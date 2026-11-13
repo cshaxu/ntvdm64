@@ -183,3 +183,6 @@ P32 verified: [delivery receipt](batch-p32-checkpoint.json),
 [batch line references](batch-p32-line-check.json),
 [binary comparison](batch-p32-binary-identity.json),
 [register consistency](batch-p32-local-consistency.json).
+
+P33: [Operand whole-file review and line/token checks](r0399-r0408-operand-review.json).
+Only comments and a redundant diagnostic directive removed; P32 runtime baseline remains.

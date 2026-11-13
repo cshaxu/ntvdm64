@@ -1,0 +1,92 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+  "points": [
+    "T483-R0399",
+    "T483-R0400",
+    "T483-R0401",
+    "T483-R0402",
+    "T483-R0403",
+    "T483-R0404",
+    "T483-R0405",
+    "T483-R0406",
+    "T483-R0407",
+    "T483-R0408"
+  ],
+  "original_source": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+  "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
+  "source_head": "5901ae112825f49ff511a5fbe20c53259c7ca84d",
+  "scope_before": "+26/-14=40 excluding #line, including unchanged excluded bodies",
+  "scope_after": "+21/-14=35 with same scope",
+  "mirror_diff_delta": -5,
+  "before_sha256": "e28138c2d900f501b7fe9d1007ccd98c3788a36fa96fdeb1cea8e345a485b82e",
+  "after_sha256": "8a83af2254588831515340e0fb2ddcbf38ce17bc836cda439401663ec5f47ce9",
+  "responsibility": "Decode validates all segment/page access before x87 fetch/store; BT memory register indices require signed element displacement and effective-address-size wrap.",
+  "original_inability": {
+    "x87": "zfrsrvd.c invokes D_E08/D_E0a/D_E0e/D_E5e before F_/P_. Original usr_chk_word checks only two bytes. c_page.c vir_read_bytes/vir_write_bytes use contiguous physical reads/writes whenever the physical start is nonzero. At page offset FFC, sizes8/10/14/28/94/108 cross a page despite the initial word fitting. Different second-page mapping is never consulted; absent/read-only second page is not validated.",
+    "rights": "vir_* fallback uses supervisor spr_* operations. Setting only NO_PHYSICAL_MAPPING would not enforce user permissions on the second page; usr_chk_byte with original PAGE and CPL enforces them before effects. No buffer can span more than two pages at these sizes.",
+    "segment": "Original D_E5e checks94 for32-bit and106 for16-bit, whereas original F_E5e/P_E5e transfer108/94. The supported decoder itself supplies the contradictory lengths.",
+    "bit": "c_main.c OPERAND.sng is IU32; F_Gw/F_Gd load register values. Original unsigned shift yields8190 instead of-2 for word index FFFF and536870908 instead of-4 for dword FFFFFFFF. Original address_add supplies address-size wrap; raw += does not wrap16-bit effective addresses."
+  },
+  "specific_diff_necessity": {
+    "R0399": "One shared decode macro validates final-byte access with original rights and selects original virtual transfer for noncontiguous pages. Removing this alone reintroduces unchecked/wrong physical access.",
+    "R0400_R0401_R0402_R0405": "Each distinct original operand decoder passes its real8/10/14-or28/94-or108 byte span; unmodified decoders have no other whole-span check.",
+    "R0403_R0404": "Correct two segment-limit operands to match original actual transfers. This is one combined replacement represented by insertion/deletion IDs, not independent features.",
+    "R0407_R0408": "One expression each computes signed element displacement then calls original address_add. No new function or state; removing either restores wrong addresses for that operand size."
+  },
+  "minimization": "Remove only explanatory additions; retain one shared page helper and one-line bit operands. Moving paging logic to generic c_page affects unrelated scalar/supervisor callers and does not eliminate original user-right validation requirement. Do not transfer equal complexity into a shim.",
+  "restored": [
+    "T483-R0406"
+  ],
+  "residual_owner_decisions": [
+    "T483-R0399",
+    "T483-R0400",
+    "T483-R0401",
+    "T483-R0402",
+    "T483-R0403",
+    "T483-R0404",
+    "T483-R0405",
+    "T483-R0407",
+    "T483-R0408"
+  ],
+  "line_verification": {
+    "unchanged_nonblank_lines_exact": 883,
+    "classified_nonidentical_mapping": [
+      {
+        "original": 265,
+        "current_logical": 267,
+        "text": "      limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)94);\t\\",
+        "reason": "94-byte statement is in the intentionally corrected size branch, not an unchanged source mapping"
+      },
+      {
+        "original": 707,
+        "current_logical": 706,
+        "text": "#else",
+        "reason": "Excluded-arm closing directive; selected alternative resets to exact original line immediately after #else"
+      },
+      {
+        "original": 755,
+        "current_logical": 754,
+        "text": "#else",
+        "reason": "Excluded-arm closing directive; selected alternative resets to exact original line immediately after #else"
+      },
+      {
+        "original": 1057,
+        "current_logical": 1056,
+        "text": "#else",
+        "reason": "Excluded-arm closing directive; selected alternative resets to exact original line immediately after #else"
+      }
+    ],
+    "error_directives_unchanged": true,
+    "executable_token_identity": true,
+    "eol": "LF preserved"
+  },
+  "verification": {
+    "source_counterexamples": "complete decode/fetch/store and BT chains inspected against original",
+    "arithmetic_check": "65536 word values and9 dword boundary values agree with independent signed floor-division model; not CPU runtime execution",
+    "runtime": "No fresh run; comment/diagnostic-only edit reuses P32 published runtime. Existing x87 fixture reviewed as coverage, not claimed freshly passed.",
+    "historical_bit_evidence": "ccpu-header-macros/native-bit records original/native comparison; not substituted for present source proof",
+    "final_gates": "WOW boundary143objects/9negativecontrols, documentation governance, relative links and diff check passed; final-check.exit0",
+    "delivery": "Nonbehavioral P33 commit; product package remains P32 4582bcd8-b2c7-4de3-aba0-8d16d1760a99 in both published locations."
+  },
+  "counter_review": "Original caller/callee responsibility checked independently of adapter need. No need to add supervisor transfer helpers or per-instruction special cases. Segment length correction and paging correction solve separate obligations. Existing #error exclusions untouched."
+}

@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-405 points have a prior or current review record:144 restored/verified/published,
-0 local restorations pending verification,2 approved retain,259 qualified pending
-decisions and0 prior classifications requiring requalification. Another2315
-points are unreviewed. Sequential file disposition is54/365;311 remain.
+415 points have a prior or current review record:145 restored/verified/published,
+0 local restorations pending verification,2 approved retain,268 qualified pending
+decisions and0 prior classifications requiring requalification. Another2305
+points are unreviewed. Sequential file disposition is55/365;310 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -237,4 +237,8 @@ Batch mirror diff net-46; c_main.c 3793 original nonblank lines mapped correctly
 Final cached full build, publication11x2/hash, focused CPU/debug/IRQ/notification/
 unwind and fresh Full16 passed. Residual differences await owner decisions.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p32-checkpoint.json).
-Next R0399. S5 remains active.
+P33 c_oprnd.h audit complete: mirror diff net-5, only comments/#line removed.
+R0406 restored; nine source-proved residual points await owner decision.
+Executable tokens unchanged; P32 remains runtime baseline.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0399-r0408-operand-review.json).
+Next R0409. S5 remains active.

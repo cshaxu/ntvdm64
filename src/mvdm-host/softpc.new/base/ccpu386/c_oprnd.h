@@ -199,9 +199,6 @@ operand)
    immed |= (ULONG)GET_INST_BYTE(p) << 8;			\
    ops[ARG].mlt[1] = immed;
 
-/* MVDM-HOST-DIV-471: NPX buffers can cross a page even when their first
- * word does not. Validate the final byte with the original access rights,
- * then use the virtual byte path for the non-contiguous physical pages. */
 #define D_NPX_PAGES(ARG, PAGE, SIZE)				\
       if (GET_PG() && ((m_la[ARG] & 0xfff) + (SIZE) > 0x1000)) { \
          (VOID)usr_chk_byte(m_la[ARG] + (SIZE) - 1, PAGE);	\
@@ -1089,9 +1086,6 @@ operand)
  * See the file header for a description of why these are required.
  */
 
-/* MVDM-HOST-DIV-469: register bit indexes are signed element displacements;
- * address_add applies the current address-size wrap before limit checking. */
-#line 1068
 #define BT_OPSw(TYPE, PAGE) \
 	if ( GET_MODE(modRM) == 3 ) {				\
 		/*						\
