@@ -1,0 +1,36 @@
+{
+  "status": "verified-and-published",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "5fd327856e85d4e3b8680593a06a944689cb35c251a018d5735490d2de976942",
+      "normalized_diff_before": 265,
+      "normalized_diff_after": 263
+    }
+  ],
+  "normalized_mirror_diff_delta": -2,
+  "source_scope": "Original SCS pointer registration only; R0014-R0020 consumer restoration not applied; R0059 only partial.",
+  "cached_exit": 0,
+  "full": {
+    "exit": 0,
+    "gates": 16,
+    "elapsed_ms": 361408
+  },
+  "excluded_error_directives_unchanged": true,
+  "line_proof": "Inserted exact original statement at #line594; following existing #line601 retained.",
+  "dpmi_reuse": "No DPMI product or fixture changes since P4 selected-object pass; no new DPMI pass claimed.",
+  "skipped": "DOS4GW/NESticle verified external fixtures absent",
+  "publication": {
+    "status": "published",
+    "package": "95a66d4d-35a7-4399-abe3-c297b4e183d4",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "git_delivery": "Receipt included in P5 delivery commit; origin verified after push",
+  "file_completion": false
+}

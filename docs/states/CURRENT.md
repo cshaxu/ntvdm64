@@ -66,7 +66,7 @@ its retention remains an owner decision. No guest rebuild or winnt.zip change.
 
 ## Current Technical Baseline
 
-Package `47f8520a-0f9c-4387-9f95-52c74f9ce58c`: complete 11-image P4 candidate,
+Package `95a66d4d-35a7-4399-abe3-c297b4e183d4`: complete 11-image P5 candidate,
 Full-tested and raw-hash verified at assets/release and O:/winnt/system32.
 No guest or winnt.zip change. See the P4 receipt above.
 
@@ -114,8 +114,18 @@ admission review; zero are currently counted as evidence-qualified pending
 owner decisions. They remain unfinished investigations until requalified or
 restored and verified. Existing owner approvals remain valid.
 
-Owner superseding cadence: finish the coupled changes in each modified file,
-then cached full build and applicable full tests before changing another file.
-The existing five-file batch has passed verification and publication; SCS
-restoration R0014-R0020 has not been applied. The next audit group is R0014-R0020, under the per-file verification cadence. Prior failed DPMI test attempts and their corrected
-contracts remain in [verification](../../artifacts/mvdm-audit/t483-remaining-reaudit/p4-verification.json).
+Owner superseding cadence: pure formatting/newline/reference-only changes may
+accumulate when they do not alter binding or behavior. A functional or semantic
+original restoration triggers cached full build, tests and commit/push of the
+whole current batch; existing publication requirements remain in force. Finish
+all outstanding diffs in the current file before triggering that batch; do not
+build repeatedly for partial edits. Unresolved research is not file completion.
+
+P5 candidate: restore only original cmdSetInfo SCS pointer registration at
+logical line594 as the prerequisite for R0014-R0020; consumers remain unchanged.
+Cached x86/x64, command fixtures and Full16 passed; 11 images published/hash-verified at both targets. Git delivery follows. DOS4GW/NESticle remains skipped for absent external fixtures.
+See [producer evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0014-r0020-producer-restoration.json).
+
+P5 was already verified/published before the file-completeness refinement.
+It is only a prerequisite restoration, not completion of cmdmisc.c or the SCS
+group. [P5 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p5-checkpoint.json).

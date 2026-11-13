@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "c071e10b5c3aff27ca5fb2e068e518c799a60961cca1394d1fae712b1fc80e2a",
+  "new_register_sha256": "4425ded474ec2dc963bb65f59f8bd8d7cc3061873557399af3a1b80b3cc10376",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -32,13 +32,13 @@
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
   "pending_decisions": 131,
   "restored_verified_published": 37,
-  "last_batch_mirror_diff_delta": -69,
-  "last_delivery": "batch-p4-checkpoint.json",
+  "last_batch_mirror_diff_delta": -2,
+  "last_delivery": "batch-p5-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 108,
   "qualified_pending_decisions": 0,
   "pending_decisions_count_note": "Historical classified backlog count, not qualified decisions; all outstanding entries require requalification under owner correction.",
   "active_rework": "R0010 restored and verified; next backlog R0014-R0020",
-  "active_investigation": "R0014-R0020: original SCS alias lifetime/address subtraction; actual mapping witness outstanding; not qualified pending decision",
+  "active_investigation": "Complete current file differences before next semantic batch build; SCS producer verified, consumer not restored",
   "backlog_requalification_completed": 1
 }

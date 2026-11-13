@@ -81,3 +81,20 @@ standard; their historical reviewed count is not a count of qualified conclusion
 After completing the related edits in a file, run cached full compilation and
 tests before modifying the next file. This replaces the ten-file build threshold.
 The pre-existing five-file batch is verified before any further source changes.
+
+## Superseding impact-based batch cadence
+
+Pure newline, formatting and reference-only adjustments with no binding or
+behavior change may accumulate. Any substantive, functional or semantic
+original restoration triggers cached full build, tests, commit and push for
+the entire current batch before further functional changes. Reference changes
+that alter linkage or behavior are semantic changes. Existing publication
+requirements remain in force. This supersedes the unconditional per-file cadence.
+
+File-completeness refinement: finish every outstanding difference in the
+current file before triggering the batch build. Restore all eligible points
+together, record only evidence-qualified retention decisions, and leave no
+unresolved investigation counted as a completed file. Do not build repeatedly
+for individual points in the same file. P5 had already built/tested/published
+a partial cmdmisc.c prerequisite when this refinement arrived; finish its Git
+delivery without treating that file or R0014-R0020 as complete.

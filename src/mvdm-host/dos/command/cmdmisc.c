@@ -762,6 +762,9 @@ UINT  DriveType;
 VOID cmdSetInfo (VOID)
 {
 
+#line 594
+    pSCSInfo = (PSCSINFO) GetVDMAddr (getDS(),getDX());
+
     /* DIVERGENCE MVDM-HOST-DIV-111: record all three original SCS scalar
      * locations numerically; their values are acquired only at each use. */
     if (!mvdm_command_guest_state_set_scs_scalars(getDS(), getDX(),

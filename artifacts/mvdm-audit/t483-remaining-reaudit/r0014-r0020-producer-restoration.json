@@ -1,0 +1,19 @@
+{
+  "scope": "R0014-R0020 prerequisite; partial R0059 original producer restoration",
+  "status": "producer-verified-consumer-not-restored",
+  "change": "Restore original cmdSetInfo pSCSInfo assignment at logical594. Numeric scalar registration and current consumer unchanged until this file passes.",
+  "initial_review": "Global declaration and definition already linked; cmdCheckBinary still shadows global with lease-local pointer.",
+  "counter_review": "No selected consumer begins using this global yet. Mapping has runtime effects; source review is not verification. Temporary ordered restoration step, not a proposed second permanent access path.",
+  "excluded_errors_unchanged": true,
+  "before_sha256": "6bab8065bd60858e2f4ee84b271f9f50dccf466cc2998e1441adc541f8530dda",
+  "after_sha256": "5fd327856e85d4e3b8680593a06a944689cb35c251a018d5735490d2de976942",
+  "original_line": 594,
+  "verification": {
+    "cached_build_exit": 0,
+    "build_owner": "build/t483-s5-p5/cached-owner.json",
+    "test_owner": "build/t483-s5-p5/verify-owner.json",
+    "test_status": "Full16 passed; DOS4GW/NESticle skipped external fixtures absent",
+    "pipeline_attempt": "Waiting wrapper rejected serialized start-time comparison before tests; actual build ended0. No rebuild; reused established verify.ps1.",
+    "publication": "11-image package published/hash-verified both destinations; batch-p5-checkpoint.json"
+  }
+}
