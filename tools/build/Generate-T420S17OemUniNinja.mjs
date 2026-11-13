@@ -17,9 +17,8 @@ mkdirSync(`${build}/obj`, { recursive: true });
 const demSource = readFileSync(`${root}/src/mvdm-host/dos/dem/demfile.c`, "utf8");
 const demStart = demSource.indexOf("VOID demCreateCommon (flCreateType)");
 const demEnd = demSource.indexOf("BOOL IsCdRomFile (PSTR pszPath)", demStart);
-const demNameHelper = demSource.match(/^static BOOL demCopyFileName\(CHAR fileName\[MAX_PATH\]\)[\s\S]*?^}/m)?.[0];
-if (demStart < 0 || demEnd <= demStart || !demNameHelper) throw new Error("DEM source boundaries changed");
-writeFileSync(`${build}/dem-create-body.inc`, `${demNameHelper}\n${demSource.slice(demStart, demEnd)}`);
+if (demStart < 0 || demEnd <= demStart) throw new Error("DEM source boundaries changed");
+writeFileSync(`${build}/dem-create-body.inc`, `${demSource.slice(demStart, demEnd)}`);
 writeFileSync(`${build}/dem-create-source.sha256`, createHash("sha256").update(demSource).digest("hex"));
 const mediaSource = readFileSync(`${root}/src/mvdm-host/dos/dem/demgset.c`, "utf8");
 const mediaStart = mediaSource.search(/BOOL\s+GetMediaId\(/);
@@ -73,7 +72,6 @@ const lines = [
   "  command = link.exe /nologo /out:$out $in $formal/obj/opennt-abi-host-compat/opennt_support_rtl.obj $formal/original-opennt-rtl-x86.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib",
   "build obj/file.obj: cc $root/src/mvdm-host/oemuni/file.c",
   "build obj/process.obj: cc $root/src/mvdm-host/oemuni/process.c",
-  "build obj/firmware-root-stub.obj: cc $root/test/mvdm/oemuni/oemuni_firmware_root_stub.c",
   "build obj/failure.obj: cc $root/test/mvdm/oemuni/oemuni_failure_fixture.c",
   "build obj/expand-failure.obj: cc $root/test/mvdm/oemuni/oemuni_expand_failure_fixture.c",
   "build obj/family.obj: cc $root/test/mvdm/oemuni/oemuni_family_fixture.c",
@@ -110,7 +108,7 @@ const lines = [
   "build cmd-svc-probe.exe: link obj/cmd-service.obj $formal/obj/command/cmddisp.obj",
   "build obj/pif-fault.obj: cc $root/test/mvdm/oemuni/oemuni_pif_fault_fixture.c",
   `  cflags = ${formalFlags}`,
-  "build oemuni-pif-fault-fixture.exe: link obj/pif-fault.obj obj/process.obj obj/firmware-root-stub.obj",
+  "build oemuni-pif-fault-fixture.exe: link obj/pif-fault.obj obj/process.obj",
   "build obj/pif-root.obj: cc $root/test/mvdm/oemuni/oemuni_pif_root_fixture.c",
   `  cflags = ${formalFlags}`,
   "build obj/pif-session.obj: cc $root/src/ntvdm-exe/session/session.c",
@@ -126,14 +124,14 @@ const lines = [
   "build oemuni-pif-root-fixture.exe: link obj/pif-root.obj obj/pif-session.obj obj/pif-lease.obj obj/pif-firmware.obj obj/pif-system-root.obj obj/pif-guest-env.obj $formal/obj/host/nt_pif.obj obj/process.obj",
   "build obj/pif-parser.obj: cc $root/test/mvdm/oemuni/oemuni_pif_parser_fixture.c",
   `  cflags = ${formalFlags}`,
-  "build oemuni-pif-parser-fixture.exe: link obj/pif-parser.obj $formal/obj/host/nt_pif.obj obj/process.obj obj/firmware-root-stub.obj",
+  "build oemuni-pif-parser-fixture.exe: link obj/pif-parser.obj $formal/obj/host/nt_pif.obj obj/process.obj",
   "build obj/pif-caller.obj: cc $root/test/mvdm/oemuni/oemuni_pif_caller_fixture.c",
   `  cflags = ${formalFlags} /I \"$root/src/mvdm-host/dos/command\"`,
-  "build oemuni-pif-caller-fixture.exe: link obj/pif-caller.obj $formal/obj/command/cmdpif.obj obj/file.obj obj/process.obj obj/firmware-root-stub.obj",
+  "build oemuni-pif-caller-fixture.exe: link obj/pif-caller.obj $formal/obj/command/cmdpif.obj obj/file.obj obj/process.obj",
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
-  "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj obj/firmware-root-stub.obj",
+  "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
-  "build oemuni-failure-fixture.exe: link obj/file.obj obj/process.obj obj/failure.obj obj/firmware-root-stub.obj",
+  "build oemuni-failure-fixture.exe: link obj/file.obj obj/process.obj obj/failure.obj",
   "default oemuni-family-fixture.exe",
   ""
 ];

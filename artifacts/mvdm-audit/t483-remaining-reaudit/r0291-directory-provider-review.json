@@ -1,0 +1,51 @@
+{
+  "file": "src/mvdm-host/oemuni/process.c",
+  "range": "R0291-R0340",
+  "status": "R0291 restored locally; whole process.c audit still active, no build yet",
+  "finding": "Package root ownership alone does not justify changing the OEM wrappers. Current search finds declarations/definitions but no product callers or exports of the two DirectoryOem wrappers. Actual session directory helpers have independent callers; verify selected object reachability before deciding the OEM wrapper changes.",
+  "search_command": [
+    "rg",
+    "-n",
+    "GetSystemDirectoryOem|GetWindowsDirectoryOem",
+    "src",
+    "tools/build",
+    "build/.ninja/msvc-x86-release/worker",
+    "build/.ninja/msvc-x86-release/wow32",
+    "-g",
+    "*.c",
+    "-g",
+    "*.h",
+    "-g",
+    "*.ps1",
+    "-g",
+    "*.mjs",
+    "-g",
+    "*.def",
+    "-g",
+    "*.map"
+  ],
+  "search_exit": 0,
+  "search_result": "src\\mvdm-host\\oemuni\\process.c:18:GetSystemDirectoryOem(\nsrc\\mvdm-host\\oemuni\\process.c:85:GetWindowsDirectoryOem(\nsrc\\mvdm-host\\inc\\oemuni.h:107:GetSystemDirectoryOem(\nsrc\\mvdm-host\\inc\\oemuni.h:114:GetWindowsDirectoryOem(\n",
+  "source_hashes": {
+    "src/mvdm-host/oemuni/process.c": "179c07c8e1542ed304baebecdbd975431818fc1b7ea4494c22d35a433ed1f8e9",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c": "a198631a171849c8c0c98e1b209723533ed4681f6a472a880ba2e399a9f6adc1",
+    "src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h": "c3e830f274df92911f963e049edee5286d6d8844fd53b5969fdbc298ed84a855",
+    "test/session/softpc_media_resource_fixture.c": "13c4363c1c580e37e4b95ee186c4776856109b6eb771271dadd27af14a840e42"
+  },
+  "next": "Confirm production linkage and test role of DirectoryOem wrappers, then audit every remaining point of process.c before any build.",
+  "decision": "Remove extra firmware header and restore original Win32 directory providers. Existing byte-sizing changes are separate pending audit points, not accepted automatically.",
+  "proof_layers": {
+    "responsibility": "Session package directory providers remain necessary for their direct consumers.",
+    "original_unable": "No production call/export of DirectoryOem wrappers found; no evidence original Win32 provider is wrong for these wrappers.",
+    "specific_diff": "Extra header and provider substitution not necessary here; remove without changing the independent session directory API."
+  },
+  "counter_review": "Rejected initial package-root argument because it proves the helper responsibility but not this OEM call-site substitution. Existing DBCS fixture intercept is not product evidence.",
+  "changes": [
+    "process.c extra include removed; four provider references restored to original Win32 functions.",
+    "DBCS fixture intercepts original GetSystemDirectoryW/GetWindowsDirectoryW; removes two package-only fake functions."
+  ],
+  "verification": "Source review complete for R0291 only. Remaining49 file points and final-source build/test/publication/commit/push pending.",
+  "point_diff": "R0291 +1/-0 excluding #line ->0; coupled provider names restored, other sizing points not yet completed.",
+  "superseded_by": "r0291-r0340-oem-process-review.json",
+  "final_delivery": "P30 full-source build/publication/Full16 passed; see batch-p30-checkpoint.json"
+}

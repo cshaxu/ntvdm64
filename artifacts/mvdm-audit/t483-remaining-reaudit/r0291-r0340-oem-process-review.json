@@ -1,0 +1,99 @@
+{
+  "path": "src/mvdm-host/oemuni/process.c",
+  "before": {
+    "added": 153,
+    "deleted": 237,
+    "total": 390
+  },
+  "after": {
+    "added": 121,
+    "deleted": 236,
+    "total": 357
+  },
+  "delta": -33,
+  "proof": {
+    "291": "No production DirectoryOem caller/export found. Original Win32 directory provider restored; independently called session package providers unchanged.",
+    "292": "Original allocation narrows caller byte capacity to USHORT WCHAR storage; zero/short OEM queries cannot return correct encoded byte requirement without obtaining complete Unicode result. CP932 example10 WCHARs ->11 bytes ->12 includingNUL.",
+    "293": "Independent full-result capacity must be supplied to original GetSystemDirectoryW, not derived from caller OEM capacity. Provider name restored; only capacity handling remains.",
+    "294": "A zero result is failure; required-capacity result >= allocated capacity is not initialized text. Bound check must precede conversion/narrowing.",
+    "295": "Original required count is WCHARs; it is not an OEM byte requirement. Failed/grown acquisition cannot return that as a valid OEM result.",
+    "296": "Once full query result is bounded, assign exact byte Length before original RTL converter consumes it; original inline provider assignment cannot carry both required-size and narrowed length safely.",
+    "297": "Original uSize+1 grants an extra byte. CP932 11-byte output plusNUL needs12; capacity11 must report12, not write beyond the caller. Saturation avoids65536 truncating to0.",
+    "298": "Windows-directory counterpart of R0292: obtain full Unicode before byte sizing; guard USHORT carrier bound.",
+    "299": "Original GetWindowsDirectoryW provider restored, independent query capacity retained for correct OEM sizing.",
+    "300": "Windows-directory success must be nonzero and strictly smaller than supplied WCHAR capacity before conversion.",
+    "301": "Failed/grown Unicode result is not a valid OEM capacity result; return failure without converting uninitialized contents.",
+    "302": "Publish checked Unicode byte Length for RTL only after bounded full query succeeds.",
+    "303": "Windows-directory caller-byte bound and required OEM size; original uSize+1 can permit NUL overrun.",
+    "304": "Original RtlAllocateHeap failure goto bail0 reaches return ReturnValue without assignment. Keep zero initialization. Capacity and return DWORD declarations combined to reduce diff.",
+    "305": "FilePart consumed only after successful SearchPathW and conversion. Provider supplies it; extra NULL initializer unnecessary, exact original declaration restored.",
+    "306": "Original caller-sized Unicode buffer cannot determine OEM requirement for short output. Query full path then allocate checked WCHAR capacity.",
+    "307": "SearchPathW must receive actual allocated Unicode capacity, not unrelated caller OEM byte capacity.",
+    "308": "Original <= treats required-size equality as success, then RtlInitUnicodeString reads an unfilled path. Strict < is required.",
+    "309": "Full Unicode result may encode to more OEM bytes. Check actual required bytes before conversion; never advertise nBufferLength+1.",
+    "310": "Successful result is OEM byte length, not previous SearchPathW WCHAR length.",
+    "311": "Original pointer difference counts WCHARs. CP932 prefix must be encoded byte offset, as original BaseClient DBCS correction also demonstrates.",
+    "312": "Growth between query and fill is insufficient-buffer result, not a usable path. Fail and release, no retry introduced.",
+    "313": "Temp path uses same complete-result OEM size requirement; original caller-sized USHORT allocation can wrap.",
+    "314": "GetTempPathW must fill actual Unicode capacity; reject failed or grown results before treating them as initialized bytes.",
+    "315": "Original returned WCHAR requirement is not OEM required byte count; fail on invalid acquisition.",
+    "316": "Assign checked Unicode Length after fill, before original converter.",
+    "317": "Original nBufferLength+1 can overrun; size OEM before conversion and saturate carrier capacity.",
+    "318": "ANSI environment value may fit fewer bytes than OEM; obtain full ANSI intermediate independently from caller. Bounded USHORT before allocation.",
+    "319": "After new query ReturnValue contains size; allocation failure must reset0 rather than return successful-looking size.",
+    "320": "Actual native probe: empty environment query/fill leaves preexisting LastError123 unchanged; initialize SUCCESS before distinguishing empty success from missing/failure.",
+    "321": "Empty value returns0 but writesNUL when capacity allows, or requires1 at zero capacity. Without this path original leaves caller data unchanged.",
+    "322": "Second ANSI query must be checked against its allocated ANSI capacity, not caller OEM capacity; growth must not be interpreted as initialized text.",
+    "323": "Original falls through after failed ANSI->Unicode conversion and invokes OEM conversion on failed state; goto keeps first error and prevents invalid subsequent conversion.",
+    "324": "Original USHORT nSize truncates65536 and uses ANSI length as OEM requirement. Compute encoded requirement before bounded output.",
+    "325": "Success must return OemString.Length; grown ANSI query must fail without converting. Existing final DBCS fixture covers both.",
+    "326": "ExpandEnvironmentStrings ANSI success value otherwise survives failed subsequent conversion; reset before conversions.",
+    "327": "RtlInitString makes Value.Buffer borrow lpDst. Failure before OEM allocation reaches original finally and frees that borrowed pointer unless detached.",
+    "328": "Original performs OEM conversion into allocated Value then frees it, leaving ANSI lpDst. Copy bounded OEM bytes and return size includingNUL.",
+    "329": "Conversion can fail before assigning UString.Buffer; finally unconditionally calls RtlFreeUnicodeString. Zero initialization prevents cleanup of uninitialized storage.",
+    "330": "Original conversion/allocation early return enters finally, which frees lpDstW and returns ReturnValue. Initialize pointer and result before all early paths.",
+    "331": "Independent UnicodeCapacity is needed to keep WCHAR provider capacity distinct from OEM cchDst and success byte count.",
+    "332": "Query complete short path even for zero/short output; original direct query returns WCHAR count, not OEM requirement.",
+    "333": "Allocate using checked Unicode capacity rather than caller byte capacity; needed for complete OEM size query.",
+    "334": "Original null-destination branch sets cchDst0 and skips full acquisition; cannot compute encoded OEM requirement. Unified acquisition replaces this branch.",
+    "335": "GetShortPathNameW receives actual allocated WCHAR capacity.",
+    "336": "Original <= admits insufficient-buffer equality; obtain encoded requirement and only convert when caller bytes suffice.",
+    "337": "Original MaximumLength=cchDst*sizeofWCHAR advertises twice caller bytes. Current RTL initializer prepares complete Unicode result before OEM-size computation; no duplicate state introduced.",
+    "338": "Original finally return ReturnValue overrides return0 on conversion failure; explicit0 is required.",
+    "339": "Return converted OEM bytes rather than prior WCHAR length.",
+    "340": "Growing short-path query must fail instead of returning unconverted WCHAR capacity as OEM success."
+  },
+  "restored": [
+    291,
+    305
+  ],
+  "initial_review": "Separate directory provider ownership, Unicode/OEM size contracts, and cleanup lifetime. No current-adapter circular necessity claim.",
+  "counter_review": "Directory provider substitution unsupported by product callers removed. FilePart initialization unnecessary under successful provider contract removed. Other retained claims derive from original RTL byte-capacity/terminator contract, original SEH finally control flow, and explicit native empty-variable probe; they are owner decisions, not blanket approval.",
+  "native_empty": [
+    {
+      "capacity": 0,
+      "result": 1,
+      "error": 123,
+      "first": 90
+    },
+    {
+      "capacity": 8,
+      "result": 0,
+      "error": 123,
+      "first": 0
+    }
+  ],
+  "verification": "Cached full build, boundary and publication/hash passed. P30 final package Full16 passed.",
+  "limits": [
+    "Source counterexamples for this file are distinguished from guest runtime repro.",
+    "CP932 fixture passed final code; P29 original-file failure outputs were for file.c, not claimed as process.c original execution.",
+    "DirectoryOem wrappers have no found product callers; their byte-contract residuals remain an explicit owner choice, not a production break claim.",
+    "No guest edits."
+  ],
+  "tests": {
+    "oemuni-dbcs-fixture": "S37_DBCS_FULLPATH actual_length=11 expected_length=11 part=6 expected_part=6 terminator=0\nS37_DBCS_FULLPATH_LENGTH_COPY_FILEPART_SHORT_EXACT_BUFFER_OK\nS37_DBCS_CURRENT_SEARCH_CAPACITY_OK\nS37_DBCS_SYSTEM_WINDOWS_TEMP_CAPACITY_OK\nS37_VOLUME_BOUNDARY side=0 result=0 error=234 canary=90 outstanding=0\nS37_VOLUME_BOUNDARY side=1 result=0 error=234 canary=90 outstanding=0\nS37_DBCS_VOLUME_BOTH_CAPACITIES_OPTIONAL_FAILURE_CLEANUP_OK\nS37_SIZE_MATRIX api=current cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX_ALL_30_PASS\nS37_QUERY_GROWTH_FAILURE_OVERSIZE_ALLOCATION_CLEANUP_OK\nS37_SHORTPATH_COMPUTER_CAPACITY_LENGTH_FAILURE_CLEANUP_OK\nS37_ENV_DBCS cap=0 actual=3 expected=3 failures=0\nS37_ENV_DBCS cap=1 actual=3 expected=3 failures=0\nS37_ENV_DBCS cap=2 actual=3 expected=3 failures=0\nS37_ENV_DBCS cap=3 actual=2 expected=2 failures=0\nS37_ENV_DBCS cap=65536 actual=2 expected=2 failures=0\nS37_ENV_ANSI_ONE_OEM_TWO_BYTE_CAPACITIES_OK\nS37_ENV_GROWTH_REMOVAL_OVERSIZE_ALLOCATION_CLEANUP_OK\n",
+    "oemuni-expand-failure-fixture": "S37_EXPAND_FAILURE stage=1 result=0 error=8 borrowed_frees=0\nS37_EXPAND_FAILURE stage=2 result=0 error=8 borrowed_frees=0\nS37_EXPAND_CONVERSION_FAILURE_ZERO_AND_SAFE_CLEANUP_OK\nS37_ENV_FAILURE stage=1 result=0 error=8 oem_calls=0\nS37_ENV_FAILURE stage=2 result=0 error=8 oem_calls=1\nS37_ENV_CONVERSION_FAILURE_ORDER_OK\n",
+    "oemuni-family-fixture": "S37_OEM_ENUM_SEARCH_RENAME_DELETE_DIRECTORY_OK\nS37_OEM_TEMP_SYSTEM_VOLUME_COMPUTER_NEGATIVE_FONT_OK\n",
+    "oemuni-failure-fixture": "OEMUNI_HOST_CODEPAGES OEM=437 ANSI=1252\nS37_OEM_FULLPATH_NONASCII_PART_SHORT_BUFFER_OK\nS37_OEM_EXPAND_NONASCII_OK\nS37_OEM_ENV_NONASCII_DELETE_MISSING_OK\nS37_ENV_LARGE result=3 expected=3 error=0 copied=1\nS37_ENV_LARGE_SHORT_EMPTY_DELETE_OK\n"
+  }
+}

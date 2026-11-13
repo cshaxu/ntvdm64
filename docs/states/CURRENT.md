@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-297 points have a prior or current review record:137 restored/verified/published,
-0 local restorations pending verification,2 approved retain,158 qualified pending
-decisions and0 prior classifications requiring requalification. Another2423
-points are unreviewed. Sequential file disposition is44/365;321 remain.
+347 points have a prior or current review record:139 restored/verified/published,
+0 local restorations pending verification,2 approved retain,206 qualified pending
+decisions and0 prior classifications requiring requalification. Another2373
+points are unreviewed. Sequential file disposition is45/365;320 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P29 package `22365a94-a493-44e1-bde1-3ecedf9ea4c1` is published to
+P30 package `c7965a63-225a-46e3-bf1f-ec27265b4796` is published to
 assets/release and O:/winnt/system32; all11 image hashes match.
-Cached full build and WOW boundary passed. P29 final package Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p29-checkpoint.json).
+Cached full build and WOW boundary passed. P30 final package Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p30-checkpoint.json).
 No original guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,11 +230,11 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P29 Verified Batch
+## P30 Verified Batch
 
-R0278 original FilePart declaration restored; mirror diff net-16. Original excluded#error
-bodies preserved;271 matched original logical lines pass. Cached full build,
+R0291/R0305 restored; whole-file mirror diff net-33. Original excluded#error
+bodies preserved;161 matched original logical lines pass. Cached full build,
 11-image publication to both destinations, boundary and governance pass.
-P29 final package Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p29-checkpoint.json).
-Next R0291; S5 remains active.
+P30 final package Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p30-checkpoint.json).
+Next R0341; S5 remains active.
