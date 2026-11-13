@@ -1,0 +1,14 @@
+{
+  "main_pending_point_ids": 98,
+  "backlog_rows": 84,
+  "backlog_expanded_point_ids": 98,
+  "exact_membership_match": true,
+  "statuses": {
+    "completed-owner-approved-retain": 2,
+    "restored-verified-published": 128,
+    "pending-decision": 98,
+    "pending": 2492
+  },
+  "current_bytes": 16079,
+  "source_and_publication_hashes": "Verified final-source hashes and11x2 published hashes; final-source Full16 and governance passed"
+}

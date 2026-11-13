@@ -27,11 +27,9 @@ Revision History:
 #include <softpc.h>
 #include <memory.h>
 #include <malloc.h>
-#if defined(CPU_40_STYLE)
 extern BOOL ThreadSetDebugContext(PULONG Registers);
 extern BOOL mvdm_debugger_read_debug_registers(USHORT Selector,
     USHORT Offset, PULONG Registers);
-#endif
 
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 extern void load_pseudo_descr(int index);
@@ -174,15 +172,12 @@ Return Value:
 --*/
 {
     PCHAR RegisterPointer;
-#if defined(CPU_40_STYLE)
     ULONG DebugRegisters[6];
-#endif
 
 #line 367
     setCF(0);
 
 #if defined(CPU_40_STYLE)
-    /* MVDM-HOST-DIV-281: SIM32 ignores its size argument; use a copied lease. */
     RegisterPointer = mvdm_debugger_read_debug_registers(getDS(), getSI(),
         DebugRegisters) ? (PCHAR)DebugRegisters : NULL;
 #else
@@ -190,7 +185,8 @@ Return Value:
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
-    if (RegisterPointer == NULL || !ThreadSetDebugContext((PULONG) RegisterPointer))
+#line 374
+    if (!ThreadSetDebugContext((PULONG) RegisterPointer))
 #line 375
         {
         ULONG ClearDebugRegisters[6] = {0, 0, 0, 0, 0, 0};

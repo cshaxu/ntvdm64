@@ -1,0 +1,8 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+    "matched_original_line_mismatches": [],
+    "checked_lines": 94,
+    "error_directives_unchanged": true
+  }
+]

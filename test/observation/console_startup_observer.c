@@ -1387,13 +1387,13 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
             written != record_count) return FALSE;
         if (observed) {
             if (character == '\r') {
-                /* Every nonempty line was armed by its own full echo before
-                 * Enter. A new empty current prompt cannot be an old one.
-                 * The enclosing verifier still checks exact output/order/code. */
-                if (!echoed || !wait_input_milestone(output,
-                    (!_stricmp(echo,"edit") || !_stricmp(echo,"edit.com")) ? NULL : "",
-                    (!_stricmp(echo,"edit") || !_stricmp(echo,"edit.com")) ? "Untitled" : NULL, NULL,
-                    _stricmp(echo,"edit") != 0 && _stricmp(echo,"edit.com") != 0)) return FALSE;
+                BOOL editor = !_stricmp(echo,"edit") || !_stricmp(echo,"edit.com");
+                /* Preserve application readiness even for the final line.
+                 * Only the final ordinary prompt belongs to the outer wait;
+                 * intermediate commands still acknowledge before more input. */
+                if (!echoed || ((cursor[1] || editor) && !wait_input_milestone(output,
+                    editor ? NULL : "", editor ? "Untitled" : NULL, NULL,
+                    !editor))) return FALSE;
                 echoed = 0; echo[0] = 0;
             } else {
                 if (echoed >= OBSERVER_TEXT_COLUMNS || (unsigned char)character < 32) return FALSE;

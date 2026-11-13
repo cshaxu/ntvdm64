@@ -1,0 +1,62 @@
+{
+  "failure": "full-current/handoff.observer: final exit23 and command output present, input delivered flag false",
+  "original_failure_preserved": true,
+  "unchanged_assertions_diagnostic_runs": 15,
+  "diagnostic_results": "All15 isolated runs passed; initial Full failure remains unexplained",
+  "observer_identity": {
+    "paths": [
+      "build\\t483-s5-p20\\observer.exe",
+      "build\\t483-s5-p23\\plain\\observer.exe"
+    ],
+    "sizes": [
+      283136,
+      283136
+    ],
+    "raw_hashes": [
+      "624d72e0403ff1e05e988d9dd9bb33961d8ae86c7077e7fda2f12cdfc93b14d2",
+      "eeb7451c4812a58f2651e1f716d110c14b63a608fc5861338941444603476906"
+    ],
+    "equal_except_coff_timestamp": false,
+    "different_bytes": 2,
+    "equal_after_coff_and_debug_timestamps": true,
+    "debug_directory_timestamp_offset": 243604,
+    "conclusion": "P20 observer is current code; stale executable hypothesis disproved."
+  },
+  "next": "Complete P23 Git delivery",
+  "wait_comparison": {
+    "failed_wait_ms": 22907,
+    "successful_example_wait_ms": 2907,
+    "key_messages_both": 157,
+    "enters_both": 6,
+    "inference": "Exactly20s extra milestone timeout; no failed key-message call reported. Need exact wait stage; not yet root cause."
+  },
+  "test_contract_finding": "Final Enter was echo-armed and sent, but the observer imposed a20s next-prompt/exit milestone in addition to outer40s process completion. No subsequent input needs that final prompt.",
+  "fix": "Skip only final post-Enter milestone; keep full echo before Enter, all intermediate milestones, actual key-send failures, outer wait deadline, exact exit23, real DOS/MEM/parent-return output and CAF owner assertions.",
+  "scope": "Test observer only. No product behavior or timeout increase.",
+  "causality_limit": "Initial failed run lacks per-milestone timing: source/control-flow evidence identifies invalid final prerequisite; it does not explain why that run completed later. Diagnostic Full retained separately.",
+  "call_site_audit": {
+    "intermediate_snapshots": "verify-broker-io-handoff consumes lines01/03; verify-dos-native-gui line02 of3; verify-command-native-edit-return line02 of7; verify-frontend-relaunch lines03/05/07 of8. These nonfinal milestone waits are unchanged.",
+    "final_completion": "Observer waits child with remaining original observation_timeout_ms and snapshots output; handoff verifier still requires exited, exact23, DOS/MEM output, parent marker and verified CAF window.",
+    "subsequent_phases": "Explicit next-input phases wait_for_fresh_console_prompt; EDIT-return phase waits mouse mode and UI milestones. None may treat transport delivery alone as program completion.",
+    "negative_controls": "Key-send failures and pre-Enter full echo checks remain; no reinjection, retry, command-name exception or timeout increase."
+  },
+  "unchanged_observer_full_diagnostic": {
+    "exit": 0,
+    "gates": 16,
+    "all_passed": true,
+    "timings": "build/t483-s5-p23/full-diagnostic/timings.json",
+    "meaning": "Original failure did not recur in this Full sequence; does not erase first failure or prove original20s final milestone contract correct."
+  },
+  "first_correction_failure": {
+    "case": "full-fixed/Console-17-edit.txt",
+    "result": "timeout0x53504354",
+    "cause": "Final EDIT Untitled readiness skipped; mouse-mode state alone preexisted, so Esc sent before welcome ready. Introduced by first test correction, not product.",
+    "correction": "Preserve existing EDIT application milestone, including final input; skip only terminal ordinary-prompt milestone."
+  },
+  "final_verification": {
+    "focused": "Console EDIT, Window EDIT, exact nested-window handoff passed",
+    "full": "full-final/timings.json16/16 passed",
+    "scope": "No increased timeout; actual key delivery, intermediate milestones, EDIT readiness, final outputs and exact process completion remain checked.",
+    "limits": "Initial run did not capture per-milestone timing; do not claim a production delay root cause or product fix."
+  }
+}

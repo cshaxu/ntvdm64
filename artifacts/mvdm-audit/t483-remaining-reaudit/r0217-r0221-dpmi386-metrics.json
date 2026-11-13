@@ -1,0 +1,16 @@
+{
+  "before": {
+    "added": 39,
+    "deleted": 233,
+    "total": 272
+  },
+  "after": {
+    "added": 33,
+    "deleted": 232,
+    "total": 265
+  },
+  "matched_original_lines": 94,
+  "line_mismatches": [],
+  "error_unchanged": true,
+  "sha256": "e6e31737a2b8378a62bd5f429ebaadecc76c31621c20ef7ed1700b12b1dfdedf"
+}

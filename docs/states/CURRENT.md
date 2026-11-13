@@ -230,17 +230,12 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P19 Delivered Baseline
+## P23 Verified Batch
 
-P19 removed obsolete fast-BOP adaptation; six mirrors net-195 diff lines.
-Cached build, publication11x2, focused, Full16 and supplemental gates passed.
-Commit41569ec4a is pushed; [receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p19-checkpoint.json).
-
-## P22 Verified Batch
-
-P21 delivered/pushed5d87857c1. P22 sources/xmem.c complete; mirror diff17->12(-5).
-R0214/R0215 restored; R0216 minimized, pending owner decision. Lines/#error pass.
-Cached full build/publication11x2 pass. All11 match P21 excluding explicit PE
-metadata/package ID; reuse P21 runtime tests per authorization, no fresh run claimed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p22-checkpoint.json).
-Next R0217. This receipt accompanies P22 commit/push.
+P22 delivered/pushed b691ec880. P23 dpmi386.c mirror diff272->265(-7).
+R0221 restored; four residual decisions remain pending. Lines/#error pass.
+Cached build/publication11x2, debug/CCPU143 and final-source Full16 pass.
+Observer keeps EDIT readiness; final ordinary prompt uses outer completion.
+Initial failures and counter-runs retained; no product fix claimed for them.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p23-checkpoint.json).
+This receipt accompanies P23 Git delivery; next R0222.

@@ -1,0 +1,147 @@
+{
+  "batch": "P23",
+  "status": "Final-source cached build, publication11x2/hash, focused and Full16 passed; P23 Git delivery receipt",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "sha256": "e6e31737a2b8378a62bd5f429ebaadecc76c31621c20ef7ed1700b12b1dfdedf"
+    },
+    {
+      "path": "test/observation/console_startup_observer.c",
+      "sha256": "63dab979b84c6bd3a8f55e1df341f0e35fd82793f6962264239224c3f4453bae"
+    }
+  ],
+  "mirror_diff": {
+    "before": 272,
+    "after": 265,
+    "delta": -7
+  },
+  "cached_exit": 0,
+  "focused_exit": 0,
+  "package": "cd514f6e-e6d8-42fc-bea8-42ee112c3674",
+  "focused_evidence": "build/t483-s5-p23/focused.log",
+  "focused_limits": "Debug binding uses mocked descriptor/memory endpoints; separate CCPU monitor suite executes143 cases. Neither alone proves full guest behavior.",
+  "full_failure": {
+    "path": "build/t483-s5-p23/full-current/handoff.observer",
+    "result": "exited",
+    "exit": "0x00000017",
+    "scripted_input": "failed",
+    "window_key_failure": "none",
+    "window_enters": 6,
+    "screen_evidence": "S6-PARENT-RETURN and exit /b 23 present",
+    "conclusion": "Exact observer failure branch not yet determined; no production regression or environmental attribution claimed",
+    "diagnostic": "build/t483-s5-p23/diagnostic.ps1; task-local observer source records failure line, unchanged assertion"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 364857,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 2283,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1401,
+        "CleanupMs": 483,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 210,
+        "CleanupMs": 421,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66682,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46138,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44032,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14606,
+        "CleanupMs": 439,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10531,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 66604,
+        "CleanupMs": 439,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12684,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28656,
+        "CleanupMs": 441,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30845,
+        "CleanupMs": 445,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4497,
+        "CleanupMs": 461,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7862,
+        "CleanupMs": 456,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10306,
+        "CleanupMs": 460,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3453,
+        "CleanupMs": 356,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6086,
+        "CleanupMs": 369,
+        "Passed": true
+      }
+    ]
+  },
+  "final_check_exit": 0,
+  "limits": [
+    "Debug binding mocks descriptor/memory endpoints; separate CCPU143 and Full16 passed.",
+    "External DOS4GW/NESticle fixture skips are not passes; WOW frontier is not exhaustive interactive Win3.x acceptance.",
+    "No original guest or winnt.zip changes."
+  ]
+}
