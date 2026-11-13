@@ -23,8 +23,6 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-/* CPU40 exposes these generated CCPU accessors through cpu4gen.h, which is
- * intentionally not part of the DPMI provider's public include surface. */
 extern void setLDT_SELECTOR(USHORT val);
 extern int setLDT_BASE_LIMIT(ULONG base, ULONG limit);
 //
@@ -305,9 +303,7 @@ Return Value:
     IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
 
 #if defined(CPU_40_STYLE)
-    /* The source-published DOSX GDT and the process LDT are distinct
-     * descriptor domains.  Keep immutable published images for CCPU rather
-     * than using the mutable DOSX source table as either live table. */
+    /* Separate published DOSX GDT and process LDT descriptor images. */
     if (!Cpu40GdtShadowAddress || !Cpu40LdtShadowAddress) {
         ULONG Address = 0;
         ULONG Size = 2u * LDT_SIZE * sizeof(LDT_ENTRY);
