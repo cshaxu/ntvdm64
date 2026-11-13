@@ -1,0 +1,47 @@
+{
+  "point": "T483-R0411",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+  "before": "+20/-0 functional point plus1blank; historical21 included#line",
+  "after": "+8/-0 functional point",
+  "mirror_diff_delta": -13,
+  "responsibility": "Selected DOSX/WOW FSTI expands MOV DS,40h and accesses fixed NTVDM state through that selector.",
+  "original_inability": "Original generic CCPU load_data_seg validates current GDT/LDT. Selected WOW pmdefs.inc defines its BIOS descriptor atB8h, not40h. dxboot InitGlobalDscrTable zeros GDT and sets named descriptors; dxstrt initializes/publishes LDT before FSTI; current shadow GDT copy does not create fixed40h entry. Historical T407 S14 actual failure atFSTI MOV DS,AX and continuation with carrier supports this reached boundary.",
+  "original_source_refs": [
+    "src/mvdm-host/inc/vint.h:FSTI",
+    "src/mvdm-guest/dpmi/dxstrt.asm:InitDosExtender then protected init/PassTableAddress/FSTI",
+    "src/mvdm-guest/dpmi/dxboot.asm:InitGlobalDscrTable",
+    "src/mvdm-guest/dpmi/pmdefs.inc:WOW SEL_BIOSDATA=B8h",
+    "O:/repos.external/OpenNT/public/sdk/inc/ntx86.h:KGDT_VDM_TILE=64",
+    "src/mvdm-host/dpmi32/dpmi32.c:DpmiPassTableAddress",
+    "docs/etc/evidence/m0-t407-s14-fsti-fixed-selector-recovery.md"
+  ],
+  "correction_to_old_rationale": "Do not claim BIOS descriptor is published later: InitGlobalDscrTable runs before DXPMInit; WOW BIOSB8h is distinct from fixed40h. Public NT definition establishes reserved selector identity; not claiming recovered kernel initialization body. Existing fallback has no early-only lifetime gate.",
+  "specific_diff_necessity": "Under current missing fixed-table publication, removing all fallback causes original descriptor lookup to reject fixed40h. This justifies a residual decision, not unrestricted bypass as ideal architecture. Six cache attributes are already implemented by original load_pseudo_descr; local duplicated assignments are unnecessary.",
+  "minimization": "Use original load_pseudo_descr(indx), then override its protected-mode DPL0 to3. Preserve selector/base writes. Helper has no calls or callbacks and changes exactly limit,W,R,E,C,X,DPL; final fields match former branch. CPU_40_STYLE is always selected for this source; remove added guard and misleading comment.",
+  "remaining_design_choice": "Prefer eventually restoring generic CPU behavior by supplying fixed KGDT_VDM_TILE in the owning DOSX host descriptor context before FSTI; do not silently publish into arbitrary guest GDTs. This would add/change a different owner diff and requires owner decision/proof of transition point. Current eight-line fallback stays pending, including its overbroad lifetime limitation.",
+  "no_complexity_transfer": "No new shim or autonomous helper. Reuse same-file original function already called by original reset and host real-mode transition.",
+  "line_check": "batch-p35-line-check.json:301 unchanged selected lines exact;#error unchanged.",
+  "verification": "Final-source cached full build, publication11x2/hash, segment state, x87 paging and CPU boundary fixtures plus Full16 passed. See batch-p35-checkpoint.json.",
+  "focused_segment_state": {
+    "exit": 0,
+    "output": "SEGMENT_STATE_4_REGISTERS_AND_NULL_OK",
+    "checks": "Four data segment registers, nine resulting fields each; subsequent null-selector fields; actual final CCPU functions.",
+    "map": [
+      "0001:001220a0       _load_data_seg             005230a0 f   original-ccpu386:c_seg.obj",
+      "0001:00122360       _load_pseudo_descr         00523360 f   original-ccpu386:c_seg.obj"
+    ],
+    "exe_sha256": "d46ce8334d2dad344ebe3237f470fe072e3eb13d9dbbc75975a6a912688fb968",
+    "source": "r0411-segment-state-probe.c",
+    "failed_attempts": "First two isolated fixture compile attempts lacked CPU_DESCR definition. Correct c_main.h dependency supplied; no product-source change.",
+    "fixture_limits": "Uses existing host fixture boundaries and force:multiple link rule; map proves tested CPU functions are original-ccpu386:c_seg.obj, not seam replacements.",
+    "source_sha256": "85aabf9d4e178867e601288bbcc81ae1f7a8823c5170c2c1da3b70181c43c1e9",
+    "final_output_correction": "Use sizeof literal minus1 for complete result marker; final archived source recompiled and run,exit0."
+  },
+  "before_sha256": "ce5218761b42456b5a5eda100f48ca7318509e882111d436cfc51be3fc688e99",
+  "after_sha256": "983bcd1de050928237f211ea391b5e4d9f5191a7a1ed04e60f23e79f93e2a51b",
+  "whole_file_scope": {
+    "before": "+24/-3=27",
+    "after": "+11/-3=14",
+    "basis": "diagnostic#line excluded; unchanged#error body replacements included"
+  }
+}

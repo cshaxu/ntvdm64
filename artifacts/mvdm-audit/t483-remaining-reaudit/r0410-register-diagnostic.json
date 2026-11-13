@@ -1,0 +1,20 @@
+{
+  "point": "T483-R0410",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+  "before": "+4/-0",
+  "after": "+0/-0 nonexcluded",
+  "mirror_diff_delta": -4,
+  "responsibility": "Existing diagnostic printf with format pointer, filename pointer, line integer and promoted unsigned16 argument.",
+  "original_capability": "Actual selected x86 cdecl default promotions match the declared variadic call; both variants compile and reference _printf.",
+  "specific_diff_necessity": "Disproved. C4013 alone is not failure evidence. No floating argument or mismatched pointer-width conversion occurs at this original diagnostic.",
+  "paired_compile": {
+    "current_exit": 0,
+    "original_include_exit": 0,
+    "instruction_count": 844,
+    "instruction_bytes_identical": true,
+    "only_disassembly_text_difference": "Isolated source path changes __FILE__ relocation/string; same printf binding and argument instructions."
+  },
+  "change": "Remove added3commentlines andstdio include; no new declarations/shim.",
+  "line_check": "batch-p35-line-check.json:1298 unchanged selected lines exact;#error retained.",
+  "verification": "Final-source cached full build, publication11x2/hash, segment state, x87 paging and CPU boundary fixtures plus Full16 passed. See batch-p35-checkpoint.json."
+}

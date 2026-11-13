@@ -190,3 +190,9 @@ Only comments and a redundant diagnostic directive removed; P32 runtime baseline
 P34: [Original PROD check_D provider restoration](r0409-page-debug-provider.json),
 [line verification](batch-p34-line-check.json), [delivery checkpoint](batch-p34-checkpoint.json),
 [binary identity comparison](batch-p34-binary-identity.json).
+
+P35: [Register diagnostic original restoration](r0410-register-diagnostic.json),
+[Fixed selector minimization](r0411-fixed-selector-minimization.json),
+[line checks](batch-p35-line-check.json), [checkpoint](batch-p35-checkpoint.json).
+P35 focused witness: [segment cache state probe](r0411-segment-state-probe.c);
+compiled only in the task build directory, not a new production/test target.

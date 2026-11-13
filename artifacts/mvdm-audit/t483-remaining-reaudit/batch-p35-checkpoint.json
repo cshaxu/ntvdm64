@@ -1,0 +1,137 @@
+{
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "sha256": "1d6fc134b08a768a4146c8cf6c25e7526eed878cec95a1c8e597e34b62a2b1a4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "sha256": "983bcd1de050928237f211ea391b5e4d9f5191a7a1ed04e60f23e79f93e2a51b"
+    }
+  ],
+  "mirror_diff_delta": -17,
+  "status": "P35 verified delivery receipt; accompanies Git delivery",
+  "package": "5009d314-d7ba-45d9-bf5d-a5f701d6788a",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1486,
+      "CleanupMs": 482,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 245,
+      "CleanupMs": 514,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 67050,
+      "CleanupMs": 498,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 46262,
+      "CleanupMs": 440,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 44040,
+      "CleanupMs": 405,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14688,
+      "CleanupMs": 401,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10709,
+      "CleanupMs": 439,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 69179,
+      "CleanupMs": 541,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12643,
+      "CleanupMs": 444,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28442,
+      "CleanupMs": 398,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30733,
+      "CleanupMs": 429,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4686,
+      "CleanupMs": 394,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7842,
+      "CleanupMs": 477,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10155,
+      "CleanupMs": 453,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3723,
+      "CleanupMs": 378,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6204,
+      "CleanupMs": 385,
+      "Passed": true
+    }
+  ],
+  "full_elapsed_ms": 373727,
+  "focused": {
+    "x87_cases": 64,
+    "cpu_boundary": 143,
+    "segment_state": "four data registers and subsequent null-selector checks passed; final archived probe source"
+  },
+  "limitations": [
+    "No new guest gameplay acceptance.",
+    "Absent external DOS4GW/NESticle fixtures remain explicit skips."
+  ],
+  "final_checks": {
+    "boundary": "143 selected objects and9negative controls passed",
+    "documentation_governance": "passed",
+    "relative_links": "passed",
+    "git_diff": "passed"
+  },
+  "probe_failures": "Two initial isolated probe compilation failures due missing CPU_DESCR header; fixed with original c_main.h, final source compiled and passed. No product change for probe."
+}
