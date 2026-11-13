@@ -200,3 +200,7 @@ compiled only in the task build directory, not a new production/test target.
 ## P36 original TLB restoration delivered
 
 [R0412-R0415 evidence](r0412-r0415-original-tlb-restoration.json) restores original xtrn2phy and removes coupled duplicate page-table preflight; mirror diff net-31. [Line checks](batch-p36-line-check.json) preserve excluded branches and694 original logical lines. [Checkpoint](batch-p36-checkpoint.json) records final-source cached build,11-image publication/hash at both locations,64 x87/143 CPU cases and Full16 passing. Progress:422/2720 reviewed;59/365 files;151 restored verified published,0 local,2 approved,269 pending decisions,2298 unreviewed. This receipt accompanies Git delivery.
+
+## P37 task-switch debug event audit
+
+[R0416-R0417](r0416-r0417-task-debug-event.json) qualify two one-line residuals for owner decision; redundant comment removed, mirror diff net-1. No code-token or logical-line changes. [Receipt](batch-p37-checkpoint.json) records a fresh real CCPU T-bit/no-T-bit probe and reuse of P36 published package/Full. Progress424/2720 points,60/365 files;151 restored published,2 approved,271 pending decisions,2296 unreviewed.

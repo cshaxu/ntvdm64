@@ -1,0 +1,32 @@
+{
+  "status": "P37 comment-only audit; accompanies Git delivery",
+  "baseline_commit": "20754b450d0ab6674fc62f391fefbda8070753c7",
+  "mirror_diff_delta": -1,
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+  "sha256": "a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68",
+  "runtime_package": "1321b0b1-240b-4e69-844c-b1d0c10728ed",
+  "publication": "P36 unchanged11-image package verified at both destinations; no new package needed for comment-only change",
+  "verification": {
+    "target": "ccpu-halt-reset-test.exe",
+    "build_run_exit": 0,
+    "marker": "S38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK",
+    "log_sha256": "024e08871aa81fa6b1ffe99843ac5d3fdd68ab09c3718dcf58b7fe6125606888",
+    "limits": "Synthetic protected CPU/TSS fixture, not fresh guest application acceptance. Original repeated-delivery claim is a complete-source state counterexample, not a new unmodified-original executable run.",
+    "tokens_unchanged": true,
+    "matched_original_lines": 448,
+    "line_mismatches": [],
+    "error_unchanged": true
+  },
+  "full_regression": "Reused P36 unchanged behavioral baseline; no fresh Full claim",
+  "progress": {
+    "reviewed": 424,
+    "total": 2720,
+    "files": 60,
+    "total_files": 365,
+    "restored_published": 151,
+    "local_pending": 0,
+    "approved": 2,
+    "pending_decisions": 271,
+    "unreviewed": 2296
+  }
+}

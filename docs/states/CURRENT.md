@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-422 points have a prior or current review record:151 restored/verified/published,
-0 local restorations pending verification,2 approved retain,269 qualified pending
-decisions and0 prior classifications requiring requalification. Another2298
-points are unreviewed. Sequential file disposition is59/365;306 remain.
+424 points have a prior or current review record:151 restored/verified/published,
+0 local restorations pending verification,2 approved retain,271 qualified pending
+decisions and0 prior classifications requiring requalification. Another2296
+points are unreviewed. Sequential file disposition is60/365;305 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -230,10 +230,10 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P36 Verified Batch
+## P37 Nonbehavioral Audit
 
-R0412-R0415 restore original xtrn2phy; coupled duplicate page-table preflight removed.
-Mirror diff net-31;694 original selected lines checked;#error retained.
-Cached full build, publication11x2/hash,64 x87/143 CPU and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p36-checkpoint.json).
-Next R0416. S5 remains active.
+R0416-R0417: two one-line residuals pending; redundant comment removed.
+Mirror diff net-1;448 original lines verified;#error and code tokens unchanged.
+Fresh CCPU T-bit/no-T-bit probe passed. P36 package/Full reused unchanged.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p37-checkpoint.json).
+Next R0418. S5 remains active.

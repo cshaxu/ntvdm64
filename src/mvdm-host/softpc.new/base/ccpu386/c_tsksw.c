@@ -26,7 +26,6 @@ Task Switch Support.
 #include <c_xcptn.h>
 #include <c_reg.h>
 #include <c_tsksw.h>
-/* DIVERGENCE: MVDM-HOST-DIV-282: publish the original T-bit event once. */
 #include <c_debug.h>
 #line 29
 #include <c_page.h>

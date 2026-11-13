@@ -1,0 +1,44 @@
+{
+  "points": [
+    "T483-R0416",
+    "T483-R0417"
+  ],
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+  "responsibility": "A new 386 TSS T-bit event must cause one debug trap while keeping DR6.BT visible as status. A 286 task sets T_byte=0; the added event write remains under the original T-bit condition.",
+  "original_inability": "Original c_main.c lines4382-4386 tests sticky DR6 B/BT at every interinstruction boundary. Original c_tsksw sets BT; Int1_t -> benign_exception -> c_cpu_continue does not clear it. Even a handler INC instruction reaches a later boundary with old BT still set, causing a second delivery without a new task switch. Clearing BT instead discards guest-visible status. This is an original full-chain state counterexample, not merely an incompatibility with the current latch consumer.",
+  "specific_diff_necessity": "One event write at the original T-bit producer completes the independently justified shared latch. Its declaration belongs to existing c_debug.h; replacing the include with a local duplicate extern would not reduce line count and would split declaration ownership.",
+  "minimization": "Delete redundant added explanatory comment. Retain one include and one event assignment pending owner decision; no new state/function/shim.",
+  "source_refs": [
+    "Original OpenNT c_tsksw.c:503-506",
+    "Original OpenNT c_main.c:4382-4386 and c_cpu_continue",
+    "Original OpenNT c_xcptn.c:Int1_t/benign_exception",
+    "Current c_debug.c:debug_exception_pending; c_main.c:delivery and c_cpu_continue reset",
+    "test/mvdm-host/ccpu_halt_reset_test.c:debug_task_switch(1), debug_task_switch(0)"
+  ],
+  "verification": {
+    "target": "ccpu-halt-reset-test.exe",
+    "build_run_exit": 0,
+    "marker": "S38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK",
+    "log_sha256": "024e08871aa81fa6b1ffe99843ac5d3fdd68ab09c3718dcf58b7fe6125606888",
+    "limits": "Synthetic protected CPU/TSS fixture, not fresh guest application acceptance. Original repeated-delivery claim is a complete-source state counterexample, not a new unmodified-original executable run.",
+    "tokens_unchanged": true,
+    "matched_original_lines": 448,
+    "line_mismatches": [],
+    "error_unchanged": true
+  },
+  "original_relative_diff": {
+    "R0416": {
+      "before_added": 2,
+      "after_added": 1,
+      "deleted": 0
+    },
+    "R0417": {
+      "before_added": 1,
+      "after_added": 1,
+      "deleted": 0
+    },
+    "delta": -1,
+    "counting": "Exclude #line; historic point counts3/2 included one diagnostic directive each."
+  },
+  "status": "qualified pending owner decisions; comment-only minimization complete"
+}
