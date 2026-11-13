@@ -1,0 +1,8 @@
+[
+  {
+    "path": "src/mvdm-host/inc/suballoc.h",
+    "matched": 52,
+    "matched_original_line_mismatches": [],
+    "error_directives_unchanged": true
+  }
+]

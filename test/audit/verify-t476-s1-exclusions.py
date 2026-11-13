@@ -45,7 +45,7 @@ for arm in ledger["arms"]:
         expected[(path, arm["directive"], arm["expression"])] += 1
 
 suballoc = (root / "src/mvdm-host/inc/suballoc.h").read_text(encoding="utf-8")
-if not re.search(r"#if defined\(_M_IX86\)\s*\n#line 33\s*\n#define COMMIT_GRANULARITY 4096\s*\n#else\s*\n#line 35\s*\n#define COMMIT_GRANULARITY 65536", suballoc):
+if not re.search(r"#elif defined\(_M_IX86\)\s*\n#line 33\s*\n#define COMMIT_GRANULARITY 4096\s*\n#else\s*\n#line 35\s*\n#define COMMIT_GRANULARITY 65536", suballoc):
     raise SystemExit("restored x86/x64 suballocator granularities missing")
 
 actual = collections.Counter()

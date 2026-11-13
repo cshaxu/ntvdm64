@@ -1,0 +1,77 @@
+{
+  "id": "T483-R0273",
+  "path": "src/mvdm-host/inc/suballoc.h",
+  "before": {
+    "added": 5,
+    "deleted": 0,
+    "total": 5
+  },
+  "after": {
+    "added": 2,
+    "deleted": 0,
+    "total": 2
+  },
+  "delta": -3,
+  "proof_layers": {
+    "responsibility": "Suballocator commit/decommit spans must stay within the reserved XMS allocation.",
+    "original_limitation": "config.c accepts PIF XMS in KB without 64KB rounding. XMSInit subtracts64KB and reserves via VdmAllocateVirtualMemory; original nt_mem.c rounds allocation to4KB. CommitChunk rounds spans to COMMIT_GRANULARITY and VdmDeCommitVirtualMemory directly VirtualFree-decommits them without clipping to allocation.",
+    "specific_difference": "Restoring non-i38665536 allows a tail commit/decommit beyond a4KB-aligned allocation. Keep4KB for supported MSVC x86 without enabling historical i386 kernel branch."
+  },
+  "source_chain": [
+    "src/mvdm-host/softpc.new/host/src/config.c:395 PIFExtendMemSize -> xmsMemorySize",
+    "src/mvdm-host/xms.486/xms.c:44 XMS size and callbacks selected by VdmAllocateVirtualMemory",
+    "src/mvdm-host/softpc.new/host/src/nt_mem.c:395 4KB round, adjacent header splitting, commit/decommit at493/533",
+    "src/mvdm-host/suballoc/suballoc.c:824-856 round and invoke callbacks"
+  ],
+  "contrast": {
+    "pool_bytes": 987136,
+    "xms_kb": 1028,
+    "current": "granularity=4096 reserved=987136 cross_commit=0 cross_decommit=0",
+    "original": "granularity=65536 reserved=987136 cross_commit=1 cross_decommit=1",
+    "source": "Actual product suballoc.c; callback records spans, not a full nt_mem runtime or reproduced application crash.",
+    "fixture_source": "#include <windows.h>\n#include <stdio.h>\n#include <stdlib.h>\n#include \"suballoc.h\"\n#define BASE 0x110000u\n#define SIZE (1028u*1024u-64u*1024u)\nstatic unsigned overcommit,overfree;\nstatic NTSTATUS commit(ULONG a,ULONG n){if(a<BASE || a+n>BASE+SIZE)++overcommit;return 0;}\nstatic NTSTATUS decommit(ULONG a,ULONG n){if(a<BASE || a+n>BASE+SIZE)++overfree;return 0;}\nstatic void move(ULONG a,ULONG b,ULONG n){(void)a;(void)b;(void)n;}\nint main(void){ULONG a;PVOID p=SAInitialize(BASE,SIZE,commit,decommit,move);\n if(!p || !SAAllocate(p,SIZE,&a) || a!=BASE || !SAFree(p,SIZE,a))return 2;\n printf(\"granularity=%u reserved=%u cross_commit=%u cross_decommit=%u\\n\",COMMIT_GRANULARITY,SIZE,overcommit,overfree);\n free(p);return (overcommit || overfree)?1:0;}\n"
+  },
+  "alternatives": "Changing original nt_mem allocator to64KB or adding clipping/state to XMS callbacks alters more behavior and mirror code. Reducing existing selector to one#elif keeps all three preprocessing outcomes without another implementation.",
+  "decision": "minimized residual pending owner decision",
+  "line_check": {
+    "matched": 52,
+    "mismatches": [],
+    "error_directives_unchanged": true
+  },
+  "verification": "P26 cached full build, publication11x2/hash, boundary and governance passed. P24 Full16 reused: all11 images identical after specific PE timestamps and package GUID normalization; no new runtime pass claimed.",
+  "hashes": {
+    "current-allocator.obj": "959cc0853042874aa0728a1f18e4a8f97aed3d077b2b0d344296b3480b18046d",
+    "current-probe.obj": "09265e771b39581f23216f4cd119503cf4ef56ef73f053bf08cf31cd2e0a77a5",
+    "current.exe": "90e124a6b08782b947a938d2d7eead8719d5646e3c7ad2a498e0f9773e38e90d",
+    "final-allocator.obj": "b696ba1f2e9aa4e336ee65e44856bda96760cdf8b6239876d7cdfb3f64ef716d",
+    "original-allocator.obj": "4c9de64d6d9c75224be852bfa15e09bedf64f2feae98ae2f149388e1bf824711",
+    "original-probe.obj": "129ad308b7c2543503fc1ea16d3793bb07ebf9d7b1ca5695a568e1f372c054ee",
+    "original.exe": "d1fd9e0183ad10ce36e23582d47aea46090ae3301486c7a217a45480f4ff8bbd",
+    "tail.c": "de83f640ba15e4653083de5ea1a5a2b5902dd57bf95281af06b30fa25393eaa0"
+  },
+  "final_focused": {
+    "contrast": "granularity=4096 reserved=987136 cross_commit=0 cross_decommit=0",
+    "lifecycle": [
+      "SUBALLOC_ROUND_TAIL_GROW_SHRINK_OK",
+      "SUBALLOC_PRECEDING_OVERLAP_DATA_OK",
+      "SUBALLOC_ELSEWHERE_DATA_OK",
+      "SUBALLOC_FRAGMENT_EXHAUST_FAILGROW_COALESCE_OK",
+      "SUBALLOC_FIRST_COMMIT_FAILURE_REUSE_OK"
+    ],
+    "original_failure_limits": [
+      "LIMITATION_PARTIAL_COMMIT_NO_ROLLBACK: first page committed; bitmap free",
+      "LIMITATION_DECOMMIT_FAILURE_BITMAP_NOT_RESTORED: failed free exposes 4096 bytes"
+    ],
+    "exclusion_check": "PASS 21 recorded unhit outer arms in 9 host files",
+    "initial_tool_failure": "Task script aggregate log collided with compiler log final-probe.log; renamed aggregate log, rerun passed. No product failure."
+  },
+  "linked_provider_evidence": [
+    "0001:00056570       _VdmAllocateVirtualMemory  00457570 f   original-softpc-host-roots:nt_mem.obj",
+    "0001:00056760       _VdmCommitVirtualMemory    00457760 f   original-softpc-host-roots:nt_mem.obj",
+    "0001:000567a0       _VdmDeCommitVirtualMemory  004577a0 f   original-softpc-host-roots:nt_mem.obj",
+    "0001:001587c0       _XMSInit                   005597c0 f   original-mvdm-xms:xms.obj"
+  ],
+  "limits": [
+    "Callback-span experiment is not a production application crash reproduction."
+  ]
+}

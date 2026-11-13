@@ -130,3 +130,6 @@ P24: [checkpoint](batch-p24-checkpoint.json), [line check](batch-p24-line-check.
 
 P25: [softpc.h complete ABI review](r0236-r0272-softpc-abi-review.json),
 [line check](batch-p25-line-check.json), [checkpoint](batch-p25-checkpoint.json).
+
+P26: [suballocator review](r0273-suballocator-granularity-review.json),
+[line check](batch-p26-line-check.json), [checkpoint](batch-p26-checkpoint.json).

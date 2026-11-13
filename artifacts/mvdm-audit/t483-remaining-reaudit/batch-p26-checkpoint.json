@@ -1,0 +1,32 @@
+{
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "sha256": "d18350215388f68a97817da37acb9df032c47074f0fb3354c2e212166a37058c"
+    },
+    {
+      "path": "test/audit/verify-t476-s1-exclusions.py",
+      "sha256": "e1ef30291645ea8cee369b9a026445a6f22a04e800ff8dd5e60c69f923516301"
+    }
+  ],
+  "mirror_diff_delta": -3,
+  "status": "Verified P26 delivery receipt; commit/push follows",
+  "package": "8791dad7-fc11-429a-b68d-d29e9d512bac",
+  "published_images": 11,
+  "destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "hash_verified": true,
+  "cached_full_exit": 0,
+  "boundary_and_governance_exit": 0,
+  "runtime": "P24 Full16 reused: all11 images identical after specific PE timestamps and package GUID normalization; no new runtime pass claimed.",
+  "runtime_reused": true,
+  "full_gate_count": 16,
+  "limits": [
+    "ABI proof is not a runtime failure reproduction.",
+    "Full frontier is not exhaustive Win3.x/game acceptance; missing external fixtures remain skips.",
+    "No original guest or winnt.zip changes."
+  ]
+}

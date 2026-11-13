@@ -29,18 +29,15 @@ Revision History:
 //   this is done as a constant rather than a parameter
 //   to make defining data structures easier
 //
-/* DIVERGENCE(MVDM-SUPPORT-DIV-007): recognize MSVC's x86 target macro. */
 #ifdef i386
 #line 33
 #error Excluded unsupported historical i386 profile
-#else
-#if defined(_M_IX86)
+#elif defined(_M_IX86)
 #line 33
 #define COMMIT_GRANULARITY 4096
 #else
 #line 35
 #define COMMIT_GRANULARITY 65536
-#endif
 #endif
 #line 37
 
