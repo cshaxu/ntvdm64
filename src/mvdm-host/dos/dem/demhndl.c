@@ -124,24 +124,20 @@ UCHAR   locus, action, class;
 LONG    lLoc;
 mvdm_guest_location bufferLocation;
 mvdm_guest_location_lease bufferLease;
-BOOL    bufferLeaseActive;
 
 #line 124
     hFile = GETHANDLE (getAX(),getBP());
     usDS = getDS();
     usDX = getDX();
-    bufferLeaseActive = FALSE;
-    /* DIVERGENCE(MVDM-HOST-DIV-195): the source passes a durable guest alias
-     * to synchronous host I/O.  Retain its ReadFile/named-pipe/CF/AX order,
-     * but hold one bounded writable session lease only for this call. */
+    /* DIVERGENCE(MVDM-HOST-DIV-195): copy across noncontiguous guest pages. */
     mvdm_guest_location_set_real_mode(&bufferLocation, usDS, usDX);
     if (!mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
             GUEST_MEMORY_ACCESS_WRITE, &bufferLease)) {
         SetLastError(ERROR_INVALID_ADDRESS);
         goto readFailureExit;
     }
-    bufferLeaseActive = TRUE;
     lpBuf = (LPVOID)bufferLease.bytes;
+#line 128
 
     //
     // if this handle is a named pipe then use VrReadNamedPipe since we have
@@ -206,9 +202,7 @@ BOOL    bufferLeaseActive;
     //
 
     if (!getZF()) {
-        /* DIVERGENCE MVDM-HOST-DIV-105: the public SetFilePointer high-offset
-         * parameter is signed LONG; NT4 accepted ULONG by same-width coincidence. */
-        LONG    Zero = 0;
+        ULONG   Zero = 0;
 #line 190
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,
@@ -228,10 +222,8 @@ BOOL    bufferLeaseActive;
                   NULL) == FALSE){
 
 readFailureExit:
-        if (bufferLeaseActive) {
-            (void)mvdm_guest_location_release(&bufferLease, FALSE);
-            bufferLeaseActive = FALSE;
-        }
+        (void)mvdm_guest_location_release(&bufferLease, FALSE);
+#line 212
 
         if (GetLastError() == ERROR_BROKEN_PIPE)  {
              setAX(0);
@@ -243,13 +235,9 @@ readFailureExit:
     }
 
 readSuccessExit:
-    if (bufferLeaseActive) {
-        if (!mvdm_guest_location_release(&bufferLease, TRUE)) {
-            bufferLeaseActive = FALSE;
-            SetLastError(ERROR_INVALID_ADDRESS);
-            goto readFailureExit;
-        }
-        bufferLeaseActive = FALSE;
+    if (!mvdm_guest_location_release(&bufferLease, TRUE)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        goto readFailureExit;
     }
 #line 227
     setCF(0);
@@ -291,8 +279,7 @@ mvdm_guest_location_lease bufferLease;
 
 #line 262
     hFile = GETHANDLE (getAX(),getBP());
-    /* DIVERGENCE(MVDM-HOST-DIV-231): preserve the original synchronous
-     * WriteFile order with a bounded guest-memory lease. */
+    /* DIVERGENCE(MVDM-HOST-DIV-231): copy across noncontiguous guest pages. */
     mvdm_guest_location_set_real_mode(&bufferLocation, getDS(), getDX());
     if (!mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
         GUEST_MEMORY_ACCESS_READ, &bufferLease)) {
@@ -301,6 +288,7 @@ mvdm_guest_location_lease bufferLease;
         return;
     }
     lpBuf = (LPVOID)bufferLease.bytes;
+#line 264
 
 
     //
@@ -327,9 +315,7 @@ mvdm_guest_location_lease bufferLease;
 
 
     if (!getZF()) {
-        /* DIVERGENCE MVDM-HOST-DIV-105: the public SetFilePointer high-offset
-         * parameter is signed LONG; NT4 accepted ULONG by same-width coincidence. */
-        LONG    Zero = 0;
+        ULONG   Zero = 0;
 #line 290
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,

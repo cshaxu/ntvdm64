@@ -6,6 +6,7 @@
 
 typedef struct fixture_memory {
     uint8_t bytes[0x20000];
+    int reject_write;
 } fixture_memory;
 
 static int read_memory(void *context, uint32_t address, uint8_t *bytes,
@@ -22,6 +23,7 @@ static int write_memory(void *context, uint32_t address, uint8_t const *bytes,
     uint32_t byte_count)
 {
     fixture_memory *memory = (fixture_memory *)context;
+    if (memory != NULL && memory->reject_write) return 0;
     if (memory == NULL || bytes == NULL || address > sizeof(memory->bytes) ||
         byte_count > sizeof(memory->bytes) - address) return 0;
     memcpy(memory->bytes + address, bytes, byte_count);
@@ -103,6 +105,16 @@ int main(void)
     if (!mvdm_guest_location_set_real_mode(&location, 0xffffu, 0xffffu) ||
         mvdm_guest_location_acquire(&location, 1u, GUEST_MEMORY_ACCESS_READ,
             &lease)) return 10;
+    /* Failed acquisition and failed commit both leave an empty wrapper.
+     * DEM's common failure exit may discard it without a second active flag. */
+    if (lease.lease != NULL || lease.bytes != NULL ||
+        mvdm_guest_location_release(&lease, 0)) return 15;
+    if (!mvdm_guest_location_set_real_mode(&location, 0u, 0x90u) ||
+        !mvdm_guest_location_acquire(&location, 1u,
+            GUEST_MEMORY_ACCESS_WRITE, &lease)) return 16;
+    memory.reject_write = 1;
+    if (mvdm_guest_location_release(&lease, 1) || lease.lease != NULL ||
+        lease.bytes != NULL || mvdm_guest_location_release(&lease, 0)) return 17;
     if (!session_thread_unbind(&instance)) return 11;
     session_guest_memory_end(&instance);
     return session_dispose(&instance) ? 0 : 12;

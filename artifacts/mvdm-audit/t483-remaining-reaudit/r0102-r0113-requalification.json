@@ -1,0 +1,39 @@
+{
+  "scope": "R0102-R0113 whole demhndl.c and coupled acquisition bodies. Single-agent initial and counter-review.",
+  "source_head": "d60725c7256f84b3253c384e558d9429455b7540",
+  "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+  "before": [
+    53,
+    37
+  ],
+  "after": [
+    34,
+    35
+  ],
+  "mirror_diff_delta": -21,
+  "metric": "Original-relative added+removed lines, newline normalized and #line excluded; includes unchanged excluded bodies. Source line count is not used.",
+  "initial_review": "Old durable-pointer comments and lease cleanup dependencies were not original-failure proof. Trace handle.asm ReadSetup -> Align_Buffer -> HRDSVC DEMREAD/DEMWRITE and dev.asm one-byte device path; application buffer is variable, unlike fixed DOSDATA error record.",
+  "counter_review": "DOS segment-fit guard does not imply physically contiguous CCPU page mappings. SIM32 translates only the first linear byte with c_GetLinAdd; ordinary native I/O uses consecutive host bytes. Sim32FlushVDMPointer copies video scratch only for video addresses and c_sas_overwrite_memory is a no-op in CCPU, so it cannot scatter a RAM buffer.",
+  "actual_counterexample": {
+    "runner": "build/t483-s5-dem-buffer-proof/run.ps1",
+    "selected_profile": "x86 CCPU40",
+    "result": "CCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK\nDOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1\nCCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK\n",
+    "exit": 0,
+    "case": "DS:DX 9000:0FFE, length4, low linear pages90/91 mapped to distinct nonadjacent physical pages. Original Sim32pGetVDMPointer + contiguous4-byte access returns wrong suffix; current real SAS/session copy returns33445566. Page table restored and CR3 reloaded afterward.",
+    "limits": "Fixture configures valid mappings; no claim a production guest application reproduced this layout or failure. It demonstrates the supported arbitrary-buffer address contract, not asynchronous lifetime or failure-partial-write equivalence.",
+    "attempts": [
+      "Wrong compiler-driver path: terminal before compilation; corrected using existing wow32 driver.",
+      "Fixture exited0 but CRT puts was not visible through fixture standard-output handling; replaced with existing fixture_stdout and reran successfully."
+    ]
+  },
+  "original_reuse": "c_sas_transbuf_address is original but uses process-shared scratch; replacing the existing lease with that buffer would require separate lifetime/reentry work and copy/failure policy. No second buffer mechanism or new shim introduced.",
+  "implemented": [
+    "Restore both original ULONG Zero declarations; same-width signed/unsigned representation, current selected DEM compiler has no /WX. Final build will verify actual diagnostics.",
+    "Remove duplicate read active Boolean and use acquire/release wrapper zeroing. acquire clears lease_out before any failure; release validates empty wrapper and clears it after attempted commit, including commit failure.",
+    "Preserve original file/pipe routing, read counts, seek/truncate/EOF/disk-full behavior; write lease cleanup retained.",
+    "Restore original CRLF and missing logical-line resets128/212/264. Existing excluded #error directives unchanged."
+  ],
+  "pending": "Remaining per-point buffer adaptations are evidence-qualified owner choices, not approved retention. Counterexample proves direct alias restoration cannot preserve arbitrary paged-buffer I/O, not that every historical snapshot/failure behavior is equivalent to original.",
+  "verification": "Final pinned source: cached full build, both publication destinations/22 hashes, address and failure-cleanup fixtures, DOS INT21 file-service probe, Full16 and governance pass. See batch-p13-checkpoint.json.",
+  "release_error_state": "Empty-lease release returns before session_guest_memory_release; session_thread_current is direct thread_instance access (session.c:382), not TlsGetValue. No new error-state-changing OS call on failed-acquire or failed-commit cleanup."
+}

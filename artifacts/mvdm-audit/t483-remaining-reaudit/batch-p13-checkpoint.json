@@ -1,0 +1,173 @@
+{
+  "status": "Final-code cached build/publication/focused/Full/governance verified; included in P13 Git delivery",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "sha256": "ac47089e2cd2f60b9509d3eb1ab84f8c52bb65a68be896206c9cc6ae0549f902"
+    },
+    {
+      "path": "test/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "sha256": "4a63d0fc498f6a3841665a796b0ef4a8bc3b796e36190d85c0c8e1ef05c2b2bf"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/softpc/t280_s20_mvdm_guest_location_fixture.c",
+      "sha256": "0f7055f3ea506b5b0a06a06e932a2bf902e5fa954f68e067afac94d049158a49"
+    }
+  ],
+  "mirror_diff_before": [
+    53,
+    37
+  ],
+  "mirror_diff_after": [
+    34,
+    35
+  ],
+  "mirror_diff_delta": -21,
+  "limits": [
+    "DOS4GW/NESticle skipped for absent external fixtures; no pass claimed.",
+    "Address comparison uses real selected CCPU/SIM32 and fixture-created valid mappings, not an application-level corruption reproduction.",
+    "No original guest modified or rebuilt; self-authored DOS probe only."
+  ],
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "dem-guest": 0,
+    "full": 0,
+    "pipeline": 0,
+    "governance": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "092ebd9d-7f99-4c24-a418-f42f5744dcf5",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 358866,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 2284,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1137,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 229,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67481,
+        "CleanupMs": 450,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46850,
+        "CleanupMs": 449,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46284,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15975,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10905,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53816,
+        "CleanupMs": 491,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12595,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28252,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30515,
+        "CleanupMs": 436,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4728,
+        "CleanupMs": 475,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7602,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9899,
+        "CleanupMs": 492,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4029,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7298,
+        "CleanupMs": 447,
+        "Passed": true
+      }
+    ]
+  },
+  "dem_guest_result": "PASS actual DOS INT21 file read/write/seek/truncate, commit, sharing, lock, find, rename, FCB, attributes and error mapping",
+  "guest_location_exit": 0,
+  "source_warnings": [
+    "Original ULONG parameters compile with C4057 at logical193/293; no build or demonstrated ABI failure."
+  ],
+  "attempts": [
+    "Initial pipeline stopped after publication on temporary Select-String argument error; fixture exited0. Corrected -Path and resumed tests on identical published package without rebuilding or republishing."
+  ],
+  "backlog": {
+    "rows": 60,
+    "points": 67,
+    "qualified_points": 30,
+    "historical_points": 37
+  },
+  "sequential_files_complete": 20,
+  "next": "T483-R0114 demmisc.c"
+}

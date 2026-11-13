@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-177 points have a prior or current review record:106 restored/verified/published,
-0 local restorations pending verification,2 approved retain,20 qualified pending
-decisions and49 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is19/365;346 remain.
+177 points have a prior or current review record:108 restored/verified/published,
+0 local restorations pending verification,2 approved retain,30 qualified pending
+decisions and37 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is20/365;345 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -69,15 +69,14 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P11 package `4b68202f-b3f2-40ca-97c5-25ae6ce22205` is published to
+P13 package `092ebd9d-7f99-4c24-a418-f42f5744dcf5` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
-Cached full build, command fixtures, source-contract assertions, Full16 and
-governance passed. DOS4GW/NESticle skipped: external fixtures not supplied.
-No original guest or winnt.zip changes. One final original blank line was restored
-under format-only reuse authorization; nonblank content/logical lines match the
-built source exactly. This record accompanies P11 Git delivery.
-See [P11 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-checkpoint.json).
-S5 remains active; next ordered point is R0079.
+Final-source cached full build, command/location/CCPU fixtures, DOS INT21
+file-service probe, Full16 and governance passed. Original ULONG declarations
+produce C4057 warnings, not build failures; no ABI fault is asserted.
+DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
+or winnt.zip changes. See [P13 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p13-checkpoint.json).
+S5 remains active; next ordered point R0114 in demmisc.c after P13 Git delivery.
 
 ## Remaining Scope
 
@@ -185,3 +184,18 @@ See [file review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0079-r0101-
 and [R0098 proof](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0098-requalification.json).
 
 P12 delivery receipt: [audit/format checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p12-checkpoint.json).
+
+## Current P13 Batch
+
+Complete-file demhndl.c review R0102-R0113 restores two original ULONG declarations
+and removes redundant read-lease active state. Original-relative diff drops from
++53/-37 to+34/-35, net-21 (newline normalized, #line excluded). Both excluded
+#error directives remain; original matched selected-source logical lines agree.
+The original SIM32 contiguous-pointer boundary fails a real CCPU low-page mapping
+fixture; its source/fixture proof qualifies the remaining ten buffer adaptations
+for owner decision, not retention approval or a production-application repro.
+See [P13 review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0102-r0113-requalification.json)
+and [checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p13-checkpoint.json).
+Final-source cached build, both-location publication, focused tests, Full16
+and governance passed; this receipt accompanies P13 Git delivery. Residual
+buffer differences remain owner decisions, not approved retention.

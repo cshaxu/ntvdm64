@@ -1,0 +1,8 @@
+[
+  {
+    "file": "src/mvdm-host/dos/dem/demhndl.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Exact selected-source runs of >=4 nonempty lines; DBG=0 and Win32 seek constants, inactive #line ignored; not compiler preprocessor evidence."
+  }
+]

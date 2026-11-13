@@ -383,6 +383,39 @@ static int fixture_high_linear_page(void)
         fputs("high-page SAS bulk read failed\n", stderr);
         goto done;
     }
+    /* DOS DS:DX buffers can cross a page while remaining inside one segment.
+     * Exercise the original SIM32 alias on low linear pages, not the high
+     * Win16 clock address. This is an address-contract counterexample, not
+     * a claim that a particular guest application has reproduced corruption. */
+    {
+        extern IU8 *Sim32pGetVDMPointer(IU32 address, IU8 protected_mode);
+        IU32 low_table = allocation + 3u * 4096u;
+        IU32 low_pte = low_table + 0x90u * 4u;
+        IU8 alias_bytes[4];
+        int low_ok;
+        phy_w32(low_pte, first | 7u);
+        phy_w32(low_pte + 4u, second | 7u);
+        c_setCR3(directory);
+        memcpy(alias_bytes, Sim32pGetVDMPointer(0x90000ffeu, 0), 4u);
+        low_ok = memcmp(alias_bytes, "\x33\x44\x55\x66", 4u) != 0 &&
+            mvdm_softpc_guest_memory_acquire(0x90ffeu, 4u,
+                GUEST_MEMORY_ACCESS_READ, &lease, &lease_bytes);
+        if (low_ok) {
+            low_ok = memcmp(lease_bytes, "\x33\x44\x55\x66", 4u) == 0;
+            if (!mvdm_softpc_guest_memory_release(lease, 0)) low_ok = 0;
+            lease = NULL;
+            lease_bytes = NULL;
+        }
+        phy_w32(low_pte, 0x90000u | 7u);
+        phy_w32(low_pte + 4u, 0x91000u | 7u);
+        c_setCR3(directory);
+        if (!low_ok) {
+            fputs("DOS low-page SIM32/lease comparison failed\n", stderr);
+            goto done;
+        }
+        if (!fixture_stdout("DOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1\r\n"))
+            goto done;
+    }
     c_setGDT_BASE_LIMIT(allocation + 4u * 4096u, 0x27u);
     (void)c_setCS(0x1bu);
     (void)c_setDS(0x23u);
