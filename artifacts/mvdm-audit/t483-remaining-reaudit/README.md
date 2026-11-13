@@ -294,3 +294,8 @@ Mirror diff6->0;delivery pending.489/2720 reviewed;184restored delivered,1local,
 P51 delivered:cached build,11x2 publication/hash,C-VID/vector,focused and Full16 passed.
 489/2720 reviewed;185restored delivered,0local,2approved,302pending,2231unreviewed.
 75/365files complete;290remain.Next R0483.
+
+R0483: [selected CCPU manifest review](r0483-sources-review.json), +0/-1 unchanged.
+Actual original selection fails on the excluded alternate stub; no product edit.
+490/2720 reviewed;76/365 files;185 restored,2 approved,303 pending,2230 unreviewed.
+P51 remains the build/publication/runtime baseline.

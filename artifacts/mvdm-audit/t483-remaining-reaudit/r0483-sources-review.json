@@ -1,0 +1,44 @@
+{
+  "id": "T483-R0483",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/sources",
+  "source": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/softpc.new/base/ccpu386/sources",
+    "git_blob": "19214a837a2250b61a0ce353e7ef13f65990a064",
+    "sha256": "6dc49164a86efb90776924f463fc0e1ec064436e21339b92e709449a73779431"
+  },
+  "current_sha256": "7f87b0cff6f41a59084e736b906e6f2457f7580dfc2cdf98682d8855a13f4432",
+  "responsibility": "The selected CCPU build must enumerate actual providers. This manifest is consumed by Get-OriginalSources, unlike the inactive ccpudefs.inc metadata.",
+  "original_capability": "The historical manifest selects ntstubs.c. That alternate carrier has empty copyROM and profile/debug/NPX stubs plus a3 CPU and direct c_sas forwarding wrappers. It is not an additional CCPU algorithm required by this product.",
+  "provider_chain": [
+    "New-T310OriginalSoftpcNinja.ps1 Get-OriginalSources -> ccpuNames -> source-existence check -> generated CCPU object list.",
+    "Original ccpusas4.c sas_init -> copyROM; current production ntvdm.exe.map resolves _copyROM to original-softpc-system:rom.obj. The alternative ntstubs.c copyROM is empty.",
+    "Original fpu.c and ntstubs.c both define initialise_npx/npx_reset; original cvidc/accessfn.c and ntstubs.c both define sas_connect_memory/sas_dw_at and other SAS interfaces. These are source-definition overlaps, not a newly executed duplicate-link failure."
+  ],
+  "controls": {
+    "method": "Extracted and invoked the actual Get-OriginalSources FunctionDefinitionAst and CCPU ForEachStatementAst from the current generator; no reimplementation of the parser/check.",
+    "current": {
+      "selected": 129,
+      "ntstubs_selected": false,
+      "failure": null
+    },
+    "original": {
+      "selected": 130,
+      "ntstubs_selected": true,
+      "failure": "Original CCPU source missing: ntstubs.c"
+    }
+  },
+  "historical_evidence": "s13-depth1-whole-file-removal-015.json records prior selected-closure deletion and removal of generator filters. Historical assertion alone was not used as a new runtime/link result.",
+  "counter_review": "A missing file alone is not proof of an original defect. The current packet explicitly excludes reopening deleted files; original provider source/map evidence separately confirms the stub is an alternate carrier, not lost ROM implementation. Restoring the line would require reopening that excluded file or adding a generator filter. Neither is a smaller coherent change within this packet.",
+  "minimum_option": "Keep the one-line omission pending owner decision; no new filter, shim, source import or second provider. Deleting one selected filename is already the minimum nonzero line difference.",
+  "diff": {
+    "before_added": 0,
+    "before_removed": 1,
+    "after_added": 0,
+    "after_removed": 1,
+    "net": 0
+  },
+  "line_and_exclusions": "Historical build manifest, not compiled C: no C #error/#line to alter. Sole difference is original line177; all other lines match after newline normalization.",
+  "verification": "Read-only generator selection control and current source/map attribution. No product change, fresh full build, publication or runtime pass claimed; P51 remains the delivered baseline.",
+  "decision": "pending-owner-decision-source-and-generator-proof"
+}

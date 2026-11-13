@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-489 points have a prior or current review record:185 restored/verified/published,
-0 local restorations pending verification,2 approved retain,302 qualified pending
-decisions and0 prior classifications requiring requalification. Another2231
-points are unreviewed. Sequential file disposition is75/365;290 remain.
+490 points have a prior or current review record:185 restored/verified/published,
+0 local restorations pending verification,2 approved retain,303 qualified pending
+decisions and0 prior classifications requiring requalification. Another2230
+points are unreviewed. Sequential file disposition is76/365;289 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -241,4 +241,5 @@ P50:R0481 diff5->2;final build/publication/tests verified.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0481-ret-review.json).
 P51:R0482 exact original restored;full delivery verified.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0482-sascdef-review.json).
-Next R0483;S5 remains active.
+R0483: one-line manifest omission pending;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0483-sources-review.json).
+Next R0484;S5 remains active.
