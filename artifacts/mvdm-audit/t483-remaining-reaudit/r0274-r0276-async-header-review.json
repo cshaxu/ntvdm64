@@ -1,0 +1,87 @@
+{
+  "ids": [
+    "T483-R0274",
+    "T483-R0275",
+    "T483-R0276"
+  ],
+  "path": "src/mvdm-host/inc/vrnmpipe.h",
+  "before": {
+    "added": 11,
+    "deleted": 3,
+    "total": 14
+  },
+  "after": {
+    "added": 2,
+    "deleted": 1,
+    "total": 3
+  },
+  "delta": -11,
+  "points": [
+    {
+      "id": "T483-R0274",
+      "scope": "+6/-2",
+      "decision": "restore-original",
+      "evidence": "Both modified DWORD members only transported values inside prepare before conversion to existing private locations; no selected completion or other caller reads them. Restore exact original LPWORD lines; use two local uint32 values, no pointer casts or new interface."
+    },
+    {
+      "id": "T483-R0275",
+      "scope": "+3/-0",
+      "decision": "restore-original",
+      "evidence": "Extra explanation comment removed; no behavior."
+    },
+    {
+      "id": "T483-R0276",
+      "scope": "+1/-0",
+      "decision": "pending-owner-decision",
+      "evidence": "One per-request staging owner pointer remains; no original field is a free host-context slot."
+    }
+  ],
+  "proof_layers": {
+    "responsibility": "Overlapped native I/O must receive contiguous host bytes valid until operation completion, and those bytes must be reclaimed on the original request cleanup paths.",
+    "original_limitation": "Original VrReadWriteAsyncNmPipe converts arbitrary far buffers with READ_FAR_POINTER -> original vrdisp::_inlinePointerFromWords -> GetVDMAddr -> Sim32pGetVDMPointer, then submits that single pointer directly. Original SIM32 maps the first byte only; a supported noncontiguous CCPU page span is not contiguous host storage. Historical real CCPU counterexample is linked below, not a new runtime pass.",
+    "specific_difference": "Original request queue supports concurrent outstanding operations. Buffer remains the guest far value consumed by VrNmPipeInterrupt DS:SI; Next and HANDLE are live original fields, OVERLAPPED is OS-owned. A single host state pointer supplies ownership of the per-request staging allocation through original completion/dequeue/free. This does not prove every private-state member or all async policies necessary."
+  },
+  "source_chain": [
+    "Original vrnmpipe.c:1337-1339 far-buffer acquisition;1520 onward ReadFile/WriteFile;2080 GetOverlappedResult and WRITE_WORD publication; original ANR queue cleanup.",
+    "Original vrdisp.c:161-168 unchanged _inlinePointerFromWords delegates to GetVDMAddr.",
+    "src/ntvdm-exe/redir/mvdm_redirector_async.c prepare -> completion_begin -> complete -> completion_end -> release.",
+    "Selected current vrnmpipe.c:1601/1602 uses request Buffer for ANR DS:SI; all pBytesTransferred/pErrorCode uses formerly confined to prepare."
+  ],
+  "prior_real_mapping_evidence": "r0102-r0113-requalification.json: DOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1; valid CCPU low pages90/91 mapped nonadjacently. It proves noncontiguous native-pointer failure, not a production pipe application repro or async lifetime equivalence.",
+  "alternatives": [
+    "Reusing restored LPWORD members for an unrelated host context would disguise the same divergence and violate their original meaning.",
+    "Using one global staging pointer cannot serve the original multiple outstanding requests. A side table adds identity lookup and synchronization.",
+    "Embedding original request into a larger private allocation requires a changed allocation boundary/API or private size exposure and different prepare/release ownership; it is not direct restoration of the original exact-size LocalAlloc contract and is larger than this one header member. No new allocator API introduced."
+  ],
+  "counter_review": "Do not claim current adapter dependencies prove header type changes: R0274 was unnecessary and restored. R0276 is supported by original I/O buffer contract plus actual CCPU mapping evidence. The claim is bounded to the one owner pointer, not full async correctness.",
+  "line_check": {
+    "matched": 147,
+    "mismatches": [],
+    "error_directives_unchanged": true
+  },
+  "verification": "P27 cached full build, publication11x2/hash, boundary and governance passed. P27 Full16 final package passed.",
+  "limits": [
+    "Historical CCPU mapping proof reused; not a new actual named-pipe reproduction.",
+    "No claim of complete async teardown/remap/multi-VM ownership equivalence.",
+    "No guest changes.",
+    "Final adapter publication and x86/x64 contract verification passed; retained owner pointer still pending approval."
+  ],
+  "focused": {
+    "publication": {
+      "exit_code": 0,
+      "elapsed_ms": 210,
+      "executable_sha256": "9A7D13EBC08C8BE45BB1FFBC4F5B7DF89CA9619C9E16FEEF2DE52949D0F494FB",
+      "scope": "Production async adapter/location/session/lease; controlled memory, not real pipe callback"
+    },
+    "publication_assertions": "",
+    "contract_exit": 0,
+    "contract_scope": "x86 original redirector compilation; x86/x64 adapter contract execution. Native x64 mirror implementation excluded by existing source policy.",
+    "test_repairs": [
+      "Old WIN_32/missingCCPU flags selected excluded profiles; use supported flags and native NT declarations.",
+      "Removed duplicate CD-name copy case and obsolete guest-copy link; redirector_oem_capacity_test.c:98-105 already covers these outcomes.",
+      "Old x64 default source compilation was outside supported MVDM implementation; x64 now defaults only to adapter contract."
+    ],
+    "failure_history": "Initial and subsequent stale-test configuration failures preserved in task logs; final contracts and publication passed. No product workaround."
+  },
+  "delivery_attempt_note": "First publication refused before copy because task runtime publication directory collided with async publication fixture. Runtime staging preserved; use runtime-publication directory and resume after successful stage. No build rerun or test evidence overwrite."
+}

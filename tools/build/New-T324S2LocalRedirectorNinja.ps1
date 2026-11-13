@@ -38,11 +38,13 @@ $includeRoots = @(
     'src/non-mvdm/private/inc') | ForEach-Object {
         '/I "' + (Join-Path $root $_).Replace('\', '/') + '"'
     }
+$nativeHeader = (Join-Path $root 'src/compat/include/nt.h').Replace('\', '/')
 $threadHeader = (Join-Path $root 'src/compat/include/thread_start_compat.h').Replace('\', '/')
-$cflags = '/nologo /TC /c /std:c11 /MT /W4 /Gy /showIncludes /DWIN_32 /DVDMREDIR_DLL /DCPU_40_STYLE /FI "' +
-    $threadHeader + '" ' + ($includeRoots -join ' ')
+$cflags = '/nologo /TC /c /std:c11 /MT /W4 /Gy /showIncludes /DWIN32 /DWINNT /DNTVDM /DVDMREDIR_DLL /DCPU_40_STYLE /DCCPU /FI "' +
+    $nativeHeader + '" /FI "' + $threadHeader + '" ' + ($includeRoots -join ' ')
 $ninjaRoot = $root.Replace('\', '/').Replace(':', '$:')
 $ninjaEnvironment = $environment.Replace('\', '/').Replace(':', '$:')
+$originalTargets = if ($Architecture -eq 'x86') { 'obj/vrnmpipe.obj obj/vrputil.obj obj/vrdisp.obj obj/vrmisc.obj obj/vrmslot.obj obj/cmdredir.obj obj/ntstatus.obj' } else { '' }
 $content = @"
 ninja_required_version = 1.10
 root = $ninjaRoot
@@ -65,14 +67,13 @@ build obj/vrmslot.obj: cc `$root/src/mvdm-host/vdmredir/vrmslot.c
 build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
 build obj/ntstatus.obj: cc `$root/src/non-mvdm/ds/netapi/netlib/ntstatus.c
 build obj/async.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_async.c
-build obj/guest-copy.obj: cc `$root/src/vdmredir-dll/source/mvdm_redirector_guest_copy.c
 build obj/location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c
 build obj/thread.obj: cc `$root/src/common/worker-thread/bridge.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build obj/fixture.obj: cc `$root/test/mvdm-host/vdmredir/redirector_async_contract_fixture.c
-build bin/redirector-async-contract-fixture.exe: link obj/async.obj obj/guest-copy.obj obj/location.obj obj/session.obj obj/lease.obj obj/fixture.obj
-default obj/vrnmpipe.obj obj/vrputil.obj obj/vrdisp.obj obj/vrmisc.obj obj/vrmslot.obj obj/cmdredir.obj obj/ntstatus.obj bin/redirector-async-contract-fixture.exe
+build bin/redirector-async-contract-fixture.exe: link obj/async.obj obj/location.obj obj/session.obj obj/lease.obj obj/fixture.obj
+default $originalTargets bin/redirector-async-contract-fixture.exe
 "@
 [IO.File]::WriteAllText((Join-Path $BuildRoot 'build.ninja'), $content + [Environment]::NewLine,
     (New-Object Text.UTF8Encoding($false)))

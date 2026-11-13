@@ -1,0 +1,568 @@
+[
+  {
+    "name": "VCDEX.DLL",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "7e6eed33d3ca340ac801dd000bb70a97ace902751c14f286189fca475e6e8a0d",
+      "39123d2319e1a59b7d9083356a19dbbfa809f88f829559229ab781d9d5f7da2f"
+    ],
+    "normalizations": [
+      [
+        [
+          240,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          6020,
+          4,
+          "export timestamp"
+        ],
+        [
+          5964,
+          4,
+          "debug timestamp"
+        ],
+        [
+          7876,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          240,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          6020,
+          4,
+          "export timestamp"
+        ],
+        [
+          5964,
+          4,
+          "debug timestamp"
+        ],
+        [
+          7876,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "run16.exe",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "d319805551ab53e69299f91079ea09e5ac7ceffad2a4c24f8f18d6892f986b75",
+      "8523d2a3a3762733317e26c16c53873f6e547f67776b9ac416b2727b888a7073"
+    ],
+    "normalizations": [
+      [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          211428,
+          4,
+          "debug timestamp"
+        ],
+        [
+          304764,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          211428,
+          4,
+          "debug timestamp"
+        ],
+        [
+          304764,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ntsrv.exe",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "e025dc47e873e145dab6d7c814f760d4e6e5b3008100bf4af10044b6c958050a",
+      "7b4fd03d286072849de1611d3da2fb54bce20980878e816bd40362c04b65a5d9"
+    ],
+    "normalizations": [
+      [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          300084,
+          4,
+          "debug timestamp"
+        ],
+        [
+          407164,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          300084,
+          4,
+          "debug timestamp"
+        ],
+        [
+          407164,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ntcon.exe",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "e4ed7525cc804b1bf3e5c0ba96347d8a8f6e3538457a398242e356c6b2653768",
+      "db83d65e60017b96450831ff40a9b2fc6057e1475b3951fff0b1c75c531ab4ef"
+    ],
+    "normalizations": [
+      [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          250580,
+          4,
+          "debug timestamp"
+        ],
+        [
+          353916,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          250580,
+          4,
+          "debug timestamp"
+        ],
+        [
+          353916,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ntvdm.exe",
+    "raw_equal": false,
+    "normalized_equal": false,
+    "different_remaining_bytes": 381,
+    "sha256": [
+      "b9afc523f63546defe75fd2805f47be82254776fe9ca70478a53b5665e805036",
+      "946635f8a22bba1e954266e95bd381e5382bf8f59deb712a4e5077bf224e6efc"
+    ],
+    "normalizations": [
+      [
+        [
+          280,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          1785300,
+          4,
+          "export timestamp"
+        ],
+        [
+          1713668,
+          4,
+          "debug timestamp"
+        ],
+        [
+          1845384,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          280,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          1785300,
+          4,
+          "export timestamp"
+        ],
+        [
+          1713668,
+          4,
+          "debug timestamp"
+        ],
+        [
+          1845384,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ntvwm.exe",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "3375f7fdfc54f6b192ba35919c5a9187e383cf8d7dd47dd570628ca3e1df7f41",
+      "92b7b35deb682bdf2c8b57b1f551325c3594f07d2458e4be7078f8728e666b1e"
+    ],
+    "normalizations": [
+      [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          227252,
+          4,
+          "debug timestamp"
+        ],
+        [
+          323708,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          227252,
+          4,
+          "debug timestamp"
+        ],
+        [
+          323708,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ntmon.exe",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "d1e50eb52ff3524f2df19230ca2a4bb62d1f203db32d6de04fee463e31ae1861",
+      "d923f410f7be83b2801b47204f239954b8640a941f0ab922ca9aac853dcb4e01"
+    ],
+    "normalizations": [
+      [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          148180,
+          4,
+          "debug timestamp"
+        ],
+        [
+          166524,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          148180,
+          4,
+          "debug timestamp"
+        ],
+        [
+          166524,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "WOW32.DLL",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "df677da2d817dce0ad004d791aeab2c81e8dcc5231b5a9ecd70aa798e240c2c2",
+      "b05134b59587a455cb2de12ed8fea2ae163c1d5f96fed2abd0570606231e5afe"
+    ],
+    "normalizations": [
+      [
+        [
+          288,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          635092,
+          4,
+          "export timestamp"
+        ],
+        [
+          623332,
+          4,
+          "debug timestamp"
+        ],
+        [
+          675548,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          288,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          635092,
+          4,
+          "export timestamp"
+        ],
+        [
+          623332,
+          4,
+          "debug timestamp"
+        ],
+        [
+          675548,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "VDMREDIR.DLL",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "f22bd05b49ccb2b7f68c69b89a3ea91d82c761430e0b498b0b6ae3c9119d26e3",
+      "45e28ecd29faa46e757bf22ec968c9a8256a1f207651b10ae0244aa1d306fcfc"
+    ],
+    "normalizations": [
+      [
+        [
+          288,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          193604,
+          4,
+          "export timestamp"
+        ],
+        [
+          125028,
+          4,
+          "debug timestamp"
+        ],
+        [
+          200900,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          288,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          193604,
+          4,
+          "export timestamp"
+        ],
+        [
+          125028,
+          4,
+          "debug timestamp"
+        ],
+        [
+          200900,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "nthook32.dll",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "a7dbafffa5814c749b6abf64910600a7d693a2b08752994ec54b84538d645490",
+      "4fb7af75793352cbc41186a07454088584ae7b20fde47e4f8f06ea90b943ba4f"
+    ],
+    "normalizations": [
+      [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          203332,
+          4,
+          "export timestamp"
+        ],
+        [
+          134228,
+          4,
+          "debug timestamp"
+        ],
+        [
+          210044,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          203332,
+          4,
+          "export timestamp"
+        ],
+        [
+          134228,
+          4,
+          "debug timestamp"
+        ],
+        [
+          210044,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "nthook64.dll",
+    "raw_equal": false,
+    "normalized_equal": true,
+    "different_remaining_bytes": 0,
+    "sha256": [
+      "d37fc3ad886bfd0760e2e1f82a589e2573961504ca9de33f30c6ba5037aa48ec",
+      "3788e35cff1a79b5d7655df91c3c8143b12bcdaf4789acbe6a5e10eb5f140753"
+    ],
+    "normalizations": [
+      [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          243204,
+          4,
+          "export timestamp"
+        ],
+        [
+          167844,
+          4,
+          "debug timestamp"
+        ],
+        [
+          257660,
+          16,
+          "package identity"
+        ]
+      ],
+      [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          243204,
+          4,
+          "export timestamp"
+        ],
+        [
+          167844,
+          4,
+          "debug timestamp"
+        ],
+        [
+          257660,
+          16,
+          "package identity"
+        ]
+      ]
+    ]
+  }
+]

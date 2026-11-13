@@ -48,7 +48,7 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     mvdm_guest_location_lease buffer_lease;
     mvdm_redirector_async_state *state;
     uint8_t const *bytes;
-    uint32_t buffer_value;
+    uint32_t buffer_value, count_value, error_value;
 
     session *owner;
 
@@ -76,17 +76,17 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     state->length = read_u16(bytes + 4u);
     buffer_value = read_u32(bytes + 6u);
     state->is_read = request_type == 0x86u || request_type == 0x90u;
-    request->pBytesTransferred = read_u32(bytes);
+    count_value = read_u32(bytes);
     request->Buffer = buffer_value;
-    request->pErrorCode = read_u32(bytes + 10u);
+    error_value = read_u32(bytes + 10u);
     request->ANR = read_u32(bytes + 14u);
     request->Type2 = request_type == 0x90u || request_type == 0x91u;
     request->Semaphore = request->Type2 ? read_u32(bytes + 20u) : 0u;
     if (!mvdm_guest_location_release(&request_lease, 0) ||
         (state->length != 0u &&
             !location_from_value(&state->buffer, buffer_value)) ||
-        !location_from_value(&state->bytes_transferred, request->pBytesTransferred) ||
-        !location_from_value(&state->error_code, request->pErrorCode)) {
+        !location_from_value(&state->bytes_transferred, count_value) ||
+        !location_from_value(&state->error_code, error_value)) {
         free(state);
         return 0;
     }

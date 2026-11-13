@@ -1,0 +1,13 @@
+{
+  "statuses": {
+    "completed-owner-approved-retain": 2,
+    "restored-verified-published": 135,
+    "pending-decision": 146,
+    "pending": 2437
+  },
+  "pending_exact_membership": true,
+  "pending_ids": 146,
+  "current_bytes": 15989,
+  "mirror_diff_reduction": 11,
+  "runtime": "P27 Full16 final package passed."
+}

@@ -118,7 +118,7 @@ Two BOP functions restored to their original i386/dpmi386.c owner.
 focused and Full16 verification; this receipt accompanies the P21 delivery.
 
 Current dbgexp.h ABI review: [R0222-R0224](r0222-r0224-debug-abi-review.json).
-Three declarations remain pending; comment-only reduction awaits batch delivery.
+Three declarations remain pending; comment-only reduction was delivered in P24.
 
 Current demexp.h ABI review: [R0225-R0227](r0225-r0227-dem-abi-review.json).
 
@@ -133,3 +133,6 @@ P25: [softpc.h complete ABI review](r0236-r0272-softpc-abi-review.json),
 
 P26: [suballocator review](r0273-suballocator-granularity-review.json),
 [line check](batch-p26-line-check.json), [checkpoint](batch-p26-checkpoint.json).
+
+P27: [async header review](r0274-r0276-async-header-review.json),
+[line check](batch-p27-line-check.json), [checkpoint](batch-p27-checkpoint.json).

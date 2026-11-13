@@ -1,0 +1,139 @@
+{
+  "source_files": 4,
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "sha256": "4f93fc169d83f72b1e193aef8759fc47d9511ded5f5be899164743644b905eea"
+    },
+    {
+      "path": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+      "sha256": "ea603a396894ca158b855ffcc09779cc94dcbb57ccd928913a25adaa75861cc1"
+    },
+    {
+      "path": "tools/build/New-T324S2LocalRedirectorNinja.ps1",
+      "sha256": "76bd6ca9ae0f02fc898fa3f2a3e73b7318242f05b5f833b5561eddf9b7c47b67"
+    },
+    {
+      "path": "test/mvdm-host/vdmredir/redirector_async_contract_fixture.c",
+      "sha256": "fdc1d422995569bc513d6576b35d869a96fbf93408632a2081d141128e37ce2c"
+    }
+  ],
+  "mirror_diff_delta": -11,
+  "status": "Verified P27 delivery receipt; commit/push follows",
+  "package": "d171cff3-1971-4421-9d63-c0123652a574",
+  "published_images": 11,
+  "destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "hash_verified": true,
+  "cached_full_exit": 0,
+  "boundary_and_governance_exit": 0,
+  "runtime": "P27 Full16 final package passed.",
+  "runtime_reused": false,
+  "full_gate_count": 16,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1335,
+      "CleanupMs": 464,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 242,
+      "CleanupMs": 376,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66112,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 47961,
+      "CleanupMs": 517,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 52158,
+      "CleanupMs": 453,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 15063,
+      "CleanupMs": 490,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10832,
+      "CleanupMs": 407,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 68098,
+      "CleanupMs": 544,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12671,
+      "CleanupMs": 451,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28456,
+      "CleanupMs": 431,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30773,
+      "CleanupMs": 465,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4636,
+      "CleanupMs": 399,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7829,
+      "CleanupMs": 542,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10454,
+      "CleanupMs": 412,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3864,
+      "CleanupMs": 433,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6217,
+      "CleanupMs": 459,
+      "Passed": true
+    }
+  ],
+  "full_elapsed_ms": 383314,
+  "limits": [
+    "ABI proof is not a runtime failure reproduction.",
+    "Full frontier is not exhaustive Win3.x/game acceptance; missing external fixtures remain skips.",
+    "No original guest or winnt.zip changes."
+  ]
+}

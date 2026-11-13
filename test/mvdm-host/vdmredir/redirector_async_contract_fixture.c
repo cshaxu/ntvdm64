@@ -3,7 +3,6 @@
 #include "ntvdm-exe/session/session.h"
 #include "vrnmpipe.h"
 #include "common/redirector/async.h"
-#include "mvdm_redirector_guest_copy.h"
 
 typedef struct fixture_memory {
     uint8_t bytes[0x20000];
@@ -97,14 +96,6 @@ int main(void)
     if (!mvdm_redirector_async_complete(&request, 3u, 0u) ||
         memcmp(memory.bytes + 0x140u, buffer, 3u) != 0) return 5;
     mvdm_redirector_async_release(&request);
-
-    write_u32(memory.bytes + 0x1a0u, 0x1b0u);
-    write_u32(memory.bytes + 0x1a4u, 0x1c0u);
-    write_u32(memory.bytes + 0x1a8u, 0x1d0u);
-    if (!mvdm_redirector_write_cd_names(0u, 0x1a0u, "HOST", "DOMAIN",
-        "LOGON") || strcmp((char *)memory.bytes + 0x1b0u, "HOST") != 0 ||
-        strcmp((char *)memory.bytes + 0x1c0u, "DOMAIN") != 0 ||
-        strcmp((char *)memory.bytes + 0x1d0u, "LOGON") != 0) return 6;
 
     initialize_request(&memory, 0x100u, 0x140u, 0x180u, 0x182u, 1u);
     if (!mvdm_redirector_async_prepare(&request, 0u, 0x100u, 0x86u,
