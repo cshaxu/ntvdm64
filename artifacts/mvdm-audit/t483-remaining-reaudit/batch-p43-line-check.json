@@ -1,0 +1,18 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "matched_original_lines": 1486,
+    "matched_original_line_mismatches": [],
+    "excluded_errors": "All #error directives unchanged",
+    "diff_before_including_unchanged_exclusions": {
+      "added": 38,
+      "deleted": 59,
+      "total": 97
+    },
+    "diff_after_including_unchanged_exclusions": {
+      "added": 27,
+      "deleted": 59,
+      "total": 86
+    }
+  }
+]

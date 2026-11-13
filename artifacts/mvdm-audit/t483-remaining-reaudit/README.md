@@ -225,3 +225,9 @@ P42: [original build metadata](r0438-original-build-metadata.json) restored;
 mirror diff net-2. All supported generated graphs remain byte-identical;
 CPU30 not selected. [Receipt](batch-p42-checkpoint.json) reuses P41 publication
 and runtime.445/2720 reviewed;65/365 files;160 restored,2 approved,283 pending,2275 unreviewed.
+
+P43: [SAS call-chain and controls](r0439-r0453-investigation.json),
+[line proof](batch-p43-line-check.json), [checkpoint](batch-p43-checkpoint.json).
+Whole-file diff97->86;1486 original logical lines.460 points source-reviewed;
+162 restored delivered,0 local,2 approved,296 pending,2260 unreviewed.
+66/365 files complete; P43 cached build,publication11x2/hash,mapping/90 BIOS accesses,64 x87/143 CPU and Full16 passed.

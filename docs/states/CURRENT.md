@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-445 points have a prior or current review record:160 restored/verified/published,
-0 local restorations pending verification,2 approved retain,283 qualified pending
-decisions and0 prior classifications requiring requalification. Another2275
-points are unreviewed. Sequential file disposition is65/365;300 remain.
+460 points have a prior or current review record:162 restored/verified/published,
+0 local restorations pending verification,2 approved retain,296 qualified pending
+decisions and0 prior classifications requiring requalification. Another2260
+points are unreviewed. Sequential file disposition is66/365;299 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P41 package `cbdb5e30-ae2f-421a-9461-cbce7eb3938a` is published to
+P43 package `00f9d285-10a3-4ebc-8203-5c08deec1c4b` is published to
 assets/release and O:/winnt/system32; all11 hashes match. Cached full build,
-stack current/original controls, x87/CPU boundary and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p41-checkpoint.json).
+mapping/BIOS, x87/CPU boundary and Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p43-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,11 +230,9 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P42 original build metadata restored
+## P43 SAS file delivered
 
-R0438 restores byte-exact original ccpudefs.inc; mirror diff net-2.
-The historical NMAKE include is not consumed by current builds. Both cached
-architecture graphs regenerated identically; CPU30 remains unselected.
-P41 build/publication/Full reused; no fresh runtime or publication claim.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p42-checkpoint.json).
-Next R0439; S5 remains active.
+R0439/R0441 restored;13 residuals await owner decision. Mirror diff97->86;
+1486 original logical lines verified;#error unchanged. Cached build,
+publication11x2/hash,mapping/BIOS/x87/CPU and Full16 passed. Next R0454.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0439-r0453-investigation.json).

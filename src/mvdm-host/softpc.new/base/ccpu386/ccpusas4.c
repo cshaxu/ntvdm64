@@ -58,15 +58,10 @@
 #include <c_reg.h>
 #include <timer.h>
 #include <yoda.h>
-#include <emm.h>
-#include <host.h>
 #include "mvdm_softpc_physical_mapping.h"
 
-extern UTINY *host_sas_init IPT1(sys_addr, size);
-extern UTINY *host_sas_term IPT0();
-
+#line 65
 /********************************************************/
-#line 66
 #define SIXTY_FOUR_K 1024*64
 
 /* global functions & variables */
@@ -1302,15 +1297,9 @@ c_GetPhyAdd IFN1(PHY_ADDR, addr)
 	IU8 *retVal;
 	uint32_t translated_address;
 
-	/* DIVERGENCE MVDM-HOST-DIV-036: preserve the original CCPU fast path for
-	 * normal SoftPC RAM, but first ask the source-shaped adapter whether this
-	 * Intel address is a checked external physical-page binding. The returned
-	 * pointer is consumed only by the immediate CCPU access path. */
-	/* DIVERGENCE(MVDM-HOST-DIV-097): NT4 kernel VDM aliases an EMS page-frame
-	 * destination to its backing physical pages.  Translate only that numeric
-	 * guest physical address before the unchanged normal/external SAS lookup. */
-	if (mvdm_softpc_physical_mapping_translate(addr, &translated_address))
-		addr = (PHY_ADDR)translated_address;
+	/* MVDM-HOST-DIV-036/097: resolve original host remaps and EMS aliases. */
+	mvdm_softpc_physical_mapping_translate(addr, &translated_address);
+	addr = (PHY_ADDR)translated_address;
 	if (mvdm_softpc_physical_mapping_resolve(addr, &retVal))
 		return(retVal);
 #ifdef BACK_M

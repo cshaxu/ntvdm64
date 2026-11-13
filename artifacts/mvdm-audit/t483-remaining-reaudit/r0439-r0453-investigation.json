@@ -1,0 +1,98 @@
+{
+  "status": "Initial investigation evidence plus final source disposition; delivery tracked separately",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+  "source_sha256": "1803b505e65ffccaf5af90d1dadb5a8de23518c28b52bf77de852b5683385b96",
+  "production_source_changed": false,
+  "declarations": {
+    "sections": 146,
+    "original_declarations_sections": 146,
+    "all_section_bytes_and_named_relocations_equal": true,
+    "differences": []
+  },
+  "baseline": {
+    "pipeline_exit": 0,
+    "mapping_log": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access_log": "CCPU_BIOS_ACCESS cases=90 failures=0\n"
+  },
+  "controls": {
+    "no-external": {
+      "exit": 1,
+      "log": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nfailed: c_GetPhyAdd(guest) == external + 1\n",
+      "selected_symbols": [
+        "0001:00000550       _c_GetPhyAdd               00401550 f   no-external.obj",
+        "0001:00000bf0       _c_sas_hw_at               00401bf0 f   no-external.obj",
+        "0001:00000fa0       _c_sas_storedw             00401fa0 f   no-external.obj"
+      ],
+      "candidate_sha256": "44b01c123e79d87f9eae7f0892f2933c4596e37971c23764fb1d48f4ccee175b"
+    },
+    "no-alias": {
+      "exit": 1,
+      "log": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nfailed: c_GetPhyAdd(0x100001) == external + 1\n",
+      "selected_symbols": [
+        "0001:00000580       _c_GetPhyAdd               00401580 f   no-alias.obj",
+        "0001:00000bf0       _c_sas_hw_at               00401bf0 f   no-alias.obj",
+        "0001:00000fa0       _c_sas_storedw             00401fa0 f   no-alias.obj"
+      ],
+      "candidate_sha256": "3b5ab3347b552638ad9d6b1e9c6796962974a64d978fb1029c6b0f38915d884f"
+    },
+    "original-cpl": {
+      "exit": 1,
+      "log": "FAIL read width=1 CPL=0 PTE=1\nFAIL write width=1 CPL=0 PTE=1\nFAIL read width=1 CPL=0 PTE=3\nFAIL write width=1 CPL=0 PTE=3\nFAIL write width=1 CPL=0 PTE=5\nFAIL write width=1 CPL=3 PTE=1\nFAIL write width=1 CPL=3 PTE=3\nFAIL write width=1 CPL=3 PTE=5\nFAIL read width=2 CPL=0 PTE=1\nFAIL write width=2 CPL=0 PTE=1\nFAIL read width=2 CPL=0 PTE=3\nFAIL write width=2 CPL=0 PTE=3\nFAIL write width=2 CPL=0 PTE=5\nFAIL write width=2 CPL=3 PTE=1\nFAIL write width=2 CPL=3 PTE=3\nFAIL write width=2 CPL=3 PTE=5\nFAIL read width=4 CPL=0 PTE=1\nFAIL write width=4 CPL=0 PTE=1\nFAIL read width=4 CPL=0 PTE=3\nFAIL write width=4 CPL=0 PTE=3\nFAIL write width=4 CPL=0 PTE=5\nFAIL write width=4 CPL=3 PTE=1\nFAIL write width=4 CPL=3 PTE=3\nFAIL write width=4 CPL=3 PTE=5\nCCPU_BIOS_ACCESS cases=90 failures=24\n",
+      "selected_symbols": [
+        "0001:00000590       _c_GetPhyAdd               00401590 f   original-cpl.obj",
+        "0001:00000c60       _c_sas_hw_at               00401c60 f   original-cpl.obj",
+        "0001:00001010       _c_sas_storedw             00402010 f   original-cpl.obj"
+      ],
+      "candidate_sha256": "7ac26d8a4026290b9d2f0539b47e4f15fcd73e627d11ac8b3f1c96544959176c"
+    }
+  },
+  "remaining": [
+    "Final-source tests and delivery; see batch-p43-checkpoint.json."
+  ],
+  "limits": [
+    "Real CCPU/SAS and original nt_mem are linked to test host boundary providers; not application or guest-session acceptance.",
+    "Negative CPL control changes six predicates together; source inspection associates read/write widths, not six independent runtime binaries.",
+    "Declaration object equality covers actual selected x86 compiler/flags, not hypothetical x64 CCPU.",
+    "Compiler warnings from implicit declarations are recorded, not reported as compile failures."
+  ],
+  "width_control": {
+    "actual_contract": "Original bios1.asm 30c0 reads AX; 30d0 reads EAX; original biosDoInst saves getEAX result before restoring registers. IU8 cast discards required high bits in both PM and V86 branches.",
+    "current_exit": 0,
+    "original_cast_exit": 1,
+    "current_log": "PASS original CCPU BIOS width bodies: virtual-8086/protected fallback and mapped reads\n",
+    "original_log": "FAIL bios_read_word(0x4000)==0x5678\n",
+    "scope": "Extracted actual bios_read_word/double bodies, stubbed paging and biosDoInst; not a full nested-CPU execution test. Negative test stops at first assertion."
+  },
+  "final_change": {
+    "source_sha256": "b035518e1bd3b9d4884516d2af18e2fcbbc7cfbb40517e9b308e48fd1841c1d7",
+    "restored_points": [
+      "T483-R0439",
+      "T483-R0441"
+    ],
+    "qualified_residuals": [
+      "T483-R0440",
+      "T483-R0442",
+      "T483-R0443",
+      "T483-R0444",
+      "T483-R0445",
+      "T483-R0446",
+      "T483-R0447",
+      "T483-R0448",
+      "T483-R0449",
+      "T483-R0450",
+      "T483-R0451",
+      "T483-R0452",
+      "T483-R0453"
+    ],
+    "mirror_diff_before": 97,
+    "mirror_diff_after": 86,
+    "delta": -11,
+    "mapping_simplification": "translate always initializes its output to input; remove redundant return-value conditional and assign numeric output unconditionally. Keep separate uint32_t local because PHY_ADDR is unsigned long. Collapse seven-line explanation to one provenance line.",
+    "counter_review": "No equivalent complexity moved to adapter. Header removal actual object equivalence; original-first assumption constrained to supported x86 ABI. All excluded #error directives unchanged;1486 matching original logical lines verified."
+  },
+  "mapping_header_control": {
+    "compiler_exit": 2,
+    "failure": "C2065 uint32_t undeclared at original logical line1312 when restoring original include set after removing R0440 alone.",
+    "scope": "Current final source copy, same actual x86 flags. Mapping calls already source/fixture-qualified; retain their declared fixed-width interface rather than duplicate type declarations."
+  }
+}
