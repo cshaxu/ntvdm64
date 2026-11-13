@@ -1,0 +1,18 @@
+[
+  {
+    "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+    "before": {
+      "added": 32,
+      "deleted": 30,
+      "total": 62
+    },
+    "after": {
+      "added": 23,
+      "deleted": 16,
+      "total": 39
+    },
+    "matched_original_lines": 445,
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true
+  }
+]

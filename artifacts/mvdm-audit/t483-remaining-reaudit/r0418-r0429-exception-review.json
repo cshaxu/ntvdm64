@@ -1,0 +1,52 @@
+{
+  "points": [
+    "T483-R0418",
+    "T483-R0419",
+    "T483-R0420",
+    "T483-R0421",
+    "T483-R0422",
+    "T483-R0423",
+    "T483-R0424",
+    "T483-R0425",
+    "T483-R0426",
+    "T483-R0427",
+    "T483-R0428",
+    "T483-R0429"
+  ],
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+  "status": "whole-file verified; R0418 restored,11 residual points pending",
+  "R0418": {
+    "responsibility": "Production force_yoda call binding.",
+    "original_ability": "Original ccpu386/stubs.c already defines force_yoda as empty function; selected original archive supplies it. Added yoda.h substitutes an empty macro, but is not required for the runtime binding.",
+    "action": "Remove added include; restore original include list. C4013 alone is not a failure proof.",
+    "selected_link_proof": "P38 ntvdm.exe.map: _force_yoda resolved to original-ccpu386:stubs.obj at00407030; actual cached full build succeeded."
+  },
+  "R0419": {
+    "responsibility": "Exception diagnostics must not call fprintf with NULL stream.",
+    "original_failure": "Original trace.c trace_file is zero initialized; original trace_init body is excluded under PROD. Original macro sets show_exceptions from CCPU_SHOW_EXCEPTIONS regardless of stream, then original exception routines call fprintf(trace_file). Concrete configuration/source path, not dependency on current adapter.",
+    "action": "Restore original environment macro body, change only first_exception predicate to first_exception && trace_file, retain existing PROD/excluded non-PROD #error framework. This minimizes original-relative diff without a new provider.",
+    "residual": "Valid-stream guard and existing profile exclusion remain pending owner decision, not full restoration."
+  },
+  "R0420-R0429": {
+    "responsibility": "Continue CPU directly only if host handled exception; otherwise execute original fault delivery/reset chain.",
+    "original_failure": "Five original if statements guard only a flag assignment, leaving c_cpu_continue unconditional. PE=0 or host_exint_hook=FALSE therefore bypasses original GP,GP_INT,DF,Int0,PF delivery; DIV/PF also alter second flag unconditionally. Original benign_exception already scopes its hook correctly.",
+    "action": "Retain braces, remove five repeated provenance comments; external provenance and corresponding original source ranges retained here.",
+    "source_and_negative_control": "docs/etc/evidence/m0-t413-s5-exception-scope.md: pinned original and NTVDMx64 ccpu.patch;27 cases and101 original-negative assertion failures. Fresh rerun pending.",
+    "minimality": "Required lexical scopes cannot be implemented by an adapter without changing the non-returning continuation contract. No new executable statements required."
+  },
+  "mirror_diff": {
+    "before": "+32/-30=62",
+    "after": "+23/-16=39",
+    "delta": -23,
+    "counting": "Original-relative added+deleted lines, excluding #line; unchanged #error exclusion differences included in both totals."
+  },
+  "line_proof": "batch-p38-line-check.json:445 original matched lines, zero mismatches; #error list unchanged.",
+  "tests": "27 current-source cases pass; original-negative101 assertions fail as expected; null/valid diagnostic stream controls pass;143 CPU boundary,64 x87 and Full16 pass. See checkpoint.",
+  "counter_review": "Do not describe original whole exception engine as defective. Scope defect is five lexical missing braces; diagnostic defect is unsupported stream state. Both preserve original exception body/ABI. Original force_yoda provider is reused rather than retaining header merely to suppress calls.",
+  "original_baseline": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/c_xcptn.c",
+    "sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2"
+  },
+  "verification": "Final-source cached full build, publication11x2/hash,64 x87/143 CPU boundary and Full16 passed. See batch-p38-checkpoint.json."
+}

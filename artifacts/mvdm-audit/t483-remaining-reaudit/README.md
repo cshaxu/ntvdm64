@@ -204,3 +204,7 @@ compiled only in the task build directory, not a new production/test target.
 ## P37 task-switch debug event audit
 
 [R0416-R0417](r0416-r0417-task-debug-event.json) qualify two one-line residuals for owner decision; redundant comment removed, mirror diff net-1. No code-token or logical-line changes. [Receipt](batch-p37-checkpoint.json) records a fresh real CCPU T-bit/no-T-bit probe and reuse of P36 published package/Full. Progress424/2720 points,60/365 files;151 restored published,2 approved,271 pending decisions,2296 unreviewed.
+
+## P38 exception source delivery
+
+[R0418-R0429 review](r0418-r0429-exception-review.json) restores original diagnostic macro with minimal valid-stream guard, removes redundant header/comments, retains necessary five hook scopes. Mirror diff net-23. [Line proof](batch-p38-line-check.json); [receipt](batch-p38-checkpoint.json). Cached full build, publication11x2/hash,27 positive cases,101 expected original-negative failures, null/valid stream controls,64 x87/143 CPU and Full16 passed.436/2720 reviewed;61/365 files;152 restored delivered,0 local,2 approved,282 pending,2284 unreviewed. Receipt accompanies Git delivery.

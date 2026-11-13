@@ -29,7 +29,6 @@ Exception Handling Support.
 #include <c_xtrn.h>
 #include <ccpupig.h>
 #include <fault.h>
-#include <yoda.h>
 
 /*
    Allow print out of exceptions or disallow it.
@@ -40,11 +39,23 @@ GLOBAL BOOL trap_exceptions = FALSE;
 LOCAL  BOOL first_exception = TRUE;
 
 #ifdef PROD
-/* DIVERGENCE(MVDM-HOST-DIV-271): trace_init deliberately leaves trace_file
- * unbound in the original production profile.  The non-product exception
- * environment switch must therefore be inert here, rather than turn an
- * externally supplied CCPU_SHOW_EXCEPTIONS value into fprintf(NULL,...). */
-#define check_exception_env()
+#line 40
+#define check_exception_env()						\
+{									\
+	IMPORT char *host_getenv IPT1 (char *, name);			\
+	if (first_exception && trace_file)						\
+	{								\
+		char *env = host_getenv ("CCPU_SHOW_EXCEPTIONS");	\
+		if (env != NULL)					\
+		{							\
+			show_exceptions = TRUE;				\
+			if (strcasecmp(env, "TRAP") == 0)		\
+				trap_exceptions = TRUE;			\
+		}							\
+	}								\
+	first_exception = FALSE;					\
+}
+
 #else
 #line 40
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
@@ -161,6 +172,7 @@ LOCAL VOID check_for_shutdown IFN1(IU16, xcode)
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
 
+#line 168
       /* then carry on */
 #line 169
       c_cpu_continue();   /* DOES NOT RETURN */
@@ -248,7 +260,6 @@ IFN3(
     {
 	extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
 #line 253
         doing_contributory = FALSE;
@@ -314,7 +325,6 @@ IFN3(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
 #line 313
           doing_contributory = FALSE;
@@ -381,7 +391,6 @@ IFN1(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE)) {
 #line 374
             doing_double_fault = FALSE;
@@ -451,7 +460,6 @@ GLOBAL VOID Int0 IFN0 ()
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE)) {
 #line 438
           doing_fault = FALSE;
@@ -603,7 +611,6 @@ IFN2(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
 	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error)) {
 #line 584
           doing_fault = FALSE;

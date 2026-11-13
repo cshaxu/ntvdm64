@@ -22,15 +22,17 @@ for(const [start,end] of [['252c259','312c320'],['312c320','373c382'],['373c382'
  assert(hunk.length>0,'Pinned upstream hunk must remain available for provenance review');
 }
 const block=/if\(GET_PE\(\) && host_exint_hook\([^\n]+\) \{\n[\s\S]*?c_cpu_continue\(\);[^\n]*\n[\t ]*\}/g;
-const recoveredBlocks=[...current.matchAll(block)].map(match=>match[0]);
+const normalized=current.replace(/^#line[^\n]*\n/gm,'');
+const recoveredBlocks=[...normalized.matchAll(block)].map(match=>match[0]);
 assert.equal(recoveredBlocks.length,5);
 for (const recovered of recoveredBlocks) {
  const originalBlock=recovered.replace(') {',')').replace(/\n[\t ]*\}$/,'');
  assert.equal(original.split(originalBlock).length-1,1,'Each recovered block must map uniquely to the pinned original');
 }
-const releaseGuard=/^#ifdef PROD\n\/\* DIVERGENCE\(MVDM-HOST-DIV-271\):[\s\S]*?^#define check_exception_env\(\)\n#else\n#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register\.\n#endif\n/m;
-assert.match(current,releaseGuard,
- 'Production must make the non-product CCPU_SHOW_EXCEPTIONS gate inert');
+// Keep the original diagnostic macro, with only the valid-stream guard.
+const macroOf=text=>text.slice(text.indexOf('#define check_exception_env()'),text.indexOf('IMPORT FILE *trace_file;')).split('#else')[0].trim();
+assert.equal(macroOf(normalized).replace('first_exception && trace_file','first_exception'),macroOf(original));
+assert.match(normalized,/#error DIVERGENCE MVDM-HOST-DIV-503:/);
 // S13 intentionally replaces excluded branches with #error.  Use the pinned
 // original directly for the negative baseline rather than recovering deleted
 // text from the selected mirror or asserting that unrelated subsets match.
@@ -157,6 +159,14 @@ int main(void) {
    show_exceptions,trap_exceptions,deliveries,observed_vector,observed_error,observed_priv);return 1;
  }
  printf("PASS PROD CCPU_SHOW_EXCEPTIONS is inert without trace_file\\n");
+ trace_file=tmpfile(); if(!trace_file) return 2;
+ first_exception=TRUE;show_exceptions=trap_exceptions=FALSE;
+ doing_fault=doing_contributory=doing_page_fault=doing_double_fault=0;
+ deliveries=0;
+ if(!setjmp(checkpoint)) Int0();
+ if(!show_exceptions || trap_exceptions || deliveries!=1 || ftell(trace_file)<=0) return 3;
+ fclose(trace_file);trace_file=NULL;
+ printf("PASS original exception diagnostics with valid stream\n");
  return 0;
 }
 `;
