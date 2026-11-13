@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "67e648822cc5a574a38e9a6ebc2beca0f94cca1b96084a4f29a3069a2cd1c8c6",
+  "new_register_sha256": "2b86263690b7ef94032315117881d01be9d482a4d731ab57255b6c940005d33e",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -15,8 +15,8 @@
     "already-byte-identical-to-original": 1
   },
   "completed": 2,
-  "pending": 2033,
-  "next": "T483-R0681",
+  "pending": 2017,
+  "next": "T483-R0697",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
@@ -24,31 +24,29 @@
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
   "awaiting_owner_approval": 430,
-  "reviewed": 687,
+  "reviewed": 703,
   "restored_pending_delivery": 0,
   "batch_modified_implementation_files": 0,
   "batch_mirror_diff_delta": 0,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
   "pending_decisions": 430,
-  "restored_verified_published": 255,
-  "last_batch_mirror_diff_delta": -140,
-  "last_delivery": "batch-p57-checkpoint.json",
+  "restored_verified_published": 271,
+  "last_batch_mirror_diff_delta": -44,
+  "last_delivery": "batch-p58-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
   "qualified_pending_decisions": 430,
-  "pending_decisions_count_note": "430 residual IDs;46 full local restorations;R0633-R0647 removed after product-caller counter-review.",
-  "active_rework": "P57 full delivery accompanies commit;next R0681",
-  "active_investigation": "Whole-file review complete; prepare cached full batch delivery.",
+  "pending_decisions_count_note": "430 qualified residual IDs;P58 delivered16;no local restorations pending.",
+  "active_rework": "P58 full delivery accompanies commit;next R0697",
+  "active_investigation": "P58 build/publication/tests verified; Git delivery accompanies record; next R0697.",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 90,
-  "sequential_files_remaining": 275,
+  "sequential_files_disposition_complete": 91,
+  "sequential_files_remaining": 274,
   "batch_modified_mirror_files": 0,
-  "batch_format_only_files": [
-    "src/mvdm-host/softpc.new/base/cvidc/sevid018.c"
-  ],
+  "batch_format_only_files": [],
   "partial_restoration_pending_delivery": [],
   "new_baseline_gap_evidence": "r0642-r0647-vram-copy-review.json"
 }

@@ -1,0 +1,10 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid020.c",
+    "physical_lines": 3728,
+    "matched_original_line_mismatches": [],
+    "original_sha256": "54c1f06723e0811f896e57bb414836d4f98446292cbf86f546c11e105260c3b3",
+    "sha256": "54c1f06723e0811f896e57bb414836d4f98446292cbf86f546c11e105260c3b3",
+    "proof": "Exact pinned original bytes; no #error or #line changed."
+  }
+]

@@ -388,3 +388,8 @@ P57: sevid01946 original restorations; mirror diff net-140. Cached full build,
 11x2 publication/hash, focused and Full16 passed. 687 reviewed;255 restored
 delivered,2 approved,430 pending,2033 unreviewed;90/365 files.
 See [receipt](batch-p57-checkpoint.json) and [file review](sevid019-file-review.json).
+
+P58: sevid02016/16 restored byte-exact,mirror diff net-44. Cached full build,
+11x2 publication/hash, focused and Full16 passed.703 reviewed;271 restored
+delivered,2 approved,430 pending,2017 unreviewed;91/365 files.
+See [receipt](batch-p58-checkpoint.json) and [file review](sevid020-file-review.json).

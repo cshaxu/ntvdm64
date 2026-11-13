@@ -1,0 +1,135 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid020.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/cvidc/sevid020.c",
+  "original_sha256": "54c1f06723e0811f896e57bb414836d4f98446292cbf86f546c11e105260c3b3",
+  "before_sha256": "db9b9da6a9e768a039c5244bcea2060a004ca7db6e91c906ad7771e58e46b1d1",
+  "after_sha256": "54c1f06723e0811f896e57bb414836d4f98446292cbf86f546c11e105260c3b3",
+  "points": [
+    {
+      "id": "T483-R0681",
+      "line": 911,
+      "added": 2,
+      "deleted": 2,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0682",
+      "line": 1174,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0683",
+      "line": 1186,
+      "added": 2,
+      "deleted": 2,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0684",
+      "line": 1197,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0685",
+      "line": 1206,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0686",
+      "line": 1222,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0687",
+      "line": 1228,
+      "added": 2,
+      "deleted": 2,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0688",
+      "line": 1246,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0689",
+      "line": 1258,
+      "added": 2,
+      "deleted": 2,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0690",
+      "line": 1269,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0691",
+      "line": 1278,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0692",
+      "line": 1287,
+      "added": 2,
+      "deleted": 2,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0693",
+      "line": 1292,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0694",
+      "line": 1311,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0695",
+      "line": 1313,
+      "added": 1,
+      "deleted": 1,
+      "result": "restore-original"
+    },
+    {
+      "id": "T483-R0696",
+      "line": 1375,
+      "added": 2,
+      "deleted": 2,
+      "result": "restore-original"
+    }
+  ],
+  "responsibility": "Preserve selected CCPU memory operations; do not repair unused generated bulk internals as product requirements.",
+  "original_selected_path": "ccpusas4.c1024/1032/1040 backward entries call c_sas_not_used; forward SAS moves use scalar read/write loops. ev_glue backward routines only publish/consume compound pointers; no external product callers.",
+  "closure": "S2726 is called only by backward ModeX wrappers in sevid019/020; S2729 by S2730/S2731 backward wrappers; S2730 table entry and own definition only. Their external roots are unused backward EVID entries. No scalar provider enters these routines.",
+  "counter_review": "Original generated nesting/addressing may be defective when invoked directly. Restoring this unused closure does not claim it correct, and does not alter selected scalar access behavior. P57 corrected fixture coverage to actual SAS operations while preserving table identity checks.",
+  "diff": {
+    "before_added": 22,
+    "before_deleted": 22,
+    "after_added": 0,
+    "after_deleted": 0,
+    "delta": -44
+  },
+  "line_error": "Exact original bytes including LF; no excluded directives present.",
+  "validation": "P58 cached full build, 11x2 publication/hash, focused and Full16 passed; see batch-p58-checkpoint.json. Accompanies Git delivery."
+}

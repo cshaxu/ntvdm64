@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-687 points reviewed:255 restored/verified/published,0 local pending delivery,
-2 approved retain,430 qualified pending decisions. Another2033 points unreviewed.
-Sequential file disposition is90/365;275 remain.
+703 points reviewed:271 restored/verified/published,0 local pending delivery,
+2 approved retain,430 qualified pending decisions. Another2017 points unreviewed.
+Sequential file disposition is91/365;274 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -55,9 +55,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P57 package `1ad83d27-b421-4650-aa02-3ed0bbc61810` published11x2;hashes match.
-Cached full build,focused and Full16 passed;Git delivery accompanies this record.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p57-checkpoint.json).
+P58 package `203fbc59-dc71-4342-8289-881a38345866` published11x2;hashes match.
+Cached full build,focused and Full16 passed;Git delivery accompanies record.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p58-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -237,3 +237,5 @@ P56:sevid00133/33;eight restorations delivered(net-24);next R0605.
 sevid004:R0605-R0607 qualified pending owner;source unchanged;next R0608.
 
 sevid016:R0608-R0611 qualified. sevid017:11/11 qualified. sevid018:9/9;LF restored. sevid019:49/49;46 restored;3 residuals;net-140;P57 gates passed;next R0681.
+
+P58:sevid02016/16 restored byte-exact;mirror diff-44;delivered;next R0697.
