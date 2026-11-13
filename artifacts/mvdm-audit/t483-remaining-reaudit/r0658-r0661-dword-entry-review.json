@@ -1,0 +1,34 @@
+{
+  "points": [
+    658,
+    659,
+    660,
+    661
+  ],
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "responsibility": "DWORD stores must preserve selected shared-plane output.",
+  "selected_original_path": "c_sas_storedw -> bios_write_double -> phy_w32 -> two phy_w16 calls (ccpusas4.c881). write_dword_ev_glue and S_2702 have no product invocation outside their definitions/table; direct diagnostic tests are distinct.",
+  "specific_diff_necessity": "No selected product need for modifying this compound implementation. Restoring original constants does not change the scalar word stores used by CCPU.",
+  "continuation": "No nested S_2702 caller or external callback in its body. Original continuation writes remaining bytes and frees active frame; no outer saved allocation to preserve.",
+  "controls": {
+    "dword-current": "dword16 wrong=8 live=0",
+    "r0658-original": "dword16 wrong=16 live=0",
+    "r0659-original": "dword16 wrong=16 live=0",
+    "r0660-original": "dword16 wrong=8 live=0",
+    "r0661-original": "dword16 wrong=8 live=0"
+  },
+  "limits": "Current direct provider already fails8/16 independent full-plane comparisons. R0660 restoration has identical output and zero allocations. Three constant controls are not product regression proofs. Final combined source not yet executed. Do not claim direct DWORD path fixed.",
+  "runner": {
+    "pid": 10844,
+    "deadline_seconds": 120,
+    "script": "build/t483-s5-p57/dword-probe.cmd",
+    "exit": 0,
+    "meaning": "Harness finished; individual wrong counters above are authoritative, not all-pass."
+  },
+  "change": "Restore four original points without a shim; coupled fixture must distinguish actual scalar product entry from unused compound table diagnostics.",
+  "mirror_diff_delta": -10,
+  "line_error": "Same physical lines; #error/#line unchanged.",
+  "before_sha256": "ab2b6ee20e3cb539642d5810b9398adc6e6b48a1577f24d1482def83e0ae4407",
+  "after_sha256": "bdd7b71ef8472d5fb8bcded2161161e74bd743155767ebdc438a118a6fd18254",
+  "delivery": "Local restoration only; whole-file audit and final delivery pending."
+}

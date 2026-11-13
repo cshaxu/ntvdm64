@@ -1,0 +1,50 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "points": 49,
+  "restored_local": 46,
+  "residual_pending": [
+    "T483-R0632",
+    "T483-R0648",
+    "T483-R0650"
+  ],
+  "original_relative_diff": {
+    "before_added": 77,
+    "before_deleted": 69,
+    "after_added": 3,
+    "after_deleted": 3,
+    "delta": -140
+  },
+  "remaining_ranges": [
+    [
+      1299,
+      1,
+      1299,
+      1
+    ],
+    [
+      1718,
+      1,
+      1718,
+      1
+    ],
+    [
+      1736,
+      1,
+      1736,
+      1
+    ]
+  ],
+  "line_proof": "Entire normalized file matches original except three same-line scalar constants. Original physical line numbers are identical throughout. No #error/#line changes. Original LF restored.",
+  "source_sha256": "c763b216c1caef24611efb43faa133423d47a193bf700a870e99ec0c2c125f6c",
+  "focused_validation": {
+    "pid": 38400,
+    "deadline_seconds": 120,
+    "exit": 0,
+    "script": "build/t483-s5-p57/fixture-final.cmd",
+    "result": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "source_identity": "Tested provider/fixture/helper identical to final files after newline normalization; no semantic change after passing run.",
+    "scope": "Real-provider C-VID fixture plus actual CCPU SAS moves/fills, not full product regression."
+  },
+  "test_change": "Retain independent fill/move output and full-plane guards; execute SAS scalar path. Remove direct unused bulk write/move replay coverage, retain table identity checks. CCPU-profile initialization helper avoids changing the non-CCPU CpuVector ABI fixture view.",
+  "delivery": "P57 cached full build, 11x2 publication/hash, focused and Full16 passed; see batch-p57-checkpoint.json; accompanies Git delivery."
+}

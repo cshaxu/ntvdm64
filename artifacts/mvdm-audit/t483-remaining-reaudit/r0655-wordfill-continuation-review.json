@@ -1,0 +1,32 @@
+{
+  "id": "T483-R0655",
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "original_lines": [
+    1863,
+    1864
+  ],
+  "responsibility": "Release WordFill local allocation and return to its caller.",
+  "original_capability": "Only definition, header and EVID table reference the S_2700 entry; no generated parent caller. No callbacks in body. Original cleanup frees active locals and returns; no nested parent allocation is lost.",
+  "specific_diff": "The T88 saved-parent rationale does not apply to this entry. Restore original continuation call; no replacement helper.",
+  "before_sha256": "34efd39e9a83a743573ff2fada5e2f05be677c1706bb064fc6afd732af285483",
+  "after_sha256": "cb49690f928a9cc10fcde86e69b7f5a05a9866fa180edbac645069af08a6b783",
+  "verification": {
+    "current": "wordfill128 wrong=0 live=0",
+    "original_restored": "wordfill128 wrong=0 live=0",
+    "logs": [
+      "build/t483-s5-p57/wordfill-current-wordfill.log",
+      "build/t483-s5-p57/r0655-original-wordfill.log"
+    ],
+    "final_source": "Byte-equivalent to tested r0655-original.c after newline normalization",
+    "scope": "Direct EVID function diagnostic, not guest execution or full product regression"
+  },
+  "mirror_diff": {
+    "before_added": 2,
+    "before_deleted": 2,
+    "after_added": 0,
+    "after_deleted": 0,
+    "delta": -4
+  },
+  "line_error": "Same two original physical lines restored; #error/#line directives unchanged. Whole-file final mapping check pending.",
+  "delivery": "Local restoration; full-file audit and batch delivery pending."
+}

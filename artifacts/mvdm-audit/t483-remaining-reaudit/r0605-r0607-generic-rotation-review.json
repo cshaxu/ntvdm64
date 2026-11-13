@@ -1,0 +1,28 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid004.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "2475f9a09749173b9d4dde8b947d20af221ffaed4b0fb1db68ed336270e28959",
+  "current_sha256": "b239bbed52f17d86e5a21a86f1cdac71c98363f4495a8c699efa46d421d17da2",
+  "before": "+3/-3",
+  "after": "+3/-3",
+  "mirror_diff_delta": 0,
+  "responsibility": "VGA mode0 byte/word writes must rotate CPU input by programmed graphics-controller count.",
+  "original_capability": "Pinned original vga_prts.c assigns 3bit rotate_count through setVideorotate; pinned original vglob.c stores IU32 value directly. Original evid_c.h declares IU32 rotate. Actual selected x86 layout puts low byte at1404,upper byte1407 is0 for counts0..7. Original generic reader at1407 therefore disables requested rotation.",
+  "exact_diff_necessity": "Three independent selected reads each need1404: S_2238 byte and S_2241 word low/high. Restoring each separately fails its respective actual provider assertion;no adapter-owned producer convention is required to establish failure.",
+  "actual_chain": "VGA graphics controller register3 -> original setVideorotate -> ega_write_routines_update -> selected ev_glue setWritePointers generic override -> gricvid_evid -> S_2238/S_2241 -> shared video planes.",
+  "controls": {
+    "rotate-current": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation",
+    "r0605-original": "generic rotate=1 result=81818181\nFAIL line 167: *(IU32 *)(planes+0x400)==byte*0x01010101u\nFAIL line 563: check_chain2_rules(planes)==0",
+    "r0606-original": "FAIL line 170: *(IU32 *)(planes+0x400)==byte*0x01010101u\nFAIL line 563: check_chain2_rules(planes)==0",
+    "r0607-original": "FAIL line 172: *(IU32 *)(planes+0x404)==byte*0x01010101u\nFAIL line 563: check_chain2_rules(planes)==0"
+  },
+  "example": "rotate1:0x81 ->0xc0;word0x1281 ->low0xc0/high0x09;original upper-byte reads rotate0.",
+  "minimum": "One numeric constant per consumer is minimum nonzero line diff. Moving scalar representation into setter/getter would change original field contract and other consumers rather than simplify;no helper introduced.",
+  "counter_review": [
+    "This is selected MSVC x86 evidence,not a claim original generated offsets are wrong on every historic host.",
+    "Existing fixture uses real providers with host seams and sets values via original setter. Source pin independently proves hardware register path uses same scalar setter.",
+    "Fixture stops on first failed assertion;not a full guest reproduction or count of all failing rotate values."
+  ],
+  "line_error": "No source edits;original physical line count and existing error exclusions unchanged.",
+  "decision": "All3 qualified pending owner;not approved retention."
+}

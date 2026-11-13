@@ -1,0 +1,36 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "current_sha256": "646eeb973481be2ae7a04d344e83ff62a564d870950df1bb36312702ebcabc49",
+  "points": [
+    {
+      "id": "T483-R0623",
+      "line": 1172,
+      "chain": "S_2664->S_2665->L21_77if_d",
+      "current": "wordmove start=16 live=0\nwordmove start=17 live=0",
+      "original": "wordmove start=16 live=1\nwordmove start=17 live=2"
+    },
+    {
+      "id": "T483-R0624",
+      "line": 1361,
+      "chain": "S_2666->S_2667->L21_87if_d",
+      "current": "word start=16 live=0\nword start=17 live=0",
+      "original": "word start=16 live=0\nword start=17 live=1"
+    },
+    {
+      "id": "T483-R0625",
+      "line": 1712,
+      "chain": "S_2670->S_2671->L21_92if_d",
+      "current": "wordmove start=16 live=0\nwordmove start=17 live=0",
+      "original": "wordmove start=16 live=1\nwordmove start=17 live=2"
+    }
+  ],
+  "responsibility": "Each original generated nested activation must restore caller locals and release its allocation.",
+  "original_failure": "Original internal-label wrapper enters crules with CopyLocalIUH=0 without ENTER_SECTION;child cleanup frees child but assigns0,so outer wrapper skips freeing its own allocation. This is an original call/allocator lifetime issue,not an adapter dependency.",
+  "minimum": "Same-activation goto avoids loss of automatic saved frame;one transfer plus blank replaces2original lines. No helper or extra state. No smaller nonzero change found.",
+  "controls": "Diagnostic tracked malloc/free only for sevid018,delegating real CRT. Original lookup initialized. Actual S_2664(byte move),S_2666(word write),S_2670(word move) invoked;move label is generic wordmove but function identity is explicit in source/map.",
+  "limits": "No guest or concurrency claim;zero process exit does not mean no memory loss. Allocation counts provide failure oracle.",
+  "diff": "Each+2/-2 unchanged;net0",
+  "line_error": "Production unchanged;physical line positions unchanged. Whole-file CRLF versus original LF format difference discovered;will normalize with full-file completion.",
+  "decision": "All3 qualified pending owner,not approved retention."
+}

@@ -34,10 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-611 points have a prior or current review record:209 restored/verified/published,
-0 local restorations pending verification,2 approved retain,400 qualified pending
-decisions and0 prior classifications requiring requalification. Another2109
-points are unreviewed. Sequential file disposition is85/365;280 remain.
+687 points reviewed:255 restored/verified/published,0 local pending delivery,
+2 approved retain,430 qualified pending decisions. Another2033 points unreviewed.
+Sequential file disposition is90/365;275 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -56,9 +55,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P56 package `0a50ec7d-ee7f-458e-9257-52ec89faf235` published11x2;hashes match.
-Cached full build,focused and Full16 passed;known CVIDC baseline failures remain.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p56-checkpoint.json).
+P57 package `1ad83d27-b421-4650-aa02-3ed0bbc61810` published11x2;hashes match.
+Cached full build,focused and Full16 passed;Git delivery accompanies this record.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p57-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -234,3 +233,7 @@ R0562/R0563:CHAIN4 word high-byte mask missing;current320/512fail;repair net-inc
 R0568-R0571 restored ineffective byte offsets;original UNCHAINED string width defect still outputs0. [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0564-r0571-final-string-review.json).
 
 P56:sevid00133/33;eight restorations delivered(net-24);next R0605.
+
+sevid004:R0605-R0607 qualified pending owner;source unchanged;next R0608.
+
+sevid016:R0608-R0611 qualified. sevid017:11/11 qualified. sevid018:9/9;LF restored. sevid019:49/49;46 restored;3 residuals;net-140;P57 gates passed;next R0681.

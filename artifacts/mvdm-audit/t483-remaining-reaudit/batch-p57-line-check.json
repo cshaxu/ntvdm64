@@ -1,0 +1,72 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+    "physical_lines": 3581,
+    "matched_original_line_mismatches": [],
+    "remaining_same_line_ranges": [
+      [
+        1172,
+        1173
+      ],
+      [
+        1361,
+        1362
+      ],
+      [
+        1712,
+        1713
+      ],
+      [
+        2300,
+        2300
+      ],
+      [
+        2308,
+        2309
+      ],
+      [
+        2325,
+        2325
+      ],
+      [
+        2659,
+        2660
+      ],
+      [
+        2848,
+        2849
+      ],
+      [
+        3199,
+        3200
+      ]
+    ],
+    "original_sha256": "870093e49a0bf12cc26b0b21e8bd0d13cd2d084d0685b3968950351592b37f0a",
+    "sha256": "571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471",
+    "error_directives": 0,
+    "proof": "Original LF and equal physical line count; every unchanged matched line retains its original position."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+    "physical_lines": 4591,
+    "matched_original_line_mismatches": [],
+    "remaining_same_line_ranges": [
+      [
+        1299,
+        1299
+      ],
+      [
+        1718,
+        1718
+      ],
+      [
+        1736,
+        1736
+      ]
+    ],
+    "original_sha256": "0bc4f7ef4ccf5a3d86db8516cef6cd0bace3f24c839e2c0771bcb1af7a26c06d",
+    "sha256": "c763b216c1caef24611efb43faa133423d47a193bf700a870e99ec0c2c125f6c",
+    "error_directives": 0,
+    "proof": "Original LF and equal physical line count; every unchanged matched line retains its original position."
+  }
+]

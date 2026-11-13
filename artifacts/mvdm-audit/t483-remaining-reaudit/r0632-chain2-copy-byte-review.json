@@ -1,0 +1,18 @@
+{
+  "id": "T483-R0632",
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "original_line": 1299,
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "current_sha256": "3d5e4507ce015a031a7691e32995e5bfc26481f4f5c53e4d20fb93c35275e203",
+  "diff": "+1/-1;net0",
+  "responsibility": "CHAIN2 copies must preserve shared-plane addresses across unchained transitions.",
+  "original_capability": "Original compact mapping4*(a>>1)+(a&1) is internally coherent but differs from unchained shared-plane location4*(a&~1)+(a&1).",
+  "exact_necessity": "S_2696 obtains destination base1288 plus address bit0 at1284-1292;extracts bits1..31 then shifts at1299-1303. Restoring only shift2 changes physical write location for all16 tested addresses16..31.",
+  "cross_mode_evidence": "r0502-chain2-byte-address-review.json and docs/etc/evidence/m0-t479-s9-delivery.md;prior guest VDD unchained text-save observation supports cross-mode requirement,not merely current fixture preference.",
+  "current": "byte16 wrong=0 live=0",
+  "original": "byte16 wrong=16 live=0",
+  "minimum": "Single numeric substitution;restoring compact representation globally would require repacking or additional backing to satisfy evidenced cross-mode behavior. No smaller nonzero line edit.",
+  "counter_review": "Actual generated copy entry tested,not reimplemented copy.16addresses,input31. No new guest reproduction or all-address/concurrency claim. Prior evidence and isolated restoration control have distinct roles.",
+  "line_error": "Current production bytes unchanged;original1299 still physical1299.",
+  "decision": "Qualified pending owner,not approved retention."
+}

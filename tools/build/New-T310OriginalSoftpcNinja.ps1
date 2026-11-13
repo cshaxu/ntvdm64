@@ -1106,6 +1106,8 @@ $cvidcVectorBindingFixtureObject = 'obj/tests/cvidc_vector_binding_fixture.obj'
 # This fixture must see C-VID's generated (non-CCPU) CpuVector view, just as
 # accessfn.c does; it therefore validates the actual cross-profile ABI seam.
 $graph.Add('build ' + $cvidcVectorBindingFixtureObject + ': cc_cvidc_access ' + (NinjaPath $cvidcVectorBindingFixtureSource))
+$cvidcSasFixtureObject = 'obj/tests/cvidc_sas_fixture.obj'
+$graph.Add('build ' + $cvidcSasFixtureObject + ': cc_cvidc_rule ' + (NinjaPath (Join-Path $root 'test/mvdm-host/cvidc_sas_fixture.c')))
 $x87LayoutFixtureObject = 'obj/tests/x87_layout_fixture.obj'
 $graph.Add('build ' + $x87LayoutFixtureObject + ': cc ' + (NinjaPath $x87LayoutFixtureSource))
 $cvidcVectorProviderStubSource = 'generated/cvidc_vector_provider_stubs.c'
@@ -2213,7 +2215,7 @@ $graph.Add('build cpu40-descriptor-domain-fixture.exe: memory_test_link ' + $cpu
 $graph.Add('build obj/tests/wow_user_client_view_layout_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/wow/wow_user_client_view_layout_fixture.c')))
 $graph.Add('  cflags = /nologo /c /MT /W3 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '" /I "' + (NinjaPath (Join-Path $wow32DllRoot 'include')) + '"')
 $graph.Add('build wow-user-client-view-layout-test.exe: memory_test_link obj/tests/wow_user_client_view_layout_fixture.obj')
-$graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $cvidcSasFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib common-worker-thread.lib lib-thread.lib common-opennt-compat.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib')

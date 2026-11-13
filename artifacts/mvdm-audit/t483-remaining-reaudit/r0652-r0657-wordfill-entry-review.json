@@ -1,0 +1,34 @@
+{
+  "points": [
+    652,
+    653,
+    654,
+    656,
+    657
+  ],
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "responsibility": "CCPU word fill must preserve shared-plane output.",
+  "original_capability": "Selected c_sas_fillsw loops c_sas_storew (ccpusas4.c1074); S_2700 has no nested generated caller. EVID w_fill slot is registered but read_w_fill_ptrs has no caller. Only test directly invokes the compound entry.",
+  "specific_diff_necessity": "Not established for the selected product. Historical import records demonstrate direct EVID test failures, explicitly not a guest path hit. A shared-plane requirement alone does not require modifying an uncalled bulk implementation.",
+  "evidence": [
+    "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c:112",
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:1074",
+    "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c:192",
+    "src/mvdm-host/softpc.new/base/cvidc/evidfunc.c:161",
+    "docs/etc/evidence/m0-t481-s9-softpc.md:16"
+  ],
+  "controls": {
+    "652": "wordfill128 wrong=64 live=0",
+    "653": "wordfill128 wrong=64 live=0",
+    "654": "wordfill128 wrong=56 live=0",
+    "656": "wordfill128 wrong=64 live=0",
+    "657": "wordfill128 wrong=56 live=0"
+  },
+  "control_interpretation": "These show direct bulk output differences, not product necessity. Existing direct word-fill plane oracle will fail after restoration; not waived or claimed passed. Coupled fixture must exercise actual SAS word-fill path with independent output assertions before delivery.",
+  "change": "Restore five original constants; preserve original table and original implementation, no shim.",
+  "mirror_diff_delta": -10,
+  "line_error": "Same-line substitutions; physical line count and #error/#line unchanged.",
+  "before_sha256": "cb49690f928a9cc10fcde86e69b7f5a05a9866fa180edbac645069af08a6b783",
+  "after_sha256": "ab2b6ee20e3cb539642d5810b9398adc6e6b48a1577f24d1482def83e0ae4407",
+  "verification": "Source-only combined restoration; full-file coupled fixture and final verification pending."
+}

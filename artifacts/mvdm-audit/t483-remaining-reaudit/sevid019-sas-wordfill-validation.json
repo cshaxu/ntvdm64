@@ -1,0 +1,14 @@
+{
+  "purpose": "Verify actual selected CCPU SAS word-fill path after restoring unused compound functions.",
+  "source_sha256": "c5c7762f7f2b475ae6aba421d4317a5942e4e560379d100718b1be1db68c55f4",
+  "probe_sha256": "a8895b601cf5aa87f5302e6c21a7efe18135f76a0159f620ce63fc788f6c77c5",
+  "script": "build/t483-s5-p57/sasfill-probe.cmd",
+  "pid": 12600,
+  "deadline_seconds": 120,
+  "exit": 0,
+  "result": "owner\nsas\ncpu\nhandlers\nvga\nready\nSASwordfill144 wrong=0 live=0\n",
+  "cases": "16 starts16..31 x lengths0..8; value7131; independent full256-byte plane oracle including unchanged bytes.",
+  "path": "Real session/SAS initialization, VIDEO Glue_writes registration, c_sas_fillsw -> c_sas_storew -> original video word glue -> selected scalar EVID word provider.",
+  "invalid_attempts": "PIDs16020/15004 exited C0000005 because fixture had not initialized c_ev_write_ptr. Neither is product failure or a pass. Final probe explicitly selects chain2_evid[4].",
+  "limitations": "Focused native real-provider diagnostic, not guest execution/full regression. Checked-in fixture coupling and complete delivery still pending."
+}

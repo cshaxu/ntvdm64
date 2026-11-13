@@ -1,0 +1,103 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "points": [
+    {
+      "id": "T483-R0662",
+      "line": 2134,
+      "before_added": 2,
+      "before_deleted": 0,
+      "delta": -2
+    },
+    {
+      "id": "T483-R0663",
+      "line": 2147,
+      "before_added": 1,
+      "before_deleted": 1,
+      "delta": -2
+    },
+    {
+      "id": "T483-R0664",
+      "line": 2161,
+      "before_added": 2,
+      "before_deleted": 2,
+      "delta": -4
+    },
+    {
+      "id": "T483-R0665",
+      "line": 2165,
+      "before_added": 2,
+      "before_deleted": 2,
+      "delta": -4
+    },
+    {
+      "id": "T483-R0666",
+      "line": 2169,
+      "before_added": 2,
+      "before_deleted": 2,
+      "delta": -4
+    },
+    {
+      "id": "T483-R0667",
+      "line": 2175,
+      "before_added": 1,
+      "before_deleted": 1,
+      "delta": -2
+    },
+    {
+      "id": "T483-R0668",
+      "line": 2182,
+      "before_added": 1,
+      "before_deleted": 1,
+      "delta": -2
+    },
+    {
+      "id": "T483-R0669",
+      "line": 2185,
+      "before_added": 2,
+      "before_deleted": 2,
+      "delta": -4
+    },
+    {
+      "id": "T483-R0670",
+      "line": 2196,
+      "before_added": 1,
+      "before_deleted": 1,
+      "delta": -2
+    },
+    {
+      "id": "T483-R0671",
+      "line": 2224,
+      "before_added": 1,
+      "before_deleted": 1,
+      "delta": -2
+    },
+    {
+      "id": "T483-R0672",
+      "line": 2228,
+      "before_added": 4,
+      "before_deleted": 0,
+      "delta": -4
+    },
+    {
+      "id": "T483-R0673",
+      "line": 2229,
+      "before_added": 1,
+      "before_deleted": 1,
+      "delta": -2
+    }
+  ],
+  "responsibility": "Preserve CCPU fill data, addressing and zero-length behavior.",
+  "original_selected_path": "sascdef.c selects c_sas_fillsdw; ccpusas4.c1095 loops c_sas_storedw, then bios_write_double/phy_w32/two phy_w16. No compound bulk entry is called.",
+  "reference_closure": "S_2703 referenced only by own wrapper/definition, evidfunc declaration/table. fill_dword_ev_glue only its definition. d_fill pointer consumed only by that glue and tests. No nested generated caller.",
+  "rationale_review": "The historical direct bulk fixture proves errors inside unused compound implementation, not necessity for a selected CCPU product fix. No assumption that all old generated code works; no new fix or shim.",
+  "change": "Restore original S_2703 region, including arithmetic, original continuation and original zero behavior.",
+  "before_sha256": "bdd7b71ef8472d5fb8bcded2161161e74bd743155767ebdc438a118a6fd18254",
+  "after_sha256": "eb8f8c8b59d22f8b1d2e0416442511c3418bf14eb4fb0dff9f9575a31a66456f",
+  "diff": {
+    "removed_added_lines": 20,
+    "restored_original_lines": 14,
+    "delta": -34
+  },
+  "validation": "Source reference closure and exact original body comparison; no new runtime claim. Existing compound fill assertions require coupled real-SAS entry review, not deletion of expected-output checks.",
+  "line_error": "Six inserted lines removed, original positions recovered; no #error or #line modified."
+}

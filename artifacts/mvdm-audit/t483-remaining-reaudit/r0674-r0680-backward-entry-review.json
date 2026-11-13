@@ -1,0 +1,21 @@
+{
+  "points": {
+    "674": 2469,
+    "675": 2755,
+    "676": 3125,
+    "677": 3411,
+    "678": 3781,
+    "679": 4067,
+    "680": 4437
+  },
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "responsibility": "Selected CCPU memory moves preserve scalar SAS addressing and access semantics.",
+  "selected_path": "ccpusas4.c forward moves loop scalar reads/stores; backward entrypoints call c_sas_not_used. read_b_move_ptrs/read_w_move_ptrs have no consumers. Backward EVID glue is not in Glue_writes and has no product caller.",
+  "original_capability": "Nested generated compound functions can lose an outer allocation under original continuation; that is a direct-table diagnostic limitation, not proof of a reached product requirement. No claim that original compound nesting is generally correct.",
+  "decision": "Restore original continuations in unused compound entries. Keep original table and functions, do not create a shim or alter CCPU behavior.",
+  "mirror_diff_delta": -28,
+  "line_error": "Same two original physical lines for every point; #error/#line unchanged.",
+  "before_sha256": "eb8f8c8b59d22f8b1d2e0416442511c3418bf14eb4fb0dff9f9575a31a66456f",
+  "after_sha256": "43f50b4767c9e6ad6266f750afead3636225ab42b3ad404ae8befe53807de8d7",
+  "validation": "Source chain only; original nested compound diagnostic can fail. Coupled fixture must separate unused-table diagnostics from actual supported scalar route. Whole-file final testing pending."
+}

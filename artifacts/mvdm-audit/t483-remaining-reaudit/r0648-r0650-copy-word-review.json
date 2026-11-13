@@ -1,0 +1,31 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "points": [
+    {
+      "id": "T483-R0648",
+      "line": 1718,
+      "control": "word16 wrong=16 live=0"
+    },
+    {
+      "id": "T483-R0649",
+      "line": 1731,
+      "control": "word16 wrong=0 live=0"
+    },
+    {
+      "id": "T483-R0650",
+      "line": 1736,
+      "control": "word16 wrong=8 live=0"
+    }
+  ],
+  "before_sha256": "5078abe23411b8e6a5186ef984b67f8e43be64de3866f981e8a03b177a7e1705",
+  "after_sha256": "f9a4648f86b64537604ac4b0c3192a3d582be02131d165388a7e86e2bb4cff78",
+  "baseline": "word16 wrong=0 live=0",
+  "responsibility": "Write both bytes to shared-plane locations and release local allocation.",
+  "retained_evidence": "R0648 original shift1 puts both bytes at wrong base16/16;R0650 original stride3 puts odd-start high byte at wrong location8/16. Cross-mode plane necessity established inr0502-chain2-byte-address-review.json and priorT479S9guest evidence.",
+  "restoration_proof": "S_2699 C/H references only definition,header,evidfunc.c158 table and own entry. No nested generated caller or external callback in body. Original continuation writes second byte,frees only active frame,and returns;no parent automatic saved frame needed. Restored variant16/16correct,0outstanding allocations.",
+  "minimum": "Restore original2-line call R0649. Keep one constant at each other point pending owner;no helper or new state.",
+  "diff": "R0649+2/-2 ->0,net-4;R0648/R0650 each+1/-1 unchanged",
+  "line_error": "Original physical1731-1732 restored with existing newline style;line count unchanged;exclusions untouched.",
+  "limitations": "Probe16addresses16..31,value7131,first256 backing bytes guarded;not guest/concurrency/all-values claim. Full file audit and production delivery pending.",
+  "decision": "R0649 restored locally;two qualified residuals pending owner."
+}

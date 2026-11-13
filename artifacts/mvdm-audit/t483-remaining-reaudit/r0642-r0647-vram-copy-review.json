@@ -1,0 +1,61 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "current_sha256": "5078abe23411b8e6a5186ef984b67f8e43be64de3866f981e8a03b177a7e1705",
+  "points": [
+    {
+      "id": "T483-R0642",
+      "line": 1575,
+      "controls": {
+        "r0642-original": "vram cases=56 fullwrong=28 prefixwrong=28 live=0\nnested start=16 live=0\nnested start=17 live=0"
+      }
+    },
+    {
+      "id": "T483-R0643",
+      "line": 1586,
+      "controls": {
+        "r0643-stride": "vram cases=56 fullwrong=28 prefixwrong=24 live=0\nnested start=16 live=0\nnested start=17 live=0",
+        "r0643-call": "vram cases=56 fullwrong=28 prefixwrong=0 live=0\nnested start=16 live=0\nnested start=17 live=1"
+      }
+    },
+    {
+      "id": "T483-R0644",
+      "line": 1598,
+      "controls": {
+        "r0644-original": "vram cases=56 fullwrong=56 prefixwrong=28 live=0\nnested start=16 live=0\nnested start=17 live=0"
+      }
+    },
+    {
+      "id": "T483-R0645",
+      "line": 1615,
+      "controls": {
+        "r0645-stride": "vram cases=56 fullwrong=42 prefixwrong=26 live=0\nnested start=16 live=0\nnested start=17 live=0",
+        "r0645-call": "vram cases=56 fullwrong=28 prefixwrong=0 live=0\nnested start=16 live=1\nnested start=17 live=2"
+      }
+    },
+    {
+      "id": "T483-R0646",
+      "line": 1640,
+      "controls": {
+        "r0646-original": "vram cases=56 fullwrong=52 prefixwrong=44 live=0\nnested start=16 live=0\nnested start=17 live=0"
+      }
+    },
+    {
+      "id": "T483-R0647",
+      "line": 1642,
+      "controls": {
+        "r0647-original": "vram cases=56 fullwrong=52 prefixwrong=44 live=0\nnested start=16 live=0\nnested start=17 live=0"
+      }
+    }
+  ],
+  "baseline": "vram cases=56 fullwrong=28 prefixwrong=0 live=0\nnested start=16 live=0\nnested start=17 live=0",
+  "responsibility": "Preserve cross-mode source/destination plane correspondence and nested caller allocation lifetime.",
+  "source": "S_2698 VRAM branch1560-1657;S_2701/S_2704 nested calls1946/2287. Source pointer=rplane+fromOff;source fromOff already physical,its bit0 determines alternating1/7. Destination independently derives physical offset.",
+  "necessity": "Single original constants cause additional prefix failures28/24/28/26/44/44. R0643 call restoration loses odd-target parent allocation;R0645 call restoration loses parent for both targets. Original wrapper continuation reenters without ENTER_SECTION and cannot recover outer CopyLocalIUH.",
+  "cross_mode_evidence": "r0502-chain2-byte-address-review.json;docs/etc/evidence/m0-t479-s9-delivery.md. Shared address f(a)=4*(a&~1)+(a&1).",
+  "minimum": "Constants and same-activation gotos are independently necessary in tested original call chain. No helper,additional state or alternate backing proposed.",
+  "baseline_gap": "Current full copy oracle fails28/56 odd-target cases:1568 decrements count but no leading byte is copied before loop. Result matches k-1 byte prefix,not requested k. Original baseline contains same decrement. Prefix oracle isolates these diffs;it is not full acceptance. No fix implemented or claimed.",
+  "counter_review": "Addresses16..19,source physical512/513,count2..8;nonoverlap. Full requested oracle AND separate prefix oracle reported. Nested real S_2701 count3 checks allocation. No guest/concurrency evidence. Source and destination parity independent.",
+  "diff": "R0642+1/-1,R0643+3/-3,R0644+1/-1,R0645+3/-3,R0646+1/-1,R0647+1/-1;netchange0",
+  "line_error": "Production unchanged;physical positions and exclusions untouched.",
+  "decision": "6qualified pending owner;current missing-byte gap separately recorded,not passed."
+}

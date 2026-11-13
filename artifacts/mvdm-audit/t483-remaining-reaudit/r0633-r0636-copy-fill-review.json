@@ -1,0 +1,43 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "before_sha256": "3d5e4507ce015a031a7691e32995e5bfc26481f4f5c53e4d20fb93c35275e203",
+  "after_sha256": "5078abe23411b8e6a5186ef984b67f8e43be64de3866f981e8a03b177a7e1705",
+  "points": [
+    {
+      "id": "T483-R0633",
+      "line": 1375,
+      "original_control": "fill144 wrong=64 live=0",
+      "remaining": "+1/-1"
+    },
+    {
+      "id": "T483-R0634",
+      "line": 1386,
+      "original_control": "fill144 wrong=56 live=0",
+      "remaining": "+1/-1"
+    },
+    {
+      "id": "T483-R0635",
+      "line": 1398,
+      "original_control": "fill144 wrong=64 live=0",
+      "remaining": "+1/-1"
+    },
+    {
+      "id": "T483-R0636",
+      "line": 1421,
+      "original_control": "fill144 wrong=96 live=0",
+      "remaining": "+1/-1"
+    }
+  ],
+  "baseline": "fill144 wrong=0 live=0",
+  "restored_call": "fill144 wrong=0 live=0",
+  "responsibility": "Cross-mode CHAIN2 fill must cover the same byte positions as unchained backing;generated allocation must be released.",
+  "retained_evidence": "Shared-plane f(a)=4*(a&~1)+(a&1) gives stride1/7 and XOR6. Original shift2/stride3/XOR2 violates that correspondence. Prior guest transition evidence:r0502-chain2-byte-address-review.json,docs/etc/evidence/m0-t479-s9-delivery.md;actual144case restored constants fail64,56,64,96cases.",
+  "restoration_proof": "Full src C/H reference search finds S_2697 only in its definition,header,entry ID/label and evidfunc.c table160. Original fill loop has no external callback or generated child call. Internal continuation call cleans its single allocated frame then immediately returns;no saved outer generated frame is live. This is distinct from nested wrappers earlier retained.",
+  "minimum": "Restore original two-line internal call;retain one constant atR0634. Other3 constants already one-line substitutions;no new helper,state,or alternate path.",
+  "mirror_diff_delta": -4,
+  "partial_restoration": "R0634+3/-3 -> +1/-1;not a fully restored ID;residual remains pending owner.",
+  "line_error": "Original physical1387-1388 restored;line count preserved;no exclusion directives touched.",
+  "verification": "Actual generated fill current/restored-call:144cases0fail0live;constant-restored controls fail. Single diagnostic source variant matches production line content after restoration;full production build/release/test not yet done.",
+  "limitations": "Addresses16..31,count0..8,byte31,guard check first256 backing bytes;not guest/concurrency/all values. Allocator instrumentation delegates CRT. Current full file audit remains ongoing."
+}

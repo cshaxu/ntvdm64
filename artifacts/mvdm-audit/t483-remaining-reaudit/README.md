@@ -383,3 +383,8 @@ P56 sevid00133/33 dispositions:8 restorations local,25 residual decisions;mirror
 P56 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
 611 reviewed;209 restored delivered,0 local,2 approved,400 pending,2109 unreviewed;85/365 files.
 Known backward UNCHAINED width defect remains.Next R0605.
+
+P57: sevid01946 original restorations; mirror diff net-140. Cached full build,
+11x2 publication/hash, focused and Full16 passed. 687 reviewed;255 restored
+delivered,2 approved,430 pending,2033 unreviewed;90/365 files.
+See [receipt](batch-p57-checkpoint.json) and [file review](sevid019-file-review.json).

@@ -1,0 +1,70 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "before_sha256": "646eeb973481be2ae7a04d344e83ff62a564d870950df1bb36312702ebcabc49",
+  "after_sha256": "571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471",
+  "points": [
+    {
+      "id": "T483-R0626",
+      "line": 2300,
+      "reason": "Odd mode3 byte store original shift2 writes compact aliases instead of shared-plane4*(a&~1)+(a&1).",
+      "current": "byte16 wrong=0 live=0",
+      "original": "byte16 wrong=8 live=0",
+      "size": "+1/-1"
+    },
+    {
+      "id": "T483-R0627",
+      "line": 2308,
+      "reason": "S_2678->S_2679->L21_103if_d loses caller saved allocation on odd addresses.",
+      "current": "byte16 wrong=0 live=0",
+      "original": "byte16 wrong=0 live=8",
+      "size": "+2/-2"
+    },
+    {
+      "id": "T483-R0628",
+      "line": 2325,
+      "reason": "Even mode3 byte store original shift2 writes compact aliases instead of shared-plane4*(a&~1)+(a&1).",
+      "current": "byte16 wrong=0 live=0",
+      "original": "byte16 wrong=8 live=0",
+      "size": "+1/-1"
+    },
+    {
+      "id": "T483-R0629",
+      "line": 2659,
+      "reason": "S_2682->S_2683->L21_111if_d: original internal wrapper enters crules without ENTER_SECTION;CopyLocalIUH starts0 and cleanup loses parent frame. Outer wrapper skips free.",
+      "current": "wordmove start=16 live=0\nwordmove start=17 live=0",
+      "original": "wordmove start=16 live=1\nwordmove start=17 live=2",
+      "size": "+2/-2"
+    },
+    {
+      "id": "T483-R0630",
+      "line": 2848,
+      "reason": "S_2684->S_2685->L21_121if_d: original internal wrapper enters crules without ENTER_SECTION;CopyLocalIUH starts0 and cleanup loses parent frame. Outer wrapper skips free.",
+      "current": "word start=16 live=0\nword start=17 live=0",
+      "original": "word start=16 live=0\nword start=17 live=1",
+      "size": "+2/-2"
+    },
+    {
+      "id": "T483-R0631",
+      "line": 3199,
+      "reason": "S_2688->S_2689->L21_126if_d: original internal wrapper enters crules without ENTER_SECTION;CopyLocalIUH starts0 and cleanup loses parent frame. Outer wrapper skips free.",
+      "current": "wordmove start=16 live=0\nwordmove start=17 live=0",
+      "original": "wordmove start=16 live=1\nwordmove start=17 live=2",
+      "size": "+2/-2"
+    }
+  ],
+  "responsibility": "Cross-mode shared-plane visibility;original nested allocation lifecycle.",
+  "original_inability": "Compact CHAIN2 offsets cannot match unchained reads;original internal cleanup recursion cannot recover parent automatic saved frame.",
+  "minimum": "One constant per parity or one same-activation goto plus blank. No helper or duplicated state;no smaller nonzero line change identified.",
+  "cross_mode_evidence": "r0502-chain2-byte-address-review.json;docs/etc/evidence/m0-t479-s9-delivery.md;prior guest transition evidence.",
+  "limits": [
+    "Diagnostic tracked allocations delegate real CRT;not concurrency evidence.",
+    "Mode3 address test uses input0,latches31313131;16addresses verify position independently of bitmask complexity;not all mode3 values.",
+    "Move probe printed wordmove also for BYTE entry;source and map identify actual S_2682.",
+    "No fresh guest or full-suite acceptance claim."
+  ],
+  "format_restoration": "3581CRLF endings restored to pinned original LF;all3581 line contents identical to pre-edit current. No semantic edit or line displacement.",
+  "diff": "Semantic+16/-16 unchanged;format-only difference removed;no functional net reduction.",
+  "line_error": "3581 physical lines preserved;no #line/#error present or changed.",
+  "decision": "6qualified pending owner;file9/9 reviewed. Pure-format restoration may accumulate under owner instruction."
+}

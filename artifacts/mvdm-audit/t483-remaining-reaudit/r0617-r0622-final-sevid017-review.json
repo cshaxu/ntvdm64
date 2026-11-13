@@ -1,0 +1,67 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "current_sha256": "178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2",
+  "points": [
+    {
+      "id": "T483-R0617",
+      "line": 2168,
+      "reason": "S_2646 -> S_2647 -> L21_43if_d: original internal wrapper reenters crules without ENTER_SECTION;CopyLocalIUH=0. Child cleanup therefore loses parent frame and wrapper cannot free it.",
+      "current": "wordmove start=16 live=0\nwordmove start=17 live=0",
+      "original": "wordmove start=16 live=1\nwordmove start=17 live=2",
+      "size": "+2/-2"
+    },
+    {
+      "id": "T483-R0618",
+      "line": 2357,
+      "reason": "S_2648 -> S_2649 -> L21_53if_d: original internal wrapper reenters crules without ENTER_SECTION;CopyLocalIUH=0. Child cleanup therefore loses parent frame and wrapper cannot free it.",
+      "current": "word start=16 live=0\nword start=17 live=0",
+      "original": "word start=16 live=0\nword start=17 live=1",
+      "size": "+2/-2"
+    },
+    {
+      "id": "T483-R0619",
+      "line": 2708,
+      "reason": "S_2652 -> S_2653 -> L21_58if_d: original internal wrapper reenters crules without ENTER_SECTION;CopyLocalIUH=0. Child cleanup therefore loses parent frame and wrapper cannot free it.",
+      "current": "wordmove start=16 live=0\nwordmove start=17 live=0",
+      "original": "wordmove start=16 live=1\nwordmove start=17 live=2",
+      "size": "+2/-2"
+    },
+    {
+      "id": "T483-R0620",
+      "line": 3311,
+      "reason": "Odd mode2 byte store: original shift2 aliases compact addresses;shared-plane transition requires4*(a&~1)+(a&1).",
+      "current": "byte16 wrong=0 live=0",
+      "original": "byte16 wrong=8 live=0",
+      "size": "+1/-1"
+    },
+    {
+      "id": "T483-R0621",
+      "line": 3319,
+      "reason": "S_2660 -> S_2661 -> L21_69if_d: original cleanup wrapper restores0 instead of saved parent frame,losing one wrapper allocation per odd address.",
+      "current": "byte16 wrong=0 live=0",
+      "original": "byte16 wrong=0 live=8",
+      "size": "+2/-2"
+    },
+    {
+      "id": "T483-R0622",
+      "line": 3336,
+      "reason": "Even mode2 byte store: original shift2 aliases compact addresses;shared-plane transition requires4*(a&~1)+(a&1).",
+      "current": "byte16 wrong=0 live=0",
+      "original": "byte16 wrong=8 live=0",
+      "size": "+1/-1"
+    }
+  ],
+  "responsibility": "Preserve original nested caller lifetime and cross-mode plane visibility.",
+  "original_inability": "Original recursive cleanup enters without saving outer automatic frame;original compact byte spacing cannot match cross-mode shared plane reads.",
+  "minimum": "Keep same-activation goto and one constant per parity. No new helper,state,mode repack or alternative backing. No smaller nonzero line diff identified.",
+  "cross_mode_evidence": "r0502-chain2-byte-address-review.json and docs/etc/evidence/m0-t479-s9-delivery.md;prior guest transition evidence,not new reproduction.",
+  "counter_review": [
+    "Allocation probes delegate real CRT malloc/free for sevid017 only;they do not prove concurrency or guest acceptance.",
+    "R0617 probe output label says wordmove but actual called entry is S_2646 BYTE move;source and map define the exercised entry.",
+    "Mode2 initial probes lacked lookup initialization and failed even current baseline. Those logs are invalid controls. Final source sets original sr_lookup and records exceptions;all final controls exit0 with differing wrong-address/allocation counts.",
+    "Only tested masks and16addresses for byte mode2;no blanket validation of other paths."
+  ],
+  "line_error": "Production raw bytes unchanged;original physical positions unchanged;no exclusion/line directives edited.",
+  "decision": "All6 qualified pending owner;not approved retention."
+}

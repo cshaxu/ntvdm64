@@ -16,6 +16,8 @@
 #include "ga_mark.h"
 #include "evidfunc.h"
 
+extern int cvidc_sas_fixture_begin(void);
+extern void cvidc_sas_fixture_end(void);
 extern struct VideoVector C_Video;
 extern struct SasVector Sas;
 extern IHP Gdp;
@@ -236,21 +238,20 @@ static int check_chain2_rules(IU8 *planes)
             fprintf(stderr, "string read mode=%u parity=%u backward=%u expected=%02x actual=%02x\n", mode, parity, slot, first[0], output[24]);
         CHECK(memcmp(first, output + 24, 4) == 0);
     }
-    /* A RAM-to-video word move consumes the generated-rule descending RAM
-       source convention; verify each destination CPU byte independently. */
+    /* CCPU moves use guest RAM addresses, not descending native pointers. */
     for (parity = 0; parity < 2; ++parity) {
         for (i = 0; i < sizeof(input); ++i) input[i] = (IU8)(0x31u + i);
         memset(planes, 0x5a, sizeof(expected));
         c_ev_write_ptr = chain2_evid[4];
         offset = 0x100u + parity;
-        r1 = (IUH)Gdp; r2 = offset; r3 = (IUH)(input + 32); r4 = 4; r5 = 1;
-        c_ev_write_ptr.w_fwd_move(offset, (IHPE)(input + 32), 4, 1);
+        Sas.Sas_stores(0x80000, input, sizeof(input));
+        Sas.Sas_move_words_forward(0x80020, 0xa0000 + offset, 4);
         for (i = 0; i < 8; ++i) {
             IU32 address = offset + i;
             IU8 actual = planes[4u * (address & ~1u) + (address & 1u)];
-            if (actual != input[32-i])
-                fprintf(stderr, "copy RAM word move parity=%u byte=%u expected=%02x actual=%02x\n", parity, i, input[32-i], actual);
-            CHECK(actual == input[32-i]);
+            if (actual != input[32+i])
+                fprintf(stderr, "copy RAM word move parity=%u byte=%u expected=%02x actual=%02x\n", parity, i, input[32+i], actual);
+            CHECK(actual == input[32+i]);
         }
     }
     /* Independent physical-plane oracle for the registered byte/word Copy fills. */
@@ -259,8 +260,8 @@ static int check_chain2_rules(IU8 *planes)
         IU32 width = 1u << slot;
         memset(planes, 0x5a, sizeof(expected));
         r1 = (IUH)Gdp; r2 = 0x100u + parity; r3 = 0x11111111u; r4 = 8u / width;
-        if (slot == 0) c_ev_write_ptr.b_fill(0x100u + parity, 0x11, 8);
-        else c_ev_write_ptr.w_fill(0x100u + parity, 0x1111, 4);
+        if (slot == 0) Sas.Sas_fills(0xa0100u + parity, 0x11, 8);
+        else Sas.Sas_fillsw(0xa0100u + parity, 0x1111, 4);
         for (i = 0; i < 8; ++i) {
             IU32 address = 0x100u + parity + i;
             if (planes[4u * (address & ~1u) + (address & 1u)] != (IU8)(0x11111111u >> ((i % width) * 8u)))
@@ -279,9 +280,9 @@ static int check_chain2_rules(IU8 *planes)
         memset(planes, 0x5a, sizeof(expected));
         memset(expected, 0x5a, sizeof(expected));
         r1=(IUH)Gdp; r2=0x101; r3=0x1234; r4=0;
-        c_ev_write_ptr.b_fill(0x101, 0x34, 0);
-        r1=(IUH)Gdp; r2=0x101; r3=0x1234; r4=0;
-        c_ev_write_ptr.w_fill(0x101, 0x1234, 0);
+        Sas.Sas_fills(0xa0101, 0x34, 0);
+        /* Zero-length CCPU fills stop at SAS, before EVID dispatch. */
+        Sas.Sas_fillsw(0xa0101, 0x1234, 0);
         CHECK(memcmp(planes, expected, sizeof(expected)) == 0);
         for (start = 0; start < sizeof(starts)/sizeof(starts[0]); ++start)
         for (value = 0; value < sizeof(values)/sizeof(values[0]); ++value)
@@ -294,7 +295,7 @@ static int check_chain2_rules(IU8 *planes)
                     (IU8)(values[value] >> ((i % 4u) * 8u));
             }
             r1=(IUH)Gdp; r2=starts[start]; r3=values[value]; r4=counts[count];
-            c_ev_write_ptr.d_fill(starts[start], values[value], counts[count]);
+            Sas.Sas_fillsdw(0xa0000 + starts[start], values[value], counts[count]);
             CHECK(memcmp(planes, expected, sizeof(expected)) == 0);
         }
     }
@@ -324,33 +325,24 @@ static int check_chain2_rules(IU8 *planes)
     for (parity = 0; parity < 4; ++parity) {
         offset = 0x100u + parity;
         c_ev_write_ptr = chain2_evid[mode];
-        /* Exercise all compound entries with valid native RAM pointers.
-           Replay checks stable output and a scalar sentinel checks that nested
-           returns leave the next ordinary call usable. No missing video-source
-           bulk callback is manufactured by this fixture. */
-        for (slot = 0; slot < 12; ++slot)
-        for (flag = 1; flag <= (mode == 4 && slot >= 6 ? 2u : 1u); ++flag)
+        /* Exercise the selected CCPU routes. Backward bulk entries are not
+           used by CCPU; their table bindings remain checked above. */
+        for (slot = 0; slot < 9; ++slot)
         for (pass = 0; pass < 2; ++pass) {
-            IBOOL in_ram = flag == 1;
-            rule_mode=mode; rule_parity=parity; rule_slot=slot; rule_flag=flag;
-            IHPE source = in_ram ? (IHPE)(input + ((slot & 1u) ? 64u : 32u) + (parity & 1u)) : (IHPE)0x700u;
+            rule_mode=mode; rule_parity=parity; rule_slot=slot; rule_flag=1;
             for (i = 0; i < sizeof(expected); ++i)
                 planes[i] = (IU8)(i * 37u + (i >> 3));
-            r1 = (IUH)Gdp; r2 = offset; r3 = 0xa5; r4 = 4; r5 = in_ram;
-            if (slot >= 6) r3 = (IUH)source;
+            Sas.Sas_stores(0x80000, input, sizeof(input));
             switch (slot) {
-            case 0: c_ev_write_ptr.b_write(offset, 0xa5); break;
-            case 1: c_ev_write_ptr.w_write(offset, 0xa5); break;
-            case 2: c_ev_write_ptr.d_write(offset, 0xa5); break;
-            case 3: c_ev_write_ptr.b_fill(offset, 0xa5, 4); break;
-            case 4: c_ev_write_ptr.w_fill(offset, 0xa5, 4); break;
-            case 5: c_ev_write_ptr.d_fill(offset, 0xa5, 4); break;
-            case 6: c_ev_write_ptr.b_fwd_move(offset, source, 4, in_ram); break;
-            case 7: c_ev_write_ptr.b_bwd_move(offset, source, 4, in_ram); break;
-            case 8: c_ev_write_ptr.w_fwd_move(offset, source, 4, in_ram); break;
-            case 9: c_ev_write_ptr.w_bwd_move(offset, source, 4, in_ram); break;
-            case 10: c_ev_write_ptr.d_fwd_move(offset, source, 4, in_ram); break;
-            case 11: c_ev_write_ptr.d_bwd_move(offset, source, 4, in_ram); break;
+            case 0: Sas.Sas_store(0xa0000 + offset, 0xa5); break;
+            case 1: Sas.Sas_storew(0xa0000 + offset, 0xa5); break;
+            case 2: Sas.Sas_storedw(0xa0000 + offset, 0xa5); break;
+            case 3: Sas.Sas_fills(0xa0000 + offset, 0xa5, 4); break;
+            case 4: Sas.Sas_fillsw(0xa0000 + offset, 0xa5, 4); break;
+            case 5: Sas.Sas_fillsdw(0xa0000 + offset, 0xa5, 4); break;
+            case 6: Sas.Sas_move_bytes_forward(0x80020, 0xa0000 + offset, 4); break;
+            case 7: Sas.Sas_move_words_forward(0x80020, 0xa0000 + offset, 4); break;
+            case 8: Sas.Sas_move_doubles_forward(0x80020, 0xa0000 + offset, 4); break;
             }
             r1 = (IUH)Gdp; r2 = 0x500; r3 = 0x69;
             c_ev_write_ptr.b_write(0x500, 0x69);
@@ -407,6 +399,7 @@ int main(void)
     unsigned i,test;
     HANDLE thread;
     DWORD written;
+    CHECK(cvidc_sas_fixture_begin());
     CHECK(sizeof(struct VideoVector)==81*sizeof(void*));
     CHECK(setup_global_data_ptr()!=0);
     memset(Gdp,0,65536);
@@ -554,6 +547,7 @@ int main(void)
         ((IUH *)Gdp)[2]=(IUH)trace;
         ((IUH *)Gdp)[3]=(IUH)trace;
         ((IUH *)Gdp)[4]=(IUH)&trace[63];
+        gvi_pc_low_regen=0xa0000;
         setVideorplane(planes); setVideowplane(planes);
         setVideoread_shift_count(0); setMarkPointers(0);
         setVideosr_lookup(sr_lookup);
@@ -574,7 +568,8 @@ int main(void)
     CHECK(WaitForSingleObject(thread,10000)==WAIT_OBJECT_0); CloseHandle(thread);
     CHECK(getVideodirty_total()==1000000);
     for(i=0;i<32;i++) CHECK(*scratch[i]==100+i);
-    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\r\n";
+    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\r\n";
       WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,sizeof(message)-1,&written,NULL); }
+    cvidc_sas_fixture_end();
     return 0;
 }

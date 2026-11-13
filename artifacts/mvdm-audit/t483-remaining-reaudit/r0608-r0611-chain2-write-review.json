@@ -1,0 +1,49 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "779010fc9ac72e8ffc0c760d434588526e6fb417b467917a43828d3870826794",
+  "current_sha256": "636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc",
+  "before": "+6/-6",
+  "after": "+6/-6",
+  "mirror_diff_delta": 0,
+  "points": [
+    {
+      "id": "T483-R0608",
+      "reason": "Odd-address store must map4*(a&~1)+(a&1);original shift2 writes compact alias rather than shared-plane position. Direct actual S_2624 16address control restores8wrong odd stores.",
+      "baseline_fixture": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation",
+      "direct_control": "byte16 wrong=8 live=0\nmove start=16 live=0\nmove start=17 live=0"
+    },
+    {
+      "id": "T483-R0609",
+      "reason": "Nested S_2625 is called by fill/move activations. Original internal wrapper enters crules with CopyLocalIUH=0, frees child then restores0 instead of parent; caller continuation accesses lost locals. Actual fixture restoration raises c0000005.",
+      "baseline_fixture": "CHAIN2 exception mode=0 parity=0 slot=3 flag=1 address=009B6939 code=c0000005",
+      "direct_control": "Nested exception observed in baseline fixture."
+    },
+    {
+      "id": "T483-R0610",
+      "reason": "Even-address store requires same shared-plane spacing;original shift2 restores8wrong even stores in16address control.",
+      "baseline_fixture": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation",
+      "direct_control": "byte16 wrong=8 live=0\nmove start=16 live=0\nmove start=17 live=0"
+    },
+    {
+      "id": "T483-R0611",
+      "reason": "S_2628 allocates20bytes then calls S_2629. Original internal cleanup wrapper has CopyLocalIUH=0, frees S_2629 then sets LocalIUH=0;S_2628 cleanup skips freeing its own allocated block. Diagnostic allocator accounting confirms one outstanding allocation per call.",
+      "baseline_fixture": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation",
+      "direct_control": "byte16 wrong=0 live=0\nmove start=16 live=1\nmove start=17 live=2"
+    }
+  ],
+  "responsibility": "Shared-plane writes must preserve addresses and every generated nested activation must restore/free its own locals.",
+  "original_capability": "Original compact shift does not satisfy cross-mode shared backing. Original internal wrappers do not execute ENTER_SECTION and so cannot recover caller CopyLocalIUH;this differs from the top-level strings restored in P56.",
+  "actual_chain": "evidfunc.c CHAIN2 write table -> S_2624 -> S_2625;fill/move also call S_2625 with post-call continuation. S_2628 table move -> S_2629 -> internal label -> both cleanup blocks.",
+  "cross_mode_evidence": "docs/etc/evidence/m0-t479-s9-delivery.md and r0502-chain2-byte-address-review.json;not fixture representation alone.",
+  "current_direct_control": "byte16 wrong=0 live=0\nmove start=16 live=0\nmove start=17 live=0",
+  "minimum": "Address constants are one-line substitutions. Keep two same-activation goto transfers instead of adding shared saved-state or recursion helpers;each replaces two original lines with goto+blank preserving positions.",
+  "counter_review": [
+    "Original broad fixture passed address restorations and R0611;that did not establish correctness. Direct target entry and allocation accounting expose uncovered failures.",
+    "Allocation wrappers are diagnostic compile substitutions only for sevid016;delegate real malloc/free and count live allocations;no product changes.",
+    "R0611 output remains correct in tested calls;failure is persistent parent allocation loss,not claimed output corruption.",
+    "No new guest reproduction claimed;instrumented allocation accounting may change timing and is not concurrency evidence."
+  ],
+  "line_error": "No source changes;all original line positions and exclusions unchanged.",
+  "decision": "All4 qualified pending owner;not approved retention."
+}

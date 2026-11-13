@@ -1,0 +1,13 @@
+{
+  "id": "T483-R0651",
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "source_proof": "sascdef.c112 selects c_sas_fillsw;ccpusas4.c1074 loops i<len calling c_sas_storew,so zero never reaches video. All src C/H/ASM references:w_fill_ptrs only registered,read_w_fill_ptrs unused,gmi_w_fill declaration only;S_2700 only wrapper/header/table.",
+  "old_evidence": "DIV-895 direct fixture EVID zero call bypassed selected SAS product boundary;not proof of production necessity.",
+  "before": "SAS zero changed=0 live=0\ndirect zero changed=0 live=0",
+  "restored": "SAS zero changed=0 live=0",
+  "limitation": "Direct restored EVID zero call fails after SAS zero passed. Not fixed or claimed supported. No full-suite pass claimed.",
+  "change": "Removed2-line guard;test now calls real SAS zero and retains complete-plane unchanged assertion.",
+  "diff": "R0651+2/-0 ->0,net-2",
+  "lines": "Removal restores original1805 onwards until next preexisting insertion;final whole-file line mapping pending. No#error touched.",
+  "decision": "restored locally;file audit and delivery pending"
+}

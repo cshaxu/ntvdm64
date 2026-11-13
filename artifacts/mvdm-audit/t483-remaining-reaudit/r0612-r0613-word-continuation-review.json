@@ -1,0 +1,36 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "current_sha256": "178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2",
+  "points": [
+    {
+      "id": "T483-R0612",
+      "line": 883,
+      "chain": "S_2630 -> S_2631 -> L21_19if_d; S_2635 also invokes S_2631 and reads LocalIUH afterward at1226.",
+      "failure": "Odd word write: current live allocations0; original single restoration live1. Broad vector fixture original-restored variant raises c0000005; corrupted slot/flag fields not used as subcase evidence.",
+      "reason": "Original cleanup wrapper enters crules without ENTER_SECTION. CopyLocalIUH=0 at793; cleanup906-908 frees child and assigns zero instead of parent saved frame. S_2630 skips freeing its parent frame; nested move loses live continuation frame."
+    },
+    {
+      "id": "T483-R0613",
+      "line": 1234,
+      "chain": "S_2634 wrapper allocates20bytes at1057 -> S_2635 -> L21_24if_d -> wrapper cleanup1088.",
+      "failure": "Two direct word moves: current live0,0; single original restoration live1,2. Both processes return0; this demonstrates allocation loss, not observed output corruption.",
+      "reason": "Original internal cleanup enters fresh crules with CopyLocalIUH=0, frees child at1332 then restores0 at1334. S_2634 therefore skips freeing its own allocation at1088."
+    }
+  ],
+  "responsibility": "Generated nested activation must preserve caller locals and release both allocations. This follows original calls and malloc/free lifetime, not adapter policy.",
+  "minimum": "Same-activation goto is one transfer plus blank replacing two original lines. No new state/helper. Retaining original recursive cleanup would require carrying outer automatic saved state through another interface;no smaller change identified.",
+  "diff": "Each +2/-2 unchanged;net0",
+  "counter_review": [
+    "Top-level string continuations previously restored are not a precedent for these nested wrappers.",
+    "Diagnostic malloc/free substitutions only instrument sevid017 and delegate real CRT allocation;no production or guest edits.",
+    "Allocation results do not prove concurrency or guest runtime acceptance.",
+    "R0612 broad diagnostic slot/flag values are corrupt;only exception fact is used."
+  ],
+  "verification": [
+    "wordwrite-probe.cmd:current0,0 versus original0,1 live blocks",
+    "wordmove-probe.cmd:current0,0 versus original1,2 live blocks"
+  ],
+  "line_error": "Production source unchanged;original physical positions unchanged;no new #line/#error.",
+  "decision": "Both qualified pending owner,not approved retention."
+}

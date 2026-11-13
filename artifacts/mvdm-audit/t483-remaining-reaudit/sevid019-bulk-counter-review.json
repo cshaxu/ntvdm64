@@ -1,0 +1,18 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "points": "R0633-R0647",
+  "supersedes": [
+    "r0633-r0636-copy-fill-review.json",
+    "r0637-r0641-copy-move-review.json",
+    "r0642-r0647-vram-copy-review.json"
+  ],
+  "responsibility": "CCPU fill/move remains governed by original scalar SAS loops.",
+  "counter_review": "Earlier pending classifications proved a difference or leak through a direct unused compound table. They did not establish product need. c_sas_fills/c_sas_fillsw and forward moves use scalar stores; backward SAS is unused. No generated scalar entry calls the bulk entries. Keep the negative diagnostic history but withdraw its necessity conclusion.",
+  "change": "Restore original ByteFill and ByteMove regions; no shim. R0634 remaining stride restored as well as its previously restored call.",
+  "mirror_diff_delta": -44,
+  "before_sha256": "43f50b4767c9e6ad6266f750afead3636225ab42b3ad404ae8befe53807de8d7",
+  "after_sha256": "c5c7762f7f2b475ae6aba421d4317a5942e4e560379d100718b1be1db68c55f4",
+  "remaining_mirror_diff": "Only R0632 byte-write address,R0648 word-write base,R0650 odd word stride: +3/-3 total.",
+  "validation": "Source reference closure; direct bulk diagnostics may fail by original behavior; actual scalar SAS regression coupling pending.",
+  "line_error": "Original physical line count throughout file; #error/#line unchanged."
+}

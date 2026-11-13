@@ -1,0 +1,57 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "current_sha256": "5078abe23411b8e6a5186ef984b67f8e43be64de3866f981e8a03b177a7e1705",
+  "points": [
+    {
+      "id": "T483-R0637",
+      "line": 1502,
+      "controls": {
+        "r0637-original": "move144 wrong=64 live=0\nnested word start=16 live=0\nnested word start=17 live=0"
+      }
+    },
+    {
+      "id": "T483-R0638",
+      "line": 1513,
+      "controls": {
+        "r0638-stride": "move144 wrong=56 live=0\nnested word start=16 live=0\nnested word start=17 live=0",
+        "r0638-call": "move144 wrong=0 live=0\nnested word start=16 live=0\nnested word start=17 live=1"
+      }
+    },
+    {
+      "id": "T483-R0639",
+      "line": 1525,
+      "controls": {
+        "r0639-original": "move144 wrong=64 live=0\nnested word start=16 live=0\nnested word start=17 live=0"
+      }
+    },
+    {
+      "id": "T483-R0640",
+      "line": 1551,
+      "controls": {
+        "r0640-original": "move144 wrong=96 live=0\nnested word start=16 live=0\nnested word start=17 live=0"
+      }
+    },
+    {
+      "id": "T483-R0641",
+      "line": 1557,
+      "controls": {
+        "r0641-original": "move144 wrong=0 live=0\nnested word start=16 live=1\nnested word start=17 live=2"
+      }
+    }
+  ],
+  "baseline": "move144 wrong=0 live=0\nnested word start=16 live=0\nnested word start=17 live=0",
+  "responsibility": "Correct cross-mode destination sequence and caller allocation lifetime.",
+  "source_chain": "evidfunc.c163 -> S_2698; original S_2701 calls it at1946 and must free its frame1956;S_2704 calls it2287 and frees2297. RAM source loop1535-1556 has no callbacks.",
+  "original_inability": "Original compact shift2,stride3,XOR2 cannot preserve shared-plane f(a)=4*(a&~1)+(a&1). Original continuation call creates fresh crules with CopyLocalIUH=0;its terminal cleanup loses saved parent pointer.",
+  "necessity": "R0638 call-only restoration passes144 direct cases yet leaks1parent block for odd nested word move;R0641 restoration passesdirect but leaks1parent block on each nested call. This distinguishes them from restored top-level fillR0634.",
+  "cross_mode_evidence": "r0502-chain2-byte-address-review.json;docs/etc/evidence/m0-t479-s9-delivery.md;prior guest transition observations.",
+  "minimum": "Retain constants and same-activation transfers;no helper,new state,or competing storage path. R0638 stride and control independently demonstrated necessary.",
+  "counter_review": [
+    "Direct-only passing control is inadequate;explicit real original caller exposes lifetime failure.",
+    "Diagnostic allocator delegates CRT;scope144RAM-source cases addresses16..31,count0..8 plus2nested word calls;no full guest/concurrency acceptance.",
+    "Baseline includes already-restoredR0634;no new product edit in this group."
+  ],
+  "line_error": "Current source unchanged by this review;original physical positions retained;no exclusion directives edited.",
+  "diff": "R0637+1/-1;R0638+3/-3;R0639+1/-1;R0640+1/-1;R0641+2/-2;net change0",
+  "decision": "5qualified pending owner,not approved retention."
+}
