@@ -1,0 +1,34 @@
+{
+  "id": "T483-R0345",
+  "scope_before": "+3/-0 excluding #line",
+  "scope_after": "+1/-0",
+  "mirror_diff_delta": -2,
+  "responsibility": "Original INT15 block move calls original XMS A20 wrappers, including HIMEM state.",
+  "original_limitation": "Only xms.486/xms.h declares VOID(void) prototypes; original tape_io lacks them.",
+  "compile_evidence": {
+    "pid": 8720,
+    "current_exit": 0,
+    "without_exit": 0,
+    "without_warnings": [
+      "C4013 xmsDisableA20Wrapping assumed int",
+      "C4013 xmsEnableA20Wrapping assumed int"
+    ],
+    "limit": "Both compile; not a runtime failure claim."
+  },
+  "decision": "Remove two comment lines; remaining original-header include pending decision.",
+  "minimality": "One owner header, no duplicate declarations or shim.",
+  "line_check": {
+    "unique_matches": 146,
+    "mismatches": [],
+    "corrections": [
+      "Restore logical26 after SEGMENTATION excluded body",
+      "Following original endif102 ->103, not100"
+    ]
+  },
+  "error_directives_unchanged": true,
+  "before_sha256": "f1be73cd49cfed2100d716815068467d98b68515687147c4de2eddf65c6c0f46",
+  "after_sha256": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9",
+  "verification": "Final change only comment/diagnostic lines; focused compilation precedes cleanup. No full build or publication claimed.",
+  "final_delivery_receipt": "batch-p31-checkpoint.json",
+  "final_delivery_note": "P31 cached full, publication11x2/hash, focused NIDDB and fresh Full16 passed. Earlier investigation/verification fields describe their recorded checkpoint; post-build whitespace exception is explicit in final receipt."
+}

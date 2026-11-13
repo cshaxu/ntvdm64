@@ -1,0 +1,45 @@
+{
+  "scope": "R0346-R0352 whole-file investigation; no point marked complete by this record",
+  "findings": [
+    {
+      "point": "R0346",
+      "responsibility": "Bridge include supplies independent driver BOP contract; termination include supplies invalid-index failure contract.",
+      "evidence": "insignia-386 instance_byte invokes signature4e544d56/op6 to obtain DOS CDS instance location; original NIDDB switch has no matching operation. MAX_VMS80 table indexed by guest byte; original swap dereferences selected table without validation.",
+      "remaining": "Check coupled callsite minimization; include dependence alone is not necessity proof."
+    },
+    {
+      "point": "R0347",
+      "evidence": "Original virtual.c already calls ClearInstanceDataMarking. Current ntvdm.exe.map binds it to vdd-bindings:mvdm_softpc_vdd_unavailable.obj, which terminates unsupported session. Current companion uses original reboot notification0x17 on shutdown, intentionally avoiding System_Exit5.",
+      "conclusion": "Added declaration does not itself introduce termination behavior; long provenance comment can be removed. Do not conflate declaration proof with proof that unsupported provider is correct."
+    },
+    {
+      "point": "R0348",
+      "evidence": "allocate_NIDDB calloc owns table locally; child allocation failure frees children but original returns without freeing table; vrecs publication only occurs after entire loop succeeds.",
+      "conclusion": "No later owner can free unpublished table; single host_free has direct ownership evidence."
+    },
+    {
+      "points": [
+        "R0349",
+        "R0350"
+      ],
+      "evidence": "All mouse BOP wrappers invoke virtual_swap_instance before data access. Current video-mode and route-change entrypoints also invoke it. Sole selected production NIDDB allocation is mouse_driver_initialisation with null callbacks.",
+      "counter_review": "Existing fixture requires immediate pointer recovery after deletion without invoking original swap boundary. This overconstrains behavior and alone cannot prove deletion recovery necessary.",
+      "next": "Finish actual device-access/callback closure, then compare original deletion plus original swap against valid selected instance transitions. Do not use stale-ID tests to assert immediate restoration requirement."
+    }
+  ],
+  "not_claimed": [
+    "No runtime equivalence or original restoration proved for deletion recovery yet.",
+    "No source mutation or product delivery for virtual.c.",
+    "Old fixture pass/failure is not a supported runtime failure witness."
+  ],
+  "sha256": {
+    "src/mvdm-host/softpc.new/base/bios/virtual.c": "633fc2cd60b8a823beee3ef0e203dcdd62f6ee80c1db1c0e4a9f0113d9b6372e",
+    "src/mvdm-host/softpc.new/base/bios/bios.c": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b",
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": "22fb57843f0dc34d940797b016b3da7f1a635cdfe4249fa015df49b39a7d86d3",
+    "src/ntvdm-exe/softpc/mvdm_vm_notification.c": "d8b843492c84d77fb39812f8af1fc1669e36e63ed5d04012a1b9d829c7740f40",
+    "src/addon/insignia-386/insignia.asm": "d3c2e05139b67a9e43ffecbbc987d7d6d469242b1fef69bd77d4f85e7a4e7a8f",
+    "test/mvdm-host/niddb_object_contract_fixture.c": "afc676bd24ee077470f2d871d12601cbb94ca39459ddd8740a7fab6e0d4ce293"
+  },
+  "final_delivery_receipt": "batch-p31-checkpoint.json",
+  "final_delivery_note": "P31 cached full, publication11x2/hash, focused NIDDB and fresh Full16 passed. Earlier investigation/verification fields describe their recorded checkpoint; post-build whitespace exception is explicit in final receipt."
+}

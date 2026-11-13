@@ -1,0 +1,38 @@
+{
+  "points": {
+    "T483-R0346": "Driver signature4e544d56/op6 in insignia.asm requires directory-instance result; original NIDDB switch has no bridge operation. Termination declaration provides nonreturning failure for byte>=80 or freed record before device access.",
+    "T483-R0347": "Original System_Exit calls ClearInstanceDataMarking; sole current definition is VOID(void) in vdd unavailable provider. Declaration avoids implicit int, not authority for provider semantics. Current companion shutdown sends0x17 and does not use this unavailable call.",
+    "T483-R0348": "Table calloc remains local until successful final vrecs publication. On child allocation failure original frees children but never table; no later owner can free it.",
+    "T483-R0349": "Previous-selection cache unnecessary: device accesses invoke original virtual_swap_instance. Creation/deletion explicitly selects required instance for callbacks.",
+    "T483-R0350": "Restored original deletion. All selected mouse BOPs and host video/route entries select guest instance before access. Existing fixture immediate-pointer assertion was stronger than product contract. System_Exit/Reboot owns snapshot restoration and allocation unlock.",
+    "T483-R0351": "Bridge result is read to marshal status/value/serial registers for actual independent addon BOP requests; original NIDDB EAX control switch cannot supply these operations.",
+    "T483-R0352": "Guest virtualising byte is8-bit; table has80 entries; freed table is null. Original swap indexes/dereferences without checking and equality shortcut can retain stale data. Keep fail-fast validation before device access."
+  },
+  "source_counter_review": "Original invalidates no ownership by leaving pointers between BOPs: original public device access switches first. Null callbacks in actual mouse registration exclude callback reentry for selected consumer; no broader callback ABI equivalence claimed.",
+  "mirror_before": {
+    "added": 58,
+    "deleted": 3,
+    "total": 61
+  },
+  "mirror_after": {
+    "added": 25,
+    "deleted": 3,
+    "total": 28
+  },
+  "mirror_diff_delta": -33,
+  "line_check": {
+    "path": "src\\mvdm-host\\softpc.new\\base\\bios\\virtual.c",
+    "matched_original_lines": 398,
+    "matched_original_line_mismatches": []
+  },
+  "validation": "Local whole-file source complete; final build/publication/runtime pending. Test now validates access boundary rather than immediate pointer recovery.",
+  "exact_original_delete_body": true,
+  "post_build_format": {
+    "before_sha256": "f28dd5f21360e4be0b06ece1f80cbc44232c564fd5930ebf738b76a0b2834352",
+    "after_sha256": "aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622",
+    "change": "Remove sole extra blank before #line526; all nonblank physical lines unchanged; next logical line resets526.",
+    "verification": "Owner-authorized nonbehavior format exception: build and runtime use pre-format bytes; no claim that those bytes were recompiled."
+  },
+  "final_delivery_receipt": "batch-p31-checkpoint.json",
+  "final_delivery_note": "P31 cached full, publication11x2/hash, focused NIDDB and fresh Full16 passed. Earlier investigation/verification fields describe their recorded checkpoint; post-build whitespace exception is explicit in final receipt."
+}

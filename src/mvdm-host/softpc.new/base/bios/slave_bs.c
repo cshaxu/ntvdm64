@@ -105,8 +105,7 @@ void D11_int()
 			mask |= level2;
 			outb( ICA1_PORT_1, mask );
 
-			/* DIVERGENCE(MVDM-HOST-DIV-883): EOI belongs to the
-			 * slave command port; the data port changes its mask. */
+			/* send EOI to 2nd chip		*/
 			outb( ICA1_PORT_0, 0x20 );
 		}
 		/* send EOI to 1st chip	*/

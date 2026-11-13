@@ -144,3 +144,15 @@ P29: [OEM file review](r0278-r0290-oem-file-review.json), [line check](batch-p29
 P30 directory provider: [directory provider review](r0291-directory-provider-review.json).
 
 P30 whole-file: [review](r0291-r0340-oem-process-review.json), [line check](batch-p30-line-check.json), [checkpoint](batch-p30-checkpoint.json).
+
+P31: [BIOS line restoration](r0341-bios-line-review.json).
+
+P31: [Reset continuation call-chain proof](r0342-r0343-reset-call-chain.json).
+
+P31: [Slave EOI minimal-diff review](r0344-slave-eoi-review.json).
+
+P31: [Tape XMS declaration review](r0345-tape-xms-review.json).
+
+P31: [Virtual whole-file investigation](r0346-r0352-virtual-investigation.json) (not a completed disposition).
+
+P31: [Virtual completed source review](r0346-r0352-virtual-review.json); [batch checkpoint](batch-p31-checkpoint.json), [line checks](batch-p31-line-check.json). P31 verified: cached full, publication11x2, focused NIDDB, fresh Full16 and governance; receipt records the post-build blank-line exception.

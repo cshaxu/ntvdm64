@@ -1,0 +1,20 @@
+{
+  "id": "T483-R0344",
+  "path": "src\\mvdm-host\\softpc.new\\base\\bios\\slave_bs.c",
+  "responsibility": "Acknowledge the slave IRQ after masking unexpected interrupt.",
+  "original_failure_evidence": "ica.c odd command address changes IMR; even address value0x20 invokes nonspecific EOI. Original D11 A1h write replaces IMR by0x20 and leaves ISR set. Sibling re_direct/int_287 use A0h.",
+  "historical_runtime": "T478 S34 actual PIC/BIOS object fixture: baseline44 checks/15 failures; fixed74 checks/0 failures. Not a fresh run.",
+  "decision": "Restore original comment; retain one port operand difference pending owner decision.",
+  "scope_before": "+3/-2",
+  "scope_after": "+1/-1",
+  "mirror_diff_delta": -3,
+  "matched_original_lines": 68,
+  "line_mismatches": [],
+  "error_directives_unchanged": true,
+  "source_before_sha256": "4ca609045412255d3e2e12d33261778ea8c0fd422615ba36a3a06bc42dfd7792",
+  "source_after_sha256": "c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140",
+  "verification": "Only comment restored; no executable expression changed. Diagnostic/comment batch accumulates under owner authorization; no new build or publication claimed.",
+  "counter_review": "Do not intercept I/O in adapter or synthetically clear ISR; those duplicate PIC semantics. One constant correction is the smallest functional change.",
+  "final_delivery_receipt": "batch-p31-checkpoint.json",
+  "final_delivery_note": "P31 cached full, publication11x2/hash, focused NIDDB and fresh Full16 passed. Earlier investigation/verification fields describe their recorded checkpoint; post-build whitespace exception is explicit in final receipt."
+}

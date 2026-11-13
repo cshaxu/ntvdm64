@@ -1,0 +1,214 @@
+{
+  "status": "Verified P31 delivery receipt; Git commit/push follows",
+  "source_files": 5,
+  "files": [
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\bios.c",
+      "sha256": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\slave_bs.c",
+      "sha256": "c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\tape_io.c",
+      "sha256": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9"
+    },
+    {
+      "path": "src\\mvdm-host\\softpc.new\\base\\bios\\virtual.c",
+      "sha256": "aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622",
+      "built_sha256": "f28dd5f21360e4be0b06ece1f80cbc44232c564fd5930ebf738b76a0b2834352"
+    },
+    {
+      "path": "test/mvdm-host/niddb_object_contract_fixture.c",
+      "sha256": "cd553ccbbcf884a6ca5f42e3039ca681ced5e963260f8599941303f75f08ea64"
+    }
+  ],
+  "mirror_diff_delta": -38,
+  "diagnostic_directives": "bios stale line removed; tape original line corrections; virtual declaration line reset",
+  "post_build_format": {
+    "before_sha256": "f28dd5f21360e4be0b06ece1f80cbc44232c564fd5930ebf738b76a0b2834352",
+    "after_sha256": "aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622",
+    "change": "Remove sole extra blank before #line526; all nonblank physical lines unchanged; next logical line resets526.",
+    "verification": "Owner-authorized nonbehavior format exception: build and runtime use pre-format bytes; no claim that those bytes were recompiled."
+  },
+  "package": "cf9620ea-3a65-4415-bc71-c9541ab4aee7",
+  "published_images": 11,
+  "destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "hash_verified": true,
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1390,
+      "CleanupMs": 481,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 264,
+      "CleanupMs": 469,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66780,
+      "CleanupMs": 512,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 53387,
+      "CleanupMs": 406,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 44936,
+      "CleanupMs": 473,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 15384,
+      "CleanupMs": 432,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10471,
+      "CleanupMs": 401,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 70012,
+      "CleanupMs": 418,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 13318,
+      "CleanupMs": 503,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 29050,
+      "CleanupMs": 488,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30749,
+      "CleanupMs": 483,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4798,
+      "CleanupMs": 427,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7882,
+      "CleanupMs": 449,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10403,
+      "CleanupMs": 436,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3860,
+      "CleanupMs": 408,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6694,
+      "CleanupMs": 396,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "results": [
+      {
+        "case": "normal",
+        "exit": 0,
+        "expected": 0,
+        "output": "NIDDB_OBJECT_CONTRACT checks=15 failures=0 callbacks=3\nNIDDB_THREE_VM_REUSE active=1 reused=1 callbacks=3 cleanup=1\n"
+      },
+      {
+        "case": "--stale",
+        "exit": 3221226528,
+        "expected": 3221226528,
+        "output": ""
+      },
+      {
+        "case": "--out-of-range",
+        "exit": 3221226528,
+        "expected": 3221226528,
+        "output": ""
+      },
+      {
+        "case": "--active-stale",
+        "exit": 3221226528,
+        "expected": 3221226528,
+        "output": ""
+      }
+    ],
+    "scope": "Real final virtual.obj; controlled CPU, memory and bridge boundaries; not guest execution.",
+    "inputs": {
+      "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_object_contract_fixture.c": "cd553ccbbcf884a6ca5f42e3039ca681ced5e963260f8599941303f75f08ea64",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj": "59e8015cd01bdf5750655f4f2f10eea4f6d5a8e1f455cf986b0ee241f7db71b2",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p31\\niddb\\fixture.exe": "8db587960082cc871c5066c53ca0a8cc422c5d384ca7e65588e6a01d1b9e6c8a",
+      "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\bios\\virtual.c": "f28dd5f21360e4be0b06ece1f80cbc44232c564fd5930ebf738b76a0b2834352"
+    }
+  },
+  "allocation_rollback": {
+    "result": "pass",
+    "exit": 0,
+    "scope": "intercepted object and controlled VxD boundaries, not guest execution",
+    "baseline_control": false,
+    "inputs": [
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_no_retry_fixture.c",
+        "sha256": "c3b2d0cf18c6f4311dfdb0d086d0f9e283f56f138a4e8b9d4ec4a8a4f1b290a1"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_bridge_boundary.h",
+        "sha256": "2759a2f56219fbf1d5f2ce2516a8c6b33ea9045e12b585d6d0c06f488e643fd3"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_vm_bridge.h",
+        "sha256": "ecc3d25e9dc019dff4214d4af48016b6eaa3b3d19f5c7a1af5e60169f1650155"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+        "sha256": "59e8015cd01bdf5750655f4f2f10eea4f6d5a8e1f455cf986b0ee241f7db71b2"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p31\\no-retry\\virtual-intercept.obj",
+        "sha256": "5b0111c3291b730060e660558e8fbeebe700f5631b728836f3fa713da1155c44"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p31\\no-retry\\fixture.exe",
+        "sha256": "67efc6c68c22c1ef2a5c769c06e4ed9958438eb4b515a713411960c8ef7850c7"
+      }
+    ]
+  },
+  "limitations": [
+    "Controlled NIDDB fixture is not full guest VMM scheduling.",
+    "Full16 is declared suite, not exhaustive Win3.x gameplay.",
+    "Absent external DOS4GW/NESticle fixtures remain skips where reported."
+  ],
+  "runtime": "Fresh P31 Full16 passed; no reuse."
+}

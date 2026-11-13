@@ -1,0 +1,18 @@
+{
+  "id": "T483-R0341",
+  "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "decision": "Restore structural line progression; remove stale #line630",
+  "scope": "+1/-0 diagnostic directive ->0",
+  "source_tokens_unchanged": true,
+  "error_directives_unchanged": true,
+  "matched_original_lines": 284,
+  "mismatches": [],
+  "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+  "before_sha256": "ef9629e07f4ecd78ede30985f1b8fa4dc31c0e6981a9b2f3fe54afcdfeb76987",
+  "after_sha256": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b",
+  "initial_review": "Added directive follows original677 but incorrectly resets630.",
+  "counter_review": "Next excluded non-PROD body resets682; no selected execution change. Preserve all exclusions.",
+  "verification": "Non-#line bytes unchanged. Pure diagnostic restoration may accumulate; no new binary/runtime claim.",
+  "final_delivery_receipt": "batch-p31-checkpoint.json",
+  "final_delivery_note": "P31 cached full, publication11x2/hash, focused NIDDB and fresh Full16 passed. Earlier investigation/verification fields describe their recorded checkpoint; post-build whitespace exception is explicit in final receipt."
+}

@@ -1,0 +1,42 @@
+{
+  "points": [
+    "T483-R0342",
+    "T483-R0343"
+  ],
+  "kind": "source-call-chain evidence; not runtime acceptance",
+  "responsibility": "Reset shutdown 9 restores saved continuation; shutdown 0A transfers to supplied CS:IP. The continuation is not a BOP address.",
+  "original_limitation": "Original host_def.h and current host_def.h define HOST_BOP_IP_FUDGE=-2. Original reset.c applies it to both continuation values under !CPU_30_STYLE.",
+  "selected_chain": [
+    "CCPU c_main.c C4 BOP decodes operand and calls UPDATE_INTEL_IP before bop",
+    "bios.h bop(n) directly invokes BIOS[n]; bios.c BIOS[0] is reset",
+    "reset.c reads saved continuation, invokes setIP and returns",
+    "cpu4gen.h setIP maps to c_setIP; c_reg.c c_setIP directly SET_EIP(val)",
+    "After bop returns c_main.c calls CANCEL_HOST_IP, invalidating cached instruction pointer; SETUP_HOST_IP derives next fetch from GET_CS_BASE()+GET_EIP()"
+  ],
+  "specific_counterexample": "For supplied continuation T, reinstating the original arithmetic produces T-2. The inspected BOP-return path has no post-call +2 correction. This changes the requested reset continuation, rather than merely adapting a local helper dependency.",
+  "guest_source_corroboration": "dxutil.asm supplies enrm50 (saved IRET) and enrm45 (direct jump), both ordinary FCLI label entries. This is source corroboration, not proof that current immutable guest binaries exercised these labels.",
+  "limits": [
+    "No runtime reproduction of either reset continuation is claimed. T404 P14 explicitly did not reach those continuations.",
+    "No new build or runtime test; reset.c unchanged."
+  ],
+  "sha256": {
+    "src/mvdm-host/softpc.new/base/bios/reset.c": "408dfbee8fb31878424df9a20a24e6a69847d006eedb6e948d93872c387c9ac8",
+    "src/mvdm-host/softpc.new/base/bios/bios.c": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b",
+    "src/mvdm-host/softpc.new/base/inc/bios.h": "0afbf13726fcd1bbb2dfeac33ac3465f465c327227e5cdeef771d9e89c982c53",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": "99e2e407b9b3cfaceb3da672d049e87a6a83d887be2108580a004236d8d59a40",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h": "f2bc102075e0624cfe95a040c0608d97df5a8a198a0c0d08bf0271a71207b93a",
+    "src/mvdm-host/softpc.new/host/inc/host_def.h": "6eeac8f78a2d2b6928b372da0def9b9455ab1e0fa5e42cce63afc185f0b2eff7",
+    "src/mvdm-guest/dpmi/dxutil.asm": "c87933e2da13cd0aa87e9acf74dea8254af83672d4447624c3a775fb03730016"
+  },
+  "disposition": "Source-qualified residuals pending owner decision; no source change",
+  "whole_file_line_check": {
+    "unique_original_matches": 350,
+    "mismatches": []
+  },
+  "minimality": "Keep original outer CPU_30_STYLE conditional, CPU40 exclusion and rejected-profile #error. Combining outer conditions loses original structure; moving adjustment to an adapter only transfers complexity.",
+  "current_scope_per_point": "+3/-1 excluding #line; historical +4 included diagnostic directive",
+  "mirror_diff_delta": 0,
+  "final_delivery_receipt": "batch-p31-checkpoint.json",
+  "final_delivery_note": "P31 cached full, publication11x2/hash, focused NIDDB and fresh Full16 passed. Earlier investigation/verification fields describe their recorded checkpoint; post-build whitespace exception is explicit in final receipt."
+}

@@ -40,17 +40,13 @@
 #include "bios.h"
 #include "virtual.h"
 #include "mvdm_softpc_termination.h"
-#include "mvdm_vm_bridge.h" /* MVDM-HOST-DIV-870 */
+#include "mvdm_vm_bridge.h"
 #line 36
 #include "error.h"
 #include "debug.h"
 
-/* DIVERGENCE MVDM-HOST-DIV-087: the selected SoftPC patch retains this
- * original VM-instance lifecycle hook, but its historical header carrier is
- * absent from the split source layout.  Publish its exact void contract at
- * the original call boundary; the patch provider and System_Exit ordering are
- * unchanged. */
 extern VOID ClearInstanceDataMarking(VOID);
+#line 38
 
 /*
    This file implements the Non-Intel Driver Data Block (NIDDB) Manager. This 
@@ -422,7 +418,6 @@ LOCAL IBOOL allocate_NIDDB IFN2
 		  host_free(*p);
 	       }
 
-	    /* DIVERGENCE MVDM-HOST-DIV-468: the unpublished table is ours. */
 	    host_free((IHP)instance_ptr);
 #line 408
 	    return FALSE;
@@ -515,7 +510,6 @@ LOCAL void delete_NIDDB IFN1
    {
    int i;
    IHP *instance_ptr;
-   IU8 previous_virtual_byte = last_virtual_byte;
 
    /* Ensure instance is active (for terminate callback). */
 #line 500
@@ -545,30 +539,6 @@ LOCAL void delete_NIDDB IFN1
    /* Initialise virtual record entry */
    vrecs[record_id].vr_pinst_tbl = (IHP *)0;
    vrecs[record_id].vr_inst_handle = (IU32)0;
-
-   /* DIVERGENCE MVDM-HOST-DIV-467: the termination callback must run with
-      the retiring instance active, but its freed data must not remain in
-      master_ptrs. Restore the previously active instance if it survived. */
-   if (previous_virtual_byte != record_id && previous_virtual_byte < MAX_VMS &&
-       vrecs[previous_virtual_byte].vr_pinst_tbl != (IHP *)0)
-      {
-      swap_NIDDB(previous_virtual_byte);
-      return;
-      }
-   {
-      IU8 selected;
-      sas_load(BIOS_VIRTUALISING_BYTE, &selected);
-      if (selected < MAX_VMS && vrecs[selected].vr_pinst_tbl != (IHP *)0)
-         {
-         swap_NIDDB(selected);
-         return;
-         }
-   }
-   /* A system-exit or reboot notification will unlock allocations after
-      restoring the snapshot. Until then, keep the pointers valid. */
-   for (i = 0; i < MAX_INSTANCES; ++i)
-      master_ptrs[i] = snapshot_ptrs[i];
-   last_virtual_byte = (IU8)0xff;
 #line 526
    }
 
@@ -880,8 +850,6 @@ virtual_swap_instance IFN0()
    /* read virtualising byte and compare with current ID */
    sas_load(BIOS_VIRTUALISING_BYTE, &current_virtual_byte);
 
-   /* A stale or invalid guest identity cannot authorize access to any other
-      instance. Fail before dereferencing its record or executing a device. */
    if (current_virtual_byte >= MAX_VMS ||
        vrecs[current_virtual_byte].vr_pinst_tbl == (IHP *)0)
       mvdm_softpc_invalid_virtual_instance(current_virtual_byte);

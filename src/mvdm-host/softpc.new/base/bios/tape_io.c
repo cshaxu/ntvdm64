@@ -19,6 +19,7 @@
 #ifdef SEGMENTATION
 #line 20
 #error Excluded unsupported SEGMENTATION configuration
+#line 26
 #endif
 
 /*
@@ -34,8 +35,6 @@
 #include "xt.h"
 #include CpuH
 #include "sas.h"
-/* DIVERGENCE(MVDM-HOST-DIV-085): preserve the original XMS-mediated A20
- * transition by consuming the original XMS interface contract directly. */
 #include "xms.h"
 #line 40
 #include "ios.h"
@@ -111,7 +110,7 @@ half_word target_AR;
 #line 101
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
-#line 100
+#line 103
         /*
          *	Determine function
          */

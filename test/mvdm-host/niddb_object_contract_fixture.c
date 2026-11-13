@@ -91,9 +91,10 @@ static int verify_three_vm_reuse(void)
     reuse_seen = 0;
     control(11, 100);
     if (errors || reuse_seen != 1u) return 2;
-    /* Compare identity only; the retired allocation must not be read. */
+    /* Device access selects the guest VM through the original BOP boundary. */
+    virtual_swap_instance();
     if ((uintptr_t)*instance != active) {
-        puts("FAIL: retiring an inactive VM did not preserve the active instance");
+        puts("FAIL: device boundary did not select the surviving active instance");
         return 1;
     }
     replacement_id = control(9, 400);
@@ -151,8 +152,9 @@ int main(int argc, char **argv)
         return 3; /* Invalid identity must not return to a device caller. */
     }
     if (argc != 1) return 2;
+    virtual_swap_instance();
     if ((uintptr_t)*instance != system_address) {
-        printf("FAIL: retiring inactive child changed master pointer to retired instance\n");
+        printf("FAIL: device boundary selected retired instance\n");
         control(5, 100);
         NIDDB_Deallocate_Instance_Data(instance);
         return 1;
@@ -164,19 +166,20 @@ int main(int argc, char **argv)
     expected_termination = child_address;
     control(11, 201);
     if (errors || termination_count != 2) return 2;
+    virtual_swap_instance();
     if ((uintptr_t)*instance != system_address || ((unsigned char *)*instance)[0] != 0x22) {
-        puts("FAIL: retiring active child did not select surviving system instance");
+        puts("FAIL: device boundary did not select surviving system instance");
         return 1;
     }
     expected_termination = system_address;
     control(11, 100);
     if (errors || termination_count != 3) return 2;
+    if (!NIDDB_is_active()) return 1;
+    control(5, 100); /* Original System_Exit restores the snapshot. */
     if ((uintptr_t)*instance != snapshot_address || ((unsigned char *)*instance)[0] != 0x11) {
-        puts("FAIL: retiring last instance did not restore snapshot pointers");
+        puts("FAIL: System_Exit did not restore snapshot pointers");
         return 1;
     }
-    if (!NIDDB_is_active()) return 1;
-    control(5, 100);
     if (NIDDB_is_active() || (uintptr_t)*instance != snapshot_address) return 1;
     NIDDB_Deallocate_Instance_Data(instance);
     printf("NIDDB_OBJECT_CONTRACT checks=15 failures=0 callbacks=%u\n", termination_count);

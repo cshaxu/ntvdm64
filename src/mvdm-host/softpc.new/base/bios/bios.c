@@ -724,7 +724,6 @@ void (*BIOS[])() = {
 			   we only have a byte quantity */
 		};
 #endif /* MAC_LIKE */
-#line 630
 
 
 
