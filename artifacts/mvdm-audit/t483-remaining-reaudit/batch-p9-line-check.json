@@ -1,0 +1,32 @@
+[
+  {
+    "file": "src\\mvdm-host\\dos\\dem\\dem.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true
+  },
+  {
+    "file": "src\\mvdm-host\\dos\\dem\\dem.h",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true
+  },
+  {
+    "file": "src\\mvdm-host\\dos\\dem\\demdata.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true
+  },
+  {
+    "file": "src\\mvdm-host\\dos\\dem\\demfcb.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true
+  },
+  {
+    "file": "src\\mvdm-host\\dos\\dem\\demgset.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true
+  },
+  {
+    "file": "src\\mvdm-host\\dos\\dem\\demsrch.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true
+  }
+]

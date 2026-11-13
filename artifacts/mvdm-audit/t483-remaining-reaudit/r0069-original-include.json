@@ -1,0 +1,12 @@
+{
+  "id": "T483-R0069",
+  "decision": "restore-original",
+  "proof": "Original ntdddisk.h include compiled with actual obj/dem/dem.obj flags; modern SDK winioctl.h defines _NTDDDISK_H_. No original failure demonstrated.",
+  "probe": "build/t483-s5-dem-header/probe-r2.stdout",
+  "exit": 0,
+  "mirror_diff_delta": -2,
+  "line_proof": "One blank line replaced by original include at logical56; no line count change, #error unchanged.",
+  "verification": "Isolated restored-header compile only. Complete-file batch delivery pending.",
+  "source_sha256": "febdb645ed47b95ba4a11cb9fbce7ef7d20456b54092f1c0c746b35db74f95ec",
+  "correction": "Initial probe and edit hit commented preamble and did not prove target. Corrected restoration in WIN_32 arm; r2 compile exit0 and include log confirms actual SDK ntdddisk.h."
+}

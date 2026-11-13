@@ -5,41 +5,38 @@ param([Parameter(Mandatory)][string]$RuntimeRoot,
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
-$runtime=(Resolve-Path $RuntimeRoot).Path
+$package=(Resolve-Path $RuntimeRoot).Path
 $observerPath=(Resolve-Path $Observer).Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
     (Test-Path $out)){throw 'Require a fresh build directory'}
-if(Test-Path Z:\){throw 'Z: already in use'}
-$scope=New-IsolatedPackageScope $runtime
-$owned=Join-Path $runtime 'tests/DFCB01'
-if(Test-Path $owned){throw 'Guest directory already exists; cannot claim ownership'}
-New-Item -ItemType Directory $out | Out-Null
-New-Item -ItemType Directory $owned | Out-Null
-$probe=Join-Path $out 'FCBTEST.COM'
-& nasm -f bin "$PSScriptRoot/../observation/dem_fcb_probe.asm" -o $probe
-if($LASTEXITCODE){throw 'Guest probe assembly failed'}
-Copy-Item $probe (Join-Path $owned 'FCBTEST.COM')
-foreach($name in @('AAA.TST','BBB.TST','CCC.TST')){
-    [IO.File]::WriteAllText((Join-Path $owned $name),'AB',[Text.Encoding]::ASCII)
-}
-$mapped=$false
+$runtime=$null
+$scope=$null
 $savedPath=$env:PATH
 $savedDesktop=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $savedMilestone=$env:MVDM_OBSERVER_MILESTONE_INPUT
 try{
-    & subst.exe Z: $runtime
-    if($LASTEXITCODE){throw 'SUBST failed'}
-    $mapped=$true
-    $scope=New-IsolatedPackageScope $runtime 'Z:\'
-    $env:PATH='Z:\system32;'+(Join-Path $env:SystemRoot 'System32')
+    $runtime=New-PhysicalRuntimeStage $package
+    $scope=New-IsolatedPackageScope $runtime
+    $owned=Join-Path $runtime 'tests/DFCB01'
+    if(Test-Path $owned){throw 'Guest directory already exists; cannot claim ownership'}
+    New-Item -ItemType Directory $out | Out-Null
+    New-Item -ItemType Directory $owned | Out-Null
+    $probe=Join-Path $out 'FCBTEST.COM'
+    & nasm -f bin "$PSScriptRoot/../observation/dem_fcb_probe.asm" -o $probe
+    if($LASTEXITCODE){throw 'Guest probe assembly failed'}
+    Copy-Item $probe (Join-Path $owned 'FCBTEST.COM')
+    foreach($name in @('AAA.TST','BBB.TST','CCC.TST')){
+        [IO.File]::WriteAllText((Join-Path $owned $name),'AB',[Text.Encoding]::ASCII)
+    }
+    $env:PATH=(Join-Path $runtime 'system32')+';'+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
     $report=Join-Path $out 'guest.txt'
     $start=[Diagnostics.ProcessStartInfo]::new()
     $start.FileName=$observerPath; $start.UseShellExecute=$false; $start.CreateNoWindow=$true
     foreach($arg in @((Join-Path $runtime 'system32/run16.exe'),$owned,$report,'--wait',
-        'Z:\tests\DFCB01\FCBTEST.COM',
+        (Join-Path $owned 'FCBTEST.COM'),
         '--observation-timeout-ms','20000')){
         $start.ArgumentList.Add($arg)
     }
@@ -68,21 +65,17 @@ try{
         Copy-Item $trace (Join-Path $out 'TRACE.BIN')
         [pscustomobject]@{result='PASS';elapsed_ms=$clock.ElapsedMilliseconds;
             names=$names;probe_exit=37;probe_sha256=(Get-FileHash $probe).Hash;
-            scope='Actual INT21 FCB first/next/end/missing + direct receipt 37; forced idle/mutation restart covered by provider fixture only'
+            scope='Actual INT21 FCB first/next/end/missing + direct receipt 37; no FCB read/write or mapping-change assertion'
         } | ConvertTo-Json | Set-Content (Join-Path $out 'result.json')
         Write-Output 'DEM-FCB-GUEST-PASS: 3 unique names, EOF and missing FF, direct receipt 37'
     }finally{$p.Dispose()}
 }finally{
-    try{Stop-IsolatedPackageScope $scope}finally{
-        if($mapped){& subst.exe Z: /d}
+    try{
+        if($scope){Stop-IsolatedPackageScope $scope}
+    }finally{
         $env:PATH=$savedPath
         [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP',$savedDesktop)
         [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_MILESTONE_INPUT',$savedMilestone)
+        if($runtime){Remove-PhysicalRuntimeStage $runtime}
     }
-    # Only the five exact fixture-created paths, never recursive/glob cleanup.
-    foreach($name in @('AAA.TST','BBB.TST','CCC.TST','FCBTEST.COM','TRACE.BIN')){
-        $file=Join-Path $owned $name
-        if(Test-Path $file){Remove-Item -LiteralPath $file}
-    }
-    Remove-Item -LiteralPath $owned
 }

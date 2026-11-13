@@ -70,7 +70,7 @@ org 100h
 fail:
     mov ax, 4c63h
     int 21h
-dirname db 'Z:\tests\DFCB01',0
+dirname db '.',0
 trace db 'TRACE.BIN',0
 passed db 'DEM-FCB-PASS',13,10,'$'
 fcb db 0,'????????','TST'

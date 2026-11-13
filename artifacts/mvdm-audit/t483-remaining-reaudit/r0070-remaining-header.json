@@ -1,0 +1,18 @@
+{
+  "point": "T483-R0070",
+  "decision": "pending-owner-decision",
+  "scope": "Only explicit type dependency for unchanged current_pdb_location and sft_head_location; DTA no longer uses header. Those pre-existing closed adaptations are outside current re-audit population.",
+  "evidence": "dem.h remaining extern mvdm_guest_location declarations require definition from mvdm_guest_location.h; no direct or transitive definition in original dem.h dependencies.",
+  "minimum": "Single explicit include. No wrapper/new implementation.",
+  "limits": "Not evidence of necessity of the pre-existing PDB/SFT adaptations themselves; no new approval claimed.",
+  "line_checks": [
+    {
+      "file": "src\\mvdm-host\\dos\\dem\\dem.h",
+      "line_resets": 5
+    },
+    {
+      "file": "src\\mvdm-host\\dos\\dem\\demsrch.c",
+      "line_resets": 15
+    }
+  ]
+}

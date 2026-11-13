@@ -1,0 +1,34 @@
+{
+  "point": "T483-R0071",
+  "decision": "restore-original",
+  "files": [
+    {
+      "path": "src\\mvdm-host\\dos\\dem\\dem.h",
+      "before": "febdb645ed47b95ba4a11cb9fbce7ef7d20456b54092f1c0c746b35db74f95ec",
+      "after": "7b35bcbb58488399b7866e23ef744b35c9001c22ba4d32b33e92dd0d8b270282"
+    },
+    {
+      "path": "src\\mvdm-host\\dos\\dem\\demdata.c",
+      "before": "5b2fd3c7b176bc1454024f8df734145be547fa63d843e1b7d79d5b401daf2398",
+      "after": "1956ad545a18eb140575df55423f3386094fee11d360ccc43b16d25fdd5034dd"
+    },
+    {
+      "path": "src\\mvdm-host\\dos\\dem\\demgset.c",
+      "before": "d299f6affe341aa818684aa1b883fff4f4c0a4ac23a3b0760a804b62a25483a3",
+      "after": "18bf89d44a3bff6b90b89463edd467bd13d701937e8c4ed2d5896e31e40d10e2"
+    },
+    {
+      "path": "src\\mvdm-host\\dos\\dem\\demsrch.c",
+      "before": "626330bb01b34df705e815d3f7deb00ef85c77d2257743c43a07b160b6612f65",
+      "after": "46f4252844a5d204fa8330ce3200b6eb3f3a56578e0188b2852c3dde3ebc297b"
+    },
+    {
+      "path": "src\\mvdm-host\\dos\\dem\\demfcb.c",
+      "before": "c2c6aad56b3d96860dbc74430757240b4dcb10192f8ef5e54a1ebcbdd6ebccdb",
+      "after": "42a352987e66ccbfb37bb8695281a4ad2aa6b1157cbf7a63209bb2226957d2e0"
+    }
+  ],
+  "proof": "Original registration msinit.asm DS:AX DMAADD shares DOSDATA startup notification; no concrete original failure established. Original DTA consumers recovered together, including flush/free.",
+  "scope": "DTA only; pre-existing current PDB/SFT/DOSWOW directory adaptations untouched.",
+  "verification": "Local implementation; source line checks and full delivery pending."
+}

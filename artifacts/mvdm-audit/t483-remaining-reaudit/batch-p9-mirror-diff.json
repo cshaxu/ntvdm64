@@ -1,0 +1,74 @@
+[
+  {
+    "path": "src/mvdm-host/dos/dem/dem.c",
+    "before": [
+      9,
+      8
+    ],
+    "after": [
+      4,
+      8
+    ],
+    "delta": -5
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/dem.h",
+    "before": [
+      19,
+      19
+    ],
+    "after": [
+      15,
+      17
+    ],
+    "delta": -6
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demdata.c",
+    "before": [
+      8,
+      3
+    ],
+    "after": [
+      5,
+      2
+    ],
+    "delta": -4
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demfcb.c",
+    "before": [
+      24,
+      6
+    ],
+    "after": [
+      0,
+      0
+    ],
+    "delta": -30
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demgset.c",
+    "before": [
+      36,
+      6
+    ],
+    "after": [
+      33,
+      5
+    ],
+    "delta": -4
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demsrch.c",
+    "before": [
+      79,
+      64
+    ],
+    "after": [
+      47,
+      60
+    ],
+    "delta": -36
+  }
+]

@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-177 points have a prior or current review record:73 restored/verified/published,
-0 local restorations pending verification,2 approved retain,16 qualified pending
-decisions and86 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is11/365;354 remain.
+177 points have a prior or current review record:89 restored/verified/published,
+0 local restorations pending verification,2 approved retain,19 qualified pending
+decisions and67 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is13/365;352 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -69,14 +69,14 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P8 package `e1f2f783-1b92-46c8-9cd3-4b1f494e7b6b` is published to
-assets/release and O:/winnt/system32; all11 image hashes match.
-Cached full build, command fixtures, actual original-object pipe input/output
-and exit tests, Full16 and governance passed. DOS4GW/NESticle is explicitly
-skipped for absent external fixtures. This record accompanies the P8 commit;
-remote confirmation follows commit creation. No guest or winnt.zip changes.
-See [P8 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p8-checkpoint.json).
-S5 remains active; next ordered point is R0067 in dem.c.
+P9 package `7e6012d6-3ad4-45e8-a7ba-44e775b12e55` is published to
+assets/release and O:/winnt/system32; all11 image hashes match at both targets.
+Cached full build, command fixtures, FCB guest enumeration and Full16 passed.
+DOS4GW/NESticle is explicitly skipped for absent external fixtures. This record
+accompanies the P9 commit; remote confirmation follows commit creation.
+No original guest or winnt.zip changes.
+See [P9 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-checkpoint.json).
+S5 remains active; next ordered point is R0072.
 
 ## Remaining Scope
 
@@ -142,24 +142,37 @@ The owner's consolidated [17 execution rules](../rules/EXECUTION.md#original-fir
 now govern this packet, superseding earlier minimization-approval restrictions.
 Residual minimized differences remain pending; final-code verification is required.
 
-Read-only follow-on review R0037/R0038 confirmed product keyboard-resource
-location differs from both Windows system directories. The unchanged include
-and directory call remain pending owner decisions; no new build is triggered.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0037-r0038-requalification.json).
+## Current P9 Batch
 
-Current file cmdmisc.c (R0039-R0061) has23 definite dispositions:
-19 restored and verified in P5/P7, and4 evidence-qualified owner
-decisions. R0039 is restored, not unresolved. Its mirror diff is +53/-63,
-down149 from entry (+182/-83), excluding #line and normalizing newlines.
-The6 coupled mirror files reduce original-relative differences by205 lines.
-cmdpif.c and nt_fdisk.h now match original bytes; demmisc.c retains only
-excluded-branch differences. Original-matched code line checks have no
-mismatches and #error bodies are unchanged. Later coupled files are not
-counted as completed sequential audits. cmdpif.c is now fully checked byte-identical; current ordered point is R0064 in cmdredir.c.
-The first P7 build missed the original pFDAccess definition and failed linking;
-r2 corrected that insertion and passed. The failed attempt was never published.
+P8 `8d4f8a5ef` was pushed and remote-verified with a clean worktree.
+P9 handles dem.c comment-only minimization and dem.h original-first review,
+including the coupled DTA declaration/definition/registration/search/FCB chain.
+R0067/R0068 remain qualified package-directory decisions; R0070 remains an
+explicit type dependency for unchanged closed-scope PDB/SFT declarations.
+R0069 restores the actual WIN_32 ntdddisk.h include. Its first probe hit the
+commented preamble and was invalid; the corrected r2 probe passes and logs
+the actual SDK header. R0071 restores the original DTA cohort, including
+original Sim32FlushVDMPointer/Sim32FreeVDMPointer calls. No guest changes.
 
-R0064 cmdredir.c is restored byte-exact. Its13 added difference lines are
-removed. Original-source compilation, original native API imports and real
-pipe tests support restoration. P8 completes build/publication/verification;
-the accompanying commit completes the Git delivery record.
+Six mirror files now reduce original-relative diff by85 lines, excluding
+#line and normalizing newlines. demfcb.c has no remaining normalized diff.
+All6 matched-original code-line checks pass and all #error bodies are unchanged.
+The first P9 candidate built but the publication guard rejected a logical-line
+mismatch; it was not published or runtime-tested. Corrected r2 passed cached
+full build, both-location publication, Full16 and the actual FCB enumeration
+probe. Package `7e6012d6-3ad4-45e8-a7ba-44e775b12e55` has11 matching images in
+assets/release and O:\winnt\system32. DOS4GW/NESticle remains explicitly skipped
+without external fixtures. FCB record read/write and remapping are not claimed
+covered by the enumeration probe. The runner now uses the existing owned short
+physical stage instead of SUBST; its authored COM uses the working directory.
+
+P9 source, tests, release artifacts, register and evidence are one Git delivery.
+Progress:13/365 sequential files complete;2720 points:89 restored and verified,
+0 local restores pending,2 approved retains,19 qualified decisions,67 historical
+backlog items requiring requalification,2543 unreviewed. Later coupled edits do
+not count as sequential file completion. S5 remains active; next point R0072.
+
+See [P9 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-checkpoint.json),
+[line check](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-line-check.json),
+[diff metrics](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-mirror-diff.json),
+and [DTA restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0071-dta-restoration.json).

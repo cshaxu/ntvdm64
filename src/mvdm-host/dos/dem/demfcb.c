@@ -448,9 +448,6 @@ PVOID   pBuf;
 DWORD	dwBytesIO;
 DWORD	dwSize,dwSizeHigh;
 DWORD	dwErrCode;
-mvdm_guest_location_lease dtaLease;
-BOOL dtaWrite;
-#line 451
 
     hFile = GETHANDLE (getAX(),getBP());
     CurOffset = (((ULONG)getDI()) << 16) + (ULONG)getDX();
@@ -463,19 +460,8 @@ BOOL dtaWrite;
         return ;
     }
 
-    /* DIVERGENCE MVDM-HOST-DIV-005: the original DTA is reached through a
-     * retained native pointer.  Lease its current far address only for this
-     * FCB I/O operation. */
-    dtaWrite = getBX() ? TRUE : FALSE;
-    if (!mvdm_guest_location_acquire_far(&dta_location, getCX(),
-        dtaWrite ? (GUEST_MEMORY_ACCESS_READ | GUEST_MEMORY_ACCESS_WRITE) :
-        GUEST_MEMORY_ACCESS_READ, &dtaLease)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        demClientError(hFile, (CHAR)-1);
-        return;
-    }
-    pBuf = dtaLease.bytes;
-#line 465
+    pBuf = (PVOID)GetVDMAddr(*((PUSHORT)pulDTALocation + 1),
+                              *((PUSHORT)pulDTALocation));
 
     if(getBX()) {	// Read Operation
 	if (ReadFile (hFile,
@@ -484,12 +470,13 @@ BOOL dtaWrite;
 		      &dwBytesIO,
 		      NULL) == FALSE){
 
-            if (!mvdm_guest_location_release(&dtaLease, TRUE))
-                SetLastError(ERROR_INVALID_ADDRESS);
+            Sim32FlushVDMPointer(*pulDTALocation, getCX(), pBuf, FALSE);
+            Sim32FreeVDMPointer(*pulDTALocation, getCX(), pBuf, FALSE);
             demClientError(hFile, (CHAR)-1);
             return ;
 	}
-#line 480
+        Sim32FlushVDMPointer (*pulDTALocation, getCX(),pBuf, FALSE);
+        Sim32FreeVDMPointer (*pulDTALocation, getCX(), pBuf, FALSE);
     }
     else {
 	if (WriteFile (hFile,
@@ -502,9 +489,6 @@ BOOL dtaWrite;
 	// AX = 1 and CF = 1
 
 	    dwErrCode = GetLastError();
-
-            (void)mvdm_guest_location_release(&dtaLease, FALSE);
-#line 492
 	    if(dwErrCode == ERROR_DISK_FULL) {
 
 		setCX( (USHORT) dwBytesIO);
@@ -519,13 +503,6 @@ BOOL dtaWrite;
 	    return ;
 
 	}
-    }
-
-    if (!mvdm_guest_location_release(&dtaLease, dtaWrite)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        demClientError(hFile, (CHAR)-1);
-        return;
-#line 506
     }
 
     // Get File Size

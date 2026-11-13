@@ -35,6 +35,7 @@
 #ifdef OS2_32
 #line 33
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
+#line 35
 #endif
 #line 36
 
@@ -48,6 +49,7 @@
 #ifdef WIN_16
 #line 45
 #error Unsupported excluded original DEM host configuration
+#line 47
 #endif
 #line 48
 
@@ -58,7 +60,7 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include <nturtl.h>
-
+#include <ntdddisk.h>
 #else
 #line 58
 #error Unsupported excluded original DEM host configuration
@@ -89,6 +91,7 @@
 #ifdef OS2_32
 #line 80
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
+#line 82
 #endif
 #line 83
 #define SIGHIT(flChk)   ((iSigCheck++ & 0x7FF)?(flSignals & (flChk)):(kbhit(),(flSignals & (flChk))))
@@ -129,11 +132,11 @@ typedef struct _DISKINFO {
 
 
 
+#line 120
 /** DEM Externs **/
 
-/* DIVERGENCE MVDM-HOST-DIV-005: the original x86 pointer identifies a
- * four-byte guest far-address cell; it is retained numerically. */
-extern mvdm_guest_location dta_location;
+#line 122
+extern ULONG  UNALIGNED *pulDTALocation;
 #line 123
 extern BOOL   VDMForWOW;
 extern PVHE   pHardErrPacket;
@@ -261,6 +264,7 @@ VOID demPipeFileEOF	    (VOID);
 #if DBG
 #line 241
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 244
 #else
 #line 245
 

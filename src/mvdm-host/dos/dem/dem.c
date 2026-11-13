@@ -8,6 +8,7 @@
 #include "dem.h"
 #include "mvdm_softpc_firmware.h"
 
+#line 10
 /* DemInit - DEM Initialiazation routine. (This name may change when DEM is
  *	     converted to DLL).
  *
@@ -45,11 +46,6 @@ BOOL DemInit (int argc, char *argv[])
     SetErrorMode (SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 
     pszDefaultDOSDirectory =  (PCHAR) malloc(MAX_PATH+14);
-    /* DIVERGENCE(MVDM-HOST-DIV-154): bind the original NT4 system directory
-     * to this product's immutable root/system32. Preserve
-     * the original caller-owned directory buffer and every later DEM path
-     * operation; obtain only its initial directory through the established
-     * session media binding. */
 #line 43
     if (!pszDefaultDOSDirectory ||
         !(dw = NtvdmGetSystemDirectoryA(pszDefaultDOSDirectory, MAX_PATH)) ||
@@ -78,6 +74,7 @@ BOOL DemInit (int argc, char *argv[])
 #if DBG
 #line 67
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 73
 #endif
 #line 74
 

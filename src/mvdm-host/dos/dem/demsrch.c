@@ -243,45 +243,21 @@ FreeFFindList(
  *
  */
 
-/* DIVERGENCE MVDM-HOST-DIV-005: the DTA address cell and the DTA itself are
- * guest memory.  Recover both as short-lived leases; never retain the native
- * pointer that historical Sim32 exposed. */
-static BOOL demAcquireSearchDta(mvdm_guest_location_lease *lease)
-{
-    mvdm_guest_location dta;
-
-    return mvdm_guest_location_read_far(&dta_location, &dta) &&
-        mvdm_guest_location_acquire(&dta, sizeof(SRCHDTA),
-            GUEST_MEMORY_ACCESS_READ | GUEST_MEMORY_ACCESS_WRITE, lease);
-}
-
+#line 240
 #line 240
 VOID demFindFirst (VOID)
 {
     DWORD dwRet;
     PVOID pDta;
-    mvdm_guest_location_lease dtaLease;
 
 
-#line 246
     LPSTR lpFile = (LPSTR) GetVDMAddr (getDS(),getDX());
 
-    if (!demAcquireSearchDta(&dtaLease)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        demClientError(INVALID_HANDLE_VALUE, *lpFile);
-        return;
-    }
-    pDta = dtaLease.bytes;
+    pDta = (PVOID) GetVDMAddr (*((PUSHORT)pulDTALocation + 1),
+                               *((PUSHORT)pulDTALocation));
 
-#line 251
     dwRet = demFileFindFirst (pDta, lpFile, getCX());
 
-    if (!mvdm_guest_location_release(&dtaLease, TRUE)) {
-        SetLastError(ERROR_INVALID_ADDRESS);
-        dwRet = (DWORD)-1;
-    }
-
-#line 253
     if (dwRet == -1) {
         dwRet = GetLastError();
         demClientError(INVALID_HANDLE_VALUE, *lpFile);
@@ -297,6 +273,8 @@ VOID demFindFirst (VOID)
     return;
 
 }
+#line 267
+
 
 
 DWORD demFileFindFirst (
@@ -314,6 +292,7 @@ DWORD demFileFindFirst (
 #if DBG
 #line 283
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 295
 #endif
 #line 296
 
@@ -426,26 +405,17 @@ BOOL DemOemToUni(PUNICODE_STRING pUnicode, LPSTR lpstr)
  *      Client (CF) = 1
  *      Client (AX) = Error Code
  */
+#line 406
 VOID demFindNext (VOID)
 {
     DWORD dwRet;
     PVOID pDta;
-    mvdm_guest_location_lease dtaLease;
 
-    if (!demAcquireSearchDta(&dtaLease)) {
-        setAX(ERROR_INVALID_ADDRESS);
-        setCF(1);
-        return;
-    }
-    pDta = dtaLease.bytes;
+    pDta = (PVOID) GetVDMAddr(*((PUSHORT)pulDTALocation + 1),
+                              *((PUSHORT)pulDTALocation));
 
-#line 414
     dwRet = demFileFindNext (pDta);
 
-    if (!mvdm_guest_location_release(&dtaLease, TRUE))
-        dwRet = ERROR_INVALID_ADDRESS;
-
-#line 416
     if (dwRet != 0) {
         setAX((USHORT) dwRet);
         setCF (1);
@@ -456,6 +426,8 @@ VOID demFindNext (VOID)
     return;
 
 }
+#line 425
+
 
 
 DWORD demFileFindNext (
@@ -480,6 +452,7 @@ DWORD demFileFindNext (
 #if DBG
 #line 448
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 452
 #endif
 #line 453
 
@@ -552,6 +525,7 @@ VOID demFindFirstFCB (VOID)
 #if DBG
 #line 521
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 525
 #endif
 #line 526
 
@@ -652,6 +626,7 @@ VOID demFindNextFCB (VOID)
 #if DBG
 #line 622
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 626
 #endif
 #line 627
 
@@ -1149,6 +1124,7 @@ FileFindOpen(
 #if DBG
 #line 1120
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1129
 #endif
 #line 1130
 
@@ -1179,6 +1155,7 @@ FFOFinallyExit:;
 #if DBG
 #line 1156
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1160
 #endif
 #line 1161
 
@@ -1373,6 +1350,7 @@ FileFindReset(
 #if DBG
 #line 1328
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1332
 #endif
 #line 1333
                return Status;
@@ -1488,6 +1466,7 @@ FileFindLast(
 #if DBG
 #line 1444
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1448
 #endif
 #line 1449
            return Status;
@@ -1591,6 +1570,7 @@ FileFindNext(
 #if DBG
 #line 1548
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 1552
 #endif
 #line 1553
                return Status;
@@ -2109,6 +2089,7 @@ VOID FillFCBSrchBuf(
 #if DBG
 #line 2067
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2071
 #endif
 #line 2072
 
@@ -2200,6 +2181,7 @@ FillSrchDta(
 #if DBG
 #line 2159
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 2163
 #endif
 #line 2164
 
@@ -2384,9 +2366,13 @@ AddFFindEntry(
         return NULL;
     pPspFFindEntry = GetPspFFindList(currentPdb);
 
+#line 2338
         //
+#line 2339
         // if a Psp entry doesn't exist
+#line 2340
         //    Allocate one, initialize it and insert it into the list
+#line 2341
         //
 #line 2342
     if (!pPspFFindEntry) {

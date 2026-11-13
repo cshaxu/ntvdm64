@@ -1,0 +1,30 @@
+{
+  "points": [
+    "T483-R0067",
+    "T483-R0068"
+  ],
+  "conclusion": "evidence-qualified pending owner decision; comment-only minimization implemented",
+  "chain": [
+    "dem.c DemInit",
+    "demmisc.c demLoadDos appends ntdos.sys",
+    "oemuni/file.c CreateFileOem converts name and calls native CreateFileW",
+    "missing file invokes original TerminateVDM"
+  ],
+  "file_presence": {
+    "C:\\WINDOWS\\System32\\ntdos.sys": false,
+    "C:\\WINDOWS\\System32\\ntio.sys": false,
+    "C:\\WINDOWS\\SysWOW64\\ntdos.sys": false,
+    "C:\\WINDOWS\\SysWOW64\\ntio.sys": false,
+    "O:\\winnt\\system32\\ntdos.sys": true,
+    "O:\\winnt\\system32\\ntio.sys": true
+  },
+  "minimum_diff": {
+    "header": "+1/-0",
+    "call": "+1/-1",
+    "comment_lines_removed": 5
+  },
+  "line_proof": "Removed only five comment lines immediately before unchanged #line43. All #error and other line directives untouched.",
+  "verification": "Source chain plus current deployed file presence; no failing-boot execution claimed. No binding/behavior change; no rebuild triggered.",
+  "counter_review": "CreateFileOem was traced to native CreateFileW; no later package-path repair exists on this chain. Do not move the same substitution into a new shim merely to hide the mirror difference.",
+  "sha256": "964151365b1fbc1f8e555679c10cdbf91c5f71afdcd3755468644cd1469b204d"
+}

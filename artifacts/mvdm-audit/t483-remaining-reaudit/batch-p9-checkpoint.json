@@ -1,0 +1,194 @@
+{
+  "status": "Verified and published; included in P9 Git delivery",
+  "source_head": "8d4f8a5ef4f76018ee073d27601a1bea07a4b712",
+  "source_files": 6,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "sha256": "e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sha256": "3026fe70a7c4adcec76b0dd64bdc04670f8194efcbd4422b3c65e228922bb9ed"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "sha256": "1956ad545a18eb140575df55423f3386094fee11d360ccc43b16d25fdd5034dd"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfcb.c",
+      "sha256": "3751bd382aa64dc75120b7c401c272718e3a9bb86a019eb47913132d5ca44ef3"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "18bf89d44a3bff6b90b89463edd467bd13d701937e8c4ed2d5896e31e40d10e2"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "sha256": "4785bc4f944c94d95ecff2df5b1b68289eb74a282205769c09e24614edf98375"
+    }
+  ],
+  "scope": "Original DTA cohort, actual ntdddisk include, comment minimization and logical-line correction; no guest changes.",
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "pipeline": 0,
+    "fcb": 0,
+    "governance": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "7e6012d6-3ad4-45e8-a7ba-44e775b12e55",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true,
+    "final_hash_recheck": 22
+  },
+  "attempts": [
+    {
+      "root": "build/t483-s5-p9",
+      "build": 0,
+      "published": false,
+      "reason": "Publication guard rejected original line mismatches; no Full run on rejected candidate."
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 386995,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5085,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1054,
+        "CleanupMs": 569,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 166,
+        "CleanupMs": 478,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66627,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48379,
+        "CleanupMs": 592,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 51604,
+        "CleanupMs": 609,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15651,
+        "CleanupMs": 648,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13614,
+        "CleanupMs": 646,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 63703,
+        "CleanupMs": 610,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13030,
+        "CleanupMs": 589,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28967,
+        "CleanupMs": 560,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31055,
+        "CleanupMs": 607,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5019,
+        "CleanupMs": 612,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8148,
+        "CleanupMs": 631,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11991,
+        "CleanupMs": 586,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5318,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6831,
+        "CleanupMs": 484,
+        "Passed": true
+      }
+    ]
+  },
+  "fcb": {
+    "result": "PASS",
+    "elapsed_ms": 2466,
+    "names": [
+      "AAA     TST",
+      "BBB     TST",
+      "CCC     TST"
+    ],
+    "probe_exit": 37,
+    "probe_sha256": "4FB3B50BCC6E7659C754A416846173A0FD0380D0CD05DD581F764C5AEFE7E402",
+    "scope": "Actual INT21 FCB first/next/end/missing + direct receipt 37; no FCB read/write or mapping-change assertion"
+  },
+  "mirror_diff_delta": -85,
+  "limits": [
+    "DOS4GW/NESticle skipped: verified external fixtures not supplied.",
+    "FCB probe covers enumeration, not record read/write or remapping.",
+    "Logical-line proof is a source mapping check, not a preprocessor trace."
+  ],
+  "test_sources": [
+    {
+      "path": "test/integration/verify-dem-fcb-guest.ps1",
+      "sha256": "905bfd73457f3f22faf863d250488a31e18cee41dc87a03c9b6e7234bb4241d3"
+    },
+    {
+      "path": "test/observation/dem_fcb_probe.asm",
+      "sha256": "954e5e32c92d4e810ea0840fdfe7890898879c03cec5454e998416b763a9bfe4"
+    }
+  ]
+}
