@@ -1,0 +1,17 @@
+{
+  "batch": "P53",
+  "status": "Nonbinding metadata restoration verified;accompanies Git delivery",
+  "mirror_diff_delta": -2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+      "sha256": "de75d67c7168f04ae82715b4dd56663093589d3fdd36bd828c6267bd6d041a6d"
+    }
+  ],
+  "source_files": 1,
+  "graph_count": 12,
+  "graphs_equal": true,
+  "package": "d1e06c36-630d-49ae-8ab2-9388fa097bc9",
+  "publication": "P52 unchanged11-image package hash-verified at both destinations;no new publication",
+  "runtime": "Reused P52 Full16 and focused evidence;no new runtime claim"
+}

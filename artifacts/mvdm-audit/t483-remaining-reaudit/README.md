@@ -308,3 +308,7 @@ Nonexcluded mirror diff +6/-2 to0,net-8;[logical lines](batch-p52-line-check.jso
 P52 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
 494/2720 reviewed;189 restored delivered,0 local,2 approved,303 pending,2226 unreviewed.
 77/365 files complete;288 remain.Next R0488.
+
+P53: [original C-VID metadata](r0488-original-cvidc-metadata.json) restored,mirror diff net-2.
+Both generated architecture graphs identical;P52 package/runtime reused,no new runtime claim.
+[Receipt](batch-p53-checkpoint.json).495/2720 reviewed;78/365 files;190 restored,2 approved,303 pending,2225 unreviewed.
