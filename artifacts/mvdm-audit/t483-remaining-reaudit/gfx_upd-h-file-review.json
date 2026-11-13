@@ -1,0 +1,213 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+  "points": [
+    "T483-R0706"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/gfx_upd.h",
+  "original_sha256": "78a633b6e3c1a7281779aabffdbe7e3f435223f3b8a1ecc540ccaa364367d492",
+  "before_sha256": "53b5da70251b70542c40a601edb354705559353ed3b3d05947c8de22fff5add8",
+  "after_sha256": "7dd7c1e0dc8f82004358cd132b0cb4217f79c24118d8c1dd682d6d39e1a841ea",
+  "diff": {
+    "metric": "original-relative LF physical lines including unchanged policy exclusions",
+    "before_added": 20,
+    "before_deleted": 9,
+    "after_added": 10,
+    "after_deleted": 4,
+    "delta": -15
+  },
+  "error_count": 3,
+  "validation": "P61 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record.",
+  "responsibility": "Mark dirty video ranges through original UPDATE_ALG callbacks.",
+  "original_can_fulfill": "All selected calls discard return values. Original providers include VOID CGA/EGA callbacks and simple_update; existing parameter-count variation is unchanged. Selected MSVC compiles original boolean slots;7 actual consumer/provider translation units generate identical initialized bytes,uninitialized sizes/flags and relocation tables.",
+  "specific_diff_necessity": "Changing return type to void removes some diagnostics but no supported-context failure was demonstrated. No new cast/wrapper/suppression.",
+  "result": "Restore original five boolean typedefs,remove explanatory adaptation comment and redundant line29.",
+  "counter_review": "Not claiming portable ISO C compatibility of mismatched function pointers or correcting original arity behavior. Evidence is exact supported MSVC code generation and actual ignored results;no incompatible return value is consumed.",
+  "line_proof": {
+    "current_lines": 137,
+    "original_lines": 137,
+    "equal": true,
+    "mismatches": []
+  },
+  "compiler_controls": [
+    {
+      "source": "egawrtm0",
+      "compile_before_exit": 0,
+      "compile_after_exit": 0,
+      "equal_nonmetadata_sections_and_relocations": true,
+      "sections": 19,
+      "normalized_sha256": "19a2be9f8ea7cc71856bf86eb81357b246d23d4bbb1b0cf5fee2b6cf5ae51432",
+      "before_object_sha256": "e037a0bf155c6eda45445ba24dee994150cb25529c1e7fdcbe75d08520642474",
+      "after_object_sha256": "c727928918e3266bceb350e167ae91efd3e470ee20aef3c145f4cf97730dfed4",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4244"
+      ],
+      "after_warnings": [
+        "warning C4005",
+        "warning C4244"
+      ]
+    },
+    {
+      "source": "ega_vide",
+      "compile_before_exit": 0,
+      "compile_after_exit": 0,
+      "equal_nonmetadata_sections_and_relocations": true,
+      "sections": 57,
+      "normalized_sha256": "3a2a19ab7d182c68e15a3638e781c10d58f8223ec101b7498f2eb28a2b41e693",
+      "before_object_sha256": "a7ba4d93cf33fcf78ae94b71a55e735f6a139191db4cc2d115e21bbedf46ee9e",
+      "after_object_sha256": "e5f7a0f7da2fd684f191887817cef923eb4e09307cdd786ab565d259acabb9dc",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4244",
+        "warning C4245"
+      ],
+      "after_warnings": [
+        "warning C4005",
+        "warning C4244",
+        "warning C4245"
+      ]
+    },
+    {
+      "source": "egwrtm12",
+      "compile_before_exit": 0,
+      "compile_after_exit": 0,
+      "equal_nonmetadata_sections_and_relocations": true,
+      "sections": 19,
+      "normalized_sha256": "afd382e41bf27a9fa8850642a48dde034d4565ddb09743db1169aee7559d3f4f",
+      "before_object_sha256": "66b27c094f23a2f9d9899f993b3663c1ec1efd2021fa2304567d2e6aad1f2662",
+      "after_object_sha256": "f58ea39b9f6a3ed16321e437f84efba0a67222e2786dfc1e615a309dab337dd7",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4100",
+        "warning C4101",
+        "warning C4244"
+      ],
+      "after_warnings": [
+        "warning C4005",
+        "warning C4100",
+        "warning C4101",
+        "warning C4244"
+      ]
+    },
+    {
+      "source": "gfx_updt",
+      "compile_before_exit": 0,
+      "compile_after_exit": 0,
+      "equal_nonmetadata_sections_and_relocations": true,
+      "sections": 135,
+      "normalized_sha256": "3c2309c89b970010333449e7e33e976663b835216769db55ef9c6346b2dab58d",
+      "before_object_sha256": "0cbc4587ec5c396540e57c476eb97212fd4e80e5b4fec4692d6ef3763dc1093f",
+      "after_object_sha256": "6f6bf0a9a77a1116f4e9d3d883b24bcdf04eaed7e790b1939c51dd48156949be",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4018",
+        "warning C4100",
+        "warning C4101",
+        "warning C4113",
+        "warning C4189",
+        "warning C4244"
+      ],
+      "after_warnings": [
+        "warning C4005",
+        "warning C4018",
+        "warning C4100",
+        "warning C4101",
+        "warning C4113",
+        "warning C4133",
+        "warning C4189",
+        "warning C4244"
+      ]
+    },
+    {
+      "source": "mouse_io",
+      "compile_before_exit": 0,
+      "compile_after_exit": 0,
+      "equal_nonmetadata_sections_and_relocations": true,
+      "sections": 199,
+      "normalized_sha256": "ead9dbdfa0576daf72bcb2ffb57e93ee284322f79eed1a0022d3af16ce639d75",
+      "before_object_sha256": "09bf8fed60ff57528d179b468f223abf873c2a37f2efb324a0f54352881e282f",
+      "after_object_sha256": "43f8c7c2cc35b0fc3228f3f104ae297fdb910f1e8e1b6874356f04303166651c",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4013",
+        "warning C4100",
+        "warning C4101",
+        "warning C4131",
+        "warning C4201",
+        "warning C4244",
+        "warning C4245",
+        "warning C4431",
+        "warning C4701",
+        "warning C4716",
+        "warning C4996"
+      ],
+      "after_warnings": [
+        "warning C4005",
+        "warning C4013",
+        "warning C4100",
+        "warning C4101",
+        "warning C4131",
+        "warning C4201",
+        "warning C4244",
+        "warning C4245",
+        "warning C4431",
+        "warning C4701",
+        "warning C4716",
+        "warning C4996"
+      ]
+    },
+    {
+      "source": "vga_vide",
+      "compile_before_exit": 0,
+      "compile_after_exit": 0,
+      "equal_nonmetadata_sections_and_relocations": true,
+      "sections": 32,
+      "normalized_sha256": "3948023bafe71a088fb88a6d921407c4a0f8bd8bb4b239723a45e5455429aaf7",
+      "before_object_sha256": "bbe9c3f5b776a788816e4f54a1586c150ba86af6a8a2576df933ec8e95fabcac",
+      "after_object_sha256": "69220ccf87671efc3c349ed507e8e66dea72ab667329faf3153c12814eb49932",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4100",
+        "warning C4131",
+        "warning C4244",
+        "warning C4701",
+        "warning C4703"
+      ],
+      "after_warnings": [
+        "warning C4005",
+        "warning C4100",
+        "warning C4131",
+        "warning C4244",
+        "warning C4701",
+        "warning C4703"
+      ]
+    },
+    {
+      "source": "video",
+      "compile_before_exit": 0,
+      "compile_after_exit": 0,
+      "equal_nonmetadata_sections_and_relocations": true,
+      "sections": 70,
+      "normalized_sha256": "7ae61b6448f2b057fd5b0b308b372e27c34d18797a03dc64e37026f0429d581e",
+      "before_object_sha256": "4e726a032ae21cd93790dea17897a7b15083164a194db7206bb83debdfd83d29",
+      "after_object_sha256": "51f5448e0bebe6322c8c3a54f2b656254fb6e7e1bb268394a62cfafa7ff5bf57",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4101",
+        "warning C4210",
+        "warning C4244",
+        "warning C4701"
+      ],
+      "after_warnings": [
+        "warning C4005",
+        "warning C4101",
+        "warning C4210",
+        "warning C4244",
+        "warning C4701"
+      ]
+    }
+  ],
+  "comparison_method": "COFF section sizes/flags/raw bytes and relocations;zero PointerToRawData means no initialized bytes, including BSS;exclude only debug/checksum metadata",
+  "comparison_correction": "Initial comparison incorrectly read file header bytes for uninitialized BSS at raw offset0;corrected section interpretation removes false difference."
+}

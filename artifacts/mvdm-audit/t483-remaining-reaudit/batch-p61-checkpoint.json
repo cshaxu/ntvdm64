@@ -1,0 +1,172 @@
+{
+  "status": "P61 delivery gates verified; known baseline failures retained; accompanies Git commit",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "sha256": "0a62769272b358c3b577d7247cca718e8c8a0ccc993b60beafaeefc3bfbb1cf4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "sha256": "7dd7c1e0dc8f82004358cd132b0cb4217f79c24118d8c1dd682d6d39e1a841ea"
+    }
+  ],
+  "mirror_diff_delta": -16,
+  "source_review": [
+    "error-h-file-review.json",
+    "gfx_upd-h-file-review.json"
+  ],
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "limits": [
+    "Original callback mismatch warnings remain;no claim of portable ISO C signature correction.",
+    "Current source/compiler evidence is not final package acceptance."
+  ],
+  "runner": {
+    "pid": 28868,
+    "created": "2026-11-13T22:18:39.7294430Z",
+    "command": "\"C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe\" -NoProfile -ExecutionPolicy Bypass -File build/t483-s5-p61/deliver.ps1",
+    "root": "build/t483-s5-p61",
+    "stdout": "build/t483-s5-p61/deliver.log",
+    "stderr": "build/t483-s5-p61/deliver.err",
+    "state": "completed",
+    "exit": 0
+  },
+  "ems": {
+    "Mapping": "PASS independent COM -> original INT67 Mapping; marker=EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS; normal launcher exit; no original guest or profile edit\n",
+    "CallReturn": "PASS independent COM -> original INT67 CallReturn; marker=T430_EMS_CALL_RETURN_STACK_MAP_OK; normal launcher exit; no original guest or profile edit\n"
+  },
+  "package": "607d81c8-a9ea-4829-9ede-ad6c413e0ad5",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1377,
+      "CleanupMs": 511,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 217,
+      "CleanupMs": 453,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 65787,
+      "CleanupMs": 478,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 44180,
+      "CleanupMs": 500,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 42173,
+      "CleanupMs": 518,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14013,
+      "CleanupMs": 469,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 11234,
+      "CleanupMs": 396,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 59142,
+      "CleanupMs": 439,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12466,
+      "CleanupMs": 433,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28007,
+      "CleanupMs": 498,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30199,
+      "CleanupMs": 492,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4363,
+      "CleanupMs": 443,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7722,
+      "CleanupMs": 433,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10203,
+      "CleanupMs": 439,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 4019,
+      "CleanupMs": 442,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6072,
+      "CleanupMs": 384,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=21864 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=19848 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=7012 escaped=1 nested=1 continue=1 normal-fe=1\n"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ],
+  "final_checks": {
+    "wow_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed",
+    "runner_pid": 13144,
+    "exit": 0,
+    "prior_attempt": {
+      "runner_pid": 11792,
+      "failed": "CURRENT UTF-8 punctuation corrupted by receipt script default decoding",
+      "resolution": "restored UTF-8 punctuation; explicit UTF-8 decoding; full final-check rerun passed",
+      "product_source_or_release_changed": false
+    }
+  }
+}

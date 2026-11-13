@@ -1,0 +1,29 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+  "points": [
+    "T483-R0705"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/error.h",
+  "original_sha256": "a262dcddcb4059e50a24c7795e09f493c9ba6e576ca0e7d904c3e60e6da08e51",
+  "before_sha256": "29a32c1af04baf69723844b01fdbbdb8902db3837fdb701a4f641685fd779d05",
+  "after_sha256": "0a62769272b358c3b577d7247cca718e8c8a0ccc993b60beafaeefc3bfbb1cf4",
+  "diff": {
+    "metric": "original-relative LF physical lines including unchanged policy exclusions",
+    "before_added": 6,
+    "before_deleted": 416,
+    "after_added": 5,
+    "after_deleted": 416,
+    "delta": -1
+  },
+  "error_count": 1,
+  "validation": "P61 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record.",
+  "responsibility": "Selected NTVDM error provider remains original host error.h include.",
+  "original_can_fulfill": "Current first4 lines byte-equal to original first4 lines. Alternate host definitions remain excluded. No code/interface replacement.",
+  "specific_diff_necessity": "Relocated notice is cosmetic;owner authorizes removing comment-only mirror differences. Notice preserved verbatim here with origin.",
+  "notice": "/* (c)Copyright Insignia Solutions Ltd., 1990. All rights reserved. */",
+  "notice_original_line": 154,
+  "result": "Remove moved notice and now redundant #line1;retain excluded body and align original endif420.",
+  "counter_review": "No copyright/provenance information erased from audit evidence. Excluded original branch is not restored. No compile or binding effect.",
+  "line_proof": "Original selected first4 lines exact;#line5 excluded start;#line420 original endif;#line421 continuation."
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+    "matched_original_line_mismatches": [],
+    "sha256": "0a62769272b358c3b577d7247cca718e8c8a0ccc993b60beafaeefc3bfbb1cf4",
+    "original_sha256": "a262dcddcb4059e50a24c7795e09f493c9ba6e576ca0e7d904c3e60e6da08e51",
+    "proof": "Original selected first4 lines exact;#line5 excluded start;#line420 original endif;#line421 continuation."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+    "matched_original_line_mismatches": [],
+    "sha256": "7dd7c1e0dc8f82004358cd132b0cb4217f79c24118d8c1dd682d6d39e1a841ea",
+    "original_sha256": "78a633b6e3c1a7281779aabffdbe7e3f435223f3b8a1ecc540ccaa364367d492",
+    "proof": {
+      "current_lines": 137,
+      "original_lines": 137,
+      "equal": true,
+      "mismatches": []
+    }
+  }
+]

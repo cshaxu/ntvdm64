@@ -406,3 +406,9 @@ hash,focused,EMS2 and Full16 passed.711 reviewed;278 delivered,2 approved,
 431 pending,2009 unreviewed;95/365 files.
 See [receipt](batch-p60-checkpoint.json),[ckmalloc](ckmalloc-h-file-review.json),
 [cpu_vid](cpu_vid-h-file-review.json),[egacpu](egacpu-h-file-review.json).
+
+P61: error/gfx_upd2/2 original subset/declarations restored;mirror diff net-16.
+Cached full,11x2 publication/hash,focused,EMS2 and Full16 passed.713 reviewed;
+280 delivered,2 approved,431 pending,2007 unreviewed;97/365 files.
+See [receipt](batch-p61-checkpoint.json),[error](error-h-file-review.json),
+[gfx_upd](gfx_upd-h-file-review.json).
