@@ -1,0 +1,13 @@
+{
+  "statuses": {
+    "completed-owner-approved-retain": 2,
+    "restored-verified-published": 133,
+    "pending-decision": 144,
+    "pending": 2441
+  },
+  "pending_exact_membership": true,
+  "pending_ids": 144,
+  "current_bytes": 16080,
+  "mirror_diff_reduction": 5,
+  "runtime": "P24 Full16 reused: all11 images identical after specific PE timestamps and package GUID normalization; no new runtime pass claimed."
+}

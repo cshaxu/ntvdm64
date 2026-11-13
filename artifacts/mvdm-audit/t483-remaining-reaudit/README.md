@@ -127,3 +127,6 @@ Legacy inc/makefile restoration: [R0228-R0229](r0228-r0229-legacy-makefile-revie
 Memory ABI review: [R0230-R0234](r0230-r0234-memory-abi-review.json); original-header Gz/Gd comparisons.
 
 P24: [checkpoint](batch-p24-checkpoint.json), [line check](batch-p24-line-check.json), [R0235](r0235-mvdm-access-review.json).
+
+P25: [softpc.h complete ABI review](r0236-r0272-softpc-abi-review.json),
+[line check](batch-p25-line-check.json), [checkpoint](batch-p25-checkpoint.json).

@@ -1,0 +1,8 @@
+[
+  {
+    "path": "src/mvdm-host/inc/softpc.h",
+    "matched_original_line_mismatches": [],
+    "matched": 173,
+    "error_directives_unchanged": true
+  }
+]

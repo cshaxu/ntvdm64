@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-242 points have a prior or current review record:131 restored/verified/published,
-0 local restorations pending verification,2 approved retain,109 qualified pending
-decisions and0 prior classifications requiring requalification. Another2478
-points are unreviewed. Sequential file disposition is39/365;326 remain.
+279 points have a prior or current review record:133 restored/verified/published,
+0 local restorations pending verification,2 approved retain,144 qualified pending
+decisions and0 prior classifications requiring requalification. Another2441
+points are unreviewed. Sequential file disposition is40/365;325 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -230,12 +230,12 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P24 Verified Batch
+## P25 Verified Batch
 
-P23 delivered/pushed3aef24a5e. P24 five mirror files: net diff-16.
-Original makefile restored byte-exact; mvdm.h selected access macros restored.
-Eleven cdecl declarations remain pending owner decision; no new shim.
-Cached build, publication11x2/hash, Full16, boundary and line checks pass.
-WOW32 has1219 nonmetadata changed bytes; other10 images metadata-only.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p24-checkpoint.json).
-This receipt accompanies P24 delivery; next R0236.
+P24 delivered/pushed ebcbe5ac4. P25 softpc.h restores two thread declarations;
+35 cdecl points have original-provider ABI evidence, pending owner choice.
+Mirror diff net-5; excluded#error unchanged; original line checks pass.
+Cached full build, publication11x2/hash, WOW boundary and governance pass.
+All11 images metadata-only; P24 Full16 reused, no new runtime pass claimed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p25-checkpoint.json).
+This receipt accompanies P25 delivery; next R0273.

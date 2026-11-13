@@ -1,0 +1,538 @@
+{
+  "path": "src/mvdm-host/inc/softpc.h",
+  "points": [
+    {
+      "id": "T483-R0236",
+      "name": "WOWSysErrorBox",
+      "original_line": 114,
+      "provider": [
+        "0001:000515b0       _WOWSysErrorBox            004525b0 f   original-softpc-host-roots:nt_error.obj"
+      ],
+      "original_consumer_references": [
+        "_WOWSysErrorBox@20"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0237",
+      "name": "SetWOWforceIncrAlloc",
+      "original_line": 124,
+      "provider": [
+        "0001:000564c0       _SetWOWforceIncrAlloc      004574c0 f   original-softpc-host-roots:nt_mem.obj"
+      ],
+      "original_consumer_references": [
+        "_SetWOWforceIncrAlloc@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0238",
+      "name": "host_simulate",
+      "original_line": 190,
+      "provider": [
+        "0001:00050310       _host_simulate             00451310 f   original-softpc-host-roots:nt_cpu.obj"
+      ],
+      "original_consumer_references": [
+        "_host_simulate@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0239",
+      "name": "host_CreateThread",
+      "original_line": 195,
+      "provider": [
+        "0001:001901c0       _host_CreateThread@24      005911c0 f   original-softpc-host-roots:nt_thred.obj"
+      ],
+      "original_consumer_references": [
+        "_host_CreateThread@24"
+      ],
+      "decision": "restore-original",
+      "remaining_diff": "+0/-0"
+    },
+    {
+      "id": "T483-R0240",
+      "name": "cpu_createthread",
+      "original_line": 205,
+      "provider": [
+        "0001:00006030       _cpu_createthread          00407030 f   original-softpc-host-roots:stubs.obj"
+      ],
+      "original_consumer_references": [
+        "_cpu_createthread@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0241",
+      "name": "host_ExitThread",
+      "original_line": 210,
+      "provider": [
+        "0001:00190240       _host_ExitThread@4         00591240 f   original-softpc-host-roots:nt_thred.obj"
+      ],
+      "original_consumer_references": [
+        "_host_ExitThread@4"
+      ],
+      "decision": "restore-original",
+      "remaining_diff": "+0/-0"
+    },
+    {
+      "id": "T483-R0242",
+      "name": "host_com_close",
+      "original_line": 215,
+      "provider": [
+        "0001:00059f10       _host_com_close            0045af10 f   original-softpc-host-roots:nt_com.obj"
+      ],
+      "original_consumer_references": [
+        "_host_com_close@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0243",
+      "name": "SuspendTimerThread",
+      "original_line": 216,
+      "provider": [
+        "0001:00051b90       _SuspendTimerThread        00452b90 f   original-softpc-host-roots:nt_timer.obj"
+      ],
+      "original_consumer_references": [
+        "_SuspendTimerThread@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0244",
+      "name": "ResumeTimerThread",
+      "original_line": 217,
+      "provider": [
+        "0001:00051b50       _ResumeTimerThread         00452b50 f   original-softpc-host-roots:nt_timer.obj"
+      ],
+      "original_consumer_references": [
+        "_ResumeTimerThread@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0245",
+      "name": "Sim32pGetVDMPointer",
+      "original_line": 222,
+      "provider": [
+        "0001:000518e0       _Sim32pGetVDMPointer       004528e0 f   original-softpc-host-roots:sim32.obj"
+      ],
+      "original_consumer_references": [
+        "_Sim32pGetVDMPointer@8"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0246",
+      "name": "getAX",
+      "original_line": 559,
+      "provider": [
+        "0001:000952f0       _getAX                     004962f0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getAX@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0247",
+      "name": "getCX",
+      "original_line": 560,
+      "provider": [
+        "0001:000953a0       _getCX                     004963a0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getCX@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0248",
+      "name": "getDX",
+      "original_line": 561,
+      "provider": [
+        "0001:00095400       _getDX                     00496400 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getDX@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0249",
+      "name": "getBX",
+      "original_line": 562,
+      "provider": [
+        "0001:00095340       _getBX                     00496340 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getBX@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0250",
+      "name": "getSP",
+      "original_line": 563,
+      "provider": [
+        "0001:00095550       _getSP                     00496550 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getSP@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0251",
+      "name": "getBP",
+      "original_line": 564,
+      "provider": [
+        "0001:00095330       _getBP                     00496330 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getBP@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0252",
+      "name": "getSI",
+      "original_line": 565,
+      "provider": [
+        "0001:00095540       _getSI                     00496540 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getSI@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0253",
+      "name": "getDI",
+      "original_line": 566,
+      "provider": [
+        "0001:000953d0       _getDI                     004963d0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getDI@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0254",
+      "name": "getIP",
+      "original_line": 567,
+      "provider": [
+        "0001:000954f0       _getIP                     004964f0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getIP@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0255",
+      "name": "setAX",
+      "original_line": 569,
+      "provider": [
+        "0001:00095620       _setAX                     00496620 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setAX@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0256",
+      "name": "setCX",
+      "original_line": 570,
+      "provider": [
+        "0001:000956e0       _setCX                     004966e0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setCX@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0257",
+      "name": "setDX",
+      "original_line": 571,
+      "provider": [
+        "0001:00095740       _setDX                     00496740 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setDX@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0258",
+      "name": "setBX",
+      "original_line": 572,
+      "provider": [
+        "0001:00095670       _setBX                     00496670 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setBX@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0259",
+      "name": "setSP",
+      "original_line": 573,
+      "provider": [
+        "0001:000958d0       _setSP                     004968d0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setSP@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0260",
+      "name": "setBP",
+      "original_line": 574,
+      "provider": [
+        "0001:00095660       _setBP                     00496660 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setBP@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0261",
+      "name": "setSI",
+      "original_line": 575,
+      "provider": [
+        "0001:000958c0       _setSI                     004968c0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setSI@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0262",
+      "name": "setDI",
+      "original_line": 576,
+      "provider": [
+        "0001:00095710       _setDI                     00496710 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setDI@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0263",
+      "name": "setIP",
+      "original_line": 577,
+      "provider": [
+        "0001:00095840       _setIP                     00496840 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setIP@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0264",
+      "name": "getES",
+      "original_line": 599,
+      "provider": [
+        "0001:00095490       _getES                     00496490 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getES@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0265",
+      "name": "getCS",
+      "original_line": 600,
+      "provider": [
+        "0001:00095390       _getCS                     00496390 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getCS@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0266",
+      "name": "getSS",
+      "original_line": 601,
+      "provider": [
+        "0001:00095560       _getSS                     00496560 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getSS@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0267",
+      "name": "getDS",
+      "original_line": 602,
+      "provider": [
+        "0001:000953f0       _getDS                     004963f0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getDS@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0268",
+      "name": "setES",
+      "original_line": 606,
+      "provider": [
+        "0001:000957e0       _setES                     004967e0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setES@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0269",
+      "name": "setCS",
+      "original_line": 607,
+      "provider": [
+        "0001:000956d0       _setCS                     004966d0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setCS@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0270",
+      "name": "setSS",
+      "original_line": 608,
+      "provider": [
+        "0001:000958e0       _setSS                     004968e0 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setSS@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0271",
+      "name": "setDS",
+      "original_line": 609,
+      "provider": [
+        "0001:00095730       _setDS                     00496730 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_setDS@4"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    },
+    {
+      "id": "T483-R0272",
+      "name": "getMSW",
+      "original_line": 626,
+      "provider": [
+        "0001:00095500       _getMSW                    00496500 f   original-softpc-cvidc:accessfn.obj"
+      ],
+      "original_consumer_references": [
+        "_getMSW@0"
+      ],
+      "decision": "pending-owner-decision",
+      "remaining_diff": "+1/-1"
+    }
+  ],
+  "before": {
+    "added": 42,
+    "deleted": 336,
+    "total": 378
+  },
+  "after": {
+    "added": 37,
+    "deleted": 336,
+    "total": 373
+  },
+  "delta": -5,
+  "line_check": {
+    "matched": 173,
+    "mismatches": [],
+    "error_directives_unchanged": true
+  },
+  "thread_restore": "Original WINAPI definitions in nt_thred.c; sole product caller wkman /Gz. Actual restored-header object .text and relocations identical.",
+  "cdecl_proof": "Actual original-header wkman, wow_user_thunk_scope, and isolated wow32 object references compared with linked original provider map. wow32 isolation preserves only WOWSysErrorBox cdecl to avoid circular wrapper conflict.",
+  "rejected_evidence": "Initial wow32 C2373 against custom wrapper is NOT necessity proof; preserved failed experiment separately.",
+  "alternatives": "Whole WOW /Gd changes original W32Thread callback ABI to LPTHREAD_START_ROUTINE. Per-provider annotations move rather than reduce complexity. No new shim.",
+  "limits": [
+    "No whole-WOW /Gd migration tested or universal impossibility claimed.",
+    "ABI compilation is not a runtime failure reproduction.",
+    "Thread object equivalence and full package binary comparison verified; retained cdecl decisions still require owner approval."
+  ],
+  "sha256": "90414e65ce628b379ac9bbf8051307839eaae61f802924dcac4b47b9d70b0aeb",
+  "verification": "P25 cached full build, publication11x2/hash, boundary and governance passed. P24 Full16 reused: all11 images identical after specific PE timestamps and package GUID normalization; no new runtime pass claimed.",
+  "proof_layers": {
+    "responsibility": "WOW callers require thread, CPU, error, memory and serial/timer services. This requirement alone does not establish any header annotation.",
+    "original_provider": "Original nt_thred WINAPI definitions already compose with original WOW /Gz caller; restore both declarations. Original cvidc/accessfn Cpu-table dispatch and other SoftPC providers remain the actual linked cdecl implementations.",
+    "specific_difference": "For each of 35 remaining points the actual original-header consumer emits a distinct stdcall symbol absent from the linked provider map. The explicit cdecl token selects the original provider ABI; no added provider behavior is justified by this proof."
+  },
+  "source_chain": [
+    "src/mvdm-host/wow32/wkman.c:569 host_CreateThread receives W32Thread; original W32Thread definition has no WINAPI and relies on WOW /Gz.",
+    "src/mvdm-host/softpc.new/host/src/nt_thred.c:45 WINAPI definition and LPTHREAD_START_ROUTINE preserve SDK thread ABI.",
+    "src/mvdm-host/softpc.new/base/cvidc/accessfn.c forwards register access through Cpu.Get*/Set*; linked accessfn.obj owns the cdecl symbols.",
+    "src/wow32-dll/wow_user_thunk_scope.c original WOWSysErrorBox caller isolated from the custom rename conflict."
+  ],
+  "experiment_hashes": {
+    "cached-x64.cmd": "621ba9000095745a39702cd431cb1313eac305a4f1e66b5450b06df15afd95cb",
+    "cached-x86.cmd": "5d679c23a9215b9b97e1cd12d34eef74d0db96c0b3733333a41d400c2f7d96ca",
+    "cached.cmd": "45aed62f70f4ab7e0bc192d4e46aab3a863102ea9a0613fa4ed431cd5cdb5db1",
+    "wkman-original.cmd": "d8f171e4ac99bb89ff7ed87a7824334a169f0b81fc0051f2728f24f9708a76b3",
+    "wkman-original.obj": "6933bd4f65cbd5d82b30759e8f97a1443a94b390145b0903a7eeffae9a3b0015",
+    "wkman-thread.cmd": "d792037ef0c1af35cc1d22c6583d1e7f9e42b4247a227361c75b9e47dc473811",
+    "wkman-thread.obj": "72cd97e9a7d98e5d1cea1b1dd33d522b22bbba92a67549d7ec0548f60feb9dd3",
+    "wow32-isolated.cmd": "02e6de9eeadb2c5141af3647e39f3bbba02d615b39e2b4d403d5597efb778b86",
+    "wow32-isolated.obj": "45574b932d2de3f6bd98b72d67cb12e1393eae8b4f669b6a79606ba5f8daefbf",
+    "wow32-original.cmd": "2e44b1890baf1a1b72528418d170d74a0dd4329b90d1ef592aac878b619da5b0",
+    "wow_user_thunk_scope-isolated.cmd": "a22d16b758f3b9e27efa22297cf35a19b832d65005dd63bb8f83709b1b0f4e25",
+    "wow_user_thunk_scope-isolated.obj": "c24389eebd27f92e48863284f4028ee04b6f37b967ba52ad95f2316a554880e8"
+  }
+}

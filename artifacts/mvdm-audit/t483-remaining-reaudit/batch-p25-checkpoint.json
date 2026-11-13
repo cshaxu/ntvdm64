@@ -1,0 +1,28 @@
+{
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "sha256": "90414e65ce628b379ac9bbf8051307839eaae61f802924dcac4b47b9d70b0aeb"
+    }
+  ],
+  "status": "Verified P25 delivery receipt; commit/push follows",
+  "mirror_diff_delta": -5,
+  "package": "b03f0f9a-b64d-4166-8753-7a45b46f5116",
+  "published_images": 11,
+  "destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "hash_verified": true,
+  "cached_full_exit": 0,
+  "boundary_and_governance_exit": 0,
+  "runtime": "P24 Full16 reused: all11 images identical after specific PE timestamps and package GUID normalization; no new runtime pass claimed.",
+  "runtime_reused": true,
+  "full_gate_count": 16,
+  "limits": [
+    "ABI proof is not a runtime failure reproduction.",
+    "Full frontier is not exhaustive Win3.x/game acceptance; missing external fixtures remain skips.",
+    "No original guest or winnt.zip changes."
+  ]
+}

@@ -1,6 +1,3 @@
-/* DIVERGENCE(MVDM-HOST-DIV-294): explicit cdecl for the existing CPU40
- * worker exports consumed by the original /Gz WOW32 DLL. Parameter types,
- * implementation and ownership are unchanged; no stack-incompatible aliases. */
 /*++ BUILD Version: 0001
 
 Copyright (c) 1990  Microsoft Corporation
@@ -198,7 +195,6 @@ __cdecl host_simulate(
     );
 
 HANDLE
-WINAPI
 #line 195
 host_CreateThread(
     LPSECURITY_ATTRIBUTES lpThreadAttributes,
@@ -215,7 +211,6 @@ __cdecl cpu_createthread(
     );
 
 VOID
-WINAPI
 #line 210
 host_ExitThread(
     DWORD dwExitCode
@@ -237,7 +232,7 @@ UCHAR *__cdecl Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 #line 226
 #error Excluded unsupported i386 kernel VDM register interface
 #else
-#line 532
+#line 527
 
 /*********************** FOR MIPS BUILD ***************************/
 
