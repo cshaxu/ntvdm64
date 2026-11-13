@@ -4,7 +4,6 @@ extern void ccpu386newthread();
 extern void ccpu386exitthread();
 extern jmp_buf *ccpu386SimulatePtr();
 extern void ccpu386Unsimulate();
-/* DIVERGENCE(MVDM-HOST-DIV-348): exact abandoned native jump frame only. */
 extern void ccpu386AbandonSimulate(jmp_buf *frame);
 #line 7
 extern jmp_buf *ccpu386ThrdExptnPtr();

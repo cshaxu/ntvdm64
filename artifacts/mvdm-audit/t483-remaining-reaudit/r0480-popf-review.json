@@ -1,0 +1,27 @@
+{
+  "id": "T483-R0480",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/popf.c",
+  "responsibility": "Original POPFD reports unsupported flag bits via sprintf then note_486_instruction; preserve original diagnostics and EFLAGS/VM/RF ordering.",
+  "original_capability": "Original source already implements the complete operation; char* buffer, char* format and IU32 integer have unchanged x86 stack representation and use existing _sprintf CRT provider.",
+  "old_rationale": "Generic varargs ABI claim did not establish a failure in the supported MSVC x86 context.",
+  "decision": "Restore exact original bytes; no replacement declaration or shim.",
+  "controls": {
+    "command": "build/t483-s5-p49/popf-compare.cmd",
+    "current_exit": 0,
+    "original_exit": 0,
+    "warnings": "Original C4013 sprintf; note_486_instruction warning exists with both sources.",
+    "object_evidence": "All four non-debug non-checksum sections and named relocations equal; .chks64 is linker-remove metadata (flags0xA00). Not whole-object hash identity.",
+    "call": "Same three pushes, call _sprintf, same note_486_instruction call; return int matches original implicit type.",
+    "scope": "Actual supported MSVC x86 C island, not a claim of portable ISO C or native x64 CCPU equivalence."
+  },
+  "diff": {
+    "before_added": 2,
+    "before_removed": 0,
+    "after_added": 0,
+    "after_removed": 0,
+    "net": -2
+  },
+  "line_mapping": "Entire file byte-identical to pinned original; no #error branches and no corrective #line needed.",
+  "sha256": "66c4fcaf0f3329dc6d7021a0ad8ba910fa775e84d63ad35404ee2a3134dd46c3",
+  "verification": "batch-p49-checkpoint.json:final-source full delivery verified;accompanies Git commit."
+}

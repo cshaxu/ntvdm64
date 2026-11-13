@@ -264,3 +264,19 @@ P46 mirror diff5->2 (-3);cached build,publication11x2/hash,focused and Full16 pa
 [delivery](batch-p48-checkpoint.json). Mirror diff25->15 (-10).
 485/2720 reviewed;183restored delivered,0local,2approved,300pending,2235unreviewed.
 71/365 files complete;294 remain.P48 cached build,publication11x2/hash,focused and Full16 passed.
+
+R0479: [header review](r0479-ntthread-header-review.json);mirror diff2->1,comment-only.
+486/2720 reviewed;183 restored delivered,0local restorations,2approved,301pending,2234unreviewed.
+72/365 files complete;293remain.P48 remains published;local comment cleanup awaits next batch.
+
+R0480: [original POPFD source](r0480-popf-review.json) restored byte-exact.
+[Batch line proof](batch-p49-line-check.json),[P49 checkpoint](batch-p49-checkpoint.json).
+487/2720 reviewed;183restored delivered,1local,2approved,301pending,2233unreviewed.
+73/365 files complete;292remain.P49 net mirror diff-3;delivery pending.
+
+P49 [actual compiler controls](batch-p49-compile-controls.json) separate link-retained
+code/data/relocations from compiler linker-remove checksum metadata.
+
+P49 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
+487/2720 reviewed;184restored delivered,0local,2approved,301pending,2233unreviewed.
+73/365 files complete;292remain. Next R0481.

@@ -1,0 +1,35 @@
+{
+  "header": {
+    "sections_compared": 38,
+    "all_link_retained_initialized_bytes_and_named_relocations_equal": true,
+    "metadata_and_uninitialized_handling": [
+      {
+        "name": ".bss",
+        "reason": "Uninitialized section has no raw data; size,flags and relocations agree",
+        "flags": 3224371328
+      },
+      {
+        "name": ".chks64",
+        "reason": "IMAGE_SCN_LNK_REMOVE",
+        "flags": 2560
+      }
+    ],
+    "current_obj_sha256": "618afd73de757e21f73993ce1f8f659952b5ec0c7e24c250c8b3b4f7b271b699",
+    "original_obj_sha256": "d3e7599504f14a8fea53e3582ef7d670e7a877887869961c0af176267cf8518d",
+    "limits": "Not whole-object byte identity; .bss retains its declared uninitialized size,not bytes at raw offset."
+  },
+  "popf-": {
+    "sections_compared": 5,
+    "all_link_retained_initialized_bytes_and_named_relocations_equal": true,
+    "metadata_and_uninitialized_handling": [
+      {
+        "name": ".chks64",
+        "reason": "IMAGE_SCN_LNK_REMOVE",
+        "flags": 2560
+      }
+    ],
+    "current_obj_sha256": "55ae505f7fd705d3d8027d1fb9246d0ed7701c17583616b137bb11436838f6de",
+    "original_obj_sha256": "5488bf1fbed3c62d8b46f3b18e13fb500d6bfebc7498f414ce6d2301ab927ab1",
+    "limits": "Not whole-object byte identity; .bss retains its declared uninitialized size,not bytes at raw offset."
+  }
+}

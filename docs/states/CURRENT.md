@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-485 points have a prior or current review record:183 restored/verified/published,
-0 local restorations pending verification,2 approved retain,300 qualified pending
-decisions and0 prior classifications requiring requalification. Another2235
-points are unreviewed. Sequential file disposition is71/365;294 remain.
+487 points have a prior or current review record:184 restored/verified/published,
+0 local restorations pending verification,2 approved retain,301 qualified pending
+decisions and0 prior classifications requiring requalification. Another2233
+points are unreviewed. Sequential file disposition is73/365;292 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P48 package `99b1433d-1cfe-4423-811f-e4f00b4e08f3` is published to
+P49 package `43b30ce5-f913-45ad-9b51-ad5c64960397` is published to
 assets/release and O:/winnt/system32;all11 hashes match.Cached full build,
 callback/C-VID/mapping/BIOS/x87/CPU/FIST64 and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p48-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p49-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,14 +230,7 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P47 localfm delivered
-
-R0474 restores CpuH;two layout includes remain pending.R0475 restores Sas.
-Original common symbols merge in normal no-force product link.
-Mirror diff10->3;original logical lines verified. Final build,publication,focused and Full16 passed.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0474-r0475-localfm-review.json).
-
-
+P47 localfm delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p47-checkpoint.json).
 
 ## P48 ntthread delivered
 
@@ -245,4 +238,7 @@ R0477/R0478 restore original returns;R0476 retains minimal abnormal-frame cleanu
 Mirror diff25->15;203 original logical lines verified. Final build,publication,focused and Full16 passed.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0476-r0478-ntthread-review.json).
 
-Next R0479;S5 remains active.
+R0479: redundant comment removed;one-line typed interface pending.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0479-ntthread-header-review.json).
+R0480 exact original restored;P49 diff net-3,full delivery verified.
+Next R0481;S5 remains active.

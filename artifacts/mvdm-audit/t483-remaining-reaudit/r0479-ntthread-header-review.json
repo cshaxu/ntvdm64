@@ -1,0 +1,27 @@
+{
+  "id": "T483-R0479",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/ntthread.h",
+  "responsibility": "Original W32Dispatch exception handling may unwind a native simulation frame without ordinary FE; P48 actual CCPU original-control fails escaped-level.",
+  "original_limit": "Original Unsimulate pops and longjmps; cannot retire an already unwound native frame. The added no-jump operation is owned by original ntthread TLS provider, not a second state machine.",
+  "specific_declaration": "Only c_main.c abnormal finally calls this void(jmp_buf*) interface. Without this declaration actual MSVC emits C4013 and infers int return, incompatible with the real void definition. Explicit interface costs one line; no equivalent declaration moved to another file.",
+  "control": {
+    "build": "build/t483-s5-p49/compare.cmd",
+    "current_exit": 0,
+    "original_header_exit": 0,
+    "warning": "C4013 ccpu386AbandonSimulate undefined; assuming extern returning int",
+    "call_assembly": "Both push frame, call _ccpu386AbandonSimulate, add esp,4; return value unused.",
+    "limits": "No runtime failure from removing the declaration reproduced. Supported x86 call sequence is identical. Type-contract evidence is distinct from runtime evidence; no claim that P48 cleanup failure proves this declaration changes runtime behavior.",
+    "object_comparison": "batch-p49-compile-controls.json: link-retained initialized sections and named relocations equal; uninitialized section size/flags equal. No whole-object hash identity claim."
+  },
+  "decision": "Minimize two added lines to one explicit prototype; residual pending owner decision based on incompatible inferred interface, not inferred crash.",
+  "diff": {
+    "before_added": 2,
+    "before_removed": 0,
+    "after_added": 1,
+    "after_removed": 0,
+    "net": -1
+  },
+  "line_check": "Original lines1-6 unchanged; #line7 restores original final declarations7-8. No #error bodies in this file.",
+  "verification": "batch-p49-checkpoint.json:final-source full delivery verified;accompanies Git commit.",
+  "sha256": "619cf740374a4271c8a4bca763eba6909ab5bbc737cdf64d5eff243b13dc14ec"
+}

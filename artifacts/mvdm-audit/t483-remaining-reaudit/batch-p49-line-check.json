@@ -1,0 +1,14 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+    "matched_original_nonblank_nonpreprocessor_lines": 8,
+    "matched_original_line_mismatches": [],
+    "excluded_error_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+    "matched_original_nonblank_nonpreprocessor_lines": 38,
+    "matched_original_line_mismatches": [],
+    "excluded_error_unchanged": true
+  }
+]
