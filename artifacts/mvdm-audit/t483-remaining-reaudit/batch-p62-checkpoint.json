@@ -1,0 +1,160 @@
+{
+  "status": "P62 delivery gates verified; known baseline failures retained; accompanies Git commit",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "sha256": "34fc10d6c02b7cd3a2c609dc793ef6373f29604933940b92f9b67cf750dfeb21"
+    }
+  ],
+  "mirror_diff_delta": -14,
+  "source_review": [
+    "gmi-h-file-review.json"
+  ],
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "limits": [
+    "Original pointer-signature diagnostics retained;compiler code identity does not claim portable ISO C compatibility."
+  ],
+  "runner": {
+    "pid": 7320,
+    "created": "2026-11-13T22:34:57.2223140Z",
+    "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File build/t483-s5-p62/deliver.ps1",
+    "root": "build/t483-s5-p62",
+    "stdout": "build/t483-s5-p62/deliver.log",
+    "stderr": "build/t483-s5-p62/deliver.err",
+    "state": "completed",
+    "exit": 0
+  },
+  "ems": {
+    "Mapping": "PASS independent COM -> original INT67 Mapping; marker=EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS; normal launcher exit; no original guest or profile edit\n",
+    "CallReturn": "PASS independent COM -> original INT67 CallReturn; marker=T430_EMS_CALL_RETURN_STACK_MAP_OK; normal launcher exit; no original guest or profile edit\n"
+  },
+  "package": "802de152-9d01-47bb-9149-f40fe8e48312",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1321,
+      "CleanupMs": 529,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 239,
+      "CleanupMs": 502,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66824,
+      "CleanupMs": 514,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 44418,
+      "CleanupMs": 497,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 41496,
+      "CleanupMs": 514,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14056,
+      "CleanupMs": 472,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 9830,
+      "CleanupMs": 481,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 54321,
+      "CleanupMs": 489,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12089,
+      "CleanupMs": 479,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 27918,
+      "CleanupMs": 516,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30189,
+      "CleanupMs": 556,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4748,
+      "CleanupMs": 544,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7918,
+      "CleanupMs": 514,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 11422,
+      "CleanupMs": 516,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 5822,
+      "CleanupMs": 539,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 7746,
+      "CleanupMs": 475,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=36796 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=35036 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=9180 escaped=1 nested=1 continue=1 normal-fe=1\n"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ],
+  "final_checks": {
+    "wow_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed",
+    "runner_pid": 35592,
+    "exit": 0
+  }
+}

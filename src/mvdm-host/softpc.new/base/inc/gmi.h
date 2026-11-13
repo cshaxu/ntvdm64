@@ -17,14 +17,14 @@ typedef enum
 typedef struct
 {
 #if defined(CPU_40_STYLE) && defined(C_VID)
-	VOID	(*b_write)IPT2(IU32, eaOff, IU8, eaVal);
-	VOID	(*w_write)IPT2(IU32, eaOff, IU16, eaVal);
-	VOID	(*b_fill)IPT3(IU32, eaOff, IU8, eaVal, IU32, count);
-	VOID	(*w_fill)IPT3(IU32, eaOff, IU16, eaVal, IU32, count);
-	VOID	(*b_move)IPT4(IU32, eaOff, IHPE, fromOff, IU32, count,
-		 IBOOL, srcInRAM);
-	VOID	(*w_move)IPT4(IU32, eaOff, IHPE, fromOff, IU32, count,
-		 IBOOL, srcInRAM);
+#line 19
+	VOID	(*b_write)();
+	VOID	(*w_write)();
+	VOID	(*b_fill)();
+	VOID	(*w_fill)();
+	VOID	(*b_move)IPT4(UTINY *, laddr, UTINY *, haddr, UTINY *, src,
+		 UTINY, src_type);
+	VOID	(*w_move)();
 #else
 #line 19
 #error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile

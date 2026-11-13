@@ -1,0 +1,173 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+  "points": [
+    "T483-R0707"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/gmi.h",
+  "original_sha256": "01ec314cb52fc3051e7c6135be6262f1cc0791ef2fcb0af4c442e3a26b709c08",
+  "before_sha256": "630653599afa008bc62d877b7eadb346b5e47b2ffdf80148dd4b0f5a24ee3e45",
+  "after_sha256": "34fc10d6c02b7cd3a2c609dc793ef6373f29604933940b92f9b67cf750dfeb21",
+  "diff": {
+    "metric": "original-relative LF physical lines including unchanged exclusions",
+    "before": {
+      "added": 20,
+      "deleted": 21
+    },
+    "after": {
+      "added": 13,
+      "deleted": 14
+    },
+    "delta": -14
+  },
+  "responsibility": "Bind six memory/video handlers through original MEM_HANDLERS tables to CCPU dispatch.",
+  "original_can_fulfill": "ccpusas4.c gmi_define_mem copies fields into original unprototyped function pointers; actual call arguments and provider definitions are unchanged. gfx_updt vid_handlers uses original simple_update_b_move pointer contract. ega_writ Glue_writes binds C-VID numeric-offset providers through original conversion.",
+  "specific_diff_necessity": "No supported failure found from restoring original declarations. Exact provider parameter types are not by themselves proof that this table needs rewritten prototypes.",
+  "counter_review": "Original b_move declaration differs from C-VID provider signature; original explicit CCPU conversion remains. No claim of portable ISO C function-pointer compatibility. All five actual binding/provider consumers compile and retain code/data/BSS and relocation identity. No new shim/cast or provider changes.",
+  "result": "Restored six original declarations;preserved all three excluded #error branches;line19 restores selected declaration coordinates.",
+  "compiler_controls": [
+    {
+      "source": "ccpusas4",
+      "equal": true,
+      "sections": 144,
+      "before_sha256": "60f5f6ab15b13c66d0b82b2a9693de447b0cab357e3b5f12ae0148e984b6b6a3",
+      "after_sha256": "4e663c5abd08fce1df3ab226385ef7ccd7325abd3ed45cce00b6e4771e7ea4ac",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4013",
+        "warning C4028",
+        "warning C4033",
+        "warning C4047",
+        "warning C4100",
+        "warning C4101",
+        "warning C4389",
+        "warning C4715",
+        "warning C4716",
+        "warning C4996"
+      ],
+      "before_compile_exit": 0,
+      "after_warnings": [
+        "warning C4005",
+        "warning C4013",
+        "warning C4028",
+        "warning C4033",
+        "warning C4047",
+        "warning C4100",
+        "warning C4101",
+        "warning C4389",
+        "warning C4715",
+        "warning C4716",
+        "warning C4996"
+      ],
+      "after_compile_exit": 0
+    },
+    {
+      "source": "ega_writ",
+      "equal": true,
+      "sections": 13,
+      "before_sha256": "3a410652d298e8814a14baca27d2777915112f27c017ec49dbcda322dcb56e55",
+      "after_sha256": "b23f2c0d5c1fcf05d9b79f890e4fcf1beae62d849731afee33cce359318187df",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4100",
+        "warning C4701"
+      ],
+      "before_compile_exit": 0,
+      "after_warnings": [
+        "warning C4005",
+        "warning C4100",
+        "warning C4113",
+        "warning C4701"
+      ],
+      "after_compile_exit": 0
+    },
+    {
+      "source": "gfx_updt",
+      "equal": true,
+      "sections": 135,
+      "before_sha256": "5b1dd6aa7f557bb2a7d31f5fe2a26e4d08987449c0e2216b358b6389f4c8c97d",
+      "after_sha256": "50ff501e5a3133d2c36a805e9a9323af1ec9eb3907bde3b958899245fe459222",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4018",
+        "warning C4100",
+        "warning C4101",
+        "warning C4113",
+        "warning C4133",
+        "warning C4189",
+        "warning C4244"
+      ],
+      "before_compile_exit": 0,
+      "after_warnings": [
+        "warning C4005",
+        "warning C4018",
+        "warning C4100",
+        "warning C4101",
+        "warning C4113",
+        "warning C4133",
+        "warning C4189",
+        "warning C4244"
+      ],
+      "after_compile_exit": 0
+    },
+    {
+      "source": "cga",
+      "equal": true,
+      "sections": 16,
+      "before_sha256": "8925cd7116df1db1983752bbced40624a7ad77f8db4716cc34b75f61c275fda7",
+      "after_sha256": "aa4bb186a60993cb226fb52e7c117fce944a0589961efbab579910a87105dab3",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4210",
+        "warning C4244",
+        "warning C4245"
+      ],
+      "before_compile_exit": 0,
+      "after_warnings": [
+        "warning C4005",
+        "warning C4210",
+        "warning C4244",
+        "warning C4245"
+      ],
+      "after_compile_exit": 0
+    },
+    {
+      "source": "ev_glue",
+      "equal": true,
+      "sections": 80,
+      "before_sha256": "ee3a4c75d04524ba642aeb5d63b58e00c819f7aa0f784549fbde75dc50ad4af1",
+      "after_sha256": "bab997aeeb8e81def966dacf6edeb05bbd7adb434be23a6408d290ba50e941f5",
+      "before_warnings": [
+        "warning C4005",
+        "warning C4013",
+        "warning C4024",
+        "warning C4047",
+        "warning C4100",
+        "warning C4113",
+        "warning C4133",
+        "warning C4244",
+        "warning C4431"
+      ],
+      "before_compile_exit": 0,
+      "after_warnings": [
+        "warning C4005",
+        "warning C4013",
+        "warning C4024",
+        "warning C4047",
+        "warning C4100",
+        "warning C4113",
+        "warning C4133",
+        "warning C4244",
+        "warning C4431"
+      ],
+      "after_compile_exit": 0
+    }
+  ],
+  "line_proof": {
+    "current": 28,
+    "original": 28,
+    "equal": true,
+    "differences": []
+  },
+  "validation": "P62 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record."
+}

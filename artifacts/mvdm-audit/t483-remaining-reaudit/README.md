@@ -412,3 +412,8 @@ Cached full,11x2 publication/hash,focused,EMS2 and Full16 passed.713 reviewed;
 280 delivered,2 approved,431 pending,2007 unreviewed;97/365 files.
 See [receipt](batch-p61-checkpoint.json),[error](error-h-file-review.json),
 [gfx_upd](gfx_upd-h-file-review.json).
+
+P62: gmi original declarations restored;mirror diff net-14.
+Cached full,11x2 publication/hash,focused,EMS2 and Full16 passed.714 reviewed;
+281 delivered,2 approved,431 pending,2006 unreviewed;98/365 files.
+See [receipt](batch-p62-checkpoint.json),[review](gmi-h-file-review.json).
