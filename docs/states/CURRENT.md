@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-444 points have a prior or current review record:159 restored/verified/published,
+445 points have a prior or current review record:160 restored/verified/published,
 0 local restorations pending verification,2 approved retain,283 qualified pending
-decisions and0 prior classifications requiring requalification. Another2276
-points are unreviewed. Sequential file disposition is64/365;301 remain.
+decisions and0 prior classifications requiring requalification. Another2275
+points are unreviewed. Sequential file disposition is65/365;300 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -230,11 +230,11 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P41 CALL file review delivered
+## P42 original build metadata restored
 
-R0433-R0436 are confirmed restored by P19, not new P41 removals.
-R0437 mirror diff5->2; remaining condition difference awaits owner decision.
-218 original logical lines verified; #error retained. Cached build,
-publication11x2/hash, stack/x87/CPU and Full16 passed; receipt accompanies commit.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0433-r0437-call-review.json).
-Next R0438; S5 remains active.
+R0438 restores byte-exact original ccpudefs.inc; mirror diff net-2.
+The historical NMAKE include is not consumed by current builds. Both cached
+architecture graphs regenerated identically; CPU30 remains unselected.
+P41 build/publication/Full reused; no fresh runtime or publication claim.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p42-checkpoint.json).
+Next R0439; S5 remains active.

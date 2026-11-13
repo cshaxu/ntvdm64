@@ -1,0 +1,49 @@
+{
+  "point": "T483-R0438",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+  "original_source": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/softpc.new/base/ccpu386/ccpudefs.inc",
+    "sha256": "5aeaaa72f958ef891628c267ee4849a0203c25af0fbe67b3fdc890b75dfb3fd8",
+    "before_sha256": "320031658eadcc273379f96e881757166f0ae7a1062348f8228ce4b005474b97"
+  },
+  "responsibility": "None in current supported build. Historical NT build metadata, not active macro authority.",
+  "original_ability": "Get-OriginalSources reads SOURCES until !INCLUDE/next assignment; it never expands this included NMAKE definitions file. CMake calls New-T310OriginalSoftpcNinja with fixed x86 CCPU worker profile; baseCommonFlags supplies actual CPU40 definitions.",
+  "original_failure": "None established. CPU30 prohibition governs actual source selection, compilation and execution; preserving unconsumed historical metadata is not selecting that backend.",
+  "action": "Restore file byte-exactly from pinned original commit. No source, flag, tool, import or link selection changes.",
+  "supported_configurations": "CMakePresets defines x86/x64 release and ccache wrappers. Reconfigured both cached presets; generator source shows CompilerCache only selects compiler wrapper, not metadata parsing or CPU macros. No legacy NMAKE configuration is supported or invoked.",
+  "graph_proof": {
+    "count": 12,
+    "before_equals_after": true,
+    "graphs": {
+      "build\\.ninja\\msvc-x86-release\\build.ninja": "3562f429e51d7ea9e4ac680009aae9420e70d56cdd56878bbc08eaea265ddffe",
+      "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja": "a89febee983c4a8e1e87e3f735d849f660d918b93bdf87365db2544537e531fd",
+      "build\\.ninja\\msvc-x86-release\\worker\\build.ninja": "db0e33e81b0504adab6662ef56f9a4e6f05d8d6df55cd6b887151ff694f47f8f",
+      "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja": "050de1afa22a67ffc91c0049fa9ac392320d11f92278f716c609316021afcec3",
+      "build\\.ninja\\msvc-x64-release\\build.ninja": "378309822998bccfc85453e1736ed4744d4a3974bfa5169fdde247a003df688b",
+      "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja": "ce681036690e9585616a8ae2b893ca7f5762e5d9f650dbff66e717d39ba3e2f1",
+      "build\\.ninja\\msvc-x64-release\\hook\\build.ninja": "664b8825659d7d9264e2eba2af0763263b8b940d93daf3d8daf007d648b2d45f",
+      "build\\.ninja\\msvc-x64-release\\launcher\\build.ninja": "f3f5b27882cd99fbbfec3911c58fdf750a1e06fb184130e2e59deea47d7632a7",
+      "build\\.ninja\\msvc-x64-release\\monitor\\build.ninja": "62f419f7501bb80e149d6a981fe12fb2fd1d20e4b9e61c575d16b05b4de607cd",
+      "build\\.ninja\\msvc-x64-release\\service\\build.ninja": "5202fba4a082c550429ff9bb5324390f1d9c65a8189253282d0efc704fcd289e",
+      "build\\.ninja\\msvc-x64-release\\worker\\build.ninja": "7efbc34b4f735352e9e016eed747d1048f5d424cce41984b066b901bd7284861",
+      "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja": "36a850e2dca8f95034fbd1a19a439498914e0ffe1739b9c3789e0ac205ffeee3"
+    },
+    "cpu30_defines": 0
+  },
+  "mirror_diff": {
+    "before": {
+      "added": 1,
+      "deleted": 1
+    },
+    "after": {
+      "added": 0,
+      "deleted": 0
+    },
+    "delta": -2
+  },
+  "line_and_exclusions": "One original line restored exactly; no C preprocessor branches or #line directives in this historical build file.",
+  "validation": "Configuration regeneration is not compilation. Actual build graphs identical; P41 full build, publication and runtime evidence reused under no-binding-change authorization. No new runtime pass claimed.",
+  "package": "cbdb5e30-ae2f-421a-9461-cbce7eb3938a",
+  "publication": "Both destinations still match all 11 manifest hashes."
+}

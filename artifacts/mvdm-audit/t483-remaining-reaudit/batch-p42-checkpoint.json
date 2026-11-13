@@ -1,0 +1,15 @@
+{
+  "status": "P42 nonbinding metadata restoration; accompanies Git delivery",
+  "mirror_diff_delta": -2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+      "sha256": "5aeaaa72f958ef891628c267ee4849a0203c25af0fbe67b3fdc890b75dfb3fd8"
+    }
+  ],
+  "graph_count": 12,
+  "graphs_equal": true,
+  "publication": "P41 unchanged 11-image package hash-verified at both destinations; no new publication required",
+  "package": "cbdb5e30-ae2f-421a-9461-cbce7eb3938a",
+  "runtime": "Reused P41; no new runtime claim"
+}

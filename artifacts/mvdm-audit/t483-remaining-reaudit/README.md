@@ -220,3 +220,8 @@ Two original restorations verified: cached build, publication11x2/hash,64 x87/14
 P41: [CALL file review](r0433-r0437-call-review.json),
 [line proof](batch-p41-line-check.json), [checkpoint](batch-p41-checkpoint.json).
 P41 cached build, publication11x2/hash,36 stack cases,2 expected original CALL failures,64 x87/143 CPU and Full16 passed.444/2720 reviewed;64/365 files;159 restored delivered (four reconciled P19 removals),2 approved,283 pending,2276 unreviewed.
+
+P42: [original build metadata](r0438-original-build-metadata.json) restored;
+mirror diff net-2. All supported generated graphs remain byte-identical;
+CPU30 not selected. [Receipt](batch-p42-checkpoint.json) reuses P41 publication
+and runtime.445/2720 reviewed;65/365 files;160 restored,2 approved,283 pending,2275 unreviewed.
