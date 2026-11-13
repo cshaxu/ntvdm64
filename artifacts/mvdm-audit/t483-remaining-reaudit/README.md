@@ -250,3 +250,10 @@ Historical-contract audit and minimal predicate: [review](r0473-iret-review.json
 480/2720 reviewed;180 restored delivered,0 local restorations,2 approved,
 298 pending,2240 unreviewed. 69/365 files source-complete;296 remain.
 P46 mirror diff5->2 (-3);cached build,publication11x2/hash,focused and Full16 passed.
+
+## R0474-R0475 localfm
+
+[Review](r0474-r0475-localfm-review.json),[lines](batch-p47-line-check.json),
+[delivery](batch-p47-checkpoint.json). Mirror diff10->3 (-7).
+482/2720 reviewed;181 restored delivered,0local,2approved,299pending,2238unreviewed.
+70/365 files complete;295 remain.P47 cached build,publication11x2/hash,focused and Full16 passed.

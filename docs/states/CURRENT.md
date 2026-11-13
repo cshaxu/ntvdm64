@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-480 points have a prior or current review record:180 restored/verified/published,
-0 local restorations pending verification,2 approved retain,298 qualified pending
-decisions and0 prior classifications requiring requalification. Another2240
-points are unreviewed. Sequential file disposition is69/365;296 remain.
+482 points have a prior or current review record:181 restored/verified/published,
+0 local restorations pending verification,2 approved retain,299 qualified pending
+decisions and0 prior classifications requiring requalification. Another2238
+points are unreviewed. Sequential file disposition is70/365;295 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P46 package `6678b111-4a52-4b1f-a9c1-1ee1a2160867` is published to
-assets/release and O:/winnt/system32; all11 hashes match. Cached full build,
-stack/mapping/BIOS/x87/CPU/FIST64 and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p46-checkpoint.json).
+P47 package `72b49043-09a2-4efc-8143-ac5ee1ec1d73` is published to
+assets/release and O:/winnt/system32;all11 hashes match.Cached full build,
+C-VID/mapping/BIOS/x87/CPU/FIST64 and Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p47-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,13 +230,6 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P45 FPU delivered
-
-R0467-R0471 restored;R0472 minimal residual awaits owner decision.
-Mirror diff16->3;5311 original logical lines verified;#error unchanged.
-Cached build,publication11x2/hash,FIST64/mapping/BIOS/x87/CPU and Full16 passed.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0467-r0472-fpu-review.json).
-
 ## P46 IRET delivered
 
 R0473 minimized mirror diff5->2;one predicate remains pending owner decision.
@@ -245,4 +238,13 @@ Original-condition control fails2/36;candidate passes36/36. Cached build,publica
 223 original logical lines checked;#error unchanged.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0473-iret-review.json).
 
-Next R0474;S5 remains active.
+
+
+## P47 localfm delivered
+
+R0474 restores CpuH;two layout includes remain pending.R0475 restores Sas.
+Original common symbols merge in normal no-force product link.
+Mirror diff10->3;original logical lines verified. Final build,publication,focused and Full16 passed.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0474-r0475-localfm-review.json).
+
+Next R0476;S5 remains active.

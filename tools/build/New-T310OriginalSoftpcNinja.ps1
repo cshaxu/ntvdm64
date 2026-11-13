@@ -930,10 +930,11 @@ $graph.Add('  command = link.exe /nologo /out:$out $in kernel32.lib user32.lib n
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    # Existing localfm.c retains this profile's original Gdp/Cpu/Video state
-    # declarations while omitting the already-owned Sas vector.
     $source = Join-Path $ccpuRoot $name
 $graph.Add('build ' + $object + ': cc_ccpu ' + (NinjaPath $source))
+    if ($name -eq 'localfm.c') {
+        $graph.Add('  ccpu_flags = /I "' + (NinjaPath $cvidcRoot) + '" ' + $ccpuFlags)
+    }
     $object
 }
 $biosObjects = foreach ($name in $biosNames) {

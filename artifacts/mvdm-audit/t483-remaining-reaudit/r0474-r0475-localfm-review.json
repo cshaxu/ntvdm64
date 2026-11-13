@@ -1,0 +1,97 @@
+{
+  "ids": [
+    "T483-R0474",
+    "T483-R0475"
+  ],
+  "status": "Verified final-source delivery;accompanies Git commit",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/localfm.c",
+  "call_chain": "Original cvidc/vglfunc C_Video -> mvdm_cvidc_bind_video_vector -> Video storage; Cpu public/private vector bindings reference it. Original ccpusas4 sas_init -> SasSetPointers(&cSasPtrs) -> common Sas storage.",
+  "responsibility": "Correct original vector layouts and shared storage required;does not prove replacement header block or Sas omission necessary.",
+  "original_compile": "Full original under current actual CCPU flags fails C2079 for undefined SasVector/VideoVector. Original CpuH plus two original layout headers compiles.",
+  "profile_proof": {
+    "baseline": {
+      "_Cpu": {
+        "size": 628,
+        "section": 0,
+        "class": 2
+      },
+      "_Video": {
+        "size": 324,
+        "section": 0,
+        "class": 2
+      }
+    },
+    "minimal": {
+      "_Cpu": {
+        "size": 636,
+        "section": 0,
+        "class": 2
+      },
+      "_Video": {
+        "size": 324,
+        "section": 0,
+        "class": 2
+      }
+    },
+    "sas": {
+      "_Cpu": {
+        "size": 636,
+        "section": 0,
+        "class": 2
+      },
+      "_Video": {
+        "size": 324,
+        "section": 0,
+        "class": 2
+      },
+      "_Sas": {
+        "size": 232,
+        "section": 0,
+        "class": 2
+      }
+    },
+    "profile": {
+      "_Cpu": {
+        "size": 628,
+        "section": 0,
+        "class": 2
+      },
+      "_Video": {
+        "size": 324,
+        "section": 0,
+        "class": 2
+      },
+      "_Sas": {
+        "size": 232,
+        "section": 0,
+        "class": 2
+      }
+    }
+  },
+  "header_selection": "CCPU CpuVector has636 bytes;selected C-VID has628. Compile localfm with original C-VID include root first. This is a single TU source-profile choice,not a replacement algorithm or shim.",
+  "sas_proof": "Both original ccpusas4.obj and restored localfm define _Sas common,size232. Exact normal production link with restored candidate passes without /FORCE;map has one _Sas common.",
+  "decisions": {
+    "R0474": "Reduce +7/-1 to +2/-0;original CpuH restored,two layout declarations remain pending owner decision.",
+    "R0475": "Restore original Sas declaration;no duplicate-definition failure."
+  },
+  "diff": {
+    "before_added": 7,
+    "before_removed": 3,
+    "after_added": 2,
+    "after_removed": 1,
+    "net": -7,
+    "unchanged": "Prior Gdp omission is not reopened."
+  },
+  "verification": "batch-p47-checkpoint.json",
+  "counter_review": "Checked symbol sizes rather than assuming compilation equals ABI equivalence. Rejected duplicate-definition rationale using actual common symbols and no-force link.",
+  "scripts": "build/t483-s5-p47/variants.cmd;profile.cmd;link.cmd",
+  "limitations": [
+    "No fresh Win3.x/Win95 gameplay claim."
+  ],
+  "final_production_object": {
+    "_Cpu": 628,
+    "_Video": 324,
+    "_Sas": 232
+  },
+  "sas_declaration_identity": "Both profiles include the same existing src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h through original sas.h;not separate historical SAS layouts."
+}
