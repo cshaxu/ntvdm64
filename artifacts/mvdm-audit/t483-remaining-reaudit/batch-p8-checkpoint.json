@@ -1,0 +1,166 @@
+{
+  "status": "verified and published; included in P8 Git delivery",
+  "source_head": "cc2595e29df9d27b4833a8526b2fa804b93ee024",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "sha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49"
+    }
+  ],
+  "point": "T483-R0064",
+  "mirror_diff_delta": -13,
+  "line_proof": "Exact original file bytes; no #error subset or #line differences.",
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "pipe-final": 0,
+    "full": 0,
+    "governance": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "e1f2f783-1b92-46c8-9cd3-4b1f494e7b6b",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "pipe_test_entrypoint": "test/mvdm-host/dos/command/verify-cmdredir.ps1 -BuildRoot build/.ninja/msvc-x86-release/worker -ReportRoot build/t483-s5-p8/pipe-final",
+  "pipe_assertions": [
+    "actual original CreateThread paths for stdin and stdout",
+    "4 bytes transferred unchanged in each direction",
+    "both native worker handles signaled with exit code 0",
+    "original cleanup callable after completion"
+  ],
+  "pipe_result": {
+    "PID": 17200,
+    "Started": "2026-11-13T02:15:39.1039228Z",
+    "ObjectSHA256": "ECC246308FAABABD6B11DCE939B1CD3BFA2287C6E7ABB7CF8A110AE666C6239A",
+    "Exit": 0,
+    "TimedOut": false
+  },
+  "test_sources": [
+    {
+      "path": "test\\mvdm-host\\dos\\command\\t290_s3_cmdredir_fixture.c",
+      "sha256": "3ff34ee21c6188aec04e074ca4b1f54bcb344cf4abc658c0c149228a41e8276f"
+    },
+    {
+      "path": "test\\mvdm-host\\dos\\command\\verify-cmdredir.ps1",
+      "sha256": "65d79cbf04c86330ec2584083cbbe946fdd040b50a3d5c98808973fd942270d5"
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 387102,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6158,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1275,
+        "CleanupMs": 590,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 205,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67296,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 49107,
+        "CleanupMs": 436,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 47990,
+        "CleanupMs": 556,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14760,
+        "CleanupMs": 486,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12403,
+        "CleanupMs": 469,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 66020,
+        "CleanupMs": 743,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12552,
+        "CleanupMs": 592,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29438,
+        "CleanupMs": 620,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30810,
+        "CleanupMs": 587,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5884,
+        "CleanupMs": 574,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8031,
+        "CleanupMs": 601,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11277,
+        "CleanupMs": 582,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5416,
+        "CleanupMs": 567,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7925,
+        "CleanupMs": 562,
+        "Passed": true
+      }
+    ]
+  },
+  "limits": [
+    "DOS4GW/NESticle external fixtures absent: explicitly skipped, not passed."
+  ],
+  "git_delivery": "Receipt accompanies P8 commit; remote verification follows commit creation."
+}

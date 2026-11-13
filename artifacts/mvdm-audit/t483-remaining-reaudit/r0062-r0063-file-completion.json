@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/dos/command/cmdpif.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdpif.c",
+  "sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+  "byte_identical": true,
+  "delivery": "cc2595e29",
+  "remaining_diff": 0,
+  "line_proof": "Byte identity includes complete original conditional structure and physical lines.",
+  "sequential_files_complete": 10
+}

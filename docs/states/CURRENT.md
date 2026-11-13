@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-177 points have a prior or current review record:72 restored/verified/published,
+177 points have a prior or current review record:73 restored/verified/published,
 0 local restorations pending verification,2 approved retain,16 qualified pending
-decisions and87 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is9/365;356 remain.
+decisions and86 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is11/365;354 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -69,15 +69,14 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P7 package `4fb1cf41-a84f-4e73-b38b-d6a752c4588e` is published to
+P8 package `e1f2f783-1b92-46c8-9cd3-4b1f494e7b6b` is published to
 assets/release and O:/winnt/system32; all11 image hashes match.
-Final cached build, command fixtures, Full16, original PIF caller,
-DOSWOW directory and original command-tail checks passed.
-DOS4GW/NESticle remains explicitly skipped for absent external fixtures.
-Final governance passed. This record accompanies the P7 delivery commit;
-Git push confirmation follows commit creation. P6 e7c728e07 is the preceding boundary.
-See [P7 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p7-checkpoint.json).
-No guest or winnt.zip changes. S5 remains active.
+Cached full build, command fixtures, actual original-object pipe input/output
+and exit tests, Full16 and governance passed. DOS4GW/NESticle is explicitly
+skipped for absent external fixtures. This record accompanies the P8 commit;
+remote confirmation follows commit creation. No guest or winnt.zip changes.
+See [P8 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p8-checkpoint.json).
+S5 remains active; next ordered point is R0067 in dem.c.
 
 ## Remaining Scope
 
@@ -156,6 +155,11 @@ The6 coupled mirror files reduce original-relative differences by205 lines.
 cmdpif.c and nt_fdisk.h now match original bytes; demmisc.c retains only
 excluded-branch differences. Original-matched code line checks have no
 mismatches and #error bodies are unchanged. Later coupled files are not
-counted as completed sequential audits. Next ordered file is cmdpif.c.
+counted as completed sequential audits. cmdpif.c is now fully checked byte-identical; current ordered point is R0064 in cmdredir.c.
 The first P7 build missed the original pFDAccess definition and failed linking;
 r2 corrected that insertion and passed. The failed attempt was never published.
+
+R0064 cmdredir.c is restored byte-exact. Its13 added difference lines are
+removed. Original-source compilation, original native API imports and real
+pipe tests support restoration. P8 completes build/publication/verification;
+the accompanying commit completes the Git delivery record.

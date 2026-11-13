@@ -1,0 +1,18 @@
+{
+  "point": "T483-R0064",
+  "conclusion": "restore-original",
+  "source_sha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49",
+  "original_source": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdredir.c",
+  "evidence": [
+    "Original source compiled with selected production x86 flags; probe.exit=0.",
+    "dumpbin original-symbols.txt confirms native CreateThread/ExitThread/ReadFile/WriteFile/CloseHandle imports.",
+    "Both cmdPipeInThread and cmdPipeOutThread end in ExitThread(0); no normal return relies on incompatible calling convention.",
+    "Original cmdCheckCopyForRedirection retains its existing event/wait/input-thread termination cleanup."
+  ],
+  "rejected_argument": "A generic cdecl-versus-WINAPI warning and the bridge own binding dependencies are not evidence that these nonreturning native-I/O workers require the bridge.",
+  "mirror_diff_before": 13,
+  "mirror_diff_after": 0,
+  "line_proof": "Entire file byte-identical to original; no excluded branches removed.",
+  "verification": "Original-source compile passed; restored product build/publication/runtime pending.",
+  "counter_review": "Other functions in this translation unit still use CPU and host calls on their original caller thread; their existence does not establish those calls run on the two pipe threads."
+}

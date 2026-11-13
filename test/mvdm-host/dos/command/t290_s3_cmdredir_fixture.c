@@ -1,8 +1,7 @@
 #include "cmd.h"
 
 #include <cmdsvc.h>
-#include "session.h"
-#include "thread_start_compat.h"
+#include <stdint.h>
 
 PREDIRCOMPLETE_INFO cmdCheckStandardHandles(PVDMINFO info,
     USHORT UNALIGNED *standard_handles);
@@ -30,31 +29,6 @@ VOID RcErrorDialogBox(DWORD error, PCHAR first, PCHAR second)
 
 VOID TerminateVDM(VOID)
 {
-}
-
-HANDLE opennt_create_void_cdecl_parameter_thread_named(
-    LPSECURITY_ATTRIBUTES attributes,
-    SIZE_T stack_bytes,
-    OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE start_routine,
-    LPVOID parameter,
-    DWORD flags,
-    LPDWORD thread_id,
-    const char *source_name)
-{
-    (void)attributes;
-    (void)stack_bytes;
-    (void)start_routine;
-    (void)parameter;
-    (void)flags;
-    (void)thread_id;
-    (void)source_name;
-    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-    return NULL;
-}
-
-VOID WINAPI opennt_exit_thread(DWORD exit_code)
-{
-    ExitThread(exit_code);
 }
 
 static USHORT fixture_ax;
@@ -87,12 +61,48 @@ static int expect_standard_handle(PREDIRCOMPLETE_INFO redirection,
         observed == (uint32_t)(uintptr_t)expected;
 }
 
+/* Exercise the original worker creation and completion, without a session
+ * bridge or a fake CreateThread provider. The runner bounds hangs. */
+static int check_pipe(BOOL input)
+{
+    HANDLE reader, writer, file, thread;
+    VDMINFO info = {0};
+    PREDIRCOMPLETE_INFO redirection;
+    USHORT mask;
+    DWORD transferred, code;
+    char bytes[4] = {0};
+    if (!CreatePipe(&reader, &writer, NULL, 0)) return 0;
+    if (input) info.StdIn = reader;
+    else info.StdOut = writer;
+    redirection = cmdCheckStandardHandles(&info, &mask);
+    if (!redirection) return 0;
+    fixture_ax = (USHORT)((uintptr_t)redirection >> 16);
+    fixture_bx = (USHORT)(uintptr_t)redirection;
+    fixture_cx = input ? HANDLE_STDIN : HANDLE_STDOUT;
+    cmdGetStdHandle();
+    if (fixture_carry) return 0;
+    file = (HANDLE)(uintptr_t)(((uint32_t)fixture_bx << 16) | fixture_cx);
+    thread = input ? redirection->ri_pPipeStdIn->hThread :
+        redirection->ri_hStdOutThread;
+    if (!WriteFile(input ? writer : file, "pipe", 4, &transferred, NULL) ||
+        transferred != 4) return 0;
+    if (input) CloseHandle(writer);
+    else SetEvent(redirection->ri_pPipeStdOut->hExitEvent);
+    if (WaitForSingleObject(thread, 5000) != WAIT_OBJECT_0 ||
+        !GetExitCodeThread(thread, &code) || code != 0) return 0;
+    if (!ReadFile(input ? file : reader, bytes, 4, &transferred, NULL) ||
+        transferred != 4 || memcmp(bytes, "pipe", 4)) return 0;
+    CloseHandle(file);
+    if (!cmdCheckCopyForRedirection(redirection)) return 0;
+    if (!input) CloseHandle(reader);
+    return 1;
+}
+
 int main(void)
 {
     VDMINFO information;
     USHORT standard_handles;
     PREDIRCOMPLETE_INFO redirection;
-    session instance;
 
     RtlZeroMemory(&information, sizeof(information));
     standard_handles = 0xffffu;
@@ -100,10 +110,6 @@ int main(void)
     if (redirection != NULL || standard_handles != 0u || fSoftpcRedirection ||
         fixture_notification || fixture_notification_count != 1u)
         return 1;
-
-    session_initialize(&instance, 0x2903u);
-    if (!session_activate(&instance) || !session_thread_bind(&instance))
-        return 2;
 
     information.StdIn = (HANDLE)(ULONG_PTR)0x7011u;
     information.StdOut = (HANDLE)(ULONG_PTR)0x7012u;
@@ -124,7 +130,7 @@ int main(void)
         return 7;
     if (!cmdCheckCopyForRedirection(redirection))
         return 8;
-    if (!session_thread_unbind(&instance) || !session_dispose(&instance))
+    if (!check_pipe(FALSE) || !check_pipe(TRUE))
         return 9;
     return 0;
 }
