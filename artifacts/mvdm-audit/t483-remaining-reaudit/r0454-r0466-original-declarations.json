@@ -1,0 +1,24 @@
+{
+  "status": "Original restorations verified and published; accompanies Git commit",
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+  "points": "R0454-R0466",
+  "original_source": "OpenNT/base/mvdm/softpc.new/base/ccpu386/cpu4gen.h",
+  "original_pin": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "responsibility": "Expose original CCPU register-loading status and flag reads to host callers.",
+  "original_contract": "c_reg.c deliberately excludes cpu.h and states the external interface is separate. Four setters return call_cpu_function status:0 or x86 exception number; flag getters return GET_* flag values. Selected x86 IUH unsigned int,IBOOL int,ISM32 long are all32-bit EAX return carriers.",
+  "diff_necessity": "No concrete behavioral necessity established for thirteen changed return declarations; original cvidc/cpu4gen.h also retains IUH/IBOOL. Restore original instead of retaining based solely on named C type difference.",
+  "call_chain": [
+    "DPMI and SoftPC host setCS/SS/DS/ES macros -> c_reg.c -> call_cpu_function -> original segment loaders; error returned by check_interface_active.",
+    "Host getCF/PF/AF/ZF/SF/TF/IF/DF/OF macros -> c_reg.c -> original GET_* values.",
+    "WOW callback lease uses independent int32_t declarations and boolean error checks; this header does not redefine them."
+  ],
+  "implementation": "Restore13 original declarations; remove6 explanatory comment lines. No replacement shim, no guest change. Preserve exclusions; restore EOF comment original line3086.",
+  "mirror_diff_before": 32,
+  "mirror_diff_after": 0,
+  "line_proof": "batch-p44-line-check.json",
+  "source_sha256": "1a21caf7f22b7271e4be6df6cb23a891fd8af6d31998a593692551a0e7fb6055",
+  "limitations": [
+    "Source/ABI proof plus full real build and existing fixtures; no fresh Win3.x/Win95 gameplay acceptance."
+  ],
+  "verification": "batch-p44-checkpoint.json"
+}

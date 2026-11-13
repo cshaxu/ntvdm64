@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-460 points have a prior or current review record:162 restored/verified/published,
+473 points have a prior or current review record:175 restored/verified/published,
 0 local restorations pending verification,2 approved retain,296 qualified pending
-decisions and0 prior classifications requiring requalification. Another2260
-points are unreviewed. Sequential file disposition is66/365;299 remain.
+decisions and0 prior classifications requiring requalification. Another2247
+points are unreviewed. Sequential file disposition is67/365;298 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P43 package `00f9d285-10a3-4ebc-8203-5c08deec1c4b` is published to
+P44 package `7fa7fc90-47fd-4cdf-bac3-e8742a872dff` is published to
 assets/release and O:/winnt/system32; all11 hashes match. Cached full build,
 mapping/BIOS, x87/CPU boundary and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p43-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p44-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,9 +230,9 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P43 SAS file delivered
+## P44 original register declarations delivered
 
-R0439/R0441 restored;13 residuals await owner decision. Mirror diff97->86;
-1486 original logical lines verified;#error unchanged. Cached build,
-publication11x2/hash,mapping/BIOS/x87/CPU and Full16 passed. Next R0454.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0439-r0453-investigation.json).
+R0454-R0466 restored;non-exclusion mirror diff32->0.442 original logical
+lines verified;#error unchanged. Cached build,publication11x2/hash,
+mapping/BIOS/x87/CPU and Full16 passed. Next R0467.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0454-r0466-original-declarations.json).

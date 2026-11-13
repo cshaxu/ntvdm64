@@ -1,0 +1,12 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "matched_original_lines": 442,
+    "matched_original_line_mismatches": [],
+    "remaining_non_exclusion_diffs": [],
+    "scope": "Matched nonblank non-preprocessor original logical lines.",
+    "excluded_errors": "All #error directives unchanged",
+    "semantic_diff_before": 32,
+    "semantic_diff_after": 0
+  }
+]

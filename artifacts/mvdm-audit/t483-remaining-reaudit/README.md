@@ -231,3 +231,9 @@ P43: [SAS call-chain and controls](r0439-r0453-investigation.json),
 Whole-file diff97->86;1486 original logical lines.460 points source-reviewed;
 162 restored delivered,0 local,2 approved,296 pending,2260 unreviewed.
 66/365 files complete; P43 cached build,publication11x2/hash,mapping/90 BIOS accesses,64 x87/143 CPU and Full16 passed.
+
+P44: [original register declarations](r0454-r0466-original-declarations.json),
+[line proof](batch-p44-line-check.json), [checkpoint](batch-p44-checkpoint.json).
+13 original restorations verified;mirror diff32->0.473/2720 reviewed;67/365 files
+complete;175 restored delivered,0 local,2 approved,296 pending,2247 unreviewed.
+P44 cached build,publication11x2/hash,mapping/90 BIOS accesses,64 x87/143 CPU and Full16 passed.
