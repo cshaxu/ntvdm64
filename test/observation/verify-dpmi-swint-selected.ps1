@@ -28,7 +28,7 @@ if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatc
     throw 'Selected DPMI fixture failed'
 }
 & "$out/fixture.exe" --wow-signature-mode | Tee-Object -FilePath "$out/wow-signature-mode.txt"
-if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/wow-signature-mode.txt" -SimpleMatch 'DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=handled')) {
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/wow-signature-mode.txt" -SimpleMatch 'DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=declined')) {
     throw 'Selected DPMI INT 2A mode ownership fixture failed'
 }
 & "$out/fixture.exe" --pm-fault-failure | Tee-Object -FilePath "$out/pm-fault-failure.txt"

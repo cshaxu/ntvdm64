@@ -59,7 +59,6 @@ static void setEIP(unsigned v){(void)v;} static void setESP(unsigned v){(void)v;
 static void setSP(unsigned v){(void)v;} static int Frame32;
 static int BuildStackFrameWithWidth(ULONG n,int wide,int native,PUCHAR *p,ULONG *s){(void)n;(void)wide;(void)native;(void)p;(void)s;frames++;return 0;}
 static void ReflectV86Int(unsigned n,unsigned f){(void)n;(void)f;reflect++;}
-static NTSTATUS DpmiSetWowLdtEntry(unsigned a,unsigned b,unsigned c){(void)a;(void)b;(void)c;return 0;}
 static void mvdm_softpc_report_dpmi_swint(unsigned a,unsigned b,unsigned c,unsigned d,unsigned e,unsigned f){(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;report++;}
 static void mvdm_softpc_report_dpmi_swint_target(unsigned a,unsigned b,unsigned c,unsigned d){(void)a;(void)b;(void)c;(void)d;target++;}
 '''

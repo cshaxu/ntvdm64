@@ -74,7 +74,6 @@ void setCF(ULONG x){mock_cf=x;} void setCS(USHORT x){cs=x;dispatches++;}
 void setIP(USHORT x){ip=x;} void setEIP(ULONG x){ip=x;}
 void setSP(USHORT x){sp=(sp & 0xffff0000u)|x;} void setESP(ULONG x){sp=x;}
 void setSS(USHORT x){ss=x;}
-LONG DpmiSetWowLdtEntry(ULONG a,ULONG b,ULONG c){(void)a;(void)b;(void)c;++ldt_publications;return 0;}
 void *Sim32pGetVDMPointer(ULONG address,ULONG mode){(void)address;(void)mode;mappings++;return mapping_unavailable ? NULL : memory;}
 void *Sim32pGetVDMPointerWithLinear(ULONG address, UCHAR mode, ULONG *linear)
 { *linear=sizeof(memory); return Sim32pGetVDMPointer(address,mode); }
@@ -99,9 +98,9 @@ int main(int argc, char **argv){
     CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u && flags==0x3302);
     msw=1;
     flags=0x3302; mock_cf=1;
-    CHECK(DpmiSwIntHandler(0x2a));
-    CHECK(ldt_publications==1 && mock_eax==0 && mock_cf==0 && flags==0x3302);
-    puts("DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=handled");
+    CHECK(!DpmiSwIntHandler(0x2a));
+    CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u && mock_cf==1 && flags==0x3302);
+    puts("DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=declined");
     return 0;
   }
   if(argc==2 && (!strcmp(argv[1],"--pm-fault-failure") ||

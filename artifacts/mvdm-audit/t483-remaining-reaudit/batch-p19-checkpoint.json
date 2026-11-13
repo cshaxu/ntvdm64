@@ -1,0 +1,213 @@
+{
+  "status": "Final source cached build, publication11x2, focused, Full16 and supplemental tests passed; governance/Git follows",
+  "source_files": 21,
+  "files": [
+    {
+      "path": "src/common/wow/page_domain.h",
+      "sha256": "ca57c6af30723dca4c09c346a2f9d11bb0b23f2936aa3389d679745bf24899d5"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "sha256": "6213f844c816a919ae6ec1bccaf1c0a178070efe219574eeab58701c706b8e36"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "sha256": "1d93cd566f1dcef1442bff00f2b6bd703372f3a555e2cdf95de957f6b2de54b1"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "sha256": "1aabde58162f2c6d5f3252d500b842c47b2e4fb12353ea1cfa099a82cef68d76"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "sha256": "2d4c54547be70238feabf783594d280530fe5305037dd390932f28abb4b1b681"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "sha256": "6c081577a6432818d76572b7bca46fcde1bb07b83887859e55878a8b409ba0e6"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "sha256": "e1b56787bd45cb41bb0ee65c9e8804f1172a28236da86fc56fc9e28a35c855c0"
+    },
+    {
+      "path": "src/ntvdm-exe/ntvdm-export-ordinals.csv",
+      "sha256": "4d7ba225bd4c3450d8738674ea66da61c68d3eb57ba8fba69ebedab27510fa4f"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h",
+      "sha256": "0bcb56eeca450d4eb1dadcf8319eacd5700f45bdd2960bfd30c39f628749fa56"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "sha256": "c685d4cc5ef52d4b8301946e386f5824245f7699bce90ac52f0b2d2f3c5b6f8c"
+    },
+    {
+      "path": "test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c",
+      "sha256": "6152cb734c8e66c61a03f80e3e097232da35f56c9a1ba05a9c166af8f6a304e2"
+    },
+    {
+      "path": "test/mvdm-host/dpmi/pm_entry_contract_fixture.c",
+      "sha256": "c2d15280a1e2fd1de8db36d8b23b5eaed91ce7ad5cccc277e17aadbc78650b38"
+    },
+    {
+      "path": "test/mvdm-host/dpmi_swint_selected_fixture.c",
+      "sha256": "188e72ed39a08f59141fbb07289beade739b09ec7563d466ed43b6747670b909"
+    },
+    {
+      "path": "test/mvdm-host/t335_s3_callback_test_boundary.c",
+      "sha256": "43a6963ca8f993bfa0d207f72d5c0714d5c818e74194f8ea7cc3c605311c0548"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "sha256": "6109a78ed72985a681a7a05320a24e7b6c540a6e979c68a142d957fbd5542f99"
+    },
+    {
+      "path": "test/observation/verify-dpmi-swint-diagnostic-source.py",
+      "sha256": "705666d96b0e141b672ef4ff6f6667ec53364b991913387da789c4c49424c3bd"
+    },
+    {
+      "path": "test/observation/verify-dpmi-swint-selected.ps1",
+      "sha256": "e41d0606bc78a5121bf8099f82ec7b487d1a90e1cd756b855f426ad1dd9dee7c"
+    },
+    {
+      "path": "test/observation/verify-wow-dispatch-exception.ps1",
+      "sha256": "6da5437fccf00f30169ee2afed4312abcf299be639d68bee4f142729cbcf1769"
+    },
+    {
+      "path": "tools/audit/verify-wow-shared-boundary.ps1",
+      "sha256": "793f5e44601a185c3870ff7a63cec81007ba08852d7c78fa28f479f1f6322057"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "05b93307e004ae0224fb6b6027ba6d62a150c1e8a3877cb338c0a212d201e9d4"
+    },
+    {
+      "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "sha256": "a44922fe1d4ab14be5bf8a47a1535dd255a6356acc047297b2d51b3ac42e20b4"
+    }
+  ],
+  "mirror_diff_delta": -195,
+  "post_test_report_only_change": "Shared-boundary result string now prints actual forbidden-header count; assertions unchanged. Re-run in final checks.",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 368260,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5130,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1133,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 232,
+        "CleanupMs": 499,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66654,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46239,
+        "CleanupMs": 498,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44796,
+        "CleanupMs": 513,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14853,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11197,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 62944,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12207,
+        "CleanupMs": 523,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28216,
+        "CleanupMs": 523,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30336,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4629,
+        "CleanupMs": 489,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7817,
+        "CleanupMs": 523,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10520,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4714,
+        "CleanupMs": 443,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7303,
+        "CleanupMs": 461,
+        "Passed": true
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "e5e1d37d-9fc1-4958-9527-12fc532a75ca",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "limits": [
+    "Full WOW frontiers do not claim game interaction or exhaustive guest callback coverage.",
+    "DOS4GW/NESticle unavailable external media skipped, not passed.",
+    "Host boundary fixture duplicate-symbol warnings remain test seams, not production linker evidence.",
+    "Original guest and winnt.zip unchanged."
+  ]
+}

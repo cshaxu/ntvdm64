@@ -23,13 +23,6 @@ void NtvdmActivateLifecycle(void)
     abort(); /* host_start_cpu is outside this bounded transaction */
 }
 
-int mvdm_softpc_fast_bop_redirect(unsigned short selector, unsigned long offset)
-{
-    (void)selector;
-    (void)offset;
-    abort(); /* this fixture executes BOP instructions, not CALLF */
-}
-
 /* Original termination diagnostics reference DPMI state even when tracing
  * is disabled; this real-mode fixture does not create a DPMI address space. */
 void *Ldt;

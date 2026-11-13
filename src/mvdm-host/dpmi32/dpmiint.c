@@ -485,6 +485,7 @@ static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
     PUCHAR *pVdmStackPointer, ULONG *pNewSP);
 #endif
 
+#line 494
 BOOL
 #line 495
 DpmiSwIntHandler(
@@ -513,21 +514,6 @@ Return Value:
     ULONG NewSP;
 
     DBGTRACE(DPMI_SW_INT, IntNumber, 0, 0);
-
-    /* WOW_x86 INT 2Ah binds trap.asm NtSetLdtEntries to the CCPU LDT. */
-    if (IntNumber == 0x2au &&
-#if defined(CPU_40_STYLE) && defined(CCPU)
-            /* DIVERGENCE(MVDM-HOST-DIV-487): this signature belongs to
-             * protected WOW, not a V86 interrupt with the same registers. */
-            (getMSW() & MSW_PE) && !(getEFLAGS() & EFLAGS_VM_MASK) &&
-#endif
-            getEAX() == 0xf0f0f0f1UL &&
-            getEBP() == 0xf0f0f0f1UL) {
-        NTSTATUS Status = DpmiSetWowLdtEntry(getEBX(), getECX(), getEDX());
-        setEAX((ULONG)Status);
-        setCF(Status != 0);
-        return TRUE;
-    }
 
 #line 522
     if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
@@ -735,6 +721,7 @@ Routine Description:
     }
 
 
+#line 686
     //
     // Fast iret (without executing final 16-bit iret)
     //
@@ -1206,6 +1193,7 @@ BuildStackFrame(ULONG StackUnits, PUCHAR *pVdmStackPointer, ULONG *pNewSP)
 }
 #endif
 
+#line 1144
 VOID
 #line 1145
 EnableIntHooks(
@@ -1462,6 +1450,7 @@ DecodeInstruction:
                 pCode = &MappedOpcode;
             }
 #endif
+#line 1295
             //
             // Look for code in dxutil.asm EnterProtectedMode
             //

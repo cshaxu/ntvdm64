@@ -5118,7 +5118,6 @@ static int run_fixture(void)
     char class_name[] = "S2 Class Name";
     HWND geometry_window = NULL, id_window = NULL;
     HMENU native_root = NULL, native_submenu = NULL;
-    static ULONG native_bases[0x1fff];
     static wow_user_object_table object_table;
     wow_task_order_process menu_process = { 0 };
     static wow_cleanup_window object_storage;
@@ -5259,26 +5258,6 @@ static int run_fixture(void)
             (unsigned long)c_sas_dw_at(shared + 4u),
             0ul, 0ul);
         goto done;
-    }
-    stage = "flat-address-domains";
-    {
-        uint32_t saved_ldt = c_getLDT_BASE();
-        uint16_t saved_limit = c_getLDT_LIMIT();
-        uint32_t table;
-        /* Deliberately unrelated native value: the guest must receive the
-         * descriptor base, not a copied pointer or IntelBase subtraction. */
-        native_bases[0x100] = 0xdeadbeefu;
-        phy_w32(dosx_gdt + 0x800u, 0x5000ffffu);
-        phy_w32(dosx_gdt + 0x804u, 0x1200f234u);
-        c_setLDT_BASE_LIMIT(dosx_gdt, 0xfffu);
-        table = mvdm_softpc_wow_page_domain_flat_address_array(native_bases);
-        c_setLDT_BASE_LIMIT(saved_ldt, saved_limit);
-        if (!table || c_sas_dw_at(table + 0x400u) != 0x12345000u ||
-                c_sas_dw_at(table + 0x404u) != 0u) goto done;
-        mvdm_softpc_wow_page_domain_update_flat_address(0x807u, 0x65432000u);
-        if (c_sas_dw_at(table + 0x400u) != 0x65432000u) goto done;
-        mvdm_softpc_wow_page_domain_update_flat_address(0xffffu, 0x11111111u);
-        if (c_sas_dw_at(table + 0x400u) != 0x65432000u) goto done;
     }
     stage = "system-colour-publication";
     if (!mvdm_softpc_wow_page_domain_publish_system_color(COLOR_WINDOW,

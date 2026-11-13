@@ -23,7 +23,6 @@ $forbidden=@('ntvdm-exe/session/session.h','ntvdm-exe/session/guest_memory_lease
     'ntvdm-exe/wow/include/wow_gdi_alias.h',
     'ntvdm-exe/wow/include/wow_user_runtime.h',
     'ntvdm-exe/wow/include/wow_user_session_binding.h',
-    'ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h',
     'ntvdm-exe/softpc/include/mvdm_shadow_registry.h')
 function Assert-Boundary([string]$deps) {
     foreach($path in $forbidden){if($deps.Contains($path)){throw "Private WOW dependency: $path"}}
@@ -38,4 +37,4 @@ foreach($path in $forbidden){
     try{Assert-Boundary $path}catch{$rejected=$true}
     if(!$rejected){throw "Negative control accepted: $path"}
 }
-Write-Output "PASS $($targets.Count) selected WOW objects; ten private-header negative controls; no NTVDM private dependency"
+Write-Output "PASS $($targets.Count) selected WOW objects; $($forbidden.Count) private-header negative controls; no NTVDM private dependency"

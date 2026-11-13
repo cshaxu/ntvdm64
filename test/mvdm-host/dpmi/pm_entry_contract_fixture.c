@@ -11,7 +11,7 @@ static BYTE frame[16];
 static ULONG flags, msw, cs, ss, ds, es, fs, gs, eip, esp, cpl;
 static ULONG Cpu40GdtShadowAddress, gdt, idt;
 static BOOL valid_idt;
-static unsigned writes, syncs, reentries, bad_order;
+static unsigned writes, reentries, bad_order;
 #define getSS() ss
 #define getSP() ((USHORT)esp)
 #define getMSW() msw
@@ -48,10 +48,6 @@ static void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit) {
     if (msw & MSW_PE || limit != 0x7ff) ++bad_order;
     idt=base;
 }
-static void mvdm_softpc_fast_bop_sync_mode(void) {
-    if (!(msw & MSW_PE)) ++bad_order;
-    ++syncs;
-}
 static BOOL mvdm_softpc_wow_page_domain_reenter_protected(void) {
     if (!(msw & MSW_PE) || cpl != 3 || cs != 0xcf || ss != 0x17f)
         ++bad_order;
@@ -77,16 +73,16 @@ int main(void) {
         input=test<65536 ? test : 0x7297u;
         flags=input; msw=0x10; ss=0x1000; esp=0x20;
         cs=ds=es=fs=gs=0x1000; cpl=0; eip=0;
-        writes=syncs=reentries=bad_order=0; gdt=idt=0;
+        writes=reentries=bad_order=0; gdt=idt=0;
         valid_idt=test!=65536;
         Cpu40GdtShadowAddress=test==65537 ? 0 : 0x11000;
         DpmiCpu40SwitchToProtectedMode();
         if (!valid_idt) {
-            failed += flags!=input || msw!=0x10 || writes || syncs || reentries;
+            failed += flags!=input || msw!=0x10 || writes || reentries;
         } else {
             failed += flags!=(input & ~EFLAGS_NT_MASK) || msw!=0x11 ||
                 cs!=cs0 || ss!=ss0 || ds!=ds0 || es || fs || gs ||
-                eip!=ip0 || esp!=sp0 || cpl!=3 || syncs!=1 || reentries!=1 ||
+                eip!=ip0 || esp!=sp0 || cpl!=3 || reentries!=1 ||
                 idt!=0x22000 || gdt!=Cpu40GdtShadowAddress;
         }
         failed += bad_order!=0;

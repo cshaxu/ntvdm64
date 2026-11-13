@@ -1,0 +1,24 @@
+{
+  "scope": "R0183-R0186 dpmiselr.c dependency audit; no completed disposition or necessity claim",
+  "source_sha256": "1aabde58162f2c6d5f3252d500b842c47b2e4fb12353ea1cfa099a82cef68d76",
+  "established": [
+    "P18 restored DpmiGetFastBopEntry to zero output, eliminating the only production call to mvdm_softpc_fast_bop_prepare.",
+    "WOWFastBopInit branches to NoFastWow before WowGetFlatAddressArray when BX:DX is zero.",
+    "FlatAddressArray initializes zero in 3protect.asm; WowSetSelector returns carry and CallServer uses04F2 when zero.",
+    "The remaining fast-bop prepare caller is a dedicated fixture, not a production root.",
+    "Current DpmiSetWowLdtEntry callers are dpmiint INT2A and fast-bop prepare; neither current-adapter reference alone establishes capability necessity.",
+    "Original NtSetLdtEntries operates on PsGetCurrentProcess LdtInformation, unlike CCPU LDTR; this proves address-domain adaptation conditional on retaining that API, not the need to retain it.",
+    "R0186 53:00 publication is a separate ordinary-DPMI responsibility and cannot be deleted merely because fast BOP is disabled."
+  ],
+  "deletion_closure_to_resolve": [
+    "dpmiselr.c DpmiSetWowLdtEntry and guest-flat synchronization",
+    "dpmiint.c INT2A branch and dpmi32p.h declaration",
+    "mvdm_softpc_fast_bop.c/header plus common/wow/fast_bop.h",
+    "modesw.c mode-sync calls and call.c fast CALLF carrier",
+    "wow32.c fast entry/callback/flat-array return branches",
+    "worker exports and WOW import generator bindings",
+    "obsolete fast-carrier fixtures versus still-valid CCPU/DPMI mapping tests"
+  ],
+  "decision": "Implemented complete fast-path removal; preserve ordinary53:00 publication after minimization. Final runtime verification pending.",
+  "counts": "R0183-R0185 plus coupled R0142/R0153 locally restored; R0186 qualified pending owner."
+}

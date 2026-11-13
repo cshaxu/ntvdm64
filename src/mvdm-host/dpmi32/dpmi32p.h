@@ -142,13 +142,6 @@ DpmiSetDescriptorEntry(
     VOID
     );
 
-NTSTATUS
-DpmiSetWowLdtEntry(
-    ULONG Selector,
-    ULONG EntryLow,
-    ULONG EntryHigh
-    );
-
 #line 138
 VOID
 DpmiGetFastBopEntry(

@@ -46,9 +46,6 @@ extern LONG VdmRemoveVirtualMemory(ULONG intel_address);
 #define MVDM_SOFTPC_CR0_PG 0x80000000u
 #define MVDM_SOFTPC_SHARED_CLOCK_LINEAR 0x7ffe0000u
 #define MVDM_SOFTPC_GDT_ENTRY_BYTES 8u
-#define MVDM_SOFTPC_FLAT_ADDRESS_ENTRIES 0x1fffu
-#define MVDM_SOFTPC_FLAT_ADDRESS_BYTES \
-    (MVDM_SOFTPC_FLAT_ADDRESS_ENTRIES * sizeof(ULONG))
 #define MVDM_SOFTPC_KGDT_R3_DATA 0x20u
 #define MVDM_SOFTPC_KGDT_R3_TEB 0x38u
 #define MVDM_SOFTPC_TEB_BYTES 4096u
@@ -145,7 +142,6 @@ typedef struct mvdm_softpc_wow_page_domain {
     ULONG guest_handle_table;
     ULONG guest_teb;
     ULONG guest_csr_flag;
-    ULONG flat_address_array;
     ULONG guest_client_objects;
     ULONG guest_client_objects_limit;
     ULONG guest_desktop_info;
@@ -377,8 +373,6 @@ static void page_domain_dispose(void *context)
         (void)VdmFreeVirtualMemory(value->table_allocation);
     if (value->client_allocation != 0u)
         (void)VdmFreeVirtualMemory(value->client_allocation);
-    if (value->flat_address_array != 0u)
-        (void)VdmFreeVirtualMemory(value->flat_address_array);
     if (value->wow_gdt != 0u)
         (void)VdmFreeVirtualMemory(value->wow_gdt);
     ZeroMemory(value, sizeof(*value));
@@ -723,54 +717,6 @@ int mvdm_softpc_wow_page_domain_activate_wow_context(void)
     domain.wow_context_selected = 1;
     page_domain_report("wow-domain-wow-gdt-active");
     return 1;
-}
-
-unsigned long mvdm_softpc_wow_page_domain_flat_address_array(
-    const unsigned long *entries)
-{
-    ULONG address;
-    ULONG index;
-
-    if (!domain.active || entries == NULL) {
-        mvdm_softpc_report_wow_fast_callback_binding("flat-address-array-unavailable", 0u);
-        return 0u;
-    }
-    if (domain.flat_address_array == 0u) {
-        address = 0u;
-        if (VdmAllocateVirtualMemory(&address, MVDM_SOFTPC_FLAT_ADDRESS_BYTES,
-                TRUE) < 0)
-            return 0u;
-        domain.flat_address_array = address;
-        /* Host FlatAddress contains native addresses (including original
-         * DIB aliases). PMODE32's view contains guest-linear bases instead.
-         * Read the original descriptor representation, never subtract an
-         * assumed IntelBase from a possibly aliased host pointer. */
-        for (index = 0u; index < MVDM_SOFTPC_FLAT_ADDRESS_ENTRIES; ++index) {
-            ULONG base = 0u;
-            if (entries[index] != 0u &&
-                    index * 8u + 7u <= c_getLDT_LIMIT()) {
-                ULONG low = c_sas_dw_at(c_getLDT_BASE() + index * 8u);
-                ULONG high = c_sas_dw_at(c_getLDT_BASE() + index * 8u + 4u);
-                base = (low >> 16) | ((high & 0xffu) << 16) |
-                    (high & 0xff000000u);
-            }
-            c_sas_storedw(address + index * sizeof(ULONG), base);
-        }
-    }
-    mvdm_softpc_report_wow_fast_callback_binding("flat-address-array",
-        domain.flat_address_array);
-    return domain.flat_address_array;
-}
-
-void mvdm_softpc_wow_page_domain_update_flat_address(unsigned short selector,
-    unsigned long base)
-{
-    ULONG index = ((ULONG)selector & 0xfff8u) >> 3;
-
-    if (domain.flat_address_array == 0u ||
-            index >= MVDM_SOFTPC_FLAT_ADDRESS_ENTRIES)
-        return;
-    c_sas_storedw(domain.flat_address_array + index * sizeof(ULONG), base);
 }
 
 unsigned long mvdm_softpc_wow_page_domain_guest_shared_info(void)

@@ -40,7 +40,6 @@
 #define SHAREWOW_MAIN
 #include <sharewow.h>
 #include "common/wow/page_domain.h"
-#include "common/wow/fast_bop.h"
 /* This selected original read path retains its query/fallback body while
  * using the worker-local NTVDM.REG/system snapshot facade. */
 #include <common/wow/registry.h>
@@ -51,6 +50,7 @@
 #undef NtClose
 
 
+#line 38
 /* Function Prototypes */
 #line 39
 DWORD   W32SysErrorBoxThread2(PTDB pTDB);
@@ -1596,18 +1596,8 @@ ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 #line 1871
 #error Excluded unsupported FASTBOPPING host profile
 #else
-#line 1898
-#if defined(CPU_40_STYLE)
-    UNREFERENCED_PARAMETER(pFrame);
-    return mvdm_softpc_fast_bop_dispatch_offset();
-#elif FASTBOPPING
-#line 1871
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#else
 #line 1873
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
-#line 1874
+    return 0;
 #endif
 #line 1875
 }
@@ -1618,18 +1608,8 @@ ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
 #line 1880
 #error Excluded unsupported FASTBOPPING host profile
 #else
-#line 1910
-#if defined(CPU_40_STYLE)
-    UNREFERENCED_PARAMETER(pFrame);
-    return mvdm_softpc_fast_bop_callback_offset();
-#elif FASTBOPPING
-#line 1880
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#else
 #line 1882
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
-#line 1883
+    return( 0L );
 #endif
 #line 1884
 }
@@ -1665,20 +1645,8 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 #line 1911
 #error Excluded unsupported FASTBOPPING host profile
 #else
-#line 1944
-#if defined(CPU_40_STYLE)
-    /* Original PMODE32 KRNL386 asks for this table before taking its
-     * WOW-specific selector publication path.  Return the same table shape,
-     * but in worker guest memory rather than leaking a host array address. */
-    return mvdm_softpc_wow_page_domain_flat_address_array(FlatAddress);
-#elif FASTBOPPING
-#line 1911
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#else
 #line 1913
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
-#line 1914
+    return 0;
 #endif
 #line 1915
 }

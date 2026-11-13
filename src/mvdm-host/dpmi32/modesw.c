@@ -26,7 +26,6 @@ Revision History:
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 /* DIVERGENCE(MVDM-HOST-DIV-310): publish the original RM_BIT mode gate
  * through guest SAS after each CCPU PE transition, not host address 0714h. */
-#include "ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h"
 
 /* CCPU's internal segment-register indices and pseudo-descriptor routine
  * are deliberately kept private to its generated headers.  CPU40's DPMI
@@ -99,7 +98,6 @@ Routine Description:
      * EFLAGS_USER_SANITIZE on PM entry. CCPU retains its own IF/IOPL policy. */
     setEFLAGS(getEFLAGS() & ~EFLAGS_NT_MASK);
     setMSW(getMSW() | MSW_PE);
-    mvdm_softpc_fast_bop_sync_mode();
     setCPL(3);
     setCS(CsSelector);
     setEIP(Eip);
@@ -160,7 +158,6 @@ Routine Description:
     /* CPU40 keeps CPL independently of CR0; real mode executes at CPL 0. */
     setCPL(0);
 #endif
-    mvdm_softpc_fast_bop_sync_mode();
     setDS(DsSelector);
     load_pseudo_descr(CPU40_DS_REG);
     setSP(Sp);
@@ -226,7 +223,6 @@ Return Value:
     /* Match the real-mode privilege before executing the DOSX continuation. */
     setCPL(0);
 #endif
-    mvdm_softpc_fast_bop_sync_mode();
 #line 64
     setCS(DosxRmCodeSegment);
 
@@ -288,7 +284,6 @@ Return Value:
 #endif
 
     setMSW(getMSW() | MSW_PE);
-    mvdm_softpc_fast_bop_sync_mode();
 
 #line 114
 #ifndef i386

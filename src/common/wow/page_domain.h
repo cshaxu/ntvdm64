@@ -6,14 +6,6 @@
 
 int __cdecl mvdm_softpc_wow_page_domain_active(void);
 
-/* PMODE32 KRNL386 consumes this original per-selector base table through a
- * flat guest pointer.  CPU40 cannot publish the host `FlatAddress` array, so
- * this returns descriptor-derived guest-linear bases. DPMI publication updates
- * this guest view before native conversion; WOW16 also writes it directly
- * before INT 2Ah updates the separate original native FlatAddress cache. */
-unsigned long __cdecl mvdm_softpc_wow_page_domain_flat_address_array(
-    const unsigned long *entries);
-
 /* Guest-linear SHAREDINFO projection for the immutable USER16 client. This
  * is intentionally distinct from WOW32's native gpsi pointer. */
 unsigned long __cdecl mvdm_softpc_wow_page_domain_guest_shared_info(void);

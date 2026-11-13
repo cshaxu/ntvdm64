@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-189 points have a prior or current review record:118 restored/verified/published,
-0 local restorations pending verification,2 approved retain,69 qualified pending
-decisions and0 prior classifications requiring requalification. Another2531
-points are unreviewed. Sequential file disposition is28/365;337 remain.
+193 points have a prior or current review record:123 restored/verified/published,
+0 local restorations pending verification,2 approved retain,68 qualified pending
+decisions and0 prior classifications requiring requalification. Another2527
+points are unreviewed. Sequential file disposition is29/365;336 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -60,7 +60,7 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P18 package `c5a41150-8a47-4271-9a46-3f303e056b20` is published to
+P19 package `e5e1d37d-9fc1-4958-9527-12fc532a75ca` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
 Final-source cached full build, descriptor2097152 and Full16 passed.
 DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
@@ -229,3 +229,15 @@ Git delivery. WOW frontier coverage is not gameplay acceptance; absent
 DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
+
+## P19 Verified Restoration Batch
+
+R0183-R0185 and coupled R0142/R0153 are restored/verified/published. R0186
+ordinary53:00 publication is minimized and remains pending owner decision.
+Fast-BOP provider, CALLF interception, mode sync, WOW fast exports and private
+flat-array plumbing are removed; original portable zero/slow paths remain.
+Six mirror files net-195 difference lines. Cached full build, publication11x2,
+focused tests, Full16 and supplemental gates passed; Git delivery follows.
+No original guest or winnt.zip changes; unavailable external fixtures are skips.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p19-checkpoint.json).
+Next sequential point is R0187.

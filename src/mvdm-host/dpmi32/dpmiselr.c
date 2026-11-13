@@ -32,7 +32,6 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include "malloc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #line 36
 #if DBG
@@ -73,92 +72,6 @@ DpmiSetX86Descriptor(
     USHORT  registerAX,
     USHORT  registerCX
     );
-
-NTSTATUS
-DpmiSetWowLdtEntry(
-    ULONG Selector,
-    ULONG EntryLow,
-    ULONG EntryHigh
-    )
-/*++
-
-Routine Description:
-
-    Implements the finite effect of the original x86 kernel
-    NtSetLdtEntries call reached by WOW_x86 KRNL386 through its INT 2Ah
-    fast path.  That kernel service changes the current process LDT only;
-    it does not rewrite DOSX's gdtdsc source table or the DOSX GDT.
-
-Arguments:
-
-    Selector, EntryLow, EntryHigh - the three operands supplied by the
-        original WOW_x86 INT 2Ah protocol.
-
-Return Value:
-
-    The source-shaped NTSTATUS returned to KRNL386 in EAX.
-
---*/
-{
-    ULONG EntryOffset;
-    ULONG Base;
-    ULONG Limit;
-    PLDT_ENTRY Entry;
-
-    /* This is the single-entry subset of base\ntos\ps\x86\psldt.c's
-     * NtSetLdtEntries validation.  The worker has a finite LDT carrier, so
-     * growing a process LDT and taking the kernel LDT mutex have no analogue;
-     * the selector and descriptor contract does. */
-    if (Selector & 0xffff0000UL)
-        return STATUS_INVALID_LDT_DESCRIPTOR;
-    EntryOffset = Selector & ~7UL;
-    if (EntryOffset == 0)
-        return STATUS_SUCCESS;
-    if ((EntryOffset / sizeof(LDT_ENTRY)) >= LDT_SIZE ||
-            Cpu40LdtShadowAddress == 0u)
-        return STATUS_INVALID_LDT_DESCRIPTOR;
-
-    Base = ((EntryLow & 0xffff0000UL) >> 16) +
-        ((EntryHigh & 0x000000ffUL) << 16) +
-        (EntryHigh & 0xff000000UL);
-    Limit = (EntryLow & 0x0000ffffUL) + (EntryHigh & 0x000f0000UL);
-    if (EntryHigh & 0x00800000UL)
-        Limit = (Limit << 12) | 0x00000fffUL;
-
-    /* The source kernel accepts a not-present descriptor without a base or
-     * limit check.  For a present descriptor, preserve the x86 user-address
-     * ceiling that DPMI's original descriptor publisher already enforces. */
-    if ((EntryHigh & 0x00008000UL) &&
-            (Base > 0x7ffeffffUL || Base > Base + Limit ||
-             Base + Limit > 0x7ffeffffUL))
-        return STATUS_INVALID_LDT_DESCRIPTOR;
-
-    /* Only application descriptors at DPL 3 are admissible; conforming code
-     * and system descriptors retain the original kernel rejection. */
-    if (EntryHigh & 0x00007f00UL) {
-        if (!(EntryHigh & 0x00001000UL) ||
-                (EntryHigh & 0x00001c00UL) == 0x00001c00UL ||
-                (EntryHigh & 0x00006000UL) != 0x00006000UL)
-            return STATUS_INVALID_LDT_DESCRIPTOR;
-    }
-
-    /* CCPU binds its LDTR to the standalone carrier for OpenNT's current
-     * process LDT.  Store the words verbatim: KRNL386 already performed the
-     * source-side limit adjustment and the kernel service did not re-derive
-     * or rewrite them. */
-    Entry = (PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress) +
-        (EntryOffset / sizeof(LDT_ENTRY));
-    *(PULONG)Entry = EntryLow;
-    *(((PULONG)Entry) + 1) = EntryHigh;
-    /* DIVERGENCE: DIV-310. WOW_x86 writes a guest-linear FlatAddressArray
-     * before INT 2Ah. Recover the original non-i386 native mapping here;
-     * that guest view cannot itself contain this process's native pointers. */
-    FlatAddress[EntryOffset / sizeof(LDT_ENTRY)] =
-        GetDescriptorMapping((USHORT)Selector, Base);
-    if (FlatAddress[EntryOffset / sizeof(LDT_ENTRY)] == Base)
-        FlatAddress[EntryOffset / sizeof(LDT_ENTRY)] += (ULONG)IntelBase;
-    return STATUS_SUCCESS;
-}
 
 #line 74
 VOID
@@ -237,12 +150,6 @@ Return Value:
         }
 
         if ((registerAX >> 3) != 0) {
-#if defined(CPU_40_STYLE)
-            /* DIVERGENCE: DIV-310. Publish the guest-linear value before
-             * the original non-i386 native-address conversion below. */
-            mvdm_softpc_wow_page_domain_update_flat_address((USHORT)
-                (registerAX + i * sizeof(LDT_ENTRY)), Base);
-#endif
 #ifndef i386
 #line 148
             {
@@ -262,19 +169,14 @@ Return Value:
 #line 161
 #if defined(CPU_40_STYLE)
             ULONG Selector = registerAX + i * sizeof(LDT_ENTRY);
-            ULONG GdtAddress = Cpu40GdtShadowAddress;
 
-            /* The original i386 provider publishes every 53:00 record to
-             * the process LDT via NtSetLdtEntries/ProcessLdtInformation.
-             * A TI=0 record is also the DOSX GDT image that protected-mode
-             * selector loads consume.  CCPU needs distinct storage for
-             * those two architectural domains, but the original publication
-             * reaches both; TI=1 records update only their LDT domain. */
+            /* Bind original 53:00 process-LDT publication to CCPU tables.
+             * TI=0 also updates the DOSX GDT; TI=1 updates only the LDT. */
             if (Cpu40LdtShadowAddress != 0)
                 ((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))[
                     Selector >> 3] = Descriptors[i];
-            if (!(Selector & 4u) && GdtAddress != 0)
-                ((PLDT_ENTRY)(IntelBase + GdtAddress))[Selector >> 3] =
+            if (!(Selector & 4u) && Cpu40GdtShadowAddress != 0)
+                ((PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress))[Selector >> 3] =
                     Descriptors[i];
 #endif
 #line 161

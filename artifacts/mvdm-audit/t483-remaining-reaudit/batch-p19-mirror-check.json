@@ -1,0 +1,131 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+    "before": {
+      "added": 21,
+      "deleted": 15,
+      "total": 36
+    },
+    "after": {
+      "added": 14,
+      "deleted": 15,
+      "total": 29
+    },
+    "delta": -7,
+    "line_repairs": [],
+    "scope": "Matched original runs>=4 lines; source evidence, not preprocessing trace",
+    "sha256": "6213f844c816a919ae6ec1bccaf1c0a178070efe219574eeab58701c706b8e36"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "before": {
+      "added": 189,
+      "deleted": 104,
+      "total": 293
+    },
+    "after": {
+      "added": 174,
+      "deleted": 104,
+      "total": 278
+    },
+    "delta": -15,
+    "line_repairs": [
+      [
+        487,
+        494
+      ],
+      [
+        722,
+        686
+      ],
+      [
+        1193,
+        1144
+      ],
+      [
+        1449,
+        1295
+      ]
+    ],
+    "scope": "Matched original runs>=4 lines; source evidence, not preprocessing trace",
+    "sha256": "1d93cd566f1dcef1442bff00f2b6bd703372f3a555e2cdf95de957f6b2de54b1"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "before": {
+      "added": 115,
+      "deleted": 11,
+      "total": 126
+    },
+    "after": {
+      "added": 17,
+      "deleted": 11,
+      "total": 28
+    },
+    "delta": -98,
+    "line_repairs": [],
+    "scope": "Matched original runs>=4 lines; source evidence, not preprocessing trace",
+    "sha256": "1aabde58162f2c6d5f3252d500b842c47b2e4fb12353ea1cfa099a82cef68d76"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "before": {
+      "added": 192,
+      "deleted": 10,
+      "total": 202
+    },
+    "after": {
+      "added": 187,
+      "deleted": 10,
+      "total": 197
+    },
+    "delta": -5,
+    "line_repairs": [],
+    "scope": "Matched original runs>=4 lines; source evidence, not preprocessing trace",
+    "sha256": "2d4c54547be70238feabf783594d280530fe5305037dd390932f28abb4b1b681"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "before": {
+      "added": 47,
+      "deleted": 33,
+      "total": 80
+    },
+    "after": {
+      "added": 7,
+      "deleted": 33,
+      "total": 40
+    },
+    "delta": -40,
+    "line_repairs": [
+      [
+        204,
+        205
+      ]
+    ],
+    "scope": "Matched original runs>=4 lines; source evidence, not preprocessing trace",
+    "sha256": "6c081577a6432818d76572b7bca46fcde1bb07b83887859e55878a8b409ba0e6"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "before": {
+      "added": 118,
+      "deleted": 842,
+      "total": 960
+    },
+    "after": {
+      "added": 91,
+      "deleted": 839,
+      "total": 930
+    },
+    "delta": -30,
+    "line_repairs": [
+      [
+        52,
+        38
+      ]
+    ],
+    "scope": "Matched original runs>=4 lines; source evidence, not preprocessing trace",
+    "sha256": "e1b56787bd45cb41bb0ee65c9e8804f1172a28236da86fc56fc9e28a35c855c0"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+    "matched_original_line_mismatches": [],
+    "scope": "Every nonblank non-directive line in exact original matched runs>=4; source comparison only"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "matched_original_line_mismatches": [],
+    "scope": "Every nonblank non-directive line in exact original matched runs>=4; source comparison only"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+    "matched_original_line_mismatches": [],
+    "scope": "Every nonblank non-directive line in exact original matched runs>=4; source comparison only"
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/modesw.c",
+    "matched_original_line_mismatches": [],
+    "scope": "Every nonblank non-directive line in exact original matched runs>=4; source comparison only"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "matched_original_line_mismatches": [],
+    "scope": "Every nonblank non-directive line in exact original matched runs>=4; source comparison only"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "matched_original_line_mismatches": [],
+    "scope": "Every nonblank non-directive line in exact original matched runs>=4; source comparison only"
+  }
+]

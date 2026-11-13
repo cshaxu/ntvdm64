@@ -1,0 +1,9 @@
+{
+  "main_points": 2720,
+  "pending_rows": 61,
+  "pending_points": 68,
+  "missing": [],
+  "extra": [],
+  "duplicate": [],
+  "scope": "Grouped IDs expanded; closed R0142/R0153 removed; R0186 residual included. Future-file coupled removals do not claim full-file audit."
+}
