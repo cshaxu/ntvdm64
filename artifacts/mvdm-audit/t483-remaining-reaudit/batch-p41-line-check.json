@@ -1,0 +1,16 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "matched_original_lines": 218,
+    "matched_original_line_mismatches": [],
+    "excluded_errors": "All six #error directives unchanged",
+    "semantic_diff_before": {
+      "added": 1,
+      "deleted": 4
+    },
+    "semantic_diff_after": {
+      "added": 1,
+      "deleted": 1
+    }
+  }
+]

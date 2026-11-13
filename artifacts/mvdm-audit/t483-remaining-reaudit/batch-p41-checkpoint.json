@@ -1,0 +1,138 @@
+{
+  "status": "P41 verified delivery; accompanies Git commit",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "sha256": "4053cf58e9c439bdcc74611d31bbddcc21a24884b1eb8d0df9f9595127e202ae"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "3c279a8d0b1887a0d331bbec20f750c7d22a3bb31cb4e7c06c270472445ccc63"
+    }
+  ],
+  "mirror_diff_delta": -3,
+  "stack_evidence": {
+    "original_variant_sha256": "f1dbb60f3874a8209344f8b6a577c95b4589c44e886802ce43f83ab730d958c2",
+    "fixture_sha256": "6963bac40412853992b9c0390c6aafdc055514e72c96e02f0631ea4124440ff8",
+    "original_output": "FAIL CALL frame operand=16 SS=32 ESP=a5a57ff4 CPL=0 fault=0\nFAIL CALL frame operand=32 SS=16 ESP=00007fe8 CPL=0 fault=0\nCCPU_STACK_PROFILE cases=36 failures=2\n",
+    "current_output": "CCPU_STACK_PROFILE cases=36 failures=0\n",
+    "actual_provider": "Current CALLF from original-ccpu386:call.obj; negative CALLF from isolated original-call.obj; SS/stack providers remain original c_seg/c_stack."
+  },
+  "package": "cbdb5e30-ae2f-421a-9461-cbce7eb3938a",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1147,
+      "CleanupMs": 399,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 221,
+      "CleanupMs": 436,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66468,
+      "CleanupMs": 523,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 58706,
+      "CleanupMs": 463,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 45524,
+      "CleanupMs": 419,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14619,
+      "CleanupMs": 472,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 11109,
+      "CleanupMs": 428,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 66574,
+      "CleanupMs": 564,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12657,
+      "CleanupMs": 463,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28411,
+      "CleanupMs": 448,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30546,
+      "CleanupMs": 553,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 6920,
+      "CleanupMs": 530,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 8300,
+      "CleanupMs": 522,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 11397,
+      "CleanupMs": 485,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 5810,
+      "CleanupMs": 476,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 8782,
+      "CleanupMs": 483,
+      "Passed": true
+    }
+  ],
+  "full_elapsed_ms": 392924,
+  "focused": {
+    "stack_current": "CCPU_STACK_PROFILE cases=36 failures=0",
+    "stack_original": "FAIL CALL frame operand=16 SS=32 ESP=a5a57ff4 CPL=0 fault=0\nFAIL CALL frame operand=32 SS=16 ESP=00007fe8 CPL=0 fault=0\nCCPU_STACK_PROFILE cases=36 failures=2",
+    "x87_cases": 64,
+    "cpu_boundary": 143
+  },
+  "limitations": [
+    "Entrypoint fixture is not a fresh Win3.x/Win95 interactive acceptance.",
+    "External DOS4GW/NESticle fixture absent: skip."
+  ]
+}

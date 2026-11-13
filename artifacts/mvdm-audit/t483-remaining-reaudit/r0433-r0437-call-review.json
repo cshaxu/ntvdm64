@@ -1,0 +1,52 @@
+{
+  "points": [
+    "T483-R0433",
+    "T483-R0434",
+    "T483-R0435",
+    "T483-R0436",
+    "T483-R0437"
+  ],
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+  "already_restored": {
+    "points": [
+      "R0433",
+      "R0434",
+      "R0435",
+      "R0436"
+    ],
+    "commit": "41569ec4a4dec578cfa52391341c00c4b5d210b6",
+    "evidence": "P19 removed Fast BOP selector redirect, imports, kind local and dispatch block; current complete-file comparison proves these original regions unchanged. This is delayed register reconciliation, not new source removal."
+  },
+  "remaining": {
+    "point": "R0437",
+    "responsibility": "After privilege-changing CALL loads a new SS, install the TSS stack pointer using the new stack-address width; gate width independently controls frame item size.",
+    "original_failure": "Original condition uses GET_OPERAND_SIZE. A 16-bit gate with SS.B=1 leaves stale high ESP bits instead of installing full TSS ESP; a 32-bit gate with SS.B=0 replaces high ESP bits instead of preserving them. Existing original set_current_SP uses GET_SS_AR_X, and spush/spop use the same SS width.",
+    "minimal_change": "Restore four original lines, changing only GET_OPERAND_SIZE() to GET_SS_AR_X(). No helper/new state/adapter. Residual +1/-1 remains pending owner decision.",
+    "existing_evidence": "Current final 36-case fixture passes. Original CALL condition alone fails exactly two mixed-width CALL frame cases; other cases pass. Original CALLF object ownership verified in link map.",
+    "test_boundary": "Real CALLF/RETF/IRET entrypoints and descriptor/SAS providers, observed host fault hook; not complete decoder or fresh guest gameplay acceptance.",
+    "call_chain": "CALLF -> validate_far_dest -> read_call_gate (gate sets GET_OPERAND_SIZE), get_stack_selector_from_TSS, validate_SS_on_stack_change, validate_new_stack_space -> load_SS_cache (sets GET_SS_AR_X from descriptor B bit) -> SP installation -> spush/spush16 (new SS-width addressing).",
+    "counterexample_isolation": "Compared isolated original-call.c against final product call.c: exactly one changed line, GET_SS_AR_X() vs GET_OPERAND_SIZE(). All other selected and excluded code unchanged."
+  },
+  "line_check": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+    "matched_original_lines": 218,
+    "matched_original_line_mismatches": [],
+    "excluded_errors": "All six #error directives unchanged",
+    "semantic_diff_before": {
+      "added": 1,
+      "deleted": 4
+    },
+    "semantic_diff_after": {
+      "added": 1,
+      "deleted": 1
+    }
+  },
+  "test_build_fix": "Stack fixture omitted existing hostFixtureSeamsObject unlike adjacent tests; add this shared fail-closed host test dependency. Initial LNK1120 recorded in build/t483-s5-p41/verify.log; no new stubs.",
+  "original_source": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/softpc.new/base/ccpu386/call.c",
+    "sha256": "5aaed65e8ebd53fe17197cbafe38b517ff3d5d5ead509eb8de337a4d0b7247f6",
+    "comparison": "Disk identical after newline normalization"
+  },
+  "verification": "Final-source cached build, publication11x2/hash,36 stack cases,2 expected original CALL failures,64 x87/143 CPU and Full16 pass; batch-p41-checkpoint.json."
+}

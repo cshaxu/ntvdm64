@@ -216,3 +216,7 @@ compiled only in the task build directory, not a new production/test target.
 P40: [original interface restoration](r0431-r0432-original-interface.json),
 [line check](batch-p40-line-check.json), [delivery checkpoint](batch-p40-checkpoint.json).
 Two original restorations verified: cached build, publication11x2/hash,64 x87/143 CPU, original/restored selector tests and Full16 passed.439/2720 reviewed;63/365 files;155 restored delivered;2 approved;282 pending decisions;2281 unreviewed. No native-fault production repro claimed.
+
+P41: [CALL file review](r0433-r0437-call-review.json),
+[line proof](batch-p41-line-check.json), [checkpoint](batch-p41-checkpoint.json).
+P41 cached build, publication11x2/hash,36 stack cases,2 expected original CALL failures,64 x87/143 CPU and Full16 passed.444/2720 reviewed;64/365 files;159 restored delivered (four reconciled P19 removals),2 approved,283 pending,2276 unreviewed.

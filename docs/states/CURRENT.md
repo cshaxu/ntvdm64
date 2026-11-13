@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-439 points have a prior or current review record:155 restored/verified/published,
-0 local restorations pending verification,2 approved retain,282 qualified pending
-decisions and0 prior classifications requiring requalification. Another2281
-points are unreviewed. Sequential file disposition is63/365;302 remain.
+444 points have a prior or current review record:159 restored/verified/published,
+0 local restorations pending verification,2 approved retain,283 qualified pending
+decisions and0 prior classifications requiring requalification. Another2276
+points are unreviewed. Sequential file disposition is64/365;301 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P40 package `3431bbd0-4374-4fec-a558-c3014e38f30e` is published to
+P41 package `cbdb5e30-ae2f-421a-9461-cbce7eb3938a` is published to
 assets/release and O:/winnt/system32; all11 hashes match. Cached full build,
-original/restored selector controls, x87/CPU boundary and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p40-checkpoint.json).
+stack current/original controls, x87/CPU boundary and Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p41-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,11 +230,11 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P40 original interface restoration delivered
+## P41 CALL file review delivered
 
-R0431/R0432 restore original call_cpu_function; mirror diff net-6.
-Artificial native exceptions did not prove a defect in supported callers.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0431-r0432-original-interface.json).
-87 original logical lines correct; #error unchanged. Cached full build,
-publication11x2/hash, focused and Full16 passed; receipt accompanies Git delivery.
-Next R0433; S5 remains active.
+R0433-R0436 are confirmed restored by P19, not new P41 removals.
+R0437 mirror diff5->2; remaining condition difference awaits owner decision.
+218 original logical lines verified; #error retained. Cached build,
+publication11x2/hash, stack/x87/CPU and Full16 passed; receipt accompanies commit.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0433-r0437-call-review.json).
+Next R0438; S5 remains active.
