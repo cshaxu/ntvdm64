@@ -1,0 +1,131 @@
+{
+  "batch": "P48",
+  "status": "P48 verified delivery; accompanies Git commit",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+      "sha256": "4b2d93eb4c2658e350bec5a4e1cbac60b852f0e410ac665eeed8c57a2f4b9442"
+    }
+  ],
+  "mirror_diff_delta": -10,
+  "package": "99b1433d-1cfe-4423-811f-e4f00b4e08f3",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1171,
+      "CleanupMs": 434,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 259,
+      "CleanupMs": 415,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 65894,
+      "CleanupMs": 464,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 47097,
+      "CleanupMs": 451,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 45612,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 15343,
+      "CleanupMs": 454,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 11247,
+      "CleanupMs": 409,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 69707,
+      "CleanupMs": 469,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12805,
+      "CleanupMs": 495,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 27849,
+      "CleanupMs": 386,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30321,
+      "CleanupMs": 425,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4950,
+      "CleanupMs": 455,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7812,
+      "CleanupMs": 425,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10051,
+      "CleanupMs": 441,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3879,
+      "CleanupMs": 408,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6478,
+      "CleanupMs": 397,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=38756 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=23884 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=22000 escaped=1 nested=1 continue=1 normal-fe=1\n"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ]
+}

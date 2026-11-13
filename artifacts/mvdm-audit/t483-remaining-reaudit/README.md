@@ -257,3 +257,10 @@ P46 mirror diff5->2 (-3);cached build,publication11x2/hash,focused and Full16 pa
 [delivery](batch-p47-checkpoint.json). Mirror diff10->3 (-7).
 482/2720 reviewed;181 restored delivered,0local,2approved,299pending,2238unreviewed.
 70/365 files complete;295 remain.P47 cached build,publication11x2/hash,focused and Full16 passed.
+
+## R0476-R0478 ntthread
+
+[Review](r0476-r0478-ntthread-review.json),[lines](batch-p48-line-check.json),
+[delivery](batch-p48-checkpoint.json). Mirror diff25->15 (-10).
+485/2720 reviewed;183restored delivered,0local,2approved,300pending,2235unreviewed.
+71/365 files complete;294 remain.P48 cached build,publication11x2/hash,focused and Full16 passed.

@@ -1,0 +1,44 @@
+{
+  "ids": [
+    "T483-R0476",
+    "T483-R0477",
+    "T483-R0478"
+  ],
+  "status": "Verified final-source delivery;accompanies Git commit",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/ntthread.c",
+  "call_chain": "Original W32Dispatch/W32Exception handles a native exception crossing CallBack16 -> host_simulate -> c_cpu_simulate -> ccpu -> BOP/native call. c_cpu_simulate owns its live setjmp and finally asks ntthread to retire only that abandoned simulation frame. Original ccpu386Unsimulate decrements level and longjmps,so cannot serve as cleanup for an already unwound frame.",
+  "R0476": {
+    "responsibility": "Abnormal native unwind must retire exactly the simulation level whose native frame is gone;normal FE already retired its level.",
+    "original_deficiency": "Only ordinary Unsimulate performs pop+longjmp;there is no original no-jump cleanup. Original controls report escaped-level failure while ordinary selector-interface control passes.",
+    "exact_diff": "Keep original TLS ownership;frame identity prevents double-pop after FE;in_C follows ordinary exit;preserve last error across TlsGetValue. No parallel state machine or host shim.",
+    "minimization": "Two-line divergence comment reduced to one;remaining15 added lines pending owner decision."
+  },
+  "R0477_R0478": {
+    "decision": "Restore both exact original bare returns and diagnostics.",
+    "reason": "The sole reached c_main consumer immediately calls setjmp on the returned address and has no null recovery. c_cpu_simulate first obtains its own frame through ccpu386SimulatePtr with the same TLS prerequisites. Returning null here does not implement a supported error recovery contract. No actual compile/runtime failure justifies these two deviations.",
+    "limits": "No claim that TLS exhaustion/invalid TLS becomes recoverable;both original and adapted callers lack such recovery."
+  },
+  "controls": {
+    "runner": "test/observation/verify-wow-callback-abort-ccpu.ps1",
+    "current_root": "build/t483-s5-p48/callback-current",
+    "original_root": "build/t483-s5-p48/callback-original",
+    "reference": "1122ab55d55b4d15699715ce1416b092b5887772",
+    "current": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=18420 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=7368 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=3628 escaped=1 nested=1 continue=1 normal-fe=1\n",
+    "negative": "CCPU_ABORT_WRONG escaped-level\n",
+    "original_interface": "CCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\n",
+    "limits": "Native exception injected through actual CCPU BOP and original TLS providers;not a fresh guest UI failure reproduction. Historical control restores multiple CPU-owner files;escaped-level assertion occurs before the selector-interface cases."
+  },
+  "diff": {
+    "before_added": 23,
+    "before_removed": 2,
+    "after_added": 15,
+    "after_removed": 0,
+    "net": -10
+  },
+  "counter_review": "Separated native-unwind responsibility from cleanup mechanism and from typed-return hardening. Rejected null-return rationale because actual caller does not handle it;kept no-jump cleanup based on source ordering and actual original-control failure.",
+  "restoration_compile_result": "Final cached x86/x64 build passes. Restored original lines223/229 emit C4033 and function C4715;warnings are recorded,not represented as compilation errors or recoverable error handling.",
+  "verification": "batch-p48-checkpoint.json",
+  "limitations": [
+    "No fresh Win3.x/Win95 gameplay claim."
+  ]
+}

@@ -184,8 +184,7 @@ jmp_buf *ccpu386SimulatePtr()
     return(&simstack->sims[simstack->level++]);
 }
 
-/* DIVERGENCE(MVDM-HOST-DIV-348): no longjmp to an already unwound frame.
- * Ordinary FE already removed its own level; never pop its parent again. */
+/* DIVERGENCE(MVDM-HOST-DIV-348): abandon only this unwound frame, without longjmp. */
 void ccpu386AbandonSimulate(jmp_buf *frame)
 {
     DWORD error = GetLastError();
@@ -237,20 +236,13 @@ jmp_buf *ccpu386ThrdExptnPtr()
     if (ccpuSimId == BADID)
     {
         fprintf(stderr, "ccpu386ThrdExptnPtr id:%#x called with Bad Id\n", GetCurrentThreadId());
-        /* DIVERGENCE(MVDM-HOST-DIV-128): this pointer-returning helper used
-         * a bare return on its two original failure paths.  Match the
-         * same-package ccpu386SimulatePtr failure contract: retain the
-         * diagnostic and failure branch, but return a typed null jmp frame. */
-        return ((jmp_buf *)0);
-#line 224
+        return ;
     }
     simstack = (ThreadSimBufPtr)TlsGetValue(ccpuSimId);
     if (simstack == (ThreadSimBufPtr)0)
     {
         fprintf(stderr, "ccpu386ThrdExptnPtr id:%#x TlsGetValue failed (err:%#x)\n", GetCurrentThreadId(), GetLastError());
-        /* DIVERGENCE(MVDM-HOST-DIV-128): see the BADID failure branch above. */
-        return ((jmp_buf *)0);
-#line 230
+        return ;
     }
     
     return(&simstack->excepts[simstack->level - 1]);
