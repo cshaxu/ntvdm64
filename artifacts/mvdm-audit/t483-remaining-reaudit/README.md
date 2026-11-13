@@ -299,3 +299,12 @@ R0483: [selected CCPU manifest review](r0483-sources-review.json), +0/-1 unchang
 Actual original selection fails on the excluded alternate stub; no product edit.
 490/2720 reviewed;76/365 files;185 restored,2 approved,303 pending,2230 unreviewed.
 P51 remains the build/publication/runtime baseline.
+
+P52: [zfrsrvd whole-file review](r0484-r0487-zfrsrvd-review.json), four points restored.
+Nonexcluded mirror diff +6/-2 to0,net-8;[logical lines](batch-p52-line-check.json) checked.
+494/2720 reviewed;77/365 files;185 delivered,4 local,2 approved,303 pending,2226 unreviewed.
+[Delivery checkpoint](batch-p52-checkpoint.json) remains pending until final-source gates pass.
+
+P52 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
+494/2720 reviewed;189 restored delivered,0 local,2 approved,303 pending,2226 unreviewed.
+77/365 files complete;288 remain.Next R0488.

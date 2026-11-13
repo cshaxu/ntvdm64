@@ -1,0 +1,114 @@
+{
+  "ids": [
+    "T483-R0484",
+    "T483-R0485",
+    "T483-R0486",
+    "T483-R0487"
+  ],
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+  "source": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/softpc.new/base/ccpu386/zfrsrvd.c",
+    "sha256": "3beaf1ec7ca8ac2092bb88de4597a19de8aecdd564fa2b55ccb1a4009041e961",
+    "git_blob": "ead9baec8e72a39408dd8384af9587131ea0fc4e"
+  },
+  "responsibility": "Original CCPU reserved-x87 decode calls original operand/address,interrupt and FPU providers. c_main invokes ZFRSRVD with an IU32 instruction index.",
+  "original_capability": "Supported MSVC x86 cdecl compiles the original K&R IU32 definition and the original unprototyped calls. Narrow integer operands are promoted into 32-bit stack argument slots;pointer arguments stay native32;void-returning calls do not consume their inferred return.",
+  "old_rationale": "Typed declarations and ANSI form improve language-level declarations but the prior generic ABI concern does not establish a failure in these actual callsites.",
+  "call_chains": [
+    "c_main -> ZFRSRVD -> inst_table reserved-x87 handler -> c_oprnd macros -> d_mem/limit_check in c_addr.c",
+    "ZFRSRVD -> DoNpxPrologue -> INTx;TakeNpxExceptionInt -> ica_intack -> do_intrupt",
+    "npx_fldenv -> FLDENV(&ops[0].npxbuff[0]) -> original fpu.c FLDENV"
+  ],
+  "controls": {
+    "no-address": {
+      "equal": true,
+      "different_sections": [],
+      "section_counts": [
+        316,
+        316
+      ]
+    },
+    "no-interrupt": {
+      "equal": true,
+      "different_sections": [],
+      "section_counts": [
+        316,
+        316
+      ]
+    },
+    "no-fldenv": {
+      "equal": true,
+      "different_sections": [],
+      "section_counts": [
+        316,
+        316
+      ]
+    },
+    "original-definition": {
+      "equal": true,
+      "different_sections": [],
+      "section_counts": [
+        316,
+        316
+      ]
+    },
+    "final": {
+      "equal": true,
+      "different_sections": [],
+      "section_counts": [
+        316,
+        316
+      ]
+    }
+  },
+  "comparison_method": "Six actual-MSVC x86 object builds: current,four distinct per-point restoration controls,and final combined restored file. Compare section multiset including symbol ownership/value/type/storage,bytes,size,flags and named relocations;include .drectve;exclude .debug* and .chks64 only. Section order differs in two cases and is not binding identity. Not whole-object byte identity.",
+  "control_setup_correction": "First preparation used CRLF replacements against LF input and produced identical inputs;that run was rejected. Corrected controls assert each replacement exists exactly once and each candidate differs before recompilation.",
+  "warnings": "Original controls introduce C4013 for d_mem/limit_check,INTx/do_intrupt,FLDENV. These warnings are recorded,not treated as demonstrated runtime defects. Existing C4005/C4201/C4028/C4244 also occur in current control.",
+  "counter_review": "This conclusion is scoped to existing original calls and supported MSVC32 ABI. It does not claim ISO C conformance or portable x64 compilation. Unlike a new adapter interface,these are preserved original same-shape calls with actual generated-call equivalence;no new implicit interface is authored.",
+  "diff": {
+    "before_added": 6,
+    "before_removed": 2,
+    "after_added": 0,
+    "after_removed": 0,
+    "net": -8,
+    "scope": "Nonexcluded semantic/format differences;#line directives and retained excluded#error bodies excluded from this measure."
+  },
+  "line_check": "batch-p52-line-check.json;all matched original selected lines retain original logical line numbers;only two excluded bodies differ.",
+  "decision": "Restore all four points;no new shim,prototype relocation or second path.",
+  "verification": "batch-p52-checkpoint.json:final-source cached build,publication,focused and Full passed;accompanies Git delivery.",
+  "build_environment_recovery": {
+    "failure": "First cached configuration failed before compiling:cached NTVDM_POWERSHELL pointed to removed Codex runtime v26-1104-2876-0.",
+    "action": "Task-local build commands explicitly set NTVDM_POWERSHELL to current installed v26-1112-611-0 executable;existing cached build trees retained.",
+    "evidence": "build/t483-s5-p52/cached-stale-pwsh.log",
+    "product_change": false
+  },
+  "binding_evidence": {
+    "map": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+    "providers": {
+      "ZFRSRVD": "original-ccpu386:zfrsrvd.obj",
+      "FLDENV": "original-ccpu386:fpu.obj",
+      "d_mem/limit_check": "original-ccpu386:c_addr.obj",
+      "do_intrupt": "original-ccpu386:c_intr.obj",
+      "INTx": "original-ccpu386:intx.obj"
+    },
+    "scope": "Actual linked owners;not a claim that every error path ran."
+  },
+  "control_identities": {
+    "current.obj": "74d54fe2b9c3a5600406d88089ca88fca06d57326d4634d1490bdc7da8d9a651",
+    "final.obj": "6a1506900dadbac2c7eba5dde1523c82de6fb6f195f521785fa402467e6469db",
+    "no-address.obj": "12fd80939eadba9fa4ad7c241ae9f83f0b8f3f6100ef82d7aafc419fdd84697b",
+    "no-fldenv.obj": "80ada0bc90dc8a21c1971fceba14c1644e577cf7fd7dcc7e1a9e845fca70cf82",
+    "no-interrupt.obj": "04c8d5c491c0ae76698e3310fc82a41006287b984bbd81f8b61256c13c824371",
+    "original-definition.obj": "99bccf395e07b8f10b6545b10ed48cedd0bdbfd2d5be2226aeb52121e4591773"
+  },
+  "control_source_identities": {
+    "before.c": "a96f3121f03c3c649283ca6c40683fae6f44109a82bb053cfd66985066cb2d94",
+    "current.c": "a96f3121f03c3c649283ca6c40683fae6f44109a82bb053cfd66985066cb2d94",
+    "no-address.c": "69305768b2a17766d0c7f8fa3d0c53eadbd596b32c273ab6c694e5a3b1bd4949",
+    "no-fldenv.c": "0b381afdc8dbce9f33ffebfb97dfa4fa004d276f1f03043bb25c480a796808ce",
+    "no-interrupt.c": "408acae58e36c2dc4df0f07ffc02a4e5e3c0f90bb78f224ba1902f0e4571eb5b",
+    "original-definition.c": "6dd428489625345c7f5b180df73d95bcb5109f9972f562beb6548333dda0bf62"
+  },
+  "final_source_sha256": "d574ec80aa660373212d12f1859534ffe78911665491f1caa47cd8e9359a9f85"
+}

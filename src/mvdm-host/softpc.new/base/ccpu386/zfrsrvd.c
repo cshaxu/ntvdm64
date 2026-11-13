@@ -21,13 +21,8 @@ Reserved Floating Point CPU Functions.
 #include <c_main.h>     /* C CPU definitions-interfaces */
 #include <c_page.h>     /* Paging Interface */
 #include <c_mem.h>      /* CPU - Memory Interface */
-#include <c_addr.h>     /* Original d_mem/limit_check contracts */
-#line 24
 #include <c_oprnd.h>
 #include <c_reg.h>
-#include <c_intr.h>     /* Original do_intrupt contract */
-#include <intx.h>       /* Original INTx contract */
-#line 26
 #include <c_xcptn.h>	/* Definition of Int16() */
 #include <fault.h>
 #line 28
@@ -90,9 +85,6 @@ IMPORT IU32 CCPU_IP;
 
 LOCAL BOOL DoNpxPrologue IPT0();
 
-GLOBAL VOID FLDENV IPT1(VOID *, memPtr);
-
-#line 84
 LOCAL IU32 NpxInstr;
 
 LOCAL VOID npx_fabs() {
@@ -4815,8 +4807,8 @@ npx_funimp,
 npx_funimp
 };
 
-VOID ZFRSRVD(IU32 npx_instr)
-#line 4808
+VOID ZFRSRVD(npx_instr)
+IU32 npx_instr;
 {
 	if (!NPX_PROT_MODE) {
 		NpxInstr = npx_instr;
