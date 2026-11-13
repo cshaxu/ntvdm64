@@ -1,0 +1,72 @@
+{
+  "points": {
+    "T483-R0374": {
+      "problem": "Quick execution eligibility.",
+      "original_failure": "No required failure of original predicate established: sticky DR6 conservatively forces slow path. Actual delivery below remains gated by new-event latch, so restoring this eligibility predicate alone does not reintroduce sticky-status exception delivery.",
+      "plan": "Restore original predicate; remove added comment.",
+      "delta": -3,
+      "restored": true
+    },
+    "T483-R0375": {
+      "problem": "Consume RESET before all other boundary work.",
+      "original_failure": "Independent HeartBeatThread publishes after ICA unlock; CPU boundary is not under the same lock. Atomic take preserves concurrently raised unrelated bits and linearizes consumption once. Original separate test/clear can lose concurrent updates.",
+      "plan": "Keep atomic take; original reset body unchanged.",
+      "delta": 0,
+      "restored": false
+    },
+    "T483-R0376": {
+      "problem": "Reuse original RESET body when resumed task has pending reset.",
+      "original_failure": "Original clear is already performed by atomic take; restoring it can erase a new reset. Resume entry skips original interinstruction block, so shared label prevents duplicating reset state cleanup.",
+      "plan": "Keep shared reset label and omit duplicate clear.",
+      "delta": 0,
+      "restored": false
+    },
+    "T483-R0377": {
+      "problem": "Consume timer tick before original timer callback.",
+      "original_failure": "Independent HeartBeatThread publishes after ICA unlock; CPU boundary is not under the same lock. Atomic take preserves concurrently raised unrelated bits and linearizes consumption once.",
+      "plan": "Keep atomic take and original callback.",
+      "delta": 0,
+      "restored": false
+    },
+    "T483-R0378": {
+      "problem": "Do not clear timer twice.",
+      "original_failure": "Atomic take already clears the consumed notification; original following clear would erase a tick arriving between operations.",
+      "plan": "Keep redundant original clear omitted.",
+      "delta": 0,
+      "restored": false
+    },
+    "T483-R0379": {
+      "problem": "Consume SAD before debugger callback.",
+      "original_failure": "Independent HeartBeatThread publishes after ICA unlock; CPU boundary is not under the same lock. Atomic take preserves concurrently raised unrelated bits and linearizes consumption once.",
+      "plan": "Keep atomic take and original force_yoda call.",
+      "delta": 0,
+      "restored": false
+    },
+    "T483-R0380": {
+      "problem": "Do not clear SAD twice.",
+      "original_failure": "Atomic take already clears notification; second clear can drop a concurrent raise.",
+      "plan": "Keep redundant original clear omitted.",
+      "delta": 0,
+      "restored": false
+    },
+    "T483-R0381": {
+      "problem": "Deliver only new task/data breakpoint event.",
+      "original_failure": "DR6 status persists after delivery and c_cpu_continue. Original DR6 B/BT test can redeliver old status without a new match; new latch distinguishes the event while retaining guest-visible status.",
+      "plan": "Keep event predicate; remove inline comment.",
+      "delta": 0,
+      "restored": false
+    },
+    "T483-R0382": {
+      "problem": "Deliver only newly matched instruction breakpoint.",
+      "original_failure": "Original any-DR6-bit test after match scan succeeds for old status even if current address did not match. Match provider sets latch only on real new match.",
+      "plan": "Keep event predicate; remove inline comment.",
+      "delta": 0,
+      "restored": false
+    }
+  },
+  "before_sha256": "df3df6d83647c2c224283380f3bde2ba8fac4ac131a0422c5adf4522b3892b0b",
+  "after_sha256": "78dc909e66e1abc499175878292660e229524b8d8d2277863409db0c0d4f9cce",
+  "separation": "Quick-path eligibility is not exception delivery. R0374 restored independently of necessary R0381/R0382 event predicates.",
+  "verification": "Source-chain review and earlier match/real-CPU fixture evidence. Restored final predicate has not yet been built or executed; whole-file batch validation pending.",
+  "line_error": "Original predicate restored on same logical line; retained #line4327 resets following mapping; inline comments only elsewhere. All #error preserved."
+}

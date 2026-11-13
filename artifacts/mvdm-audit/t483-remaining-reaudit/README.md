@@ -156,3 +156,30 @@ P31: [Tape XMS declaration review](r0345-tape-xms-review.json).
 P31: [Virtual whole-file investigation](r0346-r0352-virtual-investigation.json) (not a completed disposition).
 
 P31: [Virtual completed source review](r0346-r0352-virtual-review.json); [batch checkpoint](batch-p31-checkpoint.json), [line checks](batch-p31-line-check.json). P31 verified: cached full, publication11x2, focused NIDDB, fresh Full16 and governance; receipt records the post-build blank-line exception.
+
+P32: [CCPU FLAGS declaration review](r0353-ccpu-flags-declaration.json).
+
+P32: [CCPU debug event review](r0354-r0356-debug-events.json).
+
+P32: [Debug event interface review](r0357-debug-event-interface.json).
+
+P32: [Main decoding/reset declaration review](r0358-r0359-main-declarations.json).
+
+P32: [Main provider and event declaration review](r0360-r0362-main-provider-review.json).
+
+P32: [Debug boundary review](r0363-r0365-debug-boundary-review.json).
+
+P32: [IRQ and jump-frame review](r0366-r0368-irq-frame-review.json).
+
+P32: [HLT and event review](r0369-r0373-halt-review.json).
+
+P32: [Instruction boundary review](r0374-r0382-boundary-review.json).
+
+P32: [IRQ, resume and lifecycle tail review](r0383-r0398-tail-review.json).
+
+P32: [Complete main source line check](batch-p32-main-line-check.json).
+
+P32 verified: [delivery receipt](batch-p32-checkpoint.json),
+[batch line references](batch-p32-line-check.json),
+[binary comparison](batch-p32-binary-identity.json),
+[register consistency](batch-p32-local-consistency.json).

@@ -1,0 +1,34 @@
+{
+  "points": {
+    "T483-R0366": {
+      "problem": "Deliver accepted hardware interrupt through original installed DPMI handler before fallback CPU interrupt.",
+      "original_failure": "DpmiInit installs DpmiHwIntHandler via VdmInstallHardwareIntHandler. Selected ICA only acknowledges; original do_intrupt does not call host_hwint_hook. Restoring original c_main tail skips this handler. Moving hook into all do_intrupt calls would also affect software interrupts.",
+      "minimality": "One shared accepted-hardware-IRQ tail called by normal boundary and handled STI; reuse host_hwint_hook and original do_intrupt.",
+      "delta": 0
+    },
+    "T483-R0367": {
+      "problem": "Complete host-handled STI before delivering an accepted IRQ.",
+      "original_failure": "Original host-handled #GP resumes via c_cpu_continue at NEXT_INST, past ordinary hardware IRQ check. Original contributory_exception has set doing_contributory=TRUE and saved faulting EIP; new interrupt-frame failure must not inherit the completed GP or faulting STI address. PIC -1 means rejected, not vector 65535.",
+      "minimality": "Consume event once, check signed ack, clear completed GP state, save completed EIP, use shared tail. Remove four comment lines.",
+      "delta": -4
+    },
+    "T483-R0368": {
+      "problem": "Use thread-owned original jmp frame with modern setjmp parameter type.",
+      "original_failure": "Original ntthread.h and provider return jmp_buf pointer (pointer-to-array), while setjmp accepts the jmp_buf array parameter decayed to element pointer. Dereference selects the actual array without allocation or changing frame identity.",
+      "minimality": "Retain one dereference; remove two explanatory comment lines. This is a type-boundary correction, not evidence of observed runtime crash.",
+      "delta": -2
+    }
+  },
+  "before_sha256": "8aefba1137b1063bec607829ec5f3b17c0194138b1829ab7eefdd7c3e8c40d2e",
+  "after_sha256": "07fdda6f8b658099ecf7596c5070e6cb57903e8fb412e02e96790eae32454090",
+  "source_evidence": [
+    "softpc.new/base/ccpu386/c_intr.c do_intrupt",
+    "softpc.new/base/system/ica.c ica_intack",
+    "softpc.new/host/src/nt_inthk.c host_hwint_hook and host_exint_hook",
+    "dpmi32/dpmiint.c VdmInstallHardwareIntHandler callers",
+    "softpc.new/base/ccpu386/c_xcptn.c contributory_exception",
+    "softpc.new/base/ccpu386/ntthread.{c,h} ccpu386ThrdExptnPtr"
+  ],
+  "verification": "Source chain and ABI review; existing boundary fixture tests protected STI, stale PIC, IRQ-frame fault, cascade/AEOI. No fresh run of final file claimed; full-file delivery pending.",
+  "line_error": "Comments removed before #line548 and #line770; both remain, all #error unchanged. Whole-file line validation still due."
+}

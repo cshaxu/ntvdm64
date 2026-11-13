@@ -1,0 +1,114 @@
+{
+  "points": {
+    "T483-R0383": {
+      "problem": "Hardware IRQ consumption",
+      "original_failure": "Separate heartbeat/PIC producers and CPU consumer lack a common lock; ordinary RMW can overwrite unrelated concurrent bits. Keep original masks and atomic access, not a second event model. IF must remain true before take; clearing before PIC ack allows re-raised notification to survive.",
+      "plan": "Keep IF-gated atomic take.",
+      "delta": 0
+    },
+    "T483-R0384": {
+      "problem": "Signed PIC result",
+      "original_failure": "ica_intack returns signed -1 for stale master/slave requests; original IU16 truncates it into a non-rejection vector.",
+      "plan": "Keep signed local until rejection check.",
+      "delta": 0
+    },
+    "T483-R0385": {
+      "problem": "Accepted IRQ dispatch",
+      "original_failure": "Original direct do_intrupt bypasses installed DPMI hardware handler and treats rejected ack as a vector. Shared tail retains callback/fallback and EIP bookkeeping.",
+      "plan": "Keep rejection guard and single shared tail; remove nine comment lines.",
+      "delta": -9
+    },
+    "T483-R0386": {
+      "problem": "Restored task pre-instruction checks",
+      "original_failure": "Original continuation goes directly NEXT_INST below debug checks. A task with pending event or breakpoint at restored EIP otherwise executes first instruction before delivery. Full ordinary boundary cannot be reused unchanged: start_trap describes the prior instruction and timer/IRQ processing is additional behavior.",
+      "plan": "Keep bounded RESET-priority resume checks; remove four comment lines. No same-semantics smaller consolidation established.",
+      "delta": -4
+    },
+    "T483-R0387": {
+      "problem": "Fast-path event visibility",
+      "original_failure": "Separate heartbeat/PIC producers and CPU consumer lack a common lock; ordinary RMW can overwrite unrelated concurrent bits. Keep original masks and atomic access, not a second event model. Ordinary unqualified load is not a synchronization operation.",
+      "plan": "Keep shared atomic snapshot.",
+      "delta": 0
+    },
+    "T483-R0388": {
+      "problem": "RESET event production",
+      "original_failure": "Separate heartbeat/PIC producers and CPU consumer lack a common lock; ordinary RMW can overwrite unrelated concurrent bits. Keep original masks and atomic access, not a second event model.",
+      "plan": "Keep atomic OR of original RESET mask.",
+      "delta": 0
+    },
+    "T483-R0389": {
+      "problem": "Timer event production",
+      "original_failure": "Separate heartbeat/PIC producers and CPU consumer lack a common lock; ordinary RMW can overwrite unrelated concurrent bits. Keep original masks and atomic access, not a second event model.",
+      "plan": "Keep atomic OR of original timer mask.",
+      "delta": 0
+    },
+    "T483-R0390": {
+      "problem": "SIGIO event production",
+      "original_failure": "Separate heartbeat/PIC producers and CPU consumer lack a common lock; ordinary RMW can overwrite unrelated concurrent bits. Keep original masks and atomic access, not a second event model.",
+      "plan": "Keep atomic OR of original SIGIO mask.",
+      "delta": 0
+    },
+    "T483-R0391": {
+      "problem": "IRQ event production",
+      "original_failure": "Separate heartbeat/PIC producers and CPU consumer lack a common lock; ordinary RMW can overwrite unrelated concurrent bits. Keep original masks and atomic access, not a second event model.",
+      "plan": "Keep atomic OR of original IRQ mask.",
+      "delta": 0
+    },
+    "T483-R0392": {
+      "problem": "SAD event production",
+      "original_failure": "Separate heartbeat/PIC producers and CPU consumer lack a common lock; ordinary RMW can overwrite unrelated concurrent bits. Keep original masks and atomic access, not a second event model.",
+      "plan": "Keep atomic OR of original SAD mask.",
+      "delta": 0
+    },
+    "T483-R0393": {
+      "problem": "Wake idle HLT after event publication",
+      "original_failure": "Retained HLT wait needs notification after authoritative event bit set. Original producer only changes map and cannot wake a blocked host wait. Independent wait justification is measured busy-loop CPU cost (R0373), not this dependency alone.",
+      "plan": "Keep one signal after publication and quick-mode clear.",
+      "delta": 0
+    },
+    "T483-R0394": {
+      "problem": "Reset debug event state",
+      "original_failure": "Original reset clears DR6/DR7, but new-event and restored-context signals are separate from those registers; leaving them set makes pre-reset events affect reset-vector execution. Event separation independently justified by sticky DR6 evidence.",
+      "plan": "Clear both transient signals with original reset; remove inline comment.",
+      "delta": 0
+    },
+    "T483-R0395": {
+      "problem": "Simulation frame ownership",
+      "original_failure": "Original ccpu386SimulatePtr increments per-thread level before execution; abnormal SEH bypasses normal FE pop. A specific frame identity is needed so cleanup never pops a parent already resumed normally.",
+      "plan": "Keep one local frame pointer; remove inline comment.",
+      "delta": 0
+    },
+    "T483-R0396": {
+      "problem": "Save frame and protect execution",
+      "original_failure": "Original direct setjmp helper has no abnormal unwind cleanup. Preserve returned frame for finally; dereference fixes pointer-to-array contract.",
+      "plan": "Keep frame assignment, try and typed setjmp.",
+      "delta": 0
+    },
+    "T483-R0397": {
+      "problem": "Abnormal simulation exit",
+      "original_failure": "Original only ccpu386Unsimulate decrements level before longjmp. Native SEH leaving ccpu bypasses it, leaving dead frame address for future resume; unconditional decrement would instead corrupt normal FE nesting.",
+      "plan": "Keep finally with AbnormalTermination and frame-identity-aware abandonment.",
+      "delta": 0
+    },
+    "T483-R0398": {
+      "problem": "Consume delivered debug event",
+      "original_failure": "Original continue does not clear separate new-event latch; retaining it redelivers the same event on subsequent boundary. DR6 must remain guest-visible sticky status.",
+      "plan": "Keep one latch clear; remove two comment lines.",
+      "delta": -2
+    }
+  },
+  "before_sha256": "78dc909e66e1abc499175878292660e229524b8d8d2277863409db0c0d4f9cce",
+  "after_sha256": "00fc07e5e65245d7be36b148d44c0204e2ca4e6080a0adff29bb2ca0e7f48988",
+  "mirror_diff_delta": -15,
+  "diagnostic_cleanup": "Duplicate #line4816 removed; next original logical line unchanged.",
+  "source_evidence": [
+    "ica.c ica_intack signed reject",
+    "c_main.c original interrupt tail and NEXT_INST ordering",
+    "nt_timer.c independent HeartBeatThread",
+    "ntthread.c ccpu386SimulatePtr/Unsimulate/AbandonSimulate",
+    "test/mvdm-host/wow_callback_abort_ccpu_fixture.c normal FE, nested SEH, parent continue and frame reuse",
+    "test/mvdm-host/ccpu_monitor_boundary_fixture.c restored debug cases109-112/117"
+  ],
+  "consolidation_review": "MOV_DR immediate handled-fault check runs while completing GP and explicitly clears contributory state before nested DB. Task restore runs under task-bank exchange and defers delivery to NEXT_INST. A shared original full-boundary jump also processes previous-instruction trap state. No unproved change of those timing/ownership semantics performed to save lines.",
+  "verification": "Source review complete for these points. Existing fixture source is coverage plan, not a new passing run. Final source line audit, cached build/publication/tests pending."
+}

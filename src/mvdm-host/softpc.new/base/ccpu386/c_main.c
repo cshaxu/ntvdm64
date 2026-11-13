@@ -37,8 +37,6 @@ Actual worker routines are spun off elsewhere.
 #endif
 
 #include <c_main.h>	/* C CPU definitions-interfaces */
-/* DIVERGENCE(MVDM-HOST-DIV-072): publish the existing owner headers whose
- * declarations the historical executor previously inferred implicitly. */
 #include <c_addr.h>	/* C CPU address calculation contract */
 #line 38
 #include <c_page.h>	/* Paging Interface */
@@ -60,7 +58,6 @@ Actual worker routines are spun off elsewhere.
 #include <ica.h>
 #include <timer.h>
 #include <mvdm_softpc_ccpu_wait.h>
-
 extern void force_yoda(void);
 extern void TakeNpxExceptionInt(void);
 extern void EDL_fast_bop(ULONG immed);
@@ -248,7 +245,7 @@ LOCAL IU16 cpu_hw_interrupt_number;
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else
 #line 229
-LOCAL volatile IUM32	cpu_interrupt_map = 0;
+LOCAL IUM32	cpu_interrupt_map = 0;
 #endif	/* SFELLOW */
 #line 231
 
@@ -538,14 +535,10 @@ IMPORT VOID dispatch_q_event();
 
 #if defined(NTVDM) && !defined(SFELLOW)
 static BOOL debug_context_resume_check;
-/* DIVERGENCE(MVDM-HOST-DIV-476): a monitor-emulated debug-register write
- * must leave fast execution just as CPU40's original MOV DR instruction does. */
 GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)
 {
    MOV_DR(index, value);
    quick_mode = FALSE;
-   /* Handled exceptions resume at NEXT_INST, after the usual inter-
-    * instruction check. Check the newly armed execution breakpoint now. */
    CCPU_save_EIP = GET_EIP();
    if (nr_inst_break && GET_RF() == 0) {
       check_for_inst_exception(GET_CS_BASE() + GET_EIP());
@@ -556,8 +549,6 @@ GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)
    }
 }
 
-/* DIVERGENCE(MVDM-HOST-DIV-478): update the shared execution bank through
- * CPU40's debug provider and leave the fast instruction path. */
 GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)
 {
    IU32 index;
@@ -567,7 +558,6 @@ GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)
    quick_mode = FALSE;
 }
 
-/* A task restore resumes at NEXT_INST, after the normal boundary checks. */
 GLOBAL VOID ccpu_restore_debug_context IFN2(const IU32 *, registers, BOOL, pending)
 {
    ccpu_apply_debug_context(registers);
@@ -586,8 +576,6 @@ static VOID ccpu_dispatch_accepted_irq IFN1(IS32, vector)
    CCPU_save_EIP = GET_EIP();
 }
 
-/* DIVERGENCE(MVDM-HOST-DIV-475): a handled protected STI completes its
- * fault before delivering the same CPU-owned external interrupt path. */
 GLOBAL VOID ccpu_monitor_dispatch_irq IFN0()
 {
    IU32 hook_address = 0;
@@ -596,16 +584,14 @@ GLOBAL VOID ccpu_monitor_dispatch_irq IFN0()
    vector = ica_intack(&hook_address);
    if (vector == -1) return;
    doing_contributory = FALSE;
-   /* Normal NEXT_INST saves the completed instruction before dispatch; a
-    * fault while constructing the interrupt frame must see the same EIP. */
    CCPU_save_EIP = GET_EIP();
    ccpu_dispatch_accepted_irq(vector);
 }
 #endif
 
 
+#line 547
 /* debugging stuff */
-#line 548
 IMPORT int do_condition_checks;
 IMPORT void check_I();
 
@@ -826,8 +812,6 @@ IFN1(
    /* somewhere for exceptions to return to */
 #line 769
 #ifdef NTVDM
-   /* DIVERGENCE(MVDM-HOST-DIV-073): the helper returns jmp_buf *, while
-    * modern setjmp requires the referred-to jmp_buf array object. */
 #line 770
    setjmp(*ccpu386ThrdExptnPtr());
 #line 771
@@ -3946,8 +3930,6 @@ TYPEE8:
        while ( TRUE )
 	 {
 	 /* RESET ends the halt state. */
-	 /* DIVERGENCE(MVDM-HOST-DIV-214): atomically observe only, as in
-	  * the original HALT path; the normal RESET handler consumes it. */
 	 if ( c_cpu_event_snapshot() & CPU_RESET_EXCEPTION_MASK )
 #line 3988
 	    break;
@@ -3974,11 +3956,6 @@ TYPEE8:
          SYNCH_TICK();
          QUICK_EVENT_TICK();
 
-	 /* DIVERGENCE(MVDM-HOST-DIV-330): original CCPU leaves a ring-0 HLT
-	  * in a pure host polling loop.  The standalone host already raises the
-	  * original CCPU event bits for timer, PIC, reset and host-I/O work; its
-	  * process-local carrier retains one wake until this HLT waiter arrives.
-	  * Do not replace the event map, interrupt ordering or quick-event work. */
 	 if (c_cpu_event_snapshot() == 0 && c_cpu_q_ev_get_count() == 0)
 	    mvdm_softpc_ccpu_wait_for_event();
 #line 4011
@@ -4296,8 +4273,7 @@ TYPEFF_3:
       Now check for interrupts/external events/breakpoints...
     */
 
-   /* DIVERGENCE: MVDM-HOST-DIV-282: only a new match schedules delivery. */
-   if ( quick_mode && !debug_exception_pending )
+   if ( quick_mode && GET_DR(DR_DSR) == 0 )
 #line 4327
       goto DO_INST;
 
@@ -4363,7 +4339,7 @@ CPU_RESTORED_RESET:
       }
 
    /* check for debug traps */
-   if ( debug_exception_pending ) /* MVDM-HOST-DIV-282 */
+   if ( debug_exception_pending )
 #line 4385
       {
       Int1_t();   /* at least one breakpoint set from:-
@@ -4373,7 +4349,7 @@ CPU_RESTORED_RESET:
    if ( nr_inst_break && GET_RF() == 0 )
       {
       check_for_inst_exception(GET_CS_BASE() + GET_EIP());
-      if ( debug_exception_pending ) /* MVDM-HOST-DIV-282 */
+      if ( debug_exception_pending )
 	 {
 	 Int1_f();   /* a CODE Breakpoint triggered */
 	 }
@@ -4397,17 +4373,8 @@ CPU_RESTORED_RESET:
 	 IS32 acknowledged_interrupt;
 
 	 acknowledged_interrupt = ica_intack(&hook_address);
-	 /* DIVERGENCE(MVDM-HOST-DIV-221): the source PIC explicitly returns -1
-	  * when a host-thread notification becomes stale before CCPU accepts it.
-	  * The historical x86 monitor prevented that race outside this CCPU body;
-	  * a modern user-mode session can reach it.  Preserve the original
-	  * acknowledge and all real-interrupt mechanics, but do not narrow its
-	  * signed rejection sentinel into the original IU16 vector and dispatch
-	  * a fabricated INT FF. */
 	 if (acknowledged_interrupt != -1)
 	 {
-	     /* The host monitor and normal CPU path share this accepted-IRQ
-	      * tail, including callback and saved-instruction bookkeeping. */
 #ifdef NTVDM
 	     ccpu_dispatch_accepted_irq(acknowledged_interrupt);
 #else
@@ -4437,11 +4404,7 @@ NEXT_INST:
    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
 
 #if defined(NTVDM) && !defined(SFELLOW)
-   /* A restored task enters here without the normal inter-instruction
-    * checks. Deliver its pending trap or execution breakpoint before it
-    * executes, using the same CPU-owned checks as that path. */
    if (debug_context_resume_check) {
-      /* RESET has priority over debug delivery in the normal boundary. */
       if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
          goto CPU_RESTORED_RESET;
       debug_context_resume_check = FALSE;
@@ -4744,7 +4707,7 @@ LOCAL VOID
       SET_DR(DR_DAR2, 0);   /* Really Undefined */
       SET_DR(DR_DAR3, 0);   /* Really Undefined */
       SET_DR(DR_DSR, 0);    /* Really Undefined */
-      debug_exception_pending = FALSE; /* MVDM-HOST-DIV-282: reset. */
+      debug_exception_pending = FALSE;
 #if defined(NTVDM) && !defined(SFELLOW)
       debug_context_resume_check = FALSE;
 #endif
@@ -4789,7 +4752,6 @@ LOCAL VOID
 #line 4815
 #endif	/* SWITCHNPX */
 #line 4816
-#line 4816
 
       if ( disableNpx )
 	 SET_ET(0);
@@ -4808,7 +4770,7 @@ LOCAL VOID
    c_cpu_simulate IFN0()
       {
 #ifdef NTVDM
-      jmp_buf *frame; /* DIVERGENCE(MVDM-HOST-DIV-348): native frame identity. */
+      jmp_buf *frame;
 #endif
 #line 4833
       SYNCH_TICK();
@@ -4844,8 +4806,6 @@ LOCAL VOID
    GLOBAL VOID
    c_cpu_continue IFN0()
       {
-      /* DIVERGENCE: MVDM-HOST-DIV-282: all callers finish exception entry.
-       * Consume/cancel the pending event, retaining architectural DR6. */
       debug_exception_pending = FALSE;
 #line 4855
 #ifdef NTVDM

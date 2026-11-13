@@ -1,0 +1,26 @@
+{
+  "id": "T483-R0353",
+  "path": "src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_bsic.h",
+  "scope_before": "+2/-0 excluding #line",
+  "scope_after": "+1/-0",
+  "mirror_diff_delta": -1,
+  "responsibility": "Original c_intr calls original c_getEFLAGS returning IU32.",
+  "original_limitation": "Internal include closure lacks cpu4gen.h external-interface prototype. Original c_bsic.h omitted declaration.",
+  "compile": {
+    "pid": 6784,
+    "current_exit": 0,
+    "without_exit": 0,
+    "without_warning": "c_intr.c(249) C4013 c_getEFLAGS undefined; assuming extern returning int",
+    "actual_without_header": "build/t483-s5-p32/bsic/c_bsic.h selected in include trace",
+    "limit": "Wrong implicit return type warning, not a demonstrated runtime failure."
+  },
+  "minimum": "Keep one correctly typed original-function declaration; adding whole external CPU facade or another shim is broader.",
+  "decision": "Residual declaration pending owner decision; remove extra blank.",
+  "line_check": {
+    "matched_original_lines": 32,
+    "mismatches": []
+  },
+  "before_sha256": "a645bafef7279059c8657d6650d421073d0dede1e07415cdc8b5800bfb0b6c29",
+  "after_sha256": "c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15",
+  "verification": "Real x86 ccpu_flags paired compile; final change only blank before explicit #line99. No product build/publication yet."
+}

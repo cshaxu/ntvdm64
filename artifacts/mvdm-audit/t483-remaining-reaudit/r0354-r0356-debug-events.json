@@ -1,0 +1,39 @@
+{
+  "points": [
+    "T483-R0354",
+    "T483-R0355",
+    "T483-R0356"
+  ],
+  "responsibility": "One new breakpoint match schedules one exception without clearing guest-visible DR6 history.",
+  "original_failure": "Original c_main interinstruction tests DR6 B/BT bits, and instruction branch tests any DR6 bit after match scan. Original c_cpu_continue does not clear DR6. Old set status therefore satisfies a later delivery check even without new match.",
+  "minimality": "One latch and two writes at original match sites. Clearing DR6 discards architectural status; reconstructing it elsewhere adds state. Keep original matching algorithm and existing single consumer.",
+  "counter_review": "The data-match additional B-bit loop is dominated by the first true match; no extra latch write needed there. Task-switch T-bit and consumer/reset reviewed as dependencies, not separately completed queue points.",
+  "scope_before": "+4/-0 excluding diagnostic lines",
+  "scope_after": "+3/-0",
+  "mirror_diff_delta": -1,
+  "matched_original_lines": 165,
+  "line_mismatches": [],
+  "error_directives_unchanged": true,
+  "before_sha256": "fcfb7f8aec931a9e2d93dded7bb0357de58e2a1e433266ad711ce118551f1d6f",
+  "after_sha256": "b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9",
+  "verification": "Source-chain proof; only explanatory comments changed in this batch. Existing real CPU match and halt/reset fixtures will be checked separately, not substituted for original semantic proof.",
+  "focused_verification": {
+    "pid": 19872,
+    "results": [
+      {
+        "name": "ccpu-debug-match-test",
+        "exit": 0,
+        "output": "S38_CCPU_DEBUG_MATCH_STATUS_SEPARATION_OK\n",
+        "exe_sha256": "32e911b9b1cfc04af9e21346056b4ebe289e0576291266e92ddcb0ecb0cdcd46"
+      },
+      {
+        "name": "ccpu-halt-reset-test",
+        "exit": 0,
+        "output": "ntvdm-exe/session/gdp\nsas-init\nvga/cpu-init\nguest-program\nsimulate\noriginal-CCPU HALT RESET: AX=beef producer=0 quick=0\nS38_CCPU_DIV_FAULT_CANCELS_PENDING_DEBUG_OK\nS38_CCPU_RF_SUPPRESS_ONCE_THEN_BREAK_OK\nS38_CCPU_REAL_DESCRIPTOR_PAGING_REFUSAL_OK\nS38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK\nT430_CCPU_STALE_PIC_SENTINEL_OK\n",
+        "exe_sha256": "c4eb05741cda0a04b30e87920f10c3803dfba98716627f9b01a5590cd7484cd4"
+      }
+    ],
+    "prior_attempt": "9009: absent exe, no test ran; existing formal targets then built successfully.",
+    "limits": "Match object plus real CCPU fault/RF/reset/TSS checks; no new original-code A/B runtime comparison or product full delivery claimed."
+  }
+}

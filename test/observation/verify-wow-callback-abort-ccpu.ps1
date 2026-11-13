@@ -13,7 +13,13 @@ $graph=Get-Content "$worker/build.ninja" -Raw
 $providerGraph=Get-Content "$ProviderBuildRoot/build.ninja" -Raw
 function Flags($body){[regex]::Match($body,'(?m)^cflags = (.*)\r?$').Groups[1].Value.Trim().Replace('$:',':')}
 $flags=Flags $graph;$providerFlags=Flags $providerGraph
-if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/MT') -or !$providerFlags.Contains('/DMVDM_WOW32_PROVIDER')){throw 'Require actual CCPU40/MT worker and WOW32 graphs'}
+if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/MT') -or !$providerFlags.Contains('/MT')){throw 'Require actual CCPU40/MT worker and WOW32 graphs'}
+$controlObject='obj/wow32-dll/wow_callback_frame_lease.obj'
+$controlSource=$repo.Replace('\','/').Replace(':','$:')+'/src/wow32-dll/source/wow_callback_frame_lease.c'
+if($providerGraph -notmatch ('(?m)^build '+[regex]::Escape($controlObject)+': cc '+[regex]::Escape($controlSource)+'\r?$') -or
+   $providerGraph -notmatch ('(?m)^build wow32\.dll[^\r\n]*: wow_dll_link [^\r\n]*\b'+[regex]::Escape($controlObject)+'(?: |\r?$)')){
+    throw 'WOW32 graph does not compile and link the actual callback frame owner'
+}
 # Reuse the selected original CPU fixture's real library/resource closure.
 # No new permissive unresolved aliases or replacement CPU providers.
 $dependencies=[regex]::Match($graph,'(?m)^build cpu40-descriptor-domain-fixture.exe: memory_test_link (.*)\r?$').Groups[1].Value.Trim() -split ' '

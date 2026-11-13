@@ -1,0 +1,22 @@
+{
+  "point": "T483-R0357",
+  "responsibility": "Share one new-debug-event signal between original match functions, task-switch T-bit producer and CPU exception consumer without destroying guest-visible DR6 history.",
+  "original_failure": "Original c_main uses persistent DR6 B/BT status as delivery predicate; c_cpu_continue leaves it set. A previously delivered match therefore satisfies a later delivery predicate without a new match. See r0354-r0356-debug-events.json for original call-chain and focused checks.",
+  "necessity_layers": {
+    "responsibility": "Separate guest-visible sticky status from a newly pending exception.",
+    "original_unavailable_behavior": "Original DR6 delivery predicate cannot distinguish old status from new match. Clearing DR6 instead changes architectural status.",
+    "specific_diff": "One extern declaration for the single event state; no duplicate state or alternate delivery path. Its consumers are c_main.c and c_tsksw.c. This is conditional on the evidence-backed event correction, not merely a claim that current consumers compile with it."
+  },
+  "change": "Remove explanatory comment; retain single declaration pending owner decision.",
+  "scope_before": "+2/-0 excluding #line",
+  "scope_after": "+1/-0 excluding #line",
+  "mirror_diff_delta": -1,
+  "original_structure_proof": "Deleting only the added declaration and #line 18 yields the entire original file, newline-normalized.",
+  "logical_line_matches": 45,
+  "line_mismatches": [],
+  "error_directives_unchanged": true,
+  "before_sha256": "e364c078c6bd4ecc16780795bcd8eedfa02ff479ed977b5d39089687a2d71871",
+  "after_sha256": "66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f",
+  "verification": "Whole-file original identity reconstruction and logical-line check. Comment-only edit; prior focused runtime evidence is supplemental and not a new build/publication of this final header.",
+  "status": "pending-owner-decision-source-proof"
+}

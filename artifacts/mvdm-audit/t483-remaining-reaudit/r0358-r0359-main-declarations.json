@@ -1,0 +1,76 @@
+{
+  "points": [
+    "T483-R0358",
+    "T483-R0359"
+  ],
+  "run": {
+    "pid": 26172,
+    "started": "2026-11-13T04:03:41.4719721-08:00",
+    "token": "normal escalated execution",
+    "logs": "build/t483-s5-p32/main-declarations/*.log",
+    "command": "cmd /d /c build\\t483-s5-p32\\main-declarations\\run.cmd"
+  },
+  "cases": [
+    {
+      "name": "current",
+      "exit": 0,
+      "implicit_declarations": [],
+      "rsp_sha256": "80e97840400c9d94c080d5401a7c47fdcac2b3ad2a4ff536ebaffb615c4b7103"
+    },
+    {
+      "name": "without_addr",
+      "exit": 0,
+      "implicit_declarations": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_addr.c(840): warning C4013: 'd_mem' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_addr.c(840): warning C4013: 'limit_check' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_addr.c(1036): warning C4013: 'address_add' undefined; assuming extern returning int"
+      ],
+      "rsp_sha256": "90b8f32eb021d6f70b079f6fad75815c80ff6314ec620a6fe8159d56736558de"
+    },
+    {
+      "name": "without_seg",
+      "exit": 0,
+      "implicit_declarations": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_seg.c(4750): warning C4013: 'load_pseudo_descr' undefined; assuming extern returning int"
+      ],
+      "rsp_sha256": "c5258633110a994a9d40b9a3bfb10cc8bcf9c8830b701a46dc1c8b0b4a7509f7"
+    },
+    {
+      "name": "without_ica",
+      "exit": 0,
+      "implicit_declarations": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_ica.c(603): warning C4013: 'ica_intack' undefined; assuming extern returning int"
+      ],
+      "rsp_sha256": "238f4b963682cad4d3bdae1ef958992c38f15b26d864d36a608f2e174b0a01c3"
+    },
+    {
+      "name": "without_timer",
+      "exit": 0,
+      "implicit_declarations": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_timer.c(3998): warning C4013: 'host_timer_event' undefined; assuming extern returning int"
+      ],
+      "rsp_sha256": "e6d05bacc8dae8cbc551b68067b821d2832a7f7379ba70ab0977ef00cecce5e3"
+    },
+    {
+      "name": "without_externs",
+      "exit": 0,
+      "implicit_declarations": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_externs.c(658): warning C4013: 'force_yoda' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_externs.c(3344): warning C4013: 'EDL_fast_bop' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p32\\main-declarations\\without_externs.c(3670): warning C4013: 'TakeNpxExceptionInt' undefined; assuming extern returning int"
+      ],
+      "rsp_sha256": "b70ea01956ef478ed53d92af90104ced43b435dd5023bd87112528bf9b56eb0f"
+    }
+  ],
+  "source_before_sha256": "99e2e407b9b3cfaceb3da672d049e87a6a83d887be2108580a004236d8d59a40",
+  "source_after_sha256": "7838740d218fa443c2620b61b8dd785e0d53cb537d36df835f44349f77e9722a",
+  "original_calls": {
+    "R0358": "Original c_oprnd.h decoding macros call d_mem, limit_check and address_add; c_addr.h declares VOID, VOID and IU32 providers.",
+    "R0359": "Original c_main reset loads all six pseudo descriptors; c_seg.h declares VOID load_pseudo_descr(ISM32)."
+  },
+  "proof_limits": "All variants compile; absence gives C4013 implicit-int incompatible with actual original declarations. No runtime failure claimed. Other diagnostic cases are leads, not completed point dispositions.",
+  "change": "R0358 explanatory comment removed, +3/-0 -> +1/-0 excluding #line; R0359 +1/-0 unchanged.",
+  "line_proof": "Removed comment immediately precedes retained include and #line 38; all subsequent original logical coordinates unchanged. #error untouched. Whole c_main line audit awaits complete-file review.",
+  "necessity": "Typed original provider contracts required by original callers, not invented adapter dependency. Single existing original owner include is smaller than duplicating prototypes.",
+  "delivery": "P32 local comment-only edit, entire file still under review."
+}

@@ -720,6 +720,10 @@ instructions for this audit:
 1. Follow the latest main diff register in file order, then point order.
 2. Presume original code valid. Guesses, old comments and dependencies created
    by the current adapter do not prove a deviation necessary.
+   Trace the complete call chain and separately establish that the responsibility
+   is necessary, that the original implementation cannot fulfill it in the
+   supported context, and that this specific deviation is necessary. Do not
+   substitute evidence for one of these claims for evidence of another.
 3. Restore original code directly where feasible. Remove purely formatting,
    newline and comment differences without retaining exception registrations.
 4. A necessary deviation requires specific source, ABI, build or runtime

@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+    "sha256": "c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15",
+    "evidence": "r0353-ccpu-flags-declaration.json",
+    "matched_original_line_mismatches": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+    "sha256": "b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9",
+    "evidence": "r0354-r0356-debug-events.json",
+    "matched_original_line_mismatches": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+    "sha256": "66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f",
+    "evidence": "r0357-debug-event-interface.json",
+    "matched_original_line_mismatches": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "sha256": "e10ebdf7fa1943944e7eb1910de0c3efd9972ee14967319f6a8958d50dfe61cf",
+    "evidence": "batch-p32-main-line-check.json",
+    "matched_original_line_mismatches": []
+  }
+]

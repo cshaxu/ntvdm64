@@ -15,7 +15,6 @@ LOCAL CHAR SccsID[]="@(#)c_debug.h	1.5 09/01/94";
  */
 IMPORT IU32 nr_inst_break;
 IMPORT IU32 nr_data_break;
-/* DIVERGENCE: MVDM-HOST-DIV-282: event delivery is not sticky DR6 status. */
 IMPORT BOOL debug_exception_pending;
 #line 18
 

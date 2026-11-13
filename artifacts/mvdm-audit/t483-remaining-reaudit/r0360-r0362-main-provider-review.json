@@ -1,0 +1,40 @@
+{
+  "points": [
+    "T483-R0360",
+    "T483-R0361",
+    "T483-R0362"
+  ],
+  "before_sha256": "7838740d218fa443c2620b61b8dd785e0d53cb537d36df835f44349f77e9722a",
+  "after_sha256": "f1ce48ebd26498b6bb1be7aeb68527b841bb464b9fffb86002bdd910c97b0ee6",
+  "R0360": {
+    "responsibility": "Original PIC ack and timer calls need correct provider types; idle HLT should not consume a full host core.",
+    "original_failure": "Without ica/timer includes, paired compile emits C4013. Original HLT repeatedly polls with no blocking operation. Historical T440 S7 paired fixture measured 0.515625s CPU in 0.5s steady interval vs 0 for event wait; both reset successfully.",
+    "specific_diff": "Three one-line provider headers. Original ica/timer owner declarations reused. Wait header declares the retained wake carrier, whose independent performance rationale is documented rather than inferred from current use.",
+    "limits": "Historical performance measurement, not a fresh benchmark. Wait lifecycle/teardown remains for coupled R0373/R0393 review; header necessity is not blanket lifecycle approval.",
+    "delta": 0
+  },
+  "R0361": {
+    "responsibility": "Original force_yoda, NPX exception and extended BOP calls need correct function contracts.",
+    "original_failure": "Diagnostic without three externs emits C4013 for all three. Actual original stubs.c and zfrsrvd.c providers return void; current EDL carrier returns VOID.",
+    "specific_diff": "Original yoda.h replaces calls with PROD macros and does not declare the other functions; zfrsrvd.h only declares ZFRSRVD. Three existing explicit declarations avoid new headers/shims and retain actual original call shape.",
+    "change": "Remove extra separator blank; retain three declarations pending decision.",
+    "delta": -1
+  },
+  "R0362": {
+    "responsibility": "Atomic cross-thread event bit operations.",
+    "original_failure": "None for original declaration: type/size unchanged; all accesses already use Interlocked operations with explicit volatile LONG pointer.",
+    "specific_diff": "Redundant variable-level volatile; restoring original declaration does not restore non-atomic accesses.",
+    "references": [
+      "declaration",
+      "clear_any_thingies: InterlockedAnd",
+      "c_cpu_event_snapshot: InterlockedCompareExchange",
+      "c_cpu_raise_event: InterlockedOr",
+      "c_cpu_take_event: InterlockedAnd",
+      "historical A2CPU comment only"
+    ],
+    "change": "Restore original LOCAL IUM32 declaration.",
+    "delta": -2
+  },
+  "line_error": "Only same-line qualifier restoration and one blank before #line53 removed; existing #error unchanged. Whole-file logical mapping verification remains due after all points.",
+  "verification": "Source/access proof and preceding six-case declaration compile. Final modified file not built; substantive restoration triggers full batch delivery only after this whole file is complete."
+}

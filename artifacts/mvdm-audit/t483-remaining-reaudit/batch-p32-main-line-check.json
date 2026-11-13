@@ -1,0 +1,18 @@
+{
+  "before": {
+    "added": 269,
+    "deleted": 563,
+    "total": 832
+  },
+  "after": {
+    "added": 228,
+    "deleted": 561,
+    "total": 789
+  },
+  "delta": -43,
+  "checked": 3793,
+  "mismatches": [],
+  "sha256": "e10ebdf7fa1943944e7eb1910de0c3efd9972ee14967319f6a8958d50dfe61cf",
+  "scope": "Whole c_main.c monotonic original-source matching, nonblank matched lines; excludes #line from diff size, retains unchanged excluded bodies.",
+  "batch_mirror_delta": -46
+}

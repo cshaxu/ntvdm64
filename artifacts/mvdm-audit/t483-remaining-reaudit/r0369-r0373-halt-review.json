@@ -1,0 +1,45 @@
+{
+  "points": {
+    "T483-R0369": {
+      "problem": "Observe RESET in HLT without consuming it.",
+      "original_failure": "nt_timer.c creates HeartBeatThread; its cpu_interrupt(CPU_TIMER_TICK,0) call occurs after host_ica_unlock. CCPU HLT read/consume does not acquire that lock. Ordinary shared read/RMW therefore has no common serialization with producer. Atomic mask operations preserve unrelated concurrent raises. Reset is consumed later by the normal boundary; this read must remain observation only.",
+      "minimality": "Keep shared atomic snapshot; delete two explanation lines.",
+      "delta": -2
+    },
+    "T483-R0370": {
+      "problem": "Observe enabled hardware IRQ in HLT.",
+      "original_failure": "nt_timer.c creates HeartBeatThread; its cpu_interrupt(CPU_TIMER_TICK,0) call occurs after host_ica_unlock. CCPU HLT read/consume does not acquire that lock. Ordinary shared read/RMW therefore has no common serialization with producer. Atomic mask operations preserve unrelated concurrent raises. GET_IF still gates HLT wake for IRQ; snapshot does not acknowledge PIC or consume notification.",
+      "minimality": "Keep original IF test with atomic snapshot.",
+      "delta": 0
+    },
+    "T483-R0371": {
+      "problem": "Consume timer event once before host timer work.",
+      "original_failure": "nt_timer.c creates HeartBeatThread; its cpu_interrupt(CPU_TIMER_TICK,0) call occurs after host_ica_unlock. CCPU HLT read/consume does not acquire that lock. Ordinary shared read/RMW therefore has no common serialization with producer. Atomic mask operations preserve unrelated concurrent raises. Original separate test and &= clear is replaced by one atomic take.",
+      "minimality": "Keep one take-event call and original host_timer_event body.",
+      "delta": 0
+    },
+    "T483-R0372": {
+      "problem": "Avoid double clearing a consumed timer event.",
+      "original_failure": "After take-event linearizes, producer can raise a new tick before original separate clear. Restoring that clear erases the new notification. Restoring both ordinary test and clear reintroduces unsynchronized RMW described in R0371.",
+      "minimality": "Keep original clear omitted because atomic take owns exactly that action.",
+      "delta": 0
+    },
+    "T483-R0373": {
+      "problem": "Avoid CPU spinning while guest executes idle HLT.",
+      "original_failure": "Original loop has no wait when event map and quick event count are zero. Recorded T440 S7 comparison: busy carrier consumed 0.515625s CPU per 0.5s steady sample, event carrier 0; both resumed correct reset vector.",
+      "minimality": "Keep two-line guarded wait and shared wake carrier; remove five comment lines.",
+      "delta": -5
+    }
+  },
+  "before_sha256": "07fdda6f8b658099ecf7596c5070e6cb57903e8fb412e02e96790eae32454090",
+  "after_sha256": "df3df6d83647c2c224283380f3bde2ba8fac4ac131a0422c5adf4522b3892b0b",
+  "source_chain": [
+    "nt_timer.c TimerInit -> CreateThread HeartBeatThread -> host_ica_unlock -> cpu_interrupt(CPU_TIMER_TICK)",
+    "c_main.c c_cpu_interrupt -> c_cpu_raise_event -> wait_signal",
+    "c_main.c HLT -> snapshot/take -> original host_timer_event -> quick-event work -> guarded wait"
+  ],
+  "historical_measurement": "docs/etc/evidence/m0-t440-s7-ccpu-hlt-event-wait.md",
+  "lifecycle_limit": "Wait creation precedes host producers; cleanup calls wait_end. TerminateHeartBeat still ignores bounded wait result; this review does not claim all abnormal teardown paths joined or validated. That source limitation is not evidence that reverting to busy waiting preserves the measured idle-performance requirement.",
+  "verification": "Source concurrency/ordering proof and retained historical comparison; no fresh final-file build/runtime pass. Complete-file checks pending.",
+  "line_error": "Only comments removed before retained #line3988/#line4011; all #error unchanged."
+}

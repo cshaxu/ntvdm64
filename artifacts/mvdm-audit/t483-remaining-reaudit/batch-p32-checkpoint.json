@@ -1,0 +1,163 @@
+{
+  "status": "P32 verified delivery receipt; commit/push follows",
+  "source_files": 5,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "sha256": "c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+      "sha256": "b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "sha256": "66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "sha256": "e10ebdf7fa1943944e7eb1910de0c3efd9972ee14967319f6a8958d50dfe61cf"
+    },
+    {
+      "path": "test/observation/verify-wow-callback-abort-ccpu.ps1",
+      "sha256": "b84c362558a474972af286ef03c8f588fb4f7c7a35a0cead5c69b67dd958d601",
+      "role": "test runner only; repaired obsolete selector check after product build; no production binary input changed"
+    }
+  ],
+  "mirror_diff_delta": -46,
+  "original_restorations": [
+    "T483-R0362",
+    "T483-R0374"
+  ],
+  "test_runner_correction": {
+    "initial_failure": "Required removed MVDM_WOW32_PROVIDER macro; stopped before fixture compile/run.",
+    "fix": "Check actual callback source compile edge and its object in WOW32 DLL link plus MT runtime.",
+    "assertions": "All existing runtime frame/unwind/control assertions unchanged.",
+    "verification": "Final retry passed: CCPU_ABORT_OK, CCPU_INTERFACE_OK, CCPU_CONTROL_OK; exit0."
+  },
+  "package": "4582bcd8-b2c7-4de3-aba0-8d16d1760a99",
+  "published_images": 11,
+  "destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "hash_verified": true,
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1343,
+      "CleanupMs": 439,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 204,
+      "CleanupMs": 387,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66465,
+      "CleanupMs": 454,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 46142,
+      "CleanupMs": 473,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 43611,
+      "CleanupMs": 461,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 16414,
+      "CleanupMs": 527,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 17614,
+      "CleanupMs": 491,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 84929,
+      "CleanupMs": 517,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12119,
+      "CleanupMs": 520,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28473,
+      "CleanupMs": 446,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30785,
+      "CleanupMs": 462,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4560,
+      "CleanupMs": 474,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7975,
+      "CleanupMs": 449,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10199,
+      "CleanupMs": 480,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 4852,
+      "CleanupMs": 462,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 7614,
+      "CleanupMs": 472,
+      "Passed": true
+    }
+  ],
+  "full_elapsed_ms": 398688,
+  "focused": [
+    "CCPU debug match",
+    "CCPU debug bank + halt/reset",
+    "CCPU monitor143",
+    "atomic notification",
+    "real CPU callback abort/frame reuse"
+  ],
+  "limitations": [
+    "Focused CPU fixtures are not exhaustive guest gameplay.",
+    "Full16 is the declared suite; absent external DOS4GW/NESticle assets remain skips where reported.",
+    "Residual diff necessity is separately recorded and still awaits owner decision."
+  ],
+  "final_checks": {
+    "boundary": "143 selected WOW objects and 9 negative controls passed",
+    "documentation_governance": "passed",
+    "relative_links": "passed",
+    "git_diff_check": "passed"
+  }
+}
