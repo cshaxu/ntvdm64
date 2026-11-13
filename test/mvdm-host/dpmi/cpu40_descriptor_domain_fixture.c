@@ -75,6 +75,21 @@ int main(void)
     set_dosx_idt(0x00456000u, 0x7feu);
     if (DpmiCpu40GetDosxIdtDescriptor(&base, &limit)) return 11;
 
+    /* Compare the selected accessor against full architectural limit decoding. */
+    {
+        ULONG raw;
+        unsigned granularity;
+        for (granularity = 0; granularity != 2; ++granularity) {
+            for (raw = 0; raw != 0x100000u; ++raw) {
+                ULONG decoded = granularity ? (raw << 12) | 0xfffu : raw;
+                set_dosx_idt(0x00456000u, raw);
+                gdt[0x88u >> 3].HighWord.Bits.Granularity = granularity;
+                if (!!DpmiCpu40GetDosxIdtDescriptor(&base, &limit) !=
+                        (decoded >= 0x7ffu)) return 22;
+            }
+        }
+    }
+
     /* WOW_x86 KRNL386 bypasses BOP 53:00 for one LDT entry: it supplies
      * selector 83B7h and two descriptor words to the kernel's INT 2Ah
      * NtSetLdtEntries service.  Exercise the standalone finite carrier with

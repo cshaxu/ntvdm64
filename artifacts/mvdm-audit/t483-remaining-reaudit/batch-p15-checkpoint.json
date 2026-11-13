@@ -1,0 +1,164 @@
+{
+  "status": "Final cached build/publication/descriptor comparison/Full16/governance verified; included in P15 Git delivery.",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "sha256": "03a634db0761632eacd5b956e3314a9ccedbdc079603f243f7a38adc686815ac"
+    },
+    {
+      "path": "test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c",
+      "sha256": "640d979fd0f7e9da78895cdcc496ed1c819d808f4543cd4a180fd07b5dc5c013"
+    }
+  ],
+  "mirror_diff_delta": -3,
+  "original_relative_metric": {
+    "before": {
+      "added": 57,
+      "removed": 2,
+      "total": 59
+    },
+    "after": {
+      "added": 54,
+      "removed": 2,
+      "total": 56
+    },
+    "scope": "Normalize newline and exclude #line; unchanged #error bodies remain in totals."
+  },
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "pipeline": 0,
+    "governance": 0,
+    "descriptor": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "a929e308-dc13-4dbf-a2ef-079b9f6f3893",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 399911,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 4986,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1142,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 190,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66509,
+        "CleanupMs": 471,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47937,
+        "CleanupMs": 496,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 48370,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 17031,
+        "CleanupMs": 574,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13534,
+        "CleanupMs": 545,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 80110,
+        "CleanupMs": 570,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12672,
+        "CleanupMs": 554,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28855,
+        "CleanupMs": 521,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30609,
+        "CleanupMs": 546,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5486,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8216,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11258,
+        "CleanupMs": 527,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5215,
+        "CleanupMs": 469,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 8086,
+        "CleanupMs": 497,
+        "Passed": true
+      }
+    ]
+  },
+  "limits": [
+    "Descriptor exhaustive comparison uses actual provider with host fixture seams, not guest execution.",
+    "DOS4GW/NESticle absent-fixture skip remains non-pass. No original guest or winnt.zip modification."
+  ],
+  "next": "T483-R0137",
+  "backlog": {
+    "points": 67,
+    "qualified": 38,
+    "historical_requiring_requalification": 29
+  },
+  "sequential_files_complete": 23
+}

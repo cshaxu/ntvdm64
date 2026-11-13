@@ -1,0 +1,8 @@
+[
+  {
+    "file": "src/mvdm-host/dpmi32/data.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Matched retained nonblank nondirective source runs >=4 lines. DBG=0 else #line114 and unconditional #line116/138 restore original code numbers. Conditional delimiter physical lines differ; not compiler preprocessing evidence."
+  }
+]

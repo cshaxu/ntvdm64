@@ -168,7 +168,6 @@ Routine Description:
 {
     const USHORT DosxIdtSelector = 0x88u; /* pmdefs.inc, IFDEF WOW */
     PLDT_ENTRY Descriptor;
-    ULONG DescriptorLimit;
 
     if (Base == NULL || Limit == NULL || Cpu40GdtShadowAddress == 0u)
         return FALSE;
@@ -181,11 +180,9 @@ Routine Description:
     *Base = (ULONG)Descriptor->BaseLow |
         ((ULONG)Descriptor->HighWord.Bytes.BaseMid << 16) |
         ((ULONG)Descriptor->HighWord.Bytes.BaseHi << 24);
-    DescriptorLimit = (ULONG)Descriptor->LimitLow |
-        ((ULONG)Descriptor->HighWord.Bits.LimitHi << 16);
-    if (Descriptor->HighWord.Bits.Granularity)
-        DescriptorLimit = (DescriptorLimit << 12) | 0xfffu;
-    if (DescriptorLimit < (256u * sizeof(LDT_ENTRY) - 1u))
+    if (!Descriptor->HighWord.Bits.Granularity &&
+        !Descriptor->HighWord.Bits.LimitHi &&
+        Descriptor->LimitLow < (256u * sizeof(LDT_ENTRY) - 1u))
         return FALSE;
 
     *Limit = (USHORT)(256u * sizeof(LDT_ENTRY) - 1u);

@@ -35,9 +35,9 @@ is the sole active audit order; the old D-register is historical evidence.
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
 177 points have a prior or current review record:108 restored/verified/published,
-0 local restorations pending verification,2 approved retain,35 qualified pending
-decisions and32 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is22/365;343 remain.
+0 local restorations pending verification,2 approved retain,38 qualified pending
+decisions and29 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is23/365;342 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -69,22 +69,24 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P14 package `b89bca1d-ad88-487e-bf26-fc71523da39f` is published to
+P15 package `a929e308-dc13-4dbf-a2ef-079b9f6f3893` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
-Final-source cached full build, directory115 and Full16 passed.
-The build-only original-reset negative control fails three deleted-anchor
-assertions; current and final providers pass115/115. This is not guest evidence.
+Final-source cached full build, descriptor2097152 and Full16 passed.
 DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
-or winnt.zip changes. See [P14 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p14-checkpoint.json).
+or winnt.zip changes. See [P15 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p15-checkpoint.json).
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
 point. See [file check](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0114-r0116-whole-file-check.json).
 demsrch.c dispositions complete; P14 restores three exact FETCHWORD expressions
 (net mirror diff -7: six expression lines plus one extra blank), correcting earlier
-equivalent-but-not-exact restoration claims. Final P14 verification is recorded
-above; this receipt accompanies the same Git delivery.
+equivalent-but-not-exact restoration claims. P14 was delivered in `4820f90b4`;
+its [receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p14-checkpoint.json) retains the verification.
 [Requalification](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0117-r0133-requalification.json).
-Next ordered point after delivery is R0134.
+data.c R0134-R0136 is source-complete: required guest-address/table publication
+remains pending owner choice; IDT minimum-size comparison shrinks mirror diff by3.
+P15 final build/publication/tests passed; this receipt accompanies Git delivery.
+[Requalification](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0134-r0136-requalification.json).
+Next ordered point after delivery is R0137.
 
 ## Remaining Scope
 

@@ -1,0 +1,56 @@
+{
+  "file": "src/mvdm-host/dpmi32/data.c",
+  "original_path": "O:/repos.external/OpenNT/base/mvdm/dpmi32/data.c",
+  "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+  "points": {
+    "T483-R0134": {
+      "remaining_added": 1,
+      "removed": 0,
+      "finding": "Required guest-address carrier for unchanged WOW DOSX SEL_VDMTIB publication.",
+      "evidence": "Original dpmiint.c::DpmiPassPmStackInfo publishes &VdmTib.PmStackInfo only in i386; selected CCPU build excludes that kernel path. Guest dxboot.asm installs returned CX:DX as SEL_VDMTIB. A host structure address does not designate the structure in emulated RAM; original non-i386 routine supplies no equivalent return address. Actual ccpu sas initialization assigns Start_of_M_area from host_sas_init; normal c_GetPhyAdd returns Start_of_M_area+guest_address (ccpusas4.c). A numeric host pointer is therefore not a binding to VdmTib storage. No VdmTib external-page binding is introduced by the original publication.",
+      "minimum": "One ULONG retains allocated guest address across initialization; original non-i386 locked-stack scalar fields are not a contiguous guest-addressable VDM_DPMIINFO. Replacing the variable with another storage owner would not reduce net mechanism."
+    },
+    "T483-R0135": {
+      "remaining_added": 2,
+      "removed": 0,
+      "finding": "Addresses of distinct published GDT/LDT domains.",
+      "evidence": "Original DpmiSetDescriptorEntry invokes i386 DpmiSetX86Descriptor, which uses NtSetLdtEntries/ProcessLdtInformation, independently of DOSX table ownership. Current CCPU selector loads require live guest descriptor images; DOSX dxutil.asm excludes LGDT/LIDT under WOW and uses host transition. Original InitializeLDT only stores source Ldt/IntelBase; it does not publish CCPU GDTR/LDTR. Guest MoveDscrTables relocates construction tables; direct old-source alias is not retained publication.",
+      "minimum": "Two address scalars represent distinct architectural tables; sharing backing storage conflates table domains. Deriving one address from allocation adjacency would spread that allocation contract into consumers rather than remove the dependency. Allocation/publication bodies in later files remain separately ordered audit items."
+    },
+    "T483-R0136": {
+      "remaining_added": 39,
+      "removed": 0,
+      "delta": -3,
+      "finding": "Retain final relocated IDT descriptor handoff; minimize its size check.",
+      "evidence": "Guest dxboot.asm publishes SEL_IDT using lmaIDT after MoveDscrTables. modesw.c calls accessor before protected entry and installs its result. Original CCPU read_descriptor_linear calls spr_read_dword, which honors PG and may invoke lin2phy/#PF; it is not a drop-in host-copy decoder with BOOL failure. No extra conversion interface or copy of the CCPU algorithm introduced.",
+      "minimum": "Remove DescriptorLimit and full conversion. For G=1, minimum decoded limit is4095>=2047. For G=0 and LimitHi!=0, minimum is65536>=2047. Only G=0/LimitHi=0 requires LimitLow>=2047. Return base/presence checks/output limit/failure order remain unchanged."
+    }
+  },
+  "initial_review": "Original CCPU/WOW guest boundary requires publication otherwise performed by native NT. Do not restore hardware-monitor code or mutate guest to avoid the finite carrier.",
+  "counter_review": "Current-call references alone are not necessity proof. Checked original guest descriptor consumption and original i386 publication owners. This qualifies addresses and IDT handoff, not every later allocation/copy policy. Decoder reuse rejected for concrete memory-access and failure-contract mismatch, not merely header inconvenience.",
+  "verification": "Final source cached full build, both publication targets/22 hashes, production descriptor exhaustive2097152 comparison and existing cases, Full16 passed. See batch-p15-checkpoint.json for scopes and absent-fixture skip.",
+  "disposition": "Residual differences remain owner decisions; minimization does not approve retention.",
+  "limits": [
+    "No new runtime proof of arbitrary page remapping or allocation failure; do not claim one.",
+    "Full WOW tests exercise present integration; tests alone do not prove every adapter necessary.",
+    "Original guest source read only; no guest edits or rebuild."
+  ],
+  "source_chain": [
+    "src/mvdm-guest/dpmi/dxboot.asm",
+    "src/mvdm-guest/dpmi/dxutil.asm",
+    "src/mvdm-host/dpmi32/dpmiint.c",
+    "src/mvdm-host/dpmi32/dpmi32.c",
+    "src/mvdm-host/dpmi32/dpmiselr.c",
+    "src/mvdm-host/dpmi32/modesw.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_page.c"
+  ],
+  "focused_result": {
+    "exit": 0,
+    "limit_granularity_cases": 2097152,
+    "map_accessor": "original-mvdm-dpmi32:data.obj",
+    "map_ldt_publication": "original-mvdm-dpmi32:dpmiselr.obj",
+    "fixture_executable_sha256": "60ba9b46afa9f6dc86b64fd83f6239c563197f6b21655e8c777c87a346be528d",
+    "fixture_scope": "Real production data/descriptor objects plus existing host boundary seams. /FORCE duplicate host fixture warnings are not a claim that the complete worker ran."
+  }
+}
