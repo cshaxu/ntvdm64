@@ -1,0 +1,58 @@
+{
+  "file": "src/mvdm-host/dpmi32/dpmi32p.h",
+  "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+  "before_sha256": "836c09b0f40350b501bd8360d0b09c9e7f6dcd65ffd220c2dacdb40934f22216",
+  "after_sha256": "836c09b0f40350b501bd8360d0b09c9e7f6dcd65ffd220c2dacdb40934f22216",
+  "mirror_diff_delta": 0,
+  "points": {
+    "140": {
+      "size": 3,
+      "evidence": "Original DpmiPassPmStackInfo i386 publishes host VdmTib.PmStackInfo; unchanged DOSX consumes CX:DX as guest address. Original native DpmiSetX86Descriptor updates kernel process LDT, while CCPU resolves addresses via IntelBase/Start_of_M_area. R0134/R0135 and R0138/R0139 establish the required distinct publication. These extern declarations expose the same three definitions, not new state or another mechanism.",
+      "limit": "Necessary address-domain boundary does not approve every implementation detail of the associated projections. No standalone runtime declaration-removal failure claimed."
+    },
+    "141": {
+      "size": 5,
+      "evidence": "Original WOW DOSX skips ordinary LGDT/LIDT and publishes final SEL_IDT after relocation. modesw.c consumes the descriptor before PE. Existing read_descriptor_linear uses spr_read_dword and can invoke paging/#PF; it is not the same synchronous backing-table BOOL query. R0136/P15 established this source boundary and exhaustively checked the final size predicate.",
+      "limit": "Prototype matches data.c definition and modesw.c call. No claim that deleting only a prototype would cause a runtime crash; legacy implicit-int permissiveness is not an alternative interface design."
+    },
+    "142": {
+      "size": 6,
+      "evidence": "Unchanged WOW_x86 3protect.asm loads EAX=EBP=f0f0f0f1 and descriptor EBX/ECX/EDX before INT2A. Original trap.asm invokes NtSetLdtEntries; psldt.c selects PsGetCurrentProcess()->LdtInformation. That native table does not supply CCPU guest LDTR. Current dpmiselr.c exposes one three-ULONG NTSTATUS service, used by dpmiint.c and fast_bop; original native API is not a drop-in CCPU publication.",
+      "limit": "Header declaration is necessary for the selected finite service, not approval of its full validation implementation. Later dpmiselr.c/INT2A point audits remain in sequence. Existing P15 fixture validates production publisher with host seams, not a new guest run."
+    }
+  },
+  "initial_review": "Trace original owners and address domains; current reference existence alone is insufficient.",
+  "counter_review": "No header-only original restoration replaces the missing native-service effect for CCPU. Do not relocate declarations to manufacture mirror reduction or compress line formatting. Remove only the identical redundant autonomous declaration; retain CPU40 address extern there because the autonomous context does not select the mirror CPU_40_STYLE branch.",
+  "autonomous_cleanup": {
+    "path": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+    "before_sha256": "dc313de863aae6bc8a9fdb0ed7405081a5617776fdb4e442bb69fb86d40b8c1e",
+    "after_sha256": "e285b3c79059973440e80ae0bfc68c21678d70b3740079dcfe93862a0fa29c61",
+    "removed": "One duplicate DpmiSetWowLdtEntry declaration; identical unconditional prototype already included from dpmi32p.h.",
+    "binding_change": false
+  },
+  "verification": {
+    "header_byte_identical": true,
+    "error_unchanged": true,
+    "matched_original_code_lines": 145,
+    "logical_line_mismatches": [],
+    "scope": "Source matched nonblank non-directive code runs >=4 lines; not a compiler preprocessing trace.",
+    "runtime": "No new runtime/build/publication claim. Reuse P15 for unchanged behavior/binding; duplicate declaration cleanup follows owner reference-only batching authorization.",
+    "governance": {
+      "owner_pid": 2128,
+      "exit_code": 0,
+      "documentation": "passed",
+      "relative_links": "passed",
+      "log": "build/t483-s5-dpmi-header-review/governance.stdout.log"
+    }
+  },
+  "source_references": [
+    "src/mvdm-guest/wow16/kernel31/3protect.asm:3994-4006",
+    "O:/repos.external/OpenNT/base/ntos/ke/x86/trap.asm:1682-1719",
+    "O:/repos.external/OpenNT/base/ntos/ps/x86/psldt.c:1235,1437-1438",
+    "O:/repos.external/OpenNT/base/mvdm/dpmi32/i386/dpmi386.c:33-109",
+    "r0134-r0136-requalification.json",
+    "r0137-r0139-requalification.json",
+    "batch-p15-checkpoint.json"
+  ],
+  "next": "T483-R0143"
+}

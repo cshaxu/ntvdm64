@@ -35,9 +35,9 @@ is the sole active audit order; the old D-register is historical evidence.
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
 177 points have a prior or current review record:108 restored/verified/published,
-0 local restorations pending verification,2 approved retain,41 qualified pending
-decisions and26 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is24/365;341 remain.
+0 local restorations pending verification,2 approved retain,44 qualified pending
+decisions and23 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is25/365;340 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -90,7 +90,11 @@ dpmi32.c R0137-R0139 audit corrected the CVIDC wrapper/prototype attribution;
 comment-only cleanup reduces mirror diff by4, with executable tokens unchanged.
 P15 remains the build/publication/runtime baseline; no fresh runtime check claimed.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0137-r0139-requalification.json).
-Next ordered point is R0140.
+dpmi32p.h R0140-R0142 is requalified against original guest/kernel and CCPU
+address domains; mirror bytes unchanged. Removed one identical redundant
+autonomous function declaration without behavior/binding change.
+[Header review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0140-r0142-requalification.json).
+Next ordered point is R0143.
 
 ## Remaining Scope
 

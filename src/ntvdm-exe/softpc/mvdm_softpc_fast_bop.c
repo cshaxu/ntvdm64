@@ -16,7 +16,6 @@ extern void c_sas_storedw(uint32_t address, uint32_t value);
 /* DIVERGENCE(MVDM-HOST-DIV-310): CPU40 cannot expose the original kernel
  * monitor's host CS:IP. Reserve one LDT identity for that endpoint, then let
  * the original CALLF owner redirect it to the existing BOP dispatcher. */
-extern NTSTATUS DpmiSetWowLdtEntry(ULONG selector, ULONG low, ULONG high);
 /* This adapter uses the selected CPU40 provider directly; it does not select
  * the original DPMI header's alternate CPU implementations. */
 extern ULONG Cpu40LdtShadowAddress;
