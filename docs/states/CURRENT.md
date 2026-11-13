@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-488 points have a prior or current review record:184 restored/verified/published,
+489 points have a prior or current review record:185 restored/verified/published,
 0 local restorations pending verification,2 approved retain,302 qualified pending
-decisions and0 prior classifications requiring requalification. Another2232
-points are unreviewed. Sequential file disposition is74/365;291 remain.
+decisions and0 prior classifications requiring requalification. Another2231
+points are unreviewed. Sequential file disposition is75/365;290 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P50 package `2b211ec0-abf4-4245-97dd-360e99d1e2ec` is published to
+P51 package `40cfb8ed-8692-469c-9e1e-1c30f8161041` is published to
 assets/release and O:/winnt/system32;all11 hashes match.Cached full build,
-RET controls,focused and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p50-checkpoint.json).
+C-VID/vector,focused and Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p51-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -232,15 +232,13 @@ Next sequential file is dpmiselr.c, R0183.
 
 P47 localfm delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p47-checkpoint.json).
 
-## P48 ntthread delivered
-
-R0477/R0478 restore original returns;R0476 retains minimal abnormal-frame cleanup.
-Mirror diff25->15;203 original logical lines verified. Final build,publication,focused and Full16 passed.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0476-r0478-ntthread-review.json).
+P48 delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p48-checkpoint.json).
 
 R0479: redundant comment removed;one-line typed interface pending.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0479-ntthread-header-review.json).
 R0480 exact original restored;P49 diff net-3,full delivery verified.
 P50:R0481 diff5->2;final build/publication/tests verified.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0481-ret-review.json).
-Next R0482;S5 remains active.
+P51:R0482 exact original restored;full delivery verified.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0482-sascdef-review.json).
+Next R0483;S5 remains active.

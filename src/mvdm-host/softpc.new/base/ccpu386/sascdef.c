@@ -128,12 +128,7 @@ struct SasVector cSasPtrs = {
 	c_get_byte_addr,
 	c_GetLinAdd,
 	c_SasRegisterVirtualSelectors,
-	/* DIVERGENCE(MVDM-HOST-DIV-060): this source-era K&R null cast occupies
-	 * Sas_overwrite_memory.  Retain the original unavailable slot, with its
-	 * selected generated function-pointer type, so both host ABIs preserve
-	 * the vector layout without an incompatible function-pointer assignment. */
-	(TYPE_sas_overwrite_memory *)0,
-#line 132
+	(void (*)()) 0,
 	c_sas_PWS,
 	c_sas_PWS_no_check,
 	c_sas_PRS,

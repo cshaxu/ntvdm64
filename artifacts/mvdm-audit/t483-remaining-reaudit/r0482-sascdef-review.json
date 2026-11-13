@@ -1,0 +1,44 @@
+{
+  "id": "T483-R0482",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/sascdef.c",
+  "responsibility": "sas_init/SasSetPointers copies cSasPtrs;existing mvdm_cvidc_bind_vectors installs c_sas_overwrite_memory.",
+  "original_capability": "Original null function-pointer initializer preserves the slot and null value. The cast itself is not a function call;provider binding is separate and unchanged.",
+  "old_rationale": "Generic function-pointer ABI concern did not establish a defect in this null initializer or supported x86 context.",
+  "decision": "Restore exact original file,no shim.",
+  "controls": {
+    "command": "build/t483-s5-p51/compare.cmd",
+    "both_compile_exit": 0,
+    "warning": "Original C4113 parameter-list difference",
+    "equal_sections": [
+      ".drectve",
+      ".data",
+      ".text$mn",
+      ".rdata"
+    ],
+    "proof": "All code/data/linker-directive bytes,flags,sizes and named relocations equal;only .debug and .chks64 excluded. Not whole-object identity."
+  },
+  "diff": {
+    "before_added": 5,
+    "before_removed": 1,
+    "after_added": 0,
+    "after_removed": 0,
+    "net": -6
+  },
+  "counter_review": "Separate vector layout,actual provider binding,and null initializer type. Current adapter needs do not prove this cast deviation necessary.",
+  "verification": "batch-p51-checkpoint.json:final-source full delivery verified;accompanies Git commit.",
+  "final_binding_provider": {
+    "map": "build\\.ninja\\msvc-x86-release\\worker\\cvidc-vector-binding-fixture.exe.map",
+    "symbol": "0003:000033e8       _cSasPtrs                  005973e8     original-ccpu386:sasCdef.obj",
+    "sha256": "7d7ff64d1764f10c80a83869c6165277255f3790e8c8ef9f7ce71a3434922175",
+    "scope": "Actual vector fixture links the restored sascdef provider;not a replacement initializer."
+  },
+  "validation_interruption": {
+    "original_pipeline_pid": 36676,
+    "original_finish_pid": 14708,
+    "observed": "2026-11-13T09:31:00-08:00",
+    "evidence": "Both handles missing under elevated inspection;no remaining P51/Invoke-ProductVerification child after excluding inspection itself;no exit markers;last log09:27:44.",
+    "disposition": "Interrupted validation,not pass and not attributed product failure. Cause not established.",
+    "preserved": "build/t483-s5-p51/full-interrupted and full-interrupted.log",
+    "resume": "Only Full and later evidence/governance restarted;cached build,11x2 publication and focused tests not repeated."
+  }
+}

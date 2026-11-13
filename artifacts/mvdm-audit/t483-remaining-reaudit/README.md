@@ -287,3 +287,10 @@ Mirror diff5->2,final delivery pending.488/2720 reviewed;184restored delivered,0
 P50 delivered:cached build,11x2 publication/hash,36stack/2expected original failures,focused and Full16 passed.
 488/2720 reviewed;184restored delivered,0local,2approved,302pending,2232unreviewed.
 74/365files complete;291remain.Next R0482.
+
+R0482:[SasVector review](r0482-sascdef-review.json),[lines](batch-p51-line-check.json),[checkpoint](batch-p51-checkpoint.json).
+Mirror diff6->0;delivery pending.489/2720 reviewed;184restored delivered,1local,2approved,302pending,2231unreviewed.75/365files complete;290remain.
+
+P51 delivered:cached build,11x2 publication/hash,C-VID/vector,focused and Full16 passed.
+489/2720 reviewed;185restored delivered,0local,2approved,302pending,2231unreviewed.
+75/365files complete;290remain.Next R0483.
