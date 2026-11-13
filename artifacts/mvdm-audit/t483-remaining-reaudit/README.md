@@ -376,3 +376,10 @@ P55 sevid00070/70 dispositions complete. R0568-R0571 restored ineffective offset
 P55 delivery:cached build,11x2 publication/hash,focused and Full16 passed.
 578/2720 reviewed;201 restored delivered,0 local,2 approved,375 pending;2142 unreviewed.
 84/365 files disposition complete;281 remain.Next R0572.Known CVIDC baseline failures remain,not fixed.
+
+P56 sevid00133/33 dispositions:8 restorations local,25 residual decisions;mirror diff74->50(-24).
+611 reviewed;201 restored delivered,8 local,2 approved,400 pending,2109 unreviewed;85/365 files.
+
+P56 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
+611 reviewed;209 restored delivered,0 local,2 approved,400 pending,2109 unreviewed;85/365 files.
+Known backward UNCHAINED width defect remains.Next R0605.

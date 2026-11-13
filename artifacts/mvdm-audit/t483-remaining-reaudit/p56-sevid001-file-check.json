@@ -1,0 +1,37 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "physical_lines": 3498,
+  "changed_positions": [
+    1161,
+    1162,
+    1197,
+    1198,
+    1473,
+    1474,
+    1538,
+    1539,
+    1747,
+    1751,
+    1806,
+    1810
+  ],
+  "before": {
+    "added": 37,
+    "removed": 37
+  },
+  "after": {
+    "added": 25,
+    "removed": 25
+  },
+  "mirror_diff_delta": -24,
+  "all_changed_positions_exact_original": true,
+  "matched_original_line_mismatches": [],
+  "error_before": 0,
+  "error_after": 0,
+  "sha256": "2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5",
+  "verification": "Whole-file33point dispositions complete;delivery pending.",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/cvidc/sevid001.c",
+  "original_sha256": "77b08a47e90ab64182118de473a1b7f0c921585a5a92acc0454a3b773d542644",
+  "before_sha256": "7493b3508476dedc231d180ec2805aedf64ff525db449c239fe500bd4a796068"
+}

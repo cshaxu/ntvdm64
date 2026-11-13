@@ -1,0 +1,67 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "points": [
+    {
+      "id": "T483-R0597",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=64 nonzero_output_bytes=2304"
+    },
+    {
+      "id": "T483-R0598",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=128 nonzero_output_bytes=2304"
+    },
+    {
+      "id": "T483-R0599",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=64 nonzero_output_bytes=2304"
+    },
+    {
+      "id": "T483-R0600",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=128 nonzero_output_bytes=2304"
+    },
+    {
+      "id": "T483-R0601",
+      "decision": "restore-original",
+      "mirror_diff_delta": -2,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304"
+    },
+    {
+      "id": "T483-R0602",
+      "decision": "restore-original",
+      "mirror_diff_delta": -2,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304"
+    },
+    {
+      "id": "T483-R0603",
+      "decision": "restore-original",
+      "mirror_diff_delta": -2,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304"
+    },
+    {
+      "id": "T483-R0604",
+      "decision": "restore-original",
+      "mirror_diff_delta": -2,
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304"
+    }
+  ],
+  "responsibility": "Backward mode1 CHAIN4/UNCHAINED reads must compare selected planes correctly.",
+  "original_capability": "CHAIN4 original updater writes scalar0/ff;original high-byte offsets read0 on x86 and cause concrete errors. UNCHAINED original and current both zero-extend IU8 to LocalIUH+6 then AND low8 with bits8..31,therefore output0. Byte-offset adaptation has no effect on final output/latch and is unnecessary.",
+  "actual_chain": "ev_glue.c backward string entry -> mode1 table -> S_2123/2124;actual original ega_read_routines_update;expected output from original selected byte reader invoked at each source address.",
+  "counter_review": [
+    "No guest reproduction claimed;actual production provider linked with existing host fixture seams.",
+    "UNCHAINED512/512 failure is a known baseline width defect,not a passed test;zero exit means collector completed.",
+    "Restoring ineffective offsets does not fix width defect;do not claim complete mode1 restoration.",
+    "No external callback in S_2124;intermediate scratch does not escape as output. Shared latch and final source position are unchanged."
+  ],
+  "current_control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304",
+  "restored_control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304",
+  "minimum": "Keep four proven one-line CHAIN4 candidates pending owner;restore four ineffective UNCHAINED offsets without new helper or state.",
+  "line_error": "Four original statements restored at same physical positions;no #error modifications.",
+  "verification": "Bounded512cases per mode/variant;final whole-file delivery pending."
+}

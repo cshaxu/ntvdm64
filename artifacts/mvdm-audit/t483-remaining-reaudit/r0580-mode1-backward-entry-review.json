@@ -1,0 +1,22 @@
+{
+  "id": "T483-R0580",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "original_lines": [
+    1473,
+    1474
+  ],
+  "before": "+2/-2",
+  "after": "0",
+  "mirror_diff_delta": -4,
+  "responsibility": "Complete mode1 backward string read and clean up its top-level activation.",
+  "original_capability": "ev_glue.c read_str_bwd_ev_glue -> mode1 selected table -> S_2122 -> L26_78if_d internal wrapper -> final latch/r2/cleanup -> direct return. Source references found wrapper/table/declaration only, no nested generated caller. No external callback in loop. Original cleanup does not need an enclosing generated activation restored for continuation.",
+  "exact_diff_necessity": "No proved requirement for goto at this call site; restore original two lines.",
+  "counter_review": "Do not generalize this result to nested word/dword calls. Static saved locals can matter there. The original selected top-level call can consume/free its activation and directly return.",
+  "controls": {
+    "current": "stringloop cases=512 failures=0",
+    "restored": "stringloop cases=512 failures=0"
+  },
+  "control_scope": "Actual MSVC x86 generated provider and original mode updater with existing host fixture seams.8addresses x2compare x2care x2destination directions x8lengths=512. UNCHAINED5/10 -> CHAIN2 uniform15/0 bounded producer state;not arbitrary mode1 coverage or guest acceptance.",
+  "line_error": "Exactly original1473-1474 restored;physical count unchanged;no #error touched.",
+  "verification": "Focused controls pass;whole-file full build/publication/tests pending."
+}

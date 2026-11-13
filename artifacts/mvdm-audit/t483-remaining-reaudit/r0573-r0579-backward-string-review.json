@@ -1,0 +1,61 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "points": [
+    {
+      "id": "T483-R0573",
+      "reason": "For mapping f(a)=4*(a&~1)+(a&1), backward even-to-odd distance is7, not3.",
+      "restore_control": "string cases=128 failures=56",
+      "decision": "qualified pending owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0574",
+      "reason": "Host passes CPU offset (eaOff minus gvi_pc_low_regen); original base+offset does not map the shared four-plane backing. Current f(a) does.",
+      "restore_control": "string cases=128 failures=128",
+      "decision": "qualified pending owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0575",
+      "reason": "Destination-forward branch must alternate backward source distances1/7; XOR6 performs this, XOR2 instead gives3/5.",
+      "restore_control": "string cases=128 failures=48",
+      "decision": "qualified pending owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0576",
+      "reason": "Internal call completes remaining latch update and cleanup then returns directly; no nested generated caller or post-call continuation consumes saved parent locals.",
+      "restore_control": "string cases=128 failures=0",
+      "decision": "restored original",
+      "mirror_diff_delta": -4
+    },
+    {
+      "id": "T483-R0577",
+      "reason": "Destination-backward branch independently needs source distances1/7; original XOR2 breaks this.",
+      "restore_control": "string cases=128 failures=48",
+      "decision": "qualified pending owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0578",
+      "reason": "After reading, adding7 corrects the decremented next-source pointer to select the last accessed shared plane cell; original3 selects wrong latch cell for half the starts/counts.",
+      "restore_control": "string cases=128 failures=64",
+      "decision": "qualified pending owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0579",
+      "reason": "Final latch starts at shared8-byte CHAIN2 cell base; original4-byte alignment selects gap planes for half the starts/counts.",
+      "restore_control": "string cases=128 failures=64",
+      "decision": "qualified pending owner",
+      "mirror_diff_delta": 0
+    }
+  ],
+  "responsibility": "Selected backward string reader must return shared plane bytes and latch last read cell across mode changes.",
+  "original_capability": "Original internal call/return fulfills lifecycle at this top-level string entry. Original backward addressing does not fulfill selected shared-plane layout; whole-layout restoration is not implied by isolated function self-consistency.",
+  "producer_consumer_chain": "ev_glue.c:475-483 sets CPU offset,count,RAM destination and calls str_bwd_read;evidfunc.c:785-798 selects S_2119;generated loop reads rplane backing and publishes latch. Cross-mode requirement has prior guest evidence in docs/etc/evidence/m0-t479-s9-delivery.md and r0502-chain2-byte-address-review.json.",
+  "counter_review": "Probe plane layout alone is not necessity proof: cross-mode visibility requirement and actual call ABI provide independent support. No fresh guest reproduction claimed. Source direction decreases independently of destination direction. Each control restores only listed point on R0572-restored baseline.",
+  "minimum": "Six surviving points each change one original-relative line;no new helper/state. R0576 restored exactly without preserving guessed nesting protection.",
+  "line_error": "All replacements retain physical line count;two original lines1197-1198 recovered;no #error changes.",
+  "verification": "Focused128cases per variant;full file/batch delivery pending."
+}

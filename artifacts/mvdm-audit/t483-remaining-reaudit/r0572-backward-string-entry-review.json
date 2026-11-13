@@ -1,0 +1,22 @@
+{
+  "id": "T483-R0572",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "original_lines": [
+    1161,
+    1162
+  ],
+  "before": "+2/-2",
+  "after": "0",
+  "mirror_diff_delta": -4,
+  "responsibility": "Finish selected backward CHAIN2 string read, release its activation and return to host caller.",
+  "original_capability": "ev_glue.c:483 calls selected str_bwd_read; evidfunc.c table selects S_2119. Source references contain wrapper/table, no nested generated caller. Loop does not invoke guest/host callbacks. Original internal wrapper enters crules at L26_58if_d without allocating; it consumes outer LocalIUH, cleanup frees it and returns directly through outer return. No continuation reads freed locals.",
+  "exact_diff_necessity": "No demonstrated saved-parent requirement at this top-level string entry; do not generalize nested-word failure to it.",
+  "counter_review": "Static shared LocalIUH would require saved parent under nested activation, but no such supported call chain found for S_2119; no new concurrent/reentrant behavior guarantee inferred.",
+  "control": {
+    "current": "string cases=128 failures=0",
+    "restored": "string cases=128 failures=0"
+  },
+  "control_scope": "Actual MSVC x86 generated provider linked with production libraries and existing fixture seams; 8 start addresses x2 destination directions x8 lengths; source reads backward, checks output and final latch. Not full guest acceptance.",
+  "line_error": "Two original physical lines restored exactly;line count unchanged;no #error touched.",
+  "verification": "Focused controls pass;whole-file cached build/publication/Full pending."
+}

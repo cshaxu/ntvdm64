@@ -1,0 +1,130 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "points": [
+    {
+      "id": "T483-R0581",
+      "reason": "Backward even-to-odd physical distance is7 under shared f(a)=4*(a&~1)+(a&1),not3.",
+      "restore_control": "stringloop cases=512 failures=112",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0582",
+      "reason": "Extracted CPU address>>1 must scale8 to preserve shared-plane A0 gap;original scale4 aliases compact positions.",
+      "restore_control": "stringloop cases=512 failures=512",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0583",
+      "reason": "Address calculation must retain original CPU parity as selected lane;original assignment drops it.",
+      "restore_control": "stringloop cases=512 failures=192",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0584",
+      "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=128",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0585",
+      "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=192",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0586",
+      "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=128",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0587",
+      "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=192",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0588",
+      "reason": "Destination-forward loop requires source strides1/7,alternated with XOR6;original XOR2 gives wrong subsequent source.",
+      "restore_control": "stringloop cases=512 failures=192",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0589",
+      "reason": "Original internal cleanup call finishes latch update and directly returns through top-level S_2122;no caller continuation needs saved generated parent activation.",
+      "restore_control": "stringloop cases=512 failures=0",
+      "decision": "restore-original",
+      "mirror_diff_delta": -4
+    },
+    {
+      "id": "T483-R0590",
+      "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=128",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0591",
+      "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=192",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0592",
+      "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=128",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0593",
+      "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+      "restore_control": "stringloop cases=512 failures=192",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0594",
+      "reason": "Destination-backward loop independently requires XOR6 for source strides1/7.",
+      "restore_control": "stringloop cases=512 failures=192",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0595",
+      "reason": "Post-loop correction7 recovers last accessed8byte shared cell before latch alignment;original3 gives wrong cell.",
+      "restore_control": "stringloop cases=512 failures=256",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R0596",
+      "reason": "Final shared-plane latch aligns8bytes;original4byte mask can select unused gap half.",
+      "restore_control": "stringloop cases=512 failures=256",
+      "decision": "qualified-pending-owner",
+      "mirror_diff_delta": 0
+    }
+  ],
+  "responsibility": "Backward mode1 shared-plane string reads must preserve byte comparison,source direction,latches and top-level lifecycle.",
+  "original_capability": "Original internal cleanup call meets lifecycle. Individual original address/field expressions fail the selected host ABI and documented cross-mode shared storage or bounded actual updater transitions.",
+  "actual_chain": "ev_glue.c read_str_bwd_ev_glue -> mode1 read table -> S_2122;real ega_read_routines_update fills unchained shared masks and CHAIN2 per-plane globals. Oracle uses original per-plane comp0/comp2/dont_care0/dont_care2;not invented direct shared-mask writes.",
+  "counter_review": [
+    "CHAIN2 updater does not itself populate shared colour_comp/dont_care;do not claim these offsets alone establish correct general CHAIN2 state ownership.",
+    "Tests use actual UNCHAINED5/10 -> CHAIN2 uniform15/0 states;qualified restoration counterexamples,not exhaustive correctness.",
+    "Cross-mode shared plane requirement independently documented in m0-t479-s9-delivery.md and R0502;test layout by itself is not necessity proof.",
+    "S_2122 source references contain table/wrapper/declaration only;loop has no guest callbacks;no nested generated continuation identified.",
+    "No length-zero or new guest runtime acceptance claimed."
+  ],
+  "minimum": "All15 retained points are one changed original-relative line;no smaller nonzero implementation found. R0589 original two lines restored.",
+  "line_error": "Original1538-1539 restored exactly;all physical positions retained;no #error touched.",
+  "verification": "Each512case current/original-point control uses production libraries with host fixture seams;final whole-file build/tests pending."
+}
