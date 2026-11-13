@@ -1,0 +1,50 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+  "points": [
+    "T483-R0709"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/host.h",
+  "original_sha256": "3b5397efd06f83fbe2c31766d250ae807409e174e673812d08b5ad8ae916a716",
+  "before_sha256": "8fb42849d935c468c8abcd62db19dd3087b3374f2d633bafcaa9a79aae5b8e4b",
+  "after_sha256": "6e6713cd491e58e42a721e2fad5ba3b6231488eaf39815c5ce83c28c90d67d87",
+  "diff": {
+    "metric": "original-relative LF physical lines including fixed exclusions",
+    "before": {
+      "added": 16,
+      "deleted": 9
+    },
+    "after": {
+      "added": 11,
+      "deleted": 8
+    },
+    "delta": -6
+  },
+  "line_proof": {
+    "current": 15,
+    "original": 15,
+    "equal": true,
+    "differences": [],
+    "redundant_line_removed": "After #line49: #ifndef=49, restored declaration=50,#endif=51,next declaration=52;removing redundant #line52 preserves coordinates."
+  },
+  "error_branches_preserved": 3,
+  "validation": "P63 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record.",
+  "responsibility": "Declare original memset4 used by two ega_vide text fill calls.",
+  "original_can_fulfill": "Original host.h uses IU32/ULONG while original host_def.h and copy_fnc.c use unsigned int. Actual selected MSVC x86 accepts both declarations with C4028 warnings. Scalars and pointers use the same32-bit call ABI;two actual call sites retain identical code.",
+  "specific_diff_necessity": "Type mismatch diagnostics alone did not establish a product failure;current original restoration compiles and object code/relocations are unchanged.",
+  "result": "Restore exact original memset4 declaration;remove adaptation comment and redundant #line52.",
+  "counter_review": "Not claiming the C types are identical or portable to arbitrary compilers. No type suppression,cast,provider modification or new shim.",
+  "compiler_control": {
+    "source": "ega_vide",
+    "before_original_equal": true,
+    "sections": 57,
+    "before_sha256": "25ddb557c55ddeb1a8304aebcf4af5ad19c27e3de11d69659b2efa4a9ebd93d0",
+    "original_sha256": "5c7bac722bfa460e84ef942f46356831e120e350c747cf187944c312d0e6f764"
+  },
+  "control_exits": {
+    "before": 0,
+    "original": 0,
+    "alternative_omission": 0
+  },
+  "rejected_alternative": "Omitting redundant declaration compiles but unnecessarily retains a mirror deletion when original works."
+}

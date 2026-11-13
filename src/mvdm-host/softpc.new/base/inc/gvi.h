@@ -270,7 +270,6 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #define get_screen_height_hi()          (PCDisplay.screen_height.as_bfld.top_bit)
 #define	get_screen_end()		(get_screen_start() + get_screen_length() + gvi_pc_low_regen)
 #define	get_screen_ptr(offs)		((PCDisplay.screen_ptr) + (offs))
-/* T99: odd/even display offsets retain their character/attribute lane. */
 #define get_chain2_screen_ptr(offs) get_screen_ptr((((offs) & ~3L) << 1) | ((offs) & 3))
 #line 288 "gvi.h"
 #define get_screen_base()		((get_screen_start() << 1) + gvi_pc_low_regen)

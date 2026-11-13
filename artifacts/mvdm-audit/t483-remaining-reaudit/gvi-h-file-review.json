@@ -1,0 +1,42 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+  "points": [
+    "T483-R0708"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/gvi.h",
+  "original_sha256": "4f2d12a80a883c9f6b7cf2ca66e67e7b83b6f1263b007452b581f9e63147e8a8",
+  "before_sha256": "82c9e8daa81bb393466e4123c33371a61cdc8cdecbb52c51d0115d91a91d2dcd",
+  "after_sha256": "10e0a5f9639787bdbc7f7937c42b51d09056f1b6fabb13a895b90a3814365e89",
+  "diff": {
+    "metric": "original-relative LF physical lines including fixed exclusions",
+    "before": {
+      "added": 24,
+      "deleted": 36
+    },
+    "after": {
+      "added": 23,
+      "deleted": 36
+    },
+    "delta": -1
+  },
+  "line_proof": {
+    "current": 59,
+    "original": 59,
+    "equal": true,
+    "differences": []
+  },
+  "error_branches_preserved": 6,
+  "validation": "P63 cached full,11x2 publication/hash,focused,EMS2 and Full16 passed;Git delivery accompanies record.",
+  "responsibility": "Read correct character/attribute plane bytes for text painting and cursor attribute lookup.",
+  "original_can_fulfill": "Original compact CHAIN2 storage and original linear painter agree within that layout,but guest VDD unchained plane reads expose incompatible spacing. Full compact restoration does not preserve established guest cross-mode behavior.",
+  "specific_diff_necessity": "Independent prior guest capture found every-other-character loss before guest window drawing. Original CHAIN2 compact reader control fails12/16 physical positions;current0/16. Current generated writers and read controls preserve eight-byte cell spacing. For display offset4 (second original compact four-byte cell), original get_screen_ptr reads backing4; required cell begins8. Macro maps4->8 and preserves character/attribute lane; offset5 maps9. Changing generic get_screen_ptr globally would alter selected unchained/graphics reads.",
+  "evidence": [
+    "r0502-chain2-byte-address-review.json",
+    "../../../docs/etc/evidence/m0-t479-s9-delivery.md",
+    "O:/repos.hobby/softpc/docs/etc/evidence/softpc/m9-t99-s33-windowed-dos-addressing.md"
+  ],
+  "limits": "Prior upstream guest observations and existing actual-provider fixture are not fresh NTVDM Win3.x runtime reproduction. Header arithmetic alone does not prove every later consumer diff necessary.",
+  "result": "Remove redundant T99 comment only;one mapping macro and diagnostic line remain pending owner.",
+  "minimum_option": "Keep one shared macro;do not duplicate mapping at callers or introduce repacking/second backing storage."
+}
