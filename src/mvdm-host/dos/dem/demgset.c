@@ -562,43 +562,21 @@ SYSTEMTIME TimeDate;
 
 VOID demSetDTALocation (VOID)
 {
-    mvdm_guest_location dos_wow_data_location;
-    mvdm_guest_location_lease dos_wow_data_lease;
-    ULONG sft_offset;
+    PDOSWOWDATA pDosWowData;
 #line 562
 
 #line 563
     pulDTALocation = (PULONG)  GetVDMAddr(getDS(),getAX());
-    /* DIVERGENCE MVDM-HOST-DIV-006: current PDB remains a numeric DS:DX
-     * location and is read afresh by every DEM/SoftPC consumer. */
-    mvdm_guest_location_set_real_mode(&current_pdb_location, getDS(),
-        getDX());
+    pusCurrentPDB  = (PUSHORT) GetVDMAddr(getDS(),getDX());
 #line 565
     pExtendedError = (PDEMEXTERR) GetVDMAddr(getDS(),getCX());
 #line 566
 
-    /* DIVERGENCE MVDM-HOST-DIV-892: failed registration invalidates the prior location. */
+    pDosWowData = (PDOSWOWDATA) GetVDMAddr(getDS(),getSI());
+    pSFTHead    = (PDOSSF) GetVDMAddr(getDS(),(WORD)pDosWowData->lpSftAddr);
+    /* DIVERGENCE MVDM-HOST-DIV-892: retain DOSWOWDATA for session directory queries. */
     mvdm_command_guest_state_clear_doswow();
-
-    /* DIVERGENCE MVDM-HOST-DIV-007: `lpSftAddr` is source numeric data in
-     * DOSWOWDATA.  Read it under one short lease, then retain DS:offset;
-     * neither DOSWOWDATA nor the SFT chain is retained as a host pointer. */
-    mvdm_guest_location_set_real_mode(&dos_wow_data_location, getDS(), getSI());
-    if (mvdm_guest_location_acquire(&dos_wow_data_location,
-        sizeof(DOSWOWDATA), GUEST_MEMORY_ACCESS_READ, &dos_wow_data_lease)) {
-        sft_offset = ((PDOSWOWDATA)dos_wow_data_lease.bytes)->lpSftAddr;
-        if (!mvdm_guest_location_release(&dos_wow_data_lease, FALSE)) {
-            memset(&sft_head_location, 0, sizeof(sft_head_location));
-        } else {
-            /* DIVERGENCE MVDM-HOST-DIV-892: keep the original DOSWOWDATA
-             * address numerically for the session-bound directory query. */
-            (void)mvdm_command_guest_state_register_doswow(getDS(), getSI());
-            (void)mvdm_guest_location_set_real_mode(&sft_head_location,
-                getDS(), (WORD)sft_offset);
-        }
-    } else {
-        memset(&sft_head_location, 0, sizeof(sft_head_location));
-    }
+    (void)mvdm_command_guest_state_register_doswow(getDS(), getSI());
 #line 569
     return;
 }

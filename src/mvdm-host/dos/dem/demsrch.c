@@ -20,6 +20,7 @@
 #include <memory.h>
 #include <nt_vdd.h>
 #include "../../../ntvdm-exe/session/dem_restart_hint.h"
+#line 22
 
 #line 23
 extern BOOL IsFirstCall;
@@ -274,9 +275,11 @@ VOID demFindFirst (VOID)
 
 }
 #line 267
+#line 268
 
 
 
+#line 270
 DWORD demFileFindFirst (
     PVOID pvDTA,
     LPSTR lpFile,
@@ -427,9 +430,11 @@ VOID demFindNext (VOID)
 
 }
 #line 425
+#line 426
 
 
 
+#line 428
 DWORD demFileFindNext (
     PVOID pvDta)
 {
@@ -2218,7 +2223,7 @@ DemHeartBeat(void)
    PLIST_ENTRY    pFFindHeadList;
    PPSP_FFINDLIST pPspFFindEntry;
    PFFINDLIST  pFFindEntry;
-   USHORT currentPdb;
+
 
 #line 2199
    if (!NumFindBuffer ||
@@ -2227,9 +2232,7 @@ DemHeartBeat(void)
        return;
        }
 
-   if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-       return;
-   pPspFFindEntry = GetPspFFindList(currentPdb);
+   pPspFFindEntry = GetPspFFindList(*pusCurrentPDB);
 #line 2206
    if (!pPspFFindEntry) {
        return;
@@ -2360,11 +2363,10 @@ AddFFindEntry(
     PPSP_FFINDLIST pPspFFindEntry;
     PFFINDLIST     pFFindEntry;
     ULONG          Len;
-    USHORT         currentPdb;
 
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-        return NULL;
-    pPspFFindEntry = GetPspFFindList(currentPdb);
+
+    pPspFFindEntry = GetPspFFindList(*pusCurrentPDB);
+#line 2337
 
 #line 2338
         //
@@ -2380,7 +2382,7 @@ AddFFindEntry(
         if (!pPspFFindEntry)
             return NULL;
 
-        pPspFFindEntry->usPsp = currentPdb;
+        pPspFFindEntry->usPsp = *pusCurrentPDB;
         InitializeListHead(&pPspFFindEntry->FFindHeadList);
         InsertHeadList(&PspFFindHeadList, &pPspFFindEntry->PspFFindEntry);
         }

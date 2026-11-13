@@ -8,7 +8,6 @@
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"
-#include <mvdm_guest_location.h>
 #line 10
 
 /*
@@ -235,9 +234,7 @@ WORD	    fdisk_open_count = 0;
 
 WORD	    * pFDAccess = 0;
 
-/* DIVERGENCE MVDM-HOST-DIV-006: original code retained a native pointer to
- * the DOS current-PDB value.  Read that scalar through the session lease. */
-extern mvdm_guest_location current_pdb_location;
+extern USHORT * pusCurrentPDB;
 #line 234
 
 #line 236
@@ -407,14 +404,12 @@ ULONG nt_fdisk_read(
 {
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
-    USHORT  currentPdb;
+
 #line 402
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	return 0;
-    if (get_fdisk_handle(fdisk_data, currentPdb, FALSE))
+    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE))
 #line 406
 	return(disk_read(fdisk_data->fdisk_fd,
 			 offset,
@@ -432,15 +427,13 @@ ULONG nt_fdisk_write(
 {
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
-    USHORT  currentPdb;
+
 #line 422
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
 
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	return 0;
-    if (get_fdisk_handle(fdisk_data, currentPdb, TRUE)) {
+    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, TRUE)) {
 #line 427
 	// must lock the drive. This is very important.
 	size_returned = disk_write(fdisk_data->fdisk_fd,
@@ -462,15 +455,13 @@ BOOL nt_fdisk_verify(
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
     VERIFY_INFORMATION verify_info;
-    USHORT currentPdb;
+
 #line 447
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return FALSE;
 
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	return FALSE;
-    if (get_fdisk_handle(fdisk_data, currentPdb, FALSE)) {
+    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE)) {
 #line 452
 	verify_info.StartingOffset = *offset;
 	verify_info.Length = size;

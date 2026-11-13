@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-177 points have a prior or current review record:89 restored/verified/published,
+177 points have a prior or current review record:103 restored/verified/published,
 0 local restorations pending verification,2 approved retain,19 qualified pending
-decisions and67 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is13/365;352 remain.
+decisions and53 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is15/365;350 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -69,14 +69,13 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-P9 package `7e6012d6-3ad4-45e8-a7ba-44e775b12e55` is published to
+P10 package `27754767-b670-45f2-b8b7-bb626760161f` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
-Cached full build, command fixtures, FCB guest enumeration and Full16 passed.
-DOS4GW/NESticle is explicitly skipped for absent external fixtures. This record
-accompanies the P9 commit; remote confirmation follows commit creation.
-No original guest or winnt.zip changes.
-See [P9 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-checkpoint.json).
-S5 remains active; next ordered point is R0072.
+Cached full build, command fixtures, FCB enumeration, Full16 and governance
+passed. DOS4GW/NESticle skipped: verified external fixtures not supplied.
+No original guest or winnt.zip changes. This record accompanies P10 Git delivery.
+See [P10 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-checkpoint.json).
+S5 remains active; next ordered point is R0076.
 
 ## Remaining Scope
 
@@ -176,3 +175,23 @@ See [P9 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-c
 [line check](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-line-check.json),
 [diff metrics](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-mirror-diff.json),
 and [DTA restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0071-dta-restoration.json).
+
+## Current P10 Batch
+
+R0072 demdasd.h is still byte-identical to original; prior P3 verification applies.
+R0073 is already delivered in P9. R0074/R0075 restore the complete original PDB/SFT
+producer and consumer chain. demdata.c now matches original excluding #line and
+newline encoding. Seven coupled mirror files reduce original-relative diff by143
+lines, excluding #line. All excluded #error bodies remain. No new shim or guest
+changes. The dem.h guest-location include remains for existing demhndl.c leases;
+PDB/SFT globals no longer require it. This supersedes the old include rationale.
+
+P10 cached build passed. Initial publication hit an exiting ntvdm image lock;
+resume24112 published the same frozen package27754767-b670-45f2-b8b7-bb626760161f
+to both targets with11 matching hashes. Final Full16 and FCB enumeration passed in build/t483-s5-p10. Fourteen formerly
+pending points are restored and verified, included in P10 Git delivery. Future
+coupled-file points are not counted as completed sequential audits.
+See [P10 restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0074-r0075-restoration.json),
+[checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-checkpoint.json),
+[metrics](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-mirror-diff.json),
+and [line checks](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-line-check.json).

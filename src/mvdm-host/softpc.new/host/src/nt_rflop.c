@@ -31,10 +31,10 @@
 
 #include "insignia.h"
 #include "host_def.h"
-#include <mvdm_guest_location.h>
 /* DIV-871: bind the original void/cdecl FDC worker to its caller session. */
 #include "compat/include/thread_start_compat.h"
 #undef CreateThread
+#line 34
 
 
 #line 36
@@ -66,6 +66,7 @@
 #ifdef min
 #undef min
 #endif
+#line 64
 #define min(a,b)	(a > b ? b : a)
 
 #define PC_MAX_DRIVE_TYPES              2
@@ -227,9 +228,7 @@ VOID HostFloppyReset(VOID);
 VOID FloppyTerminatePDB(USHORT);
 int  DiskOpenRetry(CHAR);
 
-/* DIVERGENCE MVDM-HOST-DIV-006: original code retained a native pointer to
- * the DOS current-PDB value.  Read that scalar through the session lease. */
-extern mvdm_guest_location current_pdb_location;
+extern USHORT * pusCurrentPDB;
 
 #ifdef EJECT_FLOPPY
 #line 248
@@ -615,11 +614,10 @@ ULONG nt_floppy_read(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
 {
     HANDLE  fd;
     LARGE_INTEGER large_integer;
-    USHORT currentPdb;
 
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	return 0;
-    fd = get_drive_handle(drive, currentPdb, FALSE);
+
+#line 716
+    fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);
 
 #line 718
     if (fd == INVALID_HANDLE_VALUE)
@@ -635,11 +633,10 @@ ULONG nt_floppy_write(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     HANDLE  fd;
     LARGE_INTEGER large_integer;
     ULONG   size_returned;
-    USHORT currentPdb;
 
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	return 0;
-    fd = get_drive_handle(drive, currentPdb, TRUE);
+#line 731
+
+    fd = get_drive_handle(drive, *pusCurrentPDB, TRUE);
 #line 733
     if (fd == INVALID_HANDLE_VALUE)
 	return 0;
@@ -657,16 +654,15 @@ BOOL nt_floppy_format(BYTE drive, WORD Cylinder, WORD Head, MEDIA_TYPE Media)
     ULONG   size_returned;
     HANDLE  fd;
     BOOL    result;
-    USHORT currentPdb;
+
+#line 749
 
 #line 750
     result = FALSE;
     fmt.MediaType = Media;
     fmt.StartHeadNumber = fmt.EndHeadNumber = Head;
     fmt.StartCylinderNumber = fmt.EndCylinderNumber = Cylinder;
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	return FALSE;
-    fd = get_drive_handle(drive, currentPdb,TRUE);
+    fd = get_drive_handle(drive, *pusCurrentPDB,TRUE);
 #line 755
     if (fd == INVALID_HANDLE_VALUE)
 	return FALSE;
@@ -688,11 +684,10 @@ BOOL nt_floppy_verify(BYTE drive, DWORD Offset, DWORD Size)
 {
     HANDLE  fd;
     LARGE_INTEGER   large_integer;
-    USHORT currentPdb;
 
-    if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	return FALSE;
-    fd = get_drive_handle(drive, currentPdb, FALSE);
+#line 775
+
+    fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);
 #line 777
     if (fd != INVALID_HANDLE_VALUE) {
 	large_integer.LowPart = Offset;
@@ -807,6 +802,7 @@ BOOL nt_floppy_close(UTINY drive)
 #line 887
 #endif
 #line 885
+#line 888
 
 #line 889
     if (flp->diskette_fd != INVALID_HANDLE_VALUE) {
@@ -910,7 +906,7 @@ nt_rflop_command
         DWORD   fdc_thread_id;
 	BYTE	fdc_command;
 	BOOL	auto_lock;
-	USHORT currentPdb;
+
 
 
 #line 991
@@ -960,15 +956,13 @@ nt_rflop_command
 	    // no media in the drive so we go ahead to create a thread.
 	    if (!nt_floppy_media_check(drive)) {
 		nt_floppy_close(drive);
-		if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-		    return FAILURE;
-		get_drive_handle(drive, currentPdb, auto_lock);
+		get_drive_handle(drive, *pusCurrentPDB, auto_lock);
 #line 1038
 		if (!nt_floppy_media_check(drive)) {
 		    fdc_parms.auto_lock = auto_lock;
 		    fdc_parms.command_block = command_block;
 		    fdc_parms.result_block = result_block;
-		    fdc_parms.owner_pdb = currentPdb;
+		    fdc_parms.owner_pdb = *pusCurrentPDB;
 		    fdc_thread_handle = opennt_create_void_cdecl_parameter_thread(NULL,
 					   0,
 					   (OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)fdc_thread,
@@ -1225,7 +1219,7 @@ SHORT
 nt_rflop_change IFN1(UTINY, drive)
 {
 	FLP flp = &floppy_data[drive];
-	USHORT currentPdb;
+
 #line 1339
 	note_trace1 (GFI_VERBOSE, "FDC: change_line %c",
 		flp->change_line_state? 'T':'F');
@@ -1239,9 +1233,7 @@ nt_rflop_change IFN1(UTINY, drive)
 	    fdc_reset = FALSE;
 	    nt_floppy_close(drive);
 	}
-	if (!mvdm_guest_location_read_u16(&current_pdb_location, &currentPdb))
-	    return TRUE;
-	get_drive_handle(drive, currentPdb, FALSE);
+	get_drive_handle(drive, *pusCurrentPDB, FALSE);
 #line 1352
 	flp->change_line_state = !nt_floppy_media_check(drive);
 

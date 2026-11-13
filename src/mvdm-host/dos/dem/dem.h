@@ -76,11 +76,13 @@
 #endif
 #line 67
 #endif
+#line 68
 
 #ifdef WIN
 #define _WINDOWS
 #include <windows.h>
 #endif
+#line 73
 
 #ifdef SIGNALS
 #line 75
@@ -129,6 +131,7 @@ typedef struct _DISKINFO {
 #include "dosdef.h"
 #include "dossvc.h"
 #include <mvdm_guest_location.h>
+#line 117
 
 
 
@@ -145,11 +148,7 @@ extern PCHAR  aSVCNames[];
 extern PFNSVC apfnSVC[];
 extern PSZ    pszDefaultDOSDirectory;
 extern USHORT nDrives;
-/* DIVERGENCE MVDM-HOST-DIV-006: current PDB is a two-byte guest scalar;
- * callers must read it under a fresh bounded lease. */
-extern mvdm_guest_location current_pdb_location;
-
-extern mvdm_guest_location sft_head_location;
+extern PUSHORT pusCurrentPDB;
 #line 131
 extern PDEMEXTERR pExtendedError;
 
@@ -159,6 +158,7 @@ extern PDEMEXTERR pExtendedError;
 #if DEVL
 extern CHAR demDebugBuffer [];
 #endif
+#line 138
 
 
 

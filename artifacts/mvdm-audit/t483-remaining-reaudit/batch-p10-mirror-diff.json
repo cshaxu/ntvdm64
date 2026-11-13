@@ -1,0 +1,86 @@
+[
+  {
+    "path": "src/mvdm-host/dos/dem/demdata.c",
+    "before": [
+      5,
+      2
+    ],
+    "after": [
+      0,
+      0
+    ],
+    "delta": -7
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/dem.h",
+    "before": [
+      15,
+      17
+    ],
+    "after": [
+      10,
+      16
+    ],
+    "delta": -6
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demgset.c",
+    "before": [
+      33,
+      5
+    ],
+    "after": [
+      7,
+      1
+    ],
+    "delta": -30
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demfile.c",
+    "before": [
+      45,
+      35
+    ],
+    "after": [
+      6,
+      24
+    ],
+    "delta": -50
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demsrch.c",
+    "before": [
+      47,
+      60
+    ],
+    "after": [
+      43,
+      60
+    ],
+    "delta": -4
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+    "before": [
+      18,
+      5
+    ],
+    "after": [
+      6,
+      2
+    ],
+    "delta": -15
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "before": [
+      70,
+      310
+    ],
+    "after": [
+      47,
+      302
+    ],
+    "delta": -31
+  }
+]

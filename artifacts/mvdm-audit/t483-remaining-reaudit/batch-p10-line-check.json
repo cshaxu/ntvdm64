@@ -1,0 +1,44 @@
+[
+  {
+    "file": "src/mvdm-host/dos/dem/demdata.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent source exact-run counter-review, >=4 nonempty lines; not preprocessor trace"
+  },
+  {
+    "file": "src/mvdm-host/dos/dem/dem.h",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent source exact-run counter-review, >=4 nonempty lines; not preprocessor trace"
+  },
+  {
+    "file": "src/mvdm-host/dos/dem/demgset.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent source exact-run counter-review, >=4 nonempty lines; not preprocessor trace"
+  },
+  {
+    "file": "src/mvdm-host/dos/dem/demfile.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent source exact-run counter-review, >=4 nonempty lines; not preprocessor trace"
+  },
+  {
+    "file": "src/mvdm-host/dos/dem/demsrch.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent source exact-run counter-review, >=4 nonempty lines; not preprocessor trace"
+  },
+  {
+    "file": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent source exact-run counter-review, >=4 nonempty lines; not preprocessor trace"
+  },
+  {
+    "file": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "matched_original_line_mismatches": [],
+    "error_unchanged": true,
+    "proof_scope": "Independent source exact-run counter-review, >=4 nonempty lines; not preprocessor trace"
+  }
+]

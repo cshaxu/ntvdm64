@@ -1,0 +1,191 @@
+{
+  "status": "Verified and published; included in P10 Git delivery",
+  "source_head": "275d6e0299124a48ba3495100376217e630da878",
+  "source_files": 7,
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "sha256": "3245d8d20e080e77b657a780ee752ee3578cbbea1199e9c378c7003921a9e22f"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sha256": "9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "642ad5256ce58b4f0381bb6811ce325daea718ebe03548d2badfcf256bc8c5b8"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "sha256": "cb73f73fa18a8f3c4e009990ee24f0d72a9a69876da07df839f58911818fe9f6"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "sha256": "0dba7d4b3e4d69958d00513c4864a2f0246e9e4d813eac32a3096f1aa41c3f6f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "sha256": "e6d1b195c485c40560b6e68bb7e47c4fb212db520cc3074222aa4b54689f4fa3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "sha256": "d72a38b63161c4f9f0fd68001d7505e422968019a8d022d28b702a1672725ad0"
+    }
+  ],
+  "mirror_diff_delta": -143,
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "resume": 0,
+    "fcb": 0,
+    "governance": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "27754767-b670-45f2-b8b7-bb626760161f",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "attempts": [
+    {
+      "root": "build/t483-s5-p10",
+      "cached": 0,
+      "stage": 0,
+      "initial_publish": 1,
+      "reason": "Destination ntvdm.exe still locked during process retirement; first pipeline stopped. Exact same frozen package successfully published after processes ended.",
+      "resume_pid": 24112
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 353503,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6633,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1347,
+        "CleanupMs": 543,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 171,
+        "CleanupMs": 536,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66990,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47571,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43614,
+        "CleanupMs": 563,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14703,
+        "CleanupMs": 568,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10039,
+        "CleanupMs": 493,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 50086,
+        "CleanupMs": 597,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12133,
+        "CleanupMs": 579,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28189,
+        "CleanupMs": 384,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30477,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3521,
+        "CleanupMs": 462,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7640,
+        "CleanupMs": 533,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9832,
+        "CleanupMs": 463,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4367,
+        "CleanupMs": 459,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6324,
+        "CleanupMs": 459,
+        "Passed": true
+      }
+    ]
+  },
+  "fcb": {
+    "result": "PASS",
+    "elapsed_ms": 2057,
+    "names": [
+      "AAA     TST",
+      "BBB     TST",
+      "CCC     TST"
+    ],
+    "probe_exit": 37,
+    "probe_sha256": "4FB3B50BCC6E7659C754A416846173A0FD0380D0CD05DD581F764C5AEFE7E402",
+    "scope": "Actual INT21 FCB first/next/end/missing + direct receipt 37; no FCB read/write or mapping-change assertion"
+  },
+  "limits": [
+    "DOS4GW/NESticle skipped because verified external fixtures not supplied.",
+    "FCB enumeration does not prove FCB record I/O or arbitrary paging/remapping.",
+    "Physical disk/floppy device operations not exercised by these tests.",
+    "Original logical-line checks are source checks, not preprocessor traces."
+  ],
+  "sequential_files_complete": 15,
+  "point_restored_local_to_delivered": 14
+}

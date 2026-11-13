@@ -13,15 +13,12 @@ ULONG  UNALIGNED *pulDTALocation; // Address in ntdos where DTA address is kept.
 
 /** VDM's Current PDB **/
 
-/* DIVERGENCE MVDM-HOST-DIV-006: numeric location of the current two-byte
- * PDB segment in NTDOS, not a retained native GetVDMAddr pointer. */
-mvdm_guest_location current_pdb_location;
+PUSHORT pusCurrentPDB;
 #line 15
 
 /** SFT Chain Head **/
 
-
-mvdm_guest_location sft_head_location;
+PDOSSF pSFTHead = NULL;
 #line 19
 
 //

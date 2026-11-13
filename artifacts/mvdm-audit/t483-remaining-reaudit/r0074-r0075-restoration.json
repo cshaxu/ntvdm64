@@ -1,0 +1,28 @@
+{
+  "points": [
+    "T483-R0074",
+    "T483-R0075"
+  ],
+  "decision": "Restore original coherent PDB/SFT chain; implemented, final verification pending",
+  "original_evidence": [
+    "OpenNT/base/mvdm/dos/v86/doskrnl/dos/msinit.asm:317-331 passes DOSDATA CurrentPDB in DS:DX and DosWowDataStart in DS:SI to original DEM registration",
+    "OpenNT/base/mvdm/dos/dem/demgset.c::demSetDTALocation stores the current-PDB pointer and SFT chain head",
+    "src/mvdm-host/softpc.new/host/src/sim32.c::Sim32pGetVDMPointerWithLinear returns the selected CCPU native SAS address"
+  ],
+  "prior_rationale": "Numeric descriptors were justified by possible stale native aliases; no original failure established in supported worker. Current adaptation dependencies are not necessity evidence.",
+  "changes": [
+    "Restore original pusCurrentPDB and pSFTHead definitions and declaration",
+    "Restore registration, optional-PDB VDD calls and SFT traversal",
+    "Remove demCurrentPdbAddress/demSftHeadPointer and scalar read wrappers in search/disk/floppy users",
+    "Keep existing DOSWOW directory registration; do not introduce a new path",
+    "Retain dem.h guest-location include for existing demhndl read/write lease consumers, not for removed PDB/SFT globals"
+  ],
+  "counter_review": [
+    "All current_pdb_location/sft_head_location source references removed as one closure",
+    "Original #error bodies preserved; old conditional #line boundaries retained",
+    "Floppy asynchronous request still captures original scalar owner_pdb before thread start; thread adapter not changed",
+    "No original guest modification or recompilation; raw media-specific paths not claimed tested by Full"
+  ],
+  "verification": "P10 cached/full delivery in progress; source claims only",
+  "mirror_diff_delta": -143
+}

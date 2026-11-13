@@ -27,33 +27,6 @@ BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
 extern BOOL IsVdmRedirLoaded(VOID);
 
-/* DIVERGENCE MVDM-HOST-DIV-006: preserve the source's optional-current-PDB
- * convention without retaining a native pointer to its two-byte DOS value. */
-static BOOL demCurrentPdbAddress(PULONG pPDB)
-{
-    USHORT currentPdb;
-
-    if (pPDB == NULL || !mvdm_guest_location_read_u16(&current_pdb_location,
-        &currentPdb)) return FALSE;
-    *pPDB = (ULONG)currentPdb << 16;
-    return TRUE;
-}
-
-/* The selected CCPU40 Sim32 provider still supplies the original synchronous
- * linear-pointer contract.  `demgset.c` records the DOS SFT head as a stable
- * 16:16 value so it cannot retain a host pointer across worker setup; resolve
- * that value only at the original VDD call boundary. */
-static PDOSSF demSftHeadPointer(VOID)
-{
-    ULONG sftHead;
-
-    if (sft_head_location.valid != 1u)
-        return NULL;
-    sftHead = ((ULONG)sft_head_location.segment << 16) |
-        (ULONG)sft_head_location.offset;
-    return (PDOSSF)Sim32GetVDMPointer(sftHead, 0, 0);
-}
-
 #line 29
 BOOL
 IsNamedPipeName(
@@ -197,6 +170,7 @@ SECURITY_ATTRIBUTES sa;
 #if DBG
 #line 167
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 171
 #endif
 #line 172
 
@@ -450,6 +424,7 @@ LPSTR   lpFileName;
 #if DBG
 #line 421
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 425
 #endif
 #line 426
 
@@ -498,6 +473,7 @@ DWORD   dwAttr;
 #if DBG
 #line 470
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 474
 #endif
 #line 475
 
@@ -560,6 +536,7 @@ LPSTR   lpSrc,lpDst;
 #if DBG
 #line 533
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 537
 #endif
 #line 538
 
@@ -656,6 +633,7 @@ DWORD   dwLastError;
 #if DBG
 #line 627
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 631
 #endif
 #line 632
 
@@ -835,6 +813,7 @@ CHAR    szFileName[MAX_PATH];
 #if DBG
 #line 807
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 811
 #endif
 #line 812
 
@@ -935,14 +914,14 @@ PBYTE*      ppJFT;
 PDOSPDB pPDBFlat;
 PBYTE   pJFT;
 PDOSSFT pSFT;
-PDOSSF  pSFTHead;
 #line 910
 USHORT  usSFN;
 WORD    JFTLength;
 SHORT   hDosHandle;
 
-    if (!pPDB && !demCurrentPdbAddress(&pPDB))
-        return (- ERROR_INVALID_ADDRESS);
+    if (!pPDB) {
+        pPDB = (ULONG) (*pusCurrentPDB) << 16;
+    }
 
     //
     // Get the JFT.
@@ -974,8 +953,7 @@ SHORT   hDosHandle;
     // Check the SF for a free SFT.
     //
 
-    if (!(pSFTHead = demSftHeadPointer()) ||
-        !(pSFT = GetFreeSftEntry(pSFTHead, &usSFN))) {
+    if (!(pSFT = GetFreeSftEntry(pSFTHead, &usSFN))) {
 #line 948
         return (- ERROR_TOO_MANY_OPEN_FILES);
     }
@@ -1069,8 +1047,9 @@ PDOSSFT pSFT;
 HANDLE  ntHandle;
 
 
-    if (!pPDB && !demCurrentPdbAddress(&pPDB))
-        return FALSE;
+    if (!pPDB) {
+        pPDB = (ULONG) (*pusCurrentPDB) << 16;
+    }
 
 #line 1043
     ntHandle = VDDRetrieveNtHandle(pPDB,hFile,(PVOID *)&pSFT,&pJFT);
@@ -1139,8 +1118,9 @@ USHORT  usSFN;
 USHORT  usSFTCount;
 ULONG   ulSFLink;
 
-    if (!pPDB && !demCurrentPdbAddress(&pPDB))
-        return 0;
+    if (!pPDB) {
+        pPDB = (ULONG) (*pusCurrentPDB) << 16;
+    }
 
     // Get flat pointer to PDB
 #line 1114
@@ -1161,9 +1141,7 @@ ULONG   ulSFLink;
     }
 
     // Get flat pointer to SF
-    if (!(pSfFlat = demSftHeadPointer())) {
-        return 0;
-    }
+    pSfFlat =  pSFTHead;
 
     // Find the right SFT group
 #line 1134
