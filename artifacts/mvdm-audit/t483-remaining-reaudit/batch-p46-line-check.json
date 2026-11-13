@@ -1,0 +1,8 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+    "matched_original_nonblank_nonpreprocessor_lines": 223,
+    "matched_original_line_mismatches": [],
+    "excluded_error_unchanged": true
+  }
+]

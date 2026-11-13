@@ -1,0 +1,54 @@
+{
+  "id": "T483-R0473",
+  "status": "Verified final-source delivery;accompanies Git commit",
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+  "baseline": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/iret.c",
+  "responsibility": "CCPU decoder opcode CF -> IRET lower-privilege return -> tpop frame/check_SS/load_SS_cache -> restore stack pointer -> CPL/data segments. No host shim owns the register restoration.",
+  "historical_basis": "T430 imported SoftPC ce5f53515d3e6ce0a64e66a5465aa7a8fbca00f7; prior fixture by itself was not independent necessity proof.",
+  "independent_contract": {
+    "iret": "https://pdos.csail.mit.edu/6.828/2018/readings/i386/IRET.htm",
+    "notation": "https://cs.nyu.edu/~mwalfish/classes/14fa/ref/i386/s17_02.htm",
+    "finding": "Intel 80386 PRM outer return loads SS:eSP; notation defines eSP by stack B-bit. Operand size governs frame slot width. This supports destination-stack-width selection separately from the test."
+  },
+  "modern_contract_boundary": {
+    "source": "https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2a-manual.pdf",
+    "section": "IRET RETURN-TO-OUTER-PRIVILEGE-LEVEL, PDF page580",
+    "finding": "Modern pseudocode writes ESP, including zero extension for operand16. Do not claim modern x86 equivalence or hardware validation; this review retains the historical stack-width contract pending owner decision."
+  },
+  "original_failure_evidence": {
+    "actual_provider": "Production IRET object linked into existing stack fixture; original-condition variant supplied first with linker map",
+    "command": "build/t483-s5-p46/verify-final.cmd",
+    "current": "36 cases,0 failures",
+    "original": "36 cases,2 failures; operand16 SS32 leaves ESP=a5a58000; operand32 SS16 replaces ESP=12348000",
+    "limitations": "Fixture calls actual instruction entrypoints with test host boundaries; not full decoder, guest acceptance or a hardware oracle. Final byte build follows tab-only restoration."
+  },
+  "minimality": "Restore original four-line branch and exact tabs; change only GET_OPERAND_SIZE to GET_SS_AR_X. No new helper/state/shim.",
+  "diff": {
+    "before_added": 1,
+    "before_removed": 4,
+    "after_added": 1,
+    "after_removed": 1,
+    "net": -3
+  },
+  "line_proof": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+    "matched_original_nonblank_nonpreprocessor_lines": 223,
+    "matched_original_line_mismatches": [],
+    "excluded_error_unchanged": true
+  },
+  "initial_control_launch": "PID30084 was started after script preparation failed; no test ran. Correct run PID26040 ended controls.exit0; not counted twice.",
+  "counter_review": {
+    "method": "Single-agent second pass: reject existing helper/test as sole oracle; inspect original decoder, tpop, descriptor installation and independent historical instruction/notation text.",
+    "responsibility_necessary": "Outer privilege return must consume the saved stack pointer and install SS before next instruction.",
+    "original_cannot_fulfill_historical_contract": "Its operand-size condition preserves/replaces the wrong high ESP half in two independent operand/stack-width combinations under the cited historical eSP contract.",
+    "exact_diff_necessary": "Only the width discriminator needs change;original SET_SP/SET_ESP and sequencing remain.",
+    "boundary": "This is a historical-contract retention recommendation; modern SDM and hardware behavior are not proved equivalent."
+  },
+  "proof_hashes": {
+    "test/mvdm-host/ccpu_stack_transition_test.c": "6963bac40412853992b9c0390c6aafdc055514e72c96e02f0631ea4124440ff8",
+    "build/t483-s5-p46/current-final.txt": "6805833d77b8fad50a4fca7c0c7032eb86ec9a6874a31a56aa144f3638a5afb2",
+    "build/t483-s5-p46/original-final.txt": "d5391a2f771f778bb0a871310542f45ece15902d21a9214a610eadf24c6b9bfa",
+    "build/t483-s5-p46/original-stack-final.exe.map": "bba21228121c4b5984b6a03f67b657ed7cf50c6df64bcfca68675f1ccfaf52ef"
+  },
+  "verification": "batch-p46-checkpoint.json"
+}

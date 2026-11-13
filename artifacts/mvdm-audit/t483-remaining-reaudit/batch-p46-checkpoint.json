@@ -1,0 +1,132 @@
+{
+  "batch": "P46",
+  "status": "P46 verified delivery; accompanies Git commit",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "sha256": "22a4c8ea19036b35388a5286a992bbd63b19ecfa05157cd71f075f73546c382b"
+    }
+  ],
+  "mirror_diff_delta": -3,
+  "review": "r0473-iret-review.json",
+  "package": "6678b111-4a52-4b1f-a9c1-1ee1a2160867",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1275,
+      "CleanupMs": 487,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 220,
+      "CleanupMs": 455,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66549,
+      "CleanupMs": 476,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 57123,
+      "CleanupMs": 485,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 49508,
+      "CleanupMs": 489,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14832,
+      "CleanupMs": 452,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 11244,
+      "CleanupMs": 459,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 86378,
+      "CleanupMs": 469,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12910,
+      "CleanupMs": 494,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28704,
+      "CleanupMs": 549,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30973,
+      "CleanupMs": 532,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 5895,
+      "CleanupMs": 510,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 8126,
+      "CleanupMs": 472,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10964,
+      "CleanupMs": 480,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 5627,
+      "CleanupMs": 459,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 7276,
+      "CleanupMs": 482,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "stack_cases": 36,
+    "original_iret_failures": 2
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "IRET mixed-width control follows historical 80386 contract;not modern x86 or hardware conformance proof."
+  ]
+}

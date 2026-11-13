@@ -242,3 +242,11 @@ P45: [FPU review](r0467-r0472-fpu-review.json),[line proof](batch-p45-line-check
 [checkpoint](batch-p45-checkpoint.json).5restorations delivered,1minimal residual;
 mirror diff16->3.479/2720 reviewed;68/365files complete;180restored delivered,
 0local,2approved,297pending,2241unreviewed. P45 cached build,publication11x2/hash,FIST64/mapping/BIOS/x87/CPU and Full16 passed.
+
+## R0473 IRET
+
+Historical-contract audit and minimal predicate: [review](r0473-iret-review.json),
+[line proof](batch-p46-line-check.json), [delivery](batch-p46-checkpoint.json).
+480/2720 reviewed;180 restored delivered,0 local restorations,2 approved,
+298 pending,2240 unreviewed. 69/365 files source-complete;296 remain.
+P46 mirror diff5->2 (-3);cached build,publication11x2/hash,focused and Full16 passed.

@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-479 points have a prior or current review record:180 restored/verified/published,
-0 local restorations pending verification,2 approved retain,297 qualified pending
-decisions and0 prior classifications requiring requalification. Another2241
-points are unreviewed. Sequential file disposition is68/365;297 remain.
+480 points have a prior or current review record:180 restored/verified/published,
+0 local restorations pending verification,2 approved retain,298 qualified pending
+decisions and0 prior classifications requiring requalification. Another2240
+points are unreviewed. Sequential file disposition is69/365;296 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P45 package `9f9c2e07-fb69-411c-8d62-7e8c0ecbc908` is published to
+P46 package `6678b111-4a52-4b1f-a9c1-1ee1a2160867` is published to
 assets/release and O:/winnt/system32; all11 hashes match. Cached full build,
-FIST64/mapping/BIOS,x87/CPU and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p45-checkpoint.json).
+stack/mapping/BIOS/x87/CPU/FIST64 and Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p46-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -236,4 +236,13 @@ R0467-R0471 restored;R0472 minimal residual awaits owner decision.
 Mirror diff16->3;5311 original logical lines verified;#error unchanged.
 Cached build,publication11x2/hash,FIST64/mapping/BIOS/x87/CPU and Full16 passed.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0467-r0472-fpu-review.json).
-Next R0473;S5 remains active.
+
+## P46 IRET delivered
+
+R0473 minimized mirror diff5->2;one predicate remains pending owner decision.
+The 80386 PRM supports target-stack eSP width;modern SDM differs.
+Original-condition control fails2/36;candidate passes36/36. Cached build,publication11x2/hash,focused and Full16 passed.
+223 original logical lines checked;#error unchanged.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0473-iret-review.json).
+
+Next R0474;S5 remains active.
