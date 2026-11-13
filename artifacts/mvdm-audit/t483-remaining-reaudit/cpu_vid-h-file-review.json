@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+  "points": [
+    "T483-R0701",
+    "T483-R0702"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/cpu_vid.h",
+  "original_sha256": "5df752f3e978f2e9b3bf0df4acd843148584b711b438933dca4d0d5f77ce542f",
+  "before_sha256": "951d12ec9c14056c9269e5d10a773f2be3d4de1c7e646ce68cc7311887856b3d",
+  "after_sha256": "69b40895ba5dc74e008e28363d991a765bbbe1110ca6282ae418472779321984",
+  "diff": {
+    "metric": "original-relative LF physical lines including unchanged policy exclusions",
+    "before_added": 24,
+    "before_deleted": 17,
+    "after_added": 18,
+    "after_deleted": 14,
+    "delta": -9
+  },
+  "line_proof": {
+    "current_lines": 63,
+    "original_lines": 63,
+    "equal": true,
+    "mismatches": []
+  },
+  "error_count": 3,
+  "validation": "P60 cached full build,11x2 publication/hash,focused,EMS Mapping+CallReturn,Full16 passed;Git delivery accompanies record.",
+  "responsibility": "Video callback types must match selected C-VID implementation.",
+  "original_can_fulfill": "ULONG macro and IU32 typedef both designate unsigned long in selected host. Bidirectional function-pointer assignments compile with C4113/C4047/C4028 as errors. Original parameter names do not affect ABI.",
+  "specific_diff_necessity": "None for selected declarations/comment. Existing excluded configuration guards retained under owner policy.",
+  "result": "Restore three original read callback declarations and remove false type-coincidence comment; preserve all error branches.",
+  "counter_review": "Actual header /E comparison:63 selected nonempty lines have same text and original coordinates. This is specific to supported MSVC profile, not a claim across other integer models."
+}

@@ -1,0 +1,162 @@
+{
+  "status": "P60 delivery gates verified; known baseline failures retained; accompanies Git commit",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+      "sha256": "9f05409d3a7414620614b1b4c0f050b0ec2a81dfb792a0f3ced264a684804f3f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "sha256": "69b40895ba5dc74e008e28363d991a765bbbe1110ca6282ae418472779321984"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "sha256": "6f5294aa77cda5216b7378fa1d84f2a8040a3a440279dbd398648268f02fe0bb"
+    }
+  ],
+  "mirror_diff_delta": -23,
+  "source_review": [
+    "ckmalloc-h-file-review.json",
+    "cpu_vid-h-file-review.json",
+    "egacpu-h-file-review.json"
+  ],
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "limits": [
+    "Original EGA structure assignment warning retained; no selected member dereference.",
+    "Preprocessor/codegen control is not final package acceptance."
+  ],
+  "runner": {
+    "pid": 31564,
+    "created": "2026-11-13T21:59:57.1075820Z",
+    "command": "\"C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe\" -NoProfile -ExecutionPolicy Bypass -File build/t483-s5-p60/deliver.ps1",
+    "root": "build/t483-s5-p60",
+    "stdout": "build/t483-s5-p60/deliver.log",
+    "stderr": "build/t483-s5-p60/deliver.err",
+    "state": "completed",
+    "exit": 0
+  },
+  "ems": {
+    "Mapping": "PASS independent COM -> original INT67 Mapping; marker=EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS; normal launcher exit; no original guest or profile edit\n",
+    "CallReturn": "PASS independent COM -> original INT67 CallReturn; marker=T430_EMS_CALL_RETURN_STACK_MAP_OK; normal launcher exit; no original guest or profile edit\n"
+  },
+  "package": "37090af7-be34-41a6-8b4f-b99c77e8ebd8",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1308,
+      "CleanupMs": 525,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 423,
+      "CleanupMs": 477,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66053,
+      "CleanupMs": 463,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 46561,
+      "CleanupMs": 464,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 42577,
+      "CleanupMs": 493,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14330,
+      "CleanupMs": 422,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10287,
+      "CleanupMs": 451,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 72306,
+      "CleanupMs": 451,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12531,
+      "CleanupMs": 502,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28375,
+      "CleanupMs": 501,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30432,
+      "CleanupMs": 475,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 3941,
+      "CleanupMs": 418,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7711,
+      "CleanupMs": 424,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9846,
+      "CleanupMs": 397,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3582,
+      "CleanupMs": 415,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 5993,
+      "CleanupMs": 475,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=31736 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=22052 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=16172 escaped=1 nested=1 continue=1 normal-fe=1\n"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ]
+}

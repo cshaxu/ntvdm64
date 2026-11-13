@@ -19,11 +19,6 @@
 
 #include "error.h"
 #include MemoryH
-/* DIVERGENCE: historical NT CRT headers exposed malloc through MemoryH.
- * Modern MSVC declares the same allocator contract in stdlib.h; include it
- * so host_malloc's existing macro spelling preserves a pointer-width return. */
-#include <stdlib.h>
-#line 22
 
 /*
  * Allocate `nitems' items of type `type' to `var' and exit cleanly on failure.

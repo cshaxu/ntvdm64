@@ -1,0 +1,84 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+  "points": [
+    "T483-R0700"
+  ],
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/ckmalloc.h",
+  "original_sha256": "9f05409d3a7414620614b1b4c0f050b0ec2a81dfb792a0f3ced264a684804f3f",
+  "before_sha256": "c1bd3ef5697fe2c07433170407a2141b287168f5b7c4e7bd22fcd5bf0623f9d1",
+  "after_sha256": "9f05409d3a7414620614b1b4c0f050b0ec2a81dfb792a0f3ced264a684804f3f",
+  "diff": {
+    "metric": "original-relative LF physical lines including unchanged policy exclusions",
+    "before_added": 5,
+    "before_deleted": 0,
+    "after_added": 0,
+    "after_deleted": 0,
+    "delta": -5
+  },
+  "line_proof": {
+    "current_lines": 0,
+    "original_lines": 0,
+    "equal": true,
+    "mismatches": []
+  },
+  "error_count": 0,
+  "validation": "P60 cached full build,11x2 publication/hash,focused,EMS Mapping+CallReturn,Full16 passed;Git delivery accompanies record.",
+  "responsibility": "Allocator prototypes must be visible before macro expansion.",
+  "original_can_fulfill": "All10 source include sites include host_def.h first; it already includes stdlib.h and provides MemoryH/host_malloc. Original header compiles under actual flags with C4013 promoted to error.",
+  "specific_diff_necessity": "None; duplicate declarations and explanatory comment removed.",
+  "result": "Exact original bytes restored; no error guards existed.",
+  "counter_review": "Do not justify duplicate declarations by local-header convenience. Macros use existing host definitions; declaration is already available.",
+  "include_sites": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "host_def_line": 2,
+      "ckmalloc_line": 100
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "host_def_line": 2,
+      "ckmalloc_line": 64
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "host_def_line": 2,
+      "ckmalloc_line": 39
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "host_def_line": 32,
+      "ckmalloc_line": 53
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "host_def_line": 10,
+      "ckmalloc_line": 50
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "host_def_line": 2,
+      "ckmalloc_line": 55
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "host_def_line": 2,
+      "ckmalloc_line": 47
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "host_def_line": 21,
+      "ckmalloc_line": 45
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "host_def_line": 26,
+      "ckmalloc_line": 36
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "host_def_line": 19,
+      "ckmalloc_line": 23
+    }
+  ]
+}

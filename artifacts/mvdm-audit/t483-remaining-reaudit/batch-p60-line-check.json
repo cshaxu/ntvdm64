@@ -1,0 +1,23 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+    "matched_original_line_mismatches": [],
+    "sha256": "9f05409d3a7414620614b1b4c0f050b0ec2a81dfb792a0f3ced264a684804f3f",
+    "original_sha256": "9f05409d3a7414620614b1b4c0f050b0ec2a81dfb792a0f3ced264a684804f3f",
+    "proof": "Exact original bytes"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+    "matched_original_line_mismatches": [],
+    "sha256": "69b40895ba5dc74e008e28363d991a765bbbe1110ca6282ae418472779321984",
+    "original_sha256": "5df752f3e978f2e9b3bf0df4acd843148584b711b438933dca4d0d5f77ce542f",
+    "proof": "Actual MSVC /E: 63 selected emitted header lines and original logical coordinates identical; all #error guards retained."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+    "matched_original_line_mismatches": [],
+    "sha256": "6f5294aa77cda5216b7378fa1d84f2a8040a3a440279dbd398648268f02fe0bb",
+    "original_sha256": "e014a0a3e736683709e33c754c0f001d8fd8f27a22056587d15f98a4f2efabe6",
+    "proof": "Actual MSVC /E: 235 selected emitted header lines and original logical coordinates identical; all #error guards retained."
+  }
+]

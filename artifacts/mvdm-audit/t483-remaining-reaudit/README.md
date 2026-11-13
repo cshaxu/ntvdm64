@@ -399,3 +399,10 @@ CCPU selection minimized;mirror diff net-6. Cached full,11x2 publication/hash,
 focused,EMS Mapping+CallReturn and Full16 passed.706 reviewed;273 delivered,
 2 approved,431 pending,2014 unreviewed;92/365 files.
 See [receipt](batch-p59-checkpoint.json) and [file review](emm-mngr-file-review.json).
+
+P60: ckmalloc/cpu_vid/egacpu5/5 original selected declarations restored;
+mirror diff net-23;all exclusion guards retained. Cached full,11x2 publication/
+hash,focused,EMS2 and Full16 passed.711 reviewed;278 delivered,2 approved,
+431 pending,2009 unreviewed;95/365 files.
+See [receipt](batch-p60-checkpoint.json),[ckmalloc](ckmalloc-h-file-review.json),
+[cpu_vid](cpu_vid-h-file-review.json),[egacpu](egacpu-h-file-review.json).
