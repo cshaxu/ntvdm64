@@ -23,7 +23,7 @@ extern void c_setIP(IU16),c_setSP(IU16),c_setCR3(IU32);
 extern void c_setGDT_BASE_LIMIT(IU32,IU16);
 extern IU16 c_getIP(void),c_getSP(void),c_getCS(void),c_getSS(void);
 extern IU32 c_getGDT_BASE(void),c_getCR3(void);
-extern ISM32 c_setCS(IU16),c_setSS(IU16);
+extern ISM32 c_setCS(IU16),c_setSS(IU16),c_setDS(IU16);
 extern void c_setPE(ISM32),c_setVM(ISM32),c_setCPL(ISM32);
 extern ISM32 c_getPE(void),c_getVM(void),c_getCPL(void);
 extern void (*BIOS[])(void);
@@ -92,21 +92,21 @@ static int simulate_cases(void)
     }
     return 0;
 }
-static void interface_raise(ISM32 unused)
-{(void)unused;raise_bop();}
-static void interface_guest_fault(ISM32 unused)
-{(void)unused;check_interface_active(13);++errors;}
-static void interface_normal(ISM32 unused)
-{(void)unused;}
 static int interface_cases(void)
 {
-    DWORD code=0;
-    __try {call_cpu_function((CALL_CPU *)interface_raise,TYPE_W,0,0);}
-    __except(GetExceptionCode()==0xe4470006?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){code=GetExceptionCode();}
-    if(code!=0xe4470006 || interface_active){puts("CCPU_INTERFACE_WRONG stale-interface");return 1;}
-    if(call_cpu_function((CALL_CPU *)interface_guest_fault,TYPE_W,0,0)!=13 || interface_active ||
-            call_cpu_function((CALL_CPU *)interface_normal,TYPE_W,0,0)!=0 || interface_active || errors)return 1;
-    puts("CCPU_INTERFACE_OK native-unwind=1 architectural-error=13 normal-reuse=1");return 0;
+    unsigned char descriptor[]={0xff,0xff,0,0,0,0x93,0,0};
+    unsigned char *table=c_GetPhyAdd(0x6000);
+    c_cpu_init();CopyMemory(table+8,descriptor,sizeof(descriptor));
+    c_setGDT_BASE_LIMIT(0x6000,15);c_setPE(1);c_setVM(0);c_setCPL(0);
+    if(c_setDS(16)!=13 || interface_active)return 1;
+    if(c_setDS(8)!=0 || interface_active)return 1;
+    table[13]=0x13;
+    if(c_setDS(8)!=11 || interface_active)return 1;
+    table[13]=0x93;
+    if(c_setDS(8)!=0 || interface_active)return 1;
+    c_setPE(0);
+    if(c_setDS(0)!=0 || interface_active)return 1;
+    puts("CCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1");return 0;
 }
 static int control_cases(void)
 {

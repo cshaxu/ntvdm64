@@ -212,3 +212,7 @@ compiled only in the task build directory, not a new production/test target.
 ## P39 transfer header restored
 
 [R0430](r0430-transfer-header.json) removes unused TLB include and redundant line directives: mirror diff net-1;285 original matched lines correct. Same-path product-context paired objects differ only in COFF timestamp. [Receipt](batch-p39-checkpoint.json) reuses P38 package/Full without repeating behavioral tests.437/2720 reviewed;62/365 files;153 restored delivered,2 approved,282 pending decisions,2283 unreviewed.
+
+P40: [original interface restoration](r0431-r0432-original-interface.json),
+[line check](batch-p40-line-check.json), [delivery checkpoint](batch-p40-checkpoint.json).
+Two original restorations verified: cached build, publication11x2/hash,64 x87/143 CPU, original/restored selector tests and Full16 passed.439/2720 reviewed;63/365 files;155 restored delivered;2 approved;282 pending decisions;2281 unreviewed. No native-fault production repro claimed.

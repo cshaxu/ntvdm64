@@ -1,0 +1,36 @@
+{
+  "points": [
+    "T483-R0431",
+    "T483-R0432"
+  ],
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+  "responsibility": "Report architectural segment-load failures to six external register setter callers and clear private interface-active state.",
+  "original_ability": "c_setES/CS/SS/DS/FS/GS -> call_cpu_function -> load_data/code/stack_seg -> descriptor/page checks. contributory_exception and PF call check_interface_active before host exception interception. Original longjmp returns to setjmp; original assignment clears interface_active. phyR handles outside-RAM and SAS_INACCESSIBLE itself.",
+  "retention_evidence_rejected": "Old direct RaiseException callback is not any actual production caller. Added actual c_setDS diagnostic needs VirtualProtect PAGE_NOACCESS against owned SAS backing to induce native fault; it proves hypothetical cleanup, not that a supported selector call has such backing. WOW native exception recovery alone does not establish a native exception source in this bounded segment-load closure.",
+  "decision": "Restore original call_cpu_function in full. Do not broaden its architecture-error contract to arbitrary native exceptions without a demonstrated production need. No new shim or alternate cleanup.",
+  "test_contract": "Actual c_setDS valid selector, out-of-table #GP13, not-present #NP11 and subsequent valid reuse; original/current both must pass. Existing separately proven CPU simulation native-unwind tests remain.",
+  "diagnostic_evidence": "build/t483-s5-p40/current-final/verify.out passes artificial protected-backing test; original-final/negative-interface.out fails stale-interface selector-read. Not product failure proof.",
+  "test_runner_repair": "Pinned old revision predates mvdm-host directory split; source extraction corrected to original src/mvdm path. Revision unchanged.",
+  "mirror_diff": {
+    "before_including_exclusion": 8,
+    "after_including_exclusion": 2,
+    "delta": -6,
+    "remaining": "Original literal #if 0 body excluded by preserved #error; diagnostic #line excluded from metric."
+  },
+  "line_check": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+    "before_diff": 8,
+    "after_diff": 2,
+    "matched_original_lines": 87,
+    "mismatches": [],
+    "error_unchanged": true,
+    "sha256": "a547b3f45e7ed95abffedc23e73203045d81f5fb8ab8ab466d8ae8bfd09ff669"
+  },
+  "validation": "Final-source cached full build; publication11x2/hash;64 x87/143 CPU; original/restored selector controls; Full16 passed. See batch-p40-checkpoint.json.",
+  "original_source": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/softpc.new/base/ccpu386/c_xtrn.c",
+    "sha256": "50ab81150861a4f56f5dfb228e6f4f560462d339bcd6e7750f7cf9011a86fdf2",
+    "disk_equal": false
+  }
+}

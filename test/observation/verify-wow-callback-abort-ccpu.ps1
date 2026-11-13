@@ -46,7 +46,7 @@ try{
  $cpuSource="$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c";$fixtureExtra=''
  if($ReferenceRevision){
   foreach($name in @('c_main','ntthread','c_xtrn')){
-   $body=(& git -C $repo show "${ReferenceRevision}:src/mvdm-host/softpc.new/base/ccpu386/$name.c") -join "`n"
+   $body=(& git -C $repo show "${ReferenceRevision}:src/mvdm/softpc.new/base/ccpu386/$name.c") -join "`n"
    if($LASTEXITCODE){throw 'Missing immutable CPU owner source'}
    [IO.File]::WriteAllText("$root/reference-$name.c",$body)
   }
@@ -73,9 +73,9 @@ try{
  }
  if($ReferenceRevision){
   Run-Owned negative-simulate "$root/fixture.exe" '--simulate' 1
-  Run-Owned negative-interface "$root/fixture.exe" '--interface' 1
+  Run-Owned original-interface "$root/fixture.exe" '--interface'
   if((Get-Content "$root/negative-simulate.out" -Raw) -notmatch 'CCPU_ABORT_WRONG escaped-level' -or
-     (Get-Content "$root/negative-interface.out" -Raw) -notmatch 'CCPU_INTERFACE_WRONG stale-interface'){throw 'Missing causal old-owner failures'}
+     (Get-Content "$root/original-interface.out" -Raw) -notmatch 'CCPU_INTERFACE_OK real-selectors=1'){throw 'Missing old simulation failure or original selector success'}
  }else{
   Run-Owned verify "$root/fixture.exe" '--verify'
   $output=Get-Content "$root/verify.out" -Raw

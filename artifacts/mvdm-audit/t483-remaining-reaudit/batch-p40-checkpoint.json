@@ -1,0 +1,135 @@
+{
+  "status": "P40 verified restoration; accompanies Git delivery",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "sha256": "a547b3f45e7ed95abffedc23e73203045d81f5fb8ab8ab466d8ae8bfd09ff669"
+    },
+    {
+      "path": "test/mvdm-host/wow_callback_abort_ccpu_fixture.c",
+      "sha256": "07ffd0b1f9076bc4237a1635cf465600fbc19c44ff93a0173f6ac9d6f25ab733"
+    },
+    {
+      "path": "test/observation/verify-wow-callback-abort-ccpu.ps1",
+      "sha256": "7c5de617f4ce7f12810e06bd2a5a00a5d49916abb0239066944a6bf2f3856195"
+    }
+  ],
+  "mirror_diff_delta": -6,
+  "package": "3431bbd0-4374-4fec-a558-c3014e38f30e",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1286,
+      "CleanupMs": 455,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 227,
+      "CleanupMs": 420,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66768,
+      "CleanupMs": 492,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 57874,
+      "CleanupMs": 422,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 44623,
+      "CleanupMs": 414,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 15031,
+      "CleanupMs": 446,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10845,
+      "CleanupMs": 434,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 65615,
+      "CleanupMs": 473,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12633,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28704,
+      "CleanupMs": 517,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30987,
+      "CleanupMs": 444,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 5814,
+      "CleanupMs": 515,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 8265,
+      "CleanupMs": 488,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10779,
+      "CleanupMs": 402,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 4297,
+      "CleanupMs": 501,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6831,
+      "CleanupMs": 385,
+      "Passed": true
+    }
+  ],
+  "full_elapsed_ms": 386034,
+  "focused": {
+    "x87_cases": 64,
+    "cpu_boundary": 143,
+    "interface": "Actual selector #GP13/#NP11 and valid reuse pass for restored and pinned-original implementations; native simulation unwind controls retained"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Absent external DOS4GW/NESticle fixtures remain skips.",
+    "Artificial native-fault tests were rejected as necessity proof, not hidden as passing original behavior."
+  ]
+}
