@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "T483-R0117",
+      "added": 1,
+      "removed": 0,
+      "finding": "Restart-hint include provides live capture/search helpers.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0118",
+      "added": 3,
+      "removed": 0,
+      "finding": "Per-search successor index/name retained for missing-anchor restart; necessity not established by comment.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0119",
+      "added": 12,
+      "removed": 0,
+      "finding": "DTA helper reads far address and acquires read/write snapshot; coupled to prior DTA owner decision.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0120",
+      "added": 1,
+      "removed": 0,
+      "finding": "FindFirst local lease owns snapshot.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0121",
+      "added": 6,
+      "removed": 2,
+      "finding": "Direct DTA pointer replaced by acquisition with invalid-address failure.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0122",
+      "added": 5,
+      "removed": 0,
+      "finding": "Post-search commit adds error override; preservation of original search error remains unproved.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "Restart hint stores FileIndex/name and rescans directory from start at missing-anchor exhaustion; source behavior verified, necessity versus original indexed restart not proven. DTA snapshot retains new failure/commit semantics; no original invalid-pointer reproduction established. Do not remove only cleanup or treat comments as evidence.",
+  "verification": "Current demsrch helpers/consumers and original ranges compared, dem_restart_hint.h read; no product edit/test.",
+  "mirror_diff_delta": 0
+}

@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "id": "T483-R0162",
+      "added": 8,
+      "removed": 0,
+      "current_range": "701-708",
+      "decision": "pending"
+    }
+  ],
+  "initial_review": "DpmiHwIntHandler:701-708 rejects absent descriptor before flags/stack mutations and before real-mode ReflectV86Int. SEGMENT_IS_PRESENT indexes Ldt, not a handler-publication flag. DpmiInit installs hook when fDpmiHookInts; nt_inthk.c:87-103 returns handler result; c_main.c:584 uses FALSE for normal interrupt processing. Specific claimed early IRQ publication race not proved.",
+  "counter_review": "Returning FALSE precedes mutations, but original real-mode dispatch used IVT irrespective of protected selector presence. This changes route, not simply a bounds check. Neither concrete failure nor safe removal is claimed.",
+  "verification": "Source-only inspection, no new build/runtime test; no product edit.",
+  "mirror_diff_delta": -8,
+  "superseding_review": {
+    "decision": "restore-original-pending-validation",
+    "evidence": [
+      "dxboot.asm789-791 initializes GDT/IDT before child launch",
+      "dxboot.asm2130-2208 publishes interrupt handlers",
+      "dxfunc.asm1008-1032 first-client path invokes DpmiInUse",
+      "dpmimscr.c96-97 enables hooks"
+    ],
+    "limits": "No fresh runtime test; startup comment not sufficient evidence. Verification of restored candidate remains outstanding.",
+    "before_sha256": "aa5be967cd04266f41a20d0a85bc7cac4e4fd747cf96bce592d73afba4fb1053",
+    "after_sha256": "4cd4e4910d55f597a539d916ef36c9a6d61b223efd77429efc59f94d84210b5d",
+    "line_mapping": "#line608 before SaveEFLAGS, checked against original",
+    "error_unchanged": true
+  }
+}

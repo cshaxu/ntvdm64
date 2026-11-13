@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "id": "T483-R0102",
+      "added": 3,
+      "removed": 0,
+      "finding": "Buffer location, lease and active flag depend on current acquisition.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0103",
+      "added": 3,
+      "removed": 1,
+      "finding": "ULONG Zero changed to LONG with comment; type consistency is not proof original runtime behavior fails. Minimum boundary requires decision.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0104",
+      "added": 4,
+      "removed": 4,
+      "finding": "Failure flush/free replaced with discard of snapshot. LastError preservation and failure partial-data visibility need coherent review.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0105",
+      "added": 8,
+      "removed": 4,
+      "finding": "Success flush/free replaced with snapshot commit and new invalid-address failure. SAS/video flush equivalence not established.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "VrReadNamedPipe treats ERROR_MORE_DATA as success, so do not assert it is necessarily discarded. Original Sim32FlushVDMPointer has SAS/video effects. Current resource lifetime depends on retained acquisition; dependency alone does not prove original faulty. Previously restored pExtendedError remains original and is not reopened.",
+  "verification": "Current demRead, original demRead and VrReadNamedPipe source reviewed; no fresh compilation or runtime failure claim.",
+  "mirror_diff_delta": 0
+}

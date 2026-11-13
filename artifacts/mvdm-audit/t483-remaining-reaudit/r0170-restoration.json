@@ -1,0 +1,21 @@
+{
+  "decision": "original-restoration-pending-validation",
+  "items": {
+    "R0170": -10,
+    "R0147": -5,
+    "R0166-partial": -1
+  },
+  "evidence": [
+    "sim32.c real NULL paths and -1 invalid-selector conversion",
+    "ccpusas4.c1262-1277 paging failure returns physical0 pointer",
+    "physical_mapping.c227-240 successful result requires nonzero page",
+    "c_seg.c417-427/check_SS validates ordinary protected SS loads",
+    "fixture injects independent mapping_unavailable/selector_resolves states"
+  ],
+  "limits": "No claim all guest states impossible; no concrete failure evidence supports this extra guard. V86 and transition behavior remain regression coverage, not assumed success. Fixture source expectations must be reconciled with restored contract.",
+  "cleanup": "Removed unused selector declaration and NativePushInt parameter at definition, forward declaration and both call sites; kept width argument.",
+  "before_sha256": "d93bcafeb98d610548ded72cbb8feecb49df906f2ef49072b3e4a988261d114e",
+  "after_sha256": "e5ac4851282cafcd61b7105d116fed0445495d4f4453300a9d6ac900a39ec172",
+  "mirror_diff_delta": -16,
+  "error_unchanged": true
+}

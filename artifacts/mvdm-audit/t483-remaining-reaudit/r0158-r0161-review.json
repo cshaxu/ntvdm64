@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "id": "T483-R0158",
+      "added": 6,
+      "removed": 1,
+      "current_range": "635-641",
+      "finding": "DWORD CS slot includes old EIP high word",
+      "evidence": "Original NT PushInt loads EDX from RiEip then overwrites DX with CS before DWORD store; original DPMI C writes getCS only.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0159",
+      "added": 0,
+      "removed": 3,
+      "current_range": "removed original549-551; current650-652",
+      "finding": "Move wide-frame EIP/ESP commit out of branch",
+      "evidence": "Original full EIP/ESP setters appear now in shared commit.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0160",
+      "added": 0,
+      "removed": 3,
+      "current_range": "removed original557-559; current650-652",
+      "finding": "Remove narrow-frame truncating commit",
+      "evidence": "Original uses LOWORD(handler Eip) and setSP((WORD)NewSP); current writes full EIP and ESP. c_reg.c setSP uses SET_SP whereas setESP uses SET_ESP; not mere code motion.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0161",
+      "added": 5,
+      "removed": 0,
+      "current_range": "650-656 excluding #line",
+      "finding": "Shared full-width EIP/ESP commit",
+      "evidence": "Native PushInt writes handler ViEip and computed RiEsp independent of frame width; current selected path follows this rather than original DPMI C narrow setters.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "Native PushInt evidence is direct but native monitor and CCPU do not share an assumed failure/state contract. Narrow-frame commit changed operand width and upper-bit behavior. No restoration justified solely as removal of duplicate setters.",
+  "verification": "Source review only; no product edit or new compile/runtime testing.",
+  "mirror_diff_delta": 0
+}

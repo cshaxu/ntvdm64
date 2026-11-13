@@ -27,22 +27,6 @@ BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
 extern BOOL IsVdmRedirLoaded(VOID);
 
-/* DIVERGENCE(MVDM-HOST-DIV-195): open pathname.
- * DIVERGENCE(MVDM-HOST-DIV-231): create pathname.
- * Copy the original DS:SI pathname within the current session. */
-static BOOL demCopyFileName(CHAR fileName[MAX_PATH])
-{
-    mvdm_guest_location location;
-    uint32_t bytes;
-
-    if (mvdm_guest_location_set_real_mode(&location, getDS(), getSI()) &&
-        mvdm_guest_location_copy_c_string(&location, (uint8_t *)fileName,
-            MAX_PATH, &bytes)) return TRUE;
-    SetLastError(ERROR_INVALID_ADDRESS);
-    demClientError(INVALID_HANDLE_VALUE, (CHAR)-1);
-    return FALSE;
-}
-
 /* DIVERGENCE MVDM-HOST-DIV-006: preserve the source's optional-current-PDB
  * convention without retaining a native pointer to its two-byte DOS value. */
 static BOOL demCurrentPdbAddress(PULONG pPDB)
@@ -200,7 +184,6 @@ BOOL    IsFirst;
 LPSTR   dupFileName;
 DWORD   dwFileSize,dwSizeHigh;
 SECURITY_ATTRIBUTES sa;
-CHAR    fileName[MAX_PATH];
 
 #line 159
     if (getAL()){
@@ -208,8 +191,8 @@ CHAR    fileName[MAX_PATH];
         return;
     }
 
-    if (!demCopyFileName(fileName)) return;
-    lpFileName = fileName;
+#line 164
+    lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
 
 #if DBG
 #line 167
@@ -641,14 +624,13 @@ USHORT  uErr;
 DWORD   dwDesiredAccess;
 SECURITY_ATTRIBUTES sa;
 CHAR    cFOTName[MAX_PATH];
-CHAR    fileName[MAX_PATH];
 #line 600
 BOOL    ttfOnce,IsFirst;
 DWORD   dwLastError;
 
 
-    if (!demCopyFileName(fileName)) return;
-    lpFileName = fileName;
+#line 604
+    lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
 #line 605
     dwAttr = (DWORD)getCX();
 

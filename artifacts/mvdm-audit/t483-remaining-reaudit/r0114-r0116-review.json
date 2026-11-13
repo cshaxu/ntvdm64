@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "T483-R0114",
+      "added": 1,
+      "removed": 0,
+      "decision": "pending",
+      "finding": "Header supplies live FDAccess write interface; follows shared-state decision."
+    },
+    {
+      "id": "T483-R0115",
+      "added": 0,
+      "removed": 2,
+      "decision": "restored",
+      "finding": "Original function-local extern and blank restored; no reference generated, #line611 preserved."
+    },
+    {
+      "id": "T483-R0116",
+      "added": 4,
+      "removed": 1,
+      "decision": "pending",
+      "finding": "Original pointer clear replaced by shared write and TerminateVDM on failure; requires producer and disk/floppy consumer decision, original defect not established."
+    }
+  ],
+  "counter_review": "A declaration can be restored independently; runtime write cannot be switched independently from state registration. Current owner/epoch failure checks do not prove termination is original-equivalent. No additional failure path introduced.",
+  "verification": "Original declaration bytes compared; original logical611 next statement preserved; source-only next batch pending.",
+  "mirror_diff_delta": -2
+}

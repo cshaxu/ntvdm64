@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "id": "T483-R0143",
+      "added": 7,
+      "removed": 0,
+      "current_range": "37-45",
+      "finding": "CPU40 protected-mode BOP binding",
+      "evidence": "dpmi32.c dispatch slot1 uses switch_to_protected_mode; current maps to modesw.c DpmiCpu40SwitchToProtectedMode, original non-i386 maps to DpmiIllegalFunction.",
+      "minimum_option": "Decide with mode-switch implementation; restoring macro alone disconnects selected transition.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0144",
+      "added": 2,
+      "removed": 0,
+      "current_range": "46-49",
+      "finding": "CPU40 debug-register BOP binding",
+      "evidence": "dpmi32.c slot0xe names DpmiSetDebugRegisters; i386/dpmi386.c supplies implementation and ThreadSetDebugContext call. Original non-i386 aliases illegal function.",
+      "minimum_option": "Review selected debug-register contract as one boundary; do not delete selector while assuming service still reachable.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0145",
+      "added": 5,
+      "removed": 24,
+      "current_range": "60-65",
+      "finding": "Use SDK LDT_ENTRY instead of duplicate original definition",
+      "evidence": "compat/include/nt.h:24 includes windows.h and is forced into worker build. SDK10.0.22621.0 um/winnt.h:8334-8357 defines matching LDT_ENTRY fields; original dpmidata.h:58-81 repeats struct tag. Current #error protects unsupported provider context.",
+      "minimum_option": "Recommend single SDK type provider in selected context; preserve #error. Owner decision required for unchanged diff.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0146",
+      "added": 5,
+      "removed": 0,
+      "current_range": "230-234",
+      "finding": "CPU40 mode-transition prototype",
+      "evidence": "Prototype matches modesw.c definition and macro binding used by dispatch slot1. Original header lacks this extra function.",
+      "minimum_option": "Resolve with R0143; no declaration-only relocation or deletion that leaves caller implicit.",
+      "decision": "pending"
+    }
+  ],
+  "counting": "Normalized original-relative lines excluding #line, including inserted conditional scaffolding/comments/blanks. R0143 owns closing endif; R0144 owns its if/endif. R0146 five inserted prototype lines; original adjacent VOID retained.",
+  "counter_review": "Non-i386 original aliases intentionally reject these BOPs; selected bindings do not prove their entire implementation minimal. SDK type provider is evidenced in actual forced include configuration; no fresh compiler failure claimed. Excluded i386/DBG code remains outside these edits and must not be restored.",
+  "verification": "Source and existing build command inspection only; no product edit or new build/test.",
+  "mirror_diff_delta": 0
+}

@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "T483-R0154",
+      "added": 3,
+      "removed": 1,
+      "current_range": "593-596",
+      "finding": "Remove unconditional early EFLAGS update into excluded branch",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0155",
+      "added": 3,
+      "removed": 0,
+      "current_range": "600-602",
+      "finding": "Commit EFLAGS update separately on real-mode path",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0156",
+      "added": 9,
+      "removed": 1,
+      "current_range": "610-619",
+      "finding": "Choose handler-width frame and native PushInt stack checks",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0157",
+      "added": 7,
+      "removed": 1,
+      "current_range": "624-632",
+      "finding": "Commit flags after frame success and select WideFrame stores",
+      "decision": "pending"
+    }
+  ],
+  "evidence": "Original dpmiint.c:529 updates flags before frame allocation;540 uses BuildStackFrame;544 uses Frame32. Current registered DpmiSwIntHandler uses handler Flags VDM_INT_32 and delayed update. Original NT base/ntos/ke/x86/instemul.asm PushInt:1883 selects VDM_INT_32; pi130 checks stack; pi170/pi175 checks destination CS/address; pi180 clears TF only afterwards. Current delayed update is after stack success, before later target transition; complete failure equivalence not established.",
+  "counter_review": "Actual VdmInstallSoftwareIntHandler registration exists at dpmiint.c:1312. Native source evidence does not automatically authorize using hardware-monitor policy in CCPU. Current target-present check precedes frame build, but native destination limit/fault sequence is more detailed; no full equivalence or observed runtime defect asserted.",
+  "verification": "Source-only review; no product modification/build/runtime test.",
+  "mirror_diff_delta": 0
+}

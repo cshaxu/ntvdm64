@@ -33,9 +33,11 @@ is the sole active audit order; the old D-register is historical evidence.
 ## S5 Progress
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
-contains 2720 points in 365 files. Reviewed 85: 22 restored and verified,
-2 owner-approved retain, 61 pending decisions (including partial restorations);
-2635 unreviewed. Continue at R0086. Decision-required items go to the
+contains 2720 points in 365 files. Reviewed 170: 37 restored, verified and published,
+0 local restorations awaiting verification, 2 owner-approved retain,
+131 historically classified pending decisions (including partial restorations); 2550 unreviewed.
+Owner-directed execution restarts from the first pending backlog item.
+R0010 is restored and verified; next is R0014-R0020. R0171 remains unexamined. Only evidence-qualified decisions enter the
 [pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
 without blocking the next ordered review.
 
@@ -47,7 +49,16 @@ records cached x86/x64 builds, two command fixtures, Full16, documentation
 checks, and publication of the same 11-image package to assets/release and
 O:/winnt/system32. Both destination hashes match the tested candidate.
 DOS4GW/NESticle is explicitly skipped: external fixtures were not supplied.
-Git delivery is being finalized; S5 remains active, not closed.
+P3 commit 4724a0bf6 is pushed and remote-verified; its worktree was clean.
+P4 changed five implementation files. Final whole-file normalized comparison
+against original sources shows a reduction of 69 mirror-diff lines, correcting
+the earlier per-point sum of 70. The difference metric excludes #line directives,
+normalizes newline encoding, and includes comments and blanks. Cached x86/x64,
+command fixtures, selected-object DPMI tests and Full16 passed; DOS4GW/NESticle
+remains skipped for absent external fixtures. The same 11-image package was
+published and hash-verified at both destinations. The P4 delivery commit carries this receipt; origin identity is checked after push.
+See [P4 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p4-checkpoint.json).
+S5 remains active, not closed.
 
 Pending DTA/PDB/SFT decisions do not establish that original pointer lifetimes
 are defective. The fast-I/O decline has original guest CF fallback evidence;
@@ -55,11 +66,9 @@ its retention remains an owner decision. No guest rebuild or winnt.zip change.
 
 ## Current Technical Baseline
 
-Package `0db3c11e-0a6e-4e0b-b2b0-ce921eaf5b1b`, complete 11 images at
-assets/release and O:/winnt/system32, raw-hash identical to the Full-tested S5 P3
-candidate and manifest. See the [P3 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p3-checkpoint.json).
-DOS4GW/NESticle remains explicitly skipped because its external fixture was not
-supplied. No guest or winnt.zip change.
+Package `47f8520a-0f9c-4387-9f95-52c74f9ce58c`: complete 11-image P4 candidate,
+Full-tested and raw-hash verified at assets/release and O:/winnt/system32.
+No guest or winnt.zip change. See the P4 receipt above.
 
 ## Remaining Scope
 
@@ -91,3 +100,22 @@ no queue changes remain pending in this batch.
 
 See the [execution rules](../rules/EXECUTION.md). Queue/proposal delivery is
 complete; S5 proceeds under the owner-approved S2–S5 sequence.
+
+## Owner Correction: Decision Admission
+
+Existing backlog entries require evidence requalification and are not yet
+qualified owner decisions. A demonstrated failure of coherent original
+restoration is required; missing investigation is agent work, not an owner
+tradeoff. Restore original directly when feasible and verified. Historical
+review counts measure inspected/classified points, not completed valid audits.
+
+The 131 historical pending classifications span 108 backlog rows requiring
+admission review; zero are currently counted as evidence-qualified pending
+owner decisions. They remain unfinished investigations until requalified or
+restored and verified. Existing owner approvals remain valid.
+
+Owner superseding cadence: finish the coupled changes in each modified file,
+then cached full build and applicable full tests before changing another file.
+The existing five-file batch has passed verification and publication; SCS
+restoration R0014-R0020 has not been applied. The next audit group is R0014-R0020, under the per-file verification cadence. Prior failed DPMI test attempts and their corrected
+contracts remain in [verification](../../artifacts/mvdm-audit/t483-remaining-reaudit/p4-verification.json).

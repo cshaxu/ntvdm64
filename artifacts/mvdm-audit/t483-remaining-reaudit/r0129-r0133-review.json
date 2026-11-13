@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "id": "T483-R0129",
+      "added": 1,
+      "removed": 0,
+      "current_range": "2239",
+      "finding": "DemHeartBeat PDB temporary declaration",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0130",
+      "added": 3,
+      "removed": 1,
+      "current_range": "2248-2250",
+      "finding": "Heartbeat reads numeric PDB location; read failure silently skips reclamation",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0131",
+      "added": 1,
+      "removed": 0,
+      "current_range": "2381",
+      "finding": "AddFFindEntry PDB temporary declaration",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0132",
+      "added": 3,
+      "removed": 1,
+      "current_range": "2383-2385",
+      "finding": "PDB read failure returns NULL and caller reports STATUS_NO_MEMORY",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0133",
+      "added": 1,
+      "removed": 1,
+      "current_range": "2397",
+      "finding": "Search owner stores the sampled PDB instead of original pointer dereference",
+      "decision": "pending"
+    }
+  ],
+  "initial_review": "Original uses FETCHWORD(pusCurrentPDB[0]); current demdata.c/dem.h replace the pointer with current_pdb_location, initialized in demgset.c. Restoring calls alone cannot restore that contract. No original lifetime failure proved. GetPspFFindList still keys solely by USHORT PSP; numeric reads do not solve cross-VM identity.",
+  "counter_review": "Original lookup and owner assignment are separate reads; current sample unifies them, but no intervening guest reentry was established. Read failure is newly conflated with allocation failure at demsrch.c:867-872. Neither observation proves original pointer contract defective. No multi-VM identity fix is claimed.",
+  "verification": "Source comparison only; no new compile or runtime verification. #error and #line untouched.",
+  "mirror_diff_delta": 0
+}

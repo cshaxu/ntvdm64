@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "T483-R0165",
+      "added": 3,
+      "removed": 2,
+      "current_range": "1148-1150",
+      "finding": "Rename original builder to static width-aware helper",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0166",
+      "added": 5,
+      "removed": 0,
+      "current_range": "1153-1158 excluding #line",
+      "finding": "Add explicit width/native-policy arguments and excluded alternative",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0167",
+      "added": 4,
+      "removed": 1,
+      "current_range": "1209-1212",
+      "finding": "Skip original Limit increment for native-policy callers",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0168",
+      "added": 5,
+      "removed": 1,
+      "current_range": "1225-1230 excluding #line",
+      "finding": "Choose frame size from explicit width",
+      "decision": "pending"
+    }
+  ],
+  "initial_review": "Original BuildStackFrame reads CurrentAppFlags and increments raw Limit before granularity expansion. Current wrapper1278-1280 passes Frame32,FALSE; dpmiint.h:49 defines Frame32 as BOOL CurrentAppFlags. Software interrupt615 passes handler width,TRUE. Original other callers723/812/899/1014 retain wrapper. Native NT PushInt uses handler width and different limit comparisons; deleting one policy fragment alone is not original restoration.",
+  "counter_review": "A shared function body already exists; removing wrapper or adding a second implementation is not automatically simplification. Ordinary width is preserved by the Frame32 alias, while native policy intentionally changes limits and width source. No runtime necessity or complete equivalence asserted.",
+  "verification": "Original/current source, call sites and macro definition inspected; no new tests or product edits.",
+  "mirror_diff_delta": 0
+}

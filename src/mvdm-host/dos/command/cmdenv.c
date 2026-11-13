@@ -16,9 +16,6 @@
 #include <ctype.h>
 #include <memory.h>
 #include <oemuni.h>
-#include "compat/include/environapi.h"
-
-#line 19
 
 #define VDM_ENV_INC_SIZE    512
 

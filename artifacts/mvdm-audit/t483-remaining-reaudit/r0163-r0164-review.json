@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": "T483-R0163",
+      "added": 5,
+      "removed": 0,
+      "current_range": "988-992",
+      "finding": "Restore EFLAGS when fault handler absent",
+      "evidence": "SaveEFLAGS captured971, IF/TF cleared974; absent-handler returns FALSE993. CCPU c_xcptn.c consults host_exint_hook and continues when FALSE. Current restoration excludes VM-bit cases.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0164",
+      "added": 7,
+      "removed": 0,
+      "current_range": "1017-1023",
+      "finding": "Restore stack and flags after failed fault-frame construction",
+      "evidence": "BeginUseLockedPMStack increments count; ESP reduced0x20 at1008. EndUseLockedPMStack restores original stack only when decrement reaches0; nested failure otherwise retains subtraction. Current restores SaveESP/SaveEFLAGS only outside VM mode.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "Existing test/mvdm-host/dpmi_swint_selected_fixture.c --pm-fault-failure cases inspect absent,first,nested state. Fixtures were read, not executed. Source confirms prior mutations and nested stack imbalance, but no fresh real-guest failure or complete V86 rollback proof is claimed. Fault simulation before rejection may have other state effects; these two writes are not a claimed complete transaction.",
+  "verification": "Source and fixture inspection only; no new build/runtime tests or product modification.",
+  "mirror_diff_delta": 0
+}

@@ -352,3 +352,13 @@ Superseding owner instruction: decision-required points go to the active
 pending decision backlog with evidence/options/diff impact; continue in list
 order without waiting. Do not implement unapproved alternatives or finalize
 unapproved retention. Direct exact-original restoration remains authorized.
+
+
+Strict backlog admission clarification: a pending owner decision must identify
+concrete evidence that coherent original restoration fails in a supported
+context, the affected contract and the smallest necessary deviation. Missing
+evidence, speculative races and uncertainty are unfinished agent investigation,
+not grounds for an owner decision or completed audit. Where original restoration
+is feasible and verification finds no issue, restore it directly. Requalify all
+existing pending entries by this standard; historical classification is not
+proof of necessity.

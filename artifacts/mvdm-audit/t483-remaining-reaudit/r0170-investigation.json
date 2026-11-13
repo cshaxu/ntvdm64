@@ -1,0 +1,15 @@
+{
+  "id": "T483-R0170",
+  "status": "investigating-not-owner-decision",
+  "added": 10,
+  "removed": 0,
+  "range": "1240-1249",
+  "findings": [
+    "Fixture replaces Sim32 pointer conversion and selector lookup with independent booleans; simulated NULL+invalid combination is not evidence of real production reachability.",
+    "Real Sim32pGetVDMPointer returns NULL for pm && addr==0 or video allocation failure; invalid nonzero selector produces numeric -1.",
+    "c_GetLinAdd failed paging translation returns c_GetPhyAdd(0), not NULL. Normal c_GetPhyAdd returns Start_of_M_area+address; external mappings are another provider requiring final check.",
+    "Added selector test checks table bounds only, not descriptor present/access. It does not universally validate failed mappings."
+  ],
+  "remaining": "Check external physical mapping NULL contract and whether a real selected CPU path reaches zero SS before dispatch; then restore or evidence necessity. No build/test success claimed.",
+  "counter_review": "Do not infer guard necessity from fixture-written expectations. Do not infer universal dead code merely from normal RAM behavior. This is unfinished agent investigation, not qualified backlog entry."
+}

@@ -607,6 +607,8 @@ VOID demIsDebug(void)
 
 VOID demDiskReset (VOID)
 {
+    extern WORD * pFDAccess;	    // defined in SoftPC.
+
 #line 611
     HostFloppyReset();
     HostFdiskReset();

@@ -1,5 +1,5 @@
 {
-  "status": "built-tested-published-git-delivery-pending",
+  "status": "delivered",
   "reviewed_through": "T483-R0085",
   "next_review": "T483-R0086",
   "files": [
@@ -253,5 +253,12 @@
   ],
   "restored_entries": 22,
   "pending_decision_entries": 61,
-  "mirror_diff_delta": -126
+  "mirror_diff_delta": -126,
+  "git": {
+    "commit": "4724a0bf65b61a069014de7670ce4e9717171c60",
+    "remote": "origin",
+    "branch": "main",
+    "remote_head_verified": true,
+    "clean_after_push": true
+  }
 }

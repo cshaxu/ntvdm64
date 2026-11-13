@@ -1,0 +1,12 @@
+{
+  "review_id": "T483-R0010",
+  "status": "restored-pending-delivery",
+  "supersedes": "r0010-r0013-review.json remaining_decision",
+  "initial_review": "Both binding variants previously compiled; no original-restoration failure established.",
+  "counter_review": "NewEnv creation, updates and destruction are local to cmdXformEnvironment using one provider. Env_A is a separate ANSI conversion allocation; NewEnv never escapes. No cross-provider destruction introduced.",
+  "change": "Remove environapi.h and redundant blank/#line reset.",
+  "verification": "First166 original lines match after newline normalization; #error unchanged. New build/runtime pending; batch must verify native RTL linkage and command environment transformation.",
+  "mirror_diff_reduction": 3,
+  "before_sha256": "701246e318fb3b5bdb7cb24b8c1411afcca638dc72105ee7e2c91ea6c5c1e1d7",
+  "after_sha256": "70983be18d1ee9f37950755f11845a46e284bcc4051a8ce983500fe0cdbd7bc3"
+}

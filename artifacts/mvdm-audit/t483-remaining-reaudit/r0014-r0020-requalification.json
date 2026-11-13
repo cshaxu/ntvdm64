@@ -1,0 +1,26 @@
+{
+  "items": [
+    "T483-R0014",
+    "T483-R0015",
+    "T483-R0016",
+    "T483-R0017",
+    "T483-R0018",
+    "T483-R0019",
+    "T483-R0020"
+  ],
+  "status": "investigation-incomplete-not-owner-decision",
+  "supersedes": "r0014-r0020-review.json pending classification",
+  "initial_review": "Original cmdSetInfo stores GetVDMAddr(DS,DX), and cmdCheckBinary later subtracts GetVDMAddr(0,0) to recover guest addresses. Coherent restoration must include registration; a zero global after consumer-only restoration proves nothing.",
+  "counter_review": "GetVDMAddr uses Sim32pGetVDMPointer with pm=FALSE, which forms segment*16+offset but still calls c_GetLinAdd. c_GetLinAdd applies paging when PG is set. Thus pm=FALSE does not establish a fixed host alias. Original host-pointer subtraction requires uniform translation offset across SCS and zero; whether the real SCS pages violate this remains unproved.",
+  "evidence": [
+    "src/mvdm-host/inc/softpc.h:246",
+    "src/mvdm-host/softpc.new/host/src/sim32.c:156-176,246-256",
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:1262-1277",
+    "O:/repos.external/OpenNT/base/mvdm/dos/command/cmdmisc.c:591-603",
+    "test/integration/fixtures/t231_s6_command_check_binary_direct_fixture.c"
+  ],
+  "fixture_limit": "Existing fixture has one contiguous 64KiB array and current composition; it does not prove original registration lifetime or nonuniform SCS mapping failure.",
+  "next_required_evidence": "Identify actual SCS registration and access mapping in supported enhanced-mode command path; determine whether same registration survives mapping change and whether pointer subtraction yields the registered far address. Do not infer failure merely from mapper capability.",
+  "product_changes": false,
+  "fresh_build_or_test": false
+}

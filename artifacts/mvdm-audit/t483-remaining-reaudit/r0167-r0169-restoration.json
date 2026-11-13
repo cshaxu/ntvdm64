@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "id": "T483-R0167",
+      "before_added": 4,
+      "before_removed": 1,
+      "mirror_diff_delta": -5
+    },
+    {
+      "id": "T483-R0169",
+      "before_added": 10,
+      "before_removed": 0,
+      "mirror_diff_delta": -10
+    }
+  ],
+  "evidence": "Original CCPU intx.c invokes host_swint_hook; original DPMI builder uses incremented Limit and old-SP test. Fixture208-228 encodes native PushInt policy, not demonstrated original guest failure. Restore original policy together.",
+  "counter_review": "Restoring only R0169 would leave unincremented native limit from R0167. Both restored. NativePushInt still exists for later mapping check; do not claim all duplicate policies removed.",
+  "validation": "Source-only candidate; fixture reconciliation and batch build/regressions outstanding. No fresh pass claimed.",
+  "before_sha256": "4cd4e4910d55f597a539d916ef36c9a6d61b223efd77429efc59f94d84210b5d",
+  "after_sha256": "d93bcafeb98d610548ded72cbb8feecb49df906f2ef49072b3e4a988261d114e",
+  "mirror_diff_delta": -15,
+  "error_unchanged": true
+}

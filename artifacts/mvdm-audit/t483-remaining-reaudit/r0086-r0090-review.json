@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "id": "T483-R0086",
+      "added": 43,
+      "removed": 0,
+      "decision": "partial-restoration-pending",
+      "finding": "Removed demCopyFileName and restored synchronous original callers. PDB/SFT helpers remain pending ownership decision."
+    },
+    {
+      "id": "T483-R0087",
+      "added": 1,
+      "removed": 0,
+      "decision": "restored",
+      "finding": "Removed unnecessary open pathname stack buffer."
+    },
+    {
+      "id": "T483-R0088",
+      "added": 2,
+      "removed": 1,
+      "decision": "restored",
+      "finding": "Restored original synchronous GetVDMAddr pathname at logical164."
+    },
+    {
+      "id": "T483-R0089",
+      "added": 1,
+      "removed": 0,
+      "decision": "restored",
+      "finding": "Removed unnecessary create pathname stack buffer."
+    },
+    {
+      "id": "T483-R0090",
+      "added": 2,
+      "removed": 1,
+      "decision": "restored",
+      "finding": "Restored original synchronous GetVDMAddr pathname at logical604."
+    }
+  ],
+  "counter_review": "No supported original pathname failure established. No copy survives across guest execution in these functions; native named-pipe conversion/allocation ownership unchanged. Sim32 direct-pointer contract remains selected. Do not infer persistent PDB/SFT pointer equivalence from transient pathname review.",
+  "verification": "Original statements and logical164/604 checked; excluded #error unchanged. Build/runtime pending next batch.",
+  "mirror_diff_delta": -24
+}

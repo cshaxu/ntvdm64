@@ -1,0 +1,62 @@
+{
+  "status": "verified-and-published",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "sha256": "70983be18d1ee9f37950755f11845a46e284bcc4051a8ce983500fe0cdbd7bc3",
+      "excluded_error_directives_unchanged": true,
+      "normalized_diff_before": 2,
+      "normalized_diff_after": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "sha256": "a92f17717151130033e9b53a03e70d83df3684721e952ced0882217653b6c776",
+      "excluded_error_directives_unchanged": true,
+      "normalized_diff_before": 104,
+      "normalized_diff_after": 80
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "d299f6affe341aa818684aa1b883fff4f4c0a4ac23a3b0760a804b62a25483a3",
+      "excluded_error_directives_unchanged": true,
+      "normalized_diff_before": 44,
+      "normalized_diff_after": 42
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "sha256": "41134fdf69f90fe904937f59fe02fac2687ee7e583a572640c68773d66fae1c7",
+      "excluded_error_directives_unchanged": true,
+      "normalized_diff_before": 14,
+      "normalized_diff_after": 12
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "sha256": "e5ac4851282cafcd61b7105d116fed0445495d4f4453300a9d6ac900a39ec172",
+      "excluded_error_directives_unchanged": true,
+      "normalized_diff_before": 418,
+      "normalized_diff_after": 379
+    }
+  ],
+  "source_files": 5,
+  "normalized_mirror_diff_delta": -69,
+  "diff_metric": "difflib opcodes against original; newline normalized; #line directives excluded; comments and blank lines included",
+  "cached_build_exit": 0,
+  "command_fixtures_exit": 0,
+  "dpmi_exit": 0,
+  "full_gates": 16,
+  "full_elapsed_ms": 398824,
+  "skipped": "DOS4GW/NESticle external fixtures absent",
+  "evidence": "p4-verification.json",
+  "package": "47f8520a-0f9c-4387-9f95-52c74f9ce58c",
+  "publication": {
+    "status": "published",
+    "package": "47f8520a-0f9c-4387-9f95-52c74f9ce58c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "git_delivery": "Receipt belongs to the P4 delivery commit; pushed commit identity is verified against origin after commit."
+}

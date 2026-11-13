@@ -40,11 +40,6 @@ Comments:
 #include <softpc.h>
 #include <dpmiint.h>
 #include <intapi.h>
-#if defined(CPU_40_STYLE)
-/* Existing CCPU c_bsic.h entry, using its IU16/IU32 Windows ABI. Including
- * the CPU header here would redefine the DPMI layer's BOOL spelling. */
-extern BOOL __cdecl selector_outside_GDT_LDT(USHORT Selector, ULONG *Address);
-#endif
 
 
 VOID
@@ -528,7 +523,7 @@ Arguments:
 }
 
 #if defined(CPU_40_STYLE)
-static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame, BOOL NativePushInt,
+static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
     PUCHAR *pVdmStackPointer, ULONG *pNewSP);
 #endif
 
@@ -612,7 +607,7 @@ Return Value:
          * selects the return frame from the registered handler flags, not
          * the interrupted application's default width. */
         BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
-        if (!BuildStackFrameWithWidth(3, WideFrame, TRUE, &VdmStackPointer, &NewSP)) {
+        if (!BuildStackFrameWithWidth(3, WideFrame, &VdmStackPointer, &NewSP)) {
 #else
 #line 540
 #error Unsupported excluded original configuration
@@ -698,14 +693,7 @@ Return Value:
 
     DBGTRACE(DPMI_HW_INT, IntNumber, 0, 0);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-229): the kernel-VDM ordering guaranteed that
-     * an installed hardware carrier saw only published vectors.  CCPU can
-     * accept a real IRQ while DOSX is still publishing its table.  Preserve
-     * the original no-hook route in that case; do not construct a frame for
-     * an absent selector. */
-    if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector))
-        return FALSE;
-
+#line 608
     SaveEFLAGS = getEFLAGS();
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
@@ -1151,7 +1139,6 @@ BuildStackFrameWithWidth(
 #line 1059
     ULONG StackUnits,
     BOOL WideFrame,
-    BOOL NativePushInt,
 #else
 #line 1058
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
@@ -1206,10 +1193,8 @@ Notes:
     //
     // 
     // bugbug is this really correct?
-    #if defined(CPU_40_STYLE)
-    if (!NativePushInt)
-    #endif
-        Limit++;
+#line 1109
+    Limit++;
 #line 1110
     if (Ldt[SelIndex].HighWord.Bits.Granularity) {
         Limit = (Limit << 12) | 0xfff;
@@ -1236,16 +1221,6 @@ Notes:
 
     NewSP = VdmSp - StackOffset;
     bExpandDown = (BOOL) (Ldt[SelIndex].HighWord.Bits.Type & 4);
-    #if defined(CPU_40_STYLE)
-    /* NT4 PushInt compares the new stack pointer against SsToLinear's
-     * expanded limit; leave other callers on their original rules. */
-    if (NativePushInt) {
-        if (StackOffset > VdmSp ||
-            (!bExpandDown && NewSP >= Limit) ||
-            (bExpandDown && NewSP <= Limit))
-            return FALSE;
-    } else
-    #endif
 #line 1129
     if ((StackOffset > VdmSp) || 
         (!bExpandDown && (VdmSp > Limit)) ||
@@ -1256,16 +1231,6 @@ Notes:
 
     *pNewSP = NewSP;
     VdmStackPointer = Sim32GetVDMPointer(((ULONG)SegSs)<<16, 1, TRUE);
-    #if defined(CPU_40_STYLE)
-    /* SIM32 can also return NULL for video scratch allocation failure. Only
-     * take the native monitor's selector-failure path when the existing CPU
-     * descriptor owner confirms that the selector cannot be resolved. */
-    if (NativePushInt && VdmStackPointer == NULL) {
-        ULONG StackAddress;
-        if (selector_outside_GDT_LDT(SegSs, &StackAddress))
-            return FALSE;
-    }
-    #endif
 #line 1138
     VdmStackPointer += VdmSp;
     *pVdmStackPointer = VdmStackPointer;
@@ -1277,7 +1242,7 @@ Notes:
 BOOL
 BuildStackFrame(ULONG StackUnits, PUCHAR *pVdmStackPointer, ULONG *pNewSP)
 {
-    return BuildStackFrameWithWidth(StackUnits, Frame32, FALSE, pVdmStackPointer, pNewSP);
+    return BuildStackFrameWithWidth(StackUnits, Frame32, pVdmStackPointer, pNewSP);
 }
 #endif
 

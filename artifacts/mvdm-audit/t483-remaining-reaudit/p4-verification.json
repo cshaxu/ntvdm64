@@ -1,0 +1,49 @@
+{
+  "status": "verified-and-published",
+  "source_mutations_frozen": true,
+  "cached_build": {
+    "result": 0,
+    "owner": "build/t483-s5-p4/cached-owner.json",
+    "log": "build/t483-s5-p4/cached.stdout"
+  },
+  "full": {
+    "result": 0,
+    "gates": 16,
+    "elapsed_ms": 398824,
+    "timings": "build/t483-s5-p4/full/timings.json",
+    "skipped": "dos4gw-nesticle: missing verified external fixtures"
+  },
+  "dpmi_first": {
+    "result": 1,
+    "owner": "build/t483-s5-p4/dpmi-owner.json",
+    "failure": "fixture line150 expects obsolete targets diagnostic count",
+    "attribution": "Both HEAD and current dpmiint.c have no report_dpmi_swint_target call; source observation, not a passing baseline run."
+  },
+  "test_correction": "Remove obsolete diagnostic count assertions only; preserve register, dispatch, memory and stack-image checks. Independent retry running.",
+  "dpmi_retry_owner": "build/t483-s5-p4/dpmi-r2-owner.json",
+  "published": true,
+  "dpmi_r2": {
+    "result": 1,
+    "failure": "Old NT4 PushInt normal-stack acceptance expectation conflicts with restored original CCPU checks."
+  },
+  "dpmi_r3": {
+    "assertions": "All cases printed pass, including negative non-CCPU compilation",
+    "runner_result": 1,
+    "failure": "Checked-in runner leaked LASTEXITCODE from expected negative compilation; fixed with explicit exit0 after all checks."
+  },
+  "test_contract_basis": {
+    "normal": "Original LimitLow0x100 -> effective0x101; old SP0x101 accepted,0x102 rejected",
+    "expand_down": "newSP0x100 rejected,0x101 accepted",
+    "granular": "(0x10+1)<<12 | 0xfff =0x11fff; oldSP0x11fff accepted,0x12000 rejected",
+    "invalid_alias": "Fixture-provided NULL is a host-failure witness, not proof of reachable production guest selector failure."
+  },
+  "dpmi_final": {
+    "result": 0,
+    "owner": "build/t483-s5-p4/dpmi-r4-owner.json",
+    "log": "build/t483-s5-p4/dpmi-r4.stdout",
+    "log_sha256": "3fb6d5eae410b2345b06114a4dfdf3b9910501413d7583efb5bf673ae678c9e7",
+    "coverage": "selected production DPMI object: software interrupt widths, original stack limits, invalid-provider alias boundary, WOW signature modes, fault rollback, interrupt/fault returns, vector14, excluded non-CCPU negative compilation",
+    "limits": "Mock register/SIM32 boundaries; not a real guest mapping or exhaustive DOS/WOW/Win3.x proof."
+  },
+  "git_delivery": "Receipt belongs to the P4 delivery commit; pushed commit identity is verified against origin after commit."
+}

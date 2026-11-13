@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "id": "T483-R0134",
+      "added": 1,
+      "removed": 0,
+      "current_range": "145",
+      "finding": "Guest-readable PM stack projection address",
+      "evidence": "dpmiint.c:398-423 allocates and publishes CX:DX; original dpmiint.c:387-395 publishes &VdmTib.PmStackInfo; guest dxboot.asm:1824 installs SEL_VDMTIB. Host address and emulated guest address are different domains.",
+      "minimum_option": "Preserve required guest ABI while reviewing whether existing storage can replace the extra projection.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0135",
+      "added": 2,
+      "removed": 0,
+      "current_range": "149-150",
+      "finding": "Separate GDT and LDT backing addresses",
+      "evidence": "dpmi32.c:311-339 allocates/copies GDT and clears LDT; modesw.c:86-96 consumes GDT/IDT, dpmiselr.c and fast_bop consume LDT. Actual readers/writers exist; this does not independently prove separate allocated copies minimal.",
+      "minimum_option": "Resolve descriptor ownership and original table lifetime before removing or merging the backing images.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0136",
+      "added": 42,
+      "removed": 0,
+      "current_range": "152-193",
+      "finding": "Decode final DOSX IDT descriptor",
+      "evidence": "Guest dxboot.asm:1954 publishes relocated SEL_IDT; modesw.c:94 consumes helper. Original CCPU c_bsic.c:167 read_descriptor_linear already decodes base/limit via spr_read_dword and may raise #PF. Current helper directly reads IntelBase+shadow, validates present/size and returns FALSE.",
+      "minimum_option": "Compare reuse of original descriptor decoder with current failure contract; no blind substitution or relocation of equal complexity.",
+      "decision": "pending"
+    }
+  ],
+  "counting": "R0134/R0135 count declaration points, surrounding explanatory comments/conditional scaffolding are not assigned to these declaration anchors. R0136 counts the entire current function including comments and blanks (42 lines), historical 40-line anchor is stale. No #line counted.",
+  "counter_review": "Original non-i386 globals are not the original x86 VdmTib publication. Restoring native i386 publication is not automatically appropriate for CCPU. Existing consumers prove reachability, not minimality. Decoder reuse changes address translation and exception behavior and needs explicit analysis, not an assumption of equivalence. Existing synthetic tests were inspected as references only, not newly executed or taken as whole-runtime proof.",
+  "verification": "Source review only. No product edit or new build/test.",
+  "mirror_diff_delta": 0
+}

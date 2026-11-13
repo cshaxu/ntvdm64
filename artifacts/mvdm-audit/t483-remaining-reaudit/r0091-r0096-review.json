@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "T483-R0091",
+      "added": 1,
+      "removed": 0,
+      "finding": "Local SFT pointer supports fresh lookup.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0092",
+      "added": 2,
+      "removed": 3,
+      "finding": "Allocate reads numeric PDB and introduces invalid-address failure.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0093",
+      "added": 2,
+      "removed": 1,
+      "finding": "Allocate resolves SFT; missing SFT mapped to too-many-open-files, classification not justified by evidence.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0094",
+      "added": 2,
+      "removed": 3,
+      "finding": "Release reads numeric PDB; failed read returns FALSE.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0095",
+      "added": 2,
+      "removed": 3,
+      "finding": "Retrieve reads numeric PDB; failed read returns zero.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0096",
+      "added": 3,
+      "removed": 1,
+      "finding": "Retrieve resolves SFT; missing pointer returns zero.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "Original VDD contract still returns direct SFT/JFT pointers; fresh head lookup does not prove or repair whole lifetime. Original persistent PDB/SFT failure not established. Restore coherently with registration/definitions if approved; do not restore isolated consumers or add error special cases.",
+  "verification": "Original/current VDDAllocateDosHandle, VDDReleaseDosHandle, VDDRetrieveNtHandle compared; source only. No source/#line/#error changes.",
+  "mirror_diff_delta": 0
+}

@@ -40,6 +40,8 @@ BYTE demGetDpbI(BYTE Drive, DPB UNALIGNED *pDpb);
 
 
 UCHAR PhysicalDriveTypes[26]={0};
+
+extern PDOSSF pSFTHead;
 #line 42
 
 USHORT  nDrives = 0;

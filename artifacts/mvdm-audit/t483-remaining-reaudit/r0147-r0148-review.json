@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": "T483-R0147",
+      "added": 5,
+      "removed": 0,
+      "current_range": "43-47",
+      "finding": "CCPU selector validity declaration",
+      "evidence": "dpmiint.c:1263-1266 calls selector_outside_GDT_LDT for NativePushInt with NULL mapped stack. c_bsic.h:128-134 declares original helper. Header BOOL collision comment not independently compile-verified this round.",
+      "minimum_option": "Resolve with stack-frame adaptation; consider shared authoritative declaration without duplicating a second check.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0148",
+      "added": 3,
+      "removed": 1,
+      "current_range": "228-230",
+      "finding": "Correct DWORD IRET EFLAGS slot",
+      "evidence": "Original dpmiint.c:218 subtracts12;225 writes EIP at0;229 writes CS at4;232 writes flags at4 again. Current writes flags at8. PDWORD16 is DWORD UNALIGNED* in mvdm.h:44. This directly proves overwrite on this branch independent of speculation.",
+      "minimum_option": "Recommend retaining +8 correction; optional removal of two explanatory comment lines would reduce normalized diff from4 to2 lines, subject to owner disposition.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "R0148 defect follows directly from adjacent original DWORD stores into a 12-byte frame. This establishes source-level necessity, not an observed runtime reproduction or proof all exception paths are covered. R0147 current consumer alone does not establish original path defective; no implicit-declaration restoration.",
+  "verification": "Source/type/call-site inspection only; no new compile or runtime test; no product changes.",
+  "mirror_diff_delta": 0
+}

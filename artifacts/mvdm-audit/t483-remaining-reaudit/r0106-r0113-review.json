@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": "T483-R0106",
+      "added": 2,
+      "removed": 0,
+      "finding": "Write lease declarations depend on allocated acquisition.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0107",
+      "added": 3,
+      "removed": 1,
+      "finding": "ULONG to LONG high-offset temporary and explanatory comment; ABI necessity pending.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0108",
+      "added": 1,
+      "removed": 2,
+      "finding": "Seek failure routed to shared lease cleanup.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0109",
+      "added": 1,
+      "removed": 2,
+      "finding": "SetEndOfFile failure routed to shared lease cleanup.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0110",
+      "added": 1,
+      "removed": 0,
+      "finding": "Zero-byte truncation success frees allocated lease.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0111",
+      "added": 1,
+      "removed": 0,
+      "finding": "Disk-full success-with-zero path frees lease.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0112",
+      "added": 1,
+      "removed": 0,
+      "finding": "Failure frees lease before demClientError; error preservation not verified.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0113",
+      "added": 1,
+      "removed": 0,
+      "finding": "Successful write frees snapshot before returning byte count.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "All cleanup depends on current acquired snapshot, not proof original pointer must change. CX=0 acquires an allocated buffer before truncation, adding failure conditions absent from original. Named-pipe wrapper uses overlapped I/O with explicit wait; full lifetime comparison required, not a claim all asynchronous buffers are safe. Original count/disk-full conventions remain unchanged.",
+  "verification": "Original/current demWrite, lease acquisition and VrWriteNamedPipe wait locations inspected. No new runtime evidence or source edits.",
+  "mirror_diff_delta": 0
+}

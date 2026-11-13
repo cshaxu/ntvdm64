@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "id": "T483-R0137",
+      "added": 5,
+      "removed": 0,
+      "current_range": "25-29",
+      "finding": "CCPU include and local accessor declarations",
+      "evidence": "cpu4gen.h declares c_setLDT_BASE_LIMIT as IBOOL; c_reg.c:1686 implements VOID. Local extern int repeats header mismatch; caller ignores result. Existing adaptation calls require declarations, not proof original file must carry handwritten declarations.",
+      "minimum_option": "Unify accessor declarations with actual implementation as a separately approved minimal boundary correction; no speculative return-value behavior.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0138",
+      "added": 27,
+      "removed": 0,
+      "current_range": "308-334",
+      "finding": "Allocate separate guest GDT/LDT shadows and initialize once",
+      "evidence": "DpmiInit receives original DOSX table in Ldt; allocates two LDT_SIZE arrays, copies GDT and zeroes LDT. Failure clears selector then returns without guest failure result. Reinitialization skips refresh when both addresses nonzero. Original routine only captures Ldt/IntelBase.",
+      "minimum_option": "Resolve table ownership/lifetime and coherent original reuse before retaining allocation/cache; verify repeated initialization and allocation failure.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0139",
+      "added": 5,
+      "removed": 0,
+      "current_range": "335-339",
+      "finding": "Publish CCPU LDT selector/base/limit",
+      "evidence": "c_reg.c:1674-1697 setters directly assign LDT state. Current caller uses selector 4 and allocated LDT image. Removing publication alone breaks current consumer connection; this does not prove entire shadow design minimal.",
+      "minimum_option": "Review together with R0135/R0138; retain no standalone second publication route.",
+      "decision": "pending"
+    }
+  ],
+  "counting": "Current contiguous adaptation ranges including their comments; excludes #if/#endif and #line scaffolding. Historical anchors were relocated, not used as current counts.",
+  "counter_review": "Ignoring the setter return does not justify inconsistent declarations, but correcting a declaration is not exact original restoration. Table publication is a real CPU-state dependency; copying/caching and its failure behavior are separate design decisions. Repeated initialization and guest-visible allocation failure have not been demonstrated correct or defective at runtime.",
+  "verification": "Source review only; no product edits, new build or runtime tests.",
+  "mirror_diff_delta": 0
+}

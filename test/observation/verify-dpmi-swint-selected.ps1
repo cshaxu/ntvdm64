@@ -41,8 +41,8 @@ if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_HAND
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2')) {
     throw 'Selected DPMI stack-limit fixture failed'
 }
-if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_NULL_MAPPING_OK fallback=1 state=unchanged')) {
-    throw 'Selected DPMI null-mapping fixture failed'
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_INVALID_ALIAS_OK host_failure=1 no_dispatch=1')) {
+    throw 'Selected DPMI invalid-provider alias fixture failed'
 }
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_NONSELECTOR_NULL_OK prior_failure=preserved')) {
     throw 'Selected DPMI non-selector null-mapping fixture failed'
@@ -75,3 +75,6 @@ if (!$nonCcpuExit -or !(Select-String -LiteralPath "$out/compile-nonccpu.log" -S
 Write-Output 'DPMI_NON_CCPU_PROFILE_REJECTED'
 @($source, $fixture, "$out/dpmiint.obj", "$out/fixture.exe", "$out/fixture.map") |
     Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$out/inputs.csv"
+
+# The deliberate rejected compilation above must not leak its exit code.
+exit 0

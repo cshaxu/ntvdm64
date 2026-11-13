@@ -1,0 +1,33 @@
+{
+  "items": [
+    {
+      "id": "T483-R0149",
+      "added": 1,
+      "removed": 0,
+      "current_range": "386",
+      "finding": "CPU40 projection selection",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0150",
+      "added": 3,
+      "removed": 0,
+      "current_range": "388-390",
+      "finding": "Projection allocation locals",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0151",
+      "added": 37,
+      "removed": 0,
+      "current_range": "387;391-426",
+      "finding": "Guest PM-stack projection allocation, initialization and publication",
+      "decision": "pending"
+    }
+  ],
+  "evidence": "Original dpmiint.c:387-396 native i386 publication is now separately #error-excluded at current429-431. New CCPU group386-426 is additive. dxboot.asm:1822-1824 consumes CX:DX as SEL_VDMTIB; dxintr.asm:1631 onward writes lock count/save stack through it. Current dpmiint.c:453-485 separately operates LockedPMStackCount/PMLockOrig globals. dpmimemr.c:69-73 allocates from ExtMemSA.",
+  "counting": "Current new CPU40 group physical386-426 totals41 lines. R0149 owns opening guard; R0150 owns3 locals; R0151 owns remaining37 lines including braces/comments/blanks/closing guard. Excluded original i386 code and #line not counted as these semantic removals. Historical replacement counts are superseded, not silently reused.",
+  "counter_review": "Native original and selected software-emulation address spaces differ. Guest and host lock-state writes coexist but no demonstrated interleaving or ownership violation is claimed. Failure currently reports malloc error and terminates; repeated initialization zeroes guest state. Necessity of those exact semantics needs coupled review. No guest modification or second state machine introduced.",
+  "verification": "Source comparison only; no new compile/runtime evidence.",
+  "mirror_diff_delta": 0
+}

@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": "T483-R0140",
+      "added": 3,
+      "removed": 0,
+      "current_range": "116-118",
+      "finding": "Shared declarations for PM stack/GDT/LDT projection addresses",
+      "evidence": "Definitions in data.c; actual writers dpmiint.c/dpmi32.c and consumers modesw.c/dpmiselr.c. Original dpmi32p.h has none.",
+      "minimum_option": "Resolve with R0134/R0135; do not remove declarations while retaining selected consumers.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0141",
+      "added": 5,
+      "removed": 0,
+      "current_range": "120-124",
+      "finding": "Final DOSX IDT descriptor accessor declaration",
+      "evidence": "Matches definition data.c:152-193 and modesw.c:94 call. Existing CCPU decoder alternative has different fault semantics.",
+      "minimum_option": "Resolve with R0136; no standalone header relocation counted as simplification.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0142",
+      "added": 6,
+      "removed": 0,
+      "current_range": "146-151",
+      "finding": "WOW LDT publication declaration",
+      "evidence": "Definition dpmiselr.c:77 onward; dpmiint.c:578 calls with EBX/ECX/EDX and handles NTSTATUS; mvdm_softpc_fast_bop.c:19 repeats extern and calls at72. Original header proceeds directly to DpmiGetFastBopEntry.",
+      "minimum_option": "Resolve original kernel-service boundary and declaration ownership together; duplicated extern is a unification candidate, not justification to remove required prototype.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "All declared objects/functions have product consumers, so none qualifies as an unused declaration restoration. Current dependency is not proof original semantics defective. Duplicate autonomous extern should be considered with the single shared boundary, not used to manufacture mirror diff reduction by moving code.",
+  "verification": "Original/current source and definitions/callers inspected; no new build/test, no source edits.",
+  "mirror_diff_delta": 0
+}

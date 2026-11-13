@@ -1,0 +1,27 @@
+{
+  "items": [
+    {
+      "id": "T483-R0152",
+      "added": 5,
+      "removed": 0,
+      "current_range": "530-534",
+      "finding": "Width-aware stack-builder forward declaration",
+      "evidence": "Actual calls dpmiint.c:615 and1280; definition1150. Original BuildStackFrame lacks explicit width/native PushInt arguments.",
+      "minimum_option": "Review with builder implementation; no declaration-only deletion or second path.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0153",
+      "added": 20,
+      "removed": 0,
+      "current_range": "564-583",
+      "finding": "WOW INT2A LDT service interception",
+      "evidence": "Original guest wow16/kernel31/3protect.asm:3994-4006 sets EAX=EBP=f0f0f0f1 and EBX/ECX/EDX descriptor tuple. Original OpenNT base/ntos/ke/x86/trap.asm:1682-1719 recognizes signature and invokes NtSetLdtEntries, returning EAX and CF. Current call uses DpmiSetWowLdtEntry and NT_SUCCESS. Original CF test is exact zero; positive status reachability not established.",
+      "minimum_option": "Preserve actual guest contract; evaluate minimal shared LDT entry service and exact status semantics with R0142; owner decision required.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "INT2A service has original caller and original kernel implementation evidence. Modern software carrier still requires independent semantics review. Native exact-zero CF rule differs from NT_SUCCESS; no reachable positive-status failure claimed. Width helper is consumed but no proof it must remain separate.",
+  "verification": "Source inspection only; no runtime/build tests or product modification.",
+  "mirror_diff_delta": 0
+}

@@ -63,3 +63,21 @@ against the pinned original (state treatment of #line/format), cause and problem
 restoration feasibility and disposition, then cumulative reviewed, fully restored,
 pending-decision and unreviewed counts. Approved retain is separate; partial
 restoration remains pending until the whole point is resolved.
+
+## Owner correction: strict decision admission
+
+A pending owner decision requires concrete evidence that removing the difference
+and coherently restoring the original would break an actual supported contract.
+A current caller dependency, an unverified comment, missing research, or inability
+to prove safety is not sufficient admission evidence. Technical uncertainty stays
+with the agent as unfinished investigation, not an owner decision. When original
+restoration is feasible and verification reveals no issue, restore it directly.
+Only evidenced necessary deviations and their minimal design tradeoffs enter the
+owner decision backlog. Existing backlog entries must be requalified against this
+standard; their historical reviewed count is not a count of qualified conclusions.
+
+## Superseding per-file verification cadence
+
+After completing the related edits in a file, run cached full compilation and
+tests before modifying the next file. This replaces the ten-file build threshold.
+The pre-existing five-file batch is verified before any further source changes.

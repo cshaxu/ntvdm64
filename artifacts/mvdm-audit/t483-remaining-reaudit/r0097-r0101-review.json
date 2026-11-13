@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "id": "T483-R0097",
+      "added": 0,
+      "removed": 2,
+      "decision": "restored",
+      "finding": "Original unused extern plus original adjacent blank restored; #line42 retained."
+    },
+    {
+      "id": "T483-R0098",
+      "added": 1,
+      "removed": 1,
+      "decision": "pending",
+      "finding": "Original FileSystemType NUL padding writes VolumeID instead; FAT field would retain NULs while modifying volume label. Current one-line destination correction addresses explicit source defect; no fresh runtime test."
+    },
+    {
+      "id": "T483-R0099",
+      "added": 0,
+      "removed": 0,
+      "historical_added": 1,
+      "historical_removed": 1,
+      "decision": "already-restored-delivered",
+      "finding": "Original assignment at logical737 restored as R0072 dependency and delivered in P3; exact statement and logical line rechecked."
+    },
+    {
+      "id": "T483-R0100",
+      "added": 0,
+      "removed": 0,
+      "historical_added": 1,
+      "historical_removed": 1,
+      "decision": "already-restored-delivered",
+      "finding": "Original assignment at logical989 restored as R0072 dependency and delivered in P3; exact statement and logical line rechecked."
+    },
+    {
+      "id": "T483-R0101",
+      "added": 0,
+      "removed": 0,
+      "historical_added": 1,
+      "historical_removed": 1,
+      "decision": "already-restored-delivered",
+      "finding": "Original assignment at logical1006 restored as R0072 dependency and delivered in P3; exact statement and logical line rechecked."
+    }
+  ],
+  "mirror_diff_delta": -2,
+  "verification": "Source comparison; unused extern no object/reference. Original DPB statements at logical737/989/1006 match; existing #error preserved. R0097 pending next build; three DPB dependencies already P3-tested."
+}

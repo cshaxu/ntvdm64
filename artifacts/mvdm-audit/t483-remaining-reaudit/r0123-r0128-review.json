@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "T483-R0123",
+      "added": 1,
+      "removed": 0,
+      "finding": "FindNext DTA lease declaration.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0124",
+      "added": 6,
+      "removed": 2,
+      "finding": "FindNext snapshot acquisition replaces direct pointer and adds invalid-address return.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0125",
+      "added": 3,
+      "removed": 0,
+      "finding": "Commit failure overrides search result.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0126",
+      "added": 11,
+      "removed": 0,
+      "finding": "Reclamation clears terminal query status when unconsumed buffer remains; production trigger/minimal repair not demonstrated.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0127",
+      "added": 1,
+      "removed": 0,
+      "finding": "Capture first unconsumed successor before freeing buffer.",
+      "decision": "pending"
+    },
+    {
+      "id": "T483-R0128",
+      "added": 9,
+      "removed": 0,
+      "finding": "Missing-anchor exhaustion rescans using saved successor hint.",
+      "decision": "pending"
+    }
+  ],
+  "counter_review": "LastQueryStatus assignment, consumption and FileFindLast buffered remainder reviewed. Terminal underlying enumeration and buffered remainder are distinct; necessity/trigger and minimum original repair remain unresolved. Snapshot commit can replace original search result. Dependencies alone not retention proof.",
+  "verification": "Source-only original/current comparison; no fresh runtime reproduction and no product edits.",
+  "mirror_diff_delta": 0
+}
