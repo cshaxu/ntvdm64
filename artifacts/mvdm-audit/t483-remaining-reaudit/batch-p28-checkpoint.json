@@ -1,0 +1,120 @@
+{
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "sha256": "1a44a3a9de28ce28f05a42be0540f21610c57453c901c977711310c87692576f"
+    }
+  ],
+  "mirror_diff_delta": -4,
+  "status": "Verified delivery receipt; commit/push follows",
+  "package": "a29c87ae-b8d1-4323-95ec-6735c1a7ee7b",
+  "published_images": 11,
+  "destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "hash_verified": true,
+  "cached_full_exit": 0,
+  "boundary_and_governance_exit": 0,
+  "runtime": "P27 Full16 reused: all11 normalized images identical; no fresh runtime pass claimed.",
+  "runtime_reused": true,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1335,
+      "CleanupMs": 464,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 242,
+      "CleanupMs": 376,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66112,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 47961,
+      "CleanupMs": 517,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 52158,
+      "CleanupMs": 453,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 15063,
+      "CleanupMs": 490,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10832,
+      "CleanupMs": 407,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 68098,
+      "CleanupMs": 544,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12671,
+      "CleanupMs": 451,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28456,
+      "CleanupMs": 431,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30773,
+      "CleanupMs": 465,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4636,
+      "CleanupMs": 399,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7829,
+      "CleanupMs": 542,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10454,
+      "CleanupMs": 412,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3864,
+      "CleanupMs": 433,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6217,
+      "CleanupMs": 459,
+      "Passed": true
+    }
+  ]
+}

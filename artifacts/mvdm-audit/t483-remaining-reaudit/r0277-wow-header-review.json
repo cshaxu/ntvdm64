@@ -1,0 +1,37 @@
+{
+  "id": "T483-R0277",
+  "path": "src/mvdm-host/inc/wow.h",
+  "before": {
+    "added": 10,
+    "deleted": 21,
+    "total": 31
+  },
+  "after": {
+    "added": 7,
+    "deleted": 20,
+    "total": 27
+  },
+  "delta": -4,
+  "initial_review": "Old evidence proved only that header body was suppressed, not that the physical include was unsafe.",
+  "counter_review": "The selected SDK WowNT32.h encloses its entire content in the same _WOWNT32_ guard. precomp.h defines it before wow32.h -> wow.h. Restoring the original include introduces no selected declarations; no shim or new dependency file is needed.",
+  "proof_layers": {
+    "responsibility": "Keep the selected original WOW32 declaration ABI, without conflicting modern SDK declarations.",
+    "original_limitation": "None established for the include under supported guarded context.",
+    "specific_difference": "The synthetic include-replacement error guard is unnecessary. Restore exact original include. Existing original excluded branch error bodies remain unchanged."
+  },
+  "sources": [
+    "src/mvdm-host/wow32/precomp.h:24-26,50",
+    "src/mvdm-host/wow32/wow32.h:52",
+    "C:/Program Files (x86)/Windows Kits/10/Include/10.0.22621.0/um/WowNT32.h:17",
+    "artifacts/mvdm-audit/s13-r1412-wownt32-removal.json"
+  ],
+  "verification": "Cached full build, boundary and publication/hash passed. P27 Full16 reused: all11 normalized images identical; no fresh runtime pass claimed.",
+  "line_check": {
+    "matched": 909,
+    "mismatches": []
+  },
+  "limits": [
+    "Removal affects a synthetic guard around an unconditional original include, not an excluded original conditional body.",
+    "Do not infer that modern SDK header declarations may be enabled for original WOW32."
+  ]
+}

@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-283 points have a prior or current review record:135 restored/verified/published,
+284 points have a prior or current review record:136 restored/verified/published,
 0 local restorations pending verification,2 approved retain,146 qualified pending
-decisions and0 prior classifications requiring requalification. Another2437
-points are unreviewed. Sequential file disposition is42/365;323 remain.
+decisions and0 prior classifications requiring requalification. Another2436
+points are unreviewed. Sequential file disposition is43/365;322 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P27 package `d171cff3-1971-4421-9d63-c0123652a574` is published to
+P28 package `a29c87ae-b8d1-4323-95ec-6735c1a7ee7b` is published to
 assets/release and O:/winnt/system32; all11 image hashes match.
-Cached full build and focused contracts passed. P27 Full16 final package passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p27-checkpoint.json).
+Cached full build and WOW boundary passed. P27 Full16 reused: all11 normalized images identical; no fresh runtime pass claimed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p28-checkpoint.json).
 No original guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,12 +230,11 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P27 Verified Batch
+## P28 Verified Batch
 
-P26 delivered/pushed4b2fad830. P27 vrnmpipe.h restores result-pointer types;
-one staging-owner field remains pending approval. Mirror diff net-11;
-excluded#error unchanged;147 original line matches pass.
-Cached full build, publication11x2/hash, WOW boundary and governance pass.
-P27 final-source Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p27-checkpoint.json).
-This receipt accompanies P27 delivery; next R0277.
+R0277 original include restored; mirror diff net-4. Original excluded#error
+bodies preserved;909 matched original logical lines pass. Cached full build,
+11-image publication to both destinations, boundary and governance pass.
+P27 Full16 reused: all11 normalized images identical; no fresh runtime pass claimed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p28-checkpoint.json).
+Next R0278; S5 remains active.

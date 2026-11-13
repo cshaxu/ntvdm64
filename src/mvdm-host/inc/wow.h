@@ -24,11 +24,7 @@
 #ifndef NOEXTERNS
 #include <softpc.h>
 #endif
-#ifndef _WOWNT32_
-#line 27
-#error Unsupported unguarded WOW32 public declaration profile
-#endif
-#line 28
+#include <wownt32.h>
 
 #line 29
 #ifdef i386
