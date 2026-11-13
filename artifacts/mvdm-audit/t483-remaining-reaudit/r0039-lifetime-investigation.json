@@ -1,0 +1,55 @@
+{
+  "point": "T483-R0039",
+  "state": "investigation-incomplete-not-owner-decision",
+  "scope": "cmdmisc.c added stddef and command guest-state include; resolve with scalar producer and consumers",
+  "findings": [
+    {
+      "claim": "Memory epoch expiry by itself proves original aliases unsafe during normal execution",
+      "result": "not established",
+      "evidence": "Production mvdm_standalone_worker.c begins memory registration once at worker startup and ends it during worker cleanup after producer and WOW retirement. The execution_run_until_return alternative is explicitly a bounded fixture bridge, not evidence of recurring production epochs."
+    },
+    {
+      "claim": "Current header dependency proves adaptation necessary",
+      "result": "rejected",
+      "evidence": "stddef supplies offsetof for new scalar registration only. cmdmisc consumers and cmdpif/DEM/FDC consumers use the new accessor by local choice; this is not an independent original failure."
+    },
+    {
+      "claim": "GetVDMAddr returns an alias tied to a physical mapping",
+      "result": "source verified",
+      "evidence": "softpc.h -> Sim32pGetVDMPointerWithLinear -> NtGetPtrToLinAddrByte -> c_GetLinAdd -> c_GetPhyAdd; c_GetLinAdd translates when paging is enabled. Mapping capability alone does not prove these DOSDATA scalars are remapped."
+    },
+    {
+      "claim": "Scalar registration points originate in original guest DOSDATA",
+      "result": "source verified read-only",
+      "evidence": "msinit.asm loads DS:DX SCS_COMSPEC, DS:BX SCS_Is_Dos_Binary, DS:CX SCS_FDACCESS before SVC_CMDSETINFO. lmstub.asm defines the fields in DOSDATA."
+    }
+  ],
+  "remaining_question": "Determine actual mapping/instance contract of these registered DOSDATA scalar locations across selected guest transitions and asynchronous FDC accesses; distinguish shared kernel data from per-VM buffers. No arbitrary paging counterexample admitted as a reproduced product failure.",
+  "counter_review": "Do not remove registration alone: nt_fdisk/nt_rflop/demmisc/cmdpif still consume it. No production or guest edits, no build required. Do not mark file complete.",
+  "sources": [
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "sha256": "4bb85e0a70526b1bbf67ac5ac4531afb1c649efcda65d05ade6280029b18c75b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "sha256": "b9cebb194bb17cfea513011a2ed6f576bba3702f7d38478676528c46c22d2572"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "1803b505e65ffccaf5af90d1dadb5a8de23518c28b52bf77de852b5683385b96"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+      "sha256": "4e42dc1e6d8950d8f73d95df5dcef4b1f916b5b61c4d4e01b25be8090a061780"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "sha256": "3c4295ec2bc61732be8fac1623336292eb412995cc161b51e900a18f3e550eea"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/doskrnl/dos/msinit.asm",
+      "sha256": "5b0f2e3e9fe9c083b8cf03e4307e9a90bddacddad22176062c59a314b8c46620"
+    }
+  ]
+}

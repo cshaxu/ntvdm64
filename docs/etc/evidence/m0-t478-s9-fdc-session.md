@@ -1,4 +1,4 @@
-# T478 S9 — original FDC access to COMMAND registration
+# T478 S9 - original FDC access to COMMAND registration
 
 ## Scope and source finding
 
@@ -40,8 +40,8 @@ are outside this finding.
 
 ## Verification
 
-The focused [actual-object test](../../../test/integration/fdc_command_session_test.c)
-and [runner](../../../test/integration/fdc_command_session_test.cmd) link the
+The focused actual-object test `test/integration/fdc_command_session_test.c`
+and runner `test/integration/fdc_command_session_test.cmd` link the
 current session, COMMAND, numeric-location and real thread bridge objects.
 43 checks pass: shared bound-worker access; separate sessions; no binding;
 registration and memory epochs; an outstanding CPU lease; modular decrement;
@@ -79,3 +79,7 @@ provider retirement remains refusal, not a new device recovery policy.
 
 Only this worktree assets/release is an authorized publication destination;
 O:/winnt and remote push are excluded.
+
+T483 S5 P7 supersedes this adapter-specific fixture: original pFDAccess
+producer/consumers are restored and the numeric-registration-only test is
+retired. The paths above identify historical inputs, not current entrypoints.

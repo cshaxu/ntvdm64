@@ -1,0 +1,381 @@
+{
+  "status": "verified and published P7, prepared for commit and push",
+  "source_head": "e7c728e079e56bb82468bdb7b69e41463b9fa551",
+  "source_files": 13,
+  "files": [
+    {
+      "path": "src/mvdm-host/README.md",
+      "sha256": "7b8a40f56968731ac2806da47c37eabee47cb00774efea9e2639658441f64ab7"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "dbda6b348870d058edfdff547b0a876e952acd436b3b43e1c8257bed63eb261c"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "sha256": "4b8e9992445025633f5aa49139c0c48705371c9d29ea207bf26e97d555b87e12"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+      "sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "sha256": "3385f81331b5c9c0aba64866f0ee122cb6306926cfd0e3b474c6885f0ba658a8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "sha256": "6e467410266adbf80c24289d9b930b4fdb9454b906a2cffaee7fc234864bf5b3"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "sha256": "27795331d87db89b6ad3f5af8fc9dc2b892013e1120cb61d4e23e9bdb9ed394c"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/README.md",
+      "sha256": "2d55675d538b0d3cf8a7e23f478a56ad9b5dd88cd4d57f1227a42827508b3940"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c",
+      "sha256": "40262e1593c0bb4fe3bf9561e77721049d635b5a1ba7018b8c39c16204c70805"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/host-continuation.c",
+      "sha256": "aff4f994b3b5c908686a63cf3ab86e66682977238a135b4ca51469b680ff12c3"
+    },
+    {
+      "path": "test/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+      "sha256": "0789f44a7902f4c582ce41e152f713ccc3cc259bc34508ecbdf2e177a6ca1af5"
+    },
+    {
+      "path": "tools/build/Generate-T420S17OemUniNinja.mjs",
+      "sha256": "ce3cd3199692b27bab36c5962a2db72a3c121c534c5c18d9e4f0a8a739feb029"
+    }
+  ],
+  "deleted_inputs": [
+    "src/ntvdm-exe/command/include/mvdm_command_guest_state.h",
+    "test/integration/fdc_command_session_test.c",
+    "test/integration/fdc_command_session_test.cmd",
+    "test/mvdm/oemuni/oemuni_pif_environment_fixture.c"
+  ],
+  "verification": {
+    "cached": 0,
+    "stage": 0,
+    "publish": 0,
+    "focused": 0,
+    "full": 0,
+    "pif": 0,
+    "directory-tail": 0,
+    "pipeline": 0,
+    "diagnostic_compile_and_generator_syntax": 0,
+    "governance": 0
+  },
+  "publication": {
+    "status": "published",
+    "package": "4fb1cf41-a84f-4e73-b38b-d6a752c4588e",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "attempts": [
+    {
+      "root": "build/t483-s5-p7",
+      "result": "build failed LNK1120 unresolved pFDAccess",
+      "cause": "Original definition insertion used a CRLF-sensitive replacement that did not match mixed line endings. Other scalar consumers restored, definition missing.",
+      "repair": "Inserted exact original WORD *pFDAccess=0 definition with uniqueness assertion. No new semantic workaround.",
+      "published": false
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 359802,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5889,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1502,
+        "CleanupMs": 657,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 260,
+        "CleanupMs": 598,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 68078,
+        "CleanupMs": 619,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48758,
+        "CleanupMs": 526,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44884,
+        "CleanupMs": 486,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14958,
+        "CleanupMs": 540,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12447,
+        "CleanupMs": 478,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 46359,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12721,
+        "CleanupMs": 519,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28835,
+        "CleanupMs": 525,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30744,
+        "CleanupMs": 647,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3290,
+        "CleanupMs": 476,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8685,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10554,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4879,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7077,
+        "CleanupMs": 461,
+        "Passed": true
+      }
+    ]
+  },
+  "limits": [
+    "DOS4GW/NESticle skipped: external fixtures absent.",
+    "Diagnostic host-continuation runtime not exercised by Full; compile tracked separately.",
+    "Generator syntax and changed tail extraction checked separately; complete OEM generator suite not claimed."
+  ],
+  "final_file_hashes": [
+    {
+      "path": "src/mvdm-host/README.md",
+      "sha256": "0a3c6904257d2a2f11139f9dddb8a0ab26a05b6ab72237666bbb378d6589921e"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "dbda6b348870d058edfdff547b0a876e952acd436b3b43e1c8257bed63eb261c"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "sha256": "4b8e9992445025633f5aa49139c0c48705371c9d29ea207bf26e97d555b87e12"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+      "sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "sha256": "3385f81331b5c9c0aba64866f0ee122cb6306926cfd0e3b474c6885f0ba658a8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "sha256": "6e467410266adbf80c24289d9b930b4fdb9454b906a2cffaee7fc234864bf5b3"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "sha256": "27795331d87db89b6ad3f5af8fc9dc2b892013e1120cb61d4e23e9bdb9ed394c"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/README.md",
+      "sha256": "2d55675d538b0d3cf8a7e23f478a56ad9b5dd88cd4d57f1227a42827508b3940"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c",
+      "sha256": "40262e1593c0bb4fe3bf9561e77721049d635b5a1ba7018b8c39c16204c70805"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/host-continuation.c",
+      "sha256": "aff4f994b3b5c908686a63cf3ab86e66682977238a135b4ca51469b680ff12c3"
+    },
+    {
+      "path": "test/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+      "sha256": "0789f44a7902f4c582ce41e152f713ccc3cc259bc34508ecbdf2e177a6ca1af5"
+    },
+    {
+      "path": "tools/build/Generate-T420S17OemUniNinja.mjs",
+      "sha256": "3c8d1d65f766709c7ee4b6242cded19b02aea2fc32f026cb52d6b11a2a3b48c4"
+    }
+  ],
+  "identity_note": "files records frozen build inputs; final_file_hashes includes later documentation and test-generator boundary corrections. Production sources unchanged after successful build.",
+  "final_publication_hash_checks": [
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "d7ce640cb0ee0eb3e526b644d419f6c7ba4aa8e80249ca0a45b8e43d4e06af77"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VCDEX.DLL",
+      "sha256": "d7ce640cb0ee0eb3e526b644d419f6c7ba4aa8e80249ca0a45b8e43d4e06af77"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "400bd339f8e8e4c227db1a64f513428307aae358f5a3fd98dc2ed68e6a3a8bb0"
+    },
+    {
+      "path": "O:\\winnt\\system32\\run16.exe",
+      "sha256": "400bd339f8e8e4c227db1a64f513428307aae358f5a3fd98dc2ed68e6a3a8bb0"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "28716a87c4b2254cceb614f92a9738c8f31f03dbf9b4e9974ce7cc41c03606fb"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntsrv.exe",
+      "sha256": "28716a87c4b2254cceb614f92a9738c8f31f03dbf9b4e9974ce7cc41c03606fb"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "ee84b342c8d52a1793232a00570f4a0283a7ef18afaeeaf99ff6b7bc318749fb"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntcon.exe",
+      "sha256": "ee84b342c8d52a1793232a00570f4a0283a7ef18afaeeaf99ff6b7bc318749fb"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "978ce54787b7f07e2cc6786c1b949bdb9c3fa5c044df89cd3f2b40ed45697e58"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvdm.exe",
+      "sha256": "978ce54787b7f07e2cc6786c1b949bdb9c3fa5c044df89cd3f2b40ed45697e58"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "408aa40c3c4941dadee1c85b41e5ea0c168290ce295b6582682fd06224f1a707"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvwm.exe",
+      "sha256": "408aa40c3c4941dadee1c85b41e5ea0c168290ce295b6582682fd06224f1a707"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "c692c9e5f65689a55508d7212129e6fe0274e5a710fd82d19ff32792a43cbcf6"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntmon.exe",
+      "sha256": "c692c9e5f65689a55508d7212129e6fe0274e5a710fd82d19ff32792a43cbcf6"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "49bc921be100286d801a44ae90bc859ede018297113d095dc611d04f5af763b1"
+    },
+    {
+      "path": "O:\\winnt\\system32\\WOW32.DLL",
+      "sha256": "49bc921be100286d801a44ae90bc859ede018297113d095dc611d04f5af763b1"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "d340bd8658bc0d38659b56c5c6330d4ee4b75be08fa94e4486575d02b8cda3c3"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+      "sha256": "d340bd8658bc0d38659b56c5c6330d4ee4b75be08fa94e4486575d02b8cda3c3"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "8f1be4861a20e8135bdd126c74ce6fc93be68ee5ea686af0e5755d6c94b8bc08"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook32.dll",
+      "sha256": "8f1be4861a20e8135bdd126c74ce6fc93be68ee5ea686af0e5755d6c94b8bc08"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "7a1e515079cfc0432c37b7b9fbe72901eaa9c0a2cf2621cf319a57cb1eba97cf"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook64.dll",
+      "sha256": "7a1e515079cfc0432c37b7b9fbe72901eaa9c0a2cf2621cf319a57cb1eba97cf"
+    }
+  ],
+  "restored_verified_published_points": [
+    "T483-R0039",
+    "T483-R0041",
+    "T483-R0043",
+    "T483-R0044",
+    "T483-R0045",
+    "T483-R0046",
+    "T483-R0047",
+    "T483-R0048",
+    "T483-R0049",
+    "T483-R0053",
+    "T483-R0056",
+    "T483-R0057",
+    "T483-R0058",
+    "T483-R0059",
+    "T483-R0062",
+    "T483-R0063",
+    "T483-R0114",
+    "T483-R0116",
+    "T483-R1000",
+    "T483-R1109",
+    "T483-R1110",
+    "T483-R1211",
+    "T483-R1212",
+    "T483-R1221",
+    "T483-R1222"
+  ],
+  "mirror_diff_delta": -205,
+  "git_delivery": "This receipt is included in the P7 delivery commit; remote confirmation follows commit creation.",
+  "counter_review": "Checked actual source changes, removed scalar/PIF APIs and consumers, original byte identity for cmdpif.c/nt_fdisk.h, unchanged #error bodies, original matched-code logical lines, final runtime-source hashes and both publication destinations. Test-only diagnostic compiled; no claim of its runtime acceptance."
+}

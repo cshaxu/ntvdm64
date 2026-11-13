@@ -17,7 +17,6 @@
 #include <mvdm.h>
 #include <dbgsvc.h>
 #include <nt_vdd.h>
-#include "ntvdm-exe/command/include/mvdm_command_guest_state.h"
 
 
 #if DEVL
@@ -533,6 +532,7 @@ void SignalSegmentNotice(WORD  wType,
 #if DBG
 #line 531
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 536
 #endif
 #line 537
 
@@ -612,10 +612,7 @@ VOID demDiskReset (VOID)
 #line 611
     HostFloppyReset();
     HostFdiskReset();
-    /* DIVERGENCE MVDM-HOST-DIV-111: the registered SCS word is a scoped
-     * guest location, not a persistent process pointer. */
-    if (!mvdm_command_guest_state_write_fd_access(0u))
-        TerminateVDM();
+    *pFDAccess = 0;
 
 #line 615
     return;

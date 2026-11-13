@@ -23,7 +23,8 @@
  * fixed-result mode stays diagnostic. REAL_COMMAND delegates BOP11 admission
  * to production and supplies only translated input stimulus. */
 extern BOOL CmdDispatch(ULONG);
-extern int mvdm_command_guest_state_scs_field(uint32_t, uint16_t *, uint16_t *);
+extern unsigned char *pSCSInfo;
+extern unsigned char *Sim32pGetVDMPointer(ULONG, UCHAR);
 extern uint32_t c_getEAX(void), c_getEDX(void), c_getESI(void);
 extern uint16_t c_getIP(void), c_getCS(void);
 extern uint16_t c_getDS(void), c_getDX(void), c_getCX(void), c_getAX(void), c_getSI(void);
@@ -145,9 +146,10 @@ void test_virtual_device_trap(void)
 {
     uint32_t operation=c_getEAX();
     if (operation == 0x4e530001u || operation == 0x4e530002u) {
-        uint16_t segment = 0, offset = 0;
-        int found = mvdm_command_guest_state_scs_field(0, &segment, &offset);
-        trace(0xc40, (uint32_t)found, ((uint32_t)segment << 16) | offset);
+        uintptr_t linear = pSCSInfo ?
+            (uintptr_t)pSCSInfo - (uintptr_t)Sim32pGetVDMPointer(0, FALSE) : 0;
+        trace(0xc40, pSCSInfo != NULL,
+            (uint32_t)(((linear >> 4) << 16) | (linear & 15u)));
         trace(0xc52, test_original_cds_buffer, 0);
         if (operation == 0x4e530002u)
             c_setEDX(test_original_cds_buffer);

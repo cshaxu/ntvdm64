@@ -1,0 +1,18 @@
+{
+  "file": "src/mvdm-host/dos/command/cmdmisc.c",
+  "conclusions": {
+    "R0040": "Keep minimal selected headers, pending owner disposition; closed directory adapter not reopened.",
+    "R0042": "Keep capacity261 instead of68, minimized to one substitution, pending owner.",
+    "R0054": "Keep original initial WOW projection seam; historical real probe supports need, pending owner.",
+    "R0055": "Keep bounded CF/AX retry after expanded environment; no filtering or second guest path, pending owner.",
+    "R0056": "Restore original parser: base_config.c constructs mandatory -a; original BaseGetVdmConfigInfo rejects absent -a for WOW."
+  },
+  "validation": "No runtime/build claim yet. No guest edits. Error branches preserved. Recovered scalar consumers use original global state.",
+  "counts": {
+    "completed-owner-approved-retain": 2,
+    "restored-verified-published": 46,
+    "pending-decision": 103,
+    "restored-pending-verification": 26,
+    "pending": 2543
+  }
+}

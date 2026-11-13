@@ -1,0 +1,62 @@
+[
+  {
+    "path": "src/mvdm-host/dos/command/cmdmisc.c",
+    "added": 53,
+    "deleted": 63,
+    "line_mismatches": [],
+    "sha256": "dbda6b348870d058edfdff547b0a876e952acd436b3b43e1c8257bed63eb261c",
+    "before_diff_lines": 265,
+    "after_diff_lines": 116,
+    "delta": -149
+  },
+  {
+    "path": "src/mvdm-host/dos/command/cmdpif.c",
+    "added": 0,
+    "deleted": 0,
+    "line_mismatches": [],
+    "sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+    "before_diff_lines": 6,
+    "after_diff_lines": 0,
+    "delta": -6
+  },
+  {
+    "path": "src/mvdm-host/dos/dem/demmisc.c",
+    "added": 1,
+    "deleted": 5,
+    "line_mismatches": [],
+    "sha256": "4b8e9992445025633f5aa49139c0c48705371c9d29ea207bf26e97d555b87e12",
+    "before_diff_lines": 12,
+    "after_diff_lines": 6,
+    "delta": -6
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+    "added": 0,
+    "deleted": 0,
+    "line_mismatches": [],
+    "sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87",
+    "before_diff_lines": 1,
+    "after_diff_lines": 0,
+    "delta": -1
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+    "added": 18,
+    "deleted": 5,
+    "line_mismatches": [],
+    "sha256": "3385f81331b5c9c0aba64866f0ee122cb6306926cfd0e3b474c6885f0ba658a8",
+    "before_diff_lines": 42,
+    "after_diff_lines": 23,
+    "delta": -19
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "added": 78,
+    "deleted": 318,
+    "line_mismatches": [],
+    "sha256": "6e467410266adbf80c24289d9b930b4fdb9454b906a2cffaee7fc234864bf5b3",
+    "before_diff_lines": 420,
+    "after_diff_lines": 396,
+    "delta": -24
+  }
+]

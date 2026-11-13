@@ -9,7 +9,6 @@
 #include "insignia.h"
 #include "host_def.h"
 #include <mvdm_guest_location.h>
-#include <mvdm_command_guest_state.h>
 #line 10
 
 /*
@@ -233,6 +232,8 @@ DWORD	    max_align_factor = 0;
 DWORD	    disk_buffer_pool = 0;
 DWORD	    cur_align_factor;
 WORD	    fdisk_open_count = 0;
+
+WORD	    * pFDAccess = 0;
 
 /* DIVERGENCE MVDM-HOST-DIV-006: original code retained a native pointer to
  * the DOS current-PDB value.  Read that scalar through the session lease. */
@@ -505,10 +506,7 @@ BOOL close_fdisk(PFDISKDATA fdisk_data)
 	fdisk_data->auto_locked = FALSE;
 	fdisk_data->fdisk_fd = INVALID_HANDLE_VALUE;
 	fdisk_data->owner_pdb = 0;
-	/* DIVERGENCE MVDM-HOST-DIV-111: update the original SCS word through its
-	 * session-owned numeric location, preserving unsigned 16-bit wrap. */
-	if (!mvdm_command_guest_state_add_fd_access(UINT16_MAX))
-	    return FALSE;
+	(*(pFDAccess))--;
 #line 487
 	fdisk_open_count--;
     }
@@ -559,16 +557,7 @@ BOOL get_fdisk_handle(PFDISKDATA fdisk_data, USHORT pdb, BOOL auto_lock)
 	    fdisk_data->auto_locked = auto_lock;
 	    fdisk_data->owner_pdb = pdb;
 	    fdisk_open_count++;
-	    /* DIVERGENCE MVDM-HOST-DIV-111: acquire the SCS counter only for
-	     * this update; do not publish a durable host pointer. */
-	    if (!mvdm_command_guest_state_add_fd_access(1u)) {
-		CloseHandle(fdisk_data->fdisk_fd);
-		fdisk_data->fdisk_fd = INVALID_HANDLE_VALUE;
-		fdisk_data->auto_locked = FALSE;
-		fdisk_data->owner_pdb = 0;
-		fdisk_open_count--;
-		return FALSE;
-	    }
+	    (*(pFDAccess))++;
 	    break;
 #line 538
 	}

@@ -1,0 +1,35 @@
+{
+  "state": "local-restoration-unverified-file-in-progress",
+  "restored_points": [
+    "T483-R0041",
+    "T483-R0043",
+    "T483-R0044",
+    "T483-R0045",
+    "T483-R0046",
+    "T483-R0048",
+    "T483-R0049"
+  ],
+  "partially_minimized": [
+    "T483-R0042",
+    "T483-R0053"
+  ],
+  "file": "src/mvdm-host/dos/command/cmdmisc.c",
+  "source_sha256": "888ce54e366a684373d4b7dde16a32fbb1374b91ad3e32b49cd14db2567b3402",
+  "original_source": "O:/repos.external/OpenNT/base/mvdm/dos/command/cmdmisc.c",
+  "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+  "reason": "Original GetVDMAddr obtains the mapped alias; cmdGetNextCmd consumes and updates these buffers within its CPU-thread invocation. GetNextVDMCommand waits for server delivery, not a second guest CPU. No demonstrated failure requires a duplicate CMDINFO/AppName/initial-environment snapshot in this call. Original synchronous command-line writes were already restored.",
+  "changes": "Restore original cmdGetNextCmd body, except evidenced directory capacity and separately unresolved scalar accessor cohort. Remove local copy, AppName writeback and PIF wrapper call together. Preserve original direct cmdVDMEnvBlk initialization and normal cleanup.",
+  "counter_review": "Scalar registration and consumers remain intact until paired restoration. Directory buffer now261 bytes matching CurDirectoryLen; original68-byte buffer cannot receive advertised261-byte result. No guest edits, excluded #error byte lines unchanged.",
+  "line_check": "Matched original code inside restored function has correct logical lines. Four remaining full-file mismatches (two blanks, one blank near418, #endif713) need final file pass; not claimed fixed.",
+  "diff_metric": "Normalized newlines; excludes #line; includes unchanged excluded-branch difference. Added+deleted lines versus original.",
+  "before": {
+    "added": 182,
+    "deleted": 83
+  },
+  "after": {
+    "added": 110,
+    "deleted": 78
+  },
+  "delta": -77,
+  "verification": "Source inspection only; no build until all current-file and coupled changes complete."
+}

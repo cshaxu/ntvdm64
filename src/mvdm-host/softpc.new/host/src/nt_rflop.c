@@ -32,7 +32,6 @@
 #include "insignia.h"
 #include "host_def.h"
 #include <mvdm_guest_location.h>
-#include <mvdm_command_guest_state.h>
 /* DIV-871: bind the original void/cdecl FDC worker to its caller session. */
 #include "compat/include/thread_start_compat.h"
 #undef CreateThread
@@ -102,6 +101,7 @@
 #ifndef PROD
 #line 101
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 123
 #endif
 #line 124
 
@@ -281,6 +281,7 @@ ULONG	floppy_open_count = 0;
 #ifndef PROD
 #line 293
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 328
 #endif	/* PROD */
 #line 329
 
@@ -375,6 +376,7 @@ host_gfi_rdiskette_valid IFN3(UTINY,hostID,ConfigValues *,vals,CHAR *,err)
 #ifndef NTVDM
 #line 417
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 447
 #endif
 #line 448
 	return(C_CONFIG_OP_OK);
@@ -388,6 +390,7 @@ host_gfi_rdiskette_change IFN2(UTINY, hostID, BOOL, apply)
 #ifndef NTVDM
 #line 457
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#line 463
 #endif
 #line 464
 }
@@ -397,6 +400,7 @@ host_gfi_rdiskette_change IFN2(UTINY, hostID, BOOL, apply)
 #ifdef EJECT_FLOPPY
 #line 469
 #error Unsupported excluded original configuration
+#line 503
 #endif                          /* EJECT_FLOPPY */
 #line 504
 
@@ -409,11 +413,8 @@ GLOBAL void host_flpy_heart_beat(void)
 
     UTINY drive;
     FLP   flp;
-    WORD  fd_access;
 
-    /* DIVERGENCE MVDM-HOST-DIV-111: read the SCS counter through a fresh
-     * session lease instead of dereferencing a retained guest alias. */
-    if (mvdm_command_guest_state_read_fd_access(&fd_access) && fd_access) {
+    if (pFDAccess && *pFDAccess) {
 #line 516
 	if (floppy_open_count) {
 	    for (drive = 0; drive < number_of_floppy; drive++) {
@@ -757,16 +758,7 @@ HANDLE get_drive_handle(UTINY drive, USHORT pdb, BOOL auto_lock)
 	    floppy_open_count++;
 	    flp->auto_locked = auto_lock;
 	    flp->owner_pdb = pdb;
-		    /* DIVERGENCE MVDM-HOST-DIV-111: preserve the original increment
-		     * while keeping the guest location session-scoped. */
-		    if (!mvdm_command_guest_state_add_fd_access(1u)) {
-			CloseHandle(flp->diskette_fd);
-			flp->diskette_fd = INVALID_HANDLE_VALUE;
-			flp->auto_locked = FALSE;
-			flp->owner_pdb = 0;
-			floppy_open_count--;
-			return INVALID_HANDLE_VALUE;
-		    }
+	    (*(pFDAccess))++;
 		    break;
 #line 843
 	}
@@ -812,6 +804,7 @@ BOOL nt_floppy_close(UTINY drive)
 #ifndef PROD
 #line 884
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 887
 #endif
 #line 885
 
@@ -819,10 +812,7 @@ BOOL nt_floppy_close(UTINY drive)
     if (flp->diskette_fd != INVALID_HANDLE_VALUE) {
 	CloseHandle(flp->diskette_fd);
 	flp->diskette_fd = INVALID_HANDLE_VALUE;
-	/* DIVERGENCE MVDM-HOST-DIV-111: preserve the original decrement through
-	 * the registered scalar rather than a durable process pointer. */
-	if (!mvdm_command_guest_state_add_fd_access(UINT16_MAX))
-	    return FALSE;
+	(*(pFDAccess))--;
 #line 893
 	flp->auto_locked = FALSE;
 	flp->owner_pdb = 0;
@@ -1016,6 +1006,7 @@ nt_rflop_command
 #ifndef PROD
 #line 1078
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1083
 #endif
 #line 1084
 		break;
@@ -1026,6 +1017,7 @@ nt_rflop_command
 #ifndef PROD
 #line 1090
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1092
 #endif
 #line 1093
 		D = get_c7_drive (command_block);
@@ -1045,6 +1037,7 @@ nt_rflop_command
 #ifndef PROD
 #line 1108
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1110
 #endif
 #line 1111
 		D = get_c5_drive (command_block);
@@ -1065,6 +1058,7 @@ nt_rflop_command
 #ifndef PROD
 #line 1127
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1133
 #endif
 #line 1134
 
@@ -1084,6 +1078,7 @@ nt_rflop_command
 #ifndef     PROD
 #line 1149
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1152
 #endif
 #line 1153
 
@@ -1098,6 +1093,7 @@ nt_rflop_command
 #ifndef PROD
 #line 1163
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1170
 #endif /* !PROD */
 #line 1171
 
@@ -1118,6 +1114,7 @@ nt_rflop_drive_on IFN1(UTINY, drive)
 #ifndef PROD
 #line 1187
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1193
 #endif
 #line 1194
 
@@ -1145,6 +1142,7 @@ nt_rflop_drive_off IFN1(UTINY, drive)
 #ifndef PROD
 #line 1217
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1223
 #endif
 #line 1224
 
@@ -1193,6 +1191,7 @@ nt_rflop_rate IFN2(UTINY, drive, half_word, rate)
 #ifndef PROD
 #line 1301
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1307
 #endif
 #line 1308
 
@@ -1249,6 +1248,7 @@ nt_rflop_change IFN1(UTINY, drive)
 #ifndef PROD
 #line 1355
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1361
 #endif
 #line 1362
 
@@ -1307,6 +1307,7 @@ nt_rflop_reset IFN2(FDC_RESULT_BLOCK *, result_block, UTINY, drive)
 #ifndef  PROD
 #line 1416
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1421
 #endif
 #line 1422
 	/* clear change line */
@@ -1398,6 +1399,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1509
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1512
 #endif
 #line 1513
 		goto fdc_read_write_exit;
@@ -1418,6 +1420,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1529
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1531
 #endif 	/* PROD */
 #line 1532
 	    /* check params passed are DOS compatible */
@@ -1432,6 +1435,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1542
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1551
 #endif /* !PROD */
 #line 1552
 		/* Sector not found or wrong size */
@@ -1451,6 +1455,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1567
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1574
 #endif
 #line 1575
 
@@ -1462,6 +1467,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1582
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1589
 #endif
 #line 1590
 
@@ -1517,6 +1523,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1641
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1648
 #endif
 #line 1649
 		if (!failed) {
@@ -1577,6 +1584,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1705
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1710
 #endif
 #line 1711
 
@@ -1596,6 +1604,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1726
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1733
 #endif
 #line 1734
 		if (!nt_floppy_format(D,
@@ -1660,6 +1669,7 @@ FDC_RESULT_BLOCK * result_block
 #ifndef PROD
 #line 1794
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1801
 #endif
 #line 1802
 	}
@@ -1785,6 +1795,7 @@ guess_media_density IFN1(UTINY, drive)
 #ifndef PROD
 #line 1923
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 1929
 #endif /* !PROD */
 #line 1930
 	return(flp->media_density);
@@ -1857,6 +1868,7 @@ set_floppy_parms IFN1(FLP, flp)
 #ifndef PROD
 #line 1998
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 2002
 #endif
 #line 2003
 
@@ -1872,6 +1884,7 @@ UTINY	sector_count
 #ifndef PROD
 #line 2014
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 2018
 #endif
 #line 2019
 

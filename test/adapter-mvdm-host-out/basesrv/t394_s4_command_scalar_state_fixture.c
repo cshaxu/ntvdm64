@@ -1,4 +1,4 @@
-#include "mvdm_command_guest_state.h"
+#include "mvdm_command_guest_directory.h"
 
 #include <string.h>
 
@@ -36,7 +36,6 @@ int main(void)
     fixture_memory second_memory;
     session first;
     session second;
-    uint16_t value;
     uint32_t directory, directory_bytes;
 
     memset(&first_memory, 0, sizeof(first_memory));
@@ -48,14 +47,12 @@ int main(void)
             write_memory) || !session_guest_memory_begin(&second,
             &second_memory, read_memory, write_memory) ||
         !session_thread_bind(&first)) return 1;
-    /* DOS registers before COMMAND; the later SCS update must not overwrite it. */
+    /* DOS owns the directory pointer; resolve its current far value. */
     first_memory.bytes[0x308u] = 0x00;
     first_memory.bytes[0x309u] = 0x04;
     if (!mvdm_command_guest_state_register_doswow(0u, 0x300u) ||
         !mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
-        directory != 0x400u || directory_bytes != 71u ||
-        !mvdm_command_guest_state_set_scs_scalars(0u, 0x100u, 32u, 1u,
-            0u, 0x200u, 0u, 0x202u)) return 1;
+        directory != 0x400u || directory_bytes != 71u) return 1;
 
     if (!mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
         directory != 0x400u || directory_bytes != 71u) return 9;
@@ -65,33 +62,22 @@ int main(void)
     first_memory.bytes[0x30au] = 0x10;
     if (!mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
         directory != 0x420u) return 10;
-    if (!mvdm_command_guest_state_set_to_sync(0xffu) ||
-        first_memory.bytes[0x101u] != 0xffu ||
-        !mvdm_command_guest_state_write_is_dos_binary(1u) ||
-        first_memory.bytes[0x200u] != 1u ||
-        !mvdm_command_guest_state_write_fd_access(0xffffu) ||
-        !mvdm_command_guest_state_add_fd_access(1u) ||
-        !mvdm_command_guest_state_read_fd_access(&value) || value != 0u ||
-        !mvdm_command_guest_state_add_fd_access(0xffffu) ||
-        !mvdm_command_guest_state_read_fd_access(&value) || value != 0xffffu)
-        return 2;
-
     if (!session_thread_unbind(&first) || !session_thread_bind(&second) ||
-        mvdm_command_guest_state_write_is_dos_binary(0u) ||
-        mvdm_command_guest_state_write_fd_access(0u)) return 3;
+        mvdm_command_guest_state_directory_instance(&directory, &directory_bytes))
+        return 3;
     if (!session_thread_unbind(&second) || !session_thread_bind(&first)) return 4;
-
     session_guest_memory_end(&first);
-    if (mvdm_command_guest_state_write_is_dos_binary(0u) ||
-        mvdm_command_guest_state_read_fd_access(&value) ||
-        mvdm_command_guest_state_directory_instance(&directory, &directory_bytes)) return 5;
+    if (mvdm_command_guest_state_directory_instance(&directory, &directory_bytes))
+        return 5;
     if (!session_guest_memory_begin(&first, &first_memory, read_memory,
-            write_memory) || mvdm_command_guest_state_write_is_dos_binary(0u) ||
+            write_memory) ||
         mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
-        !mvdm_command_guest_state_set_scs_scalars(0u, 0x100u, 32u, 1u,
-            0u, 0x200u, 0u, 0xfffu) ||
-        mvdm_command_guest_state_write_fd_access(1u))
-        return 6;
+        !mvdm_command_guest_state_register_doswow(0u, 0x300u) ||
+        !mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
+        directory != 0x420u) return 6;
+    mvdm_command_guest_state_clear_doswow();
+    if (mvdm_command_guest_state_directory_instance(&directory, &directory_bytes))
+        return 11;
 
     if (!session_thread_unbind(&first)) return 7;
     session_guest_memory_end(&first);

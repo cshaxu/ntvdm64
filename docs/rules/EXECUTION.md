@@ -775,3 +775,9 @@ and cumulative file and point progress. A file is not reported complete while
 its investigation or known reducible differences remain unfinished. Never
 substitute source-line reduction for mirror-diff reduction, or point counts
 for completed-file counts. Report the file end before starting the next file.
+
+Every diff-file end report includes the current file result AND cumulative
+file/point totals: sequential files completed/remaining/total; points restored
+and delivered, locally restored pending verification, approved retain, qualified
+pending decision, historical classifications requiring requalification, and
+unreviewed. Do not count coupled edits as entire later-file audits.

@@ -34,10 +34,11 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-Historical reviewed count170 comprises47 restored/verified/published,
-0 local original restorations awaiting verification,2 owner-approved retain,
-12 source-qualified pending decisions and109 historical classifications still
-requiring requalification. Another2550 points have not been reviewed.
+177 points have a prior or current review record:72 restored/verified/published,
+0 local restorations pending verification,2 approved retain,16 qualified pending
+decisions and87 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is9/365;356 remain.
+Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
 Owner-directed backlog requalification started at R0010 (restored and delivered).
@@ -68,13 +69,15 @@ and [remaining decisions](../../artifacts/mvdm-audit/t483-remaining-reaudit/r002
 
 ## Current Technical Baseline
 
-Published package `b02b2179-9a7f-4a7e-8011-ef0c3c5559b1` is P6's complete11-image
-package, built before publication and tested after publication. All raw hashes
-match assets/release and O:/winnt/system32. Final source/test hashes match the
-[P6 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p6-checkpoint.json).
-P5 commit690f31c39 remains the preceding pushed baseline; this update accompanies
-P6 Git delivery. No guest or winnt.zip changes. DOS4GW/NESticle is explicitly
-skipped because external fixtures were not supplied. This does not complete S5.
+P7 package `4fb1cf41-a84f-4e73-b38b-d6a752c4588e` is published to
+assets/release and O:/winnt/system32; all11 image hashes match.
+Final cached build, command fixtures, Full16, original PIF caller,
+DOSWOW directory and original command-tail checks passed.
+DOS4GW/NESticle remains explicitly skipped for absent external fixtures.
+Final governance passed. This record accompanies the P7 delivery commit;
+Git push confirmation follows commit creation. P6 e7c728e07 is the preceding boundary.
+See [P7 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p7-checkpoint.json).
+No guest or winnt.zip changes. S5 remains active.
 
 ## Remaining Scope
 
@@ -144,3 +147,15 @@ Read-only follow-on review R0037/R0038 confirmed product keyboard-resource
 location differs from both Windows system directories. The unchanged include
 and directory call remain pending owner decisions; no new build is triggered.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0037-r0038-requalification.json).
+
+Current file cmdmisc.c (R0039-R0061) has23 definite dispositions:
+19 restored and verified in P5/P7, and4 evidence-qualified owner
+decisions. R0039 is restored, not unresolved. Its mirror diff is +53/-63,
+down149 from entry (+182/-83), excluding #line and normalizing newlines.
+The6 coupled mirror files reduce original-relative differences by205 lines.
+cmdpif.c and nt_fdisk.h now match original bytes; demmisc.c retains only
+excluded-branch differences. Original-matched code line checks have no
+mismatches and #error bodies are unchanged. Later coupled files are not
+counted as completed sequential audits. Next ordered file is cmdpif.c.
+The first P7 build missed the original pFDAccess definition and failed linking;
+r2 corrected that insertion and passed. The failed attempt was never published.

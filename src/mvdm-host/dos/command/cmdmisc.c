@@ -8,12 +8,6 @@
 
 #include "cmd.h"
 
-#include <stddef.h>
-
-/* DIVERGENCE(MVDM-HOST-DIV-111): SCSINFO and SCS_ToSync were retained as
- * process-address aliases in NT4.  Preserve their 16:16 source positions and
- * obtain session-mapped guest leases only at the original access points. */
-#include "ntvdm-exe/command/include/mvdm_command_guest_state.h"
 
 #line 11
 #include <cmdsvc.h>
@@ -34,70 +28,36 @@
 VOID GetWowKernelCmdLine(VOID);
 extern ULONG fSeparateWow;
 
+#line 25
 VOID cmdGetNextCmd (VOID)
 {
 LPSTR   lpszCmd;
 PCMDINFO pCMDInfo;
-/* DIVERGENCE(MVDM-HOST-DIV-194): the original CMDINFO and each pointed
- * command payload are guest-memory records, not process aliases.  Snapshot
- * the fixed CMDINFO only for this synchronous host call, then commit its
- * original fields through a fresh checked lease before returning to COMMAND. */
-CMDINFO CmdInfo;
-mvdm_guest_location cmdinfo_location;
-mvdm_guest_location execpath_location;
-mvdm_guest_location_lease command_lease;
-mvdm_guest_location_lease execpath_lease;
-#line 29
 ULONG   cb;
 PREDIRCOMPLETE_INFO pRdrInfo;
 VDMINFO MyVDMInfo;
 
 char    *pSrc, *pDst;
-/* DIVERGENCE(MVDM-HOST-DIV-160): the original request advertises
- * `MAX_PATH + 1` bytes to BaseSrv but allocates only the guest DOS
- * current-directory limit.  The modern package root is a valid host path
- * longer than that guest-only limit.  Keep the original VDMINFO request and
- * SetCurrentDirectory semantics, but make the receiving host buffer match
- * the stated ABI capacity. */
 char    achCurDirectory[MAX_PATH + 1];
-#line 35
 char    CmdLine[MAX_PATH];
-/* COMMAND.COM's original EXECPATHLEN is MAX_PATH + 13 (comequ.asm). */
-char    AppName[MAX_PATH + 13];
 
     //
     // This routine is called once for WOW VDMs, to retrieve the
     // "krnl386" command line.
     //                                         5
-#line 41
     if (VDMForWOW) {
         GetWowKernelCmdLine();
         return;
     }
 
     VDMInfo.VDMState = 0;
-    if (!mvdm_guest_location_set_real_mode(&cmdinfo_location,
-            (USHORT)getDS(), (USHORT)getDX()) ||
-        !mvdm_guest_location_acquire(&cmdinfo_location, sizeof(CmdInfo),
-            GUEST_MEMORY_ACCESS_READ, &command_lease)) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
-    RtlMoveMemory(&CmdInfo, command_lease.bytes, sizeof(CmdInfo));
-    if (!mvdm_guest_location_release(&command_lease, 0)) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
-    pCMDInfo = &CmdInfo;
+    pCMDInfo = (LPVOID) GetVDMAddr ((USHORT)getDS(),(USHORT)getDX());
 
-#line 49
     VDMInfo.ErrorCode = FETCHWORD(pCMDInfo->ReturnCode);
     VDMInfo.CmdSize = sizeof(CmdLine);
     VDMInfo.CmdLine = CmdLine;
-    AppName[0] = '\0';
-    VDMInfo.AppName = AppName;
+    VDMInfo.AppName = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->ExecPathSeg),
+                                        FETCHWORD(pCMDInfo->ExecPathOff));
     VDMInfo.AppLen = FETCHWORD(pCMDInfo->ExecPathSize);
     VDMInfo.PifLen = 0;
     VDMInfo.EnviornmentSize = 0;
@@ -118,7 +78,7 @@ char    AppName[MAX_PATH + 13];
 	// When COMMAND.COM issues first cmdGetNextCmd, it has
 	// a completed environment already(cmdGetInitEnvironment),
 	// Therefore, we don't have to ask environment from BASE
-	cmdVDMEnvBlk.lpszzEnv = NULL;
+	cmdVDMEnvBlk.lpszzEnv = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->EnvSeg),0);
         cmdVDMEnvBlk.cchEnv = FETCHWORD(pCMDInfo->EnvSize);
 
 	//clear bits that track printer flushing
@@ -279,13 +239,10 @@ char    AppName[MAX_PATH + 13];
     // Sync VDMs enviornment variables for current directories
     cmdSetDirectories (lpszzVDMEnv32, &VDMInfo);
 
-    /* DIVERGENCE MVDM-HOST-DIV-111: the original durable guest alias is
-     * represented by a fresh session-scoped scalar lease. */
-    if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(1))) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
+    // tell DOS that this is a dos executable and no further checking is
+    // necessary
+    *pIsDosBinary = 1;
+#line 238
 
 
     // Check for PIF files. If a pif file is being executed extract the
@@ -295,14 +252,7 @@ char    AppName[MAX_PATH + 13];
     // pass the pif as it is to scs to execute which we know will fail and
     // will come back to cmdGettNextCmd with proper error code.
 
-    /* DIVERGENCE(MVDM-HOST-DIV-194): restore the original guest environment
-     * input for PIF expansion through a call-local copied lease. */
-    mvdm_command_check_pif(&VDMInfo, FETCHWORD(pCMDInfo->EnvSeg), FETCHWORD(pCMDInfo->EnvSize));
-    if (VDMInfo.ErrorCode == ERROR_INVALID_ADDRESS || VDMInfo.ErrorCode == ERROR_NOT_ENOUGH_MEMORY) {
-        VdmExitCode = VDMInfo.ErrorCode;
-        TerminateVDM();
-        return;
-    }
+    cmdCheckForPIF (&VDMInfo);
 
 
     //
@@ -312,7 +262,6 @@ char    AppName[MAX_PATH + 13];
     // It now uses a bit in CreateProcess (dwCreationFlags).
     //
 
-#line 257
     DontCheckDosBinaryType = (VDMInfo.dwCreationFlags & CREATE_FORCEDOS) != 0;
 
 
@@ -340,31 +289,7 @@ char    AppName[MAX_PATH + 13];
     else
 	STOREWORD(pCMDInfo->ExecExtType, UNKNOWN_EXTENTION);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-194): original `VDMInfo.AppName` is the
-     * guest `ExecPathSeg:ExecPathOff` alias, so BaseClient writes its result
-     * directly into COMMAND's buffer.  The bounded local capture above must
-     * commit that same post-PIF/post-uppercase value before COMMAND resumes. */
-    if (VDMInfo.AppLen != 0u) {
-        if (VDMInfo.AppLen > FETCHWORD(pCMDInfo->ExecPathSize) ||
-            !mvdm_guest_location_set_real_mode(&execpath_location,
-                FETCHWORD(pCMDInfo->ExecPathSeg),
-                FETCHWORD(pCMDInfo->ExecPathOff)) ||
-            !mvdm_guest_location_acquire(&execpath_location, VDMInfo.AppLen,
-                GUEST_MEMORY_ACCESS_WRITE, &execpath_lease)) {
-            VdmExitCode = ERROR_INVALID_ADDRESS;
-            TerminateVDM();
-            return;
-        }
-        RtlMoveMemory(execpath_lease.bytes, VDMInfo.AppName, VDMInfo.AppLen);
-        if (!mvdm_guest_location_release(&execpath_lease, 1)) {
-            VdmExitCode = ERROR_INVALID_ADDRESS;
-            TerminateVDM();
-            return;
-        }
-    }
-
     // tell command.com the length of the app full path name.
-#line 285
     STOREWORD(pCMDInfo->ExecPathSize, VDMInfo.AppLen);
 
     //
@@ -374,7 +299,6 @@ char    AppName[MAX_PATH + 13];
                                 FETCHWORD(pCMDInfo->CmdLineOff));
 
     // Copy filepart of AppName excluding extension to ccom's buffer
-#line 294
     pSrc = strrchr(VDMInfo.AppName, '\\');
     if (!pSrc) {
          pSrc = VDMInfo.AppName;
@@ -415,14 +339,12 @@ char    AppName[MAX_PATH + 13];
 
 
 
-#line 334
     if (DosEnvCreated) {
 	VDMInfo.Enviornment = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->EnvSeg),0);
 	RtlMoveMemory(VDMInfo.Enviornment,
 		      cmdVDMEnvBlk.lpszzEnv,
 		      cmdVDMEnvBlk.cchEnv
 		     );
-#line 340
 	STOREWORD(pCMDInfo->EnvSize,cmdVDMEnvBlk.cchEnv);
 	free(cmdVDMEnvBlk.lpszzEnv);
 	DosEnvCreated = FALSE;
@@ -444,17 +366,7 @@ char    AppName[MAX_PATH + 13];
     STOREDWORD(pCMDInfo->pRdrInfo,(ULONG)pRdrInfo);
 
     // Tell DOS that it has to invalidate the CDSs
-    if (!mvdm_command_guest_state_set_to_sync(UINT8_C(0xff))) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
-    if (!mvdm_guest_location_copy_to_guest(&cmdinfo_location,
-            (uint8_t const *)&CmdInfo, sizeof(CmdInfo))) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
+    *pSCS_ToSync = (CHAR)0xff;
 #line 362
     setCF(0);
 
@@ -463,6 +375,7 @@ char    AppName[MAX_PATH + 13];
 
 
 
+#line 369
 VOID GetWowKernelCmdLine(VOID)
 {
 CMDINFO UNALIGNED *pCMDInfo;
@@ -504,8 +417,6 @@ LPSTR    pszCmdLine;
     // uses lpszzVDMEnv32 and cchVDMEnv32 as the source.
     //
 
-    /* DIVERGENCE(MVDM-HOST-DIV-324): kernel boot precedes task delivery.
-     * Project only the completed guest block, not lpszzVDMEnv32 or host env. */
     if (!cmdCreateVDMEnvironment(&cmdVDMEnvBlk) ||
         !mvdm_softpc_project_wow_initial_environment(
             &cmdVDMEnvBlk.lpszzEnv, &cmdVDMEnvBlk.cchEnv)) {
@@ -518,9 +429,6 @@ LPSTR    pszCmdLine;
     // Copy the transformed environment to real mode mem and then free it.
     //
 
-    /* DIVERGENCE(MVDM-HOST-DIV-331): use COMMAND's existing carry/AX
-     * environment-resize contract before writing beyond its allocation.
-     * Owner-approved local repair; no guest or environment filtering change. */
     if (cmdVDMEnvBlk.cchEnv > FETCHWORD(pCMDInfo->EnvSize)) {
         ULONG required = cmdVDMEnvBlk.cchEnv;
 
@@ -531,8 +439,6 @@ LPSTR    pszCmdLine;
         lpszzVDMEnv32 = NULL;
         cchVDMEnv32 = 0;
 
-        /* The unchanged guest resize protocol accepts sizes below 32 KiB.
-         * Never truncate an oversized length into the 16-bit AX register. */
         if (required >= 0x8000u) {
             RcErrorDialogBox(EG_ENVIRONMENT_ERR, NULL, NULL);
             TerminateVDM();
@@ -584,17 +490,11 @@ LPSTR    pszCmdLine;
             }
 
         // mov to beg of WowKernelPathName
-        pch = strstr(pszCmdLine, " -a ");
-        if (pch != NULL) {
-            pszCmdLine = pch + 4;
-#line 460
-            while (*pszCmdLine && *pszCmdLine == ' ') {
-                   pszCmdLine++;
-            }
-        }
-        else {
-            pszCmdLine = NULL;
-#line 462
+#line 458
+        pszCmdLine = strstr(pszCmdLine, " -a ");
+        pszCmdLine += 4;
+        while (*pszCmdLine && *pszCmdLine == ' ') {
+               pszCmdLine++;
         }
     }
 
@@ -638,23 +538,13 @@ LPSTR    pszCmdLine;
     strcpy(pch, "\x0d\x0a");
 
 
-    /* DIVERGENCE MVDM-HOST-DIV-111: do not retain the SCS binary byte as a
-     * process pointer between this command BOP and its guest consumer. */
-    if (!mvdm_command_guest_state_write_is_dos_binary(UINT8_C(1))) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
+    *pIsDosBinary = 1;
 #line 506
     IsRepeatCall = FALSE;
     IsFirstCall = FALSE;
 
     // Tell DOS that it has to invalidate the CDSs
-    if (!mvdm_command_guest_state_set_to_sync(UINT8_C(0xff))) {
-        VdmExitCode = ERROR_INVALID_ADDRESS;
-        TerminateVDM();
-        return;
-    }
+    *pSCS_ToSync = (CHAR)0xff;
 #line 511
     setCF(0);
 
@@ -765,17 +655,11 @@ VOID cmdSetInfo (VOID)
 #line 594
     pSCSInfo = (PSCSINFO) GetVDMAddr (getDS(),getDX());
 
-    /* DIVERGENCE MVDM-HOST-DIV-111: record all three original SCS scalar
-     * locations numerically; their values are acquired only at each use. */
-    if (!mvdm_command_guest_state_set_scs_scalars(getDS(), getDX(),
-            (uint32_t)sizeof(SCSINFO),
-            (uint32_t)offsetof(SCSINFO, SCS_ToSync),
-            getDS(), getBX(), getDS(), getCX())) {
-        setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
-        return;
-    }
+    pSCS_ToSync  =  (PCHAR) &pSCSInfo->SCS_ToSync;
 
+    pIsDosBinary = (BYTE *) GetVDMAddr(getDS(), getBX());
+
+    pFDAccess = (WORD *) GetVDMAddr(getDS(), getCX());
 #line 601
     return;
 }
@@ -836,6 +720,7 @@ VOID cmdSaveWorld (VOID)
 #ifdef CHECK_IT_LATER
 #line 657
 #error DIVERGENCE MVDM-HOST-DIV-529: CHECK_IT_LATER platform branch is not selected; see mirror register.
+#line 713
 #endif
 #line 714
     return;

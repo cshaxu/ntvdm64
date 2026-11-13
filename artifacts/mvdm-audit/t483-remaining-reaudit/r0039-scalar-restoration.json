@@ -1,0 +1,40 @@
+{
+  "point": "T483-R0039",
+  "conclusion": "restore-original-implemented-awaiting-file-batch-validation",
+  "reason": "No concrete original failure established. Original boot registers DOSDATA pointers; source instance table does not instance these fields. Production memory epochs persist until worker cleanup. New accessor dependencies and isolated epoch invalidation fixtures do not prove original code broken. Restore original cohort rather than require original to disprove hypothetical remapping.",
+  "implementation": "Removed cmdmisc stddef/guest-state additions; restored pSCS_ToSync/pIsDosBinary/pFDAccess registration and scalar consumers in COMMAND, PIF, DEM and disk/floppy. Restored original pFDAccess definition and extern. No duplicate registration invoked. DOSWOW directory registration untouched.",
+  "evidence": [
+    "r0039-lifetime-investigation.json",
+    "src/mvdm-guest/dos/v86/doskrnl/dos/dostab.asm:758",
+    "src/mvdm-guest/dos/v86/doskrnl/dos/msinit.asm:346",
+    "src/mvdm-guest/dos/v86/inc/lmstub.asm:836"
+  ],
+  "excluded_branches": "All #error lines unchanged by edits. Existing excluded #endif line resets remain to be corrected before delivery.",
+  "verification": "Source and matched original nonempty code line checks only. No build/publication/test claim; finish cmdmisc and remove unused scalar/PIF adapter API and affected obsolete fixtures before batch build.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "e164ba2699fc798af7b3944893506bf03606afce6f47b1bd99c7094834fd6431"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "sha256": "dde90146b14918f7e14fe4ed091c84861076a189026245b026515d7d9b975c99"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "sha256": "afd72774b087012bc81351583eeb07d2f3616d896337dc482b7498976c3525e3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "sha256": "d3cc32ff37343a1d153dd0ec551ef26f690a29c2e754918080acbb7e568996a4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+      "sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87"
+    }
+  ]
+}

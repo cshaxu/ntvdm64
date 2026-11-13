@@ -41,7 +41,7 @@ writeFileSync(`${build}/cmd-temp-source.sha256`, createHash("sha256").update(red
 
 const commandSource = readFileSync(`${root}/src/mvdm-host/dos/command/cmdmisc.c`, "utf8");
 const tailStart = commandSource.indexOf("    pSrc = strrchr(VDMInfo.AppName");
-const tailEnd = commandSource.indexOf("    if (!mvdm_guest_location_release(&command_lease, 1))", tailStart);
+const tailEnd = commandSource.indexOf("    if (DosEnvCreated)", tailStart);
 if (tailStart < 0 || tailEnd <= tailStart) throw new Error("COMMAND tail boundaries changed");
 writeFileSync(`${build}/cmd-tail-body.inc`, commandSource.slice(tailStart, tailEnd));
 writeFileSync(`${build}/cmd-tail-source.sha256`, createHash("sha256").update(commandSource).digest("hex"));
@@ -130,11 +130,6 @@ const lines = [
   "build obj/pif-caller.obj: cc $root/test/mvdm/oemuni/oemuni_pif_caller_fixture.c",
   `  cflags = ${formalFlags} /I \"$root/src/mvdm-host/dos/command\"`,
   "build oemuni-pif-caller-fixture.exe: link obj/pif-caller.obj $formal/obj/command/cmdpif.obj obj/file.obj obj/process.obj obj/firmware-root-stub.obj",
-  "build obj/pif-environment.obj: cc $root/src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
-  `  cflags = ${formalFlags} /Gy /Dmalloc=pif_test_malloc /Dfree=pif_test_free`,
-  "build obj/pif-environment-test.obj: cc $root/test/mvdm/oemuni/oemuni_pif_environment_fixture.c",
-  `  cflags = ${formalFlags} /Gy`,
-  "build oemuni-pif-environment-fixture.exe: link obj/pif-environment.obj obj/pif-environment-test.obj",
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
   "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj obj/firmware-root-stub.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
