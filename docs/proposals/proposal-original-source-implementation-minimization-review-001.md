@@ -127,6 +127,74 @@ repairs. No candidate may disappear through an unapproved deferral.
 
 ## Verification and exit criteria
 
+### Next S after the current ordered audit: pending-diff evidence review
+
+Owner requests this second review as the next S of this T (planned S6), after
+the active S5. This replaces the earlier S6 category-only plan for that slot;
+it neither closes S5 nor admits a second active packet. Current remains the
+admission authority. The later project-wide implementation scope is preserved.
+
+The initial discussion concerned44 points labelled evidence-qualified pending
+decisions. That is a snapshot, not a frozen workload or a claim that all44 are
+necessary. At admission, freeze the then-current main register and pending
+backlog, reconcile their point IDs, and include all surviving pending points,
+including additions from the remainder of S5. Do not reopen fully restored
+points or deleted files. Review dependency groups in the order of their first
+point in the main register; retain every constituent point's identity.
+
+The question is whether a coherent original implementation can replace the
+adaptation, not whether deleting one declaration or cleanup call breaks the
+current implementation. Separate three propositions in every disposition:
+
+1. The original guest/product contract requires a particular responsibility.
+2. The original provider cannot perform that responsibility in the supported
+   host context, with the exact unavailable boundary or failing case identified.
+3. The particular remaining diff is necessary and minimal after considering
+   coherent original reuse, including its callers, declarations and cleanup.
+
+Evidence for one proposition does not establish the others. In particular,
+do not reject original reuse merely because it differs from a locally invented
+BOOL-return interface, allocation policy, snapshot lifetime or failure path.
+First establish why that local contract is required. An existing adaptation's
+dependents are not independent evidence for retaining the adaptation.
+
+Seed questions from the read-only second review, not predetermined verdicts:
+
+| Points | Required challenge |
+| --- | --- |
+| R0040, R0070 | Header/type dependencies prove only current usage. Trace and evaluate the complete underlying access implementation; prior closure of a dependency must not shield an in-scope pending diff from review. |
+| R0021, R0025, R0031 and coupled capture points | Separate the source-supported concurrency/input-ownership requirement from the particular capture design and its initialization, validity and cleanup costs. Evaluate coherent original producer/consumer ordering, not partial deletion. |
+| R0033/R0035/R0036 | Split capacity, capture cleanup and service routing conclusions. A proved capacity error does not justify an unrelated routing override. |
+| R0136/R0141 | Establish the actual paging, address and exception state at the call boundary. Determine whether original descriptor decoding can be reused; a mismatch with the newly introduced BOOL contract alone is insufficient. |
+| R0137 and coupled publication declarations | Distinguish correct types for the current selected wrapper from proof that original declaration/call arrangements cannot be restored. |
+| DEM buffer and GDT/LDT groups | Preserve concrete noncontiguous-mapping and address-domain evidence, but independently justify each retained allocation, copy, publication and failure-handling choice. A required responsibility does not prove the whole current mechanism minimal. |
+
+For each group, record the exact original and current chain, supported build
+context, evidence provenance, coherent restoration candidate, and a concrete
+reason for accepting or rejecting it. Reuse existing evidence only where its
+inputs and scope match. Source/ABI counterexamples may establish necessity;
+do not require an arbitrary runtime crash, and do not present a fixture or
+source inference as a production reproduction. Missing proof remains agent
+investigation, never a qualified owner-decision entry.
+
+Restore original code where feasible and implement evidenced reductions under
+the current owner rules. Keep only the unresolved residual in the decision
+backlog; qualify dependencies by reference to the established group argument,
+not by circular references to one another. Net increases in original-relative
+diff require approval before implementation. Do not transfer equivalent
+complexity into a shim, introduce a second mechanism, modify/rebuild original
+guest, or remove excluded-branch #error. Maintain original logical #line maps.
+
+Finish each affected file and its coupled changes before delivering the
+accumulated substantive batch: cached full build, publication, applicable
+tests, commit and push, in that order. Apply existing nonbehavioral evidence-
+reuse rules without claiming a fresh runtime pass. Synchronize both registers
+and report point/file progress, original-relative diff deltas, independent
+necessity evidence, dependency-only evidence, restorations, residual decisions
+and actual delivery state. Close this S only when every admitted group has a
+complete disposition and required verification; a renamed status or an owner
+decision request cannot substitute for unfinished technical investigation.
+
 Every implementation S must build the selected MSVC Win32/x86 profile and
 pass the established COMMAND/MEM/EDIT tests, directly and through interactive
 and nested COMMAND routes. Test guest text and expected exit behavior, not

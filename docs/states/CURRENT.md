@@ -35,8 +35,8 @@ is the sole active audit order; the old D-register is historical evidence.
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
 177 points have a prior or current review record:110 restored/verified/published,
-0 local restorations pending verification,2 approved retain,46 qualified pending
-decisions and19 historical classifications requiring requalification. Another2543
+0 local restorations pending verification,2 approved retain,45 qualified pending
+decisions and20 prior classifications requiring requalification. Another2543
 points are unreviewed. Sequential file disposition is26/365;339 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
@@ -100,7 +100,12 @@ prototype remains. Two points are restored/verified/published, two residual
 boundaries remain pending owner decision.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0143-r0146-requalification.json).
 P16 cached build, publication11x2, descriptor2097152, Full16 and governance
-passed; this receipt accompanies Git delivery. Next point R0147.
+passed; this receipt accompanies Git delivery. dpmiint.c is in progress, not a completed file. R0147 remains restored; R0148
+is source-qualified. Actual DOSX binary identity/build rules select486/dxintr.asm,
+so earlier top-level guest lock-state citations require correction. R0149-R0151
+and coupled PM-address necessity are under investigation, not owner decisions.
+[Source attribution](../../artifacts/mvdm-audit/t483-remaining-reaudit/dpmiint-guest-source-attribution.json).
+Next point R0149; no product edit or new runtime claim in this audit checkpoint.
 
 ## Remaining Scope
 

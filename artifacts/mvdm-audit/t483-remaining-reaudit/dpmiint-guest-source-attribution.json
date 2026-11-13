@@ -1,0 +1,33 @@
+{
+  "file": "src/mvdm-host/dpmi32/dpmiint.c",
+  "source_sha256": "e5ac4851282cafcd61b7105d116fed0445495d4f4453300a9d6ac900a39ec172",
+  "source_changed": false,
+  "points": {
+    "R0147": {
+      "conclusion": "P4 original restoration still present; no new restored count.",
+      "evidence": "Current file has no selector_outside_GDT_LDT declaration/call; original declarations precede DpmiSetProtectedmodeInterrupt. Prior batch-p4-checkpoint.json remains delivery evidence."
+    },
+    "R0148": {
+      "conclusion": "Original +4 flags write cannot be restored: overwrites CS in 12-byte DWORD IRET frame. Necessary +8 correction remains owner decision; shorten explanatory comment when completing entire file.",
+      "size": {
+        "added": 3,
+        "removed": 1
+      },
+      "evidence": "Original dpmiint.c lines218/225/229/232 reserve12 and store EIP at0, CS at4, then flags at4. Current changes final store to8. PDWORD16 is DWORD UNALIGNED*. This is direct store-layout evidence, not claimed guest reproduction.",
+      "implementation": "No source edit yet; whole-file pass precedes batch construction."
+    }
+  },
+  "new_evidence": {
+    "binary_sha256": "c5af29a29abf167b243daabf877459e8278b8c9a339bf8e1e2576ead5f6ceeff",
+    "matches": "assets/winnt-guest-manifest.json WINNT/SYSTEM32/DOSX.EXE",
+    "build_rule": "src/mvdm-guest/dpmi/makefile all selects DEST486/dosx.exe; dxintr.obj rule selects486/dxintr.asm, dxboot.obj selects486/dxboot.asm.",
+    "actual_source_path": "486/dxintr.asm PMIntHandlerIRET/IRETD execute BOP IntHandlerIret/IntHandlerIretd. Top-level dxintr.asm lock-count stores are not proof those stores execute in packaged DOSX.",
+    "retained_fact": "486/dxboot.asm:1824-1826 still obtains CX:DX and constructs SEL_VDMTIB. This proves descriptor publication, not by itself live use of every field of projected storage.",
+    "additional_reader": "Common dxbug.asm:769 reads first word under NTDEBUG. The source build rule does not define NTDEBUG in normal OPTIONS486; exact immutable binary reader reachability still requires evidence. No guest rebuild performed.",
+    "counter_review": "Binary hash equality pins preserved image, but does not alone prove every source option or immutable binary instruction. Avoid claiming nonexistent VDMTIB_Esp field implies current product corruption: that reference occurs in the wrong top-level source path.",
+    "allocator": "Original SAAllocate writes *Address only on success; DpmiAllocateVirtualMemory delegates to it. No runtime low-memory test claimed."
+  },
+  "impact": "R0149-R0151 remain agent investigation, not qualified owner decisions. Earlier R0134/R0140 necessity attribution requires requalification because top-level guest lock-state path was cited; reopen only that coupled proof, not unrelated table decisions.",
+  "verification": "Read-only source/binary identity investigation. No product edit, build, runtime test or publication this batch; P16 remains baseline.",
+  "next": "Finish R0149-R0151 allocation/publication reader attribution, then continue R0152 onward; file not complete."
+}
