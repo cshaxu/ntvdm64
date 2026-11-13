@@ -1,0 +1,10 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+    "matched_original_lines": 5311,
+    "matched_original_line_mismatches": [],
+    "excluded_errors": "All #error directives unchanged",
+    "semantic_diff_before": 16,
+    "semantic_diff_after": 3
+  }
+]

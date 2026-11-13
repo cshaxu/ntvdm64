@@ -1,0 +1,58 @@
+{
+  "status": "Verified final-source delivery;accompanies Git commit",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+  "points": "R0467-R0472",
+  "baseline_original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/fpu.c",
+  "original_first_conclusion": "Added stdio declaration and memcpy alias workaround have no demonstrated necessity in selected MSVC x86 product context. Paired compilation succeeds; real CCPU FISTP16cases passes original representation access. Original M64I conversion bypasses npx_rint and falsely reports invalid conversion when truncated value differs from rounded value.",
+  "responsibility": "Execute x87 integer store according to the guest rounding-control word.",
+  "original_failure": "Actual original-rounding FPU object:4/16 failures, rounded positive/negative fraction becomes integer indefinite80000000:00000000. Integer values and truncate cases pass.",
+  "minimal_change": "Restore5points and original CVTFPHI64 representation reads. Retain FPRes=npx_rint followed by original conversion as2lines instead of3; residual+2/-1 awaits owner decision. No shim or second path.",
+  "object_control": {
+    "section_count": 271,
+    "same_section_count": true,
+    "changed_sections": [
+      14,
+      15,
+      270
+    ],
+    "equal_data_and_named_relocations": false
+  },
+  "controls": {
+    "current": {
+      "exit": 0,
+      "output": "FIST64 cases=16 failures=0\n",
+      "providers": [
+        "0001:00024020       _FINIT                     00425020 f   original-ccpu386:fpu.obj",
+        "0001:000240a0       _FIST                      004250a0 f   original-ccpu386:fpu.obj",
+        "0001:00024490       _FLD                       00425490 f   original-ccpu386:fpu.obj"
+      ]
+    },
+    "original-alias": {
+      "exit": 0,
+      "output": "FIST64 cases=16 failures=0\n",
+      "providers": [
+        "0001:00002100       _FINIT                     00403100 f   original-declarations-same.obj",
+        "0001:00002180       _FIST                      00403180 f   original-declarations-same.obj",
+        "0001:00002570       _FLD                       00403570 f   original-declarations-same.obj"
+      ]
+    },
+    "original-rounding": {
+      "exit": 1,
+      "output": "FAIL mode=0 value=2.75 vector=-1 result=80000000:00000000 expected=3\nFAIL mode=0 value=-2.75 vector=-1 result=80000000:00000000 expected=-3\nFAIL mode=1 value=-2.75 vector=-1 result=80000000:00000000 expected=-3\nFAIL mode=2 value=2.75 vector=-1 result=80000000:00000000 expected=3\nFIST64 cases=16 failures=4\n",
+      "providers": [
+        "0001:00002100       _FINIT                     00403100 f   original-rounding.obj",
+        "0001:00002180       _FIST                      00403180 f   original-rounding.obj",
+        "0001:00002560       _FLD                       00403560 f   original-rounding.obj"
+      ]
+    }
+  },
+  "line_proof": "batch-p45-line-check.json",
+  "mirror_diff_before": 16,
+  "mirror_diff_after": 3,
+  "limits": [
+    "Real selected CCPU execution, finite16case rounding coverage; not complete x87 conformance.",
+    "Object bytes differ after original aliasing/header restoration, so no byte-identity claim.",
+    "No original guest modification or rebuild."
+  ],
+  "verification": "batch-p45-checkpoint.json"
+}

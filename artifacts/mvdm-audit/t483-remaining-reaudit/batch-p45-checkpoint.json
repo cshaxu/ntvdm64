@@ -1,0 +1,136 @@
+{
+  "status": "P45 verified delivery; accompanies Git commit",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "sha256": "6e4b42a75cfa9aeef551b83ac147b6199d059abb5d6cddedce29e77be2f978b0"
+    },
+    {
+      "path": "test/mvdm-host/ccpu_fist64_test.c",
+      "sha256": "4f0c38175d9912d502ffc018cf6a90ffd6a49ab67d715997712eeba7b34b1ff1"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "120da2beba1e1e897f8e2846099e886ff9a2c5f700f04eb0c8acabd0fcbfab4e"
+    }
+  ],
+  "mirror_diff_delta": -13,
+  "package": "9f9c2e07-fb69-411c-8d62-7e8c0ecbc908",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1228,
+      "CleanupMs": 432,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 221,
+      "CleanupMs": 438,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66599,
+      "CleanupMs": 499,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 57821,
+      "CleanupMs": 461,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 44930,
+      "CleanupMs": 410,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14700,
+      "CleanupMs": 458,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10691,
+      "CleanupMs": 423,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 68315,
+      "CleanupMs": 407,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12690,
+      "CleanupMs": 507,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 29116,
+      "CleanupMs": 507,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 31192,
+      "CleanupMs": 558,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 6708,
+      "CleanupMs": 605,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 8303,
+      "CleanupMs": 490,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10643,
+      "CleanupMs": 441,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3757,
+      "CleanupMs": 434,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6711,
+      "CleanupMs": 468,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "FIST64 executes real CCPU;16 finite rounding cases are not complete x87 conformance."
+  ]
+}

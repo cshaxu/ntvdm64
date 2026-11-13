@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-473 points have a prior or current review record:175 restored/verified/published,
-0 local restorations pending verification,2 approved retain,296 qualified pending
-decisions and0 prior classifications requiring requalification. Another2247
-points are unreviewed. Sequential file disposition is67/365;298 remain.
+479 points have a prior or current review record:180 restored/verified/published,
+0 local restorations pending verification,2 approved retain,297 qualified pending
+decisions and0 prior classifications requiring requalification. Another2241
+points are unreviewed. Sequential file disposition is68/365;297 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P44 package `7fa7fc90-47fd-4cdf-bac3-e8742a872dff` is published to
+P45 package `9f9c2e07-fb69-411c-8d62-7e8c0ecbc908` is published to
 assets/release and O:/winnt/system32; all11 hashes match. Cached full build,
-mapping/BIOS, x87/CPU boundary and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p44-checkpoint.json).
+FIST64/mapping/BIOS,x87/CPU and Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p45-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,9 +230,10 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P44 original register declarations delivered
+## P45 FPU delivered
 
-R0454-R0466 restored;non-exclusion mirror diff32->0.442 original logical
-lines verified;#error unchanged. Cached build,publication11x2/hash,
-mapping/BIOS/x87/CPU and Full16 passed. Next R0467.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0454-r0466-original-declarations.json).
+R0467-R0471 restored;R0472 minimal residual awaits owner decision.
+Mirror diff16->3;5311 original logical lines verified;#error unchanged.
+Cached build,publication11x2/hash,FIST64/mapping/BIOS/x87/CPU and Full16 passed.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0467-r0472-fpu-review.json).
+Next R0473;S5 remains active.

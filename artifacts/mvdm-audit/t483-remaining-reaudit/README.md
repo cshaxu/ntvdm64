@@ -237,3 +237,8 @@ P44: [original register declarations](r0454-r0466-original-declarations.json),
 13 original restorations verified;mirror diff32->0.473/2720 reviewed;67/365 files
 complete;175 restored delivered,0 local,2 approved,296 pending,2247 unreviewed.
 P44 cached build,publication11x2/hash,mapping/90 BIOS accesses,64 x87/143 CPU and Full16 passed.
+
+P45: [FPU review](r0467-r0472-fpu-review.json),[line proof](batch-p45-line-check.json),
+[checkpoint](batch-p45-checkpoint.json).5restorations delivered,1minimal residual;
+mirror diff16->3.479/2720 reviewed;68/365files complete;180restored delivered,
+0local,2approved,297pending,2241unreviewed. P45 cached build,publication11x2/hash,FIST64/mapping/BIOS/x87/CPU and Full16 passed.

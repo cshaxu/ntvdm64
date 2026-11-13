@@ -2193,6 +2193,8 @@ $graph.Add('build obj/tests/ccpu_far_exception_fixture.obj: cc ' + (NinjaPath (J
 $graph.Add('build ccpu-far-exception-test.exe: memory_test_link obj/tests/ccpu_far_exception_fixture.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/ccpu_stack_transition_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_stack_transition_test.c')))
 $graph.Add('build ccpu-stack-transition-test.exe: memory_test_link obj/tests/ccpu_stack_transition_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/ccpu_fist64_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_fist64_test.c')))
+$graph.Add('build ccpu-fist64-test.exe: memory_test_link obj/tests/ccpu_fist64_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/ccpu_bios_access_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_bios_access_test.c')))
 $graph.Add('build ccpu-bios-access-test.exe: memory_test_link obj/tests/ccpu_bios_access_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/keyboard_controller_pic_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/keyboard_controller_pic_test.c')))
