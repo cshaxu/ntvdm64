@@ -204,7 +204,10 @@ IFN1(
 
 	 new_sp = tpop(STACK_ITEM_3, (ISM32)op1);
 	 load_SS_cache(new_ss, ss_descr_addr, &ss_entry);
-	 set_current_SP(new_sp);
+	 if ( GET_SS_AR_X() == USE16 )
+	    SET_SP(new_sp);
+	 else
+	    SET_ESP(new_sp);
 #line 212
 	 stk_inc = 0;
 

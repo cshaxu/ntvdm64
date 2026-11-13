@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-487 points have a prior or current review record:184 restored/verified/published,
-0 local restorations pending verification,2 approved retain,301 qualified pending
-decisions and0 prior classifications requiring requalification. Another2233
-points are unreviewed. Sequential file disposition is73/365;292 remain.
+488 points have a prior or current review record:184 restored/verified/published,
+0 local restorations pending verification,2 approved retain,302 qualified pending
+decisions and0 prior classifications requiring requalification. Another2232
+points are unreviewed. Sequential file disposition is74/365;291 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P49 package `43b30ce5-f913-45ad-9b51-ad5c64960397` is published to
+P50 package `2b211ec0-abf4-4245-97dd-360e99d1e2ec` is published to
 assets/release and O:/winnt/system32;all11 hashes match.Cached full build,
-callback/C-VID/mapping/BIOS/x87/CPU/FIST64 and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p49-checkpoint.json).
+RET controls,focused and Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p50-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -241,4 +241,6 @@ Mirror diff25->15;203 original logical lines verified. Final build,publication,f
 R0479: redundant comment removed;one-line typed interface pending.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0479-ntthread-header-review.json).
 R0480 exact original restored;P49 diff net-3,full delivery verified.
-Next R0481;S5 remains active.
+P50:R0481 diff5->2;final build/publication/tests verified.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0481-ret-review.json).
+Next R0482;S5 remains active.

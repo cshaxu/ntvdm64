@@ -1,0 +1,41 @@
+{
+  "id": "T483-R0481",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/ccpu386/ret.c",
+  "responsibility": "Decoder opcodes CA/CB dispatch RETF; outer return tpop/check_SS/load_SS_cache restores target stack, then byte_change_SP drops parameters. CPU owner,not host shim.",
+  "original_limit": "Original operand-size selection disagrees with historical eSP destination stack-width interpretation in mixed operand/SS widths.",
+  "specific_diff": "Restore original four-line SET_SP/SET_ESP branch; retain only GET_SS_AR_X discriminator in place of GET_OPERAND_SIZE. This is equivalent to current set_current_SP after load_SS_cache.",
+  "sources": {
+    "historical": "https://pdos.csail.mit.edu/6.828/2018/readings/i386/RET.htm",
+    "notation": "https://cs.nyu.edu/~mwalfish/classes/14fa/ref/i386/s17_02.htm",
+    "modern": "https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf"
+  },
+  "contract_boundary": "Historical outer return uses SS:eSP; eSP denotes stack-B-selected width. Modern RET pseudocode writes ESP for both operand widths. Do not claim hardware/modern equivalence; retained historical contract is pending owner choice.",
+  "controls": {
+    "command": "build/t483-s5-p50/verify-final.cmd",
+    "current": "CCPU_STACK_PROFILE cases=36 failures=0\n",
+    "original": "FAIL RETF outer adjustment operand=16 SS=32 ESP=a5a58004 CPL=3 fault=0\nFAIL RETF outer adjustment operand=32 SS=16 ESP=12348008 CPL=3 fault=0\nCCPU_STACK_PROFILE cases=36 failures=2\n",
+    "limits": "Actual RETF object with test host boundaries;not full decoder or guest gameplay. Original predicate override linked first;check map. Existing fixture is not sole contract oracle."
+  },
+  "diff": {
+    "before_added": 1,
+    "before_removed": 4,
+    "after_added": 1,
+    "after_removed": 1,
+    "net": -3
+  },
+  "decision": "Minimized;one discriminator remains pending owner decision",
+  "verification": "batch-p50-checkpoint.json:final-source full delivery verified;accompanies Git commit.",
+  "proof_hashes": {
+    "src/mvdm-host/softpc.new/base/ccpu386/ret.c": "033ed0ac65d26a9ec5105fdf6ebb1992eb635080d463bb975a2dc16a178b7cc6",
+    "test/mvdm-host/ccpu_stack_transition_test.c": "6963bac40412853992b9c0390c6aafdc055514e72c96e02f0631ea4124440ff8",
+    "build/t483-s5-p50/current-final.txt": "6805833d77b8fad50a4fca7c0c7032eb86ec9a6874a31a56aa144f3638a5afb2",
+    "build/t483-s5-p50/original-final.txt": "5453414bef428742283d8a9e1415c0570811390b5ae7cb3035aec1e12b745c64",
+    "build/t483-s5-p50/original-stack-final.exe.map": "66c6824e74b5adbbffd391fe68a4172a9e5f008d09c26d8f916711208519f962"
+  },
+  "counter_review": {
+    "responsibility": "Actual decoder CA/CB selects RETF;stack return and parameter adjustment remain in original CPU owner.",
+    "original_limit": "Independent historical RET/eSP text and two actual-provider negative controls support mixed-width difference; modern SDM disagreement explicitly retained.",
+    "minimality": "Same target-SS discriminator and assignments as existing set_current_SP; restore original branch shape without extra state,helper or shim.",
+    "test_scope": "36 actual instruction-entrypoint cases include CALL,IRET,RETF and fault-before-commit;not36 standalone RETF cases or guest gameplay."
+  }
+}

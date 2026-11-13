@@ -1,0 +1,135 @@
+{
+  "batch": "P50",
+  "status": "P50 verified delivery; accompanies Git commit",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "sha256": "033ed0ac65d26a9ec5105fdf6ebb1992eb635080d463bb975a2dc16a178b7cc6"
+    }
+  ],
+  "mirror_diff_delta": -3,
+  "package": "2b211ec0-abf4-4245-97dd-360e99d1e2ec",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1448,
+      "CleanupMs": 574,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 241,
+      "CleanupMs": 541,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66100,
+      "CleanupMs": 480,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 46760,
+      "CleanupMs": 460,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 44130,
+      "CleanupMs": 504,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14916,
+      "CleanupMs": 440,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 11219,
+      "CleanupMs": 497,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 77844,
+      "CleanupMs": 491,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12614,
+      "CleanupMs": 457,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 27985,
+      "CleanupMs": 490,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30165,
+      "CleanupMs": 480,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4708,
+      "CleanupMs": 455,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7793,
+      "CleanupMs": 476,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10120,
+      "CleanupMs": 452,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3909,
+      "CleanupMs": 423,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6406,
+      "CleanupMs": 500,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=38812 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=13680 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=18792 escaped=1 nested=1 continue=1 normal-fe=1\n"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ],
+  "stack_controls": {
+    "current": "CCPU_STACK_PROFILE cases=36 failures=0\n",
+    "original": "FAIL RETF outer adjustment operand=16 SS=32 ESP=a5a58004 CPL=3 fault=0\nFAIL RETF outer adjustment operand=32 SS=16 ESP=12348008 CPL=3 fault=0\nCCPU_STACK_PROFILE cases=36 failures=2\n"
+  }
+}

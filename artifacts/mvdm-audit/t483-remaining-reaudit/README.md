@@ -280,3 +280,10 @@ code/data/relocations from compiler linker-remove checksum metadata.
 P49 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
 487/2720 reviewed;184restored delivered,0local,2approved,301pending,2233unreviewed.
 73/365 files complete;292remain. Next R0481.
+
+R0481:[RET review](r0481-ret-review.json),[lines](batch-p50-line-check.json),[checkpoint](batch-p50-checkpoint.json).
+Mirror diff5->2,final delivery pending.488/2720 reviewed;184restored delivered,0local restorations,2approved,302pending,2232unreviewed.74/365files complete;291remain.
+
+P50 delivered:cached build,11x2 publication/hash,36stack/2expected original failures,focused and Full16 passed.
+488/2720 reviewed;184restored delivered,0local,2approved,302pending,2232unreviewed.
+74/365files complete;291remain.Next R0482.
