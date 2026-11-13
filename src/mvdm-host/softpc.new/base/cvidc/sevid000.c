@@ -891,8 +891,8 @@ switch ( id )
 	if	(*((IU32	*)&(r22)	+	REGLONG)	+	*((IU32	*)&(r21)	+	REGLONG)	>	32	||	*((IU32	*)&(r22)	+	REGLONG)	==	0)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
-	*((IU32 *)&r20 + REGLONG) = (IU32)*((IU16 *)(LocalIUH+2) + REGWORD) | ((IU32)*((IU16 *)&r2 + REGWORD) << 16); /* DIV-889: compose both CPU words. */
-	*((IU32 *)(LocalIUH+2) + REGLONG) = *((IU32 *)&r20 + REGLONG);
+	*((IU32	*)(LocalIUH+2)	+	REGLONG)	=	(IU32)*((IU16	*)(LocalIUH+2)	+	REGWORD)	|	((IU32)*((IU16	*)&(r2)	+	REGWORD)	<<	16)	;	
+	*((IU16	*)&(r20)	+	REGWORD)	=	*((IU16	*)&(r2)	+	REGWORD	)	;	
 	*((IUH	*)(r1+0))	=	(IS32)(16207)	;	
 	*((IU32	*)&(r2)	+	REGLONG)	=	*((IU32	*)(LocalIUH+2)	+	REGLONG)	;	
 /*J_KILL__*/
@@ -933,8 +933,8 @@ switch ( id )
 	else
 	if	((*((IU32	*)(LocalIUH+1)	+	REGLONG)	&	(1	<<	*((IU32	*)&(r20)	+	REGLONG)))	==	0)	goto	L26_2if_f;	
 	*((IUH	*)(LocalIUH+4))	=	(IS32)(7) /* T99: odd/even plane stride. */	;	
-	goto L26_3if_d; /* T88: keep this activation's saved locals. */
-
+	{	extern	IUH	L26_3if_d()	;	
+	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L26_3if_d(v1,v2,v3,v4);	return(returnValue);	}	
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L26_2if_f_id	:
 		L26_2if_f:	;	
@@ -978,8 +978,8 @@ switch ( id )
 	if	(*((IU32	*)(LocalIUH+6)	+	REGLONG)	>	*((IU32	*)&(r20)	+	REGLONG))	goto	L26_6w_t;	
 	case	L26_7w_d_id	:
 		L26_7w_d:	;	
-	goto L26_5if_d; /* T88: keep this activation's saved locals. */
-
+	{	extern	IUH	L26_5if_d()	;	
+	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L26_5if_d(v1,v2,v3,v4);	return(returnValue);	}	
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L26_4if_f_id	:
 		L26_4if_f:	;	
@@ -1809,8 +1809,8 @@ switch ( id )
 	if	(*((IU32	*)&(r22)	+	REGLONG)	+	*((IU32	*)&(r21)	+	REGLONG)	>	32	||	*((IU32	*)&(r22)	+	REGLONG)	==	0)
 	CrulesRuntimeError("Bad	long	bitfield");
 	else
-	*((IU32 *)&r20 + REGLONG) = (IU32)*((IU16 *)(LocalIUH+2) + REGWORD) | ((IU32)*((IU16 *)&r2 + REGWORD) << 16); /* DIV-889: compose both CPU words. */
-	*((IU32 *)(LocalIUH+2) + REGLONG) = *((IU32 *)&r20 + REGLONG);
+	*((IU32	*)(LocalIUH+2)	+	REGLONG)	=	(IU32)*((IU16	*)(LocalIUH+2)	+	REGWORD)	|	((IU32)*((IU16	*)&(r2)	+	REGWORD)	<<	16)	;	
+	*((IU16	*)&(r20)	+	REGWORD)	=	*((IU16	*)&(r2)	+	REGWORD	)	;	
 	*((IUH	*)(r1+0))	=	(IS32)(16237)	;	
 	*((IU32	*)&(r2)	+	REGLONG)	=	*((IU32	*)(LocalIUH+2)	+	REGLONG)	;	
 /*J_KILL__*/
@@ -1851,8 +1851,8 @@ switch ( id )
 	else
 	if	((*((IU32	*)(LocalIUH+1)	+	REGLONG)	&	(1	<<	*((IU32	*)&(r21)	+	REGLONG)))	==	0)	goto	L26_25if_f;	
 	*((IUH	*)(LocalIUH+4))	=	(IS32)(7) /* T99: odd/even plane stride. */	;	
-	goto L26_26if_d; /* T88: keep this activation's saved locals. */
-
+	{	extern	IUH	L26_26if_d()	;	
+	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L26_26if_d(v1,v2,v3,v4);	return(returnValue);	}	
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L26_25if_f_id	:
 		L26_25if_f:	;	
@@ -1916,8 +1916,8 @@ switch ( id )
 	if	(*((IU32	*)(LocalIUH+6)	+	REGLONG)	>	*((IU32	*)&(r21)	+	REGLONG))	goto	L26_29w_t;	
 	case	L26_30w_d_id	:
 		L26_30w_d:	;	
-	goto L26_28if_d; /* T88: keep this activation's saved locals. */
-
+	{	extern	IUH	L26_28if_d()	;	
+	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L26_28if_d(v1,v2,v3,v4);	return(returnValue);	}	
 	/*	j_state	(IS32)(-2013004285),	(IS32)(0),	(IS32)(0)	*/
 	case	L26_27if_f_id	:
 		L26_27if_f:	;	
@@ -2711,11 +2711,11 @@ switch ( id )
 		L26_41w_t:	;	
 	*((IUH	*)&(r21))	=	(IS32)(1)	;	
 	*((IU32	*)(LocalIUH+5)	+	REGLONG)	=	*((IU32	*)(LocalIUH+5)	+	REGLONG)	-	*((IU32	*)&(r21)	+	REGLONG)	;	
-	*((IUH	*)&(r20))	=	(IS32)(1376)	;	
+	*((IUH	*)&(r20))	=	(IS32)(1379)	;	
 	*((IUH	*)&(r22))	=	(IS32)(1284)	;	
 	*((IUH	*)&(r23))	=	*((IUH	*)(LocalIUH+4))	;	
 	*((IU8	*)&(r21)	+	REGBYTE)	=	*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r20)))	)	^	*((IU8	*)((*((IHPE	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22))))	)	+	*((IHPE	*)&(r23)))	)	;	
-	*((IUH	*)&(r22))	=	(IS32)(1380)	;	
+	*((IUH	*)&(r22))	=	(IS32)(1383)	;	
 	*((IU8	*)&(r21)	+	REGBYTE)	=	*((IU8	*)&(r21)	+	REGBYTE)	|	*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22)))	)	;	
 	*((IUH	*)&(r21))	=	*((IU8	*)&(r21)	+	REGBYTE);	
 	*((IU32	*)(LocalIUH+6)	+	REGLONG)	=	*((IU32	*)&(r21)	+	REGLONG)	;	
@@ -2770,11 +2770,11 @@ switch ( id )
 		L26_43w_t:	;	
 	*((IUH	*)&(r21))	=	(IS32)(1)	;	
 	*((IU32	*)(LocalIUH+5)	+	REGLONG)	=	*((IU32	*)(LocalIUH+5)	+	REGLONG)	-	*((IU32	*)&(r21)	+	REGLONG)	;	
-	*((IUH	*)&(r20))	=	(IS32)(1376)	;	
+	*((IUH	*)&(r20))	=	(IS32)(1379)	;	
 	*((IUH	*)&(r22))	=	(IS32)(1284)	;	
 	*((IUH	*)&(r23))	=	*((IUH	*)(LocalIUH+4))	;	
 	*((IU8	*)&(r21)	+	REGBYTE)	=	*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r20)))	)	^	*((IU8	*)((*((IHPE	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22))))	)	+	*((IHPE	*)&(r23)))	)	;	
-	*((IUH	*)&(r22))	=	(IS32)(1380)	;	
+	*((IUH	*)&(r22))	=	(IS32)(1383)	;	
 	*((IU8	*)&(r21)	+	REGBYTE)	=	*((IU8	*)&(r21)	+	REGBYTE)	|	*((IU8	*)((*((IHPE	*)&(r1)))	+	*((IHPE	*)&(r22)))	)	;	
 	*((IUH	*)&(r21))	=	*((IU8	*)&(r21)	+	REGBYTE);	
 	*((IU32	*)(LocalIUH+6)	+	REGLONG)	=	*((IU32	*)&(r21)	+	REGLONG)	;	

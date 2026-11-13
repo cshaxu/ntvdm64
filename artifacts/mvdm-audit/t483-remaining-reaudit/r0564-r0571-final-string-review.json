@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R0564",
+      "anchor": 2184,
+      "delta": 0,
+      "after": "+1/-1",
+      "reason": "Original CHAIN4 updater writes scalar0/ff; original high-byte offset reads0 on x86. Selected bytewise string loop must read low byte. Individual restoration introduces64/128failures in corresponding destination-direction branch.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=64 nonzero_output_bytes=2304\n",
+      "decision": "qualified pending owner"
+    },
+    {
+      "id": "T483-R0565",
+      "anchor": 2188,
+      "delta": 0,
+      "after": "+1/-1",
+      "reason": "Original CHAIN4 updater writes scalar0/ff; original high-byte offset reads0 on x86. Selected bytewise string loop must read low byte. Individual restoration introduces64/128failures in corresponding destination-direction branch.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=128 nonzero_output_bytes=2304\n",
+      "decision": "qualified pending owner"
+    },
+    {
+      "id": "T483-R0566",
+      "anchor": 2212,
+      "delta": 0,
+      "after": "+1/-1",
+      "reason": "Original CHAIN4 updater writes scalar0/ff; original high-byte offset reads0 on x86. Selected bytewise string loop must read low byte. Individual restoration introduces64/128failures in corresponding destination-direction branch.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=64 nonzero_output_bytes=2304\n",
+      "decision": "qualified pending owner"
+    },
+    {
+      "id": "T483-R0567",
+      "anchor": 2216,
+      "delta": 0,
+      "after": "+1/-1",
+      "reason": "Original CHAIN4 updater writes scalar0/ff; original high-byte offset reads0 on x86. Selected bytewise string loop must read low byte. Individual restoration introduces64/128failures in corresponding destination-direction branch.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=128 nonzero_output_bytes=2304\n",
+      "decision": "qualified pending owner"
+    },
+    {
+      "id": "T483-R0568",
+      "anchor": 2714,
+      "delta": -2,
+      "after": "0",
+      "reason": "Result is read asIU8,zero-extended intoLocalIUH+6,then ANDed with its own bits8..15/16..23/24..31; result always0. Both destination branches follow this. Changing comparison byte offset cannot affect output or final latch address. Restore original offsets rather than retain ineffective adaptation.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304\n",
+      "decision": "restore original"
+    },
+    {
+      "id": "T483-R0569",
+      "anchor": 2718,
+      "delta": -2,
+      "after": "0",
+      "reason": "Result is read asIU8,zero-extended intoLocalIUH+6,then ANDed with its own bits8..15/16..23/24..31; result always0. Both destination branches follow this. Changing comparison byte offset cannot affect output or final latch address. Restore original offsets rather than retain ineffective adaptation.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304\n",
+      "decision": "restore original"
+    },
+    {
+      "id": "T483-R0570",
+      "anchor": 2773,
+      "delta": -2,
+      "after": "0",
+      "reason": "Result is read asIU8,zero-extended intoLocalIUH+6,then ANDed with its own bits8..15/16..23/24..31; result always0. Both destination branches follow this. Changing comparison byte offset cannot affect output or final latch address. Restore original offsets rather than retain ineffective adaptation.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304\n",
+      "decision": "restore original"
+    },
+    {
+      "id": "T483-R0571",
+      "anchor": 2777,
+      "delta": -2,
+      "after": "0",
+      "reason": "Result is read asIU8,zero-extended intoLocalIUH+6,then ANDed with its own bits8..15/16..23/24..31; result always0. Both destination branches follow this. Changing comparison byte offset cannot affect output or final latch address. Restore original offsets rather than retain ineffective adaptation.",
+      "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304\n",
+      "decision": "restore original"
+    }
+  ],
+  "current_control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304\n",
+  "final_control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=0 nonzero_output_bytes=2304\n",
+  "method": "8starts x2compare x2care x2destination traversal x8lengths=512permode. Actual original updater; byte-reader oracle at every source byte. Probe exit0 means collection completed,NOT assertions passed; textual failure counts authoritative.",
+  "preexisting_gap": "UNCHAINED S_2110 reads onlyIU8 intoLocalIUH+6 then reduces four bytes,forcing0. Correct repair requires coherent32bit plane compare before reduction; merely moving byte offset is ineffective. Not repaired or declared acceptable. Full delivery cannot claim this regression passed.",
+  "counter_review": [
+    "Restored four offsets do not change output or latch addressing by source proof; extracted high-byte result dies before any external callback. Final scratch register contents are not used by host glue.",
+    "CHAIN4 string byte operations differ from previously found16bit word-mask gap; do not conflate.",
+    "No guest/full acceptance claimed."
+  ],
+  "delta": -8,
+  "final_sha256": "208ca0085de613aeb8beb33f6e20b7e006df89b93a9462b6ab25929b80f15278"
+}

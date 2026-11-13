@@ -1,0 +1,151 @@
+{
+  "status": "P55 delivery gates verified; known baseline failures retained; accompanies Git commit",
+  "source_files": 5,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+      "sha256": "31efdd4784c2b796f14965e4a7177595aec0924b8bf0a7950e6b6197c3f394d3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "sha256": "83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+      "sha256": "f8e31bc5d63f810f73da165084a5a498a8261e48ff20daf7efdc1393216f2f48"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "sha256": "6d6f8e99e437c8dcc7cde9afd3e215bd6f85c0f9d1076ddcb853ef4de9be7e80"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+      "sha256": "208ca0085de613aeb8beb33f6e20b7e006df89b93a9462b6ab25929b80f15278"
+    }
+  ],
+  "mirror_diff_delta": -65,
+  "known_baseline_failures": [
+    "CHAIN4 mode1 word high-byte mask:320/512 fail in current baseline.",
+    "UNCHAINED mode1 string reduction:512/512 fail both before and restored offsets."
+  ],
+  "verification": "Source and focused controls recorded separately;full delivery pending.",
+  "package": "7933fa92-bea5-42a6-9cd2-42972473b203",
+  "images": 11,
+  "cached_full_exit": 0,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1618,
+      "CleanupMs": 539,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 325,
+      "CleanupMs": 466,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66809,
+      "CleanupMs": 487,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 43759,
+      "CleanupMs": 469,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 43457,
+      "CleanupMs": 416,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14861,
+      "CleanupMs": 482,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10816,
+      "CleanupMs": 454,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 56926,
+      "CleanupMs": 390,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12619,
+      "CleanupMs": 469,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28215,
+      "CleanupMs": 379,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30105,
+      "CleanupMs": 383,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 3872,
+      "CleanupMs": 401,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7663,
+      "CleanupMs": 401,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10276,
+      "CleanupMs": 488,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 5056,
+      "CleanupMs": 463,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6619,
+      "CleanupMs": 500,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/forward/backward strings/fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=24824 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=18300 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=19004 escaped=1 nested=1 continue=1 normal-fe=1\n"
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ]
+}

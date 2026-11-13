@@ -1,0 +1,38 @@
+{
+  "id": "T483-R0495",
+  "file": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/cvidc/evidfunc.h",
+  "original_sha256": "31efdd4784c2b796f14965e4a7177595aec0924b8bf0a7950e6b6197c3f394d3",
+  "current_sha256": "31efdd4784c2b796f14965e4a7177595aec0924b8bf0a7950e6b6197c3f394d3",
+  "diff": {
+    "before_added": 13,
+    "before_removed": 17,
+    "after_added": 0,
+    "after_removed": 0,
+    "net": -30,
+    "excluded": "Compensating #line not counted"
+  },
+  "responsibility": "Declare addresses used in the original EVID_MARK_POINTERS tables. Actual generated rule calls pass the J-code scratch registers, not parameters inferred from these declarations.",
+  "original_capability": "Both selected product consumers ev_glue.c/evidfunc.c compile with the original header. sevid001.c defines its IUH four-argument rule wrappers without including this header; internal rule calls have their own declarations. Test consumer has no named direct calls to these markers.",
+  "exact_diff_necessity": "No evidence of a selected-call failure. Original default-int and shorter prototypes differ from rule definitions, but these consumers only materialize the same symbol addresses. Do not infer a runtime defect merely from declaration style.",
+  "counter_review": "Not a blanket claim that mismatched prototypes are safe. Scope is this exact selected C-VID address-table usage and actual MSVC x86 build flags. New direct callers would need separate ABI review.",
+  "object_comparison": {
+    "ev_glue": {
+      "equal": true,
+      "sections": 53,
+      "before_sha256": "8cf5d86a4699db66fb9f3a7a315c45bec9a5ec0f38dfe2006ba2e6a930d013b7",
+      "original_sha256": "51b668824641da2ae7ec493b0f9cbb8f75e8ba5d6249308a0606410a5c5114fc"
+    },
+    "evidfunc": {
+      "equal": true,
+      "sections": 2,
+      "before_sha256": "4f7918e69cdb9bf918211db677742d1bfe002818d48c5e55649b35d805c7cf7d",
+      "original_sha256": "ffc1475759b3af01cecdc1bbc5a63b3a506e7880df5cc9dc121eb192585c1906"
+    }
+  },
+  "warnings": "Original C4431 default-int warnings recorded. They are accepted by actual selected compilation flags; not errors or evidence of runtime failure.",
+  "line_mapping": "Entire file equals pinned original bytes;all original line positions restored. No excluded #error branch exists in either file.",
+  "status": "original restored locally; no behavior/binding change in actual product consumers; accumulate with next batch under owner rule9",
+  "delivery": "pending;published P54 remains current"
+}

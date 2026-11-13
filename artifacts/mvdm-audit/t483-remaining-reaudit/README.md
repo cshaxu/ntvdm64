@@ -320,3 +320,59 @@ P54 local:ev_glue.c six points audited;mirror diff54->25(net-29).
 P54 delivered:cached build,11x2 publication/hash,focused and Full16 passed.
 501/2720 reviewed;192 restored delivered,0 local,2 approved,307 pending,2219 unreviewed.
 79/365 files complete;286 remain.Next R0495.
+
+P55 local R0495:exact original header restored,mirror diff net-30;two product consumer object controls equal.
+502 reviewed;192 delivered,1 local,2 approved,307 pending,2218 unreviewed;80/365 files.
+Nonbinding batch accumulates;no full build or new publication claimed.
+
+P55 R0496-R0499:four paired boundaries pending;mirror diff net-3.
+506 reviewed;192 delivered,1 local,2 approved,311 pending,2214 unreviewed;81/365 files.
+Two-header batch net-33;next R0500.
+
+P55 R0500 original restored;mirror diff net-2;10 object sections equal.
+507 reviewed;192 delivered,2 local,2 approved,311 pending,2213 unreviewed;82/365 files.
+Three-file nonbinding batch net-35;next R0501.
+
+P55 R0501 restored;mirror diff net-2;70 compile controls,4722 sections equal.
+508 reviewed;192 delivered,3 local,2 approved,311 pending,2212 unreviewed;83/365 files.
+Four-file nonbinding batch net-37;next R0502.
+
+R0502 qualified residual:current16/16,original shift12/16 mismatches;one-line diff unchanged.
+509 reviewed;192 delivered,3 local,2 approved,312 pending,2211 unreviewed.
+83/365 files complete;sevid0001/70 points reviewed,next R0503.
+
+P55 R0503-R0506: four individual original-restoration controls prove address/latch or nested-local failure; no product changes. See [review](r0503-r0506-word-read-review.json). Reviewed513/2720;316 pending;83/365 files complete, sevid0005/70.
+
+P55 R0507-R0508: second-word and composition controls;R0508 minimized+2/-2 to+1/-1. [Evidence](r0507-r0508-dword-review.json). Reviewed515/2720;318pending;83/365files complete;sevid0007/70. Batch net-39;full-file delivery pending.
+
+P55 R0509 original internal call restored;stride remains pending. Mirror+3/-3 -> +1/-1,net-4;128/128 focused cases pass. [Evidence](r0509-string-entry-review.json). Reviewed516/2720;319pending;sevid0008/70;batch net-43;full-file delivery pending.
+
+P55 R0510-R0515: five address residuals qualified;R0513 original completion call restored,net-4. [Evidence](r0510-r0515-string-loop-review.json). Reviewed522/2720;324pending;4local restorations;sevid00014/70;batch net-47;full delivery pending.
+
+P55 R0516: unchained dword original offset fails32cases;current64/64. [Evidence](r0516-unchained-dword-review.json). Reviewed523/2720;325pending;sevid00015/70;batch net-47 unchanged.
+
+P55 R0517 mode1 address residual qualified;[evidence](r0517-mode1-byte-address-review.json). Reviewed524/2720;326pending;sevid00016/70. R0518+ field sources still require investigation, not pending-owner admission.
+
+P55 R0518-R0521: original updater transition proves offset regressions;current256/256,full CHAIN2 comparison coverage explicitly not claimed. [Evidence](r0518-r0521-mode1-field-review.json). Reviewed528/2720;330pending;sevid00020/70;batch net-47.
+
+P55 R0522-R0523 qualified with comparison-field-independent word controls. [Evidence](r0522-r0523-mode1-word-address-review.json). Reviewed530/2720;332pending;sevid00022/70;batch net-47 unchanged.
+
+P55 R0524-R0533: ten single-line original controls fail96/152of256;current256/256. [Evidence](r0524-r0533-mode1-word-fields-review.json). Reviewed540/2720;342pending;sevid00032/70;batch net-47 unchanged.
+
+P55 R0534 real nested dword control: original internal call loses local activation;current16/16. [Evidence](r0534-mode1-nested-local-review.json). Reviewed541/2720;343pending;sevid00033/70;batch net-47.
+
+P55 R0535-R0544: eight field residuals+two dword residuals qualified;R0544 minimized net-2 with final16/16. [Evidence](r0535-r0544-mode1-word-dword-review.json). Reviewed551/2720;353pending;sevid00043/70;batch net-49.
+
+P55 R0545 original internal call restored;stride remains pending;net-4,current candidate128/128. [Evidence](r0545-mode1-string-entry-review.json). Reviewed552/2720;354pending;sevid00044/70;batch net-53.
+
+P55 R0546-R0559: thirteen bounded residuals;R0553 original completion restored,net-4,final512/512. [Evidence](r0546-r0559-mode1-string-loop-review.json). Reviewed566/2720;367pending;5local restorations;sevid00058/70;batch net-57.
+
+P55 R0560-R0561 CHAIN4 byte offset evidence uses actual scalar updater;current128/128. [Evidence](r0560-r0561-chain4-byte-review.json). Reviewed568/2720;369pending;sevid00060/70;batch net-57.
+
+P55 R0562/R0563: necessary but incomplete word mask adaptation;current320/512fail. [Root cause/proposal](r0562-r0563-chain4-word-gap-review.json). Net-increase repair not implemented;not a pass. Reviewed570/2720;371pending;sevid00062/70;batch net-57.
+
+P55 sevid00070/70 dispositions complete. R0568-R0571 restored ineffective offsets;net-8;UNCHAINED zero-output baseline defect explicit,not passed. [Review](r0564-r0571-final-string-review.json),[whole-file lines/diff](p55-sevid000-file-check.json). Reviewed578/2720;375pending;9local restorations;84/365files complete;batch net-65;full delivery pending.
+
+P55 delivery:cached build,11x2 publication/hash,focused and Full16 passed.
+578/2720 reviewed;201 restored delivered,0 local,2 approved,375 pending;2142 unreviewed.
+84/365 files disposition complete;281 remain.Next R0572.Known CVIDC baseline failures remain,not fixed.

@@ -1,0 +1,118 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R0524",
+      "anchor": 1672,
+      "kind": "compare",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared colour_comp instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=0 y=ff expected=0 actual=ff latch=19ff1900 got=19ff1900\nFAIL a=1 c=0 d=0 x=0 y=55 expected=0 actual=55 latch=19551900 got=19551900\nFAIL a=1 c=0 d=0 x=0 y=aa expected=0 actual=aa latch=19aa1900 got=19aa1900\nFAIL a=1 c=0 d=0 x=ff y=ff expected=ffff actual=ff00 latch=19ff19ff got=19ff19ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=5500 latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=aa00 latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=55aa latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=55 expected=5555 actual=5500 latch=19551955 got=19551955\nwordfield cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0525",
+      "anchor": 1675,
+      "kind": "care",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared dont_care instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=0 y=ff expected=0 actual=ff latch=19ff1900 got=19ff1900\nFAIL a=1 c=0 d=0 x=0 y=55 expected=0 actual=55 latch=19551900 got=19551900\nFAIL a=1 c=0 d=0 x=0 y=aa expected=0 actual=aa latch=19aa1900 got=19aa1900\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=55ff latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=aa expected=0 actual=aa latch=19aa1955 got=19aa1955\nFAIL a=1 c=0 d=0 x=aa y=ff expected=aaaa actual=aaff latch=19ff19aa got=19ff19aa\nFAIL a=1 c=0 d=0 x=aa y=55 expected=0 actual=55 latch=195519aa got=195519aa\nFAIL a=1 c=0 d=1 x=0 y=0 expected=ffff actual=ff00 latch=19001900 got=19001900\nwordfield cases=256 failures=152\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0526",
+      "anchor": 1682,
+      "kind": "compare",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared colour_comp instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=ff y=0 expected=0 actual=ff latch=190019ff got=190019ff\nFAIL a=1 c=0 d=0 x=ff y=ff expected=ffff actual=ff00 latch=19ff19ff got=19ff19ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=55aa latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=aa55 latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=0 expected=0 actual=55 latch=19001955 got=19001955\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=5500 latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=55 expected=5555 actual=5500 latch=19551955 got=19551955\nFAIL a=1 c=0 d=0 x=55 y=aa expected=0 actual=55 latch=19aa1955 got=19aa1955\nwordfield cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0527",
+      "anchor": 1685,
+      "kind": "care",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared dont_care instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=ff y=0 expected=0 actual=ff latch=190019ff got=190019ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=55ff latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=aaff latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=0 expected=0 actual=55 latch=19001955 got=19001955\nFAIL a=1 c=0 d=0 x=55 y=aa expected=0 actual=55 latch=19aa1955 got=19aa1955\nFAIL a=1 c=0 d=0 x=aa y=0 expected=0 actual=aa latch=190019aa got=190019aa\nFAIL a=1 c=0 d=0 x=aa y=55 expected=0 actual=aa latch=195519aa got=195519aa\nFAIL a=1 c=0 d=1 x=0 y=0 expected=ffff actual=ff00 latch=19001900 got=19001900\nwordfield cases=256 failures=152\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0528",
+      "anchor": 1691,
+      "kind": "address",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Odd-start word second byte lies in next8byte physical pair; original4/6 offset selects the gap instead of planes0/2 at8/10.",
+      "control": "FAIL a=1 c=0 d=0 x=0 y=ff expected=0 actual=1900 latch=19ff1900 got=19ff1900\nFAIL a=1 c=0 d=0 x=0 y=55 expected=0 actual=1100 latch=19551900 got=19551900\nFAIL a=1 c=0 d=0 x=0 y=aa expected=0 actual=800 latch=19aa1900 got=19aa1900\nFAIL a=1 c=0 d=0 x=ff y=ff expected=ffff actual=19ff latch=19ff19ff got=19ff19ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=1155 latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=8aa latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=1955 latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=55 expected=5555 actual=1155 latch=19551955 got=19551955\nwordfield cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0529",
+      "anchor": 1693,
+      "kind": "compare",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared colour_comp instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=0 y=ff expected=0 actual=ff00 latch=19ff1900 got=19ff1900\nFAIL a=1 c=0 d=0 x=0 y=55 expected=0 actual=5500 latch=19551900 got=19551900\nFAIL a=1 c=0 d=0 x=0 y=aa expected=0 actual=aa00 latch=19aa1900 got=19aa1900\nFAIL a=1 c=0 d=0 x=ff y=ff expected=ffff actual=ff latch=19ff19ff got=19ff19ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=55 latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=aa latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=aa55 latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=55 expected=5555 actual=55 latch=19551955 got=19551955\nwordfield cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0530",
+      "anchor": 1696,
+      "kind": "care",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared dont_care instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=0 y=ff expected=0 actual=ff00 latch=19ff1900 got=19ff1900\nFAIL a=1 c=0 d=0 x=0 y=55 expected=0 actual=5500 latch=19551900 got=19551900\nFAIL a=1 c=0 d=0 x=0 y=aa expected=0 actual=aa00 latch=19aa1900 got=19aa1900\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=ff55 latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=aa expected=0 actual=aa00 latch=19aa1955 got=19aa1955\nFAIL a=1 c=0 d=0 x=aa y=ff expected=aaaa actual=ffaa latch=19ff19aa got=19ff19aa\nFAIL a=1 c=0 d=0 x=aa y=55 expected=0 actual=5500 latch=195519aa got=195519aa\nFAIL a=1 c=0 d=1 x=0 y=0 expected=ffff actual=ff latch=19001900 got=19001900\nwordfield cases=256 failures=152\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0531",
+      "anchor": 1701,
+      "kind": "address",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Odd-start word second byte lies in next8byte physical pair; original4/6 offset selects the gap instead of planes0/2 at8/10.",
+      "control": "FAIL a=1 c=0 d=0 x=ff y=0 expected=0 actual=1900 latch=190019ff got=190019ff\nFAIL a=1 c=0 d=0 x=ff y=ff expected=ffff actual=19ff latch=19ff19ff got=19ff19ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=1955 latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=19aa latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=0 expected=0 actual=1100 latch=19001955 got=19001955\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=1155 latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=55 expected=5555 actual=1155 latch=19551955 got=19551955\nFAIL a=1 c=0 d=0 x=55 y=aa expected=0 actual=1100 latch=19aa1955 got=19aa1955\nwordfield cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0532",
+      "anchor": 1703,
+      "kind": "compare",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared colour_comp instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=ff y=0 expected=0 actual=ff00 latch=190019ff got=190019ff\nFAIL a=1 c=0 d=0 x=ff y=ff expected=ffff actual=ff latch=19ff19ff got=19ff19ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=aa55 latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=55aa latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=0 expected=0 actual=5500 latch=19001955 got=19001955\nFAIL a=1 c=0 d=0 x=55 y=ff expected=5555 actual=55 latch=19ff1955 got=19ff1955\nFAIL a=1 c=0 d=0 x=55 y=55 expected=5555 actual=55 latch=19551955 got=19551955\nFAIL a=1 c=0 d=0 x=55 y=aa expected=0 actual=5500 latch=19aa1955 got=19aa1955\nwordfield cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    },
+    {
+      "id": "T483-R0533",
+      "anchor": 1706,
+      "kind": "care",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original offset selects high byte of shared dont_care instead of low byte on little-endian x86. Real updater transition produces unequal low/high bytes; final CHAIN2 per-plane conditions are uniform and current low-byte selection agrees with original per-plane oracle, single restored offset does not.",
+      "control": "FAIL a=1 c=0 d=0 x=ff y=0 expected=0 actual=ff00 latch=190019ff got=190019ff\nFAIL a=1 c=0 d=0 x=ff y=55 expected=5555 actual=ff55 latch=195519ff got=195519ff\nFAIL a=1 c=0 d=0 x=ff y=aa expected=aaaa actual=ffaa latch=19aa19ff got=19aa19ff\nFAIL a=1 c=0 d=0 x=55 y=0 expected=0 actual=5500 latch=19001955 got=19001955\nFAIL a=1 c=0 d=0 x=55 y=aa expected=0 actual=5500 latch=19aa1955 got=19aa1955\nFAIL a=1 c=0 d=0 x=aa y=0 expected=0 actual=aa00 latch=190019aa got=190019aa\nFAIL a=1 c=0 d=0 x=aa y=55 expected=0 actual=aa00 latch=195519aa got=195519aa\nFAIL a=1 c=0 d=1 x=0 y=0 expected=ffff actual=ff latch=19001900 got=19001900\nwordfield cases=256 failures=152\n",
+      "exit": 21,
+      "minimum": "Single constant substitution; no extra helper/state; moving representation into a new adapter would not eliminate complexity."
+    }
+  ],
+  "actual_chain": "Original ega_read_routines_update sets UNCHAINED compare/care masks5/10; then CHAIN2 compare/care masks15/0 set all four per-plane conditions equally, while shared low byte remains the appropriate0/ff and high byte differs. Generated word read selected from read_mode1_evid[1]. No direct comparison-field setters in probe.",
+  "oracle": "Original updater comp0/comp2/dont_care0/dont_care2. Final masks15/0 make these conditions equal to comp1/comp3/etc too, so both bytes crossing odd/even boundary have same intended semantics.",
+  "coverage": "4oddstarts x2compare x2care x4first-plane-values x4second-plane-values=256; complete word and final latches; each negative restores only one line.",
+  "current_control": "wordfield cases=256 failures=0\n",
+  "counter_review": [
+    "This is a reachable transition witness, not claim that stale shared fields satisfy arbitrary CHAIN2 register updates. Prior producer/consumer limitation remains explicitly recorded in r0518-r0521-mode1-field-review.json.",
+    "All controls use actual original update functions and generated providers but not a running guest application.",
+    "Word controls do not validate nested dword-local restoration; R0534 will be independently reviewed."
+  ],
+  "line_error": "No source edits. Same-line constants preserve source diagnostics; no #error changes.",
+  "status": "ten qualified residuals pending owner",
+  "current_sha256": "93a8794634923d6868e3d3c9d2d0f76521fc350f50b7eefe2e23d0013d29360f"
+}

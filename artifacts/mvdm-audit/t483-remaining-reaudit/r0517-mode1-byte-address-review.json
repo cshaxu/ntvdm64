@@ -1,0 +1,19 @@
+{
+  "id": "T483-R0517",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "original_anchor": 1563,
+  "diff": "+1/-1 unchanged",
+  "responsibility": "Mode1 CHAIN2 reads and latches must use same shared physical-plane addresses as mode0 and unchained transitions.",
+  "necessity": "Original shift2 compacts pair indices into4byte storage; selected shared layout preserves A0 gap with8byte spacing. Single-line restoration fails384/512 cases versus current0/512. Latch address is determined before comparison fields and independently checks four-byte plane cell. Cross-mode guest evidence remains r0502-chain2-byte-address-review.json.",
+  "controls": {
+    "current": "mode1 cases=512 failures=0\n",
+    "517": "FAIL a=2 c=0 d=0 x=0 y=0 expected=0 actual=19 latch=19001900 got=19191919\nFAIL a=2 c=0 d=0 x=0 y=ff expected=0 actual=19 latch=19ff1900 got=19191919\nFAIL a=2 c=0 d=0 x=0 y=55 expected=0 actual=19 latch=19551900 got=19191919\nFAIL a=2 c=0 d=0 x=0 y=aa expected=0 actual=19 latch=19aa1900 got=19191919\nFAIL a=2 c=0 d=0 x=ff y=0 expected=0 actual=19 latch=190019ff got=19191919\nFAIL a=2 c=0 d=0 x=ff y=ff expected=ff actual=19 latch=19ff19ff got=19191919\nFAIL a=2 c=0 d=0 x=ff y=55 expected=55 actual=19 latch=195519ff got=19191919\nFAIL a=2 c=0 d=0 x=ff y=aa expected=aa actual=19 latch=19aa19ff got=19191919\nmode1 cases=512 failures=384\n"
+  },
+  "counter_review": [
+    "Mode1 comparison fields were set by the focused probe. This establishes address/result behavior under those inputs, not necessity of subsequent four field-offset changes.",
+    "Initial commentary incorrectly attributed ega_read.c scalar0/ff setters toCHAIN2;actual lines are inCHAIN4 VGG branch. CHAIN2 sets per-plane comp0..3/dont_care0..3 instead. R0518-R0521 remain unreviewed pending actual field-source investigation; their probe failures alone do not qualify retention."
+  ],
+  "minimum": "One shift constant; no smaller nonzero line diff.",
+  "line_error": "Same-line constant; no #error or line changes.",
+  "status": "qualified pending owner; no product edit"
+}

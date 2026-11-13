@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-501 points have a prior or current review record:192 restored/verified/published,
-0 local restorations pending verification,2 approved retain,307 qualified pending
-decisions and0 prior classifications requiring requalification. Another2219
-points are unreviewed. Sequential file disposition is79/365;286 remain.
+578 points have a prior or current review record:201 restored/verified/published,
+0 local restorations pending verification,2 approved retain,375 qualified pending
+decisions and0 prior classifications requiring requalification. Another2142
+points are unreviewed. Sequential file disposition is84/365;281 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -56,10 +56,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P54 package `723f1bba-205b-48d2-a211-49db921c9255` is published to
-assets/release and O:/winnt/system32;all11 hashes match.Cached full build,
-focused and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p54-checkpoint.json).
+P55 package `7933fa92-bea5-42a6-9cd2-42972473b203` published11x2;hashes match.
+Cached full build,focused and Full16 passed;known CVIDC baseline failures remain.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p55-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -186,20 +185,7 @@ Original-byte/line checks and the R0098 label proof are retained in the
 [P12 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p12-checkpoint.json).
 Its nonbehavioral changes reused P11 runtime evidence; no new guest pass claimed.
 
-## Current P13 Batch
-
-Complete-file demhndl.c review R0102-R0113 restores two original ULONG declarations
-and removes redundant read-lease active state. Original-relative diff drops from
-+53/-37 to+34/-35, net-21 (newline normalized, #line excluded). Both excluded
-#error directives remain; original matched selected-source logical lines agree.
-The original SIM32 contiguous-pointer boundary fails a real CCPU low-page mapping
-fixture; its source/fixture proof qualifies the remaining ten buffer adaptations
-for owner decision, not retention approval or a production-application repro.
-See [P13 review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0102-r0113-requalification.json)
-and [checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p13-checkpoint.json).
-Final-source cached build, both-location publication, focused tests, Full16
-and governance passed; this receipt accompanies P13 Git delivery. Residual
-buffer differences remain owner decisions, not approved retention.
+P13 delivered; [review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0102-r0113-requalification.json) and [receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p13-checkpoint.json).
 
 ## P17 Completed File Batch
 
@@ -214,17 +200,8 @@ Git delivery. Package `6b318f5f-3c92-4572-a9e7-f850066b3ec4` is installed.
 [Final receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p17-checkpoint.json).
 No original guest or winnt.zip changes; unavailable DOS4GW/NESticle fixtures
 are skips, not passes. No fresh Win3.x interactive acceptance is claimed.
-Next sequential file: dpmimscr.c, starting R0180.
 
-## P18 Original-Restoration Delivery
-
-dpmimscr.c R0180-R0182 is byte-identical to original; mirror diff net-10.
-NoFastWow, slow BOP and 04F2 descriptor fallback are the original providers.
-Cached full build, publication11x2 and Full16 passed; this record accompanies
-Git delivery. WOW frontier coverage is not gameplay acceptance; absent
-DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
-Next sequential file is dpmiselr.c, R0183.
+P18 delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 
 P47 localfm delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p47-checkpoint.json).
 
@@ -234,10 +211,24 @@ P49-P51 delivered;see ordered register and batch receipts.
 R0483 manifest omission pending;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0483-sources-review.json).
 P52:R0484-R0487 restored;mirror diff net-8;full delivery verified.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0484-r0487-zfrsrvd-review.json).
-P53:R0488 original metadata restored;graphs unchanged,P52 runtime reused.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p53-checkpoint.json).
-Next R0489;S5 remains active.
-
 P54:ev_glue.c R0489-R0494 complete;mirror diff54->25(net-29).
-Two restorations delivered;four residuals await owner.Next R0495.
+Two restorations delivered;four residuals await owner.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0489-r0494-ev-glue-review.json).
+
+P55:R0495 original header restored;mirror diff net-30;local controls pass.
+P55 five-file batch net-65;sevid00070/70 disposition complete.
+Cached build,11x2 publication,focused and Full16 passed;Git delivery follows.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0495-evidfunc-header-review.json).
+
+[P55 accessor evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0496-r0499-evidgen-review.json).
+
+P55 R0500 original restored;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0500-j-c-lang-review.json).
+
+P55 R0501 restored;35 consumers/4722 object sections equal;BIGEND line repaired.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0501-j-c-header-review.json).
+
+R0502:16-case address control;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0502-chain2-byte-address-review.json).
+
+R0562/R0563:CHAIN4 word high-byte mask missing;current320/512fail;repair net-increase pending owner. See [proof](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0562-r0563-chain4-word-gap-review.json).
+
+R0568-R0571 restored ineffective byte offsets;original UNCHAINED string width defect still outputs0. [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0564-r0571-final-string-review.json).

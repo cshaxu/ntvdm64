@@ -1,0 +1,38 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "call_chain": "read_dword_ev_glue -> c_ev_read_ptr.d_read selected from read_mode0_evid[1] -> S_2089 -> S_2088 twice -> r2 returned to glue",
+  "points": [
+    {
+      "id": "T483-R0507",
+      "original_anchor": 881,
+      "before_diff": "+1/-1",
+      "after_diff": "+1/-1",
+      "delta": 0,
+      "responsibility": "Return four consecutive CPU-address bytes in little-endian order, preserving final-byte VGA latches.",
+      "original_failure": "FAIL width=4 address=0 lane=0 expected=33323130 actual=a5a53130 latch=a5a53332 got=a5a5a5a5 exception=0\nFAIL width=4 address=1 lane=0 expected=34333231 actual=a5a53231 latch=a5a5a534 got=a5a5a5a5 exception=0\nFAIL width=4 address=2 lane=0 expected=35343332 actual=a5a53332 latch=a5a53534 got=a5a5a5a5 exception=0\nFAIL width=4 address=3 lane=0 expected=36353433 actual=a5a53433 latch=a5a5a536 got=a5a5a5a5 exception=0\nFAIL width=4 address=100 lane=0 expected=37363534 actual=a5a53534 latch=a5a53736 got=a5a5a5a5 exception=0\nFAIL width=4 address=101 lane=0 expected=38373635 actual=a5a53635 latch=a5a5a538 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff8 lane=0 expected=39383736 actual=a5a53736 latch=a5a53938 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff9 lane=0 expected=3a393837 actual=a5a53837 latch=a5a5a53a got=a5a5a5a5 exception=0\nFAIL width=4 address=0 lane=2 expected=33323130 actual=a5a53130 latch=a5a53332 got=a5a5a5a5 exception=0\nFAIL width=4 address=1 lane=2 expected=34333231 actual=a5a53231 latch=a5a5a534 got=a5a5a5a5 exception=0\nFAIL width=4 address=2 lane=2 expected=35343332 actual=a5a53332 latch=a5a53534 got=a5a5a5a5 exception=0\nFAIL width=4 address=3 lane=2 expected=36353433 actual=a5a53433 latch=a5a5a536 got=a5a5a5a5 exception=0\nFAIL width=4 address=100 lane=2 expected=37363534 actual=a5a53534 latch=a5a53736 got=a5a5a5a5 exception=0\nFAIL width=4 address=101 lane=2 expected=38373635 actual=a5a53635 latch=a5a5a538 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff8 lane=2 expected=39383736 actual=a5a53736 latch=a5a53938 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff9 lane=2 expected=3a393837 actual=a5a53837 latch=a5a5a53a got=a5a5a5a5 exception=0\nword-dword cases=32 failures=16\n",
+      "current_control": "word-dword cases=32 failures=0\n",
+      "minimal_control": "word-dword cases=32 failures=0\n",
+      "status": "qualified pending owner; unchanged",
+      "necessity": "Original second word address is a+4, omitting bytes2/3; word helper takes CPU addresses, not backing-store offsets. Single-line restoration fails all16 dword cases;16 word controls pass.",
+      "minimum": "One constant 4->2; minimal nonzero line diff."
+    },
+    {
+      "id": "T483-R0508",
+      "original_anchor": 894,
+      "before_diff": "+2/-2",
+      "after_diff": "+1/-1",
+      "delta": -2,
+      "responsibility": "Return four consecutive CPU-address bytes in little-endian order, preserving final-byte VGA latches.",
+      "original_failure": "FAIL width=4 address=0 lane=0 expected=33323130 actual=3130 latch=a5a53332 got=a5a53332 exception=0\nFAIL width=4 address=1 lane=0 expected=34333231 actual=3231 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=4 address=2 lane=0 expected=35343332 actual=3332 latch=a5a53534 got=a5a53534 exception=0\nFAIL width=4 address=3 lane=0 expected=36353433 actual=3433 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=4 address=100 lane=0 expected=37363534 actual=3534 latch=a5a53736 got=a5a53736 exception=0\nFAIL width=4 address=101 lane=0 expected=38373635 actual=3635 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=fff8 lane=0 expected=39383736 actual=3736 latch=a5a53938 got=a5a53938 exception=0\nFAIL width=4 address=fff9 lane=0 expected=3a393837 actual=3837 latch=a5a5a53a got=a5a5a53a exception=0\nFAIL width=4 address=0 lane=2 expected=33323130 actual=3130 latch=a5a53332 got=a5a53332 exception=0\nFAIL width=4 address=1 lane=2 expected=34333231 actual=3231 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=4 address=2 lane=2 expected=35343332 actual=3332 latch=a5a53534 got=a5a53534 exception=0\nFAIL width=4 address=3 lane=2 expected=36353433 actual=3433 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=4 address=100 lane=2 expected=37363534 actual=3534 latch=a5a53736 got=a5a53736 exception=0\nFAIL width=4 address=101 lane=2 expected=38373635 actual=3635 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=fff8 lane=2 expected=39383736 actual=3736 latch=a5a53938 got=a5a53938 exception=0\nFAIL width=4 address=fff9 lane=2 expected=3a393837 actual=3837 latch=a5a5a53a got=a5a5a53a exception=0\nword-dword cases=32 failures=16\n",
+      "current_control": "word-dword cases=32 failures=0\n",
+      "minimal_control": "word-dword cases=32 failures=0\n",
+      "status": "qualified pending owner; local minimization pending full-file delivery",
+      "necessity": "Original saves first word to LocalIUH+2, then extracts into r20 and overwrites its low word from r2, but returns LocalIUH+2 without storing second word. Single-point original restoration fails all16 dword cases; word controls pass.",
+      "minimum": "Compose directly into LocalIUH+2 on original line894 and restore original line895 scratch assignment. Retains original generated structure, no helper or additional state. Actual ev_glue d_read caller returns only jccc_parm1/r2; r20 is generated scratch. Current first line and local-store second line replaced with one changed line and one exact original line."
+    }
+  ],
+  "final_source_sha256": "a8a9bd73352ebe4955a8c1493c512e3e6619f31d580b6ee1882783cff6d791e4",
+  "line_error_check": "Two original physical lines replaced by two; second restored byte-for-byte. All other bytes unchanged; #error and original line positions unchanged.",
+  "counter_review": "No guest integration claim. Source proof distinguishes CPU addresses from storage strides. Minimal candidate changes unused final r20 scratch contents, not returned r2 or latches; actual caller inspected. All32 focused cases pass with minimized final source. Full-file audit must finish before accumulated substantive build/publication/tests/commit/push."
+}

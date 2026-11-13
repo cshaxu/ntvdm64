@@ -1,0 +1,24 @@
+{
+  "id": "T483-R0500",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "f8e31bc5d63f810f73da165084a5a498a8261e48ff20daf7efdc1393216f2f48",
+  "current_sha256": "f8e31bc5d63f810f73da165084a5a498a8261e48ff20daf7efdc1393216f2f48",
+  "diff": {
+    "before_added": 2,
+    "before_removed": 0,
+    "after_added": 0,
+    "after_removed": 0,
+    "net": -2
+  },
+  "responsibility": "Two out-of-range mask diagnostics printf with32-bit integer arguments and ignored return.",
+  "original_capability": "Actual selected MSVC x86 C-VID compilation passes without stdio;32-bit default integer argument promotions match the actual calls.",
+  "exact_diff_necessity": "No selected ABI failure evidence;do not treat C4013 warning alone as a defect.",
+  "counter_review": "Conclusion is restricted to these concrete diagnostic arguments;not blanket permission for implicit declarations or floating-point varargs.",
+  "object_comparison": {
+    "equal": true,
+    "sections": 10
+  },
+  "line_mapping": "Entire file byte-identical to pinned original;no #error exclusions in original/current.",
+  "verification": "Two actual compile controls and10 code/data/directive/named-relocation sections equal;nonbinding batch delivery pending."
+}

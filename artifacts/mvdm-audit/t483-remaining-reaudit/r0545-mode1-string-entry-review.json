@@ -1,0 +1,26 @@
+{
+  "id": "T483-R0545",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "anchor": 1853,
+  "before": "+3/-3",
+  "after": "+1/-1",
+  "delta": -4,
+  "responsibility": "Sequential CHAIN2 read-mode1 string addressing; preserve real caller state.",
+  "remaining_necessity": "Original odd-start stride3 selects compact storage; shared physical pairs require7. Full original restoration fails56/128 data/latch cases while only restoring the internal call passes128/128. Cross-mode plane rationale recorded in r0502.",
+  "restored": "Original lines1854-1855 internal L26_26if_d wrapper call restored verbatim. Source-wide references to S_2102 include wrapper/address/table only; host glue enters it top-level, body has no external callback or generated nested caller. No evidence that this internal call must preserve a parent generated local activation.",
+  "minimum": "Single stride constant; no helper/shim; original internal call retained.",
+  "controls": {
+    "current": "string cases=128 failures=0\n",
+    "original": "FAIL a=1 dir=0 count=2 latch=a531a531 got=a531a531\nFAIL a=1 dir=0 count=3 latch=32313231 got=32313231\nFAIL a=1 dir=0 count=4 latch=a533a533 got=a533a533\nFAIL a=1 dir=0 count=5 latch=34333433 got=34333433\nFAIL a=1 dir=0 count=6 latch=a535a535 got=a535a535\nFAIL a=1 dir=0 count=7 latch=36353635 got=36353635\nFAIL a=1 dir=0 count=8 latch=a537a537 got=a537a537\nFAIL a=1 dir=1 count=2 latch=a531a531 got=a531a531\nFAIL a=1 dir=1 count=3 latch=32313231 got=32313231\nFAIL a=1 dir=1 count=4 latch=a533a533 got=a533a533\nFAIL a=1 dir=1 count=5 latch=34333433 got=34333433\nFAIL a=1 dir=1 count=6 latch=a535a535 got=a535a535\nFAIL a=1 dir=1 count=7 latch=36353635 got=36353635\nFAIL a=1 dir=1 count=8 latch=a537a537 got=a537a537\nFAIL a=3 dir=0 count=2 latch=a531a531 got=a531a531\nFAIL a=3 dir=0 count=3 latch=32313231 got=32313231\nFAIL a=3 dir=0 count=4 latch=a533a533 got=a533a533\nFAIL a=3 dir=0 count=5 latch=34333433 got=34333433\nFAIL a=3 dir=0 count=6 latch=a535a535 got=a535a535\nFAIL a=3 dir=0 count=7 latch=36353635 got=36353635\nFAIL a=3 dir=0 count=8 latch=a537a537 got=a537a537\nFAIL a=3 dir=1 count=2 latch=a531a531 got=a531a531\nFAIL a=3 dir=1 count=3 latch=32313231 got=32313231\nFAIL a=3 dir=1 count=4 latch=a533a533 got=a533a533\nFAIL a=3 dir=1 count=5 latch=34333433 got=34333433\nFAIL a=3 dir=1 count=6 latch=a535a535 got=a535a535\nFAIL a=3 dir=1 count=7 latch=36353635 got=36353635\nFAIL a=3 dir=1 count=8 latch=a537a537 got=a537a537\nFAIL a=5 dir=0 count=2 latch=a531a531 got=a531a531\nFAIL a=5 dir=0 count=3 latch=32313231 got=32313231\nFAIL a=5 dir=0 count=4 latch=a533a533 got=a533a533\nFAIL a=5 dir=0 count=5 latch=34333433 got=34333433\nFAIL a=5 dir=0 count=6 latch=a535a535 got=a535a535\nFAIL a=5 dir=0 count=7 latch=36353635 got=36353635\nFAIL a=5 dir=0 count=8 latch=a537a537 got=a537a537\nFAIL a=5 dir=1 count=2 latch=a531a531 got=a531a531\nFAIL a=5 dir=1 count=3 latch=32313231 got=32313231\nFAIL a=5 dir=1 count=4 latch=a533a533 got=a533a533\nFAIL a=5 dir=1 count=5 latch=34333433 got=34333433\nFAIL a=5 dir=1 count=6 latch=a535a535 got=a535a535\nFAIL a=5 dir=1 count=7 latch=36353635 got=36353635\nFAIL a=5 dir=1 count=8 latch=a537a537 got=a537a537\nFAIL a=7 dir=0 count=2 latch=a531a531 got=a531a531\nFAIL a=7 dir=0 count=3 latch=32313231 got=32313231\nFAIL a=7 dir=0 count=4 latch=a533a533 got=a533a533\nFAIL a=7 dir=0 count=5 latch=34333433 got=34333433\nFAIL a=7 dir=0 count=6 latch=a535a535 got=a535a535\nFAIL a=7 dir=0 count=7 latch=36353635 got=36353635\nFAIL a=7 dir=0 count=8 latch=a537a537 got=a537a537\nFAIL a=7 dir=1 count=2 latch=a531a531 got=a531a531\nFAIL a=7 dir=1 count=3 latch=32313231 got=32313231\nFAIL a=7 dir=1 count=4 latch=a533a533 got=a533a533\nFAIL a=7 dir=1 count=5 latch=34333433 got=34333433\nFAIL a=7 dir=1 count=6 latch=a535a535 got=a535a535\nFAIL a=7 dir=1 count=7 latch=36353635 got=36353635\nFAIL a=7 dir=1 count=8 latch=a537a537 got=a537a537\nstring cases=128 failures=56\n",
+    "call": "string cases=128 failures=0\n"
+  },
+  "context": "8CPUstarts x2destination traversal flags x8lengths; original updater UNCHAINED->CHAIN2 comparison/care15,all fields zero,isolating control flow/addresses. Paired plane bytes equal; expected output and final latches checked.",
+  "counter_review": [
+    "Unlike actual dword->word nesting in R0534,this top-level string path does not justify a local-jump adaptation.",
+    "No full guest acceptance claimed; candidate compiled/linked to actual libraries with existing host fixture seams.",
+    "Zero-count/unrelated comparison settings not certified by128cases."
+  ],
+  "line_error": "Three lines remain three; two restored raw original lines; #error and subsequent original line positions unchanged.",
+  "final_sha256": "7618e0f2f52cad82c6dcd3545fa5bf399328f9d7ee1ebd4a578103e4b0be395e",
+  "status": "partial restoration pending full-file delivery; residual qualified pending owner"
+}

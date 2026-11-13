@@ -1,0 +1,32 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+    "matched_original_lines": 709,
+    "matched_original_line_mismatches": [],
+    "excluded_error_count": 0
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+    "matched_original_lines": 170,
+    "matched_original_line_mismatches": [],
+    "excluded_error_count": 0
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+    "matched_original_lines": 185,
+    "matched_original_line_mismatches": [],
+    "excluded_error_count": 0
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+    "matched_original_lines": 42,
+    "matched_original_line_mismatches": [],
+    "excluded_error_count": 1
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+    "matched_original_lines": 3082,
+    "matched_original_line_mismatches": [],
+    "excluded_error_count": 0
+  }
+]

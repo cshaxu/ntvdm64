@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R0518",
+      "anchor": 1584,
+      "field": "colour_comp",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original byte offset1379 selects plane3/high byte on x86; corrected1376 selects plane0/low byte. Real original updater UNCHAINED->CHAIN2 with compare/care masks5 or10 leaves unequal low/high bytes in shared fields. For even CPU addresses whose planes0/2 have equal conditions, original per-plane comp0/comp2/dont_care0/dont_care2 oracle agrees with current reader and disagrees with this single restored byte offset.",
+      "control": "FAIL a=0 c=0 d=0 x=0 y=ff expected=0 actual=ff latch=19ff1900 got=19ff1900\nFAIL a=0 c=0 d=0 x=0 y=55 expected=0 actual=55 latch=19551900 got=19551900\nFAIL a=0 c=0 d=0 x=0 y=aa expected=0 actual=aa latch=19aa1900 got=19aa1900\nFAIL a=0 c=0 d=0 x=ff y=ff expected=ff actual=0 latch=19ff19ff got=19ff19ff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=55 actual=0 latch=195519ff got=195519ff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aa actual=0 latch=19aa19ff got=19aa19ff\nFAIL a=0 c=0 d=0 x=55 y=ff expected=55 actual=aa latch=19ff1955 got=19ff1955\nFAIL a=0 c=0 d=0 x=55 y=55 expected=55 actual=0 latch=19551955 got=19551955\nmode1 cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "One scalar offset constant; no new shim/state. Changing producer layout globally also affects original unchained readers and would expand changes, not remove this boundary mismatch."
+    },
+    {
+      "id": "T483-R0519",
+      "anchor": 1588,
+      "field": "dont_care",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original byte offset1383 selects plane3/high byte on x86; corrected1380 selects plane0/low byte. Real original updater UNCHAINED->CHAIN2 with compare/care masks5 or10 leaves unequal low/high bytes in shared fields. For even CPU addresses whose planes0/2 have equal conditions, original per-plane comp0/comp2/dont_care0/dont_care2 oracle agrees with current reader and disagrees with this single restored byte offset.",
+      "control": "FAIL a=0 c=0 d=0 x=0 y=ff expected=0 actual=ff latch=19ff1900 got=19ff1900\nFAIL a=0 c=0 d=0 x=0 y=55 expected=0 actual=55 latch=19551900 got=19551900\nFAIL a=0 c=0 d=0 x=0 y=aa expected=0 actual=aa latch=19aa1900 got=19aa1900\nFAIL a=0 c=0 d=0 x=55 y=ff expected=55 actual=ff latch=19ff1955 got=19ff1955\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=aa latch=19aa1955 got=19aa1955\nFAIL a=0 c=0 d=0 x=aa y=ff expected=aa actual=ff latch=19ff19aa got=19ff19aa\nFAIL a=0 c=0 d=0 x=aa y=55 expected=0 actual=55 latch=195519aa got=195519aa\nFAIL a=0 c=0 d=1 x=0 y=0 expected=ff actual=0 latch=19001900 got=19001900\nmode1 cases=256 failures=152\n",
+      "exit": 21,
+      "minimum": "One scalar offset constant; no new shim/state. Changing producer layout globally also affects original unchained readers and would expand changes, not remove this boundary mismatch."
+    },
+    {
+      "id": "T483-R0520",
+      "anchor": 1597,
+      "field": "colour_comp",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original byte offset1379 selects plane3/high byte on x86; corrected1376 selects plane0/low byte. Real original updater UNCHAINED->CHAIN2 with compare/care masks5 or10 leaves unequal low/high bytes in shared fields. For even CPU addresses whose planes0/2 have equal conditions, original per-plane comp0/comp2/dont_care0/dont_care2 oracle agrees with current reader and disagrees with this single restored byte offset.",
+      "control": "FAIL a=0 c=0 d=0 x=ff y=0 expected=0 actual=ff latch=190019ff got=190019ff\nFAIL a=0 c=0 d=0 x=ff y=ff expected=ff actual=0 latch=19ff19ff got=19ff19ff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=55 actual=aa latch=195519ff got=195519ff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aa actual=55 latch=19aa19ff got=19aa19ff\nFAIL a=0 c=0 d=0 x=55 y=0 expected=0 actual=55 latch=19001955 got=19001955\nFAIL a=0 c=0 d=0 x=55 y=ff expected=55 actual=0 latch=19ff1955 got=19ff1955\nFAIL a=0 c=0 d=0 x=55 y=55 expected=55 actual=0 latch=19551955 got=19551955\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=55 latch=19aa1955 got=19aa1955\nmode1 cases=256 failures=96\n",
+      "exit": 21,
+      "minimum": "One scalar offset constant; no new shim/state. Changing producer layout globally also affects original unchained readers and would expand changes, not remove this boundary mismatch."
+    },
+    {
+      "id": "T483-R0521",
+      "anchor": 1599,
+      "field": "dont_care",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original byte offset1383 selects plane3/high byte on x86; corrected1380 selects plane0/low byte. Real original updater UNCHAINED->CHAIN2 with compare/care masks5 or10 leaves unequal low/high bytes in shared fields. For even CPU addresses whose planes0/2 have equal conditions, original per-plane comp0/comp2/dont_care0/dont_care2 oracle agrees with current reader and disagrees with this single restored byte offset.",
+      "control": "FAIL a=0 c=0 d=0 x=ff y=0 expected=0 actual=ff latch=190019ff got=190019ff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=55 actual=ff latch=195519ff got=195519ff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aa actual=ff latch=19aa19ff got=19aa19ff\nFAIL a=0 c=0 d=0 x=55 y=0 expected=0 actual=55 latch=19001955 got=19001955\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=55 latch=19aa1955 got=19aa1955\nFAIL a=0 c=0 d=0 x=aa y=0 expected=0 actual=aa latch=190019aa got=190019aa\nFAIL a=0 c=0 d=0 x=aa y=55 expected=0 actual=aa latch=195519aa got=195519aa\nFAIL a=0 c=0 d=1 x=0 y=0 expected=ff actual=0 latch=19001900 got=19001900\nmode1 cases=256 failures=152\n",
+      "exit": 21,
+      "minimum": "One scalar offset constant; no new shim/state. Changing producer layout globally also affects original unchained readers and would expand changes, not remove this boundary mismatch."
+    }
+  ],
+  "actual_chain": "ega_read_routines_update UNCHAINED -> ~sr_lookup[mask] -> original vglob setters -> switch CHAIN2 -> per-plane comp/dontcare globals and SetReadPointers(1) -> read_mode1_evid[1].b_read. Probe calls updater twice, does not directly set comparison fields.",
+  "current_control": "mode1 cases=256 failures=0\n",
+  "cases": "4evenaddresses x2compare masks x2care masks x4plane0bytes x4plane2bytes=256; data and latches checked. compare/care masks5,10 give equal conditions within even pair and unequal low/high field bytes.",
+  "correction": "Earlier initial commentary misidentified CHAIN4 scalar setters as CHAIN2. Rejected that reasoning and direct-field-only admission; real transition evidence replaces it.",
+  "boundary": "CHAIN2 updates per-plane globals but not shared colour_comp/dont_care. Selected generated path uses a single shared comparison byte for both planes. These tests prove concrete regression on restoring offsets, NOT correctness for odd addresses, unequal plane-pair comparisons, or changing masks while already CHAIN2. No product fix for this separate producer/consumer limitation is claimed or added.",
+  "counter_review": "Responsibility is VGA per-plane comparison; original selected byte offsets cannot fulfill the evidenced even-pair transition on little-endian x86; exact minimum is four single constants. Do not infer all field paths correct or a guest application reproduction from this provider-level control.",
+  "line_error": "No source edit; same-line constant differences preserve original diagnostics; #error unchanged.",
+  "status": "four qualified residuals pending owner; actual full-file audit continues",
+  "current_sha256": "93a8794634923d6868e3d3c9d2d0f76521fc350f50b7eefe2e23d0013d29360f"
+}

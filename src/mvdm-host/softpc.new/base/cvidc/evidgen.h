@@ -91,9 +91,6 @@ struct	VideoVector	{
 extern	struct	VideoVector	Video;
 
 #define	getVideolatches()	(*(Video.GetVideolatches))()
-/* DIVERGENCE(MVDM-HOST-DIV-156): CPU40 egacpu.h declares the original
- * direct vglob.c accessors. Keep the full C-VID latch/table layout, but do
- * not replace those typed calls with the older generated scratch users. */
 #ifndef CPU_40_STYLE
 #line 94
 #define	getVideorplane()	(*(Video.GetVideorplane))()

@@ -1,0 +1,118 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R0535",
+      "anchor": 1717,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=0 y=ff expected=0 actual=ff latch=ffff0000 got=ffff0000\nFAIL a=0 c=0 d=0 x=0 y=55 expected=0 actual=55 latch=55550000 got=55550000\nFAIL a=0 c=0 d=0 x=0 y=aa expected=0 actual=aa latch=aaaa0000 got=aaaa0000\nFAIL a=0 c=0 d=0 x=ff y=ff expected=ffff actual=ff00 latch=ffffffff got=ffffffff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=5555 actual=5500 latch=5555ffff got=5555ffff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aaaa actual=aa00 latch=aaaaffff got=aaaaffff\nFAIL a=0 c=0 d=0 x=55 y=ff expected=5555 actual=55aa latch=ffff5555 got=ffff5555\nFAIL a=0 c=0 d=0 x=55 y=55 expected=5555 actual=5500 latch=55555555 got=55555555\nwordfield cases=256 failures=96\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0536",
+      "anchor": 1721,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=0 y=ff expected=0 actual=ff latch=ffff0000 got=ffff0000\nFAIL a=0 c=0 d=0 x=0 y=55 expected=0 actual=55 latch=55550000 got=55550000\nFAIL a=0 c=0 d=0 x=0 y=aa expected=0 actual=aa latch=aaaa0000 got=aaaa0000\nFAIL a=0 c=0 d=0 x=55 y=ff expected=5555 actual=55ff latch=ffff5555 got=ffff5555\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=aa latch=aaaa5555 got=aaaa5555\nFAIL a=0 c=0 d=0 x=aa y=ff expected=aaaa actual=aaff latch=ffffaaaa got=ffffaaaa\nFAIL a=0 c=0 d=0 x=aa y=55 expected=0 actual=55 latch=5555aaaa got=5555aaaa\nFAIL a=0 c=0 d=1 x=0 y=0 expected=ffff actual=ff00 latch=0 got=0\nwordfield cases=256 failures=152\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0537",
+      "anchor": 1728,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=ff y=0 expected=0 actual=ff latch=ffff got=ffff\nFAIL a=0 c=0 d=0 x=ff y=ff expected=ffff actual=ff00 latch=ffffffff got=ffffffff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=5555 actual=55aa latch=5555ffff got=5555ffff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aaaa actual=aa55 latch=aaaaffff got=aaaaffff\nFAIL a=0 c=0 d=0 x=55 y=0 expected=0 actual=55 latch=5555 got=5555\nFAIL a=0 c=0 d=0 x=55 y=ff expected=5555 actual=5500 latch=ffff5555 got=ffff5555\nFAIL a=0 c=0 d=0 x=55 y=55 expected=5555 actual=5500 latch=55555555 got=55555555\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=55 latch=aaaa5555 got=aaaa5555\nwordfield cases=256 failures=96\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0538",
+      "anchor": 1731,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=ff y=0 expected=0 actual=ff latch=ffff got=ffff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=5555 actual=55ff latch=5555ffff got=5555ffff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aaaa actual=aaff latch=aaaaffff got=aaaaffff\nFAIL a=0 c=0 d=0 x=55 y=0 expected=0 actual=55 latch=5555 got=5555\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=55 latch=aaaa5555 got=aaaa5555\nFAIL a=0 c=0 d=0 x=aa y=0 expected=0 actual=aa latch=aaaa got=aaaa\nFAIL a=0 c=0 d=0 x=aa y=55 expected=0 actual=aa latch=5555aaaa got=5555aaaa\nFAIL a=0 c=0 d=1 x=0 y=0 expected=ffff actual=ff00 latch=0 got=0\nwordfield cases=256 failures=152\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0539",
+      "anchor": 1739,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=0 y=ff expected=0 actual=ff00 latch=ffff0000 got=ffff0000\nFAIL a=0 c=0 d=0 x=0 y=55 expected=0 actual=5500 latch=55550000 got=55550000\nFAIL a=0 c=0 d=0 x=0 y=aa expected=0 actual=aa00 latch=aaaa0000 got=aaaa0000\nFAIL a=0 c=0 d=0 x=ff y=ff expected=ffff actual=ff latch=ffffffff got=ffffffff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=5555 actual=55 latch=5555ffff got=5555ffff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aaaa actual=aa latch=aaaaffff got=aaaaffff\nFAIL a=0 c=0 d=0 x=55 y=ff expected=5555 actual=aa55 latch=ffff5555 got=ffff5555\nFAIL a=0 c=0 d=0 x=55 y=55 expected=5555 actual=55 latch=55555555 got=55555555\nwordfield cases=256 failures=96\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0540",
+      "anchor": 1742,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=0 y=ff expected=0 actual=ff00 latch=ffff0000 got=ffff0000\nFAIL a=0 c=0 d=0 x=0 y=55 expected=0 actual=5500 latch=55550000 got=55550000\nFAIL a=0 c=0 d=0 x=0 y=aa expected=0 actual=aa00 latch=aaaa0000 got=aaaa0000\nFAIL a=0 c=0 d=0 x=55 y=ff expected=5555 actual=ff55 latch=ffff5555 got=ffff5555\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=aa00 latch=aaaa5555 got=aaaa5555\nFAIL a=0 c=0 d=0 x=aa y=ff expected=aaaa actual=ffaa latch=ffffaaaa got=ffffaaaa\nFAIL a=0 c=0 d=0 x=aa y=55 expected=0 actual=5500 latch=5555aaaa got=5555aaaa\nFAIL a=0 c=0 d=1 x=0 y=0 expected=ffff actual=ff latch=0 got=0\nwordfield cases=256 failures=152\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0541",
+      "anchor": 1749,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=ff y=0 expected=0 actual=ff00 latch=ffff got=ffff\nFAIL a=0 c=0 d=0 x=ff y=ff expected=ffff actual=ff latch=ffffffff got=ffffffff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=5555 actual=aa55 latch=5555ffff got=5555ffff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aaaa actual=55aa latch=aaaaffff got=aaaaffff\nFAIL a=0 c=0 d=0 x=55 y=0 expected=0 actual=5500 latch=5555 got=5555\nFAIL a=0 c=0 d=0 x=55 y=ff expected=5555 actual=55 latch=ffff5555 got=ffff5555\nFAIL a=0 c=0 d=0 x=55 y=55 expected=5555 actual=55 latch=55555555 got=55555555\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=5500 latch=aaaa5555 got=aaaa5555\nwordfield cases=256 failures=96\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0542",
+      "anchor": 1752,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original high-byte offset fails even-start word after real updater UNCHAINED masks5/10 -> CHAIN2 masks15/0. Final per-plane conditions uniform; low-byte fields match original per-plane oracle, high bytes differ. Each offset individually restored.",
+      "control": "FAIL a=0 c=0 d=0 x=ff y=0 expected=0 actual=ff00 latch=ffff got=ffff\nFAIL a=0 c=0 d=0 x=ff y=55 expected=5555 actual=ff55 latch=5555ffff got=5555ffff\nFAIL a=0 c=0 d=0 x=ff y=aa expected=aaaa actual=ffaa latch=aaaaffff got=aaaaffff\nFAIL a=0 c=0 d=0 x=55 y=0 expected=0 actual=5500 latch=5555 got=5555\nFAIL a=0 c=0 d=0 x=55 y=aa expected=0 actual=5500 latch=aaaa5555 got=aaaa5555\nFAIL a=0 c=0 d=0 x=aa y=0 expected=0 actual=aa00 latch=aaaa got=aaaa\nFAIL a=0 c=0 d=0 x=aa y=55 expected=0 actual=aa00 latch=5555aaaa got=5555aaaa\nFAIL a=0 c=0 d=1 x=0 y=0 expected=ffff actual=ff latch=0 got=0\nwordfield cases=256 failures=152\n",
+      "minimum": "One field-offset constant; minimal remaining line difference."
+    },
+    {
+      "id": "T483-R0543",
+      "anchor": 1799,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "necessity": "Original second word uses CPU address a+4 instead of a+2; S_2100 already performs planar address conversion. Restoring only offset skips middle two bytes and final latches.",
+      "control": "FAIL width=4 address=0 lane=0 expected=33323130 actual=a5a53130 latch=33323332 got=a5a5a5a5 exception=0\nFAIL width=4 address=1 lane=0 expected=34333231 actual=a5a53231 latch=a534a534 got=a5a5a5a5 exception=0\nFAIL width=4 address=2 lane=0 expected=35343332 actual=a5a53332 latch=35343534 got=a5a5a5a5 exception=0\nFAIL width=4 address=3 lane=0 expected=36353433 actual=a5a53433 latch=a536a536 got=a5a5a5a5 exception=0\nFAIL width=4 address=100 lane=0 expected=37363534 actual=a5a53534 latch=37363736 got=a5a5a5a5 exception=0\nFAIL width=4 address=101 lane=0 expected=38373635 actual=a5a53635 latch=a538a538 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff8 lane=0 expected=39383736 actual=a5a53736 latch=39383938 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff9 lane=0 expected=3a393837 actual=a5a53837 latch=a53aa53a got=a5a5a5a5 exception=0\nword-dword cases=16 failures=8\n",
+      "minimum": "Keep one CPU-address offset correction4->2."
+    },
+    {
+      "id": "T483-R0544",
+      "anchor": 1812,
+      "before": "+2/-2",
+      "after": "+1/-1",
+      "delta": -2,
+      "necessity": "Original code modifies r20 but returns saved LocalIUH+2 without storing second word. Single restoration loses upper word; actual caller read_dword_ev_glue returns r2 only.",
+      "control": "FAIL width=4 address=0 lane=0 expected=33323130 actual=3130 latch=33323332 got=33323332 exception=0\nFAIL width=4 address=1 lane=0 expected=34333231 actual=3231 latch=a534a534 got=a534a534 exception=0\nFAIL width=4 address=2 lane=0 expected=35343332 actual=3332 latch=35343534 got=35343534 exception=0\nFAIL width=4 address=3 lane=0 expected=36353433 actual=3433 latch=a536a536 got=a536a536 exception=0\nFAIL width=4 address=100 lane=0 expected=37363534 actual=3534 latch=37363736 got=37363736 exception=0\nFAIL width=4 address=101 lane=0 expected=38373635 actual=3635 latch=a538a538 got=a538a538 exception=0\nFAIL width=4 address=fff8 lane=0 expected=39383736 actual=3736 latch=39383938 got=39383938 exception=0\nFAIL width=4 address=fff9 lane=0 expected=3a393837 actual=3837 latch=a53aa53a got=a53aa53a exception=0\nword-dword cases=16 failures=8\n",
+      "minimum": "Compose directly into LocalIUH+2 on line1812;restore original line1813 scratch assignment. Final r20 differs but is scratch,not consumed by actual caller;return and latches preserved."
+    }
+  ],
+  "word_current": "wordfield cases=256 failures=0\n",
+  "dword_current": "word-dword cases=16 failures=0\n",
+  "dword_minimal_final": "word-dword cases=16 failures=0\n",
+  "context": "Word fields: actual updater transitions and original per-plane oracle, four even addresses;same bounded producer/consumer proof as r0524-r0533. Dword: updater compare/care15 zeros all field bytes,isolating composition/address from field offsets;8word controls+8dwordcases.",
+  "counter_review": [
+    "Do not certify arbitrary CHAIN2 field-state transitions;known shared-field update boundary remains.",
+    "No fresh guest/full acceptance claimed.",
+    "R0544 exact source candidate was built and tested;only restored scratch assignment differs in finalr20,actual caller consumesr2.",
+    "No full build until all remaining sevid000points processed."
+  ],
+  "final_source_sha256": "a9f0be4bdf9e6cd467007a7ed70f6a9b991b1c2e3738d2b822423dbfabe37ddd",
+  "delta": -2
+}

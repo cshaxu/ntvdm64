@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R0522",
+      "anchor": 1642,
+      "diff": "+1/-1 unchanged",
+      "role": "final CPU-byte latch address",
+      "necessity": "Original compact shift2 does not preserve shared-plane A0 gap. Current shift3 maps CPU pair index to8byte physical cell; single restored shift changes only final CPU-byte latch address.",
+      "control": "FAIL width=2 address=1 lane=0 expected=3231 actual=3231 latch=a532a532 got=a5a5a5a5 exception=0\nFAIL width=2 address=2 lane=0 expected=3332 actual=3332 latch=33323332 got=a5a5a5a5 exception=0\nFAIL width=2 address=3 lane=0 expected=3433 actual=3433 latch=a534a534 got=33a533a5 exception=0\nFAIL width=2 address=100 lane=0 expected=3534 actual=3534 latch=35343534 got=a5a5a5a5 exception=0\nFAIL width=2 address=101 lane=0 expected=3635 actual=3635 latch=a536a536 got=a5a5a5a5 exception=0\nFAIL width=2 address=fff8 lane=0 expected=3736 actual=3736 latch=37363736 got=a5a5a5a5 exception=0\nFAIL width=2 address=fff9 lane=0 expected=3837 actual=3837 latch=a538a538 got=a5a5a5a5 exception=0\nword-dword cases=8 failures=7\n",
+      "minimum": "Single shift constant; already minimal nonzero line diff."
+    },
+    {
+      "id": "T483-R0523",
+      "anchor": 1658,
+      "diff": "+1/-1 unchanged",
+      "role": "first CPU-byte data address",
+      "necessity": "Original compact shift2 does not preserve shared-plane A0 gap. Current shift3 maps CPU pair index to8byte physical cell; single restored shift changes only first CPU-byte data address.",
+      "control": "FAIL width=2 address=2 lane=0 expected=3332 actual=a5a5 latch=33323332 got=33323332 exception=0\nFAIL width=2 address=3 lane=0 expected=3433 actual=a5a5 latch=a534a534 got=a534a534 exception=0\nFAIL width=2 address=100 lane=0 expected=3534 actual=a5a5 latch=35343534 got=35343534 exception=0\nFAIL width=2 address=101 lane=0 expected=3635 actual=a5a5 latch=a536a536 got=a536a536 exception=0\nFAIL width=2 address=fff8 lane=0 expected=3736 actual=a5a5 latch=37363736 got=37363736 exception=0\nFAIL width=2 address=fff9 lane=0 expected=3837 actual=a5a5 latch=a538a538 got=a538a538 exception=0\nword-dword cases=8 failures=6\n",
+      "minimum": "Single shift constant; already minimal nonzero line diff."
+    }
+  ],
+  "current_control": "word-dword cases=8 failures=0\n",
+  "actual_context": "Selected S_2100_RdMode1Chain2WordRead through original table. Probe invokes ega_read_routines_update for UNCHAINED then CHAIN2 with compare=care=15. Original updater writes all-zero comparison/care fields; thus high/low byte offset changes cannot influence these controls. Both even/odd CPU starts and near-end valid addresses tested. Equal data seeded into each paired physical plane; expected word independently combines consecutive CPU bytes; latches checked separately.",
+  "layout_evidence": "r0502-chain2-byte-address-review.json contains cross-mode guest proof; not derived solely from current code.",
+  "counter_review": [
+    "R0522 returns correct data but wrong final latches, so checking return alone would miss it.",
+    "R0523 returns wrong data but preserves expected latches, separating responsibilities.",
+    "Eight selected provider cases are not full VGA or guest integration qualification; no broader field correctness claimed."
+  ],
+  "line_error": "No product change; same-line constants retain original locations; no #error altered.",
+  "status": "two qualified residuals pending owner"
+}

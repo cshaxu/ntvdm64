@@ -1,0 +1,33 @@
+{
+  "same_physical_line_count": 3148,
+  "original_relative_before": {
+    "added": 80,
+    "removed": 80
+  },
+  "original_relative_after": {
+    "added": 66,
+    "removed": 66
+  },
+  "original_lines_restored": 14,
+  "changed_positions": [
+    894,
+    895,
+    936,
+    937,
+    981,
+    982,
+    1812,
+    1813,
+    1854,
+    1855,
+    1919,
+    1920,
+    2714,
+    2718,
+    2773,
+    2777
+  ],
+  "excluded_error_before": 0,
+  "excluded_error_after": 0,
+  "note": "No insertions/deletions;all unmodified original-matching positions retain physical diagnostic line. Entire70point register disposition complete;not runtime/full delivery complete."
+}

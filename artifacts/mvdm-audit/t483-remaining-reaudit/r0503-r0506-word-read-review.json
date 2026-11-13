@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "baseline": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "current_sha256": "269ba5341434669f391c4bcf7e111e879d0bba6e6f7aa1fce4fd1a5d02cc5da6",
+  "method": "Actual x86 generated source, production flags and libraries; existing fixture host seams and /force:multiple. Five separately linked candidates; only the stated original line(s) restored. Not fresh guest integration acceptance.",
+  "points": [
+    {
+      "id": "T483-R0503",
+      "original_anchor": 792,
+      "diff": {
+        "added": 1,
+        "removed": 1,
+        "change": 0
+      },
+      "responsibility": "Word-read final-byte latch address must preserve plane A0 gap.",
+      "current_control": "word-dword cases=32 failures=0\n",
+      "single_point_original_control": "FAIL width=2 address=1 lane=0 expected=3231 actual=3231 latch=a5a5a532 got=a5a5a5a5 exception=0\nFAIL width=2 address=2 lane=0 expected=3332 actual=3332 latch=a5a53332 got=a5a5a5a5 exception=0\nFAIL width=2 address=3 lane=0 expected=3433 actual=3433 latch=a5a5a534 got=a5a533a5 exception=0\nFAIL width=2 address=100 lane=0 expected=3534 actual=3534 latch=a5a53534 got=a5a5a5a5 exception=0\nFAIL width=2 address=101 lane=0 expected=3635 actual=3635 latch=a5a5a536 got=a5a5a5a5 exception=0\nFAIL width=2 address=fff8 lane=0 expected=3736 actual=3736 latch=a5a53736 got=a5a5a5a5 exception=0\nFAIL width=2 address=fff9 lane=0 expected=3837 actual=3837 latch=a5a5a538 got=a5a5a5a5 exception=0\nFAIL width=2 address=1 lane=2 expected=3231 actual=3231 latch=a5a5a532 got=a5a5a5a5 exception=0\nFAIL width=2 address=2 lane=2 expected=3332 actual=3332 latch=a5a53332 got=a5a5a5a5 exception=0\nFAIL width=2 address=3 lane=2 expected=3433 actual=3433 latch=a5a5a534 got=a5a533a5 exception=0\nFAIL width=2 address=100 lane=2 expected=3534 actual=3534 latch=a5a53534 got=a5a5a5a5 exception=0\nFAIL width=2 address=101 lane=2 expected=3635 actual=3635 latch=a5a5a536 got=a5a5a5a5 exception=0\nFAIL width=2 address=fff8 lane=2 expected=3736 actual=3736 latch=a5a53736 got=a5a5a5a5 exception=0\nFAIL width=2 address=fff9 lane=2 expected=3837 actual=3837 latch=a5a5a538 got=a5a5a5a5 exception=0\nFAIL width=4 address=0 lane=0 expected=33323130 actual=33323130 latch=a5a53332 got=a5a5a5a5 exception=0\nFAIL width=4 address=1 lane=0 expected=34333231 actual=34333231 latch=a5a5a534 got=a5a53332 exception=0\nFAIL width=4 address=2 lane=0 expected=35343332 actual=35343332 latch=a5a53534 got=a5a53332 exception=0\nFAIL width=4 address=3 lane=0 expected=36353433 actual=36353433 latch=a5a5a536 got=a5a5a5a5 exception=0\nFAIL width=4 address=100 lane=0 expected=37363534 actual=37363534 latch=a5a53736 got=a5a5a5a5 exception=0\nFAIL width=4 address=101 lane=0 expected=38373635 actual=38373635 latch=a5a5a538 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff8 lane=0 expected=39383736 actual=39383736 latch=a5a53938 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff9 lane=0 expected=3a393837 actual=3a393837 latch=a5a5a53a got=a5a5a5a5 exception=0\nFAIL width=4 address=0 lane=2 expected=33323130 actual=33323130 latch=a5a53332 got=a5a5a5a5 exception=0\nFAIL width=4 address=1 lane=2 expected=34333231 actual=34333231 latch=a5a5a534 got=a5a53332 exception=0\nFAIL width=4 address=2 lane=2 expected=35343332 actual=35343332 latch=a5a53534 got=a5a53332 exception=0\nFAIL width=4 address=3 lane=2 expected=36353433 actual=36353433 latch=a5a5a536 got=a5a5a5a5 exception=0\nFAIL width=4 address=100 lane=2 expected=37363534 actual=37363534 latch=a5a53736 got=a5a5a5a5 exception=0\nFAIL width=4 address=101 lane=2 expected=38373635 actual=38373635 latch=a5a5a538 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff8 lane=2 expected=39383736 actual=39383736 latch=a5a53938 got=a5a5a5a5 exception=0\nFAIL width=4 address=fff9 lane=2 expected=3a393837 actual=3a393837 latch=a5a5a53a got=a5a5a5a5 exception=0\nword-dword cases=32 failures=30\n",
+      "exit": 21,
+      "candidate_sha256": "f68d9340c72f81b94fbfce79ddffb6acb5781cb361d27df7239858e012f22483",
+      "original_limitation": "Original compact CHAIN2 storage is internally plausible; cross-mode unchained access requires the shared physical-plane layout. Prior guest capture and layout reasoning are recorded in r0502-chain2-byte-address-review.json. This probe seeds that independently specified layout, not current writer output.",
+      "exact_diff_evidence": "Only original line 792 restored; 30/32 word/dword cases fail. Separate checks cover returned bytes and final-byte latches across two plane-pair bases and even/odd addresses.",
+      "minimum_option": "Single numeric substitution; restoring compact storage would require a coherent cross-mode representation change, not removal of this line alone.",
+      "line_error_check": "Same physical line count; no #error directives changed; original anchors preserved.",
+      "status": "qualified-pending-owner; no production source change"
+    },
+    {
+      "id": "T483-R0504",
+      "original_anchor": 808,
+      "diff": {
+        "added": 1,
+        "removed": 1,
+        "change": 0
+      },
+      "responsibility": "Word-read data base must preserve plane A0 gap.",
+      "current_control": "word-dword cases=32 failures=0\n",
+      "single_point_original_control": "FAIL width=2 address=2 lane=0 expected=3332 actual=a5a5 latch=a5a53332 got=a5a53332 exception=0\nFAIL width=2 address=3 lane=0 expected=3433 actual=a5a5 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=2 address=100 lane=0 expected=3534 actual=a5a5 latch=a5a53534 got=a5a53534 exception=0\nFAIL width=2 address=101 lane=0 expected=3635 actual=a5a5 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=2 address=fff8 lane=0 expected=3736 actual=a5a5 latch=a5a53736 got=a5a53736 exception=0\nFAIL width=2 address=fff9 lane=0 expected=3837 actual=a5a5 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=2 address=2 lane=2 expected=3332 actual=a5a5 latch=a5a53332 got=a5a53332 exception=0\nFAIL width=2 address=3 lane=2 expected=3433 actual=a5a5 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=2 address=100 lane=2 expected=3534 actual=a5a5 latch=a5a53534 got=a5a53534 exception=0\nFAIL width=2 address=101 lane=2 expected=3635 actual=a5a5 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=2 address=fff8 lane=2 expected=3736 actual=a5a5 latch=a5a53736 got=a5a53736 exception=0\nFAIL width=2 address=fff9 lane=2 expected=3837 actual=a5a5 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=0 lane=0 expected=33323130 actual=a5a53130 latch=a5a53332 got=a5a53332 exception=0\nFAIL width=4 address=1 lane=0 expected=34333231 actual=a5a53231 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=4 address=2 lane=0 expected=35343332 actual=3332a5a5 latch=a5a53534 got=a5a53534 exception=0\nFAIL width=4 address=3 lane=0 expected=36353433 actual=3433a5a5 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=4 address=100 lane=0 expected=37363534 actual=a5a5a5a5 latch=a5a53736 got=a5a53736 exception=0\nFAIL width=4 address=101 lane=0 expected=38373635 actual=a5a5a5a5 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=fff8 lane=0 expected=39383736 actual=a5a5a5a5 latch=a5a53938 got=a5a53938 exception=0\nFAIL width=4 address=fff9 lane=0 expected=3a393837 actual=a5a5a5a5 latch=a5a5a53a got=a5a5a53a exception=0\nFAIL width=4 address=0 lane=2 expected=33323130 actual=a5a53130 latch=a5a53332 got=a5a53332 exception=0\nFAIL width=4 address=1 lane=2 expected=34333231 actual=a5a53231 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=4 address=2 lane=2 expected=35343332 actual=3332a5a5 latch=a5a53534 got=a5a53534 exception=0\nFAIL width=4 address=3 lane=2 expected=36353433 actual=3433a5a5 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=4 address=100 lane=2 expected=37363534 actual=a5a5a5a5 latch=a5a53736 got=a5a53736 exception=0\nFAIL width=4 address=101 lane=2 expected=38373635 actual=a5a5a5a5 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=fff8 lane=2 expected=39383736 actual=a5a5a5a5 latch=a5a53938 got=a5a53938 exception=0\nFAIL width=4 address=fff9 lane=2 expected=3a393837 actual=a5a5a5a5 latch=a5a5a53a got=a5a5a53a exception=0\nword-dword cases=32 failures=28\n",
+      "exit": 21,
+      "candidate_sha256": "cc6c6f0514a1573f7a3fabef70c050698fd9ed790fec81a5cdd0f3fa8fb62188",
+      "original_limitation": "Original compact CHAIN2 storage is internally plausible; cross-mode unchained access requires the shared physical-plane layout. Prior guest capture and layout reasoning are recorded in r0502-chain2-byte-address-review.json. This probe seeds that independently specified layout, not current writer output.",
+      "exact_diff_evidence": "Only original line 808 restored; 28/32 word/dword cases fail. Separate checks cover returned bytes and final-byte latches across two plane-pair bases and even/odd addresses.",
+      "minimum_option": "Single numeric substitution; restoring compact storage would require a coherent cross-mode representation change, not removal of this line alone.",
+      "line_error_check": "Same physical line count; no #error directives changed; original anchors preserved.",
+      "status": "qualified-pending-owner; no production source change"
+    },
+    {
+      "id": "T483-R0505",
+      "original_anchor": 823,
+      "diff": {
+        "added": 1,
+        "removed": 1,
+        "change": 0
+      },
+      "responsibility": "Odd-address word read must cross to the next physical odd/even pair.",
+      "current_control": "word-dword cases=32 failures=0\n",
+      "single_point_original_control": "FAIL width=2 address=1 lane=0 expected=3231 actual=a531 latch=a5a5a532 got=a5a5a532 exception=0\nFAIL width=2 address=3 lane=0 expected=3433 actual=a533 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=2 address=101 lane=0 expected=3635 actual=a535 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=2 address=fff9 lane=0 expected=3837 actual=a537 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=2 address=1 lane=2 expected=3231 actual=a531 latch=a5a5a532 got=a5a5a532 exception=0\nFAIL width=2 address=3 lane=2 expected=3433 actual=a533 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=2 address=101 lane=2 expected=3635 actual=a535 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=2 address=fff9 lane=2 expected=3837 actual=a537 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=1 lane=0 expected=34333231 actual=a533a531 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=4 address=3 lane=0 expected=36353433 actual=a535a533 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=4 address=101 lane=0 expected=38373635 actual=a537a535 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=fff9 lane=0 expected=3a393837 actual=a539a537 latch=a5a5a53a got=a5a5a53a exception=0\nFAIL width=4 address=1 lane=2 expected=34333231 actual=a533a531 latch=a5a5a534 got=a5a5a534 exception=0\nFAIL width=4 address=3 lane=2 expected=36353433 actual=a535a533 latch=a5a5a536 got=a5a5a536 exception=0\nFAIL width=4 address=101 lane=2 expected=38373635 actual=a537a535 latch=a5a5a538 got=a5a5a538 exception=0\nFAIL width=4 address=fff9 lane=2 expected=3a393837 actual=a539a537 latch=a5a5a53a got=a5a5a53a exception=0\nword-dword cases=32 failures=16\n",
+      "exit": 21,
+      "candidate_sha256": "b91c54aafc8cc5041a80999d49c264ee6e7eebdad5a07d7b39f1e1d68eb5cca9",
+      "original_limitation": "Original compact CHAIN2 storage is internally plausible; cross-mode unchained access requires the shared physical-plane layout. Prior guest capture and layout reasoning are recorded in r0502-chain2-byte-address-review.json. This probe seeds that independently specified layout, not current writer output.",
+      "exact_diff_evidence": "Only original line 823 restored; 16/32 word/dword cases fail. Separate checks cover returned bytes and final-byte latches across two plane-pair bases and even/odd addresses.",
+      "minimum_option": "Single numeric substitution; restoring compact storage would require a coherent cross-mode representation change, not removal of this line alone.",
+      "line_error_check": "Same physical line count; no #error directives changed; original anchors preserved.",
+      "status": "qualified-pending-owner; no production source change"
+    },
+    {
+      "id": "T483-R0506",
+      "original_anchor": 827,
+      "diff": {
+        "added": 2,
+        "removed": 2,
+        "change": 0
+      },
+      "responsibility": "Nested generated readers must restore their caller local allocation.",
+      "current_control": "word-dword cases=32 failures=0\n",
+      "single_point_original_control": "FAIL width=4 address=1 lane=0 expected=34333231 actual=3231 latch=a5a5a534 got=a5a53332 exception=c0000005\nFAIL width=4 address=1 lane=2 expected=34333231 actual=3231 latch=a5a5a534 got=a5a53332 exception=c0000005\nword-dword cases=20 failures=2\n",
+      "exit": 21,
+      "candidate_sha256": "9b6e0f21bffefd18b237d88cbe3ce2cba5e6568c61a20ff114045455d5193b15",
+      "original_limitation": "crules has automatic CopyLocalIUH/CopyLocalFPH and static LocalIUH/LocalFPH. Word ENTER_SECTION saves the dword parent. Calling L26_1if_d recursively enters crules at an internal label without ENTER_SECTION; its automatic saved pointers are zero. LEAVE_SECTION frees word locals and restores zero, so the dword continuation loses its parent allocation.",
+      "exact_diff_evidence": "Top-level word cases pass; nested dword odd address1 raises C0000005 for each plane-pair base when only original lines827-828 are restored. Current local goto preserves the original word activation and all32 cases pass. SEH prevents a dialog; after exception remaining addresses in that lane are not run and are not counted passed.",
+      "minimum_option": "Local goto to existing cleanup label; no second cleanup/state. Retained blank preserves original subsequent physical line numbers. A #line replacement would use the same number of differing lines, not reduce the diff.",
+      "line_error_check": "Same physical line count; no #error directives changed; original anchors preserved.",
+      "status": "qualified-pending-owner; no production source change"
+    }
+  ],
+  "counter_review": [
+    "Address failures do not establish original compact storage was universally defective; cross-mode requirement is independently supported by prior guest evidence.",
+    "R0506 failure is independent of address changes: variant restores only internal branch call.",
+    "No claim of full-file necessity; remaining65 points still require ordered review."
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "ids": [
+    "T483-R0496",
+    "T483-R0497",
+    "T483-R0498",
+    "T483-R0499"
+  ],
+  "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "4cff6622d4ac0d20ae626c0233ecefc2d6d7ae2d1e5e35e95b4eaa0b91930b1f",
+  "current_sha256": "83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4",
+  "diff": {
+    "before_added": 7,
+    "before_removed": 0,
+    "after_added": 4,
+    "after_removed": 0,
+    "net": -3,
+    "scope": "Exclude #line compensation"
+  },
+  "responsibility": "External field access without EDL shared scratch context;original vglob.c owns field implementation.",
+  "original_capability": "Original egacpu.h declares38 direct vglob getter/setter pairs before evidgen.h. Unguarded original C-VID macros override those declarations with Video table calls into SINIT011/012/013. Original vglob.c explicitly replaces EDL/C context switching with one field read/write. Paired actual-library probes return correct values with both headers,but original macros overwrite r20/r21 and direct accessors preserve them. ConsoleEventThread WINDOW_BUFFER_SIZE_EVENT -> nt_mark_screen_refresh -> screen_refresh_required -> setter has no surrounding ICA lock. Generated video writers share these registers. Two balanced guards retain that coherent original direct-provider choice,with original latch/table layout unchanged.",
+  "exact_difference": "Four conditional boundary lines select existing original functions;no accessor algorithm,lock,wrapper or parallel state added.",
+  "counter_review": [
+    "Getter-only removal was not independently shown to crash a guest. New probe establishes concrete state mutation,not a fresh concurrent crash.",
+    "Historical T413 failure supports external setter route;this does not prove every binder or video diff necessary.",
+    "Keep getter/setter conditions as one coherent original-provider selection for owner decision,not four separately reproduced bugs.",
+    "Rebinding generated table slots would add adaptation elsewhere rather than remove this complexity."
+  ],
+  "probe": {
+    "before": {
+      "getter": {
+        "exit": 0,
+        "output": "getter=1 value=123 r20_preserved=1 r21_preserved=1"
+      },
+      "setter": {
+        "exit": 0,
+        "output": "getter=0 value=456 r20_preserved=1 r21_preserved=1"
+      }
+    },
+    "original": {
+      "getter": {
+        "exit": 21,
+        "output": "getter=1 value=123 r20_preserved=0 r21_preserved=0"
+      },
+      "setter": {
+        "exit": 21,
+        "output": "getter=0 value=456 r20_preserved=0 r21_preserved=0"
+      }
+    }
+  },
+  "line_mapping": {
+    "matched_original_nonblank": 170,
+    "mismatches": [],
+    "excluded_errors": 0
+  },
+  "decision": "Delete3 explanation lines;four residual boundaries pending owner.",
+  "verification": "Local controls only;comment-only reduction leaves code tokens unchanged;P55 delivery pending."
+}

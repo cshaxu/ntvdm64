@@ -1,0 +1,203 @@
+{
+  "id": "T483-R0501",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "9dec83d8cb16ca582a009ee877a14824913f179be2913fb959cd796f119e1c74",
+  "current_sha256": "6d6f8e99e437c8dcc7cde9afd3e215bd6f85c0f9d1076ddcb853ef4de9be7e80",
+  "diff": {
+    "before_added": 2,
+    "before_removed": 0,
+    "after_added": 0,
+    "after_removed": 0,
+    "net": -2,
+    "scope": "Non-excluded code;BIGEND #error retained;#line excluded"
+  },
+  "responsibility": "Call original rule diagnostic implementation with its string pointer.",
+  "original_capability": "All35 selected C-VID consumers compile before/after under actual MSVC x86 rule flags. All4722 symbol-owned code/data/directive sections and named relocations match. Calls pass a diagnostic string pointer and ignore the return;original void definition in ev_glue.c prints that string. No direct caller uses a return value or takes this function address.",
+  "exact_diff_necessity": "No actual selected call or object-level failure evidence. Remove the added prototype rather than retain on style alone.",
+  "counter_review": "Original implicit-int declaration differs from the void definition. This conclusion is limited to selected MSVC x86 behavior with ignored return and unchanged pointer arguments,not portable ISO-C equivalence or a promise for future direct callers.",
+  "compile_controls": [
+    {
+      "source": "ev_glue.c",
+      "sections": 53,
+      "equal": true
+    },
+    {
+      "source": "sevid000.c",
+      "sections": 118,
+      "equal": true
+    },
+    {
+      "source": "sevid001.c",
+      "sections": 174,
+      "equal": true
+    },
+    {
+      "source": "sevid002.c",
+      "sections": 141,
+      "equal": true
+    },
+    {
+      "source": "sevid003.c",
+      "sections": 157,
+      "equal": true
+    },
+    {
+      "source": "sevid004.c",
+      "sections": 227,
+      "equal": true
+    },
+    {
+      "source": "sevid005.c",
+      "sections": 123,
+      "equal": true
+    },
+    {
+      "source": "sevid006.c",
+      "sections": 177,
+      "equal": true
+    },
+    {
+      "source": "sevid007.c",
+      "sections": 141,
+      "equal": true
+    },
+    {
+      "source": "sevid008.c",
+      "sections": 143,
+      "equal": true
+    },
+    {
+      "source": "sevid009.c",
+      "sections": 88,
+      "equal": true
+    },
+    {
+      "source": "sevid010.c",
+      "sections": 151,
+      "equal": true
+    },
+    {
+      "source": "sevid011.c",
+      "sections": 125,
+      "equal": true
+    },
+    {
+      "source": "sevid012.c",
+      "sections": 125,
+      "equal": true
+    },
+    {
+      "source": "sevid013.c",
+      "sections": 199,
+      "equal": true
+    },
+    {
+      "source": "sevid014.c",
+      "sections": 177,
+      "equal": true
+    },
+    {
+      "source": "sevid015.c",
+      "sections": 161,
+      "equal": true
+    },
+    {
+      "source": "sevid016.c",
+      "sections": 171,
+      "equal": true
+    },
+    {
+      "source": "sevid017.c",
+      "sections": 132,
+      "equal": true
+    },
+    {
+      "source": "sevid018.c",
+      "sections": 142,
+      "equal": true
+    },
+    {
+      "source": "sevid019.c",
+      "sections": 190,
+      "equal": true
+    },
+    {
+      "source": "sevid020.c",
+      "sections": 129,
+      "equal": true
+    },
+    {
+      "source": "sevid021.c",
+      "sections": 185,
+      "equal": true
+    },
+    {
+      "source": "sevid022.c",
+      "sections": 133,
+      "equal": true
+    },
+    {
+      "source": "sevid023.c",
+      "sections": 94,
+      "equal": true
+    },
+    {
+      "source": "sevid024.c",
+      "sections": 108,
+      "equal": true
+    },
+    {
+      "source": "sevid025.c",
+      "sections": 135,
+      "equal": true
+    },
+    {
+      "source": "sevid026.c",
+      "sections": 139,
+      "equal": true
+    },
+    {
+      "source": "sevid027.c",
+      "sections": 151,
+      "equal": true
+    },
+    {
+      "source": "sevid028.c",
+      "sections": 163,
+      "equal": true
+    },
+    {
+      "source": "sevid029.c",
+      "sections": 141,
+      "equal": true
+    },
+    {
+      "source": "sevid030.c",
+      "sections": 107,
+      "equal": true
+    },
+    {
+      "source": "sinit011.c",
+      "sections": 24,
+      "equal": true
+    },
+    {
+      "source": "sinit012.c",
+      "sections": 36,
+      "equal": true
+    },
+    {
+      "source": "sinit013.c",
+      "sections": 62,
+      "equal": true
+    }
+  ],
+  "line_mapping": {
+    "matched_original_nonblank": 42,
+    "mismatches": [],
+    "preserved_error_count": 1,
+    "repair": "Add #line48 before excluded BIGEND endif;existing map was44. This excluded directive is the only difference from compiled restored-header control and cannot alter selected product tokens."
+  },
+  "verification": "70 compile controls passed;4722 sections equal;local restoration pending batch delivery."
+}

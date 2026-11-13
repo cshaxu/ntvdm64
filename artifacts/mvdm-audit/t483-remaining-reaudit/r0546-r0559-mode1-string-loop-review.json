@@ -1,0 +1,171 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R0546",
+      "anchor": 1868,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original shift2 uses compact pair spacing instead of shared physical8byte cells.",
+      "control": "FAIL a=2 c=0 d=0 dir=0 count=1 latch=19f01930 got=19191919\nFAIL a=2 c=0 d=0 dir=0 count=2 latch=f1f03130 got=f1f03130\nFAIL a=2 c=0 d=0 dir=0 count=3 latch=19f21932 got=f1f03130\nFAIL a=2 c=0 d=0 dir=0 count=4 latch=f3f23332 got=f3f23332\nFAIL a=2 c=0 d=0 dir=0 count=5 latch=19f41934 got=f3f23332\nFAIL a=2 c=0 d=0 dir=0 count=6 latch=f5f43534 got=f5f43534\nFAIL a=2 c=0 d=0 dir=0 count=7 latch=19f61936 got=f5f43534\nFAIL a=2 c=0 d=0 dir=0 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=352\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0547",
+      "anchor": 1873,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original base drops source address bit0,selecting even lane on odd starts.",
+      "control": "FAIL a=1 c=0 d=0 dir=0 count=1 latch=f0193019 got=f0193019\nFAIL a=1 c=0 d=0 dir=0 count=2 latch=19f11931 got=f0193019\nFAIL a=1 c=0 d=0 dir=0 count=3 latch=f2f13231 got=f2f13231\nFAIL a=1 c=0 d=0 dir=0 count=4 latch=19f31933 got=f2f13231\nFAIL a=1 c=0 d=0 dir=0 count=5 latch=f4f33433 got=f4f33433\nFAIL a=1 c=0 d=0 dir=0 count=6 latch=19f51935 got=f4f33433\nFAIL a=1 c=0 d=0 dir=0 count=7 latch=f6f53635 got=f6f53635\nFAIL a=1 c=0 d=0 dir=0 count=8 latch=19f71937 got=f6f53635\nstringloop cases=512 failures=192\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0548",
+      "anchor": 1886,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=0 dir=1 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=0 dir=1 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=0 dir=1 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=0 dir=1 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=0 dir=1 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=0 dir=1 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=0 dir=1 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=0 dir=1 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=128\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0549",
+      "anchor": 1890,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=0 dir=1 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=0 dir=1 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=0 dir=1 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=0 dir=1 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=0 dir=1 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=0 dir=1 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=0 dir=1 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=0 dir=1 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=192\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0550",
+      "anchor": 1898,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=0 dir=1 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=0 dir=1 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=0 dir=1 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=0 dir=1 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=0 dir=1 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=0 dir=1 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=0 dir=1 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=0 dir=1 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=128\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0551",
+      "anchor": 1901,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=1 dir=1 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=1 dir=1 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=1 dir=1 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=1 dir=1 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=1 dir=1 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=1 dir=1 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=1 dir=1 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=1 dir=1 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=192\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0552",
+      "anchor": 1913,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original XOR2 produces incorrect stride sequence;physical sequential CPU bytes require1/7 alternating strides.",
+      "control": "FAIL a=0 c=0 d=0 dir=1 count=3 latch=19f21932 got=f1f03130\nFAIL a=0 c=0 d=0 dir=1 count=4 latch=f3f23332 got=f1f03130\nFAIL a=0 c=0 d=0 dir=1 count=5 latch=19f41934 got=f3f23332\nFAIL a=0 c=0 d=0 dir=1 count=6 latch=f5f43534 got=f3f23332\nFAIL a=0 c=0 d=0 dir=1 count=7 latch=19f61936 got=f3f23332\nFAIL a=0 c=0 d=0 dir=1 count=8 latch=f7f63736 got=f3f23332\nFAIL a=0 c=0 d=1 dir=1 count=3 latch=19f21932 got=f1f03130\nFAIL a=0 c=0 d=1 dir=1 count=4 latch=f3f23332 got=f1f03130\nstringloop cases=512 failures=192\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0553",
+      "anchor": 1919,
+      "before": "+2/-2",
+      "after": "0",
+      "delta": -4,
+      "reason": "Actual top-level string caller has no enclosing generated local allocation; original recursive completion call safely frees current locals and restores null parent. No external callback in this loop; unlike dword->word nesting.",
+      "control": "stringloop cases=512 failures=0\n",
+      "exit": 0,
+      "minimum": "Restore original two-line completion call."
+    },
+    {
+      "id": "T483-R0554",
+      "anchor": 1931,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=0 dir=0 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=0 dir=0 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=0 dir=0 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=0 dir=0 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=0 dir=0 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=0 dir=0 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=0 dir=0 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=0 dir=0 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=128\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0555",
+      "anchor": 1935,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=0 dir=0 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=0 dir=0 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=0 dir=0 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=0 dir=0 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=0 dir=0 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=0 dir=0 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=0 dir=0 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=0 dir=0 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=192\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0556",
+      "anchor": 1943,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=0 dir=0 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=0 dir=0 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=0 dir=0 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=0 dir=0 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=0 dir=0 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=0 dir=0 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=0 dir=0 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=0 dir=0 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=128\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0557",
+      "anchor": 1946,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original high-byte comparison/care offset disagrees with original per-plane oracle on actual updater transition; current low-byte offset preserves reachable correct behavior. Broad CHAIN2 field-update correctness remains uncertified.",
+      "control": "FAIL a=0 c=0 d=1 dir=0 count=1 latch=19f01930 got=19f01930\nFAIL a=0 c=0 d=1 dir=0 count=2 latch=f1f03130 got=f1f03130\nFAIL a=0 c=0 d=1 dir=0 count=3 latch=19f21932 got=19f21932\nFAIL a=0 c=0 d=1 dir=0 count=4 latch=f3f23332 got=f3f23332\nFAIL a=0 c=0 d=1 dir=0 count=5 latch=19f41934 got=19f41934\nFAIL a=0 c=0 d=1 dir=0 count=6 latch=f5f43534 got=f5f43534\nFAIL a=0 c=0 d=1 dir=0 count=7 latch=19f61936 got=19f61936\nFAIL a=0 c=0 d=1 dir=0 count=8 latch=f7f63736 got=f7f63736\nstringloop cases=512 failures=192\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0558",
+      "anchor": 1958,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original XOR2 produces incorrect stride sequence in opposite destination traversal loop.",
+      "control": "FAIL a=0 c=0 d=0 dir=0 count=3 latch=19f21932 got=f1f03130\nFAIL a=0 c=0 d=0 dir=0 count=4 latch=f3f23332 got=f1f03130\nFAIL a=0 c=0 d=0 dir=0 count=5 latch=19f41934 got=f3f23332\nFAIL a=0 c=0 d=0 dir=0 count=6 latch=f5f43534 got=f3f23332\nFAIL a=0 c=0 d=0 dir=0 count=7 latch=19f61936 got=f3f23332\nFAIL a=0 c=0 d=0 dir=0 count=8 latch=f7f63736 got=f3f23332\nFAIL a=0 c=0 d=1 dir=0 count=3 latch=19f21932 got=f1f03130\nFAIL a=0 c=0 d=1 dir=0 count=4 latch=f3f23332 got=f1f03130\nstringloop cases=512 failures=192\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    },
+    {
+      "id": "T483-R0559",
+      "anchor": 1968,
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "delta": 0,
+      "reason": "Original mask-4 can select gap half of8byte cell after final odd source byte; final latches must align-8.",
+      "control": "FAIL a=0 c=0 d=0 dir=0 count=2 latch=f1f03130 got=19191919\nFAIL a=0 c=0 d=0 dir=0 count=4 latch=f3f23332 got=19191919\nFAIL a=0 c=0 d=0 dir=0 count=6 latch=f5f43534 got=19191919\nFAIL a=0 c=0 d=0 dir=0 count=8 latch=f7f63736 got=19191919\nFAIL a=0 c=0 d=0 dir=1 count=2 latch=f1f03130 got=19191919\nFAIL a=0 c=0 d=0 dir=1 count=4 latch=f3f23332 got=19191919\nFAIL a=0 c=0 d=0 dir=1 count=6 latch=f5f43534 got=19191919\nFAIL a=0 c=0 d=0 dir=1 count=8 latch=f7f63736 got=19191919\nstringloop cases=512 failures=256\n",
+      "exit": 21,
+      "minimum": "Single constant/expression correction;no extra helper or state."
+    }
+  ],
+  "current_control": "stringloop cases=512 failures=0\n",
+  "final_control": "stringloop cases=512 failures=0\n",
+  "method": "8starts x2compare x2care x2destination directions x8lengths=512. Actual original updater transitions UNCHAINED masks5/10->CHAIN2 uniform masks15/0. Expected comparison from original per-plane globals; two planes contain different byte patterns; final four-byte latches checked independently. Each variant restores only specified original lines.",
+  "counter_review": [
+    "Restored R0553 is consistent with source-wide table-only top-level S_2102 references already recorded inR0545;no unsupported nesting assumption.",
+    "Field evidence is reachable bounded behavior,not proof all possible CHAIN2 compare state transitions work.",
+    "Length0 and full guest integration not claimed.",
+    "Final source candidate with both R0545 and R0553 original calls was compiled and passes512cases."
+  ],
+  "final_sha256": "9394d18c54a8238148f85e803aaa326c88d92bd96956ccd80a1f0fab952fedbd",
+  "delta": -4
+}

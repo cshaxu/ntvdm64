@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R0562",
+      "anchor": 2065,
+      "field": "colour_comp",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original upper-half offset reads0 instead of scalar colour_comp on x86; restoring it adds low-byte mismatches. Current low-half offset fixes low byte but leaves high byte untransformed because original CHAIN4 producer writes scalar0/ff,not repeated16bit mask.",
+      "control": "FAIL a=0 c=0 d=1 x=0 y=0 byte_oracle=ffff word=ff\nFAIL a=0 c=0 d=1 x=0 y=55 byte_oracle=ffff word=55ff\nFAIL a=0 c=0 d=1 x=0 y=aa byte_oracle=ffff word=aaff\nFAIL a=0 c=0 d=1 x=ff y=0 byte_oracle=ffff word=ff\nchain4word cases=512 full_failures=320 low_byte_failures=128\n"
+    },
+    {
+      "id": "T483-R0563",
+      "anchor": 2067,
+      "field": "dont_care",
+      "diff": "+1/-1 unchanged",
+      "necessity": "Original upper-half offset reads0 instead of scalar dont_care on x86; restoring it adds low-byte mismatches. Current low-half offset fixes low byte but leaves high byte untransformed because original CHAIN4 producer writes scalar0/ff,not repeated16bit mask.",
+      "control": "FAIL a=0 c=0 d=1 x=0 y=0 byte_oracle=ffff word=0\nFAIL a=0 c=0 d=1 x=0 y=ff byte_oracle=ffff word=ff00\nFAIL a=0 c=0 d=1 x=0 y=55 byte_oracle=ffff word=5500\nFAIL a=0 c=0 d=1 x=0 y=aa byte_oracle=ffff word=aa00\nchain4word cases=512 full_failures=368 low_byte_failures=192\n"
+    }
+  ],
+  "current_control": "FAIL a=0 c=0 d=1 x=0 y=0 byte_oracle=ffff word=ff\nFAIL a=0 c=0 d=1 x=0 y=55 byte_oracle=ffff word=55ff\nFAIL a=0 c=0 d=1 x=0 y=aa byte_oracle=ffff word=aaff\nFAIL a=0 c=0 d=1 x=ff y=0 byte_oracle=ffff word=ff\nchain4word cases=512 full_failures=320 low_byte_failures=0\n",
+  "root_cause": "S_2104 uses a16bit XOR/OR against scalar shared fields set by original CHAIN4 updater. On x86 scalar0xff has upper byte0. A word must match two consecutive selected byte reads for these ordinary memory reads; current implementation omits comparison/care on high byte.",
+  "evidence": "Actual original updater executed; getter asserts scalarvalues.8addresses x2compare x2care x4lowpatterns x4highpatterns=512. Oracle invokes actual S_2103 byte reader twice, then S_2104 word reader. No guest reproduction claim.",
+  "disposition": "Necessary but incomplete adaptation; owner decision on complete correction required. Do not call current word tests passed.",
+  "concrete_option": "Retain low-half offsets and change XOR/OR operands at original2066/2068 to use low IU8 multiplied by0x0101, producing replicated16bit mask. Two additional original-relative changed lines,estimated net+4 diff lines forpair; requires owner approval. No helper or new state. Producer-wide replication is not yet qualified and could affect other modes; do not silently alter shared producer.",
+  "counter_review": [
+    "Current512cases have320whole-word failures but0low-byte failures. Original compare-offset restoration has320whole-word failures and128low-byte failures; original care-offset restoration has368whole-word failures and192low-byte failures. Aggregate failure count alone hides low-byte regression.",
+    "This defect predates P55 and exists in unchanged production path; no new product fix implemented under no-net-increase rule.",
+    "A clear defect and concrete proposal qualify owner decision; this is not an unexplained investigative unknown."
+  ],
+  "line_error": "No source change; existing diagnostic lines and#error unchanged.",
+  "verification": "Known failing current-provider control; full correction not implemented/verified."
+}

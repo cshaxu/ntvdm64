@@ -1,0 +1,22 @@
+{
+  "id": "T483-R0534",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+  "original_anchor": 1711,
+  "diff": "+2/-2 unchanged",
+  "responsibility": "Mode1 word reader must preserve enclosing dword reader local activation.",
+  "original_failure": "Original L26_24if_d wrapper recursively enters crules internal label without ENTER_SECTION; automatic CopyLocalIUH is zero. Cleanup frees word locals and sets static LocalIUH to zero rather than saved dword allocation. S_2101 continuation accesses its locals after S_2100 and raises C0000005 at odd CPU start1.",
+  "actual_chain": "read_dword_ev_glue -> mode1 table chain2 S_2101 -> S_2100 at original lines1792/1803 -> odd-address L26_24if_d cleanup -> dword continuation.",
+  "controls": {
+    "current": "word-dword cases=16 failures=0\n",
+    "original": "FAIL width=4 address=1 lane=0 expected=34333231 actual=3231 latch=a534a534 got=33323332 exception=c0000005\nword-dword cases=10 failures=1\n"
+  },
+  "minimum": "Keep local goto and original-line-count blank;uses existing cleanup/state. Recursive wrapper cannot see caller automatic saved pointer. Adding alternative cleanup/helper is larger. #line replacing blank has same physical diff count.",
+  "counter_review": [
+    "Eight top-level word cases pass with original; necessity arises from actual nested dword call,not speculative reentrancy.",
+    "Current16/16;original9successful and1exception before remaining6 skipped. Do not label skipped cases passes.",
+    "Real updater comparison/care15 makes all field bytes zero,isolating control-flow from comparison-offset issues.",
+    "This provider control is not guest application/full integration acceptance."
+  ],
+  "line_error": "No product edit; two-line replacement preserves original line positions; #error unchanged.",
+  "status": "qualified pending owner"
+}
