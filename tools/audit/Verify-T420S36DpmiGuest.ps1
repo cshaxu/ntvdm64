@@ -11,7 +11,7 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
 $originalRegisters = Get-Content "$repo\src\mvdm-host\softpc.new\base\ccpu386\c_reg.h" -Raw
 $modeSwitch = Get-Content "$repo\src\mvdm-host\dpmi32\modesw.c" -Raw
-foreach ($segment in @('ES','CS','SS','DS','FS','GS')) {
+foreach ($segment in @('ES','SS','DS','FS','GS')) {
     $original = [regex]::Match($originalRegisters,"(?m)^#define\s+${segment}_REG\s+(\d+)")
     $binding = [regex]::Match($modeSwitch,"(?m)^#define\s+CPU40_${segment}_REG\s+(\d+)")
     if (!$original.Success -or !$binding.Success -or

@@ -111,3 +111,8 @@ Current int21map.c call-chain evidence: [R0187-R0203](r0187-r0203-call-chain-rev
 
 [P20 binary comparison](batch-p20-binary-identity.json) identifies exact metadata-only
 differences; it is separate from runtime verification.
+
+Current modesw.c review: [R0204-R0213](r0204-r0213-call-chain-review.json).
+Two BOP functions restored to their original i386/dpmi386.c owner.
+[P21 checkpoint](batch-p21-checkpoint.json) records cached build, publication11x2,
+focused and Full16 verification; this receipt accompanies the P21 delivery.

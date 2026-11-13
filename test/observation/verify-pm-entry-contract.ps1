@@ -4,9 +4,9 @@ $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
 if (!$out.StartsWith((Join-Path $repo 'build/'),[StringComparison]::OrdinalIgnoreCase)) { throw 'Build root must be under build' }
 New-Item -ItemType Directory -Path $out -Force | Out-Null
-$source=Join-Path $repo 'src/mvdm-host/dpmi32/modesw.c'
+$source=Join-Path $repo 'src/mvdm-host/dpmi32/i386/dpmi386.c'
 $text=[IO.File]::ReadAllText($source)
-$body=[regex]::Match($text,'(?ms)^VOID\r?\nDpmiCpu40SwitchToProtectedMode\(.*?^\}')
+$body=[regex]::Match($text,'(?ms)^VOID\r?\nswitch_to_protected_mode\(.*?^\}')
 if (!$body.Success) { throw 'Production PM entry body not found' }
 # Generated test input is the complete current production function, not a
 # copied sanitization expression. CPU/descriptor dependencies are test doubles.

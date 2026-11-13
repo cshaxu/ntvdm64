@@ -1,0 +1,108 @@
+{
+  "status": "Whole modesw file and finite original-owner restoration source review complete; cached build/publication/runtime/Git pending",
+  "points": {
+    "T483-R0204": {
+      "problem": "BOP53:01 continuation frame",
+      "original_failure_evidence": "Original immutable WOW_x86 dxutil.asm pushes DS/ESP/SS/EIP/CS and omits native LGDT/LIDT path; original non-i386 alias is DpmiIllegalFunction, not a frame consumer. Native i386 original CONTEXT setters are passive; CCPU setters load caches immediately.",
+      "implementation": "Restore original owner/body in i386/dpmi386.c; remove redundant snapshot locals; retain CCPU boundary ordering."
+    },
+    "T483-R0205": {
+      "problem": "GDT/IDT install",
+      "original_failure_evidence": "WOW_x86 guest omits LGDT/LIDT. CCPU load_code_seg reads CPU-installed GDT; original NT process LDT does not install CCPU GDT. Original dxboot InitIntrDscrTable publishes final SEL_IDT; install that descriptor, not freed temporary table.",
+      "implementation": "Keep finite table publication and existing descriptor validation; remove explanatory comment duplication."
+    },
+    "T483-R0206": {
+      "problem": "NT/PE/CPL and segment entry",
+      "original_failure_evidence": "Original VdmSwapContexts sanitizes NT via mask0x003e0dd7; non-WOW DOSX explicitly clearsNT. CCPU c_setMSW/MOV_CR and load_code_seg/load_stack_seg act immediately, so original passive CONTEXT PE-last order would leave real-mode cache bases.",
+      "implementation": "Restore original register-frame expressions in original owner, retaining NT clear and PE/CPL-before-load."
+    },
+    "T483-R0207": {
+      "problem": "WOW page view restore",
+      "original_failure_evidence": "Immutable wow16/user/usercli.asm reads MM_SHARED_USER_DATA_VA=0x7ffe0000 (ks386p.inc). Native NT provides mapping; CCPU has no native NT page tables. Page domain supplies this view. Real excursion clearsPG because MOV_CR rejects PG with PE0; returning protected execution must restore selected mapping/GDT.",
+      "implementation": "Keep existing reentry call in original mode owner; no second page-domain owner."
+    },
+    "T483-R0208": {
+      "problem": "BOPFD return frame",
+      "original_failure_evidence": "Original dxutil.asm WOW_x86 BOPFD passes five-word DS/SP/SS/IP/CS frame. Native i386 owner writes passive context before clearingPE; CCPU setters would validate real segments as protected selectors.",
+      "implementation": "Restore original function in i386/dpmi386.c; keep PE/CPL-before-load, DS/SS cache refresh; remove CS pseudo refresh and local snapshot duplication."
+    },
+    "T483-R0209": {
+      "problem": "Helper real-mode transition",
+      "original_failure_evidence": "int21map.c calls helper then DPMI_EXEC_INT; CCPU setCS immediately validates selector when PE1, so DosxRmCodeSegment cannot be loaded as a protected selector. Native CONTEXT original setter does not validate at assignment.",
+      "implementation": "Keep PE-before-CS and page-domain leave/CPL0; remove historical narrative."
+    },
+    "T483-R0210": {
+      "problem": "Data/stack pseudo descriptors",
+      "original_failure_evidence": "Original CCPU real-mode data/stack setters change selector/base only. c_oprnd.h RO/WO/RW still enforce cached R/W without PE guard; c_stack.c uses SS B and W in real mode. Original SS-limit-only workaround cannot reset null-data R/W or USE32 stack. CS differs: load_CS_cache already resets all access attributes, and supported profile excludes real-mode limit checks.",
+      "implementation": "Remove CS pseudo reset from both paths and its constants; retain five data/stack resets. Verify indices of remaining bindings."
+    },
+    "T483-R0211": {
+      "problem": "Fast-BOP mode sync",
+      "original_failure_evidence": "Original-restore baseline P19 removed sync_mode; no call or header remains. Remove stale DIV310 description.",
+      "implementation": "Already restored/published by P19; retain receipt rather than claim fresh implementation."
+    },
+    "T483-R0212": {
+      "problem": "Temporary protected CS/SS",
+      "original_failure_evidence": "Original int21map GetVector/GetPSP/GetDTA paths call DpmiSegmentToSelector after helper and before outer restore. buffer.c helper saves currentCS/SS, executes guest, then restores them through CCPU protected setters. Unconverted real segments would be validated as protected selectors on this nested return.",
+      "implementation": "Keep original DOSX-provided protectedCS/SS carriers; shorten duplicated explanation."
+    },
+    "T483-R0213": {
+      "problem": "Helper WOW page reentry",
+      "original_failure_evidence": "Same immutable USER fixed mapping and CCPU PG/PE incompatibility chain as R0207; after real INT21 excursion protected caller still needs its original linear view.",
+      "implementation": "Keep single reentry call; no duplicate mapping/state mechanism."
+    }
+  },
+  "metrics": {
+    "src/mvdm-host/dpmi32/modesw.c": {
+      "baseline": {
+        "added": 187,
+        "deleted": 10,
+        "total": 197
+      },
+      "local": {
+        "added": 30,
+        "deleted": 10,
+        "total": 40
+      }
+    },
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": {
+      "baseline": {
+        "added": 18,
+        "deleted": 314,
+        "total": 332
+      },
+      "local": {
+        "added": 39,
+        "deleted": 233,
+        "total": 272
+      }
+    }
+  },
+  "mirror_diff_delta": -217,
+  "line_checks": [
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "checked_lines": 62,
+      "mismatches": [],
+      "errors_unchanged": true,
+      "sha256": "401d13ac2ec3e9705c45cfa857916e15cff1ec19897bd893356ca4fc78ec7f97"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "checked_lines": 93,
+      "mismatches": [],
+      "errors_unchanged": true,
+      "sha256": "64e78625dec4870cbfb1c60b6cff78078525eb8bc6aed24b5da2b20f2161d8c4"
+    }
+  ],
+  "counter_review": [
+    "Native CONTEXT versus CCPU immediate setters distinguished; present adapter dependency alone not accepted.",
+    "Original function placement restored rather than adding shim or second state machine.",
+    "Physical stack pointer resolved before state changes; mode/table writes do not invalidate backing allocation. Invalid/cross-page frames are unchanged original boundary, not repaired by snapshot locals.",
+    "Mock PM-entry fixture alone does not prove real CPU semantics. CCPU/DOS/WOW regression remains required."
+  ],
+  "limits": [
+    "No new build/runtime evidence yet.",
+    "Coupled i386/dpmi386.c changes cover only these restored functions; do not complete its later ordered whole-file audit."
+  ]
+}

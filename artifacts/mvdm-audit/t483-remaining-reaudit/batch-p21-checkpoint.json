@@ -1,0 +1,169 @@
+{
+  "status": "Final-source cached build, publication11x2/hash, focused and Full16 passed; included in P21 delivery receipt",
+  "baseline": "4636c52c0f277417ae3512adb743a11c676c8d22",
+  "source_files": 6,
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "sha256": "64e78625dec4870cbfb1c60b6cff78078525eb8bc6aed24b5da2b20f2161d8c4"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "sha256": "401d13ac2ec3e9705c45cfa857916e15cff1ec19897bd893356ca4fc78ec7f97"
+    },
+    {
+      "path": "test/mvdm-host/dpmi/pm_entry_contract_fixture.c",
+      "sha256": "ffc8ae5f79749a82ed7ed92a13147c583c7970ec4bdb0ff54d2261a53efb5cb2"
+    },
+    {
+      "path": "test/observation/verify-pm-entry-contract.ps1",
+      "sha256": "465303b4b2be15f0d84bfa3e22db5bfda01f36328155d6959bcb7f92f1a5bfb5"
+    },
+    {
+      "path": "tools/audit/Verify-T420S36DpmiGuest.ps1",
+      "sha256": "77bec1aafdea56b15400a5a6885ab2ea1b14b51ad27e44d1a8356f929d42b808"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "3121bb998148b55158836d220d063e3bcbb27c5d359efbda06863fff177dbf86"
+    }
+  ],
+  "audit": {
+    "reviewed": 220,
+    "total": 2720,
+    "files_reviewed": 31,
+    "total_files": 365,
+    "restored_published": 125,
+    "qualified_pending": 93,
+    "approved_retain": 2,
+    "remaining": 2500
+  },
+  "mirror_diff_delta": -217,
+  "original_guest_changed": false,
+  "winnt_zip_changed": false,
+  "publication": {
+    "status": "published",
+    "package": "c53bcc24-2fb4-46be-96dc-97ba9fb7453a",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "cached_exit": 0,
+  "focused_exit": 0,
+  "focused_limits": "PM-entry65538 is mock-boundary; independent CCPU/descriptor/page-domain tests passed. Full runtime verification still running.",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 374256,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 9665,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 2541,
+        "CleanupMs": 680,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 389,
+        "CleanupMs": 577,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67138,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 45812,
+        "CleanupMs": 449,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44882,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14866,
+        "CleanupMs": 432,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10882,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 65449,
+        "CleanupMs": 502,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12635,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28350,
+        "CleanupMs": 528,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30681,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4115,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7880,
+        "CleanupMs": 445,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10271,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3614,
+        "CleanupMs": 352,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6222,
+        "CleanupMs": 374,
+        "Passed": true
+      }
+    ]
+  },
+  "final_check_exit": 0,
+  "limits": [
+    "PM-entry65538 uses test doubles, not CPU execution. Independent CCPU/descriptor/page-domain tests and Full runtime gates passed.",
+    "Unavailable external DOS4GW/NESticle fixtures remain skips; not passed.",
+    "WOW frontiers are startup/exit coverage, not exhaustive interactive gameplay or Win3.x acceptance.",
+    "No original guest or winnt.zip changes."
+  ]
+}

@@ -76,7 +76,7 @@ int main(void) {
         writes=reentries=bad_order=0; gdt=idt=0;
         valid_idt=test!=65536;
         Cpu40GdtShadowAddress=test==65537 ? 0 : 0x11000;
-        DpmiCpu40SwitchToProtectedMode();
+        switch_to_protected_mode();
         if (!valid_idt) {
             failed += flags!=input || msw!=0x10 || writes || reentries;
         } else {

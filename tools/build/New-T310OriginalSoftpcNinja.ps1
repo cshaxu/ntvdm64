@@ -946,7 +946,7 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)
     if ($name -eq 'bios.c' -and $Architecture -eq 'x86') {
         # The original BIOS BOP table publishes FD only in its monitor
         # product profile.  CPU40 uses the same original DOSX continuation
-        # frame through dpmi32/modesw.c's bounded counterpart.
+        # frame through the restored dpmi32/i386/dpmi386.c provider.
         $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR')
     }
     $object

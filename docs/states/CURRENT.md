@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-210 points have a prior or current review record:124 restored/verified/published,
-0 local restorations pending verification,2 approved retain,84 qualified pending
-decisions and0 prior classifications requiring requalification. Another2510
-points are unreviewed. Sequential file disposition is30/365;335 remain.
+220 points have a prior or current review record:125 restored/verified/published,
+0 local restorations pending verification,2 approved retain,93 qualified pending
+decisions and0 prior classifications requiring requalification. Another2500
+points are unreviewed. Sequential file disposition is31/365;334 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,11 +60,11 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P20 package `79ae5698-34e1-49b2-811e-f414e0905f87` is published to
+P21 package `c53bcc24-2fb4-46be-96dc-97ba9fb7453a` is published to
 assets/release and O:/winnt/system32; all11 image hashes match at both targets.
-Final-source cached full build and current-source observer Full16 passed.
+Final-source cached full build, focused and Full16 passed.
 DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
-or winnt.zip changes. See [P20 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p20-checkpoint.json).
+or winnt.zip changes. See [P21 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p21-checkpoint.json).
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
 point. See [file check](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0114-r0116-whole-file-check.json).
@@ -236,12 +236,12 @@ P19 removed obsolete fast-BOP adaptation; six mirrors net-195 diff lines.
 Cached build, publication11x2, focused, Full16 and supplemental gates passed.
 Commit41569ec4a is pushed; [receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p19-checkpoint.json).
 
-## P20 Verified Batch
+## P21 Verified Batch
 
-int21map.c R0187-R0203: R0202 restored;16 residuals await owner decision.
-Mirror diff159->139 (-20); executable tokens/#error unchanged; lines checked.
-Cached build, publication11x2, current-source observer Full16 and3 handoff
-repeats passed. First historical-observer handoff failure is retained, not
-claimed as a repaired product bug. Final governance/Git follows.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p20-checkpoint.json).
-Next file: modesw.c R0204.
+P20 delivered in4636c52c0; P21 is published11x2/hash-verified.
+modesw.c R0204-R0213 source review complete. Two mode functions restored to
+original i386/dpmi386.c owner; redundant frame snapshots and CS refresh removed.
+R0211 was already restored/delivered by P19;9 residuals await owner decision.
+Line/#error, cached build, publication11x2, focused and Full16 pass.
+Mirror diff529->312 (-217); P21 delivery carries this receipt.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0204-r0213-call-chain-review.json).

@@ -1,0 +1,59 @@
+{
+  "scope": "Intermediate R0204 investigation retained as evidence history; superseded by r0204-r0213-call-chain-review.json",
+  "baseline_commit": "4636c52c0f277417ae3512adb743a11c676c8d22",
+  "source_sha256": "2d4c54547be70238feabf783594d280530fe5305037dd390932f28abb4b1b681",
+  "established": [
+    "dpmi32.c dispatch slot1 calls switch_to_protected_mode; dpmidata.h currently aliases it to DpmiCpu40SwitchToProtectedMode for CPU40. This existing alias is a caller, not proof of necessity.",
+    "Pinned original dpmi32/i386/dpmi386.c has switch_to_protected_mode restoring the same offsets12/8/6/2/0 through original setters, then setsPE and updates fixed NT VDM state bits.",
+    "Current i386/dpmi386.c retains only debug-register service; the original mode-switch owner is absent. A finite original-function restoration deserves review before retaining the duplicate modesw.c implementation.",
+    "Original c_reg.c c_setCS/c_setSS call load_code_seg/load_stack_seg immediately; c_setMSW callsMOV_CR. Passive CONTEXT assumptions cannot be transferred unchanged.",
+    "Original c_seg.c real-mode load_stack_seg sets selector/base only; load_pseudo_descr separately sets limit/access/DPL. Thus a segment setter alone is not proof that all hidden state refresh is redundant."
+  ],
+  "next": [
+    "Whole-file source review now complete; see final review and P21 checkpoint for current verification state"
+  ],
+  "verification": "Read-only source evidence; no new production edits, tests or point-count advance after P20.",
+  "frame_read_conclusion": {
+    "status": "local semantic minimization; whole-file review and delivery pending",
+    "chain": "Sim32pGetVDMPointer -> Sim32pGetVDMPointerWithLinear -> c_GetLinAdd -> c_GetPhyAdd returns resolved host pointer, not deferred selector/linear lookup.",
+    "operations": "GDT/IDT setters update CPU fields; leave_protected changes GDT/CR0 but does not dispose backing allocations; CCPU segment setters synchronously load caches through call_cpu_function, not guest scheduling.",
+    "change": "Remove ten redundant snapshot locals and restore ten original offset read expressions. Preserve CCPU PE-before-segment ordering, descriptor and page-domain operations pending their own review.",
+    "limits": "Does not establish validity of arbitrary guest frames or repair existing cross-page/invalid-frame behavior. No new runtime evidence.",
+    "directives": "Existing #error and #line sequence byte-identical; file LF preserved. Original logical line proof remains whole-file work.",
+    "before_sha256": "2d4c54547be70238feabf783594d280530fe5305037dd390932f28abb4b1b681",
+    "after_sha256": "167e7530e5d9c68b100f5aea2b66da8d52afc7a387955e2c9a9f5d19465f347e"
+  },
+  "descriptor_and_flag_review": {
+    "points": [
+      "T483-R0205",
+      "T483-R0206"
+    ],
+    "responsibility_evidence": [
+      "Original guest dpmi/486/dxutil.asm EnterProtectedMode: non-WOW_x86 executes LGDT/LIDT/LMSW, whereas WOW_x86 pushes continuation and calls BOP53:01. Removing that BOP implementation does not expose the unselected guest instructions.",
+      "Original dpmi32/i386/dpmi386.c switch_to_protected_mode restores selectors through passive NT CONTEXT setters. Original softpc.h setMSW only updates IntelMSW; CCPU c_setMSW executes MOV_CR and segment setters immediately load descriptor caches.",
+      "Original ntos/vdm/x86/vdmmisc.asm VdmSwapContexts masks protected EFLAGS with EFLAGS_USER_SANITIZE=0x003e0dd7, excluding NT; ordinary non-WOW DOSX explicitly clears 0x4000 before transition."
+    ],
+    "current_closure": [
+      "DpmiInitDosx publishes separate GDT/LDT descriptor images; DpmiSetDescriptorEntry updates TI=0 GDT records from original guest publication. CCPU load_code_seg/read_descriptor_linear consumes installed GDT, not NT process LDT.",
+      "Original guest dxboot.asm InitIntrDscrTable sets bpIDT and calls NSetSegmentDscr(SEL_IDT,...). DpmiCpu40GetDosxIdtDescriptor consumes that final descriptor; CPU c_setIDT_BASE_LIMIT publishes actual IDTR.",
+      "c_setGDT_BASE_LIMIT/c_setIDT_BASE_LIMIT only set CPU fields; they do not copy/rewrite stack bytes or invalidate the already resolved stack pointer."
+    ],
+    "counter_review": [
+      "The table-publication dependency alone is not proof: the independent reason is that immutable WOW_x86 guest omits hardware table instructions and CCPU cannot consume the native NT process descriptor context.",
+      "Original portable DpmiSwitchToProtectedMode assumes caller restores registers; it does not consume BOP53:01 continuation frame. Original non-i386 alias DpmiIllegalFunction does not implement this service.",
+      "The need for a CCPU table/flag boundary does not establish all current checks or function placement minimal. Whole-file original-owner restoration/minimization still being checked."
+    ],
+    "change": "Remove thirteen lines of local explanatory comments; retain concrete executable descriptor publication, NT clear, PE/CPL ordering. Full rationale is external evidence, not duplicated in mirror.",
+    "verification": "Source inspection only. No new runtime or compile evidence; whole-file processing precedes build."
+  },
+  "next_cache_review": {
+    "point": "T483-R0210",
+    "evidence": [
+      "c_addr.c real-mode limit_check returns before bad_limit when TAKE_REAL_MODE_LIMIT_FAULT is undefined; checked inventory identifies undefined production profile.",
+      "c_oprnd.h RO/WO/RW macros still check cached read/write attributes without PE guard. c_stack.c uses SS B-bit and checks SS write access in real mode. Therefore limit-check evidence alone cannot justify reverting every pseudo-descriptor refresh.",
+      "load_CS_cache already refreshes CS attributes in real mode but preserves CS limit. Need check all instruction-fetch/transfer consumers before deleting the CS refresh."
+    ],
+    "status": "Evidence gathered for next ordered point, not marked reviewed or owner pending."
+  },
+  "current_source_sha256": "e6757c407695e6617190b8880829ebc5bb8f5adec4da30f899212882406122b8"
+}

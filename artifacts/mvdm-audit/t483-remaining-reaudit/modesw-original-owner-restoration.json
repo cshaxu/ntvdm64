@@ -1,0 +1,32 @@
+{
+  "status": "Intermediate relocation measurement; final CS minimization and combined metrics are in r0204-r0213-call-chain-review.json",
+  "metrics": {
+    "src/mvdm-host/dpmi32/modesw.c": {
+      "delivered_baseline": {
+        "added": 187,
+        "deleted": 10,
+        "total": 197
+      },
+      "local": {
+        "added": 57,
+        "deleted": 10,
+        "total": 67
+      }
+    },
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": {
+      "delivered_baseline": {
+        "added": 18,
+        "deleted": 314,
+        "total": 332
+      },
+      "local": {
+        "added": 41,
+        "deleted": 233,
+        "total": 274
+      }
+    }
+  },
+  "hardware_exclusion": "Original fixed NTVDM state-page inline assembly remains absent. Existing #error branches unchanged.",
+  "binding": "Original function spelling expands through existing dpmidata.h alias; dispatch/BIOS symbols unchanged. Existing product build already compiles i386/dpmi386.c.",
+  "test": "PM-entry fixture extraction follows original owner; calls original function spelling; assertions unchanged."
+}
