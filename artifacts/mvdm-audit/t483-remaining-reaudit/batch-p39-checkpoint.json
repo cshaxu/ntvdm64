@@ -1,0 +1,37 @@
+{
+  "status": "P39 nonbehavioral restoration; accompanies Git delivery",
+  "mirror_diff_delta": -1,
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+  "source_sha256": "c2d760ddcc93a440a89af32f4994bae227e7532571217576048c376e403150f7",
+  "pair_compile": {
+    "base_commit": "e030063df9fc9413041f86dba4c42bea16d04222",
+    "flags_source": "build/.ninja/msvc-x86-release/worker/build.ninja ccpu_flags + /O2",
+    "input_path": "build/t483-s5-p39/input.c",
+    "output_path": "build/t483-s5-p39/input.obj",
+    "procedure": "Copy prechange source to input.c, compile, preserve object; copy restored source to same input.c, compile with identical arguments/output path; compare COFF excluding only bytes4..7 timestamp.",
+    "exit": 0,
+    "before_sha256": "ead8ac2e3d61e84ad022c4c2a4abf02e7fee6ce4c11f64a9264ef42dd05e3e54",
+    "after_sha256": "55191a528707bfc39190a72898375467794e10d548f969e0154af22e94e0b02a",
+    "object_size": 4910,
+    "raw_equal": false,
+    "equal_except_timestamp": true,
+    "different_offsets": [
+      4
+    ],
+    "normalized_sha256": "3e9409460fdc8c0b60a342fbf7ef1e28074cb75acb134c3d7890e9d89862f956",
+    "initial_comparison": "Different output paths injected object names into .debug$S; corrected same-path comparison isolates timestamp only. Not a production failure."
+  },
+  "publication": "P38 unchanged11-component package hash-verified at assets/release and O:/winnt/system32; no new publication required for identical code/binding",
+  "package": "52a7e9fb-5c3b-4c83-80aa-b3248d606604",
+  "runtime": "Reused P38 full/focused evidence under owner nonbehavioral/reference cleanup exception",
+  "progress": {
+    "reviewed": 437,
+    "total": 2720,
+    "restored": 153,
+    "approved": 2,
+    "pending_decisions": 282,
+    "unreviewed": 2283,
+    "files": 62,
+    "total_files": 365
+  }
+}

@@ -208,3 +208,7 @@ compiled only in the task build directory, not a new production/test target.
 ## P38 exception source delivery
 
 [R0418-R0429 review](r0418-r0429-exception-review.json) restores original diagnostic macro with minimal valid-stream guard, removes redundant header/comments, retains necessary five hook scopes. Mirror diff net-23. [Line proof](batch-p38-line-check.json); [receipt](batch-p38-checkpoint.json). Cached full build, publication11x2/hash,27 positive cases,101 expected original-negative failures, null/valid stream controls,64 x87/143 CPU and Full16 passed.436/2720 reviewed;61/365 files;152 restored delivered,0 local,2 approved,282 pending,2284 unreviewed. Receipt accompanies Git delivery.
+
+## P39 transfer header restored
+
+[R0430](r0430-transfer-header.json) removes unused TLB include and redundant line directives: mirror diff net-1;285 original matched lines correct. Same-path product-context paired objects differ only in COFF timestamp. [Receipt](batch-p39-checkpoint.json) reuses P38 package/Full without repeating behavioral tests.437/2720 reviewed;62/365 files;153 restored delivered,2 approved,282 pending decisions,2283 unreviewed.

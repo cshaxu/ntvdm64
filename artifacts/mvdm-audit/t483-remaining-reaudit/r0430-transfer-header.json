@@ -1,0 +1,34 @@
+{
+  "point": "T483-R0430",
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+  "responsibility": "No TLB-specific responsibility in this transfer-control translation unit; it uses original segment, stack and paging accessor declarations.",
+  "original_ability": "Original include list supplies all referenced declarations. c_tlb.h adds PG_S/PG_U and flush_tlb/invalidate_tlb_entry/lin2phy/test_tlb/xtrn2phy declarations; no direct use found, and paired actual-product-context compilation proves no expansion-induced code or binding dependency.",
+  "original_failure": "None established. Both candidate and prechange compile successfully.",
+  "action": "Remove c_tlb.h and two redundant adjacent #line directives; original include list restored.",
+  "original_relative_diff_delta": -1,
+  "excluded_errors": "Unchanged TAKE_REAL_MODE_LIMIT_FAULT and TAKE_PROT_MODE_LIMIT_FAILURE exclusions.",
+  "line_proof": {
+    "matched_original_lines": 285,
+    "mismatches": []
+  },
+  "paired_compile": {
+    "base_commit": "e030063df9fc9413041f86dba4c42bea16d04222",
+    "flags_source": "build/.ninja/msvc-x86-release/worker/build.ninja ccpu_flags + /O2",
+    "input_path": "build/t483-s5-p39/input.c",
+    "output_path": "build/t483-s5-p39/input.obj",
+    "procedure": "Copy prechange source to input.c, compile, preserve object; copy restored source to same input.c, compile with identical arguments/output path; compare COFF excluding only bytes4..7 timestamp.",
+    "exit": 0,
+    "before_sha256": "ead8ac2e3d61e84ad022c4c2a4abf02e7fee6ce4c11f64a9264ef42dd05e3e54",
+    "after_sha256": "55191a528707bfc39190a72898375467794e10d548f969e0154af22e94e0b02a",
+    "object_size": 4910,
+    "raw_equal": false,
+    "equal_except_timestamp": true,
+    "different_offsets": [
+      4
+    ],
+    "normalized_sha256": "3e9409460fdc8c0b60a342fbf7ef1e28074cb75acb134c3d7890e9d89862f956",
+    "initial_comparison": "Different output paths injected object names into .debug$S; corrected same-path comparison isolates timestamp only. Not a production failure."
+  },
+  "verification_scope": "Nonbehavioral include restoration. Full runtime/publication reused from P38; no fresh full-build/runtime claim.",
+  "source_sha256": "c2d760ddcc93a440a89af32f4994bae227e7532571217576048c376e403150f7"
+}

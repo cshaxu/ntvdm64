@@ -23,10 +23,7 @@ Transfer of Control Support.
 #include <c_xcptn.h>
 #include <c_reg.h>
 #include <c_xfer.h>
-#line 26
 #include <c_page.h>
-#include <c_tlb.h>
-#line 27
 #include <fault.h>
 
 /*

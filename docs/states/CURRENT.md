@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-436 points have a prior or current review record:152 restored/verified/published,
+437 points have a prior or current review record:153 restored/verified/published,
 0 local restorations pending verification,2 approved retain,282 qualified pending
-decisions and0 prior classifications requiring requalification. Another2284
-points are unreviewed. Sequential file disposition is61/365;304 remain.
+decisions and0 prior classifications requiring requalification. Another2283
+points are unreviewed. Sequential file disposition is62/365;303 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -230,11 +230,10 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P38 Verified Batch
+## P39 Nonbehavioral Restoration
 
-R0418 restored; R0419-R0429 minimized with11 residual points pending.
-Mirror diff net-23;445 original lines verified;#error retained.
-Cached build, publication11x2/hash, exception positive/negative/stream controls,
-64 x87/143 CPU and Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p38-checkpoint.json).
-Next R0430. S5 remains active.
+R0430 restores original transfer includes; mirror diff net-1.
+285 original lines correct;#error unchanged; paired objects equal except timestamp.
+P38 published package/Full reused; no fresh runtime or publication claim.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p39-checkpoint.json).
+Next R0431. S5 remains active.
