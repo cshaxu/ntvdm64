@@ -1,0 +1,22 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demfcb.c",
+      "sha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670",
+      "original_sha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670",
+      "byte_identity": true,
+      "selected_code_and_logical_line_identity": true,
+      "classification": "byte-identical"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "sha256": "128da4b626b661731a5a230696d18bfb75ecf9a2aefa4dc635a6309001c14824",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "byte_identity": false,
+      "selected_code_and_logical_line_identity": true,
+      "classification": "original subset:6 DBG #error bodies"
+    }
+  ],
+  "demgset_scope": "R0097/99/100/101 already restored; R0098 qualified by original/current counterexample. Other closed adapters not reopened.",
+  "verification": "Source identity and logical-line checks; newline-only edits reuse delivered P9/P10/P11 runtime evidence."
+}

@@ -1,0 +1,55 @@
+{
+  "status": "Audit and format-only verification complete; included in P12 Git delivery",
+  "source_head": "858af5e7ccc4ef9e87059f19e18762e7227a824d",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demfcb.c",
+      "sha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "sha256": "128da4b626b661731a5a230696d18bfb75ecf9a2aefa4dc635a6309001c14824"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e"
+    },
+    {
+      "path": "test/mvdm/oemuni/verify-media-owner.ps1",
+      "sha256": "7b373f1f7b5e49635c5172201bfcc854e4ec8c899703782a66a23cadb4df2c65"
+    }
+  ],
+  "mirror_diff_delta": -1,
+  "format_restored_files": 2,
+  "ordered_files_completed": 19,
+  "sequential_next": "T483-R0102",
+  "restored_point_count_unchanged": 106,
+  "qualified_pending": 20,
+  "historical_pending_requalification": 49,
+  "unreviewed": 2543,
+  "runtime_package_reused": "4b68202f-b3f2-40ca-97c5-25ae6ce22205",
+  "publication_hashes_verified": 22,
+  "verification_scope": "Reuse P11 cached build/publication/Full16 for newline/comment-only production edits; fresh original/current owner fixture counterexample, exact subset and logical-line source checks. No fresh DOS integration test claimed.",
+  "current_bytes": 12608,
+  "fixture_result": {
+    "scope": "Exact source owner extraction with mocked volume-query endpoint; not a fresh DOS integration test",
+    "cases": [
+      {
+        "source_sha256": "642AD5256CE58B4F0381BB6811CE325DAEA718EBE03548D2BADFCF256BC8C5B8",
+        "case": "current",
+        "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "exit": 0,
+        "output": "S37_DEM_MEDIA_PADDING_LABEL_CANARY_FAILURE_OK"
+      },
+      {
+        "source_sha256": "19C5999308A479CC9C0FCB30D23E8301D9A835408417AA965B85523DFB8A1653",
+        "case": "original",
+        "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "exit": 1,
+        "output": "S37_MEDIA_FAIL line=42"
+      }
+    ],
+    "fixture_sha256": "4A430FB6A12A5F72F175F8763E0717675E309AEDBB0D4E60DA2BC1660A0B9FCC"
+  },
+  "governance_exit": 0
+}

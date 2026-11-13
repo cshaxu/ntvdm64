@@ -668,11 +668,10 @@ DWORD   adwVolumeSerial[2],i;
         }
 
     strncpy(pVolInfo->FileSystemType,achFileSystemType,FILESYS_NAME_SIZE);
-    /* DIVERGENCE(MVDM-HOST-DIV-279): pad the filesystem field, not VolumeID. */
 #line 659
     for(i=0;i<FILESYS_NAME_SIZE;i++) {
         if (pVolInfo->FileSystemType[i] == '\0')
-            pVolInfo->FileSystemType[i] = '\x020';
+            pVolInfo->FileSystemType[i] = '\x020'; /* DIVERGENCE(MVDM-HOST-DIV-279) */
         }
 
 

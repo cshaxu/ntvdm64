@@ -35,14 +35,14 @@ is the sole active audit order; the old D-register is historical evidence.
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
 177 points have a prior or current review record:106 restored/verified/published,
-0 local restorations pending verification,2 approved retain,19 qualified pending
-decisions and50 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is16/365;349 remain.
+0 local restorations pending verification,2 approved retain,20 qualified pending
+decisions and49 historical classifications requiring requalification. Another2543
+points are unreviewed. Sequential file disposition is19/365;346 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
 Owner-directed backlog requalification started at R0010 (restored and delivered).
-Current file cmdexec.c has had its remaining register points handled: R0014-R0020
+Earlier cmdexec.c delivery handled its remaining register points: R0014-R0020
 restore original SCS construction; R0022/R0026/R0028 restore original ordinary
 text conversion and ownership. Capture/capacity alternatives remain owner choices;
 no unapproved alternative has been implemented. R0171 remains unexamined.
@@ -145,74 +145,43 @@ Residual minimized differences remain pending; final-code verification is requir
 
 ## Current P9 Batch
 
-P8 `8d4f8a5ef` was pushed and remote-verified with a clean worktree.
-P9 handles dem.c comment-only minimization and dem.h original-first review,
-including the coupled DTA declaration/definition/registration/search/FCB chain.
-R0067/R0068 remain qualified package-directory decisions; R0070 remains an
-explicit type dependency for unchanged closed-scope PDB/SFT declarations.
-R0069 restores the actual WIN_32 ntdddisk.h include. Its first probe hit the
-commented preamble and was invalid; the corrected r2 probe passes and logs
-the actual SDK header. R0071 restores the original DTA cohort, including
-original Sim32FlushVDMPointer/Sim32FreeVDMPointer calls. No guest changes.
-
-Six mirror files now reduce original-relative diff by85 lines, excluding
-#line and normalizing newlines. demfcb.c has no remaining normalized diff.
-All6 matched-original code-line checks pass and all #error bodies are unchanged.
-The first P9 candidate built but the publication guard rejected a logical-line
-mismatch; it was not published or runtime-tested. Corrected r2 passed cached
-full build, both-location publication, Full16 and the actual FCB enumeration
-probe. Package `7e6012d6-3ad4-45e8-a7ba-44e775b12e55` has11 matching images in
-assets/release and O:\winnt\system32. DOS4GW/NESticle remains explicitly skipped
-without external fixtures. FCB record read/write and remapping are not claimed
-covered by the enumeration probe. The runner now uses the existing owned short
-physical stage instead of SUBST; its authored COM uses the working directory.
-
-P9 source, tests, release artifacts, register and evidence are one Git delivery.
-Progress:13/365 sequential files complete;2720 points:89 restored and verified,
-0 local restores pending,2 approved retains,19 qualified decisions,67 historical
-backlog items requiring requalification,2543 unreviewed. Later coupled edits do
-not count as sequential file completion. S5 remains active; next point R0072.
-
-See [P9 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-checkpoint.json),
-[line check](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-line-check.json),
-[diff metrics](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-mirror-diff.json),
-and [DTA restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0071-dta-restoration.json).
+Delivered in275d6e029: original DTA chain and ntdddisk include, mirror diff net-85.
+Cached build, both-location publication, Full16 and FCB enumeration passed.
+See [P9 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-checkpoint.json).
 
 ## Current P10 Batch
 
-R0072 demdasd.h is still byte-identical to original; prior P3 verification applies.
-R0073 is already delivered in P9. R0074/R0075 restore the complete original PDB/SFT
-producer and consumer chain. demdata.c now matches original excluding #line and
-newline encoding. Seven coupled mirror files reduce original-relative diff by143
-lines, excluding #line. All excluded #error bodies remain. No new shim or guest
-changes. The dem.h guest-location include remains for existing demhndl.c leases;
-PDB/SFT globals no longer require it. This supersedes the old include rationale.
-
-P10 cached build passed. Initial publication hit an exiting ntvdm image lock;
-resume24112 published the same frozen package27754767-b670-45f2-b8b7-bb626760161f
-to both targets with11 matching hashes. Final Full16 and FCB enumeration passed in build/t483-s5-p10. Fourteen formerly
-pending points are restored and verified, included in P10 Git delivery. Future
-coupled-file points are not counted as completed sequential audits.
-See [P10 restoration](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0074-r0075-restoration.json),
-[checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-checkpoint.json),
-[metrics](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-mirror-diff.json),
-and [line checks](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-line-check.json).
+Delivered in8a0a55ff3: original PDB/SFT chain, mirror diff net-143;14 points restored.
+Cached build, both-location publication, Full16 and FCB enumeration passed.
+See [P10 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-checkpoint.json).
 
 ## Current P11 Batch
 
-R0076-R0078 demdisp.c: restore original FASTREAD/FASTWRITE table slots and remove
-added CF fallback. Initial retention omitted the upstream FastOrSlow software-CPU
-gate and is withdrawn. CPU40 startup sets MIPS_BIT_MASK; the original guest chooses
-ordinary I/O before reaching fast slots. The first candidate was built but withheld
-before publication. Corrected r2 built and published package
-4b68202f-b3f2-40ca-97c5-25ae6ce22205 to both targets; final Full16 passed under pipeline37360.
+Delivered in858af5e7c: original software-CPU slow-I/O selection makes the added
+fast-I/O fallback redundant. R0076-R0078 restored; mirror diff net-15. Initial
+retention proof was withdrawn before publication after upstream-gate review.
+Final build/publication/Full16 passed. Format-only final blank-line restoration
+preserves nonblank content and logical lines. See
+[P11 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-checkpoint.json).
 
-Final original blank-line cleanup after build preserves every nonblank line and
-logical line pair; owner format-only reuse authorization applies. Exactly4 original
-DBG bodies are replaced by #error; no other normalized difference remains. Source
-subset/line proof is independent of compilation evidence. Original-relative diff
-net-15 excluding #line. Three restored points are verified and published, included in P11 Git delivery.
-The source-contract test now checks the upstream gate, not a redundant added helper.
-See [corrected evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0076-r0078-restoration.json),
-[checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-checkpoint.json),
-and [line checks](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-line-check.json).
+## Current P12 Audit And Format Batch
+
+R0079-R0084 demfcb.c is byte-identical to original after newline-only restoration.
+R0085-R0096 demfile.c is an exact original subset with6 excluded DBG bodies; its
+original CRLF form and selected logical lines are verified. Prior P9/P10 runtime
+receipts remain applicable; no restored point is counted twice.
+R0097/R0099-R0101 demgset.c are already restored. R0098 now has fresh original/current
+owner-fixture evidence: original overwrites volume-label characters when padding
+NTFS; current passes normal/edge/query-failure cases. Inline annotation reduces its
+remaining diff to+1/-1, net-1 comment-only; owner retention remains pending.
+
+P12 has no production behavior or binding change: reuse P11's published11-image
+package and Full16 under format-only authorization. The added runner reuses the
+existing media fixture with extracted original/current owner code; its query mock
+is explicitly not a fresh DOS integration test. Sequential files19/365; points106
+restored,0 local pending,2 approved,20 qualified pending,49 historical backlog,
+2543 unreviewed. Next R0102 demhndl.c after clean Git delivery.
+See [file review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0079-r0101-file-review.json)
+and [R0098 proof](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0098-requalification.json).
+
+P12 delivery receipt: [audit/format checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p12-checkpoint.json).

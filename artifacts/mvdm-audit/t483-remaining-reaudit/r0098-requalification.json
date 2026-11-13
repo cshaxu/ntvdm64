@@ -1,0 +1,30 @@
+{
+  "point": "T483-R0098",
+  "decision": "pending-owner-decision-source-proof",
+  "original_failure": "Actual original GetMediaId extraction fails existing fixture line42: NTFS padding overwrites VolumeID characters5-8 of ABCDEFGHIJK. Current owner passes4 normal/boundary rows and query failure/canaries.",
+  "current_scope": "+1/-1 single destination-field correction; local annotation retained inline; no new algorithm",
+  "minimization": "Move standalone rationale to existing modified line; comment-only, code tokens and logical code lines unchanged. Original-relative diff net-1.",
+  "runner": "test/mvdm/oemuni/verify-media-owner.ps1 -OriginalRoot O:/repos.external/OpenNT/base/mvdm -OutputRoot build/t483-s5-r0098-media",
+  "fresh_result": {
+    "scope": "Exact source owner extraction with mocked volume-query endpoint; not a fresh DOS integration test",
+    "cases": [
+      {
+        "source_sha256": "642AD5256CE58B4F0381BB6811CE325DAEA718EBE03548D2BADFCF256BC8C5B8",
+        "case": "current",
+        "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "exit": 0,
+        "output": "S37_DEM_MEDIA_PADDING_LABEL_CANARY_FAILURE_OK"
+      },
+      {
+        "source_sha256": "19C5999308A479CC9C0FCB30D23E8301D9A835408417AA965B85523DFB8A1653",
+        "case": "original",
+        "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "exit": 1,
+        "output": "S37_MEDIA_FAIL line=42"
+      }
+    ],
+    "fixture_sha256": "4A430FB6A12A5F72F175F8763E0717675E309AEDBB0D4E60DA2BC1660A0B9FCC"
+  },
+  "historical_real_guest_evidence": "docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md records pre/post INT21/6900 observations; no fresh guest test claimed here.",
+  "counter_review": "This is a concrete original field-write error, unlike the prior fast-I/O case. Preserving the original query/loop and changing the destination needs no shim. Fresh fixture mocks only the query endpoint; not complete guest integration."
+}
