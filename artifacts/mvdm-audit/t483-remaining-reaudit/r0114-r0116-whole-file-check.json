@@ -1,0 +1,20 @@
+{
+  "file": "src/mvdm-host/dos/dem/demmisc.c",
+  "points": [
+    "T483-R0114",
+    "T483-R0115",
+    "T483-R0116"
+  ],
+  "original": "O:/repos.external/OpenNT/base/mvdm/dos/dem/demmisc.c",
+  "original_sha256": "19676fa5995555ec0b16c2923953b4e6236467dc42bf36cc7e746f45d0fcf912",
+  "current_sha256": "4b8e9992445025633f5aa49139c0c48705371c9d29ea207bf26e97d555b87e12",
+  "method": "Remove only #line directives; replace original DBG body at original lines531-535 with existing #error; compare all remaining lines exactly after newline normalization. Match original logical lines outside removed body. For DBG=0 the internal #line is inactive; unconditional #line537 resets the continuation. DEVL alternatives retain original contents.",
+  "result": "Exact whole-file equality after that single excluded-body substitution and diagnostic directives; zero retained logical-line mismatches. No surviving semantic adaptation.",
+  "initial_review": "Three historical points already restored by P4/P7; no new restoration claimed.",
+  "counter_review": "Whole-file original comparison verifies no missing include, FDAccess replacement, or second path remains; unchanged #error retained. This is source/line proof, not fresh compilation or runtime evidence.",
+  "source_modified": false,
+  "semantic_diff_added": 0,
+  "semantic_diff_removed": 0,
+  "delivery_basis": "Existing P4/P7 restoration receipts; current source unchanged in this review.",
+  "next": "T483-R0117"
+}

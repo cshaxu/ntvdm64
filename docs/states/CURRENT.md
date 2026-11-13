@@ -37,7 +37,7 @@ contains2720 points in365 files, with1052 live host C/H mirror files.
 177 points have a prior or current review record:108 restored/verified/published,
 0 local restorations pending verification,2 approved retain,30 qualified pending
 decisions and37 historical classifications requiring requalification. Another2543
-points are unreviewed. Sequential file disposition is20/365;345 remain.
+points are unreviewed. Sequential file disposition is21/365;344 remain.
 Coupled edits in later files do not count as completed sequential file audits.
 These are point counts, not completed-file counts or reproduced defect counts.
 
@@ -76,7 +76,10 @@ file-service probe, Full16 and governance passed. Original ULONG declarations
 produce C4057 warnings, not build failures; no ABI fault is asserted.
 DOS4GW/NESticle remains skipped for absent external fixtures. No original guest
 or winnt.zip changes. See [P13 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p13-checkpoint.json).
-S5 remains active; next ordered point R0114 in demmisc.c after P13 Git delivery.
+S5 remains active; demmisc.c whole-file verification found only the retained DBG
+#error exclusion and diagnostic #line directives; no source change or new restored
+point. See [file check](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0114-r0116-whole-file-check.json).
+Next ordered point is R0117 in demsrch.c.
 
 ## Remaining Scope
 

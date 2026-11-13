@@ -16,7 +16,7 @@
   },
   "completed": 2,
   "pending": 2543,
-  "next": "T483-R0114",
+  "next": "T483-R0117",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
@@ -38,12 +38,12 @@
   "backlog_entries_requiring_admission_review": 37,
   "qualified_pending_decisions": 30,
   "pending_decisions_count_note": "Historical classified backlog count, not qualified decisions; all outstanding entries require requalification under owner correction.",
-  "active_rework": "P13 verified/published; next demmisc.c R0114 after Git delivery.",
-  "active_investigation": "No unresolved current-file disposition; next R0114.",
+  "active_rework": "demmisc.c whole-file comparison completed without source changes; next demsrch.c R0117.",
+  "active_investigation": "No unresolved demmisc.c disposition; next R0117.",
   "backlog_requalification_completed": 35,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 20,
-  "sequential_files_remaining": 345,
+  "sequential_files_disposition_complete": 21,
+  "sequential_files_remaining": 344,
   "batch_modified_mirror_files": 0
 }
