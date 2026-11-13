@@ -1,0 +1,122 @@
+{
+  "path": "src/mvdm-host/oemuni/file.c",
+  "ids": [
+    "T483-R0278",
+    "T483-R0279",
+    "T483-R0280",
+    "T483-R0281",
+    "T483-R0282",
+    "T483-R0283",
+    "T483-R0284",
+    "T483-R0285",
+    "T483-R0286",
+    "T483-R0287",
+    "T483-R0288",
+    "T483-R0289",
+    "T483-R0290"
+  ],
+  "before": {
+    "added": 41,
+    "deleted": 12,
+    "total": 53
+  },
+  "after": {
+    "added": 26,
+    "deleted": 11,
+    "total": 37
+  },
+  "delta": -16,
+  "proof": {
+    "278": "Original output pointer is consumed only after bounded successful provider return. GetFullPathNameW sets it on success; failure/oversize do not reach consumption. No unusual-provider evidence supports initialization.",
+    "279": "CP932 full path: original length10 versus required11, terminator remains0x5a; current11 and NUL. Original BaseClient curdir.c explicitly documents same DBCS count defect. Buffer acquisition must succeed before encoding-size query.",
+    "280": "Same fixture: original file-part offset5 versus OEM byte offset6; pointer arithmetic must use encoded prefix size.",
+    "281": "Original current-directory capacity11 returns11 and writes NUL at offset11; current returns required12 without touching canary. UTF16 character count cannot stand in for OEM bytes.",
+    "282": "Capacity65536: original USHORT(nBufferLength+1) becomes1 and returns0; current saturated capacity returns11. Correct byte guard excludes small overflow, but cannot prevent large DWORD truncation.",
+    "283": "Original insufficient-buffer required count is Unicode characters+1; CP932 full_path requires12 bytes rather than11. Same original count defect as R0281.",
+    "284": "Volume-side capacity2 for one CP932 character: original returns success and changes byte2 canary from90 to0; current rejects and preserves90.",
+    "285": "Filesystem-side identical capacity2 counterexample independently reproduces extra-byte overwrite.",
+    "286": "Complete Unicode name capacity and conversion NTSTATUS are separate from caller OEM capacity. A one-character CP932 name needs2 WCHARs but3 output bytes; original zero-size query reports2.",
+    "287": "Original allocation follows caller byte capacity. Once Unicode provider uses independent bounded capacity, allocation must match it; using old zero/small allocation would underallocate. Together with R0286/R0289 avoids a second name-query path.",
+    "288": "Original USHORT cast of caller capacity65536 becomes0; original returns false success with size0 and untouched buffer; current emits2 OEM bytes. Saturation preserves valid large DWORD capacity.",
+    "289": "Original GetComputerNameW mutates caller nSize to Unicode counts before conversion; independent capacity retains original OEM bound and permits correct3-byte query. Paired allocation is required.",
+    "290": "Injected STATUS_NO_MEMORY: original returnsTRUE, currentFALSE/ERROR_NOT_ENOUGH_MEMORY. Capacity2 likewise originalTRUE with untouched output versus currentFALSE/required3. Original ignores conversion NTSTATUS."
+  },
+  "initial_review": "Do not retain sentinel based on unusual-provider speculation. Distinguish UTF16 character counts, OEM byte counts, and actual caller bounds.",
+  "counter_review": "Original RTL nls.c RtlUnicodeStringToOemString checks Length >= MaximumLength then writes NUL; original BaseClient curdir.c DBCS branch documents byte-count and prefix corrections. Thus counterexamples are not created solely by current adapter dependencies. Fixed CP932 fixture replaces provider boundary, not guest; full original file compiled separately.",
+  "sources": [
+    "O:/repos.external/OpenNT/base/win32/client/curdir.c:124-188,295-348",
+    "O:/repos.external/OpenNT/base/ntos/rtl/nls.c:528-613",
+    "src/compat/opennt_support_rtl.c:269,276-277",
+    "src/mvdm-host/dos/command/cmdpif.c:86",
+    "src/mvdm-host/dos/dem/demmisc.c:506",
+    "src/mvdm-host/wow32/wdos.c:438,565",
+    "src/mvdm-host/dos/dem/demgset.c:817"
+  ],
+  "current_result": "FULL length=11 part=6 terminator=0\nCURRENT cap=11 result=12 canary=90\nCURRENT cap=12 result=11 canary=90\nCURRENT_LARGE result=11\nVOLUME side=0 result=0 canary=90\nVOLUME side=1 result=0 canary=90\nCOMPUTER case=0 result=0 size=3 first=90 error=111\nCOMPUTER case=1 result=0 size=3 first=90 error=111\nCOMPUTER case=2 result=1 size=2 first=149 error=111\nCOMPUTER_CONVERSION_FAILURE result=0 error=8\n",
+  "original_result": "FULL length=10 part=5 terminator=90\nCURRENT cap=11 result=11 canary=0\nCURRENT cap=12 result=11 canary=90\nCURRENT_LARGE result=0\nVOLUME side=0 result=1 canary=0\nVOLUME side=1 result=1 canary=0\nCOMPUTER case=0 result=0 size=2 first=90 error=111\nCOMPUTER case=1 result=1 size=0 first=90 error=111\nCOMPUTER case=2 result=1 size=0 first=90 error=111\nCOMPUTER_CONVERSION_FAILURE result=1 error=111\n",
+  "full_fixture_result": "S37_DBCS_FULLPATH actual_length=11 expected_length=11 part=6 expected_part=6 terminator=0\nS37_DBCS_FULLPATH_LENGTH_COPY_FILEPART_SHORT_EXACT_BUFFER_OK\nS37_DBCS_CURRENT_SEARCH_CAPACITY_OK\nS37_DBCS_SYSTEM_WINDOWS_TEMP_CAPACITY_OK\nS37_VOLUME_BOUNDARY side=0 result=0 error=234 canary=90 outstanding=0\nS37_VOLUME_BOUNDARY side=1 result=0 error=234 canary=90 outstanding=0\nS37_DBCS_VOLUME_BOTH_CAPACITIES_OPTIONAL_FAILURE_CLEANUP_OK\nS37_SIZE_MATRIX api=current cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=current cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=system cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=windows cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=temp cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=0 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=1 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=10 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=11 actual=12 expected=12 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=12 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX api=search cap=65536 actual=11 expected=11 error=0 contract=PASS\nS37_SIZE_MATRIX_ALL_30_PASS\nS37_QUERY_GROWTH_FAILURE_OVERSIZE_ALLOCATION_CLEANUP_OK\nS37_SHORTPATH_COMPUTER_CAPACITY_LENGTH_FAILURE_CLEANUP_OK\nS37_ENV_DBCS cap=0 actual=3 expected=3 failures=0\nS37_ENV_DBCS cap=1 actual=3 expected=3 failures=0\nS37_ENV_DBCS cap=2 actual=3 expected=3 failures=0\nS37_ENV_DBCS cap=3 actual=2 expected=2 failures=0\nS37_ENV_DBCS cap=65536 actual=2 expected=2 failures=0\nS37_ENV_ANSI_ONE_OEM_TWO_BYTE_CAPACITIES_OK\nS37_ENV_GROWTH_REMOVAL_OVERSIZE_ALLOCATION_CLEANUP_OK\n",
+  "verification": "Cached full build, boundary and publication/hash passed. P29 final package Full16 passed.",
+  "limits": [
+    "CP932 boundary fixture, not production guest failure reproduction.",
+    "Large-capacity tests exercise public DWORD API contract, not a claim that current guest callers pass65536.",
+    "No new runtime semantics for retained capacity fixes; owner approval still pending."
+  ],
+  "residual_scopes": {
+    "R0279": {
+      "added": 7,
+      "deleted": 0
+    },
+    "R0280": {
+      "added": 2,
+      "deleted": 2
+    },
+    "R0281": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0282": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0283": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0284": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0285": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0286": {
+      "added": 2,
+      "deleted": 0
+    },
+    "R0287": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0288": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0289": {
+      "added": 1,
+      "deleted": 1
+    },
+    "R0290": {
+      "added": 7,
+      "deleted": 1
+    }
+  },
+  "compiler_warnings": "Restored original FilePart declaration produces C4701/C4703: compiler cannot infer external success output. Bounded successful GetFullPathNameW provider writes the output; failure and insufficient-capacity branches do not consume it. No warning suppression or speculative initializer added.",
+  "proof_inputs": {
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\file.c": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df",
+    "test\\mvdm\\oemuni\\oemuni_dbcs_fixture.c": "56144c58f3df6026e5966d2ee7758b170c7dae381f1391262844d36a1a2c704b",
+    "build\\t483-s5-p29\\current.c": "59fa31207ad5536dc0ba889cb8f3b4d1e31398f976a108036ea2178f22ce4165",
+    "build\\t483-s5-p29\\original.c": "bc7cd1149b49040234848f34a0948a91fe4a7c24cc4df6d9a41f609c08abe342",
+    "build\\t483-s5-p29\\proof.cmd": "50e93cde857822d2137ba3453c6e29ef52bb9175bc7b8297ef6be4cd20dfafcf"
+  }
+}

@@ -515,10 +515,7 @@ Routine Description:
     OEM_STRING OemString;
     OEM_STRING OemResult;
     PWSTR Ubuff;
-    /* DIVERGENCE MVDM-HOST-DIV-269: original optional output is consumed
-       after a successful conversion; initialize the local sentinel so an
-       unusual provider result cannot publish an uninitialized host pointer. */
-    PWSTR FilePart = NULL;
+    PWSTR FilePart;
 #line 519
     PWSTR *FilePartPtr;
 
@@ -551,8 +548,6 @@ Routine Description:
                         FilePartPtr
                         );
     UnicodeLength >>= 1;
-    /* DIVERGENCE MVDM-HOST-DIV-274: use encoded byte counts, as in the
-       original BaseClient curdir.c DBCS fix, but for OEM rather than ANSI. */
     if ( UnicodeLength && UnicodeLength < MAX_PATH ) {
         RtlInitUnicodeString(&UnicodeResult,Ubuff);
         UnicodeLength = RtlUnicodeStringToOemSize(&UnicodeResult)-1;
@@ -573,7 +568,6 @@ Routine Description:
                     *lpFilePart = NULL;
                     }
                 else {
-                    /* DIVERGENCE MVDM-HOST-DIV-274: OEM prefix bytes. */
                     UnicodeResult.Length = (USHORT)((FilePart - Ubuff)*sizeof(WCHAR));
                     *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeResult)-1;
 #line 564
@@ -624,8 +618,6 @@ Routine Description:
                                     Unicode->Buffer
                                     );
 
-    /* DIVERGENCE MVDM-HOST-DIV-275: original BaseClient DBCS sizing,
-       using OEM bytes and the caller's actual capacity. */
     if ( nBufferLength >= RtlUnicodeStringToOemSize(Unicode) ) {
 #line 612
         OemString.Buffer = lpBuffer;
@@ -914,11 +906,9 @@ Routine Description:
     UnicodeVolumeName.MaximumLength = 0;
     UnicodeFileSystemName.MaximumLength = 0;
     OemVolumeName.Buffer = lpVolumeNameBuffer;
-    /* DIVERGENCE MVDM-HOST-DIV-275: no extra byte beyond caller capacity. */
     OemVolumeName.MaximumLength = (USHORT)nVolumeNameSize;
 #line 899
     OemFileSystemName.Buffer = lpFileSystemNameBuffer;
-    /* DIVERGENCE MVDM-HOST-DIV-275: same bound for the second output. */
     OemFileSystemName.MaximumLength = (USHORT)nFileSystemNameSize;
 #line 901
 
@@ -1084,8 +1074,6 @@ Routine Description:
     UNICODE_STRING UnicodeString;
     OEM_STRING     OemString;
     LPWSTR UnicodeBuffer;
-    /* DIVERGENCE MVDM-HOST-DIV-276: obtain the complete bounded computer
-       name independently of the caller's OEM capacity. */
     DWORD UnicodeCapacity = MAX_COMPUTERNAME_LENGTH+1;
     NTSTATUS Status;
 #line 1064
@@ -1122,8 +1110,6 @@ Routine Description:
     //
 
     RtlInitUnicodeString(&UnicodeString, UnicodeBuffer);
-    /* DIVERGENCE MVDM-HOST-DIV-276: conversion failure is not success;
-       publish the OEM requirement and preserve the name API error shape. */
     Status = RtlUnicodeStringToOemString(&OemString, &UnicodeString, FALSE);
     if ( !NT_SUCCESS(Status) ) {
         *nSize = RtlUnicodeStringToOemSize(&UnicodeString);
