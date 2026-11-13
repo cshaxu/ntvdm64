@@ -34,10 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-415 points have a prior or current review record:145 restored/verified/published,
+416 points have a prior or current review record:146 restored/verified/published,
 0 local restorations pending verification,2 approved retain,268 qualified pending
-decisions and0 prior classifications requiring requalification. Another2305
-points are unreviewed. Sequential file disposition is55/365;310 remain.
+decisions and0 prior classifications requiring requalification. Another2304
+points are unreviewed. Sequential file disposition is56/365;309 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,10 +60,10 @@ command fixtures and Full16 passed; evidence is in the
 
 ## Current Technical Baseline
 
-P32 package `4582bcd8-b2c7-4de3-aba0-8d16d1760a99` is published to
+P34 package `847db9bf-363c-4d6d-8bc0-7bd42813de63` is published to
 assets/release and O:/winnt/system32; all11 hashes match. Cached full build,
-focused CPU/debug/IRQ/notification/unwind and fresh Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p32-checkpoint.json).
+x87 paging/CPU boundary and fresh Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p34-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,15 +230,11 @@ DOS4GW/NESticle fixtures are skipped. No original guest or winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 Next sequential file is dpmiselr.c, R0183.
 
-## P32 Verified Batch
+## P34 Verified Batch
 
-R0362/R0374 restored original event-map declaration and quick-path predicate.
-Batch mirror diff net-46; c_main.c 3793 original nonblank lines mapped correctly.
-Final cached full build, publication11x2/hash, focused CPU/debug/IRQ/notification/
-unwind and fresh Full16 passed. Residual differences await owner decisions.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p32-checkpoint.json).
-P33 c_oprnd.h audit complete: mirror diff net-5, only comments/#line removed.
-R0406 restored; nine source-proved residual points await owner decision.
-Executable tokens unchanged; P32 remains runtime baseline.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0399-r0408-operand-review.json).
-Next R0409. S5 remains active.
+R0409 restores original check_D calls backed by selected original stubs.c;
+mirror diff net-4. Paired compilation and520 original line mappings checked.
+Cached full build, publication11x2/hash, x87/CPU boundary and Full16 passed.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0409-page-debug-provider.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p34-checkpoint.json).
+Next R0410. S5 remains active.

@@ -1,0 +1,40 @@
+{
+  "point": "T483-R0409",
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+  "scope_before": "+4/-0 excluding diagnostics and excluded bodies",
+  "scope_after": "+0/-0 outside excluded bodies",
+  "mirror_diff_delta": -4,
+  "responsibility": "Original PROD data-debug hook may be a no-op while original virtual memory writes retain their call sites.",
+  "original_capability": "Original softpc.new/base/ccpu386/stubs.c explicitly supplies empty check_D IFN0 for Prod Ccpu. Current selected original-ccpu386.lib includes stubs.obj. Callers ignore the return; selected x86 cdecl lets caller discard supplied arguments. No new provider is needed.",
+  "specific_diff_necessity": "Disproved: added yoda.h makes the calls macros but neither successful execution nor linking requires that macro optimization when original PROD stubs are selected. A C4013 warning alone did not prove inability.",
+  "call_chain": "Decoded store -> original vir_write_bytes/byte/word/dword -> check_D -> original PROD stubs.c empty function; then original breakpoint checks and physical/supervisor transfer.",
+  "paired_compile": {
+    "current_exit": 0,
+    "without_include_exit": 0,
+    "without_include_warning": "C4013 check_D implicit extern returning int",
+    "without_include_symbol": "UNDEF _check_D; resolved-provider proof required from final library/link",
+    "runtime": "Not claimed from compilation alone"
+  },
+  "minimum_change": "Remove entire added comment/include and redundant#line64; no forced include, added prototype, local macro, adapter, or stub. Original stubs.c already byte-identical.",
+  "line_evidence": "batch-p34-line-check.json;520 unchanged selected nonblank original lines match;excluded#error unchanged",
+  "source_before_sha256": "0de7a3fe2180d77441f127bd3462cadc3feffdd52249c8b0f3e98b2fe5cfe80e",
+  "source_after_sha256": "5bc1871b2dd550072d29865103bc38c9f608a11348bb37a956cdc10de11b8f88",
+  "counter_review": "The old retention rationale considered macro expansion but missed the linked original PROD provider. Full source closure overturns that rationale. No new stub is introduced to make the restoration pass.",
+  "verification": "Final-source cached full build, publication11x2/hash, x87 paging and CPU boundary fixtures plus Full16 passed. See batch-p34-checkpoint.json.",
+  "final_link_provider": {
+    "ntvdm.exe.map": {
+      "sha256": "5475e85847d3222f297105ea39f972e6bd5ad3a464a35d45f045f243f238c061",
+      "symbol": "0001:00006030       _check_D                   00407030 f   original-ccpu386:stubs.obj"
+    },
+    "ccpu-x87-page-test.exe.map": {
+      "sha256": "da151290088c5574aa21474c0c98b020422a3f23cff86caf7e105bbfb8479a93",
+      "symbol": "0001:00000660       _check_D                   00401660 f   original-ccpu386:stubs.obj"
+    }
+  },
+  "focused_actual": {
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "result": "passed; actual final library with restored call"
+  },
+  "whole_file_original_equivalence": "After excluding the two preserved PIG#error bodies and diagnostic#line, file matches original exactly (trailing blank lines ignored)."
+}

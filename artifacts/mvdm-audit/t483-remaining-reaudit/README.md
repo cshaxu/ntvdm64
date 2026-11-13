@@ -186,3 +186,7 @@ P32 verified: [delivery receipt](batch-p32-checkpoint.json),
 
 P33: [Operand whole-file review and line/token checks](r0399-r0408-operand-review.json).
 Only comments and a redundant diagnostic directive removed; P32 runtime baseline remains.
+
+P34: [Original PROD check_D provider restoration](r0409-page-debug-provider.json),
+[line verification](batch-p34-line-check.json), [delivery checkpoint](batch-p34-checkpoint.json),
+[binary identity comparison](batch-p34-binary-identity.json).

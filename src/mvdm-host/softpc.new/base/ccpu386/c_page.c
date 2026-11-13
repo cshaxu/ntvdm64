@@ -27,10 +27,6 @@ Paging Support.
 #include <c_tlb.h>	/* Translation Lookaside Buffer interface */
 #include <ccpusas4.h>	/* CPU <-> sas interface */
 #include <c_debug.h>	/* Debugging Regs and Breakpoint interface */
-/* DIVERGENCE(MVDM-HOST-DIV-082): preserve the original PROD `check_D` macro
- * selection from yoda.h.  The selected production profile makes the debug
- * hook a no-op rather than relying on an implicit external call. */
-#include <yoda.h>
 
 
 /*[
@@ -65,7 +61,6 @@ Paging Support.
 
 ]*/
 
-#line 64
 #define LAST_DWORD_ON_PAGE 0xffc
 #define LAST_WORD_ON_PAGE  0xffe
 
