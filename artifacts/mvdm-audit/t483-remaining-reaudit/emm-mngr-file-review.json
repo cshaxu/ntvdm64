@@ -1,0 +1,92 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/dos/emm_mngr.c",
+  "original_sha256": "f260b1b70aa1501bf6c0cdd32116e8ae609f66fc0ee4b889dd97b4547e2d1e36",
+  "before_sha256": "3eea2f7d7cc8840dbb56e80dd5740a943ae052db6dad138d7a7b399c22fa7c95",
+  "after_sha256": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe",
+  "points": [
+    {
+      "id": "T483-R0697",
+      "before_added": 4,
+      "before_deleted": 0,
+      "after_added": 0,
+      "after_deleted": 0,
+      "result": "restore-original",
+      "evidence": "Original first two includes remain; host_def.h already includes stdlib.h. Exact product-flags candidate compiles without C4013 after removing local addition."
+    },
+    {
+      "id": "T483-R0698",
+      "result": "correct-original-coordinate",
+      "evidence": "Old 666-mismatch claim incorrectly counted two formfeeds as line endings. Actual /E comparison:726 selected emitted source lines have identical text and logical coordinates. Correct redundant #line1665 to1882; no runtime change."
+    },
+    {
+      "id": "T483-R0699",
+      "result": "minimize-pending-owner",
+      "evidence": "Pinned original ccpusas4.c808/866 refers to LIM_b_write/w_write under LIM. Actual product CCPU object has UNDEF references; only emm_mngr defines symbols. Original NT gate control compiles but emits neither symbol. Restoring this gate alone leaves unresolved externals. This is build closure proof, not runtime-use proof.",
+      "minimum": "Use existing CCPU selector, delete bespoke recovery define/build branch, restore original endif comment. Retain original function bodies; no new shim."
+    }
+  ],
+  "responsibility_layers": {
+    "necessary": "EMS alias consistency is necessary. Current NT mapping uses physical aliases and SAS_RAM, not evidence of software writeback activity.",
+    "original_limit": "Original CCPU LIM references and original NTVDM exclusion do not provide a closed linked combination; original code was assembled under different host/CPU profiles.",
+    "specific_diff": "Only selecting original definitions for current CCPU is justified by link closure. No evidence that custom recovery macro or changed ending comment is necessary."
+  },
+  "call_chain": [
+    "emm_mngr init_expanded_memory registers NT pages SAS_RAM",
+    "map_page -> host_map_page(nt_emm.c) -> VdmMapDosMemory physical alias records",
+    "physical mapping translation supplies actual shared backing",
+    "original CCPU phy_w8/phy_w16 retains SAS_MM_LIM branches and unresolved writeback references",
+    "emm_mngr original non-NT definitions supply these symbols under selected CCPU"
+  ],
+  "counter_review": "No observed MM_LIM setter in supported host sources; no runtime writeback necessity claimed. Removing this interface completely would require changing the original CCPU references and testing that distinct alternative, not deleting this gate alone. No such unapproved mirror diff increase implemented.",
+  "diff": {
+    "metric": "original-relative added+deleted LF physical lines including fixed policy exclusions; excluding line-ending-only differences",
+    "before_added": 113,
+    "before_deleted": 358,
+    "after_added": 108,
+    "after_deleted": 357,
+    "delta": -6
+  },
+  "line_error": {
+    "error_count": 25,
+    "all_existing_exclusions_preserved": true,
+    "formfeeds_preserved": 2,
+    "preprocessed_source_lines": 726,
+    "selected_tokens_and_coordinates_equal": true
+  },
+  "controls": {
+    "candidate_compile": "exit0; no implicit allocator declaration warning",
+    "original_gate_compile": "exit0; LIM_b_write/w_write definitions absent",
+    "actual_ccpu_object": "both LIM symbols UNDEF",
+    "note": "Initial dumpbin wrong path failed; corrected obj/ccpu path succeeded; not a compiler/product failure."
+  },
+  "validation": "P59 cached full build,11x2 publication/hash,focused,EMS Mapping+CallReturn,Full16 passed;Git delivery accompanies record.",
+  "control_results": {
+    "preprocessor": {
+      "current_lines": 726,
+      "original_lines": 726,
+      "equal": true,
+      "mismatches": []
+    },
+    "original_ccpu_references": "808: \t\t\tLIM_b_write(addr);\n866: \t\t\tLIM_w_write(addr);",
+    "ccpu_undefined": [
+      "173 00000000 UNDEF  notype ()    External     | _LIM_b_write",
+      "174 00000000 UNDEF  notype ()    External     | _LIM_w_write"
+    ],
+    "candidate_defined": [
+      "0CF 00000000 SECT3  notype ()    External     | _LIM_b_write",
+      "0D1 00000000 SECT7  notype ()    External     | _LIM_w_write"
+    ],
+    "original_gate_defined": [],
+    "files": {
+      "candidate.log": "c50199b39b1a38d9162b2aaa250440eefebc627d3b60e69f0e17c616e2d9984f",
+      "original-gate.log": "07cf6b1d814f41786a4ec121982845f17032a545c9f8f354d8d1a989d6c8e217",
+      "candidate-symbols.txt": "f39eacdcb689ac51bcca515fef2ba6a458587ed3712ec28d079e8262d8c76487",
+      "original-gate-symbols.txt": "da5aa0307b8dd64ebc4ea94888d3ee717046644d9eb6498668001a5a2a893371",
+      "ccpu-symbols.txt": "cac2cbf85d10d7ba58f5cd74a34cd32bffd22724b8f7b9d560a17437bcde6e2d",
+      "current-preprocessed.i": "cd7b3b731dab8e5804a3084904eb24223af388a1bc36b18505dec84591c8038a",
+      "original-preprocessed.i": "8cb556c75e487e08456f25c287fc97590a4e7a767a96af6b4e0d272f2d74a880"
+    }
+  }
+}

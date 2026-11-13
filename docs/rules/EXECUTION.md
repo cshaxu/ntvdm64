@@ -33,6 +33,13 @@ evidence and state any deferred P delivery and its limitation; that deferral
 does not make the P delivered or authorize a scope expansion.  The reopening
 must retain one active S and be verified mechanically before work proceeds.
 
+Owner permanent approval dated 2026-11-13 authorizes ending running product
+instances whose executable paths are under `O:/winnt`, including manual-test
+instances, when needed to continue delivery or verification. Verify the exact
+process image paths before termination and record the affected instances.
+Do not ask again for those runtime instances; this does not authorize deleting
+installation files or terminating unrelated processes.
+
 A material scope expansion, changed boundary, or failed stop condition pauses
 work. Revise the S brief and obtain renewed owner approval before proceeding.
 

@@ -1,0 +1,9 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+    "matched_original_line_mismatches": [],
+    "original_sha256": "f260b1b70aa1501bf6c0cdd32116e8ae609f66fc0ee4b889dd97b4547e2d1e36",
+    "sha256": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe",
+    "proof": "Actual MSVC /E comparison against original with only excluded writeback block selected:726 lines content and coordinates equal;25 #error guards preserved;2 formfeeds preserved."
+  }
+]

@@ -74,10 +74,6 @@ AMMENDMENTS	:
 
 #include <stdio.h>
 #include <string.h>
-/* DIVERGENCE(MVDM-HOST-DIV-061): NT4 selected <malloc.h> only for MONITOR,
- * while the NTVDM host_malloc macro remains reachable in every formal build.
- * The standard declaration preserves its native pointer result. */
-#include <stdlib.h>
 
 #line 80
 #if defined(NTVDM) && defined(MONITOR)
@@ -1670,13 +1666,13 @@ GLOBAL boolean activate_altreg_set(unsigned short set, short * page_in)
     return TRUE;
 }
 #endif	/* NTVDM */
-#line 1665
+#line 1882
 
 #line 1883
 #ifndef NTVDM
 #line 1884
 #error Excluded unsupported non-NTVDM LIM writeback profile
-#elif defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)
+#elif defined(CCPU)
 #line 1884
 
 /*
@@ -1870,7 +1866,7 @@ LIM_str_write IFN2( sys_addr, intel_addr, ULONG, length )
 	sas_overwrite_memory( intel_addr, length );
 }
 #line 2073
-#endif	/* !NTVDM || MVDM_SOFTPC_RECOVER_LIM_WRITEBACK */
+#endif	/* !NTVDM */
 #line 2074
 
 #line 2075
