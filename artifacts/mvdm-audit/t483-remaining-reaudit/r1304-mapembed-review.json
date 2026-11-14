@@ -1,0 +1,46 @@
+{
+  "path": "src/mvdm-host/wow32/mapembed.c",
+  "source_sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+  "original_sha256": "a790e54dec42ff96120a701c38082a4f08144bc58a932a9cf60ecca2b83d75aa",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_diff": [
+    {
+      "original_line": 81,
+      "original": [
+        "    //",
+        "    // Filename argument must already be lowercase.  Be sure.",
+        "    //",
+        "",
+        "    {",
+        "        char Lowercase[MAX_PATH];",
+        "",
+        "        WOW32ASSERT(strlen(FileName) < MAX_PATH-1);",
+        "        strcpy(Lowercase, FileName);",
+        "        _strlwr(Lowercase);",
+        "        WOW32ASSERT(!strcmp(FileName, Lowercase));",
+        "    }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    }
+  ],
+  "selected_proof": [
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "shared_selected_lines": 242,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "mirror_diff": {
+    "before": 13,
+    "after": 13,
+    "delta": 0
+  },
+  "conclusion": "Only DEBUG assertion body at original81..92 is replaced by required #error. Original conditional structure and every selected line retained. No source change.",
+  "context": "Actual mapembed.obj flags, including WOW_ORIGINAL_THUNK_BUILD and forced wow_registry_binding.h",
+  "limitations": "Preprocessing/source proof;reuse P129 runtime evidence,not new execution."
+}

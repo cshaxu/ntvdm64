@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1303 points reviewed:494 restored/confirmed delivered,0 local,8 approved,
-801 qualified pending,0 restores decided;1417 unreviewed. Files183/365 audited,182 remain.
-P131 isvwow.h diff3->2;ABI unchanged;P129 package/Full reused.
+1304 points reviewed:495 restored/confirmed delivered,0 local,8 approved,
+801 qualified pending,0 restores decided;1416 unreviewed. Files184/365 audited,181 remain.
+P132 mapembed.c verified;source unchanged;P129 package/Full reused.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
