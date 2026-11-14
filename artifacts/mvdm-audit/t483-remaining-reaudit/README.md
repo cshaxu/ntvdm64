@@ -767,3 +767,5 @@ P96 audit-only: [nt_graph header and DAC boundaries](r1122-r1124-nt-graph-header
 P97 audit-only: [R1125-R1128 publication and clear ownership](r1125-r1128-nt-graph-publish-clear-review.json).nt_graph7/24;R1126 original FULLSCREEN clear guard restoration decided,not applied;three source-qualified residuals.1132 reviewed,726 pending,1 restore decided,1588 unreviewed. No source changes;P95 remains published.
 
 P98 audit-only: [R1129-R1134 flush/tick controls](r1129-r1134-nt-graph-flush-tick-review.json).nt_graph13/24;current graphics flush fails4/6 original-contract cases,candidate passes6/6;blocked and mode-settle omission controls fail. R1129 minimization decided,not applied.1138 reviewed,732 pending,1 restore decided,1582 unreviewed. P95 remains published.
+
+P99 audit-only: [R1135-R1139 cursor ownership](r1135-r1139-nt-graph-cursor-review.json).nt_graph18/24;R1136-R1139 original restoration decided;R1135 duplicate declaration/comment reduction. Original dirty producers refine R1125 without reopening its one-bit publication boundary.1143 reviewed,733 pending,5 restores decided,1577 unreviewed. P95 remains published.

@@ -1,0 +1,79 @@
+{
+  "status": "P99 source audit only;no implementation",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "source_head": "8d4b888a9c6d96a133e379702384fba2241ec45b",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_hashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+    "src/mvdm-host/softpc.new/base/video/gfx_updt.c": "d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602",
+    "src/mvdm-host/softpc.new/base/video/vga_prts.c": "09d340437223c9b7593cc2ed7ef40dd5b530be98c42335e8719d2d5b441d4502",
+    "src/mvdm-host/softpc.new/base/video/ega_prts.c": "c9f8117fef04f59a161f8fced9d404b7c7e7cba2e00efc49e3c373b7168a7f3c",
+    "src/mvdm-host/softpc.new/base/video/cga.c": "d164721c7f16202e31409963cb1758a8ca9f11d7a26826088820ba2e7dcc85e0",
+    "src/mvdm-host/softpc.new/base/video/v7_ports.c": "4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3",
+    "src/ntvdm-exe/softpc/v7_pointer.c": "86c1f96ba77d006ae9e2e831b7d4c5081818dae651e866e9a0d14ceb6475301e",
+    "src/ntvdm-exe/softpc/v7_pointer_binding.c": "09e62e85f0e3cf70ba344d557d92f3a0179b7e7a2d11524ec4d0e0dd664e68e7",
+    "src/ntvdm-exe/win32/console_graphics.c": "671b2aa747ab1eecf8001dc29c369b0deacde8119ee93f6383af4f3b1743667f",
+    "src/ntvdm-exe/win32/console_graphics.h": "2423cffeae7331d92d0048251890e65797e9032adf6eee4f58cdfdc5aba1587e",
+    "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747",
+    "src/ntcon-exe/window_frame.c": "22b5776b2ade7e7f2552a86826ec6659ad95f8c2ad471111f24d6fca8ba33ad0"
+  },
+  "points": [
+    {
+      "id": "T483-R1135",
+      "scale": "+12/-1",
+      "anchor": "original925;nt_end_update",
+      "problem": "Complete software Video7 overlay/body update before capture",
+      "evidence": "Original gfx_updt.c vga_graph_update draws Video7 pointer after a full body paint but after a partial paint only when v7ptr_between_lines is true. Original draw_v7ptr reads controller enable/coordinates/pattern and calls selected host callback. Current software compositor stores old background;begin_update clears the overlay before body writes so later clear cannot restore stale pre-paint pixels. A partial body update outside pointer then leaves it absent unless end_update redraws it. capture refuses update_depth>0;end_update decrements and signals dirty only at matching outer end. Restoring empty original end leaves depth held and pointer absent. Removing only unconditional begin clear instead allows subsequent paint to restore old background over freshly painted pixels. These are source state-order counterexamples,not a newly reproduced guest mouse failure.",
+      "minimum": "Keep original-controller redraw plus matched source publication end pending owner. Remove duplicate local ntvdm_console_graphics_end_update extern (already in owner header) and four comment lines. Do not replace original controller with a second cursor model. D1295 start-update item was completed S4;read its body as coupled evidence,do not reopen it.",
+      "decision": "pending-owner",
+      "delta": "0 applied;planned -5 mirror lines"
+    },
+    {
+      "id": "T483-R1136",
+      "scale": "+5/-0",
+      "anchor": "original1081;nt_paint_cursor added flag and FULLSCREEN return",
+      "problem": "Redundant publication marking and suppression of original Console cursor position",
+      "evidence": "All three host_paint_cursor callsites are in gfx_updt.c text painters and are dominated by host_start_update;nt_start_update already sets presentation_updated. No other direct nt_paint_cursor caller or paint_cursor table consumer was found. Original cursor_changed marks video dirty before painter runs. FULLSCREEN return suppresses only logical Console cursor position:console_client sends CURSOR_POSITION and Console projection;KVM Window renders copied VGA coordinates from video->pixels. Original visible/height checks remain. No concrete original failure requires the return or duplicate mark;restore original body.",
+      "minimum": "Delete all added lines at this point;restore exact original nt_paint_cursor body and logical lines. Final full package and cursor/mode transition tests after complete file edits.",
+      "decision": "restore-decided-not-applied",
+      "delta": "0 applied;planned restoration of registered +5/-0"
+    },
+    {
+      "id": "T483-R1137",
+      "scale": "+2/-0",
+      "anchor": "original1108;nt_cursor_size_changed extra publication mark",
+      "problem": "Duplicate notification already supplied by original cursor dirty owner",
+      "evidence": "VGA vga_prts.c do_new_cursor invokes host_cursor_size_changed and then base_cursor_shape_changed;EGA does likewise;CGA calls base_cursor_shape_changed before size callback. base_cursor_shape_changed calls cursor_changed which increments Videodirty_total. The autonomous route-switch direct caller first nt_mark_screen_refresh (sets dirty1000000) then nt_cursor_size_changed. Thus next original painter enters nt_start_update and marks the pending publication itself. Remove extra assignment/comment;original CursorResizeNeeded remains. This refines R1125:one post-paint pending bit is needed,but these pre-paint setters are not.",
+      "minimum": "Restore exact original size callback;do not add substitute marking or a new cursor state. Keep the original dirty-to-painter chain.",
+      "decision": "restore-decided-not-applied",
+      "delta": "0 applied;planned restoration of registered +2/-0"
+    },
+    {
+      "id": "T483-R1138",
+      "scale": "+4/-0",
+      "anchor": "original1119;early CursorResizeNeeded clear and comment",
+      "problem": "Original cursor-change consumption moved before FULLSCREEN return",
+      "evidence": "CursorResizeNeeded has only one writer callback and one tick reader in nt_graph.c. Original make_cursor_change returns in FULLSCREEN before consuming the Console resize flag;this preserves pending Console operation until its applicable route. Copied VGA cursor publication uses original registers and its separate completed-paint notification,not clearing this flag. Route switch also re-marks cursor size. No observed or source-proven original failure requires consuming the flag without doing its Console work. Restore original order;an early-return function call on future ticks is not evidence of incorrect original state.",
+      "minimum": "Remove early clear and explanatory comment;restore exact assignment at its original location via paired R1139. Preserve original FULLSCREEN guard and #line.",
+      "decision": "restore-decided-not-applied",
+      "delta": "0 applied;paired original placement restoration"
+    },
+    {
+      "id": "T483-R1139",
+      "scale": "+0/-2",
+      "anchor": "original1120-1121;missing original CursorResizeNeeded assignment/blank",
+      "problem": "Restore original consumed-state line at its original position",
+      "evidence": "Paired with R1138:original FALSE assignment follows FULLSCREEN return and precedes Console cursor update. No other file consumes this static flag. Restoring this line and blank removes deletion diff while removing moved copy prevents duplication.",
+      "minimum": "Restore exact original lines1120-1121 after original guard;check actual preprocessed logical lines at whole-file validation.",
+      "decision": "restore-decided-not-applied",
+      "delta": "0 applied;paired with R1138"
+    }
+  ],
+  "counter_review": [
+    "Do not treat all cursor callbacks as independent notifications:trace original dirty production and start_update domination.",
+    "This review corrects the broader earlier rationale for cursor-specific pending assignments;R1125 post-paint pending state remains distinct from already-consumed Videodirty_total.",
+    "Original FULLSCREEN make_cursor_change already returns without Console work;restore consumption order rather than inventing failure recovery.",
+    "R1135 declaration/comment reduction does not approve retained overlay boundaries.",
+    "No new guest or runtime test;all four restorations are decided but not yet applied. Existing error exclusions unchanged;whole-file final line audit and full delivery remain required."
+  ]
+}
