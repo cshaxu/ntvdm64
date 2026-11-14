@@ -5,8 +5,6 @@
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"
-void host_ica_lock(void);
-void host_ica_unlock(void);
 /*
  * VPC-XT Revision 2.0
  *

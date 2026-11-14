@@ -817,3 +817,8 @@ P111 [nt_rflop review](r1209-r1228-nt-rflop-review.json):mirror349->339(-10).
 [Checkpoint](batch-p111-checkpoint.json);[line proof](batch-p111-line-check.json).
 155/365 files;1232 points reviewed:461 restored/confirmed,8 approved,763 pending,1488 unreviewed.
 One include restored;16 prior restorations confirmed;three thread residuals pending.43 object sections/relocations equal;P110 publication/Full reused.
+
+P112 [sound/thread review](r1229-r1230-sound-thread-review.json):mirror4->2 and10->4(net-8).
+[Checkpoint](batch-p112-checkpoint.json);[line proof](batch-p112-line-check.json).
+157/365 files;1234 points reviewed:463 restored/confirmed,8 approved,763 pending,1486 unreviewed.
+Both files selected-code original;294 logical lines exact,20 object sections/relocations equal;P110 publication/Full reused.

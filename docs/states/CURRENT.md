@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1232 points reviewed:461 restored/confirmed delivered,0 local,8 approved,
-763 qualified pending,0 restores decided;1488 unreviewed. Files155/365 audited,210 remain.
+1234 points reviewed:463 restored/confirmed delivered,0 local,8 approved,
+763 qualified pending,0 restores decided;1486 unreviewed. Files157/365 audited,208 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -91,14 +91,7 @@ That read-only checkpoint is followed by the active local restoration below.
 
 P102-P106 delivered;see active audit README indexed receipts.
 
-P107 nt_msscs.c mirror171->129(-42);cached build,publish11x2,Full19 passed.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p107-checkpoint.json).
-
-P108 nt_pif.c mirror31->14(-17);cached/focused,publication11x2,Full19 passed.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p108-checkpoint.json).
-
-P109 nt_reset.c mirror115->99(-16);cached build,publish11x2,Full19 passed.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p109-checkpoint.json).
+P107-P109 delivered;see active audit README indexed receipts.
 
 P110 nt_rez.c mirror15->5(-10);cached build,publish11x2,Full19 passed.
 [Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p110-checkpoint.json).
@@ -106,6 +99,10 @@ P110 nt_rez.c mirror15->5(-10);cached build,publish11x2,Full19 passed.
 P111 nt_rflop.c mirror349->339(-10);43 object sections/relocations equal.
 P110 package/runtime evidence reused;16 prior restorations confirmed,one include restored.
 [Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p111-checkpoint.json).
+
+P112 nt_sound/nt_thred declarations restored;mirror net-8;20 object sections equal.
+P110 publication/Full reused;original selected code and logical lines verified.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p112-checkpoint.json).
 
 ## Remaining Scope
 
