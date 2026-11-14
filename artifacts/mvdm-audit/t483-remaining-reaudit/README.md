@@ -716,3 +716,7 @@ P73 final delivery: [checkpoint](batch-p73-checkpoint.json), [line proof](batch-
 - [R0950-R0953 VGA port review](r0950-r0953-vga-ports-review.json):4/4 complete;2 original restorations,2 minimized residuals pending owner;mirror diff-22;P74 delivery pending.
 
 P74 final delivery: [checkpoint](batch-p74-checkpoint.json), [line proof](batch-p74-line-check.json);cached x86/x64 build,11x2 publication,CVID,Full and governance passed;mirror diff-22. Git delivery accompanies record.
+
+- [R0954-R0969 video BIOS review](r0954-r0969-video-review.json):16/16 complete;3 original restorations,13 qualified residuals;P75 delivery pending.
+
+P75 final delivery: [checkpoint](batch-p75-checkpoint.json), [line proof](batch-p75-line-check.json);cached x86/x64 build,11x2 publication,CVID,Full and governance passed;mirror diff-10. Git delivery accompanies record.

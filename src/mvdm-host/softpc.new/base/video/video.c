@@ -87,10 +87,6 @@
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #include "egavideo.h"
-/* DIVERGENCE(MVDM-HOST-DIV-067): retain the same-package EGA service's
- * original parameter and `void` result contract. */
-IMPORT void ega_read_dot IPT3(int, page, int, col, int, row);
-#line 90
 #include "host_gfx.h"
 #include "cpu_vid.h"
 #include "ga_defs.h"
@@ -130,10 +126,8 @@ sys_addr	stream_io_bios_busy_sysaddr;
  */
 GLOBAL sys_addr video_pc_low_regen,video_pc_high_regen;
 
-/* DIVERGENCE(MVDM-HOST-DIV-545): SoftPC T99 S33 P4 selects both
- * text aperture bounds from the caller's BIOS mode; SAS owns translation. */
 #define vd_text_mode() (vd_mode_table[sas_hw_at_no_check(vd_video_mode)])
-
+#line 127
 
 /*
  * ============================================================================
@@ -820,7 +814,7 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i
 
 	/* Try to scroll the adaptor memory & host screen. */
 
-	if( !getVM() && source >= get_screen_base() )
+	if( source >= get_screen_base() )
 	{
 	    screen_updated = (*update_alg.scroll_up)(source,2*colsdiff,rowsdiff,attr,lines,0);
 	}
@@ -1195,7 +1189,7 @@ LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff,
 
 	/* Try to scroll the adaptor memory & host screen. */
 
-	if( !getVM() && source >= get_screen_base() )
+	if( source >= get_screen_base() )
 	{
 	    screen_updated = (*update_alg.scroll_down)(source,2*colsdiff,rowsdiff,attr,lines,0);
 	}

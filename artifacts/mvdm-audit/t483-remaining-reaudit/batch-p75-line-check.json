@@ -1,0 +1,11 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "before": 607,
+    "after": 597,
+    "delta": -10,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]

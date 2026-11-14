@@ -1,0 +1,156 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/video/video.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": {
+    "R0954": {
+      "before": "+3/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "proof": "Actual per-TU flags include MONITOR/X86GFX/MVDM_STANDALONE_SAS_VIDEO. Removing ega_read_dot declaration/prose compiles;all70 non-debug COFF sections/relocations unchanged;int argument promotions and unused return preserve ABI."
+    },
+    "R0955": {
+      "before": "+4/-0",
+      "after": "+1/-0 plus necessary #line127",
+      "decision": "minimized residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0956": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0957": {
+      "before": "+1/-1",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "proof": "All selected scroll callbacks are bound by gfx_updt.c in its own non-MONITOR context;ten callbacks reject VM before host/display work, dummy returnsFALSE. Initialization and saved pointer restoration introduce no other callback. 1320 actual caller/source-prefix controls match after original condition restored;VM1 host-tail calls0."
+    },
+    "R0958": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0959": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0960": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0961": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Original down-scroll local is uninitialized when source<get_screen_base; subsequent move/fill reads it. Physical display start can differ from caller BDA/page and be higher. Source-extracted original declaration triggers MSVC C6001 and C4701 at read sites. No UB candidate executed. Keep FALSE initialization matching original upward-scroll contract."
+    },
+    "R0962": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0963": {
+      "before": "+1/-1",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "proof": "All selected scroll callbacks are bound by gfx_updt.c in its own non-MONITOR context;ten callbacks reject VM before host/display work, dummy returnsFALSE. Initialization and saved pointer restoration introduce no other callback. 1320 actual caller/source-prefix controls match after original condition restored;VM1 host-tail calls0."
+    },
+    "R0964": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0965": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0966": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0967": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0968": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    },
+    "R0969": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified residual pending owner",
+      "proof": "Physical bounds cache is set by ega_vide mode programming; BIOS text dispatch reads caller BDA through SAS. Original table selects B0000..B7FFF for mode7 and B8000..BFFFF for colour text. The11 actual expression controls pass current and fail original for stale cache; equal-cache controls pass. Historical SoftPC S33 VM1 BDA3/cacheA0000 evidence and P134 coherent-original object controls independently agree;these are comparison evidence,not new NTVDM guest acceptance."
+    }
+  },
+  "object_proof": {
+    "nodecl": {
+      "equal": true,
+      "sections": 70
+    },
+    "minimal": {
+      "equal": false,
+      "sections": 70
+    }
+  },
+  "scroll": {
+    "exit": 0,
+    "output": "PASS actual-source scroll caller equivalence cases=1320;selected callback guards=11;VM1 host-tail calls=0\n",
+    "guards": {
+      "text_scroll_up": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "text_scroll_down": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "cga_graph_scroll_up": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "cga_graph_scroll_down": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "ega_graph_scroll_up": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "ega_graph_scroll_down": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "vga_graph_scroll_up": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "vga_graph_scroll_down": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "v7vga_graph_scroll_up": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "v7vga_graph_scroll_down": "Selected actual preprocessed guard returns0 before host/display operations; only local declarations/pure PCDisplay reads precede guard",
+      "dummy_scroll": "IBOOL\tdummy_scroll (int dummy1, int dummy2, int dummy3, int dummy4, int dummy5, int dummy6)\n\n{\n\t;\n\t;\n\t;\n\t;\n\t;\n\t;\n\t\n\treturn 0;\n}"
+    },
+    "scope": "Actual up/down caller bodies and selected preprocessed callback prefixes. SAS buffer and non-VM hardware result are test boundaries;not full guest runtime."
+  },
+  "aperture": {
+    "exit": 0,
+    "output": "R956 mono=0 current=754006 original=721238 expected=754006\nR956 mono=1 current=721238 original=754006 expected=721238\nR958 mono=0 current=754006 original=721238 expected=754006\nR958 mono=1 current=721238 original=754006 expected=721238\nR959 mono=0 current=1 original=1 expected=1\nR959 mono=1 current=1 original=0 expected=1\nR960 mono=0 current=1 original=2147467265 expected=1\nR960 mono=1 current=1 original=16385 expected=1\nR962 mono=0 current=754006 original=721238 expected=754006\nR962 mono=1 current=721238 original=754006 expected=721238\nR964 mono=0 current=754006 original=721238 expected=754006\nR964 mono=1 current=721238 original=754006 expected=721238\nR965 mono=0 current=753676 original=720908 expected=753676\nR965 mono=1 current=720908 original=753676 expected=720908\nR966 mono=0 current=753676 original=720908 expected=753676\nR966 mono=1 current=720908 original=753676 expected=720908\nR967 mono=0 current=753676 original=720908 expected=753676\nR967 mono=1 current=720908 original=753676 expected=720908\nR968 mono=0 current=753684 original=720916 expected=753684\nR968 mono=1 current=720916 original=753684 expected=720916\nR969 mono=0 current=754007 original=721239 expected=754007\nR969 mono=1 current=721239 original=754007 expected=721239\nPASS conditions=1\n",
+    "scope": "Eleven actual changed expressions;caller text-mode and mismatched/equal physical cache controls. Independent address oracle;not complete paged V86 emulation."
+  },
+  "uninitialized_analysis": [
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p75\\uninit-probe.c(1164) : warning C6001: Using uninitialized memory 'screen_updated'.: Lines: 1172, 1173, 1174, 1175, 1176, 1178, 1179, 1183, 1188, 1189, 1194, 1160, 1164",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p75\\uninit-probe.c(1151) : warning C4701: potentially uninitialized local variable 'screen_updated' used"
+  ],
+  "source_chain": [
+    "video.c BIOS BDA reads/alpha_num_mode -> original vd_mode_table -> SAS",
+    "ega_vide.c physical cache setters do not track every caller BDA",
+    "ccpusas4.c c_sas_move_bytes_forward -> c_sas_hw_at/store -> xtrn2phy",
+    "gfx_updt.c initialization/set_gfx_update_routines/save/restore -> guarded original callbacks"
+  ],
+  "line_proof": {
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "before": 607,
+    "after": 597,
+    "delta": -10,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  "validation": "Final source cached full x86/x64 build,11x2 publication,CVID,Full and governance passed;see batch-p75-checkpoint.json",
+  "limits": "No guest modified/recompiled. Restored scroll guards rely on verified supported callback set;no hardware MONITOR context claimed. Original-helper implicit C4013 warning accepted only with compile/COFF proof."
+}
