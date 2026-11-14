@@ -702,3 +702,9 @@ P71 [gfx_updt.c initial decisions](r0864-r0865-gfx-start-review.json):2/77 point
 - P71 [checkpoint](batch-p71-checkpoint.json) and [line checks](batch-p71-line-check.json): completed three-file batch, delivery pending.
 
 P71 final delivery: cached x86/x64 full build,11x2 publication,Full19,CVID,143 WOW objects/9 negative controls and governance passed; checkpoint carries package identity and explicit DOS4GW skip.
+
+- [R0941-R0942 V7 pointer review](r0941-r0942-v7-ports-review.json):two qualified residuals; comment-only mirror diff-2; P72 accumulation.
+
+- [R0943-R0946 whole V7 mode file](r0943-r0946-v7-video-review.json):4/4 complete;2 original restorations,2 minimized residuals pending owner; mirror diff-10, P72 cumulative-12; delivery pending.
+
+P72 final delivery: [checkpoint](batch-p72-checkpoint.json), [original line proof](batch-p72-line-check.json); cached x86/x64 build,11x2 publication,CVID,Full and governance passed; mirror diff-12. Git delivery accompanies record.

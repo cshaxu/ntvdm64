@@ -43,9 +43,6 @@
 #include "vgaports.h"
 #include CpuH
 #include "sas.h"
-#if defined(NTVDM) && !defined(X86GFX)
-#include "mouse_io.h"
-#endif
 
 
 #line 48
@@ -286,14 +283,13 @@ v7vga_extended_set_mode()
 	set_host_pix_height(1);
 	set_banking( 0, 0 );
 
-	/* DIVERGENCE(VIDEO7-PRESERVE-MODE): SoftPC T70 S10 validates the mode,
-	 * not BL's preserve-memory flag; retain that flag for screen clearing. */
-	video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */
-	if (is_bad_vid_mode(video_mode) && !is_v7vga_mode(video_mode))
+	if (is_bad_vid_mode(getBL()) && !is_v7vga_mode((getBL() & 0x7F)))
 #line 286
 		return;
 
-	#line 290
+	video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */
+
+#line 290
 	/*
 	 * The method of storing an extended video mode according to a real BIOS is
 	 * if it is an text mode then put 1 in the BIOS mode variable and store
@@ -465,8 +461,6 @@ v7vga_extended_set_mode()
     inb(EGA_IPSTAT1_REG,&temp_word);
     outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
 #if defined(NTVDM) && !defined(X86GFX)
-    /* DIVERGENCE(VIDEO7-MOUSE-MODE): match the standard EGA mode path: INT33 and the host mouse bridge
-     * must observe the actual Video 7 extent after an extended mode set. */
     mouse_video_mode_changed(video_mode);
 #endif
 #line 456

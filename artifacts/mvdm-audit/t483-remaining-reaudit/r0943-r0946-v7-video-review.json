@@ -1,0 +1,70 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "R0943": {
+    "before": "+3/-0",
+    "after": "+0/-0",
+    "decision": "restore original",
+    "evidence": "Actual cc_cvidc_rule base and omitted header compile exit0;18 non-debug COFF sections, allocation sizes, characteristics and symbol-resolved relocations identical. C4013 warning remains; no warning-free claim. Callee takes int, return unused."
+  },
+  "R0944": {
+    "before": "+4/-1",
+    "after": "+1/-1",
+    "decision": "minimize; residual pending owner",
+    "evidence": "video.h is_bad_vid_mode masks bit7 but is_v7vga_mode does not. Original BL E7 rejects supported67 preserve request before mode setup. c_reg.c c_getBL only returns GET_BL; no mutation/callback between predicate reads. Mask only V7 predicate; double parentheses required by existing macro parameter expansion. Original screen-clear flag storage remains unchanged."
+  },
+  "R0945": {
+    "before": "+0/-2",
+    "after": "+0/-0",
+    "decision": "restore original",
+    "evidence": "Assignment and blank restored at original logical288/289; predicate no longer depends on local video_mode. getBL pure getter; validation result unchanged from previous normalized local."
+  },
+  "R0946": {
+    "before": "+5/-0",
+    "after": "+3/-0",
+    "decision": "minimize; residual pending owner",
+    "evidence": "ega_vide.c ega_set_mode V7 forwarding returns immediately after v7vga_extended_set_mode and bypasses later mouse_video_mode_changed. Existing original mouse_video_mode_changed sets current_video_mode, mouse_ega_mode and VirtualX/Y consumed by mouse extents provider. Original mouse_video_io is separate BIOS entry, not this post-completion path. Keep one completion call using original provider; remove two comment lines. No new state or second path."
+  },
+  "proof": "build/t483-s5-p72/v7-object-proof.json",
+  "line_proof": "batch-p72-line-check.json",
+  "raw_mirror_diff": {
+    "before": 45,
+    "after": 35,
+    "delta": -10
+  },
+  "validation": "Final source cached full x86/x64 build, publication11x2, CVID, Full and governance passed; see batch-p72-checkpoint.json",
+  "limits": "Source proof for completion obligation; no new runtime acceptance claim. Final minimal object differs due repeated pure register reads; not claimed binary-equivalent.",
+  "mode_domain_proof": {
+    "byte_values": 256,
+    "minimal_matches": 256,
+    "original_missed_preserve": [
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233
+    ],
+    "scope": "V7 predicate domain; standard predicate independently masks all arguments; source derivation, not runtime test"
+  },
+  "header_object_proof": {
+    "omit": {
+      "equal": true,
+      "sections": 18
+    },
+    "minimal": {
+      "equal": false,
+      "sections": 18
+    }
+  }
+}

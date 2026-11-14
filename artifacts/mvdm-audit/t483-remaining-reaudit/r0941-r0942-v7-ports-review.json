@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+  "points": {
+    "R0941": {
+      "before": "+3/-1",
+      "after": "+1/-1",
+      "decision": "minimize comments; residual pending owner",
+      "evidence": "C operator precedence parses original value&0x80!=old_value&0x80 through comparison0/1 AND128, always false. Actual expressions exhaustive65536 controls: current0 errors, original32768 missed transitions. Existing enabled branch draws, disabled branch clears; this is a missing transition, not cosmetic rearrangement."
+    },
+    "R0942": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "residual pending owner",
+      "evidence": "vga_seq_mem_mode owns SR4 CPU address chain; vga_gc_mode separately owns256-colour scanout and horizontal halving; V7 FC owns sequential display state. Pointer position must not jump merely because CPU aperture changes. Extracted actual draw_v7ptr body32 coherent getter/position cases: current0 errors, original6; disabled-pointer check passes. Independent SoftPC P129 actual BIOS modes66-69/SR4/pointer register fixture restores same original condition and fails pixel X8/Y6 on both widths; this is comparative evidence, not our product acceptance."
+    }
+  },
+  "comparison": "O:/repos.hobby/softpc/docs/etc/evidence/softpc/m9-t100-progress.md File426 P129; XP original condition equals pinned OpenNT condition; no source imported",
+  "run": "build/t483-s5-p72/probe-job.json PID16424 finished",
+  "results": {
+    "current": "transition_cases=65536 transition_fail=0 coordinate_cases=32 coordinate_fail=0 disabled_fail=0",
+    "r0941": "transition_cases=65536 transition_fail=32768 coordinate_cases=32 coordinate_fail=0 disabled_fail=0",
+    "r0942": "transition_cases=65536 transition_fail=0 coordinate_cases=32 coordinate_fail=6 disabled_fail=0"
+  },
+  "limits": "Local coordinate fixture controls getters; independent full controller evidence is from SoftPC, not new NTVDM guest/RDP acceptance. Current edit removes comments only, selected tokens unchanged.",
+  "diff": {
+    "before": 16,
+    "after": 14,
+    "delta": -2
+  },
+  "line_mismatches": [],
+  "errors_unchanged": true,
+  "sha256": "4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3",
+  "delivery": "P72 format-only accumulation; P71 remains published baseline"
+}

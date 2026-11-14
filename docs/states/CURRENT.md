@@ -34,9 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-947 points reviewed:342 restored/verified/published,6 approved retention,
-599 qualified pending decisions;1773 unreviewed. Sequential file disposition
-122/365;243 remain. No local restoration awaits validation.
+953 points reviewed:344 restored delivered,6 approved,
+603 qualified pending;1767 unreviewed. Files124/365 complete,241 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -228,4 +227,7 @@ gfx_updt.c-92). All77 gfx points resolved;19 original points restored/verified/p
 59 exclusion errors retained; original logical-line check0 mismatches.
 Full19 and all applicable delivery gates passed; this record accompanies Git delivery.
 [Whole-file evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0915-r0940-gfx-final-review.json).
-Next ordered point R0941; S5 remains active.
+P72:v7_ports.c2/2 and v7_video.c4/4 complete;mirror diff-12;2 original
+points restored/verified/published;2 minimized residuals pending owner.
+Cached x86/x64 build,publish11x2,CVID,Full and governance passed;Git delivery
+accompanies checkpoint. Next R0947;S5 remains active.

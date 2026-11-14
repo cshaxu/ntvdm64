@@ -1,0 +1,42 @@
+{
+  "batch": "P72",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "8fc68f8f7baaafa12721cf323f939ecfea0b047c",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "sha256": "4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "sha256": "e2854333cd759430c3104208152a362d79f824d3fb2157b48a5a652cbef38427"
+    }
+  ],
+  "mirror_diff_delta": -12,
+  "mirror_files": 2,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "6304d91b-8602-486d-abba-e18710ae501b",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p72/full-final/timings.json",
+    "Full_elapsed_ms": 387457,
+    "CVID": "PASS selected original vector fixture",
+    "original_line_check": "batch-p72-line-check.json",
+    "dos4gw_nesticle": "SKIP: verified external fixtures unavailable",
+    "governance": "PASS documentation and links",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9
+  }
+}

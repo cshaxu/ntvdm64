@@ -1,0 +1,20 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+    "before": 16,
+    "after": 14,
+    "delta": -2,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+    "before": 45,
+    "after": 35,
+    "delta": -10,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]
