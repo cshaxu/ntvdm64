@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1143 points reviewed:397 restored delivered,0 local,8 approved,
-733 qualified pending,5 restores decided;1577 unreviewed. Files144/365 audited,221 remain.
+1149 points reviewed:397 restored delivered,0 local,8 approved,
+739 qualified pending,5 restores decided;1571 unreviewed. Files145/365 audited,220 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -232,4 +232,4 @@ P81:nt_cpu19/19;mirror188->118(-70);13 restored,5 residuals,1 retained exclusion
 
 P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,217 lines;build,publish11x2,Full19 passed;nextR1047.
 
-P99 audit-only:nt_graph18/24;[cursor ownership](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1135-r1139-nt-graph-cursor-review.json).Five restores decided;source unchanged;P95 published;next R1140.
+P100 audit-only:nt_graph24/24;[presentation](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1140-r1145-nt-graph-presentation-review.json).Whole-file implementation next;source unchanged;P95 published.

@@ -1,0 +1,90 @@
+{
+  "status": "P100 source audit only;whole-file implementation next",
+  "source_head": "c66d464a4acde168b514f05d8b74f0b2a394393f",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "source_hashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+    "src/mvdm-host/softpc.new/base/video/gvi.c": "fde48eaad3255332867c1560cf5a38e8f7f23df3e009691d93b93f870c893d68",
+    "src/mvdm-host/softpc.new/base/video/vga_prts.c": "09d340437223c9b7593cc2ed7ef40dd5b530be98c42335e8719d2d5b441d4502",
+    "src/mvdm-host/softpc.new/base/video/v7_ports.c": "4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3",
+    "src/mvdm-host/softpc.new/base/video/gfx_updt.c": "d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602",
+    "src/mvdm-host/softpc.new/base/video/vga_mode.c": "120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3",
+    "src/mvdm-host/softpc.new/host/src/nt_vga.c": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntvdm-exe/win32/console_text.c": "220f7637c3e94e70a2bd7456f445d974ff4a20178d9fc1c963ca8f420f007b39",
+    "src/ntvdm-exe/win32/console_graphics.c": "671b2aa747ab1eecf8001dc29c369b0deacde8119ee93f6383af4f3b1743667f",
+    "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747"
+  },
+  "original_hashes": {
+    "base\\video\\gvi.c": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+    "base\\video\\v7_ports.c": "d02575bd0594f9ccc3a23ad7ed0eb208ec7c1414eeffd558dd1ce6b648f1991b",
+    "base\\video\\vga_prts.c": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+    "base\\video\\gfx_updt.c": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+    "host\\src\\nt_graph.c": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+    "host\\src\\nt_vga.c": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d"
+  },
+  "points": [
+    {
+      "id": "T483-R1140",
+      "scale": "+1/-1",
+      "anchor": "original1277;nt_set_paint_routine",
+      "problem": "Select packed Video7 painter independently of CPU chain4 addressing",
+      "evidence": "Original vga_seq_mem_mode writes PCDisplay.chain4_mode from sequencer CPU memory_mode.chain4;original v7_ports register FC separately writes sequential_chain4. Original gvi.c recalc_screen_params selects chars_per_line<<3 for byte-addressed sequential_chain4 without requiring CPU chain4. Original vga_graph_update passes that bytes_per_line directly to paint_screen. For 80 characters this is640 bytes. Restoring the original conjunction with CPU chain4 false selects ordinary nt_vga_hi_graph_std/med instead of packed:hi reads offset<<2,advances source4*offset_per_line and duplicates every byte,while packed reads byte offset,advances offset_per_line and emits one pixel per byte. This is a source contract counterexample from independent original producers,not merely agreement with modified vga_mode stride. Historical35424a126 introduced the condition together with stride/pointer changes but provides no isolated new runtime proof. CPU banking still legitimately tests both bits;do not remove its checks. Current vga_mode stride changes are not used as independent proof.",
+      "minimum": "One changed condition line is already minimal. Keep pending owner;do not change CPU banking or move mode selection into a shim.",
+      "delta": "0 applied;no smaller source-shaped condition identified"
+    },
+    {
+      "id": "T483-R1141",
+      "scale": "+7/-0",
+      "anchor": "original1575;check_win_size",
+      "problem": "Use pixel width for one-byte-per-pixel packed painter",
+      "evidence": "Original formula chars_per_line*char_width*2 gives1280 for80*8 in256-colour mode;original gvi sequential byte scanout gives640 and original packed painter emits640 bytes as640 pixels. Original vga_graph_update passes bytes_per_line without pixel doubling. Thus original size creates a half-empty1280-wide DIB for640 visible pixels. This exact1280x480 versus640x480 symptom is recorded in historical35424a126 parent README;existing actual-painter fixture verifies640 destination width but alone does not test the selector. Predicate follows selected packed painter rather than program names or guessed screen dimensions.",
+      "minimum": "Keep existing selected-painter width assignment and V7 conditional pending owner;delete two explanatory comment lines and the added blank. Do not change original VGA doubled-pixel paths.",
+      "delta": "0 applied;planned -3 mirror lines"
+    },
+    {
+      "id": "T483-R1142",
+      "scale": "+6/-3",
+      "anchor": "original1650;256-colour DAC conversion",
+      "problem": "Respect original Video7 eight-bit DAC values",
+      "evidence": "Pinned original v7_ports caseC1 selects DAC_data_bits8/maskFF or6/mask3F;original vga_prts DAC writes apply that mask. Original host unconditional BYTE(value*4) maps allowed8-bit64 to0 instead of64 and255 to252. Six-bit0..63 still requires multiplication by4. No new colour policy is needed;use existing controller width. This is an arithmetic/source proof,not fresh guest colour acceptance.",
+      "minimum": "Keep ternary conversion pending owner but put each channel assignment on one line,matching the original three-line shape. No helper,new variable or second palette owner.",
+      "delta": "0 applied;planned -3 mirror lines"
+    },
+    {
+      "id": "T483-R1143",
+      "scale": "+6/-3",
+      "anchor": "original1710;attribute-mapped DAC conversion",
+      "problem": "Apply the same original DAC width after attribute/padding/mask selection",
+      "evidence": "Same original DAC producer asR1142. This loop resolves host_plane_mask,blink,attribute palette,pixel padding andDACmask first;preserve that original mapping. The selected DAC entry may still carry8-bit components. Applying unconditional*4 here has the same64->0 counterexample;fixing only the256-colour loop would leave this actual path wrong.",
+      "minimum": "Same three channel expressions/three lines asR1142;preserve all original index logic. Residual conversion pending owner.",
+      "delta": "0 applied;planned -3 mirror lines"
+    },
+    {
+      "id": "T483-R1144",
+      "scale": "+3/-0",
+      "anchor": "original1718;resolved text palette handoff",
+      "problem": "Carry original resolved colours across the absent original Console graphics service",
+      "evidence": "Original closeGraphicsBuffer closes ScreenBufHandle and zeros ColPalette;the local graphics owner also deletes its installed palette on close. A text-only path need not own a graphics palette. Original set_the_vlt already computes DAC+attribute resolved vga_color. NtvdmConsoleTextColours copies its first16 entries under the session palette lock;NtvdmConsoleUpdateText/Configuration consume them through read_text_palette. Removing the sole copy leaves initialtext read ERROR_NO_DATA even after the refresh callback invokes original set_the_vlt,or leaves stale colours after later updates. Reverting consumer to GetPaletteEntries cannot recover colours from the original zero/retired handle. Recomputing DAC mapping in consumer would duplicate the original owner. Thus a finite one-call handoff is necessary;adapter self-dependency is not the sole argument.",
+      "minimum": "Retain the existing single handoff pending owner;delete two explanatory comment lines. Do not introduce a second palette algorithm or preserve retired GDI objects.",
+      "delta": "0 applied;planned -2 mirror lines"
+    },
+    {
+      "id": "T483-R1145",
+      "scale": "+3/-2",
+      "anchor": "original2067;graphicsResize hardware early return",
+      "problem": "Allocate the software graphics DIB even when ScreenState is FULLSCREEN",
+      "evidence": "mvdm_softpc_text_video_sync routes software GRAPHICS to FULLSCREEN. Original graphicsResize creates the bitmap metadata,Console graphics buffer and write pointer;original packed painter rejects a null buffer and writes that DIB. Modern local console_graphics supplies this unavailable original Console service. Restoring original FULLSCREEN early return prevents initialallocation or mode-size recreation although no physical hardware framebuffer exists to present the guest. This is a concrete source allocation/consumer contract. Keep excluded X86GFX#error;it is not an admitted hardware monitor path.",
+      "minimum": "Retain the existing narrow hardware-only exclusion pending owner. No new allocation path;reuse original graphicsResize body. Logical continuation2069 and excluded2067 remain.",
+      "delta": "0 applied;no functional reduction identified"
+    }
+  ],
+  "counter_review": [
+    "A historical successful package or modified stride rule is not isolated evidence for painter selection. R1140 uses independent original bytes-per-line producer and original painter byte/pixel contracts.",
+    "CPU banking uses a different contract;do not globally replace its chain4 predicate.",
+    "Palette state ownership remains original set_the_vlt;the finite copied presentation handoff must not duplicate its mapping.",
+    "All six outcomes are source/ABI conclusions,not new runtime results. Whole-file final source,preprocessed line proof,cached build,publication andFull remain pending.",
+    "No source change and no new exclusion;restoration and reductions already decided for all24points will be applied together."
+  ]
+}
