@@ -1,0 +1,150 @@
+{
+  "status": "Comment-only mirror reduction verified;actual ABI controls/object identity;P118 publication/Full reused;Git accompanies receipt",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrica.h",
+      "sha256": "12b035d868e78ccee22a945a3e369e23642d9fc4fb66b562fea05876ee1d74af"
+    }
+  ],
+  "mirror_delta": -2,
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "1E2FD08B5AA7BDF19B343B8A17A80E19014AFA5F299DE123EFEEEE13AA5E93AD",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "13A7BE8CDBB25833ACDC61D32C0969946D658AC7F803074F331C26B8CCCDA4C1"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "0D8871FC5D6E85ABBF43F25B61D50E927E13932BC6B9FCED7E8331CFE64E7487",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "6707ACD3AB4134C5DFC5624EEDD24152E62C1F3052529C5CEB64CE53C918B55A"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "A4F57D30B7701A72E2B3A800EB5A1A1A337837D4EB7AE1533E5059C949324565",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "29D4B07A30B2E2C290DCBDE6F67A7526D9C8E3072D7CFBA32B38FF09F37FE0F2"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "A0E9DFD97F657D4234E3404488332FCAA1F6E0FCBEFAA093C12CB88A802AF898",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "DD086653E78A42B6A01DB1958A635674CDE51ACDA8A2B8C8C00BEFFB41186B71"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "39964ECCC231E48A4C70041B0A04DC70C2781F65D456E0C6FA0993E9B4716BA5",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "584AE399CAE7640565FF8374469719687AFBDD6ED3BAEE779C85B44F9053710E"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "F3EC4AFA6B83D70CE66C8A378262C3E32C2C7B1799FAA1EDB09E1AF063B08DAE",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "EEA814BAC30D621336B2AA826FAE7F1DC0FCF1AB12E57972AD4CE052CBC2C6F0"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "4E8C7A5C3903B46E932B22816EAFCEA57599154690D55AE7DB7927D72921B260",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "6FBB54508B427A4398CCD5538B0B08E4485302940FE2C527109E6D624CE29688",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "5AB7126E7D0294719813365D4F0C5D988C459E57C3C2974E3FE25104B4B4CB6C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "6D7A6440AD45739658A8B27F8623727AA3F51036C1ACDA9970A66A7F69A1FFD1",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "16F84DEB76D13C0685000D63FC3A6F04CF60CD6EE96CC7F8997B8E6EF3E08416"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "5AF797D3BAFBF7B062C6D5327FFA4C783FD0D868359742A6917CC97F100D4BCD",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "C3CF354D26125B79A9CA0150C05B4EF4C1F6F95F63B6EF289B87D20709BD641C"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "148EC23149DCEB9D4DA860282E6A94AB4094AB1F7EF2A142B0C972A4F282E312",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "reused_evidence": "batch-p118-checkpoint.json",
+  "no_new_full_or_publication_claim": true,
+  "processes": [
+    {
+      "start": "2026-11-14T10:20:25.15548-08:00",
+      "pid": 3096,
+      "script": "build/t483-s5-p123/controls.ps1"
+    },
+    {
+      "script": "build/t483-s5-p123/abi/controls.ps1",
+      "pid": 13444,
+      "start": "2026-11-14T10:22:54.8464122-08:00"
+    }
+  ],
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "shared_selected_lines": 22,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "object_identity": [
+    {
+      "file": "vrinit",
+      "equal": true,
+      "sections": 4
+    },
+    {
+      "file": "vrnetb",
+      "equal": true,
+      "sections": 3
+    },
+    {
+      "file": "vrnmpipe",
+      "equal": true,
+      "sections": 5
+    },
+    {
+      "file": "vrdlcpst",
+      "equal": true,
+      "sections": 4
+    }
+  ]
+}

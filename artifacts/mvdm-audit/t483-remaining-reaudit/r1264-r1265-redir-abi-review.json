@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "id": "T483-R1264",
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "line_proof": [
+        {
+          "path": "src/mvdm-host/vdmredir/vrdll.c",
+          "shared_selected_lines": 22,
+          "line_mismatches": [],
+          "ambiguous_equal_text_matches_resolved_at_original_line": [],
+          "selected_changes": [],
+          "excluded_error_directives_unchanged": true
+        }
+      ],
+      "source_unchanged": true
+    },
+    {
+      "id": "T483-R1265",
+      "path": "src/mvdm-host/vdmredir/vrica.h",
+      "before": "+3/-1",
+      "after": "+1/-1",
+      "mirror_delta": -2,
+      "evidence": "Original vrica.h compiles all4 real consumers but actual VDMREDIR link fails _call_ica_hw_interrupt. Original header plus /Gz for all4 compiles but link fails42 imports/exports. Current and comment-cleaned final compile/link successfully;all4 nondebug object sections/relocations equal. Original WOW32 /Gz caller and public interrupt ABI require callee cleanup;CCPU internal PIC and remaining redirector interfaces are cdecl.",
+      "object_identity": [
+        {
+          "file": "vrinit",
+          "equal": true,
+          "sections": 4
+        },
+        {
+          "file": "vrnetb",
+          "equal": true,
+          "sections": 3
+        },
+        {
+          "file": "vrnmpipe",
+          "equal": true,
+          "sections": 5
+        },
+        {
+          "file": "vrdlcpst",
+          "equal": true,
+          "sections": 4
+        }
+      ],
+      "original_git_sha256": "7b1b66dc083c04f147fd21f1a1ec1c457976b55ad2f1b8e90991690ce90da2b1",
+      "line_proof": "Entire final header equals original except declaration token change;declaration restored to original LF line24;no error exclusions in this header."
+    }
+  ],
+  "initial_review": "R1264 only3 DBG exclusions;selected code/lines unchanged. R1265 explicit public ABI boundary versus original default convention.",
+  "counter_review": "Do not infer necessity from wrapper alone:original WOW32 declaration compiled /Gz shares this export;switching it to cdecl breaks that caller. Actual redirector /Gz alternative fails42 symbols. Retain smallest explicit declaration,pending owner;do not add another export or macro shim.",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "mirror_delta": -2,
+  "limits": [
+    "Original/header and mixed-/Gz failures are actual compile/link controls,not runtime tests.",
+    "All4 objects unchanged by comment removal;P118 Full19/publication reused.",
+    "Whole redirector ABI redesign is not claimed impossible;it changes other cross-module contracts and is not a smaller alternative for this one declaration."
+  ],
+  "negative_logs": {
+    "original": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vdmredir.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored\n   Creating library O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p123\\abi\\original\\VDMREDIR.dll.lib and object O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p123\\abi\\original\\VDMREDIR.dll.exp\nvrinit.obj : error LNK2019: unresolved external symbol _call_ica_hw_interrupt referenced in function _VrRaiseInterrupt\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p123\\abi\\original\\VDMREDIR.dll : fatal error LNK1120: 1 unresolved externals\n",
+    "stdcall": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vdmredir.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored\n   Creating library O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p123\\abi\\stdcall\\VDMREDIR.dll.lib and object O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p123\\abi\\stdcall\\VDMREDIR.dll.exp\nvrnmpipe.obj : error LNK2019: unresolved external symbol _opennt_create_cdecl_thread_named@28 referenced in function _VrReadWriteAsyncNmPipe@0\nvrdlcpst.obj : error LNK2001: unresolved external symbol _opennt_create_cdecl_thread_named@28\n  Hint on symbols that are defined and could potentially match:\n    _opennt_create_cdecl_thread_named\nvrnmpipe.obj : error LNK2019: unresolved external symbol _WaitIfIdle@0 referenced in function _VrPeekNamedPipe@0\nvrnmpipe.obj : error LNK2019: unresolved external symbol _setAL@4 referenced in function _VrNmPipeInterrupt@0\nvrnetb.obj : error LNK2001: unresolved external symbol _setAL@4\nvrdlcpst.obj : error LNK2001: unresolved external symbol _setAL@4\n  Hint on symbols that are defined and could potentially match:\n    _setAL\nvrnmpipe.obj : error LNK2019: unresolved external symbol _setCF@4 referenced in function _VrGetNamedPipeInfo@0\nvrinit.obj : error LNK2001: unresolved external symbol _setCF@4\nvrnetb.obj : error LNK2001: unresolved external symbol _setCF@4\nvrdlcpst.obj : error LNK2001: unresolved external symbol _setCF@4\n  Hint on symbols that are defined and could potentially match:\n    _setCF\nvrnmpipe.obj : error LNK2019: unresolved external symbol _setZF@4 referenced in function _VrNmPipeInterrupt@0\nvrinit.obj : error LNK2001: unresolved external symbol _setZF@4\nvrnetb.obj : error LNK2001: unresolved external symbol _setZF@4\nvrdlcpst.obj : error LNK2001: unresolved external symbol _setZF@4\nvrnmpipe.obj : error LNK2019: unresolved external symbol __inlinePointerFromWords@8 referenced in function _VrGetNamedPipeInfo@0\nvrinit.obj : error LNK2001: unresolved external symbol __inlinePointerFromWords@8\nvrdlcpst.obj : error LNK2001: unresolved external symbol __inlinePointerFromWords@8\n  Hint on symbols that are defined and could potentially match:\n    __inlinePointerFromWords\nvrnmpipe.obj : error LNK2019: unresolved external symbol _VrpMapLastError@0 referenced in function _VrGetNamedPipeInfo@0\n  Hint on symbols that are defined and could potentially match:\n    _VrpMapLastError\nvrnmpipe.obj : error LNK2019: unresolved external symbol __imp__mvdm_redirector_async_prepare@24 referenced in function _VrReadWriteAsyncNmPipe@0\nvrnmpipe.obj : error LNK2019: unresolved external symbol __imp__mvdm_redirector_async_complete@12 referenced in function _VrpCompleteAsyncRequest@4\nvrnmpipe.obj : error LNK2019: unresolved external symbol __imp__mvdm_redirector_async_completion_begin@4 referenced in function _VrpCompleteAsyncRequest@4\nvrnmpipe.obj : error LNK2019: unresolved external symbol __imp__mvdm_redirector_async_completion_end@4 referenced in function _VrpCompleteAsyncRequest@4\nvrnmpipe.obj : error LNK2019: unresolved external symbol __imp__mvdm_redirector_async_release@4 referenced in function _VrReadWriteAsyncNmPipe@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrInitialize\nvrdll.obj : error LNK2001: unresolved external symbol _VrInitialize\n  Hint on symbols that are defined and could potentially match:\n    _VrInitialize@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrUninitialize\nvrdll.obj : error LNK2001: unresolved external symbol _VrUninitialize\n  Hint on symbols that are defined and could potentially match:\n    _VrUninitialize@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrDismissInterrupt\n  Hint on symbols that are defined and could potentially match:\n    _VrDismissInterrupt@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrHandleAsyncCompletion\n  Hint on symbols that are defined and could potentially match:\n    _VrHandleAsyncCompletion@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrCheckPmNetbiosAnr\n  Hint on symbols that are defined and could potentially match:\n    _VrCheckPmNetbiosAnr@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrEoiAndDismissInterrupt\n  Hint on symbols that are defined and could potentially match:\n    _VrEoiAndDismissInterrupt@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrGetNamedPipeInfo\n  Hint on symbols that are defined and could potentially match:\n    _VrGetNamedPipeInfo@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrGetNamedPipeHandleState\n  Hint on symbols that are defined and could potentially match:\n    _VrGetNamedPipeHandleState@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrSetNamedPipeHandleState\n  Hint on symbols that are defined and could potentially match:\n    _VrSetNamedPipeHandleState@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrPeekNamedPipe\n  Hint on symbols that are defined and could potentially match:\n    _VrPeekNamedPipe@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrTransactNamedPipe\n  Hint on symbols that are defined and could potentially match:\n    _VrTransactNamedPipe@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrCallNamedPipe\n  Hint on symbols that are defined and could potentially match:\n    _VrCallNamedPipe@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrWaitNamedPipe\n  Hint on symbols that are defined and could potentially match:\n    _VrWaitNamedPipe@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrNetHandleGetInfo\n  Hint on symbols that are defined and could potentially match:\n    _VrNetHandleGetInfo@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrNetHandleSetInfo\n  Hint on symbols that are defined and could potentially match:\n    _VrNetHandleSetInfo@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrReadWriteAsyncNmPipe\n  Hint on symbols that are defined and could potentially match:\n    _VrReadWriteAsyncNmPipe@0\nvrdisp.obj : error LNK2001: unresolved external symbol _VrNetbios5c\n  Hint on symbols that are defined and could potentially match:\n    _VrNetbios5c@0\nvrinit.obj : error LNK2019: unresolved external symbol _VDDInstallUserHook@20 referenced in function _VrInitialize@0\nvrinit.obj : error LNK2019: unresolved external symbol _SoftPcEoi@8 referenced in function _VrEoiAndDismissInterrupt@0\nvrmisc.obj : error LNK2019: unresolved external symbol _VrTerminateNamedPipes referenced in function _VrTerminateDosProcess\n  Hint on symbols that are defined and could potentially match:\n    _VrTerminateNamedPipes@4\nvrnetb.obj : error LNK2019: unresolved external symbol __inlineConvertAddress@16 referenced in function _VrNetbios5c@0\n  Hint on symbols that are defined and could potentially match:\n    __inlineConvertAddress\nvrdlc5c.obj : error LNK2019: unresolved external symbol _ResetEmulatedLocalBusyState referenced in function _MapDosCommandsToNt\n  Hint on symbols that are defined and could potentially match:\n    _ResetEmulatedLocalBusyState@12\nvrdlc5c.obj : error LNK2019: unresolved external symbol _InitializeEventHandler referenced in function _InitializeAdapterSupport\n  Hint on symbols that are defined and could potentially match:\n    _InitializeEventHandler@0\nvrdlc5c.obj : error LNK2019: unresolved external symbol _InitiateRead referenced in function _InitializeAdapterSupport\n  Hint on symbols that are defined and could potentially match:\n    _InitiateRead@8\nvrdlcpst.obj : error LNK2019: unresolved external symbol _LlcCommand@12 referenced in function _VrDlcHwInterrupt@0\n  Hint on symbols that are defined and could potentially match:\n    _LlcCommand\nvrdlcpst.obj : error LNK2019: unresolved external symbol _BufferFree@12 referenced in function _VrDlcHwInterrupt@0\n  Hint on symbols that are defined and could potentially match:\n    _BufferFree\nvrdlcpst.obj : error LNK2019: unresolved external symbol _GetBuffers@24 referenced in function _ProcessReceiveFrame@16\n  Hint on symbols that are defined and could potentially match:\n    _GetBuffers\nvrdlcpst.obj : error LNK2019: unresolved external symbol _FreeBuffers@12 referenced in function _VrDlcHwInterrupt@0\n  Hint on symbols that are defined and could potentially match:\n    _FreeBuffers\nvrdlcpst.obj : error LNK2019: unresolved external symbol _CalculateBufferRequirement@20 referenced in function _ProcessReceiveFrame@16\n  Hint on symbols that are defined and could potentially match:\n    _CalculateBufferRequirement\nvrdlcpst.obj : error LNK2019: unresolved external symbol _CopyFrame@20 referenced in function _ProcessReceiveFrame@16\n  Hint on symbols that are defined and could potentially match:\n    _CopyFrame\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p123\\abi\\stdcall\\VDMREDIR.dll : fatal error LNK1120: 42 unresolved externals\n"
+  }
+}

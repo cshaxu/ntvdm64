@@ -868,3 +868,7 @@ P121 [DLC review](r1259-r1260-vrdlc5c-review.json):R1259 line mapping confirmed,
 P122 [DLC line review](r1261-r1263-dlc-lines-review.json):3 files confirmed already correct;mirror delta0.
 [Checkpoint](batch-p122-checkpoint.json):431+1401 selected lines and3 header consumers;source unchanged,P118 published11x2/Full19 reused.
 171/365 files;1267 reviewed:479 restored/confirmed,8 approved,780 pending,1453 unreviewed.
+
+P123 [redirector ABI review](r1264-r1265-redir-abi-review.json):vrdll line mapping confirmed;vrica mirror4->2(net-2),residual pending.
+[Checkpoint](batch-p123-checkpoint.json):actual original and /Gz negative links,4 object identities;P118 publication/Full reused.
+173/365 files;1269 reviewed:480 restored/confirmed,8 approved,781 pending,1451 unreviewed.
