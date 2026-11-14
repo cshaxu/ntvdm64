@@ -1,0 +1,64 @@
+{
+  "path": "src/mvdm-host/wow32/fastwow.h",
+  "source_sha256": "8a1d959854751dcba6a8b9f624e28d92b41836ded4b406968de34f9a18852608",
+  "original_sha256": "e285af8f5c17ad640e47ad1a7d0d5089604cdff15c4dcc4b6b4b7d96b63d5eec",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "mirror_metric": {
+    "added": 4,
+    "deleted": 45,
+    "total": 49
+  },
+  "mirror_delta": 0,
+  "selected_proof": [
+    {
+      "configuration": "normal",
+      "selected_lines": [
+        [
+          44,
+          "extern void FastWowFirstCode(void);"
+        ],
+        [
+          45,
+          "extern void FixLocks(void);"
+        ]
+      ],
+      "mismatches": 0
+    },
+    {
+      "configuration": "unicode",
+      "selected_lines": [
+        [
+          44,
+          "extern void FastWowFirstCode(void);"
+        ],
+        [
+          45,
+          "extern void FixLocks(void);"
+        ]
+      ],
+      "mismatches": 0
+    }
+  ],
+  "conclusion": "No selected semantic diff; four excluded bodies remain #error; original structure and selected logical lines match. No product source change.",
+  "context": "Actual WOW compiler cflags and complete precomp prefix at fastwow inclusion; normal and control_user Unicode flags; FASTBOPPING==0 asserted.",
+  "excluded_original_ranges": [
+    [
+      15,
+      17
+    ],
+    [
+      25,
+      27
+    ],
+    [
+      31,
+      37
+    ],
+    [
+      49,
+      80
+    ]
+  ],
+  "line_directives": "Retained original line numbers verified in selected preprocessor output and source structure; disabled #line not relied upon.",
+  "limits": "Header-context preprocessing, not a new runtime test. Original excluded instructions intentionally not restored."
+}

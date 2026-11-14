@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1301 points reviewed:493 restored/confirmed delivered,0 local,8 approved,
-800 qualified pending,0 restores decided;1419 unreviewed. Files181/365 audited,184 remain.
-P129 vrremote.c:cached build,publish11x2,focused4/Full19 passed;Git follows.
+1302 points reviewed:494 restored/confirmed delivered,0 local,8 approved,
+800 qualified pending,0 restores decided;1418 unreviewed. Files182/365 audited,183 remain.
+P130 fastwow.h verified;source unchanged;P129 package/Full reused.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
