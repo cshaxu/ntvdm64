@@ -1,0 +1,43 @@
+{
+  "status": "cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "sha256": "f8e19853b3da68601daf8882f32bd506f50ec131d5e608e2dea1275a6100edd9"
+    }
+  ],
+  "mirror_metric": {
+    "before": {
+      "added": 65,
+      "deleted": 1445,
+      "total": 1510
+    },
+    "minimized": {
+      "added": 60,
+      "deleted": 1442,
+      "total": 1502
+    }
+  },
+  "restored": [
+    "T483-R1119"
+  ],
+  "guest_changed": false,
+  "publication": {
+    "status": "published",
+    "package": "385f6f57-a63a-4c0d-9d29-35cc315c9955",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build\\t483-s5-p95\\full-final\\timings.json",
+  "verification": {
+    "focused": "actual product preprocessing confirms only restored condition and diagnostic line changes;Full tests final source",
+    "actual_preprocessor": "372 text-matched original lines;two brace alignment ambiguities explicitly resolved;#error unchanged",
+    "Full": "19 gates passed;external DOS4GW fixture explicitly SKIP",
+    "limits": "No claim of every protected CRTC/window transition;retained residuals remain owner decisions"
+  }
+}

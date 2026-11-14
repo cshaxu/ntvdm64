@@ -1,0 +1,31 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+    "shared_selected_lines": 372,
+    "line_mismatches": [],
+    "alignment_ambiguities": [
+      [
+        [
+          604,
+          "}"
+        ],
+        [
+          616,
+          "}"
+        ]
+      ],
+      [
+        [
+          2048,
+          "}"
+        ],
+        [
+          2037,
+          "}"
+        ]
+      ]
+    ],
+    "resolution": "Actual preprocessed enclosing statements confirm original604 and waitForInputFocus2037 braces preserved;extra font-block616 and deleted hardware-function2048 are not counterparts",
+    "error_preserved": true
+  }
+]

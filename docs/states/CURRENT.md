@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1123 points reviewed:396 restored delivered,0 local,8 approved,
-718 qualified pending;1 restoration decided,not applied;1597 unreviewed. Files143/365 audited,222 remain.
+1125 points reviewed:397 restored delivered,0 local,8 approved,
+720 qualified pending;1595 unreviewed. Files144/365 audited,221 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -54,9 +54,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P91 package `f555e7c3-f7bd-416c-9816-135418dab3dc` published11x2; hashes match.
+P95 package `385f6f57-a63a-4c0d-9d29-35cc315c9955` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p91-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p95-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored

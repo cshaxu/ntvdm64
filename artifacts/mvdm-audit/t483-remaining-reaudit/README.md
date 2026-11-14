@@ -759,3 +759,5 @@ P92 audit-only: [nt_fulsc first three route boundaries](r1111-r1113-nt-fulsc-rou
 P93 audit-only: [hardware exclusion and shared planes](r1114-r1116-nt-fulsc-hardware-plane-review.json).nt_fulsc6/11 reviewed;3 residuals source-qualified;prior CHAIN2 controls explicitly historical. No product change;P91 remains published.1120 reviewed,716 pending,1600 unreviewed.
 
 P94 audit-only: [cursor register ownership](r1117-r1119-nt-fulsc-cursor-review.json).nt_fulsc9/11 reviewed;R1117/R1118 qualified residuals,R1119 original condition restoration decided but not applied. No product changes;P91 remains published.1123 reviewed,718 pending,1 restore decided,1597 unreviewed.
+
+P95 delivered: [final two points](r1120-r1121-nt-fulsc-final-review.json), [lines](batch-p95-line-check.json), [checkpoint](batch-p95-checkpoint.json).nt_fulsc11/11 audited;R1119 original condition restored;mirror1510->1502(-8),including retained exclusions,excluding #line. Cached full build,publish11x2/hash,Full19 passed.

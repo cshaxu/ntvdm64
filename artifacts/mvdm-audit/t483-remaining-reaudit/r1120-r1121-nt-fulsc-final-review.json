@@ -1,0 +1,25 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "points": [
+    {
+      "id": "T483-R1120",
+      "problem": "Remove retired monitor-only IVT helper",
+      "evidence": "Original nt_reset.c declaration and sole call are under MONITOR. AddTempIVTFixups writes temporary INT17 BOP code to guest address0x40000 for native BIOS printer initialization. MONITOR hardware path is explicitly excluded. Restoring this orphan function would revive deliberately removed hardware-monitor implementation,not a required CCPU caller.",
+      "minimum": "Retain whole function deletion;fix neighboring waitForInputFocus closing-brace mapping to2037."
+    },
+    {
+      "id": "T483-R1121",
+      "problem": "Reenable original updates after stream-to-video transition",
+      "evidence": "host_disable_stream_io calls ConsoleInit which disables update_alg and sets ConsoleNoUpdates. Original WINDOWED guard would leave software FULLSCREEN disabled. Original enableUpdates is necessary regardless of software presentation choice.",
+      "minimum": "Retain unconditional original enableUpdates;restore original indentation."
+    }
+  ],
+  "whole_file": "11/11 reviewed;R1119 original condition restored locally;2 indentation restorations;3 added comment lines removed;line mapping repaired;all #error unchanged",
+  "mirror_delta": -8,
+  "limits": [
+    "DIV901 and other residuals remain pending owner.",
+    "No exhaustive protected-CRTC/geometry transition matrix claimed."
+  ],
+  "counter_review": "Original MONITOR call traced in nt_reset.c;selected VGA do_new_cursor ownership confirmed;no extra state or shim.",
+  "delivery": "Cached full build,publish11x2,Full19 passed;Git delivery accompanies record"
+}

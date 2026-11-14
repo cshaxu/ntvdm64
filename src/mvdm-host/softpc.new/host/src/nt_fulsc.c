@@ -213,7 +213,7 @@ GLOBAL VOID nt_init_event_thread(VOID)
 #error Unsupported excluded original configuration
 #endif
 #line 203
-            enableUpdates();
+		enableUpdates();
     }
     else
 	enableUpdates();
@@ -337,9 +337,6 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	 * Now call video routine to set the character height, updating the
 	 * BIOS RAM as it does so.
 	 */	
-	/* DIVERGENCE(MVDM-HOST-DIV-901): software VGA displays font RAM.
-	 * A host-requested cell-height change must also select its font.
-	 * Preserve downloaded fonts when the cell height is unchanged. */
 	if (charHeight != get_char_height())
 	{
 	    extern void load_font(sys_addr, int, int, int, int);
@@ -347,6 +344,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	              charHeight == 14 ? EGA_CGMN : EGA_HIFONT,
 	              256, 0, 0, charHeight);
 	}
+#line 610
 	set_screen_height_recal( scanLines ); /* Tim Oct 92 */
 	recalc_text(charHeight);
 
@@ -994,7 +992,8 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #line 2024
 #error Unsupported excluded original configuration
 #endif
-#line 2025
+#line 2024
+    if (sc.ScreenState == WINDOWED)
     {
 #line 2026
 #ifdef MONITOR
@@ -1010,8 +1009,9 @@ VOID waitForInputFocus()
 {
     if (WaitForSingleObject(sc.FocusEvent, INFINITE))
 	ErrorExit();
-#line 2048
+#line 2037
 }
+#line 2049
 
 /***************************************************************************
  * Function:								   *
@@ -1115,7 +1115,7 @@ void host_disable_stream_io(void)
 #error Unsupported excluded original configuration
 #endif
 #line 2411
-        enableUpdates();
+	enableUpdates();
 
     MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
     host_stream_io_enabled = FALSE;
