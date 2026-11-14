@@ -1,0 +1,154 @@
+{
+  "status": "source/parser/real-link verification passed;P116 published11x2 identities and Full19 reused;Git accompanies receipt",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sources",
+      "sha256": "d98e4e87d136d13c385f1ac8c1bcda6766dd708ce2dffd1c833bb3fb9f014771"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "sha256": "283a7d60ca1e0279a884d8e1b2380f43fd9ced8f763fb28d4a9e9528da3b14c8"
+    }
+  ],
+  "mirror_delta": -6,
+  "controls": {
+    "controls_raw_identical": true,
+    "control_sha256": "a1d4444ca038c88470faaeae32a6f8ab7c60b90bf0bcd17e371c0055e913ebd6",
+    "actual_product_build_sha256": "069a42379eb9b3d6912f61c34bacb4f46af87bf80db8a7a10b3b2dee2276776c",
+    "actual_product_equals_controls_except_link_timestamps": true,
+    "normalized_fields": [
+      [
+        296,
+        4,
+        "COFF TimeDateStamp"
+      ],
+      [
+        1709844,
+        4,
+        "IMAGE_DEBUG_DIRECTORY TimeDateStamp"
+      ]
+    ]
+  },
+  "processes": {
+    "controls": {
+      "start": "2026-11-14T09:20:52.6832188-08:00",
+      "script": "build/t483-s5-p117/controls.ps1",
+      "pid": 13960
+    },
+    "sources-check": {
+      "script": "build/t483-s5-p117/sources-check.ps1",
+      "start": "2026-11-14T09:22:08.1958438-08:00",
+      "pid": 22740
+    },
+    "checks": {
+      "script": "build/t483-s5-p117/checks.ps1",
+      "pid": 5836,
+      "start": "2026-11-14T09:22:56.2655256-08:00"
+    }
+  },
+  "runtime_reuse": "P116 package aee80117-292e-442a-b7cf-b4a8da97c6d3;Full19",
+  "commands": {
+    "controls.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\ncd /d O:/repos.hobby/ntvdm64\ncl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fo\"O:/repos.hobby/ntvdm64/build/t483-s5-p117/stubs.obj\" \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/restored.c\" > \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/restored-compile.log\" 2>&1\nif errorlevel 1 exit /b 1\ncd /d O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker\nlib.exe /nologo /out:\"O:/repos.hobby/ntvdm64/build/t483-s5-p117/original-softpc-host-roots.lib\" obj/host/sim32.obj obj/host/cpucstbs.obj obj/host/nt_timer.obj obj/host/nt_ntfun.obj obj/host/nt_msscs.obj obj/host/nt_error.obj obj/host/nt_cga.obj obj/host/nt_ega.obj obj/host/nt_vga.obj obj/host/nt_input.obj obj/host/nt_graph.obj obj/host/nt_hosts.obj obj/host/nt_sound.obj obj/host/nt_bop.obj obj/host/nt_com.obj obj/host/nt_wcom.obj obj/host/nt_rez.obj obj/host/nt_sas.obj obj/host/nt_fdisk.obj obj/host/nt_unix.obj obj/host/nt_keycd.obj obj/host/nt_cpu.obj obj/host/nt_lpt.obj obj/host/nt_yoda.obj obj/host/nt_mouse.obj obj/host/nt_event.obj obj/host/nt_munge.obj obj/host/config.obj obj/host/nt_nls.obj obj/host/copy_fnc.obj \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/stubs.obj\" obj/host/nt_pif.obj obj/host/nt_fulsc.obj obj/host/nt_emm.obj obj/host/nt_eoi.obj obj/host/nt_vdd.obj obj/host/nt_sec.obj obj/host/nt_thred.obj obj/host/nt_det.obj obj/host/nt_umb.obj obj/host/fprt.obj obj/host/nt_rflop.obj obj/host/nt_inthk.obj obj/host/nt_reset.obj obj/host/nt_mem.obj obj/host/ntvdm_entry.obj > \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/archive.log\" 2>&1\nif errorlevel 1 exit /b 1\nlink.exe /nologo /subsystem:console /opt:ref /out:\"O:/repos.hobby/ntvdm64/build/t483-s5-p117/before/ntvdm.exe\" /map:\"O:/repos.hobby/ntvdm64/build/t483-s5-p117/before/ntvdm.exe.map\" /def:generated/ntvdm-wow32-provider.def worker-base.lib ntvdm-vm-frontend.lib common-frontend-base.lib lib-pipe.lib common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj obj/adapter-redir/mvdm_redirector_worker_copy.obj obj/adapter-redir/mvdm_redirector_async.obj obj/adapter-wow-worker/wow_gdi_alias.obj obj/adapter-wow-worker/wow_user_runtime.obj obj/adapter-wow-worker/wow_user_session_binding.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib common-base-srv-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib common-base-srv-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib lib-process-launch.lib lib-crt-compat.lib common-worker-thread.lib lib-thread.lib lib-process-hook.lib lib-file.lib lib-process-image.lib lib-handle.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/before-link.log\" 2>&1\necho %errorlevel% > \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/before-link.exit\"\nlink.exe /nologo /subsystem:console /opt:ref /out:\"O:/repos.hobby/ntvdm64/build/t483-s5-p117/restored/ntvdm.exe\" /map:\"O:/repos.hobby/ntvdm64/build/t483-s5-p117/restored/ntvdm.exe.map\" /def:generated/ntvdm-wow32-provider.def worker-base.lib ntvdm-vm-frontend.lib common-frontend-base.lib lib-pipe.lib common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj obj/adapter-redir/mvdm_redirector_worker_copy.obj obj/adapter-redir/mvdm_redirector_async.obj obj/adapter-wow-worker/wow_gdi_alias.obj obj/adapter-wow-worker/wow_user_runtime.obj obj/adapter-wow-worker/wow_user_session_binding.obj worker-shell.lib worker-command-bindings.lib \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/original-softpc-host-roots.lib\" original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib common-base-srv-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib common-base-srv-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/original-softpc-host-roots.lib\" obj/host/softpc-resource.res common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib lib-process-launch.lib lib-crt-compat.lib common-worker-thread.lib lib-thread.lib lib-process-hook.lib lib-file.lib lib-process-image.lib lib-handle.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib > \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/restored-link.log\" 2>&1\necho %errorlevel% > \"O:/repos.hobby/ntvdm64/build/t483-s5-p117/restored-link.exit\"\nexit /b 0\n",
+    "sources-check.ps1": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n $tokens=$null;$errors=$null\n $ast=[Management.Automation.Language.Parser]::ParseFile((Resolve-Path tools/build/New-T310OriginalSoftpcNinja.ps1),[ref]$tokens,[ref]$errors)\n if($errors.Count){throw 'Generator parse errors'}\n $fn=$ast.Find({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst] -and $n.Name -eq 'Get-OriginalSources'},$true)\n if(!$fn){throw 'Original parser missing'}\n . ([scriptblock]::Create($fn.Extent.Text))\n $before=@(Get-OriginalSources build/t483-s5-p117/sources-before)\n $after=@(Get-OriginalSources build/t483-s5-p117/sources-final)\n if(Compare-Object $before $after -SyncWindow 0){throw 'Selected sources changed'}\n if($after -contains 'nt_aorc.c'){throw 'Excluded source selected'}\n [ordered]@{count=$after.Count;equal=$true;selected=$after;provider='tools/build/New-T310OriginalSoftpcNinja.ps1:Get-OriginalSources';scope='Same parser shared by x86 and x64;T313 reads CCPU manifest only'}|ConvertTo-Json -Depth 5|Set-Content build/t483-s5-p117/sources-check.json\n $node='C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/node/bin/node.exe'\n & $node tools/audit/Verify-VdmTibStorage.mjs build/t483-s5-p117/restored/ntvdm.exe.map build/.ninja/msvc-x86-release/worker/obj/adapter-monitor/mvdm_vdm_tib.obj\n if($LASTEXITCODE){throw 'Restored storage guard failed'}\n 0|Set-Content build/t483-s5-p117/sources-check.exit\n} catch {$_|Out-String|Write-Output;1|Set-Content build/t483-s5-p117/sources-check.exit;exit 1}\n",
+    "checks.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\ncd /d \"O:\\repos.hobby\\ntvdm64\"\ncl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fo\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/before.obj\" \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/before.c\" > \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/before-compile.log\" 2>&1\nif errorlevel 1 exit /b 1\ncl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fo\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/final.obj\" \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/final.c\" > \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/final-compile.log\" 2>&1\nif errorlevel 1 exit /b 1\ncl.exe /nologo /TC /P /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/original.i\" \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/original.c\" > \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/original-preprocess.log\" 2>&1\nif errorlevel 1 exit /b 1\ncl.exe /nologo /TC /P /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/final.i\" \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/final.c\" > \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p117/final-preprocess.log\" 2>&1\nif errorlevel 1 exit /b 1\nexit /b 0\n"
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "FE6A5BF5FB6DE74AB1DE05A32FDEE0064D02C7CFE3D9F122D7142CC4830289F9",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "13A7BE8CDBB25833ACDC61D32C0969946D658AC7F803074F331C26B8CCCDA4C1"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "676176D6D0587630E571B63C1E45853F069E005F41E69C8C1F55C67041897240",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "C5BBC55BD03F4A04CF43EA7FA4490D4AF1532A209DC987056A83550F9E2F6138"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "0BEDF0889F072B0958D3112D7D029ED746668596F219E718ECB1658A66749D43",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "44DF67357761E87AF2B6C71DB32D83BCE2EEF2A0937EE09D49963E6ADB67A257"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "3D521B6408AB11D2167F532A3EC8BBD6C3E443DE3047FA8D7EA0BF27F16BC8B9",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "569183A2C39F7A37343E70A2B447288C35E6492B7241E7848099878B40EED3CD"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "E126D0AEA32625B531C42A9D28A4905D73AF19D240A578D016F0689EB97A00D9",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "069A42379EB9B3D6912F61C34BACB4F46AF87BF80DB8A7A10B3B2DEE2276776C"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "E08ACE149497779C96A52C970ED68441C6157AC58D448D4BA69B92088FA58AC4",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "4ADCB994E47F955DC037A99BC2CF812A0B550C327074F74FA06BC495BCDA3CF4"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "08DA4C99437ECFDB1BBFBDEA386A3FBA7AD4395319B271E3E6DE8F22D29A526B",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "A332E2221768296916E343A5878D914F589D92BDF66662F7D3D829CF747998CF",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "5AB7126E7D0294719813365D4F0C5D988C459E57C3C2974E3FE25104B4B4CB6C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "32582E8EB06BD282A5E96B11568474506C03DAF0043D9E3D240A60EFB8E186FC",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "16F84DEB76D13C0685000D63FC3A6F04CF60CD6EE96CC7F8997B8E6EF3E08416"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "0D6F7E89C72A0827F009F035A6F45427ABC58599837912959EC78DC9329458F4",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "6E602A0D082B8AD05DDD16B6D96DED00D1C9E938A54C6E1BD85FA307C3C46FFD"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "906778581612E3CF0564D8BB967B6E9EED3353C3EAC0B47066C2EC58DA741F34",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "reused_runtime_evidence": "batch-p116-checkpoint.json",
+  "no_new_full_claim": true,
+  "governance": "close-checks.exit0:documentation governance,relative links,git diff --check passed",
+  "governance_process": {
+    "script": "build/t483-s5-p117/close-checks.ps1",
+    "start": "2026-11-14T09:26:30.2821685-08:00",
+    "pid": 31836
+  }
+}

@@ -842,3 +842,8 @@ P116 [SIM32 review](r1242-r1248-sim32-review.json):whole-file mirror151->126(-25
 [Checkpoint](batch-p116-checkpoint.json);[line proof](batch-p116-line-check.json).
 161/365 files;1252 reviewed:471 delivered restorations,8 approved,773 pending,1468 unreviewed.
 Final compile,156 original logical lines,cached full build,publish11x2,Full19 and memory/descriptor fixtures pass;Git accompanies receipt.
+
+P117 [sources/stubs review](r1249-r1250-original-restoration.json):two original declarations restored;mirror net-6.
+[Checkpoint](batch-p117-checkpoint.json);[line proof](batch-p117-line-check.json).
+163/365 files;1254 reviewed:473 delivered restores,0 local,8 approved,773 pending,1466 unreviewed.
+Real source-list parser unchanged;full product link before/after raw-identical;204 selected original lines exact. Published11x2 identities verified;P116 Full19 reused;Git accompanies receipt.

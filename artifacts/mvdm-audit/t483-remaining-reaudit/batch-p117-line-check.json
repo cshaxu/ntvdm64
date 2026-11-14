@@ -1,0 +1,10 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+    "shared_selected_lines": 204,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [],
+    "excluded_error_directives_unchanged": true
+  }
+]

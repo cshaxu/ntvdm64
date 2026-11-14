@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1252 points reviewed:471 restored/confirmed delivered,0 fully restored local,8 approved,
-773 qualified pending,0 restores decided;1468 unreviewed. Files161/365 audited,204 remain.
+1254 points reviewed:473 restored/confirmed delivered,0 local,8 approved,
+773 qualified pending,0 restores decided;1466 unreviewed. Files163/365 audited,202 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -233,8 +233,10 @@ P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaini
 
 P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,one evidenced declaration residual;cached build,publish11x2,Full19 passed.
 
-P115 nt_vga.c mirror566->564(-2),comments only;941 lines and26 product object sections match. Two residuals pending;P114 publication/Full reused.
 
 P116 SIM32 whole-file reduction151->126(-25) applied;156 logical lines exact.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1242-r1248-sim32-review.json);
 cached full build,publish11x2,Full19 and memory/descriptor fixtures pass;Git accompanies receipt;seven residuals pending owner.
+
+P117 sources/stubs declarations restored,mirror-6;parser/real-link identity and204 lines verified.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1249-r1250-original-restoration.json);published identity verified,P116 Full19 reused;Git accompanies receipt.
