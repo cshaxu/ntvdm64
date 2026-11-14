@@ -1,0 +1,23 @@
+[
+  {
+    "file": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+    "before": 123,
+    "after": 119,
+    "delta": -4,
+    "tokens_equal": true,
+    "errors_unchanged": true,
+    "line_checks": 117,
+    "line_mismatches": [],
+    "CRLF": true
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+    "before": 537,
+    "after": 207,
+    "delta": -330,
+    "line_checks": 250,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]

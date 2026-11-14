@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-976 points reviewed:349 restored delivered,6 approved,
-621 qualified pending;1744 unreviewed. Files127/365 complete,238 remain.
+1000 points reviewed:356 restored delivered,6 approved,
+638 qualified pending;1720 unreviewed. Files129/365 complete,236 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -54,9 +54,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P71 package `1ffe9df3-e10b-4ae0-8180-cb47b900270e` published11x2; hashes match.
+P76 package `65a96961-1c27-43be-bdae-d29aa11c38d4` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p71-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p76-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -213,21 +213,18 @@ sevid016:R0608-R0611 qualified. sevid017:11/11 qualified. sevid018:9/9;LF restor
 P66 verified/published(diff-127);P67 ios3/3;main4/4 diff-18;cached build/publish11x2 and Full passed;next R0823.
 
 Owner requests committing/pushing the current tree after stopping RDP investigation.
-Latest published package is e08de2fa-ed4f-409e-bf87-376e59bb3756; Full19 passed,
+That RDP checkpoint package was e08de2fa-ed4f-409e-bf87-376e59bb3756; Full19 passed,
 and the owner accepts the RDP input fix. The reported exit is suspected to be
 concurrent-test interference; causality is unconfirmed. See the
 [RDP checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/rdp-input-checkpoint.json).
 
-P68 terminat.c2/2,xt.c4/4,ica.c3/3,idetect.c1/1:plus cga.c2/2;mirror diff-31;cached build/publish11x2/Full passed;Git delivery accompanies this record;next R0835.
-
-P69 three video files7/7;2 original casts restored;diff-12;cached build/publish11x2/Full19 passed;Git delivery accompanies receipt;next R0842.
-P70 ega_writ.c4/4:2 points restored(8 declarations),2 residuals;diff-21;cached build/publish11x2/Full19 passed;Git delivery accompanies receipt;next R0846.
-P71 delivered:three video files,mirror diff-114;Full19 passed.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0915-r0940-gfx-final-review.json).
-P72 delivered:two files,mirror diff-12;cached build,publish11x2,Full passed.
-P73 delivered:vga_mode.c3/3;mirror diff-6;Full19 passed.
-P74 delivered:vga_prts.c4/4;mirror diff-22;Full19 passed.
+P68-P74 delivered;indexed batch receipts preserve mirror deltas and Full results.
 P75:video.c16/16 complete;mirror diff-10;3 original restorations delivered,
 13 qualified residuals pending owner. Original-line check0;#error unchanged.
 Cached full build,publish11x2,Full and governance passed;Git delivery accompanies
-checkpoint. Next R0970;S5 remains active.
+checkpoint. S5 remains active.
+
+P76:cfpu_def.h15/15 and host_cpu.h9/9 complete;mirror diff-334.
+Seven original restorations delivered;17 qualified residuals;#error unchanged;
+367 original-line checks0 mismatch. Cached build,publish11x2,Full passed;
+Git delivery accompanies checkpoint;next R0994.

@@ -1,0 +1,96 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/inc/host_cpu.h",
+  "points": {
+    "T483-R0985": {
+      "before": "+3/-0",
+      "after": "+2/-0",
+      "evidence": "Original ios.c generic_outw assigns temp.X=value then emits byte.low followed by byte.high. Actual x8665536-value probe:original65280 mismatches,current0. No new I/O algorithm;necessary host byte order overlay. Unsupported alternative remains#error.",
+      "decision": "minimized residual pending owner"
+    },
+    "T483-R0986": {
+      "before": "+3/-1",
+      "after": "+3/-1",
+      "evidence": "Original ios.c generic_outw assigns temp.X=value then emits byte.low followed by byte.high. Actual x8665536-value probe:original65280 mismatches,current0. No new I/O algorithm;necessary host byte order overlay. Unsupported alternative remains#error.",
+      "decision": "qualified residual pending owner"
+    },
+    "T483-R0987": {
+      "before": "+2/-22",
+      "after": "+0/-0 selected content",
+      "evidence": "Original cpu4.h includes host_cpu.h before cpu4gen.h. Generated original CCPU macros override old register macros before use;unused extern declarations create no link references. Actual ios/nt_cpu/stubs selected-context before/restored compilation passes;71+21+81=173 non-debug COFF sections and symbol-resolved relocations equal. Retain#error for unsupported CPU30/A2CPU;no alternate executor admitted.",
+      "decision": "restore original selected content"
+    },
+    "T483-R0988": {
+      "before": "+13/-39",
+      "after": "+0/-0 selected content",
+      "evidence": "Original cpu4.h includes host_cpu.h before cpu4gen.h. Generated original CCPU macros override old register macros before use;unused extern declarations create no link references. Actual ios/nt_cpu/stubs selected-context before/restored compilation passes;71+21+81=173 non-debug COFF sections and symbol-resolved relocations equal. Retain#error for unsupported CPU30/A2CPU;no alternate executor admitted.",
+      "decision": "restore original selected content"
+    },
+    "T483-R0989": {
+      "before": "+1/-17",
+      "after": "+0/-0 selected content",
+      "evidence": "Original cpu4.h includes host_cpu.h before cpu4gen.h. Generated original CCPU macros override old register macros before use;unused extern declarations create no link references. Actual ios/nt_cpu/stubs selected-context before/restored compilation passes;71+21+81=173 non-debug COFF sections and symbol-resolved relocations equal. Retain#error for unsupported CPU30/A2CPU;no alternate executor admitted.",
+      "decision": "restore original selected content"
+    },
+    "T483-R0990": {
+      "before": "+2/-40",
+      "after": "+0/-0 selected content",
+      "evidence": "Original cpu4.h includes host_cpu.h before cpu4gen.h. Generated original CCPU macros override old register macros before use;unused extern declarations create no link references. Actual ios/nt_cpu/stubs selected-context before/restored compilation passes;71+21+81=173 non-debug COFF sections and symbol-resolved relocations equal. Retain#error for unsupported CPU30/A2CPU;no alternate executor admitted.",
+      "decision": "restore original selected content"
+    },
+    "T483-R0991": {
+      "before": "+1/-16",
+      "after": "+0/-0 selected content",
+      "evidence": "Original cpu4.h includes host_cpu.h before cpu4gen.h. Generated original CCPU macros override old register macros before use;unused extern declarations create no link references. Actual ios/nt_cpu/stubs selected-context before/restored compilation passes;71+21+81=173 non-debug COFF sections and symbol-resolved relocations equal. Retain#error for unsupported CPU30/A2CPU;no alternate executor admitted.",
+      "decision": "restore original selected content"
+    },
+    "T483-R0992": {
+      "before": "+2/-65",
+      "after": "+0/-1 host_simulate macro",
+      "evidence": "Actual selected nt_cpu.c compile with restored host_simulate() macro fails C2054 at original direct host_simulate definition. cpu4gen.h does not override this macro. Leaving this one macro omitted while restoring all other selected declarations/macros compiles and produces identical21 non-debug nt_cpu COFF sections/relocations.",
+      "decision": "minimized residual pending owner"
+    },
+    "T483-R0993": {
+      "before": "+2/-130",
+      "after": "+0/-0 selected content",
+      "evidence": "Original cpu4.h includes host_cpu.h before cpu4gen.h. Generated original CCPU macros override old register macros before use;unused extern declarations create no link references. Actual ios/nt_cpu/stubs selected-context before/restored compilation passes;71+21+81=173 non-debug COFF sections and symbol-resolved relocations equal. Retain#error for unsupported CPU30/A2CPU;no alternate executor admitted.",
+      "decision": "restore original selected content"
+    }
+  },
+  "object_proof": {
+    "ios": {
+      "equal": true,
+      "sections": 71
+    },
+    "ntcpu": {
+      "equal": true,
+      "sections": 21
+    },
+    "stubs": {
+      "equal": true,
+      "sections": 81
+    }
+  },
+  "line_proof": {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+    "before": 537,
+    "after": 207,
+    "delta": -330,
+    "line_checks": 250,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  "negative_compile": [
+    "src/mvdm-host/softpc.new/host/src/nt_cpu.c(82): error C2054: expected '(' to follow 'host_simulate_func'",
+    "src/mvdm-host/softpc.new/host/src/nt_cpu.c(86): error C2005: #line expected a line number, found 'string'",
+    "src/mvdm-host/softpc.new/host/src/nt_cpu.c(91): error C2005: #line expected a line number, found 'string'"
+  ],
+  "byte_probe": {
+    "word-original.result.txt": "mismatches=65280/65536\n",
+    "word-current.result.txt": "mismatches=0/65536\n",
+    "endian.log": "PASS actual register byte layout and non-little-endian rejection\n"
+  },
+  "counter_review": "Warnings alone are not failure evidence. Restore original unused externs and overridden macros rather than preserving broad deletions. host_simulate is the separately demonstrated real compile failure. The restored scopes contain no hardware V86 or A2CPU code;all excluded bodies remain#error. Final whole-header diagnostic cleanup corrects pre-existing comment-line offset and removes only redundant#line.",
+  "validation": "Final source cached full x86/x64 build,11x2 publication,CVID,Full and governance passed;see batch-p76-checkpoint.json"
+}

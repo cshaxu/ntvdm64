@@ -15,9 +15,6 @@ typedef double 		FPH;
 #if !defined(HOST_BIAS)
 #define HOST_BIAS 1023
 #endif
-/* T59 host ABI: word and bitfield order must match the selected host
- * byte order. The CCPU arithmetic and Intel-memory conversion remain unchanged. */
-#line 18
 typedef struct {
 #ifdef LITTLEND
 #line 21
@@ -40,7 +37,7 @@ IU32	mant_hi:20;
 #line 26
 IU32	exp:11;
 #line 25
-IU32	sign:1;
+IU32 	sign:1;
 #else
 #line 25
 #error Unsupported excluded original configuration
@@ -79,7 +76,6 @@ FP64HI	hiword;
 
 typedef struct {
 #ifdef LITTLEND
-/* fpu.c's little-endian BCD tables initialize low word before high word. */
 #line 45
 IU32 low_word;
 #line 44

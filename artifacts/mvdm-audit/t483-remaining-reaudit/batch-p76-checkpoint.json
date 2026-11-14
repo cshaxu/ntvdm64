@@ -1,0 +1,42 @@
+{
+  "batch": "P76",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "add2c9962c13741951458354fcc314f106a1252c",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "sha256": "71d576e975b49379a2cad1cfc0f6a82579a2e81b4e096222363a70147cfb1535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "sha256": "f1e5de5a5b037b67da9b8b8a6e405f2549dd49f0f5491a912c3630328f3a536c"
+    }
+  ],
+  "mirror_diff_delta": -334,
+  "mirror_files": 2,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "65a96961-1c27-43be-bdae-d29aa11c38d4",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p76/full-final/timings.json",
+    "Full_elapsed_ms": 424413,
+    "CVID": "PASS original production vector fixture",
+    "original_line_check": "batch-p76-line-check.json",
+    "dos4gw_nesticle": "SKIP verified external fixtures unavailable",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "PASS documentation and links"
+  }
+}

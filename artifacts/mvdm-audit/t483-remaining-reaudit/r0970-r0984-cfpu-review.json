@@ -1,0 +1,131 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/inc/cfpu_def.h",
+  "points": {
+    "T483-R0970": {
+      "before": "+2/-0",
+      "after": "+0/-0",
+      "conclusion": "restore original formatting",
+      "evidence": "Two added comment lines and now-redundant #line18 removed;original logical line18 resumes naturally. Token sequence unchanged."
+    },
+    "T483-R0971": {
+      "before": "+3/-0",
+      "after": "+3/-0",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0972": {
+      "before": "+3/-2",
+      "after": "+3/-2",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0973": {
+      "before": "+2/-1",
+      "after": "+2/-1",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0974": {
+      "before": "+4/-1",
+      "after": "+4/-1",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0975": {
+      "before": "+2/-0",
+      "after": "+2/-0",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0976": {
+      "before": "+3/-1",
+      "after": "+3/-1",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0977": {
+      "before": "+2/-0",
+      "after": "+2/-0",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0978": {
+      "before": "+3/-1",
+      "after": "+3/-1",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0979": {
+      "before": "+3/-0",
+      "after": "+2/-0",
+      "conclusion": "minimized residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0980": {
+      "before": "+3/-1",
+      "after": "+3/-1",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0981": {
+      "before": "+2/-0",
+      "after": "+2/-0",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0982": {
+      "before": "+3/-1",
+      "after": "+3/-1",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual MSVC x86 /MT /O2 ABI probe with original IU32/IS32/IU16 types. Each of six original structure restorations independently reads the known IEEE/integer bytes incorrectly;current reads all correctly. Original fpu.c directly reads FPH through FPHOST in CalcTagword/CVTFPHI64, extended fields in conversion, and its LITTLEND BCD tables initialize low word first. No new guest/runtime failure claim."
+    },
+    "T483-R0983": {
+      "before": "+3/-3",
+      "after": "+3/-3",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual x86 CRT after clear and all exceptions masked: original _controlfp queries report7 although status is0;current _statusfp reports0. Original PostCheckOUP then sets guest O/P flags from those values. UCRT _SW and _EM values match for O/U/P;the difference is status versus control,not bit numbering."
+    },
+    "T483-R0984": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "conclusion": "qualified residual pending owner",
+      "evidence": "Actual x86 CRT clean-state control: original HostClearExceptions changes exception mask8001f to80000;current retains8001f. Original fpu.c calls this before pow/arithmetic,then handles guest masks in PostCheckOUP;unmasking host exceptions is not guest exception delivery. No deliberately unmasked exceptional operation executed. Current _clear87 clears sticky flags and _control87 masks host exceptions;both operations have separate necessary roles."
+    }
+  },
+  "line_and_token_proof": {
+    "file": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+    "before": 123,
+    "after": 119,
+    "delta": -4,
+    "tokens_equal": true,
+    "errors_unchanged": true,
+    "line_checks": 117,
+    "line_mismatches": [],
+    "CRLF": true
+  },
+  "probe_procedure": "Eight private copies: current,original,and each of six structure-only original restorations. MSVC x86 /MT /O2;actual original typedef widths. No guest changes;no product behavior change;normal clean-state CRT tests restore masks before return.",
+  "probe_source": "\n#include <stdio.h>\n#include <stddef.h>\n#include <string.h>\n#include <float.h>\ntypedef unsigned long IU32;\ntypedef signed long IS32;\ntypedef unsigned short IU16;\ntypedef unsigned int IUH;\n#define VOID void\n#define LITTLEND 1\n#define NTVDM 1\n#include \"current.h\"\nint main(void) {\n float s=-1.5f; double d=-1.5; FP32 a; FP64 z; FP80 e; FPU_I64 i;\n unsigned char ext[10]={0,0,0,0,0,0,0,0xc0,0xff,0xbf};\n unsigned char iv[8]={0x78,0x56,0x34,0x12,0xfe,0xff,0xff,0xff};\n unsigned int got,after,mask; int ok=0;\n memcpy(&a,&s,4);memcpy(&z,&d,8);memset(&e,0,sizeof(e));memcpy(&e,ext,10);memcpy(&i,iv,8);\n printf(\"FP32 sign=%u exp=%u mant=%x\\n\",a.sign,a.exp,a.mant);\n printf(\"FP64 sign=%u exp=%u hi=%x lo=%x offsets=%u,%u\\n\",z.hiword.sign,z.hiword.exp,z.hiword.mant_hi,z.mant_lo,(unsigned)offsetof(FP64,mant_lo),(unsigned)offsetof(FP64,hiword));\n printf(\"FP80 sign=%u exp=%u hi=%x lo=%x offsets=%u,%u,%u\\n\",e.sign_exp.sign,e.sign_exp.exp,e.mant_hi,e.mant_lo,(unsigned)offsetof(FP80,mant_lo),(unsigned)offsetof(FP80,mant_hi),(unsigned)offsetof(FP80,sign_exp));\n printf(\"I64 high=%d low=%x offsets=%u,%u\\n\",i.high_word,i.low_word,(unsigned)offsetof(FPU_I64,low_word),(unsigned)offsetof(FPU_I64,high_word));\n ok=(a.sign==1&&a.exp==127&&a.mant==0x400000&&z.hiword.sign==1&&z.hiword.exp==1023&&z.hiword.mant_hi==0x80000&&z.mant_lo==0&&e.sign_exp.sign==1&&e.sign_exp.exp==16383&&e.mant_hi==0xc0000000&&e.mant_lo==0&&i.high_word==-2&&i.low_word==0x12345678);\n _clear87();_control87(_MCW_EM,_MCW_EM);\n got=HostGetOverflowException()|HostGetUnderflowException()|HostGetPrecisionException();\n mask=_control87(0,0)&_MCW_EM;\n HostClearExceptions();after=_control87(0,0)&_MCW_EM;\n _clear87();_control87(_MCW_EM,_MCW_EM);\n printf(\"layout_ok=%d clean_exception_queries=%x mask_before=%x mask_after_clear=%x expected_mask=%x\\n\",ok,got,mask,after,_MCW_EM);\n return 0;\n}\n",
+  "outputs": {
+    "current.result.txt": "FP32 sign=1 exp=127 mant=400000\nFP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4\nFP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8\nI64 high=-2 low=12345678 offsets=0,4\nlayout_ok=1 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f\n",
+    "original-FP32.result.txt": "FP32 sign=0 exp=0 mant=5fe000\nFP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4\nFP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8\nI64 high=-2 low=12345678 offsets=0,4\nlayout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f\n",
+    "original-FP64.result.txt": "FP32 sign=1 exp=127 mant=400000\nFP64 sign=0 exp=0 hi=0 lo=bff80000 offsets=4,0\nFP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8\nI64 high=-2 low=12345678 offsets=0,4\nlayout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f\n",
+    "original-FP64HI.result.txt": "FP32 sign=1 exp=127 mant=400000\nFP64 sign=0 exp=0 hi=bff80 lo=0 offsets=0,4\nFP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8\nI64 high=-2 low=12345678 offsets=0,4\nlayout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f\n",
+    "original-FP80.result.txt": "FP32 sign=1 exp=127 mant=400000\nFP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4\nFP80 sign=1 exp=16383 hi=0 lo=c0000000 offsets=4,0,8\nI64 high=-2 low=12345678 offsets=0,4\nlayout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f\n",
+    "original-FP80SE.result.txt": "FP32 sign=1 exp=127 mant=400000\nFP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4\nFP80 sign=1 exp=24575 hi=c0000000 lo=0 offsets=0,4,8\nI64 high=-2 low=12345678 offsets=0,4\nlayout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f\n",
+    "original-FPU_I64.result.txt": "FP32 sign=1 exp=127 mant=400000\nFP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4\nFP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8\nI64 high=305419896 low=fffffffe offsets=4,0\nlayout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f\n",
+    "original.result.txt": "FP32 sign=0 exp=0 mant=5fe000\nFP64 sign=0 exp=0 hi=0 lo=bff80000 offsets=4,0\nFP80 sign=1 exp=24575 hi=0 lo=c0000000 offsets=4,0,8\nI64 high=305419896 low=fffffffe offsets=4,0\nlayout_ok=0 clean_exception_queries=7 mask_before=8001f mask_after_clear=80000 expected_mask=8001f\n"
+  },
+  "production_call_chain": [
+    "fpu.c::CalcTagword/CVTFPHI64 reinterpret FPH bytes using FPHOST",
+    "fpu.c original extended conversion reads FP80SE/FP80 fields",
+    "fpu.c LITTLEND BCD tables and CVTI64FPH high*2^32+low",
+    "fpu.c arithmetic -> HostClearExceptions -> math -> PostCheckOUP -> NpxControl/NpxStatus/NpxException"
+  ],
+  "counter_review": "Original declaration-order restore fails independently for every type;restoring only status or clear remains incorrect. Moving byte/bit corrections into every original consumer increases complexity and mirror diff. No shorter faithful macro combines clearing pending flags and masking traps. Current arithmetic retained. Added conditional wrappers retained because excluded #error must remain.",
+  "limits": [
+    "This proves selected host ABI/status semantics,not new full x87 guest acceptance.",
+    "Format-only final header tokens equal reviewed current;P75 remains published runtime."
+  ],
+  "validation": "Final source cached full x86/x64 build,11x2 publication,CVID,Full and governance passed;see batch-p76-checkpoint.json"
+}
