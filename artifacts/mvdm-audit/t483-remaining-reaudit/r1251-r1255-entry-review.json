@@ -1,0 +1,127 @@
+{
+  "status": "Whole-file minimization built,published11x2 and Full19 passed;Git accompanies receipt",
+  "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+  "original": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/softpc.new/obj.vdm/ntvdm.c",
+    "git_sha256": "ad5898bd47082cd788bcc6fb81d7be13bdb454ad2ce101ad9a124e82514ee9ee",
+    "checkout_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+    "raw_equal": false,
+    "newline_normalized_equal": true
+  },
+  "points": [
+    {
+      "review_id": "T483-R1251",
+      "problem": "Worker entry declarations",
+      "before": "+1/-0",
+      "after": "+1/-0",
+      "delta": 0,
+      "evidence": "mvdm_standalone_worker.h supplies typed begin/escape/finish declarations and setjmp. Original main relies on NT4 process/client initialization outside this TU. Current NTSRV registration, guest-memory/thread binding and CsrPortHeap initialization are absent from the original main and host_main.",
+      "decision": "Retain one explicit include; do not force-include it globally or introduce another entry.",
+      "disposition": "qualified pending owner decision; minimization directly authorized",
+      "current_range": "physical13;original insertion after12"
+    },
+    {
+      "review_id": "T483-R1252",
+      "problem": "CpuEnv product registry binding",
+      "before": "+1/-0",
+      "after": "+1/-0",
+      "delta": 0,
+      "evidence": "Original CpuEnvInit opens the native HKLM Wow/CpuEnv key then enumerates it. Native NtOpenKey cannot read the package NTVDM.REG overlay. Existing sole provider mvdm_shadow_registry.c loads system32/NTVDM.REG and enumerates its section before the readonly host snapshot. Removing include would bypass the approved provider; original enumeration and defaults remain unchanged.",
+      "decision": "Retain one explicit same-shaped mapping include; no second reader or system registry write.",
+      "disposition": "qualified pending owner decision; minimization directly authorized",
+      "current_range": "physical14;original insertion after12"
+    },
+    {
+      "review_id": "T483-R1253",
+      "problem": "Standalone worker initialization and nonlocal completion",
+      "before": "+11/-0",
+      "after": "+6/-0",
+      "delta": -5,
+      "evidence": "Without begin, CsrPortHeap remains NULL whereas original csrutil.c:CsrAllocateCaptureBuffer calls RtlAllocateHeap(CsrPortHeap,...); no worker registration/session binding/guest-memory service is established. Without live setjmp frame, session_terminate_current cannot return through explicit cleanup. Original NT4 ExitProcess boundary is replaced by NTSRV-coordinated worker completion, not by a second emulator.",
+      "decision": "Delete three explanation lines and one extra blank; initialize bootstrap at its declaration, eliminating one statement. Keep original ret=-1, begin/error ordering and live outer escape frame.",
+      "disposition": "qualified pending owner decision; minimization directly authorized",
+      "current_range": "physical42-47;original insertion after35"
+    },
+    {
+      "review_id": "T483-R1254",
+      "problem": "Coordinated worker retirement",
+      "before": "+2/-1",
+      "after": "+2/-1",
+      "delta": 0,
+      "evidence": "Original return ret bypasses NtvdmAuthorizeExit and mvdm_standalone_worker_cleanup: observer/lifecycle stop, VM producers/frontend release, escape disarm, guest memory/registry/thread disposal and worker_base_disconnect. Original host_applClose precedes the escape; it does not own the standalone NTSRV connection. A helper containing setjmp and returning before host_main would leave an invalid jump target.",
+      "decision": "Keep shared finish label/call for normal return and session escape; no duplicate cleanup path.",
+      "disposition": "qualified pending owner decision; minimization directly authorized",
+      "current_range": "physical76-77;original63"
+    },
+    {
+      "review_id": "T483-R1255",
+      "problem": "DbgBreakPoint x86 ABI",
+      "before": "+5/-1",
+      "after": "+1/-1",
+      "delta": -4,
+      "evidence": "Actual supported host_cflags compile: current NTAPI succeeds; exact original VOID fails C2373 at logical77. /Gz succeeds compilation but changes original calls _host_main to _host_main@8, _TimerInit to _TimerInit@0 and _nls_init to _nls_init@0, plus worker interfaces. ntrtl.h declares DbgBreakPoint NTAPI; local definition must agree without changing other ABI.",
+      "decision": "Delete four explanatory comment lines; retain only VOID NTAPI and original #line77. Do not globalize stdcall or add wrappers.",
+      "disposition": "qualified pending owner decision; minimization directly authorized",
+      "current_range": "physical91;original76"
+    }
+  ],
+  "mirror_metric": {
+    "before": {
+      "added": 24,
+      "deleted": 12,
+      "total": 36
+    },
+    "after": {
+      "added": 15,
+      "deleted": 12,
+      "total": 27
+    }
+  },
+  "mirror_delta": -9,
+  "metric_scope": "Original-relative added+deleted lines excluding #line; existing #error bodies included unchanged; not total source LOC. Point R1253 includes one extra blank deletion.",
+  "counter_review": [
+    "Responsibilities alone do not prove this shape: actual missing heap/registration ownership, same-shaped overlay API and x86 ABI evidence identify the unavailable original boundaries.",
+    "Moving whole main to autonomous code or global force-includes would transfer complexity rather than remove it. No new entry, provider or state machine introduced.",
+    "Local bootstrap initialization retains ret=-1, begin-before-TimerInit, error return, live setjmp and shared finish; object-code comparison and final product regression verify final code."
+  ],
+  "verification": {
+    "line_check": "158 common selected original lines exact; prior #error directives unchanged",
+    "abi_control": "build/t483-s5-p118 before.exit0,original-convention.exit2 C2373,original-convention-gz.exit0 with changed external symbol decorations",
+    "compile_flags_source": "build/.ninja/msvc-x86-release/worker/build.ninja host_cflags; ntvdm_entry edge has no override",
+    "full_gates": 19,
+    "object_comparison": {
+      "non_debug_sections_equal": true,
+      "before_sections": 13,
+      "candidate_sections": 13,
+      "differences": []
+    }
+  },
+  "limitations": [
+    "Lifecycle/registry restoration failures are concrete source-contract evidence,not newly induced runtime failures.",
+    "No new physical Win3.x or injected startup-failure acceptance claimed.",
+    "All five residuals remain pending owner; none counted as a complete restoration."
+  ],
+  "delivery": "batch-p118-checkpoint.json",
+  "call_chains": {
+    "startup": "original main -> mvdm_standalone_worker_begin -> HeapCreate/CsrPortHeap, sole registry provider, worker_base_connect, lifecycle/session/thread/guest-memory setup -> original TimerInit/CpuEnvInit/nls_init/host_main -> InitialiseDosEmulation -> host_start_cpu",
+    "completion": "mvdm_softpc_terminate_current_session -> original host_applClose -> session_terminate_current stores completion and longjmps to main -> shared finish -> NtvdmAuthorizeExit -> standalone cleanup/disconnect. Ordinary host_main fallthrough also calls original host_applClose and returns -1 to shared finish.",
+    "registry": "original CpuEnvInit -> original NtOpenKey/NtEnumerateValueKey/NtClose names -> one explicit header maps to existing product overlay provider; original list-building/getenv logic unchanged",
+    "debugger": "original local DbgBreakPoint overrides NTDLL; original selected ntrtl.h NTAPI prototype -> local VOID NTAPI -> unchanged debugger-port query and DebugBreak"
+  },
+  "source_owners": [
+    "src/mvdm-host/softpc.new/base/support/main.c:host_main",
+    "src/non-mvdm/base/ntdll/csrutil.c:CsrAllocateCaptureBuffer",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c:mvdm_softpc_terminate_current_session",
+    "src/ntvdm-exe/session/session.c:session_terminate_current",
+    "src/ntvdm-exe/softpc/mvdm_shadow_registry.c",
+    "src/non-mvdm/public/sdk/inc/ntrtl.h:DbgBreakPoint"
+  ],
+  "selected_point_metric": {
+    "before": 22,
+    "after": 13,
+    "delta": -9,
+    "unchanged_excluded_branch_difference": 14
+  }
+}

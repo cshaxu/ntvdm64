@@ -1,0 +1,120 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+    "shared_selected_lines": 158,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            36,
+            "DWORD bootstrap=mvdm_standalone_worker_begin();"
+          ],
+          [
+            37,
+            "if (bootstrap!=0L) return (int)bootstrap;"
+          ],
+          [
+            38,
+            "if (_setjmp(*mvdm_standalone_worker_termination_escape()) != 0) {"
+          ],
+          [
+            39,
+            "ret=(int)mvdm_standalone_worker_completion_code();"
+          ],
+          [
+            40,
+            "goto finish;"
+          ],
+          [
+            41,
+            "}"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            63,
+            "return ret;"
+          ]
+        ],
+        "after": [
+          [
+            63,
+            "finish:"
+          ],
+          [
+            64,
+            "return mvdm_standalone_worker_finish(ret);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            76,
+            "void"
+          ]
+        ],
+        "after": [
+          [
+            76,
+            "void __stdcall"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            286,
+            "Status = NtOpenKey(&CpuEnvKey,"
+          ]
+        ],
+        "after": [
+          [
+            286,
+            "Status = ntvdm_shadow_nt_open_key(&CpuEnvKey,"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            300,
+            "Status = NtEnumerateValueKey(CpuEnvKey,"
+          ]
+        ],
+        "after": [
+          [
+            300,
+            "Status = ntvdm_shadow_nt_enumerate_value_key(CpuEnvKey,"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            315,
+            "NtClose(CpuEnvKey);"
+          ]
+        ],
+        "after": [
+          [
+            315,
+            "ntvdm_shadow_nt_close(CpuEnvKey);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

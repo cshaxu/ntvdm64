@@ -39,12 +39,7 @@ INT host_main(INT argc, CHAR **argv);  // located in base\support\main.c
 _CRTAPI1 main(int argc, CHAR ** argv)
 {
    int ret=-1;
-   DWORD bootstrap;
-
-    /* NT4's process creation had already supplied this worker-local state.
-     * Keep the standalone replacement explicit at the original C entry rather
-     * than installing a second CRT/application entry. */
-    bootstrap=mvdm_standalone_worker_begin();
+   DWORD bootstrap=mvdm_standalone_worker_begin();
     if (bootstrap!=ERROR_SUCCESS) return (int)bootstrap;
     if (setjmp(*mvdm_standalone_worker_termination_escape()) != 0) {
         ret=(int)mvdm_standalone_worker_completion_code();
@@ -93,10 +88,6 @@ finish:
 // DbgBreakPoint here, instead of NTDLL.
 //
 
-/* DIVERGENCE(MVDM-HOST-DIV-144): the selected public NTDLL declaration
- * supplies `DbgBreakPoint` as NTAPI.  Keep this original local override and
- * all its debugger/no-debugger branches, but spell the same public calling
- * convention so the x86 declaration and definition agree. */
 VOID NTAPI
 #line 77
 DbgBreakPoint(

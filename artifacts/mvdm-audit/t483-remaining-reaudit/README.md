@@ -847,3 +847,8 @@ P117 [sources/stubs review](r1249-r1250-original-restoration.json):two original 
 [Checkpoint](batch-p117-checkpoint.json);[line proof](batch-p117-line-check.json).
 163/365 files;1254 reviewed:473 delivered restores,0 local,8 approved,773 pending,1466 unreviewed.
 Real source-list parser unchanged;full product link before/after raw-identical;204 selected original lines exact. Published11x2 identities verified;P116 Full19 reused;Git accompanies receipt.
+
+P118 [entry review](r1251-r1255-entry-review.json):mirror36->27(-9);five residuals pending owner.
+[Checkpoint](batch-p118-checkpoint.json);[line proof](batch-p118-line-check.json).
+164/365 files;1259 reviewed:473 delivered restores,8 approved,778 pending,1461 unreviewed.
+158 original logical lines exact;ABI/object controls,cached full build,publish11x2 and Full19 pass;Git accompanies receipt.
