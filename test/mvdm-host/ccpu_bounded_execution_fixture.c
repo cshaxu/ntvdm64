@@ -588,13 +588,6 @@ int main(void)
      * c_cpu_unsimulate(), which returns through the original CCPU TLS
      * simulation frame. */
     SetUnhandledExceptionFilter(fixture_unhandled_exception);
-    /* Before SAS/CCPU initialization there is no TLS simulation context.
-     * The original pointer-returning exception-frame API must decline this
-     * state with a typed null result, never an undefined native pointer. */
-    if (ccpu386ThrdExptnPtr() != NULL) {
-        fputs("exception-frame accessor accepted an uninitialized TLS context\n", stderr);
-        return 1;
-    }
     fputs("sas-init\n", stderr);
     session_initialize(&physical_owner, 2u);
     if (!session_activate(&physical_owner) ||

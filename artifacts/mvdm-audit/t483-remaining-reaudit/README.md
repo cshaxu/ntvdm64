@@ -876,3 +876,11 @@ P123 [redirector ABI review](r1264-r1265-redir-abi-review.json):vrdll line mappi
 P124 [redirector line review](r1266-r1268-redir-lines-review.json):3 files confirmed already correct;mirror delta0.
 [Checkpoint](batch-p124-checkpoint.json):264+16+456 selected lines;source unchanged,P118 published11x2/Full19 reused.
 176/365 files;1272 reviewed:483 restored/confirmed,8 approved,781 pending,1448 unreviewed.
+
+P125 in progress: [NetAPI investigation](r1269-r1279-investigation.json). Actual CCPU alias counterexample and current12-case provider baseline pass;obsolete pre-init frame assertion removed. No point disposition or delivery claimed.
+
+P125 [whole-file review](r1269-r1279-vrnetapi-review.json):mirror814->747(-67);provider16/copy14 and1448 logical lines pass. Full delivery pending;3 local restores,8 qualified residuals.
+
+P125 [frozen build checkpoint](batch-p125-checkpoint.json) and [line proof](batch-p125-line-check.json);delivery pending.
+
+P125 final cached x86/x64,publication11x2,Full19 and governance passed;Git accompanies checkpoint.177/365 files;1283/2720 points:486 restored/confirmed,8 approved,789 pending,1437 unreviewed.

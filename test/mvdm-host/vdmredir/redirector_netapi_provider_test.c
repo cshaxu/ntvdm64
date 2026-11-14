@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <lm.h>
+#include <winternl.h>
 #include "mvdm_redirector_guest_copy.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_guest_location.h"
@@ -48,6 +49,21 @@ int WINAPI fixture_oem_conversion(UINT cp, DWORD flags, LPCWCH text, int chars,
 {
     return WideCharToMultiByte(cp == CP_OEMCP ? 932 : cp, flags, text, chars,
         bytes, capacity, replacement, replaced);
+}
+/* Use the Windows encoder for a supported DBCS ANSI locale in this fixture.
+ * No process-global locale or product configuration is changed. */
+LONG NTAPI fixture_ansi_conversion(PANSI_STRING destination,
+    PUNICODE_STRING source, BOOLEAN allocate)
+{
+    int count;
+    if (allocate) return (LONG)0xc000000d;
+    count = WideCharToMultiByte(932, 0, source->Buffer,
+        source->Length / sizeof(WCHAR), destination->Buffer,
+        destination->MaximumLength - 1, NULL, NULL);
+    if (!count && source->Length) return (LONG)0xc0000023;
+    destination->Length = (USHORT)count;
+    destination->Buffer[count] = 0;
+    return 0;
 }
 static int read_memory(void *context, uint32_t address, uint8_t *bytes, uint32_t n)
 {
@@ -149,6 +165,34 @@ int main(void)
     VrGetCDNames();
     check(ax == 0x1234 && carry == 1 && freed == 2,
         "actual CDNames lease failure still frees, no invented error ABI");
+    init(5); di = 0x100;
+    wksta.wki100_computername = L"HOST";
+    wksta.wki100_langroup = L"DOMAIN";
+    user1.wkui1_logon_domain = L"LOGON";
+    put32(0x100, 0x200); put32(0x104, 0); put32(0x108, 0x220);
+    VrGetCDNames();
+    check(!strcmp((char *)memory + 0x200, "HOST") &&
+        !strcmp((char *)memory + 0x220, "LOGON") && freed == 2,
+        "actual CD null far target skipped");
+    init(5); di = 0x100;
+    wksta.wki100_computername = L"ABC"; wksta.wki100_langroup = L"XY";
+    put32(0x100, 0x300); put32(0x104, 0x301); put32(0x108, 0);
+    VrGetCDNames();
+    check(!memcmp(memory + 0x300, "AXY", 4) && freed == 2,
+        "actual CD overlapping strings use original order");
+    init(5); di = 0x100;
+    wksta.wki100_computername = L""; wksta.wki100_langroup = L"DOM";
+    put32(0x100, 0x104); put32(0x104, 0x420); put32(0x108, 0);
+    VrGetCDNames();
+    check(!strcmp((char *)memory + 0x400, "DOM") && freed == 2,
+        "actual CD destination alias preserves sequential far-field read");
+    init(5); di = 0x100;
+    wksta.wki100_computername = L"\x65e5";
+    put32(0x100, 0x200); put32(0x104, 0); put32(0x108, 0);
+    VrGetCDNames();
+    check(memory[0x200] == 0x93 && memory[0x201] == 0xfa &&
+        memory[0x202] == 0 && memory[0x203] == 0xa5 && freed == 2,
+        "actual CD DBCS output includes terminating byte");
     session_guest_memory_end(&s);
     check(session_thread_unbind(&s) && session_dispose(&s), "session cleanup");
     printf("assertions=%u failures=%u\n", assertions, failures);

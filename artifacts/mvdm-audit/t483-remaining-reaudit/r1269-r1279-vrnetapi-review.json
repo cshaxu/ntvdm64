@@ -1,0 +1,76 @@
+{
+  "status": "Whole-file review and final-source delivery gates passed;Git accompanies receipt",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/vdmredir/vrnetapi.c",
+  "points": {
+    "T483-R1269": {
+      "conclusion": "restored-local-awaiting-delivery",
+      "evidence": "Actual preprocessing confirms1448 shared selected lines at original logical numbers;excluded error directives unchanged."
+    },
+    "T483-R1270": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Bounded helper prototypes remain used by the three original API entrypoints;deleting the include removes their typed ABI declarations. Keep one explicit include,not an indirect header dependency."
+    },
+    "T483-R1271": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Original packed-structure and destination native pointers cannot span noncontiguous physical backing. Actual CCPU alias counterexample demonstrates incorrect contiguous bytes. Keep one numeric far target instead of two native pointers."
+    },
+    "T483-R1272": {
+      "conclusion": "restored-local-awaiting-delivery",
+      "evidence": "Original single ANSI buffer restored;three independent name buffers were unnecessary."
+    },
+    "T483-R1273": {
+      "conclusion": "restored-local-awaiting-delivery",
+      "evidence": "Original ANSI_STRING initialization restored;separate zeroing and buffer reassignment removed."
+    },
+    "T483-R1274": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Restore original computer-name branch/order. Bounded clear/copy remains for noncontiguous guest pages. Original len+1 fails CP932 termination control;encoded byte count passes."
+    },
+    "T483-R1275": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Restore original primary-domain branch/order. Target is read after preceding write;actual overlapping destination and pointer-field alias cases pass. Keep bounded access and encoded byte count."
+    },
+    "T483-R1276": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Restore original logon-domain branch/order and original API allocation cleanup. Remove composite autonomous writer;retain one cleanup label for failed bounded access."
+    },
+    "T483-R1277": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Original direct strcpy uses only start-address translation and fails the proven noncontiguous alias contract. Keep bounded ANSI write/result handling;remove false missing-release rationale."
+    },
+    "T483-R1278": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Actual original preprocessing expands STRLEN to strlen while public NetAPI returns wchar_t*. ASCII user in UTF16 would be measured as1,not4. Keep explicit wcslen;do not change entire translation-unit Unicode ABI."
+    },
+    "T483-R1279": {
+      "conclusion": "qualified-residual-pending-owner",
+      "evidence": "Original character-capacity expression restored:existing encoded-byte check rejects zero capacity. Original unchecked strcpy macro consumes UTF16 as bytes;bounded OEM conversion preserves encoding and capacity,with BX0 unchecked mode. Residual copy/ABI adaptation remains pending."
+    }
+  },
+  "mirror_metric": {
+    "dlc": {
+      "before": {
+        "added": 125,
+        "deleted": 689,
+        "total": 814
+      },
+      "after": {
+        "added": 99,
+        "deleted": 648,
+        "total": 747
+      }
+    }
+  },
+  "line_proof": {
+    "shared_selected_lines": 1448,
+    "line_mismatches": [],
+    "excluded_errors_unchanged": true
+  },
+  "dbcs_control": {
+    "original_length": "PASS actual VrGetUserName DBCS bound and free-once\nPASS actual VrGetUserName DBCS exact capacity\nPASS actual original character gate retained\nPASS zero capacity rejects copy and frees exactly once\nPASS empty username still needs terminating byte\nPASS empty username fits one-byte capacity\nPASS actual BX0 unchecked copy and registers retained\nPASS actual invalid destination reports failure and frees\nPASS actual NetAPI failure does not free absent allocation\nPASS actual CDNames copies and unchanged status ABI\nPASS actual CDNames lease failure still frees, no invented error ABI\nPASS actual CD null far target skipped\nPASS actual CD overlapping strings use original order\nPASS actual CD destination alias preserves sequential far-field read\nFAIL actual CD DBCS output includes terminating byte\nPASS session cleanup\nassertions=16 failures=1\n\n",
+    "final": "PASS actual VrGetUserName DBCS bound and free-once\nPASS actual VrGetUserName DBCS exact capacity\nPASS actual original character gate retained\nPASS zero capacity rejects copy and frees exactly once\nPASS empty username still needs terminating byte\nPASS empty username fits one-byte capacity\nPASS actual BX0 unchecked copy and registers retained\nPASS actual invalid destination reports failure and frees\nPASS actual NetAPI failure does not free absent allocation\nPASS actual CDNames copies and unchanged status ABI\nPASS actual CDNames lease failure still frees, no invented error ABI\nPASS actual CD null far target skipped\nPASS actual CD overlapping strings use original order\nPASS actual CD destination alias preserves sequential far-field read\nPASS actual CD DBCS output includes terminating byte\nPASS session cleanup\nassertions=16 failures=0\n\n",
+    "limit": "Actual VrGetCDNames with native Windows CP932 conversion fixture in place of RTL ANSI locale;not a whole-machine locale acceptance run."
+  },
+  "copy_result": "PASS real DBCS character needs two bytes plus NUL\nPASS DBCS byte capacity rejects without writing\nPASS exact DBCS capacity includes NUL and keeps sentinel\nPASS ASCII capacity includes NUL\nPASS ASCII exact capacity\nPASS zero capacity rejects even NUL\nPASS empty string fits one byte\nPASS caller-selected original unchecked capacity retained\nPASS out-of-memory-span copy fails\nPASS null source fails\nPASS large copy commits in two bounded chunks\nPASS second chunk failure retains first commit and rejects completion\nPASS dead guest memory fails\nPASS session cleanup\nassertions=14 failures=0\n\n",
+  "counter_review": "Rejected missing-release rationale. Original call path gives start-page native pointer,not a lease. Actual CCPU counterexample proves bounded access needed,not composite orchestration. Restore sequential target reads and one original buffer. Preserve pre-batch encoded byte length after controlled failure of original len+1. No new guest code,no new state machine,no equivalent workflow moved into helper. Full product validation still pending."
+}

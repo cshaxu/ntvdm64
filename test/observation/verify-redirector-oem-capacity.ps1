@@ -123,7 +123,7 @@ try {
         })
     } | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $out 'result.json')
     Write-Output $text
-    $count = if ($OriginalProviders) { 12 } else { 17 }
+    $count = if ($OriginalProviders) { 16 } else { 14 }
     if ($p.ExitCode -ne 0 -or $text -notmatch "assertions=$count failures=0") {
         throw 'OEM/CD assertions failed.'
     }

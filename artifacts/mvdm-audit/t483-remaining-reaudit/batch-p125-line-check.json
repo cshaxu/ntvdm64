@@ -1,0 +1,314 @@
+[
+  {
+    "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+    "shared_selected_lines": 1448,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            197,
+            "struct I_CDNames* structurePointer;"
+          ],
+          [
+            198,
+            "LPSTR stringPointer;"
+          ]
+        ],
+        "after": [
+          [
+            197,
+            "uint32_t stringPointer;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            226,
+            "structurePointer = (struct I_CDNames*)_inlinePointerFromWords((WORD)(getES()), (WORD)(getDI()));"
+          ],
+          [
+            227,
+            "stringPointer = _inlinePointerFromWords((WORD)((((WORD)(*((LPBYTE)((LPWORD)(&structurePointer->CDN_pszComputer)+1)))) | (((WORD)(*((LPBYTE)((LPBYTE)((LPWORD)(&structurePointer->CDN_pszComputer)+1)+1)))) << 8))), (WORD)((((WORD)(*((LPBYTE)((LPWORD)(&structurePointer->CDN_pszComputer))))) | (((WORD)(*((LPBYTE)((LPBYTE)((LPWORD)(&structurePointer->CDN_pszComputer))+1)))) << 8))));"
+          ]
+        ],
+        "after": [
+          [
+            226,
+            "if (!mvdm_redirector_cd_name_target(getES(), getDI(), 0,"
+          ],
+          [
+            227,
+            "&stringPointer)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            229,
+            "*stringPointer = 0;"
+          ]
+        ],
+        "after": [
+          [
+            229,
+            "if (!mvdm_redirector_copy_ansi_to_guest(((WORD)((((DWORD_PTR)(stringPointer)) >> 16) & 0xffff)),"
+          ],
+          [
+            230,
+            "((WORD)(((DWORD_PTR)(stringPointer)) & 0xffff)), \"\", 1u)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            237,
+            "memcpy((stringPointer),(ansiBuf),(len+1));"
+          ],
+          [
+            238,
+            "_strupr(stringPointer);"
+          ]
+        ],
+        "after": [
+          [
+            237,
+            "_strupr(ansiBuf);"
+          ],
+          [
+            238,
+            "if (!mvdm_redirector_copy_ansi_to_guest(((WORD)((((DWORD_PTR)(stringPointer)) >> 16) & 0xffff)),"
+          ],
+          [
+            239,
+            "((WORD)(((DWORD_PTR)(stringPointer)) & 0xffff)), ansiBuf, strlen(ansiBuf)+1)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            245,
+            "stringPointer = _inlinePointerFromWords((WORD)((((WORD)(*((LPBYTE)((LPWORD)(&structurePointer->CDN_pszPrimaryDomain)+1)))) | (((WORD)(*((LPBYTE)((LPBYTE)((LPWORD)(&structurePointer->CDN_pszPrimaryDomain)+1)+1)))) << 8))), (WORD)((((WORD)(*((LPBYTE)((LPWORD)(&structurePointer->CDN_pszPrimaryDomain))))) | (((WORD)(*((LPBYTE)((LPBYTE)((LPWORD)(&structurePointer->CDN_pszPrimaryDomain))+1)))) << 8))));"
+          ]
+        ],
+        "after": [
+          [
+            245,
+            "if (!mvdm_redirector_cd_name_target(getES(), getDI(), 1,"
+          ],
+          [
+            246,
+            "&stringPointer)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            247,
+            "*stringPointer = 0;"
+          ]
+        ],
+        "after": [
+          [
+            247,
+            "if (!mvdm_redirector_copy_ansi_to_guest(((WORD)((((DWORD_PTR)(stringPointer)) >> 16) & 0xffff)),"
+          ],
+          [
+            248,
+            "((WORD)(((DWORD_PTR)(stringPointer)) & 0xffff)), \"\", 1u)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            255,
+            "memcpy((stringPointer),(ansiBuf),(len+1));"
+          ],
+          [
+            256,
+            "_strupr(stringPointer);"
+          ]
+        ],
+        "after": [
+          [
+            255,
+            "_strupr(ansiBuf);"
+          ],
+          [
+            256,
+            "if (!mvdm_redirector_copy_ansi_to_guest(((WORD)((((DWORD_PTR)(stringPointer)) >> 16) & 0xffff)),"
+          ],
+          [
+            257,
+            "((WORD)(((DWORD_PTR)(stringPointer)) & 0xffff)), ansiBuf, strlen(ansiBuf)+1)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            262,
+            "stringPointer = _inlinePointerFromWords((WORD)((((WORD)(*((LPBYTE)((LPWORD)(&structurePointer->CDN_pszLogonDomain)+1)))) | (((WORD)(*((LPBYTE)((LPBYTE)((LPWORD)(&structurePointer->CDN_pszLogonDomain)+1)+1)))) << 8))), (WORD)((((WORD)(*((LPBYTE)((LPWORD)(&structurePointer->CDN_pszLogonDomain))))) | (((WORD)(*((LPBYTE)((LPBYTE)((LPWORD)(&structurePointer->CDN_pszLogonDomain))+1)))) << 8))));"
+          ]
+        ],
+        "after": [
+          [
+            262,
+            "if (!mvdm_redirector_cd_name_target(getES(), getDI(), 2,"
+          ],
+          [
+            263,
+            "&stringPointer)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            264,
+            "*stringPointer = 0;"
+          ]
+        ],
+        "after": [
+          [
+            264,
+            "if (!mvdm_redirector_copy_ansi_to_guest(((WORD)((((DWORD_PTR)(stringPointer)) >> 16) & 0xffff)),"
+          ],
+          [
+            265,
+            "((WORD)(((DWORD_PTR)(stringPointer)) & 0xffff)), \"\", 1u)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            272,
+            "memcpy((stringPointer),(ansiBuf),(len+1));"
+          ],
+          [
+            273,
+            "_strupr(stringPointer);"
+          ]
+        ],
+        "after": [
+          [
+            272,
+            "_strupr(ansiBuf);"
+          ],
+          [
+            273,
+            "if (!mvdm_redirector_copy_ansi_to_guest(((WORD)((((DWORD_PTR)(stringPointer)) >> 16) & 0xffff)),"
+          ],
+          [
+            274,
+            "((WORD)(((DWORD_PTR)(stringPointer)) & 0xffff)), ansiBuf, strlen(ansiBuf)+1)) goto cleanup;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            280,
+            "cleanup:"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            351,
+            "strcpy(((LPSTR)_inlinePointerFromWords((WORD)((getES())), (WORD)((getDI())))), nameBuf);"
+          ]
+        ],
+        "after": [
+          [
+            351,
+            "if (!mvdm_redirector_copy_ansi_to_guest(getES(), getDI(), nameBuf,"
+          ],
+          [
+            352,
+            "nameLen + 1u)) {"
+          ],
+          [
+            353,
+            "{setAX(487L); setCF(1);};"
+          ],
+          [
+            354,
+            "} else {"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            354,
+            "}"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            495,
+            "len = (DWORD)(DWORD)strlen(pInfo->wkui0_username);"
+          ]
+        ],
+        "after": [
+          [
+            495,
+            "len = (DWORD)wcslen(pInfo->wkui0_username);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            507,
+            "(void) strcpy((((LPSTR)_inlinePointerFromWords((WORD)((getES())), (WORD)((getDI()))))),(pInfo->wkui0_username));"
+          ]
+        ],
+        "after": [
+          [
+            507,
+            "status = mvdm_redirector_copy_wide_to_guest(getES(), getDI(),"
+          ],
+          [
+            508,
+            "pInfo->wkui0_username, getBX() ? getCX() : 0xffffffffui32);"
+          ],
+          [
+            509,
+            "if (status != 0) {setAX((WORD)status); setCF(1);};"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

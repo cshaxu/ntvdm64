@@ -1,0 +1,83 @@
+{
+  "status": "Historical investigation;superseded by r1269-r1279-vrnetapi-review.json for final source disposition",
+  "ids": [
+    "T483-R1269",
+    "T483-R1270"
+  ],
+  "file": "src/mvdm-host/vdmredir/vrnetapi.c",
+  "source_sha256": "e0dcb485747237461e39e33032e192ede81463955a16ea8b78bb3b9a7412053d",
+  "findings": [
+    "GetVDMAddr->Sim32pGetVDMPointer->c_GetLinAdd returns a native physical pointer,not a leased allocation;missing-release rationale is rejected.",
+    "Actual CCPU low real-mode page alias counterexample reproduced:noncontiguous backing makes direct contiguous alias copy wrong;bounded lease returns correct bytes.",
+    "This establishes a memory-access boundary,not necessity of3 name buffers or composite write workflow.",
+    "Existing12-case production NetAPI provider fixture passes;its test-owned memory boundary is not the CCPU paging proof."
+  ],
+  "ccpu_result": "CCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK\nDOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1\nCCPU_ORIGINAL_USER_HANDLE_VALIDATOR_OK cases=10\nCCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK\n",
+  "netapi_result": "PASS actual VrGetUserName DBCS bound and free-once\nPASS actual VrGetUserName DBCS exact capacity\nPASS actual original character gate retained\nPASS zero capacity rejects copy and frees exactly once\nPASS empty username still needs terminating byte\nPASS empty username fits one-byte capacity\nPASS actual BX0 unchecked copy and registers retained\nPASS actual invalid destination reports failure and frees\nPASS actual NetAPI failure does not free absent allocation\nPASS actual CDNames copies and unchanged status ABI\nPASS actual CDNames lease failure still frees, no invented error ABI\nPASS session cleanup\nassertions=12 failures=0\n\n",
+  "test_correction": {
+    "file": "test/mvdm-host/ccpu_bounded_execution_fixture.c",
+    "removed": "Pre-initialization ccpu386ThrdExptnPtr NULL assertion",
+    "reason": "P48 ed5653317 restored original untyped early returns. Production c_cpu_simulate queries an installed active frame. The pre-init NULL requirement is a stale test-added contract.",
+    "production_changed": false,
+    "new_runtime_failure_claim": false
+  },
+  "process": {
+    "pid": 24156,
+    "start": "2026-11-14T10:34:37.9667216-08:00",
+    "script": "build/t483-s5-p125/controls.ps1"
+  },
+  "next": "P125 final source complete;cached full build and remaining delivery pipeline in progress",
+  "actual_link_owners": [
+    "0001:00002f40       _Sim32pGetVDMPointer       00403f40 f   original-softpc-host-fixture-roots:sim32.obj",
+    "0001:000078d0       _c_GetLinAdd               004088d0 f   original-ccpu386:ccpusas4.obj",
+    "0001:000097b0       _xtrn2phy                  0040a7b0 f   original-ccpu386:c_tlb.obj"
+  ],
+  "local_candidate": {
+    "status": "Focused validation only;whole-file review/full build/publication/Git delivery pending",
+    "source_hashes": {
+      "src/mvdm-host/vdmredir/vrnetapi.c": "a233e84a115d82861d49af63089e6c61889c137b51643dd81166b144fbe52baf",
+      "src/vdmredir-dll/source/mvdm_redirector_guest_copy.c": "6818fcf2b34c10ebf721c5ad0b615b566512e82788dddb7702df368631eb4d8a",
+      "src/vdmredir-dll/include/mvdm_redirector_guest_copy.h": "2efa694f5d8910c0bca0e3ef3f64e5255f5821ec35d65e6ea95fedce82d65b9d",
+      "test/mvdm-host/vdmredir/redirector_netapi_provider_test.c": "3495a50cbf4ca45780f27156c888d88bb4e4c09ca9585c23c7a936f66bee637e",
+      "test/mvdm-host/vdmredir/redirector_oem_capacity_test.c": "24ab0b0da20bdec27594086e54b281d2db2b509ab9c092def371d48e4ebcf4a3",
+      "test/observation/verify-redirector-oem-capacity.ps1": "69f1f4f8b1265477bef16c5443cb6bfa0a53fc1cff09973f896d646c32f5d5c9"
+    },
+    "process": {
+      "script": "build/t483-s5-p125/minimized-check.ps1",
+      "start": "2026-11-14T10:45:51.9936477-08:00",
+      "pid": 12296
+    },
+    "provider_result": "PASS actual VrGetUserName DBCS bound and free-once\nPASS actual VrGetUserName DBCS exact capacity\nPASS actual original character gate retained\nPASS zero capacity rejects copy and frees exactly once\nPASS empty username still needs terminating byte\nPASS empty username fits one-byte capacity\nPASS actual BX0 unchecked copy and registers retained\nPASS actual invalid destination reports failure and frees\nPASS actual NetAPI failure does not free absent allocation\nPASS actual CDNames copies and unchanged status ABI\nPASS actual CDNames lease failure still frees, no invented error ABI\nPASS actual CD null far target skipped\nPASS actual CD overlapping strings use original order\nPASS actual CD destination alias preserves sequential far-field read\nPASS session cleanup\nassertions=15 failures=0\n\n",
+    "copy_result": "PASS real DBCS character needs two bytes plus NUL\nPASS DBCS byte capacity rejects without writing\nPASS exact DBCS capacity includes NUL and keeps sentinel\nPASS ASCII capacity includes NUL\nPASS ASCII exact capacity\nPASS zero capacity rejects even NUL\nPASS empty string fits one byte\nPASS caller-selected original unchecked capacity retained\nPASS out-of-memory-span copy fails\nPASS null source fails\nPASS large copy commits in two bounded chunks\nPASS second chunk failure retains first commit and rejects completion\nPASS dead guest memory fails\nPASS session cleanup\nassertions=14 failures=0\n\n",
+    "mirror_metric": {
+      "dlc": {
+        "before": {
+          "added": 125,
+          "deleted": 689,
+          "total": 814
+        },
+        "after": {
+          "added": 99,
+          "deleted": 648,
+          "total": 747
+        }
+      }
+    },
+    "line_proof": {
+      "shared_selected_lines": 1448,
+      "mismatches": [],
+      "excluded_errors_unchanged": true
+    },
+    "changes": [
+      "Restore one original ANSI name buffer and sequential caller-owned CD name processing;remove autonomous composite writer.",
+      "Move destination-alias tests to actual VrGetCDNames provider,remove orphan test helper.",
+      "Restore original username character-capacity expression;existing bounded OEM conversion rejects zero capacity with the same visible result.",
+      "Remove disproven missing-release explanation;native pointer cannot represent noncontiguous physical pages,as separately verified by CCPU fixture."
+    ],
+    "remaining_review": [
+      "Verify non-ASCII CD name copy length and uppercasing against original and pre-batch behavior before accepting restored copy expression.",
+      "Finish remaining username conversion and computer-name boundary disposition;complete whole-file counter-review and register synchronization."
+    ],
+    "no_product_publication": true
+  }
+}

@@ -12,10 +12,9 @@ int mvdm_redirector_copy_ansi_to_guest(uint16_t segment, uint16_t offset,
 uint32_t mvdm_redirector_copy_wide_to_guest(uint16_t segment, uint16_t offset,
     wchar_t const *text, uint32_t capacity);
 
-/* Writes the three original I_CDNames far-pointer targets through bounded
- * session leases. A null value retains the original "clear only" result. */
-int mvdm_redirector_write_cd_names(uint16_t segment, uint16_t offset,
-    char const *computer, char const *primary_domain,
-    char const *logon_domain);
+/* Read one packed I_CDNames target immediately before its original write.
+ * Prefix reads preserve the contiguous structure address across offset 0xffff. */
+int mvdm_redirector_cd_name_target(uint16_t segment, uint16_t offset,
+    uint32_t index, uint32_t *target);
 
 #endif

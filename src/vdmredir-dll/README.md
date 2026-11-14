@@ -16,9 +16,11 @@ asynchronous completion bindings remain in `src/ntvdm-exe/redir/`.
 
 The OEM copy boundary accepts capacity in encoded bytes including NUL and
 returns the existing LAN buffer-too-small status before any guest write. Its
-caller preserves the original unchecked BX=0/CX=0 cases. CD-name copies read
-each far destination after the preceding result write, preserving original
-aliasing order rather than freezing the packed pointer trio. These are
+caller preserves the original unchecked BX=0/CX=0 cases. Original VrGetCDNames
+owns sequential conversion and writes; the binding reads one packed far target
+at a time and copies bounded bytes. Each target is read after the preceding
+result write, preserving aliasing order. Converted names include their encoded
+terminating byte, including under DBCS. These are
 project-boundary corrections, not new guest error or atomic-write semantics.
 
 The public server-enumeration route is owned by original

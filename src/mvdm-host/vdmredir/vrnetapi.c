@@ -190,6 +190,7 @@ Return Value:
 --*/
 
 {
+    uint32_t stringPointer;
 #line 199
     LPWSTR infoString;
     NET_API_STATUS rc1;
@@ -198,70 +199,95 @@ Return Value:
     UNICODE_STRING unicodeString;
     LPWKSTA_INFO_100 wkstaInfo = NULL;
     LPWKSTA_USER_INFO_1 userInfo = NULL;
-    CHAR computerBuf[LM20_CNLEN+1];
-    CHAR primaryDomainBuf[LM20_CNLEN+1];
-    CHAR logonDomainBuf[LM20_CNLEN+1];
-#line 207
+    CHAR ansiBuf[LM20_CNLEN+1];
     NTSTATUS status;
     register DWORD len;
 
 #if DBG
 #line 211
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 217
 #endif
 #line 218
 
-#line 219
     rc1 = NetWkstaGetInfo(NULL, 100, (LPBYTE*)&wkstaInfo);
     rc2 = NetWkstaUserGetInfo(0, 1, (LPBYTE*)&userInfo);
 
-    RtlZeroMemory(computerBuf, sizeof(computerBuf));
-    RtlZeroMemory(primaryDomainBuf, sizeof(primaryDomainBuf));
-    RtlZeroMemory(logonDomainBuf, sizeof(logonDomainBuf));
-    ansiString.MaximumLength = sizeof(computerBuf);
-#line 223
+    ansiString.MaximumLength = sizeof(ansiBuf);
     ansiString.Length = 0;
-    ansiString.Buffer = computerBuf;
-    if (rc1 == NERR_Success) {
-#line 231
-        infoString = (LPWSTR)wkstaInfo->wki100_computername;
-        len = wcslen(infoString);
-        if (len <= LM20_CNLEN) {
-            RtlInitUnicodeString(&unicodeString, infoString);
-            status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
-            if (NT_SUCCESS(status)) _strupr(computerBuf);
-        }
-        ansiString.Buffer = primaryDomainBuf;
-#line 249
-        infoString = (LPWSTR)wkstaInfo->wki100_langroup;
-        len = wcslen(infoString);
-        if (len <= LM20_CNLEN) {
-            RtlInitUnicodeString(&unicodeString, infoString);
-            status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
-            if (NT_SUCCESS(status)) _strupr(primaryDomainBuf);
-#line 242
-        }
-    }
-    if (rc2 == NERR_Success) {
-        ansiString.Buffer = logonDomainBuf;
-#line 266
-        infoString = (LPWSTR)userInfo->wkui1_logon_domain;
-        len = wcslen(infoString);
-        if (len <= LM20_CNLEN) {
-            RtlInitUnicodeString(&unicodeString, infoString);
-            status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
-            if (NT_SUCCESS(status)) _strupr(logonDomainBuf);
-#line 259
-        }
-    }
-    /* DIVERGENCE(MVDM-HOST-DIV-176): I_CDNames is a packed trio of 16:16
-     * destinations.  The original dereferenced those as durable flat aliases;
-     * retain its result conversion and clear-then-copy order through the
-     * Redirector adapter's bounded composite write. */
-    mvdm_redirector_write_cd_names(getES(), getDI(), computerBuf,
-        primaryDomainBuf, logonDomainBuf);
+    ansiString.Buffer = ansiBuf;
 
+    if (!mvdm_redirector_cd_name_target(getES(), getDI(), 0,
+        &stringPointer)) goto cleanup;
+#line 228
+    if (stringPointer) {
+        if (!mvdm_redirector_copy_ansi_to_guest(HIWORD(stringPointer),
+            LOWORD(stringPointer), "", 1u)) goto cleanup;
+#line 230
+        if (rc1 == NERR_Success) {
+            infoString = (LPWSTR)wkstaInfo->wki100_computername;
+            len = wcslen(infoString);
+            if (len <= LM20_CNLEN) {
+                RtlInitUnicodeString(&unicodeString, infoString);
+                status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
+                if (NT_SUCCESS(status)) {
+                    _strupr(ansiBuf);
+                    if (!mvdm_redirector_copy_ansi_to_guest(HIWORD(stringPointer),
+                        LOWORD(stringPointer), ansiBuf, strlen(ansiBuf)+1)) goto cleanup;
+#line 239
+                }
+            }
+
+        }
+    }
+
+    if (!mvdm_redirector_cd_name_target(getES(), getDI(), 1,
+        &stringPointer)) goto cleanup;
+#line 246
+    if (stringPointer) {
+        if (!mvdm_redirector_copy_ansi_to_guest(HIWORD(stringPointer),
+            LOWORD(stringPointer), "", 1u)) goto cleanup;
+#line 248
+        if (rc1 == NERR_Success) {
+            infoString = (LPWSTR)wkstaInfo->wki100_langroup;
+            len = wcslen(infoString);
+            if (len <= LM20_CNLEN) {
+                RtlInitUnicodeString(&unicodeString, infoString);
+                status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
+                if (NT_SUCCESS(status)) {
+                    _strupr(ansiBuf);
+                    if (!mvdm_redirector_copy_ansi_to_guest(HIWORD(stringPointer),
+                        LOWORD(stringPointer), ansiBuf, strlen(ansiBuf)+1)) goto cleanup;
+#line 257
+                }
+            }
+        }
+    }
+
+    if (!mvdm_redirector_cd_name_target(getES(), getDI(), 2,
+        &stringPointer)) goto cleanup;
+#line 263
+    if (stringPointer) {
+        if (!mvdm_redirector_copy_ansi_to_guest(HIWORD(stringPointer),
+            LOWORD(stringPointer), "", 1u)) goto cleanup;
+#line 265
+        if (rc2 == NERR_Success) {
+            infoString = (LPWSTR)userInfo->wkui1_logon_domain;
+            len = wcslen(infoString);
+            if (len <= LM20_CNLEN) {
+                RtlInitUnicodeString(&unicodeString, infoString);
+                status = RtlUnicodeStringToAnsiString(&ansiString, &unicodeString, FALSE);
+                if (NT_SUCCESS(status)) {
+                    _strupr(ansiBuf);
+                    if (!mvdm_redirector_copy_ansi_to_guest(HIWORD(stringPointer),
+                        LOWORD(stringPointer), ansiBuf, strlen(ansiBuf)+1)) goto cleanup;
+#line 274
+                }
+            }
+
+        }
+    }
+
+cleanup:
 #line 280
     if (wkstaInfo) {
         NetApiBufferFree((LPVOID)wkstaInfo);
@@ -273,7 +299,6 @@ Return Value:
 #if DBG
 #line 288
 #error DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register.
-#line 301
 #endif
 #line 302
 }
@@ -327,13 +352,11 @@ Return Value:
 #endif
 #line 350
         } else {
-            /* DIVERGENCE(MVDM-HOST-DIV-171): the original direct guest alias
-             * has no release point.  Retain its exact bounded copy and result
-             * order through the session-owned synchronous lease instead. */
             if (!mvdm_redirector_copy_ansi_to_guest(getES(), getDI(), nameBuf,
                 nameLen + 1u)) {
                 SET_ERROR(ERROR_INVALID_ADDRESS);
             } else {
+#line 352
                 setAX(0);
                 setCF(0);
             }
@@ -476,15 +499,10 @@ Return Value:
     status = NetWkstaUserGetInfo(NULL, 0, &buffer);
     if (status == NERR_Success) {
         pInfo = (LPWKSTA_USER_INFO_0)buffer;
-        /* DIVERGENCE(MVDM-HOST-DIV-171): the selected public NetAPI carrier
-         * exposes the returned user name as Unicode even though this source
-         * is compiled without the historical global UNICODE switch. */
         len = (DWORD)wcslen(pInfo->wkui0_username);
 #line 496
         if (getBX()) {
-            /* DIVERGENCE(MVDM-HOST-DIV-361): zero capacity cannot hold
-             * even the terminating byte; do not let CX-1 underflow. */
-            itFits = getCX() != 0 && (len) <= (DWORD)getCX()-1;
+            itFits = (len) <= (DWORD)getCX()-1;
 #line 498
             if (itFits) {
                 SET_SUCCESS();
@@ -495,9 +513,6 @@ Return Value:
             itFits = TRUE;
         }
         if (itFits) {
-            /* DIVERGENCE(MVDM-HOST-DIV-171): bound the added OEM conversion
-             * by bytes, including NUL. Keep the original BX=0 unchecked ABI
-             * while rejecting zero capacity before the copy. */
             status = mvdm_redirector_copy_wide_to_guest(getES(), getDI(),
                 pInfo->wkui0_username, getBX() ? getCX() : UINT32_MAX);
             if (status != NERR_Success) SET_ERROR((WORD)status);

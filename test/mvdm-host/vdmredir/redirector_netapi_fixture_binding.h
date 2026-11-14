@@ -8,3 +8,7 @@ NET_API_STATUS WINAPI fixture_net_free(LPVOID);
 #define NetWkstaUserGetInfo fixture_user_info
 #define NetWkstaGetInfo fixture_wksta_info
 #define NetApiBufferFree fixture_net_free
+
+/* Match the original RTL ABI; the fixture supplies a native CP932 converter. */
+LONG NTAPI fixture_ansi_conversion(struct _STRING *, struct _UNICODE_STRING *, BOOLEAN);
+#define RtlUnicodeStringToAnsiString fixture_ansi_conversion

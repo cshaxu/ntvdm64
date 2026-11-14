@@ -54,13 +54,6 @@ int __cdecl mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int comm
 {
     return session_guest_memory_release(session_thread_current(), lease, commit);
 }
-static void put32(unsigned address, uint32_t value)
-{
-    memory[address] = (uint8_t)value;
-    memory[address+1] = (uint8_t)(value >> 8);
-    memory[address+2] = (uint8_t)(value >> 16);
-    memory[address+3] = (uint8_t)(value >> 24);
-}
 int main(void)
 {
     session s;
@@ -94,17 +87,6 @@ int main(void)
         ERROR_INVALID_ADDRESS, "out-of-memory-span copy fails");
     check(mvdm_redirector_copy_wide_to_guest(0, 0x80, NULL, 5) ==
         ERROR_INVALID_ADDRESS, "null source fails");
-    put32(0x100, 0x200); put32(0x104, 0); put32(0x108, 0x220);
-    check(mvdm_redirector_write_cd_names(0, 0x100, "HOST", "DOMAIN", NULL) &&
-        !strcmp((char *)memory + 0x200, "HOST") && memory[0x220] == 0,
-        "CD null far target skipped and null name clears only");
-    put32(0x100, 0x300); put32(0x104, 0x301); put32(0x108, 0);
-    check(mvdm_redirector_write_cd_names(0, 0x100, "ABC", "XY", NULL) &&
-        !memcmp(memory + 0x300, "AXY", 4), "CD overlapping strings use original order");
-    put32(0x100, 0x104); put32(0x104, 0x420); put32(0x108, 0);
-    check(mvdm_redirector_write_cd_names(0, 0x100, "", "DOM", NULL) &&
-        !strcmp((char *)memory + 0x400, "DOM"),
-        "CD destination alias preserves sequential far-field read");
     memset(large, 'z', sizeof(large));
     writes = 0; fail_write = 0;
     check(mvdm_redirector_copy_ansi_to_guest(0, 0x800, large, sizeof(large)) &&
