@@ -1,0 +1,132 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "source_sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_head": "bd5f9f903",
+  "points": {
+    "R1070": {
+      "scope": "+4/-0",
+      "problem": "Dispatch modern relative mouse records",
+      "evidence": "console_client converts FRAME_MOUSE into CONSOLE_INPUT_RELATIVE_MOUSE carrying signed displacement,geometry and ENTER/MOVE/LEAVE. Original switch has no matching case and drops it. Treating payload as original absolute MOUSE_EVENT loses geometry and route semantics. receive->submit under ICA->original DoMouseInterrupt->CPU-owned apply retains original IRQ and coordinate ownership.",
+      "plan": "Keep three dispatch statements pending owner;remove surplus added blank if alignment permits. No alternate IRQ scheduler."
+    },
+    "R1071": {
+      "scope": "+3/-0",
+      "problem": "Attribute original key expansion to its input record",
+      "evidence": "keyba records active origin into device and held slots;one raw PrintScreen/CtrlBreak may produce multiple bytes and ignored releases produce none. P86 original history control replayed the wrong release instead of unread make. P88 omitting begin in the controlled dispatch fixture loses pending origin and fails the first return-count assertion.",
+      "plan": "Remove explanatory comment at whole-file edit;retain begin plus fail-fast pending owner. No extra queue."
+    },
+    "R1072": {
+      "scope": "+1/-0",
+      "problem": "End keyboard input origin scope",
+      "evidence": "Without end,the next begin rejects an already-active source;P88 controlled omission fails the actual history_begin assertion. Leaving active set also attributes later internal actions to an earlier input. The begin/end scope is under the existing keyboard lock.",
+      "plan": "Retain one end call pending owner;must accompany R1071 and controller metadata,not a separate state owner."
+    },
+    "R1073": {
+      "scope": "+3/-5",
+      "problem": "Remove fixed batch packing latency",
+      "evidence": "Original calls Sleep(10) after each batch to encourage Console packing. This was an explicit owner-supplied responsiveness change in accepted T423 S11. P88 same adapter/controlled-input assertions pass both without and with one10ms delay per read;elapsed0ms(timer resolution) versus6859ms. This establishes imposed batch cost,not an original functional bug or actual product mouse latency. Current pressure uses bounded capacity and wake event;original IRQ delay remains.",
+      "plan": "Remove three new comment lines at whole-file edit;keep five-line original packing-delay omission as a PERFORMANCE decision for owner. Do not describe original as functionally broken or infer a quantified product speedup."
+    },
+    "R1074": {
+      "scope": "+3/-0",
+      "problem": "Align raw history entries with controller origins",
+      "evidence": "Original raw-history suffix count cannot identify which entries emitted unread bytes:ignored releases and synthetic expansion break one-to-one count(P86 counterexample). P88 replacing update_key_history with pinned original leaves the identity stream absent;actual history_begin fails. Recording every raw key before dispatch keeps ordinal and receipt alignment without changing original ring payload.",
+      "plan": "Remove explanatory comment;retain record/error pair pending owner. Evidence distinguishes required origin association from mere adapter self-dependency."
+    },
+    "R1075": {
+      "scope": "+4/-0",
+      "problem": "Select history by pending origin instead of raw suffix",
+      "evidence": "P86 actual GetHistoryKeyEvent replaced alone by original compiles but fails ignored-release-after-unread-make:the last raw record is not necessarily the unread key. age maps selected live origins into original ring index;zero rejects unavailable/overwritten identities. Original wrap/index body remains.",
+      "plan": "Remove comment and added blank;retain age conversion and zero return pending owner. Do not invent a fallback suffix on missing identity."
+    },
+    "R1076": {
+      "scope": "+2/-0",
+      "problem": "Reset origin state with original history reset",
+      "evidence": "P88 restores only pinned original InitKeyHistory;return fixture fails because issued/output metadata survives while original raw history is empty. Subsequent selection could refer to an earlier handoff. Full zero reset is at the original init/return boundary;device metadata is already captured before controller reset.",
+      "plan": "Remove explanatory comment;retain one memset pending owner. Do not introduce a second reset boundary."
+    },
+    "R1077": {
+      "scope": "+3/-1",
+      "problem": "Let original EOI observe remaining relative fragments",
+      "evidence": "Original MoreMouseEvents sees only absolute ring. Relative queue take fragments displacement into signed16-bit chunks:maintained bridge fixture demonstrates40000 becoming32767 then7233 while first take keeps the slot. DoMouseInterrupt counts submissions,not fragments;after its lazy count is exhausted,original EOI needs the remaining-queue predicate to schedule the next chunk.",
+      "plan": "Remove explanatory comment;retain relative pending OR in original EOI predicate pending owner. Preserve original IRQ delay and lock."
+    },
+    "R1078": {
+      "scope": "+2/-0",
+      "problem": "Cancel relative samples at original mouse cancellation boundary",
+      "evidence": "Original MouseEoiHook(CallCount<0) zeroes lazy IRQ count and calls FlushMouseEvents. Restoring flush to absolute-ring-only leaves relative deltas/buttons queued after cancellation and can replay them on later input. Adapter cancel clears samples under existing ICA lock,preserves accepted frontend route,and wakes a producer blocked by full capacity. Maintained bridge tests cover cancellation and wake;not freshly rerun here.",
+      "plan": "Remove explanatory comment;retain one cancel call pending owner. Do not reset connection ownership or require an extra ENTER."
+    }
+  },
+  "tests": {
+    "cost-fast.log": {
+      "sha256": "e5b9ea9e45981f680cf4711c4e528418da09ba92ead05b79b51439e8496152d5",
+      "text": "BATCH-PRESSURE full queue consumes nothing; partial capacity and recovery PASS\nBATCH-MOUSE 1000 records / 200 reads; order, buttons, bounds PASS\nBATCH-RELATIVE 1000 records / 200 reads; signed motion, buttons, enter/leave PASS\nBATCH-SCANLESS-TEXT punctuation/case/modifiers/key-up PASS\nBATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS\nBATCH-RECEIPT identical keys remain distinct through normalization and original history PASS\nBATCH-COST delay=0 elapsed_ms=0\n"
+    },
+    "cost-delay.log": {
+      "sha256": "e67860b93ce601daab0f31cf9c66fb8e1d806a04eb20b67cc9f69862fe47df07",
+      "text": "BATCH-PRESSURE full queue consumes nothing; partial capacity and recovery PASS\nBATCH-MOUSE 1000 records / 200 reads; order, buttons, bounds PASS\nBATCH-RELATIVE 1000 records / 200 reads; signed motion, buttons, enter/leave PASS\nBATCH-SCANLESS-TEXT punctuation/case/modifiers/key-up PASS\nBATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS\nBATCH-RECEIPT identical keys remain distinct through normalization and original history PASS\nBATCH-COST delay=1 elapsed_ms=6859\n"
+    },
+    "cost.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "text": "0\n"
+    },
+    "controls.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "text": "0\n"
+    },
+    "prepare.py": {
+      "sha256": "85b70d24f706c1a4787f1a6db9ae6b8a39e1317a6763728610ee2b0a3635fad2",
+      "text": "from pathlib import Path\nr=Path.cwd();b=r/'build/t483-s5-p88'\ns=(r/'test/app/console_input_batch_test.c').read_text(encoding='utf-8-sig')\ns=s.replace('#include \"../../src/ntvdm-exe/win32/console_compat.c\"','#include \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_compat.c\"')\ns=s.replace('static DWORD mouse_capacity=256;','static DWORD mouse_capacity=256;static BOOL cost_delay;')\ns=s.replace('(void)h; ++reads;','(void)h; ++reads;if(cost_delay)Sleep(10);')\ns=s.replace('int main(void)','int main(int argc,char **argv)')\ns=s.replace('    HANDLE input=(HANDLE)1;','    HANDLE input=(HANDLE)1;ULONGLONG started=GetTickCount64();(void)argv;cost_delay=argc>1;')\npos=s.rfind('return 0;');assert pos>=0;s=s[:pos]+'printf(\"BATCH-COST delay=%u elapsed_ms=%llu\\\\n\",cost_delay,GetTickCount64()-started);'+s[pos:]\n(b/'input-cost.c').write_bytes(s.encode())\ns=(r/'test/observation/verify-console-input-batch.ps1').read_text(encoding='utf-8-sig')\ns=s.replace(\"$root=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path\",\"$root='O:\\\\repos.hobby\\\\ntvdm64'\")\ns=s.replace(\"'test/app/console_input_batch_test.c'\",\"'build/t483-s5-p88/input-cost.c'\")\n(b/'cost-build.ps1').write_bytes(s.encode())\n"
+    },
+    "controls.py": {
+      "sha256": "b45325aa611826403c21c3949eff6514ee675044ae6761ff3b2baa4b81e3e5e7",
+      "text": "from pathlib import Path\nimport re,shutil\nr=Path.cwd();b=r/'build/t483-s5-p88';old=Path('O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_event.c').read_text(encoding='utf-8-sig');fixture=(r/'test/app/keyboard_origin_return_test.c').read_text(encoding='utf-8-sig')\nfor kind,func,inc in [('init','void InitKeyHistory','keyboard_origin_init.inc'),('update','void update_key_history','keyboard_origin_update.inc'),('begin',None,None),('end',None,None)]:\n d=b/kind;d.mkdir(exist_ok=True)\n for p in (r/'build/t483-s5-p86/origin').glob('*.inc'):shutil.copyfile(p,d/p.name)\n s=fixture\n if func:\n  m=re.search(r'^'+re.escape(func)+r'\\([^;{]*\\)\\n\\{.*?^\\}',old,re.M|re.S);assert m,func\n  (d/inc).write_bytes(m.group().encode())\n elif kind=='begin':\n  s=s.replace('CHECK(mvdm_keyboard_history_begin(&nt_keyboard_history));origin=nt_keyboard_history.active;','origin=nt_keyboard_history.active;')\n else:s=s.replace('mvdm_keyboard_history_end(&nt_keyboard_history);return origin;','return origin;')\n (d/'fixture.c').write_bytes(s.encode())\n"
+    },
+    "controls.ps1": {
+      "sha256": "a64aaa4f3c9da72f7bb9afbb30498a2aad3d1955fb5b4ec2c4a3cc534051e00f",
+      "text": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\n$vs='C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat'\n$lines=& cmd /d /s /c ('call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && set')\nforeach($line in $lines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -LiteralPath ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}\ntry {\n foreach($kind in @('init','update','begin','end')){\n  $d=\"$PSScriptRoot/$kind\"\n  & cl /nologo /MT /W4 /I $d /I src \"$d/fixture.c\" build/t483-s5-p86/origin/origin.obj \"/Fo:$d/test.obj\" \"/Fe:$d/test.exe\" user32.lib *> \"$d/compile.log\"\n  if($LASTEXITCODE){throw \"$kind compile failed\"}\n  & \"$d/test.exe\" *> \"$d/result.log\"\n  $LASTEXITCODE|Set-Content \"$d/result.exit\"\n  if($LASTEXITCODE -ne 1){throw \"$kind missing expected negative assertion\"}\n }\n 0|Set-Content $PSScriptRoot/controls.exit\n}catch{$_|Out-String|Write-Output;1|Set-Content $PSScriptRoot/controls.exit;exit 1}\n"
+    },
+    "begin/result.exit": {
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "text": "1\n"
+    },
+    "begin/result.log": {
+      "sha256": "5ce8eb4419c0c0b22a54a03799ded788cc32e817daf7fc3e0e163cecf5a355d1",
+      "text": "FAIL line=77: pending==(int)count && resets==1\n"
+    },
+    "end/result.exit": {
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "text": "1\n"
+    },
+    "end/result.log": {
+      "sha256": "c31f64562f2caa323c2cd89336f0248e9678de3810ec796ba65d55d9ba661b0e",
+      "text": "FAIL line=65: mvdm_keyboard_history_begin(&nt_keyboard_history)\n"
+    },
+    "init/result.exit": {
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "text": "1\n"
+    },
+    "init/result.log": {
+      "sha256": "35f98276ca29f81b59aa529096cdd9b06737f1d80615472955c7182f8eb68cc9",
+      "text": "FAIL line=80: !nt_keyboard_history.issued && !nt_keyboard_history.output\n"
+    },
+    "update/result.exit": {
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "text": "1\n"
+    },
+    "update/result.log": {
+      "sha256": "c31f64562f2caa323c2cd89336f0248e9678de3810ec796ba65d55d9ba661b0e",
+      "text": "FAIL line=65: mvdm_keyboard_history_begin(&nt_keyboard_history)\n"
+    }
+  },
+  "limits": [
+    "No production edits;#error/#line byte-identical. Whole-file reductions not yet implemented.",
+    "History controls use actual extracted functions with controlled device origins and Console sink;not full guest execution.",
+    "Begin/end omissions are controlled fixture dispatch substitutions,not a rebuilt original entire event loop.",
+    "Delay control inserts Sleep(10) once per adapter read,not the original post-dispatch event-loop location. It quantifies packing-delay cost only;both variants pass functionality.",
+    "R1073 is an explicit performance policy decision,not an assertion that original functionality fails.",
+    "Relative cancellation/fragmentation cases inspected in maintained tests,not rerun in P88."
+  ]
+}

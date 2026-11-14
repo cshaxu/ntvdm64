@@ -745,3 +745,5 @@ nt_event in progress: [R1056/R1057 interface evidence](r1056-r1057-nt-event-head
 P86 audit-only: [R1058-R1063 boundaries](r1058-r1063-nt-event-boundary-review.json);nt_event8/44 points. Current/original function controls distinguish key-origin and BIOS-release failures;actual helper exposes premature-start join hang. Lifetime corrections explicitly pending,not certified. No source changes;P84 baseline unchanged.
 
 P87 audit-only: [R1064-R1069 input dispatch](r1064-r1069-nt-event-input-review.json);nt_event14/44 points. Actual bounded-input fixture and native wait-order counterexample pass;shutdown authority checked in source. No production changes;P84 remains published.
+
+P88 audit-only: [R1070-R1078 origin and mouse lifecycle](r1070-r1078-nt-event-origin-review.json);nt_event23/44 points. Original history restoration/dispatch omission controls fail specifically;delay control quantifies cost without claiming an original functional bug. No production changes;P84 remains published.
