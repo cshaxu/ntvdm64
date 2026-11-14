@@ -1,0 +1,370 @@
+{
+  "status": "Cached full,publish11x2,focused4,Full19 passed;delivery governance and Git follow",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "sha256": "e85a1f718c4b19c370a2a3f52f6c1c7726113628392c203ce14b7081b53c6689"
+    },
+    {
+      "path": "test/mvdm-host/vdmredir/remote_computer_name_test.c",
+      "sha256": "b2a2d3c7a0b241fcbcebfadaaa4696f40c61328109a06686c018a39864472f90"
+    },
+    {
+      "path": "test/observation/verify-redirector-remote-name.ps1",
+      "sha256": "385ad4afc21b97c0bc9d1449c8ebb2a24b238451d262c0d57007dfbe2a0bb070"
+    }
+  ],
+  "mirror_diff": {
+    "before": 43,
+    "after": 34,
+    "delta": -9
+  },
+  "points": {
+    "R1298": "644 shared selected lines agree with original; excluded error directives unchanged",
+    "R1299": "Remove redundant computerNameBytes; reuse existing len with no live value at this point",
+    "R1300": "Restore original comment; retain necessary UTF16-to-ANSI conversion and match original RtlAnsiStringToUnicodeString CP_ACP consumer",
+    "R1301": "Retain conversion failure cleanup, pending owner decision"
+  },
+  "controls": {
+    "original": {
+      "exit_code": 1,
+      "output": "ACP=1252 OEM=437 CNLEN=15\ncase=0 result=120 reached=1 freed=1 name_match=0 ok=0\ncase=1 result=120 reached=1 freed=1 name_match=1 ok=1\ncase=2 result=120 reached=1 freed=1 name_match=0 ok=0\ncase=3 result=5 reached=0 freed=0 name_match=0 ok=1\ncases=4 failures=2; long-name rejection is retained boundary, not fixed\n"
+    },
+    "before": {
+      "exit_code": 1,
+      "output": "ACP=1252 OEM=437 CNLEN=15\ncase=0 result=120 reached=1 freed=1 name_match=1 ok=1\ncase=1 result=120 reached=1 freed=1 name_match=0 ok=0\ncase=2 result=13 reached=0 freed=1 name_match=0 ok=1\ncase=3 result=5 reached=0 freed=0 name_match=0 ok=1\ncases=4 failures=1; long-name rejection is retained boundary, not fixed\n"
+    },
+    "candidate": {
+      "exit_code": 0,
+      "output": "ACP=1252 OEM=437 CNLEN=15\ncase=0 result=120 reached=1 freed=1 name_match=1 ok=1\ncase=1 result=120 reached=1 freed=1 name_match=1 ok=1\ncase=2 result=13 reached=0 freed=1 name_match=0 ok=1\ncase=3 result=5 reached=0 freed=0 name_match=0 ok=1\ncases=4 failures=0; long-name rejection is retained boundary, not fixed\n"
+    }
+  },
+  "limits": [
+    "Control transports are test boundaries, not RAP network acceptance",
+    "Production RAP provider returns ERROR_CALL_NOT_IMPLEMENTED",
+    "Original fixed computerName buffer still rejects a 15-character local name; not fixed",
+    "Candidate controls precede final comment restoration and portable test expectation; final test remains required",
+    "Native boundary fixture is not RAP network support; external immutable-fixture skips are recorded by Full."
+  ],
+  "progress_base": {
+    "files": 180,
+    "total_files": 365,
+    "reviewed": 1297,
+    "restored_delivered": 491,
+    "approved": 8,
+    "pending": 798,
+    "unreviewed": 1423,
+    "total": 2720
+  },
+  "publication": {
+    "status": "published",
+    "package": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "final_focused": {
+    "exit_code": 0,
+    "elapsed_ms": 224,
+    "executable_sha256": "D6B3D573A2C8893D18B8DE02E6F13BA1FFFECB22B5359BB088495E7E3DC8ED91",
+    "scope": "Actual VrRemoteApi and production RTL; controlled NetAPI and unavailable RAP transport, no network/guest execution"
+  },
+  "final_focused_output": "ACP=1252 OEM=437 CNLEN=15\ncase=0 result=120 reached=1 freed=1 name_match=1 ok=1\ncase=1 result=120 reached=1 freed=1 name_match=1 ok=1\ncase=2 result=13 reached=0 freed=1 name_match=0 ok=1\ncase=3 result=5 reached=0 freed=0 name_match=0 ok=1\ncases=4 failures=0; long-name rejection is retained boundary, not fixed\n\n",
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 414610,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6394,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1576,
+          "CleanupMs": 467,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 15112,
+          "CleanupMs": 401,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 14911,
+          "CleanupMs": 380,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 15414,
+          "CleanupMs": 401,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 344,
+          "CleanupMs": 380,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66585,
+          "CleanupMs": 411,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 45830,
+          "CleanupMs": 396,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 45750,
+          "CleanupMs": 399,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14920,
+          "CleanupMs": 402,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10961,
+          "CleanupMs": 360,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 62015,
+          "CleanupMs": 451,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12701,
+          "CleanupMs": 375,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28572,
+          "CleanupMs": 437,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30761,
+          "CleanupMs": 460,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 5169,
+          "CleanupMs": 395,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7891,
+          "CleanupMs": 397,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10269,
+          "CleanupMs": 456,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3764,
+          "CleanupMs": 335,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6530,
+          "CleanupMs": 314,
+          "Passed": true
+        }
+      ]
+    },
+    "line_proof": [
+      {
+        "path": "src/mvdm-host/vdmredir/vrremote.c",
+        "shared_selected_lines": 644,
+        "line_mismatches": [],
+        "ambiguous_equal_text_matches_resolved_at_original_line": [],
+        "selected_changes": [
+          {
+            "op": "replace",
+            "original": [
+              [
+                676,
+                "strcpy(computerName+2,"
+              ],
+              [
+                677,
+                "((LPWKSTA_INFO_100)wkstaInfo)->wki100_computername);"
+              ]
+            ],
+            "after": [
+              [
+                676,
+                "len = WideCharToMultiByte(0, 0,"
+              ],
+              [
+                677,
+                "((LPWKSTA_INFO_100)wkstaInfo)->wki100_computername, -1,"
+              ],
+              [
+                678,
+                "computerName + 2, (int)(sizeof(computerName) - 2u), ((void *)0),"
+              ],
+              [
+                679,
+                "((void *)0));"
+              ]
+            ]
+          },
+          {
+            "op": "insert",
+            "original": [],
+            "after": [
+              [
+                679,
+                "if (len == 0) {"
+              ],
+              [
+                680,
+                "if (alloc_flag) {"
+              ],
+              [
+                681,
+                "LocalFree(send_data_ptr);"
+              ],
+              [
+                682,
+                "}"
+              ],
+              [
+                683,
+                "return 13L;"
+              ],
+              [
+                684,
+                "}"
+              ]
+            ]
+          }
+        ],
+        "excluded_error_directives_unchanged": true
+      }
+    ],
+    "focused": {
+      "exit_code": 0,
+      "elapsed_ms": 224,
+      "executable_sha256": "D6B3D573A2C8893D18B8DE02E6F13BA1FFFECB22B5359BB088495E7E3DC8ED91",
+      "scope": "Actual VrRemoteApi and production RTL; controlled NetAPI and unavailable RAP transport, no network/guest execution"
+    }
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "EF9024ABC45DBFC8378D364359D806ED5ADBE52D11CD046ACD4B7D5B6124C39B",
+      "Machine": 332,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "08EC09E800F5950E3A479D11D6D4BC50BD59CFEDFC7F7D6FF0C84C6FD28E6A63",
+      "Machine": 34404,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "7BC84AB5CC5A6DCF659842396CA74BB010EAB1E2B5F443AE0AD6D6B8D191E56B"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "CEA8B7E43ADBE0138A2AC3FB2C99C48EB902D7C0F40167FB1B880D70D3FE9F92",
+      "Machine": 34404,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "42AA4BD69D5EF5F30ACB7D4FEEA46CA42CB2FB1A10BFBDAACFFB8924D8ABB6CB"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "9DD15F61643406532168C24AF3085602B6BE80B842995C8E4ACF5734B779A0EE",
+      "Machine": 34404,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "40FD4543BFB3FE41F2B456DF6202333E5D2B86F1CE1292AAB839C76C13DC0071"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "897F3205E6E65B56701B51F02D55270C56D49298B18B440D11295CEE66397B2D",
+      "Machine": 332,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "621100CBD7C7DCC9CF5D323BC974F7BD249F83C50240387190BC34A44BDA3CDC"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "97E1BBE587E4E8489A0F69E658D51480124F378340E0E45CAE670C0ACA877C72",
+      "Machine": 34404,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "3B3560C486043E766A641732E4C7EA9ED2AA7D04FEE1381B629C91F72F636B93"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "3754A921B643B738424C39AAD2F53018A7CD9305B5CB17A80BDD6943D8EC6D30",
+      "Machine": 34404,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "1E9E879BBCEF4669C4B09F7452358F00DE621A8B62C1B6D1BBEF7696D664A7DE",
+      "Machine": 332,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "6345B35E2D361320D9594F2F61D75D3960F10E8D0275755020E021EC0AED3C36"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "5049152E88371B762B12D9B8000011D8FFB24B4F086C6EB0417EC230EE7D9135",
+      "Machine": 332,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "863DF9F7193C54B6ACA233428D2DB043FFDB7B2E1BCF09C48EE2B041A2FEBA89",
+      "Machine": 332,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "1F39EEB71B59B56FEAB4787C8625421630169CA7BE149CE27E3D9E93219A4603"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "826ACCA7882F0F8789BE4A537BAD0EE090B08886CE04E9ECE07F4D0FDC52C35D",
+      "Machine": 34404,
+      "PackageId": "bf325d81-d6b8-4ab1-af8b-65c76f3c4306",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

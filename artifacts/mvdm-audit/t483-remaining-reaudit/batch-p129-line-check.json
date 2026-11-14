@@ -1,0 +1,72 @@
+[
+  {
+    "path": "src/mvdm-host/vdmredir/vrremote.c",
+    "shared_selected_lines": 644,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            676,
+            "strcpy(computerName+2,"
+          ],
+          [
+            677,
+            "((LPWKSTA_INFO_100)wkstaInfo)->wki100_computername);"
+          ]
+        ],
+        "after": [
+          [
+            676,
+            "len = WideCharToMultiByte(0, 0,"
+          ],
+          [
+            677,
+            "((LPWKSTA_INFO_100)wkstaInfo)->wki100_computername, -1,"
+          ],
+          [
+            678,
+            "computerName + 2, (int)(sizeof(computerName) - 2u), ((void *)0),"
+          ],
+          [
+            679,
+            "((void *)0));"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            679,
+            "if (len == 0) {"
+          ],
+          [
+            680,
+            "if (alloc_flag) {"
+          ],
+          [
+            681,
+            "LocalFree(send_data_ptr);"
+          ],
+          [
+            682,
+            "}"
+          ],
+          [
+            683,
+            "return 13L;"
+          ],
+          [
+            684,
+            "}"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

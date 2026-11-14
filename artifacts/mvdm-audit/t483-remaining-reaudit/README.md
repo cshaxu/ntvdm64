@@ -901,3 +901,7 @@ P127 [count reconciliation](p127-progress-reconciliation.json):P111 double-count
 P127 final delivery gates passed:cached full,publish11x2,focused27,old-adapter negative,Full19,967 lines and governance. Git accompanies receipt.179/365 files;1296/2720 points:490 delivered,8 approved,798 pending,1424 unreviewed.
 
 P128 [vrputil review](r1297-vrputil-review.json), [receipt](batch-p128-checkpoint.json):only one required diagnostic #error replacement;75 original lines match;source unchanged. P127 package/Full reused with22 hashes checked.180/365 files,1297/2720 points:491 confirmed/restored,8 approved,798 pending,1423 unreviewed.
+
+P129 [source checkpoint](batch-p129-checkpoint.json), [line proof](batch-p129-line-check.json):vrremote mirror43->34(-9);644 shared selected lines0 mismatch.181/365 files source-reviewed;1301/2720 points:491 delivered,2 local pending verification,8 approved,800 qualified pending,1419 unreviewed. Cached build/publication/final tests and Git delivery remain pending.
+
+P129 final cached build,11x2 publication,focused4 and Full19 passed;delivery governance/Git follow.181/365 files;1301/2720 points:493 delivered,8 approved,800 pending,1419 unreviewed.

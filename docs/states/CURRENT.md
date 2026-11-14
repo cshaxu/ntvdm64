@@ -34,8 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1297 points reviewed:491 restored/confirmed delivered,0 local,8 approved,
-798 qualified pending,0 restores decided;1423 unreviewed. Files180/365 audited,185 remain.
+1301 points reviewed:493 restored/confirmed delivered,0 local,8 approved,
+800 qualified pending,0 restores decided;1419 unreviewed. Files181/365 audited,184 remain.
+P129 vrremote.c:cached build,publish11x2,focused4/Full19 passed;Git follows.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,10 +52,10 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P127 candidate `a7cc2446-c84e-40fe-ba24-d440a44ca953` published11x2;hashes match.
-Cached full x86/x64,Full19 and governance passed;Git accompanies P127 receipt.
+P129 candidate `bf325d81-d6b8-4ab1-af8b-65c76f3c4306` published11x2;hashes match.
+Cached full x86/x64,Full19 and governance passed;Git accompanies P129 receipt.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p127-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p129-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
