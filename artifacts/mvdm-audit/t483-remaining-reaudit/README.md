@@ -856,3 +856,7 @@ P118 [entry review](r1251-r1255-entry-review.json):mirror36->27(-9);five residua
 P119 [metadata restoration](r1256-r1257-metadata-restoration.json):two files raw-identical to pinned Git originals;mirror-8.
 [Checkpoint](batch-p119-checkpoint.json). Actual worker graph/parser unchanged;P118 published11x2 hashes and Full19 reused.
 166/365 files;1261 reviewed:475 delivered restores,8 approved,778 pending,1459 unreviewed;Git accompanies receipt.
+
+P120 [VCDEX entry review](r1258-vcdex-entry-review.json):+1/-1 remains;inline comment removed,mirror line delta0.
+[Checkpoint](batch-p120-checkpoint.json). Original link fails entry ABI;global stdcall fails12 imports;final object identity and published11x2 hashes pass;P118 Full19 reused.
+167/365 files;1262 reviewed:475 restores,8 approved,779 pending,1458 unreviewed;Git accompanies receipt.

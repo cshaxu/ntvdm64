@@ -96,7 +96,7 @@ VOID UserTerminateHook(USHORT);
 
 
 
-BOOL WINAPI /* MVDM-HOST-DIV-886: Win32 DLL entry ABI in the cdecl build. */
+BOOL WINAPI
 VDDInitialize(
     HANDLE hDll,
     DWORD dwReason,

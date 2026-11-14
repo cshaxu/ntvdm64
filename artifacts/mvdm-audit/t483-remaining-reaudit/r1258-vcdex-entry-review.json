@@ -1,0 +1,46 @@
+{
+  "review_id": "T483-R1258",
+  "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+  "status": "Qualified residual pending owner;comment cleaned;actual compile/link controls and object identity verified;P118 publication/Full reused;Git accompanies receipt",
+  "original": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/vdd/samples/mscdex/vdd/vcdex.c",
+    "git_sha256": "9c317fb2af9b9396dce1d6ef812d118eeab842e356395bfd0753a4b5b07d668c",
+    "normalized_original_control_equal": true
+  },
+  "problem": "DLL loader entry convention differs from selected cdecl VDD service ABI",
+  "before": "+1/-1 with inline explanation",
+  "after": "+1/-1,only WINAPI token",
+  "mirror_delta": 0,
+  "decision": "Keep local WINAPI as smallest residual,pending owner;remove only inline comment. Not an original algorithm bug.",
+  "evidence": "Original BOOL compiles but actual /entry:VDDInitialize@12 link fails LNK2001. Whole-file /Gz compiles but actual ntvdm.lib link fails12 stdcall imports including VDDInstallUserHook@20,MGetVdmPointer@12,getBX@0. Current local WINAPI and comment-cleaned final compile/link successfully. Windows DLL entry uses stdcall;the selected VDD service and hook declarations/imports use cdecl. Changing the entry spelling in /entry alone cannot change generated callee cleanup.",
+  "alternatives": [
+    "Changing all VDD service imports,callbacks and providers to stdcall is a broad ABI redesign,not a smaller fix for one entry.",
+    "Force-including a name-specific macro or adding a CRT/entry wrapper transfers the same adaptation into another path;does not simplify it.",
+    "No original internal algorithm,dispatch table or drive operation changed."
+  ],
+  "line_proof": {
+    "original_logical_entry_line": 99,
+    "LF_count": 1474,
+    "form_feed_count": 5,
+    "all_line_positions_preserved": true,
+    "entire_file_equals_original_except_WINAPI": true,
+    "no_error_or_line_directive_change": true,
+    "counting_rule": "Only LF terminates a compiler line;form feeds are not extra lines."
+  },
+  "object_identity": {
+    "non_debug_sections_equal": true,
+    "before_sections": 30,
+    "candidate_sections": 30,
+    "differences": []
+  },
+  "negative_controls": {
+    "original": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored\n   Creating library O:/repos.hobby/ntvdm64/build/t483-s5-p120/original.lib and object O:/repos.hobby/ntvdm64/build/t483-s5-p120/original.exp\noriginal.exp : warning LNK4070: /OUT:VCDEX.dll directive in .EXP differs from output filename 'O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p120\\original.dll'; ignoring directive\nLINK : error LNK2001: unresolved external symbol _VDDInitialize@12\n  Hint on symbols that are defined and could potentially match:\n    _VDDInitialize\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p120\\original.dll : fatal error LNK1120: 1 unresolved externals\n",
+    "stdcall": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored\nLINK : warning LNK4216: Exported entry point _VDDInitialize@12\n   Creating library O:/repos.hobby/ntvdm64/build/t483-s5-p120/stdcall.lib and object O:/repos.hobby/ntvdm64/build/t483-s5-p120/stdcall.exp\nstdcall.exp : warning LNK4070: /OUT:VCDEX.dll directive in .EXP differs from output filename 'O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p120\\stdcall.dll'; ignoring directive\nstdcall.obj : error LNK2019: unresolved external symbol _VDDInstallUserHook@20 referenced in function _VDDRegisterInit@0\nstdcall.obj : error LNK2019: unresolved external symbol _MGetVdmPointer@12 referenced in function _ApiGetCDROMDriveList@0\nstdcall.obj : error LNK2019: unresolved external symbol _getBX@0 referenced in function _ApiGetCDROMDriveList@0\nstdcall.obj : error LNK2019: unresolved external symbol _getCX@0 referenced in function _ApiGetCopyrightFileName@0\nstdcall.obj : error LNK2019: unresolved external symbol _getDX@0 referenced in function _VDDRegisterInit@0\nstdcall.obj : error LNK2019: unresolved external symbol _getSP@0 referenced in function _VDDDispatch@0\nstdcall.obj : error LNK2019: unresolved external symbol _getSS@0 referenced in function _VDDDispatch@0\nstdcall.obj : error LNK2019: unresolved external symbol _getES@0 referenced in function _ApiGetCDROMDriveList@0\nstdcall.obj : error LNK2019: unresolved external symbol _setAX@4 referenced in function _ApiGetCopyrightFileName@0\nstdcall.obj : error LNK2019: unresolved external symbol _setBX@4 referenced in function _ApiGetNumberOfCDROMDrives@0\nstdcall.obj : error LNK2019: unresolved external symbol _setCX@4 referenced in function _ApiGetNumberOfCDROMDrives@0\nstdcall.obj : error LNK2019: unresolved external symbol _setCF@4 referenced in function _ApiGetCopyrightFileName@0\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p120\\stdcall.dll : fatal error LNK1120: 12 unresolved externals\n"
+  },
+  "limits": [
+    "Link failures are real negative controls;no runtime failure injection or physical CD-ROM acceptance claimed.",
+    "Only comment text changed;runtime package remains P118 and its Full19 is reused,not rerun."
+  ],
+  "delivery": "batch-p120-checkpoint.json"
+}
