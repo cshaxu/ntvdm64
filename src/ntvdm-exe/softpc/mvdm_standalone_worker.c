@@ -67,8 +67,9 @@ static DWORD begin_character_io(void *owner,HANDLE stop)
     /* Resolve the authenticated frontend requirement before original startup
      * can enable stream I/O. A short DOS task can finish before the first
      * video tick; deferring this choice loses writes on frame-only frontends.
-     * Use the original optimization switch, not a second renderer or policy. */
-    available=ntvdm_console_window_query(CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,presentation);
+     * A native Console shown in a Window still owns stream/restore state.
+     * Only presentation-only frontends must disable the startup option. */
+    available=ntvdm_console_window_query(CONSOLE_WINDOW_PRESENTATION_ONLY,presentation);
     if(available<=0)return available<0 ? ERROR_INVALID_STATE : GetLastError();
     if(presentation[0])StreamIoSwitchOn=FALSE;
     return ERROR_SUCCESS;

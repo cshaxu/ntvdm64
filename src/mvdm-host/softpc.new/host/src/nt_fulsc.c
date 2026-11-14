@@ -337,6 +337,16 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	 * Now call video routine to set the character height, updating the
 	 * BIOS RAM as it does so.
 	 */	
+	/* DIVERGENCE(MVDM-HOST-DIV-901): software VGA displays font RAM.
+	 * A host-requested cell-height change must also select its font.
+	 * Preserve downloaded fonts when the cell height is unchanged. */
+	if (charHeight != get_char_height())
+	{
+	    extern void load_font(sys_addr, int, int, int, int);
+	    load_font(charHeight == 8 ? EGA_CGDDOT :
+	              charHeight == 14 ? EGA_CGMN : EGA_HIFONT,
+	              256, 0, 0, charHeight);
+	}
 	set_screen_height_recal( scanLines ); /* Tim Oct 92 */
 	recalc_text(charHeight);
 

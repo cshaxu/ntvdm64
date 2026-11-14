@@ -159,6 +159,12 @@ try {
             if($LASTEXITCODE){throw 'Guest media contract failed; inspect guest-media.txt'}
         }
     }
+    Invoke-Gate 'startup-presentation' {
+        & "$repo/test/ntvdm-exe/softpc/verify-startup-presentation.ps1" -OutputRoot "$log/startup-presentation" *> "$log/startup-presentation.txt"
+    }
+    Invoke-Gate 'console-font-restore' {
+        & "$repo/test/ntvdm-exe/softpc/verify-console-font-restore.ps1" -OutputRoot "$log/console-font-restore" *> "$log/console-font-restore.txt"
+    }
     Invoke-Gate 'ntvdm-export-ordinals' {
         & $Python "$repo/test/observation/verify-ntvdm-export-ordinals.py" `
             (Join-Path $runtimeBinary 'ntvdm.exe') `
