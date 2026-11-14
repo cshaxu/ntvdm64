@@ -27,7 +27,8 @@ $selections = [Collections.Generic.List[object]]::new()
 
 function Read-Input([string]$Path, [bool]$Old) {
     if ($Old) {
-        $value = (& git -C $repo show "${baseline}:$Path") -join "`n"
+        $baselinePath = $Path -replace '^src/mvdm-host/', 'src/mvdm/'
+        $value = (& git -C $repo show "${baseline}:$baselinePath") -join "`n"
         if ($LASTEXITCODE) { throw "Cannot read baseline $Path" }
         return $value
     }

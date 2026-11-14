@@ -1,0 +1,383 @@
+{
+  "status": "Cached full,published11x2,focused source contrasts,public ABI,menu-resource,Full19 and boundary passed;final governance/Git follow",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "sha256": "f20548935ced3d6ace5ad0885dfe890cddd2f193f911e3afc2db5e813e580a61"
+    },
+    {
+      "path": "test/observation/verify-wow-copydata-lifetime.ps1",
+      "sha256": "385d3a7be2feee88aa340d5e371c77ef2d786fd83774abb809d6ffc0e90d5a16"
+    },
+    {
+      "path": "test/observation/verify-wow-dde-alias.ps1",
+      "sha256": "1af6e0c5b4d06ab163adb2a655f160be65ab1384bd5027aac97cad5a7cc90e15"
+    }
+  ],
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/walias.h",
+  "mirror_diff": {
+    "before": {
+      "added": 26,
+      "deleted": 25,
+      "total": 51
+    },
+    "after": {
+      "added": 12,
+      "deleted": 19,
+      "total": 31
+    }
+  },
+  "points": {
+    "R1312": {
+      "before": 2,
+      "after": 1,
+      "problem": "GDI declaration boundary",
+      "evidence": "Native x86 GdiQueryTable returned NULL for a real bitmap; original hConvert16to32 cannot obtain ENTRYWOW.FullUnique. Keep declared existing conversion ABI;remove comment.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1313": {
+      "before": 6,
+      "after": 4,
+      "problem": "GDI handle conversion",
+      "evidence": "Same native negative; original shift/private-table conversion cannot identify modern handles. Retain existing two macros,remove comments.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1314": {
+      "before": 2,
+      "after": 2,
+      "problem": "DC alias retirement",
+      "evidence": "ReleaseCachedDCs and FreeCachedDCs call this at original release points. Empty macro leaves live mapping slots after native release; finite alias table then retains stale identities. Native GDI remains resource owner.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1315": {
+      "before": 2,
+      "after": 0,
+      "problem": "Unused type-specific retirement macro",
+      "evidence": "No callers in src/test/tools or current generated source;restore exact original empty macro,not a new lifecycle route.",
+      "disposition": "restored-local"
+    },
+    "R1316": {
+      "before": 2,
+      "after": 0,
+      "problem": "Unused type-specific retirement macro",
+      "evidence": "No callers in src/test/tools or current generated source;restore exact original empty macro,not a new lifecycle route.",
+      "disposition": "restored-local"
+    },
+    "R1317": {
+      "before": 2,
+      "after": 0,
+      "problem": "Unused type-specific retirement macro",
+      "evidence": "No callers in src/test/tools or current generated source;restore exact original empty macro,not a new lifecycle route.",
+      "disposition": "restored-local"
+    },
+    "R1318": {
+      "before": 2,
+      "after": 0,
+      "problem": "Unused type-specific retirement macro",
+      "evidence": "No callers in src/test/tools or current generated source;restore exact original empty macro,not a new lifecycle route.",
+      "disposition": "restored-local"
+    },
+    "R1319": {
+      "before": 2,
+      "after": 0,
+      "problem": "Unused type-specific retirement macro",
+      "evidence": "No callers in src/test/tools or current generated source;restore exact original empty macro,not a new lifecycle route.",
+      "disposition": "restored-local"
+    },
+    "R1320": {
+      "before": 2,
+      "after": 0,
+      "problem": "Unused type-specific retirement macro",
+      "evidence": "No callers in src/test/tools or current generated source;restore exact original empty macro,not a new lifecycle route.",
+      "disposition": "restored-local"
+    },
+    "R1321": {
+      "before": 2,
+      "after": 2,
+      "problem": "Object alias retirement",
+      "evidence": "WG32DeleteDC/DeleteObject retire only after native deletion succeeds;GrayString releases temporary callback DC. Empty original macro cannot retire separate modern alias identity.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1322": {
+      "before": 6,
+      "after": 3,
+      "problem": "Per-call conversion ownership",
+      "evidence": "COPYDATA nested borrowed mapping must not free outer owner;optional text-map failure and callback changes require captured ownership;failed nested same-initiator DDE allocation must not delete outer node. Retain typed fields in existing MsgBuffer,remove comments.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1323": {
+      "before": 5,
+      "after": 3,
+      "problem": "Conversion status and failed-post ownership",
+      "evidence": "NULL HWND is valid for thread messages and cannot encode conversion failure;PostMessage rejection must roll back only this call newly created DDE pairs/packed parameter. Keep status and scoped ownership fields;remove comments.",
+      "disposition": "residual-pending-owner"
+    }
+  },
+  "native_negative": {
+    "kind": "x86-modern-gdi-query-table-contract-observation",
+    "directContract": false,
+    "exitCode": 1,
+    "output": [
+      "GDI_QUERY_TABLE pointer=00000000 readable=0 handle=0A0512EE guest=4BB8 index=12EE rebuilt=00000000 equal=0"
+    ],
+    "sourceSHA256": "0C6EFB0A9422B5CECDBF0972EC9FC59C54C575F5FB04BBDDF1AC039E3A1D68BC"
+  },
+  "test_repairs": "Two maintained fixtures still used post-move src/mvdm-host paths in immutable pre-move Git baseline. Map only historical path to src/mvdm;same baseline and assertions. Initial failure preserved.",
+  "limits": [
+    "Residual GDI/message-ownership adaptations remain pending owner decision;source contrasts do not claim private NT4 GDI support.",
+    "No guest edits. External immutable-fixture skips remain non-pass outcomes in Full records."
+  ],
+  "excluded_error_directives_unchanged": true,
+  "original_macro_identity": [
+    "FREEHFONT16",
+    "FREEHRGN16",
+    "FREEHBITMAP16",
+    "FREEHBRUSH16",
+    "FREEHPALETTE16",
+    "FREEHPEN16"
+  ],
+  "counter_review": "Native GDI table observation establishes unavailable original conversion duty;it does not prove every alias implementation detail optimal. Only called retirement macros remain. Six unused definitions restored exactly. Per-message fields track successful ownership acquisition,not a second persistent table. Existing positive/negative exact-body controls remain separate from full guest verification.",
+  "focused_evidence": {
+    "parameter_map": {
+      "end": "2026-11-14T21:20:28.7960753Z",
+      "baseline": "18d0ec060024912e6b03aec69bdded6c9181af03",
+      "passed": true,
+      "scope": "selected original release cache and exact extracted bodies with actual finalizer; lower services doubled, not actual guest"
+    },
+    "copydata": "FILTER_SELECTOR cases=14 entry_values=2 modes=7 errors=0 guest_proof=0\nQUEUE_SELECTOR cases=18 owners=3 modes=3 errors=0 full_queue_proof=0 guest_proof=0\nCOPYDATA_LIFETIME errors=0 scenarios=59 directions=2 stages=4 nested=1 immutable_release=1 exception=2 thread_status=1 hook_roles=2 filter_nested_different=1 embedded_headers=2 filter_output_rollback=1 guest_proof=0\n",
+    "copydata_negative": "FAIL line=318 fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth\nFAIL line=318 fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth\nFAIL line=318 fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth\nFAIL line=318 fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth\nFAIL line=318 fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth\nFAIL line=318 fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth\nFAIL line=318 fThunkDDEmsg==(BOOL)entering&&!live&&!pCPDataFirst&&!hook_depth\nFILTER_SELECTOR cases=14 entry_values=2 modes=7 errors=7 guest_proof=0\nQUEUE_SELECTOR cases=18 owners=3 modes=3 errors=0 full_queue_proof=0 guest_proof=0\nCOPYDATA_LIFETIME errors=7 scenarios=59 directions=2 stages=4 nested=1 immutable_release=1 exception=2 thread_status=1 hook_roles=2 filter_nested_different=1 embedded_headers=2 filter_output_rollback=1 guest_proof=0\n",
+    "dde": {
+      "scope": "Original alias/free bodies with service doubles; no guest/transport proof",
+      "candidateBodies": 16,
+      "baselineBodies": 12,
+      "baseline": "7835ba25e18b7b5e3f26cfb3e1e046d5789f4b92",
+      "passed": true
+    },
+    "dde_marker": "DDE_ALIAS cases=101 errors=0 nodes=0 guest_proof=0 transport_proof=0\n"
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 408050,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6397,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1361,
+          "CleanupMs": 427,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 14115,
+          "CleanupMs": 400,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 14324,
+          "CleanupMs": 421,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 12777,
+          "CleanupMs": 403,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 248,
+          "CleanupMs": 384,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 65969,
+          "CleanupMs": 390,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 45280,
+          "CleanupMs": 372,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 44066,
+          "CleanupMs": 375,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15377,
+          "CleanupMs": 376,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9916,
+          "CleanupMs": 389,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 64380,
+          "CleanupMs": 661,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12703,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28345,
+          "CleanupMs": 445,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30448,
+          "CleanupMs": 412,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4512,
+          "CleanupMs": 339,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7894,
+          "CleanupMs": 398,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9898,
+          "CleanupMs": 415,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4156,
+          "CleanupMs": 387,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6497,
+          "CleanupMs": 382,
+          "Passed": true
+        }
+      ]
+    },
+    "line_proof": "batch-p136-line-check.json",
+    "focused": [
+      "parameter-map positive/negative",
+      "COPYDATA positive/negative",
+      "DDE positive/negative",
+      "WOW_PUBLIC_MEMORY_ABI_OK",
+      "WOW_FIXTURE_OK case=menu-resource"
+    ],
+    "boundary": "review-check.log"
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "6E2B4508FF9792AA9EF22CA2F4F350A94C78D025AFCA6CF1217C12822721A050",
+      "Machine": 332,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "3A7E9419C237A3F1F459AC3D1EBEEEFE5F8F7E822DE739A6E45D4B7DE84C2B51",
+      "Machine": 34404,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "529805FA8F2E815E435F9ACA7EC2C1F6C101836BF3996FCE90E5691A207F5339"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "FBC7BBBF1D31B3AECEC5B85D01CB0573A2B4EDDEF54FE0BC04CF39BA26587F0B",
+      "Machine": 34404,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "BE9D0DC784BADB8000E751F3A9FA41C2F961C6A1A21C9593603DB20D96AE17D9"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "9C563D47ECE312A6C47FFA77E83991AF7EF32DBC1D3A47D9B6F07E2DD14AFEAA",
+      "Machine": 34404,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "37CAE5010EBFC56C0A192C004E5E2271F92DD3695617BEC503C28C177465B2EA"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "9E7E02B7026219AB24EAC7D9EECE2D39CA99286041B47B21734A4FB4F2A1A32B",
+      "Machine": 332,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "8EE8ADBD99F41846D7332DD177D97960F3072D9AE2F50F356DB5AF883A20DA21"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "58D32728A5ABBCD0EC6DD460C4361823DC3FD347AC3634F26A9A13374C3D6D29",
+      "Machine": 34404,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "44CE059DC160FF8FF04431B64E2E6B7871964B8472F4D56D0A983BB8DE4BCE69"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "EEDD79F5829771AD71886D11D88FE18468271C53AC719DEE180CFAEFBCA55FFE",
+      "Machine": 34404,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "5336327386D1EB931A2B0704D0C63A5A895C830250805B7E3ADCD240B0B7B402",
+      "Machine": 332,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "A84A5F1B868D7D21248428EB8B1AC302624FA090767DE5CEBD96A8E16D53E8D1"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "50E18D3CAB384E8760C8C925AA0CE59DB1B36F02EC117EBAF6330BFD4705E93B",
+      "Machine": 332,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "46868A42D75FE0FA9CC0C242E3A8CB6A69190C522832433381AF5BD2297199A4",
+      "Machine": 332,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "66B4389D852B824856EAEA8005A4600AD4FBF3FD96DEFD996085A6E86472FDCE"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "941A0AE733719CBE4BF325C1D1F0DF2CACCB0E93BF4C25817AA415FDCE52E9AB",
+      "Machine": 34404,
+      "PackageId": "13f4a9d2-5213-46a8-b6aa-5074162804bd",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

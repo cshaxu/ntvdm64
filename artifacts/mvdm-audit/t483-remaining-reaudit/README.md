@@ -923,3 +923,7 @@ P134 [waccel review](r1309-waccel-review.json), [receipt](batch-p134-checkpoint.
 P135 [whole-file restoration checkpoint](batch-p135-checkpoint.json), [line proof](batch-p135-line-check.json):walias mirror164->135(-29);original GDI suffix restored without changing live aliases.342 selected lines match;syntax passes. Cached full/publication/runtime/Git pending.187/365 files;1311/2720 points:497 delivered,2 local,8 approved,804 pending,1409 unreviewed.
 
 P135 final cached build,publish11x2,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror164->135(-29);342 selected lines match.187/365 files;1311/2720 points:499 delivered/confirmed,8 approved,804 pending,1409 unreviewed. Final governance and Git accompany receipt.
+
+P136 [whole-file checkpoint](batch-p136-checkpoint.json), [line proof](batch-p136-line-check.json):walias.h mirror51->31(-20);six unused macros restored;remaining six residuals pending owner.188/365 files;1323/2720 reviewed;499 delivered,6 local,8 approved,810 pending,1397 unreviewed. Cached build/publication/tests/Git pending.
+
+P136 final cached build,publish11x2,source contrasts,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror51->31(-20);82 selected lines per normal/Unicode context match.188/365 files;1323/2720 points:505 delivered/confirmed,8 approved,810 pending,1397 unreviewed. Final governance and Git accompany receipt.

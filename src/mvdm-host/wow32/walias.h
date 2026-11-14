@@ -17,7 +17,6 @@ typedef HANDLE HAND32;
 #define _WALIAS_
 #include "wspool.h"
 #include "wowuserp.h"
-/* DIVERGENCE(MVDM-HOST-DIV-341): original GDI table's existing carrier. */
 #include "common/wow/gdi_alias.h"
 
 
@@ -178,8 +177,6 @@ typedef struct _HDW {
 
 #define SERVERHANDLE(h)            (HIWORD(h))
 
-/* DIVERGENCE(MVDM-HOST-DIV-341): conversion and FREE* retire the same alias;
- * modern GDI remains the real resource/type/lifetime authority. */
 #define GDI32(h16)                 mvdm_wow_gdi_handle_to_native((HAND16)(h16))
 #define GDI16(h32)                 ((HAND16)mvdm_wow_gdi_handle_from_native((HANDLE)(h32)))
 
@@ -192,7 +189,7 @@ typedef struct _HDW {
 
 #define HFONT32(hobj16)            GDI32((HAND16)(hobj16))
 #define GETHFONT16(hobj32)         GDI16((HAND32)(hobj32))
-#define FREEHFONT16(hobj16)        mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
+#define FREEHFONT16(hobj16)
 
 #define HMETA32(hobj16)            ((HANDLE)HMFFromWinMetaFile((HAND16)(hobj16),FALSE))
 #define GETHMETA16(hobj32)         ((HAND16)WinMetaFileFromHMF((HMETAFILE)(hobj32),FALSE))
@@ -200,23 +197,23 @@ typedef struct _HDW {
 
 #define HRGN32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHRGN16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHRGN16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
+#define FREEHRGN16(hobj16)
 
 #define HBITMAP32(hobj16)          GDI32((HAND16)(hobj16))
 #define GETHBITMAP16(hobj32)       GDI16((HAND32)(hobj32))
-#define FREEHBITMAP16(hobj16)      mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
+#define FREEHBITMAP16(hobj16)
 
 #define HBRUSH32(hobj16)           GDI32((HAND16)(hobj16))
 #define GETHBRUSH16(hobj32)        GDI16((HAND32)(hobj32))
-#define FREEHBRUSH16(hobj16)       mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
+#define FREEHBRUSH16(hobj16)
 
 #define HPALETTE32(hobj16)         GDI32((HAND16)(hobj16))
 #define GETHPALETTE16(hobj32)      GDI16((HAND32)(hobj32))
-#define FREEHPALETTE16(hobj16)     mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
+#define FREEHPALETTE16(hobj16)
 
 #define HPEN32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHPEN16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHPEN16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
+#define FREEHPEN16(hobj16)
 
 #define HOBJ32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHOBJ16(hobj32)          GDI16((HAND32)(hobj32))
@@ -335,11 +332,8 @@ typedef union _MSGTHUNKBUFFER {
     BYTE               calcsz[sizeof(NCCALCSIZE_PARAMS) +
                                         sizeof(WINDOWPOS)];
     THUNKTEXTDWORD     thkdword;                            // LB_GETTEXT w/no HASSTRINGS
-    /* DIVERGENCE(MVDM-HOST-DIV-344): synchronous COPYDATA release keys. */
     struct { DWORD header, data, flags; } copydata;
-    /* DIVERGENCE(MVDM-HOST-DIV-347): call progress, no union size change. */
     struct { DWORD flags, native; } text;
-    /* DIVERGENCE(MVDM-HOST-DIV-353): original INITIATE node publication. */
     struct { DWORD active, initiator; } ddeinit;
 #line 343
 } MSGTHUNKBUFFER, *LPMSGTHUNKBUFFER;
@@ -360,9 +354,7 @@ typedef struct _MSGPARAMEX {
     INT            iMsgThunkClass;          // thunking aid
     INT            iClass;
     MSGTHUNKBUFFER MsgBuffer[1];
-    /* DIVERGENCE(MVDM-HOST-DIV-344): NULL HWND can be a valid thread message. */
     BOOL fThunkSucceeded;
-    /* DIV-363: optional owner supplied only by WU32PostMessage. */
     PVOID ddePostConversion;
     BOOL ddePostPacked;
 #line 361

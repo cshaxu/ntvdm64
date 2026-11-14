@@ -1,0 +1,90 @@
+[
+  {
+    "context": "normal",
+    "selected_original_lines": 82,
+    "matched_original_lines": 82,
+    "line_mismatches": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "final": [
+          [
+            343,
+            "struct { DWORD header, data, flags; } copydata;"
+          ],
+          [
+            344,
+            "struct { DWORD flags, native; } text;"
+          ],
+          [
+            345,
+            "struct { DWORD active, initiator; } ddeinit;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "final": [
+          [
+            361,
+            "BOOL fThunkSucceeded;"
+          ],
+          [
+            362,
+            "PVOID ddePostConversion;"
+          ],
+          [
+            363,
+            "BOOL ddePostPacked;"
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "context": "unicode",
+    "selected_original_lines": 82,
+    "matched_original_lines": 82,
+    "line_mismatches": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "final": [
+          [
+            343,
+            "struct { DWORD header, data, flags; } copydata;"
+          ],
+          [
+            344,
+            "struct { DWORD flags, native; } text;"
+          ],
+          [
+            345,
+            "struct { DWORD active, initiator; } ddeinit;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "final": [
+          [
+            361,
+            "BOOL fThunkSucceeded;"
+          ],
+          [
+            362,
+            "PVOID ddePostConversion;"
+          ],
+          [
+            363,
+            "BOOL ddePostPacked;"
+          ]
+        ]
+      }
+    ]
+  }
+]

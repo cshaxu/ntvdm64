@@ -12,7 +12,8 @@ function Owned($name,$exe,$line,$seconds,$expected=0){
 function Body($source,$name,[switch]$BeforeDdeScope){
  if($BeforeDdeScope){
   $relative=$source.Substring($repo.Length+1).Replace('\','/')
-  $text=(& git -C $repo show "7835ba25e:$relative") -join "`n"
+  $baselinePath=$relative -replace '^src/mvdm-host/','src/mvdm/'
+  $text=(& git -C $repo show "7835ba25e:$baselinePath") -join "`n"
   if($LASTEXITCODE){throw 'Cannot acquire immutable selector counterfactual'}
  }else{$text=[IO.File]::ReadAllText($source).Replace("`r`n","`n")}
  $matchesFound=[regex]::Matches($text,'(?m)^(?:BOOL|VPVOID|PCPDATA|HWND|LONG|ULONG)\s+(?:FASTCALL\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
