@@ -937,3 +937,7 @@ R1336-R1370 [initial source and diagnostic evidence](r1336-r1370-initial-evidenc
 P138 [whole-file checkpoint](batch-p138-checkpoint.json), [line proof](batch-p138-line-check.json):wcntl32 mirror86->69(-17);R1350 restored,34 minimized/unchanged residuals pending.190/365 files;1370/2720 points;510 delivered,1 local,8 approved,851 pending,1350 unreviewed. Final delivery pending.
 
 P138 final cached build,publish11x2,transaction167/parameter-map54 source contrasts,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror86->69(-17);540 selected lines match.190/365 files;1370/2720 points:511 delivered/confirmed,8 approved,851 pending,1350 unreviewed. Final governance and Git accompany receipt.
+
+P139 [whole-file checkpoint](batch-p139-checkpoint.json), [line proof](batch-p139-line-check.json):wcommdlg mirror239->234(-5);selected differences27->22,excluded212 unchanged. R1379 restored,R1371 structure confirmed,11 residuals pending.191/365 files;1383/2720 points;511 delivered,2 local,8 approved,862 pending,1337 unreviewed. Final delivery pending.
+
+P139 final cached build,publish11x2,transaction169,common-dialog callback,native42/two references,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror239->234(-5);1218 selected lines match.191/365 files;1383/2720 points:513 delivered/confirmed,8 approved,862 pending,1337 unreviewed. Final governance and Git accompany receipt.

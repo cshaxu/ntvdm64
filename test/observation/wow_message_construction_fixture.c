@@ -451,6 +451,13 @@ static void cbt_transactions(void){
 #ifndef BASELINE_IMAGE
 static void stack_transactions(void){
  wow_message_stack scope;DWORD old;PTD_VALUE other;unsigned mode;
+ for(mode=0;mode<2;++mode){
+  DWORD flags;reset_case();task.dwFlags=mode ? TDF_INITCALLBACKSTACK : 0;
+  ++scenarios;flags=task.dwFlags;old=task.vpCBStack;SetLastError(0x4498);
+  expect(fixture_common_dialog_filter(0xc180,0xc180)==FALSE &&
+   task.vpCBStack==old && task.dwFlags==flags && !owned() && !allocations &&
+   GetLastError()==0x4498,"TRANSACTION_COMMDLG_FILTER_UNCHANGED");
+ }
  for(mode=0;mode<7;++mode){
   reset_case();old=task.vpCBStack;wow_message_stack_enter(&scope);(void)stackalloc16(8);
   if(mode==0)scope.completed=TRUE;

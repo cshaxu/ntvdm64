@@ -1,0 +1,161 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wcommdlg.c",
+    "shared_selected_lines": 1218,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            494,
+            "if (!(*plParamNew = malloc16(cb))) {"
+          ]
+        ],
+        "after": [
+          [
+            494,
+            "if (!(*plParamNew = wow_message_heap32(lpwm32mpex, malloc16(cb)))) {"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            501,
+            "free16((VPVOID) *plParamNew);"
+          ]
+        ],
+        "after": [
+          [
+            501,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            548,
+            "WCD32DialogProc("
+          ]
+        ],
+        "after": [
+          [
+            548,
+            "WowOriginalDialogProc("
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            580,
+            "WCD32PrintSetupDialogProc("
+          ]
+        ],
+        "after": [
+          [
+            580,
+            "WowOriginalPrintSetupDialogProc("
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            650,
+            "WM32MSGPARAMEX  wm32mpex;"
+          ]
+        ],
+        "after": [
+          [
+            650,
+            "WM32MSGPARAMEX  wm32mpex = {0};"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            653,
+            "wow_message_stack stack;"
+          ],
+          [
+            654,
+            "wow_message_stack_enter(&stack);"
+          ],
+          [
+            655,
+            "__try {"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            788,
+            "wm32mpex.fFree = 1;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            834,
+            "stack.completed = 1;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            845,
+            "} __finally {"
+          ],
+          [
+            846,
+            "__try { wow_message_unwind32(&wm32mpex); }"
+          ],
+          [
+            847,
+            "__finally { wow_message_stack_leave(&stack, !stack.completed || _abnormal_termination()); }"
+          ],
+          [
+            848,
+            "}"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            2379,
+            "WCD32FindReplaceDialogProc("
+          ]
+        ],
+        "after": [
+          [
+            2379,
+            "WowOriginalFindReplaceDialogProc("
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

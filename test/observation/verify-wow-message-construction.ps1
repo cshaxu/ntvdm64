@@ -110,8 +110,11 @@ try{
    $marker='        stack.completed = TRUE; /* DIV-349: successful native-only notification. */'
    if(!$branch.Contains($marker)){throw 'Successful native-only return must commit, not restore its nested call'}
    $dialog=Region (Read-Source 'src/mvdm-host/wow32/wcommdlg.c' $false) "UINT APIENTRY`nWCD32CommonDialogProc(" 'ULONG FASTCALL WCD32ChooseColor' 'common-dialog-normal-return'
-   $dialog=[regex]::Replace($dialog,'(?m)^#line[^\n]*\n','')
-   if($dialog -notmatch '(?s)uMsg == msgWOWCHOOSEFONT\).*?stack\.completed = TRUE; /\* DIV-349: intentionally filtered, not failed\. \*/\s*return\(FALSE\);'){throw 'Intentional common-dialog filter must commit normally'}
+   $filter=Region $dialog '            } else if (uMsg == msgWOWCHOOSEFONT) {' '            } else {' 'common-dialog-filter'
+   $filter=$filter.Substring(0,$filter.LastIndexOf('            } else {'))+'            }'
+   $filter=$filter.Replace('            } else if (','            if (')
+   $dialogFinalizer=Region $dialog '    } __finally {' "`n}`n" 'common-dialog-finalizer'
+   $bodies+='static UINT fixture_common_dialog_filter(UINT uMsg,UINT msgWOWCHOOSEFONT) { wow_message_stack stack; WM32MSGPARAMEX wm32mpex = {0}; wow_message_stack_enter(&stack); __try {'+"`n"+$filter+"`n"+'return 1;'+"`n"+$dialogFinalizer
    $finalizer=Region $dispatch '    } __finally {' "`n}`n" 'wndproc-transaction-finalizer'
    foreach($variant in @('current','omitted')){
     $selected=if($variant -eq 'current'){$branch}else{$branch.Replace($marker,'')}

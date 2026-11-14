@@ -1,0 +1,380 @@
+{
+  "batch": "P139",
+  "status": "Cached full,published11x2,transaction/common-dialog/native reference,public ABI,menu-resource,Full19 and boundary passed;final governance/Git follow",
+  "source_head": "2e72bb9150ab040be0ff403340028706fc5877a2",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "sha256": "7949bf8bb815824c507cfa7fbcc85b4c9c87001522aa5e1ae1bc8016abcdec1f"
+    },
+    {
+      "path": "test/observation/verify-wow-message-construction.ps1",
+      "sha256": "d15ac98e5baaa8e8ec00aa58586a8419e4e5131b0f0b72e0c28ad0f29b99e22f"
+    },
+    {
+      "path": "test/observation/wow_message_construction_fixture.c",
+      "sha256": "27b608dd9584eee20bd4de92484d59f9af99a4d8794323132e3f4b2f8009aa99"
+    }
+  ],
+  "mirror_files": 1,
+  "mirror_before": 239,
+  "mirror_after": 234,
+  "mirror_diff_delta": -5,
+  "excluded_structure_difference_unchanged": 212,
+  "selected_adaptation_before": 27,
+  "selected_adaptation_after": 22,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wcommdlg.c",
+  "points": [
+    {
+      "id": "T483-R1371",
+      "before": 0,
+      "after": 0,
+      "delta": 0,
+      "problem": "Excluded debug and line structure",
+      "evidence": "Both original DBG boundaries remain excluded by #error; actual x86 preprocessing matches1218 shared selected lines. No new runtime change or restoration of excluded code.",
+      "decision": "restore/confirm original"
+    },
+    {
+      "id": "T483-R1372",
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Lifetime declarations",
+      "evidence": "Original SHAREVIOLATION converter allocates before putstr16/callback; exception bypasses normal free16. Existing call-local cleanup uses explicit WINAPI declarations and stack record; original has no exceptional resource owner. Keep one include, no new shim.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1373",
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Capture SHAREVIOLATION buffer",
+      "evidence": "Original malloc16/putstr16/normal-free body is exercised by transaction family18; construction and copyback escape skip release. Capture completed acquisition in existing dwTmp[1]; incoming native lParam alone cannot identify owned guest allocation before conversion.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1374",
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume SHAREVIOLATION buffer",
+      "evidence": "Original free16 does not consume the recorded key, so the required owner finalizer would release again. Single existing release call consumes before original free16 without replaying copyback.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1375",
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Dialog native entrance",
+      "evidence": "Modern USER invokes the callback while original taskman execution can be parked in a native wait. callback_enter restores the selected task through original xxxDirectedYield/xxxSleepTask and grants a bounded alias borrow before the original body. Original GetCommdlgTd only reads CURRENTPTD chain; it cannot perform this missing native-host execution handoff. Keep body-only rename, remove comment; whole-TU rename would also redirect registrations away from the entry.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1376",
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Print-setup native entrance",
+      "evidence": "Same task/borrow boundary as normal dialog. Original setup callback reads and updates CURRENTPTD CommDlgTd and may GetWindow the owner before CallBack16. Guarding only the later CallBack16 is too late. Keep body-only rename, remove comment.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1377",
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Initialize cleanup progress",
+      "evidence": "Common-dialog callback may reject IGNOREINPUT or fail before selecting/converting a message. Original uninitialized record cannot be passed to required cleanup: random uMsg/lpfnM32/keys can select or release unacquired resources. Zero existing per-call record, not another allocation registry.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1378",
+      "before": 3,
+      "after": 3,
+      "delta": 0,
+      "problem": "Scope before construction",
+      "evidence": "Original selected converters may allocate callback stack before CallBack16. CallBack16 captures after that allocation, so its own recovery cannot restore this caller pre-conversion cursor. Constructor/copyback exceptions skip normal unthunk. Keep the single existing outer scope and finally.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1379",
+      "before": 1,
+      "after": 0,
+      "delta": -1,
+      "problem": "Filtered ChooseFont return",
+      "evidence": "Restore original immediate return. On this exact branch, no converter or guest callback ran. GETHWND16 is a cast; GetWindowLong GWL_HINSTANCE is negative-index public native query: client_try_get_long returns FALSE, wow_native_GetWindowLongA directly queries USER and only publishes GWL_HWNDPARENT. No stack/callback mutation occurs. Restoring the captured unchanged cursor is equivalent; old source-string assertion was not necessity evidence. Two INIT flag states pass unchanged-stack/flags/error/no-allocation assertions using exact selected filter and finalizer bodies.",
+      "decision": "restore/confirm original"
+    },
+    {
+      "id": "T483-R1380",
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Synchronous converter release policy",
+      "evidence": "Common-dialog source dispatches every uMsg<0x400 through aw32Msg, including WM_DDE_ACK. Original WM32DDEAck reads fFree to release the EXECUTE pair; original W32Win16WndProc sets TRUE for the same synchronous callback contract. Leaving this uninitialized or zero makes the release depend on stack garbage or suppresses it. Keep explicit policy; this is source-level DDE contract evidence, not a new real-guest common-dialog DDE reproduction.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1381",
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Completed output conversion",
+      "evidence": "Set completed only after successful original callback and output unthunk. Otherwise finalizer would roll back a successfully advanced call stack; existing normal versus abort stack fixture demonstrates the distinction. Error/early-return labels must not implicitly commit.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1382",
+      "before": 5,
+      "after": 4,
+      "delta": -1,
+      "problem": "Cleanup then stack restore",
+      "evidence": "Keep finalizer order: release message resources, then restore the outer stack on unsuccessful/abnormal completion even if release throws. Remove redundant local abnormal: stack is caller-private and wow_message_unwind32 receives only wm32mpex, never this scope. Inline the same predicate at the same stack_leave call.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1383",
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Modeless resource destroy entrance",
+      "evidence": "Original FindReplace WM_DESTROY releases guest template resources and host COMMDLGTD/FINDREPLACE records without invoking application hook. It must remain callable during task resource cleanup even when application callbacks are denied. Existing callback binding registers/consumes this original owner before guest teardown; source plus nested/exception/deny/resource-order fixture proves entry responsibilities. Keep body-only rename; remove comment.",
+      "decision": "residual pending owner"
+    }
+  ],
+  "counter_review": "Verified filtered path cannot reach constructor/CallBack16; GWL_HINSTANCE bypasses private positive-index state and parent discovery. Existing stack scope remains private across message cleanup. Retained entry names in prototypes/registrations; only original body names differ. DBG boundaries and1218 line positions unchanged. Tests now observe filtered return state rather than require implementation marker.",
+  "limitations": [
+    "Focused exact-body fixtures use bounded doubles; native references do not constitute full guest common-dialog acceptance.",
+    "DDE fFree necessity is source-contract evidence, not a new actual guest reproduction.",
+    "11 residual points await owner decision; no guest or winnt.zip changes; missing external fixtures remain skipped."
+  ],
+  "original_shareviolation_test_body": "Exact pinned original after CRLF normalization; compared to transaction historical baseline extracted function",
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 419648,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6671,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1500,
+          "CleanupMs": 476,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 16169,
+          "CleanupMs": 480,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 14023,
+          "CleanupMs": 478,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 12012,
+          "CleanupMs": 463,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 310,
+          "CleanupMs": 398,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66872,
+          "CleanupMs": 511,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 46823,
+          "CleanupMs": 489,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 47568,
+          "CleanupMs": 505,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15078,
+          "CleanupMs": 455,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11078,
+          "CleanupMs": 424,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 65174,
+          "CleanupMs": 483,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12874,
+          "CleanupMs": 489,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28621,
+          "CleanupMs": 460,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30780,
+          "CleanupMs": 513,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4496,
+          "CleanupMs": 504,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7857,
+          "CleanupMs": 498,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10296,
+          "CleanupMs": 479,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4377,
+          "CleanupMs": 396,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6483,
+          "CleanupMs": 487,
+          "Passed": true
+        }
+      ]
+    },
+    "line_proof": "batch-p139-line-check.json",
+    "transaction": "TRANSACTION_FAMILY index=0 message=000D modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=1 message=0087 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=2 message=030C modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=3 message=022B modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=4 message=00B2 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=5 message=00B3 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=6 message=00C2 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=7 message=00C4 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=8 message=00CB modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=9 message=0143 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=10 message=0148 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=11 message=0152 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=12 message=0189 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=13 message=018D modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=14 message=0191 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=15 message=0192 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=16 message=0198 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=17 message=0180 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=18 message=C001 modes=5 errors=0 copy_fault=1\nTRANSACTION_GROUP errors=0 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0\nMESSAGE_CONSTRUCTION failures=0 scenarios=171 abi=72 scratch_offset=56 scratch_slots=4 parm=16\n",
+    "negative_transaction": "FAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=0 message=000D modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=1 message=0087 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=2 message=030C modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=3 message=022B modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=4 message=00B2 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=5 message=00B3 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=6 message=00C2 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=7 message=00C4 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=8 message=00CB modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=9 message=0143 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=10 message=0148 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=11 message=0152 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=12 message=0189 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=13 message=018D modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=14 message=0191 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=15 message=0192 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=16 message=0198 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=17 message=0180 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=18 message=C001 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_PARTIAL_COPY_RELEASE_ONLY\nFAIL TRANSACTION_CREATE_COPY_ABORT\nFAIL TRANSACTION_CREATE_COPY_ABORT\nFAIL TRANSACTION_CREATE_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_RELEASE_ESCAPE\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_UNLOCKED_HANDLE_RELEASE\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_UNLOCKED_HANDLE_RELEASE\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_CBT_ABORT\nFAIL TRANSACTION_CBT_FAILED_STACK\nFAIL TRANSACTION_CBT_FAILED_STACK\nFAIL TRANSACTION_CONTROL_ABORT\nTRANSACTION_GROUP errors=72 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0\nMESSAGE_CONSTRUCTION failures=72 scenarios=154 abi=72 scratch_offset=56 scratch_slots=4 parm=16\n",
+    "callback": "WOW_UNINITIALIZED_CLEANUP errors=0 exact_td=1 foreign_rejected=1 committed_rejected=1 retired_rejected=1\nWOW_COMMDLG_RESOURCE_ASSOCIATION errors=0 bound_before_callback=1 consumed_before_release=1 failures_fatal=2\nWOW_COMMDLG_RESOURCE_FAILURE errors=0 fatal_edges=3 skipped_free=0\nWOW_COMMDLG_EXIT_GUARD errors=0 entries=3 resource_branch=1 nested=1 exception=1 denied=3 early_order=1 rejected_free=1\n",
+    "native_calls": "COMMON_DIALOG_LEAF wow_native_choose_color scenarios=6\nCOMMON_DIALOG_LEAF wow_native_choose_font scenarios=6\nCOMMON_DIALOG_LEAF wow_native_open_file scenarios=6\nCOMMON_DIALOG_LEAF wow_native_save_file scenarios=6\nCOMMON_DIALOG_LEAF wow_native_find_text scenarios=6\nCOMMON_DIALOG_LEAF wow_native_replace_text scenarios=6\nCOMMON_DIALOG_LEAF wow_native_print_dialog scenarios=6\nCOMMON_DIALOG_BOUNDARIES errors=0 leaves=7 scenarios=42 guest_proof=0\n",
+    "native_reference": "NATIVE_COMMDLG_REFERENCE mode=0 hwnd=029008CA error=0 extended=0 hooks=1 size=40\nNATIVE_COMMDLG_REFERENCE mode=1 hwnd=029108CA error=0 extended=0 hooks=2 size=40\nNATIVE_COMMDLG_REFERENCE_RESULT errors=0 modes=2\n",
+    "focused": [
+      "WOW_PUBLIC_MEMORY_ABI_OK",
+      "WOW_FIXTURE_OK case=menu-resource"
+    ],
+    "boundary": "review-check.log"
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "B37CA8704023E3C0ED214DD1699669B7F1371A9347DF2B19595FF6CAE5A3F102",
+      "Machine": 332,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "F630994C30EF7707FA8CCB3BBCCFCBC88370C50FDE1771D6EBF43D53107E3EC8",
+      "Machine": 34404,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "4448E3F84C1D080939543DC746D7F01013E87D5F2C6EE36810A0018EE82620ED"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "07FFCB567780980EC53146CCC8B9D675212DB2A6AC596D1470BDB651626EF061",
+      "Machine": 34404,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "2E2E247B709CDCB7A0C5737DED14A70083339DDD4C979ADE5FBAD9E359CFDA58"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "CF3E2A02CD841622FBB6637B0FE5D8A89B0C33D17052DB7ED1BD2D193E2E9293",
+      "Machine": 34404,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "70FC6BD8BD4A592B2E58EDF7A6434E1EE89482383548FAD8FDAD13B60E2D3AF5"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "42A0D1989D9003C23AE91C4027F88AD5AE93C61C4C6E2DE8D39DF35EE4F7F0F1",
+      "Machine": 332,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "A80BA2165B5D13F55644C5928FD07F7247EA1C749081E4CB4A385CC0598999AE"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "69BD401DFDF29A017EB2F15FB49506CED73255D136DA8F97976654A81D99BD10",
+      "Machine": 34404,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "0EE68AB2BA926ED064ECC7F3FD728975BCA1C19EF9A3755BC83BF3E040F00AE0"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "91AC76BD275A48F919298A72139FCBDBEA162C5459CACCAAE6F7A9C6F9A8FD2F",
+      "Machine": 34404,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "84C0A3A43F13D8864353DD67922008207B7AAF14AE65E72108C5A6A1E5A9B4BE",
+      "Machine": 332,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "DC374E08343DD29FAF71054136BFC9B676A193B0BC87AE9F8D832A9581FE4A72"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "0DE633A6581434149D23CE2D1C35F11F39168327713B1F2D7AD40F600FE259FA",
+      "Machine": 332,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "7A8BE88A8EC3C4B70863D94D6FAD20902F71423D9669B87BB0D6B25FF637F0DB",
+      "Machine": 332,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "8CA8C1534E77C9D91CD8087FC181D7AFFDF65EB83FC2B22C6F0CA2C8FFB86BF5"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "487671C0CE4EB7C12DB5270D13623C511C8AEB41140B2507AAD8BAB91C582A17",
+      "Machine": 34404,
+      "PackageId": "c99550f4-2be0-450b-b6b5-77a5cd181c5e",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

@@ -353,7 +353,6 @@ BOOL FASTCALL WM32msgCHOOSEFONTGETLOGFONT(LPWM32MSGPARAMEX lpwm32mpex)
 //
 
 UINT APIENTRY
-/* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */
 #line 548
 WowOriginalDialogProc(
     HWND hdlg,
@@ -388,7 +387,6 @@ Routine Description:
 
 
 UINT APIENTRY
-/* DIVERGENCE(MVDM-HOST-DIV-335): scoped native callback entrance. */
 #line 580
 WowOriginalPrintSetupDialogProc(
     HWND hdlg,
@@ -577,7 +575,6 @@ Routine Description:
                 //
                 // no wow app will expect this, so don't send it.
                 //
-                stack.completed = TRUE; /* DIV-349: intentionally filtered, not failed. */
 #line 770
                 return(FALSE);
             } else {
@@ -659,9 +656,8 @@ SilentError:
     wm32mpex.lReturn = 0;
     goto Done;
     } __finally {
-        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */
         __try { wow_message_unwind32(&wm32mpex); }
-        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }
+        __finally { wow_message_stack_leave(&stack, !stack.completed || AbnormalTermination()); }
     }
 #line 845
 }
@@ -2198,7 +2194,6 @@ Error:
 }
 
 UINT APIENTRY
-/* DIVERGENCE(MVDM-HOST-DIV-335): preserve original resource-only destroy branch. */
 #line 2379
 WowOriginalFindReplaceDialogProc(
     HWND hdlg,
