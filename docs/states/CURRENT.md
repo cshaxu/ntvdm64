@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1173 points reviewed:427 restored delivered,0 local,8 approved,
-738 qualified pending,0 restores decided;1547 unreviewed. Files147/365 audited,218 remain.
+1176 points reviewed:428 restored delivered,0 local,8 approved,
+740 qualified pending,0 restores decided;1544 unreviewed. Files148/365 audited,217 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -98,6 +98,9 @@ P103 nt_inthk.c original hook restored and delivered;mirror326->22(-304),only7 e
 branches remain. Coupled c_main monitor-only entrypoints removed(-25). Cached full
 build,publish11x2,focused/Full19 passed;Git delivery accompanies receipt.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1151-r1169-nt-inthk-review.json).
+
+P104 nt_keycd.c reviewed;mirror6->4(-2),comment-only;P103 binaries unchanged.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1170-r1172-nt-keycd-review.json).
 
 ## Remaining Scope
 

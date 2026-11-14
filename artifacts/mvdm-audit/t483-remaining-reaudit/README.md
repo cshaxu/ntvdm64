@@ -777,3 +777,8 @@ P101 delivered: [whole-file restoration/minimization](batch-p101-checkpoint.json
 P102 delivered: [nt_hosts whole-file review](r1146-r1150-nt-hosts-review.json), [lines](batch-p102-line-check.json), [checkpoint](batch-p102-checkpoint.json). Mirror86->56(-30);four original restorations and one QuickEdit residual;121 original selected-line matches. Cached full x86/x64,publish11x2/hash,Full19 and governance passed;Git delivery accompanies receipt.
 
 P103 delivered: [nt_inthk whole-file review](r1151-r1169-nt-inthk-review.json), [line check](batch-p103-line-check.json), [checkpoint](batch-p103-checkpoint.json). Mirror diff net-329 across2 files;21 points restored;cached full build,publish11x2,focused/Full19 and governance passed;Git delivery accompanies receipt.
+
+P104 [nt_keycd whole-file review](r1170-r1172-nt-keycd-review.json): R1170 original blank restored;
+R1171/R1172 actual-object boundary controls justify two minimal residuals pending owner.
+Mirror6->4(-2);148/365 files,1176/2720 points reviewed;428 restored,8 approved,740 pending,1544 unreviewed.
+Comment/newline-only delivery reuses published P103 package; no fresh full build claimed.

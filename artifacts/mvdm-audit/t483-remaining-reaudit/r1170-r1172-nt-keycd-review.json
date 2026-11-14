@@ -1,0 +1,24 @@
+{
+  "scope": "M0 T483 S5 P104; whole nt_keycd.c",
+  "baseline": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_keycd.c",
+  "before_diff": 6,
+  "after_diff": 4,
+  "mirror_diff_delta": -2,
+  "sha256": "eee7e08dd0bc4b094907d176b465d0cbb29fabf61dc9dcf0954fb88fe72fa794",
+  "line_proof": "Exact original bytes except two single-character >= replacements at original lines419/428. Original blank409 and CRLF restored. No line movement or added #line/#error; original conditional structure untouched.",
+  "chain": "NTCON encode_input -> common console client WORD scan decode -> nt_event nt_key_down_action/nt_key_up_action -> KeyMsgToKeyCode; no array-length filter in this chain.",
+  "evidence": "Current cached real object and pinned original compiled with actual worker command; both normal contracts268322 assertions/1184 callbacks pass. Boundary sentinel controls: current rejects2/2, original0/2 and reads123 from adjacent byte.",
+  "limits": "Sentinel is confined to fixture process and restored; proves out-of-bounds access, not a physical-keyboard crash. No new interactive acceptance claimed.",
+  "decision": {
+    "R1170": "restore original blank",
+    "R1171": "minimum one-character comparison change; pending owner",
+    "R1172": "minimum one-character comparison change; pending owner"
+  },
+  "delivery": "Comment/newline-only source restoration; executable tokens and physical lines unchanged from P103. Owner exemption: no full product rebuild/republication/runtime rerun. P103 package remains published. This record accompanies P104 Git delivery.",
+  "controls": {
+    "controls.process.json": "{\n  \"pid\": 13304,\n  \"start\": \"2026-11-14T06:16:37.9327897-08:00\",\n  \"script\": \"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p104\\\\controls.ps1\"\n}\n",
+    "current-boundary.log": "KEYCODE_BOUNDARY enhanced=0 scan=133 before=0 sentinel=123 observed=0 restored=0\nKEYCODE_BOUNDARY enhanced=1 scan=84 before=0 sentinel=123 observed=0 restored=0\nKEYCODE_BOUNDARY expected_rejected=2 actual_rejected=2\n",
+    "original-boundary.log": "KEYCODE_BOUNDARY enhanced=0 scan=133 before=0 sentinel=123 observed=123 restored=0\nKEYCODE_BOUNDARY enhanced=1 scan=84 before=0 sentinel=123 observed=123 restored=0\nKEYCODE_BOUNDARY expected_rejected=2 actual_rejected=0\n",
+    "original-normal.log": "KEYCODE_OBJECT_CONTRACT checks=268322 failures=0 callbacks=1184\n"
+  }
+}

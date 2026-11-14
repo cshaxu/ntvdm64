@@ -406,7 +406,7 @@ WORD aNumPadSCode[] = // index by VK_NUMPAD0 as zero offset
   *                 Return 0 if not mapped.				     *
   *									     *
   ****************************************************************************/
-/* DIV-873: table extent is not an index; retain the original unmapped result. */
+
 BYTE KeyMsgToKeyCode(PKEY_EVENT_RECORD KeyEvent)
 {
     /*:::::::::::::::::::::::::::::::::::: do we need the enhanced key set ? */
