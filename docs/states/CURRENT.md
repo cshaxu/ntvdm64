@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1209 points reviewed:442 restored delivered,0 local,8 approved,
-759 qualified pending,0 restores decided;1511 unreviewed. Files153/365 audited,212 remain.
+1212 points reviewed:444 restored delivered,0 local,8 approved,
+760 qualified pending,0 restores decided;1508 unreviewed. Files154/365 audited,211 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P109 package `92b6d16e-1f87-46eb-931b-de036d32f41d` published11x2; hashes match.
+P110 package `93763d86-98e7-4c6c-a386-507c1dbbcad0` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p109-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p110-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -99,6 +99,9 @@ P108 nt_pif.c mirror31->14(-17);cached/focused,publication11x2,Full19 passed.
 
 P109 nt_reset.c mirror115->99(-16);cached build,publish11x2,Full19 passed.
 [Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p109-checkpoint.json).
+
+P110 nt_rez.c mirror15->5(-10);cached build,publish11x2,Full19 passed.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p110-checkpoint.json).
 
 ## Remaining Scope
 

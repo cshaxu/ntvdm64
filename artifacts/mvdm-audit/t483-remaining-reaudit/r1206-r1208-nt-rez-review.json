@@ -1,0 +1,68 @@
+{
+  "scope": "M0 T483 S5 P110 whole nt_rez.c",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_rez.c",
+  "evidence": {
+    "1206": "Restored original include list after counter-review: initial header deletion failed only because of added uint32_t cast. Remove that redundant cast too;actual x86 compile succeeds. Six non-debug COFF sections and named relocations identical to prior candidate. cdecl pointer arguments and 32-bit int/long return have identical selected x86 ABI. C4013 alone is not a failure proof;no replacement shim or declaration.",
+    "1207": "rom.c load_ROM requests ROMS_REZ_ID with ROM_BUFFER_SIZE. Product builder embeds bios1/bios4/v7vga as named RCDATA in ntvdm.exe. Runtime firmware root is product/softpc,which has no shipped ROM files. Original host_find_file/_open cannot load those embedded bytes;removing the hook loses ROM initialization. No extraction or second lookup path is introduced.",
+    "1208": "Whole src/tools/test search finds no caller or address use of host_write_resource,only definition and header declaration;actual ntvdm.exe map contains host_read_resource but not host_write_resource. Historical wrong-CWD scenario is not a reached product failure. Restore original comment and _open(name,...) exactly;do not retain speculative path correction."
+  },
+  "mirror": {
+    "nt_rez": {
+      "before": {
+        "added": 12,
+        "deleted": 3,
+        "total": 15
+      },
+      "after": {
+        "added": 4,
+        "deleted": 1,
+        "total": 5
+      }
+    }
+  },
+  "line_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "shared_selected_lines": 75,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              69,
+              "if (type == 1)"
+            ],
+            [
+              70,
+              "return maxsize <= 0 ? 0 : mvdm_softpc_firmware_read_embedded_rom("
+            ],
+            [
+              71,
+              "name, addr, maxsize);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "restored": [
+    1206,
+    1208
+  ],
+  "residual": [
+    1207
+  ],
+  "counter_review": "Caught circular uint32_t cast/header dependency;both removed with actual x86 object equivalence. Keep only independently proven embedded ROM boundary. Uncalled resource-write correction restored. No second lookup or extraction path.",
+  "status": "Whole-file restoration built,published11x2 and Full19 passed;Git delivery accompanies receipt",
+  "header_object_comparison": {
+    "non_debug_sections_equal": true,
+    "before_sections": 6,
+    "candidate_sections": 6,
+    "differences": []
+  },
+  "delivery": "batch-p110-checkpoint.json"
+}

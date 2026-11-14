@@ -1,0 +1,29 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+    "shared_selected_lines": 75,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            69,
+            "if (type == 1)"
+          ],
+          [
+            70,
+            "return maxsize <= 0 ? 0 : mvdm_softpc_firmware_read_embedded_rom("
+          ],
+          [
+            71,
+            "name, addr, maxsize);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

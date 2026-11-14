@@ -807,3 +807,8 @@ P109 [nt_reset review](r1202-r1205-nt-reset-review.json):delivered mirror115->99
 [Checkpoint](batch-p109-checkpoint.json);[line proof](batch-p109-line-check.json).
 153/365 files;1209 points reviewed:442 delivered restorations,0 local,8 approved,759 pending,1511 unreviewed.
 Cached full build,publication11x2,Full19 and governance passed;Git delivery accompanies receipt.
+
+P110 [nt_rez review](r1206-r1208-nt-rez-review.json):delivered mirror15->5(-10).
+[Checkpoint](batch-p110-checkpoint.json);[line proof](batch-p110-line-check.json).
+154/365 files;1212 points reviewed:444 delivered restorations,0 local,8 approved,760 pending,1508 unreviewed.
+Cached full build,publication11x2,Full19 and governance passed;Git delivery accompanies receipt.
