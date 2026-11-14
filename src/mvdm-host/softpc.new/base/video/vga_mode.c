@@ -484,13 +484,7 @@ boolean	choose_vga_display_mode()
 	 * anything the EGA does.
 	 */
 
-	/* Packed V7 scanout keeps byte units when CPU chain4 is disabled. */
-	if( get_chain4_mode()
-#ifdef V7VGA
-		|| (get_256_colour_mode() && get_seq_chain4_mode())
-#endif
-	)
-#line 474
+	if( get_chain4_mode() || (get_256_colour_mode() && get_seq_chain4_mode()) )
 	{
 		set_offset_per_line_recal(get_actual_offset_per_line() << 2);
 	}

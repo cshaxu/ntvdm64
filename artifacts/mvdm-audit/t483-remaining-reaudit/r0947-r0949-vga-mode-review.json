@@ -1,0 +1,70 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": {
+    "R0947": {
+      "before": "+6/-1",
+      "after": "+1/-1",
+      "negative": "Packed256 + sequential4 + CPUchain4 off: original stride160, required640; current640. SR4 and V7 FC independent."
+    },
+    "R0948": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "negative": "Planar256 + CPUodd/even: original stride160,length32000; per-plane display requires80,16000. GC5 colour selector independent of CPUchain."
+    },
+    "R0949": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "negative": "Planar256 start49664,length16000 exceeds65536. Original condition tests doubled-plane bound and reports no wrap; current reports wrap."
+    }
+  },
+  "observations": {
+    "current": {
+      "exit": 0,
+      "output": "packed stride=640 expected=640\nplanar stride=80 length=16000 wrap=1 expected=80,16000,1\nordinary chain2 stride=160 expected=160\n"
+    },
+    "r0947": {
+      "exit": 1,
+      "output": "packed stride=160 expected=640\nplanar stride=80 length=16000 wrap=1 expected=80,16000,1\nordinary chain2 stride=160 expected=160\n"
+    },
+    "r0948": {
+      "exit": 1,
+      "output": "packed stride=640 expected=640\nplanar stride=160 length=32000 wrap=1 expected=80,16000,1\nordinary chain2 stride=160 expected=160\n"
+    },
+    "r0949": {
+      "exit": 1,
+      "output": "packed stride=640 expected=640\nplanar stride=80 length=16000 wrap=0 expected=80,16000,1\nordinary chain2 stride=160 expected=160\n"
+    },
+    "all": {
+      "exit": 1,
+      "output": "packed stride=160 expected=640\nplanar stride=160 length=32000 wrap=1 expected=80,16000,1\nordinary chain2 stride=160 expected=160\n"
+    }
+  },
+  "scope": "Extracted actual chooser stride/wrap source; accessor boundary uses explicit state; recalc models selected VGA height200,charheight1 equation from gvi.c. Not full BIOS or guest runtime test.",
+  "source_chain": [
+    "vga_prts.c vga_seq_mem_mode SR4 CPUchain",
+    "vga_prts.c vga_gc_mode GC5 displaycolour",
+    "v7_ports.c FC sequential displayflags",
+    "gvi.h set_offset_per_line_recal -> gvi.c recalc_screen_params",
+    "vga_mode.c set_update_routine selects VGA painter by colour256",
+    "gfx_updt.c vga_graph_update divides dirty offsets by display stride"
+  ],
+  "cross_evidence": "SoftPC docs/etc/evidence/softpc/m9-t100-progress.md File428 P132: actual BIOS/port current and separate/coherent original-restoration controls on x86/x64. Read-only comparison; not NTVDM acceptance.",
+  "minimization": "Drop added (not original) V7VGA wrapper because selected production cc_cvidc_rule defines V7VGA; compact identical selected condition; remove comment and now redundant #line474. All original condition structures/error bodies retained.",
+  "object_proof": {
+    "equal": true,
+    "sections": 8,
+    "scope": "Non-debug COFF section bytes, allocation sizes, characteristics and symbol-resolved relocations"
+  },
+  "line_proof": {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+    "before": 192,
+    "after": 186,
+    "delta": -6,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  "decision": "All three residuals qualified pending owner; no original point fully restored.",
+  "validation": "Final source cached full x86/x64 build,11x2 publication,CVID,Full and governance passed;see batch-p73-checkpoint.json"
+}

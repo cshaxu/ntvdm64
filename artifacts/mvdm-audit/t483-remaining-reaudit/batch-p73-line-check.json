@@ -1,0 +1,11 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+    "before": 192,
+    "after": 186,
+    "delta": -6,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]

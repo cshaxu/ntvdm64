@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-953 points reviewed:344 restored delivered,6 approved,
-603 qualified pending;1767 unreviewed. Files124/365 complete,241 remain.
+956 points reviewed:344 restored delivered,6 approved,
+606 qualified pending;1764 unreviewed. Files125/365 complete,240 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -222,12 +222,10 @@ P68 terminat.c2/2,xt.c4/4,ica.c3/3,idetect.c1/1:plus cga.c2/2;mirror diff-31;cac
 
 P69 three video files7/7;2 original casts restored;diff-12;cached build/publish11x2/Full19 passed;Git delivery accompanies receipt;next R0842.
 P70 ega_writ.c4/4:2 points restored(8 declarations),2 residuals;diff-21;cached build/publish11x2/Full19 passed;Git delivery accompanies receipt;next R0846.
-P71:three completed video-file audits; mirror diff-114 (comment-only files-22,
-gfx_updt.c-92). All77 gfx points resolved;19 original points restored/verified/published.
-59 exclusion errors retained; original logical-line check0 mismatches.
-Full19 and all applicable delivery gates passed; this record accompanies Git delivery.
-[Whole-file evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0915-r0940-gfx-final-review.json).
-P72:v7_ports.c2/2 and v7_video.c4/4 complete;mirror diff-12;2 original
-points restored/verified/published;2 minimized residuals pending owner.
-Cached x86/x64 build,publish11x2,CVID,Full and governance passed;Git delivery
-accompanies checkpoint. Next R0947;S5 remains active.
+P71 delivered:three video files,mirror diff-114;Full19 passed.
+[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0915-r0940-gfx-final-review.json).
+P72 delivered:two files,mirror diff-12;cached build,publish11x2,Full passed.
+P73:vga_mode.c3/3 complete;mirror diff-6;three qualified residuals pending owner.
+Original-line check0;excluded errors unchanged;selected object equivalent.
+Cached full build,publish11x2,Full and governance passed;Git delivery accompanies
+checkpoint. Next R0950;S5 remains active.

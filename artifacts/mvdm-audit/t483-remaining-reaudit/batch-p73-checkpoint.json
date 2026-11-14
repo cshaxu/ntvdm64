@@ -1,0 +1,38 @@
+{
+  "batch": "P73",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "56766446ab4ffa684daab2f08d5855a56e02a48d",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "sha256": "120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3"
+    }
+  ],
+  "mirror_diff_delta": -6,
+  "mirror_files": 1,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "598bbc34-cd71-4ed1-b3ba-3b2a55a176dd",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p73/full-final/timings.json",
+    "Full_elapsed_ms": 394915,
+    "CVID": "PASS original production vector fixture",
+    "original_line_check": "batch-p73-line-check.json",
+    "dos4gw_nesticle": "SKIP verified external fixtures unavailable",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "PASS documentation and links"
+  }
+}
