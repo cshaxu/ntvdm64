@@ -34,9 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1412 points reviewed:516 restored/confirmed delivered,0 local,8 approved,
-888 qualified pending,0 restores decided;1308 unreviewed. Files192/365 audited,173 remain.
-P140 wdde.c delivered gates:mirror171->143;coupled header-1;Full19 passed;Git follows.
+1417 points reviewed:516 restored/confirmed delivered,0 local,8 approved,
+893 qualified pending,0 restores decided;1303 unreviewed. Files193/365 audited,172 remain.
+P141 diff27->24;cached,publish11x2,isolated Full19 passed;Git follows.
+First Full RPC1740 failure retained;test package identity alone changed for isolation.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -52,10 +53,10 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P140 candidate `9d6698da-b97a-45d0-8271-352b651835d0` published11x2;hashes match.
-Cached full x86/x64,Full19 and governance passed;Git accompanies P140 receipt.
+P141 candidate `c7fb3664-39ab-461d-85d8-1277c92af27e` published11x2;hashes match.
+Cached full x86/x64,Full19 and governance passed;Git accompanies P141 receipt.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p140-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p141-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -185,16 +186,14 @@ P54:ev_glue.c R0489-R0494 complete;mirror diff54->25(net-29).
 Two restorations delivered;four residuals await owner.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0489-r0494-ev-glue-review.json).
 
-P55:R0495 original header restored;mirror diff net-30;local controls pass.
-P55 five-file batch net-65;sevid00070/70 disposition complete.
-Cached build,11x2 publication,focused and Full16 passed;Git delivery follows.
+P55 delivered;five-file mirror diff net-65. Details remain in the indexed evidence.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0495-evidfunc-header-review.json).
 
 [P55 accessor evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0496-r0499-evidgen-review.json).
 
 P55 R0500 original restored;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0500-j-c-lang-review.json).
 
-P55 R0501 restored;35 consumers/4722 object sections equal;BIGEND line repaired.
+P55 R0501 restored;object equivalence and line proof:
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0501-j-c-header-review.json).
 
 R0502:16-case address control;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0502-chain2-byte-address-review.json).

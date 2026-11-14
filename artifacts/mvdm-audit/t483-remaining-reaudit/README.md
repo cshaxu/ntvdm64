@@ -953,3 +953,11 @@ P140 [targeted checkpoint](p140-targeted-checkpoint.json):717 selected lines mat
 P140 [delivery checkpoint](batch-p140-checkpoint.json) and [compiler line proof](batch-p140-line-check.json); delivery status is updated only after each gate completes.
 
 P140 final gates passed:cached full,11x2 publication,DDE conversion8/alias101,COPYDATA59,public ABI,menu-resource,Full19,WOW boundary. Mirror wdde171->143,header-1;total-29.192/365 files;1412/2720 points:516 delivered,8 approved,888 pending,1308 unreviewed. Final governance/Git accompany receipt.
+
+P140 delivered as0efde9480;remote matched and worktree clean. P141 [wdde.h whole-file review](r1413-r1417-wdde-header-review.json):5/5 points source-reviewed,mirror27->24(-3);final line/alias/build checks running.193/365 files;1417/2720 points.
+
+P141 [checkpoint](batch-p141-checkpoint.json), [actual header line check](batch-p141-line-check.json); publication/Full/Git pending.
+
+P141 first Full attempt failed version-negatives:reply-protocol server exited1740(RPC duplicate endpoint), after three negative variants passed. Failure-time occupant was not captured; do not attribute it retrospectively. Publication remains complete, commit/push stopped; isolated process-identity diagnosis running. See batch-p141-checkpoint.json.
+
+P141 final gates passed:cached full,11x2 publication,alias101,public ABI,menu-resource,Full19,WOW boundary. Mirror header27->24(-3);62 selected lines match.193/365 files;1417/2720 points:516 delivered,8 approved,893 pending,1303 unreviewed. Final governance/Git accompany receipt.

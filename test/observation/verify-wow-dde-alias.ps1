@@ -103,7 +103,7 @@ try {
             ForEach-Object Value
         if (@($flags).Count -ne 4) { throw 'Original DDE flag family changed' }
         if (!$old) {
-            $conversionStart = $header.IndexOf('#define DDE_CONVERSION_MAX_PAIRS', [StringComparison]::Ordinal)
+            $conversionStart = $header.IndexOf('typedef struct _DDECONVERSIONPAIR', [StringComparison]::Ordinal)
             if ($conversionStart -lt 0) { throw 'Conversion ownership types missing' }
             $conversionEnd = $header.IndexOf('} DDECONVERSION, *PDDECONVERSION;', $conversionStart, [StringComparison]::Ordinal)
             if ($conversionEnd -lt 0) { throw 'Conversion ownership types missing' }

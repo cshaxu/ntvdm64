@@ -1,0 +1,111 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wdde.h",
+    "shared_selected_lines": 62,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            46,
+            "typedef struct _DDECONVERSIONPAIR {"
+          ],
+          [
+            47,
+            "HAND16 h16;"
+          ],
+          [
+            48,
+            "HANDLE h32;"
+          ],
+          [
+            49,
+            "WORD Flags;"
+          ],
+          [
+            50,
+            "} DDECONVERSIONPAIR;"
+          ],
+          [
+            52,
+            "typedef struct _DDECONVERSION {"
+          ],
+          [
+            53,
+            "DDECONVERSIONPAIR Pair[3];"
+          ],
+          [
+            54,
+            "WORD Count;"
+          ],
+          [
+            55,
+            "} DDECONVERSION, *PDDECONVERSION;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            94,
+            "void    WI32DDEAddInitiator (HAND16 Initiator);"
+          ]
+        ],
+        "after": [
+          [
+            94,
+            "BOOL    WI32DDEAddInitiator (HAND16 Initiator);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            101,
+            "HAND16  DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo);"
+          ],
+          [
+            102,
+            "HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo);"
+          ],
+          [
+            103,
+            "void    W32MarkDDEHandle (HAND16 hMem16);"
+          ]
+        ],
+        "after": [
+          [
+            101,
+            "BOOL    DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo);"
+          ],
+          [
+            102,
+            "void    DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd);"
+          ],
+          [
+            103,
+            "void    DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd);"
+          ],
+          [
+            104,
+            "HAND16  DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo, PDDECONVERSION pConversion);"
+          ],
+          [
+            105,
+            "HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo, PDDECONVERSION pConversion);"
+          ],
+          [
+            106,
+            "BOOL    W32MarkDDEHandle (HAND16 hMem16);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

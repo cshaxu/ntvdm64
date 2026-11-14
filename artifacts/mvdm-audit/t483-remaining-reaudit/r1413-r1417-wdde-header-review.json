@@ -1,0 +1,46 @@
+{
+  "points": [
+    {
+      "id": "T483-R1413",
+      "before": 13,
+      "after": 11,
+      "problem": "Conversion acquisition record",
+      "evidence": "P140 exact original converters returned incomplete outer packets on subobject failure; the original HDDE list records aliases but not acquisitions owned by this conversion. Pair h16/h32 identify the two domains, Flags selects metafile versus GlobalFree and unique EXECUTE alias retirement, Count records partial acquisition. All call paths bound acquisitions to three. Inline the one-use capacity macro as Pair[3]; remove unused PDDECONVERSIONPAIR typedef alias and standalone comment. No alternate state machine or shim."
+    },
+    {
+      "id": "T483-R1414",
+      "before": 2,
+      "after": 1,
+      "problem": "COPYDATA header provenance",
+      "evidence": "P140 embedded-header cases in both directions distinguish a payload alias from an independently converted message header. Without this flag the existing list lookup returns the payload as header. Preserve one flag definition, remove commentary."
+    },
+    {
+      "id": "T483-R1415",
+      "before": 2,
+      "after": 2,
+      "problem": "Initiator publication result declaration",
+      "evidence": "P140 exact original/current initiator controls show a failed nested allocation followed by unconditional cleanup deleting the live outer initiator. Original malloc_w may return NULL and release assertions do not stop it. BOOL reports publication; a caller-local active bit determines cleanup."
+    },
+    {
+      "id": "T483-R1416",
+      "before": 1,
+      "after": 1,
+      "problem": "Initiator ownership bit",
+      "evidence": "Same initiator allocation failure proof as R1415. The bit records whether this invocation actually inserted a node; a HWND alone cannot distinguish the failed inner operation from the successful outer one. Keep the single flag, not a second list."
+    },
+    {
+      "id": "T483-R1417",
+      "before": 9,
+      "after": 9,
+      "problem": "DDE conversion and callback declarations",
+      "evidence": "P140 whole-function failures prove local acquisition rollback is needed before outer publication; original routines have no recursive object owner. Existing CallBack16 rejection before original guest marking must propagate separately from normal AX0 payload. Keep signatures matching those finite responsibilities. DDEBeginConversion prototype already removed in P140, so historical +7/-3 is now +6/-3. Do not count that delivered reduction twice."
+    }
+  ],
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wdde.h",
+  "mirror_before": 27,
+  "mirror_after": 24,
+  "mirror_delta": -3,
+  "whole_file_source_complete": true,
+  "verification": "Cached full, published11x2, alias101, focused ABI/menu-resource, isolated Full19 and original-line verification passed; first Full RPC1740 failure retained in checkpoint, not relabeled as success.",
+  "counter_review": "Responsibilities and exact representation are justified by P140 original/current failure evidence, not the fact that current consumers compile against these types. One-use capacity and unused pointer alias removed instead of hiding them elsewhere; original HDDE/CPDATA layouts untouched."
+}

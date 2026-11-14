@@ -43,16 +43,14 @@ typedef struct _DDEINFO {
     HAND16  h16;               // original h16 for bad apps doing EXECUTE
 } DDEINFO, *PDDEINFO;
 
-/* MVDM-HOST-DIV-354: conversion-local acquisitions only; HDDE stays global. */
-#define DDE_CONVERSION_MAX_PAIRS 3
 typedef struct _DDECONVERSIONPAIR {
     HAND16 h16;
     HANDLE h32;
     WORD Flags;
-} DDECONVERSIONPAIR, *PDDECONVERSIONPAIR;
+} DDECONVERSIONPAIR;
 
 typedef struct _DDECONVERSION {
-    DDECONVERSIONPAIR Pair[DDE_CONVERSION_MAX_PAIRS];
+    DDECONVERSIONPAIR Pair[3];
     WORD Count;
 } DDECONVERSION, *PDDECONVERSION;
 
@@ -82,7 +80,6 @@ typedef struct _CPDATA {
 //
 
 #define COPYDATA_16             0x0001
-/* DIVERGENCE(MVDM-HOST-DIV-344): distinguish header from payload provenance. */
 #define COPYDATA_HEADER         0x0002
 #line 71
 
