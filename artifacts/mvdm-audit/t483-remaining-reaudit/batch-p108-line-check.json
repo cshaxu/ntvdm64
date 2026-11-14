@@ -1,0 +1,100 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+    "shared_selected_lines": 245,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            69,
+            "dw = GetSystemDirectoryA(pchFileName, 260);"
+          ],
+          [
+            70,
+            "if (!dw || *(pchFileName+dw-1) != achSlash[0])"
+          ]
+        ],
+        "after": [
+          [
+            69,
+            "dw = NtvdmGetSystemDirectoryA(pchFileName, 260);"
+          ],
+          [
+            70,
+            "if (!dw || dw >= 260) return;"
+          ],
+          [
+            70,
+            "if (*(pchFileName+dw-1) != achSlash[0])"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            76,
+            "if (!dw || dw > 260+12) {"
+          ]
+        ],
+        "after": [
+          [
+            76,
+            "if (!dw || dw > 260+12 ||"
+          ],
+          [
+            77,
+            "!mvdm_softpc_config_path_to_ansi(pchFileName, 260+12)) {"
+          ]
+        ]
+      },
+      {
+        "op": "delete",
+        "original": [
+          [
+            79,
+            "free(*ppch);"
+          ],
+          [
+            80,
+            "*ppch = ((void *)0);"
+          ]
+        ],
+        "after": []
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            133,
+            "dw = GetWindowsDirectoryA(pathBuff, sizeof(pathBuff) - sizeof(achDef));"
+          ]
+        ],
+        "after": [
+          [
+            133,
+            "dw = NtvdmGetWindowsDirectoryA(pathBuff, sizeof(pathBuff) - sizeof(achDef));"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            273,
+            "free(pchConfigFile);"
+          ],
+          [
+            274,
+            "free(pchAutoexecFile);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

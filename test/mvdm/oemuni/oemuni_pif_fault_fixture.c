@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "mvdm_softpc_firmware.h"
 static HFILE WINAPI fault_open(LPCSTR,int);
 static UINT WINAPI fault_read(HFILE,LPVOID,UINT);
 static LONG WINAPI fault_seek(HFILE,LONG,int);
@@ -39,8 +40,8 @@ static void *fault_malloc(size_t bytes)
 {++allocCalls;if(allocFails){--allocFails;return NULL;}return malloc(bytes);}
 int RcMessageBox(UINT id,CHAR *a,CHAR *b,ULONG flags)
 {if(id!=EG_MALLOC_FAILURE||!a||!b||flags!=(RMB_ABORT|RMB_RETRY|RMB_IGNORE|RMB_ICON_STOP))ExitProcess(98);++dialogs;return reply;}
-int mvdm_softpc_system_find_file(const char *name,char *path,uint32_t bytes)
-{(void)name;(void)path;(void)bytes;ExitProcess(99);return 0;}
+uint32_t NtvdmGetSystemDirectoryA(char *path,uint32_t bytes)
+{(void)path;(void)bytes;ExitProcess(99);return 0;}
 uint32_t NtvdmGetWindowsDirectoryA(char *path,uint32_t bytes)
 {(void)path;(void)bytes;ExitProcess(99);return 0;}
 int mvdm_softpc_config_path_to_ansi(char *path,uint32_t bytes)

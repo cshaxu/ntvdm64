@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1199 points reviewed:440 restored delivered,0 local,8 approved,
-751 qualified pending,0 restores decided;1521 unreviewed. Files151/365 audited,214 remain.
+1205 points reviewed:441 restored delivered,0 local,8 approved,
+756 qualified pending,0 restores decided;1515 unreviewed. Files152/365 audited,213 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P107 package `c2d6ec0e-0b2e-47db-8dbf-9612221ceb9a` published11x2; hashes match.
+P108 package `94b0f060-bb58-45fa-999f-5566275bf89c` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p107-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p108-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -104,6 +104,9 @@ P106 nt_mouse.c mirror706->698(-8);comments/CRLF only;P103 package unchanged.
 
 P107 nt_msscs.c mirror171->129(-42);cached build,publish11x2,Full19 passed.
 [Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p107-checkpoint.json).
+
+P108 nt_pif.c mirror31->14(-17);cached/focused,publication11x2,Full19 passed.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p108-checkpoint.json).
 
 ## Remaining Scope
 

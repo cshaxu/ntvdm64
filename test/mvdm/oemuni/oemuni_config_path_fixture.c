@@ -4,11 +4,6 @@
 #include "mvdm_softpc_firmware.h"
 #include "ntvdm-exe/session/session.h"
 
-/* Unused co-resident media functions must not run in this conversion test. */
-session *session_thread_current(void) { ExitProcess(90); return NULL; }
-const char *session_firmware_root(const session *instance) { (void)instance; ExitProcess(91); return NULL; }
-const char *session_mvdm_system_root(const session *instance) { (void)instance; ExitProcess(92); return NULL; }
-
 int main(void)
 {
     char path[MAX_PATH+13], expected[MAX_PATH+12];

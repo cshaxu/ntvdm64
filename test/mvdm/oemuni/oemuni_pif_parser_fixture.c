@@ -8,8 +8,8 @@
 #include "mvdm_softpc_firmware.h"
 /* Explicit file names must not enter root/default discovery. */
 static unsigned configConversions;
-int mvdm_softpc_system_find_file(const char *name,char *path,uint32_t bytes)
-{(void)name;(void)path;(void)bytes;ExitProcess(99);return 0;}
+uint32_t NtvdmGetSystemDirectoryA(char *path,uint32_t bytes)
+{(void)path;(void)bytes;ExitProcess(99);return 0;}
 uint32_t NtvdmGetWindowsDirectoryA(char *path,uint32_t bytes)
 {(void)path;(void)bytes;ExitProcess(99);return 0;}
 int mvdm_softpc_config_path_to_ansi(char *path,uint32_t bytes)

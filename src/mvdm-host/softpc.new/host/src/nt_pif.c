@@ -23,8 +23,6 @@ This line causes this file to be build with a checkin of NT_PIF.H
 #include "nt_reset.h"
 #include <oemuni.h>
 #include "error.h"
-#include "mvdm_softpc_firmware.h"
-#line 26
 
 
  //
@@ -68,30 +66,21 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
    ppch = bConfig ? &pchConfigFile : &pchAutoexecFile;
    if (!*ppch)
       {
-       /* DIVERGENCE(MVDM-HOST-DIV-157): The NT4 product defaulted to a
-        * system-directory config.nt/autoexec.nt pair.  Those files are not
-        * an installed modern-Windows contract.  Preserve the original PIF
-        * override branch and caller-owned output buffer, but resolve the
-        * no-PIF default from the immutable MVDM system root selected by app.
-        * A missing selected file still returns the original bad-name result
-        * and therefore follows cmdconf.c's existing fatal path. */
-       if (!mvdm_softpc_system_find_file(
-               bConfig ? achConfigNT : achAutoexecNT,
-               pchFileName, MAX_PATH + 12))
-           *pchFileName = '\0';
+       dw = NtvdmGetSystemDirectoryA(pchFileName, MAX_PATH);
+       if (!dw || dw >= MAX_PATH) return;
+#line 70
+       if (*(pchFileName+dw-1) != achSlash[0])
+           strcat(pchFileName, achSlash);
+       strcat(pchFileName, bConfig ? achConfigNT : achAutoexecNT);
 #line 73
        }
    else {
        dw = ExpandEnvironmentStringsOem(*ppch, pchFileName, MAX_PATH+12);
-       /* DIVERGENCE(MVDM-HOST-DIV-278): configuration consumers use ANSI. */
        if (!dw || dw > MAX_PATH+12 ||
            !mvdm_softpc_config_path_to_ansi(pchFileName, MAX_PATH+12)) {
 #line 77
            *pchFileName = '\0';
            }
-       /* DIVERGENCE(MVDM-HOST-DIV-157): CCPU LIM initialization and DOS
-        * boot both read this path. Retain it until the next PIF selection
-        * (or process exit), rather than consuming it on the first read. */
 #line 81
        }
 }
@@ -145,8 +134,7 @@ BOOL GetPIFData(PIF_DATA * pd, char *PifName)
 
         // if no PifName, use %windir%\_default.pif
     if (!*PifName) {
-        dw = NtvdmGetWindowsDirectoryA(pathBuff,
-            sizeof(pathBuff) - sizeof(achDef));
+        dw = NtvdmGetWindowsDirectoryA(pathBuff, sizeof(pathBuff) - sizeof(achDef));
 #line 134
         if (!dw || dw > sizeof(pathBuff) - sizeof(achDef)) {
             return FALSE;            // give it up... use default settings
@@ -287,7 +275,6 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
 	     */
 	     if (!pd->IgnoreConfigAutoexec)
 		{
-		/* DIVERGENCE(MVDM-HOST-DIV-157): replace the retained paths. */
 		free(pchConfigFile);
 		free(pchAutoexecFile);
 #line 273

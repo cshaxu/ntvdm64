@@ -84,7 +84,7 @@ const lines = [
   '  cflags = $cflags /I "$root/src"',
   "build obj/config-path-test.obj: cc $root/test/mvdm/oemuni/oemuni_config_path_fixture.c",
   '  cflags = $cflags /I "$root/src" /I "$root/src/ntvdm-exe/softpc/include"',
-  "build oemuni-config-path-fixture.exe: link obj/config-path.obj obj/config-path-test.obj obj/system-root.obj",
+  "build oemuni-config-path-fixture.exe: link obj/config-path.obj obj/config-path-test.obj obj/system-root.obj obj/pif-session.obj obj/pif-lease.obj obj/pif-guest-env.obj",
   "build obj/font-retry.obj: cc $root/test/mvdm/oemuni/oemuni_font_retry_fixture.c | dem-create-body.inc",
   `  cflags = $cflags /I \"${build}\"`,
   "build oemuni-font-retry-fixture.exe: link obj/font-retry.obj",

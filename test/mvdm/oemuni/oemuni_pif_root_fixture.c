@@ -32,6 +32,21 @@ int main(void)
     CHECK(data.xmsdes==DEFAULTXMSLMT&&data.emsdes==DEFAULTEMSLMT);
     CHECK(DeleteFileA(path));data.xmsdes=123;
     CHECK(!GetPIFData(&data,"")&&data.xmsdes==DEFAULTXMSLMT);
+    /* Default CONFIG/AUTOEXEC use the selected installation, even when the
+     * file is absent: original consumers own the resulting open failure. */
+    {
+        char config[MAX_PATH+12], expected[MAX_PATH+12], directory[MAX_PATH];
+        CHECK(sprintf_s(directory,sizeof(directory),"%s\\system32",root)>0);
+        GetPIFConfigFiles(TRUE,config);CHECK(config[0]==0);
+        CHECK(CreateDirectoryA(directory,NULL));
+        CHECK(sprintf_s(expected,sizeof(expected),"%s\\config.nt",directory)>0);
+        GetPIFConfigFiles(TRUE,config);CHECK(!strcmp(config,expected));
+        CHECK(GetFileAttributesA(config)==INVALID_FILE_ATTRIBUTES);
+        CHECK(sprintf_s(expected,sizeof(expected),"%s\\autoexec.nt",directory)>0);
+        GetPIFConfigFiles(FALSE,config);CHECK(!strcmp(config,expected));
+        CHECK(GetFileAttributesA(config)==INVALID_FILE_ATTRIBUTES);
+        CHECK(RemoveDirectoryA(directory));
+    }
     CHECK(session_thread_unbind(&instance)&&session_dispose(&instance));
     CHECK(RemoveDirectoryA(root));puts("PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK");return 0;
 }

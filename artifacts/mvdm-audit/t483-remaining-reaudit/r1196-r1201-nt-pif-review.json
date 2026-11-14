@@ -1,0 +1,171 @@
+{
+  "scope": "M0 T483 S5 P108;whole nt_pif.c",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_pif.c",
+  "evidence": {
+    "R1196": "Remove added firmware header: before/declaration-only candidate actual MSVC x86 objects have14 identical nondebug sections and named relocations. All called helper returns are32-bit and parameters retain the same x86 ABI; no binding change.",
+    "R1197": "Native GetSystemDirectory selects modern Windows rather than the explicitly chosen portable MVDM installation. Restore original separator/basename concatenation using existing NtvdmGetSystemDirectoryA. On unavailable/oversize directory keep empty result, avoiding rooted-relative fallback. Remove file existence precheck: original nt_msscs CreateFile and cmdconf ExpandConfigFiles own open failure. No new helper or complexity transfer.",
+    "R1198": "Original oemuni/process.c ExpandEnvironmentStringsOem converts final ANSI expansion back to OEM. Both nt_msscs init_lim_configuration_data and cmdconf ExpandConfigFiles use ANSI CreateFile; selected MvdmCreateFileA delegates ordinary paths unchanged. No selected SetFileApisToOEM call exists. OEM/ANSI differing non-ASCII path bytes require conversion at this output boundary; preserve it, remove comment only.",
+    "R1199": "Original config.c process_pif_exe->GetPIFData precedes enabled LIM init_lim_configuration_data->GetPIFConfigFiles(TRUE); original cmdconf later reads configuration again. cmdpif first-VDM path skips GetPIFData and later PIFs set IgnoreConfigAutoexec. Restoring free/null on first read loses configured path before DOS boot. Keep path lifetime through selection/process; remove explanation-only diff.",
+    "R1200": "Original default _default.pif location must be selected portable Windows root, not native hostWindows. Existing NtvdmGetWindowsDirectoryA preserves shape/length semantics; compress to original single-line call. Real session fixture exercises present/missing selected default PIF.",
+    "R1201": "Retaining configuration pointers for both LIM/DOS readers requires freeing prior pointers before an accepted replacement selection; original malloc assignment would otherwise lose allocations. IgnoreConfigAutoexec remains original gate. Keep only two frees, remove comment. No extra state or second path. Counter-review: config() has one production startup caller; later cmdpif sets IgnoreConfigAutoexec, so repeated startup is not the proof. The original parser walks linked extension records and accepts multiple WNTEXTSIG records in one PIF without a uniqueness check; each accepted record assigns fresh allocations. Existing parser fixture also exercises supported replacement calls. Without release, prior owned strings become unreachable even within one GetPIFData call. This is allocation ownership evidence, not a claim of reproduced product memory exhaustion."
+  },
+  "restored": [
+    1196
+  ],
+  "residual": [
+    1197,
+    1198,
+    1199,
+    1200,
+    1201
+  ],
+  "mirror": {
+    "nt_pif": {
+      "before": {
+        "added": 23,
+        "deleted": 8,
+        "total": 31
+      },
+      "after": {
+        "added": 8,
+        "deleted": 6,
+        "total": 14
+      }
+    }
+  },
+  "mirror_diff_delta": -17,
+  "line_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+      "shared_selected_lines": 245,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              69,
+              "dw = GetSystemDirectoryA(pchFileName, 260);"
+            ],
+            [
+              70,
+              "if (!dw || *(pchFileName+dw-1) != achSlash[0])"
+            ]
+          ],
+          "after": [
+            [
+              69,
+              "dw = NtvdmGetSystemDirectoryA(pchFileName, 260);"
+            ],
+            [
+              70,
+              "if (!dw || dw >= 260) return;"
+            ],
+            [
+              70,
+              "if (*(pchFileName+dw-1) != achSlash[0])"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              76,
+              "if (!dw || dw > 260+12) {"
+            ]
+          ],
+          "after": [
+            [
+              76,
+              "if (!dw || dw > 260+12 ||"
+            ],
+            [
+              77,
+              "!mvdm_softpc_config_path_to_ansi(pchFileName, 260+12)) {"
+            ]
+          ]
+        },
+        {
+          "op": "delete",
+          "original": [
+            [
+              79,
+              "free(*ppch);"
+            ],
+            [
+              80,
+              "*ppch = ((void *)0);"
+            ]
+          ],
+          "after": []
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              133,
+              "dw = GetWindowsDirectoryA(pathBuff, sizeof(pathBuff) - sizeof(achDef));"
+            ]
+          ],
+          "after": [
+            [
+              133,
+              "dw = NtvdmGetWindowsDirectoryA(pathBuff, sizeof(pathBuff) - sizeof(achDef));"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              273,
+              "free(pchConfigFile);"
+            ],
+            [
+              274,
+              "free(pchAutoexecFile);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "object_control": {
+    "non_debug_sections_equal": true,
+    "before_sections": 14,
+    "candidate_sections": 14,
+    "differences": []
+  },
+  "counter_review": "Checked original callers rather than adapted helper dependency; original file API default remains ANSI, and first startup does not re-read PIF between LIM and config expansion. Default missing-file failure is deliberately returned to original consuming CreateFile; no new fallback. Tests/source proof are distinct from Full acceptance.",
+  "status": "Whole-file restoration built,published11x2 and Full19 passed;Git delivery accompanies receipt",
+  "sha256": "94bba68ddaa77ceac7fe5eef585e439f9b4b05b69829866488efd0913e63731a",
+  "lifetime_negative_control": {
+    "expected": 99,
+    "restored_consuming_path_exit": 99,
+    "meaning": "Second read reached forbidden default-directory provider instead of retained PIF override",
+    "passed": true
+  },
+  "lifetime_control_procedure": "Compile whole final nt_pif.c with original free(*ppch);*ppch=NULL restored after override expansion and corresponding replacement-time frees removed. Link same checked-in parser fixture and OEM process provider. First selected-path reads pass; second config read reaches fixture forbidden default provider (ExitProcess99). Current file passes repeat/ignore/replace cases. No guest or product hot patch.",
+  "lifetime_control_source_sha256": "4b5f284ab604f21a50122c361a0610373c4dce5e3424ba8184c6322e3186a37a",
+  "lifetime_control_build": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\ncl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fo\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p108\\consume.obj\" O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p108\\consume.c > \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p108\\consume-compile.log\" 2>&1\nif errorlevel 1 exit /b 1\ncd /d O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p108\\oemuni\nlink.exe /nologo /out:O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p108\\consume.exe obj/pif-parser.obj O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p108\\consume.obj obj/process.obj O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/obj/opennt-abi-host-compat/opennt_support_rtl.obj O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/original-opennt-rtl-x86.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib\nexit /b %errorlevel%\n",
+  "focused_markers": [
+    "PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK",
+    "PIF_ORIGINAL_PARSER_8_ROWS_OK",
+    "PIF_ORIGINAL_REPEAT_IGNORE_REPLACE_OPEN_FAILURE_OK",
+    "PIF_ORIGINAL_9_IO_FAILURES_CLOSE_PARTIAL_STATE_RETRY_IGNORE_OK",
+    "S37_PIF_OEM_TO_ANSI_BOUNDED_PATH_OK"
+  ],
+  "delivery": "batch-p108-checkpoint.json",
+  "actual_encoding_control": {
+    "ansi_code_page": 1252,
+    "oem_code_page": 437,
+    "text": "D\u00a3\\P30.NT",
+    "ansi_hex": "44a35c5033302e4e54",
+    "oem_hex": "449c5c5033302e4e54",
+    "evidence": "Read GetACP/GetOEMCP on current host;existing conversion fixture passed with this same non-ASCII path."
+  }
+}

@@ -797,3 +797,8 @@ P107 [nt_msscs review](r1184-r1195-nt-msscs-review.json):whole-file delivered mi
 [Checkpoint](batch-p107-checkpoint.json);[line proof](batch-p107-line-check.json).
 151/365 files reviewed;1199 points:440 restored delivered,0 local,8 approved,751 pending,1521 unreviewed.
 Cached full build,publish11x2,Full19 and governance passed;Git delivery accompanies receipt.
+
+P108 [nt_pif review](r1196-r1201-nt-pif-review.json):delivered mirror31->14(-17).
+[Checkpoint](batch-p108-checkpoint.json);[line proof](batch-p108-line-check.json).
+152/365 files;1205 points reviewed:441 delivered restorations,0 local,8 approved,756 pending,1515 unreviewed.
+Cached full build,publish11x2,PIF focused/negative controls,Full19 and governance passed;Git delivery accompanies receipt.
