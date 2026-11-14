@@ -1,0 +1,378 @@
+{
+  "batch": "P78",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "6939488cf9a098e646945a9e34c3ded840e54f99",
+  "source_files": 4,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "sha256": "6d734877e3226e675435255fffc2eeabe2358916953d55175778853a23a61970"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "sha256": "b750c829b44a881f8afee8464ac58c8834117a91af86a7fd3015e67ce2d3b0ca"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "sha256": "f3d03ec8a801a519a7da0ed85224d1bc98c5364c0ebafa2e8ce83924d0ebf389"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "sha256": "85eb9dc3847e9e1a49762c48b7b771f2ae615a5d0e978a92b4dbe265f665f9f6"
+    }
+  ],
+  "mirror_diff_delta": -50,
+  "mirror_files": 4,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "runtime_test_source_files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "sha256": "6d734877e3226e675435255fffc2eeabe2358916953d55175778853a23a61970"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "sha256": "b750c829b44a881f8afee8464ac58c8834117a91af86a7fd3015e67ce2d3b0ca"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "sha256": "dccc8d6dfde0bf03a1b8b97aa58c440cdb9b22f9fb299dfe80c2686c266eb5e1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "sha256": "85eb9dc3847e9e1a49762c48b7b771f2ae615a5d0e978a92b4dbe265f665f9f6"
+    }
+  ],
+  "final_image_equivalence": [
+    {
+      "name": "VCDEX.DLL",
+      "raw_equal": true,
+      "normalized_equal": true,
+      "before_sha256": "6e120497660af17175b08be27c64fcdb5f991501157a4ed741192c2248d75fc5",
+      "after_sha256": "6e120497660af17175b08be27c64fcdb5f991501157a4ed741192c2248d75fc5",
+      "excluded_fields": [
+        [
+          240,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          320,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          6020,
+          4,
+          "export TimeDateStamp"
+        ],
+        [
+          5964,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 0
+    },
+    {
+      "name": "run16.exe",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "before_sha256": "723219c68fe02bf1802b720d49c92265032a3a937eb6367f8fee02a137ca69a4",
+      "after_sha256": "0ee7d88b2707452a9aef4cf60d5df7995d9bc042fd714ac5705458a5b52a1149",
+      "excluded_fields": [
+        [
+          264,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          344,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          211428,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 4
+    },
+    {
+      "name": "ntsrv.exe",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "before_sha256": "dac5ab02fa6fc8d5cc3ddb61bed5ecf24b303bfb9342a1902b350d1fda28c88d",
+      "after_sha256": "227cd4d1c388fbc207a99cab6c4f832c4c9728d29b868c9a0ce5980050db898a",
+      "excluded_fields": [
+        [
+          248,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          328,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          300084,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 4
+    },
+    {
+      "name": "ntcon.exe",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "before_sha256": "3da7e86f8bab7c78a0d196641f6401e35f6fef467244dfbc5771ae0ad0bffb9c",
+      "after_sha256": "56f8fa24da9578bc2d02e5800dfd9450df45406917c9df1d78a37f7af6ad3dc2",
+      "excluded_fields": [
+        [
+          264,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          344,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          250580,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 4
+    },
+    {
+      "name": "ntvdm.exe",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "before_sha256": "7b985172482ca2a326d35b0d20433c192148b60f9c938198f8c750233a15aaa3",
+      "after_sha256": "9f6908b1a0480f301cdc4caefe5a1d276f5628dd33a235cef093cbce3c4291d9",
+      "excluded_fields": [
+        [
+          296,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          376,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          1786804,
+          4,
+          "export TimeDateStamp"
+        ],
+        [
+          1715236,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 4
+    },
+    {
+      "name": "ntvwm.exe",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "before_sha256": "54637d799e1a6c7cf7ff4194fcae2a56042a044c01016311511e73ec32882122",
+      "after_sha256": "4ebd8447d7f937936acac045348e465ae1d0555141d571b7d38a7488cdcbaa72",
+      "excluded_fields": [
+        [
+          248,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          328,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          227252,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 4
+    },
+    {
+      "name": "ntmon.exe",
+      "raw_equal": true,
+      "normalized_equal": true,
+      "before_sha256": "dbd5b191693d542370fabaecd956d05537fa87af098de715feefa992eca27dbc",
+      "after_sha256": "dbd5b191693d542370fabaecd956d05537fa87af098de715feefa992eca27dbc",
+      "excluded_fields": [
+        [
+          248,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          328,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          148180,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 0
+    },
+    {
+      "name": "WOW32.DLL",
+      "raw_equal": true,
+      "normalized_equal": true,
+      "before_sha256": "9141eaf35d0034295c2a312e00c5a6bfba505a31c0620cc3f39367ae3eae109d",
+      "after_sha256": "9141eaf35d0034295c2a312e00c5a6bfba505a31c0620cc3f39367ae3eae109d",
+      "excluded_fields": [
+        [
+          288,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          368,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          635092,
+          4,
+          "export TimeDateStamp"
+        ],
+        [
+          623332,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 0
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "raw_equal": true,
+      "normalized_equal": true,
+      "before_sha256": "020467d035324f7f4f78d053e49ed24a8371a7adca27d3e952310533f8f9f48b",
+      "after_sha256": "020467d035324f7f4f78d053e49ed24a8371a7adca27d3e952310533f8f9f48b",
+      "excluded_fields": [
+        [
+          288,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          368,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          193604,
+          4,
+          "export TimeDateStamp"
+        ],
+        [
+          125028,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 0
+    },
+    {
+      "name": "nthook32.dll",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "before_sha256": "c3b4fe75381fe4669af64e6139684cb82305b33140291c0ffca89aedea813dbd",
+      "after_sha256": "7a5dae5f2e2c1d9a6e04c221b876e681a62b2c1f2e6d8ae99e3c52009f3dc1b1",
+      "excluded_fields": [
+        [
+          272,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          352,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          203332,
+          4,
+          "export TimeDateStamp"
+        ],
+        [
+          134228,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 4
+    },
+    {
+      "name": "nthook64.dll",
+      "raw_equal": true,
+      "normalized_equal": true,
+      "before_sha256": "8dfd91839442aa7b46262f19064430d74ecb422f95d4cfbcc48dd69da011d53e",
+      "after_sha256": "8dfd91839442aa7b46262f19064430d74ecb422f95d4cfbcc48dd69da011d53e",
+      "excluded_fields": [
+        [
+          272,
+          4,
+          "COFF TimeDateStamp"
+        ],
+        [
+          352,
+          4,
+          "PE CheckSum"
+        ],
+        [
+          243204,
+          4,
+          "export TimeDateStamp"
+        ],
+        [
+          167844,
+          4,
+          "debug TimeDateStamp"
+        ]
+      ],
+      "difference_count": 0
+    }
+  ],
+  "final_build_evidence": "build/t483-s5-p78-final/cached.log",
+  "runtime_reuse": "Full19 tested package before final conditional diagnostic-line correction;all11 final images equal after excluding only PE COFF/export/debug timestamps and checksum. No code or other image bytes excluded.",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "7352a2c8-9112-479d-89df-c2a785cabd26",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p78/full-final/timings.json",
+    "Full_elapsed_ms": 416726,
+    "CVID": "PASS original production vector fixture",
+    "original_line_check": "batch-p78-line-check.json",
+    "dos4gw_nesticle": "SKIP verified external fixtures unavailable",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "PASS documentation and links"
+  },
+  "final_package_identity": "Reused Full-tested7352a2c8-9112-479d-89df-c2a785cabd26 explicitly through existing Set-PackageIdentity;initial auto-generated final staging GUID differed16bytes in each image,not ignored by comparator. Final comparison excludes no resource data;5 images byte-identical,6 differ only4 timestamp bytes each."
+}

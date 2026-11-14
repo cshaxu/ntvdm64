@@ -55,10 +55,9 @@
 #include "pmvdm.h"
 
 #ifdef HUNTER
-#line 56
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 59
 #endif  //HUNTER
-#line 60
 
 
 /*================================================================
@@ -68,10 +67,9 @@ IMPORT SHORT gfi_floppy_active (UTINY hostID, BOOL active, CHAR *err);
 IMPORT ULONG xmsMemorySize;
 
 #ifdef HUNTER
-#line 69
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 111
 #endif /* HUNTER */
-#line 112
 
 
 PIF_DATA pfdata; /* data structure for holding all the relavent information
@@ -151,10 +149,9 @@ VOID host_fdisk_valid
 VOID process_pif_exe (char *PifName)
 {
 #ifdef X86GFX
-#line 191
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 193
 #endif
-#line 194
 
     GetPIFData(&pfdata, PifName);
 
@@ -197,10 +194,9 @@ VOID process_pif_exe (char *PifName)
     else
 	IdleDisabledFromPIF = TRUE;
 #ifdef X86GFX
-#line 236
 #error Unsupported excluded original configuration
+#line 277
 #endif  /* X86GFX */
-#line 278
 
 }
 
@@ -243,10 +239,9 @@ GLOBAL VOID config( VOID )
     ULONG dpmiMemorySize, vdmMemorySize;
 
 #ifdef HUNTER
-#line 320
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 330
 #endif /* HUNTER */
-#line 331
 
          /*
           *  Set the window title to a unique string, to get
@@ -422,15 +417,10 @@ GLOBAL VOID config( VOID )
         // dpmi memory. We get this size from the registry.
         //
 
-/* DIVERGENCE(MVDM-HOST-DIV-056): the original i386 arm relies on the NT
- * kernel VDM allocator outside this selected source package.  CPU40 has no
- * such allocator: its SAS is the entire standalone machine, so retain the
- * original non-i386 DPMI-headroom calculation for this one backend. */
 #ifdef i386
-#line 507
 #error Unsupported i386 kernel VDM memory-size profile
+#line 509
 #else
-#line 510
 	 vdmMemorySize = GetVDMSize(VDMForWOW);
 
 	 // Extend the vdm size if the user asks for it through a .PIF.
@@ -443,14 +433,12 @@ GLOBAL VOID config( VOID )
 	    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +
 			    dpmiMemorySize;
 	 }
-#endif /* i386 */
-#line 523
+#endif
 
 #ifndef PROD
-#line 525
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#line 529
 #endif
-#line 530
 
 	sas_init(vdmMemorySize*ONEKB);
 
@@ -460,17 +448,15 @@ GLOBAL VOID config( VOID )
         /* sas_init has initialised Gdp, so now we can set up the pointers */
         /* to the Gdp variables that hold register values. This is to */
         /* allow NTSD debugger extensions to display those values. */
-#line 539
         InitNtCpuInfo();
 
 #endif
 
 
 #ifdef X86GFX
-#line 545
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 548
 #endif
-#line 549
 
            //  Now see if we can get the console window handle
         if (!VDMForWOW)  {
@@ -483,10 +469,8 @@ GLOBAL VOID config( VOID )
             if (!hWndConsole) {
                 hWndConsole = HWND_DESKTOP;
 #ifndef PROD
-#line 561
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 563
                 }
             }
 
@@ -632,10 +616,9 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
 
 #ifdef HUNTER
-#line 708
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 737
 #endif /* HUNTER */
-#line 738
 
 		case C_COM_SYNCWRITE:
 		    values->index = (short)read_profile_int(PROFILE_COM_SYNCWRITE);
@@ -718,13 +701,11 @@ struct
 void host_runtime_init()
 {
 #ifdef MONITOR
-#line 820
 #error Excluded unsupported monitor floating-point status
+#line 843
 #else
-#line 844
     runtime_status.npx_enabled = TRUE;
 #endif
-#line 846
 }
 
 short host_runtime_inquire IFN1(UTINY, what)
@@ -739,10 +720,8 @@ short host_runtime_inquire IFN1(UTINY, what)
                         return (runtime_status.sound_on);
                 default:
 #ifndef PROD
-#line 860
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 862
                         ;
         }
 }
@@ -762,10 +741,8 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
                         break;
                 default:
 #ifndef PROD
-#line 881
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 883
                         ;
         }
 }
@@ -773,10 +750,9 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 
 
 #ifdef HUNTER
-#line 890
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 970
 #endif /* HUNTER */
-#line 971
 
 /*
  * ===========================================================================
@@ -785,10 +761,9 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
  */
 
 #ifdef HUNTER
-#line 979
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
+#line 1102
 #endif /* HUNTER */
-#line 1103
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Read auto close time ::::::::::::::::::::::::::::*/
@@ -880,12 +855,10 @@ boolean get_lim_configuration_data(PLIM_CONFIG_DATA buffer)
 #endif
 
 
-#line 1194
 #ifdef MONITOR
-#line 1195
 #error Excluded original conditional branch
+#line 1214
 #endif
-#line 1215
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Get VDM Memory Size :::::::::::::::::::::::::::::*/

@@ -1,0 +1,56 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+    "before": 227,
+    "after": 222,
+    "delta": -5,
+    "line_checks": 6,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "byte_identical_original": false
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+    "before": 10,
+    "after": 6,
+    "delta": -4,
+    "line_checks": 29,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "byte_identical_original": false
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+    "before": 0,
+    "after": 0,
+    "delta": 0,
+    "line_checks": 13,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "byte_identical_original": true
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "before": 444,
+    "after": 415,
+    "delta": -29,
+    "line_checks": 617,
+    "line_mismatches": [],
+    "conditional_checks": 44,
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "before": 51,
+    "after": 39,
+    "delta": -12,
+    "line_checks": 113,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]

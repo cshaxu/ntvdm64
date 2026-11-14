@@ -16,17 +16,15 @@ bwdcopy(
     )
 {
 #if 0
-#line 19
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 23
 #else
-#line 24
       int i;
 
       i = len - 1;
       memcpy(dest - i , src - i, len);
 
 #endif
-#line 30
 }
 
 
@@ -56,12 +54,10 @@ memfill(
      len = h_addr_in + 1 - l_addr_in;
      memset(l_addr_in, data, len);
 
-#line 59
 #if 0
-#line 60
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 79
 #endif
-#line 80
 }
 
 void
@@ -97,17 +93,15 @@ fwd_word_fill(
 		}
                 data4 = data+(data<<16);
 
-/* DIVERGENCE(MVDM-HOST-DIV-064): select the original in-source fill loop. */
 #if 0
-#line 116
 #error Excluded unsupported original constant-false fill branch
-#else
-#line 116
-                do *l_addr4++ = data4; while (h_addr4 > l_addr4);
-#line 121
                 l_addr = (unsigned char *)l_addr4;
+#else
+                count = h_addr4 - l_addr4;
+                RtlFillMemoryUlong(l_addr4, count << 2, data4);
+                l_addr = (unsigned char *)l_addr4;
+                l_addr += count << 2;
 #endif
-#line 124
 
 	}
 	switch(h_addr-l_addr)
@@ -165,10 +159,9 @@ memset4(
     )
 {
 #if 0
-#line 181
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 185
 #else
-#line 186
 
    /*
     * The argument, count, as passed to this function is the number of 4-byte
@@ -178,5 +171,4 @@ memset4(
    RtlFillMemoryUlong(laddr, count << 2, data);
 
 #endif
-#line 195
 }

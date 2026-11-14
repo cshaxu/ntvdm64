@@ -1,0 +1,121 @@
+{
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": {
+    "T483-R0998": {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "before": "+1/-0",
+      "decision": "restore original",
+      "evidence": "Stray terminal #line143 contradicted original HFX endif238;remove and map original conditional boundary. Excluded code remains#error."
+    },
+    "T483-R0999": {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "before": "+0/-1",
+      "decision": "restore original",
+      "evidence": "Original unused WaitIcaLockFullyInitialized prototype restored. No production C/H caller exists;declaration does not import or execute excluded hardware MONITOR implementation."
+    },
+    "T483-R1001": {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "before": "+4/-0",
+      "decision": "restore original",
+      "evidence": "Remove explanatory i386/SAS comment only. Original selected non-i386 computation and excluded i386#error unchanged."
+    },
+    "T483-R1002": {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "before": "+1/-0",
+      "decision": "restore original",
+      "evidence": "Remove comment for displaced fill loop;original selected API body restored."
+    },
+    "T483-R1003": {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "before": "+2/-0",
+      "decision": "restore original",
+      "evidence": "Remove alternate loop and restore original selected branch. Original false arm remains#error."
+    },
+    "T483-R1004": {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "before": "+0/-5",
+      "decision": "minimized residual pending owner",
+      "evidence": "Actual x86 production compile context plus original RtlFillMemoryUlong assembly:aligned four-word fill original cccc123412341234,current/fixed1234123412341234. Original DWORD pointer difference passed as byte count and added to byte pointer. Minimal residual changes count to count<<2 in API length and pointer advance.132 alignment/length cases current and fixed digest91153575,no guard failures;original27e9010d. Two expression changes remain pending owner;not an extra path."
+    }
+  },
+  "already_delivered": "R1000 P7;exact original bytes",
+  "fill_results": {
+    "before": "aligned4words=1234123412341234\ncases=132 digest=91153575 guard_failures=0\n",
+    "original": "aligned4words=cccc123412341234\ncases=132 digest=27e9010d guard_failures=0\n",
+    "restored-fixed": "aligned4words=1234123412341234\ncases=132 digest=91153575 guard_failures=0\n"
+  },
+  "fill_compile_contexts": [
+    {
+      "variant": "before",
+      "command": "cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fobuild/t483-s5-p78/before.obj build/t483-s5-p78/before/copy_fnc.c"
+    },
+    {
+      "variant": "original",
+      "command": "cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fobuild/t483-s5-p78/original.obj build/t483-s5-p78/original/copy_fnc.c"
+    },
+    {
+      "variant": "restored-fixed",
+      "command": "cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fobuild/t483-s5-p78/restored-fixed.obj build/t483-s5-p78/restored-fixed/copy_fnc.c"
+    }
+  ],
+  "probe_limit": "132 alignment/length cases plus explicit aligned4word failure;not full guest proof. Initial cmd invocation used forward slash executable path and failed9009;compiled executables then actually run via PowerShell,recorded exit0/1/0.",
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "before": 227,
+      "after": 222,
+      "delta": -5,
+      "line_checks": 6,
+      "line_mismatches": [],
+      "errors_unchanged": true,
+      "CRLF": true,
+      "byte_identical_original": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "before": 10,
+      "after": 6,
+      "delta": -4,
+      "line_checks": 29,
+      "line_mismatches": [],
+      "errors_unchanged": true,
+      "CRLF": true,
+      "byte_identical_original": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+      "before": 0,
+      "after": 0,
+      "delta": 0,
+      "line_checks": 13,
+      "line_mismatches": [],
+      "errors_unchanged": true,
+      "CRLF": true,
+      "byte_identical_original": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "before": 444,
+      "after": 415,
+      "delta": -29,
+      "line_checks": 617,
+      "line_mismatches": [],
+      "conditional_checks": 44,
+      "errors_unchanged": true,
+      "CRLF": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "before": 51,
+      "after": 39,
+      "delta": -12,
+      "line_checks": 113,
+      "line_mismatches": [],
+      "errors_unchanged": true,
+      "CRLF": true
+    }
+  ],
+  "validation": "Final source cached full x86/x64 build,11x2 publication;all11 images equivalent to Full19 tested package excluding only timestamps/checksum;see batch-p78-checkpoint.json",
+  "conditional_line_followup": "Full selected source lines were correct;final counter-review aligned remaining config.c conditional boundary directives and removed added endif comment. Final cached build and PE equivalence required before reusing runtime evidence.",
+  "probe_source": "#include <stdio.h>\n#include <stdint.h>\n#include <string.h>\nextern void fwd_word_fill(unsigned short,unsigned char *,int);\nint main(void) {\n __declspec(align(16)) unsigned char buf[96];\n uint32_t digest=2166136261u;unsigned off,n,i,bad=0;unsigned firstoff=0,firstlen=0;\n for(off=4;off<8;++off)for(n=0;n<=32;++n){\n  memset(buf,0xcc,sizeof buf);fwd_word_fill(0x1234,buf+off,n);\n  for(i=0;i<sizeof buf;++i){\n   if((i<off||i>=off+n*2)&&buf[i]!=0xcc)++bad;\n   digest=(digest^buf[i])*16777619u;\n  }\n }\n memset(buf,0xcc,sizeof buf);fwd_word_fill(0x1234,buf+4,4);\n printf(\"aligned4words=\");for(i=4;i<12;++i)printf(\"%02x\",buf[i]);puts(\"\");\n printf(\"cases=132 digest=%08x guard_failures=%u\\n\",digest,bad);\n return digest!=0x91153575u||bad;\n}\n"
+}

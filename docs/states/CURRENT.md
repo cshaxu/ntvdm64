@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1004 points reviewed:358 restored delivered,6 approved,
-640 qualified pending;1716 unreviewed. Files130/365 complete,235 remain.
+1010 points reviewed:363 restored delivered,6 approved,
+641 qualified pending;1710 unreviewed. Files135/365 complete,230 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -54,9 +54,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P77 package `7ef428a7-d376-4553-bad2-ebdc885aa43d` published11x2; hashes match.
+P78 package `7352a2c8-9112-479d-89df-c2a785cabd26` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p77-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p78-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -219,17 +219,7 @@ concurrent-test interference; causality is unconfirmed. See the
 [RDP checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/rdp-input-checkpoint.json).
 
 P68-P74 delivered;indexed batch receipts preserve mirror deltas and Full results.
-P75:video.c16/16 complete;mirror diff-10;3 original restorations delivered,
-13 qualified residuals pending owner. Original-line check0;#error unchanged.
-Cached full build,publish11x2,Full and governance passed;Git delivery accompanies
-checkpoint. S5 remains active.
+P75-P77 delivered;see indexed batch receipts for exact deltas and gates.
 
-P76:cfpu_def.h15/15 and host_cpu.h9/9 complete;mirror diff-334.
-Seven original restorations delivered;17 qualified residuals;#error unchanged;
-367 original-line checks0 mismatch. Cached build,publish11x2,Full passed;
-Git delivery accompanies checkpoint;next R0994.
-
-P77:host_def.h4/4 complete;mirror41->15(-26);two restores delivered.
-Two profile residuals qualified;143 line checks0 mismatch;#error retained.
-Cached build,publish11x2,Full passed;Git delivery accompanies checkpoint;
-next R0998.
+P78:five files complete;mirror net-50;five restores delivered,one minimized residual.
+778 line checks0 mismatch;#error retained. Cached build,publish11x2,Full passed;Git delivery accompanies checkpoint;next R1005.

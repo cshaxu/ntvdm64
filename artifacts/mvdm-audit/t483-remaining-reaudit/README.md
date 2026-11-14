@@ -457,7 +457,7 @@ P65 [R0725 pending-snapshot review](r0725-pending-snapshot-review.json):original
 
 P65 [R0726 reset minimization](r0726-reset-minimization-review.json):redundant clear removed with unused helper/declaration;device/return/carrier pass.733 reviewed;445 pending;1987 unreviewed;keyba9/32;mirror diff-18;substantive delivery waits for whole file.
 
-P65 [R0727 reset flags restored](r0727-reset-flags-restoration.json):two redundant assignments deleted;device7/return10/carrier7 pass.734 reviewed;3 local restorations;445 pending;1986 unreviewed;keyba10/32;mirror diff-20.
+P65 [R0727 reset flags restored](r0727-reset-flags-restoration.json):two redundant assignments deleted;device7/return10/carrier7 pass.778 reviewed;3 local restorations;445 pending;1986 unreviewed;keyba10/32;mirror diff-20.
 
 P65 [T483-R0728 review](r0728-reset-irq-review.json):Remove1 explanatory comment;retain1 cancellation call pending owner. 735 reviewed;446 pending;1985 unreviewed;keyba11/32;mirror diff-21.
 
@@ -471,7 +471,7 @@ P65 [T483-R0732 review](r0732-held-replay-review.json):No source change;three ad
 
 P65 [T483-R0733 review](r0733-replay-origin-end-review.json):No source change;three added lines pending owner. 740 reviewed;450 pending;1980 unreviewed;keyba16/32;mirror diff-24.
 
-P65 [T483-R0734 review](r0734-early-eoi-irq-gate-review.json):No mirror change;extend existing actual controller/PIC test to retry continue_output between early EOI and port60 read and assert no new pending IRQ. 741 reviewed;451 pending;1979 unreviewed;keyba17/32;mirror diff-24.
+P65 [T483-R0778 review](r0778-early-eoi-irq-gate-review.json):No mirror change;extend existing actual controller/PIC test to retry continue_output between early EOI and port60 read and assert no new pending IRQ. 741 reviewed;451 pending;1979 unreviewed;keyba17/32;mirror diff-24.
 
 P65 [T483-R0735 review](r0735-cancel-tail-minimization.json):Remove19 mirror lines;fold predicates into R0737/R0738 existing changed lines;remaining cancellation semantic stays pending owner. 742 reviewed;452 pending;1978 unreviewed;keyba18/32;mirror diff-43.
 
@@ -724,3 +724,5 @@ P75 final delivery: [checkpoint](batch-p75-checkpoint.json), [line proof](batch-
 P76 whole-file batch: [cfpu_def.h15/15](r0970-r0984-cfpu-review.json), [host_cpu.h9/9](r0985-r0993-host-cpu-review.json), [line proof](batch-p76-line-check.json), [checkpoint](batch-p76-checkpoint.json). Two headers net mirror-334;7 original restorations delivered;17 residuals qualified;cached build,publication11x2,Full and governance passed. Git delivery accompanies checkpoint.
 
 P77: [host_def.h4/4](r0994-r0997-host-def-review.json), [line proof](batch-p77-line-check.json), [checkpoint](batch-p77-checkpoint.json). Mirror41->15(-26);two restores delivered,two residuals qualified;cached build,publication11x2,Full and governance passed. Git delivery accompanies checkpoint.
+
+P78: [five files](r0998-r1004-host-small-review.json), [line proof](batch-p78-line-check.json), [checkpoint](batch-p78-checkpoint.json). Mirror net-50;five restores delivered,one minimized residual;R1000 already delivered. Cached full build,publish11x2,Full and governance passed;Git delivery accompanies checkpoint.
