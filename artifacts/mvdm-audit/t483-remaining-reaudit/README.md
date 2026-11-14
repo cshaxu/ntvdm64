@@ -832,3 +832,8 @@ P114 [nt_unix review](r1234-r1239-nt-unix-review.json):delivered mirror100->29(-
 [Checkpoint](batch-p114-checkpoint.json);[line proof](batch-p114-line-check.json).
 159/365 files;1243 reviewed:471 delivered restorations,0 local,8 approved,764 pending,1477 unreviewed.
 Whole-file original restored except one SDK-conflicting declaration and two unchanged exclusions;cached full build,publish11x2,firmware/media/boot x86/x64,Full19 and governance passed.
+
+P115 [nt_vga review](r1240-r1241-nt-vga-review.json):mirror566->564(-2);two executable residuals pending.
+[Checkpoint](batch-p115-checkpoint.json);[line proof](batch-p115-line-check.json).
+160/365 files;1245 reviewed:471 delivered restorations,0 local,8 approved,766 pending,1475 unreviewed.
+Actual painter current passes;original and no-clip controls fail specified assertions.941 line checks;26 product sections/relocations identical;P114 publication/Full reused.

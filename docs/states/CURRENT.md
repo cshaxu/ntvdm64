@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1243 points reviewed:471 restored/confirmed delivered,0 local,8 approved,
-764 qualified pending,0 restores decided;1477 unreviewed. Files159/365 audited,206 remain.
+1245 points reviewed:471 restored/confirmed delivered,0 local,8 approved,
+766 qualified pending,0 restores decided;1475 unreviewed. Files160/365 audited,205 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -232,3 +232,5 @@ P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,21
 P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p101-checkpoint.json).Diff329->262;5restored delivered;lines/focused/Full19 passed;next R1146.
 
 P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,one evidenced declaration residual;cached build,publish11x2,Full19 passed.
+
+P115 nt_vga.c mirror566->564(-2),comments only;941 lines and26 product object sections match. Two residuals pending;P114 publication/Full reused.

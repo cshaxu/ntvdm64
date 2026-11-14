@@ -1351,8 +1351,6 @@ void nt_v7vga_hi_graph_std(int offset, int screen_x, int screen_y,
     ** Tim Septemver 92, sanity check parameters, if they're too big
     ** it can cause a crash.
     */
-    /* DIVERGENCE(VIDEO7-PACKED-SURFACE): SoftPC T60 bounds the actual
-     * DIB/source extent instead of rejecting full 480-line updates. */
     if (width <= 0 || height <= 0 || screen_x < 0 || screen_y < 0 ||
         screen_x >= sc.PC_W_Width || screen_y >= sc.PC_W_Height ||
         offset < 0 || offset >= 4 * EGA_PLANE_SIZE || get_offset_per_line() <= 0){

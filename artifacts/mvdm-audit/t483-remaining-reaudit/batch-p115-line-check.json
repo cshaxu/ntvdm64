@@ -1,0 +1,56 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+    "shared_selected_lines": 941,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            1350,
+            "if( height>400 || width>640 ){"
+          ]
+        ],
+        "after": [
+          [
+            1350,
+            "if (width <= 0 || height <= 0 || screen_x < 0 || screen_y < 0 ||"
+          ],
+          [
+            1351,
+            "screen_x >= sc.PC_W_Width || screen_y >= sc.PC_W_Height ||"
+          ],
+          [
+            1352,
+            "offset < 0 || offset >= 4 * 0x20000 || (PCDisplay.offset_per_line) <= 0){"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            1355,
+            "width = (((width) < (sc.PC_W_Width - screen_x)) ? (width) : (sc.PC_W_Width - screen_x));"
+          ],
+          [
+            1356,
+            "height = (((height) < (sc.PC_W_Height - screen_y)) ? (height) : (sc.PC_W_Height - screen_y));"
+          ],
+          [
+            1357,
+            "width = (((width) < (4 * 0x20000 - offset)) ? (width) : (4 * 0x20000 - offset));"
+          ],
+          [
+            1358,
+            "height = (((height) < (1 + (4 * 0x20000 - offset - width) / (PCDisplay.offset_per_line))) ? (height) : (1 + (4 * 0x20000 - offset - width) / (PCDisplay.offset_per_line)));"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

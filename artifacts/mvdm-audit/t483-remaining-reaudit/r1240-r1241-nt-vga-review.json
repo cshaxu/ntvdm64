@@ -1,0 +1,60 @@
+{
+  "status": "Whole-file initial/counter review complete;comment-only reduction verified;two residuals pending owner",
+  "original": "OpenNT/base/mvdm/softpc.new/host/src/nt_vga.c",
+  "before_sha256": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+  "final_sha256": "e02b45a17b7ae8c171a880c2dc4df3d87e478126a2b8ce1c479667e17b96e03e",
+  "scope": [
+    "T483-R1240",
+    "T483-R1241"
+  ],
+  "R1240": {
+    "before": "+5/-1",
+    "after": "+3/-1",
+    "delta": -2,
+    "problem": "Original400row ceiling rejects selected640x480 full-frame painting.",
+    "evidence": "Actual original painter compiled and linked to same fixture,then exited1 at line48 full-frame invalidation assertion;current passes. nt_graph.c selects this painter for256color seq_chain4;gfx_updt.c vga_graph_update passes full bpl,screen_height. vga_split_graph_update unconditionally paints first split,including height0;original do/while is not safe for zero-height input.",
+    "counter_review": "Height400 failure proves ceiling change,not all modern wrappers. No helper or new state needed:existing original copy loop remains. Bounds at the painter are tied to actual source and DIB extents,not a new guest-specific mode."
+  },
+  "R1241": {
+    "before": "+5/-0",
+    "after": "+5/-0",
+    "delta": 0,
+    "problem": "A partial rectangle must not overwrite next DIB rows or read beyond source.",
+    "evidence": "Removing only5 clipping lines while keeping height fix fails actual painter edge-damage assertion53. Extra test backing rows keep the deliberate negative within test allocation. Source counterexample: EGA_HI_WR selects ega_wrap_graph_update while nt_graph still selects same packed painter;left_over32,bpl640 produces destination x256,width608,ending864. Painter must bound destination to640.",
+    "counter_review": "Original caller clipping is insufficient for wrap boundary coordinate/width combination. Existing5 lines separately bound destination width/height and source width/last row. No pixel loop replacement or second painter. Guard/source-end checks are fixture-level evidence,not claimed reproduction of a specific guest program."
+  },
+  "decision": "Retain executable deltas pending owner decision;no approval inferred. Removed only added comment,restoring original surrounding explanation.",
+  "minimum_option": "Existing nine original-relative lines retain actual painter semantics without moving checks into shim. Not a proof of globally minimum expression count;reject-only alternatives would change partial rectangle output.",
+  "controls": {
+    "limitation": "Original fails first full-frame assertion;this alone does not prove every added bounds check necessary.",
+    "sourceSha256": "1EBDAFAF6E9ED6AFC128B64D305233CA8F8B12C5DD77AA12052D8A57283F99AF",
+    "fixtureSha256": "EF94D255A8D00D267151FBE52CD0CA8EA8A8D6072962696CBA3732AB77DC8FBD",
+    "originalAssertion": "full640x480 frame must invalidate and paint",
+    "currentPassed": true,
+    "originalExit": 1,
+    "originalResult": "FAIL line 48\r\n"
+  },
+  "clip_negative": {
+    "exit": 1,
+    "output": "FAIL line 53\n",
+    "fixture_change": "Only32extra destination backing rows added;logical DIB,inputs and assertions unchanged."
+  },
+  "verification": {
+    "line_proof": "batch-p115-line-check.json",
+    "coff": {
+      "non_debug_sections_equal": true,
+      "before_sections": 26,
+      "candidate_sections": 26,
+      "differences": []
+    },
+    "excluded_error_directives_unchanged": true,
+    "no_new_runtime_claim": "P114 Full19 and published package reused based on identical selected product object;current/original painter controls are new."
+  },
+  "script_issues": [
+    "Initial wrapper expected assertion44 instead of48;corrected by owned rerun of same binaries,retained logs.",
+    "Initial comment cleanup expected CRLF for LF-added lines;assertion stopped before mutation. Correct LF byte removal succeeded."
+  ],
+  "delivery": "batch-p115-checkpoint.json",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_reference_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d"
+}
