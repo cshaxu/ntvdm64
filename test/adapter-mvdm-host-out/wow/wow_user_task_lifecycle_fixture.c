@@ -17,7 +17,7 @@ static unsigned native_direct_calls;
 #ifdef WOW_NATIVE_NESTED_FIXTURE
 extern unsigned long CCPU_DR[];
 extern int ThreadSetDebugContext(unsigned long *);
-extern void ccpu_monitor_write_dr(unsigned long, unsigned long);
+extern void MOV_DR(unsigned long, unsigned long);
 static volatile LONG debug_handoff_active;
 #endif
 #ifdef WOW_RETIREMENT_LOCK_PROBE
@@ -640,7 +640,7 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
 #ifdef WOW_NATIVE_NESTED_FIXTURE
         if (InterlockedCompareExchange(&debug_handoff_active, 0, 0)) {
             CHECK(CCPU_DR[0] == 0x123456u);
-            ccpu_monitor_write_dr(0, 0x654321u);
+            MOV_DR(0, 0x654321u);
         }
 #endif
         ++test->delivered;

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1154 points reviewed:406 restored delivered,0 local,8 approved,
-740 qualified pending,0 restores decided;1566 unreviewed. Files146/365 audited,219 remain.
+1173 points reviewed:427 restored delivered,0 local,8 approved,
+738 qualified pending,0 restores decided;1547 unreviewed. Files147/365 audited,218 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P102 package `88dbe85a-138c-47af-b3d7-69c72ef9b5d5` published11x2; hashes match.
+P103 package `f5194129-5529-41d2-867a-4e125354b05a` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p102-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p103-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -93,6 +93,11 @@ P102 nt_hosts.c whole-file changes delivered: mirror86->56(-30);four originals r
 one QuickEdit residual. Actual preprocessing matches121 original selected lines,
 zero line mismatches;cached full build,publish11x2,Full19 passed.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1146-r1150-nt-hosts-review.json).
+
+P103 nt_inthk.c original hook restored and delivered;mirror326->22(-304),only7 excluded
+branches remain. Coupled c_main monitor-only entrypoints removed(-25). Cached full
+build,publish11x2,focused/Full19 passed;Git delivery accompanies receipt.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1151-r1169-nt-inthk-review.json).
 
 ## Remaining Scope
 
@@ -162,17 +167,10 @@ P9-P13 delivered; per-batch receipts remain indexed in the active audit README.
 
 ## P17 Completed File Batch
 
-Whole-file dpmiint.c review R0147-R0179 and coupled PM projection cleanup
-reduce mirror diff by93 lines: dpmiint.c379->293, data.c56->50,
-dpmi32p.h37->36. Excluded#error bodies remain; original line evidence is
-[recorded](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p17-line-check.json).
-Five points are restored; partial reductions remain owner decisions.
-Cached full build, both-location publication11x2, DPMI selected-object tests,
-CCPU143, descriptor tests, Full16 and governance passed. This record accompanies
-Git delivery. Package `6b318f5f-3c92-4572-a9e7-f850066b3ec4` is installed.
-[Final receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p17-checkpoint.json).
-No original guest or winnt.zip changes; unavailable DOS4GW/NESticle fixtures
-are skips, not passes. No fresh Win3.x interactive acceptance is claimed.
+P17 delivered the whole-file DPMI restoration and paired address cleanup.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p17-checkpoint.json)
+retains mirror deltas, line proof, publication and tests; unavailable external
+fixtures remain skips. No fresh Win3.x interactive acceptance was claimed.
 
 P18 delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 

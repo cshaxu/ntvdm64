@@ -535,20 +535,6 @@ IMPORT VOID dispatch_q_event();
 
 #if defined(NTVDM) && !defined(SFELLOW)
 static BOOL debug_context_resume_check;
-GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)
-{
-   MOV_DR(index, value);
-   quick_mode = FALSE;
-   CCPU_save_EIP = GET_EIP();
-   if (nr_inst_break && GET_RF() == 0) {
-      check_for_inst_exception(GET_CS_BASE() + GET_EIP());
-      if (debug_exception_pending) {
-         doing_contributory = FALSE;
-         Int1_f();
-      }
-   }
-}
-
 GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)
 {
    IU32 index;
@@ -576,17 +562,6 @@ static VOID ccpu_dispatch_accepted_irq IFN1(IS32, vector)
    CCPU_save_EIP = GET_EIP();
 }
 
-GLOBAL VOID ccpu_monitor_dispatch_irq IFN0()
-{
-   IU32 hook_address = 0;
-   IS32 vector;
-   if (!c_cpu_take_event(CPU_HW_INT_MASK)) return;
-   vector = ica_intack(&hook_address);
-   if (vector == -1) return;
-   doing_contributory = FALSE;
-   CCPU_save_EIP = GET_EIP();
-   ccpu_dispatch_accepted_irq(vector);
-}
 #endif
 
 

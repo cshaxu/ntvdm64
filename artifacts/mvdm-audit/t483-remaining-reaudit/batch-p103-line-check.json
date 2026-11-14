@@ -1,0 +1,29 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+    "shared_selected_lines": 45,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "excluded_error_directives_unchanged": true,
+    "selected_change_block_count": 0
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "shared_selected_lines": 3073,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [
+      [
+        [
+          4846,
+          "}"
+        ],
+        [
+          4850,
+          "}"
+        ]
+      ]
+    ],
+    "excluded_error_directives_unchanged": true,
+    "selected_change_block_count": 32
+  }
+]

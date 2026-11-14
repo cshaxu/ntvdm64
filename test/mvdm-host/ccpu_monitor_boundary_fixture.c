@@ -19,6 +19,9 @@ extern void c_cpu_simulate(void);
 extern void c_cpu_interrupt(int, unsigned short);
 extern uint32_t c_cpu_q_ev_get_count(void);
 extern void c_setIP(unsigned short);
+extern void c_setSI(unsigned short);
+extern ULONG c_getEAX(void), c_getEFLAGS(void);
+extern void c_setEFLAGS(ULONG);
 extern unsigned short c_getIP(void);
 extern unsigned short c_getAX(void);
 extern unsigned short c_getBX(void);
@@ -68,11 +71,10 @@ extern void OUT8(uint32_t,uint32_t);
 extern void ica_inb(uint32_t,unsigned char *);
 extern BOOL host_exint_hook(long,long);
 extern unsigned char c_getAL(void);
-static volatile unsigned long test_out;
 static int test_case;
 extern void do_intrupt(unsigned short, BOOL, BOOL, unsigned short);
-static volatile uint32_t test_fault, test_irq, test_irq_eip, test_irq_isr;
-static volatile uint32_t frame_fault_vector, frame_fault_eip, test_fault_vector, test_fault_error;
+static volatile uint32_t test_fault, test_irq;
+static volatile uint32_t frame_fault_eip, test_fault_vector, test_fault_error;
 extern uint32_t lin2phy(uint32_t,int);
 extern int xtrn2phy(uint32_t,unsigned char,uint32_t *);
 static int duplicate_tlb_mapping(void) {
@@ -107,17 +109,9 @@ static int monitor_cache_contract(void) {
     return read && hit && deny && write && absent;
 }
 
-static unsigned io_reads, io_writes, string_reads, string_writes, first_output, string_visible_during_callback, string_output_uses_guest, string_word_direct, wrong_string_write;
+static unsigned io_reads, wrong_string_write;
 static void probe_read(io_addr port, half_word *value) { (void)port; ++io_reads; *value=0xa5; }
-static void probe_write(io_addr port, half_word value) { (void)port; if(!io_writes)first_output=value; ++io_writes; }
-static void probe_string_read(io_addr port, half_word *out, word count) { (void)port;++string_reads;io_reads+=count;while(count--)*out++=0xa5; }
-static void probe_string_read_visible(io_addr port, half_word *out, word count) { (void)port;++string_reads;io_reads+=count;if(count){*out=0xa5;string_visible_during_callback=(*c_GetPhyAdd(0x912)==0xa5);} }
-static void probe_string_read_word(io_addr port, word *out, word count) { (void)port;++string_reads;io_reads+=count;string_word_direct=((void *)out==(void *)c_GetPhyAdd(0x7fff));if(count)*out=0x6ba5; }
-static void probe_string_read_untouched(io_addr port, half_word *out, word count) { (void)port;(void)out;++string_reads;io_reads+=count; }
-static void probe_string_write_wrapped(io_addr port, half_word *in, word count) { (void)port;++string_writes;io_writes+=count;if(count)first_output=*in; }
-static void probe_string_write_visible(io_addr port, half_word *in, word count) { (void)port;++string_writes;io_writes+=count;string_output_uses_guest=(in==c_GetPhyAdd(0x902) && *in==0x42); }
-static void probe_wrong_string_write(io_addr port, half_word *in, word count) { (void)port;(void)in;(void)count;++wrong_string_write; }
-static void probe_string_write(io_addr port, half_word *in, word count) { (void)port;(void)in;++string_writes;io_writes+=count; }
+
 static BOOL test_sti_fault(unsigned long vector, unsigned long error) {
     test_fault_vector=vector; test_fault_error=error; ++test_fault; return FALSE;
 }
@@ -132,16 +126,7 @@ static void debug_broadcast_out(io_addr port, half_word value) {
     if (test_case>=114) DpmiSetDebugRegisters();
     else if (!ThreadSetDebugContext(registers)) ++wrong_string_write;
 }
-static BOOL probe_unhandled_fault(unsigned long vector, unsigned long error) {
-    if(vector!=13 || error!=0) return FALSE;
-    ++test_fault;
-    c_setEIP(test_case==41 ? 0x100b : 0x1009);
-    return TRUE;
-}
-static BOOL probe_irq_frame_fault(unsigned long vector, unsigned long error) {
-    (void)error;frame_fault_vector=vector;frame_fault_eip=c_getEIP();
-    c_setEIP(0x1020);return TRUE;
-}
+
 static BOOL probe_debug_fault(unsigned long vector, unsigned long error) {
     (void)error;if(vector!=1)return FALSE;
     ++test_fault;frame_fault_eip=c_getEIP();c_setEIP(test_case==116 ? 0x1004 : test_case>=113 ? 0x1003 : test_case>=109 ? 0x1001 : test_case==47 ? 0x101d : test_case==46 ? 0x101a : 0x1019);return TRUE;
@@ -202,475 +187,17 @@ static int broadcast_debug_execution(void) {
     if(test_case==116) return !test_fault ? 0 : frame_fault_eip==0x1003 && c_getBX()==0;
     return !wrong_string_write && test_fault==1 && frame_fault_eip==0x1002 && c_getBX()==0;
 }
-static BOOL test_irq_handler(unsigned long vector) {
-    unsigned char isr=0;
-    (void)vector;
-    ica_outb(0x20,0x0b);ica_inb(0x20,&isr);test_irq_isr=isr;
-    ++test_irq; test_irq_eip=c_getEIP(); return FALSE;
-}
-static int protected_scalar_io(void) {
-    unsigned char gdt[48]={0};
-    unsigned char program[64]={0xba,0x80,0x00,0xb8,0x5a,0x00};
-    unsigned used=6, width=(test_case==11 || test_case==13) ? 2 : 1;
-    int immediate=(test_case==10 || test_case==11);
-    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    unsigned i;
-    if(test_case==47) {
-        const unsigned char setup[]={0x66,0xb8,0x00,0x03,0x00,0x00,0x0f,0x23,0xc0,0x66,0xb8,0x01,0x00,0x01,0x00,0x0f,0x23,0xf8,0xc6,0x06,0x00,0x03,0x5a};
-        CopyMemory(program+used,setup,sizeof(setup));used+=sizeof(setup);
-    }
-    else if(test_case==45 || test_case==46) {
-        unsigned char setup[]={0x66,0xb8,0x18,0x10,0x0f,0x00,0x0f,0x23,0xc0,0x66,0xb8,0x01,0,0,0,0x0f,0x23,0xf8,0x90};
-        if(test_case==46)setup[2]=0x19;
-        if(test_case==45)setup[18]=0x43; /* callback skips INC BX */
-        CopyMemory(program+used,setup,sizeof(setup));used+=sizeof(setup);
-        if(test_case==46)program[used++]=0x90;
-    }
-    else if(test_case>=42 && test_case<=44) {
-        if(test_case!=43){program[used++]=0x66;program[used++]=0xb8;program[used++]=test_case==42 ? 0x78 : 2;program[used++]=test_case==42 ? 0x56 : 0;program[used++]=test_case==42 ? 0x34 : 0;program[used++]=test_case==42 ? 0x12 : 0;program[used++]=0x0f;program[used++]=0x23;program[used++]=test_case==42 ? 0xc0 : 0xf8;}
-        program[used++]=0x0f;program[used++]=0x21;program[used++]=test_case==42 ? 0xc3 : (test_case==43 ? 0xe3 : 0xfb);
-        program[used++]=0x66;program[used++]=0x89;program[used++]=0x1e;program[used++]=0x00;program[used++]=0x03;
-    }
-    else if(test_case==41) {program[used++]=0x0f;program[used++]=0x01;program[used++]=0x36;program[used++]=0x00;program[used++]=0x30;}
-    else if(test_case==39) {program[used++]=0x67;program[used++]=0x0f;program[used++]=0x01;program[used++]=0x35;program[used++]=0x00;program[used++]=0x03;program[used++]=0x00;program[used++]=0x00;}
-    else if(test_case==40) {program[used++]=0x66;program[used++]=0xbd;program[used++]=0x00;program[used++]=0x02;program[used++]=0x00;program[used++]=0x00;program[used++]=0x66;program[used++]=0xb9;program[used++]=0x40;program[used++]=0x00;program[used++]=0x00;program[used++]=0x00;program[used++]=0x67;program[used++]=0x0f;program[used++]=0x01;program[used++]=0x74;program[used++]=0x8d;program[used++]=0x00;}
-    else if(test_case==37) {program[used++]=0xbb;program[used++]=0xfe;program[used++]=0x02;program[used++]=0x0f;program[used++]=0x01;program[used++]=0x77;program[used++]=0x02;}
-    else if(test_case==38) {program[used++]=0xbd;program[used++]=0x00;program[used++]=0x02;program[used++]=0xbe;program[used++]=0x00;program[used++]=0x01;program[used++]=0x0f;program[used++]=0x01;program[used++]=0x32;}
-    else if(test_case==36) {program[used++]=0x0f;program[used++]=0x01;program[used++]=0x36;program[used++]=0x00;program[used++]=0x03;}
-    else if(test_case==34 || test_case==35) {
-        program[used++]=0x0f;program[used++]=0x20;program[used++]=test_case==34 ? 0xc0 : 0xdb;
-        program[used++]=0x66;
-        if(test_case==34)program[used++]=0xa3;
-        else {program[used++]=0x89;program[used++]=0x1e;}
-        program[used++]=0x00;program[used++]=0x03;
-    }
-    else if(test_case==32 || test_case==33) { program[4]=6;program[used++]=0x0f;program[used++]=test_case==32 ? 0x22 : 0x01;program[used++]=test_case==32 ? 0xc0 : 0xf0; }
-    else if(test_case==31 || test_case==48 || test_case==50) { if(test_case==50)program[used++]=0x66;program[used++]=0x0f;program[used++]=0x06;program[used++]=0x90; }
-    else if(test_case==28) { program[used++]=0x6c;program[used++]=0x90;program[used++]=0x90; }
-    else if(test_case==14) { program[used++]=0x66;program[used++]=0xe6;program[used++]=0x80; }
-    else {
-        program[used++]=immediate ? (width==1 ? 0xe6 : 0xe7) : (width==1 ? 0xee : 0xef);
-        if(immediate) program[used++]=0x80;
-        program[used++]=immediate ? (width==1 ? 0xe4 : 0xe5) : (width==1 ? 0xec : 0xed);
-        if(immediate) program[used++]=0x80;
-    }
-    program[used++]=0xb8;program[used++]=0xef;program[used++]=0xbe;
-    program[used++]=0xd6;program[used++]=0xfe;
-    c_cpu_init(); io_init();
-    io_define_inb(adapter,probe_read);io_define_outb(adapter,probe_write);
-    for(i=0;i<2;i++) io_connect_port((io_addr)(0x80+i),adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=test_case==51 ? 0x0040fa0fu : 0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    *(uint32_t *)(gdt+0x28)=test_case==38 || test_case==40 || test_case==54 ? 0x2000ffffu : 0x0000ffffu;*(uint32_t *)(gdt+0x2c)=test_case==38 || test_case==40 || test_case==54 ? 0x0000f300u : 0x0000f100u;
-    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,used);
-    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);
-    c_setCS(0x1b);c_setSS(0x23);c_setDS(test_case==38 || test_case==40 || test_case==54 ? 0x2b : 0x23);c_setSP(0x800);c_setBX(0);c_setIOPL(test_case==48 ? 3 : 0);c_setIP(0x1000);
-    if(test_case==28){c_setES(0x2b);c_setDI(0x300);*c_GetPhyAdd(0x300)=0;}
-    if(test_case>=31)c_setCR0((c_getCR0() & ~6u) | ((test_case==34 || test_case==35) ? 14u : 8u));
-    if(test_case==41){ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned j;ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;for(j=0;j<512;j++)pte[j]=(j<<12)|7;pte[3]=0;*(uint16_t *)c_GetPhyAdd(0x3000)=6;c_setCR3(0x4000);c_setPG(1);}
-    if(test_case>=36 && test_case<=40){*(uint16_t *)c_GetPhyAdd(0x300)=6;*(uint16_t *)c_GetPhyAdd(0x2300)=0;}
-    if(test_case==34 || test_case==35 || (test_case>=42 && test_case<=44))*(uint32_t *)c_GetPhyAdd(0x300)=0xdeadbeef;
-    if(test_case==47)*c_GetPhyAdd(0x300)=0;
-    io_reads=io_writes=0;test_fault=0;VdmInstallFaultHandler((void *)(test_case>=45 && test_case<=47 ? probe_debug_fault : (test_case==14 || test_case==28 || test_case==41) ? probe_unhandled_fault : test_sti_fault));
-    if(test_case==19) {
-        int handled;
-        *c_GetPhyAdd(0xf1000)=0xe6;*c_GetPhyAdd(0xf1001)=0x80;
-        handled=host_exint_hook(13,4);
-        VdmInstallFaultHandler(NULL);
-        return handled && test_fault==0 && !io_reads && io_writes==1 && c_getIP()==0x1002;
-    }
-    if(test_case==39 || test_case==40 || test_case==50) {
-        unsigned offset=test_case==40 ? 18 : 6;
-        int handled;
-        c_setIP((unsigned short)(0x1000+offset));
-        handled=host_exint_hook(13,0);
-        VdmInstallFaultHandler(NULL);
-        return !handled && test_fault==1 && !io_reads && !io_writes &&
-            c_getIP()==(unsigned short)(0x1000+offset);
-    }
-    if(test_case==51) {
-        const unsigned char lmsw32[]={0x0f,0x01,0x35,0x00,0x03,0x00,0x00};
-        int handled;
-        CopyMemory(c_GetPhyAdd(0xf1000),lmsw32,sizeof(lmsw32));
-        c_setDI(0x300);*(uint16_t *)c_GetPhyAdd(0x300)=6;
-        handled=host_exint_hook(13,0);
-        VdmInstallFaultHandler(NULL);
-        return handled && test_fault==0 && c_getEIP()==0x1003 && (c_getCR0()&15)==15;
-    }
-    if(test_case==53) {
-        const unsigned char lmsw_bx_si[]={0x0f,0x01,0x30};
-        int handled;
-        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_bx_si,sizeof(lmsw_bx_si));
-        c_setBX(0xffff);c_setSI(1);
-        *(uint16_t *)c_GetPhyAdd(0)=0;*(uint16_t *)c_GetPhyAdd(0x10000)=6;
-        handled=host_exint_hook(13,0);
-        VdmInstallFaultHandler(NULL);
-        return handled && test_fault==0 && c_getEIP()==0x1003 && (c_getCR0()&15)==15;
-    }
-    if(test_case==54) {
-        const unsigned char lmsw_negative[]={0x0f,0x01,0x70,0xff};
-        int handled;
-        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_negative,sizeof(lmsw_negative));
-        c_setBX(0);c_setSI(0);*(uint16_t *)c_GetPhyAdd(0x1fff)=6;
-        handled=host_exint_hook(13,0);
-        VdmInstallFaultHandler(NULL);
-        return handled && test_fault==0 && c_getEIP()==0x1004 && (c_getCR0()&15)==15;
-    }
-    if(test_case==57 || test_case==58) {
-        const unsigned char lmsw_mixed_permissions[]={0x0f,0x01,0x36,0x00,0x23};
-        ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000),physical;unsigned j;int handled,external_allows;
-        extern int xtrn2phy(unsigned long,unsigned char,unsigned long *);
-        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_mixed_permissions,sizeof(lmsw_mixed_permissions));
-        ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=test_case==58 ? 0x5003 : 0x5007;
-        for(j=0;j<512;j++)pte[j]=(j<<12)|7;
-        if(test_case==57)pte[2]=0x2003;
-        *(uint16_t *)c_GetPhyAdd(0x2300)=6;
-        c_setCR3(0x4000);c_setPG(1);external_allows=xtrn2phy(0x2300,2,&physical);
-        handled=host_exint_hook(13,0);
-        VdmInstallFaultHandler(NULL);c_setPG(0);
-        return external_allows && physical==0x2300 && handled && test_fault==0 && c_getEIP()==0x1005 && (c_getCR0()&15)==15;
-    }
-    if(test_case==55 || test_case==56) {
-        const unsigned char lmsw_cross_page[]={0x0f,0x01,0x36,0xfe,0x2f};
-        ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned j;int handled,ok;
-        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_cross_page,sizeof(lmsw_cross_page));
-        ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
-        for(j=0;j<512;j++)pte[j]=(j<<12)|7;
-        if(test_case==55)pte[3]=0;
-        *(uint16_t *)c_GetPhyAdd(0x2ffe)=6;c_setCR3(0x4000);c_setPG(1);
-        handled=host_exint_hook(13,0);
-        {char line[120];wsprintfA(line,"LMSW_CROSS_PAGE handled=%d fault=%lu eip=%lx cr0=%lx\n",handled,test_fault,c_getEIP(),c_getCR0());report(line);}
-        ok=test_case==55 ? (!handled && test_fault==1 && c_getEIP()==0x1000 && (c_getCR0()&15)==9) : (handled && test_fault==0 && c_getEIP()==0x1005 && (c_getCR0()&15)==15);
-        VdmInstallFaultHandler(NULL);c_setPG(0);return ok;
-    }
-    c_cpu_simulate();VdmInstallFaultHandler(NULL);if(test_case==41)c_setPG(0);
-    {char line[120];wsprintfA(line,"MONITOR_SCALAR_IO case=%d width=%u reads=%u writes=%u fault=%lu ax=%04x\n",test_case,width,io_reads,io_writes,test_fault,c_getAX());report(line);}
-    if(test_case==31 || test_case==48) return test_fault==0 && io_reads==0 && io_writes==0 && (c_getCR0()&8) && c_getAX()==0xbeef;
-    if(test_case==32 || test_case==33) return test_fault==0 && io_reads==0 && io_writes==0 && (c_getCR0()&15)==15 && c_getAX()==0xbeef;
-    if(test_case>=36 && test_case<=40) return test_fault==0 && io_reads==0 && io_writes==0 && (c_getCR0()&15)==15 && c_getAX()==0xbeef;
-    if(test_case==34 || test_case==35) return test_fault==0 && io_reads==0 && io_writes==0 && *(uint32_t *)c_GetPhyAdd(0x300)==(test_case==34 ? (c_getCR0() & ~8u) : 0) && c_getAX()==0xbeef;
-    if(test_case>=42 && test_case<=44) return test_fault==0 && io_reads==0 && io_writes==0 && *(uint32_t *)c_GetPhyAdd(0x300)==(test_case==42 ? 0x00345678u : test_case==43 ? 0u : 1u) && c_getAX()==0xbeef;
-    if(test_case==45 || test_case==46) {extern uint32_t nr_inst_break;char line[120];wsprintfA(line,"MONITOR_DEBUG dr0=%08lx dr7=%08lx count=%lu fault=%lu eip=%08lx bx=%04x\n",CCPU_DR[0],CCPU_DR[7],nr_inst_break,test_fault,frame_fault_eip,(unsigned short)c_getBX());report(line);return test_fault==1 && frame_fault_eip==(test_case==46 ? 0x1019 : 0x1018) && (test_case!=45 || (unsigned short)c_getBX()==0) && c_getAX()==0xbeef;}
-    if(test_case==47)return test_fault==1 && frame_fault_eip==0x101d && *c_GetPhyAdd(0x300)==0x5a && (CCPU_DR[6]&1) && c_getAX()==0xbeef;
-    /* NT4 EventVdmStringIo resolves the selector without checking ES write rights. */
-    if(test_case==28) return test_fault==0 && io_reads==1 && io_writes==0 && *c_GetPhyAdd(0x300)==0xa5 && c_getAX()==0xbeef;
-    if(test_case==41) return test_fault==1 && io_reads==0 && io_writes==0 && (c_getCR0()&15)==9 && c_getAX()==0xbeef;
-    if(test_case==14) return test_fault==0 && io_reads==0 && io_writes==1 && c_getAX()==0xbeef;
-    return test_fault==0 && io_reads==width && io_writes==width && c_getAX()==0xbeef;
-}
+
 extern unsigned short c_getSI(void),c_getDI(void),c_getCX(void);
-static int protected_string_reverse_baseline(void) {
-    unsigned char gdt[48]={0};
-    unsigned char program[32]={0xfd,0xba,0x80,0x00,0xbe,0x02,0x09,0xbf,0x12,0x09,
-        0xb9,0x02,0x00,0xf3,0x6e,0xb9,0x02,0x00,0xf3,0x6c,0xfc,0xb8,0xef,0xbe,0xd6,0xfe};
-    unsigned source=test_case==24 ? 0x2902 : 0x902, target=test_case==24 ? 0x3912 : (test_case==25 ? 0x2912 : 0x912), target_index=test_case==25 ? 0x912 : target;
-    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    if(test_case==24){program[6]=0x29;program[9]=0x39;}
-    if(test_case==25){MoveMemory(program+14,program+13,13);program[13]=0x26;}
-    if(test_case==29)program[13]=0xf2;
-    c_cpu_init();io_init();io_define_inb(adapter,probe_read);io_define_outb(adapter,probe_write);
-    if(test_case==23){io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);io_define_out_routines(adapter,probe_write,NULL,probe_string_write,NULL);}
-    if(test_case==52)io_define_in_routines(adapter,probe_read,NULL,probe_string_read_untouched,NULL);
-    if(test_case==59){io_define_in_routines(adapter,probe_read,NULL,probe_string_read_visible,NULL);io_define_out_routines(adapter,probe_write,NULL,probe_string_write_visible,NULL);}
-    if(test_case==82){half_word other=adapter-1;wrong_string_write=0;
-        io_define_out_routines(adapter,probe_write,NULL,probe_string_write,NULL);
-        io_define_out_routines(other,probe_write,NULL,probe_wrong_string_write,NULL);
-        io_connect_port((io_addr)0x80,adapter,IO_READ);io_connect_port((io_addr)0x80,other,IO_WRITE);}
-    else io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    *(uint32_t *)(gdt+0x28)=0x2000ffffu;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    *c_GetPhyAdd(source)=0x42;*c_GetPhyAdd(source-1)=0x43;*c_GetPhyAdd(source+1)=0x44;*c_GetPhyAdd(target)=0;*c_GetPhyAdd(target-1)=0;*c_GetPhyAdd(target+1)=0;
-    if(test_case==52)*c_GetPhyAdd(target)=0x37;
-    if(test_case==25)*c_GetPhyAdd(source+0x2000)=0x77;
-    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);
-    c_setES(test_case==25 ? 0x2b : 0x23);
-    c_setSP(0x800);c_setIOPL(test_case>=21 ? 0 : 3);c_setIP(0x1000);io_reads=io_writes=string_reads=string_writes=0;test_fault=0;
-    if(test_case==22 || test_case==24) {ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned i;ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;for(i=0;i<512;i++)pte[i]=(i<<12)|7;c_setCR3(0x4000);c_setPG(1);}
-    VdmInstallFaultHandler((void *)test_sti_fault);c_cpu_simulate();VdmInstallFaultHandler(NULL);
-    if(test_case==22 || test_case==24)c_setPG(0);
-    {char line[140];wsprintfA(line,"MONITOR_STRING_DF cpu_si=%04x di=%04x cx=%04x reads=%u writes=%u bytes=%02x,%02x fault=%lu\n",c_getSI(),c_getDI(),c_getCX(),io_reads,io_writes,*c_GetPhyAdd(0x911),*c_GetPhyAdd(0x912),test_fault);report(line);}
-    if(test_case==15) return c_getSI()==source-2 && c_getDI()==target_index-2 && c_getCX()==0 && io_reads==2 && io_writes==2 && *c_GetPhyAdd(target-1)==0xa5 && *c_GetPhyAdd(target)==0xa5 && test_fault==0 && c_getAX()==0xbeef;
-    if(test_case==82)return string_writes==1 && !wrong_string_write && io_writes==1 && io_reads==1 && *c_GetPhyAdd(target)==0xa5 && !test_fault && c_getAX()==0xbeef;
-    if(test_case==59)return string_visible_during_callback && string_output_uses_guest && *c_GetPhyAdd(target)==0xa5 && test_fault==0 && c_getAX()==0xbeef;
-    if(test_case==52)return c_getSI()==source-1 && c_getDI()==target_index-1 && c_getCX()==2 && io_reads==1 && io_writes==1 && string_reads==1 && *c_GetPhyAdd(target)==0x37 && test_fault==0 && c_getAX()==0xbeef;
-    return c_getSI()==source-1 && c_getDI()==target_index-1 && c_getCX()==2 && io_reads==1 && io_writes==1 && *c_GetPhyAdd(target)==0xa5 && *c_GetPhyAdd(target+1)!=0xa5 && test_fault==0 && c_getAX()==0xbeef && (test_case!=25 || first_output==0x42) && (test_case!=23 || (string_reads==1 && string_writes==1)) && (test_case!=24 || ((*(ULONG *)c_GetPhyAdd(0x5008)&0x20) && (*(ULONG *)c_GetPhyAdd(0x500c)&0x60)==0x60));
-}
-static int protected_split_word_string(void) {
-    unsigned char gdt[40]={0};ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned i;
-    const unsigned char program[]={0x6d};half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    ULONG second=test_case==60 ? 0x9000 : 0x8000;int handled;
-    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,NULL,probe_string_read_word);
-    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x23);
-    c_setSP(0x800);c_setDI(0x7fff);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
-    ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
-    for(i=0;i<512;i++)pte[i]=(i<<12)|7;pte[8]=second|7;
-    *c_GetPhyAdd(0x7fff)=0;*c_GetPhyAdd(second)=0;c_setCR3(0x4000);c_setPG(1);
-    io_reads=string_reads=string_word_direct=test_fault=0;VdmInstallFaultHandler((void *)test_sti_fault);
-    handled=host_exint_hook(13,0);VdmInstallFaultHandler(NULL);c_setPG(0);
-    return handled && !test_fault && string_reads==1 && io_reads==1 &&
-        string_word_direct==(test_case==61) && *c_GetPhyAdd(0x7fff)==0xa5 &&
-        *c_GetPhyAdd(second)==0x6b && c_getDI()==0x8001 && c_getEIP()==0x1001;
-}
-static int protected_wrapped_cs(void) {
-    unsigned char gdt[40]={0},program[]={0xe6,0x80,0xb8,0xef,0xbe,0xd6,0xfe};
-    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;int handled;
-    c_cpu_init();io_init();io_define_outb(adapter,probe_write);io_connect_port((io_addr)0x80,adapter,IO_WRITE);
-    *(uint32_t *)(gdt+0x18)=0xf000ffffu;*(uint32_t *)(gdt+0x1c)=0xff00faffu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0x1000),program,sizeof(program));
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);
-    c_setSP(0x800);c_setAX(0x5a);c_setIOPL(0);c_setIP(0x2000);io_writes=test_fault=0;
-    VdmInstallFaultHandler((void *)test_sti_fault);
-    if(test_case==63){c_cpu_simulate();handled=(c_getAX()==0xbeef);}
-    else handled=host_exint_hook(13,0);
-    VdmInstallFaultHandler(NULL);
-    {char line[100];wsprintfA(line,"WRAPPED_CS handled=%d fault=%lu out=%u eip=%lx\n",handled,test_fault,io_writes,c_getEIP());report(line);}
-    return handled && !test_fault && io_writes==1 && first_output==0x5a && (test_case==63 || c_getEIP()==0x2002);
-}
-static int protected_wrapped_string(void) {
-    unsigned char gdt[48]={0},program[]={0x6c,0xb8,0xef,0xbe,0xd6,0xfe};
-    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;int handled;
-    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);
-    if(test_case==66){program[0]=0x6e;io_define_out_routines(adapter,probe_write,NULL,probe_string_write_wrapped,NULL);}
-    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    *(uint32_t *)(gdt+0x28)=0xf000ffffu;*(uint32_t *)(gdt+0x2c)=0xff00f3ffu;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(test_case==66 ? 0x2b : 0x23);c_setES(0x2b);
-    c_setSP(0x800);c_setDI(0x2000);c_setSI(0x2000);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
-    *c_GetPhyAdd(0x1000)=test_case==66 ? 0x42 : 0;io_reads=io_writes=string_reads=string_writes=test_fault=0;
-    VdmInstallFaultHandler((void *)test_sti_fault);
-    if(test_case==65 || test_case==66){c_cpu_simulate();handled=(c_getAX()==0xbeef);}
-    else handled=host_exint_hook(13,0);
-    VdmInstallFaultHandler(NULL);
-    {char line[100];wsprintfA(line,"WRAPPED_STRING handled=%d fault=%lu reads=%u eip=%lx\n",handled,test_fault,io_reads,c_getEIP());report(line);}
-    if(test_case==66)return handled && !test_fault && io_writes==1 && string_writes==1 && first_output==0x42 && c_getSI()==0x2001;
-    return handled && !test_fault && io_reads==1 && string_reads==1 && *c_GetPhyAdd(0x1000)==0xa5 && c_getDI()==0x2001 && (test_case==65 || c_getEIP()==0x1001);
-}
-static int protected_changed_descriptor(void) {
-    unsigned char gdt[48]={0},program[]={0x6c,0xb8,0xef,0xbe,0xd6,0xfe};
-    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;BOOL input=(test_case==67 || test_case==75);
-    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);
-    io_define_out_routines(adapter,probe_write,NULL,probe_string_write_wrapped,NULL);
-    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);if(!input)program[0]=0x6e;
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    *(uint32_t *)(gdt+0x28)=0x0000ffffu;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x2b);
-    c_setSP(0x800);c_setSI(0x902);c_setDI(0x912);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
-    *(uint32_t *)c_GetPhyAdd(input ? 0x3028 : 0x3020)=0x2000ffffu;
-    *c_GetPhyAdd(0x902)=0x11;*c_GetPhyAdd(0x2902)=0x42;
-    *c_GetPhyAdd(0x912)=0x11;*c_GetPhyAdd(0x2912)=0;
-    io_reads=io_writes=string_reads=string_writes=first_output=test_fault=0;
-    VdmInstallFaultHandler((void *)test_sti_fault);
-    if(test_case==75){int handled,restored;c_setGDT_BASE_LIMIT(0x3000,0x27);doing_contributory=TRUE;
-        handled=host_exint_hook(13,0);restored=doing_contributory;doing_contributory=FALSE;VdmInstallFaultHandler(NULL);
-        return !handled && restored && test_fault==1 && !io_reads && c_getEIP()==0x1000;}
-    c_cpu_simulate();VdmInstallFaultHandler(NULL);
-    {char line[128];wsprintfA(line,"CHANGED_DESCRIPTOR case=%d fault=%lu reads=%u writes=%u old=%02x new=%02x output=%02x\n",test_case,test_fault,io_reads,io_writes,*c_GetPhyAdd(0x912),*c_GetPhyAdd(0x2912),first_output);report(line);}
-    if(input)return !test_fault && io_reads==1 && string_reads==1 && *c_GetPhyAdd(0x912)==0x11 && *c_GetPhyAdd(0x2912)==0xa5 && c_getDI()==0x913 && c_getAX()==0xbeef;
-    return !test_fault && io_writes==1 && string_writes==1 && first_output==0x42 && c_getSI()==0x903 && c_getAX()==0xbeef;
-}
-static int protected_string_segment_limit(void) {
-    unsigned char gdt[48]={0},program[]={0x6d,0xb8,0xef,0xbe,0xd6,0xfe};half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    BOOL last_byte=(test_case==69 || test_case==71);unsigned index=last_byte ? 0xffff : 0x200;int handled;
-    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,probe_string_read_word);
-    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);if(!last_byte)program[0]=0x6c;
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    *(uint32_t *)(gdt+0x28)=last_byte ? 0x0000ffffu : 0x00000100u;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x2b);
-    c_setSP(0x800);c_setDI((uint16_t)index);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
-    *c_GetPhyAdd(index)=0;*c_GetPhyAdd(index+1)=0;io_reads=string_reads=test_fault=0;
-    VdmInstallFaultHandler((void *)test_sti_fault);
-    if(test_case==71 || test_case==72){c_cpu_simulate();handled=(c_getAX()==0xbeef);}
-    else handled=host_exint_hook(13,0);
-    VdmInstallFaultHandler(NULL);
-    {char line[100];wsprintfA(line,"STRING_LIMIT case=%d handled=%d fault=%lu reads=%u\n",test_case,handled,test_fault,io_reads);report(line);}
-    return handled && !test_fault && io_reads==1 && string_reads==1 && *c_GetPhyAdd(index)==0xa5 &&
-        (last_byte ? (*c_GetPhyAdd(index+1)==0x6b && c_getDI()==1) : c_getDI()==0x201) &&
-        (test_case>=71 || c_getEIP()==0x1001);
-}
-static BOOL descriptor_page_fault(unsigned long vector, unsigned long error) {
-    (void)error;++test_fault;frame_fault_vector=(uint32_t)vector;
-    if(test_case==74 && vector==14){((ULONG *)c_GetPhyAdd(0x5000))[3]=0x3007;c_setEIP(0x1001);}
-    else c_setEIP(test_case==74 ? 0x1003 : 0x1001);
-    return TRUE;
-}
-static int protected_missing_descriptor_page(void) {
-    unsigned char gdt[48]={0},program[]={0x6c,0xb8,0xef,0xbe,0xd6,0xfe,0,0};
-    ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned i;half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    if(test_case==74){program[1]=0xe6;program[2]=0x80;program[3]=0xb8;program[4]=0xef;program[5]=0xbe;program[6]=0xd6;program[7]=0xfe;}
-    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);io_define_outb(adapter,probe_write);io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    *(uint32_t *)(gdt+0x28)=0x0000ffffu;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x2b);
-    c_setSP(0x800);c_setDI(0x912);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
-    ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;for(i=0;i<512;i++)pte[i]=(i<<12)|7;pte[3]=0;
-    c_setCR3(0x4000);c_setPG(1);io_reads=io_writes=string_reads=test_fault=frame_fault_vector=0;
-    VdmInstallFaultHandler((void *)descriptor_page_fault);c_cpu_simulate();VdmInstallFaultHandler(NULL);c_setPG(0);
-    {char line[100];wsprintfA(line,"DESCRIPTOR_PAGE fault=%lu vector=%lu reads=%u ax=%04x\n",test_fault,frame_fault_vector,io_reads,c_getAX());report(line);}
-    return test_fault==1 && frame_fault_vector==14 && !io_reads && (test_case!=74 || io_writes==1) && c_getAX()==0xbeef;
-}
-static int protected_ldt_descriptor(void) {
-    unsigned char ldt[40]={0},old_code[]={0xe6,0x80,0xb8,0xef,0xbe,0xd6,0xfe,0,0,0};
-    const unsigned char new_code[]={0xe4,0x80};half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    c_cpu_init();io_init();io_define_inb(adapter,probe_read);io_define_outb(adapter,probe_write);io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    if(test_case==81){const unsigned char p[]={0x0f,0x01,0x36,0x00,0x03,0xb8,0xef,0xbe,0xd6,0xfe};CopyMemory(old_code,p,sizeof(p));}
-    if(test_case==84){const unsigned char p[]={0x0f,0x01,0x76,0x00,0xb8,0xef,0xbe,0xd6,0xfe};CopyMemory(old_code,p,sizeof(p));}
-    *(uint32_t *)(ldt+0x18)=0x0000ffffu;*(uint32_t *)(ldt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(ldt+0x20)=0x0000ffffu;*(uint32_t *)(ldt+0x24)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x4000),ldt,sizeof(ldt));CopyMemory(c_GetPhyAdd(0xf1000),old_code,sizeof(old_code));
-    c_setLDT_SELECTOR(0x28);c_setLDT_BASE_LIMIT(0x4000,sizeof(ldt)-1);c_setPE(1);c_setCPL(3);
-    if(c_setCS(0x1f) || c_setSS(0x27) || c_setDS(0x27))return 0;
-    c_setSP(0x800);c_setAX(0x5a);c_setIOPL(0);c_setIP(0x1000);
-    if(test_case==118 || test_case==119 || test_case==120) {
-        int handled;
-        /* NT4 Kt0d110 attempts protected-VDM opcode dispatch irrespective
-         * of the #GP error code. Use its user-LDT selector profile here. */
-        if(test_case==119) *c_GetPhyAdd(0xf1000)=0x90;
-        if(test_case==120) c_setIOPL(3);
-        io_reads=io_writes=test_fault=test_fault_vector=test_fault_error=0;
-        VdmInstallFaultHandler((void *)test_sti_fault);
-        handled=host_exint_hook(13,4);
-        VdmInstallFaultHandler(NULL);
-        if(test_case==118 || test_case==120)
-            return handled && !test_fault && io_writes==1 && c_getEIP()==0x1002;
-        return !handled && test_fault==1 && test_fault_vector==13 && test_fault_error==4 && !io_writes && c_getEIP()==0x1000;
-    }
-    if(test_case==78){*(uint32_t *)c_GetPhyAdd(0x4018)=0x5000ffffu;*(uint32_t *)c_GetPhyAdd(0x401c)=0x0000fa00u;CopyMemory(c_GetPhyAdd(0x6000),new_code,sizeof(new_code));}
-    if(test_case==79)*(uint32_t *)c_GetPhyAdd(0x401c)=0x0000f20fu;
-    if(test_case==80)*(uint32_t *)c_GetPhyAdd(0x4018)=0x00000fffu;
-    if(test_case==85)*(uint32_t *)c_GetPhyAdd(0x401c)=0x00007a0fu;
-    if(test_case==81 || test_case==84){c_setBP(0x300);*(uint32_t *)c_GetPhyAdd(0x4020)=0x5000ffffu;*(uint16_t *)c_GetPhyAdd(0x300)=0;*(uint16_t *)c_GetPhyAdd(0x5300)=6;c_setCR0((c_getCR0()&~6u)|8u);}
-    io_reads=io_writes=test_fault=0;VdmInstallFaultHandler((void *)test_sti_fault);
-    if(test_case==79 || test_case==80 || test_case==85){int handled=host_exint_hook(13,0);VdmInstallFaultHandler(NULL);return !handled && test_fault==1 && !io_reads && !io_writes && c_getEIP()==0x1000;}
-    c_cpu_simulate();VdmInstallFaultHandler(NULL);
-    {char line[120];wsprintfA(line,"LDT_MONITOR case=%d fault=%lu reads=%u writes=%u ax=%04x\n",test_case,test_fault,io_reads,io_writes,c_getAX());report(line);}
-    if(test_case==81 || test_case==84)return !test_fault && c_getAX()==0xbeef && (c_getCR0()&15)==15;
-    return !test_fault && c_getAX()==0xbeef && (test_case==77 ? (io_writes==1 && !io_reads) : (io_reads==1 && !io_writes));
-}
-static int monitor_register_matrix(void) {
-    unsigned char gdt[40]={0},program[]={0x0f,0x20,0xc0};unsigned r,write,j;
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    for(write=0;write<2;write++)for(r=0;r<8;r++){
-        uint32_t saved[8],expected;int handled;
-        c_cpu_init();CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));
-        program[1]=(unsigned char)(write ? 0x22 : 0x20);program[2]=(unsigned char)(0xc0+r);
-        CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-        c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);
-        c_setIOPL(0);c_setEIP(0x1000);c_setCR0((c_getCR0()&~6u)|8u);
-        for(j=0;j<8;j++)CCPU_GR[j]=0x1000+j;
-        if(write)CCPU_GR[r]=6;for(j=0;j<8;j++)saved[j]=CCPU_GR[j];
-        expected=c_getCR0()&~8u;test_fault=0;VdmInstallFaultHandler((void *)test_sti_fault);
-        handled=host_exint_hook(13,0);VdmInstallFaultHandler(NULL);
-        if(!handled || test_fault || c_getEIP()!=0x1003)return 0;
-        if(write){if((c_getCR0()&15)!=15)return 0;}
-        else saved[r]=expected;
-        for(j=0;j<8;j++)if(CCPU_GR[j]!=saved[j])return 0;
-    }
-    report("MONITOR_REGISTER_MATRIX 8 read and 8 write cases passed\n");return 1;
-}
+
 /* NT4 VdmUserCr0MapIn/Out preserve each guest-visible EM/MP pair. */
-static int monitor_cr0_npx_matrix(void) {
-    unsigned char gdt[40]={0}, program[]={0x0f,0x22,0xc0,0x0f,0x20,0xc1};
-    unsigned n; int handled;
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
-    for(n=0;n<4;n++) {
-        uint32_t before, readback;
-        c_cpu_init(); CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));
-        CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-        c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
-        c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0x1000);
-        c_setCR0((c_getCR0() & ~6u) | 8u); before=c_getCR0();
-        CCPU_GR[0]=n<<1; CCPU_GR[1]=0xdeadbeefu; test_fault=0;
-        VdmInstallFaultHandler((void *)test_sti_fault);
-        handled=host_exint_hook(13,0);
-        if(!handled || test_fault || c_getEIP()!=0x1003 ||
-           (c_getCR0() & ~6u)!=(before & ~6u) || (c_getCR0() & 6u)!=(n<<1)) {
-            VdmInstallFaultHandler(NULL); return 0;
-        }
-        handled=host_exint_hook(13,0); readback=CCPU_GR[1];
-        VdmInstallFaultHandler(NULL);
-        if(!handled || test_fault || c_getEIP()!=0x1006 ||
-           (readback & 6u)!=(n<<1) || (readback & 8u)) return 0;
-    }
-    report("MONITOR_CR0_NPX_MATRIX four EM/MP states passed\n"); return 1;
-}
+
 /* Original host instruction reads set accessed on a page-table walk. */
-static int monitor_fetch_page_access(void) {
-    unsigned char gdt[40]={0}, program[]={0xe6,0x80};
-    ULONG *pde=(ULONG *)c_GetPhyAdd(0x4000), *pte=(ULONG *)c_GetPhyAdd(0x5000);
-    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1; unsigned i; int handled;
-    extern void flush_tlb(void);
-    extern ULONG lin2phy(ULONG, int);
-    c_cpu_init(); io_init(); io_define_outb(adapter,probe_write); io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt)); CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    ZeroMemory(c_GetPhyAdd(0x4000),0x2000); pde[0]=0x5007;
-    for(i=0;i<512;i++) pte[i]=(i<<12)|7;
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
-    c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0x1000);
-    c_setCR3(0x4000); c_setPG(1); flush_tlb(); io_writes=test_fault=0;
-    if(test_case==88) {
-        if(lin2phy(0xf1000,2)!=0xf1000) {c_setPG(0);return 0;}
-        *c_GetPhyAdd(0xf2000)=0xf4; pte[0xf1]=0xf2007;
-    }
-    VdmInstallFaultHandler((void *)test_sti_fault); handled=host_exint_hook(13,0);
-    VdmInstallFaultHandler(NULL);
-    {char line[120]; wsprintfA(line,"MONITOR_FETCH_PAGE handled=%d fault=%lu writes=%u pde=%08lx pte=%08lx\n",handled,test_fault,io_writes,pde[0],pte[0xf1]);report(line);}
-    i=handled && !test_fault && io_writes==1 && (pde[0]&0x20) && !(pte[0xf1]&0x40) &&
-        (test_case==88 ? !(pte[0xf1]&0x20) : (pte[0xf1]&0x20));
-    c_setPG(0); return (int)i;
-}
+
 /* NT4 increments the linear instruction pointer modulo 32 bits. */
-static int monitor_wrapped_instruction_offset(void) {
-    unsigned char gdt[40]={0}; half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    int handled,ok;
-    c_cpu_init(); io_init(); io_define_outb(adapter,probe_write); io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x00cffa00u;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt)); c_sas_enable_20_bit_wrapping();
-    *c_GetPhyAdd(0xfffff)=0xe6; *c_GetPhyAdd(0)=0x80;
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
-    c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0xffffffffu);
-    io_writes=test_fault=0; VdmInstallFaultHandler((void *)test_sti_fault);
-    handled=host_exint_hook(13,0); VdmInstallFaultHandler(NULL);
-    {char line[100];wsprintfA(line,"MONITOR_WRAP_IP handled=%d fault=%lu writes=%u eip=%08lx\n",handled,test_fault,io_writes,c_getEIP());report(line);}
-    ok=handled && !test_fault && io_writes==1 && c_getEIP()==1;
-    c_sas_disable_20_bit_wrapping(); return ok;
-}
+
 /* OpcodeGenericPrefix permits instruction length through 128 before dispatch. */
-static int monitor_prefix_length(void) {
-    unsigned char gdt[40]={0}, program[130]; half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
-    unsigned prefixes=test_case==90 ? 16 : test_case==91 ? 127 : 128; int handled;
-    c_cpu_init(); io_init(); io_define_outb(adapter,probe_write); io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
-    FillMemory(program,prefixes,0x66); program[prefixes]=0xe6; program[prefixes+1]=0x80;
-    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt)); CopyMemory(c_GetPhyAdd(0xf1000),program,prefixes+2);
-    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
-    c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0x1000);
-    io_writes=test_fault=0; VdmInstallFaultHandler((void *)test_sti_fault);
-    handled=host_exint_hook(13,0); VdmInstallFaultHandler(NULL);
-    {char line[120];wsprintfA(line,"MONITOR_PREFIX count=%u handled=%d fault=%lu writes=%u eip=%08lx\n",prefixes,handled,test_fault,io_writes,c_getEIP());report(line);}
-    if(test_case==92)return !handled && test_fault==1 && !io_writes && c_getEIP()==0x1000;
-    return handled && !test_fault && io_writes==1 && c_getEIP()==0x1000+prefixes+2;
-}
+
 /* A code selector's translated base does not establish a linear host alias
  * for an independently remapped later code page. */
 static int dpmi_remapped_code_page(void) {
@@ -824,103 +351,6 @@ static int monitor_v86_mode_boundary(void) {
         c_getEFLAGS()==before_flags && *(ULONG *)c_GetPhyAdd(0x714)==0x200;
 }
 extern void BlockWOWIdle(BOOL);
-static DWORD WINAPI probe_wow_state_writer(void *unused) {
-    unsigned i;(void)unused;
-    for(i=0;i<20000;i++){BlockWOWIdle(TRUE);BlockWOWIdle(FALSE);}
-    BlockWOWIdle(TRUE);
-    return 0;
-}
-static int protected_concurrent_if(void) {
-    unsigned char gdt[40]={0};
-    const unsigned char program[]={0xb9,0xff,0xff,0xfb,0xfa,0xe2,0xfc,0xb8,0xef,0xbe,0xd6,0xfe};
-    HANDLE writer;DWORD result;
-    c_cpu_init();InitializeIcaLock();ica0_init();ica1_init();
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    *(uint32_t *)c_GetPhyAdd(0x714)=0;
-    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);
-    c_setSP(0x800);c_setIOPL(0);c_setIF(0);c_setIP(0x1000);test_fault=0;
-    VdmInstallFaultHandler((void *)test_sti_fault);
-    writer=CreateThread(NULL,0,probe_wow_state_writer,NULL,0,NULL);if(!writer)return 0;
-    c_cpu_simulate();
-    if(WaitForSingleObject(writer,INFINITE)!=WAIT_OBJECT_0 || !GetExitCodeThread(writer,&result)){CloseHandle(writer);return 0;}
-    CloseHandle(writer);VdmInstallFaultHandler(NULL);
-    {char line[120];wsprintfA(line,"MONITOR_IF_CONCURRENT state=%08lx fault=%lu writer=%lu ax=%04x\n",*(uint32_t *)c_GetPhyAdd(0x714),test_fault,result,c_getAX());report(line);}
-    return (*(uint32_t *)c_GetPhyAdd(0x714)&0x00100200u)==0x00100000u && !test_fault && !result && c_getAX()==0xbeef;
-}
-static int protected_pending_irq_observe(void) {
-    unsigned char pic_isr=0,pic_irr=0,slave_isr=0; unsigned char gdt[40]={0};
-    unsigned char gate[8]={0x00,0x11,0x1b,0x00,0x00,0x86,0x00,0x00};
-    unsigned char handler[]={0xfe,0x06,0x01,0x03,0xb0,0x20,0xe6,0x20,0xcf};
-    unsigned char slave_handler[]={0xfe,0x06,0x01,0x03,0xb0,0x20,0xe6,0xa0,0xe6,0x20,0xcf};
-    const unsigned char program[]={0xfb,0xc6,0x06,0x00,0x03,0x01,0xb8,0xef,0xbe,0xd6,0xfe};
-    const unsigned char prefixed_program[]={0x66,0xfb,0xc6,0x06,0x00,0x03,0x01,0xb8,0xef,0xbe,0xd6,0xfe};
-    const unsigned char stale_program[]={0xc7,0x06,0xc4,0x53,0x03,0x10,0xfb,0xc6,0x06,0x00,0x03,0x01,0xb8,0xef,0xbe,0xd6,0xfe};
-    const unsigned char fault_sentinel[]={0xb8,0xef,0xbe,0xd6,0xfe};
-    unsigned char longest_program[25];
-    c_cpu_init();
-    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
-    if(test_case==27) *(uint32_t *)(gdt+0x1c)=0x0000fa10u;
-    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
-    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));
-    if(test_case==20) CopyMemory(c_GetPhyAdd(0xf1000),stale_program,sizeof(stale_program));
-    else if(test_case==18) CopyMemory(c_GetPhyAdd(0xf1fff),prefixed_program,sizeof(prefixed_program));
-    else if(test_case==7) {
-        FillMemory(longest_program,14,0x66);
-        CopyMemory(longest_program+14,program,sizeof(program));
-        CopyMemory(c_GetPhyAdd(0xf1000),longest_program,sizeof(longest_program));
-    } else if(test_case==6) CopyMemory(c_GetPhyAdd(0xf1000),prefixed_program,sizeof(prefixed_program));
-    else CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
-    if(test_case==26){gate[5]=0x06;CopyMemory(c_GetPhyAdd(0xf1020),fault_sentinel,sizeof(fault_sentinel));frame_fault_vector=frame_fault_eip=0;}
-    if(test_case==5) CopyMemory(c_GetPhyAdd(0xf1100),slave_handler,sizeof(slave_handler));
-    else CopyMemory(c_GetPhyAdd(0xf1100),handler,sizeof(handler));
-    if(test_case==27){CopyMemory(c_GetPhyAdd(0x2000),program,sizeof(program));CopyMemory(c_GetPhyAdd(0x1100),handler,sizeof(handler));}
-    CopyMemory(c_GetPhyAdd(0x9040),gate,sizeof(gate));
-    if(test_case==5) CopyMemory(c_GetPhyAdd(0x9380),gate,sizeof(gate));
-    c_setIDT_BASE_LIMIT(0x9000,test_case==5 ? 0x387 : 0x47);
-    *c_GetPhyAdd(0x300)=0; *c_GetPhyAdd(0x301)=0; test_fault=test_irq=test_irq_eip=0; test_out=0;
-    InitializeIcaLock(); ica0_init(); ica1_init(); DelayIrqLine=0;
-    ica_outb(0x20,0x11);ica_outb(0x21,8);ica_outb(0x21,4);ica_outb(0x21,test_case==4 ? 3 : 1);ica_outb(0x21,test_case==2 ? 0xff : (test_case==5 ? 0xfb : 0xfe));
-    if(test_case==5) {ica_outb(0xa0,0x11);ica_outb(0xa1,0x70);ica_outb(0xa1,2);ica_outb(0xa1,1);ica_outb(0xa1,0xfe);}
-    VdmInstallFaultHandler((void *)(test_case==26 ? probe_irq_frame_fault : test_sti_fault)); VdmInstallHardwareIntHandler((void *)test_irq_handler);
-    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1); c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setSP(0x800);c_setIOPL(test_case==30 ? 3 : 0);c_setIF(0);c_setIP(0x1000);
-    if(test_case==27){c_sas_enable_20_bit_wrapping();c_setIP(0x2000);}
-    if(test_case==17 || test_case==18 || test_case==20) {
-        ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned i;
-        ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
-        for(i=0;i<512;i++) pte[i]=(i<<12)|7;
-        c_setCR3(0x4000);c_setPG(1);
-        if(test_case==18)c_setIP(0x1fff);
-    }
-    if(test_case==0 || test_case==2 || test_case==4 || test_case==6 || test_case==7 || test_case==17 || test_case==18 || test_case==20 || test_case==26 || test_case==27 || test_case==30) ica_hw_interrupt(0,0,1);
-    if(test_case==5) ica_hw_interrupt(1,0,1);
-    if(test_case==3) c_cpu_interrupt(3,0);
-    c_cpu_simulate();
-    ica_outb(0x20,0x0b); ica_inb(0x20,&pic_isr); ica_outb(0x20,0x0a); ica_inb(0x20,&pic_irr);
-    if(test_case==5) {ica_outb(0xa0,0x0b);ica_inb(0xa0,&slave_isr);}
-    { char line[180]; wsprintfA(line,"OBSERVE PM_STI case=%d fault=%lu irq=%lu irq_eip=%04lx marker=%u out=%lu isr=%02x irr=%02x ax=%04x\n",test_case,test_fault,test_irq,test_irq_eip,*c_GetPhyAdd(0x300),test_out,pic_isr,pic_irr,c_getAX()); report(line); }
-    VdmInstallHardwareIntHandler(NULL);VdmInstallFaultHandler(NULL);
-    if(test_case==30)return test_fault==0 && test_irq==1 && test_irq_eip==0x1006 && !(pic_isr&1) && c_getAX()==0xbeef;
-    if(test_case==27){c_sas_disable_20_bit_wrapping();return test_fault==0 && test_irq==1 && test_irq_eip==0x2001 && c_getAX()==0xbeef;}
-    if(test_case==26){char line[100];wsprintfA(line,"MONITOR_IRQ_FRAME_FAULT vector=%lu ip=%04lx\n",frame_fault_vector,frame_fault_eip);report(line);return test_irq==1 && frame_fault_vector==11 && frame_fault_eip==0x1001 && c_getAX()==0xbeef;}
-    if(test_case==17) {c_setPG(0);return test_fault==0 && test_irq==1 && test_irq_eip==0x1001 && !(pic_isr&1) && c_getAX()==0xbeef;}
-    if(test_case==18) {c_setPG(0);return test_fault==0 && test_irq==1 && test_irq_eip==0x2000 && !(pic_isr&1) && c_getAX()==0xbeef;}
-    if(test_case==20) {c_setPG(0);return test_fault==0 && test_irq==1 && test_irq_eip==0x1007 && !(pic_isr&1) && c_getAX()==0xbeef && !(*(ULONG *)c_GetPhyAdd(0x53c4)&4);}
-    if(test_case==7) return test_fault==0 && test_irq==1 && test_irq_eip==0x1001 && !(pic_isr&1) && c_getAX()==0xbeef;
-    if(test_case==6) return test_fault==0 && test_irq==1 && test_irq_eip==0x1001 && !(pic_isr&1) && c_getAX()==0xbeef;
-    if (test_case==5) {
-        char line[96];
-        wsprintfA(line,"MONITOR_SLAVE_EOI master=%02x slave=%02x\n",pic_isr,slave_isr);report(line);
-        return test_fault==0 && test_irq==1 && test_irq_eip==0x1001 && !(pic_isr&4) && !(slave_isr&1) && c_getAX()==0xbeef;
-    }
-    if (test_case==4) {
-        char line[96];
-        wsprintfA(line,"MONITOR_AEOI callback_isr=%02lx\n",test_irq_isr);report(line);
-        return test_irq==1 && test_irq_eip==0x1001 && !(test_irq_isr&1) && !(pic_isr&1) && c_getAX()==0xbeef;
-    }
-    return test_fault==0 && !(pic_isr & 1) && c_getAX()==0xbeef && (test_case==0 ? (test_irq==1 && test_irq_eip==0x1001 && *c_GetPhyAdd(0x301)==1 && test_out==0 && !(pic_irr&1)) : (test_irq==0 && *c_GetPhyAdd(0x301)==0 && test_out==0 && ((pic_irr&1)==(test_case==2 ? 1 : 0))));
-}
 
 #pragma pack(push,1)
 typedef struct { USHORT cs, flags; ULONG eip; } SWINT_HANDLER;
@@ -937,15 +367,13 @@ extern BOOL DpmiSwIntHandler(ULONG);
 extern BOOL host_swint_hook(long);
 extern long VdmInstallSoftwareIntHandler(void *);
 extern void c_setVM(int), c_setEAX(ULONG), c_setEBP(ULONG), c_setEBX(ULONG);
-extern ULONG c_getEAX(void);
 extern USHORT c_getCS(void), c_getSS(void), c_getSP(void);
 extern void INTx(ULONG);
 extern void ZFRSRVD(ULONG);
 static BOOL swint_origin_probe(ULONG vector) {test_irq=vector; return TRUE;}
 
-/* The CPU40 protected monitor belongs to the installed NT DPMI fault
- * handler. A guest VMM may instead own the protected-mode IDT and its I/O
- * bitmap; its #GP must not be consumed by an uninstalled host monitor. */
+/* The original hook delegates to its registered fault owner. The CPU
+ * retains guest IDT and I/O bitmap enforcement when the fault is declined. */
 static int protected_monitor_ownership(void) {
     unsigned char gdt[40]={0};
     const unsigned char gate[8]={0x00,0x11,0x1b,0x00,0x00,0x86,0x00,0x00};
@@ -975,11 +403,12 @@ static int protected_monitor_ownership(void) {
     }
     io_reads=0;test_fault=0;VdmInstallFaultHandler(NULL);
     if(test_case==169) {
-        /* The same handler registration boundary used by DPMI must enable
-         * interception, and its removal must immediately disable it. */
+        /* Registration delegates the exception unchanged. It does not grant
+         * an extra instruction emulator permission to consume the fault. */
         VdmInstallFaultHandler((void *)test_sti_fault);
         handled=host_exint_hook(13,0);
-        ok=handled && io_reads==1 && c_getEIP()==0x1002;
+        ok=!handled && test_fault==1 && test_fault_vector==13 &&
+            test_fault_error==0 && io_reads==0 && c_getEIP()==0x1000;
         VdmInstallFaultHandler(NULL);c_setIP(0x1000);io_reads=0;
         handled=host_exint_hook(13,0);
         ok=ok && !handled && io_reads==0 && c_getEIP()==0x1000;
@@ -1148,33 +577,16 @@ int main(int argc, char **argv) {
     else if(test_case>=168 && test_case<=172) ok=protected_monitor_ownership();
     else if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
-    else if(test_case==154) ok=dpmi_remapped_decode_fallback();
-    else if(test_case==155 || test_case==156) ok=dpmi_remapped_code_page();
-    else if(test_case==146) ok=vdd_sas_unbound_control();
+    else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
     else if(test_case==145) ok=v86_a20_word_ram_control();
+    else if(test_case==146) ok=vdd_sas_unbound_control();
+    else if(test_case==154) ok=dpmi_remapped_decode_fallback();
+    else if((test_case>=93 && test_case<=101) || (test_case>=104 && test_case<=106) || (test_case>=150 && test_case<=153) || test_case==155 || test_case==156) ok=dpmi_remapped_code_page();
+    else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
     else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
-    else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
-    else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
-    else if((test_case>=93 && test_case<=101) || (test_case>=104 && test_case<=106) || (test_case>=150 && test_case<=153)) ok=dpmi_remapped_code_page();
-    else if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();
-    else if(test_case==89) ok=monitor_wrapped_instruction_offset();
-    else if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();
-    else if(test_case==86) ok=monitor_cr0_npx_matrix();
     else if(test_case==49) ok=duplicate_tlb_mapping();
-    else if(test_case==83) ok=monitor_register_matrix();
-    else if((test_case>=77 && test_case<=81) || test_case==84 || test_case==85 || (test_case>=118 && test_case<=120)) ok=protected_ldt_descriptor();
     else if(test_case==76) ok=monitor_cache_contract();
-    else if(test_case==73 || test_case==74) ok=protected_missing_descriptor_page();
-    else if(test_case>=69 && test_case<=72) ok=protected_string_segment_limit();
-    else if(test_case==67 || test_case==68 || test_case==75) ok=protected_changed_descriptor();
-    else if(test_case==64 || test_case==65 || test_case==66) ok=protected_wrapped_string();
-    else if(test_case==62 || test_case==63) ok=protected_wrapped_cs();
-    else if(test_case==60 || test_case==61) ok=protected_split_word_string();
-    else if ((test_case>=10 && test_case<=14) || test_case==19 || test_case==28 || (test_case>=31 && test_case<=48) || test_case==50 || test_case==51 || test_case==53 || test_case==54 || test_case==55 || test_case==56 || test_case==57 || test_case==58) ok=protected_scalar_io();
-    else if (test_case==15 || (test_case>=21 && test_case<=25) || test_case==29 || test_case==52 || test_case==59 || test_case==82) ok=protected_string_reverse_baseline();
-    else if (test_case==16) ok=protected_concurrent_if();
-    else if ((test_case>=0 && test_case<=7) || test_case==17 || test_case==18 || test_case==20 || test_case==26 || test_case==27 || test_case==30) ok=protected_pending_irq_observe();
     else return 5;
     return ok ? 0 : 1;
 }

@@ -1,0 +1,304 @@
+{
+  "status": "Whole-file original restoration built/published;focused and Full19 passed;Git delivery accompanies receipt",
+  "baseline": "4da94a64d30b755586cb62ab366086485beeeb67",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe",
+  "before_sha256": "b2c2942dac794ba3a83866962fcc99b636c9700c685bf97cc41ac491f633a909",
+  "sources": {
+    "src/mvdm-host/softpc.new/host/src/nt_inthk.c": "0792f971d765eb9523ed73620ebfdcac710704db01cfad6601f65b60b9bf8542",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": "a4259569853ba4336646b4006bf8e28cfbcbcfa66fda221a8dcabedd6c8fcd99",
+    "test/mvdm-host/ccpu_monitor_boundary_fixture.c": "fcca7cfbca68c1ba7994657c7c18c0bbed7ff5238840f97f79799deea0f3a6cb",
+    "test/observation/verify-ccpu-monitor-boundary.ps1": "003c22146fda2a28e69af206ba891a91cbb34b3439840e61ee6eb82964fb18c2",
+    "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c": "bcc80a712c12c4b6acd8d0adccfc53dec9e5ce71bf70e771f43e18eb35e3738e"
+  },
+  "points": [
+    {
+      "id": "T483-R1151",
+      "historical_added": 1,
+      "historical_deleted": 0,
+      "original_anchor": "33",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1152",
+      "historical_added": 7,
+      "historical_deleted": 0,
+      "original_anchor": "37",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1153",
+      "historical_added": 22,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1154",
+      "historical_added": 21,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1155",
+      "historical_added": 12,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1156",
+      "historical_added": 12,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1157",
+      "historical_added": 14,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1158",
+      "historical_added": 9,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1159",
+      "historical_added": 35,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1160",
+      "historical_added": 54,
+      "historical_deleted": 0,
+      "original_anchor": "204",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1161",
+      "historical_added": 20,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1162",
+      "historical_added": 16,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1163",
+      "historical_added": 2,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1164",
+      "historical_added": 8,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1165",
+      "historical_added": 24,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1166",
+      "historical_added": 17,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1167",
+      "historical_added": 8,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1168",
+      "historical_added": 16,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    },
+    {
+      "id": "T483-R1169",
+      "historical_added": 18,
+      "historical_deleted": 0,
+      "original_anchor": "207",
+      "decision": "restore-original",
+      "current_remaining_semantic_diff": 0
+    }
+  ],
+  "chain": "CCPU exception -> original host_exint_hook -> registered DpmiFaultHandler -> DpmiEmulateInstruction/DpmiOp0f or guest exception delivery. Original c_main executes CLI/STI and scalar/string I/O at actual IOPL3. Original DpmiOp0f owns CR0 reads/writes. NT4 hardware trap semantics are not the selected portable CCPU contract.",
+  "coupled_restored_points": [
+    "T483-R0363",
+    "T483-R0367"
+  ],
+  "metric": {
+    "nt_inthk": {
+      "before": {
+        "added": 311,
+        "deleted": 15,
+        "total": 326
+      },
+      "after": {
+        "added": 7,
+        "deleted": 15,
+        "total": 22
+      }
+    },
+    "c_main": {
+      "before": {
+        "added": 228,
+        "deleted": 561,
+        "total": 789
+      },
+      "after": {
+        "added": 203,
+        "deleted": 561,
+        "total": 764
+      }
+    }
+  },
+  "test_disposition": {
+    "retained": [
+      "broadcast_debug_execution",
+      "cursor_copy_fault",
+      "debug_broadcast_out",
+      "dpmi_decode_page_fault",
+      "dpmi_faulting_decode_page",
+      "dpmi_remapped_code_page",
+      "dpmi_remapped_decode_fallback",
+      "duplicate_tlb_mapping",
+      "main",
+      "monitor_cache_contract",
+      "monitor_v86_mode_boundary",
+      "probe_debug_fault",
+      "probe_read",
+      "protected_cursor_copy_loop",
+      "protected_fault_decline_cpu",
+      "protected_monitor_ownership",
+      "report",
+      "restored_debug_execution",
+      "swint_origin_probe",
+      "test_sti_fault",
+      "v86_a20_word_ram_control",
+      "v86_explicit_software_int",
+      "v86_installed_exception",
+      "v86_unadmitted_fault_probe",
+      "vdd_sas_unbound_control"
+    ],
+    "removed": [
+      "descriptor_page_fault",
+      "monitor_cr0_npx_matrix",
+      "monitor_fetch_page_access",
+      "monitor_prefix_length",
+      "monitor_register_matrix",
+      "monitor_wrapped_instruction_offset",
+      "probe_irq_frame_fault",
+      "probe_string_read",
+      "probe_string_read_untouched",
+      "probe_string_read_visible",
+      "probe_string_read_word",
+      "probe_string_write",
+      "probe_string_write_visible",
+      "probe_string_write_wrapped",
+      "probe_unhandled_fault",
+      "probe_wow_state_writer",
+      "probe_write",
+      "probe_wrong_string_write",
+      "protected_changed_descriptor",
+      "protected_concurrent_if",
+      "protected_ldt_descriptor",
+      "protected_missing_descriptor_page",
+      "protected_pending_irq_observe",
+      "protected_scalar_io",
+      "protected_split_word_string",
+      "protected_string_reverse_baseline",
+      "protected_string_segment_limit",
+      "protected_wrapped_cs",
+      "protected_wrapped_string",
+      "test_irq_handler"
+    ]
+  },
+  "diagnostic_evidence": {
+    "state": "diagnostic investigation; no production source change or disposition advancement",
+    "baseline": "4da94a64d30b755586cb62ab366086485beeeb67",
+    "points": "R1151-R1169",
+    "findings": [
+      "Original hook compiles/links in actual worker context and isolated image map selects original.obj",
+      "Current/original WOW startup both visible; initial uncontrolled environment runs are invalid comparisons, retained separately",
+      "Current/original DPMI INT21 low/high direct/nested all pass",
+      "Independent DOSX probe reports CPL3 IOPL3; CLI/STI, port61 read, CR0 read, exit succeed in both",
+      "Original hook WOW trace records CPL3 IOPL3 exception6 handled by original callback"
+    ],
+    "limits": [
+      "No complete instruction or lifecycle conclusion",
+      "No Full result yet",
+      "Trace observes only first256 exceptions and adds file I/O",
+      "No original guest modified or rebuilt"
+    ],
+    "evidence": {
+      "commands.json": "ba2a94a00223e513d93d0a7b7dbffd9e1e22cceba252388c16d02b449249c726",
+      "controls.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "wow-retry-current/result.json": "9afb53c1f09e444558b056cd043650a33b4072745f035990ba3e7e8b6dc76f01",
+      "wow-retry-original/result.json": "3e4fad8dc862d258f79b5e3d73a2f8ac2b28a9e2137d7fdc2dfb3e5c9068c2d7",
+      "dpmi-int21-current/results.json": "84fdafb08f354db311c0f6df98cb7af5df92472b0f4075aab6021b9f132fde04",
+      "dpmi-int21-original/results.json": "89b65cb94882ef93858fb04ad95dc090f6eb743cad604aa3fd115ea6892e4cec",
+      "privilege-current/result.json": "75e848ec13f005fb4557c562ba55f3b8cf7392da8f36d9b1057b88c9dcae63a1",
+      "privilege-original/result.json": "8cdf732cc853be1a0f171b3f5bd43c8f750ea9db19aa6e999aa31543cc8db611",
+      "wow-trace-original-trace/result.json": "96e113989feaccf934fe8d43a4035267bacc9c3ab76157741d9f2362d3b3553e",
+      "wow-original-trace.txt": "9c1fb424ed2cdb4b862daad05e3f6736fbb5ef79f3fa6ebd4091d35d0c82ed8a"
+    }
+  },
+  "counter_review": [
+    "Original callback semantics, not NT4 hardware opcode emulation, define this portable hook.",
+    "DOSX probe executes immutable DOSX at CPL3 IOPL3;original CLI/STI and I/O do not require a host GP emulator.",
+    "WOW trace original hook handled exception6 at CPL3 IOPL3;startup is not complete gameplay/Win3.x acceptance.",
+    "Most retired tests installed a false-returning callback while forcing IOPL0 and asserted the added emulator consumed the fault;that proves implementation behavior,not original necessity.",
+    "Retain real CPU,TSS I/O bitmap,DPMI code-page,V86 software interrupt,debug context and cursor-loop tests. Case169 now asserts exact callback delegation and no port access.",
+    "No retired monitor mechanism transferred into shim;no original guest modified/rebuilt."
+  ],
+  "limits": [
+    "Diagnostic Full attempts failed preparation gates (cache identity,historical baseline path,missing fixture);none counted as Full pass. Final Full uses complete coherent final cache.",
+    "Independent port fixture first link lacked bounded-execution seam;built declared ccpu-bit-fault prerequisite and reran into fresh output. First failure retained.",
+    "Absent external DOS4GW/Nesticle fixture remains explicit skip.",
+    "No fresh Win3.x physical-input acceptance claimed;original/current WOW startup and original-hook trace were bounded diagnostic observations."
+  ]
+}
