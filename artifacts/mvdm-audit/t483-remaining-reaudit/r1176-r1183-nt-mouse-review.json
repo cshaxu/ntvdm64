@@ -1,0 +1,174 @@
+{
+  "scope": "M0 T483 S5 P106;whole nt_mouse.c",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_mouse.c",
+  "points": {
+    "R1176": {
+      "evidence": "Original forward declarations already restored by P66 coupled R0754 delivery; exact declaration comparison now confirms. No new source restoration counted as new diff reduction.",
+      "decision": "already-restored-original",
+      "delta_this_batch": 0
+    },
+    "R1177": {
+      "evidence": "INT33 reset calls host_mouse_reset. The original CCPU-selected mouse_reset only sets ratios; confine reset and bFunctionZeroReset are inside excluded X86GFX. Current Window route uses original EmulateCoordinates and LimitCoordinates, which read these flags. Retaining old custom ranges/reset state contradicts INT33 reset; restore hardware fast-track body is not appropriate for CCPU.",
+      "decision": "minimized-pending-owner",
+      "delta_this_batch": -2
+    },
+    "R1178": {
+      "evidence": "Original setter enters counter-update only when WINDOWED && bPointerOff; active Window relative route can have visible pointer. Original alternative calls host Console pointer warp, whose coordinates/owner are not the KVM relative record. Required counter update stays at original setter.",
+      "decision": "minimized-pending-owner",
+      "delta_this_batch": -2
+    },
+    "R1179": {
+      "evidence": "Original EmulateCoordinates prioritizes reset over set-position over displacement. Adapter synchronizes state with zero movement then consumes real movement. With both reset and position flags still set, both calls consume state and lose first real delta. INT33/4 supersedes earlier pending reset; clear at existing setter, no duplicate state.",
+      "decision": "minimized-pending-owner",
+      "delta_this_batch": -2
+    },
+    "R1180": {
+      "evidence": "nt_event receives CONSOLE_INPUT_RELATIVE_MOUSE through bridge. Original GetNextMouseEvent and ScaleToWindowedVirtualCoordinates consume absolute Console position or WarpSystemPointer, not these relative records. Keep one adapter call at existing original ICA-locked dispatch and original fallback; reuse unchanged coordinate/callback algorithms.",
+      "decision": "minimized-pending-owner",
+      "delta_this_batch": -1
+    },
+    "R1181": {
+      "evidence": "Original WOW16 user/k/daytona/wowk.asm GetCursorPos reads wow16gpsi offsets772/776 directly, no host thunk. Original NT USER producer is unavailable in standalone worker. Existing page-domain publish writes these fields only for active owner/CR3. Without publication shared view remains stale even when guest mouse coordinates move. Keep post-transform call, no additional coordinate conversion.",
+      "decision": "minimized-pending-owner",
+      "delta_this_batch": -1
+    },
+    "R1182": {
+      "evidence": "Original host_x_range signature already restored in P66; exact comparison confirms word* parameters. Coupled pointer-bitpattern proof and full delivery recorded by P66.",
+      "decision": "already-restored-original",
+      "delta_this_batch": 0
+    },
+    "R1183": {
+      "evidence": "Original host_y_range signature already restored in P66; exact comparison confirms word* parameters. Coupled pointer-bitpattern proof and full delivery recorded by P66.",
+      "decision": "already-restored-original",
+      "delta_this_batch": 0
+    }
+  },
+  "mirror": {
+    "nt_mouse": {
+      "before": {
+        "added": 49,
+        "deleted": 657,
+        "total": 706
+      },
+      "after": {
+        "added": 41,
+        "deleted": 657,
+        "total": 698
+      }
+    }
+  },
+  "delta": -8,
+  "line_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "shared_selected_lines": 993,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              327,
+              "if(mvdm_softpc_mouse_route_active())"
+            ],
+            [
+              328,
+              "{"
+            ],
+            [
+              329,
+              "confine.bF7 = confine.bF8 = 0;"
+            ],
+            [
+              330,
+              "bFunctionZeroReset = 1;"
+            ],
+            [
+              331,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              413,
+              "if(sc.ScreenState == 0 && bPointerOff)"
+            ]
+          ],
+          "after": [
+            [
+              413,
+              "if((sc.ScreenState == 0 && bPointerOff) || mvdm_softpc_mouse_route_active())"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              415,
+              "if(mvdm_softpc_mouse_route_active()) bFunctionZeroReset = 0;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              547,
+              "if(!mvdm_softpc_mouse_apply(mcs,counter,&old_x,&old_y,&bPointerInSamePlace,"
+            ],
+            [
+              548,
+              "bFunctionZeroReset,&bFunctionFour,&newF4x,&newF4y))"
+            ],
+            [
+              549,
+              "{"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              561,
+              "}"
+            ],
+            [
+              562,
+              "(void)mvdm_softpc_wow_page_domain_publish_cursor((long)mcs->position.x,"
+            ],
+            [
+              563,
+              "(long)mcs->position.y);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "object_check": {
+    "non_debug_sections_equal": true,
+    "before_sections": 48,
+    "candidate_sections": 48,
+    "differences": []
+  },
+  "tests": "PASS reset-center: 319,99\nPASS relative-motion: 328,95\nPASS guest-position: 80,40\nPASS motion-after-guest-position: 83,42\nPASS button-only-no-motion: 83,42\nPASS negative-limit: 0,0\nPASS text-row-limit: 639,199\nPASS text-row-limit: 639,343\nPASS text-row-limit: 639,399\nPASS mode13-virtual-width-not-raster-width: 639,199\nPASS mode12-limit: 639,479\nPASS guest-text-range: 20,90\nPASS guest-graphics-range: 120,10\nPASS pending-position-consumes-this-sample: 100,50\nPASS sync-then-motion-preserves-first-delta: 107,59\nPASS reset-sync-then-motion: 326,108\nPASS signed-short-wrap-before-clamp: 0,50\nPASS original-coordinate-contract checks=17; no guest/IRQ claim\n",
+  "process": {
+    "pid": 20312,
+    "start": "2026-11-14T06:31:41.8798319-08:00",
+    "script": "build/t483-s5-p106/run.ps1"
+  },
+  "limitations": "17 tests exercise extracted original algorithms with fixture state, not guest/IRQ/rendering or current-file full callchain. Necessity conclusions use complete source contract; no new physical mouse reproduction claimed. 3 earlier P66 restorations add reviewed dispositions,not new diff savings.",
+  "delivery": "Comments and original CRLF only;48 non-debug/non-checksum sections and named relocations equal. Reuse published P103 package and Full19 under owner no-behavior exception;no fresh product full build/publication claimed. Git delivery accompanies this record.",
+  "sha256": "361a27377098703c97ce1a0a67cc7fc4683285bec8a5171e2ae81641ba94b9c1"
+}

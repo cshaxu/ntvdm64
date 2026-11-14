@@ -787,3 +787,8 @@ P105 [nt_mem whole-file review](r1173-r1175-nt-mem-review.json):R1173 restored;R
 Mirror145->139(-6),539 exact original logical lines,20 object sections/bindings equal.
 149/365 files;1179 reviewed,429 restored,8 approved,742 pending,1541 unreviewed.
 No-binding/comment-only delivery reuses P103 publication and runtime evidence.
+
+P106 [nt_mouse whole-file review](r1176-r1183-nt-mouse-review.json):3 P66 restorations confirmed,5 residuals minimized/pending.
+Mirror706->698(-8),993 original lines exact,48 object sections/bindings equal;17 original coordinate cases pass.
+150/365 files;1187 reviewed,432 restored,8 approved,747 pending,1533 unreviewed.
+Comment/CRLF-only delivery reuses published P103.

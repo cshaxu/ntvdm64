@@ -329,8 +329,6 @@ return(mouse_state == INSTALLED && in_text_mode() == FALSE);
 
 GLOBAL void mouse_reset()
 {
-/* DIVERGENCE(MVDM-HOST-DIV-318): CCPU Window uses the original counter
- * reset contract without the MONITOR guest fast-track storage. */
 if(mvdm_softpc_mouse_route_active())
    {
    confine.bF7 = confine.bF8 = FALSE;
@@ -371,13 +369,9 @@ GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)
 // reset does this too.
 //
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): Window relative input shares the original
- * counter-position update; it does not warp a host Console pointer. */
 if((sc.ScreenState == WINDOWED && bPointerOff) || mvdm_softpc_mouse_route_active())
 #line 414
    {
-   /* DIVERGENCE(MVDM-HOST-DIV-318): INT33/4 supersedes an unconsumed
-      Window reset; otherwise the first movement is spent consuming both. */
    if(mvdm_softpc_mouse_route_active()) bFunctionZeroReset = FALSE;
 #line 415
    newF4x = (IS16)newx;
@@ -433,7 +427,6 @@ VOID host_os_mouse_pointer(MOUSE_CURSOR_STATUS *mcs,MOUSE_CALL_MASK *call_mask,
 
 host_ica_lock(); // synch with the event thread
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): preserve original absolute route otherwise. */
 if(!mvdm_softpc_mouse_apply(mcs,counter,&old_x,&old_y,&bPointerInSamePlace,
                           bFunctionZeroReset,&bFunctionFour,&newF4x,&newF4y))
 {
@@ -450,7 +443,6 @@ GetNextMouseEvent();
    }
 
 }
-// Publish the same final virtual coordinates consumed by the guest mouse path.
 (void)mvdm_softpc_wow_page_domain_publish_cursor((long)mcs->position.x,
                                                  (long)mcs->position.y);
 

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1179 points reviewed:429 restored delivered,0 local,8 approved,
-742 qualified pending,0 restores decided;1541 unreviewed. Files149/365 audited,216 remain.
+1187 points reviewed:432 restored delivered,0 local,8 approved,
+747 qualified pending,0 restores decided;1533 unreviewed. Files150/365 audited,215 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -91,16 +91,16 @@ That read-only checkpoint is followed by the active local restoration below.
 
 P102 delivered;[review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1146-r1150-nt-hosts-review.json).
 
-P103 nt_inthk.c original hook restored and delivered;mirror326->22(-304),only7 excluded
-branches remain. Coupled c_main monitor-only entrypoints removed(-25). Cached full
-build,publish11x2,focused/Full19 passed;Git delivery accompanies receipt.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1151-r1169-nt-inthk-review.json).
+P103 original hook restored;[review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1151-r1169-nt-inthk-review.json).
 
 P104 nt_keycd.c reviewed;mirror6->4(-2),comment-only;P103 binaries unchanged.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1170-r1172-nt-keycd-review.json).
 
 P105 nt_mem.c mirror145->139(-6);no-binding/comment-only;P103 package unchanged.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1173-r1175-nt-mem-review.json).
+
+P106 nt_mouse.c mirror706->698(-8);comments/CRLF only;P103 package unchanged.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1176-r1183-nt-mouse-review.json).
 
 ## Remaining Scope
 
