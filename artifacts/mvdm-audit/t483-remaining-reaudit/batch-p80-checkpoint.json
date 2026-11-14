@@ -1,0 +1,32 @@
+{
+  "batch": "P80",
+  "status": "cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "sha256": "3007cc09956a602dfc27460e615bdd77f934bff57ed09576f3ed26a7180e6bc7"
+    }
+  ],
+  "mirror_diff_delta": -15,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "publication": {
+    "status": "published",
+    "package": "22ae51a1-22d0-413b-b0fa-3160f4a84f9b",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build\\t483-s5-p80\\full-final\\timings.json",
+  "Full_elapsed_ms": 416359,
+  "verification": {
+    "focused_text": "54 cases original399 wrong cells,current/candidate0",
+    "actual_preprocessor": "449 shared selected lines equal original;non-directive nonblank statements identical before/after",
+    "Full": "19 passed;DOS4GW external fixture explicitly SKIP",
+    "boundary": "143 WOW objects,9 negative controls",
+    "governance": "documentation/links/diff checks passed"
+  }
+}

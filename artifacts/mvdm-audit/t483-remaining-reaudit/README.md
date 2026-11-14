@@ -728,3 +728,6 @@ P77: [host_def.h4/4](r0994-r0997-host-def-review.json), [line proof](batch-p77-l
 P78: [five files](r0998-r1004-host-small-review.json), [line proof](batch-p78-line-check.json), [checkpoint](batch-p78-checkpoint.json). Mirror net-50;five restores delivered,one minimized residual;R1000 already delivered. Cached full build,publish11x2,Full and governance passed;Git delivery accompanies checkpoint.
 
 P79: [nt_bop10/10](r1005-r1014-nt-bop-review.json), [lines](batch-p79-line-check.json), [checkpoint](batch-p79-checkpoint.json). Mirror329->188(-141);three restores delivered,seven qualified residuals. Cached full build,publish11x2,Full and governance passed;Git delivery accompanies checkpoint.
+
+P80 delivered: [nt_cga six-point review](r1015-r1020-nt-cga-review.json);mirror353->338(-15),comments and lines only;all6 residuals qualified;449 actual selected-line matches;cached build,publish11x2,Full19 passed.
+P80 delivery evidence: [checkpoint](batch-p80-checkpoint.json), [line proof](batch-p80-line-check.json).

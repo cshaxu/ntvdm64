@@ -159,7 +159,6 @@ void nt_init_cga_colour_med_graph()
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
 #line 188
-#line 150
 
 #ifdef LITTLEND
 #line 190
@@ -288,7 +287,22 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
 		org_height,clen);
     }
 
-    /* T99: gather the existing host cells from hardware odd/even planes. */
+	// note that the sharing buffer has different format on x86 and RISC
+	// platforms. On x86, a cell is defined as:
+	//	typedef _x86cell {
+	//		byte	char;
+	//		byte	attributes;
+	//		}
+	// on RISC, a cell is defined as:
+	//	typedef _RISCcell {
+	//		byte	char;
+	//		byte	attributes;
+	//		byte	reserved_1;
+	//		byte	reserved_2;
+	//		}
+	// the size of each cell was defined by TEXT_INCVAL
+	//
+
     to = &textBuffer[(ScreenY*now_width + ScreenX) * TEXT_INCVAL];
     for (lines = height; lines; lines--)
     {
@@ -298,6 +312,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
                 pScreenText + cell * 8, TEXT_INCVAL);
         pScreenText += get_offset_per_line() * 4;
         to += now_width * TEXT_INCVAL;
+#line 362
     }
 
 #line 365 "nt_cga.c"
@@ -433,7 +448,7 @@ void nt_cga_colour_med_graph_std(int offset, int screen_x, int screen_y,
 
 
     /* Build up DIB. */
-    inc = offset & 1 ? 7 : 1; /* T99: odd/even plane spacing. */
+    inc = offset & 1 ? 7 : 1;
     intelmem_ptr = get_chain2_screen_ptr(offset);
     graph_ptr = (ULONG *) ((UTINY *) sc.ConsoleBufInfo.lpBitMap +
                            (screen_y * bytes_per_scanline + screen_x));
