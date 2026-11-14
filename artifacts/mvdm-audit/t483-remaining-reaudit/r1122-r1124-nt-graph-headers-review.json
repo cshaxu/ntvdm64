@@ -1,0 +1,106 @@
+{
+  "status": "P96 audit-only;no production edits",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "source_sha256": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+  "original": {
+    "path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_graph.c",
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+    "selected_source_status": "clean;revision verified"
+  },
+  "points": [
+    {
+      "id": "T483-R1122",
+      "scale": "+5/-0",
+      "location": "original55;current text and software-route includes",
+      "problem": "Declare copied text-frame and software-route boundary",
+      "evidence": "Removing only both includes compiles with exit0 but introduces five C4013 implicit declarations. NtvdmConsoleTextColours and mvdm_softpc_text_video_flush return void, not implicit int. Original physical Console output cannot transport copied cells/font/CRTC metadata to the independently owned NTCON frontend. console_text.c obtains the session source snapshot and submits CONSOLE_VIDEO_TEXT_FRAME through ntvdm_console_publish_video; the route adapter retains original software update_alg ownership. This proves the finite declaration boundary, not all later callsites or helper internals.",
+      "minimum": "Keep two explicit includes pending owner; remove three explanatory comment lines during whole-file cleanup. Do not replace declarations with implicit-int calls or duplicate prototypes.",
+      "delta": "0 applied;planned -3 comment lines"
+    },
+    {
+      "id": "T483-R1123",
+      "scale": "+1/-0",
+      "location": "original57;current console_graphics.h include",
+      "problem": "Declare copied graphics publication/update boundary",
+      "evidence": "Removing this include compiles with exit0 but introduces two C4013 diagnostics for flush and begin_update; begin_update actually returns void. Original source paints local DIB state, whereas the admitted independent frontend needs source-owned copied publication. console_graphics.c serializes body/overlay capture with update_depth and dirty notification. The end_update declaration also exists locally; that duplicate is to be reviewed at its ordered point, not evidence that the header is redundant.",
+      "minimum": "Keep the single owner header pending owner; do not recreate its declarations in the mirror. This does not approve all later callsite logic.",
+      "delta": "0"
+    },
+    {
+      "id": "T483-R1124",
+      "scale": "+7/-0",
+      "location": "original81;current V7VGA DAC_data_bits declaration",
+      "problem": "Preserve original Video7 selectable DAC width at host palette boundary",
+      "evidence": "Original v7_ports.c register0xC1 selects DAC_data_bits=8/mask0xff or6/mask0x3f; vga_prts.c owns initial/reset6. Original host set_the_vlt scales every component by4, which maps 8-bit64 to BYTE0. Selected current host reads the original state. Removing its extern yields six C2065 diagnostics and compile exit2. Existing original vgaports.h also declares the variable under V7VGA, but replacing one extern with one include does not reduce mirror lines and imports unrelated declarations; no claim that original declaration is absent. Original standard6-bit behavior is not accused of a defect.",
+      "minimum": "Keep the one state declaration and excluded configuration framework pending owner; remove one explanatory comment during whole-file cleanup. Later arithmetic points remain ordered, not pre-approved.",
+      "delta": "0 applied;planned -1 comment line"
+    }
+  ],
+  "controls": [
+    {
+      "name": "current",
+      "exit": 0,
+      "source_sha256": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+      "log_sha256": "de460b5638bfc4143549b48106b01298710f2282578a6d783abcf36c0cceb354",
+      "diagnostics": []
+    },
+    {
+      "name": "without-text-route",
+      "exit": 0,
+      "source_sha256": "b3d945389bce2cc4a4c8eabb10ef9349c4ecb9b92837a876cf454986b3cd046f",
+      "log_sha256": "26c3b5503dd6a1342698e839bd65356fe02a6e5a8ba0ddcff4a4c0fa4711b180",
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-text-route.c(803): warning C4013: 'NtvdmConsoleUpdateText' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-text-route.c(860): warning C4013: 'mvdm_softpc_text_video_flush' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-text-route.c(837): warning C4013: 'mvdm_softpc_text_video_sync_route' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-text-route.c(832): warning C4013: 'NtvdmConsoleUpdateTextConfiguration' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-text-route.c(1720): warning C4013: 'NtvdmConsoleTextColours' undefined; assuming extern returning int"
+      ]
+    },
+    {
+      "name": "without-graphics",
+      "exit": 0,
+      "source_sha256": "3342d5cc220271a58b0262e64af424c3c6e228e3493ff65faf806531a875a55c",
+      "log_sha256": "3b9d6e4fa236f38d442a0c5958ea437da83f72489e359a7cbc611c704cc360aa",
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-graphics.c(856): warning C4013: 'ntvdm_console_graphics_flush' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-graphics.c(920): warning C4013: 'ntvdm_console_graphics_begin_update' undefined; assuming extern returning int"
+      ]
+    },
+    {
+      "name": "without-dac",
+      "exit": 2,
+      "source_sha256": "0a74ee4b79e17047f1c1915b5dfb6f780556d1139e23e68dc7fc5f4ffa051c76",
+      "log_sha256": "003af9b6f7094f097273a606d4ff8ed67b58415147a80f14e698655b3f1863b6",
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-dac.c(1650): error C2065: 'DAC_data_bits': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-dac.c(1652): error C2065: 'DAC_data_bits': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-dac.c(1654): error C2065: 'DAC_data_bits': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-dac.c(1710): error C2065: 'DAC_data_bits': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-dac.c(1712): error C2065: 'DAC_data_bits': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p96\\without-dac.c(1714): error C2065: 'DAC_data_bits': undeclared identifier"
+      ]
+    }
+  ],
+  "command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Foobj/host/nt_graph.obj O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "procedure": "Use actual selected x86 product cl flags/includes/forced headers; bypass compiler cache only for isolated source snapshots and separate objects. controls.cmd builds current and two header omissions; dac.cmd removes only DAC_data_bits declaration. No product objects replaced.",
+  "processes": [
+    {
+      "Id": 13120,
+      "StartTime": "2026-11-14T04:02:58.0887903-08:00"
+    },
+    {
+      "Id": 32064,
+      "StartTime": "2026-11-14T04:03:54.2196232-08:00"
+    }
+  ],
+  "counter_review": [
+    "A successful implicit-declaration compile is not a compile failure or demonstrated runtime crash.",
+    "Header omission diagnostics alone do not prove every adapted call necessary; independent frontend ownership and original DAC producer supply the separate source rationale.",
+    "Source unchanged: no new line mapping or exclusion validation claimed;existing #error/#line bytes unchanged.",
+    "Whole file3/24 reviewed;planned comment reductions not applied and not counted as restorations.",
+    "No new runtime acceptance or publication;P95 remains delivered baseline."
+  ],
+  "verification": "Source chain and actual translation-unit controls;not full product regression"
+}
