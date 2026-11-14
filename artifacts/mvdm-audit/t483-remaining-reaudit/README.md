@@ -860,3 +860,7 @@ P119 [metadata restoration](r1256-r1257-metadata-restoration.json):two files raw
 P120 [VCDEX entry review](r1258-vcdex-entry-review.json):+1/-1 remains;inline comment removed,mirror line delta0.
 [Checkpoint](batch-p120-checkpoint.json). Original link fails entry ABI;global stdcall fails12 imports;final object identity and published11x2 hashes pass;P118 Full19 reused.
 167/365 files;1262 reviewed:475 restores,8 approved,779 pending,1458 unreviewed;Git accompanies receipt.
+
+P121 [DLC review](r1259-r1260-vrdlc5c-review.json):R1259 line mapping confirmed,R1260 +1/-1 residual pending owner. Source unchanged,mirror delta0.
+[Checkpoint](batch-p121-checkpoint.json):1579 line matches,current33/0 versus original35/5 initializer assertions;P118 published11x2/Full19 reused.
+168/365 files;1264 reviewed:476 restored/confirmed,8 approved,780 pending,1456 unreviewed.

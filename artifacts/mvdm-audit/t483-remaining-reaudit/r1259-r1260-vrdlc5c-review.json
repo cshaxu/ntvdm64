@@ -1,0 +1,71 @@
+{
+  "points": [
+    "T483-R1259",
+    "T483-R1260"
+  ],
+  "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+  "original": {
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/vdmredir/vrdlc5c.c",
+    "sha256": "a2d971f76439fb775311dc30b54255ad2ffa8cbc4909a3d3a11020e0c8ffe0c0",
+    "normalized_control_equal": true
+  },
+  "initial_review": {
+    "R1259": "Old line-drift classification used form-feed as newline. Compiler LF-only mapping confirms1579 selected common lines exact;no repair needed.",
+    "R1260": "Exact original InitializeDlcWorkerThread checks the first event after creating the second. With event2 allocation failure it creates a thread and reports TRUE with NULL completion event. Same maintained fixture:current33 checks/0 failures;original35 checks/5 failures. Controlled thread boundary,real Windows events;no real DLC adapter execution."
+  },
+  "counter_review": {
+    "call_chain": "VrDlc5cHandler -> LoadDlcDll(DLCAPI exports) -> InitializeAdapterSupport -> VrDlcInit -> InitializeEventHandler && InitializeDlcWorkerThread;FALSE maps to LLC_STATUS_NO_MEMORY. DlcCallWorker later waits on completion event.",
+    "boundary": "Without external DLCAPI provider,the handler returns COMMAND_CANCELLED_FAILURE before worker creation. Fixture proves the selected initializer failure contract,not provider availability or end-to-end DLC success.",
+    "alternatives": "One identifier replacement is the minimal correction. Moving validation to caller,adding a wrapper or removing optional provider logic would increase complexity or change the admitted boundary.",
+    "decision": "R1259 confirmed no remaining line defect;R1260 residual +1/-1 pending owner,not approved automatically."
+  },
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "shared_selected_lines": 1579,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              3780,
+              "if (DlcWorkerEvent == ((void *)0)) {"
+            ]
+          ],
+          "after": [
+            [
+              3780,
+              "if (DlcWorkerCompletionEvent == ((void *)0)) {"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "metric": {
+    "dlc": {
+      "before": {
+        "added": 6,
+        "deleted": 54,
+        "total": 60
+      },
+      "after": {
+        "added": 6,
+        "deleted": 54,
+        "total": 60
+      }
+    }
+  },
+  "mirror_delta": 0,
+  "source_unchanged": true,
+  "evidence_logs": {
+    "current": "DLC_WORKER_EVENT checks=33 failures=0\n",
+    "original": "FAIL both events precede thread\nFAIL initialization result\nFAIL no thread after event failure\nFAIL failure event retirement count\nFAIL no untransferred live handles\nDLC_WORKER_EVENT checks=35 failures=5\n"
+  },
+  "runner_correction": "First temporary cmd invocations used slash paths and did not launch;corrected backslash paths in retry.ps1. Failed launches are not product failures.",
+  "verification": "Actual preprocess and native positive/negative fixture;unchanged-source P118 Full19/publication reused,not rerun."
+}

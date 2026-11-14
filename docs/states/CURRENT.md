@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1262 points reviewed:475 restored/confirmed delivered,0 local,8 approved,
-779 qualified pending,0 restores decided;1458 unreviewed. Files167/365 audited,198 remain.
+1264 points reviewed:476 restored/confirmed delivered,0 local,8 approved,
+780 qualified pending,0 restores decided;1456 unreviewed. Files168/365 audited,197 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -234,6 +234,6 @@ P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaini
 P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,one evidenced declaration residual;cached build,publish11x2,Full19 passed.
 
 
-P120 VCDEX entry qualified:local WINAPI residual+1/-1;comment removed,mirror delta0.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1258-vcdex-entry-review.json).
-Actual ABI controls/object identity pass;P118 published11x2/Full19 reused;Git accompanies receipt.
+P121 vrdlc5c.c audit-only:1579 line matches;event initializer current33/0,original35/5.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1259-r1260-vrdlc5c-review.json).
+Source unchanged;one minimal residual pending;P118 publication/Full reused;Git accompanies receipt.
