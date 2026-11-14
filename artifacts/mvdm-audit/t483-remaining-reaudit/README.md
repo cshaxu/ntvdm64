@@ -941,3 +941,15 @@ P138 final cached build,publish11x2,transaction167/parameter-map54 source contra
 P139 [whole-file checkpoint](batch-p139-checkpoint.json), [line proof](batch-p139-line-check.json):wcommdlg mirror239->234(-5);selected differences27->22,excluded212 unchanged. R1379 restored,R1371 structure confirmed,11 residuals pending.191/365 files;1383/2720 points;511 delivered,2 local,8 approved,862 pending,1337 unreviewed. Final delivery pending.
 
 P139 final cached build,publish11x2,transaction169,common-dialog callback,native42/two references,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror239->234(-5);1218 selected lines match.191/365 files;1383/2720 points:513 delivered/confirmed,8 approved,862 pending,1337 unreviewed. Final governance and Git accompany receipt.
+
+P140 partial: [R1384-R1395 review](r1384-r1395-partial-review.json), [initiator original/current control](r1384-r1386-initiator-review.json). wdde.c12/29 points complete, file not complete. Local original-relative diff171->170; final line/build/publication/testing pending. P139 delivered as fa427360e.
+
+P140 [R1396-R1404 converter review](r1396-r1404-conversion32-review.json): original read order restored, exact-body candidate8 cases pass.21/29 points reviewed; whole file and delivery remain incomplete.
+
+P140 [R1405-R1412 tail review](r1405-r1412-tail-review.json): wdde.c29/29 source-reviewed; COPYDATA empty-list adaptation restored, DDE residual evidence qualified. Final validation/publication remains pending.
+
+P140 [targeted checkpoint](p140-targeted-checkpoint.json):717 selected lines match, DDE alias and COPYDATA59 pass; cached full build started. No publication or Full result yet.
+
+P140 [delivery checkpoint](batch-p140-checkpoint.json) and [compiler line proof](batch-p140-line-check.json); delivery status is updated only after each gate completes.
+
+P140 final gates passed:cached full,11x2 publication,DDE conversion8/alias101,COPYDATA59,public ABI,menu-resource,Full19,WOW boundary. Mirror wdde171->143,header-1;total-29.192/365 files;1412/2720 points:516 delivered,8 approved,888 pending,1308 unreviewed. Final governance/Git accompany receipt.

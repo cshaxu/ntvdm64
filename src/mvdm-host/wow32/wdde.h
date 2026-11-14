@@ -118,7 +118,6 @@ BOOL    DDEDeletehandle(HAND16 h16, HANDLE h32);
 HANDLE  DDEFind32(HAND16 h16);
 HAND16  DDEFind16(HANDLE h32);
 BOOL    DDEAddhandle(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo);
-VOID    DDEBeginConversion(PDDECONVERSION pConversion);
 BOOL    DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo);
 VOID    DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd);
 VOID    DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd);

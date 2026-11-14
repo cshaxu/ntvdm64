@@ -335,7 +335,7 @@ int __cdecl main(void)
         memset(&info, 0, sizeof(info));
         info.Msg = WM_DDE_DATA; info.Flags = DDE_PACKET;
         CHECK("rollback-peer-add", add(3, 4, 30, 130, WM_DDE_DATA, DDE_PACKET));
-        DDEBeginConversion(&conversion);
+        conversion.Count = 0;
         CHECK("rollback-track", DDETrackhandle(&conversion, 1, 2, 30, H(131), &info));
         CHECK("rollback-mark-before", marked[30] && live_nodes == 2);
         DDERollback32(&conversion, 1, 2);
@@ -344,7 +344,7 @@ int __cdecl main(void)
         CHECK("rollback-new-native-once", native_frees == old_native + 1 && last_native == 131);
         CHECK("rollback-peer-cleanup", DDEDeletehandle(30, H(130)) && !live_nodes);
         marked[30] = 0;
-        DDEBeginConversion(&conversion);
+        conversion.Count = 0;
         info.Msg = WM_DDE_EXECUTE; info.Flags = DDE_PACKET | DDE_EXECUTE_FREE_H16;
         info.h16 = 77;
         CHECK("rollback-execute-track", DDETrackhandle(&conversion, 1, 2, 31, H(132), &info));
@@ -362,7 +362,7 @@ int __cdecl main(void)
             message.Parm16.WndProc.wMsg = WM_DDE_POKE;
             message.lParam = 0x1234;
             message.ddePostPacked = TRUE;
-            DDEBeginConversion(&conversion);
+            conversion.Count = 0;
             info.Msg = WM_DDE_POKE; info.Flags = DDE_PACKET;
             CHECK("post-cancel-track", DDETrackhandle(&conversion, 1, 2, 33, H(134), &info));
             SetLastError(ERROR_ACCESS_DENIED);

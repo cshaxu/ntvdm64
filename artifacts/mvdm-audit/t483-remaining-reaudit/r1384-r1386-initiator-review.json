@@ -1,0 +1,30 @@
+{
+  "points": [
+    "T483-R1384",
+    "T483-R1385",
+    "T483-R1386"
+  ],
+  "path": "src/mvdm-host/wow32/wdde.c",
+  "status": "source and bounded original/current comparison complete; register synchronization waits for P139 delivery",
+  "original_relative_diff": {
+    "added": 3,
+    "deleted": 1,
+    "change": 0
+  },
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wdde.c",
+  "responsibility": "Track outstanding WM_DDE_INITIATE per initiating HWND so ACK conversion distinguishes atom pair from packed handle pair.",
+  "original_failure": "Original malloc_w returns HeapAlloc(...,0,...) NULL. Original release WOW32ASSERT is empty. Original VOID WI32DDEAddInitiator returns normally after allocation failure. Both original thunk callers later delete by initiating HWND unconditionally. If an outer same-HWND initiation remains active, failed nested initiation deletes the outer node. WI32DDEInitiate then returns FALSE while the outer initiation is still active.",
+  "actual_callers": [
+    "wmsg16.c WM_DDE_INITIATE construction and unthunk",
+    "wmdisp32.c WM32DDEInitiate thunk and unthunk"
+  ],
+  "candidate": "BOOL result and TRUE only after insertion, FALSE after failed allocation; callers condition retirement on successful publication.",
+  "alternative_review": "Restoring VOID plus unconditional retirement reproduces the wrong-node deletion. A caller-side list snapshot/comparison introduces list coupling and additional state rather than reducing the four differing lines. Changing malloc_w to fail-fast changes a shared original allocation contract; original already treats failure as returning NULL. No additional registry, identifier or shim is needed.",
+  "comparison": {
+    "original": "normal_nested=1 normal_empty=1 failed_inner_preserves_outer=0 live=0 assertions=2",
+    "current": "normal_nested=1 normal_empty=1 failed_inner_preserves_outer=1 live=0 assertions=1",
+    "runner_exit": 0,
+    "boundary": "Exact original/current add/delete/query bodies compiled with test heap and logging/assertion doubles. Injected allocation failure demonstrates list ownership error, not actual guest transport, application OOM frequency, or full product acceptance. Caller deletion conditions are represented explicitly, not whole caller functions."
+  },
+  "disposition": "Evidence-qualified residual pending owner decision. No source edit made. Whole wdde.c audit and final logical-line verification remain required before file completion."
+}

@@ -425,10 +425,10 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                                                 (HAND16)hMeta16, hMeta32, pDdeInfo)) {
                                 GlobalUnlockFree16(GlobalLock16(hMeta16, NULL));
                                 fFailed = TRUE;
-                            }
+                            } else {
 #line 409
                             hMF32 = lpMemMeta32->hMF;
-                            if (!fFailed && hMF32) {
+                            if (hMF32) {
                                 hMF16 = WinMetaFileFromHMF(hMF32, FALSE);
                                 pDdeInfo->Flags = DDE_METAFILE;
                                 if (!hMF16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
@@ -444,6 +444,8 @@ HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDd
                             GlobalUnlock16(hMeta16);
                             FLUSHVDMPTR(vp2, 8, lpMemMeta16);
                             FREEMISCPTR(lpMemMeta16);
+                            }
+#line 421
                         }
                         else {
                             fFailed = TRUE;
@@ -627,10 +629,6 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                             lpMemMeta32->mm = (LONG) FETCHSHORT(lpMemMeta16->mm);
                             lpMemMeta32->xExt = (LONG) FETCHSHORT(lpMemMeta16->xExt);
                             lpMemMeta32->yExt = (LONG) FETCHSHORT(lpMemMeta16->yExt);
-                            /* The mark callback below may reenter guest code.  Do
-                             * not dereference this flat guest view after it. */
-                            hMF16 = FETCHWORD(lpMemMeta16->hMF);
-#line 586
                             pDdeInfo->Format = lpMem16->cfFormat;
                             pDdeInfo->Flags = 0;
                             pDdeInfo->h16 = 0;
@@ -640,6 +638,8 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                                 fFailed = TRUE;
                             }
 #line 590
+
+                            hMF16 = FETCHWORD(lpMemMeta16->hMF);
 
                             if (!fFailed && hMF16) {
 #line 594
@@ -718,7 +718,6 @@ BOOL DDEAddhandle(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32
             // arena of this handle.
 
             if (!W32MarkDDEHandle(hMem16)) {
-                /* DIV-354: wrapper rejection occurred before original guest entry. */
                 DDEDeletehandle(hMem16, hMem32);
                 return (FALSE);
             }
@@ -737,21 +736,10 @@ BOOL DDEAddhandle(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16, HANDLE hMem32
 }
 
 
-VOID DDEBeginConversion(PDDECONVERSION pConversion)
-{
-    pConversion->Count = 0;
-}
-
-
 BOOL DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd,
                     HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo)
 {
     DDECONVERSIONPAIR *pPair;
-
-    if (pConversion->Count == DDE_CONVERSION_MAX_PAIRS) {
-        WOW32ASSERT(FALSE);
-        return (FALSE);
-    }
 
     if (!DDEAddhandle(To_hwnd, From_hwnd, hMem16, hMem32, pDdeInfo)) {
         return (FALSE);
@@ -789,14 +777,8 @@ VOID DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
         pPair = &pConversion->Pair[--pConversion->Count];
         if (DDEFindPair16(To_hwnd, From_hwnd, pPair->h32) == pPair->h16 &&
                 DDEDeletehandle(pPair->h16, pPair->h32)) {
-            /* DIVERGENCE(MVDM-HOST-DIV-363): the original HDDE list is the
-             * sole alias authority.  A failed post must not clear a shared
-             * guest arena mark while another live pair still names it. */
             if (!DDEFindNode16(pPair->h16)) {
                 W32UnMarkDDEHandle(pPair->h16);
-                /* DIVERGENCE(MVDM-HOST-DIV-363): WM_DDE_EXECUTE may create
-                 * a unique 16-bit alias which the normal ACK path frees.
-                 * A rejected post has no ACK, so retire only that alias. */
                 if (pPair->Flags & DDE_EXECUTE_FREE_H16) {
                     GlobalUnlockFree16(GlobalLock16(pPair->h16, NULL));
                 }
@@ -822,7 +804,6 @@ BOOL DDEDeletehandle(HAND16 h16, HANDLE h32)
     PHDDE   phTemp1, phTemp2;
 
     phTemp1 = phDDEFirst;
-    /* DIVERGENCE(MVDM-HOST-DIV-351): the absent pair also includes an empty list. */
     if (!phTemp1) return (FALSE);
 #line 677
 
@@ -1136,7 +1117,7 @@ VPVOID CopyDataFindData16 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     while (pTemp) {
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
-            (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: not an embedded payload. */
+            (pTemp->Flags & COPYDATA_HEADER) &&
 #line 988
             (pTemp->Mem32 == Mem)) {
                 return (pTemp->Mem16);
@@ -1158,7 +1139,7 @@ PCPDATA CopyDataFindData32 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     while (pTemp) {
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
-            (pTemp->Flags & COPYDATA_HEADER) && /* DIV-344: same original list. */
+            (pTemp->Flags & COPYDATA_HEADER) &&
 #line 1008
             (pTemp->Mem16 == Mem)) {
                 return (pTemp);
@@ -1181,9 +1162,6 @@ BOOL CopyDataDeleteNode (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     PCPDATA pTemp2;
 
     pTemp1 = pCPDataFirst;
-
-    /* DIVERGENCE(MVDM-HOST-DIV-344): rollback may have no published node. */
-    if (!pTemp1) return FALSE;
 #line 1029
 
     if ((pTemp1->To_hwnd == To_hwnd) &&

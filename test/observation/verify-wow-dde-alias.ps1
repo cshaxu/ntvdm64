@@ -121,7 +121,7 @@ try {
             Select-Body $source $name $variant
         }
         if (!$old) {
-            foreach ($name in @('DDEBeginConversion', 'DDETrackhandle', 'DDERollback32')) {
+            foreach ($name in @('DDETrackhandle', 'DDERollback32')) {
                 $bodies += Select-Body $source $name $variant
             }
             $bodies += Select-Body (Read-Input 'src/mvdm-host/wow32/wumsg.c' $false) 'W32CancelDDEPost' $variant
@@ -158,7 +158,7 @@ try {
             throw "Source changed during group: $($entry.Path)"
         }
     }
-    @{ passed = $true; baseline = $baseline; baselineBodies = 12; candidateBodies = 16;
+    @{ passed = $true; baseline = $baseline; baselineBodies = 12; candidateBodies = 15;
         scope = 'Original alias/free bodies with service doubles; no guest/transport proof'
     } | ConvertTo-Json | Set-Content "$root/result.json"
 } catch {

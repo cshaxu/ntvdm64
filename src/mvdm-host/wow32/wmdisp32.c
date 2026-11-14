@@ -2014,7 +2014,7 @@ BOOL FASTCALL WM32DDEAdvise(LPWM32MSGPARAMEX lpwm32mpex)
 
 #line 1958
     if (lpwm32mpex->fThunk) {
-        DDEBeginConversion(&Conversion);
+        Conversion.Count = 0;
 #line 1959
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
@@ -2094,7 +2094,7 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
 
 #line 2023
     if (lpwm32mpex->fThunk) {
-        DDEBeginConversion(&Conversion);
+        Conversion.Count = 0;
 #line 2024
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
@@ -2190,7 +2190,7 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
 
 #line 2107
     if (lpwm32mpex->fThunk) {
-        DDEBeginConversion(&Conversion);
+        Conversion.Count = 0;
 #line 2108
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
@@ -2292,7 +2292,7 @@ BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
 
 #line 2198
     if (lpwm32mpex->fThunk) {
-        DDEBeginConversion(&Conversion);
+        Conversion.Count = 0;
 #line 2199
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 

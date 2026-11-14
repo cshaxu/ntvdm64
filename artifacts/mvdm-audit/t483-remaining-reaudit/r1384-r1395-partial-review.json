@@ -1,0 +1,112 @@
+{
+  "status": "First12 points complete; whole file remains in progress",
+  "points": [
+    {
+      "id": "T483-R1384",
+      "before": 2,
+      "after": 2,
+      "problem": "Initiator publication result",
+      "evidence": "Original malloc_w returns HeapAlloc(...,0,...) NULL. Original release WOW32ASSERT is empty. Original VOID WI32DDEAddInitiator returns normally after allocation failure. Both original thunk callers later delete by initiating HWND unconditionally. If an outer same-HWND initiation remains active, failed nested initiation deletes the outer node. WI32DDEInitiate then returns FALSE while the outer initiation is still active."
+    },
+    {
+      "id": "T483-R1385",
+      "before": 1,
+      "after": 1,
+      "problem": "Successful initiator publication",
+      "evidence": "Original malloc_w returns HeapAlloc(...,0,...) NULL. Original release WOW32ASSERT is empty. Original VOID WI32DDEAddInitiator returns normally after allocation failure. Both original thunk callers later delete by initiating HWND unconditionally. If an outer same-HWND initiation remains active, failed nested initiation deletes the outer node. WI32DDEInitiate then returns FALSE while the outer initiation is still active."
+    },
+    {
+      "id": "T483-R1386",
+      "before": 1,
+      "after": 1,
+      "problem": "Failed initiator publication",
+      "evidence": "Original malloc_w returns HeapAlloc(...,0,...) NULL. Original release WOW32ASSERT is empty. Original VOID WI32DDEAddInitiator returns normally after allocation failure. Both original thunk callers later delete by initiating HWND unconditionally. If an outer same-HWND initiation remains active, failed nested initiation deletes the outer node. WI32DDEInitiate then returns FALSE while the outer initiation is still active."
+    },
+    {
+      "id": "T483-R1387",
+      "before": 2,
+      "after": 2,
+      "problem": "Conversion-owned acquisitions",
+      "evidence": "Original DDECopyhData16 creates DIB or metafile subobjects before the caller registers the outer packet. Original HDDE/free helpers do not recursively unwind subobjects if outer registration fails. A call-local acquisition record permits rollback of only this conversion; global alias presence does not identify which call owns a newly allocated object."
+    },
+    {
+      "id": "T483-R1388",
+      "before": 1,
+      "after": 1,
+      "problem": "Propagate partial conversion failure",
+      "evidence": "Original body ignores a failed DDEAddhandle and still returns the outer handle. Exact original-body diagnostic returns nonzero after first/second registration failure and inner allocation failure; caller consequently attempts publication of an incomplete conversion."
+    },
+    {
+      "id": "T483-R1389",
+      "before": 6,
+      "after": 6,
+      "problem": "DIB allocation and registration failure",
+      "evidence": "Copyh32Toh16 can return zero; original DDEAddhandle rejects a zero handle or failed node allocation, but its return is ignored. The original outer DIB packet is still returned and cannot establish a reverse alias. Release only a newly created, unpublished guest DIB and propagate failure; registered resources are owned by the call-local rollback."
+    },
+    {
+      "id": "T483-R1390",
+      "before": 6,
+      "after": 6,
+      "problem": "Embedded MSDRAW metafile failure",
+      "evidence": "WinMetaFileFromHMF returns a newly created guest metafile or zero. The original code ignores registration failure and returns an embedded POKE packet with no alias/retirement record. The minimal failure branch frees only an unregistered guest copy and signals the existing rollback tail."
+    },
+    {
+      "id": "T483-R1391",
+      "before": 6,
+      "after": 6,
+      "problem": "Metafile-pict registration and post-release use",
+      "evidence": "Original ignores failed registration and reports conversion success. Previous adaptation freed hMeta16 on failed registration but unconditionally reacquired vp2 to STOREWORD into the retired object. Exact complete-function diagnostic reproduced one access after release. Continue the existing fill block only in the successful-registration else arm; no new state or cleanup path."
+    },
+    {
+      "id": "T483-R1392",
+      "before": 2,
+      "after": 0,
+      "problem": "Redundant failure condition",
+      "evidence": "The coupled R1391 successful-registration else now dominates this block. Restore original if(hMF32); no separate fFailed guard is needed here. Exact-body normal and three failure scenarios pass."
+    },
+    {
+      "id": "T483-R1393",
+      "before": 6,
+      "after": 6,
+      "problem": "Metafile registration failure",
+      "evidence": "Original ignores failed metafile copy or alias registration. A successful pict registration followed by failed metafile registration must roll back the pict and outer packet; current local record identifies those acquisitions without touching source native objects."
+    },
+    {
+      "id": "T483-R1394",
+      "before": 3,
+      "after": 4,
+      "problem": "Inner allocation failure and success-arm boundary",
+      "evidence": "Original failed GlobalAllocLock16 leaves the outer packet allocated and returns it as success. Keep the existing failure propagation. One closing brace terminates R1391 successful-registration arm; coupled R1391/R1392/R1394 total decreases by one mirror-diff line, not an independent scope expansion."
+    },
+    {
+      "id": "T483-R1395",
+      "before": 6,
+      "after": 6,
+      "problem": "Conversion rollback and failed result",
+      "evidence": "The original final return exposes a partial packet after failure; original DDE freeing routines do not traverse the DDEDATA object graph. Reverse this call\u2019s registered subobjects, free its outer guest allocation and return zero through the existing caller failure route. Original-body controls demonstrate all three failures returning a nonzero packet; corrected current body returns zero with no live test allocations."
+    }
+  ],
+  "whole_file_before": {
+    "added": 153,
+    "deleted": 18,
+    "total": 171
+  },
+  "whole_file_local": {
+    "added": 153,
+    "deleted": 17,
+    "total": 170
+  },
+  "mirror_delta": -1,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wdde.c",
+  "diagnostics": {
+    "conversion-original/result.txt": "case=0 result=1 live=3 invalid_after_release=0 marks=2\ncase=1 result=1 live=3 invalid_after_release=0 marks=2\ncase=2 result=1 live=3 invalid_after_release=0 marks=2\ncase=3 result=1 live=1 invalid_after_release=0 marks=0\nconversion16_errors=3 guest_proof=0\n",
+    "conversion-current/result.txt": "case=0 result=1 live=3 invalid_after_release=0 marks=2\ncase=1 result=0 live=0 invalid_after_release=1 marks=1\ncase=2 result=0 live=0 invalid_after_release=0 marks=2\ncase=3 result=0 live=0 invalid_after_release=0 marks=0\nconversion16_errors=1 guest_proof=0\n",
+    "conversion-fixed/result.txt": "case=0 result=1 live=3 invalid_after_release=0 marks=2\ncase=1 result=0 live=0 invalid_after_release=0 marks=1\ncase=2 result=0 live=0 invalid_after_release=0 marks=2\ncase=3 result=0 live=0 invalid_after_release=0 marks=0\nconversion16_errors=0 guest_proof=0\n"
+  },
+  "proof_limits": [
+    "Allocation/registration service doubles; exact conversion function body, not complete guest execution.",
+    "No completed final line check, full build, publication or regression claimed.",
+    "Original alias fixture did not include DDECopyhData16/32; it was not evidence for full conversion correctness."
+  ],
+  "counter_review": "Unchanged original malloc_w returns NULL; release assertions do not stop execution. Both original callers delete initiator unconditionally. Original conversion registration return is ignored. The local failure fix avoids freed object access without another cleanup path; R1392 original condition is restored. Combined affected block diff decreases, unrelated comment deletion is not used to offset growth."
+}

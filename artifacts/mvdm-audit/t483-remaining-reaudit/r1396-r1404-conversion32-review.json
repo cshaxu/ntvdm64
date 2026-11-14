@@ -1,0 +1,173 @@
+{
+  "points": [
+    {
+      "id": "T483-R1396",
+      "before": 2,
+      "after": 2,
+      "problem": "Conversion acquisition ownership",
+      "evidence": "Exact original DDECopyhData32 body ignores subobject alias-registration failure and returns a nonzero outer packet. The original-body diagnostic returns a partial packet in three failure controls. Candidate returns zero and releases its own acquired objects. This is allocator/registration-double evidence, not an actual guest allocation failure. The caller registers the outer packet after conversion. The original flat HDDE list cannot identify which subobjects this call acquired for rollback."
+    },
+    {
+      "id": "T483-R1397",
+      "before": 1,
+      "after": 1,
+      "problem": "Propagate failed native conversion",
+      "evidence": "Exact original DDECopyhData32 body ignores subobject alias-registration failure and returns a nonzero outer packet. The original-body diagnostic returns a partial packet in three failure controls. Candidate returns zero and releases its own acquired objects. This is allocator/registration-double evidence, not an actual guest allocation failure."
+    },
+    {
+      "id": "T483-R1398",
+      "before": 6,
+      "after": 6,
+      "problem": "DIB copy and registration failure",
+      "evidence": "Exact original DDECopyhData32 body ignores subobject alias-registration failure and returns a nonzero outer packet. The original-body diagnostic returns a partial packet in three failure controls. Candidate returns zero and releases its own acquired objects. This is allocator/registration-double evidence, not an actual guest allocation failure. Copyh16Toh32 may fail or its DDEAddhandle registration may fail; only unpublished native copies are freed directly."
+    },
+    {
+      "id": "T483-R1399",
+      "before": 3,
+      "after": 0,
+      "problem": "Unnecessary relocated metafile handle read",
+      "evidence": "Original WOW16SetDdeHandleFlag calls SetDdeHandleFlag; its selected get_arena_pointer32 path reads the arena table and sets/clears GAH_WOWDDEFREEHANDLE. It does not allocate, relocate, or invoke application code. The source METAFILEPICT is already GlobalLock16-locked. This converter is called from the guest-origin message thunk before native dispatch; its current GETMISCPTR is a direct mapped pointer, not a callback-epoch temporary buffer. This bounded chain does not justify the earlier read relocation; it does not establish arbitrary callback stability."
+    },
+    {
+      "id": "T483-R1400",
+      "before": 6,
+      "after": 6,
+      "problem": "Native metafile-pict registration failure",
+      "evidence": "Exact original DDECopyhData32 body ignores subobject alias-registration failure and returns a nonzero outer packet. The original-body diagnostic returns a partial packet in three failure controls. Candidate returns zero and releases its own acquired objects. This is allocator/registration-double evidence, not an actual guest allocation failure. Failed registration frees the unpublished native pict; the source guest pict remains locked until the original unlock point."
+    },
+    {
+      "id": "T483-R1401",
+      "before": 4,
+      "after": 2,
+      "problem": "Restore original read location; retain failed-conversion guard",
+      "evidence": "Original WOW16SetDdeHandleFlag calls SetDdeHandleFlag; its selected get_arena_pointer32 path reads the arena table and sets/clears GAH_WOWDDEFREEHANDLE. It does not allocate, relocate, or invoke application code. The source METAFILEPICT is already GlobalLock16-locked. This converter is called from the guest-origin message thunk before native dispatch; its current GETMISCPTR is a direct mapped pointer, not a callback-epoch temporary buffer. This bounded chain does not justify the earlier read relocation; it does not establish arbitrary callback stability. The remaining !fFailed condition prevents creating a child metafile after its parent native pict was freed on registration failure."
+    },
+    {
+      "id": "T483-R1402",
+      "before": 6,
+      "after": 6,
+      "problem": "Metafile allocation and alias failure",
+      "evidence": "Exact original DDECopyhData32 body ignores subobject alias-registration failure and returns a nonzero outer packet. The original-body diagnostic returns a partial packet in three failure controls. Candidate returns zero and releases its own acquired objects. This is allocator/registration-double evidence, not an actual guest allocation failure. An unregistered native metafile is deleted directly; earlier registered pict resources are rolled back through the local acquisition record."
+    },
+    {
+      "id": "T483-R1403",
+      "before": 4,
+      "after": 4,
+      "problem": "Avoid writing a freed native metafile-pict",
+      "evidence": "Exact original DDECopyhData32 body ignores subobject alias-registration failure and returns a nonzero outer packet. The original-body diagnostic returns a partial packet in three failure controls. Candidate returns zero and releases its own acquired objects. This is allocator/registration-double evidence, not an actual guest allocation failure. R1400 can free hMeta32 while lpMemMeta32 still holds its address. The retained !fFailed arm prevents writing lpMemMeta32->hMF through that released pointer."
+    },
+    {
+      "id": "T483-R1404",
+      "before": 5,
+      "after": 5,
+      "problem": "Return failed conversion without publishing partial packet",
+      "evidence": "Exact original DDECopyhData32 body ignores subobject alias-registration failure and returns a nonzero outer packet. The original-body diagnostic returns a partial packet in three failure controls. Candidate returns zero and releases its own acquired objects. This is allocator/registration-double evidence, not an actual guest allocation failure. Reverse registered acquisitions, release the outer packet, and return NULL through the existing thunk failure path."
+    }
+  ],
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wdde.c",
+  "scope": "R1396-R1404; whole file still incomplete",
+  "point_delta": -5,
+  "formal_result": {
+    "cases": 8,
+    "passed": true,
+    "scope": "Exact bodies; allocator/registration doubles; no guest proof"
+  },
+  "results": {
+    "baseline-16-run.out": "case=0 result=1 live=3 invalid_after_release=0 marks=2\ncase=1 result=0 live=0 invalid_after_release=1 marks=1\ncase=2 result=0 live=0 invalid_after_release=0 marks=2\ncase=3 result=0 live=0 invalid_after_release=0 marks=0\nconversion16_errors=1 guest_proof=0\n",
+    "baseline-32-run.out": "case=0 result_nonzero=1 live=3 invalid=0 marks=2 hMF_read_after_marks=0\ncase=1 result_nonzero=0 live=0 invalid=0 marks=1 hMF_read_after_marks=0\ncase=2 result_nonzero=0 live=0 invalid=0 marks=2 hMF_read_after_marks=0\ncase=3 result_nonzero=0 live=0 invalid=0 marks=1 hMF_read_after_marks=0\nconversion32_errors=4 guest_proof=0\n",
+    "candidate-16-run.out": "case=0 result=1 live=3 invalid_after_release=0 marks=2\ncase=1 result=0 live=0 invalid_after_release=0 marks=1\ncase=2 result=0 live=0 invalid_after_release=0 marks=2\ncase=3 result=0 live=0 invalid_after_release=0 marks=0\nconversion16_errors=0 guest_proof=0\n",
+    "candidate-32-run.out": "case=0 result_nonzero=1 live=3 invalid=0 marks=2 hMF_read_after_marks=1\ncase=1 result_nonzero=0 live=0 invalid=0 marks=1 hMF_read_after_marks=1\ncase=2 result_nonzero=0 live=0 invalid=0 marks=2 hMF_read_after_marks=1\ncase=3 result_nonzero=0 live=0 invalid=0 marks=1 hMF_read_after_marks=1\nconversion32_errors=0 guest_proof=0\n"
+  },
+  "steps": [
+    {
+      "name": "baseline-16-build",
+      "pid": 2136,
+      "start": "2026-11-14T15:08:57.5557709-08:00",
+      "file": "cmd.exe",
+      "arguments": [
+        "/d",
+        "/c",
+        "\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\baseline-16/build.cmd\""
+      ],
+      "exit": 0
+    },
+    {
+      "name": "baseline-16-run",
+      "pid": 1660,
+      "start": "2026-11-14T15:09:04.3970823-08:00",
+      "file": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\baseline-16/unit.exe",
+      "arguments": [
+        "test"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "baseline-32-build",
+      "pid": 18036,
+      "start": "2026-11-14T15:09:04.8101795-08:00",
+      "file": "cmd.exe",
+      "arguments": [
+        "/d",
+        "/c",
+        "\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\baseline-32/build.cmd\""
+      ],
+      "exit": 0
+    },
+    {
+      "name": "baseline-32-run",
+      "pid": 36272,
+      "start": "2026-11-14T15:09:11.0964068-08:00",
+      "file": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\baseline-32/unit.exe",
+      "arguments": [
+        "test"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "candidate-16-build",
+      "pid": 26656,
+      "start": "2026-11-14T15:09:11.5444232-08:00",
+      "file": "cmd.exe",
+      "arguments": [
+        "/d",
+        "/c",
+        "\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\candidate-16/build.cmd\""
+      ],
+      "exit": 0
+    },
+    {
+      "name": "candidate-16-run",
+      "pid": 16796,
+      "start": "2026-11-14T15:09:17.2406567-08:00",
+      "file": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\candidate-16/unit.exe",
+      "arguments": [
+        "test"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "candidate-32-build",
+      "pid": 37344,
+      "start": "2026-11-14T15:09:17.652036-08:00",
+      "file": "cmd.exe",
+      "arguments": [
+        "/d",
+        "/c",
+        "\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\candidate-32/build.cmd\""
+      ],
+      "exit": 0
+    },
+    {
+      "name": "candidate-32-run",
+      "pid": 27216,
+      "start": "2026-11-14T15:09:23.3196674-08:00",
+      "file": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p140-conversion-formal\\candidate-32/unit.exe",
+      "arguments": [
+        "test"
+      ],
+      "exit": 0
+    }
+  ],
+  "source_sha256": "bec86f1cb279fa4274f7d1d0a6f8020575fd977fb439dc35a399accbb5451217",
+  "counter_review": "Four frozen-baseline32 failures are read-order assertions, not four runtime memory-corruption claims. Original failure handling and restoration of the original read location are separate conclusions. No claim of guest reentry/transport or final package validation."
+}

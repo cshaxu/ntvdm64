@@ -1,0 +1,63 @@
+{
+  "points": [
+    {
+      "id": "T483-R1405",
+      "before": 6,
+      "after": 5,
+      "problem": "Reject unpublished guest arena mark",
+      "evidence": "CallBack16 can return FALSE before guest entry when task runtime admission fails (wow_user_native_extension.c and callback_enter in wow_user_task_lifecycle.c). Original W32MarkDDEHandle returns VOID, so DDEAddhandle reports success although GAH_WOWDDEFREEHANDLE was not set. Original free notifications cannot retire that unmarked alias. Preserve callback BOOL handling and remove only the added explanatory comment; do not interpret the guest AX0 payload as failure."
+    },
+    {
+      "id": "T483-R1406",
+      "before": 75,
+      "after": 58,
+      "problem": "Conversion acquisition and rollback",
+      "evidence": "Original flat HDDE list does not own the DDEDATA subobject graph. A failed outer publication must retire only objects acquired by this conversion. Retain local pair recording and reverse rollback. Every production caller initializes Count once; ADVISE/EXECUTE add one pair, DIB adds child plus packet, METAFILEPICT adds pict plus metafile plus packet, MSDRAW adds metafile plus packet. No caller can add a fourth pair. Delete the unused overflow branch and trivial DDEBeginConversion wrapper; eight callers initialize Count at the identical point. Remove standalone explanatory comments; do not move the algorithm to a shim."
+    },
+    {
+      "id": "T483-R1407",
+      "before": 2,
+      "after": 1,
+      "problem": "DDE deletion after callback execution handoff",
+      "evidence": "W32DDEFreeGlobalMem32 is installed with RegisterWowBaseHandlers and also reached by exported WOWFreeMetafile. It finds the pair before W32UnMarkDDEHandle and GlobalUnlockFree16, then deletes it. These CallBack16 entries acquire guest execution; callback_enter can park a native owner and DirectedYield to the receiving task. A second task can retire the same shared alias while the native caller waits for guest execution. Original DDEDeletehandle dereferences the now-empty list. Retain the one-line empty-list return, remove its comment. This is a source-eligible scheduling counterexample, not a reproduced guest race; the test callback double demonstrates the list result but cannot prove real timing."
+    },
+    {
+      "id": "T483-R1408",
+      "before": 2,
+      "after": 2,
+      "problem": "Propagate mark callback admission result",
+      "evidence": "Same R1405 failure chain: the original VOID return loses CallBack16 rejection. BOOL communicates whether the original kernel marking routine executed; the guest return payload is independent."
+    },
+    {
+      "id": "T483-R1409",
+      "before": 2,
+      "after": 2,
+      "problem": "Return callback result instead of ignoring it",
+      "evidence": "Same R1405/R1408 failure chain. Returning CallBack16 BOOL preserves callback admission failure without a second error channel or new callback. Original SetDdeHandleFlag normally returns AX0, which must not be mistaken for failure."
+    },
+    {
+      "id": "T483-R1410",
+      "before": 1,
+      "after": 1,
+      "problem": "Distinguish native COPYDATA headers from payload aliases",
+      "evidence": "The original list contains both header and payload nodes. A payload may itself hold a COPYDATASTRUCT that is sent in a nested message. Without COPYDATA_HEADER filtering, CopyDataFindData16 returns the payload alias as a header although no independently converted header/embedded data pointer exists. The existing exact-body lifetime fixture explicitly covers nested embedded headers in both directions. Keep the flag predicate, remove its inline comment."
+    },
+    {
+      "id": "T483-R1411",
+      "before": 1,
+      "after": 1,
+      "problem": "Distinguish guest COPYDATA headers from payload aliases",
+      "evidence": "Same R1410 object-role collision in CopyDataFindData32: a guest payload address becomes a nested message header. Existing exact-body fixture tests distinct converted headers and matched cleanup. Keep the original-list flag filter; remove inline comment."
+    },
+    {
+      "id": "T483-R1412",
+      "before": 3,
+      "after": 0,
+      "problem": "Unnecessary empty COPYDATA deletion guard",
+      "evidence": "All four production calls are in WM32CopyData and UnThunkMsg16 cleanup. Each NODE bit is set only after successful CopyDataAddNode; cleanup consumes bits once, deletes its data/header nodes before any guest free callback, and borrowed aliases have no owned bits. Unlike DDE native free, no callback/yield separates ownership acquisition at cleanup and list deletion. The artificial empty-list test was not evidence of a production requirement. Restore original deletion body and retain missing-key coverage using a nonempty list, then delete its owned node."
+    }
+  ],
+  "status": "Whole file source disposition complete; final line/build/publication/tests pending",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wdde.c",
+  "counter_review": "Do not infer necessity from a direct empty-list test. COPYDATA owned-bit paths delete before callbacks, so restore original. DDE native free crosses a real guest-execution acquisition boundary; describe the eligible scheduling order separately from service-double tests. Capacity is proven by all callers, not assumed from the array length. No original guest changes."
+}

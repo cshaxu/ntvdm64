@@ -1,0 +1,765 @@
+{
+  "status": "Targeted verification passed; cached full build running; no publication yet",
+  "line_check": [
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "shared_selected_lines": 717,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [
+        [
+          [
+            597,
+            "}"
+          ],
+          [
+            600,
+            "}"
+          ]
+        ]
+      ],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              31,
+              "void WI32DDEAddInitiator (HAND16 Initiator)"
+            ]
+          ],
+          "after": [
+            [
+              31,
+              "BOOL WI32DDEAddInitiator (HAND16 Initiator)"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              54,
+              "return (1);"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              63,
+              "return (0);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              236,
+              "HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo)"
+            ]
+          ],
+          "after": [
+            [
+              236,
+              "HAND16 DDECopyhData16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE h32, PDDEINFO pDdeInfo, PDDECONVERSION pConversion)"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              243,
+              "BOOL fFailed = 0;"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              328,
+              "DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hDib16, hDib32, pDdeInfo);"
+            ]
+          ],
+          "after": [
+            [
+              328,
+              "if (!hDib16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,"
+            ],
+            [
+              329,
+              "(HAND16)hDib16, hDib32, pDdeInfo)) {"
+            ],
+            [
+              330,
+              "if (hDib16) WOWGlobalUnlockFree16(WOWGlobalLockSize16(hDib16, ((void *)0)));"
+            ],
+            [
+              331,
+              "fFailed = 1;"
+            ],
+            [
+              332,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              384,
+              "DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);"
+            ]
+          ],
+          "after": [
+            [
+              384,
+              "if (!hMF16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,"
+            ],
+            [
+              385,
+              "(HAND16)hMF16, hMF32, pDdeInfo)) {"
+            ],
+            [
+              386,
+              "if (hMF16) WOWGlobalUnlockFree16(WOWGlobalLockSize16(hMF16, ((void *)0)));"
+            ],
+            [
+              387,
+              "fFailed = 1;"
+            ],
+            [
+              388,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              408,
+              "DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMeta16, hMeta32, pDdeInfo);"
+            ]
+          ],
+          "after": [
+            [
+              408,
+              "if (!DDETrackhandle(pConversion, To_hwnd, From_hwnd,"
+            ],
+            [
+              409,
+              "(HAND16)hMeta16, hMeta32, pDdeInfo)) {"
+            ],
+            [
+              410,
+              "WOWGlobalUnlockFree16(WOWGlobalLockSize16(hMeta16, ((void *)0)));"
+            ],
+            [
+              411,
+              "fFailed = 1;"
+            ],
+            [
+              412,
+              "} else {"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              413,
+              "DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);"
+            ]
+          ],
+          "after": [
+            [
+              413,
+              "if (!hMF16 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,"
+            ],
+            [
+              414,
+              "(HAND16)hMF16, hMF32, pDdeInfo)) {"
+            ],
+            [
+              415,
+              "if (hMF16) WOWGlobalUnlockFree16(WOWGlobalLockSize16(hMF16, ((void *)0)));"
+            ],
+            [
+              416,
+              "fFailed = 1;"
+            ],
+            [
+              417,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              421,
+              "}"
+            ],
+            [
+              421,
+              "}"
+            ],
+            [
+              422,
+              "else {"
+            ],
+            [
+              423,
+              "fFailed = 1;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              438,
+              "if (fFailed) {"
+            ],
+            [
+              439,
+              "DDERollback16(pConversion, To_hwnd, From_hwnd);"
+            ],
+            [
+              440,
+              "if (h16) WOWGlobalUnlockFree16(WOWGlobalLockSize16(h16, ((void *)0)));"
+            ],
+            [
+              441,
+              "return (0);"
+            ],
+            [
+              442,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              449,
+              "HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo)"
+            ]
+          ],
+          "after": [
+            [
+              449,
+              "HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pDdeInfo, PDDECONVERSION pConversion)"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              456,
+              "BOOL fFailed = 0;"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              535,
+              "DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hDib16, hDib32, pDdeInfo);"
+            ]
+          ],
+          "after": [
+            [
+              535,
+              "if (!hDib32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,"
+            ],
+            [
+              536,
+              "(HAND16)hDib16, hDib32, pDdeInfo)) {"
+            ],
+            [
+              537,
+              "if (hDib32) GlobalFree(hDib32);"
+            ],
+            [
+              538,
+              "fFailed = 1;"
+            ],
+            [
+              539,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              589,
+              "DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMeta16, hMeta32, pDdeInfo);"
+            ]
+          ],
+          "after": [
+            [
+              589,
+              "if (!DDETrackhandle(pConversion, To_hwnd, From_hwnd,"
+            ],
+            [
+              590,
+              "(HAND16)hMeta16, hMeta32, pDdeInfo)) {"
+            ],
+            [
+              591,
+              "GlobalFree(hMeta32);"
+            ],
+            [
+              592,
+              "fFailed = 1;"
+            ],
+            [
+              593,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              593,
+              "if (hMF16) {"
+            ]
+          ],
+          "after": [
+            [
+              593,
+              "if (!fFailed && hMF16) {"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              596,
+              "DDEAddhandle(To_hwnd, From_hwnd, (HAND16) hMF16, hMF32, pDdeInfo);"
+            ]
+          ],
+          "after": [
+            [
+              596,
+              "if (!hMF32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,"
+            ],
+            [
+              597,
+              "(HAND16)hMF16, hMF32, pDdeInfo)) {"
+            ],
+            [
+              598,
+              "if (hMF32) DeleteMetaFile(hMF32);"
+            ],
+            [
+              599,
+              "fFailed = 1;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              597,
+              "}"
+            ],
+            [
+              599,
+              "if (!fFailed) {"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              600,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              616,
+              "if (fFailed) {"
+            ],
+            [
+              617,
+              "DDERollback32(pConversion, To_hwnd, From_hwnd);"
+            ],
+            [
+              618,
+              "if (h32) GlobalFree(h32);"
+            ],
+            [
+              619,
+              "return (((void *)0));"
+            ],
+            [
+              620,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              653,
+              "W32MarkDDEHandle (hMem16);"
+            ]
+          ],
+          "after": [
+            [
+              653,
+              "if (!W32MarkDDEHandle(hMem16)) {"
+            ],
+            [
+              654,
+              "DDEDeletehandle(hMem16, hMem32);"
+            ],
+            [
+              655,
+              "return (0);"
+            ],
+            [
+              656,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              668,
+              "BOOL DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd,"
+            ],
+            [
+              669,
+              "HAND16 hMem16, HANDLE hMem32, PDDEINFO pDdeInfo)"
+            ],
+            [
+              670,
+              "{"
+            ],
+            [
+              671,
+              "DDECONVERSIONPAIR *pPair;"
+            ],
+            [
+              673,
+              "if (!DDEAddhandle(To_hwnd, From_hwnd, hMem16, hMem32, pDdeInfo)) {"
+            ],
+            [
+              674,
+              "return (0);"
+            ],
+            [
+              675,
+              "}"
+            ],
+            [
+              677,
+              "pPair = &pConversion->Pair[pConversion->Count++];"
+            ],
+            [
+              678,
+              "pPair->h16 = hMem16;"
+            ],
+            [
+              679,
+              "pPair->h32 = hMem32;"
+            ],
+            [
+              680,
+              "pPair->Flags = pDdeInfo->Flags;"
+            ],
+            [
+              681,
+              "return (1);"
+            ],
+            [
+              682,
+              "}"
+            ],
+            [
+              685,
+              "void DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)"
+            ],
+            [
+              686,
+              "{"
+            ],
+            [
+              687,
+              "DDECONVERSIONPAIR *pPair;"
+            ],
+            [
+              689,
+              "while (pConversion->Count) {"
+            ],
+            [
+              690,
+              "pPair = &pConversion->Pair[--pConversion->Count];"
+            ],
+            [
+              691,
+              "if (DDEFindPair32(To_hwnd, From_hwnd, pPair->h16) == pPair->h32) {"
+            ],
+            [
+              692,
+              "W32UnMarkDDEHandle(pPair->h16);"
+            ],
+            [
+              693,
+              "if (DDEDeletehandle(pPair->h16, pPair->h32)) {"
+            ],
+            [
+              694,
+              "WOWGlobalUnlockFree16(WOWGlobalLockSize16(pPair->h16, ((void *)0)));"
+            ],
+            [
+              695,
+              "}"
+            ],
+            [
+              696,
+              "}"
+            ],
+            [
+              697,
+              "}"
+            ],
+            [
+              698,
+              "}"
+            ],
+            [
+              701,
+              "void DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)"
+            ],
+            [
+              702,
+              "{"
+            ],
+            [
+              703,
+              "DDECONVERSIONPAIR *pPair;"
+            ],
+            [
+              705,
+              "while (pConversion->Count) {"
+            ],
+            [
+              706,
+              "pPair = &pConversion->Pair[--pConversion->Count];"
+            ],
+            [
+              707,
+              "if (DDEFindPair16(To_hwnd, From_hwnd, pPair->h32) == pPair->h16 &&"
+            ],
+            [
+              708,
+              "DDEDeletehandle(pPair->h16, pPair->h32)) {"
+            ],
+            [
+              709,
+              "if (!DDEFindNode16(pPair->h16)) {"
+            ],
+            [
+              710,
+              "W32UnMarkDDEHandle(pPair->h16);"
+            ],
+            [
+              711,
+              "if (pPair->Flags & 0x0001) {"
+            ],
+            [
+              712,
+              "WOWGlobalUnlockFree16(WOWGlobalLockSize16(pPair->h16, ((void *)0)));"
+            ],
+            [
+              713,
+              "}"
+            ],
+            [
+              714,
+              "}"
+            ],
+            [
+              715,
+              "if (pPair->Flags & 0x0004) {"
+            ],
+            [
+              716,
+              "DeleteMetaFile(pPair->h32);"
+            ],
+            [
+              717,
+              "}"
+            ],
+            [
+              718,
+              "else {"
+            ],
+            [
+              719,
+              "GlobalFree(pPair->h32);"
+            ],
+            [
+              720,
+              "}"
+            ],
+            [
+              721,
+              "}"
+            ],
+            [
+              722,
+              "}"
+            ],
+            [
+              723,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              677,
+              "if (!phTemp1) return (0);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              818,
+              "void W32MarkDDEHandle (HAND16 hMem16)"
+            ]
+          ],
+          "after": [
+            [
+              818,
+              "BOOL W32MarkDDEHandle (HAND16 hMem16)"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              825,
+              "CallBack16(51, &Parm16, 0, &vp);"
+            ]
+          ],
+          "after": [
+            [
+              825,
+              "return CallBack16(51, &Parm16, 0, &vp);"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              988,
+              "(pTemp->Flags & 0x0002) &&"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              1008,
+              "(pTemp->Flags & 0x0002) &&"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "metric": {
+    "dlc": {
+      "before": {
+        "added": 153,
+        "deleted": 18,
+        "total": 171
+      },
+      "after": {
+        "added": 128,
+        "deleted": 15,
+        "total": 143
+      }
+    }
+  },
+  "alias": {
+    "baseline": "7835ba25e18b7b5e3f26cfb3e1e046d5789f4b92",
+    "baselineBodies": 12,
+    "scope": "Original alias/free bodies with service doubles; no guest/transport proof",
+    "passed": true,
+    "candidateBodies": 15
+  },
+  "copydata_exit": 0,
+  "copydata_result": "FILTER_SELECTOR cases=14 entry_values=2 modes=7 errors=0 guest_proof=0\nQUEUE_SELECTOR cases=18 owners=3 modes=3 errors=0 full_queue_proof=0 guest_proof=0\nCOPYDATA_LIFETIME errors=0 scenarios=59 directions=2 stages=4 nested=1 immutable_release=1 exception=2 thread_status=1 hook_roles=2 filter_nested_different=1 embedded_headers=2 filter_output_rollback=1 guest_proof=0\n",
+  "conversion": {
+    "cases": 8,
+    "passed": true,
+    "scope": "Exact bodies; allocator/registration doubles; no guest proof"
+  },
+  "limits": [
+    "Exact-body service-double tests are not guest transport or actual scheduling-race proof.",
+    "Full build, publication and Full regression not yet completed."
+  ],
+  "final_converter_body_identity": [
+    {
+      "function": "DDECopyhData16",
+      "body_sha256": "7fb15080ee374b01762f8b21db99bdf69b2ad89eaefd2c2b3ae217836533c578",
+      "matches_final_source": true
+    },
+    {
+      "function": "DDECopyhData32",
+      "body_sha256": "5b5bd254d1b886cc024dcebbf320607c35ba9ec7e7a948fc4874922962e5bd52",
+      "matches_final_source": true
+    }
+  ]
+}

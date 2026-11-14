@@ -257,7 +257,9 @@ int main(void) {
     wow_message_unwind32(&a);CHECK(live==4);
     ((COPYDATASTRUCT *)x.lParam)->lpData=(void *)1; /* Release never rereads mutable header. */
     SetLastError(654);wow_message_unwind16(&x);CHECK(GetLastError()==654&&!live&&!pCPDataFirst);wow_message_unwind16(&x);
-    reset(0);CHECK(!CopyDataDeleteNode(1,2,99));
+    reset(0);CHECK(CopyDataAddNode(1,2,98,98,COPYDATA_HEADER));
+    CHECK(!CopyDataDeleteNode(1,2,99));
+    CHECK(CopyDataDeleteNode(1,2,98)&&!live&&!pCPDataFirst);
     a=forward(native);copy_fault=TRUE;
     __try{(void)WM32CopyData(&a);CHECK(FALSE);}__except(GetExceptionCode()==0xe0420950?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){CHECK(!live&&!pCPDataFirst);}
     reset(0);x=reverse();copy_fault=TRUE;

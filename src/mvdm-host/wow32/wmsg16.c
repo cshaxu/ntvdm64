@@ -773,7 +773,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-            DDEBeginConversion(pConversion);
+            pConversion->Count = 0;
 #line 772
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
@@ -835,7 +835,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-            DDEBeginConversion(pConversion);
+            pConversion->Count = 0;
 #line 814
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
@@ -898,7 +898,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-            DDEBeginConversion(pConversion);
+            pConversion->Count = 0;
 #line 860
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
@@ -972,7 +972,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-            DDEBeginConversion(pConversion);
+            pConversion->Count = 0;
 #line 914
             vp = GlobalLock16(HIWORD(lParam), &cb);
             if (vp) {
