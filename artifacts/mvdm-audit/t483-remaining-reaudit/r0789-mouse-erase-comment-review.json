@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0789",
+  "location": "cursor_undisplay original5351",
+  "before": {
+    "added": 2,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -2,
+  "evidence": "Added explanation only; save-kind runtime logic unchanged and reviewed in following points.",
+  "change": "Removed two explanation lines; original absence restored, mirror diff-2.",
+  "line_mapping": "No #error removed; body original line mapping is reviewed with following replacements.",
+  "verification": "Byte-local comment removal; final whole-file verification pending."
+}

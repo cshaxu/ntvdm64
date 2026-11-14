@@ -116,11 +116,8 @@
 
 #line 162
 IMPORT void host_m2p_ratio(word *,word *,word *,word *);
-/* DIVERGENCE(MVDM-HOST-DIV-058): match the original call operands' scalar
- * type at the host range boundary; the paired host definitions are adjusted
- * to the same unchanged four-pointer contract. */
-IMPORT void host_x_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
-IMPORT void host_y_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
+IMPORT void host_x_range(word *,word *,word *,word *);
+IMPORT void host_y_range(word *,word *,word *,word *);
 #line 165
 void   host_show_pointer(void);
 void   host_hide_pointer(void);
@@ -1131,7 +1128,7 @@ void mouse_io_interrupt()
 	local_DX = getDX();
 
 #ifdef EGG
-        /* DIVERGENCE(MVDM-HOST-DIV-899): derive at every use; VDD restores bypass INT33. */
+
         if (jap_mouse)
                 note_trace0(MOUSE_VERBOSE, "In Japanese mode - will emulate textmouse");
 #endif /* EGG */
@@ -1524,7 +1521,6 @@ GLOBAL void mouse_video_mode_changed(int new_mode)
 {
     IMPORT word VirtualX, VirtualY;
 
-    /* DIVERGENCE MVDM-HOST-DIV-467: video changes bypass mouse BOP dispatch. */
     virtual_swap_instance();
 #line 1703
     current_video_mode = new_mode & 0x7F;
@@ -2235,8 +2231,6 @@ condition_mask = 0;
 //
 
 host_os_mouse_pointer(&cursor_status,&condition_mask,&mouse_counter);
-/* DIVERGENCE(MVDM-HOST-DIV-318): keep the original drawing position in
-   step with the NT IRQ owner's already-confined position. */
 point_copy(&cursor_status.position, &cursor_position);
 
 //
@@ -2368,13 +2362,11 @@ outb(ICA0_PORT_0, END_INTERRUPT);
  */
 /*@ACW*/
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): non-MONITOR cursor_display is route-gated. */
 #line 2641
 #ifndef NTVDM
 #line 2642
 #error Excluded unsupported non-NTVDM mouse profile
 #else
-#if !defined(MONITOR)
 #line 2642
 	/*
 	 *	If the cursor is currently displayed, move it to the new
@@ -2390,16 +2382,12 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 			{
 			cursor_display();
 			}
-#endif
 #line 2656
-#endif
+#endif /*NTVDM*/
 #line 2657
 }
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): a second IRQ may arrive while the
- * virtualized PIC EOI executes. Keep each callback's saved words on its
- * own guest stack, ahead of the existing INT2 return address. */
 LOCAL void mouse_callback_push IFN1(word, value)
 {
     setSP(getSP() - 2);
@@ -2414,9 +2402,11 @@ LOCAL word mouse_callback_pop IFN0()
     return value;
 }
 
+#line 2660
 void mouse_int2()
 {
     MOUSE_CALL_MASK condition_mask;
+#line 2662
 	/*
 	 *	Part 2 of the mouse hardware interrupt service routine. Control
 	 *	is passed to this routine when the "user subroutine" that may
@@ -2426,7 +2416,6 @@ void mouse_int2()
 	note_trace0(MOUSE_VERBOSE, "mouse_int2:");
 
 #ifndef NTVDM
-#line 2671
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 2673
@@ -2441,6 +2430,7 @@ void mouse_int2()
     setCX(mouse_callback_pop());
     setBX(mouse_callback_pop());
     setAX(mouse_callback_pop());
+#line 2683
 
 	/*
 	 *	If the cursor is currently displayed, move it to the new
@@ -2450,7 +2440,6 @@ void mouse_int2()
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
 		{
 #ifdef	MOUSE_16_BIT
-#line 2692
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #line 2695
 #endif	/* MOUSE_16_BIT */
@@ -2713,14 +2702,11 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	
 	note_trace0(MOUSE_VERBOSE, "mouse_io:show_cursor()");
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): CCPU ROM BOP BD does not maintain a
-   guest show count; retain the original C owner without MONITOR. */
 #line 2950
 #ifndef NTVDM
 #line 2951
 #error Excluded unsupported non-NTVDM mouse profile
 #else
-#if !defined(MONITOR)
 #line 2951
 	/*
 	 *	Disable conditional off area
@@ -2740,9 +2726,8 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 			{
 			cursor_display();
 			}
-#endif
 #line 2969
-#endif
+#endif /* NTVDM */
 #line 2970
 
 #if defined(NTVDM) && defined(X86GFX)
@@ -2772,13 +2757,11 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	UNUSED(junk4);
 	
 	note_trace0(MOUSE_VERBOSE, "mouse_io:hide_cursor()");
-/* DIVERGENCE(MVDM-HOST-DIV-318): pair the non-MONITOR C-owned show count. */
 #line 2996
 #ifndef NTVDM
 #line 2997
 #error Excluded unsupported non-NTVDM mouse profile
 #else
-#if !defined(MONITOR)
 #line 2997
 	if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
@@ -2789,7 +2772,6 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 		{
 		cursor_undisplay();
 		}
-#endif
 #line 3006
 #endif
 #line 3007
@@ -2841,9 +2823,6 @@ LOCAL void mouse_set_position IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,curs
 
 
 #if defined(NTVDM)
-/* DIVERGENCE(MVDM-HOST-DIV-318): Window uses original guest positioning,
-   not the Console host-pointer warp. */
-    if (!mvdm_softpc_mouse_route_active()) {
 
 #line 3054
 #ifndef X86GFX
@@ -2869,12 +2848,7 @@ LOCAL void mouse_set_position IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,curs
          */
 
          host_mouse_set_position((USHORT)*cursor_x_ptr,(USHORT)*cursor_y_ptr);
-         return;  /* let's get out of this mess - FAST! */
-    }
-
-    /* DIVERGENCE(MVDM-HOST-DIV-318): synchronize the NT relative counter
-       before the original base owner updates and paints the guest position. */
-    host_mouse_set_position((USHORT)*cursor_x_ptr,(USHORT)*cursor_y_ptr);
+         if (!mvdm_softpc_mouse_route_active()) return;
 
 #line 3078
 #endif /* NTVDM */
@@ -3110,14 +3084,12 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 
 	UNUSED(junk1);
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): retain shape even before Window selection. */
 #line 3310
 #ifndef NTVDM
 #line 3311
 #error Excluded unsupported non-NTVDM mouse profile
 #else
-#if !defined(MONITOR)
-#line 2936
+#line 3311
 	
 #ifdef MOUSE_16_BIT
 #line 3313
@@ -3178,9 +3150,8 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 
 	}
 #endif /* MOUSE_16_BIT */
-#endif
 #line 3371
-#endif
+#endif /* NTVDM */
 #line 3372
 	/*
 	 *	Redisplay cursor if necessary
@@ -3524,15 +3495,13 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	note_trace0(MOUSE_VERBOSE, "mouse_io: mouse_save_state()");
 
 	dest = effective_addr (getES(), *m4);
-	/* DIVERGENCE(MVDM-HOST-DIV-357): match the existing restore checksum
-	 * over exactly the cookie and context bytes written to the guest. */
 	for (i = 0; i < MOUSE_CONTEXT_MAGIC_SIZE; i++)
 		cs += (IU8)mouse_context_magic[i];
 	for (i = 0; i < sizeof(MOUSE_CONTEXT); i++)
 		cs += ((IU8 *)&mouse_context)[i];
 
+#line 3722
 	/* Save Cookie */
-#line 3723
 	sas_stores(dest, (IU8 *)mouse_context_magic, MOUSE_CONTEXT_MAGIC_SIZE);
 	dest += MOUSE_CONTEXT_MAGIC_SIZE;
 
@@ -5005,17 +4974,13 @@ LOCAL MOUSE_BIT_ADDRESS ega_point_as_graphics_cell_address IFN1(MOUSE_POINT *,po
 
 LOCAL void cursor_update IFN0()
 {
-/* DIVERGENCE(MVDM-HOST-DIV-318): restore original geometry only for Window. */
 #line 5227
 #ifndef NTVDM
 #line 5228
 #error Excluded unsupported non-NTVDM mouse profile
 #else
-#if !defined(MONITOR)
-#line 4764
-#ifdef NTVDM
     if (!mvdm_softpc_mouse_route_active()) return;
-#endif
+#line 5228
 	/*
 	 *	This function is used to update the displayed cursor
 	 *	position on the screen following a change to the 
@@ -5031,7 +4996,6 @@ LOCAL void cursor_update IFN0()
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
-#endif
 #line 5242
 #endif
 #line 5243
@@ -5042,19 +5006,14 @@ LOCAL void cursor_update IFN0()
 
 LOCAL void cursor_display IFN0()
 {
-/* DIVERGENCE(MVDM-HOST-DIV-318): original software painter for Window only. */
 #line 5250
 #ifndef NTVDM
 #line 5251
 #error Excluded unsupported non-NTVDM mouse profile
 #else
-#if !defined(MONITOR)
-#line 4791
 #line 5251
 	UTINY v_mode;
-#ifdef NTVDM
     if (!mvdm_softpc_mouse_route_active()) return;
-#endif
 
 	/* Check if Enhanced Mode wants to "see" cursor */
 #line 5254
@@ -5146,9 +5105,8 @@ LOCAL void cursor_display IFN0()
 	 *	don't automatically update the screen regularly
 	 */
 	host_flush_screen();
-#endif
 #line 5343
-#endif
+#endif /* !NTVDM */
 #line 5344
 }
 
@@ -5157,16 +5115,26 @@ LOCAL void cursor_display IFN0()
 
 LOCAL void cursor_undisplay IFN0()
 {
-/* DIVERGENCE(MVDM-HOST-DIV-900): the saved background, not current VGA/BIOS
-   state, owns restoration. Keep the original per-VM validity and restorers. */
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM mouse profile
 #else
-#if !defined(MONITOR)
-#ifdef MOUSE_16_BIT
+#line 5354
+	/* Check if Enhanced Mode wants to "see" cursor */
+	if ( cursor_EM_disabled )
+	   return;
+
+#line 5360
+#ifdef	MOUSE_16_BIT
 #error Excluded unsupported MOUSE_16_BIT profile
-#endif
-    if (cursor_EM_disabled || !save_area_in_use)
+#line 5363
+#endif	/* MOUSE_16_BIT */
+
+	/*
+	 *	Undisplay the representation of the current mouse status on
+	 *	the screen. This routine tolerates being called when the 
+	 *	cursor isn't actually being displayed
+	 */
+    if (!save_area_in_use)
         return;
     save_area_in_use = FALSE;
     switch (saved_cursor_kind)
@@ -5176,11 +5144,13 @@ LOCAL void cursor_undisplay IFN0()
         break;
 #ifdef EGG
     case MOUSE_SAVED_EGA:
-        EGA_graphics_cursor_undisplay();
+#line 5385
+                EGA_graphics_cursor_undisplay();
         break;
 #ifdef VGG
     case MOUSE_SAVED_VGA:
-        VGA_graphics_cursor_undisplay();
+#line 5412
+					VGA_graphics_cursor_undisplay();
         break;
 #else
 #error Excluded unsupported non-VGG profile
@@ -5188,25 +5158,23 @@ LOCAL void cursor_undisplay IFN0()
 #endif
 #ifdef HERC
 #error Excluded unsupported HERC profile
-#endif
+#line 5423
+#endif /* HERC */
     case MOUSE_SAVED_CGA:
-        graphics_cursor_undisplay();
+#line 5424
+			    graphics_cursor_undisplay();
         break;
     }
-#endif
-#endif
+#line 5429
+#endif /* !NTVDM */
 #line 5430
 }
 
 
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-318): CPU-owner route edges reuse the original
-   drawing operations without fabricating movement or guest callbacks. */
 GLOBAL void mouse_pointer_route_changed IFN1(int,active)
 {
-    /* DIVERGENCE MVDM-HOST-DIV-467: route changes also bypass mouse BOPs. */
-    virtual_swap_instance();
     if (active) cursor_update();
     if (active && cursor_flag == MOUSE_CURSOR_DISPLAYED) cursor_display();
     if (!active) cursor_undisplay();
@@ -5306,7 +5274,7 @@ GLOBAL void software_text_cursor_undisplay IFN0()
 	 */
 	MOUSE_BYTE_ADDRESS text_address;
 
-	/* DIVERGENCE(MVDM-HOST-DIV-900): keep the original VM-linear address across mode/page changes. */
+
 	text_address = saved_text_address;
 
 	/*
@@ -5407,6 +5375,7 @@ LOCAL EGA_graphics_cursor_display IFN0()
         MOUSE_SCALAR saved_bottom_right;
         boolean scaled_mouse = jap_mouse;
 
+#line 5625
         if (scaled_mouse) {
                 /* fake up the mode 0x12 cursor position, saving original */
                 saved_cursor_pos=cursor_status.position.y;
@@ -5555,7 +5524,6 @@ LOCAL EGA_graphics_cursor_display IFN0()
 			}
 
 			update_alg.mark_string(byte_offset, byte_offset + 2);
-#line 5773
 #ifdef V7VGA
 			if (sas_hw_at(vd_video_mode) >= 0x40)
 				byte_offset += get_bytes_per_line();
@@ -5566,8 +5534,6 @@ LOCAL EGA_graphics_cursor_display IFN0()
 			line++;
 		}
 	}
-        /* DIVERGENCE(MVDM-HOST-DIV-893): restore temporary coordinates even
-         * when the cursor lies outside the screen or in the exclusion area. */
         if (scaled_mouse) {
                 cursor_status.position.y = saved_cursor_pos;
                 virtual_screen.bottom_right.y = saved_bottom_right;
@@ -6146,7 +6112,6 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 	 *	part of the mouse hardware interrupt service routine
 	 */
 
-    /* Preserve this invocation before a virtualized EOI can reenter it. */
     mouse_callback_push(getAX());
     mouse_callback_push(getBX());
     mouse_callback_push(getCX());
@@ -6157,7 +6122,7 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
     mouse_callback_push(getBP());
     mouse_callback_push(getDS());
     mouse_callback_push(condition_mask);
-
+#line 6609
 	/*
 	 *	Push address of second part of mouse hardware interrupt service
 	 *	routine
@@ -6168,7 +6133,6 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 	setSP(getSP() - 2);
 	sas_storew(effective_addr(getSS(), getSP()), MOUSE_INT2_OFFSET);
 
-	/* Set CS:IP to the registered user subroutine. */
 #line 6624
 	setCS(segment);
 #line 6625
@@ -6177,12 +6141,7 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 #error Excluded unsupported original CPU30 mouse callback
 #else /* !CPU_30_STYLE */
 #if defined(CPU_40_STYLE)
-	/* DIVERGENCE(MVDM-HOST-DIV-222): CPU40's CCPU starts at live EIP.
-	 * An INT 33h callback registered by EDIT points at ordinary guest code,
-	 * not at a BOP marker: its two preceding bytes decode as ADD, while its
-	 * registered entry begins PUSH ES; PUSH DS.  Enter the direct callback at
-	 * that entry.  Keep HOST_BOP_IP_FUDGE for its other, actual BOP callers. */
-#line 6626
+#line 6628
 	setIP(offset);
 #else
 #line 6628
@@ -6192,13 +6151,34 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 #endif /* !CPU_30_STYLE */
 #line 6630
 
-	/* Set callback parameters; INT2 restores the saved stack frame. */
+	/*
+	 *	Put parameters into the registers, saving the previous contents
+	 *	to be restored in the second part of the mouse hardware 
+	 *	interrupt service routine
+	 */
+	saved_AX = getAX();
 	setAX(condition_mask);
+	saved_BX = getBX();
 	setBX(cursor_status.button_status);
+	saved_CX = getCX();
 	setCX(cursor_status.position.x);
+	saved_DX = getDX();
 	setDX(cursor_status.position.y);
+	saved_SI = getSI();
 	setSI(mouse_motion.x);
+	saved_DI = getDI();
 	setDI(mouse_motion.y);
+	saved_ES = getES();
+	saved_BP = getBP();
+	saved_DS = getDS();
+
+	/*
+	 *	Save the condition mask so that the second part of the mouse
+	 *	hardware interrupt service routine can determine whether the
+	 *	cursor has changed position
+	 */
+
+	last_condition_mask = condition_mask;
 
 	/*
 	 *	Enable interrupts

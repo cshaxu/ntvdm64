@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0757",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_video_mode_changed entry; original1703 continuation",
+  "before": {
+    "added": 2,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "problem": "Direct video BOP can mutate the previously selected mouse NIDDB instance.",
+  "chain": "bios.c BOP42 -> ega_video_io -> ega_video_func[AH]/v7vga_func_6f -> ega_set_mode/v7 mode setter -> mouse_video_mode_changed -> current_video_mode/mouse_ega_mode/virtual_screen. Unlike mouse BOP wrappers85-99, BOP42 has no SWAP_INSTANCE.",
+  "evidence": "bios.c:302 directly binds ega_video_io; ega_vide.c:1823 dispatches without virtual_swap_instance, ega_set_mode calls mouse_video_mode_changed at1279; v7_video.c:470 same notification. mouse_io.h:1083/1103 expand current_video_mode and virtual_screen through mm_handle. virtual.c:842-864 reads BIOS_VIRTUALISING_BYTE and changes selected NIDDB only when needed; no selected-instance refresh exists in direct video dispatch. With last selected A/current guest B, original callback writes A; the retained call selects B before writes. Source-derived failure case, no new runtime reproduction claimed.",
+  "necessity": "The original VM-specific mouse state owner must be selected at an entry not covered by the original mouse BOP wrappers. Exact retained call reuses original selector, not new VM management. Existing current-context equality and pre-Windows guards make it no-op when already selected.",
+  "minimum": "Keep one original virtual_swap_instance call at shared mouse mode consumer, covering EGA and V7; delete explanatory comment. Moving to each caller duplicates hooks and misses other mode callers.",
+  "change": "Removed added comment; +2/-0 becomes +1/-0, mirror delta-1; original selector call remains pending owner.",
+  "decision": "Qualified pending owner decision; not fully restored.",
+  "line_mapping": "Existing #line1703 retained immediately after hook, all original callback lines retain their coordinates. #error unchanged.",
+  "verification": "Inspected real dispatch and state macro/provider chain. Final-code cached build and runtime batch tests pending.",
+  "limits": [
+    "Source proof covers wrong-instance ownership possibility, not a claimed fresh Win3.1 repro.",
+    "Does not approve other virtual.c adaptations or VM lifecycle changes."
+  ]
+}

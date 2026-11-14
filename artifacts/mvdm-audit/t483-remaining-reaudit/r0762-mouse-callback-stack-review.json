@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0762",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "helpers before mouse_int2;original2660 continuation",
+  "before": {
+    "added": 17,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 15,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -2,
+  "problem": "Same-VM reentry overwrites the original single register save area before outer return.",
+  "chain": "mouse_update -> jump_to_user_subroutine -> virtualized master PIC EOI/biosDoInst -> nested callback -> inner mouse_int2 -> outer mouse_int2. Original save fields are per VM, not per active callback.",
+  "evidence": "docs/etc/evidence/m0-t481-s9-softpc.md:1448-1471 records outer46377 SI1f8f/BP8f90, inner46385 SI0780/BP0000, outer return46414 using inner values. Later owner-rdp-click-records.json trace summarized at1522-1533:226 paired callbacks including nested same-VM restored recorded registers. Existing actual-body regression covers original negative, nested/single/wrapped frame returns. spcmse.asm:2635 mouse_int2 executes BOP then DOIRET; caller pushes existing INT2 far return after the private saved words. c_stack.c spush/spop use GET_OPERAND_SIZE/GetStackPointer and assume prior stack checking; spush16 also changes SP by operand width, so neither is a drop-in fixed-word callback-frame primitive.",
+  "necessity": "Independent active callback save storage is required by observed reentry. Existing guest stack gives naturally nested lifetime without new VM/host tables or a fixed depth. Helpers reuse exact original callback far-return SP/SAS mechanism at fixed16-bit width. Original guest code remains unchanged.",
+  "minimum": "Retain two short fixed-word helpers; delete3 explanation lines and add #line2660 restoring original function origin. Inlining20 uses increases differences; CCPU general instruction helpers have different width/precheck contracts.",
+  "change": "Removed3 comment lines, added one original-coordinate #line; +17/-0 becomes +15/-0, net-2.",
+  "decision": "Qualified residual pending owner; not original restoration.",
+  "line_mapping": "Added #line2660 immediately before original mouse_int2. No #error changed. Added condition local and subsequent restoration blocks audited next.",
+  "verification": "Source chain and retained real trace/actual-body test evidence inspected; no fresh runtime claim. Whole-file final batch remains pending.",
+  "limits": [
+    "Previous trace does not prove every reported Win95 crash had this cause.",
+    "Existing fixture uses stubbed translation and cannot establish all paging/reentry fault behavior."
+  ]
+}

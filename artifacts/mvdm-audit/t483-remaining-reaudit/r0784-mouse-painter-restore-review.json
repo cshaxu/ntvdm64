@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0784",
+  "location": "before5250",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "evidence": "Original outer condition retained; redundant project guard removed.",
+  "change": "Removed duplicate painter explanation.",
+  "line_mapping": "Original #line5250/5343/5344 preserved; #error unchanged.",
+  "verification": "Source structure review; final batch pending."
+}

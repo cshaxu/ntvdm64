@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0790",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "cursor_undisplay original5352-5379",
+  "before": {
+    "added": 14,
+    "deleted": 28
+  },
+  "remaining": {
+    "added": 14,
+    "deleted": 16
+  },
+  "mirror_diff_delta": -12,
+  "problem": "Erasing by current video mode consumes a text background with the wrong graphics restorer after mode transition.",
+  "chain": "software_text_cursor_display saves background/address/type -> video mode changes -> cursor_undisplay -> saved kind dispatch -> matching original restorer; original selects by current hardware/BIOS mode instead.",
+  "evidence": "docs/etc/evidence/m0-t481-s16-win31-mouse-transitions.md:263-283 records extracted actual-body ordering control: text display then hardware graphics change invokes EGA restorer, consumes save flag, leaves text cell. Existing original_mouse_restore_dispatch_test.c covers unchanged mode, graphics transition, page transition, single consumption and EGA/VGA/CGA dispatch. Current text restore uses SAS paging; EGA restore writes plane buffers, so selection mismatch is a real owner/representation error.",
+  "necessity": "Saved background type, not current mode, must select its original restorer. Keep original per-VM save validity and existing restoration functions; no second renderer/state machine. Original Enhanced Mode guard remains valid and need not be rewritten.",
+  "minimum": "Restore original Enhanced Mode guard, original comments and MOUSE_16_BIT spelling/ending; keep invalid-save early return and saved-kind switch. Three line directives retain original anchors. Redundant MONITOR pair removed with R0794.",
+  "change": "Restored original surrounding structure; full pinned-original raw comparison changes +491/-992 to +492/-980, net-11 attributable solely to this edit. Per-point historical +14/-28 becomes attributable +15/-16; whole-file final relocation will reconcile anchors. Paired R0794 review removed redundant MONITOR opening, another mirror delta-1.",
+  "decision": "Reduced saved-owner residual pending owner; not complete restoration.",
+  "line_mapping": "Added #line5354/5360/5363 to restored original guard/comment structure. Existing #error retained byte-exact. Subsequent replacement block has no identical original counterpart; original function continuation5430 remains.",
+  "verification": "Source and retained actual-body negative witness reviewed. Current full-file raw diff measured with pinned original; no fresh compile/test claim.",
+  "limits": [
+    "Fixture stubs graphics restorers and does not prove physical EGA writes.",
+    "Does not prove guest VDD screenshot timing; that limitation remains separate."
+  ]
+}

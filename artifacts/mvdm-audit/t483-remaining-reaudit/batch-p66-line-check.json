@@ -1,0 +1,17 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "matched_original_line_mismatches": [],
+    "limitation": "Source coordinate check of equal blocks >=3 lines; not compiler diagnostic execution."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+    "matched_original_line_mismatches": [],
+    "limitation": "Source coordinate check of equal blocks >=3 lines; not compiler diagnostic execution."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+    "matched_original_line_mismatches": [],
+    "limitation": "Source coordinate check of equal blocks >=3 lines; not compiler diagnostic execution."
+  }
+]

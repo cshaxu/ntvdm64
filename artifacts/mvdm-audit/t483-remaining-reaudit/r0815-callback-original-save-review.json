@@ -1,0 +1,19 @@
+{
+  "point": "T483-R0815",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original6631-end; individual original range retained in register",
+  "before": {
+    "added": 0,
+    "deleted": 11
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -11,
+  "evidence": "Searched all src C/H definitions/readers of saved_AX/BX/CX/DX/SI/DI/ES/BP/DS and last_condition_mask. Existing mouse_io.h MM_INSTANCE_DATA fields remain. mouse_int2 reads only mouse_callback_pop and local condition_mask; ordinary register getters have no side effects. Restoring original assignments cannot overwrite the stack frame or change its restoration. No new fields or second restore path added. The original single-slot reads, which caused the recorded nested corruption, remain replaced.",
+  "change": "Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally.",
+  "line_mapping": "Existing #line6630 followed by original blank and byte-exact original6631-end restores every original callback parameter and final setIF line; #error remains unchanged.",
+  "verification": "Source call/read/write audit complete. Nested/single/wrapped callback test and cached full delivery gates pending.",
+  "original_file_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439"
+}

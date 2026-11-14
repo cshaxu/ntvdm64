@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0765",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_int2 original2688",
+  "before": {
+    "added": 1,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 1
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Use the returning activation condition rather than last nested activation condition for redraw.",
+  "chain": "mouse_update -> jump_to_user_subroutine -> virtualized master PIC EOI/biosDoInst -> nested callback -> inner mouse_int2 -> outer mouse_int2. Original save fields are per VM, not per active callback.",
+  "evidence": "docs/etc/evidence/m0-t481-s9-softpc.md:1448-1471 records outer46377 SI1f8f/BP8f90, inner46385 SI0780/BP0000, outer return46414 using inner values. Later owner-rdp-click-records.json trace summarized at1522-1533:226 paired callbacks including nested same-VM restored recorded registers. Existing actual-body regression covers original negative, nested/single/wrapped frame returns. spcmse.asm:2635 mouse_int2 executes BOP then DOIRET; caller pushes existing INT2 far return after the private saved words. c_stack.c spush/spop use GET_OPERAND_SIZE/GetStackPointer and assume prior stack checking; spush16 also changes SP by operand width, so neither is a drop-in fixed-word callback-frame primitive.",
+  "necessity": "Outer POSITION callback and inner non-POSITION callback have different masks. Shared last_condition_mask after nested return belongs to inner invocation; original predicate would omit outer redraw. Current local value was popped from the exact current frame. Existing fixture asserts one draw after nested masks1/0.",
+  "minimum": "Single identifier replacement in the original predicate; keep pending owner. Removing local association breaks the proved nesting contract.",
+  "change": "No source change; +1/-1 retained.",
+  "decision": "Qualified pending owner, part of independently saved callback frame.",
+  "line_mapping": "R0764 relocated #line2683 places this original predicate at2688; line count unchanged; #error untouched.",
+  "verification": "Inspected actual predicate and fixture outer1/inner0 draw assertion. No new execution; final batch verification pending.",
+  "limits": [
+    "Previous trace does not prove every reported Win95 crash had this cause.",
+    "Existing fixture uses stubbed translation and cannot establish all paging/reentry fault behavior."
+  ]
+}

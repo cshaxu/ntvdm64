@@ -1,0 +1,16 @@
+{
+  "point": "T483-R0759",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "conclusion": "Removed added explanation; original content fully restored at this point. No runtime behavior changed.",
+  "line_mapping": "Existing #line2641 pins following original #ifndef; all #error unchanged.",
+  "verification": "Byte-local comment removal only. Final batch not yet built/published; not counted delivered."
+}

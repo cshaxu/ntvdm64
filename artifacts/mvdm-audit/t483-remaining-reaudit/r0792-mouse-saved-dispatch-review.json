@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0792",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "cursor_undisplay original5412",
+  "before": {
+    "added": 3,
+    "deleted": 4
+  },
+  "remaining": {
+    "added": 3,
+    "deleted": 3
+  },
+  "mirror_diff_delta": -1,
+  "problem": "Current-mode-based restore cannot select the prior saved-background representation.",
+  "chain": "software_text_cursor_display saves background/address/type -> video mode changes -> cursor_undisplay -> saved kind dispatch -> matching original restorer; original selects by current hardware/BIOS mode instead.",
+  "evidence": "docs/etc/evidence/m0-t481-s16-win31-mouse-transitions.md:263-283 records extracted actual-body ordering control: text display then hardware graphics change invokes EGA restorer, consumes save flag, leaves text cell. Existing original_mouse_restore_dispatch_test.c covers unchanged mode, graphics transition, page transition, single consumption and EGA/VGA/CGA dispatch. Current text restore uses SAS paging; EGA restore writes plane buffers, so selection mismatch is a real owner/representation error.",
+  "necessity": "All four real painters set saved_cursor_kind when marking the save area valid; reset clears validity. The switch calls the corresponding original restorer exactly once. Restoring the old current-mode conditional or its trailing else would break this association after mode changes.",
+  "minimum": "Retain saved-kind dispatch and original restorers; no additional state machine. Restore exact original call formatting/coordinates where available.",
+  "change": "Restored exact original VGA call and #line5412; mirror diff-1.",
+  "decision": "Qualified residual pending owner; partial original line restoration is not whole point restoration.",
+  "line_mapping": "Original VGA call mapped to5412; added one #line offset by restored original call match. #error unchanged.",
+  "verification": "Producer kind/validity assignments and actual-body dispatch fixture inspected; no current final-code execution.",
+  "limits": [
+    "Fixture stubs graphics restorers and does not prove physical EGA writes.",
+    "Does not prove guest VDD screenshot timing; that limitation remains separate."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0758",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_int1 immediately after host_os_mouse_pointer; original2382",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -2,
+  "problem": "NT position supplier and original software cursor geometry have different existing position fields.",
+  "chain": "BOP BA -> mouse_int1 -> host_os_mouse_pointer(cursor_status) -> mvdm_softpc_mouse_apply/EmulateCoordinates updates cursor_status.position. INT33 set_range -> cursor_update -> coerce cursor_position -> point_copy(cursor_position,cursor_status.position).",
+  "evidence": "nt_mouse.c:425-437 passes supplied status to current input provider; guest.c applies coordinates to its position. mouse_io.c has no IRQ assignment to cursor_position other than this point. mouse_io.h:535 confirms source/destination order. mouse_set_range_x/y call cursor_update; its original body overwrites cursor_status from cursor_position. For unequal old geometry and moved input, removing sync makes a later range call restore old position. Original NTVDM excludes cursor_update body, whereas the supported KVM Window route uses the recovered original painter/geometry body. This establishes a boundary adaptation need, not an original NT4 defect.",
+  "necessity": "Both fields are original per-VM state, not an added cache. At the selected host-input boundary the provider cannot update private mouse geometry itself. One original point_copy after provider return preserves the invariant before later original geometry consumers.",
+  "minimum": "Retain one original point_copy pending owner; delete two explanation lines. Replacing all original coordinate fields or moving mouse policy into the provider would create greater mirror/autonomous changes.",
+  "change": "Deleted two added comment lines; +3/-0 becomes +1/-0, net-2.",
+  "decision": "Residual synchronization pending owner; not fully restored.",
+  "line_mapping": "The existing #line2388 still pins subsequent mouse_motion statements after the insertion; #error directives unchanged. Hook itself has no original counterpart.",
+  "verification": "Source-chain and field ownership proof; no new runtime test claimed. Final-file batch validation pending.",
+  "limits": [
+    "Route geometry recovery itself remains subject to its later point audit.",
+    "Behavioral sequence should be checked in final coordinate/route regression; current proof is deterministic source analysis."
+  ]
+}

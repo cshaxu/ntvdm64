@@ -41,6 +41,8 @@ typedef uint16_t word; typedef word MOUSE_CALL_MASK;
 #define IFN3(a,b,c,d,e,f) (a b,c d,e f)
 #define NTVDM 1
 #define CPU_40_STYLE 1
+/* Original host/inc/host_def.h callback adjustment for the negative control. */
+#define HOST_BOP_IP_FUDGE (-2)
 #define MOUSE_VERBOSE 0
 #define note_trace0(a,b) ((void)0)
 #define MOUSE_INT2_SEGMENT 0xf000

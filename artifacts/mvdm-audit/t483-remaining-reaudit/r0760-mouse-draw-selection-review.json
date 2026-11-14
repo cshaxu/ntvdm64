@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0760",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_update #line2641-2657",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 2,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "problem": "Enable original software cursor movement drawing for the KVM Window frontend, while retaining original outer selection.",
+  "chain": "Mouse IRQ -> host_os_mouse_pointer -> mouse_update POSITION/show-count gate -> cursor_display route gate -> original text/graphics painter.",
+  "evidence": "Pinned original NTVDM excludes the mouse_update draw block and cursor_display body. Current nt_mouse host_show_pointer/hide_pointer contain only rejected X86GFX bodies; KVM Window requires the software painter, witnessed by T481 S16 retained edit cursor transitions. The nested !MONITOR guard is redundant: mouse_io.c top-level NTVDM/MONITOR branch already #errors, and selected mouse_io Ninja command has NTVDM without MONITOR. No supported compilation can reach the guard with MONITOR true.",
+  "necessity": "Draw dispatch is necessary for admitted KVM Window relative input; original NT4 host-pointer boundary alone cannot draw this frame. Exact #else enables original body, #error preserves rejected original branch. Additional nested MONITOR selection has no supported function.",
+  "minimum": "Retain original #ifndef, rejected #error and #else; remove redundant project-added !MONITOR wrapper and matching endif, restore original ending comment. No new state or shim.",
+  "change": "Removed redundant nested guard at R0760; paired closing restoration belongs to next R0761. This point +3/-0 -> +2/-0, net-1.",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Original outer #ifndef retained. #line2642 and2656 retained. Every #error unchanged. Paired #endif restored to original comment.",
+  "verification": "Selected Ninja flags and mandatory top-level rejection inspected. No final-code compile yet; semantic batch remains pending until whole file complete.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

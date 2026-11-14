@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0766",
+  "location": "mouse_show_cursor before original2950",
+  "before": {
+    "added": 2,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -2,
+  "evidence": "Two added comment lines only; no executable/conditional effect.",
+  "change": "Removed two added comments; original absence restored, mirror diff-2.",
+  "line_mapping": "Existing #line2950 retained; #error unchanged.",
+  "verification": "Byte-local comment deletion inspected; final batch pending."
+}

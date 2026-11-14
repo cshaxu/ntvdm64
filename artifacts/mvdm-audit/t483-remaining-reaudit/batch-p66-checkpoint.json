@@ -1,0 +1,198 @@
+{
+  "part": "P66",
+  "source_files": 5,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "sha256": "9a77ed941309cb36ca22ca705f14d366d725456744f228d35cde586ce29ef4e2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "sha256": "6728d20b2b3406a8084d3f55109f34dce344b46a0b07506c25f1630db287c7b3"
+    },
+    {
+      "path": "test/mvdm-host/softpc.new/base/keymouse/original_mouse_ega_restore_test.c",
+      "sha256": "0569e65162e05f7dfccdc2b342b90125439c9d3588207d39a565559656929f17"
+    },
+    {
+      "path": "test/observation/verify-mouse-callback-reentry.py",
+      "sha256": "4b362f3a6d4b62d658ae0756e98c9616f0f5dc2115aae4906d01cfc0186f69d7"
+    }
+  ],
+  "mirror_diff_delta": -127,
+  "delivery": "cached full, publication11x2, final tests passed; accompanies P66 commit",
+  "metrics": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "before": {
+        "added": 109,
+        "deleted": 470
+      },
+      "after": {
+        "added": 100,
+        "deleted": 470
+      },
+      "delta": -9,
+      "sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "before": {
+        "added": 540,
+        "deleted": 997
+      },
+      "after": {
+        "added": 476,
+        "deleted": 953
+      },
+      "delta": -108,
+      "sha256": "9a77ed941309cb36ca22ca705f14d366d725456744f228d35cde586ce29ef4e2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "before": {
+        "added": 97,
+        "deleted": 661
+      },
+      "after": {
+        "added": 91,
+        "deleted": 657
+      },
+      "delta": -10,
+      "sha256": "6728d20b2b3406a8084d3f55109f34dce344b46a0b07506c25f1630db287c7b3"
+    }
+  ],
+  "test_fixture_correction": "Original negative control needs original host_def.h HOST_BOP_IP_FUDGE=-2; first fixture compile failure retained in mouse-final.log.",
+  "build": "cached x86/x64 exit0",
+  "publication": {
+    "status": "published",
+    "package": "4d5eafb7-3940-47f9-8faa-5025003eeeb4",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "focused_mouse_log": "PASS 8 mode cases and bidirectional VDD transitions without INT33\nPASS original software text cursor: masks, saved-position restore, page offset, conditional exclusion, off-screen exclusion; memory/geometry mocked\nPASS saved text owner: graphics transition, page transition, single consumption; graphics dispatch retained\nPASS EGA cursor temporary geometry restored: off-screen, excluded, drawn, mode change, non-virtual\nBASELINE expected failure: outer: reg 0 expected 1100 got 0001\nPASS: original callback bodies preserve independent nested guest frames\n",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 357715,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3066,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1401,
+        "CleanupMs": 483,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 217,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66535,
+        "CleanupMs": 450,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 45669,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 42979,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14230,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9829,
+        "CleanupMs": 400,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 59306,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12619,
+        "CleanupMs": 456,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27818,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30384,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5010,
+        "CleanupMs": 456,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8130,
+        "CleanupMs": 506,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10326,
+        "CleanupMs": 474,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4164,
+        "CleanupMs": 438,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6963,
+        "CleanupMs": 472,
+        "Passed": true
+      }
+    ]
+  },
+  "limitations": [
+    "DOS4GW/NESticle external fixture explicitly skipped by Full; not newly passed.",
+    "No fresh manual Win3.1/Win95 acceptance is claimed.",
+    "The EGA mode-change fixture models SAS reentry; it does not run a guest page-fault handler."
+  ],
+  "verification_logs": {
+    "mouse-final-retry.log": "PASS 8 mode cases and bidirectional VDD transitions without INT33\nPASS original software text cursor: masks, saved-position restore, page offset, conditional exclusion, off-screen exclusion; memory/geometry mocked\nPASS saved text owner: graphics transition, page transition, single consumption; graphics dispatch retained\nPASS EGA cursor temporary geometry restored: off-screen, excluded, drawn, mode change, non-virtual\nBASELINE expected failure: outer: reg 0 expected 1100 got 0001\nPASS: original callback bodies preserve independent nested guest frames\n",
+    "keyboard-final.log": "PASS masked port read preserves original EOI-owned slot and IRQ request\nPASS actual INTACK/EOI advances queued bytes and retires final slot\nPASS early EOI retains unread port-60 byte and advances once\nPASS PIC reset cancels rather than early-acknowledges unread keyboard output\nPASS physical Alt+Enter and following key through controller/PIC\nKEYBOARD_PIC_PROFILE assertions=90 failures=0\n\n",
+    "final-check.log": "PASS 143 selected WOW objects; 9 private-header negative controls; no NTVDM private dependency\nDocumentation governance verification passed.\nDocumentation relative-link verification passed.\n"
+  },
+  "first_attempt": "Mouse negative-control fixture failed to compile without HOST_BOP_IP_FUDGE; original -2 constant supplied; retry passes with expected baseline register-restore failure."
+}

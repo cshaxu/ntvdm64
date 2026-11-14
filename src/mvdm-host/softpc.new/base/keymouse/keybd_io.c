@@ -1556,19 +1556,12 @@ void kb_setup_vectors(void)
 
 
    KbdSeg     = getDS();
-   /*
-    * DIVERGENCE(MVDM-HOST-DIV-059): effective_addr is a fixed-width guest
-    * physical number, not a host pointer.  The original function already
-    * uses Start_of_M_area as the selected SoftPC SAS backing store below;
-    * use that same native-width backing path for every table pointer rather
-    * than converting the guest number directly to a host address.
-    */
    phy_base   = effective_addr(getCS(), getSI());
    pkio_table = (word *)(Start_of_M_area + phy_base);
+#line 1920
 
       /* IDLE variables */
     sas_loadw((sys_addr)(phy_base + 12 * sizeof(word)), &w);
-#line 1923
     pICounter		  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w));
     pCharPollsPerTick	  = (word *) (Start_of_M_area + ((KbdSeg<<4)+w+4));
     pMinConsecutiveTicks = (word *)  (Start_of_M_area + ((KbdSeg<<4)+w+8));
@@ -1640,10 +1633,8 @@ void kb_setup_vectors(void)
    int13h_vector_off = *pkio_table++;
    int13h_caller_off = *pkio_table++;
    stream_io_buffer_size = *pkio_table++;
-    stream_io_buffer = (half_word *)(Start_of_M_area +
-        effective_addr(*pkio_table++, 0));
-    stream_io_dirty_count_ptr = (word *)(Start_of_M_area +
-        effective_addr(KbdSeg, *pkio_table++));
+   stream_io_buffer = (half_word *)(Start_of_M_area + effective_addr(*pkio_table++, 0));
+   stream_io_dirty_count_ptr = (word *)(Start_of_M_area + effective_addr(KbdSeg, *pkio_table++));
 #line 1995
    stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);
 #ifndef PROD

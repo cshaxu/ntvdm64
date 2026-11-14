@@ -1,0 +1,104 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+  "before": {
+    "added": 109,
+    "deleted": 470,
+    "total": 579
+  },
+  "after": {
+    "added": 100,
+    "deleted": 470,
+    "total": 570
+  },
+  "matched_original_line_mismatches": [
+    [
+      "#endif",
+      60,
+      55
+    ],
+    [
+      "#endif /* GISP_SVGA */",
+      184,
+      170
+    ],
+    [
+      "#endif /* GISP_SVGA */",
+      259,
+      253
+    ],
+    [
+      "#endif\t/* GISP_CPU */",
+      557,
+      550
+    ],
+    [
+      "#endif\t/* NTVDM or GISP_CPU */",
+      582,
+      560
+    ],
+    [
+      "#else\t/* NTVDM */",
+      656,
+      640
+    ],
+    [
+      "#else   /* NTVDM */",
+      668,
+      666
+    ],
+    [
+      "#else   /* NTVDM */",
+      731,
+      702
+    ],
+    [
+      "#endif",
+      842,
+      840
+    ],
+    [
+      "#endif",
+      880,
+      877
+    ],
+    [
+      "#endif /* NTVDM */",
+      1508,
+      1505
+    ],
+    [
+      "#endif",
+      1841,
+      1536
+    ],
+    [
+      "#endif",
+      1850,
+      1845
+    ],
+    [
+      "#endif",
+      2000,
+      1998
+    ],
+    [
+      "#endif /* MONITOR */",
+      2024,
+      2006
+    ]
+  ],
+  "errors_identical": true,
+  "points": [
+    "R0750",
+    "R0751",
+    "R0752"
+  ],
+  "complete": 3,
+  "restored": 0,
+  "pending_owner": 3,
+  "mirror_delta": -9,
+  "token_equivalent_excluding_comments_whitespace_line_directives": true,
+  "line_scope": "All matched original non-directive lines have exact original coordinates;listed conditional-close coordinates are pre-existing excluded-branch compression,not emitted statements. No unrelated excluded structure edited.",
+  "verification": "Source/token/line evidence only;format-only batch accumulates under owner rule;no new build/publication/runtime claim.",
+  "sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9"
+}

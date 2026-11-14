@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0769",
+  "location": "before original2996",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "evidence": "Paired original show/hide implementation retained; removed explanation or redundant project condition only.",
+  "change": "Removed added hide-count explanation. Mirror diff-1.",
+  "line_mapping": "Existing original #line and all #error retained.",
+  "verification": "Source structure checked; final batch pending."
+}

@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0768",
+  "location": "original2969",
+  "before": {
+    "added": 2,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -3,
+  "evidence": "R0767 redundant wrapper removed; one original outer ending remains. Historical anchor includes blank.",
+  "change": "Restored #endif /* NTVDM */; mirror diff-3.",
+  "line_mapping": "Existing #line2969 preserved; #error unchanged.",
+  "verification": "Paired structure source check; final batch pending."
+}

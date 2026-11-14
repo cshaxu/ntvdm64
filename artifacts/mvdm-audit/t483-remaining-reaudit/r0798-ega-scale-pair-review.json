@@ -1,0 +1,28 @@
+{
+  "point": "T483-R0798",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5624",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 0
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Pair temporary coordinate scaling with restoration across the reached SAS guest-execution boundary.",
+  "chain": "EGA_graphics_cursor_display -> per-line sas_hw_at(vd_video_mode) -> c_sas_hw_at -> bios_read_byte -> xtrn2phy failure -> biosDoInst -> host_simulate -> return to cursor loop. gfx_updt ega_mark_string only updates dirty data.",
+  "evidence": "ccpusas4.c:1552 bios_read_byte calls biosDoInst on translation failure; biosDoInst:1365 explicitly calls host_simulate. mouse_io original5774 reads vd_video_mode in each V7VGA cursor row. The selected jap_mouse predicate reads current VGA/BDA state (R0755, supported by the actual T481 S16 wrong-painter witness). Re-evaluating that predicate at cleanup is not a test of whether this invocation scaled its locals. On true-to-false transition it leaves scaled coordinates; on false-to-true it consumes uninitialized saved coordinates. No rule in the reached SAS boundary preserves video state across guest execution.",
+  "necessity": "Restoration belongs to this invocation, not the later mode. R0755 establishes current-mode selection independently of this adaptation; the existing SAS guest-execution contract establishes the intervening boundary. Retain one automatic boolean, not another persistent mode cache or provider.",
+  "minimum": "One local snapshot and paired condition uses; no helper, second state machine or additional mirror lines. Retain pending owner review.",
+  "change": "No mirror source change at this point. Corrected focused fixture to model mode change at SAS read, not dirty marking.",
+  "decision": "Qualified residual pending owner on source-contract evidence; not a claim of reproduced mode-changing page fault.",
+  "line_mapping": "Original5624 insertion/5625 replacement remains; whole-file final logical-line audit pending. No #error body changed.",
+  "verification": "Read selected SAS and dirty providers and actual cursor body. Updated fixture will run with completed P66 file; no new test pass claimed.",
+  "limits": [
+    "No observed trace proves this exact draw experienced a mode-changing page fault.",
+    "Fixture models the permitted SAS reentry effect; it does not execute the guest page-fault handler or validate paging.",
+    "Local snapshot only pairs temporary scaling; it does not establish arbitrary full mouse-state reentry safety."
+  ]
+}

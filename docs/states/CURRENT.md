@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-756 points reviewed:291 restored/verified/published,0 local pending delivery,
-2 approved retain,463 qualified pending decisions. Another1964 points unreviewed.
-Sequential file disposition is106/365;259 remain.
+822 points reviewed:313 restored/verified/published,0 local pending delivery,
+2 approved retain,507 qualified pending decisions. Another1898 points unreviewed.
+Sequential file disposition is108/365;257 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -238,4 +238,4 @@ sevid004:R0605-R0607 qualified pending owner;source unchanged;next R0608.
 
 sevid016:R0608-R0611 qualified. sevid017:11/11 qualified. sevid018:9/9;LF restored. sevid019:49/49;46 restored;3 residuals;net-140;P57 gates passed;next R0681.
 
-P65:diff-68;keyba32/32 delivered;next R0750.
+P66 verified/published(diff-127);receipt accompanies P66 commit;next R0816.

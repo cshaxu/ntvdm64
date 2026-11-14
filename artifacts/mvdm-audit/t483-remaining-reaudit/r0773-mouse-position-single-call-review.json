@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0773",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original3076 return; historical added block3077",
+  "before": {
+    "added": 5,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 1
+  },
+  "mirror_diff_delta": -3,
+  "problem": "Window software cursor must proceed past original NTVDM early return, while Console retains return.",
+  "chain": "INT33/4 -> original status point_set -> working_mouse_funcs set_position (nt_mouse counter flags only) -> conditional Console return -> original cursor_position/cursor_update/cursor_display for Window.",
+  "evidence": "Original unconditional return prevents Window software geometry and repaint. Current host provider:357-395 only sets original counter-position flags and returns; no callback or status read. Earlier conditional duplicates the same host call. Commonizing original call preserves Console sequence and Window final coordinates: original point_set before setter is overwritten with the same coordinates by original cursor_update before painting, with original clipping/grid retained.",
+  "necessity": "Frontend boundary requires conditional early return, not two host-call sites. No new persistent state; original geometry and original provider retained.",
+  "minimum": "One-line conditional return replaces original one-line unconditional return. R0772 opening and historical duplicate-call/closing block disappear. +1/-1 remains pending owner.",
+  "change": "Removed closing branch, two explanation lines and duplicate host call; replaced original return with route-dependent return. Point delta-3; paired group delta-6.",
+  "decision": "Qualified reduced residual pending owner; not full original restoration.",
+  "line_mapping": "Existing #line3078 preserves continuation; no #error removed. Whole-file coordinate verification still required.",
+  "verification": "Current selected provider and caller source examined; semantic candidate not yet built/tested/published.",
+  "limits": [
+    "No claim final candidate tests passed.",
+    "Other providers/profiles are not admitted by this reduction; selected NT provider required."
+  ]
+}

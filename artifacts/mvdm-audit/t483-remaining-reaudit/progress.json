@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "cbcef77748c8ea904da09bb708b0069288f6d3a49e6c3dd69d6e99a28f7535eb",
+  "new_register_sha256": "40affa29a67b29d48711ddc426718566b6bd62f651256ee75180c8afe1826b9c",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -15,38 +15,48 @@
     "already-byte-identical-to-original": 1
   },
   "completed": 2,
-  "pending": 1964,
-  "next": "T483-R0750",
+  "pending": 1898,
+  "next": "T483-R0816",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
     "Existing evidence is a lead, not accepted necessity proof. Closed items and absent files are not reopened.",
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
-  "awaiting_owner_approval": 463,
-  "reviewed": 756,
+  "awaiting_owner_approval": 507,
+  "reviewed": 822,
   "restored_pending_delivery": 0,
   "batch_modified_implementation_files": 0,
   "batch_mirror_diff_delta": 0,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
-  "pending_decisions": 463,
-  "restored_verified_published": 291,
-  "last_batch_mirror_diff_delta": -68,
-  "last_delivery": "batch-p65-checkpoint.json",
+  "pending_decisions": 507,
+  "restored_verified_published": 313,
+  "last_batch_mirror_diff_delta": -127,
+  "last_delivery": "batch-p66-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
-  "qualified_pending_decisions": 463,
-  "pending_decisions_count_note": "463 qualified residuals;P65 delivered7 restorations.",
-  "active_rework": "P65 final delivery gates passed;Git delivery follows;next R0750",
-  "active_investigation": "keyba32/32 complete;next R0750",
+  "qualified_pending_decisions": 507,
+  "pending_decisions_count_note": "507 qualified residual IDs;no local restoration awaiting tests.",
+  "active_rework": "P66 verified package and commit receipt;continue ordered audit at R0816",
+  "active_investigation": "next R0816",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 106,
-  "sequential_files_remaining": 259,
+  "sequential_files_disposition_complete": 108,
+  "sequential_files_remaining": 257,
   "batch_modified_mirror_files": 0,
   "batch_format_only_files": [],
   "partial_restoration_pending_delivery": [],
-  "new_baseline_gap_evidence": "r0642-r0647-vram-copy-review.json"
+  "new_baseline_gap_evidence": "r0642-r0647-vram-copy-review.json",
+  "coupled_changes_pending_ordered_review": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "reason": "R0754 paired original ABI restoration",
+      "mirror_diff_delta": -10,
+      "delivery": "P66 paired ABI restoration delivered;later file audit not claimed"
+    }
+  ],
+  "batch_line_only_mirror_delta": -1,
+  "batch_point_metric_reconciliation": 2
 }

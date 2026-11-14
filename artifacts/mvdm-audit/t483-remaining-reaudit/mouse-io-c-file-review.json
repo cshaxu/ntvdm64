@@ -1,0 +1,54 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "points": "R0753-R0815",
+  "point_count": 63,
+  "audit_complete": true,
+  "delivery_complete": true,
+  "changes": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "before": {
+        "added": 109,
+        "deleted": 470
+      },
+      "after": {
+        "added": 100,
+        "deleted": 470
+      },
+      "delta": -9,
+      "sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "before": {
+        "added": 540,
+        "deleted": 997
+      },
+      "after": {
+        "added": 476,
+        "deleted": 953
+      },
+      "delta": -108,
+      "sha256": "9a77ed941309cb36ca22ca705f14d366d725456744f228d35cde586ce29ef4e2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "before": {
+        "added": 97,
+        "deleted": 661
+      },
+      "after": {
+        "added": 91,
+        "deleted": 657
+      },
+      "delta": -10,
+      "sha256": "6728d20b2b3406a8084d3f55109f34dce344b46a0b07506c25f1630db287c7b3"
+    }
+  ],
+  "batch_mirror_diff_delta": -127,
+  "point_aggregation_reconciliation": 2,
+  "reconciliation_note": "Whole-file normalized SequenceMatcher raw +/- against fixed original is authoritative; point anchors and matching blank/directive boundaries do not sum exactly. Previous point aggregate -129; whole-file result -127.",
+  "line_check": "All matching original code blocks of length>=3 checked with explicit #line interpreter: zero mismatches. Selected modified callback setIP mapped6628; tail6631-end byte-exact. This is source-coordinate evidence, not compiled diagnostics.",
+  "excluded_branch_check": "Every #error line identical to HEAD in all three edited mirrors.",
+  "verification": "P66 cached x86/x64 full build, two-destination publication11, mouse positive/negative controls, Full, WOW boundary143+9, governance passed;receipt batch-p66-checkpoint.json accompanies commit. Limitations in receipt."
+}

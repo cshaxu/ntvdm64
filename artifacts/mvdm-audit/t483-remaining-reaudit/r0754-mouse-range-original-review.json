@@ -1,0 +1,30 @@
+{
+  "point": "T483-R0754",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "before": {
+    "added": 5,
+    "deleted": 2
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -7,
+  "coupled_mirror_delta": -10,
+  "conclusion": "Restore original declarations and paired nt_mouse.c declarations/definitions; local, not yet compiled or delivered.",
+  "evidence": [
+    "base/inc/base_def.h:93 word=IU16; mouse_io.h:381 MOUSE_SCALAR=short.",
+    "mouse_set_range_x/y pass addresses of original MOUSE_SCALAR coordinate fields.",
+    "nt_mouse.c host_x_range/y_range only copy dereferenced coordinates into word confine fields before LazyMouseInterrupt; no sign-sensitive operation intervenes.",
+    "Reading signed short then storing unsigned 16-bit, versus reading unsigned 16-bit then storing it, preserves all 65536 bit patterns. Both pointer argument representations are unchanged.",
+    "Original OpenNT pinned 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c uses word pointers in both declarations and definitions.",
+    "Actual worker Ninja flags /W4, no /WX. Pointer-sign diagnostic alone does not establish broken supported behavior."
+  ],
+  "change": "Restore both original imports, both forward declarations, both provider signatures; remove added explanatory comments. No shim or new branch.",
+  "line_mapping": "mouse_io #line162 -> host_m2p line162 -> range declarations163/164 -> #line165 retained. nt_mouse declarations precede retained #line121; definitions have unchanged line counts after #line2479. All #error directives unchanged.",
+  "verification": "Source/ABI proof only; final-code cached full build and tests deferred until all mouse_io.c points complete. No runtime pass claimed.",
+  "limits": [
+    "Compiler diagnostics and final object behavior still require batch verification.",
+    "Paired nt_mouse restoration tracked as coupled change, not a claim that its whole file is audited."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0767",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_show_cursor original2950-2969",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 2,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "problem": "CCPU INT33 show must increment original cursor count.",
+  "chain": "roms/bios1.asm:395-401 and bios4.asm:720-726 INT33 BOP BD -> bios.c v_mouse_io_interrupt -> mouse_io_interrupt -> mouse_function[1] mouse_show_cursor -> ++cursor_flag -> cursor_display.",
+  "evidence": "ROM entry only dispatches BOP then IRET, no guest show-count update. mouse_io.h default=-1/displayed=0. Current mouse_io writes show count at initialization/reset and this increment; original NTVDM exclusion removes the increment. Unlike original x86 spcmse guest implementation, selected ROM delegates to C. Top-level MONITOR already #errors; redundant guard has no supported selected-false case.",
+  "necessity": "Retain original C show count for selected ROM and KVM software cursor; no added count state. Needed #else reuses original implementation. Extra !MONITOR is redundant.",
+  "minimum": "Retain original #ifndef, rejected #error and #else; remove redundant project-added !MONITOR wrapper and matching endif, restore original ending comment. No new state or shim.",
+  "change": "Removed nested !MONITOR; this point mirror diff-1. Paired ending restoration R0768 follows.",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Retained #line2950/2951/2969 and all #error; original closing restored.",
+  "verification": "ROM/C dispatch and counter writes inspected. Final batch pending.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

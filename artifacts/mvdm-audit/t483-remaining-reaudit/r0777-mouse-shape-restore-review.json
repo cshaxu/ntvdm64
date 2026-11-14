@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0777",
+  "location": "original3371",
+  "before": {
+    "added": 2,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -3,
+  "evidence": "Original outer structure retained; project-only explanation/wrapper removed.",
+  "change": "Restored original #endif /* NTVDM */ after redundant guard removal; historical anchor includes empty line.",
+  "line_mapping": "Existing #line3310/3371/3372 retained; #error unchanged.",
+  "verification": "Source structure inspected; final batch pending."
+}

@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0752",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+  "location": "kb_setup_vectors original1993-1994",
+  "before": {
+    "added": 4,
+    "deleted": 2
+  },
+  "remaining": {
+    "added": 2,
+    "deleted": 2
+  },
+  "mirror_diff_delta": -2,
+  "problem": "Original stream pointers directly cast numeric guest addresses;host stream consumers dereference them as host pointers.",
+  "chain": "NTIO BOP5F -> MONITOR kb_setup_vectors table -> stream_io_buffer/stream_io_dirty_count_ptr -> video.c text output and stream_io_update access actual buffer/count.",
+  "evidence": "video.c2075-2077 directly tests/increments *stream_io_dirty_count_ptr and indexes stream_io_buffer;2425 onward copies via sas_loads into host buffer. Original CCPU SAS backing is Start_of_M_area,distinct from guest addresses. Original direct cast would target numeric guest addresses in host address space rather than allocated backing. No original direct consumer adds missing base later.",
+  "necessity": "Bind original stream fields to existing guest backing;no new buffering or output policy. Keeping effective_addr numeric is required by neighboring SAS consumers.",
+  "minimum": "Keep two base additions in original two-statement layout;remove unnecessary wrapped lines. No extra helper or duplicate conversion owner.",
+  "change": "Format-only consolidation+4 to+2;net mirror diff-2;expressions and evaluation order unchanged.",
+  "decision": "Minimized+2/-2 residual pending owner.",
+  "line_mapping": "Retain #line1995 after statements;whole-file original coordinate check follows;all #error preserved.",
+  "verification": "Direct consumers inspected. This is whitespace-only rewrite of existing expressions;no new runtime result claimed.",
+  "limits": [
+    "No general pageable-buffer lifetime guarantee is inferred beyond existing startup stream contract."
+  ]
+}

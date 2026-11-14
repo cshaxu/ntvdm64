@@ -506,3 +506,141 @@ P65 [T483-R0749 review](r0749-init-flags-restoration.json):Original restored;mir
 P65 final-code gates passed:seven restorations;mirror diff net-68 (keyba-61,vgaports-7).
 291 restored/delivered,2 approved,463 pending;756/2720 reviewed,1964 remain;106/365 files.
 [Receipt](batch-p65-checkpoint.json);[line proof](batch-p65-line-check.json).
+
+P66 [R0750](r0750-keyboard-table-address-review.json):comment-only mirror reduction7;remaining+2/-1 pending owner;keybd_io1/3. 757/2720 reviewed,1963 remain.
+
+P66 [T483-R0751](r0751-keyboard-sas-address-review.json):No source change;remaining+1/-1 pending owner. 758/2720 reviewed;1962 remain.
+
+P66 [T483-R0752](r0752-stream-buffer-pointers-review.json):Format-only consolidation+4 to+2;net mirror diff-2;expressions and evaluation order unchanged. 759/2720 reviewed;1961 remain.
+
+P66 [keybd_io file review](keybd-io-c-file-review.json):3/3 complete;raw mirror diff579->570 (-9);tokens equal;selected original lines aligned;format-only local batch. Files107/365;759/2720 points reviewed;1961 remain.
+
+P66 [T483-R0753](r0753-mouse-route-declaration-review.json):No source change at R0753; one-line explicit boundary dependency retained pending owner decision. 760/2720 reviewed;1960 remain.
+
+P66 [R0754](r0754-mouse-range-original-review.json): original range ABI restored locally with paired provider; mirror diff-17. 761/2720 reviewed;1959 remain. Final batch verification pending.
+
+P66 [T483-R0755](r0755-mouse-current-mode-review.json):No source change; +1/-1 retained pending owner with actual scene and before/fixed evidence. 762/2720 reviewed;1958 remain.
+
+P66 [T483-R0756](r0756-mouse-cache-assignment-review.json):Removed one added explanation line contents; physical blank retained. Mirror diff +1/-1 becomes +0/-1, net-1. 763/2720 reviewed;1957 remain.
+
+P66 [T483-R0757](r0757-video-mouse-instance-review.json):Removed added comment; +2/-0 becomes +1/-0, mirror delta-1; original selector call remains pending owner. 764/2720 reviewed;1956 remain.
+
+P66 [T483-R0758](r0758-mouse-position-owner-review.json):Deleted two added comment lines; +3/-0 becomes +1/-0, net-2. 765/2720 reviewed;1955 remain.
+
+P66 [R0759](r0759-mouse-draw-comment-review.json): explanation removed;mirror diff-1. 766/2720 reviewed;1954 remain. Not delivered.
+
+P66 [T483-R0760](r0760-mouse-draw-selection-review.json):Removed redundant nested guard at R0760; paired closing restoration belongs to next R0761. This point +3/-0 -> +2/-0, net-1. 767/2720 reviewed;1953 remain.
+
+P66 [R0761](r0761-mouse-draw-ending-review.json): original ending restored with R0760;mirror diff-3. 768/2720 reviewed;1952 remain. Not delivered.
+
+P66 [T483-R0762](r0762-mouse-callback-stack-review.json):Removed3 comment lines, added one original-coordinate #line; +17/-0 becomes +15/-0, net-2. 769/2720 reviewed;1951 remain.
+
+P66 [T483-R0763](r0763-mouse-callback-local-mask-review.json):Retained one local declaration; relocated existing line directive, no mirror size growth. 770/2720 reviewed;1950 remain.
+
+P66 [T483-R0764](r0764-mouse-callback-restore-review.json):No statement change; relocated existing #line2692 to #line2683 immediately after ten restores. Mirror size unchanged. 771/2720 reviewed;1949 remain.
+
+P66 [T483-R0765](r0765-mouse-return-draw-mask-review.json):No source change; +1/-1 retained. 772/2720 reviewed;1948 remain.
+
+P66 [T483-R0766](r0766-mouse-show-comment-review.json):Removed two added comments; original absence restored, mirror diff-2. 773/2720 reviewed;1947 remain. Not delivered.
+
+P66 [T483-R0767](r0767-mouse-show-selection-review.json):Removed nested !MONITOR; this point mirror diff-1. Paired ending restoration R0768 follows. 774/2720 reviewed;1946 remain.
+
+P66 [T483-R0768](r0768-mouse-show-ending-review.json):Restored #endif /* NTVDM */; mirror diff-3. 775/2720 reviewed;1945 remain. Not delivered.
+
+P66 [T483-R0769](r0769-mouse-hide-restore-review.json):Removed added hide-count explanation. Mirror diff-1. 776/2720 reviewed;1944 remain. Not delivered.
+
+P66 [T483-R0770](r0770-mouse-hide-selection-review.json):Removed redundant !MONITOR; +3/-0 becomes +2/-0, net-1. Paired extra ending removed at R0771. 777/2720 reviewed;1943 remain.
+
+P66 [T483-R0771](r0771-mouse-hide-restore-review.json):Removed redundant nested condition ending; original outer ending retained. Mirror diff-1. 778/2720 reviewed;1942 remain. Not delivered.
+
+P66 [T483-R0772](r0772-mouse-position-common-path-review.json):Restored absence of opening route branch and its two comments; paired R0773 replaces unconditional return with route-dependent return. Mirror diff-3. 779/2720 reviewed;1941 remain. Not delivered.
+
+P66 [T483-R0773](r0773-mouse-position-single-call-review.json):Removed closing branch, two explanation lines and duplicate host call; replaced original return with route-dependent return. Point delta-3; paired group delta-6. 780/2720 reviewed;1940 remain.
+
+P66 [T483-R0774](r0774-mouse-shape-restore-review.json):Removed added shape explanation. 781/2720 reviewed;1939 remain. Not delivered.
+
+P66 [T483-R0775](r0775-mouse-shape-selection-review.json):Removed redundant guard: +3/-0 -> +2/-0, net-1. Corrected stale #line2936 to3311 without adding directives. 782/2720 reviewed;1938 remain.
+
+P66 [T483-R0776](r0776-mouse-shape-provider-review.json):No source change at this point; +3/-5 retained. 783/2720 reviewed;1937 remain.
+
+P66 [T483-R0777](r0777-mouse-shape-restore-review.json):Restored original #endif /* NTVDM */ after redundant guard removal; historical anchor includes empty line. 784/2720 reviewed;1936 remain. Not delivered.
+
+P66 [T483-R0778](r0778-mouse-checksum-index-review.json):No source change at index; +1/-0 retained. 785/2720 reviewed;1935 remain.
+
+P66 [T483-R0779](r0779-mouse-checksum-sum-review.json):Removed2 added explanation lines; +6/-0 -> +4/-0, net-2. Repositioned existing #line3723 to3722 before original Save Cookie comment. 786/2720 reviewed;1934 remain.
+
+P66 [T483-R0780](r0780-mouse-geometry-restore-review.json):Removed duplicate geometry explanation. Mirror diff-1. 787/2720 reviewed;1933 remain. Not delivered.
+
+P66 [T483-R0781](r0781-mouse-geometry-selection-review.json):Added content +6/-0 -> +3/-0, net-3; corrected/repositioned stale #line4764 to5228 after runtime guard. 788/2720 reviewed;1932 remain.
+
+P66 [T483-R0782](r0782-mouse-geometry-host-position-review.json):No change at R0782. 789/2720 reviewed;1931 remain.
+
+P66 [T483-R0783](r0783-mouse-geometry-restore-review.json):Removed redundant MONITOR closing condition; original ending retained. Mirror diff-1. 790/2720 reviewed;1930 remain. Not delivered.
+
+P66 [T483-R0784](r0784-mouse-painter-restore-review.json):Removed duplicate painter explanation. 791/2720 reviewed;1929 remain. Not delivered.
+
+P66 [T483-R0785](r0785-mouse-painter-selection-review.json):Removed redundant !MONITOR, +3/-0 -> +2/-0, net-1. Also removed superseded #line4791 immediately preceding #line5251 (line-only delta-1 counted separately). 792/2720 reviewed;1928 remain.
+
+P66 [T483-R0786](r0786-mouse-painter-route-review.json):Removed inner #ifdef NTVDM/#endif; +3/-0 -> +1/-0, net-2. 793/2720 reviewed;1927 remain.
+
+P66 [T483-R0787](r0787-mouse-painter-host-provider-review.json):No source change at R0787. 794/2720 reviewed;1926 remain.
+
+P66 [T483-R0788](r0788-mouse-painter-restore-review.json):Restored original #endif /* !NTVDM */; historical count included empty line. 795/2720 reviewed;1925 remain. Not delivered.
+
+P66 [T483-R0789](r0789-mouse-erase-comment-review.json):Removed two explanation lines; original absence restored, mirror diff-2. 796/2720 reviewed;1924 remain. Not delivered.
+
+P66 [T483-R0790](r0790-mouse-saved-owner-review.json):Restored original surrounding structure; full pinned-original raw comparison changes +491/-992 to +492/-980, net-11 attributable solely to this edit. Per-point historical +14/-28 becomes attributable +15/-16; whole-file final relocation will reconcile anchors. 797/2720 reviewed;1923 remain.
+
+P66 [T483-R0791](r0791-mouse-saved-dispatch-review.json):Restored exact original EGA call and #line5385; mirror diff-1. 798/2720 reviewed;1922 remain.
+
+P66 [T483-R0792](r0792-mouse-saved-dispatch-review.json):Restored exact original VGA call and #line5412; mirror diff-1. 799/2720 reviewed;1921 remain.
+
+P66 [T483-R0793](r0793-mouse-saved-dispatch-review.json):No change; obsolete conditional ending remains deleted, +0/-2. 800/2720 reviewed;1920 remain.
+
+P66 [T483-R0794](r0794-mouse-erase-tail-review.json):Restored original HERC/NTVDM endings and CGA call with original #line5423/5424/5429; removed redundant MONITOR close. Tail net-4; paired opening R0790 net-1 separately synchronized. Whole-file measured +492/-978 -> +490/-975, net-5. 801/2720 reviewed;1919 remain.
+
+P66 [T483-R0795](r0795-mouse-route-edge-review.json):Deleted3 comment lines plus repeated selector; historical +11/-0 becomes +7/-0, mirror diff-4. 802/2720 reviewed;1918 remain.
+
+P66 [T483-R0796](r0796-text-save-provenance-review.json):No change at R0796; +1/-1 retained. 803/2720 reviewed;1917 remain.
+
+P66 [T483-R0797](r0797-text-restore-address-review.json):Removed explanation contents; +2/-2 -> +1/-2, net-1. 804/2720 reviewed;1916 remain.
+
+P66 [T483-R0798](r0798-ega-scale-pair-review.json):No mirror source change at this point. Corrected focused fixture to model mode change at SAS read, not dirty marking. 805/2720 reviewed;1915 remain.
+
+P66 [T483-R0799](r0799-ega-scale-pair-review.json):No mirror source change at this point. Corrected focused fixture to model mode change at SAS read, not dirty marking. 806/2720 reviewed;1914 remain.
+
+P66 [T483-R0800](r0800-ega-background-geometry-review.json):No source change; necessary residual pending owner. 807/2720 reviewed;1913 remain.
+
+P66 [T483-R0801](r0801-ega-background-geometry-review.json):No source change; necessary residual pending owner. 808/2720 reviewed;1912 remain.
+
+P66 [T483-R0802](r0802-ega-background-geometry-review.json):Removed two comment lines; residual +6/-0 becomes +4/-0; mirror diff net-2. 809/2720 reviewed;1911 remain.
+
+P66 [T483-R0803](r0803-vga-saved-kind-review.json):No source change; necessary residual pending owner. 810/2720 reviewed;1910 remain.
+
+P66 [T483-R0804](r0804-cga-saved-kind-review.json):No source change; necessary residual pending owner. 811/2720 reviewed;1909 remain.
+
+P66 [T483-R0805](r0805-callback-entry-review.json):Mirror diff net-1; removed redundant explanation where applicable; no behavior change. 812/2720 reviewed;1908 remain.
+
+P66 [T483-R0806](r0806-callback-entry-review.json):Mirror diff net-1; removed redundant explanation where applicable; no behavior change. 813/2720 reviewed;1907 remain.
+
+P66 [T483-R0807](r0807-callback-entry-review.json):Mirror diff net-5; removed redundant explanation where applicable; no behavior change. 814/2720 reviewed;1906 remain.
+
+P66 [T483-R0808](r0808-callback-entry-review.json):Mirror diff net0; removed redundant explanation where applicable; no behavior change. 815/2720 reviewed;1905 remain.
+
+P66 [T483-R0809](r0809-callback-original-save-review.json):Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally. 816/2720 reviewed;1904 remain. Not delivered.
+
+P66 [T483-R0810](r0810-callback-original-save-review.json):Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally. 817/2720 reviewed;1903 remain. Not delivered.
+
+P66 [T483-R0811](r0811-callback-original-save-review.json):Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally. 818/2720 reviewed;1902 remain. Not delivered.
+
+P66 [T483-R0812](r0812-callback-original-save-review.json):Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally. 819/2720 reviewed;1901 remain. Not delivered.
+
+P66 [T483-R0813](r0813-callback-original-save-review.json):Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally. 820/2720 reviewed;1900 remain. Not delivered.
+
+P66 [T483-R0814](r0814-callback-original-save-review.json):Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally. 821/2720 reviewed;1899 remain. Not delivered.
+
+P66 [T483-R0815](r0815-callback-original-save-review.json):Restored exact original parameter/setup tail, including saved field writes and original comments. Entire point restored locally. 822/2720 reviewed;1898 remain. Not delivered.
+
+P66 [mouse file review](mouse-io-c-file-review.json):63/63;whole-file mirror net-127 across3 files, point aggregation reconciliation+2;108/365 files audited. Build/delivery pending.
+
+P66 [delivery evidence](batch-p66-checkpoint.json):cached full,publication11x2,mouse controls,Full and governance passed;22 restorations verified;mirror diff-127;822/2720 points and108/365 files audited;Receipt accompanies P66 commit.

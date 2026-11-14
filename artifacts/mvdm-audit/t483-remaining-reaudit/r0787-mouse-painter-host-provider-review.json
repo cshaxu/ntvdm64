@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0787",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5301-5311",
+  "before": {
+    "added": 3,
+    "deleted": 11
+  },
+  "remaining": {
+    "added": 3,
+    "deleted": 11
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Installed NT host mouse does not implement software graphics pointer display.",
+  "chain": "INT33/IRQ/route change -> cursor_display -> original text/EGA/VGA/CGA painter -> host_flush_screen.",
+  "evidence": "nt_reset selects NT function table; nt_mouse.c mouse_installed returns installation state, while mouse_cursor_display and mouse_cursor_undisplay bodies are empty. Original installed-host branch skips following EGA/VGA/CGA body after those calls. Thus restoring it produces no software graphics cursor for installed NT host/KVM path.",
+  "necessity": "Skip empty host provider to preserve original software painter. No replacement painter or fake success introduced.",
+  "minimum": "Keep excluded non-NTVDM #error/framework as required; +3/-11 remains pending owner.",
+  "change": "No source change at R0787.",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Existing #line5312 resumes original painter block; #error retained.",
+  "verification": "Source/selected compilation review; final batch pending.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

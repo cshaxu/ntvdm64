@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0755",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "173;original logical215",
+  "before": {
+    "added": 1,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 1
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Original global jap_mouse cache can select graphics cursor writes after hardware has returned to text.",
+  "chain": "BIOS/v7 mode setters update Currently_emulated_video_mode; VGA hardware restoration can change EGA_GRAPH state independently. INT33 refreshes original jap_mouse, while BOP BA mouse_int1 -> mouse_update -> cursor_display and enhanced callback can paint without INT33. Current predicate reads original is_it_text() at use.",
+  "evidence": "T481 S16 retained owner scene: outer NTVDM33848 BIOS3/last103/actual0xC0/jap_mouse1 and two character strips; docs/etc/evidence/m0-t481-s16-win31-mouse-transitions.md:49-75. Existing build/t481-s16/unit2-before/test.log: FAIL case0 painter1 expected0; unit2-fixed/test.log passes8 cases and bidirectional transitions without INT33. Current source confirms egagraph.h:87 hardware text bit, ega_vide.c:1101 and v7_video.c:320 last-mode setters, bios.c:85/88 separate INT33/IRQ entrypoints. These are retained results, not newly run controls.",
+  "necessity": "KVM Window painting is an admitted host responsibility absent from original NTVDM cursor_display body. Once bound, original cached mode misclassifies the retained actual text state. This exact one-line expression reuses existing hardware mode state and prevents the demonstrated wrong-plane writes without another cache or shim.",
+  "minimum": "Retain +1/-1 derived expression pending owner. Restoring original variable plus corrected update still leaves non-INT33 transitions stale. Adding invalidation at every transition would introduce more state/edges.",
+  "change": "No source change; +1/-1 retained pending owner with actual scene and before/fixed evidence.",
+  "decision": "Qualified pending owner; not blanket approval of other cursor changes.",
+  "line_mapping": "One original logical215 line replaced with one line; #error/#line unchanged.",
+  "verification": "Current source chain inspected; historical negative/positive logs read. Final P66 validation pending.",
+  "limits": [
+    "Test is extracted-body unit evidence; original hardware-mode/INT33 stubs are not full Win3.1 execution.",
+    "Old owner scene and tests establish necessity, not verification of current unbuilt P66 package."
+  ]
+}

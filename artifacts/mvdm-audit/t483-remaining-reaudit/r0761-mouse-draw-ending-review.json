@@ -1,0 +1,16 @@
+{
+  "point": "T483-R0761",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "before": {
+    "added": 2,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -3,
+  "conclusion": "Original #endif /*NTVDM*/ restored with R0760 redundant guard removal. Historical +3/-1 anchor includes an empty line; actual two directive lines differ from one original directive.",
+  "line_mapping": "Existing #line2656 pins restored original ending; #line2657 and all #error retained.",
+  "verification": "Paired guard/endif reviewed; no final batch compile/test/publication yet."
+}

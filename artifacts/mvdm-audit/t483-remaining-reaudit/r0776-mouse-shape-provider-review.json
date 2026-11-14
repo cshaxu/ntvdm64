@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0776",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original3316-3320",
+  "before": {
+    "added": 3,
+    "deleted": 5
+  },
+  "remaining": {
+    "added": 3,
+    "deleted": 5
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Original host-installed branch delegates graphics shape to an empty NT provider.",
+  "chain": "INT33/9 -> mouse_set_graphics -> original guest mask SAS reads -> graphics_cursor per-VM hotspot/masks -> software painter.",
+  "evidence": "nt_reset.c:203 binds working_mouse_funcs to the_mouse_funcs; nt_mouse.c table set_graphics slot is dummy, whose body321-323 is empty. Original NTVDM exclusion removes C mask loading, and the NT host provider cannot replace it. Selected CCPU ROM delegates INT33 to C. MONITOR is already rejected at file top.",
+  "necessity": "mouse_installed returns mouse_state; when installed the original if calls empty dummy and skips C mask loading. Software painter consequently keeps previous/default shape. Bypassing this provider preserves original C shape implementation.",
+  "minimum": "Retain existing excluded non-NTVDM #error and its framework under owner constraints; no duplicate mask implementation or provider shim. Residual +3/-5 pending owner.",
+  "change": "No source change at this point; +3/-5 retained.",
+  "decision": "Qualified pending owner decision; not an original NT4 defect claim.",
+  "line_mapping": "Existing #line3321 resumes original C mask block; #error retained.",
+  "verification": "Actual selected provider and state writes read; no new runtime result.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0800",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5649",
+  "before": {
+    "added": 1,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 1
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Erase saved EGA background by its actual representation.",
+  "chain": "EGA_graphics_cursor_display saves EGA planes and sets save_area_in_use -> later cursor_undisplay dispatches saved_cursor_kind -> EGA_graphics_cursor_undisplay.",
+  "evidence": "R0790 saved-owner audit and original_mouse_restore_dispatch_test.c establish old/current representation mismatch; EGA plane save cannot be restored by text/VGA/CGA eraser after display transition. This producer must set the same instance-owned discriminant consumed by that dispatcher.",
+  "necessity": "Keep the one type assignment where the save becomes valid; no alternative background owner.",
+  "minimum": "One same-line saved kind assignment, pending owner.",
+  "change": "No source change; necessary residual pending owner.",
+  "decision": "Qualified residual pending owner.",
+  "line_mapping": "No #error changed. Existing #line5787 after the relocated cleanup preserves following original lines; whole-file line review pending.",
+  "verification": "Source and existing fixture assertions inspected. P66 final-code execution remains pending until whole file is complete.",
+  "limits": [
+    "This is source/control-flow evidence; no new full guest regression pass is claimed."
+  ]
+}

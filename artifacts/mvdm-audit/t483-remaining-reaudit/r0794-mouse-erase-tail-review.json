@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0794",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5420-5429",
+  "before": {
+    "added": 8,
+    "deleted": 10
+  },
+  "remaining": {
+    "added": 7,
+    "deleted": 7
+  },
+  "mirror_diff_delta": -4,
+  "problem": "Finish saved-kind dispatch while retaining original CGA restorer and excluded HERC boundary.",
+  "chain": "software_text_cursor_display saves background/address/type -> video mode changes -> cursor_undisplay -> saved kind dispatch -> matching original restorer; original selects by current hardware/BIOS mode instead.",
+  "evidence": "docs/etc/evidence/m0-t481-s16-win31-mouse-transitions.md:263-283 records extracted actual-body ordering control: text display then hardware graphics change invokes EGA restorer, consumes save flag, leaves text cell. Existing original_mouse_restore_dispatch_test.c covers unchanged mode, graphics transition, page transition, single consumption and EGA/VGA/CGA dispatch. Current text restore uses SAS paging; EGA restore writes plane buffers, so selection mismatch is a real owner/representation error.",
+  "necessity": "All four real painters set saved_cursor_kind when marking the save area valid; reset clears validity. The switch calls the corresponding original restorer exactly once. Restoring the old current-mode conditional or its trailing else would break this association after mode changes.",
+  "minimum": "Keep single saved-type switch; original restorers reused. Rejected HERC #error retained. No default fallback added.",
+  "change": "Restored original HERC/NTVDM endings and CGA call with original #line5423/5424/5429; removed redundant MONITOR close. Tail net-4; paired opening R0790 net-1 separately synchronized. Whole-file measured +492/-978 -> +490/-975, net-5.",
+  "decision": "Qualified residual pending owner; partial original line restoration is not whole point restoration.",
+  "line_mapping": "Original CGA call5424, HERC ending5423, outer ending5429 restored; #error unchanged.",
+  "verification": "Pinned-original raw diff measured; producer/case ownership inspected. Final batch tests pending.",
+  "limits": [
+    "Fixture stubs graphics restorers and does not prove physical EGA writes.",
+    "Does not prove guest VDD screenshot timing; that limitation remains separate."
+  ]
+}

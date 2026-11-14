@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0751",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+  "location": "kb_setup_vectors original1922",
+  "before": {
+    "added": 1,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 1
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Original SAS read casts a table pointer to guest sys_addr;with separate host backing this confuses host pointer and guest address.",
+  "chain": "NTIO BOP5F -> kb_setup_vectors -> sas_loadw macro -> sas_w_at -> c_sas_w_at(LIN_ADDR) -> bios_read_word;direct table consumers separately dereference pkio_table.",
+  "evidence": "sas.h CPU40 sas_loadw dereferences return of sas_w_at(addr);ccpusas4.c c_sas_w_at takes LIN_ADDR and invokes bios_read_word. Original kb_setup_vectors uses pkio_table+12 for this SAS address. With host table=Start_of_M_area+guest_base,the original argument becomes host_base+guest_base+24 instead of guest_base+24. Current SAS backing is separately allocated and original CCPU API takes guest numeric addresses. Returning host pointers globally from effective_addr cannot fix both SAS and direct reads.",
+  "necessity": "Separate numeric guest address for SAS access from host pointer for direct table access. Existing phy_base variable avoids extra state/helper and preserves original word-index12.",
+  "minimum": "Keep one numeric expression;casting host pointer back after subtracting base adds unnecessary conversion and does not restore original identity-map assumption. No smaller line replacement preserves both address spaces.",
+  "change": "No source change;remaining+1/-1 pending owner.",
+  "decision": "Qualified pending owner for one-line SAS address correction.",
+  "line_mapping": "Existing relocated #line1920 maps IDLE comment1921,load1922 and following pointers1923 onward;#error unchanged.",
+  "verification": "Complete source/ABI consumer chain checked;no new runtime keyboard-table failure claimed. Final file format changes will be checked against pinned original coordinates.",
+  "limits": [
+    "This point does not prove arbitrary protected-mode pageable table direct access safe;the BOP startup table contract is the audited scope."
+  ]
+}

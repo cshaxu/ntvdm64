@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0780",
+  "location": "before5227",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "evidence": "No selected behavior depends on comment or redundant condition; actual outer branch already implies NTVDM and rejects MONITOR.",
+  "change": "Removed duplicate geometry explanation. Mirror diff-1.",
+  "line_mapping": "Original outer structure and all #error retained; original continuation #line preserved.",
+  "verification": "Source structure inspected; final batch pending."
+}

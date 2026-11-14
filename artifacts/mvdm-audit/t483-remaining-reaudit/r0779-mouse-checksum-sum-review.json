@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0779",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original3721 insertion",
+  "before": {
+    "added": 6,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 4,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -2,
+  "problem": "Compute saved state checksum to satisfy unchanged original restore validation.",
+  "chain": "INT33/16 -> mouse_save_state -> cookie/context sas_stores + checksum; INT33/17 -> mouse_restore_state -> sum same bytes and compare before restoring.",
+  "evidence": "Pinned original save initializes cs=0 and never accumulates before storing cs&0xff. Original restore recomputes cookie/context sum; therefore any nonzero sum rejects original valid save. Retained T448 witness documented in artifacts/mvdm-audit/shard-2/mouse-input-callback-state-review.md: baseline SUM26/SAVED00 fails, candidate SUM26/SAVED26 passes including invalid-cookie/checksum controls. Current integration verify-mouse-state-checksum.ps1 and independent DOS probe exercise actual INT33.",
+  "necessity": "The two loops sum exactly cookie and context bytes already written by original stores. The existing original restore dictates this additive low-byte contract. Original zero checksum fails nonzero-sum round trips.",
+  "minimum": "Retain4 loop/body lines; delete2 explanatory lines. No new helper or second restore policy.",
+  "change": "Removed2 added explanation lines; +6/-0 -> +4/-0, net-2. Repositioned existing #line3723 to3722 before original Save Cookie comment.",
+  "decision": "Qualified pending owner.",
+  "line_mapping": "Existing directive reused as #line3722 before original comment; first sas_stores stays3723. All #error retained.",
+  "verification": "Original save/restore source and historical real DOS witness inspected; current integration runner audited. Final P66 runtime pending.",
+  "limits": [
+    "Historical witness is not final candidate validation.",
+    "No claim every saved layout or concurrent mutation path covered."
+  ]
+}

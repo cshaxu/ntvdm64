@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0763",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_int2 local before original2662",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 0
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Keep returned callback condition mask local to its own activation.",
+  "chain": "mouse_update -> jump_to_user_subroutine -> virtualized master PIC EOI/biosDoInst -> nested callback -> inner mouse_int2 -> outer mouse_int2. Original save fields are per VM, not per active callback.",
+  "evidence": "docs/etc/evidence/m0-t481-s9-softpc.md:1448-1471 records outer46377 SI1f8f/BP8f90, inner46385 SI0780/BP0000, outer return46414 using inner values. Later owner-rdp-click-records.json trace summarized at1522-1533:226 paired callbacks including nested same-VM restored recorded registers. Existing actual-body regression covers original negative, nested/single/wrapped frame returns. spcmse.asm:2635 mouse_int2 executes BOP then DOIRET; caller pushes existing INT2 far return after the private saved words. c_stack.c spush/spop use GET_OPERAND_SIZE/GetStackPointer and assume prior stack checking; spush16 also changes SP by operand width, so neither is a drop-in fixed-word callback-frame primitive.",
+  "necessity": "Original last_condition_mask is one per-VM save slot overwritten by observed same-VM nesting. Each callback pushes its own mask; return needs a local value until original draw predicate consumes it. This is not another persistent owner or VM table.",
+  "minimum": "One existing MOUSE_CALL_MASK local; retain pending owner. Reuse old #line2671 from excluded body at #line2662 after new local; unchanged directive count and correct original error line2671.",
+  "change": "Retained one local declaration; relocated existing line directive, no mirror size growth.",
+  "decision": "Qualified pending owner; callback mask storage local to restored frame.",
+  "line_mapping": "Pinned original mouse_int2 begins2660, brace2661, comment2662, trace2668, #ifndef2670, rejected body2671, endif2672. Relocated existing directive to2662; kept #line2673. No #error removed.",
+  "verification": "Original source coordinates and observed nesting evidence inspected. Final batch build/runtime checks pending.",
+  "limits": [
+    "Previous trace does not prove every reported Win95 crash had this cause.",
+    "Existing fixture uses stubbed translation and cannot establish all paging/reentry fault behavior."
+  ]
+}

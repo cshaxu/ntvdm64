@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0750",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+  "before": {
+    "added": 9,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 2,
+    "deleted": 1
+  },
+  "mirror_diff_delta": -7,
+  "problem": "kb_setup_vectors must dereference guest table from original CCPU SAS backing,not reinterpret its numeric guest address as host pointer.",
+  "chain": "NTIO BOP5F -> MS_bop_F -> kb_setup_vectors;actual keybd_io compile enables MONITOR,which dereferences pkio_table;CCPU ccpusas4 sas_init obtains non-null Start_of_M_area from host_sas_init. effective_addr callers pass its numeric results into SAS.",
+  "evidence": "Pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c original kb_setup_vectors casts effective_addr to pointer,then casts pkio_table+12 back to sys_addr for SAS. Same original function uses Start_of_M_area for idle-variable pointers. Original CCPU cpu4gen.h declares effective_addr IU32;provided original tree has only c_effective_addr declarations,not its implementation. Current selected SAS owns a distinct host backing pointer (ccpusas4.c345),not identity mapping. Removing base addition would make selected MONITOR table dereferences use guest numeric addresses;changing global return to host pointer breaks SAS consumers,not a valid restoration.",
+  "necessity": "Read original guest-provided table using existing backing allocation. Two statements retain numeric address separately for SAS and form host pointer for direct table reads. This is address-space conversion,not new keyboard behavior.",
+  "minimum": "Remove seven-line explanation,keep two statements;move existing #line1923 anchor to #line1920 before original comment/SAS read so original following coordinates remain correct. No new shim.",
+  "decision": "Minimized +2/-1 residual pending owner. R0751 and R0752 remain separately to review.",
+  "verification": "Source/ABI and selected build entry inspected;P65 external-memory sharing pass is corroborating historical backing evidence,not a fresh keyboard-vector runtime test. No functional statement changed in R0750.",
+  "limits": [
+    "No runtime fault was injected for original low-pointer dereference.",
+    "Original absent CCPU address provider is not assumed equivalent to modern adapter;boundary is established from original SAS consumers and selected memory ownership."
+  ]
+}

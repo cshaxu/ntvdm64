@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0796",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5502",
+  "before": {
+    "added": 1,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 1
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Saved text background needs its actual guest linear address and painter type across mode/page changes.",
+  "chain": "software_text_cursor_display computes B8000+VID_ADDR+cell -> SAS loads background -> saves address/type -> SAS paints; cursor_undisplay dispatches saved kind -> text restorer SAS-writes saved linear address.",
+  "evidence": "Current restore-dispatch fixture changes video_offset4000 after painting and verifies old slot restored/new slot untouched. T481 S16 actual-body negative witness records old implementation restoring a different page when VID_ADDR changes. Current text-address/position computation depends on current video registers/grid, which may differ at erase. SAS path remains paging-aware (ccpusas4 bios_write_word), unlike raw plane access.",
+  "necessity": "Address/type are provenance of existing per-VM save area, not a second current-mode cache. Recomputing from current registers fails demonstrated page/representation transition. Must record before save validity is asserted.",
+  "minimum": "Retain single changed line pending owner. Splitting original read and added metadata requires a compensating #line and gives no smaller difference; no source reformatting performed.",
+  "change": "No change at R0796; +1/-1 retained.",
+  "decision": "Qualified residual pending owner.",
+  "line_mapping": "Original one-line read replaced with one line; logical5502 and following original coordinates preserved.",
+  "verification": "Existing actual-body fixture and retained negative evidence inspected; final P66 tests pending.",
+  "limits": [
+    "Fixture stubs graphics restorers and does not prove physical EGA writes.",
+    "Does not prove guest VDD screenshot timing; that limitation remains separate."
+  ]
+}

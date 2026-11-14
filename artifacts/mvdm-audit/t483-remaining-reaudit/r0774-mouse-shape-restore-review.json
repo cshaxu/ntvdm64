@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0774",
+  "location": "before3310",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "evidence": "Original outer structure retained; project-only explanation/wrapper removed.",
+  "change": "Removed added shape explanation.",
+  "line_mapping": "Existing #line3310/3371/3372 retained; #error unchanged.",
+  "verification": "Source structure inspected; final batch pending."
+}

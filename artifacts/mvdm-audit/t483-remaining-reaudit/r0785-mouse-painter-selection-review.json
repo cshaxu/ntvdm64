@@ -1,0 +1,28 @@
+{
+  "point": "T483-R0785",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "cursor_display original5251",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 2,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "problem": "Select original software painter for KVM Window.",
+  "chain": "INT33/IRQ/route change -> cursor_display -> original text/EGA/VGA/CGA painter -> host_flush_screen.",
+  "evidence": "Original NTVDM excludes this entire painter. Selected nt_mouse.c host cursor display/undisplay functions are empty; direct C renderer needed for KVM frame. Real T481 S16 cursor scene and rendering witnesses establish this boundary. Top-level MONITOR #error makes nested !MONITOR redundant.",
+  "necessity": "Retain original painter via #else, not a second implementation. Redundant guard has no supported alternate context.",
+  "minimum": "Retain original #ifndef, rejected #error and #else; remove redundant project-added !MONITOR wrapper and matching endif, restore original ending comment. No new state or shim.",
+  "change": "Removed redundant !MONITOR, +3/-0 -> +2/-0, net-1. Also removed superseded #line4791 immediately preceding #line5251 (line-only delta-1 counted separately).",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Kept #line5251; deleted immediately overridden stale #line4791. Remaining original anchors/#error retained.",
+  "verification": "Source/selected compilation review; final batch pending.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ],
+  "line_only_mirror_delta": -1
+}

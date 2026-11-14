@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0807",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original6627 insertion",
+  "before": {
+    "added": 8,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 3,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -5,
+  "problem": "Enter the registered callback at its exact entry, not two bytes before it.",
+  "chain": "CCPU c_main.c C4 BOP decoding performs UPDATE_INTEL_IP before dispatch -> mouse_update/jump_to_user_subroutine sets callback CS:IP -> decoder resumes at live IP. host_def.h defines HOST_BOP_IP_FUDGE=-2.",
+  "evidence": "c_main.c original3324 UPDATE_INTEL_IP precedes EDL_fast_bop/bop dispatch; the D6 BOP case likewise updates before bop and invalidates its host IP cache afterward. The callback offset is supplied by INT33 registration, not an address after a BOP. Restoring offset+HOST_BOP_IP_FUDGE therefore begins at offset-2. This source contract suffices independently of the old EDIT-byte comment, whose fresh runtime trace has not been reproduced here.",
+  "necessity": "Keep setIP(offset) for the reached CCPU callback. Original BOP return adjustment has a different entry contract. No new trampoline, guest edit or second executor is needed.",
+  "minimum": "Retain exact-entry assignment and existing excluded #error branch; remove redundant explanatory prose. Existing selected CPU40 conditional remains subject to whole-file structure check.",
+  "change": "Mirror diff net-5; removed redundant explanation where applicable; no behavior change.",
+  "decision": "Qualified residual pending owner. Removed comment content does not mean whole point restored.",
+  "line_mapping": "Original setCS remains mapped6624; selected setIP now mapped6628, not6626. CPU30 and non-CPU40 #error bodies unchanged.",
+  "verification": "Source and retained evidence reviewed; final P66 callback/control tests and full package gates pending.",
+  "limits": [
+    "No fresh instruction trace or runtime pass is claimed."
+  ]
+}

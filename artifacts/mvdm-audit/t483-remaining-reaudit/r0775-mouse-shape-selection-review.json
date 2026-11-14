@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0775",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original3310-3371",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 2,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "problem": "Retain original software cursor hotspot and masks for KVM painter.",
+  "chain": "INT33/9 -> mouse_set_graphics -> original guest mask SAS reads -> graphics_cursor per-VM hotspot/masks -> software painter.",
+  "evidence": "nt_reset.c:203 binds working_mouse_funcs to the_mouse_funcs; nt_mouse.c table set_graphics slot is dummy, whose body321-323 is empty. Original NTVDM exclusion removes C mask loading, and the NT host provider cannot replace it. Selected CCPU ROM delegates INT33 to C. MONITOR is already rejected at file top.",
+  "necessity": "Original C mask owner is needed; retain #else reuse, remove redundant !MONITOR guard.",
+  "minimum": "Retain original #ifndef, rejected #error and #else; remove redundant project-added !MONITOR wrapper and matching endif, restore original ending comment. No new state or shim.",
+  "change": "Removed redundant guard: +3/-0 -> +2/-0, net-1. Corrected stale #line2936 to3311 without adding directives.",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Original3311 continuation fixed; original3371 ending restored with R0777; all #error retained.",
+  "verification": "Actual selected provider and state writes read; no new runtime result.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

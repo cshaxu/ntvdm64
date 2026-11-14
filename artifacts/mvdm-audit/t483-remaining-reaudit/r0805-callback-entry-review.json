@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0805",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original6609 insertion",
+  "before": {
+    "added": 12,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 11,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "problem": "Preserve independent callback register frames across proven same-VM nested callbacks.",
+  "chain": "mouse_update -> jump_to_user_subroutine pushes saved words then original far INT2 return -> guest callback RETF -> mouse_int2 pops words -> original guest IRET.",
+  "evidence": "R0762 records actual outer46377 SI1f8f/BP8f90, inner46385 SI0780/BP0000 and outer46414 incorrectly returning inner values. Original single per-VM saved_* fields cannot hold both invocations. This producer is paired with the already-reviewed LIFO mouse_int2 consumer.",
+  "necessity": "Ten word pushes store nine registers and condition mask with naturally nested lifetime; single saved_* fields demonstrably fail.",
+  "minimum": "Ten fixed-word helper calls; no extra explanatory comment; original line6609 restored.",
+  "change": "Mirror diff net-1; removed redundant explanation where applicable; no behavior change.",
+  "decision": "Qualified residual pending owner. Removed comment content does not mean whole point restored.",
+  "line_mapping": "#line6609 restores original far-return setup.",
+  "verification": "Source and retained evidence reviewed; final P66 callback/control tests and full package gates pending.",
+  "limits": [
+    "No fresh instruction trace or runtime pass is claimed."
+  ]
+}

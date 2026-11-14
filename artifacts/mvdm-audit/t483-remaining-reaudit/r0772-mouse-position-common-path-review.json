@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0772",
+  "location": "original3053",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -3,
+  "evidence": "Original point_set and common host setter now execute once for both routes. nt_mouse.c:357 setter only writes newF4x/newF4y/bFunctionFour/reset flag, never reads mouse_io cursor_status, paints or reenters. Window then sets cursor_position to same requested coordinates and cursor_update writes/clamps status before painting. Console path unchanged.",
+  "change": "Restored absence of opening route branch and its two comments; paired R0773 replaces unconditional return with route-dependent return. Mirror diff-3.",
+  "line_mapping": "Existing #line3054/3067/3078 retained; #error unchanged.",
+  "verification": "Source provider and ordered state writes inspected; substantive change requires final whole-file batch build/test/publication."
+}

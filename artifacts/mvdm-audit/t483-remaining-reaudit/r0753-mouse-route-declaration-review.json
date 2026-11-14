@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0753",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "107; consumers 2846,5017,5056",
+  "before": {
+    "added": 1,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 0
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Declare the bounded frontend route query used by position and software cursor owners.",
+  "chain": "NTCON window_mouse.c ENTER/LEAVE -> mvdm_softpc_mouse_submit -> CPU mvdm_softpc_mouse_apply/next -> bridge.active -> ICA-locked mvdm_softpc_mouse_route_active -> mouse_io set_position/cursor_update/cursor_display.",
+  "evidence": "Pinned OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c mouse_io.c:5225-5254 excludes cursor_update/display bodies under NTVDM. Current selected host_show_pointer/host_hide_pointer have only excluded X86GFX bodies (nt_mouse.c:1361-1385); they cannot supply the KVM Window software painter. window_mouse.c:28,40,70 emits route transitions; bridge.c:87 commits active on consumed ENTER; guest.c:64-70 retires consumed LEAVE and notifies original cursor owner. The public bridge header declares BOOL mvdm_softpc_mouse_route_active(void); this mirror has three real consumers and no other declaration. Removing only the include leaves implicit declarations, not restored original behavior. This is source/ABI evidence, not a newly run failure control.",
+  "necessity": "Responsibility: distinguish host Console pointer from KVM Window guest painter. Original NTVDM cursor bodies do not supply that frontend boundary. Exact diff: one include provides the typed route-query contract; independent need of each later body remains subject to its own ordered review.",
+  "minimum": "Retain one include. A duplicate local extern is also one line and duplicates ABI ownership; no demonstrated smaller correct declaration. Do not move painter logic to a shim merely to hide mirror differences.",
+  "change": "No source change at R0753; one-line explicit boundary dependency retained pending owner decision.",
+  "decision": "Qualified pending owner decision; not owner-approved. No blanket approval of later mouse adaptations.",
+  "line_mapping": "Existing #line110 resumes original structure after added include; no #error or #line changed.",
+  "verification": "Read pinned original and current production call/definition paths. Existing focused tests of route state are leads only; no new runtime test or compile claimed.",
+  "limits": [
+    "Exact body minimization remains for its own point; declaration necessity will be revisited if those callers are removed in this file.",
+    "No inference that original NT mouse implementation was defective; modern KVM frontend is a different host boundary."
+  ]
+}

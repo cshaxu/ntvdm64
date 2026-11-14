@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0795",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_pointer_route_changed before original5435",
+  "before": {
+    "added": 11,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 7,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -4,
+  "problem": "Frontend ownership transitions need immediate original redraw/erase without fabricated motion callbacks.",
+  "chain": "bios.c v_mouse_int1 executes SWAP_INSTANCE -> mouse_int1 -> host_os_mouse_pointer -> mvdm_softpc_mouse_apply -> mouse_pointer_route_changed. Repository search finds no other production callers of apply or route callback.",
+  "evidence": "bios.c:88 selects instance before mouse_int1. mouse_io.c passes current per-VM status/counter to host provider; nt_mouse.c:437 is only apply caller. guest.c consumes ENTER/LEAVE and invokes route callback after position/route commit. Thus added comment claiming route changes bypass mouse BOP is false for actual production chain. Switching instance again is redundant with entry owner and cannot establish a different valid owner than the already supplied status.",
+  "necessity": "Retain small edge callback to invoke original static cursor operations: ENTER is allowed with zero displacement and must redraw; LEAVE must erase even without POSITION bit. A fabricated IRQ motion or alternate rendering implementation is unnecessary. Extra instance selection has no separately evidenced responsibility.",
+  "minimum": "Remove3 explanation lines and redundant virtual_swap_instance. Keep original cursor_update/display/undisplay calls and original show-count guard. No new persistent state or public renderer API.",
+  "change": "Deleted3 comment lines plus repeated selector; historical +11/-0 becomes +7/-0, mirror diff-4.",
+  "decision": "Reduced edge callback remains pending owner; obsolete ownership assertion removed.",
+  "line_mapping": "Existing #line5435 pins original following function; all #error retained.",
+  "verification": "Complete production caller search and original BOP owner inspected. Actual final-code route/instance tests required at whole-file batch; not yet run.",
+  "limits": [
+    "Focused guest input fixture stubs route callback; it does not alone validate this removed selector.",
+    "No claim to generic callback ownership outside the selected producer chain."
+  ]
+}

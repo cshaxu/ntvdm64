@@ -120,10 +120,8 @@ FORWARD void   MouseReattachMenuItem(HANDLE);
 FORWARD void   ResetMouseOnBlock(void);
 FORWARD void   ScaleToWindowedVirtualCoordinates(IS16 *,IS16 *,MOUSE_VECTOR *);
 FORWARD void   host_m2p_ratio(word *,word *,word *,word *);
-/* DIVERGENCE(MVDM-HOST-DIV-058): keep the actual MOUSE_SCALAR pointer
- * contract shared with mouse_io.c; width, order and behavior are unchanged. */
-FORWARD void   host_x_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
-FORWARD void   host_y_range(word *,word *,MOUSE_SCALAR *,MOUSE_SCALAR *);
+FORWARD void   host_x_range(word *,word *,word *,word *);
+FORWARD void   host_y_range(word *,word *,word *,word *);
 #line 121
 FORWARD void   EmulateCoordinates(half_word,IS16,IS16,IS16 *,IS16 *);
 FORWARD void   AssembleCallMask(MOUSE_CALL_MASK *);
@@ -1919,7 +1917,7 @@ void FullscTextPtr(int x,int y)
 // in X as requested by the application through int 33h function 7.
 //==============================================================================
 
-void host_x_range(word *blah, word *blah2, MOUSE_SCALAR *CX, MOUSE_SCALAR *DX)
+void host_x_range(word *blah, word *blah2,word *CX,word *DX)
 {
 confine.bF7 = TRUE;
 confine.xmin = *CX;
@@ -1937,7 +1935,7 @@ confine.xmax = *DX;
 // in Y as requested by the application through int 33h function 8.
 //==============================================================================
 
-void host_y_range(word *blah, word *blah2, MOUSE_SCALAR *CX, MOUSE_SCALAR *DX)
+void host_y_range(word *blah, word *blah2,word *CX,word *DX)
 {
 confine.bF8 = TRUE;
 confine.ymin = *CX;

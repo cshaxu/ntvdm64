@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0803",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5907",
+  "before": {
+    "added": 1,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 1
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Erase saved VGA background by its actual representation.",
+  "chain": "VGA_graphics_cursor_display saves vga_background byte array populated from EGA_planes and sets save_area_in_use -> cursor_undisplay selects saved_cursor_kind -> VGA_graphics_cursor_undisplay.",
+  "evidence": "R0790 saved-owner audit and original_mouse_restore_dispatch_test.c establish saved/current representation mismatch. The VGA producer uses vga_background byte array populated from EGA_planes; erasing by the later display mode may choose a different buffer/layout. Its matching saved-kind assignment is required by the already-audited dispatcher.",
+  "necessity": "Keep the one type assignment where the save becomes valid; no alternative background owner.",
+  "minimum": "One same-line saved kind assignment, pending owner.",
+  "change": "No source change; necessary residual pending owner.",
+  "decision": "Qualified residual pending owner.",
+  "line_mapping": "Same-line assignment preserves physical lines; no #error changed. Whole-file original-coordinate check remains pending.",
+  "verification": "Source and existing fixture assertions inspected. P66 final-code execution remains pending until whole file is complete.",
+  "limits": [
+    "This is source/control-flow evidence; no new full guest regression pass is claimed."
+  ]
+}

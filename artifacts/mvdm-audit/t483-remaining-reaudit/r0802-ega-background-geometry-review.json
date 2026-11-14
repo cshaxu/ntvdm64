@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0802",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5787 insertion",
+  "before": {
+    "added": 6,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 4,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -2,
+  "problem": "Restore temporary scaled coordinates on off-screen/exclusion paths, not only after drawing.",
+  "chain": "EGA_graphics_cursor_display scales y/bottom by19/8 before area intersection -> rejected screen/exclusion branch -> original cleanup inside rejected branch is skipped -> next call scales already-scaled coordinates.",
+  "evidence": "Original cleanup is structurally inside the intersection/exclusion branch, while scale occurs before it. With y100/bottom200 and x700 outside width640, the old path leaves y237/bottom475 instead of100/200; repeated calls compound the distortion. Existing original_mouse_ega_restore_test.c asserts seven outside calls plus exclusion and drawn controls. This defect does not require the separate mode-change fixture or hypothetical concurrency.",
+  "necessity": "The cleanup must postdominate the scale operation even when no pixels are drawn. Restoring the original placement demonstrably violates that pairing.",
+  "minimum": "Keep the four-line cleanup outside the clipping branch; remove the two added explanatory comment lines. No new helper or second path.",
+  "change": "Removed two comment lines; residual +6/-0 becomes +4/-0; mirror diff net-2.",
+  "decision": "Qualified residual pending owner.",
+  "line_mapping": "No #error changed. Existing #line5787 after the relocated cleanup preserves following original lines; whole-file line review pending.",
+  "verification": "Source and existing fixture assertions inspected. P66 final-code execution remains pending until whole file is complete.",
+  "limits": [
+    "This is source/control-flow evidence; no new full guest regression pass is claimed."
+  ]
+}

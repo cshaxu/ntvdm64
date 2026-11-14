@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0781",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "cursor_update original5228",
+  "before": {
+    "added": 6,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 3,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -3,
+  "problem": "Use original software geometry only on KVM Window route.",
+  "chain": "INT33 position/range -> cursor_update -> cursor_window clip, position copy, grid coercion -> painter.",
+  "evidence": "Original NTVDM excludes geometry body. Window consumes software cursor_status position; Console has host absolute pointer provider and must retain original no-op here. Outer #ifndef NTVDM/#else already proves NTVDM; file-top MONITOR #error rejects other mode. Nested ifdefs have no additional supported selection. Historical7-line anchor includes blank; six actual added non-line directives/statements reduce to three.",
+  "necessity": "Retain original geometry plus one route guard; no need for two nested configuration guards.",
+  "minimum": "Keep #error/#else and runtime route return, remove3 redundant preprocessor lines; paired closing R0783 also removed.",
+  "change": "Added content +6/-0 -> +3/-0, net-3; corrected/repositioned stale #line4764 to5228 after runtime guard.",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Original comment starts5228; original point_coerce_to_area still5234; #error untouched.",
+  "verification": "Actual caller/provider and compilation exclusions inspected. Whole-file batch not yet built.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

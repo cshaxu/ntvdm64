@@ -1,0 +1,17 @@
+{
+  "point": "T483-R0788",
+  "location": "original5343",
+  "before": {
+    "added": 2,
+    "deleted": 1
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -3,
+  "evidence": "Original outer condition retained; redundant project guard removed.",
+  "change": "Restored original #endif /* !NTVDM */; historical count included empty line.",
+  "line_mapping": "Original #line5250/5343/5344 preserved; #error unchanged.",
+  "verification": "Source structure review; final batch pending."
+}

@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0764",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_int2 original2674-2682",
+  "before": {
+    "added": 10,
+    "deleted": 9
+  },
+  "remaining": {
+    "added": 10,
+    "deleted": 9
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Restore the current callback frame rather than overwritten per-VM saved words.",
+  "chain": "mouse_update -> jump_to_user_subroutine -> virtualized master PIC EOI/biosDoInst -> nested callback -> inner mouse_int2 -> outer mouse_int2. Original save fields are per VM, not per active callback.",
+  "evidence": "docs/etc/evidence/m0-t481-s9-softpc.md:1448-1471 records outer46377 SI1f8f/BP8f90, inner46385 SI0780/BP0000, outer return46414 using inner values. Later owner-rdp-click-records.json trace summarized at1522-1533:226 paired callbacks including nested same-VM restored recorded registers. Existing actual-body regression covers original negative, nested/single/wrapped frame returns. spcmse.asm:2635 mouse_int2 executes BOP then DOIRET; caller pushes existing INT2 far return after the private saved words. c_stack.c spush/spop use GET_OPERAND_SIZE/GetStackPointer and assume prior stack checking; spush16 also changes SP by operand width, so neither is a drop-in fixed-word callback-frame primitive.",
+  "necessity": "Observed nested same-VM callback corrupts shared saved registers. Current reverse order pops condition,DS,BP,ES,DI,SI,DX,CX,BX,AX matching jump_to_user_subroutine pushes AX..DS,condition before far-return address. Guest RETF consumes return address before BOP INT2; remaining20 bytes are restored here.",
+  "minimum": "Retain ten reads replacing nine shared reads. Original accessors/one short helper avoid a new state machine. A loop would need register indexing/table or dispatch and obscure fixed ABI, not remove necessary work.",
+  "change": "No statement change; relocated existing #line2692 to #line2683 immediately after ten restores. Mirror size unchanged.",
+  "decision": "Qualified pending owner; cannot independently restore shared save reads.",
+  "line_mapping": "New restore block ends with setAX; relocated #line2683 restores original blank/comment/condition coordinates. Existing #line2695 still restores excluded MOUSE_16_BIT ending; #error untouched.",
+  "verification": "Paired push/pop and immutable guest RETF/BOP/IRET chain checked; retained negative/positive nesting test evidence only. Final P66 test pending.",
+  "limits": [
+    "Previous trace does not prove every reported Win95 crash had this cause.",
+    "Existing fixture uses stubbed translation and cannot establish all paging/reentry fault behavior."
+  ]
+}

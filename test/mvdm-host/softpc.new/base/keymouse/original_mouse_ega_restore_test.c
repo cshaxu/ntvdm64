@@ -36,9 +36,11 @@ static void area_coerce_to_area(MOUSE_AREA*a,const MOUSE_AREA*b){if(a->top_left.
 static int area_depth(const MOUSE_AREA*a){return a->bottom_right.y-a->top_left.y;}
 static int area_width(const MOUSE_AREA*a){return a->bottom_right.x-a->top_left.x;}
 static unsigned ega_point_as_graphics_cell_address(const point*p){(void)p;return 0;}
-static void mark_string(unsigned a,unsigned b){(void)a;(void)b;if(change_mode_during_draw)jap_mouse=0;}
+static void mark_string(unsigned a,unsigned b){(void)a;(void)b;}
 static struct {void(*mark_string)(unsigned,unsigned);} update_alg={mark_string};
-static unsigned sas_hw_at(unsigned a){(void)a;return 3;}
+/* Production SAS may reenter guest via bios_read_byte -> biosDoInst.
+ * This models that boundary, not a mode-changing dirty callback. */
+static unsigned sas_hw_at(unsigned a){(void)a;if(change_mode_during_draw)jap_mouse=0;return 3;}
 static unsigned get_bytes_per_line(void){return 1;}
 static unsigned get_actual_offset_per_line(void){return 1;}
 #include "original_mouse_ega_restore.h"

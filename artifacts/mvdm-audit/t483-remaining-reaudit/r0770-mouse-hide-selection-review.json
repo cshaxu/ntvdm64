@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0770",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "mouse_hide_cursor original2996-3006",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 2,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "problem": "INT33 hide must decrement the same original C cursor count and erase the displayed cursor.",
+  "chain": "ROM INT33 BOP BD -> C dispatcher mouse_function[2] -> mouse_hide_cursor -> cursor_flag-- and cursor_undisplay.",
+  "evidence": "ROM entry only dispatches BOP then IRET, no guest show-count update. mouse_io.h default=-1/displayed=0. Current mouse_io writes show count at initialization/reset and this increment; original NTVDM exclusion removes the increment. Unlike original x86 spcmse guest implementation, selected ROM delegates to C. Top-level MONITOR already #errors; redundant guard has no supported selected-false case.",
+  "necessity": "Without hide decrement, the paired show count remains displayed and cursor background is not restored. Original ROM delegates this function to C. Preserve original count and eraser, not a new host visibility state.",
+  "minimum": "Retain original #ifndef, rejected #error and #else; remove redundant project-added !MONITOR wrapper and matching endif, restore original ending comment. No new state or shim.",
+  "change": "Removed redundant !MONITOR; +3/-0 becomes +2/-0, net-1. Paired extra ending removed at R0771.",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Original #ifndef and #line2996/2997/3006/3007 remain; all #error retained.",
+  "verification": "ROM/C dispatch and counter writes inspected. Final batch pending.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

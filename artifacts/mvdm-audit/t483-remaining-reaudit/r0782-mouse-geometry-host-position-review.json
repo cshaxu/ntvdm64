@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0782",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "original5238-5240",
+  "before": {
+    "added": 3,
+    "deleted": 3
+  },
+  "remaining": {
+    "added": 3,
+    "deleted": 3
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Original generic host-mouse position conversion is not the NT counter setter contract.",
+  "chain": "cursor_update -> original host_mouse_in_use -> host_mouse_set_position(scaled coords) would enter nt_mouse newF4 setters -> EmulateCoordinates bFunctionFour assigns those values as absolute pixels.",
+  "evidence": "mouse_io.h host setter uses working_mouse_funcs; nt_reset binds NT table. nt_mouse.c mouse_in_use is true for installed graphics modes; setter357 writes newF4x/y verbatim. EmulateCoordinates bFunctionFour at1613-1614 assigns those to internalX/Y, not inverse-scaled values. Original generic call multiplies mouse_gear*mouse_sens/800 and thus changes coordinates when factor is not1. INT33/4 already invokes NT setter once with guest absolute coords. Reintroducing generic call would overwrite them with a different unit.",
+  "necessity": "Must not apply generic host conversion to NT absolute-coordinate setter. Existing excluded branch retains original C geometry without that wrong-unit call.",
+  "minimum": "Retain #ifndef/#error/#endif under owner exclusion-preservation rule; no second position provider. +3/-3 pending owner.",
+  "change": "No change at R0782.",
+  "decision": "Qualified pending owner; provider-unit mismatch proved from actual consumer, not only current adaptation dependency.",
+  "line_mapping": "Existing original geometry and closing #line preserved; #error unchanged.",
+  "verification": "Actual caller/provider and compilation exclusions inspected. Whole-file batch not yet built.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}

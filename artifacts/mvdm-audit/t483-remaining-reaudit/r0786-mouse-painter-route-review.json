@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0786",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "location": "after original5251 declaration",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -2,
+  "problem": "Do not paint software cursor on host Console route.",
+  "chain": "INT33/IRQ/route change -> cursor_display -> original text/EGA/VGA/CGA painter -> host_flush_screen.",
+  "evidence": "Original NTVDM excludes this entire painter. Selected nt_mouse.c host cursor display/undisplay functions are empty; direct C renderer needed for KVM frame. Real T481 S16 cursor scene and rendering witnesses establish this boundary. Top-level MONITOR #error makes nested !MONITOR redundant.",
+  "necessity": "Consumed ENTER/LEAVE controls ownership; inactive Console route has its own host pointer. One runtime guard prevents a second guest software pointer. The enclosing #ifndef/#else already establishes NTVDM, so inner ifdef is redundant.",
+  "minimum": "One runtime return retained; remove two redundant preprocessor lines.",
+  "change": "Removed inner #ifdef NTVDM/#endif; +3/-0 -> +1/-0, net-2.",
+  "decision": "Remaining draw selection pending owner; guard reduction authorized.",
+  "line_mapping": "Existing #line5254 retained; no #error removed.",
+  "verification": "Source/selected compilation review; final batch pending.",
+  "limits": [
+    "Historical scene establishes software painting need, not a fresh regression pass.",
+    "R0761 paired closing changed with this point; separate register accounting follows."
+  ]
+}
