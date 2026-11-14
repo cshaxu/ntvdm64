@@ -1,0 +1,274 @@
+{
+  "status": "cached full build,publish11x2,Full19 and governance passed;Git delivery accompanies record",
+  "source_files": 4,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "sha256": "aa57ec5d0d77585bc0fbce0235b9f4cd9cb2ca8d2f21682d0680497db6b27f99"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/nt_thread_alert_compat.c",
+      "sha256": "b428654bfd44abc6458c854f81693f5a2a3ed8652d0aa3496e9fd54607fac95b"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/nt_thread_alert_compat.h",
+      "sha256": "034546edbede056e5dd58a38a5aef2ba7a468687e1c63f63452b84e4714e621f"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c",
+      "sha256": "ffa4fc6648a25d249106843dc122d49099756b95d876bb5589e2a8040a35655a"
+    }
+  ],
+  "mirror_diff_delta": -13,
+  "publication": {
+    "status": "published",
+    "package": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "tests": {
+    "Suite": "Full",
+    "ElapsedMs": 426314,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6007,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1616,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 22337,
+        "CleanupMs": 399,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 19855,
+        "CleanupMs": 417,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 12117,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 198,
+        "CleanupMs": 418,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65640,
+        "CleanupMs": 348,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47472,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45303,
+        "CleanupMs": 421,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15295,
+        "CleanupMs": 351,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10225,
+        "CleanupMs": 453,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 62557,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12846,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28554,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30855,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5070,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8334,
+        "CleanupMs": 457,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9816,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 5455,
+        "CleanupMs": 444,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7434,
+        "CleanupMs": 396,
+        "Passed": true
+      }
+    ]
+  },
+  "manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "7CE70AE5A36D805EFBE1DBF4F1B4DC22647D656D6E498DBAE4D159275D73EFF8",
+      "Machine": 332,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "13A7BE8CDBB25833ACDC61D32C0969946D658AC7F803074F331C26B8CCCDA4C1"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "7CA78B1E77363002BA7952471854FC2A8AF954C69C2A84A14E2EFF5B3A126C34",
+      "Machine": 34404,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "194477B9BEBC71D481733637F0BCD437655A72D302C272091911B8BE86E5B74A"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "A113F77872C40A6E9B52024C32EC92A4F63FA34A001220EBE31BABC852EB28D5",
+      "Machine": 34404,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "184F13D456AFBB83103B939ADBF8EA4C29EC93AA40C32474069F2228EA8540BD"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "832BBA621EE8382E10AD31EC932A85FBAAD6E803F89E60A332F141D7081278BF",
+      "Machine": 34404,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "13B5FF3E3B7CF966933BF744E686656E0D3F3E8B116A44ACF856268DA058337E"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "0C815DC2D51767560AA06D3BFFB54A4DA4AA76D21EB23E46CDBCEAF5957DCCEB",
+      "Machine": 332,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "B21D835C7A5E9DFFA0527BF81EF4CFEA8E098661D02E8762378DD84B16931653"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "49409F8CBD7260DE828CC5CED45A071DF372BD0D1A652F6D4EFEDC94A46928D5",
+      "Machine": 34404,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "3617A6BB99737B5C5FA83B7FA02FFC22874D4CFF9DFD267BF572DC07C5730802"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "E8D5A40E2CEF04E3F07B968E3CE4FEFE4F0ADE3C0407C44D710E199C35C1E015",
+      "Machine": 34404,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "64B41A651233DF3D9B635A94E8B37B97E1F06FD0C3A30F89B1A5C4CEF3C208AA",
+      "Machine": 332,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "5AB7126E7D0294719813365D4F0C5D988C459E57C3C2974E3FE25104B4B4CB6C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "01AE139D742CB716582E9145DC5FAD8607E88987EFD2290114B37CC829B8BE76",
+      "Machine": 332,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "16F84DEB76D13C0685000D63FC3A6F04CF60CD6EE96CC7F8997B8E6EF3E08416"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "8211B237DE678DDCE13FEDC10204721ABCC46120D39DCFA0D08F241B88A40ED1",
+      "Machine": 332,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "67200B31F2CF5DA83367209291C1CA255C8775CA7CCF09B47D0DAC1E828ECA46"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "0E3BEDDFFF5C3EE29CA3E6C3BD79FE72C8620CF276BCB691D3ECEE261E35767D",
+      "Machine": 34404,
+      "PackageId": "d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "build_process": {
+    "script": "run-build.ps1",
+    "start": "2026-11-14T08:02:34.1017936-08:00",
+    "pid": 35296
+  },
+  "pipeline_process": {
+    "pid": 34524,
+    "start": "2026-11-14T08:05:17.0375462-08:00",
+    "script": "pipeline.ps1"
+  },
+  "focused_process": {
+    "pid": 12876,
+    "start": "2026-11-14T08:05:01.8608629-08:00",
+    "script": "focused.ps1"
+  },
+  "focused_result": "Generated T310 S8 P2 heartbeat graph: O:\\repos.hobby\\ntvdm64\\build\\M0-T310\\S8\\p2-heartbeat\\x86\nninja: Entering directory `build/M0-T310/S8/p2-heartbeat/x86'\n[1/3] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p2-heartbeat/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/4-mvdm_softpc_event_thread.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c\n[2/3] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p2-heartbeat/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/7-softpc_event_thread_shutdown_fixture.obj O:/repos.hobby/ntvdm64/test/adapter-mvdm-host-out/softpc/softpc_event_thread_shutdown_fixture.c\n[3/3] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p2-heartbeat/x86/msvc-mt.cmd link.exe /nologo /out:softpc-event-thread-shutdown-fixture.exe obj/3-nt_thread_alert_compat.obj obj/4-mvdm_softpc_event_thread.obj obj/7-softpc_event_thread_shutdown_fixture.obj kernel32.lib\nPASS native alert and event shutdown: x86\nGenerated T310 S8 P2 heartbeat graph: O:\\repos.hobby\\ntvdm64\\build\\M0-T310\\S8\\p2-heartbeat\\x64\nninja: Entering directory `build/M0-T310/S8/p2-heartbeat/x64'\n[1/3] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p2-heartbeat/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/7-softpc_event_thread_shutdown_fixture.obj O:/repos.hobby/ntvdm64/test/adapter-mvdm-host-out/softpc/softpc_event_thread_shutdown_fixture.c\n[2/3] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p2-heartbeat/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/4-mvdm_softpc_event_thread.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c\n[3/3] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p2-heartbeat/x64/msvc-mt.cmd link.exe /nologo /out:softpc-event-thread-shutdown-fixture.exe obj/3-nt_thread_alert_compat.obj obj/4-mvdm_softpc_event_thread.obj obj/7-softpc_event_thread_shutdown_fixture.obj kernel32.lib\nPASS native alert and event shutdown: x64\n",
+  "commands": {
+    "cached-x86.cmd": "@echo off\ncd /d O:\\repos.hobby\\ntvdm64\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\nif errorlevel 1 exit /b %errorlevel%\ncmake --preset msvc-x86-release-ccache -DNTVDM_POWERSHELL:FILEPATH=\"C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe\"\nif errorlevel 1 exit /b 1\ncmake --build --preset msvc-x86-release-ccache\nif errorlevel 1 exit /b %errorlevel%\nninja -C build\\.ninja\\msvc-x86-release\\worker ntvdm.exe VCDEX.DLL VDMREDIR.dll nthook32.dll ntvdm-command-capture-test.exe ntvdm-command-launch-test.exe\nif errorlevel 1 exit /b %errorlevel%\ncmake --build --preset msvc-x86-release-ccache --target wow32\nexit /b %errorlevel%\n",
+    "cached-x64.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x64 -host_arch=x64 >nul\nif errorlevel 1 exit /b 1\ncmake --preset msvc-x64-release-ccache -DNTVDM_POWERSHELL:FILEPATH=\"C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe\"\nif errorlevel 1 exit /b 1\ncmake --build --preset msvc-x64-release-ccache\nif errorlevel 1 exit /b 1\nfor %%d in (worker frontend monitor launcher service hook) do (\n ninja -C build\\.ninja\\msvc-x64-release\\%%d\n if errorlevel 1 exit /b 1\n)\nexit /b 0\n",
+    "pipeline.ps1": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n if((Get-Content \"$PSScriptRoot/cached.exit\").Trim() -ne '0'){throw 'Cached build failed'}\n $hostPath=(Get-Process -Id $PID).Path\n foreach($step in @('stage','publish-before-full','full-final','final-check')) {\n  & $hostPath -NoProfile -File \"$PSScriptRoot/$step.ps1\" *> \"$PSScriptRoot/$step.log\"\n  if($LASTEXITCODE){throw \"$step failed\"}\n }\n 0|Set-Content \"$PSScriptRoot/pipeline.exit\"\n} catch {$_|Out-String|Write-Output;1|Set-Content \"$PSScriptRoot/pipeline.exit\";exit 1}\n",
+    "full-final.ps1": "try {\n$ErrorActionPreference='Stop'\n$repo='O:\\repos.hobby\\ntvdm64'\n$env:OPENNT_BROKER_PRODUCT_BUILD=\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\"\n$node='C:\\Users\\neko\\AppData\\Local\\Logi\\LogiPluginService\\PluginHosts\\node22\\node\\node.exe'\n& \"$repo\\tools\\audit\\Invoke-ProductVerification.ps1\" -RuntimeRoot \"$repo\\build\\t483-s5-p113\\candidate-final\" -BuildCache \"$repo\\build\\t483-s5-p113\\cache-final\" -Observer \"$repo\\build\\t483-s5-p79-final\\observers-x64\\console-startup-observer.exe\" -WindowObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\worker-window-snapshot.exe\" -TerminalObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\terminal-observer.exe\" -GuestFixture \"$repo\\build\\M0-T420\\S44\\p79-fixture\\G7.COM\" -NativeHook64 \"$repo\\build\\t483-s5-p113\\cache-final\\nthook64.dll\" -NativeWorker \"$repo\\build\\t483-s5-p113\\cache-final\\ntvwm.exe\" -NativeFrontend \"$repo\\build\\t483-s5-p113\\cache-final\\ntcon.exe\" -NativeMonitor \"$repo\\build\\t483-s5-p113\\cache-final\\ntmon.exe\" -NativeLauncher \"$repo\\build\\t483-s5-p113\\cache-final\\run16.exe\" -NativeService \"$repo\\build\\t483-s5-p113\\cache-final\\ntsrv.exe\" -MonitorRpc \"$repo\\build\\t483-s5-p113\\cache-final\\monitor-rpc-test.exe\" -WowBaselineRoots \"$repo\\build\\t483-s5-p78\\full-final\" -LogRoot \"$repo\\build\\t483-s5-p113\\full-final\" -Suite Full -Node $node\n\n\n\n\n\n\n\n\n$LASTEXITCODE | Set-Content build/t483-s5-p113/full-final.exit\n\nexit $LASTEXITCODE\n\n}catch{$_|Out-String|Write-Output;1|Set-Content O:/repos.hobby/ntvdm64/build/t483-s5-p113/full-final.exit;exit 1}\n",
+    "focused.ps1": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n foreach($arch in @('x86','x64')) {\n  & tools/build/New-T310HeartbeatNinja.ps1 -Architecture $arch\n  if($LASTEXITCODE){throw 'Generate failed'}\n  & 'C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe' -C \"build/M0-T310/S8/p2-heartbeat/$arch\" nt-thread-alert-fixture.exe softpc-event-thread-shutdown-fixture.exe\n  if($LASTEXITCODE){throw 'Compile failed'}\n  & \"./build/M0-T310/S8/p2-heartbeat/$arch/nt-thread-alert-fixture.exe\"\n  if($LASTEXITCODE){throw \"Alert fixture failed: $arch $LASTEXITCODE\"}\n  & \"./build/M0-T310/S8/p2-heartbeat/$arch/softpc-event-thread-shutdown-fixture.exe\"\n  if($LASTEXITCODE){throw \"Event shutdown failed: $arch $LASTEXITCODE\"}\n  \"PASS native alert and event shutdown: $arch\"\n }\n 0|Set-Content build/t483-s5-p113/focused.exit\n} catch {$_|Out-String|Write-Output;1|Set-Content build/t483-s5-p113/focused.exit;exit 1}\n"
+  },
+  "limits": [
+    "Unavailable external DOS4GW/Nesticle remains explicit skip,not pass.",
+    "No new physical Win3.x mouse acceptance claimed.",
+    "313 original selected lines match;four __FILE__ diagnostic path differences retain original line. x86/x64 NtDelayExecution pending-alert fixture passes. APC fallback removed;no claim arbitrary APC wake equals termination."
+  ]
+}

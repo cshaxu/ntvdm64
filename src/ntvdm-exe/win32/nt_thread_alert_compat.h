@@ -3,9 +3,8 @@
 
 #include <windows.h>
 
-/* Same-shaped replacement for the historical private NTDLL alert operation
- * used by the original SoftPC heartbeat.  The adapter schedules a harmless
- * APC, which wakes the target's alertable public Win32 wait. */
+/* Same-shaped forwarding to the native NT alert operation. Missing native
+ * support is an error, never an APC substitute. */
 NTSTATUS NTAPI NtAlertThread(HANDLE thread_handle);
 
 #endif

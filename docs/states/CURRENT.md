@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1234 points reviewed:463 restored/confirmed delivered,0 local,8 approved,
-763 qualified pending,0 restores decided;1486 unreviewed. Files157/365 audited,208 remain.
+1237 points reviewed:466 restored/confirmed delivered,0 local,8 approved,
+763 qualified pending,0 restores decided;1483 unreviewed. Files158/365 audited,207 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P110 package `93763d86-98e7-4c6c-a386-507c1dbbcad0` published11x2; hashes match.
+P113 package `d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p110-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p113-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -93,16 +93,10 @@ P102-P106 delivered;see active audit README indexed receipts.
 
 P107-P109 delivered;see active audit README indexed receipts.
 
-P110 nt_rez.c mirror15->5(-10);cached build,publish11x2,Full19 passed.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p110-checkpoint.json).
+P110-P112 delivered;see active audit README indexed receipts.
 
-P111 nt_rflop.c mirror349->339(-10);43 object sections/relocations equal.
-P110 package/runtime evidence reused;16 prior restorations confirmed,one include restored.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p111-checkpoint.json).
-
-P112 nt_sound/nt_thred declarations restored;mirror net-8;20 object sections equal.
-P110 publication/Full reused;original selected code and logical lines verified.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p112-checkpoint.json).
+P113 nt_timer.c mirror109->96(-13);cached build,publish11x2,native alert/Full19 passed.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p113-checkpoint.json).
 
 ## Remaining Scope
 

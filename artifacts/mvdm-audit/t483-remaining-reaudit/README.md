@@ -822,3 +822,8 @@ P112 [sound/thread review](r1229-r1230-sound-thread-review.json):mirror4->2 and1
 [Checkpoint](batch-p112-checkpoint.json);[line proof](batch-p112-line-check.json).
 157/365 files;1234 points reviewed:463 restored/confirmed,8 approved,763 pending,1486 unreviewed.
 Both files selected-code original;294 logical lines exact,20 object sections/relocations equal;P110 publication/Full reused.
+
+P113 [timer review](r1231-r1233-nt-timer-review.json):delivered mirror109->96(-13).
+[Checkpoint](batch-p113-checkpoint.json);[line proof](batch-p113-line-check.json).
+158/365 files;1237 points reviewed:466 delivered restorations,0 local,8 approved,763 pending,1483 unreviewed.
+Cached full build,x86/x64 native alert,publish11x2,Full19 and governance passed;Git delivery accompanies receipt.

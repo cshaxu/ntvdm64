@@ -9,8 +9,13 @@ typedef struct alert_fixture_state {
 static DWORD WINAPI alertable_waiter(LPVOID parameter)
 {
     alert_fixture_state *state = (alert_fixture_state *)parameter;
-    if (!SetEvent(state->ready)) return 10u;
-    return SleepEx(5000u, TRUE) == WAIT_IO_COMPLETION ? 0u : 11u;
+    typedef NTSTATUS (NTAPI *delay_fn)(BOOLEAN, PLARGE_INTEGER);
+    delay_fn delay = (delay_fn)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),
+        "NtDelayExecution");
+    LARGE_INTEGER timeout;
+    timeout.QuadPart = -50000000;
+    if (delay == NULL || !SetEvent(state->ready)) return 10u;
+    return delay(TRUE, &timeout) == (NTSTATUS)0x101L ? 0u : 11u;
 }
 
 int main(void)

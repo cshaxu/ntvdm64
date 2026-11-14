@@ -1,0 +1,71 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+    "shared_selected_lines": 313,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            264,
+            "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",264);"
+          ]
+        ],
+        "after": [
+          [
+            264,
+            "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",264);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            286,
+            "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",286);"
+          ]
+        ],
+        "after": [
+          [
+            286,
+            "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",286);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            291,
+            "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",291);"
+          ]
+        ],
+        "after": [
+          [
+            291,
+            "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",291);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            852,
+            "DisplayErrorTerm(1001, status,\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",852);"
+          ]
+        ],
+        "after": [
+          [
+            852,
+            "DisplayErrorTerm(1001, status,\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",852);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

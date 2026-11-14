@@ -532,7 +532,6 @@ VOID host_init_bda_timer(void)
 void host_GetSysTime(struct host_timeval *time)
 {
     LARGE_INTEGER liTime;
-    ULONG remainder;
 
 #line 518
         // Don't call kernel unless we have to.
@@ -541,11 +540,7 @@ void host_GetSysTime(struct host_timeval *time)
         liTime = RtlExtendedLargeIntegerDivide(
                                         CurrHeartBeat,
                                         1000000,
-                                        &remainder);
-        /* DIVERGENCE(MVDM-HOST-DIV-050): the original host_timeval field is
-         * signed IS32 while the preserved NTDLL ABI requires PULONG.  The
-         * remainder is strictly below the positive divisor. */
-        time->tv_usec = (IS32)remainder;
+                                        &time->tv_usec);
 #line 524
         time->tv_sec = liTime.LowPart;
         }
@@ -825,11 +820,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 
 #line 842
          // alerted to die
-     /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter
-      * wakes this alertable wait through QueueUserAPC.  Modern user-mode
-      * wait completion is STATUS_USER_APC rather than NT4's private
-      * STATUS_ALERTED; both mean the original heartbeat must terminate. */
-     if (status == STATUS_ALERTED || status == STATUS_USER_APC)  {
+     if (status == STATUS_ALERTED)  {
 #line 844
          CloseHandle(ThreadInfo.HeartBeat.Handle);
          ThreadInfo.HeartBeat.Handle = NULL;

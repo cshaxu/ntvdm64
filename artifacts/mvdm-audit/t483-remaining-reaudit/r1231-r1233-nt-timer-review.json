@@ -1,0 +1,103 @@
+{
+  "scope": "M0 T483 S5 P113 whole nt_timer.c and coupled native alert binding",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_timer.c",
+  "evidence": {
+    "1231": "Remove ULONG intermediate. Original host_timeval IS32 and NTDLL ULONG remainder both have32-bit storage in selected x86 ABI;positive divisor1000000 bounds remainder. Actual original expression compiles. Signed/unsigned pointer warning alone does not prove need for copy.",
+    "1232": "Restore RtlExtendedLargeIntegerDivide(...,&time->tv_usec) and remove extra assignment/comment. Actual original selected code and logical line match;no new shim. Runtime final-package Full still required.",
+    "1233": "Restore STATUS_ALERTED-only original termination. Existing adapter already prefers native NtAlertThread;SDK x86/x64 ntdll import libraries contain that symbol. Delete unsupported APC substitution and cache state from same-shaped forwarding adapter;missing native entry now returns STATUS_PROCEDURE_NOT_FOUND. Native pending alert and APC completion are not equivalent;old SleepEx-only fixture asserted the wrong completion contract and is updated to actual NtDelayExecution STATUS_ALERTED. No arbitrary APC is treated as shutdown."
+  },
+  "restored": [
+    1231,
+    1232,
+    1233
+  ],
+  "residual": [],
+  "mirror": {
+    "nt_timer": {
+      "before": {
+        "added": 23,
+        "deleted": 86,
+        "total": 109
+      },
+      "after": {
+        "added": 12,
+        "deleted": 84,
+        "total": 96
+      }
+    }
+  },
+  "lines": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "shared_selected_lines": 313,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              264,
+              "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",264);"
+            ]
+          ],
+          "after": [
+            [
+              264,
+              "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",264);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              286,
+              "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",286);"
+            ]
+          ],
+          "after": [
+            [
+              286,
+              "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",286);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              291,
+              "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",291);"
+            ]
+          ],
+          "after": [
+            [
+              291,
+              "DisplayErrorTerm(1001,GetLastError(),\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",291);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              852,
+              "DisplayErrorTerm(1001, status,\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\original.c\",852);"
+            ]
+          ],
+          "after": [
+            [
+              852,
+              "DisplayErrorTerm(1001, status,\"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s5-p113\\\\final.c\",852);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "counter_review": "Do not preserve signedness copy from type warning alone. Do not justify mirror APC widening by adapter fallback: eliminate fallback. Original native pending-alert contract is the authority. No claim arbitrary APCs are valid shutdown. Four preprocessor differences are diagnostic __FILE__ candidate filenames with same original line,not selected logic.",
+  "status": "Whole-file restoration built,published11x2 and Full19 passed;Git delivery accompanies receipt",
+  "delivery": "batch-p113-checkpoint.json"
+}
