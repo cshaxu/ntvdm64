@@ -1,0 +1,142 @@
+{
+  "status": "P98 audit/diagnostic only;whole-file implementation pending",
+  "source_head": "3ea7dd0776578f0453c9adb9d96c34459a3b9642",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "source_hashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": "596636a5d61295fe3ff8d2ce8d407576dc0d0f81117439a3e3675d72ef44c337",
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": "9a77ed941309cb36ca22ca705f14d366d725456744f228d35cde586ce29ef4e2",
+    "src/mvdm-host/softpc.new/base/video/cga.c": "d164721c7f16202e31409963cb1758a8ca9f11d7a26826088820ba2e7dcc85e0",
+    "src/mvdm-host/softpc.new/host/src/nt_vga.c": "1ebdafaf6e9ed6afc128b64d305233ca8f8b12c5dd77aa12052d8a57283f99af",
+    "src/mvdm-host/softpc.new/host/src/nt_ega.c": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+    "src/ntvdm-exe/win32/console_graphics.c": "671b2aa747ab1eecf8001dc29c369b0deacde8119ee93f6383af4f3b1743667f",
+    "src/ntvdm-exe/win32/console_text.c": "220f7637c3e94e70a2bd7456f445d974ff4a20178d9fc1c963ca8f420f007b39",
+    "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747",
+    "src/ntvwm-exe/presentation.c": "05dc7433e6284ab7b83761636e29586b363f0d83de120d2f27958eb7ec08f8f2",
+    "src/ntvwm-exe/main.c": "e6eaf5a68c87679ecbe98de6f71fe993053d80cba7c97097f4cfe2d595258c6f",
+    "test/ntvdm-exe/softpc/blocked_video_tick_test.c": "7b8c197ed6a2c9077d474a85deae696ffc3a223babc114f69cbdb6e2376ff9d3"
+  },
+  "points": [
+    {
+      "id": "T483-R1129",
+      "scale": "+24/-0",
+      "anchor": "original800;nt_flush_screen software FULLSCREEN branch",
+      "problem": "Restore original graphics repaint before copied presentation",
+      "evidence": "Original mouse_int2 explicitly flushes guest drawing made by application callback,including applications drawing their own graphics. cga.c also flushes when display is enabled. Current GRAPHICS branch signals capture of existing DIB and returns without calc_update or original readiness gates. Actual function control fails4/6 original-contract cases:ordinary graphics omits paint;uninitialized,disabled and mode-changing states still notify. Candidate that removes graphics-only branch and falls through original calc_update passes6/6. Original nt_vga/nt_ega painters call InvalidateConsoleDIBits,which marks graphics dirty;matched end_update releases existing publisher notification. Thus separate notification-only flush is redundant and not equivalent to original repaint. Text needs its existing completed-grid publication/rearm boundary.",
+      "minimum": "Replace fullscreen split with existing text-only helper branch;let GRAPHICS execute original calc_update. Remove sole-use ntvdm_console_graphics_flush implementation/declaration;update graphics-publication fixture to exercise original painter invalidation rather than obsolete standalone flush. Preserve text helper and #error. Whole-file final build/runtime required.",
+      "delta": "planned reduction of mirror branch and autonomous unused helper;not yet applied"
+    },
+    {
+      "id": "T483-R1130",
+      "scale": "+19/-1",
+      "anchor": "original826;nt_graphics_tick entry",
+      "problem": "Respect frontend handoff and defer copied publication during mode settlement",
+      "evidence": "nt_block_event_thread sets existing CNTRL_VDMBLOCKED before set_active(FALSE);resume reacquires before clearing bit. Without guard actual extracted tick fixture routes/paints/sends while blocked. Original NT4 local Console does not supply independent frontend ownership. Route synchronization translates existing frontend choice to software ScreenState and uses original refresh/cursor hooks. completed flag records whether execution reached an original timed repaint branch:forcing TRUE in actual function publishes/consumes pending frame on an ordinary mode-settle tick. Current passes both added mode-settle case and existing blocked/resume/error tests;each omission control fails at its specific assertion.",
+      "minimum": "Retain existing blocked bit test,one software route call/error and one local completion flag pending owner. Remove explanatory comments at whole-file cleanup;retain excluded alternative framework. No new lifecycle or timer state.",
+      "delta": "0 applied;comment reductions planned"
+    },
+    {
+      "id": "T483-R1131",
+      "scale": "+4/-0",
+      "anchor": "original830;STREAM_IO configuration publication",
+      "problem": "Carry original VGA font/palette across stream-to-native handoff",
+      "evidence": "host_stream_io_update only WriteConsoleA bytes;nt_block_event_thread STREAM_IO arm only stream_io_update,not non-stream NtvdmConsoleUpdateText. NtvdmConsoleUpdateTextConfiguration copies original VGA fonts and palette without disabling stream mode. NTCON stores configuration separately;ntvwm_presentation_seed reads it and otherwise chooses fixed startup16-row font/mouse geometry. host_enable_stream_io does not reset guest VGA font state. Thus valid non-default VGA metadata in a stream source cannot be recovered from character Console calls alone;removing sole stream configuration producer leaves absent/stale metadata for native consumer. Existing tick fixture verifies stream configuration occurs on owned tick and not blocked tick. This is source data-flow proof and a bounded callback fixture,not fresh guest font-transition acceptance.",
+      "minimum": "Keep configuration call and existing error propagation pending owner;remove two explanatory comment lines. Do not switch stream to video merely to obtain configuration.",
+      "delta": "0 applied;planned -2 comment lines"
+    },
+    {
+      "id": "T483-R1132",
+      "scale": "+1/-0",
+      "anchor": "original888;EGA/VGA completed-update assignment",
+      "problem": "Record eligible original EGA/VGA update completion",
+      "evidence": "Assignment is after original timed repaint and cursor-shape processing,inside mode-stable EGA branch. Mode-settle branches must not mark completed. Without corresponding true assignment the pending copied frame cannot be consumed after this branch;using original dirty count fails because painter consumes it. See actual tick control for normal and mode-settle paths.",
+      "minimum": "Keep single assignment to shared local flag pending owner;no second state machine.",
+      "delta": "0"
+    },
+    {
+      "id": "T483-R1133",
+      "scale": "+1/-0",
+      "anchor": "original907;CGA/MDA completed-update assignment",
+      "problem": "Record eligible alternate original display update completion",
+      "evidence": "Non-EGA branch runs original palette/repaint on same TICKS_PER_FLUSH cadence and needs the shared completion notification. It does not execute R1132. Removing only this assignment leaves helper gated false for this branch. Original memory-dirty count is consumed within painter,not a post-paint publication token.",
+      "minimum": "Keep single assignment to the same flag pending owner;no adapter duplication.",
+      "delta": "0"
+    },
+    {
+      "id": "T483-R1134",
+      "scale": "+3/-0",
+      "anchor": "original910;completed tick publication",
+      "problem": "Consume pending text notification only after eligible update",
+      "evidence": "Both original display branches join here;publish_text_update supplies independent frontend copied text and retains metadata-only dirty state. Removing call drops timer-driven software text publication;unconditional publication is disproved by actual mode-settle control. Existing mouse flush uses the same helper. No duplicate guest renderer or new polling is introduced.",
+      "minimum": "Keep one conditional publisher call pending owner;remove two explanatory comment lines.",
+      "delta": "0 applied;planned -2 comment lines"
+    }
+  ],
+  "controls": [
+    {
+      "name": "current",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "result": "case0 paints=0 notify-only=1 texts=0 expected-paints=1 FAIL\ncase1 paints=0 notify-only=1 texts=0 expected-paints=0 FAIL\ncase2 paints=0 notify-only=1 texts=0 expected-paints=0 FAIL\ncase3 paints=0 notify-only=1 texts=0 expected-paints=0 FAIL\ncase4 paints=1 notify-only=0 texts=0 expected-paints=1 PASS\ncase5 paints=1 notify-only=0 texts=1 expected-paints=1 PASS\nfailures=4/6\n",
+      "source_sha256": "c061793fd9a69bdbed88c95f13744373226a6ab562613b31f302fb9d72624b70"
+    },
+    {
+      "name": "original-repaint",
+      "compile_exit": 0,
+      "run_exit": 0,
+      "result": "case0 paints=1 notify-only=0 texts=0 expected-paints=1 PASS\ncase1 paints=0 notify-only=0 texts=0 expected-paints=0 PASS\ncase2 paints=0 notify-only=0 texts=0 expected-paints=0 PASS\ncase3 paints=0 notify-only=0 texts=0 expected-paints=0 PASS\ncase4 paints=1 notify-only=0 texts=0 expected-paints=1 PASS\ncase5 paints=1 notify-only=0 texts=1 expected-paints=1 PASS\nfailures=0/6\n",
+      "source_sha256": "e1ddaa465135d48f481d3bae0a4180e3a0de88879d9d46004f3629f16b0401d0"
+    },
+    {
+      "name": "tick-current",
+      "compile_exit": 0,
+      "run_exit": 0,
+      "result": "PASS blocked video tick: no transport, retained dirt/cursor/mode/stream state, resume, shell-count independence, final paint and real error propagation\n",
+      "function_sha256": "3add8e66cf4844a51cfa0bb46507d78830f413455b753d0eedacf28c9c59e70f",
+      "fixture_sha256": "edaa72010979d97cb13a76f899ca21104bdda1bdad7b79fe4f02fc3e01b383dc"
+    },
+    {
+      "name": "tick-no-block",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "result": "FAIL line 54: !routes && !paints && !frames && !shapes && !errors\n",
+      "function_sha256": "727d83455f3d8d190d12b6ad6eb22c1b326f7b76c7655b90f8444f622da0fd2e",
+      "fixture_sha256": "edaa72010979d97cb13a76f899ca21104bdda1bdad7b79fe4f02fc3e01b383dc"
+    },
+    {
+      "name": "tick-unconditional-completed",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "result": "FAIL line 49: frames==0 && presentation_updated && mode_change_now==EGA_TICK_DELAY-1\n",
+      "function_sha256": "173cd124041667fabc37acec98eda57e68480ee496205d2cb2424cfa8f5858f0",
+      "fixture_sha256": "edaa72010979d97cb13a76f899ca21104bdda1bdad7b79fe4f02fc3e01b383dc"
+    }
+  ],
+  "processes": [
+    {
+      "Id": 29248,
+      "StartTime": "2026-11-14T04:18:28.4095159-08:00"
+    },
+    {
+      "Id": 31848,
+      "StartTime": "2026-11-14T04:20:07.5024139-08:00"
+    }
+  ],
+  "commands": {
+    "controls.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\ncd /d \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p98\"\ncl /nologo /TC /MT /W4 /O2 current.c /Focurrent.obj /Fecurrent.exe > current-build.log 2>&1\necho %errorlevel% > current-build.exit\nif errorlevel 1 exit /b 2\ncurrent.exe > current-run.log 2>&1\necho %errorlevel% > current-run.exit\ncl /nologo /TC /MT /W4 /O2 original-repaint.c /Fooriginal-repaint.obj /Feoriginal-repaint.exe > original-repaint-build.log 2>&1\necho %errorlevel% > original-repaint-build.exit\nif errorlevel 1 exit /b 2\noriginal-repaint.exe > original-repaint-run.log 2>&1\necho %errorlevel% > original-repaint-run.exit\nexit /b 0\n",
+    "tick.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\ncd /d \"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p98\"\ncl /nologo /TC /MT /W4 /WX /O2 tick-current\\test.c /Fotick-current\\test.obj /Fetick-current\\test.exe > tick-current\\build.log 2>&1\necho %errorlevel% > tick-current\\build.exit\nif errorlevel 1 exit /b 2\ntick-current\\test.exe > tick-current\\run.log 2>&1\necho %errorlevel% > tick-current\\run.exit\ncl /nologo /TC /MT /W4 /WX /O2 tick-no-block\\test.c /Fotick-no-block\\test.obj /Fetick-no-block\\test.exe > tick-no-block\\build.log 2>&1\necho %errorlevel% > tick-no-block\\build.exit\nif errorlevel 1 exit /b 2\ntick-no-block\\test.exe > tick-no-block\\run.log 2>&1\necho %errorlevel% > tick-no-block\\run.exit\ncl /nologo /TC /MT /W4 /WX /O2 tick-unconditional-completed\\test.c /Fotick-unconditional-completed\\test.obj /Fetick-unconditional-completed\\test.exe > tick-unconditional-completed\\build.log 2>&1\necho %errorlevel% > tick-unconditional-completed\\build.exit\nif errorlevel 1 exit /b 2\ntick-unconditional-completed\\test.exe > tick-unconditional-completed\\run.log 2>&1\necho %errorlevel% > tick-unconditional-completed\\run.exit\nexit /b 0\n"
+  },
+  "reproduction_generators": {
+    "t483-s5-p98-prepare.py": "from pathlib import Path\nimport json,hashlib\nr=Path('O:/repos.hobby/ntvdm64');b=r/'build/t483-s5-p98';b.mkdir(exist_ok=True)\ns=(r/'src/mvdm-host/softpc.new/host/src/nt_graph.c').read_text(encoding='utf8')\nstart=s.index('void nt_flush_screen(void)\\n{');end=s.index('\\n/*::::::::::::::::',start)\nbody=s[start:end]\na=body.index('    if (sc.ScreenState == FULLSCREEN) {');z=body.index('        mvdm_softpc_text_video_flush',a)\ncandidate=body[:a]+'    if (sc.ScreenState == FULLSCREEN && sc.ModeType == TEXT) {\\n'+body[z:]\nprefix=r'''#include <stdio.h>\n#define CCPU 1\n#define TRUE 1\n#define FALSE 0\n#define TEXT 0\n#define GRAPHICS 1\n#define FULLSCREEN 1\n#define WINDOWED 0\n#define EHS_FUNC_FAILED 1\n#define ALL_ADAPT_VERBOSE 0\n#define sub_note_trace0(a,b) ((void)0)\nstatic struct {int ScreenState,ModeType;} sc;\nstatic int ConsoleInitialised,ConsoleNoUpdates,changing;\nstatic unsigned paints,flushes,texts,errors;\nstatic void paint(void){++paints;}\nstatic struct {void (*calc_update)(void);} update_alg={paint};\nstatic int get_mode_change_required(void){return changing;}\nstatic int ntvdm_console_graphics_flush(void){++flushes;return 1;}\nstatic unsigned long GetLastError(void){return 0;}\nstatic void DisplayErrorTerm(int a,unsigned long b,const char*c,int d){(void)a;(void)b;(void)c;(void)d;++errors;}\nstatic void publish_text_update(void){++texts;}\nstatic void mvdm_softpc_text_video_flush(void (*publish)(void)){\n if(ConsoleInitialised&&!ConsoleNoUpdates&&!changing){paint();publish();}\n}\n'''\nsuffix=r'''\nint main(void){\n unsigned failure=0;\n for(int c=0;c<6;++c){\n  paints=flushes=texts=errors=0;sc.ScreenState=FULLSCREEN;sc.ModeType=GRAPHICS;\n  ConsoleInitialised=TRUE;ConsoleNoUpdates=changing=0;\n  if(c==1)ConsoleInitialised=FALSE;\n  if(c==2)ConsoleNoUpdates=TRUE;\n  if(c==3)changing=TRUE;\n  if(c==4)sc.ScreenState=WINDOWED;\n  if(c==5)sc.ModeType=TEXT;\n  nt_flush_screen();\n  unsigned want=(c==0||c==4||c==5);\n  int ok=paints==want&&flushes==0&&texts==(c==5)&&errors==0;\n  printf(\"case%d paints=%u notify-only=%u texts=%u expected-paints=%u %s\\n\",c,paints,flushes,texts,want,ok?\"PASS\":\"FAIL\");\n  failure+=!ok;\n }\n printf(\"failures=%u/6\\n\",failure);return failure?1:0;\n}\n'''\nfor name,code in [('current',body),('original-repaint',candidate)]:\n (b/(name+'.c')).write_bytes((prefix+code+suffix).encode())\ncmd=['@echo off','call \"C:\\\\Program Files (x86)\\\\Microsoft Visual Studio\\\\2022\\\\BuildTools\\\\Common7\\\\Tools\\\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul',f'cd /d \"{b}\"']\nfor name in ['current','original-repaint']:\n cmd += [f'cl /nologo /TC /MT /W4 /O2 {name}.c /Fo{name}.obj /Fe{name}.exe > {name}-build.log 2>&1',f'echo %errorlevel% > {name}-build.exit',f'if errorlevel 1 exit /b 2',f'{name}.exe > {name}-run.log 2>&1',f'echo %errorlevel% > {name}-run.exit']\ncmd+=['exit /b 0']\n(b/'controls.cmd').write_bytes(('\\r\\n'.join(cmd)+'\\r\\n').encode())\n(b/'controls.ps1').write_bytes(b\"Set-Location O:/repos.hobby/ntvdm64/build/t483-s5-p98\\n& cmd.exe /d /c controls.cmd\\n$LASTEXITCODE|Set-Content controls.exit\\n\")\nprint('Six actual-function boundary cases generated;production unchanged')\n",
+    "t483-s5-p98-tick.py": "from pathlib import Path\nr=Path('O:/repos.hobby/ntvdm64');b=r/'build/t483-s5-p98'\ns=(r/'src/mvdm-host/softpc.new/host/src/nt_graph.c').read_text(encoding='utf8')\ndef body(signature):\n start=s.index(signature);op=s.index('{',start);i=op+1;depth=1\n while depth:\n  if s[i]=='{':depth+=1\n  if s[i]=='}':depth-=1\n  i+=1\n return s[start:i]\ncode=body('static void publish_text_update(void)')+'\\n'+body('void nt_graphics_tick(void)')\nfixture=(r/'test/ntvdm-exe/softpc/blocked_video_tick_test.c').read_text(encoding='utf8')\nat='int main(void)\\n{\\n'\ncheck='''    /* Pending paint must survive a normal mode-settle tick too. */\n    presentation_updated=TRUE;changing=1;flush_count=1;mode_change_now=0;\n    nt_graphics_tick();\n    CHECK(frames==0 && presentation_updated && mode_change_now==EGA_TICK_DELAY-1);\n    changing=mode_change_now=0;routes=paints=frames=configs=streams=shapes=errors=modes=0;\n'''\nassert at in fixture;fixture=fixture.replace(at,at+check)\nvariants={'tick-current':code,'tick-no-block':code.replace('    if (CntrlHandlerState & CNTRL_VDMBLOCKED) return;',''), 'tick-unconditional-completed':code.replace('BOOL software_update_completed = FALSE;','BOOL software_update_completed = TRUE;')}\ncmd=['@echo off','call \"C:\\\\Program Files (x86)\\\\Microsoft Visual Studio\\\\2022\\\\BuildTools\\\\Common7\\\\Tools\\\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul',f'cd /d \"{b}\"']\nfor name,value in variants.items():\n p=b/name;p.mkdir(exist_ok=True);(p/'blocked_video_tick.inc').write_bytes(value.encode());(p/'test.c').write_bytes(fixture.encode())\n cmd += [f'cl /nologo /TC /MT /W4 /WX /O2 {name}\\\\test.c /Fo{name}\\\\test.obj /Fe{name}\\\\test.exe > {name}\\\\build.log 2>&1',f'echo %errorlevel% > {name}\\\\build.exit','if errorlevel 1 exit /b 2',f'{name}\\\\test.exe > {name}\\\\run.log 2>&1',f'echo %errorlevel% > {name}\\\\run.exit']\ncmd+=['exit /b 0'];(b/'tick.cmd').write_bytes(('\\r\\n'.join(cmd)+'\\r\\n').encode());(b/'tick.ps1').write_bytes(b'Set-Location O:/repos.hobby/ntvdm64/build/t483-s5-p98\\n& cmd.exe /d /c tick.cmd\\n$LASTEXITCODE|Set-Content tick.exit\\n')\n"
+  },
+  "limits": [
+    "Extracted real production functions with controlled host boundaries;not full guest execution or actual asynchronous DIB capture.",
+    "Original-repaint control preserves text helper and all excluded #error;no production source edited.",
+    "R1129 failure is current adapter behavior,not evidence that original calc_update is defective.",
+    "R1131 source ownership proves metadata boundary;no claim of newly reproduced guest font mismatch.",
+    "R1132/R1133 remain the same single completion flag;fixture mock paint is not proof of every original graphics painter.",
+    "P95 remains published full-regression baseline;final changed source must pass full delivery after whole-file completion."
+  ]
+}

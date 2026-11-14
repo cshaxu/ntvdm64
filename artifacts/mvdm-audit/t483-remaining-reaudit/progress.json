@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "3aee5b82b1fa5194b9a5e8160e9f311d258f3c96e8debcc753d61f87fdce5cff",
+  "new_register_sha256": "eea176f5aaaf6c525a76afa6943e9d7564c88bc586ec4256b8783f139c9e59b8",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -15,31 +15,31 @@
     "already-byte-identical-to-original": 1
   },
   "completed": 8,
-  "pending": 1588,
-  "next": "T483-R1129",
+  "pending": 1582,
+  "next": "T483-R1135",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
     "Existing evidence is a lead, not accepted necessity proof. Closed items and absent files are not reopened.",
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
-  "awaiting_owner_approval": 726,
-  "reviewed": 1132,
+  "awaiting_owner_approval": 732,
+  "reviewed": 1138,
   "restored_pending_delivery": 0,
   "batch_modified_implementation_files": 0,
   "batch_mirror_diff_delta": 0,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
-  "pending_decisions": 726,
+  "pending_decisions": 732,
   "restored_verified_published": 397,
   "last_batch_mirror_diff_delta": -8,
   "last_delivery": "batch-p95-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
-  "qualified_pending_decisions": 726,
-  "pending_decisions_count_note": "726 residuals;397 restored delivered;0 local;8 approved;1 restoration decided not applied;DIV-901 separate.",
-  "active_rework": "P97 audit-only;nt_graph7/24;R1126 restoration decided,whole-file implementation pending",
-  "active_investigation": "Next R1129",
+  "qualified_pending_decisions": 732,
+  "pending_decisions_count_note": "732 residuals;397 restored delivered;0 local;8 approved;1 restoration decided not applied;DIV-901 separate.",
+  "active_rework": "P98 audit-only;nt_graph13/24;R1126 restore and R1129 minimize decided;whole-file implementation pending",
+  "active_investigation": "Next R1135",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
@@ -60,6 +60,6 @@
   "batch_line_only_mirror_delta": 0,
   "batch_point_metric_reconciliation": 0,
   "restoration_decided_not_applied": 1,
-  "pending_decision_csv_rows": 707,
-  "pending_decision_grouping_note": "707 rows expand to726 R points plus DIV-901"
+  "pending_decision_csv_rows": 713,
+  "pending_decision_grouping_note": "713 rows expand to732 R points plus DIV-901"
 }
