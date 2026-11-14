@@ -5,15 +5,6 @@
 #include <wingdip.h>
 #include "wow_control_message_abi.h"
 
-/* Exact OpenNT WOW public handle taxonomy; its function prototypes are not
- * included because WOW32's retained internal header has distinct FASTCALL
- * declarations for the same names. */
-typedef enum _WOW_HANDLE_TYPE {
-    WOW_TYPE_HWND, WOW_TYPE_HMENU, WOW_TYPE_HDWP, WOW_TYPE_HDROP,
-    WOW_TYPE_HDC, WOW_TYPE_HFONT, WOW_TYPE_HMETAFILE, WOW_TYPE_HRGN,
-    WOW_TYPE_HBITMAP, WOW_TYPE_HBRUSH, WOW_TYPE_HPALETTE, WOW_TYPE_HPEN,
-    WOW_TYPE_HACCEL, WOW_TYPE_HTASK, WOW_TYPE_FULLHWND
-} WOW_HANDLE_TYPE;
 
 /* The modern SDK may suppress OpenNT winuserp.h after windows.h.  These are
  * the original private indices consumed by retained WOW32 client code; their

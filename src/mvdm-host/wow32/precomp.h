@@ -18,34 +18,15 @@
 --*/
 
 #include <stddef.h>
-/* DIVERGENCE(MVDM-HOST-DIV-180): modern `windows.h` includes its incompatible
- * post-NT4 WOW export declarations. The original WOW32 body remains the
- * selected provider, so keep that unrelated SDK declaration carrier out. */
-#ifndef _WOWNT32_
-#define _WOWNT32_
-#endif
 #line 21
 #include <nt.h>
-/* DIVERGENCE(MVDM-HOST-DIV-179): the original build's private include-root
- * made these declaration carriers implicit.  The split mirror uses the
- * byte-identical opennt-abi carriers; this selects no USER/GDI behavior. */
-#include <winuserp.h>
-/* Provider-local declarations preserve the original WOW32 callers while
- * binding only the unavailable NT4-private host edges. */
 #include <wow32_provider_private.h>
-#include <wow_private_user_compat.h>
 #include <wow_clipboard_epoch.h>
 #include <common/wow/paths.h>
 #include <ntpsapi_wow32.h>
 #include <nturtl_wow32.h>
 #include <ntrtl_wow32.h>
-/* DIVERGENCE(MVDM-HOST-DIV-181): the SDK's host-architecture `_X86_` marker
- * selects a native-VDM register alias in original WOW32. The selected
- * CPU40 SoftPC path is emulated on both host widths and must retain the
- * original simulator `getSS`/`setSS` stack form instead. */
-#ifdef _X86_
 #undef _X86_
-#endif
 #line 22
 #include "wow32.h"
 #include "wowtbl.h"
@@ -141,15 +122,9 @@
 #include "wole2.h"
 #include "wparam.h"
 #include <limits.h>
-/* DIVERGENCE(MVDM-HOST-DIV-542): project-owned clients do not inherit
- * the original WOW thunk redirects. */
 #ifdef WOW_ORIGINAL_THUNK_BUILD
-/* DIVERGENCE(MVDM-HOST-DIV-297): private WW/WC indices use scoped native
- * storage; ordinary USER indices retain their public API calls. */
 #define WOW_USER_PRIVATE_REDIRECT
 #include "wow_user_private_access.h"
-/* DIVERGENCE(MVDM-HOST-DIV-298): original WOW menu thunks consume the
- * ConvertMenu16 private owner-draw format, not native USER32 templates. */
 #include "wow_menu_parser_bindings.h"
 #undef LoadMenuIndirect
 #define LoadMenuIndirect wow_user_load_menu_indirect

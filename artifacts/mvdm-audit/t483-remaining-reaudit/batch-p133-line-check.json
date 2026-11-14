@@ -1,0 +1,395 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/precomp.h",
+    "line_mismatches": [],
+    "original_include_anchors": [
+      [
+        20,
+        "#include <stddef.h>"
+      ],
+      [
+        21,
+        "#include <nt.h>"
+      ],
+      [
+        22,
+        "#include \"wow32.h\""
+      ],
+      [
+        23,
+        "#include \"wowtbl.h\""
+      ],
+      [
+        24,
+        "#include \"doswow.h\""
+      ],
+      [
+        25,
+        "#include \"wdos.h\""
+      ],
+      [
+        26,
+        "#include \"wmdisp32.h\""
+      ],
+      [
+        27,
+        "#include \"mapembed.h\""
+      ],
+      [
+        28,
+        "#include \"wowusr.h\""
+      ],
+      [
+        29,
+        "#include \"waccel.h\""
+      ],
+      [
+        30,
+        "#include \"wcall16.h\""
+      ],
+      [
+        31,
+        "#include \"wuclass.h\""
+      ],
+      [
+        32,
+        "#include \"wsubcls.h\""
+      ],
+      [
+        33,
+        "#include <mmsystem.h>"
+      ],
+      [
+        34,
+        "#include \"wkman.h\""
+      ],
+      [
+        35,
+        "#include \"fastwow.h\""
+      ],
+      [
+        36,
+        "#include \"wcall32.h\""
+      ],
+      [
+        37,
+        "#include \"wudlg.h\""
+      ],
+      [
+        38,
+        "#include \"tdb16.h\""
+      ],
+      [
+        39,
+        "#include \"wcntl32.h\""
+      ],
+      [
+        40,
+        "#include \"wcuricon.h\""
+      ],
+      [
+        41,
+        "#include \"wmsg16.h\""
+      ],
+      [
+        42,
+        "#include \"wmsgbm.h\""
+      ],
+      [
+        43,
+        "#include \"wmtbl32.h\""
+      ],
+      [
+        44,
+        "#include \"wcommdlg.h\""
+      ],
+      [
+        45,
+        "#include \"wowcmdlg.h\""
+      ],
+      [
+        46,
+        "#include <commdlg.h>"
+      ],
+      [
+        47,
+        "#include \"wres16.h\""
+      ],
+      [
+        48,
+        "#include \"wres32.h\""
+      ],
+      [
+        49,
+        "#include \"wowkrn.h\""
+      ],
+      [
+        50,
+        "#include \"wdde.h\""
+      ],
+      [
+        51,
+        "#include <dde.h>"
+      ],
+      [
+        52,
+        "#include \"wuclip.h\""
+      ],
+      [
+        53,
+        "#include \"wgmeta.h\""
+      ],
+      [
+        54,
+        "#include \"wowgdi.h\""
+      ],
+      [
+        55,
+        "#include \"wgdi.h\""
+      ],
+      [
+        56,
+        "#include \"wgprnset.h\""
+      ],
+      [
+        57,
+        "#include \"wgfont.h\""
+      ],
+      [
+        58,
+        "#include \"wgdi31.h\""
+      ],
+      [
+        59,
+        "#include \"wgman.h\""
+      ],
+      [
+        60,
+        "#include \"wgpal.h\""
+      ],
+      [
+        61,
+        "#include \"wgtext.h\""
+      ],
+      [
+        62,
+        "#include \"wheap.h\""
+      ],
+      [
+        63,
+        "#include \"wowkbd.h\""
+      ],
+      [
+        64,
+        "#include \"wkbman.h\""
+      ],
+      [
+        65,
+        "#include \"wkernel.h\""
+      ],
+      [
+        66,
+        "#include \"wkfileio.h\""
+      ],
+      [
+        67,
+        "#include <winbase.h>"
+      ],
+      [
+        68,
+        "#include \"oemuni.h\""
+      ],
+      [
+        69,
+        "#include \"vrnmpipe.h\""
+      ],
+      [
+        70,
+        "#include \"wkgthunk.h\""
+      ],
+      [
+        71,
+        "#include \"wklocal.h\""
+      ],
+      [
+        72,
+        "#include \"wowhooks.h\""
+      ],
+      [
+        73,
+        "#include \"wutmr.h\""
+      ],
+      [
+        74,
+        "#include \"wreldc.h\""
+      ],
+      [
+        75,
+        "#include \"vdmapi.h\""
+      ],
+      [
+        76,
+        "#include \"wowinfo.h\""
+      ],
+      [
+        77,
+        "#include \"dbgexp.h\""
+      ],
+      [
+        78,
+        "#include \"wucomm.h\""
+      ],
+      [
+        79,
+        "#include \"wowmmcb.h\""
+      ],
+      [
+        80,
+        "#include \"isz.h\""
+      ],
+      [
+        81,
+        "#include \"wkmem.h\""
+      ],
+      [
+        82,
+        "#include <mmddk.h>"
+      ],
+      [
+        83,
+        "#include \"wowmmed.h\""
+      ],
+      [
+        84,
+        "#include \"wmmstruc.h\""
+      ],
+      [
+        85,
+        "#include \"wmmedia.h\""
+      ],
+      [
+        86,
+        "#include \"isvwow.h\""
+      ],
+      [
+        87,
+        "#include <string.h>"
+      ],
+      [
+        88,
+        "#include <digitalv.h>"
+      ],
+      [
+        89,
+        "#include \"wmsgcb.h\""
+      ],
+      [
+        90,
+        "#include \"wmsgem.h\""
+      ],
+      [
+        91,
+        "#include \"wmsglb.h\""
+      ],
+      [
+        92,
+        "#include \"wmsgsbm.h\""
+      ],
+      [
+        93,
+        "#include \"wumsg.h\""
+      ],
+      [
+        94,
+        "#include \"wuman.h\""
+      ],
+      [
+        95,
+        "#include \"..\\..\\inc\\vdm.h\""
+      ],
+      [
+        96,
+        "#include \"wucaret.h\""
+      ],
+      [
+        97,
+        "#include \"wucursor.h\""
+      ],
+      [
+        98,
+        "#include \"wuhook.h\""
+      ],
+      [
+        99,
+        "#include \"wumenu.h\""
+      ],
+      [
+        100,
+        "#include \"wuser.h\""
+      ],
+      [
+        101,
+        "#include \"wutext.h\""
+      ],
+      [
+        102,
+        "#include \"wuwind.h\""
+      ],
+      [
+        103,
+        "#include \"wuser31.h\""
+      ],
+      [
+        104,
+        "#include \"wulang.h\""
+      ],
+      [
+        105,
+        "#include \"winsockp.h\""
+      ],
+      [
+        106,
+        "#include \"wowsnd.h\""
+      ],
+      [
+        107,
+        "#include \"wsman.h\""
+      ],
+      [
+        108,
+        "#include \"wowshell.h\""
+      ],
+      [
+        109,
+        "#include \"wshell.h\""
+      ],
+      [
+        110,
+        "#include \"wowth.h\""
+      ],
+      [
+        111,
+        "#include \"wthman.h\""
+      ],
+      [
+        112,
+        "#include \"wusercli.h\""
+      ],
+      [
+        113,
+        "#include \"wole2.h\""
+      ],
+      [
+        114,
+        "#include \"wparam.h\""
+      ],
+      [
+        115,
+        "#include <limits.h>"
+      ]
+    ],
+    "checked_include_anchors": 96,
+    "method": "Exact original include positions compared with final #line evaluation;original vdm spelling maps to selected existing header. Header consists of directives/comments;not counted as executed statements.",
+    "excluded_error_directives_unchanged": true
+  }
+]

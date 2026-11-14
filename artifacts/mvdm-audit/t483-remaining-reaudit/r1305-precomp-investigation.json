@@ -1,0 +1,31 @@
+{
+  "point": "T483-R1305",
+  "status": "Restoration passed final cached build,public ABI,menu-resource,Full19;published11x2",
+  "problem": "Suppression of WOW public declarations plus copied enum",
+  "evidence": "precomp->wow32.h->wow.h->SDK wownt32.h;actual 3-source controls",
+  "controls": {
+    "baseline": {
+      "walias": 0,
+      "wcall16": 0,
+      "wkgthunk": 0
+    },
+    "unguarded": {
+      "walias": 2,
+      "wcall16": 2,
+      "wkgthunk": 2
+    },
+    "public-header": {
+      "walias": 0,
+      "wcall16": 0,
+      "wkgthunk": 0
+    }
+  },
+  "conclusion": "Ungarded-only failure is enum duplication in project header;remove both guard and duplicated enum, all three selected actual source compilations pass.",
+  "mirror_diff": {
+    "before": 6,
+    "after": 0,
+    "delta": -6
+  },
+  "autonomous_change": "Delete duplicated WOW_HANDLE_TYPE enum and stale explanation;use selected SDK public declaration through original wow.h include.",
+  "remaining": "Residual R1306-R1308 owner choices remain in pending-decisions.csv;Git accompanies P133 receipt."
+}

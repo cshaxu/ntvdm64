@@ -1,0 +1,440 @@
+{
+  "status": "Cached full,published11x2,public ABI,menu-resource,Full19 and boundary passed;final governance/Git follow",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "sha256": "5fe597ec3eb07edeff970f54748b504f516a832c2ee9f4972e6b8b0b1103769a"
+    },
+    {
+      "path": "src/compat/include/wow32_provider_private.h",
+      "sha256": "02697db14bb5250afbd76da7de1eb35ba82c31caa164915870f471ee16412b53"
+    }
+  ],
+  "mirror_diff": {
+    "before": {
+      "added": 40,
+      "deleted": 1,
+      "total": 41
+    },
+    "after": {
+      "added": 15,
+      "deleted": 1,
+      "total": 16
+    }
+  },
+  "points": {
+    "R1305": "restored guard;duplicate autonomous enum removed",
+    "R1306": "minimized20->7;remaining declarations and CCPU selector pending",
+    "R1307": "original relative path absent in all actual roots;retain2 pending",
+    "R1308": "minimized13->7;original private slot and menu parser compatibility pending"
+  },
+  "controls": {
+    "status": "Dependency controls complete;whole-file boundary review recorded separately below",
+    "results": {
+      "minimal": {
+        "exit": 0,
+        "errors": []
+      },
+      "x86": {
+        "exit": 2,
+        "errors": [
+          "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\\wow32.h(508): fatal error C1189: #error:  Native x86 WOW stack profile is not supported"
+        ]
+      },
+      "ntps": {
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1265): error C2065: 'THREAD_BASIC_INFORMATION': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1265): error C2146: syntax error: missing ';' before identifier 'ThreadInfo'",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1265): error C2065: 'ThreadInfo': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1274): error C4013: 'NtCurrentThread' undefined; assuming extern returning int",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1275): error C2065: 'ThreadBasicInformation': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1276): error C2065: 'ThreadInfo': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1277): error C2065: 'THREAD_BASIC_INFORMATION': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1296): error C4013: 'NtOpenThread' undefined; assuming extern returning int",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1302): error C2065: 'ThreadInfo': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-ntps\\wkman.c(1302): error C2224: left of '.ClientId' must have struct/union type"
+        ]
+      },
+      "nturtl": {
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p133\\r1306-nturtl\\wkman.c(819): error C2065: 'RTL_PERTHREAD_CURDIR': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-nturtl\\wkman.c(819): error C2146: syntax error: missing ';' before identifier 'rptc'",
+          "build\\t483-s5-p133\\r1306-nturtl\\wkman.c(819): error C2065: 'rptc': undeclared identifier",
+          "build\\t483-s5-p133\\r1306-nturtl\\wkman.c(1029): error C4013: 'RtlAssociatePerThreadCurdir' undefined; assuming extern returning int",
+          "build\\t483-s5-p133\\r1306-nturtl\\wkman.c(1029): error C2065: 'rptc': undeclared identifier"
+        ]
+      },
+      "ntrtl": {
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p133\\r1306-ntrtl\\wkman.c(1018): error C4013: 'RtlMultiByteToUnicodeN' undefined; assuming extern returning int",
+          "build\\t483-s5-p133\\r1306-ntrtl\\wkman.c(3083): error C4013: 'RtlAdjustPrivilege' undefined; assuming extern returning int"
+        ]
+      },
+      "provider": {
+        "exit": 0,
+        "errors": []
+      },
+      "clipboard": {
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p133\\r1306-clipboard\\wuclip.c(99): error C4013: 'wow_clipboard_epoch_note_current' undefined; assuming extern returning int",
+          "build\\t483-s5-p133\\r1306-clipboard\\wuclip.c(1083): error C4013: 'wow_clipboard_epoch_matches_current' undefined; assuming extern returning int",
+          "build\\t483-s5-p133\\r1306-clipboard\\wuclip.c(1192): error C4013: 'wow_clipboard_epoch_reset' undefined; assuming extern returning int"
+        ]
+      },
+      "paths": {
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p133\\r1306-paths\\wkernel.c(29): error C4013: 'mvdm_softpc_profile_shadow_system_ini' undefined; assuming extern returning int"
+        ]
+      }
+    },
+    "followup": [
+      "provider removal needs actual HLP consumer wmdisp32,not only wuser",
+      "project clipboard/path declarations require tracing original boundary necessity,not merely current custom callers",
+      "complete R1307 path and R1308 redirect scope before batch build"
+    ]
+  },
+  "provider_control": {
+    "provider-control": 0,
+    "provider-removed": 2
+  },
+  "path_proof": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\internal\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\internal\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\internal\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\private\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\inc\\vdm.h",
+      "exists": false
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\inc\\vdm.h",
+      "exists": false
+    }
+  ],
+  "source_boundary_evidence": [
+    "src/mvdm-host/wow32/wmdisp32.c HLP and GWL_WOWWORDS reads;modern USER returns1413 for private slots, m0-t420-s40-wow-user-profile.md",
+    "src/mvdm-host/wow32/wow32.c pfnIn.pfnEmptyCB;wuclip.c cache and modern public Clipboard sequence owner",
+    "src/mvdm-host/wow32/wres16.c ConvertMenu16 writes packed owner-draw pointer;original MenuLoadWinTemplates16-bit itemData consumption;native parse counterexample in m0-t420-s40-wow-user-profile.md",
+    "selected package paths differ from modern OS Windows/system32;original file operations retained through existing directory provider"
+  ],
+  "limits": [
+    "Precomp declarations do not alone prove every downstream adapter implementation minimal;remaining original/private boundary substitutions stay pending owner choice.",
+    "Historical Clipboard r42/r43 claims withdrawn;use later R5 evidence,not invalidated earlier records.",
+    "Original include logical lines proved statically;actual cached build and runtime are separate evidence. External immutable-fixture skips remain non-pass outcomes in Full records."
+  ],
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "660b0b06-42be-4d4b-b426-54e995423478",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/precomp.h",
+  "mirror_diff_metric": "Original-relative added+deleted lines,excluding #line bookkeeping;41(+40/-1)->16(+15/-1),net-25. Not total source LOC.",
+  "counter_review": {
+    "R1305": "Original public include was blocked by local guard;project duplicated enum caused the apparent conflict. Removing both restores original owner without a replacement shim. Source controls and final cached build distinguish guard-only failure from actual restoration.",
+    "R1306": "Removed include duplication and unused compatibility declarations;unconditional undef has identical resulting macro state. Kept NT declarations for original calls,private USER layout carrier,Clipboard generation and package path boundary only. Remaining implementations are not declared globally minimal.",
+    "R1307": "Original-relative spelling cannot resolve in actual roots;selected existing original header remains sole provider. No duplicate source import.",
+    "R1308": "Only comments removed. Packed owner-draw contract is distinct from modern menu template;native negative control is historical,final original-compatible positive control rerun in P133. Selector prevents project-owned code acquiring private redirects.",
+    "no_new_paths": true,
+    "guest_changed": false,
+    "original_line_checks": "96 retained include directives statically matched;not represented as96 runtime statements",
+    "approval": "Residual3 points remain pending;no net mirror increase implemented."
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 428969,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6815,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1325,
+          "CleanupMs": 402,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 14823,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 14975,
+          "CleanupMs": 386,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 12212,
+          "CleanupMs": 432,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 274,
+          "CleanupMs": 418,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66103,
+          "CleanupMs": 405,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 48795,
+          "CleanupMs": 413,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 49416,
+          "CleanupMs": 368,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15530,
+          "CleanupMs": 399,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10220,
+          "CleanupMs": 391,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 73669,
+          "CleanupMs": 448,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12902,
+          "CleanupMs": 421,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28292,
+          "CleanupMs": 398,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30591,
+          "CleanupMs": 472,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 5444,
+          "CleanupMs": 439,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7812,
+          "CleanupMs": 375,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10032,
+          "CleanupMs": 371,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3737,
+          "CleanupMs": 332,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6737,
+          "CleanupMs": 421,
+          "Passed": true
+        }
+      ]
+    },
+    "line_proof": "batch-p133-line-check.json",
+    "focused": [
+      "WOW_PUBLIC_MEMORY_ABI_OK",
+      "WOW_FIXTURE_OK case=menu-resource",
+      "OWNER_DRAW expected=12345678 actual=12345678"
+    ],
+    "boundary": "review-check.log"
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "D9C271D7B58A92B7ACF18B80550E013C39C47ED08885D64FD507F5A2BC954319",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "A6AFA52CCBAD0FD895CC963C64453F3EB6094907818E88523FAD35B28E616298",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "AB5DC380F876B3E98B1682B60A5432B2623D209C200684FED9B1918ADDB0874C"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "EEE873C0B8FE975BF5B8F67CD38AA88942A77177E5821C97C8419C3A1A58B769",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "73710C71BC95918A54E26758C7A4B430EC951DA285721E82474ECD8656D8F2F2"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "677F3344657CAFA7B667B51ECA1B562E1645FA2EF8A64B81C73DED87D02BC8E2",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "94BD8602F062D8A9070DC65C0B1C11597BCCEC6137C969EF78D151511022EA2B"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "FD352EF32F49B79411B4C7B84A19B294E53C4B170B225423DB69002060705C29",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "E718EB2FF4BF476371A8ABBCC7EF376911C0452E978B3C9C76631D04F2F9CA59"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "AD51205E1091D7BB08DAABEE10572EA879982748E0669A0F2EC21CD7A0CFDA69",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "D63DAA051ACE110B81792CA6505FA7DBF79936D6767F0CFAFDB4DB7E5ADB9081"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "51FA9A3F48C1064EAA19A2686C7BE019A3F23E56248315BA37177A09CA3D4254",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "D90FDDC799228179650FFA01B89D4F0B191D5BB7E26F73AB38D009392E6862C5",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "A363F622373421F5835B9A0C2F4BB9348D326FF2601E7B8A2C1C9AC07CC9EC22"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "A5FF220F4EEFCA2A4A978F2A20FA6AB8357C44EB89CF3B21D074D6D416BBC6FA",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "023A64D4D8942DC114044F9881A35E6040D74F50FE08AB29FA0858E5C65D85CB",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "9DA7245151BEAC6968E0EC7CDD02C61A79A0D32C518ABF3A2D6365F057700B39"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "11243DFB50532F83EED98563BA39DB6C051F9FB57B23539C301D3B186F978705",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

@@ -911,3 +911,9 @@ P130 [fastwow review](r1302-fastwow-review.json), [receipt](batch-p130-checkpoin
 P131 [isvwow review](r1303-isvwow-review.json), [receipt](batch-p131-checkpoint.json):diff3->2(-1),comment/line-only. Original product /Gz passes;external-default /Gd fails;residual explicit APIENTRY pending owner.183/365 files;1303/2720 points;494 restored/confirmed,8 approved,801 pending,1417 unreviewed. P129 runtime/publication reused.
 
 P132 [mapembed review](r1304-mapembed-review.json), [receipt](batch-p132-checkpoint.json):one DEBUG exclusion only;242 selected lines0 mismatches/changes. Source unchanged;P129 package/Full19 reused with22 hashes.184/365 files;1304/2720 points;495 restored/confirmed,8 approved,801 pending,1416 unreviewed.
+
+P133 in progress: [R1305 restoration evidence](r1305-precomp-investigation.json). Guard-only removal fails because of duplicated autonomous enum;removing both restores original inclusion and passes3 actual-source controls. Local mirror delta-6;R1306-R1308 must finish before final build/publication/tests.184/365 complete files;1305 reviewed points,1 local restoration,1415 unreviewed.
+
+P133 whole-file source review complete: [checkpoint](batch-p133-checkpoint.json), [line proof](batch-p133-line-check.json). Mirror41->16(-25);R1305 restored locally,R1306/R1308 minimized,R1307 required include path unchanged. Cached full passed;11x2 published;final focused/Full and Git pending.185/365 files;1308/2720 points:495 delivered,1 local,8 approved,804 qualified pending,1412 unreviewed.
+
+P133 final cached build,publish11x2,public ABI,menu-resource and Full19 passed. Mirror41->16(-25);96 static include-line anchors match;WOW boundary checked.185/365 files;1308/2720 points:496 delivered/confirmed,8 approved,804 pending,1412 unreviewed. Final governance and Git accompany receipt.
