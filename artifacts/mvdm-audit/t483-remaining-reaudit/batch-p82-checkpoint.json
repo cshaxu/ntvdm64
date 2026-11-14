@@ -1,0 +1,32 @@
+{
+  "batch": "P82",
+  "status": "cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "sha256": "84e0daa501996dfc43f0492ec3f1dc1a014fc6c1b1ebed84c9e177e7262336d8"
+    }
+  ],
+  "mirror_diff_delta": -39,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "publication": {
+    "status": "published",
+    "package": "f3a08843-45d8-4a51-957b-3cd46b1a54dd",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build\\t483-s5-p82\\full-final\\timings.json",
+  "Full_elapsed_ms": 418330,
+  "verification": {
+    "focused": "current0/original-control c0000005/minimized0;all5 copy/exchange operations and5 failure returns pass",
+    "actual_preprocessor": "217 shared selected lines;all #error unchanged",
+    "Full": "19 passed;DOS4GW external fixture explicitly SKIP",
+    "boundary": "143 WOW objects,9 negative controls",
+    "governance": "documentation/links/diff checks passed"
+  }
+}

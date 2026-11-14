@@ -733,3 +733,5 @@ P80 delivered: [nt_cga six-point review](r1015-r1020-nt-cga-review.json);mirror3
 P80 delivery evidence: [checkpoint](batch-p80-checkpoint.json), [line proof](batch-p80-line-check.json).
 
 P81 delivered: [nt_cpu19-point review](r1021-r1039-nt-cpu-review.json), [lines](batch-p81-line-check.json), [checkpoint](batch-p81-checkpoint.json). Mirror188->118(-70);13 original restorations,5 qualified residuals,1 policy-retained excluded framework;final cached build,publish11x2,Full19 passed.
+
+P82 delivered: [nt_emm7-point review](r1040-r1046-nt-emm-review.json), [lines](batch-p82-line-check.json), [checkpoint](batch-p82-checkpoint.json). Mirror131->92(-39);7 residuals qualified;real controls0/AV/0;all5 directions/failures,cached build,publish11x2,Full19 passed.

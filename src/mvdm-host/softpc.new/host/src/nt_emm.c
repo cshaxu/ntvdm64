@@ -57,14 +57,7 @@ The Following Routines are defined:
 #include "umb.h"
 #include "host_emm.h"
 #include "nt_mem.h"
-/* DIVERGENCE(MVDM-HOST-DIV-096): the original calls NT4 kernel-VDM page
- * alias services.  Keep those exact public calls and page-number ABI, but
- * bind their user-mode replacement through the selected SoftPC adapter. */
 #include "mvdm_softpc_physical_mapping.h"
-/* DIVERGENCE(MVDM-HOST-DIV-267): kernel VDM supplied contiguous host aliases
- * for EMS windows. CCPU40 resolves every guest byte but intentionally does
- * not publish a span pointer. Keep the original fast macros for ordinary RAM;
- * the smallest bounded lease binding covers only an alias-backed span. */
 #include "mvdm_softpc_guest_memory.h"
 
 
@@ -131,79 +124,47 @@ Defines are:
 
 static int em_loads(sys_addr from, unsigned char *to, int length)
 {
-    uint32_t count;
-    sys_addr guest_from;
-    int result;
-
-    if (length < 0) return FAILURE;
-    count = (uint32_t)length;
-    guest_from = from;
 #ifdef BACK_M
 #line 103
 #error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
 #endif
-    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count)) {
+    if (!mvdm_softpc_physical_mapping_span_is_aliased(from, length)) {
         EM_loads(from, to, length);
         return SUCCESS;
     }
-    
-    result = mvdm_softpc_guest_memory_copy_from(guest_from, to, count) ?
+    return mvdm_softpc_guest_memory_copy_from(from, to, length) ?
         SUCCESS : FAILURE;
-    
-    return result;
 }
 
 static int em_stores(sys_addr to, unsigned char *from, int length)
 {
-    uint32_t count;
-    sys_addr guest_to;
-    int result;
-
-    if (length < 0) return FAILURE;
-    count = (uint32_t)length;
-    guest_to = to;
 #ifdef BACK_M
 #line 104
 #error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
 #endif
-    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
+    if (!mvdm_softpc_physical_mapping_span_is_aliased(to, length)) {
         EM_stores(to, from, length);
         return SUCCESS;
     }
-    sas_overwrite_memory(guest_to, count);
-    
-    result = mvdm_softpc_guest_memory_copy_to(guest_to, from, count) ?
+    sas_overwrite_memory(to, length);
+    return mvdm_softpc_guest_memory_copy_to(to, from, length) ?
         SUCCESS : FAILURE;
-    
-    return result;
 }
 
 static int em_moves(sys_addr from, sys_addr to, int length)
 {
-    uint32_t count;
-    sys_addr guest_from;
-    sys_addr guest_to;
-    int result;
-
-    if (length < 0) return FAILURE;
-    count = (uint32_t)length;
-    guest_from = from;
-    guest_to = to;
 #ifdef BACK_M
 #line 107
 #error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
 #endif
-    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count) &&
-        !mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
+    if (!mvdm_softpc_physical_mapping_span_is_aliased(from, length) &&
+        !mvdm_softpc_physical_mapping_span_is_aliased(to, length)) {
         EM_moves(from, to, length);
         return SUCCESS;
     }
-    sas_overwrite_memory(guest_to, count);
-    
-    result = mvdm_softpc_guest_memory_move(guest_to, guest_from, count) ?
+    sas_overwrite_memory(to, length);
+    return mvdm_softpc_guest_memory_move(to, from, length) ?
         SUCCESS : FAILURE;
-    
-    return result;
 }
 
 

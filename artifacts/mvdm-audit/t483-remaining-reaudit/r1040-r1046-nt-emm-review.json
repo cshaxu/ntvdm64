@@ -1,0 +1,97 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+  "source_head": "f3a746f972072ec84f56e7755d738a75f3bb966b",
+  "source_sha256": "84e0daa501996dfc43f0492ec3f1dc1a014fc6c1b1ebed84c9e177e7262336d8",
+  "points": [
+    {
+      "id": "T483-R1040",
+      "conclusion": "Typed declarations for exact VdmMap/Unmap public bindings and alias-span/guest-copy APIs. Modern process uses CCPU page aliases, not NT4 contiguous host window mappings. Keep two direct provider headers;do not relocate equivalent declaration complexity to another mirror.",
+      "mirror_diff_delta": -7,
+      "disposition": "minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1041",
+      "conclusion": "Original contiguous-address macro fails real reversed-page fixture. Keep existing ordinary-RAM fast macros and page-aware alias copy. Restore original caller preconditions: Move_Exchange_Memory_Region rejects length>1MB,then copy_exchange_data forwards bounded block lengths. Remove duplicate address/count/result locals and unreachable negative-length guards. Direct SAS forward byte move is not memmove overlap semantics.",
+      "mirror_diff_delta": -32,
+      "disposition": "minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1042",
+      "conclusion": "host_copy_con_to_con: original raw memmove AV in real cross-window fixture. Page-aware move can fail lease/allocation/preflight;return FAILURE rather than success;original higher caller maps failure to EMM_HW_ERROR.",
+      "mirror_diff_delta": 0,
+      "disposition": "residual pending owner"
+    },
+    {
+      "id": "T483-R1043",
+      "conclusion": "host_copy_con_to_EM: original memcpy from first resolved byte assumes contiguous conventional alias span;same reversed-page source failure. Page-aware load and error propagation preserve host API SUCCESS/FAILURE.",
+      "mirror_diff_delta": 0,
+      "disposition": "residual pending owner"
+    },
+    {
+      "id": "T483-R1044",
+      "conclusion": "host_copy_EM_to_con: original contiguous destination memcpy cannot cross independently mapped host pages. Page-aware store must keep SAS overwrite notification and propagate failure.",
+      "mirror_diff_delta": 0,
+      "disposition": "residual pending owner"
+    },
+    {
+      "id": "T483-R1045",
+      "conclusion": "host_exchg_con_to_con: original three raw operations depend on contiguous ranges. Retain short-circuit load/move/store and free original host_malloc buffer on failure;dropping failure cleanup leaks buffer or reports incomplete exchange as success.",
+      "mirror_diff_delta": 0,
+      "disposition": "residual pending owner"
+    },
+    {
+      "id": "T483-R1046",
+      "conclusion": "host_exchg_con_to_EM: original load/store face same conventional alias boundary. Retain short-circuit failure cleanup before original final EM_memcpy;no new buffer/owner introduced.",
+      "mirror_diff_delta": 0,
+      "disposition": "residual pending owner"
+    }
+  ],
+  "metric": {
+    "before": {
+      "added": 105,
+      "deleted": 26,
+      "total": 131
+    },
+    "after": {
+      "added": 66,
+      "deleted": 26,
+      "total": 92
+    },
+    "delta": -39
+  },
+  "evidence": {
+    "file": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+    "source_sha256": "035b3ce8157587e58c1dc64b01e60da69e2c5b6a6f0a864fd80bfd1ea3fda351",
+    "scope": "R1040-R1046 whole-file review complete;7 functional residuals remain pending owner",
+    "current_test_exit": 0,
+    "original_operations_test_exit": -1073741819,
+    "control": "Exactly five original host copy/exchange bodies restored in isolated nt_emm translation unit;current other code and same formal CCPU/nt_mem/session test libraries. Existing fixture linker uses /force:multiple;map confirms original-operations.obj owns changed operations.",
+    "exception": "c0000005; image002e0000;address00425717;preferred00400000 -> PC00545717,memmove begins00545210",
+    "existing_test": "test/mvdm-host/original_external_memory_test.c reversed adjacent aliases and host_copy_con_to_con across page boundary",
+    "limits": [
+      "Focused test only, not full integration or guest acceptance.",
+      "Does not establish every helper or failure check necessary.",
+      "Overlapping backing aliases are not covered by existing four-byte cross-window test."
+    ],
+    "SAS_contract": "c_sas_move_bytes_forward writes forward byte-by-byte;not automatically memmove overlap semantics.",
+    "next": "Audit complete callers, simplify redundant helper locals without changing overwrite/failure ordering;test candidate against same real memory facility before whole-file edit.",
+    "caller_precondition": "emm_fncs.c::Move_Exchange_Memory_Region rejects length>0x100000 before dispatch;copy_exchange_data forwards only bounded nonnegative block lengths to host_copy/host_exchg.",
+    "candidate": "nt_emm.minimized.c applied byte-for-byte to production source;repeated locals and negative guards removed;all #error and overwrite/failure ordering preserved",
+    "candidate_validation": "Final source compiled and published;real fixture0/current,AV/original,0/minimized;five directions andfive failure returns passed;Full19 passed",
+    "all_operations_fixture": {
+      "source": "build/t483-s5-p82/all-operations-test.c",
+      "source_sha256": "e6fa9062d5967b17109ddada71425bb01c27b526124ebc36adc1040af0c671e3",
+      "result": "0;all five operation bodies and five lease-failure returns pass",
+      "scope": "Actual current CCPU/nt_mem/alias/session libraries and minimized nt_emm object. Four-byte reversed-page boundary. Conventional/EMS copies and exchanges; five failure returns via ended memory lease.",
+      "boundary": "EM_host_base_address temporarily points to fixed8byte scratch to isolate copy API;restore prior pointer. EMS allocation itself remains covered by original fixture allocation tests,not claimed by this scratch fixture.",
+      "reproduction_patch": "--- test/mvdm-host/original_external_memory_test.c\n\n+++ build/t483-s5-p82/all-operations-test.c\n\n@@ -28,4 +28,10 @@\n\n extern PBYTE get_aligned_disk_buffer(void);\n extern DWORD disk_buffer_pool, max_align_factor, cur_align_factor;\n+\n+extern uint8_t *EM_host_base_address;\n+extern int host_copy_con_to_EM(int, unsigned short, unsigned short,unsigned short,unsigned short);\n+extern int host_copy_EM_to_con(int, unsigned short, unsigned short,unsigned short,unsigned short);\n+extern int host_exchg_con_to_con(int, unsigned short, unsigned short,unsigned short,unsigned short);\n+extern int host_exchg_con_to_EM(int, unsigned short, unsigned short,unsigned short,unsigned short);\n \n static void report(const char *message)\n@@ -166,4 +172,38 @@\n\n             external[0] == 0x53 && external[1] == 0x54);\n         report(\"EMS cross-window original nt_emm lease copy PASS\\n\");\n+        {\n+            uint8_t expanded[8], got[4], pattern[4]={0x61,0x62,0x63,0x64};\n+            uint8_t other[4]={0x71,0x72,0x73,0x74};\n+            uint8_t *saved=EM_host_base_address;\n+            unsigned i;\n+            EM_host_base_address=expanded;\n+            c_sas_stores(0x80ffe,pattern,4);\n+            CHECK(host_copy_con_to_EM(4,0x8000,0x0ffe,0,0)==0);\n+            for(i=0;i<4;i++)CHECK(expanded[i]==pattern[i]);\n+            for(i=0;i<4;i++)expanded[i]=other[i];\n+            CHECK(host_copy_EM_to_con(4,0,0,0x8000,0x0ffe)==0);\n+            c_sas_loads(0x80ffe,got,4);\n+            for(i=0;i<4;i++)CHECK(got[i]==other[i]);\n+            c_sas_stores(0x80ffe,pattern,4);\n+            CHECK(host_exchg_con_to_EM(4,0x8000,0x0ffe,0,0)==0);\n+            c_sas_loads(0x80ffe,got,4);\n+            for(i=0;i<4;i++)CHECK(got[i]==other[i] && expanded[i]==pattern[i]);\n+            c_sas_stores(0x70000,pattern,4);\n+            CHECK(host_exchg_con_to_con(4,0x8000,0x0ffe,0x7000,0)==0);\n+            c_sas_loads(0x80ffe,got,4);\n+            for(i=0;i<4;i++)CHECK(got[i]==pattern[i]);\n+            c_sas_loads(0x70000,got,4);\n+            for(i=0;i<4;i++)CHECK(got[i]==other[i]);\n+            mvdm_softpc_guest_memory_end(&owner);\n+            CHECK(host_copy_con_to_con(4,0x8000,0x0ffe,0x7000,0)!=0);\n+            CHECK(host_copy_con_to_EM(4,0x8000,0x0ffe,0,0)!=0);\n+            CHECK(host_copy_EM_to_con(4,0,0,0x8000,0x0ffe)!=0);\n+            CHECK(host_exchg_con_to_con(4,0x8000,0x0ffe,0x7000,0)!=0);\n+            CHECK(host_exchg_con_to_EM(4,0x8000,0x0ffe,0,0)!=0);\n+            CHECK(mvdm_softpc_guest_memory_begin(&owner));\n+            EM_host_base_address=saved;\n+            report(\"EMS all five operations and five lease-failure returns PASS\\n\");\n+        }\n+\n         CHECK(VdmUnmapDosMemory(0x80, 1) == 0);\n         CHECK(VdmUnmapDosMemory(0x81, 1) == 0);"
+    }
+  },
+  "limits": [
+    "Full19 routine integration gates passed;focused fixture is not separate Win3.x guest EMS acceptance.",
+    "Overlapping backing aliases and paging/reentry equivalence to alternate SAS paths not claimed. No new implementation for those paths."
+  ],
+  "line_proof": "batch-p82-line-check.json",
+  "newline": "Original CRLF restored;excluded from lexical metric.",
+  "delivery": "P82 cached full build,publish11x2,Full19 and governance passed;7 functional residuals pending owner"
+}

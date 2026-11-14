@@ -1,0 +1,8 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+    "common_selected_lines": 217,
+    "line_mismatches": [],
+    "method": "Actual original/minimized compiler /P, LF accounting, matched selected statements;original first declarations separately checked;all #error lines byte-equivalent."
+  }
+]

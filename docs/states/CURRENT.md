@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1045 points reviewed:379 restored delivered,0 local,7 approved,
-659 qualified pending;1675 unreviewed. Files138/365 complete,227 remain.
+1052 points reviewed:379 restored delivered,0 local,7 approved,
+666 qualified pending;1668 unreviewed. Files139/365 complete,226 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -54,9 +54,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P81 package `15a4788b-485f-490d-9d03-3b1a52d58c29` published11x2; hashes match.
+P82 package `f3a08843-45d8-4a51-957b-3cd46b1a54dd` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p81-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p82-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -231,3 +231,5 @@ Focused controls, cached build,publish11x2,Full passed;zero-delta P78 line corre
 P80:nt_cga6/6 reviewed;mirror353->338(-15),comments/lines only;build,publish11x2,Full19 passed;nextR1021.
 
 P81:nt_cpu19/19;mirror188->118(-70);13 restored,5 residuals,1 retained exclusion framework;final build,publish11x2,Full19 passed;nextR1040.
+
+P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,217 lines;build,publish11x2,Full19 passed;nextR1047.
