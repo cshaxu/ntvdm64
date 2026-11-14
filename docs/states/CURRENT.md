@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1283 points reviewed:486 restored/confirmed delivered,0 local,8 approved,
-789 qualified pending,0 restores decided;1437 unreviewed. Files177/365 audited,188 remain.
+1284 points reviewed:487 restored/confirmed delivered,0 local,8 approved,
+789 qualified pending,0 restores decided;1436 unreviewed. Files178/365 audited,187 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -238,3 +238,6 @@ P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,on
 P125 source-complete;mirror814->747(-67);provider16/copy14,1448 lines pass.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1269-r1279-vrnetapi-review.json).
 Cached full build,publish11x2,Full19/governance passed;Git accompanies receipt.
+
+P126 vrnetb confirmed correct;185 lines,4 exclusions,no source change.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1280-vrnetb-review.json);P125 build/publication/Full reused.

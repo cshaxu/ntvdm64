@@ -1,0 +1,53 @@
+{
+  "id": "T483-R1280",
+  "path": "src/mvdm-host/vdmredir/vrnetb.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/vdmredir/vrnetb.c",
+  "original_sha256": "65b6e9c17ecd71f570b2d8ce0973781c06e552414eb67be79baad673aa941c4f",
+  "current_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
+  "initial_review": "Historical +1/-1 line defect is not present. Whole-file raw comparison has only4 original DBG-body exclusions and line directives.",
+  "counter_review": "Checked all original/current normalized source blocks,not only historical point. Actual vrnetb object edge preprocessing retains185 nonempty code lines at original numbers,with zero selected-code changes. No functional restoration or autonomous adaptation is needed.",
+  "exclusions": [
+    {
+      "original_first": 135,
+      "original_last": 142,
+      "replacement": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_first": 314,
+      "original_last": 324,
+      "replacement": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_first": 385,
+      "original_last": 387,
+      "replacement": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "original_first": 406,
+      "original_last": 413,
+      "replacement": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    }
+  ],
+  "line_proof": {
+    "shared_selected_lines": 185,
+    "mismatches": [],
+    "selected_changes": []
+  },
+  "mirror_metric": {
+    "dlc": {
+      "before": {
+        "added": 4,
+        "deleted": 30,
+        "total": 34
+      },
+      "after": {
+        "added": 4,
+        "deleted": 30,
+        "total": 34
+      }
+    }
+  },
+  "source_change": false,
+  "disposition": "Confirmed already-correct subset/line mapping",
+  "verification": "Actual per-file preprocessing;P125 cached build,published11x2 and Full19 reused after22 image hash checks;no new runtime or publication claimed"
+}

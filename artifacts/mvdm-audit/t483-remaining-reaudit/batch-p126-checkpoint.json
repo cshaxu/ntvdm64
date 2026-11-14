@@ -1,0 +1,10 @@
+{
+  "batch": "P126",
+  "status": "Audit-only;source unchanged;publication identity verified;Git accompanies receipt",
+  "review": "r1280-vrnetb-review.json",
+  "mirror_diff_delta": 0,
+  "reused_evidence": "batch-p125-checkpoint.json",
+  "package": "66ee7948-79a1-4edc-9927-70b26445eb26",
+  "publication_hashes_verified": 22,
+  "no_new_full_or_publication_claim": true
+}

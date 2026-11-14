@@ -884,3 +884,6 @@ P125 [whole-file review](r1269-r1279-vrnetapi-review.json):mirror814->747(-67);p
 P125 [frozen build checkpoint](batch-p125-checkpoint.json) and [line proof](batch-p125-line-check.json);delivery pending.
 
 P125 final cached x86/x64,publication11x2,Full19 and governance passed;Git accompanies checkpoint.177/365 files;1283/2720 points:486 restored/confirmed,8 approved,789 pending,1437 unreviewed.
+
+P126 [vrnetb review](r1280-vrnetb-review.json):185 original lines,4 DBG exclusions,zero source change.
+[Checkpoint](batch-p126-checkpoint.json):P125 publication/Full reused with22 hashes.178/365 files;1284/2720 points.
