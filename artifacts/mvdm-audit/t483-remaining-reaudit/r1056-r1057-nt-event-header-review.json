@@ -1,0 +1,39 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "source_sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+  "source_head": "83ff2fba50378a6ef24da378fd1d8e049e3e2e5f",
+  "points": {
+    "R1056": {
+      "scope": "+1/-0;nt_ega.h",
+      "problem": "Final handoff after pending software VGA mode change",
+      "proof": [
+        "Original nt_graph.c::nt_graphics_tick defers choose_display_mode by EGA_TICK_DELAY;only after choose does it clear mode_change_required.",
+        "Original cmdexec.c::cmdExec blocks in nt_block_event_thread before starting native command;nt_event final calc_update executes before returning to guest. Future guest timer callbacks cannot be assumed to occur before this synchronous handoff.",
+        "Current CCPU uses software VGA rather than NT4 physical-console fullscreen takeover. Final copied text snapshot explicitly declines mode_change_required;calling the old calc_update pointer alone does not call choose_display_mode.",
+        "gfx_upd.h host_graphics_tick dispatches original working_video_funcs graphics_tick;nt_ega.h supplies original EGA_TICK_DELAY=2. Header is a direct dependency of that reused original state transition,not an independent mode algorithm."
+      ],
+      "decision": "Qualified residual header dependency;retain pending owner;coupled R1082 body will be separately audited",
+      "limits": "Source-level ordering evidence;no new runtime reproduction and no blanket approval of R1082",
+      "minimum": "One include;inline explanatory comment can be removed at whole-file edit without reducing line-count metric"
+    },
+    "R1057": {
+      "scope": "+3/-0;mouse_guest header and2 comment lines",
+      "problem": "Relative Window mouse input reaches original IRQ consumer",
+      "proof": [
+        "common/protocol/console_mouse.h defines signed relative dx/dy,source width/height,and ENTER/MOVE/LEAVE;this is not the absolute Console MOUSE_EVENT_RECORD contract.",
+        "ntvdm-exe/win32/console_client.c converts FRAME_MOUSE to CONSOLE_INPUT_RELATIVE_MOUSE;original nt_event switch has no case for this type.",
+        "nt_event.c dispatches to mvdm_softpc_mouse_receive;mouse_bridge submit queues the sample under ICA lock then calls original DoMouseInterrupt.",
+        "nt_mouse.c calls mvdm_softpc_mouse_apply under original CPU/IRQ ownership;it applies relative displacement using original EmulateCoordinates. Original nt_process_mouse instead clamps absolute Console coordinates and uses MouseEventBuffer.",
+        "Deleting interface and dispatch without replacing the source contract drops relative motion and route edges. Routing raw payload as MOUSE_EVENT reinterprets displacement as absolute coordinates and discards geometry/route semantics."
+      ],
+      "decision": "Qualified residual header dependency pending owner;do not infer all bridge internals are necessary",
+      "limits": "Source/protocol proof;no fresh mouse interaction test;related dispatch/pending/cancel rows remain separately queued",
+      "minimum": "Remove2 explanatory comment lines during whole-file cleanup;retain one header without relocating equivalent complexity"
+    }
+  },
+  "source_changes": false,
+  "mirror_diff_delta": 0,
+  "whole_file_status": "2 of44 points reviewed;file not complete;next R1058",
+  "line_status": "No source edit;#error/#line unchanged.Whole-file actual selected-line proof remains required before final file completion.",
+  "delivery": "Audit evidence only;P84 product baseline unchanged"
+}
