@@ -1,0 +1,19 @@
+{
+  "point": "T483-R0819",
+  "path": "src/mvdm-host/softpc.new/base/support/main.c",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -3,
+  "coupled_change": "R0822 early call also removed (-5); its formal ordered disposition follows R0820/R0821. No build before whole file completes.",
+  "evidence": "Selected host/src/config.c calls sas_init -> host_sas_init/InitIntelMemory, sets SAS RAM map, loads ROM and copies it; host_def.h makes host_rom_init empty. init_virtual_drivers only initializes mouse instance data; c_cpu_init resets CPU. Original main subsequently calls setup_vga_globals before host_init_screen, InitialiseDosEmulation and host_start_cpu. Selected ev_glue setup_vga_globals calls existing complete binder, including Video=C_Video. gvi_init/ega_init occur in later BIOS reset path, not config. Historical T411 checker asserted early-hook presence rather than proving an early Video consumer; its old necessity conclusion is not accepted.",
+  "change": "Removed added binding include and its two comment lines; paired removal of early bind call and explanation. Keep original setup_vga_globals binding.",
+  "line_mapping": "Existing #line50 retained after include removal; original blank and following block restored at early-hook removal. #error unchanged; entire-file line verification follows remaining points.",
+  "verification": "Source restoration local, final cached build/negative and startup checks required after full-file audit.",
+  "decision": "restore-original"
+}

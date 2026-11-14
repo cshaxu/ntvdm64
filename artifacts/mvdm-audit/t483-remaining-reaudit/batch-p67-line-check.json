@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+    "before": 163,
+    "after": 160,
+    "mirror_diff_delta": -3,
+    "error_identical": true,
+    "errors": 24,
+    "matching_blocks_minimum": 3,
+    "line_mismatches": [],
+    "crlf": 1017,
+    "lf": 1017
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/main.c",
+    "before": 195,
+    "after": 180,
+    "mirror_diff_delta": -15,
+    "error_identical": true,
+    "errors": 27,
+    "matching_blocks_minimum": 3,
+    "line_mismatches": [],
+    "crlf": 353,
+    "lf": 353
+  }
+]

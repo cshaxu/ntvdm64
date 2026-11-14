@@ -1,0 +1,16 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+  "points": [
+    "R0816",
+    "R0817",
+    "R0818"
+  ],
+  "complete": true,
+  "before_normalized_diff": 163,
+  "after_normalized_diff": 160,
+  "mirror_diff_delta": -3,
+  "original_line_mismatches": [],
+  "error_bodies_unchanged": true,
+  "format": "Original CRLF restored;tokens and behavior unchanged.",
+  "delivery": "P67 accumulation pending;parallel standalone_worker edit excluded"
+}

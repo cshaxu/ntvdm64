@@ -360,7 +360,13 @@ static DWORD nt_rdp_normalize_key(const KEY_EVENT_RECORD *input,
         output[0].Event.KeyEvent = key;
         return 1u;
     }
-    if (key.wVirtualKeyCode != 0u && key.wVirtualKeyCode != VK_PACKET) {
+    /* Scanless printable input carries the intended character, even when
+     * Console supplies an ordinary VK. Mapping only that VK loses Shift.
+     * Physical scans and Ctrl/Alt shortcuts retain their original identity. */
+    if (key.wVirtualKeyCode != 0u && key.wVirtualKeyCode != VK_PACKET &&
+        (key.uChar.UnicodeChar < L' ' || key.uChar.UnicodeChar == 0x7fu ||
+         (key.dwControlKeyState & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED |
+                                  LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)))) {
         scan = nt_rdp_resolve_scan(key.wVirtualKeyCode);
         if (scan == 0u) return 0u;
         key.wVirtualScanCode = (WORD)(scan & 0xffu);
@@ -419,6 +425,9 @@ static DWORD nt_rdp_normalize_key(const KEY_EVENT_RECORD *input,
         (count = nt_rdp_emit_transition(output, capacity, count,
             key.uChar.UnicodeChar, scan, virtual_key, control_state, FALSE)) == 0u)
         return 0u;
+    /* Only the character repeats; modifier transitions remain single. */
+    output[count - 2u].Event.KeyEvent.wRepeatCount =
+        key.wRepeatCount ? key.wRepeatCount : 1u;
     if ((key_flags & 6u) == 6u)
         return nt_rdp_emit_transition(output, capacity, count,
             0, 0x38u, VK_MENU, ENHANCED_KEY, FALSE);

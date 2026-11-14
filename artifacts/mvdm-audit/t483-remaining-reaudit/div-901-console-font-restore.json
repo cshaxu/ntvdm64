@@ -1,0 +1,44 @@
+{
+  "point": "MVDM-HOST-DIV-901",
+  "classification": "supplemental new mirror difference; outside frozen 2720-point audit census",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "function": "calcScreenParams",
+  "commit": "8e97e5d3952474de27d6655e60a25c8de4461cb4",
+  "mirror_diff_delta": {
+    "added_physical_lines": 10,
+    "deleted_physical_lines": 0,
+    "comment_lines": 3,
+    "noncomment_lines_including_braces": 7
+  },
+  "problem": "Host Console geometry restoration changed software VGA cell height without loading the corresponding font. Win31 exit left eight new glyph rows over older taller glyph data, displayed at height14.",
+  "original_restoration_evidence": "Same-worker COMMAND -> Win31 /3 -> exit reproduced mixed A glyph 3078ccccfccccc00c6c6c6c60000 at height14. The actual-function regression control removes the new loading block and fails font-height consistency.",
+  "implemented_option": "Reuse original load_font for the host-selected 8/14/16-row BIOS font before scanline/geometry restoration; do not reload when height is unchanged.",
+  "alternatives": "Exact restoration without a matching software-VGA adaptation reintroduces the reproduced failure. Renderer masking or heuristic glyph substitution would hide the inconsistent VGA state and is not selected.",
+  "verification": {
+    "package": "3e37552a-825e-4dd9-9a78-720b7d3a9ed9",
+    "publication_before_acceptance_tests": true,
+    "destinations": [
+      "O:/WINNT/system32",
+      "assets/release"
+    ],
+    "manifest_files": 11,
+    "full_selected_gates_passed": 18,
+    "external_dos4gw_fixture": "skipped; not supplied",
+    "real_win31_exit_rows": [
+      25,
+      28,
+      43,
+      50
+    ],
+    "glyph_comparison": "All256 visible glyphs identical before/after each real exit and after CAF return at height14",
+    "command_then_win_cmd": "passed; isolated copy displayed menus and probe selected386 Enhanced",
+    "tests": [
+      "test/ntvdm-exe/softpc/verify-console-font-restore.ps1",
+      "test/ntvdm-exe/softpc/verify-startup-presentation.ps1"
+    ],
+    "local_evidence_root": "build/win31-font-fix2"
+  },
+  "status": "pending-owner-decision-evidence-qualified",
+  "implementation_status": "implemented, published, tested, committed and pushed",
+  "owner_decision": "Immediate bug repair authorized; user explicitly requests pending diff decision tracking. Long-term retention decision remains pending."
+}

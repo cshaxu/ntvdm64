@@ -1,0 +1,10 @@
+{
+  "point": "T483-R0820",
+  "path": "src/mvdm-host/softpc.new/base/support/main.c",
+  "decision": "minimize; remaining declaration pending owner",
+  "mirror_diff_delta": -6,
+  "evidence": "Original main.c54 hides host_start_cpu declaration under !CPU_40_STYLE. Selected NT provider nt_cpu.c72 defines void host_start_cpu(), calling cpu_simulate; main calls it after DOS initialization. No declaration exists in selected base/inc or host/inc. Deleting the selected declaration produces implicit int declaration for a void provider, not the provider contract. This is declaration compatibility evidence, not an observed runtime crash.",
+  "change": "Removed four explanatory comment lines; restored original #ifndef inline comment. Retained excluded original body #error and selected void prototype. Corrected its #line61 to original declaration line55.",
+  "limits": "Final full-file line validation and cached build not run; R0821 and R0822 dispositions remain. No early-bind test pass claimed.",
+  "coupled_test": "Verify-T411CvidcVectorContract now checks original config -> setup_vga_globals -> screen -> DOS initialization -> CPU order; complete binder still asserted in setup_vga_globals. Old test demanded unnecessary early hook."
+}

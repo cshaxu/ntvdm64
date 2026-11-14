@@ -1,0 +1,30 @@
+{
+  "scope": "Owner-requested combined commit and push of current main worktree; investigation stopped.",
+  "implementation": "Scanless printable ordinary VK input uses existing character mapping; physical scans and Ctrl/Alt shortcuts retain identity. Character repeat field is preserved.",
+  "changed_production_path": "src/ntvdm-exe/win32/console_compat.c",
+  "new_mirror_diff": 0,
+  "package": "e08de2fa-ed4f-409e-bf87-376e59bb3756",
+  "publication": "11 images published to O:/WINNT/system32 and assets/release before acceptance tests.",
+  "verified": {
+    "old_command_probe": "scan=0,VK_OEM_1,Unicode colon,no Shift -> RDP;END; VK_PACKET control -> RDP:END",
+    "new_command_probe": "Both event forms -> RDP:END",
+    "unit": "Punctuation, case, modifier preservation, repeat field, key-up, queue bounds and receipt cases passed. Old source fails Shift assertion.",
+    "full": {
+      "gates": 19,
+      "all_passed": true,
+      "evidence": "build/rdp-scanless-text/full-clean/timings.json",
+      "skipped": "External DOS4GW/Nesticle fixtures not supplied"
+    },
+    "test_runner": "Standalone VS compiler fixture now runs in a child PowerShell to avoid polluting later runtime gates."
+  },
+  "open_issue": {
+    "owner_report": "Typing colon then semicolon under RDP Console can subsequently hang/exit.",
+    "status": "Input fix accepted by owner; suspected concurrent-test interference remains causally unconfirmed.",
+    "stress": "Five 240-event probe variants did not observe early launcher termination; this does not disprove the report.",
+    "service_isolation_hypothesis": "Full gate runtime preserves published package identity and endpoints are scoped by session/logon/package ID. Shared-service cleanup interference is a hypothesis, not an established cause.",
+    "reproduction_attempt": "Two-owned-package isolation attempt ended with Missing owned first broker; no successful collision reproduction or causal proof.",
+    "next_investigation": "Capture actual failure and native exit/worker reason; verify isolation before concurrent installed-package/manual and Full testing."
+  },
+  "registration": "DIV-901 remains pending long-term retention decision in pending-decisions.csv; this RDP change adds no original mirror lines.",
+  "owner_followup": "Owner explicitly accepts the RDP input fix and requests retaining/committing it; suspects other tests caused the exit."
+}

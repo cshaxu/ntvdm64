@@ -1,0 +1,15 @@
+{
+  "point": "T483-R0822",
+  "before": {
+    "added": 5,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 0,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -5,
+  "decision": "restore original startup order",
+  "evidence": "r0819-main-early-binding-restoration.json traces selected config/sas/ROM/reset and original setup order. Existing complete binder remains in setup_vga_globals; early call has no demonstrated earlier consumer.",
+  "verification": "Local source restored; final cached build/test pending. Contract checker updated from early-hook presence to original startup order, not claimed runtime proof."
+}

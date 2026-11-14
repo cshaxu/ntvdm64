@@ -40,9 +40,9 @@ const xt = requireText(root, 'src/mvdm-host/softpc.new/base/support/xt.c',
 const evGlue = requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/ev_glue.c',
   /setup_vga_globals[\s\S]*mvdm_cvidc_bind_vectors\(\)/);
 const localfm = requireText(root, 'src/mvdm-host/softpc.new/base/ccpu386/localfm.c',
-  /extern\s+IHP\s+Gdp\s*;/);
+  /struct CpuVector Cpu\s*;/);
 const main = requireText(root, 'src/mvdm-host/softpc.new/base/support/main.c',
-  /mvdm_cvidc_bind_video_vector\(\)[\s\S]*config\(/);
+  /config\([\s\S]*setup_vga_globals\(\);[\s\S]*host_init_screen\([\s\S]*InitialiseDosEmulation\([\s\S]*host_start_cpu\(/);
 requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/evidgen.h',
   /#ifndef CPU_40_STYLE\s+(?:#line\s+\d+\s+)?#define\s+getVideorplane/);
 requireText(root, 'src/mvdm-host/softpc.new/base/inc/egacpu.h',
@@ -67,13 +67,12 @@ if (!publicSlots.includes('CalcQuickEventInstTime') ||
 if (!binder.includes('mvdm_cvidc_bind_video_vector();') ||
     !cvidAccess.includes('result = (*(Cpu.CalcQuickEventInstTime))(val);') ||
     !ccpuHeader.includes('c_effective_addr(seg, offset)') ||
-    !xt.includes('#ifdef CPU_30_STYLE') || /Cpu\.EffectiveAddr/.test(xt) || !evGlue.includes('mvdm_cvidc_bind_vectors();') ||
-    !main.includes('mvdm_cvidc_bind_video_vector();')) {
+    !xt.includes('#ifdef CPU_30_STYLE') || /Cpu\.EffectiveAddr/.test(xt) || !evGlue.includes('mvdm_cvidc_bind_vectors();')) {
   throw new Error('CCPU/C-VID profile-routing contract drifted');
 }
-if (!/IHP\s+Gdp\s*=\s*\(IHP\)0\s*;/.test(evGlue) ||
+if (!/(^|\n)IHP\s+Gdp\s*;/.test(evGlue) ||
     /(^|\n)IHP\s+Gdp\s*;/.test(localfm)) {
-  throw new Error('GDP must have exactly one explicit C-VID state owner');
+  throw new Error('GDP must retain its original C-VID state owner');
 }
 if (mapPath !== null) {
   const map = fs.readFileSync(mapPath, 'utf8');
@@ -88,7 +87,7 @@ console.log(JSON.stringify({
   quick_event_slot: 'c_cpu_calc_q_ev_inst_for_time',
   ccpu_effective_address: 'direct-c_effective_addr',
   cpu30_indirection_excluded: true,
-  early_video_bind: true,
+  original_startup_binding_order: true,
   setup_bind: true,
   quick_event_restart_owner: 'system/qevnt.c::qevJumpRestart',
   gdp_owner: 'cvidc/ev_glue.c',

@@ -165,6 +165,11 @@ try {
     Invoke-Gate 'console-font-restore' {
         & "$repo/test/ntvdm-exe/softpc/verify-console-font-restore.ps1" -OutputRoot "$log/console-font-restore" *> "$log/console-font-restore.txt"
     }
+    Invoke-Gate 'console-input-batch' {
+        # The standalone compiler fixture imports VS environment variables.
+        & (Get-Process -Id $PID).Path -NoProfile -File "$repo/test/observation/verify-console-input-batch.ps1" -BuildRoot "$log/console-input-batch" -LogPath "$log/console-input-batch/run.log" *> "$log/console-input-batch.txt"
+        if($LASTEXITCODE){throw 'Console input batch regression failed'}
+    }
     Invoke-Gate 'ntvdm-export-ordinals' {
         & $Python "$repo/test/observation/verify-ntvdm-export-ordinals.py" `
             (Join-Path $runtimeBinary 'ntvdm.exe') `

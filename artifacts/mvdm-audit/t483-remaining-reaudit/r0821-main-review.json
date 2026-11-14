@@ -1,0 +1,15 @@
+{
+  "point": "T483-R0821",
+  "before": {
+    "added": 2,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 1,
+    "deleted": 0
+  },
+  "mirror_diff_delta": -1,
+  "decision": "restore int declaration omission; residual void declaration pending owner",
+  "evidence": "nt_msscs.c InitialiseDosEmulation is originally implicit int with int argc,char **argv; main passes int argc,char **argv and ignores result. Actual worker main compile command uses /TC /W4, no /we4013. No demonstrated ABI failure from original omission. mouse_io.c mouse_driver_initialisation is GLOBAL void IFN0(); no public prototype in selected base/inc or host/inc, so original omission implicitly declares int contrary to provider. Retain only exact void contract, not a new header/shim.",
+  "verification": "Source and actual compile-command evidence; final build/test pending."
+}

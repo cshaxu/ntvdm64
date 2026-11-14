@@ -407,7 +407,6 @@ LOCAL VOID generic_outsd IFN3(io_addr, io_address, double_word *, valarray, word
 #endif
 
 /* ensure any more LOCAL routines remain LOCAL */
-/* DIVERGENCE(MVDM-HOST-DIV-477): CPU40 reuses the original monitor IOS entries. */
 #if defined(NTVDM) && defined(MONITOR)
 #line 414
 #error Excluded unsupported monitor IOS carrier
@@ -444,7 +443,7 @@ VOID outsw IFN3(io_addr, io_address, word *, valarray, word, count)
 }
 
 #endif
-#endif /* NTVDM & MONITOR */
+#endif	/* NTVDM & MONITOR */
 #line 444
 
 /*

@@ -49,28 +49,20 @@
 #include "gfx_upd.h"
 #include "cmos.h"
 #include "gfi.h"
-/* DIVERGENCE(MVDM-HOST-DIV-162): selected CCPU40/C-VID sources retain their
- * original tables but not the historical generated pre-config binder. */
-#include "mvdm_cvidc_vector_binding.h"
 #line 50
 #include "timer.h"
 #include "yoda.h"
 //#include "host_env.h"
 
-/* DIVERGENCE(MVDM-HOST-DIV-083): CPU_40_STYLE selects the same original
- * host startup provider but hid its declaration, while the NT DOS-emulation
- * and mouse providers have no selected public declaration carrier. Publish
- * their exact existing contracts without changing startup order. */
 #line 54
-#ifndef CPU_40_STYLE
+#ifndef CPU_40_STYLE	/* defined in CpuH */
 #line 55
 #error Excluded unsupported non-CPU40 host startup profile
 #else
-#line 61
+#line 55
 extern void host_start_cpu(void);
 #endif
 #line 57
-extern int InitialiseDosEmulation(int argc, char **argv);
 extern void mouse_driver_initialisation(void);
 
 #line 58
@@ -87,7 +79,6 @@ extern void host_applInit(int argc, char *argv[]);
 #endif	/* ANSI */
 #line 68
 
-#line 69
 #ifdef REAL_VGA
 #line 70
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
@@ -100,6 +91,7 @@ extern void host_applInit(int argc, char *argv[]);
 #line 76
 #error DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register.
 #else
+#line 79
 GLOBAL IBOOL Running_SoftWindows = FALSE;
 GLOBAL CHAR *SPC_Product_Name = "SoftPC";
 #endif /* SOFTWINDOWS */
@@ -213,11 +205,6 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
    * Setup the initial gfi funtion pointers before going into config
    */
   gfi_init();
-
-  /* DIVERGENCE(MVDM-HOST-DIV-162): config() can initialise EGA before the
-   * original later setup_vga_globals() hook. Bind the selected original
-   * C-VID vector table before that first controller call. */
-  mvdm_cvidc_bind_video_vector();
 
   /*
    * Initialise any Windows 3.x compliant DOS Drivers.

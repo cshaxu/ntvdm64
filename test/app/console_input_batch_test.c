@@ -184,6 +184,44 @@ int main(void)
     }
     CHECK(ntvdm_console_read_pc_input(input,out,NTVDM_PC_INPUT_RECORDS,&got,CONSOLE_READ_NOWAIT));
     CHECK(got==4 && !memcmp(out,queue,4*sizeof(*out)));
+    /* Character-bearing scanless records must retain text semantics even
+     * when Console/RDP supplies an ordinary virtual key instead of VK_PACKET. */
+    {
+        HKL prior=GetKeyboardLayout(0),us=LoadKeyboardLayoutW(L"00000409",0);
+        const WCHAR chars[]=L":;!?_+Aa";
+        CHECK(us && ActivateKeyboardLayout(us,0));
+        for(i=0;chars[i];++i) {
+            SHORT mapping=VkKeyScanExW(chars[i],us);
+            DWORD j,character_down=0;
+            reset(1);queue[0].EventType=KEY_EVENT;
+            queue[0].Event.KeyEvent.bKeyDown=TRUE;
+            queue[0].Event.KeyEvent.wRepeatCount=1;
+            queue[0].Event.KeyEvent.wVirtualKeyCode=(WORD)(mapping&255);queue[0].Event.KeyEvent.wRepeatCount=3;
+            queue[0].Event.KeyEvent.uChar.UnicodeChar=chars[i];
+            CHECK(ntvdm_console_read_pc_input(input,out,NTVDM_PC_INPUT_RECORDS,&got,CONSOLE_READ_NOWAIT));
+            for(j=0;j<got;++j)if(out[j].Event.KeyEvent.bKeyDown &&
+                out[j].Event.KeyEvent.wVirtualKeyCode==(WORD)(mapping&255)) {
+                CHECK(!!(out[j].Event.KeyEvent.dwControlKeyState&SHIFT_PRESSED)==!!(mapping&0x100));
+                CHECK(out[j].Event.KeyEvent.uChar.UnicodeChar==chars[i]);CHECK(out[j].Event.KeyEvent.wRepeatCount==3);
+                ++character_down;
+            }
+            CHECK(character_down==1);
+            queue[0].Event.KeyEvent.bKeyDown=FALSE;position=0;
+            CHECK(ntvdm_console_read_pc_input(input,out,NTVDM_PC_INPUT_RECORDS,&got,CONSOLE_READ_NOWAIT));
+            CHECK(got==0);
+        }
+        const DWORD modifiers[]={LEFT_CTRL_PRESSED,RIGHT_CTRL_PRESSED,LEFT_ALT_PRESSED,RIGHT_ALT_PRESSED};
+        for(DWORD m=0;m<ARRAYSIZE(modifiers);++m) {
+            DWORD modifier=modifiers[m];
+            KEY_EVENT_RECORD key={TRUE,1,'X',0,L'x',modifier};
+            CHECK(nt_rdp_normalize_key(&key,out,ARRAYSIZE(out))==1);
+            CHECK(out[0].Event.KeyEvent.wVirtualKeyCode=='X' &&
+                out[0].Event.KeyEvent.dwControlKeyState==modifier &&
+                out[0].Event.KeyEvent.wVirtualScanCode!=0);
+        }
+        CHECK(ActivateKeyboardLayout(prior,0));
+    }
+    printf("BATCH-SCANLESS-TEXT punctuation/case/modifiers/key-up PASS\n");
     printf("BATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS\n");
     memset(&nt_keyboard_history,0,sizeof(nt_keyboard_history));reset(2);use_receipts=TRUE;
     queue[0].EventType=KEY_EVENT;queue[0].Event.KeyEvent.bKeyDown=TRUE;

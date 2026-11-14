@@ -5,8 +5,10 @@ $root=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $build=[IO.Path]::GetFullPath($BuildRoot)
 if(!$build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalIgnoreCase)) {throw 'BuildRoot must be below repository build'}
 $log=[IO.Path]::GetFullPath($LogPath)
-if(!$log.StartsWith('O:\winnt\Logs2\',[StringComparison]::OrdinalIgnoreCase) -and
-   !$log.StartsWith('O:\winnt\logs\',[StringComparison]::OrdinalIgnoreCase)) {throw 'Runtime log must use approved observation directory'}
+if(!$log.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -and
+   !$log.StartsWith('O:\winnt\Logs2\',[StringComparison]::OrdinalIgnoreCase) -and
+   !$log.StartsWith('O:\winnt\logs\',[StringComparison]::OrdinalIgnoreCase)) {throw 'LogPath must use repository build or approved observation directory'}
+New-Item -ItemType Directory -Force (Split-Path -Parent $log) | Out-Null
 New-Item -ItemType Directory -Force $build | Out-Null
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $envLines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set')
@@ -15,7 +17,7 @@ $sources=@('test/app/console_input_batch_test.c',
  'test/app/console_input_batch_stubs.c',
  'src/ntvdm-exe/softpc/mvdm_keyboard_history.c',
  'src/common/console/client.c',
- 'src/lib-win32/pipe/pipe_transfer.c',
+ 'src/lib-win32/pipe/pipe_transfer.c','src/lib-win32/handle/duplicate.c',
  'src/ntvdm-exe/win32/console_client.c','src/ntvdm-exe/win32/console_graphics.c',
  'src/ntvdm-exe/win32/console_bitmap.c','src/ntvdm-exe/softpc/v7_pointer.c','src/compat/console_grid.c',
  'src/ntvdm-exe/session/session.c','src/ntvdm-exe/session/guest_memory_lease.c') |

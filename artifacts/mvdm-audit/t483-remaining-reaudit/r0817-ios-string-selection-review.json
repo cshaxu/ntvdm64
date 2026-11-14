@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0817",
+  "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+  "before": {
+    "added": 3,
+    "deleted": 0
+  },
+  "remaining": {
+    "added": 3,
+    "deleted": 0
+  },
+  "mirror_diff_delta": 0,
+  "problem": "Expose original string IOS provider without enabling hardware-monitor configuration.",
+  "evidence": "Original EventVdmStringIo (v86/monitor/i386/monitor.c494) calls the four IOS string wrappers. CCPU c_main INSB checks CPL/IOPL before IN8; c_xcptn routes protected faults to host_exint_hook. Scalar IN8/IN16 call scalar tables, unlike string-provider dispatch. ccpu_monitor_boundary_fixture cases23/52/59/82 distinguish string handling, untouched buffer, live pointer and original adapter choice; delivered P66 monitor-final.log has143 passing cases. Directly duplicating table dispatch in the consumer only relocates original code.",
+  "change": "Retain minimal selection of original bodies.",
+  "line_mapping": "Existing #line414/444 delimit unchanged original code. All #error lines retained. Restored original CRLF bytes throughout file.",
+  "verification": "Source/call-chain and P66 real CCPU controls inspected. Current changes are format-only; fresh batch build not yet required.",
+  "decision": "qualified residual pending owner",
+  "limits": [
+    "Later nt_inthk.c audit not completed by this finding.",
+    "Original output string adapter selection preserved without speculative repair."
+  ]
+}

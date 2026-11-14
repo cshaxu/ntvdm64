@@ -644,3 +644,21 @@ P66 [T483-R0815](r0815-callback-original-save-review.json):Restored exact origin
 P66 [mouse file review](mouse-io-c-file-review.json):63/63;whole-file mirror net-127 across3 files, point aggregation reconciliation+2;108/365 files audited. Build/delivery pending.
 
 P66 [delivery evidence](batch-p66-checkpoint.json):cached full,publication11x2,mouse controls,Full and governance passed;22 restorations verified;mirror diff-127;822/2720 points and108/365 files audited;Receipt accompanies P66 commit.
+
+P67 ios.c3/3: [R0816](r0816-ios-string-selection-review.json), [R0817](r0817-ios-string-selection-review.json), [R0818](r0818-ios-string-selection-review.json). Format-only net-3 plus original CRLF restoration;825/2720 points,109/365 files;batch pending.
+
+P67 [R0819](r0819-main-early-binding-restoration.json):restore original include/startup pairing;R0822 source removal coupled but not counted yet.826/2720 points;main1/4;no partial-file build.
+
+R0820 declaration minimization: [review](r0820-main-declaration-review.json). Source/ABI evidence only; P67 final verification pending.
+
+main.c final points: [R0821](r0821-main-review.json), [R0822](r0822-main-review.json); P67 source changes await final verification.
+
+P67 whole-file checks: [ios.c](ios-c-file-review.json), [main.c](main-c-file-review.json), [logical lines](batch-p67-line-check.json).
+
+P67 [delivery checkpoint](batch-p67-checkpoint.json): cached build, dual publication and Full regression passed; included in the owner-requested combined Git delivery. Three full restorations are now verified/published; residual decisions remain pending.
+
+## Supplemental new mirror differences
+
+[MVDM-HOST-DIV-901: Console font restoration](div-901-console-font-restore.json) is recorded in the pending decision tracker as implemented and published, with long-term retention still pending. Its +10/-0 physical lines are a new owner-requested bug repair, separate from the frozen 2720-point R census; this registration does not advance the ordered audit or mark retention approved.
+
+[RDP input checkpoint](rdp-input-checkpoint.json) records the current published adaptation and Full19 pass, with the owner subsequently accepting the input fix and requesting its retention. The exit is suspected to be test interference; the service-identity collision hypothesis was not established by the attempted probe.

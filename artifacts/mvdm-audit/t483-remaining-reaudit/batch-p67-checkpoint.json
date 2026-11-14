@@ -1,0 +1,60 @@
+{
+  "batch": "P67",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-owner-authorized-Git-delivery",
+  "source_head": "2123c235d0d2d80dea16c7d124485d7961b264ec",
+  "source_files": 6,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "sha256": "f5bb86d7fada1b989786beb80b506b44a66b88767bb67b1afb693f8792877dea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "sha256": "9a3e1bde1aab4dae562720da1fcef95a85ee6e2e17bccfe1055417b731033eff"
+    },
+    {
+      "path": "tools/audit/Verify-T411CvidcVectorContract.mjs",
+      "sha256": "23db251d8005eac4b1c98cc205f889154f1c75f7e347915e329efccd8a069db4"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+      "sha256": "582e4fd65b8340243d8d4da2922fffeb1d1bb94a0c6945156fa661b7ccc60fff"
+    },
+    {
+      "path": "tools/audit/Invoke-ProductVerification.ps1",
+      "sha256": "80f392b29fb741145bf98f170ef6f03744ca81dec6fd083e3b5b5ae0e21a19d7"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/verify-startup-presentation.ps1",
+      "sha256": "d5b8016e2c1649b679937a63a87d575a521aa49965e1a0c8ddebd01b16e7d1d1"
+    }
+  ],
+  "mirror_diff_delta": -18,
+  "mirror_files": 2,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "other_session_changes": "Startup presentation correction and its test are pinned build inputs, not claimed as this session original audit work; preserve parallel ownership.",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "build_job": "build/t483-s5-p67/build-job.json",
+  "verification": "Pinned audit sources, source contract and line checks pass; cached x86/x64 build, dual publication hashes, vector fixture and P67 Full passed. Subsequent combined RDP package Full19 passed; user-reported RDP instability remains unresolved.",
+  "publication": {
+    "status": "published",
+    "package": "7fac0faa-14d5-4ba4-b6a0-2d5ec3347cfb",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "cached_full_exit": 0,
+  "vector_fixture": "pass: build/t483-s5-p67/vector-final.log",
+  "compile_warning": "Original InitialiseDosEmulation omission emits C4013 at original line306; original provider implicit int; accepted compiler command completes successfully.",
+  "final_verification": {
+    "original_full_exit": 0,
+    "evidence": "build/t483-s5-p67/full-final.log",
+    "latest_combined_full_gates": 19,
+    "latest_combined_evidence": "build/rdp-scanless-text/full-clean/timings.json",
+    "latest_combined_package": "e08de2fa-ed4f-409e-bf87-376e59bb3756",
+    "qualification": "Automated passes do not close the later owner-reported RDP exit."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/support/main.c",
+  "points": [
+    "R0819",
+    "R0820",
+    "R0821",
+    "R0822"
+  ],
+  "disposition": "2 full local restorations;2 minimized residuals pending owner",
+  "mirror_diff_delta": -15,
+  "excluded_branches": "27 #error directives unchanged",
+  "line_verification": "batch-p67-line-check.json; matching original code blocks of >=3 lines, no remaining mismatches; selected added host_start_cpu declaration maps original55; #line58 resumes original declarations. Removed redundant #line69 to add needed #line79 for original SOFTWINDOWS alternative without adding directive count.",
+  "byte_format": "Restored original CRLF; no guest changes.",
+  "validation": "Source review complete; final cached compilation, publication, regression and Git delivery pending.",
+  "concurrency": "Existing win31-font-fix Full runner observed PID9812/11724; do not mutate shared build/service while it runs.",
+  "source_contract_check": {
+    "first_result": "failed: obsolete checker required localfm extern Gdp, already removed in P47; also required explicit Gdp zero initializer restored to original tentative definition in P54",
+    "correction": "Check localfm Cpu carrier; original C-VID tentative Gdp owner; original startup binding order. No production restoration reverted.",
+    "rerun": "owned PID8824 exit0;154 public slots,55 private slots; GDP map not supplied, not claimed verified",
+    "evidence": "build/t483-s5-p67/vector-contract.log;source-check.exit;source-check-r2-job.json"
+  }
+}
