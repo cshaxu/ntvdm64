@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/isvwow.h",
+  "source_sha256": "de0c0839707c033582c23a706eae019cd9c42f3424815e5ba0d9ec6135e06e08",
+  "original_sha256": "f15af27b3bb14f229506e079de18ba7d4e8fb8c61a57e40ffd614f976be5fd6c",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "mirror_diff": {
+    "before": 3,
+    "after": 2,
+    "delta": -1
+  },
+  "change": "Remove divergence comment and redundant #line; only APIENTRY remains different from original. No executable token or ABI change.",
+  "line_proof": "After replacing the single APIENTRY token with empty text, full normalized source equals pinned original. All physical/logical lines now match original, including declaration line23. Before the existing #line24 already aligned lines24 onwards; declaration itself was physically24.",
+  "controls": {
+    "original": {
+      "Gz": 0,
+      "Gd": 2
+    },
+    "before": {
+      "Gz": 0,
+      "Gd": 0
+    }
+  },
+  "evidence": "Original /Gd compile fails C2440: cdecl pointer cannot initialize APIENTRY pointer; selected product /Gz passes. Existing T447 S3 P21 delivery explicitly includes external-default-calling-convention declaration check.",
+  "limitation": "No current product /Gd caller found; no runtime failure reproduced. This is external extension declaration compatibility evidence, not a product /Gz requirement.",
+  "decision": "Minimize formatting now; residual APIENTRY remains pending owner decision. Removing it drops the retained /Gd external declaration contract.",
+  "status": "source review and compile controls complete;format-only changes not delivered"
+}

@@ -20,9 +20,7 @@
 ** a hardware interrupt callback and to use the same handle mapping that
 ** WOW uses.
 */
-/* DIVERGENCE(MVDM-HOST-DIV-342): match wmmedia.c's explicit APIENTRY ABI. */
 LPVOID APIENTRY
-#line 24
 WOW32ResolveMemory(
     VPVOID  vp
     );

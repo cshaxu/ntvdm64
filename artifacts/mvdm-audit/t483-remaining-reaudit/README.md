@@ -907,3 +907,5 @@ P129 [source checkpoint](batch-p129-checkpoint.json), [line proof](batch-p129-li
 P129 final cached build,11x2 publication,focused4 and Full19 passed;delivery governance/Git follow.181/365 files;1301/2720 points:493 delivered,8 approved,800 pending,1419 unreviewed.
 
 P130 [fastwow review](r1302-fastwow-review.json), [receipt](batch-p130-checkpoint.json):four excluded bodies only;both WOW contexts retain original declarations/lines. No product change;P129 package/Full19 reused with22 hashes.182/365 files;1302/2720 points;494 delivered/confirmed,8 approved,800 pending,1418 unreviewed.
+
+P131 [isvwow review](r1303-isvwow-review.json), [receipt](batch-p131-checkpoint.json):diff3->2(-1),comment/line-only. Original product /Gz passes;external-default /Gd fails;residual explicit APIENTRY pending owner.183/365 files;1303/2720 points;494 restored/confirmed,8 approved,801 pending,1417 unreviewed. P129 runtime/publication reused.
