@@ -753,3 +753,5 @@ P89: [R1079-R1087 handoff](r1079-r1087-nt-event-handoff-review.json);nt_event32/
 P90 delivered: [whole-file checkpoint](batch-p90-checkpoint.json), [line proof](batch-p90-line-check.json), [R1088-R1099](r1088-r1099-nt-event-return-review.json). nt_event44/44 audited;two originals restored;mirror253->187(-66),937 original selected lines match. Cached full build,publish11x2/hash,Full19 passed;R1062/R1063 corrections remain pending.
 
 P91 delivered: [nt_fdisk review](r1100-r1110-nt-fdisk-review.json), [byte/line proof](batch-p91-line-check.json), [checkpoint](batch-p91-checkpoint.json). All11 points checked;9 newly reconciled/restored,2 prior delivered. File is byte-identical to original;actual header controls and cached full build,publish11x2,Full19 passed.
+
+P92 audit-only: [nt_fulsc first three route boundaries](r1111-r1113-nt-fulsc-route-review.json).3/11 points,source-proven residuals pending owner;no product change. P91 remains published.1117 reviewed,713 pending,1603 unreviewed;143 whole files complete.
