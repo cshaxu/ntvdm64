@@ -1,0 +1,107 @@
+{
+  "scope": "M0 T483 S5 P105; whole nt_mem.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_mem.c",
+  "mirror": {
+    "nt_mem": {
+      "before": {
+        "added": 40,
+        "deleted": 105,
+        "total": 145
+      },
+      "after": {
+        "added": 34,
+        "deleted": 105,
+        "total": 139
+      }
+    }
+  },
+  "delta": -6,
+  "R1173": {
+    "decision": "restore-original",
+    "evidence": "Actual worker compile succeeds with and without stdio. Candidate C4013 printf does not change the x86 cdecl call/return binding:20 non-debug/non-checksum sections, data and named relocations equal. Generic varargs ABI rationale rejected.",
+    "delta": -3
+  },
+  "R1174": {
+    "decision": "minimized-pending-owner",
+    "evidence": "Original WOW DIB caller is guarded by !i386, but production mvdm_softpc_wow_page_domain.c:626 calls VdmAddVirtualMemory for NT shared clock; original nt_mem invokes void VdmSetPhysRecStructs. Selected CCPU source lacks the original PhysicalPageREC setter/storage implementation. CCPU c_GetPhyAdd consults the bounded mapping. Without initialization setter has no record and silently cannot bind clock. Preserve preallocated slots and allocation failure return before success; lazy allocation would add failure semantics to void setter.",
+    "delta": -2,
+    "remaining": "+5/-0"
+  },
+  "R1175": {
+    "decision": "minimized-pending-owner",
+    "evidence": "Original config.c:366 sas_term precedes config.c:443 sas_init in same session while applying PIF memory sizing. sas_term -> host_sas_term -> FreeIntelMemory. Session teardown alone is later; retaining old record causes next initialize to reject find_owner and fail startup. Therefore binding lifetime must end with backing lifetime, not merely at session disposal.",
+    "delta": -1,
+    "remaining": "+2/-0"
+  },
+  "line_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "shared_selected_lines": 539,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              252,
+              "if (!mvdm_softpc_physical_mapping_initialize(intelMem, MaxIntelMemorySize)) {"
+            ],
+            [
+              253,
+              "FreeIntelMemory();"
+            ],
+            [
+              254,
+              "return((IU8 *) ((void *)0));"
+            ],
+            [
+              255,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              285,
+              "mvdm_softpc_physical_mapping_release();"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "object_check": {
+    "non_debug_sections_equal": true,
+    "before_sections": 20,
+    "candidate_sections": 20,
+    "differences": []
+  },
+  "validation": "Before/final actual worker objects compile0; original/final preprocessing0,539 common selected lines exact. All excluded#error directives unchanged. Added executable mapping calls unchanged. No original guest edit.",
+  "limits": "Source-proven initialization/resize necessity, not a newly reproduced mapping failure or fresh WOW runtime acceptance. Header restoration has identical binding; residual reductions are comments only.",
+  "delivery": "P105 no-behavior/no-binding reference/comment/CRLF restoration; owner exemption reuses P103 cached full build,published11x2 package and Full19. No fresh full build/publication/runtime claimed. Git delivery accompanies this record.",
+  "diagnostic_failures": "Initial preparation assumed CRLF but source was LF; assertion prevented candidate creation and runner exited1. Corrected preparation; retry/final compile0. Initial COFF comparator treated uninitialized .bss offset0 as file bytes; corrected to compare uninitialized extent; no product failure.",
+  "processes": {
+    "retry.process.json": {
+      "start": "2026-11-14T06:23:46.4213317-08:00",
+      "script": "build/t483-s5-p105/run.ps1",
+      "pid": 27000
+    },
+    "final.process.json": {
+      "pid": 26764,
+      "start": "2026-11-14T06:26:13.2793997-08:00",
+      "script": "build/t483-s5-p105/final-run.ps1"
+    },
+    "lines.process.json": {
+      "script": "build/t483-s5-p105/lines-run.ps1",
+      "pid": 27220,
+      "start": "2026-11-14T06:26:47.7454776-08:00"
+    }
+  },
+  "sha256": "c3998fba15a90d4cbf3f66b20fdf37daf6a33c0dae52503b55bb91facef6266b"
+}

@@ -782,3 +782,8 @@ P104 [nt_keycd whole-file review](r1170-r1172-nt-keycd-review.json): R1170 origi
 R1171/R1172 actual-object boundary controls justify two minimal residuals pending owner.
 Mirror6->4(-2);148/365 files,1176/2720 points reviewed;428 restored,8 approved,740 pending,1544 unreviewed.
 Comment/newline-only delivery reuses published P103 package; no fresh full build claimed.
+
+P105 [nt_mem whole-file review](r1173-r1175-nt-mem-review.json):R1173 restored;R1174/R1175 minimized residuals pending owner.
+Mirror145->139(-6),539 exact original logical lines,20 object sections/bindings equal.
+149/365 files;1179 reviewed,429 restored,8 approved,742 pending,1541 unreviewed.
+No-binding/comment-only delivery reuses P103 publication and runtime evidence.

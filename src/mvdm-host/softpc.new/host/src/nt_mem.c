@@ -21,9 +21,6 @@
 
 #ifdef CPU_40_STYLE
 
-/* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
-#include <stdio.h>
-
 #if defined(DBG)
 #line 25
 #error Unsupported excluded original configuration
@@ -257,8 +254,6 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
         return((IU8 *) NULL);
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-035): prepare the unavailable CCPU page
-     * binding storage before success; original add/remove need no protocol. */
     if (!mvdm_softpc_physical_mapping_initialize(intelMem, MaxIntelMemorySize)) {
         FreeIntelMemory();
         return((IU8 *) NULL);
@@ -300,9 +295,8 @@ GLOBAL	VOID FreeIntelMemory IFN0()
 #line 284
 #error Unsupported excluded original configuration
 #endif
-#line 283
+#line 284
 
-    /* DIVERGENCE(MVDM-HOST-DIV-035): retire bindings before their backing. */
     mvdm_softpc_physical_mapping_release();
 
     /* Free Intel memory */
