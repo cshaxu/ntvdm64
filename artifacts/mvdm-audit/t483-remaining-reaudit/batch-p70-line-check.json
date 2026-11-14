@@ -1,0 +1,11 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "before": 421,
+    "after": 400,
+    "mirror_diff_delta": -21,
+    "error_identical": true,
+    "line_mismatches": [],
+    "matching_blocks_minimum": 3
+  }
+]

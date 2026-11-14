@@ -1,0 +1,19 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+  "points": [
+    "R0842",
+    "R0843",
+    "R0844",
+    "R0845"
+  ],
+  "before": 421,
+  "after": 400,
+  "mirror_diff_delta": -21,
+  "word_proof": "ev_glue.c192 defines fill_word_ev_glue(IU32,IU16,IU32); original declaration uses IU8 and disagrees with that definition. No runtime truncation is claimed from this address-only use.",
+  "selector_proof": "ega_writ invokes SetWritePointers via egacpu.h macro mapping; ev_glue.c561 defines void/no-arg provider. Original omission actual compile emits C4013 assuming int.",
+  "restoration_proof": "Eight original VOID unspecified-argument declarations are used only for assignment to bios_ch2 typed function pointers. Original providers egawrtm0.c255/270/400/886 and egwrtm12.c268/300/354/419 accept ULONG,ULONG. These types are unchanged by default argument promotions; C declarations compatible despite MSVC C4113 warnings. Baseline/restored actual compile0;13 nonmetadata COFF sections and resolved relocations identical.",
+  "changes": "Restore8 exact original writer declarations; remove5 explanatory comment lines; retain minimum IU16 correction and void selector declaration pending owner. No shim or runtime logic added.",
+  "line_check": "batch-p70-line-check.json: original matching blocks >=3 logical lines equal; excluded errors unchanged; CRLF restored.",
+  "verification": "build/t483-s5-p70/probe-job.json PID13000; base/restored/original-all exits0; coff_compare.py and writ-object-proof.json; full batch pending",
+  "delivery": "P70 cached full passed; published11x2; Full19 passed; batch-p70-checkpoint.json"
+}

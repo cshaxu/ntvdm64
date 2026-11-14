@@ -146,13 +146,10 @@ WRT_POINTERS *mode_chain_handler_table[] = { 0 };
 extern void  write_byte_ev_glue IPT2(IU32, eaOff, IU8, eaVal);
 extern void  write_word_ev_glue IPT2(IU32, eaOff, IU16, eaVal);
 extern void  fill_byte_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);
-/* DIVERGENCE MVDM-HOST-DIV-074: match the original glue body's IU16 word value. */
 extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU16, eaVal, IU32, count);
 #line 310
 extern void  move_byte_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);
 extern void  move_word_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);
-/* DIVERGENCE MVDM-HOST-DIV-088: use the original C-video selector body's
- * exact no-argument contract rather than an implicit host-int call. */
 extern void setWritePointers IPT0();
 #line 312
 MEM_HANDLERS Glue_writes =
@@ -176,17 +173,15 @@ WRT_POINTERS dth_md3_writes;
 #endif	/* CPU_40_STYLE - EVID */
 #line 330
 
-/* DIVERGENCE(MVDM-HOST-DIV-136): preserve the original writer table order,
- * with the exact original provider parameter contracts. */
-IMPORT VOID ega_copy_b_write IPT2(ULONG, value, ULONG, offset);
-IMPORT VOID ega_mode0_chn_b_write IPT2(ULONG, value, ULONG, offset);
-IMPORT VOID ega_mode1_chn_b_write IPT2(ULONG, value, ULONG, offset);
-IMPORT VOID ega_mode2_chn_b_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_copy_b_write();
+IMPORT VOID ega_mode0_chn_b_write();
+IMPORT VOID ega_mode1_chn_b_write();
+IMPORT VOID ega_mode2_chn_b_write();
 
-IMPORT VOID ega_copy_w_write IPT2(ULONG, value, ULONG, offset);
-IMPORT VOID ega_mode0_chn_w_write IPT2(ULONG, value, ULONG, offset);
-IMPORT VOID ega_mode1_chn_w_write IPT2(ULONG, value, ULONG, offset);
-IMPORT VOID ega_mode2_chn_w_write IPT2(ULONG, value, ULONG, offset);
+IMPORT VOID ega_copy_w_write();
+IMPORT VOID ega_mode0_chn_w_write();
+IMPORT VOID ega_mode1_chn_w_write();
+IMPORT VOID ega_mode2_chn_w_write();
 
 /* Handy array to extract all 4 plane values in one go. */
 

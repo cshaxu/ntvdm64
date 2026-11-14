@@ -682,3 +682,5 @@ P69 [ega_read.c review](r0837-r0838-ega-read-review.json): exact return declarat
 P69 [ega_vide.c review](r0839-r0841-ega-vide-review.json): virtual geometry retained with historical failure proof; two original casts restored and57-section object identity verified;diff-7; batch delivery pending.
 
 P69 [batch receipt](batch-p69-checkpoint.json) and [line checks](batch-p69-line-check.json): three frozen sources, diff-12; cached build, publication11x2 and Full19 passed; Git delivery accompanies receipt.
+
+P70 [ega_writ.c review](r0842-r0845-ega-writ-review.json), [batch receipt](batch-p70-checkpoint.json), [line checks](batch-p70-line-check.json): 8 original declarations restored;2 residuals qualified;mirror diff-21; cached build, publication11x2 and Full19 passed; Git delivery accompanies receipt.

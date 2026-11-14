@@ -1,0 +1,37 @@
+{
+  "batch": "P70",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "28cf9c5bb0c346ac772f945f71e46a56b19fee86",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "sha256": "af61cd179ed3a251f43a4db257ea13737061e7ff449dab12f2974f324b373366"
+    }
+  ],
+  "mirror_diff_delta": -21,
+  "mirror_files": 1,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "9b24443a-ab16-4484-abc6-fb9d117475de",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p70/full-final/timings.json",
+    "COFF_equal_sections": 13,
+    "original_line_check": "batch-p70-line-check.json",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "dos4gw_nesticle": "SKIP missing verified external fixtures",
+    "warnings": "Original unspecified-argument declarations produce MSVC C4113; supported build succeeds and final regression passes; no ABI/codegen change proved by13-section comparison."
+  }
+}
