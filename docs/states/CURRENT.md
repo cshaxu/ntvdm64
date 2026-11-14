@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-841 points reviewed:316 restored/verified/published,3 local pending delivery,
-2 approved retain,520 qualified pending decisions. Another1879 points unreviewed.
-Sequential file disposition is115/365;250 remain.
+947 points reviewed:342 restored/verified/published,6 approved retention,
+599 qualified pending decisions;1773 unreviewed. Sequential file disposition
+122/365;243 remain. No local restoration awaits validation.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -55,9 +55,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P65 package `1718c31b-feee-4bb2-ade6-71fd9c119aa3` published11x2;hashes match.
-Cached full,keyboard90,origin24,CPU reset,focused,EMS2,Full16 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p65-checkpoint.json).
+P71 package `1ffe9df3-e10b-4ae0-8180-cb47b900270e` published11x2; hashes match.
+Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p71-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -223,3 +223,9 @@ P68 terminat.c2/2,xt.c4/4,ica.c3/3,idetect.c1/1:plus cga.c2/2;mirror diff-31;cac
 
 P69 three video files7/7;2 original casts restored;diff-12;cached build/publish11x2/Full19 passed;Git delivery accompanies receipt;next R0842.
 P70 ega_writ.c4/4:2 points restored(8 declarations),2 residuals;diff-21;cached build/publish11x2/Full19 passed;Git delivery accompanies receipt;next R0846.
+P71:three completed video-file audits; mirror diff-114 (comment-only files-22,
+gfx_updt.c-92). All77 gfx points resolved;19 original points restored/verified/published.
+59 exclusion errors retained; original logical-line check0 mismatches.
+Full19 and all applicable delivery gates passed; this record accompanies Git delivery.
+[Whole-file evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0915-r0940-gfx-final-review.json).
+Next ordered point R0941; S5 remains active.

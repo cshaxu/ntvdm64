@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+  "points": [
+    "R0846",
+    "R0847",
+    "R0848",
+    "R0849",
+    "R0850",
+    "R0851"
+  ],
+  "before": 596,
+  "after": 585,
+  "mirror_diff_delta": -11,
+  "scalar_evidence": "Actual copy byte/word and mode0 byte function bodies extracted unchanged, only four per-point original address substitutions in negative controls. Eight addresses including parity and high offsets,24 checks; current0 failures; R0846 byte6, R0847 word6, R0848 word4,R0850 mode0 byte6 failures. Harness mocks only marking, register access, latch logic/pass-through; validates mapping with set/reset disabled, not full graphics logic or scheduling.",
+  "independent_basis": "SoftPC T99 S33 real VDD transition records character/attribute loss during CHAIN2->unchained save and inverse corruption; restoring common plane spacing corrects guest saved text. Prior R0502 records16 actual generated-read checks. Current selected backing coordinates must match guest-visible cross-mode plane storage; restoring whole compact representation needs another repacking path.",
+  "excluded_basis": "ega_writ.c CPU40 path calls SetWritePointers, whose ev_glue.c table populates c_ev_write_ptr from EVID entries; legacy WRT_POINTERS handler installation body excluded. Current source has no selected legacy move references; linked map has scalar writer, not legacy movers. Existing #error guards maintained by owner standing exclusion policy, not a claim original dead function body would crash.",
+  "changes": "Delete11 redundant explanatory lines around selected table storage and excluded movers; remove inline T99 prose from already-different address lines without changing expressions. No selected token changes.",
+  "line_check": "Original equal blocks >=3 lines all logical numbers match; all #error lines identical; CRLF maintained.",
+  "verification": "build/t483-s5-p71/probe-r2-job.json PID37476 current and4 negative controls; original fixture mistakenly shadowed backing pointer and is invalid evidence, corrected rerun used separate backing.",
+  "counter_review": "Source extraction with controlled host boundary, not live NTVDM or full regression. No new product algorithm. Mode0 logical/set-reset behavior not covered or changed.",
+  "delivery": "P71 format-only accumulation"
+}

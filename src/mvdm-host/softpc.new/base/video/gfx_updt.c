@@ -99,13 +99,6 @@ GLOBALS		  :	describe what exported data objects are
 #include "ga_mark.h"
 #include "ga_defs.h"
 
-/* DIVERGENCE MVDM-HOST-DIV-087: retain the original host display update call
- * with the exact selected nt_graph.c parameter contract.  The split source
- * layout has no public declaration carrier for this same-package provider. */
-IMPORT void host_stream_io_update IPT2(half_word *, buffer, word, count);
-/* DIVERGENCE MVDM-HOST-DIV-088: selected C-video marker selector. */
-IMPORT void setMarkPointers IPT1(IUH, markset);
-
 /*[3.2 INTERMODULE EXPORTS]						*/ 
 
 /*
@@ -194,9 +187,7 @@ GLOBAL LONG dirty_curs_y;
 
 /* [5.1.3 PROCEDURE() DECLARATIONS]					*/
 
-	/* DIVERGENCE(MVDM-HOST-DIV-135): selected marking dispatch is void; see
-	 * gfx_upd.h.  Original callers use only its dirty-state side effect. */
-	LOCAL VOID simple_update IPT0();
+	LOCAL boolean simple_update IPT0();
 #line 214
 	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 			int,dummy4,int,dummy5,int,dummy6);
@@ -638,9 +629,10 @@ simple_handler IFN0()
 	setVideodirty_total(getVideodirty_total() + 1);
 }
 
-LOCAL	VOID simple_update IFN0()
+LOCAL	boolean simple_update IFN0()
 {
 	setVideodirty_total(getVideodirty_total() + 1);
+	return( FALSE );
 #line 639
 }
 
@@ -674,11 +666,11 @@ GLOBAL void dummy_calc IFN0()
 
 UPDATE_ALG update_alg =
 {
-	simple_update,
-	simple_update,
-	simple_update,
-	simple_update,
-	simple_update,
+	(T_mark_byte)simple_update,
+	(T_mark_word)simple_update,
+	(T_mark_fill)simple_update,
+	(T_mark_wfill)simple_update,
+	(T_mark_string)simple_update,
 	dummy_calc,
 	dummy_scroll,
 	dummy_scroll,
@@ -707,11 +699,11 @@ void    flag_mode_change_required IFN0()
 {
     set_mode_change_required(YES);
 
-    update_alg.mark_byte = simple_update;
-    update_alg.mark_word = simple_update;
-    update_alg.mark_fill = simple_update;
-    update_alg.mark_wfill = simple_update;
-    update_alg.mark_string = simple_update;
+    update_alg.mark_byte = (T_mark_byte)simple_update;
+    update_alg.mark_word = (T_mark_word)simple_update;
+    update_alg.mark_fill = (T_mark_fill)simple_update;
+    update_alg.mark_wfill = (T_mark_wfill)simple_update;
+    update_alg.mark_string = (T_mark_string)simple_update;
 
     update_alg.scroll_up = dummy_scroll;
     update_alg.scroll_down = dummy_scroll;
@@ -799,7 +791,7 @@ void	ega_wrap_split_text_update IFN0()
 			}
 
 			to = (USHORT *) &video_copy[0];
-			from = (USHORT * ) get_chain2_screen_ptr(0);
+			from = (USHORT * ) get_screen_ptr(0);
 			limit = (screen_start + ((get_screen_length() - 2 * EGA_PLANE_DISP_SIZE) << 1)) >> 2;
 
 			for( i = 0; i < limit; i++ )
@@ -845,7 +837,7 @@ void	ega_wrap_split_text_update IFN0()
 		if( no_of_split_lines > 0 )
 		{
 			to = (USHORT *) &video_copy[0];
-			from = (USHORT * ) get_chain2_screen_ptr(0);
+			from = (USHORT * ) get_screen_ptr(0);
 			limit = (no_of_split_lines * get_offset_per_line()) >> 1;
 
 			for( i = 0; i < limit; i++ )
@@ -879,10 +871,10 @@ void	ega_wrap_split_text_update IFN0()
 										wrap_line, screen_start );
 
 			next1 = ega_text_find_dirty_lines(&video_copy[0],
-						get_chain2_screen_ptr(0), wrap_line, split_line, 0 );
+						get_screen_ptr(0), wrap_line, split_line, 0 );
 
 			next2 = ega_text_find_dirty_lines(&video_copy[0],
-						get_chain2_screen_ptr(0), split_line, lines_per_screen, 0 );
+						get_screen_ptr(0), split_line, lines_per_screen, 0 );
 
 			ega_text_paint_dirty_recs(0,next);
 			ega_text_paint_dirty_recs(next,next1);
@@ -896,7 +888,7 @@ void	ega_wrap_split_text_update IFN0()
 			next = ega_text_find_dirty_lines( &video_copy[screen_start >> 1],
 					get_chain2_screen_ptr(screen_start), 0, split_line, screen_start );
 
-			next1 = ega_text_find_dirty_lines( &video_copy[0], get_chain2_screen_ptr(0),
+			next1 = ega_text_find_dirty_lines( &video_copy[0], get_screen_ptr(0),
 									split_line, lines_per_screen, 0 );
 
 			ega_text_paint_dirty_recs(0,next);
@@ -964,7 +956,7 @@ void	ega_split_text_update IFN0()
 		if( no_of_split_lines > 0 )
 		{
 			to = (USHORT *) &video_copy[0];
-			from = (USHORT *) get_chain2_screen_ptr(0);
+			from = (USHORT *) get_screen_ptr(0);
 
 			for( i = 0; i < (no_of_split_lines * get_offset_per_line()) >> 1; i++ )
 			{
@@ -991,7 +983,7 @@ void	ega_split_text_update IFN0()
 		next = ega_text_find_dirty_lines( &video_copy[screen_start >> 1],
 					get_chain2_screen_ptr(screen_start) , 0, split_line, screen_start );
 
-		next1 = ega_text_find_dirty_lines( &video_copy[0], get_chain2_screen_ptr(0),
+		next1 = ega_text_find_dirty_lines( &video_copy[0], get_screen_ptr(0),
 								split_line, lines_per_screen, 0 );
 
 		ega_text_paint_dirty_recs(0,next);
@@ -1088,7 +1080,7 @@ void ega_wrap_text_update IFN0()
 						get_chain2_screen_ptr(screen_start), 0,
 							lines_per_screen - lines_left, screen_start);
 
-			next1 = ega_text_find_dirty_lines( video_copy, get_chain2_screen_ptr(0),
+			next1 = ega_text_find_dirty_lines( video_copy, get_screen_ptr(0),
 						lines_per_screen - lines_left, lines_per_screen, 0 );
 
 			ega_text_paint_dirty_recs(0,next);
@@ -1453,7 +1445,7 @@ cga_graph_update_chain2 IFN0()
 	 */
 
 	to = (USHORT *)&video_copy[0];
-	from = (USHORT *) get_chain2_screen_ptr(0);
+	from = (USHORT *) get_screen_ptr(0);
 
 	if (getVideodirty_total() > 5000)	
 	{
@@ -3560,11 +3552,11 @@ set_mark_funcs IFN0()
 	switch (curr_mark_type)
 	{
 		case	SIMPLE_MARKING:
-			update_alg.mark_byte = simple_update;
-			update_alg.mark_word = simple_update;
-			update_alg.mark_fill = simple_update;
-			update_alg.mark_wfill = simple_update;
-			update_alg.mark_string = simple_update;
+			update_alg.mark_byte = (T_mark_byte)simple_update;
+			update_alg.mark_word = (T_mark_word)simple_update;
+			update_alg.mark_fill = (T_mark_fill)simple_update;
+			update_alg.mark_wfill = (T_mark_wfill)simple_update;
+			update_alg.mark_string = (T_mark_string)simple_update;
 
 #ifndef CPU_40_STYLE	/* EVID */
 #line 3616
@@ -3577,11 +3569,11 @@ set_mark_funcs IFN0()
 			break;
 
 		case	CGA_GRAPHICS_MARKING:
-			update_alg.mark_byte = cga_mark_byte;
-			update_alg.mark_word = cga_mark_word;
-			update_alg.mark_fill = cga_mark_string;
-			update_alg.mark_wfill = cga_mark_string;
-			update_alg.mark_string = cga_mark_string;
+			update_alg.mark_byte = (boolean(*)())cga_mark_byte;
+			update_alg.mark_word = (boolean(*)())cga_mark_word;
+			update_alg.mark_fill = (boolean(*)())cga_mark_string;
+			update_alg.mark_wfill = (boolean(*)())cga_mark_string;
+			update_alg.mark_string = (boolean(*)())cga_mark_string;
 
 #ifndef CPU_40_STYLE	/* EVID */
 #line 3633
@@ -3601,11 +3593,11 @@ set_mark_funcs IFN0()
 #endif /* GORE */
 #line 3654
 
-			update_alg.mark_byte = ega_mark_byte;
-			update_alg.mark_word = ega_mark_word;
-			update_alg.mark_fill = ega_mark_string;
-			update_alg.mark_wfill = ega_mark_wfill;
-			update_alg.mark_string = ega_mark_string;
+			update_alg.mark_byte = (boolean(*)())ega_mark_byte;
+			update_alg.mark_word = (boolean(*)())ega_mark_word;
+			update_alg.mark_fill = (boolean(*)())ega_mark_string;
+			update_alg.mark_wfill = (boolean(*)())ega_mark_wfill;
+			update_alg.mark_string = (boolean(*)())ega_mark_string;
 
 			switch( EGA_CPU.chain )
 			{
@@ -3628,7 +3620,7 @@ set_mark_funcs IFN0()
 					break;
 
 				case CHAIN2:
-					SetMarkPointers(4); /* SoftPC T88/T99 CHAIN2 EGA bitmap. */
+					SetMarkPointers(4);
 
 					break;
 
@@ -3822,11 +3814,11 @@ LOCAL VOID inhibit_gfx_update_routines IFN0()
      */
     gfx_update_routines_inhibited = TRUE;
 
-    update_alg.mark_byte 	= simple_update;
-    update_alg.mark_word	= simple_update;
-    update_alg.mark_fill 	= simple_update;
-    update_alg.mark_wfill 	= simple_update;
-    update_alg.mark_string 	= simple_update;
+    update_alg.mark_byte 	= (T_mark_byte)simple_update;
+    update_alg.mark_word	= (T_mark_word)simple_update;
+    update_alg.mark_fill 	= (T_mark_fill)simple_update;
+    update_alg.mark_wfill 	= (T_mark_wfill)simple_update;
+    update_alg.mark_string 	= (T_mark_string)simple_update;
     update_alg.calc_update 	= dummy_calc;
     update_alg.scroll_up 	= dummy_scroll;
     update_alg.scroll_down 	= dummy_scroll;

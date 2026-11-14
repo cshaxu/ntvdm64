@@ -1,0 +1,43 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "range": "R0903-R0914",
+  "scope": "each +1/-1",
+  "provider": "Actual cga_graph_update_chain2 body; controlled host paint sink and getters; same shared CHAIN2 backing as independent EVID/VDD evidence cited by preceding reviews.",
+  "results": {
+    "903": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0",
+    "904": "full_cells=8192 full_fail=8191 clean_fail=0 partial_fail=0",
+    "905": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=240",
+    "906": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0",
+    "907": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=157",
+    "908": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=80",
+    "909": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=158",
+    "910": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=240",
+    "911": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0",
+    "912": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=157",
+    "913": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=80",
+    "914": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=158"
+  },
+  "current": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0",
+  "span": {
+    "906": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0 span_fail=3",
+    "911": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0 span_fail=3"
+  },
+  "span_current": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0 span_fail=0",
+  "conclusions": {
+    "R0903": "Restore original get_screen_ptr(0): macro identity and exact-body control passes.",
+    "R0906_R0911": "Original search stride samples interleaved storage and expands dirty spans; final pixel copies remain correct in these cases. Both fail3/3 expected repaint-span checks while current passes. Retain only as qualified dirty-range/performance decision, not a claim of pixel corruption.",
+    "other9": "Original single-point restoration miscopies cells or invents dirty work; exact outputs recorded. Minimum existing stride/address expressions await owner decision."
+  },
+  "coverage": "8192-cell full refresh; unchanged dirty range; three paired even/odd partial updates across rows1/2 and varied within-row positions. Does not claim all CGA modes, all masks, live frontend or full guest acceptance.",
+  "runs": [
+    "cga-job.json PID13072 finished",
+    "span-job.json PID4000 finished"
+  ],
+  "source_state": "No production edit; #error/#line unchanged; source-relative anchors in gfx-points.txt",
+  "hashes": {
+    "cga-current.c": "c63f3a639db0e66e26991f4b64dc9efd2e0d12cfc81586db9512e465c1ff39f7",
+    "cga.cmd": "e3c240b4bc105d171dd9effc351edb5c62ad6aea22d23cca8b8376b1dd62a409",
+    "cga-current-span.c": "560c29e9ca28435d5ae9cde4acd69662373e83bc97c45593ce3d445543667e79",
+    "span.cmd": "75e460765c6ad2a31af61b8af07b7dc23d048f36f00289fd0b7b73c69301701a"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "points": [
+    866,
+    867,
+    868,
+    869,
+    870
+  ],
+  "scope": {
+    "866": "+2/-2",
+    "867": "+1/-1",
+    "868": "+2/-2",
+    "869": "+1/-1",
+    "870": "+1/-1"
+  },
+  "contract": "CHAIN2 text characters occupy plane01 at eight-byte backing spacing; video_copy is compact two-byte character/attribute. Independent real guest VDD cross-mode evidence is indexed by r0846-r0851-egawrtm0-review.json. No new compact backing path is introduced.",
+  "probe": "build/t483-s5-p71/dirty-job.json; PID20176 finished; actual extracted dirty scanner and paint/copy bodies; current9 scan and12 copy checks pass",
+  "negative": {
+    "866": "9/9 scan failures",
+    "867": "9/9 scan failures",
+    "868": "6/9 scan failures",
+    "869": "8/12 copied cells wrong",
+    "870": "9/12 copied cells wrong"
+  },
+  "decision": "Minimum existing address/step expressions pending owner; no production change",
+  "limits": "Boundary getters and paint sink are controlled fixtures; this proves addressing and dirty-record contents, not complete live graphics or mouse acceptance. Individual restoration negatives are against the supported shared backing contract, not a claim that every historical SoftPC layout was wrong.",
+  "line_error": "Production unchanged; no #line/#error edit",
+  "files": {
+    "dirty-current.c": "d1336be89f1b5cd1528de5b3eda7eb8f3d3945d6671a2b3406a48bb3e2f582a1",
+    "dirty.cmd": "3f7098f95f613451deb22603aa5947b30c7671b3bec1e1717d6324e11b959766",
+    "dirty-current.result.txt": "aa4d0da08f633bc3595e3dc8b45ac27edfc8b2bc05bd3b52d4e2918b80b48005",
+    "r0866.result.txt": "b02f99e15c6e559917cb66d646bf8a2c63480a468bad3d074d3b13aa1006c508",
+    "r0867.result.txt": "b02f99e15c6e559917cb66d646bf8a2c63480a468bad3d074d3b13aa1006c508",
+    "r0868.result.txt": "fcaa046ad0b2fa659449fd05986571e6dec484d1a954d67bd1e2674a75feb11d",
+    "r0869.result.txt": "9eed9fcd0d94515da3745faed60a8ed156abebec4f73953036c143b11c285418",
+    "r0870.result.txt": "207f5c2902b5ae60caf25b2873cc1627381a9d5fec9ceaf091e2129cd253480b"
+  }
+}

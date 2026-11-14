@@ -1,0 +1,80 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "range": "R0915-R0940 plus R0864 whole-file counter-review",
+  "scroll": {
+    "current": "cases=16 backing_fail=0 rectangle_fail=0 refusal_fail=0",
+    "negative": {
+      "915": "cases=16 backing_fail=8 rectangle_fail=8 refusal_fail=0",
+      "916": "cases=16 backing_fail=0 rectangle_fail=4 refusal_fail=0",
+      "917": "cases=16 backing_fail=0 rectangle_fail=8 refusal_fail=0",
+      "918": "cases=16 backing_fail=8 rectangle_fail=12 refusal_fail=0",
+      "919": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0",
+      "920": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0",
+      "921": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0",
+      "922": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0",
+      "923": "cases=16 backing_fail=6 rectangle_fail=0 refusal_fail=0",
+      "924": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0",
+      "925": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0",
+      "926": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0",
+      "927": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0",
+      "928": "cases=16 backing_fail=2 rectangle_fail=0 refusal_fail=0"
+    },
+    "contract": "16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+    "limits": "R0916/R0917 only fail expected rectangle shrink, not backing contents. Video-copy memcpy/host rendering not full guest coverage.",
+    "run": "scroll-job.json PID15796 finished"
+  },
+  "callbacks": {
+    "restore": [
+      929,
+      930,
+      931,
+      933
+    ],
+    "evidence": "Exact original casts compile in actual C_VID TU. Caller search in mouse_io.c, egawrtm0.c, video.c and vga_vide.c consumes only side effects. Candidate all-callback.exit0; C4133 eliminated; ten original unspecified-parameter C4113 warnings remain. Existing marker owners unchanged.",
+    "run": "all-callback-job.json PID37268"
+  },
+  "R0932": {
+    "decision": "minimum one-call residual pending owner",
+    "evidence": "Original assertion makes no SetMarkPointers call. After SIMPLE_MARKING, entering CHAIN2 would retain simple EVID pointers: original simple marker increments total but leaves EGA bitmap empty. Real prior marker control and consumer chain in r0489-r0494-ev-glue-review.json qualify required bitmap selection, independently of calling current helper. Current ev_glue case4 reuses original unchained byte/word owners plus previously minimized string conversion.",
+    "reduction": "Remove inline provenance prose; expression stays same. No extra raw line reduction from inline prose."
+  },
+  "jazz": {
+    "current": "cases=20 copied_cell_fail=0 span_fail=0 cursor_fail=0",
+    "negative": {
+      "934": "cases=20 copied_cell_fail=80 span_fail=9 cursor_fail=0",
+      "935": "cases=20 copied_cell_fail=14 span_fail=0 cursor_fail=0",
+      "936": "cases=20 copied_cell_fail=0 span_fail=12 cursor_fail=0",
+      "937": "cases=20 copied_cell_fail=0 span_fail=8 cursor_fail=0",
+      "938": "cases=20 copied_cell_fail=56 span_fail=8 cursor_fail=0",
+      "939": "cases=20 copied_cell_fail=118 span_fail=18 cursor_fail=0",
+      "940": "cases=20 copied_cell_fail=0 span_fail=0 cursor_fail=20"
+    },
+    "contract": "20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+    "limits": "R0936/R0937 affect dirty-span size only in these cases, not final copied cells. No full graphics/guest acceptance claim.",
+    "run": "jazz-job.json PID32360 finished"
+  },
+  "R0864_superseding": {
+    "decision": "restore original; remove pending entry",
+    "evidence": "Actual x86 TU with both added declarations omitted compiles0.135 COFF sections, sizes, characteristics and symbol-resolved relocations exactly equal current base after excluding debug/checksum. C4013 alone does not establish required diff; arguments retain supported calling representation and neither return value is consumed. This supersedes earlier qualified-pending judgment in r0864-r0865-gfx-start-review.json.",
+    "scope": "Supported worker is x86; x64 full build uses worker reference, not untested native-x64 C_VID execution."
+  },
+  "applied": {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "before": 1374,
+    "after": 1282,
+    "delta": -92,
+    "before_sha256": "c2d1f583e2f56f2ba4675acb0cd98d336ec635a68c8d00cebd2f2596816994c9",
+    "after_sha256": "d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602",
+    "line_mismatches": [],
+    "error_count": 59,
+    "scope": "Raw original-relative added+removed lines including #line/#error; preserved every excluded error line; matching original blocks>=3 mapped to original logical lines."
+  },
+  "limits": "Whole-file local source application, not yet cached full build/publication/Full/Git delivery. Prior probes were candidates; final package must be verified.",
+  "hashes": {
+    "scroll-current.c": "d64cecba383cb7021c5e89f41031cf696d6bfe2211a557fc03fdd47c8a28e759",
+    "scroll.cmd": "69dc1a0c42a3b046fd1be411ce948c16aaacd1a8398a73fd5db2316c30ac6f83",
+    "jazz-current.c": "ef7f1cafcab61872b9fbb5ca21babb072bf1583957c881b150f2f8abde7d2580",
+    "jazz.cmd": "37df803f31a508d7e57c8e56ae8785b33e4358bded9e6e551ca191ac69fd5b66",
+    "gfx-all-callback.c": "d9343c683e9e86d3f9cd3cb09a34925318bb86900bfede3a572c45a26c198b0d"
+  }
+}

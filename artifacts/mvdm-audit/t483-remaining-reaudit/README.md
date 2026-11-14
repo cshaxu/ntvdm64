@@ -684,3 +684,21 @@ P69 [ega_vide.c review](r0839-r0841-ega-vide-review.json): virtual geometry reta
 P69 [batch receipt](batch-p69-checkpoint.json) and [line checks](batch-p69-line-check.json): three frozen sources, diff-12; cached build, publication11x2 and Full19 passed; Git delivery accompanies receipt.
 
 P70 [ega_writ.c review](r0842-r0845-ega-writ-review.json), [batch receipt](batch-p70-checkpoint.json), [line checks](batch-p70-line-check.json): 8 original declarations restored;2 residuals qualified;mirror diff-21; cached build, publication11x2 and Full19 passed; Git delivery accompanies receipt.
+
+P71 [egawrtm0.c review](r0846-r0851-egawrtm0-review.json): 4 scalar-address negatives verified;2 existing excluded-error blocks preserved under owner policy;comment-only diff-11(includes7 adjacent table-explanation lines outside those frozen point ranges);no selected token changes.
+
+P71 [egwrtm12.c review](r0852-r0863-egwrtm12-review.json):10 per-point scalar negatives,2 approved exclusions;comment-only diff-11(includes6 adjacent carrier-explanation lines);no selected token changes.
+
+P71 [gfx_updt.c initial decisions](r0864-r0865-gfx-start-review.json):2/77 points;R0864 minimum prototypes pending;R0865 original boolean restoration decided, not implemented until whole-file review.
+
+- [R0866-R0870 dirty scan/copy controls](r0866-r0870-gfx-dirty-review.json): five qualified residuals; production unchanged.
+
+- [R0871-R0902 callback/text review](r0871-r0902-gfx-callback-text-review.json):12 exact restoration decisions,20 residuals;135 candidate object sections equal for zero-address cleanup.
+
+- [R0903-R0914 CGA controls](r0903-r0914-gfx-cga-review.json):one zero-address restoration,11 qualified residuals; separates wrong pixels from excess dirty-span repaint.
+
+- [R0915-R0940 and whole-file counter-review](r0915-r0940-gfx-final-review.json):gfx_updt.c77/77 complete,19 original points restored locally; original-relative diff-92; P71 three files-114.
+
+- P71 [checkpoint](batch-p71-checkpoint.json) and [line checks](batch-p71-line-check.json): completed three-file batch, delivery pending.
+
+P71 final delivery: cached x86/x64 full build,11x2 publication,Full19,CVID,143 WOW objects/9 negative controls and governance passed; checkpoint carries package identity and explicit DOS4GW skip.

@@ -155,9 +155,6 @@ SIGNALS ISSUED	  :	NONE
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]				*/
 
-/* DIVERGENCE(MVDM-HOST-DIV-143): retain the original mode-1/mode-2 table
- * carrier for the selected CCPU40 C-VID profile instead of selecting legacy
- * A_VID movers that have no selected CCPU40 implementation. */
 #line 156
 #ifdef A_VID
 #line 157
@@ -166,9 +163,6 @@ SIGNALS ISSUED	  :	NONE
 #else
 #line 205
 #if defined(CPU_40_STYLE)
-/* DIVERGENCE MVDM-HOST-DIV-143: CPU_40_STYLE selects C-video EVID tables.
- * Preserve these historical table globals for EGA selection code, but do not
- * bind their unselected ULONG-carried native-pointer string callbacks. */
 WRT_POINTERS mode1_handlers;
 WRT_POINTERS mode2_handlers;
 #else
@@ -274,7 +268,7 @@ ega_mode1_chn_b_write IFN2(ULONG, value, ULONG, offset )
 	note_entrance0("ega_mode1_chn_b_write");
 
 	lsb = offset & 1;
-	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
+	offset = (offset & ~1u) << 2;
 
 	if( lsb )	/* odd address, in plane 1 or 3 */
 	{
@@ -306,7 +300,7 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	note_entrance0("ega_mode1_chn_w_write");
 
 	lsb = offset & 1;
-	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
+	offset = (offset & ~1u) << 2;
 
 	if( lsb )	/* odd address, low byte in planes 1 and 3 */
 	{
@@ -340,10 +334,6 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	update_alg.mark_word( offset );
 }
 
-/* DIVERGENCE MVDM-HOST-DIV-143: under CPU_40_STYLE the selected original
- * C-video EVID tables own the string fill/move route.  These WRT_POINTERS
- * helpers carry native pointers through legacy ULONG fields and are not
- * installed by the CPU_40_STYLE selection path. */
 #ifndef CPU_40_STYLE
 #line 414
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
@@ -359,7 +349,7 @@ ega_mode2_chn_b_write IFN2(ULONG, value, ULONG, offset )
 	note_entrance0("ega_mode2_chn_b_write");
 
 	lsb = offset & 1;
-	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
+	offset = (offset & ~1u) << 2;
 
 	if( EGA_CPU.fun_or_protection )
 	{
@@ -428,7 +418,7 @@ ega_mode2_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	note_entrance0("ega_mode2_chn_w_write");
 
 	lsb = offset & 1;
-	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
+	offset = (offset & ~1u) << 2;
 
 	if( EGA_CPU.fun_or_protection )
 	{
@@ -724,7 +714,6 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	update_alg.mark_wfill( offset, offset + count - 1, 0 );
 }
 
-/* DIVERGENCE MVDM-HOST-DIV-143: the CPU_40 EVID path owns string moves. */
 #ifndef CPU_40_STYLE
 #line 1028
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.

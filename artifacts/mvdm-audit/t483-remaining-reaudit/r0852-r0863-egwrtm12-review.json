@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+  "points": [
+    "R0852",
+    "R0853",
+    "R0854",
+    "R0855",
+    "R0856",
+    "R0857",
+    "R0858",
+    "R0859",
+    "R0860",
+    "R0861",
+    "R0862",
+    "R0863"
+  ],
+  "before": 631,
+  "after": 620,
+  "mirror_diff_delta": -11,
+  "scalar_evidence": "Four actual mode1/mode2 byte/word function bodies,8 addresses and two function/protection states,64 checks. Current0 failures. Per-point original substitution failures:{852: 12, 853: 12, 854: 8, 855: 8, 857: 12, 858: 12, 859: 4, 860: 4, 861: 4, 862: 4}. Controlled marking/register boundary; do_logicals pass-through; all plane enables set. This proves addressing, not all logical operations or masks.",
+  "independent_basis": "Same cross-mode guest VDD plane evidence as r0846-r0851-egawrtm0-review.json; common backing must preserve plane A0 gaps when switching CHAIN2 and unchained guest save/restore.",
+  "excluded_basis": "ega_writ CPU40 selection installs EVID through SetWritePointers; legacy mode1 fill/move and mode2 move have no selected references. Existing excluded #error branches preserved under owner standing policy. Not a claim all old dead code is defective.",
+  "changes": "Remove11 redundant comment lines (6 adjacent carrier explanation,4 first excluded block,1 second excluded block) and inline T99 prose from already-changed lines; no selected tokens changed.",
+  "line_check": "Matching original blocks >=3 lines:0 logical mismatches; errors unchanged; original CRLF maintained.",
+  "verification": "build/t483-s5-p71/m12-job.json PID2128; current64 checks and10 per-point negative controls. Diagnostic source extraction, no live guest regression claimed.",
+  "delivery": "P71 format-only accumulation"
+}

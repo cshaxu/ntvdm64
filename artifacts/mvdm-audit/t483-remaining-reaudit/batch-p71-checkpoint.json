@@ -1,0 +1,47 @@
+{
+  "batch": "P71",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "ea17890d40138722d29e96db54db769da40e432e",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "sha256": "5044e92f636b864b54922ad5b2339d4c8c1e026f0d0697655ee3e730571c595d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "sha256": "ba364e0597af92f8530214a8f43479e9d141c4e8579d0a78c15ab9d0dee037d3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "sha256": "d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602"
+    }
+  ],
+  "mirror_diff_delta": -114,
+  "mirror_files": 3,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "1ffe9df3-e10b-4ae0-8180-cb47b900270e",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p71/full-final/timings.json",
+    "Full_elapsed_ms": 404200,
+    "CVID": "PASS selected production vector fixture; build/t483-s5-p71/vector-final.log",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "original_line_check": "batch-p71-line-check.json",
+    "dos4gw_nesticle": "SKIP missing verified external fixtures",
+    "governance": "PASS documentation and relative links",
+    "warnings": "Restored original implicit/unspecified declarations retain MSVC C4013/C4113 diagnostics; supported build and final package gates pass. No warning-free claim."
+  }
+}

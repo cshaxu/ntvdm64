@@ -1,0 +1,263 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "range": "R0871-R0902",
+  "callback": {
+    "points": [
+      871,
+      872,
+      873,
+      874
+    ],
+    "decision": "restore exact original, coupled R0865",
+    "evidence": "Actual gfx_upd.h boolean return typedefs; original simple_update increments dirty_total and returns FALSE. Actual x86 TU candidate compiles0. C4133 base30 -> boolean10 -> callback10; remaining incompatible providers later in file. Original casts express existing marker parameter adaptation; no arguments are read by simple_update.",
+    "probe": "callback-job.json PID32348; gfx-callback.exit0",
+    "limits": "Not a final full build or runtime result."
+  },
+  "zero_address": {
+    "points": [
+      877,
+      881,
+      884,
+      885,
+      887,
+      890,
+      893,
+      897
+    ],
+    "decision": "restore exact original",
+    "evidence": "gvi.h272 is screen_ptr+offs;273 chain2(0) expands to screen_ptr+0, with no side effect. Candidate compiles0 and135 COFF sections, sizes, flags and resolved relocations match callback candidate excluding debug/checksum metadata.",
+    "probe": "zero-r2-job.json PID37220; gfx-zero-object-proof.json",
+    "invalid_attempt": "First generation assertion repeated an already replaced spelling; zero-job PID36996 had no script and did not compile. Corrected candidate tested."
+  },
+  "points": [
+    {
+      "id": 875,
+      "logical_line": 772,
+      "physical_line": 780,
+      "old": "\tfrom = (USHORT *) get_screen_ptr(screen_start);",
+      "new": "\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 876,
+      "logical_line": 790,
+      "physical_line": 798,
+      "old": "\t\t\t\tfrom += 2;",
+      "new": "\t\t\t\tfrom += 4;",
+      "kind": "stride"
+    },
+    {
+      "id": 877,
+      "logical_line": 794,
+      "physical_line": 802,
+      "old": "\t\t\tfrom = (USHORT * ) get_screen_ptr(0);",
+      "new": "\t\t\tfrom = (USHORT * ) get_chain2_screen_ptr(0);",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 878,
+      "logical_line": 800,
+      "physical_line": 808,
+      "old": "\t\t\t\tfrom += 2;",
+      "new": "\t\t\t\tfrom += 4;",
+      "kind": "stride"
+    },
+    {
+      "id": 879,
+      "logical_line": 820,
+      "physical_line": 828,
+      "old": "\t\t\tfrom = (USHORT * ) get_screen_ptr(screen_start);",
+      "new": "\t\t\tfrom = (USHORT * ) get_chain2_screen_ptr(screen_start);",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 880,
+      "logical_line": 826,
+      "physical_line": 834,
+      "old": "\t\t\t\tfrom += 2;",
+      "new": "\t\t\t\tfrom += 4;",
+      "kind": "stride"
+    },
+    {
+      "id": 881,
+      "logical_line": 840,
+      "physical_line": 848,
+      "old": "\t\t\tfrom = (USHORT * ) get_screen_ptr(0);",
+      "new": "\t\t\tfrom = (USHORT * ) get_chain2_screen_ptr(0);",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 882,
+      "logical_line": 846,
+      "physical_line": 854,
+      "old": "\t\t\t\tfrom += 2;",
+      "new": "\t\t\t\tfrom += 4;",
+      "kind": "stride"
+    },
+    {
+      "id": 883,
+      "logical_line": 870,
+      "physical_line": 878,
+      "old": "\t\t\t\t\t\t\tget_screen_ptr(screen_start), 0,",
+      "new": "\t\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 884,
+      "logical_line": 874,
+      "physical_line": 882,
+      "old": "\t\t\t\t\t\tget_screen_ptr(0), wrap_line, split_line, 0 );",
+      "new": "\t\t\t\t\t\tget_chain2_screen_ptr(0), wrap_line, split_line, 0 );",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 885,
+      "logical_line": 877,
+      "physical_line": 885,
+      "old": "\t\t\t\t\t\tget_screen_ptr(0), split_line, lines_per_screen, 0 );",
+      "new": "\t\t\t\t\t\tget_chain2_screen_ptr(0), split_line, lines_per_screen, 0 );",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 886,
+      "logical_line": 889,
+      "physical_line": 897,
+      "old": "\t\t\t\t\tget_screen_ptr(screen_start), 0, split_line, screen_start );",
+      "new": "\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0, split_line, screen_start );",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 887,
+      "logical_line": 891,
+      "physical_line": 899,
+      "old": "\t\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_screen_ptr(0),",
+      "new": "\t\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_chain2_screen_ptr(0),",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 888,
+      "logical_line": 931,
+      "physical_line": 939,
+      "old": "\tfrom = (USHORT *) get_screen_ptr(screen_start);",
+      "new": "\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 889,
+      "logical_line": 946,
+      "physical_line": 954,
+      "old": "\t\t\tfrom += 2;",
+      "new": "\t\t\tfrom += 4;",
+      "kind": "stride"
+    },
+    {
+      "id": 890,
+      "logical_line": 959,
+      "physical_line": 967,
+      "old": "\t\t\tfrom = (USHORT *) get_screen_ptr(0);",
+      "new": "\t\t\tfrom = (USHORT *) get_chain2_screen_ptr(0);",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 891,
+      "logical_line": 964,
+      "physical_line": 972,
+      "old": "\t\t\t\tfrom += 2;",
+      "new": "\t\t\t\tfrom += 4;",
+      "kind": "stride"
+    },
+    {
+      "id": 892,
+      "logical_line": 984,
+      "physical_line": 992,
+      "old": "\t\t\t\t\tget_screen_ptr(screen_start) , 0, split_line, screen_start );",
+      "new": "\t\t\t\t\tget_chain2_screen_ptr(screen_start) , 0, split_line, screen_start );",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 893,
+      "logical_line": 986,
+      "physical_line": 994,
+      "old": "\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_screen_ptr(0),",
+      "new": "\t\tnext1 = ega_text_find_dirty_lines( &video_copy[0], get_chain2_screen_ptr(0),",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 894,
+      "logical_line": 1021,
+      "physical_line": 1029,
+      "old": "\t\tfrom = (USHORT *) get_screen_ptr(screen_start);",
+      "new": "\t\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 895,
+      "logical_line": 1026,
+      "physical_line": 1034,
+      "old": "\t\t\tfrom += 2;",
+      "new": "\t\t\tfrom += 4;",
+      "kind": "stride"
+    },
+    {
+      "id": 896,
+      "logical_line": 1080,
+      "physical_line": 1088,
+      "old": "\t\t\t\t\t\tget_screen_ptr(screen_start), 0,",
+      "new": "\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 897,
+      "logical_line": 1083,
+      "physical_line": 1091,
+      "old": "\t\t\tnext1 = ega_text_find_dirty_lines( video_copy, get_screen_ptr(0),",
+      "new": "\t\t\tnext1 = ega_text_find_dirty_lines( video_copy, get_chain2_screen_ptr(0),",
+      "kind": "zero-identity"
+    },
+    {
+      "id": 898,
+      "logical_line": 1095,
+      "physical_line": 1103,
+      "old": "\t\t\t\t\t\tget_screen_ptr(screen_start), 0,",
+      "new": "\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 899,
+      "logical_line": 1130,
+      "physical_line": 1138,
+      "old": "\t\tfrom = (USHORT *) get_screen_ptr(screen_start);",
+      "new": "\t\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 900,
+      "logical_line": 1135,
+      "physical_line": 1143,
+      "old": "\t\t\tfrom += 2;\t\t/* planes 2,3 interleaved */",
+      "new": "\t\t\tfrom += 4;\t\t/* planes 2,3 interleaved */",
+      "kind": "stride"
+    },
+    {
+      "id": 901,
+      "logical_line": 1152,
+      "physical_line": 1160,
+      "old": "\t\t\tget_screen_ptr(screen_start), 0, lines_per_screen, screen_start);",
+      "new": "\t\t\tget_chain2_screen_ptr(screen_start), 0, lines_per_screen, screen_start);",
+      "kind": "nonzero-base"
+    },
+    {
+      "id": 902,
+      "logical_line": 1169,
+      "physical_line": 1177,
+      "old": "\t\tattr = *(get_screen_ptr(dirty_curs_offs + 1));",
+      "new": "\t\tattr = *(get_chain2_screen_ptr(dirty_curs_offs + 1));",
+      "kind": "nonzero-base"
+    }
+  ],
+  "nonzero_contract": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+  "nonzero_decision": "20 minimal single-expression residuals pending owner, not approved retention",
+  "limits": "Nonzero updater/cursor point decisions use source/address counterexamples and shared exact-body controls; no claim each split/wrap branch was exercised live.",
+  "source_state": "gfx_updt.c unchanged pending whole-file application",
+  "line_error": "Mapped each current expression using #line to pinned original logical line; no product line/error changes"
+}

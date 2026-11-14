@@ -208,9 +208,6 @@ typedef	union {
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]				*/
 
-/* DIVERGENCE(MVDM-HOST-DIV-079): the selected CCPU40 C-VID profile needs
- * this original writer-table declaration block.  The legacy A_VID-only
- * condition otherwise selects an obsolete mover table with no CCPU40 body. */
 #line 209
 #ifdef A_VID
 #line 210
@@ -219,10 +216,6 @@ typedef	union {
 #else
 #line 264
 #if defined(CPU_40_STYLE)
-/* DIVERGENCE MVDM-HOST-DIV-079: CPU_40_STYLE selects the original C-video
- * EVID tables through SetWritePointers(). The older WRT_POINTERS string
- * movers pass native pointers through ULONG and are not installed by this
- * profile. Preserve table storage for EGA source selection only. */
 WRT_POINTERS mode0_copy_handlers;
 WRT_POINTERS mode0_gen_handlers;
 #else
@@ -260,7 +253,7 @@ ega_copy_b_write IFN2(ULONG, value, ULONG, offset )
 	(*update_alg.mark_byte)( offset );
 
 	lsb = offset & 0x1;
-	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
+	offset = (offset & ~1u) << 2;
 	offset |= lsb;
 
 	*(IU8 *)(getVideowplane() + offset) = value;
@@ -277,7 +270,7 @@ ega_copy_w_write IFN2(ULONG, value, ULONG, offset )
 	(*update_alg.mark_word)( offset );
 
 	lsb = offset & 0x1;
-	offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
+	offset = (offset & ~1u) << 2;
 	planes = getVideowplane() + offset;
 
 	if( lsb )
@@ -387,9 +380,6 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
     }
 }
 
-/* DIVERGENCE MVDM-HOST-DIV-079: non-CPU_40 direct-pointer string path.
- * CPU_40 uses EVID_WRT_POINTERS, which keeps guest offsets and native source
- * pointers in separately typed slots. */
 #ifndef CPU_40_STYLE
 #line 467
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
@@ -406,7 +396,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
    (*update_alg.mark_byte)( offset );
 
 	lsb = offset & 0x1;
-    offset = (offset & ~1u) << 2 /* T99: preserve plane address A0. */;
+    offset = (offset & ~1u) << 2;
 
 	if( lsb )	/* odd address, in plane 1 or 3  */
 	{
@@ -875,7 +865,6 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	}
 }
 
-/* DIVERGENCE MVDM-HOST-DIV-079: non-CPU_40 direct-pointer string path. */
 #ifndef CPU_40_STYLE
 #line 1085
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.

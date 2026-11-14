@@ -1,0 +1,29 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+    "line_mismatches": [],
+    "before": 596,
+    "after": 585,
+    "delta": -11,
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "line_mismatches": [],
+    "before": 631,
+    "after": 620,
+    "delta": -11,
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "line_mismatches": [],
+    "before": 1374,
+    "after": 1282,
+    "delta": -92,
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "points": [
+    "R0864",
+    "R0865"
+  ],
+  "state": "First2 point decisions complete; entire77-point file not complete; no product edit",
+  "r0864": {
+    "scope": "+7/-0",
+    "evidence": "Actual nt_graph.c2405 defines void host_stream_io_update(half_word*,word); ev_glue.c695 defines void setMarkPointers(IUH). No selected header declaration found. Both original omissions compile0 but C4013 at original3621/4838 default to int, contrary to providers.",
+    "decision": "Minimize to2 provider declarations; remaining pending owner; comments removable with final file batch"
+  },
+  "r0865": {
+    "scope": "+3/-1",
+    "evidence": "Current actual gfx_upd.h27-31 uses boolean marker typedefs, contradicting historical void rationale. Restoring declaration plus original definition and return(FALSE) compiles0; C4133 drops30->10. Scalar body only increments dirty_total; originalFALSE is correct matching return contract.",
+    "decision": "Restore original boolean declaration with R0871/R0872 as coupled file batch; no current product edit",
+    "limits": "Remaining warnings include other unreviewed callback casts; candidate build is not final product delivery"
+  },
+  "probe": "build/t483-s5-p71/gfx-probe-r2-job.json PID25232; gfx-base/omit/boolean exits0; first generation failed due mixed newline matching and did not compile",
+  "line_plan": "Preserve errors; remove added explanation; restore original declaration213, definition635 and return638 when entire file ready.",
+  "next": "R0866; full gfx_updt.c77 points must finish before product mutation/build"
+}
