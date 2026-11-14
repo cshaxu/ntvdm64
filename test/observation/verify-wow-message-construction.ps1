@@ -110,6 +110,7 @@ try{
    $marker='        stack.completed = TRUE; /* DIV-349: successful native-only notification. */'
    if(!$branch.Contains($marker)){throw 'Successful native-only return must commit, not restore its nested call'}
    $dialog=Region (Read-Source 'src/mvdm-host/wow32/wcommdlg.c' $false) "UINT APIENTRY`nWCD32CommonDialogProc(" 'ULONG FASTCALL WCD32ChooseColor' 'common-dialog-normal-return'
+   $dialog=[regex]::Replace($dialog,'(?m)^#line[^\n]*\n','')
    if($dialog -notmatch '(?s)uMsg == msgWOWCHOOSEFONT\).*?stack\.completed = TRUE; /\* DIV-349: intentionally filtered, not failed\. \*/\s*return\(FALSE\);'){throw 'Intentional common-dialog filter must commit normally'}
    $finalizer=Region $dispatch '    } __finally {' "`n}`n" 'wndproc-transaction-finalizer'
    foreach($variant in @('current','omitted')){

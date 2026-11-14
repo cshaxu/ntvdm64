@@ -1,0 +1,672 @@
+{
+  "batch": "P138",
+  "status": "Cached full,published11x2,transaction/parameter-map contrasts,public ABI,menu-resource,Full19 and boundary passed;final governance/Git follow",
+  "source_head": "4dbd3a0e7251a8ce225632fb3eb59296a23de8d7",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "sha256": "3d592e96fd4f53002609ecad220af5d73162be932277a17a3847944cfda7e141"
+    },
+    {
+      "path": "test/observation/verify-wow-message-construction.ps1",
+      "sha256": "e69afb9a8a795323beba9bb496502155beb0f8a451773f111a02654972178c58"
+    }
+  ],
+  "mirror_files": 1,
+  "mirror_before": 86,
+  "mirror_after": 69,
+  "mirror_diff_delta": -17,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R1336",
+      "original_line": 17,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Explicit lifetime declaration",
+      "evidence": "Original exceptional control conversions skip normal free16; concrete exact-original body fixture demonstrates unreleased heap buffers. Remaining APIs use WINAPI and CB_DIR uses WOW_TEXT_ACTIVE/MAPPED constants declared in this header; do not replace with implicit declarations.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1337",
+      "original_line": 107,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1338",
+      "original_line": 113,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1339",
+      "original_line": 131,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1340",
+      "original_line": 137,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1341",
+      "original_line": 182,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1342",
+      "original_line": 194,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1343",
+      "original_line": 232,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1344",
+      "original_line": 246,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1345",
+      "original_line": 320,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1346",
+      "original_line": 327,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1347",
+      "original_line": 409,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1348",
+      "original_line": 419,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1349",
+      "original_line": 447,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Consumed ownership snapshot",
+      "evidence": "Keep the single local snapshot while clearing dwParam before DeleteParamMap/free16. Initialize at function entry instead of separate unthunk assignment. No extra state owner or failure path.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1350",
+      "original_line": 448,
+      "before": 2,
+      "after": 0,
+      "delta": -2,
+      "problem": "Redundant initialization",
+      "evidence": "Restore original absence of these two resets. W32Win16WndProcEx, W32DialogFunc, ThunkCallWndProcHook, ThunkMsgFilterHook and WCD32CommonDialogProc initialize fresh WM32MSGPARAMEX to zero. putmsg16 selects only COMMAND/DDE/DROPFILES and cannot dispatch CB_DIR. Null input already carries null lParam; successful map/heap acquisition assigns lParam; pre-acquisition failure has no ACTIVE bit so unthunk does not free an incoming native pointer.",
+      "decision": "restore original"
+    },
+    {
+      "id": "T483-R1351",
+      "original_line": 456,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Borrowed map acquisition",
+      "evidence": "Original GetParam16 increments map reference count. A callback exception skips normal DeleteParamMap. Captured MAPPED/ACTIVE provenance enables exactly one reference release and prevents treating borrowed guest storage as heap ownership.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1352",
+      "original_line": 464,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Heap acquisition",
+      "evidence": "CB_DIR fallback malloc16 succeeds before putstr16, which can fault. ACTIVE records the actual acquired allocation without classifying an incoming native pointer as guest ownership.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1353",
+      "original_line": 467,
+      "before": 9,
+      "after": 8,
+      "delta": -1,
+      "problem": "Consume original map/heap provenance",
+      "evidence": "Original unthunk does not record consumed ownership. Calling it on normal exit and final cleanup decrements the borrowed reference twice, or frees heap twice. Retain consumed-state release using original DeleteParamMap/free16; remove only duplicate local assignment. Original map count and heap release fixtures cover normal/abort/repeated cleanup.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1354",
+      "original_line": 472,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "No acquisition or already consumed",
+      "evidence": "Without ACTIVE, pre-acquisition fault cleanup could use the incoming native lParam, or repeated cleanup could release already consumed storage. Gate release on acquired state, not pointer nonzeroness.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1355",
+      "original_line": 554,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1356",
+      "original_line": 575,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1357",
+      "original_line": 593,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1358",
+      "original_line": 599,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1359",
+      "original_line": 727,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1360",
+      "original_line": 760,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1361",
+      "original_line": 815,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1362",
+      "original_line": 826,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1363",
+      "original_line": 846,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1364",
+      "original_line": 854,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1365",
+      "original_line": 871,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1366",
+      "original_line": 878,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1367",
+      "original_line": 893,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1368",
+      "original_line": 899,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1369",
+      "original_line": 953,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1370",
+      "original_line": 963,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    }
+  ],
+  "source_proof": {
+    "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "original_path": "base/mvdm/wow32/wcntl32.c",
+    "controls": [
+      {
+        "function": "WM32EMGetRect",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32EMSetRect",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32EMReplaceSel",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32EMGetLine",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32EMSetTabStops",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32CBAddString",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32CBGetLBText",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32CBGetDropDownControlRect",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32LBGetText",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32LBDir",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32LBGetSelItems",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32LBSetTabStops",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32LBGetItemRect",
+        "tested_baseline_exact_original": true
+      },
+      {
+        "function": "WM32LBAddString",
+        "tested_baseline_exact_original": true
+      }
+    ],
+    "mirror_metric_before": {
+      "added": 54,
+      "deleted": 32,
+      "total": 86
+    },
+    "scope": "Historical fixture control bodies compared byte-for-byte after CRLF normalization with pinned original; host boundaries remain fixture doubles, not guest runtime proof."
+  },
+  "line_proof": "batch-p138-line-check.json",
+  "limitations": [
+    "Focused exact-body fixtures use host service doubles, not a guest-runtime substitute.",
+    "34 residual points remain pending owner decision.",
+    "No guest or winnt.zip changes. External missing-fixture skips remain non-pass results."
+  ],
+  "review_counterpass": "Checked all message-table dispatch sites, putmsg16 message restriction, no other dwTmp[1] user in this file, capture-before-copy LB_DIR, normal/output/abort ordering, reference-count provider, original line471 outer brace versus removed line470 inner brace.",
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 431397,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6661,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 2068,
+          "CleanupMs": 495,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 15422,
+          "CleanupMs": 479,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 20088,
+          "CleanupMs": 416,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 12528,
+          "CleanupMs": 456,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 287,
+          "CleanupMs": 456,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66666,
+          "CleanupMs": 447,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 47341,
+          "CleanupMs": 450,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 45234,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15200,
+          "CleanupMs": 492,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11229,
+          "CleanupMs": 510,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 73291,
+          "CleanupMs": 521,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12509,
+          "CleanupMs": 448,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28580,
+          "CleanupMs": 462,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30764,
+          "CleanupMs": 458,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4444,
+          "CleanupMs": 446,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7799,
+          "CleanupMs": 458,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10207,
+          "CleanupMs": 452,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4246,
+          "CleanupMs": 412,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6503,
+          "CleanupMs": 447,
+          "Passed": true
+        }
+      ]
+    },
+    "line_proof": "batch-p138-line-check.json",
+    "transaction": "TRANSACTION_FAMILY index=0 message=000D modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=1 message=0087 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=2 message=030C modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=3 message=022B modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=4 message=00B2 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=5 message=00B3 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=6 message=00C2 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=7 message=00C4 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=8 message=00CB modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=9 message=0143 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=10 message=0148 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=11 message=0152 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=12 message=0189 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=13 message=018D modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=14 message=0191 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=15 message=0192 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=16 message=0198 modes=5 errors=0 copy_fault=0\nTRANSACTION_FAMILY index=17 message=0180 modes=5 errors=0 copy_fault=1\nTRANSACTION_FAMILY index=18 message=C001 modes=5 errors=0 copy_fault=1\nTRANSACTION_GROUP errors=0 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0\nMESSAGE_CONSTRUCTION failures=0 scenarios=167 abi=72 scratch_offset=56 scratch_slots=4 parm=16\n",
+    "negative_transaction": "FAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=0 message=000D modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=1 message=0087 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=2 message=030C modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=3 message=022B modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=4 message=00B2 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=5 message=00B3 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=6 message=00C2 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=7 message=00C4 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=8 message=00CB modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=9 message=0143 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=10 message=0148 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=11 message=0152 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=12 message=0189 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=13 message=018D modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=14 message=0191 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=15 message=0192 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=16 message=0198 modes=5 errors=3 copy_fault=0\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_COPYBACK_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=17 message=0180 modes=5 errors=3 copy_fault=1\nFAIL TRANSACTION_HEAP_ABORT\nFAIL TRANSACTION_HEAP_PRECALL_COPY_ABORT\nTRANSACTION_FAMILY index=18 message=C001 modes=5 errors=2 copy_fault=1\nFAIL TRANSACTION_PARTIAL_COPY_RELEASE_ONLY\nFAIL TRANSACTION_CREATE_COPY_ABORT\nFAIL TRANSACTION_CREATE_COPY_ABORT\nFAIL TRANSACTION_CREATE_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_NESTED_COPY_ABORT\nFAIL TRANSACTION_RELEASE_ESCAPE\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_UNLOCKED_HANDLE_RELEASE\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_UNLOCKED_HANDLE_RELEASE\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_GLOBAL_LOCKED_ABORT\nFAIL TRANSACTION_CBT_ABORT\nFAIL TRANSACTION_CBT_FAILED_STACK\nFAIL TRANSACTION_CBT_FAILED_STACK\nFAIL TRANSACTION_CONTROL_ABORT\nTRANSACTION_GROUP errors=72 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0\nMESSAGE_CONSTRUCTION failures=72 scenarios=154 abi=72 scratch_offset=56 scratch_slots=4 parm=16\n",
+    "parameter_map": "PARAMETER_MAP failures=0 scenarios=54 reverse=148 buffer=84 forward=72\n",
+    "focused": [
+      "WOW_PUBLIC_MEMORY_ABI_OK",
+      "WOW_FIXTURE_OK case=menu-resource"
+    ],
+    "boundary": "review-check.log"
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "A05FF49EA26392436C910019B27A33B22BA70BD41E0C08B7324DAF4930F9646F",
+      "Machine": 332,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "EF2C160CB00B84D94118A82E6C77A3CE41F6A35FBFAD15F618A64F948A9BBDA5",
+      "Machine": 34404,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "58C8C8131FC02C27A7D3A63D5FC27670030F3FAD3736E30ABEBBEC2AC7D62460"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "CCF92F17B8C52D6D8CF626E3FEB926BE54A03296D3C345390EC0C08499D35749",
+      "Machine": 34404,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "54CAE802E78CBBAE2FDCA151A05A47F4179EBADFB2BF75522D2A32750AD8345E"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "5F1FEC7007EA5545E1D2F433A96DCD272EF96E4FEE775A7E64AD359298BAB685",
+      "Machine": 34404,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "F719E35DEB360AC00046EAC3BC493A807AE04EDD6378BB5E0271728E5D28F087"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "0A164FE55B46AB18B25CB9FFA1E67389637651873589138A82256395F522ECBA",
+      "Machine": 332,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "F1897FCE93D6B8F8377B839E8F316446A24B9C484EF4AEF19E388A040B8F56A8"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "4F20BB4CF3E4072B0C5DB23B2366AD186A081CF42FE721FB154F7340FA46B84D",
+      "Machine": 34404,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "5DDE3264C3476750442FAAEDA880B3F011505BCAF2F1C49A43E3BD049AC8F072"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "9B2EB426C1828B955CB8CF037C998989741A1A6DE998A80F85DF04DA5805761C",
+      "Machine": 34404,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "C5B533929016ADD048712CBE971AFE3B4356869388EBB2944C82883E34DEA15C",
+      "Machine": 332,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "3BE2B97A89AC42DE1EF5B1EB8F891F5C6DF1634EF53216181649D9BC672A04A0"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "1BD44EBAE6A8A0CE08C92A1FD3E16EAA7436C90FC6B4B090C6029CC66C6E23F1",
+      "Machine": 332,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "42BE9434DFB4CB83C474036A2D42B1DC04E6390C9B0EB63E6E6080F6ED2BDE6F",
+      "Machine": 332,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "0375331F431DEC033A6164D8548A7FA0618DDCEB2C80359A2423F85348EC6C60"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "A9DD55B4995324CD2F664129FF85536D8D7C1A40F51021E5D2E9686506E9EBEC",
+      "Machine": 34404,
+      "PackageId": "9aae65ce-8330-4270-a340-eaf8615e9db5",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

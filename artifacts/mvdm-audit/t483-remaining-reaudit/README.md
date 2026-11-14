@@ -931,3 +931,9 @@ P136 final cached build,publish11x2,source contrasts,public ABI,menu-resource,Fu
 P137 [whole-file checkpoint](batch-p137-checkpoint.json), [line proof](batch-p137-line-check.json):wcall16 mirror222->198(-24);original frame reads and cast-lvalues restored;duplicate LastError handling removed.189/365 files;1335/2720 reviewed;505 delivered,5 local,8 approved,817 pending,1385 unreviewed. Final verification and delivery pending.
 
 P137 final cached build,publish11x2,callback/CCPU source contrasts,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror222->198(-24);370 selected lines match.189/365 files;1335/2720 points:510 delivered/confirmed,8 approved,817 pending,1385 unreviewed. Final governance and Git accompany receipt.
+
+R1336-R1370 [initial source and diagnostic evidence](r1336-r1370-initial-evidence.md): wcntl32 whole-file review in progress; mirror +54/-32 (86). All14 fixture control baseline bodies match pinned OpenNT. Existing transaction fixture passes after its source check accepts diagnostic #line directives. No mirror change, completed-count advance or new delivery claimed.
+
+P138 [whole-file checkpoint](batch-p138-checkpoint.json), [line proof](batch-p138-line-check.json):wcntl32 mirror86->69(-17);R1350 restored,34 minimized/unchanged residuals pending.190/365 files;1370/2720 points;510 delivered,1 local,8 approved,851 pending,1350 unreviewed. Final delivery pending.
+
+P138 final cached build,publish11x2,transaction167/parameter-map54 source contrasts,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror86->69(-17);540 selected lines match.190/365 files;1370/2720 points:511 delivered/confirmed,8 approved,851 pending,1350 unreviewed. Final governance and Git accompany receipt.

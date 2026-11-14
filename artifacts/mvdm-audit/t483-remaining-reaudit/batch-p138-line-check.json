@@ -1,0 +1,509 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wcntl32.c",
+    "shared_selected_lines": 540,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            107,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+          ]
+        ],
+        "after": [
+          [
+            107,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            113,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            113,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            131,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+          ]
+        ],
+        "after": [
+          [
+            131,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            137,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            137,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            182,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+          ]
+        ],
+        "after": [
+          [
+            182,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            194,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            194,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            232,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+          ]
+        ],
+        "after": [
+          [
+            232,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            246,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            246,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            320,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(lpwm32mpex->uParam * sizeof(WORD));"
+          ]
+        ],
+        "after": [
+          [
+            320,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            327,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            327,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            409,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+          ]
+        ],
+        "after": [
+          [
+            409,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            419,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            419,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            447,
+            "DWORD owned = lpwm32mpex->dwParam;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            456,
+            "lpwm32mpex->dwParam = 1u | 2u;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            464,
+            "lpwm32mpex->dwParam = 1u;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            467,
+            "if (W32CheckThunkParamFlag()) {"
+          ],
+          [
+            468,
+            "if (DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, ((void *)0))) {"
+          ]
+        ],
+        "after": [
+          [
+            467,
+            "lpwm32mpex->dwParam = 0;"
+          ],
+          [
+            468,
+            "if (owned & 2u) {"
+          ],
+          [
+            469,
+            "DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, ((void *)0));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            471,
+            "}"
+          ]
+        ],
+        "after": [
+          [
+            472,
+            "if (!(owned & 1u)) return 1;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            554,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+          ]
+        ],
+        "after": [
+          [
+            554,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            575,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            575,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            593,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+          ]
+        ],
+        "after": [
+          [
+            593,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            599,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            599,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            727,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+          ]
+        ],
+        "after": [
+          [
+            727,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            760,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            760,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            815,
+            "if (!(vp = malloc16(cb))) {"
+          ]
+        ],
+        "after": [
+          [
+            815,
+            "if (!(vp = wow_message_heap32(lpwm32mpex, malloc16(cb)))) {"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            826,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            826,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            846,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+          ]
+        ],
+        "after": [
+          [
+            846,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            854,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            854,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            871,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(lpwm32mpex->uParam * sizeof(WORD));"
+          ]
+        ],
+        "after": [
+          [
+            871,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            878,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            878,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            893,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(sizeof(RECT16));"
+          ]
+        ],
+        "after": [
+          [
+            893,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            899,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            899,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            953,
+            "lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb);"
+          ]
+        ],
+        "after": [
+          [
+            953,
+            "lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            963,
+            "free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);"
+          ]
+        ],
+        "after": [
+          [
+            963,
+            "wow_message_release32(lpwm32mpex);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true,
+    "structural_duplicate_brace_resolution": [
+      {
+        "removed_inner": 470,
+        "retained_outer": 471
+      }
+    ]
+  }
+]
