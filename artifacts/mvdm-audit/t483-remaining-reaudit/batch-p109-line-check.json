@@ -1,0 +1,63 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+    "shared_selected_lines": 121,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            86,
+            "static UINT HostApplicationActive = 0;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            176,
+            "HostApplicationActive = 1;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            287,
+            "ntvdm_worker_lifecycle_authorize_exit();"
+          ],
+          [
+            288,
+            "if (!HostApplicationActive)"
+          ],
+          [
+            289,
+            "return;"
+          ],
+          [
+            290,
+            "HostApplicationActive = 0;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            323,
+            "ntvdm_worker_lifecycle_authorize_exit();"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": false
+  }
+]

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1205 points reviewed:441 restored delivered,0 local,8 approved,
-756 qualified pending,0 restores decided;1515 unreviewed. Files152/365 audited,213 remain.
+1209 points reviewed:442 restored delivered,0 local,8 approved,
+759 qualified pending,0 restores decided;1511 unreviewed. Files153/365 audited,212 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P108 package `94b0f060-bb58-45fa-999f-5566275bf89c` published11x2; hashes match.
+P109 package `92b6d16e-1f87-46eb-931b-de036d32f41d` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p108-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p109-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -89,24 +89,16 @@ supersedes that investigation checkpoint.
 [Source attribution](../../artifacts/mvdm-audit/t483-remaining-reaudit/dpmiint-guest-source-attribution.json).
 That read-only checkpoint is followed by the active local restoration below.
 
-P102 delivered;[review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1146-r1150-nt-hosts-review.json).
-
-P103 original hook restored;[review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1151-r1169-nt-inthk-review.json).
-
-P104 nt_keycd.c reviewed;mirror6->4(-2),comment-only;P103 binaries unchanged.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1170-r1172-nt-keycd-review.json).
-
-P105 nt_mem.c mirror145->139(-6);no-binding/comment-only;P103 package unchanged.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1173-r1175-nt-mem-review.json).
-
-P106 nt_mouse.c mirror706->698(-8);comments/CRLF only;P103 package unchanged.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1176-r1183-nt-mouse-review.json).
+P102-P106 delivered;see active audit README indexed receipts.
 
 P107 nt_msscs.c mirror171->129(-42);cached build,publish11x2,Full19 passed.
 [Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p107-checkpoint.json).
 
 P108 nt_pif.c mirror31->14(-17);cached/focused,publication11x2,Full19 passed.
 [Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p108-checkpoint.json).
+
+P109 nt_reset.c mirror115->99(-16);cached build,publish11x2,Full19 passed.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p109-checkpoint.json).
 
 ## Remaining Scope
 

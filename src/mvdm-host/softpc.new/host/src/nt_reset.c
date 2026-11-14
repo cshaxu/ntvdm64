@@ -91,12 +91,8 @@ GLOBAL ULONG DosSessionId = 0;
 GLOBAL UINT VdmExitCode = 0xFF;
 GLOBAL BOOL StreamIoSwitchOn = TRUE;
 
-/* DIVERGENCE(MVDM-HOST-DIV-147): NT4 may reach host_terminate directly and
- * then rely on ExitProcess to destroy outstanding SoftPC workers. The app
- * terminates only the current session, so retain one source-owned close cohort
- * for both the ordinary terminate() route and the direct-reset route. */
-static BOOL HostApplicationClosed = FALSE;
-static BOOL HostApplicationStarted = FALSE;
+static BOOL HostApplicationActive = FALSE;
+#line 86
 
 /*
  *
@@ -153,11 +149,10 @@ host_reset()
 #line 139
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #else	/* ! ( HUNTER ) */
-#ifdef X86GFX
 #line 141
-#error X86GFX fullscreen idle path is not supported
-#endif
-#line 144
+    if (sc.ScreenState == FULLSCREEN)	// initialised in ConsoleInit()
+	IDLE_ctl(FALSE);
+    else
 	IDLE_ctl(TRUE);		// can't idle detect fullscreen
 
     host_idle_init();		// host sleep event creation
@@ -191,9 +186,7 @@ void  host_applInit(int argc,char *argv[])
     char	*psz;
     int  temp_argc = argc;
 
-    /* A fresh original host start owns a fresh close cohort. */
-    HostApplicationClosed = FALSE;
-    HostApplicationStarted = TRUE;
+    HostApplicationActive = TRUE;
 #line 175
     char         **temp_argv = argv;
     BOOL         bSwitchF = FALSE;
@@ -312,11 +305,10 @@ void  host_applInit(int argc,char *argv[])
 void
 host_applClose(void)
 {
-  /* DIVERGENCE(MVDM-HOST-DIV-356): before any original host resource release. */
   ntvdm_worker_lifecycle_authorize_exit();
-  if (!HostApplicationStarted || HostApplicationClosed)
+  if (!HostApplicationActive)
       return;
-  HostApplicationClosed = TRUE;
+  HostApplicationActive = FALSE;
 #line 287
   nt_remove_event_thread();
   InitSound(FALSE);
@@ -355,7 +347,6 @@ host_applClose(void)
  */
 void host_terminate(void)
 {
-    /* DIVERGENCE(MVDM-HOST-DIV-356): direct entries precede ExitVDM retirement. */
     ntvdm_worker_lifecycle_authorize_exit();
 
 #ifdef HUNTER
@@ -381,7 +372,6 @@ void host_terminate(void)
  */
 VOID TerminateVDM(void)
 {
-
 
     /*
      *  Do base sepcific cleanup thru terminate().

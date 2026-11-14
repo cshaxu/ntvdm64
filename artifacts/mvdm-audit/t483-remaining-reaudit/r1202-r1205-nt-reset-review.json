@@ -1,0 +1,111 @@
+{
+  "scope": "M0 T483 S5 P109;whole nt_reset.c",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_reset.c",
+  "evidence": {
+    "R1202": "Two booleans represent one close entitlement. Original ExitProcess terminates the dedicated process; admitted mvdm_softpc_terminate_current_session calls host_applClose before session longjmp. Bounded execution also has a close tail after return. Preserve a single entered/not-closed bit rather than separate Started/Closed states. Original host_applClose unconditionally calls InitSound(FALSE), which enters IcaLock; it is not a pre-start-safe cleanup primitive. Reduced residual is one BOOL, pending owner; ordinary host_terminate still uses native ExitProcess, not longjmp.",
+    "R1203": "No concrete failure proves the original ScreenState/FULLSCREEN IDLE_ctl selection invalid. Restore all three original selected lines. Software presentation now also uses FULLSCREEN; that fact alone does not prove the original idle policy must be deleted. Keep the original policy and validate normal product paths;no performance improvement claimed.",
+    "R1204": "Enter the close entitlement at the same host_applInit point. One assignment replaces resetting Closed and setting Started. All state writes are in this file; relation active=started&&!closed holds after initial state and every complete init/close transition. No new lifecycle owner or callback.",
+    "R1205": "Retain existing NTSRV authorization before original resource cleanup; ntvdm_worker_lifecycle_authorize_exit serializes cleanup ownership and quiesces VM frontends. Collapse guard to one active bit and clear before original callbacks, preserving repeated/reentrant close behavior. Original InitSound/ICA lock assumes initialized host; original cleanup cannot be called indiscriminately by controlled session-return entries. Full concurrency/lifecycle runtime tests remain required;enumerated state proof alone is not runtime evidence."
+  },
+  "restored": [
+    1203
+  ],
+  "residual": [
+    1202,
+    1204,
+    1205
+  ],
+  "mirror": {
+    "nt_reset": {
+      "before": {
+        "added": 32,
+        "deleted": 83,
+        "total": 115
+      },
+      "after": {
+        "added": 19,
+        "deleted": 80,
+        "total": 99
+      }
+    }
+  },
+  "mirror_diff_delta": -16,
+  "line_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "shared_selected_lines": 121,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              86,
+              "static UINT HostApplicationActive = 0;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              176,
+              "HostApplicationActive = 1;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              287,
+              "ntvdm_worker_lifecycle_authorize_exit();"
+            ],
+            [
+              288,
+              "if (!HostApplicationActive)"
+            ],
+            [
+              289,
+              "return;"
+            ],
+            [
+              290,
+              "HostApplicationActive = 0;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              323,
+              "ntvdm_worker_lifecycle_authorize_exit();"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": false
+    }
+  ],
+  "state_equivalence": {
+    "sequences": 65536,
+    "operations_per_sequence": 16,
+    "actions": [
+      "host_applInit",
+      "host_applClose"
+    ],
+    "close_traces_equal": true,
+    "scope": "State-transition proof only; not concurrency or guest runtime acceptance"
+  },
+  "state_proof_source": "import itertools,json\nfrom pathlib import Path\ncases=0\nfor actions in itertools.product((0,1),repeat=16):\n started=closed=active=False\n old=[];new=[]\n for action in actions:\n  if action==0:started=True;closed=False;active=True\n  else:\n   old.append(started and not closed)\n   if old[-1]:closed=True\n   new.append(active)\n   if active:active=False\n assert old==new\n cases+=1\nr={'sequences':cases,'operations_per_sequence':16,'actions':['host_applInit','host_applClose'],'close_traces_equal':True,'scope':'State-transition proof only; not concurrency or guest runtime acceptance'}\nPath('build/t483-s5-p109/state-proof.json').write_text(json.dumps(r,indent=2))\nprint(r)\n",
+  "counter_review": "Distinguish original process exit from surviving admitted session escape. Do not justify two booleans by the existence of cleanup responsibility. One active bit suffices. Restore idle policy because changed presentation-state meaning is not proof original policy fails. Original exclusions remain;removed only the project-added nested X86GFX#error around originally selected code.",
+  "status": "Whole-file restoration built,published11x2 and Full19 passed;Git delivery accompanies receipt",
+  "sha256": "c5de0f587bad56710c42094f0e337a7195f508fb03e9cca5670ee1abb051f887",
+  "delivery": "batch-p109-checkpoint.json"
+}
