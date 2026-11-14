@@ -1,0 +1,38 @@
+{
+  "status": "audit only;R1119 restoration decided,not applied",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "source_sha256": "64f56b674ce1cbb6f3f70cd2baf269e51cdafbdfa3faad82d4898a2d62d0fce9",
+  "points": [
+    {
+      "id": "T483-R1117",
+      "lines": "1986",
+      "scale": "+3/-1",
+      "problem": "Program software VGA cursor shape",
+      "evidence": "Original WINDOWED predicate suppresses R10/R11 writes for logical FULLSCREEN,although software frontend reads get_cursor_start/height from VGA state. BIOS VID_CURMOD is written regardless;restoration leaves register/presentation shape different from BIOS cursor info.",
+      "minimum": "Retain original port-write block selected for software FULLSCREEN;no second cursor state."
+    },
+    {
+      "id": "T483-R1118",
+      "lines": "2010",
+      "scale": "+3/-1",
+      "problem": "Program software VGA cursor position",
+      "evidence": "Original WINDOWED predicate suppresses R14/R15 writes while VID_CURPOS is updated unconditionally. vga_prts cursor-address handlers and nt_text presentation use the register-derived cursor position,not merely BIOS memory. Restoring predicate skips software cursor movement at initialization/resume.",
+      "minimum": "Retain original port writes for both software presentation routes."
+    },
+    {
+      "id": "T483-R1119",
+      "lines": "2024",
+      "scale": "+3/-1",
+      "problem": "Avoid redundant shape resynchronization",
+      "evidence": "Current selected vga_prts.c case0xa invokes do_new_cursor even when start value unchanged (unless register protection suppresses write);case0xb recomputes on changed end;case9 recomputes on changed height. The preceding setVDMCursorPosition writes R10/R11;subsequent R14/R15 and BIOS writes do not change shape inputs. Protected registers leave their existing values/shape unchanged. Therefore additional unconditional do_new_cursor is redundant for software FULLSCREEN.",
+      "minimum": "Restore original WINDOWED condition;preserve original call inside it and excluded MONITOR #error;apply only with whole-file final edits and validate final candidate."
+    }
+  ],
+  "actual_provider": "vga_prts.c::do_new_cursor (GLOBAL under NTVDM),not ega_prts.c LOCAL function",
+  "counter_review": [
+    "R1117/R1118 preserve the original register owner;BIOS data is not a replacement for those registers.",
+    "R1119 is not retained by analogy with neighboring condition changes. Trace shape inputs and original port side effects.",
+    "No production edits yet;no new runtime pass claimed. Whole-file edits must precede cached build/publication/tests."
+  ],
+  "next": "R1120;nt_fulsc9/11 audited"
+}
