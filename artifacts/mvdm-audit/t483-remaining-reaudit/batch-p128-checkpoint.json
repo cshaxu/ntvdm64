@@ -1,0 +1,96 @@
+{
+  "status": "Audit-only: source identity and22 publication hashes verified;governance/Git accompany delivery",
+  "source_change": false,
+  "review": "r1297-vrputil-review.json",
+  "reused_build_publication_full": "batch-p127-checkpoint.json",
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "523885C62A404DE92C5E8EDC4C833B6CF8A537C157F9BC2C209E91BBC2AFFA4F",
+      "Machine": 332,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "4362E093DE47E5637E5FD4E031C5353F4C5F4B090A9D6E7479B596C017E14FA7",
+      "Machine": 34404,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "F583ABA6BEBB814E8DC29FB1D5FB7C96FE29537F246C2932AAC16B2AD2ADDF72"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "7B6B88E7411CB38543218C192D429C5AD7C22ACF5AD63F489E8FAA61323769DE",
+      "Machine": 34404,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "62C9EEA3D26759F3D63A73636A183F6F715FBE0EE310384C781F74B48DB8477F"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "7ADBA0DBE6E19AF00079304A07181B6501EA048C194F0F8D2EE35D01C13ABEB0",
+      "Machine": 34404,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "7310D9301A827D6A46CBAAB67FE4E79A57D84AE436B714C0A72E45C5E4078B03"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "B67A12CACF8BB8520AD1DBDDA2422C8831D315241C1226C628CE011E25F40C16",
+      "Machine": 332,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "D33052FC4A1F43586FBBFA05104B20D1F1064202C7DE5155EE5E10EAD2804ECC"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "EF33359DD369909F48B60AACE69C83FDAAB1D7E272562B6CE58411BF8B548519",
+      "Machine": 34404,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "D3AB77288267F85989C2B2B54C03635998CB6505A57439C5BAC322FA9D28DFCB"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "0DD9691AF9AD2B3617EE9444C49AE4BB06950133B8FC54E7AD3DDD39D8E9E4DF",
+      "Machine": 34404,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "52C31EBD1FED16647621A4E43C9AC75B9C3679F71350F68E40D02CDB22402D06",
+      "Machine": 332,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "6345B35E2D361320D9594F2F61D75D3960F10E8D0275755020E021EC0AED3C36"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "842C7593D595112F7CB4A4A66CAA0BFE876F11F85A89A02A8DBDE77CDD3F756D",
+      "Machine": 332,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "0A519FD5D8AE9E3C679A0AEFED35A9CB56A39662659F29B0DC9DED8B9C5DEEB7"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "30DCF1F1627B9178E171E5CA6A21DCCEDCDD98C353E8FA995E6D8BBF74D091B6",
+      "Machine": 332,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "5B771AF47B833C21CAE493BB473B701622019A6703340B6F1ECB4C0275CD9E90"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "57B66CB5CECE2CA6D7D7DC9ECA19ACBA9BC61785E66BCDAD8C0628E8B12E22E4",
+      "Machine": 34404,
+      "PackageId": "a7cc2446-c84e-40fe-ba24-d440a44ca953",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

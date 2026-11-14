@@ -899,3 +899,5 @@ P127 [final compiler line proof](batch-p127-line-check.json) checks967 selected 
 P127 [count reconciliation](p127-progress-reconciliation.json):P111 double-counted four previously delivered points. Main-register dispositions remain unchanged; cumulative counts now derive from actual rows, not batch additions.
 
 P127 final delivery gates passed:cached full,publish11x2,focused27,old-adapter negative,Full19,967 lines and governance. Git accompanies receipt.179/365 files;1296/2720 points:490 delivered,8 approved,798 pending,1424 unreviewed.
+
+P128 [vrputil review](r1297-vrputil-review.json), [receipt](batch-p128-checkpoint.json):only one required diagnostic #error replacement;75 original lines match;source unchanged. P127 package/Full reused with22 hashes checked.180/365 files,1297/2720 points:491 confirmed/restored,8 approved,798 pending,1423 unreviewed.
