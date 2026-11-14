@@ -1,0 +1,46 @@
+{
+  "point": "T483-R1309",
+  "path": "src/mvdm-host/wow32/waccel.c",
+  "source_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/waccel.c",
+  "original_sha256": "1c88ea2dbc215f524374529ffc344eb7c8a7b0584867f8676af47765402d9360",
+  "mirror_diff": {
+    "before": {
+      "added": 3,
+      "deleted": 9,
+      "total": 12
+    },
+    "after": {
+      "added": 3,
+      "deleted": 9,
+      "total": 12
+    }
+  },
+  "excluded_bodies": [
+    {
+      "original_lines": "259",
+      "purpose": "DBG LastKeyIndex diagnostic variable"
+    },
+    {
+      "original_lines": "280-282",
+      "purpose": "DBG last-key marker tracking"
+    },
+    {
+      "original_lines": "292-296",
+      "purpose": "DBG diagnostic logging"
+    }
+  ],
+  "line_proof": {
+    "path": "src/mvdm-host/wow32/waccel.c",
+    "shared_selected_lines": 224,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [],
+    "excluded_error_directives_unchanged": true
+  },
+  "compile_context": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /DWOW_ORIGINAL_THUNK_BUILD /O2 /Foobj/waccel.obj O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/waccel.c",
+  "initial_review": "Every non-line difference is one of three DBG bodies replaced by mandated #error. All accelerator creation/conversion/alias execution remains original.",
+  "counter_review": "Full-file original diff checked,not just recorded first anchor. Actual original/current preprocessing has224 identical selected lines at identical original line numbers. Historical S1 line mismatches no longer present. No product edit or guest change.",
+  "disposition": "confirmed original selected behavior;excluded diagnostic bodies retained under owner policy",
+  "limitations": "Preprocessing proves selected content/line identity,not new runtime acceptance. P133 exact source/package runtime evidence reused."
+}

@@ -917,3 +917,5 @@ P133 in progress: [R1305 restoration evidence](r1305-precomp-investigation.json)
 P133 whole-file source review complete: [checkpoint](batch-p133-checkpoint.json), [line proof](batch-p133-line-check.json). Mirror41->16(-25);R1305 restored locally,R1306/R1308 minimized,R1307 required include path unchanged. Cached full passed;11x2 published;final focused/Full and Git pending.185/365 files;1308/2720 points:495 delivered,1 local,8 approved,804 qualified pending,1412 unreviewed.
 
 P133 final cached build,publish11x2,public ABI,menu-resource and Full19 passed. Mirror41->16(-25);96 static include-line anchors match;WOW boundary checked.185/365 files;1308/2720 points:496 delivered/confirmed,8 approved,804 pending,1412 unreviewed. Final governance and Git accompany receipt.
+
+P134 [waccel review](r1309-waccel-review.json), [receipt](batch-p134-checkpoint.json):only3 DBG exclusions;224 selected lines match original content and lines. Source unchanged;P133 package/Full19 reused with22 hashes.186/365 files;1309/2720 points:497 restored/confirmed,8 approved,804 pending,1411 unreviewed.

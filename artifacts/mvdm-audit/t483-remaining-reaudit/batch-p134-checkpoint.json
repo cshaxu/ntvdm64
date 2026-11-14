@@ -1,0 +1,106 @@
+{
+  "status": "Audit-only: source identity and22 publication hashes verified;governance/Git accompany delivery",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e"
+    }
+  ],
+  "review": "r1309-waccel-review.json",
+  "mirror_diff_delta": 0,
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "D9C271D7B58A92B7ACF18B80550E013C39C47ED08885D64FD507F5A2BC954319",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "A6AFA52CCBAD0FD895CC963C64453F3EB6094907818E88523FAD35B28E616298",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "AB5DC380F876B3E98B1682B60A5432B2623D209C200684FED9B1918ADDB0874C"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "EEE873C0B8FE975BF5B8F67CD38AA88942A77177E5821C97C8419C3A1A58B769",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "73710C71BC95918A54E26758C7A4B430EC951DA285721E82474ECD8656D8F2F2"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "677F3344657CAFA7B667B51ECA1B562E1645FA2EF8A64B81C73DED87D02BC8E2",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "94BD8602F062D8A9070DC65C0B1C11597BCCEC6137C969EF78D151511022EA2B"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "FD352EF32F49B79411B4C7B84A19B294E53C4B170B225423DB69002060705C29",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "E718EB2FF4BF476371A8ABBCC7EF376911C0452E978B3C9C76631D04F2F9CA59"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "AD51205E1091D7BB08DAABEE10572EA879982748E0669A0F2EC21CD7A0CFDA69",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "D63DAA051ACE110B81792CA6505FA7DBF79936D6767F0CFAFDB4DB7E5ADB9081"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "51FA9A3F48C1064EAA19A2686C7BE019A3F23E56248315BA37177A09CA3D4254",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "D90FDDC799228179650FFA01B89D4F0B191D5BB7E26F73AB38D009392E6862C5",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "A363F622373421F5835B9A0C2F4BB9348D326FF2601E7B8A2C1C9AC07CC9EC22"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "A5FF220F4EEFCA2A4A978F2A20FA6AB8357C44EB89CF3B21D074D6D416BBC6FA",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "023A64D4D8942DC114044F9881A35E6040D74F50FE08AB29FA0858E5C65D85CB",
+      "Machine": 332,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "9DA7245151BEAC6968E0EC7CDD02C61A79A0D32C518ABF3A2D6365F057700B39"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "11243DFB50532F83EED98563BA39DB6C051F9FB57B23539C301D3B186F978705",
+      "Machine": 34404,
+      "PackageId": "660b0b06-42be-4d4b-b426-54e995423478",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "reused_delivery": "P133 e4e4f5bd9:cached full,11x2 publication,public ABI/menu-resource,Full19;no new runtime test claimed",
+  "limitations": [
+    "DOS4GW external fixture absent in reused Full;remains a skip.",
+    "No source change,no duplicate build or runtime needed."
+  ]
+}
