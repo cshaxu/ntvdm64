@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1269 points reviewed:480 restored/confirmed delivered,0 local,8 approved,
-781 qualified pending,0 restores decided;1451 unreviewed. Files173/365 audited,192 remain.
+1272 points reviewed:483 restored/confirmed delivered,0 local,8 approved,
+781 qualified pending,0 restores decided;1448 unreviewed. Files176/365 audited,189 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -234,6 +234,6 @@ P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaini
 P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,one evidenced declaration residual;cached build,publish11x2,Full19 passed.
 
 
-P123 vrdll line mapping confirmed;vrica mirror4->2(net-2),residual pending.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1264-r1265-redir-abi-review.json).
-Actual ABI controls/object identity pass;P118 publication/Full reused;Git accompanies receipt.
+P124 vrinit/vrmisc/vrmslot confirmed correct:736 selected lines,39 exclusions retained.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1266-r1268-redir-lines-review.json).
+Source unchanged;P118 publication/Full reused;Git accompanies receipt.

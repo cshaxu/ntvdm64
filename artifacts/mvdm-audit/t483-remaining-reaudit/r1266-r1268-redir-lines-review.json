@@ -1,0 +1,117 @@
+{
+  "files": [
+    {
+      "id": "T483-R1266",
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "sha256": "a2e4878558786715e56bda92357c5e1db94cef2949c1b0879bed44f1e7807866",
+      "original_git_sha256": "9d7a615f7c7c8e4a0a8c1ee56421f81a27baa77e10d092106e45280c64477364",
+      "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "source_unchanged": true,
+      "mirror_delta": 0,
+      "line_proof": {
+        "path": "src/mvdm-host/vdmredir/vrinit.c",
+        "shared_selected_lines": 264,
+        "line_mismatches": [],
+        "ambiguous_equal_text_matches_resolved_at_original_line": [],
+        "selected_changes": [],
+        "excluded_error_directives_unchanged": true
+      },
+      "metric": {
+        "dlc": {
+          "before": {
+            "added": 1,
+            "deleted": 4,
+            "total": 5
+          },
+          "after": {
+            "added": 1,
+            "deleted": 4,
+            "total": 5
+          }
+        }
+      },
+      "process": {
+        "script": "build/t483-s5-p124/controls.ps1",
+        "start": "2026-11-14T10:26:21.3797658-08:00",
+        "pid": 11020
+      }
+    },
+    {
+      "id": "T483-R1267",
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
+      "original_git_sha256": "79f24755e6f9f3183771c0fe0456e9fab5c896cd0e77b544b3cc35451c30a85d",
+      "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "source_unchanged": true,
+      "mirror_delta": 0,
+      "line_proof": {
+        "path": "src/mvdm-host/vdmredir/vrmisc.c",
+        "shared_selected_lines": 16,
+        "line_mismatches": [],
+        "ambiguous_equal_text_matches_resolved_at_original_line": [],
+        "selected_changes": [],
+        "excluded_error_directives_unchanged": true
+      },
+      "metric": {
+        "dlc": {
+          "before": {
+            "added": 2,
+            "deleted": 9,
+            "total": 11
+          },
+          "after": {
+            "added": 2,
+            "deleted": 9,
+            "total": 11
+          }
+        }
+      },
+      "process": {
+        "script": "build/t483-s5-p124/misc/controls.ps1",
+        "start": "2026-11-14T10:26:54.8237648-08:00",
+        "pid": 31688
+      }
+    },
+    {
+      "id": "T483-R1268",
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "sha256": "9fe36a96396cdc776db8b58e0b5c189104f030f733163052566ec09c0015c726",
+      "original_git_sha256": "f17eb9b9e17487f14350c89513111beb8357b115dae8d02dffda39bebed8d25a",
+      "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "source_unchanged": true,
+      "mirror_delta": 0,
+      "line_proof": {
+        "path": "src/mvdm-host/vdmredir/vrmslot.c",
+        "shared_selected_lines": 456,
+        "line_mismatches": [],
+        "ambiguous_equal_text_matches_resolved_at_original_line": [],
+        "selected_changes": [],
+        "excluded_error_directives_unchanged": true
+      },
+      "metric": {
+        "dlc": {
+          "before": {
+            "added": 36,
+            "deleted": 179,
+            "total": 215
+          },
+          "after": {
+            "added": 36,
+            "deleted": 179,
+            "total": 215
+          }
+        }
+      },
+      "process": {
+        "pid": 31460,
+        "start": "2026-11-14T10:27:27.4031702-08:00",
+        "script": "build/t483-s5-p124/slot/controls.ps1"
+      }
+    }
+  ],
+  "initial_review": "All3 historical points describe logical-line drift. Whole-file pinned-original comparison finds only prescribed DBG/VR_BREAK exclusions and line directives.",
+  "counter_review": "LF-only original numbering and actual selected product preprocessing confirm no remaining line defect. Selected else bodies preserved;no functional adaptation added or removed. All retained production statements match original with correct logical lines.",
+  "disposition": "Confirmed already-correct subset and selected line mapping;no additional restoration or pending decision needed.",
+  "mirror_delta": 0,
+  "limitations": "No new runtime/provider claim;unchanged-source P118 build,published11x2 and Full19 reused."
+}
