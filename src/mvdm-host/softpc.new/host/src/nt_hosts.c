@@ -111,13 +111,8 @@ void SetupConsoleMode(void)
     mode = sc.OrgInConsoleMode &
 	   ~(ENABLE_PROCESSED_INPUT | ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
     if (!host_stream_io_enabled)
-	mode |= ENABLE_WINDOW_INPUT;
-    /* DIVERGENCE(MVDM-HOST-DIV-263): standalone text mode remains in
-       STREAM_IO, unlike the original Console Server transition that enabled
-       mouse input later. Public Console QuickEdit otherwise consumes physical
-       clicks before this unchanged original event worker can read them. */
-    mode |= (ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
-    mode &= ~ENABLE_QUICK_EDIT_MODE;
+	mode |= (ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+    mode = (mode | ENABLE_EXTENDED_FLAGS) & ~ENABLE_QUICK_EDIT_MODE;
 
     /*.............................................. Set new console mode */
 
@@ -164,9 +159,6 @@ void SetupConsoleMode(void)
 void InitScreenDesc(void)
 {
 SECURITY_ATTRIBUTES sa;
-DWORD console_mode;
-HANDLE inherited_handle;
-HANDLE inherited_error;
 
     /*::::::::::::::::::::::::::::::::::::::::::: Get console output handle */
 
@@ -188,15 +180,7 @@ HANDLE inherited_error;
 
     /*:::::::::::::::::::::::::::::: check out if stdin has been redirected */
 
-    /* DIVERGENCE(MVDM-HOST-DIV-272): NT4 Console character handles retained
-       their Console identity after BaseSrv duplicated them into the worker.
-       A modern ConPTY duplicate can remain FILE_TYPE_CHAR yet no longer be
-       usable by the original console-mode calls.  Preserve the original
-       redirected-input fallback, but select it from the actual Console
-       contract rather than an output-type proxy.  The DOS record retains
-       its separately duplicated input/output streams. */
-    if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR ||
-       !GetConsoleMode(sc.InputHandle, &console_mode))
+    if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR)
 #line 177
     {
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
@@ -217,8 +201,6 @@ HANDLE inherited_error;
 
     if(GetFileType(sc.OutputHandle) != FILE_TYPE_CHAR)
     {
-       inherited_handle = sc.OutputHandle;
-       inherited_error = GetStdHandle(STD_ERROR_HANDLE);
 #line 196
        stdoutRedirected = TRUE;
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
@@ -233,14 +215,6 @@ HANDLE inherited_error;
        else {
           SetStdHandle (STD_OUTPUT_HANDLE,sc.OutputHandle);
           SetStdHandle (STD_ERROR_HANDLE,sc.OutputHandle);
-          /* BaseSrv has separately duplicated stdout/stderr into the DOS
-             record.  Once this host has replaced its process startup stream
-             with CONOUT$, release the superseded inherited handle so it
-             cannot retain a host pipe write end past COMMAND cleanup. */
-          CloseHandle(inherited_handle);
-          if (inherited_error != inherited_handle &&
-              inherited_error != NULL && inherited_error != INVALID_HANDLE_VALUE)
-             CloseHandle(inherited_error);
 #line 209
        }
     }

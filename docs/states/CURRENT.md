@@ -34,16 +34,13 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1149 points reviewed:402 restored delivered,0 local,8 approved,
-739 qualified pending,0 restores decided;1571 unreviewed. Files145/365 audited,220 remain.
+1154 points reviewed:406 restored delivered,0 local,8 approved,
+740 qualified pending,0 restores decided;1566 unreviewed. Files146/365 audited,219 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
-Owner-directed backlog requalification started at R0010 (restored and delivered).
-Earlier cmdexec.c delivery handled its remaining register points: R0014-R0020
-restore original SCS construction; R0022/R0026/R0028 restore original ordinary
-text conversion and ownership. Capture/capacity alternatives remain owner choices;
-no unapproved alternative has been implemented. R0171 has source-qualified residual evidence recorded in P17.
+Backlog requalification began at R0010. Prior cmdexec.c restorations and
+R0171 residual evidence are delivered/indexed in the ordered register.
 
 The [pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
 contains only unresolved portions of these points. All current entries have been requalified; historical speculation is not
@@ -54,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P101 package `09eeb38c-1f98-4f13-ae12-495c83615cb2` published11x2; hashes match.
+P102 package `88dbe85a-138c-47af-b3d7-69c72ef9b5d5` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p101-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p102-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -91,6 +88,11 @@ and coupled PM-address necessity were re-examined; the restoration candidate bel
 supersedes that investigation checkpoint.
 [Source attribution](../../artifacts/mvdm-audit/t483-remaining-reaudit/dpmiint-guest-source-attribution.json).
 That read-only checkpoint is followed by the active local restoration below.
+
+P102 nt_hosts.c whole-file changes delivered: mirror86->56(-30);four originals restored,
+one QuickEdit residual. Actual preprocessing matches121 original selected lines,
+zero line mismatches;cached full build,publish11x2,Full19 passed.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1146-r1150-nt-hosts-review.json).
 
 ## Remaining Scope
 

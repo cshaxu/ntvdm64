@@ -1,0 +1,23 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+    "shared_selected_lines": 121,
+    "line_mismatches": [],
+    "excluded_error_directives_unchanged": true,
+    "original_line_endings": "CRLF restored from original; before LF",
+    "normalized_file_macro_shared_lines": 130,
+    "normalized_file_macro_mismatches": 0,
+    "only_selected_token_delta": [
+      [
+        "insert",
+        [],
+        [
+          [
+            111,
+            "mode = (mode | 0x0080) & ~0x0040;"
+          ]
+        ]
+      ]
+    ]
+  }
+]

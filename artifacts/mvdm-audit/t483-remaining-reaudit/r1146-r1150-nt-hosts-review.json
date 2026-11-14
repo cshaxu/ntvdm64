@@ -1,0 +1,82 @@
+{
+  "status": "Whole-file implementation built/published andFull19 passed;Git delivery accompanies receipt",
+  "source_head": "be3f4e9c6251c329bccbb336c2abded3e6b87945",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+  "before_sha256": "9fde43cfebd448ff03be94b44ffef71fc039567e665524d40c1e144e8a282c1c",
+  "sources": {
+    "src/mvdm-host/softpc.new/host/src/nt_hosts.c": "a1f23673515b408894109ed5367821bb50f77bc156a643cea997798da9865aa7",
+    "src/ntsrv-exe/transport/worker_spawn.c": "65d8a927d6f3536583c2526838be3d7950ac33594225d068a82d5910645ab3ab",
+    "src/ntsrv-exe/opennt/source/worker_registry.c": "5cf4e47eaaff7a4a3ac0f1c65d21abedb3e103e76f851f2a7fc1bfd8bc3122d1",
+    "src/ntsrv-exe/opennt/source/base_reservation.c": "622c38093f30b1c1b32c83f09c2c2607e897788253d1d8ad11910e6a3ef69aad",
+    "src/lib-win32/process-launch/process.c": "42c9800e39b7ca622def80b4274fa54875c3d9361c7333b83955a29261e8524d",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "582e4fd65b8340243d8d4da2922fffeb1d1bb94a0c6945156fa661b7ccc60fff",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntcon-exe/console_frontend.c": "3107d2aa1f92d58f4bf5a712a8afedf6c2f4159df7fbf4337d485572bd79d72d",
+    "src/mvdm-host/softpc.new/base/video/video.c": "a8becf7361d53ebe329b4cf1fbcc3069b94967bf16ff451c37aa4b951017c110",
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": "9a77ed941309cb36ca22ca705f14d366d725456744f228d35cde586ce29ef4e2",
+    "src/mvdm-host/softpc.new/host/src/nt_fulsc.c": "f8e19853b3da68601daf8882f32bd506f50ec131d5e608e2dea1275a6100edd9"
+  },
+  "points": [
+    {
+      "id": "T483-R1146",
+      "scale": "+7/-1",
+      "anchor": "original110;SetupConsoleMode",
+      "problem": "Enable mouse in STREAM_IO and disable QuickEdit",
+      "evidence": "The historical P11/P12 notes conflict and are not sufficient necessity evidence. Current selected video.c enable_stream_io sets both common stream_io_enabled and host state. mouse_io_interrupt calls disable_stream_io before any INT33 dispatch; host_disable_stream_io enables WINDOW_INPUT and MOUSE_INPUT. Presentation-only startup disables StreamIoSwitchOn, so original SetupConsoleMode enables both flags itself. Thus unconditional MOUSE_INPUT is redundant. Modern QuickEdit remains a distinct native interception: console_client mode_client/GET_MODE/SET_MODE transport the actual frontend Console mode; console_frontend uses native GetConsoleMode/SetConsoleMode without normalization; no other selected owner clears QuickEdit. Restoring the complete original setup retains an initially enabled QuickEdit bit even after mouse activation, leaving Console selection enabled instead of exclusive guest mouse records. This is a source/API contract counterexample, not a newly observed physical click failure.",
+      "minimum": "Restore original conditional mouse/window OR; retain one mode expression to set EXTENDED_FLAGS and clear QUICK_EDIT_MODE. No helper, new state or relocated policy.",
+      "decision": "pending-owner",
+      "delta": -7
+    },
+    {
+      "id": "T483-R1147",
+      "scale": "+3/-0",
+      "anchor": "original156;InitScreenDesc locals",
+      "problem": "Locals for added Console detection and inherited-stream cleanup",
+      "evidence": "NTSRV OpenNtBaseServiceStartVdmWorker -> broker_worker_start_admitted clears STARTF_USESTDHANDLES and all three standard handles; win32_process_create forwards inherit=FALSE. DOS uses DETACHED_PROCESS; WOW uses CREATE_NO_WINDOW. ReservationPrepareWorker only registers/retains the process handle. Character startup opens the authenticated Console client before original InitScreenDesc; it does not inject target standard streams. Original GetFileType fallback opens CONIN$/CONOUT$ endpoints. Target streams remain in separately delivered DOS command records, not resident worker startup inheritance.",
+      "minimum": "Remove all three locals with their obsolete consumers at R1148-R1150.",
+      "decision": "restore-original",
+      "delta": -3
+    },
+    {
+      "id": "T483-R1148",
+      "scale": "+9/-1",
+      "anchor": "original176;stdin classification",
+      "problem": "Treat non-Console character handle as redirected input",
+      "evidence": "NTSRV OpenNtBaseServiceStartVdmWorker -> broker_worker_start_admitted clears STARTF_USESTDHANDLES and all three standard handles; win32_process_create forwards inherit=FALSE. DOS uses DETACHED_PROCESS; WOW uses CREATE_NO_WINDOW. ReservationPrepareWorker only registers/retains the process handle. Character startup opens the authenticated Console client before original InitScreenDesc; it does not inject target standard streams. Original GetFileType fallback opens CONIN$/CONOUT$ endpoints. Target streams remain in separately delivered DOS command records, not resident worker startup inheritance. A generic NUL handle can fail GetConsoleMode despite FILE_TYPE_CHAR, but the supported worker creator no longer passes NUL or duplicated ConPTY handles to this startup path. No selected caller creates that historical input. Arbitrary unsupported NTVDM direct launch is not evidence against the actual broker-owned worker contract.",
+      "minimum": "Restore exact original GetFileType condition and remove historical ConPTY explanation; no new input fallback.",
+      "decision": "restore-original",
+      "delta": -10
+    },
+    {
+      "id": "T483-R1149",
+      "scale": "+2/-0",
+      "anchor": "original196;stdout fallback",
+      "problem": "Save startup output/error handles for later closing",
+      "evidence": "NTSRV OpenNtBaseServiceStartVdmWorker -> broker_worker_start_admitted clears STARTF_USESTDHANDLES and all three standard handles; win32_process_create forwards inherit=FALSE. DOS uses DETACHED_PROCESS; WOW uses CREATE_NO_WINDOW. ReservationPrepareWorker only registers/retains the process handle. Character startup opens the authenticated Console client before original InitScreenDesc; it does not inject target standard streams. Original GetFileType fallback opens CONIN$/CONOUT$ endpoints. Target streams remain in separately delivered DOS command records, not resident worker startup inheritance.",
+      "minimum": "Restore original branch with no inherited-handle bookkeeping.",
+      "decision": "restore-original",
+      "delta": -2
+    },
+    {
+      "id": "T483-R1150",
+      "scale": "+8/-0",
+      "anchor": "original209;stdout replacement",
+      "problem": "Close inherited target pipe write ends after replacing standard streams",
+      "evidence": "NTSRV OpenNtBaseServiceStartVdmWorker -> broker_worker_start_admitted clears STARTF_USESTDHANDLES and all three standard handles; win32_process_create forwards inherit=FALSE. DOS uses DETACHED_PROCESS; WOW uses CREATE_NO_WINDOW. ReservationPrepareWorker only registers/retains the process handle. Character startup opens the authenticated Console client before original InitScreenDesc; it does not inject target standard streams. Original GetFileType fallback opens CONIN$/CONOUT$ endpoints. Target streams remain in separately delivered DOS command records, not resident worker startup inheritance. The former pipe-lifetime premise has been removed at the process creator. These CloseHandle calls do not retire command-record handles and no longer own the alleged leaked pipe endpoints. Existing command-record cleanup remains unchanged.",
+      "minimum": "Remove added closing/comment block; retain original SetStdHandle and SCS assignments.",
+      "decision": "restore-original",
+      "delta": -8
+    }
+  ],
+  "counter_review": [
+    "Distinguish current target command streams from worker process startup handles; no circular dependency argument.",
+    "The old QuickEdit transition note is historical only; current selected INT33/video state chain supports restoring conditional mouse activation.",
+    "No generic NUL hardening retained without a selected producer.",
+    "No guest code, hidden replacement path or lifecycle state machine introduced."
+  ],
+  "limits": [
+    "Source/API counterexample establishes QuickEdit retention boundary;no new physical-click original-versus-candidate experiment claimed.",
+    "Existing absent DOS4GW/Nesticle external fixture remains an explicit skip."
+  ]
+}
