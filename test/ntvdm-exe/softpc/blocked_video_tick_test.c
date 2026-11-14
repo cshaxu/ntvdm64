@@ -6,6 +6,11 @@
 #define EGG 1
 #undef TEXT
 #define TEXT 0
+#define GRAPHICS 1
+#define FULLSCREEN 1
+#define WINDOWED 0
+#define ALL_ADAPT_VERBOSE 0
+#define sub_note_trace0(a,b) ((void)0)
 #define STREAM_IO 2
 #define VGA 1
 #define EGA 2
@@ -39,10 +44,15 @@ static void paint(void){++paints;presentation_updated=TRUE;}
 static struct {void (*calc_update)(void);} update_alg={paint};
 static void choose_mode(void){++modes;}
 static void (*choose_display_mode)(void)=choose_mode;
+static void mvdm_softpc_text_video_flush(void (*publish)(void))
+{
+    if(ConsoleInitialised && !ConsoleNoUpdates && !changing){paint();publish();}
+}
 #include "blocked_video_tick.inc"
 #define CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x);return 1;}}while(0)
 int main(void)
 {
+    unsigned case_index;
     presentation_updated=TRUE;CursorResizeNeeded=1;flush_count=TICKS_PER_FLUSH-1;
     CntrlHandlerState=CNTRL_VDMBLOCKED;
     nt_graphics_tick();
@@ -64,6 +74,25 @@ int main(void)
     /* Original handoff's final paint precedes setting the blocked bit. */
     send_error=0;CntrlHandlerState=0;presentation_updated=TRUE;publish_text_update();
     CHECK(frames==5 && !presentation_updated && errors==2);
+    /* Mode selection alone must not consume the previous completed paint. */
+    changing=1;mode_change_now=1;presentation_updated=TRUE;
+    nt_graphics_tick();CHECK(!changing && presentation_updated && frames==5);
+    /* Fullscreen graphics must execute original repaint/gates, not merely
+     * notify a publisher holding the previous DIB. Text retains its helper. */
+    for(case_index=0;case_index<6;++case_index){
+        paints=frames=0;presentation_updated=FALSE;
+        sc.ScreenState=FULLSCREEN;sc.ModeType=GRAPHICS;
+        ConsoleInitialised=TRUE;ConsoleNoUpdates=FALSE;changing=0;
+        if(case_index==1)ConsoleInitialised=FALSE;
+        if(case_index==2)ConsoleNoUpdates=TRUE;
+        if(case_index==3)changing=1;
+        if(case_index==4)sc.ScreenState=WINDOWED;
+        if(case_index==5)sc.ModeType=TEXT;
+        nt_flush_screen();
+        CHECK(paints==(unsigned)(case_index==0 || case_index==4 || case_index==5));
+        CHECK(frames==(unsigned)(case_index==5));
+    }
+    puts("PASS original flush: graphics repaint, initialization/update/mode gates, windowed and text routes");
     puts("PASS blocked video tick: no transport, retained dirt/cursor/mode/stream state, resume, shell-count independence, final paint and real error propagation");
     return 0;
 }

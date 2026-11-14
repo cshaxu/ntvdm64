@@ -13,7 +13,6 @@ int ntvdm_console_graphics_invalidate(HANDLE,const SMALL_RECT *);
 /* Original host flush completed a software-VGA paint.  The copied frontend
  * needs one source-owned publication request even when the legacy physical
  * fullscreen renderer would have displayed that paint directly. */
-int ntvdm_console_graphics_flush(void);
 int ntvdm_console_graphics_palette(HANDLE,HPALETTE,DWORD);
 /* TRUE only for this session's live graphics output; count may be negative. */
 BOOL ntvdm_console_graphics_cursor(HANDLE,BOOL,int *);

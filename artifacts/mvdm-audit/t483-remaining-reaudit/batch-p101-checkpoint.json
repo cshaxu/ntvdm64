@@ -1,0 +1,338 @@
+{
+  "status": "cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_head": "f8c1d20a489be8e140f5f9a67f8a0ca517f4ed95",
+  "source_files": 7,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "sha256": "a996a56fdb41b3dcc651d8283d84987f42b19c6f98b028428ef4404844b98c03"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_graphics.c",
+      "sha256": "77dd8ca309a906f2cd5789577bf516698569d717a1792cb786ab39a0a676661a"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_graphics.h",
+      "sha256": "190254aa7a349d8600d42b2b27944ebb1310988a9ad3d982c9ee4cb78d4915c2"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/blocked_video_tick_test.c",
+      "sha256": "bcd9759cee000bf64f3e9d0f55a4786f1cb182ac0fda52d712c46927239eaeda"
+    },
+    {
+      "path": "test/ntvdm-exe/win32/console_graphics_publication_test.c",
+      "sha256": "7467a36b1f5abd8b938b4d8d2580a59769896a7b34ba9a8a756e60eeb6732766"
+    },
+    {
+      "path": "test/observation/verify-blocked-video-tick.ps1",
+      "sha256": "2b8171c0b901ed14ed45913e1b82d8cc1a0557a619af1d5cc8396ad02e496c5c"
+    },
+    {
+      "path": "test/observation/verify-console-graphics-publication.ps1",
+      "sha256": "468a6ae30dc57e199dc34e40f738ff090ce15901740483b353c39fbd09ab41ef"
+    }
+  ],
+  "mirror_metric": {
+    "scope": "normalized original-relative added+deleted lines;exclude#line;include#error subsets",
+    "before": {
+      "added": 157,
+      "deleted": 172,
+      "total": 329
+    },
+    "after": {
+      "added": 94,
+      "deleted": 168,
+      "total": 262
+    },
+    "delta": -67
+  },
+  "restored_points": [
+    "T483-R1126",
+    "T483-R1136",
+    "T483-R1137",
+    "T483-R1138",
+    "T483-R1139"
+  ],
+  "residual_points": 19,
+  "autonomous_change": "Delete sole-use graphics flush implementation/declaration;original painter invalidation plus existing begin/end update is the sole publication path. No substitute helper.",
+  "test_changes": "Existing actual-function tick fixture now also extracts nt_flush_screen and covers six repaint/gating routes plus mode-settle notification;existing actual graphics publication fixture verifies completed frame and no premature publication. Its runner now links its existing real v7_pointer dependency.",
+  "focused": {
+    "tick": "PASS original flush: graphics repaint, initialization/update/mode gates, windowed and text routes\nPASS blocked video tick: no transport, retained dirt/cursor/mode/stream state, resume, shell-count independence, final paint and real error propagation\n",
+    "graphics": "PASS graphics source: host flush publishes a valid unselected software-VGA DIB; 200 invalidations coalesce before one deferred full-frame capture/send; palette-late DIB defers without poisoning publication\n",
+    "scope": "Actual production function/body and actual compositor/publication with finite boundary mocks;not guest acceptance"
+  },
+  "line_evidence": "batch-p101-line-check.json",
+  "counter_review": [
+    "Original dirty producer/start_update dominates cursor paint;no duplicate cursor publication needed.",
+    "GRAPHICS flush now executes original initialization/update/mode gates and calc_update;the text-specific helper remains the necessary copied text path.",
+    "No guest modifications,new state machine,program-name special case or shifted shim complexity.",
+    "All24points were audited before edits;5 exact restoration points and minimal residuals accounted;residual necessity remains subject to owner decision.",
+    "The test output historical phrase host flush now means original repaint followed by invalidation,not the deleted notify-only API.",
+    "Cached build,11x2publication andFull must verify this final source identity;focused success is not delivery."
+  ],
+  "final_format_check": "Restored original #endif spelling after semantic fixture pass;final actual preprocessed selected tokens exactly identical to tested candidate;1157 original line matches and zero mismatches. No repeated runtime tests needed for this pure comment deletion.",
+  "publication": {
+    "status": "published",
+    "package": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build/t483-s5-p101/full-final/timings.json",
+  "runtime_limits": [
+    "Existing external DOS4GW/Nesticle prerequisite skip is not passing guest acceptance.",
+    "Full and focused checks do not establish every VGA register/interleaving;19 retained point decisions remain with owner."
+  ],
+  "verification": {
+    "cached": "x86/x64 full final-source build passed",
+    "focused": "actual production tick/flush boundary and actual graphics publication passed;comment-only final restore has identical preprocessed selected tokens",
+    "lines": "1157 original selected lines matched;zero mismatches;unchanged#error",
+    "Full": "19 gates passed;see full timing receipt",
+    "source_files": 7
+  },
+  "Full_summary": {
+    "Suite": "Full",
+    "ElapsedMs": 399903,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6151,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1319,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 15118,
+        "CleanupMs": 348,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 13748,
+        "CleanupMs": 339,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10765,
+        "CleanupMs": 338,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 199,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65351,
+        "CleanupMs": 353,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46574,
+        "CleanupMs": 349,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46513,
+        "CleanupMs": 325,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15254,
+        "CleanupMs": 354,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11280,
+        "CleanupMs": 283,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 52180,
+        "CleanupMs": 305,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12445,
+        "CleanupMs": 321,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28884,
+        "CleanupMs": 349,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31273,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5425,
+        "CleanupMs": 337,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8238,
+        "CleanupMs": 325,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9832,
+        "CleanupMs": 285,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4427,
+        "CleanupMs": 333,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7102,
+        "CleanupMs": 325,
+        "Passed": true
+      }
+    ]
+  },
+  "runs": {
+    "prepare-process.json": {
+      "pid": 11584,
+      "start": "2026-11-14T04:42:18.7299872-08:00",
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p101\\prepare-verify.ps1"
+    },
+    "first-cached-process.json": {
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p101\\run-build.ps1",
+      "pid": 8568,
+      "start": "2026-11-14T04:43:40.2857138-08:00"
+    },
+    "deliver-process.json": {
+      "pid": 28404,
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p101\\deliver.ps1",
+      "start": "2026-11-14T04:46:43.4807922-08:00"
+    }
+  },
+  "runner": "C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe -NoProfile -ExecutionPolicy Bypass -File <recorded script>;hidden owned background;configured elevated execution context",
+  "run_exits": {
+    "prepare-verify": "0",
+    "cached": "0",
+    "publish": "0",
+    "full-final": "0",
+    "final-check": "0",
+    "pipeline": "0",
+    "deliver": "0"
+  },
+  "source_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Foobj/host/nt_graph.obj O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "full_command": "$ErrorActionPreference='Stop'\n$repo='O:\\repos.hobby\\ntvdm64'\n$env:OPENNT_BROKER_PRODUCT_BUILD=\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\"\n$node='C:\\Users\\neko\\AppData\\Local\\Logi\\LogiPluginService\\PluginHosts\\node22\\node\\node.exe'\n& \"$repo\\tools\\audit\\Invoke-ProductVerification.ps1\" -RuntimeRoot \"$repo\\build\\t483-s5-p101\\candidate\" -BuildCache \"$repo\\build\\t483-s5-p101\\cache\" -Observer \"$repo\\build\\t483-s5-p79-final\\observers-x64\\console-startup-observer.exe\" -WindowObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\worker-window-snapshot.exe\" -TerminalObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\terminal-observer.exe\" -GuestFixture \"$repo\\build\\M0-T420\\S44\\p79-fixture\\G7.COM\" -NativeHook64 \"$repo\\build\\t483-s5-p101\\cache\\nthook64.dll\" -NativeWorker \"$repo\\build\\t483-s5-p101\\cache\\ntvwm.exe\" -NativeFrontend \"$repo\\build\\t483-s5-p101\\cache\\ntcon.exe\" -NativeMonitor \"$repo\\build\\t483-s5-p101\\cache\\ntmon.exe\" -NativeLauncher \"$repo\\build\\t483-s5-p101\\cache\\run16.exe\" -NativeService \"$repo\\build\\t483-s5-p101\\cache\\ntsrv.exe\" -MonitorRpc \"$repo\\build\\t483-s5-p101\\cache\\monitor-rpc-test.exe\" -WowBaselineRoots \"$repo\\build\\t483-s5-p78\\full-final\" -LogRoot \"$repo\\build\\t483-s5-p101\\full-final\" -Suite Full -Node $node\n\n\n\n\n\n\n\n\n$LASTEXITCODE | Set-Content build/t483-s5-p101/full-final.exit\n\nexit $LASTEXITCODE\n",
+  "manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "49E7758EEDEC6B422F7744C78846E992FFF48EDB739DA7B951B931AB2607C0F8",
+      "Machine": 332,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "13A7BE8CDBB25833ACDC61D32C0969946D658AC7F803074F331C26B8CCCDA4C1"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "624795B34105B07F7A0799467BC36B85902C0B6B3688AABD87EB7591C3FD88BD",
+      "Machine": 34404,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "13B9D04B711986AE5310F18F4C05B0EFC7BA4FBDCDB35A204786D18FE3E19BCA"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "AD09689E0AE9C2566316698E59E46DF54E34A116AE3483E940DF6BA0E6846457",
+      "Machine": 34404,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "BCA2780548731605A942717461F9A3A8F2D1A5A10E61DF98996644B541C4E176"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "8FD0737ADB42F264BA81434EB2479AEAFA66C28088991CA306D79D7B0214BA10",
+      "Machine": 34404,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "C2096329637C9C7B227DD11FA522E8F633FEEB4B255BC1986BBAEEEA667800E7"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "F80BADF8181B54C8E7406B72069CF4B91E5F865C9C7444660FEF09FFC56FE5C7",
+      "Machine": 332,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "DFE0E8FDAD426E4851C2B0D2BF73F02E56880D6693D2918C8ECDE8AA88997500"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "C4E6880D8EAFC553D16E4BBEC17B66CBAA01AF3271A6A7EA16A21797FFC1931A",
+      "Machine": 34404,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "1E13B1E2332CA52B2FEFAA135BDF47A98A4553F669A4C72A192B48B2694B7A37"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "F8B6C0D4C42F9E42505746ABB8237E881250397D62D02E368B791CBD9EBBB2A3",
+      "Machine": 34404,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "8245E103BA4B3075933A11180E0AB683B4B94E6C5A06E0C7BDD20E8ABC06A11F",
+      "Machine": 332,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "5AB7126E7D0294719813365D4F0C5D988C459E57C3C2974E3FE25104B4B4CB6C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "DE4E108BDD6BEC58E20FB6DB61FCC07EDA463A3BC84AA92412C434D009153988",
+      "Machine": 332,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "16F84DEB76D13C0685000D63FC3A6F04CF60CD6EE96CC7F8997B8E6EF3E08416"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "31FEE0852095A86CCC31102A2032C5F87C490E14C341B02689CD7BFA73A9F28E",
+      "Machine": 332,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "DA9DF67B0715A349FA672423720D44A4710E80371F7919ECEBF4B854F4BE3DE8"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "EB20BB13A6DB5C0C34DA16ECCB5493B34582AD798AADEFBD4CB7662C697458B0",
+      "Machine": 34404,
+      "PackageId": "09eeb38c-1f98-4f13-ae12-495c83615cb2",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

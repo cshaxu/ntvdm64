@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1149 points reviewed:397 restored delivered,0 local,8 approved,
-739 qualified pending,5 restores decided;1571 unreviewed. Files145/365 audited,220 remain.
+1149 points reviewed:402 restored delivered,0 local,8 approved,
+739 qualified pending,0 restores decided;1571 unreviewed. Files145/365 audited,220 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -54,9 +54,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P95 package `385f6f57-a63a-4c0d-9d29-35cc315c9955` published11x2; hashes match.
+P101 package `09eeb38c-1f98-4f13-ae12-495c83615cb2` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p95-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p101-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -232,4 +232,4 @@ P81:nt_cpu19/19;mirror188->118(-70);13 restored,5 residuals,1 retained exclusion
 
 P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,217 lines;build,publish11x2,Full19 passed;nextR1047.
 
-P100 audit-only:nt_graph24/24;[presentation](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1140-r1145-nt-graph-presentation-review.json).Whole-file implementation next;source unchanged;P95 published.
+P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p101-checkpoint.json).Diff329->262;5restored delivered;lines/focused/Full19 passed;next R1146.

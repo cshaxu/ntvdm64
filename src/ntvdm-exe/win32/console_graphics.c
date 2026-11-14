@@ -300,27 +300,6 @@ void ntvdm_console_graphics_v7_pointer(const BYTE *pattern,unsigned x,unsigned y
     ReleaseSRWLockExclusive(&state->lock);
 }
 
-int ntvdm_console_graphics_flush(void)
-{
-    ntvdm_console_graphics *state=ntvdm_console_graphics_context();
-    int result=0;
-    if (!state) return 0;
-    AcquireSRWLockExclusive(&state->lock);
-    if (state->identity) {
-        /* `host_flush_screen` is the original completion boundary: do not
-         * infer rectangles or redraw a pointer here.  The existing capture
-         * callback copies the complete, already-painted DIB.  `active`
-         * records the legacy physical-Console buffer selection, not whether
-         * this worker's copied software-VGA source is routable.  Window mode
-         * owns a valid DIB without that old selection, so gating this flush
-         * on `active` silently falls back to the coarse invalidation timer. */
-        state->dirty=TRUE;
-        result=signal_dirty(state) ? 1 : -1;
-    }
-    ReleaseSRWLockExclusive(&state->lock);
-    return result;
-}
-
 int ntvdm_console_graphics_palette(HANDLE output,HPALETTE palette,DWORD flags)
 {
     ntvdm_console_graphics *state=ntvdm_console_graphics_context();

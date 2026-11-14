@@ -771,3 +771,5 @@ P98 audit-only: [R1129-R1134 flush/tick controls](r1129-r1134-nt-graph-flush-tic
 P99 audit-only: [R1135-R1139 cursor ownership](r1135-r1139-nt-graph-cursor-review.json).nt_graph18/24;R1136-R1139 original restoration decided;R1135 duplicate declaration/comment reduction. Original dirty producers refine R1125 without reopening its one-bit publication boundary.1143 reviewed,733 pending,5 restores decided,1577 unreviewed. P95 remains published.
 
 P100 audit-only: [R1140-R1145 presentation boundaries](r1140-r1145-nt-graph-presentation-review.json). nt_graph24/24 dispositions complete;five restorations and associated reductions await whole-file implementation.1149 reviewed,739 pending,5 restores decided,1571 unreviewed;145/365 files. P95 remains published.
+
+P101 delivered: [whole-file restoration/minimization](batch-p101-checkpoint.json), [final original logical lines](batch-p101-line-check.json). nt_graph original-relative diff329->262 (-67);five original restorations,19 residual decisions. Cached full x86/x64,11x2 publication/hash verification,focused andFull19 passed;Git delivery accompanies record.

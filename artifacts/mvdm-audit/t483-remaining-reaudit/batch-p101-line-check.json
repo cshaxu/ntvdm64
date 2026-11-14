@@ -1,0 +1,11 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "source_sha256": "a996a56fdb41b3dcc651d8283d84987f42b19c6f98b028428ef4404844b98c03",
+    "shared_selected_lines": 1157,
+    "line_mismatches": [],
+    "unchanged_error_directives": 25,
+    "method": "Actual Ninja nt_graph command definitions/includes;MSVC preprocessed pinned original,before and final;compare equal selected nonblank lines and original logical locations;matched1157lines,zero mismatches. Added lines have no original identity. Explicit619 and1374 anchors repair two inherited mismatches.",
+    "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
+  }
+]

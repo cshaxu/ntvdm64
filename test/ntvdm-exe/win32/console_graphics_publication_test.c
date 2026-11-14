@@ -59,11 +59,16 @@ int main(void)
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_GRAPHICS_BUFFER,&info);
     CHECK(surface!=INVALID_HANDLE_VALUE && info.hMutex && info.lpBitMap);
     mutex=info.hMutex;
-    /* Window-mode software VGA owns a DIB before the historical physical
-     * Console selects it.  A completed host flush must still request one
-     * copied publication; ``active`` is not a presentation-route predicate. */
-    CHECK(ntvdm_console_graphics_flush()==1);
-    CHECK(WaitForSingleObject(delivered,5000)==WAIT_OBJECT_0 && sends==1);
+    /* Original painters invalidate the DIB inside begin/end update. The
+     * copied frame must contain that completed paint even before physical
+     * Console activation; a separate flush notification is unnecessary. */
+    ntvdm_console_graphics_begin_update();
+    CHECK(WaitForSingleObject(mutex,5000)==WAIT_OBJECT_0);
+    memset(info.lpBitMap,0x39,16);CHECK(ReleaseMutex(mutex));
+    CHECK(ntvdm_console_graphics_invalidate(surface,&dirty)==1);
+    CHECK(WaitForSingleObject(delivered,80)==WAIT_TIMEOUT && sends==0);
+    ntvdm_console_graphics_end_update();
+    CHECK(WaitForSingleObject(delivered,5000)==WAIT_OBJECT_0 && sends==1 && final_pixel==0x39);
     ResetEvent(delivered);
     CHECK(MvdmSetConsoleActiveScreenBuffer(surface));
     CHECK(WaitForSingleObject(delivered,5000)==WAIT_OBJECT_0 && sends==2);

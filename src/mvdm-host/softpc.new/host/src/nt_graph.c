@@ -54,11 +54,8 @@
 #include "video.h"
 #include "ckmalloc.h"
 #include "conapi.h"
-/* DIVERGENCE(MVDM-HOST-DIV-314): copied text for the independent frontend. */
 #include "ntvdm-exe/win32/console_text.h"
-/* DIVERGENCE(MVDM-HOST-DIV-322): CCPU software fullscreen route adapter. */
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
-/* DIVERGENCE(MVDM-HOST-DIV-318): original CCPU cursor refresh owner. */
 
 #line 56
 #include "nt_graph.h"
@@ -91,7 +88,6 @@ extern int  ega_int_enable;
 #endif
 
 #ifdef V7VGA
-/* DIVERGENCE(VIDEO7-DAC-WIDTH): SoftPC selects 6- or 8-bit DAC components. */
 extern int DAC_data_bits;
 #else
 #line 80
@@ -102,8 +98,6 @@ extern int DAC_data_bits;
 extern byte  *video_copy;
 
 static int flush_count = 0;	 /*count of graphic ticks since last flush*/
-/* DIVERGENCE(MVDM-HOST-DIV-314): only the original update-start callback
- * establishes a completed refresh; a timer check alone is not a repaint. */
 static BOOL presentation_updated = FALSE;
 
 // DIB_PAL_INDICES shouldn't be used, use CreateDIBSECTION to get better
@@ -604,6 +598,7 @@ void nt_init_screen(void)
 #line 617
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
+#line 619
     if(!video_copy) video_copy = (byte *) host_malloc(0x20000);
 #endif
 #line 621
@@ -730,7 +725,10 @@ void nt_clear_screen(void)
 #line 761
 #error DIVERGENCE MVDM-HOST-DIV-580: non-CCPU non-X86GFX display branch is not selected
 #endif
-#endif /* !X86GFX */
+#line 761
+    if (sc.ScreenState == FULLSCREEN)   // don't want sudden screen clears
+        return;
+#endif
 #line 764
 
     /*::::::::::::::::::::::::::::: Get information on current screen size */
@@ -762,9 +760,6 @@ void nt_clear_screen(void)
 /*::::::::::::::::::::::::::: Flush screen :::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-/* DIVERGENCE(MVDM-HOST-DIV-314): publish the original painter's completed
-   grid and consume its update notification. Mouse flushes occur between
-   timer ticks; a tick must not discard that real update. */
 static void publish_text_update(void)
 {
     if (sc.ModeType == TEXT && presentation_updated) {
@@ -787,20 +782,7 @@ void nt_flush_screen(void)
 #line 844
 
 #if defined(CCPU) && !defined(X86GFX)
-    /* DIVERGENCE(MVDM-HOST-DIV-326): local painter, copied async delivery. */
-    if (sc.ScreenState == FULLSCREEN) {
-        /* The standalone host deliberately compiles its original host sources
-         * without X86GFX: VGA is software state presented by NTCON, not an
-         * old physical-Console renderer.  A completed graphics paint must
-         * therefore notify that copied source at the same original
-         * host_flush_screen boundary.  Do not send it through the text helper:
-         * that helper correctly ignores GRAPHICS and would otherwise swallow
-         * this completed paint. */
-        if (sc.ModeType == GRAPHICS) {
-            if (ntvdm_console_graphics_flush() < 0)
-                DisplayErrorTerm(EHS_FUNC_FAILED, GetLastError(), __FILE__, __LINE__);
-            return;
-        }
+    if (sc.ScreenState == FULLSCREEN && sc.ModeType == TEXT) {
         mvdm_softpc_text_video_flush(publish_text_update);return;
     }
 #endif
@@ -837,22 +819,12 @@ void nt_mark_screen_refresh(void)
 
 void nt_graphics_tick(void)
 {
-    /* DIV-314: a mode-selection tick is not a completed software paint.
-       Retain pending cursor/frame changes until palette and cells are ready. */
     BOOL software_update_completed = FALSE;
 #if defined(CCPU) && !defined(X86GFX)
-    /* DIVERGENCE(MVDM-HOST-DIV-314): COMMAND can return to guest code
-       between blocking and its next command BOP. A pending CPU timer tick
-       must not publish to the released channel. Keep dirty/cursor/mode state
-       until original resume clears this bit after reacquiring the frontend.
-       The final pre-release paint runs before this original bit is set. */
     if (CntrlHandlerState & CNTRL_VDMBLOCKED) return;
-    /* DIVERGENCE(MVDM-HOST-DIV-322): software route, not hardware takeover. */
     if (!mvdm_softpc_text_video_sync_route())
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 #endif
-    /* DIVERGENCE(MVDM-HOST-DIV-314): retain the original stream-to-video
-       transition; a separate frontend cannot render stream-only VGA state. */
 #if !defined(CCPU) || defined(X86GFX)
 #line 827
 #error Unsupported excluded original configuration
@@ -861,8 +833,6 @@ void nt_graphics_tick(void)
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
 	    stream_io_update();
-            /* DIVERGENCE(MVDM-HOST-DIV-314): copy configuration without
-               forcing the original stream-to-video transition. */
             if (!NtvdmConsoleUpdateTextConfiguration(sc.ColPalette))
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 #line 830
@@ -961,8 +931,6 @@ void nt_graphics_tick(void)
             flush_count = 0;
         }
     }
-    /* DIVERGENCE(MVDM-HOST-DIV-314): Window consumers receive a completed
-       copy, never the mutable original painter or EGA storage. */
     if (software_update_completed) publish_text_update();
 #line 910
 }
@@ -987,12 +955,7 @@ void nt_start_update(void)
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 void nt_end_update(void) {
-   extern void ntvdm_console_graphics_end_update(void);
 #ifdef V7VGA
-   /* The host removes the overlay before every body update.  The original
-    * partial painter redraws only when the dirty lines intersect the cursor,
-    * so restore it here as well when those lines are elsewhere.  draw_v7ptr
-    * consults the controller's enable bit and original position registers. */
    extern void draw_v7ptr(void);
    draw_v7ptr();
 #endif
@@ -1154,18 +1117,13 @@ boolean nt_scroll_down(int tlx,int tly,int brx,int bry,int amount,int col)
 /*::::::::::::::::::::::::: Paint cursor :::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#line 1077
 void nt_paint_cursor IFN3(int, cursor_x, int, cursor_y, half_word, attr)
 {
     COORD CursorPos;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-314/322): actual VGA cursor movement is a
-       publication even without changed cells; Window owns its host caret. */
-    presentation_updated = TRUE;
-    if (sc.ScreenState == FULLSCREEN) return;
-
     /*::::::::::::::::::::::::::::::::::::::::::::::::::: Guess where we are */
 
-#line 1083
     sub_note_trace3(ALL_ADAPT_VERBOSE, "nt_paint_cursor x=%d, y=%d, attr=%d\n",
 		    cursor_x, cursor_y, attr);
 
@@ -1191,9 +1149,6 @@ void nt_cursor_size_changed(int lo, int hi)
     UNREFERENCED_FORMAL_PARAMETER(lo);
     UNREFERENCED_FORMAL_PARAMETER(hi);
     CursorResizeNeeded = TRUE;
-    /* DIVERGENCE(MVDM-HOST-DIV-314): register-only shape/visibility change. */
-    presentation_updated = TRUE;
-#line 1108
 }
 
 void make_cursor_change(void)
@@ -1205,16 +1160,12 @@ void make_cursor_change(void)
     SAVED DWORD CurrentCursorSize = (DWORD)-1;
     SAVED BOOL CurNowOff = FALSE;
 
-    CursorResizeNeeded = FALSE;
-
-    /* DIVERGENCE(MVDM-HOST-DIV-322): clear the consumed software notification
-       even when no host Console caret operation is applicable. */
-#line 1119
     if(sc.ScreenState == FULLSCREEN) return;
+
+    CursorResizeNeeded = FALSE;
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Update cursor */
 
-#line 1125
     if(is_cursor_visible())
     {
 
@@ -1442,6 +1393,7 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
 #else
 
     /*................................................... Apply mode change */
+#line 1374
     check_win_size(height);
 #line 1375
 #endif  /* X86GFX */
@@ -1640,12 +1592,9 @@ static void check_win_size(register int height)
        width = CGA_WIN_WIDTH;
 
 #ifdef V7VGA
-    /* DIVERGENCE(VIDEO7-PACKED-SURFACE): SoftPC's selected packed
-     * painter emits one pixel per byte, without VGA pixel doubling. */
     if (paint_screen == nt_paint_funcs->v7vga_hi_graph)
         width = get_bytes_per_line();
 #endif
-
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Resize window */
 
 #line 1577
@@ -1723,12 +1672,9 @@ void set_the_vlt(void)
 
                 vga_color[i].peFlags = 0;
 
-                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ?
-                    DAC[ind].red : DAC[ind].red * 4);
-                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ?
-                    DAC[ind].green : DAC[ind].green * 4);
-                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?
-                    DAC[ind].blue : DAC[ind].blue * 4);
+                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ? DAC[ind].red : DAC[ind].red * 4);
+                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ? DAC[ind].green : DAC[ind].green * 4);
+                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ? DAC[ind].blue : DAC[ind].blue * 4);
 #line 1653
             }
 
@@ -1787,20 +1733,15 @@ void set_the_vlt(void)
                 /*........................ Construct next palette entry */
 
                 vga_color[i].peFlags = 0;
-                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ?
-                    DAC[ind].red : DAC[ind].red * 4);
-                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ?
-                    DAC[ind].green : DAC[ind].green * 4);
-                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?
-                    DAC[ind].blue : DAC[ind].blue * 4);
+                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ? DAC[ind].red : DAC[ind].red * 4);
+                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ? DAC[ind].green : DAC[ind].green * 4);
+                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ? DAC[ind].blue : DAC[ind].blue * 4);
 #line 1713
             }
 
             SetPaletteEntries(sc.ColPalette, 0, VGA_DAC_SIZE, &vga_color[0]);
         }
 
-        /* DIVERGENCE(MVDM-HOST-DIV-314): retain resolved text colours even
-           when the original graphics palette handle is later retired. */
         if (sc.ModeType == TEXT) NtvdmConsoleTextColours(vga_color);
 #line 1718
         set_palette_change_required(FALSE);
