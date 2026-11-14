@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1128 points reviewed:397 restored delivered,0 local,8 approved,
-723 qualified pending;1592 unreviewed. Files144/365 audited,221 remain.
+1132 points reviewed:397 restored delivered,0 local,8 approved,
+726 qualified pending,1 restore decided;1588 unreviewed. Files144/365 audited,221 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -174,9 +174,7 @@ are skips, not passes. No fresh Win3.x interactive acceptance is claimed.
 
 P18 delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
 
-P47 localfm delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p47-checkpoint.json).
-
-P48 delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p48-checkpoint.json).
+P47-P48 delivered;receipts remain indexed in the active audit README.
 
 P49-P51 delivered;see ordered register and batch receipts.
 R0483 manifest omission pending;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0483-sources-review.json).
@@ -234,4 +232,4 @@ P81:nt_cpu19/19;mirror188->118(-70);13 restored,5 residuals,1 retained exclusion
 
 P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,217 lines;build,publish11x2,Full19 passed;nextR1047.
 
-P96 audit-only:nt_graph3/24;[header/DAC evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1122-r1124-nt-graph-headers-review.json).No source changes;P95 published baseline;next R1125.
+P97 audit-only:nt_graph7/24;[publication/clear evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1125-r1128-nt-graph-publish-clear-review.json).R1126 restore decided;source unchanged;P95 published;next R1129.

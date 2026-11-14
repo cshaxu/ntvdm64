@@ -763,3 +763,5 @@ P94 audit-only: [cursor register ownership](r1117-r1119-nt-fulsc-cursor-review.j
 P95 delivered: [final two points](r1120-r1121-nt-fulsc-final-review.json), [lines](batch-p95-line-check.json), [checkpoint](batch-p95-checkpoint.json).nt_fulsc11/11 audited;R1119 original condition restored;mirror1510->1502(-8),including retained exclusions,excluding #line. Cached full build,publish11x2/hash,Full19 passed.
 
 P96 audit-only: [nt_graph header and DAC boundaries](r1122-r1124-nt-graph-headers-review.json).3/24 points reviewed;actual source omission controls distinguish implicit declarations from compile errors. No source edits or new runtime claims;P95 remains published.1128 reviewed,723 qualified pending,1592 unreviewed.
+
+P97 audit-only: [R1125-R1128 publication and clear ownership](r1125-r1128-nt-graph-publish-clear-review.json).nt_graph7/24;R1126 original FULLSCREEN clear guard restoration decided,not applied;three source-qualified residuals.1132 reviewed,726 pending,1 restore decided,1588 unreviewed. No source changes;P95 remains published.

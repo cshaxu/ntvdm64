@@ -1,0 +1,72 @@
+{
+  "status": "P97 source audit only;no production edits",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_graph.c",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "source_hashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": "327ceac75f25bbca3b5d080d055996907474f7696419dc8c667964d258373823",
+    "src/mvdm-host/softpc.new/base/video/gfx_updt.c": "d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602",
+    "src/mvdm-host/softpc.new/base/video/cga.c": "d164721c7f16202e31409963cb1758a8ca9f11d7a26826088820ba2e7dcc85e0",
+    "src/mvdm-host/softpc.new/base/video/ega_vide.c": "6852d6f38de18e87ab96481f6f1b370e7e1b0e1c33984179f77b30b8e4271e0d",
+    "src/mvdm-host/softpc.new/base/system/timestrb.c": "8d3472bba03117e0378be943bdcaaf32403e418e828bc59737c43eb1608d1f39",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntvdm-exe/win32/console_compat.c": "833ccfcf534a4408940cda1eb00bcebedde8f434e29a41b49cc14f1b4190e996",
+    "src/ntvdm-exe/win32/console_text.c": "220f7637c3e94e70a2bd7456f445d974ff4a20178d9fc1c963ca8f420f007b39",
+    "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747",
+    "src/ntcon-exe/console_frontend.c": "3107d2aa1f92d58f4bf5a712a8afedf6c2f4159df7fbf4337d485572bd79d72d",
+    "src/ntcon-exe/console_channel.c": "921a6dd494d042669458189ba73f861b7df0a3a9066a48e6f5d476fcbacabdf3",
+    "src/ntcon-exe/frontend_session.c": "8d7cebc00e34c4ee6bbd53c265e32d8f8ff834308bd7280aa72c3d528ffbc41b",
+    "src/ntcon-exe/window_frame.c": "22b5776b2ade7e7f2552a86826ec6659ad95f8c2ad471111f24d6fca8ba33ad0"
+  },
+  "points": [
+    {
+      "id": "T483-R1125",
+      "scale": "+3/-0",
+      "anchor": "original84;current presentation_updated",
+      "problem": "Retain completed-paint/cursor notification until copied publication",
+      "evidence": "Selected gfx_updt.c text painter clears Videodirty_total before host_paint_cursor/host_end_update and return. nt_graphics_tick publishes after calc_update and cursor shape handling; mouse flush also calls calc_update then the publisher. nt_cursor_size_changed records metadata-only notification. Thus original memory-dirty count is already consumed at publication and is not the same ownership state. Replacing the pending bit with the post-paint count loses the completed update; publishing unconditionally replaces event coalescing with idle full font/cell allocation and copying. The bit does not duplicate guest memory or cursor coordinates.",
+      "minimum": "Keep one pending-publication BOOL pending owner;remove two explanatory comment lines at whole-file cleanup. Do not move equal state into a shim.",
+      "decision": "pending-owner",
+      "delta": "0 applied;planned -2 comment lines"
+    },
+    {
+      "id": "T483-R1126",
+      "scale": "+2/-2",
+      "anchor": "original761-762;current nested exclusion in nt_clear_screen",
+      "problem": "Original FULLSCREEN clear-screen skip removed",
+      "evidence": "Complete chain: original cga.c R6=0,ega_vide soft-reset and time_strobe call host_clear_screen; nt_clear_screen calls FillConsoleOutputCharacter/Attribute. console_client sends two fill operations; console_frontend fills channel output and screen_end projects logical Console through frontend_session_project_text. That projection only writes console_output. KVM Window present_loop decodes video->pixels on published_serial change;window_frame.c does not read the Console fill buffer. Therefore the old claim that removing the original guard clears the software Window is false. Original guest regeneration clear/mark remains in ega_vide, and restoring the predicate does not disable that later copied-frame route. No concrete evidence establishes that FULLSCREEN must additionally erase the Console projection. Under original-first policy restore the original predicate, not add a second Window clear mechanism.",
+      "minimum": "Restore exact original if(sc.ScreenState == FULLSCREEN) return body within outer !X86GFX. Keep existing inner non-CCPU #error and its framework;insert original #line761 before restored code. Implement after all24 file points,then verify final compile/runtime and mode transitions.",
+      "decision": "restore-decided-not-applied",
+      "delta": "planned mirror reduction;measure final normalized whole-file diff;no source changed"
+    },
+    {
+      "id": "T483-R1127",
+      "scale": "+1/-0",
+      "anchor": "original764;additional closing directive in nt_clear_screen",
+      "problem": "Close the retained unsupported non-CCPU exclusion framework",
+      "evidence": "Current structure is original outer !X86GFX plus inner !X86GFX&&!CCPU containing #error. Its additional #endif closes this inner exclusion;deleting it alone unbalances the preprocessor. Owner requires excluded #error preservation. R1126 can restore original selected code after inner #endif and before original outer #endif,without removing that exclusion or re-enabling hardware monitor. This is a subset-framework necessity,not a behavioral reason to omit the original clear guard.",
+      "minimum": "Preserve exclusion closure;restore original clear guard separately at R1126. Do not classify as a reproduced runtime defect.",
+      "decision": "pending-owner",
+      "delta": "0;subset framework"
+    },
+    {
+      "id": "T483-R1128",
+      "scale": "+12/-0",
+      "anchor": "original796;publish_text_update before nt_flush_screen",
+      "problem": "Publish completed original text source to independent frontend",
+      "evidence": "console_compat.c InvalidateConsoleDIBits explicitly returns success without rectangle transport for software FULLSCREEN text. Original painter still updates session-backed cells; NtvdmConsoleUpdateText snapshots those cells and original VGA font/cursor metadata, then ntvdm_console_publish_video delivers a complete frame. Deleting this helper removes the text publication shared by timer and mouse flush; the original physical Console/shared-VDM renderer cannot publish to the separate NTCON process. Original dirty count is consumed before this boundary (R1125). Helper consumes one notification for TEXT and reports the actual send error through existing DisplayErrorTerm. Moving publication to each original rectangle/cursor call would change batching and add transport at callbacks,not restore original behavior or simplify the boundary.",
+      "minimum": "Retain one shared publisher pending owner;remove three explanatory comment lines at whole-file cleanup. No second dirty state or transport path. Error propagation retained;this review does not assert retry behavior or test every failure path.",
+      "decision": "pending-owner",
+      "delta": "0 applied;planned -3 comment lines"
+    }
+  ],
+  "counter_review": [
+    "Do not claim Console fills alter the independent Window video frame: source trace proves they do not.",
+    "R1126 previous current-adapter justification was insufficient;original predicate is selected for restoration.",
+    "R1125/R1128 need copied publication,not a second guest renderer;the retained pending bit has different lifetime from original Videodirty_total.",
+    "Excluded #error remains at R1126/R1127;original line761 restored only when source is edited.",
+    "No new runtime test was run;existing blocked_video_tick_test is supporting contract source,not fresh validation.",
+    "No source change or restored-delivered count;whole file7/24,one restoration decided awaiting whole-file implementation."
+  ],
+  "verification": "Current/original and full caller-to-frontend source/data-flow review;P95 remains published and runtime-verified baseline"
+}
