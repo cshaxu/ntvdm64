@@ -1,0 +1,38 @@
+{
+  "batch": "P77",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "cd0aa336bcf2c4b4664d85bba6802667ea3d46a0",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "sha256": "71b0afcd5906ef2dddac4ca2fa546aa4ceedd8302d097fb62ab71ee0b4b1254e"
+    }
+  ],
+  "mirror_diff_delta": -26,
+  "mirror_files": 1,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "7ef428a7-d376-4553-bad2-ebdc885aa43d",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p77/full-final/timings.json",
+    "Full_elapsed_ms": 439444,
+    "CVID": "PASS original production vector fixture",
+    "original_line_check": "batch-p77-line-check.json",
+    "dos4gw_nesticle": "SKIP verified external fixtures unavailable",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "PASS documentation and links"
+  }
+}

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1000 points reviewed:356 restored delivered,6 approved,
-638 qualified pending;1720 unreviewed. Files129/365 complete,236 remain.
+1004 points reviewed:358 restored delivered,6 approved,
+640 qualified pending;1716 unreviewed. Files130/365 complete,235 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -54,9 +54,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P76 package `65a96961-1c27-43be-bdae-d29aa11c38d4` published11x2; hashes match.
+P77 package `7ef428a7-d376-4553-bad2-ebdc885aa43d` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p76-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p77-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -228,3 +228,8 @@ P76:cfpu_def.h15/15 and host_cpu.h9/9 complete;mirror diff-334.
 Seven original restorations delivered;17 qualified residuals;#error unchanged;
 367 original-line checks0 mismatch. Cached build,publish11x2,Full passed;
 Git delivery accompanies checkpoint;next R0994.
+
+P77:host_def.h4/4 complete;mirror41->15(-26);two restores delivered.
+Two profile residuals qualified;143 line checks0 mismatch;#error retained.
+Cached build,publish11x2,Full passed;Git delivery accompanies checkpoint;
+next R0998.

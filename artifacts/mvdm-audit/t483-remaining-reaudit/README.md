@@ -722,3 +722,5 @@ P74 final delivery: [checkpoint](batch-p74-checkpoint.json), [line proof](batch-
 P75 final delivery: [checkpoint](batch-p75-checkpoint.json), [line proof](batch-p75-line-check.json);cached x86/x64 build,11x2 publication,CVID,Full and governance passed;mirror diff-10. Git delivery accompanies record.
 
 P76 whole-file batch: [cfpu_def.h15/15](r0970-r0984-cfpu-review.json), [host_cpu.h9/9](r0985-r0993-host-cpu-review.json), [line proof](batch-p76-line-check.json), [checkpoint](batch-p76-checkpoint.json). Two headers net mirror-334;7 original restorations delivered;17 residuals qualified;cached build,publication11x2,Full and governance passed. Git delivery accompanies checkpoint.
+
+P77: [host_def.h4/4](r0994-r0997-host-def-review.json), [line proof](batch-p77-line-check.json), [checkpoint](batch-p77-checkpoint.json). Mirror41->15(-26);two restores delivered,two residuals qualified;cached build,publication11x2,Full and governance passed. Git delivery accompanies checkpoint.

@@ -1,0 +1,12 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+    "before": 41,
+    "after": 15,
+    "delta": -26,
+    "line_checks": 143,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]

@@ -13,11 +13,9 @@
 \***************************************************************/
 
 #include "ctype.h"
-#include <stdlib.h>
 
 /* put the invariant #defines for your host here, eg:*/
 
-#line 19
 #define BIT_ORDER2
 #define LITTLEND
 
@@ -39,7 +37,7 @@
 #define YYLENG_ADJUST 0
 
 #ifdef MONITOR
-#if defined(CPU_40_STYLE) /* DIVERGENCE(MVDM-HOST-DIV-551) */
+#if defined(CPU_40_STYLE)
 #line 40
 #define CpuH "cpu4.h"
 #else
@@ -50,7 +48,6 @@
 #line 42
 #define CpuH "cpu4.h"
 #endif
-#line 44
 
 // reduce unused param warnings.
 #define UNREFERENCED_FORMAL_PARAMETER(x)   (x)
@@ -98,17 +95,6 @@ extern	quick_event_delays	host_delays;
 #define host_rom_init()
 #define HOST_BOP_IP_FUDGE     -2
 
-/*
- * DIVERGENCE(MVDM-HOST-DIV-057): non-MONITOR controller sources select
- * cpu4.h, which does not carry the original host_simulate declaration even
- * though keyboard, mouse, BIOS and storage sources invoke the same source
- * entrypoint.  Keep the original void/no-argument contract visible to both
- * host architectures; its selected implementation remains the existing
- * SoftPC/CCPU path.
- */
-extern void host_simulate(void);
-
-#line 91
 #ifndef EGATEST
 #ifndef MONITOR
 #define BIGWIN
@@ -149,12 +135,9 @@ extern void host_simulate(void);
 #define host_popen  popen
 #define host_pipe_init()
 
-#line 131
 #ifdef HUNTER
-#line 132
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 134
 
 #define HOST_TIMER_TOOLONG_DELAY        15000   //BCN 1781
 
@@ -162,12 +145,6 @@ extern void host_simulate(void);
 
 #define NTVDM	// To enable NT specific base code.
 
-/*
- * DIVERGENCE(MVDM-HOST-DIV-044): the selected product compiles only the
- * original CCPU40 software-executor route.  CPU_30_STYLE selects the separate
- * NT4 kernel-VDM V86 monitor contract, which this non-invasive product cannot
- * provide; it must never be selected implicitly by a common host header.
- */
 #line 142
 #define PM
 
@@ -248,12 +225,9 @@ void *ch_malloc(unsigned int NumBytes);
 
 // from nt_bop.c
 #ifdef i386
-#line 221
 #error Excluded unsupported i386 host library loader
 #else
-#line 223
 #define SafeLoadLibrary(name) LoadLibrary(name)
 #endif
-#line 225
 
 #define HOST_PRINTER_DELAY 1000
