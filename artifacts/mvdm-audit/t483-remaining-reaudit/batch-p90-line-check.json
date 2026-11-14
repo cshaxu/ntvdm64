@@ -1,0 +1,9 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "shared_selected_lines": 937,
+    "line_mismatches": [],
+    "error_preserved": true,
+    "evidence": "actual product command three-way preprocess"
+  }
+]

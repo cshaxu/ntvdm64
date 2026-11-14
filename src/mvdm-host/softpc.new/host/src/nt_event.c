@@ -43,7 +43,7 @@
 #include "gmi.h"
 #include "gfx_upd.h"
 #include "nt_graph.h"
-#include "nt_ega.h" /* MVDM-HOST-DIV-311: original mode-settle bound. */
+#include "nt_ega.h"
 #line 46
 #include "nt_uis.h"
 #include <stdio.h>
@@ -56,17 +56,16 @@
 #include "ica.h"
 
 #include "nt_mouse.h"
-/* DIVERGENCE(MVDM-HOST-DIV-318): copied Window-relative input joins the
- * original mouse IRQ owner, never the native Console event queue. */
+#line 59
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
 #line 57
 #include "nt_event.h"
-#include "mvdm_softpc_termination.h"
-#include "worker-base/connection.h" /* MVDM-HOST-DIV-355: Console exit intent. */
+#include "worker-base/connection.h"
+#line 60
 #include "mvdm_softpc_event_thread.h"
-/* MVDM-HOST-DIV-355: authenticated teardown is not an input fault dialog. */
+#line 62
 #include "ntvdm-exe/win32/worker_lifecycle.h"
-/* DIVERGENCE(MVDM-HOST-DIV-317): pending scan data retains its raw origin. */
+#line 64
 #include "mvdm_keyboard_history.h"
 mvdm_keyboard_history nt_keyboard_history;
 extern unsigned PendingKeyboardHistory(void);
@@ -91,14 +90,13 @@ extern unsigned PendingKeyboardHistory(void);
 #include "nt_com.h"
 #include "nt_pif.h"
 #include "yoda.h"
-/* DIVERGENCE(MVDM-HOST-DIV-313): acknowledge the original input handoff at
- * the root-owned Console, without moving its block/resume policy here. */
+#line 80
 extern BOOL ntvdm_console_set_active(BOOL active);
-/* DIVERGENCE(MVDM-HOST-DIV-322): final software text before ownership release. */
+#line 82
 #include "ntvdm-exe/win32/console_text.h"
-/* DIVERGENCE(MVDM-HOST-DIV-326): quiesce before final ownership release. */
+#line 84
 #include "mvdm_softpc_text_video.h"
-/* DIVERGENCE(MVDM-HOST-DIV-318): CPU-owner retirement restores mouse backing. */
+#line 86
 extern void mouse_pointer_route_changed(int);
 /*================================================================
 External references.
@@ -136,8 +134,7 @@ IMPORT void RestoreKbdLed(void);
 static PKEY_EVENT_RECORD key_history_head, key_history_tail;
 static PKEY_EVENT_RECORD key_history;
 static key_history_count;
-/* DIVERGENCE(MVDM-HOST-DIV-316): join BIOS reconstruction to the first
- * successfully returned hardware event without duplicating its release. */
+#line 113
 static INPUT_RECORD first_returned_key;
 
 #line 112
@@ -161,8 +158,7 @@ void nt_process_menu(PMENU_EVENT_RECORD MenuEvent);
 void nt_process_suspend_event();
 void nt_process_screen_scale(void);
 
-/* DIVERGENCE(MVDM-HOST-DIV-211): bounded host-key normalization retains
- * original batching; its modern Console boundary is worker-owned. */
+#line 134
 #include "ntvdm-exe/win32/console_input.h"
 
 //
@@ -332,10 +328,7 @@ void nt_remove_event_thread(void)
     /* Must make sure that the thread has terminated */
 #line 294
     if (!VDMForWOW && ThreadInfo.EventMgr.Handle)  {
-        /* DIVERGENCE(MVDM-HOST-DIV-206): the NT4 process exited after its
-         * alert, so it did not need an explicit worker join.  This product
-         * retains the original alert and adds only the adapter-owned join
-         * needed before releasing the in-process session binding. */
+#line 299
         (void)mvdm_softpc_event_thread_alert_and_join(ThreadInfo.EventMgr.Handle,
                                                    nt_init_called);
 #line 296
@@ -397,8 +390,7 @@ DWORD nt_event_loop(void)
     /* the console input handle shouldn't get changed during the lifetime
        of the ntvdm
     */
-    /* DIVERGENCE(MVDM-HOST-DIV-211): service suspension before queued
-     * input when both are ready, including under continuous mouse traffic. */
+#line 356
     Events[0] = hConsoleSuspend;
     Events[1] = GetConsoleInputWaitHandle(); ////sc.InputHandle
     /*:::::::::::::::::::::::::::::::::::::::::::::: Get and process events */
@@ -436,7 +428,7 @@ DWORD nt_event_loop(void)
                 update_key_history(&InputRecord[0], RecordsRead);
                 }
             else {
-                /* MVDM-HOST-DIV-355: let the original event thread join. */
+#line 391
                 if (ntvdm_worker_lifecycle_input_terminal()) return 0;
 #line 390
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
@@ -458,7 +450,7 @@ DWORD nt_event_loop(void)
            //
         else {
            if (!NT_SUCCESS(status)) {
-                /* MVDM-HOST-DIV-355: let the original event thread join. */
+#line 410
                 if (ntvdm_worker_lifecycle_input_terminal()) return 0;
 #line 409
                 DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
@@ -501,7 +493,7 @@ DWORD nt_event_loop(void)
                                return (0);
                            }
 
-                       /* DIV-317: internal synthetic actions share this origin. */
+#line 445
                        if (!mvdm_keyboard_history_begin(&nt_keyboard_history))
                            DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_INVALID_DATA,__FILE__,__LINE__);
 #line 444
@@ -535,9 +527,7 @@ DWORD nt_event_loop(void)
               }
            }
 
-        /* DIVERGENCE(MVDM-HOST-DIV-211): consume queued batches without
-         * the original Console packing delay. The alertable wait above
-         * blocks when idle and checks suspension before the next batch. */
+#line 475
 
 #line 478
         }
@@ -557,7 +547,7 @@ void update_key_history(register INPUT_RECORD *InputRecords,
         {
 
             //Transfer key event to history buffer
-        /* DIV-317: preserve identity even when this record makes no scan data. */
+#line 496
         if (!mvdm_keyboard_history_record(&nt_keyboard_history))
             DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_ARITHMETIC_OVERFLOW,__FILE__,__LINE__);
 #line 495
@@ -594,7 +584,7 @@ int GetHistoryKeyEvent(PKEY_EVENT_RECORD LastKeyEvent, int KeyNumber)
     int KeyReturned = FALSE;
     int KeysBeforeWrap = key_history_tail-key_history;
 
-    /* DIV-317: pending-origin ordinal, not a raw-history suffix count. */
+#line 529
     KeyNumber = mvdm_keyboard_history_age(&nt_keyboard_history,KeyNumber);
     if (!KeyNumber) return FALSE;
 
@@ -626,7 +616,7 @@ void InitKeyHistory()
 {
     key_history_head = key_history_tail = key_history;
     key_history_count = 0;
-    /* DIV-317: called initially or after the original hardware reset/return. */
+#line 556
     memset(&nt_keyboard_history,0,sizeof(nt_keyboard_history));
 #line 555
 }
@@ -1186,7 +1176,7 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
  */
 BOOL MoreMouseEvents(void)
 {
- /* DIVERGENCE(MVDM-HOST-DIV-318): original EOI also observes relative input. */
+#line 1107
  return MouseEBufNxtEvtInx != MouseEBufNxtFreeInx ||
         mvdm_softpc_mouse_pending(mvdm_softpc_mouse_current());
 #line 1107
@@ -1226,7 +1216,7 @@ void FlushMouseEvents(void)
 {
      host_ica_lock();
      MouseEBufNxtEvtInx = MouseEBufNxtFreeInx = 0;
-     /* DIVERGENCE(MVDM-HOST-DIV-318): same explicit cancellation boundary. */
+#line 1144
      mvdm_softpc_mouse_cancel(mvdm_softpc_mouse_current());
 #line 1143
      host_ica_unlock();
@@ -1393,9 +1383,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #endif
 #line 1333
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
-                /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original
-                 * cmdPushExit cleanup until the service's Console-close
-                 * delivery. Preserve its cleanup/ExitVDM/process-exit order. */
+#line 1337
                 host_applClose();
                 ExitVDM(FALSE,0);
 #line 1334
@@ -1474,12 +1462,11 @@ BOOL CntrlHandler(ULONG CtrlType)
             }
 
 
-        /* DIVERGENCE(MVDM-HOST-DIV-326): drain before final synchronous paint. */
+#line 1408
         mvdm_softpc_text_video_pause();
         /*::::::::::::::::::::::::::::::::: Flush screen output, reset console */
 
-        /* DIVERGENCE(MVDM-HOST-DIV-318): restore the original saved background
-           before final paint; blocked input need not consume a queued LEAVE. */
+#line 1413
         mouse_pointer_route_changed(FALSE);
 
 #line 1410
@@ -1493,18 +1480,12 @@ BOOL CntrlHandler(ULONG CtrlType)
 #error Unsupported excluded original configuration
 #endif
 #line 1402
-            { /* DIVERGENCE(MVDM-HOST-DIV-322): always extract software VGA. */
-                /* DIVERGENCE(MVDM-HOST-DIV-311): this stopped-guest
-                 * handoff must finish the original pending mode selection
-                 * before its final paint. Advance only the bounded video
-                 * settle path, never guest time or CPU interrupts. */
+#line 1407
                 for (dw = 0; dw < EGA_TICK_DELAY && get_mode_change_required(); ++dw)
                     host_graphics_tick();
 #line 1414
 		(*update_alg.calc_update)();
-            }
-            /* DIVERGENCE(MVDM-HOST-DIV-322): acknowledge final cells and VGA
-               cursor before ResetConsoleState and ownership release. */
+#line 1418
             if (sc.ModeType == TEXT && !NtvdmConsoleUpdateText(sc.ColPalette))
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 #line 1415
@@ -1589,8 +1570,7 @@ BOOL CntrlHandler(ULONG CtrlType)
     fEventThreadBlock = TRUE;
 
     CntrlHandlerState |= CNTRL_VDMBLOCKED;
-    /* DIVERGENCE(MVDM-HOST-DIV-313): final paint, returned typeahead and
-     * original mode restoration must precede native frontend activation. */
+#line 1495
     if (!VDMForWOW && !ntvdm_console_set_active(FALSE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 #line 1493
@@ -1617,8 +1597,7 @@ void nt_resume_event_thread(void)
         return;
         }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-313): reclaim input/presentation before the
-     * original Console queries, mode setup and event-thread release. */
+#line 1516
     if (!ntvdm_console_set_active(TRUE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
@@ -1670,8 +1649,6 @@ void nt_resume_event_thread(void)
 	DoFullScreenResume();
 	MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
     }
-    /* DIVERGENCE(MVDM-HOST-DIV-326): resume after native ownership ack. */
-    mvdm_softpc_text_video_resume();
 #line 1557
     ResumeTimerThread(); /* Restart timer thread */
 
@@ -1847,7 +1824,7 @@ VOID ReturnBiosBufferKeys(VOID)
 
                   // normal case
          else if (InputRecord[i].Event.KeyEvent.wVirtualScanCode)  {
-             /* DIV-316: reuse only the adjacent, same physical key release. */
+#line 1732
              if (first_returned_key.EventType != KEY_EVENT ||
                  first_returned_key.Event.KeyEvent.bKeyDown ||
                  first_returned_key.Event.KeyEvent.wVirtualScanCode != InputRecord[i].Event.KeyEvent.wVirtualScanCode ||
@@ -1946,14 +1923,14 @@ VOID ReturnBiosBufferKeys(VOID)
 
 
 
-        /* DIV-316: only the newest BIOS entry adjoins the hardware suffix. */
+#line 1822
         first_returned_key.EventType = 0;
 
              /*  If buffer is full or
               *     bios buffer is empty and got stuff in buffer
               *     Write it out
               */
-        /* DIV-316: an odd-sized joined batch still needs two slots per pair. */
+#line 1829
         if ((BufferHead == BufferTail && i != NUMBBIRECS - 1) || i < 1)
 #line 1826
             {
@@ -1984,19 +1961,16 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
     DWORD RecsWrt;
     int KeyToRtn, KeyInx;
 
-    first_returned_key.EventType = 0; /* DIV-316: no prior handoff identity. */
+    first_returned_key.EventType = 0;
 
     /* Return keys to console input buffer */
 
 #line 1856
     if(UnusedKeyEvents)
     {
-    /* DIVERGENCE(MVDM-HOST-DIV-312): return only initialized history
-     * records, oldest first. The original loop counter is one past the
-     * copied count; a short history occupies the tail, not the prefix. */
 #line 1858
-    for(KeyToRtn = 1, KeyInx = min(UnusedKeyEvents,MAX_KEY_EVENTS)-1;
-        KeyToRtn <= min(UnusedKeyEvents,MAX_KEY_EVENTS) &&
+    for(KeyToRtn = 1, KeyInx = UnusedKeyEvents-1;
+        KeyToRtn <= UnusedKeyEvents &&
         GetHistoryKeyEvent(&InputRecords[KeyInx].Event.KeyEvent,KeyToRtn);
         KeyToRtn++,KeyInx--)
     {
@@ -2008,7 +1982,7 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
         &InputRecords[KeyInx+1],KeyToRtn-1,&RecsWrt))
 #line 1867
         always_trace0("Console write failed\n");
-    else if(RecsWrt) first_returned_key = InputRecords[KeyInx+1]; /* DIV-316 */
+    else if(RecsWrt) first_returned_key = InputRecords[KeyInx+1];
     }
 #line 1868
     }
@@ -2029,11 +2003,7 @@ void cmdPushExitInConsoleBuffer (void)
         }
     CntrlHandlerState |= CNTRL_PUSHEXIT;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-355): NTSRV owns this Console group.
-     * Report intent through the existing RPC; do not close a host window or
-     * release worker resources before its instruction. The original calling
-     * thread retires; the independent lifecycle receiver remains alive.
-     * Submission failure is not retried or treated as teardown permission. */
+#line 1891
     ExitThread(worker_base_request_console_exit());
 #line 1903
 }
@@ -2047,9 +2017,9 @@ extern void Reset6805and8042(void);
 
 int CalcNumberOfUnusedKeyEvents()
 {
-    unsigned pending = PendingKeyboardHistory(); /* DIV-317: snapshot before reset. */
+    unsigned pending = PendingKeyboardHistory();
 
     Reset6805and8042();
-    return (pending + KeyQueue.KeyCount); /* DIV-317: original queue is empty in this profile. */
+    return (pending + KeyQueue.KeyCount);
 #line 1918
 }

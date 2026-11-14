@@ -1,0 +1,56 @@
+{
+  "status": "cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "sha256": "596636a5d61295fe3ff8d2ce8d407576dc0d0f81117439a3e3675d72ef44c337"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c",
+      "sha256": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_text_video.h",
+      "sha256": "fca206b5fb2c6407bcb0345ed0202ba84d8c6ad095f34beb87e541bc59c0ceec"
+    }
+  ],
+  "mirror_metric": {
+    "before": {
+      "added": 158,
+      "deleted": 95,
+      "total": 253
+    },
+    "minimized": {
+      "added": 94,
+      "deleted": 93,
+      "total": 187
+    }
+  },
+  "restored": [
+    "T483-R1087",
+    "T483-R1093"
+  ],
+  "pending_lifetime_corrections": [
+    "T483-R1062",
+    "T483-R1063"
+  ],
+  "guest_changed": false,
+  "publication": {
+    "status": "published",
+    "package": "38c94bbd-3836-4318-a779-2c940d668e7b",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build\\t483-s5-p90\\full-final\\timings.json",
+  "verification": {
+    "focused": "final origin and BIOS fixtures passed;original-return and original-flush negative controls fail;unclamped control passes",
+    "actual_preprocessor": "937 shared selected original logical lines match;all #error preserved",
+    "Full": "19 gates passed;external DOS4GW fixture explicitly SKIP",
+    "limits": "R1062/R1063 lifetime corrections remain pending;not certified by this minimization"
+  }
+}

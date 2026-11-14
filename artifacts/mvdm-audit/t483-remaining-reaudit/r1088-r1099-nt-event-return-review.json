@@ -1,0 +1,119 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "baseline_sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+  "final_source_sha256": "596636a5d61295fe3ff8d2ce8d407576dc0d0f81117439a3e3675d72ef44c337",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": {
+    "R1088": {
+      "scope": "+6/-0",
+      "problem": "Join newest BIOS make with adjacent returned release",
+      "evidence": "P86 original BIOS function counterexample returns3 records instead of2. Actual final fixture checks key,scan,extended identity and adjacency;different keys/scan/flags or a make must not suppress BIOS release.",
+      "plan": "Remove explanation;retain boundary identity checks pending owner."
+    },
+    "R1089": {
+      "scope": "+1/-0",
+      "problem": "Scope conditional BIOS release construction",
+      "evidence": "Closing brace belongs to R1088 guard;removing it alone changes parse/scope,and removing guard duplicates release as proven by original BIOS counterexample.",
+      "plan": "Retain paired brace pending owner;no independent branch or state."
+    },
+    "R1090": {
+      "scope": "+3/-0",
+      "problem": "Limit overlap to newest BIOS entry",
+      "evidence": "Only newest BIOS entry adjoins returned hardware suffix. Without clearing boundary identity per iteration,multiple BIOS makes can share one release. P86/final only-newest-overlaps and untranslated-newest cases exercise this.",
+      "plan": "Remove explanation;retain per-entry boundary reset pending owner."
+    },
+    "R1091": {
+      "scope": "+2/-1",
+      "problem": "Flush before a two-record pair overruns odd remaining space",
+      "evidence": "Joining an existing release makes output length odd. Original i<0 permits i==0,then next pair writes index-1. P90 restoring only original condition compiles then exits0xC0000005;final i<1 passes20-key odd-batch40-record case. This is required by admitted join semantics,not an original standalone crash claim.",
+      "plan": "Remove comment;retain i<1 pending owner."
+    },
+    "R1092": {
+      "scope": "+2/-0",
+      "problem": "Clear preceding handoff identity",
+      "evidence": "Empty/failed hardware return must not reuse prior handoff first key. P86/final subsequent-empty-hardware,failed-prepend and zero-written cases cover this boundary.",
+      "plan": "Retain reset;remove inline explanation and unnecessary explanatory framing."
+    },
+    "R1093": {
+      "scope": "+5/-2",
+      "problem": "Redundant history-count clamping",
+      "evidence": "PendingKeyboardHistory selects at most MVDM_KEY_HISTORY_CAPACITY100. KeyQueue is file-static and only assigned zero in supported source;no enqueue producer. MAX_KEY_EVENTS is100. Invalid UINT32_MAX becomes negative int and does not enter original positive ordinal loop. P90 unclamped candidate passes14 BIOS cases;final origin fixture covers history wrap.",
+      "plan": "Restore original two loop lines;remove added explanation. No new bound state or fallback."
+    },
+    "R1094": {
+      "scope": "+1/-1",
+      "problem": "Initialize the element actually populated",
+      "evidence": "Original loop writes key data at descending KeyInx but EventType at ascending KeyToRtn-1. If actual history shorter than requested,returned tail element may lack KEY_EVENT. Store EventType beside the key in the same slot. P90 original-return function control fails record/count contract.",
+      "plan": "Retain original-index correction pending owner."
+    },
+    "R1095": {
+      "scope": "+3/-1",
+      "problem": "Return initialized suffix and actual count",
+      "evidence": "Original KeyToRtn starts1 and increments after copied element,so completion value is copied count+1. Original writes array prefix even when initialized history occupies suffix. P90 whole-original ReturnUnusedKeyEvents compiles but duplicates records/fails. Current guard prevents empty/uninitialized prepend and writes KeyInx+1,KeyToRtn-1.",
+      "plan": "Retain guard and exact initialized suffix pending owner;no extra allocation."
+    },
+    "R1096": {
+      "scope": "+2/-0",
+      "problem": "Capture only successfully prepended first event",
+      "evidence": "BIOS join requires actual successfully returned oldest event. Failed/zero-length writes must not create that boundary. Final BIOS cases cover failure,zero and matching release. Closing brace scopes the guarded prepend.",
+      "plan": "Remove inline marker;retain successful-write capture and scope pending owner."
+    },
+    "R1097": {
+      "scope": "+6/-17",
+      "problem": "Request authoritative Console-group close",
+      "evidence": "NTSRV resolves CONSOLE scope from authenticated frontend association;PARTICIPANT scope only closes worker. Original PostMessage targets local hWndConsole,not copied frontend group or embedded VM owner. Request Console exit then retire calling thread;independent lifecycle receiver invokes original cleanup at R1079 after permission.",
+      "plan": "Remove5 explanatory comment lines;retain existing one-call request/ExitThread boundary pending owner. No timeout/retry or local teardown permission."
+    },
+    "R1098": {
+      "scope": "+1/-0",
+      "problem": "Snapshot source identity before resetting controller",
+      "evidence": "Original keys_in_6805_buff counts emitted key markers and resets hardware;counts cannot identify ignored releases or multi-byte origins. PendingKeyboardHistory selects live source identities before Reset6805and8042 clears ring. P86 original history control demonstrates wrong raw suffix. Associated replacement extern declares actual reset dependency.",
+      "plan": "Retain snapshot and required reset declaration pending owner;inline marker removed."
+    },
+    "R1099": {
+      "scope": "+2/-1",
+      "problem": "Keep original reset and return unique pending identities",
+      "evidence": "Source selection must precede controller reset;reset remains original hardware reset function. Returned count is selected identity count plus original KeyQueue count,which is zero in this profile. Final origin fixture proves unread output once,consumed output not replayed,held/prefix dedup and post-reset cleanup.",
+      "plan": "Retain original reset plus identity count pending owner;inline marker removed."
+    }
+  },
+  "tests": {
+    "original-flush/result.exit": {
+      "sha256": "0065eb2859d3d8935a9b67baade22b7fec608935486ce046841c2b5ab8133241",
+      "text": "-1073741819\n"
+    },
+    "original-return/result.exit": {
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "text": "1\n"
+    },
+    "original-return/result.log": {
+      "sha256": "2ebba561914dc3e9fa97c01089a97e8334735b18509c882e08bd3f763ee8a9c5",
+      "text": "FAIL matching-release records=4 expected=2 E-make/up=1/2 drained=1\nPASS no-hardware records=2 expected=2 E-make/up=1/1 drained=1\nFAIL different-key records=4 expected=3 E-make/up=1/1 drained=1\nFAIL different-scan records=4 expected=3 E-make/up=1/2 drained=1\nFAIL different-extended records=4 expected=3 E-make/up=1/2 drained=1\nFAIL hardware-make records=4 expected=3 E-make/up=2/1 drained=1\nPASS failed-prepend records=2 expected=2 E-make/up=1/1 drained=1\nPASS zero-written-prepend records=2 expected=2 E-make/up=1/1 drained=1\nFAIL physical-release-modifiers records=4 expected=2 E-make/up=1/2 drained=1\nFAIL wrapped-bios records=4 expected=2 E-make/up=1/2 drained=1\nFAIL only-newest-overlaps records=6 expected=4 E-make/up=2/3 drained=1\nFAIL odd-batch-flush records=42 expected=40 E-make/up=20/21 drained=1\nFAIL untranslated-newest records=4 expected=3 E-make/up=1/2 drained=1\nPASS subsequent-empty-hardware records=2 expected=2 E-make/up=1/1 drained=1\n"
+    },
+    "unclamped-return/result.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "text": "0\n"
+    },
+    "unclamped-return/result.log": {
+      "sha256": "c2388d26cd4e30c0998685e70f859fc29ae5b15f79b71960d0bffde833c6a0a2",
+      "text": "PASS matching-release records=2 expected=2 E-make/up=1/1 drained=1\nPASS no-hardware records=2 expected=2 E-make/up=1/1 drained=1\nPASS different-key records=3 expected=3 E-make/up=1/1 drained=1\nPASS different-scan records=3 expected=3 E-make/up=1/2 drained=1\nPASS different-extended records=3 expected=3 E-make/up=1/2 drained=1\nPASS hardware-make records=3 expected=3 E-make/up=2/1 drained=1\nPASS failed-prepend records=2 expected=2 E-make/up=1/1 drained=1\nPASS zero-written-prepend records=2 expected=2 E-make/up=1/1 drained=1\nPASS physical-release-modifiers records=2 expected=2 E-make/up=1/1 drained=1\nPASS wrapped-bios records=2 expected=2 E-make/up=1/1 drained=1\nPASS only-newest-overlaps records=4 expected=4 E-make/up=2/2 drained=1\nPASS odd-batch-flush records=40 expected=40 E-make/up=20/20 drained=1\nPASS untranslated-newest records=3 expected=3 E-make/up=1/2 drained=1\nPASS subsequent-empty-hardware records=2 expected=2 E-make/up=1/1 drained=1\n"
+    },
+    "final-origin.log": {
+      "sha256": "f19bdafb769c8efed1dfc7aef7ec1e8635be2bc362c6f8b6e5416fe3e04f1660",
+      "text": "mvdm_keyboard_history.c\nkeyboard_origin_return_test.c\n\nAlgorithm : SHA256\nHash      : A9AD670C2D5C026D1F4AF57D906D798EC23B7D9D1020DC0E2C57C321525FAE70\nPath      : O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c\n\nAlgorithm : SHA256\nHash      : 34B83FEDA7238441F188D19694C05077B0C4E7FA8C4F9CDB4B8A1C02BE08612D\nPath      : O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-keyboard-buffer-count.ps1\n\nAlgorithm : SHA256\nHash      : B85C577DCB89D5836D5A55B0120F0BD69F9269D8D6B3F58B18C79C984511B346\nPath      : O:\\repos.hobby\\ntvdm64\\test\\app\\keyboard_origin_return_test.c\n\nPASS ignored release after unread make does not displace it\nPASS ignored release before unread make retains original order\nPASS Ctrl-Break/PrintScreen expansion returns its one raw record, never consumed M\nPASS synthetic data and unattributed output do not replay consumed M\nPASS unread output returns once; consumed output awaiting EOI is not replayed\nPASS captured-history shape preserves first M despite ignored duplicate release\nPASS wrapped device metadata retains paired original order\nPASS held/output/prefix duplicate identity survives hardware reset once\nPASS original history ring wrap rejects overwritten identities without aliasing\nPASS failed Console prepend keeps original cleanup and no fabricated BIOS join\n"
+    },
+    "final-bios.log": {
+      "sha256": "dc73e3d1646d34cc8a23e317ee39fec5364189cb7394e1ccbf54ea8d1e55543f",
+      "text": "keyboard_bios_join_test.c\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p90\\final-bios\\keyboard_bios_return.inc(37): warning C4213: nonstandard extension used: cast on l-value\n\nAlgorithm : SHA256\nHash      : A9AD670C2D5C026D1F4AF57D906D798EC23B7D9D1020DC0E2C57C321525FAE70\nPath      : O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c\n\nAlgorithm : SHA256\nHash      : 34B83FEDA7238441F188D19694C05077B0C4E7FA8C4F9CDB4B8A1C02BE08612D\nPath      : O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-keyboard-buffer-count.ps1\n\nAlgorithm : SHA256\nHash      : 51BD2FBC74290572FDB4B5ED64B8D6BEABBCF6242F76F71840C1011ED124A451\nPath      : O:\\repos.hobby\\ntvdm64\\test\\app\\keyboard_bios_join_test.c\n\nPASS matching-release records=2 expected=2 E-make/up=1/1 drained=1\nPASS no-hardware records=2 expected=2 E-make/up=1/1 drained=1\nPASS different-key records=3 expected=3 E-make/up=1/1 drained=1\nPASS different-scan records=3 expected=3 E-make/up=1/2 drained=1\nPASS different-extended records=3 expected=3 E-make/up=1/2 drained=1\nPASS hardware-make records=3 expected=3 E-make/up=2/1 drained=1\nPASS failed-prepend records=2 expected=2 E-make/up=1/1 drained=1\nPASS zero-written-prepend records=2 expected=2 E-make/up=1/1 drained=1\nPASS physical-release-modifiers records=2 expected=2 E-make/up=1/1 drained=1\nPASS wrapped-bios records=2 expected=2 E-make/up=1/1 drained=1\nPASS only-newest-overlaps records=4 expected=4 E-make/up=2/2 drained=1\nPASS odd-batch-flush records=40 expected=40 E-make/up=20/20 drained=1\nPASS untranslated-newest records=3 expected=3 E-make/up=1/2 drained=1\nPASS subsequent-empty-hardware records=2 expected=2 E-make/up=1/1 drained=1\n"
+    },
+    "focus.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "text": "0\n"
+    }
+  },
+  "limits": [
+    "Controlled BIOS/Console fixtures use actual extracted functions;not full guest proof.",
+    "Only original-flush substitution crashes;not claimed that all-original independent BIOS code crashes.",
+    "Whole-file cached build/publication/Full delivery pending."
+  ]
+}

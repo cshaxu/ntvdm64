@@ -46,11 +46,6 @@ void mvdm_softpc_text_video_pause(void)
     if(!ntvdm_console_video_async(FALSE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 }
-void mvdm_softpc_text_video_resume(void)
-{
-    if(!ntvdm_console_video_async(sc.ScreenState==FULLSCREEN))
-        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
-}
 
 /* CCPU's software VGA remains active in either presentation route. Never
  * request hardware fullscreen, map physical regen or change guest video mode

@@ -25,6 +25,5 @@ int mvdm_softpc_text_video_sync_route(void);
 int mvdm_softpc_text_video_local(void);
 void mvdm_softpc_text_video_flush(void (*publish)(void));
 void mvdm_softpc_text_video_pause(void);
-void mvdm_softpc_text_video_resume(void);
 
 #endif
