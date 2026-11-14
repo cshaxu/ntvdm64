@@ -13,8 +13,6 @@
 
 #include <windows.h>
 #include "host_def.h"
-#include "mvdm_softpc_firmware.h"
-#line 16
 #include "insignia.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -42,8 +40,11 @@
 
 /****    externally visible global variable declarations                 ****/
 
+#line 44
+extern  int     _sys_nerr;
+
+
 /* Exported Data */
-#line 48
 GLOBAL BOOL ExternalWaitRequest = FALSE;
 
 
@@ -65,19 +66,15 @@ DWORD  line;
 DWORD  error;
 {
 static  BYTE buf[256];
-const char *message;
 
-/* DIVERGENCE(MVDM-HOST-DIV-033): the NT4 CRT exported _sys_errlist and
- * _sys_nerr.  Modern UCRT no longer exposes that storage.  Keep this source
- * function's same char* error-text contract through its public successor. */
-message = strerror((int)error);
-if (message != NULL)
-   return((LPSTR)message);
-#line 72
-sprintf(buf, "System error %d occurred in %s (line %d)",
-	 error, filename, line);
-return(buf);
-#line 78
+if (error > (DWORD)_sys_nerr)
+   {
+   sprintf(buf, "System error %d occurred in %s (line %d)",
+		 error, filename, line);
+   return(buf);
+   }
+else
+   return(_sys_errlist[error]);
 }
 
 
@@ -96,9 +93,7 @@ void host_idle_init(void)
 
     IdleEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL, FALSE, FALSE, NULL);
 
-#line 96
 #ifndef PROD
-#line 97
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 100
@@ -175,17 +170,8 @@ void HostIdleNoActivity(void)
 
     IdleNoActivity=0;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-208): NT4 used PulseEvent only while the
-     * original CPU thread was observed waiting.  PulseEvent is explicitly
-     * unreliable on current Win32: an activity notification in the small
-     * interval before NowWaiting becomes visible is lost, leaving the CPU
-     * asleep despite IdleNoActivity having been cleared.  IdleEvent was
-     * already created as the source's auto-reset event.  SetEvent preserves
-     * the same one-waiter wake contract, while retaining one pending wake
-     * until the CPU reaches its next original WaitForSingleObject call. */
-    if (IdleEvent != NULL)
-	SetEvent(IdleEvent);
-#line 175
+    if (NowWaiting)                  // critical path do inline....
+	PulseEvent(IdleEvent);
 }
 
 
@@ -200,7 +186,6 @@ void host_release_timeslice(void)
     //
     // If there is counter idle activity no idling so return immediatly
     //
-#line 189
     if (!IdleNoActivity || IdleDisabledFromPIF) {
 	return;
     }
@@ -229,7 +214,6 @@ void host_release_timeslice(void)
 	}
 
     NowWaiting = TRUE;
-#line 217
     if (WaitForSingleObject(IdleEvent, idletime) == WAIT_FAILED) {
         idletime = 0;
 	Sleep(0);
@@ -237,7 +221,6 @@ void host_release_timeslice(void)
     NowWaiting = FALSE;
 
 #ifndef MONITOR
-#line 224
     if (idletime) {
         ActivityCheckAfterTimeSlice();
         }
@@ -331,9 +314,7 @@ memset(addr, val, size);
 
 
 
-#line 317
 #ifdef NO_LONGER_USED
-#line 318
 #error Unsupported excluded original configuration
 #endif
 #line 343
@@ -368,16 +349,38 @@ char *host_find_file(file,full_path,display_error)
 char *file,*full_path;
 int display_error;
 {
-    /* DIVERGENCE: the NT4 system-directory resource assumption is not a
-     * portable product boundary.  Preserve this original function's name,
-     * parameters and host_error failure ordering; source the selected immutable
-     * firmware directory from the currently bound session through the named
-     * SoftPC adapter.  See MVDM-HOST-DIV-037. */
-    if (mvdm_softpc_firmware_find_file(file, full_path, MAXPATHLEN))
-        return(full_path);
+    char buffer[MAXPATHLEN];
+    WIN32_FIND_DATA match;
+    HANDLE gotit;
+    static char sysdir[MAX_PATH];
+    static int first = 1;
+
+    if (first)
+    {
+	first = 0;
+	if (GetSystemDirectory(sysdir, MAXPATHLEN) == 0)
+	{
+	    sysdir[0] = '\0';
+	    host_error(EG_SYS_MISSING_FILE, ERR_QUIT, file);
+	    return(NULL);
+	}
+    }
+
+    if (sysdir[0] != '\0')
+    {
+	strcpy(buffer, sysdir);
+	strcat(buffer, "\\");
+	strcat(buffer, file);
+    }
+
+    if ((gotit = FindFirstFile(buffer, &match)) != (HANDLE)-1)
+    {
+	FindClose(gotit);       // should check (BOOL) return & then ??
+	strcpy(full_path, buffer);
+	return (full_path);
+    }
 
     /* Haven't managed to find the file. Oh dear... */
-#line 406
     switch( display_error )
     {
 	case SILENT:

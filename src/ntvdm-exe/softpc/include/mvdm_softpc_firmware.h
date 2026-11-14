@@ -12,12 +12,6 @@ extern "C" {
 int mvdm_softpc_project_wow_initial_environment(char **environment,
     unsigned long *bytes); /* Original Win32 DWORD cchEnv carrier. */
 
-/* Same-shaped host resource lookup binding used by the original
- * host_find_file() caller.  It owns no firmware bytes and returns only a
- * caller-provided, synchronous path buffer. */
-int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
-    uint32_t path_out_bytes);
-
 /* Copy one selected immutable firmware image from the product executable into
  * an original caller-owned buffer.  It is deliberately not a file-search
  * fallback: only the three fixed firmware identities are accepted. */

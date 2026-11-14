@@ -1,0 +1,335 @@
+{
+  "status": "cached full build,publish11x2,Full19 and governance passed;Git delivery accompanies record",
+  "source_files": 4,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "sha256": "59ff5502badd8e75136da1ab1b4bf69b50add4b2d11731bd2fd678f83d842cab"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "sha256": "30b153a94ad54f57bb55c507aea8fcdff25c9dd895dc6cd6108b24a59e645b29"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h",
+      "sha256": "c234c38fca508caddd305e55a4f5c95d479fbb266beae1fd8a56d2826e4f5943"
+    },
+    {
+      "path": "test/session/softpc_firmware_resource_fixture.c",
+      "sha256": "5ce5403d8e673751c0afc370c2af5fb3f52e7572e198bad15c895fdb7197200f"
+    }
+  ],
+  "source_baseline": "b7706a97f",
+  "review_ids": [
+    "T483-R1234",
+    "T483-R1235",
+    "T483-R1236",
+    "T483-R1237",
+    "T483-R1238",
+    "T483-R1239"
+  ],
+  "restored": [
+    1234,
+    1236,
+    1237,
+    1238,
+    1239
+  ],
+  "pending": [
+    1235
+  ],
+  "declaration_restoration_identity": {
+    "source": "original _sys_nerr extern restored after functional package build",
+    "actual_product_object": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_unix.obj",
+    "product_object_sha256": "c24441afcb33465d0543c39d1a7afd10c3938cc943af86bdce9533391ddc8e5e",
+    "final_source_object_sha256": "a07397b1d20b104214c6cb3febd937f297670440af9a54fb9d97848a569bfbbb",
+    "comparison": {
+      "non_debug_sections_equal": true,
+      "before_sections": 25,
+      "candidate_sections": 25,
+      "differences": []
+    },
+    "reuse_basis": "No code/data/relocation binding changes:all25 nondebugsections identical;reuse published functional package and its Full runtime,not a new runtime pass."
+  },
+  "final_declaration_process": {
+    "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p114\\final-declaration-check.ps1",
+    "pid": 8792,
+    "start": "2026-11-14T08:34:53.8528405-08:00",
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+  },
+  "final_line_proof": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "shared_selected_lines": 209,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "delete",
+          "original": [
+            [
+              43,
+              "extern  char    *(__sys_errlist())[];"
+            ]
+          ],
+          "after": []
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "publication": {
+    "status": "published",
+    "package": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "39676785CD6EC656FC15A1D0E4621E321BBF893792CF28BE3FBBE946BFEF0B47",
+      "Machine": 332,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "13A7BE8CDBB25833ACDC61D32C0969946D658AC7F803074F331C26B8CCCDA4C1"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "9A623564F9507353906BCD42F8B08C4246E1228192003AE4A3B2B50F3ED6D444",
+      "Machine": 34404,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "A2A1EBC020E6AABDD5AF081E2A84499585146179B0B3DF4EFDE571644B118CFE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "AA6024EC1D25ECFCEEAA3ACD452E9FBB663999F429EAB511F9C6EE8DD0816532",
+      "Machine": 34404,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "813F57B150865BE3803CBDF823FDD5E884B6E4697F2C4F57D9C5E5B142ECDE8E"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "A9630EA03815BEC0C7AFC3FE1D9731289EAA04C63AEEFF624E9DB707C48B1AC6",
+      "Machine": 34404,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "F228B321F6F3CEA215E14D6F81DF71B3361951895E9F9B4BEF20E8873A41C477"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "15548962AD9275CACE083BE594A49CD4A62CD6E385D0294F91F2F8EEA026D40B",
+      "Machine": 332,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "1C1CB3612B6C318F6F7404F4F958A7F1C65FC40D88D3D32428AE004ADB33DE64"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "662F4AB7F41422624963E7622BA611161B75DF608BAEDE2854755828FCC98816",
+      "Machine": 34404,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "2B84D41186A37224AE241FF5DD0D4C408F3899F18072F3AE440004BD075A696B"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "0A0FBF29FCE3F6B8230A1C687DD6DF6B6ED658FAA29C3CF0E0B859ECE7A14CCC",
+      "Machine": 34404,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "9CC40D61C31F31F25BD848ACECD6BC7663B2BAE64D6C53BB73E7240E57B2D851",
+      "Machine": 332,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "5AB7126E7D0294719813365D4F0C5D988C459E57C3C2974E3FE25104B4B4CB6C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "67F06F253BE09444EFE8D33F258A505DA96628D591CA4B7875947716B50447D6",
+      "Machine": 332,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "16F84DEB76D13C0685000D63FC3A6F04CF60CD6EE96CC7F8997B8E6EF3E08416"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "042266112AABE144C25423EB47735A7E98FE5A45EFDE28E967BD5AA7A00F8B76",
+      "Machine": 332,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "9D8C8E10DD3E757F7109BEE793C4067790B5AD2F5A96F089888A67CEEC103B20"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "3C3F4428186494AC0C1544723A01818F7A083CDF3A9118F8765C43DC4634C99A",
+      "Machine": 34404,
+      "PackageId": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "tests": {
+    "Suite": "Full",
+    "ElapsedMs": 409314,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6278,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1314,
+        "CleanupMs": 355,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 14833,
+        "CleanupMs": 436,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 15339,
+        "CleanupMs": 416,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 12509,
+        "CleanupMs": 384,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 242,
+        "CleanupMs": 349,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65553,
+        "CleanupMs": 394,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48336,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46076,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14943,
+        "CleanupMs": 391,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10871,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 58636,
+        "CleanupMs": 361,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12535,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28507,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30935,
+        "CleanupMs": 394,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4876,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8060,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9691,
+        "CleanupMs": 350,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3905,
+        "CleanupMs": 338,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7130,
+        "CleanupMs": 356,
+        "Passed": true
+      }
+    ]
+  },
+  "build_process": {
+    "start": "2026-11-14T08:26:11.2565908-08:00",
+    "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p114\\run-build.ps1",
+    "pid": 18788,
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+  },
+  "pipeline_process": {
+    "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p114\\pipeline.ps1",
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+    "pid": 11268,
+    "start": "2026-11-14T08:28:26.9341696-08:00"
+  },
+  "focused_process": {
+    "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p114\\focused.ps1",
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+    "start": "2026-11-14T08:24:31.3731560-08:00",
+    "pid": 15344
+  },
+  "focused_result": "Generated T310 S8 firmware-resource graph: O:\\repos.hobby\\ntvdm64\\build\\M0-T310\\S8\\p1-firmware-resource\\x86\nninja: Entering directory `build/M0-T310/S8/p1-firmware-resource/x86'\n[1/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/1-session.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/session.c\n[2/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/3-softpc_firmware_resource_fixture.obj O:/repos.hobby/ntvdm64/test/session/softpc_firmware_resource_fixture.c\n[3/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/4-softpc_media_resource_fixture.obj O:/repos.hobby/ntvdm64/test/session/softpc_media_resource_fixture.c\n[4/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/0-guest_memory_lease.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/guest_memory_lease.c\n[5/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/6-guest_environment.obj O:/repos.hobby/ntvdm64/src/common/guest_environment.c\n[6/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/5-system_root.obj O:/repos.hobby/ntvdm64/src/common/system_root.c\n[7/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/2-mvdm_softpc_firmware.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_firmware.c\n[8/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/7-softpc_wow_boot_environment_fixture.obj O:/repos.hobby/ntvdm64/test/session/softpc_wow_boot_environment_fixture.c\n[9/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd link.exe /nologo /out:softpc-media-resource-fixture.exe obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj kernel32.lib\n[10/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd link.exe /nologo /out:softpc-firmware-resource-fixture.exe obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/3-softpc_firmware_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj kernel32.lib\n[11/14] softpc-media-resource-fixture.exe \"O:/repos.hobby/ntvdm64/build/t483-s5-p113/candidate-final\"\n[12/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x86/msvc-mt.cmd link.exe /nologo /out:softpc-wow-boot-environment-fixture.exe obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/5-system_root.obj obj/6-guest_environment.obj obj/7-softpc_wow_boot_environment_fixture.obj kernel32.lib\n[13/14] softpc-firmware-resource-fixture.exe \"O:/repos.hobby/ntvdm64/src/mvdm-guest/softpc.new/roms\"\n[14/14] softpc-wow-boot-environment-fixture.exe\nWOW-BOOT-ENVIRONMENT-PASS\nPASS firmware/media/boot fixtures: x86\nGenerated T310 S8 firmware-resource graph: O:\\repos.hobby\\ntvdm64\\build\\M0-T310\\S8\\p1-firmware-resource\\x64\nninja: Entering directory `build/M0-T310/S8/p1-firmware-resource/x64'\n[1/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/0-guest_memory_lease.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/guest_memory_lease.c\n[2/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/2-mvdm_softpc_firmware.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_firmware.c\n[3/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/5-system_root.obj O:/repos.hobby/ntvdm64/src/common/system_root.c\n[4/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/1-session.obj O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/session.c\n[5/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/3-softpc_firmware_resource_fixture.obj O:/repos.hobby/ntvdm64/test/session/softpc_firmware_resource_fixture.c\n[6/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/6-guest_environment.obj O:/repos.hobby/ntvdm64/src/common/guest_environment.c\n[7/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/7-softpc_wow_boot_environment_fixture.obj O:/repos.hobby/ntvdm64/test/session/softpc_wow_boot_environment_fixture.c\n[8/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd cl.exe /nologo /TC /c /MT /W4 /showIncludes /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /Foobj/4-softpc_media_resource_fixture.obj O:/repos.hobby/ntvdm64/test/session/softpc_media_resource_fixture.c\n[9/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd link.exe /nologo /out:softpc-wow-boot-environment-fixture.exe obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/5-system_root.obj obj/6-guest_environment.obj obj/7-softpc_wow_boot_environment_fixture.obj kernel32.lib\n[10/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd link.exe /nologo /out:softpc-firmware-resource-fixture.exe obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/3-softpc_firmware_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj kernel32.lib\n[11/14] cmd.exe /d /s /c call O:/repos.hobby/ntvdm64/build/M0-T310/S8/p1-firmware-resource/x64/msvc-mt.cmd link.exe /nologo /out:softpc-media-resource-fixture.exe obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj kernel32.lib\n[12/14] softpc-firmware-resource-fixture.exe \"O:/repos.hobby/ntvdm64/src/mvdm-guest/softpc.new/roms\"\n[13/14] softpc-wow-boot-environment-fixture.exe\nWOW-BOOT-ENVIRONMENT-PASS\n[14/14] softpc-media-resource-fixture.exe \"O:/repos.hobby/ntvdm64/build/t483-s5-p113/candidate-final\"\nPASS firmware/media/boot fixtures: x64\n",
+  "commands": {
+    "cached-x86.cmd": "@echo off\ncd /d O:\\repos.hobby\\ntvdm64\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\nif errorlevel 1 exit /b %errorlevel%\ncmake --preset msvc-x86-release-ccache -DNTVDM_POWERSHELL:FILEPATH=\"C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe\"\nif errorlevel 1 exit /b 1\ncmake --build --preset msvc-x86-release-ccache\nif errorlevel 1 exit /b %errorlevel%\nninja -C build\\.ninja\\msvc-x86-release\\worker ntvdm.exe VCDEX.DLL VDMREDIR.dll nthook32.dll ntvdm-command-capture-test.exe ntvdm-command-launch-test.exe\nif errorlevel 1 exit /b %errorlevel%\ncmake --build --preset msvc-x86-release-ccache --target wow32\nexit /b %errorlevel%\n",
+    "cached-x64.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x64 -host_arch=x64 >nul\nif errorlevel 1 exit /b 1\ncmake --preset msvc-x64-release-ccache -DNTVDM_POWERSHELL:FILEPATH=\"C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe\"\nif errorlevel 1 exit /b 1\ncmake --build --preset msvc-x64-release-ccache\nif errorlevel 1 exit /b 1\nfor %%d in (worker frontend monitor launcher service hook) do (\n ninja -C build\\.ninja\\msvc-x64-release\\%%d\n if errorlevel 1 exit /b 1\n)\nexit /b 0\n",
+    "pipeline.ps1": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n if((Get-Content \"$PSScriptRoot/cached.exit\").Trim() -ne '0'){throw 'Cached build failed'}\n $hostPath=(Get-Process -Id $PID).Path\n foreach($step in @('stage','publish-before-full','full-final','final-check')) {\n  & $hostPath -NoProfile -File \"$PSScriptRoot/$step.ps1\" *> \"$PSScriptRoot/$step.log\"\n  if($LASTEXITCODE){throw \"$step failed\"}\n }\n 0|Set-Content \"$PSScriptRoot/pipeline.exit\"\n} catch {$_|Out-String|Write-Output;1|Set-Content \"$PSScriptRoot/pipeline.exit\";exit 1}\n",
+    "full-final.ps1": "try {\n$ErrorActionPreference='Stop'\n$repo='O:\\repos.hobby\\ntvdm64'\n$env:OPENNT_BROKER_PRODUCT_BUILD=\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\"\n$node='C:\\Users\\neko\\AppData\\Local\\Logi\\LogiPluginService\\PluginHosts\\node22\\node\\node.exe'\n& \"$repo\\tools\\audit\\Invoke-ProductVerification.ps1\" -RuntimeRoot \"$repo\\build\\t483-s5-p114\\candidate-final\" -BuildCache \"$repo\\build\\t483-s5-p114\\cache-final\" -Observer \"$repo\\build\\t483-s5-p79-final\\observers-x64\\console-startup-observer.exe\" -WindowObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\worker-window-snapshot.exe\" -TerminalObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\terminal-observer.exe\" -GuestFixture \"$repo\\build\\M0-T420\\S44\\p79-fixture\\G7.COM\" -NativeHook64 \"$repo\\build\\t483-s5-p114\\cache-final\\nthook64.dll\" -NativeWorker \"$repo\\build\\t483-s5-p114\\cache-final\\ntvwm.exe\" -NativeFrontend \"$repo\\build\\t483-s5-p114\\cache-final\\ntcon.exe\" -NativeMonitor \"$repo\\build\\t483-s5-p114\\cache-final\\ntmon.exe\" -NativeLauncher \"$repo\\build\\t483-s5-p114\\cache-final\\run16.exe\" -NativeService \"$repo\\build\\t483-s5-p114\\cache-final\\ntsrv.exe\" -MonitorRpc \"$repo\\build\\t483-s5-p114\\cache-final\\monitor-rpc-test.exe\" -WowBaselineRoots \"$repo\\build\\t483-s5-p78\\full-final\" -LogRoot \"$repo\\build\\t483-s5-p114\\full-final\" -Suite Full -Node $node\n\n\n\n\n\n\n\n\n$LASTEXITCODE | Set-Content build/t483-s5-p114/full-final.exit\n\nexit $LASTEXITCODE\n\n}catch{$_|Out-String|Write-Output;1|Set-Content O:/repos.hobby/ntvdm64/build/t483-s5-p114/full-final.exit;exit 1}\n",
+    "focused.ps1": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n foreach($arch in @('x86','x64')) {\n  & tools/build/New-T310FirmwareResourceNinja.ps1 -Architecture $arch -RuntimeRoot O:/repos.hobby/ntvdm64/build/t483-s5-p113/candidate-final\n  if($LASTEXITCODE){throw 'Generate failed'}\n  & 'C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe' -C \"build/M0-T310/S8/p1-firmware-resource/$arch\" all-verify\n  if($LASTEXITCODE){throw \"Firmware/media/boot fixtures failed: $arch\"}\n  \"PASS firmware/media/boot fixtures: $arch\"\n }\n 0|Set-Content build/t483-s5-p114/focused.exit\n} catch {$_|Out-String|Write-Output;1|Set-Content build/t483-s5-p114/focused.exit;exit 1}\n"
+  },
+  "limits": [
+    "Unavailable external DOS4GW/Nesticle remains explicit skip,not pass.",
+    "No new physical Win3.x mouse acceptance claimed.",
+    "209 original selected lines match. Only one SDK-conflicting declaration remains as a non-exclusion mirror deviation. Full firmware/media/boot fixtures pass x86/x64."
+  ]
+}

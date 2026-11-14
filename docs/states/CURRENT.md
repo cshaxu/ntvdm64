@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1237 points reviewed:466 restored/confirmed delivered,0 local,8 approved,
-763 qualified pending,0 restores decided;1483 unreviewed. Files158/365 audited,207 remain.
+1243 points reviewed:471 restored/confirmed delivered,0 local,8 approved,
+764 qualified pending,0 restores decided;1477 unreviewed. Files159/365 audited,206 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P113 package `d1a6740a-1a37-4ffb-ae78-bc8b6db9cd86` published11x2; hashes match.
+P114 package `7710fc81-2a3b-4c83-bcb9-0e470b53787f` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p113-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p114-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -230,3 +230,5 @@ P81 delivered;see active audit README batch receipts.
 P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,217 lines;build,publish11x2,Full19 passed;nextR1047.
 
 P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p101-checkpoint.json).Diff329->262;5restored delivered;lines/focused/Full19 passed;next R1146.
+
+P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,one evidenced declaration residual;cached build,publish11x2,Full19 passed.

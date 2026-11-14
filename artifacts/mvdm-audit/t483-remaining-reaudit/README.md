@@ -827,3 +827,8 @@ P113 [timer review](r1231-r1233-nt-timer-review.json):delivered mirror109->96(-1
 [Checkpoint](batch-p113-checkpoint.json);[line proof](batch-p113-line-check.json).
 158/365 files;1237 points reviewed:466 delivered restorations,0 local,8 approved,763 pending,1483 unreviewed.
 Cached full build,x86/x64 native alert,publish11x2,Full19 and governance passed;Git delivery accompanies receipt.
+
+P114 [nt_unix review](r1234-r1239-nt-unix-review.json):delivered mirror100->29(-71).
+[Checkpoint](batch-p114-checkpoint.json);[line proof](batch-p114-line-check.json).
+159/365 files;1243 reviewed:471 delivered restorations,0 local,8 approved,764 pending,1477 unreviewed.
+Whole-file original restored except one SDK-conflicting declaration and two unchanged exclusions;cached full build,publish11x2,firmware/media/boot x86/x64,Full19 and governance passed.

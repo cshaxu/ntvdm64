@@ -1,0 +1,21 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+    "shared_selected_lines": 209,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "delete",
+        "original": [
+          [
+            43,
+            "extern  char    *(__sys_errlist())[];"
+          ]
+        ],
+        "after": []
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

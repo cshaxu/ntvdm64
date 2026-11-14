@@ -1,0 +1,84 @@
+{
+  "status": "Whole-file restoration built,published11x2 and Full19 passed;Git delivery accompanies receipt",
+  "source": "OpenNT/base/mvdm/softpc.new/host/src/nt_unix.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+  "review": {
+    "R1234": {
+      "before": "+1/-0",
+      "decision": "restore",
+      "initial": "Firmware header for added disk lookup",
+      "counter_review": "No product disk consumer needs the added lookup; remove header together with R1239."
+    },
+    "R1235": {
+      "before": "+0/-4",
+      "decision": "pending-owner-decision",
+      "evidence": "Current production MSVC flags: original body compiles0, adding original extern declarations fails2 with C2090 function returns array. UCRT stdlib.h230-234 defines _sys_errlist as (__sys_errlist()) and _sys_nerr as (*__sys_nerr()).",
+      "minimum": "Omit only _sys_errlist declaration. Original _sys_nerr declaration compiles;25 actual product nondebug COFF sections and named relocations identical. Restore spacing;no shim."
+    },
+    "R1236_R1237": {
+      "before": "+10/-8",
+      "decision": "restore",
+      "initial": "Claim modern UCRT no longer exposes the storage",
+      "counter_review": "Public UCRT accessors expose the historical macros. Original body compiles. strerror is not needed and changes out-of-range filename/line diagnostics. Restore body, remove temporary and comment."
+    },
+    "R1238": {
+      "before": "+10/-2",
+      "decision": "restore",
+      "initial": "Possible PulseEvent wake loss",
+      "counter_review": "WaitIfIdle,host_release_timeslice,PrioWaitIfIdle all use bounded waits; generic possible ordering is not a demonstrated current product failure. Original owns NowWaiting/PulseEvent policy. No proof requiring retained pending-signal behavior; restore original without adding lock/event state."
+    },
+    "R1239": {
+      "before": "+7/-30",
+      "decision": "restore",
+      "initial": "Portable firmware directory",
+      "counter_review": "Complete src symbol search: only rom.c loadROM calls host_read_resource with ROMS_REZ_ID, returned through embedded resource seam before host_find_file. No source caller for host_write_resource. Test called added helper itself and cannot prove mirror deviation necessary. Restore original GetSystemDirectory/FindFirstFile lookup. Keep selected embedded-ROM seam untouched."
+    }
+  },
+  "coupled_cleanup": [
+    "Remove now-unused mvdm_softpc_firmware_find_file function/declaration.",
+    "Retain private mvdm_softpc_media_find_file used by real system-file callers.",
+    "Retire deleted API direct tests; keep unknown embedded ROM negative fixture and all existing system-file/boot-environment fixtures."
+  ],
+  "verification": {
+    "actual_context": "build/.ninja/msvc-x86-release/worker/build.ninja nt_unix.obj edge",
+    "controls": "build/t483-s5-p114/original-body.exit0;original-declarations.exit2;candidate.exit0",
+    "limitations": [
+      "Compile-only controls do not prove final runtime delivery.",
+      "No new physical-floppy or Win3.x manual interaction claim.",
+      "Original guest bytes unmodified."
+    ],
+    "first_line_check": "Detected #line inside excluded body,83 mismatches; fix outside #endif before publication.",
+    "final_line_check": {
+      "common_selected_lines": 209,
+      "mismatches": 0,
+      "excluded_error_directives_unchanged": true
+    },
+    "pinned_git_object": {
+      "sha256": "477ed9d9d272834c56afab291323d31750208c4a10b88a1c849288b87bb19dd6",
+      "raw_byte_equal": false,
+      "newline_normalized_equal": true,
+      "note": "Pinned Git object LF;read-only reference checkout CRLF. Restored mirror retains reference checkout CRLF, not claimed raw Git-object byte identity."
+    },
+    "mirror_reference_crlf_preserved": true,
+    "removed_api_no_src_test_tools_references": true,
+    "declaration_restoration_identity": {
+      "non_debug_sections_equal": true,
+      "before_sections": 25,
+      "candidate_sections": 25,
+      "differences": []
+    }
+  },
+  "delivery": "batch-p114-checkpoint.json",
+  "mirror_diff": {
+    "before": 100,
+    "after": 29,
+    "delta": -71,
+    "metric": "EOL-normalized original-relative added+deleted, #line excluded, existing #error body differences included",
+    "non_exclusion_difference": {
+      "before": 72,
+      "after": 1,
+      "delta": -71
+    }
+  }
+}

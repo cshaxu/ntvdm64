@@ -79,15 +79,6 @@ static void mvdm_softpc_profile_shadow_dispose(void *context)
     ZeroMemory(shadow, sizeof(*shadow));
 }
 
-int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
-    uint32_t path_out_bytes)
-{
-    session *instance = session_thread_current();
-    return mvdm_softpc_media_find_file(instance != NULL ?
-        session_firmware_root(instance) : NULL, name, path_out,
-        path_out_bytes);
-}
-
 long mvdm_softpc_firmware_read_embedded_rom(const char *name, void *bytes_out,
     uint32_t bytes_out_capacity)
 {
