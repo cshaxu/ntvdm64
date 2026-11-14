@@ -919,3 +919,7 @@ P133 whole-file source review complete: [checkpoint](batch-p133-checkpoint.json)
 P133 final cached build,publish11x2,public ABI,menu-resource and Full19 passed. Mirror41->16(-25);96 static include-line anchors match;WOW boundary checked.185/365 files;1308/2720 points:496 delivered/confirmed,8 approved,804 pending,1412 unreviewed. Final governance and Git accompany receipt.
 
 P134 [waccel review](r1309-waccel-review.json), [receipt](batch-p134-checkpoint.json):only3 DBG exclusions;224 selected lines match original content and lines. Source unchanged;P133 package/Full19 reused with22 hashes.186/365 files;1309/2720 points:497 restored/confirmed,8 approved,804 pending,1411 unreviewed.
+
+P135 [whole-file restoration checkpoint](batch-p135-checkpoint.json), [line proof](batch-p135-line-check.json):walias mirror164->135(-29);original GDI suffix restored without changing live aliases.342 selected lines match;syntax passes. Cached full/publication/runtime/Git pending.187/365 files;1311/2720 points:497 delivered,2 local,8 approved,804 pending,1409 unreviewed.
+
+P135 final cached build,publish11x2,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror164->135(-29);342 selected lines match.187/365 files;1311/2720 points:499 delivered/confirmed,8 approved,804 pending,1409 unreviewed. Final governance and Git accompany receipt.
