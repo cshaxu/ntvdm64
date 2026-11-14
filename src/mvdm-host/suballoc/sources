@@ -40,3 +40,6 @@ SOURCES=suballoc.c
 
 C_DEFINES=-DDEV_DBG
 
+UMTYPE=console
+UMTEST=tsa
+UMLIBS=\nt\public\sdk\lib\*\suballoc.lib

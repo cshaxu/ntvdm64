@@ -1,0 +1,81 @@
+{
+  "status": "Both metadata files restored byte-identical to fixed Git originals;actual graph unchanged;P118 runtime reused;Git accompanies receipt",
+  "originals": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/sources",
+      "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "original_path": "base/mvdm/softpc.new/obj.vdm/sources",
+      "git_sha256": "03ef1b5edc1b0443c3dde5a0562a8bd5e07ec83ee35b35735a1272bd00fd67b0",
+      "original_checkout_sha256": "f80c0d8513ea68500c792674d05dee7f42f1f76aed98f4f5ca6bc409ffd61f3e",
+      "raw_checkout_equal": false,
+      "raw_git_equal": true,
+      "newline_normalized_git_equal": true,
+      "final_sha256": "03ef1b5edc1b0443c3dde5a0562a8bd5e07ec83ee35b35735a1272bd00fd67b0"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/sources",
+      "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "original_path": "base/mvdm/suballoc/sources",
+      "git_sha256": "50d324042a3423752201374d694725b9077f74bd3aa2d46c9f6713cfa857a237",
+      "original_checkout_sha256": "fabb2241cea80f81921560057b26186d188fa5e61a097e387b41a5a690ce4e81",
+      "raw_checkout_equal": false,
+      "raw_git_equal": true,
+      "newline_normalized_git_equal": true,
+      "final_sha256": "50d324042a3423752201374d694725b9077f74bd3aa2d46c9f6713cfa857a237"
+    }
+  ],
+  "points": [
+    {
+      "review_id": "T483-R1256",
+      "path": "src/mvdm-host/softpc.new/obj.vdm/sources",
+      "before": "+4/-1",
+      "after": "+0/-0",
+      "delta": -5,
+      "problem": "Historical monitor.lib LINKLIBS line replaced by four explanatory comments. Old tsa reference is not the actual hunk.",
+      "evidence": "New-T310OriginalSoftpcNinja sets hostEntrySource/resource/export directly and owns an explicit worker link edge;it never reads obj.vdm/sources LINKLIBS. Restoring metadata cannot import missing monitor code.",
+      "decision": "Restore exact original metadata;hardware V86 monitor remains excluded."
+    },
+    {
+      "review_id": "T483-R1257",
+      "path": "src/mvdm-host/suballoc/sources",
+      "before": "+0/-3",
+      "after": "+0/-0",
+      "delta": -3,
+      "problem": "Historical UMTYPE=console,UMTEST=tsa,UMLIBS entries deleted after unused TSA removal.",
+      "evidence": "Actual Get-OriginalSources parser stops before C_DEFINES and returns only suballoc.c before/after. No selected target consumes UMTEST/UMLIBS;whole generated graph unchanged and no TSA selected.",
+      "decision": "Restore exact original metadata;do not restore deleted tsa.c or add a test target."
+    }
+  ],
+  "mirror_delta": -8,
+  "metric_scope": "Original-relative added+deleted logical lines;R1256 5->0,R1257 3->0;not net source LOC. Final files raw-equal fixed Git originals.",
+  "build_graph": {
+    "before": {
+      "graph_sha256": "C3FEDDF4DCD13CFE107480331D2E117AF21CE4D3B8BBDD117A64DF739C9AD4B2",
+      "excluded_provider_absent": true,
+      "architecture": "x86"
+    },
+    "after": {
+      "architecture": "x86",
+      "graph_sha256": "C3FEDDF4DCD13CFE107480331D2E117AF21CE4D3B8BBDD117A64DF739C9AD4B2",
+      "excluded_provider_absent": true
+    },
+    "identical": true,
+    "actual_entry": "CMakeLists.txt always invokes worker generator -Architecture x86 for both host presets. Native x64 tools are separate;restored metadata is not their input."
+  },
+  "parser": {
+    "selected": [
+      "suballoc.c"
+    ],
+    "provider": "real Get-OriginalSources AST",
+    "equal": true
+  },
+  "source_control_structure": "Whole original NMAKE structures restored exactly;no C-preprocessor #error or #line directives modified/introduced.",
+  "counter_review": "Original metadata is source evidence,not runtime admission. Explicit selected graph and source policy still exclude hardware V86 monitor/TSA. No executable source restored,no shim,no side path.",
+  "runner_corrections": [
+    "Initial isolated graph root outside build/.ninja rejected by BuildTree.cmake before generation;corrected root passed.",
+    "Extra direct -Architecture x64 worker diagnostic failed uninitialized baseAdapterFlags. CMake actual products always use -Architecture x86 worker;unsupported diagnostic is not a product pass or newly repaired capability.",
+    "External checkout CRLF initially caused whole-file whitespace noise;final bytes restored from pinned Git LF object and final graph regenerated."
+  ],
+  "verification": "Real final graph and parser checks pass;22 published hashes unchanged;P118 cached full build and Full19 reused. No new compile/Full/publication claimed.",
+  "delivery": "batch-p119-checkpoint.json"
+}

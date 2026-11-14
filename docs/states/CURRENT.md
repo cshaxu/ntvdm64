@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1259 points reviewed:473 restored/confirmed delivered,0 local,8 approved,
-778 qualified pending,0 restores decided;1461 unreviewed. Files164/365 audited,201 remain.
+1261 points reviewed:475 restored/confirmed delivered,0 local,8 approved,
+778 qualified pending,0 restores decided;1459 unreviewed. Files166/365 audited,199 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -234,6 +234,6 @@ P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaini
 P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,one evidenced declaration residual;cached build,publish11x2,Full19 passed.
 
 
-P118 entry whole-file audit:mirror36->27(-9),five residuals pending owner.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1251-r1255-entry-review.json).
-158 logical lines exact;cached build,publish11x2,Full19 and object proof pass;Git accompanies receipt.
+P119 two metadata files restored to fixed original Git bytes;mirror-8.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1256-r1257-metadata-restoration.json).
+Real graph/parser unchanged;P118 published11x2 hashes/Full19 reused;Git accompanies receipt.

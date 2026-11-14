@@ -81,10 +81,7 @@ LINKLIBS = \
      $(SOFTPC_TREE)\base\disks\obj\*\DISKS.LIB  \
      $(SOFTPC_TREE)\base\keymouse\obj\*\KEYMOUSE.LIB \
      $(SOFTPC_TREE)\host\src\obj\*\SRC.LIB      \
-# DIVERGENCE(MVDM-HOST-DIV-031): The selected i386+CCPU product profile
-# never links the historical kernel-V86 monitor.  Its source package is
-# available only in the read-only external OpenNT reference tree; all remaining original link order
-# is unchanged.
+     $(BASEDIR)\public\sdk\lib\*\monitor.lib        \
      $(BASEDIR)\public\sdk\lib\*\dem.lib    \
      $(BASEDIR)\public\sdk\lib\*\dbg.lib    \
      $(BASEDIR)\public\sdk\lib\*\command.lib        \

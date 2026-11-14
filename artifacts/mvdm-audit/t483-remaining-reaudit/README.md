@@ -852,3 +852,7 @@ P118 [entry review](r1251-r1255-entry-review.json):mirror36->27(-9);five residua
 [Checkpoint](batch-p118-checkpoint.json);[line proof](batch-p118-line-check.json).
 164/365 files;1259 reviewed:473 delivered restores,8 approved,778 pending,1461 unreviewed.
 158 original logical lines exact;ABI/object controls,cached full build,publish11x2 and Full19 pass;Git accompanies receipt.
+
+P119 [metadata restoration](r1256-r1257-metadata-restoration.json):two files raw-identical to pinned Git originals;mirror-8.
+[Checkpoint](batch-p119-checkpoint.json). Actual worker graph/parser unchanged;P118 published11x2 hashes and Full19 reused.
+166/365 files;1261 reviewed:475 delivered restores,8 approved,778 pending,1459 unreviewed;Git accompanies receipt.

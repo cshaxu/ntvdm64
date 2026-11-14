@@ -1,0 +1,166 @@
+{
+  "status": "original metadata/graph/parser and published identity verified;P118 build/Full/publication reused;Git accompanies receipt",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/sources",
+      "sha256": "03ef1b5edc1b0443c3dde5a0562a8bd5e07ec83ee35b35735a1272bd00fd67b0"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/sources",
+      "sha256": "50d324042a3423752201374d694725b9077f74bd3aa2d46c9f6713cfa857a237"
+    }
+  ],
+  "mirror_delta": -8,
+  "review": "r1256-r1257-metadata-restoration.json",
+  "originals": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/sources",
+      "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "original_path": "base/mvdm/softpc.new/obj.vdm/sources",
+      "git_sha256": "03ef1b5edc1b0443c3dde5a0562a8bd5e07ec83ee35b35735a1272bd00fd67b0",
+      "original_checkout_sha256": "f80c0d8513ea68500c792674d05dee7f42f1f76aed98f4f5ca6bc409ffd61f3e",
+      "raw_checkout_equal": false,
+      "raw_git_equal": true,
+      "newline_normalized_git_equal": true,
+      "final_sha256": "03ef1b5edc1b0443c3dde5a0562a8bd5e07ec83ee35b35735a1272bd00fd67b0"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/sources",
+      "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "original_path": "base/mvdm/suballoc/sources",
+      "git_sha256": "50d324042a3423752201374d694725b9077f74bd3aa2d46c9f6713cfa857a237",
+      "original_checkout_sha256": "fabb2241cea80f81921560057b26186d188fa5e61a097e387b41a5a690ce4e81",
+      "raw_checkout_equal": false,
+      "raw_git_equal": true,
+      "newline_normalized_git_equal": true,
+      "final_sha256": "50d324042a3423752201374d694725b9077f74bd3aa2d46c9f6713cfa857a237"
+    }
+  ],
+  "build_graph": {
+    "architecture": "x86",
+    "graph_sha256": "C3FEDDF4DCD13CFE107480331D2E117AF21CE4D3B8BBDD117A64DF739C9AD4B2",
+    "excluded_provider_absent": true
+  },
+  "parser": {
+    "selected": [
+      "suballoc.c"
+    ],
+    "provider": "real Get-OriginalSources AST",
+    "equal": true
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "1E2FD08B5AA7BDF19B343B8A17A80E19014AFA5F299DE123EFEEEE13AA5E93AD",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "13A7BE8CDBB25833ACDC61D32C0969946D658AC7F803074F331C26B8CCCDA4C1"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "0D8871FC5D6E85ABBF43F25B61D50E927E13932BC6B9FCED7E8331CFE64E7487",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "6707ACD3AB4134C5DFC5624EEDD24152E62C1F3052529C5CEB64CE53C918B55A"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "A4F57D30B7701A72E2B3A800EB5A1A1A337837D4EB7AE1533E5059C949324565",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "29D4B07A30B2E2C290DCBDE6F67A7526D9C8E3072D7CFBA32B38FF09F37FE0F2"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "A0E9DFD97F657D4234E3404488332FCAA1F6E0FCBEFAA093C12CB88A802AF898",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "DD086653E78A42B6A01DB1958A635674CDE51ACDA8A2B8C8C00BEFFB41186B71"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "39964ECCC231E48A4C70041B0A04DC70C2781F65D456E0C6FA0993E9B4716BA5",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "584AE399CAE7640565FF8374469719687AFBDD6ED3BAEE779C85B44F9053710E"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "F3EC4AFA6B83D70CE66C8A378262C3E32C2C7B1799FAA1EDB09E1AF063B08DAE",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "EEA814BAC30D621336B2AA826FAE7F1DC0FCF1AB12E57972AD4CE052CBC2C6F0"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "4E8C7A5C3903B46E932B22816EAFCEA57599154690D55AE7DB7927D72921B260",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "6FBB54508B427A4398CCD5538B0B08E4485302940FE2C527109E6D624CE29688",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "5AB7126E7D0294719813365D4F0C5D988C459E57C3C2974E3FE25104B4B4CB6C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "6D7A6440AD45739658A8B27F8623727AA3F51036C1ACDA9970A66A7F69A1FFD1",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "16F84DEB76D13C0685000D63FC3A6F04CF60CD6EE96CC7F8997B8E6EF3E08416"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "5AF797D3BAFBF7B062C6D5327FFA4C783FD0D868359742A6917CC97F100D4BCD",
+      "Machine": 332,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "C3CF354D26125B79A9CA0150C05B4EF4C1F6F95F63B6EF289B87D20709BD641C"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "148EC23149DCEB9D4DA860282E6A94AB4094AB1F7EF2A142B0C972A4F282E312",
+      "Machine": 34404,
+      "PackageId": "1366c2da-7151-448d-9dd7-46c5a3d1a612",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "reused_evidence": "batch-p118-checkpoint.json",
+  "no_new_full_claim": true,
+  "commands": {
+    "graphs.ps1": "param([ValidateSet('before','after')][string]$Phase)\n$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n $node='C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/node/bin/node.exe'\n $ninja='C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe'\n $rows=@()\n foreach($arch in @('x86')) {\n  $root=\"O:/repos.hobby/ntvdm64/build/.ninja/t483-s5-p119-$arch\"\n  & tools/build/New-T310OriginalSoftpcNinja.ps1 -Architecture $arch -RepositoryRoot O:/repos.hobby/ntvdm64 -BuildRoot $root -NodeExecutable $node -NinjaExecutable $ninja\n  if($LASTEXITCODE){throw \"Generator $arch failed\"}\n  $hash=(Get-FileHash \"$root/build.ninja\").Hash\n  if($Phase -eq 'before'){Copy-Item \"$root/build.ninja\" \"build/t483-s5-p119/$arch-before.ninja\"}\n  else {if($hash -ne (Get-FileHash \"build/t483-s5-p119/$arch-before.ninja\").Hash){throw \"$arch graph changed\"}}\n  $graph=Get-Content \"$root/build.ninja\" -Raw\n  if($graph -match '(?i)(?<![-a-z])monitor\\.lib|[/\\\\]tsa\\.c'){throw 'Excluded provider selected'}\n  $rows+=@{architecture=$arch;graph_sha256=$hash;excluded_provider_absent=$true}\n }\n $rows|ConvertTo-Json|Set-Content \"build/t483-s5-p119/$Phase-graphs.json\"\n 0|Set-Content \"build/t483-s5-p119/$Phase.exit\"\n}catch {$_|Out-String|Write-Output;1|Set-Content \"build/t483-s5-p119/$Phase.exit\";exit 1}\n",
+    "restore-validate.ps1": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n $p=Get-Process -Id 5264 -ErrorAction SilentlyContinue\n if($p){Wait-Process -Id 5264 -Timeout 300}\n if((Get-Content build/t483-s5-p119/before.exit).Trim() -ne '0'){throw 'Before graph did not pass'}\n & python build/t483-s5-p119/restore.py\n if($LASTEXITCODE){throw 'Original restoration failed'}\n & \"$PSScriptRoot/graphs.ps1\" -Phase after\n if($LASTEXITCODE){throw 'After graph failed'}\n $tokens=$null;$errors=$null\n $ast=[Management.Automation.Language.Parser]::ParseFile((Resolve-Path tools/build/New-T310OriginalSoftpcNinja.ps1),[ref]$tokens,[ref]$errors)\n if($errors.Count){throw 'Generator parser errors'}\n $fn=$ast.Find({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst] -and $n.Name -eq 'Get-OriginalSources'},$true)\n . ([scriptblock]::Create($fn.Extent.Text))\n $before=@(Get-OriginalSources build/t483-s5-p119/suballoc-before)\n $after=@(Get-OriginalSources build/t483-s5-p119/suballoc-after)\n if((Compare-Object $before $after -SyncWindow 0) -or $after.Count -ne 1 -or $after[0] -ne 'suballoc.c'){throw 'Suballoc selection changed'}\n @{selected=$after;equal=$true;provider='real Get-OriginalSources AST'}|ConvertTo-Json|Set-Content build/t483-s5-p119/parser.json\n 0|Set-Content build/t483-s5-p119/validation.exit\n} catch {$_|Out-String|Write-Output;1|Set-Content build/t483-s5-p119/validation.exit;exit 1}\n",
+    "align-original-bytes.py": "from pathlib import Path\nimport subprocess,json,hashlib\nr=Path.cwd();b=r/'build/t483-s5-p119';rows=json.loads((b/'originals.json').read_text())\nfor x,name in zip(rows,['entry','suballoc']):\n p=r/x['path'];assert hashlib.sha256(p.read_bytes()).hexdigest()==x['original_checkout_sha256']\n g=subprocess.check_output(['git','-C','O:/repos.external/OpenNT','show',x['commit']+':'+x['original_path']]);assert hashlib.sha256(g).hexdigest()==x['git_sha256']\n p.write_bytes(g);(b/(name+'-after')).write_bytes(g);x.update(raw_checkout_equal=False,raw_git_equal=True,final_sha256=hashlib.sha256(g).hexdigest())\n(b/'originals.json').write_bytes((json.dumps(rows,indent=2)+'\\n').encode())\n"
+  },
+  "processes": {
+    "before": {
+      "pid": 5264,
+      "script": "build/t483-s5-p119/graphs.ps1 -Phase before",
+      "start": "2026-11-14T09:53:40.7640704-08:00"
+    },
+    "validation": {
+      "pid": 38144,
+      "start": "2026-11-14T09:54:59.7698937-08:00",
+      "script": "build/t483-s5-p119/restore-validate.ps1"
+    },
+    "final-graphs": {
+      "start": "2026-11-14T09:57:06.7026368-08:00",
+      "script": "build/t483-s5-p119/graphs.ps1 -Phase after",
+      "pid": 4204
+    }
+  }
+}
