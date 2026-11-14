@@ -735,3 +735,5 @@ P80 delivery evidence: [checkpoint](batch-p80-checkpoint.json), [line proof](bat
 P81 delivered: [nt_cpu19-point review](r1021-r1039-nt-cpu-review.json), [lines](batch-p81-line-check.json), [checkpoint](batch-p81-checkpoint.json). Mirror188->118(-70);13 original restorations,5 qualified residuals,1 policy-retained excluded framework;final cached build,publish11x2,Full19 passed.
 
 P82 delivered: [nt_emm7-point review](r1040-r1046-nt-emm-review.json), [lines](batch-p82-line-check.json), [checkpoint](batch-p82-checkpoint.json). Mirror131->92(-39);7 residuals qualified;real controls0/AV/0;all5 directions/failures,cached build,publish11x2,Full19 passed.
+
+P83 audit-only: [nt_eoi R1047](r1047-nt-eoi-review.json);owner-approved hardware monitor declaration removal;diff delta0;176 actual selected-line matches. No source change;P82 runtime baseline unchanged.

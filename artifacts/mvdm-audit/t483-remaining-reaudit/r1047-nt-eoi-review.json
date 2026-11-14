@@ -1,0 +1,24 @@
+{
+  "review_id": "T483-R1047",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+  "source_sha256": "a5c144ad5d99806af6ed57b5cfb6aad92bc4e3474bc83f8be74942abc69be29d",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "scope": "+0/-4 original lines39-42; no source change",
+  "decision": "Owner-approved removal of unused hardware-monitor-only declarations;not an original runtime defect",
+  "evidence": [
+    "Original ThreadLookUp(CurrentMonitorTeb) use is inside MONITOR host_DelayHwInterrupt branch and calls NtVdmControl(VdmDelayInterrupt).",
+    "Actual cc_host selects CCPU and does not define MONITOR; original software branch uses add_q_event_i/DelayIrqQuickEvent/ica_RestartInterrupts.",
+    "Restoring unused declarations alone need not fail compilation/runtime; removal follows explicit owner instruction to remove hardware monitor remnants, not an invented original failure.",
+    "SoftPcEoi adapter is a previously completed S4 item, commit5a9ac0c9b;not reopened or counted as R1047 restoration. vrinit.c passes int*, ica.h declares IS32* (long*)."
+  ],
+  "line_check": {
+    "shared_selected_lines": 176,
+    "mismatches": [],
+    "original_selected": 180,
+    "current_selected": 181,
+    "scope": "Actual selected nt_eoi source lines; changed SoftPcEoi block excluded from common-line comparison"
+  },
+  "excluded_branches": "All existing #error and #line unchanged; actual selected common statements match original diagnostic lines",
+  "mirror_diff_delta": 0,
+  "validation": "Actual original/current preprocessing succeeded. No production source or artifact changed;P82 build/publication/Full19 remains baseline,not a new test claim."
+}
