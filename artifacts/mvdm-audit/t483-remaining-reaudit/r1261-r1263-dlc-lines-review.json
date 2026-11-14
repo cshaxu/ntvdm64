@@ -1,0 +1,105 @@
+{
+  "files": [
+    {
+      "id": "T483-R1261",
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+      "original_git_sha256": "43f521709deab8674adc094f3f4b84f101738b9a139844133b53a11adc7811ae",
+      "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "source_unchanged": true,
+      "mirror_delta": 0,
+      "line_proof": {
+        "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+        "shared_selected_lines": 431,
+        "line_mismatches": [],
+        "ambiguous_equal_text_matches_resolved_at_original_line": [],
+        "selected_changes": [],
+        "excluded_error_directives_unchanged": true
+      },
+      "metric": {
+        "dlc": {
+          "before": {
+            "added": 7,
+            "deleted": 23,
+            "total": 30
+          },
+          "after": {
+            "added": 7,
+            "deleted": 23,
+            "total": 30
+          }
+        }
+      },
+      "process": {
+        "script": "build/t483-s5-p122/controls.ps1",
+        "start": "2026-11-14T10:15:59.5584155-08:00",
+        "pid": 29780
+      }
+    },
+    {
+      "id": "T483-R1262",
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "sha256": "205baabd2d10ebeeb49a016c78634b7a4931c4ba961b009cd47cde0c1d53ebff",
+      "original_git_sha256": "17c445de87ce4ff3eaede4e751737f908eb0b47e73ec26c656a4adb1eea509ab",
+      "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "source_unchanged": true,
+      "mirror_delta": 0,
+      "line_proof": {
+        "retained_macro_lines": [
+          185,
+          186
+        ],
+        "after_endif_line": 188,
+        "unchanged_prefix_and_selected_else": true,
+        "excluded_bodies": 1,
+        "actual_product_consumers": [
+          "vrdlc5c.c",
+          "vrdlcbuf.c",
+          "vrdlcpst.c"
+        ],
+        "limits": "Macros disappear from /P output;selected macro spellings and their logical lines verified directly against pinned original,with actual inclusion/branch markers in all3 product consumers."
+      }
+    },
+    {
+      "id": "T483-R1263",
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3",
+      "original_git_sha256": "95be2be838b4bdc875d7fca9062a2a574c09238080f08122e205337eb6838832",
+      "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "source_unchanged": true,
+      "mirror_delta": 0,
+      "line_proof": {
+        "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+        "shared_selected_lines": 1401,
+        "line_mismatches": [],
+        "ambiguous_equal_text_matches_resolved_at_original_line": [],
+        "selected_changes": [],
+        "excluded_error_directives_unchanged": true
+      },
+      "metric": {
+        "dlc": {
+          "before": {
+            "added": 19,
+            "deleted": 145,
+            "total": 164
+          },
+          "after": {
+            "added": 19,
+            "deleted": 145,
+            "total": 164
+          }
+        }
+      },
+      "process": {
+        "pid": 30252,
+        "script": "build/t483-s5-p122/post/controls.ps1",
+        "start": "2026-11-14T10:17:12.0862216-08:00"
+      }
+    }
+  ],
+  "initial_review": "All3 historical points describe logical-line drift. Whole-file pinned-original comparison finds only prescribed DBG exclusions and line directives.",
+  "counter_review": "LF-only original numbering and actual selected product preprocessing confirm no remaining line defect. Selected else bodies preserved;no functional adaptation added or removed. Header checked through all3 direct consumers.",
+  "disposition": "Confirmed already-correct subset and selected line mapping;no additional restoration or pending decision needed.",
+  "mirror_delta": 0,
+  "limitations": "No new runtime/provider claim;unchanged-source P118 build,published11x2 and Full19 reused."
+}
