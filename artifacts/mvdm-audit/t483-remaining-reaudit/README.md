@@ -792,3 +792,8 @@ P106 [nt_mouse whole-file review](r1176-r1183-nt-mouse-review.json):3 P66 restor
 Mirror706->698(-8),993 original lines exact,48 object sections/bindings equal;17 original coordinate cases pass.
 150/365 files;1187 reviewed,432 restored,8 approved,747 pending,1533 unreviewed.
 Comment/CRLF-only delivery reuses published P103.
+
+P107 [nt_msscs review](r1184-r1195-nt-msscs-review.json):whole-file delivered mirror171->129(-42).
+[Checkpoint](batch-p107-checkpoint.json);[line proof](batch-p107-line-check.json).
+151/365 files reviewed;1199 points:440 restored delivered,0 local,8 approved,751 pending,1521 unreviewed.
+Cached full build,publish11x2,Full19 and governance passed;Git delivery accompanies receipt.

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1187 points reviewed:432 restored delivered,0 local,8 approved,
-747 qualified pending,0 restores decided;1533 unreviewed. Files150/365 audited,215 remain.
+1199 points reviewed:440 restored delivered,0 local,8 approved,
+751 qualified pending,0 restores decided;1521 unreviewed. Files151/365 audited,214 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,9 +51,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P103 package `f5194129-5529-41d2-867a-4e125354b05a` published11x2; hashes match.
+P107 package `c2d6ec0e-0b2e-47db-8dbf-9612221ceb9a` published11x2; hashes match.
 Cached full x86/x64, Full19, CVID, WOW boundary143/private header9 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p103-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p107-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -101,6 +101,9 @@ P105 nt_mem.c mirror145->139(-6);no-binding/comment-only;P103 package unchanged.
 
 P106 nt_mouse.c mirror706->698(-8);comments/CRLF only;P103 package unchanged.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1176-r1183-nt-mouse-review.json).
+
+P107 nt_msscs.c mirror171->129(-42);cached build,publish11x2,Full19 passed.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p107-checkpoint.json).
 
 ## Remaining Scope
 
@@ -225,13 +228,11 @@ P75-P77 delivered;see indexed batch receipts for exact deltas and gates.
 P78:five files complete;mirror net-50;five restores delivered,one minimized residual.
 778 line checks0 mismatch;#error retained. Cached build,publish11x2,Full passed;Git delivery accompanies checkpoint;next R1005.
 
-P79:nt_bop.c10/10 complete;mirror329->188(-141);three restores delivered.
-Seven residuals pending;963 actual preprocessed lines match original;#error retained.
-Focused controls, cached build,publish11x2,Full passed;zero-delta P78 line correction included;next R1015.
+P79 delivered;[review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1005-r1014-nt-bop-review.json).
 
 P80:nt_cga6/6 reviewed;mirror353->338(-15),comments/lines only;build,publish11x2,Full19 passed;nextR1021.
 
-P81:nt_cpu19/19;mirror188->118(-70);13 restored,5 residuals,1 retained exclusion framework;final build,publish11x2,Full19 passed;nextR1040.
+P81 delivered;see active audit README batch receipts.
 
 P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,217 lines;build,publish11x2,Full19 passed;nextR1047.
 

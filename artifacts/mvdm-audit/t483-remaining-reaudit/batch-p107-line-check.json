@@ -1,0 +1,354 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+    "shared_selected_lines": 660,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            169,
+            "dw = GetSystemDirectoryA(buffer, sizeof(buffer));"
+          ],
+          [
+            170,
+            "if (!dw || dw >= sizeof(buffer)) {"
+          ]
+        ],
+        "after": [
+          [
+            169,
+            "dw = NtvdmGetSystemDirectoryA(buffer, sizeof(buffer));"
+          ],
+          [
+            170,
+            "if (!dw || dw + sizeof(\"\\\\ntio.sys\") > sizeof(buffer)) {"
+          ]
+        ]
+      },
+      {
+        "op": "delete",
+        "original": [
+          [
+            260,
+            "HANDLE hFile, hFind;"
+          ],
+          [
+            261,
+            "WIN32_FIND_DATA wfd;"
+          ],
+          [
+            262,
+            "char *pchIOSYS    =\"C:\\\\IO.SYS\";"
+          ],
+          [
+            263,
+            "char *pchMSDOSSYS =\"C:\\\\MSDOS.SYS\";"
+          ],
+          [
+            266,
+            "hFind = FindFirstFileA(pchMSDOSSYS, &wfd);"
+          ],
+          [
+            267,
+            "if (hFind == ((HANDLE)(LONG_PTR)-1)) {"
+          ],
+          [
+            268,
+            "hFind = FindFirstFileA(\"C:\\\\IBMDOS.SYS\", &wfd);"
+          ],
+          [
+            269,
+            "}"
+          ],
+          [
+            271,
+            "if (hFind != ((HANDLE)(LONG_PTR)-1)) {"
+          ],
+          [
+            272,
+            "FindClose(hFind);"
+          ],
+          [
+            273,
+            "}"
+          ],
+          [
+            274,
+            "else {"
+          ],
+          [
+            275,
+            "hFile = MvdmCreateFileA(pchMSDOSSYS,"
+          ],
+          [
+            276,
+            "0,"
+          ],
+          [
+            277,
+            "0x00000001 | 0x00000002,"
+          ],
+          [
+            278,
+            "((void *)0),"
+          ],
+          [
+            279,
+            "1,"
+          ],
+          [
+            280,
+            "0x00000002 |"
+          ],
+          [
+            281,
+            "0x00000004 |"
+          ],
+          [
+            282,
+            "0x00000001,"
+          ],
+          [
+            283,
+            "0);"
+          ],
+          [
+            284,
+            "if (hFile != ((HANDLE)(LONG_PTR)-1)) {"
+          ],
+          [
+            285,
+            "MvdmCloseConsoleHandle(hFile);"
+          ],
+          [
+            286,
+            "}"
+          ],
+          [
+            288,
+            "}"
+          ],
+          [
+            290,
+            "hFind = FindFirstFileA(pchIOSYS, &wfd);"
+          ],
+          [
+            291,
+            "if (hFind == ((HANDLE)(LONG_PTR)-1)) {"
+          ],
+          [
+            292,
+            "hFind = FindFirstFileA(\"C:\\\\IBMBIO.SYS\", &wfd);"
+          ],
+          [
+            293,
+            "}"
+          ],
+          [
+            295,
+            "if (hFind != ((HANDLE)(LONG_PTR)-1)) {"
+          ],
+          [
+            296,
+            "FindClose(hFind);"
+          ],
+          [
+            297,
+            "}"
+          ],
+          [
+            298,
+            "else {"
+          ],
+          [
+            299,
+            "hFile = MvdmCreateFileA(pchIOSYS,"
+          ],
+          [
+            300,
+            "0,"
+          ],
+          [
+            301,
+            "0x00000001 | 0x00000002,"
+          ],
+          [
+            302,
+            "((void *)0),"
+          ],
+          [
+            303,
+            "1,"
+          ],
+          [
+            304,
+            "0x00000002 |"
+          ],
+          [
+            305,
+            "0x00000004 |"
+          ],
+          [
+            306,
+            "0x00000001,"
+          ],
+          [
+            307,
+            "0);"
+          ],
+          [
+            308,
+            "if (hFile != ((HANDLE)(LONG_PTR)-1)) {"
+          ],
+          [
+            309,
+            "MvdmCloseConsoleHandle(hFile);"
+          ],
+          [
+            310,
+            "}"
+          ],
+          [
+            312,
+            "}"
+          ]
+        ],
+        "after": []
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            346,
+            "char config_sys_pathname[260];"
+          ]
+        ],
+        "after": [
+          [
+            346,
+            "char config_sys_pathname[260+12];"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            648,
+            "if (RegOpenKeyExA ( (( HKEY ) (ULONG_PTR)((long)0x80000002) ),"
+          ]
+        ],
+        "after": [
+          [
+            648,
+            "if (ntvdm_shadow_reg_open_key_ex ( (( HKEY ) (ULONG_PTR)((long)0x80000002) ),"
+          ]
+        ]
+      },
+      {
+        "op": "delete",
+        "original": [
+          [
+            654,
+            "RcErrorDialogBox(341, pKeyName, ((void *)0));"
+          ]
+        ],
+        "after": []
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            661,
+            "if (RegQueryInfoKeyA (VDDKey,"
+          ]
+        ],
+        "after": [
+          [
+            661,
+            "if (ntvdm_shadow_reg_query_info_key (VDDKey,"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            675,
+            "RegCloseKey (VDDKey);"
+          ]
+        ],
+        "after": [
+          [
+            675,
+            "ntvdm_shadow_reg_close_key (VDDKey);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            683,
+            "RegCloseKey (VDDKey);"
+          ]
+        ],
+        "after": [
+          [
+            683,
+            "ntvdm_shadow_reg_close_key (VDDKey);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            689,
+            "if (RegQueryValueExA (VDDKey,"
+          ]
+        ],
+        "after": [
+          [
+            689,
+            "if (ntvdm_shadow_reg_query_value_ex (VDDKey,"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            697,
+            "RegCloseKey (VDDKey);"
+          ]
+        ],
+        "after": [
+          [
+            697,
+            "ntvdm_shadow_reg_close_key (VDDKey);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            711,
+            "RegCloseKey (VDDKey);"
+          ]
+        ],
+        "after": [
+          [
+            711,
+            "ntvdm_shadow_reg_close_key (VDDKey);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": false
+  }
+]

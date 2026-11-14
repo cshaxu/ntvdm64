@@ -1,0 +1,413 @@
+{
+  "scope": "M0 T483 S5 P107;whole nt_msscs.c",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_msscs.c",
+  "evidence": {
+    "R1184": "Original GetPIFConfigFiles call discards void return; actual MSVC x86 object sections/relocations unchanged without added nt_pif.h. C4013 alone is not failure.",
+    "R1185": "lim_page_frame_init original return is IBOOL=int and ignored by caller; no ABI difference without prototype; remove prototype/comments. Firmware binding and layered registry header remain necessary: native SystemDirectory is modern OS, and native registry ignores approved NTVDM.REG overlay. Residual headers remain pending, not justified by circular include dependency.",
+    "R1186": "PCHAR versus host_addr casts have same native pointer representation at selected sas_loads ABI; declaration/cast control32 object sections equal. Restore PCHAR.",
+    "R1187": "Comment described host-ISA confusion, but actual supported commands leave i386 undefined. Original outer !i386 already selects software CPU; comment removed.",
+    "R1188": "Restore original MIPS_BIT_MASK statement and remove redundant project CPU_40_STYLE inner selector. No selection or value change in actual supported CCPU build.",
+    "R1189": "Original i386 hardware body is already excluded by#error. Keep original outer branch framework and#error; no hardware code restored. Point retires as no remaining selected-code deviation.",
+    "R1190": "Remove locally added redundant nested selector closure; preserve original i386 boundary and#line128.",
+    "R1191": "Restore original GetSystemDirectory-shaped directory retrieval, error text, CreateFile/size/read/SAS flow. NtvdmGetSystemDirectoryA supplies selected immutable installation system32, not modern host system32. Keep suffix-inclusive capacity check to retain previous helper bounded-write contract. No new adapter.",
+    "R1192": "TerminateVDM->terminate->host_terminate->ExitProcess never returns on selected product path; repeated termination also calls exit. Remove added unreachable return(-1).",
+    "R1193": "Original strcat(buffer,\"\\ntio.sys\") restored after bounded selected-directory retrieval; CreateFile owns missing-file result again.",
+    "R1194": "Original nt_pif.c GetPIFConfigFiles documents MAX_PATH+8.3 and calls ExpandEnvironmentStringsOem with MAX_PATH+12. Original MAX_PATH caller cannot hold all allowed output. Keep +12, remove comment; no new storage/state.",
+    "R1195": "Read-only admitted VirtualDeviceDrivers key is absent in current host (Test-Path false). Absence is supported no-VDD installation, not corrupt NT4 setup. Preserve omission of installation-error popup; restore original RegOpenKeyEx layout and KEY_QUERY_VALUE. Facade explicitly ignores access and delegates same read-only projection; downstream query failures unchanged. Scope: current omission still suppresses every open-failure dialog, preserving pre-batch behavior. Evidence requires no dialog for missing optional key only, not allocation/access failures. Narrowing suppression to ERROR_FILE_NOT_FOUND would require extra result capture/condition and net-increase versus the minimized one-line omission; this is an explicit owner decision, not a claimed universal necessity."
+  },
+  "restored": [
+    1184,
+    1186,
+    1187,
+    1188,
+    1189,
+    1190,
+    1192,
+    1193
+  ],
+  "residual": [
+    1185,
+    1191,
+    1194,
+    1195
+  ],
+  "mirror": {
+    "nt_msscs": {
+      "before": {
+        "added": 55,
+        "deleted": 116,
+        "total": 171
+      },
+      "after": {
+        "added": 25,
+        "deleted": 104,
+        "total": 129
+      }
+    }
+  },
+  "mirror_diff_delta": -42,
+  "line_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "shared_selected_lines": 660,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              169,
+              "dw = GetSystemDirectoryA(buffer, sizeof(buffer));"
+            ],
+            [
+              170,
+              "if (!dw || dw >= sizeof(buffer)) {"
+            ]
+          ],
+          "after": [
+            [
+              169,
+              "dw = NtvdmGetSystemDirectoryA(buffer, sizeof(buffer));"
+            ],
+            [
+              170,
+              "if (!dw || dw + sizeof(\"\\\\ntio.sys\") > sizeof(buffer)) {"
+            ]
+          ]
+        },
+        {
+          "op": "delete",
+          "original": [
+            [
+              260,
+              "HANDLE hFile, hFind;"
+            ],
+            [
+              261,
+              "WIN32_FIND_DATA wfd;"
+            ],
+            [
+              262,
+              "char *pchIOSYS    =\"C:\\\\IO.SYS\";"
+            ],
+            [
+              263,
+              "char *pchMSDOSSYS =\"C:\\\\MSDOS.SYS\";"
+            ],
+            [
+              266,
+              "hFind = FindFirstFileA(pchMSDOSSYS, &wfd);"
+            ],
+            [
+              267,
+              "if (hFind == ((HANDLE)(LONG_PTR)-1)) {"
+            ],
+            [
+              268,
+              "hFind = FindFirstFileA(\"C:\\\\IBMDOS.SYS\", &wfd);"
+            ],
+            [
+              269,
+              "}"
+            ],
+            [
+              271,
+              "if (hFind != ((HANDLE)(LONG_PTR)-1)) {"
+            ],
+            [
+              272,
+              "FindClose(hFind);"
+            ],
+            [
+              273,
+              "}"
+            ],
+            [
+              274,
+              "else {"
+            ],
+            [
+              275,
+              "hFile = MvdmCreateFileA(pchMSDOSSYS,"
+            ],
+            [
+              276,
+              "0,"
+            ],
+            [
+              277,
+              "0x00000001 | 0x00000002,"
+            ],
+            [
+              278,
+              "((void *)0),"
+            ],
+            [
+              279,
+              "1,"
+            ],
+            [
+              280,
+              "0x00000002 |"
+            ],
+            [
+              281,
+              "0x00000004 |"
+            ],
+            [
+              282,
+              "0x00000001,"
+            ],
+            [
+              283,
+              "0);"
+            ],
+            [
+              284,
+              "if (hFile != ((HANDLE)(LONG_PTR)-1)) {"
+            ],
+            [
+              285,
+              "MvdmCloseConsoleHandle(hFile);"
+            ],
+            [
+              286,
+              "}"
+            ],
+            [
+              288,
+              "}"
+            ],
+            [
+              290,
+              "hFind = FindFirstFileA(pchIOSYS, &wfd);"
+            ],
+            [
+              291,
+              "if (hFind == ((HANDLE)(LONG_PTR)-1)) {"
+            ],
+            [
+              292,
+              "hFind = FindFirstFileA(\"C:\\\\IBMBIO.SYS\", &wfd);"
+            ],
+            [
+              293,
+              "}"
+            ],
+            [
+              295,
+              "if (hFind != ((HANDLE)(LONG_PTR)-1)) {"
+            ],
+            [
+              296,
+              "FindClose(hFind);"
+            ],
+            [
+              297,
+              "}"
+            ],
+            [
+              298,
+              "else {"
+            ],
+            [
+              299,
+              "hFile = MvdmCreateFileA(pchIOSYS,"
+            ],
+            [
+              300,
+              "0,"
+            ],
+            [
+              301,
+              "0x00000001 | 0x00000002,"
+            ],
+            [
+              302,
+              "((void *)0),"
+            ],
+            [
+              303,
+              "1,"
+            ],
+            [
+              304,
+              "0x00000002 |"
+            ],
+            [
+              305,
+              "0x00000004 |"
+            ],
+            [
+              306,
+              "0x00000001,"
+            ],
+            [
+              307,
+              "0);"
+            ],
+            [
+              308,
+              "if (hFile != ((HANDLE)(LONG_PTR)-1)) {"
+            ],
+            [
+              309,
+              "MvdmCloseConsoleHandle(hFile);"
+            ],
+            [
+              310,
+              "}"
+            ],
+            [
+              312,
+              "}"
+            ]
+          ],
+          "after": []
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              346,
+              "char config_sys_pathname[260];"
+            ]
+          ],
+          "after": [
+            [
+              346,
+              "char config_sys_pathname[260+12];"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              648,
+              "if (RegOpenKeyExA ( (( HKEY ) (ULONG_PTR)((long)0x80000002) ),"
+            ]
+          ],
+          "after": [
+            [
+              648,
+              "if (ntvdm_shadow_reg_open_key_ex ( (( HKEY ) (ULONG_PTR)((long)0x80000002) ),"
+            ]
+          ]
+        },
+        {
+          "op": "delete",
+          "original": [
+            [
+              654,
+              "RcErrorDialogBox(341, pKeyName, ((void *)0));"
+            ]
+          ],
+          "after": []
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              661,
+              "if (RegQueryInfoKeyA (VDDKey,"
+            ]
+          ],
+          "after": [
+            [
+              661,
+              "if (ntvdm_shadow_reg_query_info_key (VDDKey,"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              675,
+              "RegCloseKey (VDDKey);"
+            ]
+          ],
+          "after": [
+            [
+              675,
+              "ntvdm_shadow_reg_close_key (VDDKey);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              683,
+              "RegCloseKey (VDDKey);"
+            ]
+          ],
+          "after": [
+            [
+              683,
+              "ntvdm_shadow_reg_close_key (VDDKey);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              689,
+              "if (RegQueryValueExA (VDDKey,"
+            ]
+          ],
+          "after": [
+            [
+              689,
+              "if (ntvdm_shadow_reg_query_value_ex (VDDKey,"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              697,
+              "RegCloseKey (VDDKey);"
+            ]
+          ],
+          "after": [
+            [
+              697,
+              "ntvdm_shadow_reg_close_key (VDDKey);"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              711,
+              "RegCloseKey (VDDKey);"
+            ]
+          ],
+          "after": [
+            [
+              711,
+              "ntvdm_shadow_reg_close_key (VDDKey);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": false
+    }
+  ],
+  "object_control": {
+    "non_debug_sections_equal": true,
+    "before_sections": 32,
+    "candidate_sections": 32,
+    "differences": []
+  },
+  "error_exclusion": "Original excluded branches remain. One extra project-only non-CPU40#error and its redundant selector removed; original !i386 already owns supported software selection.",
+  "status": "Whole-file restoration built,published11x2 and Full19 passed;Git delivery accompanies receipt",
+  "sha256": "97989e20250ea2e3b97e6321316d7104e8d8fd3de1e8fa8713b76031740234cf",
+  "delivery": "batch-p107-checkpoint.json"
+}

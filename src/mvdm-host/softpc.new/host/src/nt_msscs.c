@@ -30,7 +30,6 @@
 #include "nt_graph.h"
 #include "nt_event.h"
 #include "nt_reset.h"
-#include "nt_pif.h"
 #line 33
 #include "config.h"
 #include <nt_vdd.h>   // DO NOT USE vddsvc.h
@@ -43,11 +42,6 @@
 #include "mvdm_softpc_firmware.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
-/* DIVERGENCE(MVDM-HOST-DIV-084): `emm_mngr.c` is a selected original DOS
- * owner but no selected public header carries its page-frame initializer.
- * Publish its exact original boolean/LIM configuration contract here; the
- * function and its EMS page-frame behavior remain in the original package. */
-extern boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data);
 
 #line 41
 PMEM_HOOK_DATA MemHookHead = NULL;
@@ -130,24 +124,11 @@ InitialiseDosEmulation(int argc, char **argv)
     //
 
     sas_loads((ULONG)FIXED_NTVDMSTATE_LINEAR,
-              (host_addr)&fVirtualInt,
+              (PCHAR)&fVirtualInt,
               FIXED_NTVDMSTATE_SIZE
               );
-    /* DIVERGENCE(MVDM-HOST-DIV-039): in the original build, `i386` selected
-     * NT's kernel-V86 monitor while the non-i386 body selected the software
-     * CCPU machine.  This product deliberately selects CPU_40_STYLE on an
-     * x86 host, so preserve the original software-CPU state transition based
-     * on the machine owner rather than host ISA.  MIPS_BIT_MASK here names
-     * the historical FSTI/FCLI fallback selector; it does not enable MIPS
-     * guest code or a second CPU.
-     */
 #ifndef i386
-#ifdef CPU_40_STYLE
-    fVirtualInt |= MIPS_BIT_MASK;
-#else
-#line 124
-#error Excluded unsupported non-CPU40 virtual interrupt state
-#endif
+    fVirtualInt |=  MIPS_BIT_MASK;
 #else
 #line 126
 #error Unsupported excluded original configuration
@@ -195,19 +176,15 @@ InitialiseDosEmulation(int argc, char **argv)
 
      /*................................................. Load DOSEM code */
 
-     /* DIVERGENCE: MVDM-HOST-DIV-038. The original location is the NT4
-      * system directory. The original session owns a selected immutable DOS
-      * system root instead; retain the following original file/size/read/SAS
-      * and CS:IP sequence unchanged. */
-     if (!mvdm_softpc_system_find_file("ntio.sys", buffer, sizeof(buffer))) {
-         host_error(EG_OWNUP, ERR_QUIT, "ntio.sys");
-#line 172
+#line 169
+     dw = NtvdmGetSystemDirectoryA(buffer, sizeof(buffer));
+     if (!dw || dw + sizeof("\\ntio.sys") > sizeof(buffer)) {
+         host_error(EG_OWNUP, ERR_QUIT, "NTVDM:InitialiseDosEmulation fails");
          TerminateVDM();
-         return (-1);
-#line 173
          }
 
-#line 177
+     strcat(buffer, "\\ntio.sys");
+
      hFile = CreateFile(buffer,
                         GENERIC_READ,
                         FILE_SHARE_READ,
@@ -338,7 +315,6 @@ void AddSystemFiles(void)
 
 boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
 {
-    /* DIVERGENCE(MVDM-HOST-DIV-278): match GetPIFConfigFiles' output contract. */
     char config_sys_pathname[MAX_PATH+12];
 #line 347
     HANDLE  handle;
@@ -645,11 +621,16 @@ PCHAR  pszName,pszValue;
 FILETIME ft;
 PCHAR  pKeyName = "SYSTEM\\CurrentControlSet\\Control\\VirtualDeviceDrivers";
 
-    /* DIVERGENCE(MVDM-HOST-DIV-148): retain the original open/query/close
-     * sequence. Its local include returns a private layered handle: NTVDM.REG
-     * overrides the admitted read-only HKLM snapshot, never a native handle. */
-    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, pKeyName, 0, KEY_READ, &VDDKey) !=
-        ERROR_SUCCESS) return;
+#line 648
+    if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
+                       pKeyName,
+		       0,
+		       KEY_QUERY_VALUE,
+		       &VDDKey
+		     ) != ERROR_SUCCESS){
+#line 655
+        return;
+    }
 
 #line 658
     pszName = "VDD";
