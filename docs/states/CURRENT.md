@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-829 points reviewed:316 restored/verified/published,0 local pending delivery,
-2 approved retain,511 qualified pending decisions. Another1891 points unreviewed.
-Sequential file disposition is110/365;255 remain.
+841 points reviewed:316 restored/verified/published,3 local pending delivery,
+2 approved retain,520 qualified pending decisions. Another1879 points unreviewed.
+Sequential file disposition is115/365;250 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -157,34 +157,7 @@ The owner's consolidated [17 execution rules](../rules/EXECUTION.md#original-fir
 now govern this packet, superseding earlier minimization-approval restrictions.
 Residual minimized differences remain pending; final-code verification is required.
 
-## Current P9 Batch
-
-Delivered in275d6e029: original DTA chain and ntdddisk include, mirror diff net-85.
-Cached build, both-location publication, Full16 and FCB enumeration passed.
-See [P9 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p9-checkpoint.json).
-
-## Current P10 Batch
-
-Delivered in8a0a55ff3: original PDB/SFT chain, mirror diff net-143;14 points restored.
-Cached build, both-location publication, Full16 and FCB enumeration passed.
-See [P10 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p10-checkpoint.json).
-
-## Current P11 Batch
-
-Delivered in858af5e7c: original software-CPU slow-I/O selection makes the added
-fast-I/O fallback redundant. R0076-R0078 restored; mirror diff net-15. Initial
-retention proof was withdrawn before publication after upstream-gate review.
-Final build/publication/Full16 passed. Format-only final blank-line restoration
-preserves nonblank content and logical lines. See
-[P11 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p11-checkpoint.json).
-
-## Delivered P12 Audit And Format Batch
-
-Original-byte/line checks and the R0098 label proof are retained in the
-[P12 checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p12-checkpoint.json).
-Its nonbehavioral changes reused P11 runtime evidence; no new guest pass claimed.
-
-P13 delivered; [review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0102-r0113-requalification.json) and [receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p13-checkpoint.json).
+P9-P13 delivered; per-batch receipts remain indexed in the active audit README.
 
 ## P17 Completed File Batch
 
@@ -245,3 +218,5 @@ Latest published package is e08de2fa-ed4f-409e-bf87-376e59bb3756; Full19 passed,
 and the owner accepts the RDP input fix. The reported exit is suspected to be
 concurrent-test interference; causality is unconfirmed. See the
 [RDP checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/rdp-input-checkpoint.json).
+
+P68 terminat.c2/2,xt.c4/4,ica.c3/3,idetect.c1/1:plus cga.c2/2;mirror diff-31;cached build/publish11x2/Full passed;Git delivery accompanies this record;next R0835.

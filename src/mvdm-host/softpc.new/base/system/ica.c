@@ -838,12 +838,12 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 #ifdef NTVDM
     IU8 canceled;		/* Device ownership retired by ICW1 reset */
 #endif
+#line 868
 
     /*
      * First check the validity of the port
      */
 
-#line 873
     if ((port & 0xfffe) != ICA_PORT_0)
     {
 #ifndef PROD
@@ -860,12 +860,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 
     if (((port & 1) == 0) && (value & 0x10))		/****  ICW1  ****/
     {
-	/* DIVERGENCE(MVDM-HOST-DIV-460): ICW1 retires the PIC's pending
-	 * and in-service ownership, but the original standalone reset did not
-	 * notify the NT device EOI gates. Snapshot before clearing, then send
-	 * their existing cancellation notification while the ICA critical section
-	 * excludes a heartbeat/device race. A callback can publish a new request;
-	 * that request is deliberately not part of this retired snapshot. */
 #ifdef NTVDM
 	host_ica_lock();
 	canceled = asp->ica_irr | asp->ica_isr;
@@ -894,7 +888,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 		host_EOI_hook(i + (adapter << 3), -1);
 	host_ica_unlock();
 #endif
-
 #line 908
 #ifndef PROD
 #line 909
@@ -1429,7 +1422,7 @@ ica_intack IFN1(IU32 *, hook_address)
 #error Excluded unsupported monitor PIC IRET hook
 #else
 
-#line 1545
+#line 1799
 /*
  *  obsolete, to be removed... but the current ntvdm emulator libs ref
  * */

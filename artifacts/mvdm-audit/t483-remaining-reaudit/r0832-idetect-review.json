@@ -1,0 +1,14 @@
+{
+  "point": "R0832",
+  "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+  "before": 138,
+  "after": 137,
+  "mirror_diff_delta": -1,
+  "remaining": "+0/-1",
+  "proof": "Original ../../../../inc/vdm.h relative to source resolves src/inc/vdm.h, absent. Isolated actual product compiler command with original source-directory search: original-path C1083 exit2, current include exit0, omission exit0. VDM_IDLEACTIVITY consumers reside only in excluded MONITOR blocks. Object code/data/directives and resolved relocation symbols match current include; only .debug$S/.chks64 metadata differ. No shadow header, relocation or shim required.",
+  "decision": "remove unnecessary replacement include; remaining original omission pending owner",
+  "line_check": "Existing #line215 advanced to216 after removal; subsequent logical lines unchanged; #error identical; original CRLF restored",
+  "verification": "build/t483-s5-p68/idetect-r2-job.json PID5608;idetect-{base,original,omit}.exit=0,2,0;idetect-object-proof.json",
+  "limits": "Isolated copy adds original source directory to include search so original relative resolution is exercised. No fresh full build/runtime pass; no selected binding change proved by object comparison.",
+  "delivery": "P68 cached full, dual publication and Full gates passed; batch-p68-checkpoint.json"
+}

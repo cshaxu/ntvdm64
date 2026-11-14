@@ -204,8 +204,7 @@ void idle_tick();
 #line 203
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
-#line 215
-#include <vdm.h>
+#line 216
   
 /*  NTVDM
  *  Some of our static global variables are located in 16 bit memory area

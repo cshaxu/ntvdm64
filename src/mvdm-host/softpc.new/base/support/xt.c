@@ -72,14 +72,6 @@ half_word ica_lock;
  * The actual CCPU registers
  */
 
-/*
- * DIVERGENCE(MVDM-HOST-DIV-147): this declaration block is the legacy
- * x86 monitor register store.  The selected CPU_40_STYLE CCPU executor owns
- * its register, descriptor and machine-status state privately in c_main.c;
- * defining this second store would neither bind to it nor preserve event
- * delivery.  Keep the original shared support data and routines below, but
- * exclude only this obsolete CPU-state carrier from the CPU40 build.
- */
 #if defined(CCPU) && !defined(CPU_30_STYLE)
 #if defined(CCPU) && !defined(CPU_40_STYLE)
 #line 76
@@ -105,17 +97,11 @@ int verbose;			/* TRUE => trace instructions   */
 #line 159
 #error Excluded original conditional branch
 #endif /* CPU_30_STYLE */
-#line 340
+#line 342
 /*
  * The following is a table lookup for finding parity of a byte
  */
 
-/*
- * DIVERGENCE(MVDM-HOST-DIV-155): CPU40 CCPU owns this table in c_main.c.
- * The historical support copy serves the non-CCPU monitor path; retaining it
- * in the selected CCPU40 product produces a second provider with no distinct
- * consumer. Unsupported non-CPU40 profiles are rejected below.
- */
 #if !defined(MAC_LIKE) && !defined(CPU_30_STYLE)
 #if !defined(MAC_LIKE) && !defined(CPU_40_STYLE)
 #line 347

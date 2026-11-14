@@ -1,0 +1,22 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/support/terminat.c",
+  "points": [
+    "R0823",
+    "R0824"
+  ],
+  "before": 75,
+  "after": 72,
+  "mirror_diff_delta": -3,
+  "decision": "minimized residual declaration/call pending owner",
+  "proof": "Original terminate checks static already_called_terminate then shuts down devices before host_applClose. Current worker_lifecycle worker_instruction/console_instruction can enter original TerminateVDM on a different thread; natural original host callers also invoke it. Without early ownership gate, a second entrant sees already_called and executes original exit(0), bypassing first cleanup and service coordination. Later host_applClose authorization cannot protect the earlier shortcut. The existing early gate serializes entry, waits for service instruction and joins VM frontend producers. Original has no equivalent service/lifetime owner. This proves the entry boundary, not every implementation detail inside worker_lifecycle.",
+  "limits": "Source-level eligible ordering counterexample, not reproduced runtime race. Existing console_client_test natural-exit/loss/console cases prove provider waits and same-thread recurrence only, not mirror callsite necessity.",
+  "minimization": "Remove two explanations and one extra blank; retain one declaration and one call; no transferred logic or new shim.",
+  "line_check": {
+    "matching_blocks_minimum": 3,
+    "mismatches": [],
+    "excluded_errors_unchanged": true
+  },
+  "verification": "Executable tokens unchanged; existing P67/combined package evidence retained; no fresh runtime claim",
+  "delivery": "P68 cached full, dual publication and Full gates passed; batch-p68-checkpoint.json",
+  "byte_format": "Original CRLF restored; normalized mirror delta remains -3."
+}

@@ -1,0 +1,18 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "points": [
+    "R0825",
+    "R0826",
+    "R0827",
+    "R0828"
+  ],
+  "before": 545,
+  "after": 531,
+  "mirror_diff_delta": -14,
+  "register_proof": "Actual xt.obj compiler parameters: current source exits0; only restoring original register block exits2 with C2061/C2059 at mreg MSW. CPU40 c_reg.h and c_main use CCPU_GR/SR/FLAGS. Original block is old CCPU, not hardware monitor.",
+  "parity_proof": "Original xt.c and c_main.c parity arrays each contain256 identical values. Production ntvdm.exe.map attributes _pf_table to original-ccpu386:c_main.obj. Original xt.c would introduce a second initialized external definition. No distinct provider or missing table.",
+  "changes": "Removed8-line register and6-line parity explanations; restored CRLF. Corrected existing #line340 to342 for original parity comment. Original guards and #error unchanged.",
+  "line_mismatches": [],
+  "verification": "build/t483-s5-p68/current.exit=0;original-registers.exit=2;PID22440. Parity source/map proof, not fresh duplicate-link test. Selected code unchanged; no new runtime pass.",
+  "delivery": "P68 cached full, dual publication and Full gates passed; batch-p68-checkpoint.json"
+}

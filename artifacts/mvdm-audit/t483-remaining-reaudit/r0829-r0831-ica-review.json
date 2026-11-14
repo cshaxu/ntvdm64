@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+  "points": [
+    "R0829",
+    "R0830",
+    "R0831"
+  ],
+  "before": 1164,
+  "after": 1157,
+  "mirror_diff_delta": -7,
+  "proof": "Original ICW1 clears IRR/ISR/count without notifying device EOI gates. TimerGenerateMultipleInterrupts submits no new IRQ while EoiPending is set; original TimerEoiHook negative count clears that gate/backlog. Original SWPIC_clear_int already invokes host_EOI_hook(irq,-1) for withdrawn IRQ. Resetting ISR also removes its future normal EOI. Existing recursive ICA lock serializes reset with devices; pre-reset snapshot preserves callback-requeued new requests. Controller-local IRQ offset preserves cascade ownership.",
+  "alternatives": "Direct timer state clearing, guest special cases or a second state machine are unnecessary; moving loop to shim only transfers complexity.",
+  "evidence": [
+    "docs/etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md",
+    "test/mvdm-host/pic_reset_eoi_test.c",
+    "build/t483-s5-p68/pic.log"
+  ],
+  "verification": "Existing production-object fixture rerun:24 assertions0 failures exit0 PID32624; selected tokens unchanged. Historical real DOS IRQ0 controls not rerun.",
+  "line_mismatches": [],
+  "error_unchanged": true,
+  "changes": "Remove6-line explanation and1 blank; move existing #line873 to868 ahead of original comment;correct stale#line1545 to1799. CRLF retained.",
+  "delivery": "P68 cached full, dual publication and Full gates passed; batch-p68-checkpoint.json",
+  "metric": "Original-relative normalized CRLF diff; split only on LF, preserving historical formfeed bytes. Earlier splitlines absolute counts corrected; delta unchanged."
+}

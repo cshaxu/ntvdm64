@@ -662,3 +662,15 @@ P67 [delivery checkpoint](batch-p67-checkpoint.json): cached build, dual publica
 [MVDM-HOST-DIV-901: Console font restoration](div-901-console-font-restore.json) is recorded in the pending decision tracker as implemented and published, with long-term retention still pending. Its +10/-0 physical lines are a new owner-requested bug repair, separate from the frozen 2720-point R census; this registration does not advance the ordered audit or mark retention approved.
 
 [RDP input checkpoint](rdp-input-checkpoint.json) records the current published adaptation and Full19 pass, with the owner subsequently accepting the input fix and requesting its retention. The exit is suspected to be test interference; the service-identity collision hypothesis was not established by the attempted probe.
+
+P68 [terminat.c review](r0823-r0824-terminat-review.json): minimal cleanup entry retained pending owner; comment-only mirror diff-3.
+
+P68 [xt.c review](r0825-r0828-xt-review.json): original register control fails compilation; duplicate parity provider excluded; added comments removed, mirror diff-14.
+
+P68 [ica.c review](r0829-r0831-ica-review.json): PIC reset/EOI proof and24 passing production-object assertions;format-only mirror diff-7.
+
+P68 [idetect.c review](r0832-idetect-review.json): unnecessary replacement include removed; original path fails, omission preserves code/data/relocations;mirror diff-1.
+
+P68 [cga.c review](r0833-r0834-cga-review.json): original function-pointer definitions restored, object equivalence proved;mirror diff-6.
+
+P68 [delivery receipt](batch-p68-checkpoint.json) and [line checks](batch-p68-line-check.json): five mirror files, original-relative diff net-31; cached build passed and 11 images published to both destinations; Full passed; Git delivery accompanies this receipt.

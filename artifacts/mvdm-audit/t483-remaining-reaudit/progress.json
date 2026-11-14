@@ -15,39 +15,41 @@
     "already-byte-identical-to-original": 1
   },
   "completed": 2,
-  "pending": 1891,
-  "next": "T483-R0823",
+  "pending": 1879,
+  "next": "T483-R0835",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
     "Existing evidence is a lead, not accepted necessity proof. Closed items and absent files are not reopened.",
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
-  "awaiting_owner_approval": 511,
-  "reviewed": 829,
+  "awaiting_owner_approval": 520,
+  "reviewed": 841,
   "restored_pending_delivery": 0,
   "batch_modified_implementation_files": 0,
-  "batch_mirror_diff_delta": -18,
+  "batch_mirror_diff_delta": -31,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
-  "pending_decisions": 511,
-  "restored_verified_published": 316,
-  "last_batch_mirror_diff_delta": -18,
-  "last_delivery": "batch-p67-checkpoint.json",
+  "pending_decisions": 520,
+  "restored_verified_published": 319,
+  "last_batch_mirror_diff_delta": -31,
+  "last_delivery": "batch-p68-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
-  "qualified_pending_decisions": 511,
-  "pending_decisions_count_note": "511 qualified residual R IDs; no local restorations awaiting delivery. Supplemental DIV-901 is tracked separately from the frozen census.",
-  "active_rework": "P67 verified/published; owner-authorized combined Git delivery",
-  "active_investigation": "Next ordered point R0823; RDP user-reported instability separately remains unresolved.",
+  "qualified_pending_decisions": 520,
+  "pending_decisions_count_note": "520 qualified residual R IDs;319 restored verified/published; supplemental DIV-901 separate.",
+  "active_rework": "P68 complete; next ordered audit R0835",
+  "active_investigation": "Next ordered file at R0835",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 110,
-  "sequential_files_remaining": 255,
-  "batch_modified_mirror_files": 2,
+  "sequential_files_disposition_complete": 115,
+  "sequential_files_remaining": 250,
+  "batch_modified_mirror_files": 5,
   "batch_format_only_files": [
-    "src/mvdm-host/softpc.new/base/support/ios.c"
+    "src/mvdm-host/softpc.new/base/support/terminat.c",
+    "src/mvdm-host/softpc.new/base/support/xt.c",
+    "src/mvdm-host/softpc.new/base/system/ica.c"
   ],
   "partial_restoration_pending_delivery": [],
   "new_baseline_gap_evidence": "r0642-r0647-vram-copy-review.json",
@@ -59,6 +61,6 @@
       "delivery": "P66 paired ABI restoration delivered;later file audit not claimed"
     }
   ],
-  "batch_line_only_mirror_delta": -1,
-  "batch_point_metric_reconciliation": 2
+  "batch_line_only_mirror_delta": 0,
+  "batch_point_metric_reconciliation": 0
 }
