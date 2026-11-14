@@ -1,0 +1,48 @@
+{
+  "status": "source audit only;no product change",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "source_sha256": "64f56b674ce1cbb6f3f70cd2baf269e51cdafbdfa3faad82d4898a2d62d0fce9",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c/base/mvdm/softpc.new/host/src/nt_fulsc.c",
+  "points": [
+    {
+      "id": "T483-R1114",
+      "original_lines": "1215-1402",
+      "registered_scale": "+2/-188",
+      "problem": "Exclude hardware text-to-graphics and fullscreen handshake,retain original state getter",
+      "evidence": "Original TextToGraphics invokes foreground focus waits and SetConsoleDisplayMode(CONSOLE_FULLSCREEN_MODE);CheckForFullscreenSwitch disables software updates for FULLSCREEN and manages physical Console handshakes. These are X86GFX hardware responsibilities. Current product deliberately excludes X86GFX but still requires original getNtScreenState from keybd_io.c keyboard initialization (useHostInt10 assignment). Restoring the enclosing original X86GFX extent hides that required symbol;activating it would reintroduce prohibited hardware rendering.",
+      "minimum": "Preserve X86GFX #error and the small original getter outside that exclusion;no emulated hardware handshake."
+    },
+    {
+      "id": "T483-R1115",
+      "original_lines": "1415-1463",
+      "registered_scale": "+2/-49",
+      "problem": "Keep hardware BIOS mode-switch hook excluded",
+      "evidence": "Original hostModeChange reads guest AL and calls TextToGraphics for graphics modes. Its entire definition is under X86GFX and depends on hardware fullscreen signaling;current software VGA selects its mode through original video implementation and copied frontend. No selected caller to hardware TextToGraphics/hostModeChange exists. Original #error exclusion must remain by owner policy.",
+      "minimum": "Preserve excluded original outer frame and #error;no original hardware revival."
+    },
+    {
+      "id": "T483-R1116",
+      "original_lines": "1878",
+      "registered_scale": "+1/-1",
+      "problem": "Copy console cells into shared planar CHAIN2 backing",
+      "evidence": "copyConsoleToRegen first increments to after character then stores attribute. Current +=7 therefore advances8 bytes per cell;original +=3 advances4. Shared backing is4*(CPU-address&~1)+(CPU-address&1),so cells at CPU addresses0,2,4 begin0,8,16. Existing r0502 source and actual generated-reader controls prove original compact mapping fails12/16 positions across shared planes;prior guest VDD unchained save lost alternating characters. nt_cga and get_chain2_screen_ptr consume this same backing. Reverting only the increment misplaces every cell after the first;reverting whole layout revives cross-mode defect.",
+      "minimum": "One constant replacement is minimal;no new copy buffer/repacking state. Retain pending owner."
+    }
+  ],
+  "evidence_links": [
+    "r0502-chain2-byte-address-review.json",
+    "../t483-remaining-reaudit/batch-p91-checkpoint.json"
+  ],
+  "source_chain": [
+    "keybd_io.c -> getNtScreenState -> sc.ScreenState",
+    "TextToGraphics -> SetConsoleDisplayMode hardware mode",
+    "CheckForFullscreenSwitch -> disableUpdates on hardware FULLSCREEN",
+    "copyConsoleToRegen -> EGA_planes;get_chain2_screen_ptr/nt_cga -> same shared planes"
+  ],
+  "counter_review": [
+    "Original compact layout is internally plausible;necessary change is shared cross-mode plane visibility,not a claim that original standalone DOS text never worked.",
+    "No new runtime reproduction claimed;historical controlled-reader and guest evidence are labeled as prior evidence.",
+    "Excluded hardware branches stay #error;no new source/header/guest mutation."
+  ],
+  "next": "R1117;file6/11 reviewed"
+}

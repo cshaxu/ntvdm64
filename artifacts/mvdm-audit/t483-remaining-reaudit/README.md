@@ -755,3 +755,5 @@ P90 delivered: [whole-file checkpoint](batch-p90-checkpoint.json), [line proof](
 P91 delivered: [nt_fdisk review](r1100-r1110-nt-fdisk-review.json), [byte/line proof](batch-p91-line-check.json), [checkpoint](batch-p91-checkpoint.json). All11 points checked;9 newly reconciled/restored,2 prior delivered. File is byte-identical to original;actual header controls and cached full build,publish11x2,Full19 passed.
 
 P92 audit-only: [nt_fulsc first three route boundaries](r1111-r1113-nt-fulsc-route-review.json).3/11 points,source-proven residuals pending owner;no product change. P91 remains published.1117 reviewed,713 pending,1603 unreviewed;143 whole files complete.
+
+P93 audit-only: [hardware exclusion and shared planes](r1114-r1116-nt-fulsc-hardware-plane-review.json).nt_fulsc6/11 reviewed;3 residuals source-qualified;prior CHAIN2 controls explicitly historical. No product change;P91 remains published.1120 reviewed,716 pending,1600 unreviewed.
