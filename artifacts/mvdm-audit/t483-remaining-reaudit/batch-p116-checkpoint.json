@@ -1,0 +1,274 @@
+{
+  "status": "cached full build,publish11x2,Full19 and focused/governance passed;Git delivery accompanies receipt",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "sha256": "fdccb451d0a5c9c3002139249ee02c6ada70d06aefbaf8cd3f423fc61eaf3981"
+    }
+  ],
+  "mirror_diff": {
+    "sim32": {
+      "before": {
+        "added": 30,
+        "deleted": 121,
+        "total": 151
+      },
+      "after": {
+        "added": 18,
+        "deleted": 108,
+        "total": 126
+      }
+    }
+  },
+  "previous_product": "7710fc81-2a3b-4c83-bcb9-0e470b53787f",
+  "preparation_correction": "Initial candidate retained LF xt.h include; corrected before publication. Final whole-file compile has no new C4028; cached full rebuilt.",
+  "publication": {
+    "status": "published",
+    "package": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "FE6A5BF5FB6DE74AB1DE05A32FDEE0064D02C7CFE3D9F122D7142CC4830289F9",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "13A7BE8CDBB25833ACDC61D32C0969946D658AC7F803074F331C26B8CCCDA4C1"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "676176D6D0587630E571B63C1E45853F069E005F41E69C8C1F55C67041897240",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "C5BBC55BD03F4A04CF43EA7FA4490D4AF1532A209DC987056A83550F9E2F6138"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "0BEDF0889F072B0958D3112D7D029ED746668596F219E718ECB1658A66749D43",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "44DF67357761E87AF2B6C71DB32D83BCE2EEF2A0937EE09D49963E6ADB67A257"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "3D521B6408AB11D2167F532A3EC8BBD6C3E443DE3047FA8D7EA0BF27F16BC8B9",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "569183A2C39F7A37343E70A2B447288C35E6492B7241E7848099878B40EED3CD"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "E126D0AEA32625B531C42A9D28A4905D73AF19D240A578D016F0689EB97A00D9",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "069A42379EB9B3D6912F61C34BACB4F46AF87BF80DB8A7A10B3B2DEE2276776C"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "E08ACE149497779C96A52C970ED68441C6157AC58D448D4BA69B92088FA58AC4",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "4ADCB994E47F955DC037A99BC2CF812A0B550C327074F74FA06BC495BCDA3CF4"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "08DA4C99437ECFDB1BBFBDEA386A3FBA7AD4395319B271E3E6DE8F22D29A526B",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "A332E2221768296916E343A5878D914F589D92BDF66662F7D3D829CF747998CF",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "5AB7126E7D0294719813365D4F0C5D988C459E57C3C2974E3FE25104B4B4CB6C"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "32582E8EB06BD282A5E96B11568474506C03DAF0043D9E3D240A60EFB8E186FC",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "16F84DEB76D13C0685000D63FC3A6F04CF60CD6EE96CC7F8997B8E6EF3E08416"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "0D6F7E89C72A0827F009F035A6F45427ABC58599837912959EC78DC9329458F4",
+      "Machine": 332,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "6E602A0D082B8AD05DDD16B6D96DED00D1C9E938A54C6E1BD85FA307C3C46FFD"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "906778581612E3CF0564D8BB967B6E9EED3353C3EAC0B47066C2EC58DA741F34",
+      "Machine": 34404,
+      "PackageId": "aee80117-292e-442a-b7cf-b4a8da97c6d3",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "tests": {
+    "Suite": "Full",
+    "ElapsedMs": 400100,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6430,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1362,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13605,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 14706,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11330,
+        "CleanupMs": 386,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 208,
+        "CleanupMs": 417,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65711,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 45403,
+        "CleanupMs": 330,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44966,
+        "CleanupMs": 354,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15156,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 8970,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 59469,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12607,
+        "CleanupMs": 526,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28263,
+        "CleanupMs": 340,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30668,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4119,
+        "CleanupMs": 349,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7856,
+        "CleanupMs": 457,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9807,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3978,
+        "CleanupMs": 300,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6482,
+        "CleanupMs": 329,
+        "Passed": true
+      }
+    ]
+  },
+  "delivery_process": {
+    "start": "2026-11-14T09:05:09.0498111-08:00",
+    "pid": 29376,
+    "script": "build/t483-s5-p116/delivery.ps1"
+  },
+  "focused_result": "ninja: Entering directory `build\\.ninja\\msvc-x86-release\\worker'\n[1/5] LIB original-softpc-host-fixture-roots.lib\n[2/5] LIB softpc-fixture-bindings.lib\n[3/5] link.exe /nologo /force:multiple /map:original-external-memory-test.exe.map /out:original-external-memory-test.exe obj/tests/original_external_memory_test.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib common-rpc.lib lib-rpc.lib common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib lib-process-launch.lib lib-crt-compat.lib common-worker-thread.lib lib-thread.lib lib-process-hook.lib lib-file.lib lib-process-image.lib lib-handle.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib libcmt.lib libvcruntime.lib libucrt.lib\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientAcquireConsoleContext already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientConnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientDisconnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientStopBrokerWatch already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWaitFrontend already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWatchBroker already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerFrontendCapability already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoCheckpoint already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoReleaseEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoTransition already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerShutdownEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored\n   Creating library original-external-memory-test.lib and object original-external-memory-test.exp\noriginal-external-memory-test.exe : warning LNK4088: image being generated due to /FORCE option; image may not run\n[4/5] CC-DPMI O:/repos.hobby/ntvdm64/test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\\vdm.h(428): warning C4201: nonstandard extension used: nameless struct/union\nO:/repos.hobby/ntvdm64/test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c(43): warning C4127: conditional expression is constant\n[5/5] link.exe /nologo /force:multiple /map:cpu40-descriptor-domain-fixture.exe.map /out:cpu40-descriptor-domain-fixture.exe obj/tests/cpu40_descriptor_domain_fixture.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib common-rpc.lib lib-rpc.lib common-root.lib common-rpc.lib lib-rpc.lib lib-pipe.lib lib-process-observation.lib lib-file.lib common-codec.lib common-console.lib lib-process-launch.lib lib-crt-compat.lib common-worker-thread.lib lib-thread.lib lib-process-hook.lib lib-file.lib lib-process-image.lib lib-handle.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib libcmt.lib libvcruntime.lib libucrt.lib\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientAcquireConsoleContext already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientConnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientDisconnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientStopBrokerWatch already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWaitFrontend already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWatchBroker already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerFrontendCapability already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoCheckpoint already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoReleaseEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoTransition already defined in ccpu_host_fixture_seams.obj; second definition ignored\nbase-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerShutdownEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored\ncpu40-descriptor-domain-fixture.exe : warning LNK4088: image being generated due to /FORCE option; image may not run\noriginal disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\nPASS actual external-memory and CPU40 descriptor fixtures\n",
+  "commands": {
+    "cached-x86.cmd": "@echo off\ncd /d O:\\repos.hobby\\ntvdm64\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\nif errorlevel 1 exit /b %errorlevel%\ncmake --preset msvc-x86-release-ccache -DNTVDM_POWERSHELL:FILEPATH=\"C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe\"\nif errorlevel 1 exit /b 1\ncmake --build --preset msvc-x86-release-ccache\nif errorlevel 1 exit /b %errorlevel%\nninja -C build\\.ninja\\msvc-x86-release\\worker ntvdm.exe VCDEX.DLL VDMREDIR.dll nthook32.dll ntvdm-command-capture-test.exe ntvdm-command-launch-test.exe\nif errorlevel 1 exit /b %errorlevel%\ncmake --build --preset msvc-x86-release-ccache --target wow32\nexit /b %errorlevel%\n",
+    "cached-x64.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x64 -host_arch=x64 >nul\nif errorlevel 1 exit /b 1\ncmake --preset msvc-x64-release-ccache -DNTVDM_POWERSHELL:FILEPATH=\"C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe\"\nif errorlevel 1 exit /b 1\ncmake --build --preset msvc-x64-release-ccache\nif errorlevel 1 exit /b 1\nfor %%d in (worker frontend monitor launcher service hook) do (\n ninja -C build\\.ninja\\msvc-x64-release\\%%d\n if errorlevel 1 exit /b 1\n)\nexit /b 0\n",
+    "pipeline.ps1": "$ErrorActionPreference='Stop'\nSet-Location O:/repos.hobby/ntvdm64\ntry {\n if((Get-Content \"$PSScriptRoot/cached.exit\").Trim() -ne '0'){throw 'Cached build failed'}\n $hostPath=(Get-Process -Id $PID).Path\n foreach($step in @('stage','publish-before-full','full-final','final-check')) {\n  & $hostPath -NoProfile -File \"$PSScriptRoot/$step.ps1\" *> \"$PSScriptRoot/$step.log\"\n  if($LASTEXITCODE){throw \"$step failed\"}\n }\n 0|Set-Content \"$PSScriptRoot/pipeline.exit\"\n} catch {$_|Out-String|Write-Output;1|Set-Content \"$PSScriptRoot/pipeline.exit\";exit 1}\n",
+    "full-final.ps1": "try {\n$ErrorActionPreference='Stop'\n$repo='O:\\repos.hobby\\ntvdm64'\n$env:OPENNT_BROKER_PRODUCT_BUILD=\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\"\n$node='C:\\Users\\neko\\AppData\\Local\\Logi\\LogiPluginService\\PluginHosts\\node22\\node\\node.exe'\n& \"$repo\\tools\\audit\\Invoke-ProductVerification.ps1\" -RuntimeRoot \"$repo\\build\\t483-s5-p116\\candidate-final\" -BuildCache \"$repo\\build\\t483-s5-p116\\cache-final\" -Observer \"$repo\\build\\t483-s5-p79-final\\observers-x64\\console-startup-observer.exe\" -WindowObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\worker-window-snapshot.exe\" -TerminalObserver \"$repo\\build\\t483-s5-p79-final\\observers-x64\\terminal-observer.exe\" -GuestFixture \"$repo\\build\\M0-T420\\S44\\p79-fixture\\G7.COM\" -NativeHook64 \"$repo\\build\\t483-s5-p116\\cache-final\\nthook64.dll\" -NativeWorker \"$repo\\build\\t483-s5-p116\\cache-final\\ntvwm.exe\" -NativeFrontend \"$repo\\build\\t483-s5-p116\\cache-final\\ntcon.exe\" -NativeMonitor \"$repo\\build\\t483-s5-p116\\cache-final\\ntmon.exe\" -NativeLauncher \"$repo\\build\\t483-s5-p116\\cache-final\\run16.exe\" -NativeService \"$repo\\build\\t483-s5-p116\\cache-final\\ntsrv.exe\" -MonitorRpc \"$repo\\build\\t483-s5-p116\\cache-final\\monitor-rpc-test.exe\" -WowBaselineRoots \"$repo\\build\\t483-s5-p78\\full-final\" -LogRoot \"$repo\\build\\t483-s5-p116\\full-final\" -Suite Full -Node $node\n\n\n\n\n\n\n\n\n$LASTEXITCODE | Set-Content build/t483-s5-p116/full-final.exit\n\nexit $LASTEXITCODE\n\n}catch{$_|Out-String|Write-Output;1|Set-Content O:/repos.hobby/ntvdm64/build/t483-s5-p116/full-final.exit;exit 1}\n",
+    "focused.cmd": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\nif errorlevel 1 exit /b 1\ncd /d O:\\repos.hobby\\ntvdm64\nninja -C build\\.ninja\\msvc-x86-release\\worker original-external-memory-test.exe cpu40-descriptor-domain-fixture.exe\nif errorlevel 1 exit /b 1\nbuild\\.ninja\\msvc-x86-release\\worker\\original-external-memory-test.exe\nif errorlevel 1 exit /b 1\nbuild\\.ninja\\msvc-x86-release\\worker\\cpu40-descriptor-domain-fixture.exe\nif errorlevel 1 exit /b 1\necho PASS actual external-memory and CPU40 descriptor fixtures\nexit /b 0\n"
+  },
+  "limits": [
+    "External unavailable fixture skips remain skips,not passes.",
+    "No new physical Win3.x acceptance or allocation-failure injection claimed.",
+    "All seven residual points remain pending owner decision,including minimized portions."
+  ],
+  "final_governance": "close-checks-final.stdout: documentation governance, relative links and git diff check passed",
+  "final_governance_process": {
+    "script": "build/t483-s5-p116/close-checks.ps1",
+    "pid": 9968,
+    "start": "2026-11-14T09:16:08.3442119-08:00"
+  },
+  "receipt_tool_correction": "First receipt update used default Windows text decoding for markdown. Restored UTF-8 characters, made decoding explicit and reran final receipt/governance checks; runtime source and package unchanged."
+}

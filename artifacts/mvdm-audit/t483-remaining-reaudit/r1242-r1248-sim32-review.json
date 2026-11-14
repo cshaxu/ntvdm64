@@ -1,0 +1,141 @@
+{
+  "status": "Whole-file review/minimization built,published11x2 and Full19/focused passed;Git accompanies receipt",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original": "OpenNT/base/mvdm/softpc.new/host/src/sim32.c",
+  "before_sha256": "b9cebb194bb17cfea513011a2ed6f576bba3702f7d38478676528c46c22d2572",
+  "final_sha256": "fdccb451d0a5c9c3002139249ee02c6ada70d06aefbaf8cd3f423fc61eaf3981",
+  "scope": [
+    "T483-R1242",
+    "T483-R1243",
+    "T483-R1244",
+    "T483-R1245",
+    "T483-R1246",
+    "T483-R1247",
+    "T483-R1248"
+  ],
+  "points": {
+    "R1242": {
+      "problem": "Session-termination declaration",
+      "before": "+1/-0",
+      "after": "+1/-0",
+      "evidence": "Original exit(0) bypasses ntvdm.c finish -> mvdm_standalone_worker_finish -> NtvdmAuthorizeExit and worker cleanup. Product bootstrap arms the session escape before host_main/config/sas_init.",
+      "minimum_option": "Keep existing explicit declaration while retaining the session escape; no new cleanup owner.",
+      "decision": "Residual pending owner; reduction applied without approving retained difference"
+    },
+    "R1243": {
+      "problem": "SIM32 numeric address and pointer in one translation",
+      "before": "+3/-1",
+      "after": "+1/-1",
+      "evidence": "DPMI mapped instruction read uses CodeBase+IP/EIP; a host pointer is not its guest linear address. GetVideoMemory returns a separate malloc scratch alias and NtGetPtrToLinAddrByte returns a mapped host alias.",
+      "minimum_option": "Remove added two-line explanation; keep same-body optional numeric output and unchanged public wrapper ABI.",
+      "decision": "Residual pending owner; reduction applied without approving retained difference"
+    },
+    "R1244": {
+      "problem": "Numeric guest address output",
+      "before": "+1/-0",
+      "after": "+1/-0",
+      "evidence": "The numeric result is captured before video scratch or native mapping; inverse pointer arithmetic cannot recover it for all actual SIM32 returns. A second descriptor walk duplicates selected address work.",
+      "minimum_option": "Keep one optional output assignment; no ambient state.",
+      "decision": "Residual pending owner; reduction applied without approving retained difference"
+    },
+    "R1245": {
+      "problem": "Preserve original public SIM32 entry",
+      "before": "+5/-0",
+      "after": "+5/-0",
+      "evidence": "ExpSim32GetVDMPointer and current consumers retain original two-argument ABI; added DPMI consumer needs numeric address as well. Removing wrapper alone leaves missing public symbol.",
+      "minimum_option": "One delegation into same conversion body; no second conversion algorithm.",
+      "decision": "Residual pending owner; reduction applied without approving retained difference"
+    },
+    "R1246": {
+      "problem": "Selected CPU40 descriptor ownership",
+      "before": "+3/-10 plus coupled declarations/header",
+      "after": "CPU_DESCR and selector_outside_GDT_LDT substitutions; c_main/c_bsic replaces unused xt and project helper include",
+      "evidence": "Actual original TU compile fails DESCR C2065, selector_outside_table/read_descriptor C4013. Original xt.c providers are inside CPU_30_STYLE. CPU40 c_bsic.c already implements the corresponding table bounds and descriptor read. Direct candidate with xt.h conflicts on effective_addr offset width; removing unused xt.h removes the new warning.",
+      "minimum_option": "Restore original control structure, sentinel, comments and PROD exclusion; call existing original CPU40 routines directly. No new shim or copied descriptor algorithm.",
+      "decision": "Residual pending owner; reduction applied without approving retained difference"
+    },
+    "R1247": {
+      "problem": "Descriptor base plus original offset",
+      "before": "+1/-6",
+      "after": "+1/-1",
+      "evidence": "CPU40 read_descriptor_linear is the original selected primitive and is exactly the primitive called by the former autonomous helper. CPU_DESCR replaces unavailable CPU30 DESCR.",
+      "minimum_option": "Restore original else block and entry.base+off; retain only CPU40 function name substitution.",
+      "decision": "Residual pending owner; reduction applied without approving retained difference"
+    },
+    "R1248": {
+      "problem": "Initialization allocation-failure escape",
+      "before": "+6/-1",
+      "after": "+2/-1",
+      "evidence": "InitIntelMemory can fail VirtualAlloc. Product outer main has a setjmp escape and explicit finish; direct CRT exit skips that path. Existing terminator calls original host_applClose then session longjmp. No injected allocation-failure runtime reproduction claimed.",
+      "minimum_option": "Delete four added comment lines; retain existing escape and unbound NULL return. Residual is pending owner, not approved.",
+      "decision": "Residual pending owner; reduction applied without approving retained difference"
+    }
+  },
+  "mirror_metric": {
+    "sim32": {
+      "before": {
+        "added": 30,
+        "deleted": 121,
+        "total": 151
+      },
+      "after": {
+        "added": 18,
+        "deleted": 108,
+        "total": 126
+      }
+    }
+  },
+  "metric_scope": "Original-relative added+deleted lines, ignoring #line; includes excluded-branch representations.151->126 (-25). Not net source LOC.",
+  "verification": {
+    "current_compile_exit": 0,
+    "original_compile_exit": 2,
+    "final_compile_exit": 0,
+    "shared_selected_line_numbers": 156,
+    "line_mismatches": 0,
+    "original_error_directives_retained": true,
+    "restored_error_branch": "original non-PROD descriptor error print/break replaced by #error; frame restored",
+    "line_proof": "batch-p116-line-check.json",
+    "new_final_compile_warnings": [],
+    "full_gates": 19,
+    "focused": "Actual external-memory and CPU40 descriptor fixtures pass"
+  },
+  "counter_review": [
+    "CPU40 direct selector check returns TRUE/FALSE; TRUE is1. Invalid selector still returns -1 before descriptor read. Valid selector reads same CPU40 descriptor then adds same16bit offset.",
+    "The old helper additionally checks nonnull local output pointers; these cannot be null here. No paging, hidden-segment-cache or exception implementation is copied or changed.",
+    "xt.h contributes no consumed declaration/type/macro to final selected SIM32 TU; final compile has no new warnings versus before. c_main and c_bsic do not replace CpuH.",
+    "WithLinear extension remains required by current paged instruction-reader contract; this does not claim every surrounding DPMI adapter is necessary.",
+    "No guest changes; no second state machine; autonomous helper remains used by other existing consumers."
+  ],
+  "limitations": [
+    "No new allocation-failure runtime injection or physical Win3.x acceptance claimed. Full19 and focused regressions passed.",
+    "Initial final-candidate generator missed LF xt.h; initial full build completed but was not published. Corrected final candidate recompiled and full build repeated. First line-check failure438/439 fixed before publication."
+  ],
+  "delivery": "batch-p116-checkpoint.json",
+  "descriptor_group_accounting": {
+    "points": [
+      "R1246",
+      "R1247"
+    ],
+    "includes": "Original declarations,former helper header/comment/body,restored original non-PROD frame and error body",
+    "before": {
+      "added": 12,
+      "deleted": 19,
+      "total": 31
+    },
+    "after": {
+      "added": 6,
+      "deleted": 6,
+      "total": 12
+    },
+    "delta": -19,
+    "after_non_exclusion_residual": "+5/-4 (9); remaining+1/-2 is restored#error body",
+    "not_additive": "Historic point anchors omit coupled declaration/header/comment changes; use group delta once. R1243 -2 plus R1248 -4 plus descriptor group -19 equals whole-file -25."
+  },
+  "original_identity": {
+    "git_object_bytes_sha256": "0751346d607fec23c0ff19793ed6ee680cc032a9cd82e4b9847db01ae493bb6d",
+    "comparison_file_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+    "raw_identical": false,
+    "newline_normalized_identical": true,
+    "reference_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c"
+  }
+}

@@ -837,3 +837,8 @@ P115 [nt_vga review](r1240-r1241-nt-vga-review.json):mirror566->564(-2);two exec
 [Checkpoint](batch-p115-checkpoint.json);[line proof](batch-p115-line-check.json).
 160/365 files;1245 reviewed:471 delivered restorations,0 local,8 approved,766 pending,1475 unreviewed.
 Actual painter current passes;original and no-clip controls fail specified assertions.941 line checks;26 product sections/relocations identical;P114 publication/Full reused.
+
+P116 [SIM32 review](r1242-r1248-sim32-review.json):whole-file mirror151->126(-25);all seven residuals pending owner.
+[Checkpoint](batch-p116-checkpoint.json);[line proof](batch-p116-line-check.json).
+161/365 files;1252 reviewed:471 delivered restorations,8 approved,773 pending,1468 unreviewed.
+Final compile,156 original logical lines,cached full build,publish11x2,Full19 and memory/descriptor fixtures pass;Git accompanies receipt.

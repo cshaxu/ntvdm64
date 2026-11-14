@@ -27,7 +27,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "xt.h"
+#line 31
 #include "sim32.h"
 #include "mvdm_softpc_termination.h"
 #line 32
@@ -35,7 +35,8 @@
 #include "gmi.h"
 #include "ckmalloc.h"
 #include CpuH
-#include "mvdm_softpc_effective_address.h"
+#include "c_main.h"
+#include "c_bsic.h"
 
 
 #line 38
@@ -151,8 +152,7 @@ BOOL SetVideoMemory(ULONG iaddr)
  *      WARNING: This routine returns a pointer into M, and
  *               WILL NOT work for backward M.
  */
-/* DIVERGENCE(MVDM-HOST-DIV-488): let the CPU40 DPMI decoder use the same
- * numeric address as its SIM32 alias without walking the descriptor twice. */
+#line 148
 UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)
 {
 #line 150
@@ -243,11 +243,13 @@ GLOBAL BOOL Sim32SetVDMMemory IFN4(double_word, addr, word, size, UTINY *, buff,
 
 /********************************************************/
 /* Support routines for sim32 above */
+#line 226
 GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 {
     word seg, off;
+    double_word descr_addr;
+    CPU_DESCR entry;
 
-#line 232
     seg = (word)(addr>>16);
     off = (word)(addr & 0xffff);
 
@@ -255,24 +257,30 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
     {
 	return ((double_word)seg << 4) + off;
     }
-    /*
-     * DIVERGENCE(MVDM-HOST-DIV-177): CPU40 CCPU keeps descriptor decoding
-     * in its CPU_DESCR implementation, whereas this historical SIM32 body
-     * uses the CPU30 DESCR carrier. Preserve SIM32's numeric result and
-     * invalid-selector sentinel through the checked adapter, which uses the
-     * original CPU40 GDT/LDT descriptor walker rather than recreating CPU30.
-     */
+    else
     {
-        IU32 linear;
-
-        if (!mvdm_softpc_protected_address(seg, off, &linear))
+	if ( selector_outside_GDT_LDT(seg, &descr_addr) == 1 )
+	{
+	/*
+	This should not happen, but is a check the real effective_addr
+	includes. Return error -1.
+	*/
+#ifndef PROD
+#error Unsupported excluded original configuration
+#endif
+#line 251
             return ((sys_addr)-1);
-        return (sys_addr)linear;
+	}
+	else
+	{
+	    read_descriptor_linear(descr_addr, &entry);
+	    return entry.base + off;
+	}
     }
-#line 259
 }
 
 
+#line 262
 /********************************************************/
 /* Microsoft extensions to sas interface */
 LOCAL IMEMBLOCK *imap_start=NULL, *imap_end=NULL;
@@ -357,12 +365,10 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
-       /* DIVERGENCE(MVDM-HOST-DIV-147): the original selected CCPU40
-        * allocation failure exits its dedicated process.  Bound product
-        * execution instead escapes through the session; an unbound caller
-        * receives the source-shaped allocation failure below. */
+#line 437
        (void)mvdm_softpc_terminate_current_session(0u, 0u);
        return(NULL);
+#line 438
     }
 
 #line 440

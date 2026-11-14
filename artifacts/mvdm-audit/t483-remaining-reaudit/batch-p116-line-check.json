@@ -1,0 +1,133 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+    "shared_selected_lines": 156,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [
+      [
+        [
+          163,
+          "}"
+        ],
+        [
+          168,
+          "}"
+        ]
+      ]
+    ],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            148,
+            "UCHAR *Sim32pGetVDMPointer(unsigned long addr, UCHAR pm)"
+          ]
+        ],
+        "after": [
+          [
+            148,
+            "UCHAR *Sim32pGetVDMPointerWithLinear(unsigned long addr, UCHAR pm, unsigned long *linear)"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            156,
+            "if (linear) *linear = (unsigned long)iaddr;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            163,
+            "}"
+          ],
+          [
+            165,
+            "UCHAR *Sim32pGetVDMPointer(unsigned long addr, UCHAR pm)"
+          ],
+          [
+            166,
+            "{"
+          ],
+          [
+            167,
+            "return Sim32pGetVDMPointerWithLinear(addr, pm, ((void *)0));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            230,
+            "DESCR entry;"
+          ]
+        ],
+        "after": [
+          [
+            230,
+            "CPU_DESCR entry;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            241,
+            "if ( selector_outside_table(seg, &descr_addr) == 1 )"
+          ]
+        ],
+        "after": [
+          [
+            241,
+            "if ( selector_outside_GDT_LDT(seg, &descr_addr) == 1 )"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            255,
+            "read_descriptor(descr_addr, &entry);"
+          ]
+        ],
+        "after": [
+          [
+            255,
+            "read_descriptor_linear(descr_addr, &entry);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            437,
+            "exit(0);"
+          ]
+        ],
+        "after": [
+          [
+            437,
+            "(void)mvdm_softpc_terminate_current_session(0u, 0u);"
+          ],
+          [
+            438,
+            "return(((void *)0));"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]
