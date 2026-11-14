@@ -30,6 +30,15 @@ USHORT __cdecl getBX(void) {return 0;}
 USHORT __cdecl getBP(void) {return 0;}
 USHORT __cdecl getSI(void) {return 0;}
 USHORT __cdecl getDI(void) {return 0;}
+/* Immutable pre-repair source calls this removed, default-off observer.
+ * It owns no callback state; the counterfactual tests leave tracing disabled. */
+void WINAPI wow_callback_frame_trace(const char *phase, uint32_t ret_id,
+    uint32_t stack, uint32_t callback_stack, uint32_t linear, uint16_t task_id,
+    uint32_t procedure, uint16_t message, uint32_t parameter)
+{
+    (void)phase; (void)ret_id; (void)stack; (void)callback_stack; (void)linear;
+    (void)task_id; (void)procedure; (void)message; (void)parameter;
+}
 int32_t __cdecl c_getPE(void) {return pe_value;}
 int32_t __cdecl c_getVM(void) {return vm_value;}
 int32_t __cdecl c_getCPL(void) {return cpl_value;}
@@ -54,7 +63,7 @@ PVOID FASTCALL GetPModeVDMPointerAssert(DWORD address)
     case 1:if(address!=source_stack)++errors;return caller;
     case 2:
         if(address!=expected_callback)++errors;
-        protect(caller,PAGE_NOACCESS);return outbound;
+        return outbound;
     case 3:if(address!=return_stack)++errors;return returned;
     default:++errors;RaiseException(0xe4470003,0,0,NULL);return NULL;
     }

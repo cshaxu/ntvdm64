@@ -35,7 +35,8 @@ try {
         $object="$root/$name.obj";$objects+=('"'+$object+'"')
         $input="$repo/$source"
         if($ReferenceRevision -and $name -eq 'wcall16'){
-            $body=(& git -C $repo show "${ReferenceRevision}:$source") -join "`n"
+            $baselinePath=$source -replace '^src/mvdm-host/','src/mvdm/'
+            $body=(& git -C $repo show "${ReferenceRevision}:$baselinePath") -join "`n"
             if($LASTEXITCODE){throw 'Missing immutable callback reference'}
             $input="$root/reference-wcall16.c";[IO.File]::WriteAllText($input,$body)
         }

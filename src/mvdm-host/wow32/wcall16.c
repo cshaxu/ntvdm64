@@ -14,7 +14,6 @@
 
 
 #include "precomp.h"
-/* DIVERGENCE(MVDM-HOST-DIV-304): default-off callback observation only. */
 #include "wow_callback_frame_lease.h"
 #line 17
 #pragma hdrstop
@@ -486,7 +485,6 @@ DWORD WOWCallback16(DWORD vpFn, DWORD dwParam)
 
     vp = (VPVOID) sizeof(dwParam);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-343): rejected admission did not call guest. */
     if (!CallBack16(RET_WOWCALLBACK16, &Parm16, (VPPROC)vpFn, &vp))
         return 0;
 
@@ -532,14 +530,11 @@ BOOL WOWCallback16Ex(
 
     *pdwRetCode = cbArgs;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-343): preserve the original argument/store
-     * order, but propagate the now-fallible execution admission. */
     return CallBack16(RET_WOWCALLBACK16, (PPARM16)pArgs, (VPPROC)vpFn, (PVPVOID)pdwRetCode);
+#line 578
 }
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-343): admit execution before original frame access;
- * keep same-unit callers on the public-shaped entry and this body intact. */
 BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 #line 582
 {
@@ -552,12 +547,10 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     register PTD ptd;
     register PVDMFRAME pFrame;
     register PCBVDMFRAME pCBFrame;
-    VDMFRAME callerFrame;
 #line 651
     WORD wAX;
-    /* DIVERGENCE(MVDM-HOST-DIV-348): progress of this original frame only. */
     VPVOID callerStack, callerCallbackStack;
-    DWORD callerInit, error;
+    DWORD callerInit;
     wow_callback_control control = {0};
 #if FASTBOPPING
 #line 653
@@ -579,7 +572,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     ptd = CURRENTPTD();
 
-    // DIV-348: first-pass error UI can schedule even before preparation.
     callerStack = ptd->vpStack;
     callerCallbackStack = ptd->vpCBStack;
     callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;
@@ -587,14 +579,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     __try {
 #line 665
     GETFRAMEPTR(ptd->vpStack, pFrame);
-    /* DIVERGENCE(MVDM-HOST-DIV-178): snapshot the only caller fields used
-     * below before the second original resolution can fault in a segment.
-     * Consume the original FlatAddress result, never retranslate through SAS;
-     * do not write this snapshot back over guest changes made by WOW16Done. */
-    callerFrame.wTDB = pFrame->wTDB;
-    callerFrame.wLocalBP = pFrame->wLocalBP;
-    FREEVDMPTR(pFrame);
-    pFrame = &callerFrame;
 
     // Just making sure that this thread matches the current 16-bit task
 
@@ -613,7 +597,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
         ptd->dwFlags |= TDF_INITCALLBACKSTACK;
         ptd->vpCBStack = (ptd->vpCBStack - sizeof(CBVDMFRAME)) & (~0x1);
     }
-    pCBFrame = CBFRAMEPTR(ptd->vpCBStack);
+    GETFRAMEPTR(ptd->vpCBStack, (PVDMFRAME)pCBFrame);
     pCBFrame->vpStack = ptd->vpStack;
     pCBFrame->wRetID = (WORD)iRetID;
     pCBFrame->wTDB       = pFrame->wTDB;
@@ -700,7 +684,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     WOW32ASSERT(ptd->vpStack == vpCBStackT);
 
     ptd->vpCBStack = ptd->vpStack;
-    pCBFrame = CBFRAMEPTR(ptd->vpCBStack);
+    GETFRAMEPTR(ptd->vpCBStack, (PVDMFRAME)pCBFrame);
 
     // Just making sure that this thread matches the current 16-bit task
 
@@ -729,15 +713,12 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     } __finally {
         if (AbnormalTermination()) {
-            error = GetLastError();
             if (wow_callback_control_restore(&control, callerStack)) {
                 ptd->vpStack = callerStack;
                 ptd->vpCBStack = callerCallbackStack;
-                /* SignalProc deliberately reinitializes teardown callbacks. */
                 if (!(ptd->dwFlags & TDF_IGNOREINPUT))
                     ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
             }
-            SetLastError(error);
         }
     }
 #line 818

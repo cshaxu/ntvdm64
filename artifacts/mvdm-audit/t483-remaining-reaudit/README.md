@@ -927,3 +927,7 @@ P135 final cached build,publish11x2,public ABI,menu-resource,Full19 and WOW boun
 P136 [whole-file checkpoint](batch-p136-checkpoint.json), [line proof](batch-p136-line-check.json):walias.h mirror51->31(-20);six unused macros restored;remaining six residuals pending owner.188/365 files;1323/2720 reviewed;499 delivered,6 local,8 approved,810 pending,1397 unreviewed. Cached build/publication/tests/Git pending.
 
 P136 final cached build,publish11x2,source contrasts,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror51->31(-20);82 selected lines per normal/Unicode context match.188/365 files;1323/2720 points:505 delivered/confirmed,8 approved,810 pending,1397 unreviewed. Final governance and Git accompany receipt.
+
+P137 [whole-file checkpoint](batch-p137-checkpoint.json), [line proof](batch-p137-line-check.json):wcall16 mirror222->198(-24);original frame reads and cast-lvalues restored;duplicate LastError handling removed.189/365 files;1335/2720 reviewed;505 delivered,5 local,8 approved,817 pending,1385 unreviewed. Final verification and delivery pending.
+
+P137 final cached build,publish11x2,callback/CCPU source contrasts,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror222->198(-24);370 selected lines match.189/365 files;1335/2720 points:510 delivered/confirmed,8 approved,817 pending,1385 unreviewed. Final governance and Git accompany receipt.

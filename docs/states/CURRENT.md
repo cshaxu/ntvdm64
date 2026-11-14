@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1323 points reviewed:505 restored/confirmed delivered,0 local,8 approved,
-810 qualified pending,0 restores decided;1397 unreviewed. Files188/365 audited,177 remain.
-P136 walias.h:diff51->31;cached,publish11x2,focused/Full19 passed;Git follows.
+1335 points reviewed:510 restored/confirmed delivered,0 local,8 approved,
+817 qualified pending,0 restores decided;1385 unreviewed. Files189/365 audited,176 remain.
+P137 wcall16:diff222->198;cached,publish11x2,callback/Full19 passed;Git follows.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -52,10 +52,10 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P136 candidate `13f4a9d2-5213-46a8-b6aa-5074162804bd` published11x2;hashes match.
-Cached full x86/x64,Full19 and governance passed;Git accompanies P136 receipt.
+P137 candidate `9e08dc20-5e98-4d65-af0c-2248a8989a24` published11x2;hashes match.
+Cached full x86/x64,Full19 and governance passed;Git accompanies P137 receipt.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p136-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p137-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored

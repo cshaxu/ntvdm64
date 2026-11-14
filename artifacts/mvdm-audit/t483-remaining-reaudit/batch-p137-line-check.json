@@ -1,0 +1,154 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "shared_selected_lines": 370,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            515,
+            "CallBack16(56, &Parm16, (VPPROC)vpFn, &vp);"
+          ]
+        ],
+        "after": [
+          [
+            515,
+            "if (!CallBack16(56, &Parm16, (VPPROC)vpFn, &vp))"
+          ],
+          [
+            516,
+            "return 0;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            575,
+            "CallBack16(56, (PPARM16)pArgs, (VPPROC)vpFn, (PVPVOID)pdwRetCode);"
+          ],
+          [
+            577,
+            "return 1;"
+          ]
+        ],
+        "after": [
+          [
+            575,
+            "return CallBack16(56, (PPARM16)pArgs, (VPPROC)vpFn, (PVPVOID)pdwRetCode);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            581,
+            "BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)"
+          ]
+        ],
+        "after": [
+          [
+            581,
+            "BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            652,
+            "VPVOID callerStack, callerCallbackStack;"
+          ],
+          [
+            653,
+            "DWORD callerInit;"
+          ],
+          [
+            654,
+            "wow_callback_control control = {0};"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            665,
+            "callerStack = ptd->vpStack;"
+          ],
+          [
+            666,
+            "callerCallbackStack = ptd->vpCBStack;"
+          ],
+          [
+            667,
+            "callerInit = ptd->dwFlags & 0x00000001;"
+          ],
+          [
+            668,
+            "wow_callback_control_capture(&control);"
+          ],
+          [
+            669,
+            "__try {"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            818,
+            "} __finally {"
+          ],
+          [
+            819,
+            "if (_abnormal_termination()) {"
+          ],
+          [
+            820,
+            "if (wow_callback_control_restore(&control, callerStack)) {"
+          ],
+          [
+            821,
+            "ptd->vpStack = callerStack;"
+          ],
+          [
+            822,
+            "ptd->vpCBStack = callerCallbackStack;"
+          ],
+          [
+            823,
+            "if (!(ptd->dwFlags & 0x00000002))"
+          ],
+          [
+            824,
+            "ptd->dwFlags = (ptd->dwFlags & ~0x00000001) | callerInit;"
+          ],
+          [
+            825,
+            "}"
+          ],
+          [
+            826,
+            "}"
+          ],
+          [
+            827,
+            "}"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

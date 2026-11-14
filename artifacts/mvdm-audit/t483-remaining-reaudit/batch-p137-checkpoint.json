@@ -1,0 +1,364 @@
+{
+  "status": "Cached full,published11x2,callback/CCPU positive and historical negatives,public ABI,menu-resource,Full19 and boundary passed;final governance/Git follow",
+  "source_files": 4,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "sha256": "1bff5cf3ea48e92725c733b9c4bf7e5ae72fdbd5196c86b2851cd80a196e44a0"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c",
+      "sha256": "9534ebb8e38b173cbd319b885c0ba9bf3b4a7a70c5b09adfd46e0b5d350b9ae1"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c",
+      "sha256": "a03f3774ffc38a8c242bf8be594a6be630bba39fb79439d6f0997f3c9a9cf13b"
+    },
+    {
+      "path": "test/observation/verify-wow-original-callback-frame.ps1",
+      "sha256": "d9cddd14f2fa86b3473465cfb5ca7d127b1a47412293b5c6de973637ac2817f2"
+    }
+  ],
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wcall16.c",
+  "mirror_diff": {
+    "before": {
+      "added": 55,
+      "deleted": 167,
+      "total": 222
+    },
+    "after": {
+      "added": 33,
+      "deleted": 165,
+      "total": 198
+    }
+  },
+  "points": {
+    "R1324": {
+      "before": 0,
+      "after": 0,
+      "problem": "Excluded profiles and original structure",
+      "evidence": "Nine existing #error boundaries retained. Final actual MSVC original/candidate preprocessing matches370 selected lines at their original logical positions.",
+      "disposition": "restored-or-confirmed-local"
+    },
+    "R1325": {
+      "before": 2,
+      "after": 1,
+      "problem": "Callback control declarations",
+      "evidence": "Native SEH may bypass host_simulate normal return and setIP/TD restoration. Existing caller-scoped continuation handles that finite owner;original normal-return code cannot execute during unwind. Remove stale observation-only comment;keep explicit declaration.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1326": {
+      "before": 4,
+      "after": 3,
+      "problem": "Public callback rejection result",
+      "evidence": "callback_enter rejects application callbacks during task cleanup or failed owner entry before guest execution. Original WOWCallback16 returns initial sizeof(DWORD)=4 because it ignores FALSE. Retain return0 propagation,remove comment.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1327": {
+      "before": 6,
+      "after": 4,
+      "problem": "Extended callback rejection result",
+      "evidence": "Same production admission rejection;original WOWCallback16Ex ignores FALSE and reports TRUE. Keep failure result and original argument/store ordering;remove comments.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1328": {
+      "before": 4,
+      "after": 2,
+      "problem": "Original body versus public admission entry",
+      "evidence": "Original source calls CallBack16 within its own TU. A whole-TU define renames those callers too and bypasses the modern taskman/CCPU execution boundary. Keep only body rename;remove comments. This does not approve all facade details.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1329": {
+      "before": 1,
+      "after": 0,
+      "problem": "Caller frame snapshot declaration",
+      "evidence": "Restore original. Valid callback stack and reservations derive from the current stack selector. After first resolution, second same-present-selector resolution is pure FlatAddress arithmetic;no guest call occurs between them.",
+      "disposition": "restored-or-confirmed-local"
+    },
+    "R1330": {
+      "before": 4,
+      "after": 3,
+      "problem": "Saved call-owned progress",
+      "evidence": "Original normal restoration lies after host_simulate and is bypassed on native unwind. Preserve original caller stack/callback cursor/INIT plus CPU continuation;remove comment and unused error variable.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1331": {
+      "before": 6,
+      "after": 5,
+      "problem": "Scope before frame preparation",
+      "evidence": "Preparation changes vpCBStack and INIT before the second frame lookup can raise. A scope only around host_simulate misses those mutations. Capture before preparation;remove comment.",
+      "disposition": "residual-pending-owner"
+    },
+    "R1332": {
+      "before": 8,
+      "after": 0,
+      "problem": "Caller snapshot and early release",
+      "evidence": "Restore original reads. Former fixture invalidated the caller page on the second same-selector resolution without an actual production transition. Removed that unsupported injection;retained post-guest remapping,three resolver failure phases and all abort assertions.",
+      "disposition": "restored-or-confirmed-local"
+    },
+    "R1333": {
+      "before": 2,
+      "after": 0,
+      "problem": "First callback frame conversion",
+      "evidence": "Exact original GETFRAMEPTR(vp,(PVDMFRAME)pCBFrame) compiles with actual production MSVC flags;no syntax adaptation required. Restore original.",
+      "disposition": "restored-or-confirmed-local"
+    },
+    "R1334": {
+      "before": 2,
+      "after": 0,
+      "problem": "Returned callback frame conversion",
+      "evidence": "Same full-TU compile establishes both original sites valid. Restore original resolver macro after guest return.",
+      "disposition": "restored-or-confirmed-local"
+    },
+    "R1335": {
+      "before": 13,
+      "after": 10,
+      "problem": "Abnormal return cleanup",
+      "evidence": "Native exception bypasses original ordinary return. Keep bounded caller control/TD restore and terminal guard. Existing control_restore already preserves LastError on successful/terminal returns,so remove duplicate outer Get/SetLastError and comment. No CR3 or device rollback.",
+      "disposition": "residual-pending-owner"
+    }
+  },
+  "counter_review": "Do not use adapter self-dependency or historical safety comments as proof. Existing artificial second-resolution PAGE_NOACCESS injection is not a real mapping transition. Keep post-simulation remapping and exception tests. Actual compiler accepts both original cast-lvalues. LastError has one owner after reduction. Private original monitor assembly is not a CCPU substitute.",
+  "line_correction": "Initial check found original closing brace578 mapped576;added #line578. Final370 common selected lines match. All9 #error boundaries unchanged.",
+  "limits": [
+    "Frame service doubles do not prove real physical relocation. Valid original stack/selector preconditions retained;no new malformed-stack policy.",
+    "Residual callback admission and abnormal-continuation differences remain pending owner choice.",
+    "No guest edits. External immutable-fixture skips remain non-pass outcomes in Full records."
+  ],
+  "historical_test_maintenance": "Reference1122ab55 uses pre-move src/mvdm paths and a removed default-off trace observer. Test maps historical paths only and provides a no-state trace double,leaving original callback body and seven negative assertions unchanged. Initial link failure is not runtime evidence.",
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 417572,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 7177,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1716,
+          "CleanupMs": 442,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 15788,
+          "CleanupMs": 372,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 14229,
+          "CleanupMs": 492,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 12368,
+          "CleanupMs": 419,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 499,
+          "CleanupMs": 394,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66308,
+          "CleanupMs": 395,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 46960,
+          "CleanupMs": 438,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 45036,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15820,
+          "CleanupMs": 409,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10719,
+          "CleanupMs": 429,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 65177,
+          "CleanupMs": 395,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12616,
+          "CleanupMs": 465,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28240,
+          "CleanupMs": 459,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30882,
+          "CleanupMs": 452,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 5217,
+          "CleanupMs": 377,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7938,
+          "CleanupMs": 500,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10579,
+          "CleanupMs": 415,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4259,
+          "CleanupMs": 377,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6466,
+          "CleanupMs": 358,
+          "Passed": true
+        }
+      ]
+    },
+    "line_proof": "batch-p137-line-check.json",
+    "frame": "ORIGINAL_CALLBACK_FRAME phase=0 resolve=3 simulate=1 output=1234abcd exception=00000000\nORIGINAL_CALLBACK_FRAME phase=1 resolve=1 simulate=0 output=deadbeef exception=e4470002\nORIGINAL_CALLBACK_FRAME phase=2 resolve=2 simulate=0 output=deadbeef exception=e4470002\nORIGINAL_CALLBACK_FRAME phase=3 resolve=3 simulate=1 output=deadbeef exception=e4470002\nPASS selected CallBack16 frame/re-resolution/exception propagation/output preservation\n",
+    "abort": "CALLBACK_ABORT_OK name=first-init resolve=1 simulate=0\nCALLBACK_ABORT_OK name=first-reserved resolve=1 simulate=0\nCALLBACK_ABORT_OK name=prep-init resolve=2 simulate=0\nCALLBACK_ABORT_OK name=prep-reserved resolve=2 simulate=0\nCALLBACK_ABORT_OK name=return-init resolve=3 simulate=1\nCALLBACK_ABORT_OK name=return-reserved resolve=3 simulate=1\nCALLBACK_ABORT_OK name=live-init resolve=2 simulate=1\nCALLBACK_ABORT_OK name=live-reserved resolve=2 simulate=1\nCALLBACK_ABORT_OK name=teardown resolve=2 simulate=1\nCALLBACK_ABORT_OK name=terminal resolve=2 simulate=1\nCALLBACK_ABORT_OK name=selector resolve=2 simulate=1\n",
+    "old_reference": {
+      "reference": "1122ab55d55b4d15699715ce1416b092b5887772",
+      "scope": "seven old-body abort counterexamples; unchanged terminal bypass"
+    },
+    "pinned_original": {
+      "reference": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "scope": "seven pinned-original whole-TU abort counterexamples; unchanged terminal bypass",
+      "source": "O:/repos.external/OpenNT"
+    },
+    "original_normal": "ORIGINAL_CALLBACK_FRAME phase=0 resolve=3 simulate=1 output=1234abcd exception=00000000\nORIGINAL_CALLBACK_FRAME phase=1 resolve=1 simulate=0 output=deadbeef exception=e4470002\nORIGINAL_CALLBACK_FRAME phase=2 resolve=2 simulate=0 output=deadbeef exception=e4470002\nORIGINAL_CALLBACK_FRAME phase=3 resolve=3 simulate=1 output=deadbeef exception=e4470002\nPASS selected CallBack16 frame/re-resolution/exception propagation/output preservation\n",
+    "ccpu": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=30284 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=2696 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=18872 escaped=1 nested=1 continue=1 normal-fe=1\n",
+    "public_rejection": "WOW_PUBLIC_CALLBACK_REJECTION errors=0 dword_zero=1 bool_false=1 original_store=1 invalid_size_untouched=1 no_guest_entry=1\n",
+    "focused": [
+      "WOW_PUBLIC_MEMORY_ABI_OK",
+      "WOW_FIXTURE_OK case=menu-resource"
+    ],
+    "boundary": "review-check.log"
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "0A3F8A3D32242B46C8D7526EA99B69D9CB4A2299A83328C71C1156F1157CB926",
+      "Machine": 332,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "E04BD3B070AA5178A7BD54AA43FFE7B66246BAC8622855E95141FB82D83930D8",
+      "Machine": 34404,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "BEE2C7BC5AE74F0328594D185CC84A8AB461248EE7F55A308D3844C6EACF0974"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "5243E57B1D3E9C31FBA2C19567F21981F9CE031B622D69A7FAFB882DDB1066FD",
+      "Machine": 34404,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "7B65AEDF0EC333BFB9DD73D1B3D01B4FBF7B076E2DF5BC48E2F666C725FB8FD7"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "4733AB1A5CDDF64169317F99870D22CE75720213149BD4A07E85AF5C73217038",
+      "Machine": 34404,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "27F05E377A382889B01DB105476F6B366E58DCB9EC9A387F72838EABF20E5908"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "FA0D26C63FDD1E50C86C70B4AF31523C7CFBDB8001D23E282748F9D116629E5E",
+      "Machine": 332,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "7065B4EE4B04BBD8F070159FDFF8D8514AF4E03D90A7E309757BE7BA3F4BAE08"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "3854751AFE8D8D33D222171F69C0181109FD3AD555EB2770A04C9084F2D31047",
+      "Machine": 34404,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "9319EAE48477DF4CB2C4F4DDD0791D071976CF715239DFA9CD7832B16820E44F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "2C785FD70AE5EB2C8FFEEB9305AF920CBF3A6C39984E0A6BBB948FA6E3DDBBB9",
+      "Machine": 34404,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "D13C89E2376AF9CA822908949931114084E63D4069B9DC4BC5D17BC9AF9EAD91",
+      "Machine": 332,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "866B7D0679460FE9B28D44FA8EF420129AFDE0D7AEC7B2EBCF5004E3B0E3FF18"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "25066DD00981F58F7F7D7FA6D92DAA24B86D6B337927559BCEF1295450D4D561",
+      "Machine": 332,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "8DCB2C8267846C617F202D807CCEF3566EB75E554EF91C9B7E896AD286925FE1",
+      "Machine": 332,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "46A330773AD8506B907B4E64664045F92F8A6FEACEEDCE46504346A70E1913A3"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "4E0A6F9AA725F49618AC16D1210601DD0CFD06B83DE07B7AAB791E9B6157D33C",
+      "Machine": 34404,
+      "PackageId": "9e08dc20-5e98-4d65-af0c-2248a8989a24",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ]
+}

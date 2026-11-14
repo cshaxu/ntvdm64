@@ -39,9 +39,7 @@ PVOID FASTCALL GetPModeVDMPointerAssert(DWORD address)
         return caller;
     case 2:
         if(address!=((source_stack-sizeof(CBVDMFRAME))&~1u)) ++errors;
-        /* A second resolver may invalidate the caller mapping. The actual
-         * DIV178 snapshot must be consumed, not the now-inaccessible page. */
-        protect(caller,PAGE_NOACCESS);
+        /* Same present stack selector: no guest call between these resolutions. */
         return outbound;
     case 3:
         if(address!=return_stack) ++errors;
@@ -104,6 +102,6 @@ int __cdecl main(void)
     }
     VirtualFree(caller,0,MEM_RELEASE);VirtualFree(outbound,0,MEM_RELEASE);
     VirtualFree(returned,0,MEM_RELEASE);
-    puts("PASS selected CallBack16 snapshot/re-resolution/exception propagation/output preservation");
+    puts("PASS selected CallBack16 frame/re-resolution/exception propagation/output preservation");
     return 0;
 }
