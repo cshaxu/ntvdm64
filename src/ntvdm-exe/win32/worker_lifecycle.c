@@ -9,7 +9,7 @@
 extern BOOL CntrlHandler(ULONG type);
 extern VOID TerminateVDM(VOID);
 extern UINT VdmExitCode;
-extern DWORD ntvdm_wow_terminate_ticket(uint64_t identity);
+extern HANDLE hWOWDll;
 static struct {
     session *owner;
     HANDLE stop,console_close,worker_close,task_close,fault,server;
@@ -81,12 +81,18 @@ static void worker_instruction(void *context)
 }
 static DWORD task_instruction(void *context)
 {
+    typedef DWORD (WINAPI *terminate_ticket_fn)(uint64_t);
+    terminate_ticket_fn terminate_ticket;
     uint64_t identity=0;DWORD error;
     (void)context;
     error=worker_base_take_wow_task_close(&identity);
     if(error==ERROR_NOT_FOUND)return ERROR_SUCCESS; /* stale source record retired normally */
     if(error)return error;
-    error=ntvdm_wow_terminate_ticket(identity);
+    if(!identity || !hWOWDll)error=ERROR_INVALID_STATE;
+    else {
+        terminate_ticket=(terminate_ticket_fn)GetProcAddress(hWOWDll,"W32TerminateTaskTicket");
+        error=terminate_ticket ? terminate_ticket(identity) : ERROR_PROC_NOT_FOUND;
+    }
     if(!error)return ERROR_SUCCESS;
     /* Injection was not accepted locally. Release this request for a later
      * authenticated management action; do not spin or kill the whole worker. */

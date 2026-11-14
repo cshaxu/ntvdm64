@@ -2,18 +2,14 @@
 #include <ntrtl.h>
 #include <nturtl.h>
 #include <windows.h>
-#include <stdint.h>
-#line 5
 #include <vdm.h>
 #include "insignia.h"
 #include "host_def.h"
 #include <nt_thred.h>
 
 #ifndef MONITOR
-#line 11
 #include <gdpvar.h>
 #endif
-#line 12
 
 /*          INSIGNIA MODULE SPECIFICATION
             -----------------------------
@@ -64,7 +60,6 @@ DATA OBJECTS      : None
 
 /* [3.1.1 #INCLUDES]                                                    */
 
-#line 63
 #include "stdio.h"
 
 #include "xt.h"
@@ -73,7 +68,6 @@ DATA OBJECTS      : None
 #include "error.h"
 #include "config.h"
 #include "cntlbop.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #line 71
 #include "host_bop.h"
@@ -175,55 +169,22 @@ MYFARPROC WOWDispatchEntry;
 MYFARPROC WOWInitEntry;
 VOID (*pW32HungAppNotifyThread)(UINT) = NULL;
 
-/* T449 S3: the broker selects an opaque management ticket; WOW32 resolves
- * it against its live original TD mapping and owns the actual HTASK exit.
- * This is intentionally a narrow loader bridge, not a second control path. */
-DWORD ntvdm_wow_terminate_ticket(uint64_t ticket)
-{
-    typedef DWORD (WINAPI *terminate_ticket_fn)(uint64_t);
-    terminate_ticket_fn terminate_ticket;
-    if(!ticket || !hWOWDll)return ERROR_INVALID_STATE;
-    terminate_ticket=(terminate_ticket_fn)GetProcAddress(hWOWDll,
-        "W32TerminateTaskTicket");
-    return terminate_ticket ? terminate_ticket(ticket) : ERROR_PROC_NOT_FOUND;
-}
-
-#line 170
 static BOOL WowModeInitialized = FALSE;
 
 void MS_bop_1(void) {
 
-    mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),
-        (unsigned long)getCR3(), getCS(), getIP(),
-        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
-
-    /* The immutable PMODE32 USER client reads NT's fixed shared-data linear
-     * address after this BOP returns.  Standalone CPU40 has no NT page-table
-     * owner, so bind the finite worker view before loading WOW32. */
     if (!mvdm_softpc_wow_page_domain_enter()) {
-        mvdm_softpc_report_wow_stage("page-domain-enter-failed",
-            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
         TerminateVDM();
         return;
     }
-    mvdm_softpc_report_wow_stage("page-domain-entered",
-        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
-    mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),
-        (unsigned long)getCR3(), getCS(), getIP(),
-        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
-
 #line 174
     if (!WowModeInitialized) {
     //Load the WOW DLL
-#line 176
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
 #ifndef PROD
-#line 179
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 181
-#line 181
         TerminateVDM();
         return;
     }
@@ -232,28 +193,18 @@ void MS_bop_1(void) {
     if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
     {
 #ifndef PROD
-#line 189
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 191
-#line 191
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
     }
 
-    /* DIVERGENCE MVDM-HOST-DIV-008: modern x86 MSVC rejects the historical
-       implicit FARPROC-to-MYFARPROC conversion.  Preserve the original raw
-       export address and call path; no WOW provider is enabled by this cast. */
     if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
-#line 197
     {
 #ifndef PROD
-#line 199
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 201
-#line 201
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -263,10 +214,8 @@ void MS_bop_1(void) {
     if ((GetCommHandle = (GCHfn) GetProcAddress(hWOWDll, "GetCommHandle")) == NULL)
     {
 #ifndef PROD
-#line 210
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 212
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -275,10 +224,8 @@ void MS_bop_1(void) {
     if ((GetCommShadowMSR = (GCSfn) GetProcAddress(hWOWDll, "GetCommShadowMSR")) == NULL)
     {
 #ifndef PROD
-#line 220
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 222
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -290,10 +237,8 @@ void MS_bop_1(void) {
     if (!pW32HungAppNotifyThread)
     {
 #ifndef PROD
-#line 233
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 235
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -301,46 +246,29 @@ void MS_bop_1(void) {
 
 
     // Call the init routine
-#line 242
     if ((*WOWInitEntry)() == FALSE)
     {
 #ifndef PROD
-#line 245
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 247
-#line 247
         TerminateVDM();
         return;
     }
-    mvdm_softpc_report_wow_stage("init-succeeded",
-        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 
-    /* `W32Init` itself is native host code. Its successful return is the
-     * first point at which immutable USER16 can safely consume the original
-     * flat selector ABI. Switch only the worker descriptor view, leaving the
-     * DOSX source GDT unchanged for real-mode withdrawal. */
     if (!mvdm_softpc_wow_page_domain_activate_wow_context()) {
-        mvdm_softpc_report_wow_stage("activate-failed",
-            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
+#line 247
         TerminateVDM();
         return;
     }
-    mvdm_softpc_report_wow_stage("activated",
-        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 
-#line 251
     WowModeInitialized = TRUE;
     }
 
 #if !defined(CPU_40_STYLE) || defined(CCPU)
-#line 255
     (*WOWDispatchEntry)();
 #else
-#line 257
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 278
 #line 278
 }
 
@@ -352,7 +280,6 @@ void MS_bop_2(void) {
                                             FALSE
                                             )));
 
-#line 288
     setIP((USHORT)(getIP() + 1));
 }
 
@@ -361,10 +288,8 @@ void MS_bop_2(void) {
 void MS_bop_int3(void) {
 
 #ifndef PROD
-#line 296
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 298
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -385,14 +310,11 @@ void MS_bop_4(void)
 {
     half_word Command;
     IMPORT BOOL CmdDispatch(ULONG);
+    extern int mvdm_vm_command_enter(IU32 service);
 
+#line 319
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
-    /* DIVERGENCE MVDM-HOST-DIV-871: admitted software-V86 bridge CALLF
-     * owns its return IP; ordinary COMMAND dispatch remains below. */
-    {
-        extern int mvdm_vm_command_enter(uint32_t service);
-        if (mvdm_vm_command_enter((uint32_t)Command)) return;
-    }
+    if (mvdm_vm_command_enter(Command)) return;
 #line 320
     CmdDispatch((ULONG) Command);
     setIP((USHORT)(getIP() + 1));
@@ -430,7 +352,6 @@ ULONG DefaultVrInitialized() {
 //
 
 #if DBG
-#line 356
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 #line 372
@@ -444,7 +365,6 @@ MYFARPROC VrAddOpenNamedPipeInfo;
 MYFARPROC VrConvertLocalNtPipeName;
 MYFARPROC VrRemoveOpenNamedPipeInfo;
 #endif
-#line 382
 
 BOOL LoadVdmRedir(VOID);
 
@@ -511,8 +431,6 @@ Return Value:
         // VdmRedir is loaded: do it
         //
 
-        /* DIVERGENCE(MVDM-HOST-DIV-466): V86 addresses use real-mode segments. */
-#line 448
         VrDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
                                                1,
                                                (UCHAR)((getMSW() & MSW_PE) && !getVM())
@@ -532,7 +450,6 @@ returnError:
         break;
 
 #if DBG
-#line 467
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 470
@@ -556,10 +473,8 @@ BOOL IsVdmRedirLoaded() {
 BOOL LoadVdmRedir() {
 
 #if DBG
-#line 490
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 492
 
     if (VdmRedirLoaded) {
         return TRUE;
@@ -573,74 +488,56 @@ BOOL LoadVdmRedir() {
 
         if ((VrDispatch = (MYFARPROC)GetProcAddress(hVdmRedir, "VrDispatch")) == NULL) {
 #if DBG
-#line 505
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 507
             goto closeAndReturnError;
         }
         if ((VrInitialized = (MYFARPROC)GetProcAddress(hVdmRedir, "VrInitialized")) == NULL) {
 #if DBG
-#line 511
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 513
             goto closeAndReturnError;
         }
         if ((VrReadNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, "VrReadNamedPipe")) == NULL) {
 #if DBG
-#line 517
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 519
             goto closeAndReturnError;
         }
         if ((VrWriteNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, "VrWriteNamedPipe")) == NULL) {
 #if DBG
-#line 523
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 525
             goto closeAndReturnError;
         }
         if ((VrIsNamedPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, "VrIsNamedPipeName")) == NULL) {
 #if DBG
-#line 529
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 531
             goto closeAndReturnError;
         }
         if ((VrIsNamedPipeHandle = (MYFARPROC)GetProcAddress(hVdmRedir, "VrIsNamedPipeHandle")) == NULL) {
 #if DBG
-#line 535
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 537
             goto closeAndReturnError;
         }
         if ((VrAddOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, "VrAddOpenNamedPipeInfo")) == NULL) {
 #if DBG
-#line 541
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 543
             goto closeAndReturnError;
         }
         if ((VrConvertLocalNtPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, "VrConvertLocalNtPipeName")) == NULL) {
 #if DBG
-#line 547
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 549
             goto closeAndReturnError;
         }
         if ((VrRemoveOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, "VrRemoveOpenNamedPipeInfo")) == NULL) {
 #if DBG
-#line 553
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 555
             goto closeAndReturnError;
         }
         VdmRedirLoaded = TRUE;
@@ -650,31 +547,18 @@ BOOL LoadVdmRedir() {
 closeAndReturnError:
 
 #if DBG
-#line 564
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 566
 
-    /* DIV-872: failed LoadLibrary resolution owns a module reference, not a
-       kernel handle. Restore the original unloaded callback state. */
-    VrDispatch = NULL;
-    VrInitialized = DefaultVrInitialized;
-    VrReadNamedPipe = NULL;
-    VrWriteNamedPipe = NULL;
-    VrIsNamedPipeName = NULL;
-    VrIsNamedPipeHandle = NULL;
-    VrAddOpenNamedPipeInfo = NULL;
-    VrConvertLocalNtPipeName = NULL;
-    VrRemoveOpenNamedPipeInfo = NULL;
     if (hVdmRedir != NULL) FreeLibrary(hVdmRedir);
     hVdmRedir = NULL;
+#line 568
     return FALSE;
 }
 
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: More MS BOP stubs */
 
-#line 574
 void MS_bop_5(void)
 {
     IMPORT VOID ms_bop(VOID);
@@ -692,12 +576,10 @@ void ISV_DispatchCall (void);
 void MS_bop_8 (void)
 {
     ULONG iFunc;
-    /* DIVERGENCE(MVDM-HOST-DIV-466): V86 addresses use real-mode segments. */
     UCHAR uchMode = (UCHAR)((getMSW() & MSW_PE) && !getVM());
 
 
     // Get the Function Number
-#line 595
     iFunc = (ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
                                         1,
                                         uchMode
@@ -728,9 +610,7 @@ void MS_bop_8 (void)
 //
 void MS_bop_9(void)
 {
-#line 625
     host_direct_access_error((ULONG)getAX());
-#line 626
 }
 
 //
@@ -751,7 +631,6 @@ void MS_bop_A(void)
         if (control == 1)
             WakeUpNow();
 #ifndef PROD
-#line 646
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 649
@@ -787,13 +666,11 @@ void MS_bop_C(void)
 void MS_bop_D(void)
 {
 #ifdef MONITOR
-#line 681
 #error Excluded unsupported monitor IRET BOP
 #else
 #line 699
     illegal_bop();
 #endif
-#line 701
 
 }
 
@@ -814,10 +691,8 @@ void MS_bop_E(void)
        }
    else {
 #ifndef PROD
-#line 721
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 723
        }
 }
 
@@ -830,12 +705,9 @@ void MS_bop_F(void)
     kb_setup_vectors();
 
 
-#line 735
 #ifdef MONITOR
-#line 736
 #error Excluded original conditional branch
 #endif
-#line 746
 #line 746
 
     /*
@@ -852,13 +724,10 @@ void MS_bop_F(void)
     host_ica_unlock();
 
 #ifdef MONITOR
-#line 761
 #error Excluded unsupported monitor keyboard setup carry
 #else
-#line 763
     setCF(0);
 #endif
-#line 765
 }
 
 
@@ -940,9 +809,7 @@ void ISV_RegisterModule (BOOL fMode)
         pchInit = procbuffer;
     }
 
-#line 846
     if ((InitEntry = GetProcAddress(hDll, pchInit)) == NULL){
-#line 847
         FreeLibrary(hDll);
         setCF(1);
         setAX(3);
@@ -961,9 +828,7 @@ void ISV_RegisterModule (BOOL fMode)
     pchDispatch = procbuffer;
     }
 
-#line 865
     if ((DispatchEntry = GetProcAddress(hDll, pchDispatch)) == NULL){
-#line 866
     FreeLibrary(hDll);
     setCF(1);
     setAX(2);
@@ -994,10 +859,8 @@ void ISV_DeRegisterModule (void)
     Handle = (ULONG)getAX();
     if (Handle == 0 || Handle > MAX_ISV_BOP){
 #ifndef PROD
-#line 896
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 898
     TerminateVDM();
     return;
     }
@@ -1017,10 +880,8 @@ void ISV_DispatchCall (void)
     Handle = (ULONG)getAX();
     if (Handle == 0 || Handle > MAX_ISV_BOP){
 #ifndef PROD
-#line 917
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 919
     TerminateVDM();
     return;
     }
@@ -1031,9 +892,7 @@ void ISV_DispatchCall (void)
     return;
 }
 
-#line 929
 #ifdef i386
-#line 930
 #error DIVERGENCE MVDM-HOST-DIV-601: unsupported hardware-host FPU save path
 #endif  //i386
 #line 961

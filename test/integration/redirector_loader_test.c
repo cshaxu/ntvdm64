@@ -52,12 +52,6 @@ static unsigned char *Sim32GetVDMPointer(unsigned long address,int count,int pro
 #include "redirector_loader_selected.inc"
 #undef GetProcAddress
 #undef CloseHandle
-static int callbacks_empty(void)
-{
-    return !VrDispatch && VrInitialized==DefaultVrInitialized && !VrReadNamedPipe &&
-        !VrWriteNamedPipe && !VrIsNamedPipeName && !VrIsNamedPipeHandle &&
-        !VrAddOpenNamedPipeInfo && !VrConvertLocalNtPipeName && !VrRemoveOpenNamedPipeInfo;
-}
 static void reset_fixture(void)
 {
     HMODULE module=GetModuleHandleA(dll_path);
@@ -75,12 +69,18 @@ int main(int argc,char **argv)
     if(argc!=2)return 2;dll_path=argv[1];
     reset_fixture();missing_library=1;
     CHECK(!LoadVdmRedir());CHECK(!IsVdmRedirLoaded());CHECK(!hVdmRedir);
-    CHECK(callbacks_empty());CHECK(load_calls==1 && proc_calls==0 && bad_close_calls==0);
+    CHECK(load_calls==1 && proc_calls==0 && bad_close_calls==0);
     for(i=1;i<=9;++i){
         reset_fixture();fail_export=i;
         CHECK(!LoadVdmRedir());CHECK(!IsVdmRedirLoaded());CHECK(!hVdmRedir);
-        CHECK(callbacks_empty());CHECK(detached==1);CHECK(!GetModuleHandleA(dll_path));
+        CHECK(detached==1);CHECK(!GetModuleHandleA(dll_path));
         CHECK(load_calls==1 && proc_calls==i && bad_close_calls==0);
+        fail_export=0;
+        CHECK(LoadVdmRedir());CHECK(IsVdmRedirLoaded());
+        CHECK(VrDispatch()==0 && VrInitialized()==0 && VrReadNamedPipe()==0 &&
+            VrWriteNamedPipe()==0 && VrIsNamedPipeName()==0 && VrIsNamedPipeHandle()==0 &&
+            VrAddOpenNamedPipeInfo()==0 && VrConvertLocalNtPipeName()==0 &&
+            VrRemoveOpenNamedPipeInfo()==0);
     }
     reset_fixture();CHECK(LoadVdmRedir());CHECK(IsVdmRedirLoaded());CHECK(hVdmRedir!=NULL);
     CHECK(load_calls==1 && proc_calls==9 && detached==0 && bad_close_calls==0);

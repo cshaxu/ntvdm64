@@ -1,0 +1,101 @@
+{
+  "batch": "P79",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "4fdf202a1f9eb3bcbad5ef16ca51043ff0e082f9",
+  "source_files": 11,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "sha256": "2f4fb290be2e0e5967aa370189bf77dfe74d60a07698da391db7ecae7265b321"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/worker_lifecycle.c",
+      "sha256": "c82db52b06708386f8a6ad141d5676f2c1be2d2fd6f62c56a9726a09363952b2"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+      "sha256": "1bffd5fcfab7c03a7a3828b46d72f6602535aa566f41e76294b55e370bcef2a1"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+      "sha256": "4e13b1d4e79154e94a76c49da02b6051ff70e030851cd01084a48c2abeeb7f9b"
+    },
+    {
+      "path": "test/ntvdm-exe/win32/console_client_test.c",
+      "sha256": "0fb53f8869e690b1e1901011f29f842e4f631beadd289a114d33838ffce307ab"
+    },
+    {
+      "path": "test/observation/softpc_observer_error_probe.c",
+      "sha256": "f60faa8b76ed556b854b6368949494a6b0e3a7beb42345c1d30d69fd785aa76b"
+    },
+    {
+      "path": "test/observation/verify-softpc-observer-error.ps1",
+      "sha256": "395703d94957f9f80a5f17942ba4cee53212b81e61d0baea8779cf86c58caa4f"
+    },
+    {
+      "path": "test/integration/redirector_loader_test.c",
+      "sha256": "e44c30afa9f47c2156e871ed1e0a916a61d5da0cc2144f6e5395a5ff2a710e92"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "sha256": "a9edb2008fb5fecabac890520195a4c6ddd2c8ccf156edf606a1875a1933366f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "sha256": "7debece9647e74d74aca69be379a8e97810452b3a34c8e9f69b8942e693d329c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "sha256": "a5d17a7e5d2d48fe58dbe0e265a9c1291bc14076aa8c5fa858a641c0edc51660"
+    }
+  ],
+  "mirror_files": 4,
+  "mirror_diff_delta": -141,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "preliminary_cached_build": "Passed,publication correctly stopped by line gate;not accepted as final build.",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "ec079dcd-27c3-49ac-9c58-f663bd85c307",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build\\t483-s5-p79-final\\full-verified\\timings.json",
+    "Full_elapsed_ms": 406833,
+    "CVID": "PASS original production vector fixture",
+    "original_line_check": "batch-p79-line-check.json",
+    "actual_preprocessor_common_lines": 963,
+    "dos4gw_nesticle": "SKIP verified external fixtures unavailable;side-session findings are independent evidence",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "PASS documentation and links"
+  },
+  "delivery_recovery": "Old S1 staging and historical probe paths had been cleaned. Used P78 retained guest/media candidate, rebuilt checked-in observers and G7 test fixture, retained P78 WOW signatures. No original guest changed or rebuilt; all11 host images from final cached build.",
+  "runner_failure": {
+    "failed_evidence": "build/t483-s5-p79-final/full-final/timings.json",
+    "case": "Window-17 empty",
+    "cause": "Rebuilt x86 observer reads native x64 NTCON layout;frame capture unavailable,pre-Enter echo never observed. Existing source requires matching pointer width. Rebuilt via Generate-ObservationNinja x64;unchanged product and assertions;fresh Full run."
+  },
+  "included_side_changes": [
+    "artifacts/mvdm-audit/dos4gw-nesticle-integration.md",
+    "artifacts/mvdm-audit/dos4gw-path-overflow.json",
+    "docs/states/TODO.md",
+    "docs/states/QUEUE.md",
+    "docs/proposals/proposal-unified-build-cmd-release-001.md"
+  ],
+  "side_review": "Owner authorizes inclusion. DOS4GW record has matched hashes, watchpoint writer chain and short/long PATH controls; no product fix or broad compatibility claim. Queue proposal remains unnumbered and does not change active S. These are reviewed side-session evidence, not independently rerun P79 tests.",
+  "register_integrity_repair": {
+    "cause": "P78 global numeric text replacement734->778 unintentionally changed88 fields in82 unrelated rows,including IDs/anchors/hashes. Exact pre-P78 values restored field-by-field;P78/P79 substantive review fields preserved.",
+    "fields": 88,
+    "rows": 82,
+    "baseline": "6939488cf",
+    "verification": "all2720 sequence numbers now unique and contiguous;pending648 IDs reconcile exactly"
+  }
+}

@@ -726,3 +726,5 @@ P76 whole-file batch: [cfpu_def.h15/15](r0970-r0984-cfpu-review.json), [host_cpu
 P77: [host_def.h4/4](r0994-r0997-host-def-review.json), [line proof](batch-p77-line-check.json), [checkpoint](batch-p77-checkpoint.json). Mirror41->15(-26);two restores delivered,two residuals qualified;cached build,publication11x2,Full and governance passed. Git delivery accompanies checkpoint.
 
 P78: [five files](r0998-r1004-host-small-review.json), [line proof](batch-p78-line-check.json), [checkpoint](batch-p78-checkpoint.json). Mirror net-50;five restores delivered,one minimized residual;R1000 already delivered. Cached full build,publish11x2,Full and governance passed;Git delivery accompanies checkpoint.
+
+P79: [nt_bop10/10](r1005-r1014-nt-bop-review.json), [lines](batch-p79-line-check.json), [checkpoint](batch-p79-checkpoint.json). Mirror329->188(-141);three restores delivered,seven qualified residuals. Cached full build,publish11x2,Full and governance passed;Git delivery accompanies checkpoint.

@@ -32,8 +32,8 @@ extern VDMVIRTUALICA VirtualIca[];
 
 #ifdef MONITOR
 #error Excluded original conditional branch
-#line 38
 #endif
+#line 39
 
 //from base ica.c
 LONG ica_intack(ULONG *hook_addr);

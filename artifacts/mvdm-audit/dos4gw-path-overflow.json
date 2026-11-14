@@ -1,0 +1,58 @@
+{
+  "status": "confirmed original DOS4GW 1.97 guest PATH overflow; no product or guest modification",
+  "date": "2026-11-13",
+  "fixtures": {
+    "DOS4GW.EXE": "b8265123ac8a189637448618409ef3ecd2e9f3e1a47062c685a02240f688dec1",
+    "NESTICLE.EXE": "224e348e1fd5c11b16ef096ff5607c7c57c49d65fa7e4dbbc9b2a5c9c53e832b"
+  },
+  "method": "Fresh package identities, private observer desktops, Windows CreateEnvironmentBlock user environment. WOW64 hardware data breakpoints in owned instances; no guest code writes. Same GP reproduced without debugger.",
+  "causal_chain": [
+    "DOS4GW 0237:72F1 queries PATH; 7306 calls 6A0C with destination DS:16FA.",
+    "6A0C calls unbounded string copy at 09A0; REP MOVSW at 09C7 writes through the following data, including COMSPEC at DS:190D.",
+    "Original DOS4GW file data at 1E814+190D contains COMSPEC followed by NUL. The hardware watch observes its replacement by PATH bytes.",
+    "730E calls environment query 6EA9 with DS:190D, now corrupted.",
+    "6EA9 allocates 2A bytes, copies the query string to SS:BP-26 through 6A97/8042/09A0, then uppercases it at 0964. The long corrupted string overwrites the return slot.",
+    "RETF 4 at 6F12 (CA 04 00, original DOS4GW file offset 1C5D6) faults on the overwritten selector."
+  ],
+  "watch_hits": {
+    "constant": [
+      "hit=5 native=0000000000C67AEC value=4d4f5c00 cs=0237 ip=000009c7 dsbase=00189390 esbase=001600f0 esi=000060da edi=0000190e ecx=00000147 esp=00004432 ebp=00004434 code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55",
+      "hit=6 native=0000000000C67B21 value=4d4f5c65 cs=0237 ip=000009c7 dsbase=00189390 esbase=001600f0 esi=000060da edi=0000190e ecx=00000147 esp=00004432 ebp=00004434 code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55",
+      "hit=7 native=0000000000C67AEC value=634f5c65 cs=0237 ip=000009c7 dsbase=00189390 esbase=001600f0 esi=000060dc edi=00001910 ecx=00000146 esp=00004432 ebp=00004434 code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55",
+      "hit=8 native=0000000000C67B21 value=63735c65 cs=0237 ip=000009c7 dsbase=00189390 esbase=001600f0 esi=000060dc edi=00001910 ecx=00000146 esp=00004432 ebp=00004434 code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55"
+    ],
+    "stack": [
+      "hit=163 native=00000000001B7AEC value=02376711 cs=0237 ip=000009c7 dsbase=001600f0 esbase=001600f0 esi=00001937 edi=0000444a ecx=00000133 esp=000043ec ebp=000043ee code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55",
+      "hit=164 native=00000000001B7B21 value=0237676f cs=0237 ip=000009c7 dsbase=001600f0 esbase=001600f0 esi=00001937 edi=0000444a ecx=00000133 esp=000043ec ebp=000043ee code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55",
+      "hit=165 native=00000000001B7AEC value=6137676f cs=0237 ip=000009c7 dsbase=001600f0 esbase=001600f0 esi=00001939 edi=0000444c ecx=00000132 esp=000043ec ebp=000043ee code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55",
+      "hit=166 native=00000000001B7B21 value=6172676f cs=0237 ip=000009c7 dsbase=001600f0 esbase=001600f0 esi=00001939 edi=0000444c ecx=00000132 esp=000043ec ebp=000043ee code=a8017402a449d1e9f3a513c9f3a48bf38bfa1f8cc25dcb55",
+      "hit=167 native=00000000001B78AD value=6172674f cs=0237 ip=00000978 dsbase=001600f0 esbase=001600f0 esi=00000120 edi=00005894 ecx=00000247 esp=000043f2 ebp=000043f2 code=2c613c1a730404418807438a070ac075ef928cda8ed95dcb",
+      "hit=168 native=00000000001B78AD value=6172474f cs=0237 ip=00000978 dsbase=001600f0 esbase=001600f0 esi=00000120 edi=00005894 ecx=00000247 esp=000043f2 ebp=000043f2 code=2c613c1a730404418807438a070ac075ef928cda8ed95dcb",
+      "hit=169 native=00000000001B78AD value=6152474f cs=0237 ip=00000978 dsbase=001600f0 esbase=001600f0 esi=00000120 edi=00005894 ecx=00000247 esp=000043f2 ebp=000043f2 code=2c613c1a730404418807438a070ac075ef928cda8ed95dcb",
+      "hit=170 native=00000000001B78AD value=4152474f cs=0237 ip=00000978 dsbase=001600f0 esbase=001600f0 esi=00000120 edi=00005894 ecx=00000247 esp=000043f2 ebp=000043f2 code=2c613c1a730404418807438a070ac075ef928cda8ed95dcb"
+    ]
+  },
+  "controls": [
+    {
+      "path": "normal Windows user environment",
+      "result": "0237:6F12 GP 4151; combo and direct NESticle"
+    },
+    {
+      "path_chars": 46,
+      "path": "O:\\WINNT;O:\\WINNT\\system32;C:\\Windows\\System32",
+      "result": "visible LibKvmWindow"
+    },
+    {
+      "path_chars": 88,
+      "construction": "C:\\Windows; repeated 8 times",
+      "result": "visible LibKvmWindow"
+    },
+    {
+      "path_chars": 1023,
+      "construction": "C:\\Windows; repeated 93 times",
+      "result": "0237:6F12 GP 5C39"
+    }
+  ],
+  "limits": "Graphics-window startup only, not gameplay or clean exit. Not a general PATH length acceptance threshold. Separate giant-environment COMMAND failure and R6009 are not attributed to this overwrite.",
+  "disposition": "Preserve original guest. No CPU fix, host environment truncation or guest patch. Explicit caller-local short PATH is a temporary launch workaround, not product acceptance."
+}

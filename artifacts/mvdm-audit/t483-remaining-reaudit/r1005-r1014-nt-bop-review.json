@@ -1,0 +1,137 @@
+{
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_bop.c",
+  "points": {
+    "T483-R1005": {
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "evidence": "Remove stdint include after eliminating mirror ticket bridge;use existing original IU32 for ingress service. Actual minimized production TU compiles;appending real mvdm_vm_ingress.h also compiles,proving declaration compatibility. Initial no-stdint control passed only via diagnostic header;after removing that header,uint32_t failed;IU32 resolves without adding shim or transitive include."
+    },
+    "T483-R1006": {
+      "before": "+13/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "evidence": "Original W32HungAppNotifyThread accepts HTASK,not64-bit service ticket. WOW32 already resolves ticket to current HTASK in wow_task_termination.c. Eliminate mirror wrapper and inline original module/export call in sole task_instruction caller using original hWOWDll;one less function,unchanged state/error handling. Actual native DLL before/current controls15 checks each pass,including64bit identity and4 failed requests."
+    },
+    "T483-R1007": {
+      "before": "+19/-0",
+      "after": "+4/-0",
+      "decision": "minimized qualified residual pending owner",
+      "evidence": "Original USER16 usercli.asm GETTICKCOUNT sets DS=KGDT_R3_DATA|3 (0x23) and dereferences MM_SHARED_USER_DATA_VA=0x7ffe0000;NT4 kernel supplied this process mapping. Standalone CCPU does not inherit native NT process page tables. page_domain_create is called only by enter;reenter returns without creating inactive domain. Removing enter leaves original USER16 fixed client view unpublished. Keep only4line enter/failure boundary;remove default-off observation calls and their now-unused functions,not move them. Source ABI proof,not new negative guest run."
+    },
+    "T483-R1008": {
+      "before": "+4/-1",
+      "after": "+1/-1",
+      "decision": "minimized qualified residual pending owner",
+      "evidence": "Actual MSVC x86 production command restoring literal original WOWDispatchEntry=GetProcAddress fails C2440 FARPROC->MYFARPROC. Original neighboring WOWInitEntry already explicitly casts same API. Keep only cast;remove explanation. No second provider/call path."
+    },
+    "T483-R1009": {
+      "before": "+15/-0",
+      "after": "+4/-0",
+      "decision": "minimized qualified residual pending owner",
+      "evidence": "Original USER16 SETFLATDSANDFS uses selectors0x23 and0x3b;page_domain_create_wow_gdt copies original DOSX GDT and supplies flat data/guest TEB descriptors without patching guest. activate_wow_context is sole writer setting wow_context_selected;reenter can only restore after it. Removing activation leaves DOSX descriptor view instead of required NT user view. Keep4line activation/failure after W32Init;remove logging. Source ABI proof,not new negative guest run."
+    },
+    "T483-R1010": {
+      "before": "+6/-0",
+      "after": "+2/-0",
+      "decision": "minimized qualified residual pending owner",
+      "evidence": "Original CmdDispatch is synchronous. Registered independent ntvdm64.386 callback must first establish caller VM before host request admission. mvdm_vm_command_enter handles only service8/10 with VM set and registered callback,advances IP and uses original CALLF;zero return falls through unchanged original dispatch/IP. Removing hook prevents admitted nonblocking VM frontend path. Keep declaration and single early-return call,remove block/comment/cast;no new state."
+    },
+    "T483-R1011": {
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "evidence": "Remove explanatory software-V86 comment;no behavior change."
+    },
+    "T483-R1012": {
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "minimized qualified residual pending owner",
+      "evidence": "CR0.PE remains1 in software V86. Sim32 macro forwards pm unchanged;sim32_effective_addr chooses segment<<4+offset only for pm=FALSE,otherwise walks GDT/LDT via protected_address without VM check. Original PE-only expression therefore treats V86 CS as descriptor;CS=1234 IP=56 means real linear12396 but protected selector may be absent/different. Keep !getVM at original explicit mode boundary;not a generic protected-pointer change. Source counterexample,not recorded runtime failure."
+    },
+    "T483-R1013": {
+      "before": "+13/-1",
+      "after": "+2/-1",
+      "decision": "minimized qualified residual pending owner",
+      "evidence": "Original CloseHandle receives LoadLibrary HMODULE;native loader control94 checks has37 failures,including no detach and retained module references. Minimal candidate FreeLibrary guarded for absent DLL plus null module,94 checks0 failures. Remove9 callback resets:all real consumers guarded by successful LoadVdmRedir/IsVdmRedirLoaded or MS_bop_7 state1;VrInitialized has no invocation in selected tree. Failed resolutions cannot be called;successful retry overwrites all9 and test invokes each. Tests stop requiring unobservable pointer clearing."
+    },
+    "T483-R1014": {
+      "before": "+2/-1",
+      "after": "+1/-1",
+      "decision": "minimized qualified residual pending owner",
+      "evidence": "Same explicit V86/PE distinction as R1012;MS_bop_8 uses selected mode for both BOP byte read and ISV_RegisterModule. Original PE-only computes wrong address for software V86;keep !getVM only and remove comment."
+    }
+  },
+  "line_proof": {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "before": 329,
+    "after": 188,
+    "delta": -141,
+    "line_checks": 655,
+    "conditional_checks": 66,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "line_counter": "LF only;two original form-feed characters retained,not counted as newlines"
+  },
+  "compile_contexts": [
+    {
+      "variant": "before",
+      "command": "cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fobuild/t483-s5-p79/before.obj build/t483-s5-p79/before/nt_bop.c"
+    },
+    {
+      "variant": "original-cast",
+      "command": "cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fobuild/t483-s5-p79/original-cast.obj build/t483-s5-p79/original-cast/nt_bop.c"
+    },
+    {
+      "variant": "no-stdint",
+      "command": "cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src/lib-nxvm\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/common/base_srv\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Fobuild/t483-s5-p79/no-stdint.obj build/t483-s5-p79/no-stdint/nt_bop.c"
+    }
+  ],
+  "cast_error": [
+    "build/t483-s5-p79/original-cast/nt_bop.c(199): error C2440: '=': cannot convert from 'FARPROC' to 'MYFARPROC'"
+  ],
+  "ticket_before": "TICKET checks=15 failed_requests=4 PASS\n",
+  "ticket_after": "TICKET checks=15 failed_requests=4 PASS\n",
+  "loader_results": [
+    "REDIR_LOADER_RESULT checks=94 failures=37 missing_exports=9 native_unload=1 no_bop_retry=1",
+    "REDIR_LOADER_RESULT checks=94 failures=0 missing_exports=9 native_unload=1 no_bop_retry=1",
+    "PASS original loader native module lifecycle; baseline fails and corrected owner passes"
+  ],
+  "observer_exit": "0",
+  "counter_review": "No necessity inferred solely from old comments or current adaptation. Native HTASK cannot accept service ticket;wrapper eliminated by inlining sole caller,not by moving an equivalent helper. Reporter-only APIs and test calls removed together. Callback reset test contract corrected to production publication gates and retry execution. Initial uint32 candidate failed after reporter include removed;original IU32 plus real-header redeclaration succeeds. Form feed is not a compiler newline.",
+  "validation": "Final source cached full x86/x64 build,11x2 publication,Full19 and governance passed;see batch-p79-checkpoint.json",
+  "compiler_line_proof": [
+    {
+      "file": "nt_bop.c",
+      "matched_selected_lines": 367,
+      "mismatches": []
+    },
+    {
+      "file": "config.c",
+      "matched_selected_lines": 472,
+      "mismatches": []
+    },
+    {
+      "file": "copy_fnc.c",
+      "matched_selected_lines": 104,
+      "mismatches": []
+    },
+    {
+      "file": "nt_eoi.h",
+      "matched_selected_lines": 20,
+      "mismatches": []
+    }
+  ],
+  "line_correction": "Initial text-only line model was insufficient: directives inside excluded branches do not execute. Move existing directives after else/endif;nt_eoi/config/copy_fnc zero mirror-delta correction to P78. nt_bop+2 candidate rejected/not applied;restoring two leftover blank lines in the same entry block gives188->188,applied with explicit zero-increase proof. Final compiler selected lines963 match original. host_hfx unchanged:it has no selected executable/declaration body.",
+  "zero_increase_proof": {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "before": 188,
+    "after": 188,
+    "delta": 0,
+    "batch_before": 329,
+    "batch_delta": -141,
+    "reason": "Correct directive placement plus remove two leftover blank lines in the same entry block;rejected+2 candidate not applied",
+    "sha256": "2f4fb290be2e0e5967aa370189bf77dfe74d60a07698da391db7ecae7265b321"
+  }
+}

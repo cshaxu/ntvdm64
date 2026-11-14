@@ -42,58 +42,6 @@ void mvdm_softpc_report_xms_move(unsigned long source,
     SetLastError(saved);
 }
 
-void mvdm_softpc_report_wow_bop_state(unsigned long cr0, unsigned long cr3,
-    unsigned short cs, unsigned short ip, unsigned long ds_base,
-    unsigned long ds_limit)
-{
-    DWORD saved_error = GetLastError();
-    char path[MAX_PATH];
-    char line[144];
-    DWORD bytes;
-    HANDLE file;
-    DWORD written;
-
-    bytes = GetEnvironmentVariableA("MVDM_S41_WOW_BOP_REPORT_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
-        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) goto restore_error;
-    snprintf(line, sizeof(line),
-        "wow-bop cr0=%08lx cr3=%08lx csip=%04x:%04x dsbase=%08lx dslimit=%08lx\r\n",
-        cr0, cr3, (unsigned int)cs, (unsigned int)ip, ds_base, ds_limit);
-    WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
-    CloseHandle(file);
-restore_error:
-    SetLastError(saved_error);
-}
-
-void mvdm_softpc_report_wow_stage(char const *stage, unsigned long cr0,
-    unsigned long cr3, unsigned short cs, unsigned short ip)
-{
-    DWORD saved_error = GetLastError();
-    char path[MAX_PATH];
-    char line[144];
-    DWORD bytes;
-    HANDLE file;
-    DWORD written;
-
-    if (stage == NULL) goto restore_error;
-    bytes = GetEnvironmentVariableA("MVDM_S42_WOW_RETURN_REPORT_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
-        OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) goto restore_error;
-    snprintf(line, sizeof(line),
-        "wow-stage stage=%s cr0=%08lx cr3=%08lx csip=%04x:%04x\\r\\n",
-        stage, cr0, cr3, (unsigned int)cs, (unsigned int)ip);
-    WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
-    CloseHandle(file);
-restore_error:
-    SetLastError(saved_error);
-}
-
 void mvdm_softpc_report_wow_fast_callback_binding(char const *stage,
     unsigned long address)
 {

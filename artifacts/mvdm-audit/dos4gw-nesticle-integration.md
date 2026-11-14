@@ -38,3 +38,36 @@ The Full gate inherits the environment of its suite runner, which may itself
 be sanitized; callers must test a representative outer CMD environment as a
 separate run. The graphics-window assertion is a bounded startup witness, not
 a guarantee that all rendered pixels or input interactions are correct.
+
+## Confirmed PATH overflow (2026-11-13)
+
+This follow-up supersedes the unresolved 6F12 attribution above. With the same
+pinned guest hashes, the installed-package isolated reproduction and a normal
+Windows-generated user environment produce 0237:00006F12 / 4151. Both direct
+NESticle and DOS4GW plus NESticle reproduce it. The instruction is `CA 04 00`,
+`RETF 4`, at original DOS4GW file offset 1C5D6.
+
+Two hardware data-watchpoint runs on owned workers establish the writer chain.
+DOS4GW calls its unbounded string copy with PATH and destination DS:16FA.
+Its `REP MOVSW` at 0237:09C7 overwrites the original `COMSPEC` constant at
+DS:190D. The subsequent query at 730E passes that corrupted constant to 6EA9.
+That function copies the now-long string into its stack buffer at BP-26 and
+uppercases it. The return slot becomes text (4152:474F, bytes `OGRA`), and
+`RETF 4` faults. The host watchpoints do not patch guest code. Undebugged runs
+reproduce the same failure. [Machine-readable evidence](dos4gw-path-overflow.json)
+retains guest identities, writer register snapshots and control results.
+
+Keeping the normal user environment and changing only child PATH to 46
+characters reaches a visible graphics window. Repeating `C:\Windows;` eight
+times (88 characters) also reaches graphics; 93 repetitions (1023 characters)
+reproduce 0237:6F12 with error 5C39. This controlled case removes dependence
+on private directory names. These observations do not establish a universal
+safe PATH threshold, gameplay correctness or clean application exit.
+
+This is an unchanged DOS4GW 1.97 guest overflow, not evidence requiring a
+RETF/descriptor correction in NTVDM. Preserve the original binaries and do
+not silently truncate the host environment or hot-patch the guest. An explicit
+caller-local short PATH is a temporary workaround, not a product fix. The
+separate large-environment COMMAND failure and R6009 remain separate issues.
+No matching lost fix was located in the current five stashes or relevant
+reflog search; the earlier DOS4GW commits retain investigation and controls.

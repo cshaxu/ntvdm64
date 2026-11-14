@@ -17,7 +17,6 @@ int main(int argc, char **argv)
 {
     static const char *names[] = {
         "MVDM_WIN31_SETUP_XMS_TRACE_PATH",
-        "MVDM_S41_WOW_BOP_REPORT_PATH", "MVDM_S42_WOW_RETURN_REPORT_PATH",
         "MVDM_WOW_CALLBACK_CPU_TRACE_PATH", "MVDM_S41_DPMI_MODE_REPORT_PATH"
     };
     char long_path[MAX_PATH + 32];
@@ -32,8 +31,6 @@ int main(int argc, char **argv)
         SetEnvironmentVariableA(names[i], path);
     SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", "8");
     CHECK(mvdm_softpc_report_xms_move(1, 2, 3, 1));
-    CHECK(mvdm_softpc_report_wow_bop_state(0, 0, 0, 0, 0, 0));
-    CHECK(mvdm_softpc_report_wow_stage("fixture", 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_fast_callback_binding("fixture", 0));
     CHECK(mvdm_softpc_report_dpmi_mode_state("fixture", 0, 0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_cpu40_descriptor_publish(8, 0, 0, 0, 0, 0, 0));

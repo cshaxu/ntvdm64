@@ -17,8 +17,8 @@ bwdcopy(
 {
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 23
 #else
+#line 24
       int i;
 
       i = len - 1;
@@ -56,8 +56,8 @@ memfill(
 
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 79
 #endif
+#line 80
 }
 
 void
@@ -160,8 +160,8 @@ memset4(
 {
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 185
 #else
+#line 186
 
    /*
     * The argument, count, as passed to this function is the number of 4-byte

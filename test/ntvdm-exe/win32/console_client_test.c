@@ -55,8 +55,7 @@ DWORD worker_base_take_wow_task_close(uint64_t *identity)
 { (void)identity;return ERROR_NOT_FOUND; }
 DWORD worker_base_fail_wow_task_close(uint64_t identity)
 { (void)identity;return ERROR_NOT_FOUND; }
-DWORD ntvdm_wow_terminate_ticket(uint64_t identity)
-{ (void)identity;return ERROR_NOT_FOUND; }
+HANDLE hWOWDll;
 DWORD worker_base_request_console_exit(void) { return ERROR_SUCCESS; }
 DWORD worker_base_io_release_event(HANDLE *event)
 {

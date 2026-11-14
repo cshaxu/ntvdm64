@@ -1,0 +1,46 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "before": 329,
+    "after": 188,
+    "delta": -141,
+    "line_checks": 367,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "method": "Actual original/final MSVC preprocessing;common selected blocks at least3 lines;static retained-source/conditional review supplements changed expressions. No reliance on excluded#line execution."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "before": 415,
+    "after": 415,
+    "delta": 0,
+    "line_checks": 472,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "method": "Actual original/final MSVC preprocessing;common selected blocks at least3 lines;static retained-source/conditional review supplements changed expressions. No reliance on excluded#line execution."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "before": 39,
+    "after": 39,
+    "delta": 0,
+    "line_checks": 104,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "method": "Actual original/final MSVC preprocessing;common selected blocks at least3 lines;static retained-source/conditional review supplements changed expressions. No reliance on excluded#line execution."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+    "before": 6,
+    "after": 6,
+    "delta": 0,
+    "line_checks": 20,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true,
+    "method": "Actual original/final MSVC preprocessing;common selected blocks at least3 lines;static retained-source/conditional review supplements changed expressions. No reliance on excluded#line execution."
+  }
+]
