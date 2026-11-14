@@ -14,7 +14,7 @@ typedef struct mvdm_keyboard_history {
     mvdm_key_origin issued,dispatched,active;
     mvdm_key_origin device[MVDM_KEY_DEVICE_CAPACITY];
     mvdm_key_origin held[MVDM_KEY_HELD_CAPACITY];
-    mvdm_key_origin translated,prefix,pending,output;
+    mvdm_key_origin translated,prefix,output;
     uint64_t receipts[MVDM_KEY_HISTORY_CAPACITY];
     uint64_t receipt_batch[MVDM_KEY_RECEIPT_BATCH_CAPACITY];
     unsigned receipt_batch_count,receipt_batch_next;
@@ -42,8 +42,7 @@ unsigned mvdm_keyboard_history_live(const mvdm_keyboard_history *state,uint64_t 
 /* Snapshot before original hardware reset; selected ages survive that reset. */
 unsigned mvdm_keyboard_history_pending(mvdm_keyboard_history *state,
     unsigned first,unsigned next,unsigned capacity,unsigned held,
-    int output,int pending,int prefix);
-void mvdm_keyboard_history_clear_device(mvdm_keyboard_history *state);
+    int output,int prefix);
 void mvdm_keyboard_history_clear_ring(mvdm_keyboard_history *state);
 
 #endif

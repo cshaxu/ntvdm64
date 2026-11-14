@@ -436,3 +436,73 @@ P64 delivered:two SAS original restorations;ICA/mouse residuals remain owner dec
 Mirror diff net-14;cached full,11x2 publication/hash,focused,EMS2 and Full16 passed.
 722 reviewed;284 delivered,2 approved,436 pending,1998 unreviewed;103/365 files.
 See [delivery receipt](batch-p64-checkpoint.json) and [logical lines](batch-p64-line-check.json).
+
+P65 audits: [time declaration](timeval-h-file-review.json) has real original-restoration C2371 failure and awaits owner;[VGA header](vgaports-h-file-review.json) removes7 obsolete line directives. Old489 mismatch claim was form-feed counting error;real793 preprocessed lines/coordinates match original before and after. Diagnostic-only batch accumulating;724 reviewed,284 delivered,1 local,2 approved,437 pending,1996 unreviewed;105/365 files.
+
+P65 [R0718 keyboard boundary](r0718-keyboard-boundary-review.json):comment diff-1;residual6 lines pending owner;current device7/return10 extracted cases pass with explicit limits.725 reviewed;105 complete files unchanged;keyba1/32 in progress.
+
+P65 [R0719 XMS include](r0719-xms-include-review.json):original include set restored;mirror diff-1;actual67 code/data sections and resolved relocations identical.726 reviewed;284 delivered,2 local,2 approved,438 pending,1994 unreviewed;105 complete files;keyba2/32 ongoing. Batch diff-9,not published.
+
+P65 [R0720 slot-state review](r0720-keyboard-slot-state-review.json):original early-EOI overwrite defect evidenced;existing state alternatives checked;two declarations pending owner and seven comment lines removed.727 reviewed;439 pending;1993 unreviewed;keyba3/32;batch diff-16 accumulating.
+
+P65 [R0721 immediate-origin review](r0721-immediate-origin-review.json):original RESEND transition invalidates empty-slot-zero assumption;positive/negative extraction controls0/1.728 reviewed;440 pending;1992 unreviewed;keyba4/32;batch mirror diff remains-16.
+
+P65 [R0722 enqueue-origin review](r0722-enqueue-origin-review.json):packet markers cannot identify raw events;single-hook restoration fails make/ignored-release control.729 reviewed;441 pending;1991 unreviewed;keyba5/32;batch mirror diff remains-16.
+
+P65 [R0723 dequeue-origin review](r0723-dequeue-origin-review.json):independent transfer/clear deletion controls fail;730 reviewed;442 pending;1990 unreviewed;keyba6/32;mirror diff remains-16.
+
+P65 [R0724 ring-clear review](r0724-ring-clear-review.json):clear plus original RESEND exposes stale identity without hook;731 reviewed;443 pending;1989 unreviewed;keyba7/32;mirror diff remains-16.
+
+P65 [R0725 pending-snapshot review](r0725-pending-snapshot-review.json):original count/reset cannot replace identity snapshot;comment removed,diff-1.732 reviewed;444 pending;1988 unreviewed;keyba8/32;batch mirror diff-17.
+
+P65 [R0726 reset minimization](r0726-reset-minimization-review.json):redundant clear removed with unused helper/declaration;device/return/carrier pass.733 reviewed;445 pending;1987 unreviewed;keyba9/32;mirror diff-18;substantive delivery waits for whole file.
+
+P65 [R0727 reset flags restored](r0727-reset-flags-restoration.json):two redundant assignments deleted;device7/return10/carrier7 pass.734 reviewed;3 local restorations;445 pending;1986 unreviewed;keyba10/32;mirror diff-20.
+
+P65 [T483-R0728 review](r0728-reset-irq-review.json):Remove1 explanatory comment;retain1 cancellation call pending owner. 735 reviewed;446 pending;1985 unreviewed;keyba11/32;mirror diff-21.
+
+P65 [T483-R0729 review](r0729-held-make-review.json):No source change;three added lines remain pending owner. 736 reviewed;447 pending;1984 unreviewed;keyba12/32;mirror diff-21.
+
+P65 [T483-R0730 review](r0730-held-release-review.json):No source change;three added lines remain pending owner. 737 reviewed;448 pending;1983 unreviewed;keyba13/32;mirror diff-21.
+
+P65 [T483-R0731 review](r0731-immediate-slot-restoration.json):Delete all3 added assignments;check invalid prepublication slot does not select old input. 738 reviewed;448 pending;1982 unreviewed;keyba14/32;mirror diff-24.
+
+P65 [T483-R0732 review](r0732-held-replay-review.json):No source change;three added lines pending owner. 739 reviewed;449 pending;1981 unreviewed;keyba15/32;mirror diff-24.
+
+P65 [T483-R0733 review](r0733-replay-origin-end-review.json):No source change;three added lines pending owner. 740 reviewed;450 pending;1980 unreviewed;keyba16/32;mirror diff-24.
+
+P65 [T483-R0734 review](r0734-early-eoi-irq-gate-review.json):No mirror change;extend existing actual controller/PIC test to retry continue_output between early EOI and port60 read and assert no new pending IRQ. 741 reviewed;451 pending;1979 unreviewed;keyba17/32;mirror diff-24.
+
+P65 [T483-R0735 review](r0735-cancel-tail-minimization.json):Remove19 mirror lines;fold predicates into R0737/R0738 existing changed lines;remaining cancellation semantic stays pending owner. 742 reviewed;452 pending;1978 unreviewed;keyba18/32;mirror diff-43.
+
+P65 [T483-R0736 review](r0736-unconditional-clear-review.json):No product edit;one deleted original line pending owner. 743 reviewed;453 pending;1977 unreviewed;keyba19/32;mirror diff-43.
+
+P65 [T483-R0737 review](r0737-eoi-observation-review.json):No further edit;R0735 coupled assignment reviewed in order here. 744 reviewed;454 pending;1976 unreviewed;keyba20/32;mirror diff-43.
+
+P65 [T483-R0738 review](r0738-eoi-retirement-minimization.json):Delete1 added origin clear;replace raw-inactive-storage test assertion with unchanged no-pending-input assertion. 745 reviewed;455 pending;1975 unreviewed;keyba21/32;mirror diff-44.
+
+P65 [T483-R0739 review](r0739-output-publication-minimization.json):Delete translated=0 from do_q_int;remaining3 additions pending owner. 746 reviewed;456 pending;1974 unreviewed;keyba22/32;mirror diff-45.
+
+P65 [T483-R0740 review](r0740-input-port-reply-review.json):No source change;one assignment pending owner. 747 reviewed;457 pending;1973 unreviewed;keyba23/32;mirror diff-45.
+
+P65 [T483-R0741 review](r0741-ccpu-reset-boundary-review.json):Remove11 added diagnostic/comment lines;remaining call plus line anchor pending owner. 748 reviewed;458 pending;1972 unreviewed;keyba24/32;mirror diff-56.
+
+P65 [T483-R0742 review](r0742-original-reset-body-review.json):No source change;correct historical deletion scope from three to two remaining original statements because #else is already restored. 749 reviewed;459 pending;1971 unreviewed;keyba25/32;mirror diff-56.
+
+P65 [T483-R0743 review](r0743-controller-reply-flags-restoration.json):Delete two added state writes;mirror diff net-2. 750 reviewed;459 pending;1970 unreviewed;keyba26/32;mirror diff-58.
+
+P65 [T483-R0744 review](r0744-controller-reply-publication-minimization.json):Mirror diff +5 to +2,net-3;partial restoration,residual remains pending owner. 751 reviewed;460 pending;1969 unreviewed;keyba27/32;mirror diff-61.
+
+P65 [T483-R0745 review](r0745-split-prefix-origin-review.json):No source change;remaining +3/-0 pending owner. 752 reviewed;461 pending;1968 unreviewed;keyba28/32;mirror diff-61.
+
+P65 [T483-R0746 review](r0746-unused-pending-origin-restoration.json):Restore original continue_output branch;mirror diff net-4. Reduce autonomous state and argument;retain original pending_8042 variable/logic. 753 reviewed;461 pending;1967 unreviewed;keyba29/32;mirror diff-65.
+
+P65 [T483-R0747 review](r0747-resume-handshake-review.json):No source change;remaining +2/-0 pending owner. 754 reviewed;462 pending;1966 unreviewed;keyba30/32;mirror diff-65.
+
+P65 [T483-R0748 review](r0748-port60-retirement-minimization.json):Mirror +9 to +7,net-2;remaining semantic diff stays pending owner. 755 reviewed;463 pending;1965 unreviewed;keyba31/32;mirror diff-67.
+
+P65 [T483-R0749 review](r0749-init-flags-restoration.json):Original restored;mirror diff net-2. 756 reviewed;463 pending;1964 unreviewed;keyba32/32;mirror diff-69.
+
+P65 final-code gates passed:seven restorations;mirror diff net-68 (keyba-61,vgaports-7).
+291 restored/delivered,2 approved,463 pending;756/2720 reviewed,1964 remain;106/365 files.
+[Receipt](batch-p65-checkpoint.json);[line proof](batch-p65-line-check.json).

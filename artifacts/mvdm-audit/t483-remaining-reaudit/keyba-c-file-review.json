@@ -1,0 +1,24 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "points": "R0718-R0749",
+  "completed": 32,
+  "qualified_residuals": 26,
+  "mirror_scope": "LF-normalized raw original-relative line diff including unchanged excluded branches",
+  "before": {
+    "added": 425,
+    "deleted": 766,
+    "total": 1191
+  },
+  "after": {
+    "added": 364,
+    "deleted": 766,
+    "total": 1130
+  },
+  "net_delta": -61,
+  "batch_net_delta_including_vgaports": -68,
+  "line_check": "All matched original lines align except public CPU reset call:original CPU30 line2567 is excluded;selected replacement intentionally maps CPU40 line2569. No mismatch in surviving original statements.",
+  "error_check": "All #error directives identical to HEAD in order and bytes",
+  "validation": "P65 final-code cached full/publication11x2/keyboard90/origin24/CPU reset/focused/EMS2/Full16 passed;Git delivery accompanies record.",
+  "sha256": "a9ad670c2d5c026d1f4af57d906d798ec23b7d9d1020dc0e2c57c321525fae70",
+  "restored_verified_published": 6
+}

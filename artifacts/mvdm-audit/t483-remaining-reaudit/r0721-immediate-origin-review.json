@@ -1,0 +1,79 @@
+{
+  "point": "T483-R0721",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "added": 3,
+    "deleted": 0,
+    "mirror_diff_delta": 0
+  },
+  "problem": "An immediate controller response must not be returned as an unused host keyboard record.",
+  "responsibility_evidence": "R0718 establishes the original count/history suffix mismatch independently of the current metadata implementation. Internal ACK is not user input.",
+  "original_alternative": "Original key_marker_buffer describes scan packet boundaries,not raw host record identity. Clearing on pop does not prove every immediate destination zero: original cmd_to_6805 case0xfe rewinds out without pop.",
+  "counterexample": [
+    "Fill original511-byte ring with one user-origin packet;in511/out0.",
+    "Original RESEND moves out to511 without clearing tags;in==out.",
+    "Immediate ACK moves out to510 and replaces a tagged byte.",
+    "With the zero assignment, pending raw-record count0;without it,count1."
+  ],
+  "minimum": "One existing-slot assignment inside NTVDM guard;moving it to AddTo6805BuffImm adds slot knowledge there without reducing the operation. No second metadata owner or change to original RESEND behavior.",
+  "controls": {
+    "runner": {
+      "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\r0721-controls\\run.cmd",
+      "pid": 22120,
+      "start": "2026-11-13T15:47:07.0312764-08:00"
+    },
+    "before_exit": 0,
+    "restoration_exit": 1,
+    "failure": "PendingKeyboardHistory()==0",
+    "artifacts": {
+      "build\\t483-s5-p65\\r0721-controls\\before\\compile.log": "db371a25c07fff40b736e6c013c8fba13a7c4375af046a8416640147640ff562",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_add.inc": "2e29dda72aa15b2df168bad6c1a96e8f57cbcf99b83c6ce5c8fc2b9e43b27660",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_clear.inc": "5b4f5275b1031a39654f8a66775f81b758cc09509e1a27d02a0fea6b9a21c6a7",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_continue.inc": "19458aa32b636a75b103e8e4aac1d8a3703f35ba782db965eea14c698da16868",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_eoi.inc": "ee5389e9afea1ab9c700676b945c9d73e753dfd3b47729f7b3f8c4047a74697a",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_immediate.inc": "734c5155ad48007098955dd911a1e774f9a4283fb9230eb699c6b571382b2549",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_mark.inc": "ab9f77b2acb8a27426216e2029d360c1133449c5c069ec1d58e5aa10c0e30926",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_output.inc": "f057919347fbe1c57f8fbc98b454b036bd3d14f640408b8101f1a83463c37cb7",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_remove.inc": "1c4db7cc3c787664313b3678b0f9fd1a6a7a37a5ff634297f2ca2d5f71fd0688",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_replay.inc": "df0474b93fd23de15f805f1b174ef0cf3f4268acaa1dda9a741eae01ccd1939d",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_reset.inc": "06f096a40ce5e85c878bd351113db6e37136e92750304424292da3f1f56752bd",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_device_translate.inc": "62a2d15909cf8fa243c4f45b690e3313d18e453131f0e5cf0f4ac17fb02a5786",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_host_down.inc": "1cfe24a27cef8b2d7f9b69d975b419deb3024f61c8b3e528ccc1132d666fc083",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_host_up.inc": "6cd29efb4e4ff9c7d8ffb69b2321a9c23e632e30dd8e1d6524d0e9518ce36530",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_origin_pending.inc": "7433f048524bf20da37e53cdf85fa4bc11fd17bd2337befe53fdf2e9d4f72079",
+      "build\\t483-s5-p65\\r0721-controls\\before\\keyboard_raise_all.inc": "9bfabccd0fd2a1389573b73ef22fc902b8a3c7c69d05d8f369c623fe07a533c9",
+      "build\\t483-s5-p65\\r0721-controls\\before\\result.exit": "9aca8dfce962538fb8131d73f84cada05e4dc79f5a0d3612c511b1150f3e33e2",
+      "build\\t483-s5-p65\\r0721-controls\\before\\result.txt": "e5cbdb555880a4056b8e0fc9efdb79fd1b48f1dc6f436f0b4d2c02107f4ce286",
+      "build\\t483-s5-p65\\r0721-controls\\before\\test.c": "6042f0c81b52a1f1057cf8da4409a469a72b2a5d9bc5dda591707f4b1f4d6f4d",
+      "build\\t483-s5-p65\\r0721-controls\\before\\test.exe": "e81878cdabf2579ea4ed894258d492480590f47d4aa0434b9c1fa666a32fadac",
+      "build\\t483-s5-p65\\r0721-controls\\before\\test.obj": "b1b7bfb1a7d0275a579984fa2a3cc12f88c6f95edce40b23fcff83c5d652fab3",
+      "build\\t483-s5-p65\\r0721-controls\\original\\compile.log": "6056797f7451a9787b36ccec6c90bc5a78cac225a398db229ee146190f586ef9",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_add.inc": "a7dba635f92e2e00fb42b8ef2c7e256e6aea6fa8c113074c0256697fc1a2e014",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_clear.inc": "5b4f5275b1031a39654f8a66775f81b758cc09509e1a27d02a0fea6b9a21c6a7",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_continue.inc": "19458aa32b636a75b103e8e4aac1d8a3703f35ba782db965eea14c698da16868",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_eoi.inc": "ee5389e9afea1ab9c700676b945c9d73e753dfd3b47729f7b3f8c4047a74697a",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_immediate.inc": "734c5155ad48007098955dd911a1e774f9a4283fb9230eb699c6b571382b2549",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_mark.inc": "ab9f77b2acb8a27426216e2029d360c1133449c5c069ec1d58e5aa10c0e30926",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_output.inc": "f057919347fbe1c57f8fbc98b454b036bd3d14f640408b8101f1a83463c37cb7",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_remove.inc": "1c4db7cc3c787664313b3678b0f9fd1a6a7a37a5ff634297f2ca2d5f71fd0688",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_replay.inc": "df0474b93fd23de15f805f1b174ef0cf3f4268acaa1dda9a741eae01ccd1939d",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_reset.inc": "06f096a40ce5e85c878bd351113db6e37136e92750304424292da3f1f56752bd",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_device_translate.inc": "62a2d15909cf8fa243c4f45b690e3313d18e453131f0e5cf0f4ac17fb02a5786",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_host_down.inc": "1cfe24a27cef8b2d7f9b69d975b419deb3024f61c8b3e528ccc1132d666fc083",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_host_up.inc": "6cd29efb4e4ff9c7d8ffb69b2321a9c23e632e30dd8e1d6524d0e9518ce36530",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_origin_pending.inc": "7433f048524bf20da37e53cdf85fa4bc11fd17bd2337befe53fdf2e9d4f72079",
+      "build\\t483-s5-p65\\r0721-controls\\original\\keyboard_raise_all.inc": "9bfabccd0fd2a1389573b73ef22fc902b8a3c7c69d05d8f369c623fe07a533c9",
+      "build\\t483-s5-p65\\r0721-controls\\original\\result.exit": "2f1c37754e38b4ac70a9559fbfbdbd28feda47f36be9cd9e3ad5bc844ee3feb6",
+      "build\\t483-s5-p65\\r0721-controls\\original\\result.txt": "916c4af896aef03b78d36ca7f635fe4f4305b59ba1f1ed05068840c2e66256ce",
+      "build\\t483-s5-p65\\r0721-controls\\original\\test.c": "6042f0c81b52a1f1057cf8da4409a469a72b2a5d9bc5dda591707f4b1f4d6f4d",
+      "build\\t483-s5-p65\\r0721-controls\\original\\test.exe": "9aed85dc13efd7970072da1351bd1654acf3218ee5295845f42536519099b30f",
+      "build\\t483-s5-p65\\r0721-controls\\original\\test.obj": "c668425580536c1bcbb802abf98f74e5ef9de7d50a55a2083a4172c1d2a6013e"
+    }
+  },
+  "line_mapping": "No product edits;existing #line951 after added guard and all #error remain unchanged.",
+  "decision": "Keep current three added lines pending owner decision.",
+  "limits": [
+    "Extracted real enqueue/output code with controlled host dependencies;not a fresh guest RESEND observation.",
+    "The witness executes the exact original RESEND pointer transition;does not repair or endorse original full-ring RESEND behavior."
+  ]
+}

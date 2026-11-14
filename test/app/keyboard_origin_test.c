@@ -32,8 +32,7 @@ int main(void)
     CHECK(!mvdm_keyboard_history_age(&state,0) && !mvdm_keyboard_history_age(&state,3));
     puts("PASS zero/many device expansion, deduplication and original history order");
     state.translated=state.device[0];state.device[0]=0;
-    state.pending=state.translated;state.translated=0;
-    state.output=state.pending;state.pending=0;
+    state.output=state.translated;state.translated=0;
     mvdm_keyboard_history_select_begin(&state);
     mvdm_keyboard_history_select(&state,state.output);
     CHECK(mvdm_keyboard_history_selected(&state)==1 && mvdm_keyboard_history_age(&state,1)==1);
@@ -42,17 +41,17 @@ int main(void)
     mvdm_keyboard_history_select(&state,state.output);
     CHECK(!mvdm_keyboard_history_selected(&state));
     puts("PASS modeled slot movement and unattributed output never select consumed history");
-    state.output=2;state.pending=3;state.prefix=1;
-    CHECK(mvdm_keyboard_history_pending(&state,511,2,512,16,0,1,1)==2);
+    state.output=2;state.prefix=1;
+    CHECK(mvdm_keyboard_history_pending(&state,511,2,512,16,0,1)==2);
     CHECK(mvdm_keyboard_history_age(&state,1)==1 && mvdm_keyboard_history_age(&state,2)==3);
-    CHECK(mvdm_keyboard_history_pending(&state,511,2,512,16,1,1,1)==3);
-    mvdm_keyboard_history_clear_device(&state);
+    CHECK(mvdm_keyboard_history_pending(&state,511,2,512,16,1,1)==3);
+    mvdm_keyboard_history_clear_ring(&state);
     CHECK(mvdm_keyboard_history_selected(&state)==3 && state.issued==3 && state.dispatched==3);
-    CHECK(!state.output && !state.pending && !state.prefix && !state.device[511] && !state.held[15]);
-    CHECK(!mvdm_keyboard_history_pending(&state,511,2,512,16,1,1,1));
-    CHECK(mvdm_keyboard_history_pending(&state,0,0,0,0,0,0,0)==UINT32_MAX);
-    CHECK(mvdm_keyboard_history_pending(&state,512,0,512,0,0,0,0)==UINT32_MAX);
-    CHECK(mvdm_keyboard_history_pending(&state,0,0,512,17,0,0,0)==UINT32_MAX);
+    CHECK(!state.prefix && !state.device[511]);
+    CHECK(!mvdm_keyboard_history_pending(&state,0,0,512,0,0,0));
+    CHECK(mvdm_keyboard_history_pending(&state,0,0,0,0,0,0)==UINT32_MAX);
+    CHECK(mvdm_keyboard_history_pending(&state,512,0,512,0,0,0)==UINT32_MAX);
+    CHECK(mvdm_keyboard_history_pending(&state,0,0,512,17,0,0)==UINT32_MAX);
     puts("PASS actual pending-slot selector, wrapped ring, held/prefix/output gates and reset-before-return");
     for(index=3;index<203;++index)CHECK(mvdm_keyboard_history_record(&state));
     mvdm_keyboard_history_select_begin(&state);
@@ -79,7 +78,7 @@ int main(void)
         CHECK(live[0]==1103 && live[99]==1202);
     }
     CHECK(!mvdm_keyboard_history_receipt(&state,3));
-    mvdm_keyboard_history_clear_device(&state);
+    mvdm_keyboard_history_clear_ring(&state);
     CHECK(mvdm_keyboard_history_receipt(&state,1)==1202 &&
         mvdm_keyboard_history_receipt(&state,2)==1103);
     CHECK(mvdm_keyboard_history_record(&state));

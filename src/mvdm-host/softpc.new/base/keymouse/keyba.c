@@ -89,13 +89,13 @@
 #include "debug.h"
 
 #ifdef NTVDM
-/* DIVERGENCE(MVDM-HOST-DIV-317): metadata only; original scan bytes unchanged. */
 #include "mvdm_keyboard_history.h"
 extern mvdm_keyboard_history nt_keyboard_history;
 extern void mvdm_keyboard_reset_pending_irq(int pending); /* DIVERGENCE(MVDM-HOST-DIV-321) */
 #endif
 
 
+#line 90
 /* <tur 12-Jul-93> BCN 2040
 ** KBD_CONT_DELAY is the delay time for continuing keyboard interrupts
 ** when a "sloppy" read of port 0x60 occurs while the keyboard interface
@@ -106,7 +106,6 @@ extern void mvdm_keyboard_reset_pending_irq(int pending); /* DIVERGENCE(MVDM-HOS
 ** See comments in kbd_inb() below for more details.
 */
 
-#line 100
 #ifndef	KBD_CONT_DELAY
 #line 101
 #define	KBD_CONT_DELAY	7000		/* microseconds */
@@ -116,7 +115,6 @@ extern void mvdm_keyboard_reset_pending_irq(int pending); /* DIVERGENCE(MVDM-HOS
 #ifdef NTVDM
 #include "idetect.h"
 #include "nt_eoi.h"
-#include "xms.h"
 
 /* exported for NT host event code */
 #line 110
@@ -148,13 +146,6 @@ char KbdData = -1;
 BOOL bKbdEoiPending = TRUE;   // Kbd interrupts blocked until KbdResume invoked
 BOOL bDelayIntPending = FALSE;
 BOOL bForceDelayInts = FALSE;
-/*
- * DIVERGENCE(MVDM-HOST-DIV-461): output-data consumption and IRQ1's PIC
- * acknowledgement are distinct hardware observations.  The original NT host
- * path retired this one-slot latch from KbdEOIHook(), which loses a scan byte
- * when a client acknowledges IRQ1 before reading port 60.  Advance the slot
- * only after this byte has been both read and normally acknowledged.
- */
 LOCAL BOOL kbd_output_data_read = FALSE;
 LOCAL BOOL kbd_output_irq_acknowledged = FALSE;
 #line 138
@@ -1012,12 +1003,11 @@ GLOBAL int keys_in_6805_buff(int *part_key_transferred)
     return(keys_in_buffer);
 }
 
-/* DIV-317: snapshot original live slots before Reset6805and8042 clears them. */
 GLOBAL unsigned PendingKeyboardHistory(void)
 {
     return mvdm_keyboard_history_pending(&nt_keyboard_history,buff_6805_out_ptr,
         buff_6805_in_ptr,BUFF_6805_PMAX,scanning_discontinued ? held_event_count : 0,
-        output_full && !kbd_output_data_read,pending_8042,waiting_for_upcode);
+        output_full && !kbd_output_data_read,waiting_for_upcode);
 }
 
 #line 1119
@@ -1025,11 +1015,10 @@ void Reset6805and8042(void)
 {
     int key;
     int cancel_irq = output_full && nt_keyboard_history.output; /* DIV-321 */
-    mvdm_keyboard_history_clear_device(&nt_keyboard_history); /* DIV-317 */
 
+#line 1123
     /* Reset 6805 */
 
-#line 1125
     buff_6805_out_ptr=0;
     clear_buff_6805();
     current_light_pattern=0;
@@ -1061,8 +1050,6 @@ void Reset6805and8042(void)
     op_port_remembered_bits = 0xc;
 
     pending_8042 = output_full = in_anomalous_state = FALSE;
-    kbd_output_data_read = FALSE;
-    kbd_output_irq_acknowledged = FALSE;
 #line 1156
     int_enabled = translating = TRUE;
     scanning_discontinued = FALSE;
@@ -1071,7 +1058,6 @@ void Reset6805and8042(void)
     //Removed by (DAB)
     //host_kb_light_off (5);
     num_lock_on = TRUE;
-    /* DIV-321: cancellation calls EOI; empty queues before it can refill. */
     mvdm_keyboard_reset_pending_irq(cancel_irq);
 #line 1163
 }
@@ -1787,9 +1773,6 @@ LOCAL VOID AddTo6805BuffImm IFN1(half_word,code)
 {
   add_to_6805_buff(code,IMMEDIATE_OUTPUT);
   output_full = FALSE;
-  kbd_output_data_read = FALSE;
-  kbd_output_irq_acknowledged = FALSE;
-  nt_keyboard_history.output=0; /* DIV-317: original port replacement. */
 #line 1895
   KbdData = -1;
 }
@@ -2174,25 +2157,6 @@ void KbdEOIHook(int IrqLine, int CallCount)
        return;
        }
 
-   /* PIC reset cancellation is not a normal EOI.  The original hook did not
-    * distinguish CallCount and consequently retired this old device slot.
-    * Preserve that reset semantics explicitly: it must neither retain an
-    * unread pre-reset byte as an early-normal-EOI slot nor manufacture a
-    * second acknowledgement for it. */
-   if (CallCount < 0) {
-       bKbdEoiPending = FALSE;
-       kbd_output_data_read = FALSE;
-       kbd_output_irq_acknowledged = FALSE;
-       output_full = FALSE;
-       nt_keyboard_history.output=0;
-       bForceDelayInts = TRUE;
-       continue_output();
-       bForceDelayInts = FALSE;
-       if (!bBiosOwnsKbdHdw)
-            HostReleaseKbd();
-       return;
-   }
-
 #line 2259
    bKbdIntHooked = KbdInt09Off != *(word *)(Start_of_M_area+0x09*4) ||
                    KbdInt09Seg != *(word *)(Start_of_M_area+0x09*4+2);
@@ -2202,11 +2166,11 @@ void KbdEOIHook(int IrqLine, int CallCount)
 
 #line 2266
    bKbdEoiPending = FALSE;
-   kbd_output_irq_acknowledged = TRUE;
+   kbd_output_irq_acknowledged = CallCount >= 0;
 
-   if (!output_full || kbd_output_data_read) {
+   if (CallCount < 0 || !output_full || kbd_output_data_read) {
        output_full = FALSE;
-       nt_keyboard_history.output=0; /* DIV-317: both slot observations retire this value. */
+#line 2268
        bForceDelayInts = TRUE;
        continue_output();
        bForceDelayInts = FALSE;
@@ -2223,7 +2187,6 @@ void KbdEOIHook(int IrqLine, int CallCount)
 LOCAL VOID do_q_int(char scancode)
 {
    nt_keyboard_history.output=nt_keyboard_history.translated; /* DIV-317 */
-   nt_keyboard_history.translated=0;
    kbd_output_data_read = FALSE;
    kbd_output_irq_acknowledged = FALSE;
 #line 2281
@@ -2461,17 +2424,6 @@ if (!waiting_for_next_8042_code)
 #error Unsupported excluded original configuration
 #else /* CPU_30_STYLE */
 #line 2569
-				/*
-				 * DIVERGENCE(MVDM-HOST-DIV-146): the original CPU40
-				 * controller branch reaches CCPU's private interrupt bitmap
-				 * directly, then asks the historical host to wake that CPU.
-				 * This composition keeps that bitmap private to c_main.c and
-				 * retains the same CPU_HW_RESET event through the original
-				 * public CCPU entrypoint.  c_cpu_interrupt performs the
-				 * original bitmap update and clears quick mode for the
-				 * selected single-session executor.
-				 */
-#line 2569
 				cpu_interrupt(CPU_HW_RESET, 0);
 #line 2571
 #endif /* CPU_30_STYLE */
@@ -2505,13 +2457,8 @@ if (code_to_send_valid)
          *  since we no longer clear output_full in the Kbd_inb routine
          */
         output_full = FALSE;
-        kbd_output_data_read = FALSE;
-        kbd_output_irq_acknowledged = FALSE;
 #line 2601
         KbdData = -1;
-        nt_keyboard_history.output=0; /* DIV-317: direct controller response replaces scan output. */
-        /* DIV-359: expose the controller reply through port 60/status,
-         * without generating an IRQ or entering the scan-code queue. */
         output_contents = (char)code_to_send;
         kbd_status |= 1;
 #line 2602
@@ -2640,10 +2587,6 @@ if(!output_full)
 	if (pending_8042)
 		{
                 pending_8042=FALSE;
-#ifdef NTVDM
-                nt_keyboard_history.translated=nt_keyboard_history.pending; /* DIV-317 */
-                nt_keyboard_history.pending=0;
-#endif
 #line 2756
                 do_q_int(pending_8042_value);
 		}
@@ -2733,11 +2676,9 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 
         *val=KbdData;
         kbd_status &= 0xfe;
-        /* Port 64 observes controller status; only port 60 consumes data. */
         kbd_output_data_read = TRUE;
         if (kbd_output_irq_acknowledged && output_full) {
             output_full = FALSE;
-            nt_keyboard_history.output=0;
             bForceDelayInts = TRUE;
             continue_output();
             bForceDelayInts = FALSE;
@@ -2874,8 +2815,6 @@ GLOBAL VOID AT_kbd_init()
        cmd_byte_8042=0x45;
        op_port_remembered_bits=0xc;
 
-       kbd_output_data_read = FALSE;
-       kbd_output_irq_acknowledged = FALSE;
 #line 3222
        int_enabled = translating = TRUE;
 

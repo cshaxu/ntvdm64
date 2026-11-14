@@ -80,7 +80,7 @@ unsigned mvdm_keyboard_history_live(const mvdm_keyboard_history *state,uint64_t 
 }
 unsigned mvdm_keyboard_history_pending(mvdm_keyboard_history *state,
     unsigned first,unsigned next,unsigned capacity,unsigned held,
-    int output,int pending,int prefix)
+    int output,int prefix)
 {
     unsigned index;
     mvdm_keyboard_history_select_begin(state);
@@ -90,7 +90,6 @@ unsigned mvdm_keyboard_history_pending(mvdm_keyboard_history *state,
         mvdm_keyboard_history_select(state,state->device[index]);
     for(index=0;index<held;++index)mvdm_keyboard_history_select(state,state->held[index]);
     if(output)mvdm_keyboard_history_select(state,state->output);
-    if(pending)mvdm_keyboard_history_select(state,state->pending);
     if(prefix)mvdm_keyboard_history_select(state,state->prefix);
     return mvdm_keyboard_history_selected(state);
 }
@@ -98,10 +97,4 @@ void mvdm_keyboard_history_clear_ring(mvdm_keyboard_history *state)
 {
     memset(state->device,0,sizeof(state->device));
     state->translated=state->prefix=0;
-}
-void mvdm_keyboard_history_clear_device(mvdm_keyboard_history *state)
-{
-    mvdm_keyboard_history_clear_ring(state);
-    memset(state->held,0,sizeof(state->held));
-    state->pending=state->output=0;
 }

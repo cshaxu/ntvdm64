@@ -1,0 +1,27 @@
+{
+  "point": "T483-R0719",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "original_anchor": 108,
+  "mirror_diff_delta": -1,
+  "decision": "Restore original omission of xms.h;no replacement declaration or shim.",
+  "responsibility": "Original controller output-port handling calls existing XMS A20 enable/disable routines.",
+  "provider": "src/mvdm-host/xms.486/xmsa20.c functions VOID(void);original no-argument calls discard result.",
+  "necessity": "No demonstrated need for added include in selected x86 context;only C4013 warnings on restoration. Actual source command with identical logical filename yields identical67 nonmetadata COFF sections and symbol-normalized relocations.",
+  "proof": {
+    "normalized_code_data_relocations_equal": true,
+    "sections_before": 67,
+    "sections_after": 67,
+    "different_sections": []
+  },
+  "runner": {
+    "start": "2026-11-13T15:40:55.4685738-08:00",
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\xms-controls\\run.cmd",
+    "pid": 21588
+  },
+  "line_mapping": "Removed include before unchanged #line110. All #error and other #line remain.",
+  "status": "Local restored include;whole keyba.c audit2/32;no final-code full delivery claim.",
+  "limits": [
+    "Selected x86 compiler/ABI proof,not portable C type equivalence.",
+    "Compiler controls precede this exact include deletion and use identical logical source filename;final whole-file validation still required."
+  ]
+}

@@ -97,7 +97,7 @@ int main(void)
     kbd_output_data_read=1;
     CHECK(output_full && !PendingKeyboardHistory());
     bKbdEoiPending=1;KbdEOIHook(1,0);
-    CHECK(!output_full && !nt_keyboard_history.output && !PendingKeyboardHistory());
+    CHECK(!output_full && !PendingKeyboardHistory());
     puts("PASS actual enqueue/remove/output/EOI preserves then retires origin; ignored release has none");
     buff_6805_out_ptr=buff_6805_in_ptr=511;calc_buff_6805_left();
     begin();host_key_up(0x32);end();
@@ -135,11 +135,16 @@ int main(void)
     CHECK(reset_pending_irq_calls==1);
     CHECK(mvdm_keyboard_history_selected(&nt_keyboard_history)==1);
     CHECK(!output_full && !pending_8042 && !scanning_discontinued && !held_event_count);
-    CHECK(!nt_keyboard_history.output && !nt_keyboard_history.pending && !nt_keyboard_history.prefix);
+    CHECK(!nt_keyboard_history.prefix);
     CHECK(!PendingKeyboardHistory());
+    kbd_output_data_read=kbd_output_irq_acknowledged=1;
     Reset6805and8042();CHECK(reset_pending_irq_calls==1);
-    AddTo6805BuffImm(0xfa);continue_output();
+    CHECK(!PendingKeyboardHistory());
+    AddTo6805BuffImm(0xfa);
+    CHECK(!output_full && !PendingKeyboardHistory());
+    continue_output();
     CHECK(output_full && !nt_keyboard_history.output);
+    CHECK(!kbd_output_data_read && !kbd_output_irq_acknowledged);
     Reset6805and8042();CHECK(reset_pending_irq_calls==1);
     puts("PASS original full hardware reset clears device provenance but preserves captured return selection");
     /* A consumed make survives in the guest but not in host key_down_count

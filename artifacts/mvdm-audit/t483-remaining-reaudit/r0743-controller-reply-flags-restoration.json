@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0743",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 2,
+    "deleted": 0,
+    "remaining_added": 0,
+    "mirror_diff_delta": -2
+  },
+  "location": "cmd_to_8042 code_to_send_valid NTVDM branch;before original logical2601",
+  "problem": "Added read/EOI flag clearing duplicates next scan-slot publication after direct controller reply invalidates the current scan slot.",
+  "chain": "cmd_to_8042 reply -> original output_full=FALSE and KbdData=-1 -> direct port reply without IRQ. kbd_inb retires only if output_full;PendingKeyboardHistory selects output only if full. EOI on empty slot follows !output_full arm. Next scan enters do_q_int,which resets both facts before setting output_full and calling KbdIntDelay. Other KbdIntDelay callers are continue_output full arm and KbdResume full guard.",
+  "evidence": "Current complete production reference search finds all read/EOI fact accesses and KbdIntDelay callers only in keyba.c. do_q_int is the only output_full=TRUE publication. Both delay callers outside it require output_full. Thus stale facts while direct reply has invalidated scan slot do not affect request or retirement;next publication overwrites them. Prior generic reset/reply rationale did not establish necessity of these two writes.",
+  "necessity": "No independent responsibility remains for these duplicate writes;direct response data/status publication is separately audited under R0744.",
+  "minimum": "Restore original body by deleting both flag writes;no helper or second state path.",
+  "change": "Delete two added state writes;mirror diff net-2.",
+  "decision": "Original restored locally;final whole-file runtime/build delivery pending.",
+  "line_mapping": "Existing #line2601 still anchors KbdData original assignment;all excluded #error unchanged.",
+  "verification": "Source call-chain audit complete;git diff check pending below. Actual controller/PIC reply,early EOI,next byte coverage will run on final whole-file code;no new passing test claimed.",
+  "limits": [
+    "Final runtime validation pending;do not count as delivered restoration."
+  ]
+}

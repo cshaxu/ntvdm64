@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0736",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 0,
+    "deleted": 1,
+    "remaining_added": 0,
+    "remaining_deleted": 1,
+    "mirror_diff_delta": 0
+  },
+  "location": "Original unconditional output_full clear at2265;omitted before #line2266",
+  "problem": "Unconditionally clearing output validity on normal early EOI discards an unread keyboard byte.",
+  "chain": "PIC normal EOI before port60 -> KbdEOIHook -> original unconditional clear would invalidate slot -> shared continue_output retires/refills before guest reads",
+  "evidence": "Pinned original clears output_full before bKbdEoiPending. Independent early-EOI overwrite evidence is in R0720. r0736-controls restores only that assignment:current passes0,restoration fails1 because the next unread byte no longer remains full after normal early EOI. Cancellation controls still pass before that assertion.",
+  "necessity": "Data consumption and interrupt acknowledgement can arrive in either order;unconditional clear cannot serve both. Original clear responsibility remains inside the common retirement condition;only its unconditional placement is removed.",
+  "minimum": "Keep one original statement omitted at this location;restore cannot preserve required unread-byte lifetime. Moving equivalent validity bookkeeping to another owner adds state rather than removing the mismatch.",
+  "change": "No product edit;one deleted original line pending owner.",
+  "decision": "Retain omission pending owner.",
+  "line_mapping": "No edit;#line2266 identifies original pending-state clear;all #error unchanged.",
+  "verification": "build/t483-s5-p65/r0736-controls:unified0/original-clear1;actual extracted EOI with controlled dependencies,not guest acceptance.",
+  "limits": [
+    "The retirement guard and metadata cleanup are separately reviewed at R0738."
+  ]
+}

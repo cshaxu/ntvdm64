@@ -46,7 +46,7 @@ try {
     }
     $text = $stdout.Result + $stderr.Result
     $text | Set-Content -LiteralPath (Join-Path $out 'controller.txt') -Encoding UTF8
-    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=89 failures=0' -or
+    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=90 failures=0' -or
         $text -notmatch 'PASS actual INTACK/EOI' -or
         $text -notmatch 'PASS early EOI retains unread port-60 byte' -or
         $text -notmatch 'PASS PIC reset cancels rather than early-acknowledges' -or

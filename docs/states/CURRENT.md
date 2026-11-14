@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-722 points reviewed:284 restored/verified/published,0 local pending delivery,
-2 approved retain,436 qualified pending decisions. Another1998 points unreviewed.
-Sequential file disposition is103/365;262 remain.
+756 points reviewed:291 restored/verified/published,0 local pending delivery,
+2 approved retain,463 qualified pending decisions. Another1964 points unreviewed.
+Sequential file disposition is106/365;259 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -55,9 +55,9 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P64 package `c6d1e7a2-4e0c-430b-bf67-1b4334740bd4` published11x2;hashes match.
-Cached full,focused,EMS2 and Full16 passed;Git delivery accompanies record.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p64-checkpoint.json).
+P65 package `1718c31b-feee-4bb2-ade6-71fd9c119aa3` published11x2;hashes match.
+Cached full,keyboard90,origin24,CPU reset,focused,EMS2,Full16 passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p65-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -238,4 +238,4 @@ sevid004:R0605-R0607 qualified pending owner;source unchanged;next R0608.
 
 sevid016:R0608-R0611 qualified. sevid017:11/11 qualified. sevid018:9/9;LF restored. sevid019:49/49;46 restored;3 residuals;net-140;P57 gates passed;next R0681.
 
-P64:sas2 delivered;3 files diff-14;next R0716.
+P65:diff-68;keyba32/32 delivered;next R0750.

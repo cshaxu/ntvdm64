@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0735",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 19,
+    "deleted": 0,
+    "remaining_added": 0,
+    "mirror_diff_delta": -19,
+    "residual_ownership": "Cancellation predicates are combined into existing R0737/R0738 changed lines;not counted twice as added lines and not claimed fully original."
+  },
+  "location": "KbdEOIHook separate negative CallCount branch removed;common tail retained",
+  "problem": "PIC cancellation must discard old unread data,while normal early EOI must retain it;separate tail duplicated queue and host-release logic.",
+  "chain": "Original PIC host_EOI_hook(-1) -> original hook guards -> original BIOS/interrupt state refresh -> shared pending clear -> cancellation-aware retirement -> original continue_output/HostReleaseKbd once",
+  "evidence": "Pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c keyba.c2251-2273 routes cancellation through the same BIOS-state update and tail as normal EOI. Current19-line early-return branch needlessly duplicated that path. Retiring cancellation remains necessary: unified extracted control passes0,removing CallCount<0 from retirement fails1 with unread slot retained. Original SWPIC_clear_int explicitly calls EOI with -1.",
+  "necessity": "The cancellation distinction is necessary;the separate path and invalid-slot clears are not. Normal early-EOI retention cannot be applied to cancellation. Original common state update is restored for cancellation with no evidence it must be bypassed.",
+  "minimum": "Delete19-line branch;set acknowledgement from CallCount>=0 in existing assignment;OR cancellation into existing retirement condition. No new lines in those existing diff blocks,helper,state or second executor. Original public tail handles release and refill once.",
+  "change": "Remove19 mirror lines;fold predicates into R0737/R0738 existing changed lines;remaining cancellation semantic stays pending owner.",
+  "decision": "Partial minimization locally tested;not a whole-point original restoration. Residual predicates pending owner and later ordered R0737/R0738 audit.",
+  "line_mapping": "#line2259 restores original common BIOS-state update;#line2266/2272 retained;all #error unchanged.",
+  "verification": "r0735.exit0:device7/return10/carrier7. r0735-controls unified0/no-cancel-distinction1:cancel no-next byte retires,queued byte advances once,new normal early EOI retains byte. Actual PIC final suite/full build/publication still pending whole file.",
+  "limits": [
+    "Extracted host boundary fixture,not a fresh guest/PIC hardware acceptance.",
+    "Cancellation now refreshes BIOS/hook flags exactly as pinned original rather than retaining the autonomous branch's stale values;intentional original restoration.",
+    "The obsolete cancelled slot's read fact need not be zero when output_full is false;new output initializes both facts,as separately proven in R0727/R0731."
+  ]
+}

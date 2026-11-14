@@ -39,7 +39,7 @@ static BOOL WriteConsoleInputVDMW(HANDLE handle,PINPUT_RECORD records,DWORD coun
 static void Reset6805and8042(void)
 {
     kbd_output_data_read=0;
-    ++resets;mvdm_keyboard_history_clear_device(&nt_keyboard_history);
+    ++resets;mvdm_keyboard_history_clear_ring(&nt_keyboard_history);
     buff_6805_out_ptr=buff_6805_in_ptr=held_event_count=0;
     output_full=pending_8042=waiting_for_upcode=scanning_discontinued=0;
     memset(key_marker_buffer,0,sizeof(key_marker_buffer));

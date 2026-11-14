@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0748",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 9,
+    "deleted": 0,
+    "remaining_added": 7,
+    "mirror_diff_delta": -2
+  },
+  "location": "kbd_inb NTVDM port60 branch before original2854",
+  "problem": "When PIC EOI precedes port60 read,the read must retire preserved slot and advance queue;old EOI-only retirement loses unread byte.",
+  "chain": "PIC normal early EOI records ack while preserving output -> actual kbd_inb60 marks data read -> full+ack retires output -> existing continue_output under original forced-delay discipline. Port64 does not enter this branch.",
+  "evidence": "T460 S3 independent actual-controller/PIC experiment and original baseline lose make1C under early EOI;corrected controller preserves it. Existing actual provider fixture tests early EOI,64 status reads,60 read and next-byte delivery. Without this port60 continuation the preserved slot has no later EOI to retire it. Origin clear after fullFALSE is redundant:PendingKeyboardHistory and reset cancel selection gate on full,and next do_q_int overwrites origin.",
+  "necessity": "Two observable completion orders require read-side retirement in addition to original EOI-side continuation. Existing continuation and delay controls are reused;redundant origin clearing does not implement that responsibility.",
+  "minimum": "Retain seven-line handshake/retirement;remove one comment and one redundant origin clear. No second queue,helper or new IRQ policy.",
+  "change": "Mirror +9 to +7,net-2;remaining semantic diff stays pending owner.",
+  "decision": "Qualified pending owner for minimized read-side handshake.",
+  "line_mapping": "#line2854 still anchors original trace;all #error preserved.",
+  "verification": "Historical source and fixture evidence inspected;P65 final actual-controller/PIC run remains pending;no fresh runtime pass claimed for this final edit.",
+  "limits": [
+    "Actual PIC fixture has controlled host boundaries,not complete BIOS or guest acceptance."
+  ]
+}

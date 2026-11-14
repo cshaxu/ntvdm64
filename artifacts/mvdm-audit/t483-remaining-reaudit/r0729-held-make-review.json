@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0729",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 3,
+    "deleted": 0,
+    "remaining_added": 3,
+    "mirror_diff_delta": 0
+  },
+  "location": "host_key_down held slot before original1356",
+  "problem": "Return the original host records represented by delayed makes rather than reconstructing records from key numbers.",
+  "chain": "Host history begin -> scanning_discontinued host_key_down -> original held[type,key] slot -> resume scan generation -> device/output -> handoff selection",
+  "evidence": "Original held arrays retain only type/key,not original event identity or raw flags/repeat data. Same-key makes have equal stored payloads but distinct raw records;R0718 proves original raw-suffix count selection fails after ignored/expanded events. r0729-controls before passes0,omitting only held-origin assignment fails1 at PendingKeyboardHistory()==2;both distinct records survive replay in before control.",
+  "necessity": "Identity must cross deferred storage before the original active dispatch ends;it cannot be recovered from key number/type later. Original marker count does not establish raw record correspondence.",
+  "minimum": "One assignment uses original held_event_count before its original increment/clamp. Moving it into each producer or new common enqueue function adds structure without reducing identity operations;no separate queue/count.",
+  "change": "No source change;three added lines remain pending owner.",
+  "decision": "Retain current residual pending owner decision.",
+  "line_mapping": "No edit;#line1356 and all #error unchanged.",
+  "verification": "build/t483-s5-p65/r0729-controls:actual extracted host admission/replay,positive0/deletion1;current source dependencies from r0727-device. Not guest acceptance.",
+  "limits": [
+    "Original full-buffer clamp behavior unchanged;only slots below held_event_count are selected.",
+    "Specific assigned-source evidence supports this hook,not blanket approval of all metadata code."
+  ]
+}

@@ -390,7 +390,6 @@ typedef	union
 	} as_bfld;
 } INPUT_STAT_REG1;
 #endif /* BIT_ORDER2 */
-#line 391
 
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
@@ -952,7 +951,6 @@ struct extensions_controller
 #endif /* V7VGA */
 
 #endif /* BIT_ORDER2 */
-#line 1961
 
 #ifdef V7VGA
 #ifdef CPU_40_STYLE
@@ -964,7 +962,6 @@ extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #endif	/* CPU_40_STYLE */
 #line 1974
 #endif /* V7VGA */
-#line 1014
 
 #ifdef GISP_SVGA
 #line 1977
@@ -987,13 +984,11 @@ IMPORT VOID disable_gfx_update_routines IPT0();
 #ifndef cursor_changed
 IMPORT VOID cursor_changed IPT2(int, x, int, y);
 #endif
-#line 1996
 IMPORT VOID update_shift_count IPT0();
 
 #ifdef V7VGA 
 IMPORT struct extensions_controller extensions_controller;
 #endif /* V7VGA */ 
-#line 2001
 IMPORT struct crt_controller		crt_controller;
 IMPORT struct sequencer			sequencer;
 IMPORT struct attribute_controller	attribute_controller;
@@ -1010,7 +1005,5 @@ IMPORT	byte	DAC_data_mask;
 #ifdef V7VGA
 IMPORT	int	DAC_data_bits;
 #endif
-#line 1055
 
 #endif	/* VGG */
-#line 1057

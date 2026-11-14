@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0731",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 3,
+    "deleted": 0,
+    "remaining_added": 0,
+    "mirror_diff_delta": -3
+  },
+  "location": "AddTo6805BuffImm before original1895",
+  "problem": "Immediate reply invalidates the current output slot;additional metadata/event-fact zeroing was duplicated with next-output publication.",
+  "chain": "Original immediate enqueue -> output_full FALSE -> original KbdData invalidation -> optional wait/EOI -> pop reply -> do_q_int initializes origin/read/ack -> output_full TRUE",
+  "evidence": "Original output_full FALSE gates pending-origin selection,reset IRQ capture and port60 retirement. KbdIntDelay is reached by do_q_int after both facts initialized,or continue_output only for a full slot,or KbdResume which initializes its facts. EOI handles !output_full independently. Immediate queue origin0 is established at enqueue,then pop/output replace old metadata. No original failure requires these three extra clears.",
+  "necessity": "These specific assignments are unnecessary even though tracking input identity and early EOI are independently required.",
+  "minimum": "Restore original code directly;no substitute hook/helper/state.",
+  "change": "Delete all3 added assignments;check invalid prepublication slot does not select old input.",
+  "decision": "Fully restored locally;await whole-file delivery,not pending owner.",
+  "line_mapping": "Original KbdData resumes at unchanged #line1895;all #error unchanged.",
+  "verification": "build/t483-s5-p65/r0731.exit=0;maintained device7,return10,carrier7 groups pass on reduced source,including old read/ack observations and prepublication invalid-slot check.",
+  "limits": [
+    "Not full build/publication/guest acceptance;those follow completed-file batch.",
+    "This restoration does not decide later direct-port,EOI,resume or init hooks."
+  ]
+}

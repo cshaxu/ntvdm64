@@ -1,0 +1,40 @@
+{
+  "point": "T483-R0718",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 7,
+    "before_deleted": 0,
+    "remaining_added": 6,
+    "remaining_deleted": 0,
+    "mirror_diff_delta": -1
+  },
+  "responsibility": "Preserve exact host keyboard-record correspondence across non-bijective scan generation and cancel actual stale IRQ on hardware handoff reset.",
+  "original_limitation": "Original CalcNumberOfUnusedKeyEvents returns keys_in_6805_buff count plus KeyQueue count;GetHistoryKeyEvent selects raw history suffix. Ignored release and multi-packet actions break count-to-record identity. Original key markers identify scan packets,not raw history events.",
+  "independent_evidence": [
+    "docs/etc/evidence/m0-t423-s6-window-display.md: Keyboard provenance requirements beyond scalar compensation;original HistoryBoundary six failing assertions and real captured29-record shape.",
+    "docs/etc/evidence/m0-t423-s16-typeahead-handoff.md: observed pending IRQ replay plus rejection of broad reset candidate;final selective cancellation route passes repeated direct and reverse controls."
+  ],
+  "chain": "Original event history -> dispatch -> keyba ring/held/translation/output slots -> snapshot pending origins before Reset6805and8042 -> original history record store -> Console prepend. Reset interface separately cancels captured user-output IRQ after queues emptied.",
+  "counter_review": "Restoring original count-only return loses information before public Console boundary;an adapter there cannot reconstruct it. A second raw-event ring or translating guest scans back into host events is unnecessary. Exact includes/externs supply existing metadata type/state/reset seam;removing comment does not remove any operation. This does not approve all later hooks or helper complexity.",
+  "controls": {
+    "runner": {
+      "start": "2026-11-13T15:38:51.5577517-08:00",
+      "pid": 10564,
+      "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\origin.ps1"
+    },
+    "exit": 0,
+    "device_pass_groups": 7,
+    "return_pass_groups": 10,
+    "logs": [
+      "build\\t483-s5-p65\\origin-device.log",
+      "build\\t483-s5-p65\\origin-return.log"
+    ],
+    "launch_failure": "Initial runner missing - before ExecutionPolicy terminated64 without starting tests;corrected command completed0. Original failure logs retained."
+  },
+  "line_mapping": "Only comment removed before existing #line100 reset;all code,#line and #error unchanged.",
+  "decision": "Remaining6 added lines pending owner;comment reduced now.",
+  "limits": [
+    "Current extracted fixtures have controlled device/Console dependencies,not new guest acceptance.",
+    "keyba.c32-point audit is in progress;not counted as complete file."
+  ]
+}

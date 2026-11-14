@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0737",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 1,
+    "deleted": 0,
+    "remaining_added": 1,
+    "mirror_diff_delta": 0
+  },
+  "location": "KbdEOIHook acknowledgement assignment after original2266",
+  "problem": "Port60 consumption after an early EOI must recognize that the byte may now retire.",
+  "chain": "PIC EOI -> bKbdEoiPending FALSE -> record normal acknowledgement -> later kbd_inb60 records consumption -> both facts retire output and continue once",
+  "evidence": "Original pending flag is false before IRQ admission and after its acknowledgement;it cannot distinguish those states. Removing the acknowledgement assignment leaves the new byte's initialized false value;the actual port60 handler then cannot retire output after early EOI,while the scheduler may retry it. Independent original early-EOI failure is recorded in R0720. R0735 controls explicitly check cancellation false and normal early EOI true.",
+  "necessity": "A normal EOI fact is separate from port data consumption and original IRQ pending state. Negative cancellation should retire the byte through the cancellation predicate,not claim a normal acknowledgement.",
+  "minimum": "One assignment derives the fact from existing CallCount;R0735 replaced TRUE with CallCount>=0 while removing separate cancellation branch. Same one added line,no new state/helper here.",
+  "change": "No further edit;R0735 coupled assignment reviewed in order here.",
+  "decision": "One residual added assignment pending owner.",
+  "line_mapping": "No new edit;existing #line2266/2272 and all #error preserved.",
+  "verification": "R0735 final-source focused7/10/7 and cancellation-vs-normal extracted control passed. Port60 early-EOI actual controller/PIC assertions retained for final whole-file run;not claimed freshly passed.",
+  "limits": [
+    "The slot retirement guard is reviewed next;this point does not establish every cleanup in that block necessary."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0746",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 4,
+    "deleted": 0,
+    "remaining_added": 0,
+    "mirror_diff_delta": -4
+  },
+  "location": "continue_output pending_8042 branch before original2756",
+  "problem": "Added provenance transfer models a pending origin with no production assignment or producer.",
+  "chain": "Original pending_8042 static-zero state is only cleared by reset/continue in current selected source. No production assignment sets it true;no production assignment supplies history.pending. Authored carrier test alone invented the intermediate pending slot.",
+  "evidence": "Complete src reference searches across C,H,ASM and remaining source extensions find only keyba declaration,clears,conditions;no address-taking or writer. history.pending references are declaration,selection,read-and-clear;no producing assignment. Current origin carrier test was the only source populating the synthetic field.",
+  "necessity": "No production responsibility established for the added pending-origin layer;original queue branch remains unchanged rather than deleting original logic.",
+  "minimum": "Remove four added mirror lines,remove unused history field and selector argument/branch,update all callers and modeled tests to real translated-to-output flow. No new shim or fallback.",
+  "change": "Restore original continue_output branch;mirror diff net-4. Reduce autonomous state and argument;retain original pending_8042 variable/logic.",
+  "decision": "Original restored locally;whole-file final delivery pending.",
+  "line_mapping": "Existing #line2756 anchors original do_q_int;all #error unchanged. PendingKeyboardHistory existing line size unchanged.",
+  "verification": "Fresh background r0746 device7/return10/carrier7 passed;runner exit0. Fixture assertions keep wrapped-ring,held,prefix,output,receipt ordering and reset coverage;removed only fictitious pending carrier step. git diff check passed.",
+  "limits": [
+    "Focused source-extraction/controlled boundaries are not final product or guest acceptance."
+  ]
+}

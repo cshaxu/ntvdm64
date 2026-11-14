@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0728",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 2,
+    "deleted": 0,
+    "remaining_added": 1,
+    "mirror_diff_delta": -1
+  },
+  "location": "Reset6805and8042 cancellation before #line1163",
+  "problem": "A pending keyboard IRQ can replay input already returned to the native Console after controller reset.",
+  "chain": "Original device reset empties queues -> captured user-origin flag -> cancel delayed quick event -> original ica_hw_interrupt_cancel -> SWPIC_clear_int -> host_EOI_hook(-1) -> keyboard callback",
+  "evidence": "docs/etc/evidence/m0-t423-s16-typeahead-handoff.md records output-full/IRR-pending replay into BIOS during actual handoff;selective cancellation passed primary controls and broad reset caused lost input. Current nt_eoi.c host_DelayHwInterrupt Delay=FFFFFFFF cancels quick event;ica.c cancellation clears IRR and synchronously calls EOI hook,which can continue_output. Original Reset6805and8042 alone has neither cancellation.",
+  "necessity": "Queue retirement and interrupt retirement are different owners. Cancellation belongs after original reset to prevent callback refilling discarded data;normal controller ACK must not trigger unconditional cancellation.",
+  "minimum": "Keep one existing boundary call using original delayed-event/PIC interfaces;inline replacement requires condition plus two calls in mirror and adds diff. Moving cancellation into metadata helper mixes independent ownership;no replacement state machine.",
+  "change": "Remove1 explanatory comment;retain1 cancellation call pending owner.",
+  "decision": "Residual call pending owner;comment removed locally.",
+  "line_mapping": "Only comment removed before unchanged #line1163;all code and #error unchanged.",
+  "verification": "R0727 final-source extracted device7/return10/carrier7 passed before this comment-only removal. Actual controller/PIC fixture contains handoff reset no-refill assertion for full-batch gate;not freshly executed here. Historical guest evidence is not new acceptance.",
+  "limits": [
+    "Full batch delivery pending complete keyba file.",
+    "Rejected broad reset and supplementary historical reverse-path failures remain explicit in cited record;not claimed resolved by this audit."
+  ]
+}

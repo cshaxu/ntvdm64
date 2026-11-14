@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0744",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 5,
+    "deleted": 0,
+    "remaining_added": 2,
+    "mirror_diff_delta": -3
+  },
+  "location": "cmd_to_8042 valid response;before original logical2602",
+  "problem": "Original selected NTVDM branch discards calculated controller response;port60 reads previous output. Existing five-line patch also clears an already invalid origin and adds two comment lines.",
+  "chain": "kbd_outb64 -> cmd_to_8042 computes reply -> original output_full=FALSE,KbdData=-1 -> output_contents and status publication -> kbd_inb64 status / kbd_inb60 refreshed KbdData. No IRQ generation or queue insertion for direct response.",
+  "evidence": "T430 S3 actual-provider two-sentinel baseline returns previous bytes instead of input_port_val BF;T448 S11 correction passed30 actual controller/PIC assertions. Source kbd_inb reloads KbdData from output_contents;without assignment value remains stale. Without status bit write a prior cleared status remains empty despite reply. Current fixture checks status and C0/20/AA/AB/D0/E0. Origin selection in PendingKeyboardHistory and reset cancellation require output_full,already FALSE;do_q_int overwrites origin before next valid slot.",
+  "necessity": "Publishing computed reply and its availability is required by controller port contract and is absent in original selected NTVDM body. Clearing origin while invalid is redundant and does not implement that responsibility.",
+  "minimum": "Keep two writes to original output_contents/kbd_status;delete origin clear and two added comment lines. No new state,helper or command-specific path.",
+  "change": "Mirror diff +5 to +2,net-3;partial restoration,residual remains pending owner.",
+  "decision": "Qualified pending owner for two-line response publication;redundant origin clear and comments removed directly.",
+  "line_mapping": "Existing #line2602 continues to anchor original else;all #error preserved. No selected original statement moved to wrong logical coordinate.",
+  "verification": "Historical actual-provider evidence re-read and full current consumer chain inspected. Final source controller/PIC regression remains pending whole-file completion;no historical pass represented as current-code pass.",
+  "limits": [
+    "Controlled host boundaries in actual controller/PIC fixture are not complete guest BIOS acceptance."
+  ]
+}

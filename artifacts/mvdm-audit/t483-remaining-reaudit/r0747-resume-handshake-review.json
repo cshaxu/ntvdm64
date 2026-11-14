@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0747",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 2,
+    "deleted": 0,
+    "remaining_added": 2,
+    "mirror_diff_delta": 0
+  },
+  "location": "KbdResume before original2790",
+  "problem": "Original resume explicitly rearms an existing full output slot;the added read/EOI facts must describe this renewed delivery rather than its previous IRQ.",
+  "chain": "nt_resume_event_thread -> ica_reset_interrupt_state -> KbdResume -> original clear bKbdEoiPending -> if full and enabled KbdIntDelay -> IRQ delivery. Initial nt_init_event_thread also calls KbdResume. Unlike do_q_int,this path rearms existing output without replacing its data.",
+  "evidence": "Source original KbdResume clears flow regulators and invokes KbdIntDelay for full slot. Concrete state A:early EOI leaves full unread slot and ackTRUE;without ack clear,KbdIntDelay rejects original rearm. Concrete state B:previous port60 read leaves full slot until EOI with readTRUE;original resume rearms it,then new early EOI would retire byte before new read unless read fact is reset. Both predecessor states are actual normal/early EOI fixture paths. nt_resume_event_thread calls PIC state reset before rearm;these writes do not introduce a new rearm policy.",
+  "necessity": "Preserve original resume/rearm responsibility with two independently tracked completion facts. do_q_int resets cannot substitute because original KbdResume does not publish through do_q_int.",
+  "minimum": "Keep two fact initializations at original rearm owner;moving them into every KbdIntDelay would erase ack guarding of producer retries and regress proven early EOI path.",
+  "change": "No source change;remaining +2/-0 pending owner.",
+  "decision": "Qualified pending owner based on explicit original rearm call chain and reachable state transitions.",
+  "line_mapping": "No edit;#line2790 and all #error unchanged.",
+  "verification": "Source chain and complete flag uses inspected;normal/early EOI predecessor fixture coverage exists. Dedicated fresh resume runtime case not yet run and not claimed;whole-file final tests pending.",
+  "limits": [
+    "Source proof establishes necessary reset for original rearm;does not claim all event-thread lifecycle interleavings tested."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0730",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 3,
+    "deleted": 0,
+    "remaining_added": 3,
+    "mirror_diff_delta": 0
+  },
+  "location": "host_key_up held slot before original1411",
+  "problem": "Keep original release-record identity across scan suspension and deferred multi-byte translation.",
+  "chain": "Host history -> scanning_discontinued branch -> held release before immediate key_down_count filter -> original replay -> multi-byte scan ring -> handoff",
+  "evidence": "Original host_key_up stores releases in the held branch before checking ordinary immediate-path key_down_count;stored type/key cannot distinguish repeated raw releases. R0718 provides independent original history-count failure evidence. r0730-controls current passes0,omitting held-origin assignment fails1 at two-record selection;actual extracted replay retains both identities with assignment.",
+  "necessity": "Deferred releases need source identity before dispatch ends;byte expansion and ignored other events prevent reconstructing it from packet count or last raw record.",
+  "minimum": "One assignment to the existing held slot under NTVDM;no new queue or filter. Shared down/up helper would move both original admissions and not remove the distinct required assignments.",
+  "change": "No source change;three added lines remain pending owner.",
+  "decision": "Retain current residual pending owner decision.",
+  "line_mapping": "No edit;#line1411 and all #error unchanged.",
+  "verification": "build/t483-s5-p65/r0730-controls:positive0/restoration1,distinct from down-key control;extracted device test,not guest acceptance.",
+  "limits": [
+    "Test scan-generator boundary is controlled;real host admission and replay extracted from production.",
+    "Original overflow and release filtering behavior preserved."
+  ]
+}

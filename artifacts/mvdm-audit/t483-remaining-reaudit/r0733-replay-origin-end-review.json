@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0733",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 3,
+    "deleted": 0,
+    "remaining_added": 3,
+    "mirror_diff_delta": 0
+  },
+  "location": "cmd_to_6805 replay completion before original2169",
+  "problem": "Do not let the last replayed user origin escape the deferred event-generation scope.",
+  "chain": "Guest command held replay temporarily selects each source -> replay ends -> internal scan production or next nt_event dispatch begins",
+  "evidence": "R0732 proves per-held-event selection required. Without end clearing,the final held origin remains active despite guest-command replay completion. All later ordinary enqueue reads active,so internal generation can be falsely assigned to that raw event. Actual r0733 deletion control additionally fails next mvdm_keyboard_history_begin;current passes0,omission fails1. nt_event.c treats failed begin as dispatch failure.",
+  "necessity": "Origin is valid only during its raw-event generation. Independent no-unattributed-input-replay requirement from R0718 demands ending this temporary scope;the begin guard alone is not the justification.",
+  "minimum": "One assignment at existing replay tail. Removing the autonomous begin guard still permits incorrect synthetic attribution;new scope stack or second replay executor is unnecessary. Calling existing end helper costs the same mirror lines and adds indirection without shrinking responsibility.",
+  "change": "No source change;three added lines pending owner.",
+  "decision": "Residual replay-scope end pending owner.",
+  "line_mapping": "No edit;#line2169 and all #error unchanged.",
+  "verification": "build/t483-s5-p65/r0733-controls before0/restoration1;actual extracted replay and carrier begin. Synthetic attribution consequence is source proof,not a separately executed guest test.",
+  "limits": [
+    "No fresh guest acceptance;whole-file build/delivery pending.",
+    "No claim of proven asynchronous nested dispatch beyond the current serialized device path."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "point": "T483-R0720",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 9,
+    "deleted": 0,
+    "remaining_added": 2,
+    "mirror_diff_delta": -7
+  },
+  "problem": "Normal IRQ1 EOI may precede port60 consumption;original hook releases and overwrites unread output.",
+  "original_evidence": "Pinned original keyba.c KbdEOIHook2259-2271 unconditionally clears output_full and calls continue_output;it has no data-read observation. Independent owner experiment and T460 evidence record missing1C under early EOI,versus repaired order.",
+  "call_chain": [
+    "do_q_int latches byte and starts original IRQ delay",
+    "PIC normal acknowledgement invokes KbdEOIHook",
+    "kbd_inb60 consumes data;64 only observes status",
+    "retire/continue only after read and normal acknowledgement",
+    "negative PIC cancellation explicitly retires old byte under separate semantics"
+  ],
+  "existing_state_review": {
+    "bKbdEoiPending": "FALSE before IRQ admission as well as after EOI;cannot distinguish not-yet-issued from acknowledged slot. TRUE also used to block initial delivery.",
+    "kbd_status_bit0": "Set at immediate IRQ delivery or delayed observation,cleared by port60,also used for direct controller replies;not an independent per-slot read history.",
+    "output_full": "Slot validity,not the two ordering facts;changing it to packed flags changes original boolean writes/readers.",
+    "KbdData": "Latched byte/shadow with -1 sentinel;not acknowledgement provenance."
+  },
+  "minimum": "Keep two controller-local facts pending owner;no additional queue/state owner. Remove7-line narrative now;do not encode flags into old boolean fields or add new enum/masks solely to shrink declaration lines.",
+  "evidence": [
+    "docs/etc/evidence/m0-t460-s3-keyboard-early-eoi-plan.md",
+    "test/mvdm-host/keyboard_controller_pic_test.c:145-180",
+    "r0718-keyboard-boundary-review.json"
+  ],
+  "verification": "Historical actual-controller/PIC46-assertion candidate proof and independent44-assertion experiment;current fixture source has89 assertions,not freshly rebuilt/run for this point. Current extracted origin/device fixture from R0718 covers normal read/EOI retirement but is not early-EOI negative proof.",
+  "line_mapping": "Seven comment lines removed immediately before flag declarations and existing #line138. Code and all #error/#line directives unchanged;original retained declarations resume138.",
+  "decision": "Remaining two declarations pending owner;later transition hooks still require their own ordered audit.",
+  "limits": [
+    "No fresh Win95 reproduction or full runtime acceptance claimed.",
+    "This point establishes missing read/EOI facts,not blanket approval of every current keyboard adaptation."
+  ]
+}

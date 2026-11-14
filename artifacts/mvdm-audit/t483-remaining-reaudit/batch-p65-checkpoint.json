@@ -1,0 +1,195 @@
+{
+  "status": "P65 delivery gates verified; external fixture skips retained; accompanies Git commit",
+  "source_files": 9,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "sha256": "0e1cb38308754edacca018ab297daf76794a35b4d6a8d33af4c765cade710156"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "sha256": "a9ad670c2d5c026d1f4af57d906d798ec23b7d9d1020dc0e2c57c321525fae70"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_keyboard_history.h",
+      "sha256": "47d5e4a09b6c8c1a682c695799bd4a008e17effc7efe4d10937a65f403a2c555"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_keyboard_history.c",
+      "sha256": "c294c5ed91b047cec7c9d1135f369ed109932420a0d518e8a10ae871b01a8faa"
+    },
+    {
+      "path": "test/app/keyboard_origin_device_test.c",
+      "sha256": "2acbab39f5d36d663cddd294d53483520db93da3b401046c7e7fdcba9e1e0af6"
+    },
+    {
+      "path": "test/app/keyboard_origin_return_test.c",
+      "sha256": "b85c577dcb89d5836d5a55b0120f0bd69f9269d8d6b3f58b18c79c984511b346"
+    },
+    {
+      "path": "test/app/keyboard_origin_test.c",
+      "sha256": "ae6f41daa318925effa9108bdac15bad7c263dabbe98704bec22fe5c80af5ff5"
+    },
+    {
+      "path": "test/mvdm-host/keyboard_controller_pic_test.c",
+      "sha256": "faaa7fa8ca1cef5ccd863f8b1be52e54060a5dfebf0ef4142caf5c5425f6da31"
+    },
+    {
+      "path": "test/observation/verify-keyboard-controller-pic.ps1",
+      "sha256": "9a2f1ba5cafaae808f07136cddcb7d05c3520afb0a9cc622407c6f1a3017a269"
+    }
+  ],
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "mirror_diff_delta": -68,
+  "runner": {
+    "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\run-build.ps1",
+    "pid": 37496,
+    "start": "2026-11-13T16:34:40.2111887-08:00",
+    "state": "completed",
+    "exit": 0
+  },
+  "ems": {
+    "Mapping": "PASS independent COM -> original INT67 Mapping; marker=EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS; normal launcher exit; no original guest or profile edit\n",
+    "CallReturn": "PASS independent COM -> original INT67 CallReturn; marker=T430_EMS_CALL_RETURN_STACK_MAP_OK; normal launcher exit; no original guest or profile edit\n"
+  },
+  "package": "1718c31b-feee-4bb2-ade6-71fd9c119aa3",
+  "images": 11,
+  "hash_verified_destinations": [
+    "assets/release",
+    "O:/winnt/system32"
+  ],
+  "cached_full_exit": 0,
+  "full_gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1369,
+      "CleanupMs": 482,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 207,
+      "CleanupMs": 468,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66729,
+      "CleanupMs": 429,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 48991,
+      "CleanupMs": 406,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 43837,
+      "CleanupMs": 448,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 15477,
+      "CleanupMs": 472,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 12332,
+      "CleanupMs": 408,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 57357,
+      "CleanupMs": 279,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12546,
+      "CleanupMs": 694,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28458,
+      "CleanupMs": 411,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30372,
+      "CleanupMs": 541,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 4198,
+      "CleanupMs": 381,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7622,
+      "CleanupMs": 465,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10226,
+      "CleanupMs": 468,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3910,
+      "CleanupMs": 421,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6436,
+      "CleanupMs": 435,
+      "Passed": true
+    }
+  ],
+  "focused": {
+    "mapping": "original disk-buffer alignment PASS (no disk I/O)\nword-fill 132 alignment/length cases digest=91153575\nbefore sas_init\nafter sas_init\nafter original add\nEMS cross-window original nt_emm lease copy PASS\noriginal SAS reversed-page loads/stores/move PASS\noriginal allocation grow/shrink content PASS\noriginal memory exported name/ordinal query and reallocate PASS\nreal DIB GDI/guest bidirectional sharing PASS\noriginal add/remove unaligned sharing and normal-backing PASS\n",
+    "access": "CCPU_BIOS_ACCESS cases=90 failures=0\n",
+    "x87_cases": 64,
+    "cpu_boundary_cases": 143,
+    "fist64_cases": 16,
+    "vector_binding": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation\n",
+    "callback": "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1\nCCPU_ABORT_OK thread=33472 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1\nCCPU_ABORT_OK thread=9940 escaped=1 nested=1 continue=1 normal-fe=1\nCCPU_ABORT_OK thread=37652 escaped=1 nested=1 continue=1 normal-fe=1\n",
+    "keyboard_pic_assertions": 90,
+    "reset": "ntvdm-exe/session/gdp\nsas-init\nvga/cpu-init\nguest-program\nsimulate\noriginal-CCPU HALT RESET: AX=beef producer=0 quick=0\nS38_CCPU_DIV_FAULT_CANCELS_PENDING_DEBUG_OK\nS38_CCPU_RF_SUPPRESS_ONCE_THEN_BREAK_OK\nS38_CCPU_REAL_DESCRIPTOR_PAGING_REFUSAL_OK\nS38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK\nT430_CCPU_STALE_PIC_SENTINEL_OK\n",
+    "origin": {
+      "device": 7,
+      "return": 10,
+      "carrier": 7
+    }
+  },
+  "limitations": [
+    "No fresh Win3.x/Win95 interactive acceptance claimed.",
+    "Unavailable external DOS4GW/NESticle fixtures are skips.",
+    "Vector fixture exercises actual binding and C-VID providers with test host boundaries;not full guest gameplay."
+  ],
+  "governance": {
+    "documentation": "passed",
+    "links": "passed",
+    "wow_boundary": "143 objects /9 negative controls passed",
+    "recovery": "Finalizer default-encoding error and CURRENT mojibake corrected;documentation gates rerun successfully. Product source and published package unchanged."
+  },
+  "pipeline_runner": {
+    "start": "2026-11-13T16:36:52.4227612-08:00",
+    "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\after-build.ps1",
+    "pid": 26984,
+    "waitForBuildPid": 37496,
+    "state": "completed",
+    "exit": 0
+  }
+}

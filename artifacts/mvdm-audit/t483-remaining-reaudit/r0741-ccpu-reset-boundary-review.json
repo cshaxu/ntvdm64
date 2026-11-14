@@ -1,0 +1,25 @@
+{
+  "point": "T483-R0741",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 13,
+    "deleted": 0,
+    "remaining_added": 2,
+    "mirror_diff_delta": -11,
+    "remaining_note": "One public-entry call plus existing #line2571;opposite original-body omission is R0742."
+  },
+  "location": "CPU40 reset pulse branch at logical2569",
+  "problem": "Original controller accesses a CPU-private interrupt bitmap rather than using selected CCPU public interrupt entry.",
+  "chain": "8042 F0-FF even pulse -> cpu_interrupt macro in cpu4gen.h CCPU branch -> original c_cpu_interrupt CPU_HW_RESET -> CPU reset event bit -> original execution loop reset handling",
+  "evidence": "Pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c CCPU c_main.c declares cpu_interrupt_map LOCAL and c_cpu_interrupt updates CPU_RESET_EXCEPTION_MASK. Original comment distinguishes A2CPU direct bitmap access from this API. Actual product-command compile current0/original2:C2065 cpu_interrupt_map and CPU_RESET_EXCEPTION_MASK. cpu4gen.h197-198 maps cpu_interrupt to c_cpu_interrupt for CCPU;host_cpu_interrupt in nt_cpu.c is empty. Thus exporting private state merely to reproduce the two statements is not original CCPU interface recovery.",
+  "necessity": "Keyboard reset must notify selected CCPU. Existing original public entry carries the same reset event and exits quick mode;one call is a bounded component binding,not a new reset algorithm.",
+  "minimum": "Retain one public-entry call;delete10 comment lines and1 redundant #line2569. No new export,wrapper,state or host monitor path.",
+  "change": "Remove11 added diagnostic/comment lines;remaining call plus line anchor pending owner.",
+  "decision": "Minimized residual pending owner;original deleted bitmap statements audited next under R0742.",
+  "line_mapping": "Outer existing #line2569 now directly anchors the call;#line2571 anchors original endif. Emitted call coordinate unchanged;all #error preserved.",
+  "verification": "build/t483-s5-p65/r0741-controls current compile0/original2 with actual product command. P64 CCPU reset focused evidence remains historical;comment/duplicate-line removal does not change emitted statement coordinate. No new full runtime claim.",
+  "limits": [
+    "Actual final whole-file cached build and CCPU regressions remain pending.",
+    "CPU implementation's own atomic event/wait adaptations are outside this point and not justified merely by this caller."
+  ]
+}

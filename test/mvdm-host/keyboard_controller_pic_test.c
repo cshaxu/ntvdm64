@@ -156,6 +156,8 @@ int main(void)
     CHECK(output_full && (unsigned char)output_contents == 0xfa);
     kbd_inb(0x64, &value); CHECK((value & 1) && output_full);
     kbd_inb(0x64, &value); CHECK((value & 1) && output_full);
+    continue_output(); /* A producer retry must not reissue this unread byte. */
+    CHECK(!bKbdEoiPending);
     CHECK(!(pic(0x0a) & 2) && !(pic(0x0b) & 2));
     kbd_inb(0x60, &value); CHECK(value == 0xfa);
     CHECK(output_full && (unsigned char)output_contents == 0xfe);

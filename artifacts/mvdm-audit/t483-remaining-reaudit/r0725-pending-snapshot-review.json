@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0725",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 8,
+    "deleted": 0,
+    "remaining_added": 7,
+    "mirror_diff_delta": -1
+  },
+  "problem": "Select distinct unused raw host input records before original controller reset destroys live slot state.",
+  "responsibility_evidence": "R0718 original-count/suffix counterexamples and captured input records establish identity rather than scan-packet count is required. R0722/R0723 deletion controls demonstrate ring and unread-output identity loss.",
+  "original_alternative": "keys_in_6805_buff counts packet markers and any output_full slot then immediately Reset6805and8042. It returns no raw identity;an already consumed port60 slot awaiting EOI is incorrectly counted as unused. Changing its return value alone cannot encode selected records.",
+  "chain": "nt_event CalcNumberOfUnusedKeyEvents -> PendingKeyboardHistory -> metadata selection from original ring/held/output/translation valid states -> Reset6805and8042 -> existing raw history selection/Console return.",
+  "minimum": "Existing keyba-private state is projected once into the same metadata selector. Moving private ring pointers or validity ownership to nt_event adds coupling. Replacing original count function body would delete substantial original code without removing selector responsibility. Remove explanatory comment only;do not combine lines for artificial savings.",
+  "validity": "Ring only from out to in;held only while scanning_discontinued;output only full and data unread;pending/prefix gated by their original state flags. Pending-origin producer reachability belongs to the later ordered transfer hook review;this entry does not approve it independently.",
+  "verification": "Current extracted device7 and return10 groups passed under R0718;R0723 current path positive plus two negative controls passed as expected. This edit removes only comment;no new runtime claim.",
+  "line_mapping": "All code and #error/#line bytes unchanged;existing #line1119 anchors original reset.",
+  "decision": "Seven residual added lines pending owner;comment removed locally.",
+  "limits": [
+    "No fresh full-build/guest acceptance for P65 until whole file complete.",
+    "The existence of current selector dependencies is not the necessity argument;original identity/count mismatch is."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0740",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 1,
+    "deleted": 0,
+    "remaining_added": 1,
+    "mirror_diff_delta": 0
+  },
+  "location": "cmd_to_8042 C0 case before original2511",
+  "problem": "Read Input Port marks a reply valid without assigning the reply value.",
+  "chain": "kbd_outb64 -> cmd_to_8042 C0 -> code_to_send_valid -> reply publication -> kbd_inb60",
+  "evidence": "Pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c C0 case has no code_to_send assignment;local declaration has no initializer;other valid reply cases assign it. Original AT_kbd_init sets input_port_val=BF. T430 S3 actual-provider baseline returned two old output sentinels instead of BF,proving full original NTVDM path is not a valid alternative. T448 S11 paired value/publication correction passed30 controller/PIC assertions. Omitting only this line leaves an uninitialized value on the C0 publication path;not just an adapter naming dependency.",
+  "necessity": "The controller's declared input-port read must return its original modeled input state. Original omission plus omitted NTVDM publication are separate linked faults;this assignment alone did not fix the historical baseline.",
+  "minimum": "One assignment from existing original input_port_val,not a constant,special guest case,or host emulation replacement. Moving C0 selection into common publication would require another command-dependent branch.",
+  "change": "No source change;one assignment pending owner.",
+  "decision": "Retain one-line reply-value correction pending owner;R0744 publication separately audited.",
+  "line_mapping": "No edit;#line2511 and all #error preserved.",
+  "verification": "Read pinned source and docs/etc/evidence/m0-t430-s3-controller-pic-boundary.md plus m0-t448-s11-window-startup.md. Current actual controller/PIC fixture retains two sentinel controls and C0/AA/AB/20/D0/E0 checks;new P65 runtime run pending whole file.",
+  "limits": [
+    "Historical full-original failure does not by itself isolate this one line;uninitialized local source proof establishes that separate defect.",
+    "No fresh full build or guest acceptance claimed."
+  ]
+}

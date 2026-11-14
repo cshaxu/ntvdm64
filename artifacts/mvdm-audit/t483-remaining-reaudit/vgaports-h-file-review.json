@@ -1,0 +1,56 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+  "point": "T483-R0717",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/vgaports.h",
+  "original_git_sha256": "c9e1221af93b3bad79d396ea0c7c517ec9d826cb44245227153c4fb3d4d4a0de",
+  "pinned_worktree_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2",
+  "baseline_identity": "Pinned worktree has2018 CRLF endings;normalizing those to LF equals fixed Git blob exactly. Six form-feed bytes are whitespace,not line delimiters.",
+  "before_sha256": "aa41c19b16d4d94a34acdbaaec5e6ba1583bf782ac7b3ee2e4a4ff2096b26d66",
+  "after_sha256": "0e1cb38308754edacca018ab297daf76794a35b4d6a8d33af4c765cade710156",
+  "diff": {
+    "before": {
+      "added": 31,
+      "deleted": 1033
+    },
+    "after": {
+      "added": 24,
+      "deleted": 1033
+    },
+    "delta": -7
+  },
+  "old_claim_correction": "S1 source counter reported489 logical mismatches using form-feed-sensitive splitlines;real compiler before/after each emits793 lines identical to original including coordinates. Old count is not real declaration/bitfield misalignment.",
+  "change": "Remove seven obsolete or redundant line resets391,1961,1014,1996,2001,1055,1057. All non-line-directive bytes and all8 #error directives preserved.",
+  "counter_review": "No selected code,macro value,conditional expression,layout or runtime binding changed;no __LINE__ use in header. Wrong old reset targets occur only around non-emitted comment/conditional boundaries.",
+  "preprocessor_proof": {
+    "before": {
+      "count": 793,
+      "equal_to_original": true,
+      "differences": []
+    },
+    "after": {
+      "count": 793,
+      "equal_to_original": true,
+      "differences": []
+    }
+  },
+  "runner": {
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\vgaports-lines.cmd",
+    "start": "2026-11-13T15:35:00.0388452-08:00",
+    "pid": 11368
+  },
+  "status": "File audit complete;diagnostic-only reduction accumulating under owner cadence;not newly built/published.",
+  "counter_reproduction": {
+    "method": "Recompute matched nonblank/non-directive line mappings with splitlines versus literal LF splitting.",
+    "splitlines_mismatches": 489,
+    "splitlines_triples_equal_entire_historical_list": true,
+    "LF_mismatches": [
+      [
+        767,
+        395,
+        392
+      ]
+    ],
+    "interpretation": "The sole LF-based mismatch is the comment The Sequencer Registers,not an emitted declaration. Removing obsolete #line391 restores it;compiler confirms all793 emitted lines were already correct."
+  }
+}

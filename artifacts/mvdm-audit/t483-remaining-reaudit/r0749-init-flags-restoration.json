@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0749",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 2,
+    "deleted": 0,
+    "remaining_added": 0,
+    "mirror_diff_delta": -2
+  },
+  "location": "AT_kbd_init before original3222",
+  "problem": "Initialization redundantly resets added per-slot read/EOI facts without publishing or rearming an output slot.",
+  "chain": "reset -> keyboard_init (NT host kb_init is empty nt_kb_prepare) -> AT_kbd_init configures ring/controller defaults/ports/EOI hook. First process entry has static FALSE flags. Actual new slot do_q_int resets both;explicit existing-slot rearm KbdResume resets both. AT_kbd_init does neither.",
+  "evidence": "Only source caller is base/bios/reset.c;complete AT_kbd_init has no output_full assignment,no do_q_int,KbdIntDelay or continue_output invocation. Both facts have static FALSE initializers. Every transition creating/rearming a valid scan slot independently initializes them. A later register/table initialization does not itself establish new scan delivery and supplies no reason to overwrite an extant slot completion fact. Historical plan listed initialization generically but provided no distinct failing requirement for these writes.",
+  "necessity": "No independent initialization responsibility remains;keep initialization with actual slot publication/rearm owners.",
+  "minimum": "Delete both writes;restore original initialization body without relocating code or adding guards.",
+  "change": "Original restored;mirror diff net-2.",
+  "decision": "Locally restored pending final whole-file verification/delivery.",
+  "line_mapping": "#line3222 continues to anchor original int_enabled assignment;all #error unchanged.",
+  "verification": "Full source/caller/flag-use audit complete;final focused controller/PIC and cached full gates pending,not claimed passed.",
+  "limits": [
+    "No fresh repeated-BIOS-reset runtime acceptance claimed."
+  ]
+}

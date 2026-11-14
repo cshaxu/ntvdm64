@@ -1,0 +1,23 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "matched_original_line_mismatches": [],
+    "proof": "Full LF-line alignment;matched CPU30 reset call is excluded and its selected CPU40 replacement intentionally at2569;all other matched original coordinates equal. #error identical to HEAD."
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+    "matched_original_line_mismatches": [],
+    "proof": {
+      "before": {
+        "count": 793,
+        "equal_to_original": true,
+        "differences": []
+      },
+      "after": {
+        "count": 793,
+        "equal_to_original": true,
+        "differences": []
+      }
+    }
+  }
+]

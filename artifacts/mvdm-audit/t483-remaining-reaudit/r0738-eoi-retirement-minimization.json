@@ -1,0 +1,25 @@
+{
+  "point": "T483-R0738",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 7,
+    "deleted": 3,
+    "remaining_added": 7,
+    "remaining_deleted": 3,
+    "mirror_diff_delta": 0
+  },
+  "location": "KbdEOIHook common retirement between original2266 and2272",
+  "problem": "Retire data only after normal acknowledgement plus consumption,or cancellation/replaced slot;do not duplicate invalid-slot metadata reset.",
+  "chain": "EOI -> clear IRQ pending -> classify cancellation/normal -> retire valid consumed or cancelled output -> original forced-delay continue_output -> common host release",
+  "evidence": "R0736 original-unconditional-clear control fails normal early EOI;R0735 cancel-distinction control fails cancellation. !output_full is separately needed when an immediate response invalidates the old output while its IRQ remains outstanding. Metadata output origin is read only with output_full by pending selection and pre-reset IRQ capture;new output overwrites origin before setting full. Thus zeroing metadata after output_full FALSE is redundant.",
+  "necessity": "Retirement condition is necessary;extra origin clear is not. Original three-line continue_output sequence remains common and in its original order.",
+  "minimum": "Remove1 redundant metadata assignment. Keep one common conditional tail;moving it back to separate normal/cancel returns duplicates release/refill logic. Retain readable block indentation rather than pretending differently indented control flow is original bytes.",
+  "change": "Remove redundant origin clear;add #line2268 for original shared continuation. Net mirror difference0;semantic redundancy removed.",
+  "decision": "Partial minimization;remaining +6/-3 pending owner.",
+  "line_mapping": "Whole-file check requires #line2268 before original bForceDelayInts;maps original three continuation statements2268-2270. All #error unchanged.",
+  "verification": "build/t483-s5-p65/r0738.exit0:device7,return10,carrier7 pass on reduced source. Raw output field may remain in diagnostic observations when full=false;no production identity selection uses it then. Full/PIC/guest gates still pending entire file.",
+  "limits": [
+    "No new release or full-runtime success claim.",
+    "Later port60 retirement cleanup reviewed separately."
+  ]
+}

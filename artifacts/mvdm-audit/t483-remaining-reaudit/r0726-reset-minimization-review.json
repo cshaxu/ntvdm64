@@ -1,0 +1,60 @@
+{
+  "point": "T483-R0726",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 2,
+    "deleted": 0,
+    "remaining_added": 1,
+    "mirror_diff_delta": -1,
+    "autonomous_lines_removed": 7
+  },
+  "problem": "Capture the user-originated pending IRQ before original reset empties the controller;avoid duplicating reset of invalid metadata slots.",
+  "responsibility_evidence": "m0-t423-s16-typeahead-handoff.md records keyboard IRR set/output full,returned key reappearing in BIOS before input resume;broad unconditional reset caused missing keys,selective user-origin cancellation passed. This is not inferred from the current helper.",
+  "original_alternative": "Original Reset6805and8042 empties device queues but does not cancel pending host delayed/PIC IRQ;capture must precede output_full reset and metadata retirement. However original clear_buff_6805 already clears ring/translation/prefix metadata and original reset clears all held/output/pending validity fields.",
+  "removal_proof": [
+    "clear_buff_6805 is unconditionally called in original reset;it clears ring,translated,prefix metadata.",
+    "Original reset sets output_full,pending_8042,scanning_discontinued,held_event_count to zero before the cancellation callback.",
+    "PendingKeyboardHistory gates held/output/pending by those states;capture uses output_full before inspecting output origin.",
+    "Both held admission paths overwrite held[count] before increment;normal output do_q_int overwrites output origin before setting output_full;immediate/direct replies clear origin.",
+    "No supported production assignment sets pending_8042 true;existing pending delivery hooks remain later ordered audit scope.",
+    "The cancellation callback runs after emptying queues;does not require invalid held/output storage bytes zero."
+  ],
+  "minimum": "Retain one pre-reset cancel_irq capture;delete redundant clear_device call plus now-production-unused helper and declaration. Original reset owns slot validity;no replacement helper or validity state.",
+  "test_changes": "Keep reset/next-input/repeated-reset/ACK/selected-record assertions. Replace checks of inactive raw metadata being zero with pending selection under original reset validity flags;return stub uses existing ring clear. No lost-input assertion removed.",
+  "controls": {
+    "runner": {
+      "pid": 2356,
+      "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\r0726.ps1",
+      "start": "2026-11-13T15:57:50.9527439-08:00"
+    },
+    "exit": 0,
+    "logs": {
+      "build\\t483-s5-p65\\r0726-device.log": {
+        "sha256": "4fa1b338194235ba0282f41f7fd448136dfcb63f851969fae8850ce23f4ac9d4",
+        "pass_groups": 7
+      },
+      "build\\t483-s5-p65\\r0726-return.log": {
+        "sha256": "92075838bb78ca4fcad0059f439009e9c682db561adaf20900ebc2e250493e80",
+        "pass_groups": 10
+      },
+      "build\\t483-s5-p65\\r0726-carrier.log": {
+        "sha256": "a83e3fa9f6d5b32033e2f3aa9f790a5773dff341a97c2c3aa72d1008a31ddf8a",
+        "pass_groups": 7
+      }
+    },
+    "source_sha256": {
+      "src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c": "118ff4d0b0f97c603140ba579989b2bd0adb6815480bb9cd5e78b2cb79963c7e",
+      "src\\ntvdm-exe\\softpc\\mvdm_keyboard_history.c": "c2a0863f8357e60c13019f8e3e79b4fd5ab7d25f45347f824becf512144f6b28",
+      "src\\ntvdm-exe\\softpc\\include\\mvdm_keyboard_history.h": "092c69539a738b4b3a8801a7f7082586932d8f7c5ad3ec2c9bfc7b74a1969389",
+      "test\\app\\keyboard_origin_test.c": "cafdc6826d3a056c732a50988f145277364e14c6102f01b8d4f4cbf55c098770",
+      "test\\app\\keyboard_origin_return_test.c": "b85c577dcb89d5836d5a55b0120f0bd69f9269d8d6b3f58b18c79c984511b346",
+      "test\\app\\keyboard_origin_device_test.c": "3abf6e3eafa058d23e35fe2d1e9b307ede1bf4135ad2fa002c9fd1c0d7d03ca9"
+    }
+  },
+  "line_mapping": "Byte comparison proves only the one call removed since R0725;existing #line1125 anchors original reset body.All #error unchanged.",
+  "decision": "Partial original restoration locally verified;remaining IRQ capture pending owner,not counted as whole-point restoration.",
+  "limits": [
+    "Focused extracted fixtures and carrier tests passed;cached full/publication/Full/Git delivery wait for complete keyba audit.",
+    "No fresh guest handoff acceptance claimed;historical IRQ observations explicitly identified as historical."
+  ]
+}

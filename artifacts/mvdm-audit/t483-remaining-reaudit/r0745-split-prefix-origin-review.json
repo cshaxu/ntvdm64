@@ -1,0 +1,23 @@
+{
+  "point": "T483-R0745",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 3,
+    "deleted": 0,
+    "remaining_added": 3,
+    "mirror_diff_delta": 0
+  },
+  "location": "translate_6805_8042 split F0 branch before original2647",
+  "problem": "A consumed release prefix waits for its next byte outside the ring and output slot;handoff must still return its unconsumed host input.",
+  "chain": "host input origin -> ring F0 -> remove_from_6805_buff -> waiting_for_upcode without output -> PendingKeyboardHistory prefix selection -> input handoff;next byte completes translation and eventual output retirement.",
+  "evidence": "build/t483-s5-p65/r0745-result.json:production-extraction positive0;remove only prefix assignment negative1 at PendingKeyboardHistory()==1. Negative test removes internal prefix-value assertion,retains behavioral pending assertion. Original queue packet count cannot name removed prefix source,waiting_for_upcode is only a Boolean;raw history tail cannot recover skipped/replayed source identity as independently established R0718.",
+  "necessity": "Returnable input must survive translation waiting state;original flags/counts do not carry its raw input identity. One copy from popped origin retains that identity without another queue or algorithm.",
+  "minimum": "Retain one assignment and original-profile guard;no additional implementation.",
+  "change": "No source change;remaining +3/-0 pending owner.",
+  "decision": "Qualified pending owner.",
+  "line_mapping": "No edit;existing #line2647 and excluded #error unchanged.",
+  "verification": "Fresh background extracted-production device positive7 cases pass;isolated negative fails pending-selection contract. Actual PIC,guest and final package gates remain pending whole file.",
+  "limits": [
+    "Scan generation,IRQ and BIOS boundaries are controlled dependencies in this fixture."
+  ]
+}

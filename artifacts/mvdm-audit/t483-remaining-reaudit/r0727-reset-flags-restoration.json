@@ -1,0 +1,48 @@
+{
+  "point": "T483-R0727",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 2,
+    "deleted": 0,
+    "remaining_added": 0,
+    "mirror_diff_delta": -2
+  },
+  "original_rationale": "Initialize the added read/EOI observations at whole-device reset. Early-EOI tracking is necessary,but this reset-site initialization was not independently required.",
+  "restoration_proof": [
+    "Original reset invalidates output_full before any cancel callback.",
+    "Pending input selection reads data-read only with output_full;port60 retirement also requires output_full;EOI condition handles !output_full independently.",
+    "KbdIntDelay callers are do_q_int which initializes both flags before publishing output;continue_output only calls it with output_full;KbdResume initializes flags before its gated call.",
+    "Every new output path initializes slot facts before their first meaningful use;retaining old facts in an invalid slot changes no published behavior."
+  ],
+  "change": "Delete both reset assignments;no replacement state,helper,or callsite.",
+  "controls": {
+    "runner": {
+      "pid": 25724,
+      "command": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\r0727.ps1",
+      "start": "2026-11-13T16:00:03.5084334-08:00"
+    },
+    "exit": 0,
+    "logs": {
+      "build\\t483-s5-p65\\r0727-device.log": {
+        "sha256": "f687e300e8f0ce50da4ebae64c24ea9ff9607f431104f9a6a60efb6f700a1f00",
+        "pass_groups": 7
+      },
+      "build\\t483-s5-p65\\r0727-return.log": {
+        "sha256": "5c77ebd20d41d6abbaf113f63d8e9d6b458090a035c2c29eab6cd02433a49742",
+        "pass_groups": 10
+      },
+      "build\\t483-s5-p65\\r0727-carrier.log": {
+        "sha256": "a83e3fa9f6d5b32033e2f3aa9f790a5773dff341a97c2c3aa72d1008a31ddf8a",
+        "pass_groups": 7
+      }
+    },
+    "additional_check": "Set both old observations true before an empty repeated reset;no pending record or duplicate cancellation;next immediate reply has both observations initialized false.",
+    "source_sha256": "6de846807c84616933f44391c4d777c3e08d3e1eaa78e177f6b515bd224e9cf4"
+  },
+  "line_mapping": "Original pending_8042/output_full reset remains;#line1156 restores following original statement coordinate;no #error changed.",
+  "decision": "Original restored locally;await whole-file delivery.",
+  "limits": [
+    "Focused tests only;no new full build/publication/guest acceptance claimed.",
+    "Other initialization sites have not been assumed redundant by this proof."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "point": "T483-R0739",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 4,
+    "deleted": 0,
+    "remaining_added": 3,
+    "mirror_diff_delta": -1
+  },
+  "location": "do_q_int before original2281",
+  "problem": "Publish each byte with its origin and fresh read/EOI facts;avoid clearing an overwritten scratch value.",
+  "chain": "remove_from_6805_buff sets translated -> translate_6805_8042 -> do_q_int publishes output then IRQ;alternate pending branch assigns translated immediately before do_q_int",
+  "evidence": "All three do_q_int callers are in codes_to_translate/continue_output. Two unconditionally call translate_6805_8042,whose first operation pops and assigns translated;the pending branch explicitly assigns translated. Prefix capture also follows a pop,while pending selection reads saved prefix,not translated. Thus clearing translated after publication is unnecessary. Output origin remains required by R0723 unread-output negative control;fresh read/ack facts prevent previous-byte consumption/acknowledgement from discarding or suppressing a new byte,as established by R0720/R0734.",
+  "necessity": "Only source transfer and the two new-byte facts are required at publication. Scratch clear is dead with respect to subsequent reads.",
+  "minimum": "Remove one scratch assignment;keep3 assignments in the existing publication owner,without moving initialization into callers or adding a helper.",
+  "change": "Delete translated=0 from do_q_int;remaining3 additions pending owner.",
+  "decision": "Partial minimization locally tested;residual publication assignments pending owner.",
+  "line_mapping": "Original output_full assignment retains #line2281;all #error/#line unchanged.",
+  "verification": "build/t483-s5-p65/r0739.exit0:maintained device7/return10/carrier7 pass including wrapped translation,split prefix,held replay and next-slot facts. Final full/PIC/guest delivery pending entire file.",
+  "limits": [
+    "No fresh full-build/publication claim.",
+    "Dormant pending-origin branch remains independently scheduled for later point review;proof covers its assignment too."
+  ]
+}

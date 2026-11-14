@@ -1,0 +1,42 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+  "point": "T483-R0716",
+  "source_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_path": "base/mvdm/softpc.new/base/inc/timeval.h",
+  "original_git_sha256": "47909596ce2ff91bb96b86333efd13b639ef7a4240b6c8bbca14923eed7a7b2d",
+  "current_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+  "diff_scope": {
+    "added": 1,
+    "deleted": 1,
+    "delta": 0
+  },
+  "responsibility": "Declare existing host_time function consistently with its original nt_unix implementation.",
+  "original_capability": "Original declaration uses time_t and original provider uses long. Current UCRT corecrt.h608/642-645 selects64-bit time_t; original provider remains32-bit long. No actual host_time callers found in src/test C/H.",
+  "exact_failure": "Actual nt_unix.c compiler: current0;original declaration2 with C2371 at original348 and header57. Failure is original provider against modern CRT,not dependence on invented adapter logic.",
+  "minimum_options": [
+    "Retain one-line long declaration pending owner.",
+    "Deleting no-caller declaration alone requires line preservation and does not reduce original-relative diff count;deleting provider increases source deletion budget.",
+    "Changing original provider to time_t adds mirror edits;globally selecting32-bit CRT time changes unrelated interfaces and is not the narrow minimum."
+  ],
+  "decision": "Qualified pending owner;unchanged source.",
+  "runner": {
+    "start": "2026-11-13T15:33:08.8480392-08:00",
+    "pid": 27784,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p65\\timeval-controls.cmd"
+  },
+  "compiler_logs": {
+    "before": {
+      "exit": 0,
+      "sha256": "608fdf9aaf61c15c62a98e0a0302b5fd9927a28ebe7839c61c1ca0e0cd4c95d0"
+    },
+    "original": {
+      "exit": 2,
+      "sha256": "f71fb5562c6a39af02a4e33e096cf683ebb6a5d3016719e7fde08f4f467747ac"
+    }
+  },
+  "line_mapping": "No source change;header declaration remains original logical57;compiler error independently confirms coordinate.",
+  "limits": [
+    "No runtime fault claimed for this uncalled function.",
+    "Declaration deletion versus type adjustment remains owner choice;no global CRT ABI change made."
+  ]
+}

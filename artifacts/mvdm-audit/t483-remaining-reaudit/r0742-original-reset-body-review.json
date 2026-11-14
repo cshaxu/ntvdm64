@@ -1,0 +1,26 @@
+{
+  "point": "T483-R0742",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 0,
+    "deleted": 3,
+    "remaining_added": 0,
+    "remaining_deleted": 2,
+    "mirror_diff_delta": 0,
+    "note": "Historical three-line deletion includes #else already present before this review; only two original statements remain omitted. No new framework restoration claimed."
+  },
+  "location": "original logical2568-2570;current CPU_30_STYLE else reset branch",
+  "problem": "Original CPU40 controller reset body directly accesses CPU-private bitmap and calls host interrupt wakeup.",
+  "chain": "8042 reset pulse -> selected CPU40 branch -> original CCPU public cpu_interrupt/c_cpu_interrupt CPU_HW_RESET -> reset event -> CPU execution loop. Original CPU_30_STYLE branch remains excluded.",
+  "evidence": "Pinned OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/base/keymouse/keyba.c confirms #else plus bitmap update and host_cpu_interrupt. R0741 actual product-command controls: current exit0, restored original body exit2 C2065 cpu_interrupt_map and CPU_RESET_EXCEPTION_MASK. Original CCPU keeps bitmap LOCAL and supplies public CPU_HW_RESET entry. See r0741-ccpu-reset-boundary-review.json and build/t483-s5-p65/r0741-controls.",
+  "necessity": "Reset responsibility is required by 8042 command. Original direct-bitmap body is not composable with selected CCPU private state. Existing original public reset entry fulfills this boundary without exporting CPU state or adding another implementation.",
+  "minimum": "Keep original #else framework and public reset call audited under R0741;retain omission of two private-bitmap/wakeup statements pending owner. No shim or new CPU state.",
+  "change": "No source change;correct historical deletion scope from three to two remaining original statements because #else is already restored.",
+  "decision": "Qualified pending owner: retain two-statement omission coupled to R0741 public CCPU reset binding.",
+  "line_mapping": "#else preserved;#line2569 anchors replacement call and #line2571 anchors original endif;CPU_30_STYLE #error preserved. No diagnostic-coordinate change in this point.",
+  "verification": "Read pinned original and both terminal compile receipts/logs;reuse completed R0741 control, no duplicate compilation. Whole-file final cached build and reset runtime regression pending.",
+  "limits": [
+    "Compile boundary proof is not a new runtime-reset acceptance result.",
+    "No claim that unrelated CPU event implementation differences are necessary."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "point": "T483-R0734",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "scope": {
+    "before_added": 1,
+    "deleted": 1,
+    "remaining_added": 1,
+    "remaining_deleted": 1,
+    "mirror_diff_delta": 0
+  },
+  "location": "KbdIntDelay condition before #line2205",
+  "problem": "Prevent another IRQ for the same unread byte after guest has already acknowledged its first IRQ.",
+  "chain": "Normal early PIC EOI -> KbdEOIHook clears bKbdEoiPending and records acknowledgement while keeping unread output_full -> producer retry calls continue_output -> full-slot branch calls KbdIntDelay -> original condition would issue same IRQ again",
+  "evidence": "The source-selected KbdEOIHook early-EOI path leaves output_full true and bKbdEoiPending false;continue_output full-slot arm calls KbdIntDelay. With original bKbdEoiPending-only condition and int_enabled true,ica_hw_interrupt or host_DelayHwInterrupt is necessarily called again. Independent early-EOI byte-overwrite observation is recorded in R0720/T460 evidence;keeping pending true instead would conflate actual IRQ completion with data consumption.",
+  "necessity": "Original single IRQ-pending flag cannot represent acknowledged-but-unread slot. The added acknowledgement test rejects precisely this state,while do_q_int resets it for each new byte.",
+  "minimum": "One extra operand in existing condition. Changing pending lifecycle would require extra changes to original EOIs/resume and lose the independent state distinction;no new path or polling.",
+  "change": "No mirror change;extend existing actual controller/PIC test to retry continue_output between early EOI and port60 read and assert no new pending IRQ.",
+  "decision": "One added/one removed condition line pending owner.",
+  "line_mapping": "No mirror edit;#line2205 and all #error preserved.",
+  "verification": "Concrete selected-source state-transition proof. Existing early-EOI test source inspected;new retry assertion awaits whole-file final-controller/PIC build/run. Earlier runtime evidence does not claim new assertion passed.",
+  "limits": [
+    "No newly executed runtime negative control for this point.",
+    "Final batch must execute the revised test rather than reuse its prior result."
+  ]
+}
