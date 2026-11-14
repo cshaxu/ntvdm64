@@ -1,0 +1,15 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+  "points": [
+    "R0835",
+    "R0836"
+  ],
+  "before": 701,
+  "after": 699,
+  "mirror_diff_delta": -2,
+  "proof": "Actual shared cc_cvidc_rule compile: baseline0; original declaration omissions0 with C4013 at original1882 and2948. egacpu.h remaps SetMarkPointers to void ev_glue.c provider; ega_writ.c defines VOID Glue_set_vid_wrt_ptrs(WRT_POINTERS*). No other selected declaration found. This proves declared-return mismatch, not runtime failure.",
+  "changes": "Remove2 explanatory comment lines; restore original CRLF; retain2 minimal declarations for owner decision.",
+  "line_check": "All original equal blocks >=3 lines match logical line numbers; #error unchanged. Removed comments occur before existing #line370.",
+  "verification": "build/t483-s5-p69/probe-r2-job.json PID29908; ega-base/original-decls exits0; C4013 only omitted declarations. Initial probe path failed before compiling; corrected rerun is evidence.",
+  "delivery": "P69 cached full passed; published11x2; Full19 passed; batch-p69-checkpoint.json"
+}

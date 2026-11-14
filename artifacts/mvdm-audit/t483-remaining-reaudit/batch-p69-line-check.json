@@ -1,0 +1,35 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "before": 701,
+    "after": 699,
+    "mirror_diff_delta": -2,
+    "error_identical": true,
+    "line_mismatches": [],
+    "matching_blocks_minimum": 3,
+    "crlf": 2924,
+    "lf": 2924
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "before": 514,
+    "after": 511,
+    "mirror_diff_delta": -3,
+    "error_identical": true,
+    "line_mismatches": [],
+    "matching_blocks_minimum": 3,
+    "crlf": 847,
+    "lf": 847
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+    "before": 402,
+    "after": 395,
+    "mirror_diff_delta": -7,
+    "error_identical": true,
+    "line_mismatches": [],
+    "matching_blocks_minimum": 3,
+    "crlf": 2263,
+    "lf": 2263
+  }
+]

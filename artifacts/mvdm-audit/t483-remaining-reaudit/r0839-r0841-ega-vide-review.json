@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+  "points": [
+    "R0839",
+    "R0840",
+    "R0841"
+  ],
+  "mirror_diff_delta": -7,
+  "geometry_proof": "ios.c491/532 virtualizes inb/outb; ccpusas4.c1519 invokes biosDoInst in software V86. gvi.h262 reads physical PCDisplay; vga_prts.c1669 scales CRTC17 bit2. Historical scanline288/292 show virtual399 versus physical481 and incorrect60 rows; scanline294/295 fixed50 rows with normal exit. This is retained historical evidence, not fresh runtime reproduction.",
+  "cast_proof": "Original host_def.h187 already takes unsigned int*. Both ULONG and unsigned int are32-bit in selected x86 ABI. Restoring original cast preserves addresses; copy_fnc.c uses RtlFillMemoryUlong. Actual baseline/restored compile0;57 COFF nonmetadata sections, allocation sizes and resolved relocations equal.",
+  "changes": "Remove3 added geometry comment lines; retain minimal virtual CRTC path pending owner. Restore2 exact original ULONG pointer casts. Preserve original CRLF.",
+  "verification": "build/t483-s5-p69/vide-probe-job.json PID16396; vide-object-proof.json; final batch pending",
+  "delivery": "P69 cached full passed; published11x2; Full19 passed; batch-p69-checkpoint.json"
+}

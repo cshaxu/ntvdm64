@@ -674,3 +674,11 @@ P68 [idetect.c review](r0832-idetect-review.json): unnecessary replacement inclu
 P68 [cga.c review](r0833-r0834-cga-review.json): original function-pointer definitions restored, object equivalence proved;mirror diff-6.
 
 P68 [delivery receipt](batch-p68-checkpoint.json) and [line checks](batch-p68-line-check.json): five mirror files, original-relative diff net-31; cached build passed and 11 images published to both destinations; Full passed; Git delivery accompanies this receipt.
+
+P69 [ega_prts.c review](r0835-r0836-ega-prts-review.json): two minimal void prototypes pending owner; comment-only diff-2; actual omitted-prototype compile warns C4013, not runtime failure.
+
+P69 [ega_read.c review](r0837-r0838-ega-read-review.json): exact return declarations pending owner; diff-3, original line138 restored; compiler controls report incompatible implicit-int declarations.
+
+P69 [ega_vide.c review](r0839-r0841-ega-vide-review.json): virtual geometry retained with historical failure proof; two original casts restored and57-section object identity verified;diff-7; batch delivery pending.
+
+P69 [batch receipt](batch-p69-checkpoint.json) and [line checks](batch-p69-line-check.json): three frozen sources, diff-12; cached build, publication11x2 and Full19 passed; Git delivery accompanies receipt.

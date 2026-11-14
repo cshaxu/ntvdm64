@@ -1,0 +1,48 @@
+{
+  "batch": "P69",
+  "status": "cached-full-passed;published11x2;Full-passed;included-in-Git-delivery",
+  "source_head": "d6a8ad8695b60f8ca7a241c2792526b1c44aae9e",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "sha256": "c9f8117fef04f59a161f8fced9d404b7c7e7cba2e00efc49e3c373b7168a7f3c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "sha256": "f21775fefd79782e792bf430b651cf4f49defcf538d9b5a33c29196da6f142cb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "sha256": "6852d6f38de18e87ab96481f6f1b370e7e1b0e1c33984179f77b30b8e4271e0d"
+    }
+  ],
+  "mirror_diff_delta": -12,
+  "mirror_files": 3,
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "aae9b267-6992-40d6-b350-d362ce8c42df",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "line_evidence": "batch-p69-line-check.json",
+  "build_job": "build/t483-s5-p69/deliver-job.json",
+  "verification": {
+    "Full_gates": 19,
+    "Full_evidence": "build/t483-s5-p69/full-final/timings.json",
+    "pipeline_exit": 0,
+    "COFF_equal_sections": 57,
+    "original_line_check": "batch-p69-line-check.json; equal original blocks >=3 lines; error unchanged",
+    "WOW_boundary_objects": 143,
+    "private_header_negative_controls": 9,
+    "governance": "passed",
+    "dos4gw_nesticle": "SKIP missing verified external fixtures"
+  }
+}

@@ -368,8 +368,6 @@ ERROR RECOVERY	  :	none.
 IMPORT	void	ega_mode_init IPT0();
 IMPORT	int	get_ega_switch_setting IPT0();
 IMPORT void v7_get_banks IPT2(UTINY *, rd_bank, UTINY *, wrt_bank );
-/* DIVERGENCE(MVDM-HOST-DIV-067): retain the original cross-video calls with
- * their actual same-package declarations; NT4 accepted their implicit forms. */
 IMPORT void setMarkPointers IPT1(IUH, markset);
 #ifndef cursor_changed
 #line 370

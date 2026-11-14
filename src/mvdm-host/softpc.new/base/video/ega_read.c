@@ -135,9 +135,8 @@ ERROR RECOVERY	  :	none.
 #include	"ga_mark.h"
 #include	"ga_defs.h"
 #include	"cpu_vid.h"
-/* DIVERGENCE(MVDM-HOST-DIV-067): the selected C_VID function has an
- * original `void (IUH)` shape; do not use an implicit C declaration. */
 IMPORT void setReadPointers IPT1(IUH, readset);
+#line 138
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
@@ -285,8 +284,6 @@ GLOBAL READ_POINTERS read_pointers;
 
 #ifdef C_VID
 /* C_Evid glue */
-/* DIVERGENCE MVDM-HOST-DIV-089: retain the concrete original C-video read
- * glue contracts instead of implicit host-int declarations. */
 extern IU32 read_byte_ev_glue IPT1(IU32, eaOff);
 extern IU32 read_word_ev_glue IPT1(IU32, eaOff);
 extern void read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);

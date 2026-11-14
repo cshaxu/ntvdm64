@@ -1,0 +1,15 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+  "points": [
+    "R0837",
+    "R0838"
+  ],
+  "before": 514,
+  "after": 511,
+  "mirror_diff_delta": -3,
+  "proof": "Actual cc_cvidc_rule controls both exit0. Original declarations emit C4431(default-int), C4057(read pointer initializer signedness), C4013(setReadPointers). ev_glue.c defines IU32 read_byte/read_word, void read_str_fwd and void setReadPointers. Selected cpu_vid.h READ_POINTERS uses corresponding IU32/void types. Evidence is incompatible declarations, not observed runtime crash.",
+  "changes": "Remove4 explanatory comment lines; restore original CRLF; add #line138 after selected prototype to preserve original following lines; keep minimum declarations pending owner.",
+  "line_check": "Original equal blocks >=3 lines logical line mismatch0; error bodies unchanged.",
+  "verification": "build/t483-s5-p69/read-probe-job.json PID27928; read-base.exit0/read-original-decls.exit0; warning controls; no final batch build yet.",
+  "delivery": "P69 cached full passed; published11x2; Full19 passed; batch-p69-checkpoint.json"
+}
