@@ -63,7 +63,9 @@ int main(void)
     CHECK(WaitForSingleObject(ack,5000)==WAIT_OBJECT_0);
     CHECK(calls==2 && values[0]==1 && values[1]==201);
     CHECK((times[1].QuadPart-times[0].QuadPart)*1000000/frequency.QuadPart>=20000);
-    CHECK(offer(p,201)==0 && WaitForSingleObject(ack,80)==WAIT_TIMEOUT && calls==2);
+    /* Dirty policy belongs to the source; an explicit repeat is a new send. */
+    CHECK(WaitForSingleObject(ack,80)==WAIT_TIMEOUT && calls==2);
+    CHECK(offer(p,201)==0 && WaitForSingleObject(ack,5000)==WAIT_OBJECT_0 && calls==3);
     /* Palette/cursor/font differences are represented in the complete
      * descriptor/payload, not just character memory. Change a palette only. */
     {
@@ -72,14 +74,14 @@ int main(void)
         description->kind=CONSOLE_VIDEO_TEXT_FRAME;description->width=2;description->height=1;
         description->stride=4;description->bytes=4;description->palette[0]=123;
         CHECK(!worker_base_publication_offer(p,&copy,sizeof(copy),&queued) && queued);
-        CHECK(WaitForSingleObject(ack,5000)==WAIT_OBJECT_0 && calls==3);
+        CHECK(WaitForSingleObject(ack,5000)==WAIT_OBJECT_0 && calls==4);
     }
     CHECK(offer(p,202)==0 && !worker_base_publication_active(p,FALSE));
-    CHECK(calls==4 && values[3]==202);
+    CHECK(calls==5 && values[4]==202);
     CHECK(WaitForSingleObject(ack,0)==WAIT_OBJECT_0); /* Drain's real send ack. */
-    CHECK(WaitForSingleObject(ack,60)==WAIT_TIMEOUT && calls==4);
+    CHECK(WaitForSingleObject(ack,60)==WAIT_TIMEOUT && calls==5);
     CHECK(!worker_base_publication_active(p,TRUE) && offer(p,202)==0);
-    CHECK(WaitForSingleObject(ack,5000)==WAIT_OBJECT_0 && calls==5);
+    CHECK(WaitForSingleObject(ack,5000)==WAIT_OBJECT_0 && calls==6);
     fail_value=203;CHECK(offer(p,203)==0);
     CHECK(worker_base_publication_active(p,FALSE)==ERROR_BROKEN_PIPE);
     CHECK(offer(p,204)==ERROR_BROKEN_PIPE);
@@ -90,9 +92,9 @@ int main(void)
         copy.description.bytes=4;copy.value=205;
         p=worker_base_publication_create(send_frame,NULL,shutdown);CHECK(p);
         CHECK(!worker_base_publication_commit(p,&copy,sizeof(copy)) && calls==before+1);
-        CHECK(!worker_base_publication_commit(p,&copy,sizeof(copy)) && calls==before+1);
-        copy.description.palette[0]=42;
         CHECK(!worker_base_publication_commit(p,&copy,sizeof(copy)) && calls==before+2);
+        copy.description.palette[0]=42;
+        CHECK(!worker_base_publication_commit(p,&copy,sizeof(copy)) && calls==before+3);
         CHECK(worker_base_publication_offer(p,NULL,0,NULL)==ERROR_INVALID_PARAMETER);
         worker_base_publication_destroy(p);
     }
@@ -125,6 +127,6 @@ int main(void)
         worker_base_publication_destroy(p);
     }
     CloseHandle(shutdown);CloseHandle(entered);CloseHandle(unblock);CloseHandle(ack);
-    puts("PASS production publisher: latest of200, >=20ms, unchanged idle, palette-only change, deferred source capture, forced final drain, resume, sticky failed send, 50 stop/join cycles without handle leaks");
+    puts("PASS production publisher: latest of200, >=20ms, no-submit idle, explicit repeat, palette-only change, deferred source capture, forced final drain, resume, sticky failed send, 50 stop/join cycles without handle leaks");
     return 0;
 }

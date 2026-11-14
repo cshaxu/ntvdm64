@@ -747,3 +747,5 @@ P86 audit-only: [R1058-R1063 boundaries](r1058-r1063-nt-event-boundary-review.js
 P87 audit-only: [R1064-R1069 input dispatch](r1064-r1069-nt-event-input-review.json);nt_event14/44 points. Actual bounded-input fixture and native wait-order counterexample pass;shutdown authority checked in source. No production changes;P84 remains published.
 
 P88 audit-only: [R1070-R1078 origin and mouse lifecycle](r1070-r1078-nt-event-origin-review.json);nt_event23/44 points. Original history restoration/dispatch omission controls fail specifically;delay control quantifies cost without claiming an original functional bug. No production changes;P84 remains published.
+
+P89: [R1079-R1087 handoff](r1079-r1087-nt-event-handoff-review.json);nt_event32/44 points. R1087 restore decided,not applied. Fixed stale publisher duplicate-suppression assertions against explicit T440 contract;targeted fixture passes. No production changes;P84 remains published.

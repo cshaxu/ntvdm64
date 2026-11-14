@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1084 points reviewed:385 restored delivered,0 local,8 approved,
-691 qualified pending;1636 unreviewed. Files141/365 complete,224 remain.
+1093 points reviewed:385 restored delivered,0 local,8 approved,
+699 qualified pending;1 restoration decided,not applied;1627 unreviewed. Files141/365 complete,224 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 

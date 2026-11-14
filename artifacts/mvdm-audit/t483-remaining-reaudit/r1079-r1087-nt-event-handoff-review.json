@@ -1,0 +1,92 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "source_sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_head": "d728deadd",
+  "points": {
+    "R1079": {
+      "scope": "+5/-0",
+      "problem": "Console-group authorized cleanup",
+      "evidence": "Original cmdPushExit cleans host/ExitVDM before WM_CLOSE. Current host_applClose authorize_exit requests PARTICIPANT scope;this is not CONSOLE scope. NTSRV lifecycle selects a worker for the former and authenticated frontend group for the latter. Returning cleanup calls to their old position would request worker termination before Console-group intent. Current lifecycle close_console binds original control handler after service permission.",
+      "plan": "Remove3 comment lines;keep original host_applClose and ExitVDM in authorized handler pending owner. R1097 request/retirement audited separately."
+    },
+    "R1080": {
+      "scope": "+2/-0",
+      "problem": "Drain asynchronous publication before final paint",
+      "evidence": "Publication thread can have an in-flight or queued copied frame independently of original input thread. Pausing original input alone does not wait for it. publication_active(FALSE) stops admission,waits existing send,forces latest/source drain and propagates error. Without it,older async frame can race final state/ownership release. Actual production publisher fixture now passes forced drain,resume,sticky send failure and50 stop/join cycles.",
+      "plan": "Remove comment;retain one pause call pending owner. Do not add another publication state or lock."
+    },
+    "R1081": {
+      "scope": "+3/-0",
+      "problem": "Restore original mouse saved background before final capture",
+      "evidence": "Original cursor_undisplay restores saved text word/graphics pixels and clears save_area_in_use. Input suspension cannot rely on queued LEAVE being processed. Without explicit retirement before capture,the mouse-painted guest word is copied as lasting text. route_changed(FALSE) directly invokes original undisplay,without injecting guest input or flushing/reenabling publisher.",
+      "plan": "Remove2 comment lines;retain one original-owner route retirement call pending owner."
+    },
+    "R1082": {
+      "scope": "+10/-1",
+      "problem": "Settle original software mode before handoff paint",
+      "evidence": "Current FULLSCREEN is software presentation,not NT4 hardware takeover;old if-not-FULLSCREEN skips extraction. Original nt_graphics_tick uses mode_change_now and EGA_TICK_DELAY to call choose_display_mode then clear mode_change_required. calc_update alone does not perform this state transition;copy declines pending mode. cmdExec stops guest before native handoff,so future guest ticks cannot supply the required pre-release snapshot.",
+      "plan": "Keep existing #error configuration skeleton. Remove explanatory comments and unnecessary inner scope;retain bounded original graphics ticks and original calc_update pending owner. No guest time/IRQ synthesis."
+    },
+    "R1083": {
+      "scope": "+5/-0",
+      "problem": "Submit completed text frame before original reset/release",
+      "evidence": "calc_update populates original presentation backing;separate publish_text_update normally runs through video tick/flush. This stopped-guest handoff cannot rely on a later tick before ResetConsoleState and release. NtvdmConsoleUpdateText captures cells,font,cursor andpalette;paused publisher makes send synchronous. Thus logical paint alone is not copied-frame delivery.",
+      "plan": "Remove2 comment lines and surplus blank;retain conditional final text submission/error pending owner. No second renderer or frame cache."
+    },
+    "R1084": {
+      "scope": "+3/-4",
+      "problem": "Exclude physical Console display takeover in software route",
+      "evidence": "Original block calls SetConsoleDisplayMode(WINDOWED) when ScreenState FULLSCREEN at termination. Current software route uses FULLSCREEN for KVM presentation without any physical fullscreen ownership;adapter forwards this call to real NTCON Console,not software route selection. It would mutate a different surface based on a logical software state. Current X86GFX #error marks excluded hardware operation.",
+      "plan": "Retain excluded #if/#error/#endif per owner rule;no active code restoration around the exclusion. Pending owner confirmation of this admitted hardware/software boundary."
+    },
+    "R1085": {
+      "scope": "+4/-0",
+      "problem": "Release authoritative frontend after original handoff work",
+      "evidence": "Original SetConsoleMode and local blocked flags cannot release NTSRV frontend association. console_activate(FALSE) requests IO checkpoint,barrier then channel release;only successful release retires local route. Existing source ordering completes final paint,returned keyboard and original mode restoration first. Original-only code leaves external owner/channel unchanged.",
+      "plan": "Remove2 comment lines;retain guarded deactivate/error pair pending owner."
+    },
+    "R1086": {
+      "scope": "+5/-0",
+      "problem": "Acquire frontend before original Console queries/resume",
+      "evidence": "Deactivation can physically close copied channel. Original GetConsoleScreenBufferInfo/SetupConsoleMode cannot operate on a released endpoint. console_activate(TRUE) acquires broker-authorized IO,initializes transport and prepares returned text geometry before event/timer producers resume;failed preparation releases ownership.",
+      "plan": "Remove2 comment lines and surplus blank;retain activate/error pair pending owner. Preserve original restoration order."
+    },
+    "R1087": {
+      "scope": "+2/-0",
+      "problem": "Redundant explicit publication resume",
+      "evidence": "All software graphics ticks call text_video_sync_route before paint,which enables publication for selected route;mouse text flush also enables before publishing. Original resume restarts timer/input after restoring source. A pre-tick dirty source remains latched,and final pause drains even already-inactive pending source. No separate transition is required here. Only this mirror caller uses text_video_resume.",
+      "plan": "Restore original by removing comment/call at whole-file edit;delete then-unused autonomous text_video_resume function and declaration. Keep route-owned enabling and final drain. Final-code regression still required."
+    }
+  },
+  "tests": {
+    "focus.exit": {
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+      "text": "1\n"
+    },
+    "publisher/results.txt": {
+      "sha256": "797350c6a68f90cd957984ce66dc36b967c6917da0d557cb02a70243bc201114",
+      "text": "FAIL line 66 error 0\n"
+    },
+    "fixed.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "text": "0\n"
+    },
+    "publisher-fixed/results.txt": {
+      "sha256": "05ddcc7629b1bd02b6ed399eb05acb3efce0b12e637ee8c50d725f6b26d3d49c",
+      "text": "PASS production publisher: latest of200, >=20ms, no-submit idle, explicit repeat, palette-only change, deferred source capture, forced final drain, resume, sticky failed send, 50 stop/join cycles without handle leaks\n"
+    }
+  },
+  "test_repair": {
+    "path": "test/worker-base/software_video_publisher_test.c",
+    "cause": "T440 commit56b6c8450 removed whole-frame dedup from production;old test still required duplicate suppression at line66 and commit. Header explicitly guarantees final commit always delivers.",
+    "change": "Require no unsolicited send when idle;explicit repeat and repeated commit each deliver. Adjust counts;retain palette,forced drain,resume,sticky error,deferred capture and handle-cycle assertions.",
+    "production_changed": false
+  },
+  "limits": [
+    "Publisher fixture uses actual production component and controlled send/capture boundary;not full guest/presentation regression.",
+    "R1087 is a source-proven restoration decision,not an implemented or delivered restoration.",
+    "All mirror bytes/#error/#line unchanged;whole-file edit/line proof pending.",
+    "New tests do not retroactively establish this formerly stale standalone fixture passed in P84."
+  ]
+}
