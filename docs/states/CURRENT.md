@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-956 points reviewed:344 restored delivered,6 approved,
-606 qualified pending;1764 unreviewed. Files125/365 complete,240 remain.
+960 points reviewed:346 restored delivered,6 approved,
+608 qualified pending;1760 unreviewed. Files126/365 complete,239 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -225,7 +225,8 @@ P70 ega_writ.c4/4:2 points restored(8 declarations),2 residuals;diff-21;cached b
 P71 delivered:three video files,mirror diff-114;Full19 passed.
 [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0915-r0940-gfx-final-review.json).
 P72 delivered:two files,mirror diff-12;cached build,publish11x2,Full passed.
-P73:vga_mode.c3/3 complete;mirror diff-6;three qualified residuals pending owner.
-Original-line check0;excluded errors unchanged;selected object equivalent.
+P73 delivered:vga_mode.c3/3;mirror diff-6;Full19 passed.
+P74:vga_prts.c4/4 complete;mirror diff-22;2 original restorations delivered,
+2 minimized residuals pending owner. Original-line check0;#error unchanged.
 Cached full build,publish11x2,Full and governance passed;Git delivery accompanies
-checkpoint. Next R0950;S5 remains active.
+checkpoint. Next R0954;S5 remains active.

@@ -1,0 +1,61 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": {
+    "R0950": {
+      "before": "+5/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "proof": "set_index_state/in_index_state have no selected calls in this file. Removing added declarations and prose compiles; combined declaration removal preserves all85 non-debug COFF sections and resolved relocations."
+    },
+    "R0951": {
+      "before": "+5/-0",
+      "after": "+2/-0",
+      "decision": "minimized residual pending owner",
+      "proof": "Original do_new_cursor shape branches overwrite visibility TRUE even with stored cursor_off. Actual-source negative: prior02,new22,end7,height16 -> stored22,visible1. Current returnsvisible0. Keep two-line final disable gate; remove prose/blank."
+    },
+    "R0952": {
+      "before": "+2/-11",
+      "after": "+2/-2",
+      "decision": "partially restore; minimized residual pending owner",
+      "proof": "Original conditional storage compares only five scanline bits:02->22 retains02; restored together with original shape still visible1. Restore original block, compare both complete as.abyte values instead; 8388608 old/new/end/height combinations match current final state, callback argument/count and shape notification count. Original preliminary visibility writes are overwritten by every do_new_cursor branch before host notification."
+    },
+    "R0953": {
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "proof": "Glue_set_vid_wrt_ptrs takes WRT_POINTERS*, returns void; direct call return unused. Restored implicit declaration compiles;85 selected COFF sections/relocations unchanged;C4013 warning not treated as failure."
+    }
+  },
+  "object_proof": {
+    "nodecl": {
+      "equal": true,
+      "sections": 85
+    },
+    "minimal": {
+      "equal": false,
+      "sections": 85
+    }
+  },
+  "probe": {
+    "exit": 0,
+    "output": "current/minimal equivalent cases=8388608\nhide current reg=34 visible=0\noriginal951 reg=34 visible=1\noriginal952 reg=2 visible=1\noriginal_both reg=2 visible=1\nshow current/minimal reg=2/2 visible=1/1\n",
+    "scope": "Extracted current/original do_new_cursor and original CRTC-A write block; actual CURSOR_START/END bitfields. Accessors, host notification and screen geometry are test boundaries;not full port-handler/guest runtime verification."
+  },
+  "source_chain": [
+    "vga_crtc_outb CRTC-A -> stored cursor_start -> do_new_cursor -> base_cursor_shape_changed -> cursor_changed",
+    "host nt_cursor_size_changed ignores lo/hi and schedules resize;make_cursor_change uses is_cursor_visible",
+    "mvdm_softpc_text_video.c copies is_cursor_visible into text frame"
+  ],
+  "line_proof": {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "before": 605,
+    "after": 583,
+    "delta": -22,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  },
+  "metric_reconciliation": "Point reductions18 plus four redundant #line directives removed after original positions restored = raw mirror diff22 fewer lines",
+  "validation": "Final source cached full x86/x64 build,11x2 publication,CVID,Full and governance passed;see batch-p74-checkpoint.json"
+}

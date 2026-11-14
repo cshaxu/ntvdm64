@@ -1,0 +1,11 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "before": 605,
+    "after": 583,
+    "delta": -22,
+    "line_mismatches": [],
+    "errors_unchanged": true,
+    "CRLF": true
+  }
+]

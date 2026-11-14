@@ -368,12 +368,6 @@ ERROR RECOVERY	  :	none.
 
 #include	"egaports.h"
 
-/* DIVERGENCE(MVDM-HOST-DIV-067): declare original same-package EGA helpers
- * at their consumers; historical C accepted implicit declarations. */
-IMPORT void set_index_state IPT0();
-IMPORT boolean in_index_state IPT0();
-
-#line 371
 #ifdef GISP_SVGA 
 #line 372
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
@@ -636,11 +630,8 @@ GLOBAL VOID	do_new_cursor IFN0()
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 
-	/* DIVERGENCE(MVDM-HOST-DIV-358): VGA CRTC bit 5 disables the cursor
-	 * independently of its scan-line geometry. */
 	if (crt_controller.cursor_start.as_bfld.cursor_off)
 		set_cursor_visible(FALSE);
-
 #line 631
 	if(( get_cur_y() < 0 ) ||
 			((( get_cur_y() + 1 ) * get_char_height()) > get_screen_height() ))
@@ -1442,10 +1433,17 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 					{
 #endif /* V7VGA */
 						new.value = value;
-						/* DIV-358: retain bit-only writes as well as geometry. */
-#line 1419
-						crt_controller.cursor_start.as.abyte = value;
-#line 1422
+						if (crt_controller.cursor_start.as_bfld.cursor_off)
+							set_cursor_visible(FALSE);
+						else
+							set_cursor_visible(TRUE);
+
+						if (crt_controller.cursor_start.as.abyte != 
+							((CURSOR_START*)&new)->as.abyte)
+						{
+							crt_controller.cursor_start.as.abyte = value;
+						}
+
 						do_new_cursor();
 #ifdef V7VGA
 					}
@@ -2146,9 +2144,7 @@ FAST TINY colour_dont_care;
 **  NB: GLOBAL for JOKER.
 )*/
 #include	"cpu_vid.h"
-IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);
 
-#line 2123
 GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 {
 	ULONG				state;
