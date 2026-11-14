@@ -1,0 +1,25 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+    "common_selected_lines": 91,
+    "line_mismatches": [],
+    "ambiguities_resolved": [
+      {
+        "original": [
+          105,
+          "}"
+        ],
+        "text_match": [
+          111,
+          "}"
+        ],
+        "resolution": "exact original (line,text) also exists; repeated brace belongs to inserted function"
+      }
+    ],
+    "restored_original_declarations": [
+      40,
+      41
+    ],
+    "method": "Actual final compiler /P compared to original; matching selected statements and exact line/text disambiguation."
+  }
+]

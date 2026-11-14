@@ -1,0 +1,33 @@
+{
+  "batch": "P81",
+  "status": "final cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "sha256": "84f296121ff4113db0b9ea39a17dde187e7c7c9fbfaa4e4f219f2447f99003f6"
+    }
+  ],
+  "mirror_diff_delta": -70,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "publication": {
+    "status": "published",
+    "package": "15a4788b-485f-490d-9d03-3b1a52d58c29",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build\\t483-s5-p81-final\\full-final\\timings.json",
+  "Full_elapsed_ms": 403441,
+  "verification": {
+    "focused": "final/current115 instruction lines identical;actual normal product link with restored COMMON declarations passes",
+    "actual_preprocessor": "91 shared selected lines;original declarations40/41;no line mismatches;all #error unchanged",
+    "Full": "19 passed;DOS4GW external fixture explicitly SKIP",
+    "boundary": "143 WOW objects,9 negative controls",
+    "governance": "documentation/links/diff checks passed"
+  },
+  "superseded_candidate_Full": "build/t483-s5-p81/full-final/timings.json;before final globals restoration,not substitute for final Full"
+}

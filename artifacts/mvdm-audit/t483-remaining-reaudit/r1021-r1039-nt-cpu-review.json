@@ -1,0 +1,151 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+  "points": [
+    {
+      "id": "T483-R1021",
+      "disposition": "restore",
+      "evidence": "fm_c.h only serves .EIP first-member spelling; original address compiles and final machine instructions identical.",
+      "mirror_diff_delta": -5
+    },
+    {
+      "id": "T483-R1022",
+      "disposition": "restore",
+      "evidence": "Added timing-table comment only; original host_delays remains.",
+      "mirror_diff_delta": -3
+    },
+    {
+      "id": "T483-R1023",
+      "disposition": "partial restoration;excluded-framework retained under standing owner policy",
+      "evidence": "Actual normal product link with original two tentative definitions succeeds. Restore both original declarations. Remaining conditional/error framework is retained only under explicit owner requirement to preserve #error, not duplicate-symbol reasoning.",
+      "mirror_diff_delta": -7
+    },
+    {
+      "id": "T483-R1024",
+      "disposition": "pending",
+      "evidence": "Production sole lifecycle activation declaration; resolves worker_lifecycle.c provider called at initialized CPU boundary.",
+      "mirror_diff_delta": -2
+    },
+    {
+      "id": "T483-R1025",
+      "disposition": "pending",
+      "evidence": "Removing sole production activation prevents creation of worker_base input/service watchers, so NTSRV close/service-loss instructions lose their consumer. Original has no current service protocol.",
+      "mirror_diff_delta": 0
+    },
+    {
+      "id": "T483-R1026",
+      "disposition": "pending",
+      "evidence": "Original bios.c BOP FE references host_unsimulate; selected CCPU exports c_cpu_unsimulate -> ccpu386Unsimulate -> TLS longjmp. No other selected host_unsimulate definition; preserve one bridge, remove added always-true guard.",
+      "mirror_diff_delta": -6
+    },
+    {
+      "id": "T483-R1027",
+      "disposition": "restore",
+      "evidence": "Original unused gdp_bool local can compile and adds no machine instructions.",
+      "mirror_diff_delta": -2
+    },
+    {
+      "id": "T483-R1028",
+      "disposition": "restore",
+      "evidence": "Restore original diagnostic comment.",
+      "mirror_diff_delta": -1
+    },
+    {
+      "id": "T483-R1029",
+      "disposition": "pending",
+      "evidence": "Selected generated gdpvar.h places InNanoCpu at563, not original fixed631. Original bde/vdmexts context readers consume published pointer via symbol; fixed631 names wrong storage. No product runtime failure claimed.",
+      "mirror_diff_delta": -2
+    },
+    {
+      "id": "T483-R1030",
+      "disposition": "restore",
+      "evidence": "GLOBAL_CurrentUniverse is already IU32 lvalue; cast and added comment unnecessary.",
+      "mirror_diff_delta": -5
+    },
+    {
+      "id": "T483-R1031",
+      "disposition": "restore",
+      "evidence": "Restore original diagnostic comment.",
+      "mirror_diff_delta": -1
+    },
+    {
+      "id": "T483-R1032",
+      "disposition": "pending",
+      "evidence": "Selected generated gdpvar.h places stackIsBig at3099, not original fixed4355. Original bde/vdmexts read this published pointer for ESP selection. No product runtime failure claimed.",
+      "mirror_diff_delta": -2
+    },
+    {
+      "id": "T483-R1033",
+      "disposition": "restore",
+      "evidence": "CleanedREC EIP first member atoffset0; original structure address and flags pointer produce identical instructions. Original pointer type warnings not evidence of required adaptation.",
+      "mirror_diff_delta": -4
+    },
+    {
+      "id": "T483-R1034",
+      "disposition": "restore",
+      "evidence": "Original CR0 address produces identical instructions; pointer warning does not justify diff.",
+      "mirror_diff_delta": -2
+    },
+    {
+      "id": "T483-R1035",
+      "disposition": "restore",
+      "evidence": "Original EAX pointer expressions produce identical instructions.",
+      "mirror_diff_delta": -4
+    },
+    {
+      "id": "T483-R1036",
+      "disposition": "restore",
+      "evidence": "Original EBX pointer expressions produce identical instructions.",
+      "mirror_diff_delta": -4
+    },
+    {
+      "id": "T483-R1037",
+      "disposition": "restore",
+      "evidence": "Original ECX pointer expressions produce identical instructions.",
+      "mirror_diff_delta": -4
+    },
+    {
+      "id": "T483-R1038",
+      "disposition": "restore",
+      "evidence": "Original EDX pointer expressions produce identical instructions.",
+      "mirror_diff_delta": -4
+    },
+    {
+      "id": "T483-R1039",
+      "disposition": "restore",
+      "evidence": "Original ESI/EDI/EBP pointer expressions produce identical instructions.",
+      "mirror_diff_delta": -12
+    }
+  ],
+  "metric": {
+    "before": {
+      "added": 69,
+      "deleted": 119,
+      "total": 188
+    },
+    "after": {
+      "added": 23,
+      "deleted": 95,
+      "total": 118
+    },
+    "delta": -70
+  },
+  "compile_context": "actual cc_host rule, x86 product worker, reused by x64 product composition",
+  "verification": "Final/current115 disassembled instruction lines identical;final cached x86/x64 build,publish11x2,Full19;91 original selected logical-line matches;all #error unchanged",
+  "newline": "Restore original CRLF; previous local file LF. Excluded from lexical diff metric.",
+  "source_hash": "84f296121ff4113db0b9ea39a17dde187e7c7c9fbfaa4e4f219f2447f99003f6",
+  "delivery": "P81 final cached full build,publish11x2,Full19 and governance passed;5 functional residuals pending owner;R1023 partial restore with explicitly retained exclusion framework",
+  "counter_review": {
+    "point": "T483-R1023",
+    "previous_claim_rejected": "Restoring host tentative definitions necessarily collides with initialized SAS definitions.",
+    "coff_evidence": "original.obj marks both symbols external COMMON (section0,value4); selected ccpusas4.obj defines both in section3.",
+    "isolated_link": "COMMON+initialized definitions link with no duplicate-symbol error; unresolved other CPU symbols deliberately allowed only in diagnostic boundary, not accepted product build.",
+    "actual_product_link_exit": 0,
+    "actual_product_link": "Same selected NTVDM libraries and normal link flags; candidate nt_cpu object supplies restored globals plus lifecycle/BOP bridge. No FORCE; output is not published. Only LNK4070 output-basename warning.",
+    "next_action": "Restore original two declarations after active verification ends; retain existing #error framework under owner subset policy. Recompile final source and compare final artifacts; do not claim this finding delivered.",
+    "final_product_map_owners": [
+      "0003:00018ce4       _Start_of_M_area           005d2ce4     original-ccpu386:ccpusas4.obj",
+      "0003:00018ce8       _Length_of_M_area          005d2ce8     original-ccpu386:ccpusas4.obj"
+    ],
+    "conclusion": "Original tentative declarations restored; actual final linker binds both existing storage locations to ccpusas4.obj. No second allocation or owner."
+  }
+}

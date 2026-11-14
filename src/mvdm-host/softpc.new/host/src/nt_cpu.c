@@ -34,23 +34,12 @@ static char SccsID[]="@(#)sun4_a3cpu.c	1.2 5/24/91 Copyright Insignia Solutions 
 
 #ifdef CPU_40_STYLE
 #include "cpu_c.h"
-/* DIVERGENCE(MVDM-HOST-DIV-048): fm_c.h is
- * the selected generated definition of CleanedREC, which this host carrier
- * needs to name the original EIP member rather than treating the record as
- * an untyped 32-bit word. */
-#include "fm_c.h"
 #endif
 
-/* The original CCPU40 disk/FDC controller uses this independent timing
- * table.  It is not a SAS-memory global and therefore remains available in
- * the CCPU profile. */
 #line 39
 GLOBAL	quick_event_delays	host_delays;
-
-/* DIVERGENCE(MVDM-HOST-DIV-030): CCPU SAS owns Start_of_M_area and
- * Length_of_M_area in ccpusas4.c.  These two historical duplicate host
- * definitions are unused by the selected CCPU path and collide at a modern
- * static link. The unselected non-CCPU body is now marked by DIV-505. */
+GLOBAL	host_addr Start_of_M_area;
+GLOBAL	IHPE Length_of_M_area;
 #ifndef CCPU
 #line 40
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
@@ -87,8 +76,6 @@ GLOBAL	quick_event_delays	host_delays;
 	we are running a software emulation, or if a 486 is present,
 	starts up this emulation.
 */
-/* DIVERGENCE(MVDM-HOST-DIV-356): original host initialization is complete;
- * only now may service instructions enter its original cleanup callbacks. */
 extern void NtvdmActivateLifecycle(void);
 #line 72
 void	host_start_cpu()
@@ -119,18 +106,12 @@ void	host_simulate()
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
 }
 
-/* DIVERGENCE(MVDM-HOST-DIV-153): BIOS BOP FE keeps the historical
- * host_unsimulate public entry.  The selected CCPU40 implementation is the
- * original c_cpu_unsimulate provider; publish the thin original-name bridge
- * rather than inventing an alternate stop mechanism. */
-#ifdef CCPU
 extern void c_cpu_unsimulate(void);
 void host_unsimulate()
 {
     c_cpu_unsimulate();
-#line 105
 }
-#endif /* CCPU */
+#line 106
 
 
 /*
@@ -241,19 +222,20 @@ LOCAL void initNtCpuRegInfo IFN6(
 
 
 
+#line 265
 GLOBAL void InitNtCpuInfo IFN0()
 {
+    BOOL *gdp_bool;
+
     /* Variables for deciding what mode we're in, and hence where the */
     /* register values are kept. */
 
     /* Horrible hack, part 1. InNanoCpu is a BOOL, so GLOBAL_InNanoCpu */
+    /* is not an l-value, hence we can't take its address. */
 #ifdef ALPHA
 #line 275
 #error Unsupported excluded original configuration
 #else /* ALPHA */
-#line 277
-    /* DIVERGENCE(MVDM-HOST-DIV-048): generated GDP lvalues replace NT4
-     * packed offsets and their unavailable non-PROD GdpOffsetFromName check. */
 #line 277
     nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;
 #endif /* ALPHA */
@@ -263,21 +245,16 @@ GLOBAL void InitNtCpuInfo IFN0()
 #error Unsupported excluded original configuration
 #endif
 #line 286
-    /* DIVERGENCE(MVDM-HOST-DIV-048): these CCPU control/register cells are
-     * fixed 32-bit Intel values.  The original IUH spelling happened to be
-     * identical to IU32 on NT4; state that source contract explicitly. */
 #line 287
-    nt_cpu_info.universe = (IU32 *)&GLOBAL_CurrentUniverse;
+    nt_cpu_info.universe = &GLOBAL_CurrentUniverse;
 
     /* Variables needed to get the value SP or ESP. */
 
+    /* Horrible hack, part 2: as for InNanoCpu, so for stackIsBig. */
 #ifdef ALPHA
 #line 293
 #error Unsupported excluded original configuration
 #else /* ALPHA */
-#line 295
-    /* DIVERGENCE(MVDM-HOST-DIV-048): use the generated source field rather
-     * than an architecture-specific byte offset into the old packed GDP. */
 #line 295
     nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;
 #endif /* ALPHA */
@@ -303,29 +280,29 @@ GLOBAL void InitNtCpuInfo IFN0()
     nt_cpu_info.ss = &GLOBAL_SsSel;
 
     /* EIP & flags, neither of which are likely to be very reliable. */
-    nt_cpu_info.eip = &GLOBAL_CleanedRec.EIP;
-    nt_cpu_info.flags = (IU32 *)&GLOBAL_EFLAGS;
+    nt_cpu_info.eip = &GLOBAL_CleanedRec;
+    nt_cpu_info.flags = &GLOBAL_EFLAGS;
 
-    nt_cpu_info.cr0 = (IU32 *)&GLOBAL_R_CR0;
+    nt_cpu_info.cr0 = &GLOBAL_R_CR0;
     /* General purpose registers. */
-    initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, (IU32 *)&GLOBAL_R_EAX,
-                     (IU32 *)&GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.eax, &GLOBAL_nanoEax, &GLOBAL_R_EAX,
+                     &GLOBAL_EAXsaved, 1 << ConstraintRAL_LS8,
                      1 << ConstraintRAX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, (IU32 *)&GLOBAL_R_EBX,
-                     (IU32 *)&GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.ebx, &GLOBAL_nanoEbx, &GLOBAL_R_EBX,
+                     &GLOBAL_EBXsaved, 1 << ConstraintRBL_LS8,
                      1 << ConstraintRBX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, (IU32 *)&GLOBAL_R_ECX,
-                     (IU32 *)&GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.ecx, &GLOBAL_nanoEcx, &GLOBAL_R_ECX,
+                     &GLOBAL_ECXsaved, 1 << ConstraintRCL_LS8,
                      1 << ConstraintRCX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, (IU32 *)&GLOBAL_R_EDX,
-                     (IU32 *)&GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,
+    initNtCpuRegInfo(&nt_cpu_info.edx, &GLOBAL_nanoEdx, &GLOBAL_R_EDX,
+                     &GLOBAL_EDXsaved, 1 << ConstraintRDL_LS8,
                      1 << ConstraintRDX_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, (IU32 *)&GLOBAL_R_ESI,
-                     (IU32 *)&GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, (IU32 *)&GLOBAL_R_EDI,
-                     (IU32 *)&GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);
-    initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, (IU32 *)&GLOBAL_R_EBP,
-                     (IU32 *)&GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);
+    initNtCpuRegInfo(&nt_cpu_info.esi, &GLOBAL_nanoEsi, &GLOBAL_R_ESI,
+                     &GLOBAL_ESIsaved, 0, 1 << ConstraintRSI_LS16);
+    initNtCpuRegInfo(&nt_cpu_info.edi, &GLOBAL_nanoEdi, &GLOBAL_R_EDI,
+                     &GLOBAL_EDIsaved, 0, 1 << ConstraintRDI_LS16);
+    initNtCpuRegInfo(&nt_cpu_info.ebp, &GLOBAL_nanoEbp, &GLOBAL_R_EBP,
+                     &GLOBAL_EBPsaved, 0, 1 << ConstraintRBP_LS16);
 }
 
 #endif /* CPU_40_STYLE */
