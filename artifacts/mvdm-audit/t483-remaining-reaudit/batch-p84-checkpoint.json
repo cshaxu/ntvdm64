@@ -1,0 +1,30 @@
+{
+  "batch": "P84",
+  "status": "cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "sha256": "23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d"
+    }
+  ],
+  "mirror_diff_delta": -20,
+  "publication": {
+    "status": "published",
+    "package": "e8e9c89e-cdfd-4193-849d-8551b6de4be1",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build\\t483-s5-p84\\full-final\\timings.json",
+  "verification": {
+    "focused": "actual current0/original2 C2440/minimized0",
+    "actual_preprocessor": "656 shared selected lines;all #error unchanged",
+    "Full": "19 passed;external DOS4GW fixture explicitly SKIP",
+    "boundary": "143 WOW objects,9 negative controls",
+    "governance": "documentation/links/diff passed"
+  }
+}

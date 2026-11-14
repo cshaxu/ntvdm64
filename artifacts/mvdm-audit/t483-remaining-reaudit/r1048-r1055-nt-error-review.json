@@ -1,0 +1,40 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+  "ids": "R1048-R1055",
+  "source_head": "ec7978ea755ebc5c08ecdb67e49891282530d3b8",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_relative_diff": {
+    "before": 52,
+    "after": 32,
+    "delta": -20,
+    "method": "added+deleted lines against original,normalize newlines and omit #line;excluded #error bodies unchanged"
+  },
+  "restored": [
+    "R1049",
+    "R1050",
+    "R1051",
+    "R1053",
+    "R1054",
+    "R1055"
+  ],
+  "pending": [
+    "R1048",
+    "R1052"
+  ],
+  "evidence": {
+    "compilation": "Actual cc_host flags:before0,original2,minimized0. Original error C2440 at CreateThread argument:DWORD (__cdecl *)(void*) cannot convert to LPTHREAD_START_ROUTINE.",
+    "call_chain": "ErrorDialogBox -> CreateThread -> ErrorDialogBoxThread -> DialogBoxParam -> ErrorDialogEvents;WOW owner lookup uses EnumWindows -> GetThreadTopLevelWindow",
+    "ABI": "Actual selected x86 worker;no /Gz. Remaining WINAPI supplies stdcall,assembly _ErrorDialogBoxThread@4 and ret4. Restored callbacks retain original CALLBACK/APIENTRY and original function pointer casts.",
+    "scope": "Original dialog handles WM_INITDIALOG and WM_COMMAND,uses LOWORD(wParam),returns TRUE/FALSE;WNDENUM callback returns0/1;LONG and LRESULT are32bit in actual x86 context,local value tested only for zero. No x64 nt_error translation unit assumed.",
+    "controls": "build/t483-s5-p84/{before,original,minimized}.log/.exit;minimized.asm;actual preprocessed line proof"
+  },
+  "line_check": {
+    "shared_selected_lines": 656,
+    "mismatches": []
+  },
+  "limits": [
+    "Original whole-file compile fails at thread entry;explicit WINAPI retained.",
+    "Routine Full19 passed;no separate interactive error-dialog button matrix claimed."
+  ],
+  "delivery": "Final cached full build,publish11x2,Full19 and governance passed;two residuals pending owner"
+}

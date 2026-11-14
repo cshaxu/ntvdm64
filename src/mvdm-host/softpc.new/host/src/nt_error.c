@@ -85,11 +85,7 @@ char achPERIOD[]=". ";
 int ErrorDialogBox(char *message, char *Edit, DWORD dwOptions);
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv);
 int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi);
-/* DIVERGENCE(MVDM-HOST-DIV-066): preserve the worker/dialog sequence and
- * original x86 local carriers, but spell public Win32 callback signatures
- * exactly. The SoftPC BOOL macro does not match WNDENUMPROC. */
-INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,
-                                   LPARAM lParam);
+LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam);
 #line 89
 void SwpButtons(HWND hDlg, DWORD dwOptions);
 void SwpDosDialogs(HWND hDlg, HWND hWndCon,HWND SwpInsert, UINT SwpFlags);
@@ -500,9 +496,7 @@ DWORD OemMessageToAnsiMessage(CHAR *pBuff, CHAR *pMsg)
  *         FALSE - edgi->hWnd has window handle for TopLevelWindow of thread
  *
  */
-/* The SoftPC host headers redefine BOOL as UINT.  WNDENUMPROC, however,
- * retains the public Win32 signed BOOL return representation. */
-int __stdcall GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)
+BOOL CALLBACK GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)
 #line 495
 {
    PDWORD pdw = (PDWORD)lParam;
@@ -554,7 +548,7 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
         // get window handle for the offending app
     if (VDMForWOW) {
         hWndApp = (HWND)GetCurrentThreadId();
-        EnumWindows(GetThreadTopLevelWindow, (LPARAM)&hWndApp);
+        EnumWindows((WNDENUMPROC)GetThreadTopLevelWindow,(LPARAM)&hWndApp);
         if (hWndApp == (HWND)GetCurrentThreadId()) {
             hWndApp = HWND_DESKTOP;
             }
@@ -657,7 +651,6 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
  *  exit: fills in pedgi.dwReply with ret code from DialogBoxParam
  *        IDB_QUIT, IDB_CONTINUE
  */
-/* DIVERGENCE(MVDM-SOFTPC-PATCH-003): see the source-shaped declaration above. */
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 #line 649
 {
@@ -697,7 +690,7 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
         i = DialogBoxParam(GetModuleHandle(NULL),
                            "ERRORPANEL",
                            GetDesktopWindow(),
-                           ErrorDialogEvents,
+                           (DLGPROC) ErrorDialogEvents,
                            (LPARAM) pedgi
                            );
         }
@@ -720,15 +713,14 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 
 
 
-INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,
-                                   LPARAM lParam)
+LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam)
 #line 710
 {
     ERRORDIALOGINFO *pedgi;
     CHAR  szBuff[MAX_PATH];
     int i;
     LPSTR  lpstr;
-    LRESULT l;
+    LONG  l;
 
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::: Process messages */
     switch(wMsg)
