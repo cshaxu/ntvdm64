@@ -1,0 +1,26 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+  "range": "R1100-R1110",
+  "original": "OpenNT/base/mvdm/softpc.new/host/src/nt_fdisk.c",
+  "evidence": {
+    "compile": "build/t483-s5-p91/actual-command.txt",
+    "controls": {
+      "before": 0,
+      "restored SDK header": 0,
+      "pinned original header": 0
+    },
+    "logs": "build/t483-s5-p91/*header.log",
+    "prior_restoration": "8a0a55ff3 P10 removed guest-location and restored original PDB accesses;cc2595e29 P7 restored fd access scalars"
+  },
+  "decisions": {
+    "R1100": "Restore include;three actual compiler contexts succeed;current winioctl carrier and ntdddisk header coexist. No evidence for omission.",
+    "R1101-R1108": "P10 already removed functional differences;restore exact whitespace and redundant line remnants;reconcile stale worklist.",
+    "R1109-R1110": "P7 delivered;not double counted. Exact byte restoration now removes residual redundant line directives."
+  },
+  "selected_api_use": [
+    "nt_fdisk_init DISK_GEOMETRY",
+    "nt_fdisk_verify VERIFY_INFORMATION/IOCTL_DISK_VERIFY"
+  ],
+  "counter_review": "Whole file matches pinned original bytes;no excluded branch removed,no replacement shim,no guest edit",
+  "delivery": "P91 cached full x86/x64,publish11x2 hashes,Full19 passed;Git delivery accompanies record"
+}

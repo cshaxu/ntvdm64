@@ -3,12 +3,10 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include <nturtl.h>
-
-#line 7
+#include <ntdddisk.h>
 #include <windows.h>
 #include "insignia.h"
 #include "host_def.h"
-#line 10
 
 /*
  * [ Product:        SoftPC-AT Revision 3.0
@@ -234,10 +232,7 @@ WORD	    fdisk_open_count = 0;
 
 WORD	    * pFDAccess = 0;
 
-extern USHORT * pusCurrentPDB;
-#line 234
-
-#line 236
+extern	    USHORT * pusCurrentPDB;
 
 extern	    int     DiskOpenRetry(CHAR);
 
@@ -405,12 +400,9 @@ ULONG nt_fdisk_read(
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
 
-#line 402
-
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
     if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE))
-#line 406
 	return(disk_read(fdisk_data->fdisk_fd,
 			 offset,
 			 size,
@@ -428,13 +420,10 @@ ULONG nt_fdisk_write(
     PFDISKDATA fdisk_data;
     ULONG   size_returned = 0;
 
-#line 422
-
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
 
     if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, TRUE)) {
-#line 427
 	// must lock the drive. This is very important.
 	size_returned = disk_write(fdisk_data->fdisk_fd,
 				   offset,
@@ -456,13 +445,10 @@ BOOL nt_fdisk_verify(
     ULONG   size_returned = 0;
     VERIFY_INFORMATION verify_info;
 
-#line 447
-
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return FALSE;
 
     if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE)) {
-#line 452
 	verify_info.StartingOffset = *offset;
 	verify_info.Length = size;
 	return(DeviceIoControl(fdisk_data->fdisk_fd,
@@ -498,7 +484,6 @@ BOOL close_fdisk(PFDISKDATA fdisk_data)
 	fdisk_data->fdisk_fd = INVALID_HANDLE_VALUE;
 	fdisk_data->owner_pdb = 0;
 	(*(pFDAccess))--;
-#line 487
 	fdisk_open_count--;
     }
     return TRUE;
@@ -550,7 +535,6 @@ BOOL get_fdisk_handle(PFDISKDATA fdisk_data, USHORT pdb, BOOL auto_lock)
 	    fdisk_open_count++;
 	    (*(pFDAccess))++;
 	    break;
-#line 538
 	}
 	else {
 	    last_error = GetLastError();

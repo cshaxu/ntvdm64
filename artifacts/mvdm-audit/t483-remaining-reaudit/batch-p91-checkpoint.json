@@ -1,0 +1,46 @@
+{
+  "status": "cached full built;published11x2;Full19 passed;Git delivery accompanies record",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867"
+    }
+  ],
+  "original": {
+    "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fdisk.c",
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867"
+  },
+  "mirror_metric": {
+    "before": {
+      "added": 6,
+      "deleted": 2,
+      "total": 8
+    },
+    "after": {
+      "added": 0,
+      "deleted": 0,
+      "total": 0
+    }
+  },
+  "guest_changed": false,
+  "publication": {
+    "status": "published",
+    "package": "f555e7c3-f7bd-416c-9816-135418dab3dc",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "Full_evidence": "build\\t483-s5-p91\\full-final\\timings.json",
+  "governance_recovery": "Initial final-check failed CURRENT UTF8 mojibake;corrected encoding only;final-check-retry passed;initial pipeline exit1 retained",
+  "verification": {
+    "focused": "actual product compile:current,restored SDK header,pinned original header all passed",
+    "actual_preprocessor": "whole source byte-identical to pinned original;no excluded branch changed",
+    "Full": "19 gates passed;external DOS4GW fixture explicitly SKIP",
+    "limits": "Inherited baseline warnings unchanged;no claim of raw physical disk runtime coverage"
+  }
+}

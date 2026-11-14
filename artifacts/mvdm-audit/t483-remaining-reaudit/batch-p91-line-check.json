@@ -1,0 +1,9 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+    "byte_identical_to_original": true,
+    "line_mismatches": [],
+    "error_preserved": true,
+    "note": "Original and prior file contain no #error; exact original bytes restore all physical and logical lines"
+  }
+]
