@@ -741,3 +741,5 @@ P83 audit-only: [nt_eoi R1047](r1047-nt-eoi-review.json);owner-approved hardware
 P84 delivered: [nt_error8-point review](r1048-r1055-nt-error-review.json), [lines](batch-p84-line-check.json), [checkpoint](batch-p84-checkpoint.json). Mirror52->32(-20);six originals restored,two thread ABI residuals;656 selected-line matches;cached build,publish11x2,Full19 passed.
 
 nt_event in progress: [R1056/R1057 interface evidence](r1056-r1057-nt-event-header-review.json);2/44 points reviewed,whole file not complete. No source change or new build/publication;P84 remains baseline.
+
+P86 audit-only: [R1058-R1063 boundaries](r1058-r1063-nt-event-boundary-review.json);nt_event8/44 points. Current/original function controls distinguish key-origin and BIOS-release failures;actual helper exposes premature-start join hang. Lifetime corrections explicitly pending,not certified. No source changes;P84 baseline unchanged.

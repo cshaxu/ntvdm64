@@ -1,0 +1,136 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "source_sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_head": "b795558e647d32e0ec2709b39a4e7b0b4fd37679",
+  "points": {
+    "R1058": {
+      "scope": "+9/-0",
+      "problem": "Lifecycle and key-origin dependencies",
+      "evidence": "The termination header supplies no used declaration and only includes stdint,already owned by history header. Other dependencies reach existing worker Console exit RPC,event-thread join,input terminal detection,and origin selection. Raw event count is not pending scan-byte count:original GetHistoryKeyEvent control fails on ignored release displacing unread make.",
+      "plan": "Remove unused termination include and3 explanation lines when whole file is edited;retain5 declaration/state lines pending owner. Do not remove origin metadata based only on ring counts."
+    },
+    "R1059": {
+      "scope": "+9/-0",
+      "problem": "Copied frontend handoff and video/mouse retirement",
+      "evidence": "console_activate performs NTSRV WORKER_IO_CHECKPOINT_PAUSE,NTCON barrier,and physical channel closure/acquisition. Original ResetConsoleState/SetConsoleMode cannot notify a separate authoritative broker. Async publisher must be drained before final frame/release;original mouse backing must be restored on CPU owner before retirement.",
+      "plan": "Remove5 explanatory comment lines;retain4 direct interface declarations/includes pending owner. R1080-R1087 still require separate exact-call/order audit;this does not approve the entire adapter."
+    },
+    "R1060": {
+      "scope": "+3/-0",
+      "problem": "Join BIOS key reconstruction with returned hardware suffix",
+      "evidence": "Existing actual extracted-function BiosJoin fixture passes. Replacing only ReturnBiosBufferKeys with pinned original causes duplicated release:2 expected records become3 and odd batch40 becomes41. first_returned_key captures only successful prepend and newest BIOS adjacency.",
+      "plan": "Remove2 explanatory comment lines;retain one original-type INPUT_RECORD state pending owner. Exact branches R1088 onward remain separately queued."
+    },
+    "R1061": {
+      "scope": "+3/-0",
+      "problem": "Convert scan-less modern host input to original PC keys",
+      "evidence": "Original nt_process_keys calls nt_key_down/up_action -> KeyMsgToKeyCode,which indexes scan-code tables;scan0 maps no physical key. Modern VK_PACKET/scan-less character data has a Unicode value but no usable original PC scan. console_compat normalizes a bounded5 raw records into up to40 transitions,without hidden carry queue;physical scan records pass unchanged.",
+      "plan": "Remove2 explanatory comment lines;retain one console_input header pending owner. Do not count interface proof as complete audit of normalization internals."
+    },
+    "R1062": {
+      "scope": "+1/-0",
+      "problem": "Distinguish never-started event thread before join",
+      "evidence": "Original nt_start_event_thread creates CREATE_SUSPENDED. Helper must not wait indefinitely for that thread. Existing nt_init_called is set BEFORE copyConsoleToRegen/enableUpdates/SyncBiosKbdLedToKbdDevice and ResumeThread,so it is not a definitive resumed-state witness. Actual helper test with suspended thread/started=true hangs and bounded parent returns6;started=false and running=true controls return0.",
+      "plan": "Keep qualified pending CORRECTION decision,not approved retention:replace the premature initialization proxy with an authoritative started/terminal lifetime witness when entire lifecycle chain is handled. No new state or net-increase implemented. Product startup failure reproduction not claimed."
+    },
+    "R1063": {
+      "scope": "+6/-1",
+      "problem": "Join source-owned input thread before session resource retirement",
+      "evidence": "Original NtAlertThread requests wakeup,not terminal completion. Modern source thread has session binding via common/worker-thread/bridge enter_owner/finish_owner;destroying session-owned frontend/state requires terminal thread. Current helper duplicates thread handle because original ConsoleEventThread closes its handle before return. Its failure result is currently ignored at this caller;therefore existing diff is NOT certified correct on failure.",
+      "plan": "Minimize4 comment lines;retain necessary alert/join pending owner with explicit correction:failed duplicate/alert/wait must not permit teardown beneath a live thread. Prefer fail-fast through existing terminal owner,not retry/poll/new callback. Coupled premature-start proxy belongs R1062;no additional mirror lines implemented."
+    }
+  },
+  "tests": {
+    "origin.log": {
+      "sha256": "f19bdafb769c8efed1dfc7aef7ec1e8635be2bc362c6f8b6e5416fe3e04f1660",
+      "result_lines": [
+        "PASS ignored release after unread make does not displace it",
+        "PASS ignored release before unread make retains original order",
+        "PASS Ctrl-Break/PrintScreen expansion returns its one raw record, never consumed M",
+        "PASS synthetic data and unattributed output do not replay consumed M",
+        "PASS unread output returns once; consumed output awaiting EOI is not replayed",
+        "PASS captured-history shape preserves first M despite ignored duplicate release",
+        "PASS wrapped device metadata retains paired original order",
+        "PASS held/output/prefix duplicate identity survives hardware reset once",
+        "PASS original history ring wrap rejects overwritten identities without aliasing",
+        "PASS failed Console prepend keeps original cleanup and no fabricated BIOS join"
+      ]
+    },
+    "bios.log": {
+      "sha256": "f2b610cecc65adf2f0153042f20bc5900e3ed4d35374218661d0eee49ae13041",
+      "result_lines": [
+        "PASS matching-release records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS no-hardware records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS different-key records=3 expected=3 E-make/up=1/1 drained=1",
+        "PASS different-scan records=3 expected=3 E-make/up=1/2 drained=1",
+        "PASS different-extended records=3 expected=3 E-make/up=1/2 drained=1",
+        "PASS hardware-make records=3 expected=3 E-make/up=2/1 drained=1",
+        "PASS failed-prepend records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS zero-written-prepend records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS physical-release-modifiers records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS wrapped-bios records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS only-newest-overlaps records=4 expected=4 E-make/up=2/2 drained=1",
+        "PASS odd-batch-flush records=40 expected=40 E-make/up=20/20 drained=1",
+        "PASS untranslated-newest records=3 expected=3 E-make/up=1/2 drained=1",
+        "PASS subsequent-empty-hardware records=2 expected=2 E-make/up=1/1 drained=1"
+      ]
+    },
+    "origin-original/result.log": {
+      "sha256": "359267628b2f316b17140bf3cc9d0f630b42e8f35aae909bbb23aeda35212a82",
+      "result_lines": [
+        "FAIL line=82: captured[0].Event.KeyEvent.wVirtualKeyCode==first && captured[0].Event.KeyEvent.bKeyDown==down"
+      ]
+    },
+    "bios-original/result.log": {
+      "sha256": "b5113bb974fc759888be767e54f8d39c9c53ee501351253b99bc6f6d82d9e869",
+      "result_lines": [
+        "FAIL matching-release records=3 expected=2 E-make/up=1/2 drained=1",
+        "PASS no-hardware records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS different-key records=3 expected=3 E-make/up=1/1 drained=1",
+        "PASS different-scan records=3 expected=3 E-make/up=1/2 drained=1",
+        "PASS different-extended records=3 expected=3 E-make/up=1/2 drained=1",
+        "PASS hardware-make records=3 expected=3 E-make/up=2/1 drained=1",
+        "PASS failed-prepend records=2 expected=2 E-make/up=1/1 drained=1",
+        "PASS zero-written-prepend records=2 expected=2 E-make/up=1/1 drained=1",
+        "FAIL physical-release-modifiers records=3 expected=2 E-make/up=1/2 drained=1",
+        "FAIL wrapped-bios records=3 expected=2 E-make/up=1/2 drained=1",
+        "FAIL only-newest-overlaps records=5 expected=4 E-make/up=2/3 drained=1",
+        "FAIL odd-batch-flush records=41 expected=40 E-make/up=20/21 drained=1",
+        "PASS untranslated-newest records=3 expected=3 E-make/up=1/2 drained=1",
+        "PASS subsequent-empty-hardware records=2 expected=2 E-make/up=1/1 drained=1"
+      ]
+    },
+    "event-current.log": {
+      "sha256": "e5beeebdd8bd9f735f9b64f01c2d145ba204f0126f71ed6677e868354199624a",
+      "result_lines": [
+        "S35_CHILD_RETURNED_0"
+      ]
+    },
+    "event-started-early.log": {
+      "sha256": "bf58ba8e46b4d254186afa98d5b2995301e3b6642fbce4ec27d4a3713a8151cf",
+      "result_lines": [
+        "S35_SUSPENDED_THREAD_JOIN_HANG_REPRODUCED"
+      ]
+    },
+    "event-running.log": {
+      "sha256": "e5beeebdd8bd9f735f9b64f01c2d145ba204f0126f71ed6677e868354199624a",
+      "result_lines": [
+        "S35_CHILD_RETURNED_0"
+      ]
+    }
+  },
+  "control_method": {
+    "origin": "Same existing keyboard_origin_return_test.c and current carrier;replace only extracted GetHistoryKeyEvent with pinned original.",
+    "bios": "Same existing keyboard_bios_join_test.c;replace only extracted ReturnBiosBufferKeys with pinned original.",
+    "event": "Existing event_thread_startup_failure.c linked to actual product alert/join helper;control changes only supplied started argument toTRUE while child is CREATE_SUSPENDED. Existing parent reclaims its own disposable child after2seconds."
+  },
+  "limits": [
+    "Controlled function/host thread tests,not a guest integration run or fresh product startup failure reproduction.",
+    "No product source changed. No claim that all helper internals are minimal or all lifecycle failure paths correct.",
+    "R1062/R1063 require correction decision,not blanket retention approval.",
+    "Whole file8/44 points reviewed;no final line proof or full-file completion claimed."
+  ],
+  "mirror_diff_delta": 0,
+  "delivery": "Audit-only evidence;P84 runtime package unchanged"
+}
