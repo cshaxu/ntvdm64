@@ -1,0 +1,41 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+    "shared_selected_lines": 1044,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            1043,
+            "fdc_thread_handle = CreateThread(((void *)0),"
+          ]
+        ],
+        "after": [
+          [
+            1043,
+            "fdc_thread_handle = opennt_create_void_cdecl_parameter_thread(((void *)0),"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            1045,
+            "(LPTHREAD_START_ROUTINE)fdc_thread,"
+          ]
+        ],
+        "after": [
+          [
+            1045,
+            "(OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)fdc_thread,"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

@@ -812,3 +812,8 @@ P110 [nt_rez review](r1206-r1208-nt-rez-review.json):delivered mirror15->5(-10).
 [Checkpoint](batch-p110-checkpoint.json);[line proof](batch-p110-line-check.json).
 154/365 files;1212 points reviewed:444 delivered restorations,0 local,8 approved,760 pending,1508 unreviewed.
 Cached full build,publication11x2,Full19 and governance passed;Git delivery accompanies receipt.
+
+P111 [nt_rflop review](r1209-r1228-nt-rflop-review.json):mirror349->339(-10).
+[Checkpoint](batch-p111-checkpoint.json);[line proof](batch-p111-line-check.json).
+155/365 files;1232 points reviewed:461 restored/confirmed,8 approved,763 pending,1488 unreviewed.
+One include restored;16 prior restorations confirmed;three thread residuals pending.43 object sections/relocations equal;P110 publication/Full reused.

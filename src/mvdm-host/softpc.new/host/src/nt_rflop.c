@@ -26,14 +26,12 @@
 #include "nt.h"
 #include "ntrtl.h"
 #include "nturtl.h"
-
+#include "ntdddisk.h"
 #include "windows.h"
 
 #include "insignia.h"
 #include "host_def.h"
-/* DIV-871: bind the original void/cdecl FDC worker to its caller session. */
 #include "compat/include/thread_start_compat.h"
-#undef CreateThread
 #line 34
 
 
@@ -615,7 +613,6 @@ ULONG nt_floppy_read(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     HANDLE  fd;
     LARGE_INTEGER large_integer;
 
-
 #line 716
     fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);
 
@@ -633,7 +630,6 @@ ULONG nt_floppy_write(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     HANDLE  fd;
     LARGE_INTEGER large_integer;
     ULONG   size_returned;
-
 #line 731
 
     fd = get_drive_handle(drive, *pusCurrentPDB, TRUE);
@@ -654,7 +650,6 @@ BOOL nt_floppy_format(BYTE drive, WORD Cylinder, WORD Head, MEDIA_TYPE Media)
     ULONG   size_returned;
     HANDLE  fd;
     BOOL    result;
-
 #line 749
 
 #line 750
@@ -684,7 +679,6 @@ BOOL nt_floppy_verify(BYTE drive, DWORD Offset, DWORD Size)
 {
     HANDLE  fd;
     LARGE_INTEGER   large_integer;
-
 #line 775
 
     fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);
@@ -801,7 +795,6 @@ BOOL nt_floppy_close(UTINY drive)
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #line 887
 #endif
-#line 885
 #line 888
 
 #line 889
@@ -906,7 +899,6 @@ nt_rflop_command
         DWORD   fdc_thread_id;
 	BYTE	fdc_command;
 	BOOL	auto_lock;
-
 
 
 #line 991
@@ -1219,7 +1211,6 @@ SHORT
 nt_rflop_change IFN1(UTINY, drive)
 {
 	FLP flp = &floppy_data[drive];
-
 #line 1339
 	note_trace1 (GFI_VERBOSE, "FDC: change_line %c",
 		flp->change_line_state? 'T':'F');

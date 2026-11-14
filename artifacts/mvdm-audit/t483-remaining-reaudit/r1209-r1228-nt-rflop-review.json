@@ -1,0 +1,115 @@
+{
+  "scope": "M0 T483 S5 P111 whole nt_rflop.c",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/softpc.new/host/src/nt_rflop.c",
+  "evidence": {
+    "1209": "Original ntdddisk.h include restored: actual selected x86 compilation succeeds;final 43 non-debug object sections and named relocations equal baseline. No failure supports omission.",
+    "1210": "Remove commentary and unused #undef CreateThread. Keep existing thread ABI declaration because fdc_thread is void __cdecl(PFDC_PARMS),whereas native CreateThread expects DWORD WINAPI(LPVOID). The explicit void-parameter thunk preserves callback ABI and binds/finishes caller session. This is not proof every session wrapper is needed;no extra provider or macro selector added.",
+    "1225": "Original CreateThread casts void/cdecl fdc_thread to DWORD/WINAPI callback;the cast does not supply the missing return/calling convention. Existing bridge selects void_parameter_entry and lib-win32/thread thunk provides DWORD WINAPI boundary and session enter/finally finish. A generic cdecl DWORD bridge would still call a void function through wrong return type. Keep two original-shape call-token substitutions pending owner;no new shim.",
+    "1226": "Paired with R1225: callback cast names existing void/cdecl parameter signature instead of native DWORD/WINAPI. Preserves original fdc_thread body,parameters,original FDC dispatch and completion ordering. Source/ABI proof,not a newly reproduced physical-floppy failure.",
+    "1211": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1212": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1213": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1214": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1215": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1216": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1217": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1218": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1219": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1220": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1221": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1222": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1223": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1224": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1227": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair.",
+    "1228": "Historical guest-state adaptation already restored in prior delivered P7/P10 (cc2595e29,8a0a55ff3);current original scalar/PDB/access expression equals pinned source. Retire this ordered point by whole-file comparison;remove only extra blank where present. Do not count this as a newly executed functional repair."
+  },
+  "restored_now": [
+    1209
+  ],
+  "prior_restoration_confirmed": [
+    1211,
+    1212,
+    1213,
+    1214,
+    1215,
+    1216,
+    1217,
+    1218,
+    1219,
+    1220,
+    1221,
+    1222,
+    1223,
+    1224,
+    1227,
+    1228
+  ],
+  "residual": [
+    1210,
+    1225,
+    1226
+  ],
+  "mirror": {
+    "nt_rflop": {
+      "before": {
+        "added": 47,
+        "deleted": 302,
+        "total": 349
+      },
+      "after": {
+        "added": 38,
+        "deleted": 301,
+        "total": 339
+      }
+    }
+  },
+  "line_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "shared_selected_lines": 1044,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              1043,
+              "fdc_thread_handle = CreateThread(((void *)0),"
+            ]
+          ],
+          "after": [
+            [
+              1043,
+              "fdc_thread_handle = opennt_create_void_cdecl_parameter_thread(((void *)0),"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              1045,
+              "(LPTHREAD_START_ROUTINE)fdc_thread,"
+            ]
+          ],
+          "after": [
+            [
+              1045,
+              "(OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)fdc_thread,"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "object_identity": {
+    "non_debug_sections_equal": true,
+    "before_sections": 43,
+    "candidate_sections": 43,
+    "differences": []
+  },
+  "counter_review": "Do not keep header omission without actual failure. Do not claim old guest-state adapters remain after P7/P10 restoration. Unused macro undef and comments are removable. Calling-convention/return mismatch is separate from session tracking responsibility;reuse existing typed thread thunk,not another adapter. No physical floppy access was exercised.",
+  "status": "No behavior/binding change;actual x86 object identity proved;P110 package and Full evidence reused under owner rule"
+}

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1212 points reviewed:444 restored delivered,0 local,8 approved,
-760 qualified pending,0 restores decided;1508 unreviewed. Files154/365 audited,211 remain.
+1232 points reviewed:461 restored/confirmed delivered,0 local,8 approved,
+763 qualified pending,0 restores decided;1488 unreviewed. Files155/365 audited,210 remain.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -102,6 +102,10 @@ P109 nt_reset.c mirror115->99(-16);cached build,publish11x2,Full19 passed.
 
 P110 nt_rez.c mirror15->5(-10);cached build,publish11x2,Full19 passed.
 [Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p110-checkpoint.json).
+
+P111 nt_rflop.c mirror349->339(-10);43 object sections/relocations equal.
+P110 package/runtime evidence reused;16 prior restorations confirmed,one include restored.
+[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p111-checkpoint.json).
 
 ## Remaining Scope
 

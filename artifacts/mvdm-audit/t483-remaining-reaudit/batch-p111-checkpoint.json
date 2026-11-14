@@ -1,0 +1,48 @@
+{
+  "status": "Source-only cleanup verified with identical objects;P110 publication/Full reused;governance,links,diff check passed;Git delivery accompanies receipt",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "sha256": "b969ec4e1d4501472b0a5ca281222673eea78cf067130cc0f2087c8c68f40507"
+    }
+  ],
+  "mirror_diff_delta": -10,
+  "checks": {
+    "script": "run-checks.ps1",
+    "pid": 9552,
+    "start": "2026-11-14T07:50:39.3927213-08:00"
+  },
+  "object_identity": {
+    "non_debug_sections_equal": true,
+    "before_sections": 43,
+    "candidate_sections": 43,
+    "differences": []
+  },
+  "publication_reused_from": "batch-p110-checkpoint.json",
+  "publication": {
+    "status": "published",
+    "package": "93763d86-98e7-4c6c-a386-507c1dbbcad0",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "publication_hashes_rechecked": 22,
+  "new_full_build": false,
+  "new_runtime_tests": false,
+  "limits": [
+    "Physical floppy not exercised",
+    "Original thread ABI mismatch established from code signatures;no fresh runtime failure injection"
+  ],
+  "line_directive_coalescing": {
+    "removed": 7,
+    "proof": "Only immediately consecutive #line directives coalesced to last;no source or preprocessor token lies between them,so effective lines and compiled tokens identical."
+  },
+  "governance_process": {
+    "pid": 9600,
+    "start": "2026-11-14T07:52:36.4174510-08:00",
+    "script": "docs-final.ps1"
+  }
+}
