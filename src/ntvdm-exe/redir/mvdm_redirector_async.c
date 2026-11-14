@@ -9,9 +9,6 @@
 #include "mvdm-host/inc/vrnmpipe.h"
 
 typedef struct mvdm_redirector_async_state {
-    /* VrpAsyncNmPipeThread is an original DLL-owned worker thread.  It has no
-     * inherited TLS binding, whereas these bounded locations belong to the
-     * one NTVDM worker session that accepted the request. */
     session *owner;
     uint32_t owner_epoch;
     mvdm_guest_location buffer;
@@ -20,7 +17,6 @@ typedef struct mvdm_redirector_async_state {
     uint8_t *staging;
     WORD length;
     int is_read;
-    int completion_bound;
 } mvdm_redirector_async_state;
 
 static uint16_t read_u16(uint8_t const *bytes)
@@ -56,11 +52,11 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     if (length_out != NULL) *length_out = 0u;
     owner = session_thread_current();
     if (request == NULL || buffer_out == NULL || length_out == NULL ||
-        request->PrivateAsyncState != NULL ||
         owner == NULL || !session_valid(owner) ||
         owner->state != SESSION_STATE_ACTIVE ||
         !mvdm_guest_location_set_real_mode(&request_location, segment, offset) ||
-        !mvdm_guest_location_acquire(&request_location, 24u,
+        !mvdm_guest_location_acquire(&request_location,
+            request_type == ANP_READ2 || request_type == ANP_WRITE2 ? 24u : 18u,
             GUEST_MEMORY_ACCESS_READ, &request_lease)) {
         return 0;
     }
@@ -117,40 +113,6 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     return 1;
 }
 
-int mvdm_redirector_async_completion_begin(PDOS_ASYNC_NAMED_PIPE_INFO request)
-{
-    mvdm_redirector_async_state *state;
-
-    if (request == NULL || request->PrivateAsyncState == NULL) {
-        return 0;
-    }
-    state = (mvdm_redirector_async_state *)request->PrivateAsyncState;
-    if (state->owner == NULL || !session_valid(state->owner) ||
-        state->owner->state != SESSION_STATE_ACTIVE ||
-        state->owner->epoch != state->owner_epoch) {
-        return 0;
-    }
-    if (session_thread_current() == state->owner) return 1;
-    if (session_thread_current() != NULL ||
-        !session_thread_bind_owned_source(state->owner,
-            SESSION_THREAD_BINDING_ORIGINAL_WORKER,
-            "VDMREDIR async completion")) return 0;
-    state->completion_bound = 1;
-    return 1;
-}
-
-void mvdm_redirector_async_completion_end(PDOS_ASYNC_NAMED_PIPE_INFO request)
-{
-    mvdm_redirector_async_state *state;
-
-    if (request == NULL || request->PrivateAsyncState == NULL) return;
-    state = (mvdm_redirector_async_state *)request->PrivateAsyncState;
-    if (state->completion_bound) {
-        state->completion_bound = 0;
-        (void)session_thread_unbind(state->owner);
-    }
-}
-
 int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
     DWORD byte_count, DWORD error_code)
 {
@@ -162,7 +124,10 @@ int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
         return 0;
     }
     state = (mvdm_redirector_async_state *)request->PrivateAsyncState;
-    if (session_thread_current() != state->owner) {
+    if (session_thread_current() != state->owner ||
+        !session_valid(state->owner) ||
+        state->owner->state != SESSION_STATE_ACTIVE ||
+        state->owner->epoch != state->owner_epoch) {
         return 0;
     }
     /* Original ReadFile had already written the guest payload when completion

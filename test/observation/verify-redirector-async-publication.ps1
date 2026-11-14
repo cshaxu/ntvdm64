@@ -15,6 +15,7 @@ $wrapper = Join-Path $out 'compiler.cmd'
     'if errorlevel 1 exit /b %errorlevel%', '%*') |
     Set-Content -LiteralPath $wrapper -Encoding ASCII
 $sources = @('src/ntvdm-exe/redir/mvdm_redirector_async.c',
+    'src/common/worker-thread/bridge.c', 'src/lib-win32/thread/thread.c',
     'src/ntvdm-exe/softpc/mvdm_guest_location.c',
     'src/ntvdm-exe/session/session.c',
     'src/ntvdm-exe/session/guest_memory_lease.c',
@@ -55,7 +56,7 @@ try {
         scope='Production async adapter/location/session/lease; controlled memory, not real pipe callback'
     } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $out 'result.json') -Encoding UTF8
     Write-Output $text
-    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=24 failures=0') {
+    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=27 failures=0') {
         throw 'Async publication assertions failed.'
     }
 } finally { $process.Dispose() }

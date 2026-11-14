@@ -4,6 +4,7 @@
 #include "ntvdm-exe/session/session.h"
 #include <stdio.h>
 #include <string.h>
+#include "compat/include/thread_start_compat.h"
 
 /* Exercise the production staging adapter and real session leases. Only the
  * guest-memory provider is controlled; failed writes must not look completed. */
@@ -12,6 +13,7 @@ typedef struct memory_fixture {
     uint32_t writes[8];
     unsigned write_count;
     uint32_t fail_address;
+    uint32_t request_limit;
 } memory_fixture;
 static unsigned assertions, failures;
 static void check(int ok, char const *name)
@@ -24,7 +26,8 @@ static int read_memory(void *context, uint32_t address, uint8_t *bytes,
     uint32_t count)
 {
     memory_fixture *m = context;
-    if (address > sizeof(m->bytes) || count > sizeof(m->bytes) - address)
+    if (address > sizeof(m->bytes) || count > sizeof(m->bytes) - address ||
+        (address == 0x100 && count > m->request_limit))
         return 0;
     memcpy(bytes, m->bytes + address, count);
     return 1;
@@ -52,6 +55,7 @@ static int prepare(memory_fixture *m, DOS_ASYNC_NAMED_PIPE_INFO *request,
     WORD length;
     memset(m, 0xa5, sizeof(*m));
     m->write_count = 0; m->fail_address = UINT32_MAX;
+    m->request_limit = kind == ANP_READ2 || kind == ANP_WRITE2 ? 24u : 18u;
     memset(request, 0, sizeof(*request));
     memset(m->bytes + 0x100, 0, 24);
     put32(m->bytes + 0x100, 0x180);
@@ -62,6 +66,11 @@ static int prepare(memory_fixture *m, DOS_ASYNC_NAMED_PIPE_INFO *request,
         &staging, &length) || length != 3 || staging == NULL) return 0;
     memcpy(staging, "xyz", 3);
     return 1;
+}
+static DWORD __cdecl complete_on_bound_thread(LPVOID opaque)
+{
+    return session_thread_current() != NULL &&
+        mvdm_redirector_async_complete(opaque, 3, 0) ? 0u : 1u;
 }
 static int no_live_leases(session const *s)
 {
@@ -82,6 +91,7 @@ int main(void)
         read_memory, write_memory) || !session_thread_bind(&s)) return 2;
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
+    check(m.request_limit == 18u, "original request does not require Type2 extension");
     check(mvdm_redirector_async_complete(&request, 3, ERROR_MORE_DATA),
         "partial read completion succeeds");
     check(m.write_count == 3 && m.writes[0] == 0x140 &&
@@ -95,6 +105,16 @@ int main(void)
     check(request.PrivateAsyncState == NULL && no_live_leases(&s),
         "release is idempotent and leases are closed");
 
+    {
+        LPBYTE staging;
+        WORD length;
+        request.PrivateAsyncState = (void *)1;
+        check(mvdm_redirector_async_prepare(&request, 0, 0x100, ANP_READ,
+            &staging, &length) && request.PrivateAsyncState != (void *)1,
+            "fresh LocalAlloc request needs no private-field initialization");
+        mvdm_redirector_async_release(&request);
+    }
+
     for (i = 0; i < 3; ++i) {
         if (!prepare(&m, &request, ANP_READ2)) return 2;
         m.fail_address = destinations[i];
@@ -106,6 +126,14 @@ int main(void)
             "failure does not publish later completion words");
         check(no_live_leases(&s), "failed commit closes lease");
         mvdm_redirector_async_release(&request);
+    }
+    {
+        LPBYTE staging;
+        WORD length;
+        m.request_limit = 18u;
+        check(!mvdm_redirector_async_prepare(&request, 0, 0x100, ANP_READ2,
+            &staging, &length) && request.PrivateAsyncState == NULL,
+            "Type2 rejects unreadable semaphore extension");
     }
     if (!prepare(&m, &request, ANP_READ)) return 2;
     check(!mvdm_redirector_async_complete(&request, 4, 0) && m.write_count == 0,
@@ -125,25 +153,33 @@ int main(void)
     mvdm_redirector_async_release(&request);
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
+    {
+        DWORD result = 1;
+        HANDLE worker = opennt_create_cdecl_thread_named(NULL, 0,
+            complete_on_bound_thread, &request, 0, NULL, "redirector-owner-witness");
+        if (worker == NULL) return 2;
+        check(WaitForSingleObject(worker, 5000) == WAIT_OBJECT_0 &&
+            GetExitCodeThread(worker, &result) && result == 0,
+            "production thread bridge binds before direct completion");
+        CloseHandle(worker);
+        check(session_thread_current() == &s,
+            "production thread bridge leaves parent binding unchanged");
+    }
+    m.write_count = 0;
     if (!session_thread_unbind(&s)) return 2;
     check(!mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
         "unbound thread cannot publish");
-    check(mvdm_redirector_async_completion_begin(&request) &&
-        session_thread_current() == &s, "original completion worker binds owner");
-    check(mvdm_redirector_async_complete(&request, 3, 0),
-        "bound original completion worker publishes");
-    mvdm_redirector_async_completion_end(&request);
-    check(session_thread_current() == NULL, "completion returns thread binding");
+    check(session_thread_current() == NULL, "failed completion does not bind caller");
     mvdm_redirector_async_release(&request);
     if (!session_thread_bind(&s)) return 2;
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
     ++s.epoch;
-    check(!mvdm_redirector_async_completion_begin(&request),
+    check(!mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
         "stale owner epoch rejected before publication");
     --s.epoch;
     check(session_request_cancellation(&s, SESSION_CANCELLATION_REQUESTED) &&
-        !mvdm_redirector_async_completion_begin(&request) && m.write_count == 0,
+        !mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
         "cancelled owner rejects original completion entry");
     session_guest_memory_end(&s);
     check(!mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,

@@ -1,0 +1,214 @@
+[
+  {
+    "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+    "shared_selected_lines": 967,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "replace",
+        "original": [
+          [
+            830,
+            "GetOverlappedResult(Handle, &pipeio.Overlapped, &BytesRead, 1);"
+          ]
+        ],
+        "after": [
+          [
+            830,
+            "if (!GetOverlappedResult(Handle, &pipeio.Overlapped, &BytesRead, 1)) {"
+          ],
+          [
+            831,
+            "Error = GetLastError();"
+          ],
+          [
+            832,
+            "}"
+          ],
+          [
+            833,
+            "}"
+          ],
+          [
+            834,
+            "if (Error == 0L || Error == 234L) {"
+          ]
+        ]
+      },
+      {
+        "op": "delete",
+        "original": [
+          [
+            1295,
+            "PDOS_ASYNC_NAMED_PIPE_STRUCT StructurePointer;"
+          ]
+        ],
+        "after": []
+      },
+      {
+        "op": "delete",
+        "original": [
+          [
+            1334,
+            "StructurePointer = (PDOS_ASYNC_NAMED_PIPE_STRUCT)_inlinePointerFromWords((IU16)(getDS()), (IU16)(getSI()));"
+          ],
+          [
+            1335,
+            "length = (((IU16)(*((LPBYTE)(&StructurePointer->BufferLength)))) | (((IU16)(*((LPBYTE)((LPBYTE)(&StructurePointer->BufferLength)+1)))) << 8));"
+          ],
+          [
+            1336,
+            "buffer = ((LPVOID)(_inlinePointerFromWords((IU16)((((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpBuffer)+1)))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpBuffer)+1)+1)))) << 8))), (IU16)((((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpBuffer))))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpBuffer))+1)))) << 8))))));"
+          ]
+        ],
+        "after": []
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            1507,
+            "pAsyncInfo->Buffer = (DWORD)StructurePointer->lpBuffer;"
+          ],
+          [
+            1508,
+            "pAsyncInfo->pBytesTransferred = ((LPVOID)(_inlinePointerFromWords((IU16)((((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpBytesRead)+1)))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpBytesRead)+1)+1)))) << 8))), (IU16)((((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpBytesRead))))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpBytesRead))+1)))) << 8))))));"
+          ],
+          [
+            1509,
+            "pAsyncInfo->pErrorCode = ((LPVOID)(_inlinePointerFromWords((IU16)((((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpErrorCode)+1)))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpErrorCode)+1)+1)))) << 8))), (IU16)((((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpErrorCode))))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpErrorCode))+1)))) << 8))))));"
+          ],
+          [
+            1510,
+            "pAsyncInfo->ANR = (((DWORD)(((IU16)(*((LPBYTE)(&StructurePointer->lpANR)))) | (((IU16)(*((LPBYTE)((LPBYTE)(&StructurePointer->lpANR)+1)))) << 8))) | (((DWORD)(((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpANR)+1)))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpANR)+1)+1)))) << 8))) << 16));"
+          ],
+          [
+            1517,
+            "if (Type == 0x90 || Type == 0x91) {"
+          ],
+          [
+            1518,
+            "pAsyncInfo->Type2 = 1;"
+          ],
+          [
+            1519,
+            "pAsyncInfo->Semaphore = (((DWORD)(((IU16)(*((LPBYTE)(&StructurePointer->lpSemaphore)))) | (((IU16)(*((LPBYTE)((LPBYTE)(&StructurePointer->lpSemaphore)+1)))) << 8))) | (((DWORD)(((IU16)(*((LPBYTE)((LPWORD)(&StructurePointer->lpSemaphore)+1)))) | (((IU16)(*((LPBYTE)((LPBYTE)((LPWORD)(&StructurePointer->lpSemaphore)+1)+1)))) << 8))) << 16));"
+          ],
+          [
+            1520,
+            "} else {"
+          ],
+          [
+            1521,
+            "pAsyncInfo->Type2 = 0;"
+          ],
+          [
+            1522,
+            "pAsyncInfo->Semaphore = (DWORD)((void *)0);"
+          ]
+        ],
+        "after": [
+          [
+            1507,
+            "if (!mvdm_redirector_async_prepare(pAsyncInfo, getDS(), getSI(), Type,"
+          ],
+          [
+            1508,
+            "&buffer, &length)) {"
+          ],
+          [
+            1509,
+            "CloseHandle(hEvent);"
+          ],
+          [
+            1510,
+            "LocalFree(pAsyncInfo);"
+          ],
+          [
+            1511,
+            "{setAX(487L); setCF(1);};"
+          ],
+          [
+            1512,
+            "return;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            1602,
+            "mvdm_redirector_async_release(pAsyncInfo);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            1706,
+            "mvdm_redirector_async_release(pAsyncInfo);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            2092,
+            "{ ((LPBYTE)(pAsyncInfo->pErrorCode))[0] = ((BYTE)(((DWORD_PTR)(error)) & 0xff)); ((LPBYTE)(pAsyncInfo->pErrorCode))[1] = ((BYTE)((((DWORD_PTR)(error)) >> 8) & 0xff)); };"
+          ],
+          [
+            2093,
+            "{ ((LPBYTE)(pAsyncInfo->pBytesTransferred))[0] = ((BYTE)(((DWORD_PTR)(bytesTransferred)) & 0xff)); ((LPBYTE)(pAsyncInfo->pBytesTransferred))[1] = ((BYTE)((((DWORD_PTR)(bytesTransferred)) >> 8) & 0xff)); };"
+          ]
+        ],
+        "after": [
+          [
+            2092,
+            "if (!mvdm_redirector_async_complete(pAsyncInfo, bytesTransferred, error)) {"
+          ],
+          [
+            2093,
+            "VrpDequeueAsyncRequest(pAsyncInfo);"
+          ],
+          [
+            2094,
+            "CloseHandle(pAsyncInfo->Overlapped.hEvent);"
+          ],
+          [
+            2095,
+            "mvdm_redirector_async_release(pAsyncInfo);"
+          ],
+          [
+            2096,
+            "LocalFree(pAsyncInfo);"
+          ],
+          [
+            2097,
+            "return;"
+          ],
+          [
+            2098,
+            "}"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            2130,
+            "mvdm_redirector_async_release(pAsyncInfo);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

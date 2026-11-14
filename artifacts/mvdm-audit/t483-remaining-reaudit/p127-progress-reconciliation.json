@@ -1,0 +1,109 @@
+{
+  "cause_commit": "c6d9120028fd0dbcaa01e2e1823dc2b7d92539d9",
+  "cause": "P111 added20 reviewed points and17 restored points for R1209-R1228 although R1211,R1212,R1221,R1222 were already restored-verified-published in its parent. Actual new reviewed16 and restored13. Four-point overcount propagated through P126.",
+  "already_restored": [
+    "T483-R1211",
+    "T483-R1212",
+    "T483-R1221",
+    "T483-R1222"
+  ],
+  "historical_comparison": [
+    {
+      "commit": "02e74158f",
+      "reported": 1284,
+      "register_non_pending": 1280
+    },
+    {
+      "commit": "c646de2e2",
+      "reported": 1283,
+      "register_non_pending": 1279
+    },
+    {
+      "commit": "2b2d3c521",
+      "reported": 1272,
+      "register_non_pending": 1268
+    },
+    {
+      "commit": "8ba3cbcd9",
+      "reported": 1269,
+      "register_non_pending": 1265
+    },
+    {
+      "commit": "c21f3aa57",
+      "reported": 1267,
+      "register_non_pending": 1263
+    },
+    {
+      "commit": "1e5acf18c",
+      "reported": 1264,
+      "register_non_pending": 1260
+    },
+    {
+      "commit": "ea49dca79",
+      "reported": 1262,
+      "register_non_pending": 1258
+    },
+    {
+      "commit": "02694367d",
+      "reported": 1261,
+      "register_non_pending": 1257
+    },
+    {
+      "commit": "2e1f605e9",
+      "reported": 1259,
+      "register_non_pending": 1255
+    },
+    {
+      "commit": "94e4af099",
+      "reported": 1254,
+      "register_non_pending": 1250
+    },
+    {
+      "commit": "e0a7a36a5",
+      "reported": 1252,
+      "register_non_pending": 1248
+    },
+    {
+      "commit": "6bc07f92d",
+      "reported": 1245,
+      "register_non_pending": 1241
+    },
+    {
+      "commit": "079086315",
+      "reported": 1243,
+      "register_non_pending": 1239
+    },
+    {
+      "commit": "b7706a97f",
+      "reported": 1237,
+      "register_non_pending": 1233
+    },
+    {
+      "commit": "edaadc0a3",
+      "reported": 1234,
+      "register_non_pending": 1230
+    },
+    {
+      "commit": "c6d912002",
+      "reported": 1232,
+      "register_non_pending": 1228
+    },
+    {
+      "commit": "bdf790e0c",
+      "reported": 1212,
+      "register_non_pending": 1212
+    }
+  ],
+  "current_register_counts_before_P127_delivery": {
+    "total": 2720,
+    "reviewed": 1296,
+    "delivered": 483,
+    "local": 7,
+    "approved": 8,
+    "pending_owner": 798,
+    "unreviewed": 1424,
+    "files_reviewed": 179,
+    "files_total": 365
+  },
+  "effect": "Correct aggregate statistics only; no point disposition or product code changed."
+}

@@ -887,3 +887,15 @@ P125 final cached x86/x64,publication11x2,Full19 and governance passed;Git accom
 
 P126 [vrnetb review](r1280-vrnetb-review.json):185 original lines,4 DBG exclusions,zero source change.
 [Checkpoint](batch-p126-checkpoint.json):P125 publication/Full reused with22 hashes.178/365 files;1284/2720 points.
+
+P127 source review complete, delivery pending: [review](r1281-r1296-vrnmpipe-review.json), [controls](r1281-r1296-vrnmpipe-investigation.json), [native API control source](r1281-r1296-native-count-control.c). vrnmpipe mirror685->646(-39);7 local restorations,9 residual decisions. Final-source build/publication/tests pending;179/365 files,1296/2720 points reviewed.
+
+P127 [sealed inputs](batch-p127-checkpoint.json); final delivery remains pending.
+
+P127 counter-review removed circular fresh-request initialization/check. Initial candidate published and focused26 passed; Full intentionally deferred until final candidate rebuild/republication. Current counts483 delivered,7 local,8 approved,798 pending,1424 unreviewed.
+
+P127 [final compiler line proof](batch-p127-line-check.json) checks967 selected lines with0 mismatches and unchanged exclusions.
+
+P127 [count reconciliation](p127-progress-reconciliation.json):P111 double-counted four previously delivered points. Main-register dispositions remain unchanged; cumulative counts now derive from actual rows, not batch additions.
+
+P127 final delivery gates passed:cached full,publish11x2,focused27,old-adapter negative,Full19,967 lines and governance. Git accompanies receipt.179/365 files;1296/2720 points:490 delivered,8 approved,798 pending,1424 unreviewed.

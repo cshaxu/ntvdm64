@@ -136,8 +136,6 @@ host_com_close,134
 host_direct_access_error,135
 host_simulate,136
 mvdm_redirector_async_complete,137
-mvdm_redirector_async_completion_begin,138
-mvdm_redirector_async_completion_end,139
 mvdm_redirector_async_prepare,140
 mvdm_redirector_async_release,141
 mvdm_redirector_worker_copy_from,143

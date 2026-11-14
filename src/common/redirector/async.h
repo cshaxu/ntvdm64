@@ -19,10 +19,6 @@ MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PI
     WORD *length_out);
 MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
     DWORD byte_count, DWORD error_code);
-MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_completion_begin(
-    PDOS_ASYNC_NAMED_PIPE_INFO request);
-MVDM_REDIRECTOR_WORKER_API void mvdm_redirector_async_completion_end(
-    PDOS_ASYNC_NAMED_PIPE_INFO request);
 MVDM_REDIRECTOR_WORKER_API void mvdm_redirector_async_release(PDOS_ASYNC_NAMED_PIPE_INFO request);
 
 #endif

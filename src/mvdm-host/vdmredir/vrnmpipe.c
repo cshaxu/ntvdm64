@@ -135,11 +135,10 @@ Revision History:
 #include <idetect.h>    // WaitIfIdle
 #include <vrica.h>      // call_ica_hw_interrupt
 #include <vrnmpipe.h>   // routine prototypes
-/* DIVERGENCE(MVDM-HOST-DIV-167): original async requests retained flat
- * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the
- * mirror; enter the Redirector adapter only at the guest-memory lifetime
- * seam. */
+
+#include <stdio.h>
 #include "common/redirector/async.h"
+#line 140
 
 //
 // manifests
@@ -764,17 +763,13 @@ Return Value:
 
         Handle = HANDLE_FROM_WORDS(getBP(), getBX());
         RememberPipeIo(&pipeio);
-        /* DIVERGENCE(MVDM-HOST-DIV-277): modern TransactNamedPipe rejects
-         * lpBytesRead when an OVERLAPPED is supplied.  The original next
-         * step already retrieves the authoritative count from the completed
-         * OVERLAPPED request. */
 #line 806
         Ok = TransactNamedPipe(Handle,
                                (LPVOID)POINTER_FROM_WORDS(getDS(), getSI()),
                                (DWORD)getCX(),
                                (LPVOID)POINTER_FROM_WORDS(getES(), getDI()),
                                (DWORD)getDX(),
-                               NULL,
+                               &BytesRead,
                                &pipeio.Overlapped
                                );
         Error = Ok ? NO_ERROR : GetLastError();
@@ -793,12 +788,7 @@ Return Value:
             Error = WAIT_TIMEOUT;
         }
         if (Error == NO_ERROR || Error == ERROR_MORE_DATA) {
-            /* A signalled OVERLAPPED event only says that the operation has
-             * completed.  Modern named-pipe completion can still fail (for
-             * example a peer disconnect); preserve the original result path,
-             * but do not publish an uninitialised/zero byte count as success. */
-            Ok = GetOverlappedResult(Handle, &pipeio.Overlapped, &BytesRead, TRUE);
-            if (!Ok) {
+            if (!GetOverlappedResult(Handle, &pipeio.Overlapped, &BytesRead, TRUE)) {
                 Error = GetLastError();
             }
         }
@@ -1389,9 +1379,6 @@ Return Value:
     }
 
     RtlZeroMemory(&pAsyncInfo->Overlapped, sizeof(pAsyncInfo->Overlapped));
-    /* DIVERGENCE(MVDM-HOST-DIV-167): LocalAlloc does not promise a zeroed
-     * private field. The overlay uses this member solely as ownership state. */
-    pAsyncInfo->PrivateAsyncState = NULL;
 
     //
     // create a new event for this request - there can be multiple simultaneous
@@ -1561,7 +1548,6 @@ Return Value:
 
 {
     PDOS_ASYNC_NAMED_PIPE_INFO pAsyncInfo;
-
 
 #if DBG
 #line 1657
@@ -1954,15 +1940,6 @@ Return Value:
     DWORD bytesTransferred;
     DWORD error;
 
-    if (!mvdm_redirector_async_completion_begin(pAsyncInfo)) {
-        VrpDequeueAsyncRequest(pAsyncInfo);
-        CloseHandle(pAsyncInfo->Overlapped.hEvent);
-        mvdm_redirector_async_release(pAsyncInfo);
-        LocalFree(pAsyncInfo);
-        return;
-#line 2077
-    }
-
 #if DBG
 #line 2074
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -1981,12 +1958,8 @@ Return Value:
     //
 
     if (!mvdm_redirector_async_complete(pAsyncInfo, bytesTransferred, error)) {
-        /* DIVERGENCE(MVDM-HOST-DIV-167): guest memory may have disappeared
-         * with its session while host I/O was completing. Do not publish a
-         * stale completion or keep an alias past that event. */
         VrpDequeueAsyncRequest(pAsyncInfo);
         CloseHandle(pAsyncInfo->Overlapped.hEvent);
-        mvdm_redirector_async_completion_end(pAsyncInfo);
         mvdm_redirector_async_release(pAsyncInfo);
         LocalFree(pAsyncInfo);
         return;
@@ -2018,7 +1991,6 @@ Return Value:
 #line 2128
 
         CloseHandle(pAsyncInfo->Overlapped.hEvent);
-        mvdm_redirector_async_completion_end(pAsyncInfo);
         mvdm_redirector_async_release(pAsyncInfo);
 #line 2130
         LocalFree(pAsyncInfo);
@@ -2038,7 +2010,6 @@ Return Value:
         VrQueueCompletionHandler(VrNmPipeInterrupt);
 #line 2145
         VrRaiseInterrupt();
-        mvdm_redirector_async_completion_end(pAsyncInfo);
 #line 2146
     }
 }
@@ -2396,11 +2367,7 @@ Return Value:
     //
 
     RememberPipeIo(&pipeio);
-    /* DIVERGENCE(MVDM-HOST-DIV-276): NT4 accepted an output count together
-     * with OVERLAPPED.  Modern ReadFile requires it to be NULL; the original
-     * next step already obtains the authoritative count from
-     * GetOverlappedResult. */
-    success = ReadFile(Handle, Buffer, Buflen, NULL, &pipeio.Overlapped);
+    success = ReadFile(Handle, Buffer, Buflen, BytesRead, &pipeio.Overlapped);
 #line 2527
     if (!success) {
         error = GetLastError();

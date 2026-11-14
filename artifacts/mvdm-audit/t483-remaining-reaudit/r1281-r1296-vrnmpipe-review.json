@@ -1,0 +1,73 @@
+{
+  "status": "Whole-file final source review/build/publication/focused27/Full19 passed;Git accompanies receipt",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/vdmredir/vrnmpipe.c",
+  "points": {
+    "T483-R1281": {
+      "decision": "restore",
+      "evidence": "Actual original/current preprocessing matches967 shared selected lines; excluded #error unchanged."
+    },
+    "T483-R1282": {
+      "decision": "pending",
+      "evidence": "Restore original stdio include and blank. One explicit async boundary declaration remains used by prepare/complete/release."
+    },
+    "T483-R1283": {
+      "decision": "restore",
+      "evidence": "Delete false claim that overlapped TransactNamedPipe rejects non-NULL output count; native ten-case control disproves it."
+    },
+    "T483-R1284": {
+      "decision": "restore",
+      "evidence": "Restore original &BytesRead; final authoritative count still comes from original GetOverlappedResult."
+    },
+    "T483-R1285": {
+      "decision": "pending",
+      "evidence": "Native controls yield ERROR_BROKEN_PIPE109 and ERROR_MORE_DATA234 after signalled completion. Original ignores failure and can report stale success. Minimize to direct conditional and saved error."
+    },
+    "T483-R1286": {
+      "decision": "pending",
+      "evidence": "Original StructurePointer is a flat guest alias. Actual CCPU noncontiguous backing witness from P125 disproves native pointer arithmetic. Do not restore unused alias declaration or its explanation."
+    },
+    "T483-R1287": {
+      "decision": "pending",
+      "evidence": "Original raw buffer pointer would be retained by asynchronous ReadFile/WriteFile. Numeric guest location plus request-owned staging is required across completion; preserve register capture in prepare."
+    },
+    "T483-R1288": {
+      "decision": "restore",
+      "evidence": "Sole production prepare caller supplies fresh LocalAlloc request and frees it directly on failure. Removed mirror PrivateAsyncState initialization and helper precondition that alone required it; successful prepare assigns owned state before queueing. No second path."
+    },
+    "T483-R1289": {
+      "decision": "pending",
+      "evidence": "Retain bounded request decode and staging. Restore original ordinary-request18-byte access versus Type2 24-byte access; previous unconditional24 was unnecessary. Completion remains original queue-owned."
+    },
+    "T483-R1290": {
+      "decision": "pending",
+      "evidence": "Submission failure frees original request; request-owned staging must be released at that same retirement edge."
+    },
+    "T483-R1291": {
+      "decision": "pending",
+      "evidence": "ANR guest interrupt retires original request; release staging immediately before original LocalFree."
+    },
+    "T483-R1292": {
+      "decision": "restore",
+      "evidence": "Real production thread bridge already binds original completion thread. Delete repeated per-request entry branch; retain owner epoch/activity validation in complete."
+    },
+    "T483-R1293": {
+      "decision": "pending",
+      "evidence": "Original native writes cannot address noncontiguous guest destinations. Keep bounded completion and one failure cleanup, remove repeated binding cleanup and redundant comment."
+    },
+    "T483-R1294": {
+      "decision": "pending",
+      "evidence": "No-ANR completion is final request retirement. Retain only staging release; remove completion_end."
+    },
+    "T483-R1295": {
+      "decision": "restore",
+      "evidence": "Delete redundant completion_end after original VrRaiseInterrupt; thread bridge owns binding lifecycle."
+    },
+    "T483-R1296": {
+      "decision": "restore",
+      "evidence": "Native immediate/pending ReadFile controls pass original non-NULL count; restore original call and remove false modern API restriction comment."
+    }
+  },
+  "test_evidence": "r1281-r1296-vrnmpipe-investigation.json; baseline bridge26/26 and native API10/10 are controls, not final candidate validation; initial final fixture26/26, old adapter rejected ordinary18-byte request with exit2; final source adds fresh-request witness",
+  "line_evidence": "batch-p127-line-check.json",
+  "source_changes": "No guest or assets/winnt.zip changes. Public thread bridge owns binding. Deleted private completion begin/end exports; all remaining explicit ordinals retain values."
+}
