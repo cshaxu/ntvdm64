@@ -743,3 +743,5 @@ P84 delivered: [nt_error8-point review](r1048-r1055-nt-error-review.json), [line
 nt_event in progress: [R1056/R1057 interface evidence](r1056-r1057-nt-event-header-review.json);2/44 points reviewed,whole file not complete. No source change or new build/publication;P84 remains baseline.
 
 P86 audit-only: [R1058-R1063 boundaries](r1058-r1063-nt-event-boundary-review.json);nt_event8/44 points. Current/original function controls distinguish key-origin and BIOS-release failures;actual helper exposes premature-start join hang. Lifetime corrections explicitly pending,not certified. No source changes;P84 baseline unchanged.
+
+P87 audit-only: [R1064-R1069 input dispatch](r1064-r1069-nt-event-input-review.json);nt_event14/44 points. Actual bounded-input fixture and native wait-order counterexample pass;shutdown authority checked in source. No production changes;P84 remains published.

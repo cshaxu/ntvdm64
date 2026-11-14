@@ -1,0 +1,77 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "source_sha256": "6db86778bb2a566905fddef5e4adb0e2efd60383efa23da1c2ea3942eee270af",
+  "original_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_head": "0f551cb3abf3c49ce05ebf7c243c3765e839ab34",
+  "points": {
+    "R1064": {
+      "scope": "+1/-1",
+      "problem": "Expanded PC keyboard batch capacity",
+      "evidence": "Original KeyMsgToKeyCode consumes scan-code tables, not Unicode characters; scan0 maps no key. The real normalization fixture converts five scanless characters into ten PC transitions, preserves physical records and rejects undersized storage before consumption. Returning to five output records would require smaller raw batches or a carry queue, not exact original restoration.",
+      "plan": "Retain the single capacity substitution pending owner;40 bounds five records times eight transitions without another carry queue."
+    },
+    "R1065": {
+      "scope": "+4/-2",
+      "problem": "Suspend handshake priority under ready input",
+      "evidence": "Actual NtWaitForMultipleObjects WaitAny/alertable test with manual-reset ready input and auto-reset suspension selects input1000 times in original order, leaving suspension unconsumed. Reversed order consumes suspension first and selects input next. This proves selection starvation with a continuously-ready source, not a reproduced product deadlock.",
+      "plan": "Remove two added comment lines at whole-file edit;retain the two swapped assignments pending owner. Keep original suspend handler and reset semantics."
+    },
+    "R1066": {
+      "scope": "+2/-2",
+      "problem": "Read normalized PC input and follow input index",
+      "evidence": "ReadConsoleInputExW preserves scanless character records; original nt_process_keys -> nt_key_down/up_action -> KeyMsgToKeyCode requires PC scans. Current real batch fixture proves bounded expansion and physical-record identity. The status1 input branch matches suspension-first array;restoring status0 alone interprets suspension as input.",
+      "plan": "Retain read-entry and status-index substitutions pending owner;no second keyboard consumer or state machine."
+    },
+    "R1067": {
+      "scope": "+2/-0",
+      "problem": "Finish input thread after authoritative closure on read failure",
+      "evidence": "worker_lifecycle_input_terminal requires a bound owner and signaled server lifetime,worker-close or console-close event. It preserves GetLastError. Original unconditional DisplayErrorTerm turns an expected closed endpoint during authorized teardown into an application error;ordinary failed reads without terminal authority still take original error path. Existing console_client_test --input-terminal and --natural-* explicitly distinguish an exit request from actual permission;not rerun in this checkpoint.",
+      "plan": "Remove one explanatory comment at whole-file edit;retain one terminal check pending owner. Do not broaden to all broken-pipe errors."
+    },
+    "R1068": {
+      "scope": "+1/-1",
+      "problem": "Dispatch suspension at its actual wait index",
+      "evidence": "Same actual native-wait counterexample as R1065. After moving suspension to index0,zero is its success result. Original status1 would dispatch input readiness as suspension and index0 as input.",
+      "plan": "Retain the paired zero-status condition pending owner;do not alter original suspend handshake."
+    },
+    "R1069": {
+      "scope": "+2/-0",
+      "problem": "Finish input thread after authoritative closure on failed wait",
+      "evidence": "Failed wait during owner-authorized endpoint retirement otherwise reaches original DisplayErrorTerm before source thread exits. The same terminal authority gate as R1067 accepts only known owner/service shutdown and preserves the original error status path for other failures. Successful APC/alert statuses already return through original code.",
+      "plan": "Remove one explanatory comment at whole-file edit;retain one terminal check pending owner;no change to ordinary wait failures."
+    }
+  },
+  "tests": {
+    "batch.log": {
+      "sha256": "74e5745d189bbf746d4fac69c305731ae5e4566f0b15463f366872799457a197",
+      "text": "BATCH-PRESSURE full queue consumes nothing; partial capacity and recovery PASS\nBATCH-MOUSE 1000 records / 200 reads; order, buttons, bounds PASS\nBATCH-RELATIVE 1000 records / 200 reads; signed motion, buttons, enter/leave PASS\nBATCH-SCANLESS-TEXT punctuation/case/modifiers/key-up PASS\nBATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS\nBATCH-RECEIPT identical keys remain distinct through normalization and original history PASS\n"
+    },
+    "focus.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "text": "0\n"
+    },
+    "wait.log": {
+      "sha256": "8a7e61e8d5f3e0e1ce4db5d10dc0021cbe1a5df6900abb8d22def13dab3b070a",
+      "text": "original input-first: 1000 ready-input iterations leave suspend unconsumed\nsuspend-first: suspension consumed first, input selected next; PASS\n"
+    },
+    "wait.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "text": "0\n"
+    },
+    "wait-order.c": {
+      "sha256": "a8922f840b640be99558044731ee911ca6f9f2fdda598cf08118dc209cac64d0",
+      "text": "#include <windows.h>\n#include <stdio.h>\ntypedef LONG (NTAPI *wait_fn)(ULONG,HANDLE*,ULONG,BOOLEAN,PLARGE_INTEGER);\nint main(void) {\n wait_fn wait=(wait_fn)GetProcAddress(GetModuleHandleW(L\"ntdll.dll\"),\"NtWaitForMultipleObjects\");\n HANDLE input=CreateEventW(NULL,TRUE,TRUE,NULL), suspend=CreateEventW(NULL,FALSE,TRUE,NULL), events[2];\n LARGE_INTEGER zero; LONG status; unsigned i;zero.QuadPart=0;\n if(!wait||!input||!suspend)return 2;\n events[0]=input;events[1]=suspend;\n for(i=0;i<1000;++i)if(wait(2,events,1,TRUE,&zero)!=0)return 3;\n if(WaitForSingleObject(suspend,0)!=WAIT_OBJECT_0)return 4;\n printf(\"original input-first: 1000 ready-input iterations leave suspend unconsumed\\n\");\n SetEvent(suspend);events[0]=suspend;events[1]=input;\n status=wait(2,events,1,TRUE,&zero);if(status!=0)return 5;\n if(WaitForSingleObject(suspend,0)!=WAIT_TIMEOUT)return 6;\n if(wait(2,events,1,TRUE,&zero)!=1)return 7;\n printf(\"suspend-first: suspension consumed first, input selected next; PASS\\n\");\n CloseHandle(input);CloseHandle(suspend);return 0;\n}\n"
+    },
+    "wait.cmd": {
+      "sha256": "5a09f2df8cf84863eab0f1f60869e5e818e130eadc1661b57ca21912a438a024",
+      "text": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\ncl /nologo /MT /W4 wait-order.c /Fewait-order.exe /Fowait-order.obj >wait-build.log 2>&1\nif errorlevel 1 exit /b 1\nwait-order.exe >wait.log 2>&1\nexit /b %errorlevel%\n"
+    }
+  },
+  "limits": [
+    "Controlled batch fixture uses actual adapter with test Console queue boundaries;not a new full guest regression.",
+    "Native wait test proves API selection,not full-product deadlock reproduction.",
+    "Lifecycle points use inspected actual source and maintained test cases;no claim of newly reproduced shutdown error.",
+    "No production edits or publication. Source byte identity means #error and #line unchanged;whole-file changes and line proof await remaining points."
+  ],
+  "historical_sleep_review": "T423 evidence explicitly says200-record timing did not isolate Sleep(10) removal. R1073 not disposed in this checkpoint."
+}
