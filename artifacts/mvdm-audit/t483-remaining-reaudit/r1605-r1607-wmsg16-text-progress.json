@@ -1,0 +1,42 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": [
+    {
+      "id": "R1605",
+      "before": "+1/-1",
+      "remaining": "0",
+      "delta": -2,
+      "result": "Original LONG lParamMap restored; original plParamNew carries mapped result, no separate mapped local needed."
+    },
+    {
+      "id": "R1606",
+      "before": "+2/-0",
+      "remaining": "0",
+      "delta": -2,
+      "result": "Remove reset and explanation. All selected MSGPARAMEX owners are call-local zero initializers. ThunkWMMsg16 has no independent production caller outside ThunkMsg16 table. Text constructor is not reusing a populated scratch record; no read requires an extra zero before GETPSZPTR."
+    },
+    {
+      "id": "R1607",
+      "before": "+11/-1",
+      "remaining": "+5/-0",
+      "delta": -7,
+      "result": "Restore exact original AddParamMap assignment; remove redundant caller NULL guard because the helper enforces nonzero inputs. Preserve active/acquired-map flags and existing unmapped-pointer fallback on failed optional mapping. Drop both native captures: their only consumer in this family is FREEPSZPTR, empty in supported non-DEBUG configuration.",
+      "original_failure_evidence": "AddParamMap can return NULL after CacheBlockAllocate failure. Original unconditionally replaces nonempty input with NULL and later normal unthunk can DeleteParamMap without a successful acquisition; owned-map flag prevents decrementing another call after failed refresh. Existing source controls cover fallback/normal/NULL and mapping movement, but require rerun against final file.",
+      "residual_status": "source-qualified owner decision after whole-file reconciliation"
+    }
+  ],
+  "source_evidence": [
+    "src/mvdm-host/wow32/wparam.c::AddParamMap",
+    "src/mvdm-host/wow32/wparam.c::DeleteParamMap",
+    "src/mvdm-host/wow32/wow32.h:598-605",
+    "src/mvdm-host/wow32/wowhooks.c::WU32StdHookProc",
+    "src/mvdm-host/wow32/wumsg.c MSGPARAMEX owners",
+    "test/observation/wow_message_construction_fixture.c::map_cases"
+  ],
+  "line_correction": "Original AddParamMap assignment explicitly retains #line221; original following conditional retains #line222.",
+  "whole_file_metric_before": 267,
+  "whole_file_metric_current": 251,
+  "source_sha256": "64af5a00af325a66d02f071d7dbdf0156b89e8e2dcd7a7319ead934a0da886e1",
+  "next": "R1608 WinHelp allocation failure guard; exact necessity not yet adjudicated, not admitted to pending backlog.",
+  "verification": "Source review only at this checkpoint; complete all51 points before cached full and delivery."
+}

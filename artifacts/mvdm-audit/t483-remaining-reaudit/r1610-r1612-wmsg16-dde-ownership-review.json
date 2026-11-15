@@ -1,0 +1,32 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": [
+    {
+      "id": "R1610",
+      "before": "+2/-0",
+      "after": "+2/-0",
+      "decision": "qualified pending owner",
+      "evidence": "WU32PostMessage attaches fresh postConversion, calls conversion then native PostMessage. Failure calls W32CancelDDEPost, which needs packed ownership to free created ACK PackDDElParam. Success clears flag and transfers ownership. INITIATE ACK path passes atoms directly and must not be treated as allocated packed storage. Original unconditional post without failure release loses packed allocation on rejected post.",
+      "minimization": "No extra provider or new state introduced; retain boolean identifying allocated packed storage."
+    },
+    {
+      "id": "R1611",
+      "before": "+3/-0",
+      "after": "+3/-0",
+      "decision": "qualified pending owner; declaration zero-initialized",
+      "evidence": "WU32SendMessage also explicitly selects WOWDDE_POSTMESSAGE for original AmiPro compatibility, but has no ddePostConversion. A local conversion record remains necessary for failed POKE construction cleanup; WU32PostMessage supplies caller-owned storage for post-result cleanup. Not redundant parallel state: only selected record receives acquisitions.",
+      "change": "Initialize fallback Conversion at declaration, keeping same mirror line count."
+    },
+    {
+      "id": "R1612",
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restored original at branch entry",
+      "evidence": "Both possible records now originate zero-initialized: caller-local postConversion in WU32PostMessage or this conversion-local fallback. No previous constructor shares either record. Remove repeated Count reset; #line772 retained.",
+      "mirror_delta": -1
+    }
+  ],
+  "verification": "Source chain reviewed; no fresh compile/runtime claim. Whole-file delivery pending.",
+  "whole_file_mirror_total": 244,
+  "batch_mirror_delta": -27
+}

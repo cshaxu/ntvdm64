@@ -1,0 +1,14 @@
+[
+  {
+    "shared_exact_lines": 1022,
+    "mismatches": [],
+    "snapshot_matches_source": true,
+    "file": "src/mvdm-host/wow32/wmsg16.c",
+    "candidate_sha256": "a764326d0d62768cafd0e6b9fe5b59acc07ff84b2611793fe52ddf5949680765",
+    "original_sha256": "b72828c5fe01fd53dd6924aa79eb5175bc720b7cd14b3f52987b3eca10168a7c",
+    "preprocess_exit": 0,
+    "command": "build/t483-s5-p147/wmsg16-lines.cmd",
+    "limitation": "Compiler preprocessing and original selected-line comparison, not object compile/runtime proof.",
+    "line_mismatches": []
+  }
+]

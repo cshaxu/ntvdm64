@@ -1,0 +1,20 @@
+{
+  "file": "src/mvdm-host/wow32/wmmalias.c",
+  "point": "T483-R1597",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "ca414bae02133a1feeae845ab9e40737714a15bf293cb0da0a0de2f66f778d98",
+  "current_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+  "selected_code_and_logical_lines_identical": true,
+  "selected_lines": 138,
+  "excluded_bodies": 10,
+  "non_exclusion_diff": 0,
+  "modifications": 0,
+  "conclusion": "Historical line warnings compared non-emitted excluded directives. Actual selected production code and diagnostic lines are exactly original. Retain existing #error exclusions; no repair necessary.",
+  "evidence": [
+    "build/.ninja/msvc-x86-release/wow32/build.ninja:141",
+    "build/t483-s5-p147/alias-lines.cmd",
+    "build/t483-s5-p147/wmmalias.c.original.i",
+    "build/t483-s5-p147/wmmalias.c.candidate.i"
+  ],
+  "limits": "Preprocessing identity, not a fresh runtime run. No source modification."
+}

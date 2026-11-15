@@ -84,7 +84,7 @@ function Invoke-Owned([string]$Name, [string]$File, [string[]]$Arguments,
 }
 
 try {
-    $inputs = @('src/mvdm-host/wow32/wdde.c', 'src/mvdm-host/wow32/wdde.h', 'src/mvdm-host/wow32/wmdisp32.c', 'src/mvdm-host/wow32/wumsg.c') |
+    $inputs = @('src/mvdm-host/wow32/wdde.c', 'src/mvdm-host/wow32/wdde.h', 'src/mvdm-host/wow32/wmdisp32.c', 'src/mvdm-host/wow32/wumsg.c', 'src/mvdm-host/wow32/wmsg16.c', 'test/observation/wow_dde_execute_fixture.c') |
         ForEach-Object { Join-Path $repo $_ }
     Get-FileHash -LiteralPath @($inputs + @($fixture, $PSCommandPath, $driver)) |
         Export-Csv -NoTypeInformation "$root/source-inputs.csv"
@@ -150,6 +150,30 @@ try {
         }
         Get-FileHash -LiteralPath "$directory/dde_alias_types.h", "$directory/dde_alias_exact_bodies.h",
             "$directory/unit.exe" | Export-Csv -NoTypeInformation "$directory/inputs.csv"
+    }
+    # Exercise the complete forward EXECUTE case, including the original NULL
+    # result contract; alias-helper tests alone do not cover this caller.
+    foreach ($variant in @('original','candidate')) {
+        $directory = Join-Path $root "execute-$variant"
+        $null = New-Item -ItemType Directory $directory
+        $text = if ($variant -eq 'original') {
+            $value = (& git -C O:/repos.external/OpenNT show '5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wmsg16.c') -join "`n"
+            if ($LASTEXITCODE) { throw 'Pinned original EXECUTE source missing' }
+            $value
+        } else { Read-Input 'src/mvdm-host/wow32/wmsg16.c' $false }
+        $start = $text.IndexOf('    case WM_DDE_EXECUTE:')
+        $end = $text.IndexOf('    case WM_COPYDATA:', $start)
+        if ($start -lt 0 -or $end -lt 0) { throw 'Forward EXECUTE case missing' }
+        $body = 'static BOOL execute(LPMSGPARAMEX lpmpex,INT fWhoCalled){WORD wParam=lpmpex->Parm16.WndProc.wParam;LONG lParam=lpmpex->Parm16.WndProc.lParam;PLONG plParamNew=&lpmpex->lParam;switch(lpmpex->Parm16.WndProc.wMsg){' + "`n" + $text.Substring($start,$end-$start) + "`n}return TRUE;}"
+        [IO.File]::WriteAllText("$directory/execute_body.h",$body)
+        Copy-Item "$root/candidate/dde_alias_types.h" "$directory/execute_types.h"
+        $command = "@echo off`r`ncall `"$driver`" cl.exe /nologo /TC /O2 /MT /W4 /I`"$directory`" `"$PSScriptRoot/wow_dde_execute_fixture.c`" /Fo`"$directory/unit.obj`" /Fe`"$directory/unit.exe`"`r`nexit /b %errorlevel%`r`n"
+        [IO.File]::WriteAllText("$directory/build.cmd",$command)
+        Invoke-Owned "execute-compile-$variant" cmd.exe @('/d','/c',"`"$directory/build.cmd`"") 180 0
+        Invoke-Owned "execute-body-$variant" "$directory/unit.exe" @() 30 $(if($variant -eq 'original'){1}else{0})
+        $result = Get-Content "$root/execute-body-$variant.stdout.log" -Raw
+        if($variant -eq 'candidate' -and $result -notmatch 'DDE_EXECUTE cases=38 errors=0 modes=7 guest_proof=0'){throw 'Incomplete forward EXECUTE controls'}
+        if($variant -eq 'original' -and ($result -notmatch 'FAIL mode=2 ' -or $result -notmatch 'FAIL mode=5 ')){throw 'Original must expose double-unlock and unregistered allocation controls'}
     }
     $selections | ConvertTo-Json | Set-Content "$root/selections.json"
     foreach ($entry in Import-Csv -LiteralPath "$root/source-inputs.csv") {

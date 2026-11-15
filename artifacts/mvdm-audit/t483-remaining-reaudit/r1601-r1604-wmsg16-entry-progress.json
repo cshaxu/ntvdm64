@@ -1,0 +1,53 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "status": "whole-file in progress; no full build or publication",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "initial_mirror_diff": 267,
+  "current_mirror_diff": 262,
+  "current_sha256": "8d88cb5368264748703e9212b7e6435563b9e3c99b5e3f33c22094963cdfdbc1",
+  "points": [
+    {
+      "id": "R1601",
+      "scope": "whole-file diagnostic mapping",
+      "result": "1016 shared selected lines match; one brace-only SequenceMatcher pair crosses the reordered COPYDATA construction/borrow branches. Final structural line assignment must be reconciled with the COPYDATA group, not by blindly mapping an inserted finally brace to original line1013. No completion claimed."
+    },
+    {
+      "id": "R1602",
+      "before": "+2/-0",
+      "remaining": "+1/-0",
+      "delta": -1,
+      "result": "Removed explanatory comment; retain direct lifetime interface for text/COPYDATA flags and unwind call. Final necessity rechecked with the remaining complete converter groups."
+    },
+    {
+      "id": "R1603",
+      "before": "+3/-0",
+      "remaining": "0",
+      "delta": -3,
+      "result": "Restore original entry by deleting preliminary false status. Normal return always assigns real converter result. All supported reads are after normal return; cleanup never reads it.",
+      "evidence": [
+        "src/mvdm-host/wow32/wmsg16.c::ThunkMsg16",
+        "src/wow32-dll/source/wow_message_lifetime.c::wow_message_unwind16",
+        "src/mvdm-host/wow32/wumsg.c::WU32PostAppMessage",
+        "src/mvdm-host/wow32/wudlg.c::WU32IsDialogMessage",
+        "src/mvdm-host/wow32/wowhooks.c"
+      ]
+    },
+    {
+      "id": "R1604",
+      "before": "+2/-0",
+      "remaining": "+1/-0",
+      "delta": -1,
+      "result": "Remove extra blank; retain successful/failed conversion status for HWND0 thread messages. Original PostAppMessage ignores HWND return and would publish even after conversion failure; checking HWND instead rejects legitimate thread messages. Residual awaits owner after whole-file record completion.",
+      "evidence": [
+        "src/mvdm-host/wow32/wumsg.c::WU32PostAppMessage",
+        "test/observation/wow_copydata_lifetime_fixture.c:271-272"
+      ]
+    }
+  ],
+  "next": "R1605-R1607 text acquisition: audit actual AddParamMap failures, empty FREEPSZPTR macro and capture ownership; do not preserve dead state just because current cleanup names it.",
+  "limits": [
+    "Earlier P146 fixture evidence is not validation of this modified file.",
+    "Finish entire file and coupled changes before cached full/publish/test/commit/push.",
+    "Do not count this partial file as complete or move unproved points into pending decisions."
+  ]
+}

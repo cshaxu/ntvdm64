@@ -1,0 +1,18 @@
+{
+  "file": "src/mvdm-host/wow32/wmmstruc.h",
+  "point": "T483-R1600",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "f991da66791e191238227cbe93b264cba7def8b5b6eb93e812eb9013039cc47b",
+  "current_sha256": "7938034986ce5547725f9a1056f211310d3e6d0cca686dc3cf0f2d0a92e8bc15",
+  "selected_code_and_logical_lines_identical": true,
+  "selected_lines": 14,
+  "excluded_bodies": 1,
+  "non_exclusion_diff": 0,
+  "modifications": 0,
+  "conclusion": "Only already excluded conditional bodies differ; actual selected declarations and logical lines exactly original. No repair needed.",
+  "evidence": [
+    "build/t483-s5-p147/wmmstruc.h.original.i",
+    "build/t483-s5-p147/wmmstruc.h.candidate.i"
+  ],
+  "limits": "Preprocessing identity in selected product configuration, not a fresh runtime run. No source modification."
+}

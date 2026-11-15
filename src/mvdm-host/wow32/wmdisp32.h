@@ -42,9 +42,6 @@ typedef struct _WM32MSGPARAMEX {
     PWW  pww;
     DWORD dwParam;
     BOOL fFree;
-    /* DIVERGENCE(MVDM-HOST-DIV-345): final slots own nested MDI title/struct. */
-    /* DIVERGENCE(MVDM-HOST-DIV-349): otherwise slot1 captures heap ownership;
-     * COPYDATA retains its original separate progress/slot contract. */
     DWORD dwTmp[4];
 #line 46
 } WM32MSGPARAMEX;
@@ -61,7 +58,6 @@ typedef struct _M32 {   /* w32 */
 #line 57
 } M32, *PM32;
 
-/* DIVERGENCE(MVDM-HOST-DIV-344): matches the operation-private TLS owner. */
 extern  __declspec(thread) BOOL fThunkDDEmsg;
 
 #line 61

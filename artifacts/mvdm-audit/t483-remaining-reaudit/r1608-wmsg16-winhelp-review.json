@@ -1,0 +1,20 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "id": "R1608",
+  "before": "+2/-0",
+  "after": "+0/-0",
+  "mirror_delta": -2,
+  "decision": "restore original",
+  "evidence": [
+    "Original constructor guards RtlCopyMemory with nonzero allocated destination; failed allocation leaves lParam zero and returns TRUE.",
+    "Original WinHelp release checks nonzero and excludes inline storage; failed allocation owns no buffer.",
+    "WM32WinHelp receiving conversion checks lParam before dereference. No demonstrated failing supported consumer justifies early FALSE.",
+    "Existing reverse fixture demanded FALSE/no native call, not a null-access witness. Retain failure case with original TRUE/NULL, no copy, live allocation or release; four other constructor negatives unchanged."
+  ],
+  "line": "Keep #line321 before original copy guard; exclusions unchanged. Whole-file compiler proof pending.",
+  "verification": "Source and fixture contract reviewed; not tested or delivered. Finish whole file before batch build.",
+  "source_sha256": "d0fe416fb4e537b3777a094621e0b23dc24d9c16d17fdd4cdc7b06152824f402",
+  "whole_file_mirror_before": 267,
+  "whole_file_mirror_now": 249,
+  "batch_mirror_delta": -22
+}

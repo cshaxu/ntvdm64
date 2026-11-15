@@ -1,0 +1,31 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "id": "R1609",
+  "before": "+4/-1",
+  "after": "+2/-1",
+  "mirror_delta": -2,
+  "decision": "minimize; residual qualified pending owner",
+  "necessary": "WI32DDEAddInitiator allocates independent node; failed nested allocation publishes none. Unconditional Delete of same HWND finds and retires outer active node. Keep successful-acquisition flag. Counter-review correction: wow_message_unwind16 does not dispatch DDE_INITIATE; do not cite finally replay to justify flag clearing. Clearing is reviewed at R1649.",
+  "removed": "Duplicate initiator capture and explanation. Original Parm16.WndProc.wParam is populated before conversion; native callback/hook receives scalar or separate CWPSTRUCT and modifies converted uParam, not original Parm16 field. Cleanup can use original field.",
+  "coupled_change": {
+    "id": "R1649",
+    "note": "paired cleanup only; not counted as later audit completion",
+    "before": "+6/-1",
+    "after": "+4/-1",
+    "mirror_delta": -2
+  },
+  "evidence": [
+    "src/mvdm-host/wow32/wdde.c::WI32DDEAddInitiator/ WI32DDEDeleteInitiator",
+    "src/mvdm-host/wow32/wumsg.c::WU32SendMessage",
+    "src/mvdm-host/wow32/wowhooks.c::ThunkCallWndProcHook16",
+    "src/wow32-dll/source/wow_message_lifetime.c::wow_message_unwind16"
+  ],
+  "line": "Original #line721 and #line1302 retained; no excluded branch changed. Final compiler line proof pending.",
+  "verification": "Source caller-chain review, not runtime validation; finish full file before build.",
+  "mirror_current": {
+    "added": 152,
+    "deleted": 93,
+    "total": 245
+  },
+  "sha256": "69b9405472d9a91c3803e656057a28c7de456393d03f26ba1b363295c5c13768"
+}

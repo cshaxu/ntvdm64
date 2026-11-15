@@ -1,0 +1,16 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "id": "R1636",
+  "registered_before": "+6/-0",
+  "mirror_delta": -3,
+  "decision": "remove duplicate initialization and two comments; remaining fields/guard reviewed with COPYDATA group",
+  "evidence": [
+    "All product MSGPARAMEX owners in wumsg.c/wowhooks.c/wudlg.c zero-initialize local call records; getmsg16 receives those same records. No independent ThunkWMMsg16 product caller.",
+    "COPYDATA constructor is invoked once for each local record; native callback output updates converted fields, not a second constructor using the same owned scratch.",
+    "WU32SendDlgItemMessage invokes ThunkMsg16 without setting POSTMESSAGE; original COPYDATA else path dereferences CopyDataFindData32 result without requiring a previous mapping. Existing find-or-construct adaptation serves this original reachable caller."
+  ],
+  "line": "Keep #line989 before original HWND conversion; exclusions unchanged.",
+  "verification": "Source caller review, not build/runtime validation; complete remaining file points first.",
+  "whole_file_mirror_total": 224,
+  "batch_mirror_delta": -47
+}

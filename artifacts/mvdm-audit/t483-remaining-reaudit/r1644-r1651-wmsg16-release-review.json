@@ -1,0 +1,17 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": {
+    "R1644": "Retain failed allocation return; partial COPYDATA buffer cannot be transmitted.",
+    "R1645": "Retain registered header ownership and borrowed mapping; duplicate outer finally removed in prior group.",
+    "R1646": "Remove local unwind, real caller finally owns cleanup on FALSE and exception. Fixture failure cases now exercise same owner boundary. Error/return retained.",
+    "R1647": "Remove explanatory comment and redundant ACTIVE guard: MAPPED bit alone gates DeleteParamMap; clear flags before release prevents later owner finally double decrement. PARAM_16 stable original key required after native callback can change converted lParam.",
+    "R1648": "Restore exact original FREEPSZPTR expression; supported macro empty, no retained pointer needed.",
+    "R1649": "Remove active clear: each real INITIATE owner invokes unthunk once; getmsg16 has its own one-time unthunk and outer unwind16 excludes INITIATE. Retain success predicate so failed nested add cannot delete outer node. Original argument spacing restored.",
+    "R1650": "Retain unconditional scope with acquisition flags instead of ambient fWhoCalled: native forwarding borrows and non-POST constructors can acquire.",
+    "R1651": "Remove two explanation lines; retain immutable owned header/data keys and clear-before-free flags. Native callback can modify lParam/header, original dereference-based cleanup can free wrong address or leak original."
+  },
+  "line": "All existing #error unchanged. Final source needs compiler-backed logical-line check.",
+  "verification": "Whole-file source point decisions now present in indexed records; counter-review, exact metrics/register reconciliation and final build/test/delivery remain.",
+  "whole_file_mirror_total": 199,
+  "batch_mirror_delta": -72
+}

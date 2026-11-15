@@ -1,0 +1,18 @@
+{
+  "file": "src/mvdm-host/wow32/wmmedia.h",
+  "point": "T483-R1599",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "40468b35fb13331bbe85c0ae8e4e1ae0a1bf9738e1f5c4591fd84e9f29f3cad1",
+  "current_sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44",
+  "selected_code_and_logical_lines_identical": true,
+  "selected_lines": 162,
+  "excluded_bodies": 1,
+  "non_exclusion_diff": 0,
+  "modifications": 0,
+  "conclusion": "Only already excluded conditional bodies differ; actual selected declarations and logical lines exactly original. No repair needed.",
+  "evidence": [
+    "build/t483-s5-p147/wmmedia.h.original.i",
+    "build/t483-s5-p147/wmmedia.h.candidate.i"
+  ],
+  "limits": "Preprocessing identity in selected product configuration, not a fresh runtime run. No source modification."
+}

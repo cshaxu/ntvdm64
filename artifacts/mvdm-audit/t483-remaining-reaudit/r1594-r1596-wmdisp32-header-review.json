@@ -1,0 +1,29 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.h",
+  "source_sha256": "3dd14fded39eb89dff3e8f5a3c5ca15056ae374d0ecabe195eb875fa0bb2ce97",
+  "original_sha256": "6feb1598726291b80d7f7a221da094900e36d032bafa272f515246c96d25e39c",
+  "shared_selected_lines": 80,
+  "line_mismatches": [],
+  "token_identical_to_delivered_header": true,
+  "excluded_error_unchanged": true,
+  "metric_before": 12,
+  "metric_after": 8,
+  "points": {
+    "R1594": "Old header line concern does not survive actual selected preprocessing: excluded endif is not selected code; original selected lines match. No new semantic fix.",
+    "R1595": "Original dwParam plus two DWORD scratch slots cannot simultaneously retain outer class/title and nested MDI class/title/record keys across callback changes and constructor failures. Four scratch slots retained; comments removed. Residual +1/-1 pending owner.",
+    "R1596": "Native hook snapshots fThunkDDEmsg before wow_task_callback_enter; interleaving with PM_NOREMOVE can restore another threads stale value into the original global. TLS protects per-thread mode; native callback ownership needed independently of current adapter. Residual +1/-1 pending owner; redundant comment removed. Source-permitted ordering, not reproduced race."
+  },
+  "evidence": [
+    "src/mvdm-host/wow32/wmdisp32.c:454-500",
+    "src/wow32-dll/source/wow_message_lifetime.c:42-46",
+    "src/wow32-dll/source/wow_hook_callback.c:100-101,150",
+    "src/mvdm-host/wow32/wumsg.c:1223-1235",
+    "build/t483-s5-p146/message-final-caller",
+    "build/t483-s5-p147/header-lines.cmd"
+  ],
+  "limits": [
+    "Header preprocessing uses actual WOW compiler flags; production compile/runtime reuse P146 because token and declaration layout unchanged.",
+    "No new guest or race reproduction."
+  ],
+  "delivery": "Comment-only diff reduction pending next accumulated batch; not a new product publication."
+}

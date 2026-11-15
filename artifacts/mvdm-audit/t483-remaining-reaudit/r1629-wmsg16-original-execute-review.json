@@ -1,0 +1,19 @@
+{
+  "id": "R1629",
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "before": "+4/-3",
+  "after": "+0/-0",
+  "mirror_delta": -7,
+  "decision": "restore original",
+  "evidence": [
+    "WOWGlobalLockSize16 in wcall16.c explicitly documents size zero on lock failure and copies callback frame size out even when returned vp is zero.",
+    "Original EXECUTE documents OmniPage constant handles and conditions duplicate handling on vp, rather than rejecting entire request before allocation.",
+    "GETMISCPTR uses optional pointer conversion; no new assertion of original nonzero-length invalid copy is established by vp==0 alone. Restore original allocation/copy control flow rather than preserving an unsupported rejection.",
+    "Native h32 is unconditionally assigned by original allocation; paired R1627 initializer restored too (-2 additional mirror lines)."
+  ],
+  "verification": "Source restoration only. Required final controls: lock failure/zero size and constant handle, valid command, alias duplication, allocation and registration failure; no current runtime pass claimed.",
+  "line": "Keep #line914 and #line918, original intermediate lines restored; final compiler proof pending.",
+  "whole_file_mirror_total": 228,
+  "batch_mirror_delta": -43,
+  "final_verification": "P147 exact forward EXECUTE case: build/t483-s5-p147-execute; 7 modes/38 checks current0 failures, pinned OpenNT10 failures. Covers constant zero-size handle, valid data, preexisting lock preserved on native allocation failure, duplicate allocation/registration failure, ordinary registration failure. Source-boundary doubles only; final selected-line proof1022/0; see batch-p147-checkpoint.json for Full/Git delivery state."
+}

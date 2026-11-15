@@ -1,0 +1,58 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": [
+    {
+      "id": "R1630",
+      "before": "+5/-1",
+      "after": "+5/-1",
+      "decision": "qualified pending owner",
+      "evidence": "Failed duplicate alias registration leaves newly allocated guest duplicate and native packet unowned; free both, clear h32. Original ignored failure cannot link ACK to acquired duplicate.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1631",
+      "before": "+2/-0",
+      "after": "+2/-0",
+      "decision": "qualified pending owner",
+      "evidence": "Failed guest duplicate allocation occurs after native packet acquired; original logs only and leaves unregistered native packet. Free it and clear result.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1632",
+      "before": "+5/-1",
+      "after": "+5/-1",
+      "decision": "qualified pending owner",
+      "evidence": "Ordinary pair registration can fail allocation/mark; release unregistered native packet and clear result rather than transfer an untracked allocation.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1633",
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified pending owner",
+      "evidence": "Original native allocation failure executes else GlobalUnlock16, then unconditional GlobalUnlock16: two releases for one lock. A preexisting external lock count can be decremented. Current branch releases successful vp once.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1634",
+      "before": "+0/-1",
+      "after": "+0/-1",
+      "decision": "qualified pending owner",
+      "evidence": "Companion deletion removes original second unlock; retain single successful-lock release.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1635",
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "evidence": "Original converter returns TRUE with h32 zero; previous cleanup already retired failed acquisitions. WM32DDEExecute handles incoming zero through GlobalSize/allocation rather than unconditional dereference. No demonstrated failure requires new early FALSE. Restore original propagation; test must distinguish cleanup from send-policy assertions.",
+      "mirror_delta": -1
+    }
+  ],
+  "line": "Retain #line950/953/961/967/975 and exclusions. Final selected-line proof pending.",
+  "verification": "Full source branch ownership review; runtime tests pending entire-file completion. Prior reverse direction EXECUTE controls do not prove this direction. Include duplicate/ordinary registration failure and exact unlock counts in final controls.",
+  "whole_file_mirror_total": 227,
+  "batch_mirror_delta": -44,
+  "final_verification": "P147 exact forward EXECUTE case: build/t483-s5-p147-execute; 7 modes/38 checks current0 failures, pinned OpenNT10 failures. Covers constant zero-size handle, valid data, preexisting lock preserved on native allocation failure, duplicate allocation/registration failure, ordinary registration failure. Source-boundary doubles only; final selected-line proof1022/0; see batch-p147-checkpoint.json for Full/Git delivery state."
+}

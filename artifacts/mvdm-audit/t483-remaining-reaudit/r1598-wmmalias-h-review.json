@@ -1,0 +1,20 @@
+{
+  "file": "src/mvdm-host/wow32/wmmalias.h",
+  "point": "T483-R1598",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "7246e9756d481ce5bb6b64058951cbc2c949c86b580082eb4b6ba7a465fa106d",
+  "current_sha256": "7b9696ef8c12eaf2b917d6fd4c187426bdd7fdc258d77acf47f4984351ad42ac",
+  "selected_code_and_logical_lines_identical": true,
+  "selected_lines": 32,
+  "excluded_bodies": 1,
+  "non_exclusion_diff": 0,
+  "modifications": 0,
+  "conclusion": "Only the already excluded NEWALIAS fields differ;actual selected declarations and logical lines exactly original. No repair needed.",
+  "evidence": [
+    "src/mvdm-host/wow32/wmmalias.c:18",
+    "build/t483-s5-p147/alias-header.cmd",
+    "build/t483-s5-p147/wmmalias.h.original.i",
+    "build/t483-s5-p147/wmmalias.h.candidate.i"
+  ],
+  "limits": "Preprocessing identity in selected product configuration, not a fresh runtime run. No source modification."
+}

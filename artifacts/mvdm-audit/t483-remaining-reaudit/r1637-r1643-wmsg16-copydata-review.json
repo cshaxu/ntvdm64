@@ -1,0 +1,30 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": [
+    "R1637",
+    "R1638",
+    "R1639",
+    "R1640",
+    "R1641",
+    "R1642",
+    "R1643"
+  ],
+  "changes": [
+    "Remove duplicate outer exception cleanup; all actual message owners in wumsg/wowhooks/wudlg run wow_message_unwind16 in finally; getmsg16 forwards owner record.",
+    "Restore original dwData/cbData reads before next guest mapping; malloc_w is HeapAlloc without guest callback. Keep data16 for guest-key use after mapping.",
+    "Remove duplicate data16 NULL test; optional GETMISCPTR and following NULL check suffice.",
+    "Remove inner finally around empty supported-profile FREEMISCPTR. Restore original header FREE macro location.",
+    "Exception fixture now invokes actual outer-owner cleanup contract."
+  ],
+  "retained_evidence": [
+    "WU32SendDlgItemMessage reaches converter without POSTMESSAGE; missing mapping requires construction.",
+    "Original node Mem16 key used native lpMem16; reverse lookup needs guest far data16.",
+    "Acquisition flags distinguish buffers, nodes and borrowing; callback may mutate native header."
+  ],
+  "coupled": "Closing outer finally touches R1645; does not complete later audit.",
+  "line": "Restore #line1008 before header FREE macro; final compiler line proof pending.",
+  "verification": "Source/caller review only; whole-file tests/build/delivery pending.",
+  "whole_file_mirror_before": 224,
+  "whole_file_mirror_total": 207,
+  "batch_mirror_delta": -64
+}

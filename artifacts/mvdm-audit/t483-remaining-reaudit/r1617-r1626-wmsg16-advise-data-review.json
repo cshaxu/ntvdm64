@@ -1,0 +1,89 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": [
+    {
+      "id": "R1617",
+      "before": "+3/-0",
+      "after": "+3/-0",
+      "decision": "qualified pending owner",
+      "evidence": "Synchronous WU32SendMessage also selects POSTMESSAGE conversion without caller-owned postConversion. Keep fallback record, initialize at declaration.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1618",
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original branch code",
+      "evidence": "Both caller and fallback record already zero-initialized; remove repeat reset.",
+      "mirror_delta": -1
+    },
+    {
+      "id": "R1619",
+      "before": "+5/-1",
+      "after": "+5/-1",
+      "decision": "qualified pending owner",
+      "evidence": "ADVISE allocates one native packet; failed alias allocation/marking must free unregistered packet. No nested resources need rollback here.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1620",
+      "before": "+5/-0",
+      "after": "+5/-0",
+      "decision": "qualified pending owner",
+      "evidence": "Failed packing follows successful alias creation; rollback retires that alias and packet, successful post retains packed flag until ownership transfer.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1621",
+      "before": "+3/-0",
+      "after": "+3/-0",
+      "decision": "qualified pending owner",
+      "evidence": "DATA same synchronous fallback requirement; declaration initializes record.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1622",
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original branch code",
+      "evidence": "Both record owners already initialized; remove repeat reset.",
+      "mirror_delta": -1
+    },
+    {
+      "id": "R1623",
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified pending owner",
+      "evidence": "DDECopyhData32 can register DIB/metafile subresources; caller must retain acquired pairs through final packing/post result.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1624",
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original branch code",
+      "evidence": "Within nonzero guest data branch, failed copy yields NULL rejected by DDEAddhandle before publication; following unified cleanup returns FALSE. Zero-data original branch bypasses registration and still packs NULL data normally.",
+      "mirror_delta": -1
+    },
+    {
+      "id": "R1625",
+      "before": "+6/-1",
+      "after": "+6/-1",
+      "decision": "qualified pending owner",
+      "evidence": "Failed outer packet registration leaves unregistered h32 plus any registered nested handles; rollback nested then free outer separately.",
+      "mirror_delta": 0
+    },
+    {
+      "id": "R1626",
+      "before": "+5/-0",
+      "after": "+5/-0",
+      "decision": "qualified pending owner",
+      "evidence": "Pack failure retires tracked allocations; success marks packed parameter only for post owner. Synchronous path also needs construction failure cleanup.",
+      "mirror_delta": 0
+    }
+  ],
+  "line": "Keep #line804/814/834/835/854/860/872/875/878; exclusions unchanged. Final selected-line verification pending.",
+  "verification": "Source-chain conclusions only; no fresh test or delivery claim.",
+  "whole_file_mirror_total": 240,
+  "batch_mirror_delta": -31
+}

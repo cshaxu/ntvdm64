@@ -1,0 +1,26 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": [
+    {
+      "id": "R1627",
+      "before": "+5/-2",
+      "after": "+3/-0",
+      "mirror_delta": -4,
+      "decision": "original handle declarations restored; conversion record qualified pending owner",
+      "evidence": "WOWGlobalAllocLock16 in wcall16.c writes *phMem from callback frame whenever returned vp is nonzero. Every h16 use in this EXECUTE branch is inside vp1 success. Restore original uninitialized h16 declaration; no read before successful provider assignment. Conversion fallback remains needed by synchronous SendMessage and is initialized here. R1629 restores unconditional native allocation assignment, so original uninitialized h32 is also correct. Every normal path assigns h32 before use (allocation or DDEFindPair32)."
+    },
+    {
+      "id": "R1628",
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "mirror_delta": -1,
+      "decision": "restore original branch entry",
+      "evidence": "WU32PostMessage owns zero-initialized postConversion; synchronous caller uses zero-initialized local Conversion. No need for second Count reset.",
+      "line": "Retain #line914."
+    }
+  ],
+  "next": "R1629 source adjudicated in companion evidence; remaining EXECUTE failure and unlock diffs next.",
+  "verification": "Source-only; whole-file build/test/delivery pending.",
+  "whole_file_mirror_total": 237,
+  "batch_mirror_delta": -34
+}

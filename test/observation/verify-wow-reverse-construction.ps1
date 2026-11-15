@@ -10,7 +10,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
  $root.StartsWith($repo+'\build\.ccache\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh disposable root required'}
 $null=New-Item -ItemType Directory $root
 $baseline='049ae27da';$selections=@();$steps=@()
-function Read($path,$old){if($old){$s=(& git -C $repo show "${baseline}:$path") -join "`n";if($LASTEXITCODE){throw 'Missing baseline'};return $s};[IO.File]::ReadAllText("$repo/$path").Replace("`r`n","`n")}
+function Read($path,$old){if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/' -replace '^src/non-mvdm/','src/opennt-host/';$s=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw 'Missing baseline'};return $s};[IO.File]::ReadAllText("$repo/$path").Replace("`r`n","`n")}
 function Slice($source,$start,$end,$label){
  $a=$source.IndexOf($start,[StringComparison]::Ordinal);if($a -lt 0){throw "Missing $label start"}
  $b=$source.IndexOf($end,$a,[StringComparison]::Ordinal);if($b -lt 0){throw "Missing $label end"}
@@ -65,9 +65,9 @@ try{
   Run "body-$kind" "$dir/unit.exe" @() $(if($old){1}else{0}) 30
  }
  $negative=Get-Content "$root/body-baseline.stdout.log" -Raw
- foreach($name in @('EDIT_REPLACE_ALLOC','EDIT_TABS_ALLOC','LIST_SELECTION_ALLOC','LIST_TABS_ALLOC','HELP_ALLOC','EDIT_TABS_SIGNED_RELEASE','LIST_TABS_SIGNED_RELEASE','LIST_TABS_RESET_CLEARS_OWNERSHIP','LIST_TABS_FAILED_FREE_KEEPS_OWNERSHIP')){if($negative -notmatch "(?m)^FAIL $name\r?`$"){throw "Missing negative $name"}}
+ foreach($name in @('EDIT_REPLACE_ALLOC','EDIT_TABS_ALLOC','LIST_SELECTION_ALLOC','LIST_TABS_ALLOC','EDIT_TABS_SIGNED_RELEASE','LIST_TABS_SIGNED_RELEASE','LIST_TABS_RESET_CLEARS_OWNERSHIP','LIST_TABS_FAILED_FREE_KEEPS_OWNERSHIP')){if($negative -notmatch "(?m)^FAIL $name\r?`$"){throw "Missing negative $name"}}
  if((Get-Content "$root/body-candidate.stdout.log" -Raw) -notmatch 'REVERSE_CONSTRUCTION failures=0 scenarios=21 buffer=\d+ record=\d+'){throw 'Incomplete candidate'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Source changed'}}
  $selections|ConvertTo-Json|Set-Content "$root/selections.json"
- @{passed=$true;baseline=$baseline;negative='five missing native buffers, two signed releases and native tab reset/failure';scope='exact-source service doubles, not runtime acceptance';end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
+ @{passed=$true;baseline=$baseline;negative='four missing native buffers, two signed releases and native tab reset/failure';originalHelp='allocation failure preserves successful NULL conversion and empty cleanup';scope='exact-source service doubles, not runtime acceptance';end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";exit 1}

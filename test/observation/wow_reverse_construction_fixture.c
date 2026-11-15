@@ -98,7 +98,10 @@ int main(void){
  for(i=0;i<5;++i){
   reset();memset(guest,'x',sizeof(guest));guest[512]=0;if(messages[i]==WM_WINHELP)*(WORD *)guest=512;
   ok=construct(&value,messages[i],256,TRUE);++scenarios;
-  check(!ok && !native_calls && !bad_copy && !live,names[i]);
+  if(messages[i]==WM_WINHELP){
+   check(ok && native_calls==1 && value.lParam==0 && !bad_copy && !live,"HELP_ALLOC_ORIGINAL_NULL");
+   finish(&value,messages[i]);check(!releases && !live,"HELP_ALLOC_NULL_RELEASE");
+  }else check(!ok && !native_calls && !bad_copy && !live,names[i]);
   reset();memset(guest,'x',sizeof(guest));guest[512]=0;if(messages[i]==WM_WINHELP)*(WORD *)guest=512;
   check(construct(&value,messages[i],256,FALSE),"normal constructor");++scenarios;
   check(allocations==1 && live==1,"heap acquired once");

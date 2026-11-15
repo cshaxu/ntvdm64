@@ -1048,3 +1048,43 @@ P146 [R1577-R1593 COPYDATA/WinHelp](r1577-r1593-copydata-winhelp-review.json):re
 - [P146 final message verification](p146-final-message-review.json): 171 cases; retained failed attempt and corrected caller context.
 
 P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Full19,WOW boundary/governance. Mirror net-106;1267 wmdisp32 line matches.210/365files;1593/2720points:567 delivered,0 local,8 approved,1018 pending,1127 unreviewed. Git accompanies receipt.
+
+- [R1594-R1596 wmdisp32 header](r1594-r1596-wmdisp32-header-review.json): comment-only mirror12->8;80 selected lines match;two residuals await owner.
+
+- [R1597 wmmalias.c](r1597-wmmalias-c-review.json):138 selected lines exactly original;10 exclusions retained;no source edit.
+
+- [R1598 wmmalias.h](r1598-wmmalias-h-review.json):32 selected lines exactly original;exclusions retained;no source edit.
+
+- [R1599 wmmedia.h](r1599-wmmedia-h-review.json):162 selected lines exactly original;exclusions retained;no source edit.
+
+- [R1600 wmmstruc.h](r1600-wmmstruc-h-review.json):14 selected lines exactly original;exclusions retained;no source edit.
+
+- [R1601-R1604 wmsg16 entry progress](r1601-r1604-wmsg16-entry-progress.json): local diff-5;whole-file audit and final verification outstanding.
+
+- [R1605-R1607 wmsg16 text progress](r1605-r1607-wmsg16-text-progress.json): restore original declarations/call;remove redundant captures;whole-file verification pending.
+
+- [R1608 WinHelp original failure contract](r1608-wmsg16-winhelp-review.json): local restoration; whole-file validation pending.
+
+- [R1609 DDE initiate ownership](r1609-wmsg16-dde-initiate-review.json): minimized acquisition and paired release; whole-file validation pending.
+
+- [R1610-R1612 DDE ownership](r1610-r1612-wmsg16-dde-ownership-review.json): ACK post ownership, synchronous fallback and redundant reset removal.
+
+- [R1613-R1616 POKE failure ownership](r1613-r1616-wmsg16-poke-review.json): restore redundant failure exit; retain evidenced allocation rollback pending owner.
+
+- [R1617-R1626 ADVISE/DATA](r1617-r1626-wmsg16-advise-data-review.json): unified failure flow and initialization; original empty DATA retained.
+
+- [R1627-R1628 EXECUTE initialization](r1627-r1628-wmsg16-execute-review.json): original handle declaration and single record initialization.
+
+- [R1629 original EXECUTE lock/allocation flow](r1629-wmsg16-original-execute-review.json): restore original zero-size/constant-handle path and paired native declaration.
+
+- [R1630-R1635 EXECUTE release](r1630-r1635-wmsg16-execute-release-review.json): allocation ownership, single unlock and original empty-result propagation.
+
+- [R1636 COPYDATA entry](r1636-wmsg16-copydata-entry-review.json): duplicate zeroing removed; direct dialog-message caller traced.
+
+- [R1637-R1643 COPYDATA construction](r1637-r1643-wmsg16-copydata-review.json): original field reads and caller-owned exception cleanup.
+
+- [R1644-R1651 final release points](r1644-r1651-wmsg16-release-review.json): caller cleanup, original text release and minimal owned-resource retirement.
+
+- [P147 final wmsg16 compiler line proof](p147-wmsg16-final-line-proof.json): 1022 shared selected lines agree; cached full, publication, focused and Full19 passed.
+
+- [P147 frozen source checkpoint](batch-p147-checkpoint.json) and [line gate](batch-p147-line-check.json): all gates passed; Git delivery accompanies this record.

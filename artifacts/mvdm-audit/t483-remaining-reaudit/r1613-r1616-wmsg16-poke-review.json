@@ -1,0 +1,44 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "points": [
+    {
+      "id": "R1613",
+      "before": "+1/-1",
+      "after": "+1/-1",
+      "decision": "qualified pending owner",
+      "evidence": "DDECopyhData32 CF_DIB and CF_METAFILEPICT can publish nested native resources. Conversion record gives caller exact acquired pairs for later packet registration, packing or PostMessage failure. Without tracking, original later failure has no ownership list to retire those allocations. Current helper drains this record on its own reported conversion failure.",
+      "minimum": "Keep one parameter; no new helper or alternate conversion."
+    },
+    {
+      "id": "R1614",
+      "before": "+1/-0",
+      "after": "+0/-0",
+      "decision": "restore original",
+      "mirror_delta": -1,
+      "evidence": "DDETrackhandle calls DDEAddhandle, whose hMem16 && hMem32 check rejects NULL before allocation/publication. Following existing failure block rolls back conversion and GlobalFree(NULL) acquires/frees nothing. DDECopyhData32 already drains and frees partial conversion on fFailed. Remove redundant early FALSE; unified rejection still returns FALSE, no message is posted.",
+      "line": "Retain #line779 before original Flags assignment."
+    },
+    {
+      "id": "R1615",
+      "before": "+6/-1",
+      "after": "+6/-1",
+      "decision": "qualified pending owner",
+      "evidence": "DDEAddhandle can fail node allocation or guest handle marking. On failure outer h32 is not a tracked pair; free it separately. Previously recorded nested resources must be rolled back. Ignoring original registration result leaves native allocations lacking reverse association and gives later ACK/free no pair."
+    },
+    {
+      "id": "R1616",
+      "before": "+5/-0",
+      "after": "+5/-0",
+      "decision": "qualified pending owner",
+      "evidence": "PackDDElParam failure occurs after native packet and nested pairs are registered. Return failure only after rollback; on success post caller records packed allocation for post-result transfer/cancellation. Synchronous SendMessage also uses branch, so cannot delegate all failure cleanup to PostMessage-only owner."
+    }
+  ],
+  "evidence_paths": [
+    "src/mvdm-host/wow32/wdde.c::DDECopyhData32",
+    "src/mvdm-host/wow32/wdde.c::DDEAddhandle/DDETrackhandle/DDERollback32",
+    "src/mvdm-host/wow32/wumsg.c::WU32PostMessage/W32CancelDDEPost/WU32SendMessage"
+  ],
+  "verification": "Source analysis only; final whole-file focused and Full testing pending. Existing alias fixture covers failed marking and caller cancellation, not all conversion-to-post paths.",
+  "whole_file_mirror_total": 243,
+  "batch_mirror_delta": -28
+}
