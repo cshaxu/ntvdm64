@@ -1266,3 +1266,5 @@ P199: [SMB macro header mapping](batch-p199-checkpoint.json):6 excluded diff unc
 P200: [SMB types header mapping](batch-p200-checkpoint.json):12 excluded diff unchanged;raw26->24;14 contexts and4 negative profiles;original boundary lines restored.
 
 P201: [VDM header mapping](batch-p201-checkpoint.json):26 excluded diff unchanged;8 actual contexts/4 negative profiles;original boundary lines restored without monitor behavior changes.
+
+P202: [Debug header mapping](batch-p202-checkpoint.json):6 excluded diff unchanged;raw9->8;6 contexts/DBG negative;original conditional line and CRLF restored.

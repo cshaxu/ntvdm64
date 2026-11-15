@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2024 reviewed:702 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1314 qualified pending;696 unreviewed. Files287/365 audited,78 remain.
+2025 reviewed:703 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1314 qualified pending;695 unreviewed. Files288/365 audited,77 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -176,12 +176,6 @@ P186 apimsg533->7(-526):original descriptors and complete function bodies restor
 
 P187 apisrv1067->190(-877):original linkable bodies and error semantics restored;includes4 and Enum3 omission180 pending,excluded6 retained.901 source/607 MSVC lines match;focused37,cached,publish11x2,Full passed. Original C4701 remains disclosed;RDP shared Clipboard still fails with external holders. Git accompanies receipt.
 
-P191 xssubs2 unchanged:original bytes except include match;1407 content/747 actual MSVC lines preserved. Original header C1083 smb.h;one decision. No product changes;P187 evidence reused;Git accompanies receipt.
-
-P192 xsunicod2 unchanged:original bytes except include match;165 content/93 actual MSVC lines preserved. Original header C1083 smb.h;one decision. No product changes;P187 evidence reused;Git accompanies receipt.
-
-P193 xsunicod.h18 unchanged(all excluded):redundant#line46 removed,endif#line83 restored;one#error retained.7 actual contexts original/before/final tokens and20 selected header lines equal;ANSI negative C1189;90 source lines match. P187 product evidence reused;Git accompanies receipt.
-
 P194 dlcio.h75 unchanged(all excluded):original CRLF restored;redundant#line470 removed,else#line734 restored;two#error retained.5 contexts original/before/final tokens and354 header lines equal;two negative C1189;654 source lines match. P187 product evidence reused;Git accompanies receipt.
 
 P195 ntddser.h10 unchanged(all excluded):CRLF preserved;redundant#line37 moved to endif#line42;three#error retained.3 contexts original/before/final tokens and124 header lines equal;two negative C1189;578 source lines match. P187 product evidence reused;Git accompanies receipt.
@@ -197,3 +191,4 @@ P199 smbmacro.h6 unchanged(all excluded),raw8 unchanged:original endif99 restore
 P200 smbtypes.h12 unchanged(all excluded),raw26->24(-2):conditional boundary lines restored;4#error retained;line directives14->12.14 contexts/42 preprocessings tokens and114 header lines equal;4 negative profiles rejected;291 source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p200-checkpoint.json).
 
 P201 vdm.h26 unchanged(all excluded),raw40 unchanged:conditional boundary lines restored;5#error retained.8 representative host/DEM/DPMI/WOW contexts tokens/header lines equal;4 negative profiles rejected;literal if0 retained;366 source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p201-checkpoint.json).
+P202 debuglib.h6 unchanged(all excluded),raw9->8(-1):else149 and original CRLF restored;DBG#error retained;line directives3->2.6 contexts tokens equal;negative DBG rejected;109 source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p202-checkpoint.json).

@@ -1,0 +1,75 @@
+{
+  "status": "original release macros confirmed;conditional line mapping and original CRLF restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+    "sha256": "a78caf76be221cc7f06a88a56bc9325749ae46d10c4bf43b8638cbc6506c17b8",
+    "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+    "source_lines": 109,
+    "contexts": [
+      {
+        "unit": "xlatesvc",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "time",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "svcinfo",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "packstr",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "ntstatus",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "memalloc",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 6,
+    "mirror_after": 6,
+    "mirror_delta": 0,
+    "raw_before": 9,
+    "raw_after": 8,
+    "errors": 1,
+    "line_directives_before": 3,
+    "line_directives_after": 2,
+    "negative_controls": [
+      "DBG=1"
+    ],
+    "line_endings": "Original CRLF restored from prior LF;metrics normalize line endings",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "sha256": "a78caf76be221cc7f06a88a56bc9325749ae46d10c4bf43b8638cbc6506c17b8"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+    "sha256": "a78caf76be221cc7f06a88a56bc9325749ae46d10c4bf43b8638cbc6506c17b8"
+  },
+  "mirror_before": 6,
+  "mirror_after": 6,
+  "mirror_delta": 0,
+  "raw_before": 9,
+  "raw_after": 8,
+  "change": "Remove redundant line144 and157;restore original else149;retain selected-arm150. Original CRLF restored from LF. DBG error remains.",
+  "call_chain": "Six formal x86 netlib consumers:xlatesvc,time,svcinfo,packstr,ntstatus,memalloc. Original release IF_DEBUG and all constants unchanged.",
+  "verification": "18 preprocessings with explicit variant inclusion;full TU tokens equal. Macro-only header emits zero declarations;109 retained original source lines map correctly. DBG=1 fails C1189.",
+  "counter_review": "Only original5-line DBG body replaced by mandated error;all other contents match original. Directive count3->2;no behavior or binding change.",
+  "product_verification": "P187 product evidence reused for token/selected-line-equivalent formatting;11x2 publication hashes rechecked. Shared Clipboard failure remains disclosed in P197.",
+  "delivery": "P202 governance commit push accompany receipt"
+}

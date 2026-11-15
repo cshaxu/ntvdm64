@@ -141,8 +141,8 @@ Revision History:
 
 /*lint -save -e767 */  // Don't complain about different definitions
 #if DBG
-#line 144
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 149
 #else
 #line 150
 
@@ -152,7 +152,6 @@ Revision History:
     /*lint -restore */
 
 #endif // DBG
-#line 157
 /*lint -restore */  // Resume checking for different macro definitions
 
 #endif // _DEBUGLIB_
