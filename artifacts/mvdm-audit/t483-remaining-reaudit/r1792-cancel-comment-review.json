@@ -1,0 +1,12 @@
+{
+  "review_id": "T483-R1792",
+  "path": "src/mvdm-host/wow32/wsdata.c",
+  "original_line": 1775,
+  "before": "+3/-0",
+  "after": "+0/-0",
+  "mirror_diff_delta": -3,
+  "implementation": "Removed the three added explanatory comment lines;original function opening/declaration resumes at existing #line1775.",
+  "evidence": "No executable token or binding changed. The original stub versus native cancellation behavior is reviewed at following points, not justified by this comment.",
+  "verification": "Exact deleted comment block;existing #line1775 retained;final whole-file preprocessing/delivery will follow remaining points.",
+  "status": "Restored comment-only point locally;whole-file audit remains active"
+}

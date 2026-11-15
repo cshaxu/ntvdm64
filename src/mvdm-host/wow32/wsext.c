@@ -814,12 +814,19 @@ WWS32DispatchPostMessage (
     // 16-bit message that that routine will post.
     //
 
+    RtlEnterCriticalSection( &WWS32CriticalSection );
+    __try {
+#line 803
     return WWS32PostDispatchTable[Msg & 0xFFFF](
                hWnd,
                Msg,
                wParam,
                lParam
                );
+    } __finally {
+        RtlLeaveCriticalSection( &WWS32CriticalSection );
+    }
+#line 809
 
 } // WWS32DispatchPostMessage
 

@@ -6,8 +6,9 @@ if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgn
 $null=New-Item -ItemType Directory -Force $out
 $source='src/mvdm-host/wow32/wsdata.c';$s=[IO.File]::ReadAllText((Resolve-Path $source))
 $bodies=@()
-foreach($name in @('WWS32CancelAsyncRequestsForTask','WWS32FindAndRemoveAsyncContext')){
- $m=[regex]::Match($s,'(?m)^(?:VOID|PWINSOCK_ASYNC_CONTEXT_BLOCK)\s+'+$name+'\s*\(')
+foreach($name in @('WWS32FindAsyncTaskHandle32','WWS32CancelAsyncRequestsForTask','WWS32FindAndRemoveAsyncContext','WWS32DispatchPostMessage')){
+ if($name -eq 'WWS32DispatchPostMessage'){$s=[IO.File]::ReadAllText((Join-Path $repo 'src/mvdm-host/wow32/wsext.c'))}
+ $m=[regex]::Match($s,'(?m)^(?:BOOL|HANDLE|VOID|PWINSOCK_ASYNC_CONTEXT_BLOCK)\s+'+$name+'\s*\(')
  if(!$m.Success){throw "Missing $name"}
  $i=$s.IndexOf('{',$m.Index)+1;$depth=1
  while($depth -and $i -lt $s.Length){if($s[$i] -eq '{'){++$depth}elseif($s[$i] -eq '}'){--$depth};++$i}

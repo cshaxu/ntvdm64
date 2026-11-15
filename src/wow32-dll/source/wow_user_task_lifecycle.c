@@ -1798,7 +1798,10 @@ BOOL WINAPI wow_user_task_prepare_exit(void)
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
     binding->resource_cleanup_live = TRUE;
-    __try { result = destroy_terminal_windows(owner, task, binding); }
+    __try {
+        wow_user_task_retire_async();
+        result = destroy_terminal_windows(owner, task, binding);
+    }
     __finally { binding->resource_cleanup_live = FALSE; }
     return result;
 }

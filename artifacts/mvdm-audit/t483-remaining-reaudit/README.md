@@ -1099,21 +1099,21 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 
 - [P148 counter-review](p148-counter-review.json):source freeze,ownership boundaries and synchronized pending residuals;all gates passed.
 
-- [R1661–R1665](r1661-r1665-wmsgem-review.json): Edit converter whole-file review;comment/line-only diff-4,141 retained lines;P149 full delivery verified.
+- [R1661â€“R1665](r1661-r1665-wmsgem-review.json): Edit converter whole-file review;comment/line-only diff-4,141 retained lines;P149 full delivery verified.
 
-- [R1666–R1669](r1666-r1669-wmsglb-review.json): ListBox full-file review;comments-only diff-3;original consumer and line evidence,P149 delivered.
+- [R1666â€“R1669](r1666-r1669-wmsglb-review.json): ListBox full-file review;comments-only diff-3;original consumer and line evidence,P149 delivered.
 
 - [R1670](r1670-wmsgsbm-review.json): whole-file original selected code and line identity;no source edits.
 
 - [R1671](r1671-wmtbl32-review.json): whole-file original selected code and line identity;no source edits.
 
-- [R1672–R1686](r1672-r1686-wole2-review.json): whole-file OLE alias reduction97->42;native evidence and original line proof;P149 gates passed.
+- [R1672â€“R1686](r1672-r1686-wole2-review.json): whole-file OLE alias reduction97->42;native evidence and original line proof;P149 gates passed.
 
 - [P149 checkpoint](batch-p149-checkpoint.json) and [line proof](batch-p149-line-check.json): frozen whole-file batch,all delivery gates passed.
 
 - [P149 counter-review](p149-counter-review.json): source freeze,original contracts,ownership and ordered-register reconciliation.
 
-- [R1687–R1708](r1687-r1708-wow32-review.json): complete wow32.c dispositions,net mirror diff-37;[line proof](batch-p150-line-check.json). P150 full delivery verified.
+- [R1687â€“R1708](r1687-r1708-wow32-review.json): complete wow32.c dispositions,net mirror diff-37;[line proof](batch-p150-line-check.json). P150 full delivery verified.
 
 - [P150 receipt](batch-p150-checkpoint.json) and [counter-review](p150-counter-review.json): cached build,publish11x2,focused andFull19 passed.
 
@@ -1121,13 +1121,13 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 
 - [R1710 wow32.h](r1710-wow32-header-review.json):25 approved exclusion blocks only;102 selected original logical lines match actual MSVC preprocessing;no source change.227/365 files;1710/2720 points,1010 remain.
 
-- [R1711–R1720 fax investigation](r1711-r1720-fax-investigation.json): original/current/minimized exact-function contrasts;candidate diff41->30,not applied or delivered;full-file line/binding review remains.
+- [R1711â€“R1720 fax investigation](r1711-r1720-fax-investigation.json): original/current/minimized exact-function contrasts;candidate diff41->30,not applied or delivered;full-file line/binding review remains.
 
-- [R1711–R1720 complete source review](r1711-r1720-fax-review.json):mirror41->30(-11),698 logical lines match;3 local restorations,7 minimized/necessary residuals;P151 delivery pending.
+- [R1711â€“R1720 complete source review](r1711-r1720-fax-review.json):mirror41->30(-11),698 logical lines match;3 local restorations,7 minimized/necessary residuals;P151 delivery pending.
 
 - [P151 receipt](batch-p151-checkpoint.json):cached full,publish11x2,final fax135,Full19/shared boundary/governance passed;mirror diff net-11;Git accompanies receipt.
 
-- [R1721–R1764 hook investigation](r1721-r1764-hook-investigation.json):fixed baseline and complete diff;actual wrapper/scheduler chain and fixture limitations;not a completed disposition.
+- [R1721â€“R1764 hook investigation](r1721-r1764-hook-investigation.json):fixed baseline and complete diff;actual wrapper/scheduler chain and fixture limitations;not a completed disposition.
 
 - [P152 line proof](batch-p152-line-check.json) and [delivery checkpoint](batch-p152-checkpoint.json):wowhooks mirror151->125;1048 original selected lines match;cached/full delivery pending.
 
@@ -1142,3 +1142,19 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [R1772-R1774 DC cache](r1772-r1774-dc-cache-review.json): exact original C/header restored;three coupled callers;mirror diff -14;native release controls passed;final delivery pending.
 
 - [P154 receipt](batch-p154-checkpoint.json) and [line proof](batch-p154-line-check.json):cached full,publish11x2,DC/window-borrow and Full19 passed;mirror net-14;supersedes pending-delivery notes above.
+
+- [R1775 resource review](r1775-resource-review.json):only authorized DEBUG exclusion;365actual preprocessed retained lines match;no source change.
+
+- [R1776 wsdata lines](r1776-wsdata-lines-review.json):22 shifted statements corrected;1030actual retained lines match;line-only local change;remaining file points precede next product batch.
+
+- [R1777-R1778 Winsock](r1777-r1778-winsock-review.json):allocation-result and task-ownership source evidence;minimal unchanged residuals pending owner decision;whole file not complete.
+
+- [R1779-R1791 Winsock](r1779-r1791-winsock-review.json):six constructors/three converters checked;qualified residuals pending;redundant comment removed;mirror231->228;file review continues.
+
+- [R1792 cancel comment](r1792-cancel-comment-review.json):original comment content restored;mirror-3;no execution change;whole-file review continues.
+
+- [R1793-R1798 cancellation](r1793-r1798-cancel-review.json):reuse original native removal;delete duplicate alias removal;batch mirror-64;final lines1030/0,focused336/0;delivery pending. Coupled R1438 residual remains pending.
+
+P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-review.md).
+
+- [P155 final receipt](batch-p155-checkpoint.json):mirror net-59;cached,publish11x2,focused353,five Win16 modes,Full19 passed. Approved completion synchronization retained for revisit.

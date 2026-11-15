@@ -1,0 +1,187 @@
+{
+  "path": "src/mvdm-host/wow32/wsdata.c",
+  "points": [
+    {
+      "id": "T483-R1779",
+      "kind": "guard",
+      "problem": "Second buffer allocation failure check",
+      "evidence": "Original returns from failed context allocation first, then allocates buffer32 but retests context. malloc_w can return NULL. It therefore bypasses existing WSAENOBUFS cleanup and supplies NULL with a nonzero buffer length. The original host/protocol/service async workers copy result structures into that buffer;this is a concrete invalid-buffer counterexample,not a conjectured scheduling race.",
+      "minimum": "Keep one operand substitution;no helper or parallel path.",
+      "remaining": "+1/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1780",
+      "kind": "owner",
+      "problem": "Task ownership and retirement-state initialization",
+      "evidence": "Original native WSAStartup is process-wide;task cleanup does not terminate the provider. Global async records have no task owner;original post conversion writes vBuffer16 before PostMessage validates the window. Existing task serial identifies the cleanup subset;uninitialized nonzero retirement flags could suppress a live completion. Each of the six real constructors initializes exactly once before submission.",
+      "minimum": "Keep two direct assignments;no new ID or table. Complete rundown algorithm remains separately reviewed at R1797.",
+      "remaining": "+2/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1781",
+      "kind": "completion",
+      "problem": "Completion after context retirement",
+      "evidence": "FindAndRemoveAsyncContext deliberately returns NULL after retired-task completion or after an already-removed cancellation. All three original completion functions only ASSERT nonnull,then access context on both success and message-post paths. In the selected PROD build the ASSERT does not stop this dereference. The same lookup owner must tell the converter to stop;adding a second context registry would duplicate ownership.",
+      "minimum": "Keep the three-line NULL return. R1781 redundant explanation removed;R1786/R1791 already use that minimal readable form.",
+      "remaining": "+3/-1",
+      "delta": -3
+    },
+    {
+      "id": "T483-R1782",
+      "kind": "guard",
+      "problem": "Second buffer allocation failure check",
+      "evidence": "Original returns from failed context allocation first, then allocates buffer32 but retests context. malloc_w can return NULL. It therefore bypasses existing WSAENOBUFS cleanup and supplies NULL with a nonzero buffer length. The original host/protocol/service async workers copy result structures into that buffer;this is a concrete invalid-buffer counterexample,not a conjectured scheduling race.",
+      "minimum": "Keep one operand substitution;no helper or parallel path.",
+      "remaining": "+1/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1783",
+      "kind": "owner",
+      "problem": "Task ownership and retirement-state initialization",
+      "evidence": "Original native WSAStartup is process-wide;task cleanup does not terminate the provider. Global async records have no task owner;original post conversion writes vBuffer16 before PostMessage validates the window. Existing task serial identifies the cleanup subset;uninitialized nonzero retirement flags could suppress a live completion. Each of the six real constructors initializes exactly once before submission.",
+      "minimum": "Keep two direct assignments;no new ID or table. Complete rundown algorithm remains separately reviewed at R1797.",
+      "remaining": "+2/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1784",
+      "kind": "guard",
+      "problem": "Second buffer allocation failure check",
+      "evidence": "Original returns from failed context allocation first, then allocates buffer32 but retests context. malloc_w can return NULL. It therefore bypasses existing WSAENOBUFS cleanup and supplies NULL with a nonzero buffer length. The original host/protocol/service async workers copy result structures into that buffer;this is a concrete invalid-buffer counterexample,not a conjectured scheduling race.",
+      "minimum": "Keep one operand substitution;no helper or parallel path.",
+      "remaining": "+1/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1785",
+      "kind": "owner",
+      "problem": "Task ownership and retirement-state initialization",
+      "evidence": "Original native WSAStartup is process-wide;task cleanup does not terminate the provider. Global async records have no task owner;original post conversion writes vBuffer16 before PostMessage validates the window. Existing task serial identifies the cleanup subset;uninitialized nonzero retirement flags could suppress a live completion. Each of the six real constructors initializes exactly once before submission.",
+      "minimum": "Keep two direct assignments;no new ID or table. Complete rundown algorithm remains separately reviewed at R1797.",
+      "remaining": "+2/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1786",
+      "kind": "completion",
+      "problem": "Completion after context retirement",
+      "evidence": "FindAndRemoveAsyncContext deliberately returns NULL after retired-task completion or after an already-removed cancellation. All three original completion functions only ASSERT nonnull,then access context on both success and message-post paths. In the selected PROD build the ASSERT does not stop this dereference. The same lookup owner must tell the converter to stop;adding a second context registry would duplicate ownership.",
+      "minimum": "Keep the three-line NULL return. R1781 redundant explanation removed;R1786/R1791 already use that minimal readable form.",
+      "remaining": "+3/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1787",
+      "kind": "guard",
+      "problem": "Second buffer allocation failure check",
+      "evidence": "Original returns from failed context allocation first, then allocates buffer32 but retests context. malloc_w can return NULL. It therefore bypasses existing WSAENOBUFS cleanup and supplies NULL with a nonzero buffer length. The original host/protocol/service async workers copy result structures into that buffer;this is a concrete invalid-buffer counterexample,not a conjectured scheduling race.",
+      "minimum": "Keep one operand substitution;no helper or parallel path.",
+      "remaining": "+1/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1788",
+      "kind": "owner",
+      "problem": "Task ownership and retirement-state initialization",
+      "evidence": "Original native WSAStartup is process-wide;task cleanup does not terminate the provider. Global async records have no task owner;original post conversion writes vBuffer16 before PostMessage validates the window. Existing task serial identifies the cleanup subset;uninitialized nonzero retirement flags could suppress a live completion. Each of the six real constructors initializes exactly once before submission.",
+      "minimum": "Keep two direct assignments;no new ID or table. Complete rundown algorithm remains separately reviewed at R1797.",
+      "remaining": "+2/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1789",
+      "kind": "guard",
+      "problem": "Second buffer allocation failure check",
+      "evidence": "Original returns from failed context allocation first, then allocates buffer32 but retests context. malloc_w can return NULL. It therefore bypasses existing WSAENOBUFS cleanup and supplies NULL with a nonzero buffer length. The original host/protocol/service async workers copy result structures into that buffer;this is a concrete invalid-buffer counterexample,not a conjectured scheduling race.",
+      "minimum": "Keep one operand substitution;no helper or parallel path.",
+      "remaining": "+1/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1790",
+      "kind": "owner",
+      "problem": "Task ownership and retirement-state initialization",
+      "evidence": "Original native WSAStartup is process-wide;task cleanup does not terminate the provider. Global async records have no task owner;original post conversion writes vBuffer16 before PostMessage validates the window. Existing task serial identifies the cleanup subset;uninitialized nonzero retirement flags could suppress a live completion. Each of the six real constructors initializes exactly once before submission.",
+      "minimum": "Keep two direct assignments;no new ID or table. Complete rundown algorithm remains separately reviewed at R1797.",
+      "remaining": "+2/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1791",
+      "kind": "completion",
+      "problem": "Completion after context retirement",
+      "evidence": "FindAndRemoveAsyncContext deliberately returns NULL after retired-task completion or after an already-removed cancellation. All three original completion functions only ASSERT nonnull,then access context on both success and message-post paths. In the selected PROD build the ASSERT does not stop this dereference. The same lookup owner must tell the converter to stop;adding a second context registry would duplicate ownership.",
+      "minimum": "Keep the three-line NULL return. R1781 redundant explanation removed;R1786/R1791 already use that minimal readable form.",
+      "remaining": "+3/-1",
+      "delta": 0
+    }
+  ],
+  "constructors": [
+    {
+      "function": "WWS32WSAAsyncGetHostByAddr",
+      "two_allocations": 2,
+      "original_wrong_guard": true,
+      "current_checks_buffer": true,
+      "owner_assignments": 1,
+      "state_initializations": 1,
+      "existing_error_cleanup": true
+    },
+    {
+      "function": "WWS32WSAAsyncGetHostByName",
+      "two_allocations": 2,
+      "original_wrong_guard": true,
+      "current_checks_buffer": true,
+      "owner_assignments": 1,
+      "state_initializations": 1,
+      "existing_error_cleanup": true
+    },
+    {
+      "function": "WWS32WSAAsyncGetProtoByName",
+      "two_allocations": 2,
+      "original_wrong_guard": true,
+      "current_checks_buffer": true,
+      "owner_assignments": 1,
+      "state_initializations": 1,
+      "existing_error_cleanup": true
+    },
+    {
+      "function": "WWS32WSAAsyncGetProtoByNumber",
+      "two_allocations": 2,
+      "original_wrong_guard": true,
+      "current_checks_buffer": true,
+      "owner_assignments": 1,
+      "state_initializations": 1,
+      "existing_error_cleanup": true
+    },
+    {
+      "function": "WWS32WSAAsyncGetServByPort",
+      "two_allocations": 2,
+      "original_wrong_guard": true,
+      "current_checks_buffer": true,
+      "owner_assignments": 1,
+      "state_initializations": 1,
+      "existing_error_cleanup": true
+    },
+    {
+      "function": "WWS32WSAAsyncGetServByName",
+      "two_allocations": 2,
+      "original_wrong_guard": true,
+      "current_checks_buffer": true,
+      "owner_assignments": 1,
+      "state_initializations": 1,
+      "existing_error_cleanup": true
+    }
+  ],
+  "mirror_diff": {
+    "before": 231,
+    "after": 228,
+    "delta": -3
+  },
+  "implementation": "Only three redundant added comment lines removed at R1781;#line514 and all executable tokens at these points retained.",
+  "counter_review": "Allocator and async copy failure are source-proven;no actual low-memory production crash is claimed. Task ownership necessity does not prove every current rundown bit necessary. Existing extracted-body fixture assumes provider terminal errors itself;it is not accepted as proof of provider cancellation semantics.",
+  "line_proof": "Explicit #line514 still resumes original host completion source. Whole-file final preprocessing will follow all R1792-R1798 edits.",
+  "status": "Qualified residuals pending owner choice;file remains in review."
+}

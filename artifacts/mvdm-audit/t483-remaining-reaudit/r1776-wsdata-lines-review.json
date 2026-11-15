@@ -1,0 +1,17 @@
+{
+  "review_id": "T483-R1776",
+  "path": "src/mvdm-host/wow32/wsdata.c",
+  "problem": "Missing original line resumption after added retired-context handling shifts22selected statements by15lines",
+  "implementation": "Insert #line1824 before original blank/comment/RemoveEntryList continuation",
+  "mirror_diff_delta": 0,
+  "executable_change": false,
+  "line_proof": {
+    "selected_retained_lines": 1030,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "verification": "Actual original/current MSVC preprocessing;whole-file production delivery deferred until R1777-R1798 complete",
+  "before_sha256": "01441093111cbc6d9af499e16b05d8367a869ea1cb19e238b975bc781b94f8de",
+  "after_sha256": "fd148e46b8163e9ae7047fc6e22c1504abe919df4700a8ab80d83a48ffb9dd52"
+}

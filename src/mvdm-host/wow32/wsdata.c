@@ -517,9 +517,6 @@ WWS32PostAsyncGetHost (
 
     context = WWS32FindAndRemoveAsyncContext( (HANDLE)wParam );
     if ( context == NULL ) {
-        // A successful cancel or task rundown detaches the context before
-        // asking WSOCK32 to stop it.  A completion already queued by the
-        // provider is therefore stale and must not touch freed guest memory.
         return TRUE;
     }
 #line 514
@@ -1802,14 +1799,10 @@ BytesInServent32 (
 
 ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
 {
-    /* DIVERGENCE(MVDM-HOST-DIV-463): the selected source leaves this
-       mapped WINSOCK operation as WSAEINVAL, although it already owns the
-       native request identity in the existing async-context list. */
 #line 1775
     ULONG ul;
     register PWSACANCELASYNCREQUEST16 parg16;
     HANDLE asyncTaskHandle32;
-    HAND16 asyncTaskHandle16;
     PWINSOCK_ASYNC_CONTEXT_BLOCK context;
 #line 1777
 
@@ -1819,14 +1812,13 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
     }
 
     GETARGPTR(pFrame, sizeof(WSACANCELASYNCREQUEST16), parg16);
-    asyncTaskHandle16 = GETWORD16( parg16->hAsyncTaskHandle );
 #line 1784
 
-    if ( !WWS32FindAsyncTaskHandle32(
-              asyncTaskHandle16,
-              WWS32ThreadSerialNumber,
-              &asyncTaskHandle32
-              ) ) {
+    asyncTaskHandle32 = WWS32FindAsyncTaskHandle32(
+                            GETWORD16( parg16->hAsyncTaskHandle ),
+                            WWS32ThreadSerialNumber
+                            );
+    if ( asyncTaskHandle32 == NULL ) {
 
         FREEARGPTR(parg16);
         SetLastError( WSAEINVAL );
@@ -1841,13 +1833,7 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
 
     if ( ul == NO_ERROR ) {
-        // WSOCK32 has accepted the cancellation.  Remove the matching
-        // context before a queued post can reach the task's guest buffer.
-        // A completion that won the race has already removed and released it.
-        context = WWS32FindAndRemoveAsyncContext16(
-                      asyncTaskHandle16,
-                      WWS32ThreadSerialNumber
-                      );
+        context = WWS32FindAndRemoveAsyncContext( asyncTaskHandle32 );
         if ( context != NULL ) {
             free_w( context->Buffer32 );
             free_w( (PVOID)context );
@@ -1860,55 +1846,17 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
 } // WWS32WSACancelAsyncRequest
 
 
-BOOL
+HANDLE
 WWS32FindAsyncTaskHandle32 (
-    IN HAND16 AsyncTaskHandle16,
-    IN DWORD ThreadSerialNumber,
-    OUT HANDLE *AsyncTaskHandle32
-    )
-{
-    PWINSOCK_ASYNC_CONTEXT_BLOCK context;
-    PLIST_ENTRY listEntry;
-    BOOL found;
-
-    found = FALSE;
-    RtlEnterCriticalSection( &WWS32CriticalSection );
-
-    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
-          listEntry != &WWS32AsyncContextBlockListHead;
-          listEntry = listEntry->Flink ) {
-
-        context = CONTAINING_RECORD(
-                      listEntry,
-                      WINSOCK_ASYNC_CONTEXT_BLOCK,
-                      ContextBlockListEntry
-                      );
-
-        if ( context->AsyncTaskHandle16 == AsyncTaskHandle16 &&
-             context->ThreadSerialNumber == ThreadSerialNumber ) {
-
-            *AsyncTaskHandle32 = context->AsyncTaskHandle32;
-            found = TRUE;
-            break;
-        }
-    }
-
-    RtlLeaveCriticalSection( &WWS32CriticalSection );
-
-    return found;
-
-} // WWS32FindAsyncTaskHandle32
-
-
-PWINSOCK_ASYNC_CONTEXT_BLOCK
-WWS32FindAndRemoveAsyncContext16 (
     IN HAND16 AsyncTaskHandle16,
     IN DWORD ThreadSerialNumber
     )
 {
     PWINSOCK_ASYNC_CONTEXT_BLOCK context;
     PLIST_ENTRY listEntry;
+    HANDLE asyncTaskHandle32;
 
+    asyncTaskHandle32 = NULL;
     RtlEnterCriticalSection( &WWS32CriticalSection );
 
     for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
@@ -1924,16 +1872,16 @@ WWS32FindAndRemoveAsyncContext16 (
         if ( context->AsyncTaskHandle16 == AsyncTaskHandle16 &&
              context->ThreadSerialNumber == ThreadSerialNumber ) {
 
-            RemoveEntryList( &context->ContextBlockListEntry );
-            RtlLeaveCriticalSection( &WWS32CriticalSection );
-            return context;
+            asyncTaskHandle32 = context->AsyncTaskHandle32;
+            break;
         }
     }
 
     RtlLeaveCriticalSection( &WWS32CriticalSection );
-    return NULL;
 
-} // WWS32FindAndRemoveAsyncContext16
+    return asyncTaskHandle32;
+
+} // WWS32FindAsyncTaskHandle32
 
 
 VOID
@@ -1947,9 +1895,6 @@ WWS32CancelAsyncRequestsForTask(
     INT error;
     BOOL release;
 
-    /* MVDM-HOST-DIV-882: retire guest ownership before calling the provider.
-       Keep native buffers discoverable until cancellation or completion proves
-       the provider is finished. No list lock is held across cancellation. */
     RtlEnterCriticalSection( &WWS32CriticalSection );
     for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
           listEntry != &WWS32AsyncContextBlockListHead;
@@ -2026,8 +1971,6 @@ WWS32FindAndRemoveAsyncContext (
                       );
 
         if ( context->AsyncTaskHandle32 == AsyncTaskHandle32 ) {
-            /* MVDM-HOST-DIV-882: a retired task cannot receive this result.
-               A reentrant completion leaves release to its active canceler. */
             if ( context->RundownState & WWS32_ASYNC_RETIRED ) {
                 if ( context->RundownState & WWS32_ASYNC_CANCEL_ACTIVE ) {
                     context->RundownState |= WWS32_ASYNC_COMPLETED;
@@ -2041,6 +1984,7 @@ WWS32FindAndRemoveAsyncContext (
                 return NULL;
             }
 
+#line 1824
 
             //
             // Found a match.  Remove it from the global list, leave

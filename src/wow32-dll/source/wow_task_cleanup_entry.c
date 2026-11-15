@@ -37,6 +37,14 @@ BOOL WINAPI wow_user_task_cleanup_uninitialized(DWORD task_id)
  * and incomplete-startup exits which do not necessarily send that signal. */
 VOID WowOriginalFreeTask(PVOID);
 
+/* Retire async guest-buffer users before the guest frees task segments.
+ * The original late cleanup still owns per-thread data and socket release. */
+VOID WINAPI wow_user_task_retire_async(void)
+{
+    if (WWS32IsThreadInitialized)
+        WWS32CancelAsyncRequestsForTask(WWS32ThreadSerialNumber);
+}
+
 VOID W32FreeTask(PVOID task)
 {
     if (!wow_user_task_prepare_exit())

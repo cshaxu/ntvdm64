@@ -13,6 +13,8 @@ $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned output required'}
 $null=New-Item -ItemType Directory $root
+# Success is published only after the complete case, including owned cleanup.
+'1'|Set-Content "$root/result.exit"
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null;$process=$null
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
@@ -45,11 +47,12 @@ try {
  if($Mode -eq 'TaskLoss' -and ($row.phase -ne 3 -or $row.completion -or $row.freed -or $row.cancel)){throw 'Async Winsock task-loss witness failed'}
  if($Mode -eq 'AsyncSelect' -and ($row.phase -ne 2 -or $row.completion -ne 1 -or !$row.select -or !$row.disabled -or !$row.closed)){throw 'Win16 WSAAsyncSelect witness failed'}
  if($Mode -eq 'AsyncSelectTaskLoss' -and ($row.phase -ne 3 -or $row.completion -or !$row.select -or $row.disabled -or $row.closed)){throw 'Win16 WSAAsyncSelect task-loss witness failed'}
- "PASS real Win16 Winsock async $Mode witness"|Set-Content "$root/result.txt"
- '0'|Set-Content "$root/result.exit"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";'1'|Set-Content "$root/result.exit";throw}
 finally {
  if($process){if(!$process.HasExited){$process.Kill();$process.WaitForExit(5000)|Out-Null};$process.Dispose()}
  try {if($runtime -and (Test-Path "$runtime/tests/WSKASYNC.BIN")){Copy-Item "$runtime/tests/WSKASYNC.BIN" "$root/guest-report.bin" -Force}}
  finally {try {if($scope){Stop-IsolatedPackageScope $scope}}finally {try {if($runtime){Remove-PhysicalRuntimeStage $runtime}}finally {foreach($name in $saved.Keys){[Environment]::SetEnvironmentVariable($name,$saved[$name])}}}}
 }
+
+"PASS real Win16 Winsock async $Mode witness; owned cleanup completed"|Set-Content "$root/result.txt"
+'0'|Set-Content "$root/result.exit"

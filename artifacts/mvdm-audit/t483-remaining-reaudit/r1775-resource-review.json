@@ -1,0 +1,22 @@
+{
+  "review_id": "T483-R1775",
+  "path": "src/mvdm-host/wow32/wres16.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "24324d4b95b7c5ac102e9751872af1db779efc0cff223b32aa066034cb874ae9",
+  "current_sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f",
+  "semantic_diff": {
+    "added": 0,
+    "deleted": 0
+  },
+  "conclusion": "Only the authorized DEBUG resource-name helper exclusion remains;all other source exactly matches original after removing #line. No source modification.",
+  "original_failure_evidence": "Not applicable: no retained functional deviation. DEBUG exclusion follows selected PROD context and owner policy, not a defect in original DEBUG code.",
+  "line_proof": {
+    "selected_retained_lines": 365,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "old_warning": "Original #endif line77 is not emitted selected code. The active #line78 follows the group;all selected retained statements match actual original MSVC preprocessed line numbers.",
+  "verification": "Actual per-file wow_cflags extracted from current build.ninja;original/final copies preprocessed. First setup stopped because it read global flags instead of per-file flags;corrected run passed. P154 product full build/Full19 used unchanged current file.",
+  "delivery": "Unchanged already published P154 baseline;no additional product build or runtime claim."
+}

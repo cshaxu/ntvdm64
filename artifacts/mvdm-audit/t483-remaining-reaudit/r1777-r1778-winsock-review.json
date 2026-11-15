@@ -1,0 +1,26 @@
+{
+  "file": "src/mvdm-host/wow32/wsdata.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "points": [
+    {
+      "id": "T483-R1777",
+      "location": "original326",
+      "size": "+1/-1",
+      "problem": "Check the result of the second allocation",
+      "evidence": "wow32.c malloc_w returns HeapAlloc(...,0,...) including NULL. In WWS32WSAAsyncGetHostByAddr, context has already passed its guard. Original second guard retests context after buffer32 allocation; if buffer32 is NULL it still passes buffer32 to the provider with MAXGETHOSTSTRUCT. OpenNT olddb.c GETXBYYSP_WSAAsyncGetHostByAddr stores Buffer and queues it;SockProcessAsyncGetHost calls CopyHostentToBuffer;gethost.c copies HOSTENT into Buffer after only a length check. Current check uses the already-existing WSAENOBUFS/exit cleanup.",
+      "minimum": "Keep the one-token operand substitution;no helper or state. Restoring original loses the existing allocation-failure path. A new combined guard or allocator wrapper would not reduce mirror diff.",
+      "limits": "Source-level allocation-failure counterexample;no claim of reproduced production low-memory failure or current-provider crash."
+    },
+    {
+      "id": "T483-R1778",
+      "location": "original338",
+      "size": "+2/-0",
+      "problem": "Associate an async context with its existing task serial and initialize retirement state",
+      "evidence": "Original WWS32WSAStartup initializes native Winsock process-wide once, while task startup uses existing WWS32ThreadSerialNumber. Original WWS32TaskCleanup removes TLS and frees per-task data;the global async list has no task owner. Original DispatchPostMessage invokes PostAsyncGetHost, which copies to context->vBuffer16 before PostMessage validates the target window. Thus a queued success surviving task cleanup can address a departed task buffer;socket cleanup cannot identify these database requests. Reusing the existing serial in each context allows the same list owner to retire only that task. malloc_w does not zero memory;the current retirement state must start at zero before provider submission/list insertion.",
+      "minimum": "Keep these two assignments pending owner decision. Moving ownership to a second lookup table duplicates state. Zeroing the entire context with a different allocator adds a replaced original call without reducing the field contract. The complete rundown algorithm is reviewed separately at R1797;this does not approve all of it.",
+      "limits": "Complete source-level lifetime counterexample, not a measured scheduling race. Necessity of task ownership does not prove all four current retirement bits minimal."
+    }
+  ],
+  "implementation": "No change at these two points;qualified owner decisions. Whole-file review remains active.",
+  "line_status": "R1776 actual original/current preprocessing1030retained lines match after separate #line correction."
+}

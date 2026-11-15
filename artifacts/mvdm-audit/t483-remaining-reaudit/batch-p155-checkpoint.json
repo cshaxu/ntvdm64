@@ -1,0 +1,245 @@
+{
+  "batch": "P155",
+  "status": "Final-source cached full,publication11x2,focused353,five Win16 modes,Full19 and governance passed;Git accompanies receipt",
+  "source_files": 9,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "sha256": "c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def"
+    },
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "sha256": "14bfe1a54324736958561935ac88df621b330f2b362b2aa31bfdf8e30b06f2d2"
+    },
+    {
+      "path": "test/integration/verify-wow-winsock-rundown.ps1",
+      "sha256": "54280cad0c1a5459e382cdd97df9b12bb45ca859775e6f52d047989e91aef21c"
+    },
+    {
+      "path": "test/integration/wow_winsock_rundown_test.c",
+      "sha256": "300038a834db5dc8ed57125337147537f7b541e83959fe8183c7da23126effe8"
+    },
+    {
+      "path": "test/integration/verify-win16-winsock-async-probe.ps1",
+      "sha256": "62cde33e2d48ae492675d5448415d5df2419392406e85ffeef966f8e7832fce3"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "sha256": "990fe8c64d7cef1db71a534925fbc95081d69bacc2acc3de00fa2ff781262df4"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_task_cleanup_entry.c",
+      "sha256": "d6a1b003cc269accb15848fd9306eb7f84b69117134011fc53b8657253779d2c"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_cleanup_entry.h",
+      "sha256": "968bae786a85d8d6173ddc9f271ee9c940966d93b94c9180fd5e2f80a7f41b7e"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "sha256": "9b38f1bb5d187cc746172b2b35db9c934af9fa3a5c82bd3cd741cdd93d204eb7"
+    }
+  ],
+  "mirror_diff_delta": -59,
+  "mirror_files": [
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "before": 231,
+      "after": 174,
+      "delta": -57,
+      "sha256": "c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def"
+    },
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "before": 24,
+      "after": 17,
+      "delta": -7,
+      "sha256": "14bfe1a54324736958561935ac88df621b330f2b362b2aa31bfdf8e30b06f2d2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "before": 14,
+      "after": 19,
+      "delta": 5,
+      "approval": "Owner approved; retained for revisit"
+    }
+  ],
+  "package": "17dc788f-54fc-41f8-aa88-88be34743ad0",
+  "failure": {
+    "test": "Real Win16 TaskLoss",
+    "guest_report": "phase3/errors0 on both runs;insufficient for worker lifetime acceptance",
+    "runs": [
+      {
+        "stage": "O:/tmp/nf01",
+        "time": "2026-11-15T01:09:58-08:00",
+        "worker_pid": 408
+      },
+      {
+        "stage": "O:/tmp/n900",
+        "time": "2026-11-15T01:13:29-08:00",
+        "worker_pid": 23928
+      }
+    ],
+    "exception": "c0000005",
+    "module": "WOW32.DLL",
+    "rva": "0x5712",
+    "map_function": "wow_original_CallBack16 + 0x52",
+    "cleanup": "Both exact owned stages removed after source marker,remaining image hashes,no links/no active process verification. Immediate cleanup failures retained.",
+    "comparison": "Same TaskLoss probe on P154 package completed including cleanup once;does not alone prove cause",
+    "next": "No remaining failure in this batch;retain synchronization for revisit",
+    "instruction": "WOW32+5712: mov eax,[edi];EDI is current PTD;fault occurs while saving callerStack before callback body",
+    "diagnostic_runs": "Debugger runs did not reproduce. Pass-through VEH on independent package captured actual AV; see p155-taskloss-stack-review.md.",
+    "stack_review": "p155-taskloss-stack-review.md",
+    "captured_stack": {
+      "worker_pid": 34252,
+      "thread_id": 30336,
+      "edi": "0",
+      "read_address": "0",
+      "frames": [
+        "WOW32+5712 wow_original_CallBack16",
+        "WOW32+71b4b CallBack16",
+        "WOW32+18e0 GetPModeVDMPointerAssert",
+        "WS2_32+30615"
+      ],
+      "evidence": "build/t483-s5-p155/veh-trace-1.txt",
+      "limitation": "Does not independently identify exact selector invalidation time or guest exit branch"
+    },
+    "timing_witness": {
+      "file": "build/t483-s5-p155/phase-trace-3.txt",
+      "sha256": "0db411a1e955ccec92fe5ed4c6b8726523f32295aff0c6b6076f54815823e00b",
+      "pid": 36268,
+      "guest_thread": 10896,
+      "provider_thread": 7192,
+      "guest_buffer": "1797:00AE",
+      "request_owner": 1,
+      "order": [
+        "pre-resource-exit",
+        "convert",
+        "not-present CURRENTPTD=0",
+        "access violation",
+        "W32FreeTask",
+        "retire"
+      ],
+      "raw_trace": "PHASE pid=36268 tid=10896 tick=346302406 pre-resource-exit value=000017bf owner=00000000\nPHASE pid=36268 tid=7192 tick=346302421 convert value=179700ae owner=00000001\nPHASE pid=36268 tid=7192 tick=346302421 not-present value=179700ae owner=00000000\nAV pid=36268 tid=7192 ip=71e35742 edi=00000000 operation=0 address=00000000\npc=71e35742 module=O:\\tmp\\nde7\\system32\\WOW32.DLL rva=00005742\npc=71ea1c0b module=O:\\tmp\\nde7\\system32\\WOW32.DLL rva=00071c0b\npc=71e318f7 module=O:\\tmp\\nde7\\system32\\WOW32.DLL rva=000018f7\npc=77d70615 module=C:\\WINDOWS\\System32\\WS2_32.dll rva=00030615\npc=76b35d49 module=C:\\WINDOWS\\System32\\KERNEL32.DLL rva=00015d49\npc=77e4c88b module=C:\\WINDOWS\\SYSTEM32\\ntdll.dll rva=0006c88b\npc=77e4c811 module=C:\\WINDOWS\\SYSTEM32\\ntdll.dll rva=0006c811\nPHASE pid=36268 tid=10896 tick=346302421 free-task value=0588f930 owner=00000000\nPHASE pid=36268 tid=10896 tick=346302421 pre-resource-exit value=000017bf owner=00000000\nPHASE pid=36268 tid=10896 tick=346302437 retire value=00000001 owner=00000000\n"
+    },
+    "diagnostic_stage_cleanup": {
+      "roots": [
+        "O:/tmp/n1dd",
+        "O:/tmp/nde7"
+      ],
+      "verified_removed": true,
+      "proofs": [
+        "build/t483-s5-p155/n1dd-cleanup-proof.json",
+        "build/t483-s5-p155/nde7-cleanup-proof.json"
+      ],
+      "runner_pid": 5320,
+      "exit": 0
+    },
+    "resolution": "Existing pre-resource task exit now retires async requests;existing completion lock spans buffer conversion. Same failing real TaskLoss case and final-source Full passed. Original failing traces retained."
+  },
+  "full_gate_result": {
+    "passed": 19,
+    "failed": 0,
+    "does_not_supersede_TaskLoss_crash": true
+  },
+  "test_result_contract": {
+    "change": "Default failure marker; publish success only after owned cleanup completes",
+    "positive_and_negative": "build/t483-s5-p155/outcome-contract.txt",
+    "runner": "build/t483-s5-p155/verify-outcome.ps1",
+    "pid": 16432,
+    "exit": 0,
+    "scope": "Actual runner AST cleanup and final-result control flow; mocked cleanup success/failure only, not product acceptance",
+    "product_fix": "not implemented; mirror increment approval pending"
+  },
+  "pending_implementation_approval": {
+    "target": "src/mvdm-host/wow32/wsext.c::WWS32DispatchPostMessage",
+    "mirror_delta": 5,
+    "proposal": "Existing critical section plus try/finally spans original completion dispatch; call existing retirement at pre-resource task exit",
+    "implemented": true,
+    "reason": "Owner explicitly approved implementation and requested retained revisit",
+    "delivery_block": "none;owner-approved change verified and published",
+    "owner_decision": "Approved implementation; retain pending revisit"
+  },
+  "repair_validation": {
+    "focused_assertions": 353,
+    "failures": 0,
+    "cached_full_exit": 0,
+    "line_retained": 447,
+    "line_mismatches": 0,
+    "delivery_pid": 25464,
+    "runtime_result": "five real modes and Full19 passed"
+  },
+  "tests": {
+    "extracted_assertions": 353,
+    "failures": 0,
+    "Win16_modes": {
+      "Completion": {
+        "phase": 2,
+        "errors": 0,
+        "startup": 0,
+        "task": 2,
+        "completion": 1,
+        "freed": 1,
+        "cancel": 0,
+        "select": 0,
+        "disabled": 0,
+        "closed": 0
+      },
+      "Cancel": {
+        "phase": 2,
+        "errors": 0,
+        "startup": 0,
+        "task": 2,
+        "completion": 0,
+        "freed": 1,
+        "cancel": 1,
+        "select": 0,
+        "disabled": 0,
+        "closed": 0
+      },
+      "TaskLoss": {
+        "phase": 3,
+        "errors": 0,
+        "startup": 0,
+        "task": 2,
+        "completion": 0,
+        "freed": 0,
+        "cancel": 0,
+        "select": 0,
+        "disabled": 0,
+        "closed": 0
+      },
+      "AsyncSelect": {
+        "phase": 2,
+        "errors": 0,
+        "startup": 0,
+        "task": 0,
+        "completion": 1,
+        "freed": 1,
+        "cancel": 0,
+        "select": 1,
+        "disabled": 1,
+        "closed": 1
+      },
+      "AsyncSelectTaskLoss": {
+        "phase": 3,
+        "errors": 0,
+        "startup": 0,
+        "task": 0,
+        "completion": 0,
+        "freed": 0,
+        "cancel": 0,
+        "select": 1,
+        "disabled": 0,
+        "closed": 0
+      }
+    },
+    "Full_gates": 19
+  },
+  "limitations": [
+    "Owned scope cleanup is explicit test cleanup,not a claim of natural idle worker exit.",
+    "Synthetic provider failures supplement real guest cases;not exhaustive scheduling proof.",
+    "Approved five-line mirror increment remains an owner-requested revisit.",
+    "External DOS4GW/Nesticle fixtures unavailable;case skipped,not passed."
+  ]
+}

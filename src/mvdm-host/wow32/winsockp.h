@@ -169,15 +169,8 @@ WWS32FindAndRemoveAsyncContext (
     IN HANDLE AsyncTaskHandle32
     );
 
-BOOL
+HANDLE
 WWS32FindAsyncTaskHandle32 (
-    IN HAND16 AsyncTaskHandle16,
-    IN DWORD ThreadSerialNumber,
-    OUT HANDLE *AsyncTaskHandle32
-    );
-
-PWINSOCK_ASYNC_CONTEXT_BLOCK
-WWS32FindAndRemoveAsyncContext16 (
     IN HAND16 AsyncTaskHandle16,
     IN DWORD ThreadSerialNumber
     );

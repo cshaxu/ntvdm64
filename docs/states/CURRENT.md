@@ -34,8 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1774 reviewed:623 restored/confirmed published,0 local,8 approved,
-1143 qualified pending;946 unreviewed. Files235/365 audited,130 remain.
+1798 reviewed:627 restored/confirmed published,0 local restorations,8 approved,
+1163 qualified pending;922 unreviewed. Files237/365 audited,128 remain.
+P155 mirror batch-59;cached,publish11x2,focused353/0,five Win16 modes,Full19 and governance passed;Git accompanies receipt. Approved synchronization remains R1797 revisit.
 P154 DC cache original restored;mirror batch-14;cached,publish11x2,focused,Full19 passed;Git accompanies receipt.
 P153 header4->2;wparam106->94;cached,publish11x2,parameter54,Full19 passed;Git accompanies receipt.
 P152 delivered37bb1252f;P152 mirror151->125(-26);1048 lines match;cached,publish11x2,transactions183,Full19 passed;Git accompanies receipt.
@@ -58,8 +59,8 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P154 candidate `91441212-e53f-424a-aa0b-b16bbdae0b59` published11x2;hashes match.
-Final DC/window-borrow and Full19 passed;Git accompanies P154.
+P155 candidate `17dc788f-54fc-41f8-aa88-88be34743ad0` published11x2;hashes match.
+Final Winsock353/0,five real Win16 modes and Full19 passed;Git accompanies P155.
 Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p154-checkpoint.json).

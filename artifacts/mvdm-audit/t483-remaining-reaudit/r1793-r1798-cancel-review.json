@@ -1,0 +1,86 @@
+{
+  "path": "src/mvdm-host/wow32/wsdata.c",
+  "points": [
+    {
+      "id": "T483-R1793",
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "change": "Keep native handle and returned context locals;remove redundant alias local.",
+      "evidence": "Original WWS32WSACancelAsyncRequest is an unconditional WSAEINVAL stub. Native requests are created and their native handles retained in the existing list while Win16 receives aliases. Original provider getxbyy.cpp WSACancelAsyncRequest delegates to async.cpp SockCancelAsyncRequest;successful cancellation removes queued work or marks current work cancelled before its buffer copy. The reached cancellation responsibility cannot be supplied by the original WOW stub."
+    },
+    {
+      "id": "T483-R1794",
+      "before": 1,
+      "after": 0,
+      "delta": -1,
+      "change": "Remove alias assignment;read guest alias once in the sole lookup call.",
+      "evidence": "The local copy has no remaining user after native-handle removal is restored;no distinct state lifetime is needed."
+    },
+    {
+      "id": "T483-R1795",
+      "before": 16,
+      "after": 16,
+      "delta": 0,
+      "change": "Return HANDLE directly from owner-qualified lookup,then call native cancellation.",
+      "evidence": "Original WWS32WSACancelAsyncRequest is an unconditional WSAEINVAL stub. Native requests are created and their native handles retained in the existing list while Win16 receives aliases. Original provider getxbyy.cpp WSACancelAsyncRequest delegates to async.cpp SockCancelAsyncRequest;successful cancellation removes queued work or marks current work cancelled before its buffer copy. The reached cancellation responsibility cannot be supplied by the original WOW stub. Alias alone is not task ownership;reuse the existing task serial and list."
+    },
+    {
+      "id": "T483-R1796",
+      "before": 15,
+      "after": 9,
+      "delta": -6,
+      "change": "Reuse original WWS32FindAndRemoveAsyncContext(nativeHandle);delete duplicate alias-based removal call and comments.",
+      "evidence": "Original WWS32WSACancelAsyncRequest is an unconditional WSAEINVAL stub. Native requests are created and their native handles retained in the existing list while Win16 receives aliases. Original provider getxbyy.cpp WSACancelAsyncRequest delegates to async.cpp SockCancelAsyncRequest;successful cancellation removes queued work or marks current work cancelled before its buffer copy. The reached cancellation responsibility cannot be supplied by the original WOW stub. Both completion and cancellation now remove by the same native request identity;no context pointer is held across the provider call."
+    },
+    {
+      "id": "T483-R1797",
+      "before": 139,
+      "after": 98,
+      "delta": -41,
+      "change": "Delete WWS32FindAndRemoveAsyncContext16 and simplify lookup to HANDLE;retain the existing single-list retirement algorithm.",
+      "evidence": "Original WWS32WSACancelAsyncRequest is an unconditional WSAEINVAL stub. Native requests are created and their native handles retained in the existing list while Win16 receives aliases. Original provider getxbyy.cpp WSACancelAsyncRequest delegates to async.cpp SockCancelAsyncRequest;successful cancellation removes queued work or marks current work cancelled before its buffer copy. The reached cancellation responsibility cannot be supplied by the original WOW stub. Original native Winsock startup is process-wide;WWS32TaskCleanup frees per-task state without stopping all provider work. Completion converts into vBuffer16 before posting to its window. Task retirement must suppress that write. Original wsautil.cpp Prolog_v1 can reject cancellation with WSAEINPROGRESS during a blocking hook without cancelling work;async.cpp also documents WSAEINVAL when completed work is about to post. RETIRED suppresses guest delivery;CANCEL_STARTED prevents retrying an unresolved item indefinitely;CANCEL_ACTIVE pins the item across an unlocked provider call;COMPLETED records a callback during that call so the canceller can release it once. This is a source-level eligible ordering,not a claim of a newly reproduced race."
+    },
+    {
+      "id": "T483-R1798",
+      "before": 15,
+      "after": 13,
+      "delta": -2,
+      "change": "Remove redundant comment;retain retired/reentrant-completion branch and restore #line1824.",
+      "evidence": "Original native Winsock startup is process-wide;WWS32TaskCleanup frees per-task state without stopping all provider work. Completion converts into vBuffer16 before posting to its window. Task retirement must suppress that write. Original wsautil.cpp Prolog_v1 can reject cancellation with WSAEINPROGRESS during a blocking hook without cancelling work;async.cpp also documents WSAEINVAL when completed work is about to post. RETIRED suppresses guest delivery;CANCEL_STARTED prevents retrying an unresolved item indefinitely;CANCEL_ACTIVE pins the item across an unlocked provider call;COMPLETED records a callback during that call so the canceller can release it once. This is a source-level eligible ordering,not a claim of a newly reproduced race."
+    }
+  ],
+  "original_root": "O:/repos.external/OpenNT",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "provider_sources": [
+    "net/sockets/winsock2/dll/winsock2/getxbyy.cpp::WSACancelAsyncRequest",
+    "net/sockets/winsock2/dll/winsock2/async.cpp::SockCancelAsyncRequest",
+    "net/sockets/winsock2/dll/winsock2/wsautil.cpp::Prolog_v1"
+  ],
+  "mirror_files": [
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "before": 231,
+      "after": 174,
+      "delta": -57,
+      "sha256": "c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def"
+    },
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "before": 24,
+      "after": 17,
+      "delta": -7,
+      "sha256": "14bfe1a54324736958561935ac88df621b330f2b362b2aa31bfdf8e30b06f2d2"
+    }
+  ],
+  "line_proof": {
+    "selected_retained_lines": 1030,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "focused": "Final extracted production bodies:336 assertions,0 failures",
+  "counter_review": "Native handle zero is already the async constructor failure sentinel. Alias resolution remains task-qualified. Original native remover is shared with completion and preserves list lock ownership. No duplicate state machine or new shim. Mock provider error controls are robustness tests,not proof of real-provider error behavior. Full runtime integration and delivery pending.",
+  "status": "Final-source gates and publication passed;Git accompanies P155;residual decisions retained",
+  "delivery": "batch-p155-checkpoint.json"
+}
