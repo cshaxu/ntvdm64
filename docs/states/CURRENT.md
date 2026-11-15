@@ -34,11 +34,11 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1708 reviewed:606 restored/confirmed published,0 local,8 approved,
-1094 qualified pending;1012 unreviewed. Files225/365 audited,140 remain.
+1720 reviewed:610 restored/confirmed published,0 local,8 approved,
+1102 qualified pending;1000 unreviewed. Files228/365 audited,137 remain.
 P150 diff-37;701 retained lines/build/publish/focused/Full19 pass.
-P150 delivery gates passed;Git accompanies receipt.
-P150 mirror930 to893 (-37);cached build,publish11x2,focused,Full19 passed;next R1709.
+P151 fax diff41->30(-11);699 lines match;build,publish11x2,fax135,Full19 passed;Git accompanies receipt.
+P150 mirror930 to893 (-37);cached build,publish11x2,focused,Full19 passed.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1687-r1708-wow32-review.json).
 P141 first Full RPC1740 failure retained;test package identity alone changed for isolation.
 Coupled later-file edits do not complete those file audits.
@@ -56,10 +56,11 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P150 candidate `5b498c14-f614-42ec-9147-c74431b27f75` published11x2;hashes match.
-Cached full x86/x64,Full19 and governance passed;Git accompanies P150.
+P151 candidate `29517417-b1b0-41a4-99d8-b3da65ab67fc` published11x2;hashes match.
+Final fax135 and Full19 passed;Git accompanies P151.
+Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p150-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p151-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored

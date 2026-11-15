@@ -1116,3 +1116,13 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [R1687–R1708](r1687-r1708-wow32-review.json): complete wow32.c dispositions,net mirror diff-37;[line proof](batch-p150-line-check.json). P150 full delivery verified.
 
 - [P150 receipt](batch-p150-checkpoint.json) and [counter-review](p150-counter-review.json): cached build,publish11x2,focused andFull19 passed.
+
+- [R1709](r1709-wow32-def-review.json): ticket export ABI and placement;original CRLF restored locally,no normalized diff change.
+
+- [R1710 wow32.h](r1710-wow32-header-review.json):25 approved exclusion blocks only;102 selected original logical lines match actual MSVC preprocessing;no source change.227/365 files;1710/2720 points,1010 remain.
+
+- [R1711–R1720 fax investigation](r1711-r1720-fax-investigation.json): original/current/minimized exact-function contrasts;candidate diff41->30,not applied or delivered;full-file line/binding review remains.
+
+- [R1711–R1720 complete source review](r1711-r1720-fax-review.json):mirror41->30(-11),698 logical lines match;3 local restorations,7 minimized/necessary residuals;P151 delivery pending.
+
+- [P151 receipt](batch-p151-checkpoint.json):cached full,publish11x2,final fax135,Full19/shared boundary/governance passed;mirror diff net-11;Git accompanies receipt.

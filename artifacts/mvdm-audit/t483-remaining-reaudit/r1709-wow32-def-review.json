@@ -1,0 +1,17 @@
+{
+  "review_id": "T483-R1709",
+  "file": "src/mvdm-host/wow32/wow32.def",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wow32.def",
+  "original_sha256": "0df4286cc384d667dd95bf00b84d81f4afb6536a4fc387a5546b8e74b2f321b4",
+  "current_sha256": "458e4c62bbd2f832f472b66303dd2e920f8b0cfe047fec3acd51cdf52efbee1f",
+  "mirror_diff": {
+    "added": 1,
+    "deleted": 0,
+    "delta": 0
+  },
+  "evidence": "Required named WINAPI uint64 ticket export consumed by worker_lifecycle.c::task_instruction;original W32HungAppNotifyThread takes UINT HTASK and cannot accept ticket. Selected linker map binds _W32TerminateTaskTicket@8. Removing sole export without another export declaration makes named lookup fail. Export need does not prove mirror placement necessary;existing generator could declare project export but this merely relocates one declaration without reducing total complexity.",
+  "changes": "Restore original CRLF only;normalized export sequence unchanged",
+  "line_policy": "DEF is linker input,not preprocessed C;no #error/#line applies. Original export order retained with one named addition.",
+  "decision": "pending owner:keep single mirror export or put project declaration in existing export generator;no new wrapper",
+  "verification": "P151 cached full build,publish11x2,Full19 and governance passed;original CRLF restored,export content unchanged;Git accompanies receipt"
+}

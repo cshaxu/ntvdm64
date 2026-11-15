@@ -1,0 +1,13 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wow32fax.c",
+    "before": 41,
+    "after": 30,
+    "delta": -11,
+    "selected_lines": 699,
+    "logical_line_mismatches": [],
+    "moved_zeroing_original_line": 134,
+    "errors_unchanged": true,
+    "source_sha256": "a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad"
+  }
+]

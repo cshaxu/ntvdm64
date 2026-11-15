@@ -1,0 +1,187 @@
+{
+  "review_id": "T483-R1710",
+  "file": "src/mvdm-host/wow32/wow32.h",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "b277611580f1a485bf3fe4c027e1b75c191cd73164cf2f48451352e64213dfb4",
+  "structural_diff": {
+    "blocks": [
+      {
+        "original_start": 22,
+        "deleted": 1,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 26,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 96,
+        "deleted": 3,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 102,
+        "deleted": 3,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 119,
+        "deleted": 4,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 133,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 142,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 152,
+        "deleted": 1,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 266,
+        "deleted": 3,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 272,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 277,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 281,
+        "deleted": 1,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 285,
+        "deleted": 5,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 359,
+        "deleted": 58,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 432,
+        "deleted": 1,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 438,
+        "deleted": 1,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 461,
+        "deleted": 3,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 508,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 517,
+        "deleted": 1,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 538,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 592,
+        "deleted": 3,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 608,
+        "deleted": 8,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 639,
+        "deleted": 4,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 646,
+        "deleted": 2,
+        "added": 1,
+        "only_error": true
+      },
+      {
+        "original_start": 659,
+        "deleted": 8,
+        "added": 1,
+        "only_error": true
+      }
+    ],
+    "added": 25,
+    "deleted": 124
+  },
+  "line_proof": {
+    "selected_lines": 102,
+    "mismatches": [],
+    "original_pp_lines": 102,
+    "current_pp_lines": 138,
+    "source_sha256": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc",
+    "method": "Actual product x86 precomp include sequence with only target header replaced by pinned original;equal retained source ranges compared to actual MSVC logical line statements."
+  },
+  "decision": "Selected original content confirmed unchanged;retain 25 approved excluded bodies as #error. No source edit.",
+  "counter_review": [
+    "All 25 unequal blocks contain only #error;no autonomous semantic differences concealed in this file.",
+    "Original and current header each preprocessed through same current product precomp sequence and x86 flags;102 retained selected lines match original logical lines.",
+    "Preprocessor observation supports selected product context only;does not admit DBG/profiling/native i386 excluded profiles.",
+    "No product code changed;existing published P150 identity applies,not a new runtime test claim."
+  ],
+  "diagnostic": {
+    "runner": "build/t483-s5-p151/headers.ps1",
+    "pid": 22192,
+    "exit_code": 0,
+    "prior_attempts": [
+      "Restricted baseline access denied before preparation;retried authorized context.",
+      "First CMD invocation used forward slash and failed before compiler;fixed path separators."
+    ]
+  },
+  "delivery": "No source changes;P150 published baseline unchanged. Audit record local P151."
+}

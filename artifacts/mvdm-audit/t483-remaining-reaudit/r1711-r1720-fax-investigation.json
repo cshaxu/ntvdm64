@@ -1,0 +1,66 @@
+{
+  "file": "src/mvdm-host/wow32/wow32fax.c",
+  "points": "R1711-R1720",
+  "status": "whole-file investigation in progress;not disposition-complete",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "hashes": {
+    "wow32fax.original.c": "4afd8937d3815e99ed6b29a8b27d547c86fa77ab4a176949ec2a96604c091ace",
+    "wow32fax.before.c": "22b1487d1377ef4d2f51bc30c0b871320641f9436d903672e3a6c919619d9722",
+    "wow32fax.candidate.c": "dba165db525b0ece5fdaeffde0770eb786cef77e14113f9567cb0c1dde65c9fb",
+    "fax-baseline.log": "f5c3738f0c4c108f58fe0d8a32c74968cfcf25e1190f063c0f1d8545af8dbb65",
+    "fax-current.log": "2b1276ada42d43727b46e2b8998663252e0f2c80f8f91adabfa7ba18850e045c",
+    "fax-candidate.log": "2b1276ada42d43727b46e2b8998663252e0f2c80f8f91adabfa7ba18850e045c"
+  },
+  "baseline": {
+    "exit": 1,
+    "checks": 132,
+    "failures": 15
+  },
+  "current": {
+    "exit": 0,
+    "checks": 135,
+    "failures": 0
+  },
+  "candidate": {
+    "exit": 0,
+    "checks": 135,
+    "failures": 0,
+    "mirror_before": 41,
+    "mirror_after": 30,
+    "delta": -11
+  },
+  "candidate_changes": [
+    "Restore original array-pointer conditional;move zeroing into it,remove redundant goto failure path.",
+    "Remove two explanatory-only comments.",
+    "Preserve original if call structure with required assignment for AddPrinterDriver and AddPrinter."
+  ],
+  "source_evidence": [
+    "malloc_w in wow32.c calls HeapAlloc then returns pointer;release profile does not guarantee allocation success.",
+    "IsFaxPrinterSupportedDevice indexes SupFaxDrv only while i<uNumSupFaxDrv;count consistency matters independently of pointer initialization.",
+    "Original InstallWowFaxPrinter reads bRetVal after successful AddPrinterDriver without assignment and discards successful AddPrinter handle."
+  ],
+  "limitations": [
+    "Exact-function isolated boundary fixture,not real deployed fax or guest acceptance.",
+    "Production source remains unchanged.",
+    "Full TU bindings and actual logical lines must be completed before implementing candidate and whole-file disposition."
+  ],
+  "owned_jobs": [
+    {
+      "pid": 21120,
+      "state": "complete",
+      "outputs": [
+        "fax-baseline.exit",
+        "fax-current.exit"
+      ]
+    },
+    {
+      "pid": 37556,
+      "state": "complete",
+      "outputs": [
+        "fax-candidate.exit"
+      ]
+    }
+  ],
+  "next": "Complete actual product TU preprocessing/line proof and independent counter-review;then apply whole-file minimized candidate and full batch delivery.",
+  "superseded_by": "r1711-r1720-fax-review.json"
+}

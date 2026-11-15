@@ -1,0 +1,34 @@
+{
+  "batch": "P151",
+  "status": "cached full,publish11x2,final fax135,Full19,governance passed;Git accompanies receipt",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.def",
+      "sha256": "458e4c62bbd2f832f472b66303dd2e920f8b0cfe047fec3acd51cdf52efbee1f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "sha256": "a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad"
+    }
+  ],
+  "mirror_diff": {
+    "fax_before": 41,
+    "fax_after": 30,
+    "delta": -11
+  },
+  "guest_modified": false,
+  "publication": "11 images at both destinations;all hashes match",
+  "tests": "Final exact-source fax135,Full19,shared boundary and governance passed",
+  "package": "29517417-b1b0-41a4-99d8-b3da65ab67fc",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "full": {
+    "gates": 19,
+    "all_passed": true,
+    "evidence": "build/t483-s5-p151/full-isolated/timings.json"
+  },
+  "limitations": [
+    "Fax exact-function fixtures use isolated boundary providers;not a real printer-driver installation test.",
+    "No guest modifications."
+  ]
+}

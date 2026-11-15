@@ -102,7 +102,6 @@ LPSTR *GetSupportedFaxDrivers(UINT *uCount)
     HKEY  hKey = 0;
     DWORD dwType;
     DWORD cbBufSize;
-    // MVDM-HOST-DIV-879: preserve empty/failure ownership.
     LPSTR lpSupFaxDrvBuf = NULL;
     LPSTR *alpSupFaxDrvList = NULL;
 
@@ -132,12 +131,14 @@ LPSTR *GetSupportedFaxDrivers(UINT *uCount)
     if (*uCount = BuildStrList(lpSupFaxDrvBuf, NULL)) {
         // Build an array of pointers to the start of the strings in the list.
         alpSupFaxDrvList = (LPSTR *) malloc_w(*uCount * sizeof(LPSTR));
-        if (!alpSupFaxDrvList) {
-            goto GSFD_error;
+#line 135
+        if (alpSupFaxDrvList) {
+#line 134
+            RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
+#line 136
+            // Fill the array with string starting points.
+            BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);
         }
-        RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
-        // Fill the array with string starting points.
-        BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);
     }
     goto GSFD_exit;
 
@@ -151,6 +152,7 @@ GSFD_exit:
             free_w(lpSupFaxDrvBuf);
         }
     }
+#line 146
     if (hKey) {
         RegCloseKey(hKey);
     }
@@ -225,9 +227,7 @@ ULONG WOW32FaxHandler(UINT iFun, LPSTR lpIn)
     LPBYTE lpData;
     VPVOID vp;
 
-#line 220
 #ifdef DEBUG
-#line 221
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 227
@@ -885,9 +885,9 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
     PRINTER_INFO_2 PrinterInfo;
     PORT_INFO_1 PortInfo;
     HKEY hKey = 0, hSubKey = 0;
-    // MVDM-HOST-DIV-879: successful installation owns a printer handle.
     BOOL bRetVal;
     HANDLE hPrinter;
+#line 882
 
     LOGDEBUG(0,("InstallWowFaxPrinter, Section = %s, Key = %s, String = %s\n", szSection, szKey, szString));
 
@@ -937,8 +937,7 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
             // Install the printer driver.
             DriverInfo.cVersion = 1;
             DriverInfo.pName = "Windows 3.1 Compatible Fax Driver";
-            bRetVal = (*spoolerapis[WOW_AddPrinterDriver].lpfn)(NULL, 2, &DriverInfo);
-            if (!bRetVal) {
+            if ((bRetVal = (*spoolerapis[WOW_AddPrinterDriver].lpfn)(NULL, 2, &DriverInfo)) == FALSE) {
                 bRetVal = (GetLastError() == ERROR_PRINTER_DRIVER_ALREADY_INSTALLED);
             }
 
@@ -964,8 +963,7 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                 PrinterInfo.pDriverName     = "Windows 3.1 Compatible Fax Driver";
                 PrinterInfo.pPrintProcessor = "WINPRINT";
                 PrinterInfo.pDatatype       = "RAW";
-                hPrinter = (HANDLE)(*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo);
-                if (!hPrinter) {
+                if ((hPrinter = (HANDLE)(*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo)) == 0) {
                     bRetVal = (GetLastError() == ERROR_PRINTER_ALREADY_EXISTS);
                 }
                 else {
@@ -973,7 +971,6 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                 }
 #line 960
 #ifdef DBG
-#line 961
 #error Unsupported excluded original configuration
 #endif
 #line 965
