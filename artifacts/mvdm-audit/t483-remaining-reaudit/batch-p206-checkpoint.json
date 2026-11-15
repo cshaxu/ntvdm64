@@ -1,0 +1,54 @@
+{
+  "status": "original selected RAP debug macros confirmed;conditional line mapping minimized",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+    "sha256": "d88d16222378f74e58919e17892c67e7f8ee0e66ca6bd1153d8c0ba5b9dd8804",
+    "original_sha256": "ffc0d0378b56e4ef1a7b4356f7c00749f6cc4ef459df4a59af2d3bcf64728003",
+    "source_lines": 35,
+    "contexts": [
+      {
+        "unit": "convert",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "parmnum",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 8,
+    "mirror_after": 8,
+    "mirror_delta": 0,
+    "raw_before": 12,
+    "raw_after": 10,
+    "errors": 1,
+    "line_directives_before": 4,
+    "line_directives_after": 2,
+    "negative_controls": [
+      "DBG=1"
+    ],
+    "line_endings": "Original CRLF matches pinned source; before-byte counts recorded separately",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "sha256": "d88d16222378f74e58919e17892c67e7f8ee0e66ca6bd1153d8c0ba5b9dd8804"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+    "sha256": "d88d16222378f74e58919e17892c67e7f8ee0e66ca6bd1153d8c0ba5b9dd8804"
+  },
+  "mirror_before": 8,
+  "mirror_after": 8,
+  "mirror_delta": 0,
+  "raw_before": 12,
+  "raw_after": 10,
+  "change": "Remove redundant line52/53/67;add original else60;retain61. Four line directives become two. DBG error retained.",
+  "counter_review": "Selected original macro definitions already exact. Both direct production consumers convert.c/parmnum.c checked with exact variant inclusion and complete TU token equivalence. Macro-only header emits zero selected declaration lines;35 retained source lines match original.",
+  "verification": "Six preprocessings;DBG=1 C1189 negative control;no new product link or runtime pass claimed.",
+  "product_verification": "Reuse P187 cached build and publication for token-equivalent diagnostic-only change;verify11 images at both destinations. Current shared RDP Clipboard18 passed in P205.",
+  "delivery": "P206 governance commit push accompany receipt"
+}

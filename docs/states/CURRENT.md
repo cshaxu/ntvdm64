@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2028 reviewed:706 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1314 qualified pending;692 unreviewed. Files291/365 audited,74 remain.
+2029 reviewed:707 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1314 qualified pending;691 unreviewed. Files292/365 audited,73 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -176,8 +176,6 @@ P186 apimsg533->7(-526):original descriptors and complete function bodies restor
 
 P187 apisrv1067->190(-877):original linkable bodies and error semantics restored;includes4 and Enum3 omission180 pending,excluded6 retained.901 source/607 MSVC lines match;focused37,cached,publish11x2,Full passed. Original C4701 remains disclosed;RDP shared Clipboard still fails with external holders. Git accompanies receipt.
 
-P198 smbgtpt.h246 unchanged(all excluded),raw366 unchanged:original CRLF preserved;conditional boundary lines restored;40#error retained.14 contexts/42 preprocessings tokens equal;3 negative profiles rejected;620 retained source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p198-checkpoint.json).
-
 P199 smbmacro.h6 unchanged(all excluded),raw8 unchanged:original endif99 restored;NO_PACKING#error retained.7 contexts/21 preprocessings tokens equal;negative profile rejected;199 source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p199-checkpoint.json).
 
 P200 smbtypes.h12 unchanged(all excluded),raw26->24(-2):conditional boundary lines restored;4#error retained;line directives14->12.14 contexts/42 preprocessings tokens and114 header lines equal;4 negative profiles rejected;291 source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p200-checkpoint.json).
@@ -190,3 +188,5 @@ P203 netdebug.h380 unchanged(all excluded),raw418 unchanged:original boundary li
 P204 netlib.h21 unchanged(all excluded),raw33->25(-8):original boundary lines and CRLF restored;5#error retained;directives12->4.14 contexts tokens/186 header lines equal;4 negative controls;451 source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p204-checkpoint.json).
 
 P205 rap.h31 unchanged(all excluded),raw33 unchanged:endif140 corrected;Unicode#error retained;19 contexts/57 preprocessings tokens and104 header lines equal;282 source lines match;Unicode negative passes. P187 product reused. Current RDP Clipboard18 passed after removing evidenced RadeonSoftware occupancy;earlier failures retained in receipts. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p205-checkpoint.json).
+
+P206 rapdebug.h8 unchanged(all excluded),raw12->10(-2):else60 restored;DBG#error retained;2 actual contexts/6 preprocessings equal;35 source lines match;DBG negative passes. P187 product and P205 RDP evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p206-checkpoint.json).
