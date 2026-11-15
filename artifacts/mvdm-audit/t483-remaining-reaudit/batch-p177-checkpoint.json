@@ -1,0 +1,1553 @@
+{
+  "status": "line/EOL only;selected x86/x64 preprocessing identical;reuse P176 cached full,publish11x2,Full19,RDP18",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "sha256": "77faa5a534f8e5d97ff13d152b80b210df9cc6bbf0e0d4ab0644367daec175c5"
+    }
+  ],
+  "mirror_before": {
+    "added": 2,
+    "deleted": 9,
+    "total": 11
+  },
+  "mirror_after": {
+    "added": 2,
+    "deleted": 9,
+    "total": 11
+  },
+  "mirror_delta": 0,
+  "ordinary_semantic_diff": 0,
+  "retained_exclusions": [
+    "ALLOC_PRAGMA && NTOS_KERNEL_RUNTIME original27",
+    "!NTOS_KERNEL_RUNTIME original176-183"
+  ],
+  "lines": [
+    {
+      "selected_retained_lines": 55,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context",
+      "arch": [
+        [
+          "/*++",
+          1
+        ],
+        [
+          "",
+          2
+        ],
+        [
+          "Copyright (c) 1991  Microsoft Corporation",
+          3
+        ],
+        [
+          "",
+          4
+        ],
+        [
+          "Module Name:",
+          5
+        ],
+        [
+          "",
+          6
+        ],
+        [
+          "    error.c",
+          7
+        ],
+        [
+          "",
+          8
+        ],
+        [
+          "Abstract:",
+          9
+        ],
+        [
+          "",
+          10
+        ],
+        [
+          "    This module contains a routine for converting NT status codes",
+          11
+        ],
+        [
+          "    to DOS/OS|2 error codes.",
+          12
+        ],
+        [
+          "",
+          13
+        ],
+        [
+          "Author:",
+          14
+        ],
+        [
+          "",
+          15
+        ],
+        [
+          "    David Treadwell (davidtr)   04-Apr-1991",
+          16
+        ],
+        [
+          "",
+          17
+        ],
+        [
+          "Revision History:",
+          18
+        ],
+        [
+          "",
+          19
+        ],
+        [
+          "--*/",
+          20
+        ],
+        [
+          "",
+          21
+        ],
+        [
+          "#include \"ntrtlp.h\"",
+          22
+        ],
+        [
+          "#include <winerror.h>",
+          23
+        ],
+        [
+          "#include \"error.h\"",
+          24
+        ],
+        [
+          "",
+          25
+        ],
+        [
+          "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+          26
+        ],
+        [
+          "#pragma alloc_text(PAGE, RtlNtStatusToDosError)",
+          27
+        ],
+        [
+          "#endif",
+          28
+        ],
+        [
+          "",
+          29
+        ],
+        [
+          "//",
+          30
+        ],
+        [
+          "// Ensure that the Registry ERROR_SUCCESS error code and the",
+          31
+        ],
+        [
+          "// NO_ERROR error code remain equal and zero.",
+          32
+        ],
+        [
+          "//",
+          33
+        ],
+        [
+          "",
+          34
+        ],
+        [
+          "#if ERROR_SUCCESS != 0 || NO_ERROR != 0",
+          35
+        ],
+        [
+          "#error Invalid value for ERROR_SUCCESS.",
+          36
+        ],
+        [
+          "#endif",
+          37
+        ],
+        [
+          "\f",
+          38
+        ],
+        [
+          "ULONG",
+          39
+        ],
+        [
+          "RtlNtStatusToDosError (",
+          40
+        ],
+        [
+          "    IN NTSTATUS Status",
+          41
+        ],
+        [
+          "    )",
+          42
+        ],
+        [
+          "",
+          43
+        ],
+        [
+          "/*++",
+          44
+        ],
+        [
+          "",
+          45
+        ],
+        [
+          "Routine Description:",
+          46
+        ],
+        [
+          "",
+          47
+        ],
+        [
+          "    This routine converts an NT status code to its DOS/OS|2 equivalent.",
+          48
+        ],
+        [
+          "    Remembers the Status code value in the TEB.",
+          49
+        ],
+        [
+          "",
+          50
+        ],
+        [
+          "Arguments:",
+          51
+        ],
+        [
+          "",
+          52
+        ],
+        [
+          "    Status - Supplies the status value to convert.",
+          53
+        ],
+        [
+          "",
+          54
+        ],
+        [
+          "Return Value:",
+          55
+        ],
+        [
+          "",
+          56
+        ],
+        [
+          "    The matching DOS/OS|2 error code.",
+          57
+        ],
+        [
+          "",
+          58
+        ],
+        [
+          "--*/",
+          59
+        ],
+        [
+          "",
+          60
+        ],
+        [
+          "{",
+          61
+        ],
+        [
+          "    PTEB Teb;",
+          62
+        ],
+        [
+          "",
+          63
+        ],
+        [
+          "    Teb = NtCurrentTeb();",
+          64
+        ],
+        [
+          "    if ( Teb ) {",
+          65
+        ],
+        [
+          "    Teb->LastStatusValue = Status;",
+          66
+        ],
+        [
+          "        }",
+          67
+        ],
+        [
+          "",
+          68
+        ],
+        [
+          "    return RtlNtStatusToDosErrorNoTeb( Status );",
+          69
+        ],
+        [
+          "}",
+          70
+        ],
+        [
+          "\f",
+          71
+        ],
+        [
+          "ULONG",
+          72
+        ],
+        [
+          "RtlNtStatusToDosErrorNoTeb (",
+          73
+        ],
+        [
+          "    IN NTSTATUS Status",
+          74
+        ],
+        [
+          "    )",
+          75
+        ],
+        [
+          "",
+          76
+        ],
+        [
+          "/*++",
+          77
+        ],
+        [
+          "",
+          78
+        ],
+        [
+          "Routine Description:",
+          79
+        ],
+        [
+          "",
+          80
+        ],
+        [
+          "    This routine converts an NT status code to its DOS/OS 2 equivalent",
+          81
+        ],
+        [
+          "    and returns the translated value.",
+          82
+        ],
+        [
+          "",
+          83
+        ],
+        [
+          "Arguments:",
+          84
+        ],
+        [
+          "",
+          85
+        ],
+        [
+          "    Status - Supplies the status value to convert.",
+          86
+        ],
+        [
+          "",
+          87
+        ],
+        [
+          "Return Value:",
+          88
+        ],
+        [
+          "",
+          89
+        ],
+        [
+          "    The matching DOS/OS 2 error code.",
+          90
+        ],
+        [
+          "",
+          91
+        ],
+        [
+          "--*/",
+          92
+        ],
+        [
+          "",
+          93
+        ],
+        [
+          "{",
+          94
+        ],
+        [
+          "",
+          95
+        ],
+        [
+          "    ULONG Offset;",
+          96
+        ],
+        [
+          "    ULONG Entry;",
+          97
+        ],
+        [
+          "    ULONG Index;",
+          98
+        ],
+        [
+          "",
+          99
+        ],
+        [
+          "    //",
+          100
+        ],
+        [
+          "    // Convert any HRESULTs to their original form of a NTSTATUS or a",
+          101
+        ],
+        [
+          "    // WIN32 error",
+          102
+        ],
+        [
+          "    //",
+          103
+        ],
+        [
+          "",
+          104
+        ],
+        [
+          "",
+          105
+        ],
+        [
+          "    if (Status & 0x20000000) {",
+          106
+        ],
+        [
+          "",
+          107
+        ],
+        [
+          "        //",
+          108
+        ],
+        [
+          "        // The customer bit is set so lets just pass the",
+          109
+        ],
+        [
+          "        // error code on thru",
+          110
+        ],
+        [
+          "        //",
+          111
+        ],
+        [
+          "",
+          112
+        ],
+        [
+          "        return Status;",
+          113
+        ],
+        [
+          "",
+          114
+        ],
+        [
+          "    }",
+          115
+        ],
+        [
+          "    else if ((Status & 0xffff0000) == 0x80070000) {",
+          116
+        ],
+        [
+          "",
+          117
+        ],
+        [
+          "        //",
+          118
+        ],
+        [
+          "        // The status code  was a win32 error already.",
+          119
+        ],
+        [
+          "        //",
+          120
+        ],
+        [
+          "",
+          121
+        ],
+        [
+          "        return(Status & 0x0000ffff);",
+          122
+        ],
+        [
+          "    }",
+          123
+        ],
+        [
+          "    else if ((Status & 0xf0000000) == 0xd0000000) {",
+          124
+        ],
+        [
+          "",
+          125
+        ],
+        [
+          "        //",
+          126
+        ],
+        [
+          "        // The status code is a HRESULT from NTSTATUS",
+          127
+        ],
+        [
+          "        //",
+          128
+        ],
+        [
+          "",
+          129
+        ],
+        [
+          "        Status &= 0xcfffffff;",
+          130
+        ],
+        [
+          "    }",
+          131
+        ],
+        [
+          "",
+          132
+        ],
+        [
+          "    //",
+          133
+        ],
+        [
+          "    // Scan the run length table and compute the entry in the translation",
+          134
+        ],
+        [
+          "    // table that maps the specified status code to a DOS error code.",
+          135
+        ],
+        [
+          "    //",
+          136
+        ],
+        [
+          "",
+          137
+        ],
+        [
+          "    Entry = 0;",
+          138
+        ],
+        [
+          "    Index = 0;",
+          139
+        ],
+        [
+          "    do {",
+          140
+        ],
+        [
+          "        if ((ULONG)Status >= RtlpRunTable[Entry + 1].BaseCode) {",
+          141
+        ],
+        [
+          "            Index += (RtlpRunTable[Entry].RunLength * RtlpRunTable[Entry].CodeSize);",
+          142
+        ],
+        [
+          "",
+          143
+        ],
+        [
+          "        } else {",
+          144
+        ],
+        [
+          "            Offset = (ULONG)Status - RtlpRunTable[Entry].BaseCode;",
+          145
+        ],
+        [
+          "            if (Offset >= RtlpRunTable[Entry].RunLength) {",
+          146
+        ],
+        [
+          "                break;",
+          147
+        ],
+        [
+          "",
+          148
+        ],
+        [
+          "            } else {",
+          149
+        ],
+        [
+          "                Index += (Offset * (ULONG)RtlpRunTable[Entry].CodeSize);",
+          150
+        ],
+        [
+          "                if (RtlpRunTable[Entry].CodeSize == 1) {",
+          151
+        ],
+        [
+          "                    return (ULONG)RtlpStatusTable[Index];",
+          152
+        ],
+        [
+          "",
+          153
+        ],
+        [
+          "                } else {",
+          154
+        ],
+        [
+          "                    return (((ULONG)RtlpStatusTable[Index + 1] << 16) |",
+          155
+        ],
+        [
+          "                                                (ULONG)RtlpStatusTable[Index]);",
+          156
+        ],
+        [
+          "                }",
+          157
+        ],
+        [
+          "            }",
+          158
+        ],
+        [
+          "        }",
+          159
+        ],
+        [
+          "",
+          160
+        ],
+        [
+          "        Entry += 1;",
+          161
+        ],
+        [
+          "    } while (Entry < (sizeof(RtlpRunTable) / sizeof(RUN_ENTRY)));",
+          162
+        ],
+        [
+          "",
+          163
+        ],
+        [
+          "    //",
+          164
+        ],
+        [
+          "    // The translation to a DOS error code failed.",
+          165
+        ],
+        [
+          "    //",
+          166
+        ],
+        [
+          "    // The redirector maps unknown OS/2 error codes by ORing 0xC001 into",
+          167
+        ],
+        [
+          "    // the high 16 bits.  Detect this and return the low 16 bits if true.",
+          168
+        ],
+        [
+          "    //",
+          169
+        ],
+        [
+          "",
+          170
+        ],
+        [
+          "    if (((ULONG)Status >> 16) == 0xC001) {",
+          171
+        ],
+        [
+          "        return ((ULONG)Status & 0xFFFF);",
+          172
+        ],
+        [
+          "    }",
+          173
+        ],
+        [
+          "",
+          174
+        ],
+        [
+          "#ifndef NTOS_KERNEL_RUNTIME",
+          175
+        ],
+        [
+          "    DbgPrint(\"RTL: RtlNtStatusToDosError(0x%lx): No Valid Win32 Error Mapping\\n\",Status);",
+          176
+        ],
+        [
+          "    DbgPrint(\"RTL: Edit ntos\\\\rtl\\\\generr.c to correct the problem\\n\");",
+          177
+        ],
+        [
+          "    DbgPrint(\"RTL: ERROR_MR_MID_NOT_FOUND is being returned\\n\");",
+          178
+        ],
+        [
+          "",
+          179
+        ],
+        [
+          "#if DBG",
+          180
+        ],
+        [
+          "    DbgBreakPoint();",
+          181
+        ],
+        [
+          "#endif // DBG",
+          182
+        ],
+        [
+          "",
+          183
+        ],
+        [
+          "#endif // NTOS_KERNEL_RUNTIME",
+          184
+        ],
+        [
+          "",
+          185
+        ],
+        [
+          "    return ERROR_MR_MID_NOT_FOUND;",
+          186
+        ],
+        [
+          "}",
+          187
+        ],
+        [
+          "",
+          188
+        ]
+      ],
+      "selected_preprocessing_unchanged": true
+    },
+    {
+      "selected_retained_lines": 55,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context",
+      "arch": [
+        [
+          "/*++",
+          1
+        ],
+        [
+          "",
+          2
+        ],
+        [
+          "Copyright (c) 1991  Microsoft Corporation",
+          3
+        ],
+        [
+          "",
+          4
+        ],
+        [
+          "Module Name:",
+          5
+        ],
+        [
+          "",
+          6
+        ],
+        [
+          "    error.c",
+          7
+        ],
+        [
+          "",
+          8
+        ],
+        [
+          "Abstract:",
+          9
+        ],
+        [
+          "",
+          10
+        ],
+        [
+          "    This module contains a routine for converting NT status codes",
+          11
+        ],
+        [
+          "    to DOS/OS|2 error codes.",
+          12
+        ],
+        [
+          "",
+          13
+        ],
+        [
+          "Author:",
+          14
+        ],
+        [
+          "",
+          15
+        ],
+        [
+          "    David Treadwell (davidtr)   04-Apr-1991",
+          16
+        ],
+        [
+          "",
+          17
+        ],
+        [
+          "Revision History:",
+          18
+        ],
+        [
+          "",
+          19
+        ],
+        [
+          "--*/",
+          20
+        ],
+        [
+          "",
+          21
+        ],
+        [
+          "#include \"ntrtlp.h\"",
+          22
+        ],
+        [
+          "#include <winerror.h>",
+          23
+        ],
+        [
+          "#include \"error.h\"",
+          24
+        ],
+        [
+          "",
+          25
+        ],
+        [
+          "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+          26
+        ],
+        [
+          "#pragma alloc_text(PAGE, RtlNtStatusToDosError)",
+          27
+        ],
+        [
+          "#endif",
+          28
+        ],
+        [
+          "",
+          29
+        ],
+        [
+          "//",
+          30
+        ],
+        [
+          "// Ensure that the Registry ERROR_SUCCESS error code and the",
+          31
+        ],
+        [
+          "// NO_ERROR error code remain equal and zero.",
+          32
+        ],
+        [
+          "//",
+          33
+        ],
+        [
+          "",
+          34
+        ],
+        [
+          "#if ERROR_SUCCESS != 0 || NO_ERROR != 0",
+          35
+        ],
+        [
+          "#error Invalid value for ERROR_SUCCESS.",
+          36
+        ],
+        [
+          "#endif",
+          37
+        ],
+        [
+          "\f",
+          38
+        ],
+        [
+          "ULONG",
+          39
+        ],
+        [
+          "RtlNtStatusToDosError (",
+          40
+        ],
+        [
+          "    IN NTSTATUS Status",
+          41
+        ],
+        [
+          "    )",
+          42
+        ],
+        [
+          "",
+          43
+        ],
+        [
+          "/*++",
+          44
+        ],
+        [
+          "",
+          45
+        ],
+        [
+          "Routine Description:",
+          46
+        ],
+        [
+          "",
+          47
+        ],
+        [
+          "    This routine converts an NT status code to its DOS/OS|2 equivalent.",
+          48
+        ],
+        [
+          "    Remembers the Status code value in the TEB.",
+          49
+        ],
+        [
+          "",
+          50
+        ],
+        [
+          "Arguments:",
+          51
+        ],
+        [
+          "",
+          52
+        ],
+        [
+          "    Status - Supplies the status value to convert.",
+          53
+        ],
+        [
+          "",
+          54
+        ],
+        [
+          "Return Value:",
+          55
+        ],
+        [
+          "",
+          56
+        ],
+        [
+          "    The matching DOS/OS|2 error code.",
+          57
+        ],
+        [
+          "",
+          58
+        ],
+        [
+          "--*/",
+          59
+        ],
+        [
+          "",
+          60
+        ],
+        [
+          "{",
+          61
+        ],
+        [
+          "    PTEB Teb;",
+          62
+        ],
+        [
+          "",
+          63
+        ],
+        [
+          "    Teb = NtCurrentTeb();",
+          64
+        ],
+        [
+          "    if ( Teb ) {",
+          65
+        ],
+        [
+          "    Teb->LastStatusValue = Status;",
+          66
+        ],
+        [
+          "        }",
+          67
+        ],
+        [
+          "",
+          68
+        ],
+        [
+          "    return RtlNtStatusToDosErrorNoTeb( Status );",
+          69
+        ],
+        [
+          "}",
+          70
+        ],
+        [
+          "\f",
+          71
+        ],
+        [
+          "ULONG",
+          72
+        ],
+        [
+          "RtlNtStatusToDosErrorNoTeb (",
+          73
+        ],
+        [
+          "    IN NTSTATUS Status",
+          74
+        ],
+        [
+          "    )",
+          75
+        ],
+        [
+          "",
+          76
+        ],
+        [
+          "/*++",
+          77
+        ],
+        [
+          "",
+          78
+        ],
+        [
+          "Routine Description:",
+          79
+        ],
+        [
+          "",
+          80
+        ],
+        [
+          "    This routine converts an NT status code to its DOS/OS 2 equivalent",
+          81
+        ],
+        [
+          "    and returns the translated value.",
+          82
+        ],
+        [
+          "",
+          83
+        ],
+        [
+          "Arguments:",
+          84
+        ],
+        [
+          "",
+          85
+        ],
+        [
+          "    Status - Supplies the status value to convert.",
+          86
+        ],
+        [
+          "",
+          87
+        ],
+        [
+          "Return Value:",
+          88
+        ],
+        [
+          "",
+          89
+        ],
+        [
+          "    The matching DOS/OS 2 error code.",
+          90
+        ],
+        [
+          "",
+          91
+        ],
+        [
+          "--*/",
+          92
+        ],
+        [
+          "",
+          93
+        ],
+        [
+          "{",
+          94
+        ],
+        [
+          "",
+          95
+        ],
+        [
+          "    ULONG Offset;",
+          96
+        ],
+        [
+          "    ULONG Entry;",
+          97
+        ],
+        [
+          "    ULONG Index;",
+          98
+        ],
+        [
+          "",
+          99
+        ],
+        [
+          "    //",
+          100
+        ],
+        [
+          "    // Convert any HRESULTs to their original form of a NTSTATUS or a",
+          101
+        ],
+        [
+          "    // WIN32 error",
+          102
+        ],
+        [
+          "    //",
+          103
+        ],
+        [
+          "",
+          104
+        ],
+        [
+          "",
+          105
+        ],
+        [
+          "    if (Status & 0x20000000) {",
+          106
+        ],
+        [
+          "",
+          107
+        ],
+        [
+          "        //",
+          108
+        ],
+        [
+          "        // The customer bit is set so lets just pass the",
+          109
+        ],
+        [
+          "        // error code on thru",
+          110
+        ],
+        [
+          "        //",
+          111
+        ],
+        [
+          "",
+          112
+        ],
+        [
+          "        return Status;",
+          113
+        ],
+        [
+          "",
+          114
+        ],
+        [
+          "    }",
+          115
+        ],
+        [
+          "    else if ((Status & 0xffff0000) == 0x80070000) {",
+          116
+        ],
+        [
+          "",
+          117
+        ],
+        [
+          "        //",
+          118
+        ],
+        [
+          "        // The status code  was a win32 error already.",
+          119
+        ],
+        [
+          "        //",
+          120
+        ],
+        [
+          "",
+          121
+        ],
+        [
+          "        return(Status & 0x0000ffff);",
+          122
+        ],
+        [
+          "    }",
+          123
+        ],
+        [
+          "    else if ((Status & 0xf0000000) == 0xd0000000) {",
+          124
+        ],
+        [
+          "",
+          125
+        ],
+        [
+          "        //",
+          126
+        ],
+        [
+          "        // The status code is a HRESULT from NTSTATUS",
+          127
+        ],
+        [
+          "        //",
+          128
+        ],
+        [
+          "",
+          129
+        ],
+        [
+          "        Status &= 0xcfffffff;",
+          130
+        ],
+        [
+          "    }",
+          131
+        ],
+        [
+          "",
+          132
+        ],
+        [
+          "    //",
+          133
+        ],
+        [
+          "    // Scan the run length table and compute the entry in the translation",
+          134
+        ],
+        [
+          "    // table that maps the specified status code to a DOS error code.",
+          135
+        ],
+        [
+          "    //",
+          136
+        ],
+        [
+          "",
+          137
+        ],
+        [
+          "    Entry = 0;",
+          138
+        ],
+        [
+          "    Index = 0;",
+          139
+        ],
+        [
+          "    do {",
+          140
+        ],
+        [
+          "        if ((ULONG)Status >= RtlpRunTable[Entry + 1].BaseCode) {",
+          141
+        ],
+        [
+          "            Index += (RtlpRunTable[Entry].RunLength * RtlpRunTable[Entry].CodeSize);",
+          142
+        ],
+        [
+          "",
+          143
+        ],
+        [
+          "        } else {",
+          144
+        ],
+        [
+          "            Offset = (ULONG)Status - RtlpRunTable[Entry].BaseCode;",
+          145
+        ],
+        [
+          "            if (Offset >= RtlpRunTable[Entry].RunLength) {",
+          146
+        ],
+        [
+          "                break;",
+          147
+        ],
+        [
+          "",
+          148
+        ],
+        [
+          "            } else {",
+          149
+        ],
+        [
+          "                Index += (Offset * (ULONG)RtlpRunTable[Entry].CodeSize);",
+          150
+        ],
+        [
+          "                if (RtlpRunTable[Entry].CodeSize == 1) {",
+          151
+        ],
+        [
+          "                    return (ULONG)RtlpStatusTable[Index];",
+          152
+        ],
+        [
+          "",
+          153
+        ],
+        [
+          "                } else {",
+          154
+        ],
+        [
+          "                    return (((ULONG)RtlpStatusTable[Index + 1] << 16) |",
+          155
+        ],
+        [
+          "                                                (ULONG)RtlpStatusTable[Index]);",
+          156
+        ],
+        [
+          "                }",
+          157
+        ],
+        [
+          "            }",
+          158
+        ],
+        [
+          "        }",
+          159
+        ],
+        [
+          "",
+          160
+        ],
+        [
+          "        Entry += 1;",
+          161
+        ],
+        [
+          "    } while (Entry < (sizeof(RtlpRunTable) / sizeof(RUN_ENTRY)));",
+          162
+        ],
+        [
+          "",
+          163
+        ],
+        [
+          "    //",
+          164
+        ],
+        [
+          "    // The translation to a DOS error code failed.",
+          165
+        ],
+        [
+          "    //",
+          166
+        ],
+        [
+          "    // The redirector maps unknown OS/2 error codes by ORing 0xC001 into",
+          167
+        ],
+        [
+          "    // the high 16 bits.  Detect this and return the low 16 bits if true.",
+          168
+        ],
+        [
+          "    //",
+          169
+        ],
+        [
+          "",
+          170
+        ],
+        [
+          "    if (((ULONG)Status >> 16) == 0xC001) {",
+          171
+        ],
+        [
+          "        return ((ULONG)Status & 0xFFFF);",
+          172
+        ],
+        [
+          "    }",
+          173
+        ],
+        [
+          "",
+          174
+        ],
+        [
+          "#ifndef NTOS_KERNEL_RUNTIME",
+          175
+        ],
+        [
+          "    DbgPrint(\"RTL: RtlNtStatusToDosError(0x%lx): No Valid Win32 Error Mapping\\n\",Status);",
+          176
+        ],
+        [
+          "    DbgPrint(\"RTL: Edit ntos\\\\rtl\\\\generr.c to correct the problem\\n\");",
+          177
+        ],
+        [
+          "    DbgPrint(\"RTL: ERROR_MR_MID_NOT_FOUND is being returned\\n\");",
+          178
+        ],
+        [
+          "",
+          179
+        ],
+        [
+          "#if DBG",
+          180
+        ],
+        [
+          "    DbgBreakPoint();",
+          181
+        ],
+        [
+          "#endif // DBG",
+          182
+        ],
+        [
+          "",
+          183
+        ],
+        [
+          "#endif // NTOS_KERNEL_RUNTIME",
+          184
+        ],
+        [
+          "",
+          185
+        ],
+        [
+          "    return ERROR_MR_MID_NOT_FOUND;",
+          186
+        ],
+        [
+          "}",
+          187
+        ],
+        [
+          "",
+          188
+        ]
+      ],
+      "selected_preprocessing_unchanged": true
+    }
+  ],
+  "scope": "Correct original endif28 and184;restore original CRLF;no runtime logic or binding changes",
+  "reused_receipt": "batch-p176-checkpoint.json",
+  "probe_preparation_correction": "Initial copied-source probe lost same-directory error.h include priority;copied the exact existing companion header and reran both contexts. No product build failure."
+}

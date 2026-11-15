@@ -1216,3 +1216,5 @@ P174: [CSR capture review](r1945-r1951-csrutil-review.json), [receipt](batch-p17
 P175: [Original read-probe review](r1952-r1956-probe-review.json), [receipt](batch-p175-checkpoint.json): mirror125->117(-8);conditional order and lines repaired;P173 product evidence reused.
 
 P176: [Environment restoration review](r1957-r1958-environ-review.json), [checkpoint](batch-p176-checkpoint.json), [lines](batch-p176-line-check.json): original environment names/includes restored;cached,publish11x2,focused,Full19,RDP Clipboard18 passed;Git accompanies receipt.
+
+P177: [Error mapping line review](batch-p177-checkpoint.json): original body retained;both #error guards preserved;logical-line/EOL repair only;P176 product evidence reused.

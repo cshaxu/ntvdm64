@@ -27,6 +27,7 @@ Revision History:
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #line 27
 #error Unsupported excluded original configuration
+#line 28
 #endif
 #line 29
 
@@ -181,6 +182,7 @@ Return Value:
 #ifndef NTOS_KERNEL_RUNTIME
 #line 176
 #error Unsupported excluded original configuration
+#line 184
 #endif // NTOS_KERNEL_RUNTIME
 #line 185
 
