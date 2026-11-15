@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2014 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1313 qualified pending;706 unreviewed. Files277/365 audited,88 remain.
+2015 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1314 qualified pending;705 unreviewed. Files278/365 audited,87 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -170,8 +170,6 @@ The latest published baseline and active work are reported above.
 
 P176 final:environ14->11(-3);ordinary semantic diff removed,excluded11 retained;449 MSVC lines match. Original RTL names restored with x86/x64 provider and private-PEB clone proof. Cached,publish11x2,focused,Full19,RDP Clipboard18 passed. First RDP failure was confirmed RadeonSoftware Clipboard occupancy;unchanged retry passed. Package 83adbf7e-5ee3-4e21-b906-e339b3085d6a;Git accompanies receipt.
 
-P178 time.c:1225->1219;redundant comment removed,CRLF/endif53 restored;14 selected lines match and selected preprocessing unchanged. Full original compile confirms native ABI/declaration closure gaps;5 residual points await owner package-boundary choice. P176 product verification reused;Git accompanies receipt.
-
 P179 vdm.c891->870(-21):remove redundant comments/environment include;original ntrtl declarations suffice. Six actual objects compile;selected source and generated config fragments unchanged. Original x64 casts fail C4311;package/CSR/header boundaries logged for12 owner decisions;OLD_CFG structure confirmed. P176 product verification reused;Git accompanies receipt.
 
 P180 basesrv.h7->4(-3):comment/blank removed;CRLF and original comment28 mapping restored. Actual x64 dispatch needs conditional binding (no /FI);removal fails CSR declarations. DFS restoration C1083. Two qualified boundary decisions;selected preprocessing identical;P176 product validation reused;Git accompanies receipt.
@@ -197,3 +195,5 @@ P189 apiuse ordinary2 unchanged/raw3->2:redundant#line38 removed;all original by
 P190 apiwksta2 unchanged:original bytes except include match;796 content/490 actual MSVC lines preserved. Original header C1083 smb.h;one decision. No product changes;P187 evidence reused;Git accompanies receipt.
 
 P191 xssubs2 unchanged:original bytes except include match;1407 content/747 actual MSVC lines preserved. Original header C1083 smb.h;one decision. No product changes;P187 evidence reused;Git accompanies receipt.
+
+P192 xsunicod2 unchanged:original bytes except include match;165 content/93 actual MSVC lines preserved. Original header C1083 smb.h;one decision. No product changes;P187 evidence reused;Git accompanies receipt.
