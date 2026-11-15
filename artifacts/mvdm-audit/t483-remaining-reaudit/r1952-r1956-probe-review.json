@@ -1,0 +1,57 @@
+{
+  "path": "src/non-mvdm/base/ntos/ex/probe.c",
+  "original_source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/ntos/ex/probe.c",
+  "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+  "mirror_before": {
+    "added": 9,
+    "deleted": 116,
+    "total": 125
+  },
+  "mirror_after": {
+    "added": 4,
+    "deleted": 113,
+    "total": 117
+  },
+  "mirror_delta": -8,
+  "metric": "original-relative added+deleted excluding #line;subset deletions included",
+  "points": [
+    {
+      "id": "T483-R1952",
+      "evidence": "Logical diagnostics repaired: original30 #endif now30;retained original143 formfeed and ProbeForRead start144 restored;54 retained nonblank source lines match.",
+      "decision": "restored/confirmed original structure and required exclusion"
+    },
+    {
+      "id": "T483-R1953",
+      "evidence": "Original exp.h belongs to kernel executive declaration closure. Selected user-mode WOW32 requires only public native RtlRaiseStatus and current process address ceiling;original caller cleanup.c probes selector-list range/alignment before its own SEH-protected copy. Restoring kernel header pulls executive/kernel environment outside this admitted local function boundary. Remove redundant two-line comment;retain finite header/macro binding pending owner.",
+      "decision": "source-qualified residual pending owner"
+    },
+    {
+      "id": "T483-R1954",
+      "evidence": "ALLOC_PRAGMA remains unsupported in actual user-mode WOW32 build. Forced ALLOC_PRAGMA control fails on retained #error;normal selected preprocessing unchanged.",
+      "decision": "restored/confirmed original structure and required exclusion"
+    },
+    {
+      "id": "T483-R1955",
+      "evidence": "Only ProbeForRead is reached from original USER cleanup.c. ProbeForWrite is an unadmitted page-writing kernel helper,with PAGE_SIZE/MM_USER_PROBE_ADDRESS/exception environment dependencies;no product caller requires its page touches. Retain function subset boundary pending owner;do not claim original ProbeForWrite algorithm broken.",
+      "decision": "source-qualified residual pending owner"
+    },
+    {
+      "id": "T483-R1956",
+      "evidence": "Retain existing Alpha rejection but return original conditional framework to source order106/121/128 before ProbeForRead144. No backward diagnostic jumps remain after end of file. Forced Alpha compile still fails;selected preprocessing byte-equivalent after removing diagnostic directives.",
+      "decision": "restored/confirmed original structure and required exclusion"
+    }
+  ],
+  "counter_review": "No evidence original read algorithm is defective;it remains exact. Private kernel boundary and unused write helper are scope decisions,not original algorithm defects. Alpha guard is retained under owner requirement;no selected write routine is imported. Moving guard changes neither supported macro state nor selected tokens.",
+  "lines": {
+    "retained_nonblank": 54,
+    "mismatches": []
+  },
+  "preprocessed_identity": true,
+  "preprocessed_sha256": "6b32abef0b71ff3b8c97b87e9ba2708ed241a31c23cc4c8c7668fa2d73997c02",
+  "fixture": "test/adapter-mvdm-host-out/wow/wow_original_probe_fixture.c",
+  "fixture_result": "WOW_ORIGINAL_PROBE errors=0 alignment=5 range=3 no_page_touch=1 access_fault_caught=1",
+  "alpha_rejection": "probe.c\nO:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\base\\ntos\\ex\\probe.c(107): fatal error C1189: #error:  Excluded unsupported original Alpha probe branch\n",
+  "allocation_rejection": "probe.c\nO:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\base\\ntos\\ex\\probe.c(28): fatal error C1189: #error:  DIVERGENCE OPENNT-HOST-144: kernel allocation pragma profile is not selected\n",
+  "actual_build_context": "build/.ninja/msvc-x86-release/wow32/build.ninja:obj/opennt-user/probe.obj default cflags",
+  "delivery": "format/conditional-position/logical-line only;P173 published product and Full19 reused;Git accompanies receipt"
+}

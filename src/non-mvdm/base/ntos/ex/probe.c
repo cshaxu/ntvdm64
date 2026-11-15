@@ -22,18 +22,24 @@ Revision History:
 
 --*/
 
-/* DIVERGENCE(OPENNT-HOST-061): unchanged ProbeForRead; the finite native
- * environment supplies the process address ceiling and status raising. */
 #define WOW_ORIGINAL_USER_PROBE
 #include "wow_user_probe_bindings.h"
 #line 27
 #if defined(ALLOC_PRAGMA)
 #line 28
 #error DIVERGENCE OPENNT-HOST-144: kernel allocation pragma profile is not selected
+#line 30
+#endif
+#line 106
+#if defined(_ALPHA_)
+#line 107
+#error Excluded unsupported original Alpha probe branch
+#line 121
+#else
+#line 128
 #endif
 #line 143
-
-#line 144
+
 #undef ProbeForRead
 NTKERNELAPI
 VOID
@@ -85,11 +91,3 @@ Return Value:
     }
 }
 
-#line 106
-#if defined(_ALPHA_)
-#line 107
-#error Excluded unsupported original Alpha probe branch
-#else
-#line 122
-#endif
-#line 129

@@ -1,0 +1,22 @@
+{
+  "status": "selected preprocessing identical;54 original retained lines match;real original probe fixture passed;both rejected macro controls failed as required;reuse P173 product validation",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "sha256": "92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f"
+    }
+  ],
+  "mirror_delta": -8,
+  "reused_receipt": "batch-p173-checkpoint.json",
+  "restored_confirmed_points": [
+    "T483-R1952",
+    "T483-R1954",
+    "T483-R1956"
+  ],
+  "pending_points": [
+    "T483-R1953",
+    "T483-R1955"
+  ],
+  "review": "r1952-r1956-probe-review.json"
+}
