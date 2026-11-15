@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2018 reviewed:696 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1314 qualified pending;702 unreviewed. Files281/365 audited,84 remain.
+2019 reviewed:697 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1314 qualified pending;701 unreviewed. Files282/365 audited,83 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -172,8 +172,6 @@ P176 final:environ14->11(-3);ordinary semantic diff removed,excluded11 retained;
 
 P181 srvvdm.c93->84(-9):redundant comment/null-output guard removed;CRLF and endif logical lines restored;2317 original lines match. Notification current5/5,original control3 failures;native casts fail actual x64 build. Cached,publish11x2,service/Full passed;10 residual decisions;Git accompanies receipt.
 
-P183 apibuff.c188->174(-14):original comments restored;selected actual preprocessing unchanged;55 original lines match. Full original misses rpcutil.h;public allocator ownership remains2 pending decisions. P181 product verification reused;Git accompanies receipt.
-
 P184 memalloc.c:selected original subset confirmed;ordinary semantic0,excluded diff57 unchanged. Four boundary #line corrected;173 original lines match;7#error retained. Actual original/before/final preprocessing identical;P181 product evidence reused;Git accompanies receipt.
 
 P185 convert.c:selected original subset confirmed;ordinary semantic0,excluded diff33 unchanged. Six boundary #line corrected;1743 original lines match;7#error retained. Actual original/before/final preprocessing identical;P181 product evidence reused;Git accompanies receipt.
@@ -197,3 +195,5 @@ P193 xsunicod.h18 unchanged(all excluded):redundant#line46 removed,endif#line83 
 P194 dlcio.h75 unchanged(all excluded):original CRLF restored;redundant#line470 removed,else#line734 restored;two#error retained.5 contexts original/before/final tokens and354 header lines equal;two negative C1189;654 source lines match. P187 product evidence reused;Git accompanies receipt.
 
 P195 ntddser.h10 unchanged(all excluded):CRLF preserved;redundant#line37 moved to endif#line42;three#error retained.3 contexts original/before/final tokens and124 header lines equal;two negative C1189;578 source lines match. P187 product evidence reused;Git accompanies receipt.
+
+P196 ntddvdeo.h66 unchanged(all excluded):CRLF preserved;endif#line1580 fixed;line directives6->2;three#error retained.6 contexts tokens and290 header lines equal;two negative C1189;1405 source lines match. P187 product evidence reused;Git accompanies receipt.

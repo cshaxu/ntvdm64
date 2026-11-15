@@ -27,10 +27,8 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-#line 30
 #error Unsupported excluded original configuration
 #endif
-#line 32
 
 #include <tvout.h>
 
@@ -1518,8 +1516,8 @@ typedef struct _VIDEO_LUT_RGB256WORDS {
 
 
 #ifndef _WINCON_
-#line 1519
 #error Unsupported excluded original configuration
+#line 1580
 #endif // _WINCON_
 #line 1581
 
@@ -1623,10 +1621,8 @@ typedef struct _FSVIDEO_CURSOR_POSITION {
 } FSVIDEO_CURSOR_POSITION, *PFSVIDEO_CURSOR_POSITION;
 
 #ifdef __cplusplus
-#line 1682
 #error Unsupported excluded original configuration
 #endif
-#line 1684
 
 #endif  // _NTDDVDEO_
 

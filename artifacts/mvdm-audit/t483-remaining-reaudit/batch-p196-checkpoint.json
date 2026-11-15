@@ -1,0 +1,82 @@
+{
+  "status": "original selected header and structural line mapping confirmed;line-only cleanup delivered",
+  "proof": {
+    "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+    "sha256": "18144a49d2c6093c9ed428c2862a1be9388a780feb638b186bcfc6820d568364",
+    "original_sha256": "e81160b69920ee87d603fe593916994f8448a280b2a2adfefd34c190b1b3cb78",
+    "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddvdeo.h",
+    "source_lines": 1405,
+    "contexts": [
+      {
+        "unit": "nt_event",
+        "selected_header_lines": 290,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_det",
+        "selected_header_lines": 290,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "config",
+        "selected_header_lines": 290,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_timer",
+        "selected_header_lines": 290,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_sec",
+        "selected_header_lines": 290,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_mouse",
+        "selected_header_lines": 290,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "line_endings": "original CRLF preserved",
+    "ordinary_diff": 0,
+    "excluded_diff": 66,
+    "mirror_before": 66,
+    "mirror_after": 66,
+    "mirror_delta": 0,
+    "line_directives_before": 6,
+    "line_directives_after": 2,
+    "excluded": 3,
+    "structural_endif_original_line": 1580,
+    "selected_post_endif_line": 1581,
+    "negative_controls": [
+      "_WINCON_ missing -> C1189",
+      "__cplusplus enabled -> C1189"
+    ],
+    "mismatches": []
+  },
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "sha256": "18144a49d2c6093c9ed428c2862a1be9388a780feb638b186bcfc6820d568364"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+    "sha256": "18144a49d2c6093c9ed428c2862a1be9388a780feb638b186bcfc6820d568364"
+  },
+  "mirror_before": 66,
+  "mirror_after": 66,
+  "mirror_delta": 0,
+  "change": "Remove redundant line directives30,32,1519,1682,1684;add line1580 before original endif. Preserve CRLF and three errors;line directive count6->2.",
+  "call_chain": "Six host units nt_event,nt_det,config,nt_timer,nt_sec,nt_mouse include original video IOCTL structures. No runtime or ABI change.",
+  "verification": "Six formal /O2 contexts with explicit header paths:before/final/original tokens and290 selected header lines match. Missing _WINCON_ and enabled __cplusplus yield expected C1189;1405 original retained lines mapped correctly.",
+  "byte_check_note": "Source and diagnostic before copy byte identities checked before applying;original CRLF retained.",
+  "counter_review": "All three excluded arms retained. Original endif1580 restored;four redundant directives eliminated without selected token or line changes. Pinned OpenNT source hash verified.",
+  "product_verification": "P187 cached build,11-image dual publication,Full and focused controls reused under line-only equivalence authorization;not a new runtime run.",
+  "delivery": "P196 governance/commit/push accompany receipt",
+  "raw_line_diff_before": 72,
+  "raw_line_diff_after": 68,
+  "raw_line_diff_delta": -4
+}
