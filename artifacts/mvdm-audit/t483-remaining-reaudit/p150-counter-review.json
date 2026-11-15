@@ -1,0 +1,25 @@
+{
+  "mode": "single agent second-pass counter-review",
+  "file": "src/mvdm-host/wow32/wow32.c",
+  "source_review": [
+    "GdiQueryTable export exists;do not incorrectly cite missing export. Current SDK direct import fails and dynamic call returns NULL. Only call omission remains;declarations and surrounding original text restored.",
+    "WowKey initialization unnecessary on both successful and fallback paths. Null close returns an ignored error before any release.",
+    "Original exception dispatcher Ignore/Close negative controls fail at phases5/6 while current passes. Reference test uses complete pinned dispatcher,not whole obsolete build closure.",
+    "Removed includes/macros are not referenced and individual/combined actual TU controls pass.",
+    "Directory and registry bindings retain selected product boundary;no new shim or duplicate owner.",
+    "Existing all-error registry fallback is not proved correct. Missing key need is observed;error-specific correction remains an explicit owner decision,not a silently accepted robustness claim."
+  ],
+  "line_proof": "701 equal original source lines retain logical lines;3 intentional registry substitutions separately recorded;all #error bytes unchanged",
+  "mirror_metric": {
+    "before": 930,
+    "after": 893,
+    "delta": -37,
+    "method": "original-relative added+deleted lines;normalize EOL and omit #line"
+  },
+  "guest_changed": false,
+  "test_repairs": [
+    "unused initialization query import fixture alias;map proves its disposal",
+    "pin old source path;replace only complete historical dispatcher"
+  ],
+  "status": "P150 cached build,publish11x2,post-publication focused,Full19/governance passed;Git accompanies receipt"
+}

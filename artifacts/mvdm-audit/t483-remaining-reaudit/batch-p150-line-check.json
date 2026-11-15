@@ -1,0 +1,26 @@
+{
+  "selected_lines": 701,
+  "mirror_before": 930,
+  "mirror_after": 893,
+  "delta": -37,
+  "method": "Raw equal ranges + actual selected product preprocessing membership at original logical line; no unselected #line treated as compiler evidence.",
+  "binding_differences": [
+    {
+      "original": 576,
+      "current": 576,
+      "text": "    if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,"
+    },
+    {
+      "original": 591,
+      "current": 591,
+      "text": "    if (RegQueryValueEx(WowKey,"
+    },
+    {
+      "original": 681,
+      "current": 681,
+      "text": "    RegCloseKey (WowKey);"
+    }
+  ],
+  "logical_line_mismatches": [],
+  "binding_difference_reason": "Original RegOpenKeyExA/RegQueryValueExA/RegCloseKey map to explicit existing worker registry facade at identical logical lines."
+}

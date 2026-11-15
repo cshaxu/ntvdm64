@@ -1,0 +1,86 @@
+{
+  "file": "src/mvdm-host/wow32/wow32.c",
+  "batch": "P150",
+  "status": "Superseded by r1687-r1708-wow32-review.json;historical partial investigation evidence,not current source identity",
+  "head": "231fc43e6df0dfd8d816b7d665e17e7c342c96bb",
+  "header_controls": [
+    {
+      "pid": 27072,
+      "name": "before",
+      "exit": 0
+    },
+    {
+      "pid": 38492,
+      "name": "no-lpc",
+      "exit": 2
+    },
+    {
+      "pid": 6324,
+      "name": "no-page",
+      "exit": 0
+    },
+    {
+      "pid": 22108,
+      "name": "no-nt-undef",
+      "exit": 0
+    }
+  ],
+  "combined_header_control": {
+    "pid": 9416,
+    "exit": 0,
+    "source": "C113C70A3097EE78DB99C9E01501782E7FB2159F6A45D173EF98F427030FFCB0"
+  },
+  "findings": [
+    "R1690 page_domain include has no identifier use in this translation unit; individual and combined removal compilation succeeded.",
+    "R1690 four Nt API undefs have no matching mappings in common/wow/registry.h; individual and combined removal compilation succeeded.",
+    "R1689 removing ntlpcapi fails on PORT_MESSAGE in original ntcsrmsg.h. Original CsrIdentifyAlertableThread is still called in W32Exception debugger startup; do not remove original CSR include merely to bypass declarations.",
+    "R1696 current fallback treats all RegOpenKeyEx failures as absence. Actual provider chain wow_registry_open -> parent ntvdm_shadow_reg_open_key_ex -> open_section can return ERROR_NOT_ENOUGH_MEMORY as well as ERROR_FILE_NOT_FOUND; wow_registry_publish adds allocation failure. Old comment is not sufficient evidence for unconditional continuation.",
+    "GDI original hConvert16to32 still exists in walias.c and reads gpGdiHandleInfo; repository search found no C/H caller. Need actual linked call closure/export evidence before classifying removed GdiQueryTable initialization."
+  ],
+  "remaining": [
+    "Finish full wow32.c point audit before production rewrite or batch build.",
+    "Determine default WOW registry section evidence and original init failure contract.",
+    "Prove GDI private table link boundary and scope/exception complete calling chain.",
+    "Maintain exact #error and compiler logical line proof after final edits."
+  ],
+  "progress_unchanged": {
+    "total": 2720,
+    "approved": 8,
+    "reviewed": 1686,
+    "pending_decision": 1079,
+    "files_audited": 224,
+    "local_restored": 0,
+    "restored_delivered": 599,
+    "unreviewed": 1034,
+    "files_total": 365
+  },
+  "local_edit": {
+    "before": 930,
+    "after": 909,
+    "delta": -21,
+    "eol": "LF",
+    "status": "local partial file edit; unverified; not delivered",
+    "points": [
+      "R1690 partial reduction",
+      "R1693 original declaration restored",
+      "R1697 original close restored"
+    ],
+    "sha256": "c2efbd9d7a11826c7ff490d0c856c278aee8282c026d84458850470ae8efe019",
+    "proof": {
+      "R1693": "Success writes out handle; existing failure branch assigns NULL before any query. No prior WowKey read. Original declaration restored.",
+      "R1697": "ntvdm_shadow_reg_close_key -> validate_key returns ERROR_INVALID_HANDLE before unregister/free on NULL. Caller ignores return. Original unconditional close restored.",
+      "R1690": "Unused page_domain include, four unmapped Nt API undefs and obsolete comment removed. Individual and combined actual TU compilation succeeded."
+    },
+    "line_status": "Every #error preserved. Existing #line38/#line468 bound edited declarations; #line681 immediately before original close. Actual compiler line proof still required."
+  },
+  "gdi_evidence": {
+    "export_present": true,
+    "dynamic_call_nonnull": false,
+    "direct_link_exit": 2,
+    "direct_link_error": "LNK2019 _GdiQueryTable@0 with current x86 SDK gdi32.lib",
+    "selected_link_map": "gpGdiHandleInfo remains data; hConvert16to32 absent; no C/H callers found",
+    "R1691": "Original three declaration lines locally restored",
+    "R1692": "Original comment/blank structure restored; only unavailable direct GdiQueryTable assignment remains omitted. No dynamic wrapper/import binding added."
+  },
+  "successor": "r1687-r1708-wow32-review.json"
+}

@@ -34,10 +34,12 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1686 reviewed:599 restored/confirmed published,0 local,8 approved,
-1079 qualified pending;1034 unreviewed. Files224/365 audited,141 remain.
-P149 diff-62;451 changed-file lines/build/publish/focused/Full19 pass.
-P149 diff-62;build,publish11x2,focused,Full19 passed;next R1687.
+1708 reviewed:606 restored/confirmed published,0 local,8 approved,
+1094 qualified pending;1012 unreviewed. Files225/365 audited,140 remain.
+P150 diff-37;701 retained lines/build/publish/focused/Full19 pass.
+P150 delivery gates passed;Git accompanies receipt.
+P150 mirror930 to893 (-37);cached build,publish11x2,focused,Full19 passed;next R1709.
+[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1687-r1708-wow32-review.json).
 P141 first Full RPC1740 failure retained;test package identity alone changed for isolation.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
@@ -54,10 +56,10 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P149 candidate `09788f28-75f7-486f-bfbd-29724588afb3` published11x2;hashes match.
-Cached full x86/x64,Full19 and governance passed;Git accompanies P149.
+P150 candidate `5b498c14-f614-42ec-9147-c74431b27f75` published11x2;hashes match.
+Cached full x86/x64,Full19 and governance passed;Git accompanies P150.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p149-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p150-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -168,77 +170,8 @@ Residual minimized differences remain pending; final-code verification is requir
 
 P9-P13 delivered; per-batch receipts remain indexed in the active audit README.
 
-## P17 Completed File Batch
+## Earlier Delivery Evidence
 
-P17 delivered the whole-file DPMI restoration and paired address cleanup.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p17-checkpoint.json)
-retains mirror deltas, line proof, publication and tests; unavailable external
-fixtures remain skips. No fresh Win3.x interactive acceptance was claimed.
-
-P18 delivered;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p18-checkpoint.json).
-
-P47-P48 delivered;receipts remain indexed in the active audit README.
-
-P49-P51 delivered;see ordered register and batch receipts.
-R0483 manifest omission pending;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0483-sources-review.json).
-P52:R0484-R0487 restored;mirror diff net-8;full delivery verified.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0484-r0487-zfrsrvd-review.json).
-P54:ev_glue.c R0489-R0494 complete;mirror diff54->25(net-29).
-Two restorations delivered;four residuals await owner.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0489-r0494-ev-glue-review.json).
-
-P55 delivered;five-file mirror diff net-65. Details remain in the indexed evidence.
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0495-evidfunc-header-review.json).
-
-[P55 accessor evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0496-r0499-evidgen-review.json).
-
-P55 R0500 original restored;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0500-j-c-lang-review.json).
-
-P55 R0501 restored;object equivalence and line proof:
-[Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0501-j-c-header-review.json).
-
-R0502:16-case address control;[evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0502-chain2-byte-address-review.json).
-
-R0562/R0563:CHAIN4 word high-byte mask missing;current320/512fail;repair net-increase pending owner. See [proof](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0562-r0563-chain4-word-gap-review.json).
-
-R0568-R0571 restored ineffective byte offsets;original UNCHAINED string width defect still outputs0. [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0564-r0571-final-string-review.json).
-
-P56:sevid00133/33;eight restorations delivered(net-24);next R0605.
-
-sevid004:R0605-R0607 qualified pending owner;source unchanged;next R0608.
-
-sevid016:R0608-R0611 qualified. sevid017:11/11 qualified. sevid018:9/9;LF restored. sevid019:49/49;46 restored;3 residuals;net-140;P57 gates passed;next R0681.
-
-P66 verified/published(diff-127);P67 ios3/3;main4/4 diff-18;cached build/publish11x2 and Full passed;next R0823.
-
-Owner requests committing/pushing the current tree after stopping RDP investigation.
-That RDP checkpoint package was e08de2fa-ed4f-409e-bf87-376e59bb3756; Full19 passed,
-and the owner accepts the RDP input fix. The reported exit is suspected to be
-concurrent-test interference; causality is unconfirmed. See the
-[RDP checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/rdp-input-checkpoint.json).
-
-P68-P74 delivered;indexed batch receipts preserve mirror deltas and Full results.
-P75-P77 delivered;see indexed batch receipts for exact deltas and gates.
-
-P78:five files complete;mirror net-50;five restores delivered,one minimized residual.
-778 line checks0 mismatch;#error retained. Cached build,publish11x2,Full passed;Git delivery accompanies checkpoint;next R1005.
-
-P79 delivered;[review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1005-r1014-nt-bop-review.json).
-
-P80:nt_cga6/6 reviewed;mirror353->338(-15),comments/lines only;build,publish11x2,Full19 passed;nextR1021.
-
-P81 delivered;see active audit README batch receipts.
-
-P82:nt_emm7/7;mirror131->92(-39);real controls0/AV/0,all5 directions/failures,217 lines;build,publish11x2,Full19 passed;nextR1047.
-
-P101 nt_graph24/24 implemented;[receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p101-checkpoint.json).Diff329->262;5restored delivered;lines/focused/Full19 passed;next R1146.
-
-P114 nt_unix.c source complete:mirror100->29(-71),five restorations delivered,one evidenced declaration residual;cached build,publish11x2,Full19 passed.
-
-
-P125 source-complete;mirror814->747(-67);provider16/copy14,1448 lines pass.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1269-r1279-vrnetapi-review.json).
-Cached full build,publish11x2,Full19/governance passed;Git accompanies receipt.
-
-P126 vrnetb confirmed correct;185 lines,4 exclusions,no source change.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1280-vrnetb-review.json);P125 build/publication/Full reused.
+P17–P149 historical batch receipts and reviews remain indexed in the
+[active audit evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md).
+The latest published baseline and active work are reported above.

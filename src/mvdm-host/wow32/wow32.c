@@ -19,8 +19,6 @@
 --*/
 
 #include "precomp.h"
-/* DIVERGENCE(MVDM-HOST-DIV-296): native private USER aliases retain their
- * storage across original thunk calls, including reentry and exception unwind. */
 #include "wow_user_thunk_scope.h"
 #line 22
 #pragma hdrstop
@@ -39,15 +37,7 @@
 #include <ntcsrdll.h>
 #define SHAREWOW_MAIN
 #include <sharewow.h>
-#include "common/wow/page_domain.h"
-/* This selected original read path retains its query/fallback body while
- * using the worker-local NTVDM.REG/system snapshot facade. */
 #include <common/wow/registry.h>
-/* This TU needs only the Win32 registry-reader redirection. */
-#undef NtOpenKey
-#undef NtEnumerateValueKey
-#undef NtQueryValueKey
-#undef NtClose
 
 
 #line 38
@@ -175,6 +165,10 @@ extern BOOL GdiReserveHandles(VOID);
 extern CRITICAL_SECTION VdmLoadCritSec;
 extern LIST_ENTRY TimerList;
 
+#line 159
+extern PVOID GdiQueryTable();
+extern PVOID gpGdiHandleInfo;
+
 #line 162
 #if defined (_X86_)
 #line 163
@@ -250,6 +244,11 @@ Return Value:
             MessageBox(NULL, "The Win16 subsystem could not load critical string resources from wow32.dll, terminating.",
                        "Win16 subsystem load failure", MB_ICONEXCLAMATION | MB_OK);
         }
+
+        //
+        // setup the GDI table for handle conversion
+        //
+
 
 #line 256
         W32EWExecer();
@@ -458,7 +457,7 @@ BOOL W32EWExecData(DWORD fnid, LPSTR lpData, DWORD cb)
 
 BOOL W32Init(VOID)
 {
-    HKEY  WowKey = NULL;
+    HKEY  WowKey;
 #ifdef DEBUG
 #line 464
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
@@ -503,11 +502,6 @@ BOOL W32Init(VOID)
         char szBuf[ MAX_PATH ];
         int cb;
 
-        /* DIVERGENCE(MVDM-HOST-DIV-259): preserve the original directory
-         * publication and short-name normalization, but source only its
-         * directory spelling from the current worker's selected MVDM media.
-         * Modern GetSystemDirectory/GetWindowsDirectory identify the host OS,
-         * not this standalone product package. */
         if (!NtvdmGetSystemDirectoryA(szBuf, sizeof szBuf)) {
             return FALSE;
         }
@@ -598,8 +592,6 @@ BOOL W32Init(VOID)
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #else
 #line 600
-        /* An absent section denotes the original empty-KnownDLL configuration.
-         * The worker-local facade never creates or mutates host state. */
         WowKey = NULL;
 #endif
 #line 604
@@ -648,10 +640,9 @@ BOOL W32Init(VOID)
 
     WK32InitWowIsKnownDLL(WowKey);
 
-    if (WowKey != NULL) {
 #line 681
-        RegCloseKey (WowKey);
-    }
+    RegCloseKey (WowKey);
+
     // 
     // Initialize list of app names known to be setup applications
     //
@@ -854,8 +845,6 @@ VOID W32Dispatch()
 {
     INT iFun;
     ULONG ulReturn;
-    /* DIVERGENCE(MVDM-HOST-DIV-337): a handled exception must complete
-     * CallBack16's deferred CPU-stack pop, but not before a stack exists. */
     BOOL fStackEstablished = FALSE;
     VPVOID vpCurrentStack = 0; // DIV-348: filter arguments precede setup too
     register PTD ptd = NULL;
@@ -971,7 +960,6 @@ VOID W32Dispatch()
 
     } except (wow_user_dispatch_exception(GetExceptionCode(),
             GetExceptionInformation(), ptd, vpCurrentStack, fStackEstablished)) { // DIV-348
-        /* DIV-337: neither continue-search nor continue-execution comes here. */
         if (fStackEstablished) { // DIVERGENCE(MVDM-HOST-DIV-348)
             ptd->vpStack = vpCurrentStack;
             SETVDMSTACK(ptd->vpStack);
@@ -1719,7 +1707,6 @@ PVOID WOWStartupFailed(VOID)
     char szCaption[256];
     char szMsgBoxText[1024];
     DWORD exit_code;
-    /* DIVERGENCE(MVDM-HOST-DIV-356): parent owns whole-worker exit permission. */
     extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 
 #line 2312
@@ -1731,7 +1718,6 @@ PVOID WOWStartupFailed(VOID)
         szCaption,
         MB_SETFOREGROUND | MB_TASKMODAL | MB_ICONSTOP | MB_OK | MB_DEFBUTTON1);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */
     exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
 #line 2320
     ExitVDM(WOWVDM, ALL_TASKS);         // Tell Win32 All Tasks are gone.

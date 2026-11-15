@@ -1,0 +1,230 @@
+{
+  "file": "src/mvdm-host/wow32/wow32.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_sha256": "57ecbebf107dedf72febabe2c9e2040b0deb7e86707b445b1a58af87933ac49f",
+  "points": {
+    "1687": {
+      "decision": "restore",
+      "evidence": "Preserved every excluded #error;701 original retained lines verified at original logical positions;3 named registry binding changes separately recorded.",
+      "mirror_diff_before": 849,
+      "mirror_diff_after": 849,
+      "mirror_diff_delta": 0
+    },
+    "1688": {
+      "decision": "pending",
+      "evidence": "Private USER alias borrows cross native reentry and destruction. wow_user_invoke_thunk enters borrow scope and releases in finally;original private USER storage is unavailable. Existing thunk-scope fixture covers destroying borrowed window and nested exception. Remove explanation-only comment;keep one include.",
+      "mirror_diff_before": 3,
+      "mirror_diff_after": 1,
+      "mirror_diff_delta": -2
+    },
+    "1689": {
+      "decision": "pending",
+      "evidence": "No-LPC actual TU control fails C2061 PORT_MESSAGE in original ntcsrmsg.h;current passes. Original W32Exception still calls CsrIdentifyAlertableThread;original CSR declaration include remains required. Keep one explicit dependency, no new declaration shim.",
+      "mirror_diff_before": 1,
+      "mirror_diff_after": 1,
+      "mirror_diff_delta": 0
+    },
+    "1690": {
+      "decision": "pending",
+      "evidence": "Keep single registry facade include for admitted read-only system baseline/product overlay ownership. Remove unused page_domain include and four obsolete Nt undefs;individual and combined compile controls pass. No provider copied or moved.",
+      "mirror_diff_before": 9,
+      "mirror_diff_after": 1,
+      "mirror_diff_delta": -8
+    },
+    "1691": {
+      "decision": "restore",
+      "evidence": "Original GDI extern declarations restored. Declarations alone require no provider binding;old blanket deletion not necessary.",
+      "mirror_diff_before": 3,
+      "mirror_diff_after": 0,
+      "mirror_diff_delta": -3
+    },
+    "1692": {
+      "decision": "pending",
+      "evidence": "Original direct GdiQueryTable call fails LNK2019 against actual x86 SDK gdi32.lib. Runtime export exists but dynamic call returns NULL. Current link map has no hConvert16to32 and repository C/H has no caller. Restore all surrounding original comments/blanks;retain only omitted assignment rather than new dynamic-import shim.",
+      "mirror_diff_before": 6,
+      "mirror_diff_after": 1,
+      "mirror_diff_delta": -5
+    },
+    "1693": {
+      "decision": "restore",
+      "evidence": "Original uninitialized WowKey declaration restored:successful open writes it;existing failure branch explicitly sets NULL before use. No pre-open read.",
+      "mirror_diff_before": 2,
+      "mirror_diff_after": 0,
+      "mirror_diff_delta": -2
+    },
+    "1694": {
+      "decision": "pending",
+      "evidence": "Original GetSystemDirectory resolves modern host OS, while selected firmware provider returns session-owned root/system32 and verifies existence. Original subsequent short-path/name publication stays. Failed provider returns zero and clears output;retain checked package binding,remove five comment lines.",
+      "mirror_diff_before": 9,
+      "mirror_diff_after": 4,
+      "mirror_diff_delta": -5
+    },
+    "1695": {
+      "decision": "pending",
+      "evidence": "Original GetWindowsDirectory resolves modern host OS instead of session root. Selected provider copies configured package root;zero means failed root acquisition. Keep same-shaped checked directory binding.",
+      "mirror_diff_before": 4,
+      "mirror_diff_after": 4,
+      "mirror_diff_delta": 0
+    },
+    "1696": {
+      "decision": "pending",
+      "evidence": "Actual x86 native RegOpenKeyEx WOW key returns ERROR_FILE_NOT_FOUND(2);provider open_section also returns missing when neither overlay nor native section exists. Original unconditional FALSE would prevent current supported empty-config startup. Existing fallback also swallows real errors:that broader behavior is not justified. Remove misleading comments;owner decision must separate necessary missing-key fallback from error-propagation correction requiring a new diff budget.",
+      "mirror_diff_before": 11,
+      "mirror_diff_after": 9,
+      "mirror_diff_delta": -2
+    },
+    "1697": {
+      "decision": "restore",
+      "evidence": "Original unconditional RegCloseKey restored. Selected close validates NULL,returns ERROR_INVALID_HANDLE before unregister/free,return unused. No extra NULL guard needed.",
+      "mirror_diff_before": 5,
+      "mirror_diff_after": 0,
+      "mirror_diff_delta": -5
+    },
+    "1698": {
+      "decision": "pending",
+      "evidence": "Exception before task/frame assignment reaches filter arguments:initialized state avoids indeterminate reads;established flag distinguishes valid stack. Actual current dispatcher passes early/handled/resumable cases. Remove comment-only addition;retain guarded state.",
+      "mirror_diff_before": 7,
+      "mirror_diff_after": 5,
+      "mirror_diff_delta": -2
+    },
+    "1699": {
+      "decision": "pending",
+      "evidence": "Set established only after CURRENTPTD and saved entry stack are valid. Paired guard avoids restoring an unestablished stack on early exception.",
+      "mirror_diff_before": 1,
+      "mirror_diff_after": 1,
+      "mirror_diff_delta": 0
+    },
+    "1700": {
+      "decision": "pending",
+      "evidence": "Original thunk call runs through bounded alias borrow/finally ownership and saves fWhoCalled/fThunkDDEmsg across reentry. Original USER private object lifetime cannot be assumed for modern aliases. Existing scope fixture covers nested destruction/exception;keep one invocation seam.",
+      "mirror_diff_before": 2,
+      "mirror_diff_after": 2,
+      "mirror_diff_delta": 0
+    },
+    "1701": {
+      "decision": "pending",
+      "evidence": "Pinned historical complete W32Dispatch substituted into current TU fails both Ignore/Close at phases5/6:kill/return marker lands on nested callback instead of entry frame. Current complete W32Dispatch/W32Exception passes8 phases and5 hard-error scopes. Filter temporarily binds entry for original policy then restores pending callback;handler restores CPU only on handled established stack. Remove explanation-only line.",
+      "mirror_diff_before": 9,
+      "mirror_diff_after": 8,
+      "mirror_diff_delta": -1
+    },
+    "1702": {
+      "decision": "pending",
+      "evidence": "W32TryCall uses same thunk ownership seam as W32Dispatch;do not introduce second alias lifetime path. Original W32Exception remains policy owner.",
+      "mirror_diff_before": 2,
+      "mirror_diff_after": 2,
+      "mirror_diff_delta": 0
+    },
+    "1703": {
+      "decision": "restore",
+      "evidence": "Current selected non-FASTBOPPING return0 is already original;no new provider or guest allocation retained.",
+      "mirror_diff_before": 0,
+      "mirror_diff_after": 0,
+      "mirror_diff_delta": 0
+    },
+    "1704": {
+      "decision": "restore",
+      "evidence": "Current selected return(0L) is already original;old fast-BOP deviation gone.",
+      "mirror_diff_before": 0,
+      "mirror_diff_after": 0,
+      "mirror_diff_delta": 0
+    },
+    "1705": {
+      "decision": "restore",
+      "evidence": "Current selected return0 is already original;unsupported FASTBOPPING #error preserved.",
+      "mirror_diff_before": 0,
+      "mirror_diff_after": 0,
+      "mirror_diff_delta": 0
+    },
+    "1706": {
+      "decision": "pending",
+      "evidence": "Startup failure must obtain NTSRV whole-worker exit authorization before original ExitVDM retires task records. Existing authorize_exit waits server/worker control and quiesces active VM frontends;bare ExitProcess bypasses this ownership. Keep local return-code and prototype;remove comment.",
+      "mirror_diff_before": 3,
+      "mirror_diff_after": 2,
+      "mirror_diff_delta": -1
+    },
+    "1707": {
+      "decision": "pending",
+      "evidence": "Ordering matters:request owner permission before ExitVDM ALL_TASKS. Service-loss path maps result to ERROR_INVALID_HANDLE. Keep existing authorization call before retirement;remove comment.",
+      "mirror_diff_before": 2,
+      "mirror_diff_after": 1,
+      "mirror_diff_delta": -1
+    },
+    "1708": {
+      "decision": "pending",
+      "evidence": "Use authorized exit result rather than fixed EXIT_FAILURE to preserve service-loss failure identity. Original ExitProcess remains final owner,not an alternate cleanup route.",
+      "mirror_diff_before": 2,
+      "mirror_diff_after": 2,
+      "mirror_diff_delta": 0
+    }
+  },
+  "line_proof": {
+    "selected_lines": 701,
+    "mirror_before": 930,
+    "mirror_after": 893,
+    "delta": -37,
+    "method": "Raw equal ranges + actual selected product preprocessing membership at original logical line; no unselected #line treated as compiler evidence.",
+    "binding_differences": [
+      {
+        "original": 576,
+        "current": 576,
+        "text": "    if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,"
+      },
+      {
+        "original": 591,
+        "current": 591,
+        "text": "    if (RegQueryValueEx(WowKey,"
+      },
+      {
+        "original": 681,
+        "current": 681,
+        "text": "    RegCloseKey (WowKey);"
+      }
+    ],
+    "logical_line_mismatches": [],
+    "binding_difference_reason": "Original RegOpenKeyExA/RegQueryValueExA/RegCloseKey map to explicit existing worker registry facade at identical logical lines."
+  },
+  "header_controls": [
+    {
+      "pid": 27072,
+      "name": "before",
+      "exit": 0
+    },
+    {
+      "pid": 38492,
+      "name": "no-lpc",
+      "exit": 2
+    },
+    {
+      "pid": 6324,
+      "name": "no-page",
+      "exit": 0
+    },
+    {
+      "pid": 22108,
+      "name": "no-nt-undef",
+      "exit": 0
+    }
+  ],
+  "gdi_direct_link_exit": 2,
+  "gdi_export_present": true,
+  "gdi_dynamic_result_nonnull": false,
+  "wow_native_key_open_status": 2,
+  "dispatcher": {
+    "current": "dispatch-current-v3/fixture.out:PASS",
+    "negative": "dispatch-reference-v5:phases5/6 expected failure",
+    "historical_path": "1122ab55d55b4d15699715ce1416b092b5887772:src/mvdm/wow32/wow32.c",
+    "method": "Complete pinned W32Dispatch only replaced;current surrounding dependencies;no old Fast-BOP restoration"
+  },
+  "test_repairs": [
+    "Explicit unused RegQueryValueEx link dependency added;map must discard W32Init and replacement symbol.",
+    "Historical reference path corrected;extract complete pinned dispatcher to avoid obsolete unrelated headers."
+  ],
+  "counter_review": [
+    "No mirror increase or guest changes.",
+    "Original externs and two unnecessary guards/state restorations restored rather than preserved on old assumptions.",
+    "GDI export existence,SDK linkability and usable table distinguished.",
+    "Missing registry support justified but all-error continuation not endorsed;precise correction retained for owner decision."
+  ],
+  "status": "P150 cached build,publish11x2,post-publication focused,Full19/governance passed;Git accompanies receipt"
+}

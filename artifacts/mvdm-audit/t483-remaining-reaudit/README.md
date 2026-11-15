@@ -1112,3 +1112,7 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [P149 checkpoint](batch-p149-checkpoint.json) and [line proof](batch-p149-line-check.json): frozen whole-file batch,all delivery gates passed.
 
 - [P149 counter-review](p149-counter-review.json): source freeze,original contracts,ownership and ordered-register reconciliation.
+
+- [R1687–R1708](r1687-r1708-wow32-review.json): complete wow32.c dispositions,net mirror diff-37;[line proof](batch-p150-line-check.json). P150 full delivery verified.
+
+- [P150 receipt](batch-p150-checkpoint.json) and [counter-review](p150-counter-review.json): cached build,publish11x2,focused andFull19 passed.

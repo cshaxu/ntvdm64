@@ -1,0 +1,30 @@
+{
+  "batch": "P150",
+  "status": "cached full,publish11x2,post-dispatch,thunk scope,Full19,governance passed;Git accompanies receipt",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "sha256": "57ecbebf107dedf72febabe2c9e2040b0deb7e86707b445b1a58af87933ac49f"
+    },
+    {
+      "path": "test/observation/verify-wow-dispatch-exception.ps1",
+      "sha256": "99667c93c98bc817d3c34cedd1cd3b7a98b64d55a666842991d61a20375b5d74"
+    }
+  ],
+  "mirror_diff_delta": -37,
+  "line_proof": "batch-p150-line-check.json",
+  "review": "r1687-r1708-wow32-review.json",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "5b498c14-f614-42ec-9147-c74431b27f75",
+  "full": {
+    "gates": 19,
+    "all_passed": true,
+    "evidence": "build/t483-s5-p150/full-isolated/timings.json"
+  },
+  "limitations": [
+    "Native and controlled-source probes supplement Full guest tests;no guest modification.",
+    "R1696 existing all-error fallback not endorsed;missing-key support and correction decision separately recorded.",
+    "External DOS4GW fixture absence remains explicit skip."
+  ]
+}

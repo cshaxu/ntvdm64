@@ -36,8 +36,17 @@ try {
         $object="$root/$name.obj";$objects+=('"'+$object+'"')
         $input="$repo/$source"
         if($ReferenceRevision -and $name -eq 'wow32'){
-            $body=(& git -C $repo show "${ReferenceRevision}:$source") -join "`n"
+            $body=(& git -C $repo show "${ReferenceRevision}:src/mvdm/wow32/wow32.c") -join "`n"
             if($LASTEXITCODE){throw 'Missing immutable dispatcher reference'}
+            # Keep unrelated historical headers/providers out of the control.
+            # Substitute only the complete pinned dispatcher, without edits.
+            $pattern='(?s)VOID W32Dispatch\(\).*?(?=\r?\n#if NO_W32TRYCALL)'
+            $reference=[regex]::Matches($body,$pattern)
+            $current=[IO.File]::ReadAllText($input)
+            $selected=[regex]::Matches($current,$pattern)
+            if($reference.Count -ne 1 -or $selected.Count -ne 1){throw 'Dispatcher extraction is not unique'}
+            [IO.File]::WriteAllText("$root/reference-dispatch.inc",$reference[0].Value)
+            $body=$current.Replace($selected[0].Value,$reference[0].Value)
             $input="$root/reference-wow32.c";[IO.File]::WriteAllText($input,$body)
         }
         $extra=if($name -eq 'wow_user_thunk_scope'){' /Dwow_user_invoke_thunk=fixture_unused_original_invoke'}elseif($name -eq 'wow32'){' /DWOWSysErrorBox=wow_user_sys_error_box'}else{''}
@@ -61,7 +70,8 @@ try {
         '_W32GlobalAlloc16@8',
         '_W32Win16WndProcEx@24','_W32InitHookState@4','_Sim32pGetVDMPointer',
         '_W32GetExpWinVer@4','_W32SizeofResource@8','_W32LocalSize@8',
-        '_ntvdm_shadow_reg_open_key_ex@20','_InitCBFormats@0','_W32LocalLock@8',
+        '_ntvdm_shadow_reg_open_key_ex@20','_ntvdm_shadow_reg_query_value_ex@24',
+        '_InitCBFormats@0','_W32LocalLock@8',
         '_W32FindResource@16','_NtvdmGetSystemDirectoryA','_W32UnlockResource@8',
         '_CreateSmallHeap@0','_W32InitWOWSetupNames@0','_W32LocalFree@8','_W32EmptyClipboard@0',
         '_W32LoadResource@8','_W32EditNextWord@20','_W32DDEFreeGlobalMem32@4',
