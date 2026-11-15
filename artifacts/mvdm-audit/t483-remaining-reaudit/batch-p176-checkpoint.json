@@ -1,0 +1,345 @@
+{
+  "status": "cached full,published11x2,focused x86/x64,Full19,RDP Clipboard18,governance passed;Git accompanies receipt",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "sha256": "e838fb88985f2f1c2f8ef982285ab3bbe31157ea0b4b23adb4bb5d28422af747"
+    },
+    {
+      "path": "src/compat/include/environapi.h",
+      "sha256": "118b6957ce079ef8db4d9f9f7c4e7e80725a96fbadc3a71ff35682f0a7257d34"
+    }
+  ],
+  "mirror_before": {
+    "added": 4,
+    "deleted": 10,
+    "total": 14
+  },
+  "mirror_after": {
+    "added": 2,
+    "deleted": 9,
+    "total": 11
+  },
+  "mirror_delta": -3,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "publication": {
+    "status": "published",
+    "package": "83adbf7e-5ee3-4e21-b906-e339b3085d6a",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 423652,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6158,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1674,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 19003,
+        "CleanupMs": 559,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 16116,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 12318,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 277,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66388,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48450,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45310,
+        "CleanupMs": 482,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15717,
+        "CleanupMs": 481,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10394,
+        "CleanupMs": 465,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 67332,
+        "CleanupMs": 434,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12195,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27829,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30306,
+        "CleanupMs": 481,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4962,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7867,
+        "CleanupMs": 511,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10383,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3933,
+        "CleanupMs": 469,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6619,
+        "CleanupMs": 419,
+        "Passed": true
+      }
+    ]
+  },
+  "identity_proof": {
+    "images": [
+      {
+        "publishedSha256": "5AD3632786F694F7CC019FC7E72DBF09E7DF66264AE9064C8CEDC1CDAEFCC67C",
+        "restoredSha256": "5AD3632786F694F7CC019FC7E72DBF09E7DF66264AE9064C8CEDC1CDAEFCC67C",
+        "name": "VCDEX.DLL",
+        "identical": true
+      },
+      {
+        "publishedSha256": "EA6CC431BE84D3CABE42F09D57B2BDD74BF3C1E9E574E9F59344B878E8DD22FD",
+        "restoredSha256": "EA6CC431BE84D3CABE42F09D57B2BDD74BF3C1E9E574E9F59344B878E8DD22FD",
+        "name": "run16.exe",
+        "identical": true
+      },
+      {
+        "publishedSha256": "F95E55C87384EB8C08A9C4B3FBE3BCC99948C6ADF48F6FBA9A0802F7CEEAC609",
+        "restoredSha256": "F95E55C87384EB8C08A9C4B3FBE3BCC99948C6ADF48F6FBA9A0802F7CEEAC609",
+        "name": "ntsrv.exe",
+        "identical": true
+      },
+      {
+        "publishedSha256": "DC38CABF02074605DCD57F3254BFC28C065F4A16363E9C7CE3EB557177C61DD8",
+        "restoredSha256": "DC38CABF02074605DCD57F3254BFC28C065F4A16363E9C7CE3EB557177C61DD8",
+        "name": "ntcon.exe",
+        "identical": true
+      },
+      {
+        "publishedSha256": "9A5700F3A4358DBB4DB14E13532469880ED28DE192A756355A51AF8296F1A688",
+        "restoredSha256": "9A5700F3A4358DBB4DB14E13532469880ED28DE192A756355A51AF8296F1A688",
+        "name": "ntvdm.exe",
+        "identical": true
+      },
+      {
+        "publishedSha256": "83945FC1BF930AA3775D086CD59BDD77E94B3D61585CD884AC7CE0A6F9FA6016",
+        "restoredSha256": "83945FC1BF930AA3775D086CD59BDD77E94B3D61585CD884AC7CE0A6F9FA6016",
+        "name": "ntvwm.exe",
+        "identical": true
+      },
+      {
+        "publishedSha256": "61560B83F4A4D493E94ED39513F63AD792BAB108CF13A45FDD6678BF48D4F2C3",
+        "restoredSha256": "61560B83F4A4D493E94ED39513F63AD792BAB108CF13A45FDD6678BF48D4F2C3",
+        "name": "ntmon.exe",
+        "identical": true
+      },
+      {
+        "publishedSha256": "32F27203674709D06AEAF8B26C0B01ABCB808B27916A8DA077D60A3363F49148",
+        "restoredSha256": "32F27203674709D06AEAF8B26C0B01ABCB808B27916A8DA077D60A3363F49148",
+        "name": "WOW32.DLL",
+        "identical": true
+      },
+      {
+        "publishedSha256": "E2BCE2BF4CFFD00027055CE9DFD1CB63F2C626C6003B2E68598E0A4605E0F567",
+        "restoredSha256": "E2BCE2BF4CFFD00027055CE9DFD1CB63F2C626C6003B2E68598E0A4605E0F567",
+        "name": "VDMREDIR.DLL",
+        "identical": true
+      },
+      {
+        "publishedSha256": "A75437D68CAB63EBE6942E2AAD1709E469CB9A7469A1F5B00FD6173AED6123B3",
+        "restoredSha256": "A75437D68CAB63EBE6942E2AAD1709E469CB9A7469A1F5B00FD6173AED6123B3",
+        "name": "nthook32.dll",
+        "identical": true
+      },
+      {
+        "publishedSha256": "03A415423A61D49075553B48878CC42FC77BC8B055517986CE8F689A57EBF9C8",
+        "restoredSha256": "03A415423A61D49075553B48878CC42FC77BC8B055517986CE8F689A57EBF9C8",
+        "name": "nthook64.dll",
+        "identical": true
+      }
+    ],
+    "testPackage": "ddf0466d-ea9e-4409-bf06-d650d9cb7019",
+    "publishedPackage": "83adbf7e-5ee3-4e21-b906-e339b3085d6a"
+  },
+  "rdp_clipboard": {
+    "first_failure": "RadeonSoftware.exe PID14484 held Clipboard;OpenClipboard error5;96-byte incomplete report",
+    "action": "Verified holder identity and stopped under permanent owner authorization;no product changes",
+    "retry": [
+      {
+        "phase": 12,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 8,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 9,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 10,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 11,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 1,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 2,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 4096
+      },
+      {
+        "phase": 3,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 4096
+      },
+      {
+        "phase": 4,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 6110
+      },
+      {
+        "phase": 5,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 6,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 7,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 13,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 14,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 15,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 16,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 17,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 18,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      }
+    ]
+  }
+}

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1956 reviewed:675 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1273 qualified pending;764 unreviewed. Files261/365 audited,104 remain.
+1958 reviewed:677 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1273 qualified pending;762 unreviewed. Files262/365 audited,103 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -49,13 +49,7 @@ source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
 
-P156 wsext19->8,wspool17->6;mirror-22. Original GetPrn16 restored;cached,publish11x2,focused72/0,raw-spool negative witness,Full19 and governance passed;Git accompanies receipt.
-
-P157 wstruc9->5;mirror-4;original putmsg16 frame declaration restored.1017 retained lines match;cached,publish11x2,DDE/COPYDATA focused,Full19 and governance passed;Git accompanies receipt.
-
 P158 source complete:wuclass51->48;wuclip144->90 (DEBUG exclusion11 unchanged);mirror batch-57. Open-time cache retirement follows original serial/owner ordering;epoch56/0,ownership24/0 and lines536/0 passed. Initial candidate built/published;final2 also restores original NULL-text cache replacement. Final2 cached,publish11x2,epoch56/0,ownership24/0 and Full19 passed;real Clipboard exchange passed after RDP recovery;Git accompanies receipt.
-
-P158 previous access failures retained. After RDP reconnect, native access succeeded;real retries identified RadeonSoftware PID38864 holding the Clipboard. Stopping that confirmed unrelated holder allowed the unchanged final package to pass all18 real Win16 transfer checkpoints. Cached/Full results remain bound to identical final package hashes;Git accompanies receipt.
 
 P159 confirms wucomm.c/h selected original source;C1519 retained lines match,header source line mappings match. Header CRLF restored only;no semantic diff. P158 build/publication/Full results reused;governance and Git accompany this evidence.
 
@@ -91,9 +85,11 @@ P174 csrutil650->622(-28):original header/comment cleanup,174 retained lines mat
 
 P175 probe125->117(-8):both#error preserved in original condition order,54 retained logical lines match. Selected preprocessing unchanged;original probe fixture and negative macro controls passed;P173 runtime evidence reused.
 
+P176 R1957-R1958 restores original environment symbols/includes and removes5 remapping macros;mirror14->11(-3),ordinary diff0.449 MSVC lines match;final verification recorded below.
+
 ## Current Technical Baseline
 
-P173 candidate `4163a393-7484-416c-b244-0e5c1e149751` published11x2;hashes match.
+P176 candidate `83adbf7e-5ee3-4e21-b906-e339b3085d6a` published11x2;hashes match.
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
@@ -209,3 +205,5 @@ P9-P13 delivered; per-batch receipts remain indexed in the active audit README.
 P17–P149 historical batch receipts and reviews remain indexed in the
 [active audit evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md).
 The latest published baseline and active work are reported above.
+
+P176 final:environ14->11(-3);ordinary semantic diff removed,excluded11 retained;449 MSVC lines match. Original RTL names restored with x86/x64 provider and private-PEB clone proof. Cached,publish11x2,focused,Full19,RDP Clipboard18 passed. First RDP failure was confirmed RadeonSoftware Clipboard occupancy;unchanged retry passed. Package 83adbf7e-5ee3-4e21-b906-e339b3085d6a;Git accompanies receipt.

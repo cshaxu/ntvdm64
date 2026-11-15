@@ -1,0 +1,12 @@
+[
+  {
+    "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+    "logical_line_mismatches": [],
+    "actual_msvc": {
+      "selected_retained_lines": 449,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+    }
+  }
+]

@@ -19,8 +19,8 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
-#include "environapi.h"
-#include "zwapi.h"
+#line 22
+#include <zwapi.h>
 #line 23
 #include <nturtl.h>
 #include <string.h>
@@ -29,6 +29,7 @@ Revision History:
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #line 27
 #error Unsupported excluded original configuration
+#line 32
 #endif
 #line 33
 
@@ -290,6 +291,7 @@ RtlQueryEnvironmentVariable_U(
 #if DBG
 #line 289
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 293
 #endif
 #line 294
 

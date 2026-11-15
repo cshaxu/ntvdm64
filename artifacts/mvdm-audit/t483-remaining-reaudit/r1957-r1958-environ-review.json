@@ -1,0 +1,69 @@
+{
+  "points": [
+    "T483-R1957",
+    "T483-R1958"
+  ],
+  "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/ntos/rtl/environ.c",
+  "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+  "before": {
+    "added": 4,
+    "deleted": 10,
+    "total": 14
+  },
+  "after": {
+    "added": 2,
+    "deleted": 9,
+    "total": 11
+  },
+  "ordinary_diff": "3->0;only two existing #error exclusions remain",
+  "decision": "Restore original includes and environment export names;remove five autonomous remapping macros;no replacement shim",
+  "initial_claim": "Private names necessary because modern NTDLL exports same names",
+  "counter_review": "Claim disproved as blanket necessity: original unprefixed object links with ntdll.lib on x86/x64 and existing mutation/clone fixture passes. Explicit object/static-library provider selection,not source renaming,determines definition. Current-consumer prefix dependencies are not independent evidence.",
+  "diagnostic_controls": [
+    {
+      "architecture": "x86",
+      "compile_exit": 0,
+      "variant": "final"
+    },
+    {
+      "architecture": "x86",
+      "compile_exit": 0,
+      "variant": "no-private"
+    },
+    {
+      "architecture": "x64",
+      "compile_exit": 0,
+      "variant": "final"
+    },
+    {
+      "architecture": "x64",
+      "compile_exit": 0,
+      "variant": "no-private"
+    }
+  ],
+  "unprefixed_x86": "ORIGINAL_ENVIRONMENT_UNPREFIXED_OK",
+  "unprefixed_x64": "ORIGINAL_ENVIRONMENT_UNPREFIXED_OK",
+  "identity_witness": "Existing fixture clone reads fixture-private PEB containing RTL_CLONE=present. Native NTDLL clone does not use that private PEB. Link maps independently show local no-private.obj RtlCreate/Destroy definitions.",
+  "caller_review": [
+    "BaseClient vdm.c original clone/destroy use refreshed private PEB ingress",
+    "mvdm_base_vdm_environment creates/destroys explicit original projection",
+    "Original cmdenv.c creates/sets/destroys explicit blocks;no mutation of native process environment is introduced",
+    "Modern DLL-internal calls retain DLL binding;only selected executable local calls use linked original functions"
+  ],
+  "changes": [
+    "Original <zwapi.h> spelling resolves same compat header in real include traces",
+    "Remove extra environapi include from mirror",
+    "Remove all five Rtl->OpenNtRtl environment macros;retain finite API declarations and snapshot helper",
+    "Align RtlSetEnvironmentVariable declaration const qualifications with original public ntrtl.h;no ABI change",
+    "Preserve both #error and correct original #endif32/293 logical positions",
+    "Restore original file CRLF"
+  ],
+  "actual_lines": {
+    "selected_retained_lines": 449,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "final_product_status": "cached full,publish11x2,focused,Full19,RDP Clipboard18 passed;Git accompanies receipt"
+}

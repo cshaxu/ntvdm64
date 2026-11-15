@@ -1214,3 +1214,5 @@ P173: [XMS mover review](r1943-r1944-xmsmemr-review.json), [checkpoint](batch-p1
 P174: [CSR capture review](r1945-r1951-csrutil-review.json), [receipt](batch-p174-checkpoint.json): mirror650->622(-28),original header/comment cleanup;ABI residuals pending;P173 product evidence reused.
 
 P175: [Original read-probe review](r1952-r1956-probe-review.json), [receipt](batch-p175-checkpoint.json): mirror125->117(-8);conditional order and lines repaired;P173 product evidence reused.
+
+P176: [Environment restoration review](r1957-r1958-environ-review.json), [checkpoint](batch-p176-checkpoint.json), [lines](batch-p176-line-check.json): original environment names/includes restored;cached,publish11x2,focused,Full19,RDP Clipboard18 passed;Git accompanies receipt.
