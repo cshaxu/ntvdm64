@@ -1,0 +1,22 @@
+{
+  "status": "cached full,published11x2,window-borrow focused,Full19 and governance passed;Git accompanies receipt",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "sha256": "3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d"
+    }
+  ],
+  "source_files": 1,
+  "mirror_delta": -9,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "a805e6fb-9cb1-4bcd-bec1-bf5e2ea1b8dc",
+  "tests": {
+    "Full_gates": 19,
+    "focused": "actual GetDCEx and published HWND identity window-borrow suite",
+    "focused_exit": 0
+  },
+  "limitations": [
+    "Linked window-borrow fixture calls real production DC thunks and identity owner;Full exercises final runtime.",
+    "External DOS4GW/Nesticle absent:skipped not passed."
+  ]
+}

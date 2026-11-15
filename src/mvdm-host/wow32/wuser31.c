@@ -114,18 +114,12 @@ ULONG FASTCALL WU32GetCursor(PVDMFRAME pFrame)
 ULONG FASTCALL WU32GetDCEx(PVDMFRAME pFrame)
 {
     ULONG ul;
-    HWND hwnd32;
-#line 115
     register PGETDCEX16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
     GETARGPTR(pFrame, sizeof(GETDCEX16), parg16);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */
-    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));
-    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
-#line 120
-    ul = GETHDC16(wow_native_GetDCEx(hwnd32,
+    ul = GETHDC16(wow_native_GetDCEx(HWND32(parg16->f1),
                           HRGN32(parg16->f2),
                           DWORD32(parg16->f3)));
 
@@ -154,12 +148,7 @@ ULONG FASTCALL WU32GetOpenClipboardWindow(PVDMFRAME pFrame)
 {
     ULONG ul;
 
-    UNREFERENCED_PARAMETER(pFrame);
-    /* DIVERGENCE(MVDM-HOST-DIV-454): public USER may return a foreign native
-     * HWND. Reuse only an exact current worker or shared-view publication;
-     * never truncate an unrelated native identity. */
-    ul = GETHWND16(wow_user_window_public_guest_handle(
-            GetOpenClipboardWindow()));
+    ul = GETHWND16(wow_user_window_public_guest_handle(GetOpenClipboardWindow()));
 
 #line 151
     RETURN (ul);

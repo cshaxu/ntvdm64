@@ -1,0 +1,41 @@
+{
+  "path": "src/mvdm-host/wow32/wuser31.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wuser31.c",
+  "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+  "current_sha256": "3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d",
+  "mirror_diff": {
+    "before": {
+      "added": 12,
+      "deleted": 2,
+      "excluded_added": 4,
+      "excluded_deleted": 20
+    },
+    "after": {
+      "added": 3,
+      "deleted": 2,
+      "excluded_added": 4,
+      "excluded_deleted": 20
+    },
+    "delta": -9
+  },
+  "line_check": {
+    "selected_retained_lines": 537,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "source_proofs": {
+    "GetDCEx": "wow_native_GetDCEx uses WOW_NATIVE_MAPPED_CALL/native_window_argument:identical wow_user_window_native_handle resolution and NULL/nonzero-failure distinction. Current original StoreDC consumes guest HWND,not the extra local. Removing duplicate conversion leaves one existing native-call lifetime owner;no new shim.",
+    "Clipboard": "Original walias.h USER16 truncates native HWND. Modern GetOpenClipboardWindow can return a foreign full HWND whose generation is absent or differs from guest copied table. public_guest_handle refreshes typed result into sole graph publisher then checks exact owned or observed full identity;raw truncation skips that required publication/generation check. Existing window-borrow fixture rejects changed generation and withdrawn foreign observation.",
+    "explicit_header": "Actual MSVC wuser31.original.i contains no public_guest_handle declaration;final.i line232837 provides HWND __stdcall prototype from explicit wow_user_object_bindings.h. Residual call requires this declaration for return/calling convention;omitting header would use an implicit default C declaration,not the selected stdcall ABI. This supports the one-line include independently of comment rationale."
+  },
+  "counter_review": "No new identity owner or wrapper. Native HWND/guest copied identity is a representation boundary independent of current adapter demand. Original GetDCEx body can retain its parameter/return/cache shape while existing native wrapper supplies unavailable modern call ownership. Comments and unused-parameter suppression are not behavior and were removed.",
+  "status": "cached,published,tested;Git accompanies receipt",
+  "limits": [
+    "Source identity failure proof is not a newly reproduced Clipboard race."
+  ],
+  "validation": "MSVC537/0;planned existing linked window-borrow actual WU32GetDCEx and public handle tests",
+  "next": "Continue R1912 after Git",
+  "delivery": "batch-p165-checkpoint.json",
+  "verification": "Cached full,published11x2,window-borrow linked DC/identity suite,Full19 passed"
+}

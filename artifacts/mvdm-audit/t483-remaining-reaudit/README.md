@@ -1192,3 +1192,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P163 message header review](r1895-wumsg-header-review.json), [checkpoint](batch-p163-checkpoint.json): comment minimization, original logical-line proof and latest RDP Clipboard witness.
 
 - [P164 USER thunk review](r1896-r1905-wuser-review.json), [line checks](batch-p164-line-check.json), [checkpoint](batch-p164-checkpoint.json): original bitmap restoration and GetDC minimization;cached,publish11x2,resource suite and Full19 passed.
+
+- [P165 USER31 review](r1906-r1911-wuser31-review.json), [line checks](batch-p165-line-check.json), [checkpoint](batch-p165-checkpoint.json): GetDCEx and public Clipboard conversion minimization;cached,publish11x2,window-borrow and Full19 passed.
