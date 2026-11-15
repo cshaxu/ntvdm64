@@ -133,5 +133,6 @@
     "batch_delta": -141,
     "reason": "Correct directive placement plus remove two leftover blank lines in the same entry block;rejected+2 candidate not applied",
     "sha256": "2f4fb290be2e0e5967aa370189bf77dfe74d60a07698da391db7ecae7265b321"
-  }
+  },
+  "owner_approved_revisit": "Owner approved the proposed nt_bop line-placement correction and requested later revisit. The historical +2 alternative was superseded by the delivered zero-increase188->188 solution;approval is recorded,not used to reintroduce discarded edits. Revisit selected-path #line placement and same-block blank-line normalization together."
 }

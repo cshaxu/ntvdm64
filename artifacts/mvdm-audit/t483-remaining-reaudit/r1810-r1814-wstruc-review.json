@@ -1,0 +1,55 @@
+{
+  "path": "src/mvdm-host/wow32/wstruc.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wstruc.c",
+  "before": 9,
+  "after": 5,
+  "delta": -4,
+  "points": [
+    {
+      "id": "R1810",
+      "before": 0,
+      "after": 0,
+      "evidence": "Actual MSVC original/current preprocessing compares1017 retained selected statements with zero logical-line mismatches. Existing excluded bodies and conditional boundaries unchanged.",
+      "decision": "original restored/line confirmed"
+    },
+    {
+      "id": "R1811",
+      "before": 2,
+      "after": 2,
+      "evidence": "getmsg16 can receive caller-supplied WM_COPYDATA through WU32CallMsgFilter or WU32DispatchMessage. Original scalar fallback passes segmented guest lParam and unconverted sender handle to native USER. Existing ThunkWMMsg16 COPYDATA case resolves handles and builds native COPYDATASTRUCT; caller finally wow_message_unwind16 releases captured owned buffers. No new converter is needed.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1812",
+      "before": 3,
+      "after": 2,
+      "evidence": "WI32DDEAddInitiator allocates and returns FALSE on failure; an outer same-HWND initiate may remain in DDEInitiateList. Original unconditional WI32DDEDeleteInitiator removes the first matching outer record even when inner allocation failed. Existing ThunkWMMsg16 captures acquisition success; UnThunkWMMsg16 tests it. Current selected unwind16 does not unthunk DDE again. Prior review claim that the unthunker clears this flag is stale and is not used as evidence.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1813",
+      "before": 2,
+      "after": 1,
+      "evidence": "Native message dispatch must not use a failed pointer-bearing conversion. ThunkMsg16 returns HWND-or-NULL, which cannot distinguish failure from a valid thread message with NULL HWND. Existing separate success result carries converter outcome; scalar/timer getmsg16 path needs TRUE. Original scalar operands and message conversion remain untouched; no second success state introduced.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1814",
+      "before": 2,
+      "after": 0,
+      "evidence": "putmsg16 invokes only WM32Command,WM32DropFiles and7 DDE converters via aw32Msg,always with fThunk=THUNKMSG. It initializes operands,hwnd,uMsg,uParam,lParam,pww,fFree andlpfnM32 before call. All selected reads are initialized; WM32DDEInitiate assigns dwTmp[3] before any unthunk read. lReturn reads belong to unthunk branches not called here. This frame has no generic finally/unwind consuming uninitialized fields. Whole-frame zero initialization is unnecessary; original declaration restored.",
+      "decision": "original restored/line confirmed"
+    }
+  ],
+  "validation": {
+    "selected_retained_lines": 1017,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "delivery": "batch-p157-checkpoint.json",
+  "limits": [
+    "Source/ABI counterexamples are not claimed observed guest failures.",
+    "Historical COPYDATA fixture is supplementary;Full runs on final candidate."
+  ]
+}

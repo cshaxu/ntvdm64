@@ -22,7 +22,15 @@ function Body($source,$name,[switch]$BeforeDdeScope){
  while($depth -and $at -lt $text.Length){if($text[$at] -eq '{'){++$depth}elseif($text[$at] -eq '}'){--$depth};++$at}
  if($depth){throw 'Unbalanced source function'}
  $script:selections+=@{source=$source;name=$name;offset=$m.Index;length=$at-$m.Index}
- return $text.Substring($m.Index,$at-$m.Index)
+ $body=$text.Substring($m.Index,$at-$m.Index)
+ if($name -eq 'ThunkMsgFilterHook'){
+  # Original control flow: hwnd32 is assigned whenever fHookModifiedLpMsg
+  # remains true; vp stays zero until after fUseOld is assigned. MSVC's
+  # optimized standalone extraction loses these branch correlations.
+  # Keep /WX for every other warning/function and retain all failure cases.
+  $body="#pragma warning(push)`n#pragma warning(disable:4701 4703)`n"+$body+"`n#pragma warning(pop)"
+ }
+ return $body
 }
 function CopyCase($source){
  $text=[IO.File]::ReadAllText($source).Replace("`r`n","`n")
@@ -31,7 +39,7 @@ function CopyCase($source){
  foreach($m in $matchesFound){$next=[regex]::Match($text.Substring($m.Index+$m.Length),'(?m)^    case WM_');if(!$next.Success){throw 'Missing exact case boundary'};$length=$m.Length+$next.Index;$script:selections+=@{source=$source;name='COPYDATA-case';offset=$m.Index;length=$length};$text.Substring($m.Index,$length)}
 }
 try{
- $script:selections=@();$original="$repo/src/mvdm-host/wow32";$bodies=@()
+ $script:selections=@();$original="$repo/src/mvdm-host/wow32";$bodies=@(Body "$repo/src/mvdm-host/wow32/walloc16.c" 'stackalloc16')
  foreach($name in @('CopyDataAddNode','CopyDataFindData16','CopyDataFindData32','CopyDataDeleteNode')){$bodies+=Body "$original/wdde.c" $name}
  $bodies+=Body "$original/wmdisp32.c" 'WM32CopyData'
  $cases=@(CopyCase "$original/wmsg16.c")
@@ -58,7 +66,7 @@ try{
  [IO.File]::WriteAllText("$root/queue_selector_intervals.h",$queueBodies)
  $script:selections|ConvertTo-Json|Set-Content "$root/selections.json"
  $fixture="$PSScriptRoot/wow_copydata_lifetime_fixture.c"
- Get-FileHash "$original/wdde.c","$original/wmdisp32.c","$original/wmsg16.c","$original/wowhooks.c","$original/wumsg.c",$adapter,"$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$header,"$root/queue_selector_intervals.h",$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash "$original/walloc16.c","$original/wdde.c","$original/wmdisp32.c","$original/wmsg16.c","$original/wowhooks.c","$original/wumsg.c",$adapter,"$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$header,"$root/queue_selector_intervals.h",$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I"'+$root+'" /I"'+$repo+'/src/wow32-dll/include" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe""') 180
  Owned body "$root/unit.exe" '' 30
  $output=Get-Content "$root/body.stdout.txt" -Raw

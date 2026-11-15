@@ -42,7 +42,8 @@ static CWPSTRUCT cwp_input;
 static MSG filter_input;
 static PCPDATA pCPDataFirst;
 static unsigned errors,attempt,fail_at,live,scenarios;
-static unsigned posted,normal_unthunks;
+static unsigned posted,normal_unthunks,callbacks;
+static BYTE guest_stack[4096];
 static BOOL copy_fault;
 static void *revoke_header;
 static struct { void *pointer; DWORD far_value; } allocations[64];
@@ -90,6 +91,8 @@ static VPVOID GlobalAllocLock16(UINT flags,DWORD bytes,HAND16 *handle) {
     return 0;
 }
 static void *guest_pointer(DWORD value) {
+    if(value>=0x04000000u && value<0x04000000u+sizeof(guest_stack))
+        return guest_stack+(value-0x04000000u);
     unsigned i;
     if(value==0x01000000u)return &input16;
     if(value==0x02000000u)return input_bytes;
@@ -114,8 +117,8 @@ static void copy_bytes(void *to,const void *from,SIZE_T bytes){if(copy_fault)Rai
 #define OLDCB_DIR (WM_USER+5)
 #define TDF_INITCALLBACKSTACK 1u
 #define TDF_IGNOREINPUT 2u
-typedef struct _TD {DWORD vpCBStack,dwFlags;WORD htask16;} TD,*PTD;
-static TD task={0,0,1};
+typedef struct _TD {DWORD vpCBStack,dwFlags;WORD htask16;DWORD vpStack;} TD,*PTD;
+static TD task={0,0,1,0};
 #define CURRENTPTD() (&task)
 BOOL WINAPI wow_user_worker_active(void){return TRUE;}
 /* Other finalizer families are outside this COPYDATA fixture. Fail closed
@@ -150,8 +153,8 @@ LONG ThunkCallWndProcHook(INT,LONG,LPCWPSTRUCT,LPHOOKSTATEDATA);
 LONG ThunkMsgFilterHook(INT,LONG,LPMSG,LPHOOKSTATEDATA);
 static VPVOID malloc16(DWORD bytes){HAND16 handle;return GlobalAllocLock16(0,bytes,&handle);}
 #define free16 GlobalUnlockFree16
-#define stackalloc16 malloc16
-#define stackfree16 GlobalUnlockFree16
+/* Original stackalloc16 is extracted; stackfree16 is originally empty. */
+#define stackfree16(vp) ((void)(vp))
 static BOOL CallBack16(INT code,PARM16 *args,DWORD procedure,PVPVOID result);
 static BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX p){(void)p;return TRUE;}
 static struct { BOOL (FASTCALL *lpfnM32)(LPWM32MSGPARAMEX); } aw32Msg[WM_USER];
@@ -180,6 +183,7 @@ static ULONG putmsg16(DWORD guest,LPMSG message){
 #include "queue_selector_intervals.h"
 static VOID FASTCALL count_normal_unthunk(LPMSGPARAMEX p){++normal_unthunks;UnThunkWMMsg16(p);}
 static BOOL CallBack16(INT code,PARM16 *args,DWORD procedure,PVPVOID result) {
+    ++callbacks;
     static DWORD outer_vp,outer_header;
     CWPSTRUCT16 *message=guest_pointer(args->HookProc.lParam);
     COPYDATASTRUCT *copy;HOOKSTATEDATA hook={1};MSG different=filter_input;
@@ -210,6 +214,8 @@ static BOOL CallBack16(INT code,PARM16 *args,DWORD procedure,PVPVOID result) {
     *result=0;return TRUE;
 }
 static void reset(unsigned failure) {
+    task.vpCBStack=task.vpStack=0x04000000u+sizeof(guest_stack);
+    callbacks=0;
     unsigned i;
     CHECK(live==0&&pCPDataFirst==NULL);
     for(i=0;i<64;i++)CHECK(!allocations[i].pointer);
@@ -303,6 +309,8 @@ int main(void) {
      for(hook_cwp=FALSE;hook_cwp<=TRUE;++hook_cwp){
         reset(5);hook_mode=0;
         if(hook_cwp)CHECK(!ThunkCallWndProcHook(0,0,&cwp_input,&hook));else CHECK(!ThunkMsgFilterHook(0,0,&filter_input,&hook));
+        /* CWP uses the original non-allocating stack; filter uses malloc16. */
+        CHECK(callbacks==(hook_cwp?1u:0u));
         CHECK(!live&&!pCPDataFirst);
      }
     }

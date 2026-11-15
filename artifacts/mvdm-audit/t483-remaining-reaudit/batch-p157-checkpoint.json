@@ -1,0 +1,37 @@
+{
+  "status": "cached full,published11x2,DDE/COPYDATA focused,Full19 and governance passed;Git accompanies receipt",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "sha256": "4a7300940a0da14ead319b6b8ce2451b21932a2dfd6fcc9390e6f5d6b98dd0bd"
+    },
+    {
+      "path": "test/observation/verify-wow-copydata-lifetime.ps1",
+      "sha256": "e36eb5565c3c5ba07edbc6684b13c7291ca97381c0432e64ee266133a277e0d3"
+    },
+    {
+      "path": "test/observation/wow_copydata_lifetime_fixture.c",
+      "sha256": "0353d38741ab746ac0eb1e1e90f2182c0c8148d32cb81f3cbffbcbb311f55f49"
+    }
+  ],
+  "source_files": 3,
+  "mirror_before": 9,
+  "mirror_after": 5,
+  "mirror_delta": -4,
+  "metric": "Non-excluded point additions+deletions vs pinned original;#line ignored;not LOC",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "runner_corrections": [
+    "Initial relative CompilerDriver path failed before compilation;use absolute path.",
+    "Standalone extracted ThunkMsgFilterHook C4701/C4703 false positives:hwnd32 assigned on sole output-enabling branch;vp nonzero only after fUseOld assigned. Scoped diagnostic annotation,not production initialization;keep all runtime assertions and negatives.",
+    "Runtime AV isolated to scenario27:fixture incorrectly aliases original stackalloc16 to fallible malloc16. Extract real walloc16 stackalloc16 and retain original empty stackfree16;add callback-count assertion distinguishing CWP stack success from filter heap failure. Preserve59 scenarios and all negative controls."
+  ],
+  "package": "3ef10b33-2c68-4451-906a-a14bac74dc4b",
+  "tests": {
+    "focused": "DDE conversion and COPYDATA lifetime checked-in fixtures",
+    "Full_gates": 19
+  },
+  "limitations": [
+    "Focused fixtures use bounded test boundary doubles;not guest interaction proof.",
+    "External DOS4GW/Nesticle fixtures unavailable;case skipped,not passed."
+  ]
+}

@@ -705,7 +705,7 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
         }
 
 #line 761
-    } else if (message == WM_SYSCOMMAND || message == WM_COMMAND || message == WM_DROPFILES || message == WM_COPYDATA || /* DIVERGENCE(MVDM-HOST-DIV-344). */
+    } else if (message == WM_SYSCOMMAND || message == WM_COMMAND || message == WM_DROPFILES || message == WM_COPYDATA ||
                   ( message >= WM_DDE_FIRST && message <= WM_DDE_LAST )) {
         HWND hwnd32;
 
@@ -727,7 +727,6 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
 
         if (message == WM_DDE_INITIATE) {
             LOGDEBUG(LOG_ALWAYS,("WOW::getmsg16:*** ERROR: saw WM_DDE_INITIATE message %04x\n", message));
-            /* DIVERGENCE(MVDM-HOST-DIV-353): consume only ThunkMsg16's token. */
             UnThunkWMMsg16(lpmpex);
 #line 784
         }
@@ -738,7 +737,6 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
     lpmsg->hwnd      = HWND32(hwnd16);
     lpmsg->message   = message;
     lpmsg->wParam    = uParam;
-    /* DIVERGENCE(MVDM-HOST-DIV-344): no converter was required on this path. */
     lpmpex->fThunkSucceeded = TRUE;
 #line 792
 finish_up:
@@ -813,7 +811,7 @@ ULONG putmsg16(VPMSG16 vpmsg16, LPMSG lpmsg)
     UINT    message;
     WPARAM  wParam;
     LPARAM  lParam;
-    WM32MSGPARAMEX wm32mpex = {0}; /* DIV-353: its DDE publication bits are call-private. */
+    WM32MSGPARAMEX wm32mpex;
     ULONG ulReturn;
 
     message = lpmsg->message;

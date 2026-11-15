@@ -1164,3 +1164,7 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [R1801–R1809 whole-file review](r1801-r1809-wspool-review.json):original GetPrn16 restored;mirror17->6;three proven residuals remain pending.
 
 - [P156 receipt](batch-p156-checkpoint.json) and [line proof](batch-p156-line-check.json):mirror-22;cached,publish11x2,focused72,raw-spool witness,Full19 passed.
+
+- [R1810-R1814 review](r1810-r1814-wstruc-review.json), [P157 checkpoint](batch-p157-checkpoint.json), [line proof](batch-p157-line-check.json): whole-file source complete;delivery pending.
+
+- [P157 receipt](batch-p157-checkpoint.json):mirror-4;cached,publish11x2,DDE/COPYDATA focused,Full19 passed.
