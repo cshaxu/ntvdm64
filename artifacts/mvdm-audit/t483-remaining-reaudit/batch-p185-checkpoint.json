@@ -1,0 +1,69 @@
+{
+  "status": "whole-file selected original content confirmed;only excluded branches and line directives differ;P181 product evidence reused",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "sha256": "73874720f6cb913f200d40b32f314ce099dbed7ff5857a9f17ecb7f57817b69c"
+    }
+  ],
+  "mirror_before": {
+    "added": 7,
+    "deleted": 26,
+    "total": 33
+  },
+  "mirror_after": {
+    "added": 7,
+    "deleted": 26,
+    "total": 33
+  },
+  "mirror_delta": 0,
+  "ordinary_semantic_diff": 0,
+  "line_check": {
+    "checked_nonblank_original_lines": 1743,
+    "fixed_directive_lines": [
+      [
+        370,
+        372,
+        "#else"
+      ],
+      [
+        650,
+        656,
+        "#else"
+      ],
+      [
+        751,
+        755,
+        "#else"
+      ],
+      [
+        1180,
+        1179,
+        "#else"
+      ],
+      [
+        1275,
+        1278,
+        "#else"
+      ],
+      [
+        1419,
+        1420,
+        "#else"
+      ]
+    ],
+    "mismatches": [],
+    "tokens_without_line_directives_identical": true,
+    "error_count": 7
+  },
+  "controls": {
+    "before": 0,
+    "final": 0,
+    "original": 0,
+    "selected_preprocessing_identical": true
+  },
+  "actual_context": "Current worker obj/opennt-xactsrv/convert.obj flags;DBCS unselected;full original and both subsets preprocess identically",
+  "counter_review": "All selected RAP conversion statements remain original. Do not restore discarded DBCS implementations or revive nested excluded frameworks. Six directive line corrections affect excluded-arm boundaries only;no new source-level state or shim. No failing-original claim needed because selected original is already intact.",
+  "reused_receipt": "batch-p181-checkpoint.json"
+}

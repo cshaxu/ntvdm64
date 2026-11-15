@@ -368,6 +368,7 @@ Return Value:
 #ifdef DBCS // RapConvertSingleEntry()
 #line 369
 #error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
+#line 372
 #else
 #line 373
                         NetpCopyWStrToStr(
@@ -648,6 +649,7 @@ Return Value:
 #ifdef DBCS // RapConvertSingleEntry()
 #line 648
 #error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
+#line 656
 #else
 #line 657
                     stringSize = STRLEN( (LPTSTR) stringPtr );
@@ -749,6 +751,7 @@ Return Value:
 #ifdef DBCS // RapConvertSingleEntry()
 #line 753
 #error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
+#line 755
 #else
 #line 756
                         NetpCopyTStrToStr( (LPSTR)*StringLocation,
@@ -1178,6 +1181,7 @@ Return Value:
 #ifdef DBCS // RapConvertSingleEntry()
 #line 1177
 #error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
+#line 1179
 #else
 #line 1180
                             NetpCopyTStrToStr( Source,
@@ -1273,6 +1277,7 @@ Return Value:
 #ifdef DBCS // RapConvertSingleEntry ()
 #line 1270
 #error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
+#line 1278
 #else
 #line 1279
                     stringLength = STRLEN( (LPTSTR)stringPtr ) + 1;
@@ -1417,6 +1422,7 @@ Return Value:
 #ifdef DBCS // RapConvertSingleEntry ()
 #line 1418
 #error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
+#line 1420
 #else
 #line 1421
                             LPTSTR Source;
