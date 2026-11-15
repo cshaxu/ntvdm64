@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "65d328ccdf4f4b757929dcef6db47c7574a9c31e9ea5f5c15661651df17c272c",
+  "new_register_sha256": "7e3c547d0679b1d833e7cad3af83f4c31c5a8dc27c633515123a6e664ce45fea",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -15,8 +15,8 @@
     "already-byte-identical-to-original": 1
   },
   "completed": 8,
-  "pending": 809,
-  "next": "T483-R1912",
+  "pending": 808,
+  "next": "T483-R1913",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
@@ -24,29 +24,31 @@
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
   "awaiting_owner_approval": 1246,
-  "reviewed": 1911,
+  "reviewed": 1912,
   "restored_pending_delivery": 0,
-  "batch_modified_implementation_files": 1,
-  "batch_mirror_diff_delta": -9,
+  "batch_modified_implementation_files": 0,
+  "batch_mirror_diff_delta": 0,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
   "pending_decisions": 1246,
-  "restored_verified_published": 657,
-  "last_batch_mirror_diff_delta": -9,
-  "last_delivery": "batch-p165-checkpoint.json",
+  "restored_verified_published": 658,
+  "last_batch_mirror_diff_delta": 0,
+  "last_delivery": "batch-p166-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
   "qualified_pending_decisions": 1246,
-  "pending_decisions_count_note": "657 delivered;0 local;8 approved;1246 pending;809 unreviewed.",
-  "active_rework": "P165 delivered;Git accompanies receipt",
-  "active_investigation": "Next R1912 after commit/push",
+  "pending_decisions_count_note": "658 delivered;0 local;8 approved;1246 pending;808 unreviewed.",
+  "active_rework": "P166 original header confirmation and CRLF restore",
+  "active_investigation": "Next R1913 after Git",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 251,
-  "sequential_files_remaining": 114,
+  "sequential_files_disposition_complete": 252,
+  "sequential_files_remaining": 113,
   "batch_modified_mirror_files": 1,
-  "batch_format_only_files": [],
+  "batch_format_only_files": [
+    "src/mvdm-host/wow32/wusercli.h"
+  ],
   "partial_restoration_pending_delivery": [],
   "new_baseline_gap_evidence": "r0642-r0647-vram-copy-review.json",
   "coupled_changes_pending_ordered_review": [
@@ -61,6 +63,6 @@
   "pending_decision_grouping_note": "CSV rows may group multiple R points;row count and reviewed point count are separate.",
   "count_reconciliation": "p127-progress-reconciliation.json",
   "batch_test_files": [],
-  "partial_file_points_source_reviewed_through": "T483-R1911",
+  "partial_file_points_source_reviewed_through": "T483-R1912",
   "partial_file_review_not_delivery": false
 }

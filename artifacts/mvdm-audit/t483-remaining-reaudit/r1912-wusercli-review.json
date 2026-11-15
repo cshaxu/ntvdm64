@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/wow32/wusercli.h",
+  "original_sha256": "2731955b6f6d24419575806304481b7d866c99b552ec8da756fc956b5dfa4b2e",
+  "before_sha256": "3fb024c93755563fb20cf94c0b4f10674970b5866a053ebd30591c68c92872f3",
+  "after_sha256": "4c47550427950f24fb0995a540b66893dda3b64160dbef820d11817503ceef5e",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wusercli.h",
+  "mirror_diff": {
+    "semantic_added": 0,
+    "semantic_deleted": 0,
+    "delta": 0,
+    "excluded_added": 1,
+    "excluded_deleted": 28
+  },
+  "line_check": {
+    "matched_original_lines": 67,
+    "mismatches": 0,
+    "method": "Equal retained original content lines;conditional directive physical positions excluded from diagnostic-line comparison. Original conditional text preserved;#line42 follows#else and#line98 follows#endif."
+  },
+  "actual_preprocessor": "P165 actual MSVC wuser31.final.i enters wusercli.h and resumes selected else at original42;no#error selected. Production P165 build passed same normalized bytes.",
+  "disposition": "Selected original declarations and conditional frame confirmed;restore original CRLF only",
+  "counter_review": "PMODE32 here controls host table LOCALAPI selection,not admission of immutable guest PMODE32 code. Preserve excluded branch#error. No semantic restoration or new difference.",
+  "validation": "Normalized source unchanged;reuse P165 cached/published/Full19 and window-borrow;no new runtime test claimed",
+  "runner_note": "Initial checker incorrectly treated#else physical position as diagnostic content;corrected checker follows source-policy selected-content line contract. No source changed before that failed assertion."
+}
