@@ -1244,3 +1244,5 @@ P188: [NetService original-body confirmation](batch-p188-checkpoint.json):4 unch
 P189: [NetUse byte/line confirmation](batch-p189-checkpoint.json):ordinary2 unchanged,raw3->2;redundant#line removed;one header decision;P187 evidence reused.
 
 P190: [NetWksta original-byte confirmation](batch-p190-checkpoint.json):2 unchanged;one header decision;no source change;P187 product evidence reused.
+
+P191: [XACTSRV helper original-byte confirmation](batch-p191-checkpoint.json):2 unchanged;one header decision;no source change;P187 product evidence reused.

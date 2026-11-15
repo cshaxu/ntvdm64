@@ -1,0 +1,34 @@
+{
+  "proof": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+    "sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33",
+    "original_sha256": "b3f3831e4a3a1eee6624b28fadaa48742465e1c51a093d6a75ffd9fefaecdd95",
+    "mirror_added": 1,
+    "mirror_deleted": 1,
+    "source_lines": 1407,
+    "msvc_selected_lines": 747,
+    "mismatches": [],
+    "preprocessing_identical": true,
+    "excluded": 0,
+    "source_unchanged": true,
+    "original_header_exit": 2,
+    "original_header_failure": "xactsrvp.h(63): C1083 smb.h absent",
+    "current_preprocessing_exit": 0,
+    "original_body_preprocessing_exit": 0
+  },
+  "status": "original conversion helper bodies byte-identical except header;qualified decision",
+  "mirror_before": 2,
+  "mirror_after": 2,
+  "mirror_delta": 0,
+  "source_files": 0,
+  "files": [],
+  "reviewed_source": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+    "sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33"
+  },
+  "call_chain": "Original XACTSRV handlers -> XsFillEnumBuffer / XsPackReturnData / XsSetDataCount;RAP descriptor conversion,packing,and failure data-count semantics remain original. P187 focused map proves original XsFillEnumBuffer owner;no new caller introduced.",
+  "necessity": "Original aggregate header restored alone fails C1083 smb.h at xactsrvp.h63. P186 isolated original SMB declaration closure additionally reaches absent ntmsv1_0.h. The one-line boundary replaces aggregate declarations, not function bodies.",
+  "counter_review": "All original file bytes except one include already retained;no excluded or line directives. Actual selected headers do not compile original aggregate:independent original-header control fails,not merely an assertion of current adapter dependence. Owner may admit wider original header closure.",
+  "verification": "Actual supported /O2 flags:current/original-body preprocessing identical;747 selected lines and1407 original nonblank lines preserved. Original-header compilation fails C1083 smb.h. No product change;P187 compiled/published/tested package reused.",
+  "delivery": "P191 governance/commit/push accompany receipt"
+}
