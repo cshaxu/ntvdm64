@@ -1,0 +1,27 @@
+{
+  "path": "src/mvdm-host/wow32/wutmr.c",
+  "original_sha256": "e42bc0c7e9dc199ae19414461d65ecf86b7acc55c6d7523792812d73f158bef5",
+  "before_sha256": "2dc58f85d74c4b8a9594d70b5447427a5839d4e878b63f67b95be1c3643bfaff",
+  "current_sha256": "ac32decdb5712f1dbfcdd0948095c2995426f6734b2b284bd85e6ee28a59c296",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wutmr.c",
+  "mirror_diff": {
+    "before": {
+      "added": 2,
+      "deleted": 1
+    },
+    "after": {
+      "added": 1,
+      "deleted": 1
+    },
+    "delta": -1
+  },
+  "evidence": "Original27 TIMERPROC stubs reach W32TimerFunc,which reads aptmrWOWTimers and TimerList before CallBack16. Modern USER callback entry may occur after native-call ownership release. wow_timer_callback enters existing task callback scope and borrow scope before these reads;callback_enter restores original scheduler owner and rejects cleanup,finally returns to native wait. Inner CallBack16 begins too late to cover slot/list accesses. No second timer registry. One renamed body connects original stubs through this finite boundary.",
+  "counter_review": "Original timer identity/lookup/cancellation/conversion algorithm unchanged. Moving rename into broad build macros adds selection complexity without removing host responsibility. Keep one function name change pending owner;delete redundant standalone description. Wrapper fixture alone is not necessity proof.",
+  "line_check": {
+    "kind": "source original logical lines;no fresh preprocessing",
+    "matched": 685,
+    "mismatches": 0
+  },
+  "validation": "Comment/EOL only;normalized noncomment source unchanged. P165 cached,publish11x2,window-borrow and Full19 reused;no new timer race reproduction or fixture pass claimed",
+  "status": "Residual minimized pending owner;Git accompanies receipt"
+}

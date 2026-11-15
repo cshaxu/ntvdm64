@@ -1196,3 +1196,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P165 USER31 review](r1906-r1911-wuser31-review.json), [line checks](batch-p165-line-check.json), [checkpoint](batch-p165-checkpoint.json): GetDCEx and public Clipboard conversion minimization;cached,publish11x2,window-borrow and Full19 passed.
 
 - [P166 USER client header review](r1912-wusercli-review.json), [checkpoint](batch-p166-checkpoint.json): selected original content and lines confirmed;CRLF restored only.
+
+- [P167 timer entry review](r1913-wutmr-review.json), [checkpoint](batch-p167-checkpoint.json): bounded callback entry evidence and comment reduction.

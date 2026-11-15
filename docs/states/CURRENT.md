@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1912 reviewed:658 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1246 qualified pending;808 unreviewed. Files252/365 audited,113 remain.
+1913 reviewed:658 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1247 qualified pending;807 unreviewed. Files253/365 audited,112 remain.
 P155 mirror batch-59;cached,publish11x2,focused353/0,five Win16 modes,Full19 and governance passed;Git accompanies receipt. Approved synchronization remains R1797 revisit.
 P154 DC cache original restored;mirror batch-14;cached,publish11x2,focused,Full19 passed;Git accompanies receipt.
 P153 header4->2;wparam106->94;cached,publish11x2,parameter54,Full19 passed;Git accompanies receipt.
@@ -80,6 +80,8 @@ P164 wuser mirror31->13(-18);original bitmap thunk restored and repeated GetDC c
 P165 wuser31 mirror14->5(-9);MSVC537/0,cached full,publish11x2,linked DC/identity window-borrow,Full19 and governance passed;Git accompanies receipt.
 
 P166 wusercli.h selected original content/line structure confirmed;original CRLF restored only. P165 build/publication/window-borrow/Full19 reused;Git accompanies receipt.
+
+P167 wutmr3->2(-1),duplicate comment removed;original timer body rename remains source-qualified pending owner. Retained logical lines match;P165 product evidence reused;Git accompanies receipt.
 
 ## Current Technical Baseline
 
