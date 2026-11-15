@@ -1,0 +1,8 @@
+{
+  "status": "Format-only original CRLF recovery;P171 product verification reused;Git accompanies receipt",
+  "source_sha256": "a062de312853f50f47764882f0e929a971a390ba50e08b4fff39c1aa8bdde774",
+  "mirror_delta": 0,
+  "package": "62f31338-ddb7-403c-9df4-645078014722",
+  "verification": "P171 cached/publish11x2/Full19/RDP18 unchanged",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924"
+}

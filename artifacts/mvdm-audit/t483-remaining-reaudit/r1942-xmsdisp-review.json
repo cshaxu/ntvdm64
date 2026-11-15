@@ -1,0 +1,27 @@
+{
+  "path": "src\\mvdm-host\\xms.486\\xmsdisp.c",
+  "original_sha256": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+  "before_sha256": "f44b2c9cc2b4730f385e75694e83f0106a69cf399eac010da406fb0273d2212d",
+  "source_sha256": "a062de312853f50f47764882f0e929a971a390ba50e08b4fff39c1aa8bdde774",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/xms.486/xmsdisp.c",
+  "semantic_diff": {
+    "added": 0,
+    "deleted": 0,
+    "delta": 0
+  },
+  "excluded": [
+    {
+      "original_start": 48,
+      "removed": 7,
+      "added": 1
+    }
+  ],
+  "line_check": {
+    "retained": 51,
+    "mismatches": 0,
+    "method": "Compare content/open-condition lines through current #line directives to original;collapsed #endif is preprocessing structure,not content statement"
+  },
+  "context": "Actual worker obj/xms/xmsdisp.obj dependency VALID;PROD/CPU_40_STYLE/CCPU/WIN_32 product flags;excluded DBG branch rejected by existing #error and successful P171 build",
+  "counter_review": "Original dispatch table and indexed call unchanged;no missing bounds check in selected original release code. No additional validation invented. Original CRLF restored;logical lines and preprocessor tokens unchanged.",
+  "verification": "Reuse unchanged P171 built/published package and Full19 plus real Clipboard18/0;no new runtime claim"
+}

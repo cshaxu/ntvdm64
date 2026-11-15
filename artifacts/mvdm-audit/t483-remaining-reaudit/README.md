@@ -1206,3 +1206,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P170 A20 review](r1932-xmsa20-review.json), [checkpoint](batch-p170-checkpoint.json): original selected source confirmed;no source edits.
 
 - [P171 XMS block review](r1933-r1941-xmsblock-review.json), [checkpoint](batch-p171-checkpoint.json), [lines](batch-p171-line-check.json): original guest preconditions and reduced numeric memory boundary;delivery pending.
+
+P172: [XMS dispatch review](r1942-xmsdisp-review.json), [receipt](batch-p172-checkpoint.json); original CRLF restored; P171 product verification reused.
