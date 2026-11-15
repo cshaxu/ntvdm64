@@ -13,7 +13,6 @@
 
 
 #include "precomp.h"
-/* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */
 #include "wow_message_lifetime.h"
 #line 16
 #pragma hdrstop
@@ -174,9 +173,8 @@ SilentError:
     wm32mpex.lReturn = 0;
     goto Done;
     } __finally {
-        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */
         __try { wow_message_unwind32(&wm32mpex); }
-        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }
+        __finally { wow_message_stack_leave(&stack, AbnormalTermination()); }
     }
 #line 161
 }

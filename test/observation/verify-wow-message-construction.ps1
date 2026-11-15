@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$BuildRoot,[Parameter(Mandatory)][string]$CompilerDriver,
- [switch]$Transaction)
+ [switch]$Transaction,[string]$OriginalDialogSource)
 # Supplementary exact selected original bodies, not a substitute runtime.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
@@ -24,7 +24,7 @@ function Region($text,$start,$end,$label){
  $text.Substring($at,$last+$end.Length-$at)
 }
 function Body($text,$name){
- $matchesFound=[regex]::Matches($text,'(?m)^(?:BOOL|VOID|DWORD|PVOID|VPVOID|LONG)\s+(?:FASTCALL\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
+ $matchesFound=[regex]::Matches($text,'(?m)^(?:BOOL|VOID|DWORD|PVOID|VPVOID|LONG|ULONG|HWND)\s+(?:FASTCALL\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
  if($matchesFound.Count -ne 1){throw "One exact body required: $name"}
  $m=$matchesFound[0];$at=$m.Index+$m.Length;$depth=1
  while($depth -and $at -lt $text.Length){if($text[$at] -eq '{'){++$depth}elseif($text[$at] -eq '}'){--$depth};++$at}
@@ -45,7 +45,7 @@ function Owned($name,$file,$arguments,$seconds,$expected){
 try{
  $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
  Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
- Get-FileHash "$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/wow32/wudlg.c","$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
   $lifetime=Read-Source 'src/wow32-dll/include/wow_message_lifetime.h' ($old -and $Transaction)
@@ -137,6 +137,18 @@ try{
     $bodies+='static LONG fixture_notification_'+$variant+'(HWND hwnd,UINT uMsg,UINT uParam,LONG lParam) { wow_message_stack stack; WM32MSGPARAMEX wm32mpex = {0}; (void)uParam; (void)lParam; wow_message_stack_enter(&stack); __try {'+"`n"+$selected+"`n"+'return -1;'+"`n"+$finalizer
    }
   }
+  if($Transaction -and !$old){
+   $bodies+=Body $messages 'ThunkMsg16'
+   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wudlg.c' $false) 'W32DialogFunc'
+   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wudlg.c' $false) 'WU32IsDialogMessage'
+   if($OriginalDialogSource){
+    $originalDialog=[IO.File]::ReadAllText((Resolve-Path $OriginalDialogSource))
+    $bodies+='#define DIALOG_ORIGINAL_CONTROL 1'
+    $bodies+=(Body $originalDialog 'W32DialogFunc').Replace('W32DialogFunc(', 'fixture_original_dialog(')
+    $bodies+=(Body $originalDialog 'WU32IsDialogMessage').Replace('WU32IsDialogMessage(', 'fixture_original_isdialog(')
+    Get-FileHash $OriginalDialogSource | Export-Csv -NoTypeInformation "$root/dialog-original-input.csv"
+   }
+  }
   [IO.File]::WriteAllText("$dir/message_construction_exact_body.h",($bodies -join "`n`n"))
   $define=if($old){'/DBASELINE_IMAGE'}else{''}
   if($Transaction){$define+=' /DTRANSACTION_GROUP'}
@@ -163,6 +175,10 @@ try{
   $families=@([regex]::Matches($current,'(?m)^TRANSACTION_FAMILY index=(\d+) message=([0-9A-F]+) modes=5 errors=0 copy_fault=([01])\r?$'))
   $hookCases=@([regex]::Matches($current,'(?m)^HOOK_COMPLETION family=([01]) mode=([0-3]) trapped=([01]) restored=([01])\r?$'))
   if($hookCases.Count -ne 8){throw 'Missing journal/mouse completion paths'}
+  $expectedDialogControl=if($OriginalDialogSource){1}else{0}
+  if($current -notmatch "DIALOG_GROUP errors=0 original_control=$expectedDialogControl guest_proof=0"){throw 'Incomplete exact dialog entry evidence'}
+  if(@([regex]::Matches($current,'(?m)^DIALOG_ENTRY original=0 mode=')).Count -ne 5 -or
+     @([regex]::Matches($current,'(?m)^ISDIALOG_ENTRY original=0 mode=')).Count -ne 3){throw 'Missing dialog entry cases'}
   if($families.Count -ne 19){throw 'Each delegated heap family must complete its five cases'}
   for($i=0;$i -lt 19;++$i){
    if([int]$families[$i].Groups[1].Value -ne $i){throw 'Family ordering missing'}

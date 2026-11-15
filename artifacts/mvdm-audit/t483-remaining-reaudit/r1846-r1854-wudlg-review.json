@@ -1,0 +1,106 @@
+{
+  "path": "src/mvdm-host/wow32/wudlg.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wudlg.c",
+  "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+  "before_sha256": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+  "current_sha256": "f98049a1afa471764fb825ccdd498a8ad189a697a181c347eba6ee8464ec542b",
+  "mirror_diff": {
+    "before": 21,
+    "after": 19,
+    "delta": -2,
+    "excluded_unchanged": {
+      "added": 5,
+      "deleted": 11
+    },
+    "method": "LF normalized,omit#line,SequenceMatcher;classify#error replacement bodies separately"
+  },
+  "line_check": {
+    "selected_retained_lines": 372,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "initial_review": "Read both original and selected complete entry functions and original converter allocation/unthunk call ordering.",
+  "counter_review": "No claim that existing adapter dependency proves necessity. Exact original entry controls use same selected converter closure and boundary faults;separate source trace identifies original delayed unthunk and DDE fFree read. Removal of duplicate abnormal local preserves completed snapshot;cleanup cannot mutate scope.",
+  "test_evidence": "build/t483-s5-p160/dialog-verified/body-candidate.stdout.log:199 scenarios/0 failures;16 entry variants;final source validated",
+  "limits": [
+    "Boundary doubles,not real guest exception reproduction.",
+    "Original entry controls use current converter closure;not a complete original NT4 runtime comparison.",
+    "Failed conversion is deliberately injected at converter boundary;does not assert every message can fail."
+  ],
+  "points": [
+    {
+      "id": "T483-R1846",
+      "before": "+0/-0",
+      "delta": 0,
+      "problem": "Whole-file line mapping",
+      "evidence": "372 equal selected source statements have actual MSVC original logical lines;5 excluded WOWPROFILE bodies remain#error.",
+      "option": "Confirm original selected structure and line mapping."
+    },
+    {
+      "id": "T483-R1847",
+      "before": "+2/-0",
+      "delta": -1,
+      "problem": "Explicit cleanup declaration",
+      "evidence": "Caller must release converter allocations on exceptional exit;exact entry control demonstrates residual allocation without finalizer. Header supplies the single cleanup ABI;an implicit prototype is not original-function recovery.",
+      "option": "Remove redundant standalone comment;retain include pending owner."
+    },
+    {
+      "id": "T483-R1848",
+      "before": "+4/-1",
+      "delta": 0,
+      "problem": "Initialize acquired-resource state and capture callback stack",
+      "evidence": "Original entry exception control leaves one heap allocation and fails to restore DS-based callback cursor. Early TDF_IGNOREINPUT/missing alias paths precede assigning converter fields;outer finalizer therefore requires a fresh zeroed frame. This retains existing converter ownership,not a second allocator.",
+      "option": "Retain zeroed frame and one call-local stack scope pending owner."
+    },
+    {
+      "id": "T483-R1849",
+      "before": "+1/-0",
+      "delta": 0,
+      "problem": "DDE ACK input ownership",
+      "evidence": "W32DialogFunc selects aw32Msg below0x400;WM_DDE_ACK=0x3e4 reaches original WM32DDE Ack. That original branch reads fFree to release Execute handle pairs. Original WndProc initializesTRUE;dialog original leaves it uninitialized. No new DDE algorithm.",
+      "option": "Retain explicit synchronous ownership flag pending owner."
+    },
+    {
+      "id": "T483-R1850",
+      "before": "+1/-0",
+      "delta": 0,
+      "problem": "Normal callback commit",
+      "evidence": "Scope leave restores on incomplete/exception. Exact normal DS-based GETTEXT control preserves changed cursor;exception restores. Omitting completion would restore even normal original return;error labels must not commit.",
+      "option": "Retain successful completion before Done pending owner."
+    },
+    {
+      "id": "T483-R1851",
+      "before": "+5/-0",
+      "delta": -1,
+      "problem": "Exception cleanup",
+      "evidence": "Exact original W32DialogFunc with same selected converter closure leaks heap after callback exception and leaves DS-based cursor changed. Normal original unthunk occurs after CallBack16 and cannot run on escaping exception. stack_leave already checks !completed;its duplicate local is unnecessary.",
+      "option": "Delete duplicate abnormal local;pass AbnormalTermination and retain one finalization chain pending owner."
+    },
+    {
+      "id": "T483-R1852",
+      "before": "+2/-1",
+      "delta": 0,
+      "problem": "IsDialogMessage partial-conversion scope",
+      "evidence": "Exact original WU32IsDialogMessage native-exception control leaves one original parameter-map record. Input mapping/conversion can fail before all fields assigned;cleanup inspects conversion progress.",
+      "option": "Retain zeroed call-local frame and SEH boundary pending owner."
+    },
+    {
+      "id": "T483-R1853",
+      "before": "+1/-0",
+      "delta": 0,
+      "problem": "Reject unsuccessful conversion",
+      "evidence": "Exact ThunkMsg16 records converterFALSE. Original WU32IsDialogMessage ignores returned failure and invokes native API;controlled converter-failure case confirms1 call versus current0. HWND0 is not a sufficient generic success signal.",
+      "option": "Retain one success-status check pending owner."
+    },
+    {
+      "id": "T483-R1854",
+      "before": "+3/-0",
+      "delta": 0,
+      "problem": "Release failed native input conversion",
+      "evidence": "Exact original caller native-exception control leaves map1;current0. Actual selected text converter and parameter-map owner compiled;native service is a boundary double. No output unthunk replay.",
+      "option": "Retain shared input-only finalizer pending owner."
+    }
+  ],
+  "delivery": "batch-p160-checkpoint.json"
+}

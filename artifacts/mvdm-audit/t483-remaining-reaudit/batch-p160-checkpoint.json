@@ -1,0 +1,34 @@
+{
+  "status": "cached full,published11x2,exact-dialog controls199/0,Full19 and governance passed;Git accompanies receipt",
+  "mirror_delta": -2,
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "sha256": "f98049a1afa471764fb825ccdd498a8ad189a697a181c347eba6ee8464ec542b"
+    },
+    {
+      "path": "test/observation/verify-wow-message-construction.ps1",
+      "sha256": "a37d24d76b156e980dd9d7fe4f4124a6685d80f67242d6e554bfe5fd58d1929c"
+    },
+    {
+      "path": "test/observation/wow_message_construction_fixture.c",
+      "sha256": "e3af5e9d9fc33974a3b4efb666e808327f15ffb05edf9f536e056fad581c504c"
+    }
+  ],
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "286d49d6-4333-4382-8cf3-4e61b6da91b4",
+  "tests": {
+    "focused_scenarios": 199,
+    "focused_failures": 0,
+    "dialog_entry_variants": 16,
+    "Full_gates": 19
+  },
+  "limitations": [
+    "Exact-body source controls with boundary doubles;not guest fault reproduction.",
+    "External DOS4GW/Nesticle fixtures absent;skipped not passed."
+  ],
+  "runner_notes": [
+    "First two extended fixture compiles exposed omitted PMSG16 alias and mistyped function-table name;test declarations corrected,no product workaround."
+  ]
+}

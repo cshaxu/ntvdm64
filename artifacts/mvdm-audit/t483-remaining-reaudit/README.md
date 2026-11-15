@@ -1182,3 +1182,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P158 delivered receipt](batch-p158-checkpoint.json): mirror net-57;cached,publish11x2,epoch56/0,ownership24/0,real Win16 Clipboard transfer and Full19 passed.
 
 - [P159 wucomm review](r1844-r1845-wucomm-review.json): selected original implementation confirmed;DEBUG exclusions retained;header original CRLF restored.
+
+- [P160 dialog review](r1846-r1854-wudlg-review.json), [line proof](batch-p160-line-check.json), [delivery checkpoint](batch-p160-checkpoint.json): original-entry controls and minimal call-owned cleanup.
