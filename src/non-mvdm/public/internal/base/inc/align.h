@@ -95,12 +95,13 @@ Environment:
 #define ALIGN_WORST             8
 
 #elif defined(_AMD64_)
-#line 98
 #error Unsupported excluded original configuration
+#line 101
 #else  // none of the above
 
-#line 102
+#line 103
 #error "Unknown alignment requirements for align.h"
+
 #endif  // none of the above
 #line 106
 

@@ -1256,3 +1256,5 @@ P194: [DLC header line mapping](batch-p194-checkpoint.json):75 excluded unchange
 P195: [Serial header line mapping](batch-p195-checkpoint.json):10 excluded unchanged,ordinary0;3 context comparisons and two excluded-profile negative controls;P187 evidence reused.
 
 P196: [Video header line mapping](batch-p196-checkpoint.json):66 excluded unchanged,ordinary0;6 context comparisons and two excluded-profile negative controls;P187 evidence reused.
+
+P197: [Alignment header restoration](batch-p197-checkpoint.json):mirror5->4,raw8->7;9 contexts and both negative diagnostics checked. Shared Clipboard retry remains failed.

@@ -1,0 +1,172 @@
+{
+  "status": "original selected content confirmed;format and diagnostic mapping restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/base/inc/align.h",
+    "sha256": "5d992f962c41f8cd776c2715d469097980e556d9a164200279625fcc15d2eacb",
+    "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+    "source_lines": 75,
+    "contexts": [
+      {
+        "unit": "vrnmpipe",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "examine",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "convert",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "auxdata",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "packstr",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "copystr",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "memalloc",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "allocstr",
+        "selected_header_lines": 17,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 5,
+    "mirror_after": 4,
+    "mirror_delta": -1,
+    "raw_before": 8,
+    "raw_after": 7,
+    "line_directives_before": 3,
+    "line_directives_after": 3,
+    "excluded_arms": 1,
+    "errors": 2,
+    "negative_controls": [
+      "AMD64 excluded error line98",
+      "original unknown architecture error line103"
+    ],
+    "line_endings": "CRLF preserved",
+    "first_candidate": "Unknown architecture line102 disproved;final adds selected-arm line103; final controls authoritative"
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "sha256": "5d992f962c41f8cd776c2715d469097980e556d9a164200279625fcc15d2eacb"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/base/inc/align.h",
+    "sha256": "5d992f962c41f8cd776c2715d469097980e556d9a164200279625fcc15d2eacb"
+  },
+  "mirror_before": 5,
+  "mirror_after": 4,
+  "mirror_delta": -1,
+  "raw_before": 8,
+  "raw_after": 7,
+  "change": "Remove redundant line98;replace incorrect line102 with selected-arm line103;restore original blank104 and else boundary101;retain post-group106.",
+  "call_chain": "Nine formal x86 consumers in VDM redirector, xactsrv, RAP and netlib;original alignment macros unchanged.",
+  "verification": "27 before/final/original preprocessings agree in tokens and 17 selected header lines per context;75 retained nonblank original lines map correctly. AMD64 rejection98 and original unknown-profile rejection103 verified.",
+  "counter_review": "One excluded AMD64 body remains #error. Original unknown-profile #error retained, not counted as a removed arm. First candidate negative line102 corrected before final proof.",
+  "product_verification": "P187 package reused for token/line-equivalent formatting change;22 publication hashes match. No new product build/runtime pass claimed.",
+  "shared_clipboard_recheck": {
+    "runs": [
+      {
+        "run": "transfer",
+        "passed": false,
+        "records": [
+          {
+            "phase": 12,
+            "errors": 0
+          },
+          {
+            "phase": 8,
+            "errors": 0
+          },
+          {
+            "phase": 9,
+            "errors": 0
+          },
+          {
+            "phase": 10,
+            "errors": 0
+          },
+          {
+            "phase": 11,
+            "errors": 0
+          },
+          {
+            "phase": 1,
+            "errors": 0
+          },
+          {
+            "phase": 1,
+            "errors": 1
+          }
+        ],
+        "failure": "Incomplete report: 84 bytes, expected 216; phase 1 failure",
+        "observerExit": 0
+      },
+      {
+        "run": "retry",
+        "passed": false,
+        "records": [
+          {
+            "phase": 12,
+            "errors": 0
+          },
+          {
+            "phase": 8,
+            "errors": 0
+          },
+          {
+            "phase": 9,
+            "errors": 0
+          },
+          {
+            "phase": 10,
+            "errors": 0
+          },
+          {
+            "phase": 11,
+            "errors": 0
+          },
+          {
+            "phase": 1,
+            "errors": 0
+          },
+          {
+            "phase": 1,
+            "errors": 1
+          }
+        ],
+        "failure": "Incomplete report: 84 bytes, expected 216; phase 1 failure",
+        "observerExit": 0
+      }
+    ],
+    "sourceChanged": false,
+    "conclusion": "Desktop-capable runner started and guest exited. Shared Clipboard transfer failed twice at phase 1. Post-run holder query returned none; this does not establish absence of contention at the failure instant. Root cause not established.",
+    "package": "27eb1fbe-c074-4fc6-a994-6c1f95b0e306",
+    "publicationMatches": 22
+  },
+  "delivery": "P197 governance commit and push accompany receipt"
+}
