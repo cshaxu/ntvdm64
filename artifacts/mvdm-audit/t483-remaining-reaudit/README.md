@@ -1180,3 +1180,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [R1824-R1843 completed file review](r1824-r1843-wuclip-review.json), [P158 checkpoint](batch-p158-checkpoint.json), [line proof](batch-p158-line-check.json): mirror144->90;original open-time cache retirement restored;epoch56/0 and ownership24/0;delivery pending.
 
 - [P158 delivered receipt](batch-p158-checkpoint.json): mirror net-57;cached,publish11x2,epoch56/0,ownership24/0,real Win16 Clipboard transfer and Full19 passed.
+
+- [P159 wucomm review](r1844-r1845-wucomm-review.json): selected original implementation confirmed;DEBUG exclusions retained;header original CRLF restored.

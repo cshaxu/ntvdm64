@@ -1,0 +1,38 @@
+{
+  "points": [
+    "R1844",
+    "R1845"
+  ],
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32",
+  "initial_review": "Only DEBUG exclusions and line scaffolding;no selected implementation difference.",
+  "counter_review": "Old mismatch reports described skipped conditional directives,not selected statements. Actual MSVC checks1519 retained C lines without mismatch;header source logical mappings checked separately.",
+  "c_preprocess": {
+    "selected_retained_lines": 1519,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "header_selected_source_line_checks": 249,
+  "header_line_limit": "Header declarations use source logical mapping;no claim that unexpanded macro definitions emit preprocessed statements. Current header is included by actual precomp.h:87 in C proof.",
+  "format_restoration": "wucomm.h LF to original CRLF only;normalized content unchanged",
+  "semantic_diff_before": 0,
+  "semantic_diff_after": 0,
+  "excluded_bodies": {
+    "wucomm.c": 2,
+    "wucomm.h": 1
+  },
+  "decision": "Confirm original selected source;keep DEBUG #error. No residual nonexcluded diff needs pending decision.",
+  "validation": "Existing P158 cached/full/package remain valid;no functional change. Two same SDK SERIAL_IOC macro warning cohorts in original/current preprocessing,not introduced by this audit.",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+      "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "sha256": "5af5c5965602bb4d13e03451f35f991c0046ed8280b3530210e385859259b015",
+      "original_sha256": "43d3f49fe9abb8fbbbe1a93e7725f7a368676dfadd764c8f0497a4218b23f77b"
+    }
+  ]
+}
