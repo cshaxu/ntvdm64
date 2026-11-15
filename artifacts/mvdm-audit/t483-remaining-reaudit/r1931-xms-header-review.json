@@ -1,0 +1,57 @@
+{
+  "path": "src/mvdm-host/xms.486/xms.h",
+  "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+  "source_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/xms.486/xms.h",
+  "semantic_diff": {
+    "added": 0,
+    "deleted": 0,
+    "delta": 0
+  },
+  "excluded": [
+    {
+      "original_start": 23,
+      "removed": 1,
+      "added": 1
+    },
+    {
+      "original_start": 27,
+      "removed": 2,
+      "added": 1
+    },
+    {
+      "original_start": 32,
+      "removed": 2,
+      "added": 1
+    },
+    {
+      "original_start": 44,
+      "removed": 2,
+      "added": 1
+    },
+    {
+      "original_start": 63,
+      "removed": 1,
+      "added": 1
+    },
+    {
+      "original_start": 73,
+      "removed": 2,
+      "added": 1
+    },
+    {
+      "original_start": 78,
+      "removed": 2,
+      "added": 1
+    }
+  ],
+  "line_check": {
+    "retained": 120,
+    "mismatches": 0,
+    "method": "Full equal source content logical-line check;conditional directive positions excluded,framework unchanged"
+  },
+  "context": "Actual worker build.ninja selects xms.c and other XMS objects;Ninja -t deps obj/xms/xms.obj reports VALID and includes xms.486/xms.h. XMS translation units add WIN_32. This is XMS API/state declarations,not activation of a hardware486 CPU backend.",
+  "counter_review": "Seven unequal ranges exactly#error replacements;all other lines original. Prior reported#endif line mismatches arise from counting collapsed excluded bodies;active continuation#line restores original contents. No policy change or new exclusion inferred from a missing hit.",
+  "disposition": "Original selected subset confirmed;no source edits",
+  "verification": "Reuse P168 final2 cached full,published11x2,focused,Full19;no new compilation or runtime pass claimed"
+}

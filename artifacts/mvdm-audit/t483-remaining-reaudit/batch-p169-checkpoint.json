@@ -1,0 +1,8 @@
+{
+  "status": "Evidence only;P168 final2 build/publication/tests reused;Git accompanies receipt",
+  "source_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f",
+  "source_unchanged": true,
+  "mirror_delta": 0,
+  "package": "8c6cdc2c-95a2-4a80-bac6-446d84b9d975",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924"
+}
