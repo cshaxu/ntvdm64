@@ -1,0 +1,19 @@
+{
+  "point": "T483-R1653",
+  "file": "src/mvdm-host/wow32/wmsgbm.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "97fc40e12c5aaed2931202496c51c98f22d19a5ce713301eb9173c4290c02288",
+  "current_sha256": "52fd5d7707b47d7d9ad99343c65f167d70e4fd15b0701a659ecbdf223d353356",
+  "selected_lines": 20,
+  "line_mismatches": [],
+  "non_exclusion_diff": 0,
+  "excluded_bodies": 1,
+  "modifications": 0,
+  "conclusion": "Only excluded DEBUG button-message names and lookup differ;actual button translation and logical lines exactly original.",
+  "evidence": [
+    "build/t483-s5-p148/button.cmd",
+    "build/t483-s5-p148/wmsgbm.original.i",
+    "build/t483-s5-p148/wmsgbm.candidate.i"
+  ],
+  "limits": "Preprocessing identity in actual selected product profile;no source change or new runtime claim."
+}

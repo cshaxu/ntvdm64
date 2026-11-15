@@ -1,0 +1,19 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.h",
+  "point": "T483-R1652",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "5be82d02a3a1728b5e20c5892fcebae150c5c290e5ec77e8643bd91c6e6fb1ee",
+  "current_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
+  "selected_lines": 14,
+  "selected_code_and_logical_lines_identical": true,
+  "excluded_bodies": 2,
+  "non_exclusion_diff": 0,
+  "modifications": 0,
+  "conclusion": "Only the excluded DEBUG MSGINFO and GetWMMsgName declarations differ; keep both #error branches. Selected declarations and original logical lines agree.",
+  "evidence": [
+    "build/t483-s5-p148/header.cmd",
+    "build/t483-s5-p148/wmsg16.h.original.i",
+    "build/t483-s5-p148/wmsg16.h.candidate.i"
+  ],
+  "limits": "Actual selected-product preprocessing, not a new runtime run; product bytes unchanged from P147."
+}

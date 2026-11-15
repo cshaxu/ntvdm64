@@ -188,7 +188,11 @@ static void putrect16(VPVOID value,const RECT *rectangle){
 static void putpaintstruct16(VPVOID value,const PAINTSTRUCT *paint){memcpy(guest_pointer(value),paint,sizeof(*paint));}
 #if defined(TRANSACTION_GROUP) || !defined(BASELINE_IMAGE)
 static BOOL FASTCALL WM32CopyData(LPWM32MSGPARAMEX value){(void)value;++failures;return FALSE;}
+#ifdef BASELINE_IMAGE
 static VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX value){(void)value;++failures;}
+#else
+VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX);
+#endif
 #endif
 #ifdef TRANSACTION_GROUP
 typedef struct {DWORD Proc16;} HOOKSTATEDATA,*LPHOOKSTATEDATA;
@@ -513,8 +517,43 @@ static void transaction_group(void){
  printf("TRANSACTION_GROUP errors=%u heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0\n",failures-before);
 }
 #endif
+
+#ifndef BASELINE_IMAGE
+static void combo_dir_cases(void){
+ unsigned mode,before=failures;MSGPARAMEX value;BOOL trapped;
+ for(mode=0;mode<4;++mode){
+  reset_case();memset(&value,0,sizeof(value));
+  value.Parm16.WndProc.wMsg=OLDCB_DIR;value.Parm16.WndProc.lParam=TEXT_FAR;
+  value.lpfnUnThunk16=UnThunkCBMsg16;
+  if(mode>=2)expect(AddParamMap((DWORD)text,TEXT_FAR)!=NULL,"COMBO_OUTER_MAP");
+  if(mode==1)map_fail=1;
+  if(mode==3)fault_at=2; /* GETPSZ succeeds; nested map refresh raises. */
+  trapped=FALSE;
+  __try {
+   __try {
+    expect(ThunkCBMsg16(&value),"COMBO_DIR_CONSTRUCT");
+    expect(value.lParam==(LONG)text,"COMBO_DIR_POINTER");
+    value.uMsg=WM_NULL;value.lParam=0; /* Actual hook output may replace both. */
+    UnThunkCBMsg16(&value);
+   } __finally { wow_message_unwind16(&value); }
+  } __except(fault_filter(GetExceptionCode())) {trapped=TRUE;}
+  expect(trapped==(mode==3),"COMBO_DIR_EXCEPTION");
+  expect(map_live==(mode>=2?1u:0u),"COMBO_DIR_MAP_OWNER");
+  if(mode>=2){
+   expect(gParamMap.pHead&&gParamMap.pHead->dwRefCount==1,"COMBO_OUTER_REFERENCE");
+   DeleteParamMap(TEXT_FAR,PARAM_16,NULL);
+  }
+  expect(!map_live&&!gParamMap.pHead,"COMBO_DIR_RELEASE");
+ }
+ printf("COMBO_DIR modes=4 errors=%u exact_functions=2 guest_proof=0\n",failures-before);
+}
+#endif
+
 int main(void){
  get_text_cases();mdi_cases();map_cases();adjacent_cases();reset_case();
+#ifndef BASELINE_IMAGE
+ combo_dir_cases();
+#endif
 #ifdef TRANSACTION_GROUP
  transaction_group();
 #endif

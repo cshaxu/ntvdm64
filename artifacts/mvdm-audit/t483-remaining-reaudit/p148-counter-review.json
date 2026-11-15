@@ -1,0 +1,38 @@
+{
+  "review_mode": "single agent, separate counter-review pass",
+  "source_checkpoint_matches": true,
+  "mirror_delta": -5,
+  "no_guest_changes": true,
+  "point_dispositions": {
+    "restored_local": [
+      "R1656"
+    ],
+    "qualified_residuals": [
+      "T483-R1655",
+      "T483-R1657",
+      "T483-R1658",
+      "T483-R1659",
+      "T483-R1660"
+    ],
+    "excluded_only": [
+      "R1654"
+    ]
+  },
+  "checks": [
+    "No second cleanup route introduced;early original-message owner remains sole CB_DIR release",
+    "Removed native pointer feeds only selected empty FREEPSZPTR;ACTIVE remains for exceptional unwind",
+    "Delete remains guarded by successful map acquisition;flags clear before release, preventing caller finally duplicate retirement",
+    "Actual full combo functions replace fixture stub for candidate;four added cases use original map routines",
+    "82 retained selected code lines checked after raw source alignment,not punctuation-only cross-matching"
+  ],
+  "evidence": [
+    "build/t483-s5-p148-construction/result.json",
+    "build/t483-s5-p148-post-construction/result.json",
+    "build/t483-s5-p148/no-lifetime.log",
+    "batch-p148-line-check.json"
+  ],
+  "limits": [
+    "Helper services are test doubles,not guest transport proof",
+    "Full19/governance passed;Git accompanies batch"
+  ]
+}

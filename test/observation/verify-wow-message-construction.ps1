@@ -44,7 +44,7 @@ function Owned($name,$file,$arguments,$seconds,$expected){
 }
 try{
  $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
- Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
  Get-FileHash "$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
@@ -72,6 +72,14 @@ try{
   $constant=[regex]::Match($wow,'(?m)^#define WM_QUERYDROPOBJECT[^\n]*')
   if(!$constant.Success){throw 'Original drag-object message identity missing'}
   $types+="`n"+$constant.Value
+  if(!$old){
+   foreach($name in @('OLDCBEC_SETCOMBOFOCUS','OLDCBEC_KILLCOMBOFOCUS')){
+    $value=[regex]::Match($wow,'(?m)^#define '+$name+'[^\n]*')
+    if(!$value.Success){throw 'Original combo message constant missing'}
+    $types+="`n"+$value.Value
+   }
+   $types+="`n#include `"$repo/src/compat/include/wow_control_message_abi.h`"`n"
+  }
   [IO.File]::WriteAllText("$dir/message_construction_types.h",$types)
   # The original current text owner now uses the actual inline call scratch.
   $aliases=Read-Source 'src/mvdm-host/wow32/walias.h' $old
@@ -103,6 +111,10 @@ try{
   $release=$release.Substring(0,$release.LastIndexOf('    case WM_GETTEXT:'))
   $bodies+='BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex) { LONG lParam=lpmpex->Parm16.WndProc.lParam; PLONG plParamNew=&lpmpex->lParam; switch(lpmpex->Parm16.WndProc.wMsg) {'+"`n"+$case+"`n"+'} return TRUE; }'
   $bodies+='VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex) { switch(lpmpex->Parm16.WndProc.wMsg) {'+"`n"+$release+"`n"+'} }'
+  if(!$old){
+   $combo=Read-Source 'src/mvdm-host/wow32/wmsgcb.c' $false
+   foreach($name in @('ThunkCBMsg16','UnThunkCBMsg16')){$bodies+=Body $combo $name}
+  }
   if(!$old -or $Transaction){
    $adapter=Read-Source 'src/wow32-dll/source/wow_message_lifetime.c' $old
    $bodies+=[regex]::Replace($adapter,'(?m)^#include[^\n]*\n','')
@@ -142,6 +154,7 @@ try{
  }
  }
  $current=Get-Content "$root/body-candidate.stdout.log" -Raw
+ if($current -notmatch 'COMBO_DIR modes=4 errors=0 exact_functions=2 guest_proof=0'){throw 'Incomplete exact combo converter proof'}
  if($current -notmatch 'MESSAGE_CONSTRUCTION failures=0 scenarios=\d+ abi=72 scratch_offset=56 scratch_slots=4 parm=16'){throw 'Incomplete candidate ownership/ABI evidence'}
  if($Transaction -and $current -notmatch 'TRANSACTION_GROUP errors=0 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0'){throw 'Incomplete whole transaction proof'}
  if($Transaction){

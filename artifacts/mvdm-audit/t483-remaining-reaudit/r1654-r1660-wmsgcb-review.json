@@ -1,0 +1,80 @@
+{
+  "file": "src/mvdm-host/wow32/wmsgcb.c",
+  "points": [
+    {
+      "id": "R1654",
+      "decision": "keep approved DEBUG exclusion",
+      "delta": 0
+    },
+    {
+      "id": "R1655",
+      "before": "+1/-0",
+      "after": "+1/-0",
+      "decision": "qualified residual: WOW_TEXT_ACTIVE/MAPPED constants for proved acquisition bookkeeping; remove annotation",
+      "delta": 0
+    },
+    {
+      "id": "R1656",
+      "before": "+2/-0",
+      "after": "+0/-0",
+      "decision": "restore original: all real MSGPARAMEX owners zero-initialize; remove redundant local zero/comment",
+      "delta": -2
+    },
+    {
+      "id": "R1657",
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "decision": "remove native capture used only by selected empty FREEPSZPTR;retain ACTIVE for exceptional finally dispatcher",
+      "delta": -1
+    },
+    {
+      "id": "R1658",
+      "before": "+2/-1",
+      "after": "+2/-1",
+      "decision": "retain acquisition result: AddParamMap can roll back its increment and return NULL;unconditional Delete can consume outer reference",
+      "delta": 0
+    },
+    {
+      "id": "R1659",
+      "before": "+9/-0",
+      "after": "+7/-0",
+      "decision": "retain original-message identity and guest map key,clear flags before delete;remove comment and empty pointer release",
+      "delta": -2
+    },
+    {
+      "id": "R1660",
+      "before": "+0/-8",
+      "after": "+0/-8",
+      "decision": "retain deletion of second cleanup: actual ThunkCallWndProcHook16 writes uMsg/lParam from callback CWPSTRUCT;original CB_DIR switch cannot select immutable acquisition",
+      "delta": 0
+    }
+  ],
+  "whole_file_mirror_before": 66,
+  "whole_file_mirror_after": 61,
+  "mirror_delta": -5,
+  "evidence": [
+    "src/mvdm-host/wow32/wmsg16.c:apfnThunkMsg16/apfnUnThunkMsg16",
+    "src/mvdm-host/wow32/wowhooks.c:ThunkCallWndProcHook16",
+    "src/mvdm-host/wow32/wumsg.c:zero-initialized MSGPARAMEX and finally",
+    "src/mvdm-host/wow32/wparam.c:AddParamMap/DeleteParamMap",
+    "src/mvdm-host/wow32/wow32.h:FREEPSZPTR",
+    "src/wow32-dll/source/wow_message_lifetime.c:wow_message_unwind16"
+  ],
+  "verification": "82 shared retained selected lines match original;exact ThunkCBMsg16/UnThunkCBMsg16 four controls pass;message-construction175 scenarios pass;full delivery pending",
+  "line_proof": {
+    "file": "src/mvdm-host/wow32/wmsgcb.c",
+    "shared_retained_selected_lines": 82,
+    "line_mismatches": [],
+    "method": "First align raw original/current source excluding line directives;only equal original ranges enter preprocessed line comparison. Removed CB_DIR body is not falsely matched to other identical punctuation."
+  },
+  "include_control": {
+    "command": "build/t483-s5-p148/no-lifetime.cmd",
+    "exit": 2,
+    "errors": [
+      "C2065 WOW_TEXT_ACTIVE at138",
+      "C2065 WOW_TEXT_MAPPED at141",
+      "C2065 WOW_TEXT_MAPPED at158"
+    ],
+    "meaning": "Direct removal fails actual compile. Necessity of acquisition flags is separately supported by exact combo nested/failure controls and real hook/finally call chain;compile dependency alone is not the behavioral justification."
+  }
+}

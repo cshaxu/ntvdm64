@@ -1,0 +1,8 @@
+[
+  {
+    "file": "src/mvdm-host/wow32/wmsgcb.c",
+    "shared_retained_selected_lines": 82,
+    "line_mismatches": [],
+    "method": "First align raw original/current source excluding line directives;only equal original ranges enter preprocessed line comparison. Removed CB_DIR body is not falsely matched to other identical punctuation."
+  }
+]

@@ -14,7 +14,7 @@
 
 #include "precomp.h"
 #pragma hdrstop
-#include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-347) */
+#include "wow_message_lifetime.h"
 
 #line 18
 MODNAME(wmsgcb.c);
@@ -100,11 +100,8 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
                 break;
 	 
             case CB_DIR:
-                /* DIVERGENCE(MVDM-HOST-DIV-347): optional map acquisition. */
-                lpmpex->MsgBuffer->text.flags = 0;
 #line 137
                 GETPSZPTR(lpmpex->Parm16.WndProc.lParam, (LPSZ)lpmpex->lParam);
-                lpmpex->MsgBuffer->text.native = lpmpex->lParam;
                 if (lpmpex->lParam) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;
 
 #line 139
@@ -126,13 +123,11 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
 
 VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX lpmpex)
 {
-    /* DIV-347: native filters may replace uMsg/lParam, not our acquisition. */
     if (lpmpex->Parm16.WndProc.wMsg == OLDCB_DIR) {
         DWORD owned = lpmpex->MsgBuffer->text.flags;
         lpmpex->MsgBuffer->text.flags = 0;
         if (owned & WOW_TEXT_MAPPED)
             DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, NULL);
-        if (owned & WOW_TEXT_ACTIVE) FREEPSZPTR((LPSZ)lpmpex->MsgBuffer->text.native);
         return;
     }
 #line 155

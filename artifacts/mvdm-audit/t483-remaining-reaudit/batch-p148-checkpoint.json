@@ -1,0 +1,40 @@
+{
+  "status": "cached full,publish11x2,post-publication focused,Full19 and governance passed;Git accompanies record",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "sha256": "5b644af487c3c9f56adbd12ce36f36fd26a81bb5571b6f9514e79fa5be0f64d2"
+    },
+    {
+      "path": "test/observation/verify-wow-message-construction.ps1",
+      "sha256": "313439a8fbd7b9857e197831fe3fe9d12d866a901e7a3491916b8f890a01a7f2"
+    },
+    {
+      "path": "test/observation/wow_message_construction_fixture.c",
+      "sha256": "4144234026da01493126158dc93c38ace9ed3824bc1a1637ab77cc7451adba41"
+    }
+  ],
+  "mirror_diff_delta": -5,
+  "focused": "build/t483-s5-p148-construction/result.json",
+  "limitations": [
+    "External DOS4GW fixture unavailable: explicit skip",
+    "Exact-body service doubles do not replace guest transport proof;no guest changes"
+  ],
+  "publication": {
+    "status": "published",
+    "package": "35a213a1-10f6-4c0e-99be-c3677eb89803",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "post_publication_focused": "build/t483-s5-p148-post-construction/result.json",
+  "full": {
+    "gates": 19,
+    "all_passed": true,
+    "evidence": "build/t483-s5-p148/full-isolated/timings.json"
+  }
+}

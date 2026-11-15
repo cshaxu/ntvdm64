@@ -1088,3 +1088,13 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [P147 final wmsg16 compiler line proof](p147-wmsg16-final-line-proof.json): 1022 shared selected lines agree; cached full, publication, focused and Full19 passed.
 
 - [P147 frozen source checkpoint](batch-p147-checkpoint.json) and [line gate](batch-p147-line-check.json): all gates passed; Git delivery accompanies this record.
+
+- [R1652 wmsg16.h](r1652-wmsg16-header-review.json):14 selected declarations and logical lines identical;only two approved DEBUG exclusions.
+
+- [R1653 wmsgbm.c](r1653-wmsgbm-review.json):selected button translation and logical lines match original;only DEBUG exclusion.
+
+- [R1654-R1660 wmsgcb source review](r1654-r1660-wmsgcb-review.json):mirror66->61;82 retained lines and exact-combo verification passed.
+
+- [P148 checkpoint](batch-p148-checkpoint.json) and [line proof](batch-p148-line-check.json):combo converter minimization;build,publish,focused,Full19/governance passed.
+
+- [P148 counter-review](p148-counter-review.json):source freeze,ownership boundaries and synchronized pending residuals;all gates passed.
