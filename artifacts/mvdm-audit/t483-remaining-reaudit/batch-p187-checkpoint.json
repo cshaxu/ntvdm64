@@ -1,0 +1,74 @@
+{
+  "status": "whole file restored/minimized and verified;two residual decisions",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+      "sha256": "a99164a46963e5fb81a2e998438eadb8284cabd185886ca379251e15f6064711"
+    },
+    {
+      "path": "test/mvdm-host/vdmredir/server_enum_test.c",
+      "sha256": "47c6a71f37da7189a5a6c7725dc5cfafad908d68a8dcc39ae14cd5351eb7cead"
+    }
+  ],
+  "mirror_before": {
+    "added": 10,
+    "deleted": 1057,
+    "total": 1067
+  },
+  "mirror_after": {
+    "added": 3,
+    "deleted": 187,
+    "total": 190
+  },
+  "mirror_delta": -877,
+  "line_check": {
+    "checked": 901,
+    "mismatches": [],
+    "error_count": 1,
+    "before": {
+      "added": 10,
+      "deleted": 1057,
+      "total": 1067
+    },
+    "after": {
+      "added": 3,
+      "deleted": 187,
+      "total": 190
+    },
+    "original_sha256": "070437121d8a1ee57ea07672ea9aba3e85a8f4b80b802034cc208383dca4e5cd",
+    "msvc_selected_lines": 607,
+    "msvc_selected_line_mismatches": [],
+    "selected_preprocessing_equals_original_body_except_enum3": true,
+    "selected_path_line_reset": 631
+  },
+  "package": "27eb1fbe-c074-4fc6-a994-6c1f95b0e306",
+  "controls": {
+    "before_compile": 0,
+    "original_body_compile": 0,
+    "original_browser_header_compile": 0,
+    "original_body_link": 1120,
+    "without_enum3_link": 0,
+    "old_assertion_failures": 3,
+    "final_checks": 37,
+    "final_failures": 0
+  },
+  "original_failure_evidence": {
+    "header": "Original XactSrvP.h requires absent smb.h and private authentication/server declarations (P186 actual compile controls). Original lmbrowsr.h alone compiles in actual P187 flags; its body is not defective. Importing its supported subset requires five excluded groups: estimated +15/-2=+13 mirror budget versus current browser binding; owner approval required before that alternative.",
+    "enum3": "Full original body compiles but actual VDMREDIR link fails LNK2019 _NetServerEnumEx@36/LNK1120. Omitting only original lines342-521 links. Original browser/client/browstub.c provider depends on private browser transport/service closure and FirstNameToReturn string semantics; public NetServerEnum numeric resume is not equivalent."
+  },
+  "call_chain": "VrNetServerEnum -> XsNetServerEnum2 -> NetServerEnum / private browser unavailable provider -> XsFillEnumBuffer -> XsSetDataCount. Error reply has zero data; caller does not read Converter/entries except SUCCESS or MORE_DATA.",
+  "restoration": "Original descriptors, DiskEnum, GetInfo, SetInfo and other omitted bodies restored without new providers. Original entriesFilled declaration and failure Converter behavior restored. No claim new dispatch exposes previously uncalled functions.",
+  "counter_review": "Original uninitialized entriesFilled warning C4701 remains: argument evaluation is a language-level concern, but XsSetDataCount exits on error before consuming it and final /O2 failure controls pass. This is not a proof against every compiler optimization. Do not retain an internal original-code repair solely on a prior adapter comment. Enum3 link failure is independently reproduced; do not extend that exclusion to linkable bodies.",
+  "excluded": "DBG original625-629 replaced by one #error; framework retained; selected reset #line631 after endif verified with actual MSVC.",
+  "verification": {
+    "root": "build\\t483-s5-p187",
+    "focused": "37/37 final assertions; old test negative control only3 invented error-field initialization checks fail",
+    "preprocessing": "607 selected original lines and tokens match;901 retained nonblank source lines match",
+    "Full": "passed;external missing fixtures remain explicit skips, not passes",
+    "guest_netapi": "Existing independent VDMNETAP.COM final-package probe passed;build/t483-s5-p187/guest-netapi",
+    "published": "11 images both destinations;isolated test identity normalization proves all11 other bytes identical",
+    "shared_clipboard": "P186 RDP recheck3 runs still fail OpenClipboard error5;Radeon removed then Explorer holder;no pass or production regression claimed;build/rdp-recheck-p187/results.json"
+  },
+  "delivery": "Git commit and push accompany receipt"
+}

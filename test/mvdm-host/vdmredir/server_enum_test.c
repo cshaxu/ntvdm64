@@ -33,7 +33,8 @@ static void run(unsigned m,WORD level,WORD capacity,BOOL private_transport)
     SmbPutUlong(&p.ServerType,SV_TYPE_ALL);
     NTSTATUS status=XsNetServerEnum2(&h,&p,NULL,NULL);
     check(status==0,"original handler NTSTATUS completion");
-    if(m==1 || level>1 || private_transport)check(h.Converter==0,"early-failure response converter initialized");
+    /* Failed replies have no data; the original handler leaves Converter unused. */
+    if(m==1 || level>1 || private_transport)check(h.Converter==0xbeef,"early-failure unused converter preserved");
     check(buffer[0]==0xa5 && buffer[capacity+1]==0xa5,"output capacity canaries");
     if(private_transport)check(h.Status==ERROR_CALL_NOT_IMPLEMENTED && !calls && !frees && !p.BufLen,"private browser remains unavailable");
     else if(level>1)check(h.Status==ERROR_INVALID_LEVEL && !calls && !frees && !p.BufLen,"invalid level skips provider");
