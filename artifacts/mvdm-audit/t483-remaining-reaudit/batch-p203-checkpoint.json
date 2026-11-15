@@ -1,0 +1,153 @@
+{
+  "status": "original selected network debug definitions confirmed;conditional diagnostic mapping restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+    "sha256": "1a8d74421a84848af1fe0dbaba5df2445ab5ecb46dca94d58aeee703bfa5b75a",
+    "original_sha256": "6e6acf20d4dcf56f6a51f99152c6792e080ea21db74efc37b6c70f2f5e00ec72",
+    "source_lines": 247,
+    "contexts": [
+      {
+        "unit": "apisrv",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisvc",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apimsg",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiuse",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiwksta",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xsunicod",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "parmnum",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "examine",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "convert",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "auxdata",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xlatesvc",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "timezone",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "time",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "svcinfo",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "packstr",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "ntstatus",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "memalloc",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "copystr",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "allocstr",
+        "selected_header_lines": 1,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 380,
+    "mirror_after": 380,
+    "mirror_delta": 0,
+    "raw_before": 418,
+    "raw_after": 418,
+    "errors": 13,
+    "line_directives_before": 38,
+    "line_directives_after": 38,
+    "negative_controls": [
+      "DBG=1",
+      "CDEBUG defined",
+      "__cplusplus defined"
+    ],
+    "line_endings": "Original CRLF identity checked; line-ending evidence in receipt",
+    "ordinary_semantic_diff": 0
+  },
+  "line_endings": {
+    "before_crlf": 0,
+    "before_lf": 358,
+    "original_crlf": 674,
+    "original_lf": 674
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "sha256": "1a8d74421a84848af1fe0dbaba5df2445ab5ecb46dca94d58aeee703bfa5b75a"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+    "sha256": "1a8d74421a84848af1fe0dbaba5df2445ab5ecb46dca94d58aeee703bfa5b75a"
+  },
+  "mirror_before": 380,
+  "mirror_after": 380,
+  "mirror_delta": 0,
+  "raw_before": 418,
+  "raw_after": 418,
+  "change": "Restore original boundaries following all13 excluded spans;remove redundant directives while retaining selected-arm resets.38 directives unchanged;original CRLF restored from LF.",
+  "call_chain": "20 formal x86 xactsrv,RAP,netlib consumers include network debug definitions;release macros and pointer declaration unchanged.",
+  "verification": "60 before/final/original preprocessings match full-TU tokens and one selected header declaration;explicit variant paths verified.247 retained original nonblank source lines map correctly. DBG,CDEBUG,C++ controls C1189.",
+  "counter_review": "All excluded spans matched pinned original/current;no selected content changes or nested conditional loss. Original if/else framework retained;only directive locations and original line endings change.",
+  "product_verification": "P187 product evidence reused for token/selected-line-equivalent formatting.11x2 publication hashes checked. Shared Clipboard failure stays disclosed in P197.",
+  "delivery": "P203 governance commit push accompany receipt"
+}

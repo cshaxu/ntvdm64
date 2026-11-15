@@ -113,32 +113,31 @@ Revision History:
 #include <debugfmt.h>           // Most FORMAT_ equates.
 
 #if DBG
-#line 116
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 119
 #else // not DBG
 #line 120
 
 #ifdef CDEBUG
 #line 122
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
+#line 127
 #else // ndef CDEBUG
 #line 128
 
 // Nondebug version.
 
 #endif // ndef CDEBUG
-#line 132
 
 #endif // not DBG
-#line 134
 
 
-#line 136
 #if !DBG || defined(lint) || defined(_lint)
 #define DBGSTATIC static        // hidden function
 #else
 #line 139
 #error Network debug visibility profile is not supported
+#line 140
 #endif
 #line 141
 
@@ -159,6 +158,7 @@ typedef LPSTR LPDEBUG_STRING;
 #ifdef __cplusplus
 #line 157
 #error Unsupported excluded original configuration
+#line 158
 #endif
 #line 159
 
@@ -176,12 +176,14 @@ typedef LPSTR LPDEBUG_STRING;
 #if DBG
 #line 172
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 190
 #else // not DBG
 #line 191
 
 #ifdef CDEBUG
 #line 193
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
+#line 197
 #else // ndef CDEBUG
 #line 198
 
@@ -189,10 +191,8 @@ typedef LPSTR LPDEBUG_STRING;
 #define NetpAssert(Predicate)   /* no output; ignore arguments */
 
 #endif // ndef CDEBUG
-#line 203
 
 #endif // not DBG
-#line 205
 
 
 // NetpBreakPoint: if this is a debug version of some sort, cause a breakpoint
@@ -208,12 +208,14 @@ typedef LPSTR LPDEBUG_STRING;
 #if DBG
 #line 218
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 225
 #else // not DBG
 #line 226
 
 #ifdef CDEBUG
 #line 228
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
+#line 232
 #else // ndef CDEBUG
 #line 233
 
@@ -221,15 +223,14 @@ typedef LPSTR LPDEBUG_STRING;
 #define NetpBreakPoint()          /* no effect. */
 
 #endif // ndef CDEBUG
-#line 238
 
 #endif // not DBG
-#line 240
 
 
 #if DBG
 #line 243
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 537
 #else // not DBG
 #line 538
 
@@ -283,7 +284,6 @@ typedef LPSTR LPDEBUG_STRING;
 #define NetpDbgDisplayWStr(Tag,Value)         /* nothing */
 
 #endif // not DBG
-#line 589
 
 //
 //  NetpKdPrint() & NetpDbgPrint() are net equivalents of
@@ -297,12 +297,14 @@ typedef LPSTR LPDEBUG_STRING;
 #if DBG
 #line 600
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 615
 #else // not DBG
 #line 616
 
 #ifdef CDEBUG
 #line 618
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
+#line 625
 #else // ndef CDEBUG
 #line 626
 
@@ -312,25 +314,22 @@ typedef LPSTR LPDEBUG_STRING;
 #define NetpKdPrint(_x_)
 
 #endif // ndef CDEBUG
-#line 633
 #endif // not DBG
-#line 634
 
 
 // NetpDbgHexDump: do a hex dump of some number of bytes to the debug
 // terminal or whatever.  This is a no-op in a nondebug build.
 
-#line 639
 #if DBG || defined(CDEBUG)
 #line 640
 #error Network debug hexdump profile is not supported
+#line 647
 #else
 #line 648
 
 #define NetpDbgHexDump(StartAddr,Length)     // no output; ignore arguments
 
 #endif
-#line 652
 
 //
 // Define a number of bytes to dump for partial dumps.  Each line dumps
@@ -352,6 +351,7 @@ typedef LPSTR LPDEBUG_STRING;
 #ifdef __cplusplus
 #line 671
 #error Unsupported excluded original configuration
+#line 672
 #endif
 #line 673
 
