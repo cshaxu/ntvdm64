@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1895 reviewed:647 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1240 qualified pending;825 unreviewed. Files249/365 audited,116 remain.
+1905 reviewed:654 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1243 qualified pending;815 unreviewed. Files250/365 audited,115 remain.
 P155 mirror batch-59;cached,publish11x2,focused353/0,five Win16 modes,Full19 and governance passed;Git accompanies receipt. Approved synchronization remains R1797 revisit.
 P154 DC cache original restored;mirror batch-14;cached,publish11x2,focused,Full19 passed;Git accompanies receipt.
 P153 header4->2;wparam106->94;cached,publish11x2,parameter54,Full19 passed;Git accompanies receipt.
@@ -75,9 +75,11 @@ P162 wumsg125->113(-12):remove duplicate per-Post/Send selector restoration and 
 
 P163 wumsg.h3->2(-1),duplicate comment removed;TLS residual source-qualified pending owner. Original logical lines match;P162 product evidence reused;latest RDP Clipboard18 passed. Git accompanies receipt.
 
+P164 wuser mirror31->13(-18);original bitmap thunk restored and repeated GetDC conversion removed;MSVC998/0,resource suite,cached full,publish11x2,Full19 and governance passed;Git accompanies receipt.
+
 ## Current Technical Baseline
 
-P162 candidate `ada335bd-9981-48f6-aa15-e91052f1fad1` published11x2;hashes match.
+P164 candidate `489c7caa-b8ac-4ef5-a70c-6a29b690f15b` published11x2;hashes match.
 Final message ownership/scope focused and Full19 passed;Git accompanies P162.
 Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.

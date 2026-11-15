@@ -1,0 +1,43 @@
+{
+  "status": "cached,published,tested;Git accompanies receipt",
+  "before": {
+    "added": 26,
+    "deleted": 5,
+    "excluded_added": 4,
+    "excluded_deleted": 142
+  },
+  "after": {
+    "added": 11,
+    "deleted": 2,
+    "excluded_added": 4,
+    "excluded_deleted": 142
+  },
+  "proofs": {
+    "GetDC": "native_window_argument in wow_user_task_lifecycle.c repeats same wow_user_window_native_handle conversion and allows NULL;StoreDC already original and no longer needs local full HWND. Keep unified native wrapper call.",
+    "LoadBitmap": "USER16 fastres.c ILoadBitmap locks resource before WOWLoadBitmap and unlocks after return. GETMISCPTR demand-loads selector;FlatAddress is native mapping from DpmiSetDescriptorEntry/GetDescriptorMapping and VdmAddDescriptorMapping. WOWLoadBitmapA calls original ConvertDIBBitmap synchronously. Old fixture only checked newly invented lease call counts,not original failure. Restore original body.",
+    "SetSysColors": "USER16 daytona/wowasmk.asm GetSysColor directly loads wow16gpsi->argbSystem[index];modern USER cannot update guest copy. Keep publication residual pending owner.",
+    "headers": "Remove lease header and explanatory comment;retain common/wow/page_domain.h for sole color publisher."
+  },
+  "next": "Continue R1906 after Git",
+  "changes": [
+    "src/mvdm-host/wow32/wuser.c",
+    "test/adapter-mvdm-host-out/wow/wow_bitmap_call_fixture.c",
+    "test/observation/verify-wow-resource-call-fixtures.ps1"
+  ],
+  "line_check": {
+    "selected_retained_lines": 998,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wuser.c",
+  "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+  "current_sha256": "801b1d94a99891fda430bb021365c75c19c3f23424f90baf8b92a02eeff11792",
+  "counter_review": "Original locked resource storage and native FlatAddress mapping precede the unchanged synchronous converter;no independent original failure justified a second lease. GetDC wrapper validates same narrow identity and owns native call. Color copy is required by immutable guest direct memory ABI,not by adapter self-dependence.",
+  "limits": [
+    "Resource call witness extracts actual thunk but mocks boundaries;not real guest bitmap acceptance.",
+    "No guest source or binaries changed."
+  ],
+  "delivery": "batch-p164-checkpoint.json",
+  "verification": "Cached full,published11x2,resource-call suite,Full19 passed"
+}

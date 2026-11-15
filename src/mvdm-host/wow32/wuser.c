@@ -17,8 +17,6 @@
 #include "precomp.h"
 #pragma hdrstop
 
-/* DIVERGENCE(MVDM-HOST-DIV-295): bounded synchronous bitmap resource alias. */
-#include "wow_callback_frame_lease.h"
 #include "common/wow/page_domain.h"
 
 
@@ -1053,8 +1051,6 @@ ULONG FASTCALL WU32GetCapture(PVDMFRAME pFrame)
 ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
 {
     ULONG ul;
-    HWND hwnd32;
-#line 1058
     register PGETDC16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
@@ -1066,10 +1062,9 @@ ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
 
     CURRENTPTD()->ulLastDesktophDC = 0;
     
-    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */
-    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));
-    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
-    ul = GETHDC16(wow_native_GetDC(hwnd32));
+    ul = GETHDC16(wow_native_GetDC(
+    HWND32(parg16->f1)
+    ));
 
 #line 1073
     if (ul) {
@@ -2098,33 +2093,23 @@ ULONG FASTCALL WU32InvertRect(PVDMFRAME pFrame)
 }
 
 
+#line 2104
 ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)
 {
     ULONG ul = 0;
     PSZ psz2;
     register PLOADBITMAP16 parg16;
     LPBYTE pResData = NULL;
-    wow_callback_frame_lease resource = {0};
 
-#line 2111
     GETARGPTR(pFrame, sizeof(LOADBITMAP16), parg16);
     GETPSZIDPTR(parg16->f2, psz2);
     GETMISCPTR(parg16->f3, pResData);
 
-    /* Preserve original selector demand loading before acquiring the bytes. */
-    if (pResData && !wow_callback_frame_acquire_protected_vp(
-        FETCHDWORD(parg16->f3), FETCHDWORD(parg16->f4),
-        GUEST_MEMORY_ACCESS_READ, &resource)) goto bitmap_cleanup;
-
-#line 2115
     ul = GETHBITMAP16((pfnOut.pfnWOWLoadBitmapA)(HINSTRES32(parg16->f1),
                                      psz2,
-                                     pResData ? resource.bytes : NULL,
+                                     pResData,
                                      parg16->f4));
 
-bitmap_cleanup:
-    if (resource.lease) wow_callback_frame_release(&resource, 0);
-#line 2120
     FREEMISCPTR(pResData);
     FREEPSZIDPTR(psz2);
     FREEARGPTR(parg16);

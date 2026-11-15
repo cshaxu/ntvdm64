@@ -1,0 +1,30 @@
+{
+  "status": "cached full,published11x2,resource-call focused,Full19 and governance passed;Git accompanies receipt",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "sha256": "801b1d94a99891fda430bb021365c75c19c3f23424f90baf8b92a02eeff11792"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_bitmap_call_fixture.c",
+      "sha256": "5e3ea61631d7474c1d608110c44ed758a506c9604c7ae934d7bba1a7196cc75f"
+    },
+    {
+      "path": "test/observation/verify-wow-resource-call-fixtures.ps1",
+      "sha256": "19dd997bd38f8a605928d095cd29b7ff2e8748ee6186011221dab874a9c787bd"
+    }
+  ],
+  "source_files": 3,
+  "mirror_delta": -18,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "489c7caa-b8ac-4ef5-a70c-6a29b690f15b",
+  "tests": {
+    "Full_gates": 19,
+    "focused": "actual bitmap/cursor thunk resource-call suite",
+    "focused_exit": 0
+  },
+  "limitations": [
+    "Extracted resource call fixture uses mocked boundaries;Full exercises final runtime.",
+    "External DOS4GW/Nesticle absent:skipped not passed."
+  ]
+}

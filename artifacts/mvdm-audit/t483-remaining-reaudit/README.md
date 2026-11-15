@@ -1190,3 +1190,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P162 message entry review](r1860-r1894-wumsg-review.json), [line proof](batch-p162-line-check.json), [checkpoint](batch-p162-checkpoint.json): one invocation-mode owner and one failed-post rollback.
 
 - [P163 message header review](r1895-wumsg-header-review.json), [checkpoint](batch-p163-checkpoint.json): comment minimization, original logical-line proof and latest RDP Clipboard witness.
+
+- [P164 USER thunk review](r1896-r1905-wuser-review.json), [line checks](batch-p164-line-check.json), [checkpoint](batch-p164-checkpoint.json): original bitmap restoration and GetDC minimization;cached,publish11x2,resource suite and Full19 passed.

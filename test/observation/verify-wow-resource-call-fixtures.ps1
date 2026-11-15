@@ -31,7 +31,7 @@ try {
     Build 'bitmap-compile' ('cl.exe /nologo /TC /c /MT /W4 /WX /I"'+$out+'" /Fo"'+$out+'/bitmap.obj" "'+$repo+'/test/adapter-mvdm-host-out/wow/wow_bitmap_call_fixture.c"')
     Build 'bitmap-link' ('link.exe /nologo /machine:x86 /subsystem:console /out:"'+$out+'/bitmap.exe" "'+$out+'/bitmap.obj"')
     Invoke-Owned 'bitmap-run' "$out/bitmap.exe" ' ' 30
-    if(!(Select-String -LiteralPath "$out/bitmap-run.stdout.log" -SimpleMatch 'WOW_BITMAP_CALL_ORDER errors=0 output=2 acquire=2 release=1')){throw 'Bitmap caller marker missing'}
+    if(!(Select-String -LiteralPath "$out/bitmap-run.stdout.log" -SimpleMatch 'WOW_BITMAP_CALL_ORDER errors=0 output=2')){throw 'Bitmap caller marker missing'}
     $include=' /I"'+$repo+'/src" /I"'+$repo+'/src/wow32-dll/include"'
     Build 'cursor-resource-compile' ('cl.exe /nologo /TC /c /MT /W4 /WX'+$include+' /Fo"'+$out+'/cursor-resource.obj" "'+$repo+'/test/adapter-mvdm-host-out/wow/wow_cursor_resource_fixture.c"')
     # Function-level COMDATs keep this witness limited to the cursor/icon
