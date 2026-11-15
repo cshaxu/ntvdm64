@@ -1,0 +1,117 @@
+{
+  "status": "original selected content confirmed;conditional diagnostic mapping restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+    "sha256": "f4ca1b63917a19b03aa99704adf11bf06c78797dae61b6f94d60ce49a5dc27f5",
+    "original_sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+    "source_lines": 620,
+    "contexts": [
+      {
+        "unit": "vrdisp",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrremote",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrnetb",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrdlc5c",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrnetapi",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisrv",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisvc",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apimsg",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiuse",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiwksta",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xsunicod",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "auxdata",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "convert",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 246,
+    "mirror_after": 246,
+    "mirror_delta": 0,
+    "raw_before": 366,
+    "raw_after": 366,
+    "errors": 40,
+    "line_directives_before": 120,
+    "line_directives_after": 120,
+    "negative_controls": [
+      "SMBDBG",
+      "SMBDBG1",
+      "SMB_USE_UNALIGNED=0"
+    ],
+    "line_endings": "CRLF matches pinned original",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "sha256": "f4ca1b63917a19b03aa99704adf11bf06c78797dae61b6f94d60ce49a5dc27f5"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+    "sha256": "f4ca1b63917a19b03aa99704adf11bf06c78797dae61b6f94d60ce49a5dc27f5"
+  },
+  "mirror_before": 246,
+  "mirror_after": 246,
+  "mirror_delta": 0,
+  "raw_before": 366,
+  "raw_after": 366,
+  "change": "Preserve original CRLF and restore boundary logical lines;replace redundant selected-path directives with end-of-excluded-arm boundary resets. All40 excluded bodies and original selected macro definitions retained.",
+  "call_chain": "Fourteen formal x86 VDM redirector,xactsrv,RAP units include directly or via rxp/rapgtpt/xactsrv_wksta_minimal.",
+  "verification": "42 before/final/original preprocessing outputs have identical nonblank tokens;explicit variant include paths checked. Header itself emits no nonblank preprocessed declarations (macro-only), so the zero header-line count is not a runtime proof.620 retained original nonblank source lines map correctly. Three negative profiles C1189.",
+  "counter_review": "Every excluded original span matched pinned source and current content before transformation. No ordinary content changes. Both side of each conditional boundary reset correctly;120 directives unchanged.",
+  "product_verification": "P187 product build/publication/runtime evidence reused for formatting and line-only change.11x2 hashes rechecked. Shared Clipboard failure remains recorded in P197;not claimed passed.",
+  "delivery": "P198 governance commit push accompany receipt"
+}
