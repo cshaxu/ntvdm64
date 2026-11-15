@@ -1,0 +1,89 @@
+{
+  "status": "original selected VDM definitions confirmed;conditional diagnostic mapping restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+    "sha256": "354c6c1af9f9f8b43d775538ab9c335da5ec5505c82683151ad5508cfcd0a0b5",
+    "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+    "source_lines": 366,
+    "contexts": [
+      {
+        "unit": "nt_sec",
+        "selected_header_lines": 210,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_event",
+        "selected_header_lines": 210,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_com",
+        "selected_header_lines": 210,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_det",
+        "selected_header_lines": 210,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_bop",
+        "selected_header_lines": 210,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "demsrch",
+        "selected_header_lines": 219,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "dpmi32",
+        "selected_header_lines": 219,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "wucomm",
+        "selected_header_lines": 113,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 26,
+    "mirror_after": 26,
+    "mirror_delta": 0,
+    "raw_before": 40,
+    "raw_after": 40,
+    "errors": 5,
+    "line_directives_before": 14,
+    "line_directives_after": 14,
+    "negative_controls": [
+      "i386",
+      "_VDMNTOS_",
+      "_PC98_",
+      "DBG",
+      "literal #if 0 retained"
+    ],
+    "line_endings": "CRLF preserved",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "sha256": "354c6c1af9f9f8b43d775538ab9c335da5ec5505c82683151ad5508cfcd0a0b5"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+    "sha256": "354c6c1af9f9f8b43d775538ab9c335da5ec5505c82683151ad5508cfcd0a0b5"
+  },
+  "mirror_before": 26,
+  "mirror_after": 26,
+  "mirror_delta": 0,
+  "raw_before": 40,
+  "raw_after": 40,
+  "change": "Restore original boundaries97,114,119,171,223 and selected continuation115;remove redundant directives.14 directives unchanged;all5 errors and original conditional structures preserved.",
+  "call_chain": "Eight representative actual formal consumers:five host SoftPC units,DEM,DPMI,WOW. No monitor implementation or guest code introduced.",
+  "verification": "24 preprocessings with explicit variant inclusion;all selected tokens and header lines equal. Header selected lines vary210/219/113 across consumer contexts.366 retained original source lines map correctly. Four excluded profiles C1189;literal if0 preserved statically.",
+  "counter_review": "All non-line content and conditional framework unchanged;all five excluded original spans matched pinned source. Differences only mandated exclusions and line directives;no ABI change.",
+  "product_verification": "P187 product evidence reused for token/selected-line-equivalent directive change;11x2 publication hashes checked. Shared Clipboard failure remains disclosed in P197.",
+  "delivery": "P201 governance commit push accompany receipt"
+}

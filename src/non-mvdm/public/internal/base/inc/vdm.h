@@ -91,15 +91,14 @@ typedef struct _VdmVirtualIca{
 
 
 #if defined(i386)
-#line 94
 #error Unsupported excluded original configuration
+#line 97
 #else
 #line 98
 #define VDM_PM_IRETBOPSEG  0xd3
 #define VDM_PM_IRETBOPOFF  0x0
 #define VDM_PM_IRETBOPSIZE 4
 #endif
-#line 102
 
 #define VDM_RM_IRETBOPSIZE 4
 
@@ -110,17 +109,19 @@ typedef struct _VdmVirtualIca{
 #ifdef _VDMNTOS_
 #line 110
 #error Unsupported excluded original configuration
+#line 114
 #else  // _VDMNTOS_
+#line 115
 
 /* XLATON */
 #if defined(_PC98_)
 #line 118
 #error DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register.
+#line 119
 #else  // !_PC98_
 #line 120
 #define  FIXED_NTVDMSTATE_SEGMENT   0x70
 #endif // _PC98_
-#line 122
 
 #define  FIXED_NTVDMSTATE_OFFSET    0x14
 #define  FIXED_NTVDMSTATE_LINEAR    ((FIXED_NTVDMSTATE_SEGMENT << 4) + FIXED_NTVDMSTATE_OFFSET)
@@ -128,7 +129,6 @@ typedef struct _VdmVirtualIca{
 /* XLATOFF */
 
 #endif // _VDMNTOS_
-#line 129
 
 #if defined (_X86_)
   // defined on x86 only since on mips we must reference thru sas
@@ -172,11 +172,11 @@ typedef struct _VdmVirtualIca{
 #if DBG
 #line 170
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#line 171
 #else
 #line 172
 #define INITIAL_VDM_TIB_FLAGS (VDM_USE_DBG_VDMEVENT | VDM_BREAK_DEBUGGER)
 #endif
-#line 174
 
 //
 // bits defined in Eflags
@@ -213,10 +213,10 @@ typedef struct _Vdm_FaultHandler {
 #pragma pack(1)
 /* XLATON */
 // ==== CHANGED TO _VdmDpmiInfo
-#line 210
 #if 0
 #line 211
 #error DIVERGENCE OPENNT-HOST-129: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 223
 #endif
 #line 224
 
