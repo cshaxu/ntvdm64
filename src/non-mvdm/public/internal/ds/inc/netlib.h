@@ -110,17 +110,15 @@ Revision History:
 #include <wchar.h>      // iswdigit().
 
 #ifdef CDEBUG                   // Debug in ANSI C environment?
-#line 113
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
+#line 116
 #endif // ndef CDEBUG
 #line 117
 
 
 #ifdef __cplusplus
-#line 120
 #error Unsupported excluded original configuration
 #endif
-#line 122
 
 // Arbitrary.  PortUAS has at least 16 args in one message.
 // This allows arg numbers 1-19 to be used.
@@ -202,8 +200,8 @@ NetpAtoX(
 //     );
 
 #ifdef CDEBUG
-#line 203
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
+#line 213
 #else // ndef CDEBUG
 #line 214
 
@@ -211,7 +209,6 @@ NetpAtoX(
                 (void) memcpy( (Dest), (Src), (size_t) (Size) )
 
 #endif // ndef CDEBUG
-#line 219
 
 DWORD
 NetpPackString(
@@ -387,13 +384,10 @@ NetpMemoryReallocate(
     }
 
 #if defined(lint) || defined(_lint)
-#line 394
 #error Unsupported excluded original configuration
 #else
-#line 396
 #define UNUSED(x)               { (void) (x); }
 #endif
-#line 398
 
 //
 // NetpGetComputerName retrieves the local computername from the local
@@ -556,9 +550,7 @@ NetpWriteEventlog(
     );
 
 #ifdef __cplusplus
-#line 560
 #error Unsupported excluded original configuration
 #endif
-#line 562
 
 #endif // ndef _NETLIB_

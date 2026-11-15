@@ -1270,3 +1270,5 @@ P201: [VDM header mapping](batch-p201-checkpoint.json):26 excluded diff unchange
 P202: [Debug header mapping](batch-p202-checkpoint.json):6 excluded diff unchanged;raw9->8;6 contexts/DBG negative;original conditional line and CRLF restored.
 
 P203: [Network debug header mapping](batch-p203-checkpoint.json):380 excluded diff unchanged;20 contexts/3 negative profiles;original conditional lines and CRLF restored.
+
+P204: [Netlib header mapping](batch-p204-checkpoint.json):21 excluded diff unchanged;raw33->25;14 contexts/4 negative controls;original line mapping and CRLF restored.

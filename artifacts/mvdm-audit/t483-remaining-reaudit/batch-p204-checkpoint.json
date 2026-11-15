@@ -1,0 +1,118 @@
+{
+  "status": "original selected netlib definitions confirmed;redundant line directives removed",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "sha256": "9e4bc3ec41e8f4782e96a3e59d0e653cb272644027980313a9631de7d25ac635",
+    "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+    "source_lines": 451,
+    "contexts": [
+      {
+        "unit": "apisrv",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisvc",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apimsg",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiuse",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiwksta",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xsunicod",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "parmnum",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "convert",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xlatesvc",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "svcinfo",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "packstr",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "memalloc",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "allocstr",
+        "selected_header_lines": 186,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 21,
+    "mirror_after": 21,
+    "mirror_delta": 0,
+    "raw_before": 33,
+    "raw_after": 25,
+    "errors": 5,
+    "line_directives_before": 12,
+    "line_directives_after": 4,
+    "negative_controls": [
+      "CDEBUG",
+      "__cplusplus",
+      "lint",
+      "_lint"
+    ],
+    "line_endings": "Original CRLF restored; original-relative metrics normalize line endings",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "sha256": "9e4bc3ec41e8f4782e96a3e59d0e653cb272644027980313a9631de7d25ac635"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "sha256": "9e4bc3ec41e8f4782e96a3e59d0e653cb272644027980313a9631de7d25ac635"
+  },
+  "mirror_before": 21,
+  "mirror_after": 21,
+  "mirror_delta": 0,
+  "raw_before": 33,
+  "raw_after": 25,
+  "change": "Remove10 redundant line directives and add original boundaries116/213;retain selected resets117/214.12->4 directives;original CRLF restored from LF;five errors retained.",
+  "call_chain": "14 formal x86 xactsrv/RAP/netlib consumers;original declarations,memory helpers and unused macro unchanged.",
+  "verification": "42 preprocessings match full TU tokens and186 selected header lines in all14 contexts;explicit variant paths checked.451 retained source lines match original;CDEBUG,C++,lint,_lint rejected with C1189.",
+  "counter_review": "Complete selected content and conditional structure match original outside5 excluded bodies. Equally sized excluded replacements need no synthetic line reset. Four retained directives cover actual shortened spans on both sides of branches.",
+  "product_verification": "P187 product evidence reused for token/selected-line-equivalent formatting;11x2 publication hashes checked. Shared Clipboard failure remains recorded in P197.",
+  "delivery": "P204 governance commit push accompany receipt"
+}
