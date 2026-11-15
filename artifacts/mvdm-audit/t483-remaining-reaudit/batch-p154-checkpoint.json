@@ -1,0 +1,39 @@
+{
+  "batch": "P154",
+  "status": "cached full,published11x2,Full19 and focused passed;Git accompanies receipt",
+  "source_files": 6,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wreldc.c",
+      "sha256": "f4ede08ef2d6bc949cd2500c75af546ec68c0e017abecc1a6c624f7c1b5a0d20"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.h",
+      "sha256": "63fb72740460f367cb75fb014562f7c278b515b73689ee0c981481f96d5961c1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "sha256": "2f16b8ef0354d5e3ea76e9053b7615595a436bf54da345087df00dad6f8ebeb7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "sha256": "56b9b109c1b896363e0ec58d949d3a311367b3a773e185143b03e62fd6f35258"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "sha256": "07018e22b4c4b57046d7777022250bf6452aac1cc28acd5bbefd4081fbd9481b"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "sha256": "59cb5ae1be4d06609864930acb4b7f7cdfc5eeea1ca5701cbdb4e7bead4d3593"
+    }
+  ],
+  "mirror_diff_delta": -14,
+  "package": "91441212-e53f-424a-aa0b-b16bbdae0b59",
+  "tests": "Native DC15positive/1negative;current x86 window-borrow/page-domain fixture;Full19;WOW boundary/governance",
+  "limitations": [
+    "Native DC probe is x64 current host;production-linked focused fixture is x86.",
+    "Original c/header byte equality establishes source line identity;coupled caller line/directive preservation is a source proof.",
+    "External DOS4GW/Nesticle fixture absent remains skipped."
+  ]
+}

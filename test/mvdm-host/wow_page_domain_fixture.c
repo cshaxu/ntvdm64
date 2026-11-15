@@ -27,7 +27,7 @@
 #include "ntvdm-exe/wow/include/wow_gdi_alias.h"
 #include "compat/include/nt.h"
 
-extern BOOL WINAPI StoreDC(WORD, WORD, WORD, HWND);
+extern BOOL WINAPI StoreDC(WORD, WORD, WORD);
 extern BOOL WINAPI CacheReleasedDC(WORD, WORD, WORD);
 extern BOOL WINAPI ReleaseCachedDCs(WORD, WORD, WORD, HWND, UINT);
 extern BOOL WINAPI FreeCachedDCs(WORD);
@@ -916,10 +916,10 @@ static int verify_callback_scope(ULONG teb)
             BORROW_CHECK(dc && dc_alias && !iReleasedDCs);
             BORROW_CHECK(hWOWHeapSmall || CreateSmallHeap());
             if (dc && dc_alias && hWOWHeapSmall) {
-                BORROW_CHECK(StoreDC(0x4321u, LOWORD(child), dc_alias, child));
+                BORROW_CHECK(StoreDC(0x4321u, LOWORD(child), dc_alias));
                 for (dc_entry = lpDCCache; dc_entry && dc_entry->dc != dc_alias;
                         dc_entry = dc_entry->next) {}
-                BORROW_CHECK(dc_entry && dc_entry->native_window == child &&
+                BORROW_CHECK(dc_entry && dc_entry->native_window == (HWND)(INT_PTR)(SHORT)LOWORD(child) &&
                     dc_entry->window == LOWORD(child));
                 BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
                 BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
@@ -933,7 +933,7 @@ static int verify_callback_scope(ULONG teb)
             dc_alias = mvdm_wow_gdi_handle_from_native(dc);
             BORROW_CHECK(dc && dc_alias);
             if (dc && dc_alias && hWOWHeapSmall) {
-                BORROW_CHECK(StoreDC(0x4321u, LOWORD(child), dc_alias, child));
+                BORROW_CHECK(StoreDC(0x4321u, LOWORD(child), dc_alias));
                 BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
                 BORROW_CHECK(FreeCachedDCs(0x4321u));
                 BORROW_CHECK(!iReleasedDCs &&
@@ -1500,11 +1500,11 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
             BORROW_CHECK(dc && dc_alias && hWOWHeapSmall);
             if (dc && dc_alias && hWOWHeapSmall) {
                 dc_original = old_full;
-                BORROW_CHECK(StoreDC(0x4321u, LOWORD(old_full), dc_alias, old));
+                BORROW_CHECK(StoreDC(0x4321u, LOWORD(old_full), dc_alias));
                 BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(old_full), dc_alias));
                 for (dc_entry = lpDCCache; dc_entry && dc_entry->dc != dc_alias;
                         dc_entry = dc_entry->next) {}
-                BORROW_CHECK(dc_entry && dc_entry->native_window == old);
+                BORROW_CHECK(dc_entry && dc_entry->native_window == (HWND)(INT_PTR)(SHORT)LOWORD(old));
             }
         }
         BORROW_CHECK(mvdm_softpc_wow_page_domain_exchange_window_word(
@@ -1536,7 +1536,7 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
         if (mode && dc_original) {
             BORROW_CHECK(old_full == dc_original && window &&
                 LOWORD(full) == LOWORD(dc_original) && full != dc_original);
-            BORROW_CHECK(dc_entry && (ULONG)(ULONG_PTR)dc_entry->native_window == dc_original);
+            BORROW_CHECK(dc_entry && dc_entry->native_window == (HWND)(INT_PTR)(SHORT)LOWORD(dc_original));
             BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(dc_original), 0, NULL, 1));
             BORROW_CHECK(!iReleasedDCs && IsWindow(window) &&
                 mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);

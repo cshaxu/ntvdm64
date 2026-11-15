@@ -130,7 +130,7 @@ ULONG FASTCALL WU32GetDCEx(PVDMFRAME pFrame)
                           DWORD32(parg16->f3)));
 
     if (ul)
-        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);
+        StoreDC(htask16, parg16->f1, (HAND16)ul);
 
     FREEARGPTR(parg16);
 

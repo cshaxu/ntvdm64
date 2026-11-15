@@ -1,0 +1,27 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wreldc.c",
+    "logical_line_mismatches": [],
+    "method": "Exact original byte identity;original diagnostic line numbers and EOL restored. No conditional groups in original file."
+  },
+  {
+    "path": "src/mvdm-host/wow32/wreldc.h",
+    "logical_line_mismatches": [],
+    "method": "Exact original byte identity;original diagnostic line numbers and EOL restored. No conditional groups in original file."
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuser.c",
+    "logical_line_mismatches": [],
+    "method": "Only fourth call argument removed on same physical line;every preprocessing directive unchanged. Source mapping preservation, not independent compiler line observation."
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuser31.c",
+    "logical_line_mismatches": [],
+    "method": "Only fourth call argument removed on same physical line;every preprocessing directive unchanged. Source mapping preservation, not independent compiler line observation."
+  },
+  {
+    "path": "src/mvdm-host/wow32/wuwind.c",
+    "logical_line_mismatches": [],
+    "method": "Only fourth call argument removed on same physical line;every preprocessing directive unchanged. Source mapping preservation, not independent compiler line observation."
+  }
+]

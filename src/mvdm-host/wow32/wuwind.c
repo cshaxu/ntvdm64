@@ -1591,7 +1591,7 @@ ULONG FASTCALL WU32GetWindowDC(PVDMFRAME pFrame)
 
 #line 1593
     if (ul)
-        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);
+        StoreDC(htask16, parg16->f1, (HAND16)ul);
 
     FREEARGPTR(parg16);
     RETURN(ul);

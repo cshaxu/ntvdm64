@@ -1100,7 +1100,7 @@ ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
 	
 	
 	
-        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);
+        StoreDC(htask16, parg16->f1, (HAND16)ul);
     }
 
     FREEARGPTR(parg16);

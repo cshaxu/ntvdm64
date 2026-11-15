@@ -1138,3 +1138,7 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [R1768-R1771 parameter map](r1768-r1771-parameter-map-review.json):original lookup restored;shared rollback;mirror106->94;54 focused scenarios and289 lines pass;delivery pending.
 
 - [P153 receipt](batch-p153-checkpoint.json) and [line proof](batch-p153-line-check.json):cached full,publish11x2,parameter54,Full19 and governance passed;mirror net-14;supersedes the pending-delivery notes above.
+
+- [R1772-R1774 DC cache](r1772-r1774-dc-cache-review.json): exact original C/header restored;three coupled callers;mirror diff -14;native release controls passed;final delivery pending.
+
+- [P154 receipt](batch-p154-checkpoint.json) and [line proof](batch-p154-line-check.json):cached full,publish11x2,DC/window-borrow and Full19 passed;mirror net-14;supersedes pending-delivery notes above.

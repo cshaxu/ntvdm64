@@ -34,8 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1771 reviewed:620 restored/confirmed published,0 local,8 approved,
-1143 qualified pending;949 unreviewed. Files233/365 audited,132 remain.
+1774 reviewed:623 restored/confirmed published,0 local,8 approved,
+1143 qualified pending;946 unreviewed. Files235/365 audited,130 remain.
+P154 DC cache original restored;mirror batch-14;cached,publish11x2,focused,Full19 passed;Git accompanies receipt.
 P153 header4->2;wparam106->94;cached,publish11x2,parameter54,Full19 passed;Git accompanies receipt.
 P152 delivered37bb1252f;P152 mirror151->125(-26);1048 lines match;cached,publish11x2,transactions183,Full19 passed;Git accompanies receipt.
 P151 fax diff41->30(-11);699 lines match;build,publish11x2,fax135,Full19 passed;Git accompanies receipt.
@@ -57,11 +58,11 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P153 candidate `3bb1c5ca-d4c2-414d-bfda-c0be9e0f6c45` published11x2;hashes match.
-Final parameter54 and Full19 passed;Git accompanies P153.
+P154 candidate `91441212-e53f-424a-aa0b-b16bbdae0b59` published11x2;hashes match.
+Final DC/window-borrow and Full19 passed;Git accompanies P154.
 Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p153-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p154-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored
