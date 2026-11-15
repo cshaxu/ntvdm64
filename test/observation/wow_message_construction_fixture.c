@@ -170,6 +170,7 @@ static LRESULT CALLBACK notification_proc(HWND w,UINT m,WPARAM p,LPARAM l){
 #define STOREWORD(d,v) (*(WORD *)&(d)=(WORD)(v))
 #define FETCHWORD(v) ((WORD)(v))
 #define FETCHDWORD(v) ((DWORD)(v))
+#define FETCHLONG(v) ((LONG)(v))
 #define stackfree16(v) ((void)(v))
 #undef RtlFillMemory
 #define RtlFillMemory fill_memory
@@ -195,7 +196,7 @@ VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX);
 #endif
 #endif
 #ifdef TRANSACTION_GROUP
-typedef struct {DWORD Proc16;} HOOKSTATEDATA,*LPHOOKSTATEDATA;
+typedef struct {DWORD Proc16;INT iHook;} HOOKSTATEDATA,*LPHOOKSTATEDATA;
 typedef DWORD *PVPVOID;
 #define RET_HOOKPROC 1
 #define WOWCLASS_UNKNOWN 0
@@ -217,6 +218,7 @@ static void getintarray16(VPVOID value,INT count,INT *array){
 }
 #define PUTCBTACTIVATESTRUCT16(p,v) ((p)->fMouse=(WORD)(v)->fMouse,(p)->hWndActive=GETHWND16((v)->hWndActive))
 #define GETCBTACTIVATESTRUCT16(p,v) ((v)->fMouse=(p)->fMouse,(v)->hWndActive=HWND32((p)->hWndActive))
+#define PUTEVENTMSG16(p,v) ((p)->message=(WORD)(v)->message,(p)->paramL=(WORD)(v)->paramL,(p)->paramH=(WORD)(v)->paramH,(p)->time=(v)->time)
 #define PUTMOUSEHOOKSTRUCT16(p,v) ((p)->pt.x=(SHORT)(v)->pt.x,(p)->pt.y=(SHORT)(v)->pt.y,(p)->hwnd=GETHWND16((v)->hwnd))
 #define GETMOUSEHOOKSTRUCT16(p,v) ((v)->pt.x=(p)->pt.x,(v)->pt.y=(p)->pt.y,(v)->hwnd=HWND32((p)->hwnd))
 static BOOL CallBack16(INT id,PARM16 *parameters,VPPROC procedure,PVPVOID result){
@@ -506,8 +508,22 @@ static void stack_transactions(void){
  reset_case();
 }
 #endif
+static void hook_completion_probe(void) {
+ unsigned family,mode;BOOL trapped;DWORD cursor;HOOKSTATEDATA hook={1,WH_JOURNALPLAYBACK};
+ for(family=0;family<2;++family)for(mode=0;mode<4;++mode) {
+  MOUSEHOOKSTRUCT mouse={0};EVENTMSG event={0};reset_case();cursor=task.vpCBStack;trapped=FALSE;
+  callback_reject=mode==1;callback_fault=mode==2;fault_at=mode==3 ? (family ? 2:1):0;
+  __try {if(family) (void)ThunkMouseHook(0,0,&mouse,&hook);else (void)ThunkJournalHook(0,0,&event,&hook);}
+  __except(fault_filter(GetExceptionCode())) {trapped=TRUE;}
+  expect(trapped==(mode>=2),"HOOK_COMPLETION_EXCEPTION");
+  expect((task.vpCBStack==cursor)==(mode!=0),"HOOK_COMPLETION_CURSOR");
+  printf("HOOK_COMPLETION family=%u mode=%u trapped=%u restored=%u\n",family,mode,trapped,task.vpCBStack==cursor);
+ }
+}
+
 static void transaction_group(void){
  unsigned before=failures;
+ hook_completion_probe();
  heap_transactions();create_transactions();global_transactions();cbt_transactions();
  /* All fourteen delegated heap families share the same original call scratch. */
  expect(failures==before,"TRANSACTION_CONTROL_ABORT");

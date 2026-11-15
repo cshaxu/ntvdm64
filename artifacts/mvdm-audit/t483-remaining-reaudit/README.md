@@ -1126,3 +1126,7 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [R1711–R1720 complete source review](r1711-r1720-fax-review.json):mirror41->30(-11),698 logical lines match;3 local restorations,7 minimized/necessary residuals;P151 delivery pending.
 
 - [P151 receipt](batch-p151-checkpoint.json):cached full,publish11x2,final fax135,Full19/shared boundary/governance passed;mirror diff net-11;Git accompanies receipt.
+
+- [R1721–R1764 hook investigation](r1721-r1764-hook-investigation.json):fixed baseline and complete diff;actual wrapper/scheduler chain and fixture limitations;not a completed disposition.
+
+- [P152 line proof](batch-p152-line-check.json) and [delivery checkpoint](batch-p152-checkpoint.json):wowhooks mirror151->125;1048 original selected lines match;cached/full delivery pending.

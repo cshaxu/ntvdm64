@@ -1,0 +1,1048 @@
+{
+  "file": "src/mvdm-host/wow32/wowhooks.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "33076e1d6ab266ffe816ac9718e2ec0ee3e72289a84dd2f1dbbb3f32681d79a7",
+  "current_sha256": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+  "original_crlf": 0,
+  "original_lf": 1997,
+  "current_crlf": 0,
+  "current_lf": 2120,
+  "added": 118,
+  "deleted": 33,
+  "blocks": [
+    {
+      "original_start": 13,
+      "deleted": 0,
+      "added": 2,
+      "original": [],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): original conversion finalizers. */",
+        "#include \"wow_message_lifetime.h\""
+      ]
+    },
+    {
+      "original_start": 78,
+      "deleted": 1,
+      "added": 2,
+      "original": [
+        "HOOKPARAMS vHookParams = {0, 0, 0};"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-344): callbacks restore their native-thread context. */",
+        "__declspec(thread) HOOKPARAMS vHookParams = {0, 0, 0};"
+      ]
+    },
+    {
+      "original_start": 80,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "INT viCurrentHookStateDataIndex = 0;"
+      ],
+      "current": [
+        "__declspec(thread) INT viCurrentHookStateDataIndex = 0;"
+      ]
+    },
+    {
+      "original_start": 458,
+      "deleted": 1,
+      "added": 2,
+      "original": [
+        "LONG APIENTRY WU32StdHookProc(INT nCode, LONG wParam, LONG lParam, INT iFunc)"
+      ],
+      "current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-332): original stubs enter the scoped host wrapper. */",
+        "LONG APIENTRY WowOriginalStdHookProc(INT nCode, LONG wParam, LONG lParam, INT iFunc)"
+      ]
+    },
+    {
+      "original_start": 570,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "    VPVOID      vp;"
+      ],
+      "current": [
+        "    VPVOID      vp = 0;"
+      ]
+    },
+    {
+      "original_start": 573,
+      "deleted": 1,
+      "added": 5,
+      "original": [
+        "    WM32MSGPARAMEX wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before converter/CWP stack. */",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 593,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "        wm32mpex.fFree = TRUE; /* DIV-344: callback owns newly constructed input. */"
+      ]
+    },
+    {
+      "original_start": 596,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "            return FALSE; /* DIV-344: never expose a partial conversion. */"
+      ]
+    },
+    {
+      "original_start": 600,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    if (!vp) return FALSE; /* DIV-344: converted input remains frame-owned. */"
+      ]
+    },
+    {
+      "original_start": 615,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn); /* DIV-349 */"
+      ]
+    },
+    {
+      "original_start": 618,
+      "deleted": 6,
+      "added": 1,
+      "original": [
+        "    GETMISCPTR(vp, pCwpStruct16);",
+        "",
+        "    if (pCwpStruct16->message != wm32mpex.Parm16.WndProc.wMsg)",
+        "        LOGDEBUG(LOG_ALWAYS,(\"ThunkCallWndProcHook: IN message != OUT message\"));",
+        "",
+        "    FREEVDMPTR(pCwpStruct16);"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 633,
+      "deleted": 0,
+      "added": 2,
+      "original": [],
+      "current": [
+        "    vp = 0; /* DIV-344: finalizer consumes only this frame's remaining stack. */",
+        "    stack.completed = fCallback; /* DIV-349: do not change the original hook result. */"
+      ]
+    },
+    {
+      "original_start": 635,
+      "deleted": 0,
+      "added": 6,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349: return is not a failed call. */",
+        "        if (vp) stackfree16(vp);",
+        "        __try { wow_message_unwind32(&wm32mpex); }",
+        "        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 658,
+      "deleted": 1,
+      "added": 5,
+      "original": [
+        "    WM32MSGPARAMEX       wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX       wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-349): actual independent CREATE owner. */",
+        "    wow_message_stack stack;",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 701,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "            wm32mpex.fFree = TRUE; /* DIV-349: same synchronous ownership as WndProc. */"
+      ]
+    },
+    {
+      "original_start": 786,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn); /* DIV-349 */"
+      ]
+    },
+    {
+      "original_start": 837,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349: all original output conversion has returned. */"
+      ]
+    },
+    {
+      "original_start": 838,
+      "deleted": 0,
+      "added": 5,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349 */",
+        "        __try { wow_message_unwind32(&wm32mpex); }",
+        "        __finally { wow_message_stack_leave(&stack, abnormal || AbnormalTermination()); }",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 884,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "    VPVOID vp;"
+      ],
+      "current": [
+        "    VPVOID vp = 0;"
+      ]
+    },
+    {
+      "original_start": 887,
+      "deleted": 1,
+      "added": 3,
+      "original": [
+        "    WM32MSGPARAMEX wm32mpex;"
+      ],
+      "current": [
+        "    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): converter stack owner. */",
+        "    BOOL fCallback;"
+      ]
+    },
+    {
+      "original_start": 890,
+      "deleted": 6,
+      "added": 14,
+      "original": [
+        "    HWND hwnd32;",
+        "    MSGPARAMEX mpex;",
+        "    BOOL fUseOld;",
+        "    static MSG msgSave;",
+        "    static int cRecurse = 0;",
+        "    static PARM16 Parm16Save;"
+      ],
+      "current": [
+        "    HWND hwnd32 = NULL; /* DIV-344: only successful conversion selects it. */",
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    /* DIV-344: preserve original same-message reuse across nested DIFFERENT",
+        "     * messages too; no second recursion table or persistent owner is added. */",
+        "    BOOL fUseOld = TRUE;",
+        "    static __declspec(thread) MSG msgSave;",
+        "    static __declspec(thread) int cRecurse = 0;",
+        "    static __declspec(thread) PARM16 Parm16Save;",
+        "    MSG savedMsg = msgSave;",
+        "    int savedRecurse = cRecurse;",
+        "    PARM16 savedParm = Parm16Save;",
+        "    BOOL savedThunkDDE = fThunkDDEmsg; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 926,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "            return FALSE; /* DIV-344: never expose a partial conversion. */"
+      ]
+    },
+    {
+      "original_start": 1009,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn); /* DIV-349 */"
+      ]
+    },
+    {
+      "original_start": 1063,
+      "deleted": 1,
+      "added": 5,
+      "original": [
+        "        if (!hwnd32)"
+      ],
+      "current": [
+        "        /* DIV-344: the native filter returns a MSG, not ownership of a newly",
+        "         * allocated COPYDATA buffer. Keep only an existing active native pair;",
+        "         * the old absent-pair branch dereferenced NULL, not a supported transfer. */",
+        "        if (!mpex.fThunkSucceeded ||",
+        "                (mpex.Parm16.WndProc.wMsg == WM_COPYDATA && mpex.MsgBuffer->copydata.flags))"
+      ]
+    },
+    {
+      "original_start": 1097,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "        free16(vp);"
+      ],
+      "current": [
+        "        wow_message_free16(&vp, FALSE); /* DIV-349: consume before a reentrant free. */"
+      ]
+    },
+    {
+      "original_start": 1102,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349 */"
+      ]
+    },
+    {
+      "original_start": 1103,
+      "deleted": 0,
+      "added": 17,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        BOOL abnormal = !stack.completed; /* DIV-349: each cleanup owns its edge. */",
+        "        __try {",
+        "        __try { if (vp && !fUseOld) wow_message_free16(&vp, FALSE); }",
+        "        __finally {",
+        "        msgSave = savedMsg;",
+        "        cRecurse = savedRecurse;",
+        "        Parm16Save = savedParm;",
+        "        __try { wow_message_unwind16(&mpex); }",
+        "        __finally { wow_message_unwind32(&wm32mpex); }",
+        "        }",
+        "        } __finally {",
+        "            BOOL stackAbnormal = abnormal || AbnormalTermination(); /* DIV-350: original scope. */",
+        "            __try { wow_message_stack_leave(&stack, stackAbnormal); }",
+        "            __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */",
+        "        }",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 1123,
+      "deleted": 0,
+      "added": 4,
+      "original": [],
+      "current": [
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): EVENTMSG stack transaction. */",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 1151,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn); /* DIV-349 */"
+      ]
+    },
+    {
+      "original_start": 1160,
+      "deleted": 3,
+      "added": 1,
+      "original": [
+        "            if (MessageNeedsThunking(lpEventMsg->message)) {",
+        "                LOGDEBUG(LOG_ALWAYS, (\"ThunkJournalHook: Playing back unexpected message 0x%x\", lpEventMsg->message));",
+        "            }"
+      ],
+      "current": [
+        "#error Excluded unsupported DEBUG WOW profile"
+      ]
+    },
+    {
+      "original_start": 1181,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349: preserve original result. */"
+      ]
+    },
+    {
+      "original_start": 1182,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    } __finally { wow_message_stack_leave(&stack, FALSE); } /* DIV-349: completed is authoritative. */"
+      ]
+    },
+    {
+      "original_start": 1230,
+      "deleted": 0,
+      "added": 4,
+      "original": [],
+      "current": [
+        "    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): MOUSEHOOK stack transaction. */",
+        "    BOOL fCallback;",
+        "    wow_message_stack_enter(&stack);",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 1243,
+      "deleted": 1,
+      "added": 1,
+      "original": [
+        "    CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn);"
+      ],
+      "current": [
+        "    fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&lReturn); /* DIV-349 */"
+      ]
+    },
+    {
+      "original_start": 1249,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    stack.completed = fCallback; /* DIV-349: after original output conversion. */"
+      ]
+    },
+    {
+      "original_start": 1250,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    } __finally { wow_message_stack_leave(&stack, FALSE); } /* DIV-349: completed is authoritative. */"
+      ]
+    },
+    {
+      "original_start": 1439,
+      "deleted": 1,
+      "added": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 1452,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    if (!mpex.fThunkSucceeded) return FALSE; /* DIV-344: HWND0 is not status. */"
+      ]
+    },
+    {
+      "original_start": 1468,
+      "deleted": 0,
+      "added": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 1485,
+      "deleted": 1,
+      "added": 2,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 1550,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "            if (!mpex.fThunkSucceeded) return FALSE; /* DIV-344: reject before native. */"
+      ]
+    },
+    {
+      "original_start": 1682,
+      "deleted": 0,
+      "added": 3,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        wow_message_unwind16(&mpex);",
+        "    }"
+      ]
+    },
+    {
+      "original_start": 1724,
+      "deleted": 1,
+      "added": 3,
+      "original": [
+        "    MSGPARAMEX mpex;"
+      ],
+      "current": [
+        "    MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */",
+        "    BOOL savedThunkDDE = fThunkDDEmsg; /* DIVERGENCE(MVDM-HOST-DIV-350): caller scope. */",
+        "    __try {"
+      ]
+    },
+    {
+      "original_start": 1746,
+      "deleted": 0,
+      "added": 1,
+      "original": [],
+      "current": [
+        "    if (!mpex.fThunkSucceeded) { FREEVDMPTR(pMsg16); return FALSE; }"
+      ]
+    },
+    {
+      "original_start": 1781,
+      "deleted": 0,
+      "added": 4,
+      "original": [],
+      "current": [
+        "    } __finally {",
+        "        __try { wow_message_unwind16(&mpex); }",
+        "        __finally { fThunkDDEmsg = savedThunkDDE; } /* DIV-350 */",
+        "    }"
+      ]
+    }
+  ],
+  "status": "P152 source review and final delivery gates complete;Git accompanies receipt",
+  "points": "R1721-R1764",
+  "baseline_reconciliation": "Pinned Git source LF hash33076e1d;normalizing only to CRLF reproduces old record34522099 exactly;no edition difference.",
+  "findings": [
+    "Current whole-file normalized mirror difference+118/-33=151. Two error-only blocks replace9 lines with2 error lines.",
+    "All32 original native stubs call WU32StdHookProc;project wrapper calls renamed WowOriginalStdHookProc.",
+    "Current wrapper saves hook parameters/index before callback_enter and restores in nested finally.",
+    "callback_enter can direct-yield the original task owner,then releases runtime lock before original dispatcher;entry/exit scope needs review beyond a compile dependency.",
+    "Existing hook fixture substitutes original dispatcher and covers same-thread nested restoration;does not prove need for TLS or renamed entry.",
+    "Existing parameter-construction fixture compares a pinned historical project revision,not unmodified OpenNT;results must remain separately labelled."
+  ],
+  "next_evidence": [
+    "Inspect real supported task scheduling around hook state;determine whether original globals can safely replace TLS without circular dependence on wrapper.",
+    "Audit entire conversion/finalization closure before deciding header and callback wrapper retention.",
+    "Preserve original source LF and verify compiler logical lines when final whole-file candidate is ready."
+  ],
+  "production_changed": true,
+  "owned_test_pid": 21708,
+  "tests": {
+    "wrapper_exit": 0,
+    "wrapper": "WOW_HOOK_CREATION_GUARD errors=0 enrollment=6 accepted=1 rollback=4;WOW_HOOK_CALLBACK_SCOPE errors=0 calls=9",
+    "transactions_exit": 0,
+    "current_scenarios": 175,
+    "current_failures": 0,
+    "historical_scenarios": 154,
+    "historical_failures": 72,
+    "historical_reference": "4b8a7c8ae6eaaca3350d640650dd9d57201fd581",
+    "scope": "Exact bodies with service doubles;historical project control is not original OpenNT;no runtime guest proof",
+    "evidence_hashes": {
+      "hook-wrapper.log": "67c11c05dab2eb10d26781f36744aff7e5dfa31150be2a3c6afb79e795d09cba",
+      "transactions/result.json": "6cccb0474ead6c20e39c91db93fec626f8d0a6448681ca84590e1e56bb61471d",
+      "transactions/body-baseline.stdout.log": "4d258002e709cd0b91c09df70346ced0587fc3fcf416f97fe45c1be6e1d46685",
+      "transactions/body-candidate.stdout.log": "ccb05b79a2a1f8aaa4ddfb31e42188a10efe97bec6ec5f231ef5b32a1153dce5"
+    }
+  },
+  "owned_test_state": "PID21708 completed;both runners exit0",
+  "original_cbt_control": {
+    "replacement": "Only complete ThunkCbtHook from pinned OpenNT;all other fixture bodies identical to current candidate",
+    "compiler_exit": 0,
+    "run_exit": 1,
+    "scenarios": 175,
+    "failures": 6,
+    "failure_output": " errors=6 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0\nMESSAGE_CONSTRUCTION failures=6 scenarios=175 abi=72 scratch_offset=56 scratch_slots=4 parm=16\n",
+    "hashes": {
+      "message_construction_exact_body.h": "e49a5703f924bef9566afc48f05b2295b8cf3aba85e1b46d7bfd9889d597e3e9",
+      "compile.log": "02874d6664c6387f2d71ac65ac2ee701fb978aa3462435e08f61a35fe86b506a",
+      "run.log": "81c74159f1f2e69a691b29d50b92d712724019a02057ffad584127fc997a7d7f"
+    },
+    "limit": "Isolated exact-function failure paths,not real guest acceptance. A function-level failure does not justify each current diff independently.",
+    "superseded_interpretation": "Use original_cbt_closure_control for creation-closure conclusions; the earlier mixed control cannot prove normal-path original failure."
+  },
+  "scheduler_source_trace": {
+    "guest_hook_entry": "mvdm-guest/wow16/kernel31/wow16cal.asm WOW16HookProc calls supplied procedure then WOW16Done;no task lock taken in this entry. Read-only research;no guest edits.",
+    "yield": "mvdm-host/wow32/wkman.c WK32Yield/OldYield call pfnOut yield providers;no hook-specific prohibition here.",
+    "host_handoff": "wow_user_task_lifecycle.c native_call_begin parks current owner through xxxSleepTask when not inline and nTaskLock==0;callback_enter obtains scheduling ownership then releases native runtime lock.",
+    "consumers": "wowhooks.c W32GetHookParams reads complete current hook tuple;W32GetHookDDEMsglParam uses current index to interpret current lParam as CWP or MSG.",
+    "remaining_question": "Need distinguish permitted overlapping callback lifetimes from a claimed reproduced multi-thread corruption;do not call mocked original dispatcher a production reproduction."
+  },
+  "before_line_proof": {
+    "selected_retained_lines": 1045,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "r1721_disposition": "Approved two #error exclusions retained;1045 selected original lines match actual preprocessing;no source change;P151 source remains published.",
+  "callback_completion_reduction_review": {
+    "question": "Can fCallback and the late stack.completed assignment be merged without changing failure semantics?",
+    "scope": "Read-only closure review of all five hook conversions and wow_message_stack_leave; no production edits.",
+    "observations": [
+      "CallWndProc, CBT, MsgFilter, Journal and Mouse save CallBack16 result and set completed only after output conversion and normal release.",
+      "Journal and Mouse finally call wow_message_stack_leave(&stack,FALSE). The callee restores the saved cursor iff !completed or abnormal, and preserves LastError.",
+      "Therefore assigning completed immediately at successful CallBack16 changes the post-callback exception path: current completed remains FALSE, while an early assignment leaves TRUE and abnormal is explicitly FALSE.",
+      "CallWndProc, CBT and MsgFilter have nested cleanup finally scopes and capture incomplete status before cleanup; AbnormalTermination must be evaluated in the intended scope, not assumed to describe the outer conversion.",
+      "No evidence here establishes that output conversion actually throws in deployed guest operation. This is a source-level distinction, not a reproduced defect."
+    ],
+    "decision": "Reject mechanical five-family substitution. A reduced design must preserve completion phase or carry outer abnormal termination correctly; this finding alone does not approve retaining all existing lifetime diffs.",
+    "next": "Compare original stack ownership and full output/free closure before selecting a minimal candidate; do not mark R1722 or the file complete from this finding."
+  },
+  "callwndproc_empty_free_reduction": {
+    "points": [
+      "R1726",
+      "R1732",
+      "R1733"
+    ],
+    "before": 151,
+    "candidate": "build/t483-s5-p152/wowhooks-stackfree-candidate.c",
+    "delta": -4,
+    "evidence": "wcall16.h defines stackfree16(vp) as empty. Actual product wowhooks.before.i expands the finalizer to if(vp);. All remaining uses of vp follow its assignment from stackalloc16. Original normal-path stackfree16 remains untouched.",
+    "candidate_sha256": "1804d2eee5f5327ab324dcca370f6640ce2de5f142a634e81ca1cf99aa80c718",
+    "status": "Proven source-level reduction; isolated candidate only. Whole-file review, final line correction and delivery still required. No production edit or completed-point count.",
+    "candidate_diff": 147
+  },
+  "original_cbt_closure_control": {
+    "question": "Does the original-only CBT control fail merely because current Create converters require new ownership bookkeeping?",
+    "substitution": "Pinned original complete ThunkCbtHook, WM32Create and WM32MDICreate; all other exact bodies and fixture service doubles retained.",
+    "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "compiler_exit": 0,
+    "run_exit": 1,
+    "cbt_modes": [
+      {
+        "mode": "callback exception",
+        "trapped": true,
+        "outstanding_allocations": 2,
+        "foreign_free": 0,
+        "cursor_restored": false,
+        "init_restored": false
+      },
+      {
+        "mode": "callback rejected",
+        "trapped": false,
+        "outstanding_allocations": 0,
+        "foreign_free": 0,
+        "cursor_restored": false,
+        "init_restored": false
+      },
+      {
+        "mode": "normal return",
+        "trapped": false,
+        "outstanding_allocations": 0,
+        "foreign_free": 0,
+        "cursor_restored": false,
+        "init_restored": false,
+        "interpretation": "No CBT assertion fails; normal original stack convention is not rollback."
+      }
+    ],
+    "conclusion": "Original full selected Create closure releases normally. Exception bypasses its normal unthunk and leaks two allocations; rejected callback has no rollback of pre-call stack allocations. Do not use the earlier mixed-current-converter normal-path failure as proof of original deficiency.",
+    "production_source_crosscheck": "walloc16.c stackalloc16 mutates vpCBStack/INIT before CallBack16. wcall16.c current abnormal restoration snapshots at CallBack16 entry, after converter allocations; it cannot restore the earlier converter cursor. The wrapper may reject before calling original callback. Guest normal return and terminal teardown remain separate cases.",
+    "limits": "Fault injection and service doubles, not production guest reproduction. This supplies bounded lifetime evidence, not proof that every current helper or header dependency is minimal. Other fixture failures from restored Create/MDICreate are outside CBT and not counted as independent proof here.",
+    "hashes": {
+      "wmdisp32.original.c": "0092319153a95e147513ad966947813634b61bee02fe8fad8fdf20c250dbffba",
+      "original-cbt-closure/message_construction_exact_body.h": "03de3ede0010b45403946ce4d9cf72ff6efd05e046501e97afea27942064b55e",
+      "original-cbt-closure/fixture.c": "3a90096a92a1af3d02e778ffb9308526854ec86d879f54fdb4bdc6e8cee0ed23",
+      "original-cbt-closure/compile.log": "2f97a77084ba90d92dc3c08edf2f2487abda4d0d36774442aa09e351cf23a4f3",
+      "original-cbt-closure/run.log": "3b9c5c72b609f364b6f49ff46d362220285eb1d77142a6700b48fad3d597da27"
+    },
+    "owner_processes": "9384 terminal before compiler startup;34416 and20012 terminal. Final run is20012.",
+    "production_changed": false
+  },
+  "tls_storage_control": {
+    "reader": "Exact pinned original W32GetHookDDEMsglParam body",
+    "cases": [
+      {
+        "case": 0,
+        "meaning": "both global",
+        "compile_exit": 0,
+        "run_exit": 1,
+        "output": "HOOK_STORAGE_INTERLEAVING A=00002222 B=00002222 correct=0 scheduler_proof=0"
+      },
+      {
+        "case": 1,
+        "meaning": "both TLS",
+        "compile_exit": 0,
+        "run_exit": 0,
+        "output": "HOOK_STORAGE_INTERLEAVING A=00001111 B=00002222 correct=1 scheduler_proof=0"
+      },
+      {
+        "case": 2,
+        "meaning": "parameter TLS only",
+        "compile_exit": 0,
+        "run_exit": 1,
+        "output": "HOOK_STORAGE_INTERLEAVING A=0000aaaa B=00002222 correct=0 scheduler_proof=0"
+      },
+      {
+        "case": 3,
+        "meaning": "index TLS only",
+        "compile_exit": 0,
+        "run_exit": 1,
+        "output": "HOOK_STORAGE_INTERLEAVING A=0000bbbb B=00002222 correct=0 scheduler_proof=0"
+      }
+    ],
+    "scope": "Event-ordered two native threads; storage control, not real scheduler or guest reproduction. Same-thread nesting is independently covered by existing wrapper fixture.",
+    "source_applicability": "Original dispatcher writes both values; wmsg16.c DDE paths consume original reader. Actual callback entry acquires task ownership, and native_call_begin with unlocked/non-inline owner calls xxxSleepTask and releases runtime lock; callback lifetime is not globally atomic. No hook-specific lock in guest WOW16HookProc.",
+    "minimality": "Both values must follow the calling native thread; moving them to a new per-task accessor or snapshot manager adds indirection and equivalent state. Existing wrapper scopes same-thread recursion; TLS addresses cross-thread storage independently.",
+    "hashes": {
+      "hook-storage.c": "eca8f0b6ac2fa5669f2029e55b30266530fa3b10a45cbbcb727c831c96c2e29b",
+      "hook-storage.ps1": "df5c6f3369da96957ce53e7bd31c6b03c1bc2fa3bff24c9b4ae7f2209b1e5949",
+      "hook-storage-case0.cmd": "2d8b31ed3a27e88f666ff80b50fc7201f8b6a2987976bc4db130d6fdfe85530c",
+      "hook-storage-case1.cmd": "0d68186c67c4b6858eb1d9f16b30176c854dd80659445c18eb26c809a25a4d42",
+      "hook-storage-case2.cmd": "1f8d6ee09c2f7dcf18c1532f8605ccdabff1192072fedc4275fb5987c13f0d6f",
+      "hook-storage-case3.cmd": "5a2dc236f4d5cdb26212d384a8e9d88c34b3359d7cff46ec0d0cdf2e4610b897",
+      "hook-storage-case0.run.log": "6735f0f87b6c16b31a5dfeddba8038d0a90360388a3f4698527ac6906aa72dbe",
+      "hook-storage-case1.run.log": "cd302d83f383bff5acb18b05177e3c0f007cf2dfdf9a696ba57a0c741afb098e",
+      "hook-storage-case2.run.log": "e87549856d085db7d8f339a8229f118cd7578fc5e14f94bb1a356f95eb18aae1",
+      "hook-storage-case3.run.log": "cca0461cf671d9f455d8c7cfb26e911f4a2488070f6a4a9b4185b67ef3a5e3e8"
+    },
+    "attempts": "16796 stopped on cmd forward-path error;29496 had cmd equals-token splitting and no valid runs;8244 fixed-command run completed. Earlier empty run exits are not evidence."
+  },
+  "local_edits": {
+    "scope": "All44points source-reviewed;actual logical-line/final whole-file validation pending",
+    "baseline_mirror_diff": 151,
+    "current_mirror_diff": 125,
+    "sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836",
+    "final_lines_verified": true,
+    "delivered": true
+  },
+  "wrapper_boundary_review": {
+    "original_assumption": "Original dispatcher assumes WOW CURRENTPTD and private USER window words before converter dispatch.",
+    "actual_boundary": "wow_user_get_window_longA routes GWL_WOWWORDS to scoped borrowed aliases;wrapper enters task/borrow and enrolls CBT creation before original converters. Native USER does not provide original NT4 private structures.",
+    "minimum": "Remove added comment;one original definition rename is smaller than copying stubs or per-TU macro/link indirection.",
+    "test_limit": "Current fixture uses real wrapper but a dispatcher double;no claim of complete guest acceptance."
+  },
+  "callwndproc_point_review": {
+    "1727": {
+      "status": "pending-owner-decision",
+      "delta": "6->6(0)",
+      "location": "Original573 conversion record and lifetime scope",
+      "evidence": "Conversion acquires memory and moves stack before callback. Exact original creation closure counterexample proves normal release is not exception release;zero initialization makes untouched ownership fields empty,including no-thunk path.",
+      "plan": "Keep call-local snapshot and completion phase;no new allocator registry."
+    },
+    "1728": {
+      "status": "restored-pending-delivery",
+      "delta": "1->0(-1)",
+      "location": "Original593 added fFree TRUE",
+      "evidence": "No selected consumer:message<0x400 excludes DDE;current WM32CopyData consumes acquired-key flags and never reads fFree. WM32Create/MDICreate propagation does not introduce another consumer.",
+      "plan": "Delete added assignment;no converter edits."
+    },
+    "1729": {
+      "status": "pending-owner-decision",
+      "delta": "1->1(0)",
+      "location": "Original596 converter FALSE branch",
+      "evidence": "Actual converter failure is explicit:WM32CopyData allocation/map failure returnsFALSE without a completed guest payload. Original hook logs then continues constructing guest CWP.",
+      "plan": "Keep one returnFALSE;do not dispatch incomplete conversion."
+    },
+    "1730": {
+      "status": "restored-pending-delivery",
+      "delta": "1->0(-1)",
+      "location": "Original600 stackalloc16 null return",
+      "evidence": "stackalloc16 performs arithmetic on existing callback cursor and has no heap-allocation failure result. Added early return silently changes invalid-stack failure handling;no evidence this guard is needed for supported execution.",
+      "plan": "Restore original progression to pointer conversion;final tests required."
+    },
+    "1731": {
+      "status": "pending-owner-decision",
+      "delta": "2->2(0)",
+      "location": "Original615 callback result capture",
+      "evidence": "CallBack16 may reject before original entry due task lifecycle;original callback abnormal restoration snapshots after converter allocations. Conversion scope needs completion result without changing original hook resultFALSE.",
+      "plan": "Keep result capture until output processing completes;early completed assignment changes exception handling."
+    },
+    "1732": {
+      "status": "pending-owner-decision",
+      "delta": "2->1(-1)",
+      "location": "Original633 completion and vp reset",
+      "evidence": "vp reset served only empty stackfree16;completion describes output conversion completion and callback success.",
+      "plan": "Removed vp reset;retain late completed assignment."
+    },
+    "1733": {
+      "status": "pending-owner-decision",
+      "delta": "6->4(-2)",
+      "location": "Original635 finally cleanup",
+      "evidence": "Original normal output conversion is bypassed on exception. Shared helper restores cursor when !completed or abnormal. No cleanup receives pointer to local scope,so duplicate !completed snapshot has no independent lifetime.",
+      "plan": "Remove empty macro conditional and duplicate abnormal local;retain unwind and finally stack leave."
+    }
+  },
+  "cbt_msgfilter_point_review": {
+    "1734": {
+      "status": "pending-owner-decision",
+      "delta": "6->6(0)",
+      "location": "Original658 CBT conversion/lifetime locals",
+      "evidence": "Original CBT/Create/MDICreate closure:normal path releases;callback exception leaves2 allocations and rejection leaves converter cursor changed. Zeroed owner fields cover non-CREATE codes and partial initialization.",
+      "plan": "Keep local scope;no new registry."
+    },
+    "1735": {
+      "status": "restored-pending-delivery",
+      "delta": "1->0(-1)",
+      "location": "Original701 CBT fFree assignment",
+      "evidence": "Only calls WM32Create;fFree propagates to WM32MDICreate but neither reads it for any effect. DDE/CopyData converters are not invoked by this branch.",
+      "plan": "Remove added assignment;leave original converter chain unchanged."
+    },
+    "1736": {
+      "status": "pending-owner-decision",
+      "delta": "2->2(0)",
+      "location": "Original786 CBT callback result",
+      "evidence": "Real callback wrapper can reject before original entry;pre-callback conversion already moved cursor. Original isolated closure rejects without restoring converter cursor.",
+      "plan": "Keep completion result without changing lReturn semantics."
+    },
+    "1737": {
+      "status": "pending-owner-decision",
+      "delta": "1->1(0)",
+      "location": "Original837 CBT completion phase",
+      "evidence": "Output conversion after callback can exit abnormally;marking completed earlier would erase this distinction.",
+      "plan": "Keep late completion assignment."
+    },
+    "1738": {
+      "status": "pending-owner-decision",
+      "delta": "5->4(-1)",
+      "location": "Original838 CBT finally",
+      "evidence": "Original callback exception bypasses output unthunk;shared stack leave already tests !completed and cleanup cannot mutate scope.",
+      "plan": "Delete duplicate abnormal local;retain nested unwind/stack finally."
+    },
+    "1739": {
+      "status": "pending-owner-decision",
+      "delta": "2->2(0)",
+      "location": "Original884 MsgFilter vp initialization",
+      "evidence": "Converter failure may return before malloc16;finally tests vp before freeing. Unlike stackfree16, message buffer free16 is a real guest heap free.",
+      "plan": "Keep initial null ownership key."
+    },
+    "1740": {
+      "status": "pending-owner-decision",
+      "delta": "4->4(0)",
+      "location": "Original887 MsgFilter conversion locals",
+      "evidence": "Both pre-callback converter acquisition and partial cleanup need initialized ownership flags and cursor snapshot. CallBack16 scope begins after these allocations.",
+      "plan": "Keep minimal initialized record and scope/result locals."
+    },
+    "1741": {
+      "status": "pending-owner-decision",
+      "delta": "20->14(-6)",
+      "location": "Original890 MsgFilter recursive context",
+      "evidence": "Original static message/parameter reuse can be overwritten by another native task or nested different message;saved per-call context restores outer identity. hwnd32 read is dominated by ThunkMsg16 assignment and fHookModified guard. fUseOld assigned before any vp acquisition;early finally vp0 short-circuits its read.",
+      "plan": "Restore HWND hwnd32 and BOOL fUseOld declarations;remove2 comment lines;retain TLS and caller snapshots."
+    }
+  },
+  "msgfilter_tail_review": {
+    "1742": {
+      "delta": "1->1(0)",
+      "location": "Original926 converter failure return",
+      "evidence": "Actual converters returnFALSE on incomplete buffer construction;continuing would dispatch partial parameters.",
+      "plan": "Keep explicit failed-conversion return."
+    },
+    "1743": {
+      "delta": "2->2(0)",
+      "location": "Original1009 callback result",
+      "evidence": "Real callback can reject without original callback entry;converter cursor/resources already acquired.",
+      "plan": "Keep result capture,independent of original hook result."
+    },
+    "1744": {
+      "delta": "6->3(-3)",
+      "location": "Original1063 output acceptance",
+      "evidence": "ThunkMsg16 explicitly distinguishes conversion success f from returned hwnd;zero hwnd can be valid thread message. Newly allocated COPYDATA storage is released by unwind16 before returned MSG use;borrowed existing pair has zero ownership flags.",
+      "plan": "Remove3-line explanation;keep success flag and owned-COPYDATA output rejection. No new ownership transfer path."
+    },
+    "1745": {
+      "delta": "2->2(0)",
+      "location": "Original1097 message release",
+      "evidence": "malloc16 may fall back to guest global memory;free16 invokes GlobalUnlockFree16. If release reenters or throws,still-populated vp would be released again in finally. Shared helper clears key first.",
+      "plan": "Keep existing clear-before-release helper;do not replace with free then clear."
+    },
+    "1746": {
+      "delta": "1->1(0)",
+      "location": "Original1102 completion",
+      "evidence": "Marks normal output/free completion and guest callback success;exception before this point must restore cursor.",
+      "plan": "Keep late completed assignment."
+    },
+    "1747": {
+      "delta": "17->16(-1)",
+      "location": "Original1103 cleanup closure",
+      "evidence": "Every acquired heap/conversion resource must release despite earlier cleanup exception;caller recursive MSG/Parm/DDE state must restore. Stack helper already checks !completed and no cleanup mutates stack local.",
+      "plan": "Delete redundant abnormal local;capture actual cleanup abnormal state at existing outer-finally scope and retain finally DDE restoration."
+    }
+  },
+  "tail_points": {
+    "1748": {
+      "status": "pending-owner-decision",
+      "delta": "4->3(-1)",
+      "location": "Journal stack scope",
+      "evidence": "stackalloc16 mutates cursor before callback;callback can reject or throw. Shared scope restores the earlier cursor.",
+      "plan": "Use completed directly;remove separate fCallback."
+    },
+    "1749": {
+      "status": "pending-owner-decision",
+      "delta": "2->2(0)",
+      "location": "Journal callback capture",
+      "evidence": "Successful callback alone does not rule out later output exception;finally now receives actual abnormal termination.",
+      "plan": "Assign callback result directly to stack.completed."
+    },
+    "1750": {
+      "status": "restored-pending-delivery",
+      "delta": "1->0(-1)",
+      "location": "Journal late completion copy",
+      "evidence": "Copy redundant after direct result capture and corrected finally fallthrough.",
+      "plan": "Remove added copy;original return remains mapped at original line."
+    },
+    "1751": {
+      "status": "pending-owner-decision",
+      "delta": "1->1(0)",
+      "location": "Journal finally",
+      "evidence": "Return inside try makes AbnormalTermination TRUE even on normal return. Final candidate leaves try normally then executes original return;exceptions still restore.",
+      "plan": "Move finally before original return;no new state. Eight exact-body mode checks pass."
+    },
+    "1752": {
+      "status": "pending-owner-decision",
+      "delta": "4->3(-1)",
+      "location": "Mouse stack scope",
+      "evidence": "stackalloc16 mutates cursor before callback;callback can reject or throw. Shared scope restores the earlier cursor.",
+      "plan": "Use completed directly;remove separate fCallback."
+    },
+    "1753": {
+      "status": "pending-owner-decision",
+      "delta": "2->2(0)",
+      "location": "Mouse callback capture",
+      "evidence": "Successful callback alone does not rule out later output exception;finally now receives actual abnormal termination.",
+      "plan": "Assign callback result directly to stack.completed."
+    },
+    "1754": {
+      "status": "restored-pending-delivery",
+      "delta": "1->0(-1)",
+      "location": "Mouse late completion copy",
+      "evidence": "Copy redundant after direct result capture and corrected finally fallthrough.",
+      "plan": "Remove added copy;original return remains mapped at original line."
+    },
+    "1755": {
+      "status": "pending-owner-decision",
+      "delta": "1->1(0)",
+      "location": "Mouse finally",
+      "evidence": "Return inside try makes AbnormalTermination TRUE even on normal return. Final candidate leaves try normally then executes original return;exceptions still restore.",
+      "plan": "Move finally before original return;no new state. Eight exact-body mode checks pass."
+    },
+    "1756": {
+      "status": "pending-owner-decision",
+      "delta": "3->3(0)",
+      "location": "CallWndProc16 record/scope",
+      "evidence": "Original native next-hook call may throw before unthunk;partial conversion fields must be empty before acquisition.",
+      "plan": "Keep initialized existing conversion record and finally scope."
+    },
+    "1757": {
+      "status": "pending-owner-decision",
+      "delta": "1->1(0)",
+      "location": "CallWndProc16 failure check",
+      "evidence": "ThunkMsg16 returns hwnd independently of fThunkSucceeded;false converter result means incomplete native payload.",
+      "plan": "Keep explicit success test before CallNextHookEx."
+    },
+    "1758": {
+      "status": "pending-owner-decision",
+      "delta": "3->3(0)",
+      "location": "CallWndProc16 cleanup",
+      "evidence": "Next hook/output exception bypasses original normal unthunk;input-only text/COPYDATA owned keys need release.",
+      "plan": "Keep existing shared unwind16 in finally;no output unthunk replay."
+    },
+    "1759": {
+      "status": "pending-owner-decision",
+      "delta": "3->3(0)",
+      "location": "CbtHook16 record/scope",
+      "evidence": "CREATE conversion acquires strings and nested structures before native hook;exception skips original output cleanup.",
+      "plan": "Keep initialized record and enclosing finally."
+    },
+    "1760": {
+      "status": "pending-owner-decision",
+      "delta": "1->1(0)",
+      "location": "CbtHook16 failure check",
+      "evidence": "Failed CREATE conversion would otherwise supply incomplete lpcs to native callback.",
+      "plan": "Keep one failed-conversion return."
+    },
+    "1761": {
+      "status": "pending-owner-decision",
+      "delta": "3->3(0)",
+      "location": "CbtHook16 cleanup",
+      "evidence": "Native callback/output failure must release completed acquisitions;normal path alone does not cover it.",
+      "plan": "Keep shared unwind16 cleanup."
+    },
+    "1762": {
+      "status": "pending-owner-decision",
+      "delta": "4->4(0)",
+      "location": "MsgFilterHook16 state",
+      "evidence": "Native message conversion may partially allocate;DDE flag is caller-scoped and may already be FALSE.",
+      "plan": "Keep initialized conversion record,caller flag snapshot and finally scope."
+    },
+    "1763": {
+      "status": "pending-owner-decision",
+      "delta": "1->1(0)",
+      "location": "MsgFilterHook16 failure check",
+      "evidence": "Native MSG cannot be populated from a failed conversion;mapping reacquisition precedes check.",
+      "plan": "Keep explicit failed-conversion return and matching pointer-release form."
+    },
+    "1764": {
+      "status": "pending-owner-decision",
+      "delta": "4->4(0)",
+      "location": "MsgFilterHook16 cleanup",
+      "evidence": "Conversion/native-hook exception must release call-owned data and restore caller DDE state even when release throws.",
+      "plan": "Keep nested cleanup finally;no parallel ownership registry."
+    }
+  },
+  "completion_reduction_control": {
+    "scenarios": 183,
+    "failures": 0,
+    "cases": "Journal/Mouse x normal,rejected,callback-exception,output-exception",
+    "initial_failure": "Early completed with return inside try misclassified normal return because AbnormalTermination TRUE;output Journal fault index also corrected. Failed log retained.",
+    "final_solution": "Normal fallthrough through finally;original return follows it. Callback result is completed;actual exception OR !completed triggers stack restore.",
+    "scope": "Exact functions with service doubles;not real guest acceptance.",
+    "hashes": {
+      "run.log": "d947c942615c7c1aaaa012b7db301c83b48c8959957a2465f64ddba0d4ca34e8",
+      "failed-early-completed.log": "e6b5440ff87e9b19af6642c9e0939c45874035c3207ef0757958b36369ea2c20",
+      "fixture.c": "33485745f92e9619f97aa3ce698c09ec0d96fbe25d2f402b546d53ac5949b2e1",
+      "message_construction_exact_body.h": "d871841d41e50a96dfb95ea0b19e3d2a7278e290acc667e44d1fbee9d69c75a3"
+    }
+  },
+  "line_proof": {
+    "path": "src/mvdm-host/wow32/wowhooks.c",
+    "before": 151,
+    "after": 125,
+    "delta": -26,
+    "selected_lines": 1048,
+    "logical_line_mismatches": [],
+    "errors_unchanged": true,
+    "source_sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836",
+    "scope": "1048 selected retained original lines;explicit original return lines1181 and1249 retained;altered callback statements inspected in actual product preprocessor."
+  },
+  "formal_delivery": {
+    "transactions": 183,
+    "failures": 0,
+    "Full": 19,
+    "publication_images": 11,
+    "destinations": 2,
+    "package": "3681f1e0-f893-45a4-ad84-3438adc2ee6a"
+  }
+}

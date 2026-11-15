@@ -1,0 +1,13 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wowhooks.c",
+    "before": 151,
+    "after": 125,
+    "delta": -26,
+    "selected_lines": 1048,
+    "logical_line_mismatches": [],
+    "errors_unchanged": true,
+    "source_sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836",
+    "scope": "1048 selected retained original lines;explicit original return lines1181 and1249 retained;altered callback statements inspected in actual product preprocessor."
+  }
+]

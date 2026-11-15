@@ -67,6 +67,7 @@ try{
    "`ntypedef VPVOID VPCREATESTRUCT16;`n" +
    (Region $wow 'typedef struct _CBT_CREATEWND16' 'typedef CBT_CREATEWND16 UNALIGNED *PCBT_CREATEWND16;' 'cbt-create16') +
    "`n" + (Region $wow 'typedef struct _CBTACTIVATESTRUCT16' 'typedef CBTACTIVATESTRUCT16 UNALIGNED *PCBTACTIVATESTRUCT16;' 'cbt-activate16') +
+   (Region $wow 'typedef struct _EVENTMSG16' 'typedef EVENTMSG16 UNALIGNED *PEVENTMSG16;' 'event-message16') +
    "`n#pragma pack(pop)`n" +
    (Region $header 'typedef struct _WM32MSGPARAMEX *LPWM32MSGPARAMEX;' '} WM32MSGPARAMEX;' 'message-record')
   $constant=[regex]::Match($wow,'(?m)^#define WM_QUERYDROPOBJECT[^\n]*')
@@ -102,7 +103,8 @@ try{
     $bodies+=$body
    }
    $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wcommdlg.c' $old) 'WM32msgSHAREVIOLATION'
-   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wowhooks.c' $old) 'ThunkCbtHook'
+   $hooks=Read-Source 'src/mvdm-host/wow32/wowhooks.c' $old
+   foreach($name in @('ThunkCbtHook','GetEventMessage16','ThunkJournalHook','ThunkMouseHook')){$bodies+=Body $hooks $name}
   }
   $case=Region $messages '    case WM_SETTEXT:' '    case WM_ACTIVATEAPP:' 'text-thunk-case'
   $case=$case.Substring(0,$case.LastIndexOf('    case WM_ACTIVATEAPP:'))
@@ -159,6 +161,8 @@ try{
  if($Transaction -and $current -notmatch 'TRANSACTION_GROUP errors=0 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0'){throw 'Incomplete whole transaction proof'}
  if($Transaction){
   $families=@([regex]::Matches($current,'(?m)^TRANSACTION_FAMILY index=(\d+) message=([0-9A-F]+) modes=5 errors=0 copy_fault=([01])\r?$'))
+  $hookCases=@([regex]::Matches($current,'(?m)^HOOK_COMPLETION family=([01]) mode=([0-3]) trapped=([01]) restored=([01])\r?$'))
+  if($hookCases.Count -ne 8){throw 'Missing journal/mouse completion paths'}
   if($families.Count -ne 19){throw 'Each delegated heap family must complete its five cases'}
   for($i=0;$i -lt 19;++$i){
    if([int]$families[$i].Groups[1].Value -ne $i){throw 'Family ordering missing'}

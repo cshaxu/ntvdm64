@@ -1,0 +1,46 @@
+{
+  "status": "cached full,publish11x2,transactions183,hook wrapper,Full19 and governance passed;Git accompanies receipt",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836"
+    },
+    {
+      "path": "test/observation/verify-wow-message-construction.ps1",
+      "sha256": "8f76017568ffe6d88c99cf0b85db816f80d9627412e967a647919e0b8e468b68"
+    },
+    {
+      "path": "test/observation/wow_message_construction_fixture.c",
+      "sha256": "8badda9ceb7fe9b6b0bc592e06abdb3e932c4172460707a409e7b6c86e25d770"
+    }
+  ],
+  "mirror_diff": {
+    "before": 151,
+    "after": 125,
+    "delta": -26
+  },
+  "line_proof": "batch-p152-line-check.json",
+  "isolated_completion_probe": {
+    "scenarios": 183,
+    "failures": 0,
+    "scope": "Exact-body service doubles;formal updated runner and full runtime pending"
+  },
+  "publication": "11 images at both destinations;all hashes match",
+  "commit": null,
+  "push": false,
+  "package": "3681f1e0-f893-45a4-ad84-3438adc2ee6a",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "full": {
+    "gates": 19,
+    "all_passed": true,
+    "evidence": "build/t483-s5-p152/full-isolated/timings.json"
+  },
+  "tests": "Formal transaction183,hook wrapper9,Full19 and shared boundary/governance passed",
+  "limitations": [
+    "Exact-body fault fixtures use service doubles;not a deployed guest exception reproduction.",
+    "Thread-storage control demonstrates storage under source-permitted interleaving;not an actual scheduler-race reproduction.",
+    "Absent external DOS4GW/Nesticle assets remain skipped,not passed.",
+    "No guest modifications."
+  ]
+}
