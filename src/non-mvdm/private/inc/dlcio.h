@@ -467,7 +467,6 @@ typedef struct _NT_DLC_OPEN_STATION_PARMS {
 //
 //  OUT: Info.ulParameter  = BringUpDiagnostics;
 //
-#line 470
 #ifndef    MAX_PATH   // I don't want to include whole windows because of this
 #line 471
 #error Excluded unsupported missing MAX_PATH SDK profile
@@ -664,6 +663,7 @@ typedef struct _LLC_IOCTL_BUFFERS {
 #ifdef INCLUDE_IO_BUFFER_SIZE_TABLE
 #line 662
 #error DIVERGENCE OPENNT-HOST-134: INCLUDE_IO_BUFFER_SIZE_TABLE branch is not selected; see mirror register.
+#line 734
 #else
 #line 735
 

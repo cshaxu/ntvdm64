@@ -1,0 +1,74 @@
+{
+  "status": "original selected header and structural line mapping confirmed;line-only cleanup delivered",
+  "proof": {
+    "path": "src/non-mvdm/private/inc/dlcio.h",
+    "sha256": "56c79410f528b52e1577725b413437a0ddfd50821aab4588e46bf72a941a3895",
+    "original_sha256": "5059d127630e19906e973266e34ffe8b648181b0962900551964147e527602de",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\inc\\dlcio.h",
+    "source_lines": 654,
+    "contexts": [
+      {
+        "unit": "vrnetb",
+        "selected_header_lines": 354,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrdlcpst",
+        "selected_header_lines": 354,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrdlcbuf",
+        "selected_header_lines": 354,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrdlc5c",
+        "selected_header_lines": 354,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrdisp",
+        "selected_header_lines": 354,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "line_endings": "restored original CRLF from LF;normalized content unchanged except line directives",
+    "ordinary_diff": 0,
+    "excluded_diff": 75,
+    "mirror_before": 75,
+    "mirror_after": 75,
+    "mirror_delta": 0,
+    "line_directives_before": 6,
+    "line_directives_after": 6,
+    "excluded": 2,
+    "structural_else_original_line": 734,
+    "selected_else_body_line": 735,
+    "negative_controls": [
+      "MAX_PATH missing -> C1189",
+      "INCLUDE_IO_BUFFER_SIZE_TABLE enabled -> C1189"
+    ],
+    "mismatches": []
+  },
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "sha256": "56c79410f528b52e1577725b413437a0ddfd50821aab4588e46bf72a941a3895"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/private/inc/dlcio.h",
+    "sha256": "56c79410f528b52e1577725b413437a0ddfd50821aab4588e46bf72a941a3895"
+  },
+  "mirror_before": 75,
+  "mirror_after": 75,
+  "mirror_delta": 0,
+  "change": "Restore original CRLF;remove redundant #line470 and add #line734 before original else. Retain both errors and selected line resets;directive count stays6.",
+  "call_chain": "Five actual VDM redirector units include dlcio.h for original DLC IOCTL structures;no runtime implementation or transport behavior changed.",
+  "verification": "Five formal /O2 contexts with identical TU copies and explicit header path checks:before/final/original tokens and354 selected header lines match. MAX_PATH missing and INCLUDE_IO_BUFFER_SIZE_TABLE enabled each trigger expected C1189.654 retained original source lines map correctly.",
+  "byte_check_note": "Initial apply guard detected LF current bytes versus CRLF diagnostic copy;HEAD/current hash and normalized identity verified before restoring pinned original CRLF. No concurrent changes overwritten.",
+  "counter_review": "No excluded code restored. Both error arms remain;else line734 fixed without selected line changes. OpenNT-4.5 origin hash independently matches file-pins;not assumed from path name.",
+  "product_verification": "P187 cached build,11-image dual publication,Full and focused controls reused under line-only equivalence authorization;not a new runtime run.",
+  "delivery": "P194 governance/commit/push accompany receipt"
+}

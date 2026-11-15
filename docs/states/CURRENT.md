@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2016 reviewed:694 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1314 qualified pending;704 unreviewed. Files279/365 audited,86 remain.
+2017 reviewed:695 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1314 qualified pending;703 unreviewed. Files280/365 audited,85 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -170,8 +170,6 @@ The latest published baseline and active work are reported above.
 
 P176 final:environ14->11(-3);ordinary semantic diff removed,excluded11 retained;449 MSVC lines match. Original RTL names restored with x86/x64 provider and private-PEB clone proof. Cached,publish11x2,focused,Full19,RDP Clipboard18 passed. First RDP failure was confirmed RadeonSoftware Clipboard occupancy;unchanged retry passed. Package 83adbf7e-5ee3-4e21-b906-e339b3085d6a;Git accompanies receipt.
 
-P180 basesrv.h7->4(-3):comment/blank removed;CRLF and original comment28 mapping restored. Actual x64 dispatch needs conditional binding (no /FI);removal fails CSR declarations. DFS restoration C1083. Two qualified boundary decisions;selected preprocessing identical;P176 product validation reused;Git accompanies receipt.
-
 P181 srvvdm.c93->84(-9):redundant comment/null-output guard removed;CRLF and endif logical lines restored;2317 original lines match. Notification current5/5,original control3 failures;native casts fail actual x64 build. Cached,publish11x2,service/Full passed;10 residual decisions;Git accompanies receipt.
 
 P182 srvvdm.h4->2(-2):duplicate query comment removed;original CRLF restored;field/prototype and tokens unchanged. Retained original lines match;2 residual decisions use P181 notification/runtime and caller proof. P181 product verification reused;Git accompanies receipt.
@@ -197,3 +195,5 @@ P191 xssubs2 unchanged:original bytes except include match;1407 content/747 actu
 P192 xsunicod2 unchanged:original bytes except include match;165 content/93 actual MSVC lines preserved. Original header C1083 smb.h;one decision. No product changes;P187 evidence reused;Git accompanies receipt.
 
 P193 xsunicod.h18 unchanged(all excluded):redundant#line46 removed,endif#line83 restored;one#error retained.7 actual contexts original/before/final tokens and20 selected header lines equal;ANSI negative C1189;90 source lines match. P187 product evidence reused;Git accompanies receipt.
+
+P194 dlcio.h75 unchanged(all excluded):original CRLF restored;redundant#line470 removed,else#line734 restored;two#error retained.5 contexts original/before/final tokens and354 header lines equal;two negative C1189;654 source lines match. P187 product evidence reused;Git accompanies receipt.
