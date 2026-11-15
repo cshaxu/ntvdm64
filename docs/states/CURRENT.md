@@ -34,17 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1931 reviewed:664 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1259 qualified pending;789 unreviewed. Files255/365 audited,110 remain.
-P155 mirror batch-59;cached,publish11x2,focused353/0,five Win16 modes,Full19 and governance passed;Git accompanies receipt. Approved synchronization remains R1797 revisit.
-P154 DC cache original restored;mirror batch-14;cached,publish11x2,focused,Full19 passed;Git accompanies receipt.
-P153 header4->2;wparam106->94;cached,publish11x2,parameter54,Full19 passed;Git accompanies receipt.
-P152 delivered37bb1252f;P152 mirror151->125(-26);1048 lines match;cached,publish11x2,transactions183,Full19 passed;Git accompanies receipt.
-P151 fax diff41->30(-11);699 lines match;build,publish11x2,fax135,Full19 passed;Git accompanies receipt.
-P150 mirror930 to893 (-37);cached build,publish11x2,focused,Full19 passed.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1687-r1708-wow32-review.json).
-P141 first Full RPC1740 failure retained;test package identity alone changed for isolation.
-Coupled later-file edits do not complete those file audits.
+1932 reviewed:665 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1259 qualified pending;788 unreviewed. Files256/365 audited,109 remain.
+Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
 Backlog requalification began at R0010. Prior cmdexec.c restorations and
@@ -86,6 +78,8 @@ P167 wutmr3->2(-1),duplicate comment removed;original timer body rename remains 
 P168 wuwind77->60(-17);MSVC829/0,cached,publish11x2,DC/typed procedure/parameter-map focused,Full19 and governance passed;Git accompanies receipt.
 
 P169 XMS header selected original subset confirmed;120 content lines match,7#error ranges preserved. No source changes;P168 final2 product evidence reused;Git accompanies receipt.
+
+P170 XMS A20 selected original source confirmed;78 content lines match,two literal#if0 exclusions retained. No source changes;P168 final2 validation reused;Git accompanies receipt.
 
 ## Current Technical Baseline
 

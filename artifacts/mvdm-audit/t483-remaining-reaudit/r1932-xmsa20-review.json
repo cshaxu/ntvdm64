@@ -1,0 +1,31 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsa20.c",
+  "original_sha256": "7261b7064a089b655b8d41d3e4ef6887be869af2b7b62970389aeee9a8acc94b",
+  "source_sha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/xms.486/xmsa20.c",
+  "semantic_diff": {
+    "added": 0,
+    "deleted": 0,
+    "delta": 0
+  },
+  "excluded": [
+    {
+      "original_start": 68,
+      "removed": 12,
+      "added": 1
+    },
+    {
+      "original_start": 92,
+      "removed": 12,
+      "added": 1
+    }
+  ],
+  "line_check": {
+    "retained": 78,
+    "mismatches": 0
+  },
+  "context": "Actual obj/xms/xmsa20.obj dependency record VALID;product XMS component. Both excluded bodies are literal#if0 in original source.",
+  "counter_review": "Outer original#if0 retained;inner MIPS condition intentionally absent because whole outer excluded body is#error. No A20 behavior change or hardware486 backend activation.",
+  "disposition": "Original selected source confirmed;no source edits",
+  "verification": "Source/logical-line comparison;reuse unchanged P168 final2 cached,publish11x2,focused and Full19"
+}
