@@ -1252,3 +1252,5 @@ P192: [Unicode helper original-byte confirmation](batch-p192-checkpoint.json):2 
 P193: [Unicode header line mapping](batch-p193-checkpoint.json):18 excluded unchanged,ordinary0;7 context comparisons and ANSI negative control;P187 evidence reused.
 
 P194: [DLC header line mapping](batch-p194-checkpoint.json):75 excluded unchanged,ordinary0;5 context comparisons and two excluded-profile negative controls;P187 evidence reused.
+
+P195: [Serial header line mapping](batch-p195-checkpoint.json):10 excluded unchanged,ordinary0;3 context comparisons and two excluded-profile negative controls;P187 evidence reused.

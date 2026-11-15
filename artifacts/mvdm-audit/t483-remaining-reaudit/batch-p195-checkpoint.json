@@ -1,0 +1,64 @@
+{
+  "status": "original selected header and structural line mapping confirmed;line-only cleanup delivered",
+  "proof": {
+    "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+    "sha256": "4c890dbc827308c06d7014f0c3ab40d0b4f53a84b85e7caef37befb0d3a3438a",
+    "original_sha256": "707287adc6162093ebe5dd9608b6f4e528b4b94cb0e2caa0df930ecffd4d3b46",
+    "original": "O:\\repos.external\\OpenNT\\public\\ddk\\inc\\ntddser.h",
+    "source_lines": 578,
+    "contexts": [
+      {
+        "unit": "nt_ntfun",
+        "selected_header_lines": 124,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "nt_com",
+        "selected_header_lines": 124,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "wucomm",
+        "selected_header_lines": 124,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "line_endings": "original CRLF preserved",
+    "ordinary_diff": 0,
+    "excluded_diff": 10,
+    "mirror_before": 10,
+    "mirror_after": 10,
+    "mirror_delta": 0,
+    "line_directives_before": 6,
+    "line_directives_after": 6,
+    "excluded": 3,
+    "structural_endif_original_line": 42,
+    "selected_post_endif_line": 43,
+    "negative_controls": [
+      "FAR missing with DEFINE_GUID -> C1189",
+      "__cplusplus enabled -> C1189"
+    ],
+    "mismatches": []
+  },
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "sha256": "4c890dbc827308c06d7014f0c3ab40d0b4f53a84b85e7caef37befb0d3a3438a"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+    "sha256": "4c890dbc827308c06d7014f0c3ab40d0b4f53a84b85e7caef37befb0d3a3438a"
+  },
+  "mirror_before": 10,
+  "mirror_after": 10,
+  "mirror_delta": 0,
+  "change": "Remove redundant #line37 and add #line42 before original endif. Preserve original CRLF,three errors and post-endif resets;directive count stays6.",
+  "call_chain": "Host nt_com/nt_ntfun and WOW wucomm include original serial IOCTL header. Actual worker host_cflags and WOW wow_cflags expanded from separate Ninja scopes;no ABI or runtime implementation changed.",
+  "verification": "Three formal /O2 contexts,explicit header path checks:before/final/original tokens and124 selected header lines match. FAR missing with DEFINE_GUID and __cplusplus enabled trigger expected C1189.578 retained original lines mapped correctly.",
+  "byte_check_note": "Source and diagnostic before copy byte identities checked before applying;original CRLF retained.",
+  "counter_review": "All three excluded arms retained;outer endif42 fixed without selected line changes. Original OpenNT source hash matches file-pins. No original serial structures or macros modified.",
+  "product_verification": "P187 cached build,11-image dual publication,Full and focused controls reused under line-only equivalence authorization;not a new runtime run.",
+  "delivery": "P195 governance/commit/push accompany receipt"
+}

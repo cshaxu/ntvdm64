@@ -34,8 +34,8 @@ Revision History:
 // Make sure FAR is defined...
 //
 #ifndef FAR
-#line 37
 #error Unsupported excluded original configuration
+#line 42
 #endif
 #line 43
 
