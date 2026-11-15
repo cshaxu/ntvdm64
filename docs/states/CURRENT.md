@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1996 reviewed:682 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1306 qualified pending;724 unreviewed. Files269/365 audited,96 remain.
+1997 reviewed:683 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1306 qualified pending;723 unreviewed. Files270/365 audited,95 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -48,8 +48,6 @@ established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P166 wusercli.h selected original content/line structure confirmed;original CRLF restored only. P165 build/publication/window-borrow/Full19 reused;Git accompanies receipt.
 
 P167 wutmr3->2(-1),duplicate comment removed;original timer body rename remains source-qualified pending owner. Retained logical lines match;P165 product evidence reused;Git accompanies receipt.
 
@@ -205,3 +203,5 @@ P181 srvvdm.c93->84(-9):redundant comment/null-output guard removed;CRLF and end
 P182 srvvdm.h4->2(-2):duplicate query comment removed;original CRLF restored;field/prototype and tokens unchanged. Retained original lines match;2 residual decisions use P181 notification/runtime and caller proof. P181 product verification reused;Git accompanies receipt.
 
 P183 apibuff.c188->174(-14):original comments restored;selected actual preprocessing unchanged;55 original lines match. Full original misses rpcutil.h;public allocator ownership remains2 pending decisions. P181 product verification reused;Git accompanies receipt.
+
+P184 memalloc.c:selected original subset confirmed;ordinary semantic0,excluded diff57 unchanged. Four boundary #line corrected;173 original lines match;7#error retained. Actual original/before/final preprocessing identical;P181 product evidence reused;Git accompanies receipt.

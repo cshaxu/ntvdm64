@@ -122,6 +122,7 @@ Return Value:
 #else // ndef WIN32
 #line 118
 #error Unsupported excluded original configuration
+#line 126
 #endif // ndef WIN32
 #line 127
 
@@ -167,6 +168,7 @@ Return Value:
 #else // ndef WIN32
 #line 168
 #error Unsupported excluded original configuration
+#line 178
 #endif // ndef WIN32
 #line 179
 } // NetpMemoryFree
@@ -252,9 +254,11 @@ Return Value:
 #elif !defined(CDEBUG)  // not WIN32 or CDEBUG, must be NT
 #line 257
 #error Unsupported excluded original configuration
+#line 282
 #else // must be CDEBUG
 #line 283
 #error Unsupported excluded original configuration
+#line 287
 #endif // CDEBUG
 #line 288
 

@@ -1,0 +1,59 @@
+{
+  "status": "whole-file selected original content confirmed;only excluded branches and line directives differ;P181 product evidence reused",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "sha256": "484efc535758d10727c99d61840db32ba86374c7c4895b8a63b4b4a588973385"
+    }
+  ],
+  "mirror_before": {
+    "added": 7,
+    "deleted": 50,
+    "total": 57
+  },
+  "mirror_after": {
+    "added": 7,
+    "deleted": 50,
+    "total": 57
+  },
+  "mirror_delta": 0,
+  "ordinary_semantic_diff": 0,
+  "line_check": {
+    "checked_nonblank_original_lines": 173,
+    "fixed_directive_lines": [
+      [
+        124,
+        126,
+        "#endif // ndef WIN32"
+      ],
+      [
+        169,
+        178,
+        "#endif // ndef WIN32"
+      ],
+      [
+        254,
+        282,
+        "#else // must be CDEBUG"
+      ],
+      [
+        257,
+        287,
+        "#endif // CDEBUG"
+      ]
+    ],
+    "mismatches": [],
+    "tokens_without_line_directives_identical": true,
+    "error_count": 7
+  },
+  "controls": {
+    "before": 0,
+    "final": 0,
+    "original": 0,
+    "selected_preprocessing_identical": true
+  },
+  "actual_context": "Current worker obj/opennt-netlib/memalloc.obj flags;WIN32 selected,CDEBUG/notdef unselected;full original and both subsets preprocess identically",
+  "counter_review": "All selected allocation/free/reallocation statements remain original. Do not restore discarded non-WIN32/CDEBUG implementations or revive nested excluded frameworks. Four directive line corrections affect excluded-arm boundaries only;no new source-level state or shim. No failing-original claim needed because selected original is already intact.",
+  "reused_receipt": "batch-p181-checkpoint.json"
+}

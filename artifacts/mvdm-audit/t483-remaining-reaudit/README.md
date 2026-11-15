@@ -1230,3 +1230,5 @@ P181: [BaseSrv VDM whole-file review](batch-p181-checkpoint.json):93->84;notific
 P182: [BaseSrv VDM header review](batch-p182-checkpoint.json):4->2;two minimal residual declarations;P181 product evidence reused.
 
 P183: [NetAPI buffer boundary review](batch-p183-checkpoint.json):original comments restored;public allocator boundary pending;P181 evidence reused.
+
+P184: [NetLib allocation subset review](batch-p184-checkpoint.json):original selected content and7#error;four directive line corrections;P181 evidence reused.
