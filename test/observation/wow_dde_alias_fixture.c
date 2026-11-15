@@ -51,7 +51,6 @@ static unsigned allocation_fail, last_guest, last_native;
 static BOOL reject_mark;
 static HAND16 reenter_guest;
 static BYTE marked[65536];
-static PHDDE retire_on_unmark, quarantined_node;
 static UINT packet_low, packet_high;
 static unsigned packet_frees;
 static BOOL initiating, fThunkDDEmsg = TRUE;
@@ -79,13 +78,7 @@ static void fixture_free(void *p)
 {
     if (p) {
         --live_nodes;
-        if (p == retire_on_unmark) {
-            /* Poison retired storage deterministically; release quarantine
-             * after the tested call. This is a service-level reentry witness,
-             * not a claim about real guest allocator/reuse timing. */
-            memset(p, 0xdd, sizeof(HDDE));
-            quarantined_node = p;
-        } else free(p);
+        free(p);
     }
 }
 
@@ -100,11 +93,6 @@ static BOOL fixture_callback(unsigned type, PARM16 *parm,
     /* Both unchanged guest SetDdeHandleFlag implementations return AX0 on
      * normal completion. CallBack16's BOOL, not this payload, is success. */
     *result = 0;
-    if (!parm->WndProc.wMsg && retire_on_unmark && !quarantined_node) {
-        HAND16 key16 = retire_on_unmark->hMem16;
-        HANDLE key32 = retire_on_unmark->hMem32;
-        DDEDeletehandle(key16, key32);
-    }
     if (!parm->WndProc.wMsg && reenter_guest) {
         HAND16 key = reenter_guest;
         reenter_guest = 0;
@@ -308,20 +296,9 @@ int __cdecl main(void)
                 !live_nodes && !phDDEFirst);
             marked[20] = 0;
         }
-        CHECK("ack-reentry-other", add(3, 4, 21, 121, WM_DDE_DATA, DDE_PACKET));
-        CHECK("ack-reentry-target", add(2, 1, 22, packet_high, WM_DDE_EXECUTE,
-            DDE_PACKET | DDE_EXECUTE_FREE_H16));
-        phDDEFirst->h16 = 78;
-        retire_on_unmark = phDDEFirst;
-        CHECK("ack-reentry-convert", WM32DDEAck(&ack));
-        CHECK("ack-retired-node-captured", last_guest == 22 &&
-            HIWORD(ack.Parm16.WndProc.lParam) == 78 && live_nodes == 1);
-        retire_on_unmark = NULL;
-        free(quarantined_node); quarantined_node = NULL;
-        CHECK("ack-reentry-tail-retained", DDEFindNode16(21) &&
-            DDEDeletehandle(21, H(121)) && !phDDEFirst && !live_nodes);
-        marked[21] = 0;
-        CHECK("ack-wrapper-release", packet_frees == 4);
+        /* SetDdeHandleFlag clears the guest arena bit; it does not retire
+         * the host alias. The three real ACK release policies are above. */
+        CHECK("ack-wrapper-release", packet_frees == 3);
     }
 #ifdef FIXTURE_CONVERSION
     /* Candidate-only exact original conversion bodies. A failed conversion

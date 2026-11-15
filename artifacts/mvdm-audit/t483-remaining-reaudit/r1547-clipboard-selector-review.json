@@ -1,0 +1,15 @@
+{
+  "id": "T483-R1547",
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "before": "+1/-0",
+  "after": "0",
+  "mirror_delta": -1,
+  "conclusion": "Exact original restored: redundant converter selector assignment removed.",
+  "source_evidence": [
+    "Only production references are definition, declaration, message-table entries and lifetime dispatch comparisons; no direct converter invocation exists.",
+    "W32Win16WndProcEx, W32DialogFunc, common-dialog and hook table callers assign lpfnM32 before dispatch. Unlike nested WM32MDICreate/CBT WM32Create there is no untagged direct owner.",
+    "Maintained fixture line434 also initializes selector before invocation; no fixture adjustment needed."
+  ],
+  "verification": "Source caller proof and diff check; previous171-scenario result predates this deletion, final candidate tests pending.",
+  "line_rule": "Existing #line1681 retained; #error unchanged; whole-file line proof pending."
+}

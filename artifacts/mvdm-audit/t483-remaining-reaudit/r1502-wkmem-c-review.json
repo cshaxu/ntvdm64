@@ -1,0 +1,17 @@
+{
+  "file": "src/mvdm-host/wow32/wkmem.c",
+  "original": "OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wkmem.c",
+  "point": "R1502",
+  "conclusion": "Selected original content and original line positions confirmed;only existing excluded branch bodies remain;no source edit",
+  "proof": {
+    "compiler_selected_lines": 50,
+    "equal_code_and_original_lines": true
+  },
+  "sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+  "error_directives": [
+    "#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected",
+    "#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register."
+  ],
+  "delivery": "Unchanged source reused from P145 051fb3b27;no fresh runtime claim",
+  "counter_review": "Conditional closing directives inside removed bodies need not retain body length;following selected source has original logical lines. Do not infer restoration of excluded hardware i386 code."
+}

@@ -48,6 +48,8 @@ try{
  Get-FileHash "$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
+  $lifetime=Read-Source 'src/wow32-dll/include/wow_message_lifetime.h' ($old -and $Transaction)
+  [IO.File]::WriteAllText("$dir/message_construction_lifetime.h",$lifetime)
   $wow=Read-Source 'src/mvdm-host/inc/wow.h' $old
   $header=Read-Source 'src/mvdm-host/wow32/wmdisp32.h' $old
   $dispatch=Read-Source 'src/mvdm-host/wow32/wmdisp32.c' $old

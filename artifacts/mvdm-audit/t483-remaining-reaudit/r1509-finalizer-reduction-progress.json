@@ -1,0 +1,19 @@
+{
+  "point": "R1509",
+  "status": "source-proven-reduction-applied-awaiting-whole-file-verification",
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "finding": "Local abnormal=!stack.completed duplicates wow_message_stack_leave internal !scope->completed test.",
+  "currentPredicate": "!completed || (!completed || AbnormalTermination())",
+  "reducedPredicate": "!completed || AbnormalTermination()",
+  "proposal": "Delete local abnormal variable; pass AbnormalTermination() directly. Keep nested finally and completed state.",
+  "limit": "Does not prove that the entire stack scope or exception restoration is necessary; whole-file audit remains in progress.",
+  "fixture": "build/t483-s5-p146/message-transaction/result.json",
+  "candidateScenarios": 171,
+  "candidateFailures": 0,
+  "historicalBaselineFailures": 72,
+  "baselineLimit": "Historical project baseline, not unchanged OpenNT; host fixture, not guest/runtime proof.",
+  "before_sha256": "2eca4913e9dbf07e73d461e25f45ff68afe37b8bf779d1d948745ad82c471338",
+  "after_sha256": "67651287414b168e7a6aae0585e3a6fbb3cdbef06c53ce68fc2f34b3caf68d5d",
+  "mirror_diff_delta": -1,
+  "line_note": "Existing LF and following #line 249 unchanged; final whole-file preprocessing not yet run."
+}

@@ -1,0 +1,31 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "source_sha256": "30da6fd5349b8811b40e79d79c0b8976d168724e9d7c8813d35bb891b597b63e",
+  "original_sha256": "0092319153a95e147513ad966947813634b61bee02fe8fad8fdf20c250dbffba",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "shared_selected_lines": 1267,
+  "line_mismatches": 0,
+  "excluded_error_directives_unchanged": true,
+  "scope": "Actual selected x86 WOW compiler preprocessing; not runtime proof. Equal repeated text matched at its original logical line.",
+  "correction": "Add #line 2046 and 2141 after DATA/POKE Error labels; no executable change.",
+  "metric": {
+    "wmdisp32": {
+      "before": {
+        "added": 219,
+        "deleted": 175,
+        "total": 394
+      },
+      "after": {
+        "added": 143,
+        "deleted": 154,
+        "total": 297
+      }
+    }
+  },
+  "evidence": [
+    "build/t483-s5-p146/wmdisp32/lines.cmd",
+    "build/t483-s5-p146/wmdisp32/line-check.json",
+    "build/t483-s5-p146/lines-final.out"
+  ],
+  "delivery": "Not built/published as P146 yet; final gates pending."
+}

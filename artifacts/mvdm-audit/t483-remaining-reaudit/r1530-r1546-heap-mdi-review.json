@@ -1,0 +1,173 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1530",
+      "before": "+3/-1",
+      "remaining": "+2/-1",
+      "delta": -1,
+      "reason": "Capture GETTEXT heap allocation before output copy; removed comment.",
+      "evidence": "Copy/conversion can escape before normal unthunk; caller finally needs the original allocation key.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1531",
+      "before": "+3/-0",
+      "remaining": "+1/-0",
+      "delta": -2,
+      "reason": "Keep allocation-failure guard; remove comment and extra blank.",
+      "evidence": "Original continues GETVDMPTR and buffer initialization after allocation returns zero; rejecting failed acquisition avoids accessing an invalid guest buffer.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1532",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep consume-once GETTEXT release.",
+      "evidence": "Normal unthunk and owner finally both execute; captured key must be cleared before release, including release escape.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1533",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Capture GETDLGCODE MSG16 allocation.",
+      "evidence": "MSG conversion/copy can escape after allocation and before normal release; caller finalizer must retain the allocation identity.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1534",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep consume-once GETDLGCODE release.",
+      "evidence": "Normal unthunk and finalizer share one captured allocation key; raw free would leave the key live for duplicate cleanup.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1535",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep MDI ownership-transfer completion local.",
+      "evidence": "Nested CREATE calls MDI with a separate local record; a successful return transfers live resources, while an escaping constructor must release them locally.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1536",
+      "before": "+3/-1",
+      "remaining": "+2/-1",
+      "delta": -1,
+      "reason": "Keep nested MDI selector and finally scope; remove comment.",
+      "evidence": "Nested WM32Create calls WM32MDICreate directly, before parent receives child keys; outer finalizer cannot clean an escaping child record.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1537",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Capture MDI class allocation before copy.",
+      "evidence": "putstr16 can escape before the original later dwParam assignment; original-only capture leaves that allocation unknown to cleanup.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1538",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Capture MDI title allocation before copy.",
+      "evidence": "putstr16 can escape; guest title field can also be modified after construction, so it is not allocation ownership authority.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1539",
+      "before": "+3/-1",
+      "remaining": "+1/-1",
+      "delta": -2,
+      "reason": "Remove duplicate title capture and comment; keep record capture.",
+      "evidence": "Title already captured before its copy; all caller records zero initialized. Record allocation still precedes fallible field mapping/copy.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1540",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep successful MDI construction transfer marker.",
+      "evidence": "Without this marker local finally would release strings and record before caller receives the successful construction.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1541",
+      "before": "+3/-2",
+      "remaining": "+2/-2",
+      "delta": -1,
+      "reason": "Remove error completion marker; retain consuming frees.",
+      "evidence": "After frees keys are zero; finally safely drains any remaining keys if release escapes. Raw frees would leave live ownership keys for duplicate cleanup.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1542",
+      "before": "+2/-7",
+      "remaining": "+1/-7",
+      "delta": -1,
+      "reason": "Keep captured-title cleanup; remove comment.",
+      "evidence": "Reading guest-modifiable vpszTitle after guest callback is not proof of original allocation identity; captured key also permits cleanup when guest structure mapping fails.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1543",
+      "before": "+1/-3",
+      "remaining": "+1/-1",
+      "delta": -2,
+      "reason": "Restore original HIW16 class-atom condition; consume only pointer key.",
+      "evidence": "Original atom predicate is valid. Only the freeing operation needs to clear ownership before the enclosing finalizer can run.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1544",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep captured MDI record release.",
+      "evidence": "Record key must be consumed before caller/local finalizers; original result conversion order retained.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1545",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Restore original normal return without extra completion assignment.",
+      "evidence": "Normal unthunk has consumed all owned keys; empty/no-input construction owns none. Extra completion assignment is unnecessary.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1546",
+      "before": "+3/-0",
+      "remaining": "+3/-0",
+      "delta": 0,
+      "reason": "Keep MDI local finally.",
+      "evidence": "Nested constructor owns resources before parent transfer, unlike table-only converters. Outer callback cleanup cannot see child-local keys on escape.",
+      "disposition": "Qualified minimized residual pending owner"
+    }
+  ],
+  "tests": {
+    "path": "build/t483-s5-p146/message-mdi-simplified/result.json",
+    "passed": true,
+    "scenarios": 171,
+    "negative": "Historical paired-header transaction baseline retains six named source defects",
+    "limits": "Extracted actual bodies with host service doubles; not guest/runtime or final whole-file build."
+  },
+  "mirror_metric": {
+    "before_group": 371,
+    "after_group": 360,
+    "group_delta": -11,
+    "file_start": 394
+  },
+  "line_rule": "Original HIW16 condition restored at #line 1536; excluded #error untouched; final whole-file line proof pending.",
+  "counter_review": "Removed redundant state even where the existing finalizer uses it; kept only acquisition/transfer identities not recoverable from caller or guest-mutated data."
+}

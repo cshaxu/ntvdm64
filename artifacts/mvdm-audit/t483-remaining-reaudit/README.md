@@ -1003,3 +1003,48 @@ P144 final gates passed:cached x86/x64,publish11x2,file cache577,attribute clean
 [P145 frozen batch](batch-p145-checkpoint.json) and [line proof](batch-p145-line-check.json):two mirrors net-47;2346 common selected lines match;cached full/publication/tests/Git pending.
 
 P145 final gates passed:cached x86/x64,publish11x2,KnownDLL21/lifecycle focused,isolated Full19,WOW boundary/governance. Mirror net-47;2346 line matches.206/365files;1496/2720points:542 delivered,0 local,8 approved,946 pending,1224 unreviewed. Git accompanies receipt.
+
+[wkman header review](r1497-r1501-wkman-header-review.json):five points complete;mirror13->4 net-9;four original restorations local,one minimum cdecl boundary pending. Actual same-path object differs only COFF timestamp.207/365files;1501/2720points:542 delivered,4 local,8 approved,947 pending,1219 unreviewed. P145 delivered051fb3b27;P146 nonbehavioral batch accumulates.
+
+[wkmem.c check](r1502-wkmem-c-review.json) and [wkmem.h check](r1503-wkmem-h-review.json):selected originals/lines confirmed;only approved #error subsets remain;no edits or fresh runtime claims.209/365files;1503/2720points:544 delivered/confirmed,4 local,8 approved,947 pending,1217 unreviewed. P146 net-9 unchanged.
+
+P146 in-progress [R1509 finalizer reduction](r1509-finalizer-reduction-progress.json): duplicate incomplete-state predicate removed, mirror net-1 locally. Whole wmdisp32 review and final-code verification remain unfinished; no reviewed/restored count increment. Pre-edit exact-body171 scenarios passed, not final-code runtime evidence.
+
+P146 coupled [R1513 exact-original WM32Create control](r1513-original-create-control.json): normal case both residual0; invalid-window original residual2 versus current0. This qualifies the early-return cleanup defect only; no file/point completion increment or full runtime claim.
+
+P146 coupled [R1510 initialization reduction](r1510-create-initialization-progress.json): redundant nested-owner zero removed after all producer/caller inspection, mirror net-2 locally; remaining direct-CBT selector not yet disposition-complete. No completion count increment.
+
+P146 [entry group R1504-R1510](r1504-r1510-entry-group-review.json): seven evidenced residuals queued, local mirror net-5; whole wmdisp32 incomplete.1510/2720points,209/365files;544 delivered/confirmed,4 local,8 approved,954 pending,1210 unreviewed. Final-code delivery pending.
+
+P146 [CREATE R1511-R1515](r1511-r1515-create-review.json): five evidence-qualified residuals; standalone comment removed net-1.1515/2720points;209/365files;544 delivered/confirmed,4 local,8 approved,959 pending,1205 unreviewed. P146 local mirror net-15; whole-file gates pending.
+
+P146 [CREATE owner review/correction](r1516-r1521-create-owner-review.json): R1513/R1518 restored exact original returns after all-caller cleanup proof; R1513 removed from pending, superseding isolated-function necessity claim. Five residuals qualified;171 scenarios passed.1521/2720points,209/365files;544 delivered/confirmed,6 local,8 approved,963 pending,1199 unreviewed. Local mirror net-23; whole-file gates pending.
+
+P146 [text R1522-R1529](r1522-r1529-text-review.json): three original restorations, five minimized acquisition residuals; mirror net-9, unused autonomous STACK define removed.171 paired-header scenarios pass.1529/2720points,209/365files;544 delivered/confirmed,9 local,8 approved,968 pending,1191 unreviewed. P146 local mirror net-32; file/full delivery pending.
+
+P146 [R1530-R1546 heap/MDI review](r1530-r1546-heap-mdi-review.json): group mirror net-11, wmdisp32 394->360;171-scenario paired control passed.1546/2720 reviewed;544 delivered,10 local,8 approved,984 pending,1174 unreviewed.Whole-file build/publication pending.
+
+P146 [R1547 selector restoration](r1547-clipboard-selector-review.json): redundant table converter assignment removed;mirror net-1;1547/2720 reviewed,11 local restorations,1173 unreviewed.Final candidate verification pending.
+
+P146 [R1548-R1554 clipboard ownership](r1548-r1554-clipboard-ownership-review.json):original paired controls compile0/run1;current171pass;one comment removed.1554/2720 reviewed;544 delivered,11 local,8 approved,991 pending,1166 unreviewed.Whole-file delivery pending.
+
+P146 [R1555-R1556 DDE initiator](r1555-r1556-dde-initiate-review.json):restore original parameter authority;drop duplicate HWND state/local;mirror net-3;success-only deletion remains pending.1556/2720 reviewed,1164 unreviewed;final DDE and whole-file gates pending.
+
+P146 [R1557-R1561 ACK/ADVISE review](r1557-r1561-dde-ack-advise-review.json):restore ACK node access and direct ADVISE alias API;remove empty conversion state;mirror net-12. Source-inapplicable poison test removed, ACK96pass;subsequent ADVISE edits await final verification.1561/2720 reviewed;544 delivered,14 local,8 approved,995 pending,1159 unreviewed.
+
+P146 [R1562-R1572 DATA/POKE/EXECUTE](r1562-r1572-dde-data-poke-execute-review.json):keep actual child ownership,restore direct outer registration,share original failure returns;remove EXECUTE empty transaction.Mirror net-22;wmdisp32 394->321.Final caller verification pending.1572/2720 reviewed;544 delivered,16 local,8 approved,1004 pending,1148 unreviewed.
+
+P146 [R1573-R1576 DROP/COPYDATA entry](r1573-r1576-drop-copydata-entry-review.json):remove redundant constructor initialization/invalid-input branch,mirror net-6;COPYDATA59/filter14/queue18 pass.1576/2720 reviewed;544 delivered,17 local,8 approved,1007 pending,1144 unreviewed;whole-file gates pending.
+
+P146 [R1577-R1593 COPYDATA/WinHelp](r1577-r1593-copydata-winhelp-review.json):remove duplicate state/inner cleanup,restore original WinHelp assignment;mirror net-18,wmdisp32 394->297.90/90 source dispositions;line/full gates pending.1593/2720 reviewed;544 delivered,23 local,8 approved,1018 pending,1127 unreviewed.
+
+- [P146 wmdisp32 compiler line proof](p146-wmdisp32-line-proof.json): 1267 shared selected lines, zero mismatch; final delivery pending.
+
+- [P146 DDE caller controls](p146-dde-caller-controls.json): four exact functions, 80 cases per version, identical results; no guest proof.
+
+- [P146 side gallery review](p146-side-gallery-review.json): original captures and P144 package identities verified.
+- [P146 pending delivery checkpoint](batch-p146-checkpoint.json), [line checks](batch-p146-line-check.json).
+
+- [P146 final message verification](p146-final-message-review.json): 171 cases; retained failed attempt and corrected caller context.
+
+P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Full19,WOW boundary/governance. Mirror net-106;1267 wmdisp32 line matches.210/365files;1593/2720points:567 delivered,0 local,8 approved,1018 pending,1127 unreviewed. Git accompanies receipt.

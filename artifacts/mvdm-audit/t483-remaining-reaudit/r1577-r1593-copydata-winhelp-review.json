@@ -1,0 +1,177 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1577",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Remove borrowed fFree assignment.",
+      "evidence": "COPYDATA cleanup reads only acquired bits; no later COPYDATA caller reads fFree. Borrowed records have zero bits from caller initialization.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1578",
+      "before": "+5/-0",
+      "remaining": "+3/-0",
+      "delta": -2,
+      "reason": "Remove comment and local try; retain captured metadata and payload key.",
+      "evidence": "All table callers have owner-finally and no independent nested COPYDATA constructor exists. Metadata must be captured before guest allocation callback; payload key must remain stable after guest callback/early sender reply for list deletion.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1579",
+      "before": "+4/-0",
+      "remaining": "+3/-0",
+      "delta": -1,
+      "reason": "Remove unused owned fFree assignment; retain header acquisition identity and failed allocation return.",
+      "evidence": "Outer cleanup needs allocated header before field copy; setting owned bits only after success distinguishes borrowed/unacquired from owned header. fFree duplicates none of that authority.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1580",
+      "before": "+0/-1",
+      "remaining": "+0/-1",
+      "delta": 0,
+      "reason": "Keep omission of late native header pointer reload.",
+      "evidence": "Reloading original source after allocation would bypass captured header, defeating pre-callback read. R1575 source ordering and captured-header control bound the reason; no actual application race claimed.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1581",
+      "before": "+3/-0",
+      "remaining": "+3/-0",
+      "delta": 0,
+      "reason": "Keep payload acquisition key, failure return and owned bit.",
+      "evidence": "Header may exist while payload allocation fails; caller must release only acquired header. Successful payload must be recorded before mapping/copy can escape.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1582",
+      "before": "+2/-0",
+      "remaining": "0",
+      "delta": -2,
+      "reason": "Restore original inner copy condition without extra try or rejection.",
+      "evidence": "FREEMISCPTR is empty in supported wow32.h. Existing original conditional handles absent copy pointers; additional invalid-input policy is not proven necessary.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1583",
+      "before": "+2/-1",
+      "remaining": "+2/-1",
+      "delta": 0,
+      "reason": "Keep checking payload node publication and recorded ownership.",
+      "evidence": "Original CopyDataAddNode allocation can fail; ignoring failure reports a partial representation and cleanup cannot infer which node was published. Flags distinguish allocated payload from published payload node.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1584",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Restore original flow before FREEMISCPTR.",
+      "evidence": "Removed unnecessary inner finally for the empty release macro; real allocation cleanup remains outer owner responsibility.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1585",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Remove inner finally closing brace.",
+      "evidence": "No separate mapped-view lifetime exists in supported configuration; retain original FREEMISCPTR line.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1586",
+      "before": "+5/-1",
+      "remaining": "+2/-1",
+      "delta": -3,
+      "reason": "Keep checked header node publication and bit; remove local abnormal-finally.",
+      "evidence": "No independent direct constructor caller; original window/dialog/hooks finalizers all call unwind32. Local finally is redundant. Header flag separates header/payload aliases for nested embedded COPYDATA headers.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1587",
+      "before": "+10/-11",
+      "remaining": "+8/-11",
+      "delta": -2,
+      "reason": "Remove comments; keep acquired-key cleanup.",
+      "evidence": "Original rereads returned input header and looks up only completed publication, missing partial construction and borrowed owners. Four bits identify allocated header/payload and two published nodes. Consume once before callbacks; delete owned nodes and free captured original allocations only.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1588",
+      "before": "+6/-0",
+      "remaining": "+4/-0",
+      "delta": -2,
+      "reason": "Remove error local assignment and duplicate unwind; return acquisition error to owner.",
+      "evidence": "Unified caller-finally releases partial state on FALSE and exception. SetLastError constant after detection; outer unwind preserves last error. No need for local error variable or second cleanup entry.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1589",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Restore WinHelp entry without duplicate selector assignment.",
+      "evidence": "Only message-table callers invoke converter and already set lpfnM32; no MDI/CBT-style direct invocation.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1590",
+      "before": "+2/-1",
+      "remaining": "+1/-1",
+      "delta": -1,
+      "reason": "Remove comment; retain zero initialized WinHelp handle.",
+      "evidence": "WOWGlobalAllocLock16 writes phMem only when returned vp is nonzero. Original reads unset hMem16 after allocation failure; zero is required for no-output failure state.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1591",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep early acquired WinHelp pointer capture.",
+      "evidence": "Guest copy can escape before original end-of-branch assignment; outer finally needs the locked pointer and must not run SetForegroundWindow on failure.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1592",
+      "before": "+0/-1",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Restore original final dwParam=vp assignment.",
+      "evidence": "Same successful pointer already captured earlier; original assignment is harmless and need not remain omitted. No change to acquisition timing or ownership.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1593",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep consume-once WinHelp release.",
+      "evidence": "Normal unthunk and outer finalizer share captured allocation; clear key before release. Original normal foreground activation stays before release and is not replayed by unwind.",
+      "disposition": "Qualified minimized residual pending owner"
+    }
+  ],
+  "verification": {
+    "copydata": "build/t483-s5-p146/copydata-owner-simplified/exit.txt",
+    "exit": 0,
+    "lifetime_scenarios": 59,
+    "filter_cases": 14,
+    "queue_cases": 18,
+    "negative": "Expected seven historical filter selector failures retained",
+    "limits": "Exact-body service doubles; WinHelp changes require final transaction fixture; whole-file preprocessor line check running; cached full/publication/runtime/Git pending."
+  },
+  "test_contract": "Allocation-failure and exception tests now wrap direct converter with actual caller-style finally. All leak/nested/borrow assertions retained; no product-only inner cleanup imposed by a direct fixture invocation.",
+  "source_ownership": "wmdisp32,wudlg,wcommdlg,wowhooks table callers own conversion; putmsg16 does not dispatch COPYDATA. Only remaining direct WM32CopyData call is unwind in UNTHUNK state. wow32.h FREEMISCPTR and FREEVDMPTR expand empty.",
+  "mirror_metric": {
+    "before_group": 315,
+    "after_group": 297,
+    "group_delta": -18,
+    "file_start": 394
+  },
+  "line_rule": "All existing #error retained; newly restored original lines and removed scopes awaiting actual preprocessor original-line reconciliation.",
+  "counter_review": "Preserve original if bodies and FREEMISCPTR spelling even where redundant. Remove only added repeated state/scopes. Invalid-input guards without independent evidence do not acquire retention status."
+}

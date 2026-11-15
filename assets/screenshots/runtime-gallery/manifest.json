@@ -1,0 +1,167 @@
+{
+  "captured_date": "2026-11-14",
+  "baseline_commit": "76e57fb44",
+  "baseline_delivery": "T483 S5 P144",
+  "baseline_package_id": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+  "method": "Real Win32 PrintWindow captures of ConsoleWindowClass and LibKvmWindow on isolated probe desktops. No image compositing or synthetic pixels.",
+  "isolation": "Each run uses a physical runtime stage with a fresh package identity. Guest installations are disposable copies; original installations were not modified.",
+  "environment": "80x25 initial console; short controlled PATH and environment. Guest Windows configuration uses the existing preparation helpers. Known missing serial-port dialogs are dismissed by the existing probe.",
+  "multitasking": "Windows 3.1 /3, DOSONLY=0, INSIGNIA.386 and NTVDM64.386 enabled. An independent Win16 probe uses WinExec to start two PIFs and USER APIs to arrange their windows; it does not draw the application contents.",
+  "verification_boundary": "Visual confirmation of these running scenes only. Not an assertion of complete application compatibility, interactive editing acceptance, or clean guest shutdown.",
+  "product_images": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "BC229C50CBAECC64D7D657ED1BC7F9C75EA16DD72518453E95B019F7E378078C",
+      "Machine": 332,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "9E614927081F40674C1419B4843FC4C9855ED5AED917570E651CD3E3BFF92E95",
+      "Machine": 34404,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "7593FA1A67CDEEE6DF8CC638B29E84CEB951EB583A905B34792B1C53DA0C1D28"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "5B7550F63E23EF4CB187CB28EE28591779D198A034E3405463F72A13F5188476",
+      "Machine": 34404,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "41F54B95DD2D5E6EAAE01A6E2FA8B8553C745F4272F678BBB2F273016BEA7A9F"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "2A3961A1B6A040FB8EF69BAB3F3146797A270F47B89CAFAEBC6623BAB6A246CD",
+      "Machine": 34404,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "DE1E5EF07A4667570720EC002F948EB91DC5D017957284701CCC456167A26165"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "6999EDA07D94681E2B4E5D5E882F7B36C09F098CB8D98B1CFD4AF3FDBB55B627",
+      "Machine": 332,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "5CFC80C7186D6AFB541FE05B8CE3E7E1731E565F091DE9B7E7BC2D29BBCD4051"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "DF8986FF567DC4C621D5333B28A647A808B29EA20E33C087FDC2ECFA44E9E5EC",
+      "Machine": 34404,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "E1E1F6D4A2D45699A89B793C33C96F5534D00E2097833883D4BC2078D103B598"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "3DCE12953FF1F29181BDE541987F573D6E2361495A1A3EDD23130866046D177A",
+      "Machine": 34404,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "92A708639AC38A0697AB74A940316BE70E473FD572910B86D86B850DEC95092D",
+      "Machine": 332,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "49E83343E25C741AED8E690A41CB01FCE1598CF0115958F634F68C4D746FDB4F"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "350EB4296EAEEAE87788C2374CDF5446C33CE78B71B597104A1645F0C5400A64",
+      "Machine": 332,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "FB75B28BBC4335F431B80006D82649B5DE6B5734660EB01FA7563F1672D76AE6",
+      "Machine": 332,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "016BFF09FA29C5EAC02960AF1773320AC1A3BCEC0F237B879059F82BCE5903D5"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "1A82CE086473585B0B01BD2318CE64008053D40FA78E6D2C40A531821F29BBCA",
+      "Machine": 34404,
+      "PackageId": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "images": [
+    {
+      "file": "win32-edit-console.png",
+      "scene": "Win32 edit.exe, Console mode",
+      "source_capture": "build/readme-gallery-edit2-20261114/win32/console-1.png",
+      "width": 528,
+      "height": 356,
+      "sha256": "1232474421e5b0a8a2074d4881cd6e33508f6d2f10491055f91b68ca94044c70"
+    },
+    {
+      "file": "win32-edit-window.png",
+      "scene": "Win32 edit.exe, Window mode",
+      "source_capture": "build/readme-gallery-edit2-20261114/win32/window-0.png",
+      "width": 656,
+      "height": 439,
+      "sha256": "fdbc548b04b6e5b0f9a75e7e3d3aab40387ef8c6c8033ccd5b5adb10f8fe0e94"
+    },
+    {
+      "file": "dos-edit-console.png",
+      "scene": "DOS EDIT.COM, Console mode",
+      "source_capture": "build/readme-gallery-edit2-20261114/dos/console-0.png",
+      "width": 528,
+      "height": 356,
+      "sha256": "94f9232ce91d1fab20460af323eeba9ab79aeb0fde3db067c786b79aa27daf9b"
+    },
+    {
+      "file": "dos-edit-window.png",
+      "scene": "DOS EDIT.COM, Window mode",
+      "source_capture": "build/readme-gallery-edit2-20261114/dos/window-0.png",
+      "width": 656,
+      "height": 439,
+      "sha256": "14368669c9810291e9a92aaa378ae880f33998252e0dc509b8eb8dd2965a3382"
+    },
+    {
+      "file": "windows-101.png",
+      "scene": "O:/tmp/rg101/PATCH/WIN101.PIF; MS-DOS Executive",
+      "source_capture": "build/readme-windows-20261114/win101/frame-30-0.png",
+      "width": 656,
+      "height": 389,
+      "sha256": "b40f85ca0ec18b6d85e5f97cfc93bcfe95498be7956a7a879c47e606d2882c99"
+    },
+    {
+      "file": "windows-31.png",
+      "scene": "O:/tmp/rg31/PATCH/WIN.PIF /3; Calculator and Clock via WIN.INI",
+      "source_capture": "build/readme-windows2-20261114/win31/frame-55-0.png",
+      "width": 656,
+      "height": 519,
+      "sha256": "7f19094906a44618fde18092b8f65da5a533c261f29391a4237f74e84b3c9d38"
+    },
+    {
+      "file": "windows-95.png",
+      "scene": "O:/tmp/rg5/PATCH/WIN.PIF; Notepad and Welcome dialog",
+      "source_capture": "build/readme-windows2-20261114/win95/frame-60-0.png",
+      "width": 656,
+      "height": 519,
+      "sha256": "6eda734cba99bec8adde3a934f31dae516b3aebee3bf1a1ce4521891da67c2c5"
+    },
+    {
+      "file": "windows-31-multitasking.png",
+      "scene": "O:/tmp/rgm31/PATCH/WIN.PIF /3; two COMMAND.COM /c profiles launch Win32 edit.exe and DOS EDIT.COM",
+      "source_capture": "build/readme-multi-run2-20261114/multi/frame-40-0.png",
+      "width": 656,
+      "height": 519,
+      "sha256": "776154ab13a673365a48b1280f6eaf56d395c44ac5e8c5314584f38abbd9f4f5"
+    }
+  ]
+}

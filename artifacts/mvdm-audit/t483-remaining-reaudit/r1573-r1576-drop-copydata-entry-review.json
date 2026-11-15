@@ -1,0 +1,55 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1573",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep DROPSTRUCT heap acquisition capture.",
+      "evidence": "GETVDMPTR/field copy follows allocation and can escape before normal unthunk; callback owner-finally must retain original allocation identity. Actual-body transaction family includes DropObject failure paths."
+    },
+    {
+      "id": "T483-R1574",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep consume-once DROPSTRUCT release before original cursor result conversion.",
+      "evidence": "Normal unthunk and owner finally both run; captured heap key must clear before release. Cursor conversion retains original order and semantics."
+    },
+    {
+      "id": "T483-R1575",
+      "before": "+2/-1",
+      "remaining": "+2/-1",
+      "delta": 0,
+      "reason": "Keep captured header and owned bits; unused error local removed during R1588 without changing line metric.",
+      "evidence": "GlobalAllocLock16 invokes guest allocation; original GlobalNotify can invoke task TDB_GNotifyProc during discard (3gmoreme.asm), and WU32ReplyMessage documents sender continuation and invalidation of prior flat pointers. Reading metadata after that boundary is not equivalent to capturing before it. owned snapshots per-call acquired bits before clearing them; original pTemp lookup only describes successful list publication, not partial construction. This is an eligible source ordering, not reproduced application timing."
+    },
+    {
+      "id": "T483-R1576",
+      "before": "+6/-0",
+      "remaining": "0",
+      "delta": -6,
+      "reason": "Restore original constructor entry; remove repeated initialization, comments and unsupported null-input special case.",
+      "evidence": "All eight actual WM32MSGPARAMEX automatic records are zero initialized. Each owns one conversion. Failed/unacquired and borrowed paths have dwParam0, so outer cleanup does not interpret incoming Parm16.lParam as owned. Invalid-input early return lacks independent necessity evidence; original failure path retained."
+    }
+  ],
+  "verification": {
+    "copydata": "build/t483-s5-p146/copydata-entry-restored/exit.txt",
+    "exit": 0,
+    "lifetime_scenarios": 59,
+    "filter_cases": 14,
+    "queue_cases": 18,
+    "negative": "Immutable old filter still fails expected seven selector preservation checks",
+    "drop": "Existing171 actual-body transaction fixture covers DropObject; no new runtime/guest claim",
+    "limits": "Service-double controls and source analysis; not final whole-file build/publication. Header-revocation double demonstrates effect, not occurrence/frequency of a real callback ordering."
+  },
+  "line_rule": "Retain #line2454/2455 and all #error; whole-file final logical-line audit pending.",
+  "mirror_metric": {
+    "before_group": 321,
+    "after_group": 315,
+    "group_delta": -6,
+    "file_start": 394
+  },
+  "counter_review": "Constructor-owned zero state comes from real callers; do not keep redundant initialization or new invalid-input policy merely because current implementation used it. Captured metadata and acquired-resource bits have separate ownership roles."
+}

@@ -1,0 +1,54 @@
+{
+  "point": "R1513",
+  "scope": "Coupled evidence collected while entry/cleanup points remain under review; not a completed whole-file audit.",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wmdisp32.c WM32Create",
+  "original_source_path": "build/t483-s5-p146/wmdisp32/original.c",
+  "proof": "Original WM32Create allocates class and title, then returns FALSE if GWL_WOWWORDS lookup returns NULL. Its existing Error label frees both; direct return bypasses it. Original W32Win16WndProcEx branches to Error/DefWindowProc on false construction, before unthunk.",
+  "paired_control": {
+    "candidate": {
+      "output": "NORMAL created=1 residual=0\nDEAD_WINDOW result=0 residual=0",
+      "exe_sha256": "c154d99e06a2802fa778fc65b20c78cafb58bba51059687f084e17816de95788",
+      "body_sha256": "2c2e3f73f71ba140c9cfbfbd77e24f7d9dd1e250653e76e88ea1485841fe8146",
+      "fixture_sha256": "6fd0cf111589035debde15e52b02d67cba38633030e2ce4b64950d7bd6073364"
+    },
+    "original-create": {
+      "output": "NORMAL created=1 residual=0\nDEAD_WINDOW result=0 residual=2",
+      "exe_sha256": "1f89dfe7c48b567bb6afec13ee3288af28432bfc068c94f38057faf922f8a455",
+      "body_sha256": "99528d38928b299192d4dbadd71c6d07a63fafcbfd4fb1f922b54cc2c9c0c954",
+      "fixture_sha256": "6fd0cf111589035debde15e52b02d67cba38633030e2ce4b64950d7bd6073364"
+    }
+  },
+  "limits": [
+    "Host allocator/window service doubles, not an observed guest leak.",
+    "Only the exact WM32Create original body was substituted; the focused scenario has no MDI child.",
+    "Does not justify every captured-field or exception-finalizer change.",
+    "Initial isolated-fixture compile failed because its relative include path moved; corrected absolute fixture include then both controls compiled."
+  ],
+  "disposition": "Superseded as necessity evidence: isolated WM32Create does leave allocations on FALSE, but all production callers now release captured keys unconditionally. R1513 restored to original return; see r1516-r1521-create-owner-review.json.",
+  "steps": [
+    {
+      "variant": "candidate",
+      "exit": 0,
+      "pid": 3776,
+      "phase": "compile"
+    },
+    {
+      "variant": "candidate",
+      "exit": 0,
+      "pid": 30792,
+      "phase": "run"
+    },
+    {
+      "variant": "original-create",
+      "exit": 0,
+      "pid": 12096,
+      "phase": "compile"
+    },
+    {
+      "variant": "original-create",
+      "exit": 1,
+      "pid": 25956,
+      "phase": "run"
+    }
+  ]
+}

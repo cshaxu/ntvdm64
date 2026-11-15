@@ -1,0 +1,97 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1522",
+      "disposition": "Exact original restored",
+      "reason": "Removed unnecessary local owned copy; existing dwParam consumed directly.",
+      "evidence": "Source caller/allocator/compatibility ownership review plus 171-scenario paired-header fixture passed.",
+      "option": "Removed unnecessary local owned copy; existing dwParam consumed directly.",
+      "remaining": "0",
+      "delta": -1
+    },
+    {
+      "id": "T483-R1523",
+      "disposition": "Exact original restored",
+      "reason": "Removed redundant initialization; caller zeroes record and original incoming Parm16 value is not owned until dwParam is set.",
+      "evidence": "Source caller/allocator/compatibility ownership review plus 171-scenario paired-header fixture passed.",
+      "option": "Removed redundant initialization; caller zeroes record and original incoming Parm16 value is not owned until dwParam is set.",
+      "remaining": "0",
+      "delta": -2
+    },
+    {
+      "id": "T483-R1524",
+      "disposition": "Qualified minimized residual pending owner",
+      "reason": "Mark acquired mapping reference",
+      "evidence": "Without marking acquisition, normal/exception unthunk now correctly refuses to consume unknown state and would retain the GetParam16 reference. Original GetParam16/DeleteParamMap remain reference authority.",
+      "option": "Keep ACTIVE only; remove MAPPED value from this converter.",
+      "remaining": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1525",
+      "disposition": "Qualified minimized residual pending owner",
+      "reason": "Mark acquired stack temporary",
+      "evidence": "After stack allocation and before copy, the normal original stackfree16 must run once. Existing dwParam records only acquisition, not a duplicate stack selector.",
+      "option": "Keep ACTIVE only; original task compatibility flag determines allocator.",
+      "remaining": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1526",
+      "disposition": "Qualified minimized residual pending owner",
+      "reason": "Mark acquired heap temporary",
+      "evidence": "The allocation precedes putstr16 mapping/copy; failed copy still needs outer cleanup, and successful normal cleanup must not repeat in finally.",
+      "option": "Keep one ACTIVE assignment after successful allocation.",
+      "remaining": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1527",
+      "disposition": "Qualified minimized residual pending owner",
+      "reason": "Consume cleanup once; original map owner",
+      "evidence": "Normal unthunk and exceptional owner-finally can both enter cleanup. Clear dwParam before original DeleteParamMap/free prevents repeated reference decrement/free, including cleanup escape. Replaced branch no longer needs a separate MAPPED selector.",
+      "option": "Restored original DeleteParamMap condition; retain one dwParam clear; removed local copy and alternate branch.",
+      "remaining": "+1/-0",
+      "delta": -4
+    },
+    {
+      "id": "T483-R1528",
+      "disposition": "Qualified minimized residual pending owner",
+      "reason": "Skip already consumed or unacquired text",
+      "evidence": "New real-body duplicate-cleanup assertions preserve the outer map reference and reject double free. A null/unacquired input and second cleanup must not interpret the incoming native pointer as an owned allocation.",
+      "option": "Keep one direct dwParam zero guard before clearing it; no local bitmask copy.",
+      "remaining": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1529",
+      "disposition": "Exact original restored",
+      "reason": "Restored exact original CURRENTPTD compatibility flag selection; no runtime mutation evidence; removed unused duplicate STACK state.",
+      "evidence": "Source caller/allocator/compatibility ownership review plus 171-scenario paired-header fixture passed.",
+      "option": "Restored exact original CURRENTPTD compatibility flag selection; no runtime mutation evidence; removed unused duplicate STACK state.",
+      "remaining": "0",
+      "delta": -2
+    }
+  ],
+  "source_findings": [
+    "All producer WM32MSGPARAMEX locals are zero initialized and each owns one conversion; dwParam does not need resetting at constructor entry.",
+    "Parm16.lParam starts as the original incoming lParam. A failed acquisition leaves dwParam zero, so unwind does not interpret it as owned storage. A null input already has null Parm16 value.",
+    "GetParam16 increments a found node reference; DeleteParamMap releases that reference. The original mapping lookup decision remains valid under this owner contract; no concrete evidence requires another mapped selector.",
+    "dwWOWCompatFlags is initialized in W32Thread, with only the original UNIQUEHDCHWND inheritance update during initialization. No supported producer changes DSBASEDSTRINGPOINTERS during this message. Restore original task flag read.",
+    "Normal unthunk followed by owner-finally cleanup requires a consume-once marker. It can use existing dwParam directly; no local copy or stack-mode bit needed."
+  ],
+  "tests": {
+    "path": "build/t483-s5-p146/message-text-header-paired/result.json",
+    "passed": true,
+    "scenarios": 171,
+    "additional_assertions": [
+      "MAP_FALLBACK_RELEASE_ONCE",
+      "MAP_BORROW_RELEASE_ONCE"
+    ],
+    "limits": "Exact extracted bodies and host service doubles, not guest/runtime; whole-file final gates pending."
+  },
+  "test_repair": "First run failed compilation because historical body was paired with current header after unused macro removal. Runner now extracts matching historical/current lifetime headers; no product workaround.",
+  "autonomous_change": "Removed unused WOW_TEXT_STACK define; no new state or shim.",
+  "line_rule": "Inserted #line 685 before restored original DeleteParamMap condition; all #error retained; final whole-file proof pending."
+}

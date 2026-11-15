@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1496 points reviewed:542 restored/confirmed delivered,0 local,8 approved,
-946 qualified pending,0 restores decided;1224 unreviewed. Files206/365 audited,159 remain.
-P145 wkgthunk/wkman mirror net-47;cached,publish11x2,focused/Full19 passed;Git follows.
+1593 points reviewed:567 restored/confirmed delivered,0 local,8 approved,
+1018 qualified pending,0 restores decided;1127 unreviewed. Files210/365 audited,155 remain.
+P146 mirror net-106;cached,publish11x2,focused/Full19 passed;Git follows.
 P141 first Full RPC1740 failure retained;test package identity alone changed for isolation.
 Coupled later-file edits do not complete those file audits.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,10 +53,10 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P145 candidate `ddec74b4-1b2a-4580-bbe1-723229839df4` published11x2;hashes match.
-Cached full x86/x64,Full19 and governance passed;Git accompanies P145.
+P146 candidate `c1d88661-ad13-4aae-8c4a-234ac7bb0e3b` published11x2;hashes match.
+Cached full x86/x64,Full19 and governance passed;Git accompanies P146.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p145-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p146-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored

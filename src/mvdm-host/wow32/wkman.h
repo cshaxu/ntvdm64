@@ -1,7 +1,3 @@
-/* DIVERGENCE(MVDM-HOST-DIV-294): explicit cdecl for the existing CPU40
- * worker exports consumed by the original /Gz WOW32 DLL. Parameter types,
- * implementation and ownership are unchanged; no stack-incompatible aliases. */
-#line 1
 /*++ BUILD Version: 0001
  *
  *  WOW v1.0
@@ -58,14 +54,11 @@ ULONG FASTCALL WK32WowReserveHtask(PVDMFRAME pFrame);
 
 
 BOOL    WK32InitializeHungAppSupport(VOID);
-DWORD WINAPI W32HungAppNotifyThread(UINT hKillUniqueID);
-#line 58
+DWORD   W32HungAppNotifyThread(UINT hKillUniqueID);
 DWORD   W32RemoteThread(VOID);
-DWORD WINAPI W32Thread(LPVOID vpInitialSSSP);
-#line 60
+DWORD   W32Thread(LPVOID vpInitialSSSP);
 VOID    W32DestroyTask( PTD ptd);
-VOID WINAPI W32EndTask(VOID);
-#line 62
+VOID    W32EndTask(VOID);
 ULONG   W32GetAppCompatFlags(HTASK16 hTask16);
 ULONG   W32ReadWOWCompatFlags(HTASK16 htask16, DWORD *pdwWOWXCompatFlagsEx);
 VOID    WK32DeleteTask(PTD ptdDelete);
@@ -84,7 +77,6 @@ BOOL W32IsSetupProgram(PSZ pszModName, PSZ pszFilePath);
 // SoftPC Routines
 HANDLE  __cdecl RegisterWOWIdle(void);
 VOID __cdecl BlockWOWIdle(BOOL Blocking);
-#line 80
 
 // User32 Routines
 VOID    ShowStartGlass (DWORD GLASSTIME);

@@ -1,0 +1,75 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "status": "CREATE group complete;whole-file still in progress",
+  "correction": "R1513 prior isolated-function failure omitted caller cleanup and did not prove product necessity. Superseded by full caller-chain review and restored-return test.",
+  "caller_cleanup": [
+    "W32Win16WndProcEx",
+    "WCD32CommonDialogProc",
+    "W32DialogFunc",
+    "ThunkCallWndProcHook",
+    "ThunkCBTHook",
+    "ThunkMsgFilterHook"
+  ],
+  "excluded_caller": "putmsg16 selects COMMAND/DDE/DROPFILES, not CREATE",
+  "test": {
+    "path": "build/t483-s5-p146/message-restored-returns/result.json",
+    "passed": true,
+    "scenarios": 171,
+    "failures": 0,
+    "limits": "Actual extracted bodies with host service doubles, not guest/runtime. Subsequent edits only restore whitespace/remove comments. Final whole-file delivery gates pending."
+  },
+  "points": [
+    {
+      "id": "T483-R1516",
+      "problem": "Nested title allocation ownership",
+      "evidence": "WM32MDICreate owns title in local child dwTmp[0]; parent outlives that local. Original normal cleanup reads guest-mutable vpszTitle; existing exact-body control deliberately changes it and detects wrong-free/residual without capture. Transfer preserves actual allocation, not guest return data.",
+      "option": "Retain one transfer into existing parent dwTmp[2].",
+      "remaining": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1517",
+      "problem": "Nested record allocation ownership",
+      "evidence": "Original unthunk reads guest CREATESTRUCT.vpCreateParams after guest callback; that field may change. Parent needs the original nested record key for normal/aborted cleanup independently of guest contents. Existing nested captured-ownership controls cover replacement.",
+      "option": "Retain one original allocation-key capture in dwTmp[3].",
+      "remaining": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1519",
+      "problem": "Move class/title capture before throwing copy",
+      "evidence": "Two original assignments moved earlier so exception cleanup sees completed acquisitions. Duplicating late assignments only to hide diff would add redundant work. Two surrounding blank lines were unnecessarily removed.",
+      "option": "Restored original surrounding whitespace; retain only relocation of two assignments.",
+      "remaining": "+0/-2",
+      "delta": -2
+    },
+    {
+      "id": "T483-R1520",
+      "problem": "Consume captured keys at original Error label",
+      "evidence": "Outer caller always unwinds. Restoring raw original free16 calls here leaves captured keys live, causing outer finalizer to free them again. Existing helper clears keys before release and drains nested ownership too.",
+      "option": "Keep one shared release call; no second cleanup implementation.",
+      "remaining": "+1/-2",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1521",
+      "problem": "Normal CREATE release uses allocation identities",
+      "evidence": "Original normal unthunk re-resolves a possibly destroyed window and rereads mutable guest create parameters; this can skip frees or free replacement pointers. Existing owner captures avoid both; clear-before-free also permits outer finalizer after a release exception. Original two-stage reconstructed child would duplicate cleanup/state transfer and does not preserve parent consumed keys on exception.",
+      "option": "Keep one shared release call and original stackfree16; remove two standalone explanation lines.",
+      "remaining": "+1/-35",
+      "delta": -2
+    },
+    {
+      "id": "T483-R1513",
+      "disposition": "Exact original restored",
+      "delta": -2,
+      "proof": "All callers unwind on false result; no extra per-converter error jump needed."
+    },
+    {
+      "id": "T483-R1518",
+      "disposition": "Exact original restored",
+      "delta": -2,
+      "proof": "All callers unwind on false result; no extra per-converter error jump needed."
+    }
+  ]
+}

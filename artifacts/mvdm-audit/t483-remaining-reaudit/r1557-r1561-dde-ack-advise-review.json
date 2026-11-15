@@ -1,0 +1,78 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1557",
+      "before": "+3/-0",
+      "remaining": "0",
+      "delta": -3,
+      "reason": "Restore original ACK node access; delete unsupported snapshot.",
+      "evidence": "Actual SetDdeHandleFlag only clears arena bit; it does not delete HDDE. WOW16GlobalUnlockFree subsequently GlobalFree sees cleared DDE bit. fFree ACK owners window/dialog/hooks enter task execution before conversion; putmsg16 uses fFree FALSE. Synthetic fixture deleted the node inside clear-mark callback without a corresponding guest path. No supported retirement point was found in this selected ACK chain.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1558",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Remove ADVISE local DDECONVERSION record.",
+      "evidence": "This converter publishes only one packet pair; unlike DATA it does not create subobject aliases. No later use consumes a successful record.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1559",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Remove ADVISE conversion Count initialization.",
+      "evidence": "Local record removed; no other ADVISE conversion operation requires it.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1560",
+      "before": "+10/-5",
+      "remaining": "+6/-2",
+      "delta": -7,
+      "reason": "Restore direct original DDEAddhandle call and original argument layout; remove empty rollback.",
+      "evidence": "DDETrackhandle returns FALSE before appending its pair; ADVISE starts Count0 and has no prior acquisitions, hence rollback on failure is always empty. DDEAddhandle itself retracts publication on mark admission failure. Retain checking its BOOL: original ignored node-allocation or mark failure and exposed an untracked allocated h16. Free only this acquired temporary and consume native wrapper according to fThunkDDEmsg.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1561",
+      "before": "+4/-0",
+      "remaining": "+4/-0",
+      "delta": 0,
+      "reason": "Keep failed guest-allocation return and wrapper release.",
+      "evidence": "Original falls through to TRUE after GlobalAllocLock16 returns0; LOW lParam then remains incoming packed native value, not an acquired guest handle. Return FALSE and release caller-owned packed wrapper instead of exposing invalid output.",
+      "disposition": "Qualified minimized residual pending owner"
+    }
+  ],
+  "ack_source_chain": [
+    "wmdisp32.c WM32DDEAck -> W32UnMarkDDEHandle -> CallBack16 RET_WOWDDEFREEHANDLE -> wow16cal.asm WOW16SetDdeHandleFlag -> 2ginterf/3ginterf SetDdeHandleFlag clears only GAH_WOWDDEFREEHANDLE.",
+    "WOW16GlobalUnlockFree -> GlobalHandle/GlobalUnlock/GlobalFree; 3ginterf GlobalFree gates WowDdeFreeHandle on arena bit already cleared. gfree/free_object release arena/selector without a DDE node deletion callback.",
+    "Task-owned native window/dialog/hook entry precedes converter; unlike W32DDEFreeGlobalMem32 native entry, this does not first acquire guest execution only after selecting the node. putmsg16 fFree FALSE never executes ACK free chain."
+  ],
+  "test_correction": "Removed five assertions requiring arbitrary node retirement inside flag-clear service double, plus dedicated poison/quarantine state. Retained three original ACK release policies, list/memory/mark rejection and independent synthetic cross-node stress. Cross-node stress is not evidence of actual guest reentry.",
+  "verification": {
+    "ack_final": "build/t483-s5-p146-dde-alias-verified/result.json",
+    "passed": true,
+    "candidate_cases": 96,
+    "candidate_errors": 0,
+    "baseline_cases": 77,
+    "baseline_errors": 2,
+    "scope": "Exact bodies/service doubles, not guest transport or application timing.",
+    "prior_attempts": [
+      "build/t483-s5-p146-dde-alias/failure.txt: stale named negative expectation",
+      "build/t483-s5-p146-dde-alias-final/failure.txt: stale exact count expectation"
+    ],
+    "advise": "Source data-flow proof only; ADVISE edits postdate ACK run and are not covered by that result; final whole-file applicable gates pending."
+  },
+  "mirror_metric": {
+    "before_group": 355,
+    "after_group": 343,
+    "group_delta": -12,
+    "file_start": 394
+  },
+  "line_rule": "Preserved #line1837,1958,1959,1983,1984 and all #error; final original logical-line proof pending.",
+  "counter_review": "Rejected prior generic reentry argument where actual clear-mark callback prevents the nominated deletion; removed empty transaction record instead of moving it to a shim."
+}

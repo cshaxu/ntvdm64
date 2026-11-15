@@ -1,0 +1,18 @@
+{
+  "failure": "Final candidate first failed WINHELP_RELEASE because the direct fixture did not supply lpfnM32, which production table dispatch supplies. No product workaround restored.",
+  "caller_evidence": [
+    "src/mvdm-host/wow32/wmdisp32.c:192",
+    "src/mvdm-host/wow32/wmtbl32.c:109"
+  ],
+  "correction": "Both standalone WinHelp cases now set value.lpfnM32=WM32WinHelp. Release and allocation-failure assertions retained.",
+  "failed_attempt": "build/t483-s5-p146/message-final",
+  "final_attempt": "build/t483-s5-p146/message-final-caller",
+  "candidate_summary": [
+    "TRANSACTION_GROUP errors=0 heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0",
+    "MESSAGE_CONSTRUCTION failures=0 scenarios=171 abi=72 scratch_offset=56 scratch_slots=4 parm=16",
+    ""
+  ],
+  "cases": 171,
+  "failures": 0,
+  "scope": "Actual extracted message functions and owner-finally with service doubles; not guest UI acceptance."
+}

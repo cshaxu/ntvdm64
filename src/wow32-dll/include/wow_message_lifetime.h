@@ -8,7 +8,6 @@
 /* ADAPTER-WOW-098: progress of the original input-only text converters. */
 #define WOW_TEXT_ACTIVE 1u
 #define WOW_TEXT_MAPPED 2u
-#define WOW_TEXT_STACK 4u
 struct _WM32MSGPARAMEX;
 struct _MSGPARAMEX;
 /* ADAPTER-WOW-101: completed acquisitions only, in existing call scratch. */

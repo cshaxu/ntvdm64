@@ -1,0 +1,133 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1562",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep DATA local subobject acquisition record.",
+      "evidence": "DDECopyhData16 creates DIB/metafile subobjects before caller outer-packet registration. Original HDDE list has no per-call graph ownership; failed final registration must retire this conversion children only.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1563",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep DATA acquisition count initialization.",
+      "evidence": "A conversion may fail before any child or after one/two children. Count is the actual acquired prefix; uninitialized count cannot identify owned children.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1564",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep passing DATA acquisition record to original converter boundary.",
+      "evidence": "The caller must see children acquired in DDECopyhData16 to roll them back if final outer registration fails. No global list scan substitutes for per-call ownership.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1565",
+      "before": "+12/-5",
+      "remaining": "+8/-2",
+      "delta": -7,
+      "reason": "Restore direct DDEAddhandle and original argument layout; share original failure return block.",
+      "evidence": "Final successful packet registration is never subsequently rolled back here, so tracking that outer pair adds unused state. If registration fails, retain child rollback and free outer h16, then goto original error cleanup for packed lParam and failed output fields. The label is charged to this point even though placed at the earlier original error block.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1566",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep POKE local subobject record.",
+      "evidence": "POKE shares DDECopyhData16, including DIB/metafile subobjects and MSDRAW compatibility. Children may exist before outer registration.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1567",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep POKE count initialization.",
+      "evidence": "Same acquired-prefix authority as DATA; zero/null-handle early success still does not create resources.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1568",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep POKE record parameter.",
+      "evidence": "Original converter can acquire multiple child objects. Existing per-call record identifies cleanup without touching independent aliases.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1569",
+      "before": "+11/-5",
+      "remaining": "+8/-2",
+      "delta": -6,
+      "reason": "Restore direct DDEAddhandle and reuse original POKE error return.",
+      "evidence": "Outer success record unused; preserve child rollback and outer free on failed publication, then use existing original packed-wrapper cleanup and lParam failure return. No new failure state machine or helper.",
+      "disposition": "Qualified minimized residual pending owner"
+    },
+    {
+      "id": "T483-R1570",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Restore original EXECUTE locals without conversion record.",
+      "evidence": "EXECUTE copies one command byte buffer and has no child conversion; local record is unused after successful registration.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1571",
+      "before": "+1/-0",
+      "remaining": "0",
+      "delta": -1,
+      "reason": "Remove EXECUTE record initialization.",
+      "evidence": "No record remains; failed DDETrackhandle never incremented Count, so old rollback was empty.",
+      "disposition": "Exact original restored"
+    },
+    {
+      "id": "T483-R1572",
+      "before": "+9/-5",
+      "remaining": "+5/-2",
+      "delta": -7,
+      "reason": "Restore direct original DDEAddhandle argument layout; remove empty rollback.",
+      "evidence": "Keep checking registration result and freeing this newly allocated h16 on rejection. Original ignores Addhandle failure and reports success with an untracked guest buffer; direct Addhandle already retracts node on failed mark admission.",
+      "disposition": "Qualified minimized residual pending owner"
+    }
+  ],
+  "source_evidence": [
+    "DDETrackhandle calls DDEAddhandle first and increments Count only after success; failure leaves prior child prefix unchanged.",
+    "DDECopyhData16 creates/tracks child allocations for DIB and metafile formats; r1384-r1395-partial-review.json preserves original-body controls showing partial packet failure and corrected cleanup. Those controls prove converter behavior, not these newly edited callers.",
+    "DATA/POKE registration failure branches previously duplicated original failed-copy wrapper/output cleanup. They now branch to the existing cleanup after child rollback and outer-buffer free.",
+    "EXECUTE, like ADVISE, has no call to DDECopyhData16 and no earlier child acquisitions; remove the entire record instead of preserving a uniform but unnecessary abstraction."
+  ],
+  "mirror_metric": {
+    "before_group": 343,
+    "after_group": 321,
+    "group_delta": -22,
+    "file_start": 394,
+    "functions": {
+      "WM32DDEData": [
+        21,
+        14
+      ],
+      "WM32DDEPoke": [
+        20,
+        14
+      ],
+      "WM32DDEExecute": [
+        16,
+        7
+      ]
+    }
+  },
+  "verification": "Source control/data-flow proof; final exact-caller tests, full compilation/publication and runtime remain pending. Existing conversion and alias controls are not claimed to validate these later caller edits.",
+  "line_rule": "All existing #error and #line retained; new shared Error labels need final original logical-line verification. No original guest changes.",
+  "counter_review": "Keep records only for actual subobjects; final outer success never needs transaction tracking. Error paths retain original DATA versus POKE output-field differences and fThunkDDEmsg ownership."
+}

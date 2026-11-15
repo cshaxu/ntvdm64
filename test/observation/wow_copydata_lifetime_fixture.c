@@ -241,7 +241,9 @@ int main(void) {
      CHECK(WU32PostAppMessage(&args)==TRUE&&posted==1&&normal_unthunks==1&&!live);
     }
     for(failure=1;failure<=4;failure++){
-        reset(failure);a=forward(native);CHECK(!WM32CopyData(&a));CHECK(!live&&!pCPDataFirst);
+        reset(failure);a=forward(native);
+        __try{CHECK(!WM32CopyData(&a));}__finally{wow_message_unwind32(&a);}
+        CHECK(!live&&!pCPDataFirst);
         reset(failure);x=reverse();(void)ThunkMsg16(&x);CHECK(!x.fThunkSucceeded);CHECK(!live&&!pCPDataFirst);
     }
     reset(0);a=forward(native);CHECK(WM32CopyData(&a));CHECK(live==4);
@@ -261,7 +263,7 @@ int main(void) {
     CHECK(!CopyDataDeleteNode(1,2,99));
     CHECK(CopyDataDeleteNode(1,2,98)&&!live&&!pCPDataFirst);
     a=forward(native);copy_fault=TRUE;
-    __try{(void)WM32CopyData(&a);CHECK(FALSE);}__except(GetExceptionCode()==0xe0420950?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){CHECK(!live&&!pCPDataFirst);}
+    __try{__try{(void)WM32CopyData(&a);CHECK(FALSE);}__finally{wow_message_unwind32(&a);}}__except(GetExceptionCode()==0xe0420950?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){CHECK(!live&&!pCPDataFirst);}
     reset(0);x=reverse();copy_fault=TRUE;
     __try{(void)ThunkMsg16(&x);CHECK(FALSE);}__except(GetExceptionCode()==0xe0420950?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){CHECK(!live&&!pCPDataFirst);}
     reset(0);native->cbData=0;a=forward(native);CHECK(WM32CopyData(&a)&&live==2);wow_message_unwind32(&a);

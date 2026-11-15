@@ -1,0 +1,48 @@
+{
+  "README": "Side-session contribution retained for this batch; replaces stale single-executable description with current 11-image architecture.",
+  "gallery_images": [
+    {
+      "file": "assets/screenshots/runtime-gallery/win32-edit-console.png",
+      "sha256": "1232474421e5b0a8a2074d4881cd6e33508f6d2f10491055f91b68ca94044c70",
+      "source_capture_identical": true
+    },
+    {
+      "file": "assets/screenshots/runtime-gallery/win32-edit-window.png",
+      "sha256": "fdbc548b04b6e5b0f9a75e7e3d3aab40387ef8c6c8033ccd5b5adb10f8fe0e94",
+      "source_capture_identical": true
+    },
+    {
+      "file": "assets/screenshots/runtime-gallery/dos-edit-console.png",
+      "sha256": "94f9232ce91d1fab20460af323eeba9ab79aeb0fde3db067c786b79aa27daf9b",
+      "source_capture_identical": true
+    },
+    {
+      "file": "assets/screenshots/runtime-gallery/dos-edit-window.png",
+      "sha256": "14368669c9810291e9a92aaa378ae880f33998252e0dc509b8eb8dd2965a3382",
+      "source_capture_identical": true
+    },
+    {
+      "file": "assets/screenshots/runtime-gallery/windows-101.png",
+      "sha256": "b40f85ca0ec18b6d85e5f97cfc93bcfe95498be7956a7a879c47e606d2882c99",
+      "source_capture_identical": true
+    },
+    {
+      "file": "assets/screenshots/runtime-gallery/windows-31.png",
+      "sha256": "7f19094906a44618fde18092b8f65da5a533c261f29391a4237f74e84b3c9d38",
+      "source_capture_identical": true
+    },
+    {
+      "file": "assets/screenshots/runtime-gallery/windows-95.png",
+      "sha256": "6eda734cba99bec8adde3a934f31dae516b3aebee3bf1a1ce4521891da67c2c5",
+      "source_capture_identical": true
+    },
+    {
+      "file": "assets/screenshots/runtime-gallery/windows-31-multitasking.png",
+      "sha256": "776154ab13a673365a48b1280f6eaf56d395c44ac5e8c5314584f38abbd9f4f5",
+      "source_capture_identical": true
+    }
+  ],
+  "baseline_package_verified": "f073d85a-ebe5-49e4-a033-15c6a5b64bdd",
+  "boundaries": "Historical P144 screenshots, not P146 acceptance or full compatibility evidence; README/manifest state limits.",
+  "package_zip_changed": false
+}

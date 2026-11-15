@@ -1,0 +1,31 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1555",
+      "before": "+4/-1",
+      "remaining": "+2/-1",
+      "delta": -2,
+      "reason": "Remove redundant captured HWND and explanatory comment; use original Parm16.WndProc.wParam for AddInitiator.",
+      "evidence": "CallBack16 copies PARM16 to guest and has no writeback to caller PARM16. Common dialog/window callers preserve it; ThunkMsgFilterHook uses a separate mpex for modified guest message. Current extra snapshot has no demonstrated necessity. Keep success marker: AddInitiator allocation failure must not authorize deletion of an outer same-HWND node."
+    },
+    {
+      "id": "T483-R1556",
+      "before": "+5/-1",
+      "remaining": "+4/-1",
+      "delta": -1,
+      "reason": "Remove redundant local HWND; use original Parm16.WndProc.wParam for DeleteInitiator after consuming success bit.",
+      "evidence": "WI32DDEAddInitiator prepends only on allocation success; WI32DDEDeleteInitiator removes first matching HWND. Inner allocation failure with same HWND followed by original unconditional deletion removes outer node. Gate on successful insertion; original HWND parameter remains stable. No call occurs between clearing active and reading parameter, so local copy is unnecessary."
+    }
+  ],
+  "source_evidence": [
+    "wcall16.c wow_original_CallBack16: all pParm16 uses are input reads; RtlCopyMemory copies to pCBFrame, not back.",
+    "wowhooks.c ThunkCallWndProcHook creates guest CWPSTRUCT copy; original local Parm16 unchanged before unthunk.",
+    "wowhooks.c ThunkMsgFilterHook copies modified guest fields to separate MSGPARAMEX mpex, then unthunks original wm32mpex.",
+    "wmdisp32.c, wudlg.c, wcommdlg.c assign conversion inputs and only callback result before unthunk; no initiator argument replacement.",
+    "wdde.c AddInitiator and DeleteInitiator provide concrete nested-allocation-failure counterexample; this is source proof, not a newly reproduced application failure."
+  ],
+  "counter_review": "Replaced old mutable-argument claim with actual caller data-flow evidence; success ownership is necessary, separate HWND snapshot is not.",
+  "verification": "Source-only restoration/minimization; prior171-scenario fixture does not cover DDE initiation. Final file build and applicable DDE verification pending.",
+  "line_rule": "Retained #line1779 and #line1782; excluded #error unchanged."
+}

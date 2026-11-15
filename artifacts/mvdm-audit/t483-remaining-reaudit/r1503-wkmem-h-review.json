@@ -1,0 +1,32 @@
+{
+  "file": "src/mvdm-host/wow32/wkmem.h",
+  "original": "OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wkmem.h",
+  "point": "R1503",
+  "conclusion": "Selected original content and original line positions confirmed;only existing excluded branch bodies remain;no source edit",
+  "proof": {
+    "original_retained_lines": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      20
+    ],
+    "literal_false_only": true
+  },
+  "sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2",
+  "error_directives": [
+    "#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register."
+  ],
+  "delivery": "Unchanged source reused from P145 051fb3b27;no fresh runtime claim",
+  "counter_review": "Conditional closing directives inside removed bodies need not retain body length;following selected source has original logical lines. Do not infer restoration of excluded hardware i386 code."
+}

@@ -137,16 +137,15 @@ try {
         $output = Get-Content -LiteralPath "$root/body-$variant.stdout.log" -Raw
         $failed = @([regex]::Matches($output, '(?m)^FAIL ([^\r\n]+)\r?$'))
         if ($old) {
-            if ($failed.Count -ne 3 -or $failed[0].Groups[1].Value -ne 'empty-delete-false' -or
-                    $failed[1].Groups[1].Value -ne 'mark-reject-unpublished' -or
-                    $failed[2].Groups[1].Value -ne 'ack-retired-node-captured') {
-                throw 'Baseline must demonstrate only the empty-list, mark-rejection and retired-ACK-node defects'
+            if ($failed.Count -ne 2 -or $failed[0].Groups[1].Value -ne 'empty-delete-false' -or
+                    $failed[1].Groups[1].Value -ne 'mark-reject-unpublished') {
+                throw 'Baseline must demonstrate only the empty-list and mark-rejection defects'
             }
         } elseif ($failed.Count) { throw 'Candidate has an alias/free ownership failure' }
         $result = [regex]::Match($output,
             'DDE_ALIAS cases=(\d+) errors=(\d+) nodes=0 guest_proof=0 transport_proof=0')
-        if (!$result.Success -or [int]$result.Groups[1].Value -ne $(if ($old) { 82 } else { 101 }) -or
-                [int]$result.Groups[2].Value -ne $(if ($old) { 3 } else { 0 })) {
+        if (!$result.Success -or [int]$result.Groups[1].Value -ne $(if ($old) { 77 } else { 96 }) -or
+                [int]$result.Groups[2].Value -ne $(if ($old) { 2 } else { 0 })) {
             throw 'Incomplete exact-body ownership result'
         }
         Get-FileHash -LiteralPath "$directory/dde_alias_types.h", "$directory/dde_alias_exact_bodies.h",

@@ -1,0 +1,25 @@
+{
+  "point": "R1510",
+  "status": "local-partial-minimization-awaiting-whole-file-audit",
+  "original_added": 3,
+  "remaining_added": 1,
+  "mirror_delta": -2,
+  "removed": "Redundant dwTmp[3]=0 and its comment",
+  "proof": [
+    "All production WM32MSGPARAMEX automatic owners initialize {0}: W32Win16WndProcEx, common dialog, dialog, call-window/CBT/message-filter hooks, putmsg16.",
+    "WM32Create is selected by aw32Msg only for WM_CREATE and WM_NCCREATE; direct calls are CBT construction then unthunk.",
+    "Each owner constructs once per stack-local record; recursive dispatch gets an independent local. No earlier operation sets dwTmp[3] before construction.",
+    "Nested WM32MSGPARAMEX in WM32Create calls WM32MDICreate, not WM32Create. putmsg16 does not dispatch WM_CREATE/NCCREATE."
+  ],
+  "remaining": "lpfnM32=WM32Create remains for direct CBT call; no owner retention approval implied.",
+  "line_proof": "Following #line 431 and every #error/#line directive unchanged; whole-file preprocessing pending.",
+  "files": {
+    "src/mvdm-host/wow32/wmdisp32.c": "4e2ac06175028a45135768fd650ddd3bf2fe16c22412b96a248d4826386fef8b",
+    "src/mvdm-host/wow32/wcommdlg.c": "7949bf8bb815824c507cfa7fbcc85b4c9c87001522aa5e1ae1bc8016abcdec1f",
+    "src/mvdm-host/wow32/wudlg.c": "4e662a804b0ce6df9c11a30f6d510f8f50b7292321ca1d6c983d003c84a3711f",
+    "src/mvdm-host/wow32/wowhooks.c": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb",
+    "src/mvdm-host/wow32/wstruc.c": "de82d10775e90274f9fd2fa0aec330f564c65b730abb892ab97a23b947091ffc",
+    "src/mvdm-host/wow32/wmtbl32.c": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6"
+  },
+  "verification": "Source call-chain proof; final-code build/test deferred until entire file complete."
+}

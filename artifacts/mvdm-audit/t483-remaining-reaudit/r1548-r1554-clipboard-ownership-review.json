@@ -1,0 +1,86 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1548",
+      "before": "+2/-0",
+      "remaining": "+2/-0",
+      "delta": 0,
+      "reason": "Capture locked guest pointer and allocation handle.",
+      "evidence": "Original stores hMem16 into Parm16 only after copy and unlock. A mapping/copy escape before that leaves outer owner no key; after unlock a movable object must be relocked by handle, not stale pointer."
+    },
+    {
+      "id": "T483-R1549",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep native lock finally scope.",
+      "evidence": "Native GlobalLock succeeds before PUTRECT16/putpaintstruct16; an escaping copy skips original trailing GlobalUnlock. Caller guest-resource cleanup cannot release this native lock."
+    },
+    {
+      "id": "T483-R1550",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep GlobalUnlock in native finally.",
+      "evidence": "Paired original SizeClipBoard control fails GLOBAL_LOCKED_ABORT; current body releases native lock on copy escape and normal path."
+    },
+    {
+      "id": "T483-R1551",
+      "before": "+1/-0",
+      "remaining": "+1/-0",
+      "delta": 0,
+      "reason": "Keep successful guest unlock marker.",
+      "evidence": "Before unlock, free consumes existing locked pointer; after unlock, original normal release reacquires pointer from handle. One bit distinguishes actual completed unlock, preserving original lock/unlock/free sequence."
+    },
+    {
+      "id": "T483-R1552",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep consume-once guest global release.",
+      "evidence": "Normal cleanup and owner-finally must not both free. Shared helper clears keys before callback and uses original GlobalLockSize16/GlobalUnlockFree16 according to captured lock state."
+    },
+    {
+      "id": "T483-R1553",
+      "before": "+2/-1",
+      "remaining": "+1/-1",
+      "delta": -1,
+      "reason": "Keep format-name heap capture; remove comment.",
+      "evidence": "Original paired function leaks on pre-call copy, guest-call abort and copyback abort; buffer acquired before fallible conversion, requiring owner-visible key."
+    },
+    {
+      "id": "T483-R1554",
+      "before": "+1/-1",
+      "remaining": "+1/-1",
+      "delta": 0,
+      "reason": "Keep format-name consume-once release.",
+      "evidence": "Captured allocation must clear on normal release so finally does not free again; exceptional copyback cleanup uses same key without replaying output conversion."
+    }
+  ],
+  "tests": {
+    "candidate": "build/t483-s5-p146/message-clipboard-simplified/result.json",
+    "candidate_passed": true,
+    "scenarios": 171,
+    "original_controls": "build/t483-s5-p146/message-clipboard-simplified/original-controls.json",
+    "original_steps": "build/t483-s5-p146/message-clipboard-simplified/original-steps.json",
+    "original_clipboard": {
+      "compile": 0,
+      "run": 1,
+      "failed_assertions": 7
+    },
+    "original_format_name": {
+      "compile": 0,
+      "run": 1,
+      "failed_assertions": 4
+    },
+    "limits": "Exact pinned original single-function substitutions into same current caller fixture. Host service doubles, not runtime or full-original subsystem. Counts include CONTROL_ABORT aggregate, not independent defects."
+  },
+  "source_chain": [
+    "WM32SizeClipBoard -> GlobalAllocLock16 -> WOWGlobalAllocLock16/CallBack16; native GlobalLock -> guest copy -> native GlobalUnlock; GlobalUnlock16 -> normal guest call -> original GlobalLock16/GlobalUnlockFree16.",
+    "wow_message_release32 preserves original locked/unlocked release variants and consumes captured keys before callback.",
+    "WM32AskCBFormatName -> malloc16 -> putstr16 -> guest callback -> getstr16 -> free16; owner-finally must cover both conversion sides."
+  ],
+  "line_rule": "No #error changes; existing #line1732 still follows allocation. Full-file logical-line verification pending.",
+  "disposition": "Qualified minimized residuals pending owner; no approval inferred from passing controls."
+}

@@ -1,0 +1,84 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1504",
+      "problem": "Explicit message-cleanup declarations",
+      "evidence": "The selected cleanup requires wow_message_stack layout and typed cleanup calls. Original W32Exception only chooses exception disposition/RET_FORCETASKEXIT; registration bridge releases borrow/scheduler state, not message-owned allocation keys.",
+      "minimal_option": "Keep one include; remove standalone project explanation.",
+      "remaining_scale": "+1/-0",
+      "local_mirror_delta": -1
+    },
+    {
+      "id": "T483-R1505",
+      "problem": "Thread-owned DDE consumption mode",
+      "evidence": "wow_hook_callback.c saves fThunkDDEmsg before wow_task_callback_enter. A PeekMessage(PM_NOREMOVE) conversion sets FALSE; another native hook thread can snapshot FALSE before acquiring WOW execution. A restores TRUE; later B restores its stale FALSE globally. W32Win16WndProcEx DDE converters then read FALSE and skip FreeDDElParam. TLS keeps snapshots thread-local. This is a source-permitted ordering, not a reproduced race.",
+      "minimal_option": "Keep TLS declaration; remove standalone comment. Restoring global needs additional cross-thread selector ownership, not a plain original substitution.",
+      "remaining_scale": "+2/-1",
+      "local_mirror_delta": -1
+    },
+    {
+      "id": "T483-R1506",
+      "problem": "Partial-conversion and callback-stack ownership",
+      "evidence": "Original entry allocates/converts before CallBack16; constructor false goes to DefWindowProc without unthunk, and exceptions bypass normal unthunk. W32Exception cannot access this stack-local message. Cleanup reads uMsg/lpfnM32/keys on early failures; original uninitialized record supplies invalid keys. stackalloc16 changes vpCBStack/init before later copy/callback failures; callback cleanup begins after construction and cannot restore pre-construction state.",
+      "minimal_option": "Keep zero initialization and one scope around existing message flow. No second resource map.",
+      "remaining_scale": "+4/-1",
+      "local_mirror_delta": 0
+    },
+    {
+      "id": "T483-R1507",
+      "problem": "Successful native-only early return",
+      "evidence": "EM_SCROLLCARET invokes native EditWndProc and returns before normal completed assignment. Existing exact-branch control preserves nested callback stack on completed return; deleting marker restores old cursor incorrectly. Exception control still restores cursor.",
+      "minimal_option": "Keep one completed marker; do not change native-only behavior.",
+      "remaining_scale": "+1/-0",
+      "local_mirror_delta": 0
+    },
+    {
+      "id": "T483-R1508",
+      "problem": "Successful original unthunk return",
+      "evidence": "After original unthunk succeeds the message stack lifecycle must distinguish normal completion from failed construction/callback; otherwise helper restores its entry cursor/init on every ordinary return. Existing completed/failed stack controls distinguish these cases.",
+      "minimal_option": "Keep one completion marker after original unthunk.",
+      "remaining_scale": "+1/-0",
+      "local_mirror_delta": 0
+    },
+    {
+      "id": "T483-R1509",
+      "problem": "Exception and partial-construction cleanup",
+      "evidence": "Original normal unthunk is bypassed on conversion failure or SEH escape. Exact-body transaction controls exercise partial allocation, copy faults, nested construction, and stack rollback; W32Exception has no local allocation keys. Unconditional replay of output unthunkers would copy partial output. Existing capture-key cleanup avoids that.",
+      "minimal_option": "Retain one cleanup finalizer; removed redundant !completed local because helper already checks it. Preserve AbnormalTermination for cleanup exceptions.",
+      "remaining_scale": "+4/-0",
+      "local_mirror_delta": -1
+    },
+    {
+      "id": "T483-R1510",
+      "problem": "Direct CBT CREATE cleanup selector",
+      "evidence": "CBT sets uMsg=0 and calls WM32Create directly rather than setting lpfnM32 through aw32Msg. Cleanup distinguishes nested CREATE resources using lpfnM32. Removing assignment falls into generic release and misses class/nested keys. All automatic owners are zero-initialized, so dwTmp[3] initializer is redundant.",
+      "minimal_option": "Removed redundant zero and comment; keep one direct-CBT selector assignment.",
+      "remaining_scale": "+1/-0",
+      "local_mirror_delta": -2
+    }
+  ],
+  "status": "entry-group-dispositions-complete;whole-file-in-progress",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "validation_limits": [
+    "Source-permitted ordering is not reproduced runtime race.",
+    "171-scenario fixture was before these edits, not final-code acceptance.",
+    "Full whole-file preprocessing/build/publication/tests/Git pending.",
+    "The exact-original WM32Create control validates its dead-window defect only; no blanket justification from historical failure baseline."
+  ],
+  "references": [
+    "r1509-finalizer-reduction-progress.json",
+    "r1510-create-initialization-progress.json",
+    "r1513-original-create-control.json"
+  ],
+  "source_evidence": {
+    "src/wow32-dll/source/wow_message_lifetime.c": "be18f3ed2de3ee8602a22d08f37605b4015d560ea3c681fd70c8a8c795d704b6",
+    "src/wow32-dll/source/wow_hook_callback.c": "29379edbe91fe3e317388324baf39868bbba9487ff722b960bdfc1f77339aac6",
+    "src/wow32-dll/source/wow_user_registration_bridge.c": "d4576d797c3cdd354078ff0a442cbe5c6a82c9acac1deae17f230140afe82607",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "c23bdc6ed4a9d38d47a77b29b02edda6e74ea03fe4ce719c5a875ccd0a9d3d3d",
+    "src/mvdm-host/wow32/wumsg.c": "efd09d864475678d3b81d22bf029cbc4b95a69247c420cf783d5a7b0974ef81e",
+    "src/mvdm-host/wow32/wow32.c": "e1b56787bd45cb41bb0ee65c9e8804f1172a28236da86fc56fc9e28a35c855c0",
+    "src/mvdm-host/wow32/walloc16.c": "6a1111899adf5351e03f9989325d2412ef0716da307a36793dc35abf585c81f2",
+    "src/mvdm-host/wow32/wowhooks.c": "b401f6ce0464288e139ef3420f7a368ec02c9f5aa8fa77b6cf23eae3aa4465fb"
+  }
+}

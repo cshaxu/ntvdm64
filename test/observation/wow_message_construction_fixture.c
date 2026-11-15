@@ -20,7 +20,7 @@ typedef struct {DWORD unused;} BLKCACHE,*PBLKCACHE;
 #define PARAM_32 2
 #include "message_construction_map_types.h"
 #include "message_construction_messages.h"
-#include "../../src/wow32-dll/include/wow_message_lifetime.h"
+#include "message_construction_lifetime.h"
 BOOL DeleteParamMap(DWORD,UINT,BOOL *);
 typedef struct _TD {DWORD dwWOWCompatFlags;HAND16 htask16;DWORD vpStack,vpCBStack,dwFlags;} PTD_VALUE,*PTD;
 typedef struct {WORD cbData;BYTE data[14];} HLP,*LPHLP;
@@ -299,7 +299,13 @@ static void mdi_cases(void){
  }
  reset_case();memset(&create,0,sizeof(create));create.lpszClass="outer";create.lpszName="title";
  value=make_message(&create,WM_CREATE,0);value.pww=NULL;dead_window=TRUE;
+#if defined(TRANSACTION_GROUP) || !defined(BASELINE_IMAGE)
+ __try { ok=WM32Create(&value); }
+ __finally { wow_message_unwind32(&value); }
+ expect(!ok && !owned(),"CREATE_DEAD_WINDOW_ROLLBACK");
+#else
  expect(!WM32Create(&value) && !owned(),"CREATE_DEAD_WINDOW_ROLLBACK");
+#endif
 }
 static void map_cases(void){
  MSGPARAMEX value;WM32MSGPARAMEX reverse;DWORD pointer;BOOL free_pointer;
@@ -310,6 +316,7 @@ static void map_cases(void){
  expect(WM32SetText(&reverse) &&
   !strcmp(guest_pointer(reverse.Parm16.WndProc.lParam),text),"MAP_FALLBACK_RECEIVE");
  reverse.fThunk=FALSE;expect(WM32SetText(&reverse) && !owned(),"MAP_FALLBACK_OWNED_RELEASE");
+ expect(WM32SetText(&reverse) && !owned() && !bad_foreign,"MAP_FALLBACK_RELEASE_ONCE");
  UnThunkWMMsg16(&value);expect(flat_release==1 && !map_live,"MAP_FALLBACK_RELEASE");
  reset_case();memset(&value,0,sizeof(value));value.Parm16.WndProc.wMsg=WM_SETTEXT;
  expect(ThunkWMMsg16(&value) && !value.lParam && !gParamMap.pHead && !map_allocations,"MAP_NULL_ENTRY");
@@ -319,6 +326,7 @@ static void map_cases(void){
  reverse=make_message((void *)value.lParam,WM_SETTEXT,0);
  expect(WM32SetText(&reverse) && reverse.Parm16.WndProc.lParam==TEXT_FAR,"MAP_BORROW_IDENTITY");
  reverse.fThunk=FALSE;expect(WM32SetText(&reverse) && map_live==1 && !owned(),"MAP_BORROW_RETURN");
+ expect(WM32SetText(&reverse) && map_live==1 && !owned(),"MAP_BORROW_RELEASE_ONCE");
  UnThunkWMMsg16(&value);expect(!map_live && !gParamMap.pHead,"MAP_NORMAL_RELEASE");
  reset_case();pointer=(DWORD)AddParamMap((DWORD)text,TEXT_FAR);relocated=1;
  expect(ParamMapUpdateNode(pointer,PARAM_32,NULL)==moved_text && GetParam16(pointer)==TEXT_FAR,"MAP_ORIGINAL_MOVEMENT");
@@ -337,9 +345,9 @@ static void adjacent_cases(void){
   if(stage)expect(!WM32AskCBFormatName(&value) && !owned(),"ASKFORMAT_FAILURE");
   else {expect(WM32AskCBFormatName(&value),"ASKFORMAT_CONSTRUCT");value.fThunk=FALSE;expect(WM32AskCBFormatName(&value) && !owned(),"ASKFORMAT_RELEASE");}
  }
- reset_case();value=make_message(&help,WM_WINHELP,0);fail_at=1;
+ reset_case();value=make_message(&help,WM_WINHELP,0);value.lpfnM32=WM32WinHelp;fail_at=1;
  expect(WM32WinHelp(&value) && !value.Parm16.WndProc.lParam && !value.dwParam && !owned(),"WINHELP_FAILURE_HANDLE");
- reset_case();value=make_message(&help,WM_WINHELP,0);
+ reset_case();value=make_message(&help,WM_WINHELP,0);value.lpfnM32=WM32WinHelp;
  expect(WM32WinHelp(&value) && owned()==1,"WINHELP_CONSTRUCT");value.fThunk=FALSE;
  expect(WM32WinHelp(&value) && !owned(),"WINHELP_RELEASE");
 }

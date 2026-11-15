@@ -1,0 +1,55 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "points": [
+    {
+      "id": "T483-R1511",
+      "problem": "Capture allocated class before copying",
+      "evidence": "Original malloc16 succeeds before putstr16 GETVDMPTR/RtlCopyMemory; exceptions bypass the local Error label. Original WM32Create substitution fails all three non-nested copy-abort cases while current passes. The entry finalizer has no access to constructor-local vpClass.",
+      "option": "Retain one early class-key capture; do not add another local exception handler.",
+      "scale": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1512",
+      "problem": "Capture allocated title before copying",
+      "evidence": "Same exact-original copy-abort control; title key is otherwise recorded only after copying, nested construction and stack allocation. Local vpName cannot be recovered by the caller after SEH unwinds its frame.",
+      "option": "Retain one early title-key capture.",
+      "scale": "+1/-0",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1513",
+      "problem": "Free allocations when window metadata disappeared",
+      "evidence": "Exact-original normal/dead-window paired control: both normal residual0; original invalid-window resultFALSE residual2, current resultFALSE residual0. Original direct return skips its own Error cleanup.",
+      "option": "Retain goto Error replacing return FALSE; reuse existing error path.",
+      "scale": "+1/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1514",
+      "problem": "Initialize partial nested MDI cleanup record",
+      "evidence": "Nested WM32MDICreate can fail or throw before initializing title/record fields; its cleanup consumes these captured fields. Original automatic wm32mpexT is uninitialized. Normal outer-owner cleanup does not initialize this independent local. Exact current nested-copy controls use the real local declaration.",
+      "option": "Retain = {0}; no extra fields or owner map.",
+      "scale": "+1/-1",
+      "delta": 0
+    },
+    {
+      "id": "T483-R1515",
+      "problem": "Propagate nested MDI construction failure",
+      "evidence": "Original WM32Create ignores WM32MDICreate FALSE, continues stack allocation, and returns TRUE with missing child construction. Exact original WM32Create substitution produced three NESTED_CREATE_REJECTION failures with controlled MDI allocation failure.",
+      "option": "Retain return check and jump to existing Error; standalone explanatory comment removed.",
+      "scale": "+1/-1",
+      "delta": -1
+    }
+  ],
+  "control": "r1513-original-create-control.json",
+  "additional_control": "build/t483-s5-p146/message-transaction/original-create/run.out",
+  "limitations": [
+    "Service-double exact-function evidence; not runtime/guest acceptance.",
+    "Original CREATE substituted with current MDI converter for nested rejection; it is an interface-failure propagation control, not all-original nested runtime.",
+    "Remaining captures are not approved retention. Final whole-file gates pending."
+  ],
+  "superseded_points": {
+    "R1513": "Exact original restored after complete caller cleanup review; see r1516-r1521-create-owner-review.json. Function-only leak is not production-necessity evidence."
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "file": "src/mvdm-host/wow32/wkman.h",
+  "original": "OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wkman.h",
+  "before": {
+    "added": 8,
+    "deleted": 5,
+    "total": 13
+  },
+  "after": {
+    "added": 2,
+    "deleted": 2,
+    "total": 4
+  },
+  "mirror_delta": -9,
+  "points": {
+    "R1497": "Remove three-line explanation",
+    "R1498-R1500": "Restore original declarations;default/Gz already preserves stdcall",
+    "R1501": "Retain minimum cdecl worker declarations pending owner"
+  },
+  "evidence": "Actual /Gz WOW compilation of wkman with current and restored declarations,identical source/output path:objects differ only COFF timestamp byte4. All code,data,relocations,symbols identical. Three retained function definitions remain stdcall;only production direct users compile /Gz;Gd fixtures do not reference these functions.",
+  "remaining_boundary_evidence": "Actual nt_eoi.obj defines _RegisterWOWIdle and _BlockWOWIdle;unchanged original header under actual WOW /Gz generates undefined _RegisterWOWIdle@0 and _BlockWOWIdle@4. Current/final header generates matching cdecl references. Generator supplies no aliases for these symbols;BlockWOWIdle has a stack argument,so a symbol alias would not repair cleanup ABI.",
+  "object_identity": {
+    "before_size": 50384,
+    "candidate_size": 50384,
+    "different_bytes": 1,
+    "first_offsets": [
+      4
+    ],
+    "only_coff_timestamp": true,
+    "normalized_sha256": "9fae584869e20f4154a8f7b283fd5a16584c440751e2315aaa98e76f91482bb6"
+  },
+  "original_line_check": {
+    "common_lines": 139,
+    "mismatches": 0,
+    "changes": [
+      {
+        "original_line": 78,
+        "original": [
+          "HANDLE  RegisterWOWIdle(void);",
+          "VOID BlockWOWIdle(BOOL Blocking);"
+        ],
+        "candidate": [
+          "HANDLE  __cdecl RegisterWOWIdle(void);",
+          "VOID __cdecl BlockWOWIdle(BOOL Blocking);"
+        ]
+      }
+    ],
+    "error_directives": 0
+  },
+  "source_sha256": "1f05fb10908781eb2c28ffd1886dd6baedad43a4b547c0e43fb1b99791773db4",
+  "counter_review": "Initial objects differed by output-path CodeView records;preserved initial evidence,then used identical output path. No code/relocation difference remains. Do not claim original cdecl omission safe based on no-argument helper alone. No guest change.",
+  "delivery": "P146 local;ABI-equivalent declaration/comment cleanup may accumulate with next semantic file",
+  "evidence_root": "build/t483-s5-p146/wkman-header"
+}
