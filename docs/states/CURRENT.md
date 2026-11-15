@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1993 reviewed:681 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1304 qualified pending;727 unreviewed. Files268/365 audited,97 remain.
+1996 reviewed:682 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1306 qualified pending;724 unreviewed. Files269/365 audited,96 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -48,8 +48,6 @@ established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P165 wuser31 mirror14->5(-9);MSVC537/0,cached full,publish11x2,linked DC/identity window-borrow,Full19 and governance passed;Git accompanies receipt.
 
 P166 wusercli.h selected original content/line structure confirmed;original CRLF restored only. P165 build/publication/window-borrow/Full19 reused;Git accompanies receipt.
 
@@ -205,3 +203,5 @@ P180 basesrv.h7->4(-3):comment/blank removed;CRLF and original comment28 mapping
 P181 srvvdm.c93->84(-9):redundant comment/null-output guard removed;CRLF and endif logical lines restored;2317 original lines match. Notification current5/5,original control3 failures;native casts fail actual x64 build. Cached,publish11x2,service/Full passed;10 residual decisions;Git accompanies receipt.
 
 P182 srvvdm.h4->2(-2):duplicate query comment removed;original CRLF restored;field/prototype and tokens unchanged. Retained original lines match;2 residual decisions use P181 notification/runtime and caller proof. P181 product verification reused;Git accompanies receipt.
+
+P183 apibuff.c188->174(-14):original comments restored;selected actual preprocessing unchanged;55 original lines match. Full original misses rpcutil.h;public allocator ownership remains2 pending decisions. P181 product verification reused;Git accompanies receipt.

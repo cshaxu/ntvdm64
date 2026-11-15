@@ -1228,3 +1228,5 @@ P180: [BaseSrv header review](batch-p180-checkpoint.json):7->4;two qualified res
 P181: [BaseSrv VDM whole-file review](batch-p181-checkpoint.json):93->84;notification/ABI controls;line proof;cached,publish and final regression.
 
 P182: [BaseSrv VDM header review](batch-p182-checkpoint.json):4->2;two minimal residual declarations;P181 product evidence reused.
+
+P183: [NetAPI buffer boundary review](batch-p183-checkpoint.json):original comments restored;public allocator boundary pending;P181 evidence reused.

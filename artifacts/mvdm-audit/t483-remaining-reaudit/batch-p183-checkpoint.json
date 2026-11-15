@@ -1,0 +1,36 @@
+{
+  "status": "whole-file source review complete;comment/original-format restoration only;P181 product evidence reused",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "sha256": "d44c57d9837dc754024ac2567dd232e9f5a543797d5c17954f0caa68b867db51"
+    }
+  ],
+  "mirror_before": {
+    "added": 8,
+    "deleted": 180,
+    "total": 188
+  },
+  "mirror_after": {
+    "added": 0,
+    "deleted": 174,
+    "total": 174
+  },
+  "mirror_delta": -14,
+  "line_check": {
+    "retained_nonblank_original_lines": 55,
+    "mismatches": []
+  },
+  "actual_context": "x86 worker obj/opennt-netapi-api/apibuff.obj cflags from current build.ninja",
+  "controls": {
+    "before_preprocess": 0,
+    "final_preprocess": 0,
+    "full_original_preprocess": 2,
+    "selected_preprocessing_identical": true
+  },
+  "retained_boundary_evidence": "Full original preprocessing in actual x86 apibuff context fails C1083 rpcutil.h:61. Original netlib/midluser.c uses LocalAlloc/LocalFree;restoring the four public NetApiBuffer APIs changes the provider boundary currently supplied by netapi32.lib. vrnetapi.c frees modern NetWkstaGetInfo/NetWkstaUserGetInfo buffers using NetApiBufferFree;this is not proof that a different allocator can free those buffers. No claim original algorithm is defective. Full original NetAPI/RPC package ownership requires owner decision,not a header-only patch.",
+  "call_chain": "netlib/allocstr.c -> unchanged NetapipBufferAllocate -> native NetApiBufferAllocate;redirector vrnetapi.c/vrremote.c -> native NetApiBufferFree;worker DLL link netapi32.lib",
+  "counter_review": "Do not infer original algorithms broken or assume native NetAPI buffers use original LocalAlloc. Header omission is part of the public allocator package boundary;no same-complexity shim added. Original file has no condition group enclosing removed public APIs,so do not invent #if/#error wrappers. Existing wrapper remains exact.",
+  "reused_receipt": "batch-p181-checkpoint.json"
+}

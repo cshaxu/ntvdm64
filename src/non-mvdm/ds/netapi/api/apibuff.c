@@ -45,18 +45,16 @@ Revision History:
         RAID 9258: return non-null pointer when allocating zero bytes.
 
 --*/
-#line 48
 
-// DIVERGENCE(OPENNT-HOST-013): true subset of original
-// ds/netapi/api/apibuff.c.  The omitted public buffer APIs require the wider
-// original RPC/MIDL product shell and are not reached by the selected
-// Redirector/NetLib closure.  NetapipBufferAllocate below is copied unchanged
-// and preserves its original public-NetAPI failure contract.
-#line 50
+// These must be included first:
 
-#include <windef.h>
-#include <lmcons.h>
-#include <lmapibuf.h>
+#include <windef.h>     // IN, LPVOID, etc.
+#include <lmcons.h>     // NET_API_FUNCTION, etc.
+#line 55
+// These may be included in any order:
+
+#line 58
+#include <lmapibuf.h>   // My prototypes.
 
 #line 231
 NET_API_STATUS NET_API_FUNCTION
