@@ -93,7 +93,8 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
 
         case FUN_FINALUSERINIT:
             {
-#line 96
+#line 95
+                extern DWORD   gpsi;
                 PUSERCLIENTGLOBALS pfinit16;
                 WORD UNALIGNED *pwMaxDWPMsg;
                 PBYTE pDWPBits;
@@ -128,9 +129,7 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 if (pfinit16->lpCsrFlag) {
                     BYTE **lpT;
                     GETVDMPTR(pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
-                    /* DIVERGENCE(MVDM-HOST-DIV-300): USER16 reads/writes
-                     * this original flag through the worker's guest domain. */
-                    *lpT = (LPSTR)mvdm_softpc_wow_page_domain_guest_csr_flag();
+                    *lpT = (LPSTR)mvdm_softpc_wow_page_domain_guest_csr_flag(); /* DIVERGENCE(MVDM-HOST-DIV-300): guest byte. */
 #line 130
                     FLUSHVDMCODEPTR((ULONG)pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
                     FREEVDMPTR(lpT);

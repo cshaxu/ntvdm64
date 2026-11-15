@@ -1184,3 +1184,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P159 wucomm review](r1844-r1845-wucomm-review.json): selected original implementation confirmed;DEBUG exclusions retained;header original CRLF restored.
 
 - [P160 dialog review](r1846-r1854-wudlg-review.json), [line proof](batch-p160-line-check.json), [delivery checkpoint](batch-p160-checkpoint.json): original-entry controls and minimal call-owned cleanup.
+
+- [P161 USER initialization review](r1855-r1859-wuman-review.json), [checkpoint](batch-p161-checkpoint.json): original declaration/format restoration and bounded guest address publication evidence.

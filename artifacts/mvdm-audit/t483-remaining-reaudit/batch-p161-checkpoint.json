@@ -1,0 +1,18 @@
+{
+  "status": "source/ABI and final preprocessing verified;declaration/comment/CRLF only;P160 cached/full/published artifacts reused;Git accompanies receipt",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "sha256": "f7850d8b710d31df0dea3f01fce697e3abf42fba55037380ae70915cca7104c8"
+    }
+  ],
+  "mirror_delta": -3,
+  "published_package": "286d49d6-4333-4382-8cf3-4e61b6da91b4",
+  "line_checks": 136,
+  "line_mismatches": 0,
+  "new_runtime_tests": false,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "runner_notes": [
+    "First preparation asserted wrong CRLF assumption without editing;second launcher used cmd-incompatible slash path. Both failed before MSVC. Corrected absolute path and final original-spacing source passed."
+  ]
+}
