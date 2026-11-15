@@ -1242,3 +1242,5 @@ P187: [Original server API restoration](batch-p187-checkpoint.json):1067->190(-8
 P188: [NetService original-body confirmation](batch-p188-checkpoint.json):4 unchanged;one evidenced header decision;no source change;P187 product evidence reused.
 
 P189: [NetUse byte/line confirmation](batch-p189-checkpoint.json):ordinary2 unchanged,raw3->2;redundant#line removed;one header decision;P187 evidence reused.
+
+P190: [NetWksta original-byte confirmation](batch-p190-checkpoint.json):2 unchanged;one header decision;no source change;P187 product evidence reused.

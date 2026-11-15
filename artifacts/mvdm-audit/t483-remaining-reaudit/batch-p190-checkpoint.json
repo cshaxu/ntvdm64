@@ -1,0 +1,34 @@
+{
+  "proof": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+    "sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5",
+    "original_sha256": "8e0dbc5c1759aef57765c63ca8942550370bb260bfcd67d97f8b2e67281cd664",
+    "mirror_added": 1,
+    "mirror_deleted": 1,
+    "source_lines": 796,
+    "msvc_selected_lines": 490,
+    "mismatches": [],
+    "preprocessing_identical": true,
+    "excluded": 0,
+    "source_unchanged": true,
+    "original_header_exit": 2,
+    "original_header_failure": "xactsrvp.h(63): C1083 smb.h absent",
+    "current_preprocessing_exit": 0,
+    "original_body_preprocessing_exit": 0
+  },
+  "status": "original workstation bodies byte-identical except header;qualified decision",
+  "mirror_before": 2,
+  "mirror_after": 2,
+  "mirror_delta": 0,
+  "source_files": 0,
+  "files": [],
+  "reviewed_source": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+    "sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5"
+  },
+  "call_chain": "VrNetWkstaGetInfo in vrnetapi.c2286 -> original XsNetWkstaGetInfo -> public NetWkstaGetInfo and original RAP conversion;SetInfo/SetUID original bodies also retained without new dispatch.",
+  "necessity": "Original aggregate header restored alone fails C1083 smb.h at xactsrvp.h63. P186 isolated original SMB declaration closure additionally reaches absent ntmsv1_0.h. The one-line boundary replaces aggregate declarations, not function bodies.",
+  "counter_review": "All original file bytes except one include already retained;no excluded or line directives. Actual selected headers do not compile original aggregate:independent original-header control fails,not merely an assertion of current adapter dependence. Owner may admit wider original header closure.",
+  "verification": "Actual supported /O2 flags:current/original-body preprocessing identical;490 selected lines and796 original nonblank lines preserved. Original-header compilation fails C1083 smb.h. No product change;P187 compiled/published/tested package reused.",
+  "delivery": "P190 governance/commit/push accompany receipt"
+}

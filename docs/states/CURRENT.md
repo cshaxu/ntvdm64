@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2012 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1311 qualified pending;708 unreviewed. Files275/365 audited,90 remain.
+2013 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1312 qualified pending;707 unreviewed. Files276/365 audited,89 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -48,8 +48,6 @@ established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P176 R1957-R1958 restores original environment symbols/includes and removes5 remapping macros;mirror14->11(-3),ordinary diff0.449 MSVC lines match;final verification recorded below.
 
 ## Current Technical Baseline
 
@@ -197,3 +195,5 @@ P187 apisrv1067->190(-877):original linkable bodies and error semantics restored
 P188 apisvc4 unchanged:all original selected bodies retained;785 source/518 actual MSVC lines match;1#error correct. Original aggregate include C1083 smb.h;one boundary decision. No product changes;P187 verification/publication reused;Git accompanies receipt.
 
 P189 apiuse ordinary2 unchanged/raw3->2:redundant#line38 removed;all original bytes except include match.335 actual MSVC lines/tokens unchanged;original header C1083 smb.h;one decision. P187 product verification/publication reused;Git accompanies receipt.
+
+P190 apiwksta2 unchanged:original bytes except include match;796 content/490 actual MSVC lines preserved. Original header C1083 smb.h;one decision. No product changes;P187 evidence reused;Git accompanies receipt.
