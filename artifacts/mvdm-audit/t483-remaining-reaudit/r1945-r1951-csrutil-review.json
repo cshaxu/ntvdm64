@@ -1,0 +1,144 @@
+{
+  "path": "src/non-mvdm/base/ntdll/csrutil.c",
+  "baseline": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/ntdll/csrutil.c",
+  "original_sha256": "7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a",
+  "before": {
+    "added": 14,
+    "deleted": 636,
+    "total": 650
+  },
+  "after": {
+    "added": 7,
+    "deleted": 615,
+    "total": 622
+  },
+  "mirror_delta": -28,
+  "scope": "Original-relative added+deleted lines excluding diagnostic #line; retained function omissions counted,not code-size savings",
+  "points": [
+    {
+      "id": "T483-R1945",
+      "before": 270,
+      "after": 245,
+      "evidence": "Original private csrdll.h is not in admitted build closure (C1083). Its CSR globals, shared port section, remote pointer rebasing and NtRequestWaitReplyPort belong to excluded private LPC/CSRSS boundary. Original file header restored; local heap facade remains.",
+      "decision": "minimized remaining subset/ABI difference pending owner;no executable change"
+    },
+    {
+      "id": "T483-R1946",
+      "before": 3,
+      "after": 2,
+      "evidence": "x64 actual ABI control: original Size reserve formula with native aligned allocations puts 5 of 9 one-byte allocations beyond CaptureBuffer.Length. Final and x86 controls pass.",
+      "decision": "minimized remaining subset/ABI difference pending owner;no executable change"
+    },
+    {
+      "id": "T483-R1947",
+      "before": 3,
+      "after": 2,
+      "evidence": "Capture header is process-local pointer metadata on x64,not serialized wire. Original PULONG cast disagrees with pointer-width table carrier; complete original ULONG table would truncate native pointer identities as independently proved by R1950. Retain matching cast without repetitive comment.",
+      "decision": "minimized remaining subset/ABI difference pending owner;no executable change"
+    },
+    {
+      "id": "T483-R1948",
+      "before": 2,
+      "after": 2,
+      "evidence": "Original CountPointers*sizeof(ULONG) zeros only half the native pointer-width table. Original allocator contract explicitly initializes every offset entry; retain width-correct entire-table initialization.",
+      "decision": "minimized remaining subset/ABI difference pending owner;no executable change"
+    },
+    {
+      "id": "T483-R1949",
+      "before": 3,
+      "after": 2,
+      "evidence": "Original 4-byte length rounding places STARTUPINFOA after a one-byte string at address misaligned to actual x64 __alignof(STARTUPINFOA)=8; current and x86 controls pass.",
+      "decision": "minimized remaining subset/ABI difference pending owner;no executable change"
+    },
+    {
+      "id": "T483-R1950",
+      "before": 2,
+      "after": 2,
+      "evidence": "Actual x64 product /we4311 compile rejects original (ULONG)Pointer at original493. Values are native local pointer-slot addresses; not guest/wire identifiers. x86 original control passes.",
+      "decision": "minimized remaining subset/ABI difference pending owner;no executable change"
+    },
+    {
+      "id": "T483-R1951",
+      "before": 367,
+      "after": 367,
+      "evidence": "Restoring omitted original tail on x64 fails at original562/788/795/859 pointer narrowing and missing CsrNtSysInfo/RtlRaiseStatus dependency. None of these extra functions is required by three-function BaseClient capture closure; importing private CSR initialization/probe runtime is outside admitted boundary.",
+      "decision": "minimized remaining subset/ABI difference pending owner;no executable change"
+    }
+  ],
+  "chain": [
+    "Run16 local CsrPortHeap HeapCreate/HeapDestroy",
+    "Original BaseClient VDM captures strings then typed STARTUPINFOA",
+    "Local capture allocator retains original algorithm;native-width pointer metadata never enters broker wire",
+    "CsrClientCallServer facade binds OpenNtBaseClientCallServer;RPC codecs marshal explicit fields,not private CSR pointer rebasing"
+  ],
+  "counter_review": "Original x86 semantics remain valid. Native64 ABI and excluded CSR transport boundary are distinct reasons;project-local dependency alone is not the basis for preserving them. No claim these original routines contain an x86 defect. Extra unused helpers are not imported merely to reduce numeric diff.",
+  "source_lines": {
+    "retained_nonblank": 174,
+    "mismatches": []
+  },
+  "preprocessing": [
+    {
+      "architecture": "x86",
+      "preprocessed_tokens_equal": true,
+      "sha256": "9cf0d11624fdf4e7fb9815d45252d9a109bfab368777cc22c51639cde3018336"
+    },
+    {
+      "architecture": "x64",
+      "preprocessed_tokens_equal": true,
+      "sha256": "eea04e94bbce4aa33d9d279dfc7841da2c8e902d4edc610b84e0df233da7d4a7"
+    }
+  ],
+  "controls": [
+    {
+      "variant": "fixture",
+      "architecture": "x86",
+      "compile": 0
+    },
+    {
+      "run": 0,
+      "variant": "final",
+      "architecture": "x86",
+      "compile": 0
+    },
+    {
+      "run": 0,
+      "variant": "align-original",
+      "architecture": "x86",
+      "compile": 0
+    },
+    {
+      "run": 0,
+      "variant": "pointer-original",
+      "architecture": "x86",
+      "compile": 0
+    },
+    {
+      "variant": "fixture",
+      "architecture": "x64",
+      "compile": 0
+    },
+    {
+      "run": 0,
+      "variant": "final",
+      "architecture": "x64",
+      "compile": 0
+    },
+    {
+      "run": 1,
+      "variant": "align-original",
+      "architecture": "x64",
+      "compile": 0
+    },
+    {
+      "variant": "pointer-original",
+      "architecture": "x64",
+      "compile": 2
+    }
+  ],
+  "size_control": "bits=64 errors=5 startup-alignment=8",
+  "pointer_control": "csrutil.pointer-original.c\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntlpcapi.h(73): warning C4201: nonstandard extension used: nameless struct/union\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntlpcapi.h(78): warning C4201: nonstandard extension used: nameless struct/union\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrmsg.h(125): warning C4201: nonstandard extension used: nameless struct/union\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrmsg.h(126): warning C4201: nonstandard extension used: nameless struct/union\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.pointer-original.c(493): error C4311: 'type cast': pointer truncation from 'PVOID *' to 'ULONG'\n",
+  "closure_tail_control": "csrutil.original-tail.c\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntlpcapi.h(73): warning C4201: nonstandard extension used: nameless struct/union\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntlpcapi.h(78): warning C4201: nonstandard extension used: nameless struct/union\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrmsg.h(125): warning C4201: nonstandard extension used: nameless struct/union\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrmsg.h(126): warning C4201: nonstandard extension used: nameless struct/union\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.original-tail.c(562): error C4311: 'type cast': pointer truncation from 'PVOID *' to 'ULONG'\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.original-tail.c(788): error C4311: 'type cast': pointer truncation from 'volatile CHAR *' to 'ULONG'\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.original-tail.c(789): error C4013: 'RtlRaiseStatus' undefined; assuming extern returning int\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.original-tail.c(795): error C4311: 'type cast': pointer truncation from 'volatile CHAR *' to 'ULONG'\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.original-tail.c(795): error C2065: 'CsrNtSysInfo': undeclared identifier\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.original-tail.c(795): error C2224: left of '.MaximumUserModeAddress' must have struct/union type\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p174\\csrutil.original-tail.c(859): error C4311: 'type cast': pointer truncation from 'volatile CHAR *' to 'ULONG'\n",
+  "fixture_source": "#include <base_capture.h>\n#include <stdio.h>\nPVOID CsrPortHeap;\nint __cdecl main(void) {\n unsigned errors=0,i; PVOID values[9]; PCSR_CAPTURE_HEADER p;\n CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return 2;\n p=CsrAllocateCaptureBuffer(9,0,9);if(!p)return 3;\n for(i=0;i<9;++i){ULONG n=CsrAllocateMessagePointer(p,1,&values[i]);if((PCHAR)values[i]+n>(PCHAR)p+p->Length)++errors;}\n CsrFreeCaptureBuffer(p);\n p=CsrAllocateCaptureBuffer(2,0,1+sizeof(STARTUPINFOA));if(!p)return 4;\n CsrAllocateMessagePointer(p,1,&values[0]);CsrAllocateMessagePointer(p,sizeof(STARTUPINFOA),&values[1]);\n if((ULONG_PTR)values[1]%__alignof(STARTUPINFOA))++errors;\n if(p->MessagePointerOffsets[0]!=(ULONG_PTR)&values[0])++errors;\n CsrFreeCaptureBuffer(p);HeapDestroy(CsrPortHeap);\n printf(\"bits=%u errors=%u startup-alignment=%u\\n\",(unsigned)sizeof(void*)*8,errors,(unsigned)__alignof(STARTUPINFOA));return errors?1:0;\n}\n",
+  "evidence_root": "build\\t483-s5-p174",
+  "delivery": "format/comment/line-only;reuse P173 published package and Full19;Git accompanies receipt"
+}

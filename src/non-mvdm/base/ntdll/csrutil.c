@@ -1,8 +1,25 @@
-/* Copyright (c) 1989  Microsoft Corporation
- * DIVERGENCE(OPENNT-HOST-031): true subset containing only the three local
- * capture-memory routines required by BaseClient. Port connection, LPC/CSR
- * transport, pointer rebasing and every other runtime function are excluded.
- * The owning process supplies a local capture heap; no shared port section. */
+/*++
+
+Copyright (c) 1989  Microsoft Corporation
+
+Module Name:
+
+    dllutil.c
+
+Abstract:
+
+    This module contains utility procedures for the Windows Client DLL
+
+
+Author:
+
+    Steve Wood (stevewo) 8-Oct-1990
+
+Revision History:
+
+--*/
+
+/* DIVERGENCE(OPENNT-HOST-031): local capture heap; private CSR transport excluded. */
 #include <base_capture.h>
 #line 265
 
@@ -66,7 +83,7 @@ Return Value:
         return NULL;
         }
     Size += sizeof( CSR_CAPTURE_HEADER ) + (CountPointers * sizeof( PVOID ));
-    /* DIVERGENCE(OPENNT-HOST-066): native pointer alignment; x86 remains4. */
+#line 326
     Size = (Size + ((sizeof(PVOID)-1) * (CountPointers+1))) & ~(sizeof(PVOID)-1);
 #line 327
 
@@ -102,7 +119,7 @@ Return Value:
     //
 
     if (CountPointers != 0) {
-        /* DIVERGENCE(OPENNT-HOST-066): retain complete local pointer values. */
+#line 360
         CaptureBuffer->MessagePointerOffsets = (PULONG_PTR)(CaptureBuffer + 1);
 #line 361
 
@@ -219,7 +236,7 @@ Return Value:
             return 0;
             }
 
-        /* DIVERGENCE(OPENNT-HOST-066): x86's original four-byte result remains. */
+#line 475
         Length = (Length + sizeof(PVOID)-1) & ~(sizeof(PVOID)-1);
 #line 476
 
@@ -239,7 +256,7 @@ Return Value:
     //
 
     CaptureBuffer->MessagePointerOffsets[ CaptureBuffer->CountMessagePointers++ ] =
-        (ULONG_PTR)Pointer; /* DIVERGENCE(OPENNT-HOST-066): local, never wire. */
+        (ULONG_PTR)Pointer;
 
     //
     // Returned the actual length allocated.

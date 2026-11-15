@@ -1,0 +1,26 @@
+{
+  "status": "format/comment/line-only;preprocessed identity x86/x64;174 retained logical lines match;ABI controls passed;reuse P173 cached/publish/Full19",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/ntdll/csrutil.c",
+      "sha256": "75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a"
+    }
+  ],
+  "mirror_delta": -28,
+  "reused_receipt": "batch-p173-checkpoint.json",
+  "preprocessed_identity": [
+    {
+      "architecture": "x86",
+      "preprocessed_tokens_equal": true,
+      "sha256": "9cf0d11624fdf4e7fb9815d45252d9a109bfab368777cc22c51639cde3018336"
+    },
+    {
+      "architecture": "x64",
+      "preprocessed_tokens_equal": true,
+      "sha256": "eea04e94bbce4aa33d9d279dfc7841da2c8e902d4edc610b84e0df233da7d4a7"
+    }
+  ],
+  "remaining_points": 7,
+  "note": "No new full build or publication claimed;no executable/binding change"
+}

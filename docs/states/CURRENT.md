@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1944 reviewed:672 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1264 qualified pending;776 unreviewed. Files259/365 audited,106 remain.
+1951 reviewed:672 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1271 qualified pending;769 unreviewed. Files260/365 audited,105 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -86,6 +86,8 @@ P171 XMS block53->32(-21);MSVC97/0,cached,publish11x2,XMS/observer focused,origi
 P172 xmsdisp selected original source confirmed;CRLF restored,51 logical lines match;P171 product evidence reused.
 
 P173 xmsmemr original mover restored;mirror30->4(-26),48 MSVC lines match. Cached,publish11x2,focused,real final guest relocation,Full19 and governance passed;Git accompanies receipt.
+
+P174 csrutil650->622(-28):original header/comment cleanup,174 retained lines match,x86/x64 preprocessing identical. Native ABI controls qualify7 residuals;P173 package verification reused.
 
 ## Current Technical Baseline
 
