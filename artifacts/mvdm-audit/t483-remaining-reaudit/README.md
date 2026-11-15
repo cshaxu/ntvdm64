@@ -1224,3 +1224,5 @@ P178: [Time package boundary and cleanup](batch-p178-checkpoint.json): five poin
 P179: [BaseClient VDM boundary review](batch-p179-checkpoint.json):13 points,whole-file891->870;12 residual decisions,one confirmed exclusion;P176 product verification reused.
 
 P180: [BaseSrv header review](batch-p180-checkpoint.json):7->4;two qualified residual boundary decisions;actual dispatch controls and original line check;P176 product evidence reused.
+
+P181: [BaseSrv VDM whole-file review](batch-p181-checkpoint.json):93->84;notification/ABI controls;line proof;cached,publish and final regression.

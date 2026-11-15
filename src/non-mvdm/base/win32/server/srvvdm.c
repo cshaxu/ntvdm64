@@ -26,11 +26,6 @@ Revision History:
 
 #include "basesrv.h"
 
-/* DIVERGENCE(OPENNT-HOST-068): PID/TID and wait-receipt numeric carriers
- * convert through ULONG_PTR on both native widths. Parent bit-zero tagging
- * masks that carrier without narrowing a native pointer. This TU's native
- * build binds NULL to integer zero; original scheduling and cleanup remain. */
-
 //
 // Initialize to an unused LUID value.
 // Nobody will ever be assigned this value, so it shouldn't
@@ -1277,9 +1272,7 @@ BaseSrvCheckDOS(
 }
 
 
-/* DIVERGENCE(OPENNT-HOST-031): CheckDOS readiness alone does not prove a
- * pending GetNextVDMCommand wait.  The original record and lock remain the
- * sole state owners. */
+/* DIVERGENCE(OPENNT-HOST-031): query the original command-wait event. */
 BOOL
 BaseSrvDOSWorkerWaitPending(
     IN HANDLE ConsoleHandle,
@@ -1291,8 +1284,6 @@ BaseSrvDOSWorkerWaitPending(
     EVENT_BASIC_INFORMATION EventInformation;
     BOOL Pending = FALSE;
 
-    if (!ConsoleRecordExists)
-        return FALSE;
     *ConsoleRecordExists = FALSE;
 
     Status = RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
@@ -2478,6 +2469,7 @@ BaseSrvGetWOWTaskId(
 #ifdef NOT_NEEDED
 #line 2427
 #error DIVERGENCE OPENNT-HOST-131: NOT_NEEDED branch is not selected; see mirror register.
+#line 2452
 #endif
 #line 2453
 
@@ -2635,6 +2627,7 @@ BaseSrvUpdateVDMSequenceNumber (
 #if DEVL
 #line 2604
 #error Unsupported excluded original configuration
+#line 2605
 #endif
 #line 2606
             return;
@@ -2655,6 +2648,7 @@ BaseSrvUpdateVDMSequenceNumber (
 #if DEVL
 #line 2622
 #error Unsupported excluded original configuration
+#line 2623
 #endif
 #line 2624
             RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );

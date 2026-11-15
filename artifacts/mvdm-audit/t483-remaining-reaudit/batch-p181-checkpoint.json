@@ -1,0 +1,546 @@
+{
+  "status": "whole-file review and final cached build/publication/focused/service/Full verification complete;Git accompanies receipt",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "sha256": "f3cb247cbefe3ebd6fd1bc7864ab6f8ae3246988806d57e2f2cea4e0de694b88"
+    }
+  ],
+  "mirror_before": {
+    "added": 58,
+    "deleted": 35,
+    "total": 93
+  },
+  "mirror_after": {
+    "added": 49,
+    "deleted": 35,
+    "total": 84
+  },
+  "line_check": {
+    "checked": 2317,
+    "mismatches": []
+  },
+  "notification_controls": {
+    "scope": "R1982 R1983 R1990 R1991 notification control; not whole-file completion or product delivery",
+    "product_modified": false,
+    "cases": [
+      {
+        "case": "reenter-before-return",
+        "current": "PASS",
+        "original_notification_wait": 258,
+        "original_notification_exit": "0x00000001"
+      },
+      {
+        "case": "reenter-after-return",
+        "current": "PASS",
+        "original_notification_wait": 0,
+        "original_notification_exit": "0x00000000"
+      },
+      {
+        "case": "reenter-nested-return",
+        "current": "PASS",
+        "original_notification_wait": 258,
+        "original_notification_exit": "0x00000001"
+      },
+      {
+        "case": "reenter-pending-command",
+        "current": "PASS",
+        "original_notification_wait": 258,
+        "original_notification_exit": "0x00000001"
+      },
+      {
+        "case": "reenter-before-increment",
+        "current": "PASS",
+        "original_notification_wait": 0,
+        "original_notification_exit": "0x00000000"
+      }
+    ],
+    "negative_control": "Restore original no-command return predicate and omit pending clear/init/set in a frozen copy; retain other current adaptations and unchanged fixture. Map proves both tested functions come from the control object.",
+    "source_chain": [
+      "Original cmdExec32 creates cmdCreateProcess thread before GetNextVDMCommand wait",
+      "Original cmdCreateProcess increments, launches/waits child, decrements from that separate thread",
+      "BaseSrvSetReenterCount decrement signals existing event only",
+      "BaseSrvGetNextVDMCommand no-command path creates or resets event; early completion is lost without a separate record-local notification"
+    ],
+    "limits": [
+      "Deterministic service integration proves an eligible ordering, not frequency in interactive use",
+      "This is not an unmodified NT4 system reproduction",
+      "R1987 readiness query and complete-file minimization still require whole-chain disposition before delivery"
+    ],
+    "inputs": {
+      "srvvdm.before.c": "7b37eb1ac88922a8ba0ff6106cb71f8d31697c04db95a38fef61f98140985cac",
+      "srvvdm.original-notification.c": "ab4d6b64cfcd8abb5dbd6155958f5d06052137a5b325edac4556aa49179a523d",
+      "original-notification.exe": "cf9cd3b6cc0314a720b9e879a3b4ae77b568444eca266c380340ee03ff7fa6a4",
+      "base_service_reservation_test.c": "211249e3086cd56c79e725ba5ef3b60a0ca437d9c2f7dcf22d72d2be509b7a5c"
+    }
+  },
+  "abi_control_exit": 2,
+  "abi_errors": [
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(629): error C4312: 'type cast': conversion from 'DWORD' to 'HANDLE' of greater size",
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(845): error C4311: 'type cast': pointer truncation from 'HANDLE' to 'DWORD'",
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(846): error C4311: 'type cast': pointer truncation from 'HANDLE' to 'DWORD'",
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(862): error C4312: 'type cast': conversion from 'DWORD' to 'HANDLE' of greater size",
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(1511): error C4311: 'type cast': pointer truncation from 'HANDLE' to 'DWORD'",
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(1512): error C4311: 'type cast': pointer truncation from 'HANDLE' to 'DWORD'",
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(1832): error C4311: 'type cast': pointer truncation from 'HANDLE' to 'DWORD'",
+    "O:/repos.hobby/ntvdm64/build/t483-s5-p181/srvvdm.original-casts.c(1832): error C4312: 'type cast': conversion from 'DWORD' to 'HANDLE' of greater size"
+  ],
+  "reduction": "Remove repeated ULONG_PTR explanation and helper explanation; remove redundant ConsoleRecordExists null guard. Every production/test caller passes the address of a local BOOL. No interface or owner change. Preserve event query, lock, record and failure behavior for all callers.",
+  "counter_review": "Do not replace event-state query by VDM_READY: original CheckDOS sets pending-command state and signals only an existing event, while a resident COMMAND need not be in GetNext wait. Query reads original state without new state machine. Null-output input is not part of any internal call contract. Original NotificationEvent is not consumed by the query.",
+  "excluded_branches": "NOT_NEEDED and two DEVL bodies remain #error;original endif logical lines2452/2605/2623 restored",
+  "source_eol": "CRLF restored to original",
+  "mirror_delta": -9,
+  "verification": {
+    "cached": 0,
+    "publish": {
+      "status": "published",
+      "package": "08431d90-1f10-49d0-b505-574e4a79f22f",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    },
+    "focused": 0,
+    "service_suite": {
+      "Concurrency": 4,
+      "ElapsedMs": 9449,
+      "ObserverHash": "EB48ED17FCBC1F56C418752E7592EF6C186BA793E0780C3AF2A43AF817CF5312",
+      "FixtureHash": "F6440C8EAE97FB05F3F5FE5CC21DE9C752D9F6A5A38000C3258DB58EC6D48907",
+      "Cases": [
+        {
+          "Case": "frontend-chains",
+          "ElapsedMs": 961,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-instances",
+          "ElapsedMs": 839,
+          "Result": "PASS"
+        },
+        {
+          "Case": "parent-resume-origin",
+          "ElapsedMs": 838,
+          "Result": "PASS"
+        },
+        {
+          "Case": "io-authority",
+          "ElapsedMs": 853,
+          "Result": "PASS"
+        },
+        {
+          "Case": "route-cancellation",
+          "ElapsedMs": 621,
+          "Result": "PASS"
+        },
+        {
+          "Case": "prepared-native-root-loss",
+          "ElapsedMs": 740,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-unclaimed-stop",
+          "ElapsedMs": 866,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-unclaimed-reconnect",
+          "ElapsedMs": 857,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-delegated",
+          "ElapsedMs": 798,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-wait",
+          "ElapsedMs": 982,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-wait-root-loss",
+          "ElapsedMs": 980,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-wait-request-loss",
+          "ElapsedMs": 974,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-wait-worker-loss",
+          "ElapsedMs": 692,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-rundown",
+          "ElapsedMs": 762,
+          "Result": "PASS"
+        },
+        {
+          "Case": "reenter-before-return",
+          "ElapsedMs": 738,
+          "Result": "PASS"
+        },
+        {
+          "Case": "reenter-after-return",
+          "ElapsedMs": 879,
+          "Result": "PASS"
+        },
+        {
+          "Case": "reenter-nested-return",
+          "ElapsedMs": 834,
+          "Result": "PASS"
+        },
+        {
+          "Case": "reenter-pending-command",
+          "ElapsedMs": 848,
+          "Result": "PASS"
+        },
+        {
+          "Case": "reenter-before-increment",
+          "ElapsedMs": 1050,
+          "Result": "PASS"
+        },
+        {
+          "Case": "launcher-completed-rundown",
+          "ElapsedMs": 1755,
+          "Result": "PASS"
+        },
+        {
+          "Case": "completed-worker-loss",
+          "ElapsedMs": 1611,
+          "Result": "PASS"
+        },
+        {
+          "Case": "wow-start-late-query",
+          "ElapsedMs": 1379,
+          "Result": "PASS"
+        },
+        {
+          "Case": "default",
+          "ElapsedMs": 1433,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-authority",
+          "ElapsedMs": 718,
+          "Result": "PASS"
+        },
+        {
+          "Case": "shared-worker-residency",
+          "ElapsedMs": 718,
+          "Result": "PASS"
+        },
+        {
+          "Case": "native-command",
+          "ElapsedMs": 647,
+          "Result": "PASS"
+        },
+        {
+          "Case": "native-worker",
+          "ElapsedMs": 956,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-gui",
+          "ElapsedMs": 829,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-frontend-close",
+          "ElapsedMs": 829,
+          "Result": "PASS"
+        },
+        {
+          "Case": "frontend-completion-barrier",
+          "ElapsedMs": 728,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-frontend-close-order",
+          "ElapsedMs": 674,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-frontend-close-root-loss",
+          "ElapsedMs": 681,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-frontend-prepare-pending",
+          "ElapsedMs": 726,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-worker-then-console",
+          "ElapsedMs": 728,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-console-then-worker",
+          "ElapsedMs": 710,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-late-worker-close",
+          "ElapsedMs": 780,
+          "Result": "PASS"
+        },
+        {
+          "Case": "worker-exit-then-console",
+          "ElapsedMs": 810,
+          "Result": "PASS"
+        },
+        {
+          "Case": "console-then-worker-exit",
+          "ElapsedMs": 821,
+          "Result": "PASS"
+        },
+        {
+          "Case": "worker-console-exit",
+          "ElapsedMs": 806,
+          "Result": "PASS"
+        },
+        {
+          "Case": "preparing-worker-exit",
+          "ElapsedMs": 749,
+          "Result": "PASS"
+        },
+        {
+          "Case": "management-terminate",
+          "ElapsedMs": 704,
+          "Result": "PASS"
+        },
+        {
+          "Case": "unfinished-worker-exit",
+          "ElapsedMs": 722,
+          "Result": "PASS"
+        }
+      ]
+    },
+    "full": 0,
+    "isolation_identity": {
+      "images": [
+        {
+          "publishedSha256": "A40ED5E52265EB9361A098D7568F9C118544C21AFCDFAA4D3039B65D26D70925",
+          "restoredSha256": "A40ED5E52265EB9361A098D7568F9C118544C21AFCDFAA4D3039B65D26D70925",
+          "name": "VCDEX.DLL",
+          "identical": true
+        },
+        {
+          "publishedSha256": "2360D8DE9CB46D0C64AD763CF27A965EFF63B770CA77D712B2DDACE7E00F73A4",
+          "restoredSha256": "2360D8DE9CB46D0C64AD763CF27A965EFF63B770CA77D712B2DDACE7E00F73A4",
+          "name": "run16.exe",
+          "identical": true
+        },
+        {
+          "publishedSha256": "3A8ECCA9F2FB00DA43A946DB516AB3841893375CD333F649AC77CE2C283BE4F8",
+          "restoredSha256": "3A8ECCA9F2FB00DA43A946DB516AB3841893375CD333F649AC77CE2C283BE4F8",
+          "name": "ntsrv.exe",
+          "identical": true
+        },
+        {
+          "publishedSha256": "5EBFB9AD3F0CF877E37DE6C4B2C1BA76AEECECE5DB18C612D08F937C329BFB90",
+          "restoredSha256": "5EBFB9AD3F0CF877E37DE6C4B2C1BA76AEECECE5DB18C612D08F937C329BFB90",
+          "name": "ntcon.exe",
+          "identical": true
+        },
+        {
+          "publishedSha256": "822D78647545E158476C5FA808FCB0F361F67619E3AA1B4CD5A84427F54EC3CE",
+          "restoredSha256": "822D78647545E158476C5FA808FCB0F361F67619E3AA1B4CD5A84427F54EC3CE",
+          "name": "ntvdm.exe",
+          "identical": true
+        },
+        {
+          "publishedSha256": "927F2E078C1A904509CB7A2B3E9C907C98385E4CFE8E3AFE7F1392697321B84B",
+          "restoredSha256": "927F2E078C1A904509CB7A2B3E9C907C98385E4CFE8E3AFE7F1392697321B84B",
+          "name": "ntvwm.exe",
+          "identical": true
+        },
+        {
+          "publishedSha256": "EA4F64B14A03E98DEC4E92EA54D3DFB369783389A69E07B963B5C516AAF2061D",
+          "restoredSha256": "EA4F64B14A03E98DEC4E92EA54D3DFB369783389A69E07B963B5C516AAF2061D",
+          "name": "ntmon.exe",
+          "identical": true
+        },
+        {
+          "publishedSha256": "70A320DC4F4496055252063A7970A24FE956EB191596622D456CB518E731ADE8",
+          "restoredSha256": "70A320DC4F4496055252063A7970A24FE956EB191596622D456CB518E731ADE8",
+          "name": "WOW32.DLL",
+          "identical": true
+        },
+        {
+          "publishedSha256": "A62DA173A7000A869595825E74D0A3E8796BAE159C6024520D697EE7D540D1AA",
+          "restoredSha256": "A62DA173A7000A869595825E74D0A3E8796BAE159C6024520D697EE7D540D1AA",
+          "name": "VDMREDIR.DLL",
+          "identical": true
+        },
+        {
+          "publishedSha256": "4DDF06FFF9A59487E246927C7988BA4C9E520CE1CF25CCA1C7633DFD3F5F3FC2",
+          "restoredSha256": "4DDF06FFF9A59487E246927C7988BA4C9E520CE1CF25CCA1C7633DFD3F5F3FC2",
+          "name": "nthook32.dll",
+          "identical": true
+        },
+        {
+          "publishedSha256": "3B91EEAB4C3AEB503105C2DFB812AD6744A679A0391D32C1DAED4D99C24C6B03",
+          "restoredSha256": "3B91EEAB4C3AEB503105C2DFB812AD6744A679A0391D32C1DAED4D99C24C6B03",
+          "name": "nthook64.dll",
+          "identical": true
+        }
+      ],
+      "testPackage": "a0efb4f8-bd34-484a-8cd0-bd052682af62",
+      "publishedPackage": "08431d90-1f10-49d0-b505-574e4a79f22f"
+    },
+    "full_timings": {
+      "Suite": "Full",
+      "ElapsedMs": 445995,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6504,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 2144,
+          "CleanupMs": 570,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 20268,
+          "CleanupMs": 529,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15289,
+          "CleanupMs": 363,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 14359,
+          "CleanupMs": 538,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 424,
+          "CleanupMs": 487,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 67531,
+          "CleanupMs": 460,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 50408,
+          "CleanupMs": 514,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 49886,
+          "CleanupMs": 574,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15754,
+          "CleanupMs": 490,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11023,
+          "CleanupMs": 467,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 72680,
+          "CleanupMs": 482,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12445,
+          "CleanupMs": 532,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28715,
+          "CleanupMs": 484,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30511,
+          "CleanupMs": 507,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 6459,
+          "CleanupMs": 585,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 8250,
+          "CleanupMs": 527,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10744,
+          "CleanupMs": 525,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4361,
+          "CleanupMs": 461,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6877,
+          "CleanupMs": 501,
+          "Passed": true
+        }
+      ]
+    },
+    "explicit_skip": "DOS4GW/Nesticle external fixture absent;not a pass",
+    "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924"
+  },
+  "reproduction": {
+    "fixture_source": "test/adapter-basesrv/base_service_reservation_test.c",
+    "fixture_target": "basesrv-service-reservation-test.exe",
+    "build_root": "build/.ninja/msvc-x64-release/service",
+    "runner": "test/adapter-basesrv/verify-service-fixtures.ps1",
+    "negative_control": "Keep current ABI and other adaptations;replace pending-aware no-command predicate with original RETURN_ON_NO_COMMAND && ASKING_FOR_SECOND_TIME;remove pending init/set/clear;link object ahead of opennt-base-server.lib and verify map owner;execute the five reenter modes listed in notification_controls",
+    "abi_control": "Restore seven original numeric HANDLE casts in srvvdm.c;compile using current service srvvdm.obj cflags with /we4311 /we4312. Captured errors identify all sites."
+  },
+  "point_conclusions": {
+    "1980": "Removed duplicate ABI explanation;required casts are separately evidenced below.",
+    "1981": "Retained all three excluded bodies as #error and restored original endif2452/2605/2623;2317 nonblank retained original logical lines match.",
+    "1982": "Actual original-notification control loses wake in early/nested/queued ordering;current five modes pass. Original cmdExec32 thread creation precedes GetNext wait and child thread decrements asynchronously.",
+    "1983": "The same control and subsequent-wait assertions require completion consumption;otherwise the next shell-out inherits a stale completion.",
+    "1984": "Original DWORD-to-HANDLE PID conversion fails actual x64 C4312 at629;ULONG_PTR explicitly preserves zero-extension of numeric PID.",
+    "1985": "Original HANDLE-to-DWORD numeric TID/receipt conversions fail actual x64 C4311 at845/846;source fields remain fixed-width numeric carriers.",
+    "1986": "Original DWORD-to-HANDLE PID conversion fails actual x64 C4312 at862.",
+    "1987": "Original CheckDOS queues/signals an existing event but does not force a running COMMAND to call GetNext. Actual fixture confirms record-present/no-wait and pending-wait states differ. One production caller and all four test callsites pass local BOOL addresses:removed null-output guard. Original lock/record/event remain owners;no new state machine.",
+    "1988": "Original HANDLE-to-DWORD numeric TID/receipt conversions fail actual x64 C4311 at1511/1512.",
+    "1989": "Original HANDLE-to-DWORD parent-tag mask fails actual x64 C4311/C4312 at1832 and truncates native-width identity. ULONG_PTR preserves the original bit-zero mask.",
+    "1990": "New original Console record must start with no pending completion;paired notification runtime controls and later-wait assertions pass.",
+    "1991": "Record-local notification preserves decrement delivered before GetNext creates/resets its event;three original-predicate control cases fail,late and startup controls pass."
+  }
+}
