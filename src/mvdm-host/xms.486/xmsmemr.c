@@ -22,12 +22,7 @@ Revision History:
 #include <xms.h>
 #include <suballoc.h>
 #include <softpc.h>
-#ifdef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-271: retain mapped, bounded CPU40 movement. */
-#include "mvdm_xms_memory.h"
-#endif
 
-#line 26
 NTSTATUS
 xmsCommitBlock(
     ULONG BaseAddress,
@@ -148,11 +143,32 @@ Return Value:
 --*/
 {
 #ifdef CPU_40_STYLE
-    mvdm_xms_move_memory(Destination, Source, Count);
+#line 145
+    ULONG SoftpcBase;
+    
+    //
+    // Get the linear address of the beginning of Intel memory
+    //
+    SoftpcBase = (ULONG) GetVDMAddr(0,0);
+    
+    //
+    // Move the memory
+    //
+    RtlMoveMemory(
+        (PVOID)((ULONG)Destination + SoftpcBase),
+        (PVOID)((ULONG)Source + SoftpcBase),
+        Count
+        );
+
+    // WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment
+    // address. In this case, we have no idea what the segment value is, all we
+    // know is its "linear address".
+
+    sas_overwrite_memory((PBYTE)Destination, Count);
 #else
 #line 150
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 166
 
-#line 167
 }

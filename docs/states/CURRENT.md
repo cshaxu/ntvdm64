@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1942 reviewed:670 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1264 qualified pending;778 unreviewed. Files258/365 audited,107 remain.
+1944 reviewed:672 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1264 qualified pending;776 unreviewed. Files259/365 audited,106 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -85,13 +85,11 @@ P171 XMS block53->32(-21);MSVC97/0,cached,publish11x2,XMS/observer focused,origi
 
 P172 xmsdisp selected original source confirmed;CRLF restored,51 logical lines match;P171 product evidence reused.
 
+P173 xmsmemr original mover restored;mirror30->4(-26),48 MSVC lines match. Cached,publish11x2,focused,real final guest relocation,Full19 and governance passed;Git accompanies receipt.
+
 ## Current Technical Baseline
 
-P171 candidate `62f31338-ddb7-403c-9df4-645078014722` published11x2;hashes match.
-Final message ownership/scope focused and Full19 passed;Git accompanies P162.
-Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
-Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p154-checkpoint.json).
+P173 candidate `4163a393-7484-416c-b244-0e5c1e149751` published11x2;hashes match.
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored

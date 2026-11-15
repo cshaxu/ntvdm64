@@ -81,6 +81,7 @@ try{
     foreach($entry in $entries){$at=$entry.IndexOf('=',1);$start.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}
     $start.EnvironmentVariables['PATH']=$binary+';'+$start.EnvironmentVariables['PATH']
     $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+    $start.EnvironmentVariables['MVDM_OBSERVER_INITIAL_GEOMETRY']='80,30'
     $start.EnvironmentVariables['TEMP']=$runtime;$start.EnvironmentVariables['TMP']=$runtime
     $probeArgs=@((Join-Path $binary 'run16.exe'),$runtime,$report,'--wait',$target)
     # /c propagates the actual probe completion instead of treating bare EXIT's

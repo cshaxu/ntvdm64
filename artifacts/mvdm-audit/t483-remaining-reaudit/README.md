@@ -1208,3 +1208,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P171 XMS block review](r1933-r1941-xmsblock-review.json), [checkpoint](batch-p171-checkpoint.json), [lines](batch-p171-line-check.json): original guest preconditions and reduced numeric memory boundary;delivery pending.
 
 P172: [XMS dispatch review](r1942-xmsdisp-review.json), [receipt](batch-p172-checkpoint.json); original CRLF restored; P171 product verification reused.
+
+P173: [XMS mover review](r1943-r1944-xmsmemr-review.json), [checkpoint](batch-p173-checkpoint.json), [line proof](batch-p173-line-check.json): original mover restored, mirror30->4 (-26);cached,publish11x2,focused,final guest relocation,Full19 and governance passed;Git accompanies receipt.

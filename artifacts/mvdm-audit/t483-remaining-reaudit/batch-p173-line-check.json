@@ -1,0 +1,12 @@
+[
+  {
+    "path": "src/mvdm-host/xms.486/xmsmemr.c",
+    "logical_line_mismatches": [],
+    "actual_msvc": {
+      "selected_retained_lines": 48,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+    }
+  }
+]

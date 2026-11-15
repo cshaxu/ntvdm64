@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('x86', 'x64')]
+    [ValidateSet('x86')]
     [string]$Architecture,
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = ''

@@ -1,0 +1,93 @@
+{
+  "points": [
+    "T483-R1943",
+    "T483-R1944"
+  ],
+  "file": "src/mvdm-host/xms.486/xmsmemr.c",
+  "state": "whole-file source and final-code verification complete;Git accompanies receipt",
+  "original": {
+    "root": "O:/repos.external/OpenNT",
+    "commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "base/mvdm/xms.486/xmsmemr.c",
+    "sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c"
+  },
+  "original_relative_diff": {
+    "before": {
+      "added": 9,
+      "deleted": 21
+    },
+    "after": {
+      "added": 4,
+      "deleted": 0
+    },
+    "net": -26,
+    "scope": "Excludes #line and EOL;remaining four lines are unsupported CPU-profile rejection framework,not replacement mover logic"
+  },
+  "decisions": [
+    {
+      "id": "T483-R1943",
+      "before": 4,
+      "after": 0,
+      "action": "Restore original include region;remove autonomous mover dependency"
+    },
+    {
+      "id": "T483-R1944",
+      "before": 26,
+      "after": 4,
+      "action": "Restore exact original GetVDMAddr/RtlMoveMemory/sas_overwrite_memory body;retain unsupported-profile #error"
+    }
+  ],
+  "call_chain": [
+    "Original HIMEM ReallocExtMemory validates handle and lock and issues XMS_REALLOCBLOCK;no mode transition in this entry",
+    "MS_bop_2 -> XMSDispatch -> xmsReallocBlock -> SAReallocate -> xmsMoveMemory",
+    "XMSInit reserves numeric contiguous XMS pool;allocator passes Intel offsets;original mover adds flat backing base and notifies SAS"
+  ],
+  "necessity_review": {
+    "old_claim": "Mapped bounded copying required for guest address safety",
+    "counter_review": "Generic mapping adapter requirements do not prove this allocator callback needs translated page-by-page copying. Synthetic remapped page zero shows a possible difference but is not evidence of a supported guest invoking the callback there.",
+    "real_original": {
+      "case": "xms-failure",
+      "result": "PASS",
+      "markers": [
+        "S36_XMS_FORCED_RELOCATION_DATA_RELEASE_OK"
+      ],
+      "exit": 0,
+      "definitions": [
+        "-DFORCED_RELOCATION"
+      ]
+    },
+    "real_current": {
+      "case": "xms-failure",
+      "result": "PASS",
+      "markers": [
+        "S36_XMS_FORCED_RELOCATION_DATA_RELEASE_OK"
+      ],
+      "exit": 0,
+      "definitions": [
+        "-DFORCED_RELOCATION"
+      ]
+    },
+    "original_trace": "original-move PG=0 VM=0 CR3=00000000 address=00147800 count=65536",
+    "win31": "Public XMS allocate/reallocate/free succeeded in enhanced-mode workload;diagnostic observed no host mover or realloc call. Windows normal shutdown timed out,so this is not Win31 integration acceptance.",
+    "synthetic": "Actual CCPU artificial page-zero remapping fails original and passes adapter;retained as a limitation,not justification to retain speculative product adaptation."
+  },
+  "coupled_changes": [
+    "Delete uncalled mvdm_xms_move_memory and prototype;retain allocator cancellation owner used elsewhere",
+    "Fixture invokes restored original overlapping mover;remove obsolete invented cancellation assertion",
+    "Fixture x86 only to match actual NTVDM XMS product pointer ABI;generic x64 host components remain supported",
+    "Memory transition runner explicitly passes geometry into its rebuilt child environment;full success marker remains required"
+  ],
+  "line_proof": {
+    "selected_retained_lines": 48,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "limitations": [
+    "Synthetic mapping difference is not disproved;no claim of arbitrary paging-context equivalence",
+    "Win31 diagnostic normal-exit failure is not a pass",
+    "No new Win95 runtime verification in this investigation",
+    "Real probes use original immutable guest components;independent probe code is not a guest replacement"
+  ],
+  "final_verification": "batch-p173-checkpoint.json:cached full,publish11x2,focused,real guest relocation,Full19 and governance passed"
+}

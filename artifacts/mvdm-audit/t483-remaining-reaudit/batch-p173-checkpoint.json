@@ -1,0 +1,264 @@
+{
+  "status": "cached full,published11x2,focused and final guest relocation,Full19,governance passed;Git accompanies receipt",
+  "source_files": 6,
+  "files": [
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "sha256": "40c236c96768a5a5a3d03c61a00b5b594552f4987a2d3ddde912912e1afba478"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "sha256": "565d0149004bae0d13970e78d7fed16b6f42117328c5dbbee98e8602431a711b"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_xms_memory.h",
+      "sha256": "4b0441700758d3544290dc2d065337f2d8a8f0f4b45f21f547b984f47f35250a"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c",
+      "sha256": "558664d398813d32aaf14545bda762c770c14ebf6ca4bc1f568775666b3de27b"
+    },
+    {
+      "path": "test/integration/verify-memory-transition-guest.ps1",
+      "sha256": "e27af310dc8cfd723aedec8076330099c0a45375e17a5c672c5692a784b33d53"
+    },
+    {
+      "path": "tools/build/New-T322XmsMappedMemoryFixtureNinja.ps1",
+      "sha256": "89132b49f3e09d116b30de9a794f37a95aa6859c9ca1620b2becc199abe8b12b"
+    }
+  ],
+  "mirror_before": {
+    "added": 9,
+    "deleted": 21,
+    "total": 30
+  },
+  "mirror_after": {
+    "added": 4,
+    "deleted": 0,
+    "total": 4
+  },
+  "mirror_delta": -26,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "publication": {
+    "status": "published",
+    "package": "4163a393-7484-416c-b244-0e5c1e149751",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 399658,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5697,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1317,
+        "CleanupMs": 516,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 14537,
+        "CleanupMs": 532,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 16720,
+        "CleanupMs": 520,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11079,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 592,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66813,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46269,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41660,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 12743,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9665,
+        "CleanupMs": 406,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53968,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12523,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 32361,
+        "CleanupMs": 481,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31074,
+        "CleanupMs": 455,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4075,
+        "CleanupMs": 436,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7882,
+        "CleanupMs": 446,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10077,
+        "CleanupMs": 434,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3789,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6489,
+        "CleanupMs": 434,
+        "Passed": true
+      }
+    ]
+  },
+  "guest": {
+    "case": "xms-failure",
+    "result": "PASS",
+    "markers": [
+      "S36_XMS_FORCED_RELOCATION_DATA_RELEASE_OK"
+    ],
+    "exit": 0,
+    "definitions": [
+      "-DFORCED_RELOCATION"
+    ]
+  },
+  "identity_proof": {
+    "testPackage": "c5237a11-cfe6-4171-90d2-a765ff4e9a7b",
+    "publishedPackage": "4163a393-7484-416c-b244-0e5c1e149751",
+    "images": [
+      {
+        "identical": true,
+        "name": "VCDEX.DLL",
+        "publishedSha256": "AA36CAD883405A74AFE301B44B50C8D90DA3795D35A695C22C76C8DFF2FEFF8F",
+        "restoredSha256": "AA36CAD883405A74AFE301B44B50C8D90DA3795D35A695C22C76C8DFF2FEFF8F"
+      },
+      {
+        "identical": true,
+        "name": "run16.exe",
+        "publishedSha256": "EA9C596945ED462B70E21565AC0A448F6E9CBB2D0088D5201AA92A168D73109E",
+        "restoredSha256": "EA9C596945ED462B70E21565AC0A448F6E9CBB2D0088D5201AA92A168D73109E"
+      },
+      {
+        "identical": true,
+        "name": "ntsrv.exe",
+        "publishedSha256": "A0D2F4052B78B8D786DF59D7AB244DDCF6A30D20DAA815719416D342070EB3C8",
+        "restoredSha256": "A0D2F4052B78B8D786DF59D7AB244DDCF6A30D20DAA815719416D342070EB3C8"
+      },
+      {
+        "identical": true,
+        "name": "ntcon.exe",
+        "publishedSha256": "CBE2B8ACF27B7B0E6E4B6A1376311515CF99F1BA1766E7722B5A5DC4254D62FC",
+        "restoredSha256": "CBE2B8ACF27B7B0E6E4B6A1376311515CF99F1BA1766E7722B5A5DC4254D62FC"
+      },
+      {
+        "identical": true,
+        "name": "ntvdm.exe",
+        "publishedSha256": "676291829B09E23AADD2A9ADE19207406D9BE08EE29A277711138357F1D40831",
+        "restoredSha256": "676291829B09E23AADD2A9ADE19207406D9BE08EE29A277711138357F1D40831"
+      },
+      {
+        "identical": true,
+        "name": "ntvwm.exe",
+        "publishedSha256": "E0A78033068F50E65DB37853BBD73C561933538844760DA95ED7D649A07B20CB",
+        "restoredSha256": "E0A78033068F50E65DB37853BBD73C561933538844760DA95ED7D649A07B20CB"
+      },
+      {
+        "identical": true,
+        "name": "ntmon.exe",
+        "publishedSha256": "F618E3B5722A9CE09D0D9A799419096E9C212955C6C7FE982D73868F23C23FC4",
+        "restoredSha256": "F618E3B5722A9CE09D0D9A799419096E9C212955C6C7FE982D73868F23C23FC4"
+      },
+      {
+        "identical": true,
+        "name": "WOW32.DLL",
+        "publishedSha256": "4653D72275A0678AE593A81CFCDCD737B594914B6B161F28DC616B7914FFDE4E",
+        "restoredSha256": "4653D72275A0678AE593A81CFCDCD737B594914B6B161F28DC616B7914FFDE4E"
+      },
+      {
+        "identical": true,
+        "name": "VDMREDIR.DLL",
+        "publishedSha256": "EE287449528809DB7F8B698C25E95F749B300855790E51BA35702350A4ABAB1E",
+        "restoredSha256": "EE287449528809DB7F8B698C25E95F749B300855790E51BA35702350A4ABAB1E"
+      },
+      {
+        "identical": true,
+        "name": "nthook32.dll",
+        "publishedSha256": "97DAB6FFC800A0C88D426EE15B9D376F127EC41498B3017EED533AEEB32DE8EB",
+        "restoredSha256": "97DAB6FFC800A0C88D426EE15B9D376F127EC41498B3017EED533AEEB32DE8EB"
+      },
+      {
+        "identical": true,
+        "name": "nthook64.dll",
+        "publishedSha256": "9413830D6ED0D11016C4D880E8A6AA911FECF95CFAF2C3DDEA63813856D565CF",
+        "restoredSha256": "9413830D6ED0D11016C4D880E8A6AA911FECF95CFAF2C3DDEA63813856D565CF"
+      }
+    ]
+  },
+  "temporary_guest_copy": {
+    "path": "O:\\tmp\\x73",
+    "removed": true,
+    "original": "O:\\w31",
+    "originalUntouched": true
+  }
+}
