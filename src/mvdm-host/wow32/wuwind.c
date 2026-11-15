@@ -1575,7 +1575,6 @@ ULONG FASTCALL WU32GetActiveWindow(PVDMFRAME pFrame)
 ULONG FASTCALL WU32GetWindowDC(PVDMFRAME pFrame)
 {
     ULONG ul;
-    HWND hwnd32;
 #line 1582
     register PGETWINDOWDC16 parg16;
     HAND16 htask16 = pFrame->wTDB;
@@ -1584,10 +1583,9 @@ ULONG FASTCALL WU32GetWindowDC(PVDMFRAME pFrame)
 
     ReleaseCachedDCs(htask16, parg16->f1, 0, 0, SRCHDC_TASK16_HWND16);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */
-    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));
-    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
-    ul = GETHDC16(wow_native_GetWindowDC(hwnd32));
+    ul = GETHDC16(wow_native_GetWindowDC(
+    HWND32(parg16->f1)
+    ));
 
 #line 1593
     if (ul)
@@ -1705,7 +1703,6 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
 #ifdef WOW_USER_PRIVATE_REDIRECT
                 BOOL procedureIsGuest;
 
-                /* DIVERGENCE(MVDM-HOST-DIV-339): keep explicit decoded-entry origin. */
                 dwWndProc32Cur = wow_user_get_procedure(HWND32(parg16->f1), FALSE, &procedureIsGuest);
 #else
 #line 1704
@@ -1723,6 +1720,7 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
                          && !procedureIsGuest
 #endif
                        ) {
+#line 1708
                         /*
                         ** Has a 32-bit WindowProc that is a handle-based value
                         ** (if it needs a 32-bit Ansi-Unicode transition, or
@@ -2475,6 +2473,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
             BOOL previousIsGuest;
 #endif
 
+#line 2452
             // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
 #line 2453
             dwWndProc32New = IsThunkWindowProc(LONG32(parg16->f3), &iClass );
@@ -2486,7 +2485,6 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 // routine.  We can just set it back to the 32-bit routine.
                 //
 #ifdef WOW_USER_PRIVATE_REDIRECT
-                /* DIVERGENCE(MVDM-HOST-DIV-339): explicit native origin. */
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, dwWndProc32New, FALSE, &previousIsGuest);
 #else
 #line 2461
@@ -2525,7 +2523,6 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 }
 
 #ifdef WOW_USER_PRIVATE_REDIRECT
-                /* DIVERGENCE(MVDM-HOST-DIV-339): explicit guest origin. */
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
 #else
 #line 2493
@@ -2551,6 +2548,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                      && !previousIsGuest
 #endif
                    ) {
+#line 2505
                     //
                     // If the return value was a handle to a proc (due to
                     // the need for unicode-ansi transitions, or vice versa)
@@ -2784,10 +2782,9 @@ ULONG FASTCALL WU32SetWindowPos(PVDMFRAME pFrame)
 
 ULONG FASTCALL WU32SetWindowText(PVDMFRAME pFrame)
 {
-    PSZ psz2 = NULL;
+    PSZ psz2;
     register PSETWINDOWTEXT16 parg16;
     HANDLE handle;
-    /* DIVERGENCE(MVDM-HOST-DIV-347): capture before native/guest reentry. */
     DWORD text16, error;
     BOOL mapped = FALSE;
 
@@ -2817,13 +2814,12 @@ ULONG FASTCALL WU32SetWindowText(PVDMFRAME pFrame)
     } __finally {
         error = GetLastError();
         if (mapped) DeleteParamMap(text16, PARAM_16, NULL);
-#line 2764
-        FREEPSZPTR(psz2);
-        FREEARGPTR(parg16);
         SetLastError(error);
 #line 2762
     }
-#line 2766
+
+    FREEPSZPTR(psz2);
+    FREEARGPTR(parg16);
     RETURN(0);
 }
 

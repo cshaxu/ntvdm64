@@ -1,0 +1,198 @@
+{
+  "path": "src/mvdm-host/wow32/wuwind.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wuwind.c",
+  "source_sha256": "671d14c3f1ca7e8351f0a874579c2962d7c9a4a671a1437370b22ec891e5d0f1",
+  "before_sha256": "07018e22b4c4b57046d7777022250bf6452aac1cc28acd5bbefd4081fbd9481b",
+  "metrics": {
+    "before": {
+      "added": 60,
+      "deleted": 17,
+      "total": 77,
+      "exclusions": [
+        [
+          1,
+          8
+        ]
+      ]
+    },
+    "after": {
+      "added": 49,
+      "deleted": 11,
+      "total": 60,
+      "exclusions": [
+        [
+          1,
+          8
+        ]
+      ]
+    }
+  },
+  "point_evidence": {
+    "R1914": "Original-selected file preamble and DEBUG exclusion framework remain intact;no semantic preamble difference.",
+    "R1915": "WOW_NATIVE_MAPPED_CALL GetWindowDC resolves the input via native_window_argument: NULL remains valid; failed nonzero resolution returns before native USER. Original StoreDC already accepts guest HWND and HDC only. The extra local and second conversion are redundant. Native USER requires the resolved full HWND; original HWND32 is a 16-bit carrier, so retain one existing boundary call name.",
+    "R1916": "WOW_NATIVE_MAPPED_CALL GetWindowDC resolves the input via native_window_argument: NULL remains valid; failed nonzero resolution returns before native USER. Original StoreDC already accepts guest HWND and HDC only. The extra local and second conversion are redundant. Native USER requires the resolved full HWND; original HWND32 is a 16-bit carrier, so retain one existing boundary call name.",
+    "R1917": "WOW_NATIVE_MAPPED_CALL GetWindowDC resolves the input via native_window_argument: NULL remains valid; failed nonzero resolution returns before native USER. Original StoreDC already accepts guest HWND and HDC only. The extra local and second conversion are redundant. Native USER requires the resolved full HWND; original HWND32 is a 16-bit carrier, so retain one existing boundary call name.",
+    "R1918": "Original WU32Get/SetWindowLong classify WNDPROC_WOW and WNDPROC_HANDLE by value bits. A guest encoded FFFF0004 collides with the native-token branch. Modern USER accepts native entrypoints, not CCPU 16:16 procedures. wow_user_get/set_procedure decodes only owned immutable guest entries and returns explicit provenance; native USER owns native procedure slots/tokens. Direct original setter would install a guest address as a native procedure; removing provenance misclassifies the guest FFFF encoding. Real production typed caller fixture covers guest FFFF query/set roundtrips; fixture selectors are representation controls,not executed invented guest selectors.",
+    "R1919": "Original WU32Get/SetWindowLong classify WNDPROC_WOW and WNDPROC_HANDLE by value bits. A guest encoded FFFF0004 collides with the native-token branch. Modern USER accepts native entrypoints, not CCPU 16:16 procedures. wow_user_get/set_procedure decodes only owned immutable guest entries and returns explicit provenance; native USER owns native procedure slots/tokens. Direct original setter would install a guest address as a native procedure; removing provenance misclassifies the guest FFFF encoding. Real production typed caller fixture covers guest FFFF query/set roundtrips; fixture selectors are representation controls,not executed invented guest selectors.",
+    "R1920": "Original WU32Get/SetWindowLong classify WNDPROC_WOW and WNDPROC_HANDLE by value bits. A guest encoded FFFF0004 collides with the native-token branch. Modern USER accepts native entrypoints, not CCPU 16:16 procedures. wow_user_get/set_procedure decodes only owned immutable guest entries and returns explicit provenance; native USER owns native procedure slots/tokens. Direct original setter would install a guest address as a native procedure; removing provenance misclassifies the guest FFFF encoding. Real production typed caller fixture covers guest FFFF query/set roundtrips; fixture selectors are representation controls,not executed invented guest selectors.",
+    "R1921": "Original WU32Get/SetWindowLong classify WNDPROC_WOW and WNDPROC_HANDLE by value bits. A guest encoded FFFF0004 collides with the native-token branch. Modern USER accepts native entrypoints, not CCPU 16:16 procedures. wow_user_get/set_procedure decodes only owned immutable guest entries and returns explicit provenance; native USER owns native procedure slots/tokens. Direct original setter would install a guest address as a native procedure; removing provenance misclassifies the guest FFFF encoding. Real production typed caller fixture covers guest FFFF query/set roundtrips; fixture selectors are representation controls,not executed invented guest selectors.",
+    "R1922": "Original WU32Get/SetWindowLong classify WNDPROC_WOW and WNDPROC_HANDLE by value bits. A guest encoded FFFF0004 collides with the native-token branch. Modern USER accepts native entrypoints, not CCPU 16:16 procedures. wow_user_get/set_procedure decodes only owned immutable guest entries and returns explicit provenance; native USER owns native procedure slots/tokens. Direct original setter would install a guest address as a native procedure; removing provenance misclassifies the guest FFFF encoding. Real production typed caller fixture covers guest FFFF query/set roundtrips; fixture selectors are representation controls,not executed invented guest selectors.",
+    "R1923": "Original WU32Get/SetWindowLong classify WNDPROC_WOW and WNDPROC_HANDLE by value bits. A guest encoded FFFF0004 collides with the native-token branch. Modern USER accepts native entrypoints, not CCPU 16:16 procedures. wow_user_get/set_procedure decodes only owned immutable guest entries and returns explicit provenance; native USER owns native procedure slots/tokens. Direct original setter would install a guest address as a native procedure; removing provenance misclassifies the guest FFFF encoding. Real production typed caller fixture covers guest FFFF query/set roundtrips; fixture selectors are representation controls,not executed invented guest selectors.",
+    "R1924": "Original WU32Get/SetWindowLong classify WNDPROC_WOW and WNDPROC_HANDLE by value bits. A guest encoded FFFF0004 collides with the native-token branch. Modern USER accepts native entrypoints, not CCPU 16:16 procedures. wow_user_get/set_procedure decodes only owned immutable guest entries and returns explicit provenance; native USER owns native procedure slots/tokens. Direct original setter would install a guest address as a native procedure; removing provenance misclassifies the guest FFFF encoding. Real production typed caller fixture covers guest FFFF query/set roundtrips; fixture selectors are representation controls,not executed invented guest selectors.",
+    "R1925": "Supported !DEBUG FREEPSZPTR and FREEARGPTR macros are empty. Before first actual use GETPSZPTR assigns psz2;no exceptional cleanup reads it. Restore original PSZ declaration.",
+    "R1926": "Original AddParamMap may fail CacheBlockAllocate and return NULL. Original WU32SetWindowText still deletes by PARAM_32 whenever text is nonnull; two guest keys may share a native address,so failed insertion can decrement the other node. SetWindowText synchronously dispatches guest/native callbacks; an exception bypasses original tail deletion. Keep successful-acquisition flag and finally. DeleteParamMap PARAM_32 can revisit GetPModeVDMPointer and match aliases; PARAM_16 uses the captured original guest key without dereferencing changed frame or revisiting mappings during unwind. Actual wparam lookup/update/refcount code supplies this contract. Existing extracted controls inject allocator/native callback failures;not proof of a reproduced application crash.",
+    "R1927": "Original AddParamMap may fail CacheBlockAllocate and return NULL. Original WU32SetWindowText still deletes by PARAM_32 whenever text is nonnull; two guest keys may share a native address,so failed insertion can decrement the other node. SetWindowText synchronously dispatches guest/native callbacks; an exception bypasses original tail deletion. Keep successful-acquisition flag and finally. DeleteParamMap PARAM_32 can revisit GetPModeVDMPointer and match aliases; PARAM_16 uses the captured original guest key without dereferencing changed frame or revisiting mappings during unwind. Actual wparam lookup/update/refcount code supplies this contract. Existing extracted controls inject allocator/native callback failures;not proof of a reproduced application crash.",
+    "R1928": "Original AddParamMap may fail CacheBlockAllocate and return NULL. Original WU32SetWindowText still deletes by PARAM_32 whenever text is nonnull; two guest keys may share a native address,so failed insertion can decrement the other node. SetWindowText synchronously dispatches guest/native callbacks; an exception bypasses original tail deletion. Keep successful-acquisition flag and finally. DeleteParamMap PARAM_32 can revisit GetPModeVDMPointer and match aliases; PARAM_16 uses the captured original guest key without dereferencing changed frame or revisiting mappings during unwind. Actual wparam lookup/update/refcount code supplies this contract. Existing extracted controls inject allocator/native callback failures;not proof of a reproduced application crash.",
+    "R1929": "Original AddParamMap may fail CacheBlockAllocate and return NULL. Original WU32SetWindowText still deletes by PARAM_32 whenever text is nonnull; two guest keys may share a native address,so failed insertion can decrement the other node. SetWindowText synchronously dispatches guest/native callbacks; an exception bypasses original tail deletion. Keep successful-acquisition flag and finally. DeleteParamMap PARAM_32 can revisit GetPModeVDMPointer and match aliases; PARAM_16 uses the captured original guest key without dereferencing changed frame or revisiting mappings during unwind. Actual wparam lookup/update/refcount code supplies this contract. Existing extracted controls inject allocator/native callback failures;not proof of a reproduced application crash.",
+    "R1930": "FREEPSZPTR/FREEARGPTR are empty in every supported !DEBUG context. Move both back to original tail;they have no exceptional-path action and need no relocation diff."
+  },
+  "changes": [
+    "Remove redundant GetWindowDC mapping and local;preserve original StoreDC",
+    "Restore original PSZ declaration;cleanup macros do not read psz2",
+    "Remove4 redundant comments",
+    "Restore original CRLF;preserve all#error frameworks and original diagnostic lines",
+    "Restore empty FREEPSZPTR/FREEARGPTR macros to original tail;finally retains only actual map/error cleanup"
+  ],
+  "counter_review": [
+    "Adapter dependency alone is not evidence:modern USER requires native executable entrypoints and full HWND;CCPU procedures are not host entrypoints.",
+    "Allocator failure and callback unwind have concrete control flow;no newly reproduced application crash claimed.",
+    "Original mapping algorithm and callback type conversion remain;no broader component changes."
+  ],
+  "line_check": {
+    "selected_retained_lines": 829,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "status": "cached,published,tested;Git accompanies receipt",
+  "point_metrics": {
+    "R1914": {
+      "before_added": 0,
+      "before_deleted": 0,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": 0
+    },
+    "R1915": {
+      "before_added": 1,
+      "before_deleted": 0,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": -1
+    },
+    "R1916": {
+      "before_added": 4,
+      "before_deleted": 3,
+      "after_added": 1,
+      "after_deleted": 1,
+      "delta": -5
+    },
+    "R1917": {
+      "before_added": 0,
+      "before_deleted": 0,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": 0
+    },
+    "R1918": {
+      "before_added": 2,
+      "before_deleted": 0,
+      "after_added": 2,
+      "after_deleted": 0,
+      "delta": 0
+    },
+    "R1919": {
+      "before_added": 5,
+      "before_deleted": 1,
+      "after_added": 4,
+      "after_deleted": 1,
+      "delta": -1
+    },
+    "R1920": {
+      "before_added": 10,
+      "before_deleted": 2,
+      "after_added": 10,
+      "after_deleted": 2,
+      "delta": 0
+    },
+    "R1921": {
+      "before_added": 3,
+      "before_deleted": 0,
+      "after_added": 3,
+      "after_deleted": 0,
+      "delta": 0
+    },
+    "R1922": {
+      "before_added": 6,
+      "before_deleted": 1,
+      "after_added": 5,
+      "after_deleted": 1,
+      "delta": -1
+    },
+    "R1923": {
+      "before_added": 6,
+      "before_deleted": 1,
+      "after_added": 5,
+      "after_deleted": 1,
+      "delta": -1
+    },
+    "R1924": {
+      "before_added": 10,
+      "before_deleted": 2,
+      "after_added": 10,
+      "after_deleted": 2,
+      "delta": 0
+    },
+    "R1925": {
+      "before_added": 1,
+      "before_deleted": 1,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": -2
+    },
+    "R1926": {
+      "before_added": 3,
+      "before_deleted": 0,
+      "after_added": 2,
+      "after_deleted": 0,
+      "delta": -1
+    },
+    "R1927": {
+      "before_added": 2,
+      "before_deleted": 0,
+      "after_added": 2,
+      "after_deleted": 0,
+      "delta": 0
+    },
+    "R1928": {
+      "before_added": 1,
+      "before_deleted": 1,
+      "after_added": 1,
+      "after_deleted": 1,
+      "delta": 0
+    },
+    "R1929": {
+      "before_added": 6,
+      "before_deleted": 2,
+      "after_added": 4,
+      "after_deleted": 2,
+      "delta": -2
+    },
+    "R1930": {
+      "before_added": 0,
+      "before_deleted": 3,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": -3
+    }
+  },
+  "negative_control": {
+    "original_settext_body_identical": true,
+    "original_result": "API_OPTIONAL and API_ABORT fail in original exact body",
+    "candidate_result": "PARAMETER_MAP failures=0 scenarios=54",
+    "scope": "Extracted bodies with fallible host service doubles;not guest execution"
+  },
+  "typed_procedure_result": "WOW_TYPED_PROCEDURE_CALLERS errors=0 actual_wu32=4 guest_ffff=1 setters=4 getters=4;WOW_CLASS_PROCEDURE errors=0 callbacks=40",
+  "delivery": "batch-p168-checkpoint.json",
+  "verification": "MSVC829/0;DC/typed procedure/parameter-map focused;Full19"
+}

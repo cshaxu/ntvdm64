@@ -1,0 +1,25 @@
+{
+  "status": "cached full,published11x2,window-borrow,class-procedure,parameter-map,Full19,governance passed;Git accompanies receipt",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "sha256": "671d14c3f1ca7e8351f0a874579c2962d7c9a4a671a1437370b22ec891e5d0f1"
+    }
+  ],
+  "mirror_delta": -17,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "8c6cdc2c-95a2-4a80-bac6-446d84b9d975",
+  "tests": {
+    "Full_gates": 19,
+    "focused": [
+      "actual window-borrow/DC thunks",
+      "actual typed procedure caller roundtrips",
+      "parameter-map extracted baseline/current fault controls"
+    ]
+  },
+  "limitations": [
+    "Fault-injection controls are not a reproduced application crash",
+    "External DOS4GW/Nesticle fixture absent:skipped not passed"
+  ]
+}

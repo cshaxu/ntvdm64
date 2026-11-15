@@ -1198,3 +1198,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P166 USER client header review](r1912-wusercli-review.json), [checkpoint](batch-p166-checkpoint.json): selected original content and lines confirmed;CRLF restored only.
 
 - [P167 timer entry review](r1913-wutmr-review.json), [checkpoint](batch-p167-checkpoint.json): bounded callback entry evidence and comment reduction.
+
+- [P168 window review](r1914-r1930-wuwind-review.json), [checkpoint](batch-p168-checkpoint.json), [lines](batch-p168-line-check.json): whole-file original-first review;cached,publish11x2,focused and Full19 passed.
