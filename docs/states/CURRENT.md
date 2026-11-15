@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1977 reviewed:679 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1290 qualified pending;743 unreviewed. Files265/365 audited,100 remain.
+1979 reviewed:679 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1292 qualified pending;741 unreviewed. Files266/365 audited,99 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -50,8 +50,6 @@ The current concurrency evidence is a source-level eligible ordering counterexam
 not a reproduced runtime race; it does not prove every capture helper necessary.
 
 P158 source complete:wuclass51->48;wuclip144->90 (DEBUG exclusion11 unchanged);mirror batch-57. Open-time cache retirement follows original serial/owner ordering;epoch56/0,ownership24/0 and lines536/0 passed. Initial candidate built/published;final2 also restores original NULL-text cache replacement. Final2 cached,publish11x2,epoch56/0,ownership24/0 and Full19 passed;real Clipboard exchange passed after RDP recovery;Git accompanies receipt.
-
-P163 wumsg.h3->2(-1),duplicate comment removed;TLS residual source-qualified pending owner. Original logical lines match;P162 product evidence reused;latest RDP Clipboard18 passed. Git accompanies receipt.
 
 P164 wuser mirror31->13(-18);original bitmap thunk restored and repeated GetDC conversion removed;MSVC998/0,resource suite,cached full,publish11x2,Full19 and governance passed;Git accompanies receipt.
 
@@ -205,3 +203,5 @@ P177 error.c:only #error exclusions11 remain;ordinary semantic0. Original endif2
 P178 time.c:1225->1219;redundant comment removed,CRLF/endif53 restored;14 selected lines match and selected preprocessing unchanged. Full original compile confirms native ABI/declaration closure gaps;5 residual points await owner package-boundary choice. P176 product verification reused;Git accompanies receipt.
 
 P179 vdm.c891->870(-21):remove redundant comments/environment include;original ntrtl declarations suffice. Six actual objects compile;selected source and generated config fragments unchanged. Original x64 casts fail C4311;package/CSR/header boundaries logged for12 owner decisions;OLD_CFG structure confirmed. P176 product verification reused;Git accompanies receipt.
+
+P180 basesrv.h7->4(-3):comment/blank removed;CRLF and original comment28 mapping restored. Actual x64 dispatch needs conditional binding (no /FI);removal fails CSR declarations. DFS restoration C1083. Two qualified boundary decisions;selected preprocessing identical;P176 product validation reused;Git accompanies receipt.

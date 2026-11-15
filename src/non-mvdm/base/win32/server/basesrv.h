@@ -25,12 +25,10 @@ Revision History:
 
 #include <base.h>
 
-/* DIVERGENCE(OPENNT-HOST-028): finite standalone VDM declaration binding.
- * The original service translation unit and its algorithms are unchanged. */
 #if defined(OPENNT_BASE_VDM_SERVER)
 #include <base_server.h>
 #endif
-
+#line 28
 //
 // Include server definitions for CSR
 //
