@@ -1,0 +1,390 @@
+{
+  "path": "src/mvdm-host/wow32/wumsg.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wumsg.c",
+  "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+  "before_sha256": "efd09d864475678d3b81d22bf029cbc4b95a69247c420cf783d5a7b0974ef81e",
+  "current_sha256": "e4ac488c1bc3ec1cf5f1ea34e7c22ed73ef392bf815bdcbdba7d0f8ab88893d7",
+  "mirror_diff": {
+    "before": {
+      "added": 111,
+      "deleted": 14
+    },
+    "after": {
+      "added": 99,
+      "deleted": 14
+    },
+    "delta": -12,
+    "excluded_unchanged": {
+      "added": 3,
+      "deleted": 15
+    },
+    "method": "LF normalized;omit#line;SequenceMatcher;#error replacements separately counted"
+  },
+  "line_check": {
+    "selected_retained_lines": 635,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "initial_review": "Read complete current/original diff and every affected entry;trace original converters/unthunkers,selected thunk dispatch and direct Post-to-Send path.",
+  "counter_review": "Responsibilities are separate: invocation owns selector restoration;local converter record owns acquired resource release;post receiver owns successful DDE transfers. Removed duplicate selector authority without adding a shim. Failed-post unthunk and private retry do not consume the abandoned converted handles. TLS proof concerns pre-admission snapshot,not concurrent CCPU execution.",
+  "limits": [
+    "Source scheduling proof,not reproduced native-thread race.",
+    "Focused source fixtures are not guest acceptance;Full remains required.",
+    "Original dialog entry negative controls are shared-converter evidence,not per-function fault reproduction for every wumsg entry."
+  ],
+  "points": [
+    {
+      "id": "T483-R1860",
+      "original_anchor": 1,
+      "before_added": 0,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Original logical lines",
+      "evidence": "Whole-file selected source retains three excluded DEBUG/ONLY_API16 bodies as#error;actual MSVC original/current retained-line comparison.",
+      "option": "Confirm original selected structure."
+    },
+    {
+      "id": "T483-R1861",
+      "original_anchor": 16,
+      "before_added": 2,
+      "before_deleted": 0,
+      "delta": -1,
+      "problem": "Cleanup declaration",
+      "evidence": "Original conversion owns map/COPYDATA allocations before native calls. Escaping exceptions skip original trailing unthunk;local finalizer uses the existing shared implementation,whose declarations are in this header.",
+      "option": "Remove redundant standalone comment;retain explicit header."
+    },
+    {
+      "id": "T483-R1862",
+      "original_anchor": 27,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": -1,
+      "problem": "DDE operation selector storage",
+      "evidence": "wow_hook_callback.c snapshots fWhoCalled before wow_task_callback_enter. An admitted other native hook thread may snapshot another thread POST mode before waiting for execution,then restore it after the first thread reset. Original converter wmsg16.c reads this mode to choose new allocation versus borrowed alias. TLS isolates native-thread entry state;one worker CPU does not serialize pre-admission native snapshots. This is source-permitted ordering,not a newly reproduced race.",
+      "option": "Remove redundant comment;retain TLS pending owner. No new per-task registry."
+    },
+    {
+      "id": "T483-R1863",
+      "original_anchor": 75,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1864",
+      "original_anchor": 83,
+      "before_added": 1,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Conversion status before native call",
+      "evidence": "getmsg16 invokes ThunkMsg16 for WM_COPYDATA and DDE and propagates fThunkSucceeded. ThunkMsg16 may returnFALSE after failed acquisition. Original CallMsgFilter/DispatchMessage call native API regardless. Existing COPYDATA failure controls demonstrate rejection;HWND is not a success discriminator for thread messages.",
+      "option": "Retain direct conversion-success check pending owner."
+    },
+    {
+      "id": "T483-R1865",
+      "original_anchor": 115,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1866",
+      "original_anchor": 196,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1867",
+      "original_anchor": 239,
+      "before_added": 2,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1868",
+      "original_anchor": 240,
+      "before_added": 1,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner. Restore original closing-brace indentation;retain required scope brace."
+    },
+    {
+      "id": "T483-R1869",
+      "original_anchor": 321,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1870",
+      "original_anchor": 352,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1871",
+      "original_anchor": 431,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1872",
+      "original_anchor": 491,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1873",
+      "original_anchor": 573,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1874",
+      "original_anchor": 602,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1875",
+      "original_anchor": 646,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1876",
+      "original_anchor": 674,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1877",
+      "original_anchor": 713,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1878",
+      "original_anchor": 720,
+      "before_added": 1,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Conversion status before native call",
+      "evidence": "getmsg16 invokes ThunkMsg16 for WM_COPYDATA and DDE and propagates fThunkSucceeded. ThunkMsg16 may returnFALSE after failed acquisition. Original CallMsgFilter/DispatchMessage call native API regardless. Existing COPYDATA failure controls demonstrate rejection;HWND is not a success discriminator for thread messages.",
+      "option": "Retain direct conversion-success check pending owner."
+    },
+    {
+      "id": "T483-R1879",
+      "original_anchor": 741,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1880",
+      "original_anchor": 853,
+      "before_added": 7,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Queue consumption mode across nested conversion",
+      "evidence": "GetMessage has consumed its queue item even inside an outer PM_NOREMOVE/hook scope. PeekMessage must reflect only its own PM_REMOVE and restore prior mode,not forceTRUE. putmsg16 can reenter through original guest allocation;DDE converters read fThunkDDEmsg to decide packet release. Existing exact queue intervals test18 owner/nesting/exception cases;hook negative control shows7 stale-selector failures.",
+      "option": "Retain bounded saved consumption mode;no new queue."
+    },
+    {
+      "id": "T483-R1881",
+      "original_anchor": 1160,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Queue consumption mode across nested conversion",
+      "evidence": "GetMessage has consumed its queue item even inside an outer PM_NOREMOVE/hook scope. PeekMessage must reflect only its own PM_REMOVE and restore prior mode,not forceTRUE. putmsg16 can reenter through original guest allocation;DDE converters read fThunkDDEmsg to decide packet release. Existing exact queue intervals test18 owner/nesting/exception cases;hook negative control shows7 stale-selector failures.",
+      "option": "Retain bounded saved consumption mode;no new queue."
+    },
+    {
+      "id": "T483-R1882",
+      "original_anchor": 1169,
+      "before_added": 1,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Queue consumption mode across nested conversion",
+      "evidence": "GetMessage has consumed its queue item even inside an outer PM_NOREMOVE/hook scope. PeekMessage must reflect only its own PM_REMOVE and restore prior mode,not forceTRUE. putmsg16 can reenter through original guest allocation;DDE converters read fThunkDDEmsg to decide packet release. Existing exact queue intervals test18 owner/nesting/exception cases;hook negative control shows7 stale-selector failures.",
+      "option": "Retain bounded saved consumption mode;no new queue."
+    },
+    {
+      "id": "T483-R1883",
+      "original_anchor": 1306,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1884",
+      "original_anchor": 1325,
+      "before_added": 2,
+      "before_deleted": 0,
+      "delta": -1,
+      "problem": "Thread message with HWND0",
+      "evidence": "WU32PostAppMessage deliberately sets Parm16 hwnd0;ThunkMsg16 may validly returnNULL on success. Original code ignores converter failure and posts anyway. Existing exact entry COPYDATA fixture asserts rejected conversion does not post and a successful HWND0 conversion does.",
+      "option": "Keep status check;fold redundant comment into same line."
+    },
+    {
+      "id": "T483-R1885",
+      "original_anchor": 1333,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1886",
+      "original_anchor": 1396,
+      "before_added": 19,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Undelivered DDE resources",
+      "evidence": "Original converters create native global handles,alias pairs and PackDDElParam before PostMessage. Failed native posting leaves no receiver to release them. DDERollback32 tracks only this conversion;W32CancelDDEPost clears packed flag before freeing and restores LastError in finally. Existing exact helper tests packet/native cleanup once,guest retention,peer preservation and idempotence.",
+      "option": "Retain one helper invoked from finalizer;no additional owner."
+    },
+    {
+      "id": "T483-R1887",
+      "original_anchor": 1404,
+      "before_added": 4,
+      "before_deleted": 1,
+      "delta": -1,
+      "problem": "Post success transfers conversion resources",
+      "evidence": "The existing DDECONVERSION tracks acquired pairs across converter and native post result;MSGPARAMEX points to that call-local record. Successful post must relinquish Count/packed before any unthunk exception,otherwise finalizer would free receiver resources. Zero initialization precedes possible early exits. Both selected W32Dispatch and W32TryCall invoke wow_user_invoke_thunk,whose finally restores fWhoCalled. Only direct WU32SendMessage caller is WU32PostMessage compatibility branch and it immediately returns. Both cleanup owners wow_message_unwind16/DDERollback32 do not read fWhoCalled;that early path has empty postConversion. Per-Post/Send restoration duplicates outer authority.",
+      "option": "Retain call-local conversion record/link and success commit;remove redundant fWhoCalled save."
+    },
+    {
+      "id": "T483-R1888",
+      "original_anchor": 1406,
+      "before_added": 2,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Post success transfers conversion resources",
+      "evidence": "The existing DDECONVERSION tracks acquired pairs across converter and native post result;MSGPARAMEX points to that call-local record. Successful post must relinquish Count/packed before any unthunk exception,otherwise finalizer would free receiver resources. Zero initialization precedes possible early exits.",
+      "option": "Retain call-local conversion record/link and success commit;remove redundant fWhoCalled save."
+    },
+    {
+      "id": "T483-R1889",
+      "original_anchor": 1466,
+      "before_added": 8,
+      "before_deleted": 0,
+      "delta": -3,
+      "problem": "One failed-post rollback point",
+      "evidence": "Tracked messages ACK/POKE/ADVISE/DATA/EXECUTE have no resource action in UnThunkWMMsg16 (its only DDE case is INITIATE,which does not populate postConversion). Original private-message retry uses f2/f3/f4 guest arguments,not converted handles. Thus failure rollback can occur once in finally after unthunk/retry;exception also reaches same finally. Successful first post clears ownership before those operations.",
+      "option": "Delete duplicate failure-side W32CancelDDEPost call;retain success ownership transfer and one finalizer."
+    },
+    {
+      "id": "T483-R1890",
+      "original_anchor": 1492,
+      "before_added": 7,
+      "before_deleted": 0,
+      "delta": -3,
+      "problem": "Duplicate invocation-mode restoration",
+      "evidence": "Both selected W32Dispatch and W32TryCall invoke wow_user_invoke_thunk,whose finally restores fWhoCalled. Only direct WU32SendMessage caller is WU32PostMessage compatibility branch and it immediately returns. Both cleanup owners wow_message_unwind16/DDERollback32 do not read fWhoCalled;that early path has empty postConversion. Per-Post/Send restoration duplicates outer authority. Residual local finalization remains necessary: acquired text maps/COPYDATA records survive a native-call exception that skips normal unthunk;failed DDE posts leave converted pairs/packed data without a receiver. Outer invocation owns only selectors/borrow scope and cannot release this local conversion record.",
+      "option": "Restore absence of per-function savedWhoCalled and its finalizer;retain resource cleanup. Shared invocation fixture adds two entry modes x normal/exception direct tail-call controls."
+    },
+    {
+      "id": "T483-R1891",
+      "original_anchor": 1691,
+      "before_added": 2,
+      "before_deleted": 1,
+      "delta": 0,
+      "problem": "Call-local conversion ownership",
+      "evidence": "Original ThunkMsg16 calls converters after HWND resolution and can acquire text-map/COPYDATA resources before native API or even when HWND isNULL. Failure/exception skips original normal unthunk. Initialization must precede GETARGPTR/native boundary because finalizer examines message/scratch fields. Caller-owned record cannot be released by outer thunk invocation because it is local to this function.",
+      "option": "Retain zeroed record and local SEH scope pending owner;do not replay output converters."
+    },
+    {
+      "id": "T483-R1892",
+      "original_anchor": 1763,
+      "before_added": 3,
+      "before_deleted": 0,
+      "delta": 0,
+      "problem": "Release call-owned conversion on exit",
+      "evidence": "Original text AddParamMap and COPYDATA conversion acquire before native call. Original normal unthunk after native call is skipped by escaping exceptions;some NULL-HWND paths also skip it. wow_message_unwind16 uses acquisition flags and only input-only release,not output replay. P160 exact original-entry controls demonstrate the same converter leak;this file additionally checked each caller and supported messages.",
+      "option": "Retain local finalizer pending owner."
+    },
+    {
+      "id": "T483-R1893",
+      "original_anchor": 1809,
+      "before_added": 3,
+      "before_deleted": 1,
+      "delta": -1,
+      "problem": "Duplicate invocation-mode restoration",
+      "evidence": "Both selected W32Dispatch and W32TryCall invoke wow_user_invoke_thunk,whose finally restores fWhoCalled. Only direct WU32SendMessage caller is WU32PostMessage compatibility branch and it immediately returns. Both cleanup owners wow_message_unwind16/DDERollback32 do not read fWhoCalled;that early path has empty postConversion. Per-Post/Send restoration duplicates outer authority. Residual local finalization remains necessary: acquired text maps/COPYDATA records survive a native-call exception that skips normal unthunk;failed DDE posts leave converted pairs/packed data without a receiver. Outer invocation owns only selectors/borrow scope and cannot release this local conversion record.",
+      "option": "Restore absence of per-function savedWhoCalled and its finalizer;retain resource cleanup. Shared invocation fixture adds two entry modes x normal/exception direct tail-call controls."
+    },
+    {
+      "id": "T483-R1894",
+      "original_anchor": 1873,
+      "before_added": 4,
+      "before_deleted": 0,
+      "delta": -1,
+      "problem": "Duplicate invocation-mode restoration",
+      "evidence": "Both selected W32Dispatch and W32TryCall invoke wow_user_invoke_thunk,whose finally restores fWhoCalled. Only direct WU32SendMessage caller is WU32PostMessage compatibility branch and it immediately returns. Both cleanup owners wow_message_unwind16/DDERollback32 do not read fWhoCalled;that early path has empty postConversion. Per-Post/Send restoration duplicates outer authority. Residual local finalization remains necessary: acquired text maps/COPYDATA records survive a native-call exception that skips normal unthunk;failed DDE posts leave converted pairs/packed data without a receiver. Outer invocation owns only selectors/borrow scope and cannot release this local conversion record.",
+      "option": "Restore absence of per-function savedWhoCalled and its finalizer;retain resource cleanup. Shared invocation fixture adds two entry modes x normal/exception direct tail-call controls."
+    }
+  ],
+  "delivery": "batch-p162-checkpoint.json",
+  "verification": "Cached full,published11x2,COPYDATA/queue,DDE and linked production scope checks,Full19 passed"
+}

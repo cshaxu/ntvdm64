@@ -1186,3 +1186,5 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [P160 dialog review](r1846-r1854-wudlg-review.json), [line proof](batch-p160-line-check.json), [delivery checkpoint](batch-p160-checkpoint.json): original-entry controls and minimal call-owned cleanup.
 
 - [P161 USER initialization review](r1855-r1859-wuman-review.json), [checkpoint](batch-p161-checkpoint.json): original declaration/format restoration and bounded guest address publication evidence.
+
+- [P162 message entry review](r1860-r1894-wumsg-review.json), [line proof](batch-p162-line-check.json), [checkpoint](batch-p162-checkpoint.json): one invocation-mode owner and one failed-post rollback.

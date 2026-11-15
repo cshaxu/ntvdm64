@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1859 reviewed:646 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1205 qualified pending;861 unreviewed. Files247/365 audited,118 remain.
+1894 reviewed:647 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1239 qualified pending;826 unreviewed. Files248/365 audited,117 remain.
 P155 mirror batch-59;cached,publish11x2,focused353/0,five Win16 modes,Full19 and governance passed;Git accompanies receipt. Approved synchronization remains R1797 revisit.
 P154 DC cache original restored;mirror batch-14;cached,publish11x2,focused,Full19 passed;Git accompanies receipt.
 P153 header4->2;wparam106->94;cached,publish11x2,parameter54,Full19 passed;Git accompanies receipt.
@@ -71,10 +71,12 @@ P160 wudlg.c21->19(-2);whole-file review complete. Original entry controls show 
 
 P161 wuman9->6(-3):original unused extern restored,comment reduced,CRLF restored. Guest-address residuals source/ABI-proved pending owner;MSVC136 lines match and executable preprocessing unchanged. P160 package/cached/Full evidence reused;Git accompanies receipt.
 
+P162 wumsg125->113(-12):remove duplicate per-Post/Send selector restoration and duplicate failed-post rollback;retain one common invocation owner and call-local conversion cleanup. Final MSVC635 lines match;cached,publish11x2,focused,Full19 and governance passed;Git accompanies receipt.
+
 ## Current Technical Baseline
 
-P160 candidate `286d49d6-4333-4382-8cf3-4e61b6da91b4` published11x2;hashes match.
-Final dialog entry controls199/0 and Full19 passed;Git accompanies P160.
+P162 candidate `ada335bd-9981-48f6-aa15-e91052f1fad1` published11x2;hashes match.
+Final message ownership/scope focused and Full19 passed;Git accompanies P162.
 Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p154-checkpoint.json).

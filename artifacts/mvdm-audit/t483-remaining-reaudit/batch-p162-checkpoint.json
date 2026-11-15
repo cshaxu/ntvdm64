@@ -1,0 +1,33 @@
+{
+  "status": "cached full,published11x2,focused ownership/scope checks,Full19 and governance passed;Git accompanies receipt",
+  "source_files": 2,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "sha256": "e4ac488c1bc3ec1cf5f1ea34e7c22ed73ef392bf815bdcbdba7d0f8ab88893d7"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_thunk_scope_fixture.c",
+      "sha256": "37e8d864ab4a7d7a30ad6b6c0e7bf192655f339adaa5b223cda6b972065eb57f"
+    }
+  ],
+  "mirror_delta": -12,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "ada335bd-9981-48f6-aa15-e91052f1fad1",
+  "tests": {
+    "Full_gates": 19,
+    "focused": "COPYDATA/queue selector exact-body controls,DDE alias rollback and linked production thunk scope with4 direct tail-call cases",
+    "focused_exit": 0,
+    "COPYDATA_scenarios": 59,
+    "DDE_alias_cases": 96,
+    "DDE_execute_cases": 38,
+    "scope_tail_cases": 4
+  },
+  "limitations": [
+    "Focused boundary controls are not guest failure reproduction.",
+    "External DOS4GW/Nesticle fixtures absent;skipped not passed."
+  ],
+  "runner_notes": [
+    "One original brace line mismatch corrected before cached build;final635 retained lines match."
+  ]
+}

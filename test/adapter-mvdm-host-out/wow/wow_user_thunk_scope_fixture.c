@@ -59,6 +59,19 @@ static void create_window(void)
     CHECK(window != NULL);
     CHECK(wow_window_words_attach(window, &words));
 }
+/* PostMessage's compatibility path directly calls SendMessage, then returns.
+ * The common invocation owner must restore mode even without inner scopes. */
+static ULONG FASTCALL mode_leaf(PVDMFRAME frame)
+{
+    fWhoCalled = FALSE;
+    if (frame->wAX) RaiseException(0xE0420042, 0, 0, NULL);
+    return 42;
+}
+static ULONG FASTCALL mode_tail(PVDMFRAME frame)
+{
+    fWhoCalled = TRUE;
+    return mode_leaf(frame);
+}
 int __cdecl main(void)
 {
     VDMFRAME frame = {0};
@@ -87,6 +100,18 @@ int __cdecl main(void)
     CHECK(fWhoCalled && !fThunkDDEmsg);
     CHECK(wow_user_borrow_window(NULL) == NULL && GetLastError() == ERROR_INVALID_STATE);
     CHECK(calls == 4);
+    for (unsigned entering = 0; entering < 2; ++entering) {
+        for (unsigned failure = 0; failure < 2; ++failure) {
+            BOOL mode_caught = FALSE;
+            frame.wAX = (WORD)failure;
+            fWhoCalled = (BOOL)entering;
+            __try { CHECK(wow_user_invoke_thunk(mode_tail, &frame) == 42); }
+            __except (GetExceptionCode() == 0xE0420042 ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+                mode_caught = TRUE;
+            }
+            CHECK(mode_caught == (BOOL)failure && fWhoCalled == (BOOL)entering);
+        }
+    }
     fprintf(stderr, "WOW_USER_THUNK_SCOPE errors=%u calls=%u exception=%u\n", errors, calls, caught);
     return errors ? 3 : 0;
 }
