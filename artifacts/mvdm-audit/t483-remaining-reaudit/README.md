@@ -1158,3 +1158,9 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-review.md).
 
 - [P155 final receipt](batch-p155-checkpoint.json):mirror net-59;cached,publish11x2,focused353,five Win16 modes,Full19 passed. Approved completion synchronization retained for revisit.
+
+- [R1799–R1800 whole-file review](r1799-r1800-wsext-review.json):comments restored;mirror19->8;residual decisions retained.
+
+- [R1801–R1809 whole-file review](r1801-r1809-wspool-review.json):original GetPrn16 restored;mirror17->6;three proven residuals remain pending.
+
+- [P156 receipt](batch-p156-checkpoint.json) and [line proof](batch-p156-line-check.json):mirror-22;cached,publish11x2,focused72,raw-spool witness,Full19 passed.

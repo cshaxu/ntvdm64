@@ -1,0 +1,84 @@
+{
+  "path": "src/mvdm-host/wow32/wspool.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wspool.c",
+  "before": 17,
+  "after": 6,
+  "delta": -11,
+  "points": [
+    {
+      "id": "R1801",
+      "evidence": "Restore original logical lines after retained adaptations;no original conditional branch removed.",
+      "decision": "restored-pending-delivery",
+      "scale": "line-only"
+    },
+    {
+      "id": "R1802",
+      "evidence": "OpenPrinterA and StartDocPrinterA succeed before carrier allocation. Original LocalAlloc16 can return0;original GetPrn16 then returns0. Without this close the successfully opened native printer has no caller-visible carrier and leaks. Same fixture original control fails allocation failure closes native printer.",
+      "decision": "minimized-residual-pending",
+      "scale": "4->3;delta-1"
+    },
+    {
+      "id": "R1803",
+      "evidence": "Original WG32OpenJob stores GetLastError after StartDocPrinterA failure but never closes the successfully opened printer. Control fails failed start retires native handle. Captured ul already preserves the original error across ClosePrinter.",
+      "decision": "minimized-residual-pending",
+      "scale": "1->1;delta0"
+    },
+    {
+      "id": "R1804",
+      "evidence": "Original unused h16 local has no behavior;its deletion was unnecessary mirror diff. Restored.",
+      "decision": "restored-pending-delivery",
+      "scale": "1->0;delta-1"
+    },
+    {
+      "id": "R1805",
+      "evidence": "Selected original WOWFASTEDIT LocalLock16 tests HIWORD(hMem)==0 and returns0. Failed LocalAlloc16 is already normalized to0;original GetPrn16 returns LOWORD(hnd)==0. Extra guard is redundant.",
+      "decision": "restored-pending-delivery",
+      "scale": "4->0;delta-4"
+    },
+    {
+      "id": "R1806",
+      "evidence": "Private fresh LMEM_MOVEABLE four-byte allocation has no DISCARDABLE flag. Original kernel31/lhandle.asm halloc stores its true address and clears flags. No caller receives the carrier before immediate LocalLock16. The fixture lock-fail on this successful new allocation had no supported caller/source basis. Restore original return location.",
+      "decision": "restored-pending-delivery",
+      "scale": "1->0;delta-1"
+    },
+    {
+      "id": "R1807",
+      "evidence": "GETMISCPTR uses GETOPTPTR and GetPModeVDMPointer for the nonzero locked pointer. A mapped live private allocation supplies its address;fault resolution is not an independent NULL success result. Fixture map_fail invented a production state for this path. Restore original unlock structure.",
+      "decision": "restored-pending-delivery",
+      "scale": "1->0;delta-1"
+    },
+    {
+      "id": "R1808",
+      "evidence": "Original allocation failure returns0;successful fresh private allocation is initialized before its handle escapes. Added local-free/zero-return fallback depended on unsupported injected lock/map failures. Restore original final return.",
+      "decision": "restored-pending-delivery",
+      "scale": "3->0;delta-3"
+    },
+    {
+      "id": "R1809",
+      "evidence": "Prn32 is called with caller-supplied Win16 handles by StartSpoolPage,EndSpoolPage,CloseJob,WriteSpool,DeleteJob. LocalLock16 may return0 for such invalid/discarded inputs,unlike the fresh private allocation in GetPrn16. Original h32 then remains uninitialized and is passed to native printer APIs. Initializing NULL defines failure without another path;original fixture control fails this case.",
+      "decision": "minimized-residual-pending",
+      "scale": "2->2;delta0"
+    }
+  ],
+  "fixture": {
+    "original_checks": 70,
+    "original_failures": 3,
+    "candidate_checks": 72,
+    "candidate_failures": 0,
+    "scope": "Exact original/selected bodies with controlled host boundary;not a physical-printer acceptance claim",
+    "removed_injections": "Successful private fresh carrier spontaneously failing lock or NULL mapping;Prn32 invalid caller-handle case retained"
+  },
+  "source_dependencies": [
+    "src/mvdm-host/wow32/wcall16.c LocalAlloc16/selected LocalLock16",
+    "src/mvdm-host/wow32/wow32.h GETMISCPTR/GETOPTPTR",
+    "src/mvdm-guest/wow16/kernel31/lhandle.asm halloc and discard eligibility"
+  ],
+  "delivery": "batch-p156-checkpoint.json",
+  "line_verification": {
+    "selected_retained_lines": 229,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "counter_review": "Original allocator publishes a private live carrier before its immediate selected fast LocalLock16;no callback runs in that lock path. Unpublished non-discardable object has no legitimate external free/discard owner. Restore that path;keep invalid caller-owned Prn32 handling separate. No original guest changed."
+}

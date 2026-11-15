@@ -1,0 +1,32 @@
+{
+  "file": "src/mvdm-host/wow32/wsext.c",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wsext.c",
+  "before": 19,
+  "after": 8,
+  "delta": -11,
+  "changes": "Delete explanatory comment deviations;restore original surrounding comments and logical lines. No executable expression or binding changed.",
+  "points": [
+    {
+      "id": "R1799",
+      "before": 6,
+      "after": 2,
+      "evidence": "Original WWS32WSAUnhookBlockingHook tests the WSAIsBlocking function pointer instead of invoking it. The loaded non-null entry therefore always returns WSAEINPROGRESS. WWS32WSASetBlockingHook and WWS32WSACleanup correctly invoke the same provider predicate. Restoring that pointer test reintroduces deterministic false rejection.",
+      "decision": "minimized;residual pending owner decision"
+    },
+    {
+      "id": "R1800",
+      "before": 8,
+      "after": 1,
+      "evidence": "Original WWS32WSACleanup decrements per-task startup count and calls WWS32TaskCleanup at zero while the task remains alive. Native WSAStartup is process-wide; the original task cleanup frees TLS-owned buffers and sockets without cancelling task-owned async contexts. The new early task-exit binding cannot replace explicit WSACleanup. Existing single-list owner-qualified retirement must remain at this shared cleanup entry.",
+      "decision": "minimized;residual pending owner decision"
+    }
+  ],
+  "coupled_new_diff": "P155 owner-approved five-line dispatcher synchronization remains R1797 revisit,not counted as a newly audited legacy point.",
+  "validation": {
+    "selected_retained_lines": 447,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "delivery": "batch-p156-checkpoint.json"
+}

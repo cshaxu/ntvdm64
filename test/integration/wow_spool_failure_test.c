@@ -18,7 +18,7 @@ enum { WOW_OpenPrinterA=3,WOW_StartDocPrinterA=4,WOW_EndDocPrinter=7,
 static DLLENTRYPOINTS spoolerapis[15];
 static WORD gUser16hInstance=0x1234;
 static unsigned checks,failures,native_live,carrier_live,locks,closes,starts,frees;
-static int open_fail,start_fail,close_fail,end_fail,alloc_fail,lock_fail,map_fail,profile_missing;
+static int open_fail,start_fail,close_fail,end_fail,alloc_fail,lock_fail,profile_missing;
 static DWORD carrier;
 static HANDLE local_handle=(HANDLE)0x12340022;
 static void check(int ok,const char *label){++checks;if(!ok){++failures;printf("FAIL %s\n",label);}}
@@ -53,7 +53,7 @@ static BOOL load_apis(char *name,DLLENTRYPOINTS *p,int n){(void)name;(void)p;(vo
 #define FREEARGPTR(arg) ((void)(arg))
 #define GETPSZPTR(v,p) ((p)=(char *)(v))
 #define FREEPSZPTR(p) ((void)(p))
-#define GETMISCPTR(v,p) ((void)(v),(p)=map_fail?NULL:(LPBYTE)&carrier)
+#define GETMISCPTR(v,p) ((void)(v),(p)=(LPBYTE)&carrier)
 #define FREEMISCPTR(p) ((void)(p))
 #define RETURN(value) return (value)
 #define LOGDEBUG(a,b) ((void)0)
@@ -71,7 +71,7 @@ VOID FreePrn(WORD h);
 #include "spool_exact.h"
 static void reset(void){
     native_live=carrier_live=locks=closes=starts=frees=0;
-    open_fail=start_fail=close_fail=end_fail=alloc_fail=lock_fail=map_fail=profile_missing=0;
+    open_fail=start_fail=close_fail=end_fail=alloc_fail=lock_fail=profile_missing=0;
 }
 static ULONG open_job(void){VDMFRAME frame={{(DWORD)"port",(DWORD)"title"}};return WG32OpenJob(&frame);}
 int main(void){
@@ -91,12 +91,11 @@ int main(void){
     reset();open_fail=1;check(open_job()==ERROR_ACCESS_DENIED&&!native_live&&!starts,"open provider failure");
     reset();start_fail=1;check(open_job()==ERROR_DISK_FULL,"start error preserved across cleanup");
     check(!native_live&&closes==1&&!carrier_live,"failed start retires native handle");
-    for(e=0;e<3;e++){
-        reset();alloc_fail=e==0;lock_fail=e==1;map_fail=e==2;
-        check(open_job()==0,"failed carrier returns zero");
-        check(!native_live&&closes==1&&!carrier_live&&!locks,"failed carrier retires both owners");
-    }
+    /* Original LocalLock16(0) returns0. A private fresh non-discardable
+     * carrier cannot independently disappear before its immediate lock. */
+    reset();alloc_fail=1;
+    check(open_job()==0,"allocation failure returns zero");
+    check(!native_live&&closes==1&&!carrier_live&&!locks,"allocation failure closes native printer");
     reset();carrier_live=1;lock_fail=1;check(Prn32(0x22)==NULL,"failed carrier lock has defined null result");
-    reset();carrier_live=1;map_fail=1;check(Prn32(0x22)==NULL&&!locks,"failed mapping has defined null result and unlock");
     printf("WOW_SPOOL_FAILURE checks=%u failures=%u\n",checks,failures);return failures?1:0;
 }

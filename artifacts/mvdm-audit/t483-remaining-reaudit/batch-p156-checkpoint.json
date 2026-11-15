@@ -1,0 +1,49 @@
+{
+  "batch": "P156",
+  "status": "cached full,published11x2,focused72/0,real raw-spool negative witness,Full19 and governance passed;Git accompanies receipt",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "sha256": "23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "sha256": "8b3af16397353e6adb69bd11d1303a72143e1c001810d2812279399cb755b75b"
+    },
+    {
+      "path": "test/integration/wow_spool_failure_test.c",
+      "sha256": "4d621473c71cf6900e483c77aedaf3c5829baebf02a203620164fc70dc03c9e9"
+    }
+  ],
+  "mirror_diff_delta": -22,
+  "mirror_files": [
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "before": 19,
+      "after": 8,
+      "delta": -11
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "before": 17,
+      "after": 6,
+      "delta": -11
+    }
+  ],
+  "original_control": "70 checks;3 expected failures for retained deviations",
+  "focused": "72 checks;0 failures",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "9ea08084-f23a-45a0-8c63-f3cb9e124949",
+  "tests": {
+    "focused_assertions": 72,
+    "failures": 0,
+    "raw_spool": "original no-profile failure reached;no host printer configuration changed",
+    "Full_gates": 19
+  },
+  "limitations": [
+    "No physical printer output acceptance claimed.",
+    "Original fixture failures are deliberate negative controls,not unresolved candidate failures.",
+    "External DOS4GW/Nesticle fixtures unavailable;case skipped,not passed."
+  ]
+}
