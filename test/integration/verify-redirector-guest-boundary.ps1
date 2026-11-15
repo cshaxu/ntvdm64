@@ -2,7 +2,9 @@
 param([Parameter(Mandatory)][string]$RuntimeRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$GuestProbes,
-    [Parameter(Mandatory)][string]$OutputRoot)
+    [Parameter(Mandatory)][string]$OutputRoot,
+    [ValidateNotNullOrEmpty()][ValidateSet('async','async-write','netapi','message')]
+    [string[]]$Modes=@('async','async-write','netapi'))
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
@@ -13,7 +15,9 @@ $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){
     throw 'Require a fresh build evidence directory'
 }
-if($env:COMPUTERNAME -ne 'NEKOGP4'){throw 'Existing guest pipe witness requires its recorded local machine name'}
+if(@($Modes | Where-Object {$_ -in @('async','async-write')}).Count -and $env:COMPUTERNAME -ne 'NEKOGP4'){
+    throw 'Existing guest pipe witness requires its recorded local machine name'
+}
 New-Item -ItemType Directory $out | Out-Null
 $saved=[Environment]::GetEnvironmentVariable('TEST_RUNTIME_ROOT')
 $savedInitial=[Environment]::GetEnvironmentVariable('MVDM_TEST_INITIAL_COMMAND')
@@ -25,7 +29,9 @@ try{
     $runtime=New-PhysicalRuntimeStage $package -FreshPackageIdentity
     $scope=New-IsolatedPackageScope $runtime
     New-Item -ItemType Directory -Force (Join-Path $runtime 'tests') | Out-Null
-    foreach($name in @('VDMPASY.COM','VDMPASW.COM','VDMNETAP.COM')){
+    $probeNames=@{'async'='VDMPASY.COM';'async-write'='VDMPASW.COM';'netapi'='VDMNETAP.COM';'message'='VDMMSG.COM'}
+    foreach($mode in $Modes){
+        $name=$probeNames[$mode]
         Copy-Item -LiteralPath (Join-Path $probes $name) -Destination (Join-Path $runtime "tests/$name")
     }
     $env:TEST_RUNTIME_ROOT=$runtime
@@ -34,7 +40,7 @@ try{
     # environment handling or allow the inherited long host PATH into COMMAND.
     $env:PATH="$env:SystemRoot\system32;$env:SystemRoot"
     [Environment]::SetEnvironmentVariable('MVDM_TEST_DIRECT_CMD',$null)
-    foreach($mode in @('async','async-write','netapi')){
+    foreach($mode in $Modes){
         $start=[Diagnostics.ProcessStartInfo]::new()
         $start.FileName=$observerPath; $start.UseShellExecute=$false; $start.CreateNoWindow=$true
         $null=$start.Environment.Remove('MVDM_TEST_DIRECT_CMD')

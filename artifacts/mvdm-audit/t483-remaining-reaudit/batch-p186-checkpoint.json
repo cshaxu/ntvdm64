@@ -1,0 +1,84 @@
+{
+  "status": "original body restored;cached build,publish11x2,Full and actual DOS message probe passed;one header boundary pending owner",
+  "source_files": 3,
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "sha256": "a5957f51780bd7a8e76e1330438aab1168688378e7ff71ff82b70ec04f9bd548"
+    },
+    {
+      "path": "test/integration/verify-redirector-guest-boundary.ps1",
+      "sha256": "40d7dab425c257766df02d031e33e43a9e230657f6c5d9657b72e7d91348be6a"
+    },
+    {
+      "path": "test/observation/console_terminal_observer.c",
+      "sha256": "0c2aa22ccee9695ffc5ac8d41072d34d1032eb4f72e7161b4566829acaa5017e"
+    }
+  ],
+  "mirror_before": {
+    "added": 4,
+    "deleted": 529,
+    "total": 533
+  },
+  "mirror_after": {
+    "added": 2,
+    "deleted": 5,
+    "total": 7
+  },
+  "mirror_delta": -526,
+  "line_check": {
+    "checked": 465,
+    "mismatches": [],
+    "error_count": 1,
+    "before": {
+      "added": 4,
+      "deleted": 529,
+      "total": 533
+    },
+    "after": {
+      "added": 2,
+      "deleted": 5,
+      "total": 7
+    },
+    "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+    "msvc_selected_lines": 276,
+    "msvc_selected_line_mismatches": [],
+    "selected_preprocessing_equals_original_body": true,
+    "selected_path_line_reset": 113
+  },
+  "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+  "package": "b40f2744-2397-4e8b-a1aa-c75ac114e221",
+  "controls": {
+    "current_header_compile": 0,
+    "original_header_compile": 2,
+    "original_header_plus_original_smb_declarations": 2,
+    "original_descriptors_compile": 0,
+    "full_original_body_compile": 0,
+    "full_original_body_link": 0
+  },
+  "original_failure_evidence": [
+    "Original XactSrvP.h fails at line63 missing smb.h in actual selected flags.",
+    "Adding original smb.h/smbtrans.h/srvfsctl.h/status.h in isolated include directory advances to missing ntmsv1_0.h at original line69;private NT4 authentication/server header closure is not supplied."
+  ],
+  "call_chain": "DOS INT21/5F40 -> VrpNetMessageBufferSend in vrnetapi.c -> original XsNetMessageBufferSend -> NetMessageBufferSend;original conversion/cleanup/status mapping retained.",
+  "restoration": "Original message-info descriptors, omitted NameAdd/Del/Enum/GetInfo bodies and original whitespace restored together. No new dispatch/caller, no assertion these unselected name APIs are newly supported.",
+  "counter_review": "The original body compiled and linked without new providers: omission had no demonstrated build necessity. Restore it, rather than keeping deletion because no current caller uses it. The remaining one-line header binding is a declaration-package boundary, not proof of an original algorithm defect. Retaining it requires owner decision;no new shim is introduced. Original compiler warnings in uncalled name handlers are recorded,not silently repaired.",
+  "excluded": "Original non-UNICODE framework retained;four excluded lines remain one#error;#line112 inside excluded arm plus #line113 after endif preserve both structural and selected compiler mapping.",
+  "verification": {
+    "root": "build\\t483-s5-p186\\final2",
+    "Full": "passed;see full-isolated evidence",
+    "message": "existing independent VDMMSG.COM probe:real mapped NetMessage error,not INVALID_FUNCTION;MEM and COMMAND exit",
+    "identity": "isolated package normalized back to published identity:all11 hashes equal",
+    "shared_rdp": "Earlier P181-package recheck failed due recorded Explorer/Radeon Clipboard ownership;no fresh shared Clipboard pass claimed. This preceding-package failure is not caused by this NetAPI restoration;WOW32 source unchanged. Raw runs retained in build/rdp-recheck-p185."
+  },
+  "limits": [
+    "No live Messenger service success path validated on this modern host.",
+    "No new guest-name-management dispatch coverage claimed.",
+    "Shared RDP Clipboard recheck remains unsuccessful;prior passing evidence is separate."
+  ],
+  "raw_controls": "build\\t483-s5-p186",
+  "test_changes": [
+    "Existing redirector runner gains optional message mode with unchanged three default modes;all four exercised.",
+    "Existing message observer uses system32 and tests paths;no alternate setup framework."
+  ]
+}

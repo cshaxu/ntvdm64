@@ -1307,7 +1307,7 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
           CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
     }
     if(argc==5 && !strcmp(argv[4],"--vdmredir-message")) {
-        send_keys("REDIR.EXE\r"); Sleep(1500); send_keys("VDMMSG.COM\r"); Sleep(3000); send_keys("mem\r");Sleep(2000);send_keys("exit\r");
+        send_keys("system32\\REDIR.EXE\r"); Sleep(1500); send_keys("tests\\VDMMSG.COM\r"); Sleep(3000); send_keys("system32\\MEM.EXE\r");Sleep(2000);send_keys("exit\r");
         { DWORD pipe_wait=WaitForSingleObject(pi.hProcess,5000),pipe_code=0; GetExitCodeProcess(pi.hProcess,&pipe_code);
           Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000); CloseHandle(raw_log);
           int passed=pipe_wait==WAIT_OBJECT_0 && pipe_code==1 && log_contains(argv[3],"NETMSG-REAL-ERROR-OK") && log_contains(argv[3],"bytes total conventional memory");

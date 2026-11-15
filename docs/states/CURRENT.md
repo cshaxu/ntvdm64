@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1998 reviewed:684 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1306 qualified pending;722 unreviewed. Files271/365 audited,94 remain.
+2001 reviewed:686 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1307 qualified pending;719 unreviewed. Files272/365 audited,93 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -48,10 +48,6 @@ established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P168 wuwind77->60(-17);MSVC829/0,cached,publish11x2,DC/typed procedure/parameter-map focused,Full19 and governance passed;Git accompanies receipt.
-
-P169 XMS header selected original subset confirmed;120 content lines match,7#error ranges preserved. No source changes;P168 final2 product evidence reused;Git accompanies receipt.
 
 P170 XMS A20 selected original source confirmed;78 content lines match,two literal#if0 exclusions retained. No source changes;P168 final2 validation reused;Git accompanies receipt.
 
@@ -205,3 +201,5 @@ P183 apibuff.c188->174(-14):original comments restored;selected actual preproces
 P184 memalloc.c:selected original subset confirmed;ordinary semantic0,excluded diff57 unchanged. Four boundary #line corrected;173 original lines match;7#error retained. Actual original/before/final preprocessing identical;P181 product evidence reused;Git accompanies receipt.
 
 P185 convert.c:selected original subset confirmed;ordinary semantic0,excluded diff33 unchanged. Six boundary #line corrected;1743 original lines match;7#error retained. Actual original/before/final preprocessing identical;P181 product evidence reused;Git accompanies receipt.
+
+P186 apimsg533->7(-526):original descriptors and complete function bodies restored;header binding2 remains pending,excluded5 retained. 276 MSVC-selected lines match original;cached,publish11x2,Full and actual DOS NetMessage failure/retirement passed. Prior-package shared RDP Clipboard recheck remains unsuccessful due recorded external ownership;not a new pass. Git accompanies receipt.

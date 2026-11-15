@@ -1234,3 +1234,5 @@ P183: [NetAPI buffer boundary review](batch-p183-checkpoint.json):original comme
 P184: [NetLib allocation subset review](batch-p184-checkpoint.json):original selected content and7#error;four directive line corrections;P181 evidence reused.
 
 P185: [RAP conversion subset review](batch-p185-checkpoint.json):original selected content and7#error;six directive line corrections;P181 evidence reused.
+
+P186: [Original NetMessage restoration](batch-p186-checkpoint.json):533->7(-526);one header decision;cached,publish11x2,Full and DOS message probe. Shared Clipboard recheck limitation retained.
