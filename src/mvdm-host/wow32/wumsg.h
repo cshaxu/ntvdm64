@@ -13,7 +13,6 @@
 
 #define WOWDDE_POSTMESSAGE TRUE
 
-/* DIVERGENCE(MVDM-HOST-DIV-344): matches the private native-thread mode. */
 extern __declspec(thread) BOOL fWhoCalled;
 #line 17
 

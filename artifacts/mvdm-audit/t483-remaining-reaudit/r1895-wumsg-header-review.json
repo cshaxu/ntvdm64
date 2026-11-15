@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/wow32/wumsg.h",
+  "original_sha256": "1f18e9770131f758947986de78dcb6c974730bcbaad3137e3c69a615f0f79324",
+  "before_sha256": "950f8b060f56a1d42131d5b4cb35ae16d1cea043f50cda83c890bd015f88b52f",
+  "after_sha256": "870f8b15e374da3c6c752982e15f881ddc60a29c93b832bbfd100766c96841b7",
+  "mirror_diff": {
+    "before": {
+      "added": 2,
+      "deleted": 1
+    },
+    "after": {
+      "added": 1,
+      "deleted": 1
+    },
+    "delta": -1
+  },
+  "evidence": "Native hook callback snapshots fWhoCalled before wow_task_callback_enter, then restores it in finally; another native thread can capture POST mode before waiting for task ownership and later restore stale global mode. Original wmsg16 DDE conversion reads mode to choose copied versus borrowed handle resources. This is a source-permitted ordering counterexample,not a reproduced race.",
+  "call_chain": [
+    "wow_hook_callback.c:Wow hook entry snapshot before admission and finally restore",
+    "wumsg.c:TLS definition and post-mode assignments",
+    "wmsg16.c:DDE converters mode readers",
+    "wow_user_thunk_scope.c:common invocation mode owner"
+  ],
+  "counter_review": "Declaration alone cannot differ from selected TLS definition;necessity is the independently traced native entry ordering,not merely the current definition. No new state or shim. Removing duplicate comment changes no declaration tokens.",
+  "disposition": "Minimize comment;remaining TLS declaration pending owner",
+  "line_check": {
+    "kind": "original/current source logical-line mapping,not new MSVC compilation",
+    "matched_original_lines": 42,
+    "mismatches": 0,
+    "excluded_branches": 0
+  },
+  "validation": "Only comment/EOL changed;P162 cached/full/published package reused. Fresh RDP recheck passed18 Clipboard checkpoints after identified RadeonSoftware holder was stopped. Initial failed attempt retained."
+}

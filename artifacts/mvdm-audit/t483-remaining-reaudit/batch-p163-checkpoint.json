@@ -1,0 +1,9 @@
+{
+  "status": "Comment-only source verified;P162 build/publication/Full reused;Git accompanies receipt",
+  "mirror_delta": -1,
+  "source_sha256": "870f8b15e374da3c6c752982e15f881ddc60a29c93b832bbfd100766c96841b7",
+  "published_package": "ada335bd-9981-48f6-aa15-e91052f1fad1",
+  "new_runtime_witness": "WOW_CLIPBOARD_TRANSFER_OK mode=transfer format=CF_TEXT render_handoff=direct checkpoints=18 guest_to_native=1 native_to_guest=1 rejected=1 deferred=1 replacement=1 owner_destroy_renderall=1 task_exit=0 desktop=shared",
+  "failed_witness": "build/rdp-recheck-p162/transfer/native-bridge-trace.txt:OpenClipboard error5;holder PID10888 RadeonSoftware;retained",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924"
+}
