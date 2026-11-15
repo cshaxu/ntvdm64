@@ -1,0 +1,80 @@
+{
+  "status": "original selected header and structural line mapping confirmed;line-only cleanup delivered",
+  "proof": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+    "sha256": "525692fc0e27d5913d9c8892917f52cd9c95293b57293b1cb82014646aea357c",
+    "original_sha256": "9c9f23b07297d1292cbc1e3da1ed05956f767f684977a825fc4eb08bcba5295f",
+    "source_lines": 90,
+    "contexts": [
+      {
+        "unit": "apimsg",
+        "selected_header_lines": 20,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisrv",
+        "selected_header_lines": 20,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisvc",
+        "selected_header_lines": 20,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiuse",
+        "selected_header_lines": 20,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiwksta",
+        "selected_header_lines": 20,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 20,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xsunicod",
+        "selected_header_lines": 20,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "ordinary_diff": 0,
+    "excluded_diff": 18,
+    "mirror_before": 18,
+    "mirror_after": 18,
+    "mirror_delta": 0,
+    "line_directives_before": 3,
+    "line_directives_after": 3,
+    "excluded": 1,
+    "structural_endif_original_line": 83,
+    "selected_post_endif_line": 84,
+    "negative_exit": 2,
+    "negative": "C1189 ANSI xactsrv conversion profile is not supported",
+    "mismatches": []
+  },
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "sha256": "525692fc0e27d5913d9c8892917f52cd9c95293b57293b1cb82014646aea357c"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+    "sha256": "525692fc0e27d5913d9c8892917f52cd9c95293b57293b1cb82014646aea357c"
+  },
+  "mirror_before": 18,
+  "mirror_after": 18,
+  "mirror_delta": 0,
+  "change": "Remove redundant #line46;add #line83 before original endif;retain #line66,error and post-endif #line84. Directive count stays3;one excluded branch retained.",
+  "call_chain": "Seven actual XACTSRV translation units include xactsrv_wksta_minimal.h -> xsunicod.h;original conversion prototypes and macros remain unchanged.",
+  "verification": "Seven formal /O2 contexts with byte-identical source copies:before/final/original headers explicitly observed;all21 preprocessed token outputs agree per unit;selected header20 lines match. ANSI negative control C1189 at excluded branch.90 retained original source lines including endif mapped correctly.",
+  "first_attempt_limitation": "Initial /I override retained actual source header due MSVC parent source search. Those outputs do not prove candidate equivalence. Final controls relocate only byte-identical TU copies and assert each included header path;verify2/negative2 are authoritative.",
+  "counter_review": "No branch content restored or suppressed;no runtime semantic changes. #line inside excluded branch repairs structural mapping without affecting selected path. No new header policy decision.",
+  "product_verification": "P187 cached build,11-image dual publication,Full and focused controls reused under line-only equivalence authorization;not a new runtime run.",
+  "delivery": "P193 governance/commit/push accompany receipt"
+}

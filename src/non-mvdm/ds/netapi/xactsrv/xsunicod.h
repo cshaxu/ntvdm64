@@ -43,7 +43,6 @@ XsDupWStrToStr(
     IN LPWSTR Src
     );
 
-#line 46
 #ifdef UNICODE
 
 #define XsDupStrToTStr( src ) ((LPTSTR)XsDupStrToWStr(( src )))
@@ -66,6 +65,7 @@ XsCopyBufToTBuf(
 #else
 #line 66
 #error ANSI xactsrv conversion profile is not supported
+#line 83
 #endif // def UNICODE
 #line 84
 

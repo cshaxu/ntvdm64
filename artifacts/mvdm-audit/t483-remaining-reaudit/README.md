@@ -1248,3 +1248,5 @@ P190: [NetWksta original-byte confirmation](batch-p190-checkpoint.json):2 unchan
 P191: [XACTSRV helper original-byte confirmation](batch-p191-checkpoint.json):2 unchanged;one header decision;no source change;P187 product evidence reused.
 
 P192: [Unicode helper original-byte confirmation](batch-p192-checkpoint.json):2 unchanged;one header decision;no source change;P187 product evidence reused.
+
+P193: [Unicode header line mapping](batch-p193-checkpoint.json):18 excluded unchanged,ordinary0;7 context comparisons and ANSI negative control;P187 evidence reused.
