@@ -1098,3 +1098,17 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [P148 checkpoint](batch-p148-checkpoint.json) and [line proof](batch-p148-line-check.json):combo converter minimization;build,publish,focused,Full19/governance passed.
 
 - [P148 counter-review](p148-counter-review.json):source freeze,ownership boundaries and synchronized pending residuals;all gates passed.
+
+- [R1661–R1665](r1661-r1665-wmsgem-review.json): Edit converter whole-file review;comment/line-only diff-4,141 retained lines;P149 full delivery verified.
+
+- [R1666–R1669](r1666-r1669-wmsglb-review.json): ListBox full-file review;comments-only diff-3;original consumer and line evidence,P149 delivered.
+
+- [R1670](r1670-wmsgsbm-review.json): whole-file original selected code and line identity;no source edits.
+
+- [R1671](r1671-wmtbl32-review.json): whole-file original selected code and line identity;no source edits.
+
+- [R1672–R1686](r1672-r1686-wole2-review.json): whole-file OLE alias reduction97->42;native evidence and original line proof;P149 gates passed.
+
+- [P149 checkpoint](batch-p149-checkpoint.json) and [line proof](batch-p149-line-check.json): frozen whole-file batch,all delivery gates passed.
+
+- [P149 counter-review](p149-counter-review.json): source freeze,original contracts,ownership and ordered-register reconciliation.

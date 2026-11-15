@@ -1,0 +1,26 @@
+{
+  "batch": "P149",
+  "role": "single-agent independent counter-review",
+  "frozen_source_hashes_match": true,
+  "ordered_register": {
+    "total": 2720,
+    "reviewed": 1686,
+    "next": "T483-R1687",
+    "sequence_contiguous": true
+  },
+  "checks": [
+    "Production diff reviewed again:original caller validation order and failure output contract restored.",
+    "Temporary ANSI allocation truncated at min(length,capacity-1) before original strcpy;capacity0 guard precedes access.",
+    "ProcessBuffer only freed after allocation;query failure frees once,all matched/unmatched/conversion exits use final common free.",
+    "No added retry,polling,shim,guest modification or second implementation.",
+    "Two converter edits are comments/#line only;necessary residuals remain pending.",
+    "Final native alias test includes successful name,short/one-byte buffers,invalid alias output preservation,32-slot eviction and thread lifetime.",
+    "Actual successful system-query records remain original trust boundary;faults invented by a mock do not justify extra product scanning."
+  ],
+  "mirror_delta": -62,
+  "line_proof": "batch-p149-line-check.json",
+  "limitations": [
+    "Full19 and post-publication gates passed;Git accompanies receipt",
+    "External DOS4GW fixture unavailable:explicit skip"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "file": "src/mvdm-host/wow32/wmsglb.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+  "points": {
+    "1666": {
+      "before": "+0/-0 non-exclusion",
+      "after": "+0/-0 non-exclusion",
+      "conclusion": "Keep approved DEBUG exclusion;no additional original-body mismatch.",
+      "evidence": "Original DEBUG name table/helper replaced by #error;selected production preprocessing excludes them."
+    },
+    "1667": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "conclusion": "Remove comment;one failed output-buffer allocation guard remains pending owner.",
+      "evidence": "wmsg16.c dispatches WOWCLASS_LISTBOX/COMBOLBOX to ThunkLBMsg16;original returns TRUE with positive count,NULL output. lb1.c routes LB_GETSELITEMS to LBoxGetSelItems in lboxctl2.c: selected item with itemsselected<wParam executes *lParam++=i without NULL check. Original exact-source LIST_SELECTION_ALLOC control fails;candidate prevents malformed native call."
+    },
+    "1668": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "conclusion": "Remove comment;one failed tab-array allocation guard remains pending owner.",
+      "evidence": "getintarray16 checks NULL but returns void;original thunk still returns TRUE. lb1.c routes LB_SETTABSTOPS to lboxrare.c LBSetTabStops;fUseTabStops and positive count enter loop dereferencing lptabstops. Thus absence of conversion write does not make NULL native handoff valid. Exact-source LIST_TABS_ALLOC fails before guard and passes after."
+    },
+    "1669": {
+      "before": "+2/-1",
+      "after": "+1/-1",
+      "conclusion": "Remove comment;consistent signed cleanup predicate remains pending owner.",
+      "evidence": "Original acquisition INT32(WORD0xffff)=-1 skips buffer allocation,leaving guest lParam. Original unsigned cleanup sees65535>0 and calls STACKORHEAPFREE on that value. Exact-source LIST_TABS_SIGNED_RELEASE negative fails;candidate preserves original zero/positive paths."
+    }
+  },
+  "line_proof": {
+    "file": "src/mvdm-host/wow32/wmsglb.c",
+    "shared_retained_selected_lines": 107,
+    "line_mismatches": [],
+    "method": "Raw equal ranges then actual product preprocessed statements at original logical lines;added guard statements sharing original line numbers not confused with originals.",
+    "mirror_before": 59,
+    "mirror_after": 56,
+    "delta": -3,
+    "error_unchanged": true,
+    "source_sha256": "568a6e3c253f84e4bb7904c90846585d1ad8dbc66135b9dbda37fd986551a694"
+  },
+  "verification": {
+    "end": "2026-11-15T04:55:36.3976838Z",
+    "passed": true,
+    "negative": "four missing native buffers, two signed releases and native tab reset/failure",
+    "scope": "exact-source service doubles, not runtime acceptance",
+    "originalHelp": "allocation failure preserves successful NULL conversion and empty cleanup",
+    "baseline": "049ae27da"
+  },
+  "counter_review": [
+    "Original native consumers independently prove need;not inferred from current fixture success alone.",
+    "No new helpers or alternate routes;only three comments removed.",
+    "Original conditional boundary,#error and selected logical lines retained.",
+    "Three partial minimizations remain pending,not counted as full restoration."
+  ],
+  "delivery": "P149 cached full,publish11x2,post-publication focused,Full19/governance passed;Git accompanies receipt"
+}

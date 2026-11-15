@@ -16,9 +16,7 @@
 
 MODNAME(wole.c);
 
-#ifndef STATUS_INFO_LENGTH_MISMATCH
 #define STATUS_INFO_LENGTH_MISMATCH ((NTSTATUS)0xC0000004L)
-#endif
 
 #line 19
 /*
@@ -318,64 +316,45 @@ UINT GetHtaskAliasProcessName(
     DWORD   dwThreadID32;
     DWORD   dwProcessID32;
     PSYSTEM_PROCESS_INFORMATION ProcessInfo;
-    PVOID   ProcessBuffer;
-    ULONG   ProcessBufferSize;
+    PVOID ProcessBuffer;
+    ULONG ProcessBufferSize = 0;
 #line 310
     NTSTATUS status;
     ANSI_STRING pname;
     ULONG TotalOffset;
-    ULONG NextEntryOffset;
-    UINT    cch;
+    UINT cch = 0;
+#line 313
 
-    ProcessBuffer = NULL;
-    ProcessBufferSize = 0;
-
-    if ( cNameBufferSize == 0 || lpNameBuffer == NULL ) {
-        return( 0 );
-    }
-
-    lpNameBuffer[0] = '\0';
-
-#line 314
     dwThreadID32 = GetHtaskAlias(htask16, &dwProcessID32);
     if (  dwThreadID32 == 0 ) {
         return( 0 );
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-450): retain the original process-list
-     * observation and ANSI conversion, but replace its fixed 16 KiB stack
-     * snapshot and unbounded strcpy with one transient, exact-size query and
-     * a caller-bounded copy.  A changing process list is an unavailable
-     * observation, not a polling/retry protocol. */
-#line 323
+    if ( cNameBufferSize == 0 || lpNameBuffer == NULL ) {
+        return( 0 );
+    }
+
     status = NtQuerySystemInformation(
-                SystemProcessInformation,
-                NULL,
-                0,
-                &ProcessBufferSize
-                );
-
-    if (status != STATUS_INFO_LENGTH_MISMATCH || ProcessBufferSize == 0) {
+                SystemProcessInformation, NULL, 0, &ProcessBufferSize);
+    if (status != STATUS_INFO_LENGTH_MISMATCH || !ProcessBufferSize)
         return(0);
-    }
-
     ProcessBuffer = malloc_w(ProcessBufferSize);
-    if (ProcessBuffer == NULL) {
+    if (!ProcessBuffer)
         return(0);
-#line 321
-    }
 
+#line 323
     status = NtQuerySystemInformation(
                 SystemProcessInformation,
                 ProcessBuffer,
                 ProcessBufferSize,
+#line 327
                 &TotalOffset
                 );
 
     if ( !NT_SUCCESS(status) ) {
         free_w(ProcessBuffer);
-        return(0);
-#line 332
+#line 331
+        return( 0 );
     }
 
     //
@@ -386,51 +365,40 @@ UINT GetHtaskAliasProcessName(
     ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)ProcessBuffer;
 
     while (TRUE) {
-        if (ProcessBufferSize < sizeof(*ProcessInfo) ||
-            TotalOffset > ProcessBufferSize - sizeof(*ProcessInfo)) {
-            break;
-        }
-#line 342
         if ( (DWORD)ProcessInfo->UniqueProcessId == dwProcessID32 ) {
             pname.Buffer = NULL;
             if ( ProcessInfo->ImageName.Buffer ) {
-                status = RtlUnicodeStringToAnsiString(
-                    &pname, (PUNICODE_STRING)&ProcessInfo->ImageName, TRUE);
+                status = RtlUnicodeStringToAnsiString(&pname,(PUNICODE_STRING)&ProcessInfo->ImageName,TRUE);
+                if (!NT_SUCCESS(status))
+                    break;
+#line 346
 
-                if (NT_SUCCESS(status)) {
-                    cch = min((UINT)pname.Length, cNameBufferSize - 1);
-                    if (cch) {
-                        RtlCopyMemory(lpNameBuffer, pname.Buffer, cch);
-                    }
-                    lpNameBuffer[cch] = '\0';
-                    RtlFreeAnsiString(&pname);
-                    free_w(ProcessBuffer);
-                    return(cch);
-                }
+                //
+                // Truncate the name to make it fit
+                //
+                pname.Buffer[min((UINT)pname.Length,cNameBufferSize-1)] = '\0';
+
+                strcpy( lpNameBuffer, pname.Buffer );
+
+                RtlFreeAnsiString( &pname );
+
+                cch = strlen(lpNameBuffer);
+                break;
 #line 357
             } else {
                 //
                 // Don't let them get the name of a system process
                 //
-                free_w(ProcessBuffer);
-                return(0);
-#line 362
+                break;
             }
-
-            free_w(ProcessBuffer);
-            return(0);
-#line 363
         }
-        NextEntryOffset = ProcessInfo->NextEntryOffset;
-        if (NextEntryOffset == 0 ||
-            NextEntryOffset > ProcessBufferSize - TotalOffset) {
-#line 365
+        if (ProcessInfo->NextEntryOffset == 0) {
             break;
         }
-        TotalOffset += NextEntryOffset;
+        TotalOffset += ProcessInfo->NextEntryOffset;
         ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)((PBYTE)ProcessBuffer + TotalOffset);
     }
     free_w(ProcessBuffer);
-    return(0);
+    return(cch);
 #line 371
 }

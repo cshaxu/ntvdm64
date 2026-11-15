@@ -1,0 +1,127 @@
+{
+  "file": "src/mvdm-host/wow32/wole2.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "before": 97,
+  "after": 42,
+  "delta": -55,
+  "source_sha256": "0886f412a895bc71c09e3140038695eadcbcfdaf6f005940a8ab9bf47cfcbf74",
+  "points": {
+    "T483-R1672": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Actual no-definition compile C2065;retain one status constant,remove conditional wrapper. No equivalent selected declaration exists."
+    },
+    "T483-R1673": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Native query statusc0000004,16KiB capacity,731040 required;original alias fixture exits2 while current/minimized passes. Dynamic buffer necessary."
+    },
+    "T483-R1674": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Restore original validation order and failure output ownership;remove early output clearing and redundant buffer initialization. Keep only result accumulator for shared release."
+    },
+    "T483-R1675": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "One size probe,one allocation,one actual query;remove long comment and excess formatting. No polling/retry added."
+    },
+    "T483-R1676": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Native query takes allocated address/size;16KiB original empirically insufficient."
+    },
+    "T483-R1677": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Dynamic buffer must be freed if second native query fails;original return formatting restored."
+    },
+    "T483-R1678": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Traverse allocated successful system snapshot;only array-to-pointer binding remains."
+    },
+    "T483-R1679": {
+      "conclusion": "restore original",
+      "evidence": "Restore original traversal:successful native kernel query owns record layout,not untrusted caller data. No evidence requires extra header bound checks."
+    },
+    "T483-R1680": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Conversion may fail;use existing status and fail before accessing allocated pname. Coupled with R1681:move existing success test to early loop break,not an additional failure policy."
+    },
+    "T483-R1681": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Original writes pname.Buffer[capacity-1] even when actual allocated ANSI name is shorter. Bound index by pname.Length;then restore original strcpy,comment,RtlFreeAnsiString. No second copy implementation."
+    },
+    "T483-R1682": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Preserve original no-name return0 through break to sole buffer release;no repeated free."
+    },
+    "T483-R1683": {
+      "conclusion": "restore original",
+      "evidence": "Remove added post-match repeated free/return;original closing structure restored."
+    },
+    "T483-R1684": {
+      "conclusion": "restore original",
+      "evidence": "Restore original NextEntryOffset==0 and direct offset accumulation. Successful native query supplies valid linked records;no fabricated corrupt records accepted as evidence."
+    },
+    "T483-R1685": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Original offset accumulation restored;one pointer arithmetic binding remains for dynamic snapshot."
+    },
+    "T483-R1686": {
+      "conclusion": "minimized qualified residual pending owner",
+      "evidence": "Single buffer release after loop;return original-style name length via accumulator,0 for no match or conversion failure."
+    }
+  },
+  "line_proof": {
+    "file": "src/mvdm-host/wow32/wole2.c",
+    "shared_retained_selected_lines": 203,
+    "line_mismatches": [],
+    "method": "Raw equal ranges before actual selected compiler statement/line comparison",
+    "mirror_before": 97,
+    "mirror_after": 42,
+    "delta": -55
+  },
+  "native_query": "QUERY status=c0000004 capacity=16384 required=731040",
+  "controls": [
+    {
+      "name": "alias-minimal-compile",
+      "pid": 26320,
+      "exit": 0
+    },
+    {
+      "name": "alias-query-compile",
+      "pid": 15320,
+      "exit": 0
+    },
+    {
+      "name": "alias-fixture-original-contract-compile",
+      "pid": 27964,
+      "exit": 0
+    },
+    {
+      "name": "alias-no-status-compile",
+      "pid": 3512,
+      "exit": 2
+    },
+    {
+      "name": "alias-minimal-link",
+      "pid": 25764,
+      "exit": 0
+    },
+    {
+      "name": "alias-minimal-run",
+      "pid": 28224,
+      "exit": 0
+    },
+    {
+      "name": "alias-query-link",
+      "pid": 17824,
+      "exit": 1120
+    }
+  ],
+  "final_focused": "build/t483-s5-p149-alias-final/exit.txt=0;WOW_MODULE_ALIAS_BOUNDS_AND_LIFETIME_OK",
+  "counter_review": [
+    "Full current caller WK32GetModuleFileName audited;caller uses return length and has no requirement to clear failure output.",
+    "strcpy is safe after bounded truncation of owned Rtl-allocated temporary;test must check buffer contract,not forbid function spelling.",
+    "No guest changes,new helpers,second state or equivalent moved complexity.",
+    "Successful NtQuerySystemInformation list is trusted native output;extra corruption scans not necessary.",
+    "R1680/R1681 are one coupled conversion/copy change:existing failure test relocates,combined diff decreases.",
+    "Early diagnostic compile-exit capture was faulty;rerun no-status exited2. Query-only printf diagnostic initially failed link1120;legacy_stdio_definitions fixed diagnostic only and rerun passed."
+  ],
+  "delivery": "P149 cached full,publish11x2,post-publication focused,Full19/governance passed;Git accompanies receipt"
+}

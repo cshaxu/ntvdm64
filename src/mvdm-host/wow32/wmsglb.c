@@ -108,7 +108,6 @@ BOOL FASTCALL ThunkLBMsg16(LPMSGPARAMEX lpmpex)
         case LB_GETSELITEMS:
             (PVOID)lpmpex->lParam = STACKORHEAPALLOC(lpmpex->Parm16.WndProc.wParam * sizeof(INT), 
                                                        sizeof(lpmpex->MsgBuffer), lpmpex->MsgBuffer);
-            /* DIVERGENCE(MVDM-HOST-DIV-346): reject absent output storage. */
             if (!lpmpex->lParam) return FALSE;
 #line 158
             break;
@@ -131,7 +130,6 @@ BOOL FASTCALL ThunkLBMsg16(LPMSGPARAMEX lpmpex)
                 if (cItems > 0) {
                     (PVOID)lpmpex->lParam = STACKORHEAPALLOC(cItems * sizeof(INT), 
                                    sizeof(lpmpex->MsgBuffer), lpmpex->MsgBuffer);
-                    /* DIVERGENCE(MVDM-HOST-DIV-346): reject failed acquisition. */
                     if (!lpmpex->lParam) return FALSE;
 #line 178
                     getintarray16((VPINT16)lpmpex->Parm16.WndProc.lParam, cItems, (LPINT)lpmpex->lParam);
@@ -194,7 +192,6 @@ VOID FASTCALL UnThunkLBMsg16(LPMSGPARAMEX lpmpex)
         break;
 
     case LB_SETTABSTOPS:
-        /* DIVERGENCE(MVDM-HOST-DIV-346): same signed acquisition predicate. */
         if (INT32(lpmpex->Parm16.WndProc.wParam) > 0) {
 #line 239
             STACKORHEAPFREE((LPINT)lpmpex->lParam, lpmpex->MsgBuffer);

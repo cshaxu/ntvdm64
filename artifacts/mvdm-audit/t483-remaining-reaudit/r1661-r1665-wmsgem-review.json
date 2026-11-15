@@ -1,0 +1,68 @@
+{
+  "file": "src/mvdm-host/wow32/wmsgem.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+  "points": {
+    "1661": {
+      "before": "+0/-0 non-exclusion",
+      "after": "+0/-0 non-exclusion",
+      "conclusion": "Keep approved DEBUG exclusion;unchanged original body except separately listed four points.",
+      "evidence": "DEBUG name table/helper absent from selected preprocessing;#error retained."
+    },
+    "1662": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "conclusion": "Minimized comment;one allocation guard remains pending owner.",
+      "evidence": "Original LocalAlloc may return NULL;RtlCopyMemory immediately writes i>=1 bytes. Exact-source reverse fixture original EDIT_REPLACE_ALLOC fails;candidate passes. Selected FREEPSZPTR empty."
+    },
+    "1663": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "conclusion": "Minimized comment;one allocation guard remains pending owner.",
+      "evidence": "getintarray16 has lpInt check,so old claim of immediate NULL conversion write is inaccurate. Thunk returns TRUE with positive count,NULL array;selected editml.c EM_SETTABSTOPS calls edmlrare.c MLSetTabStops,whose positive-count loop dereferences lpTabStops. Guard prevents malformed native delivery. Exact-body fixture proves admission stopped,not native guest runtime."
+    },
+    "1664": {
+      "before": "+2/-1",
+      "after": "+1/-1",
+      "conclusion": "Minimized comment;signed cleanup predicate remains pending owner.",
+      "evidence": "INT32(WORD0xffff)=-1 prevents acquisition;original unsigned cleanup sees65535>0 and frees guest lParam as host allocation. Existing exact-source negative EDIT_TABS_SIGNED_RELEASE fails;candidate passes."
+    },
+    "1665": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "conclusion": "Minimized comment;break remains pending owner.",
+      "evidence": "Original switch falls through from EM_SETTABSTOPS to EM_GETWORDBREAKPROC;TRUE=1 is assigned to W32WordBreakProc and triggers callback creation or cached callback substitution. Existing real product-object test covers24 tabstop combinations and6 wordbreak cases;30 pass. Added #line246 restores original following code lines."
+    }
+  },
+  "line_proof": {
+    "file": "src/mvdm-host/wow32/wmsgem.c",
+    "shared_retained_selected_lines": 141,
+    "line_mismatches": [],
+    "method": "Raw equal-range alignment followed by actual compiler-expanded original statements at their original logical lines. Added guards sharing logical lines138/158 are not mistaken for mismatching original statements.",
+    "mirror_before": 58,
+    "mirror_after": 54,
+    "delta": -4,
+    "error_unchanged": true,
+    "source_sha256": "f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8"
+  },
+  "verification": {
+    "focused_exit": "0",
+    "reverse": {
+      "baseline": "049ae27da",
+      "negative": "four missing native buffers, two signed releases and native tab reset/failure",
+      "passed": true,
+      "scope": "exact-source service doubles, not runtime acceptance",
+      "originalHelp": "allocation failure preserves successful NULL conversion and empty cleanup",
+      "end": "2026-11-15T04:51:01.0587188Z"
+    },
+    "tabstop": "30 cases0 failures;existing cached product object,not fresh final build",
+    "compiler": "original/current preprocessing with actual WOW product options"
+  },
+  "counter_review": [
+    "No changed executable tokens;four comments removed and one logical-line reset added.",
+    "Do not count four partial comment reductions as full original restorations.",
+    "Current file LF matches pre-edit Git blob;accidental CRLF write removed via byte-verified snapshot.",
+    "R1663 old immediate-copy claim corrected using full selected consumer chain."
+  ],
+  "delivery": "P149 cached full,publish11x2,post-publication focused,Full19/governance passed;Git accompanies receipt"
+}

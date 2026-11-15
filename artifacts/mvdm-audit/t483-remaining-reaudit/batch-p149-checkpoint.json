@@ -1,0 +1,39 @@
+{
+  "batch": "P149",
+  "status": "cached full,publish11x2,post-publication focused,Full19 and governance passed;Git accompanies receipt",
+  "source_files": 5,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "sha256": "f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "sha256": "568a6e3c253f84e4bb7904c90846585d1ad8dbc66135b9dbda37fd986551a694"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "sha256": "0886f412a895bc71c09e3140038695eadcbcfdaf6f005940a8ab9bf47cfcbf74"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_module_alias_fixture.c",
+      "sha256": "5ac704d0490083fa7662832948ff24bd7dbbf870dd3d83325bebbb50280ba0e6"
+    },
+    {
+      "path": "test/observation/verify-wow-module-alias-bounds.ps1",
+      "sha256": "aabb2c5081ad15ad7c6f35b979b3969ad45fd1d72a96345baac787426e05588e"
+    }
+  ],
+  "mirror_diff_delta": -62,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "09788f28-75f7-486f-bfbd-29724588afb3",
+  "full": {
+    "gates": 19,
+    "all_passed": true,
+    "evidence": "build/t483-s5-p149/full-isolated/timings.json"
+  },
+  "limitations": [
+    "Unavailable external DOS4GW fixture remains explicit skip",
+    "Exact-body fixtures supplement native and Full tests;no guest edits"
+  ]
+}

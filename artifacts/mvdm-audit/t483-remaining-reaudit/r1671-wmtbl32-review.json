@@ -1,0 +1,15 @@
+{
+  "review_id": "T483-R1671",
+  "file": "src/mvdm-host/wow32/wmtbl32.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "8fb4f02963ceb0772e69749d703868273f942978fa6baf162e039065dd957bd6",
+  "current_sha256": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6",
+  "selected_lines": 1028,
+  "line_mismatches": [],
+  "non_exclusion_diff": 0,
+  "excluded_bodies": 1,
+  "source_changes": 0,
+  "conclusion": "Only DEBUG_OR_WOWPROFILE iMsgMax/paw32Msg declarations excluded;complete selected aw32Msg table original.",
+  "evidence": "build/t483-s5-p149/wmtbl32-preprocess.cmd",
+  "limitations": "Actual product preprocessing and raw-source identity;reuse P148 unchanged-source build/runtime baseline,no new guest acceptance claim."
+}

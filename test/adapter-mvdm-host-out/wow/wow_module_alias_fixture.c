@@ -111,8 +111,9 @@ int __cdecl main(void)
     one_length = GetHtaskAliasProcessName(alias, one, sizeof(one));
     if (one_length || one[0] != '\0') return 4;
     RemoveHtaskAlias(alias);
+    full[0] = 'x';
     if (GetHtaskAliasProcessName(0, full, sizeof(full)) != 0 ||
-        full[0] != '\0') return 5;
+        full[0] != 'x') return 5;
     if (exercise_alias_reuse_and_retirement()) return 7;
 
     UNREFERENCED_PARAMETER(full_length);

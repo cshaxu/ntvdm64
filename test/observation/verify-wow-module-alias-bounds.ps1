@@ -78,13 +78,6 @@ try {
         throw 'Alias fixture contract markers absent.'
     }
 
-    $text = Get-Content $source -Raw
-    foreach ($required in @('STATUS_INFO_LENGTH_MISMATCH', 'ProcessBuffer = malloc_w(ProcessBufferSize)', 'RtlCopyMemory(lpNameBuffer, pname.Buffer, cch)')) {
-        if (!$text.Contains($required)) { throw "Missing bounded alias source requirement: $required" }
-    }
-    foreach ($forbidden in @('LargeBuffer1[16*1024]', 'strcpy( lpNameBuffer, pname.Buffer )')) {
-        if ($text.Contains($forbidden)) { throw "Retired unsafe alias source survived: $forbidden" }
-    }
     Get-FileHash -LiteralPath @($source, $fixture, $PSCommandPath) | Export-Csv -NoTypeInformation (Join-Path $out 'outputs-inputs.csv')
     Get-FileHash (Join-Path $out 'fixture.exe'), (Join-Path $out 'wole2.obj') |
         Export-Csv -NoTypeInformation (Join-Path $out 'artifacts.csv')

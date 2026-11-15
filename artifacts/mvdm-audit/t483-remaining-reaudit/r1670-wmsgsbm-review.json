@@ -1,0 +1,15 @@
+{
+  "review_id": "T483-R1670",
+  "file": "src/mvdm-host/wow32/wmsgsbm.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "cf1ea646693339e8c2b03875dad6c7b4a92576fc80f330407e60231e2689b18e",
+  "current_sha256": "7932d60818f79517f1de608ba021dd4d6d2aa2c9d1ef748ca30a7cf972b402af",
+  "selected_lines": 36,
+  "line_mismatches": [],
+  "non_exclusion_diff": 0,
+  "excluded_bodies": 1,
+  "source_changes": 0,
+  "conclusion": "Only DEBUG scrollbar names/helper excluded;all selected converters original.",
+  "evidence": "build/t483-s5-p149/wmsgsbm-preprocess.cmd",
+  "limitations": "Actual product preprocessing and raw-source identity;reuse P148 unchanged-source build/runtime baseline,no new guest acceptance claim."
+}

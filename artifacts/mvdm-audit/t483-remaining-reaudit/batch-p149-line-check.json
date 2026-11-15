@@ -1,0 +1,33 @@
+[
+  {
+    "file": "src/mvdm-host/wow32/wmsgem.c",
+    "shared_retained_selected_lines": 141,
+    "line_mismatches": [],
+    "method": "Raw equal-range alignment followed by actual compiler-expanded original statements at their original logical lines. Added guards sharing logical lines138/158 are not mistaken for mismatching original statements.",
+    "mirror_before": 58,
+    "mirror_after": 54,
+    "delta": -4,
+    "error_unchanged": true,
+    "source_sha256": "f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8"
+  },
+  {
+    "file": "src/mvdm-host/wow32/wmsglb.c",
+    "shared_retained_selected_lines": 107,
+    "line_mismatches": [],
+    "method": "Raw equal ranges then actual product preprocessed statements at original logical lines;added guard statements sharing original line numbers not confused with originals.",
+    "mirror_before": 59,
+    "mirror_after": 56,
+    "delta": -3,
+    "error_unchanged": true,
+    "source_sha256": "568a6e3c253f84e4bb7904c90846585d1ad8dbc66135b9dbda37fd986551a694"
+  },
+  {
+    "file": "src/mvdm-host/wow32/wole2.c",
+    "shared_retained_selected_lines": 203,
+    "line_mismatches": [],
+    "method": "Raw equal ranges before actual selected compiler statement/line comparison",
+    "mirror_before": 97,
+    "mirror_after": 42,
+    "delta": -55
+  }
+]
