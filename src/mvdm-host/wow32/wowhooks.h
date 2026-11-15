@@ -33,8 +33,6 @@ typedef struct {
     LONG  wParam;
     LONG  lParam;
 } HOOKPARAMS, FAR *LPHOOKPARAMS;
-
-/* DIVERGENCE(MVDM-HOST-DIV-344): original private context, scoped by entry. */
 extern __declspec(thread) HOOKPARAMS vHookParams;
 extern __declspec(thread) INT viCurrentHookStateDataIndex;
 #line 36

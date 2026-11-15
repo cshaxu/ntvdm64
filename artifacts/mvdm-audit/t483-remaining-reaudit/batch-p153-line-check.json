@@ -1,0 +1,12 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wparam.c",
+    "logical_line_mismatches": [],
+    "selected_lines": 289
+  },
+  {
+    "path": "src/mvdm-host/wow32/wowhooks.h",
+    "logical_line_mismatches": [],
+    "method": "Token unchanged;original suffix after #line36 exact"
+  }
+]

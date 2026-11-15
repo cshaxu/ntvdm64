@@ -1,0 +1,54 @@
+[
+  {
+    "review_id": "T483-R1766",
+    "path": "src/mvdm-host/wow32/wowtbl.c",
+    "source_sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
+    "excluded_blocks": 4,
+    "semantic_diff": 0,
+    "source_change": false,
+    "line_proof": {
+      "selected_retained_lines": 43,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+    },
+    "finding": "Only approved profiling exclusions and #line scaffolding;preserve all #error bodies. Original retained content and conditional framing match. Old source-only endif line warnings do not represent selected code mismatches.",
+    "verification_scope": "Actual x86 product preprocessing,not a new link/runtime run;P152 remains delivered baseline."
+  },
+  {
+    "review_id": "T483-R1767",
+    "path": "src/mvdm-host/wow32/wowtbl.h",
+    "source_sha256": "6f0847322a1151fdce4f7dbc9aee24d4130358804259d9b10804ef96bb1c01c3",
+    "excluded_blocks": 1,
+    "semantic_diff": 0,
+    "source_change": false,
+    "line_proof": {
+      "selected_declaration_lines": 19,
+      "logical_lines": [
+        16,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        40,
+        42
+      ],
+      "mismatch_count": 0,
+      "method": "Actual MSVC header include:all selected declarations precede line44;prefix exactly matches original;excluded final block has no later selected code."
+    },
+    "finding": "Only approved profiling exclusions and #line scaffolding;preserve all #error bodies. Original retained content and conditional framing match. Old source-only endif line warnings do not represent selected code mismatches.",
+    "verification_scope": "Actual x86 product preprocessing,not a new link/runtime run;P152 remains delivered baseline."
+  }
+]

@@ -93,9 +93,6 @@ DWORD FindParamMap(VOID* lpFindParam, DWORD lParam, UINT fMode)
     DWORD dwRet = 0;
     BOOL fFound = FALSE;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-347): NULL is never a mapped input. */
-    if (!lParam) return 0;
-
 #line 94
     switch(fMode) {
 
@@ -197,8 +194,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
     FINDPARAM fp;
     BOOL updated = FALSE;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-347): preserve the nonzero map invariant. */
-    if (!dwPtr32 || !dwPtr16) return NULL;
+    if (!dwPtr32) return NULL;
 
 #line 193
      // see if it's there already
@@ -209,22 +205,16 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
         
         ++lpn->dwRefCount; // increase ref count
         
-        /* DIV-347: keep the pin across segment-fault callbacks, but unwind it. */
         __try {
             updated = ParamMapUpdateNode(dwPtr32, PARAM_32, lpn) != NULL;
         } __finally {
-            if (AbnormalTermination()) {
+            if (!updated) {
                 DWORD error = GetLastError();
                 DeleteParamMap(dwPtr16, PARAM_16, NULL);
                 SetLastError(error);
             }
         }
-        if (!updated) {
-            DWORD error = GetLastError();
-            DeleteParamMap(dwPtr16, PARAM_16, NULL);
-            SetLastError(error);
-            return NULL;
-        }
+        if (!updated) return NULL;
 #line 201
     }
     else { 
@@ -290,9 +280,8 @@ PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)
 #endif
 #line 287
 
-
-    /* DIVERGENCE(MVDM-HOST-DIV-347): failed refresh must not publish NULL. */
     if (!pv) return NULL;
+#line 291
 
     if (lpn->nAliasCount < ARRAYCOUNT(lpn->rgdwAlias)) {
 

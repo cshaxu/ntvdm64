@@ -1,0 +1,38 @@
+{
+  "batch": "P153",
+  "status": "cached full,publish11x2,parameter54,Full19 and governance passed;Git accompanies receipt",
+  "source_files": 4,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.h",
+      "sha256": "15e0dd57428921940933d6340b88dc8354f009b631679fba0fcb3fab8c2f734a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "sha256": "743120dd27c03fd5df08af236c428ff63afc117416bc1d642886419500bedb57"
+    },
+    {
+      "path": "test/observation/wow_parameter_map_fixture.c",
+      "sha256": "d210e89381a8010d5920fe28a19f7055a70eaf7d10ce90ee0599fe31236ba0f0"
+    },
+    {
+      "path": "test/observation/verify-wow-parameter-map.ps1",
+      "sha256": "4468b1daf386d110caa2f04c74ade82f1eeb30dbdf7897ba3a85c0b06598c3e7"
+    }
+  ],
+  "mirror_diff_delta": -14,
+  "package": "3bb1c5ca-d4c2-414d-bfda-c0be9e0f6c45",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "full": {
+    "gates": 19,
+    "all_passed": true,
+    "evidence": "build/t483-s5-p153/full-isolated/timings.json"
+  },
+  "publication": "11 images at both destinations;all hashes match",
+  "tests": "Parameter54 and historical original negatives,Full19 and shared boundary/governance passed",
+  "limitations": [
+    "Parameter fault fixture doubles lower memory services;not deployed guest exception reproduction.",
+    "External DOS4GW/Nesticle fixture unavailable remains skipped.",
+    "No guest or winnt.zip modification."
+  ]
+}

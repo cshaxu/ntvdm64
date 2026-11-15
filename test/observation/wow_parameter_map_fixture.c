@@ -29,9 +29,8 @@ typedef struct {WORD wTDB;} VDMFRAME,*PVDMFRAME;
 typedef struct {WORD TDB_CompatHandle;} TDB,*PTDB;
 static TASK task={0,0x1234};static TDB tdb={0x77};static SETWINDOWTEXT16 arguments;
 static WW words;static char text[20][32];static unsigned view_shift,mode_fault;
-static unsigned failures,scenarios,guest_allocations,guest_frees,stack_releases,flat_releases,native_calls,pin_seen;
+static unsigned failures,scenarios,guest_allocations,guest_frees,stack_releases,native_calls,pin_seen;
 static BOOL fail_map,fail_guest,copy_fault,native_fault,mutate_arguments;
-static void *last_flat_release;
 static const DWORD fault_code=0xe04d4150u;
 #define KEY_A 0x10001000u
 #define KEY_B 0x10002000u
@@ -70,7 +69,7 @@ static unsigned heap_owned(void){unsigned i,n=0;for(i=0;i<32;++i)if(guest[i].kin
 static void putstr16(VPSZ key,LPSZ source,INT bytes){if(copy_fault){SetLastError(0x7351);RaiseException(fault_code,0,0,NULL);}memcpy(view(key),source,(size_t)bytes);}
 static void putrect16(VPRECT16 key,LPRECT rectangle){(void)key;(void)rectangle;}
 #define GETPSZPTR(key,p) ((p)=(key) ? view((DWORD)(key)) : NULL)
-#define FREEPSZPTR(p) ((last_flat_release=(void *)(p)),++flat_releases)
+#define FREEPSZPTR(p) /* Original selected macro is empty. */
 #define GETVDMPTR(key,n,p) ((void)(n),(p)=view((DWORD)(key)))
 #define FREEVDMPTR(p) ((void)(p))
 #define FETCHDWORD(v) ((DWORD)(v))
@@ -89,15 +88,15 @@ VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX);
 /* COPYDATA itself is exercised by retained exact/real groups, not this model. */
 static BOOL FASTCALL WM32CopyData(LPWM32MSGPARAMEX value){value->dwParam=0;return TRUE;}
 #include "parameter_exact.h"
-static void reset(void){mode_fault=0;fail_map=fail_guest=copy_fault=native_fault=mutate_arguments=FALSE;FreeParamMap(0x1234);FreeParamMap(0x5678);expect(!node_count(),"all test task nodes retire");task.htask16=0x1234;task.dwWOWCompatFlags=0;view_shift=0;memset(guest,0,sizeof(guest));guest_allocations=guest_frees=stack_releases=flat_releases=native_calls=pin_seen=0;last_flat_release=NULL;}
+static void reset(void){mode_fault=0;fail_map=fail_guest=copy_fault=native_fault=mutate_arguments=FALSE;FreeParamMap(0x1234);FreeParamMap(0x5678);expect(!node_count(),"all test task nodes retire");task.htask16=0x1234;task.dwWOWCompatFlags=0;view_shift=0;memset(guest,0,sizeof(guest));guest_allocations=guest_frees=stack_releases=native_calls=pin_seen=0;}
 static MSGPARAMEX reverse(UINT message,DWORD key){MSGPARAMEX v;ZeroMemory(&v,sizeof(v));v.Parm16.WndProc.wMsg=(WORD)message;v.Parm16.WndProc.lParam=key;v.lParam=(LONG)key;v.uMsg=message;v.pww=&words;v.lpfnUnThunk16=message==WM_USER+5 ? UnThunkCBMsg16 : UnThunkWMMsg16;return v;}
 static BOOL reverse_start(LPMSGPARAMEX v){return v->lpfnUnThunk16==UnThunkCBMsg16 ? ThunkCBMsg16(v) : ThunkWMMsg16(v);}
 static WM32MSGPARAMEX forward(UINT message){WM32MSGPARAMEX v;ZeroMemory(&v,sizeof(v));v.fThunk=TRUE;v.uMsg=message;v.lParam=(LONG)text[0];v.lpfnM32=message==CB_DIR ? WM32CBDir : WM32SetText;return v;}
 static LONG caught(DWORD code){return code==fault_code ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH;}
 static void map_cases(void){
- FINDPARAM found;unsigned i;BOOL trapped;DWORD before;
+ FINDPARAM found;unsigned i;BOOL trapped;DWORD before;WM32MSGPARAMEX empty;
  reset();++scenarios;expect(!AddParamMap(0,0) && !node_count(),"NULL_PAIR");
- reset();AddParamMap((DWORD)text[0],KEY_A);mode_fault=1;++scenarios;expect(!GetParam16(0) && references(KEY_A)==1,"NULL_LOOKUP");
+ reset();AddParamMap((DWORD)text[0],KEY_A);mode_fault=1;++scenarios;empty=forward(WM_SETTEXT);empty.lParam=0;expect(WM32SetText(&empty) && !empty.Parm16.WndProc.lParam && references(KEY_A)==1,"NULL_CALLER_LOOKUP");
  reset();AddParamMap((DWORD)text[0],KEY_A);mode_fault=1;++scenarios;
  expect(!AddParamMap((DWORD)text[0],KEY_A) && references(KEY_A)==1 && gParamMap.pHead->dwPtr32==(DWORD)text[0] && !gParamMap.pHead->nAliasCount,"UPDATE_FALSE_ROLLBACK");
  reset();AddParamMap((DWORD)text[0],KEY_A);mode_fault=2;trapped=FALSE;++scenarios;
@@ -162,13 +161,13 @@ static void cache_cases(void){
 static void mutation_cases(void){
  MSGPARAMEX v;unsigned abort;
  reset();AddParamMap((DWORD)text[0],KEY_A);fail_map=TRUE;v=reverse(WM_SETTEXT,KEY_B);++scenarios;expect(reverse_start(&v),"text optional constructor before native filter");v.lParam=(LONG)text[19];v.lpfnUnThunk16(&v);wow_message_unwind16(&v);
- expect(references(KEY_A)==1 && last_flat_release==text[0],"REVERSE_TEXT_MUTATION");
+ expect(references(KEY_A)==1,"REVERSE_TEXT_MUTATION");
  for(abort=0;abort<2;++abort){
   reset();task.dwWOWCompatFlags=WOWCF_NOCBDIRTHUNK;v=reverse(OLDCB_DIR,KEY_A);++scenarios;expect(reverse_start(&v),"CB_DIR constructor before native filter");v.uMsg=CB_GETLBTEXT;v.lParam=(LONG)text[19];if(!abort)v.lpfnUnThunk16(&v);wow_message_unwind16(&v);
-  expect(!node_count() && last_flat_release==text[0] && !strcmp(text[0],"original text"),abort ? "REVERSE_CB_ABORT_MUTATION" : "REVERSE_CB_MUTATION");
+  expect(!node_count() && !strcmp(text[0],"original text"),abort ? "REVERSE_CB_ABORT_MUTATION" : "REVERSE_CB_MUTATION");
  }
  reset();v=reverse(WM_USER+18,KEY_A);v.lpfnUnThunk16=UnThunkCBMsg16;v.uMsg=CB_DIR;v.MsgBuffer->rect.left=WOW_TEXT_ACTIVE;++scenarios;wow_message_unwind16(&v);
- expect(!flat_releases && v.MsgBuffer->rect.left==WOW_TEXT_ACTIVE,"other combo output is never a text lease");
+ expect(!node_count() && v.MsgBuffer->rect.left==WOW_TEXT_ACTIVE,"other combo output is never a text lease");
 }
 int main(void){unsigned i;for(i=0;i<20;++i)strcpy_s(text[i],sizeof(text[i]),"original text");InitParamMap();map_cases();reverse_cases();forward_cases();api_cases();cache_cases();mutation_cases();reset();free_w(gParamMap.blkCache.pCache);
  printf("PARAMETER_MAP failures=%u scenarios=%u reverse=%u buffer=%u forward=%u\n",failures,scenarios,(unsigned)sizeof(MSGPARAMEX),(unsigned)sizeof(MSGTHUNKBUFFER),(unsigned)sizeof(WM32MSGPARAMEX));return failures ? 1 : 0;

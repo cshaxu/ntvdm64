@@ -1130,3 +1130,11 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 - [R1721–R1764 hook investigation](r1721-r1764-hook-investigation.json):fixed baseline and complete diff;actual wrapper/scheduler chain and fixture limitations;not a completed disposition.
 
 - [P152 line proof](batch-p152-line-check.json) and [delivery checkpoint](batch-p152-checkpoint.json):wowhooks mirror151->125;1048 original selected lines match;cached/full delivery pending.
+
+- [R1765 header review](r1765-wowhooks-header-review.json):two TLS externs pending owner;format-only mirror4->2;original line36 suffix exact;local accumulated change.
+
+- [R1766/R1767 table review](r1766-r1767-wowtbl-review.json):only existing profiling exclusions;actual product preprocessing verifies selected original code and lines;no source change.
+
+- [R1768-R1771 parameter map](r1768-r1771-parameter-map-review.json):original lookup restored;shared rollback;mirror106->94;54 focused scenarios and289 lines pass;delivery pending.
+
+- [P153 receipt](batch-p153-checkpoint.json) and [line proof](batch-p153-line-check.json):cached full,publish11x2,parameter54,Full19 and governance passed;mirror net-14;supersedes the pending-delivery notes above.

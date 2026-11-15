@@ -34,9 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1764 reviewed:617 restored/confirmed published,0 local,8 approved,
-1139 qualified pending;956 unreviewed. Files229/365 audited,136 remain.
-P151 delivered6120322e7;P152 mirror151->125(-26);1048 lines match;cached,publish11x2,transactions183,Full19 passed;Git accompanies receipt.
+1771 reviewed:620 restored/confirmed published,0 local,8 approved,
+1143 qualified pending;949 unreviewed. Files233/365 audited,132 remain.
+P153 header4->2;wparam106->94;cached,publish11x2,parameter54,Full19 passed;Git accompanies receipt.
+P152 delivered37bb1252f;P152 mirror151->125(-26);1048 lines match;cached,publish11x2,transactions183,Full19 passed;Git accompanies receipt.
 P151 fax diff41->30(-11);699 lines match;build,publish11x2,fax135,Full19 passed;Git accompanies receipt.
 P150 mirror930 to893 (-37);cached build,publish11x2,focused,Full19 passed.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r1687-r1708-wow32-review.json).
@@ -56,11 +57,11 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P152 candidate `3681f1e0-f893-45a4-ad84-3438adc2ee6a` published11x2;hashes match.
-Final transaction183,hook wrapper and Full19 passed;Git accompanies P152.
+P153 candidate `3bb1c5ca-d4c2-414d-bfda-c0be9e0f6c45` published11x2;hashes match.
+Final parameter54 and Full19 passed;Git accompanies P153.
 Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p152-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p153-checkpoint.json).
 No guest or winnt.zip changes; absent external fixtures remain skips.
 S5 remains active; demmisc.c whole-file verification found only the retained DBG
 #error exclusion and diagnostic #line directives; no source change or new restored

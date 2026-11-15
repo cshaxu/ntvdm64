@@ -63,7 +63,7 @@ try{
   Run "body-$kind" "$dir/unit.exe" @() $(if($old){1}else{0}) 30
  }
  $negative=Get-Content "$root/body-baseline.stdout.log" -Raw
- foreach($name in @('NULL_PAIR','NULL_LOOKUP','UPDATE_FALSE_ROLLBACK','UPDATE_SEH_ROLLBACK','REVERSE_TEXT_OPTIONAL','REVERSE_CB_OPTIONAL','FORWARD_TEXT_ABORT','FORWARD_CB_ABORT','HEAP_COPY_ABORT','STACK_COPY_ABORT','REVERSE_TEXT_ABORT','REVERSE_CB_ABORT','API_OPTIONAL','API_ABORT','REVERSE_TEXT_MUTATION','REVERSE_CB_MUTATION','REVERSE_CB_ABORT_MUTATION')){if($negative -notmatch "(?m)^FAIL $name\r?`$"){throw "Missing exact-source negative $name"}}
+ foreach($name in @('NULL_PAIR','UPDATE_FALSE_ROLLBACK','UPDATE_SEH_ROLLBACK','REVERSE_TEXT_OPTIONAL','REVERSE_CB_OPTIONAL','FORWARD_TEXT_ABORT','FORWARD_CB_ABORT','HEAP_COPY_ABORT','STACK_COPY_ABORT','REVERSE_TEXT_ABORT','REVERSE_CB_ABORT','API_OPTIONAL','API_ABORT','REVERSE_CB_MUTATION','REVERSE_CB_ABORT_MUTATION')){if($negative -notmatch "(?m)^FAIL $name\r?`$"){throw "Missing exact-source negative $name"}}
  # DIV-363 adds a pointer and BOOL to the x86 reverse-message record. The
  # unchanged checkpoint header also yields 148 bytes rather than 140.
  if((Get-Content "$root/body-candidate.stdout.log" -Raw) -notmatch 'PARAMETER_MAP failures=0 scenarios=\d+ reverse=148 buffer=84 forward=72'){throw 'Incomplete current result/layout'}

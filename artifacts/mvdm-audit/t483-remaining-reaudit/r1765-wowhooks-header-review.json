@@ -1,0 +1,23 @@
+{
+  "review_id": "T483-R1765",
+  "path": "src/mvdm-host/wow32/wowhooks.h",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "original_sha256": "b377c978e75e62e5701a8914c03de40eebc917ee54fa47fdaef0a638fbe6452f",
+  "before_sha256": "24163a7b3a5ee861b1ed3c79724eabcfa694ea8945f8b74ee153be4c617afa6d",
+  "after_sha256": "15e0dd57428921940933d6340b88dc8354f009b631679fba0fcb3fab8c2f734a",
+  "mirror_diff": {
+    "before": 4,
+    "after": 2,
+    "delta": -2
+  },
+  "initial_review": "The only added declarations expose two original-owned TLS states to the native callback scope. The prior statement that these were function entry declarations was incorrect.",
+  "responsibility_evidence": "Original WowOriginalStdHookProc assigns index and parameters before calling converters; original W32GetHookDDEMsglParam uses both to select CWPSTRUCT versus MSG. A nested dispatch overwrites both before the outer conversion resumes. The native wrapper restores both at its existing finally boundary.",
+  "original_boundary": "W32GetHookParams only reads parameters; no original setter or index accessor exists. Replacing direct save/restore by it cannot restore the index and would require additional interfaces.",
+  "specific_diff_evidence": "Removing both declarations without another declaration makes the sole external native wrapper unable to name the two original-owned variables. Deleting the save/restore instead leaves the outer context overwritten on nested return. Existing wrapper fixture checks index and full parameter record after nested dispatch; P152 passed nine calls.",
+  "alternatives": "Moving the same externs into the wrapper would remove mirror lines but merely relocate the same contract, without reducing total declarations or state. Do not claim that relocation as simplification. Adding setters or a second context container increases complexity.",
+  "implemented": "Removed one redundant explanation and one added blank line; retained two exact TLS extern declarations. No new interface, shim or state.",
+  "counter_review": "TLS need and nested-entry restoration are separate: P152 exact original reader four storage controls show both fields must follow the same thread; actual wrapper fixture demonstrates nested restoration but substitutes dispatcher. Neither is claimed to reproduce a real scheduler race. The two declarations remain pending owner decision, not approved retention.",
+  "line_proof": "No conditional branches in this header. Existing #line 36 remains; suffix after that directive is byte-identical to original from logical line36 through EOF. Tokens including directives unchanged after comment/whitespace removal.",
+  "verification": "Source/token/line checks only for this format-only edit. Reuses P152 controls as behavior evidence, does not claim a new build or run.",
+  "delivery": "P153 cached full,publish11x2,parameter54,Full19 passed;Git accompanies receipt"
+}

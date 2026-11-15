@@ -1,0 +1,63 @@
+{
+  "path": "src/mvdm-host/wow32/wparam.c",
+  "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "historical_negative_map_functions_exact_original": {
+    "FindParamMap": true,
+    "GetParam16": true,
+    "AddParamMap": true,
+    "ParamMapUpdateNode": true,
+    "DeleteParamMap": true
+  },
+  "points": [
+    {
+      "id": "T483-R1768",
+      "status": "restored-pending-delivery",
+      "before": 3,
+      "after": 0,
+      "evidence": "Restore original lookup. Both production GetParam16 callers guard nonzero native input; remaining FindParamMap callers use guest keys. Rejected direct GetParam16(0) fixture was not a supported caller witness.",
+      "change": "Removed NULL query guard and its comment/extra blank."
+    },
+    {
+      "id": "T483-R1769",
+      "status": "pending-owner-decision-source-proof",
+      "before": 4,
+      "after": 3,
+      "evidence": "Original reverse WM_SETTEXT/CB_DIR consumers may pass null text, so AddParamMap(0,0) must not allocate a node. Nonzero native/zero guest pair is not produced: all three callers obtain native input from the same guest key and zero converts to NULL.",
+      "change": "Keep native-zero rejection and existing updated state;remove redundant guest-zero test and comment."
+    },
+    {
+      "id": "T483-R1770",
+      "status": "pending-owner-decision-source-proof",
+      "before": 17,
+      "after": 11,
+      "evidence": "Original AddParamMap increments reference before reentrant GetPModeVDMPointerAssert/RET_FORCESEGMENTFAULT. A failed refresh is ignored by original and leaks that acquisition. Exact original body negative controls prove failed-return and SEH leaks;lower service faults are doubled,not real guest reproduction.",
+      "change": "Unify failure/exception rollback in existing finally guarded by !updated. updated starts FALSE and is set only after successful refresh return. No code after assignment inside try can raise. Keep LastError preservation and return NULL on normal rejection."
+    },
+    {
+      "id": "T483-R1771",
+      "status": "pending-owner-decision-source-proof",
+      "before": 3,
+      "after": 1,
+      "evidence": "Actual GetPModeVDMPointerMacro returns NULL for missing FlatAddress. Original refresh would replace nonzero cached key with zero;FindParamMap(PARAM_16) then returns zero,so DeleteParamMap cannot retire it. Keep failed refresh from corrupting map.",
+      "change": "Retain single NULL rejection;remove redundant comment/blank;preserve original line292 for alias update."
+    }
+  ],
+  "mirror": {
+    "before": 106,
+    "after": 94,
+    "delta": -12,
+    "before_sha256": "0131ce3113859ab30c69ce29d9977252c9f856ac04f7a70d7a5d45cab06230ff",
+    "after_sha256": "743120dd27c03fd5df08af236c428ff63afc117416bc1d642886419500bedb57"
+  },
+  "line_proof": {
+    "selected_retained_lines": 289,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "error_blocks": "Eight existing exclusions retained byte-for-byte;not newly enabled.",
+  "test_correction": "FREEPSZPTR is empty in selected wow32.h. Fixture no longer invents flat allocation ownership;retains map references,text preservation,normal/exception cleanup and duplicate-finalization checks. NULL query now exercises actual guarded WM32SetText entry. Three pre-change mutation failures were invalid expectations about that empty macro.",
+  "counter_review": "Original map function bodies exactly match historical negative fixture. Responsibility and delta necessity separated;native-zero input is reached,guest-zero with nonzero native is not. Reusing updated avoids duplicate cleanup without a second state machine. Scoped service faults do not prove arbitrary task-deletion safety or global map thread safety.",
+  "tests": "Final corrected fixture54 scenarios zero failures;historical negative remains nonzero with required failure markers;selected original cache comparison passed. First runner and compile errors retained under build.",
+  "delivery": "P153 cached full,publish11x2,parameter54,Full19 passed;Git accompanies receipt"
+}
