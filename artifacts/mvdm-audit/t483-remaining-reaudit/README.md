@@ -1262,3 +1262,5 @@ P197: [Alignment header restoration](batch-p197-checkpoint.json):mirror5->4,raw8
 P198: [SMB get/put header mapping](batch-p198-checkpoint.json):246 excluded diff unchanged;14 contexts and3 negative profiles;original CRLF preserved;conditional lines restored.
 
 P199: [SMB macro header mapping](batch-p199-checkpoint.json):6 excluded diff unchanged;7 contexts and NO_PACKING negative control;endif99 restored.
+
+P200: [SMB types header mapping](batch-p200-checkpoint.json):12 excluded diff unchanged;raw26->24;14 contexts and4 negative profiles;original boundary lines restored.

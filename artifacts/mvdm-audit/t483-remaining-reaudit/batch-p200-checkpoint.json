@@ -1,0 +1,118 @@
+{
+  "status": "original selected types confirmed;conditional diagnostic mapping restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+    "sha256": "dfc802009e9094fe90c8df69e8ffcbd275ea60015dd67da7543c452e0daafe72",
+    "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+    "source_lines": 291,
+    "contexts": [
+      {
+        "unit": "vrdisp",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrremote",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrnetb",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrdlc5c",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrnetapi",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisrv",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisvc",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apimsg",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiuse",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiwksta",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xsunicod",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "auxdata",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "convert",
+        "selected_header_lines": 114,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 12,
+    "mirror_after": 12,
+    "mirror_delta": 0,
+    "raw_before": 26,
+    "raw_after": 24,
+    "errors": 4,
+    "line_directives_before": 14,
+    "line_directives_after": 12,
+    "negative_controls": [
+      "SMBDBG=1 and SMBDBG1=1",
+      "SMBDBG1=1",
+      "SMB_NO_UNALIGNED=1",
+      "SMB_USE_UNALIGNED=0"
+    ],
+    "line_endings": "CRLF preserved",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "sha256": "dfc802009e9094fe90c8df69e8ffcbd275ea60015dd67da7543c452e0daafe72"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+    "sha256": "dfc802009e9094fe90c8df69e8ffcbd275ea60015dd67da7543c452e0daafe72"
+  },
+  "mirror_before": 12,
+  "mirror_after": 12,
+  "mirror_delta": 0,
+  "raw_before": 26,
+  "raw_after": 24,
+  "change": "Restore original conditional boundaries50,76,93,112;remove redundant directives;14->12 line directives. Preserve CRLF and all4 excluded arms.",
+  "call_chain": "14 formal x86 VDM redirector,xactsrv,RAP consumers include SMB types directly or via smbgtpt. Original types and packing unchanged.",
+  "verification": "42 preprocessing outputs have identical full-TU tokens and114 selected header lines per context;explicit variant paths checked.291 retained source lines map to original. Four negative profiles fail C1189.",
+  "counter_review": "All excluded spans checked against fixed original and current bytes;no selected content changes. Both sides of changed condition boundaries retain correct mapping.",
+  "product_verification": "P187 product evidence reused for token/line-equivalent directive-only change;11x2 publication hashes checked. P197 shared Clipboard failure is not a pass.",
+  "delivery": "P200 governance commit push accompany receipt"
+}

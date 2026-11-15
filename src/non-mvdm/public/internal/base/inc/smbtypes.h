@@ -44,10 +44,10 @@ Revision History:
 #define SMBDBG1 0
 #endif
 
-#line 47
 #if SMBDBG && SMBDBG1
 #line 48
 #error Unsupported SMB diagnostic or alignment profile
+#line 50
 #endif
 #line 51
 
@@ -73,15 +73,14 @@ Revision History:
 #endif
 
 #ifndef SMB_USE_UNALIGNED
-#line 74
 #if SMB_NO_UNALIGNED
 #line 75
 #error Unsupported SMB diagnostic or alignment profile
+#line 76
 #else
 #line 77
 #define SMB_USE_UNALIGNED 1
 #endif
-#line 79
 #endif
 
 //
@@ -92,12 +91,12 @@ Revision History:
 // SMB_USE_UNALIGNED is TRUE or FALSE, respectively.
 //
 
-#line 89
 #if SMB_USE_UNALIGNED
 #define SMB_UNALIGNED UNALIGNED
 #else
 #line 92
 #error Unsupported SMB diagnostic or alignment profile
+#line 93
 #endif
 #line 94
 
@@ -113,10 +112,10 @@ typedef unsigned long SMB_UNALIGNED *PSMB_ULONG;
 // Macros for renaming short and long SMB fields.
 //
 
-#line 107
 #if SMBDBG1
 #line 108
 #error Unsupported SMB diagnostic or alignment profile
+#line 112
 #else
 #line 113
 
@@ -124,7 +123,6 @@ typedef unsigned long SMB_UNALIGNED *PSMB_ULONG;
 #define _ULONG( field ) ULONG field
 
 #endif
-#line 118
 
 //
 // Force misalignment of the following structures
