@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2010 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1309 qualified pending;710 unreviewed. Files273/365 audited,92 remain.
+2011 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1310 qualified pending;709 unreviewed. Files274/365 audited,91 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -48,10 +48,6 @@ established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P172 xmsdisp selected original source confirmed;CRLF restored,51 logical lines match;P171 product evidence reused.
-
-P173 xmsmemr original mover restored;mirror30->4(-26),48 MSVC lines match. Cached,publish11x2,focused,real final guest relocation,Full19 and governance passed;Git accompanies receipt.
 
 P174 csrutil650->622(-28):original header/comment cleanup,174 retained lines match,x86/x64 preprocessing identical. Native ABI controls qualify7 residuals;P173 package verification reused.
 
@@ -201,3 +197,5 @@ P185 convert.c:selected original subset confirmed;ordinary semantic0,excluded di
 P186 apimsg533->7(-526):original descriptors and complete function bodies restored;header binding2 remains pending,excluded5 retained. 276 MSVC-selected lines match original;cached,publish11x2,Full and actual DOS NetMessage failure/retirement passed. Prior-package shared RDP Clipboard recheck remains unsuccessful due recorded external ownership;not a new pass. Git accompanies receipt.
 
 P187 apisrv1067->190(-877):original linkable bodies and error semantics restored;includes4 and Enum3 omission180 pending,excluded6 retained.901 source/607 MSVC lines match;focused37,cached,publish11x2,Full passed. Original C4701 remains disclosed;RDP shared Clipboard still fails with external holders. Git accompanies receipt.
+
+P188 apisvc4 unchanged:all original selected bodies retained;785 source/518 actual MSVC lines match;1#error correct. Original aggregate include C1083 smb.h;one boundary decision. No product changes;P187 verification/publication reused;Git accompanies receipt.

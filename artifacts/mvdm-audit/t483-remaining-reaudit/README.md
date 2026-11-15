@@ -1238,3 +1238,5 @@ P185: [RAP conversion subset review](batch-p185-checkpoint.json):original select
 P186: [Original NetMessage restoration](batch-p186-checkpoint.json):533->7(-526);one header decision;cached,publish11x2,Full and DOS message probe. Shared Clipboard recheck limitation retained.
 
 P187: [Original server API restoration](batch-p187-checkpoint.json):1067->190(-877);two evidenced header/provider decisions;focused37,cached,publish11x2,Full.
+
+P188: [NetService original-body confirmation](batch-p188-checkpoint.json):4 unchanged;one evidenced header decision;no source change;P187 product evidence reused.

@@ -1,0 +1,34 @@
+{
+  "proof": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+    "sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6",
+    "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+    "mirror_added": 2,
+    "mirror_deleted": 2,
+    "source_lines": 785,
+    "msvc_selected_lines": 518,
+    "mismatches": [],
+    "preprocessing_identical": true,
+    "excluded": 1,
+    "source_unchanged": true,
+    "original_header_exit": 2,
+    "original_header_failure": "xactsrvp.h(63): C1083 smb.h absent",
+    "current_exit": 0,
+    "original_body_exit": 0
+  },
+  "status": "unchanged original selected bodies;header boundary qualified pending owner",
+  "mirror_before": 4,
+  "mirror_after": 4,
+  "mirror_delta": 0,
+  "source_files": 0,
+  "files": [],
+  "reviewed_source": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+    "sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6"
+  },
+  "call_chain": "VrNetServiceControl -> XsNetServiceControl -> NetServiceControl;original NetpTranslateNamesInServiceArray and RAP conversion/cleanup retained. No new service-control path introduced.",
+  "necessity": "Original aggregate header restored alone fails C1083 smb.h at xactsrvp.h63. P186 isolated original SMB declaration closure additionally reaches absent ntmsv1_0.h. The one-line boundary replaces aggregate declarations, not function bodies.",
+  "counter_review": "All four original NetService functions already present. No internal rewrite to revert, no new shim. A larger original private server/authentication header import is an owner boundary decision;current compile dependency is independently tested rather than used circularly.",
+  "verification": "Actual /O2 supported flags:current and original-body preprocessor pass and tokens/selected line numbers equal;original-header actual compile fails as recorded. Product source unchanged:reuse P187 cached/full/focused/publication evidence,not a new runtime test.",
+  "delivery": "P188 governance/commit/push accompany receipt"
+}
