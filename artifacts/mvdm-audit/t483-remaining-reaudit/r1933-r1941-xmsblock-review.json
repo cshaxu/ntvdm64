@@ -1,0 +1,109 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsblock.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/xms.486/xmsblock.c",
+  "source_sha256": "0d3a037dcfa2ce80719165ad4d890369f4b6d591157d68b9bb1c938400e0d9fc",
+  "before_sha256": "37f752a43f5991315ce9eea8d706117b060736fe68dc69098215b81e71e5a1a3",
+  "metrics": {
+    "before": {
+      "added": 36,
+      "deleted": 17,
+      "total": 53
+    },
+    "after": {
+      "added": 19,
+      "deleted": 13,
+      "total": 32
+    }
+  },
+  "point_evidence": {
+    "R1933": "No independent semantic preamble difference.",
+    "R1934": "The actual retained copy_from/copy_forward API takes numeric CCPU linear addresses and session cancellation reports failure. Explicit prototypes for those necessary address-boundary calls require these two headers;raw GetVDMAddr is not a multi-page host alias.",
+    "R1935": "Original himem4.asm AEMGotHandle passes zero DX to XMS_ALLOCBLOCK without a zero-size rejection. Original host skips SAAllocate and returns uninitialized BaseAddress. A nonzero pool-base value gives a zero-owned-size handle and permits original zero-to-positive reallocation;XMSInit uses0x110000 pool base. Keep one initializer,remove duplicate comments.",
+    "R1936": "Original himem4.asm ReallocExtMemory compares [si].Len with new BX and je REMExit before XMSSVC XMS_REALLOCBLOCK. Equal-size private host entry is not a supported HIMEM call. Restore original NewAddress handling and remove two test calls bypassing this precondition.",
+    "R1937": "Restore original declaration whitespace;only12-byte local descriptor and numeric address remain. c_GetLinAdd translates a single linear address,so decrementing the returned host pointer cannot cross arbitrary mapped pages.",
+    "R1938": "GetVDMAddr->Sim32pGetVDMPointer->c_GetLinAdd->xtrn2phy resolves only one address. With distinct neighboring physical page mappings,the pointer to SS:BP cannot be decremented to read the previous12 linear bytes. Current numeric copy reads through original SAS across mappings. Delete explanatory comment;retain bounded descriptor read and failure propagation. This proves address-domain necessity,not every invalid-BOP policy.",
+    "R1939": "Original himem5.asm shifts highword right and rotates lowword right before XMSSVC XMS_MOVEBLOCK;odd byte counts branch to MEM2_InvCount. Therefore transmitted DWORD word count<=0x7fffffff;restore original multiply2. Do not require extra protection for invented malformed private BOP inputs.",
+    "R1940": "Restore original blank line before i386 condition.",
+    "R1941": "Original GetVDMAddr(0,0)+numeric pSrc/pDst assumes globally affine mapping. CCPU c_GetLinAdd explicitly uses page translation and c_GetPhyAdd supports external physical backing. Original raw RtlCopyMemory cannot represent noncontiguous paged/XMS storage. Keep existing SAS forward copy and cancellation;remove optional XMS trace hooks and now-uncalled reporter/declaration/tests,not migrate tracing to a new shim."
+  },
+  "point_metrics": {
+    "R1933": {
+      "before_added": 0,
+      "before_deleted": 0,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": 0
+    },
+    "R1934": {
+      "before_added": 2,
+      "before_deleted": 0,
+      "after_added": 2,
+      "after_deleted": 0,
+      "delta": 0
+    },
+    "R1935": {
+      "before_added": 3,
+      "before_deleted": 1,
+      "after_added": 1,
+      "after_deleted": 1,
+      "delta": -2
+    },
+    "R1936": {
+      "before_added": 2,
+      "before_deleted": 0,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": -2
+    },
+    "R1937": {
+      "before_added": 4,
+      "before_deleted": 2,
+      "after_added": 2,
+      "after_deleted": 0,
+      "delta": -4
+    },
+    "R1938": {
+      "before_added": 13,
+      "before_deleted": 1,
+      "after_added": 9,
+      "after_deleted": 1,
+      "delta": -4
+    },
+    "R1939": {
+      "before_added": 5,
+      "before_deleted": 1,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": -6
+    },
+    "R1940": {
+      "before_added": 0,
+      "before_deleted": 1,
+      "after_added": 0,
+      "after_deleted": 0,
+      "delta": -1
+    },
+    "R1941": {
+      "before_added": 7,
+      "before_deleted": 11,
+      "after_added": 5,
+      "after_deleted": 11,
+      "delta": -2
+    }
+  },
+  "counter_review": [
+    "Trace observers are not necessary for product semantics;remove their dead implementation rather than merely hiding calls.",
+    "Original guest preconditions govern internal BOP contract;test-only bypass of equal-size early return is not evidence to change mirror code.",
+    "Preserve CCPU paging and external physical mappings;do not restore affine host-pointer arithmetic under a different memory model.",
+    "No guest source or guest binary edits. Fault/cancellation error policy remains qualified residual,not claim of complete original AX/BL equivalence."
+  ],
+  "line_check": {
+    "selected_retained_lines": 97,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "status": "cached,published,tested;Git accompanies receipt",
+  "delivery": "batch-p171-checkpoint.json",
+  "verification": "MSVC97/0;XMS/observer focused;Full19"
+}

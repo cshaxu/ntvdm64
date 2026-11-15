@@ -38,8 +38,6 @@
 VOID xmsAllocBlock (VOID)
 {
 BOOL Success;
-/* DIVERGENCE(MVDM-HOST-DIV-887): zero length owns no storage; use the
- * original XMSInit pool base, not an uninitialized address for later resize. */
 ULONG BaseAddress = 1024 * 1024 + 64 * 1024;
 ULONG size;
 
@@ -132,8 +130,6 @@ ULONG NewSize;
     size = getDX() * 1024;
     NewSize = getBX() * 1024;
     BaseAddress = getAX() * 1024;
-    /* DIVERGENCE(MVDM-HOST-DIV-887): unchanged size retains the original base. */
-    NewAddress = BaseAddress;
     if(size != NewSize) {
 
         //
@@ -183,15 +179,11 @@ ULONG NewSize;
 
 VOID xmsMoveBlock (VOID)
 {
-PBYTE pExtMoveInfo,pSrc,pDst;
-ULONG cbTransfer,SoftpcBase, DstSegOff;
+PBYTE	pExtMoveInfo,pSrc,pDst;
+ULONG	cbTransfer,SoftpcBase, DstSegOff;
 UCHAR MoveInfo[12];
 ULONG MoveInfoAddress;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-077): preserve the original descriptor
-     * interpretation and forward-copy contract.  The one unavailable raw
-     * GetVDMAddr alias is materialized as a bounded local twelve-byte lease;
-     * no descriptor parsing or XMS policy remains in the adapter. */
     MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
     if (MoveInfoAddress < sizeof(MoveInfo) ||
         !mvdm_softpc_guest_memory_copy_from(
@@ -204,11 +196,7 @@ ULONG MoveInfoAddress;
 #line 183
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
     cbTransfer = (FETCHDWORD(*(PULONG)pExtMoveInfo));
-    if (cbTransfer > ((ULONG)-1) / 2u) {
-        mvdm_xms_cancel_current_operation();
-        return;
-    }
-    cbTransfer *= 2;                    // Get in bytes
+    cbTransfer *= 2;					// Get in bytes
 #line 186
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
     (DWORD)pSrc = FETCHDWORD(*(PULONG)pExtMoveInfo);
@@ -217,18 +205,17 @@ ULONG MoveInfoAddress;
 
     // Yes, we could use memmov for handling the overlapping regions
     // but XMS spec wants memcpy behaviour.
+
 #ifdef i386
 #line 195
 #error DIVERGENCE MVDM-HOST-DIV-594: historical i386 XMS path is not selected
 #else
 #line 197
-    mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, FALSE);
     if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,
             (ULONG)pSrc, cbTransfer)) {
         mvdm_xms_cancel_current_operation();
         return;
     }
-    mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, TRUE);
 #endif
 #line 209
     setAX(1);

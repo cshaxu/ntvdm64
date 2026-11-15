@@ -1,0 +1,166 @@
+{
+  "status": "cached full,published11x2,XMS-boundaries,observer-error,Full19,governance passed;Git accompanies receipt",
+  "source_files": 7,
+  "files": [
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "sha256": "0d3a037dcfa2ce80719165ad4d890369f4b6d591157d68b9bb1c938400e0d9fc"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+      "sha256": "0727f9be1188e55ca4ceb3b3d8034e45874666c0a1d0290c9de4bea978645b40"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+      "sha256": "3e0d1cf5298d411cb45c2ef74cba53e4200a7677abb6a42a0debf8d16ccbd47b"
+    },
+    {
+      "path": "test/observation/softpc_observer_error_probe.c",
+      "sha256": "379158f2e6d3da862f03a93adbf1f58ef8410cd1efe4f4b118e7b75be0adfeed"
+    },
+    {
+      "path": "test/observation/verify-softpc-observer-error.ps1",
+      "sha256": "2c7c07744432933ebd3da4c7e424ed1210b43308bc08fc0808800cd324a4d855"
+    },
+    {
+      "path": "test/observation/verify-xms-block-boundaries.ps1",
+      "sha256": "993395336c299d937aeb1a887e7dde455c3ade9d79ebbe72fca51e9cb0b4869b"
+    },
+    {
+      "path": "test/mvdm-host/xms/xms_block_boundary_fixture.c",
+      "sha256": "9120a7dd8084f0f1c098594bda27917ca875f67a2a37a82d8c8914a960eae3ac"
+    }
+  ],
+  "mirror_delta": -21,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "rdp_recheck": {
+    "initial": "132-byte incomplete report;OpenClipboard error5;confirmed RadeonSoftware PID12844 holder",
+    "action": "Stopped exact confirmed unrelated holder under standing owner approval",
+    "retry": "18 checkpoints,zero errors;runner exit0",
+    "evidence": "build/rdp-recheck-p171",
+    "package_identity_proof": "build/t483-s5-p171/isolated-identity-proof.json",
+    "guest_report": [
+      {
+        "phase": 12,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 8,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 9,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 10,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 11,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 1,
+        "errors": 0,
+        "guestHandle": 0,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 2,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 4096
+      },
+      {
+        "phase": 3,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 4096
+      },
+      {
+        "phase": 4,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 6110
+      },
+      {
+        "phase": 5,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 6,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 7,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 13,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 14,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 15,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 16,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 17,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      },
+      {
+        "phase": 18,
+        "errors": 0,
+        "guestHandle": 6110,
+        "nativeHandle": 0
+      }
+    ]
+  },
+  "package": "62f31338-ddb7-403c-9df4-645078014722",
+  "tests": {
+    "Full_gates": 19,
+    "focused": [
+      "actual XMS provider and original suballocator",
+      "retained observer last-error checks",
+      "original zero-size allocation negative control"
+    ]
+  },
+  "limitations": [
+    "Native XMS fixture is not complete guest XMS move acceptance",
+    "External DOS4GW/Nesticle fixture absent:skipped not passed"
+  ]
+}

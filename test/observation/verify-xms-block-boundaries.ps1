@@ -20,7 +20,7 @@ foreach($unit in @(@('provider',$ProviderSource),@('fixture','test/mvdm-host/xms
 }
 $exe="$out/xms-boundary.exe"
 # Unused move/query dependencies fail fast if accidentally called; no success seams.
-$seams=@('mvdm_xms_cancel_current_operation','mvdm_softpc_guest_memory_copy_from','mvdm_softpc_guest_memory_copy_forward','getBP','setDX','getSS','mvdm_softpc_report_xms_move') | ForEach-Object {"/alternatename:_$($_)=_fixture_unexpected"}
+$seams=@('mvdm_xms_cancel_current_operation','mvdm_softpc_guest_memory_copy_from','mvdm_softpc_guest_memory_copy_forward','getBP','setDX','getSS','Sim32pGetVDMPointer','sas_overwrite_memory') | ForEach-Object {"/alternatename:_$($_)=_fixture_unexpected"}
 & $wrapper link /nologo /OPT:REF @seams "/OUT:$exe" "/MAP:$exe.map" "$out/fixture.obj" "$out/provider.obj" "$cache/original-mvdm-host-suballoc.lib" kernel32.lib ntdll.lib legacy_stdio_definitions.lib 2>&1 | Out-File "$out/build.txt" -Append
 if($LASTEXITCODE){throw 'Link failed'}
 $map=Get-Content "$exe.map" -Raw

@@ -12,36 +12,6 @@
  * original host_main -> host_applClose tail. */
 extern void host_applClose(void);
 
-void mvdm_softpc_report_xms_move(unsigned long source,
-    unsigned long destination, unsigned long byte_count, int completed)
-{
-    static __declspec(thread) char path[MAX_PATH];
-    static __declspec(thread) unsigned initialized, count;
-    DWORD saved = GetLastError(), bytes, written;
-    HANDLE file;
-    char line[176];
-
-    if (!initialized) {
-        bytes = GetEnvironmentVariableA("MVDM_WIN31_SETUP_XMS_TRACE_PATH",
-            path, (DWORD)sizeof(path));
-        if (bytes == 0u || bytes >= sizeof(path)) path[0] = 0;
-        initialized = 1u;
-    }
-    if (path[0] && count++ < 256u) {
-        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
-            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-        if (file != INVALID_HANDLE_VALUE) {
-            bytes = (DWORD)snprintf(line, sizeof(line),
-                "tid=%lu xms-move %s src=%08lx dst=%08lx bytes=%08lx\r\n",
-                GetCurrentThreadId(), completed ? "done" : "begin", source,
-                destination, byte_count);
-            if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
-            CloseHandle(file);
-        }
-    }
-    SetLastError(saved);
-}
-
 void mvdm_softpc_report_wow_fast_callback_binding(char const *stage,
     unsigned long address)
 {

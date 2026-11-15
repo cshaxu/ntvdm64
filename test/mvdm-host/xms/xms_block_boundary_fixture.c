@@ -21,14 +21,13 @@ static NTSTATUS decommit(ULONG a,ULONG n){CHECK(a>=BASE && n<=SIZE && a-BASE<=SI
 static void move(ULONG d,ULONG s,ULONG n){CHECK(d>=BASE && s>=BASE && n<=SIZE && d-BASE<=SIZE-n && s-BASE<=SIZE-n);++moves;memmove(bytes+d-BASE,bytes+s-BASE,n);}
 static ULONG freebytes(void){ULONG f,l;CHECK(SAQueryFree(ExtMemSA,&f,&l));return f;}
 int main(void){
- unsigned i;USHORT block,grown;ULONG initial;unsigned before;
+ unsigned i;USHORT block,grown;ULONG initial;
  ExtMemSA=SAInitialize(BASE,SIZE,commit,decommit,move);CHECK(ExtMemSA!=NULL);initial=freebytes();CHECK(initial==SIZE);
  for(i=0;i<32;++i){dx=0;ax=0xdead;xmsAllocBlock();CHECK(ax==BASE/1024);CHECK(freebytes()==initial);}
  CHECK(commits==0 && decommits==0 && moves==0);
  dx=8;xmsAllocBlock();block=ax;CHECK(block==BASE/1024);memset(bytes,0x5a,8192);CHECK(freebytes()==initial-8192);
- before=commits;ax=block;dx=8;bx=8;cx=0xdead;xmsReallocBlock();CHECK(cx==block);CHECK(commits==before && moves==0);CHECK(bytes[0]==0x5a && bytes[8191]==0x5a);
+ /* Original HIMEM returns before BOP for equal old/new sizes. */
  dx=0;xmsAllocBlock();CHECK(ax==BASE/1024);CHECK(freebytes()==initial-8192);
- dx=0;bx=0;cx=0xdead;xmsReallocBlock();CHECK(cx==BASE/1024);
  ax=BASE/1024;dx=0;bx=1;xmsReallocBlock();grown=cx;CHECK(grown!=0 && grown!=block);CHECK(freebytes()==initial-9216);CHECK(bytes[0]==0x5a && bytes[8191]==0x5a);
  ax=grown;dx=1;xmsFreeBlock();CHECK(ax==1);ax=block;dx=8;xmsFreeBlock();CHECK(ax==1);CHECK(freebytes()==initial);
  dx=0xffff;xmsAllocBlock();CHECK(ax==0);CHECK(freebytes()==initial);

@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1932 reviewed:665 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1259 qualified pending;788 unreviewed. Files256/365 audited,109 remain.
+1941 reviewed:669 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1264 qualified pending;779 unreviewed. Files257/365 audited,108 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -81,9 +81,11 @@ P169 XMS header selected original subset confirmed;120 content lines match,7#err
 
 P170 XMS A20 selected original source confirmed;78 content lines match,two literal#if0 exclusions retained. No source changes;P168 final2 validation reused;Git accompanies receipt.
 
+P171 XMS block53->32(-21);MSVC97/0,cached,publish11x2,XMS/observer focused,original zero-size negative control,Full19,RDP Clipboard18/0 and governance passed;Git accompanies receipt.
+
 ## Current Technical Baseline
 
-P168 candidate `8c6cdc2c-95a2-4a80-bac6-446d84b9d975` published11x2;hashes match.
+P171 candidate `62f31338-ddb7-403c-9df4-645078014722` published11x2;hashes match.
 Final message ownership/scope focused and Full19 passed;Git accompanies P162.
 Cached full x86/x64,Full19 and governance passed;Git accompanies P151.
 Cached full x86/x64, Full19, entry ABI/object proof, WOW boundary and governance passed.
