@@ -701,8 +701,8 @@ BOOL W32MapViewOfFile( PHMAPPEDFILEALIAS pCache, HANDLE hFile)
             pCache->fAccess = TRUE;     // Assume Read Access
         } else {
             CloseHandle(pCache->hMappedFileObject);
-            /* DIV-874: failed view no longer owns the closed mapping. */
             pCache->hMappedFileObject = 0;
+#line 699
         }
     }
     return(pCache->fAccess);
@@ -729,9 +729,9 @@ VOID FlushMapFileCaches()
 
     dwTotalCacheBytes = dwTotalCacheAccess = 0;
 
-    /* DIV-874: include the tail; freeing promotes nodes to the head. */
     while (pCache != 0) {
         next = pCache->hpfNext;
+#line 726
         if (pCache->hfile32 != 0) {
             FREEMAPFILECACHE(pCache->hfile32);
         }
@@ -1910,12 +1910,7 @@ ULONG FASTCALL WK32FileGetAttributes(PVDMFRAME pFrame)
 ULONG FASTCALL WK32FileSetAttributes(PVDMFRAME pFrame)
 {
     PWOWFILESETATTRIBUTES16 parg16;
-    /* DIVERGENCE(MVDM-HOST-DIV-451): the original trailing-separator
-     * rejection bypasses NormalizeDosPath, whose normal path initializes
-     * these cleanup values.  Keep that original error precedence, but make
-     * the skipped cleanup ownership explicit rather than reading/freeing
-     * indeterminate stack data. */
-    PSTR                    pszPath, lpFileName = NULL;
+    PSTR                    pszPath, lpFileName;
 #line 1903
     ULONG                   attributes, l, dwReturn;
     BOOL                    ItsANamedPipe = FALSE;

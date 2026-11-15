@@ -1,0 +1,85 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wkfileio.c",
+    "shared_selected_lines": 1222,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            699,
+            "pCache->hMappedFileObject = 0;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            714,
+            "PHMAPPEDFILEALIAS pCache;"
+          ]
+        ],
+        "after": [
+          [
+            714,
+            "PHMAPPEDFILEALIAS pCache, next;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            725,
+            "while ( (pCache->hpfNext !=0) ) {"
+          ]
+        ],
+        "after": [
+          [
+            725,
+            "while (pCache != 0) {"
+          ],
+          [
+            726,
+            "next = pCache->hpfNext;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            729,
+            "pCache = pCache->hpfNext;"
+          ]
+        ],
+        "after": [
+          [
+            729,
+            "pCache = next;"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            1904,
+            "BOOL                    ItsANamedPipe;"
+          ]
+        ],
+        "after": [
+          [
+            1904,
+            "BOOL                    ItsANamedPipe = 0;"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]

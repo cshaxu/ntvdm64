@@ -1,0 +1,172 @@
+{
+  "file": "src/mvdm-host/wow32/wkfileio.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wkfileio.c",
+  "mirror_before": {
+    "added": 17,
+    "deleted": 12,
+    "total": 29
+  },
+  "mirror_after": {
+    "added": 9,
+    "deleted": 11,
+    "total": 20
+  },
+  "mirror_delta": -9,
+  "metric_note": "Original-relative added+deleted lines;normalize EOL and exclude #line;includes unchanged excluded bodies. No code-total metric.",
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "shared_selected_lines": 1222,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              699,
+              "pCache->hMappedFileObject = 0;"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              714,
+              "PHMAPPEDFILEALIAS pCache;"
+            ]
+          ],
+          "after": [
+            [
+              714,
+              "PHMAPPEDFILEALIAS pCache, next;"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              725,
+              "while ( (pCache->hpfNext !=0) ) {"
+            ]
+          ],
+          "after": [
+            [
+              725,
+              "while (pCache != 0) {"
+            ],
+            [
+              726,
+              "next = pCache->hpfNext;"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              729,
+              "pCache = pCache->hpfNext;"
+            ]
+          ],
+          "after": [
+            [
+              729,
+              "pCache = next;"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              1904,
+              "BOOL                    ItsANamedPipe;"
+            ]
+          ],
+          "after": [
+            [
+              1904,
+              "BOOL                    ItsANamedPipe = 0;"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "points": [
+    {
+      "id": "T483-R1460",
+      "decision": "restore",
+      "problem": "Original logical-line alignment",
+      "before": 0,
+      "after": 0,
+      "evidence": "1222 shared selected original lines match;all3 excluded #error directives unchanged."
+    },
+    {
+      "id": "T483-R1461",
+      "decision": "pending",
+      "problem": "Closed mapping handle remains in cache",
+      "before": 2,
+      "after": 1,
+      "evidence": "Original/current selected x86 object comparison reproduced:579 checks8 failures versus577 checks0 failures. Normal real files/mappings cover1..11 occupancy,holes,reordering,writeback and repeated cleanup;failed mapping and numeric handle reuse are controlled imports,not an observed real allocator race. CreateFileMapping succeeds,MapViewOfFile fails,CloseHandle succeeds;FreeMapFileCache or eviction otherwise closes the stored handle again. Keep one clear;remove comment."
+    },
+    {
+      "id": "T483-R1462",
+      "decision": "pending",
+      "problem": "Saved traversal successor local",
+      "before": 2,
+      "after": 2,
+      "evidence": "Original/current selected x86 object comparison reproduced:579 checks8 failures versus577 checks0 failures. Normal real files/mappings cover1..11 occupancy,holes,reordering,writeback and repeated cleanup;failed mapping and numeric handle reuse are controlled imports,not an observed real allocator race. FreeMapFileCache calls FindMapFileCache,which moves a found node to head;retain one saved next pointer,not a second owner."
+    },
+    {
+      "id": "T483-R1463",
+      "decision": "pending",
+      "problem": "Tail-inclusive traversal and successor capture",
+      "before": 4,
+      "after": 3,
+      "evidence": "Original/current selected x86 object comparison reproduced:579 checks8 failures versus577 checks0 failures. Normal real files/mappings cover1..11 occupancy,holes,reordering,writeback and repeated cleanup;failed mapping and numeric handle reuse are controlled imports,not an observed real allocator race. Original while(next!=0) omits tail;capture successor before original cleanup reorders node. Remove explanatory comment."
+    },
+    {
+      "id": "T483-R1464",
+      "decision": "pending",
+      "problem": "Advance through saved successor",
+      "before": 2,
+      "after": 2,
+      "evidence": "Original/current selected x86 object comparison reproduced:579 checks8 failures versus577 checks0 failures. Normal real files/mappings cover1..11 occupancy,holes,reordering,writeback and repeated cleanup;failed mapping and numeric handle reuse are controlled imports,not an observed real allocator race. Re-reading the promoted node next link can revisit prior nodes and stop before original tail;use saved successor."
+    },
+    {
+      "id": "T483-R1465",
+      "decision": "restore",
+      "problem": "Redundant pointer initialization and explanation",
+      "before": 7,
+      "after": 0,
+      "evidence": "WK32FileSetAttributes trailing-separator rejection short-circuits NormalizeDosPath. The original cleanup then reads uninitialized ItsANamedPipe. Keeping FALSE ensures lpFileName is never read on that branch;all other paths assign lpFileName before cleanup. Normalizer sets flag on entry;NULL returned for failed pipe conversion is still assigned. Exact before/final thunks52 checks0 failures each;test substitutes guest mapping/path/API boundaries,not full guest integration. Restore original PSTR declaration;remove five comment lines. No new path or shim."
+    },
+    {
+      "id": "T483-R1466",
+      "decision": "pending",
+      "problem": "Cleanup flag before short-circuit rejection",
+      "before": 2,
+      "after": 2,
+      "evidence": "WK32FileSetAttributes trailing-separator rejection short-circuits NormalizeDosPath. The original cleanup then reads uninitialized ItsANamedPipe. Keeping FALSE ensures lpFileName is never read on that branch;all other paths assign lpFileName before cleanup. Normalizer sets flag on entry;NULL returned for failed pipe conversion is still assigned. Exact before/final thunks52 checks0 failures each;test substitutes guest mapping/path/API boundaries,not full guest integration. Keep only BOOL initialization;no need to initialize unused pointer."
+    }
+  ],
+  "counter_review": [
+    "Original mapping error return/read fallback and original unmap/close/file-position owner retained.",
+    "Do not replace traversal with another cache implementation;one saved pointer is sufficient.",
+    "BOOL false is the only needed initialization;no read of unassigned lpFileName exists with the remaining guard.",
+    "Original guest and adapter behavior untouched;new fixture explicitly separates controlled-provider coverage from runtime integration."
+  ],
+  "evidence": [
+    "build/t483-s5-p144/cache-original/run.txt",
+    "build/t483-s5-p144/cache-final/run.txt",
+    "build/t483-s5-p144/attributes-before.log",
+    "build/t483-s5-p144/attributes-final.log"
+  ],
+  "delivery": "P144 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p144-checkpoint.json"
+}
