@@ -1,0 +1,396 @@
+{
+  "file": "src/mvdm-host/wow32/wkernel.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wkernel.c",
+  "sha256": "a31be79d597a27a6e438a19ae2747285d9225965b22f8c339a2ba5770caeb6d1",
+  "mirror_before": {
+    "added": 58,
+    "deleted": 108,
+    "total": 166
+  },
+  "mirror_after": {
+    "added": 30,
+    "deleted": 103,
+    "total": 133
+  },
+  "mirror_delta": -33,
+  "metric_note": "Whole-file original-relative metric excludes #line and normalizes EOL;includes unchanged #error body deletions. Point scopes share relocated bindings,so whole-file metric is authoritative.",
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "shared_selected_lines": 398,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              20,
+              "static PSZ W32PrivateProfileFileName(PSZ filename, CHAR path[260])"
+            ],
+            [
+              21,
+              "{"
+            ],
+            [
+              22,
+              "if (filename != ((void *)0) && !_stricmp(filename, \"system.ini\") &&"
+            ],
+            [
+              23,
+              "mvdm_softpc_profile_shadow_system_ini(path, 260)) {"
+            ],
+            [
+              24,
+              "return path;"
+            ],
+            [
+              25,
+              "}"
+            ],
+            [
+              26,
+              "return filename;"
+            ],
+            [
+              27,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              132,
+              "CHAR szPackageProfile[260];"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              158,
+              "ul = ((BOOL16)(WritePrivateProfileStringA( pszSection, pszKey, pszValue, pszFilename )));"
+            ]
+          ],
+          "after": [
+            [
+              158,
+              "ul = ((BOOL16)(WritePrivateProfileStringA( pszSection, pszKey, pszValue, W32PrivateProfileFileName(pszFilename, szPackageProfile) )));"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              397,
+              "CHAR szPackageProfile[260];"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              455,
+              "ul = ((WORD)(GetPrivateProfileStringA( pszSection, pszKey, pszDefault, pszReturnBuffer, cchMax, pszFilename)));"
+            ]
+          ],
+          "after": [
+            [
+              455,
+              "ul = ((WORD)(GetPrivateProfileStringA( pszSection, pszKey, pszDefault, pszReturnBuffer, cchMax, W32PrivateProfileFileName(pszFilename, szPackageProfile))));"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              523,
+              "if (0 == GetPrivateProfileStringA(pszSection, pszKey, \"\", szBuf, sizeof szBuf, pszFilename)) {"
+            ]
+          ],
+          "after": [
+            [
+              523,
+              "if (0 == GetPrivateProfileStringA(pszSection, pszKey, \"\", szBuf, sizeof szBuf, W32PrivateProfileFileName(pszFilename, szPackageProfile))) {"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              717,
+              "CHAR szPackageProfile[260];"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              726,
+              "ul = (GetPrivateProfileIntA( psz1, psz2, ((INT)(INT16)(parg16->f3)), psz4 ));"
+            ]
+          ],
+          "after": [
+            [
+              726,
+              "ul = (GetPrivateProfileIntA( psz1, psz2, ((INT)(INT16)(parg16->f3)), W32PrivateProfileFileName(psz4, szPackageProfile) ));"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              748,
+              "INT cch;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              750,
+              "cch = ((INT)(INT16)(parg16->f3));"
+            ],
+            [
+              752,
+              "if (cch <= 0) {"
+            ],
+            [
+              753,
+              ";"
+            ],
+            [
+              754,
+              "return 0;"
+            ],
+            [
+              755,
+              "}"
+            ]
+          ]
+        },
+        {
+          "op": "replace",
+          "original": [
+            [
+              759,
+              "Sim32FlushVDMPointer( (parg16->f2), (USHORT)(strlen(psz2)+1), (PBYTE)(psz2), (fWowMode));"
+            ]
+          ],
+          "after": [
+            [
+              759,
+              "Sim32FlushVDMPointer( (parg16->f2), (USHORT)(cch), (PBYTE)(psz2), (fWowMode));"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "points": [
+    {
+      "id": "T483-R1439",
+      "disposition": "restore",
+      "problem": "Whole-file original LF/logical lines",
+      "before": 0,
+      "after": 0,
+      "evidence": "All five excluded DEBUG/DBCS bodies retain #error;398 shared selected original lines match."
+    },
+    {
+      "id": "T483-R1440",
+      "disposition": "pending",
+      "problem": "Bare SYSTEM.INI filename binding helper",
+      "before": 15,
+      "after": 9,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk."
+    },
+    {
+      "id": "T483-R1441",
+      "disposition": "restore",
+      "problem": "Write-profile duplicate filename local",
+      "before": 1,
+      "after": 0,
+      "evidence": "Inline existing helper only at native filename argument;no duplicate local or shifted owner."
+    },
+    {
+      "id": "T483-R1442",
+      "disposition": "pending",
+      "problem": "Write-profile session path storage",
+      "before": 1,
+      "after": 1,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk. Caller stack holds temporary path through synchronous API;guest source pointer remains separately releasable."
+    },
+    {
+      "id": "T483-R1443",
+      "disposition": "restore",
+      "problem": "Write-profile premature filename computation",
+      "before": 3,
+      "after": 0,
+      "evidence": "Original sequence restored;binding now occurs at native API filename argument in R1445."
+    },
+    {
+      "id": "T483-R1444",
+      "disposition": "restore",
+      "problem": "Write-profile compatibility filename",
+      "before": 2,
+      "after": 0,
+      "evidence": "Original pszFilename restored for IS_WIN_INI;binding changes only bare system.ini,not win.ini."
+    },
+    {
+      "id": "T483-R1445",
+      "disposition": "pending",
+      "problem": "WritePrivateProfileString native filename argument",
+      "before": 2,
+      "after": 2,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk. Writes use the same session copy as reads;no permanent host profile mutation. Session-only persistence is retained existing policy,pending owner decision."
+    },
+    {
+      "id": "T483-R1446",
+      "disposition": "restore",
+      "problem": "Read-profile duplicate filename local",
+      "before": 1,
+      "after": 0,
+      "evidence": "Existing helper inlined at two native API filename arguments;no duplicate local."
+    },
+    {
+      "id": "T483-R1447",
+      "disposition": "pending",
+      "problem": "Read-profile session path storage",
+      "before": 1,
+      "after": 1,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk. One stack path is reused synchronously;no guest pointer escape."
+    },
+    {
+      "id": "T483-R1448",
+      "disposition": "restore",
+      "problem": "Read-profile premature filename computation",
+      "before": 3,
+      "after": 0,
+      "evidence": "Original pre-compatibility sequence restored;only actual API calls evaluate binding."
+    },
+    {
+      "id": "T483-R1449",
+      "disposition": "restore",
+      "problem": "Read-profile compatibility filename",
+      "before": 2,
+      "after": 0,
+      "evidence": "Original pszFilename restored for win.ini and xtalk.ini checks;arbitrary caller filenames never rerouted."
+    },
+    {
+      "id": "T483-R1450",
+      "disposition": "pending",
+      "problem": "GetPrivateProfileString filename argument",
+      "before": 2,
+      "after": 2,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk."
+    },
+    {
+      "id": "T483-R1451",
+      "disposition": "pending",
+      "problem": "Default-string compatibility reread filename argument",
+      "before": 2,
+      "after": 2,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk. The second read must use the same backing file as the first;helper reuses cached session path."
+    },
+    {
+      "id": "T483-R1452",
+      "disposition": "pending",
+      "problem": "Integer-profile path storage",
+      "before": 2,
+      "after": 1,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk. Remove duplicate filename pointer;keep only stack path."
+    },
+    {
+      "id": "T483-R1453",
+      "disposition": "restore",
+      "problem": "Integer-profile premature filename computation",
+      "before": 3,
+      "after": 0,
+      "evidence": "Original sequence restored;binding at API argument in R1454."
+    },
+    {
+      "id": "T483-R1454",
+      "disposition": "pending",
+      "problem": "GetPrivateProfileInt filename argument",
+      "before": 2,
+      "after": 2,
+      "evidence": "Native x86 read-only probe:bare system.ini returns neither package boot marker nor custom integer;absolute build-owned system.ini returns custom integer1973 but not boot marker;same bytes named profile.tmp returns both. Therefore selecting an absolute SYSTEM.INI alone does not bypass native boot mapping. USER16 startup itself already follows original WIN16DIR and is not necessity evidence for this WOW thunk. Same exact bare-name policy across the original three private-profile APIs."
+    },
+    {
+      "id": "T483-R1455",
+      "disposition": "pending",
+      "problem": "Signed caller-capacity local",
+      "before": 1,
+      "after": 1,
+      "evidence": "Exact original WK32GetModuleFileName with real GetModuleFileName and test-owned guard pages raises C0000005 for invalid-module one-byte,zero and negative capacity;current and final each return0 safely,valid short name returns4. Original strlen evaluates even though selected WOW Sim32FlushVDMPointer is no-op. This proves a read-boundary issue,not a reproduced guest write overflow. One signed count serves pre-map rejection and bounded flush;no second buffer."
+    },
+    {
+      "id": "T483-R1456",
+      "disposition": "pending",
+      "problem": "Nonpositive-capacity rejection and allocation",
+      "before": 14,
+      "after": 7,
+      "evidence": "Exact original WK32GetModuleFileName with real GetModuleFileName and test-owned guard pages raises C0000005 for invalid-module one-byte,zero and negative capacity;current and final each return0 safely,valid short name returns4. Original strlen evaluates even though selected WOW Sim32FlushVDMPointer is no-op. This proves a read-boundary issue,not a reproduced guest write overflow. Restore original ALLOCVDMPTR count after positive guard;remove invented pre-clear and explanatory comment. Keep FREEARGPTR/RETURN for nonpositive count before mapping."
+    },
+    {
+      "id": "T483-R1457",
+      "disposition": "restore",
+      "problem": "Alias provider capacity argument",
+      "before": 2,
+      "after": 0,
+      "evidence": "Restore original INT32(parg16->f3) spelling after removing pre-call buffer write;original alias provider remains selected."
+    },
+    {
+      "id": "T483-R1458",
+      "disposition": "restore",
+      "problem": "Native module provider capacity argument",
+      "before": 2,
+      "after": 0,
+      "evidence": "Restore original INT32(parg16->f3) spelling;native call and result conversion unchanged."
+    },
+    {
+      "id": "T483-R1459",
+      "disposition": "pending",
+      "problem": "Flush expression no longer reads beyond output",
+      "before": 2,
+      "after": 2,
+      "evidence": "Exact original WK32GetModuleFileName with real GetModuleFileName and test-owned guard pages raises C0000005 for invalid-module one-byte,zero and negative capacity;current and final each return0 safely,valid short name returns4. Original strlen evaluates even though selected WOW Sim32FlushVDMPointer is no-op. This proves a read-boundary issue,not a reproduced guest write overflow. Flush count uses captured positive cch rather than unbounded strlen. Existing no-op provider remains unchanged."
+    }
+  ],
+  "call_chain": [
+    "Immutable USER16 bootstrap->original KRNL386 profile reader->WIN16DIR;not this helper",
+    "WOW private-profile thunks->existing W32PrivateProfileFileName->mvdm_softpc_profile_shadow_system_ini->selected session system.ini copied to delete-on-close temp file->native profile APIs",
+    "WK32GetModuleFileName->original alias or native module provider->selected no-op Sim32FlushVDMPointer;arguments still evaluate"
+  ],
+  "counter_review": [
+    "No global API redirect or new helper;binding remains only exact case-insensitive bare SYSTEM.INI. Arbitrary paths,default values,errors and existing shadow-failure fallback unchanged.",
+    "Original filename is correct input to original win.ini/xtalk.ini compatibility decisions;temporary filename was not needed there.",
+    "Inline helper stays after guest arguments are resolved and at synchronous API call;stack path remains live throughout call. Reads may call it twice but existing cached path is reused.",
+    "Deleted initial output zeroing was not needed after eliminating strlen;original failure-output behavior restored. Both provider argument spellings and ALLOCVDMPTR restored under the retained positive-count guard.",
+    "No changes to underlying firmware session provider or wole2.c;their later audits remain independent."
+  ],
+  "verification": {
+    "profile_read_probe": "case=0 boot_matches_marker=0 returned=7 integer=0\ncase=1 boot_matches_marker=0 returned=7 integer=1973\ncase=2 boot_matches_marker=1 returned=18 integer=1973\n",
+    "module_original_control": "invalid-module-one-byte result=0 exception=c0000005 allocated=1 flushed=0\nzero-capacity result=0 exception=c0000005 allocated=0 flushed=0\nnegative-capacity result=0 exception=c0000005 allocated=65535 flushed=0\nvalid-module-short result=4 exception=00000000 allocated=4 flushed=4\nfaults=3\n",
+    "module_final_control": "invalid-module-one-byte result=0 exception=00000000 allocated=1 flushed=1\nzero-capacity result=0 exception=00000000 allocated=0 flushed=0\nnegative-capacity result=0 exception=00000000 allocated=0 flushed=0\nvalid-module-short result=4 exception=00000000 allocated=4 flushed=4\nfaults=0\n",
+    "scope": "Real native APIs;guest mapping is a controlled guard-page boundary. Full final product verification pending."
+  },
+  "delivery": "P143 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p143-checkpoint.json"
+}

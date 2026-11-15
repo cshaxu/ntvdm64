@@ -1,0 +1,149 @@
+{
+  "file": "src/mvdm-host/wow32/winsockp.h",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/winsockp.h",
+  "current_sha256": "2cde64e1b78c2674cb26c8317d92d8660180bb366c2c97c0590259fdcd023d5e",
+  "mirror_before": 26,
+  "mirror_after": 24,
+  "mirror_delta": -2,
+  "changes": "Remove non-original comment and blank;restore original LF and typedef logical line72. No selected C declaration/token changes from P142.",
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "shared_selected_lines": 105,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              76,
+              "DWORD ThreadSerialNumber;"
+            ],
+            [
+              77,
+              "DWORD RundownState;"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              164,
+              "BOOL"
+            ],
+            [
+              165,
+              "WWS32FindAsyncTaskHandle32 ("
+            ],
+            [
+              166,
+              "HAND16 AsyncTaskHandle16,"
+            ],
+            [
+              167,
+              "DWORD ThreadSerialNumber,"
+            ],
+            [
+              168,
+              "HANDLE *AsyncTaskHandle32"
+            ],
+            [
+              169,
+              ");"
+            ],
+            [
+              171,
+              "PWINSOCK_ASYNC_CONTEXT_BLOCK"
+            ],
+            [
+              172,
+              "WWS32FindAndRemoveAsyncContext16 ("
+            ],
+            [
+              173,
+              "HAND16 AsyncTaskHandle16,"
+            ],
+            [
+              174,
+              "DWORD ThreadSerialNumber"
+            ],
+            [
+              175,
+              ");"
+            ],
+            [
+              177,
+              "void"
+            ],
+            [
+              178,
+              "WWS32CancelAsyncRequestsForTask("
+            ],
+            [
+              179,
+              "DWORD ThreadSerialNumber"
+            ],
+            [
+              180,
+              ");"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "call_chain": [
+    "wsext.c::WWS32WSAStartup installs WWS32DispatchPostMessage through original WSApSetPostRoutine",
+    "wsdata.c six WSAAsyncGet* producers allocate native and guest buffer association under WWS32CriticalSection",
+    "wkman.c::W32DestroyTask and WWS32WSACleanup reach WWS32TaskCleanup",
+    "wsdata.c::WWS32CancelAsyncRequestsForTask retires ownership before provider cancellation outside lock",
+    "WWS32DispatchPostMessage reaches WWS32PostAsyncGetHost/Proto/Serv,then WWS32FindAndRemoveAsyncContext before guest buffer conversion"
+  ],
+  "points": [
+    {
+      "id": "T483-R1436",
+      "problem": "four rundown-state constants",
+      "before": 6,
+      "after": 4,
+      "evidence": "Original completion finder returns a context even after its guest task has ended. Caller WWS32PostAsyncGetHost/Proto/Serv then copies into vBuffer16 before PostMessage. Exact original finder in the same controlled rundown harness fails39 assertions versus current323/0. RETIRED suppresses guest delivery;CANCEL_STARTED bounds one cancellation per context after failures;CANCEL_ACTIVE pins the context while the provider call runs outside the lock;COMPLETED preserves the concurrent completion result if that call fails. The real provider posts after its global buffer lock is released,so concurrent completion/cancellation is permitted,not inferred solely from current adapters."
+    },
+    {
+      "id": "T483-R1437",
+      "problem": "request owner serial and rundown state",
+      "before": 2,
+      "after": 2,
+      "evidence": "Six original async database producers allocate one context per native request. Native WSAStartup occurs once for the entire WOW process;WWS32TaskCleanup closes task sockets without native WSACleanup or async-context retirement. The original context has no task owner,so it cannot select only the exiting task requests or reject stale completion before guest buffer conversion. The existing thread serial is reused,not a new identity namespace. HWND lifetime alone cannot protect the conversion that precedes PostMessage."
+    },
+    {
+      "id": "T483-R1438",
+      "problem": "three request lookup/retirement declarations",
+      "before": 18,
+      "after": 18,
+      "evidence": "Original WWS32WSACancelAsyncRequest always returns WSAEINVAL and never calls native cancellation. Native cancellation needs AsyncTaskHandle32 but guest receives AsyncTaskHandle16;the existing context list provides that mapping. Lookup borrows only the native value across the provider call;removal re-finds by task/guest handle after success to avoid keeping a context pointer across concurrent completion. Task cleanup in wsext.c calls the third helper. Removing these declarations while preserving the proved capability loses the checked BOOL/pointer/VOID signatures;restoring the original whole call chain instead removes cancellation and per-task retirement. Moving the same declarations to wsdata.c adds equal complexity elsewhere and does not restore original behavior."
+    }
+  ],
+  "verification": {
+    "rundown_current": "323 checks/0 failures",
+    "original_finder_control": "281 checks/39 failures;expected exit1;only finder replaced,not entire original product",
+    "real_win16": [
+      "Completion",
+      "Cancel",
+      "TaskLoss"
+    ],
+    "native_provider_source": "OpenNT net/sockets/winsock2/dll/winsock2/async.cpp:SockCancelAsyncRequest and async completion buffer lock/post ordering",
+    "source_hashes_unchanged_except_header_format": true
+  },
+  "counter_review": "Original task cleanup does not cancel database requests through a hidden native WSACleanup. Native buffer cancellation and guest destination retirement are separate obligations. Each state has a distinct required transition;folding bits requires additional control state/path rather than deleting responsibility. No counterexample proves the entire remaining implementation globally minimal;retain these header contracts pending owner decision without claiming a real guest race reproduction.",
+  "limits": [
+    "Controlled provider schedules include synchronous reentry and late completion;ordinary real Win16 probes do not force the race.",
+    "Original-finder control isolates the completion guard within current rundown,not a full original-runtime comparison.",
+    "Modern native provider equivalence to historical internal implementation is not assumed.",
+    "Coupled wsdata.c/wsext.c reads establish header contracts;their later full-file audits remain pending."
+  ],
+  "delivery": "P143 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p143-checkpoint.json"
+}

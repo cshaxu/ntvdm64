@@ -981,3 +981,13 @@ P142 [delivery checkpoint](batch-p142-checkpoint.json) and [actual preprocessor 
 P142 cached full passed;all11 published and hash-verified in both roots,package eca2357e-a38c-401d-9296-3c9f471544b9. Focused/Full and Git delivery still pending;see checkpoint.
 
 P142 final gates passed:cached x86/x64,11x2 publication,DIB82/font20/palette19,ABI/menu-resource,isolated Full19,WOW boundary. Six mirror files net-8;5101 selected lines match.200/365 files;1433/2720 points:524 delivered/confirmed,0 local,8 approved,901 pending,1287 unreviewed. Initial runner failure preserved;final governance/Git accompany receipt.
+
+P142 committed/pushed as 0410aabe573c89b86d58ac5b8f0783668ac5a651;clean worktree verified after delivery.
+
+[wheap whole-file check](r1434-wheap-review.json):R1434 has only the approved DEBUG exclusion,+1/-3,selected diff0;17 selected logical lines match. No source change;P142 product verification reused.201/365 files;1434/2720 points:525 restored/confirmed delivered,0 local,8 approved,901 pending,1286 unreviewed. Next R1435-R1438.
+
+[winsockp whole-file review](r1435-r1438-winsockp-review.json):R1435-R1438 complete;mirror26->24;LF/typedef#line72 restored;105 selected lines match. Three evidence-qualified residuals stay pending. Current rundown323/0,original-finder control281/39,real Win16 Completion/Cancel/TaskLoss passed;not full-original guest-race proof.202/365 files;1438/2720 points:525 delivered/confirmed,1 local,8 approved,904 pending,1282 unreviewed. P143 format/line-only accumulation;no fresh build/publication claim.
+
+[wkernel whole-file review](r1439-r1459-wkernel-review.json):R1439-R1459 complete;mirror166->133 net-33;398 selected lines match and#error unchanged. Ten points restored locally,eleven evidenced residuals pending. Profile absolute SYSTEM.INI versus renamed-file control proves native mapping;exact original module thunk faults3,final faults0 under controlled mappings.203/365 files;1459/2720 points:525 delivered/confirmed,11 local,8 approved,915 pending,1261 unreviewed. P143 cumulative net-35 now requires full delivery.
+
+P143 final gates passed:cached x86/x64,11x2 publication,module filename boundary4,Winsock rundown323 and real Win16 Completion/Cancel/TaskLoss,ABI/menu-resource,isolated Full19,WOW boundary. Two mirrors net-35;520 shared selected lines match.203/365 files;1459/2720 points:536 delivered/confirmed,0 local,8 approved,915 pending,1261 unreviewed. Initial launcher failure preserved;final governance/Git accompany receipt.

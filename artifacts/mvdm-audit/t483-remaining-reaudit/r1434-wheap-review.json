@@ -1,0 +1,23 @@
+{
+  "review_id": "T483-R1434",
+  "path": "src/mvdm-host/wow32/wheap.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wheap.c",
+  "original_sha256": "BE3AF89DA01D5A6F296A47B7E505E2D6598B4C4E1A5CB35E76DAB3AC839848DE",
+  "current_sha256": "087F929D0CBAA781849D4021CA6D9ED5AFA5C0711B85B1C162102252108806CD",
+  "mirror_added": 1,
+  "mirror_deleted": 3,
+  "selected_semantic_diff": 0,
+  "line_proof": {
+    "path": "src/mvdm-host/wow32/wheap.c",
+    "shared_selected_lines": 17,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [],
+    "excluded_error_directives_unchanged": true
+  },
+  "conclusion": "Existing original subset: only excluded DEBUG allocation-failure logging replaced with #error. HeapCreate/HeapAlloc/HeapFree unchanged. No source modification required.",
+  "counter_review": "The original failure log is under DEBUG; actual supported WOW /DPROD preprocessing selects neither its body nor replacement #error. All 17 nonempty selected lines retain original logical positions. No compatibility dependency or additional path introduced.",
+  "validation": "Original/current preprocessing passed after correcting cmd path separator; initial launcher error retained in run.out/run.err, not counted as a compiler result.",
+  "register_status": "Whole-file complete; unchanged product source covered by P142 delivery 0410aabe5.",
+  "delivery": "P143 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p143-checkpoint.json"
+}

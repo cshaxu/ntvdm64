@@ -17,12 +17,6 @@
 
 MODNAME(wkernel.c);
 
-/* DIVERGENCE(MVDM-HOST-DIV-297): the original USER16 call uses the bare
- * SYSTEM.INI name.  Modern profile APIs map that name to host configuration
- * even when passed an absolute package path.  The worker adapter gives this
- * one original call a dynamically-created, session-owned copy of the selected
- * immutable profile; it is deleted at worker teardown.  Arbitrary caller
- * paths retain the original API. */
 static PSZ W32PrivateProfileFileName(PSZ filename, CHAR path[MAX_PATH])
 {
     if (filename != NULL && !_stricmp(filename, "system.ini") &&
@@ -142,7 +136,6 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     PSZ pszKey;
     PSZ pszValue;
     PSZ pszFilename;
-    PSZ pszProfileFilename;
 #line 129
     register PWRITEPRIVATEPROFILESTRING16 parg16;
     BOOL fIsWinIni;
@@ -156,13 +149,10 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f3, pszValue);
     GETPSZPTR(parg16->f4, pszFilename);
 
-    pszProfileFilename = W32PrivateProfileFileName(pszFilename,
-        szPackageProfile);
-
 #line 139
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
-    strcpy(szLowercase, pszProfileFilename);
+    strcpy(szLowercase, pszFilename);
     _strlwr(szLowercase);
 
     fIsWinIni = IS_WIN_INI(szLowercase);
@@ -183,7 +173,7 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
              pszSection,
              pszKey,
              pszValue,
-             pszProfileFilename
+             W32PrivateProfileFileName(pszFilename, szPackageProfile)
              ));
 
     if( ul != 0 &&
@@ -393,7 +383,6 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     PSZ pszDefault;
     PSZ pszReturnBuffer;
     PSZ pszFilename;
-    PSZ pszProfileFilename;
 #line 393
     DWORD cFlagsEx;
     UINT cchMax;
@@ -408,9 +397,6 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f3, pszDefault);
     ALLOCVDMPTR(parg16->f4, parg16->f5, pszReturnBuffer);
     GETPSZPTR(parg16->f6, pszFilename);
-
-    pszProfileFilename = W32PrivateProfileFileName(pszFilename,
-        szPackageProfile);
 
     // PC3270 (Personal communications): while installing this app it calls
     // GetPrivateProfileString (sectionname, NULL, defaultbuffer, returnbuffer,
@@ -439,7 +425,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
 
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
-    strcpy(szLowercase, pszProfileFilename);
+    strcpy(szLowercase, pszFilename);
     _strlwr(szLowercase);
 
     if (IS_WIN_INI( szLowercase )) {
@@ -469,7 +455,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
         pszDefault,
         pszReturnBuffer,
         cchMax,
-        pszProfileFilename));
+        W32PrivateProfileFileName(pszFilename, szPackageProfile)));
 
     
     // start comaptibility hacks
@@ -531,7 +517,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
                     // being used.
                     //
 
-                    if (0 == GetPrivateProfileString(pszSection, pszKey, "", szBuf, sizeof szBuf, pszProfileFilename)) {
+                    if (0 == GetPrivateProfileString(pszSection, pszKey, "", szBuf, sizeof szBuf, W32PrivateProfileFileName(pszFilename, szPackageProfile))) {
 
                         //
                         // Zap first trailing blank in pszDefault with null.
@@ -666,7 +652,6 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     PSZ psz1;
     PSZ psz2;
     PSZ psz4;
-    PSZ pszProfileFilename;
     CHAR szPackageProfile[MAX_PATH];
 #line 717
     register PGETPRIVATEPROFILEINT16 parg16;
@@ -676,9 +661,6 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f2, psz2);
     GETPSZPTR(parg16->f4, psz4);
 
-    pszProfileFilename = W32PrivateProfileFileName(psz4,
-        szPackageProfile);
-
 #line 724
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
@@ -686,7 +668,7 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     psz1,
     psz2,
     INT32(parg16->f3),
-    pszProfileFilename
+    W32PrivateProfileFileName(psz4, szPackageProfile)
     ));
 
     FREEPSZPTR(psz1);
@@ -710,24 +692,20 @@ ULONG FASTCALL WK32GetModuleFileName(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GETMODULEFILENAME16), parg16);
     cch = INT32(parg16->f3);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-450): the original final strlen-based flush
-     * can exceed the only guest range this k49 caller supplied.  Keep the
-     * original module/alias provider and result; zero-size has no writable
-     * guest range, and every nonzero write/flush remains within cch. */
     if (cch <= 0) {
         FREEARGPTR(parg16);
         RETURN(0);
     }
 
-    ALLOCVDMPTR(parg16->f2, cch, psz2);
-    psz2[0] = '\0';
+#line 750
+    ALLOCVDMPTR(parg16->f2, parg16->f3, psz2);
 
 #line 752
     if ( ISTASKALIAS(parg16->f1) ) {
-        ul = GetHtaskAliasProcessName(parg16->f1, psz2, cch);
+        ul = GetHtaskAliasProcessName(parg16->f1,psz2,INT32(parg16->f3));
     } else {
         hT = (parg16->f1) ? (HMODULE32(parg16->f1)) : GetModuleHandle(NULL) ;
-        ul = GETINT16(GetModuleFileName(hT, psz2, cch));
+        ul = GETINT16(GetModuleFileName(hT, psz2, INT32(parg16->f3)));
     }
 
     FLUSHVDMPTR(parg16->f2, cch, psz2);

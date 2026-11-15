@@ -1,0 +1,287 @@
+[
+  {
+    "path": "src/mvdm-host/wow32/wheap.c",
+    "shared_selected_lines": 17,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [],
+    "excluded_error_directives_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/wow32/winsockp.h",
+    "shared_selected_lines": 105,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            76,
+            "DWORD ThreadSerialNumber;"
+          ],
+          [
+            77,
+            "DWORD RundownState;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            164,
+            "BOOL"
+          ],
+          [
+            165,
+            "WWS32FindAsyncTaskHandle32 ("
+          ],
+          [
+            166,
+            "HAND16 AsyncTaskHandle16,"
+          ],
+          [
+            167,
+            "DWORD ThreadSerialNumber,"
+          ],
+          [
+            168,
+            "HANDLE *AsyncTaskHandle32"
+          ],
+          [
+            169,
+            ");"
+          ],
+          [
+            171,
+            "PWINSOCK_ASYNC_CONTEXT_BLOCK"
+          ],
+          [
+            172,
+            "WWS32FindAndRemoveAsyncContext16 ("
+          ],
+          [
+            173,
+            "HAND16 AsyncTaskHandle16,"
+          ],
+          [
+            174,
+            "DWORD ThreadSerialNumber"
+          ],
+          [
+            175,
+            ");"
+          ],
+          [
+            177,
+            "void"
+          ],
+          [
+            178,
+            "WWS32CancelAsyncRequestsForTask("
+          ],
+          [
+            179,
+            "DWORD ThreadSerialNumber"
+          ],
+          [
+            180,
+            ");"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkernel.c",
+    "shared_selected_lines": 398,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            20,
+            "static PSZ W32PrivateProfileFileName(PSZ filename, CHAR path[260])"
+          ],
+          [
+            21,
+            "{"
+          ],
+          [
+            22,
+            "if (filename != ((void *)0) && !_stricmp(filename, \"system.ini\") &&"
+          ],
+          [
+            23,
+            "mvdm_softpc_profile_shadow_system_ini(path, 260)) {"
+          ],
+          [
+            24,
+            "return path;"
+          ],
+          [
+            25,
+            "}"
+          ],
+          [
+            26,
+            "return filename;"
+          ],
+          [
+            27,
+            "}"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            132,
+            "CHAR szPackageProfile[260];"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            158,
+            "ul = ((BOOL16)(WritePrivateProfileStringA( pszSection, pszKey, pszValue, pszFilename )));"
+          ]
+        ],
+        "after": [
+          [
+            158,
+            "ul = ((BOOL16)(WritePrivateProfileStringA( pszSection, pszKey, pszValue, W32PrivateProfileFileName(pszFilename, szPackageProfile) )));"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            397,
+            "CHAR szPackageProfile[260];"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            455,
+            "ul = ((WORD)(GetPrivateProfileStringA( pszSection, pszKey, pszDefault, pszReturnBuffer, cchMax, pszFilename)));"
+          ]
+        ],
+        "after": [
+          [
+            455,
+            "ul = ((WORD)(GetPrivateProfileStringA( pszSection, pszKey, pszDefault, pszReturnBuffer, cchMax, W32PrivateProfileFileName(pszFilename, szPackageProfile))));"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            523,
+            "if (0 == GetPrivateProfileStringA(pszSection, pszKey, \"\", szBuf, sizeof szBuf, pszFilename)) {"
+          ]
+        ],
+        "after": [
+          [
+            523,
+            "if (0 == GetPrivateProfileStringA(pszSection, pszKey, \"\", szBuf, sizeof szBuf, W32PrivateProfileFileName(pszFilename, szPackageProfile))) {"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            717,
+            "CHAR szPackageProfile[260];"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            726,
+            "ul = (GetPrivateProfileIntA( psz1, psz2, ((INT)(INT16)(parg16->f3)), psz4 ));"
+          ]
+        ],
+        "after": [
+          [
+            726,
+            "ul = (GetPrivateProfileIntA( psz1, psz2, ((INT)(INT16)(parg16->f3)), W32PrivateProfileFileName(psz4, szPackageProfile) ));"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            748,
+            "INT cch;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            750,
+            "cch = ((INT)(INT16)(parg16->f3));"
+          ],
+          [
+            752,
+            "if (cch <= 0) {"
+          ],
+          [
+            753,
+            ";"
+          ],
+          [
+            754,
+            "return 0;"
+          ],
+          [
+            755,
+            "}"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            759,
+            "Sim32FlushVDMPointer( (parg16->f2), (USHORT)(strlen(psz2)+1), (PBYTE)(psz2), (fWowMode));"
+          ]
+        ],
+        "after": [
+          [
+            759,
+            "Sim32FlushVDMPointer( (parg16->f2), (USHORT)(cch), (PBYTE)(psz2), (fWowMode));"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]
