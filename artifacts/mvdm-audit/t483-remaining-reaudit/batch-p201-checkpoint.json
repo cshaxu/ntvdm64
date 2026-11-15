@@ -62,7 +62,7 @@
       "DBG",
       "literal #if 0 retained"
     ],
-    "line_endings": "CRLF preserved",
+    "line_endings": "Pinned original CRLF restored from prior LF; original-relative metrics normalize line endings",
     "ordinary_semantic_diff": 0
   },
   "files": [
