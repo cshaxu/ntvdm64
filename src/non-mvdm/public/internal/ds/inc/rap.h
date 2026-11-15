@@ -107,8 +107,8 @@ Revision History:
 #define FORMAT_LPDESC_CHAR      "%c"
 
 #else // DESC_CHAR_UNICODE is defined
-#line 110
 #error Unsupported excluded original configuration
+#line 140
 #endif // DESC_CHAR_UNICODE is defined
 #line 141
 

@@ -1272,3 +1272,5 @@ P202: [Debug header mapping](batch-p202-checkpoint.json):6 excluded diff unchang
 P203: [Network debug header mapping](batch-p203-checkpoint.json):380 excluded diff unchanged;20 contexts/3 negative profiles;original conditional lines and CRLF restored.
 
 P204: [Netlib header mapping](batch-p204-checkpoint.json):21 excluded diff unchanged;raw33->25;14 contexts/4 negative controls;original line mapping and CRLF restored.
+
+P205: [RAP header mapping and RDP recheck](batch-p205-checkpoint.json):31 excluded diff unchanged;19 contexts;original boundary mapping restored;P187 shared Clipboard18 passed.

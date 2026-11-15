@@ -1,0 +1,150 @@
+{
+  "status": "original selected RAP definitions confirmed;conditional line mapping restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+    "sha256": "85ce6b7f702fdefa865ee66d736f1b6a2cdea1f86f21973e6a8f72206038f146",
+    "original_sha256": "f1b132b2ab6d5b848303f27696fbcf4a78d8d937919b46dda004efb0930b9086",
+    "source_lines": 282,
+    "contexts": [
+      {
+        "unit": "apisrv",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisvc",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apimsg",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiuse",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiwksta",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xsunicod",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "strucsiz",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "pointer",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "parmnum",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "examine",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "convert",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "auxdata",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "ascii",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "svcinfo",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xlatesvc",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrremote",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "vrnetapi",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "mvdm_redirector_remote_unavailable",
+        "selected_header_lines": 104,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 31,
+    "mirror_after": 31,
+    "mirror_delta": 0,
+    "raw_before": 33,
+    "raw_after": 33,
+    "errors": 1,
+    "line_directives_before": 2,
+    "line_directives_after": 2,
+    "negative_controls": [
+      "DESC_CHAR_UNICODE=1"
+    ],
+    "line_endings": "Original CRLF matches pinned source; before-byte counts recorded separately",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "sha256": "85ce6b7f702fdefa865ee66d736f1b6a2cdea1f86f21973e6a8f72206038f146"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+    "sha256": "85ce6b7f702fdefa865ee66d736f1b6a2cdea1f86f21973e6a8f72206038f146"
+  },
+  "mirror_before": 31,
+  "mirror_after": 31,
+  "mirror_delta": 0,
+  "raw_before": 33,
+  "raw_after": 33,
+  "change": "Move line110 to original endif140;retain line141 and Unicode exclusion. Original CRLF retained.",
+  "counter_review": "Original ANSI definitions and conditional structure retained;19 actual include contexts agree in tokens and selected line numbers. Unicode remains excluded, not restored.",
+  "verification": "57 preprocessings;104 selected header lines per context;282 retained source lines;DESC_CHAR_UNICODE C1189 negative control. No fresh product link claimed.",
+  "product_verification": "P187 cached build/publication reused for token and selected-line equivalent change;finish verifies11 images at both destinations.",
+  "clipboard_recheck": {
+    "package": "P187",
+    "result": "18 phases passed,zero errors",
+    "evidence": "build\\rdp-recheck-current\\rdp-restored-clean",
+    "report_sha256": "945956df9311012ecbcf5ffd36084fc38a5db0997ef4fd2be20008b605646cc7",
+    "prior_attempts": [
+      "rdp-restored",
+      "rdp-restored-second"
+    ],
+    "prior_failure": "Both native bridge traces recorded OpenClipboard error5 with owner PID32484, verified as RadeonSoftware. Closing that control panel under owner authorization allowed unchanged test/package to pass. This does not retroactively identify every earlier phase1 failure."
+  },
+  "delivery": "P205 governance commit push accompany receipt"
+}
