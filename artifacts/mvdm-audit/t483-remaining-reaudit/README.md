@@ -1226,3 +1226,5 @@ P179: [BaseClient VDM boundary review](batch-p179-checkpoint.json):13 points,who
 P180: [BaseSrv header review](batch-p180-checkpoint.json):7->4;two qualified residual boundary decisions;actual dispatch controls and original line check;P176 product evidence reused.
 
 P181: [BaseSrv VDM whole-file review](batch-p181-checkpoint.json):93->84;notification/ABI controls;line proof;cached,publish and final regression.
+
+P182: [BaseSrv VDM header review](batch-p182-checkpoint.json):4->2;two minimal residual declarations;P181 product evidence reused.

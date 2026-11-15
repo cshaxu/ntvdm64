@@ -1,0 +1,35 @@
+{
+  "status": "whole-header audit and comment cleanup complete;no token/layout/binding change;P181 product evidence reused",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+      "sha256": "62dcc16fa98eb2dea499a194d01691bfde0ed6c5110aac9025fff391b7c0d998"
+    }
+  ],
+  "original_sha256": "f590ef866f87ce80671c4b6f4e3bbe94347342e6b723bc062ed6f044fbb3820f",
+  "mirror_before": {
+    "added": 4,
+    "deleted": 0,
+    "total": 4
+  },
+  "mirror_after": {
+    "added": 2,
+    "deleted": 0,
+    "total": 2
+  },
+  "mirror_delta": -2,
+  "line_check": {
+    "retained_nonblank_original_lines": 114,
+    "mismatches": []
+  },
+  "selected_tokens_identical": true,
+  "excluded_branches": "none in original or current header",
+  "points": {
+    "1992": "P181 actual notification controls:current5 pass;removing pending-aware predicate and initialization/set/clear makes early,nested and queued modes return WAIT_TIMEOUT. Keep the one record-local BOOL with explicit init/set/consume under original DOS lock;no original field supplies independent completed-notification state. No wire or guest layout change.",
+    "1993": "Real BaseSrv service caller in base_service.c supplies console and local BOOL output;definition lives in srvvdm.c and reads original wait event under original lock. P181 service42 verifies waiting and nonwaiting states and routing. Keep explicit prototype;moving it to a second header only relocates the same declaration. Remove two redundant explanatory lines."
+  },
+  "counter_review": "R1992 and R1993 are not removable merely because their providers are project adaptations;P181 separately established actual notification failure and wait-state routing ownership. This header adds only required field/prototype,not another policy. No claim that all original NT4 execution fails.",
+  "reused_receipt": "batch-p181-checkpoint.json",
+  "delivery": "P182;Git accompanies receipt"
+}

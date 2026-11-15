@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1991 reviewed:681 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1302 qualified pending;729 unreviewed. Files267/365 audited,98 remain.
+1993 reviewed:681 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1304 qualified pending;727 unreviewed. Files268/365 audited,97 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -48,8 +48,6 @@ established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P164 wuser mirror31->13(-18);original bitmap thunk restored and repeated GetDC conversion removed;MSVC998/0,resource suite,cached full,publish11x2,Full19 and governance passed;Git accompanies receipt.
 
 P165 wuser31 mirror14->5(-9);MSVC537/0,cached full,publish11x2,linked DC/identity window-borrow,Full19 and governance passed;Git accompanies receipt.
 
@@ -205,3 +203,5 @@ P179 vdm.c891->870(-21):remove redundant comments/environment include;original n
 P180 basesrv.h7->4(-3):comment/blank removed;CRLF and original comment28 mapping restored. Actual x64 dispatch needs conditional binding (no /FI);removal fails CSR declarations. DFS restoration C1083. Two qualified boundary decisions;selected preprocessing identical;P176 product validation reused;Git accompanies receipt.
 
 P181 srvvdm.c93->84(-9):redundant comment/null-output guard removed;CRLF and endif logical lines restored;2317 original lines match. Notification current5/5,original control3 failures;native casts fail actual x64 build. Cached,publish11x2,service/Full passed;10 residual decisions;Git accompanies receipt.
+
+P182 srvvdm.h4->2(-2):duplicate query comment removed;original CRLF restored;field/prototype and tokens unchanged. Retained original lines match;2 residual decisions use P181 notification/runtime and caller proof. P181 product verification reused;Git accompanies receipt.
