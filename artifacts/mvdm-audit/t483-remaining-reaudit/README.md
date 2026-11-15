@@ -1220,3 +1220,5 @@ P176: [Environment restoration review](r1957-r1958-environ-review.json), [checkp
 P177: [Error mapping line review](batch-p177-checkpoint.json): original body retained;both #error guards preserved;logical-line/EOL repair only;P176 product evidence reused.
 
 P178: [Time package boundary and cleanup](batch-p178-checkpoint.json): five points pending source-boundary decision;comment/line/EOL cleanup only;P176 product verification reused.
+
+P179: [BaseClient VDM boundary review](batch-p179-checkpoint.json):13 points,whole-file891->870;12 residual decisions,one confirmed exclusion;P176 product verification reused.

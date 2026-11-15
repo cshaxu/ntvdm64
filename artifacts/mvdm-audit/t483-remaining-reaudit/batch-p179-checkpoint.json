@@ -1,0 +1,136 @@
+{
+  "status": "whole file source review and six supported object controls complete;comment/include/line cleanup verified;reuse P176 delivery",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "sha256": "7493d21348acfd824b4364c81493d8e1df59da00cbb47d8e6264cbad91953c9b"
+    }
+  ],
+  "contexts": [
+    {
+      "context": "x86-worker-vdm",
+      "selected_lines": 173,
+      "selected_code_identical": true
+    },
+    {
+      "context": "x86-worker-client",
+      "selected_lines": 1389,
+      "selected_code_identical": true
+    },
+    {
+      "context": "x86-worker-classifier",
+      "selected_lines": 154,
+      "selected_code_identical": true
+    },
+    {
+      "context": "x64-launcher-client",
+      "selected_lines": 1389,
+      "selected_code_identical": true
+    },
+    {
+      "context": "x64-launcher-classifier",
+      "selected_lines": 154,
+      "selected_code_identical": true
+    },
+    {
+      "context": "x64-hook-unit17",
+      "selected_lines": 154,
+      "selected_code_identical": true
+    }
+  ],
+  "mirror_before": {
+    "added": 59,
+    "deleted": 832,
+    "total": 891
+  },
+  "mirror_after": {
+    "added": 38,
+    "deleted": 832,
+    "total": 870
+  },
+  "mirror_delta": -21,
+  "generated_config_fragments_unchanged": true,
+  "raw_mapping_false_matches": "Two braces aligned by generic diff to omitted GetBinaryTypeA;not retained original source. All other retained raw lines match.",
+  "original_cast_compile_errors": [
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p179\\vdm.original-casts.c(1795): error C4311: 'type cast': pointer truncation from 'HANDLE' to 'DWORD'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p179\\vdm.original-casts.c(2165): error C4311: 'type cast': pointer truncation from 'HANDLE' to 'ULONG'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p179\\vdm.original-casts.c(2464): error C4311: 'type cast': pointer truncation from 'PCH' to 'ULONG'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p179\\vdm.original-casts.c(2464): error C4311: 'type cast': pointer truncation from 'LPSTR' to 'ULONG'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p179\\vdm.original-casts.c(3182): error C4311: 'type cast': pointer truncation from 'WCHAR *' to 'DWORD'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p179\\vdm.original-casts.c(3182): error C4311: 'type cast': pointer truncation from 'WCHAR *' to 'DWORD'"
+  ],
+  "issues": {
+    "T483-R1965": {
+      "problem": "Selected BaseClient package rather than full kernel32/CSR shell",
+      "evidence": "Current original selected functions are in original order;omitted ANSI wrapper/process shell retain dependencies on original TEB StaticUnicodeString,Base/CSR process-creation and registry owners outside admitted package. Source-policy prohibits recursive BaseClient/CSR import.",
+      "option": "Keep existing selected package;separately admit missing original API families only if required"
+    },
+    "T483-R1966": {
+      "problem": "Finite headers and environment declarations",
+      "evidence": "Original basedll.h brings kernel32 private closure. ENV_INFO/name constants originate in original client/vdm.h;that header is not imported and no second accepted owner supplies them. Original ntrtl.h already declares the two used environment functions;removed redundant environapi include. Modern HeapAlloc binding has no original BaseDllTag metadata.",
+      "option": "Retain finite declarations or approve an original header slice;do not relocate equal complexity just to reduce this file"
+    },
+    "T483-R1967": {
+      "problem": "BaseSetLastNTError finite outgoing error mapping",
+      "evidence": "Original client/error.c function converts through RtlNtStatusToDosError then SetLastError and returns unused ULONG;all selected vdm.c callsites ignore result. Current four-line static helper has exactly those effects;full error.c also owns native SetLastError/GetLastError and unrelated APIs. No native BaseSetLastNTError export selected.",
+      "option": "Keep one finite helper;broader original error package requires explicit native API ownership decision"
+    },
+    "T483-R1968": {
+      "problem": "Independent classifier/environment/command objects",
+      "evidence": "Actual x86 environment,command,classifier and x64 command,classifier,hook translation units have distinct selectors. Removing selectors compiles duplicate command/environment implementations into classifier and brings broker dependencies into hook. Six actual cohorts compiled and selected before/final source identical.",
+      "option": "Retain per-target selectors;no globally constant replacement"
+    },
+    "T483-R1969": {
+      "problem": "Native-width environment byte distance",
+      "evidence": "Restoring original pointer-to-DWORD casts fails actual supported x64 command compilation C4311 at original3182;retained subtraction converts byte distance only. Original USHORT buffer length contract unchanged.",
+      "option": "Keep minimal native-width subtraction;comment removed"
+    },
+    "T483-R1970": {
+      "problem": "Original CSR-shaped request boundary to standalone NTSRV",
+      "evidence": "Original command algorithms call CsrClientCallServer with BaseSrv VDM packet IDs. Shared base_client.h maps them to OpenNtBaseClientCallServer;current NTSRV owns this package protocol/lifecycle. Native ntdll CSR import belongs modern CSRSS,not this independently launched server. The shared declaration also supplies capture ABI.",
+      "option": "Retain explicit single shared boundary;no parallel transport introduced"
+    },
+    "T483-R1971": {
+      "problem": "STARTF_USEHOTKEY numeric payload",
+      "evidence": "Original1795 casts hStdInput to DWORD;real x64 control C4311. This original branch transports a DWORD hotkey,not a duplicable process handle. ULONG_PTR intermediate retains original low32 value.",
+      "option": "Keep one numeric conversion;comment removed"
+    },
+    "T483-R1972": {
+      "problem": "UNDO_CREATION numeric task ID",
+      "evidence": "Original2165 casts *WaitHandle to ULONG;real x64 control C4311. Original switch uses this branch as task ID while other branches carry HANDLE.",
+      "option": "Keep one numeric conversion;comment removed"
+    },
+    "T483-R1973": {
+      "problem": "Package configuration rather than NT4 global WOW registry",
+      "evidence": "Original BaseGetVDMKeyword opens WOW_ROOT via NtOpenKey and reads global command templates. Standalone package source builds caller-owned paths;multiple side-by-side package images cannot be represented by the same global WOW template. Original argument builder remains selected;base_config supplies only source inputs.",
+      "option": "Retain package-bound config binding;do not replace original command builder"
+    },
+    "T483-R1974": {
+      "problem": "Configured executable end versus fixed substring",
+      "evidence": "Original strstr(pSrc,\"\\system32\\ntvdm\") returns NULL for supported fixture image O:\\package with spaces\\ntvdm.exe;test/broker/original_server_lifecycle.c525-548 checks successful original command construction for that exact shape. Current helper matches exact bound image prefix and its length,not guessed directory suffix.",
+      "option": "Keep single bound image-end lookup or constrain supported package layout explicitly"
+    },
+    "T483-R1975": {
+      "problem": "Native-width WOW kernel buffer capacity",
+      "evidence": "Original2464 casts both PCH addresses to ULONG;real x64 control C4311 at both casts. Selected code computes same byte distance without narrowing addresses first.",
+      "option": "Keep minimal pointer distance;comment removed"
+    },
+    "T483-R1976": {
+      "problem": "Classifier function selection and original source order",
+      "evidence": "GetBinaryTypeW and BaseIsDosApplication now occur at original relative positions. Both classifier architecture alternatives remain inside owning function;only independent build cohort guard remains. Classifier native NT path/section declarations come from base_classifier.h;no command transport owner in this object.",
+      "option": "Keep one classifier cohort per original function group;no additional guard cleanup remains"
+    },
+    "T483-R1977": {
+      "problem": "Excluded original OLD_CFG_BASED framework",
+      "evidence": "Original OLD_CFG_BASED branch1084-1149 remains in source order with one #error;ending directive now maps1149. No registry body restored,as owner requires excluded branches stay #error.",
+      "option": "Confirmed original structure and corrected logical line"
+    }
+  },
+  "retained_guards": [
+    "MIPS #error",
+    "OLD_CFG_BASED #error"
+  ],
+  "reused_receipt": "batch-p176-checkpoint.json",
+  "limits": "No claim native64 raw original casts are runtime algorithm bugs;compile-policy/ABI failure is the evidence. Native CSR/global registry package boundaries are source proofs,not live modern CSRSS experiments. Already repaired historical relocations are not new semantic repairs."
+}

@@ -18,14 +18,7 @@ Revision History:
 
 --*/
 
-/* DIVERGENCE(OPENNT-HOST-014): true source subset of original
- * base/win32/client/vdm.c. Environment routines are selected by the current
- * product; OPENNT_BASE_CLIENT_VDM_COMMANDS admits the original command API
- * for T412 source-owned integration. The remainder
- * needs the excluded Base/CSR process-creation shell. Names, parameters,
- * algorithm, call order and failure directions are retained. */
 #include <nt.h>
-#include "compat/include/environapi.h"
 #include <ntrtl.h>
 #include <wchar.h>
 
@@ -37,7 +30,6 @@ Revision History:
 #define ENV_NAME_TYPE_MULTIPLE_PATH 3
 #define STD_ENV_NAME_COUNT 3
 typedef struct _ENV_INFO { UINT NameType; UINT NameLength; WCHAR *Name; } ENV_INFO, *PENV_INFO;
-/* Heap tags are source metadata; modern public HeapAlloc has no tag input. */
 #define VDM_TAG 0
 #define MAKE_TAG(Tag) 0
 
@@ -46,8 +38,6 @@ static VOID BaseSetLastNTError(NTSTATUS Status)
     SetLastError(RtlNtStatusToDosError(Status));
 }
 
-/* DIVERGENCE(OPENNT-HOST-014): independent launcher classifier cohort;
- * finite native declarations and private symbol binding, original bodies. */
 #if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
 #include <base_classifier.h>
 #line 91
@@ -229,10 +219,12 @@ Return Value:
 #ifdef _MIPS_
 #line 260
 #error DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register.
+#line 268
 #else
 #line 269
                 SetLastError(ERROR_BAD_EXE_FORMAT);
                 goto GBTtryexit;
+#line 271
 #endif // _MIPS_
 #line 272
             }
@@ -272,7 +264,6 @@ GBTtryexit:;
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
-/* DIVERGENCE(OPENNT-HOST-243): bind the shared BaseClient declaration at its common owner. */
 #include "common/base_srv/base_client.h"
 
 #line 338
@@ -992,6 +983,7 @@ Return Value:
 #ifdef OLD_CFG_BASED
 #line 1085
 #error Excluded unsupported original OLD_CFG_BASED configuration
+#line 1149
 #endif
 #line 1150
 
@@ -1515,8 +1507,6 @@ Return Value:
                                                  );
             if (lpAllocatedReserved) {
 
-                         /* DIVERGENCE(OPENNT-HOST-065): STARTF_USEHOTKEY
-                          * carries a DWORD number, not a process handle. */
 #line 1793
                 swprintf(lpAllocatedReserved,
                          L"hotkey.%u %s",
@@ -1891,8 +1881,7 @@ BaseUpdateVDMEntry(
 
     switch (UpdateIndex) {
 	case UPDATE_VDM_UNDO_CREATION:
-    	/* DIVERGENCE(OPENNT-HOST-065): this branch carries a numeric task ID. */
-    	c->iTask = (ULONG)(ULONG_PTR)*WaitHandle;
+    	    	c->iTask = (ULONG)(ULONG_PTR)*WaitHandle;
 #line 2166
 	    c->VDMCreationState = (USHORT)IndexInfo;
 	    break;
@@ -2004,9 +1993,6 @@ Return Value:
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
-/* DIVERGENCE(OPENNT-HOST-014): package configuration replaces the NT4 WOW
- * registry. Image-tail lookup binds the configured side-by-side worker path;
- * the original argument construction and all remaining body text are kept. */
 #include <base_config.h>
 #line 2275
 BOOL
@@ -2198,9 +2184,7 @@ Notes:
         //
         // convert wowkernel to short name
         //
-        /* DIVERGENCE(OPENNT-HOST-065): retain byte-count arithmetic in this
-         * selected translation unit without narrowing either address. */
-        Len = MAX_PATH + MAX_VDM_CFG_LINE - (ULONG)(pWowKernel - NewCmdLine) -1;
+                Len = MAX_PATH + MAX_VDM_CFG_LINE - (ULONG)(pWowKernel - NewCmdLine) -1;
 #line 2465
         dw = GetShortPathNameA(pWowKernel, pWowKernel, Len);
         if (dw > Len) {
@@ -2222,7 +2206,6 @@ Notes:
     return TRUE;
 }
 
-/* DIVERGENCE(OPENNT-HOST-014): original launcher task-exit query. */
 #line 2489
 BOOL
 BaseCheckForVDM(
@@ -2430,7 +2413,6 @@ BOOL BaseCreateVDMEnvironment(
 		    }
 	    }
 	*pDst++ = UNICODE_NULL;
-	/* DIVERGENCE(OPENNT-HOST-065): preserve native-width byte distance. */
 #line 3182
 	cchEnv = (DWORD)((PCHAR)pDst - (PCHAR)pNewEnv);
 	pUStringEnv->MaximumLength = pUStringEnv->Length = (USHORT)cchEnv;
