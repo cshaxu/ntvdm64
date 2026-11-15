@@ -25,33 +25,20 @@
 #include "wow_task_termination.h"
 #line 25
 #pragma hdrstop
-/* DIVERGENCE(MVDM-HOST-DIV-356): parent authorizes whole-worker cleanup. */
 extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 #line 26
 #include <ntexapi.h>
 #include <sharewow.h>
-#if !defined(_X86_)
-#define MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
+#pragma push_macro("_X86_")
+#undef _X86_
 #define _X86_
-#endif
 #line 28
 #include <vdmdbg.h>
-#ifdef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
-#undef _X86_
-#undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
-#endif
+#pragma pop_macro("_X86_")
 #line 30
 #include "wowfax.h"
-/* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle-owned thread idle observer. */
 #include "wow_idle_hook_binding.h"
-/* Keep this completed registry-reader family isolated from the uncompleted
- * original registry writer families selected for their later owner packets. */
 #include <common/wow/registry.h>
-/* Keep thread-handle teardown on the original NT close call. */
-#undef NtOpenKey
-#undef NtEnumerateValueKey
-#undef NtQueryValueKey
-#undef NtClose
 
 #line 32
 extern void UnloadNetworkFonts( UINT id );
@@ -316,8 +303,6 @@ SkipWowExec:
         // commands.
         //
         if ((! fSeparateWow) && strstr(VDMInfo.AppName, "wowexec.exe")) {
-            /* DIVERGENCE(MVDM-HOST-DIV-319): acknowledge the original no-op,
-             * distinct from a failed task which never reached InitTask. */
             wow_user_notify_startup_noop(VDMInfo.iTask);
 #line 330
             ExitVDM(WOWVDM, VDMInfo.iTask);
@@ -559,7 +544,6 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
         W32Thread((LPVOID)vpStack);    // SHOULD NEVER RETURN
 
         WOW32ASSERTMSG(FALSE, "\nWOW32: WK32WOWInitTask ERROR - Main Thread Returning - Contact DaveHart\n");
-        /* DIVERGENCE(MVDM-HOST-DIV-356): before original task-record retirement. */
         exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
 #line 563
         ExitVDM(WOWVDM, ALL_TASKS);
@@ -705,7 +689,6 @@ ULONG FASTCALL WK32OldYield(PVDMFRAME pFrame)
 
 --*/
 
-/* DIVERGENCE(MVDM-HOST-DIV-336): scope native idle entry before guest access. */
 LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)
 #line 716
 {
@@ -756,8 +739,6 @@ ULONG FASTCALL WK32WowSetIdleHook(PVDMFRAME pFrame)
         // It is important to set a GlobalHook otherwise we will not
         // Get accurate timing results with a LocalHook.
 
-        /* DIVERGENCE(MVDM-HOST-DIV-338): all WOW task threads are observed;
-         * this TD borrows its observer as the original registration intent. */
         ptd->hIdleHook = wow_user_idle_hook_for_current();
 
 #line 769
@@ -1084,10 +1065,6 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
             host_ExitThread(EXIT_FAILURE);
             }
 
-        /* DIVERGENCE(MVDM-HOST-DIV-449): W32Thread is the original point at
-         * which this live 16-bit task owns both its exact BaseSrv iTask and
-         * HTASK.  Keep management identity binding beside that hand-off;
-         * InitTask intentionally receives zero for a separate WOW VDM. */
         if (td.VDMInfoiTaskID != (UINT)-1 && td.VDMInfoiTaskID != 0)
             (void)wow_task_termination_bind(td.VDMInfoiTaskID,td.htask16);
 
@@ -1479,7 +1456,6 @@ DWORD W32RemoteThread(VOID)
  *  None
  *
  */
-/* DIVERGENCE(MVDM-HOST-DIV-334): retire native windows before resource cleanup. */
 VOID WowOriginalFreeTask( PTD ptd )
 #line 1450
 {
@@ -1544,8 +1520,6 @@ VOID WowOriginalFreeTask( PTD ptd )
     // Remove idle hook, if any has been installed.
 
     if (ptd->hIdleHook != NULL) {
-        /* DIVERGENCE(MVDM-HOST-DIV-338): lifecycle retires the borrowed
-         * observer; this original branch withdraws only the task's intent. */
 #line 1513
         ptd->hIdleHook = NULL;
     }
@@ -1746,9 +1720,6 @@ VOID W32DestroyTask( PTD ptd)
         (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16, NULL, 0);
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-449): the original task owner has completed
-     * its cleanup. Retire only the project-owned management binding now; it
-     * never owns, selects, or alters the original task destruction path. */
     wow_task_termination_retire(ptd->htask16);
 
 
@@ -2931,8 +2902,6 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                     );
 
             if (nMsgBoxChoice == IDCANCEL) {
-                 /* DIVERGENCE(MVDM-HOST-DIV-449): original user cancellation
-                  * leaves this exact task live; reopen only its ticket. */
                  wow_task_termination_fail((USHORT)htaskKill);
 #line 2910
                  ExitThread(0);
@@ -3002,8 +2971,6 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                  EnterCriticalSection(&gcsHungApp);
                  *pNtVDMState &= ~VDM_WOWHUNGAPP;
                  LeaveCriticalSection(&gcsHungApp);
-                 /* DIVERGENCE(MVDM-HOST-DIV-449): the original task remains
-                  * live after cancel, so an explicit later close may retry. */
                  wow_task_termination_fail((USHORT)htaskKill);
 #line 2977
                  ExitThread(0);
@@ -3011,9 +2978,9 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
 
             LOGDEBUG(LOG_ALWAYS, ("W32HungAppNotifyThread: Destroying WOW Process\n"));
 
-            /* DIVERGENCE(MVDM-HOST-DIV-356): retain the hung-process exit code. */
             {
                 DWORD exit_code = NtvdmAuthorizeExit(0);
+#line 2982
                 ExitVDM(WOWVDM, ALL_TASKS);
                 ExitProcess(exit_code);
             }
@@ -3025,8 +2992,6 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
     } else { // task not found
 
         LOGDEBUG(LOG_ALWAYS,("W32HungAppNotifyThread: Task already Terminated \n"));
-        /* DIVERGENCE(MVDM-HOST-DIV-449): no original cleanup will retire a
-         * still-published binding on this path. Reopen only that ticket. */
         wow_task_termination_fail((USHORT)htaskKill);
 
 #line 2992
@@ -3619,14 +3584,14 @@ VOID WK32InitWowIsKnownDLL(HANDLE hKeyWow)
     // Get the list of known DLLs from the registry.
     //
 
-    lRegError = hKeyWow ? RegQueryValueEx(
+    lRegError = RegQueryValueEx(
                     hKeyWow,
                     "KnownDLLs",
                     NULL,
                     &dwRegValueType,
                     sz,
                     &ulSize
-                    ) : ERROR_FILE_NOT_FOUND;
+                    );
 
     if (ERROR_SUCCESS == lRegError && REG_SZ == dwRegValueType) {
 
@@ -4402,10 +4367,7 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
         "\n\n"
         );
 
-    /* DIVERGENCE(MVDM-HOST-DIV-356): retain no guest alias across the wait. */
-    exit_code = parg16->wExitCode;
-    FREEARGPTR(parg16);
-    exit_code = NtvdmAuthorizeExit(exit_code);
+    exit_code = NtvdmAuthorizeExit(parg16->wExitCode);
 #line 4362
     ExitVDM(WOWVDM, ALL_TASKS);
     ExitProcess(exit_code);
@@ -4443,10 +4405,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 
     // Sometimes we get this with no harm done (app bug)
  
-    /* DIVERGENCE(MVDM-HOST-DIV-356): retain no guest alias across the wait. */
-    exit_code = parg16->f1;
-    FREEARGPTR(parg16);
-    exit_code = NtvdmAuthorizeExit(exit_code);
+    exit_code = NtvdmAuthorizeExit(parg16->f1);
 #line 4396
     ExitVDM(WOWVDM, ALL_TASKS);
     ExitProcess(exit_code);

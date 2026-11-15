@@ -166,7 +166,7 @@ DWORD FASTCALL WK32ICallProc32(PVDMFRAME pFrame)
 
 
 #if defined(i386) || defined(WOW_X86_GENERIC_CALL)
-/* DIVERGENCE: MVDM-HOST-DIV-674: select only the x86 generic-call helper. */
+#line 175
 
     {
         extern DWORD WK32ICallProc32MakeCall(DWORD pfn, DWORD cArgs, VOID *pArgs);

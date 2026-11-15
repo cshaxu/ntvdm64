@@ -1,0 +1,57 @@
+{
+  "status": "Whole-file format/line-only change applied;accumulate before next semantic batch",
+  "points": [
+    "R1467",
+    "R1468"
+  ],
+  "metric": {
+    "added": 4,
+    "deleted": 13,
+    "total": 17
+  },
+  "evidence": "artifacts/mvdm-audit/shard-0/wow-generic-thunk.md",
+  "corrected_interpretation": "Historical normal return10 is correct for its source-Pascal payload. Initial expected14 was a test assertion bug,not product evidence. Mismatched cdecl target advertised stdcall exitedC0000409;original x86 helper control returned10. Controlled host fixture,not a real guest failure.",
+  "current_build": "wkgthunk.obj has dedicated WOW_X86_GENERIC_CALL;two other historical i386 FPU blocks remain excluded",
+  "potential_reduction": "Remove one explanation comment and correct selected #line;retain selection only if complete ABI evidence confirms necessity. Do not broaden i386 globally.",
+  "remaining": [
+    "Final accumulated-batch delivery"
+  ],
+  "conclusion": {
+    "R1467": "Correct selected original logical lines;108 selected common lines match,0 changes in selected preprocessed body",
+    "R1468": "Retain dedicated selector as pending owner decision;remove explanation comment. Original actual context selects portable path and controlled thunk process exits C0000409;candidate passes existing argument/convention/exception matrix."
+  },
+  "metric_after": {
+    "added": 3,
+    "deleted": 13,
+    "total": 16
+  },
+  "mirror_delta": -1,
+  "controls": {
+    "original_exit": -1073740791,
+    "final_exit": 0,
+    "final_errors": 0,
+    "limits": "Existing host fixture with guest boundary stubs;no new actual Win16 acceptance. Original stdout buffered and empty on fail-fast;no exact failing test index claimed."
+  },
+  "line_proof": {
+    "selected_common_lines": 108,
+    "mismatches": 0,
+    "selected_body_changes": 0,
+    "oracle": "Only original third #ifdef i386 replaced by #if1 for comparing same original branch;two FPU conditions still off. Not used as runtime baseline.",
+    "first_attempt": "portable-comparison-line-check.json retains ten false text matches across distinct branches"
+  },
+  "candidate_sha256": "c826aaeceff4640a7a205eefb6b504713f65c868b499f4902c1fb915f0a3f26e",
+  "file": "src/mvdm-host/wow32/wkgthunk.c",
+  "original": "OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wkgthunk.c",
+  "line_proof_rows": [
+    {
+      "oracle": "Pinned original body with only third architecture condition set to1 for same-branch line comparison;first two i386 regions still disabled. Actual unchanged original runtime control is separate.",
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "shared_selected_lines": 108,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "delivery": "P145 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p145-checkpoint.json"
+}

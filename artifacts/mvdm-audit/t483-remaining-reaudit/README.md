@@ -995,3 +995,11 @@ P143 final gates passed:cached x86/x64,11x2 publication,module filename boundary
 [wkfileio complete review](r1460-r1466-wkfileio-review.json):R1460-R1466;mirror29->20 net-9;1222 selected line matches;#error unchanged. Original/final cache579/8 versus577/0;attributes before/final52/0. Two restored locally,five evidenced residuals;204/365files,1466/2720points. P143 delivered62da218dc;P144 final delivery pending.
 
 P144 final gates passed:cached x86/x64,publish11x2,file cache577,attribute cleanup52,isolated Full19,WOW boundary/governance. Mirror29->20 net-9;1222 line matches.204/365files;1466/2720points:538 delivered,0 local,8 approved,920 pending,1254 unreviewed. Git accompanies receipt.
+
+[wkgthunk review](r1467-r1468-wkgthunk-review.json):R1467-R1468 complete;mirror17->16 net-1;108 same-branch selected lines match;#error unchanged. Controlled originalC0000409,final matrix errors0. Format/line-only accumulates for next semantic batch.205/365files;1468/2720points:538 delivered,1 local,8 approved,921 pending,1252 unreviewed. P144 delivered76e57fb44.
+
+[wkman review](r1469-r1496-wkman-review.json):R1469-R1496 source complete;mirror318->272 net-46;2238 selected common lines match;excluded branches unchanged. Three restorations local,25 minimal residuals pending. Paired KnownDLL21 checks pass;final batch delivery pending.206/365files;1496/2720points:538 delivered,4 local,8 approved,946 pending,1224 unreviewed.
+
+[P145 frozen batch](batch-p145-checkpoint.json) and [line proof](batch-p145-line-check.json):two mirrors net-47;2346 common selected lines match;cached full/publication/tests/Git pending.
+
+P145 final gates passed:cached x86/x64,publish11x2,KnownDLL21/lifecycle focused,isolated Full19,WOW boundary/governance. Mirror net-47;2346 line matches.206/365files;1496/2720points:542 delivered,0 local,8 approved,946 pending,1224 unreviewed. Git accompanies receipt.

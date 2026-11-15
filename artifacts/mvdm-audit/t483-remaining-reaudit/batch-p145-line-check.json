@@ -1,0 +1,419 @@
+[
+  {
+    "oracle": "Pinned original body with only third architecture condition set to1 for same-branch line comparison;first two i386 regions still disabled. Actual unchanged original runtime control is separate.",
+    "path": "src/mvdm-host/wow32/wkgthunk.c",
+    "shared_selected_lines": 108,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [],
+    "excluded_error_directives_unchanged": true
+  },
+  {
+    "path": "src/mvdm-host/wow32/wkman.c",
+    "shared_selected_lines": 2238,
+    "line_mismatches": [],
+    "ambiguous_equal_text_matches_resolved_at_original_line": [],
+    "selected_changes": [
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            26,
+            "extern DWORD __stdcall NtvdmAuthorizeExit(DWORD exit_code);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            330,
+            "wow_user_notify_startup_noop(VDMInfo.iTask);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            560,
+            "DWORD exit_code;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            563,
+            "exit_code = NtvdmAuthorizeExit(1);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            564,
+            "ExitProcess(1);"
+          ]
+        ],
+        "after": [
+          [
+            564,
+            "ExitProcess(exit_code);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            715,
+            "LRESULT __stdcall WK32ForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)"
+          ]
+        ],
+        "after": [
+          [
+            715,
+            "LRESULT __stdcall WowOriginalForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            764,
+            "ptd->hIdleHook = wow_native_SetWindowsHookExA(11,"
+          ],
+          [
+            765,
+            "WK32ForegroundIdleHook,"
+          ],
+          [
+            766,
+            "hmodWOW32,"
+          ],
+          [
+            767,
+            "0);"
+          ]
+        ],
+        "after": [
+          [
+            764,
+            "ptd->hIdleHook = wow_user_idle_hook_for_current();"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            1081,
+            "if (td.VDMInfoiTaskID != (UINT)-1 && td.VDMInfoiTaskID != 0)"
+          ],
+          [
+            1082,
+            "(void)wow_task_termination_bind(td.VDMInfoiTaskID,td.htask16);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            1449,
+            "void W32FreeTask( PTD ptd )"
+          ]
+        ],
+        "after": [
+          [
+            1449,
+            "void WowOriginalFreeTask( PTD ptd )"
+          ]
+        ]
+      },
+      {
+        "op": "delete",
+        "original": [
+          [
+            1512,
+            "UnhookWindowsHookEx(ptd->hIdleHook);"
+          ]
+        ],
+        "after": []
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            1720,
+            "wow_task_termination_retire(ptd->htask16);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            2910,
+            "wow_task_termination_fail((USHORT)htaskKill);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            2977,
+            "wow_task_termination_fail((USHORT)htaskKill);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            2982,
+            "{"
+          ],
+          [
+            2983,
+            "DWORD exit_code = NtvdmAuthorizeExit(0);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            2983,
+            "ExitProcess(0);"
+          ]
+        ],
+        "after": [
+          [
+            2983,
+            "ExitProcess(exit_code);"
+          ],
+          [
+            2984,
+            "}"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            2991,
+            "wow_task_termination_fail((USHORT)htaskKill);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3160,
+            "lError = RegOpenKeyExA("
+          ]
+        ],
+        "after": [
+          [
+            3160,
+            "lError = ntvdm_shadow_reg_open_key_ex("
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3171,
+            "lError = RegQueryValueExA("
+          ]
+        ],
+        "after": [
+          [
+            3171,
+            "lError = ntvdm_shadow_reg_query_value_ex("
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3190,
+            "lError = RegQueryValueExA("
+          ]
+        ],
+        "after": [
+          [
+            3190,
+            "lError = ntvdm_shadow_reg_query_value_ex("
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3226,
+            "RegCloseKey(hKey);"
+          ]
+        ],
+        "after": [
+          [
+            3226,
+            "ntvdm_shadow_reg_close_key(hKey);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3291,
+            "lError = RegOpenKeyExA("
+          ]
+        ],
+        "after": [
+          [
+            3291,
+            "lError = ntvdm_shadow_reg_open_key_ex("
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3320,
+            "lError = RegQueryValueExA("
+          ]
+        ],
+        "after": [
+          [
+            3320,
+            "lError = ntvdm_shadow_reg_query_value_ex("
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3369,
+            "RegCloseKey(hKey);"
+          ]
+        ],
+        "after": [
+          [
+            3369,
+            "ntvdm_shadow_reg_close_key(hKey);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            3581,
+            "lRegError = RegQueryValueExA("
+          ]
+        ],
+        "after": [
+          [
+            3581,
+            "lRegError = ntvdm_shadow_reg_query_value_ex("
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            4351,
+            "DWORD exit_code;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            4362,
+            "exit_code = NtvdmAuthorizeExit(parg16->wExitCode);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            4363,
+            "ExitProcess(parg16->wExitCode);"
+          ]
+        ],
+        "after": [
+          [
+            4363,
+            "ExitProcess(exit_code);"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            4382,
+            "DWORD exit_code;"
+          ]
+        ]
+      },
+      {
+        "op": "insert",
+        "original": [],
+        "after": [
+          [
+            4396,
+            "exit_code = NtvdmAuthorizeExit(parg16->f1);"
+          ]
+        ]
+      },
+      {
+        "op": "replace",
+        "original": [
+          [
+            4397,
+            "ExitProcess(parg16->f1);"
+          ]
+        ],
+        "after": [
+          [
+            4397,
+            "ExitProcess(exit_code);"
+          ]
+        ]
+      }
+    ],
+    "excluded_error_directives_unchanged": true
+  }
+]
