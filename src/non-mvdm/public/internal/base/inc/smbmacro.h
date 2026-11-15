@@ -91,8 +91,8 @@ Revision History:
         (byteCount) )
 
 #else
-#line 94
 #error Unsupported excluded original configuration
+#line 99
 #endif
 #line 100
 

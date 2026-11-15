@@ -1260,3 +1260,5 @@ P196: [Video header line mapping](batch-p196-checkpoint.json):66 excluded unchan
 P197: [Alignment header restoration](batch-p197-checkpoint.json):mirror5->4,raw8->7;9 contexts and both negative diagnostics checked. Shared Clipboard retry remains failed.
 
 P198: [SMB get/put header mapping](batch-p198-checkpoint.json):246 excluded diff unchanged;14 contexts and3 negative profiles;original CRLF preserved;conditional lines restored.
+
+P199: [SMB macro header mapping](batch-p199-checkpoint.json):6 excluded diff unchanged;7 contexts and NO_PACKING negative control;endif99 restored.

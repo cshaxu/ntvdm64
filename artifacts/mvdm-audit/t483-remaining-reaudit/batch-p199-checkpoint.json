@@ -1,0 +1,80 @@
+{
+  "status": "original selected macros confirmed;conditional boundary line restored",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+    "sha256": "6293f2cf5a7ab0ae828c33b8232e7a6c9380f8f80e3abfc2acb79b348d4f3c3e",
+    "original_sha256": "e7a4ff096b5e2fdd0a81cd1c080e57253231664f87cb329c17a25c694282d8d1",
+    "source_lines": 199,
+    "contexts": [
+      {
+        "unit": "apisrv",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apisvc",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apimsg",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiuse",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "apiwksta",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xssubs",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "xsunicod",
+        "selected_header_lines": 0,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 6,
+    "mirror_after": 6,
+    "mirror_delta": 0,
+    "raw_before": 8,
+    "raw_after": 8,
+    "errors": 1,
+    "line_directives_before": 2,
+    "line_directives_after": 2,
+    "negative_controls": [
+      "NO_PACKING=1"
+    ],
+    "line_endings": "CRLF preserved",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "sha256": "6293f2cf5a7ab0ae828c33b8232e7a6c9380f8f80e3abfc2acb79b348d4f3c3e"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+    "sha256": "6293f2cf5a7ab0ae828c33b8232e7a6c9380f8f80e3abfc2acb79b348d4f3c3e"
+  },
+  "mirror_before": 6,
+  "mirror_after": 6,
+  "mirror_delta": 0,
+  "raw_before": 8,
+  "raw_after": 8,
+  "change": "Remove redundant line94 and add line99 before original endif;retain post-endif100. Preserve CRLF,formfeed,and excluded NO_PACKING body.",
+  "call_chain": "Seven formal x86 xactsrv consumers via xactsrv_wksta_minimal.h. Original alignment and EA size macros retained.",
+  "verification": "21 before/final/original preprocessing outputs have equal full-TU tokens and explicit variant paths. Macro-only header emits zero declarations;199 retained original nonblank source lines map correctly. NO_PACKING=1 C1189.",
+  "counter_review": "Only original five-line NO_PACKING body replaced by mandated error;selected code byte-identical modulo line directives. Directive count2 unchanged;no ABI or behavior change.",
+  "product_verification": "P187 product evidence reused for token/line-equivalent formatting;11x2 hashes checked. P197 shared Clipboard failure remains open.",
+  "delivery": "P199 governance commit push accompany receipt"
+}
