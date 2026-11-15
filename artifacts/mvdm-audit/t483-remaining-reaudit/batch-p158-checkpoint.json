@@ -1,0 +1,104 @@
+{
+  "status": "cached full,published11x2,epoch/ownership focused,real Win16 clipboard transfer,Full19 and governance passed;Git accompanies receipt",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "sha256": "ceb60357f24f8a6bc728ee5dfb83131a4a30875bc914f625009a48eaa597ab09"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "sha256": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_clipboard_epoch.h",
+      "sha256": "7fdcd882e1740a47a985eee555675f3c5aef5aa73e401fd631a764377ce9942b"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_clipboard_epoch.c",
+      "sha256": "71a0c5795f0fb3d988c67d7abf5c0f1cbc895856ae8034ce55b4c0e0fb5a107b"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_clipboard_epoch_fixture.c",
+      "sha256": "4a9d8d9c60b7f70151f0131003a8a809235b9b9e73daf64eabfee6cdbcf2f704"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py",
+      "sha256": "fc48d91b70f0a108e56616171e9d5d334061de5ecde2c8913133a9f620b931b6"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_clipboard_format_fixture.c",
+      "sha256": "30e39a31f718835a9b07049fd34da87a12e9d89b06aaa9e826c26cc2a8f88725"
+    }
+  ],
+  "source_files": 7,
+  "mirror_before": 195,
+  "mirror_after": 138,
+  "mirror_delta": -57,
+  "metric": "Original-relative additions+deletions;#line ignored;unchanged DEBUG exclusion11 separately counted",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "package": "c01aaa84-4ae1-4584-a129-e06fd84ac34a",
+  "tests": {
+    "epoch": {
+      "inputs": {
+        "src\\mvdm-host\\wow32\\wuclip.c": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b",
+        "src\\wow32-dll\\source\\wow_clipboard_epoch.c": "71a0c5795f0fb3d988c67d7abf5c0f1cbc895856ae8034ce55b4c0e0fb5a107b",
+        "test\\adapter-mvdm-host-out\\wow\\wow_clipboard_epoch_fixture.c": "4a9d8d9c60b7f70151f0131003a8a809235b9b9e73daf64eabfee6cdbcf2f704"
+      },
+      "scope": "actual callers/adapter with controlled native boundary; not guest acceptance",
+      "compile_exit": 0,
+      "test_exit": 0,
+      "result": "clipboard-open assertions=56 failures=0 clears=6"
+    },
+    "ownership": {
+      "source_sha256": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b",
+      "body_sha256": "9bb0215cc851785320b3dbe56e34bc6ff1a4bfcf1c79fd9e2a8daf85d2f5bb07",
+      "fixture_sha256": "30e39a31f718835a9b07049fd34da87a12e9d89b06aaa9e826c26cc2a8f88725",
+      "scope": "controlled ownership only; no real guest/conversion claim",
+      "compile_exit": 0,
+      "test_exit": 0,
+      "passed_cases": 24,
+      "elapsed_seconds": 5.753292499983218
+    },
+    "real_transfer": "WOW_CLIPBOARD_TRANSFER_OK mode=transfer format=CF_TEXT render_handoff=direct checkpoints=18 guest_to_native=1 native_to_guest=1 rejected=1 deferred=1 replacement=1 owner_destroy_renderall=1 task_exit=0 desktop=shared",
+    "Full_gates": 19,
+    "original_and_previous_controls": {
+      "previous": {
+        "source": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p158\\wuclip.before.c",
+        "sha256": "de38d11cdb17f65d73de3926512c7fda5e9b22e089b7cad9ca868b26ca6695c3",
+        "compile_exit": 0,
+        "test_exit": 1,
+        "summary": [
+          "cases=24 strict=1 failures=2"
+        ]
+      },
+      "current": {
+        "source": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wuclip.c",
+        "sha256": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b",
+        "compile_exit": 0,
+        "test_exit": 0,
+        "summary": [
+          "cases=24 strict=1 failures=0"
+        ]
+      },
+      "original": {
+        "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclip.c",
+        "sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+        "compile_exit": 0,
+        "test_exit": 1,
+        "summary": [
+          "cases=24 strict=1 failures=6"
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "Focused tests substitute native boundaries;separate real transfer covers CF_TEXT,not every clipboard format.",
+    "External DOS4GW/Nesticle fixtures unavailable;case skipped,not passed."
+  ],
+  "runner_notes": [
+    "Decoded fixture carrier corrected before tests;initial compile failure retained.",
+    "One #line-only correction after focused tests;tested function bodies unchanged.",
+    "Waiting integration scheduler35396 stopped before any test launch to select console-startup-observer;corrected scheduler12520 retained."
+  ],
+  "rdp_recovery": "Same native access control succeeds after owner reconnect;real transfer passed in clipboard-transfer-rdp3 after confirmed RadeonSoftware clipboard holder PID38864 was stopped;rdp and rdp2 failed attempts retained."
+}

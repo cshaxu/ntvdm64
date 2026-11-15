@@ -1,0 +1,41 @@
+{
+  "path": "src/mvdm-host/wow32/wuclip.c",
+  "status": "Superseded by completed r1824-r1843-wuclip-review.json and P158 receipt;historical counterexample retained",
+  "register_order": "R1824-R1843; reading coupled cache dependencies does not advance later point dispositions",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source_sha256": "de38d11cdb17f65d73de3926512c7fda5e9b22e089b7cad9ca868b26ca6695c3",
+  "epoch_sha256": "77b59846dcab9db91f24414a61d7d6b182d4090a493ee6cde1d2b4b7f670208e",
+  "original_chain": [
+    "windows/core/ntuser/client/ntstubs.c::OpenClipboard calls NtUserOpenClipboard(hwnd,&fEmptyClient), then ClientEmptyClipboard when requested",
+    "windows/core/ntuser/kernel/clipbrd.c::xxxOpenClipboard acquires clipboard ownership before testing process serial and owner identity; same 16-bit process cache is deliberately preserved",
+    "windows/core/ntuser/client/client.c::ClientEmptyClipboard frees native client nodes then invokes registered pfnWowEmptyClipBoard",
+    "base/mvdm/wow32/wow32.c registers W32EmptyClipboard; that original routine owns guest cache retirement"
+  ],
+  "current_counterexample": {
+    "points": [
+      "R1829",
+      "R1841",
+      "R1842"
+    ],
+    "mechanism": "WU32CloseClipboard records current native sequence only after successful CloseClipboard releases the lock. An external writer can replace generation42 with43 before note_current. The original guest cache still contains42 but matches_current then compares43 to43 and accepts it.",
+    "fixture": "build/t483-s5-p158/clipboard-order.c",
+    "preparation": "build/t483-s5-p158/prepare-clipboard-order.py",
+    "runner": "build/t483-s5-p158/clipboard-order.ps1",
+    "pid": 26128,
+    "exit": 0,
+    "observed": [
+      "control: unchanged generation accepted",
+      "counterexample: old cache42 accepted against external generation43"
+    ],
+    "method": "Extract unchanged actual WU32CloseClipboard body, include actual wow_clipboard_epoch.c, substitute only sequence-read and CloseClipboard API boundaries. The close substitute schedules an external sequence increment after lock release. Compile MSVC x86 /W4 /WX through existing build wrapper, then run as hidden modern-pwsh owned background job.",
+    "scope": "Deterministic source-level interleaving witness, not real desktop race reproduction; no user clipboard access, production mutation or guest execution.",
+    "conclusion": "The cache-retirement responsibility is necessary, but the existing after-close generation association is not proved correct and has an explicit counterexample. Do not classify its current form as approved retention. Follow original open/lock/cache-retirement ordering before designing a minimal correction."
+  },
+  "other_verified_leads": [
+    "Original GETHWND16/USER16 truncation and HWND32 sign extension belong to private paired USER handles, not arbitrary modern native HWNDs; inspect existing publication owner, not a new alias table.",
+    "docs/etc/evidence/m0-t478-s38-clipboard-caret-investigation.md records real original-system OLETHK32 null callback execution and unavailable NT4 registration; local original thoputil converter recovery must be considered with R1826/R1843, not judged solely by a roundtrip fixture."
+  ],
+  "remaining": [],
+  "delivery": "Research only; published P157 remains unchanged. This record is not a qualified pending-owner decision or an audited-file completion.",
+  "baseline_commit": "c17b5be7d711a4f3970b09d1bc2b1ebc6c9f80f7"
+}

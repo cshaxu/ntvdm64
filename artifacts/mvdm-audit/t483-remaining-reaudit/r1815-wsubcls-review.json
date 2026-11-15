@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/wow32/wsubcls.c",
+  "point": "R1815",
+  "source": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wsubcls.c",
+  "original_sha256": "b37021cb2a0480f3aca685efb8006b32d31b0fe073b6b3fc9b99f05764679e4b",
+  "current_sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+  "semantic_before": 0,
+  "semantic_after": 0,
+  "decision": "No source change required. Selected original implementation retained. OLD_SUBCLASS_STUFF and literal#if0 bodies remain excluded by#error;outer structure preserved. Existing#line restores selected continuation correctly.",
+  "verification": {
+    "selected_retained_lines": 141,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "delivery": "batch-p158-checkpoint.json"
+}

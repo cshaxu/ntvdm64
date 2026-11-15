@@ -1,0 +1,14 @@
+{
+  "path": "src/mvdm-host/wow32/wuclass.c",
+  "points": "R1816-R1823",
+  "status": "Superseded by completed r1816-r1823-wuclass-review.json;not an outstanding investigation",
+  "observed_sources": [
+    "src/mvdm-host/wow32/precomp.h:126 defines WOW_USER_PRIVATE_REDIRECT",
+    "src/non-mvdm/public/internal/windows/inc/wowuserp.h:83-85 tags WOW=0x80000000 and CPD HIWORD=0xffff",
+    "src/wow32-dll/source/wow_user_private_access.c::decoded_procedure/get/set preserve explicit guest origin",
+    "src/wow32-dll/source/wow_window_words_binding.c::wow_window_dispatch_immutable preserves previous callback identity",
+    "test/adapter-mvdm-host-out/wow/wow_class_address_owner_probe.c contains high-word0xffff guest/native-origin cases"
+  ],
+  "remaining": [],
+  "conclusion_record": "r1816-r1823-wuclass-review.json"
+}

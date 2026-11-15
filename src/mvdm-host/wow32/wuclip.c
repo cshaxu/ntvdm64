@@ -20,7 +20,8 @@
 
 struct _CBFORMATS  ClipboardFormats;
 
-/* DIVERGENCE(MVDM-HOST-DIV-885): obsolete system-DLL lookup table removed. */
+DLLENTRYPOINTS  OleStringConversion[WOW_OLESTRINGCONVERSION_COUNT] =
+                                    {"ConvertObjDescriptor", NULL};
 #line 23
 
 
@@ -32,20 +33,9 @@ UINT CFOLELinkSrcDescriptor;
 MODNAME(wuclip.c);
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-454): `FULLHWND32` is an original WOW
- * index/uniqueness token for the paired NT4 USER implementation.  Public
- * modern USER Clipboard calls instead require the already-published live
- * native HWND.  The reverse edge may return only an already-published
- * guest HWND. An external result is representable only after the existing
- * shared-view publication confirms the same full native identity.
- * Keep these conversions at the Clipboard HWND operands/results;
- * do not alter the registered original `GetFullUserHandle` callback, whose
- * contract is shared by message, DDE and dialog conversion. */
+/* MVDM-HOST-DIV-454: public USER requires the published native HWND. */
 static BOOL WU32NativeClipboardWindow(HWND hwnd16, HWND *native)
 {
-    /* NULL is an original public Clipboard operand (notably OpenClipboard's
-     * current-task owner). A nonzero retired/foreign guest identity must not
-     * be collapsed into that valid NULL meaning. */
     if (!hwnd16) {
         *native = NULL;
         return TRUE;
@@ -89,7 +79,6 @@ ULONG FASTCALL WU32ChangeClipboardChain(PVDMFRAME pFrame)
 
     GETARGPTR(pFrame, sizeof(CHANGECLIPBOARDCHAIN16), parg16);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32NativeClipboardWindow above. */
     if (!WU32NativeClipboardWindow((HWND)parg16->f1, &hwnd) ||
             !WU32NativeClipboardWindow((HWND)parg16->f2, &hwndNext))
         ul = FALSE;
@@ -115,6 +104,7 @@ ULONG FASTCALL WU32ChangeClipboardChain(PVDMFRAME pFrame)
     the clipboard is closed. Otherwise, it is FALSE.
 --*/
 
+#line 87
 ULONG FASTCALL WU32CloseClipboard(PVDMFRAME pFrame)
 {
     ULONG ul;
@@ -123,14 +113,6 @@ ULONG FASTCALL WU32CloseClipboard(PVDMFRAME pFrame)
 
     ul = GETBOOL16(CloseClipboard());
 
-    /* DIVERGENCE(MVDM-HOST-DIV-452): associate the existing original cache
-     * with the public host generation only after the original lock release.
-     * A native writer cannot replace the Clipboard while this task owns it. */
-    if (ul) {
-        wow_clipboard_epoch_note_current();
-    }
-
-#line 95
     RETURN(ul);
 }
 
@@ -501,7 +483,6 @@ ULONG FASTCALL WU32GetClipboardOwner(PVDMFRAME pFrame)
 
     UNREFERENCED_PARAMETER(pFrame);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-454): see Clipboard identity contract above. */
     ul = GETHWND16(wow_user_window_public_guest_handle(GetClipboardOwner()));
 
 #line 467
@@ -527,7 +508,6 @@ ULONG FASTCALL WU32GetClipboardViewer(PVDMFRAME pFrame)
 
     UNREFERENCED_PARAMETER(pFrame);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-454): see Clipboard identity contract above. */
     ul = GETHWND16(wow_user_window_public_guest_handle(GetClipboardViewer()));
 
 #line 491
@@ -677,11 +657,11 @@ ULONG FASTCALL WU32OpenClipboard(PVDMFRAME pFrame)
 
     GETARGPTR(pFrame, sizeof(OPENCLIPBOARD16), parg16);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32NativeClipboardWindow above. */
     if (!WU32NativeClipboardWindow((HWND)parg16->f1, &hwnd))
         ul = FALSE;
     else
         ul = GETBOOL16(OpenClipboard(hwnd));
+    if (ul) wow_clipboard_opened();
 
 #line 639
     FREEARGPTR(parg16);
@@ -882,8 +862,6 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                     hMem32 = W32ConvertObjDescriptor((HANDLE) parg16->f2, CFOLE_ANSI_TO_UNICODE);
                 }
                 ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
-                /* DIVERGENCE(MVDM-HOST-DIV-453): retain NULL delayed
-                 * rendering; a rejected converted copy is still ours. */
                 if (!parg16->f2 || ul) {
 #line 837
                     WU32ICBStoreHandle(parg16->f1, parg16->f2);
@@ -921,12 +899,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
             }
 
             ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
-            /* DIVERGENCE(MVDM-HOST-DIV-453): the original path retained the
-             * 16-bit cache and overwrote its failure result even when modern
-             * USER rejected the copied HGLOBAL (for example, no open
-             * Clipboard). Keep the original transfer only after accepted
-             * ownership; a rejected host copy remains this call's resource. */
-            if (ul) {
+            if (!hMem16 || ul) {
                 WU32ICBStoreHandle(parg16->f1, hMem16);
             }
             else if (hMem32) {
@@ -942,8 +915,6 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                 hMem32 = CopyDropFilesFrom16(hMem16);
             }
             ul = (ULONG)SetClipboardData(WORD32(parg16->f1), hMem32);
-            /* DIVERGENCE(MVDM-HOST-DIV-453): preserve delayed rendering
-             * and release a rejected host copy without caching its guest. */
             if (!hMem16 || ul) {
                 WU32ICBStoreHandle(parg16->f1, hMem16);
             }
@@ -994,8 +965,6 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
 
             ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
 
-            /* DIVERGENCE(MVDM-HOST-DIV-453): on rejection neither the
-             * copied picture nor its new native metafile was transferred. */
             if (!hMem16 || ul) {
                 WU32ICBStoreHandle(parg16->f1, hMem16);
             }
@@ -1012,9 +981,6 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
 
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-453): return the guest handle only after the
-     * public Clipboard accepted it. The zero result is the original API's
-     * observable rejection result, not a cache-backed false success. */
     if (parg16->f2 && ul) {
 #line 928
         ul = parg16->f2;
@@ -1058,7 +1024,6 @@ ULONG FASTCALL WU32SetClipboardViewer(PVDMFRAME pFrame)
 
     GETARGPTR(pFrame, sizeof(SETCLIPBOARDVIEWER16), parg16);
 
-    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32NativeClipboardWindow above. */
     if (!WU32NativeClipboardWindow((HWND)parg16->f1, &hwnd))
         ul = 0;
     else
@@ -1172,19 +1137,12 @@ VOID WU32ICBStoreHandle(WORD wFormat, HMEM16 hMem16)
 
 
 
+#line 1075
 HMEM16 WU32ICBGetHandle(WORD wFormat)
 {
     HMEM16 hMem16 = 0;
     PCBNODE Temp;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-452): preserve the original pfnEmptyCB cache
-     * invalidation contract through the modern public sequence number before
-     * returning a cached guest handle. */
-    if (!wow_clipboard_epoch_matches_current()) {
-        W32EmptyClipboard();
-    }
-
-#line 1080
     if ((wFormat >= CF_TEXT) && (wFormat <= CF_WAVE)) {
         hMem16 = ClipboardFormats.Pre1[wFormat];
     }
@@ -1217,6 +1175,7 @@ HMEM16 WU32ICBGetHandle(WORD wFormat)
 
 
 
+#line 1112
 VOID W32EmptyClipboard ()
 {
     PCBNODE Temp, Temp1;
@@ -1294,12 +1253,6 @@ VOID W32EmptyClipboard ()
         Temp = Temp1;
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-452): W32EmptyClipboard is the original cache
-     * retirement owner. Clear only the adapter's generation observation with
-     * it; no independent clipboard state survives this boundary. */
-    wow_clipboard_epoch_reset();
-
-#line 1189
 }
 
 
@@ -1340,9 +1293,7 @@ VOID InitCBFormats ()
 
 HGLOBAL W32ConvertObjDescriptor(HANDLE hMem, UINT flag)
 {
-    /* DIVERGENCE(MVDM-HOST-DIV-885): the modern system OLETHK32 requires
-     * an unavailable kernel-WOW callback registration. Select the original
-     * descriptor conversion through the bounded local WOW binding. */
     extern HGLOBAL WINAPI wow_ole_convert_descriptor(HANDLE, UINT);
     return wow_ole_convert_descriptor(hMem, flag);
+#line 1245
 }

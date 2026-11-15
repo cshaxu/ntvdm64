@@ -1,0 +1,419 @@
+{
+  "path": "src/mvdm-host/wow32/wuclip.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wuclip.c",
+  "before": 144,
+  "after": 90,
+  "delta": -54,
+  "excluded_diff": 11,
+  "metric": "Original-relative additions+deletions;#line ignored;unchanged DEBUG exclusion11 separately counted",
+  "coupled_helper": {
+    "anchor": 32,
+    "before": 22,
+    "after": 11,
+    "delta": -11,
+    "owner_point": "R1825",
+    "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change."
+  },
+  "points": [
+    {
+      "id": "R1824",
+      "anchor": 1,
+      "before": {
+        "deleted": 0,
+        "added": 0
+      },
+      "after": {
+        "deleted": 0,
+        "added": 0
+      },
+      "delta": 0,
+      "evidence": "536 selected retained lines match actual original/current MSVC preprocessing;DEBUG outer framework and#error preserved.",
+      "decision": "restored/confirmed locally;delivery pending"
+    },
+    {
+      "id": "R1825",
+      "anchor": 17,
+      "before": {
+        "deleted": 0,
+        "added": 1
+      },
+      "after": {
+        "deleted": 0,
+        "added": 1
+      },
+      "delta": 0,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1826",
+      "anchor": 21,
+      "before": {
+        "deleted": 2,
+        "added": 1
+      },
+      "after": {
+        "deleted": 0,
+        "added": 0
+      },
+      "delta": -3,
+      "evidence": "S38 real native OLETHK32 call executed NULL registered WOWGlobalLock16 callback; retained disassembly and exception record identify kernel-WOW process-registration dependency. Original ConvertObjDescriptor and its ConvertObjDesc1632/3216 closure are already selected in non-mvdm;bounded local provider initializes original ACP lead table and memory callbacks. Restore harmless original OleStringConversion table separately;its mere existence does not invoke the unavailable system DLL. Keep local original-converter binding,no duplicate algorithm.",
+      "decision": "restored/confirmed locally;delivery pending"
+    },
+    {
+      "id": "R1827",
+      "anchor": 60,
+      "before": {
+        "deleted": 0,
+        "added": 1
+      },
+      "after": {
+        "deleted": 0,
+        "added": 1
+      },
+      "delta": 0,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1828",
+      "anchor": 64,
+      "before": {
+        "deleted": 4,
+        "added": 6
+      },
+      "after": {
+        "deleted": 4,
+        "added": 5
+      },
+      "delta": -1,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1829",
+      "anchor": 94,
+      "before": {
+        "deleted": 0,
+        "added": 7
+      },
+      "after": {
+        "deleted": 0,
+        "added": 0
+      },
+      "delta": -7,
+      "evidence": "Original client/ntstubs.c OpenClipboard requests fEmptyClient from kernel xxxOpenClipboard; the kernel compares process serial/owner after acquiring the clipboard lock,then ClientEmptyClipboard invokes registered W32EmptyClipboard. Modern public USER lacks this private WOW callback. Actual extracted old close+epoch code accepts cache42 as generation43 when external publication occurs after unlock. Replace three hooks with one successful-open notification: update the one process sequence before callback,retire only changed external-owner cache,preserve same-process Win16 handles. Existing W32EmptyClipboard remains sole data owner;no polling or second cache.",
+      "decision": "restored/confirmed locally;delivery pending"
+    },
+    {
+      "id": "R1830",
+      "anchor": 465,
+      "before": {
+        "deleted": 1,
+        "added": 2
+      },
+      "after": {
+        "deleted": 1,
+        "added": 1
+      },
+      "delta": -1,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1831",
+      "anchor": 489,
+      "before": {
+        "deleted": 1,
+        "added": 2
+      },
+      "after": {
+        "deleted": 1,
+        "added": 1
+      },
+      "delta": -1,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1832",
+      "anchor": 631,
+      "before": {
+        "deleted": 0,
+        "added": 1
+      },
+      "after": {
+        "deleted": 0,
+        "added": 1
+      },
+      "delta": 0,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1833",
+      "anchor": 635,
+      "before": {
+        "deleted": 3,
+        "added": 5
+      },
+      "after": {
+        "deleted": 3,
+        "added": 5
+      },
+      "delta": 0,
+      "evidence": "Original client/ntstubs.c OpenClipboard requests fEmptyClient from kernel xxxOpenClipboard; the kernel compares process serial/owner after acquiring the clipboard lock,then ClientEmptyClipboard invokes registered W32EmptyClipboard. Modern public USER lacks this private WOW callback. Actual extracted old close+epoch code accepts cache42 as generation43 when external publication occurs after unlock. Replace three hooks with one successful-open notification: update the one process sequence before callback,retire only changed external-owner cache,preserve same-process Win16 handles. Existing W32EmptyClipboard remains sole data owner;no polling or second cache. Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1834",
+      "anchor": 837,
+      "before": {
+        "deleted": 1,
+        "added": 8
+      },
+      "after": {
+        "deleted": 1,
+        "added": 6
+      },
+      "delta": -2,
+      "evidence": "Exact original/current WU32SetClipboardData compiled under the same maintained fixture: final24/0;original24/6;previous adapted version24/2 with original NULL-text expectation. Six nonempty rejected formats expose stale guest-cache insertion, false success and unfreed copied native data/metafiles. The prior adaptation fails two NULL-text cases;restore original zero-handle cache replacement with the same !hMem16 || ul condition already used by other formats. API acceptance is controlled;not a real guest or native clipboard integration result. Preserve original conversion algorithms;only transfer ownership on native acceptance and free rejected copies.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1835",
+      "anchor": 867,
+      "before": {
+        "deleted": 2,
+        "added": 11
+      },
+      "after": {
+        "deleted": 2,
+        "added": 6
+      },
+      "delta": -5,
+      "evidence": "Exact original/current WU32SetClipboardData compiled under the same maintained fixture: final24/0;original24/6;previous adapted version24/2 with original NULL-text expectation. Six nonempty rejected formats expose stale guest-cache insertion, false success and unfreed copied native data/metafiles. The prior adaptation fails two NULL-text cases;restore original zero-handle cache replacement with the same !hMem16 || ul condition already used by other formats. API acceptance is controlled;not a real guest or native clipboard integration result. Preserve original conversion algorithms;only transfer ownership on native acceptance and free rejected copies.",
+      "decision": "minimized necessary residual;pending owner decision",
+      "actual_change": "Restore original NULL-text cache replacement while retaining native nonempty acceptance guard and rejected-copy cleanup. Mirror scale unchanged after comment minimization;residual stays pending."
+    },
+    {
+      "id": "R1836",
+      "anchor": 878,
+      "before": {
+        "deleted": 1,
+        "added": 8
+      },
+      "after": {
+        "deleted": 1,
+        "added": 6
+      },
+      "delta": -2,
+      "evidence": "Exact original/current WU32SetClipboardData compiled under the same maintained fixture: final24/0;original24/6;previous adapted version24/2 with original NULL-text expectation. Six nonempty rejected formats expose stale guest-cache insertion, false success and unfreed copied native data/metafiles. The prior adaptation fails two NULL-text cases;restore original zero-handle cache replacement with the same !hMem16 || ul condition already used by other formats. API acceptance is controlled;not a real guest or native clipboard integration result. Preserve original conversion algorithms;only transfer ownership on native acceptance and free rejected copies.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1837",
+      "anchor": 922,
+      "before": {
+        "deleted": 1,
+        "added": 13
+      },
+      "after": {
+        "deleted": 1,
+        "added": 11
+      },
+      "delta": -2,
+      "evidence": "Exact original/current WU32SetClipboardData compiled under the same maintained fixture: final24/0;original24/6;previous adapted version24/2 with original NULL-text expectation. Six nonempty rejected formats expose stale guest-cache insertion, false success and unfreed copied native data/metafiles. The prior adaptation fails two NULL-text cases;restore original zero-handle cache replacement with the same !hMem16 || ul condition already used by other formats. API acceptance is controlled;not a real guest or native clipboard integration result. Preserve original conversion algorithms;only transfer ownership on native acceptance and free rejected copies.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1838",
+      "anchor": 927,
+      "before": {
+        "deleted": 1,
+        "added": 4
+      },
+      "after": {
+        "deleted": 1,
+        "added": 1
+      },
+      "delta": -3,
+      "evidence": "Exact original/current WU32SetClipboardData compiled under the same maintained fixture: final24/0;original24/6;previous adapted version24/2 with original NULL-text expectation. Six nonempty rejected formats expose stale guest-cache insertion, false success and unfreed copied native data/metafiles. The prior adaptation fails two NULL-text cases;restore original zero-handle cache replacement with the same !hMem16 || ul condition already used by other formats. API acceptance is controlled;not a real guest or native clipboard integration result. Preserve original conversion algorithms;only transfer ownership on native acceptance and free rejected copies.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1839",
+      "anchor": 963,
+      "before": {
+        "deleted": 0,
+        "added": 1
+      },
+      "after": {
+        "deleted": 0,
+        "added": 1
+      },
+      "delta": 0,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1840",
+      "anchor": 967,
+      "before": {
+        "deleted": 1,
+        "added": 5
+      },
+      "after": {
+        "deleted": 1,
+        "added": 4
+      },
+      "delta": -1,
+      "evidence": "Original HWND32 sign-extends the guest16 token;GETHWND16 truncates the native value. Current private USER identities are not modern HWND values. wow_user_window_public_handle and public_guest_handle resolve the existing published owner/page-domain identity;failed nonzero input must not turn into OpenClipboard(NULL),which is valid. Restoring raw short handles skips that required representation boundary. No new alias table or global GetFullUserHandle contract change.",
+      "decision": "minimized necessary residual;pending owner decision"
+    },
+    {
+      "id": "R1841",
+      "anchor": 1080,
+      "before": {
+        "deleted": 0,
+        "added": 7
+      },
+      "after": {
+        "deleted": 0,
+        "added": 0
+      },
+      "delta": -7,
+      "evidence": "Original client/ntstubs.c OpenClipboard requests fEmptyClient from kernel xxxOpenClipboard; the kernel compares process serial/owner after acquiring the clipboard lock,then ClientEmptyClipboard invokes registered W32EmptyClipboard. Modern public USER lacks this private WOW callback. Actual extracted old close+epoch code accepts cache42 as generation43 when external publication occurs after unlock. Replace three hooks with one successful-open notification: update the one process sequence before callback,retire only changed external-owner cache,preserve same-process Win16 handles. Existing W32EmptyClipboard remains sole data owner;no polling or second cache.",
+      "decision": "restored/confirmed locally;delivery pending"
+    },
+    {
+      "id": "R1842",
+      "anchor": 1189,
+      "before": {
+        "deleted": 0,
+        "added": 5
+      },
+      "after": {
+        "deleted": 0,
+        "added": 0
+      },
+      "delta": -5,
+      "evidence": "Original client/ntstubs.c OpenClipboard requests fEmptyClient from kernel xxxOpenClipboard; the kernel compares process serial/owner after acquiring the clipboard lock,then ClientEmptyClipboard invokes registered W32EmptyClipboard. Modern public USER lacks this private WOW callback. Actual extracted old close+epoch code accepts cache42 as generation43 when external publication occurs after unlock. Replace three hooks with one successful-open notification: update the one process sequence before callback,retire only changed external-owner cache,preserve same-process Win16 handles. Existing W32EmptyClipboard remains sole data owner;no polling or second cache.",
+      "decision": "restored/confirmed locally;delivery pending"
+    },
+    {
+      "id": "R1843",
+      "anchor": 1234,
+      "before": {
+        "deleted": 11,
+        "added": 5
+      },
+      "after": {
+        "deleted": 11,
+        "added": 2
+      },
+      "delta": -3,
+      "evidence": "S38 real native OLETHK32 call executed NULL registered WOWGlobalLock16 callback; retained disassembly and exception record identify kernel-WOW process-registration dependency. Original ConvertObjDescriptor and its ConvertObjDesc1632/3216 closure are already selected in non-mvdm;bounded local provider initializes original ACP lead table and memory callbacks. Restore harmless original OleStringConversion table separately;its mere existence does not invoke the unavailable system DLL. Keep local original-converter binding,no duplicate algorithm.",
+      "decision": "minimized necessary residual;pending owner decision"
+    }
+  ],
+  "line_proof": {
+    "selected_retained_lines": 536,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "tests": {
+    "epoch": {
+      "inputs": {
+        "src\\mvdm-host\\wow32\\wuclip.c": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b",
+        "src\\wow32-dll\\source\\wow_clipboard_epoch.c": "71a0c5795f0fb3d988c67d7abf5c0f1cbc895856ae8034ce55b4c0e0fb5a107b",
+        "test\\adapter-mvdm-host-out\\wow\\wow_clipboard_epoch_fixture.c": "4a9d8d9c60b7f70151f0131003a8a809235b9b9e73daf64eabfee6cdbcf2f704"
+      },
+      "scope": "actual callers/adapter with controlled native boundary; not guest acceptance",
+      "compile_exit": 0,
+      "test_exit": 0,
+      "result": "clipboard-open assertions=56 failures=0 clears=6"
+    },
+    "ownership": {
+      "source_sha256": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b",
+      "body_sha256": "9bb0215cc851785320b3dbe56e34bc6ff1a4bfcf1c79fd9e2a8daf85d2f5bb07",
+      "fixture_sha256": "30e39a31f718835a9b07049fd34da87a12e9d89b06aaa9e826c26cc2a8f88725",
+      "scope": "controlled ownership only; no real guest/conversion claim",
+      "compile_exit": 0,
+      "test_exit": 0,
+      "passed_cases": 24,
+      "elapsed_seconds": 5.753292499983218
+    },
+    "original_control": {
+      "previous": {
+        "source": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p158\\wuclip.before.c",
+        "sha256": "de38d11cdb17f65d73de3926512c7fda5e9b22e089b7cad9ca868b26ca6695c3",
+        "compile_exit": 0,
+        "test_exit": 1,
+        "summary": [
+          "cases=24 strict=1 failures=2"
+        ]
+      },
+      "current": {
+        "source": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wuclip.c",
+        "sha256": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b",
+        "compile_exit": 0,
+        "test_exit": 0,
+        "summary": [
+          "cases=24 strict=1 failures=0"
+        ]
+      },
+      "original": {
+        "source": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclip.c",
+        "sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+        "compile_exit": 0,
+        "test_exit": 1,
+        "summary": [
+          "cases=24 strict=1 failures=6"
+        ]
+      }
+    },
+    "real_transfer": "WOW_CLIPBOARD_TRANSFER_OK mode=transfer format=CF_TEXT render_handoff=direct checkpoints=18 guest_to_native=1 native_to_guest=1 rejected=1 deferred=1 replacement=1 owner_destroy_renderall=1 task_exit=0 desktop=shared"
+  },
+  "runner_notes": [
+    "First new fixture used WORD as already-decoded native carrier and /WX rejected its pointer-width cast;use ULONG_PTR only for test decoded carrier,not actual guest frame layout. No warning suppression.",
+    "Final #line1245 change is outside all tested function bodies. Extracted caller and ownership bodies remain identical;no repeated runtime test for that line-only change."
+  ],
+  "counter_review": "Compared original kernel/client open ordering and process-owner exception;serial update precedes reentrant cleanup. Restoring table does not restore unavailable DLL call. Invalid nonzero HWND remains distinct from valid NULL. No guest edits;no added source branch or second cache.",
+  "delivery": "batch-p158-checkpoint.json",
+  "initial_real_transfer_failure": {
+    "root": "build/t483-s5-p158/clipboard-transfer",
+    "report_bytes": 84,
+    "last_phase": 1,
+    "errors": 1,
+    "dispatch": "WU32OpenClipboard returned0 at task17BF/thread21864;load/getproc succeeded",
+    "scope": "Failed before newly added successful-open callback;not a passing exchange or proved product attribution",
+    "followup": "Final candidate pipeline still running;inspect native OpenClipboard/handle prerequisite and same-environment prior-package control before disposition."
+  },
+  "native_access_control": {
+    "root": "build/t483-s5-p158-final",
+    "source": "clipboard-access.c",
+    "runs": [
+      "clipboard-access.stdout",
+      "clipboard-access-input.stdout"
+    ],
+    "result": "session3 WinSta0 Default;OpenClipboard(NULL)=0/error5;input desktop Default accessible;no opener HWND",
+    "scope": "Standalone native executable;no product load,no clipboard content read/clear/write",
+    "conclusion": "Same-host access refusal exists without product;RDP/unlock explanation not established. Inspect existing execution constraints;do not waive real transfer gate.",
+    "token": "Medium integrity RID0x2000;not restricted;not AppContainer;queried current Job UI restrictions0. No execution restriction changed.",
+    "historical_success": "docs/etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md: final-package-transfer-r1 used same checked-in SharedClipboard runner;current reconstruction uses modern pwsh and normal desktop token. Historical private-window-station attempts also returned access denied;not retried or bypassed.",
+    "station_acl": "OpenWindowStation WinSta0 with WINSTA_ACCESSCLIPBOARD|READATTRIBUTES succeeds;sequence954 readable;owner PID0. OpenClipboard remains denied.",
+    "private_station": "Test-owned CreateWindowStation(GENERIC_ALL) fails ERROR_ACCESS_DENIED;no station/desktop created, no ACL modified. Matches retained historical isolation denial.",
+    "final_transfer": "Final2 also fails at first OpenClipboard;pipeline.exit1 and finish.exit1 prevent commit/push. Full19 and governance independently passed.",
+    "revalidated": "access-recheck.stdout: same medium unrestricted Default context again returns OpenClipboard0/error5;sequence954. Pipeline and finish are terminal1;HEAD remains c17b5be7d.",
+    "resume_requirement": "Owner normal-CMD control of existing clipboard-access.exe or working shared-Clipboard execution context. Then rerun only real transfer on unchanged final2 package;keep failed receipts,require final hash identity and reuse passed Full19;governance/commit/push remain required."
+  },
+  "rdp_recovery": {
+    "native_control": "OpenClipboard succeeded after RDP reconnect",
+    "attempt1": "132 bytes;later OpenClipboard returned0",
+    "attempt2": "96 bytes;native bridge identified open owner PID38864 RadeonSoftware;error5",
+    "resolution": "Stopped confirmed unrelated holder under permanent owner authorization;unchanged final package passed18 checkpoints",
+    "result": "WOW_CLIPBOARD_TRANSFER_OK mode=transfer format=CF_TEXT render_handoff=direct checkpoints=18 guest_to_native=1 native_to_guest=1 rejected=1 deferred=1 replacement=1 owner_destroy_renderall=1 task_exit=0 desktop=shared"
+  }
+}

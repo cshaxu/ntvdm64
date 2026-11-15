@@ -1,0 +1,78 @@
+{
+  "path": "src/mvdm-host/wow32/wuclass.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/wow32/wuclass.c",
+  "before": 51,
+  "after": 48,
+  "delta": -3,
+  "changes": "Remove three standalone explanatory comments only;no selected code,condition,ABI orbinding changed;no shim transfer.",
+  "points": [
+    {
+      "id": "R1816",
+      "before": 0,
+      "after": 0,
+      "evidence": "Actual MSVC original/current preprocessing checks405 selected retained statements;zero mismatches. Existing exclusion frameworks unchanged.",
+      "decision": "confirmed original selected line mapping"
+    },
+    {
+      "id": "R1817",
+      "before": 2,
+      "after": 2,
+      "evidence": "Original WNDPROC_WOW=0x80000000 and WNDPROC_HANDLE=0xffff overlap encoded guest selector7fff:7fff0004 encodesffff0004. Native USER also returns real CPD values withffff high word. Standalone modern USER does not implement NT4 guest WOW procedure dispatch. Original kernel class.c::_SetClassData resolves CPD with private HMValidateHandleNoRip then stores original CLS procedure;those private native objects are outside the admitted boundary. Modern binding preserves one logical class record and explicit origin;bit-only inference loses information. Retained original selector restoration and GetThunkWindowProc remain the implementation. BOOL output carries identity absent from raw DWORD;no additional registry introduced.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1818",
+      "before": 6,
+      "after": 5,
+      "evidence": "Original GetClassLong shape can return a DWORD but cannot return the disambiguating origin. Current generic facade discards it. Existing explicit getter reads same class record/immutable entry. Returning an extra surrogate or ambient tag would add a second mapping/state channel,not reduce complexity.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1819",
+      "before": 12,
+      "after": 12,
+      "evidence": "Original WNDPROC_WOW=0x80000000 and WNDPROC_HANDLE=0xffff overlap encoded guest selector7fff:7fff0004 encodesffff0004. Native USER also returns real CPD values withffff high word. Standalone modern USER does not implement NT4 guest WOW procedure dispatch. Original kernel class.c::_SetClassData resolves CPD with private HMValidateHandleNoRip then stores original CLS procedure;those private native objects are outside the admitted boundary. Modern binding preserves one logical class record and explicit origin;bit-only inference loses information. Retained original selector restoration and GetThunkWindowProc remain the implementation. Actual checked-in wow_typed_procedure_callers links WU32GetClassLong andWU32SetClassLong and asserts7fff0004/ffff0004 roundtrip;native CPD probe independently exercises real USERffff tokens. These are source/test contract evidence;this batch does not claim a new runtime reproduction.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1820",
+      "before": 3,
+      "after": 3,
+      "evidence": "SetClassLong returns the prior procedure,whose origin can differ from the newly requested value. Existing exchange returns previous_guest atomically with previous from the single class record;new-value bits cannot determine old-value identity.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1821",
+      "before": 8,
+      "after": 7,
+      "evidence": "Existing native setter resolves CPD through native USER class registration and returns false on resolution failure;class binding exchange also rejects an absent/invalid owner before mutation. Original unconditional SETWC after that failed exchange would change guest class words although procedure was not replaced. Break preserves existing failure without a new rollback path.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1822",
+      "before": 8,
+      "after": 7,
+      "evidence": "Modern SetClassLong cannot directly dispatch a tagged16:16 guest callback. Owned class exchange validates callback/tag and stores it in original logical CLS binding;unowned class guest installation fails. On failure original following SETWC would publish a guest address without the corresponding procedure. Same existing exchange/error return as native branch.",
+      "decision": "residual pending owner decision"
+    },
+    {
+      "id": "R1823",
+      "before": 12,
+      "after": 12,
+      "evidence": "Original WNDPROC_WOW=0x80000000 and WNDPROC_HANDLE=0xffff overlap encoded guest selector7fff:7fff0004 encodesffff0004. Native USER also returns real CPD values withffff high word. Standalone modern USER does not implement NT4 guest WOW procedure dispatch. Original kernel class.c::_SetClassData resolves CPD with private HMValidateHandleNoRip then stores original CLS procedure;those private native objects are outside the admitted boundary. Modern binding preserves one logical class record and explicit origin;bit-only inference loses information. Retained original selector restoration and GetThunkWindowProc remain the implementation. Getter and setter-return decoder need the same origin decision;no new independent state machine.",
+      "decision": "residual pending owner decision"
+    }
+  ],
+  "line_proof": {
+    "selected_retained_lines": 405,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "limits": [
+    "Source and existing test-contract evidence are not new runtime acceptance.",
+    "No behavior change;full build/publication deferred until substantive batch perowner cadence."
+  ],
+  "source_sha256": "ceb60357f24f8a6bc728ee5dfb83131a4a30875bc914f625009a48eaa597ab09",
+  "delivery": "batch-p158-checkpoint.json"
+}

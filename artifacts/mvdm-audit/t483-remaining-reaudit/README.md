@@ -1168,3 +1168,15 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 - [R1810-R1814 review](r1810-r1814-wstruc-review.json), [P157 checkpoint](batch-p157-checkpoint.json), [line proof](batch-p157-line-check.json): whole-file source complete;delivery pending.
 
 - [P157 receipt](batch-p157-checkpoint.json):mirror-4;cached,publish11x2,DDE/COPYDATA focused,Full19 passed.
+
+- [R1815 unchanged-source confirmation](r1815-wsubcls-review.json):141 selected lines match;no source change or repeated runtime test.
+
+- [R1816-R1823 call-chain investigation](r1816-r1823-wuclass-investigation.json): source leads only;not a completed audit or pending-owner decision.
+
+- [R1816-R1823 completed file review](r1816-r1823-wuclass-review.json) supersedes investigation leads:mirror51->48,comments only;405 selected lines match;seven residual decisions.
+
+- [R1824-R1843 clipboard investigation](r1824-r1843-wuclip-investigation.json): original open-time retirement chain and deterministic after-close generation counterexample; ongoing whole-file investigation, not final dispositions or product delivery.
+
+- [R1824-R1843 completed file review](r1824-r1843-wuclip-review.json), [P158 checkpoint](batch-p158-checkpoint.json), [line proof](batch-p158-line-check.json): mirror144->90;original open-time cache retirement restored;epoch56/0 and ownership24/0;delivery pending.
+
+- [P158 delivered receipt](batch-p158-checkpoint.json): mirror net-57;cached,publish11x2,epoch56/0,ownership24/0,real Win16 Clipboard transfer and Full19 passed.

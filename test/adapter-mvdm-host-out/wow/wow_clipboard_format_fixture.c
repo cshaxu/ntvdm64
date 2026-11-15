@@ -57,7 +57,7 @@ int main(int argc,char **argv){
   result=WU32SetClipboardData(&arg);++cases;
   printf("format=%u accepted=%u empty=%u result=%lu cached=%u guest=%u copies=%u freed=%u metafiles=%u meta_freed=%u\n",formats[i],mode,empty,result,cached,cached_handle,allocations,freed,metas,meta_freed);
   if(strict){
-   unsigned expected_cache=empty?(formats[i]!=CF_TEXT):mode;
+   unsigned expected_cache=empty||mode;
    if(result!=(!empty&&mode?0x55:0)||cached!=expected_cache||
       cached_handle!=(expected_cache&&!empty?0x55:0)||allocations!=!empty||
       freed!=(!empty&&!mode)||metas!=expected_meta||
