@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-1959 reviewed:678 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1273 qualified pending;761 unreviewed. Files263/365 audited,102 remain.
+1964 reviewed:678 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1278 qualified pending;756 unreviewed. Files264/365 audited,101 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -50,8 +50,6 @@ The current concurrency evidence is a source-level eligible ordering counterexam
 not a reproduced runtime race; it does not prove every capture helper necessary.
 
 P158 source complete:wuclass51->48;wuclip144->90 (DEBUG exclusion11 unchanged);mirror batch-57. Open-time cache retirement follows original serial/owner ordering;epoch56/0,ownership24/0 and lines536/0 passed. Initial candidate built/published;final2 also restores original NULL-text cache replacement. Final2 cached,publish11x2,epoch56/0,ownership24/0 and Full19 passed;real Clipboard exchange passed after RDP recovery;Git accompanies receipt.
-
-P160 wudlg.c21->19(-2);whole-file review complete. Original entry controls show heap/map/callback-stack leaks on exceptions and native call after failed conversion;current199 scenarios pass. Actual MSVC372 lines match. Final exact controls199/0,cached,publish11x2,Full19 and governance passed;Git accompanies receipt.
 
 P161 wuman9->6(-3):original unused extern restored,comment reduced,CRLF restored. Guest-address residuals source/ABI-proved pending owner;MSVC136 lines match and executable preprocessing unchanged. P160 package/cached/Full evidence reused;Git accompanies receipt.
 
@@ -207,3 +205,5 @@ The latest published baseline and active work are reported above.
 P176 final:environ14->11(-3);ordinary semantic diff removed,excluded11 retained;449 MSVC lines match. Original RTL names restored with x86/x64 provider and private-PEB clone proof. Cached,publish11x2,focused,Full19,RDP Clipboard18 passed. First RDP failure was confirmed RadeonSoftware Clipboard occupancy;unchanged retry passed. Package 83adbf7e-5ee3-4e21-b906-e339b3085d6a;Git accompanies receipt.
 
 P177 error.c:only #error exclusions11 remain;ordinary semantic0. Original endif28/184 and CRLF restored;both actual arch preprocessing unchanged,original selected lines match. P176 product verification reused;Git accompanies receipt.
+
+P178 time.c:1225->1219;redundant comment removed,CRLF/endif53 restored;14 selected lines match and selected preprocessing unchanged. Full original compile confirms native ABI/declaration closure gaps;5 residual points await owner package-boundary choice. P176 product verification reused;Git accompanies receipt.

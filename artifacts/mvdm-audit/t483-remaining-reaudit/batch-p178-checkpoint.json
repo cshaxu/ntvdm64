@@ -1,0 +1,63 @@
+{
+  "status": "whole-file review;source-boundary decisions pending;comment/EOL/line cleanup only;selected preprocessing identical",
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "sha256": "ce01257bc0bb0a87f3c14e3630160029069a7cd7addc901ba7575845a8cdffa8"
+    }
+  ],
+  "mirror_before": {
+    "added": 7,
+    "deleted": 1218,
+    "total": 1225
+  },
+  "mirror_after": {
+    "added": 1,
+    "deleted": 1218,
+    "total": 1219
+  },
+  "mirror_delta": -6,
+  "line_proof": {
+    "selected_retained_lines": 14,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "method": "Equal source ranges and actual MSVC preprocessed statement/logical-line comparison under same current product context"
+  },
+  "original_compile_exit": 2,
+  "selected_compile_exit": 0,
+  "original_compile_errors": [
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(397): error C2440: '=': cannot convert from 'int' to 'LARGE_INTEGER'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(403): error C2440: '=': cannot convert from 'int' to 'LARGE_INTEGER'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(508): error C2373: 'RtlTimeToTimeFields': redefinition; different type modifiers",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(822): error C2373: 'RtlTimeFieldsToTime': redefinition; different type modifiers",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(1063): error C2440: '=': cannot convert from 'int' to 'LARGE_INTEGER'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(1154): error C2373: 'RtlTimeToSecondsSince1970': redefinition; different type modifiers",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(1188): error C2440: '=': cannot convert from 'int' to 'LARGE_INTEGER'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(1300): error C2039: 'TimeZoneBias': is not a member of '_SYSTEM_TIMEOFDAY_INFORMATION'",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(1306): error C2373: 'RtlLocalTimeToSystemTime': redefinition; different type modifiers",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p178\\time.original.c(1329): error C2039: 'TimeZoneBias': is not a member of '_SYSTEM_TIMEOFDAY_INFORMATION'"
+  ],
+  "chain": "Original netlib NetpSecondsSince1970ToFileTime calls original RtlSecondsSince1970ToTime;its epoch constant and multiply macro are unchanged. Other time routines are not this conversion dependency.",
+  "boundary_evidence": [
+    "source-policy: separately admitted non-MVDM required original slice,not recursive NTDLL replacement",
+    "Current ntvdm.exe.map assigns RtlTimeToTimeFields and RtlTimeFieldsToTime to ntdll.dll",
+    "Original declarations use compiler-wide calling convention;current public SDK/API declarations are NTAPI. Full restoration therefore needs deliberate build/header/provider change,not merely body insertion.",
+    "SYSTEM_TIMEOFDAY_INFORMATION public modern declaration lacks old TimeZoneBias member. Full restoration needs ABI-compatible query boundary;not evidence that historical algorithm is wrong."
+  ],
+  "decision_options": [
+    "Retain existing single conversion slice and modern native calendar/time-zone API ownership",
+    "Admit larger RTL utility package with original calling convention and division prototypes;separately decide time-zone query ABI and native API owner;validate all newly owned entry points"
+  ],
+  "recommendation": "Retain current required slice pending owner boundary decision;do not add unused tables/macros independently or new shim merely to reduce mirror diff",
+  "pending_points": [
+    "T483-R1960",
+    "T483-R1961",
+    "T483-R1962",
+    "T483-R1963",
+    "T483-R1964"
+  ],
+  "partial_cleanup": "Deleted redundant comment6;restored CRLF and endif53;all excluded #error retained",
+  "reused_receipt": "batch-p176-checkpoint.json",
+  "limits": "No claim original algorithm fails at runtime;full compile control proves unchanged insertion incompatible with present supported ABI. Owner decides source package expansion;no unproved race or speculative runtime defect."
+}

@@ -51,15 +51,10 @@ Revision History:
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #line 51
 #error Excluded unsupported kernel RTL time allocation profile
+#line 53
 #endif
 #line 54
 
-/*
- * The standalone redirector needs precisely this exported RTL conversion.
- * Keep the original source file as its owner.  The rest of this NT4 unit
- * requires the retired SYSTEM_TIMEOFDAY_INFORMATION layout and is not a
- * user-mode dependency of the selected VDMREDIR closure.
- */
 
 #line 149
 const LARGE_INTEGER SecondsToStartOf1970 = {0xb6109100, 0x00000002};
