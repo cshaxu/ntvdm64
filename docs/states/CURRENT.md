@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2011 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1310 qualified pending;709 unreviewed. Files274/365 audited,91 remain.
+2012 reviewed:693 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1311 qualified pending;708 unreviewed. Files275/365 audited,90 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -48,10 +48,6 @@ established necessity. A concrete
 source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P174 csrutil650->622(-28):original header/comment cleanup,174 retained lines match,x86/x64 preprocessing identical. Native ABI controls qualify7 residuals;P173 package verification reused.
-
-P175 probe125->117(-8):both#error preserved in original condition order,54 retained logical lines match. Selected preprocessing unchanged;original probe fixture and negative macro controls passed;P173 runtime evidence reused.
 
 P176 R1957-R1958 restores original environment symbols/includes and removes5 remapping macros;mirror14->11(-3),ordinary diff0.449 MSVC lines match;final verification recorded below.
 
@@ -199,3 +195,5 @@ P186 apimsg533->7(-526):original descriptors and complete function bodies restor
 P187 apisrv1067->190(-877):original linkable bodies and error semantics restored;includes4 and Enum3 omission180 pending,excluded6 retained.901 source/607 MSVC lines match;focused37,cached,publish11x2,Full passed. Original C4701 remains disclosed;RDP shared Clipboard still fails with external holders. Git accompanies receipt.
 
 P188 apisvc4 unchanged:all original selected bodies retained;785 source/518 actual MSVC lines match;1#error correct. Original aggregate include C1083 smb.h;one boundary decision. No product changes;P187 verification/publication reused;Git accompanies receipt.
+
+P189 apiuse ordinary2 unchanged/raw3->2:redundant#line38 removed;all original bytes except include match.335 actual MSVC lines/tokens unchanged;original header C1083 smb.h;one decision. P187 product verification/publication reused;Git accompanies receipt.

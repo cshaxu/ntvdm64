@@ -1,0 +1,42 @@
+{
+  "proof": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+    "before_sha256": "b2cf945c8f00a8ef9364ed6d1e53560e231bdd8bf8d92ecdfd47ffb6f2c3c6eb",
+    "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+    "sha256": "5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b",
+    "msvc_selected_lines": 335,
+    "mismatches": [],
+    "preprocessing_identical": true,
+    "original_body_exact_except_include": true,
+    "source_lines": 536,
+    "removed_redundant_line_directives": 1,
+    "excluded": 0,
+    "mirror_before": 2,
+    "mirror_after": 2,
+    "raw_line_diff_before": 3,
+    "raw_line_diff_after": 2,
+    "original_header_failure": "xactsrvp.h63 C1083 smb.h absent"
+  },
+  "status": "redundant line directive removed;original bytes except include restored;header pending owner",
+  "mirror_before": 2,
+  "mirror_after": 2,
+  "mirror_delta": 0,
+  "source_files": 1,
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "sha256": "5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+    "sha256": "5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b"
+  },
+  "call_chain": "VrNetUseAdd/Del/Enum/GetInfo -> original XsNetUseAdd/Del/Enum/GetInfo -> public NetUse API and original RAP conversion. Four original bodies retained.",
+  "necessity": "Original aggregate header restored alone fails C1083 smb.h at xactsrvp.h63. P186 isolated original SMB declaration closure additionally reaches absent ntmsv1_0.h. The one-line boundary replaces aggregate declarations, not function bodies.",
+  "counter_review": "Final file is byte-identical to original except one include. Redundant #line38 removal leaves actual before/final/original selected tokens and line numbers unchanged. Original header dependency failure reproduced independently.",
+  "verification": "Actual /O2 flags:before/final/original-body preprocessing identical,335 selected lines identical;original-header compile fails C1083 smb.h. No behavior/diagnostic change;P187 cached/full/publication reused per authorization.",
+  "delivery": "P189 governance/commit/push accompany receipt",
+  "raw_line_diff_before": 3,
+  "raw_line_diff_after": 2
+}
