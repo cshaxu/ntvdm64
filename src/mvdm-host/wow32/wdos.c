@@ -12,7 +12,6 @@
 
 MODNAME(wdos.c);
 
-/* DIVERGENCE(MVDM-HOST-DIV-294): use the shared worker ABI declaration. */
 #include "demexp.h"
 
 #line 17

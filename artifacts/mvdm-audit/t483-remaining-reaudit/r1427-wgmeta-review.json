@@ -1,0 +1,20 @@
+{
+  "file": "src/mvdm-host/wow32/wgmeta.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wgmeta.c",
+  "sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "shared_selected_lines": 317,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "mirror_before": 35,
+  "mirror_after": 35,
+  "selected_diff": 0,
+  "disposition": "Only excluded PARAMETER_VALIDATION_16_RE_ENABLED and literal#if0 branches differ. Original conditional structure retained;actual CCPU profile selects original alternatives;317 selected lines match. No source edits.",
+  "delivery": "P142 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p142-checkpoint.json"
+}

@@ -1,0 +1,39 @@
+{
+  "file": "src/mvdm-host/wow32/wgpal.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wgpal.c",
+  "mirror_before": 3,
+  "mirror_after": 2,
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wgpal.c",
+      "shared_selected_lines": 165,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              100,
+              "putpaletteentry16((*( DWORD *)&(parg16->f4)), parg16->f3, t4);"
+            ]
+          ],
+          "after": [
+            [
+              100,
+              "putpaletteentry16((*( DWORD *)&(parg16->f4)), ul, t4);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "original_result": "FAIL only valid entries converted\nFAIL guest tail retained\nFAIL only valid entries converted\nFAIL guest tail retained\nFAIL failed query has no entries\nPALETTE_OUTPUT checks=19 failures=5\n",
+  "final_result": "PALETTE_OUTPUT checks=19 failures=0\n",
+  "evidence": "WG32GetPaletteEntries allocates requested capacity without initialization,then native GetPaletteEntries returns filled count. Original sends requested count to original putpaletteentry16 and copies unfilled tail. Real two-entry palette short/end/full and null-handle cases:original19 checks/5failures,final19/0.",
+  "counter_review": "Same checked-in native GDI test extracts exact original/current thunk and current original-shaped converter;guest address/alias/heap are explicit test seams. Original putpaletteentry16 calculates copy/flush length from count,so passing native returned count suffices;no second buffer or alternate path. No full guest mapping acceptance claim.",
+  "whole_file": "No excluded branches or other selected differences;final differs only in one count argument. Original LF restored,comment removed;165 shared selected lines match.",
+  "test_change": "Existing runner/extractor now accept optional Source/--source;default unchanged;both original/final use same test and assertions,hash output records actual source.",
+  "delivery": "P142 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p142-checkpoint.json"
+}

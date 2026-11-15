@@ -1,0 +1,33 @@
+{
+  "file": "src/mvdm-host/wow32/wgdi.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wgdi.c",
+  "mirror_before": 32,
+  "mirror_after": 31,
+  "non_exclusion_before": 2,
+  "non_exclusion_after": 1,
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "shared_selected_lines": 2713,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              2365,
+              "if (psz1) free_w(psz1);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "evidence": "WG32GetEnvironment allocates psz1 with malloc_w before loader call. LoadLibraryAndGetProcAddresses(wgprnset.c) returns FALSE when SafeLoadLibrary fails;selected wspool.h maps it to native LoadLibrary. Original immediate return bypasses sole trailing free_w(psz1). No ownership transfer occurs;wow32.c malloc_w/free_w are HeapAlloc/HeapFree on hWOWHeap.",
+  "counter_review": "Proof is an explicit original allocation/error/return chain,not a modified-code fixture. Native loader failure is allowed and no outer owner holds psz1. Source proof only;no runtime failure injection or guest printer acceptance claimed. One added release line is minimal;moving allocation or adding cleanup label costs more mirror diff.",
+  "changes": "Removed one comment,restored original LF from CRLF,added#line2365 before original return;four literal#if0 #error directives unchanged.",
+  "delivery": "P142 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p142-checkpoint.json"
+}

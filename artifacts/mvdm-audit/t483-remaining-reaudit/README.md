@@ -961,3 +961,23 @@ P141 [checkpoint](batch-p141-checkpoint.json), [actual header line check](batch-
 P141 first Full attempt failed version-negatives:reply-protocol server exited1740(RPC duplicate endpoint), after three negative variants passed. Failure-time occupant was not captured; do not attribute it retrospectively. Publication remains complete, commit/push stopped; isolated process-identity diagnosis running. See batch-p141-checkpoint.json.
 
 P141 final gates passed:cached full,11x2 publication,alias101,public ABI,menu-resource,Full19,WOW boundary. Mirror header27->24(-3);62 selected lines match.193/365 files;1417/2720 points:516 delivered,8 approved,893 pending,1303 unreviewed. Final governance/Git accompany receipt.
+
+P141 delivered e3b634f6c;remote matched,tree clean. [wdib whole-file review](r1418-r1420-wdib-review.json):R1418-R1420 complete;mirror7->6(comment only),556 lines match;original GDI cleanup fails,current passes.194/365 files;1420/2720 points,516 delivered,2 local,8 approved,894 pending,1300 unreviewed.
+
+[wdos whole-file review](r1421-r1422-wdos-review.json):R1421-R1422 complete;mirror33->32(comment only),367 lines match;original stdcall versus worker cdecl proved by actual object symbols.195/365 files;1422/2720 points,516 delivered,3 local,8 approved,895 pending,1298 unreviewed. Cumulative local mirror delta-2;no fresh Full claim.
+
+[wgdi whole-file review](r1423-r1424-wgdi-review.json):R1423-R1424 complete;mirror32->31,original LF and#line2365 restored;2713 lines match;one release retains explicit original-failure ownership evidence.196/365 files;1424/2720 points,516 delivered,4 local,8 approved,896 pending,1296 unreviewed. Cumulative local mirror delta-3;format/line only.
+
+[wgdi31 whole-file review](r1425-r1426-wgdi31-review.json):R1425-R1426 complete;mirror12->11,LF/#line348 restored;639 lines match;original20/2 versus current20/0 font output controls.197/365 files;1426/2720 points,516 delivered,5 local,8 approved,897 pending,1294 unreviewed. Cumulative local mirror delta-4;format/line only.
+
+[wgmeta whole-file check](r1427-wgmeta-review.json):R1427 confirms selected original code/317 lines;no source change,35->35 exclusions only. P141 source identity/build/Full reused.198/365 files;1427/2720 points;517 delivered/confirmed,5 local,8 approved,897 pending,1293 unreviewed.
+
+[wgpal whole-file review](r1428-r1429-wgpal-review.json):R1428-R1429 complete;mirror3->2,original LF restored;165 lines match;original19/5 versus final19/0 native palette controls.199/365 files;1429/2720 points,517 delivered,6 local,8 approved,898 pending,1291 unreviewed. Cumulative local mirror delta-5;format/line only;existing test accepts Source for same-fixture controls.
+
+[wgprnset whole-file review](r1430-r1433-wgprnset-review.json):R1430-R1433 complete;mirror41->38,344 lines match;three original early-return leaks source-proved.200/365 files;1433/2720 points;517 delivered,7 local,8 approved,901 pending,1287 unreviewed. P142 cumulative six-file net-8 enters cached full/publication/testing.
+
+P142 [delivery checkpoint](batch-p142-checkpoint.json) and [actual preprocessor line proof](batch-p142-line-check.json);gates and publication remain pending until their exit evidence is recorded.
+
+P142 cached full passed;all11 published and hash-verified in both roots,package eca2357e-a38c-401d-9296-3c9f471544b9. Focused/Full and Git delivery still pending;see checkpoint.
+
+P142 final gates passed:cached x86/x64,11x2 publication,DIB82/font20/palette19,ABI/menu-resource,isolated Full19,WOW boundary. Six mirror files net-8;5101 selected lines match.200/365 files;1433/2720 points:524 delivered/confirmed,0 local,8 approved,901 pending,1287 unreviewed. Initial runner failure preserved;final governance/Git accompany receipt.

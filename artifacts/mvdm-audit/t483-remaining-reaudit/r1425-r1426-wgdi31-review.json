@@ -1,0 +1,49 @@
+{
+  "file": "src/mvdm-host/wow32/wgdi31.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wgdi31.c",
+  "mirror_before": 12,
+  "mirror_after": 11,
+  "non_exclusion_before": 5,
+  "non_exclusion_after": 4,
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "shared_selected_lines": 639,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              347,
+              "putkerningpairs16 ((*( DWORD *)&(parg16->f3)), parg16->f2, lpkrnpair);"
+            ]
+          ],
+          "after": [
+            [
+              347,
+              "if (ul) {"
+            ],
+            [
+              348,
+              "putkerningpairs16 ((*( DWORD *)&(parg16->f3)), ul, lpkrnpair);"
+            ],
+            [
+              349,
+              "}"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "original_result": "NATIVE metrics return=48 first=00 last=00\nNATIVE bitmap return=60 tail=00 last=00\nNATIVE kerning return=120 tail=a5 last=a5\nFAIL kerning tail untouched\nFAIL no unavailable kerning output\nFONT_OUTPUT checks=20 failures=2\n",
+  "current_result": "NATIVE metrics return=48 first=00 last=00\nNATIVE bitmap return=60 tail=00 last=00\nNATIVE kerning return=120 tail=a5 last=a5\nFONT_OUTPUT checks=20 failures=0\n",
+  "evidence": "WG32GetKerningPairs allocates requested capacity, native GetKerningPairs returns actual entries. Real Arial GDI returns120 for request123; original copies123 and corrupts untouched tail. Controlled native zero return also causes original to copy unavailable output. Original20checks/2failures,current20/0.",
+  "guard_evidence": "Original wstruc.c putkerningpairs16 maps and flushes sizeof(KERNINGPAIR16) even when c=0. Loop being empty does not eliminate guest access. Keep existing nonzero guard;only remove comment.",
+  "counter_review": "Fixture uses native GDI for short return and controlled zero result;guest copy is an explicit test seam,not full guest mapping proof. No claim that current guest APIs or printer/font applications are fully accepted. Final change only removes comment/restores LF and#line348;runtime function tokens unchanged from tested current source.",
+  "whole_file": "One excluded literal#if0 function and kerning-output correction;all remaining original selected content retained.639 original logical lines match.",
+  "delivery": "P142 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p142-checkpoint.json"
+}

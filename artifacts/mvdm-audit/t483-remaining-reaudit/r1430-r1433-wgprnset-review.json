@@ -1,0 +1,94 @@
+{
+  "file": "src/mvdm-host/wow32/wgprnset.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wgprnset.c",
+  "mirror_before": 41,
+  "mirror_after": 38,
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "shared_selected_lines": 344,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              91,
+              "if (psz3) free_w(psz3);"
+            ],
+            [
+              92,
+              "if (psz4) free_w(psz4);"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              176,
+              "if (psz4) free_w(psz4);"
+            ],
+            [
+              177,
+              "if (psz5) free_w(psz5);"
+            ],
+            [
+              178,
+              "if (psz7) free_w(psz7);"
+            ]
+          ]
+        },
+        {
+          "op": "insert",
+          "original": [],
+          "after": [
+            [
+              309,
+              "if (psz1) free_w(psz1);"
+            ],
+            [
+              310,
+              "if (psz2) free_w(psz2);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "points": [
+    {
+      "id": "T483-R1431",
+      "function": "WG32DeviceMode",
+      "allocations": "psz3/psz4",
+      "before": 3,
+      "after": 2,
+      "original_return": 91,
+      "evidence": "WG32DeviceMode: psz3/psz4 initialize NULL,receive local malloc_w copies before LoadLibraryAndGetProcAddresses;original failure return91 bypasses their sole tail frees. No pointer is passed to loader,stored globally or transferred. Retained releases cover partial allocation success too."
+    },
+    {
+      "id": "T483-R1432",
+      "function": "WG32ExtDeviceMode",
+      "allocations": "psz4/psz5/psz7",
+      "before": 4,
+      "after": 3,
+      "original_return": 176,
+      "evidence": "WG32ExtDeviceMode: psz4/psz5/psz7 initialize NULL,receive local malloc_w copies before LoadLibraryAndGetProcAddresses;original failure return176 bypasses their sole tail frees. No pointer is passed to loader,stored globally or transferred. Retained releases cover partial allocation success too."
+    },
+    {
+      "id": "T483-R1433",
+      "function": "WG32DeviceCapabilities",
+      "allocations": "psz1/psz2",
+      "before": 3,
+      "after": 2,
+      "original_return": 309,
+      "evidence": "WG32DeviceCapabilities: psz1/psz2 initialize NULL,receive local malloc_w copies before LoadLibraryAndGetProcAddresses;original failure return309 bypasses their sole tail frees. No pointer is passed to loader,stored globally or transferred. Retained releases cover partial allocation success too."
+    }
+  ],
+  "counter_review": "Native LoadLibrary failure returns FALSE from retained original loader. Each local malloc_w string remains caller-owned;early return bypasses original tail free. Reusing tail with goto needs changed return/result handling and labels,larger than two/three added releases. No code moved to shim. This is explicit source ownership proof,not reproduced guest printer failure.",
+  "delivery": "P142 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p142-checkpoint.json"
+}

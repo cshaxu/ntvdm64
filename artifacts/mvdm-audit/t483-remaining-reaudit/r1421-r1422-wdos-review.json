@@ -1,0 +1,35 @@
+{
+  "file": "src/mvdm-host/wow32/wdos.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wdos.c",
+  "mirror_before": 33,
+  "mirror_after": 32,
+  "non_exclusion_before": 3,
+  "non_exclusion_after": 2,
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "shared_selected_lines": 367,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "delete",
+          "original": [
+            [
+              15,
+              "ULONG demClientErrorEx (HANDLE hFile, CHAR chDrive, BOOL bSetRegs);"
+            ]
+          ],
+          "after": []
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "abi": "Actual WOW /Gz compilation: original local declaration references _demClientErrorEx@12;shared demexp.h __cdecl declaration references _demClientErrorEx. Actual worker demerror.obj defines _demClientErrorEx. Both candidate objects compile;original cannot bind to the matching worker ABI as-is.",
+  "call_chain": "SetCurrentDir and QueryCurrentDir call demClientErrorEx on directory/drive failure;dos/dem/demerror.c retains original handling and includes demexp.h via dem.h. Only declaration source differs.",
+  "counter_review": "Responsibility is retained original DEM error handling. Calling convention follows actual worker definition and WOW object, not merely current include preference. Replacing include with an explicit __cdecl local prototype has the same +1/-1 mirror size and duplicates the shared ABI;no benefit.",
+  "whole_file": "Literal #if0 time routine remains excluded with #error;all selected behavior except ABI declaration matches original. Standalone added comment removed;LF original preserved.",
+  "verification": "Original/final objects and preprocessed logical lines verified. No new runtime claim. Tool path typo in optional first dumpbin inspection was corrected by discovering installed MSVC version;line check itself passed.",
+  "delivery": "P142 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p142-checkpoint.json"
+}

@@ -1,0 +1,365 @@
+{
+  "batch": "P142",
+  "status": "cached full,published11x2,focused,isolated Full19 and boundary passed;governance/Git follow",
+  "source_head": "e3b634f6c271bdaf13088cd6b8ced5e0a02407c5",
+  "source_files": 8,
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "sha256": "aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "sha256": "a0bc00db06a8d45b56798d7263e6827f95ead9b5e0add8ef44d134aced88b793"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "sha256": "cf9f03650cce420116b6bf87f1a9c95f21b8a26ce4861159520e95453aaf9a41"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "sha256": "b641b59025211900d4b01ce610879983f3bf5e88c1b92b100c41028c0d5386b5"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgpal.c",
+      "sha256": "1c29cff4af4ec8565f9d2e1931a1596dccd21c1b8285563b9c3d203d617c1cb1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "sha256": "ee0a7c3ad040edfd9712eccd02c2eec1b89d85861b00d3b49ffc5ecfb3a00ce2"
+    },
+    {
+      "path": "test/integration/verify-wow-palette-output.ps1",
+      "sha256": "caa441cafcaced438dbdc87ca6af42ca829957e7ff28b2164b738cb9fd81bd7d"
+    },
+    {
+      "path": "test/observation/extract-wow-palette-thunk.py",
+      "sha256": "515881d2cf8b4e4e87c5a58631cf7ee03476bf909cb5cc1ca21086c1fc983f41"
+    }
+  ],
+  "mirror_files": 6,
+  "mirror_diff_delta": -8,
+  "changes": "Remove8 non-original comment lines;restore LF in wgdi/wgdi31/wgpal;restore original logical lines. Product executable tokens unchanged. Palette fixture gains optional Source;default behavior unchanged.",
+  "scope": "R1418-R1433,seven complete files;wgmeta unchanged and P141 identity reused",
+  "line_proof": "batch-p142-line-check.json",
+  "no_guest_change": true,
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "runner_failure": {
+    "attempt": "build/t483-s5-p142/failed-launch",
+    "cause": "Outer pipeline and cached.ps1 both redirected cached.log;Out-File failed before compiler invocation. Cached exit receipt was empty,publication gate rejected before copying any runtime image.",
+    "product_published": false,
+    "fix": "Separate outer runner logs,fail on PowerShell errors and missing compiler status;require cached.exit0 before staging. Preserve unused first stage;rerun cached build from same source."
+  },
+  "cached_full_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "eca2357e-a38c-401d-9296-3c9f471544b9",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 444946,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 7544,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 2279,
+          "CleanupMs": 573,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 20986,
+          "CleanupMs": 429,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 18026,
+          "CleanupMs": 491,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 13460,
+          "CleanupMs": 485,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 215,
+          "CleanupMs": 417,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 67138,
+          "CleanupMs": 499,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 54501,
+          "CleanupMs": 460,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 46281,
+          "CleanupMs": 534,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15492,
+          "CleanupMs": 495,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10517,
+          "CleanupMs": 445,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 71601,
+          "CleanupMs": 648,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12346,
+          "CleanupMs": 569,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28564,
+          "CleanupMs": 439,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30512,
+          "CleanupMs": 512,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4473,
+          "CleanupMs": 494,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 8002,
+          "CleanupMs": 548,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10791,
+          "CleanupMs": 496,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4104,
+          "CleanupMs": 445,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6886,
+          "CleanupMs": 453,
+          "Passed": true
+        }
+      ]
+    },
+    "identity_only_isolation": {
+      "testPackage": "e71f776b-a868-44fb-b32f-70ba2f69e346",
+      "publishedPackage": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "images": [
+        {
+          "identical": true,
+          "publishedSha256": "BA04322E59E6FBEF32EE6014FB89A5B1BE79FAEF122B5A283F0F64706D58547A",
+          "name": "VCDEX.DLL",
+          "restoredSha256": "BA04322E59E6FBEF32EE6014FB89A5B1BE79FAEF122B5A283F0F64706D58547A"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "525E1BB47C9926AA6F120B9575AD3B6E57379C783064B55919EC12618CD24597",
+          "name": "run16.exe",
+          "restoredSha256": "525E1BB47C9926AA6F120B9575AD3B6E57379C783064B55919EC12618CD24597"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "8CB07944B66140869D9163C9CE2EA62905D82D422EA58E433979B4BF54AA3211",
+          "name": "ntsrv.exe",
+          "restoredSha256": "8CB07944B66140869D9163C9CE2EA62905D82D422EA58E433979B4BF54AA3211"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "E751E0451EB8B34DEF15E1BE6917F90136D7D42E94860C3EC0D86A71FAC74097",
+          "name": "ntcon.exe",
+          "restoredSha256": "E751E0451EB8B34DEF15E1BE6917F90136D7D42E94860C3EC0D86A71FAC74097"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "6E4545E71DBC901F6258AD17D7BC47D42B4205BD518CE26C2158AEC782411610",
+          "name": "ntvdm.exe",
+          "restoredSha256": "6E4545E71DBC901F6258AD17D7BC47D42B4205BD518CE26C2158AEC782411610"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "AF56DA75E10A1ACE59AD99F528E13BDD1188486D7EF421DCBEC7FFACC6605BA0",
+          "name": "ntvwm.exe",
+          "restoredSha256": "AF56DA75E10A1ACE59AD99F528E13BDD1188486D7EF421DCBEC7FFACC6605BA0"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "B787D1DBDC038B05DC9F2A7726C5C42BAA81E0BAFAD572E32D73515A083AEB87",
+          "name": "ntmon.exe",
+          "restoredSha256": "B787D1DBDC038B05DC9F2A7726C5C42BAA81E0BAFAD572E32D73515A083AEB87"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "1D18DCFB8C3A7F5A1A780D3D3F42020F43C790262A108F175996F3F576340EC9",
+          "name": "WOW32.DLL",
+          "restoredSha256": "1D18DCFB8C3A7F5A1A780D3D3F42020F43C790262A108F175996F3F576340EC9"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "A0D2A703E39000B5CE0722030E6957BC5274C81BE211F597B69A9ACF741C3B39",
+          "name": "VDMREDIR.DLL",
+          "restoredSha256": "A0D2A703E39000B5CE0722030E6957BC5274C81BE211F597B69A9ACF741C3B39"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "E1F13A9F20554499180B547D34AA461A6A3A54A5BEAA6D8DCBE2DC00D67AF821",
+          "name": "nthook32.dll",
+          "restoredSha256": "E1F13A9F20554499180B547D34AA461A6A3A54A5BEAA6D8DCBE2DC00D67AF821"
+        },
+        {
+          "identical": true,
+          "publishedSha256": "3A5B659B16A0618A5B6E055AB7C49C2F16671C633AA7E81D350702DBEC702B6D",
+          "name": "nthook64.dll",
+          "restoredSha256": "3A5B659B16A0618A5B6E055AB7C49C2F16671C633AA7E81D350702DBEC702B6D"
+        }
+      ]
+    },
+    "line_proof": "batch-p142-line-check.json",
+    "targeted": [
+      "DIB82",
+      "font20",
+      "palette19",
+      "public ABI",
+      "menu-resource"
+    ],
+    "boundary": "review-check-isolated.log"
+  },
+  "published_manifest": [
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "BA04322E59E6FBEF32EE6014FB89A5B1BE79FAEF122B5A283F0F64706D58547A",
+      "Machine": 332,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "DB08EB0099E523D4369A89614D1EB1810F705DEC487A2D42A3F9B505E225EED0"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "525E1BB47C9926AA6F120B9575AD3B6E57379C783064B55919EC12618CD24597",
+      "Machine": 34404,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "2F2E591CCACF3B8472574C2AF9A3C15DE5214123287AE213D8B2CC3209950CA0"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "8CB07944B66140869D9163C9CE2EA62905D82D422EA58E433979B4BF54AA3211",
+      "Machine": 34404,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "E9EA265C2C26367CE34AD1E406F84ED62914B89EC1655D24B85C5DDD8ADA556C"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "E751E0451EB8B34DEF15E1BE6917F90136D7D42E94860C3EC0D86A71FAC74097",
+      "Machine": 34404,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "20173CF0CFC199367510A10F57C39BC3FF20DE0D71EB281B27AF51FFD3B629DC"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "6E4545E71DBC901F6258AD17D7BC47D42B4205BD518CE26C2158AEC782411610",
+      "Machine": 332,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "5BE464170A7308862230C4921F2C47EF8781B605714EDEC3C08894219A0D66A4"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "AF56DA75E10A1ACE59AD99F528E13BDD1188486D7EF421DCBEC7FFACC6605BA0",
+      "Machine": 34404,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "F6C345119F96A8AA62A66CC7163C1E97E2B0868145BE2F567269711411279C30"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "B787D1DBDC038B05DC9F2A7726C5C42BAA81E0BAFAD572E32D73515A083AEB87",
+      "Machine": 34404,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "32B5B964626A4272BB6815B985FEC3626F0EC11581276F15935EDB56F73D014D"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "1D18DCFB8C3A7F5A1A780D3D3F42020F43C790262A108F175996F3F576340EC9",
+      "Machine": 332,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "994FCE6F3BB08CEE5E1F153EB6E4D785ABF0E90A5CBB4C0825B1F194432CFD22"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "A0D2A703E39000B5CE0722030E6957BC5274C81BE211F597B69A9ACF741C3B39",
+      "Machine": 332,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "B87F52C55577B73854F24D0159391386FEEEFD275C071C83BAF2C1DD0C6BB86F"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "E1F13A9F20554499180B547D34AA461A6A3A54A5BEAA6D8DCBE2DC00D67AF821",
+      "Machine": 332,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "54C48ED735626A341970E593466972CF91BFAEBF93F3F83EAB0E361540C2594B"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "3A5B659B16A0618A5B6E055AB7C49C2F16671C633AA7E81D350702DBEC702B6D",
+      "Machine": 34404,
+      "PackageId": "eca2357e-a38c-401d-9296-3c9f471544b9",
+      "InputSha256": "834762BECBA0D27AC58ECA564464A098FAD43FCB7A73DDF736DC8F346F175E53"
+    }
+  ],
+  "limitations": [
+    "Native fixtures use explicit guest-copy/heap seams;not full guest printer or graphics acceptance.",
+    "Missing external DOS4GW fixtures remain skipped.",
+    "No guest or winnt.zip changes;residual differences await owner decisions."
+  ]
+}

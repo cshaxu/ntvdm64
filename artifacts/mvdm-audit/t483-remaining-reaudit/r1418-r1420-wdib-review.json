@@ -1,0 +1,44 @@
+{
+  "file": "src/mvdm-host/wow32/wdib.c",
+  "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wdib.c",
+  "mirror_before": 7,
+  "mirror_after": 6,
+  "non_exclusion_before": 3,
+  "non_exclusion_after": 2,
+  "line_proof": [
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "shared_selected_lines": 556,
+      "line_mismatches": [],
+      "ambiguous_equal_text_matches_resolved_at_original_line": [],
+      "selected_changes": [
+        {
+          "op": "replace",
+          "original": [
+            [
+              375,
+              "CloseHandle (hbm);"
+            ]
+          ],
+          "after": [
+            [
+              375,
+              "DeleteObject (hbm);"
+            ]
+          ]
+        }
+      ],
+      "excluded_error_directives_unchanged": true
+    }
+  ],
+  "controls": {
+    "originalExit": 1,
+    "currentExit": 0
+  },
+  "original_result": "FAIL line=35 GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS)==before+(success?((dc!=NULL)+(bitmap!=NULL)):0)\nDIB_FAILURE_CLEANUP checks=83 failures=1\n",
+  "current_result": "DIB_FAILURE_CLEANUP checks=82 failures=0\n",
+  "whole_file": "Only two excluded i386 assignment bodies, one removed comment and one CloseHandle/DeleteObject substitution differ. All other original content retained; LF matches original.",
+  "call_chain": "W32HandleDibDrv creates hbm with CreateDIBSection; MapViewOfFile, VdmAddVirtualMemory, VdmAddDescriptorMapping, guest callback and W32AddDibInfo can fail afterwards. finally deletes DC then closes file/section, then must release the bitmap.",
+  "counter_review": "Actual GDI object count distinguishes CloseHandle from DeleteObject. Test extracts exact original/current finally bodies and supplies real GDI/kernel resources; it does not prove full guest selector rollback. No new cleanup owner or fallback is introduced.",
+  "delivery": "P142 cached full,publication11x2,focused and isolated Full19 passed;Git accompanies receipt;see batch-p142-checkpoint.json"
+}

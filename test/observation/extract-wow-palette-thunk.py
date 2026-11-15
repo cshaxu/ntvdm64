@@ -7,6 +7,7 @@ from pathlib import Path
 repo = Path(__file__).resolve().parents[2]
 parser = argparse.ArgumentParser()
 parser.add_argument('output', type=Path)
+parser.add_argument('--source', type=Path, default=Path('src/mvdm-host/wow32/wgpal.c'))
 args = parser.parse_args()
 output = args.output.resolve()
 output.relative_to((repo / 'build').resolve())
@@ -32,7 +33,7 @@ def extract(source, signature, name):
 
 
 result = {
-    'get_thunk_sha256': extract('src/mvdm-host/wow32/wgpal.c',
+    'get_thunk_sha256': extract(args.source,
         'ULONG FASTCALL WG32GetPaletteEntries(PVDMFRAME pFrame)', 'original-getpaletteentries.inc'),
     'copy_sha256': extract('src/mvdm-host/wow32/wstruc.c',
         'VOID putpaletteentry16(VPPALETTEENTRY16 vppe, INT c, LPPALETTEENTRY lpp)', 'original-putpaletteentry.inc'),
