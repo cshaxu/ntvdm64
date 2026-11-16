@@ -1,0 +1,200 @@
+{
+  "status": "file complete;original conditional line mapping restored",
+  "proof": {
+    "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+    "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+    "original_sha256": "653097c73182630ce39183526334ae4027b1aef00e2d28812a0e5e84c6164db5",
+    "source_lines": 285,
+    "contexts": [
+      {
+        "unit": "x86-worker-csrutil",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-base_command",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-base_values",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-base_payload",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-base_resource",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-base_request",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-native_service_layout_test",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-base_rpc_client_launch",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-worker-native_capture_test",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x86-wow32-wow32",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-frontend-base_command",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-frontend-base_values",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-frontend-base_payload",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-launcher-base_rpc_client_launch",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-launcher-csrutil",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-launcher-base_command",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-launcher-base_values",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-launcher-base_payload",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-launcher-native_capture_test",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-service-base_resource",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-service-base_request",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-service-base_command",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-service-base_values",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-service-base_payload",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-service-native_service_layout_test",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-worker-base_command",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-worker-base_values",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      },
+      {
+        "unit": "x64-worker-base_payload",
+        "selected_header_lines": 212,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 13,
+    "mirror_after": 13,
+    "mirror_delta": 0,
+    "raw_before": 24,
+    "raw_after": 17,
+    "errors": 5,
+    "line_directives_before": 11,
+    "line_directives_after": 4,
+    "negative_controls": [
+      "__cplusplus",
+      "USE_LPC6432",
+      "DEVL"
+    ],
+    "line_endings": "Original CRLF restored; original-relative metrics normalize line endings",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+    "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37"
+  },
+  "mirror_before": 13,
+  "mirror_after": 13,
+  "mirror_delta": 0,
+  "raw_before": 24,
+  "raw_after": 17,
+  "change": "Remove redundant resets;retain precise48/49 and134/135 boundary/continuation resets. Five excluded bodies unchanged;ordinary declarations original.",
+  "counter_review": "No function or ABI adaptation in this file. Original selected declarations already exact. Direct inclusion and base_client/base_capture/base_server consumers sampled from current product Ninja graphs;28 contexts,84 preprocessings,212 selected header lines each match before/final/original. This does not assert complete repository include coverage. Whole retained source comparison covers all285 nonblank retained lines including conditional frames.",
+  "verification": "Three excluded-profile C1189 controls. Initial generator incorrectly enumerated x64 worker-reference-x86 manifest as product;its missing service.h failure is excluded,not a product regression;actual x86 worker included.",
+  "product_verification": "Diagnostic-only change;no new product build or runtime pass claimed. Reuse P209 cached full,published11x2,Full. Finish rechecks exact published hashes.",
+  "cumulative_mirror_diff": {
+    "scope": "365 fixed remaining-reaudit files,not whole1052-file census;no summing historical receipts",
+    "baseline_commit": "4cf4e5a35546249a003387a3a7df79037e6985ac",
+    "original_commit_for_nine_non_C_H": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "metric": "Original-relative added+deleted lines;normalize CRLF/LF;exclude diagnostic #line directives;include mandated #error subset differences;one before/after comparison per file",
+    "baseline_total": 119913,
+    "current_total": 113077,
+    "net_reduction": 6836,
+    "reduced_files": 220,
+    "increased_files": 1,
+    "unchanged_files": 144,
+    "origin_validation_note": "356 existing file pins checked by SHA256; nine non-C/H origins checked against fixed original Git commit after CRLF/LF normalization."
+  },
+  "cumulative_validation": "All364 other current hashes still match P209 cumulative evidence;this file has identical normalized13-line metric. Cumulative119913->113077(-6836) unchanged.",
+  "delivery": "P210 governance commit and push accompany receipt"
+}

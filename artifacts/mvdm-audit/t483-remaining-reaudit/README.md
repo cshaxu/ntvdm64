@@ -1284,3 +1284,5 @@ P208: [Capture header minimization](batch-p208-checkpoint.json):6->4 mirror diff
 P209: [NT executive declaration restoration](batch-p209-checkpoint.json):1777->1188;11 restored/confirmed,7 qualified pending;cached/publish/isolated Full passed.
 
 P209 cumulative mirror-diff evidence: [cumulative-diff-p209.json](cumulative-diff-p209.json). Fixed 365-file scope: 119913 -> 113077, net reduction 6836; excludes diagnostic #line, includes #error subset differences. Not the complete mirror census.
+
+P210: [LPC header original mappings](batch-p210-checkpoint.json):13 excluded difference unchanged;raw24->17;28 actual contexts and3 negatives;P209 product reused,cumulative mirror reduction6836 unchanged.

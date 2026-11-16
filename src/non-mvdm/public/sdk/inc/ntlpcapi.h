@@ -27,10 +27,8 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-#line 30
 #error Unsupported excluded original configuration
 #endif
-#line 32
 
 //
 // Connection Port Type Specific Access Rights.
@@ -44,15 +42,14 @@ Revision History:
 // begin_ntsrv
 
 #if defined(USE_LPC6432)
-#line 45
 #error Unsupported excluded original configuration
+#line 48
 #else
 #line 49
 #define LPC_CLIENT_ID CLIENT_ID
 #define LPC_SIZE_T SIZE_T
 #define LPC_PVOID PVOID
 #endif
-#line 53
 
 
 typedef struct _PORT_MESSAGE {
@@ -132,8 +129,8 @@ typedef struct _PORT_DATA_INFORMATION {
 // end_ntddk end_wdm
 
 #if defined(USE_LPC6432)
-#line 132
 #error Unsupported excluded original configuration
+#line 134
 #endif
 #line 135
 
@@ -339,10 +336,8 @@ NtWriteRequestData(
 typedef enum _PORT_INFORMATION_CLASS {
     PortBasicInformation
 #if DEVL
-#line 338
 #error Unsupported excluded original configuration
 #endif
-#line 340
 } PORT_INFORMATION_CLASS;
 
 
@@ -358,9 +353,7 @@ NtQueryInformationPort(
     );
 
 #ifdef __cplusplus
-#line 355
 #error Unsupported excluded original configuration
 #endif
-#line 357
 
 #endif  // _NTLPCAPI_
