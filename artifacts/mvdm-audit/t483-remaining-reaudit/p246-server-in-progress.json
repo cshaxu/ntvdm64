@@ -1,0 +1,233 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "points": [
+    "R2639",
+    "R2640",
+    "R2641",
+    "R2642",
+    "R2643",
+    "R2644",
+    "R2645"
+  ],
+  "status": "Whole file reviewed,built,published,tested;residuals pending owner;Git delivery accompanies receipt",
+  "before": {
+    "added": 46,
+    "deleted": 1912,
+    "blocks": 18
+  },
+  "source_sha256": "2a914a39bd4364cefd9b41f92cc35e56c10a172d643ae69af715ed9311bfa915",
+  "evidence": {
+    "baseline_compile_exit": 0,
+    "restore_init_compile_exit": 0,
+    "directory": "build/t483-s5-p246",
+    "candidate": "restore-init-v2.c",
+    "candidate_sha256": "fecc0f81bca5928354fc2f22b5940720c19b07ae1383b96a0170c330b2dfbe74",
+    "initial_candidate_invalidated": "Old v2 syntax pass was insufficient:range extraction could comment out initializer. Superseded by actual product-syntax exit0 AND preprocessor definition/12call proof.",
+    "actual_product_syntax_exit": 0
+  },
+  "findings": [
+    "Original InitMessageTables can compile through current process-owned message state after capacity reaches FNID_STATIC and original MN constants are supplied",
+    "Existing autonomous initializer repeats seven original InitWindowMsgTable calls;original initializer covers additional control memberships",
+    "szEDITCLASS original global conflicts with already selected client/dlgbegin.c definition;blanket global restoration inappropriate",
+    "Conditional frames are displaced to end of current file;restore original order after complete source review"
+  ],
+  "remaining": [
+    "Commit and push"
+  ],
+  "diagnostic_limit": "Initial candidate inserted #line inside continued macro;invalid attempt excluded as original-failure evidence. Corrected contiguous original macro and original constant candidate passed.",
+  "after": {
+    "added": 20,
+    "deleted": 1669,
+    "blocks": 30
+  },
+  "candidate_sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b",
+  "compiler_definition_lines": [
+    {
+      "definition": "void InitWindowMsgTable(",
+      "line": 896
+    },
+    {
+      "definition": "void InitMessageTables(void)",
+      "line": 1032
+    }
+  ],
+  "changes": [
+    "Original InitMessageTables and omitted message tables restored",
+    "Original15 outer conditional groups restored in source order;excluded bodies bare#error",
+    "Single original global table populated under existing INIT_ONCE;failure frees/zeros before retry",
+    "Seven handwritten init calls and local candidate state removed",
+    "Existing default-message fixture admitted to maintained call-boundary runner;5 restored memberships added"
+  ],
+  "failure_retry_verification": {
+    "runner": "build/t483-s5-p246/messages.ps1",
+    "pid": 6892,
+    "exit_code": 0,
+    "result": "default_messages_failures=0",
+    "scope": "Original server.c InitMessageTables plus production INIT_ONCE adapter: failures at allocations 1 through 12, registration failure, zero-state cleanup, retry, message membership, repeat-call allocation and pointer stability",
+    "limitation": "Focused fixture only; whole-file audit, cached full build, publication and Full regression remain pending",
+    "inputs": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\windows\\core\\ntuser\\kernel\\server.c",
+        "Hash": "2AD91522C7C2B399BFC31DC889A75F2765C1DDB84109607F60862454CA5BA2D5"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_default_message_bindings.c",
+        "Hash": "85D2B977EAE204ACC9F474DB4A7F9B6FA902DAEFFEC1B4688D314E63C4B811CD"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\test\\adapter-mvdm-host-out\\wow\\wow_default_messages_fixture.c",
+        "Hash": "9021DD85912CCA85CE69C39BE1EEFC0217EEFCFE0680672CA10D9F852E369E57"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\test\\adapter-mvdm-host-out\\wow\\wow_default_messages_faults.h",
+        "Hash": "4075ADBC689CBFF3490196CBBE5FD6D50F68A54985271630FFB400B8A9F151A2"
+      }
+    ]
+  },
+  "additional_restorations": [
+    "Original nonconflicting class-name globals and debug attach pointer",
+    "Original lookaside declarations and InitGlobalRIPFlags release body;DEBUG interior remains#error"
+  ],
+  "failed_restoration": {
+    "original_line": 24,
+    "declaration": "xxxDesktopWndProc(PWND...)",
+    "evidence": "build/t483-s5-p246/messages-final-build.stdout.log",
+    "result": "C2146/C2061:PWND unavailable in message table translation unit;declaration restoration withdrawn;no new shim"
+  },
+  "final_candidate_fixture": {
+    "pid": 37768,
+    "exit_code": 0,
+    "stdout": "build/t483-s5-p246/messages-final2.stdout.log",
+    "result": "default_messages_failures=0",
+    "source_sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b"
+  },
+  "point_conclusions": {
+    "R2639": "Partial original framework/restoration;kernel FNID wrappers use private PWND,HMValidateHandleNoRip,ScSendMessage and gpsi dispatch;InitSyncOnlyMessages owns native transport pointer rules. Residual omission pending owner.",
+    "R2640": "Message table owner header binds original gSharedInfo to sole process table and SharedAlloc to raising heap allocation. Original precomp.h imports kernel provider closure. Residual pending owner.",
+    "R2641": "Original arrays,nonconflicting globals and declarations restored. szEDITCLASS duplicates selected original client/dlgbegin.c;PWND declaration restoration failed actual compilation. PDISPLAYRESOURCE belongs to original display-loading interface,not reached message table ABI. Residual pending owner.",
+    "R2642": "Original button table confirmed unchanged.",
+    "R2643": "Original InitWindowMsgTable body restored/confirmed;SharedAlloc remains finite header binding.",
+    "R2644": "Original InitMessageTables restored,FE_IME excluded interior remains#error. Seven autonomous init calls removed. Twelve failure points and registration cleanup/retry passed.",
+    "R2645": "Safe original macros and release-empty InitGlobalRIPFlags restored. InitCreateSharedSection uses MmCreateSection/MmMapViewInSystemSpace;InitCreateUserCrit uses ERESOURCE and ExInitializeResourceLite;UserInitialize mutates kernel object types;UserThreadCallout accepts PW32THREAD and calls GreLockDisplay/xxxDestroyThreadInfo;these native USER ownership omissions remain pending owner."
+  },
+  "final_line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+        "sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b"
+      }
+    ],
+    "original_nonempty_lines_checked": 652,
+    "compiler_observed": {
+      "InitWindowMsgTable": 896,
+      "InitMessageTables": 1032,
+      "InitGlobalRIPFlags": 1160
+    }
+  },
+  "publication": {
+    "status": "published",
+    "package": "23f5ae9f-bf4a-4134-b0b1-49e2e9ca545a",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_runner": {
+    "pid": 6388,
+    "script": "build/t483-s5-p246/finish-run.ps1",
+    "state": "completed"
+  },
+  "non_error_metrics": {
+    "excluded_branches": 14,
+    "excluded_original_body_lines": 131,
+    "original_excluded_intervals_zero_based": [
+      [
+        53,
+        54
+      ],
+      [
+        461,
+        462
+      ],
+      [
+        481,
+        497
+      ],
+      [
+        583,
+        595
+      ],
+      [
+        833,
+        838
+      ],
+      [
+        850,
+        876
+      ],
+      [
+        934,
+        938
+      ],
+      [
+        990,
+        991
+      ],
+      [
+        1002,
+        1018
+      ],
+      [
+        1054,
+        1055
+      ],
+      [
+        1163,
+        1208
+      ],
+      [
+        1703,
+        1704
+      ],
+      [
+        1822,
+        1823
+      ],
+      [
+        1861,
+        1862
+      ]
+    ],
+    "non_error_diff": {
+      "added": 2,
+      "deleted": 1534,
+      "blocks": 21
+    },
+    "scope": "Source frame/line comparison;not a replacement for compiler or runtime evidence"
+  },
+  "post_publication_focused": {
+    "exit_code": 0,
+    "fixtures_passed": 37,
+    "task_order": "WOW_FIXTURE_OK case=task-order",
+    "log": "build/t483-s5-p246/focused-linked.log"
+  },
+  "newline_identity": {
+    "original": {
+      "CRLF": 2351,
+      "bare_LF": 0
+    },
+    "before": {
+      "CRLF": 0,
+      "bare_LF": 540
+    },
+    "current": {
+      "CRLF": 734,
+      "bare_LF": 0
+    }
+  },
+  "newline_note": "Mirror restored to original CRLF;Git parent was LF,so unnormalized Git patch displays whole-file replacement. Reported original-relative diff normalizes CRLF and excludes #line,not this Git patch size.",
+  "verification": "Cached x86/x64,publish11x2,focused37/task-order,Full20,boundary/governance passed",
+  "counterreview": "Verified FNID_STATIC capacity against original user.h;all readers enter existing INIT_ONCE;no application callback in initializer;failure frees/zeros sole state;public SDK owns MN_GETHMENU;no kernel PWND shim added"
+}

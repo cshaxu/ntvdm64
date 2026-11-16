@@ -1,5 +1,39 @@
 #include "wow_default_message_bindings.h"
 #include <stdio.h>
+#include <string.h>
+
+#undef HeapAlloc
+#undef HeapFree
+#undef RegisterWindowMessageW
+
+static unsigned allocation_count, fail_allocation, live_allocations;
+static BOOL fail_registration;
+
+LPVOID WINAPI fixture_message_alloc(HANDLE heap, DWORD flags, SIZE_T bytes)
+{
+    LPVOID memory;
+    if (++allocation_count == fail_allocation)
+        RaiseException(STATUS_NO_MEMORY, 0, 0, NULL);
+    memory = HeapAlloc(heap, flags, bytes);
+    if (memory) ++live_allocations;
+    return memory;
+}
+
+BOOL WINAPI fixture_message_free(HANDLE heap, DWORD flags, LPVOID memory)
+{
+    BOOL freed = HeapFree(heap, flags, memory);
+    if (freed) --live_allocations;
+    return freed;
+}
+
+UINT WINAPI fixture_message_register(LPCWSTR name)
+{
+    if (fail_registration) {
+        SetLastError(ERROR_ACCESS_DENIED);
+        return 0;
+    }
+    return RegisterWindowMessageW(name);
+}
 
 /* Link the production initializer owner and original server.c slice.
  * Message membership requirements below are independent of its input arrays.
@@ -16,12 +50,37 @@ static BOOL member(const WNDMSG *table, UINT message)
 int main(void)
 {
     WNDMSG server, client, edit, list, combo, combo_list, button;
+    wow_default_message_state_type empty = {0};
+    unsigned failure;
+    for (failure = 1; failure <= 12; ++failure) {
+        allocation_count = 0;
+        fail_allocation = failure;
+        CHECK(!wow_default_messages_ready());
+        CHECK(GetLastError() == ERROR_NOT_ENOUGH_MEMORY);
+        CHECK(allocation_count == failure && live_allocations == 0);
+        CHECK(memcmp(&empty, &wow_default_message_state, sizeof(empty)) == 0);
+    }
+    fail_allocation = 0;
+    allocation_count = 0;
+    fail_registration = TRUE;
+    CHECK(!wow_default_messages_ready());
+    CHECK(GetLastError() == ERROR_ACCESS_DENIED);
+    CHECK(allocation_count == 12 && live_allocations == 0);
+    CHECK(memcmp(&empty, &wow_default_message_state, sizeof(empty)) == 0);
+    fail_registration = FALSE;
+    allocation_count = 0;
     SetLastError(456);
     CHECK(wow_default_messages_ready());
     CHECK(GetLastError() == 456);
+    CHECK(allocation_count == 12 && live_allocations == 12);
     CHECK(wow_default_message_state.uiShellMsg >= 0xc000 &&
         wow_default_message_state.uiShellMsg <= 0xffff);
     CHECK(wow_default_message_state.uiShellMsg == RegisterWindowMessageW(L"SHELLHOOK"));
+    CHECK(member(&wow_default_message_state.awmControl[FNID_DIALOG - FNID_START], WM_INITDIALOG));
+    CHECK(member(&wow_default_message_state.awmControl[FNID_SCROLLBAR - FNID_START], WM_LBUTTONDOWN));
+    CHECK(member(&wow_default_message_state.awmControl[FNID_MENU - FNID_START], WM_PAINT));
+    CHECK(member(&wow_default_message_state.awmControl[FNID_DESKTOP - FNID_START], WM_ERASEBKGND));
+    CHECK(member(&wow_default_message_state.awmControl[FNID_STATIC - FNID_START], WM_PAINT));
     server = wow_default_message_state.DefWindowMsgs;
     client = wow_default_message_state.DefWindowSpecMsgs;
     edit = wow_default_message_state.awmControl[FNID_EDIT - FNID_START];
@@ -83,6 +142,7 @@ int main(void)
     SetLastError(789);
     CHECK(wow_default_messages_ready());
     CHECK(GetLastError() == 789);
+    CHECK(allocation_count == 12 && live_allocations == 12);
     CHECK(server.abMsgs == wow_default_message_state.DefWindowMsgs.abMsgs);
     CHECK(client.abMsgs == wow_default_message_state.DefWindowSpecMsgs.abMsgs);
     CHECK(server.maxMsgs == wow_default_message_state.DefWindowMsgs.maxMsgs);

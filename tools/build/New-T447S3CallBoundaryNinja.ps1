@@ -29,7 +29,11 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 
 # Original state guards and color client must be separate selections: their
 # preprocessor subsets are mutually exclusive, as in the product generator.
+$messageFaults = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/wow_default_messages_faults.h')) + '"'
 $units = @(
+    @('default_messages_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c', ''),
+    @('default_messages_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', $messageFaults),
+    @('default_messages_state', 'src/wow32-dll/source/wow_default_message_bindings.c', $messageFaults),
     @('profile_fixture', 'test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c', ''),
     @('profile_existing_fixture', 'test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c', '/DWOW_PROFILE_EXISTING_KEY'),
     @('profile_owner', 'src/non-mvdm/windows/core/ntuser/kernel/profile.c', ''),
@@ -217,6 +221,7 @@ foreach ($unit in $units) {
     $lines.Add('build obj/' + $unit[0] + '.obj: cc ' + (NinjaPath (Join-Path $root $unit[1])))
     $lines.Add('  extra = ' + $unit[2])
 }
+$lines.Add('build bin/wow_default_messages_fixture.exe: link obj/default_messages_fixture.obj obj/default_messages_tables.obj obj/default_messages_state.obj')
 $lines.Add('build bin/wow_user_capture_fixture.exe: link obj/capture_fixture.obj obj/capture_owner.obj obj/capture_tls.obj obj/original_globals.obj')
 $lines.Add('  libs = ntdll.lib /opt:ref')
 $lines.Add('build original-user-capture-boundary: phony bin/wow_user_capture_fixture.exe')
@@ -284,7 +289,7 @@ $lines.Add('build cpd-window-research: phony bin/wow_cpd_window_normalization_pr
 $lines.Add('build bin/wow_button_focus_service_probe.exe: link obj/button_focus_probe.obj')
 $lines.Add('build button-focus-research: phony bin/wow_button_focus_service_probe.exe')
 $lines.Add('build dialog-context-boundaries: phony bin/wow_dialog_context_fixture.exe bin/wow_dialog_creation_entry_fixture.exe bin/wow_dialog_finalization_fixture.exe')
-$lines.Add('build call-boundaries: phony bin/wow_dialog_call_fixture.exe bin/wow_edit_call_fixture.exe bin/wow_edit_memory_callbacks_fixture.exe bin/wow_control_brush_fixture.exe bin/wow_default_window_binding_fixture.exe')
+$lines.Add('build call-boundaries: phony bin/wow_default_messages_fixture.exe bin/wow_dialog_call_fixture.exe bin/wow_edit_call_fixture.exe bin/wow_edit_memory_callbacks_fixture.exe bin/wow_control_brush_fixture.exe bin/wow_default_window_binding_fixture.exe')
 $lines.Add('build bin/wow_edit_lookaside_fixture.exe: link obj/lookaside_fixture.obj obj/capture_owner.obj obj/lookaside_adapter.obj obj/original_globals.obj obj/capture_tls.obj')
 $lines.Add('  libs = ntdll.lib')
 $lines.Add('build bin/wow_edit_conversion_fixture.exe: link obj/conversion_fixture.obj obj/conversion_adapter.obj obj/original_globals.obj')

@@ -76,7 +76,7 @@ try {
     $buildResult | Write-Output
     $result = [int]$buildResult[-1]
     if ($result -eq 0) {
-        $cases = @('wow_dialog_getset_fixture','wow_window_client_message_fixture','wow_dialog_creator_lifetime_fixture','wow_dialog_lifetime_fixture','wow_dialog_call_fixture','wow_edit_call_fixture','wow_edit_memory_callbacks_fixture',
+        $cases = @('wow_dialog_getset_fixture','wow_window_client_message_fixture','wow_dialog_creator_lifetime_fixture','wow_dialog_lifetime_fixture','wow_default_messages_fixture','wow_dialog_call_fixture','wow_edit_call_fixture','wow_edit_memory_callbacks_fixture',
                 'wow_control_brush_fixture','wow_default_window_binding_fixture','wow_dialog_context_fixture',
                 'wow_dialog_creation_entry_fixture','wow_dialog_finalization_fixture','wow_dialog_end_original_fixture','wow_dialog_keyboard_entry_fixture','wow_dialog_mnemonic_lifetime_fixture','wow_dialog_keyboard_lifetime_fixture',
                 'wow_control_string_fixture','wow_text_measure_failure_fixture','wow_mnemonic_drawing_fixture',

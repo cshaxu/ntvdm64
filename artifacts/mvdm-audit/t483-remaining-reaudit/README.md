@@ -1465,3 +1465,7 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P244 delivery](batch-p244-checkpoint.json): queue mirror -63;original parser restored;final cached/publish11x2;focused36/task-order/Full20 with verified final line-only package equivalence;R2627 partial remains pending.
 
 - P245 local whole-file review: [random.c evidence](p245-random-review.json); verified with [P245 receipt](batch-p245-checkpoint.json);Git delivery accompanies receipt.
+
+- P246 [server.c review evidence](p246-server-in-progress.json): original initializer restored;cached full build,publication and runtime gates passed;Git delivery accompanies receipt.
+
+P246 server.c: [review](p246-server-in-progress.json), [delivery](batch-p246-checkpoint.json);original initializer restored,mirror diff reduced269;four residual points pending owner.

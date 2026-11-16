@@ -1,0 +1,274 @@
+{
+  "batch": "P246",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+        "sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_default_message_bindings.h",
+        "sha256": "c82fbec409346e9fcbda8afeb1959f17e215fbb0d6e0f1afd849969b84c02498"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_default_message_bindings.c",
+        "sha256": "85d2b977eae204acc9f474db4a7f9b6fa902daeffec1b4688d314e63c4b811cd"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c",
+        "sha256": "9021dd85912cca85ce69c39be1eefc0217eefcfe0680672ca10d9f852e369e57"
+      },
+      {
+        "path": "test/observation/verify-wow-control-boundaries.ps1",
+        "sha256": "0f0dacd6005ef81d406f541a8b42fcbce555f72c0b105430678d91c2137ec06c"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "372f9eaaaeb44847320f5b32ba4855b98dcdf36cd7177065ca1fe9d1dec58bdf"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_default_messages_faults.h",
+        "sha256": "4075adbc689cbff3490196cbbe5fd6d50f68a54985271630ffb400b8a9f151a2"
+      }
+    ],
+    "deleted": [],
+    "source_files": 7
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+        "sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b"
+      }
+    ],
+    "original_nonempty_lines_checked": 652,
+    "compiler_observed": {
+      "InitWindowMsgTable": 896,
+      "InitMessageTables": 1032,
+      "InitGlobalRIPFlags": 1160
+    }
+  },
+  "publication": {
+    "status": "published",
+    "package": "23f5ae9f-bf4a-4134-b0b1-49e2e9ca545a",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 397388,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6124,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1211,
+        "CleanupMs": 395,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11083,
+        "CleanupMs": 455,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 11022,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10067,
+        "CleanupMs": 374,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 159,
+        "CleanupMs": 398,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65412,
+        "CleanupMs": 342,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44578,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43621,
+        "CleanupMs": 361,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14802,
+        "CleanupMs": 415,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9470,
+        "CleanupMs": 332,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 45977,
+        "CleanupMs": 375,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12710,
+        "CleanupMs": 350,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28515,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30869,
+        "CleanupMs": 352,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3408,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8088,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10331,
+        "CleanupMs": 385,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3763,
+        "CleanupMs": 361,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7066,
+        "CleanupMs": 318,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20061,
+        "CleanupMs": 326,
+        "Passed": true
+      }
+    ]
+  },
+  "focused_log": "build/t483-s5-p246/focused-linked.log",
+  "mirror_diff": {
+    "before": 1958,
+    "after": 1689,
+    "delta": -269,
+    "blocks_before": 18,
+    "blocks_after": 30,
+    "non_error": {
+      "excluded_branches": 14,
+      "excluded_original_body_lines": 131,
+      "original_excluded_intervals_zero_based": [
+        [
+          53,
+          54
+        ],
+        [
+          461,
+          462
+        ],
+        [
+          481,
+          497
+        ],
+        [
+          583,
+          595
+        ],
+        [
+          833,
+          838
+        ],
+        [
+          850,
+          876
+        ],
+        [
+          934,
+          938
+        ],
+        [
+          990,
+          991
+        ],
+        [
+          1002,
+          1018
+        ],
+        [
+          1054,
+          1055
+        ],
+        [
+          1163,
+          1208
+        ],
+        [
+          1703,
+          1704
+        ],
+        [
+          1822,
+          1823
+        ],
+        [
+          1861,
+          1862
+        ]
+      ],
+      "non_error_diff": {
+        "added": 2,
+        "deleted": 1534,
+        "blocks": 21
+      },
+      "scope": "Source frame/line comparison;not a replacement for compiler or runtime evidence"
+    }
+  },
+  "cumulative": {
+    "before": 96981,
+    "after": 96712,
+    "baseline": 119913,
+    "reduction": 23201
+  },
+  "scope": "R2639-R2645;three original/restored points,four residual pending;no guest/zip changes",
+  "git": "Accompanying commit and push required"
+}
