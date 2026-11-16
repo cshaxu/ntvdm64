@@ -1,0 +1,135 @@
+{
+  "status": "In-progress whole-file source audit;not file completion or delivery",
+  "file": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "points": "R2383-R2402",
+  "source_pin": {
+    "head": "de4012edce47a1a806874b4d6541acd070c9e340",
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "current_sha256": "cd1bc65bb851b9b6ccb3f708ee1b79d0af63f9d757b478fad48c8068a34acb98",
+    "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/usercli.h",
+    "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba"
+  },
+  "mirror_before": {
+    "add": 344,
+    "delete": 1826,
+    "total": 2170
+  },
+  "production_modified": false,
+  "context_inventory": {
+    "product_valid_dependency_edges": 45,
+    "focused_valid_dependency_edges": 59,
+    "distinct_command_flags": 33,
+    "context_json_sha256": "4b32e48bcae3a21eef776c162b831f4c28a0edb7057b1e38cde90ef3c867c7b0",
+    "evidence": "build/t483-s5-p236/actual-contexts.json",
+    "additional_supported_context": "test/mvdm-host/wow_page_domain_fixture.c under WOW_WINDOW_BORROW_FIXTURE;not present in current valid worker dependency cache,not excluded"
+  },
+  "paired_compiles": [
+    {
+      "context": "control-body-editec",
+      "results": {
+        "control": {
+          "exit": 0,
+          "log_sha256": "0f8105077fd9d49f658c5891c41583e2b3d9b4cf44918edb2e3372ad6025af93",
+          "first_errors": []
+        },
+        "header-restored": {
+          "exit": 2,
+          "log_sha256": "a93078475c4a2b1c93b7fba1641dac8699d7ed7ba1c4c157695d0b1896062d00",
+          "first_errors": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p236\\header-restored\\non-mvdm/windows/core/ntuser/client/usercli.h(34): fatal error C1083: Cannot open include file: 'ddemlp.h': No such file or directory"
+          ]
+        },
+        "header-closure": {
+          "exit": 2,
+          "log_sha256": "ea0532c61f90a80b940d5b6ad9483e186a67762b98bc112e4a6fd951cb4dd5cf",
+          "first_errors": [
+            "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\\wowuserp.h(13): error C2011: '_NE_MODULE_SEG': 'struct' type redefinition",
+            "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\\wowuserp.h(92): error C2011: 'tagAPFNWOWHANDLERSIN': 'struct' type redefinition",
+            "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\\wowuserp.h(119): error C2011: 'tagAPFNWOWHANDLERSOUT': 'struct' type redefinition"
+          ]
+        },
+        "public-complete": {
+          "exit": 0,
+          "log_sha256": "87714464c58fffb6ae19ab813062479d5b28f5ea1d2e055ae81370b231d322ab",
+          "first_errors": []
+        }
+      }
+    },
+    {
+      "context": "private-word-client",
+      "results": {
+        "control": {
+          "exit": 0,
+          "log_sha256": "80f2080ec7f9651f728ce3d36add87e01df69686ec66d1eba0464412b4a858f4",
+          "first_errors": []
+        },
+        "header-restored": {
+          "exit": 2,
+          "log_sha256": "270ef3c11c541e0cc1552853092776233c28d33a40ad7331b2f189d74367e938",
+          "first_errors": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p236\\header-restored\\non-mvdm/windows/core/ntuser/client/usercli.h(34): fatal error C1083: Cannot open include file: 'ddemlp.h': No such file or directory"
+          ]
+        },
+        "header-closure": {
+          "exit": 2,
+          "log_sha256": "4924732ce9613938050fdc0cd00cae0950a6bdfbc7181e17c449d677bf807dcb",
+          "first_errors": [
+            "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\\wowuserp.h(13): error C2011: '_NE_MODULE_SEG': 'struct' type redefinition",
+            "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\\wowuserp.h(92): error C2011: 'tagAPFNWOWHANDLERSIN': 'struct' type redefinition",
+            "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\\wowuserp.h(119): error C2011: 'tagAPFNWOWHANDLERSOUT': 'struct' type redefinition"
+          ]
+        },
+        "public-complete": {
+          "exit": 0,
+          "log_sha256": "5b0ec38fc562d83cb80f799e851a7f2d8c381811c540605d23e62ccd3036f27b",
+          "first_errors": []
+        }
+      }
+    },
+    {
+      "context": "rtlinit",
+      "results": {
+        "control": {
+          "exit": 0,
+          "log_sha256": "7e0c255978d54bc7c3ea1a915da7ce2611e75b12fd13c573a1b60ced90dcc787",
+          "first_errors": []
+        },
+        "header-restored": {
+          "exit": 2,
+          "log_sha256": "3ab191c1e8ba7d577962172b06f870811aaf6486957e1ce889c1d4eb95602cbc",
+          "first_errors": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p236\\header-restored\\non-mvdm/windows/core/ntuser/client/usercli.h(34): fatal error C1083: Cannot open include file: 'ddemlp.h': No such file or directory"
+          ]
+        },
+        "header-closure": {
+          "exit": 2,
+          "log_sha256": "dc00259a7b0ee898f0bbf6e271cbf0295383ede267a178b27200e4de62113e32",
+          "first_errors": [
+            "O:/repos.external/OpenNT/windows/core/ntuser/inc\\user.h(266): error C2011: '_LARGE_STRING': 'struct' type redefinition",
+            "O:/repos.external/OpenNT/windows/core/ntuser/inc\\user.h(273): error C2011: '_LARGE_ANSI_STRING': 'struct' type redefinition",
+            "O:/repos.external/OpenNT/windows/core/ntuser/inc\\user.h(280): error C2011: '_LARGE_UNICODE_STRING': 'struct' type redefinition"
+          ]
+        },
+        "public-complete": {
+          "exit": 0,
+          "log_sha256": "40a5f9eaacf5e31ef3b8a1d50e3527cdb2e2ba298d23cc1af9fdce9b638d6c6a",
+          "first_errors": []
+        }
+      }
+    }
+  ],
+  "determinations": [
+    "Original public includes windows.h,stddef.h,wingdip.h,ddeml.h,dde.h,memory.h,OEMRESOURCE and complete CFNSCSENDMESSAGE declaration compile in three genuine product contexts. Blanket omission is not justified.",
+    "Full original header prefix fails first at absent ddemlp.h. Original external header search paths pass that point but encounter duplicated original layouts,missing full-private USER dependencies and a RIP_COMPONENT error caused by current relocated exclusion structure. These failures do not prove every individual omission necessary.",
+    "Current capture binding duplicates original IN_STRING/LARGE_IN_STRING declarations. Whole-file candidate should restore canonical original declarations and remove the duplicates rather than add another shim.",
+    "Existing ThreadLock and allocation macros are largely original but moved and locally selected. Their order and selection must be checked across reached contexts before consolidation."
+  ],
+  "invalid_probe": "public-restored omitted line59 of a two-line typedef;discard its failures as generator error. public-complete fixes the probe and passes all3.",
+  "next_actions": [
+    "Finish ordered R2383-R2402 classification against original ranges",
+    "Form one original-order candidate;keep all excluded#error and logical#line",
+    "Check same-header multiple inclusion and original declaration ownership in actual contexts",
+    "Only after the whole file is complete run cached build,publish,focused/Full,commit,push"
+  ],
+  "completion_accounting": "No additional point or file counted complete;no pending-owner entry admitted by these preliminary failures"
+}

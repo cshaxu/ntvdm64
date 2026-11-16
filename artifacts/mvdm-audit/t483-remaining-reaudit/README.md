@@ -1394,3 +1394,5 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P235 rtlinit review](p235-rtlinit-review.json): original large capture restored;single product object;mirror91->16(-75);delivery verified below.
 
 - [P235 delivery](batch-p235-checkpoint.json): rtlinit original large capture and single product object;cached,publish11x2,focused34,Full20;mirror delta-75.
+
+- [P236 usercli investigation](p236-usercli-investigation.json): pinned whole-file audit,104 observed dependency edges and paired header-restoration compiles;no production edit or completion claim.

@@ -60,7 +60,10 @@ Mirror91->16(-75);2 restored points,1 four-line header residual pending.
 Cached x86/x64,34 focused,Full20 including DOS4GW and governance passed.
 Cumulative365-file mirror diff119913->102326(-17587).No guest/winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p235-checkpoint.json).
-Git delivery accompanies receipt;R2383 next.
+Git delivery accompanies receipt. R2383-R2402 usercli whole-file audit is active;
+[paired compile evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/p236-usercli-investigation.json)
+proves the public declaration subset can be restored. No production edit or
+additional completed point/file is claimed;full-file consolidation precedes build.
 
 ## Remaining Scope
 
