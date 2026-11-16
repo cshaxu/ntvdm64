@@ -12,24 +12,21 @@
 \**************************************************************************/
 
 #ifdef UNICODE
-#error Excluded unsupported Unicode class-client configuration
+#error
 #line 19
 #else
+#line 20
 #define IS_ANSI TRUE
 #undef _UNICODE
-#line 22
 #endif
 #line 23
 #include <tchar.h>
 #include "ntsend.h"
-/* DIVERGENCE(OPENNT-HOST-036): retain the complete ANSI class client
- * closure: duplication, menu capture, registration and unregistration.
- * Other text APIs and the private USER precompiled environment are cropped.
- * The consuming translation unit supplies the original-shaped declarations,
- * call/capture macros and finite host bindings; no server engine is imported. */
 
-/* DIVERGENCE(OPENNT-HOST-046): also retain the original ANSI GetClassInfo
- * client body. The private server query is supplied by its finite binding. */
+#line 38
+#ifndef UNICODE
+#line 64
+#endif
 #line 111
 BOOL GetClassInfo(
     HINSTANCE hmod OPTIONAL,
@@ -77,13 +74,107 @@ BOOL GetClassInfo(
     ENDCALL(BOOL);
 }
 
+#line 206
+#ifdef UNICODE
+#error
+#else
+#line 210
+#endif
+#line 217
+#ifndef UNICODE
+#line 228
+#endif
+#line 243
+#ifdef UNICODE
+#error
+#else
+#line 247
+#endif
+#line 254
+#ifndef UNICODE
+#line 265
+#endif
+#line 271
+#ifndef UNICODE
+#line 274
+#endif
+#line 293
+#ifdef FE_SB // GetMessage()
+#error
+#line 301
+#endif // FE_SB
+#line 310
+#ifndef UNICODE
+#line 315
+#ifdef FE_SB // GetMessage()
+#error
+#line 325
+#else
+#line 329
+#endif // FE_SB
+#line 330
+#else
+#error
+#line 338
+#endif // UNICODE
+#line 340
+#ifdef FE_SB // GetMessage()
+#error
+#line 344
+#endif // FE_SB
+#line 353
+#ifdef UNICODE
+#error
+#line 356
+#else
+#line 358
+#endif
+#line 362
+#ifdef UNICODE
+#error
+#line 365
+#endif
+#line 369
+#ifndef UNICODE
+#line 377
+#endif
+#line 395
+#ifndef UNICODE
+#line 402
+#endif
+#line 414
+#ifndef UNICODE
+#line 417
+#endif
+#line 431
+#ifndef UNICODE
+#line 465
+#endif
+#line 514
+#ifndef UNICODE
+#line 515
+#ifdef FE_SB // PostMessage()
+#error
+#line 520
+#endif // FE_SB
+#line 523
+#endif
+#line 549
+#ifndef UNICODE
+#line 550
+#ifdef FE_SB // PostThreadMessage()
+#error
+#line 556
+#endif // FE_SB
+#line 559
+#endif
+#line 572
 /**************************************************************************\
 * StringDuplicate
 *
 * 03-25-96 GerardoB         Added Header.
 \**************************************************************************/
 #define StringDuplicate TEXT_FN(StringDuplicate)
-#line 578
 LPTSTR StringDuplicate(LPCTSTR ptszDup) {
     LPTSTR ptsz;
     ULONG cb;
@@ -107,10 +198,8 @@ BOOL InitClsMenuName (PCLSMENUNAME pcmn, LPCTSTR lpszMenuName, PIN_STRING pstrMe
      * We check the high-word because this may be a resource-ID.
      */
     if (HIWORD(lpszMenuName) != 0) {
-#line 601
 #ifdef UNICODE
-#line 602
-#error Excluded unsupported Unicode class-client menu-name profile
+#error
 #line 609
 #else
 #line 610
@@ -136,21 +225,17 @@ BOOL InitClsMenuName (PCLSMENUNAME pcmn, LPCTSTR lpszMenuName, PIN_STRING pstrMe
 
     goto errorexit; /* Keep the compiler happy */
 errorexit: /* Used by COPYLPTSTRID */
-    /* DIVERGENCE(OPENNT-HOST-037): capture can fail after both client
-     * menu names have been allocated. No class owns them on this path. */
     LocalFree(pcmn->pszClientAnsiMenuName);
     LocalFree(pcmn->pwszClientUnicodeMenuName);
 #line 631
    return FALSE;
 }
-
-/* DIVERGENCE(OPENNT-HOST-036): SetClassLong is outside this client slice. */
+#line 696
 /**************************************************************************\
 * RegisterClassExWOW
 *
 * 03-22-96 GerardoB      Added Header
 \**************************************************************************/
-#line 701
 ATOM TEXT_FN(RegisterClassExWOW)(
     WNDCLASSEX *lpWndClass,
     LPDWORD pdwWOWstuff,
@@ -252,10 +337,8 @@ ATOM TEXT_FN(RegisterClassExWOW)(
 
         WndClass = *lpWndClass;
 
-#line 802
 #ifdef UNICODE
-#line 803
-#error Excluded unsupported Unicode class-client registration profile
+#error
 #else
 #line 805
         dwFlags = CSF_ANSIPROC;
@@ -300,8 +383,31 @@ BadParameter:
 
 }
 
-/* DIVERGENCE(OPENNT-HOST-036): unrelated text APIs between class operations
- * are excluded; retain the original unregister/cleanup body. */
+#line 934
+#ifndef UNICODE
+#line 935
+#ifdef FE_SB // SendMessageCallBack()
+#error
+#line 940
+#endif // FE_SB
+#line 943
+#endif
+#line 976
+#ifndef UNICODE
+#line 977
+#ifdef FE_SB // SendNotifyMessage()
+#error
+#line 982
+#endif // FE_SB
+#line 985
+#endif
+#line 992
+#ifdef UNICODE
+#error
+#line 995
+#else
+#line 1001
+#endif
 #line 1051
 BOOL UnregisterClass(
     LPCTSTR pszClassName,
@@ -341,284 +447,93 @@ BOOL UnregisterClass(
     ENDCALL(BOOL);
 }
 
-/* DIVERGENCE(OPENNT-HOST-036): remaining text API families are excluded. */
-
-
-
-
-#line 362
-#ifdef UNICODE
-#line 363
-#error Excluded unsupported original UNICODE branch
-#line 365
-#endif
-#line 366
-
-
-#line 206
-#ifdef UNICODE
-#line 207
-#error Excluded unsupported original UNICODE branch
-#else
-#line 209
-#line 210
-#endif
-#line 211
-
-#line 243
-#ifdef UNICODE
-#line 244
-#error Excluded unsupported original UNICODE branch
-#else
-#line 246
-#line 247
-#endif
-#line 248
-
-#line 353
-#ifdef UNICODE
-#line 354
-#error Excluded unsupported original UNICODE branch
-#line 356
-#else
-#line 357
-#line 358
-#endif
-#line 359
-
-#line 992
-#ifdef UNICODE
-#line 993
-#error Excluded unsupported original UNICODE branch
-#line 995
-#else
-#line 996
-#line 1001
-#endif
-#line 1002
-
 #line 1096
 #ifdef UNICODE
-#line 1097
-#error Excluded unsupported original UNICODE branch
+#error
 #else
-#line 1099
 #line 1100
 #endif // UNICODE
-#line 1101
-
+#line 1111
+#ifndef UNICODE
+#line 1114
+#endif
 #line 1122
 #ifdef UNICODE
-#line 1123
-#error Excluded unsupported original UNICODE branch
+#error
 #else
-#line 1125
 #line 1152
 #endif // UNICODE
-#line 1153
+#line 1191
+#ifndef UNICODE
+#line 1207
+#else
+#error
+#line 1213
+#endif
+#line 1222
+BOOL EnumDisplaySettings(
+    LPCTSTR   lpszDeviceName,
+    DWORD     iModeNum,
+    LPDEVMODE lpDevMode)
+{
+
+    //
+    // Work-around Win95 problem which does not require the caller
+    // to initialize these two fields.
+    //
+
+    lpDevMode->dmDriverExtra = 0;
+    lpDevMode->dmSize = FIELD_OFFSET(DEVMODE, dmICMMethod);
+
+    return EnumDisplaySettingsEx(lpszDeviceName, iModeNum, lpDevMode, 0);
+}
+
+#line 1295
+#ifndef UNICODE
+#line 1297
+#endif
+#line 1317
+#ifndef UNICODE
+#line 1349
+#else
+#error
+#line 1354
+#endif
+#line 1389
+LONG ChangeDisplaySettings(
+    LPDEVMODE lpDevMode,
+    DWORD     dwFlags)
+{
+
+    /*
+     * Compatibility
+     */
+    if (lpDevMode)
+        lpDevMode->dmDriverExtra = 0;
+
+    return ChangeDisplaySettingsEx(NULL, lpDevMode, NULL, dwFlags, NULL);
+}
 
 #line 1434
 #ifdef UNICODE
-#line 1435
-#error Excluded unsupported original UNICODE branch
+#error
 #line 1449
 #else
-#line 1450
 #line 1468
 #endif
-#line 1469
-
-
-#line 293
-#ifdef FE_SB // GetMessage()
-#line 294
-#error Unsupported FE_SB original branch
-#line 301
-#endif // FE_SB
-#line 302
-
-#line 340
-#ifdef FE_SB // GetMessage()
-#line 341
-#error Unsupported FE_SB original branch
-#line 344
-#endif // FE_SB
-#line 345
-
-#line 310
-#ifndef UNICODE
-#line 311
-#line 315
-#ifdef FE_SB // GetMessage()
-#line 316
-#error Excluded unsupported original text-client condition
-#line 325
-#else
-#line 326
-#line 329
-#endif
-#line 330
-#else
-#line 331
-#error Unsupported UNICODE original branch
-#line 338
-#endif // UNICODE
-#line 339
-
-#line 1191
-#ifndef UNICODE
-#line 1192
-#line 1207
-#else
-#line 1208
-#error Unsupported UNICODE original branch
-#line 1213
-#endif
-#line 1214
-
-#line 1317
-#ifndef UNICODE
-#line 1318
-#line 1349
-#else
-#line 1350
-#error Unsupported UNICODE original branch
-#line 1354
-#endif
-#line 1355
-
-#line 38
-#ifndef UNICODE
-#line 39
-#line 64
-#endif
-#line 65
-#line 217
-#ifndef UNICODE
-#line 218
-#line 228
-#endif
-#line 229
-#line 254
-#ifndef UNICODE
-#line 255
-#line 265
-#endif
-#line 266
-#line 271
-#ifndef UNICODE
-#line 272
-#line 274
-#endif
-#line 275
-#line 369
-#ifndef UNICODE
-#line 370
-#line 377
-#endif
-#line 378
-#line 395
-#ifndef UNICODE
-#line 396
-#line 402
-#endif
-#line 403
-#line 414
-#ifndef UNICODE
-#line 415
-#line 417
-#endif
-#line 418
-#line 431
-#ifndef UNICODE
-#line 432
-#line 465
-#endif
-#line 466
-#line 514
-#ifndef UNICODE
-#line 515
-#line 515
-#ifdef FE_SB // PostMessage()
-#line 516
-#error Excluded unsupported original text-client condition
-#line 520
-#endif
-#line 521
-#line 523
-#endif
-#line 524
-#line 549
-#ifndef UNICODE
-#line 550
-#line 550
-#ifdef FE_SB // PostThreadMessage()
-#line 551
-#error Excluded unsupported original text-client condition
-#line 556
-#endif
-#line 557
-#line 559
-#endif
-#line 560
-#line 934
-#ifndef UNICODE
-#line 935
-#line 935
-#ifdef FE_SB // SendMessageCallBack()
-#line 936
-#error Excluded unsupported original text-client condition
-#line 940
-#endif
-#line 941
-#line 943
-#endif
-#line 944
-#line 976
-#ifndef UNICODE
-#line 977
-#line 977
-#ifdef FE_SB // SendNotifyMessage()
-#line 978
-#error Excluded unsupported original text-client condition
-#line 982
-#endif
-#line 983
-#line 985
-#endif
-#line 986
-#line 1111
-#ifndef UNICODE
-#line 1112
-#line 1114
-#endif
-#line 1115
-#line 1295
-#ifndef UNICODE
-#line 1296
-#line 1297
-#endif
-#line 1298
 #line 1505
 #ifndef UNICODE
-#line 1506
 #line 1507
 #ifdef FE_SB // CallMsgFilter()
-#line 1508
-#error Excluded unsupported original text-client condition
+#error
 #line 1517
 #else
-#line 1518
 #line 1520
-#endif
-#line 1521
+#endif // FE_SB
 #line 1526
 #ifdef FE_IME // CallMsgFilter()
-#line 1527
-#error Excluded unsupported original text-client condition
+#error
 #line 1529
-#endif
-#line 1530
+#endif // FE_IME
 #line 1534
-#endif
-#line 1535
+#endif //!UNICODE

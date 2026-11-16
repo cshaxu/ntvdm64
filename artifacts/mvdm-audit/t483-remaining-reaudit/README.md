@@ -1415,3 +1415,9 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [Final local subset and line review](p238-wow-review.json): client/wow.c, R2427–R2436, mirror1059→1046(−13); delivery verified below.
 
 - [P238 delivery](batch-p238-checkpoint.json): wow.c selected original subset restored;cached,publish11x2,focused34,Full20;fixed mirror metric1059->1046(-13).
+
+### P239 whole-file audit
+
+- [Review](p239-ntcftxt-review.json) and [counter-review evidence](p239-ntcftxt-investigation.json): R2437-R2448 ntcftxt.h;mirror1373->1205(-168),421 original logical rows,23 error bodies. Two display wrappers restored; six residual native-boundary/cleanup decisions. Delivery verified below;Git delivery accompanies receipt.
+
+- [P239 delivery](batch-p239-checkpoint.json): ntcftxt.h selected original subset restored;cached,publish11x2,focused34,Full20;fixed mirror metric1373->1205(-168).

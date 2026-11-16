@@ -1,0 +1,139 @@
+{
+  "batch": "P239",
+  "file": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/inc/ntcftxt.h",
+  "baseline_commit": "1cd0d2b3e920ab89e7d9e631c09febf00466c9b0",
+  "baseline_sha256": "bb3570387c93050ab73b346fb304e599eaf05d3b11fec82efb6da920f0c34244",
+  "final_sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb",
+  "before": {
+    "added": 119,
+    "deleted": 1254,
+    "total": 1373
+  },
+  "after": {
+    "added": 34,
+    "deleted": 1171,
+    "total": 1205
+  },
+  "mirror_diff_delta": -168,
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+        "sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb",
+        "exact_original_logical_rows": 421,
+        "error_bodies": 23,
+        "explained_nonoriginal_rows": [
+          {
+            "physical": 228,
+            "logical": 631,
+            "text": "    LocalFree(pcmn->pszClientAnsiMenuName);"
+          },
+          {
+            "physical": 229,
+            "logical": 632,
+            "text": "    LocalFree(pcmn->pwszClientUnicodeMenuName);"
+          }
+        ],
+        "unexplained_line_mismatches": 0,
+        "status": "Whole-file candidate applied; full validation pending",
+        "conditional_structure": {
+          "original_outer_directives": 91,
+          "final_directives": 91,
+          "exact_original_order": true,
+          "excluded_bodies_bare_error_only": 23,
+          "nested_frameworks_under_excluded_body": 0
+        }
+      }
+    ]
+  },
+  "points": [
+    {
+      "review_id": "T483-R2437",
+      "scope": "Original ANSI preamble and Unicode excluded framework",
+      "decision": "restored-selected-original-or-policy-subset",
+      "evidence": "Pinned original body/framework and final logical-line proof",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2438",
+      "scope": "Native accelerators and window discovery",
+      "decision": "pending-owner-native-boundary-or-cleanup",
+      "evidence": "CopyAcceleratorTable native handle consumer in waccel.c; original restoration duplicates USER32 symbol and requires NtUserCopyAcceleratorTable. FindWindow native provider uses USER32; direct original definition duplicates symbol; FindWindowEx requires private capture/server services.",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2439",
+      "scope": "Class metadata, clipboard names, keyboard layout and message queue APIs",
+      "decision": "pending-owner-native-boundary-or-cleanup",
+      "evidence": "GetClassInfoEx private query maps to query_native, which calls modern GetClassInfoExA; rebinding that name to original would recurse. Other APIs consume native USER queue/layout state and original private NtUser protocols do not link in 10 independent controls.",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2440",
+      "scope": "Native clipboard/message registration and property ownership",
+      "decision": "pending-owner-native-boundary-or-cleanup",
+      "evidence": "Original RemoveProp/SetProp encode atom ownership in packed DWORD and manage GlobalAtom references across NtUser service; modern USER owns this protocol. All six direct original restoration controls require unavailable private providers; existing callers use native APIs.",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2441",
+      "scope": "Native key/display/filter APIs; two standalone display wrappers restored",
+      "decision": "pending-owner-native-boundary-or-cleanup",
+      "evidence": "Per-function controls identify private keyboard/display/filter/DC services. EnumDisplaySettings and ChangeDisplaySettings are exceptions: compile/link pass and are restored unchanged. Remaining omissions do not include these wrappers.",
+      "partial_restoration": true
+    },
+    {
+      "review_id": "T483-R2442",
+      "scope": "Original GetClassInfo preserved",
+      "decision": "restored-selected-original-or-policy-subset",
+      "evidence": "Pinned original body/framework and final logical-line proof",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2443",
+      "scope": "Original StringDuplicate preserved",
+      "decision": "restored-selected-original-or-policy-subset",
+      "evidence": "Pinned original body/framework and final logical-line proof",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2444",
+      "scope": "InitClsMenuName capture-failure cleanup",
+      "decision": "pending-owner-native-boundary-or-cleanup",
+      "evidence": "Real 65536-character menu capture: original RtlCaptureAnsiString rejects MAXUSHORT overflow after two allocations; original 2 allocated/0 freed, current 2/2. Caller returns on failure without subsequent cleanup; normal-success controls pass.",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2445",
+      "scope": "Native SetClassLong private menu ABI boundary",
+      "decision": "pending-owner-native-boundary-or-cleanup",
+      "evidence": "Original menu branch sends CLSMENUNAME and expects kernel to return old client strings for freeing; native SetClassLongA accepts menu string. Original WOW caller and current private-access adapter reach native provider; restoring NT4 private protocol is not an ABI-compatible substitution.",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2446",
+      "scope": "Original RegisterClassExWOW and excluded Unicode branch",
+      "decision": "restored-selected-original-or-policy-subset",
+      "evidence": "Pinned original body/framework and final logical-line proof",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2447",
+      "scope": "Original UnregisterClass",
+      "decision": "restored-selected-original-or-policy-subset",
+      "evidence": "Pinned original body/framework and final logical-line proof",
+      "partial_restoration": false
+    },
+    {
+      "review_id": "T483-R2448",
+      "scope": "Original conditional order, bare errors and logical lines",
+      "decision": "restored-selected-original-or-policy-subset",
+      "evidence": "Pinned original body/framework and final logical-line proof",
+      "partial_restoration": false
+    }
+  ],
+  "validation": "Cached x86/x64,publish11x2,focused34,Full20,shared-boundary/governance/links passed;Git delivery accompanies receipt",
+  "evidence": "p239-ntcftxt-investigation.json",
+  "delivery_receipt": "batch-p239-checkpoint.json"
+}

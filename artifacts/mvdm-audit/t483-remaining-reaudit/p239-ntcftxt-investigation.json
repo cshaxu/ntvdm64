@@ -1,0 +1,312 @@
+{
+  "batch": "P239",
+  "file": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "baseline_commit": "1cd0d2b3e920ab89e7d9e631c09febf00466c9b0",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/inc/ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "baseline_sha256": "bb3570387c93050ab73b346fb304e599eaf05d3b11fec82efb6da920f0c34244",
+  "before": {
+    "added": 119,
+    "deleted": 1254,
+    "total": 1373
+  },
+  "point_range": [
+    "T483-R2437",
+    "T483-R2448"
+  ],
+  "status": "Whole-file source/counter-review complete;cached full,publish11x2,focused34,Full20 passed;Git delivery accompanies receipt",
+  "evidence": [
+    "Production client.c selects ntcftxt through WOW_ORIGINAL_CLASS_CLIENT;actual Ninja flags define ANSI,not UNICODE.",
+    "wow_class_client_bindings.h concrete declarations use WNDCLASSEXA/LPCSTR and ANSI original entrynames;Unicode restoration cannot be selected as an interchangeable ABI.",
+    "Original menu capture allocates ANSI and Unicode names before COPYLPTSTRID;caller returns immediately on InitClsMenuName failure before its ordinary cleanup. Existing registration fixture distinguishes original two-allocation leak from mirror cleanup. Must verify this against real capture failure route."
+  ],
+  "provider_controls": [
+    {
+      "function": "CopyAcceleratorTable",
+      "original_line": 26,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\CopyAcceleratorTable.log",
+      "link_log": "build\\t483-s5-p239\\CopyAcceleratorTable-link.log"
+    },
+    {
+      "function": "FindWindowEx",
+      "original_line": 70,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\FindWindowEx.log",
+      "link_log": "build\\t483-s5-p239\\FindWindowEx-link.log"
+    },
+    {
+      "function": "FindWindow",
+      "original_line": 102,
+      "compile_exit": 0,
+      "link_exit": 1169,
+      "compile_log": "build\\t483-s5-p239\\FindWindow.log",
+      "link_log": "build\\t483-s5-p239\\FindWindow-link.log"
+    },
+    {
+      "function": "GetClassInfoEx",
+      "original_line": 157,
+      "compile_exit": 0,
+      "link_exit": 1169,
+      "compile_log": "build\\t483-s5-p239\\GetClassInfoEx.log",
+      "link_log": "build\\t483-s5-p239\\GetClassInfoEx-link.log"
+    },
+    {
+      "function": "GetClipboardFormatName",
+      "original_line": 197,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetClipboardFormatName.log",
+      "link_log": "build\\t483-s5-p239\\GetClipboardFormatName-link.log"
+    },
+    {
+      "function": "GetKeyNameText",
+      "original_line": 234,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetKeyNameText.log",
+      "link_log": "build\\t483-s5-p239\\GetKeyNameText-link.log"
+    },
+    {
+      "function": "GetMessage",
+      "original_line": 276,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetMessage.log",
+      "link_log": "build\\t483-s5-p239\\GetMessage-link.log"
+    },
+    {
+      "function": "GetKeyboardLayoutName",
+      "original_line": 350,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetKeyboardLayoutName.log",
+      "link_log": "build\\t483-s5-p239\\GetKeyboardLayoutName-link.log"
+    },
+    {
+      "function": "MapVirtualKey",
+      "original_line": 383,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\MapVirtualKey.log",
+      "link_log": "build\\t483-s5-p239\\MapVirtualKey-link.log"
+    },
+    {
+      "function": "MapVirtualKeyEx",
+      "original_line": 418,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\MapVirtualKeyEx.log",
+      "link_log": "build\\t483-s5-p239\\MapVirtualKeyEx-link.log"
+    },
+    {
+      "function": "PostMessage",
+      "original_line": 471,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\PostMessage.log",
+      "link_log": null
+    },
+    {
+      "function": "PostThreadMessage",
+      "original_line": 534,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\PostThreadMessage.log",
+      "link_log": "build\\t483-s5-p239\\PostThreadMessage-link.log"
+    },
+    {
+      "function": "SetClassLong",
+      "original_line": 639,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\SetClassLong.log",
+      "link_log": null
+    },
+    {
+      "function": "RegisterClipboardFormat",
+      "original_line": 846,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\RegisterClipboardFormat.log",
+      "link_log": "build\\t483-s5-p239\\RegisterClipboardFormat-link.log"
+    },
+    {
+      "function": "RegisterWindowMessage",
+      "original_line": 867,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\RegisterWindowMessage.log",
+      "link_log": "build\\t483-s5-p239\\RegisterWindowMessage-link.log"
+    },
+    {
+      "function": "RemoveProp",
+      "original_line": 889,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\RemoveProp.log",
+      "link_log": "build\\t483-s5-p239\\RemoveProp-link.log"
+    },
+    {
+      "function": "SendMessageCallback",
+      "original_line": 917,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\SendMessageCallback.log",
+      "link_log": "build\\t483-s5-p239\\SendMessageCallback-link.log"
+    },
+    {
+      "function": "SendNotifyMessage",
+      "original_line": 957,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\SendNotifyMessage.log",
+      "link_log": "build\\t483-s5-p239\\SendNotifyMessage-link.log"
+    },
+    {
+      "function": "SetProp",
+      "original_line": 1018,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\SetProp.log",
+      "link_log": "build\\t483-s5-p239\\SetProp-link.log"
+    },
+    {
+      "function": "VkKeyScan",
+      "original_line": 1089,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\VkKeyScan.log",
+      "link_log": "build\\t483-s5-p239\\VkKeyScan-link.log"
+    },
+    {
+      "function": "VkKeyScanEx",
+      "original_line": 1115,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\VkKeyScanEx.log",
+      "link_log": "build\\t483-s5-p239\\VkKeyScanEx-link.log"
+    },
+    {
+      "function": "EnumDisplayDevices",
+      "original_line": 1163,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\EnumDisplayDevices.log",
+      "link_log": "build\\t483-s5-p239\\EnumDisplayDevices-link.log"
+    },
+    {
+      "function": "EnumDisplaySettings",
+      "original_line": 1222,
+      "compile_exit": 0,
+      "link_exit": 0,
+      "compile_log": "build\\t483-s5-p239\\EnumDisplaySettings.log",
+      "link_log": "build\\t483-s5-p239\\EnumDisplaySettings-link.log"
+    },
+    {
+      "function": "EnumDisplaySettingsEx",
+      "original_line": 1239,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\EnumDisplaySettingsEx.log",
+      "link_log": null
+    },
+    {
+      "function": "ChangeDisplaySettings",
+      "original_line": 1389,
+      "compile_exit": 0,
+      "link_exit": 0,
+      "compile_log": "build\\t483-s5-p239\\ChangeDisplaySettings.log",
+      "link_log": "build\\t483-s5-p239\\ChangeDisplaySettings-link.log"
+    },
+    {
+      "function": "ChangeDisplaySettingsEx",
+      "original_line": 1403,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\ChangeDisplaySettingsEx.log",
+      "link_log": "build\\t483-s5-p239\\ChangeDisplaySettingsEx-link.log"
+    },
+    {
+      "function": "CallMsgFilter",
+      "original_line": 1480,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\CallMsgFilter.log",
+      "link_log": null
+    },
+    {
+      "function": "DrawCaptionTemp",
+      "original_line": 1544,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\DrawCaptionTemp.log",
+      "link_log": "build\\t483-s5-p239\\DrawCaptionTemp-link.log"
+    }
+  ],
+  "menu_capture_counterexample": {
+    "input": "65536 ANSI characters, no injected allocation failure",
+    "real_capture": "original RtlCaptureAnsiString rejects length exceeding MAXUSHORT",
+    "original": {
+      "allocations": 2,
+      "frees": 0,
+      "retained": 2
+    },
+    "current": {
+      "allocations": 2,
+      "frees": 2,
+      "retained": 0
+    },
+    "normal_capture_cleanup": "both pass",
+    "production_changed": false,
+    "logs": [
+      "build\\t483-s5-p239\\menu-original-run.log",
+      "build\\t483-s5-p239\\menu-current-run.log"
+    ]
+  },
+  "limitations": [
+    "Compile/link controls distinguish direct restoration from a redesigned native boundary; missing private providers alone do not prove every omitted implementation necessary.",
+    "EnumDisplaySettings and ChangeDisplaySettings individually compile/link successfully; exclude them from original-restoration failure claims.",
+    "No product edit, package build, publication or runtime acceptance performed for P239."
+  ],
+  "combined_candidate": {
+    "sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb",
+    "added": 34,
+    "deleted": 1171,
+    "total": 1205,
+    "reduction": 168,
+    "compile_link_exit": 0,
+    "line_proof": {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb",
+      "exact_original_logical_rows": 421,
+      "error_bodies": 23,
+      "explained_nonoriginal_rows": [
+        {
+          "physical": 228,
+          "logical": 631,
+          "text": "    LocalFree(pcmn->pszClientAnsiMenuName);"
+        },
+        {
+          "physical": 229,
+          "logical": 632,
+          "text": "    LocalFree(pcmn->pwszClientUnicodeMenuName);"
+        }
+      ],
+      "unexplained_line_mismatches": 0,
+      "status": "candidate only; product unchanged"
+    },
+    "remaining_review": "Resolved: no existing source caller or def export for restored wrappers; C4273 is SDK import/definition coexistence, no failed link or suppressed diagnostic.",
+    "production_modified": true
+  },
+  "counter_review": {
+    "method": "single-agent independent source/compile/link/capture counter-review",
+    "rejected_blanket_claim": "Full original header failure does not establish every omitted function is required to remain omitted. Two display wrappers compile/link and are restored.",
+    "native_boundary": "Private NtUser atom/string/message/class protocols are not interchangeable with modern USER public arguments. GetClassInfoEx restoration would recurse through query_native if substituted for its native provider.",
+    "cleanup": "Real original capture length rejection leaks two allocations without existing cleanup; normal success and both failure paths measured.",
+    "warnings": "C4273 for restored public display wrappers is recorded, not suppressed. Neither has current source callers or def exports; product candidate link resolves Ex calls to USER32. No existing call chain redirected.",
+    "line_review": "421 exact original logical rows,23 outer excluded bodies,2 explained existing cleanup statements;no unexplained mismatches."
+  }
+}
