@@ -1,0 +1,31 @@
+{
+  "base_evidence": "cumulative-diff-p209.json",
+  "baseline_commit": "4cf4e5a35546249a003387a3a7df79037e6985ac",
+  "files": 365,
+  "metric": "Original-relative added+deleted lines;normalize CRLF/LF;exclude diagnostic #line directives;include mandated #error subset differences;one before/after comparison per file",
+  "unchanged_current_hashes": 363,
+  "changed": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "previous_sha256": "f6a3e397e878eccf05b5126b3c68cbfefb33cda2e058adf239da2bff6c74b7f8",
+      "current_sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+      "previous_total": 13,
+      "current_total": 13,
+      "reduction": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "previous_sha256": "534aad7024d6429f5dc5c8aa8a133596781429e76d94c1a04a97d9055d56a611",
+      "current_sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+      "previous_total": 1268,
+      "current_total": 363,
+      "reduction": 905
+    }
+  ],
+  "baseline_total": 119913,
+  "current_total": 112172,
+  "net_reduction": 7741,
+  "reduced_files": 221,
+  "increased_files": 1,
+  "unchanged_files": 143
+}

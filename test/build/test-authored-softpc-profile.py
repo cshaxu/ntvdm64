@@ -59,7 +59,7 @@ def main():
             leaked = sorted(defined & FLAGS)
             if "WIN32" in defined:
                 leaked.append("WIN32")
-            if architecture == "msvc-x64-release" and "OPENNT_ADAPTER_NT_ALERT_THREAD" in defined:
+            if "OPENNT_ADAPTER_NT_ALERT_THREAD" in defined:
                 leaked.append("OPENNT_ADAPTER_NT_ALERT_THREAD")
             if leaked:
                 failures.append(f"{architecture}/{tree}: {source}: {', '.join(leaked)}")

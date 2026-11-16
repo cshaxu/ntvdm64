@@ -1,9 +1,9 @@
 # WOW32 DLL target component
 
-The project-named `include/ntpsapi_wow32.h` and `include/nturtl_wow32.h`
-carry the original source-derived WOW32 declarations and are owned here,
-rather than masquerading as original OpenNT filenames. Their content and
-selection are unchanged by the source-layout move.
+The original ntpsapi.h now owns the thread structure and service declarations.
+`include/ntpsapi_wow32.h` supplies only the ThreadBasicInformation ordinal
+omitted by the modern SDK enum. `include/nturtl_wow32.h` carries the remaining
+source-derived WOW32 declarations.
 
 ADAPTER-WOW-108 preserves the first error from the window-retirement sweep
 while continuing all later pending retirements and releases. A controlled

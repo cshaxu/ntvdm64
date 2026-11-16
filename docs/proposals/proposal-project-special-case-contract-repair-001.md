@@ -38,7 +38,7 @@ Hooks 及 NTVDM/WOW 项目适配进行字符串比较、固定路径/文件名�
 | H04 | run16 分类失败后统一转为 `COMSPEC /c`。 | 区分 shell 请求/允许的未找到结果、无效映像、访问失败和不支持类型；保留原错误，不通过启动另一程序伪装成功。测试坏映像、拒绝访问、缺失文件、built-in、batch、显式路径和明确 shell 调用。 |
 | H05 | [Hook create_process.c](../../src/nthook32-dll/create_process.c) 的 `legacy_application` 填写 resolved；非 legacy 创建仍用该路径替换原 application。 | 确认正常 native 创建是否有明确的产品搜索覆盖合同。没有覆盖依据时保留调用者 A/W application、command、环境、目录和标志；legacy 重定向消费共同搜索且保留尾部。不能撤销已批准的 legacy 发现规则或破坏双位宽 Hook。 |
 | H06 | 同文件 `command_tail` 按首个引号/空白截取 executable token，用于搜索及重定向。 | 有限 parser 不扩散为所有 CreateProcess 的替代解析器。测试显式 application 与不一致 argv[0]、未加引号的带空格路径、引号/空白、长路径及原 A/W 错误行为；按实际合同选择最小适配。 |
-| H07 | [nt_thread_alert_compat.c](../../src/ntvdm-exe/win32/nt_thread_alert_compat.c) 无原 NtAlertThread 时 QueueUserAPC 并返回成功，注释承认不通用等价。 | 优先原同形调用。fallback 只在已证明的等待合同内适用；对无法等价的边界明确失败。验证 pending alert、alertable/non-alertable 等待、返回原因、无导出分支及生命周期，不能以 APC 入队成功代表 NT alert 完成。 |
+| H07 | 历史 NtAlertThread 的 APC fallback 已删除；T483 S5 P211 进一步移除了本地动态转发，恢复 [原版导入声明](../../src/non-mvdm/public/sdk/inc/ntpsapi.h)，生产映射绑定 ntdll.dll。 | x86/x64 原生 alert 与退出专项、Full 已通过；不再保留 APC fallback 或缺少导出时的伪成功路径。最终交付记录纳入当前审计清单。 |
 | H08 | [wow_public_user_facade.c](../../src/wow32-dll/source/wow_public_user_facade.c) 字体跟踪搜索宿主 Windows/fonts 和默认 SearchPath，其他 guest 系统目录采用产品根。 | 取证区分宿主 GDI 字体与 guest 资源所有权。保留源定义的宿主字体合同或修复实际混用；不能机械替换 GetWindowsDirectory。验证相对/绝对/远程字体、同名冲突和 task cleanup。与后续 WOW 字体包共享唯一修复归属。 |
 | H09 | run16/Hook 的 MAX_PATH token/result 与 common 较大搜索缓冲区容量不一致。 | 明确 DOS 原始容量与 native 容量，避免 DOS 限制无依据扩散到 native。验证长度边界、截断、短名不可用、Unicode/ANSI 不可表示错误，不修改历史 guest 结构来扩大容量。 |
 | H10 | [console_text.c](../../src/ntvdm-exe/win32/console_text.c) 将发布 ERROR_NOT_READY 转成成功，以忽略 handoff 后旧 owner 画面。 | 证明允许忽略的 stale/inactive 发布与真正未就绪故障能够区分；必要时用明确状态/结果表示。验证旧画面不覆盖新 owner、真实故障不被吞掉、下次完整刷新与关闭；不能恢复 receiver 帧过滤或移除屏障。 |
@@ -171,13 +171,12 @@ owner；测试相对/绝对/远程字体、同名冲突和 task cleanup。若根
 CURRENT、证据与发布记录。S9 不新增另一项特判修复；它只消费前序
 S 的结果并按规则提交所有者验收。
 
-### S13 — NtAlertThread fallback 合同（H07）
+### S13 — NtAlertThread fallback 合同（H07，已由 T483 S5 P211 实施）
 
-只审计并修复 `nt_thread_alert_compat.c` 在原 `NtAlertThread` 未导出时
-以 `QueueUserAPC` 替代的边界。先通过 pending alert、alertable 和
-non-alertable wait、返回原因及 worker 关闭证明实际语义；仅在被证明
-等价的等待合同中保留 fallback。不能等价的路径必须保留真实失败，不能把
-APC 入队成功报成已经 alert。不得改 guest、增加轮询或另造调度器。
+历史 fallback 已移除；P211 现以原版 `NTSYSAPI NtAlertThread` 直接绑定
+宿主 ntdll，删除本地转发文件和选择宏。x86/x64 原生失败返回、alertable
+唤醒、会话线程与退出专项及 Full 已通过。后续任务不再重复实施此项；
+最终交付状态以当前审计清单为准。
 
 ### S14 — 前端 stale `ERROR_NOT_READY` 发布合同（H10）
 

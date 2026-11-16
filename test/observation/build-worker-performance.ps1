@@ -26,7 +26,7 @@ if($entry.Count -ne 1){throw 'Selected worker link missing/ambiguous'}
 $inputs=($entry[0] -replace '^.*: worker_link ','') -split ' '
 $objects=@()
 $compileArgs=@('/nologo','/c','/MT','/O2','/W4','/WX','/wd4201','/std:c11',
-    '/D_NO_CRT_STDIO_INLINE','/DWIN32','/DWINNT','/DOPENNT_ADAPTER_NT_ALERT_THREAD',
+    '/D_NO_CRT_STDIO_INLINE','/DWIN32','/DWINNT',
     '/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION','/DNTVDM','/DCPU_40_STYLE','/DNEW_CPU',
     '/DCCPU','/DC_VID','/DSPC386','/DSIM32','/DV7VGA','/DANSI','/DPROD',
     "/FI$repo/src/compat/include/nt.h",

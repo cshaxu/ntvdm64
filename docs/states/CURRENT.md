@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2050 reviewed:720 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1322 qualified pending;670 unreviewed. Files296/365 audited,69 remain.
+2056 reviewed:723 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1325 qualified pending;664 unreviewed. Files297/365 audited,68 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -176,10 +176,6 @@ P186 apimsg533->7(-526):original descriptors and complete function bodies restor
 
 P187 apisrv1067->190(-877):original linkable bodies and error semantics restored;includes4 and Enum3 omission180 pending,excluded6 retained.901 source/607 MSVC lines match;focused37,cached,publish11x2,Full passed. Original C4701 remains disclosed;RDP shared Clipboard still fails with external holders. Git accompanies receipt.
 
-P204 netlib.h21 unchanged(all excluded),raw33->25(-8):original boundary lines and CRLF restored;5#error retained;directives12->4.14 contexts tokens/186 header lines equal;4 negative controls;451 source lines match. P187 product evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p204-checkpoint.json).
-
-P205 rap.h31 unchanged(all excluded),raw33 unchanged:endif140 corrected;Unicode#error retained;19 contexts/57 preprocessings tokens and104 header lines equal;282 source lines match;Unicode negative passes. P187 product reused. Current RDP Clipboard18 passed after removing evidenced RadeonSoftware occupancy;earlier failures retained in receipts. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p205-checkpoint.json).
-
 P206 rapdebug.h8 unchanged(all excluded),raw12->10(-2):else60 restored;DBG#error retained;2 actual contexts/6 preprocessings equal;35 source lines match;DBG negative passes. P187 product and P205 RDP evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p206-checkpoint.json).
 
 P207 winddi.h41 unchanged(all excluded),raw44->43(-1):else2406 restored;_X86_#error retained;actual WOW32 fax context tokens/1357 lines equal;2040 source lines match;negative passes. P187 product and P205 RDP evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p207-checkpoint.json).
@@ -188,3 +184,5 @@ P208 ntcsrmsg.h6->4(-2),raw7->4(-3):original comments/natural lines restored;two
 P209 ntexapi.h1777->1188(-589):ordinary original declarations restored;11 points restored/confirmed,7 SDK/shared-type boundaries pending;531 retained lines match;9 errors retained,6 negative profiles. Cached full x86/x64,publish11x2,isolated Full passed;external DOS4GW fixture remains skip. Package bf035245-2b15-4945-8aac-0d8751d60635. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p209-checkpoint.json).
 
 P210 ntlpcapi.h13 unchanged(all excluded),raw24->17(-7):else48/endif134 restored;5 errors retained;11 line directives reduced to4.28 actual contexts/84 preprocessings tokens and212 header lines match;285 retained source lines match;3 negative controls. P209 product reused;365-file cumulative mirror reduction6836 unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p210-checkpoint.json).
+
+P211 ntpsapi.h1268->363(-905),raw1313->411(-902):original declarations and imported NtAlertThread restored;local forwarder removed;WOW duplicate declarations removed;3 restored,3 precise SDK/PEB residuals pending.729 source lines and339/340 selected lines match;5 errors retained. Final cached,publish11x2,Full,focused x86/x64 thread tests passed;external DOS4GW skip. Cumulative365-file reduction7741. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p211-checkpoint.json).

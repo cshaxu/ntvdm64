@@ -34,34 +34,35 @@ $sources = @(
     'src/ntvdm-exe/session/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c',
     'src/common/worker-thread/bridge.c',
-    'src/ntvdm-exe/win32/nt_thread_alert_compat.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c',
     'test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',
     'test/adapter-mvdm-host-out/thread_start_session_fixture.c',
     'test/adapter-mvdm-host-out/softpc/softpc_event_thread_shutdown_fixture.c',
-    'src/lib-win32/thread/thread.c'
+    'src/lib-win32/thread/thread.c',
+    'src/ntvdm-exe/win32/ccpu_thread_exit_compat.c'
 )
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes /I "' +
     (NinjaPath (Join-Path $root 'src')) + '" /I "' +
     (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' +
+    (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '" /I "' +
     (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule link')
-$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /out:$out $in kernel32.lib')
+$graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /out:$out $in kernel32.lib ntdll.lib')
 $graph.Add('rule run')
 $graph.Add('  command = $in')
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = 'obj/' + $index + '-' + ([IO.Path]::GetFileNameWithoutExtension($sources[$index])) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $sources[$index])))
 }
-$graph.Add('build nt-thread-alert-fixture.exe: link obj/3-nt_thread_alert_compat.obj obj/5-nt_thread_alert_compat_fixture.obj')
-$graph.Add('build thread-start-session-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-bridge.obj obj/6-thread_start_session_fixture.obj obj/8-thread.obj')
-$graph.Add('build softpc-event-thread-shutdown-fixture.exe: link obj/3-nt_thread_alert_compat.obj obj/4-mvdm_softpc_event_thread.obj obj/7-softpc_event_thread_shutdown_fixture.obj')
+$graph.Add('build nt-thread-alert-fixture.exe: link obj/4-nt_thread_alert_compat_fixture.obj')
+$graph.Add('build thread-start-session-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-bridge.obj obj/5-thread_start_session_fixture.obj obj/7-thread.obj obj/8-ccpu_thread_exit_compat.obj')
+$graph.Add('build softpc-event-thread-shutdown-fixture.exe: link obj/3-mvdm_softpc_event_thread.obj obj/6-softpc_event_thread_shutdown_fixture.obj')
 $graph.Add('build verify: run nt-thread-alert-fixture.exe')
 $graph.Add('build verify-thread-session: run thread-start-session-fixture.exe')
 $graph.Add('build verify-event-thread-shutdown: run softpc-event-thread-shutdown-fixture.exe')

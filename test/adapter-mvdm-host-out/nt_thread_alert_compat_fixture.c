@@ -1,6 +1,6 @@
-#include "ntvdm-exe/win32/nt_thread_alert_compat.h"
-
 #include <windows.h>
+#include <winternl.h>
+#include <ntpsapi.h>
 
 typedef struct alert_fixture_state {
     HANDLE ready;

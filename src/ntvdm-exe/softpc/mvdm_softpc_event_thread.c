@@ -1,6 +1,8 @@
 #include "mvdm_softpc_event_thread.h"
 
-#include "ntvdm-exe/win32/nt_thread_alert_compat.h"
+#include <windows.h>
+#include <winternl.h>
+#include <ntpsapi.h>
 
 int mvdm_softpc_event_thread_alert_and_join(HANDLE event_thread, BOOL started)
 {

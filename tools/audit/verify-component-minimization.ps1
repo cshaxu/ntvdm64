@@ -9,7 +9,7 @@ if($graph -match 'src/product-package|obj/product-package|NTCON_CONPTY_TEST_RELE
 if($graph -notmatch 'src/ntvdm-exe/package_layout.c'){
     throw 'Worker package binding missing'
 }
-foreach($name in 'mvdm_base_vdm_environment','mvdm_crt_redirect','nt_thread_alert_compat','wow_hard_error_dialog'){
+foreach($name in 'mvdm_base_vdm_environment','mvdm_crt_redirect','wow_hard_error_dialog'){
     if(!(Test-Path (Join-Path $repo "src/ntvdm-exe/win32/$name.h")) -or
         (Test-Path (Join-Path $repo "src/compat/include/$name.h"))){
         throw "Worker-private declaration not consolidated: $name"

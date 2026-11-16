@@ -253,7 +253,6 @@ if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC ex
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ntioapi_facade.c', 'ccpu_thread_exit_compat.c',
-                          'nt_thread_alert_compat.c',
                           'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
@@ -776,7 +775,7 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # original carriers on both host-width rows. This selects the byte-exact
 # `v7vga.rom` package already retained by mvdm-softpc-firmware rather than
 # fabricating an unavailable `vga.rom` alias.
-$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
+$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' +
     '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
     ''
@@ -1152,8 +1151,7 @@ $hostObjects += $hostEntryObject
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $object = 'obj/adapter-win32/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))
-    $alertBinding = if ($name -eq 'nt_thread_alert_compat.c') { ' /DOPENNT_ADAPTER_NT_ALERT_THREAD' } else { '' }
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $alertBinding)
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $hostCompatObject = 'obj/opennt-abi-host-compat/opennt_support_rtl.obj'
@@ -1205,9 +1203,8 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $object = 'obj/adapter-softpc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $selectedVideoInputs = if ($name -eq 'mvdm_softpc_text_video.c') { ' | generated/text_video_gfx.h generated/text_video_gvi.h generated/text_video_egagraph.h generated/text_video_nt_graph.h' } elseif ($name -eq 'v7_pointer_binding.c') { ' | generated/v7_selected_plane.h' } else { '' }
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterSoftpcRoot $name)) + $selectedVideoInputs)
-    $alertBinding = if ($name -eq 'mvdm_softpc_event_thread.c') { ' /DOPENNT_ADAPTER_NT_ALERT_THREAD' } else { '' }
     $videoInclude = if ($name -in @('mvdm_softpc_text_video.c', 'v7_pointer_binding.c')) { ' ' + $cvidcGeneratedInclude } else { '' }
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $alertBinding + $videoInclude)
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $videoInclude)
     $object
 }
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {

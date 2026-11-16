@@ -158,7 +158,7 @@ function Add-Edge([string]$target) {
    $flags+=' '+$include.Value.Replace((NP (Split-Path $reference -Parent)),(NP $build))
   }
   foreach($define in [regex]::Matches($binding,'/D[^\s]+')){
-   if($define.Value -notmatch '^/D(_X86_|CPU_[A-Z0-9_]+|NEW_CPU|CCPU|C_VID|SPC386|SIM32|V7VGA|NTVDM|ANSI|PROD|WIN32|WINNT|OPENNT_ADAPTER_NT_ALERT_THREAD|MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION|_NO_CRT_STDIO_INLINE|_WIN32_WINNT)($|=)'){$flags+=' '+$define.Value}
+   if($define.Value -notmatch '^/D(_X86_|CPU_[A-Z0-9_]+|NEW_CPU|CCPU|C_VID|SPC386|SIM32|V7VGA|NTVDM|ANSI|PROD|WIN32|WINNT|MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION|_NO_CRT_STDIO_INLINE|_WIN32_WINNT)($|=)'){$flags+=' '+$define.Value}
   }
  }
  if($target -in @('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')){$flags+=' /DNTOS_KERNEL_RUNTIME'}
