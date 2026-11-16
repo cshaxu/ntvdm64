@@ -1,0 +1,205 @@
+{
+  "batch": "P245",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+        "sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c",
+        "sha256": "dc8774294dfad0c84ef3e1367e2a76138cc27ca274b11f74a93438042ca2908e"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "812fceb9ab91238b458d691e716425fa2c3390bf62fb467ab14c299cf232bc29"
+      }
+    ],
+    "deleted": [],
+    "source_files": 3,
+    "test_only_checkpoint_update": "Shared original view test object receives existing fixture metric contract from GetSystemMetrics;product source unchanged"
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+        "sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac"
+      }
+    ],
+    "compiler_observed": [
+      {
+        "function": "BOOL CheckPwndFilter",
+        "line": 100,
+        "file": "src/non-mvdm/windows/core/ntuser/kernel/random.c"
+      },
+      {
+        "function": "HBRUSH xxxGetControlBrush",
+        "line": 208,
+        "file": "src/non-mvdm/windows/core/ntuser/kernel/random.c"
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "42dd9830-30d2-4a7c-a3ae-5502971d6b05",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 395051,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5840,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1181,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 12014,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 11425,
+        "CleanupMs": 438,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 9603,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 153,
+        "CleanupMs": 389,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65267,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 45277,
+        "CleanupMs": 346,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 42575,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14775,
+        "CleanupMs": 379,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9331,
+        "CleanupMs": 360,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 45302,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12734,
+        "CleanupMs": 382,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28507,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31145,
+        "CleanupMs": 372,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3355,
+        "CleanupMs": 342,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7600,
+        "CleanupMs": 357,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9659,
+        "CleanupMs": 361,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3306,
+        "CleanupMs": 365,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6850,
+        "CleanupMs": 371,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20045,
+        "CleanupMs": 391,
+        "Passed": true
+      }
+    ]
+  },
+  "focused_log": "build/t483-s5-p245/focused-final.log",
+  "brush_output": "control_brush_failures=0 calls=8\n",
+  "mirror_diff": {
+    "before": 396,
+    "after": 365,
+    "delta": -31,
+    "blocks_before": 4,
+    "blocks_after": 7,
+    "non_error": {
+      "added": 2,
+      "deleted": 359,
+      "blocks": 6,
+      "excluded_branches": 1,
+      "excluded_original_body_lines": 3
+    }
+  },
+  "cumulative": {
+    "before": 97012,
+    "after": 96981,
+    "baseline": 119913,
+    "reduction": 22932
+  },
+  "scope": "R2632-R2638;R2634 partial restoration remains pending;no guest/zip changes",
+  "git": "Accompanying commit and push required"
+}

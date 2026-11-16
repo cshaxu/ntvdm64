@@ -1,0 +1,126 @@
+{
+  "file": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\random.c",
+  "status": "Whole-file reviewed,built,published,tested;qualified residuals pending owner;Git accompanies receipt",
+  "before": {
+    "added": 8,
+    "deleted": 388,
+    "blocks": 4
+  },
+  "after": {
+    "added": 3,
+    "deleted": 362,
+    "blocks": 7
+  },
+  "baseline_sha256": "278332285649e2c535998c94b467f9e0cfd3f7341a97e5fb7a8710f8d02a235d",
+  "candidate_sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac",
+  "changes": [
+    "Restore original pragma hdrstop",
+    "Remove divergent explanatory comment",
+    "Return DEBUG conditional to original order before xxxGetControlBrush",
+    "Bare error; logical line190 reset after endif",
+    "Selected function byte-identical after newline normalization",
+    "Restore original CheckPwndFilter lines91-111 with no new adapter"
+  ],
+  "source_findings": [
+    {
+      "point": "R2633",
+      "finding": "Original client/client.c SetWindowState and ClearWindowState selected in control-state.obj; original kernel homonyms would duplicate definitions and replace native HWND state owner with local SetWF/ClrWF",
+      "sources": [
+        "tools/build/New-T404S5Wow32ProviderNinja.ps1:548-550",
+        "src/non-mvdm/windows/core/ntuser/client/client.c:208-223"
+      ]
+    },
+    {
+      "point": "R2634",
+      "finding": "Original CheckPwndFilter uses independently retained _IsChild; absence alone does not prove unrecoverable. Requires further full-file disposition before completion. Save/RestoreClipRgn use Gre private GDI operations; AllocateUnicodeString uses quota pool; no current selected references found by scoped search.",
+      "sources": [
+        "O:/repos.external/OpenNT/windows/core/ntuser/kernel/random.c:46-148",
+        "src/non-mvdm/windows/core/ntuser/rtl/wow.c:89"
+      ]
+    },
+    {
+      "point": "R2635",
+      "finding": "Current color service crosses into win32u NtUserGetControlColor, not a public SendMessage surrogate; original requires process identity and Gre server brush validation. Native compatibility and restoration alternatives remain under review.",
+      "sources": [
+        "src/wow32-dll/source/wow_edit_native_bindings.c:111",
+        "src/wow32-dll/source/wow_edit_native_bindings.c:216-220"
+      ]
+    }
+  ],
+  "invalidated_diagnostics": "Initial diagnostic current failure caused by erroneous original190-195 slice in local edit;removed, not published. Initial after381 metric invalid;recomputed final.",
+  "recheck_results": {
+    "color": 2,
+    "current": 0,
+    "filter": 0,
+    "harderror": 2,
+    "helpers": 2,
+    "original-header": 2
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+        "sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac"
+      }
+    ],
+    "compiler_observed": [
+      {
+        "function": "BOOL CheckPwndFilter",
+        "line": 100,
+        "file": "src/non-mvdm/windows/core/ntuser/kernel/random.c"
+      },
+      {
+        "function": "HBRUSH xxxGetControlBrush",
+        "line": 208,
+        "file": "src/non-mvdm/windows/core/ntuser/kernel/random.c"
+      }
+    ]
+  },
+  "points": [
+    {
+      "id": "R2632",
+      "decision": "minimized-pending-owner",
+      "evidence": "Original pragma restored; comment removed. Actual original include candidate fails PWND type; header name resolves through the broad product includes, not sufficient alone. Original kernel precomp owns kernel USER layout and lock contracts; retained source uses finite borrowed original client views, original HWND receive selection and native color service. Retain bounded header/selector pending owner."
+    },
+    {
+      "id": "R2633",
+      "decision": "pending-owner",
+      "evidence": "Original client/client.c selected via control-state.obj already defines SetWindowState/ClearWindowState with native NtUserCallHwndParam. Kernel homonyms would duplicate symbols and directly mutate retained view flags instead of actual HWND owner. Preserve separate original client path."
+    },
+    {
+      "id": "R2634",
+      "decision": "partially-restored-pending-owner",
+      "evidence": "Exact original CheckPwndFilter restored with existing _IsChild declaration and original provider; compiled restoration passes. Original Save/RestoreClipRgn need Gre region/DC-owner services; AllocateUnicodeString uses kernel quota pool and TAG_TEXT. Actual helper candidate errors on gpsi/TAG_TEXT and missing Gre services. No current selected caller references these omitted services; their original callers belong to excluded kernel paint/input/class/cursor paths. Do not reimplement private GDI/quota owner merely to fill unused mirror bodies."
+    },
+    {
+      "id": "R2635",
+      "decision": "pending-owner",
+      "evidence": "Original xxxGetControlColor compares PpiCurrent to GETPTI(parent)->ppi and validates kernel brush handle. Candidate fails incomplete THREADINFO and BRUSH_TYPE, missing kernel dispatch. Current recipient/child HWNDs enter actual win32u NtUserGetControlColor; borrowed original WND is not native kernel PWND. Replacing service with SendMessage/GetObject would add policy and lose native ownership. Residual service boundary pending owner."
+    },
+    {
+      "id": "R2636",
+      "decision": "confirmed-original-pending-delivery",
+      "evidence": "xxxGetControlBrush body exact original; original line208 verified with actual MSVC /E. Locks are bounded synchronous retain lease in existing binding, separately recorded rather than claimed NT4 kernel locks."
+    },
+    {
+      "id": "R2637",
+      "decision": "policy-pending-delivery",
+      "evidence": "Original DEBUG condition returned before selected brush body; excluded interior bare#error, no nested retained code. Following selected line208 proven with compiler, not textual mapping alone."
+    },
+    {
+      "id": "R2638",
+      "decision": "pending-owner",
+      "evidence": "Original HardErrorControl owns global system harderror handler, input desktop, thread queue, references and desktop switch; candidate fails missing PTHREADINFO and further kernel desktop/state definitions. Current DLL does not own these OS states; restoring private kernel service requires excluded USER server rather than finite binding."
+    }
+  ],
+  "test_change": "Existing brush fixture extended with 7 filter assertions and links original _IsChild from existing view_wow object. Existing view metric externs supplied from real GetSystemMetrics. No filter double;no new test executable.",
+  "non_error_metrics": {
+    "added": 2,
+    "deleted": 359,
+    "blocks": 6,
+    "excluded_branches": 1,
+    "excluded_original_body_lines": 3
+  },
+  "verification_status": "Cached x86/x64,publish11x2,focused36/task-order,Full20,boundary and governance passed",
+  "test_failures": "Initial and /opt:ref fixture link failures resolved by supplying existing edit-view metric inputs from GetSystemMetrics;no product workaround;failure evidence retained"
+}

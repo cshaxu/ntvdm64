@@ -229,7 +229,7 @@ $lines.Add('build bin/wow_dialog_getset_fixture.exe: link obj/getset_fixture.obj
 $lines.Add('build original-getset-boundary: phony bin/wow_dialog_getset_fixture.exe')
 $lines.Add('build bin/wow_edit_call_fixture.exe: link obj/edit_fixture.obj obj/edit_adapter.obj obj/control_extent.obj obj/state_guards.obj obj/color_client.obj')
 $lines.Add('build bin/wow_edit_memory_callbacks_fixture.exe: link obj/memory_fixture.obj obj/dialog_memory.obj')
-$lines.Add('build bin/wow_control_brush_fixture.exe: link obj/brush_fixture.obj obj/brush_adapter.obj obj/brush_owner.obj obj/brush_client.obj')
+$lines.Add('build bin/wow_control_brush_fixture.exe: link obj/brush_fixture.obj obj/brush_adapter.obj obj/brush_owner.obj obj/brush_client.obj obj/view_wow.obj')
 $lines.Add('build bin/wow_default_window_binding_fixture.exe: link obj/default_fixture.obj obj/default_adapter.obj')
 $lines.Add('build bin/wow_default_original_fixture.exe: link obj/default_original_fixture.obj obj/original_default.obj obj/default_view.obj obj/string_conversion.obj obj/string_services.obj')
 $lines.Add('  libs = ntdll.lib')

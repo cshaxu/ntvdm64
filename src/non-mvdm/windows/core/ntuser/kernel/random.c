@@ -12,11 +12,40 @@
 * 02-06-91 IanJa        HWND revalidation added (none required)
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-102): retain only xxxGetControlBrush from the
- * original random.c. The facade supplies lifetime and native color service;
- * no original recipient-selection algorithm is changed. */
 #define WOW_ORIGINAL_CONTROL_BRUSH
+#line 15
 #include "wow_control_brush_bindings.h"
+#pragma hdrstop
+
+#line 91
+/***************************************************************************\
+* CheckPwndFilter
+*
+*
+*
+* History:
+* 11-07-90 DarrinM      Translated Win 3.0 ASM code.
+\***************************************************************************/
+
+BOOL CheckPwndFilter(
+    PWND pwnd,
+    PWND pwndFilter)
+{
+    if ((pwndFilter == NULL) || (pwndFilter == pwnd) ||
+            ((pwndFilter == (PWND)1) && (pwnd == NULL))) {
+        return TRUE;
+    }
+
+    return _IsChild(pwndFilter, pwnd);
+}
+
+
+#line 185
+#ifdef DEBUG
+#error
+#endif
+#line 196
+
 
 /***************************************************************************\
 * xxxGetControlBrush
@@ -28,7 +57,6 @@
 * 01-21-91 IanJa   Prefix '_' denoting exported function (although not API)
 \***************************************************************************/
 
-#line 208
 HBRUSH xxxGetControlBrush(
     PWND pwnd,
     HDC hdc,
@@ -55,10 +83,3 @@ HBRUSH xxxGetControlBrush(
     return (HBRUSH)dw;
 }
 
-
-#line 185
-#ifdef DEBUG
-#line 186
-#error Unsupported DEBUG original branch
-#endif
-#line 190

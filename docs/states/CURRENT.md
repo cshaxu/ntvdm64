@@ -34,13 +34,13 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2631 reviewed:979 restored/confirmed delivered,0 local,51 approved/policy,
-1601 qualified pending;89 unreviewed. Files349/365 reviewed and verified;
-16 remain. P244 queue.c:mirror4501->4438(-63),blocks27->28;24 frames restored.
-ParseReserved exact;R2627 partial remains pending. Final cached build,publish11x2,
-focused36/task-order/Full20 passed;final line-only package verified equivalent.
-Git accompanies receipt;next R2632. Cumulative mirror reduction22901.
-Non-error residuals separately counted:+54/-4220,25 blocks;154 excluded lines.
+2638 reviewed:980 restored/confirmed delivered,0 local,52 approved/policy,
+1606 qualified pending;82 unreviewed. Files350/365 reviewed and verified;
+15 remain. P245 random.c:mirror396->365(-31),blocks4->7.
+Original CheckPwndFilter restored;R2634 partial remains pending.
+Non-error residuals +2/-359,6 blocks;one excluded body of3 original lines.
+Cached x86/x64,publish11x2,focused36/task-order,Full20,boundary/governance passed.
+Cumulative mirror119913->96981(-22932);next R2639 after Git delivery.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -57,13 +57,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P244 package `28cb19b9-d9a5-4b1c-b28e-cb92a3bfbec0` published11x2;hashes verified.
-Queue mirror diff reduced63;original parser restored and existing fixture extended.
-Final compiler-observed lines checked;focused36/task-order/Full20 passed.
-Final line-only package equivalence supports runtime-result reuse;no guest/zip changes.
-Cumulative365-file mirror diff119913->97012(-22901).
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p244-checkpoint.json).
-Git delivery accompanies receipt;R2582 next.
+P245 package `42dd9830-30d2-4a7c-a3ae-5502971d6b05` published11x2;hashes verified.
+Original filter restored;actual compiler lines100/208 checked.
+Cached x86/x64,focused36/task-order,Full20 and governance passed.
+Two fixture link failures corrected via existing view metric inputs;no product workaround.
+Guest/winnt.zip unchanged;cumulative mirror reduction22932.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p245-checkpoint.json).
+Git delivery accompanies receipt;R2639 next.
 
 ## Remaining Scope
 
