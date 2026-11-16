@@ -1,0 +1,38 @@
+{
+  "status": "comment/format restored;two native local field carriers pending owner",
+  "proof": {
+    "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+    "sha256": "7c72f522a841a78f78494e950190588fcaf26a2251412a7725171db25258b949",
+    "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+    "mirror_before": 6,
+    "mirror_after": 4,
+    "raw_before": 7,
+    "raw_after": 4,
+    "source_lines": 108,
+    "selected_tokens_before_final": "identical after comment/whitespace/line directives removal",
+    "controls": "x86 before/final/original pass; x64 before/final pass,original fails STARTUPINFOA alignment remainder4 versus required8",
+    "limitations": "ABI contract failure,not reproduced user crash;transport ignores pointer relocation tables;no CSR wire claim. Original header alone tested with current allocator. Earlier full original allocator controls separately indexed P174.",
+    "initial_fixture_error": "First x86 command omitted per-file Gz;corrected using actual Ninja local cflags;retry all pass."
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "sha256": "7c72f522a841a78f78494e950190588fcaf26a2251412a7725171db25258b949"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+    "sha256": "7c72f522a841a78f78494e950190588fcaf26a2251412a7725171db25258b949"
+  },
+  "mirror_before": 6,
+  "mirror_after": 4,
+  "mirror_delta": -2,
+  "raw_before": 7,
+  "raw_after": 4,
+  "call_chain": "BaseCheckVDM/GetNextVDMCommand -> CsrAllocateCaptureBuffer/CsrAllocateMessagePointer -> native STARTUPINFOA and strings -> OpenNtBaseClientCallServer. NTSRV transport does not consume relocation tables. Allocation table stride still determines data alignment.",
+  "counter_review": "Responsibility is aligned local captured storage;original32-bit table layout is insufficient for current x64 allocation layout. Minimal remaining candidate changes only two pointer carriers. No new shim or transport policy. Header-only restoration tested,not arbitrary wholesale removal of capture metadata;whole allocator evidence P174 is separate.",
+  "verification": "x86 current/final/original runtime controls pass;x64 current/final pass and original header alignment control fails. Before/final header tokens identical;108 retained original source lines match;no excluded branches in this header.",
+  "product_verification": "No executable or binding change;reuse P187 product baseline and P205 RDP pass. Finish verifies11x2 published hashes.",
+  "delivery": "P208 governance commit push accompany receipt",
+  "format": "Current LF restored to pinned original CRLF;normalized diff metrics exclude this formatting recovery."
+}

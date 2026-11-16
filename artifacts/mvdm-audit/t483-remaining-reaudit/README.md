@@ -1278,3 +1278,5 @@ P205: [RAP header mapping and RDP recheck](batch-p205-checkpoint.json):31 exclud
 P206: [RAP debug header mapping](batch-p206-checkpoint.json):8 excluded diff unchanged;raw12->10;2 actual contexts and DBG negative;original boundary mapping restored.
 
 P207: [winddi header mapping](batch-p207-checkpoint.json):41 excluded diff unchanged;raw44->43;actual WOW32 fax context and _X86_ negative;original boundary mapping restored.
+
+P208: [Capture header minimization](batch-p208-checkpoint.json):6->4 mirror diff;two native fields pending with actual allocator alignment controls;original comments/lines restored.

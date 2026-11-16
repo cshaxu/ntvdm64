@@ -97,11 +97,8 @@ typedef struct _CSR_CAPTURE_HEADER {
     struct _CSR_CAPTURE_HEADER *RelatedCaptureBuffer;
     ULONG CountMessagePointers;
     ULONG CountCapturePointers;
-    /* DIVERGENCE(OPENNT-HOST-066): process-local capture metadata only;
-     * ULONG_PTR is the identical original ULONG carrier in x86 builds. */
-    PULONG_PTR MessagePointerOffsets; // Offsets within CSR_API_MSG of pointers
-    PULONG_PTR CapturePointerOffsets; // Offsets within CaptureBuffer of pointers
-#line 102
+    PULONG_PTR MessagePointerOffsets;   // Offsets within CSR_API_MSG of pointers
+    PULONG_PTR CapturePointerOffsets;   // Offsets within CaptureBuffer of pointers
     PCHAR FreeSpace;
 } CSR_CAPTURE_HEADER, *PCSR_CAPTURE_HEADER;
 
