@@ -17,6 +17,19 @@ typedef struct tagDDE_DATA {
 #define USERGLOBALUNLOCK(h) GlobalUnlock((HANDLE)(h))
 #define WOWGLOBALFREE(pmem) GlobalFree(pmem)
 
+/* Original ddemlcli.h/usercli.h allocation macros; public DC boundaries. */
+#define DDEMLAlloc(cb) LocalAlloc(LPTR, cb)
+#define DDEMLFree(p) LocalFree(p);
+#define UserGlobalAlloc(flags, size) GlobalAlloc(flags, size)
+#define UserGlobalSize(pmem) GlobalSize(pmem)
+#define UserGlobalFree(h) GlobalFree((HANDLE)(h))
+#define NtUserGetDC GetDC
+#define NtUserReleaseDC ReleaseDC
+
+HBITMAP WINAPI CopyBitmap(HBITMAP bitmap);
+HPALETTE WINAPI CopyPalette(HPALETTE palette);
+HANDLE WINAPI CopyDDEData(HANDLE data, BOOL is_execute);
+
 VOID WINAPI FreeDDEData(HANDLE hDDE, BOOL fIgnorefRelease,
     BOOL fFreeTruelyGlobalObjects);
 

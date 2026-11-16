@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2325 reviewed:896 restored/confirmed published,0 local restorations,21 approved/policy,
-1408 qualified pending;395 unreviewed. Files324/365 source-reviewed,41 remain;
-P231 file324 verified/published;Git delivery accompanies receipt.
+2334 reviewed:898 restored/confirmed published,0 local restorations,21 approved/policy,
+1415 qualified pending;386 unreviewed. Files326/365 source-reviewed,39 remain;
+P232 file326 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,14 +53,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P231 package `c1df284c-da52-4c49-9c59-6e69c983940c` published11x2;hashes verified.
-Original globals declarations and callback include ordering restored;seven EDIT
-files have line/comment-only corrections. Mirror delta-69;two whole restores,
-three minimized pending boundaries,remaining points exclusion-policy.
-Cached x86/x64,32 focused,Full20 including DOS4GW and governance passed.
-Cumulative365-file mirror diff119913->102760(-17153).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p231-checkpoint.json).
-Git delivery accompanies receipt;R2326 next.
+P232 package `814ff37b-ecf8-453e-8045-1d3c0e29fd13` published11x2;hashes verified.
+Original DDE copy functions and handles metadata restored. Mirror delta-158;
+two whole restores,seven boundary points pending owner.
+Cached x86/x64,33 focused,Full20 including DOS4GW and governance passed.
+Cumulative365-file mirror diff119913->102602(-17311).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p232-checkpoint.json).
+Git delivery accompanies receipt;R2335 next.
 
 ## Remaining Scope
 
@@ -215,3 +214,8 @@ original globals declaration recovery. First focused compilation failure was
 an unused fixture globals include;removed it,kept assertions,repaired32 pass.
 Full20 passes;owner boundary decisions remain separate from restored points.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p231-checkpoint.json).
+
+P232 verified/published:handles307->300(-7),hdata593->442(-151).
+Original DDE copy functions restored through original public allocation macros
+and existing DC boundary. Private manager/header omissions remain pending.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p232-checkpoint.json).

@@ -7,10 +7,9 @@
 *
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-032): retain only the original FreeDDEData
- * owner; DDEML instance/transaction/copy APIs require the excluded USER
- * subsystem. Its finite declarations and public API macros are adapter-owned. */
+#define DDEMLDB
 #include "wow_dde_data_bindings.h"
+#pragma hdrstop
 #line 453
 
 /***************************************************************************\
@@ -126,6 +125,149 @@ BOOL fFreeTruelyGlobalObjects)
     }
 }
 
-/* DIVERGENCE(OPENNT-HOST-032): remaining original DDEML APIs omitted. */
-#line 567
 
+
+HBITMAP CopyBitmap(
+HBITMAP hbm)
+{
+    BITMAP bm;
+    HBITMAP hbm2, hbmOld1, hbmOld2;
+    HDC hdc, hdcMem1, hdcMem2;
+
+    if (!GetObject(hbm, sizeof(BITMAP), &bm)) {
+        return(0);
+    }
+    hdc = NtUserGetDC(NULL);  // screen DC
+    if (!hdc) {
+        return(0);
+    }
+    hdcMem1 = CreateCompatibleDC(hdc);
+    if (!hdcMem1) {
+        goto Cleanup3;
+    }
+    hdcMem2 = CreateCompatibleDC(hdc);
+    if (!hdcMem2) {
+        goto Cleanup2;
+    }
+    hbmOld1 = SelectObject(hdcMem1, hbm);
+    hbm2 = CreateCompatibleBitmap(hdcMem1, bm.bmWidth, bm.bmHeight);
+    if (!hbm2) {
+        goto Cleanup1;
+    }
+    hbmOld2 = SelectObject(hdcMem2, hbm2);
+    BitBlt(hdcMem2, 0, 0, bm.bmWidth, bm.bmHeight, hdcMem1, 0, 0, SRCCOPY);
+    SelectObject(hdcMem1, hbmOld1);
+    SelectObject(hdcMem2, hbmOld2);
+Cleanup1:
+    DeleteDC(hdcMem2);
+Cleanup2:
+    DeleteDC(hdcMem1);
+Cleanup3:
+    NtUserReleaseDC(NULL, hdc);
+    return(hbm2);
+}
+
+
+HPALETTE CopyPalette(
+HPALETTE hpal)
+{
+    int cPalEntries;
+    LOGPALETTE *plp;
+
+    if (!GetObject(hpal, sizeof(int), &cPalEntries)) {
+        return(0);
+    }
+    plp = (LOGPALETTE *)DDEMLAlloc(sizeof(LOGPALETTE) +
+            (cPalEntries - 1) * sizeof(PALETTEENTRY));
+    if (!plp) {
+        return(0);
+    }
+    if (!GetPaletteEntries(hpal, 0, cPalEntries, plp->palPalEntry)) {
+        DDEMLFree(plp);
+        return(0);
+    }
+    plp->palVersion = 0x300;
+    plp->palNumEntries = (WORD)cPalEntries;
+    hpal = CreatePalette(plp);
+    if (hpal  &&
+            !SetPaletteEntries(hpal, 0, cPalEntries, plp->palPalEntry)) {
+        hpal = 0;
+    }
+    DDEMLFree(plp);
+    return(hpal);
+}
+
+
+
+/***************************************************************************\
+* CopyDDEData
+*
+* Description:
+* Used to copy DDE data apropriately.
+*
+* History:
+* 11-19-91 sanfords Created.
+\***************************************************************************/
+HANDLE CopyDDEData(
+HANDLE hDDE,
+BOOL fIsExecute)
+{
+    HANDLE hDDENew;
+    PDDE_DATA pdde, pddeNew;
+    LPMETAFILEPICT pmfPict;
+    HANDLE hmfPict;
+
+    hDDENew = UserGlobalAlloc(GMEM_DDESHARE | GMEM_MOVEABLE,
+            UserGlobalSize(hDDE));
+    if (!hDDENew) {
+        return (0);
+    }
+    USERGLOBALLOCK(hDDE, pdde);
+    if (pdde == NULL) {
+        UserGlobalFree(hDDENew);
+        return (0);
+    }
+    USERGLOBALLOCK(hDDENew, pddeNew);
+    RtlCopyMemory(pddeNew, pdde, UserGlobalSize(hDDE));
+
+    if (!fIsExecute) {
+        switch (pdde->wFmt) {
+        case CF_BITMAP:
+        case CF_DSPBITMAP:
+            pddeNew->Data = (DWORD)CopyBitmap((HBITMAP)pdde->Data);
+            break;
+
+        case CF_PALETTE:
+            pddeNew->Data = (DWORD)CopyPalette((HPALETTE)pdde->Data);
+            break;
+
+        case CF_DIB:
+            pddeNew->Data = (DWORD)CopyDDEData((HANDLE)pdde->Data, TRUE);
+            break;
+
+        case CF_METAFILEPICT:
+        case CF_DSPMETAFILEPICT:
+            hmfPict = CopyDDEData((HANDLE)pdde->Data, TRUE);
+            USERGLOBALLOCK(hmfPict, pmfPict);
+            if (pmfPict == NULL) {
+                WOWGLOBALFREE(hmfPict);
+                USERGLOBALUNLOCK(hDDENew);
+                WOWGLOBALFREE(hDDENew);
+                USERGLOBALUNLOCK(hDDE);
+                return (FALSE);
+            }
+            pmfPict->hMF = CopyMetaFile(pmfPict->hMF, NULL);
+            USERGLOBALUNLOCK(hmfPict);
+            pddeNew->Data = (DWORD)hmfPict;
+            break;
+
+        case CF_ENHMETAFILE:
+        case CF_DSPENHMETAFILE:
+            pddeNew->Data = (DWORD)CopyEnhMetaFile((HANDLE)pdde->Data, NULL);
+            break;
+        }
+    }
+    USERGLOBALUNLOCK(hDDENew);
+    USERGLOBALUNLOCK(hDDE);
+    return (hDDENew);
+}

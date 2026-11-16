@@ -66,7 +66,7 @@ try {
         'dialog-navigation-boundaries','original-window-view-boundaries','original-button-lifetime-boundaries')
     $targets += 'dialog-native-owner-research'
     $targets += 'dialog-initialization-boundary'
-    $targets += 'original-control-globals'
+    $targets += 'original-control-globals', 'original-dde-data-boundary'
     $targets += 'original-default-bits-boundary'
     if ($CpdWindowResearch) { $targets = @('cpd-window-research') }
     if ($StyleNotificationResearch) { $targets = @('style-notification-research') }
@@ -85,7 +85,7 @@ try {
         $cases += 'wow_dialog_native_owner_probe'
         $cases += 'wow_dialog_initialization_fixture'
         $cases += 'wow_edit_lookaside_fixture', 'wow_edit_conversion_fixture'
-        $cases += 'wow_def_window_bits_fixture'
+        $cases += 'wow_def_window_bits_fixture', 'wow_original_dde_free_fixture'
         if ($CpdWindowResearch) { $cases = @('wow_cpd_window_normalization_probe') }
         if ($StyleNotificationResearch) { $cases = @('wow_style_notification_probe') }
         if ($DialogNativeOwnerResearch) { $cases = @('wow_dialog_native_owner_probe') }

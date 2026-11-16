@@ -1,0 +1,49 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+  "before_sha256": "00a301aee092b9e191de116445c9b3fd21a059893b2ee0e99a963dd7ea24c008",
+  "after_sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+  "metric": {
+    "before": 593,
+    "after": 442,
+    "add": 1,
+    "delete": 441,
+    "delta": -151
+  },
+  "points": {
+    "T483-R2332": {
+      "original_scope": "original10-12;3 omitted directives",
+      "conclusion": "Restore DDEMLDB and pragma;retain one finite binding include instead of full private precomp",
+      "evidence": "Actual original USER precomp compile fails CSR private declarations and missing ntos.h;wrong WOW precomp is not valid restoration"
+    },
+    "T483-R2333": {
+      "original_scope": "original15-452;438 omitted lines",
+      "conclusion": "Pending owner: DDEML public manager/instance APIs remain outside FreeDDEData callback closure",
+      "evidence": "Restored manager compile fails PCL_INSTANCE_INFO/EnterDDECrit and handle manager dependencies. Original APIs manage private DDEML instance and transaction state;selected WOW pfnFreeDDEData callback does not call these APIs. Importing the private manager would duplicate modern USER DDEML ownership,not restore the selected callback."
+    },
+    "T483-R2334": {
+      "original_scope": "original569-713;145 omitted lines",
+      "conclusion": "Fully restored original CopyBitmap/CopyPalette/CopyDDEData",
+      "evidence": "Initial actual product link failed seven missing bindings. Original ddemlcli.h/usercli.h define five as public allocation macros;two DC aliases already used by wow_edit_call_bindings.h. Applying those bounded original/public bindings yields actual WOW32 link exit0. No algorithm/state moved to shim."
+    }
+  },
+  "controls": {
+    "current_compile": 0,
+    "original_precomp_compile": 2,
+    "manager_compile": 2,
+    "copy_unbound_compile": 0,
+    "copy_unbound_link": 1120,
+    "copy_bound_compile": 0,
+    "copy_bound_link": 0
+  },
+  "source_line_proof": {
+    "original_nonempty_rows": 248,
+    "all_match_original_logical_lines": true,
+    "errors": 0,
+    "original_newline": "CRLF"
+  },
+  "tests": "Existing DDE fixture extended and connected to focused cohort;33 focused and Full20 passed on final published package.",
+  "status": "Whole-file audit,final compilation/publication/regression complete;residual boundary decisions pending owner;Git delivery accompanies receipt",
+  "build_evidence": "build/t483-s5-p232/hdata/",
+  "delivery_status": "Cached x86/x64,11x2 publication,focused33,Full20 and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p232-checkpoint.json"
+}

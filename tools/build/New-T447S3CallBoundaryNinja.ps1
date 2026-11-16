@@ -176,6 +176,8 @@ $units += ,@('original_default', 'src/non-mvdm/windows/core/ntuser/client/clmsg.
     (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-client')) + '"'))
 $controlObjects += 'obj/original_default.obj'
 $units += ,@('default_view', 'src/non-mvdm/windows/core/ntuser/rtl/wow.c', $navigationFlags)
+$units += ,@('dde_data_owner', 'src/non-mvdm/windows/core/ntuser/client/hdata.c', '')
+$units += ,@('dde_data_fixture', 'test/adapter-mvdm-host-out/wow/wow_original_dde_free_fixture.c', '')
 foreach ($unit in $units) {
     if (!(Test-Path -LiteralPath (Join-Path $root $unit[1]) -PathType Leaf)) {
         throw "Missing fixture input: $($unit[1])"
@@ -279,6 +281,8 @@ $lines.Add('build original-control-globals: phony bin/wow_edit_lookaside_fixture
 $lines.Add('build bin/wow_def_window_bits_fixture.exe: link obj/def_bits_fixture.obj obj/def_bits_owner.obj obj/def_bits_boundary.obj obj/def_bits_tables.obj obj/def_bits_state.obj')
 $lines.Add('  libs = /OPT:REF')
 $lines.Add('build original-default-bits-boundary: phony bin/wow_def_window_bits_fixture.exe')
+$lines.Add('build bin/wow_original_dde_free_fixture.exe: link obj/dde_data_fixture.obj obj/dde_data_owner.obj')
+$lines.Add('build original-dde-data-boundary: phony bin/wow_original_dde_free_fixture.exe')
 $lines.Add('default call-boundaries')
 $lines.Add('build bin/wow_dialog_native_owner_probe.exe: link obj/dialog_native_owner_probe.obj obj/dialog_procedure_adapter.obj obj/native_getset_reader.obj obj/native_getset_client.obj obj/native_getset_server.obj')
 $lines.Add('build dialog-native-owner-research: phony bin/wow_dialog_native_owner_probe.exe')

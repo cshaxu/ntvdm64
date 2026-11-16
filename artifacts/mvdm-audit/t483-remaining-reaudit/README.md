@@ -1372,3 +1372,9 @@ P231 source-only reviews (delivery pending):
 - [globals](p231-globals-review.json): original declaration restoration;delivery pending.
 
 - [P231 delivery](batch-p231-checkpoint.json): original globals declarations and EDIT line mapping;cached,publish11x2,focused32,Full20.
+
+- [P232 handles source review](p232-handles-review.json): line/comment cleanup;product compile and equivalent preprocessing;batch delivery pending.
+
+P232: [hdata whole-file review](p232-hdata-review.json) restores original copy functions after finite public API binding proof;mirror593->442(-151). Together with handles local batch-158. Cached build/publication/tests/Git pending;2334/2720 points,326/365 files source-reviewed.
+
+- [P232 delivery](batch-p232-checkpoint.json): original DDE copy functions and handles metadata;cached,publish11x2,focused33,Full20;mirror delta-158.

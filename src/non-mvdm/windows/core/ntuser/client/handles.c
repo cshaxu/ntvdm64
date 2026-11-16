@@ -20,17 +20,16 @@
 * 10-28-91 Sanfords Created
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-069): true subset, GetFullUserHandle.
- * OPENNT-HOST-070 replaces only the table-entry address operation with a
- * bounded copied-entry accessor; the lookup and fallback algorithm is intact.
- * The including host binding supplies the existing handle-table view;
- * unrelated DDEML allocation, callbacks and manager state are not selected. */
+#line 24
+#pragma hdrstop
 
 #line 38
 #ifdef TESTING
 #line 39
 #error Excluded unsupported original TESTING handle-table verification
+#line 59
 #else
+#define CheckHandleTable()
 #line 61
 #endif // TESTING
 #line 293

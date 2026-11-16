@@ -16,7 +16,7 @@ static HGLOBAL data(WORD format, WORD status, HANDLE nested)
 
 int __cdecl main(void)
 {
-    HGLOBAL outer, inner;
+    HGLOBAL outer, inner, copy;
     HBITMAP bitmap;
     BITMAP bitmap_info;
     unsigned mode;
@@ -103,6 +103,35 @@ int __cdecl main(void)
     GdiFlush();
     CHECK(GlobalFlags(outer) == GMEM_INVALID_HANDLE);
     CHECK(GetObject(bitmap, sizeof(bitmap_info), &bitmap_info) == 0);
+    outer = data(CF_TEXT, DDE_FRELEASE, (HANDLE)0x12345678);
+    CHECK(outer);
+    copy = CopyDDEData(outer, FALSE);
+    CHECK(copy && copy != outer);
+    {
+        PDDE_DATA source = GlobalLock(outer), target = GlobalLock(copy);
+        CHECK(source && target && source->Data == target->Data &&
+            source->wFmt == target->wFmt && source->wStatus == target->wStatus);
+        GlobalUnlock(copy); GlobalUnlock(outer);
+    }
+    FreeDDEData(copy, TRUE, TRUE);
+    CHECK(GlobalFlags(outer) != GMEM_INVALID_HANDLE);
+    FreeDDEData(outer, TRUE, TRUE);
+    bitmap = CreateBitmap(2, 2, 1, 1, NULL);
+    CHECK(bitmap);
+    outer = data(CF_BITMAP, DDE_FRELEASE, bitmap);
+    CHECK(outer);
+    copy = CopyDDEData(outer, FALSE);
+    CHECK(copy);
+    {
+        PDDE_DATA target = GlobalLock(copy);
+        CHECK(target && target->Data != (DWORD)bitmap);
+        CHECK(GetObject((HBITMAP)target->Data, sizeof(bitmap_info), &bitmap_info));
+        CHECK(bitmap_info.bmWidth == 2 && bitmap_info.bmHeight == 2);
+        GlobalUnlock(copy);
+    }
+    FreeDDEData(copy, TRUE, TRUE);
+    CHECK(GetObjectType(bitmap) == OBJ_BITMAP);
+    FreeDDEData(outer, TRUE, TRUE);
     puts("WOW_ORIGINAL_DDE_FREE_OK release override bitmap palette dib metafile enhanced display-formats null");
     return 0;
 }

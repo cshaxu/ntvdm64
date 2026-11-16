@@ -1,0 +1,38 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+  "before_sha256": "bf6e3410b3040c2b4075a9602138225101520eaa836ee7ba37cb6beb5cee09cc",
+  "after_sha256": "0d095e359b39e83b2ee5fb09e34d1a5d50c66d1ed6a113a9a1fac8930fcd0e7c",
+  "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
+  "metric": {
+    "before": 307,
+    "after": 300,
+    "add": 2,
+    "delete": 298,
+    "delta": -7
+  },
+  "line_proof": {
+    "original_nonempty_rows": 48,
+    "corrections": []
+  },
+  "compile_controls": {
+    "current": 0,
+    "restored_include": 0,
+    "restored_manager": 2,
+    "restored_table_access": 2
+  },
+  "include_resolution": "Restored quoted precomp.h resolves to src/mvdm-host/wow32/precomp.h,not original USER client precomp;no correct dependency restoration claim",
+  "manager_boundary": "PCHANDLEENTRY,PCL_INSTANCE_INFO,DDEML allocator/locks belong to omitted client DDEML manager,not registered_full_handle -> wow_user_full_handle -> GetFullUserHandle callback. No product caller of omitted manager found. Whole restored manager compiler fails on those owners.",
+  "table_boundary": "Page-domain reads guest table metadata through page_domain_read_owned_word;copied PHE carries type/uniqueness only. Original gSharedInfo host-array expression cannot address that guest-owned mapping. Fake pointer offset or new full-table copy rejected.",
+  "changes": "Restore original pragma and empty CheckHandleTable macro;remove redundant commentary;retain one TESTING #error;no runtime statement changed",
+  "status": "Whole-file audit,final compilation/publication/regression complete;residual boundary decisions pending owner;Git delivery accompanies receipt",
+  "original_newline": "CRLF",
+  "final_verification": {
+    "compiler_exit": 0,
+    "whole_including_translation_unit_preprocessed_rows": 44996,
+    "identical_excluding_line_metadata_and_hdrstop": true,
+    "pch_used": false,
+    "runtime": "No handles executable statement changed;batch Full20 passed on published package"
+  },
+  "delivery_status": "Cached x86/x64,11x2 publication,focused33,Full20 and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p232-checkpoint.json"
+}
