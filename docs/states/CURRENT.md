@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2244 reviewed:851 restored/confirmed published,0 local restorations,10 approved/policy,
-1383 qualified pending;476 unreviewed. Files312/365 source-reviewed,53 remain;
-P227 file312 verified/published;Git delivery accompanies receipt.
+2288 reviewed:880 restored/confirmed published,0 local restorations,11 approved/policy,
+1397 qualified pending;432 unreviewed. Files313/365 source-reviewed,52 remain;
+P228 file313 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P227 package `ff91f173-02c5-4b37-a7bf-bc1428a4d0b1` published11x2;hashes verified.
-Dialog manager original order/modal/focus paths restored;native USER slots
-and minimal PDLG guards remain pending.918->304(-614).
+P228 package `01d0f5ca-cb25-415e-b3c6-99331fbeb569` published11x2;hashes verified.
+Original default-button/keyboard flow restored;bounded BUTN lifetime and
+compilation residuals pending.183->67(-116).
 Cached x86/x64,32 fixtures,Full20 including DOS4GW and governance passed.
-Cumulative365-file diff119913->103161(-16752). No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p227-checkpoint.json).
-Git delivery accompanies receipt;R2245 next.
+Cumulative365-file diff119913->103045(-16868).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p228-checkpoint.json).
+Git delivery accompanies receipt;R2289 next.
 
 ## Remaining Scope
 
@@ -193,3 +193,8 @@ with/without control and two guard-removal negatives recorded.
 916 original source rows and3 selected preprocessing contexts checked.
 Cached,publish11x2,focused32,Full20,governance passed;Git delivery accompanies receipt.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p227-checkpoint.json).
+
+P228 verified/published:dlgmgr2 183->67(-116);29 restored points,one
+exclusion-policy point,14 pending decisions.539 original source rows,3 selected
+preprocessing contexts;cached,publish11x2,focused32,Full20,governance passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p228-checkpoint.json).

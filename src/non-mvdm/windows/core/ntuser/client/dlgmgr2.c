@@ -8,9 +8,6 @@
 * 12-Feb-1991 mikeke    Added Revalidation code
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-108): retain original default-button workers
- * and descendant lookup; IsDialogMessage A/W has an explicit cohort.
- * The standalone precomp binds existing scoped native calls and WND graph. */
 #line 11
 #include "precomp.h"
 #pragma hdrstop
@@ -50,24 +47,11 @@ void xxxRemoveDefaultButton(
         ThreadLock(pwnd, &tlpwnd);
 
         code = (UINT)SendMessage(HWq(pwnd), WM_GETDLGCODE, 0, 0L);
-        /* DIVERGENCE(OPENNT-HOST-119): query can destroy traversal participants. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||
-                TestWF(pwndRoot, WFDESTROYED) || (pwndRoot->fnid & FNID_STATUS_BITS)) {
-            ThreadUnlock(&tlpwnd);
-            return;
-        }
 
-#line 49
         if (code & DLGC_DEFPUSHBUTTON) {
             SendMessage(HWq(pwnd), BM_SETSTYLE, BS_PUSHBUTTON, (LONG)TRUE);
         }
-        /* DIVERGENCE(OPENNT-HOST-119): a style notification may retire the graph. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||
-                TestWF(pwndRoot, WFDESTROYED) || (pwndRoot->fnid & FNID_STATUS_BITS)) {
-            ThreadUnlock(&tlpwnd);
-            return;
-        }
-#line 53
+
         pwnd = _NextControl(pwndRoot, pwnd, 0);
 
         ThreadUnlock(&tlpwnd);
@@ -118,10 +102,6 @@ void xxxCheckDefPushButton(
             return;
 
         codeNewFocus = SendMessage(hwndNewFocus, WM_GETDLGCODE, 0, 0L);
-        /* DIVERGENCE(OPENNT-HOST-119): keep the exact new-focus identity. */
-        if (TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS) ||
-                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) return;
-#line 103
     }
 
     if (SAMEWOWHANDLE(hwndOldFocus, hwndNewFocus)) {
@@ -145,10 +125,6 @@ void xxxCheckDefPushButton(
            if (TestWF(pwndDlg, WFWIN40COMPAT) && hwndOldFocus)
            {
                lT = SendMessage(HWq(pwndDlg), DM_GETDEFID, 0, 0L);
-               /* DIVERGENCE(OPENNT-HOST-119): default-ID callbacks can destroy. */
-               if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS) ||
-                       TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS)) return;
-#line 126
                id = (HIWORD(lT) == DC_HASDEFID ? LOWORD(lT) : IDOK);
                lT = MAKELONG(id, 0);
 
@@ -159,10 +135,6 @@ void xxxCheckDefPushButton(
                        hwndOldFocus = HW(pwndOldFocus);
                        if (SendMessage(hwndOldFocus, WM_GETDLGCODE, 0, 0L) & DLGC_DEFPUSHBUTTON)
                        {
-                           /* DIVERGENCE(OPENNT-HOST-119): no traversal after query death. */
-                           if (TestWF(pwndOldFocus, WFDESTROYED) || (pwndOldFocus->fnid & FNID_STATUS_BITS) ||
-                                   TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) return;
-#line 136
                            xxxRemoveDefaultButton(pwndDlg, pwndOldFocus);
                            goto SetNewDefault;
                        }
@@ -170,11 +142,7 @@ void xxxCheckDefPushButton(
                }
            }
 
-           /* DIVERGENCE(OPENNT-HOST-119): an unsuccessful old-focus query can destroy too. */
-           if (!TestWF(pwndNewFocus, WFDESTROYED) && !(pwndNewFocus->fnid & FNID_STATUS_BITS) &&
-                   !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))
-               SendMessage(hwndNewFocus, BM_SETSTYLE, BS_DEFPUSHBUTTON, (LONG)TRUE);
-#line 144
+           SendMessage(hwndNewFocus, BM_SETSTYLE, BS_DEFPUSHBUTTON, (LONG)TRUE);
         }
         return;
     }
@@ -187,21 +155,13 @@ void xxxCheckDefPushButton(
                 0, 0) & (DLGC_DEFPUSHBUTTON | DLGC_UNDEFPUSHBUTTON))) ||
             (hwndNewFocus != NULL &&
                 (codeNewFocus & (DLGC_DEFPUSHBUTTON | DLGC_UNDEFPUSHBUTTON)))) {
-        /* DIVERGENCE(OPENNT-HOST-119): old-focus query can retire new focus/dialog. */
-        if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS) ||
-                (pwndNewFocus && (TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS)))) return;
-#line 156
         xxxRemoveDefaultButton(pwndDlg, pwndNewFocus);
     }
 
 SetNewDefault:
-    /* DIVERGENCE(OPENNT-HOST-119): nested removal/style calls may destroy. */
-    if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS) ||
-            (pwndNewFocus && (TestWF(pwndNewFocus, WFDESTROYED) || (pwndNewFocus->fnid & FNID_STATUS_BITS)))) return;
     /*
      * If moving to a button, make that button the default.
      */
-#line 163
     if (codeNewFocus & DLGC_UNDEFPUSHBUTTON) {
         SendMessage(hwndNewFocus, BM_SETSTYLE, BS_DEFPUSHBUTTON, (LONG)TRUE);
     } else {
@@ -215,16 +175,10 @@ SetNewDefault:
          * Get the original default button handle
          */
         lT = SendMessage(HWq(pwndDlg), DM_GETDEFID, 0, 0L);
-        /* DIVERGENCE(OPENNT-HOST-119): never traverse a retired dialog graph. */
-        if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) return;
-#line 176
         id = (HIWORD(lT) == DC_HASDEFID ? LOWORD(lT) : IDOK);
         pwndT = _FindDlgItem(pwndDlg, id);
 
-        /* DIVERGENCE(OPENNT-HOST-119): copied lookup can retain the target
-         * retired by the default-ID callback; storage is not native liveness. */
-        if (pwndT == NULL || TestWF(pwndT, WFDESTROYED) || (pwndT->fnid & FNID_STATUS_BITS))
-#line 180
+        if (pwndT == NULL)
             return;
         ThreadLockAlways(pwndT, &tlpwndT);
 
@@ -244,11 +198,7 @@ SetNewDefault:
             return;
         }
 
-        /* DIVERGENCE(OPENNT-HOST-119): only a surviving queried button is restyled. */
-        if (!TestWF(pwndT, WFDISABLED) && !TestWF(pwndT, WFDESTROYED) &&
-                !(pwndT->fnid & FNID_STATUS_BITS) && !TestWF(pwndDlg, WFDESTROYED) &&
-                !(pwndDlg->fnid & FNID_STATUS_BITS)) {
-#line 200
+        if (!TestWF(pwndT, WFDISABLED)) {
             SendMessage(HWq(pwndT), BM_SETSTYLE, BS_DEFPUSHBUTTON, (LONG)TRUE);
         }
         ThreadUnlock(&tlpwndT);
@@ -256,15 +206,15 @@ SetNewDefault:
 }
 
 
-/* DIVERGENCE(OPENNT-HOST-119): recover the original keyboard cohort separately. */
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
+#line 207
 /***************************************************************************\
 * IsDialogMessage (API)
 *
 * History:
 \***************************************************************************/
 
-
+#line 213
 #line 213
 BOOL IsDialogMessageA(
     HWND hwndDlg,
@@ -283,6 +233,7 @@ BOOL IsDialogMessageA(
 #else
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
 #line 232
+#line 222
     case WM_CHAR:
     case EM_SETPASSWORDCHAR:
 #endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
@@ -309,16 +260,13 @@ BOOL IsDialogMessageA(
         RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);
     }
 
-    /* DIVERGENCE(OPENNT-HOST-119): restore caller input on callback exception. */
-    __try {
 #line 248
-        bRet = IsDialogMessageW(hwndDlg, lpmsg);
-    } __finally {
+    bRet = IsDialogMessageW(hwndDlg, lpmsg);
+
     /*
      * Restore the original ANSI char.
      */
-        lpmsg->wParam = wParamSaved;
-    }
+    lpmsg->wParam = wParamSaved;
 #line 254
     return bRet;
 }
@@ -360,18 +308,13 @@ BOOL IsDialogMessageW(
     if (CallMsgFilter(lpMsg, MSGF_DIALOGBOX))
         return TRUE;
 
-    /* DIVERGENCE(OPENNT-HOST-119): a filter may destroy the retained dialog. */
-    if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))
-        return FALSE;
-
 #line 313
     if (lpMsg->hwnd == NULL) {
         return FALSE;
     }
 
     pwnd = ValidateHwnd(lpMsg->hwnd);
-    /* DIVERGENCE(OPENNT-HOST-119): a filter may withdraw the message target. */
-    if (!pwnd) return FALSE;
+#line 318
     //
     // THIS IS FOR MFC.
     //
@@ -464,11 +407,6 @@ BOOL IsDialogMessageW(
         code = (UINT)SendMessage(lpMsg->hwnd, WM_GETDLGCODE, lpMsg->wParam,
                 (DWORD)lpMsg);
 
-        /* DIVERGENCE(OPENNT-HOST-119): consume a message whose target died. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||
-                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))
-            goto ReturnProcessed;
-
         /*
          * If the control wants to process the message, then don't check for
          * possible mnemonic key.
@@ -546,10 +484,6 @@ CallDefWindowProcAndReturnTrue:
     case WM_KEYDOWN:
         code = (UINT)SendMessage(lpMsg->hwnd, WM_GETDLGCODE, lpMsg->wParam,
                 (DWORD)lpMsg);
-        /* DIVERGENCE(OPENNT-HOST-119): query cannot authorize stale navigation. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS) ||
-                TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))
-            goto ReturnProcessed;
 #line 485
         if (code & (DLGC_WANTALLKEYS | DLGC_WANTMESSAGE))
             break;
@@ -564,10 +498,8 @@ CallDefWindowProcAndReturnTrue:
                 hwnd2 = HWq(pwnd2);
                 ThreadLockAlways(pwnd2, &tlpwnd2);
                 DlgSetFocus(hwnd2);
-                /* DIVERGENCE(OPENNT-HOST-119): focus can retire either window. */
-                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&
-                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))
-                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
+#line 498
+                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
 #line 499
                 ThreadUnlock(&tlpwnd2);
             }
@@ -604,19 +536,18 @@ CallDefWindowProcAndReturnTrue:
                     (DWORD)lpMsg);
 
             /* DIVERGENCE(OPENNT-HOST-119): do not borrow cleaned Button data. */
-            if (TestWF(pwnd2, WFDESTROYED) || (pwnd2->fnid & FNID_STATUS_BITS) ||
-                    TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS)) {
+            if (pwnd2->fnid & FNID_STATUS_BITS) {
                 ThreadUnlock(&tlpwnd2);
-                ThreadUnlock(&tlpwnd);
-                if (fLockDlg) ThreadUnlock(&tlpwndDlg);
-                return TRUE;
+                goto ReturnProcessed;
             }
 
+#line 533
             /*
              * We are just moving the focus rect around! So, do not send
              * BN_CLICK messages, when WM_SETFOCUSing.  Fix for Bug
              * #4358.
              */
+#line 538
 #line 538
             if (code & (DLGC_UNDEFPUSHBUTTON | DLGC_DEFPUSHBUTTON)) {
                 PBUTN pbutn;
@@ -638,39 +569,28 @@ CallDefWindowProcAndReturnTrue:
                     BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;
                 }
                     if (fIsNTButton) wow_button_scope_leave(&buttonScope);
+#line 548
                 }
-                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&
-                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))
-                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
+#line 549
+#line 549
+                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
+#line 550
 #line 550
             } else if (code & DLGC_RADIOBUTTON) {
                 DlgSetFocus(hwnd2);
-                /* DIVERGENCE(OPENNT-HOST-119): radio focus is also a callout. */
-                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&
-                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))
-                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
-                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&
-                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS) &&
-                        TestWF(pwnd2, BFTYPEMASK) == LOBYTE(BS_AUTORADIOBUTTON)) {
+                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
+                if (TestWF(pwnd2, BFTYPEMASK) == LOBYTE(BS_AUTORADIOBUTTON)) {
 
                     /*
                      * So that auto radio buttons get clicked on
                      */
-                    /* DIVERGENCE(OPENNT-HOST-119): reject destruction in query. */
-                    if (!SendMessage(hwnd2, BM_GETCHECK, 0, 0L) &&
-                            !TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&
-                            !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS)) {
-#line 559
+                    if (!SendMessage(hwnd2, BM_GETCHECK, 0, 0L)) {
                         SendMessage(hwnd2, BM_CLICK, TRUE, 0L);
                     }
                 }
             } else if (!(code & DLGC_STATIC)) {
                 DlgSetFocus(hwnd2);
-                /* DIVERGENCE(OPENNT-HOST-119): ordinary focus has the same edge. */
-                if (!TestWF(pwnd2, WFDESTROYED) && !(pwnd2->fnid & FNID_STATUS_BITS) &&
-                        !TestWF(pwndDlg, WFDESTROYED) && !(pwndDlg->fnid & FNID_STATUS_BITS))
-                    xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
-#line 565
+                xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
             }
             ThreadUnlock(&tlpwnd2);
             ThreadUnlock(&tlpwnd);
@@ -690,32 +610,19 @@ CallDefWindowProcAndReturnTrue:
                 code = 0;
             else
             {
-                /* DIVERGENCE(OPENNT-HOST-119): retain focus before its query. */
-                pwnd2 = ValidateHwnd(hwndFocus);
-                if (!pwnd2) goto ReturnProcessed;
-#line 584
                 code = (WORD)(DWORD)SendMessage(hwndFocus, WM_GETDLGCODE,
                     0, 0L);
-                /* DIVERGENCE(OPENNT-HOST-119): do not resolve a replacement HWND. */
-                if (TestWF(pwnd2, WFDESTROYED) || (pwnd2->fnid & FNID_STATUS_BITS) ||
-                        TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))
-                    goto ReturnProcessed;
-#line 586
             }
 
             if (code & DLGC_DEFPUSHBUTTON)
             {
                 iOK = GetDlgCtrlID(hwndFocus);
-                /* DIVERGENCE(OPENNT-HOST-119): use the pre-query retained pwnd2. */
+                pwnd2 = ValidateHwnd(hwndFocus);
                 goto HaveWindow;
             }
             else
             {
                 lT = (LONG)SendMessage(hwndDlg, DM_GETDEFID, 0, 0L);
-                /* DIVERGENCE(OPENNT-HOST-119): default query may retire dialog. */
-                if (TestWF(pwndDlg, WFDESTROYED) || (pwndDlg->fnid & FNID_STATUS_BITS))
-                    goto ReturnProcessed;
-#line 597
                 iOK = MAKELONG(
                     (HIWORD(lT)==DC_HASDEFID ? LOWORD(lT) : IDOK),
                     0);
@@ -758,6 +665,7 @@ ReturnProcessed: /* DIVERGENCE(OPENNT-HOST-119): shared existing unlock exit. */
 }
 #endif
 
+#line 636
 /***************************************************************************\
 *
 * FindDlgItem32()
@@ -767,6 +675,7 @@ ReturnProcessed: /* DIVERGENCE(OPENNT-HOST-119): shared existing unlock exit. */
 *
 \***************************************************************************/
 
+#line 645
 #line 645
 PWND _FindDlgItem(PWND pwndParent, DWORD id)
 {

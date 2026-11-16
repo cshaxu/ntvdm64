@@ -83,6 +83,12 @@ static void verify_dialog_controls(void)
     SetWF(&root, WFWIN40COMPAT);
     CHECK(_FindDlgItem(&root, 3) == &nested);
     CHECK(_FindDlgItem(&root, 999) == NULL);
+    /* Production withdrawal keeps pinned WND storage and desktop parent,
+     * but removes it from the dialog. Original navigation must reject it. */
+    first.spwndParent = &desktop;
+    CHECK(_GetNextDlgTabItem(&root, &first, FALSE) == NULL);
+    CHECK(_GetNextDlgTabItem(&root, &first, TRUE) == NULL);
+    first.spwndParent = &root;
     default_id = 1; first_code = DLGC_DEFPUSHBUTTON;
     last_code = DLGC_UNDEFPUSHBUTTON; style_writes = 0;
     xxxCheckDefPushButton(&root, first.head.h, last.head.h);

@@ -26,7 +26,7 @@ static UINT target_code;
 enum fault_point { NONE, SOURCE_QUERY, TARGET_QUERY, FOCUS, DEFAULT_ID, CHECK_STATE, STYLE, SELECTION };
 static enum fault_point fault;
 static BOOL kill_dialog;
-static BOOL raise_filter;
+static BOOL raise_filter, handle_filter;
 #define FILTER_FAULT ((DWORD)0xe0447121)
 __declspec(thread) wow_edit_context *wow_edit_current;
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line=%d fault=%u root=%u\n", __LINE__, fault, kill_dialog); } } while (0)
@@ -69,17 +69,22 @@ void WINAPI FreeLookasideEntry(PLOOKASIDE pool, PVOID value)
 BOOL _IsChild(PWND parent, PWND child)
 { return parent == &dialog && (child == &source || child == &target.wnd); }
 PWND _GetDlgItem(PWND parent, int id)
-{ CHECK(parent == &dialog && !dead(parent)); return id == IDOK ? &target.wnd : NULL; }
+{ CHECK(parent == &dialog); return !dead(parent) && !dead(&target.wnd) && id == IDOK ? &target.wnd : NULL; }
 PWND _GetChildControl(PWND parent, PWND child)
-{ CHECK(parent == &dialog && !dead(parent)); return child; }
+{ CHECK(parent == &dialog); return dead(parent) || (child && dead(child)) ? NULL : child; }
 PWND _NextControl(PWND parent, PWND child, UINT flags)
-{ (void)flags; CHECK(parent == &dialog && !dead(parent)); return child == &target.wnd ? &source : &target.wnd; }
+{
+    (void)flags; CHECK(parent == &dialog);
+    if (dead(parent) || (dead(&source) && dead(&target.wnd))) return parent;
+    if ((!child || child == &target.wnd) && !dead(&source)) return &source;
+    return !dead(&target.wnd) ? &target.wnd : &source;
+}
 PWND _GetNextDlgTabItem(PWND parent, PWND child, BOOL previous)
-{ (void)previous; CHECK(parent == &dialog && (!child || child == &source)); return dead(parent) ? parent : &target.wnd; }
+{ (void)previous; CHECK(parent == &dialog && (!child || child == &source)); return child && dead(child) ? NULL : dead(parent) ? parent : &target.wnd; }
 PWND _GetNextDlgGroupItem(PWND parent, PWND child, BOOL previous)
 { return _GetNextDlgTabItem(parent, child, previous); }
 PWND xxxGotoNextMnem(PWND parent, PWND child, WCHAR character)
-{ (void)parent; (void)child; (void)character; CHECK(FALSE); return NULL; }
+{ (void)character; CHECK(parent == &dialog && (dead(parent) || dead(child))); return NULL; }
 BOOL WINAPI wow_native_CallMsgFilterW(LPMSG message, int code)
 {
     CHECK(code == MSGF_DIALOGBOX);
@@ -87,11 +92,11 @@ BOOL WINAPI wow_native_CallMsgFilterW(LPMSG message, int code)
         CHECK(message->wParam == 0x00420041);
         RaiseException(FILTER_FAULT, 0, 0, NULL);
     }
-    return FALSE;
+    return handle_filter;
 }
 HWND WINAPI wow_native_GetFocus(void) { return source.head.h; }
 LRESULT WINAPI wow_native_DispatchMessageW(const MSG *message)
-{ (void)message; CHECK(FALSE); return 0; }
+{ CHECK(!wow_window_client_validate_window(message->hwnd)); return 0; }
 LONG WINAPI wow_default_window_proc(PWND w, UINT m, WPARAM wp, LPARAM lp, DWORD ansi)
 { (void)w; (void)m; (void)wp; (void)lp; (void)ansi; CHECK(FALSE); return 0; }
 HWND WINAPI wow_native_SetFocus(HWND window)
@@ -140,7 +145,7 @@ static void setup(UINT code)
     target.pbutn = &button; button.spwnd = &target.wnd;
     target.wnd.spmenu = (PMENU)(ULONG_PTR)IDOK;
     target.wnd.style = BS_AUTORADIOBUTTON;
-    target_code = code; focused = clicked = styles = 0; fault = NONE; kill_dialog = raise_filter = FALSE;
+    target_code = code; focused = clicked = styles = 0; fault = NONE; kill_dialog = raise_filter = handle_filter = FALSE;
 }
 static BOOL key(UINT message, WPARAM keycode)
 {
@@ -189,7 +194,12 @@ int __cdecl main(void)
     ansi.hwnd = source.head.h; ansi.message = WM_CHAR; ansi.wParam = 0x4241;
     __try { (void)wow_original_IsDialogMessageA(dialog.head.h, &ansi); }
     __except (GetExceptionCode() == FILTER_FAULT ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
-    CHECK(caught && ansi.wParam == 0x4241);
+    CHECK(caught && ansi.wParam == 0x00420041);
+    /* Original ANSI contract restores on normal return; exceptions propagate
+     * with the in-flight conversion. Entry-scope cleanup has its own fixture. */
+    setup(0); handle_filter = TRUE; ansi.wParam = 0x4241;
+    CHECK(wow_original_IsDialogMessageA(dialog.head.h, &ansi));
+    CHECK(ansi.wParam == 0x4241);
     /* Actual default-dialog callers must stop too: the helper returning
      * safely does not keep its caller's PDLG alive. These are explicit
      * terminal-state doubles, not evidence of real HWND reuse. */

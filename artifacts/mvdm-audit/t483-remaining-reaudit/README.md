@@ -1344,3 +1344,7 @@ P226: [delivery receipt](batch-p226-checkpoint.json). Cached,publish11x2,focused
 P227 active: [dlgmgr ordered review](p227-dlgmgr-review.json);partial file,not delivered.
 
 P227: [delivery receipt](batch-p227-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;dlgmgr918->304(-614);native initialization and two guard negative controls.
+
+P228 active: [dlgmgr2 ordered review](p228-dlgmgr2-review.json);partial file,not delivered.
+
+P228: [delivery receipt](batch-p228-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;dlgmgr2 183->67(-116);original navigation and ANSI return semantics restored.

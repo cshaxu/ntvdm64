@@ -1,0 +1,657 @@
+{
+  "batch": "P228",
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+  "range": "R2245-R2288",
+  "point_count": 44,
+  "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+  "before_sha256": "33f0e9f5998864fc323e197f4ea0b5cf2ccd5d2ad1c59febdb1efc83f5181b06",
+  "before": {
+    "add": 131,
+    "delete": 52,
+    "total": 183
+  },
+  "current": {
+    "add": 29,
+    "delete": 38,
+    "total": 67
+  },
+  "status": "Cached x86/x64,publish11x2,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "next": "T483-R2289",
+  "points": {
+    "T483-R2245": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Remove import-description comment;original includes and no runtime binding affected.",
+      "line_check": "Entry #line24 retained;whole-file line proof pending;no #error removed."
+    },
+    "T483-R2246": {
+      "before": "+1/-1",
+      "after": "original",
+      "reason": "Historical one-line structural anchor no longer differs in current body. Original include/pragma/blank layout confirmed;do not invent a second modification.",
+      "line_check": "Entry #line24 retained;whole-file line proof pending;no #error removed."
+    },
+    "T483-R2247": {
+      "before": "+6/-0",
+      "after": "original",
+      "reason": "Restore original query continuation in xxxRemoveDefaultButton. It reads no PDLG;WND graph targets remain pinned through outermost borrow. Native invalid HWND messages reject destroyed target. Early return also skips surviving controls;no demonstrated need for altered traversal.",
+      "line_check": "Entry #line24 retained;whole-file line proof pending;no #error removed."
+    },
+    "T483-R2248": {
+      "before": "+6/-1",
+      "after": "original",
+      "reason": "Restore original style continuation and blank layout. Native callback refresh transfers exact graph pins to outermost scope;_NextControl handles missing next/parent relations. Original lock/unlock and traversal retained;no check relocated to adapter.",
+      "line_check": "Entry #line24 retained;whole-file line proof pending;no #error removed."
+    },
+    "T483-R2249": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore query continuation;later accesses are retained WND fields and HWND messages,not PDLG. No demonstrated numeric HWND reuse warrants early return.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2250": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore original DM_GETDEFID continuation and spmenu comparison. WND binding remains pinned;private PDLG is not accessed here.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2251": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore original default-button removal after old-button query. Traversal has scoped graph lifetime and native messages reject invalid HWND.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2252": {
+      "before": "+4/-1",
+      "after": "original",
+      "reason": "Restore original BM_SETSTYLE send;invalid target rejected by native service. Do not suppress original continuation for unproved handle-reuse risk.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2253": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore original removal call. Current query result may still require clearing another surviving default button;blanket terminal return changes original traversal.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2254": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore SetNewDefault original continuation. No freed PDLG state read;native operations and retained WND graph suffice.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2255": {
+      "before": "+2/-0",
+      "after": "original",
+      "reason": "Restore original ID parsing and lookup after DM_GETDEFID. _FindDlgItem uses retained WND direct-child/recursive graph,not PDLG.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2256": {
+      "before": "+3/-1",
+      "after": "original",
+      "reason": "Restore original pwndT==NULL check. A retained dead target does not justify extra local policy:following native WM_GETDLGCODE rejects invalid HWND and returns0,so original button-type check returns.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2257": {
+      "before": "+4/-1",
+      "after": "original",
+      "reason": "Restore original WFDISABLED condition. HWND message boundary handles destroyed target;keep original disabled-button contract.",
+      "line_check": "Original body copied intact;no excluded #error inside this function;whole-file line proof pending."
+    },
+    "T483-R2258": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "reason": "Product New-T404S5Wow32ProviderNinja selects keyboard bodies;New-T447S3CallBoundaryNinja separately compiles original_keyboard and original_dlgmgr2. Navigation fixture links default-button/lookup body without keyboard/context dependencies. Existing outer boundary is split around excluded FE branches so unsupported profile still raises #error;do not remove exclusions or move equal complexity to shim.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2259": {
+      "before": "+1/-0",
+      "after": "original",
+      "reason": "Remove extra blank line",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2260": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Product New-T404S5Wow32ProviderNinja selects keyboard bodies;New-T447S3CallBoundaryNinja separately compiles original_keyboard and original_dlgmgr2. Navigation fixture links default-button/lookup body without keyboard/context dependencies. Existing outer boundary is split around excluded FE branches so unsupported profile still raises #error;do not remove exclusions or move equal complexity to shim.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2261": {
+      "before": "+3/-0",
+      "after": "unchanged",
+      "reason": "Product New-T404S5Wow32ProviderNinja selects keyboard bodies;New-T447S3CallBoundaryNinja separately compiles original_keyboard and original_dlgmgr2. Navigation fixture links default-button/lookup body without keyboard/context dependencies. Existing outer boundary is split around excluded FE branches so unsupported profile still raises #error;do not remove exclusions or move equal complexity to shim.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2262": {
+      "before": "+1/-10",
+      "after": "unchanged",
+      "reason": "Owner requires excluded FE_SB body remain #error with original conditional frame.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2263": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Product New-T404S5Wow32ProviderNinja selects keyboard bodies;New-T447S3CallBoundaryNinja separately compiles original_keyboard and original_dlgmgr2. Navigation fixture links default-button/lookup body without keyboard/context dependencies. Existing outer boundary is split around excluded FE branches so unsupported profile still raises #error;do not remove exclusions or move equal complexity to shim.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2264": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Product New-T404S5Wow32ProviderNinja selects keyboard bodies;New-T447S3CallBoundaryNinja separately compiles original_keyboard and original_dlgmgr2. Navigation fixture links default-button/lookup body without keyboard/context dependencies. Existing outer boundary is split around excluded FE branches so unsupported profile still raises #error;do not remove exclusions or move equal complexity to shim.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2265": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Product New-T404S5Wow32ProviderNinja selects keyboard bodies;New-T447S3CallBoundaryNinja separately compiles original_keyboard and original_dlgmgr2. Navigation fixture links default-button/lookup body without keyboard/context dependencies. Existing outer boundary is split around excluded FE branches so unsupported profile still raises #error;do not remove exclusions or move equal complexity to shim.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2266": {
+      "before": "+4/-2",
+      "after": "original",
+      "reason": "Original IsDialogMessageA restores ANSI wParam on normal return only. WU32IsDialogMessage passes local MSG t2 and unthunks only after normal return;dialog keyboard binding already unwinds scope/resources. Fixture-injected exception restoration is an added guarantee,not evidence original fails required behavior. Restore original call/restore sequence and retain exception propagation.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2267": {
+      "before": "+2/-1",
+      "after": "original",
+      "reason": "Original IsDialogMessageA restores ANSI wParam on normal return only. WU32IsDialogMessage passes local MSG t2 and unthunks only after normal return;dialog keyboard binding already unwinds scope/resources. Fixture-injected exception restoration is an added guarantee,not evidence original fails required behavior. Restore original call/restore sequence and retain exception propagation.",
+      "line_check": "FE_SB/FE_IME excluded #error and original structure retained;restored normal return begins#line248."
+    },
+    "T483-R2268": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "New-T447S3CallBoundaryNinja.ps1 compiles original_dlgmgr2 without keyboard cohort for navigation and original_keyboard with cohort for keyboard lifetime. control-client/precomp.h:235-243 only remaps SDK IsDialogMessageA/W dllimport names under this cohort. Product New-T404S5Wow32ProviderNinja.ps1:490 enables it. Closing/reopening around LATER preserves independently diagnostic #error. Retain existing two boundaries; no new shim or source complexity transfer.",
+      "line_check": "LATER #error unchanged; #line313 and318 resume original source; whole-file preprocessing pending"
+    },
+    "T483-R2269": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "New-T447S3CallBoundaryNinja.ps1 compiles original_dlgmgr2 without keyboard cohort for navigation and original_keyboard with cohort for keyboard lifetime. control-client/precomp.h:235-243 only remaps SDK IsDialogMessageA/W dllimport names under this cohort. Product New-T404S5Wow32ProviderNinja.ps1:490 enables it. Closing/reopening around LATER preserves independently diagnostic #error. Retain existing two boundaries; no new shim or source complexity transfer.",
+      "line_check": "LATER #error unchanged; #line313 and318 resume original source; whole-file preprocessing pending"
+    },
+    "T483-R2270": {
+      "before": "+4/-0",
+      "after": "original",
+      "reason": "Original GetParentDialog only traverses pinned WND relations, not PDLG. wow_user_borrow_client_graph includes retired roots and transfers relation pins to outermost borrow. After filter retirement ValidateHwnd rejects dead ordinary targets, and original _IsChild(NULL) returns FALSE. Retained callback views remain pinned; later button-private-state guards are distinct and unchanged. No evidence the extra immediate root return is required. Restore original filter continuation; verify filter/root retirement and scope cleanup in whole-file fixture batch.",
+      "line_check": "LATER #error unchanged; #line313 and318 resume original source; whole-file preprocessing pending"
+    },
+    "T483-R2271": {
+      "before": "+2/-0",
+      "after": "original",
+      "reason": "Original rtl/wow.c::_IsChild starts while(pwnd!=NULL) and returns FALSE for NULL. Original GetParentDialog retains a nonnull input/root result and accesses WND only. Thus failed target validation reaches original membership rejection before ThreadLock or target dereference. Extra NULL early return duplicates that result; restore original.",
+      "line_check": "LATER #error unchanged; #line313 and318 resume original source; whole-file preprocessing pending"
+    },
+    "T483-R2272": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "WM_CHAR continuation uses pinned WND,original mnemonic provider and native HWND calls;no direct PDLG/BUTN access. Original mnemonic provider owns its own navigation/query handling;later private-button guard unchanged. Restoring original removes blanket message-consumption policy without adding another path.",
+      "line_check": "Excluded #error unchanged;original485/498/499 anchors retained or restored;whole-file proof pending"
+    },
+    "T483-R2273": {
+      "before": "+4/-0",
+      "after": "original",
+      "reason": "Actual page_domain_withdraw_window retains desktop parent for borrowed destroyed WND;wow_user_borrow_client_graph pins exact generations. _GetNextDlgTabItem uses _GetChildControl then _IsDescendant to reject withdrawn control. Other continuation accesses pinned WND/native operations;direct BUTN access retains separately reviewed guard. Existing fixture simplified traversal must be corrected rather than treating its blanket no-navigation expectation as original failure.",
+      "line_check": "Excluded #error unchanged;original485/498/499 anchors retained or restored;whole-file proof pending"
+    },
+    "T483-R2274": {
+      "before": "+4/-1",
+      "after": "original",
+      "reason": "DlgSetFocus only sends native HWND messages/sets focus. Restored xxxCheckDefPushButton uses pinned WND graph and native HWND calls,not PDLG. Caller accesses no private state after it;ThreadUnlock remains original. Guard adds no demonstrated required protection.",
+      "line_check": "Excluded #error unchanged;original485/498/499 anchors retained or restored;whole-file proof pending"
+    },
+    "T483-R2275": {
+      "before": "+9/-0",
+      "after": "minimized",
+      "reason": "btnctl.c WM_NCDESTROY releases BUTN;GETFNID masks FNID_STATUS_BITS,so original query continuation can still enter button-state writes after cleanup. Existing scope begins after query and cannot retain already freed BUTN. Check only target cleanup bits,unlock target then reuse existing ReturnProcessed unlock exit;root and pre-cleanup WFDESTROYED checks do not protect additional BUTN memory.",
+      "line_check": "No #error change;original549/550 anchors;whole-file proof pending",
+      "remaining_scale": "Remaining +6/-0;was +9/-0;net -3 (includes separating blank line)."
+    },
+    "T483-R2276": {
+      "before": "+4/-0",
+      "after": "unchanged",
+      "reason": "Original DlgSetFocus invokes application code;btnctl.c WM_NCDESTROY can free pbutn before original BST_DONTCLICK clear. wow_button_free_state defers release to oldest same-control scope,while WND borrow alone does not pin BUTN. Keep bounded existing scope at this direct private-state access;no new owner.",
+      "line_check": "No #error change;original549/550 anchors;whole-file proof pending",
+      "remaining_scale": "Remaining +4/-0;unchanged bounded BUTN scope entry."
+    },
+    "T483-R2277": {
+      "before": "+1/-1",
+      "after": "original",
+      "reason": "Historical one-line replacement no longer differs:current BOOL fIsNTButton declaration and pbutn assignment match pinned original body. Confirm current identity;no additional edit.",
+      "line_check": "No #error change;original549/550 anchors;whole-file proof pending"
+    },
+    "T483-R2278": {
+      "before": "+2/-0",
+      "after": "unchanged",
+      "reason": "Exception in DlgSetFocus must unwind the added button scope;otherwise TLS current_invocation points to dead stack and deferred state/resource release is lost. Existing finally is required by real scope lifetime,not an invented MSG rollback contract. Retain minimal cleanup boundary;normal original bit clear preserved.",
+      "line_check": "No #error change;original549/550 anchors;whole-file proof pending",
+      "remaining_scale": "Remaining +2/-0;unchanged finally boundary."
+    },
+    "T483-R2279": {
+      "before": "+5/-1",
+      "after": "minimized",
+      "reason": "Keep scope_leave and finally close required by R2276/R2278;restore unconditional original xxxCheckDefPushButton after scope. Helper has no BUTN/PDLG access and native invalid HWND operations reject retired targets. Removed duplicate target/root terminal guard.",
+      "line_check": "No #error change;original549/550 anchors;whole-file proof pending",
+      "remaining_scale": "Remaining +2/-0;was +5/-1;net -4;scope release/close only."
+    },
+    "T483-R2280": {
+      "before": "+7/-2",
+      "after": "original",
+      "reason": "Restore original radio/ordinary-focus continuation:only retained WND style,xxxCheckDefPushButton and native HWND messages follow;no BUTN/PDLG access. Native retirement rejection remains at native operation.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending"
+    },
+    "T483-R2281": {
+      "before": "+4/-1",
+      "after": "original",
+      "reason": "Restore original radio/ordinary-focus continuation:only retained WND style,xxxCheckDefPushButton and native HWND messages follow;no BUTN/PDLG access. Native retirement rejection remains at native operation.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending"
+    },
+    "T483-R2282": {
+      "before": "+4/-1",
+      "after": "original",
+      "reason": "Restore original radio/ordinary-focus continuation:only retained WND style,xxxCheckDefPushButton and native HWND messages follow;no BUTN/PDLG access. Native retirement rejection remains at native operation.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending"
+    },
+    "T483-R2283": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore original post-query GetDlgCtrlID/ValidateHwnd timing and default-ID continuation. Existing resolver checks full handle/generation and callback identity;original handles NULL before disabled check. No reproduced or source-mandated requirement for pre-query identity capture or added blanket early return.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending"
+    },
+    "T483-R2284": {
+      "before": "+4/-0",
+      "after": "original",
+      "reason": "Restore original post-query GetDlgCtrlID/ValidateHwnd timing and default-ID continuation. Existing resolver checks full handle/generation and callback identity;original handles NULL before disabled check. No reproduced or source-mandated requirement for pre-query identity capture or added blanket early return.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending"
+    },
+    "T483-R2285": {
+      "before": "+1/-1",
+      "after": "original",
+      "reason": "Restore original post-query GetDlgCtrlID/ValidateHwnd timing and default-ID continuation. Existing resolver checks full handle/generation and callback identity;original handles NULL before disabled check. No reproduced or source-mandated requirement for pre-query identity capture or added blanket early return.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending"
+    },
+    "T483-R2286": {
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore original post-query GetDlgCtrlID/ValidateHwnd timing and default-ID continuation. Existing resolver checks full handle/generation and callback identity;original handles NULL before disabled check. No reproduced or source-mandated requirement for pre-query identity capture or added blanket early return.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending"
+    },
+    "T483-R2287": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Existing ReturnProcessed label is required by R2275 minimal target cleanup branch;reuses original unlock path,avoids duplicated cleanup.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending",
+      "remaining_scale": "Remaining +1/-0;single shared unlock label."
+    },
+    "T483-R2288": {
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Existing keyboard cohort end is required by product-selected private SDK body names and navigation-only compile context;see R2268/R2269 concrete build/declaration evidence.",
+      "line_check": "Original550-617 content restored as contiguous block;618 mapping retained;whole-file line audit pending",
+      "remaining_scale": "Remaining +1/-0;keyboard cohort end."
+    }
+  },
+  "source_chain": [
+    "xxxRemoveDefaultButton -> SendMessage WM_GETDLGCODE/BM_SETSTYLE -> _NextControl",
+    "wow_user_borrow_client_graph includes retired roots and transfers graph target pins to outermost scope",
+    "_NextSibblingOrAncestor/_GetChildControl resolve null relations without PDLG access"
+  ],
+  "counter_review": {
+    "method": "Same agent independent original-relative final diff and call-chain review after edits;not independent agent validation",
+    "remaining": "Only keyboard build cohort,three excluded branches,target BUTN-cleanup guard and bounded focus BUTN scope remain",
+    "source_evidence": "Original GetParentDialog/_IsChild/navigation;page_domain_withdraw_window desktop-parent retirement;borrowed graph pins;ButtonWndProc WM_NCDESTROY and wow_button_free_state",
+    "fixture_limit": "Keyboard graph/native calls are explicit doubles;navigation fixture executes real original navigation. Full is actual runtime acceptance but not exhaustive reentrant HWND reuse or all exceptional callbacks. No new original-failure negative control claimed.",
+    "guest": "No guest or winnt.zip edits",
+    "governance_retry": "Initial delivery/post-build aggregate failed only CURRENT.md mojibake from locale-default read;UTF-8 corrected and owned final-docs runner reran boundary/governance/links. Original failure markers retained;product build/publication/Full input hashes unchanged."
+  },
+  "verification": "Source review only;whole-file fixture/cached build/publish/Full/Git delivery pending.",
+  "fixture_work_remaining": "Expand original navigation fixture with query/style retirement and surviving sibling assertions. Keyboard lifetime doubles must permit retained graph reads and native invalid-HWND rejection. Do not relax PDLG guard negatives from P227.",
+  "ansi_exception_review": {
+    "caller": "src/mvdm-host/wow32/wudlg.c::WU32IsDialogMessage local MSG t2",
+    "boundary": "src/wow32-dll/source/wow_dialog_keyboard_binding.c::dialog_message",
+    "test_change_pending": "Retain thrown-filter exception propagation and scope cleanup assertions;normal ANSI return restores original input,exception path follows original partial input conversion rather than invented rollback guarantee."
+  },
+  "retirement_graph_evidence": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c::page_domain_withdraw_window retains desktop parent;borrow graph propagates exact pinned relations;original dlgmgrc::_GetNextDlgTabItem rejects non-descendant before traversal. Fixture doubles must model this.",
+  "file_review_complete": true,
+  "publication": {
+    "status": "published",
+    "package": "01d0f5ca-cb25-415e-b3c6-99331fbeb569",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification_in_progress": {
+    "focused_exit": 0,
+    "navigation": "WOW_DIALOG_NAVIGATION_OK",
+    "keyboard_entry": "dialog-keyboard-entry failures=0",
+    "keyboard_lifetime": "original-keyboard-lifetime failures=0",
+    "full_runner": {
+      "pid": 12164,
+      "arguments": [
+        "-NoProfile",
+        "-File",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p228/full-isolated.ps1"
+      ],
+      "deadlineSeconds": 2400,
+      "exe": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "started": "2026-11-16T11:37:26.3301610Z"
+    }
+  },
+  "line_proof": {
+    "candidate_sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15",
+    "original_literal_lines": 539,
+    "errors": 3,
+    "add": 29,
+    "delete": 38,
+    "total": 67,
+    "mismatches": [],
+    "inserted_line_directives": {
+      "209": 207,
+      "216": 213,
+      "233": 222,
+      "540": 533,
+      "546": 538,
+      "566": 548,
+      "568": 549,
+      "660": 636,
+      "670": 645
+    },
+    "scope": "Literal original line mapping;actual selected preprocessing pending",
+    "preprocessing": [
+      {
+        "context": "product",
+        "selected_nonempty_rows": 386,
+        "literal_original_matches_at_correct_line": 199
+      },
+      {
+        "context": "fixture",
+        "selected_nonempty_rows": 386,
+        "literal_original_matches_at_correct_line": 199
+      },
+      {
+        "context": "navigation",
+        "selected_nonempty_rows": 132,
+        "literal_original_matches_at_correct_line": 83
+      }
+    ]
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+        "sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c",
+        "sha256": "acd4e139e34a5a040a4e88e29f7d19cd28bce9ecd899d9130f74887ede64f1c4"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_lifetime_fixture.c",
+        "sha256": "266ad037472767ac90f2622908ef5c26eed77136f9ebdcb9b2d7ea0e30035653"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "cumulative": {
+    "files": 365,
+    "total": 103045,
+    "baseline": 119913,
+    "net_reduction": 16868,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c",
+        "total": 42
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+        "total": 304
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+        "sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15",
+        "total": 67
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "total": 2666
+      }
+    ]
+  },
+  "tests": {
+    "focused": "32 fixtures;including actual original navigation and keyboard/default-button lifetime bodies",
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 414516,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6344,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1209,
+          "CleanupMs": 464,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 13921,
+          "CleanupMs": 485,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 19240,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10014,
+          "CleanupMs": 379,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 196,
+          "CleanupMs": 346,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 65315,
+          "CleanupMs": 467,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 45621,
+          "CleanupMs": 460,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 47402,
+          "CleanupMs": 442,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15149,
+          "CleanupMs": 408,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10218,
+          "CleanupMs": 424,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 44058,
+          "CleanupMs": 423,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12701,
+          "CleanupMs": 373,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28630,
+          "CleanupMs": 407,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30842,
+          "CleanupMs": 428,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4109,
+          "CleanupMs": 381,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 8147,
+          "CleanupMs": 393,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9561,
+          "CleanupMs": 387,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4394,
+          "CleanupMs": 343,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7519,
+          "CleanupMs": 399,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20200,
+          "CleanupMs": 375,
+          "Passed": true
+        }
+      ]
+    }
+  }
+}
