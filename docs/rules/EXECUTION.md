@@ -792,3 +792,10 @@ file/point totals: sequential files completed/remaining/total; points restored
 and delivered, locally restored pending verification, approved retain, qualified
 pending decision, historical classifications requiring requalification, and
 unreviewed. Do not count coupled edits as entire later-file audits.
+
+Owner cumulative-diff reporting clarification: retain the full existing per-point,
+file-end, verification/delivery and progress reports. Add the current file
+original-relative before/after/net reduction and the cumulative net mirror-diff
+reduction against the fixed re-audit source baseline. State the file population
+and line-accounting convention, report diagnostic #line changes separately,
+and never substitute total source lines or sum overlapping historical batches.

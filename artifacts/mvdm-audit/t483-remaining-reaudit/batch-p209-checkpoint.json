@@ -1,0 +1,277 @@
+{
+  "status": "whole file restored around qualified pending declaration boundaries",
+  "proof": {
+    "status": "source-complete-local-delivery-pending",
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+        "sha256": "43c01f46bf3e0ec3dc62e6f5035378443e59149b0b54c61ee45493919126422e"
+      }
+    ],
+    "source_files": 1,
+    "mirror_before": 1777,
+    "mirror_after": 1188,
+    "line_check": "531 matched retained nonblank lines;zero mismatches",
+    "contexts": [
+      "nt_eoi",
+      "nt_timer",
+      "wkman"
+    ],
+    "negative_profiles": [
+      "DEVL",
+      "_MAC",
+      "_WIN64",
+      "REMOTE_BOOT",
+      "USER_SHARED_DATA",
+      "__cplusplus"
+    ],
+    "pending_points": [
+      2032,
+      2033,
+      2040,
+      2043,
+      2044,
+      2045,
+      2046
+    ],
+    "restored_or_excluded_confirmed_points": [
+      2034,
+      2035,
+      2036,
+      2037,
+      2038,
+      2039,
+      2041,
+      2042,
+      2047,
+      2048,
+      2049
+    ],
+    "limitations": "No full build/publication/runtime proof yet;no completion counts advanced."
+  },
+  "points": [
+    {
+      "id": "T483-R2032",
+      "original_start": 627,
+      "old_deleted_scope": 436,
+      "old_added_scope": 0,
+      "status": "pending",
+      "change": "Restore profiling and nonconflicting system declarations;retain nine SDK duplicate types.",
+      "evidence": "Actual original restoration fails C2011 for SYSTEM_INFORMATION_CLASS and eight structs already declared by Windows SDK winternl.h.",
+      "option": "Keep precise duplicate declaration omissions; replacing the modern SDK owner is a separate dependency decision."
+    },
+    {
+      "id": "T483-R2033",
+      "original_start": 1064,
+      "old_deleted_scope": 345,
+      "old_added_scope": 2,
+      "status": "pending",
+      "change": "Keep DEVL #error;restore ordinary declarations after its endif1245. Retain SYSTEM_LOOKASIDE_INFORMATION,NtQuerySystemInformation,HARDERROR_MSG omissions.",
+      "evidence": "Actual compile: SDK duplicate struct,C2375 linkage conflict,and missing PORT_MESSAGE. Existing ntlpcapi.h can supply PORT_MESSAGE but needs a new include binding.",
+      "option": "Consider adding original ntlpcapi.h to the appropriate shared inclusion boundary to restore HARDERROR_MSG;do not introduce an independently duplicated PORT_MESSAGE."
+    },
+    {
+      "id": "T483-R2034",
+      "original_start": 1412,
+      "old_deleted_scope": 1,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore original IsNEC_98 macro.",
+      "evidence": "All three final consumer compiles pass.",
+      "option": "No remaining difference."
+    },
+    {
+      "id": "T483-R2035",
+      "original_start": 1413,
+      "old_deleted_scope": 0,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore original conditional boundary mapping.",
+      "evidence": "531 retained original line checks;no mismatch.",
+      "option": "No remaining difference."
+    },
+    {
+      "id": "T483-R2036",
+      "original_start": 1416,
+      "old_deleted_scope": 1,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore original IsNotNEC_98 macro.",
+      "evidence": "All three final consumer compiles pass.",
+      "option": "No remaining difference."
+    },
+    {
+      "id": "T483-R2037",
+      "original_start": 1420,
+      "old_deleted_scope": 1,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore original SetNEC_98 macro.",
+      "evidence": "All three final consumer compiles pass.",
+      "option": "No remaining difference."
+    },
+    {
+      "id": "T483-R2038",
+      "original_start": 1424,
+      "old_deleted_scope": 1,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore original SetNotNEC_98 macro.",
+      "evidence": "All three final consumer compiles pass.",
+      "option": "No remaining difference."
+    },
+    {
+      "id": "T483-R2039",
+      "original_start": 1428,
+      "old_deleted_scope": 11,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore PROCESSOR_FEATURE_MAX and original surrounding comments.",
+      "evidence": "All three final consumer compiles pass.",
+      "option": "No remaining difference."
+    },
+    {
+      "id": "T483-R2040",
+      "original_start": 1442,
+      "old_deleted_scope": 17,
+      "old_added_scope": 0,
+      "status": "pending",
+      "change": "Keep KUSER_SHARED_DATA opening and first fields omitted as one unused type closure.",
+      "evidence": "Actual original restoration fails unknown KSYSTEM_TIME. Its original definition is in public/sdk/inc/ntx86.h under _X86_;that header is not admitted and actual consumers do not select _X86_.",
+      "option": "Option: admit minimal original architecture declaration dependency;requires new source/binding scope. Do not substitute a guessed type or claim impossibility."
+    },
+    {
+      "id": "T483-R2041",
+      "original_start": 1462,
+      "old_deleted_scope": 5,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore original comment-only range1462-1466.",
+      "evidence": "Exact original text and line checks.",
+      "option": "No remaining difference."
+    },
+    {
+      "id": "T483-R2042",
+      "original_start": 1468,
+      "old_deleted_scope": 3,
+      "old_added_scope": 1,
+      "status": "restored",
+      "change": "Keep _WIN64 excluded body #error with correct original boundaries.",
+      "evidence": "Forced _WIN64 control C1189;branch structure retained.",
+      "option": "Mandated exclusion only."
+    },
+    {
+      "id": "T483-R2043",
+      "original_start": 1472,
+      "old_deleted_scope": 1,
+      "old_added_scope": 0,
+      "status": "pending",
+      "change": "Keep SystemTime field within omitted KUSER_SHARED_DATA type closure.",
+      "evidence": "Missing KSYSTEM_TIME compile evidence as R2040;field cannot be restored at file scope.",
+      "option": "Resolve with R2040 dependency decision."
+    },
+    {
+      "id": "T483-R2044",
+      "original_start": 1474,
+      "old_deleted_scope": 6,
+      "old_added_scope": 0,
+      "status": "pending",
+      "change": "Restore comments1474-1478;retain only TimeZoneBias field omission.",
+      "evidence": "Missing KSYSTEM_TIME compile evidence as R2040.",
+      "option": "Resolve with R2040 dependency decision."
+    },
+    {
+      "id": "T483-R2045",
+      "original_start": 1483,
+      "old_deleted_scope": 90,
+      "old_added_scope": 0,
+      "status": "pending",
+      "change": "Keep remaining KUSER_SHARED_DATA fields omitted with their type closure.",
+      "evidence": "These are struct members,not valid standalone declarations;parent type requires unselected KSYSTEM_TIME dependency.",
+      "option": "Restore as one type if original dependency admitted,not piecemeal file-scope fields."
+    },
+    {
+      "id": "T483-R2046",
+      "original_start": 1574,
+      "old_deleted_scope": 28,
+      "old_added_scope": 2,
+      "status": "pending",
+      "change": "Keep REMOTE_BOOT #error;restore DOSDEVICE constants;retain KdDebuggerEnabled/type-closing omission.",
+      "evidence": "REMOTE_BOOT C1189;ordinary constants compile;closing/member depend on omitted KUSER_SHARED_DATA type.",
+      "option": "Resolve type portion with R2040;excluded body remains error."
+    },
+    {
+      "id": "T483-R2047",
+      "original_start": 1603,
+      "old_deleted_scope": 19,
+      "old_added_scope": 1,
+      "status": "restored",
+      "change": "Keep outer USER_SHARED_DATA body wholly replaced by #error.",
+      "evidence": "USER_SHARED_DATA forced control C1189;no nested excluded body retained.",
+      "option": "Mandated outer exclusion;no inlined shared-page access restored."
+    },
+    {
+      "id": "T483-R2048",
+      "original_start": 1623,
+      "old_deleted_scope": 9,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "No separate inner tick macro restoration: range lies inside outer excluded USER_SHARED_DATA body.",
+      "evidence": "Original conditional ownership checked;outer #error covers whole body.",
+      "option": "Mandated outer exclusion only."
+    },
+    {
+      "id": "T483-R2049",
+      "original_start": 1640,
+      "old_deleted_scope": 202,
+      "old_added_scope": 0,
+      "status": "restored",
+      "change": "Restore original locale/shutdown/debug flags/atom declarations through1841.",
+      "evidence": "All three actual final consumers compile;original line mapping checked.",
+      "option": "No remaining ordinary difference."
+    }
+  ],
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "sha256": "43c01f46bf3e0ec3dc62e6f5035378443e59149b0b54c61ee45493919126422e"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+    "sha256": "43c01f46bf3e0ec3dc62e6f5035378443e59149b0b54c61ee45493919126422e"
+  },
+  "mirror_before": 1777,
+  "mirror_after": 1188,
+  "mirror_delta": -589,
+  "line_mapping": {
+    "checked": 531,
+    "mismatches": []
+  },
+  "negative_profiles": [
+    "DEVL",
+    "_MAC",
+    "_WIN64",
+    "REMOTE_BOOT",
+    "USER_SHARED_DATA",
+    "__cplusplus"
+  ],
+  "verification": "Cached full x86/x64 build0;publish11x2 hash verified;isolated Full0;identity-normalized isolated package matches all11 published images.",
+  "test_limits": "DOS4GW/Nesticle external fixture absent remains SKIP,not pass. Exploratory cc_host flag selection mistake corrected;actual final consumers0. Header changes restore declarations,not implementation of private kernel services.",
+  "package": "bf035245-2b15-4945-8aac-0d8751d60635",
+  "delivery": "P209 governance commit push accompany receipt",
+  "cumulative_mirror_diff": {
+    "scope": "365 fixed remaining-reaudit files,not whole1052-file census;no summing historical receipts",
+    "baseline_commit": "4cf4e5a35546249a003387a3a7df79037e6985ac",
+    "original_commit_for_nine_non_C_H": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "metric": "Original-relative added+deleted lines;normalize CRLF/LF;exclude diagnostic #line directives;include mandated #error subset differences;one before/after comparison per file",
+    "baseline_total": 119913,
+    "current_total": 113077,
+    "net_reduction": 6836,
+    "reduced_files": 220,
+    "increased_files": 1,
+    "unchanged_files": 144,
+    "origin_validation_note": "356 existing file pins checked by SHA256; nine non-C/H origins checked against fixed original Git commit after CRLF/LF normalization."
+  },
+  "cumulative_evidence": "cumulative-diff-p209.json"
+}

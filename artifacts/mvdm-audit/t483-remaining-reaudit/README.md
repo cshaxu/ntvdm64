@@ -1280,3 +1280,7 @@ P206: [RAP debug header mapping](batch-p206-checkpoint.json):8 excluded diff unc
 P207: [winddi header mapping](batch-p207-checkpoint.json):41 excluded diff unchanged;raw44->43;actual WOW32 fax context and _X86_ negative;original boundary mapping restored.
 
 P208: [Capture header minimization](batch-p208-checkpoint.json):6->4 mirror diff;two native fields pending with actual allocator alignment controls;original comments/lines restored.
+
+P209: [NT executive declaration restoration](batch-p209-checkpoint.json):1777->1188;11 restored/confirmed,7 qualified pending;cached/publish/isolated Full passed.
+
+P209 cumulative mirror-diff evidence: [cumulative-diff-p209.json](cumulative-diff-p209.json). Fixed 365-file scope: 119913 -> 113077, net reduction 6836; excludes diagnostic #line, includes #error subset differences. Not the complete mirror census.
