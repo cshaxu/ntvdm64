@@ -4,6 +4,7 @@
 static unsigned errors;
 typedef char full_class_is_one[(KeyValueFullInformation==1) ? 1 : -1];
 typedef char partial_class_is_two[(KeyValuePartialInformation==2) ? 1 : -1];
+typedef char full_data_offset[(offsetof(KEY_VALUE_FULL_INFORMATION,Name)==20) ? 1 : -1];
 typedef char partial_data_offset[(offsetof(KEY_VALUE_PARTIAL_INFORMATION,Data)==12) ? 1 : -1];
 #define CHECK(x) do { if(!(x)){++errors;printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError());} } while(0)
 #ifdef WOW_PROFILE_EXISTING_KEY
@@ -25,7 +26,29 @@ int __cdecl main(void)
     DWORD bytes=sizeof(expected),type=0,before,after,result;
     HKEY key=(HKEY)wow_profile_open_key(14,KEY_READ);
     unsigned i;
+    UNICODE_STRING native_name;
+    HANDLE native_key=NULL;
+    union { KEY_VALUE_FULL_INFORMATION alignment; BYTE bytes[65536]; } native;
+    WCHAR enum_name[16384]; BYTE enum_data[65536];
+    DWORD enum_chars=16384,enum_bytes=sizeof(enum_data),enum_type;
+    ULONG native_bytes=0;
     CHECK(key!=NULL);if(!key)return 99;
+    RtlInitUnicodeString(&native_name,L"\\Registry\\Machine\\Software\\Microsoft\\Windows NT\\CurrentVersion");
+    {
+        OBJECT_ATTRIBUTES attributes;
+        InitializeObjectAttributes(&attributes,&native_name,OBJ_CASE_INSENSITIVE,NULL,NULL);
+        CHECK(NtOpenKey(&native_key,KEY_READ|KEY_WOW64_64KEY,&attributes)>=0);
+    }
+    if(!native_key){RegCloseKey(key);return 99;}
+    CHECK(RegEnumValueW(key,0,enum_name,&enum_chars,NULL,&enum_type,enum_data,&enum_bytes)==ERROR_SUCCESS);
+    CHECK(NtEnumerateValueKey(native_key,0,KeyValueFullInformation,&native,sizeof(native),&native_bytes)>=0);
+    if(errors){NtClose(native_key);RegCloseKey(key);return 1;}
+    CHECK(native.alignment.Type==enum_type && native.alignment.NameLength==enum_chars*sizeof(WCHAR));
+    CHECK(native.alignment.NameLength<=sizeof(enum_name) && !memcmp(native.alignment.Name,enum_name,native.alignment.NameLength));
+    CHECK(native.alignment.DataLength==enum_bytes && native.alignment.DataOffset<=sizeof(native)-enum_bytes);
+    if(native.alignment.DataOffset<=sizeof(native)-enum_bytes)
+        CHECK(!memcmp(native.bytes+native.alignment.DataOffset,enum_data,enum_bytes));
+    CHECK(NtClose(native_key)>=0);
     result=RegQueryValueExW(key,L"ProductName",NULL,&type,(BYTE *)expected,&bytes);
     CHECK(result==ERROR_SUCCESS && type==REG_SZ && bytes>=4 && bytes<=sizeof(expected));
     if(result!=ERROR_SUCCESS || type!=REG_SZ || bytes<4 || bytes>sizeof(expected)) {

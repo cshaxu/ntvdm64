@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2056 reviewed:723 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1325 qualified pending;664 unreviewed. Files297/365 audited,68 remain.
+2058 reviewed:723 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1327 qualified pending;662 unreviewed. Files298/365 audited,67 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -186,3 +186,5 @@ P209 ntexapi.h1777->1188(-589):ordinary original declarations restored;11 points
 P210 ntlpcapi.h13 unchanged(all excluded),raw24->17(-7):else48/endif134 restored;5 errors retained;11 line directives reduced to4.28 actual contexts/84 preprocessings tokens and212 header lines match;285 retained source lines match;3 negative controls. P209 product reused;365-file cumulative mirror reduction6836 unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p210-checkpoint.json).
 
 P211 ntpsapi.h1268->363(-905),raw1313->411(-902):original declarations and imported NtAlertThread restored;local forwarder removed;WOW duplicate declarations removed;3 restored,3 precise SDK/PEB residuals pending.729 source lines and339/340 selected lines match;5 errors retained. Final cached,publish11x2,Full,focused x86/x64 thread tests passed;external DOS4GW skip. Cumulative365-file reduction7741. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p211-checkpoint.json).
+
+P212 ntregapi.h469->16(-453),raw479->21(-458):ordinary declarations restored;copied compat registry types/prototypes removed. Only two SDK duplicate types and3 import decorators pending;2 C++ errors retained.423 source lines and292 selected lines per profile/binding context match original. Final cached,publish11x2,focused registry/Full passed;external DOS4GW skip. Cumulative365-file reduction8194. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p212-checkpoint.json).

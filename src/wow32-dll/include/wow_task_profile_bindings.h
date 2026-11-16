@@ -3,9 +3,6 @@
 #include "wow_task_order_bindings.h"
 #include <stddef.h>
 #include <wchar.h>
-/* The older declaration carrier supplies this enum member as a macro.
- * Use the original complete value-query enum within this composition. */
-#undef KeyValueFullInformation
 #include "non-mvdm/public/sdk/inc/ntregapi.h"
 UINT WINAPI wow_task_profile(wow_task_order_process *, UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
 HANDLE WINAPI wow_profile_open_key(UINT, ACCESS_MASK);

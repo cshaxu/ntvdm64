@@ -1544,15 +1544,7 @@ scroll interval. init.c supplies overlap defaults3; original ntuserk.h names
 are LeftOverlapChars/RightOverlapChars, not the C field names. No global
 profile cache, impersonation, kernel initialization or new editor is imported.
 The complete dependency-group build/runtime acceptance remains outstanding.
-OPENNT-HOST-056 adds only original KEY_VALUE_PARTIAL_INFORMATION and the
-complete KEY_VALUE_INFORMATION_CLASS enum from public/sdk/inc/ntregapi.h,
-SHA-256 `0FB164317335D8B48C51122182922259C902C7F60AFB28111BAFA9FB75735A6A`.
-The unrelated legacy nt.h macro incorrectly said Full=2; it is corrected to
-Full=1 (Partial=2), and this reader uses the original enum. Missing-key paths
-are native-tested without registry writes. Existing-value/truncation tests
-use the actual reader with a test-only opening boundary for existing OS
-metadata, not a changed product registry path. Production task hookup remains
-unaccepted.
+OPENNT-HOST-056: T483 P212 restores ordinary registry constants, structures and API declarations. Only SDK duplicate KEY_SET_INFORMATION_CLASS / KEY_VALUE_ENTRY and three syscall import decorators remain omitted; all original service signatures are restored; original C++ exclusion errors and logical lines are retained. The original header replaces the copied compat registry declarations. See R2057-R2058 and the P212 receipt.
 
 ### S40 original ANSI class client composition
 

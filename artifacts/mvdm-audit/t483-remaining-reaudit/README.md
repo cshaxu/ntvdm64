@@ -1288,3 +1288,5 @@ P209 cumulative mirror-diff evidence: [cumulative-diff-p209.json](cumulative-dif
 P210: [LPC header original mappings](batch-p210-checkpoint.json):13 excluded difference unchanged;raw24->17;28 actual contexts and3 negatives;P209 product reused,cumulative mirror reduction6836 unchanged.
 
 P211: [Process/thread declaration restoration](batch-p211-checkpoint.json):1268->363(-905);original native alert binding;3 restored/3 qualified pending;cached/publish/Full passed. [Cumulative witness](cumulative-diff-p211-delta.json):119913->112172,net7741;365 fixed files.
+
+P212: [Registry declaration restoration](batch-p212-checkpoint.json):469->16(-453);two minimized qualified pending points;cached,publish11x2,focused registry/Full passed. [Cumulative witness](cumulative-diff-p212-delta.json):119913->111719,net8194;365 fixed files.

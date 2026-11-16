@@ -1,0 +1,176 @@
+{
+  "status": "whole-file review and delivery complete;two minimized residual points pending owner",
+  "proof": {
+    "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+    "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+    "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+    "metric": {
+      "before": {
+        "add": 2,
+        "delete": 467,
+        "total": 469
+      },
+      "before_raw": {
+        "add": 12,
+        "delete": 467,
+        "total": 479
+      },
+      "after": {
+        "add": 2,
+        "delete": 14,
+        "total": 16
+      },
+      "after_raw": {
+        "add": 7,
+        "delete": 14,
+        "total": 21
+      }
+    },
+    "source_lines_checked": 423,
+    "mismatches": [],
+    "errors": 2,
+    "remaining_omissions": [
+      [
+        208,
+        210
+      ],
+      [
+        246,
+        251
+      ],
+      [
+        369,
+        369
+      ],
+      [
+        436,
+        436
+      ],
+      [
+        502,
+        502
+      ]
+    ]
+  },
+  "points": [
+    {
+      "id": "T483-R2057",
+      "status": "pending",
+      "scope": "+0/-201 at original32-232",
+      "change": "Restore198 lines of constants and ordinary declarations;omit only the3-line SDK duplicate KEY_SET_INFORMATION_CLASS. Replace the project copy of KEY_VALUE_FULL_INFORMATION and selector/API declarations with original ntregapi.h.",
+      "remaining_ordinary_diff": 3,
+      "evidence": "Actual WOW profile.c and wow_task_profile_binding.c controls:before passes;whole original fails C2011 at208 against SDK10.0.22621 winternl549. Removal of the project-owned copied full-information struct/prototypes eliminates those other failures;minimal final context passes. SDK enum includes required extended definitions;do not hide SDK types or add a renamed second definition.",
+      "minimum": "Retain only3-line enum omission pending owner,allother original content at point restored."
+    },
+    {
+      "id": "T483-R2058",
+      "status": "pending",
+      "scope": "+0/-14 at original239-252;coupled ordinary API omissions after260",
+      "change": "Restore8 lines at point;omit6-line SDK duplicate KEY_VALUE_ENTRY. Restore complete ordinary registry service signatures;omit only3 NTSYSCALLAPI import decorators where SDK already declares non-dllimport services. Previously delivered NtQueryValueKey unchanged.",
+      "remaining_ordinary_diff": 9,
+      "evidence": "Actual whole-original control C2011 at246 vsSDK winternl526;C2375 on NtNotifyChangeMultipleKeys/NtQueryMultipleValueKey/NtSetInformationKey vsSDK506/535/561. Final declaration-only variant with3 decorators omitted compiles in both actual WOW consumers;no extra shims or duplicate prototypes. Native original NtOpenKey/NtEnumerateValueKey and full-information layout checked against public RegEnumValueW;profile query/default/truncation/handle checks use retained real API calls.",
+      "minimum": "Retain6-line structure omission and3 single-line import omissions pending owner;do not retain37-line whole-prototype deletion."
+    }
+  ],
+  "files": [
+    {
+      "path": "src/compat/README.md",
+      "sha256": "4a0973b90802632e6db0901cc341b01d423fb40156265707e9b1ac6b6d561ff1"
+    },
+    {
+      "path": "src/compat/include/nt.h",
+      "sha256": "2757193a4a9d02ca0e1d003a36e945428122468c2ea97472b6dd6eaf402e66d3"
+    },
+    {
+      "path": "src/non-mvdm/README.md",
+      "sha256": "966890227231253d18b1dbe49b03dc71f186318d9963e8f559298c8333b6015b"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_profile_bindings.h",
+      "sha256": "8f420df2a26ee51c699a369ca27301ffdd9f9293db374a5056b1c122e06a245f"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c",
+      "sha256": "506ae3ff3caef92bb725d20d8a93d4f79050ea9cda71bd22830cba52ece81a0e"
+    }
+  ],
+  "deleted": [],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+    "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b"
+  },
+  "mirror_before": 469,
+  "mirror_after": 16,
+  "mirror_delta": -453,
+  "raw_before": 479,
+  "raw_after": 21,
+  "line_mapping": {
+    "checked": 423,
+    "mismatches": [],
+    "selected": {
+      "profile": 292,
+      "binding": 292
+    }
+  },
+  "remaining_scope": "SDK duplicate enum3 lines and structure6 lines;three NTSYSCALLAPI decorators1 line each;mandated excluded C++ replacement diff4 lines. Complete original function signatures restored. No new shim or registry behavior.",
+  "cumulative_evidence": "cumulative-diff-p212-delta.json",
+  "verification": "Final cached full x86/x64 build0;publish11x2 hash verified;isolated Full0;all11 test images normalize to published identity. Final actual profile/binding compile and selected lines pass. Existing/missing profile fixtures pass;original NtOpenKey/NtEnumerateValueKey full-information buffer matches native Win32 results. C++ negative fails at original30 as expected.",
+  "focused_outputs": {
+    "existing": "WOW_PROFILE_EXISTING errors=0 repeats=32 success=1 truncation=2 missing=2",
+    "missing": "profile_handles before=102 after=102\nWOW_TASK_PROFILE errors=0 native_absence=1 repeats=32 invalid=4"
+  },
+  "compile_controls": {
+    "product_sources": {
+      "flags": "/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\"",
+      "sources": [
+        "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+        "src/wow32-dll/source/wow_task_profile_binding.c"
+      ]
+    },
+    "before_exit": [
+      0,
+      0
+    ],
+    "original_exit": [
+      2,
+      2
+    ],
+    "minimal_exit": [
+      0,
+      0
+    ],
+    "final_exit": [
+      0,
+      0
+    ],
+    "failure_locations": {
+      "SDK_enum": "winternl.h549;original208 C2011",
+      "SDK_entry": "winternl.h526;original246 C2011",
+      "API_linkage": "SDK506/535/561;original372/439/505 C2375"
+    },
+    "fixture_sources": [
+      "test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c",
+      "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "src/wow32-dll/source/wow_task_profile_binding.c"
+    ],
+    "fixture_variants": "WOW_PROFILE_EXISTING_KEY links fixture+original profile;missing/default links fixture+profile+product binding;both use actual WOW flags and ntdll.lib advapi32.lib kernel32.lib user32.lib legacy_stdio_definitions.lib",
+    "negative": "windows.h and winternl.h then define __cplusplus before current ntregapi.h;compilerC1189 original30"
+  },
+  "counter_review": "Original-first complete call chain:original profile query and original process-entry registry enumeration keep their owners;copied adapter declarations removed instead of cited as necessity. SDK duplicate types cannot be redefined;restore service signatures and omit only conflicting import decorators instead of37-line whole declarations. Checked two#error and selected-path lines. No original guest or runtime policy changes.",
+  "limits": "Missing external DOS4GW/Nesticle fixture remains SKIP,not pass. Original restored REG_LEGAL_OPTION/REG_LEGAL_CHANGE_FILTER differ from expanded SDK flags but no selected project consumers use these aggregate macros;macro redefinition warnings disclosed. Existing ntrtl NtTerminateProcess linkage warning belongs to later ordered file audit. No future-SDK/C++ support claim.",
+  "corrected_validation_issues": [
+    "First isolated test link omitted MSVC legacy_stdio_definitions.lib required by actual _NO_CRT_STDIO_INLINE profile;fixed test command,final tests pass.",
+    "Counter-review discovered whole service declarations could shrink to only3 missing import decorators. Initial cached build completed0 but publication guard intentionally stopped before publishing;final minimized source underwent a fresh cached full build and final tests."
+  ],
+  "process": {
+    "script": "6A777CF8A42962B7ABC44A4EB98E7E964A27AF43FD8BC4491ACD5EDB18231D82",
+    "pid": 35480,
+    "started": "2026-11-15T17:40:24.0113340-08:00"
+  },
+  "package": "cdb6d523-aec9-4fb4-8118-d29c18770cd5",
+  "delivery": "P212 commit and push accompany receipt"
+}
