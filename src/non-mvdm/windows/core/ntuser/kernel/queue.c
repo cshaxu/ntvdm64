@@ -10,33 +10,51 @@
 * 02-06-91 IanJa        HWND revalidation added
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-053): original InitTask, compatibility and
- * start-glass owners. Current thread/process are explicit; native image name
- * comes from the process view, not a kernel ETHREAD/PEB dereference. */
 #define WOW_ORIGINAL_TASK_ORDER
+#line 13
 #include "wow_task_init_bindings.h"
+#line 13
 #include "userk.h"
+#pragma hdrstop
 
-#line 30
+#line 17
+VOID DestroyProcessesObjects(PPROCESSINFO ppi);
+#line 19
+void CheckProcessForeground(PTHREADINFO pti);
+void ScreenSaverCheck(PTHREADINFO pti);
+DWORD xxxPollAndWaitForSingleObject(PKEVENT pEvent, PVOID pExecObject,
+        DWORD dwMilliseconds);
+
+#line 26
+void SetVDMCursorBounds(LPRECT lprc);
+
+PW32PROCESS gpwpCalcFirst = NULL;
+
 #ifdef DEBUG
-#line 31
-#error Excluded unsupported original DEBUG DDE tracing
+#error
 #line 36
 #else
-#line 38
-#endif
+#line 37
+#define TraceDdeMsg(m, h1, h2, c)
+#endif // DEBUG
 #line 39
-
+#line 43
+#if DBG
+#error
+#line 49
+#endif // DBG
+#line 50
 #line 54
 #ifdef DEBUG
-#line 55
-#error Excluded unsupported original DEBUG queue validation
+#error
 #line 114
 #else
-#line 117
+#line 115
+#define DebugValidateMLIST(pml)
+#define DebugValidateMLISTandQMSG(pml, pqmsg)
 #endif
 #line 118
-
+#line 518
 /***************************************************************************\
 * SetAppCompatFlags
 *
@@ -45,7 +63,6 @@
 * 03-23-92 JimA     Created.
 \***************************************************************************/
 
-#line 526
 void SetAppCompatFlags(
     PTHREADINFO pti)
 {
@@ -127,9 +144,7 @@ void SetAppCompatFlags(
      */
     if (LOWORD(pti->dwExpWinVer) <= VER31)
         if (UT_FastGetProfileStringW(PMAP_COMPAT, szKey, TEXT(""),
-                /* DIVERGENCE(OPENNT-HOST-054): cch is WCHAR count, not bytes. */
                 szHex, sizeof(szHex) / sizeof(szHex[0]))) {
-#line 608
             UNICODE_STRING strHex;
 
             /*
@@ -151,6 +166,7 @@ SACF_GotFlags:
 
 }
 
+#line 648
 /***************************************************************************\
 * xxxInitTask -- called by WOW startup for each app
 *
@@ -161,7 +177,6 @@ SACF_GotFlags:
 * 02-23-92 MattFe   Altered for WOW
 \***************************************************************************/
 
-#line 658
 NTSTATUS xxxInitTask(
     UINT dwExpWinVer,
     PUNICODE_STRING pstrAppName,
@@ -173,8 +188,8 @@ NTSTATUS xxxInitTask(
     DWORD dwXSize,
     DWORD dwYSize,
     WORD  wUnusedAndAvailable,
+#line 668
     PTHREADINFO currentThread)
-#line 669
 {
     PTHREADINFO pti;
     PTDB ptdb;
@@ -291,10 +306,8 @@ NTSTATUS xxxInitTask(
                     break;
                 }
             }
-#line 785
 #ifdef DEBUG
-#line 786
-#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#error
 #line 789
 #endif
 #line 790
@@ -375,12 +388,11 @@ NTSTATUS xxxInitTask(
 * 12-07-92 ScottLu      Created.
 \***************************************************************************/
 
-#line 867
 void _ShowStartGlass(
     DWORD dwTimeout,
+#line 868
     PPROCESSINFO currentProcess)
 {
-#line 870
     PPROCESSINFO ppi;
 
     /*
@@ -406,173 +418,162 @@ void _ShowStartGlass(
     CalcStartCursorHide((PW32PROCESS)ppi, dwTimeout);
 }
 
+#line 895
+/***************************************************************************\
+* xxxCreateThreadInfo
+*
+* Allocate the main thread information structure
+*
+* History:
+* 03-18-95 JimA         Created.
+\***************************************************************************/
 
+#define STARTF_SCREENSAVER 0x80000000
 
-#line 43
-#if DBG
-#line 44
-#error Excluded unsupported original DBG branch
-#line 49
-#endif
-#line 50
+ULONG ParseReserved(
+    WCHAR *pchReserved,
+    WCHAR *pchFind)
+{
+    ULONG dw;
+    WCHAR *pch, *pchT, ch;
+    UNICODE_STRING uString;
 
-#line 2962
-#ifdef LOCK_MOUSE_CODE
-#line 2963
-#error Excluded unsupported original LOCK_MOUSE_CODE branch
-#endif
-#line 2965
+    dw = 0;
+    if (pchReserved != NULL && (pch = wcsstr(pchReserved, pchFind)) != NULL) {
+        pch += wcslen(pchFind);
 
-#line 1480
-#ifdef DEBUG
-#line 1481
-#error Excluded unsupported original DEBUG branch
-#line 1489
-#endif
-#line 1490
+        pchT = pch;
+        while (*pchT >= '0' && *pchT <= '9')
+            pchT++;
 
-#line 1518
-#if DBG
-#line 1519
-#error Excluded unsupported original DBG branch
-#endif
-#line 1521
+        ch = *pchT;
+        *pchT = 0;
+        RtlInitUnicodeString(&uString, pch);
+        *pchT = ch;
 
-#line 1555
-#if DBG
-#line 1556
-#error Excluded unsupported original DBG branch
-#line 1558
-#endif
-#line 1559
+        RtlUnicodeStringToInteger(&uString, 0, &dw);
+    }
 
-#line 1598
-#if DBG
-#line 1599
-#error Excluded unsupported original DBG branch
-#line 1608
-#endif
-#line 1609
-
-#line 1626
-#ifdef DEBUG
-#line 1627
-#error Excluded unsupported original DEBUG branch
-#line 1635
-#endif
-#line 1636
-
-#line 1784
-#if DBG
-#line 1785
-#error Excluded unsupported original DBG branch
-#line 1787
-#endif
-#line 1788
-
-#line 2275
-#if DBG
-#line 2276
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 2278
-
-#line 2282
-#if DBG
-#line 2283
-#error Excluded unsupported original DBG branch
-#line 2288
-#endif // DBG
-#line 2289
-
-#line 2322
-#if DBG
-#line 2323
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 2325
-
-#line 2355
-#if DBG
-#line 2356
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 2358
-
-#line 2375
-#if DBG
-#line 2376
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 2378
-
-#line 2385
-#if DBG
-#line 2386
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 2388
-
-#line 2649
-#ifdef DEBUG
-#line 2650
-#error Excluded unsupported original DEBUG branch
-#line 2657
-#endif
-#line 2658
-
-#line 3705
-#if DBG
-#line 3706
-#error Excluded unsupported original DBG branch
-#line 3727
-#endif
-#line 3728
-
-
-#line 992
-#ifdef FE_IME
-#line 993
-#error Unsupported FE_IME original branch
-#line 996
-#endif
-#line 997
-
-#line 1915
-#ifdef FE_IME
-#line 1916
-#error Unsupported FE_IME original branch
-#line 1920
-#endif
-#line 1921
+    return dw;
+}
 
 #line 957
 #ifdef FE_IME
-#line 958
-#error Unsupported FE_IME original branch
+#error
 #else
 #line 960
 #line 961
 #endif
 #line 962
-
 #line 963
 #ifdef FE_IME
-#line 964
-#error Unsupported FE_IME original branch
+#error
 #else
 #line 966
 #line 967
 #endif
 #line 968
-
+#line 992
+#ifdef FE_IME
+#error
+#line 996
+#endif
+#line 997
 #line 1203
 #ifdef FE_IME
-#line 1204
-#error Unsupported FE_IME original branch
+#error
 #line 1208
 #else
 #line 1209
 #line 1210
 #endif
 #line 1211
+#line 1480
+#ifdef DEBUG
+#error
+#line 1489
+#endif
+#line 1490
+#line 1518
+#if DBG
+#error
+#endif
+#line 1521
+#line 1555
+#if DBG
+#error
+#line 1558
+#endif
+#line 1559
+#line 1598
+#if DBG
+#error
+#line 1608
+#endif
+#line 1609
+#line 1626
+#ifdef DEBUG
+#error
+#line 1635
+#endif
+#line 1636
+#line 1784
+#if DBG
+#error
+#line 1787
+#endif
+#line 1788
+#line 1915
+#ifdef FE_IME
+#error
+#line 1920
+#endif
+#line 1921
+#line 2275
+#if DBG
+#error
+#endif // DBG
+#line 2278
+#line 2282
+#if DBG
+#error
+#line 2288
+#endif // DBG
+#line 2289
+#line 2322
+#if DBG
+#error
+#endif // DBG
+#line 2325
+#line 2355
+#if DBG
+#error
+#endif // DBG
+#line 2358
+#line 2375
+#if DBG
+#error
+#endif // DBG
+#line 2378
+#line 2385
+#if DBG
+#error
+#endif // DBG
+#line 2388
+#line 2649
+#ifdef DEBUG
+#error
+#line 2657
+#endif
+#line 2658
+#line 2962
+#ifdef LOCK_MOUSE_CODE
+#error
+#endif
+#line 2965
+#line 3705
+#if DBG
+#error
+#line 3727
+#endif
+#line 3728

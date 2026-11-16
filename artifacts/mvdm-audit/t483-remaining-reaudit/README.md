@@ -1459,3 +1459,7 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P243 profile review](p243-profile-review.json): R2611-R2617;mirror982->882(-100),blocks19->8;original DWORD reader restored,partial R2614 remains pending;full cumulative delivery required.
 
 - [P243 delivery](batch-p243-checkpoint.json): four files,mirror -743;cached x86/x64,publish11x2,focused36,Full20,boundary/governance passed;R2614 residual remains pending owner.
+
+- [P244 queue in progress](p244-queue-in-progress.json): R2618 header reduction applied;remaining file points and delivery not complete;no audited-count increment.
+
+- [P244 delivery](batch-p244-checkpoint.json): queue mirror -63;original parser restored;final cached/publish11x2;focused36/task-order/Full20 with verified final line-only package equivalence;R2627 partial remains pending.

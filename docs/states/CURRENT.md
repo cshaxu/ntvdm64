@@ -34,13 +34,13 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2617 reviewed:977 restored/confirmed delivered,0 local,50 approved/policy,
-1590 qualified pending;103 unreviewed. Files348/365 reviewed and verified;
-17 remain. P243 four files:mirror reduction743. Original DWORD reader restored
-with existing bindings;R2614 partial remains pending owner. Cached x86/x64,
-publish11x2,focused36,Full20,boundary/governance passed. Git delivery accompanies
-receipt;next R2618. Cumulative mirror reduction22838,remaining97075.
-Non-error residuals recorded separately from excluded branch bodies.
+2631 reviewed:979 restored/confirmed delivered,0 local,51 approved/policy,
+1601 qualified pending;89 unreviewed. Files349/365 reviewed and verified;
+16 remain. P244 queue.c:mirror4501->4438(-63),blocks27->28;24 frames restored.
+ParseReserved exact;R2627 partial remains pending. Final cached build,publish11x2,
+focused36/task-order/Full20 passed;final line-only package verified equivalent.
+Git accompanies receipt;next R2632. Cumulative mirror reduction22901.
+Non-error residuals separately counted:+54/-4220,25 blocks;154 excluded lines.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -57,12 +57,12 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P243 package `a96bc6f3-f65a-42fd-b6b5-ad5bdd19734e` published11x2;hashes verified.
-Four mirror files reduced743 lines;per-file block counts and original line proofs recorded.
-Original profile DWORD reader restored;existing profile fixtures connected to gate.
-Cached x86/x64,focused36,Full20,boundary/governance passed.
-Cumulative365-file mirror diff119913->97075(-22838).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p243-checkpoint.json).
+P244 package `28cb19b9-d9a5-4b1c-b28e-cb92a3bfbec0` published11x2;hashes verified.
+Queue mirror diff reduced63;original parser restored and existing fixture extended.
+Final compiler-observed lines checked;focused36/task-order/Full20 passed.
+Final line-only package equivalence supports runtime-result reuse;no guest/zip changes.
+Cumulative365-file mirror diff119913->97012(-22901).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p244-checkpoint.json).
 Git delivery accompanies receipt;R2582 next.
 
 ## Remaining Scope

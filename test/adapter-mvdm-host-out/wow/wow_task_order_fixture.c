@@ -807,6 +807,17 @@ static void initialization(void)
     }
 }
 
+/* Recovered queue.c parser: caller buffer is restored after length discovery. */
+ULONG WINAPI ParseReserved(WCHAR *, WCHAR *);
+static void reserved_parameters(void)
+{
+    WCHAR text[] = L"other=7 value=123 tail=4";
+    CHECK(ParseReserved(NULL,L"value=")==0);
+    CHECK(ParseReserved(text,L"absent=")==0);
+    CHECK(ParseReserved(text,L"value=")==123);
+    CHECK(!wcscmp(text,L"other=7 value=123 tail=4"));
+}
+
 int __cdecl main(void)
 {
     wow_task_order_entry a={NULL,10},b={NULL,10},c={NULL,9},d={NULL,11};
@@ -834,6 +845,7 @@ int __cdecl main(void)
     native_synchronous_send(TRUE, TRUE);
     registration();
     initialization();
+    reserved_parameters();
     printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 native_send=3 native_same_thread=1 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
     return errors!=0;
 }
