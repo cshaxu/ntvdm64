@@ -1378,3 +1378,11 @@ P231 source-only reviews (delivery pending):
 P232: [hdata whole-file review](p232-hdata-review.json) restores original copy functions after finite public API binding proof;mirror593->442(-151). Together with handles local batch-158. Cached build/publication/tests/Git pending;2334/2720 points,326/365 files source-reviewed.
 
 - [P232 delivery](batch-p232-checkpoint.json): original DDE copy functions and handles metadata;cached,publish11x2,focused33,Full20;mirror delta-158.
+
+P233 source audit: [lboxctl2](p233-lboxctl2-review.json), [lboxctl3](p233-lboxctl3-review.json) retain only exclusion-policy diffs with original selected-line identity;no source edits. R2337 investigation follows.
+
+P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counterexample,current/reset-repeat pass. Remove one comment;retain one polarity correction pending owner. Local mirror delta-1;delivery pending.
+
+- [P233 mngrayc](p233-mngrayc-review.json): original wrappers and source structure restored;110->29;residual ownership/correction decisions.
+
+- [P233 delivery](batch-p233-checkpoint.json): original DrawState wrappers and source layout;cached,publish11x2,focused33,Full20;mirror delta-82.

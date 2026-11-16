@@ -1,0 +1,801 @@
+{
+  "batch": "P233",
+  "reviews": [
+    "p233-lboxctl2-review.json",
+    "p233-lboxctl3-review.json",
+    "p233-lboxrare-review.json",
+    "p233-mngrayc-review.json"
+  ],
+  "publication": {
+    "status": "published",
+    "package": "5df64755-6eb1-416b-b53d-6e9faf61f596",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+        "sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+        "sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572"
+      },
+      {
+        "path": "src/wow32-dll/include/control-draw-state/precomp.h",
+        "sha256": "bc09581d9816a08ab0ed4ddb0afcc9f091e867b0d35cb931b6d53435fc31e6d3"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_control_draw_state_fixture.c",
+        "sha256": "affc13d98179c93b4137c9909d22f8920bfc197c829fc8dd3a05a36a748fabb4"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "c3421cddb131dc930fe2d11eeec9ce596432bba776aa7331d0a5824282d08806"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "1db36196b2d7860101bcb0fc05e4f8955930b3c7da27a988f547300e108db8dc"
+      }
+    ],
+    "deleted": [],
+    "source_files": 6
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+        "sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+        "sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572"
+      }
+    ],
+    "source_mapping": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+        "original_matching_rows": 655,
+        "adaptation_rows": [
+          {
+            "logical_line": 697,
+            "text": "            if (UserLocalFree((HANDLE)plb->iTabPixelPositions))"
+          }
+        ]
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+        "original_matching_rows": 453,
+        "adaptation_rows": [
+          {
+            "logical_line": 95,
+            "text": "    __try {"
+          },
+          {
+            "logical_line": 295,
+            "text": "                if (!hbmGray || hbmGray == HGDI_ERROR) {"
+          },
+          {
+            "logical_line": 296,
+            "text": "                    DeleteObject(hbmpT);"
+          },
+          {
+            "logical_line": 297,
+            "text": "                    fResult = FALSE;"
+          },
+          {
+            "logical_line": 298,
+            "text": "                    goto CDS_Leave;"
+          },
+          {
+            "logical_line": 299,
+            "text": "                }"
+          },
+          {
+            "logical_line": 423,
+            "text": "        PolyData.cy        = cy;"
+          },
+          {
+            "logical_line": 486,
+            "text": "    ;"
+          },
+          {
+            "logical_line": 487,
+            "text": "    } __finally {"
+          },
+          {
+            "logical_line": 488,
+            "text": "    }"
+          }
+        ]
+      }
+    ],
+    "independent_final_source_mapping": [
+      {
+        "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\lboxrare.c",
+        "matching_rows": 655,
+        "mismatches": [],
+        "error_count": 1
+      },
+      {
+        "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\mngrayc.c",
+        "matching_rows": 453,
+        "mismatches": [],
+        "error_count": 2
+      }
+    ],
+    "actual_product_preprocessing": [
+      {
+        "profile": "state",
+        "sha256": "41e63a05b950f6e1df8647cc62e44e356d933e30537f078eecf33be00605974f",
+        "selected_nonempty_rows": 294,
+        "selected_lines": [
+          13,
+          19,
+          20,
+          28,
+          29,
+          30,
+          31,
+          32,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          92,
+          94,
+          95,
+          101,
+          102,
+          104,
+          105,
+          106,
+          108,
+          109,
+          114,
+          116,
+          121,
+          122,
+          123,
+          124,
+          126,
+          127,
+          129,
+          130,
+          131,
+          133,
+          138,
+          139,
+          140,
+          141,
+          143,
+          145,
+          147,
+          149,
+          150,
+          152,
+          153,
+          154,
+          155,
+          157,
+          162,
+          164,
+          165,
+          167,
+          169,
+          170,
+          172,
+          173,
+          174,
+          175,
+          177,
+          186,
+          187,
+          189,
+          191,
+          196,
+          198,
+          199,
+          201,
+          202,
+          203,
+          218,
+          220,
+          222,
+          223,
+          224,
+          225,
+          226,
+          228,
+          229,
+          231,
+          233,
+          235,
+          237,
+          238,
+          240,
+          241,
+          242,
+          247,
+          248,
+          250,
+          258,
+          260,
+          261,
+          262,
+          263,
+          264,
+          270,
+          272,
+          273,
+          274,
+          275,
+          280,
+          282,
+          288,
+          290,
+          292,
+          294,
+          295,
+          296,
+          297,
+          298,
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          306,
+          307,
+          312,
+          314,
+          315,
+          316,
+          317,
+          318,
+          319,
+          321,
+          323,
+          328,
+          329,
+          334,
+          336,
+          338,
+          342,
+          343,
+          345,
+          351,
+          352,
+          354,
+          355,
+          356,
+          358,
+          360,
+          364,
+          365,
+          367,
+          368,
+          369,
+          371,
+          372,
+          373,
+          375,
+          377,
+          382,
+          383,
+          384,
+          385,
+          386,
+          387,
+          388,
+          389,
+          394,
+          398,
+          399,
+          401,
+          405,
+          407,
+          408,
+          409,
+          416,
+          418,
+          420,
+          421,
+          422,
+          423,
+          424,
+          426,
+          427,
+          439,
+          441,
+          442,
+          443,
+          444,
+          445,
+          446,
+          447,
+          448,
+          449,
+          450,
+          452,
+          453,
+          454,
+          455,
+          456,
+          457,
+          458,
+          459,
+          460,
+          461,
+          463,
+          465,
+          466,
+          467,
+          468,
+          469,
+          470,
+          471,
+          472,
+          473,
+          474,
+          476,
+          478,
+          480,
+          482,
+          483,
+          485,
+          486,
+          487,
+          488,
+          489,
+          490,
+          492,
+          493,
+          499,
+          500,
+          501,
+          503,
+          504,
+          506,
+          507,
+          513,
+          514,
+          516,
+          517,
+          518,
+          520,
+          521,
+          523,
+          524,
+          525,
+          526,
+          527,
+          528,
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546,
+          547,
+          548,
+          549,
+          550,
+          551,
+          553,
+          554,
+          556,
+          557,
+          558,
+          559,
+          568,
+          569,
+          571,
+          573,
+          574,
+          577,
+          582,
+          583,
+          585,
+          586,
+          587,
+          588
+        ]
+      },
+      {
+        "profile": "button",
+        "sha256": "795a8951bc5ec6c54b35d507df16a8df1520b20ddc1b4c6cc93c65837997685c",
+        "selected_nonempty_rows": 8,
+        "selected_lines": [
+          13,
+          19,
+          20,
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      }
+    ]
+  },
+  "cumulative": {
+    "files": 365,
+    "total": 102520,
+    "baseline": 119913,
+    "net_reduction": 17393,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c",
+        "total": 42
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+        "total": 304
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+        "sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15",
+        "total": 67
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+        "total": 88
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+        "sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+        "total": 27
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+        "sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+        "total": 137
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+        "sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47",
+        "total": 72
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+        "sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+        "total": 64
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+        "sha256": "fc4b0192251586b594ef38052282667b613e2afa939dc0d2683f8eca5b9e6258",
+        "total": 107
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+        "sha256": "815c7b2fdec2d031adce1d75416fe198fd86760e572c242dc1421a022bab1059",
+        "total": 97
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+        "sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069",
+        "total": 5
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+        "sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d",
+        "total": 5
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+        "sha256": "a356c448d85fcdbb213e693b366416ef44f3943d5227c3f1439fd57427c16a72",
+        "total": 12
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+        "sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+        "sha256": "0d095e359b39e83b2ee5fb09e34d1a5d50c66d1ed6a113a9a1fac8930fcd0e7c",
+        "total": 300
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+        "sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+        "total": 442
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+        "sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+        "total": 4
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+        "sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "total": 2666
+      }
+    ]
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 392352,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6263,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1140,
+        "CleanupMs": 474,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11056,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 10627,
+        "CleanupMs": 397,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 9621,
+        "CleanupMs": 377,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 177,
+        "CleanupMs": 306,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65519,
+        "CleanupMs": 369,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44319,
+        "CleanupMs": 331,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41736,
+        "CleanupMs": 332,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14474,
+        "CleanupMs": 354,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10996,
+        "CleanupMs": 386,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 43448,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12691,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28637,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31011,
+        "CleanupMs": 434,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3778,
+        "CleanupMs": 316,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7558,
+        "CleanupMs": 356,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9652,
+        "CleanupMs": 355,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3997,
+        "CleanupMs": 368,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7019,
+        "CleanupMs": 372,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19555,
+        "CleanupMs": 364,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "cases": 33,
+    "exit": 0,
+    "scope": "Both actual mngrayc product profiles;restored original DrawStateA/W text wrappers;existing nested draw/resource/exception tests"
+  },
+  "mirror_delta": -82,
+  "counter_review": {
+    "source": "Original DrawStateA/W and bitmap helper restored;one invariant selector and three fragmented boundaries removed;8 whole restores,8 qualified residual points",
+    "negative_controls": {
+      "original_height_exit": 1,
+      "original_lock_exit": 91,
+      "current_exit": 0,
+      "button_profile_unselected_full_body": "compile fails ghdcGray/gcsHdc/private state declarations"
+    },
+    "limitations": [
+      "Lock91 comes from diagnostic teardown observer,not live guest crash",
+      "SelectObject failure has source ownership evidence,not resource-exhaustion reproduction",
+      "Residual points remain pending owner decision",
+      "First P233 Full passed;final Full rerun because binary identity proof did not establish only timestamp differences"
+    ]
+  },
+  "git": "Accompanying commit/push required"
+}

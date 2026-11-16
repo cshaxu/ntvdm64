@@ -30,6 +30,10 @@ BOOL WINAPI wow_edit_native_PolyPatBlt(HDC dc, DWORD operation,
 DWORD WINAPI original_tab_extent(HDC, LPCWSTR, int, int, const INT *);
 LONG WINAPI original_tab_out(HDC, int, int, LPCWSTR, int, int, const INT *, int);
 int WINAPI original_draw_text(HDC, LPCWSTR, int, LPRECT, UINT);
+#pragma comment(linker, "/alternatename:_original_draw_state_w@40=_DrawStateW@40")
+#pragma comment(linker, "/alternatename:_original_draw_state_a@40=_DrawStateA@40")
+BOOL WINAPI original_draw_state_w(HDC,HBRUSH,DRAWSTATEPROC,LPARAM,WPARAM,int,int,int,int,UINT);
+BOOL WINAPI original_draw_state_a(HDC,HBRUSH,DRAWSTATEPROC,LPARAM,WPARAM,int,int,int,int,UINT);
 int WINAPI wow_edit_native_GdiGetCharDimensions(HDC dc, TEXTMETRICW *metrics, LPINT height)
 {
     typedef int (WINAPI *dimensions_proc)(HDC, TEXTMETRICW *, LPINT);
@@ -70,6 +74,8 @@ static BOOL CALLBACK paint(HDC dc, LPARAM data, WPARAM parameter, int width, int
         nested = FALSE;
         CHECK(wow_control_draw_state(dc, NULL, paint, (LPARAM)outer, 0, 0, 0, 2, 2, DST_COMPLEX));
         CHECK(wow_control_draw_current == outer);
+        CHECK(original_draw_state_w(dc, NULL, NULL, (LPARAM)L"x", 1, 0, 0, 7, 3, DST_TEXT));
+        CHECK(original_draw_state_a(dc, NULL, NULL, (LPARAM)"x", 1, 0, 0, 7, 3, DST_TEXT));
     }
     if (select_borrowed) CHECK(SelectObject(dc, borrowed) != NULL);
     if (raise_callback) RaiseException(DRAW_EXCEPTION, 0, 0, NULL);

@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2334 reviewed:898 restored/confirmed published,0 local restorations,21 approved/policy,
-1415 qualified pending;386 unreviewed. Files326/365 source-reviewed,39 remain;
-P232 file326 verified/published;Git delivery accompanies receipt.
+2353 reviewed:906 restored/confirmed published,0 local restorations,23 approved/policy,
+1424 qualified pending;367 unreviewed. Files330/365 source-reviewed,35 remain;
+P233 file330 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P232 package `814ff37b-ecf8-453e-8045-1d3c0e29fd13` published11x2;hashes verified.
-Original DDE copy functions and handles metadata restored. Mirror delta-158;
-two whole restores,seven boundary points pending owner.
+P233 package `5df64755-6eb1-416b-b53d-6e9faf61f596` published11x2;hashes verified.
+Original DrawStateA/W and bitmap helper structure restored;invariant selector removed.
+Mirror delta-82;8 whole restores,8 mngrayc residual points pending owner.
 Cached x86/x64,33 focused,Full20 including DOS4GW and governance passed.
-Cumulative365-file mirror diff119913->102602(-17311).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p232-checkpoint.json).
-Git delivery accompanies receipt;R2335 next.
+Cumulative365-file mirror diff119913->102520(-17393).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p233-checkpoint.json).
+Git delivery accompanies receipt;R2354 next.
 
 ## Remaining Scope
 

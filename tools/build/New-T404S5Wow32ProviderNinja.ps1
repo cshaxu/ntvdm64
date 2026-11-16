@@ -621,7 +621,7 @@ foreach ($drawingPart in @('draw', 'mngrayc')) {
     $objects.Add($drawingObject)
     $ninja.Add('build ' + $drawingObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/windows/core/ntuser/client/' + $drawingPart + '.c'))))
     if ($drawingPart -eq 'mngrayc') {
-        $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-draw-state')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_STATE_DRAWING /DWOW_ORIGINAL_BUTTON_ATLAS')
+        $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-draw-state')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_STATE_DRAWING')
     } else {
         $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT')
     }
@@ -634,7 +634,7 @@ $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-
 $buttonBlitObject = 'obj/opennt-user/button-blit.obj'
 $objects.Add($buttonBlitObject)
 $ninja.Add('build ' + $buttonBlitObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/mngrayc.c')))
-$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_ATLAS /DWOW_ORIGINAL_BUTTON_BLIT_ONLY')
+$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_BLIT_ONLY')
 $objects.Add($atlasTableObject)
 $ninja.Add('build ' + $atlasTableObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-resources')) + '" $cflags $control_user_flags')

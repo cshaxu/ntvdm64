@@ -1,0 +1,21 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+  "point": "T483-R2336",
+  "sha256": "54d79ac2804e45da36760642a2d7af0c807cd119a65a228fd41ba23894bad078",
+  "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+  "metric": {
+    "add": 4,
+    "delete": 9,
+    "total": 13,
+    "delta": 0
+  },
+  "nonempty_non_directive_original_line_matches": 978,
+  "line_mismatches": [],
+  "errors": 4,
+  "conclusion": "Only excluded-branch substitutions and logical-line directives;all remaining code original. Preserve policy;no source edits.",
+  "build_context": "Product control-body object plus focused original-control-bodies,Unicode;WASWIN31/NEVER unselected. Same source hash as P232 full compilation/Full20;no new runtime or conditional-census claim.",
+  "delivery": "P233 verified/published;Git delivery accompanies receipt",
+  "delivery_status": "Final cached x86/x64,11x2 publication,focused33,Full20,actual preprocessing and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p233-checkpoint.json",
+  "verification": "Final cached x86/x64,33 focused,Full20,source lines and actual product preprocessing passed"
+}

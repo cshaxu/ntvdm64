@@ -1,0 +1,81 @@
+{
+  "points": "R2338-R2353",
+  "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\mngrayc.c",
+  "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+  "after_sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572",
+  "metric": {
+    "before": {
+      "add": 38,
+      "delete": 72,
+      "total": 110
+    },
+    "after": {
+      "add": 16,
+      "delete": 13,
+      "total": 29
+    },
+    "delta": -81
+  },
+  "restored_points": [
+    2338,
+    2340,
+    2341,
+    2343,
+    2344,
+    2345,
+    2346,
+    2351
+  ],
+  "pending_points": {
+    "2339": "Two actual product owners: state drawing owns callback/DC critical context; button blit owns only bitmap resource binding. Enabling state body under actual button header fails with undeclared ghdcGray/gcsHdc. Full original header crosses unavailable private USER boundary.",
+    "2342": "Original callback exception leaves critical-section recursion owned at context teardown: diagnostic original-lock exits91; current exits0.",
+    "2347": "wow_control_draw_select adopts new bitmap only after successful SelectObject. Failed selection leaves hbmpT caller-owned; delete at same function before failure exit. Source ownership proof,not resource exhaustion reproduction.",
+    "2348": "Original second PolyData.cx assignment leaves cy unset. Original-height fixture exits1 at height assertion; current exits0.",
+    "2349": "Same callback exception and critical-section ownership counterexample as R2342;finally guarantees original release on unwind.",
+    "2350": "Closing boundary for state-owner selection;both actual production objects compile same original source with distinct private resource contexts.",
+    "2352": "Original DrawStateA/W restored;remaining opening BltColor selection prevents duplicate external function ownership across two actual linked objects. Original MBToWCSEx allocation is LocalAlloc;matching LocalFree binding added.",
+    "2353": "Closing BltColor ownership boundary;one definition links into WOW32,not duplicate shared graphics owner."
+  },
+  "restorations": [
+    "Original DrawStateA and DrawStateW bodies",
+    "Original BitBltSysBmp position/constants/prototype/pragma",
+    "Merged three state selection regions into one",
+    "Removed invariant ATLAS selector and duplicate compile-only profile;both actual production profiles remain compiled and tested"
+  ],
+  "runtime_counterexamples": {
+    "current": 0,
+    "original_height": 1,
+    "original_lock": 91,
+    "scope": "Exact original-body variants and selected adapter with teardown observer;real GDI focused fixture,not guest application crash reproduction"
+  },
+  "limits": [
+    "SelectObject failure is source ownership evidence,not resource exhaustion runtime reproduction",
+    "Private original full USER header closure is not imported",
+    "Restored wrappers do not create new product callers/exports",
+    "Residual decisions remain unapproved"
+  ],
+  "verification": "Final cached x86/x64,33 focused,Full20,source lines and actual product preprocessing passed",
+  "diagnostic_artifact_hashes": {
+    "current-final.c": "108889f5c5bf84abebc5982ce8f4024ccaed1a04bb65c48824c97940a71257ca",
+    "original-height.c": "62bebc9b8f89b4a380642937dbf154ecbd7ef74c0038b465a8dcca1af71e5856",
+    "original-lock.c": "d79182b6f2da814c7a3c5d0b3f0233ab9caf24975d6a6409f293281d6c32713e",
+    "lock-observer.c": "0045d6e8bd34fd2e5a7aa45bc0a2b76f35f0b205a26f7a186203bb38c496ad90",
+    "contracts.cmd": "8f64f14dc9ca432a87170d0db667cfcb7b655f74c941956632c253fbe627ef98",
+    "selection.cmd": "a8d1bd2539b95c175d90ccb36d21d6cdd971b0a5a5b53ea90cf39fcb9bc2c833"
+  },
+  "line_proof": {
+    "original_matching_rows": 453,
+    "mismatches": [],
+    "error_count": 2,
+    "product_preprocessing_profiles": {
+      "state": 294,
+      "button": 8
+    },
+    "final_sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572"
+  },
+  "point_size_note": "Historical point anchors overlap moved regions. Authoritative original-relative whole-file metric is +16/-13=29;8 fully restored points and8 residual points are tracked separately.",
+  "delivery_status": "Final cached x86/x64,11x2 publication,focused33,Full20,actual preprocessing and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p233-checkpoint.json",
+  "delivery": "P233 verified/published;Git delivery accompanies receipt"
+}

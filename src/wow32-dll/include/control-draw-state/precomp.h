@@ -23,6 +23,8 @@
 #define NtUserGetIconSize wow_control_icon_size
 #define NtUserBitBltSysBmp wow_control_atlas_blit
 #define SelectObject wow_control_draw_select
+/* Matches the existing MBToWCSEx LocalAlloc ownership. */
+#define UserLocalFree(p) LocalFree((HLOCAL)(p))
 BOOL WINAPI BitBltSysBmp(HDC, int, int, UINT);
 VOID WINAPI BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, BOOL);
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);

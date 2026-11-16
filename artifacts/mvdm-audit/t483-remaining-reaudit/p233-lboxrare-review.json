@@ -1,0 +1,41 @@
+{
+  "point": "T483-R2337",
+  "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+  "before_sha256": "4386d23269e920e2e883cd86f8136a495e8de79a9e6cb8b0f7faa36b82ce3796",
+  "after_sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+  "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+  "metric": {
+    "before": {
+      "add": 3,
+      "delete": 2,
+      "total": 5
+    },
+    "after": {
+      "add": 2,
+      "delete": 2,
+      "total": 4
+    },
+    "delta": -1
+  },
+  "source_chain": "lb1.c LB_SETTABSTOPS -> LBSetTabStops;UserLocalFree is HeapFree in both original usercli.h:1154 and selected usercli.h;native pUserHeap binds GetProcessHeap",
+  "runtime_counterexample": {
+    "fixture": "build/t483-s5-p233/tabstop-fixture.c",
+    "current_exit": 0,
+    "current_output": "RESET_POINTER_NULL=1;TABSTOP_CREATE_RESET_REPEAT_OK",
+    "original_condition_exit": 1,
+    "original_output": "RESET_POINTER_NULL=0",
+    "scope": "Exact isolated function body with selected product headers and real Windows heap;whole-source link initially failed unrelated unselected control dependencies. Not live guest application crash reproduction."
+  },
+  "conclusion": "Original negative BOOL test retains freed pointer after success. Keep one positive condition,remove redundant comment;remaining condition is pending owner decision. No new state/helper/alternate path.",
+  "line_proof": {
+    "matching_nonempty_non_directive_rows": 655,
+    "only_selected_code_difference_original_line": 697,
+    "error_count": 1,
+    "mismatches": [],
+    "newline": "CRLF"
+  },
+  "verification": "Final cached x86/x64,33 focused,Full20,source lines and actual product preprocessing passed",
+  "delivery_status": "Final cached x86/x64,11x2 publication,focused33,Full20,actual preprocessing and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p233-checkpoint.json",
+  "delivery": "P233 verified/published;Git delivery accompanies receipt"
+}

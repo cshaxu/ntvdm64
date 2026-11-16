@@ -10,10 +10,32 @@
 \***************************************************************************/
 
 #include "precomp.h"
+#pragma hdrstop
+
+#define PATOR               0x00FA0089L
+#define SRCSTENCIL          0x00B8074AL
+#define SRCINVSTENCIL       0x00E20746L
+
+void BltColor(HDC hdc, HBRUSH hbr, HDC hdcSrce,int xO, int yO,
+       int cx, int cy, int xO1, int yO1, BOOL fInvert);
+
+#line 22
+/***************************************************************************\
+*
+*  BitBltSysBmp()
+*
+*  From Chicago -- client *only* for now.
+\***************************************************************************/
+BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
+{
+    POEMBITMAPINFO pOem = oemInfo.bm + i;
+    return(NtUserBitBltSysBmp(hdc, x, y, pOem->cx, pOem->cy, pOem->x, pOem->y, SRCCOPY));
+}
+#line 33
+
 
 #ifdef WOW_ORIGINAL_STATE_DRAWING
-#define PATOR               0x00FA0089L
-#line 73
+#line 35
 /***************************************************************************\
 *
 *  DrawState()
@@ -74,15 +96,14 @@ BOOL ClientDrawState(
     UserAssert(ghdcGray != NULL);
 
     RtlEnterCriticalSection(&gcsHdc);
-    /* DIVERGENCE(OPENNT-HOST-116): release even on callback exception. */
     __try {
+#line 95
 
     /*
      * These require monochrome conversion
      *
      * Enforce monochrome: embossed doesn't look great with 2 color displays
      */
-#line 101
     if ((uFlags & DSS_DISABLED) &&
         (oemInfo.BitCount == 1 || SYSMET(SLOWMACHINE))) {
 
@@ -191,14 +212,10 @@ BOOL ClientDrawState(
              * Now, pretend we're complex if qfnCallBack is supplied AND
              * we're supporting GrayString().
              */
-#endif /* WOW_ORIGINAL_STATE_DRAWING */
-#line 209
 #if 0 // This will get turned on if/when we change GrayString to tie
-#line 210
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
+#error Unsupported excluded original configuration
+#line 217
 #endif
-#line 218
-#ifdef WOW_ORIGINAL_STATE_DRAWING
 #line 218
             break;
 
@@ -233,14 +250,10 @@ BOOL ClientDrawState(
             break;
 
         case DST_COMPLEX:
-#endif /* WOW_ORIGINAL_STATE_DRAWING */
-#line 251
 #if 0
-#line 252
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
+#error Unsupported excluded original configuration
+#line 257
 #endif
-#line 258
-#ifdef WOW_ORIGINAL_STATE_DRAWING
 #line 258
             break;
 
@@ -279,7 +292,6 @@ BOOL ClientDrawState(
                 HBITMAP hbmGray;
 
                 hbmGray = SelectObject(ghdcGray, hbmpT);
-                /* OPENNT-HOST-116: failed selection does not transfer ownership. */
                 if (!hbmGray || hbmGray == HGDI_ERROR) {
                     DeleteObject(hbmpT);
                     fResult = FALSE;
@@ -414,7 +426,7 @@ BOOL ClientDrawState(
         PolyData.x         = 0;
         PolyData.y         = 0;
         PolyData.cx        = cx;
-        PolyData.cy        = cy; /* OPENNT-HOST-116: initialize height. */
+        PolyData.cy        = cy;
         PolyData.BrClr.hbr = ghbrGray;
 
         PolyPatBlt(ghdcGray, PATOR, &PolyData, 1, PPB_BRUSH);
@@ -477,36 +489,58 @@ DrawNormal:
     }
 
 CDS_Leave:
-    ; /* DIVERGENCE(OPENNT-HOST-116): label precedes the try-block end. */
+    ;
     } __finally {
-#line 487
-        RtlLeaveCriticalSection(&gcsHdc);
-    }
+#line 486
 
-#line 489
+    RtlLeaveCriticalSection(&gcsHdc);
+    }
+#line 488
+
     return fResult;
 }
-#endif
 
-#ifdef WOW_ORIGINAL_BUTTON_ATLAS
-/***************************************************************************\
-*
-*  BitBltSysBmp()
-*
-*  From Chicago -- client *only* for now.
-\***************************************************************************/
-BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
-{
-    POEMBITMAPINFO pOem = oemInfo.bm + i;
-    return(NtUserBitBltSysBmp(hdc, x, y, pOem->cx, pOem->cy, pOem->x, pOem->y, SRCCOPY));
-#line 501
+BOOL DrawStateW(HDC hDC, HBRUSH hBrush, DRAWSTATEPROC func,
+    LPARAM lParam, WPARAM wParam, int x, int y, int cx, int cy, UINT wFlags) {
+
+// No thunk until we set up the server-side for handling client or server-side
+//  callbacks.  We can then decide whether to make a common client/server drawing
+//  routine.
+
+    return ClientDrawState(hDC, hBrush, func,
+             lParam, wParam, x, y, cx, cy, wFlags);
+}
+
+BOOL DrawStateA(HDC hDC, HBRUSH hBrush, DRAWSTATEPROC func,
+    LPARAM lParam, WPARAM wParam, int x, int y, int cx, int cy, UINT wFlags) {
+
+    LPARAM lpwstr = lParam;
+    BOOL bRet;
+
+// No thunk until we set up the server-side for handling client or server-side
+//  callbacks.  We can then decide whether to make a common client/server drawing
+//  routine.
+
+    if (((wFlags & DST_TYPEMASK) == DST_TEXT) ||
+        ((wFlags & DST_TYPEMASK) == DST_PREFIXTEXT)) {
+
+        if (!MBToWCS((LPSTR)lParam, wParam ? wParam : -1, &(LPWSTR)lpwstr, -1, TRUE))
+            return FALSE;
+    }
+
+    bRet = ClientDrawState(hDC, hBrush, func,
+             lpwstr, wParam, x, y, cx, cy, wFlags);
+
+    if (((wFlags & DST_TYPEMASK) == DST_TEXT) ||
+        ((wFlags & DST_TYPEMASK) == DST_PREFIXTEXT)) {
+        UserLocalFree((HANDLE)lpwstr);
+    }
+    return bRet;
 }
 #endif
-
-/* DIVERGENCE(OPENNT-HOST-117): Button-only object reuses the helper above;
- * the existing drawing object remains the sole BltColor definition. */
 #ifndef WOW_ORIGINAL_BUTTON_BLIT_ONLY
-#line 536
+#line 529
+
 /***************************************************************************\
 * BltColor
 *
