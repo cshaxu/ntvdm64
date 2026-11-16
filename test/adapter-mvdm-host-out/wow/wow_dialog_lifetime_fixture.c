@@ -27,8 +27,9 @@ static void retire_at(enum retirement_edge edge)
     if (retirement_edge != edge) return;
     if (retirement_flags & 1) SetWF(&dialog.wnd, WFDESTROYED);
     if (retirement_flags & 2) dialog.wnd.fnid |= FNID_CLEANEDUP_BIT;
-    /* Preserve numeric validation and backing WND, but release PDLG.
-     * This models retained callback identity, not a real HWND reuse test. */
+    /* Modal creation has not published this HWND as the outer callback.
+     * Model native retirement and original PDLG cleanup together. */
+    dialog.wnd.alive = FALSE;
     dialog.pdlg = NULL;
 }
 #define OWNER ((HWND)(ULONG_PTR)0x101)
@@ -94,8 +95,8 @@ HCURSOR fixture_cursor(HINSTANCE module, LPCSTR name)
 { (void)module; (void)name; CHECK(FALSE); return NULL; }
 HCURSOR NtUserSetCursor(HCURSOR cursor) { CHECK(FALSE); return cursor; }
 BOOL NtUserShowWindow(HWND window, int command)
-{ CHECK(window == DIALOG_WINDOW && command == SHOW_OPENWINDOW && dialog.pdlg); ++shows; dialog.wnd.style |= WS_VISIBLE; retire_at(RETIRE_SHOW); return TRUE; }
-BOOL fixture_update(HWND window) { CHECK(window == DIALOG_WINDOW && dialog.pdlg); retire_at(RETIRE_UPDATE); return TRUE; }
+{ CHECK(window == DIALOG_WINDOW && command == SHOW_OPENWINDOW); if (!dialog.wnd.alive) return FALSE; CHECK(dialog.pdlg); ++shows; dialog.wnd.style |= WS_VISIBLE; retire_at(RETIRE_SHOW); return TRUE; }
+BOOL fixture_update(HWND window) { CHECK(window == DIALOG_WINDOW); if (!dialog.wnd.alive) return FALSE; CHECK(dialog.pdlg); retire_at(RETIRE_UPDATE); return TRUE; }
 BOOL NtUserSetWindowPos(HWND window, HWND after, int x, int y, int cx, int cy, UINT flags)
 {
     CHECK(window == DIALOG_WINDOW && after == NULL && !x && !y && !cx && !cy);
@@ -152,9 +153,9 @@ LRESULT fixture_send(HWND window, UINT message, WPARAM wp, LPARAM lp)
     CHECK(EndDialog(DIALOG_WINDOW, 73)); return 0;
 }
 BOOL fixture_dialog_message(HWND window, MSG *message)
-{ CHECK(window == DIALOG_WINDOW && message->message == WM_TIMER && dialog.pdlg); return FALSE; }
-BOOL fixture_translate(const MSG *message) { CHECK(message->message == WM_TIMER && dialog.pdlg); return FALSE; }
-LRESULT fixture_dispatch(const MSG *message) { CHECK(message->message == WM_TIMER && dialog.pdlg); retire_at(RETIRE_DISPATCH); return 0; }
+{ CHECK(window == DIALOG_WINDOW && message->message == WM_TIMER); return FALSE; }
+BOOL fixture_translate(const MSG *message) { CHECK(message->message == WM_TIMER); return FALSE; }
+LRESULT fixture_dispatch(const MSG *message) { CHECK(message->message == WM_TIMER); if (dialog.wnd.alive) retire_at(RETIRE_DISPATCH); return 0; }
 void fixture_quit(int code) { reposted_quit = code; }
 HWND InternalCreateDialog(HANDLE module, LPDLGTEMPLATE resource, DWORD bytes,
     HWND window, DLGPROC procedure, LONG parameter, UINT flags)

@@ -1340,3 +1340,7 @@ P225: [delivery receipt](batch-p225-checkpoint.json). Cached,publish11x2,32 cont
 P226 active: [dlgend review](p226-dlgend-review.json). Two format points restored locally; functional review and delivery remain pending.
 
 P226: [delivery receipt](batch-p226-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;dlgend61->42(-19).
+
+P227 active: [dlgmgr ordered review](p227-dlgmgr-review.json);partial file,not delivered.
+
+P227: [delivery receipt](batch-p227-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;dlgmgr918->304(-614);native initialization and two guard negative controls.

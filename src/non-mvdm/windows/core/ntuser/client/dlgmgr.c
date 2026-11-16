@@ -9,12 +9,13 @@
 * 19-Feb-1991 JimA      Added access checks
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-080): complete original modal manager slice.
- * The group private precomp binds window identity/state, creation, navigation
- * and native leaves. Other manager families are not selected by this slice. */
-#line 12
 #include "precomp.h"
 #pragma hdrstop
+
+#if defined(WOW_ORIGINAL_DIALOG_MANAGER)
+#line 18
+LOOKASIDE DialogLookaside;
+#endif
 
 #line 22
 #define IsInForegroundQueue(hwnd) \
@@ -22,320 +23,9 @@
 #define IsCurrentThreadForeground() \
     ((BOOL)NtUserGetThreadState(UserThreadStateIsForeground))
 
-/***************************************************************************\
-* DialogBox2
-*
-* History:
-\***************************************************************************/
-
-#line 989
-int PASCAL DialogBox2(
-    HWND hwnd,
-    HWND hwndOwner,
-    BOOL fDisabled,
-    BOOL fOwnerIsActiveWindow)
-{
-    MSG msg;
-    int result;
-    BOOL fShown;
-    BOOL fWantIdleMsgs;
-    BOOL fSentIdleMessage = FALSE;
-    HWND hwndCapture;
-    PWND pwnd;
-
-    if (hwnd) {
-        pwnd = ValidateHwnd(hwnd);
-    } else {
-        pwnd = NULL;
-    }
-
-    CheckLock(pwnd);
-
-    if (pwnd == NULL) {
-        if ((hwndOwner != NULL) && !fDisabled && IsWindow(hwndOwner)) {
-            NtUserEnableWindow(hwndOwner, TRUE);
-            if (fOwnerIsActiveWindow) {
-
-                /*
-                 * The dialog box failed but we disabled the owner in
-                 * xxxDialogBoxIndirectParam and if it had the focus, the
-                 * focus was set to NULL.  Now, when we enable the window, it
-                 * doesn't get the focus back if it had it previously so we
-                 * need to correct this.
-                 */
-                NtUserSetFocus(hwndOwner);
-            }
-        }
-        return -1;
-    }
-
-    hwndCapture = GetCapture();
-    if (hwndCapture != NULL) {
-        SendMessage(hwndCapture, WM_CANCELMODE, 0, 0);
-    }
-    /* DIVERGENCE(OPENNT-HOST-080): cancellation can release retained PDLG. */
-    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
-
-    /*
-     * Set the 'parent disabled' flag for EndDialog().
-     * convert BOOL to definite bit 0 or 1
-     */
-#line 1038
-    PDLG(pwnd)->fDisabled = !!fDisabled;
-
-    fShown = TestWF(pwnd, WFVISIBLE);
-
-    /*
-     * Should the WM_ENTERIDLE messages be sent?
-     */
-    fWantIdleMsgs = !(pwnd->style & DS_NOIDLEMSG);
-
-    if ((SYSMET(SLOWMACHINE) & 1) && !fShown && !PDLG(pwnd)->fEnd)
-        goto ShowIt;
-
-    while (PDLG(pwnd) && (!PDLG(pwnd)->fEnd)) {
-        if (!PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-ShowIt:
-            /* DIVERGENCE(OPENNT-HOST-080): queue/dispatch can retire this HWND. */
-            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
-#line 1053
-            if (!fShown) {
-                fShown = TRUE;
-
-#line 1056
-#ifdef SYSMODALWINDOWS
-#line 1057
-#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
-#line 1065
-#endif
-#line 1066
-
-                NtUserShowWindow(hwnd, SHOW_OPENWINDOW);
-                /* DIVERGENCE(OPENNT-HOST-080): no update to a destroyed/reused HWND. */
-                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
-#line 1068
-                UpdateWindow(hwnd);
-            } else {
-                /*
-                 * Make sure window still exists
-                 */
-                if (hwndOwner && !IsWindow(hwndOwner))
-                    hwndOwner = NULL;
-
-                if (hwndOwner && fWantIdleMsgs && !fSentIdleMessage) {
-                    fSentIdleMessage = TRUE;
-
-                    SendMessage(hwndOwner, WM_ENTERIDLE, MSGF_DIALOGBOX, (LONG)hwnd);
-                } else {
-                    if ((RevalidateHwnd(hwnd)==NULL) || (pwnd->fnid & FNID_STATUS_BITS))
-                        break;
-
-                    NtUserWaitMessage();
-                }
-            }
-
-        } else {
-            /*
-             * We got a real message.  Reset fSentIdleMessage so that we send
-             * one next time things are calm.
-             */
-            fSentIdleMessage = FALSE;
-
-            if (msg.message == WM_QUIT) {
-                PostQuitMessage(msg.wParam);
-                break;
-            }
-            /* DIVERGENCE(OPENNT-HOST-080): PeekMessage can run sent callbacks. */
-            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
-
-            /*
-             * Moved the msg filter hook call to IsDialogMessage to allow
-             * messages to be hooked for both modal and modeless dialog
-             * boxes.
-             */
-#line 1105
-            if (!IsDialogMessage(hwnd, &msg)) {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-            }
-
-            /*
-             * If we get a timer message, go ahead and show the window.
-             * We may continuously get timer msgs if there are zillions of
-             * apps running.
-             *
-             * If we get a syskeydown message, show the dialog box because
-             * the user may be bringing down a menu and we want the dialog
-             * box to become visible.
-             */
-            if (!fShown && (msg.message == WM_TIMER ||
-                    msg.message == WM_SYSTIMER || msg.message == WM_SYSKEYDOWN))
-                goto ShowIt;
-        }
-
-        /* DIVERGENCE(OPENNT-HOST-080): callback identity may remain borrowed. */
-        if (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-            /*
-             * Bogus case - we've already been destroyed somehow (by app,
-             * GP, etc.)
-             */
-#line 1129
-            RIPMSG0(RIP_WARNING,
-               "Dialog should be dismissed with EndDialog, not DestroyWindow");
-            return 0;
-        }
-    }
-
-    /*
-     * Make sure the window still exists
-     */
-    /* DIVERGENCE(OPENNT-HOST-080): never destroy a replacement numeric HWND. */
-    if (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-#line 1139
-        return 0;
-    }
-
-    if (PDLG(pwnd))
-        result = PDLG(pwnd)->result;
-    else
-        result = 0;
-
-    NtUserDestroyWindow(hwnd);
-
-    /*
-     * If the owner window belongs to another thread, the reactivation
-     * of the owner may have failed within DestroyWindow().  Therefore,
-     * if the current thread is in the foreground and the owner is not
-     * in the foreground we can safely set the foreground back
-     * to the owner.
-     */
-    if (hwndOwner != NULL) {
-        if (IsCurrentThreadForeground() &&
-            !IsInForegroundQueue(hwndOwner)) {
-            NtUserSetForegroundWindow(hwndOwner);
-        }
-    }
-
-    return result;
-}
-
-#line 1177
-int InternalDialogBox(
-    HANDLE hModule,
-    LPDLGTEMPLATE lpdt,
-    DWORD cb,
-    HWND hwndOwner,
-    DLGPROC pfnDialog,
-    LONG lParam,
-    UINT fSCDLGFlags)
-{
-    int i;
-    /* DIVERGENCE(OPENNT-HOST-080): no owner means no prior disabled state. */
-    BOOL fDisabled = FALSE;
-#line 1188
-    HWND hwnd;
-    PWND pwndOwner;
-    BOOL fOwnerIsActiveWindow = FALSE;
-    TL tlpwndOwner;
-    BOOL fUnlockOwner;
-
-    UserAssert(!(fSCDLGFlags & ~(SCDLG_CLIENT|SCDLG_ANSI|SCDLG_16BIT)));    // These are the only valid flags
-
-    /*
-     * If hwndOwner == HWNDESKTOP, change it to NULL.  This way the desktop
-     * (and all its children) won't be disabled if the dialog is modal.
-     */
-    if (hwndOwner && SAMEWOWHANDLE(hwndOwner, GetDesktopWindow()))
-        hwndOwner = NULL;
-
-    /*
-     * We return 0 if the ValidateHwnd fails in order to match Win 3.1
-     * validation layer which always returns 0 for invalid hwnds even
-     * if the function is spec'ed to return -1.  Autocad setup bug #3615
-     */
-    if (hwndOwner) {
-        if ((pwndOwner = ValidateHwnd(hwndOwner)) == NULL) {
-            return (0L);
-        }
-    } else {
-        pwndOwner = NULL;
-    }
-
-    CheckLock(pwndOwner);
-
-    fUnlockOwner = FALSE;
-    if (pwndOwner != NULL) {
-
-        /* The following fixes an AV in Corel Photo-Paint 6.0.  It passes a
-         * 16-bit HWND in, and croaks at some point when it gets 16-bit hwnds
-         * back in send messages. FritzS -- fixing bug 12531
-         */
-        hwndOwner = PtoHq(pwndOwner);
-
-        /*
-         * Make sure the owner is a top level window.
-         */
-        if (TestwndChild(pwndOwner)) {
-            pwndOwner = GetTopLevelWindow(pwndOwner);
-            hwndOwner = HWq(pwndOwner);
-            ThreadLock(pwndOwner, &tlpwndOwner);
-            fUnlockOwner = TRUE;
-        }
-
-        /*
-         * Remember if window was originally disabled (so we can set
-         * the correct state when the dialog goes away.
-         */
-        fDisabled = TestWF(pwndOwner, WFDISABLED);
-        fOwnerIsActiveWindow = (SAMEWOWHANDLE(hwndOwner, GetActiveWindow()));
-
-        /*
-         * Disable the window.
-         */
-        NtUserEnableWindow(hwndOwner, FALSE);
-    }
-
-    /*
-     * Don't show cursors on a mouseless system. Put up an hour glass while
-     * the dialog comes up.
-     */
-    if (SYSMET(MOUSEPRESENT)) {
-        NtUserSetCursor(LoadCursor(NULL, IDC_WAIT));
-    }
-
-    /*
-     * Creates the dialog.  Frees the menu if this routine fails.
-     */
-    hwnd = InternalCreateDialog(hModule, lpdt, 0, hwndOwner,
-            pfnDialog, lParam, fSCDLGFlags);
-
-    if (hwnd == NULL) {
-
-        /*
-         * The dialog creation failed.  Re-enable the window, destroy the
-         * menu, ie., fail gracefully.
-         */
-        if (!fDisabled && hwndOwner != NULL)
-            NtUserEnableWindow(hwndOwner, TRUE);
-
-        if (fUnlockOwner)
-            ThreadUnlock(&tlpwndOwner);
-        return -1;
-    }
-
-    i = DialogBox2(hwnd, hwndOwner, fDisabled, fOwnerIsActiveWindow);
-
-    if (fUnlockOwner)
-        ThreadUnlock(&tlpwndOwner);
-    return i;
-}
-
-/* DIVERGENCE(OPENNT-HOST-081): original manager group; omit unrelated
- * numeric/check-button convenience APIs. The private precomp supplies only
- * the audited state/creation/navigation/native boundary, not USER server. */
 #if defined(WOW_ORIGINAL_DIALOG_MANAGER)
-LOOKASIDE DialogLookaside;
 
+#line 27
 /***************************************************************************\
 *
 * GetParentDialog()
@@ -350,6 +40,7 @@ LOOKASIDE DialogLookaside;
 *
 \***************************************************************************/
 
+#line 41
 #line 41
 PWND GetParentDialog(PWND pwndDialog)
 {
@@ -414,9 +105,6 @@ BOOL xxxRestoreDlgFocus(
 {
     HWND hwndFocus;
     HWND hwndFocusSave;
-    /* DIVERGENCE(OPENNT-HOST-119): retain the saved target across callbacks. */
-    PWND pwndFocusSave;
-#line 113
     BOOL fRestored = FALSE;
 
     CheckLock(pwnd);
@@ -427,17 +115,9 @@ BOOL xxxRestoreDlgFocus(
         hwndFocusSave = PDLG(pwnd)->hwndFocusSave;
 
         if (IsWindow(hwndFocusSave)) {
-            pwndFocusSave = ValidateHwnd(hwndFocusSave);
-            if (pwndFocusSave) {
-                xxxCheckDefPushButton(pwnd, hwndFocus, hwndFocusSave);
-                /* DIVERGENCE(OPENNT-HOST-119): no focus to a retired identity. */
-                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return FALSE;
-                if (!TestWF(pwndFocusSave, WFDESTROYED) && !(pwndFocusSave->fnid & FNID_STATUS_BITS)) {
-                    fRestored = (NtUserSetFocus(hwndFocusSave) != NULL);
-                    /* DIVERGENCE(OPENNT-HOST-119): SetFocus can free dialog data. */
-                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return fRestored;
-                }
-            }
+            xxxCheckDefPushButton(pwnd, hwndFocus, hwndFocusSave);
+            fRestored = (NtUserSetFocus(hwndFocusSave) != NULL);
+            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return fRestored;
 #line 125
         }
 
@@ -447,6 +127,7 @@ BOOL xxxRestoreDlgFocus(
     return fRestored;
 }
 
+#line 134
 /***************************************************************************\
 * DlgSetFocus
 *
@@ -454,25 +135,18 @@ BOOL xxxRestoreDlgFocus(
 \***************************************************************************/
 
 #line 140
+#line 140
 void DlgSetFocus(
     HWND hwnd)
 {
-    /* DIVERGENCE(OPENNT-HOST-119): pin exact identity before native callbacks. */
-    PWND pwnd = ValidateHwnd(hwnd);
-    if (!pwnd) return;
-#line 143
     if (((UINT)SendMessage(hwnd, WM_GETDLGCODE, 0, 0)) & DLGC_HASSETSEL) {
-        /* DIVERGENCE(OPENNT-HOST-119): query may destroy/reuse its HWND. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;
-#line 144
         SendMessage(hwnd, EM_SETSEL, 0, MAXLONG);
     }
-    /* DIVERGENCE(OPENNT-HOST-119): selection may also destroy the target. */
-    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return;
-#line 147
+
     NtUserSetFocus(hwnd);
 }
 
+#line 165
 /***************************************************************************\
 * ValidateDialogPwnd
 *
@@ -488,6 +162,7 @@ void DlgSetFocus(
 * 05-21-91 ScottLu      Created.
 \***************************************************************************/
 
+#line 180
 #line 180
 BOOL ValidateDialogPwnd(
     PWND pwnd)
@@ -519,8 +194,6 @@ BOOL ValidateDialogPwnd(
      * If the lookaside buffer has not been initialized, do it now.
      */
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-    /* DIVERGENCE(OPENNT-HOST-121): initialize public native procedure storage
-     * on this HWND before publishing the original behavior-only PDLG. */
     if (!wow_dialog_host_initialize(HW(pwnd)))
         return FALSE;
 #endif
@@ -552,12 +225,14 @@ BOOL ValidateDialogPwnd(
     return TRUE;
 }
 
+#line 440
 /***************************************************************************\
 * DefDlgProc
 *
 * History:
 \***************************************************************************/
 
+#line 446
 #line 446
 LONG DefDlgProcWorker(
     PWND pwnd,
@@ -776,9 +451,6 @@ LONG DefDlgProcWorker(
             pwndT1 = GetParentDialog(pwnd);
             if (!PDLG(pwndT1)->fEnd && !xxxRestoreDlgFocus(pwndT1)) {
 
-                /* DIVERGENCE(OPENNT-HOST-119): failure may mean nested destruction. */
-                if (TestWF(pwndT1, WFDESTROYED) || (pwndT1->fnid & FNID_STATUS_BITS)) break;
-
 #line 648
                 pwndT = _GetNextDlgTabItem(pwndT1, NULL, FALSE);
                 DlgSetFocus(HW(pwndT));
@@ -867,12 +539,13 @@ DoCleanup:
                 ThreadUnlock(&tlpwndT3);
                 ThreadUnlock(&tlpwndT2);
 
-                /* DIVERGENCE(OPENNT-HOST-119): helper callbacks can free PDLG. */
                 if (!TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS))
                     PDLG(pwndT1)->result = wParam;
+#line 736
 //                if (PDLG(pwnd)->spwndFocusSave) {
 //                    Lock(&(PDLG(pwnd)->spwndFocusSave), pwndT2);
 //                }
+#line 739
 #line 739
             }
             ThreadUnlock(&tlpwndT1);
@@ -946,11 +619,7 @@ DoCleanup:
             ThreadLock(pwndT2, &tlpwndT2);
 
             DlgSetFocus(HW(pwndT1));
-            /* DIVERGENCE(OPENNT-HOST-119): retain locks/unlocks, not stale work. */
-            if (!TestWF(pwndTop, WFDESTROYED) && !(pwndTop->fnid & FNID_STATUS_BITS) &&
-                    !TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS) &&
-                    !TestWF(pwndT2, WFDESTROYED) && !(pwndT2->fnid & FNID_STATUS_BITS))
-                xxxCheckDefPushButton(pwndTop, HW(pwndT2), HW(pwndT1));
+            xxxCheckDefPushButton(pwndTop, HW(pwndT2), HW(pwndT1));
 
 #line 813
             ThreadUnlock(&tlpwndT2);
@@ -1091,6 +760,7 @@ CallDWP:
         return result;
 }
 
+#line 943
 /***************************************************************************\
 * DefDlgProc
 *
@@ -1100,6 +770,7 @@ CallDWP:
 * 04-11-91 ScottLu Created.
 \***************************************************************************/
 
+#line 952
 #line 952
 LONG WINAPI DefDlgProcW(
     HWND hwnd,
@@ -1131,6 +802,314 @@ LONG WINAPI DefDlgProcA(
     return DefDlgProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
 
+#endif
+
+#line 983
+/***************************************************************************\
+* DialogBox2
+*
+* History:
+\***************************************************************************/
+
+#line 989
+#line 989
+int PASCAL DialogBox2(
+    HWND hwnd,
+    HWND hwndOwner,
+    BOOL fDisabled,
+    BOOL fOwnerIsActiveWindow)
+{
+    MSG msg;
+    int result;
+    BOOL fShown;
+    BOOL fWantIdleMsgs;
+    BOOL fSentIdleMessage = FALSE;
+    HWND hwndCapture;
+    PWND pwnd;
+
+    if (hwnd) {
+        pwnd = ValidateHwnd(hwnd);
+    } else {
+        pwnd = NULL;
+    }
+
+    CheckLock(pwnd);
+
+    if (pwnd == NULL) {
+        if ((hwndOwner != NULL) && !fDisabled && IsWindow(hwndOwner)) {
+            NtUserEnableWindow(hwndOwner, TRUE);
+            if (fOwnerIsActiveWindow) {
+
+                /*
+                 * The dialog box failed but we disabled the owner in
+                 * xxxDialogBoxIndirectParam and if it had the focus, the
+                 * focus was set to NULL.  Now, when we enable the window, it
+                 * doesn't get the focus back if it had it previously so we
+                 * need to correct this.
+                 */
+                NtUserSetFocus(hwndOwner);
+            }
+        }
+        return -1;
+    }
+
+    hwndCapture = GetCapture();
+    if (hwndCapture != NULL) {
+        SendMessage(hwndCapture, WM_CANCELMODE, 0, 0);
+    }
+    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
+
+#line 1034
+    /*
+     * Set the 'parent disabled' flag for EndDialog().
+     * convert BOOL to definite bit 0 or 1
+     */
+#line 1038
+    PDLG(pwnd)->fDisabled = !!fDisabled;
+
+    fShown = TestWF(pwnd, WFVISIBLE);
+
+    /*
+     * Should the WM_ENTERIDLE messages be sent?
+     */
+    fWantIdleMsgs = !(pwnd->style & DS_NOIDLEMSG);
+
+    if ((SYSMET(SLOWMACHINE) & 1) && !fShown && !PDLG(pwnd)->fEnd)
+        goto ShowIt;
+
+    while (PDLG(pwnd) && (!PDLG(pwnd)->fEnd)) {
+        if (!PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+ShowIt:
+#line 1053
+            if (!fShown) {
+                fShown = TRUE;
+
+#line 1056
+#ifdef SYSMODALWINDOWS
+#line 1057
+#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
+#line 1065
+#endif
+#line 1066
+
+                NtUserShowWindow(hwnd, SHOW_OPENWINDOW);
+#line 1068
+                UpdateWindow(hwnd);
+            } else {
+                /*
+                 * Make sure window still exists
+                 */
+                if (hwndOwner && !IsWindow(hwndOwner))
+                    hwndOwner = NULL;
+
+                if (hwndOwner && fWantIdleMsgs && !fSentIdleMessage) {
+                    fSentIdleMessage = TRUE;
+
+                    SendMessage(hwndOwner, WM_ENTERIDLE, MSGF_DIALOGBOX, (LONG)hwnd);
+                } else {
+                    if ((RevalidateHwnd(hwnd)==NULL) || (pwnd->fnid & FNID_STATUS_BITS))
+                        break;
+
+                    NtUserWaitMessage();
+                }
+            }
+
+        } else {
+            /*
+             * We got a real message.  Reset fSentIdleMessage so that we send
+             * one next time things are calm.
+             */
+            fSentIdleMessage = FALSE;
+
+            if (msg.message == WM_QUIT) {
+                PostQuitMessage(msg.wParam);
+                break;
+            }
+
+#line 1100
+            /*
+             * Moved the msg filter hook call to IsDialogMessage to allow
+             * messages to be hooked for both modal and modeless dialog
+             * boxes.
+             */
+#line 1105
+            if (!IsDialogMessage(hwnd, &msg)) {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+
+            /*
+             * If we get a timer message, go ahead and show the window.
+             * We may continuously get timer msgs if there are zillions of
+             * apps running.
+             *
+             * If we get a syskeydown message, show the dialog box because
+             * the user may be bringing down a menu and we want the dialog
+             * box to become visible.
+             */
+            if (!fShown && (msg.message == WM_TIMER ||
+                    msg.message == WM_SYSTIMER || msg.message == WM_SYSKEYDOWN))
+                goto ShowIt;
+        }
+
+#line 1124
+        if (!RevalidateHwnd(hwnd)) {
+            /*
+             * Bogus case - we've already been destroyed somehow (by app,
+             * GP, etc.)
+             */
+#line 1129
+            RIPMSG0(RIP_WARNING,
+               "Dialog should be dismissed with EndDialog, not DestroyWindow");
+            return 0;
+        }
+    }
+
+    /*
+     * Make sure the window still exists
+     */
+#line 1138
+    if (!RevalidateHwnd(hwnd)) {
+#line 1139
+        return 0;
+    }
+
+    if (PDLG(pwnd))
+        result = PDLG(pwnd)->result;
+    else
+        result = 0;
+
+    NtUserDestroyWindow(hwnd);
+
+    /*
+     * If the owner window belongs to another thread, the reactivation
+     * of the owner may have failed within DestroyWindow().  Therefore,
+     * if the current thread is in the foreground and the owner is not
+     * in the foreground we can safely set the foreground back
+     * to the owner.
+     */
+    if (hwndOwner != NULL) {
+        if (IsCurrentThreadForeground() &&
+            !IsInForegroundQueue(hwndOwner)) {
+            NtUserSetForegroundWindow(hwndOwner);
+        }
+    }
+
+    return result;
+}
+
+#line 1177
+int InternalDialogBox(
+    HANDLE hModule,
+    LPDLGTEMPLATE lpdt,
+    DWORD cb,
+    HWND hwndOwner,
+    DLGPROC pfnDialog,
+    LONG lParam,
+    UINT fSCDLGFlags)
+{
+    int i;
+    BOOL fDisabled = FALSE;
+#line 1188
+    HWND hwnd;
+    PWND pwndOwner;
+    BOOL fOwnerIsActiveWindow = FALSE;
+    TL tlpwndOwner;
+    BOOL fUnlockOwner;
+
+    UserAssert(!(fSCDLGFlags & ~(SCDLG_CLIENT|SCDLG_ANSI|SCDLG_16BIT)));    // These are the only valid flags
+
+    /*
+     * If hwndOwner == HWNDESKTOP, change it to NULL.  This way the desktop
+     * (and all its children) won't be disabled if the dialog is modal.
+     */
+    if (hwndOwner && SAMEWOWHANDLE(hwndOwner, GetDesktopWindow()))
+        hwndOwner = NULL;
+
+    /*
+     * We return 0 if the ValidateHwnd fails in order to match Win 3.1
+     * validation layer which always returns 0 for invalid hwnds even
+     * if the function is spec'ed to return -1.  Autocad setup bug #3615
+     */
+    if (hwndOwner) {
+        if ((pwndOwner = ValidateHwnd(hwndOwner)) == NULL) {
+            return (0L);
+        }
+    } else {
+        pwndOwner = NULL;
+    }
+
+    CheckLock(pwndOwner);
+
+    fUnlockOwner = FALSE;
+    if (pwndOwner != NULL) {
+
+        /* The following fixes an AV in Corel Photo-Paint 6.0.  It passes a
+         * 16-bit HWND in, and croaks at some point when it gets 16-bit hwnds
+         * back in send messages. FritzS -- fixing bug 12531
+         */
+        hwndOwner = PtoHq(pwndOwner);
+
+        /*
+         * Make sure the owner is a top level window.
+         */
+        if (TestwndChild(pwndOwner)) {
+            pwndOwner = GetTopLevelWindow(pwndOwner);
+            hwndOwner = HWq(pwndOwner);
+            ThreadLock(pwndOwner, &tlpwndOwner);
+            fUnlockOwner = TRUE;
+        }
+
+        /*
+         * Remember if window was originally disabled (so we can set
+         * the correct state when the dialog goes away.
+         */
+        fDisabled = TestWF(pwndOwner, WFDISABLED);
+        fOwnerIsActiveWindow = (SAMEWOWHANDLE(hwndOwner, GetActiveWindow()));
+
+        /*
+         * Disable the window.
+         */
+        NtUserEnableWindow(hwndOwner, FALSE);
+    }
+
+    /*
+     * Don't show cursors on a mouseless system. Put up an hour glass while
+     * the dialog comes up.
+     */
+    if (SYSMET(MOUSEPRESENT)) {
+        NtUserSetCursor(LoadCursor(NULL, IDC_WAIT));
+    }
+
+    /*
+     * Creates the dialog.  Frees the menu if this routine fails.
+     */
+    hwnd = InternalCreateDialog(hModule, lpdt, 0, hwndOwner,
+            pfnDialog, lParam, fSCDLGFlags);
+
+    if (hwnd == NULL) {
+
+        /*
+         * The dialog creation failed.  Re-enable the window, destroy the
+         * menu, ie., fail gracefully.
+         */
+        if (!fDisabled && hwndOwner != NULL)
+            NtUserEnableWindow(hwndOwner, TRUE);
+
+        if (fUnlockOwner)
+            ThreadUnlock(&tlpwndOwner);
+        return -1;
+    }
+
+    i = DialogBox2(hwnd, hwndOwner, fDisabled, fOwnerIsActiveWindow);
+
+    if (fUnlockOwner)
+        ThreadUnlock(&tlpwndOwner);
+    return i;
+}
+
+#if defined(WOW_ORIGINAL_DIALOG_MANAGER)
+#line 1285
 /***************************************************************************\
 **
 **  RepositionRect()

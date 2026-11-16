@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2219 reviewed:838 restored/confirmed published,0 local restorations,9 approved/policy,
-1372 qualified pending;501 unreviewed. Files311/365 source-reviewed,54 remain;
-P226 file311 verified/published;Git delivery accompanies receipt.
+2244 reviewed:851 restored/confirmed published,0 local restorations,10 approved/policy,
+1383 qualified pending;476 unreviewed. Files312/365 source-reviewed,53 remain;
+P227 file312 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P226 package `be85f7e9-7fc9-4345-8fb3-596c8b4e5067` published11x2;hashes verified.
-EndDialog original validation/hide/activation/wake sequence restored;one
-2-line PDLG lifetime guard minimized and pending owner.61->42(-19).
+P227 package `ff91f173-02c5-4b37-a7bf-bc1428a4d0b1` published11x2;hashes verified.
+Dialog manager original order/modal/focus paths restored;native USER slots
+and minimal PDLG guards remain pending.918->304(-614).
 Cached x86/x64,32 fixtures,Full20 including DOS4GW and governance passed.
-Cumulative365-file diff119913->103775(-16138). No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p226-checkpoint.json).
-Git delivery accompanies receipt;R2220 next.
+Cumulative365-file diff119913->103161(-16752). No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p227-checkpoint.json).
+Git delivery accompanies receipt;R2245 next.
 
 ## Remaining Scope
 
@@ -186,3 +186,10 @@ pending decision. Real owner-enable destruction plus guard-removal negative
 control;22 EndDialog cases pass.116 source lines and two preprocessing contexts
 checked;cached,publish11x2,focused32,Full20,governance pass. NextR2220.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p226-checkpoint.json).
+
+P227 verified/published:dlgmgr918->304(-614);13 restored points,one
+exclusion-policy point,11 pending decisions. Native slot initialization
+with/without control and two guard-removal negatives recorded.
+916 original source rows and3 selected preprocessing contexts checked.
+Cached,publish11x2,focused32,Full20,governance passed;Git delivery accompanies receipt.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p227-checkpoint.json).

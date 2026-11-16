@@ -47,13 +47,15 @@ static void callback(enum fault_point point)
     if (fault != point) return;
     w = kill_dialog ? &dialog : point == SOURCE_QUERY ? &source : &target.wnd;
     SetWF(w, WFDESTROYED); w->fnid |= FNID_CLEANEDUP_BIT;
+    if ((kill_dialog || w == &target.wnd) && IsWindow(native_target))
+        CHECK(DestroyWindow(native_target));
     if (kill_dialog) dialog_storage.pdlg = NULL;
 }
 PWND WINAPI wow_window_client_validate_window(HWND w)
 {
     if (w == dialog.head.h) return &dialog;
-    if (w == source.head.h) return &source;
-    if (w == target.wnd.head.h) return &target.wnd;
+    if (w == source.head.h) return dead(&source) || dead(&dialog) ? NULL : &source;
+    if (w == target.wnd.head.h) return IsWindow(native_target) ? &target.wnd : NULL;
     return NULL;
 }
 PWND WINAPI wow_window_client_validate_window_no_rip(HWND w)
@@ -73,7 +75,7 @@ PWND _GetChildControl(PWND parent, PWND child)
 PWND _NextControl(PWND parent, PWND child, UINT flags)
 { (void)flags; CHECK(parent == &dialog && !dead(parent)); return child == &target.wnd ? &source : &target.wnd; }
 PWND _GetNextDlgTabItem(PWND parent, PWND child, BOOL previous)
-{ (void)previous; CHECK(parent == &dialog && child == &source && !dead(parent)); return &target.wnd; }
+{ (void)previous; CHECK(parent == &dialog && (!child || child == &source)); return dead(parent) ? parent : &target.wnd; }
 PWND _GetNextDlgGroupItem(PWND parent, PWND child, BOOL previous)
 { return _GetNextDlgTabItem(parent, child, previous); }
 PWND xxxGotoNextMnem(PWND parent, PWND child, WCHAR character)
@@ -94,7 +96,8 @@ LONG WINAPI wow_default_window_proc(PWND w, UINT m, WPARAM wp, LPARAM lp, DWORD 
 { (void)w; (void)m; (void)wp; (void)lp; (void)ansi; CHECK(FALSE); return 0; }
 HWND WINAPI wow_native_SetFocus(HWND window)
 {
-    CHECK(window == target.wnd.head.h && !dead(&dialog) && !dead(&target.wnd));
+    if (dead(&dialog) || !IsWindow(native_target)) return NULL;
+    CHECK(window == target.wnd.head.h && !dead(&target.wnd));
     ++focused; callback(FOCUS);
     return source.head.h;
 }
@@ -102,7 +105,7 @@ LRESULT WINAPI wow_native_SendMessageW(HWND window, UINT message, WPARAM wp, LPA
 {
     PWND node = wow_window_client_validate_window(window);
     (void)lp;
-    CHECK(node && !dead(node) && !dead(&dialog));
+    if (!node || dead(node) || dead(&dialog)) return 0;
     if (message == WM_GETDLGCODE) {
         callback(node == &source ? SOURCE_QUERY : TARGET_QUERY);
         return node == &target.wnd ? target_code : 0;
@@ -121,6 +124,10 @@ LRESULT WINAPI wow_native_SendMessageW(HWND window, UINT message, WPARAM wp, LPA
 }
 static void setup(UINT code)
 {
+    if (IsWindow(native_target)) CHECK(DestroyWindow(native_target));
+    native_target = CreateWindowExW(0, L"STATIC", L"focus lifetime identity",
+        0, 0, 0, 1, 1, HWND_MESSAGE, NULL, GetModuleHandleW(NULL), NULL);
+    if (!native_target) ExitProcess(2);
     ZeroMemory(&dialog_storage, sizeof(dialog_storage)); ZeroMemory(&source, sizeof(source));
     ZeroMemory(&dialog_data, sizeof(dialog_data));
     dialog_storage.pdlg = &dialog_data;
@@ -147,9 +154,6 @@ int __cdecl main(void)
     BOOL caught = FALSE;
     MSG ansi = {0};
     const UINT codes[] = {0, DLGC_BUTTON | DLGC_UNDEFPUSHBUTTON, DLGC_RADIOBUTTON};
-    native_target = CreateWindowExW(0, L"STATIC", L"focus lifetime identity",
-        0, 0, 0, 1, 1, HWND_MESSAGE, NULL, GetModuleHandleW(NULL), NULL);
-    if (!native_target) return 2;
     for (root = 0; root < 2; ++root) {
         setup(0); fault = SOURCE_QUERY; kill_dialog = root;
         CHECK(key(WM_KEYDOWN, VK_TAB) && !focused && !styles);
@@ -231,7 +235,7 @@ int __cdecl main(void)
     fault = TARGET_QUERY; kill_dialog = TRUE;
     (void)DefDlgProcWorker(&dialog, WM_SETFOCUS, 0, 0, FALSE);
     CHECK(!focused && !dialog_storage.pdlg);
-    CHECK(DestroyWindow(native_target));
+    if (IsWindow(native_target)) CHECK(DestroyWindow(native_target));
     printf("original-keyboard-lifetime failures=%u\n", failures);
     return failures ? 1 : 0;
 }

@@ -1,0 +1,779 @@
+{
+  "batch": "P227",
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+  "status": "Cached full build,publish11x2,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+  "before_sha256": "8b327ed645e66637ffd33fa91d6d41181c4552dbb50b08156d615ceba92ecd66",
+  "before": {
+    "add": 365,
+    "delete": 553,
+    "total": 918
+  },
+  "current": {
+    "add": 40,
+    "delete": 264,
+    "total": 304
+  },
+  "points": {
+    "T483-R2220": {
+      "decision": "restore-original",
+      "before": "+3/-0",
+      "after": "+0/-0",
+      "reason": "Import-description comment has no execution/ABI role;restore original header."
+    },
+    "T483-R2221": {
+      "decision": "minimize-pending-owner",
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "reason": "SendMessage WM_CANCELMODE can synchronously destroy dialog;original cleanup frees/clears PDLG before DialogBox2 fDisabled store. Native probe confirms HWND destruction;cleanup coupling separately source-proved."
+    },
+    "T483-R2222": {
+      "decision": "restore-original",
+      "before": "historical +1/-1;current comment already original",
+      "after": "original comment/logical line1034 restored",
+      "reason": "Extra guard shifted comment logical lines;explicit #line1034 repairs mapping, no functional text change."
+    },
+    "T483-R2223": {
+      "decision": "restore-original",
+      "before": "+2/-0",
+      "after": "original selected statements",
+      "reason": "Restore original modal HWND revalidation/dispatch. Modal creation does not publish new dialog as outer callback;nested callback scope restores predecessor. Subsequent operations before loop-tail validation do not dereference PDLG. Old always-valid retirement double overstates required checks."
+    },
+    "T483-R2224": {
+      "decision": "restore-original",
+      "before": "+2/-0",
+      "after": "original selected statements",
+      "reason": "Restore original modal HWND revalidation/dispatch. Modal creation does not publish new dialog as outer callback;nested callback scope restores predecessor. Subsequent operations before loop-tail validation do not dereference PDLG. Old always-valid retirement double overstates required checks."
+    },
+    "T483-R2225": {
+      "decision": "restore-original",
+      "before": "+2/-0",
+      "after": "original selected statements",
+      "reason": "Restore original modal HWND revalidation/dispatch. Modal creation does not publish new dialog as outer callback;nested callback scope restores predecessor. Subsequent operations before loop-tail validation do not dereference PDLG. Old always-valid retirement double overstates required checks."
+    },
+    "T483-R2226": {
+      "decision": "restore-original",
+      "before": "+2/-1",
+      "after": "original selected statements",
+      "reason": "Restore original modal HWND revalidation/dispatch. Modal creation does not publish new dialog as outer callback;nested callback scope restores predecessor. Subsequent operations before loop-tail validation do not dereference PDLG. Old always-valid retirement double overstates required checks."
+    },
+    "T483-R2227": {
+      "decision": "restore-original",
+      "before": "+2/-1",
+      "after": "original selected statements",
+      "reason": "Restore original modal HWND revalidation/dispatch. Modal creation does not publish new dialog as outer callback;nested callback scope restores predecessor. Subsequent operations before loop-tail validation do not dereference PDLG. Old always-valid retirement double overstates required checks."
+    },
+    "T483-R2228": {
+      "decision": "minimize-pending-owner",
+      "before": "+2/-1",
+      "after": "+1/-1",
+      "reason": "Original owner=NULL path reads fDisabled before initialization in failure expression and DialogBox2 argument. Retain FALSE initializer,remove comment. Existing no-owner success/failure fixture retained."
+    },
+    "T483-R2229": {
+      "decision": "minimize-pending-owner",
+      "before": "Moved LOOKASIDE plus manager conditional",
+      "after": "Original function order;declaration and manager subsets guarded",
+      "reason": "Product manager profile builds complete dependency group;maintained modal lifetime fixture compiles only modal functions and lacks manager ABI/leaves. Keep bounded selection,restore original placement rather than expand doubles/shims."
+    },
+    "T483-R2230": {
+      "decision": "restore-original",
+      "before": "+2/-0",
+      "after": "original body",
+      "reason": "Remove saved PWND declaration with redundant target identity checks;original HWND remains sufficient for native focus operation."
+    },
+    "T483-R2231": {
+      "decision": "minimize-pending-owner",
+      "before": "+11/-2",
+      "after": "one added PDLG guard",
+      "reason": "Restore original helper and SetFocus calls;retain only one root terminal check before PDLG hwndFocusSave store. Both helper and SetFocus can synchronously destroy parent and release PDLG;native focus to dead child declines without additional mirror state."
+    },
+    "T483-R2232": {
+      "decision": "restore-original",
+      "before": "+3/-0",
+      "after": "original body",
+      "reason": "Restore original DlgSetFocus: no retained WND needed for HWND-only messaging."
+    },
+    "T483-R2233": {
+      "decision": "restore-original",
+      "before": "+2/-0",
+      "after": "original body",
+      "reason": "Restore original EM_SETSEL continuation;invalid native HWND is rejected by existing message owner,no PDLG access."
+    },
+    "T483-R2234": {
+      "decision": "restore-original",
+      "before": "+2/-1",
+      "after": "original body",
+      "reason": "Restore original SetFocus continuation;no reproduced handle reuse justifies added private identity policy."
+    },
+    "T483-R2235": {
+      "decision": "minimize-pending-owner",
+      "before": "+6/-0",
+      "after": "+4/-0",
+      "reason": "Actual native control: without initialization first DefDlgProc(WM_NOTIFYFORMAT) clears installed DWL_DLGPROC and calls application zero times; preinitialized HWND preserves procedure and calls once. Original lookaside PDLG cannot initialize native USER storage.",
+      "line_check": "Existing #line209 follows retained selected conditional;no excluded body changed."
+    },
+    "T483-R2236": {
+      "decision": "retain-pending-owner",
+      "before": "+2/-0 overlapping R2235",
+      "after": "+2/-0 overlapping R2235",
+      "reason": "Overlapping two-line failure-return subreview of R2235. Native initialization can fail its SetWindowLong operation;continuing would publish PDLG without required native storage. Existing initialization fixture injects this failure and asserts FALSE and no callbacks. No new state or fallback is needed.",
+      "line_check": "Existing #line209 follows retained selected conditional;no excluded body changed."
+    },
+    "T483-R2237": {
+      "decision": "retain-pending-owner",
+      "before": "+8/-1",
+      "after": "+8/-1",
+      "delta": 0,
+      "reason": "Application public SetWindowLong changes actual HWND DWL_MSGRESULT while private PDIALOG.resultWP stays0 (real native probe). Original private read loses message result/reset state. Native WM_NOTIFYFORMAT owns actual A/W slot flags and invokes app once;original PDLG flags do not carry opaque native encoding. WM_FINALDESTROY is separately called after native retirement by finalization binding;skip native reads then,retain original private cleanup.",
+      "alternatives": "Private restoration requires additional synchronization of native slots and encoding;relocating same logic to shim does not reduce complexity. No smaller equivalent change established.",
+      "line_check": "Excluded original #error retained;selected continuation #line475 or484 unchanged."
+    },
+    "T483-R2238": {
+      "decision": "retain-pending-owner",
+      "before": "+6/-2",
+      "after": "+6/-2",
+      "delta": 0,
+      "reason": "Application/native A/W setters own DWL_DLGPROC. Actual probe produces opposite-encoding opaque token (FFFF0BA7 in retained run),requires CallWindowProc for A/W conversion;private PDLG.lpfnDlg remainsNULL. Restoring private direct call would omit procedure or bypass token conversion. Existing host_call reads native slot and delegates existing CallWindowProc boundary,without a second procedure registry.",
+      "alternatives": "Private restoration requires additional synchronization of native slots and encoding;relocating same logic to shim does not reduce complexity. No smaller equivalent change established.",
+      "line_check": "Excluded original #error retained;selected continuation #line475 or484 unchanged."
+    },
+    "T483-R2239": {
+      "decision": "restore-original",
+      "before": "+3/-0",
+      "after": "original",
+      "reason": "Restore original WM_SETFOCUS fallback. _GetNextDlgTabItem reads retained WND graph,not freed PDLG;DlgSetFocus sends native HWND messages. Borrow graph includes retired roots until scope release. Native invalid HWND leaves reject operations;old fixture assertion that any post-retirement call is illegal is not necessity evidence.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2240": {
+      "decision": "minimize-pending-owner",
+      "before": "+3/-1",
+      "after": "+2/-1",
+      "reason": "xxxCheckDefPushButton sends synchronous WM_GETDLGCODE/BM_SETSTYLE callbacks. Root destruction runs original DoCleanup and SetDialogPointer(NULL);caller then writes PDLG->result. Retain one terminal condition before this write;remove comment. Existing DM_SETDEFID query/style retirement tests cover exact continuation;final negative control pending.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2241": {
+      "decision": "restore-original",
+      "before": "+5/-1",
+      "after": "original",
+      "reason": "Restore original default-button call after DlgSetFocus. Callee revalidates old/new HWND and handles its callback continuations;caller uses retained WND handles only,no PDLG dereference. Do not add checks to callee.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2242": {
+      "decision": "retain-exclusion-policy",
+      "before": "+3/-2",
+      "after": "unchanged",
+      "reason": "Preserve excluded private PDLG ANSI query as #error under owner policy. Selected WM_NOTIFYFORMAT returns through native owner before switch.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2243": {
+      "decision": "retain-pending-owner",
+      "before": "+5/-1",
+      "after": "unchanged",
+      "reason": "Native DWL_MSGRESULT is application-visible result authority;actual native probe stores0x3141 while private resultWP stays0. Original fallback after cleanup unchanged.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2244": {
+      "decision": "retain-pending-owner",
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Closing manager selection paired with R2229. Isolated modal fixture compiles DialogBox2/InternalDialogBox without manager private dependencies;product/full control contexts include manager. Preserve boundary with restored original function order.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    }
+  },
+  "evidence": {
+    "native_cancel_probe": "exit0;enabled=1 destroyed=1 dialog_alive=0 owner_alive=1",
+    "probe_source": "#define WIN32_LEAN_AND_MEAN\n#include <windows.h>\n#include <stdio.h>\nstatic HWND dialog;\nstatic unsigned enabled, destroyed;\nstatic LRESULT CALLBACK window_proc(HWND w, UINT m, WPARAM a, LPARAM b)\n{\n    if (m == WM_CANCELMODE && dialog) {\n        ++enabled;\n        DestroyWindow(dialog);\n    }\n    if (m == WM_NCDESTROY && w == dialog) ++destroyed;\n    return DefWindowProcW(w,m,a,b);\n}\nint main(void)\n{\n    WNDCLASSW cls = {0}; HWND owner;\n    cls.lpfnWndProc=window_proc; cls.hInstance=GetModuleHandleW(NULL);\n    cls.lpszClassName=L\"P227CancelMode\";\n    if (!RegisterClassW(&cls)) return 2;\n    owner=CreateWindowW(cls.lpszClassName,L\"\",WS_POPUP,0,0,1,1,0,0,cls.hInstance,0);\n    if (!owner) return 3;\n    EnableWindow(owner,FALSE);\n    dialog=CreateWindowW(cls.lpszClassName,L\"\",WS_POPUP,0,0,1,1,owner,0,cls.hInstance,0);\n    if (!dialog) return 4;\n    SendMessageW(owner,WM_CANCELMODE,0,0);\n    printf(\"enabled=%u destroyed=%u dialog_alive=%d owner_alive=%d\\n\",\n        enabled,destroyed,IsWindow(dialog),IsWindow(owner));\n    DestroyWindow(owner);\n    return enabled==1 && destroyed==1 && !IsWindow(dialog) ? 0:1;\n}\n",
+    "call_chain": [
+      "DialogBox2 -> SendMessage(WM_CANCELMODE) -> native/application callback",
+      "DefDlgProcWorker DoCleanup -> FreeLookasideEntry -> SetDialogPointer(NULL)",
+      "DialogBox2 -> PDLG(pwnd)->fDisabled"
+    ],
+    "counter_review": "The probe establishes native synchronous destruction,not guest execution. The original cleanup/store coupling supplies the independent source evidence. No numeric HWND-reuse claim."
+  },
+  "verification": "First header and comment logical mapping checked;whole-file line/conditional audit and final tests pending",
+  "next": "T483-R2245",
+  "reordering_proof": [
+    {
+      "name": "DialogBox2",
+      "body_sha256": "3925bf43c70b9426cabfc90103f8083f7f6d866383ab08e20b1c1ab3bfbb9f67",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "InternalDialogBox",
+      "body_sha256": "0a01e22d1589312175c64c6c51508512d9a0e6ad77c602bf8ba635fe515f5b92",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "GetParentDialog",
+      "body_sha256": "40d565264a3e6b991b573b947a3264e80a231f828e23c794ec424e53e80e4753",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "xxxSaveDlgFocus",
+      "body_sha256": "703d84a3c67913eec1d740264cffa2c3c34ba42eebb1fdb5b7fa4a39b10cab14",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "xxxRestoreDlgFocus",
+      "body_sha256": "c0b2678d34b2b7dde72751b05b71b0f0c019804d9f2109b3149d3c9cf4d5f2e1",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "DlgSetFocus",
+      "body_sha256": "312f3dc4fc9f3d42a1535c2841bec07b6123d821412ff906c7165dc35a2291da",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "ValidateDialogPwnd",
+      "body_sha256": "869557c8e3b2234c57dc55c9c3a42415e5fb3d127761edb6338e3ec3ee2d3c71",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "DefDlgProcWorker",
+      "body_sha256": "0367aa43896601c82d7ba4005b637aae29fdf0f3b18942989933d1e5672b37ef",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "DefDlgProcW",
+      "body_sha256": "32f8cbecfb3f96184f3a90cb5e4d60b8fcae140bbc1b942eaa3e7a6a76e8fe9a",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "DefDlgProcA",
+      "body_sha256": "003785bb46e7cd110bb761aeaaa84644e236f393de921e77f8a126120465568d",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "RepositionRect",
+      "body_sha256": "d1bb53e520908d721bf368e2947bde7f3e28c1d53a2796040b1dda84b3f5f1c2",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    },
+    {
+      "name": "MapDialogRect",
+      "body_sha256": "bca49236ee347709251b1cbedaf67bfd906b1bb82d3814850ab3a8153c5675ee",
+      "comparison": "identical;InternalDialogBox import comment excluded"
+    }
+  ],
+  "fixture_work_remaining": "None for this batch;runtime coverage limitations retained in counter-review.",
+  "native_initialization_control": {
+    "source": "#include <windows.h>\n#include <stdio.h>\nstatic unsigned callbacks;\nstatic INT_PTR CALLBACK app(HWND w,UINT m,WPARAM a,LPARAM b)\n{(void)w;(void)m;(void)a;(void)b;++callbacks;return FALSE;}\nint main(void)\n{\n    WNDCLASSW c={0};unsigned mode;\n    c.lpfnWndProc=DefWindowProcW;c.cbWndExtra=DLGWINDOWEXTRA;\n    c.hInstance=GetModuleHandleW(NULL);c.lpszClassName=L\"P227NativeInit\";\n    if(!RegisterClassW(&c))return 2;\n    for(mode=0;mode<2;++mode){\n        HWND w=CreateWindowW(c.lpszClassName,L\"\",WS_POPUP,0,0,1,1,0,0,c.hInstance,0);\n        LONG before,after,result;LRESULT notify;\n        if(!w)return 3;\n        callbacks=0;\n        if(mode)DefDlgProcW(w,WM_NULL,0,0);\n        SetWindowLongW(w,DWL_DLGPROC,(LONG)app);\n        SetWindowLongW(w,DWL_MSGRESULT,0x3141);\n        before=GetWindowLongW(w,DWL_DLGPROC);\n        notify=DefDlgProcW(w,WM_NOTIFYFORMAT,0,NF_QUERY);\n        after=GetWindowLongW(w,DWL_DLGPROC);\n        result=GetWindowLongW(w,DWL_MSGRESULT);\n        printf(\"initialized=%u proc_before=%08lx proc_after=%08lx msgresult=%08lx notify=%ld callbacks=%u\\n\",mode,before,after,result,(long)notify,callbacks);\n        SetWindowLongW(w,DWL_DLGPROC,0);\n        DefDlgProcW(w,WM_NCDESTROY,0,0);DestroyWindow(w);\n    }\n    UnregisterClassW(c.lpszClassName,c.hInstance);return 0;\n}\n",
+    "source_sha256": "10fbcb7569a52afd8473b2d044094db08fd80d399525367bac038b00659e72d3",
+    "result": "initialized=0 proc_before=00f31000 proc_after=00000000 msgresult=00000000 notify=2 callbacks=0\ninitialized=1 proc_before=00f31000 proc_after=00f31000 msgresult=00000000 notify=2 callbacks=1\n",
+    "process": {
+      "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p227/native-init-probe.exe",
+      "deadlineSeconds": 15,
+      "pid": 32616,
+      "started": "2026-11-16T10:59:12.0439566Z"
+    },
+    "exit": 0,
+    "compile": "MSVC x86 /TC /MT /W4 native-init-probe.c /link user32.lib",
+    "limits": "Actual native hidden HWND/DefDlgProc probe;does not execute recovered ValidateDialogPwnd or guest. Initial pilot compiled and ran synchronously;recorded owned background rerun proves same result. Whole-file gate still pending."
+  },
+  "reordering_proof_scope": "Historical body identity at reorder step;subsequent focus edits are separately recorded,not claimed identical to pre-reorder final bodies.",
+  "native_owner_evidence": {
+    "prior_verified_control": {
+      "point": "R2199",
+      "delta": -1,
+      "remaining_diff": "+12/-1",
+      "evidence": "Selected original DefDlgProcWorker calls host_notify for WM_NOTIFYFORMAT and host_call for procedure dispatch. Both actual native DefDlgProc A/W encoding and public Get/SetWindowLong dialog slots must observe one procedure. A private PDLG assignment alone cannot publish it to USER;mirroring both requires additional synchronization and a second authority.",
+      "probe_exit": 0,
+      "probe_log": "ansi=0 prior=00000000 replaced=00000000\nansi=1 prior=00000000 replaced=FFFF0BA7\nWOW_DIALOG_NATIVE_OWNER errors=0 iterations=64 callbacks=256 terminal=32",
+      "probe_sha256": "f32af670ddf9e8593ab64d75bce08399220bb35757d71794a11734ddf0774371",
+      "scope": "Existing native slot/A-W ownership probe executable,not a new whole-product build or guest runtime test. Initialization failure is covered by new creator slot-failure injection.",
+      "decision": "Remove explanatory comment;keep native set plus failure rollback pending owner review;do not restore private slot as competing state."
+    },
+    "fixture": "test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c",
+    "actual_assertions": "WM_APP writes native DWLP_MSGRESULT=0x3141;private recovered.resultWP stays0 and recovered_data.lpfnDlg staysNULL. A/W opposite getter returns token,CallWindowProc performs text conversion. WM_NOTIFYFORMAT asserts expected NFR_ANSI/UNICODE and exactly one application callback.",
+    "source_chain": [
+      "wow_dialog_creation_binding -> original InternalCreateDialog -> native DWL_DLGPROC setter",
+      "ntstubs original get/set selected owner -> wow_dialog_host_get/set -> public Get/SetWindowLong",
+      "DefDlgProcWorker -> wow_dialog_host_call -> CallWindowProcA/W",
+      "dialog_entry WM_NCDESTROY finally -> wow_dialog_host_retire;later dialog_finalize -> DefDlgProcWorker WM_FINALDESTROY -> private DoCleanup"
+    ],
+    "limits": "Prior real native-slot probe remains evidence of ABI/state ownership,not a new P227 final-code pass. Final complete-file focused/Full validation pending."
+  },
+  "line_proof": {
+    "candidate_sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+    "original_literal_lines": 916,
+    "errors": 5,
+    "add": 40,
+    "delete": 264,
+    "total": 304,
+    "mismatches": [],
+    "inserted_line_directives": {
+      "27": 27,
+      "42": 41,
+      "127": 134,
+      "134": 140,
+      "144": 165,
+      "160": 180,
+      "221": 440,
+      "228": 446,
+      "535": 736,
+      "539": 739,
+      "752": 943,
+      "762": 952,
+      "794": 983,
+      "801": 989,
+      "1097": 1285
+    },
+    "scope": "916 literal original source rows mapped;actual product,manager fixture,and modal fixture preprocessing recorded separately. Macro-expanded rows are not claimed literal matches.",
+    "preprocessing": [
+      {
+        "context": "product",
+        "selected_nonempty_rows": 589,
+        "literal_original_matches_at_correct_line": 296
+      },
+      {
+        "context": "fixture",
+        "selected_nonempty_rows": 589,
+        "literal_original_matches_at_correct_line": 296
+      },
+      {
+        "context": "modal",
+        "selected_nonempty_rows": 150,
+        "literal_original_matches_at_correct_line": 89
+      }
+    ]
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c",
+        "sha256": "d8a027f68870bf763b0e2751d63ec1020930810da0eb924ab9378b92af6f85dc"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_lifetime_fixture.c",
+        "sha256": "4f1f31628e64037124458c8cdde63565f4de4573fd82779926c13de6ef3715ec"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "counter_review": {
+    "root_lifetime": "Borrow retains WND graph allocations,not PDLG. Only continuations that dereference PDLG retain guards;HWND-only continuations use original behavior and native invalid-handle rejection.",
+    "fixture_limit": "Keyboard native_target destruction is real;dialog/source identities,graph/native messaging remain explicit doubles. Modal fixture uses explicit retirement doubles. Neither proves numeric HWND reuse or substitutes guest acceptance.",
+    "native_storage": "Native initializer omission proved to clear procedure on first DefDlgProc;native result and A/W tokens verified in retained real HWND probe. Private slot restoration would require competing state.",
+    "remaining_checks": "Verification complete;Git commit/push required after receipt."
+  },
+  "publication": {
+    "status": "published",
+    "package": "ff91f173-02c5-4b37-a7bf-bc1428a4d0b1",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "cached_build_exit": 0,
+  "focused_final_exit": 0,
+  "focused_fixture_count": 32,
+  "cumulative_candidate": {
+    "files": 365,
+    "total": 103161,
+    "baseline": 119913,
+    "net_reduction": 16752,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c",
+        "total": 42
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+        "total": 304
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "total": 2666
+      }
+    ]
+  },
+  "negative_controls": {
+    "focus": {
+      "exit": 77,
+      "log": "EXPECTED_PDLG_ACCESS_VIOLATION\n",
+      "scope": "Actual dlgmgr copied body with only named guard removed;explicit PDLG cleanup/message doubles and real native target retirement."
+    },
+    "default": {
+      "exit": 77,
+      "log": "EXPECTED_PDLG_ACCESS_VIOLATION\n",
+      "scope": "Actual dlgmgr copied body with only named guard removed;explicit PDLG cleanup/message doubles and real native target retirement."
+    }
+  },
+  "negative_control_generator": "from pathlib import Path\nimport subprocess\nr=Path.cwd();b=r/'build/t483-s5-p227';n=r/'build/.ninja/msvc-x86-release/call-boundaries'\nsource=r/'src/non-mvdm/windows/core/ntuser/client/dlgmgr.c';s=source.read_text(encoding='utf-8')\ncs=subprocess.check_output(['ninja','-C',str(n),'-t','commands','original-keyboard-lifetime-boundary'],text=True).splitlines()\ndef cmd(key,start):\n x=next(x for x in cs if key in x);return x[x.index(start):].rstrip('\"')\ncc=cmd('/Foobj/original_dlgmgr.obj','cl.exe ');fc=cmd('/Foobj/keyboard_lifetime_fixture.obj','cl.exe ');ld=cmd('/out:\"bin/wow_dialog_keyboard_lifetime_fixture.exe\"','link /nologo')\nwrapper=b/'catch-av.c';wrapper.write_bytes(b'#include <windows.h>\\n#include <stdio.h>\\nint __cdecl subject_main(void);\\nint main(void){SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOGPFAULTERRORBOX);__try{return subject_main();}__except(GetExceptionCode()==EXCEPTION_ACCESS_VIOLATION?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){puts(\"EXPECTED_PDLG_ACCESS_VIOLATION\");return 77;}}\\n')\nfo=(b/'negative-fixture.obj').as_posix();wo=(b/'catch-av.obj').as_posix()\nlines=['@echo off','call \"C:\\\\Program Files (x86)\\\\Microsoft Visual Studio\\\\2022\\\\BuildTools\\\\Common7\\\\Tools\\\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul','if errorlevel 1 exit /b %errorlevel%','cd /d \"'+str(n)+'\"',fc.replace('obj/keyboard_lifetime_fixture.obj',fo)+' /Dmain=subject_main','if errorlevel 1 exit /b %errorlevel%',f'cl /nologo /TC /MT /c /Fo\"{wo}\" \"{wrapper.as_posix()}\"','if errorlevel 1 exit /b %errorlevel%']\nguards={'focus':'            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return fRestored;\\n','default':'                if (!TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS))\\n                    PDLG(pwndT1)->result = wParam;'}\nfor name,guard in guards.items():\n assert s.count(guard)==1\n replacement='' if name=='focus' else '                PDLG(pwndT1)->result = wParam;'\n p=b/f'negative-{name}.c';p.write_bytes(s.replace(guard,replacement).encode());obj=(b/f'negative-{name}.obj').as_posix();exe=(b/f'negative-{name}.exe').as_posix()\n lines += [cc.replace('obj/original_dlgmgr.obj',obj).replace(source.as_posix(),p.as_posix()),'if errorlevel 1 exit /b %errorlevel%',ld.replace('obj/original_dlgmgr.obj',obj).replace('obj/keyboard_lifetime_fixture.obj',fo+' '+wo).replace('bin/wow_dialog_keyboard_lifetime_fixture.exe',exe),'if errorlevel 1 exit /b %errorlevel%',f'\"{exe}\" >\"{b}/negative-{name}.log\" 2>&1',f'echo %errorlevel% >\"{b}/negative-{name}.exit\"','if not %errorlevel%==77 exit /b 1']\nlines+=['exit /b 0'];(b/'negative-control.cmd').write_bytes(('\\n'.join(lines)+'\\n').encode())\nt=(b/'build-run.ps1').read_text(encoding='utf-8').replace(\"Step 'cached' 1200\",\"Step 'negative-control' 120\").replace('build-run.exit','negative-run.exit');(b/'negative-run.ps1').write_bytes(t.encode())\n",
+  "tests": {
+    "focused": "32 fixtures passed",
+    "negative": {
+      "focus": {
+        "exit": 77,
+        "log": "EXPECTED_PDLG_ACCESS_VIOLATION\n",
+        "scope": "Actual copied dlgmgr function with only named guard removed;fixture owns native target HWND,PDLG cleanup and message dispatch are explicit doubles;not a live guest crash."
+      },
+      "default": {
+        "exit": 77,
+        "log": "EXPECTED_PDLG_ACCESS_VIOLATION\n",
+        "scope": "Actual copied dlgmgr function with only named guard removed;fixture owns native target HWND,PDLG cleanup and message dispatch are explicit doubles;not a live guest crash."
+      }
+    },
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 393003,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6402,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1055,
+          "CleanupMs": 441,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11157,
+          "CleanupMs": 348,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 11374,
+          "CleanupMs": 334,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10081,
+          "CleanupMs": 378,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 183,
+          "CleanupMs": 375,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 65455,
+          "CleanupMs": 479,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 44878,
+          "CleanupMs": 429,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 43392,
+          "CleanupMs": 347,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14363,
+          "CleanupMs": 365,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9464,
+          "CleanupMs": 385,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 43592,
+          "CleanupMs": 364,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12598,
+          "CleanupMs": 368,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28175,
+          "CleanupMs": 378,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 31169,
+          "CleanupMs": 377,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3192,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7664,
+          "CleanupMs": 373,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9491,
+          "CleanupMs": 351,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3501,
+          "CleanupMs": 364,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6843,
+          "CleanupMs": 319,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20047,
+          "CleanupMs": 339,
+          "Passed": true
+        }
+      ]
+    }
+  },
+  "cumulative": {
+    "files": 365,
+    "total": 103161,
+    "baseline": 119913,
+    "net_reduction": 16752,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c",
+        "total": 42
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+        "total": 304
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "total": 2666
+      }
+    ]
+  }
+}
