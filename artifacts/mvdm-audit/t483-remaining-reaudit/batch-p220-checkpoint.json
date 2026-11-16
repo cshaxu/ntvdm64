@@ -1,0 +1,1959 @@
+{
+  "status": "Final cached build/publication/tests complete;Git delivery follows",
+  "file": "src/non-mvdm/windows/core/ntuser/client/client.c",
+  "points": [
+    {
+      "id": "T483-R2150",
+      "problem": "Original USER client service/PCH closure",
+      "evidence": "Full original in all five actual contexts fails private CSR declarations; SDK substitution still fails PCBOX/PWND at original64-65. Published imports identify modern USER32 owners. Original public clients depend on NT4 private WND/clipboard/window-station state, not native HWND values. Unused public leaves (CopyIcon/ToAsciiEx/tile/cascade) belong to the same unselected OS API family; no standalone caller/link symbol found. This is a composition boundary, not an original defect.",
+      "change": "Restore original comments and order; retain finite selected includes and omitted native USER service family pending owner.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2151",
+      "problem": "Default window message bitmap merge",
+      "evidence": "Original retail winerrp.h137 defines UserAssert empty. Current extra CRT assert lacks necessity evidence; removed. Original gSharedInfo is NT4 process shared USER state; original merge consumes two message tables from existing original server.c owner, published once in wow_default_message_state. Existing boundary checks pointer, readiness and span before merge.",
+      "change": "Restore retail UserAssert and full original function; remaining typed table binding/selection pending owner.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2152",
+      "problem": "Window state service calls",
+      "evidence": "Original Set/ClearWindowState bodies are identical; NtUserCallHwndParam with NT4 SFI ordinals cannot operate on standalone native HWND via NT4 private WND. Existing wow_edit_call_bindings.h maps these exact operations to selected state services; no new state or adapter introduced.",
+      "change": "Restore source position/comments; retain service-name binding and profile selection pending owner.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2153",
+      "problem": "Dialog EDIT data callbacks and USER registration",
+      "evidence": "Original dialog callback bodies are retained. Original UserRegisterWowHandlers2256-2314 returns native &gSharedInfo; standalone registration returns page_domain guest shared address. wow32.c553 receives registration, wuman.c125 writes guest address into USER16 globals; page_domain.c722 returns only active guest mapping. Native private USER pointer is not that guest linear address. Input callbacks belong to one registered callback table.",
+      "change": "Restore original callback body/comment positions; retain explicit callback-table binding and registration boundary pending owner.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2154",
+      "problem": "Class registration client",
+      "evidence": "Original RegisterClassWOWA calls version-sensitive class registration through ANSI ntcftxt selection. wow_class_client_bindings.h supplies explicit task/module version and native class-publication boundary; NT4 private CLIENTINFO/class server state is not modern USER32 state. Original function preserved.",
+      "change": "Restore original source order/comment; keep existing class binding and ntcftxt include pending owner.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2155",
+      "problem": "Client dispatch callback",
+      "evidence": "Original DispatchClientMessage dereferences PWND/adwWOW and invokes WOW callback. Native HWND is opaque; current call-local window dispatch view carries HWND, adwWOW and callback, no private NT4 WND overlay. Original function body identical.",
+      "change": "Restore original comment/order; keep existing finite pointer binding and WNDPROC tag alias pending owner.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2156",
+      "problem": "Moved dispatch source and comments",
+      "evidence": "Original2370-2407 now occurs in source order with exact body/comments; #line2370 restores original locations.",
+      "change": "Original dispatch source/order restored.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2157",
+      "problem": "Remaining native/private USER entrypoints",
+      "evidence": "CurrentTaskLock/DirectedYield/RegisterUserHungAppHandlers originally dispatch NT4 SFI ordinals; current lifecycle calls original selected task-order owners with explicit process/thread context (wow_user_task_lifecycle.c475,678). Clipboard helpers own gphn/gcsClipboard native USER cache; desktop helpers issue private NT4 object calls; keyboard helpers support native LoadKeyboardLayout. No second NT4 server state can be overlaid onto modern USER32. Original algorithms are not alleged faulty.",
+      "change": "Retain native-service/private-context omissions pending owner; restore selected body ordering and no additional shim.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2158",
+      "problem": "FE_IME excluded branch",
+      "evidence": "Original3494/3502 framework retained; body remains #error; FE_IME negative rejects at original3495.",
+      "change": "Keep exclusion; remove explanatory marker and preserve logical lines.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2159",
+      "problem": "DEBUG excluded branch",
+      "evidence": "Original642/644 framework retained; DEBUG negative rejects at643.",
+      "change": "Keep exclusion with bare #error and original lines.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2160",
+      "problem": "DEBUG registration branch framework",
+      "evidence": "Original2288/2290/2292 outer framework restored with bare #error and original else/endif logical lines; registration implementation remains separately accounted in R2153. Earlier DEBUG branch stops compiler first, so second error is source-verified only.",
+      "change": "Restore outer conditional/line structure; do not claim second DEBUG branch independently runtime-tested.",
+      "fully_restored": true
+    }
+  ],
+  "mirror_core_before": 3664,
+  "mirror_core_after": 3572,
+  "mirror_core_delta": -92,
+  "retained_source_lines_matched": 163,
+  "excluded_errors": 3,
+  "original_assertion": "winerrp.h:137 retail UserAssert is empty; restore it instead of CRT assert",
+  "unchanged_contract": "Original selected eight function bodies and existing five supported build profiles; no new provider or guest changes",
+  "restored": "Original order and comments, logical lines, bare excluded errors, retail assertion behavior",
+  "residual_decision_scope": "Native USER32 ownership, private NT4 dependency boundaries and finite selected bindings remain subject to owner decision, not approved by this implementation",
+  "baseline_focused": {
+    "cases": 32,
+    "exit": 0,
+    "root": "build/t483-s5-p220/focused-before2",
+    "limit": "Before product restoration; cannot establish final-code pass"
+  },
+  "final_source_sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+  "side_session": "DOS4GW investigation untouched",
+  "line_proof": {
+    "retained_nonblank_non_directive_lines": 163,
+    "mismatches": [],
+    "errors": 3,
+    "original_assert_line": 2226,
+    "original_order_ranges": [
+      [
+        2173,
+        2196
+      ],
+      [
+        2197,
+        2254
+      ],
+      [
+        2316,
+        2369
+      ],
+      [
+        2370,
+        2407
+      ],
+      [
+        2826,
+        2841
+      ]
+    ],
+    "candidate_sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+    "rows": [
+      {
+        "physical": 1,
+        "original": 1
+      },
+      {
+        "physical": 2,
+        "original": 2
+      },
+      {
+        "physical": 3,
+        "original": 3
+      },
+      {
+        "physical": 4,
+        "original": 4
+      },
+      {
+        "physical": 5,
+        "original": 5
+      },
+      {
+        "physical": 6,
+        "original": 6
+      },
+      {
+        "physical": 7,
+        "original": 7
+      },
+      {
+        "physical": 8,
+        "original": 8
+      },
+      {
+        "physical": 9,
+        "original": 9
+      },
+      {
+        "physical": 10,
+        "original": 10
+      },
+      {
+        "physical": 18,
+        "original": 2175
+      },
+      {
+        "physical": 19,
+        "original": 2176
+      },
+      {
+        "physical": 20,
+        "original": 2177
+      },
+      {
+        "physical": 21,
+        "original": 2178
+      },
+      {
+        "physical": 22,
+        "original": 2179
+      },
+      {
+        "physical": 23,
+        "original": 2180
+      },
+      {
+        "physical": 24,
+        "original": 2181
+      },
+      {
+        "physical": 25,
+        "original": 2182
+      },
+      {
+        "physical": 26,
+        "original": 2183
+      },
+      {
+        "physical": 27,
+        "original": 2184
+      },
+      {
+        "physical": 28,
+        "original": 2185
+      },
+      {
+        "physical": 29,
+        "original": 2186
+      },
+      {
+        "physical": 30,
+        "original": 2187
+      },
+      {
+        "physical": 32,
+        "original": 2189
+      },
+      {
+        "physical": 33,
+        "original": 2190
+      },
+      {
+        "physical": 34,
+        "original": 2191
+      },
+      {
+        "physical": 36,
+        "original": 2193
+      },
+      {
+        "physical": 37,
+        "original": 2194
+      },
+      {
+        "physical": 45,
+        "original": 2197
+      },
+      {
+        "physical": 46,
+        "original": 2198
+      },
+      {
+        "physical": 47,
+        "original": 2199
+      },
+      {
+        "physical": 48,
+        "original": 2200
+      },
+      {
+        "physical": 49,
+        "original": 2201
+      },
+      {
+        "physical": 51,
+        "original": 2203
+      },
+      {
+        "physical": 52,
+        "original": 2204
+      },
+      {
+        "physical": 53,
+        "original": 2205
+      },
+      {
+        "physical": 54,
+        "original": 2206
+      },
+      {
+        "physical": 55,
+        "original": 2207
+      },
+      {
+        "physical": 56,
+        "original": 2208
+      },
+      {
+        "physical": 58,
+        "original": 2210
+      },
+      {
+        "physical": 59,
+        "original": 2211
+      },
+      {
+        "physical": 60,
+        "original": 2212
+      },
+      {
+        "physical": 61,
+        "original": 2213
+      },
+      {
+        "physical": 62,
+        "original": 2214
+      },
+      {
+        "physical": 63,
+        "original": 2215
+      },
+      {
+        "physical": 64,
+        "original": 2216
+      },
+      {
+        "physical": 65,
+        "original": 2217
+      },
+      {
+        "physical": 66,
+        "original": 2218
+      },
+      {
+        "physical": 67,
+        "original": 2219
+      },
+      {
+        "physical": 68,
+        "original": 2220
+      },
+      {
+        "physical": 69,
+        "original": 2221
+      },
+      {
+        "physical": 71,
+        "original": 2223
+      },
+      {
+        "physical": 72,
+        "original": 2224
+      },
+      {
+        "physical": 74,
+        "original": 2226
+      },
+      {
+        "physical": 76,
+        "original": 2228
+      },
+      {
+        "physical": 77,
+        "original": 2229
+      },
+      {
+        "physical": 78,
+        "original": 2230
+      },
+      {
+        "physical": 79,
+        "original": 2231
+      },
+      {
+        "physical": 81,
+        "original": 2233
+      },
+      {
+        "physical": 83,
+        "original": 2235
+      },
+      {
+        "physical": 84,
+        "original": 2236
+      },
+      {
+        "physical": 85,
+        "original": 2237
+      },
+      {
+        "physical": 86,
+        "original": 2238
+      },
+      {
+        "physical": 87,
+        "original": 2239
+      },
+      {
+        "physical": 89,
+        "original": 2241
+      },
+      {
+        "physical": 91,
+        "original": 2243
+      },
+      {
+        "physical": 92,
+        "original": 2244
+      },
+      {
+        "physical": 93,
+        "original": 2245
+      },
+      {
+        "physical": 95,
+        "original": 2247
+      },
+      {
+        "physical": 96,
+        "original": 2248
+      },
+      {
+        "physical": 97,
+        "original": 2249
+      },
+      {
+        "physical": 98,
+        "original": 2250
+      },
+      {
+        "physical": 100,
+        "original": 2252
+      },
+      {
+        "physical": 101,
+        "original": 2253
+      },
+      {
+        "physical": 107,
+        "original": 2317
+      },
+      {
+        "physical": 108,
+        "original": 2318
+      },
+      {
+        "physical": 109,
+        "original": 2319
+      },
+      {
+        "physical": 110,
+        "original": 2320
+      },
+      {
+        "physical": 111,
+        "original": 2321
+      },
+      {
+        "physical": 112,
+        "original": 2322
+      },
+      {
+        "physical": 113,
+        "original": 2323
+      },
+      {
+        "physical": 114,
+        "original": 2324
+      },
+      {
+        "physical": 115,
+        "original": 2325
+      },
+      {
+        "physical": 116,
+        "original": 2326
+      },
+      {
+        "physical": 117,
+        "original": 2327
+      },
+      {
+        "physical": 118,
+        "original": 2328
+      },
+      {
+        "physical": 119,
+        "original": 2329
+      },
+      {
+        "physical": 120,
+        "original": 2330
+      },
+      {
+        "physical": 122,
+        "original": 2332
+      },
+      {
+        "physical": 123,
+        "original": 2333
+      },
+      {
+        "physical": 127,
+        "original": 2337
+      },
+      {
+        "physical": 128,
+        "original": 2338
+      },
+      {
+        "physical": 129,
+        "original": 2339
+      },
+      {
+        "physical": 130,
+        "original": 2340
+      },
+      {
+        "physical": 131,
+        "original": 2341
+      },
+      {
+        "physical": 132,
+        "original": 2342
+      },
+      {
+        "physical": 133,
+        "original": 2343
+      },
+      {
+        "physical": 134,
+        "original": 2344
+      },
+      {
+        "physical": 135,
+        "original": 2345
+      },
+      {
+        "physical": 136,
+        "original": 2346
+      },
+      {
+        "physical": 137,
+        "original": 2347
+      },
+      {
+        "physical": 139,
+        "original": 2349
+      },
+      {
+        "physical": 140,
+        "original": 2350
+      },
+      {
+        "physical": 144,
+        "original": 2354
+      },
+      {
+        "physical": 145,
+        "original": 2355
+      },
+      {
+        "physical": 146,
+        "original": 2356
+      },
+      {
+        "physical": 147,
+        "original": 2357
+      },
+      {
+        "physical": 148,
+        "original": 2358
+      },
+      {
+        "physical": 149,
+        "original": 2359
+      },
+      {
+        "physical": 150,
+        "original": 2360
+      },
+      {
+        "physical": 151,
+        "original": 2361
+      },
+      {
+        "physical": 152,
+        "original": 2362
+      },
+      {
+        "physical": 153,
+        "original": 2363
+      },
+      {
+        "physical": 154,
+        "original": 2364
+      },
+      {
+        "physical": 155,
+        "original": 2365
+      },
+      {
+        "physical": 157,
+        "original": 2367
+      },
+      {
+        "physical": 158,
+        "original": 2368
+      },
+      {
+        "physical": 167,
+        "original": 2372
+      },
+      {
+        "physical": 168,
+        "original": 2373
+      },
+      {
+        "physical": 169,
+        "original": 2374
+      },
+      {
+        "physical": 170,
+        "original": 2375
+      },
+      {
+        "physical": 171,
+        "original": 2376
+      },
+      {
+        "physical": 172,
+        "original": 2377
+      },
+      {
+        "physical": 173,
+        "original": 2378
+      },
+      {
+        "physical": 174,
+        "original": 2379
+      },
+      {
+        "physical": 175,
+        "original": 2380
+      },
+      {
+        "physical": 176,
+        "original": 2381
+      },
+      {
+        "physical": 178,
+        "original": 2383
+      },
+      {
+        "physical": 179,
+        "original": 2384
+      },
+      {
+        "physical": 180,
+        "original": 2385
+      },
+      {
+        "physical": 181,
+        "original": 2386
+      },
+      {
+        "physical": 182,
+        "original": 2387
+      },
+      {
+        "physical": 183,
+        "original": 2388
+      },
+      {
+        "physical": 184,
+        "original": 2389
+      },
+      {
+        "physical": 186,
+        "original": 2391
+      },
+      {
+        "physical": 187,
+        "original": 2392
+      },
+      {
+        "physical": 188,
+        "original": 2393
+      },
+      {
+        "physical": 189,
+        "original": 2394
+      },
+      {
+        "physical": 190,
+        "original": 2395
+      },
+      {
+        "physical": 192,
+        "original": 2397
+      },
+      {
+        "physical": 193,
+        "original": 2398
+      },
+      {
+        "physical": 194,
+        "original": 2399
+      },
+      {
+        "physical": 195,
+        "original": 2400
+      },
+      {
+        "physical": 196,
+        "original": 2401
+      },
+      {
+        "physical": 197,
+        "original": 2402
+      },
+      {
+        "physical": 198,
+        "original": 2403
+      },
+      {
+        "physical": 199,
+        "original": 2404
+      },
+      {
+        "physical": 200,
+        "original": 2405
+      },
+      {
+        "physical": 201,
+        "original": 2406
+      },
+      {
+        "physical": 208,
+        "original": 2826
+      },
+      {
+        "physical": 209,
+        "original": 2827
+      },
+      {
+        "physical": 210,
+        "original": 2828
+      },
+      {
+        "physical": 211,
+        "original": 2829
+      },
+      {
+        "physical": 212,
+        "original": 2830
+      },
+      {
+        "physical": 213,
+        "original": 2831
+      },
+      {
+        "physical": 214,
+        "original": 2832
+      },
+      {
+        "physical": 216,
+        "original": 2834
+      },
+      {
+        "physical": 217,
+        "original": 2835
+      },
+      {
+        "physical": 218,
+        "original": 2836
+      },
+      {
+        "physical": 219,
+        "original": 2837
+      },
+      {
+        "physical": 220,
+        "original": 2838
+      },
+      {
+        "physical": 221,
+        "original": 2839
+      },
+      {
+        "physical": 222,
+        "original": 2840
+      }
+    ],
+    "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+    "selected_contexts": {
+      "client": [
+        {
+          "line": 2383,
+          "text": "LONG DispatchClientMessage("
+        },
+        {
+          "line": 2384,
+          "text": "    PWND pwnd,"
+        },
+        {
+          "line": 2385,
+          "text": "    UINT message,"
+        },
+        {
+          "line": 2386,
+          "text": "    WPARAM wParam,"
+        },
+        {
+          "line": 2387,
+          "text": "    LPARAM lParam,"
+        },
+        {
+          "line": 2388,
+          "text": "    DWORD pfn)"
+        },
+        {
+          "line": 2389,
+          "text": "{"
+        },
+        {
+          "line": 2395,
+          "text": "    ((void)0);"
+        },
+        {
+          "line": 2401,
+          "text": "    if (0x80000000u & (DWORD)pfn) {"
+        },
+        {
+          "line": 2402,
+          "text": "        return (*(pwnd->callback))(((pwnd)->window), message, wParam, lParam, (DWORD)pfn, pwnd->adwWOW);"
+        },
+        {
+          "line": 2403,
+          "text": "    } else {"
+        },
+        {
+          "line": 2404,
+          "text": "        return ((WNDPROC)pfn)(((pwnd)->window), message, wParam, lParam);"
+        },
+        {
+          "line": 2405,
+          "text": "    }"
+        },
+        {
+          "line": 2406,
+          "text": "}"
+        }
+      ],
+      "class-client": [
+        {
+          "line": 2181,
+          "text": "ATOM"
+        },
+        {
+          "line": 2182,
+          "text": "__stdcall"
+        },
+        {
+          "line": 2183,
+          "text": "wow_original_register_class("
+        },
+        {
+          "line": 2184,
+          "text": "    WNDCLASSA *lpWndClass,"
+        },
+        {
+          "line": 2185,
+          "text": "    LPDWORD pdwWOWstuff)"
+        },
+        {
+          "line": 2186,
+          "text": "{"
+        },
+        {
+          "line": 2187,
+          "text": "    WNDCLASSEXA wc;"
+        },
+        {
+          "line": 2189,
+          "text": "    memcpy(&(wc.style), lpWndClass, sizeof(WNDCLASSA));"
+        },
+        {
+          "line": 2190,
+          "text": "    wc.hIconSm = ((void *)0);"
+        },
+        {
+          "line": 2191,
+          "text": "    wc.cbSize = sizeof(WNDCLASSEXA);"
+        },
+        {
+          "line": 2193,
+          "text": "    return RegisterClassExWOWA(&wc, pdwWOWstuff, ((void *)0), 0);"
+        },
+        {
+          "line": 2194,
+          "text": "}"
+        }
+      ],
+      "default-window-bits": [
+        {
+          "line": 2203,
+          "text": "WORD WowGetDefWindowProcBits("
+        },
+        {
+          "line": 2204,
+          "text": "    PBYTE    pDefWindowProcBits,"
+        },
+        {
+          "line": 2205,
+          "text": "    WORD     cbDefWindowProcBits)"
+        },
+        {
+          "line": 2206,
+          "text": "{"
+        },
+        {
+          "line": 2207,
+          "text": "    WORD  wMaxMsg;"
+        },
+        {
+          "line": 2208,
+          "text": "    PBYTE pbSrc, pbDst, pbDstEnd;"
+        },
+        {
+          "line": 2223,
+          "text": "    wMaxMsg = (((wow_default_message_state.DefWindowMsgs.maxMsgs) > (wow_default_message_state.DefWindowSpecMsgs.maxMsgs)) ? (wow_default_message_state.DefWindowMsgs.maxMsgs) : (wow_default_message_state.DefWindowSpecMsgs.maxMsgs));"
+        },
+        {
+          "line": 2226,
+          "text": "    ;"
+        },
+        {
+          "line": 2235,
+          "text": "    memcpy((pDefWindowProcBits),(wow_default_message_state.DefWindowMsgs.abMsgs),(wow_default_message_state.DefWindowMsgs.maxMsgs / 8 + 1));"
+        },
+        {
+          "line": 2243,
+          "text": "    pbSrc = wow_default_message_state.DefWindowSpecMsgs.abMsgs;"
+        },
+        {
+          "line": 2244,
+          "text": "    pbDst = pDefWindowProcBits;"
+        },
+        {
+          "line": 2245,
+          "text": "    pbDstEnd = pbDst + (wow_default_message_state.DefWindowSpecMsgs.maxMsgs / 8 + 1);"
+        },
+        {
+          "line": 2247,
+          "text": "    while (pbDst < pbDstEnd)"
+        },
+        {
+          "line": 2248,
+          "text": "    {"
+        },
+        {
+          "line": 2249,
+          "text": "        *pbDst++ |= *pbSrc++;"
+        },
+        {
+          "line": 2250,
+          "text": "    }"
+        },
+        {
+          "line": 2252,
+          "text": "    return wMaxMsg;"
+        },
+        {
+          "line": 2253,
+          "text": "}"
+        }
+      ],
+      "dialog-memory": [
+        {
+          "line": 2326,
+          "text": "DWORD WOWDlgInit("
+        },
+        {
+          "line": 2327,
+          "text": "HWND hwndDlg,"
+        },
+        {
+          "line": 2328,
+          "text": "LONG lParam)"
+        },
+        {
+          "line": 2329,
+          "text": "{"
+        },
+        {
+          "line": 2330,
+          "text": "    ((void)0);"
+        },
+        {
+          "line": 2332,
+          "text": "    return (*(wow_user_registered_callbacks()->pfnInitDlgCb))(hwndDlg, lParam);"
+        },
+        {
+          "line": 2333,
+          "text": "}"
+        },
+        {
+          "line": 2345,
+          "text": "HANDLE GetEditDS()"
+        },
+        {
+          "line": 2346,
+          "text": "{"
+        },
+        {
+          "line": 2347,
+          "text": "    ((void)0);"
+        },
+        {
+          "line": 2349,
+          "text": "    return((HANDLE)((*(wow_user_registered_callbacks()->pfn16GlobalAlloc))((0x0002 | 0x0040) | 0x2000, 256)));"
+        },
+        {
+          "line": 2350,
+          "text": "}"
+        },
+        {
+          "line": 2362,
+          "text": "void ReleaseEditDS("
+        },
+        {
+          "line": 2363,
+          "text": "HANDLE h)"
+        },
+        {
+          "line": 2364,
+          "text": "{"
+        },
+        {
+          "line": 2365,
+          "text": "    ((void)0);"
+        },
+        {
+          "line": 2367,
+          "text": "    (*(wow_user_registered_callbacks()->pfn16GlobalFree))(((WORD)(((DWORD_PTR)(h)) & 0xffff)));"
+        },
+        {
+          "line": 2368,
+          "text": "}"
+        }
+      ],
+      "control-state": [
+        {
+          "line": 2826,
+          "text": "void SetWindowState("
+        },
+        {
+          "line": 2827,
+          "text": "    PWND pwnd,"
+        },
+        {
+          "line": 2828,
+          "text": "    UINT flags)"
+        },
+        {
+          "line": 2829,
+          "text": "{"
+        },
+        {
+          "line": 2830,
+          "text": "    if ((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(flags)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(flags)) & 0xff))) != ((BYTE)(((DWORD_PTR)(flags)) & 0xff)))"
+        },
+        {
+          "line": 2831,
+          "text": "        wow_edit_set_window_state(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), flags);"
+        },
+        {
+          "line": 2832,
+          "text": "}"
+        },
+        {
+          "line": 2834,
+          "text": "void ClearWindowState("
+        },
+        {
+          "line": 2835,
+          "text": "    PWND pwnd,"
+        },
+        {
+          "line": 2836,
+          "text": "    UINT flags)"
+        },
+        {
+          "line": 2837,
+          "text": "{"
+        },
+        {
+          "line": 2838,
+          "text": "    if ((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(flags)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(flags)) & 0xff))))"
+        },
+        {
+          "line": 2839,
+          "text": "        wow_edit_clear_window_state(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), flags);"
+        },
+        {
+          "line": 2840,
+          "text": "}"
+        }
+      ]
+    },
+    "selected_lines": 76,
+    "negative_lines": [
+      643,
+      3495
+    ]
+  },
+  "final_hunks": [
+    {
+      "original_start": 12,
+      "removed": 2161,
+      "added": 3,
+      "new_text": [
+        "#if defined(WOW_ORIGINAL_CLASS_CLIENT)",
+        "#include \"wow_class_client_bindings.h\"",
+        "#include \"../inc/ntcftxt.h\""
+      ]
+    },
+    {
+      "original_start": 2197,
+      "removed": 0,
+      "added": 4,
+      "new_text": [
+        "#elif defined(WOW_ORIGINAL_DEF_WINDOW_BITS)",
+        "#include \"wow_default_message_bindings.h\"",
+        "#define gSharedInfo wow_default_message_state",
+        "#define UserAssert(exp)"
+      ]
+    },
+    {
+      "original_start": 2255,
+      "removed": 61,
+      "added": 2,
+      "new_text": [
+        "#elif defined(WOW_ORIGINAL_DIALOG_EDIT)",
+        "#include \"wow_edit_memory_bindings.h\""
+      ]
+    },
+    {
+      "original_start": 2370,
+      "removed": 0,
+      "added": 4,
+      "new_text": [
+        "#elif !defined(WOW_ORIGINAL_CONTROL_STATE)",
+        "#define WOW_ORIGINAL_CLIENT_DISPATCH",
+        "#include \"wow_window_dispatch_bindings.h\"",
+        "#define WNDPROC_WOW WOW_WINDOW_PROC_TAG"
+      ]
+    },
+    {
+      "original_start": 2408,
+      "removed": 418,
+      "added": 4,
+      "new_text": [
+        "#endif",
+        "#if defined(WOW_ORIGINAL_CONTROL_STATE)",
+        "#define WOW_ORIGINAL_CONTROL_STATE_CALLS",
+        "#include \"wow_edit_call_bindings.h\""
+      ]
+    },
+    {
+      "original_start": 2842,
+      "removed": 651,
+      "added": 1,
+      "new_text": [
+        "#endif"
+      ]
+    },
+    {
+      "original_start": 3495,
+      "removed": 7,
+      "added": 1,
+      "new_text": [
+        "#error"
+      ]
+    },
+    {
+      "original_start": 3503,
+      "removed": 248,
+      "added": 7,
+      "new_text": [
+        "#ifdef DEBUG",
+        "#error",
+        "#endif",
+        "#ifdef DEBUG",
+        "#error",
+        "#else",
+        "#endif"
+      ]
+    }
+  ],
+  "metrics_note": "Historical point anchors overlap after movement; use final_hunks for non-overlapping +26/-3546=3572 total. Do not sum historical point sizes.",
+  "verification": "Five final preprocessings;76 selected/163 source lines;two negative profiles;cached x86/x64;publish11x2;32 focused;Full19;shared-boundary/governance/link checks passed",
+  "source_pin": {
+    "status": "whole-file investigation started; no disposition or source change claimed",
+    "file": "src/non-mvdm/windows/core/ntuser/client/client.c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+    "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+    "current_sha256": "52acb9321a7cdaba603b0e943101b72f913ee9421ffc110fa2cc23a6e2fd405b",
+    "points": [
+      "T483-R2150",
+      "T483-R2151",
+      "T483-R2152",
+      "T483-R2153",
+      "T483-R2154",
+      "T483-R2155",
+      "T483-R2156",
+      "T483-R2157",
+      "T483-R2158",
+      "T483-R2159",
+      "T483-R2160"
+    ],
+    "core_added": 69,
+    "core_deleted": 3595,
+    "core_hunks": [
+      {
+        "tag": "replace",
+        "original_start": 12,
+        "deleted": 2190,
+        "current_start": 12,
+        "added": 11
+      },
+      {
+        "tag": "insert",
+        "original_start": 2255,
+        "deleted": 0,
+        "current_start": 76,
+        "added": 5
+      },
+      {
+        "tag": "replace",
+        "original_start": 2256,
+        "deleted": 3,
+        "current_start": 82,
+        "added": 3
+      },
+      {
+        "tag": "replace",
+        "original_start": 2260,
+        "deleted": 55,
+        "current_start": 86,
+        "added": 2
+      },
+      {
+        "tag": "replace",
+        "original_start": 2317,
+        "deleted": 9,
+        "current_start": 90,
+        "added": 16
+      },
+      {
+        "tag": "delete",
+        "original_start": 2334,
+        "deleted": 2,
+        "current_start": 114,
+        "added": 0
+      },
+      {
+        "tag": "insert",
+        "original_start": 2370,
+        "deleted": 0,
+        "current_start": 148,
+        "added": 12
+      },
+      {
+        "tag": "insert",
+        "original_start": 2371,
+        "deleted": 0,
+        "current_start": 161,
+        "added": 10
+      },
+      {
+        "tag": "replace",
+        "original_start": 2408,
+        "deleted": 294,
+        "current_start": 208,
+        "added": 2
+      },
+      {
+        "tag": "delete",
+        "original_start": 2704,
+        "deleted": 789,
+        "current_start": 212,
+        "added": 0
+      },
+      {
+        "tag": "replace",
+        "original_start": 3495,
+        "deleted": 7,
+        "current_start": 214,
+        "added": 1
+      },
+      {
+        "tag": "delete",
+        "original_start": 3503,
+        "deleted": 6,
+        "current_start": 216,
+        "added": 0
+      },
+      {
+        "tag": "replace",
+        "original_start": 3510,
+        "deleted": 6,
+        "current_start": 217,
+        "added": 3
+      },
+      {
+        "tag": "replace",
+        "original_start": 3517,
+        "deleted": 234,
+        "current_start": 221,
+        "added": 4
+      }
+    ],
+    "build_contexts": [
+      "New-T404S5Wow32ProviderNinja.ps1:533 dialog memory",
+      "New-T404S5Wow32ProviderNinja.ps1:557 control state",
+      "New-T404S5Wow32ProviderNinja.ps1:596 default bits",
+      "New-T404S5Wow32ProviderNinja.ps1:675 class client",
+      "default client dispatch: locate exact command before validation"
+    ],
+    "review_requirements": [
+      "Original entire-file provider closure versus modern USER ownership",
+      "Restore original source ordering where compatible",
+      "Verify all five selected contexts and diagnostic lines",
+      "Retain excluded errors",
+      "Complete all 11 points before batch build"
+    ],
+    "dos4gw": "Owner delegated to separate session; preserve its uncommitted test changes; no debugging in this batch"
+  },
+  "actual_compile_contexts": [
+    {
+      "target": "client",
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\""
+    },
+    {
+      "target": "dialog-memory",
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_DIALOG_EDIT"
+    },
+    {
+      "target": "control-state",
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_CONTROL_STATE"
+    },
+    {
+      "target": "default-window-bits",
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_DEF_WINDOW_BITS"
+    },
+    {
+      "target": "class-client",
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /DWOW_ORIGINAL_CLASS_CLIENT"
+    }
+  ],
+  "original_compile_controls": [
+    {
+      "context": "class-client-original",
+      "current_exit": 0,
+      "original_exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(108): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(127): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2061: syntax error: identifier 'ReplyMsg'"
+      ]
+    },
+    {
+      "context": "client-original",
+      "current_exit": 0,
+      "original_exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(108): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(127): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2061: syntax error: identifier 'ReplyMsg'"
+      ]
+    },
+    {
+      "context": "control-state-original",
+      "current_exit": 0,
+      "original_exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(108): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(127): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2061: syntax error: identifier 'ReplyMsg'"
+      ]
+    },
+    {
+      "context": "default-window-bits-original",
+      "current_exit": 0,
+      "original_exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(108): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(127): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2061: syntax error: identifier 'ReplyMsg'"
+      ]
+    },
+    {
+      "context": "dialog-memory-original",
+      "current_exit": 0,
+      "original_exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(108): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(127): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2061: syntax error: identifier 'ReplyMsg'"
+      ]
+    }
+  ],
+  "sdk_substitution_control": {
+    "exit": 2,
+    "first_errors": [
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(64): error C2065: 'PCBOX': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(64): error C2146: syntax error: missing ';' before identifier 'pcCombo'",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(64): error C2065: 'pcCombo': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(65): error C2065: 'PWND': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(65): error C2146: syntax error: missing ';' before identifier 'pwnd'",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(65): error C2065: 'pwnd': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(67): error C2065: 'pwnd': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p220\\original-sdk.c(68): error C2065: 'pwnd': undeclared identifier"
+    ],
+    "limitation": "PCH and SDK failures do not alone justify every function omission;ownership analysis is separate."
+  },
+  "original_function_scope": {
+    "total": 121,
+    "selected": [
+      "RegisterClassWOWA",
+      "WowGetDefWindowProcBits",
+      "WOWDlgInit",
+      "GetEditDS",
+      "ReleaseEditDS",
+      "DispatchClientMessage",
+      "SetWindowState",
+      "ClearWindowState"
+    ],
+    "native_export_family": [
+      "BringWindowToTop",
+      "ChildWindowFromPoint",
+      "CopyIcon",
+      "AdjustWindowRect",
+      "TranslateAcceleratorW",
+      "TranslateAcceleratorA",
+      "GetClipboardData",
+      "SetClipboardData",
+      "SetDeskWallpaper",
+      "ReleaseDC",
+      "ToAscii",
+      "ToAsciiEx",
+      "ScrollDC",
+      "DrawIcon",
+      "DrawIconEx",
+      "ExcludeUpdateRgn",
+      "InvalidateRgn",
+      "ValidateRgn",
+      "CreateCaret",
+      "GetUpdateRgn",
+      "GetDCEx",
+      "ScrollWindow",
+      "SwitchToThisWindow",
+      "WaitForInputIdle",
+      "MsgWaitForMultipleObjects",
+      "MsgWaitForMultipleObjectsEx",
+      "GrayStringA",
+      "GrayStringW",
+      "GetUserObjectSecurity",
+      "SetUserObjectSecurity",
+      "GetUserObjectInformationA",
+      "CreateWindowStationA",
+      "CreateWindowStationW",
+      "OpenWindowStationA",
+      "OpenWindowStationW",
+      "CreateDesktopA",
+      "CreateDesktopW",
+      "OpenDesktopA",
+      "OpenDesktopW",
+      "UserRegisterWowHandlers",
+      "ArrangeIconicWindows",
+      "BeginDeferWindowPos",
+      "EndDeferWindowPos",
+      "CascadeChildWindows",
+      "CloseClipboard",
+      "CloseWindow",
+      "CreateMenu",
+      "CreatePopupMenu",
+      "DestroyCaret",
+      "DrawMenuBar",
+      "EmptyClipboard",
+      "EnableWindow",
+      "EnumClipboardFormats",
+      "FlashWindow",
+      "GetDialogBaseUnits",
+      "GetInputDesktop",
+      "GetKeyboardType",
+      "GetMessagePos",
+      "GetQueueStatus",
+      "LoadRemoteFonts",
+      "LoadLocalFonts",
+      "MessageBeep",
+      "OpenIcon",
+      "GetShellWindow",
+      "SetShellWindow",
+      "GetProgmanWindow",
+      "SetProgmanWindow",
+      "GetTaskmanWindow",
+      "SetTaskmanWindow",
+      "SetWindowContextHelpId",
+      "GetWindowContextHelpId",
+      "PostQuitMessage",
+      "ReleaseCapture",
+      "ReplyMessage",
+      "RegisterSystemThread",
+      "SetCaretBlinkTime",
+      "SetCaretPos",
+      "SetCursorPos",
+      "SetDoubleClickTime",
+      "SetForegroundWindow",
+      "ShowCursor",
+      "ShowOwnedPopups",
+      "ShowStartGlass",
+      "SwapMouseButton",
+      "TileChildWindows",
+      "UnhookWindowsHook",
+      "UpdateWindow",
+      "RegisterShellHookWindow",
+      "DeregisterShellHookWindow",
+      "UserRealizePalette",
+      "WindowFromDC",
+      "GetWindowRgn",
+      "LoadKeyboardLayoutEx",
+      "LoadKeyboardLayoutW",
+      "LoadKeyboardLayoutA",
+      "GetKeyboardLayout",
+      "RegisterLogonProcess"
+    ],
+    "private_helpers": [
+      {
+        "name": "DeleteClientClipboardHandle",
+        "start": 222,
+        "end": 276,
+        "ntuser_calls": [],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "leaf/private helper: do not infer necessity from PCH failure; consumer/link audit required"
+      },
+      {
+        "name": "ClientEmptyClipboard",
+        "start": 286,
+        "end": 314,
+        "ntuser_calls": [],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "leaf/private helper: do not infer necessity from PCH failure; consumer/link audit required"
+      },
+      {
+        "name": "GetClipboardCodePage",
+        "start": 672,
+        "end": 702,
+        "ntuser_calls": [],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "leaf/private helper: do not infer necessity from PCH failure; consumer/link audit required"
+      },
+      {
+        "name": "InnerGrayStringAorW",
+        "start": 1492,
+        "end": 1635,
+        "ntuser_calls": [],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "leaf/private helper: do not infer necessity from PCH failure; consumer/link audit required"
+      },
+      {
+        "name": "CommonCreateWindowStation",
+        "start": 1787,
+        "end": 1852,
+        "ntuser_calls": [
+          "NtUserCreateWindowStation"
+        ],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "CommonOpenWindowStation",
+        "start": 1895,
+        "end": 1941,
+        "ntuser_calls": [
+          "NtUserOpenWindowStation"
+        ],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "CommonCreateDesktop",
+        "start": 1982,
+        "end": 2029,
+        "ntuser_calls": [
+          "NtUserCreateDesktop",
+          "NtUserGetProcessWindowStation"
+        ],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "CommonOpenDesktop",
+        "start": 2122,
+        "end": 2140,
+        "ntuser_calls": [
+          "NtUserGetProcessWindowStation",
+          "NtUserOpenDesktop"
+        ],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "CurrentTaskLock",
+        "start": 2518,
+        "end": 2522,
+        "ntuser_calls": [
+          "NtUserCallOneParam"
+        ],
+        "server_ordinals": [
+          "SFI_CURRENTTASKLOCK"
+        ],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "DirectedYield",
+        "start": 2541,
+        "end": 2545,
+        "ntuser_calls": [
+          "NtUserCallOneParam"
+        ],
+        "server_ordinals": [
+          "SFI_XXXDIRECTEDYIELD"
+        ],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "KillSystemTimer",
+        "start": 2685,
+        "end": 2690,
+        "ntuser_calls": [
+          "NtUserCallHwndParam"
+        ],
+        "server_ordinals": [
+          "SFI__KILLSYSTEMTIMER"
+        ],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "RegisterUserHungAppHandlers",
+        "start": 2860,
+        "end": 2867,
+        "ntuser_calls": [
+          "NtUserCallTwoParam"
+        ],
+        "server_ordinals": [
+          "SFI_XXXREGISTERUSERHUNGAPPHANDLERS"
+        ],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      },
+      {
+        "name": "GetActiveKeyboardName",
+        "start": 3175,
+        "end": 3362,
+        "ntuser_calls": [],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "leaf/private helper: do not infer necessity from PCH failure; consumer/link audit required"
+      },
+      {
+        "name": "LoadPreloadKeyboardLayouts",
+        "start": 3378,
+        "end": 3397,
+        "ntuser_calls": [],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "leaf/private helper: do not infer necessity from PCH failure; consumer/link audit required"
+      },
+      {
+        "name": "OpenKeyboardLayoutFile",
+        "start": 3413,
+        "end": 3616,
+        "ntuser_calls": [],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "leaf/private helper: do not infer necessity from PCH failure; consumer/link audit required"
+      },
+      {
+        "name": "PrivateKDBreakPoint",
+        "start": 3748,
+        "end": 3750,
+        "ntuser_calls": [
+          "NtUserBreak"
+        ],
+        "server_ordinals": [],
+        "selected": false,
+        "published_import_name_match": false,
+        "published_import_owner": null,
+        "review_route": "NT4 private service/ordinal; identify selected caller or native owner"
+      }
+    ],
+    "limit": "An export-name match identifies native ownership,not proof of identical implementations. Private dependencies and actual reached contracts are reviewed in point dispositions."
+  },
+  "counter_review": [
+    "Five supported selections are mutually exclusive in the actual graph;source reordering does not change a supported macro combination.",
+    "Original selected function bodies remain unchanged;CRT assert was project-added and is removed to match original retail semantics.",
+    "Native HWND cannot be treated as NT4 PWND;guest linear shared address cannot be replaced by native USER shared pointer. These are ABI/ownership proofs,not claims of reproduced crashes.",
+    "The bitmap fixture links the real merge,tables,initialization and buffer-validation caller. Only the unrelated menu entry has an aborting sentinel;it cannot supply passing bitmap behavior.",
+    "No dependency-selection change or new product provider. Existing excluded frameworks retain bare errors and original logical lines.",
+    "Restore/pending accounting is per historical R point;shared movement/omission hunks are measured once per file."
+  ],
+  "publication": {
+    "status": "published",
+    "package": "7fe90997-4dae-4832-858f-59c084d38d18",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 406837,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6688,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1555,
+        "CleanupMs": 585,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 17802,
+        "CleanupMs": 505,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 16287,
+        "CleanupMs": 516,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 15382,
+        "CleanupMs": 545,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 262,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66171,
+        "CleanupMs": 368,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44548,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 42501,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14060,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10196,
+        "CleanupMs": 399,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 58464,
+        "CleanupMs": 422,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12142,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27886,
+        "CleanupMs": 455,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30090,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5853,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7496,
+        "CleanupMs": 444,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9717,
+        "CleanupMs": 356,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3534,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6266,
+        "CleanupMs": 406,
+        "Passed": true
+      }
+    ]
+  },
+  "isolated_identity": {
+    "testPackage": "a1aed377-132c-4769-aa29-bd024f6f03fe",
+    "publishedPackage": "7fe90997-4dae-4832-858f-59c084d38d18",
+    "images": [
+      {
+        "restoredSha256": "33B149030088AB7E8F470965230B7377F14468DA39D84FB50067AEFF0A0AA61A",
+        "name": "VCDEX.DLL",
+        "identical": true,
+        "publishedSha256": "33B149030088AB7E8F470965230B7377F14468DA39D84FB50067AEFF0A0AA61A"
+      },
+      {
+        "restoredSha256": "E4DAD2C3A716D179968DFC30793B143BC9E226EA27CAC76FCF0DDB9C38DD2DE7",
+        "name": "run16.exe",
+        "identical": true,
+        "publishedSha256": "E4DAD2C3A716D179968DFC30793B143BC9E226EA27CAC76FCF0DDB9C38DD2DE7"
+      },
+      {
+        "restoredSha256": "2C8471D6CAA05D2A8193885BA0851B0390899487632641707AB7C8DEEFD736D8",
+        "name": "ntsrv.exe",
+        "identical": true,
+        "publishedSha256": "2C8471D6CAA05D2A8193885BA0851B0390899487632641707AB7C8DEEFD736D8"
+      },
+      {
+        "restoredSha256": "D3252E6D80A30495DDC2799D2340B2BF71890A1334DA51BAA5A396D56A350597",
+        "name": "ntcon.exe",
+        "identical": true,
+        "publishedSha256": "D3252E6D80A30495DDC2799D2340B2BF71890A1334DA51BAA5A396D56A350597"
+      },
+      {
+        "restoredSha256": "B374DD5493FA603B2ABDF215B19823A538CB8DCA05B69694E3242CA92677EA73",
+        "name": "ntvdm.exe",
+        "identical": true,
+        "publishedSha256": "B374DD5493FA603B2ABDF215B19823A538CB8DCA05B69694E3242CA92677EA73"
+      },
+      {
+        "restoredSha256": "DBD3A5E35B378ABF593D4748497665A76DACE73A1081BFEDFCB80271A11A21DA",
+        "name": "ntvwm.exe",
+        "identical": true,
+        "publishedSha256": "DBD3A5E35B378ABF593D4748497665A76DACE73A1081BFEDFCB80271A11A21DA"
+      },
+      {
+        "restoredSha256": "7ABD094924BCFAE807CC8A6D7FC7AE4302CA07662AE5BC90950EC3C1A0D874E3",
+        "name": "ntmon.exe",
+        "identical": true,
+        "publishedSha256": "7ABD094924BCFAE807CC8A6D7FC7AE4302CA07662AE5BC90950EC3C1A0D874E3"
+      },
+      {
+        "restoredSha256": "27051CF7E3E13ADC958A2A9A0F3C131B2F320AC02CA1E36B63AFABD44CE66C2C",
+        "name": "WOW32.DLL",
+        "identical": true,
+        "publishedSha256": "27051CF7E3E13ADC958A2A9A0F3C131B2F320AC02CA1E36B63AFABD44CE66C2C"
+      },
+      {
+        "restoredSha256": "9E7E0E98CA08133784BBFA8E8960424D25A451DC290EAADBFF2D431D8CBD1BF3",
+        "name": "VDMREDIR.DLL",
+        "identical": true,
+        "publishedSha256": "9E7E0E98CA08133784BBFA8E8960424D25A451DC290EAADBFF2D431D8CBD1BF3"
+      },
+      {
+        "restoredSha256": "98FED67F8A8B26EF42AAC3F34F3965A78C6F4841BACF4F07EB16999D091F9D52",
+        "name": "nthook32.dll",
+        "identical": true,
+        "publishedSha256": "98FED67F8A8B26EF42AAC3F34F3965A78C6F4841BACF4F07EB16999D091F9D52"
+      },
+      {
+        "restoredSha256": "89C1973D43E74BB3E6C6FA91DA67016C10C24D9401876DDDF6B796EB98B07BC4",
+        "name": "nthook64.dll",
+        "identical": true,
+        "publishedSha256": "89C1973D43E74BB3E6C6FA91DA67016C10C24D9401876DDDF6B796EB98B07BC4"
+      }
+    ]
+  },
+  "final_focused": "Configured supplemental call-boundary graph: O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries (not built or run)\nbuild PID=37864 start=2026-11-16T07:00:03.3388784Z timeout_seconds=300\nbuild exit=0 elapsed_seconds=16.2648286\n0\nwow_dialog_getset_fixture PID=13628 start=2026-11-16T07:00:19.6305802Z timeout_seconds=30\nwow_dialog_getset_fixture exit=0 elapsed_seconds=0.1431175\n0\nwow_window_client_message_fixture PID=10908 start=2026-11-16T07:00:19.7786536Z timeout_seconds=30\nwow_window_client_message_fixture exit=0 elapsed_seconds=0.3264165\n0\nwow_dialog_creator_lifetime_fixture PID=17604 start=2026-11-16T07:00:20.1080759Z timeout_seconds=30\nwow_dialog_creator_lifetime_fixture exit=0 elapsed_seconds=0.2069\n0\nwow_dialog_lifetime_fixture PID=12152 start=2026-11-16T07:00:20.3181253Z timeout_seconds=30\nwow_dialog_lifetime_fixture exit=0 elapsed_seconds=0.4956806\n0\nwow_dialog_call_fixture PID=3280 start=2026-11-16T07:00:20.8164935Z timeout_seconds=30\nwow_dialog_call_fixture exit=0 elapsed_seconds=0.1379899\n0\nwow_edit_call_fixture PID=26792 start=2026-11-16T07:00:20.9574349Z timeout_seconds=30\nwow_edit_call_fixture exit=0 elapsed_seconds=0.283937\n0\nwow_edit_memory_callbacks_fixture PID=33196 start=2026-11-16T07:00:21.2442196Z timeout_seconds=30\nwow_edit_memory_callbacks_fixture exit=0 elapsed_seconds=0.2681912\n0\nwow_control_brush_fixture PID=28156 start=2026-11-16T07:00:21.5151468Z timeout_seconds=30\nwow_control_brush_fixture exit=0 elapsed_seconds=0.111999\n0\nwow_default_window_binding_fixture PID=12584 start=2026-11-16T07:00:21.6298402Z timeout_seconds=30\nwow_default_window_binding_fixture exit=0 elapsed_seconds=0.1031378\n0\nwow_dialog_context_fixture PID=29848 start=2026-11-16T07:00:21.7357792Z timeout_seconds=30\nwow_dialog_context_fixture exit=0 elapsed_seconds=0.127642\n0\nwow_dialog_creation_entry_fixture PID=15812 start=2026-11-16T07:00:21.8662686Z timeout_seconds=30\nwow_dialog_creation_entry_fixture exit=0 elapsed_seconds=0.1317527\n0\nwow_dialog_finalization_fixture PID=15600 start=2026-11-16T07:00:22.0007043Z timeout_seconds=30\nwow_dialog_finalization_fixture exit=0 elapsed_seconds=0.1307101\n0\nwow_dialog_end_original_fixture PID=26096 start=2026-11-16T07:00:22.1339440Z timeout_seconds=30\nwow_dialog_end_original_fixture exit=0 elapsed_seconds=0.1648623\n0\nwow_dialog_keyboard_entry_fixture PID=8912 start=2026-11-16T07:00:22.3015752Z timeout_seconds=30\nwow_dialog_keyboard_entry_fixture exit=0 elapsed_seconds=0.1259087\n0\nwow_dialog_mnemonic_lifetime_fixture PID=15824 start=2026-11-16T07:00:22.4302715Z timeout_seconds=30\nwow_dialog_mnemonic_lifetime_fixture exit=0 elapsed_seconds=0.1397953\n0\nwow_dialog_keyboard_lifetime_fixture PID=30648 start=2026-11-16T07:00:22.5723918Z timeout_seconds=30\nwow_dialog_keyboard_lifetime_fixture exit=0 elapsed_seconds=0.1381854\n0\nwow_control_string_fixture PID=33572 start=2026-11-16T07:00:22.7131905Z timeout_seconds=30\nwow_control_string_fixture exit=0 elapsed_seconds=0.1213217\n0\nwow_text_measure_failure_fixture PID=4956 start=2026-11-16T07:00:22.8369466Z timeout_seconds=30\nwow_text_measure_failure_fixture exit=0 elapsed_seconds=0.2588211\n0\nwow_mnemonic_drawing_fixture PID=36952 start=2026-11-16T07:00:23.0978161Z timeout_seconds=30\nwow_mnemonic_drawing_fixture exit=0 elapsed_seconds=0.1317302\n0\nwow_default_original_fixture PID=16508 start=2026-11-16T07:00:23.2319898Z timeout_seconds=30\nwow_default_original_fixture exit=0 elapsed_seconds=0.1207333\n0\nwow_button_drawing_fixture PID=37704 start=2026-11-16T07:00:23.3548493Z timeout_seconds=30\nwow_button_drawing_fixture exit=0 elapsed_seconds=0.1534744\n0\nwow_button_resources_fixture PID=29964 start=2026-11-16T07:00:23.5111314Z timeout_seconds=30\nwow_button_resources_fixture exit=0 elapsed_seconds=0.2097862\n0\nwow_control_draw_state_fixture PID=14540 start=2026-11-16T07:00:23.7235070Z timeout_seconds=30\nwow_control_draw_state_fixture exit=0 elapsed_seconds=0.16093\n0\nwow_dialog_navigation_fixture PID=8980 start=2026-11-16T07:00:23.8867076Z timeout_seconds=30\nwow_dialog_navigation_fixture exit=0 elapsed_seconds=0.269104\n0\nwow_edit_view_fixture PID=35080 start=2026-11-16T07:00:24.1585140Z timeout_seconds=30\nwow_edit_view_fixture exit=0 elapsed_seconds=0.1352256\n0\nwow_button_lifetime_fixture PID=5584 start=2026-11-16T07:00:24.2960820Z timeout_seconds=30\nwow_button_lifetime_fixture exit=0 elapsed_seconds=0.5184111\n0\nwow_button_dc_fixture PID=27408 start=2026-11-16T07:00:24.8177462Z timeout_seconds=30\nwow_button_dc_fixture exit=0 elapsed_seconds=0.3225385\n0\nwow_dialog_native_owner_probe PID=14052 start=2026-11-16T07:00:25.1419975Z timeout_seconds=30\nwow_dialog_native_owner_probe exit=0 elapsed_seconds=0.6588686\n0\nwow_dialog_initialization_fixture PID=14888 start=2026-11-16T07:00:25.8031513Z timeout_seconds=30\nwow_dialog_initialization_fixture exit=0 elapsed_seconds=0.7327087\n0\nwow_edit_lookaside_fixture PID=10228 start=2026-11-16T07:00:26.5379799Z timeout_seconds=30\nwow_edit_lookaside_fixture exit=0 elapsed_seconds=0.1584364\n0\nwow_edit_conversion_fixture PID=20964 start=2026-11-16T07:00:26.6988463Z timeout_seconds=30\nwow_edit_conversion_fixture exit=0 elapsed_seconds=0.1303105\n0\nwow_def_window_bits_fixture PID=27380 start=2026-11-16T07:00:26.8321401Z timeout_seconds=30\nwow_def_window_bits_fixture exit=0 elapsed_seconds=0.2823456\n0\n",
+  "limits": [
+    "Native API/private-context residuals await owner decision. No new guest rebuilt.",
+    "Full external DOS4GW case not supplied here;known reproduction is assigned to side session,not fixed or passed by P220.",
+    "Second DEBUG exclusion is source-verified;first DEBUG error stops that negative compile."
+  ]
+}

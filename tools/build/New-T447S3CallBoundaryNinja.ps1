@@ -30,6 +30,11 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 # Original state guards and color client must be separate selections: their
 # preprocessor subsets are mutually exclusive, as in the product generator.
 $units = @(
+    @('def_bits_fixture', 'test/adapter-mvdm-host-out/wow/wow_def_window_bits_fixture.c', ''),
+    @('def_bits_owner', 'src/non-mvdm/windows/core/ntuser/client/client.c', '/DWOW_ORIGINAL_DEF_WINDOW_BITS'),
+    @('def_bits_boundary', 'src/wow32-dll/source/wow_private_user_compat.c', '/Gy'),
+    @('def_bits_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', ''),
+    @('def_bits_state', 'src/wow32-dll/source/wow_default_message_bindings.c', ''),
     @('original_globals', 'src/non-mvdm/windows/core/ntuser/client/clglobal.c', ''),
     @('lookaside_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_lookaside_fixture.c', ''),
     @('lookaside_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/DWOW_ORIGINAL_EDIT_LOOKASIDE'),
@@ -270,6 +275,9 @@ $lines.Add('build bin/wow_edit_lookaside_fixture.exe: link obj/lookaside_fixture
 $lines.Add('  libs = ntdll.lib')
 $lines.Add('build bin/wow_edit_conversion_fixture.exe: link obj/conversion_fixture.obj obj/conversion_adapter.obj obj/original_globals.obj')
 $lines.Add('build original-control-globals: phony bin/wow_edit_lookaside_fixture.exe bin/wow_edit_conversion_fixture.exe')
+$lines.Add('build bin/wow_def_window_bits_fixture.exe: link obj/def_bits_fixture.obj obj/def_bits_owner.obj obj/def_bits_boundary.obj obj/def_bits_tables.obj obj/def_bits_state.obj')
+$lines.Add('  libs = /OPT:REF')
+$lines.Add('build original-default-bits-boundary: phony bin/wow_def_window_bits_fixture.exe')
 $lines.Add('default call-boundaries')
 $lines.Add('build bin/wow_dialog_native_owner_probe.exe: link obj/dialog_native_owner_probe.obj obj/dialog_procedure_adapter.obj obj/native_getset_reader.obj obj/native_getset_client.obj obj/native_getset_server.obj')
 $lines.Add('build dialog-native-owner-research: phony bin/wow_dialog_native_owner_probe.exe')

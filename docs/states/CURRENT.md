@@ -34,8 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2149 reviewed:794 restored/confirmed published,0 local restorations,8 approved,
-1347 qualified pending;571 unreviewed. Files304/365 audited,61 remain.
+2160 reviewed:798 restored/confirmed published,0 local restorations,8 approved,
+1354 qualified pending;560 unreviewed. Files305/365 audited,60 remain.
+P220 file305 verified/published;Git delivery accompanies receipt.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,15 +52,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P218 package `2aa0d5a8-ac6b-41a8-b400-986c6c9219ac` published11x2;hashes verified.
-clglobal.c133->39(-94),ordinary23/excluded16;coupled user.h2686->2666(-20).
-Three points restored;four minimized residual points pending owner.
-Original scalar/table/NULL callback data and lock definition restored;
-1285 original lines,13 conditional boundaries and1024 selected entries checked.
-Cached x86/x64,31 control fixtures,Full19 passed. Cumulative365-file diff
-119913->104671(-15242). No guest/winnt.zip changes;external DOS4GW remains SKIP.
-NextR2150;coupled user.h declarations do not mark that later file audited.
-[P218 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p218-checkpoint.json).
+P220 package `7fe90997-4dae-4832-858f-59c084d38d18` published11x2;hashes verified.
+client.c3664->3572(-92);original retail assertion,comments/order and lines restored.
+Four restored points;seven residual decisions pending owner. Cached x86/x64,
+32 focused fixtures,Full19 and governance passed. Cumulative365-file diff
+119913->104579(-15334). Original guest/winnt.zip unchanged. DOS4GW issue is
+assigned to side session and not claimed repaired.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p220-checkpoint.json).
+NextR2161.
 
 ## Remaining Scope
 
@@ -160,3 +160,7 @@ P216 delivered: whole BUTTON file complete;87->19(-68),12 minimized residual
 decisions remain;not exclusion-only. Cached,publish11x2,29 focused fixtures,
 final button assertions andFull19 passed. Cumulative mirror reduction15123.
 [Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/p216-button-review.json).
+
+P219 DOS4GW supplement is delegated by owner to a separate session. Current PIF and direct minimal-environment runs failed to reach graphics; retained diagnostics are not acceptance. Preserve its uncommitted test changes; this session does not debug that issue.
+
+P220 verified/published:client.c3664->3572(-92);four restored points,seven minimized residual decisions.163 source/76 selected lines,three bare errors;cached x86/x64,publish11x2,32 focused,Full19 and governance passed. Package 7fe90997-4dae-4832-858f-59c084d38d18. Cumulative365-file mirror diff119913->104579(-15334). DOS4GW debugging remains assigned to side session,not claimed repaired. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p220-checkpoint.json). NextR2161.

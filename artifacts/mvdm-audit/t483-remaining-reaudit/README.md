@@ -1306,3 +1306,9 @@ P216: [delivery receipt](batch-p216-checkpoint.json),[cumulative witness](cumula
 P217: [cldib whole-file review](p217-cldib-review.json):7->2(-5),one restored diagnostic point and one minimized header substitution pending owner;cached,publish11x2,bitmap focused/Full19 passed. [Receipt](batch-p217-checkpoint.json). [Cumulative witness](cumulative-diff-p217-delta.json):net15128.
 
 P218: [clglobal whole-file review](p218-clglobal-review.json):133->39(-94),coupled user.h -20;three restored points,four minimized residual decisions;cached,publish11x2,31 focused/Full19 passed. [Receipt](batch-p218-checkpoint.json). [Cumulative witness](cumulative-diff-p218-delta.json):net15242.
+
+P220 in progress: [client restoration and verification state](p220-client-progress.json). Mirror diff3664->3572(-92);final delivery pending;not a completed-file receipt.
+
+P220: [whole-file dispositions and final source controls](p220-client-review.json). Four local restorations,seven minimized residual decisions;final product delivery pending.
+
+P220: [delivery receipt](batch-p220-checkpoint.json), [cumulative diff](cumulative-diff-p220-delta.json). Cached,publish11x2,32 focused,Full19 passed;four restored points,seven residual decisions.

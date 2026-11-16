@@ -9,19 +9,45 @@
 * 04-Dec-1990 SMeans    Created.
 \**************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-038): retain original DispatchClientMessage;
- * other USER client entry points and the private precompiled environment
- * are excluded. The synchronous native view supplies HWND, original WW
- * storage and the registered WOW callback, not an NT4 kernel PWND. */
-#if defined(WOW_ORIGINAL_DEF_WINDOW_BITS)
-/* DIVERGENCE(OPENNT-HOST-094): retain the complete original bitmap merge;
- * only the shared-table environment and compilation subset are adapted. */
-#include "wow_default_message_bindings.h"
-#include <assert.h>
-#define gSharedInfo wow_default_message_state
-#define UserAssert(expression) assert(expression)
+#if defined(WOW_ORIGINAL_CLASS_CLIENT)
+#include "wow_class_client_bindings.h"
+#include "../inc/ntcftxt.h"
+#line 2173
 
-#line 2203
+
+/***************************************************************************\
+* RegisterClassWOW(API)
+*
+* History:
+* 28-Jul-1992 ChandanC Created.
+\***************************************************************************/
+ATOM
+WINAPI
+RegisterClassWOWA(
+    WNDCLASSA *lpWndClass,
+    LPDWORD pdwWOWstuff)
+{
+    WNDCLASSEXA wc;
+
+    memcpy(&(wc.style), lpWndClass, sizeof(WNDCLASSA));
+    wc.hIconSm = NULL;
+    wc.cbSize = sizeof(WNDCLASSEXA);
+
+    return RegisterClassExWOWA(&wc, pdwWOWstuff, NULL, 0);
+}
+
+
+#elif defined(WOW_ORIGINAL_DEF_WINDOW_BITS)
+#include "wow_default_message_bindings.h"
+#define gSharedInfo wow_default_message_state
+#define UserAssert(exp)
+#line 2197
+/**************************************************************************\
+* WowGetDefWindowProcBits - Fills in bit array for WOW
+*
+* 22-Jul-1991 mikeke    Created
+\**************************************************************************/
+
 WORD WowGetDefWindowProcBits(
     PBYTE    pDefWindowProcBits,
     WORD     cbDefWindowProcBits)
@@ -74,39 +100,19 @@ WORD WowGetDefWindowProcBits(
     return wMaxMsg;
 }
 
-#elif defined(WOW_ORIGINAL_CONTROL_STATE)
-/* DIVERGENCE(OPENNT-HOST-088): unchanged original state guards; the scoped
- * call seam binds symbolic services to current exports and refreshes WND. */
-#define WOW_ORIGINAL_CONTROL_STATE_CALLS
-#include "wow_edit_call_bindings.h"
-
-#line 2826
-void SetWindowState(
-    PWND pwnd,
-    UINT flags)
-{
-    if (TestWF(pwnd, flags) != LOBYTE(flags))
-        NtUserCallHwndParam(HWq(pwnd), flags, SFI_SETWINDOWSTATE);
-}
-
-#line 2834
-void ClearWindowState(
-    PWND pwnd,
-    UINT flags)
-{
-    if (TestWF(pwnd, flags))
-        NtUserCallHwndParam(HWq(pwnd), flags, SFI_CLEARWINDOWSTATE);
-}
-
 #elif defined(WOW_ORIGINAL_DIALOG_EDIT)
-/* DIVERGENCE(OPENNT-HOST-071): retain original callback-only dialog EDIT
- * allocation/release bodies. The existing WOW registration supplies inputs;
- * this separately selected subset does not import USER server transport. */
 #include "wow_edit_memory_bindings.h"
+#line 2316
 
-/* DIVERGENCE(OPENNT-HOST-081): complete original registration-based
- * dialog initializer; no direct private WOW entry replaces this callback. */
-#line 2326
+/***************************************************************************\
+* WOWDlgInit
+*
+* This is a callback to WOW used at the begining of dialog creation to allow
+* it to associate the lParam of the WM_INITDIALOG messasge with the window
+* prior to actually recieving the message.
+*
+* 06-19-92 sanfords Created
+\***************************************************************************/
 DWORD WOWDlgInit(
 HWND hwndDlg,
 LONG lParam)
@@ -116,6 +122,8 @@ LONG lParam)
     return (*pfnInitDlgCallback)(hwndDlg, lParam);
 }
 
+
+
 /***************************************************************************\
 * GetEditDS
 *
@@ -124,7 +132,6 @@ LONG lParam)
 *
 * 06-19-92 sanfords Created
 \***************************************************************************/
-#line 2345
 HANDLE GetEditDS()
 {
     UserAssert(pfn16GlobalAlloc != NULL);
@@ -142,7 +149,6 @@ HANDLE GetEditDS()
 *
 * 06-19-92 sanfords Created
 \***************************************************************************/
-#line 2362
 VOID ReleaseEditDS(
 HANDLE h)
 {
@@ -151,30 +157,12 @@ HANDLE h)
     (*pfn16GlobalFree)(LOWORD(h));
 }
 
-#elif defined(WOW_ORIGINAL_CLASS_CLIENT)
-/* DIVERGENCE(OPENNT-HOST-046): separately compiled original ANSI class
- * client closure; bindings supply version/context and native publication. */
-#include "wow_class_client_bindings.h"
-#include "../inc/ntcftxt.h"
-#line 2181
-ATOM
-WINAPI
-RegisterClassWOWA(
-    WNDCLASSA *lpWndClass,
-    LPDWORD pdwWOWstuff)
-{
-    WNDCLASSEXA wc;
-
-    memcpy(&(wc.style), lpWndClass, sizeof(WNDCLASSA));
-    wc.hIconSm = NULL;
-    wc.cbSize = sizeof(WNDCLASSEXA);
-
-    return RegisterClassExWOWA(&wc, pdwWOWstuff, NULL, 0);
-}
-#else
+#elif !defined(WOW_ORIGINAL_CONTROL_STATE)
 #define WOW_ORIGINAL_CLIENT_DISPATCH
 #include "wow_window_dispatch_bindings.h"
 #define WNDPROC_WOW WOW_WINDOW_PROC_TAG
+#line 2370
+
 
 /***************************************************************************\
 * DispatchMessage
@@ -187,7 +175,6 @@ RegisterClassWOWA(
 * 19-Aug-1992 mikeke   created
 \***************************************************************************/
 
-#line 2383
 LONG DispatchClientMessage(
     PWND pwnd,
     UINT message,
@@ -213,32 +200,44 @@ LONG DispatchClientMessage(
     }
 }
 
-/* DIVERGENCE(OPENNT-HOST-038): remaining client entry points are excluded. */
 #endif
+#if defined(WOW_ORIGINAL_CONTROL_STATE)
+#define WOW_ORIGINAL_CONTROL_STATE_CALLS
+#include "wow_edit_call_bindings.h"
+#line 2826
+void SetWindowState(
+    PWND pwnd,
+    UINT flags)
+{
+    if (TestWF(pwnd, flags) != LOBYTE(flags))
+        NtUserCallHwndParam(HWq(pwnd), flags, SFI_SETWINDOWSTATE);
+}
 
+void ClearWindowState(
+    PWND pwnd,
+    UINT flags)
+{
+    if (TestWF(pwnd, flags))
+        NtUserCallHwndParam(HWq(pwnd), flags, SFI_CLEARWINDOWSTATE);
+}
 
+#endif
 
 #line 3494
 #ifdef FE_IME
-#line 3495
-#error Unsupported FE_IME original branch
+#error
 #line 3502
 #endif
 #line 3503
-
 #line 642
 #ifdef DEBUG
-#line 643
-#error Unsupported DEBUG original branch
+#error
 #endif
 #line 645
-
 #line 2288
 #ifdef DEBUG
-#line 2289
-#error Unsupported DEBUG original branch
+#error
 #else
-#line 2291
 #line 2292
 #endif
 #line 2293

@@ -1,0 +1,51 @@
+{
+  "status": "Final verification/publication complete;Git delivery accompanies receipt",
+  "file": "src/non-mvdm/windows/core/ntuser/client/client.c",
+  "points": [
+    "R2150",
+    "R2151",
+    "R2152",
+    "R2153",
+    "R2154",
+    "R2155",
+    "R2156",
+    "R2157",
+    "R2158",
+    "R2159",
+    "R2160"
+  ],
+  "mirror_core_before": 3664,
+  "mirror_core_after": 3572,
+  "mirror_core_delta": -92,
+  "retained_source_lines_matched": 163,
+  "excluded_errors": 3,
+  "original_assertion": "winerrp.h:137 retail UserAssert is empty; restore it instead of CRT assert",
+  "unchanged_contract": "Original selected eight function bodies and existing five supported build profiles; no new provider or guest changes",
+  "restored": "Original order and comments, logical lines, bare excluded errors, retail assertion behavior",
+  "residual_decision_scope": "Native USER32 ownership, private NT4 dependency boundaries and finite selected bindings remain subject to owner decision, not approved by this implementation",
+  "baseline_focused": {
+    "cases": 32,
+    "exit": 0,
+    "root": "build/t483-s5-p220/focused-before2",
+    "limit": "Before product restoration; cannot establish final-code pass"
+  },
+  "final_source_sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+  "side_session": "DOS4GW investigation untouched",
+  "publication": {
+    "status": "published",
+    "package": "7fe90997-4dae-4832-858f-59c084d38d18",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "final_selected_lines": 76,
+  "final_focused": {
+    "cases": 32,
+    "exit": 0
+  },
+  "governance_exit": 0,
+  "receipt": "batch-p220-checkpoint.json"
+}

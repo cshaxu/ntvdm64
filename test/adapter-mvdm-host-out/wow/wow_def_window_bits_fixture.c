@@ -1,6 +1,15 @@
 #include "wow_private_user_compat.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
+/* Unrelated entry in the shared boundary object must never be reached. */
+HMENU WINAPI CreateMenuFromResource(LPBYTE bits, BOOL client)
+{
+    (void)bits; (void)client;
+    abort();
+}
+
 
 /* Host-boundary test only. It does not claim a guest window was created. */
 int main(void)

@@ -1,0 +1,13 @@
+{
+  "baseline_total": 119913,
+  "previous_total": 104671,
+  "current_total": 104579,
+  "net_reduction": 15334,
+  "files": 365,
+  "prior": "cumulative-diff-p218-delta.json",
+  "batch_file": "src/non-mvdm/windows/core/ntuser/client/client.c",
+  "before": 3664,
+  "after": 3572,
+  "batch_reduction": 92,
+  "metric": "Original-relative added+deleted lines;CRLF normalized;diagnostic #line omitted;#error retained"
+}
