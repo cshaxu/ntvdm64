@@ -15,16 +15,18 @@
 * History:
 * 10-18-90 DarrinM Created.
 \***************************************************************************/
-/* DIVERGENCE(OPENNT-HOST-092): original control wheel state and complete A/W message table.
- * Bind scalar declarations without importing USER global state/precomp. */
-#include <windows.h>
 
-#line 24
+#include <windows.h>
+#include "wowuserp.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#line 20
+#pragma hdrstop
+
+
+// Debug globals
 #if DBG
-#line 25
-#error Excluded unsupported USER debug-global profile
+#error
 #endif
-#line 27
 
 /*
  * Amount wheel has been scrolled in a control less than WHEEL_DELTA. Each
@@ -34,16 +36,101 @@
  */
 int gcWheelDelta;
 
-/* OPENNT-HOST-092: original directory-list operands. Keep one process
- * definition in the original global owner, not per-adapter copies. */
-#line 36
 WCHAR awchSlashStar[] = L"\\*";
 CHAR achSlashStar[] = "\\*";
-#line 52
+
+#line 40
+SHAREDINFO gSharedInfo;
+HMODULE hmodUser;               // USER.DLL's hmodule
+
+BOOL gfServerProcess;           // USER is linked on the CSR server side
+BOOL gfSystemInitialized;       // System has been initialized
+
+ACCESS_MASK gamWinSta;          // ACCESS_MASK for the current WindowStation
+
+PVOID pUserHeap;
+
+WCHAR szUSER32[] = TEXT("USER32");
+WCHAR szNull[2] = { TEXT('\0'), TEXT('\015') };
 WCHAR szOneChar[] = TEXT("0");
 WCHAR szSLASHSTARDOTSTAR[] = TEXT("\\*");  /* This is a single "\"  */
+WCHAR szAttr[]   = TEXT("ASHR");   /* Archive, System, Hidden, Read only */
+WCHAR szAM[10];
+WCHAR szPM[10];
+LPWSTR pTimeTagArray[] = { szAM, szPM };
 
-#line 148
+RECT rcScreen;
+
+/* Maps MessageBox type to number of buttons in the MessageBox */
+BYTE mpTypeCcmd[] = { 1, 2, 3, 3, 2, 2 };
+
+/* Maps MessageBox type to index into SEBbuttons array */
+BYTE mpTypeIich[] = { 0, 2, 5, 12, 9, 16 };
+
+/*
+ * NOTE: There is one-to-one mapping between the elements of arrays
+ *       SEBbuttons[] and rgReturn[]. So, any change in one array must
+ *       be done in the other also;
+ */
+unsigned int SEBbuttons[] = {
+    SEB_OK, SEB_HELP,
+    SEB_OK, SEB_CANCEL, SEB_HELP,
+    SEB_ABORT, SEB_RETRY, SEB_IGNORE, SEB_HELP,
+    SEB_YES, SEB_NO, SEB_HELP,
+    SEB_YES, SEB_NO, SEB_CANCEL, SEB_HELP,
+    SEB_RETRY, SEB_CANCEL, SEB_HELP
+};
+
+BYTE rgReturn[] = {
+    IDOK, IDHELP,
+    IDOK, IDCANCEL, IDHELP,
+    IDABORT, IDRETRY, IDIGNORE, IDHELP,
+    IDYES, IDNO, IDHELP,
+    IDYES, IDNO, IDCANCEL, IDHELP,
+    IDRETRY, IDCANCEL, IDHELP,
+};
+
+WCHAR szERROR[10];
+
+ATOM atomBwlProp;
+ATOM atomMsgBoxCallback;
+
+CRITICAL_SECTION gcsLookaside;
+CRITICAL_SECTION gcsHdc;
+CRITICAL_SECTION gcsClipboard;
+
+HDC    ghdcBits2 = NULL;
+HDC    ghdcGray = NULL;
+HFONT  ghFontSys = NULL;
+HBRUSH ghbrWindowText = NULL;
+int    gcxGray;
+int    gcyGray;
+PCHAR  gpOemToAnsi;
+PCHAR  gpAnsiToOem;
+
+
+/*
+ * These are the resource call procedure addresses. If WOW is running,
+ * it makes a call to set all these up to point to it. If it isn't
+ * running, it defaults to the values you see below.
+ *
+ * On the server there is an equivalent structure. The one on the server
+ * is used for DOSWIN32.
+ */
+#line 135
+PFNINITDLGCB pfnInitDlgCallback     = NULL;
+PFN16GALLOC pfn16GlobalAlloc        = NULL;
+PFN16GFREE pfn16GlobalFree          = NULL;
+PFNEMPTYCB pfnWowEmptyClipBoard     = NULL;
+PFNWOWWNDPROCEX  pfnWowWndProcEx    = NULL;
+PFNWOWSETFAKEDIALOGCLASS  pfnWowSetFakeDialogClass    = NULL;
+PFNWOWEDITNEXTWORD   pfnWowEditNextWord = NULL;
+PFNWOWCBSTOREHANDLE pfnWowCBStoreHandle = NULL;
+
+/*
+ * If TRUE, the message contains data that must be thunked
+ * ANSI->Unicode or Unicode->ANSI
+ */
 CONST BOOLEAN gabThunkMessage[] = {
     FALSE,    // WM_NULL             0x0000
     TRUE,     // WM_CREATE           0x0001
@@ -345,15 +432,11 @@ CONST BOOLEAN gabThunkMessage[] = {
     FALSE,    // empty               0x010C
     FALSE,    // empty               0x010D
     FALSE,    // empty               0x010E
-#line 449
 #ifdef FE_IME // WM_IME_COMPOSITION
-#line 450
-#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
+#error
 #else
-#line 452
     FALSE,    // empty               0x010F
 #endif // FE_IME
-#line 454
 
     FALSE,    // WM_INITDIALOG       0x0110
     FALSE,    // WM_COMMAND          0x0111
@@ -374,16 +457,13 @@ CONST BOOLEAN gabThunkMessage[] = {
 
     TRUE,     // WM_MENUCHAR         0x0120
     FALSE,    // WM_ENTERIDLE        0x0121
-#line 474
 #ifdef MEMPHIS_MENUS
-#line 475
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#error
+#line 477
 #else
-#line 478
     FALSE,    // 0x0122-0x0127
     FALSE,
 #endif // MEMPHIS_MENUS
-#line 481
     FALSE,
     FALSE,
     FALSE,
@@ -780,15 +860,11 @@ CONST BOOLEAN gabThunkMessage[] = {
     FALSE,
     FALSE,
     FALSE,
-#line 877
 #ifdef FE_IME // WM_IME_CHAR
-#line 878
-#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
+#error
 #else
-#line 880
     FALSE,
 #endif // FE_IME
-#line 882
     FALSE,
 
     FALSE,    // 0x0288
@@ -1216,9 +1292,7 @@ CONST BOOLEAN gabThunkMessage[] = {
 };
 
 
-#line 1309
 #ifdef WX86
-#line 1310
-#error Excluded unsupported USER WX86-global profile
+#error
+#line 1316
 #endif
-#line 1317

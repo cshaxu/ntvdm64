@@ -1,0 +1,901 @@
+{
+  "task": "M0 T483 S5 P218",
+  "scope": {
+    "task": "M0 T483 S5 P218",
+    "owner": "single-agent initial/counter-review",
+    "file": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+    "points": [
+      "R2143",
+      "R2144",
+      "R2145",
+      "R2146",
+      "R2147",
+      "R2148",
+      "R2149"
+    ],
+    "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+    "before_sha256": "422bda00d59863f9a899b6a13a2da3fa8ae1255d0cc1cacda0432ff2c1e20f2c",
+    "budget": "4GiB;controls600s,cached1800s,Full2700s",
+    "purpose": "Restore composable original globals;prove exact private boundary and one lookaside lock owner;preserve five excluded profiles and original logical lines"
+  },
+  "status": "Verified/published;Git delivery accompanies receipt",
+  "points": [
+    {
+      "ids": [
+        "R2143",
+        "R2144"
+      ],
+      "before": "+3/-5=8",
+      "after": "+3/-1=4",
+      "decision": "Minimized header boundary;pending owner",
+      "problem": "Original USER PCH includes private CSR/kernel initialization,not only SDK/global declarations",
+      "evidence": "Original include fails in actual product search;original-owner PCH fails CSR declarations/missing ntos.h. Three explicit existing headers supply SDK,original WOW callback types and original USER scalar types. No new shim.",
+      "change": "Restore pragma and Debug globals comment;use three explicit dependency headers;remove local explanation."
+    },
+    {
+      "ids": [
+        "R2145"
+      ],
+      "before": "+2/-0=2",
+      "after": "0",
+      "decision": "Restore original",
+      "problem": "Added directory-global explanation,not behavior",
+      "evidence": "Original operands and complete source extent retained at36-37.",
+      "change": "Remove duplicate comment;retain exact original declarations."
+    },
+    {
+      "ids": [
+        "R2146"
+      ],
+      "before": "+0/-14=14",
+      "after": "+0/-1=1",
+      "decision": "Minimized gpsi omission;pending owner",
+      "problem": "Original USER gpsi is a native SERVERINFO pointer;WOW32 has a distinct same-named DWORD guest shared-info address",
+      "evidence": "Original clglobal39 vs mvdm-host/wow32/wow32.c136,553;UserRegisterWowHandlers returns mvdm_softpc_wow_page_domain_guest_shared_info. Original separate DLL globals would collapse into the same WOW32 symbol. Actual SDK restoration also lacks PSERVERINFO. Native USER mapped server state is not this guest address.",
+      "change": "Restore all other original globals including gSharedInfo with original declaration;keep only gpsi omission. No renaming or extra state synchronization."
+    },
+    {
+      "ids": [
+        "R2147"
+      ],
+      "before": "+0/-4=4",
+      "after": "0",
+      "decision": "Restore original",
+      "problem": "Unproved blanket deletion of string/time operands",
+      "evidence": "Original SDK-typed definitions compile unchanged;no competing symbol definitions.",
+      "change": "Restore all four declarations byte-for-byte."
+    },
+    {
+      "ids": [
+        "R2148"
+      ],
+      "before": "+0/-89=89",
+      "after": "+0/-18=18",
+      "decision": "Minimized original resource/dispatch boundary;pending owner",
+      "problem": "Blanket deletion combined ordinary data and out-of-slice initialized callback providers",
+      "evidence": "Actual original/sdK compilation rejects RESCALLS,_LockResource,_UnlockResource,_FreeResource,DispatchLocal* and RtlGetExpWinVer. Original providers traced to usercli1086-1099,clres1327-1356,clinit1010-1070 and rtl/random28. Existing executable imports callbacks via UserRegisterWowHandlers into one registered input table;original globals.h consumers bind that table. This is not proof the original helpers are defective or intrinsically unrecoverable.",
+      "change": "Restore scalar/array/NULL callback definitions;restore SEB table using original constants;move gcsLookaside definition back from adapter. Leave only117-134 initializer block absent;future restoration requires separately selecting its unconsumed original providers,not adding substitutes or another registration path."
+    },
+    {
+      "ids": [
+        "R2149"
+      ],
+      "before": "diagnostic boundaries477/1316 mismatched",
+      "after": "all13 conditional boundaries equal original",
+      "decision": "Restore original",
+      "problem": "Shortened excluded bodies shifted else/endif diagnostics",
+      "evidence": "Line proof compares1285 retained source lines with original logical positions;all1024 selected message flags equal;four excluded profile controls fail via C1189.",
+      "change": "Five bare errors retained;five line directives keep all original selected/source boundaries. Restore original CRLF from prior LF."
+    }
+  ],
+  "metrics": {
+    "before": {
+      "added": 10,
+      "deleted": 123,
+      "total": 133
+    },
+    "after": {
+      "added": 8,
+      "deleted": 31,
+      "total": 39
+    }
+  },
+  "raw_metrics": {
+    "before": {
+      "added": 32,
+      "deleted": 124,
+      "total": 156
+    },
+    "after": {
+      "added": 13,
+      "deleted": 31,
+      "total": 44
+    }
+  },
+  "mirror_reduction": 94,
+  "coupled_header_reduction": 20,
+  "batch_mirror_reduction": 114,
+  "ordinary_diff_lines": 23,
+  "excluded_diff_lines": 16,
+  "verification": {
+    "source_inputs": {
+      "files": [
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+          "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2"
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+          "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83"
+        },
+        {
+          "path": "src/wow32-dll/source/wow_edit_lookaside_bindings.c",
+          "sha256": "16f5976d897712c0f98320d2fb9094bcf8bd2e90f87a935ebe78aeb17df666b5"
+        },
+        {
+          "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+          "sha256": "c1aa99aad7030a9f9b3a12b6e209c6cb55fd79d8dd94a01a2948b608a1f39aa0"
+        },
+        {
+          "path": "test/observation/verify-wow-control-boundaries.ps1",
+          "sha256": "050bc266d80acca7687cffc42cc8f74096b1adce0fe255dfd753497a0ef1603c"
+        }
+      ],
+      "source_files": 5,
+      "deleted": []
+    },
+    "final_controls": {
+      "source": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+      "metrics": {
+        "before": {
+          "added": 10,
+          "deleted": 123,
+          "total": 133
+        },
+        "after": {
+          "added": 8,
+          "deleted": 31,
+          "total": 39
+        }
+      },
+      "raw_metrics": {
+        "before": {
+          "added": 32,
+          "deleted": 124,
+          "total": 156
+        },
+        "after": {
+          "added": 13,
+          "deleted": 31,
+          "total": 44
+        }
+      },
+      "retained_source_lines": 1285,
+      "conditions": [
+        [
+          24,
+          "#if DBG"
+        ],
+        [
+          26,
+          "#endif"
+        ],
+        [
+          449,
+          "#ifdef FE_IME // WM_IME_COMPOSITION"
+        ],
+        [
+          451,
+          "#else"
+        ],
+        [
+          453,
+          "#endif // FE_IME"
+        ],
+        [
+          474,
+          "#ifdef MEMPHIS_MENUS"
+        ],
+        [
+          477,
+          "#else"
+        ],
+        [
+          480,
+          "#endif // MEMPHIS_MENUS"
+        ],
+        [
+          877,
+          "#ifdef FE_IME // WM_IME_CHAR"
+        ],
+        [
+          879,
+          "#else"
+        ],
+        [
+          881,
+          "#endif // FE_IME"
+        ],
+        [
+          1309,
+          "#ifdef WX86"
+        ],
+        [
+          1316,
+          "#endif"
+        ]
+      ],
+      "excluded": 5,
+      "line_contract": "Each retained original line including every conditional boundary has its original logical number. New includes reset to original20;excluded branches reset only after shortened bodies.",
+      "coupled_header": {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "scope": "Original SHAREDINFO1058-1073 in existing object type guard;FNID_END694 moved into that same guard without changing value;original SEB constants2439-2448 restored. Other user.h audit points remain ordered/unreviewed.",
+        "metrics": {
+          "before": {
+            "added": 362,
+            "deleted": 2324,
+            "total": 2686
+          },
+          "after": {
+            "added": 365,
+            "deleted": 2301,
+            "total": 2666
+          }
+        }
+      },
+      "selected_table": "All1024 preprocessed A/W entries identical before/final in actual product context",
+      "negative_controls": {
+        "debug": "2",
+        "ime": "2",
+        "memphis": "2",
+        "wx86": "2"
+      },
+      "body_negative_controls": [
+        {
+          "case": "dbg-local",
+          "macro": "DBG",
+          "logical_line": 25,
+          "exit": 2
+        },
+        {
+          "case": "ime-local",
+          "macro": "FE_IME",
+          "logical_line": 450,
+          "exit": 2
+        },
+        {
+          "case": "ime-late-local",
+          "macro": "FE_IME",
+          "logical_line": 878,
+          "exit": 2
+        },
+        {
+          "case": "memphis-local",
+          "macro": "MEMPHIS_MENUS",
+          "logical_line": 475,
+          "exit": 2
+        },
+        {
+          "case": "wx86-local",
+          "macro": "WX86",
+          "logical_line": 1310,
+          "exit": 2
+        }
+      ],
+      "negative_control_scope": "Actual profiles reject in ntpsapi/user.h before reaching three local branches;separate diagnostic copies enable the macro after dependencies. For late FE_IME878 only the earlier450 error is replaced with its original TRUE initializer to reach878. These are negative rejection witnesses,not supported configurations or runtime acceptance."
+    },
+    "original_compile": {
+      "original": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(39): error C2061: syntax error: identifier 'gpsi'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(39): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(40): error C2061: syntax error: identifier 'gSharedInfo'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(40): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(73): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(74): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(75): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(76): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(77): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(78): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(72): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(117): error C2061: syntax error: identifier 'rescalls'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(117): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(117): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(121): error C2065: '_LockResource': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(122): error C2065: '_UnlockResource': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(123): error C2065: '_FreeResource': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(126): error C2061: syntax error: identifier 'prescalls'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(126): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(126): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(126): error C2065: 'rescalls': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(128): error C2065: 'DispatchLocalAlloc': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(128): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(129): error C2065: 'DispatchLocalReAlloc': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(129): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(130): error C2065: 'DispatchLocalLock': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(130): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(131): error C2065: 'DispatchLocalUnlock': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(131): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(132): error C2065: 'DispatchLocalSize': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(132): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(133): error C2065: 'DispatchLocalFree': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(133): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(134): error C2065: 'RtlGetExpWinVer': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original\\clglobal.c(134): error C2099: initializer is not a constant"
+      ],
+      "original-owner": [
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(108): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(127): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2061: syntax error: identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(30): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(31): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(36): error C2061: syntax error: identifier 'PCSR_CALLBACK_ROUTINE'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(37): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(45): error C2146: syntax error: missing ')' before identifier 'CallbackInformation'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(45): error C2081: 'PCSR_CALLBACK_INFO': name in formal parameter list illegal",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(45): error C2061: syntax error: identifier 'CallbackInformation'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(45): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(45): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(49): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(55): error C2146: syntax error: missing ')' before identifier 'm'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(55): error C2061: syntax error: identifier 'm'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(55): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(55): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrdll.h(59): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2061: syntax error: identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(160): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(165): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(165): error C2061: syntax error: identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(165): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(166): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(171): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(171): error C2061: syntax error: identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(171): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(171): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(173): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(232): error C2146: syntax error: missing ')' before identifier 'HardErrorMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(232): error C2081: 'PHARDERROR_MSG': name in formal parameter list illegal",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(232): error C2061: syntax error: identifier 'HardErrorMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(232): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(233): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(247): error C2146: syntax error: missing ')' before identifier 'ReceiveMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(247): error C2061: syntax error: identifier 'ReceiveMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(247): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(247): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(249): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(306): error C2061: syntax error: identifier 'PCSR_API_ROUTINE'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(307): error C2143: syntax error: missing '{' before '*'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(308): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(319): error C2061: syntax error: identifier 'HardErrorRoutine'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(319): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(323): error C2061: syntax error: identifier 'ApiDispatchRoutine'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(323): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(324): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(329): error C2146: syntax error: missing ')' before identifier 'LoadedServerDll'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(329): error C2061: syntax error: identifier 'LoadedServerDll'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(329): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(330): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(459): error C2146: syntax error: missing ')' before identifier 'WaitReplyMessage'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(459): error C2081: 'PCSR_API_MSG': name in formal parameter list illegal",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(459): error C2061: syntax error: identifier 'WaitReplyMessage'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(459): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(459): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(464): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(472): error C2061: syntax error: identifier 'CSR_WAIT_ROUTINE'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(473): error C2061: syntax error: identifier 'WaitReplyMessage'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(473): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(474): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(481): error C2146: syntax error: missing ')' before identifier 'WaitRoutine'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(481): error C2081: 'CSR_WAIT_ROUTINE': name in formal parameter list illegal",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(481): error C2061: syntax error: identifier 'WaitRoutine'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(481): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(481): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(486): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(509): error C2146: syntax error: missing ')' before identifier 'WaitBlock'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(509): error C2061: syntax error: identifier 'WaitBlock'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(509): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(510): error C2059: syntax error: ')'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\original-owner\\precomp.h(6): fatal error C1083: Cannot open include file: 'ntos.h': No such file or directory"
+      ],
+      "sdk-all": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(39): error C2061: syntax error: identifier 'gpsi'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(39): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(40): error C2061: syntax error: identifier 'gSharedInfo'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(40): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(73): error C2065: 'SEB_OK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(73): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(74): error C2065: 'SEB_OK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(74): error C2065: 'SEB_CANCEL': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(74): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(75): error C2065: 'SEB_ABORT': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(75): error C2065: 'SEB_RETRY': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(75): error C2065: 'SEB_IGNORE': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(75): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(76): error C2065: 'SEB_YES': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(76): error C2065: 'SEB_NO': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(76): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(77): error C2065: 'SEB_YES': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(77): error C2065: 'SEB_NO': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(77): error C2065: 'SEB_CANCEL': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(77): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(78): error C2065: 'SEB_RETRY': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(78): error C2065: 'SEB_CANCEL': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(78): error C2065: 'SEB_HELP': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(72): error C2099: initializer is not a constant",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(117): error C2061: syntax error: identifier 'rescalls'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(117): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(117): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(121): error C2065: 'PFNLOCK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(121): error C2061: syntax error: identifier '_LockResource'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(126): error C2061: syntax error: identifier 'prescalls'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(126): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(126): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(126): error C2065: 'rescalls': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(128): error C2061: syntax error: identifier 'pfnLocalAlloc'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(128): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(128): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(128): error C2065: 'PFNLALLOC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(128): error C2146: syntax error: missing ';' before identifier 'DispatchLocalAlloc'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(129): error C2061: syntax error: identifier 'pfnLocalReAlloc'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(129): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(129): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(129): error C2065: 'PFNLREALLOC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(129): error C2146: syntax error: missing ';' before identifier 'DispatchLocalReAlloc'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(130): error C2061: syntax error: identifier 'pfnLocalLock'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(130): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(130): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(130): error C2065: 'PFNLLOCK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(130): error C2146: syntax error: missing ';' before identifier 'DispatchLocalLock'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(131): error C2061: syntax error: identifier 'pfnLocalUnlock'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(131): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(131): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(131): error C2065: 'PFNUNLOCK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(131): error C2146: syntax error: missing ';' before identifier 'DispatchLocalUnlock'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(132): error C2061: syntax error: identifier 'pfnLocalSize'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(132): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(132): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(132): error C2065: 'PFNLSIZE': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(132): error C2146: syntax error: missing ';' before identifier 'DispatchLocalSize'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(133): error C2061: syntax error: identifier 'pfnLocalFree'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(133): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(133): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(133): error C2065: 'PFNLFREE': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(133): error C2146: syntax error: missing ';' before identifier 'DispatchLocalFree'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(134): error C2061: syntax error: identifier 'pfnGetExpWinVer'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(134): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(134): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(134): error C2065: 'RtlGetExpWinVer': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(135): error C2061: syntax error: identifier 'pfnInitDlgCallback'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(135): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(135): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(136): error C2061: syntax error: identifier 'pfn16GlobalAlloc'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(136): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(136): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(137): error C2061: syntax error: identifier 'pfn16GlobalFree'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(137): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(137): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(138): error C2061: syntax error: identifier 'pfnWowEmptyClipBoard'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(138): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(138): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(139): error C2061: syntax error: identifier 'pfnWowWndProcEx'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(139): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(139): error C2513: ' ': no variable declared before '='",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(140): error C2061: syntax error: identifier 'pfnWowSetFakeDialogClass'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218\\sdk-all\\clglobal.c(140): fatal error C1003: error count exceeds 100; stopping compilation"
+      ]
+    },
+    "product_context": {
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE",
+      "source": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\windows\\core\\ntuser\\client\\clglobal.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c"
+    },
+    "background_ownership": {
+      "controls": {
+        "pid": 12200,
+        "started": "2026-11-16T05:44:28.4592791Z",
+        "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218/controls.cmd",
+        "deadlineSeconds": 600
+      },
+      "closure": {
+        "started": "2026-11-16T05:46:25.1883642Z",
+        "pid": 14844,
+        "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218/closure.cmd",
+        "deadlineSeconds": 600
+      },
+      "closure2": {
+        "pid": 17432,
+        "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218/closure2.cmd",
+        "started": "2026-11-16T05:47:51.4697048Z",
+        "deadlineSeconds": 600
+      },
+      "current-controls": {
+        "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218/current-controls.cmd",
+        "started": "2026-11-16T05:52:50.0074462Z",
+        "deadlineSeconds": 600,
+        "pid": 15752
+      }
+    },
+    "cached": "x86/x64 cached full passed",
+    "publication": {
+      "status": "published",
+      "package": "2aa0d5a8-ac6b-41a8-b400-986c6c9219ac",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    },
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 391295,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 5718,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1178,
+          "CleanupMs": 460,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11791,
+          "CleanupMs": 419,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 13143,
+          "CleanupMs": 489,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10625,
+          "CleanupMs": 511,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 350,
+          "CleanupMs": 507,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66627,
+          "CleanupMs": 428,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 43706,
+          "CleanupMs": 467,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 44003,
+          "CleanupMs": 501,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 13954,
+          "CleanupMs": 492,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11278,
+          "CleanupMs": 450,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 55534,
+          "CleanupMs": 573,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12264,
+          "CleanupMs": 480,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28237,
+          "CleanupMs": 472,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30286,
+          "CleanupMs": 549,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3529,
+          "CleanupMs": 490,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7596,
+          "CleanupMs": 485,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10268,
+          "CleanupMs": 567,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3935,
+          "CleanupMs": 413,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 6421,
+          "CleanupMs": 488,
+          "Passed": true
+        }
+      ]
+    },
+    "isolated_identity": {
+      "testPackage": "b3fccf73-1088-46c7-aca1-e2b8ccfa9c67",
+      "images": [
+        {
+          "restoredSha256": "A97E371B5463E5E92477EBADF429D08268ADC3E34E75E31D26D3382BF21BD22C",
+          "name": "VCDEX.DLL",
+          "identical": true,
+          "publishedSha256": "A97E371B5463E5E92477EBADF429D08268ADC3E34E75E31D26D3382BF21BD22C"
+        },
+        {
+          "restoredSha256": "D800511E577648CFD0575CF29327609ACE31E194FF82093234984B583260A25F",
+          "name": "run16.exe",
+          "identical": true,
+          "publishedSha256": "D800511E577648CFD0575CF29327609ACE31E194FF82093234984B583260A25F"
+        },
+        {
+          "restoredSha256": "C7C30134AE05EDCFC6FCBFA86720D833B49094C42BDC999B48B483A898DC44FA",
+          "name": "ntsrv.exe",
+          "identical": true,
+          "publishedSha256": "C7C30134AE05EDCFC6FCBFA86720D833B49094C42BDC999B48B483A898DC44FA"
+        },
+        {
+          "restoredSha256": "29201CD17586369D25C768B7B13F98C439F343592C50B9F239E3405248345EAC",
+          "name": "ntcon.exe",
+          "identical": true,
+          "publishedSha256": "29201CD17586369D25C768B7B13F98C439F343592C50B9F239E3405248345EAC"
+        },
+        {
+          "restoredSha256": "E86451536BB484E5CA97E6C30842E481A8BDB04A386B87BEC70FDE5385B5C305",
+          "name": "ntvdm.exe",
+          "identical": true,
+          "publishedSha256": "E86451536BB484E5CA97E6C30842E481A8BDB04A386B87BEC70FDE5385B5C305"
+        },
+        {
+          "restoredSha256": "285E580735035CD334BF38FEEBE18487C919FA83D5DBD195F8A82DD6F7C9761E",
+          "name": "ntvwm.exe",
+          "identical": true,
+          "publishedSha256": "285E580735035CD334BF38FEEBE18487C919FA83D5DBD195F8A82DD6F7C9761E"
+        },
+        {
+          "restoredSha256": "6BE59DB2CF31192EFE6380C991899D223B185FDB2ABCA568AC2DD331EBCC63DB",
+          "name": "ntmon.exe",
+          "identical": true,
+          "publishedSha256": "6BE59DB2CF31192EFE6380C991899D223B185FDB2ABCA568AC2DD331EBCC63DB"
+        },
+        {
+          "restoredSha256": "6A3C2B4543FF0199C197D54AADB5A7DFCCE8ED00DD0BB17514EF20685D2E50BB",
+          "name": "WOW32.DLL",
+          "identical": true,
+          "publishedSha256": "6A3C2B4543FF0199C197D54AADB5A7DFCCE8ED00DD0BB17514EF20685D2E50BB"
+        },
+        {
+          "restoredSha256": "013FC339A26C4CCFA1C8A1520D45945C6EF3EDA865468F8DD752915AF6E123F2",
+          "name": "VDMREDIR.DLL",
+          "identical": true,
+          "publishedSha256": "013FC339A26C4CCFA1C8A1520D45945C6EF3EDA865468F8DD752915AF6E123F2"
+        },
+        {
+          "restoredSha256": "053FA5A9ECF8BAE17FA827D4B52DE7C137F8047055F8D8FA2AEB06C323138599",
+          "name": "nthook32.dll",
+          "identical": true,
+          "publishedSha256": "053FA5A9ECF8BAE17FA827D4B52DE7C137F8047055F8D8FA2AEB06C323138599"
+        },
+        {
+          "restoredSha256": "6DF4C72297B20CB190D6F06F7CE46135CC8400225D8B6988DAFC77C005B3E311",
+          "name": "nthook64.dll",
+          "identical": true,
+          "publishedSha256": "6DF4C72297B20CB190D6F06F7CE46135CC8400225D8B6988DAFC77C005B3E311"
+        }
+      ],
+      "publishedPackage": "2aa0d5a8-ac6b-41a8-b400-986c6c9219ac"
+    },
+    "focused": "Configured supplemental call-boundary graph: O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries (not built or run)\nbuild PID=4236 start=2026-11-16T05:55:35.0947532Z timeout_seconds=300\nbuild exit=0 elapsed_seconds=252.5159038\n0\nwow_dialog_getset_fixture PID=32880 start=2026-11-16T05:59:47.6346056Z timeout_seconds=30\nwow_dialog_getset_fixture exit=0 elapsed_seconds=0.4027803\n0\nwow_window_client_message_fixture PID=8100 start=2026-11-16T05:59:48.0438626Z timeout_seconds=30\nwow_window_client_message_fixture exit=0 elapsed_seconds=0.2033372\n0\nwow_dialog_creator_lifetime_fixture PID=10928 start=2026-11-16T05:59:48.2504059Z timeout_seconds=30\nwow_dialog_creator_lifetime_fixture exit=0 elapsed_seconds=0.2610248\n0\nwow_dialog_lifetime_fixture PID=27476 start=2026-11-16T05:59:48.5142533Z timeout_seconds=30\nwow_dialog_lifetime_fixture exit=0 elapsed_seconds=0.2315834\n0\nwow_dialog_call_fixture PID=25040 start=2026-11-16T05:59:48.7483570Z timeout_seconds=30\nwow_dialog_call_fixture exit=0 elapsed_seconds=0.2342318\n0\nwow_edit_call_fixture PID=9444 start=2026-11-16T05:59:48.9847539Z timeout_seconds=30\nwow_edit_call_fixture exit=0 elapsed_seconds=0.2229883\n0\nwow_edit_memory_callbacks_fixture PID=20584 start=2026-11-16T05:59:49.2106644Z timeout_seconds=30\nwow_edit_memory_callbacks_fixture exit=0 elapsed_seconds=0.2105604\n0\nwow_control_brush_fixture PID=12844 start=2026-11-16T05:59:49.4234013Z timeout_seconds=30\nwow_control_brush_fixture exit=0 elapsed_seconds=0.2360884\n0\nwow_default_window_binding_fixture PID=34984 start=2026-11-16T05:59:49.6622023Z timeout_seconds=30\nwow_default_window_binding_fixture exit=0 elapsed_seconds=0.2388533\n0\nwow_dialog_context_fixture PID=29928 start=2026-11-16T05:59:49.9030754Z timeout_seconds=30\nwow_dialog_context_fixture exit=0 elapsed_seconds=0.2272904\n0\nwow_dialog_creation_entry_fixture PID=29032 start=2026-11-16T05:59:50.1329263Z timeout_seconds=30\nwow_dialog_creation_entry_fixture exit=0 elapsed_seconds=0.2189416\n0\nwow_dialog_finalization_fixture PID=33852 start=2026-11-16T05:59:50.3541027Z timeout_seconds=30\nwow_dialog_finalization_fixture exit=0 elapsed_seconds=0.2224144\n0\nwow_dialog_end_original_fixture PID=25732 start=2026-11-16T05:59:50.5782631Z timeout_seconds=30\nwow_dialog_end_original_fixture exit=0 elapsed_seconds=0.2624043\n0\nwow_dialog_keyboard_entry_fixture PID=15756 start=2026-11-16T05:59:50.8434252Z timeout_seconds=30\nwow_dialog_keyboard_entry_fixture exit=0 elapsed_seconds=0.2702573\n0\nwow_dialog_mnemonic_lifetime_fixture PID=6372 start=2026-11-16T05:59:51.1161220Z timeout_seconds=30\nwow_dialog_mnemonic_lifetime_fixture exit=0 elapsed_seconds=0.3887476\n0\nwow_dialog_keyboard_lifetime_fixture PID=8620 start=2026-11-16T05:59:51.5072357Z timeout_seconds=30\nwow_dialog_keyboard_lifetime_fixture exit=0 elapsed_seconds=0.3719736\n0\nwow_control_string_fixture PID=11436 start=2026-11-16T05:59:51.8813179Z timeout_seconds=30\nwow_control_string_fixture exit=0 elapsed_seconds=0.3390301\n0\nwow_text_measure_failure_fixture PID=21640 start=2026-11-16T05:59:52.2231207Z timeout_seconds=30\nwow_text_measure_failure_fixture exit=0 elapsed_seconds=0.354804\n0\nwow_mnemonic_drawing_fixture PID=28312 start=2026-11-16T05:59:52.5800746Z timeout_seconds=30\nwow_mnemonic_drawing_fixture exit=0 elapsed_seconds=0.2388587\n0\nwow_default_original_fixture PID=38016 start=2026-11-16T05:59:52.8216241Z timeout_seconds=30\nwow_default_original_fixture exit=0 elapsed_seconds=0.2266216\n0\nwow_button_drawing_fixture PID=4024 start=2026-11-16T05:59:53.0503639Z timeout_seconds=30\nwow_button_drawing_fixture exit=0 elapsed_seconds=0.2214807\n0\nwow_button_resources_fixture PID=34776 start=2026-11-16T05:59:53.2731347Z timeout_seconds=30\nwow_button_resources_fixture exit=0 elapsed_seconds=0.2976025\n0\nwow_control_draw_state_fixture PID=6500 start=2026-11-16T05:59:53.5727130Z timeout_seconds=30\nwow_control_draw_state_fixture exit=0 elapsed_seconds=0.4542115\n0\nwow_dialog_navigation_fixture PID=13552 start=2026-11-16T05:59:54.0292511Z timeout_seconds=30\nwow_dialog_navigation_fixture exit=0 elapsed_seconds=0.2125659\n0\nwow_edit_view_fixture PID=8664 start=2026-11-16T05:59:54.2442644Z timeout_seconds=30\nwow_edit_view_fixture exit=0 elapsed_seconds=0.1972901\n0\nwow_button_lifetime_fixture PID=12272 start=2026-11-16T05:59:54.4451119Z timeout_seconds=30\nwow_button_lifetime_fixture exit=0 elapsed_seconds=0.7508289\n0\nwow_button_dc_fixture PID=15764 start=2026-11-16T05:59:55.1982074Z timeout_seconds=30\nwow_button_dc_fixture exit=0 elapsed_seconds=0.2976093\n0\nwow_dialog_native_owner_probe PID=27008 start=2026-11-16T05:59:55.4975579Z timeout_seconds=30\nwow_dialog_native_owner_probe exit=0 elapsed_seconds=0.692616\n0\nwow_dialog_initialization_fixture PID=36340 start=2026-11-16T05:59:56.1918838Z timeout_seconds=30\nwow_dialog_initialization_fixture exit=0 elapsed_seconds=0.230507\n0\nwow_edit_lookaside_fixture PID=37916 start=2026-11-16T05:59:56.4240396Z timeout_seconds=30\nwow_edit_lookaside_fixture exit=0 elapsed_seconds=0.2070793\n0\nwow_edit_conversion_fixture PID=30428 start=2026-11-16T05:59:56.6342960Z timeout_seconds=30\nwow_edit_conversion_fixture exit=0 elapsed_seconds=0.2590721\n0\n",
+    "package": "2aa0d5a8-ac6b-41a8-b400-986c6c9219ac",
+    "final_governance": "PASS 143 selected WOW objects; 9 private-header negative controls; no NTVDM private dependency\nDocumentation governance verification passed.\nDocumentation relative-link verification passed.\n",
+    "focused_cases": [
+      {
+        "name": "wow_dialog_getset_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_window_client_message_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_creator_lifetime_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_lifetime_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_call_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_edit_call_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_edit_memory_callbacks_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_control_brush_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_default_window_binding_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_context_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_creation_entry_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_finalization_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_end_original_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_keyboard_entry_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_mnemonic_lifetime_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_keyboard_lifetime_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_control_string_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_text_measure_failure_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_mnemonic_drawing_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_default_original_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_button_drawing_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_button_resources_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_control_draw_state_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_navigation_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_edit_view_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_button_lifetime_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_button_dc_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_native_owner_probe",
+        "exit": 0
+      },
+      {
+        "name": "wow_dialog_initialization_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_edit_lookaside_fixture",
+        "exit": 0
+      },
+      {
+        "name": "wow_edit_conversion_fixture",
+        "exit": 0
+      }
+    ],
+    "body_negative_process": {
+      "deadlineSeconds": 600,
+      "started": "2026-11-16T06:05:09.0631796Z",
+      "command": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p218/body-negatives.cmd",
+      "pid": 7824
+    }
+  },
+  "complete_chain": [
+    "Original EDIT/dialog InitLookaside -> existing wow_edit_lookaside_ready -> same InitOnce critical section -> original rtlinit lookaside allocation/free;definition now original clglobal95 only",
+    "Original controls -> gabThunkMessage complete1024-entry A/W classification;values and original logical positions preserved",
+    "MVDM W32Initialize -> UserRegisterWowHandlers -> registered input callback table -> original globals.h macros through existing memory binding;restored unreferenced NULL variables are not wired as another callback owner"
+  ],
+  "coupled_change": {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "scope": "Original SHAREDINFO1058-1073 in existing object type guard;FNID_END694 moved into that same guard without changing value;original SEB constants2439-2448 restored. Other user.h audit points remain ordered/unreviewed.",
+    "metrics": {
+      "before": {
+        "added": 362,
+        "deleted": 2324,
+        "total": 2686
+      },
+      "after": {
+        "added": 365,
+        "deleted": 2301,
+        "total": 2666
+      }
+    },
+    "original": "O:/repos.external/OpenNT/windows/core/ntuser/inc/user.h",
+    "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1"
+  },
+  "counter_review": [
+    "Original ordinary declarations are not replaced by a new adapter;source data recovery does not claim these previously unused symbols now provide runtime capabilities.",
+    "SHAREDINFO resides within existing one-time type guard;FNID_END retains original value/logical694 before that type without duplicate definition. Full cached contexts verify repeated includes.",
+    "Original gpsi native pointer and WOW guest address must not be aliased merely because both are32bits. No actual crash claimed from this source-level incompatible ownership.",
+    "No new test source or runner;two existing fixtures enter existing31-case control cohort and link the real original global owner.",
+    "user.h coupled declaration restoration does not count that later file as audited. All its other points remain ordered.",
+    "FNID_END has one definition,one restored SHAREDINFO array use and its unchanged array-size check;no intervening include or #undef exists. gcsLookaside has exactly one source definition,at original clglobal95."
+  ],
+  "limits": [
+    "Residual18-line resource/dispatch omission is a concrete current composition boundary,not a claim that original local helpers are impossible to recover. Selecting unused providers/registration ownership remains owner decision.",
+    "Native fixtures supplement Full;no new original guest rebuilt. External DOS4GW/Nesticle case remains SKIP for absent inputs.",
+    "Existing compiler SDK redefinition warnings remain disclosed."
+  ],
+  "cumulative": "cumulative-diff-p218-delta.json"
+}

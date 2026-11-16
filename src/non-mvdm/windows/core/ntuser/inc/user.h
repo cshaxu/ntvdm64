@@ -160,6 +160,25 @@ typedef ICH *LPICH;
 #define WFDESTROYED             0x0380
 #define WFOLDUI                 0x0408
 #define WFWIN40COMPAT           0x0480
+#line 694
+#define FNID_END                    0x000002B4
+#line 1058
+typedef struct tagSHAREDINFO {
+    struct tagSERVERINFO  *psi;
+    struct _HANDLEENTRY   *aheList;   // handle table pointer
+
+    /*
+     * This field is used for DLL preloading to allow custom functinality
+     * for all windows processes.
+     */
+    LPWSTR pszDllList;
+
+    WNDMSG awmControl[FNID_END - FNID_START + 1];
+
+    WNDMSG DefWindowMsgs;
+    WNDMSG DefWindowSpecMsgs;
+} SHAREDINFO, *PSHAREDINFO;
+
 #endif
 
 /* DIVERGENCE(OPENNT-HOST-082): original counted-string declarations shared
@@ -708,8 +727,7 @@ typedef struct tagOEMBITMAPINFO
 #line 675
 #endif
 #line 686
-#line 694
-#define FNID_END                    0x000002B4
+#line 695
 
 /*
  * The size of the server side function table is defined as a power of two
@@ -790,6 +808,17 @@ typedef struct tagOEMBITMAPINFO
 #line 2409
 #error Excluded unsupported original USER condition
 #endif
+#line 2439
+
+#define  SEB_OK         1  /* Button with "OK".     */
+#define  SEB_CANCEL     2  /* Button with "Cancel"  */
+#define  SEB_YES        3  /* Button with "&Yes"     */
+#define  SEB_NO         4  /* Button with "&No"      */
+#define  SEB_RETRY      5  /* Button with "&Retry"   */
+#define  SEB_ABORT      6  /* Button with "&Abort"   */
+#define  SEB_IGNORE     7  /* Button with "&Ignore"  */
+#define  SEB_CLOSE      8  /* Button with "&Close"   */
+#define  SEB_HELP       9  /* Button with "&Help"    */
 #line 2433
 
 #endif /* _USER_ */

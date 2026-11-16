@@ -30,6 +30,12 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 # Original state guards and color client must be separate selections: their
 # preprocessor subsets are mutually exclusive, as in the product generator.
 $units = @(
+    @('original_globals', 'src/non-mvdm/windows/core/ntuser/client/clglobal.c', ''),
+    @('lookaside_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_lookaside_fixture.c', ''),
+    @('lookaside_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/DWOW_ORIGINAL_EDIT_LOOKASIDE'),
+    @('lookaside_adapter', 'src/wow32-dll/source/wow_edit_lookaside_bindings.c', ''),
+    @('conversion_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_conversion_fixture.c', ''),
+    @('conversion_adapter', 'src/wow32-dll/source/wow_edit_conversion_bindings.c', ''),
     @('dialog_native_owner_probe', 'test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c', ''),
     @('dialog_procedure_adapter', 'src/wow32-dll/source/wow_dialog_procedure_bindings.c', ''),
     @('dialog_initialization_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_initialization_fixture.c', ''),
@@ -260,6 +266,10 @@ $lines.Add('build bin/wow_button_focus_service_probe.exe: link obj/button_focus_
 $lines.Add('build button-focus-research: phony bin/wow_button_focus_service_probe.exe')
 $lines.Add('build dialog-context-boundaries: phony bin/wow_dialog_context_fixture.exe bin/wow_dialog_creation_entry_fixture.exe bin/wow_dialog_finalization_fixture.exe')
 $lines.Add('build call-boundaries: phony bin/wow_dialog_call_fixture.exe bin/wow_edit_call_fixture.exe bin/wow_edit_memory_callbacks_fixture.exe bin/wow_control_brush_fixture.exe bin/wow_default_window_binding_fixture.exe')
+$lines.Add('build bin/wow_edit_lookaside_fixture.exe: link obj/lookaside_fixture.obj obj/lookaside_owner.obj obj/lookaside_adapter.obj obj/original_globals.obj')
+$lines.Add('  libs = ntdll.lib')
+$lines.Add('build bin/wow_edit_conversion_fixture.exe: link obj/conversion_fixture.obj obj/conversion_adapter.obj obj/original_globals.obj')
+$lines.Add('build original-control-globals: phony bin/wow_edit_lookaside_fixture.exe bin/wow_edit_conversion_fixture.exe')
 $lines.Add('default call-boundaries')
 $lines.Add('build bin/wow_dialog_native_owner_probe.exe: link obj/dialog_native_owner_probe.obj obj/dialog_procedure_adapter.obj obj/native_getset_reader.obj obj/native_getset_client.obj obj/native_getset_server.obj')
 $lines.Add('build dialog-native-owner-research: phony bin/wow_dialog_native_owner_probe.exe')

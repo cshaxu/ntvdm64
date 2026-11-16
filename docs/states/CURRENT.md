@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2142 reviewed:791 restored/confirmed published,0 local restorations,8 approved,
-1343 qualified pending;578 unreviewed. Files303/365 audited,62 remain.
+2149 reviewed:794 restored/confirmed published,0 local restorations,8 approved,
+1347 qualified pending;571 unreviewed. Files304/365 audited,61 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,15 +51,15 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P217 package `06f08e3b-3d8b-47d6-915a-59ed5b0a128b` published11x2;hashes verified.
-cldib.c7->2(-5),ordinary2/excluded0;one restored point,one minimized residual
-pending owner. Original pragma/body/line extent restored;test-only mirror
-selector removed,no new shim.645 source and424 selected lines match.
-Cached x86/x64,bitmap header/GDI and binding/failure/registration fixtures,
-Full19 passed. Cumulative fixed365 files119913->104785(-15128).
-Metric excludes diagnostic #line;raw cldib8->2(-6). External DOS4GW/Nesticle
-remains SKIP. No guest or winnt.zip changes. NextR2143.
-[P217 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p217-checkpoint.json).
+P218 package `2aa0d5a8-ac6b-41a8-b400-986c6c9219ac` published11x2;hashes verified.
+clglobal.c133->39(-94),ordinary23/excluded16;coupled user.h2686->2666(-20).
+Three points restored;four minimized residual points pending owner.
+Original scalar/table/NULL callback data and lock definition restored;
+1285 original lines,13 conditional boundaries and1024 selected entries checked.
+Cached x86/x64,31 control fixtures,Full19 passed. Cumulative365-file diff
+119913->104671(-15242). No guest/winnt.zip changes;external DOS4GW remains SKIP.
+NextR2150;coupled user.h declarations do not mark that later file audited.
+[P218 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p218-checkpoint.json).
 
 ## Remaining Scope
 

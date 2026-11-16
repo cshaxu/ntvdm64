@@ -1304,3 +1304,5 @@ P216: [whole BUTTON review and controls](p216-button-review.json):87->19(-68),22
 P216: [delivery receipt](batch-p216-checkpoint.json),[cumulative witness](cumulative-diff-p216-delta.json):net15123.12 residual points remain pending owner decisions.
 
 P217: [cldib whole-file review](p217-cldib-review.json):7->2(-5),one restored diagnostic point and one minimized header substitution pending owner;cached,publish11x2,bitmap focused/Full19 passed. [Receipt](batch-p217-checkpoint.json). [Cumulative witness](cumulative-diff-p217-delta.json):net15128.
+
+P218: [clglobal whole-file review](p218-clglobal-review.json):133->39(-94),coupled user.h -20;three restored points,four minimized residual decisions;cached,publish11x2,31 focused/Full19 passed. [Receipt](batch-p218-checkpoint.json). [Cumulative witness](cumulative-diff-p218-delta.json):net15242.

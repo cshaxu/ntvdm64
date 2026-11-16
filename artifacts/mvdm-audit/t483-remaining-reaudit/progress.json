@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "380c4f06e680c7b6900c87365301f8560aabcdeb919cbfe7cd296a5e4c059b3c",
+  "new_register_sha256": "8081caa692c6af0595814f71de472316ddfd385c32b20e673c0a9a2ec2c62ef3",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -15,56 +15,62 @@
     "already-byte-identical-to-original": 1
   },
   "completed": 8,
-  "pending": 578,
-  "next": "T483-R2143",
+  "pending": 571,
+  "next": "T483-R2150",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
     "Existing evidence is a lead, not accepted necessity proof. Closed items and absent files are not reopened.",
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
-  "awaiting_owner_approval": 1343,
-  "reviewed": 2142,
+  "awaiting_owner_approval": 1347,
+  "reviewed": 2149,
   "restored_pending_delivery": 0,
-  "batch_modified_implementation_files": 2,
-  "batch_mirror_diff_delta": -5,
+  "batch_modified_implementation_files": 5,
+  "batch_mirror_diff_delta": -114,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
-  "pending_decisions": 1343,
-  "restored_verified_published": 791,
-  "last_batch_mirror_diff_delta": -5,
-  "last_delivery": "batch-p217-checkpoint.json",
+  "pending_decisions": 1347,
+  "restored_verified_published": 794,
+  "last_batch_mirror_diff_delta": -114,
+  "last_delivery": "batch-p218-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
-  "qualified_pending_decisions": 1343,
-  "pending_decisions_count_note": "791 delivered;0 local;8 approved;1343 pending;578 unreviewed.",
-  "active_rework": "P217 cldib7->2(-5);one minimized residual decision",
-  "active_investigation": "Next R2143",
+  "qualified_pending_decisions": 1347,
+  "pending_decisions_count_note": "794 delivered;0 local;8 approved;1347 pending;571 unreviewed.",
+  "active_rework": "P218 clglobal133->39(-94),coupled user.h2686->2666(-20)",
+  "active_investigation": "Next R2150",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 303,
-  "sequential_files_remaining": 62,
-  "batch_modified_mirror_files": 1,
+  "sequential_files_disposition_complete": 304,
+  "sequential_files_remaining": 61,
+  "batch_modified_mirror_files": 2,
   "batch_format_only_files": [],
   "partial_restoration_pending_delivery": [],
   "new_baseline_gap_evidence": "r0642-r0647-vram-copy-review.json",
-  "coupled_changes_pending_ordered_review": [],
+  "coupled_changes_pending_ordered_review": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "evidence": "p218-clglobal-review.json",
+      "scope": "Original SHAREDINFO/SEB declarations only;whole-file audit not advanced"
+    }
+  ],
   "batch_line_only_mirror_delta": 0,
   "batch_point_metric_reconciliation": 0,
   "restoration_decided_not_applied": 0,
-  "pending_decision_csv_rows": 1324,
+  "pending_decision_csv_rows": 1327,
   "pending_decision_grouping_note": "CSV rows may group multiple R points;row count and reviewed point count are separate.",
   "count_reconciliation": "p127-progress-reconciliation.json",
   "batch_test_files": [],
-  "partial_file_points_source_reviewed_through": "T483-R2142",
+  "partial_file_points_source_reviewed_through": "T483-R2149",
   "partial_file_review_not_delivery": false,
   "cumulative_mirror_diff": {
     "base_evidence": "cumulative-diff-p209.json",
     "baseline_commit": "4cf4e5a35546249a003387a3a7df79037e6985ac",
     "files": 365,
     "metric": "Original-relative added+deleted lines;normalize CRLF/LF;exclude diagnostic #line directives;include mandated #error subset differences;one before/after comparison per file",
-    "unchanged_current_hashes": 356,
+    "unchanged_current_hashes": 354,
     "changed": [
       {
         "path": "src/mvdm-host/wow32/precomp.h",
@@ -137,14 +143,30 @@
         "previous_total": 7,
         "current_total": 2,
         "reduction": 5
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "previous_sha256": "422bda00d59863f9a899b6a13a2da3fa8ae1255d0cc1cacda0432ff2c1e20f2c",
+        "current_sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "previous_total": 133,
+        "current_total": 39,
+        "reduction": 94
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "previous_sha256": "e3c22ccfc76affb9911b67437a2e9dc09692dc5c70143ebd386a0c9de4701fb1",
+        "current_sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "previous_total": 2686,
+        "current_total": 2666,
+        "reduction": 20
       }
     ],
     "baseline_total": 119913,
-    "current_total": 104785,
-    "net_reduction": 15128,
-    "reduced_files": 226,
+    "current_total": 104671,
+    "net_reduction": 15242,
+    "reduced_files": 228,
     "increased_files": 1,
-    "unchanged_files": 138
+    "unchanged_files": 136
   },
-  "last_file_classification": "minimized-header-residual"
+  "last_file_classification": "minimized-explicit-private-boundary"
 }
