@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "f4f1dc5b8d9c08e1f91b1ee5fa728c05cb5dcfef8b27daa059f12861f01d4aa8",
+  "new_register_sha256": "46d06aab82948cc8e5c03858bd88ddafd9d86e1631be6ac375ead6ff212e6031",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -14,38 +14,38 @@
     "deleted-file-outside-current-mirror": 8,
     "already-byte-identical-to-original": 1
   },
-  "completed": 11,
-  "pending": 432,
-  "next": "T483-R2289",
+  "completed": 13,
+  "pending": 410,
+  "next": "T483-R2311",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
     "Existing evidence is a lead, not accepted necessity proof. Closed items and absent files are not reopened.",
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
-  "awaiting_owner_approval": 1397,
-  "reviewed": 2288,
+  "awaiting_owner_approval": 1403,
+  "reviewed": 2310,
   "restored_pending_delivery": 0,
-  "batch_modified_implementation_files": 1,
-  "batch_mirror_diff_delta": -116,
+  "batch_modified_implementation_files": 2,
+  "batch_mirror_diff_delta": -114,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
-  "pending_decisions": 1397,
-  "restored_verified_published": 880,
-  "last_batch_mirror_diff_delta": -116,
-  "last_delivery": "batch-p228-checkpoint.json",
+  "pending_decisions": 1403,
+  "restored_verified_published": 894,
+  "last_batch_mirror_diff_delta": -114,
+  "last_delivery": "batch-p229-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
-  "qualified_pending_decisions": 1397,
-  "pending_decisions_count_note": "880 delivered;0 local;11 approved/policy;1397 pending;432 unreviewed.",
-  "active_rework": "P228 verified/published;R2289 next",
-  "active_investigation": "No P228 investigation outstanding;residual decisions pending owner",
+  "qualified_pending_decisions": 1403,
+  "pending_decisions_count_note": "894 delivered;0 local;13 approved/policy;1403 pending;410 unreviewed.",
+  "active_rework": "P229 verified/published;R2311 next",
+  "active_investigation": "No P229 investigation outstanding;qualified residuals pending owner",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 313,
-  "sequential_files_remaining": 52,
-  "batch_modified_mirror_files": 1,
+  "sequential_files_disposition_complete": 315,
+  "sequential_files_remaining": 50,
+  "batch_modified_mirror_files": 2,
   "batch_format_only_files": [
     "src/non-mvdm/windows/core/ntuser/client/combo.c"
   ],
@@ -61,7 +61,7 @@
   "batch_line_only_mirror_delta": 0,
   "batch_point_metric_reconciliation": 0,
   "restoration_decided_not_applied": 0,
-  "pending_decision_csv_rows": 1377,
+  "pending_decision_csv_rows": 1383,
   "pending_decision_grouping_note": "CSV rows may group multiple R points;row count and reviewed point count are separate.",
   "count_reconciliation": "p127-progress-reconciliation.json",
   "batch_test_files": [],
@@ -69,15 +69,15 @@
   "partial_file_review_not_delivery": false,
   "cumulative_mirror_diff": {
     "baseline_total": 119913,
-    "previous_total": 103161,
-    "current_total": 103045,
-    "net_reduction": 16868,
+    "previous_total": 103045,
+    "current_total": 102931,
+    "net_reduction": 16982,
     "files": 365,
-    "batch_reduction": 116,
+    "batch_reduction": 114,
     "metric": "Original-relative adds+deletes;CRLF normalized;#line omitted;#error retained",
-    "evidence": "batch-p228-checkpoint.json"
+    "evidence": "batch-p229-checkpoint.json"
   },
-  "last_file_classification": "Original default-button/keyboard flow restored;minimal BUTN lifetime and compilation residuals pending",
+  "last_file_classification": "Original mnemonic callback continuations restored;bounded BUTN scope,pre-rescan retirement guard and exhaustion return remain pending",
   "supplemental_repair_pending": [
     {
       "id": "T483-P222-COMPLETION",
@@ -87,5 +87,5 @@
     }
   ],
   "supplemental_count_note": "P222 priority-repair records are separate from the fixed2720-point original re-audit census.",
-  "last_file": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c"
+  "last_file": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c"
 }

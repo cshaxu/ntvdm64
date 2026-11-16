@@ -1,0 +1,355 @@
+{
+  "batch": "P229",
+  "reviews": {
+    "dlgmgrc": "p229-dlgmgrc-review.json",
+    "dmmnem": "p229-dmmnem-review.json"
+  },
+  "publication": {
+    "status": "published",
+    "package": "741dc6c5-0745-4549-ae5a-22f7830f820f",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+        "sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_mnemonic_lifetime_fixture.c",
+        "sha256": "1cb30aad1f4450af4e7fd2f821c45eb2e157dc889e5893a125852d41c93feab8"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 396440,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6221,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1199,
+        "CleanupMs": 452,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11091,
+        "CleanupMs": 403,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 10318,
+        "CleanupMs": 477,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10513,
+        "CleanupMs": 362,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 157,
+        "CleanupMs": 368,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66119,
+        "CleanupMs": 461,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46260,
+        "CleanupMs": 366,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 42489,
+        "CleanupMs": 342,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14579,
+        "CleanupMs": 421,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10329,
+        "CleanupMs": 339,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 44075,
+        "CleanupMs": 361,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12716,
+        "CleanupMs": 386,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28638,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31109,
+        "CleanupMs": 344,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3071,
+        "CleanupMs": 353,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7692,
+        "CleanupMs": 355,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9656,
+        "CleanupMs": 352,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3883,
+        "CleanupMs": 327,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7226,
+        "CleanupMs": 292,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19890,
+        "CleanupMs": 418,
+        "Passed": true
+      }
+    ]
+  },
+  "cumulative": {
+    "files": 365,
+    "total": 102931,
+    "baseline": 119913,
+    "net_reduction": 16982,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c",
+        "total": 42
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+        "total": 304
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+        "sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15",
+        "total": 67
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+        "total": 88
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+        "sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+        "total": 27
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "total": 2666
+      }
+    ]
+  },
+  "line_proof": {
+    "dlgmgrc": {
+      "candidate_sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+      "original_literal_lines": 296,
+      "errors": 3,
+      "add": 3,
+      "delete": 85,
+      "total": 88,
+      "mismatches": [],
+      "inserted_line_directives": {},
+      "scope": "Literal original line mapping;actual selected preprocessing pending",
+      "preprocessing": [
+        {
+          "context": "product",
+          "selected_nonempty_rows": 190,
+          "literal_original_matches_at_correct_line": 103
+        },
+        {
+          "context": "fixture",
+          "selected_nonempty_rows": 190,
+          "literal_original_matches_at_correct_line": 103
+        }
+      ]
+    },
+    "dmmnem": {
+      "candidate_sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+      "original_literal_lines": 281,
+      "errors": 3,
+      "add": 14,
+      "delete": 13,
+      "total": 27,
+      "mismatches": [],
+      "inserted_line_directives": {
+        "350": 324,
+        "354": 326
+      },
+      "scope": "Literal original line mapping;actual selected preprocessing pending",
+      "preprocessing": [
+        {
+          "context": "product",
+          "selected_nonempty_rows": 179,
+          "literal_original_matches_at_correct_line": 100
+        },
+        {
+          "context": "fixture",
+          "selected_nonempty_rows": 179,
+          "literal_original_matches_at_correct_line": 100
+        }
+      ]
+    }
+  },
+  "limits": "Mnemonic native calls and graph are doubles;independent probe links actual original navigation and confirms withdrawn-node root fixed point. No blanket claim for HWND reuse or every reentrant callback. R2308 guard-removal candidate rejected before publication. No guest or winnt.zip changes.",
+  "git": "Accompanying commit/push completes delivery;receipt alone does not prove Git delivery."
+}

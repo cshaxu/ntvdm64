@@ -1,0 +1,308 @@
+{
+  "batch": "P229",
+  "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+  "range": "R2295-R2310",
+  "before": {
+    "add": 64,
+    "delete": 14,
+    "total": 78
+  },
+  "current": {
+    "add": 14,
+    "delete": 13,
+    "total": 27
+  },
+  "before_sha256": "23eb85a4c7240d9d80f73526b0ac23f9ca9c7cf7c5bae061456e5f67f2f09d6e",
+  "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+  "points": {
+    "T483-R2295": {
+      "before": "+0/-0",
+      "after": "exclusion policy",
+      "reason": "Current original FindMnemChar body retained with two KANJI #error branches;historical zero-width anchor is not a functional adaptation. Preserve original conditional frames and logical lines."
+    },
+    "T483-R2296": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "Actual native message-only STATIC HWND probe:live GetWindowTextW returns5/&;after DestroyWindow returns0,error1400,text[0]=0. HW/HWq from pinned WND carry full identity;wow_user_window_native_handle passes full handle unchanged;native_call_begin lets invalid target follow native failure. Native source text initializes even failed lookup;post-text code reads pinned WND/returned buffer,not PDLG/BUTN. _NextControl returns retained root for an empty tree,so added !pwnd does not protect a supported nonnull-root path."
+    },
+    "T483-R2297": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "Actual native message-only STATIC HWND probe:live GetWindowTextW returns5/&;after DestroyWindow returns0,error1400,text[0]=0. HW/HWq from pinned WND carry full identity;wow_user_window_native_handle passes full handle unchanged;native_call_begin lets invalid target follow native failure. Native source text initializes even failed lookup;post-text code reads pinned WND/returned buffer,not PDLG/BUTN. _NextControl returns retained root for an empty tree,so added !pwnd does not protect a supported nonnull-root path."
+    },
+    "T483-R2298": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "Actual native message-only STATIC HWND probe:live GetWindowTextW returns5/&;after DestroyWindow returns0,error1400,text[0]=0. HW/HWq from pinned WND carry full identity;wow_user_window_native_handle passes full handle unchanged;native_call_begin lets invalid target follow native failure. Native source text initializes even failed lookup;post-text code reads pinned WND/returned buffer,not PDLG/BUTN. _NextControl returns retained root for an empty tree,so added !pwnd does not protect a supported nonnull-root path."
+    },
+    "T483-R2299": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "Actual native message-only STATIC HWND probe:live GetWindowTextW returns5/&;after DestroyWindow returns0,error1400,text[0]=0. HW/HWq from pinned WND carry full identity;wow_user_window_native_handle passes full handle unchanged;native_call_begin lets invalid target follow native failure. Native source text initializes even failed lookup;post-text code reads pinned WND/returned buffer,not PDLG/BUTN. _NextControl returns retained root for an empty tree,so added !pwnd does not protect a supported nonnull-root path."
+    },
+    "T483-R2300": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "Original private BUTN selection compares exact pwnd->fnid==FNID_BUTTON,not GETFNID;cleaned flag prevents dereference. Other paths read pinned WND and call native HWND services. No demonstrated need for blanket return after query."
+    },
+    "T483-R2301": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "Static-label second query has the same exact-fnid private-state check and retained graph;native invalid HWND calls preserve failure. Restore original continuation."
+    },
+    "T483-R2302": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "After ordinary DlgSetFocus original returns the pinned WND. Its dlgmgr2 caller reads HWND/default-button graph,not freed private state;outer borrow pins survive nested call. No necessary extra early NULL return established."
+    },
+    "T483-R2303": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "BM_SETSTATE continuation calls Sleep/native BM_SETSTATE then reads pinned parent/menu ID. page_domain_withdraw_window preserves desktop parent for retired WND,matching original cleanup;no private BUTN access here. Added early return not required."
+    },
+    "T483-R2304": {
+      "before": "+5/-0",
+      "after": "original",
+      "reason": "After unflash original uses retained parent and ID;retired WND parent is desktop,not released parent memory. Modern USER owns message validity;no evidence returnNULL is required by original mnemonic contract."
+    },
+    "T483-R2305": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "delta": -1,
+      "reason": "Keep one scope declaration: original btnctl WM_NCDESTROY frees BUTN while DlgSetFocus can synchronously retire the button; borrowed WND does not own this separate allocation. Remove redundant comment."
+    },
+    "T483-R2306": {
+      "before": "+2/-0",
+      "after": "+2/-0",
+      "delta": 0,
+      "reason": "Keep scope enter and try: existing wow_button_free_state defers the exact private allocation until original BST_DONTCLICK restoration. No new allocation or identity table."
+    },
+    "T483-R2307": {
+      "before": "+2/-1",
+      "after": "+1/-1",
+      "delta": -1,
+      "reason": "Keep finally boundary: native focus callback may unwind; original bit restoration and scope removal must execute before stack frame disappears. Remove redundant comment."
+    },
+    "T483-R2308": {
+      "before": "+6/-0",
+      "after": "+6/-0",
+      "delta": 0,
+      "reason": "Actual linked original navigation probe:withdrawn child parent=desktop;_GetNextDlgGroupItem returns dialog root;_NextControl(retired) returns root;_NextControl(root) returns the same root. xxxGNM_FindNextMnem global loop compares against withdrawn child,so after focus destruction this rescan has no terminating match. Retain existing four-line retirement return before rescan;WND pin alone proves storage lifetime,not graph membership."
+    },
+    "T483-R2309": {
+      "before": "+2/-1",
+      "after": "original",
+      "delta": -3,
+      "reason": "Restore original return pwnd. Original caller consumes pinned WND and native HWND; no private allocation is dereferenced by this return."
+    },
+    "T483-R2310": {
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "delta": -1,
+      "reason": "Original count<512 can exhaust with513 disabled controls sharing a mnemonic: each lookup returns a different match,so the first-found cycle check cannot fire within512 iterations. Falling out of nonvoid xxxGotoNextMnem supplies no defined pointer to its caller. Keep explicit NULL;remove comment. Fixture now constructs this exact ring;runtime verification pending."
+    }
+  },
+  "next": null,
+  "status": "Cached x86/x64,publish11x2,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "native_text_probe": {
+    "source": "#include <windows.h>\n#include <stdio.h>\nint main(void) {\n HWND w=CreateWindowExW(0,L\"STATIC\",L\"&Test\",0,0,0,1,1,HWND_MESSAGE,0,GetModuleHandleW(0),0);\n WCHAR text[256]; int n; unsigned i;\n if(!w) return 2;\n for(i=0;i<256;i++)text[i]=0x5555;\n n=GetWindowTextW(w,text,256);printf(\"live n=%d first=%04x\\n\",n,text[0]);\n if(n!=5||text[0]!='&')return 3;\n if(!DestroyWindow(w))return 4;\n for(i=0;i<256;i++)text[i]=0x5555;\n SetLastError(0);n=GetWindowTextW(w,text,256);\n printf(\"retired n=%d first=%04x second=%04x error=%lu\\n\",n,text[0],text[1],GetLastError());\n return n ? 5 : 0;\n}\n",
+    "command": "@echo off\ncall \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\nif errorlevel 1 exit /b %errorlevel%\ncd /d O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p229\\native-text\ncl /nologo /W4 probe.c /Fe:probe.exe user32.lib\nif errorlevel 1 exit /b %errorlevel%\nprobe.exe\nexit /b %errorlevel%\n",
+    "result": "probe.c\nlive n=5 first=0026\nretired n=0 first=0000 second=5555 error=1400\n",
+    "exit": 0,
+    "limit": "Native API behavior on this Windows build;not all callback/handle reuse scenarios"
+  },
+  "counter_review": {
+    "point": "T483-R2308",
+    "finding": "Actual linked original navigation probe:withdrawn child parent=desktop;_GetNextDlgGroupItem returns dialog root;_NextControl(retired) returns root;_NextControl(root) returns the same root. xxxGNM_FindNextMnem global loop compares against withdrawn child,so after focus destruction this rescan has no terminating match. Retain existing four-line retirement return before rescan;WND pin alone proves storage lifetime,not graph membership.",
+    "status": "Guard-removal candidate rejected;existing guard restored",
+    "probe_source": "#include \"wow_user_client_view_layout.h\"\n#include \"wow_window_client_state_bindings.h\"\n#include \"wow_default_window_bindings.h\"\n#include \"wow_task_init_bindings.h\"\n#include <stdio.h>\nPWND _GetNextDlgTabItem(PWND, PWND, BOOL);\nPWND _GetNextDlgGroupItem(PWND, PWND, BOOL);\nPWND _GetDlgItem(PWND, int);\nPWND _FindDlgItem(PWND, DWORD);\nVOID xxxCheckDefPushButton(PWND, HWND, HWND);\nBOOL _AdjustWindowRectEx(LPRECT, LONG, BOOL, DWORD);\nBOOL NeedsWindowEdge(DWORD, DWORD, BOOL);\n__declspec(thread) wow_default_context *wow_default_current;\nstatic wow_task_client_info client;\nconst wow_task_client_info *WINAPI wow_edit_client_info(void) { return &client; }\nstatic WND desktop, root, first, container, nested, disabled, last, outside;\nstatic int failures;\nstatic DWORD root_help, first_help, container_help, desktop_help;\nstatic UINT first_code, last_code, style_writes;\nstatic DWORD default_id;\n/* Only the unavailable property input is doubled. The linked original\n * help.c, not the test, chooses parent/owner order and desktop termination. */\nDWORD WINAPI wow_window_client_context_help(PWND state)\n{\n    if (state == &root) return root_help;\n    if (state == &first) return first_help;\n    if (state == &container) return container_help;\n    if (state == &desktop) return desktop_help;\n    return 0;\n}\n#define CHECK(x) do { if (!(x)) { printf(\"FAIL navigation line %d\\n\", __LINE__); ++failures; } } while (0)\nPWND WINAPI wow_window_client_validate_window(HWND window)\n{\n    PWND nodes[] = {&root, &first, &container, &nested, &last};\n    unsigned i;\n    for (i = 0; i < ARRAYSIZE(nodes); ++i)\n        if (window && nodes[i]->head.h == window) return nodes[i];\n    return NULL;\n}\nLRESULT WINAPI wow_native_SendMessageW(HWND window, UINT message, WPARAM wp, LPARAM lp)\n{\n    PWND node = wow_window_client_validate_window(window);\n    UINT *code = node == &first ? &first_code : node == &last ? &last_code : NULL;\n    CHECK(node != NULL);\n    if (message == WM_GETDLGCODE) return code ? *code : 0;\n    if (message == DM_GETDEFID) {\n        CHECK(node == &root);\n        return MAKELONG(default_id, DC_HASDEFID);\n    }\n    CHECK(message == BM_SETSTYLE && code && lp == TRUE);\n    if (message == BM_SETSTYLE && code) {\n        CHECK(wp == BS_PUSHBUTTON || wp == BS_DEFPUSHBUTTON);\n        *code = wp == BS_DEFPUSHBUTTON ? DLGC_DEFPUSHBUTTON : DLGC_UNDEFPUSHBUTTON;\n        ++style_writes;\n    }\n    return 0;\n}\nstatic void child(PWND node, PWND parent)\n{\n    node->head.pSelf = (PBYTE)node;\n    node->style = WS_CHILD | WS_VISIBLE | WS_TABSTOP;\n    node->spwndParent = parent;\n}\nstatic void verify_dialog_controls(void)\n{\n    PWND nodes[] = {&root, &first, &container, &nested, &last};\n    unsigned i;\n    for (i = 0; i < ARRAYSIZE(nodes); ++i) {\n        ZeroMemory(nodes[i], sizeof(*nodes[i]));\n        nodes[i]->head.h = (HWND)(ULONG_PTR)(i + 1);\n    }\n    root.spwndParent = &desktop;\n    child(&first, &root); child(&container, &root);\n    child(&nested, &container); child(&last, &root);\n    root.spwndChild = &first; first.spwndNext = &container;\n    container.spwndNext = &last; container.spwndChild = &nested;\n    container.ExStyle = WS_EX_CONTROLPARENT;\n    first.spmenu = (PMENU)1; last.spmenu = (PMENU)2; nested.spmenu = (PMENU)3;\n    CHECK(_GetDlgItem(NULL, 1) == NULL);\n    CHECK(_GetDlgItem(&root, 1) == &first);\n    CHECK(_GetDlgItem(&root, 3) == NULL);\n    CHECK(_FindDlgItem(&root, 3) == NULL); /* Pre-4.0 direct-child contract. */\n    SetWF(&root, WFWIN40COMPAT);\n    CHECK(_FindDlgItem(&root, 3) == &nested);\n    CHECK(_FindDlgItem(&root, 999) == NULL);\n    /* Production withdrawal keeps pinned WND storage and desktop parent,\n     * but removes it from the dialog. Original navigation must reject it. */\n    first.spwndParent = &desktop;\n    CHECK(_GetNextDlgTabItem(&root, &first, FALSE) == NULL);\n    CHECK(_GetNextDlgTabItem(&root, &first, TRUE) == NULL);\n    first.spwndParent = &root;\n    default_id = 1; first_code = DLGC_DEFPUSHBUTTON;\n    last_code = DLGC_UNDEFPUSHBUTTON; style_writes = 0;\n    xxxCheckDefPushButton(&root, first.head.h, last.head.h);\n    CHECK(first_code == DLGC_UNDEFPUSHBUTTON && last_code == DLGC_DEFPUSHBUTTON);\n    CHECK(style_writes == 2);\n    xxxCheckDefPushButton(&root, last.head.h, nested.head.h);\n    CHECK(first_code == DLGC_DEFPUSHBUTTON && last_code == DLGC_UNDEFPUSHBUTTON);\n    first.style |= WS_DISABLED;\n    first_code = DLGC_UNDEFPUSHBUTTON;\n    xxxCheckDefPushButton(&root, NULL, nested.head.h);\n    CHECK(first_code == DLGC_UNDEFPUSHBUTTON); /* Disabled default not restyled. */\n    first.style &= ~WS_DISABLED;\n    first_code = DLGC_DEFPUSHBUTTON;\n    xxxCheckDefPushButton(&root, last.head.h, last.head.h);\n    CHECK(first_code == DLGC_UNDEFPUSHBUTTON && last_code == DLGC_DEFPUSHBUTTON);\n}\nstatic void verify_dialog_groups(void)\n{\n    PWND nodes[] = {&first, &container, &nested, &last};\n    unsigned i;\n    ZeroMemory(&root, sizeof(root));\n    root.spwndParent = &desktop;\n    root.spwndChild = &first;\n    for (i = 0; i < ARRAYSIZE(nodes); ++i) {\n        ZeroMemory(nodes[i], sizeof(*nodes[i]));\n        child(nodes[i], &root);\n        nodes[i]->spwndNext = i + 1 < ARRAYSIZE(nodes) ? nodes[i + 1] : NULL;\n    }\n    first.style |= WS_GROUP;\n    nested.style |= WS_DISABLED;\n    last.style |= WS_GROUP;\n    CHECK(_GetNextDlgGroupItem(&root, &first, FALSE) == &container);\n    CHECK(_GetNextDlgGroupItem(&root, &container, FALSE) == &first);\n    CHECK(_GetNextDlgGroupItem(&root, &first, TRUE) == &container);\n    CHECK(_GetNextDlgGroupItem(&root, &last, FALSE) == &last);\n    container.style |= WS_DISABLED;\n    CHECK(_GetNextDlgGroupItem(&root, &first, FALSE) == &first);\n    container.style &= ~(WS_DISABLED | WS_VISIBLE);\n    CHECK(_GetNextDlgGroupItem(&root, &first, TRUE) == &first);\n    container.style |= WS_VISIBLE;\n    first.style &= ~WS_GROUP;\n    last.style &= ~WS_GROUP;\n    CHECK(_GetNextDlgGroupItem(&root, &last, FALSE) == &first);\n    CHECK(_GetNextDlgGroupItem(&root, &first, TRUE) == &last);\n}\nstatic void verify_dialog_geometry(void)\n{\n    wow_default_context context = {0};\n    RECT rect;\n    int bx = GetSystemMetrics(SM_CXBORDER), by = GetSystemMetrics(SM_CYBORDER);\n    int caption = GetSystemMetrics(SM_CYCAPTION), menu = GetSystemMetrics(SM_CYMENU);\n    wow_default_current = &context;\n    context.server.gclBorder = 3;\n    CHECK(!NeedsWindowEdge(WS_CAPTION, 0, FALSE));\n    CHECK(NeedsWindowEdge(WS_CAPTION, 0, TRUE));\n    CHECK(NeedsWindowEdge(WS_DLGFRAME, 0, FALSE));\n    CHECK(!NeedsWindowEdge(WS_THICKFRAME, WS_EX_STATICEDGE, TRUE));\n    CHECK(NeedsWindowEdge(0, WS_EX_DLGMODALFRAME | WS_EX_STATICEDGE, FALSE));\n    client.dwExpWinVer = 0x030a;\n    SetRect(&rect, 10, 20, 110, 120);\n    CHECK(_AdjustWindowRectEx(&rect, WS_CAPTION, TRUE, 0));\n    CHECK(rect.left == 10 - bx && rect.right == 110 + bx &&\n        rect.top == 20 - caption - menu - by && rect.bottom == 120 + by);\n    client.dwExpWinVer = 0x0400;\n    SetRect(&rect, 10, 20, 110, 120);\n    CHECK(_AdjustWindowRectEx(&rect, WS_CAPTION | WS_THICKFRAME, FALSE, WS_EX_CLIENTEDGE));\n    CHECK(rect.left == 10 - 8 * bx && rect.right == 110 + 8 * bx &&\n        rect.top == 20 - caption - 8 * by && rect.bottom == 120 + 8 * by);\n    SetRect(&rect, 10, 20, 110, 120);\n    CHECK(_AdjustWindowRectEx(&rect, WS_CAPTION, FALSE, WS_EX_TOOLWINDOW));\n    CHECK(rect.top == 20 - GetSystemMetrics(SM_CYSMCAPTION) - 3 * by);\n    wow_default_current = NULL;\n}\nPWND _NextControl(PWND,PWND,UINT);\nint __cdecl main(void) {\n PWND a,b;\n ZeroMemory(&root,sizeof(root));ZeroMemory(&first,sizeof(first));ZeroMemory(&desktop,sizeof(desktop));\n root.head.pSelf=(PBYTE)&root;desktop.head.pSelf=(PBYTE)&desktop;\n root.head.h=(HWND)1;desktop.head.h=(HWND)4;\n root.style=WS_VISIBLE;root.spwndParent=&desktop;\n child(&first,&desktop);first.head.h=(HWND)2;\n puts(\"before-group\");fflush(stdout);\n a=_GetNextDlgGroupItem(&root,&first,FALSE);\n printf(\"group: root=%d retired=%d null=%d\\n\",a==&root,a==&first,a==NULL);fflush(stdout);\n b=_NextControl(&root,&first,TRUE);\n printf(\"next-retired: root=%d retired=%d null=%d\\n\",b==&root,b==&first,b==NULL);fflush(stdout);\n a=_NextControl(&root,b,TRUE);\n printf(\"next-again: same=%d root=%d\\n\",a==b,a==&root);fflush(stdout);\n return 0;\n}\n",
+    "probe_result": "boundaries>cmd /d /c \"\"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/call-boundaries/msvc-x86.cmd\" link /nologo /machine:x86 /out:\"O:/repos.hobby/ntvdm64/build/t483-s5-p229/navigation-probe/probe.exe\" O:/repos.hobby/ntvdm64/build/t483-s5-p229/navigation-probe/probe.obj obj/navigation_graph.obj obj/navigation_help.obj obj/navigation_borders.obj obj/original_dlgmgrc.obj obj/original_dlgmgr2.obj obj/original_wow.obj obj/original_winmgrc.obj user32.lib gdi32.lib \" \n\nO:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>if errorlevel 1 exit /b 0 \n\nO:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p229\\navigation-probe\\probe.exe\"\nbefore-group\ngroup: root=1 retired=0 null=0\nnext-retired: root=1 retired=0 null=0\nnext-again: same=1 root=1\n\nO:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>exit /b 0 \n"
+  },
+  "exhaustion_negative": {
+    "change": "Only omit final return NULL from current actual dmmnem body;same compiled fixture and other providers",
+    "exit": 1,
+    "result": "by\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>if errorlevel 1 exit /b 0 \n\nO:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>cmd /d /c \"\"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/call-boundaries/msvc-x86.cmd\" link /nologo /machine:x86 /out:\"O:/repos.hobby/ntvdm64/build/t483-s5-p229/exhaustion-negative/probe.exe\" obj/mnemonic_lifetime_fixture.obj O:/repos.hobby/ntvdm64/build/t483-s5-p229/exhaustion-negative/dmmnem.obj obj/button_lifetime_adapter.obj obj/state_drawing_atlas.obj obj/button_resources_table.obj user32.lib gdi32.lib \" \n\nO:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>if errorlevel 1 exit /b 0 \n\nO:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>\"O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p229\\exhaustion-negative\\probe.exe\"\nFAIL line=159\noriginal-mnemonic-lifetime failures=1\n\nO:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries>exit /b 1 \n",
+    "assertion_line": 159,
+    "assertion": "    CHECK(!xxxGotoNextMnem(&root, &start, L't'));",
+    "fixture_sha256": "1cb30aad1f4450af4e7fd2f821c45eb2e157dc889e5893a125852d41c93feab8",
+    "positive": "Same final fixture with explicit return:failures=0",
+    "limit": "One concrete513-disabled-control state on current MSVC x86;not exhaustive mnemonic graph coverage"
+  },
+  "after_sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+  "line_proof": {
+    "candidate_sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+    "original_literal_lines": 281,
+    "errors": 3,
+    "add": 14,
+    "delete": 13,
+    "total": 27,
+    "mismatches": [],
+    "inserted_line_directives": {
+      "350": 324,
+      "354": 326
+    },
+    "scope": "Literal original line mapping;actual selected preprocessing pending",
+    "preprocessing": [
+      {
+        "context": "product",
+        "selected_nonempty_rows": 179,
+        "literal_original_matches_at_correct_line": 100
+      },
+      {
+        "context": "fixture",
+        "selected_nonempty_rows": 179,
+        "literal_original_matches_at_correct_line": 100
+      }
+    ]
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+        "sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_mnemonic_lifetime_fixture.c",
+        "sha256": "1cb30aad1f4450af4e7fd2f821c45eb2e157dc889e5893a125852d41c93feab8"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "tests": {
+    "focused": "32 fixtures;mnemonic actual body plus existing BUTN lifetime and513-disabled-control exhaustion case",
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 396440,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6221,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1199,
+          "CleanupMs": 452,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11091,
+          "CleanupMs": 403,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 10318,
+          "CleanupMs": 477,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10513,
+          "CleanupMs": 362,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 157,
+          "CleanupMs": 368,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66119,
+          "CleanupMs": 461,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 46260,
+          "CleanupMs": 366,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 42489,
+          "CleanupMs": 342,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14579,
+          "CleanupMs": 421,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10329,
+          "CleanupMs": 339,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 44075,
+          "CleanupMs": 361,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12716,
+          "CleanupMs": 386,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28638,
+          "CleanupMs": 401,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 31109,
+          "CleanupMs": 344,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3071,
+          "CleanupMs": 353,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7692,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9656,
+          "CleanupMs": 352,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3883,
+          "CleanupMs": 327,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7226,
+          "CleanupMs": 292,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 19890,
+          "CleanupMs": 418,
+          "Passed": true
+        }
+      ]
+    }
+  }
+}

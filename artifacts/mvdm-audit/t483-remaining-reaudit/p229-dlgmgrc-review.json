@@ -1,0 +1,224 @@
+{
+  "batch": "P229",
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+  "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+  "before_sha256": "ffc8da234cfcc2c446b9e30eb1a5b0c05c485a178ed0da78bbc1596877e413ed",
+  "after_sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+  "before": {
+    "add": 40,
+    "delete": 111,
+    "total": 151
+  },
+  "current": {
+    "add": 3,
+    "delete": 85,
+    "total": 88
+  },
+  "status": "Cached x86/x64,publish11x2,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "points": {
+    "T483-R2289": {
+      "reason": "Restore original formatting/positions;internal navigation function bodies byte-equivalent after newline normalization. Move group helper back to original final position without changing callers or algorithms.",
+      "decision": "restore-original",
+      "historical_scale": "+1/-1;file-level provenance anchors are not individual current hunk counts"
+    },
+    "T483-R2290": {
+      "reason": "Restore original formatting/positions;internal navigation function bodies byte-equivalent after newline normalization. Move group helper back to original final position without changing callers or algorithms.",
+      "decision": "restore-original",
+      "historical_scale": "+1/-1;file-level provenance anchors are not individual current hunk counts"
+    },
+    "T483-R2291": {
+      "reason": "Three DEBUG exclusions retained under approved policy;original non-excluded body and logical lines restored.",
+      "decision": "retain-exclusion-policy",
+      "historical_scale": "+1/-1;file-level provenance anchors are not individual current hunk counts"
+    },
+    "T483-R2292": {
+      "reason": "Restore original formatting/positions;internal navigation function bodies byte-equivalent after newline normalization. Move group helper back to original final position without changing callers or algorithms.",
+      "decision": "restore-original",
+      "historical_scale": "+1/-1;file-level provenance anchors are not individual current hunk counts"
+    },
+    "T483-R2293": {
+      "reason": "Restore original formatting/positions;internal navigation function bodies byte-equivalent after newline normalization. Move group helper back to original final position without changing callers or algorithms.",
+      "decision": "restore-original",
+      "historical_scale": "+1/-1;file-level provenance anchors are not individual current hunk counts"
+    },
+    "T483-R2294": {
+      "reason": "WU32GetNextDlgTabItem/GroupItem call mapped wow_native_GetNextDlg*;wow_user_discovery.c DISCOVERY definitions call modern USER then discovered/publish_discovery to publish full handle identities. wow_user_private_access.h declares WINAPI and maps same names. Literal restoration conflicts with existing definitions;original public Group wrapper lacks WINAPI. Replacing provider ownership is an API-boundary decision,not just moving internal traversal. Preserve native boundary pending owner;do not move equivalent complexity to another shim.",
+      "decision": "minimize-pending-owner",
+      "historical_scale": "+1/-1;file-level provenance anchors are not individual current hunk counts"
+    }
+  },
+  "next": "T483-R2295",
+  "line_proof": {
+    "candidate_sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+    "original_literal_lines": 296,
+    "errors": 3,
+    "add": 3,
+    "delete": 85,
+    "total": 88,
+    "mismatches": [],
+    "inserted_line_directives": {},
+    "scope": "Literal original line mapping;actual selected preprocessing pending",
+    "preprocessing": [
+      {
+        "context": "product",
+        "selected_nonempty_rows": 190,
+        "literal_original_matches_at_correct_line": 103
+      },
+      {
+        "context": "fixture",
+        "selected_nonempty_rows": 190,
+        "literal_original_matches_at_correct_line": 103
+      }
+    ]
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+        "sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_mnemonic_lifetime_fixture.c",
+        "sha256": "1cb30aad1f4450af4e7fd2f821c45eb2e157dc889e5893a125852d41c93feab8"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "tests": {
+    "focused": "32 fixtures;mnemonic actual body plus existing BUTN lifetime and513-disabled-control exhaustion case",
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 396440,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6221,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1199,
+          "CleanupMs": 452,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11091,
+          "CleanupMs": 403,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 10318,
+          "CleanupMs": 477,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10513,
+          "CleanupMs": 362,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 157,
+          "CleanupMs": 368,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66119,
+          "CleanupMs": 461,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 46260,
+          "CleanupMs": 366,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 42489,
+          "CleanupMs": 342,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14579,
+          "CleanupMs": 421,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10329,
+          "CleanupMs": 339,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 44075,
+          "CleanupMs": 361,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12716,
+          "CleanupMs": 386,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28638,
+          "CleanupMs": 401,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 31109,
+          "CleanupMs": 344,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3071,
+          "CleanupMs": 353,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7692,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9656,
+          "CleanupMs": 352,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3883,
+          "CleanupMs": 327,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7226,
+          "CleanupMs": 292,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 19890,
+          "CleanupMs": 418,
+          "Passed": true
+        }
+      ]
+    }
+  }
+}

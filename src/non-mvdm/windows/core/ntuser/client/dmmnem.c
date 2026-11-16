@@ -59,7 +59,9 @@ int FindMnemChar(
 #ifdef KANJI
 #line 56
 #error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register.
+#line 63
 #else
+#line 64
 #line 64
                     return 0x00;
 #endif
@@ -136,20 +138,10 @@ PWND xxxGNM_FindNextMnem(
         ThreadLock(pwndStart, &tlpwndStart);
 
         dwDlgCode = (DWORD)SendMessage(HWq(pwndT), WM_GETDLGCODE, 0, 0L);
-        /* DIVERGENCE(OPENNT-HOST-119): storage retention is not HWND liveness. */
-        if (TestWF(pwndT, WFDESTROYED) || (pwndT->fnid & FNID_STATUS_BITS)) {
-            ThreadUnlock(&tlpwndStart);
-            return NULL;
-        }
 #line 138
         if (!(dwDlgCode & DLGC_WANTCHARS) &&
                 (!(dwDlgCode & DLGC_STATIC) || !(pwndT->style & SS_NOPREFIX))) {
             GetWindowText(HWq(pwndT), rgchText, sizeof(rgchText)/sizeof(WCHAR));
-            /* DIVERGENCE(OPENNT-HOST-119): text retrieval can destroy its source. */
-            if (TestWF(pwndT, WFDESTROYED) || (pwndT->fnid & FNID_STATUS_BITS)) {
-                ThreadUnlock(&tlpwndStart);
-                return NULL;
-            }
 #line 141
             if (FindMnemChar(rgchText, ch, FALSE, TRUE) != 0) {
                 ThreadUnlock(&tlpwndStart);
@@ -178,20 +170,10 @@ PWND xxxGNM_FindNextMnem(
          * and control isn't a static control with SS_NOPREFIX
          */
         dwDlgCode = (DWORD)SendMessage(HW(pwnd), WM_GETDLGCODE, 0, 0L);
-        /* DIVERGENCE(OPENNT-HOST-119): same guard on the global search leg. */
-        if (!pwnd || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-            ThreadUnlock(&tlpwnd);
-            return NULL;
-        }
 #line 168
         if (!(dwDlgCode & DLGC_WANTCHARS) &&
                 (!(dwDlgCode & DLGC_STATIC) || !(pwnd->style & SS_NOPREFIX))) {
             GetWindowText(HW(pwnd), rgchText, sizeof(rgchText)/sizeof(WCHAR));
-            /* DIVERGENCE(OPENNT-HOST-119): do not return a dead text source. */
-            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-                ThreadUnlock(&tlpwnd);
-                return NULL;
-            }
 #line 171
             if (FindMnemChar(rgchText, ch, FALSE, TRUE) != 0)
                 break;
@@ -248,11 +230,6 @@ PWND xxxGotoNextMnem(
         ThreadLock(pwnd, &tlpwnd);
 
         code = (UINT)SendMessage(hwnd, WM_GETDLGCODE, 0, 0L);
-        /* DIVERGENCE(OPENNT-HOST-119): no focus/click after query destruction. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-            ThreadUnlock(&tlpwnd);
-            return NULL;
-        }
 
         /*
          * If a non-disabled static item, then jump ahead to nearest tabstop.
@@ -279,11 +256,6 @@ PWND xxxGotoNextMnem(
              * labeled with a static text item.
              */
             code = (UINT)SendMessage(hwnd, WM_GETDLGCODE, 0, 0L);
-            /* DIVERGENCE(OPENNT-HOST-119): also validate the static-label target. */
-            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-                ThreadUnlock(&tlpwnd);
-                return NULL;
-            }
 #line 251
         }
 
@@ -298,11 +270,6 @@ PWND xxxGotoNextMnem(
                  * No, simply give it the focus.
                  */
                 DlgSetFocus(hwnd);
-                /* DIVERGENCE(OPENNT-HOST-119): ordinary focus may destroy too. */
-                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-                    ThreadUnlock(&tlpwnd);
-                    return NULL;
-                }
 #line 264
             } else {
 
@@ -315,11 +282,6 @@ PWND xxxGotoNextMnem(
                      * Flash the button.
                      */
                     SendMessage(hwnd, BM_SETSTATE, TRUE, 0L);
-                    /* DIVERGENCE(OPENNT-HOST-119): flashing can destroy the button. */
-                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-                        ThreadUnlock(&tlpwnd);
-                        return NULL;
-                    }
 
                     /*
                      * Delay
@@ -328,7 +290,9 @@ PWND xxxGotoNextMnem(
 #ifdef LATER
 #line 280
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
+#line 284
 #else
+#line 285
 #line 285
                     Sleep(1);
 #endif
@@ -338,11 +302,6 @@ PWND xxxGotoNextMnem(
                      * Un-Flash it.
                      */
                     SendMessage(hwnd, BM_SETSTATE, FALSE, 0L);
-                    /* DIVERGENCE(OPENNT-HOST-119): no stale parent notification. */
-                    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-                        ThreadUnlock(&tlpwnd);
-                        return NULL;
-                    }
 
                     /*
                      * Send the WM_COMMAND message.
@@ -363,7 +322,6 @@ PWND xxxGotoNextMnem(
                      */
                     BOOL fIsNTButton;
                     PBUTN pbutn;
-                    /* DIVERGENCE(OPENNT-HOST-119): focus can destroy BUTN. */
                     wow_button_scope buttonScope;
 
 #line 312
@@ -379,20 +337,23 @@ PWND xxxGotoNextMnem(
                     }
 
                     DlgSetFocus(hwnd);
-                    /* DIVERGENCE(OPENNT-HOST-119): restore before releasing BUTN. */
                     } __finally {
 #line 322
                     if (fIsNTButton) {
                       BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;
                     }
                         if (fIsNTButton) wow_button_scope_leave(&buttonScope);
+#line 324
                     }
                     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
                         ThreadUnlock(&tlpwnd);
                         return NULL;
 #line 324
                     }
+#line 325
 
+#line 326
+#line 326
                     /*
                      * Send click message if button has a UNIQUE mnemonic
                      */
@@ -403,8 +364,7 @@ PWND xxxGotoNextMnem(
             }
 
             ThreadUnlock(&tlpwnd);
-            /* DIVERGENCE(OPENNT-HOST-119): click may destroy before returning. */
-            return (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) ? NULL : pwnd;
+            return pwnd;
 #line 337
         } else {
 
@@ -425,7 +385,6 @@ PWND xxxGotoNextMnem(
     }  /* Loop for a long time */
 
     ThreadUnlock(&tlpwnd);
-    /* DIVERGENCE(OPENNT-HOST-119): exhausted search previously returned garbage. */
     return NULL;
 #line 356
 }

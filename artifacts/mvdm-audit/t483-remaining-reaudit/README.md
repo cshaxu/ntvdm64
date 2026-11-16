@@ -1348,3 +1348,13 @@ P227: [delivery receipt](batch-p227-checkpoint.json). Cached,publish11x2,focused
 P228 active: [dlgmgr2 ordered review](p228-dlgmgr2-review.json);partial file,not delivered.
 
 P228: [delivery receipt](batch-p228-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;dlgmgr2 183->67(-116);original navigation and ANSI return semantics restored.
+
+P229: [dlgmgrc review](p229-dlgmgrc-review.json);original order/format restored,151->88(-63);verified and published.
+
+P229: [dmmnem review and probes](p229-dmmnem-review.json);16/16 reviewed;verified and published.
+
+P229 final source review: dlgmgrc151->88, dmmnem78->27, net reduction114.
+R2308 guard-removal candidate was rejected by actual original navigation
+evidence;the existing retirement guard remains. See P229 receipt below.
+
+P229: [delivery receipt](batch-p229-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;two-file net mirror reduction114;R2308 retirement guard retained on actual navigation evidence.

@@ -9,24 +9,16 @@
 * 15-Dec-1993 JohnC      Pulled functions from user\server.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-106): required Tab-navigation closure only.
- * Original algorithms unchanged; standalone client precomp and retained
- * same-address WND graph supply the private data boundary. No host navigation
- * API substitution. */
-#line 12
 #include "precomp.h"
 #pragma hdrstop
 
-/* DIVERGENCE(OPENNT-HOST-109): restore the original group-navigation
- * collaborators required by IsDialogMessage/xxxGotoNextMnem. Bodies are
- * unchanged; their graph comes from the same retained observation owner. */
+
 /***************************************************************************\
 * UT_PrevGroupItem
 *
 * History:
 \***************************************************************************/
 
-#line 22
 PWND UT_PrevGroupItem(
     PWND pwndDlg,
     PWND pwndCurrent)
@@ -48,13 +40,13 @@ PWND UT_PrevGroupItem(
     }
 }
 
+
 /***************************************************************************\
 * UT_NextGroupItem
 *
 * History:
 \***************************************************************************/
 
-#line 50
 PWND UT_NextGroupItem(
     PWND pwndDlg,
     PWND pwndCurrent)
@@ -78,39 +70,11 @@ PWND UT_NextGroupItem(
     return pwndNext;
 }
 
-#line 427
-PWND _GetNextDlgGroupItem(
-    PWND pwndDlg,
-    PWND pwnd,
-    BOOL fPrev)
-{
-    PWND pwndCurrent;
-    BOOL fOnceAround = FALSE;
-
-    pwnd = pwndCurrent = _GetChildControl(pwndDlg, pwnd);
-
-    do {
-        pwnd = (fPrev ? UT_PrevGroupItem(pwndDlg, pwnd) :
-                        UT_NextGroupItem(pwndDlg, pwnd));
-
-        if (pwnd == pwndCurrent)
-            fOnceAround = TRUE;
-
-        if (!pwndCurrent)
-            pwndCurrent = pwnd;
-    }
-    while (!fOnceAround && ((TestWF(pwnd, WFDISABLED) || !TestWF(pwnd, WFVISIBLE))));
-
-    return pwnd;
-}
-
 /***************************************************************************\
 * _PrevControl
 *
 * History:
 \***************************************************************************/
-
-#line 78
 PWND _PrevControl(
     PWND pwndRoot,
     PWND pwndStart,
@@ -149,7 +113,6 @@ PWND _PrevControl(
 
     return pwnd;
 }
-
 /***************************************************************************\
 *
 *  GetChildControl()
@@ -159,7 +122,6 @@ PWND _PrevControl(
 *
 \***************************************************************************/
 
-#line 125
 PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
     PWND    pwndControl = NULL;
 
@@ -186,17 +148,12 @@ PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
 * then the next control is pwndStart->spwndParent or an ancestor.
 *
 \***************************************************************************/
-
-#line 151
 PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 {
     PWND pwndParent;
-#line 154
 #ifdef DEBUG
-#line 155
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
-#line 157
 
     // If there is a sibbling, go for it
     if (pwndStart->spwndNext != NULL) {
@@ -215,25 +172,18 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
     // Otherwise walk up the parent chain looking for the first window with
     // a WS_EX_CONTROLPARENT parent.
 
-#line 175
 #ifdef DEBUG
-#line 176
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #else
-#line 178
     return
 #endif
-#line 180
         _GetChildControl(pwndRoot, pwndParent);
 
-#line 182
 #ifdef DEBUG
-#line 183
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#line 191
 #endif
-#line 192
 }
-
 /***************************************************************************\
 *
 *  _NextControl()
@@ -248,8 +198,6 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 * If the search fails, it returns pwndRoot.
 *
 \***************************************************************************/
-
-#line 207
 PWND _NextControl(
     PWND pwndRoot,
     PWND pwndStart,
@@ -396,3 +344,28 @@ AllOver:
     return pwnd;
 }
 
+#line 427
+PWND _GetNextDlgGroupItem(
+    PWND pwndDlg,
+    PWND pwnd,
+    BOOL fPrev)
+{
+    PWND pwndCurrent;
+    BOOL fOnceAround = FALSE;
+
+    pwnd = pwndCurrent = _GetChildControl(pwndDlg, pwnd);
+
+    do {
+        pwnd = (fPrev ? UT_PrevGroupItem(pwndDlg, pwnd) :
+                        UT_NextGroupItem(pwndDlg, pwnd));
+
+        if (pwnd == pwndCurrent)
+            fOnceAround = TRUE;
+
+        if (!pwndCurrent)
+            pwndCurrent = pwnd;
+    }
+    while (!fOnceAround && ((TestWF(pwnd, WFDISABLED) || !TestWF(pwnd, WFVISIBLE))));
+
+    return pwnd;
+}
