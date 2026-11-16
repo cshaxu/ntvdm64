@@ -1,0 +1,142 @@
+{
+  "status": "Whole file complete;only excluded bodies and required diagnostic lines differ from original",
+  "proof": {
+    "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+    "original_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+    "before_sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
+    "source_lines_checked": 330,
+    "contexts": [
+      {
+        "name": "x86-worker-dbg",
+        "selected_header_lines": 188,
+        "whole_unit_tokens_identical": true,
+        "selected_lines_identical": true,
+        "actual_compile_exit": 0
+      },
+      {
+        "name": "x86-worker-debugger_module_event_test",
+        "selected_header_lines": 188,
+        "whole_unit_tokens_identical": true,
+        "selected_lines_identical": true,
+        "actual_compile_exit": 0
+      },
+      {
+        "name": "x86-worker-debugger_worker_module_observer",
+        "selected_header_lines": 188,
+        "whole_unit_tokens_identical": true,
+        "selected_lines_identical": true,
+        "actual_compile_exit": 0
+      },
+      {
+        "name": "x86-wow32-wkman",
+        "selected_header_lines": 188,
+        "whole_unit_tokens_identical": true,
+        "selected_lines_identical": true,
+        "actual_compile_exit": 0
+      }
+    ],
+    "negative_controls": [
+      {
+        "profile": "__cplusplus",
+        "error_line": 20
+      },
+      {
+        "profile": "non-_X86_",
+        "error_line": 70
+      }
+    ],
+    "errors_retained": [
+      20,
+      70,
+      526
+    ],
+    "condition_structure_original": true,
+    "ordinary_semantic_diff": 0,
+    "classification": "excluded-bodies-and-required-line-mapping-only",
+    "mirror_before": {
+      "add": 3,
+      "delete": 137,
+      "total": 140
+    },
+    "mirror_after": {
+      "add": 3,
+      "delete": 137,
+      "total": 140
+    },
+    "raw_before": {
+      "add": 9,
+      "delete": 137,
+      "total": 146
+    },
+    "raw_after": {
+      "add": 5,
+      "delete": 137,
+      "total": 142
+    },
+    "line_directives_before": 6,
+    "line_directives_after": 2,
+    "counter_review": "Both closing-boundary205 and selected-path continuation206 are needed;one inside skipped else cannot reset the selected path. One-line C++ exclusions need no reset. No macro,ABI,provider or selected token changes.",
+    "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6"
+  },
+  "scope": {
+    "task": "M0 T483 S5 P215",
+    "head": "59804a5f73df970c905c3b2572e81ee3fe5dbbe0",
+    "file": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+    "points": [
+      "R2106"
+    ],
+    "original": "O:/repos.external/OpenNT/public/sdk/inc/vdmdbg.h",
+    "original_sha256": "a3048cbcaa26e32ae542a73aae59356e9fa2eb85af00932a027ff4e8e47f225c",
+    "before_sha256": "49a5c12ac3f61bfd59d8f8d4dffaf50e5cf2fb8c8a3325c084b2fced9cc3971c",
+    "owner": "single-agent initial and counter-review",
+    "temporary_root": "build/t483-s5-p215",
+    "budget": "Focused context/negative controls20min;review10min;temporary cap1GiB;inspect live process before any no-progress conclusion",
+    "scope": "Diagnostic lines only;preserve all three excluded bodies,prove full selected tokens unchanged;reuse sealed P214 product if no behavioral/binding change."
+  },
+  "classification": "no-non-exclusion-diff",
+  "mirror_before": 140,
+  "mirror_after": 140,
+  "mirror_delta": 0,
+  "raw_before": 146,
+  "raw_after": 142,
+  "raw_delta": -4,
+  "change": "Restore original endif205 diagnostic location;keep selected continuation206;remove four net redundant line directives. All three error bodies and all original selected tokens are unchanged.",
+  "initial_review": "Old S1 record accurately identified endif205 mapped as71,but lacked actual context validation. Current review validates all four direct C source inclusions in the selected x86 worker/WOW graphs,including two maintained tests.",
+  "counter_review": "Both closing-boundary205 and selected-path continuation206 are needed;one inside skipped else cannot reset the selected path. One-line C++ exclusions need no reset. No macro,ABI,provider or selected token changes.",
+  "ordinary_semantic_diff": 0,
+  "verification": "12 before/final/original preprocessings,4 actual-context final compiles,330 retained source lines,188 selected header lines per context and2 negative profiles pass. Both excluded C++ bodies retain source lines20/526;C++ compile fails at the first body20.",
+  "processes": [
+    {
+      "script": "E955073954F3103EED6B01C35C0D2D55727705A26936879F28E603E3B6E140EF",
+      "started": "2026-11-15T19:55:24.3387580-08:00",
+      "pid": 29228,
+      "root": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p215",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "started": "2026-11-15T19:57:22.3620548-08:00",
+      "pid": 18144,
+      "script": "BD1A7695A1322D322AA7969284750C318FA6573A742FF857861C2C55B6AF82AD"
+    }
+  ],
+  "product_verification": {
+    "package": "31b5215b-6e0b-42d5-a99f-55531833a85a",
+    "source_delivery": "59804a5f73df970c905c3b2572e81ee3fe5dbbe0",
+    "receipt": "batch-p214-checkpoint.json",
+    "reused": "Cached full build,11x2 publication,focused RTL/path/command and Full19;no new product build/runtime pass claimed for this diagnostic-only change. Current11x2 hashes verified.",
+    "limits": "External DOS4GW/Nesticle remains SKIP;no new debugger runtime capability or x64 worker admission."
+  },
+  "cumulative_evidence": "cumulative-diff-p215-delta.json",
+  "delivery": "P215 governance commit and origin/main push accompany receipt",
+  "final_review": {
+    "process": {
+      "started": "2026-11-15T19:59:23.8485093-08:00",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "script": "603E84CC8FFBD3B1D72EFA0BA1B10ACA2258C909AD2779BA95A0EE135C692CF0",
+      "pid": 17788
+    },
+    "exit_code": 0,
+    "result": "PASS 143 selected WOW objects; 9 private-header negative controls; no NTVDM private dependency\nDocumentation governance verification passed.\nDocumentation relative-link verification passed."
+  }
+}

@@ -17,10 +17,8 @@ Abstract:
 #define _VDMDBG_
 
 #ifdef __cplusplus
-#line 20
 #error Unsupported excluded original configuration
 #endif
-#line 22
 
 #include <pshpack4.h>
 
@@ -69,8 +67,8 @@ typedef struct _CONTEXT VDMCONTEXT;
 typedef struct _LDT_ENTRY VDMLDT_ENTRY;
 
 #else // _X86_
-#line 70
 #error Unsupported excluded original configuration
+#line 205
 #endif // _X86_
 #line 206
 
@@ -393,9 +391,7 @@ VDMBreakThread(
 );
 
 #ifdef __cplusplus
-#line 526
 #error Unsupported excluded original configuration
 #endif
-#line 528
 
 #endif // _VDMDBG_

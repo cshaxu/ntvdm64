@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2105 reviewed:767 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1330 qualified pending;615 unreviewed. Files300/365 audited,65 remain.
+2106 reviewed:768 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1330 qualified pending;614 unreviewed. Files301/365 audited,64 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -60,7 +60,7 @@ contexts match. Three SDK-owned type omissions(29 lines) remain pending owner.
 Final cached x86/x64,path/RTL/command fixtures,Full and governance passed.
 First failed WOW duplicate-header build was corrected before publication.
 External DOS4GW/Nesticle fixture remains SKIP. No guest or winnt.zip changes.
-S5 remains active,nextR2106. [P214 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p214-checkpoint.json).
+S5 remains active,nextR2107. [P214 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p214-checkpoint.json).
 Prior receipts and their limits remain indexed in the active audit README.
 
 ## Remaining Scope
@@ -155,3 +155,5 @@ P210 ntlpcapi.h13 unchanged(all excluded),raw24->17(-7):else48/endif134 restored
 P211 ntpsapi.h1268->363(-905),raw1313->411(-902):original declarations and imported NtAlertThread restored;local forwarder removed;WOW duplicate declarations removed;3 restored,3 precise SDK/PEB residuals pending.729 source lines and339/340 selected lines match;5 errors retained. Final cached,publish11x2,Full,focused x86/x64 thread tests passed;external DOS4GW skip. Cumulative365-file reduction7741. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p211-checkpoint.json).
 
 P212 ntregapi.h469->16(-453),raw479->21(-458):ordinary declarations restored;copied compat registry types/prototypes removed. Only two SDK duplicate types and3 import decorators pending;2 C++ errors retained.423 source lines and292 selected lines per profile/binding context match original. Final cached,publish11x2,focused registry/Full passed;external DOS4GW skip. Cumulative365-file reduction8194. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p212-checkpoint.json).
+
+P215 vdmdbg.h: no non-exclusion diff;three errors retained. Core140 unchanged,raw146->142(-4);330 source lines and188 selected lines in4 actual contexts match;12 preprocessings,4 compiles and2 negatives pass. P214 product reused and11x2 hashes reverified. Cumulative reduction15055 unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p215-checkpoint.json).

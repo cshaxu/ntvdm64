@@ -1294,3 +1294,5 @@ P212: [Registry declaration restoration](batch-p212-checkpoint.json):469->16(-45
 P213: [RTL declaration restoration](batch-p213-checkpoint.json):ntrtl6101->253(-5848),nturtl-19,precomp-1;42 restored/confirmed,2 qualified pending. Final cached,publish11x2,focused native/time/RTL and Full passed. [Cumulative witness](cumulative-diff-p213-delta.json):119913->105851,net14062;365 fixed files.
 
 P214: [NTURTL restoration](batch-p214-checkpoint.json):nturtl1021->29(-992),precomp15->14(-1);2 restored,1 qualified pending;original common/WOW types and declarations unified. Final cached,publish11x2,path/RTL/command and Full pass. [Cumulative witness](cumulative-diff-p214-delta.json):119913->104858,net15055;fixed365 files.
+
+P215: [VDM debug header original line mapping](batch-p215-checkpoint.json):no non-exclusion diff;three errors retained;core140 unchanged,raw146->142. Four actual contexts and2 negatives pass;P214 product reused. [Cumulative witness](cumulative-diff-p215-delta.json):net15055 unchanged.
