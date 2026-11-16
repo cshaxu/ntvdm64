@@ -62,8 +62,10 @@ Cumulative365-file mirror diff119913->102326(-17587).No guest/winnt.zip changes.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p235-checkpoint.json).
 Git delivery accompanies receipt. R2383-R2402 usercli whole-file audit is active;
 [paired compile evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/p236-usercli-investigation.json)
-proves the public declaration subset can be restored. No production edit or
-additional completed point/file is claimed;full-file consolidation precedes build.
+records an isolated whole-file candidate2170->562(-1608):104 real compile
+contexts,7 lifecycle compile variants and104 identical primary-source token
+comparisons. Final header/ABI counter-review remains;no production edit,
+additional completed point/file or runtime/publication pass is claimed.
 
 ## Remaining Scope
 

@@ -131,5 +131,625 @@
     "Check same-header multiple inclusion and original declaration ownership in actual contexts",
     "Only after the whole file is complete run cached build,publish,focused/Full,commit,push"
   ],
-  "completion_accounting": "No additional point or file counted complete;no pending-owner entry admitted by these preliminary failures"
+  "completion_accounting": "No additional point or file counted complete;no pending-owner entry admitted by these preliminary failures",
+  "whole_file_candidate": {
+    "status": "Isolated candidate only;production unchanged;whole-file final counter-review and delivery still pending",
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "before_sha256": "cd1bc65bb851b9b6ccb3f708ee1b79d0af63f9d757b478fad48c8068a34acb98",
+        "candidate_sha256": "5b35423124a3f5f5757652f12bc453a7c490e4abb97b91b11cbad36dc1c915bc"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+        "before_sha256": "25041fc104c10661ff3941791b161ae263b7a2b6f4c8b4af0c89ae9b4e040450",
+        "candidate_sha256": "810e85481ad0065ae727057e851e01395c5d53ba0cf4f772e70406d5b3fa8f28"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_user_capture_bindings.h",
+        "before_sha256": "6e64e42cf01cab1838bc5af16b346529022cd3214c1ecb4093ed7dd91ba881f7",
+        "candidate_sha256": "843682131b8054cfbfce6a9f81df26248fd9824bd359ed9310b0cc2fe9273529"
+      },
+      {
+        "path": "test/mvdm-host/wow_page_domain_fixture.c",
+        "before_sha256": "5deb2b3ad61301b7ed1cde8edb0f9617e7d5874aeb37881f3c36b00308bcedad",
+        "candidate_sha256": "bf441850d78f56ecf6d2d34c6abcd5374b78bbf5fb826cf5622e7f0a6b42f6dd"
+      }
+    ],
+    "patch": "p236-usercli-candidate.json",
+    "patch_sha256": "cde101badd000e04f1f11d99401cc73233edb780df943d2a50634756d6d66f4c",
+    "mirror_after": {
+      "add": 94,
+      "delete": 468,
+      "total": 562
+    },
+    "mirror_delta": -1608,
+    "restorations": [
+      "Original public headers and CFNSCSENDMESSAGE",
+      "Original IN_STRING/LARGE_IN_STRING in usercli;remove adapter copies",
+      "Original ThreadLock without extra EDIT_CLIENT selector",
+      "Original declaration ordering and omitted composable declarations",
+      "Replace five optional declaration families with shared full-client phase;retain minimal lookaside-only phase",
+      "Original excluded conditional positions,17 bare#error bodies and original logical lines"
+    ],
+    "compile_contexts": [
+      {
+        "name": "000.exit",
+        "exit": 0,
+        "log_sha256": "19f953750e4e1f522bc7cecff4634142b7c5b630a9b5d34b15f23f89bb8ca090"
+      },
+      {
+        "name": "001.exit",
+        "exit": 0,
+        "log_sha256": "e49a4f3dfed731fc47e896b6c8ce82ac642d78bf55a0176bdaea586bd2205e86"
+      },
+      {
+        "name": "002.exit",
+        "exit": 0,
+        "log_sha256": "07431b73db9ce5737a0f84954d2c6c392c17291e0b8c58eba913dc28e417d989"
+      },
+      {
+        "name": "003.exit",
+        "exit": 0,
+        "log_sha256": "817f91801d33927d49771db1327fd2649e9b74f5f32811c8d9c32f6a9998e972"
+      },
+      {
+        "name": "004.exit",
+        "exit": 0,
+        "log_sha256": "6e88adfa0afafc321b723a726801181cc3a9fe2c2c56b6d2a7acf382fffe3a53"
+      },
+      {
+        "name": "005.exit",
+        "exit": 0,
+        "log_sha256": "ca2bd5083cd203bc62c5de8c35fc8213222fcc0f7e087aef0f50e221b28b0c29"
+      },
+      {
+        "name": "006.exit",
+        "exit": 0,
+        "log_sha256": "2b830be3e71f785794c1001a30e12738a26bd46ea2db302049594756741bf113"
+      },
+      {
+        "name": "007.exit",
+        "exit": 0,
+        "log_sha256": "c7e2f69e57e0e06554889d29cc298d8af7977e83df7572f2ac832b27a1e00f82"
+      },
+      {
+        "name": "008.exit",
+        "exit": 0,
+        "log_sha256": "e4f71db1146b3a6498486f27860ec3a179f1641e61ad37b26519e74641c663af"
+      },
+      {
+        "name": "009.exit",
+        "exit": 0,
+        "log_sha256": "9042924b937bcadc2371d5ae69996047b654fb69f39ef1d554b90f2c6380630b"
+      },
+      {
+        "name": "010.exit",
+        "exit": 0,
+        "log_sha256": "b88f8e291cc066be2e2c40d721545958ac228eba5ad328e560b58d35d9fcb077"
+      },
+      {
+        "name": "011.exit",
+        "exit": 0,
+        "log_sha256": "53624689b89b31cbda60968f037f8d24947feb1dc9281784351cc0c1e47a286c"
+      },
+      {
+        "name": "012.exit",
+        "exit": 0,
+        "log_sha256": "86d52f556db683d73d7c217139721e0441d8d1946eb73f64a7e5c8ad2e52ef0c"
+      },
+      {
+        "name": "013.exit",
+        "exit": 0,
+        "log_sha256": "518dd8fe6bafcc832a8014e92091a272b3edf27e694160ace832b9edd2492dfc"
+      },
+      {
+        "name": "014.exit",
+        "exit": 0,
+        "log_sha256": "807a981e6429a6d234a66bab39b77f8ca867c8e900f50176724461e4588ccf65"
+      },
+      {
+        "name": "015.exit",
+        "exit": 0,
+        "log_sha256": "5a3382888034e8ad2009a9d3c0b596b08da43cc27e4f6a83a0677cccb556c870"
+      },
+      {
+        "name": "016.exit",
+        "exit": 0,
+        "log_sha256": "24aa7c9034f145c2b5e71223c5f066a3902e3f93cf8d796ace1ceef22a8fc6ae"
+      },
+      {
+        "name": "017.exit",
+        "exit": 0,
+        "log_sha256": "8ac051d3b6aa538b26e75007d9ce65fc90cb57065bc58a79401293b77538e77e"
+      },
+      {
+        "name": "018.exit",
+        "exit": 0,
+        "log_sha256": "2f7ccc363167e7b861f6b31b3fe271e2472c2b60ec89be16061ea282c59e3b13"
+      },
+      {
+        "name": "019.exit",
+        "exit": 0,
+        "log_sha256": "3dfcd6b2fe9bd9e3c341a5ba5218229b1cdba40b23f33a070a9d95a20ba6ce4e"
+      },
+      {
+        "name": "020.exit",
+        "exit": 0,
+        "log_sha256": "d60df4b774ef9545bced62fc0ff09bd702d6946e19cd725f9d8d0e4ca759bf31"
+      },
+      {
+        "name": "021.exit",
+        "exit": 0,
+        "log_sha256": "9cd7a717c38b13755183d6e12fcdb73f6ec66ca05071bf8eaedcdee6fdb47310"
+      },
+      {
+        "name": "022.exit",
+        "exit": 0,
+        "log_sha256": "908b9d0253887800af2ea6efc559a80b10bbc3f0e40ae0b9af809466e60f9304"
+      },
+      {
+        "name": "023.exit",
+        "exit": 0,
+        "log_sha256": "4cf1d8d3d4d9040ea25160ad2c2c8906c8ae9f658e9a541e1188c14c835b8848"
+      },
+      {
+        "name": "024.exit",
+        "exit": 0,
+        "log_sha256": "fcfb811cc1ed32609f4b09ba1b6ead26a2ff99c3ab103c82edd68d96842748c9"
+      },
+      {
+        "name": "025.exit",
+        "exit": 0,
+        "log_sha256": "2788680955ac226c0d53e5b2046124ccfa753891b7b7d4d2d752f4f8e0c0757e"
+      },
+      {
+        "name": "026.exit",
+        "exit": 0,
+        "log_sha256": "4cf1d8d3d4d9040ea25160ad2c2c8906c8ae9f658e9a541e1188c14c835b8848"
+      },
+      {
+        "name": "027.exit",
+        "exit": 0,
+        "log_sha256": "9c5aaa6fa774dd526feaf0fb61cb34623e79aeb61a98d469f6a0263f5e9e409b"
+      },
+      {
+        "name": "028.exit",
+        "exit": 0,
+        "log_sha256": "cfa71d9488c10f775ef47c86f3049cc520a42efae9209c18520913713b607ee0"
+      },
+      {
+        "name": "029.exit",
+        "exit": 0,
+        "log_sha256": "97b6299ae5dbe1824932df7804428541e2a6aeecbcdb5e0c6a9dbaba62484004"
+      },
+      {
+        "name": "030.exit",
+        "exit": 0,
+        "log_sha256": "01752d197835032ad8352e3e10e67548643ced9142954cfe5c2505930b549bf6"
+      },
+      {
+        "name": "031.exit",
+        "exit": 0,
+        "log_sha256": "77b97f250a33bd0588bb062db81b602653eddadf15020e250ad284e2c225787c"
+      },
+      {
+        "name": "032.exit",
+        "exit": 0,
+        "log_sha256": "f9c4a29d86b13aa581a76b401545269bc626ef274b7814ee4a530df7c9891cb3"
+      },
+      {
+        "name": "033.exit",
+        "exit": 0,
+        "log_sha256": "826ae4701065951242b9ff05ce38552a5f705ed495eecb1edf4301ba1d6ac7de"
+      },
+      {
+        "name": "034.exit",
+        "exit": 0,
+        "log_sha256": "45a3cff4110bf9d698bee3db522e4038d4d05a9025a676f3cb7aab6c3cace628"
+      },
+      {
+        "name": "035.exit",
+        "exit": 0,
+        "log_sha256": "949ba3a99757446684244db69996b6ede55e97d76e763b3b3cc8b992b8485e5e"
+      },
+      {
+        "name": "036.exit",
+        "exit": 0,
+        "log_sha256": "64017f7f5603f36414530aed4c69be97eeab3ccec4cf129c108ef079052e312b"
+      },
+      {
+        "name": "037.exit",
+        "exit": 0,
+        "log_sha256": "6dac8e23c435ed09503a9dd46f2a118ea7d1224e31fc3c9e8cef03361f582b62"
+      },
+      {
+        "name": "038.exit",
+        "exit": 0,
+        "log_sha256": "b49149a0882b2f31e06e6207f90200268894680f792bf4343a80df5e5f89d14b"
+      },
+      {
+        "name": "039.exit",
+        "exit": 0,
+        "log_sha256": "6ddc3c34174c9bdd747573f41c127a8ac7a00f47602de5e2fa1882e7fdcc89c2"
+      },
+      {
+        "name": "040.exit",
+        "exit": 0,
+        "log_sha256": "f398030c1034cf6247746091d7bc24ef2b9de3bc37550e97de70f97ff2586b6a"
+      },
+      {
+        "name": "041.exit",
+        "exit": 0,
+        "log_sha256": "d04f3a9e29dbbc24d005179fad8d3190928852198ce33fcf0b8efb1231f33038"
+      },
+      {
+        "name": "042.exit",
+        "exit": 0,
+        "log_sha256": "e6308d0ee7e42b7d845eb01f458fe19dd5adaba555bada680289aeb9e15d110e"
+      },
+      {
+        "name": "043.exit",
+        "exit": 0,
+        "log_sha256": "1dc7e095ca3dfb019d82e0f28a2da7122bf19a400389b8241739b4b38a3215b7"
+      },
+      {
+        "name": "044.exit",
+        "exit": 0,
+        "log_sha256": "06f8c25038b1f24628923cecc54e718bd98745b7770ff6fa7eff7b1884c4318d"
+      },
+      {
+        "name": "045.exit",
+        "exit": 0,
+        "log_sha256": "bb451f7af62b2ac9a2137adf24f22a20ebeee5c284df1ccb7f5ae30cd5218426"
+      },
+      {
+        "name": "046.exit",
+        "exit": 0,
+        "log_sha256": "3021438f18825622b7ed1a63525a1dc091022245b0fdfaaae92dc9b0256f8492"
+      },
+      {
+        "name": "047.exit",
+        "exit": 0,
+        "log_sha256": "29dc4748848cb81f78110bcdc925ccbd15e23a3cbc83793c715d74a68e0e9ff6"
+      },
+      {
+        "name": "048.exit",
+        "exit": 0,
+        "log_sha256": "1d8dc04aa319dc0c15f6585b4fa1f2cb05b357f3ca089c64d92efbeb2450412f"
+      },
+      {
+        "name": "049.exit",
+        "exit": 0,
+        "log_sha256": "59e20432b0ca80baafda22e4181d302ca9b8261030f80456ed8fd1725014cec0"
+      },
+      {
+        "name": "050.exit",
+        "exit": 0,
+        "log_sha256": "d40e171f249b03d869b8006b91009a08e6096fd32a0061c37d692fc1ce3f5f06"
+      },
+      {
+        "name": "051.exit",
+        "exit": 0,
+        "log_sha256": "21d11d71294cc97798c7ff62fb28bb27deb4986a70fdac55f9637b97385d6de4"
+      },
+      {
+        "name": "052.exit",
+        "exit": 0,
+        "log_sha256": "8256332397adb55d804a51916af3c39be788ff2b573cca850d3bb63beb94ed10"
+      },
+      {
+        "name": "053.exit",
+        "exit": 0,
+        "log_sha256": "6639b41b17e2cac9193338b8093f3044932298989724d7f05282c072c3b2016e"
+      },
+      {
+        "name": "054.exit",
+        "exit": 0,
+        "log_sha256": "578f7690c8102c910ae90f30225df0a41bddb1cb2c268931dd5896debd5178d1"
+      },
+      {
+        "name": "055.exit",
+        "exit": 0,
+        "log_sha256": "092d8af02e39bfbe2f9ba561d1f9cbecb868a62eb815564b488c7e691bed0d1b"
+      },
+      {
+        "name": "056.exit",
+        "exit": 0,
+        "log_sha256": "257faf31fff2b87b4e4d0868b00e8057d699e4f699bb031b61c0c9aa45843fb4"
+      },
+      {
+        "name": "057.exit",
+        "exit": 0,
+        "log_sha256": "14e2e8cf5d2a1fbcab6d38ab9857661dc064edfc608ffa5870b835ff967d2837"
+      },
+      {
+        "name": "058.exit",
+        "exit": 0,
+        "log_sha256": "45d10871cc75be80d063d3200a4f3073c8830732755aa8efb6c3c584acfcf426"
+      },
+      {
+        "name": "059.exit",
+        "exit": 0,
+        "log_sha256": "293cfcb14dcff854996541ab7ff84bfcb97cb34866abe6a648912095db03a288"
+      },
+      {
+        "name": "060.exit",
+        "exit": 0,
+        "log_sha256": "8fc6500c8c9fe929889bd39e36b07cc07bc7cf0358ba518668fde10ba6900718"
+      },
+      {
+        "name": "061.exit",
+        "exit": 0,
+        "log_sha256": "d4dda79f8323cde1b1f1b39750bb2a832cbed7ede9fc4406ccfaf889d485e5e5"
+      },
+      {
+        "name": "062.exit",
+        "exit": 0,
+        "log_sha256": "0c0575c3a8ae044ad1044b4b3527eda98b6ca7ce0c49feef9c5cf863badf2b36"
+      },
+      {
+        "name": "063.exit",
+        "exit": 0,
+        "log_sha256": "1fa7a8fcc7702002542957caf5cbf59b6858a67b686670bb9ea0e1203fe53b56"
+      },
+      {
+        "name": "064.exit",
+        "exit": 0,
+        "log_sha256": "ed7f902c29513830473ccaa27bf07b7922a5e9977528d0fff1d6ba6560e6719f"
+      },
+      {
+        "name": "065.exit",
+        "exit": 0,
+        "log_sha256": "d5a640003f3ef82a533010c3d6779bae2249e4e37cc75379c95662564ef5aba1"
+      },
+      {
+        "name": "066.exit",
+        "exit": 0,
+        "log_sha256": "22db23774e73996f39daebf0dd2b6d3eeddb063f4c94eb60e5c6f6c626cd641b"
+      },
+      {
+        "name": "067.exit",
+        "exit": 0,
+        "log_sha256": "37b56b77692e1c3c8a35a4812ff77f84a40ab1d7ad4e4deaa9d94286cca2e47a"
+      },
+      {
+        "name": "068.exit",
+        "exit": 0,
+        "log_sha256": "339bf45e6e30cabb6fbfde4fb94c9b1abe9cbe5c540abd8d1e91dde1a82f4d60"
+      },
+      {
+        "name": "069.exit",
+        "exit": 0,
+        "log_sha256": "969979ef0f3735d8051ab48a9514d3bc7c8edcf55a8ee6cf816c3f37728341fb"
+      },
+      {
+        "name": "070.exit",
+        "exit": 0,
+        "log_sha256": "cf2a1db749dee3c43f13fc6b000c0e8eee86b212af6f5d6c099327ec873fc5dd"
+      },
+      {
+        "name": "071.exit",
+        "exit": 0,
+        "log_sha256": "68622e21bb8853ec333f2043cae10ff19448e2f608b280a4aade3cbe79e76d20"
+      },
+      {
+        "name": "072.exit",
+        "exit": 0,
+        "log_sha256": "79147e7424262ff58382e2117fae03b24fea531360b631def37a1cc8d41a6dba"
+      },
+      {
+        "name": "073.exit",
+        "exit": 0,
+        "log_sha256": "0889d3e07bd9959ebbda50528610929000d950106c0a938773956e234b9ed5d3"
+      },
+      {
+        "name": "074.exit",
+        "exit": 0,
+        "log_sha256": "e890433dbfd3898db8a936866af2e75a43d1d585b8f5ba69ffd1dbf5a650f055"
+      },
+      {
+        "name": "075.exit",
+        "exit": 0,
+        "log_sha256": "c41640eb8f036b204816fb77da6660e675bb11c20a3e823982907d07e6c679c8"
+      },
+      {
+        "name": "076.exit",
+        "exit": 0,
+        "log_sha256": "b7bb5c81ea70b7310c7eb6bb25d4b67125d33d8c2418958f867fbe4cf292e917"
+      },
+      {
+        "name": "077.exit",
+        "exit": 0,
+        "log_sha256": "9639a554d29649808074d2817ca11e7992b027c920c7cd4d4512173511a514ed"
+      },
+      {
+        "name": "078.exit",
+        "exit": 0,
+        "log_sha256": "71e42622e279b8869d04e5ff3d44e6938d238e58bb1f3eb357b88bc40ab2949b"
+      },
+      {
+        "name": "079.exit",
+        "exit": 0,
+        "log_sha256": "cb699d685297156e065e649be2025f874705f319975a7f226ac8f71528b95e9e"
+      },
+      {
+        "name": "080.exit",
+        "exit": 0,
+        "log_sha256": "19868465827dfd727df3fb5663d41422c049ccd98cc4990491588ab69b5fd6d8"
+      },
+      {
+        "name": "081.exit",
+        "exit": 0,
+        "log_sha256": "59762e6febb92bcb3206b22442354441c4bce22ef2c8282391d864559593daea"
+      },
+      {
+        "name": "082.exit",
+        "exit": 0,
+        "log_sha256": "5a5d1839c67a6e71ad313572878470e4691892d4427ec421f352c68260f16e1e"
+      },
+      {
+        "name": "083.exit",
+        "exit": 0,
+        "log_sha256": "bd9d1c0875e6e86912b9a6413b008b11ec2c730cd6d0c908d1e95a61ba751f88"
+      },
+      {
+        "name": "084.exit",
+        "exit": 0,
+        "log_sha256": "9d8e5debe0c747e1fe485ffa87eeb2326eca0a2fc64ca2018fe396d0a072a2d5"
+      },
+      {
+        "name": "085.exit",
+        "exit": 0,
+        "log_sha256": "80137a6e4cd6d2617ffea0fecbc7d416ef241fabfe0a99ef527dbd95d4416db5"
+      },
+      {
+        "name": "086.exit",
+        "exit": 0,
+        "log_sha256": "f8ae85419972537ca3231fd574797c6280db63325c55b58bcac707dc99f4835e"
+      },
+      {
+        "name": "087.exit",
+        "exit": 0,
+        "log_sha256": "561f203b058c7406feecb895eddc4bf424de4ff53f3520d2790aa77b281f0625"
+      },
+      {
+        "name": "088.exit",
+        "exit": 0,
+        "log_sha256": "59d7e546cb3e67fa5a86573103c0cb1c0fbd09f7210d151ab242b84e03e0b072"
+      },
+      {
+        "name": "089.exit",
+        "exit": 0,
+        "log_sha256": "6253d2e6437c1e3c2ba30a092db6405ec7926b6ebc8ac80ec53cfb95c796c659"
+      },
+      {
+        "name": "090.exit",
+        "exit": 0,
+        "log_sha256": "87ab37cf11146a81f959dacefb106f6ce9d6d89ac95fe5f1301ab23b29a69609"
+      },
+      {
+        "name": "091.exit",
+        "exit": 0,
+        "log_sha256": "ba99b584e737ccbc83742e5840164b379fe70df0c98346e05a8ef56ed4de1e00"
+      },
+      {
+        "name": "092.exit",
+        "exit": 0,
+        "log_sha256": "11d3774df40c662d6f270347788ef2354b417e39b7dc77b19d337f03f406618e"
+      },
+      {
+        "name": "093.exit",
+        "exit": 0,
+        "log_sha256": "2e96f2f9ae73eb8c32be08e08ee9c324641109d548a41ba59858604e4b375fde"
+      },
+      {
+        "name": "094.exit",
+        "exit": 0,
+        "log_sha256": "558b6fa689ee3fc101cd1025430655c2304774efd258a0e299fd915a5b876101"
+      },
+      {
+        "name": "095.exit",
+        "exit": 0,
+        "log_sha256": "c7283824aba2852ad75c2d3a7165f8827ba8dbea17ef03da8201e27ca6e5fb15"
+      },
+      {
+        "name": "096.exit",
+        "exit": 0,
+        "log_sha256": "2c3054ec41542a2124251b68a786d8a0b7d6ab184bef45a595c4865f21d8afd2"
+      },
+      {
+        "name": "097.exit",
+        "exit": 0,
+        "log_sha256": "a9c71a84a305066df5c918af04045641555040601ca6d75ca213c3d638ffa835"
+      },
+      {
+        "name": "098.exit",
+        "exit": 0,
+        "log_sha256": "6b0bdd4ee364ce4ba03a4cf2abc47a25db2433f1fdabab7837de2573d5a0693a"
+      },
+      {
+        "name": "099.exit",
+        "exit": 0,
+        "log_sha256": "1525e423a44c1d30be482a5e4fc10a5e0e24ea3ed6a05b33fe05e4faa6e47d43"
+      },
+      {
+        "name": "100.exit",
+        "exit": 0,
+        "log_sha256": "fd984965d6bd8d8a563cfc247ac5597ad8134008830f6b59d21e4736242f21c2"
+      },
+      {
+        "name": "101.exit",
+        "exit": 0,
+        "log_sha256": "b3f98713882d5aaa833921d665773e67fce0e12ed796d33192022cb4670bdcc7"
+      },
+      {
+        "name": "102.exit",
+        "exit": 0,
+        "log_sha256": "66b8f2d119bb9ec72e0f5a3ce01a51d628e1bf0c349b0dd5910490d81da199e1"
+      },
+      {
+        "name": "103.exit",
+        "exit": 0,
+        "log_sha256": "a9c71a84a305066df5c918af04045641555040601ca6d75ca213c3d638ffa835"
+      }
+    ],
+    "additional_lifecycle_compiles": [
+      {
+        "name": "lifecycle-abi-0.exit",
+        "exit": 0,
+        "log_sha256": "85d5fe26ad63abe77157c13a2a4f167a59381fdc17180bae7f833db57055cc53"
+      },
+      {
+        "name": "lifecycle-abi-1.exit",
+        "exit": 0,
+        "log_sha256": "85d5fe26ad63abe77157c13a2a4f167a59381fdc17180bae7f833db57055cc53"
+      },
+      {
+        "name": "lifecycle-abi-2.exit",
+        "exit": 0,
+        "log_sha256": "85d5fe26ad63abe77157c13a2a4f167a59381fdc17180bae7f833db57055cc53"
+      },
+      {
+        "name": "lifecycle-abi-3.exit",
+        "exit": 0,
+        "log_sha256": "85d5fe26ad63abe77157c13a2a4f167a59381fdc17180bae7f833db57055cc53"
+      },
+      {
+        "name": "lifecycle-abi-4.exit",
+        "exit": 0,
+        "log_sha256": "85d5fe26ad63abe77157c13a2a4f167a59381fdc17180bae7f833db57055cc53"
+      },
+      {
+        "name": "lifecycle-abi-5.exit",
+        "exit": 0,
+        "log_sha256": "85d5fe26ad63abe77157c13a2a4f167a59381fdc17180bae7f833db57055cc53"
+      },
+      {
+        "name": "lifecycle-abi-6.exit",
+        "exit": 0,
+        "log_sha256": "85d5fe26ad63abe77157c13a2a4f167a59381fdc17180bae7f833db57055cc53"
+      }
+    ],
+    "source_tokens_identical": 104,
+    "source_token_comparison_sha256": "b830211d37c43440649f142103688d957f01d86b468b2ca199cac14f226d2441",
+    "source_token_scope": "Primary C translation-unit tokens only;not proof of unchanged header ABI or runtime acceptance",
+    "original_logical_rows_exact": 1862,
+    "line_rows_needing_review": 0,
+    "line_proof_sha256": "2c9d3dde51ecd5bff885cbe97640d992b30feca42e4841b5f8e24ff61c2a8f6e",
+    "counter_review_findings": [
+      "Initial isolated reconstruction omitted the opening of the original323 comment and split the854-857 comment;those malformed experiments are discarded,not evidence against original source.",
+      "Initial lifecycle compile extraction omitted the maintained runner Gz-to-Gd substitution;that run is discarded.",
+      "With correct Gd,restored DispatchClientMessage and CreateMenuFromResource declarations conflict with existing WINAPI declarations. Candidate fixture spells WINAPI around that header inclusion,like its existing UserRegisterWowHandlers adaptation;seven variants compile with assertions retained.",
+      "Four uncomposed private declaration dependencies remain:PEVENT_PACKET,LPHLP,PCURSORDATA/PCURSORFIND;missing bottom private headers remain. This is not proof every historical omission was necessary.",
+      "104 original-order/capture and104 expanded-declaration contexts compiled;final two-phase candidate also104/104. Final source tokens match all104 baseline contexts."
+    ],
+    "remaining_before_production": [
+      "Complete per-point final disposition,including original private header/type recovery alternatives and implicit calling-convention contract.",
+      "Inspect retained original _USERK_ declaration omissions and harmless constants before sealing whole file.",
+      "Synchronize main and pending registers only on completed source dispositions.",
+      "Cached x86/x64,publish11x2,focused and Full runtime tests,final receipt,commit/push."
+    ],
+    "publication": "P235 unchanged;candidate not published;no runtime pass claimed"
+  }
 }

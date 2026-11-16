@@ -39,7 +39,7 @@
   "qualified_pending_decisions": 1432,
   "pending_decisions_count_note": "913 restored delivered;0 local;37 approved/policy;1432 pending;338 unreviewed.",
   "active_rework": "P236 usercli R2383-R2402 whole-file audit;paired compile evidence,production unchanged",
-  "active_investigation": "Public declaration subset restoration compiles;private header/multipass constraints still being minimized;no additional completion count",
+  "active_investigation": "R2383-R2402 isolated whole-file candidate2170->562(-1608);104 actual compiles+7 lifecycle compile variants;104 primary-source token comparisons identical. Final per-point/header ABI counter-review and delivery pending;production unchanged.",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
