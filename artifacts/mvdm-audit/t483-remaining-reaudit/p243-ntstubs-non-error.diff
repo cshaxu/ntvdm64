@@ -3,17 +3,17 @@
 @@ -10,7 +10,8 @@
  * 08-12-96 jparsons         Added lparam validate for WM_NCCREATE [51986]
  \***************************************************************************/
- 
+
 -#include "precomp.h"
 +#define WOW_ORIGINAL_EDIT_STATE
 +#include "wow_edit_state_bindings.h"
  #pragma hdrstop
- 
+
  /*
 @@ -29,15 +30,6 @@
  #define BEGINRECV_VOID() \
      EnterCrit();
- 
+
 -#define BEGINRECV_HWND(type, err, hwnd) \
 -    type retval;                                    \
 -    type errret = err;                              \
@@ -23,27 +23,27 @@
 -        retval = errret;                            \
 -        goto errorexit;                             \
 -    }
- 
+
  #define BEGINRECV_HWND_VOID(hwnd) \
      PWND pwnd;                                      \
 @@ -115,11 +107,6 @@
      LeaveCrit();    \
      return;
- 
+
 -#define ENDRECV_HWND() \
 -    goto errorexit;         \
 -errorexit:                  \
 -    LeaveCrit();            \
 -    return retval;
- 
+
  #define ENDRECV_HWNDLOCK() \
      goto errorexit;         \
 @@ -176,7 +163,6 @@
      DWORD xpfnProc,      \
      BOOL bAnsi)
- 
+
 -#define CALLPROC(p) FNID(p)
- 
+
  /*
   * Validation macros
 @@ -268,5772 +254,156 @@
@@ -5957,7 +5957,7 @@
 @@ -6054,3731 +424,126 @@
      ENDRECV_HWND();
  }
- 
+
 -VOID NtUserAlterWindowStyle(
 -    IN HWND hwnd,
 -    IN DWORD mask,
