@@ -1,4 +1,5 @@
 #include "wow_button_resources.h"
+#include "non-mvdm/windows/core/ntuser/kernel/inctlpan.c"
 #include "button-resources/leaves.h"
 #include <stdio.h>
 #include <string.h>

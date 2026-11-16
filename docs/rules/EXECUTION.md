@@ -799,3 +799,15 @@ original-relative before/after/net reduction and the cumulative net mirror-diff
 reduction against the fixed re-audit source baseline. State the file population
 and line-accounting convention, report diagnostic #line changes separately,
 and never substitute total source lines or sum overlapping historical batches.
+
+Owner diff-point reporting clarification: retain every existing report field.
+For each completed file also report original-relative lexical difference-block
+counts before/after and their net reduction, using the same pinned original,
+CRLF normalization, terminal-empty-line convention and SequenceMatcher
+(autojunk=False) as the line metric, ignoring diagnostic #line directives.
+Each non-equal opcode is one block; no context-line grouping is applied.
+Keep required #error bodies in this lexical count. Separately report register
+points completely restored/confirmed, residual pending points and policy
+exclusions. A shorter diff, a merged block, or a partial restoration does not
+prove a complete register point disappeared. Distinguish local candidates from
+delivered results, and do not inflate audited progress for metric backfills.

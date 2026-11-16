@@ -1,0 +1,120 @@
+{
+  "batch": "P242-accumulation",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+  "source_proof": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+    "baseline_sha256": "27a0e8719c95f95072eca4d356635b4814177772eaef7126d20bcb2cd34e7098",
+    "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+    "candidate_sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d",
+    "before": {
+      "added": 21,
+      "deleted": 706
+    },
+    "after": {
+      "added": 18,
+      "deleted": 706
+    },
+    "matching_original_rows": 136,
+    "line_mismatches": []
+  },
+  "before_total": 727,
+  "after_total": 724,
+  "mirror_diff_delta": -3,
+  "points": [
+    {
+      "id": "T483-R2539",
+      "evidence": "Only DIVERGENCE prose was added before the original include. Removed;original include/pragma preserved. No functional justification needed for this format restoration.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2540",
+      "evidence": "DefSetText allocates/frees original desktop heap and writes kernel WND.strName. Actual original client _DefSetText calls wow_edit_NtUserDefSetText then the resolved system NtUserDefSetText with descriptor conversion. Native USER owns actual window title storage;restoring local kernel text allocation cannot update that storage.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2541",
+      "evidence": "Original FCallerOk dereferences private THREADINFO/ETHREAD and system/logon flags. This translation unit only accepts retained local enrolled WND allocations via wow_window_client_owns_state;borrow checks exact allocation ownership and rejects foreign/resource-only views. It is not a general replacement for kernel privileges. Keep finite boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2542",
+      "evidence": "Original _SetWindowWord writes private kernel WND/PDIALOG and extra bytes. Actual WU32SetWindowWord converts offsets/handles and reaches wow_native_SetWindowWord with mapped native HWND. Modern USER owns that API storage. Restoring a second raw kernel writer does not substitute for native HWND writes;retain omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2543",
+      "evidence": "Original xxxSetWindowLong starts at256. Only diagnostic line synchronization;no independent functional difference. Also restored original245 for its documentation block.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2544",
+      "evidence": "Original DEBUG assert branch is excluded by supported retail configuration. Preserve original framework and logical268/272;replace error explanation with bare error.",
+      "disposition": "approved-exclusion-policy"
+    },
+    {
+      "id": "T483-R2545",
+      "evidence": "Actual native dialog callbacks write HWND DWL_MSGRESULT, and current dlgmgr/RTL getter read same native slot. Native owner probe sends WM_APP,requires0x3141 result while recovered.resultWP stays0. Original local PDIALOG.resultWP assignment writes different storage. Keep narrow native slot leaf;remove comment only. This is storage identity evidence,not circular adapter dependency.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2546",
+      "evidence": "Original DWL_USER begins at298 after conditional native result arm. Correct #line retained;no independent semantic difference.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2547",
+      "evidence": "Original xxxSetWindowData includes kernel style locks,menu locking,parent mutation and server/client procedure mapping. Selected local private setter only passes GWL_STYLE through the existing native continuation;other public negatives use actual USER API/typed procedure facade. Native mutation/notification cannot be replaced with writes to a borrowed WND snapshot. Keep modern storage boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2548",
+      "evidence": "FindPCPD walks private kernel CALLPROCDATA list owned by GetCPD. Actual conversion delegates to resolved system NtUserGetCPD,whose opaque token is consumed by native CallWindowProc;local list cannot issue a compatible system CPD. Preserve system owner rather than duplicate conversion cache.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2549",
+      "evidence": "Original GetCPD allocates TYPE_CALLPROC from kernel handle manager and links class lists. Actual wow_edit_native_NtUserGetCPD calls system export and returns its opaque token. Local original kernel allocation would not create a modern USER token. Keep omission pending owner;DEBUG frames retained.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2550",
+      "evidence": "Four original GetCPD DEBUG conditional frameworks remain;unsupported bodies are bare error. Logical749/759/776/781 groups and original endif lines preserved;FE_IME frame in selected setter similarly normalized. No selected behavior changed.",
+      "disposition": "approved-exclusion-policy"
+    },
+    {
+      "id": "T483-R2551",
+      "evidence": "MapClientToServerPfn searches original shared gpsi client stub tables and returns STOCID. Modern USER server dispatch tables are not the retained control view;actual native procedure facade consumes native callbacks/opaque CPDs. Reintroducing NT4 server indexes would not identify native server procedures. Keep omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    }
+  ],
+  "validation": "Baseline/final candidate actual optimized x86 compile pass. Code/data/relocation section bytes match excluding .debug$S/.chks64 metadata.136 original nonempty logical rows checked;all matching original lines exact;DEBUG/FE_IME frames retained. No new runtime test or full delivery claimed.",
+  "call_chain": [
+    "src/wow32-dll/source/wow_window_client_access_bindings.c:14-35,110-129",
+    "src/wow32-dll/source/wow_edit_native_bindings.c:127-133,181-186",
+    "src/wow32-dll/source/wow_user_private_access.c:114-135",
+    "src/wow32-dll/source/wow_window_client_state_bindings.c:263-282",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c:180-190"
+  ],
+  "limits": "Existing fixture evidence is not a new P242 execution. Native title/style/procedure and dialog result storage boundaries remain pending owner;original kernel code is not claimed defective.",
+  "lexical_diff_point_metrics": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+    "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+    "before_sha256": "27a0e8719c95f95072eca4d356635b4814177772eaef7126d20bcb2cd34e7098",
+    "after_sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d",
+    "before": {
+      "blocks": 12,
+      "added": 21,
+      "deleted": 706
+    },
+    "after": {
+      "blocks": 11,
+      "added": 18,
+      "deleted": 706
+    },
+    "blocks_removed": 1,
+    "lines_removed": 3,
+    "state": "local-reviewed-not-delivered"
+  },
+  "delivery_receipt": "batch-p242-checkpoint.json",
+  "delivery_status": "Final code cached,published11x2,focused34,Full20,boundary/governance passed;Git delivery accompanies receipt"
+}

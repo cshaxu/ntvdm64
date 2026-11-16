@@ -619,7 +619,6 @@ foreach ($drawingPart in @('draw', 'mngrayc')) {
         $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT')
     }
 }
-$atlasTableObject = 'obj/opennt-user/button-atlas-table.obj'
 $buttonObject = 'obj/opennt-user/button-client.obj'
 $objects.Add($buttonObject)
 $ninja.Add('build ' + $buttonObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/btnctl.c')))
@@ -628,9 +627,6 @@ $buttonBlitObject = 'obj/opennt-user/button-blit.obj'
 $objects.Add($buttonBlitObject)
 $ninja.Add('build ' + $buttonBlitObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/mngrayc.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_BLIT_ONLY')
-$objects.Add($atlasTableObject)
-$ninja.Add('build ' + $atlasTableObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c')))
-$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-resources')) + '" $cflags $control_user_flags')
   $probeObject = 'obj/opennt-user/probe.obj'
   $cleanupObject = 'obj/opennt-user/cleanup.obj'
   $handleFlagsObject = 'obj/opennt-user/handtabl.obj'
@@ -674,7 +670,9 @@ foreach ($source in $providerSupportSources) {
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
-    if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
+    if ([IO.Path]::GetFileName($source) -eq 'wow_button_resources.c') {
+        $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-resources')) + '" $adapter_cflags')
+    } elseif ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
         $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase) -or
         $source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
         $ninja.Add('  cflags = $adapter_cflags')

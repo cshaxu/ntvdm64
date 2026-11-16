@@ -11,12 +11,11 @@
 * 08-Feb-1991 IanJa     Unicode/ANSI aware and neutral
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-086): complete xxxSetWindowLong only.
- * Retained local WND/control state; no USER server runtime import. */
 #line 14
 #include "precomp.h"
 #pragma hdrstop
 
+#line 245
 /***************************************************************************\
 * xxxSetWindowLong (API)
 *
@@ -44,7 +43,7 @@ DWORD xxxSetWindowLong(
 #line 268
 #ifdef DEBUG
 #line 269
-#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#error
 #line 272
 #endif
 #line 273
@@ -70,7 +69,6 @@ DWORD xxxSetWindowLong(
             switch (index) {
             case DWL_MSGRESULT:
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-                 /* DIVERGENCE(OPENNT-HOST-121): same slot as native callbacks. */
                  return wow_dialog_host_set(HW(pwnd), index, dwData, bAnsi);
 #else
 #line 294
@@ -105,7 +103,7 @@ DWORD xxxSetWindowLong(
 #line 320
 #ifdef FE_IME
 #line 321
-#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
+#error
 #endif
 #line 323
                     /*
@@ -171,14 +169,14 @@ SetData:
 #line 749
 #ifdef DEBUG
 #line 750
-#error Excluded unsupported original DEBUG branch
+#error
 #endif
 #line 752
 
 #line 759
 #ifdef DEBUG
 #line 760
-#error Excluded unsupported original DEBUG branch
+#error
 #line 769
 #endif
 #line 770
@@ -186,14 +184,14 @@ SetData:
 #line 776
 #ifdef DEBUG
 #line 777
-#error Excluded unsupported original DEBUG branch
+#error
 #endif
 #line 779
 
 #line 781
 #ifdef DEBUG
 #line 782
-#error Excluded unsupported original DEBUG branch
+#error
 #line 793
 #endif // DEBUG
 #line 794

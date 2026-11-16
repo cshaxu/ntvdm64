@@ -1,0 +1,119 @@
+{
+  "batch": "P242-accumulation",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "source_proof": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+    "baseline_sha256": "7c4f2eba0dec5987c17bd7c8729742006f820cda9e95834720800aa57988d4ca",
+    "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+    "candidate_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+    "before": {
+      "added": 17,
+      "deleted": 485
+    },
+    "after": {
+      "added": 14,
+      "deleted": 484
+    },
+    "matching_original_rows": 64
+  },
+  "before_total": 502,
+  "after_total": 498,
+  "mirror_diff_delta": -4,
+  "points": [
+    {
+      "id": "T483-R2526",
+      "evidence": "Original precomp.h requires ntos.h,w32p.h,gre.h,userk.h;the actual user-mode WOW provider has neither NT4 kernel layouts nor kernel object authority. Identical header failure established by P242 class controls. Restore hdrstop,remove divergence prose;finite user-mode bindings remain pending.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2527",
+      "evidence": "Original OPTIONMASK,windowstation logoff globals and RtlZeroHeap declaration serve the omitted system-session shutdown functions only. They cannot represent modern kernel windowstation state;no registration consumer uses them. Keep system ownership boundary pending rather than introduce unused duplicate globals.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2528",
+      "evidence": "NotifyLogon traverses kernel windowstations and posts to their Winlogon windows. WOW WU32ExitWindows calls public ExitWindows;system session/Winlogon ownership stays in modern USER. Restoring this local kernel implementation cannot operate on its private lists in a user-mode provider.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2529",
+      "evidence": "InitiateShutdown uses ETHREAD/EPROCESS,GetProcessLuid,SeSinglePrivilegeCheck and private windowstation access/locks. These are modern system responsibilities,not the recovered WOW registration domain. Original LATER conditional is preserved separately with excluded body error.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2530",
+      "evidence": "EndShutdown updates kernel windowstation/desktop state and shutdown notification under original USER ownership. It has no actual registration consumer;local copies cannot unlock modern system windowstations. Preserve system boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2531",
+      "evidence": "xxxClientShutdown2 uses original kernel WND locks,server send and timer destruction during system session shutdown. Native USER retains actual windows/timers;public ExitWindows path is retained by WOW. Reintroducing it would duplicate the system owner without its private objects.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2532",
+      "evidence": "xxxClientShutdown builds kernel desktop window lists and writes THREADINFO shutdown flags. Current registration carrier is not a desktop or kernel thread;modern USER owns these notifications. Keep omission pending owner,not an application shutdown workaround.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2533",
+      "evidence": "Relocated historical anchor corresponds to gpwpiFirstWow binding. The original registration list insertion remains verbatim;head belongs to caller process shared domain. Runtime lifecycle passes owner.process under its lock;an unrelated original kernel global would disconnect that domain.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2534",
+      "evidence": "Original ObReferenceObjectByHandle returns referenced kernel object;current scheduler waits/signals/closes a user event HANDLE. Existing helper duplicates with SAME_ACCESS and validates granted EVENT_ALL_ACCESS/type;fixture closes original handle and verifies retained reference still signals. Preserve original call body and narrow binding;not a second event owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2535",
+      "evidence": "Original registration declaration begins at508;line mapping only,not a semantic change. Matching original function rows verified;no residual functional diff at this point.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2536",
+      "evidence": "Explicit process parameter replaces unavailable kernel PpiCurrent. Actual lifecycle caller selects owner.process while holding runtime lock;allocation and retirement use same owner. Compact parameter formatting only,without introducing ambient TLS.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2537",
+      "evidence": "ppi=currentProcess is the paired lookup adaptation for R2536;original PpiCurrent derives private kernel current-thread process,not this finite carrier. Existing registration fixture covers distinct process views sharing one domain.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2538",
+      "evidence": "Original #ifndef LATER/#else/#endif frame retained;excluded body now bare error;logical134/136/142 restored explicitly. No selected code introduced.",
+      "disposition": "approved-exclusion-policy"
+    }
+  ],
+  "validation": "Baseline/final candidate actual optimized x86 compile pass. Code/data/relocation section bytes match excluding .debug$S/.chks64 metadata.64 original nonempty logical rows checked;explicit relocated LATER frame134/136/142. No new runtime test or full delivery claimed.",
+  "call_chain": [
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:462-482,1858-1862",
+    "src/wow32-dll/source/wow_task_event_binding.c:8-40",
+    "src/mvdm-host/wow32/wuman.c:36-45",
+    "src/mvdm-host/wow32/wuser31.c:852",
+    "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c:650-689"
+  ],
+  "limits": "Existing fixture evidence is not a new P242 execution. Original relative omitted shutdown scope is a modern system ownership boundary requiring owner decision,not a claim original NT4 shutdown is defective.",
+  "lexical_diff_point_metrics": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+    "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+    "before_sha256": "7c4f2eba0dec5987c17bd7c8729742006f820cda9e95834720800aa57988d4ca",
+    "after_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+    "before": {
+      "blocks": 4,
+      "added": 17,
+      "deleted": 485
+    },
+    "after": {
+      "blocks": 5,
+      "added": 14,
+      "deleted": 484
+    },
+    "blocks_removed": -1,
+    "lines_removed": 4,
+    "state": "local-reviewed-not-delivered"
+  },
+  "delivery_receipt": "batch-p242-checkpoint.json",
+  "delivery_status": "Final code cached,published11x2,focused34,Full20,boundary/governance passed;Git delivery accompanies receipt"
+}

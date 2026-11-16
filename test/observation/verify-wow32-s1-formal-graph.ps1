@@ -80,7 +80,7 @@ $expectedUser = @(
     'default-borders', 'default-messages', 'control-draw',
     'control-text-client', 'control-text-rtl', 'control-text-extent',
     'control-client-draw', 'control-client-mngrayc', 'button-client',
-    'button-blit', 'button-atlas-table', 'handtabl', 'cleanup', 'probe',
+    'button-blit', 'handtabl', 'cleanup', 'probe',
     'class-remove', 'class-register', 'taskman', 'input', 'profile', 'queue',
     'exitwin', 'class-client', 'class'
 )
@@ -88,6 +88,11 @@ $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
     ForEach-Object { $_.Groups[1].Value })
 if (@(Compare-Object $expectedUser $actualUser).Count) {
     throw 'The original OpenNT USER-owner object set differs from the admitted formal graph.'
+}
+if ($link -notmatch '\bobj/wow32-dll/wow_button_resources\.obj\b' -or
+    [IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/source/wow_button_resources.c')) -notmatch
+        '#include "non-mvdm/windows/core/ntuser/kernel/inctlpan\.c"') {
+    throw 'The button resource owner must compile the original static atlas table.'
 }
 
 $targetSources = @([regex]::Matches([IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/sources')),

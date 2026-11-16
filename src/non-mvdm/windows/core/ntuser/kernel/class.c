@@ -12,24 +12,31 @@
 * 04-08-91 DarrinM      C-S-ized and removed global/public class support.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-039/059/060): original class-list lookup and separately
- * compiled server registration wrapper. Native storage remains external; no USER
- * server, kernel allocation, process, desktop or handle engine is imported.
- * The binding supplies only their finite caller-owned metadata view. */
+#line 16
+#pragma hdrstop
 #ifdef WOW_ORIGINAL_CLASS_REGISTRATION
-/* DIVERGENCE(OPENNT-HOST-059): original server registration wrapper;
- * explicit current-thread and required registration/CPD boundary bindings. */
 #include "wow_class_register_bindings.h"
 
-#line 80
+#line 68
+/***************************************************************************\
+* _RegisterClass (API)
+*
+* This stub calls InternalRegisterClass to do its work and then does some
+* additional work to save a pointer to the client-side menu name string.
+* The menu string is returned by _GetClassInfo so the client can fix up
+* a valid entry for the WNDCLASS lpszMenuName field.
+*
+* History:
+* 04-26-91 DarrinM      Created.
+\***************************************************************************/
+
 ATOM _RegisterClassEx(
     LPWNDCLASSEX pwc,
     PROC lpfnWorker,
     PCLSMENUNAME pcmn,
     WORD fnid,
     DWORD dwFlags,
-    LPDWORD pdwWOW,
-    wow_class_register_context *context )
+    LPDWORD pdwWOW, wow_class_register_context *context )
 #line 87
 {
     PCLS pcls;
@@ -77,16 +84,35 @@ ATOM _RegisterClassEx(
     }
 }
 #elif defined(WOW_ORIGINAL_CLASS_REMOVAL)
-/* DIVERGENCE(OPENNT-HOST-060): original removal policy with explicit context
- * and native destruction failure propagation. */
 #include "wow_class_remove_bindings.h"
 
-#line 500
+#line 478
+/***************************************************************************\
+* _UnregisterClass (API)
+*
+* This API function is used to unregister a window class previously
+* registered by the Application.
+*
+* Returns:
+*     TRUE  if successful.
+*     FALSE otherwise.
+*
+* NOTE:
+*  1. The class name must have been registered earlier by this client
+*     through RegisterClass().
+*  2. The class name should not be one of the predefined control classes.
+*  3. All windows created with this class must be destroyed before calling
+*     this function.
+*
+* History:
+* 10-15-90 DarrinM      Ported from Win 3.0 sources.
+* 03-09-94 BradG        Fixed bug when ATOM was passed in
+\***************************************************************************/
+
 BOOL _UnregisterClass(
     LPWSTR lpszClassName,
     HANDLE hModule,
-    PCLSMENUNAME pcmn,
-    wow_class_remove_context *context)
+    PCLSMENUNAME pcmn, wow_class_remove_context *context)
 #line 504
 {
     ATOM atomT;
@@ -139,8 +165,7 @@ BOOL _UnregisterClass(
     /*
      * Release the Window class and related information.
      */
-    /* DIVERGENCE(OPENNT-HOST-060): propagate native class-release failure. */
-    if (!DestroyClass(ppcls))
+        if (!DestroyClass(ppcls))
         return FALSE;
 
 #line 557
@@ -243,14 +268,14 @@ PPCLS GetClassPtr(
 #line 1070
 #ifdef DBG
 #line 1071
-#error Unsupported DBG original branch
+#error
 #endif
 #line 1075
 
 #line 375
 #ifdef FE_SB // InternalRegisterClassEx()
 #line 376
-#error Unsupported FE_SB original branch
+#error
 #else
 #line 378
 #endif // FE_SB

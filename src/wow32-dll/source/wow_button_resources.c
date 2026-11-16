@@ -1,4 +1,5 @@
 #include "wow_button_resources.h"
+#include "non-mvdm/windows/core/ntuser/kernel/inctlpan.c"
 
 /* OPENNT-HOST-113 resource boundary. Original inctlpan.c owns the state
  * table; native GDI owns objects. The derived layout is scoped, not a second

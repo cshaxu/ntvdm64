@@ -1433,3 +1433,19 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [Investigation](p241-user-investigation.json): user.h R2460-R2483;original-order candidate and duplicate binding removal applied;mirror2666->265(-2401). Isolated110 contexts and full WOW link pass;cached build/publication/runtime/Git pending.
 
 - [P241 delivery](batch-p241-checkpoint.json): user.h original order restored;mirror2666->265(-2401);cached,publish11x2,focused34,Full20 passed;14 residuals pending owner;Git delivery accompanies receipt.
+
+- [P242 class audit](p242-class-review.json): R2484-R2499;mirror1440->1394(-46);three selected token streams identical;format-only accumulation,delivery pending.
+
+- [P242 cleanup audit](p242-cleanup-review.json): R2500-R2525;mirror82->68(-14);actual object code/data/relocations unchanged;source comparator repaired with two negative controls;accumulated batch -60,delivery pending.
+
+- [P242 exitwin audit](p242-exitwin-review.json): R2526-R2538;mirror502->498(-4);actual optimized code/data/relocations unchanged;64 original rows and LATER frame mapped;accumulated -64,delivery pending.
+
+- [P242 per-file difference-block metrics](p242-diff-point-metrics.json): adds before/after block counts without replacing line/register/delivery metrics. Restored original islands can split one block into two;getset source review and equivalent cleanup are complete;delivery remains pending.
+
+- [P242 getset audit](p242-getset-review.json): R2539-R2551;mirror727->724(-3),blocks12->11;136 original rows,optimized code/data/relocations unchanged;batch -67,delivery pending.
+
+- [P242 handtabl audit](p242-handtabl-review.json): R2552-R2565;mirror2169->2166(-3),blocks33->34;original table/condition lines checked,optimized code/data/relocations unchanged;batch -70,delivery pending.
+
+- [P242 inctlpan audit](p242-inctlpan-review.json): R2566-R2581;mirror1065->1052(-13),blocks8->5;static table restored,extern/separate object removed;batch -83,full delivery required.
+
+- [P242 delivery](batch-p242-checkpoint.json): six mirrors -83;static table restoration and equivalent cleanup;cached,publish11x2,focused34,Full20 passed;Git delivery accompanies receipt.

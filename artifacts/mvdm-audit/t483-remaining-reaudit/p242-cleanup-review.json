@@ -1,0 +1,411 @@
+{
+  "batch": "P242-accumulation",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+  "source_proof": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "baseline_sha256": "8f9ffcfa5ab44841e9a4305a8ee2d417ce6e69872f3173f6bf7b9a5b87ebb72f",
+    "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+    "binding": "src/wow32-dll/include/wow_cleanup_bindings.h",
+    "binding_baseline_sha256": "d7d9240e2e764650e9255a3cfb8ca3b2cf76e15f9e9ce72ed5a799fc856eb79a",
+    "before": {
+      "added": 36,
+      "deleted": 46
+    },
+    "after": {
+      "added": 25,
+      "deleted": 43
+    },
+    "matching_original_rows": 360,
+    "candidate_sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3",
+    "note": "Candidate only;actual compile and selected line validation pending"
+  },
+  "before_total": 82,
+  "after_total": 68,
+  "mirror_diff_delta": -14,
+  "initial_and_counter_review": "Whole26 points completed in list order;residuals qualified by source,ABI and existing real native fixtures;no new behavior",
+  "coff_comparison": {
+    "all_sections_equal": false,
+    "baseline": [
+      {
+        "name": ".drectve",
+        "size": 47,
+        "data_sha256": "23076615271abf1af5c29214a381c43e30e7a0950c49ba927758c527482e4c63",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1051136
+      },
+      {
+        "name": ".debug$S",
+        "size": 144,
+        "data_sha256": "8033d7f4788dfd0c23123f00d1e2983dbc11742f24b8fc897b366e8dc823d8a7",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1108344896
+      },
+      {
+        "name": ".text$mn",
+        "size": 79,
+        "data_sha256": "fa678bf7d3c5d03d939e6a092f4e30812fcee2858c6b54c93b3d8ca28da85801",
+        "relocations_sha256": "5350595ff2ae31ebab436c493df5fd4ec1e2aed5ebedeaff7e5be05f55a601f1",
+        "flags": 1615859744
+      },
+      {
+        "name": ".debug$F",
+        "size": 16,
+        "data_sha256": "0c7d9856fbe69ece5f26166dba1eff4688166941dbdf2237c27a9f4ec3553deb",
+        "relocations_sha256": "3435a525d17b40ba7af2a496e7ec65b9e6c841119efd933f0e9fa7d1dc9ded05",
+        "flags": 1108348992
+      },
+      {
+        "name": ".text$mn",
+        "size": 57,
+        "data_sha256": "13892c66caffca0b7832b8bd4ae17a0bd69cc70366df2c6e0eca460ad52dcd39",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1615859744
+      },
+      {
+        "name": ".debug$F",
+        "size": 16,
+        "data_sha256": "12af15696efd17fcac8ad9c9358b01de93ff366d8ab696733ac7a628ff7d7c20",
+        "relocations_sha256": "e57fffd90a9cd44f7ba38e155b44cc3dc84986b18f5633862f28364bc4856651",
+        "flags": 1108348992
+      },
+      {
+        "name": ".text$mn",
+        "size": 69,
+        "data_sha256": "bfb1ec78a37e73a94b20d063d037c61244d4dc97bbd47c1a963be2cbec629d7a",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1615859744
+      },
+      {
+        "name": ".debug$F",
+        "size": 16,
+        "data_sha256": "d3588c10a55beeb3f318c0f19ab0afd69edbb027b458e31442b1df25ef25fe8f",
+        "relocations_sha256": "646f363953c7437978ddf5507c660db36bd17bedd7e4748635313fc0fab0e0e7",
+        "flags": 1108348992
+      },
+      {
+        "name": ".text$mn",
+        "size": 1119,
+        "data_sha256": "8e11c0d82f766bccdf4aca1ef746725db0778ffef914710c01c5b401045785f1",
+        "relocations_sha256": "5d891ccc42d1ed240900f34aacb4b5c712fc4bb09190625b22a5c68a93b5accf",
+        "flags": 1615859744
+      },
+      {
+        "name": ".xdata$x",
+        "size": 28,
+        "data_sha256": "9b3750d1bee7c23642a1280479e03c36e9fd91c8bfb96471957d2b1eee562c11",
+        "relocations_sha256": "b0a7ae87a12ee36588d02d0f9a259e88ddf982f2e838f499f71a4421cad10edf",
+        "flags": 1077940288
+      },
+      {
+        "name": ".bss",
+        "size": 52,
+        "data_sha256": "9ee1e910d6f9743387104137c58019fbcb82c5c225c06de8d76eb187919874e7",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 3224371328
+      },
+      {
+        "name": ".data",
+        "size": 4,
+        "data_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 3224371264
+      },
+      {
+        "name": ".sxdata",
+        "size": 4,
+        "data_sha256": "b01099398ce27bbcb7ed256854acc338ba75af739e9d73d741dcb13dc4cbfb56",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 3146240
+      },
+      {
+        "name": ".chks64",
+        "size": 112,
+        "data_sha256": "d25a38bd4a99be9f63044aa0eabbdc225d5b692971da607ea5d939ee4b09bb29",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 2560
+      }
+    ],
+    "candidate": [
+      {
+        "name": ".drectve",
+        "size": 47,
+        "data_sha256": "23076615271abf1af5c29214a381c43e30e7a0950c49ba927758c527482e4c63",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1051136
+      },
+      {
+        "name": ".debug$S",
+        "size": 144,
+        "data_sha256": "ddbda81bdb75745ad00ef3684fcd52238b0abbcc1c5a34470d33f2e58365d1a7",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1108344896
+      },
+      {
+        "name": ".text$mn",
+        "size": 79,
+        "data_sha256": "fa678bf7d3c5d03d939e6a092f4e30812fcee2858c6b54c93b3d8ca28da85801",
+        "relocations_sha256": "5350595ff2ae31ebab436c493df5fd4ec1e2aed5ebedeaff7e5be05f55a601f1",
+        "flags": 1615859744
+      },
+      {
+        "name": ".debug$F",
+        "size": 16,
+        "data_sha256": "0c7d9856fbe69ece5f26166dba1eff4688166941dbdf2237c27a9f4ec3553deb",
+        "relocations_sha256": "3435a525d17b40ba7af2a496e7ec65b9e6c841119efd933f0e9fa7d1dc9ded05",
+        "flags": 1108348992
+      },
+      {
+        "name": ".text$mn",
+        "size": 57,
+        "data_sha256": "13892c66caffca0b7832b8bd4ae17a0bd69cc70366df2c6e0eca460ad52dcd39",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1615859744
+      },
+      {
+        "name": ".debug$F",
+        "size": 16,
+        "data_sha256": "12af15696efd17fcac8ad9c9358b01de93ff366d8ab696733ac7a628ff7d7c20",
+        "relocations_sha256": "e57fffd90a9cd44f7ba38e155b44cc3dc84986b18f5633862f28364bc4856651",
+        "flags": 1108348992
+      },
+      {
+        "name": ".text$mn",
+        "size": 69,
+        "data_sha256": "bfb1ec78a37e73a94b20d063d037c61244d4dc97bbd47c1a963be2cbec629d7a",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 1615859744
+      },
+      {
+        "name": ".debug$F",
+        "size": 16,
+        "data_sha256": "d3588c10a55beeb3f318c0f19ab0afd69edbb027b458e31442b1df25ef25fe8f",
+        "relocations_sha256": "646f363953c7437978ddf5507c660db36bd17bedd7e4748635313fc0fab0e0e7",
+        "flags": 1108348992
+      },
+      {
+        "name": ".text$mn",
+        "size": 1119,
+        "data_sha256": "8e11c0d82f766bccdf4aca1ef746725db0778ffef914710c01c5b401045785f1",
+        "relocations_sha256": "5d891ccc42d1ed240900f34aacb4b5c712fc4bb09190625b22a5c68a93b5accf",
+        "flags": 1615859744
+      },
+      {
+        "name": ".xdata$x",
+        "size": 28,
+        "data_sha256": "9b3750d1bee7c23642a1280479e03c36e9fd91c8bfb96471957d2b1eee562c11",
+        "relocations_sha256": "b0a7ae87a12ee36588d02d0f9a259e88ddf982f2e838f499f71a4421cad10edf",
+        "flags": 1077940288
+      },
+      {
+        "name": ".bss",
+        "size": 52,
+        "data_sha256": "9ee1e910d6f9743387104137c58019fbcb82c5c225c06de8d76eb187919874e7",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 3224371328
+      },
+      {
+        "name": ".data",
+        "size": 4,
+        "data_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 3224371264
+      },
+      {
+        "name": ".sxdata",
+        "size": 4,
+        "data_sha256": "b01099398ce27bbcb7ed256854acc338ba75af739e9d73d741dcb13dc4cbfb56",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 3146240
+      },
+      {
+        "name": ".chks64",
+        "size": 112,
+        "data_sha256": "66c6025dfdefffc86924adc4ba88d3e52417554b6b4ae93da603e83239317160",
+        "relocations_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "flags": 2560
+      }
+    ],
+    "limit": "COFF section data and relocation bytes;file/header metadata not executable behavior"
+  },
+  "coff_conclusion": "All code/data/relocation sections equal;only .debug$S/.chks64 differ;not whole object or PE byte identity",
+  "source_audit": {
+    "previous_baseline_exit": 1,
+    "previous_error": "Old comparator included #line as source content",
+    "corrected_baseline_exit": 0,
+    "final_exit": 0,
+    "negative_controls": [
+      {
+        "exit": 1,
+        "case": "bad-bound",
+        "stderr": "Exception: O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-wow-cleanup-bounds.ps1:132\r\nLine |\r\n 132 |      throw 'Both procedure-index bounds must use element count'\r\n     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Both procedure-index bounds must use element count\r\n"
+      },
+      {
+        "exit": 1,
+        "case": "bad-release",
+        "stderr": "Exception: O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-wow-cleanup-bounds.ps1:106\r\nLine |\r\n 106 |      throw 'Cleanup failure/result contract changed'\r\n     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Cleanup failure/result contract changed\r\n"
+      }
+    ],
+    "limits": "Symbolic original-bound proof,not application reproduction;source comparator retains original hashes and complete selected-body restoration checks"
+  },
+  "points": [
+    {
+      "id": "T483-R2500",
+      "evidence": "Original kernel precomp/ClientDied belongs to paired NT4 server thread death and ExRaiseStatus(STATUS_PORT_DISCONNECTED). Actual modern USER cleanup has no ClientDied call;native broker/task lifecycle owns failure. Original extern gabObjectCreateFlags restored here;binding declaration removed. Original hdrstop restored;divergence prose removed.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2501",
+      "evidence": "Original precomp.h includes ntos.h,w32p.h,gre.h,userk.h. P242 class controls use the same global Ninja compiler context and reject this identical header before file bodies. Private NT4 kernel objects cannot replace modern USER ownership. Finite binding include retained;pragma restored.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2502",
+      "evidence": "Original187-217 first-call shared procedure initialization is already byte-identical within current selected body. Confirmed against pinned source;no additional rewrite.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2503",
+      "evidence": "Only #line43 originally introduced here;function source remains original. Preserve correct original logical location;no semantic residual.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2504",
+      "evidence": "PseudoDestroyClassWindows needs actual invocation ownership for native GWL_WNDPROC writes;recursive current task context is explicit. Removing it would require ambient state or erase the owning native operation. Retain pending owner decision.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2505",
+      "evidence": "Original assigns kernel WND.lpfnWndProc. Current borrowed view is not the native USER window;wow_cleanup_set_window_procedure performs SetWindowLongA and updates the view/source flag. Real SendMessage fixture verifies callbacks stop;plain view assignment cannot alter actual dispatch.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2506",
+      "evidence": "Recursive PseudoDestroyClassWindows must carry the same native cleanup context to children;same source ownership proof as R2504/2505. No alternate context/TLS introduced.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2507",
+      "evidence": "BOOL result carries failure from fallible native cleanup to registered_cleanup,which aborts before guest GlobalFreeAll if cleanup failed. Original void API belongs to kernel-owned objects. Retain explicit native failure result without another status channel.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2508",
+      "evidence": "Explicit context binds thread,process,handle table and native release callbacks for this invocation;original global kernel PpiCurrent is not current USER ownership. Compact parameter layout only;same ABI.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2509",
+      "evidence": "Selector-copy allocation failure leaves live guest callbacks unneutralized. Propagate FALSE through lifecycle_exit/registered_cleanup before guest resource release;existing fail_alloc fixture verifies failure and state restoration. Original kernel null return is not evidence that silent host cleanup success is valid.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2510",
+      "evidence": "Original _X86_ if/else framework retained;unsupported non-x86 probe alignment body remains bare error. Selected x86 original ProbeForRead code unchanged;approved exclusion policy.",
+      "disposition": "approved-exclusion-policy"
+    },
+    {
+      "id": "T483-R2511",
+      "evidence": "Only original line234 synchronization;retained selector copy is original. No independent semantic residual.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2512",
+      "evidence": "Probe exception frees selector copy but has not neutralized all live native callbacks. FALSE reaches registered_cleanup before guest resource retirement. Existing PAGE_NOACCESS fixture proves rejection and release count;retain failure status.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2513",
+      "evidence": "Native CPD/high-bit procedure values are not necessarily encoded guest selectors. build_tree obtains guest identity through wow_window_entry_guest_target,not the high bit;original class path itself recognizes CPD tag FFFF. Preserve typed source guard so a matching numeric selector cannot overwrite a native target. Source/ABI proof,not claimed spontaneous crash reproduction.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2514",
+      "evidence": "Same actual-window storage boundary as R2505;plain metadata write does not affect native GWL_WNDPROC or dispatch. Remove redundant comment only.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2515",
+      "evidence": "Original void DestroyClass always unlinks *ppcls. Native UnregisterClassA can reject a live window,leaving the same node. Original loop continuation would retry that node indefinitely. Existing real-window fixture proves rejection;return FALSE ends the traversal and propagates failure.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2516",
+      "evidence": "Only original line310 synchronization after added failure return. Original else/comment content retained;no independent semantic residual.",
+      "disposition": "restored-confirmed-pending-delivery"
+    },
+    {
+      "id": "T483-R2517",
+      "evidence": "Class-window recursion must use current invocation owner for actual native procedure writes;retain explicit context,not an additional ambient owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2518",
+      "evidence": "Pinned original has13 PROC entries but compares index against sizeof(spfnwp)=52 on actual x86 provider. Index13 is already beyond the table. Keep element-count bound;symbolic definite range defect,application runtime reachability not claimed.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2519",
+      "evidence": "wow_class_words_restore_procedure writes the locked logical class target and clears procedure_is_guest. Direct original CLS field assignment omits source-state update and synchronization;subsequent window creation would retain wrong target kind. Existing live cleanup fixture verifies newly created windows use restored native target.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2520",
+      "evidence": "Fallback comparison must use the same13-element bound;fallback class write must update actual logical target/source state,as R2518/2519. No new behavior introduced.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2521",
+      "evidence": "Module-cleanup success returns TRUE only after all selected operations complete;paired with failure result at R2507/2509/2512/2515. Keep existing BOOL ABI rather than add another status owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2522",
+      "evidence": "Task cleanup neutralizes actual native window procedure,not only borrowed view. Existing live SendMessage fixture verifies no later guest callback. Retain native storage leaf;remove redundant comment.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2523",
+      "evidence": "Task-cleanup success result belongs to same finite BOOL contract;retain with explicit failure channel.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2524",
+      "evidence": "Thread-cleanup class loop has same unlink-progress premise as R2515;native rejection must exit instead of retrying unchanged *ppcls. Real window test exercises FALSE and later successful destruction.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2525",
+      "evidence": "Final TRUE communicates completed traversal through existing BOOL call chain;#line457 preserves original closing brace. Do not replace with unspecified void return while caller checks cleanup outcome.",
+      "disposition": "qualified-pending-owner"
+    }
+  ],
+  "call_chain": [
+    "src/wow32-dll/source/wow_user_registration_bridge.c:343-367",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:1685-1713",
+    "src/wow32-dll/source/wow_cleanup_bindings.c:5-44,100-132",
+    "src/wow32-dll/source/wow_class_words_binding.c:390-400,507-567",
+    "test/adapter-mvdm-host-out/wow/wow_cleanup_fixture.c:120-193,253-330"
+  ],
+  "validation": "Actual baseline/candidate compilation passed;selected code/data/relocations unchanged;source-audit positive and two negative controls passed. No P242 full build/publication/runtime/commit claimed. Declaration restoration and format changes accumulate per owner rule.",
+  "lexical_diff_point_metrics": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+    "before_sha256": "8f9ffcfa5ab44841e9a4305a8ee2d417ce6e69872f3173f6bf7b9a5b87ebb72f",
+    "after_sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3",
+    "before": {
+      "blocks": 21,
+      "added": 36,
+      "deleted": 46
+    },
+    "after": {
+      "blocks": 22,
+      "added": 25,
+      "deleted": 43
+    },
+    "blocks_removed": -1,
+    "lines_removed": 14,
+    "state": "local-reviewed-not-delivered"
+  },
+  "delivery_receipt": "batch-p242-checkpoint.json",
+  "delivery_status": "Final code cached,published11x2,focused34,Full20,boundary/governance passed;Git delivery accompanies receipt"
+}

@@ -1,0 +1,394 @@
+{
+  "batch": "P242-accumulation",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "source_proof": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "baseline_sha256": "e4a6190ec6c46a3b5b52c8b1d04db74c9bb772cbbded15cd7debc88685ae9eaf",
+    "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+    "candidate_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+    "before": {
+      "blocks": 33,
+      "added": 83,
+      "deleted": 2086
+    },
+    "after": {
+      "blocks": 34,
+      "added": 81,
+      "deleted": 2085
+    },
+    "condition_directives": [
+      [
+        56,
+        "#ifdef FE_IME"
+      ],
+      [
+        58,
+        "#endif"
+      ],
+      [
+        544,
+        "#if 0"
+      ],
+      [
+        563,
+        "#endif"
+      ],
+      [
+        18,
+        "#ifdef DEBUG_LOCKS"
+      ],
+      [
+        20,
+        "#else"
+      ],
+      [
+        22,
+        "#endif"
+      ],
+      [
+        86,
+        "#ifdef DEBUG"
+      ],
+      [
+        98,
+        "#endif"
+      ],
+      [
+        852,
+        "#ifdef DEBUG"
+      ],
+      [
+        952,
+        "#endif // DEBUG"
+      ],
+      [
+        963,
+        "#ifdef DEBUG"
+      ],
+      [
+        994,
+        "#endif // DEBUG"
+      ],
+      [
+        1169,
+        "#ifdef DEBUG"
+      ],
+      [
+        1188,
+        "#endif"
+      ],
+      [
+        1198,
+        "#ifdef DEBUG"
+      ],
+      [
+        1239,
+        "#endif"
+      ],
+      [
+        1250,
+        "#ifdef DEBUG"
+      ],
+      [
+        1301,
+        "#endif"
+      ],
+      [
+        1321,
+        "#ifdef DEBUG"
+      ],
+      [
+        1325,
+        "#else"
+      ],
+      [
+        1329,
+        "#endif"
+      ],
+      [
+        1394,
+        "#ifdef DEBUG"
+      ],
+      [
+        1423,
+        "#endif"
+      ],
+      [
+        1691,
+        "#ifdef DEBUG"
+      ],
+      [
+        1712,
+        "#endif"
+      ],
+      [
+        1714,
+        "#ifdef DEBUG"
+      ],
+      [
+        1794,
+        "#endif"
+      ],
+      [
+        1933,
+        "#ifdef DEBUG"
+      ],
+      [
+        2013,
+        "#endif // DEBUG"
+      ],
+      [
+        286,
+        "#if (DBG || TRACE_OBJECT_ALLOCS)"
+      ],
+      [
+        302,
+        "#endif // TRACE_OBJECT_ALLOCS"
+      ],
+      [
+        81,
+        "#ifdef FE_IME"
+      ],
+      [
+        83,
+        "#endif"
+      ],
+      [
+        134,
+        "#ifdef DEBUG"
+      ],
+      [
+        137,
+        "#endif"
+      ],
+      [
+        456,
+        "#ifdef FE_IME"
+      ],
+      [
+        458,
+        "#endif"
+      ],
+      [
+        585,
+        "#ifdef DEBUG"
+      ],
+      [
+        587,
+        "#endif"
+      ],
+      [
+        764,
+        "#ifdef DEBUG"
+      ],
+      [
+        776,
+        "#endif"
+      ],
+      [
+        797,
+        "#ifdef DEBUG"
+      ],
+      [
+        803,
+        "#endif"
+      ],
+      [
+        1056,
+        "#ifdef DEBUG"
+      ],
+      [
+        1069,
+        "#endif"
+      ],
+      [
+        1084,
+        "#ifdef DEBUG"
+      ],
+      [
+        1098,
+        "#endif"
+      ],
+      [
+        1139,
+        "#ifdef DEBUG"
+      ],
+      [
+        1152,
+        "#endif"
+      ],
+      [
+        1353,
+        "#ifdef DEBUG"
+      ],
+      [
+        1361,
+        "#endif"
+      ],
+      [
+        1519,
+        "#ifdef FE_IME"
+      ],
+      [
+        1523,
+        "#endif"
+      ],
+      [
+        1886,
+        "#ifdef DEBUG"
+      ],
+      [
+        1911,
+        "#endif // DEBUG"
+      ],
+      [
+        594,
+        "#ifndef DEBUG"
+      ],
+      [
+        600,
+        "#ifdef FE_IME"
+      ],
+      [
+        602,
+        "#endif"
+      ],
+      [
+        622,
+        "#else // DEBUG"
+      ],
+      [
+        712,
+        "#endif"
+      ]
+    ],
+    "selected_table_original_lines": [
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      58,
+      59
+    ],
+    "bare_errors": 29,
+    "line_mismatches": []
+  },
+  "before_total": 2169,
+  "after_total": 2166,
+  "mirror_diff_delta": -3,
+  "points": [
+    {
+      "id": "T483-R2552",
+      "evidence": "Actual x86 USER ownership-table provider includes public Windows declarations and selected original userk flags/types. Original precomp requires private NT4 kernel headers (same include chain rejected in P242 class control). Restore hdrstop,remove prose;remaining finite header selection pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2553",
+      "evidence": "Handle-page and lock-tracking globals belong to HMInit/HMGrow private kernel allocator. Current product consumes classification constants,not this allocator. Copying these globals cannot represent native USER shared section or handle ownership. Conditional framework preserved.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2554",
+      "evidence": "All selected gabObjectCreateFlags entries are byte-identical to original39-59;FE_IME excluded body remains bare error. Original cleanup uses these flags for thread/process ownership,not handle allocation. Policy exclusion is only residual in this table.",
+      "disposition": "approved-exclusion-policy"
+    },
+    {
+      "id": "T483-R2555",
+      "evidence": "All29 excluded outer bodies reduced to bare error;preserved conditional directive text is checked against each original logical line. Restored missing original endif comments at302,952,994,2013. This overlapping historical anchor is framework coverage,not an extra kernel implementation.",
+      "disposition": "approved-exclusion-policy"
+    },
+    {
+      "id": "T483-R2556",
+      "evidence": "gdwAllocTag and lock helper declarations are consumed by omitted kernel pool allocation/lock code;not by gabObjectCreateFlags or current cleanup. Actual native objects are not allocated from this NT4 pool. Retain omitted allocation-only scope pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2557",
+      "evidence": "HMInit/HMGrow map and initialize kernel USER shared handle pages and free lists. Native USER already owns real HWND identity;local memory initialization cannot allocate native handles. Current wow_user_object_bindings publishes copied metadata for original readers,not a second allocator.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2558",
+      "evidence": "HMAllocObject selects native kernel handle-page free slot,allocates desktop/pool object and writes gSharedInfo.aheList. Current actual window/menu creation calls modern USER;restoring this function would issue unrelated local identity rather than an HWND accepted by system APIs.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2559",
+      "evidence": "HMFreeObject/HMMarkObjectDestroy/HMDestroyObject change private gSharedInfo entries and kernel object locks. Actual modern resources require native destroy APIs;retained local WND view lifetime is separate from owning native handle. Raw kernel destruction cannot release those resources.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2560",
+      "evidence": "Original lock/unlock helpers depend on HEAD lock counts,THREADINFO and kernel object retirement. Current USER owns native object locks;local borrowed views are retained by existing scoped allocations. Restoring kernel pointer operations is not a native lock implementation. DEBUG bodies preserved excluded.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2561",
+      "evidence": "HMDestroyUnlockedObject dispatches original private destructor table by handle type. Current objects require native API and existing owner retirement;the original dispatch table accepts incompatible kernel objects. Retain ownership boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2562",
+      "evidence": "HMChangeOwnerThread/DestroyThreadsObjects traverse global kernel handle table and assign original thread ownership. Finite lifecycle cleanup only owns current tracked resource bindings;native USER retains system object/thread ownership. It cannot safely iterate or mutate private modern table.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2563",
+      "evidence": "DestroyProcessesObjects/MarkThreadsObjects iterate gSharedInfo.aheList and mutate original pOwner/flags. Original cleanup classification table can be reused independently;native resource retirement must remain through real owners. No evidence that a second reconstructed global allocator is required.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2564",
+      "evidence": "HMGetStats uses NtGlobalFlag pool tagging and PsLookupProcessByProcessId to count private kernel entries. No classification-table consumer invokes statistics;local metadata counts would not implement original system statistics. Keep omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2565",
+      "evidence": "KernelPtoH reads original object HEAD.h from kernel pointer. Current native handles come from USER APIs,not projected metadata addresses. Restoring this helper would not make borrowed views valid kernel objects;no live consumer requires it.",
+      "disposition": "qualified-pending-owner"
+    }
+  ],
+  "validation": "Actual optimized x86 baseline and final compile pass;code/data/relocation section bytes identical except excluded debug/checksum metadata;all preserved conditional directives match original logical lines;selected ownership table unchanged. No new full/runtime/publication claim.",
+  "call_chain": [
+    "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "src/wow32-dll/source/wow_user_object_bindings.c:13-44",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c",
+    "test/observation/verify-wow-cleanup-bounds.ps1"
+  ],
+  "limits": "Classifies kernel/private versus native USER ownership;does not claim original kernel code defective. Initial control command had incorrect VS path,failed before compile;corrected command produced both zero exit records.",
+  "lexical_diff_point_metrics": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+    "before_sha256": "e4a6190ec6c46a3b5b52c8b1d04db74c9bb772cbbded15cd7debc88685ae9eaf",
+    "after_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+    "before": {
+      "blocks": 33,
+      "added": 83,
+      "deleted": 2086
+    },
+    "after": {
+      "blocks": 34,
+      "added": 81,
+      "deleted": 2085
+    },
+    "blocks_removed": -1,
+    "lines_removed": 3,
+    "state": "local-reviewed-not-delivered"
+  },
+  "delivery_receipt": "batch-p242-checkpoint.json",
+  "delivery_status": "Final code cached,published11x2,focused34,Full20,boundary/governance passed;Git delivery accompanies receipt"
+}

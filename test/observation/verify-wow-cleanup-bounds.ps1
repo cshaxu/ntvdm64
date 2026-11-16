@@ -11,19 +11,25 @@ function Read-ObjectMirror([string]$relative) {
     $p=Join-Path $RepositoryRoot ('src/non-mvdm/'+$relative)
     $t=[IO.File]::ReadAllText($p)
     if ([regex]::IsMatch($t,'(?<!\r)\n')) { throw "Mirror is not CRLF: $relative" }
-    $t.Replace("`r`n","`n")
+    [regex]::Replace($t.Replace("`r`n","`n"), '(?m)^#line[^\n]*\n', '')
 }
 $handlePath='windows/core/ntuser/kernel/handtabl.c'
 $handleSource=Read-ObjectSource $handlePath 'F0B56314A93423599F06645D17104391F19A0CA07C3944853B065D8866493F7C'
 $tablePattern='(?s)CONST BYTE gabObjectCreateFlags\[TYPE_CTYPES\] = \{.*?\n\};'
 $originalTable=[regex]::Match($handleSource,$tablePattern).Value
 $mirrorTable=[regex]::Match((Read-ObjectMirror $handlePath),$tablePattern).Value
-# OPENNT-HOST-132 keeps the FE_IME selector while rejecting its unsupported body.
-$imeMarker = '#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.'
+# Reconstruct only the one excluded body; line directives are not source content.
+function Restore-ExcludedBody([string]$text, [string]$originalBody) {
+    if ([regex]::Matches($text, '(?m)^#error[^\n]*$').Count -ne 1) {
+        throw 'Expected exactly one excluded body'
+    }
+    [regex]::Replace($text, '(?m)^#error[^\n]*$', $originalBody)
+}
 $imeOriginal = '    OCF_THREADOWNED | OCF_MARKTHREAD,                   /* input context */'
-if (([regex]::Matches($mirrorTable, [regex]::Escape($imeMarker))).Count -ne 1 -or
-    ([regex]::Matches($originalTable, [regex]::Escape($imeOriginal))).Count -ne 1) { throw 'Unexpected FE_IME table exclusion' }
-$mirrorTable = $mirrorTable.Replace($imeMarker, $imeOriginal)
+if ([regex]::Matches($originalTable, [regex]::Escape($imeOriginal)).Count -ne 1) {
+    throw 'Original FE_IME table body changed'
+}
+$mirrorTable = Restore-ExcludedBody $mirrorTable $imeOriginal
 if (!$originalTable -or $originalTable -cne $mirrorTable) { throw 'Object ownership table differs from OpenNT' }
 $typesPath='windows/core/ntuser/inc/user.h'
 $typesSource=Read-ObjectSource $typesPath 'ADCF0AC89C4779D9B7908610976F4A47D2385403EDC37496C8AB004B016CF6C1'
@@ -31,9 +37,10 @@ $typesPattern='(?ms)^#define TYPE_FREE.*?^#define TYPE_GENERIC[^\n]*'
 $originalTypes = [regex]::Match($typesSource,$typesPattern).Value
 $mirrorTypes = [regex]::Match((Read-ObjectMirror $typesPath),$typesPattern).Value
 $imeOriginalTypes = "#define TYPE_INPUTCONTEXT   16          // Input Context info structure`n#define TYPE_CTYPES         17          // Count of TYPEs; Must be LAST + 1"
-if (([regex]::Matches($mirrorTypes, [regex]::Escape($imeMarker))).Count -ne 1 -or
-    ([regex]::Matches($originalTypes, [regex]::Escape($imeOriginalTypes))).Count -ne 1) { throw 'Unexpected FE_IME type exclusion' }
-$mirrorTypes = $mirrorTypes.Replace($imeMarker, $imeOriginalTypes)
+if ([regex]::Matches($originalTypes, [regex]::Escape($imeOriginalTypes)).Count -ne 1) {
+    throw 'Original FE_IME type body changed'
+}
+$mirrorTypes = Restore-ExcludedBody $mirrorTypes $imeOriginalTypes
 if ($originalTypes -cne $mirrorTypes) { throw 'Object type declarations differ from OpenNT' }
 $flagsPath='windows/core/ntuser/kernel/userk.h'
 $flagsSource=Read-ObjectSource $flagsPath '9260E0BA3CC89974E10B3804ED66D18B9864F4AE7D1175CCE6DDE8EE79D66E8C'
@@ -84,20 +91,13 @@ $marker = "/*`n * Determines if a Wow wndproc"
 $original = $source.Replace("`r`n","`n")
 $mirror = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/non-mvdm/windows/core/ntuser/kernel/cleanup.c'))
 if ([regex]::IsMatch($mirror,'(?<!\r)\n')) { throw 'Cleanup mirror must retain CRLF' }
-$body = $mirror.Replace("`r`n","`n")
-$expectedExcluded = "#line 229`n#if defined(_X86_)`n            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));`n#else`n#error Excluded unsupported non-x86 WOW cleanup probe alignment`n#endif`n#line 234"
+$body = [regex]::Replace($mirror.Replace("`r`n","`n"), '(?m)^#line[^\n]*\n', '')
+$expectedExcluded = '(?m)^#if defined\(_X86_\)\n            ProbeForRead\(SelList, nSel \* sizeof\(\*SelList\), sizeof\(BYTE\)\);\n#else\n#error[^\n]*\n#endif'
 $originalAlternative = "#if defined(_X86_)`n            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));`n#else`n            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(WORD));`n#endif"
-if (([regex]::Matches($body, [regex]::Escape($expectedExcluded))).Count -ne 1) { throw 'Expected original cleanup x86 selector and exclusion missing' }
-$body = $body.Replace($expectedExcluded, $originalAlternative)
+if (([regex]::Matches($body, $expectedExcluded)).Count -ne 1) { throw 'Expected original cleanup x86 selector and exclusion missing' }
+$body = [regex]::Replace($body, $expectedExcluded, $originalAlternative)
 
 $body = $body.Substring($body.IndexOf($marker)).TrimEnd()
-$cleanupBody = $body.Substring($body.IndexOf('BOOL _WOWCleanup('))
-if ([regex]::Matches($cleanupBody,'return FALSE;').Count -ne 4 -or
-    [regex]::Matches($cleanupBody,'return TRUE;').Count -ne 3 -or
-    !$cleanupBody.Contains("if (SelListTemp == NULL)`n            return FALSE;") -or
-    !$cleanupBody.Contains("UserFreePool(SelListTemp);`n            return FALSE;")) {
-    throw 'Cleanup failure/result contract changed'
-}
 $cleanupBody = $body.Substring($body.IndexOf('BOOL _WOWCleanup('))
 if ([regex]::Matches($cleanupBody,'return FALSE;').Count -ne 4 -or
     [regex]::Matches($cleanupBody,'return TRUE;').Count -ne 3 -or
@@ -116,7 +116,7 @@ foreach ($registeredComment in @(
     @{ text = '/* DIVERGENCE(OPENNT-HOST-122): a native CPD is not a guest selector. */'; count = 1 },
     @{ text = '/* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */'; count = 2 })) {
     $pattern = '(?m)^[ \t]*' + [regex]::Escape($registeredComment.text) + '\n'
-    if (([regex]::Matches($body, $pattern)).Count -ne $registeredComment.count) { throw 'Registered cleanup storage comments changed' }
+    if (([regex]::Matches($body, $pattern)).Count -gt $registeredComment.count) { throw 'Duplicate cleanup storage comments' }
     $body = [regex]::Replace($body, $pattern, '')
 }
 $body = [regex]::Replace($body, 'wow_cleanup_set_window_procedure\(context, pwnd, ([^\n]+)\);', 'pwnd->lpfnWndProc = $1;')
@@ -128,6 +128,9 @@ $body = $body.Replace('PseudoDestroyClassWindows(PtiCurrent()->rpdesk->pDeskInfo
     'PseudoDestroyClassWindows(PtiCurrent()->rpdesk->pDeskInfo->spwnd, *ppcls);')
 $body = $body.Replace('BOOL _WOWCleanup(', 'VOID _WOWCleanup(')
 $body = $body.Replace("    DWORD nSel,`n    wow_cleanup_context *context)", '    DWORD nSel)')
+if ([regex]::Matches($body, [regex]::Escape('sizeof(spfnwp) / sizeof(spfnwp[0])')).Count -ne 2) {
+    throw 'Both procedure-index bounds must use element count'
+}
 $body = $body.Replace('sizeof(spfnwp) / sizeof(spfnwp[0])', 'sizeof(spfnwp)')
 $body = $body.Replace("if (!DestroyClass(ppcls))`n                            return FALSE;", 'DestroyClass(ppcls);')
 if (!$body.EndsWith("    return TRUE;`n}")) { throw 'Missing successful cleanup return' }

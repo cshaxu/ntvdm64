@@ -16,14 +16,16 @@
 *
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-113): original read-only sysBmpStyles data only;
- * external linkage supplies the bounded button resource carrier. No kernel
- * factory, caption cache or system-settings behavior is imported. */
 #line 19
 #include "precomp.h"
+#pragma hdrstop
+
+#define MetricGetID(str, default) \
+    FastGetProfileIntFromID(PMAP_METRICS, str, default)
+
 
 #line 25
-CONST WORD sysBmpStyles[OBI_COUNT][2] = {
+static CONST WORD sysBmpStyles[OBI_COUNT][2] = {
 
     DFC_CAPTION,   DFCS_CAPTIONCLOSE,                               // OBI_CLOSE
     DFC_CAPTION,   DFCS_CAPTIONCLOSE | DFCS_PUSHED,                 // OBI_CLOSE_D
@@ -93,11 +95,17 @@ CONST WORD sysBmpStyles[OBI_COUNT][2] = {
     DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_PUSHED,                 // OBI_3STATE_D
     DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_CHECKED | DFCS_PUSHED,   // OBI_3STATE_CD
     DFC_BUTTON,    DFCS_BUTTON3STATE | DFCS_CHECKED | DFCS_INACTIVE,  // OBI_3STATE_CDI
+#line 95
 };
+
+#define DIVISOR 72
+
+UINT MB_FindLongestString(HDC hdc);
+
 #line 101
 #ifdef LATER
 #line 102
-#error Excluded original unsupported USER control-panel code
+#error
 #line 272
 #endif
 #line 273

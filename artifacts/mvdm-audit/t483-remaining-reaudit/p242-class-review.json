@@ -1,0 +1,206 @@
+{
+  "batch": "P242-format-accumulation",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "pins": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+    "baseline": "eeddb9850d34aa19b3fdeb5054e463f2e196f72c5acd0a3dfa0feca244cba61e",
+    "original": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a"
+  },
+  "source_review": "All16 points initial and counter-reviewed;remaining private USER boundaries require owner decision",
+  "before": {
+    "added": 28,
+    "deleted": 1412,
+    "total": 1440
+  },
+  "after": {
+    "added": 17,
+    "deleted": 1377,
+    "total": 1394
+  },
+  "mirror_diff_delta": -46,
+  "controls": [
+    {
+      "mode": "lookup",
+      "baseline_exit": 0,
+      "original_header_exit": 2,
+      "original_header_error": "C1083 ntos.h;original precomp.h requires NT4 kernel w32p/gre/userk declarations"
+    },
+    {
+      "mode": "register",
+      "baseline_exit": 0,
+      "original_header_exit": 2,
+      "original_header_error": "C1083 ntos.h;original precomp.h requires NT4 kernel w32p/gre/userk declarations"
+    },
+    {
+      "mode": "remove",
+      "baseline_exit": 0,
+      "original_header_exit": 2,
+      "original_header_error": "C1083 ntos.h;original precomp.h requires NT4 kernel w32p/gre/userk declarations"
+    }
+  ],
+  "token_equivalence": [
+    {
+      "mode": "lookup",
+      "equal_tokens": true,
+      "token_count": 141947,
+      "sha256": "37179eadb6a72e7539c2c34cb46778fdac307860e274621b16a170074222ea0c"
+    },
+    {
+      "mode": "register",
+      "equal_tokens": true,
+      "token_count": 145133,
+      "sha256": "b38cea730cf8f5d1dfd1b2ae10737e286df376fe519540f805dd4521041f5395"
+    },
+    {
+      "mode": "remove",
+      "equal_tokens": true,
+      "token_count": 144368,
+      "sha256": "00fef01c86f8816eed6579ef1f7d7d007c6c0ff33b936162a3fc2101086e5057"
+    }
+  ],
+  "line_proof": {
+    "before": {
+      "added": 28,
+      "deleted": 1412
+    },
+    "after": {
+      "added": 17,
+      "deleted": 1377
+    },
+    "matching_original_rows": 213,
+    "excluded_bodies": [
+      {
+        "physical": 271,
+        "original": 1071
+      },
+      {
+        "physical": 278,
+        "original": 376
+      }
+    ],
+    "sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2",
+    "limit": "Three actual /EP token streams identical excluding restored non-PCH hdrstop;no runtime behavior change asserted beyond those contexts",
+    "selected_function_original_rows": 164,
+    "unexplained_line_mismatches": 0,
+    "intentional_adaptation_lines": [
+      86,
+      503,
+      555,
+      556
+    ]
+  },
+  "points": [
+    {
+      "id": "T483-R2484",
+      "evidence": "Original precomp.h pulls ntos.h,w32p.h,gre.h,userk.h and kernel USER/GDI ownership. Three actual product controls pass baseline and reject original header at missing ntos.h. Restore hdrstop;keep finite binding include pending boundary decision.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2485",
+      "evidence": "Original afClassDWord/aiClassOffset/INDEX_OFFSET serve kernel CLS offset writes in InitClassOffsets/SetClassData. Actual WOW class fields use native USER APIs,not NT4 CLS layout. Restore original registration documentation;retain omitted private-layout tables/prototypes pending decision.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2486",
+      "evidence": "Original PtiCurrent gets kernel thread ownership. Actual wow_class_client_publish supplies stack-local publication,thread and CPD callbacks through explicit context. Removing it would require another ambient owner;do not move equivalent complexity. Minimize parameter formatting only.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2487",
+      "evidence": "Three actual translation units bind lookup process roots,registration thread/publication,and removal context with distinct object types. Keep profile selection;remove redundant divergence comment.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2488",
+      "evidence": "Original ClassAlloc/InternalRegisterClassEx allocate DesktopAlloc or UserAllocPoolWithQuota CLS and LockDesktop/Lock kernel cursors. Actual wow_class_words_register calls RegisterClassExA and owns metadata only. Native USER owns classes;direct private allocator cannot replace that provider. Restore selected unregister documentation.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2489",
+      "evidence": "Explicit removal context carries module,owned lists,menu availability and native destruction callback;original obtains private kernel PtiCurrent. Retain explicit association,compact parameter line;no new TLS/state.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2490",
+      "evidence": "Original DestroyClass is void;actual UnregisterClassA can reject a live native window even when no window is enrolled in metadata. Existing wow_class_registration_fixture225-291 uses a real CreateWindowExA and asserts ERROR_CLASS_HAS_WINDOWS,unchanged output/menu ownership. Preserve failure propagation;remove divergence comment.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2491",
+      "evidence": "Only original return logical line557 mapping;no independent selected-code difference. Original return remains unchanged.",
+      "disposition": "restored"
+    },
+    {
+      "id": "T483-R2492",
+      "evidence": "Lookup uses supplied process/system list roots from wow_class_lookup_context;original kernel global gpclsList and hModClient are not modern USER-owned globals. Keep finite lookup profile binding pending decision.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2493",
+      "evidence": "Original _GetWOWClass follows desktop heap clones,_GetClassInfoEx dereferences native kernel CURSOR/CPD,_SetClassWord writes private CLS extra bytes/clones. Current query reaches GetClassInfoExA;WU32 class access reaches native class APIs. Do not pass native USER classes to NT4 private layout implementations.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2494",
+      "evidence": "GetClassPtr original source is retained;#line930 solely restores diagnostic location. No independent semantic adaptation.",
+      "disposition": "restored"
+    },
+    {
+      "id": "T483-R2495",
+      "evidence": "Original UnlockAndFreeCPDs/DestroyClassBrush use HMMarkObjectDestroy,Unlock and GreDeleteObject on kernel-owned objects. Modern USER owns corresponding CPDs and brushes. Restoring private destruction against metadata/native handles would mix ownership domains.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2496",
+      "evidence": "Original DestroyClass unlocks desktop,clones,icons and frees desktop pool CLS. Native destruction is UnregisterClassA plus metadata retirement. These storage/object owners are not interchangeable;keep omitted kernel destructor pending decision.",
+      "disposition": "minimized-or-retained-pending-owner"
+    },
+    {
+      "id": "T483-R2497",
+      "evidence": "DBG original outer framework remains with original logical1070/1071 and bare error;unselected body remains excluded under approved policy. Removed error prose,not original policy.",
+      "disposition": "policy-exclusion"
+    },
+    {
+      "id": "T483-R2498",
+      "evidence": "FE_SB original if/else/endif remains with original logical375/376/378/380 and bare error. InternalRegisterClassEx body is outside native USER boundary;unsupported FE path remains excluded.",
+      "disposition": "policy-exclusion"
+    },
+    {
+      "id": "T483-R2499",
+      "evidence": "Original InitClassOffsets/SetClassData/xxxSetClassData use NT4 CLS offsets,clones,server procedure mapping and kernel window locks. Actual WU32 class operations use native Get/SetClassLong/Word. Restore does not mean creating a second native USER class engine.",
+      "disposition": "minimized-or-retained-pending-owner"
+    }
+  ],
+  "source_evidence": [
+    "src/wow32-dll/source/wow_class_client_bindings.c:86-156,264-279",
+    "src/wow32-dll/source/wow_class_words_binding.c:417-455,507-567",
+    "src/wow32-dll/include/wow_class_register_bindings.h",
+    "src/wow32-dll/include/wow_class_remove_bindings.h",
+    "src/wow32-dll/include/wow_class_lookup_bindings.h",
+    "test/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c:225-291",
+    "test/adapter-mvdm-host-out/wow/wow_class_server_fixture.c:30-90"
+  ],
+  "validation": "P241 delivered relevant34 fixtures;P242 pure format candidate has identical selected tokens in all3 actual compile contexts. No P242 cached build/runtime/publication/commit claimed;accumulate per owner rule.",
+  "controls_harness_note": "Initial CMD exit capture omitted space before redirection and produced empty exit files;fixed and reran all6 controls;only corrected exit records used.",
+  "lexical_diff_point_metrics": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+    "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+    "before_sha256": "eeddb9850d34aa19b3fdeb5054e463f2e196f72c5acd0a3dfa0feca244cba61e",
+    "after_sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2",
+    "before": {
+      "blocks": 12,
+      "added": 28,
+      "deleted": 1412
+    },
+    "after": {
+      "blocks": 13,
+      "added": 17,
+      "deleted": 1377
+    },
+    "blocks_removed": -1,
+    "lines_removed": 46,
+    "state": "local-reviewed-not-delivered"
+  },
+  "delivery_receipt": "batch-p242-checkpoint.json",
+  "delivery_status": "Final code cached,published11x2,focused34,Full20,boundary/governance passed;Git delivery accompanies receipt"
+}

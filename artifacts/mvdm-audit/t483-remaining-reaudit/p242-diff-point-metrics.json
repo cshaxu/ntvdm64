@@ -1,0 +1,119 @@
+{
+  "metric": "Non-equal SequenceMatcher opcodes,autojunk=False;CRLF normalized;split LF retains terminal empty;current #line ignored;#error retained;not semantic register point count",
+  "files": [
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "before_sha256": "eeddb9850d34aa19b3fdeb5054e463f2e196f72c5acd0a3dfa0feca244cba61e",
+      "after_sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2",
+      "before": {
+        "blocks": 12,
+        "added": 28,
+        "deleted": 1412
+      },
+      "after": {
+        "blocks": 13,
+        "added": 17,
+        "deleted": 1377
+      },
+      "blocks_removed": -1,
+      "lines_removed": 46,
+      "state": "verified-published;Git delivery accompanies receipt"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+      "before_sha256": "8f9ffcfa5ab44841e9a4305a8ee2d417ce6e69872f3173f6bf7b9a5b87ebb72f",
+      "after_sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3",
+      "before": {
+        "blocks": 21,
+        "added": 36,
+        "deleted": 46
+      },
+      "after": {
+        "blocks": 22,
+        "added": 25,
+        "deleted": 43
+      },
+      "blocks_removed": -1,
+      "lines_removed": 14,
+      "state": "verified-published;Git delivery accompanies receipt"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "before_sha256": "7c4f2eba0dec5987c17bd7c8729742006f820cda9e95834720800aa57988d4ca",
+      "after_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+      "before": {
+        "blocks": 4,
+        "added": 17,
+        "deleted": 485
+      },
+      "after": {
+        "blocks": 5,
+        "added": 14,
+        "deleted": 484
+      },
+      "blocks_removed": -1,
+      "lines_removed": 4,
+      "state": "verified-published;Git delivery accompanies receipt"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "before_sha256": "27a0e8719c95f95072eca4d356635b4814177772eaef7126d20bcb2cd34e7098",
+      "after_sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d",
+      "before": {
+        "blocks": 12,
+        "added": 21,
+        "deleted": 706
+      },
+      "after": {
+        "blocks": 11,
+        "added": 18,
+        "deleted": 706
+      },
+      "blocks_removed": 1,
+      "lines_removed": 3,
+      "state": "verified-published;Git delivery accompanies receipt"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "before_sha256": "e4a6190ec6c46a3b5b52c8b1d04db74c9bb772cbbded15cd7debc88685ae9eaf",
+      "after_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+      "before": {
+        "blocks": 33,
+        "added": 83,
+        "deleted": 2086
+      },
+      "after": {
+        "blocks": 34,
+        "added": 81,
+        "deleted": 2085
+      },
+      "blocks_removed": -1,
+      "lines_removed": 3,
+      "state": "verified-published;Git delivery accompanies receipt"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "before_sha256": "85ccfc3aaf4363a2ad4ddb8015179a76c011fa22e55a5875affe157418628246",
+      "after_sha256": "1b7ae99a06a1acb4430357e8450e1756bdc737433e1e9228b25bcb1dbe027333",
+      "before": {
+        "blocks": 8,
+        "added": 5,
+        "deleted": 1060
+      },
+      "after": {
+        "blocks": 5,
+        "added": 2,
+        "deleted": 1050
+      },
+      "blocks_removed": 3,
+      "lines_removed": 13,
+      "state": "verified-published;Git delivery accompanies receipt"
+    }
+  ]
+}

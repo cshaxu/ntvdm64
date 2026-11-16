@@ -13,7 +13,6 @@ typedef struct wow_button_resources {
     HBITMAP bitmap;
     HGDIOBJ previous_bitmap;
 } wow_button_resources;
-extern CONST WORD sysBmpStyles[OBI_COUNT][2];
 /* Start with a zeroed scope. Release before reinitializing it. */
 BOOL WINAPI wow_button_resources_initialize(wow_button_resources *);
 BOOL WINAPI wow_button_resources_ready(wow_button_resources *);

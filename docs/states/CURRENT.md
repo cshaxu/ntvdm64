@@ -34,9 +34,10 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2483 reviewed:957 restored/confirmed delivered,0 local,41 approved/policy,
-1485 qualified pending;237 unreviewed. Files338/365 source-reviewed and delivered;
-27 remain. Git delivery accompanies P241 receipt.
+2581 reviewed:970 restored/confirmed delivered,0 local,50 approved/policy,
+1561 qualified pending;139 unreviewed. Files344/365 reviewed and delivered;
+21 remain. P242 six-file mirror reduction83;static table restored;cached,
+publish11x2,focused34,Full20 and governance passed;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +54,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P241 package `77738d74-ec23-4d13-a42e-8ebc4b368597` published11x2;hashes verified.
-user.h mirror2666->265(-2401);2494 exact original logical rows,23 excluded bodies.
-Cached x86/x64,focused34,Full20,boundary and governance passed.
-10 original restorations;14 minimized residuals remain pending owner decision.
-Cumulative365-file mirror diff119913->97901(-22012).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p241-checkpoint.json).
-Git delivery accompanies receipt;R2484 next.
+P242 package `e6c51343-bbab-4414-85eb-ba04afdd94fa` published11x2;hashes verified.
+Six mirror files reduced83 lines;per-file block counts and original line proofs recorded.
+Original static bitmap table restored;extern/separate object removed.
+Cached x86/x64,focused34,Full20,boundary/governance passed.
+Cumulative365-file mirror diff119913->97818(-22095).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p242-checkpoint.json).
+Git delivery accompanies receipt;R2582 next.
 
 ## Remaining Scope
 

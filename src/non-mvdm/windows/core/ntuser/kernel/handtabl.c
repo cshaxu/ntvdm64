@@ -8,12 +8,12 @@
 * 01-13-92 ScottLu      Created.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-063): unchanged object ownership table; native
- * USER remains the allocator. Do not allocate a second handle namespace. */
 #include <windows.h>
 #include "compat/include/opennt_user_multipass.h"
 #define WOW_USER_OBJECT_FLAGS_ONLY
 #include "userk.h"
+#line 12
+#pragma hdrstop
 
 #line 39
 CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
@@ -36,7 +36,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 56
 #ifdef FE_IME
 #line 57
-#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
+#error
 #endif
 #line 59
 };
@@ -44,7 +44,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 544
 #if 0
 #line 545
-#error Excluded original disabled USER handle-table check
+#error
 #line 563
 #endif
 #line 564
@@ -53,7 +53,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 18
 #ifdef DEBUG_LOCKS
 #line 19
-#error Excluded unsupported original DEBUG_LOCKS branch
+#error
 #else
 #line 21
 #line 22
@@ -63,7 +63,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 86
 #ifdef DEBUG
 #line 87
-#error Excluded unsupported original DEBUG branch
+#error
 #line 98
 #endif
 #line 99
@@ -71,23 +71,23 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 852
 #ifdef DEBUG
 #line 853
-#error Excluded unsupported original DEBUG branch
+#error
 #line 952
-#endif
+#endif // DEBUG
 #line 953
 
 #line 963
 #ifdef DEBUG
 #line 964
-#error Excluded unsupported original DEBUG branch
+#error
 #line 994
-#endif
+#endif // DEBUG
 #line 995
 
 #line 1169
 #ifdef DEBUG
 #line 1170
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1188
 #endif
 #line 1189
@@ -95,7 +95,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1198
 #ifdef DEBUG
 #line 1199
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1239
 #endif
 #line 1240
@@ -103,7 +103,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1250
 #ifdef DEBUG
 #line 1251
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1301
 #endif
 #line 1302
@@ -111,7 +111,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1321
 #ifdef DEBUG
 #line 1322
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1325
 #else
 #line 1326
@@ -122,7 +122,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1394
 #ifdef DEBUG
 #line 1395
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1423
 #endif
 #line 1424
@@ -130,7 +130,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1691
 #ifdef DEBUG
 #line 1692
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1712
 #endif
 #line 1713
@@ -138,7 +138,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1714
 #ifdef DEBUG
 #line 1715
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1794
 #endif
 #line 1795
@@ -146,30 +146,30 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1933
 #ifdef DEBUG
 #line 1934
-#error Excluded unsupported original DEBUG branch
+#error
 #line 2013
-#endif
+#endif // DEBUG
 #line 2014
 
 #line 286
 #if (DBG || TRACE_OBJECT_ALLOCS)
 #line 287
-#error Excluded unsupported original TRACE_OBJECT_ALLOCS branch
+#error
 #line 302
-#endif
+#endif // TRACE_OBJECT_ALLOCS
 #line 303
 
 #line 81
 #ifdef FE_IME
 #line 82
-#error Excluded unsupported original FE_IME branch
+#error
 #endif
 #line 84
 
 #line 134
 #ifdef DEBUG
 #line 135
-#error Excluded unsupported original DEBUG branch
+#error
 #line 137
 #endif
 #line 138
@@ -177,21 +177,21 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 456
 #ifdef FE_IME
 #line 457
-#error Excluded unsupported original FE_IME branch
+#error
 #endif
 #line 459
 
 #line 585
 #ifdef DEBUG
 #line 586
-#error Excluded unsupported original DEBUG branch
+#error
 #endif
 #line 588
 
 #line 764
 #ifdef DEBUG
 #line 765
-#error Excluded unsupported original DEBUG branch
+#error
 #line 776
 #endif
 #line 777
@@ -199,7 +199,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 797
 #ifdef DEBUG
 #line 798
-#error Excluded unsupported original DEBUG branch
+#error
 #line 803
 #endif
 #line 804
@@ -207,7 +207,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1056
 #ifdef DEBUG
 #line 1057
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1069
 #endif
 #line 1070
@@ -215,7 +215,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1084
 #ifdef DEBUG
 #line 1085
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1098
 #endif
 #line 1099
@@ -223,7 +223,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1139
 #ifdef DEBUG
 #line 1140
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1152
 #endif
 #line 1153
@@ -231,7 +231,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1353
 #ifdef DEBUG
 #line 1354
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1361
 #endif
 #line 1362
@@ -239,7 +239,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1519
 #ifdef FE_IME
 #line 1520
-#error Excluded unsupported original FE_IME branch
+#error
 #line 1523
 #endif
 #line 1524
@@ -247,7 +247,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 1886
 #ifdef DEBUG
 #line 1887
-#error Excluded unsupported original DEBUG branch
+#error
 #line 1911
 #endif // DEBUG
 #line 1912
@@ -259,13 +259,13 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 600
 #ifdef FE_IME
 #line 601
-#error Unsupported FE_IME original branch
+#error
 #endif
 #line 603
 #line 622
 #else // DEBUG
 #line 623
-#error Unsupported DEBUG original branch
+#error
 #line 712
 #endif
 #line 713

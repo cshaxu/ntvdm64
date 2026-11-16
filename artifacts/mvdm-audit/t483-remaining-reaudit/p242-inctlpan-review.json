@@ -1,0 +1,249 @@
+{
+  "batch": "P242",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+  "source_proof": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+    "baseline_sha256": "85ccfc3aaf4363a2ad4ddb8015179a76c011fa22e55a5875affe157418628246",
+    "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+    "candidate_sha256": "1b7ae99a06a1acb4430357e8450e1756bdc737433e1e9228b25bcb1dbe027333",
+    "before": {
+      "blocks": 8,
+      "added": 5,
+      "deleted": 1060
+    },
+    "after": {
+      "blocks": 5,
+      "added": 2,
+      "deleted": 1050
+    },
+    "checked_original_nonempty_lines": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      20,
+      25,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      101,
+      272,
+      840,
+      848
+    ],
+    "checked_original_nonempty_count": 97
+  },
+  "before_total": 1065,
+  "after_total": 1052,
+  "mirror_diff_delta": -13,
+  "lexical_blocks_before": 8,
+  "lexical_blocks_after": 5,
+  "points": [
+    {
+      "id": "T483-R2566",
+      "evidence": "Original pragma,MetricGetID definition and header bytes restored;removed divergence prose. Macro has no selected expansion;no native profile API implementation added.",
+      "disposition": "restored-pending-delivery"
+    },
+    {
+      "id": "T483-R2567",
+      "evidence": "Original static sysBmpStyles restored. Resource owner directly includes original data subset;removed public extern and separate production/test table object. Tests include same original table in their own comparison unit. No accessor/shim or copied table introduced.",
+      "disposition": "restored-pending-delivery"
+    },
+    {
+      "id": "T483-R2568",
+      "evidence": "Original DIVISOR and MB_FindLongestString declaration restored verbatim;no selected call/expansion or link dependency introduced.",
+      "disposition": "restored-pending-delivery"
+    },
+    {
+      "id": "T483-R2569",
+      "evidence": "Original LATER frame retained;unsupported entire body remains bare error with original101/272 line positions.",
+      "disposition": "approved-exclusion-policy"
+    },
+    {
+      "id": "T483-R2570",
+      "evidence": "GetSetProfileStructFromResID accesses server profile map/ServerLoadString/UT_Fast profile services. Actual resource owner consumes immutable drawing styles and local GDI resources,not system metric registry ownership. Importing this body alone cannot implement native server profile storage.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2571",
+      "evidence": "GetFrameControlMetrics derives entire system atlas including caption/menu/cache dimensions from original SYSMET/oemInfo globals. Current resource consumer uses only button cells with original drawing flags and scoped GDI bitmap. Native non-client/system metrics remain system-owned;keep wider kernel atlas sizing omitted pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2572",
+      "evidence": "PackFrameControls packs shared original oemInfo atlas for all system graphics. Current button atlas has caller-owned dimensions and no access to system global atlas. Direct import would require a second full kernel atlas and global ownership,not simply restore a missing computation.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2573",
+      "evidence": "DrawCaptionButtons/CreateCaptionStrip operate shared caption DCs/fonts/cache and GRE resources;actual native window captions remain modern USER-owned. Selected button bitmaps do not own these non-client caches. Retain omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2574",
+      "evidence": "CreateBitmapStrip calls GreSetBitmapOwner(OBJECT_OWNER_PUBLIC),mutates global hbmBits/ghbmCaption/cachedCaptions and SYSMET menu dimensions. Current local resource carrier owns only public GDI allocations,released by its owner. Kernel public-resource ownership cannot be replaced by copying this function into the user provider.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2575",
+      "evidence": "SetNCMetrics mutates original global system dimensions used by native window manager. Those actual dimensions belong to modern USER/SystemParametersInfo,not the retained resource table. Preserve system owner boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2576",
+      "evidence": "Original font selection helpers create/replace shared system font handles using GRE/profile/DC globals. Native system font lifetime is not a scoped button bitmap responsibility. Reintroducing them cannot replace actual USER font settings;retain omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2577",
+      "evidence": "SetNCFonts writes global caption/menu/status/message fonts and cached dimensions. These kernel/native objects are not owned by local original table consumer;system retains their lifecycle. Keep omitted body pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2578",
+      "evidence": "Original KOREA conditional framework remains at840/848;its selected font-ascent statement is omitted together with entire native system-font owner,not falsely classified as an unreachable macro branch. Same boundary evidence as R2577;pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2579",
+      "evidence": "SetIconFonts/GetWindowNCMetrics/SetWindowNCMetrics touch global icon/nonclient fonts and settings. Native window management remains system USER;local table cannot set its private structures. Keep omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2580",
+      "evidence": "SetMinMetrics/SetIconMetrics write global minimized spacing/icon arrangement with profile defaults. Current native windows use system metrics,not local kernel globals. Retain system ownership boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2581",
+      "evidence": "MB_FindLongestString measures system messagebox resource strings via server resource/module and shared text metrics. No selected bitmap-table consumer calls it;its global system-metric caller chain is omitted for native ownership. Keep body omission pending owner;declaration restored independently.",
+      "disposition": "qualified-pending-owner"
+    }
+  ],
+  "validation": "97 original nonempty lines exactly mapped;excluded LATER body retained,error bare;whole-file initial/counter-review complete. Static linkage restoration and build/test composition changes require current cumulative cached full build,publish,focused/Full tests,commit,push;not yet verified.",
+  "coupled_files": [
+    "src/wow32-dll/source/wow_button_resources.c",
+    "src/wow32-dll/include/wow_button_resources.h",
+    "test/adapter-mvdm-host-out/wow/wow_button_resources_fixture.c",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+    "tools/build/New-T447S3CallBoundaryNinja.ps1",
+    "test/observation/verify-wow32-s1-formal-graph.ps1"
+  ],
+  "source_evidence": [
+    "src/wow32-dll/source/wow_button_resources.c:16-91",
+    "src/wow32-dll/source/wow_default_state_bindings.c:17",
+    "O:/repos.external/OpenNT/windows/core/ntuser/kernel/inctlpan.c:277-299,469-560,796-849,1053-1095"
+  ],
+  "lexical_diff_point_metrics": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+    "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+    "before_sha256": "85ccfc3aaf4363a2ad4ddb8015179a76c011fa22e55a5875affe157418628246",
+    "after_sha256": "1b7ae99a06a1acb4430357e8450e1756bdc737433e1e9228b25bcb1dbe027333",
+    "before": {
+      "blocks": 8,
+      "added": 5,
+      "deleted": 1060
+    },
+    "after": {
+      "blocks": 5,
+      "added": 2,
+      "deleted": 1050
+    },
+    "blocks_removed": 3,
+    "lines_removed": 13,
+    "state": "local-reviewed-not-delivered"
+  },
+  "actual_product_static_symbol": {
+    "object": "build/.ninja/msvc-x86-release/wow32/obj/wow32-dll/wow_button_resources.obj",
+    "symbols": [
+      {
+        "name": "_sysBmpStyles",
+        "storage_class": 3,
+        "section": 3
+      }
+    ],
+    "meaning": "COFF class3 STATIC;single original table compiled into resource owner"
+  },
+  "delivery_receipt": "batch-p242-checkpoint.json",
+  "delivery_status": "Final code cached,published11x2,focused34,Full20,boundary/governance passed;Git delivery accompanies receipt"
+}

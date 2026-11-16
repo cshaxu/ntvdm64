@@ -5,7 +5,6 @@
 #include "wow_input_group_bindings.h"
 #include "wow_user_probe_bindings.h"
 #include "wow_user_object_bindings.h"
-extern const BYTE gabObjectCreateFlags[TYPE_CTYPES];
 #include "wow_shared_user_abi.h"
 
 /* ADAPTER-WOW-047: borrowed, serialized original cleanup fields. These are

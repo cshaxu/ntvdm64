@@ -10,15 +10,16 @@
 * 07-23-92 ScottLu      Created.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-052): true subset; original process lookup is an
- * explicit view. Heap/event operations are bounded host bindings. */
 #define WOW_ORIGINAL_TASK_ORDER
 #include "wow_task_order_bindings.h"
+#line 14
+#pragma hdrstop
 #define gpwpiFirstWow (currentProcess->shared->pwpiFirstWow)
 #define UserAllocPoolWithQuota(bytes, tag) HeapAlloc(GetProcessHeap(), 0, bytes)
 #define ObReferenceObjectByHandle(handle, access, type, mode, out, info) \
     (wow_task_reference_event(handle, out) ? (NTSTATUS)0 : (NTSTATUS)0xC0000001)
 
+#line 497
 /***************************************************************************\
 * xxxRegisterUserHungAppHandlers
 *
@@ -30,12 +31,9 @@
 * Added saving and duping of wowexc event handle
 \***************************************************************************/
 
-#line 508
 BOOL xxxRegisterUserHungAppHandlers(
     PFNW32ET pfnW32EndTask,
-    HANDLE   hEventWowExec,
-    PPROCESSINFO currentProcess)
-#line 511
+    HANDLE   hEventWowExec, PPROCESSINFO currentProcess)
 {
     BOOL   bRetVal;
     PPROCESSINFO    ppi;
@@ -87,9 +85,9 @@ BOOL xxxRegisterUserHungAppHandlers(
 
 #line 134
 #ifndef LATER
-#line 135
+#line 136
 #else
-#line 137
-#error Unsupported LATER original branch
+#error
+#line 142
 #endif
 #line 143

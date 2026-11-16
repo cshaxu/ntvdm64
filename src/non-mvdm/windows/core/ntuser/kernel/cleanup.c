@@ -10,17 +10,17 @@
 * 01-16-92 IanJa        Neutralized ANSI/UNICODE (debug strings kept ANSI)
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-062): complete WOW cleanup owner with explicit
- * native context. Bound procedure indexing by elements, not bytes. Propagate
- * allocation/probe/native class-release failure through the WOW BOOL ABI;
- * a failed native release cannot satisfy original DestroyClass loop progress. */
 #define WOW_ORIGINAL_CLEANUP
 #include "wow_cleanup_bindings.h"
+#line 14
+#pragma hdrstop
 
+extern CONST BYTE gabObjectCreateFlags[];
+
+#line 40
 /*
  * Determines if a Wow wndproc is in a selector list
  */
-#line 43
 BOOL
 WowWndProcInSelList(
    WNDPROC_PWND lpfnWndProc,
@@ -83,9 +83,7 @@ VOID PseudoDestroyClassWindows(PWND pwndParent, PCLS pcls, wow_cleanup_context *
                     "USER: Wow Window not destroyed: %lX", pwnd);
 
             if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
-                /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                 wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
-#line 106
             }
         }
 
@@ -166,9 +164,7 @@ BOOL _WOWCleanup(
     HANDLE hInstance,
     DWORD hTaskWow,
     PNEMODULESEG SelList,
-    DWORD nSel,
-    wow_cleanup_context *context)
-#line 187
+    DWORD nSel, wow_cleanup_context *context)
 {
     PNEMODULESEG SelListOrg = SelList;
     PPROCESSINFO ppi = PpiCurrent();
@@ -211,14 +207,11 @@ static BOOL sbFirstCall = TRUE;
         if (SelListTemp == NULL)
             return FALSE;
         try {
-#line 229
 #if defined(_X86_)
             ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));
 #else
-#line 232
-#error Excluded unsupported non-x86 WOW cleanup probe alignment
+#error
 #endif
-#line 234
             *(LPWORD)SelListTemp = (WORD)nSel;
             pw = (LPWORD)SelListTemp + 1;
             while (nSel--) {
@@ -250,17 +243,13 @@ static BOOL sbFirstCall = TRUE;
                 if (pheT->bType == TYPE_WINDOW) {
                     PWND pwnd = (PWND) pheT->phead;
 
-                    /* DIVERGENCE(OPENNT-HOST-122): a native CPD is not a guest selector. */
-#line 265
                     if (pwnd->procedure_is_guest && (WNDPROC_WOW & (ULONG)pwnd->lpfnWndProc) &&
                         ((PTHREADINFO)pheT->pOwner)->ppi == ppi &&
                         WowWndProcInSelList(pwnd->lpfnWndProc, SelListTemp))
                     {
                         RIPMSG1(RIP_WARNING,
                             "USER: Wow Window not destroyed: %lX", pwnd);
-                        /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                         wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
-#line 272
                     }
                 }
             }
@@ -296,11 +285,11 @@ static BOOL sbFirstCall = TRUE;
                     if ((*ppcls)->cWndReferenceCount == 0) {
                         if (!DestroyClass(ppcls))
                             return FALSE;
+#line 306
                         /*
                          * DestroyClass does *ppcls = pcls->pclsNext;
                          * so we just want continue here
                          */
-#line 310
                     } else {
 
                         /*
@@ -333,16 +322,12 @@ static BOOL sbFirstCall = TRUE;
                     atom = (*ppcls)->atomClassName;
                     for (iSel = 0; iSel < sizeof(spfnwp) / sizeof(spfnwp[0]); iSel++) {
                         if (atom == gpsi->atomSysClass[iSel]) {
-                            /* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */
                             wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)spfnwp[iSel]);
-#line 343
                             break;
                         }
                     }
                     if (iSel == sizeof(spfnwp) / sizeof(spfnwp[0]))
-                        /* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */
                         wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)gpsi->apfnClientW.pfnDefWindowProc);
-#line 348
                 }
 
                 ppcls = &((*ppcls)->pclsNext);
@@ -380,9 +365,7 @@ static BOOL sbFirstCall = TRUE;
 
                 pwnd = (PWND) pheT->phead;
                 if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
-                    /* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */
                     wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
-#line 386
                 }
             }
         }
