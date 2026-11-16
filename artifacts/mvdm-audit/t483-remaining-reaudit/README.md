@@ -1302,3 +1302,5 @@ P216 initial investigation, superseded: [BUTTON original/DC lifetime investigati
 P216: [whole BUTTON review and controls](p216-button-review.json):87->19(-68),22 verified/published restorations and12 minimized residual decisions;cached,11x2,29 WOW fixtures andFull19 passed. Earlier investigation is superseded by this complete-file review.
 
 P216: [delivery receipt](batch-p216-checkpoint.json),[cumulative witness](cumulative-diff-p216-delta.json):net15123.12 residual points remain pending owner decisions.
+
+P217: [cldib whole-file review](p217-cldib-review.json):7->2(-5),one restored diagnostic point and one minimized header substitution pending owner;cached,publish11x2,bitmap focused/Full19 passed. [Receipt](batch-p217-checkpoint.json). [Cumulative witness](cumulative-diff-p217-delta.json):net15128.

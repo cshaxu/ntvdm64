@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2140 reviewed:790 restored/confirmed published,0 local restorations,8 approved,
-1342 qualified pending;580 unreviewed. Files302/365 audited,63 remain.
+2142 reviewed:791 restored/confirmed published,0 local restorations,8 approved,
+1343 qualified pending;578 unreviewed. Files303/365 audited,62 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,18 +51,15 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P216 package `44b3f7ef-6738-479d-9e9d-e4c1f152d4a1` published11x2;hashes verified.
-btnctl.c87->19(-68),ordinary13/excluded6;22 points restored,12 residuals pending.
-Original two-argument DC release and six callers restored;duplicate callback
-checks removed;no new product state/helper.1851 source and1157 selected lines
-per3 actual contexts match;two required errors retained. Original CRLF restored.
-Cached x86/x64,29 WOW fixtures,strengthened button fixture and Full19 passed.
-Test graph now uses the actual product ABI header entry;first failed controls
-remain recorded. Published/test11 images differ only in package identity.
-Cumulative fixed365 files119913->104790(-15123). Metric excludes diagnostic
-#line and includes required #error;raw btnctl123->34(-89).
-External DOS4GW/Nesticle remains SKIP;no guest or winnt.zip changes.
-S5 remains active,nextR2141. [P216 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p216-checkpoint.json).
+P217 package `06f08e3b-3d8b-47d6-915a-59ed5b0a128b` published11x2;hashes verified.
+cldib.c7->2(-5),ordinary2/excluded0;one restored point,one minimized residual
+pending owner. Original pragma/body/line extent restored;test-only mirror
+selector removed,no new shim.645 source and424 selected lines match.
+Cached x86/x64,bitmap header/GDI and binding/failure/registration fixtures,
+Full19 passed. Cumulative fixed365 files119913->104785(-15128).
+Metric excludes diagnostic #line;raw cldib8->2(-6). External DOS4GW/Nesticle
+remains SKIP. No guest or winnt.zip changes. NextR2143.
+[P217 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p217-checkpoint.json).
 
 ## Remaining Scope
 

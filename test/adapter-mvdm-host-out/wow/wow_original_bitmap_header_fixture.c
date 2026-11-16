@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #define WOW_BITMAP_FIXTURE_BINDINGS 1
+#define WOW_BITMAP_BINDINGS_H 1
 
 /* Test-only original USER header conversion; no production replacement.
  * usercli.h declarations and BitmapWidth retained in their original shape. */

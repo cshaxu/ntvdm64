@@ -7,16 +7,12 @@
 * 09-26-95 ChrisWil  Ported dib-scale code.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-035): original scaling owner retained;
- * the consuming USER bitmap binding supplies its finite declarations. */
-#ifndef WOW_BITMAP_FIXTURE_BINDINGS
 #include "wow_bitmap_bindings.h"
-#endif
+#pragma hdrstop
 
 /*
  * Constants.
  */
-#line 16
 #define FX1  65536   // 1.0 in fixed point
 
 
