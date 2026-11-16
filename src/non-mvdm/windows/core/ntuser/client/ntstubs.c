@@ -1,42 +1,94 @@
-/* DIVERGENCE(OPENNT-HOST-118): unchanged original stored-text wrapper. */
-#if defined(WOW_ORIGINAL_CONTROL_TEXT)
+/**************************************************************************\
+* Module Name: ntstubs.c
+*
+* Copyright (c) Microsoft Corp. 1990 All Rights Reserved
+*
+* client side API stubs
+*
+* History:
+* 03-19-95 JimA             Created.
+\**************************************************************************/
+
+#if defined(WOW_ORIGINAL_CONTROL_TEXT) || defined(WOW_ORIGINAL_DIALOG_GETSET)
 #include "precomp.h"
+#elif defined(WOW_ORIGINAL_CONTROL_COLOR) || defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
+#include "wow_edit_call_bindings.h"
+#else
+#define WOW_ORIGINAL_CLASS_QUERY
+#include "wow_class_query_bindings.h"
+#endif
+#line 13
+#pragma hdrstop
+
+#define CLIENTSIDE 1
+
 #include "../inc/ntsend.h"
 
-#line 1291
-BOOL _DefSetText(
-    HWND hwnd,
-    LPCWSTR lpszText,
-    BOOL bAnsi)
+#line 77
+#ifdef FE_IME
+#line 78
+#error
+#line 83
+#endif
+
+#ifdef WOW_ORIGINAL_CLASS_QUERY
+#line 138
+LONG GetClassWOWWords(
+    HINSTANCE hInstance,
+    LPCTSTR pString)
 {
-    LARGE_STRING str;
+    IN_STRING strClassName;
+    PCLS pcls;
+
+    /*
+     * Make sure cleanup will work successfully
+     */
+    strClassName.fAllocated = FALSE;
 
     BEGINCALL()
 
-        if (lpszText) {
-            if (bAnsi)
-                RtlInitLargeAnsiString((PLARGE_ANSI_STRING)&str,
-                        (LPSTR)lpszText, (UINT)-1);
-            else
-                RtlInitLargeUnicodeString((PLARGE_UNICODE_STRING)&str,
-                        lpszText, (UINT)-1);
+        FIRSTCOPYLPSTRW(&strClassName, pString);
+
+        pcls = NtUserGetWOWClass(hInstance, strClassName.pstr);
+
+        if (pcls == NULL) {
+            MSGERRORCODE(ERROR_CLASS_DOES_NOT_EXIST);
         }
 
-        retval = (DWORD)NtUserDefSetText(
-                hwnd,
-                lpszText ? &str : NULL);
+        pcls = (PCLS)((PBYTE)pcls - GetClientInfo()->ulClientDelta);
+        retval = _GetClassData(pcls, NULL, GCL_WOWWORDS, TRUE);
 
     ERRORTRAP(0);
-    ENDCALL(BOOL);
+    CLEANUPLPSTRW(strClassName);
+    ENDCALL(LONG);
 }
+#endif
 
-/* OPENNT-HOST-098: original explicit-recipient control color entry. */
-#elif defined(WOW_ORIGINAL_CONTROL_COLOR) || defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
-#include "wow_edit_call_bindings.h"
-#include "../inc/ntsend.h"
+#line 358
+#ifdef LATER
+#line 359
+#error
+#line 368
+#endif
+
+#line 380
+#ifdef MEMPHIS_MENUS
+#line 381
+#error
+#line 439
+#else // MEMPHIS_MENUS
+#line 440
+#line 498
+#endif // MEMPHIS_MENUS
+
+#line 500
+#ifdef MEMPHIS_MENU_WATERMARKS
+#line 501
+#error
+#line 522
+#endif // MEMPHIS_MENU_WATERMARKS
 
 #ifdef WOW_ORIGINAL_CONTROL_BRUSH_CLIENT
-/* OPENNT-HOST-102: unchanged implicit-recipient client wrapper. */
 #line 623
 HBRUSH GetControlBrush(
     HWND hwnd,
@@ -55,8 +107,9 @@ HBRUSH GetControlBrush(
     ERRORTRAP(0);
     ENDCALL(HBRUSH);
 }
+#endif
 
-#else
+#ifdef WOW_ORIGINAL_CONTROL_COLOR
 #line 641
 HBRUSH GetControlColor(
     HWND hwndParent,
@@ -78,11 +131,68 @@ HBRUSH GetControlColor(
     ENDCALL(HBRUSH);
 }
 #endif
-/* OPENNT-HOST-086: retain the complete dialog get/set client owner. */
-#elif defined(WOW_ORIGINAL_DIALOG_GETSET)
-#include "precomp.h"
-#pragma hdrstop
 
+#line 693
+#ifdef FE_SB // _PeekMessage()
+#line 694
+#error
+#line 701
+#endif // FE_SB
+
+#line 717
+#ifdef FE_IME // _PeekMessage()
+#line 718
+#error
+#line 720
+#else
+#line 721
+#line 722
+#endif // FE_IME
+
+#line 753
+#ifdef FE_SB // _PeekMessage()
+#line 754
+#error
+#line 758
+#else
+#line 759
+#line 760
+#ifdef DEBUG
+#line 761
+#error
+#line 764
+#endif
+#line 765
+#line 766
+#endif // FE_SB
+
+#line 769
+#ifdef FE_SB // _PeekMessage()
+#line 770
+#error
+#line 779
+#else
+#line 780
+#line 782
+#endif // FE_SB
+
+#line 784
+#ifdef FE_SB // _PeekMessage()
+#line 785
+#error
+#line 792
+#else
+#line 793
+#line 794
+#endif // FE_SB
+
+#line 797
+#ifdef FE_SB // _PeekMessage()
+#line 798
+#error
+#endif // FE_SB
+
+#ifdef WOW_ORIGINAL_DIALOG_GETSET
 #line 827
 LONG _SetWindowLong(
     HWND hwnd,
@@ -116,8 +226,6 @@ LONG _SetWindowLong(
             }
 
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-            /* DIVERGENCE(OPENNT-HOST-121): native HWND owns opaque A/W
-             * procedure storage. Never decode a modern token as NT4 CPD. */
             return wow_dialog_host_set(hwnd, nIndex, dwNewLong, bAnsi);
 #else
 #line 858
@@ -220,7 +328,7 @@ LONG _SetWindowLong(
 #line 953
 #ifdef DEBUG
 #line 954
-#error Excluded unsupported original DEBUG window-style tracing
+#error
 #endif
 #line 956
 
@@ -235,7 +343,7 @@ LONG _SetWindowLong(
 #line 965
 #ifdef DEBUG
 #line 966
-#error Excluded unsupported original DEBUG window-style tracing
+#error
 #line 969
 #endif
 #line 970
@@ -251,178 +359,54 @@ LONG _SetWindowLong(
     ERRORTRAP(0);
     ENDCALL(LONG);
 }
-#else
-/**************************************************************************\
-* Module Name: ntstubs.c
-*
-* Copyright (c) Microsoft Corp. 1990 All Rights Reserved
-*
-* client side API stubs
-*
-* History:
-* 03-19-95 JimA             Created.
-\**************************************************************************/
-
-/* DIVERGENCE(OPENNT-HOST-041): retain original GetClassWOWWords only.
- * Other client services and the private precompiled environment are excluded.
- * A synchronous native class borrow replaces the private shared CLS view. */
-#define WOW_ORIGINAL_CLASS_QUERY
-#include "wow_class_query_bindings.h"
-#include "../inc/ntsend.h"
-
-#line 138
-LONG GetClassWOWWords(
-    HINSTANCE hInstance,
-    LPCTSTR pString)
-{
-    IN_STRING strClassName;
-    PCLS pcls;
-
-    /*
-     * Make sure cleanup will work successfully
-     */
-    strClassName.fAllocated = FALSE;
-
-    BEGINCALL()
-
-        FIRSTCOPYLPSTRW(&strClassName, pString);
-
-        pcls = NtUserGetWOWClass(hInstance, strClassName.pstr);
-
-        if (pcls == NULL) {
-            MSGERRORCODE(ERROR_CLASS_DOES_NOT_EXIST);
-        }
-
-        pcls = (PCLS)((PBYTE)pcls - GetClientInfo()->ulClientDelta);
-        retval = _GetClassData(pcls, NULL, GCL_WOWWORDS, TRUE);
-
-    ERRORTRAP(0);
-    CLEANUPLPSTRW(strClassName);
-    ENDCALL(LONG);
-}
-#endif /* WOW_ORIGINAL_DIALOG_GETSET */
-#line 380
-#ifdef MEMPHIS_MENUS
-#line 381
-#error Excluded unsupported MEMPHIS_MENUS client owner
-#line 439
-#else // MEMPHIS_MENUS
-#line 440
-#line 498
-#endif // MEMPHIS_MENUS
-#line 500
-#ifdef MEMPHIS_MENU_WATERMARKS
-#line 501
-#error Excluded unsupported MEMPHIS_MENU_WATERMARKS client owner
-#line 522
-#endif // MEMPHIS_MENU_WATERMARKS
-#line 523
-#line 1611
-#ifdef FE_SB // fnINWPARAMDBCSCHAR()
-#line 1612
-#error Excluded unsupported FE_SB client message owner
-#line 1645
-#endif // FE_SB
-#line 1646
-
-
-#line 693
-#ifdef FE_SB // _PeekMessage()
-#line 694
-#error Excluded unsupported original FE_SB branch
-#line 701
-#endif // FE_SB
-#line 702
-
-#line 797
-#ifdef FE_SB // _PeekMessage()
-#line 798
-#error Excluded unsupported original FE_SB branch
-#endif // FE_SB
-#line 800
-
-
-#line 753
-#ifdef FE_SB // _PeekMessage()
-#line 754
-#error Excluded unsupported original FE_SB branch
-#line 758
-#else
-#line 759
-#line 760
-#ifdef DEBUG
-#line 761
-#error Excluded unsupported original DEBUG message tracing
-#line 764
 #endif
-#line 765
-#line 766
-#endif // FE_SB
-#line 767
-
-#line 769
-#ifdef FE_SB // _PeekMessage()
-#line 770
-#error Excluded unsupported original FE_SB branch
-#line 779
-#else
-#line 780
-#line 782
-#endif // FE_SB
-#line 783
-
-#line 784
-#ifdef FE_SB // _PeekMessage()
-#line 785
-#error Excluded unsupported original FE_SB branch
-#line 792
-#else
-#line 793
-#line 794
-#endif // FE_SB
-#line 795
-
-
-#line 358
-#ifdef LATER
-#line 359
-#error Excluded unsupported original LATER branch
-#line 368
-#endif
-#line 369
-
-
-#line 2204
-#ifdef DEBUG
-#line 2205
-#error Unsupported DEBUG original branch
-#line 2209
-#endif
-#line 2210
-
-#line 77
-#ifdef FE_IME
-#line 78
-#error Unsupported FE_IME original branch
-#line 83
-#endif
-#line 84
-
-#line 717
-#ifdef FE_IME // _PeekMessage()
-#line 718
-#error Unsupported FE_IME original branch
-#line 720
-#else
-#line 721
-#line 722
-#endif // FE_IME
-#line 723
 
 #line 1020
 #ifdef FE_IME //@TK
 #line 1021
-#error Unsupported FE_IME original branch
+#error
 #line 1033
 #endif
-#line 1034
+
+#ifdef WOW_ORIGINAL_CONTROL_TEXT
+#line 1291
+BOOL _DefSetText(
+    HWND hwnd,
+    LPCWSTR lpszText,
+    BOOL bAnsi)
+{
+    LARGE_STRING str;
+
+    BEGINCALL()
+
+        if (lpszText) {
+            if (bAnsi)
+                RtlInitLargeAnsiString((PLARGE_ANSI_STRING)&str,
+                        (LPSTR)lpszText, (UINT)-1);
+            else
+                RtlInitLargeUnicodeString((PLARGE_UNICODE_STRING)&str,
+                        lpszText, (UINT)-1);
+        }
+
+        retval = (DWORD)NtUserDefSetText(
+                hwnd,
+                lpszText ? &str : NULL);
+
+    ERRORTRAP(0);
+    ENDCALL(BOOL);
+}
+#endif
+
+#line 1611
+#ifdef FE_SB // fnINWPARAMDBCSCHAR()
+#line 1612
+#error
+#line 1645
+#endif // FE_SB
+
+#line 2204
+#ifdef DEBUG
+#line 2205
+#error
+#line 2209
+#endif

@@ -1386,3 +1386,7 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P233 mngrayc](p233-mngrayc-review.json): original wrappers and source structure restored;110->29;residual ownership/correction decisions.
 
 - [P233 delivery](batch-p233-checkpoint.json): original DrawState wrappers and source layout;cached,publish11x2,focused33,Full20;mirror delta-82.
+
+- [P234 ntstubs review](p234-ntstubs-review.json): original source order/metadata restored;five compile contexts and private USER boundary evidence;mirror delta-119.
+
+- [P234 delivery](batch-p234-checkpoint.json): ntstubs original ordering and metadata;cached,publish11x2,focused33,Full20;mirror delta-119.

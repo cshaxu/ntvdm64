@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2353 reviewed:906 restored/confirmed published,0 local restorations,23 approved/policy,
-1424 qualified pending;367 unreviewed. Files330/365 source-reviewed,35 remain;
-P233 file330 verified/published;Git delivery accompanies receipt.
+2379 reviewed:911 restored/confirmed published,0 local restorations,37 approved/policy,
+1431 qualified pending;341 unreviewed. Files331/365 source-reviewed,34 remain;
+P234 file331 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P233 package `5df64755-6eb1-416b-b53d-6e9faf61f596` published11x2;hashes verified.
-Original DrawStateA/W and bitmap helper structure restored;invariant selector removed.
-Mirror delta-82;8 whole restores,8 mngrayc residual points pending owner.
+P234 package `49f458dd-ee28-4007-96eb-3ff6e009caa3` published11x2;hashes verified.
+Original ntstubs function order and metadata restored;all16#error retained.
+Mirror2141->2022(-119);5 body/order points restored,14 exclusion-policy points,7 pending.
 Cached x86/x64,33 focused,Full20 including DOS4GW and governance passed.
-Cumulative365-file mirror diff119913->102520(-17393).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p233-checkpoint.json).
-Git delivery accompanies receipt;R2354 next.
+Cumulative365-file mirror diff119913->102401(-17512).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p234-checkpoint.json).
+Git delivery accompanies receipt;R2380 next.
 
 ## Remaining Scope
 

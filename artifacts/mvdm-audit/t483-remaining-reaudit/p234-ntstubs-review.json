@@ -1,0 +1,165 @@
+{
+  "points": "R2354-R2379",
+  "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "source_pin": {
+    "head": "d9f209aaed882fb55d82b83fb26791a7d6bca07a",
+    "current_sha256": "f8c4a2936f7a0d61e73f02121fc33f92985c12ab51849c81c39f2b9b4a0eb3ea",
+    "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+    "scope": "R2354 source/compile investigation;no production edit"
+  },
+  "after_sha256": "7cdd5e3985e5bb437b3785e23f9dd2c36b1eb4b4274e6a96757367307a66edb9",
+  "metric": {
+    "before": {
+      "add": 115,
+      "delete": 2026,
+      "total": 2141
+    },
+    "after": {
+      "add": 53,
+      "delete": 1969,
+      "total": 2022
+    }
+  },
+  "delta": -119,
+  "restored_or_original_position_confirmed": [
+    2355,
+    2357,
+    2358,
+    2359,
+    2364
+  ],
+  "excluded_policy": [
+    2365,
+    2366,
+    2367,
+    2368,
+    2369,
+    2370,
+    2371,
+    2372,
+    2373,
+    2374,
+    2375,
+    2376,
+    2377,
+    2378
+  ],
+  "pending": {
+    "2354": "Original982-1290 client APIs call NT4 BEGINRECV services,ProbeMessage/ProbeAndReadUnicodeString and private PCURSORFIND/CURSORDATA. Five actual restore compiles fail;WU32TranslateMessage links USER32 TranslateMessage,redraw uses modern HWND public API.",
+    "2356": "Original167-622 includes NT4 NtUserInitTask/PpiCurrent WOW state,shared memory/hook/menu/key services. Five restore compiles fail;current wow_user_task_lifecycle calls retained xxxInitTask through its admitted task carrier. Restoring old client/kernel shell does not supply the modern queue or native objects.",
+    "2360": "Original660-826 OpenClipboard/PeekMessage/RegisterHotKey requires NT4 BEGINRECV,thread locks,PtiCurrent keyboard layout and extra returned fields. Five restore compiles fail;current queue receive calls public PeekMessageA/W on actual USER queue.",
+    "2361": "Original dialog setter writes PDLG->lpfnDlg/flags and decodes NT4 CPD tokens;actual native HWND process slot belongs to USER. wow_dialog_host_set calls SetWindowLongA/W. Restoring local view writes cannot update that real slot;private NT4 token interpretation cannot decode modern opaque values.",
+    "2362": "Closing boundary paired withR2361;preserve original fallback for original-layout focused context and native host path for actual HWND owner.",
+    "2363": "Original file notice/pragma/CLIENTSIDE restored;remaining header selection/private unselected services need different admitted text,color,dialog,class ABI scopes. Original general precomp pulls private USER/NTOS closure;R2354 and other original-range probes expose actual unavailable types/services. No new header/shim added.",
+    "2379": "Original1316-2262 window creation,layout and message thunk services cross private NT4 receive ABI. Five restore compiles fail;original NtUserCreateWindowEx fourteen-slot call differs from current17-slot binding documented in wow_dialog_native_bindings.c. Modern public APIs and admitted current bindings own these calls;not safe to forward the old signature."
+  },
+  "compile_controls": {
+    "control-brush-client-ntstubs-before": 0,
+    "control-color-ntstubs-before": 0,
+    "control-text-ntstubs-before": 0,
+    "ntstubs-ntstubs-before": 0,
+    "private-word-client-ntstubs-before": 0
+  },
+  "original_range_restore_compiles": {
+    "r2354": {
+      "control-brush-client-r2354-restored": 2,
+      "control-color-r2354-restored": 2,
+      "control-text-r2354-restored": 2,
+      "ntstubs-r2354-restored": 2,
+      "private-word-client-r2354-restored": 2
+    },
+    "r2356": {
+      "control-brush-client-r2356-restored": 2,
+      "control-color-r2356-restored": 2,
+      "control-text-r2356-restored": 2,
+      "ntstubs-r2356-restored": 2,
+      "private-word-client-r2356-restored": 2
+    },
+    "r2360": {
+      "control-brush-client-r2360-restored": 2,
+      "control-color-r2360-restored": 2,
+      "control-text-r2360-restored": 2,
+      "ntstubs-r2360-restored": 2,
+      "private-word-client-r2360-restored": 2
+    },
+    "r2379": {
+      "control-brush-client-r2379-restored": 2,
+      "control-color-r2379-restored": 2,
+      "control-text-r2379-restored": 2,
+      "ntstubs-r2379-restored": 2,
+      "private-word-client-r2379-restored": 2
+    }
+  },
+  "selected_preprocessing": [
+    {
+      "profile": "control-brush-client-before",
+      "equal": true,
+      "before": "21a5cd3e0bc753e7a678f3f56cf252ff6652937a01528956fedb57d04c23b3d1",
+      "after": "21a5cd3e0bc753e7a678f3f56cf252ff6652937a01528956fedb57d04c23b3d1"
+    },
+    {
+      "profile": "control-color-before",
+      "equal": true,
+      "before": "30d7f814fdbbd956dc5b0555d10c2c4aae1dd1e10b94a1e8626cc7c814b1efcc",
+      "after": "30d7f814fdbbd956dc5b0555d10c2c4aae1dd1e10b94a1e8626cc7c814b1efcc"
+    },
+    {
+      "profile": "control-text-before",
+      "equal": true,
+      "before": "0cec86b245bad802b620d2d385714324df9340c447f9913c56b7cca5e59bd653",
+      "after": "0cec86b245bad802b620d2d385714324df9340c447f9913c56b7cca5e59bd653"
+    },
+    {
+      "profile": "ntstubs-before",
+      "equal": true,
+      "before": "f377589cde89a38106c70b0104641b0cf1feea9bd66cdb6133563b9da7cd5040",
+      "after": "f377589cde89a38106c70b0104641b0cf1feea9bd66cdb6133563b9da7cd5040"
+    },
+    {
+      "profile": "private-word-client-before",
+      "equal": true,
+      "before": "91f6e4c8b4b82c2ba24541a36fc109e01f379a0c41934c74664b1f6a5ad77fa6",
+      "after": "91f6e4c8b4b82c2ba24541a36fc109e01f379a0c41934c74664b1f6a5ad77fa6"
+    }
+  ],
+  "preprocessing_method": "Five actual product profiles;also compare nonblank line text trimmed only at line edges,excluding #line and restored pragma;string interior preserved and equal",
+  "line_proof": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "sha256": "7cdd5e3985e5bb437b3785e23f9dd2c36b1eb4b4274e6a96757367307a66edb9",
+    "matching_nonempty_original_rows": 202,
+    "mismatches": [],
+    "error_count": 16,
+    "all_errors_bare": true,
+    "newline": "CRLF",
+    "selected_equivalence": "selected-token-equivalence.json;five actual contexts",
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+        "sha256": "7cdd5e3985e5bb437b3785e23f9dd2c36b1eb4b4274e6a96757367307a66edb9"
+      }
+    ]
+  },
+  "source_chain_evidence": [
+    "Original kernel/ntstubs.c:2341 NtUserInitTask BEGINRECV,PpiCurrent and xxxInitTask",
+    "Original kernel/ntstubs.c:4192 OpenClipboard ThreadLock;4223 PeekMessage PtiCurrent keyboard layout",
+    "Original kernel/ntstubs.c:5022 TranslateMessage ProbeMessage;5800 cursor data ProbeForRead/private PCURSOR",
+    "wumsg.c:2219 WU32TranslateMessage;actual WOW32 map __imp__TranslateMessage USER32.dll",
+    "wow_user_task_lifecycle.c:574 xxxInitTask,766 PeekMessageA/W,1529 RedrawWindow native mapped call",
+    "wow_dialog_procedure_bindings.c:14 native SetWindowLongA/W;original PDLG assignment is not that owner",
+    "wow_dialog_native_bindings.c native_create_window_fn17slots vs original14"
+  ],
+  "changes": [
+    "Restore source file header and original relative function order",
+    "Restore original pragma and CLIENTSIDE definition",
+    "Place16 preserved #error bodies at original logical positions;all are bare#error",
+    "Remove redundant divergence comments;retain original CPD fallback and actual native procedure owner",
+    "No alternate algorithm,additional shim or new product/test selector"
+  ],
+  "limits": [
+    "Compile failure alone is not original semantic defect;private ownership traces supply the boundary rationale",
+    "No new runtime feature claim;five retained function bodies remain unchanged",
+    "Residual7 decisions remain pending owner;modern USER boundary is not automatically judged defective"
+  ],
+  "verification": "Final cached x86/x64,publication11x2,focused33,Full20,logical lines and governance passed",
+  "delivery_receipt": "batch-p234-checkpoint.json"
+}
