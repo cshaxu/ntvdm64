@@ -6,9 +6,9 @@
 #undef DestroyWindow
 #undef pfnGetExpWinVer
 
-/* Actual dlgbegin body and production private layout. Native creation and
- * messages are explicit doubles. Real hidden HWNDs deliberately remain valid
- * after simulated retirement, so IsWindow alone cannot satisfy assertions. */
+/* Actual creator and private layout; native call boundaries are doubles.
+ * Retirement destroys real hidden HWNDs. Validation follows native liveness;
+ * this fixture does not simulate replacement HWND reuse. */
 HWND WINAPI InternalCreateDialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
 static DIALOG root;
 static DLG data;
@@ -20,7 +20,7 @@ static PFNWOWHANDLERSIN handlers;
 __declspec(thread) wow_dialog_context *wow_dialog_current;
 static unsigned failures, creates, allocations, releases, queries, updates, shows, destroys;
 static HFONT transferred_font;
-static BOOL child_only, fail_child;
+static BOOL child_only, fail_child, fail_promotion, fail_slot;
 enum edge { NONE, ROOT_FONT, ALLOCATE, CREATE_CHILD, CHILD_FONT, CHILD_CODE,
     INITIALIZE, FOCUS_CHILD, DEFAULT_BUTTON, FOREGROUND, SHOW, UPDATE };
 static enum edge fault;
@@ -30,13 +30,14 @@ static BOOL dead(PWND w) { return TestWF(w, WFDESTROYED) || (w->fnid & FNID_STAT
 /* Procedure storage is an explicit transport double in this creator test;
  * native A/W ownership is exercised by wow_dialog_native_owner_probe. */
 LONG WINAPI wow_dialog_host_set(HWND w, int index, LONG value, BOOL ansi)
-{ CHECK(w == native_root && index == DWL_DLGPROC); (void)value; (void)ansi; return 0; }
+{ CHECK(w == native_root && index == DWL_DLGPROC); (void)value; (void)ansi; if (fail_slot) SetLastError(ERROR_INVALID_INDEX); return 0; }
 static void retire(enum edge at)
 {
     PWND target;
     if (fault != at) return;
     target = child_only ? &child : &root.wnd;
     SetWF(target, WFDESTROYED); target->fnid |= FNID_CLEANEDUP_BIT;
+    CHECK(DestroyWindow(child_only ? native_child : native_root));
     if (!child_only) {
         if (data.hUserFont) {
             transferred_font = data.hUserFont;
@@ -53,11 +54,11 @@ BOOL WINAPI wow_edit_native_ensure_gui_thread(void) { return TRUE; }
 int WINAPI wow_edit_native_GdiGetCharDimensions(HDC dc, TEXTMETRICW *tm, LPINT height)
 { (void)dc; (void)tm; *height = 16; return 8; }
 PWND WINAPI wow_window_client_validate_window(HWND w)
-{ return w == native_root ? &root.wnd : w == native_child ? &child : NULL; }
+{ return !IsWindow(w) ? NULL : w == native_root ? &root.wnd : w == native_child ? &child : NULL; }
 PWND WINAPI wow_window_client_validate_window_no_rip(HWND w)
 { return wow_window_client_validate_window(w); }
 BOOL ValidateDialogPwnd(PWND w)
-{ CHECK(w == &root.wnd && !dead(w)); root.pdlg = &data; SetWF(w, WFDIALOGWINDOW); return TRUE; }
+{ CHECK(w == &root.wnd && !dead(w)); if (fail_promotion) return FALSE; root.pdlg = &data; SetWF(w, WFDIALOGWINDOW); return TRUE; }
 DWORD WINAPI WOWDlgInit(HWND w, LONG value) { CHECK(w == native_root && !dead(&root.wnd)); return value; }
 HANDLE WINAPI GetEditDS(void) { ++allocations; retire(ALLOCATE); return (HANDLE)0x1234; }
 VOID WINAPI ReleaseEditDS(HANDLE segment) { CHECK(segment == (HANDLE)0x1234); ++releases; }
@@ -68,7 +69,7 @@ PWND _GetNextDlgTabItem(PWND w, PWND previous, BOOL back)
 { CHECK(w == &root.wnd && !dead(w)); (void)previous; (void)back; return dead(&child) ? NULL : &child; }
 void DlgSetFocus(HWND w) { CHECK(w == native_child && !dead(&root.wnd) && !dead(&child)); retire(FOCUS_CHILD); }
 void xxxCheckDefPushButton(PWND w, HWND old, HWND next)
-{ CHECK(w == &root.wnd && !dead(w)); (void)old; (void)next; retire(DEFAULT_BUTTON); }
+{ CHECK(w == &root.wnd); (void)old; (void)next; if (IsWindow(native_root)) retire(DEFAULT_BUTTON); }
 LONG WINAPI wow_window_client_send_message(PWND w, UINT msg, WPARAM wp, LPARAM lp, BOOL ansi)
 {
     CHECK(w == &root.wnd && !dead(w) && root.pdlg); (void)wp; (void)lp; (void)ansi;
@@ -78,7 +79,8 @@ LONG WINAPI wow_window_client_send_message(PWND w, UINT msg, WPARAM wp, LPARAM l
 }
 LRESULT WINAPI wow_native_SendMessageW(HWND w, UINT msg, WPARAM wp, LPARAM lp)
 {
-    CHECK(w == native_child && !dead(&child) && !dead(&root.wnd)); (void)wp; (void)lp;
+    CHECK(w == native_child && !dead(&root.wnd)); (void)wp; (void)lp;
+    if (dead(&child)) return 0; /* Invalid HWND: native USER sends no callback. */
     if (msg == WM_SETFONT) { retire(CHILD_FONT); return 0; }
     CHECK(msg == WM_GETDLGCODE); ++queries; retire(CHILD_CODE); return DLGC_DEFPUSHBUTTON;
 }
@@ -97,7 +99,7 @@ HWND WINAPI wow_user_create_dialog_window_ex(DWORD ex, PLARGE_STRING cls,
 BOOL WINAPI wow_native_ShowWindow(HWND w, int command)
 { CHECK(w == native_root && !dead(&root.wnd)); (void)command; ++shows; retire(SHOW); return TRUE; }
 BOOL WINAPI wow_native_UpdateWindow(HWND w)
-{ CHECK(w == native_root && !dead(&root.wnd)); ++updates; retire(UPDATE); return TRUE; }
+{ CHECK(w == native_root); if (!IsWindow(w)) return FALSE; ++updates; retire(UPDATE); return TRUE; }
 BOOL WINAPI wow_native_SetForegroundWindow(HWND w)
 { CHECK(w == native_root && !dead(&root.wnd)); retire(FOREGROUND); return TRUE; }
 BOOL WINAPI wow_native_DestroyWindow(HWND w)
@@ -115,6 +117,11 @@ POINT WINAPI wow_dialog_cursor_position(void) { POINT p = {0}; CHECK(FALSE); ret
 static __declspec(align(4)) BYTE resource[256];
 static void setup(enum edge at, BOOL child_fault, DWORD app_version)
 {
+    if (IsWindow(native_child)) CHECK(DestroyWindow(native_child));
+    if (IsWindow(native_root)) CHECK(DestroyWindow(native_root));
+    native_root = CreateWindowExW(0, L"STATIC", L"creator", 0, 0, 0, 10, 10, HWND_MESSAGE, NULL, NULL, NULL);
+    native_child = CreateWindowExW(0, L"STATIC", L"child", WS_CHILD, 0, 0, 10, 10, native_root, NULL, NULL, NULL);
+    CHECK(native_root && native_child);
     ZeroMemory(&root, sizeof(root)); ZeroMemory(&data, sizeof(data)); ZeroMemory(&child, sizeof(child));
     root.wnd.head.h = native_root; root.wnd.fnid = FNID_DIALOG; root.wnd.cbwndExtra = DLGWINDOWEXTRA;
     child.head.h = native_child; child.spwndParent = &root.wnd;
@@ -155,9 +162,16 @@ int __cdecl main(void)
     context.server.atomSysClass[ICLS_EDIT] = 0x81; context.screen.cyPixelsPerInch = 96;
     context.server.rcWork.right = 1024; context.server.rcWork.bottom = 768;
     wow_dialog_current = &context;
-    native_root = CreateWindowExW(0, L"STATIC", L"creator fixture", 0, 0, 0, 10, 10, HWND_MESSAGE, NULL, NULL, NULL);
-    native_child = CreateWindowExW(0, L"STATIC", L"child fixture", 0, 0, 0, 10, 10, HWND_MESSAGE, NULL, NULL, NULL);
-    if (!native_root || !native_child) return 2;
+    setup(NONE, FALSE, 0x30a); fail_promotion = TRUE;
+    result = create(0, TRUE, TRUE, FALSE);
+    printf("promotion-failed result=%p creates=%u destroys=%u\n", result, creates, destroys);
+    CHECK(!result && creates == 1 && destroys == 1);
+    fail_promotion = FALSE;
+    setup(NONE, FALSE, 0x30a); fail_slot = TRUE;
+    result = create(0, TRUE, TRUE, FALSE);
+    printf("slot-failed result=%p creates=%u destroys=%u\n", result, creates, destroys);
+    CHECK(!result && creates == 1 && destroys == 1);
+    fail_slot = FALSE; SetLastError(0);
     setup(NONE, FALSE, 0x30a); CHECK(create(0, TRUE, TRUE, FALSE) == native_root);
     CHECK(creates == 2 && allocations == 1 && queries == 1 && shows == 1 && updates == 1);
     release_transferred(); CHECK(releases == 1);
@@ -166,7 +180,7 @@ int __cdecl main(void)
             setup((enum edge)edge, FALSE, legacy ? 0x30a : 0x400);
             result = create(exempt ? SCDLG_NOREVALIDATE : 0, edge != FOREGROUND, TRUE, FALSE);
             CHECK(!root.pdlg);
-            if (edge == INITIALIZE || edge == FOCUS_CHILD || edge == DEFAULT_BUTTON)
+            if (edge == FOCUS_CHILD || edge == DEFAULT_BUTTON)
                 CHECK(result == (legacy ? native_root : NULL));
             else if (edge == FOREGROUND) CHECK(!result);
             else CHECK(result == (exempt ? native_root : NULL));
@@ -179,10 +193,11 @@ int __cdecl main(void)
     for (edge = CHILD_FONT; edge <= CHILD_CODE; ++edge) for (exempt = 0; exempt < 2; ++exempt) {
         setup((enum edge)edge, TRUE, 0x30a);
         result = create(0, TRUE, TRUE, exempt);
-        CHECK(result == (exempt ? native_root : NULL));
-        CHECK(destroys == (exempt ? 0u : 1u)); release_transferred();
+        CHECK(result == native_root);
+        CHECK(!destroys); release_transferred();
     }
-    CHECK(DestroyWindow(native_child)); CHECK(DestroyWindow(native_root));
+    if (IsWindow(native_child)) CHECK(DestroyWindow(native_child));
+    if (IsWindow(native_root)) CHECK(DestroyWindow(native_root));
     printf("original-creator-lifetime failures=%u\n", failures);
     return failures ? 1 : 0;
 }

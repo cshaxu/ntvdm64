@@ -8,10 +8,6 @@
 * 12-Feb-1991 mikeke    Added Revalidation code
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-081): complete original client creator unit.
- * Private precomp binds the admitted dialog/control dependency group.
- * No template, font, shared-DS or creation algorithm is replaced here. */
-#line 11
 #include "precomp.h"
 #pragma hdrstop
 
@@ -190,8 +186,6 @@ HWND InternalCreateDialog(
     HWND hwnd;
     HWND hwnd2;
     PWND pwnd;
-    /* DIVERGENCE(OPENNT-HOST-081): retain child identity across notifications. */
-    PWND pwndChild;
 #line 189
     HWND hwndNewFocus;
     HWND hwndEditFirst = NULL;
@@ -207,8 +201,6 @@ HWND InternalCreateDialog(
     BOOL fSuccess;
     BOOL fWowWindow;
     HANDLE hmodCreate;
-    /* DIVERGENCE(OPENNT-HOST-081): allocation has not transferred to PDLG yet. */
-    HANDLE hEditDS;
 #line 203
     LPBYTE lpCreateParamsData;
     DLGTEMPLATE2 dt;
@@ -293,6 +285,7 @@ HWND InternalCreateDialog(
 #ifdef DEBUG
 #line 283
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#line 286
 #endif // DEBUG
 #line 287
 
@@ -571,14 +564,10 @@ DeleteFontAndMenuAndFail:
      * dialog window!!!! So do that.
      */
     if (pwnd == NULL || !ValidateDialogPwnd(pwnd)) {
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-        /* DIVERGENCE(OPENNT-HOST-121): failed native/original promotion must
-         * retire the already-created HWND; its menu is now window-owned. */
         if (pwnd != NULL) {
             NtUserDestroyWindow(hwnd);
             hMenu = NULL;
         }
-#endif
 #line 563
         goto DeleteFontAndMenuAndFail;
     }
@@ -620,7 +609,6 @@ DeleteFontAndMenuAndFail:
     PDLG(pwnd)->cxChar = cxChar;
     PDLG(pwnd)->cyChar = cyChar;
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-    /* DIVERGENCE(OPENNT-HOST-121): no competing procedure in original PDLG. */
     SetLastError(0);
     wow_dialog_host_set(hwnd, DWL_DLGPROC, (LONG)lpfnDialog,
         (fSCDLGFlags & SCDLG_ANSI) != 0);
@@ -682,7 +670,6 @@ DeleteFontAndMenuAndFail:
              * Tell the dialog that it will be using this font...
              */
             SendMessageWorker(pwnd, WM_SETFONT, (DWORD)hNewFont, 0L, FALSE);
-            /* DIVERGENCE(OPENNT-HOST-081): resources already belong to PDLG. */
             if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;
 #line 645
         }
@@ -790,14 +777,12 @@ DeleteFontAndMenuAndFail:
              * Allocate only one global object (first time we see editctl.)
              */
             if (!(PDLG(pwnd)->hData)) {
-                /* DIVERGENCE(OPENNT-HOST-081): GlobalNotify may destroy the
-                 * destination while the guest allocator is making room. */
-                hEditDS = GetEditDS();
+                hmodCreate = GetEditDS();
                 if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
-                    if (hEditDS) ReleaseEditDS(hEditDS);
+                    if (hmodCreate) ReleaseEditDS(hmodCreate);
                     goto CreateDialogReturn;
                 }
-                PDLG(pwnd)->hData = hEditDS;
+                PDLG(pwnd)->hData = hmodCreate;
 #line 751
                 if (!(PDLG(pwnd)->hData))
                     goto NoCreate;
@@ -871,7 +856,6 @@ DeleteFontAndMenuAndFail:
                 dwExpWinVer,
                 NULL);
 
-        /* DIVERGENCE(OPENNT-HOST-081): child creation can destroy its parent. */
         if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;
 #line 823
         if (hwnd2 == NULL) {
@@ -889,8 +873,6 @@ NoCreate:
         }
         else
         {
-            pwndChild = ValidateHwnd(hwnd2);
-            if (!pwndChild) goto NoCreate;
 
 #line 839
             if (dit.dwHelpID)
@@ -902,19 +884,15 @@ NoCreate:
          */
             if (hNewFont != NULL) {
                 SendMessage(hwnd2, WM_SETFONT, (DWORD)hNewFont, 0L);
-                /* DIVERGENCE(OPENNT-HOST-081): never query a reused child. */
                 if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;
-                if (TestWF(pwndChild, WFDESTROYED) || (pwndChild->fnid & FNID_STATUS_BITS)) goto NoCreate;
 #line 848
             }
 
         /*
          * Result gets ID of last (hopefully only) defpushbutton.
          */
-            /* DIVERGENCE(OPENNT-HOST-081): query may release the result owner. */
             fSuccess = SendMessage(hwnd2, WM_GETDLGCODE, 0, 0L) & DLGC_DEFPUSHBUTTON;
             if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;
-            if (TestWF(pwndChild, WFDESTROYED) || (pwndChild->fnid & FNID_STATUS_BITS)) goto NoCreate;
             if (fSuccess) {
 #line 854
                 PDLG(pwnd)->result = dit.dwID;
@@ -942,9 +920,6 @@ NoCreate:
         if (!RevalidateHwnd(hwnd)) {
             goto CreateDialogReturn;
         }
-        /* DIVERGENCE(OPENNT-HOST-081): preserve the post-init legacy return. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CheckDialogAfterInit;
-
 #line 880
         if (fSuccess && !PDLG(pwnd)->fEnd) {
 
@@ -969,19 +944,14 @@ NoCreate:
                 if (hwndNewFocus = HW(pwndT))
                     DlgSetFocus(hwndNewFocus);
 
-                /* DIVERGENCE(OPENNT-HOST-081): focus callbacks may destroy. */
-                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CheckDialogAfterInit;
-                if (!pwndT || (!TestWF(pwndT, WFDESTROYED) && !(pwndT->fnid & FNID_STATUS_BITS)))
 #line 903
-                    xxxCheckDefPushButton(pwnd, hwndEditFirst, hwndNewFocus);
+                xxxCheckDefPushButton(pwnd, hwndEditFirst, hwndNewFocus);
 #line 904
             }
         }
     }
 
-CheckDialogAfterInit:
-    /* DIVERGENCE(OPENNT-HOST-081): IsWindow alone can see a replacement. */
-    if (!IsWindow(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
+    if (!IsWindow(hwnd))
 #line 909
     {
         // Omnis7 relies on a nonzero return even though they nuked this
@@ -1000,8 +970,7 @@ CheckDialogAfterInit:
      */
     if (bFlags & CD_SETFOREGROUND) {
         NtUserSetForegroundWindow(hwnd);
-        /* DIVERGENCE(OPENNT-HOST-081): foreground callbacks can retire root. */
-        if (!IsWindow(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
+        if (!IsWindow(hwnd))
 #line 927
         {
             hwnd = NULL;
@@ -1011,8 +980,6 @@ CheckDialogAfterInit:
 
     if ((bFlags & CD_VISIBLE) && !PDLG(pwnd)->fEnd && (!TestWF(pwnd, WFVISIBLE))) {
         NtUserShowWindow(hwnd, SHOW_OPENWINDOW);
-        /* DIVERGENCE(OPENNT-HOST-081): do not update a retired/reused HWND. */
-        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;
 #line 935
         UpdateWindow(hwnd);
     }
@@ -1025,9 +992,7 @@ CreateDialogReturn:
      * but still expects non-zero return value from CreateDialog so we will
      * do like win 3.1 and not revalidate for 16 bit apps
      */
-    /* DIVERGENCE(OPENNT-HOST-081): retain the original explicit WOW exemption. */
-    if (!(fSCDLGFlags & SCDLG_NOREVALIDATE) &&
-            (!RevalidateHwnd(hwnd) || TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))) {
+    if (!(fSCDLGFlags & SCDLG_NOREVALIDATE) && !RevalidateHwnd(hwnd)) {
 #line 947
         hwnd = NULL;
     }

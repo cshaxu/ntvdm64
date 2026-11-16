@@ -1,0 +1,4137 @@
+{
+  "batch": "P225",
+  "status": "Final cached x86/x64 build,publish11x2,32 controls,Full20 and governance passed;Git delivery accompanies receipt",
+  "files": [
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "point": "T483-R2192",
+      "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+      "before_sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+      "after_sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+      "change": "Add #line1763 before original LATER endif. Existing active #line1764 after endif unchanged.",
+      "mirror_diff": {
+        "before": 17,
+        "after": 17,
+        "delta": 0,
+        "add": 2,
+        "delete": 15
+      },
+      "normalized_original_differences": [
+        {
+          "original_start": 1507,
+          "original_count": 1,
+          "current_count": 1,
+          "replacement": [
+            "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+          ]
+        },
+        {
+          "original_start": 1749,
+          "original_count": 14,
+          "current_count": 1,
+          "replacement": [
+            "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register."
+          ]
+        }
+      ],
+      "selected_code": "All other lines equal original when diagnostic directives omitted. Both errors retained. No execution or binding change.",
+      "line_limit": "Inserted directive maps original closing frame in source/selected-LATER negative context. In normal LATER-disabled context its body is not preprocessed;existing post-endif directive1764 owns following selected diagnostic lines.",
+      "verification": "Actual product preprocessing;cached full build,publish11x2,focused32,Full20 and governance passed;no combo algorithm change.",
+      "status": "P225 published/verified;Git delivery accompanies receipt"
+    },
+    {
+      "status": "Final cached x86/x64 build,publish11x2,32 controls,Full20 and governance passed;Git delivery accompanies receipt",
+      "file": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "points": "R2193-R2212",
+      "before_sha256": "09b5a77268835e633f174cba5bb6715d7dc9158374bd05f3ea3ac4a77133b838",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "before_metric": {
+        "add": 72,
+        "delete": 13
+      },
+      "comment_candidate_metric": {
+        "add": 52,
+        "delete": 13
+      },
+      "original_client_lock_finding": {
+        "path": "O:/repos.external/OpenNT/windows/core/ntuser/client/usercli.h",
+        "lines": "330-341",
+        "finding": "Original client ThreadLock and ThreadLockAlways macros only reference the local lock variable. Do not claim original client ThreadLock pins native HWND or prevents PDLG cleanup."
+      },
+      "production_chain": [
+        "wow_user_modal_dialog_box enters task/borrow/call scope then original InternalCreateDialog",
+        "wow_dialog_host_set is SetWindowLongA/W DWL_DLGPROC;modern USER owns actual procedure slot",
+        "wow_window_client_validate_window calls callback-first wow_user_borrow_window_state;NoRip shares resolver",
+        "wow_window_words_binding terminal marks WFDESTROYED then invokes wow_dialog_finalize_bound",
+        "original dlgmgr DoCleanup releases shared edit DS/font and clears PDLG through SFI_SETDIALOGPOINTER"
+      ],
+      "fixture_limit": "wow_dialog_creator_lifetime_fixture uses explicit native call doubles and leaves real hidden handles valid after simulated retirement. It cannot alone prove real native handle-reuse or every new guard necessary. Existing production cleanup/source contract must be matched per edge.",
+      "next_actions": [
+        "Finish each ordered lifetime/resource/failure point;compare original existing revalidation before retaining any added check.",
+        "Verify candidate against actual product context and relevant original-restoration negative controls.",
+        "Finish whole file before applying substantive changes and building accumulated combo+dlgbegin batch."
+      ],
+      "current_sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+      "current_metric": {
+        "add": 34,
+        "delete": 10
+      },
+      "restored_points": [
+        {
+          "id": "T483-R2193",
+          "before": "+3/-0",
+          "after": "+0/-0",
+          "proof": "Exact original first12 lines;redundant #line11 removed with three added comment lines. No executable or binding change;all error bodies untouched."
+        }
+      ],
+      "isolated_lifetime_controls": [
+        {
+          "name": "current",
+          "source_sha256": "0f5b5ce34213d140f6e34d0846aee5bb4989cee15b0d3c51e7c683b0486e8cd8",
+          "compile_log": "build\\t483-s5-p225\\current-compile.log",
+          "link_log": "build\\t483-s5-p225\\current-link.log",
+          "run_exit": 0,
+          "run_log": "original-creator-lifetime failures=0"
+        },
+        {
+          "name": "restore-root-font",
+          "source_sha256": "5f6f34cfc03658940d86005819136d3624efa4e9b51ba9ed2f8dc6ea69a61e4a",
+          "compile_log": "build\\t483-s5-p225\\restore-root-font-compile.log",
+          "link_log": "build\\t483-s5-p225\\restore-root-font-link.log",
+          "run_exit": 3,
+          "run_log": "SEH=c0000005 edge=1 child=0"
+        },
+        {
+          "name": "restore-edit-allocation",
+          "source_sha256": "a364ec7b5da3e49b7f48c4e329c540b7e3519579eac3607760738e7f9b95e690",
+          "compile_log": "build\\t483-s5-p225\\restore-edit-allocation-compile.log",
+          "link_log": "build\\t483-s5-p225\\restore-edit-allocation-link.log",
+          "run_exit": 3,
+          "run_log": "SEH=c0000005 edge=2 child=0"
+        },
+        {
+          "name": "restore-child-query",
+          "source_sha256": "31a6f329179bd9de25ea1d10c857faeb93052af44eee20386094484a9c3d1515",
+          "compile_log": "build\\t483-s5-p225\\restore-child-query-compile.log",
+          "link_log": "build\\t483-s5-p225\\restore-child-query-link.log",
+          "run_exit": 3,
+          "run_log": "SEH=c0000005 edge=5 child=0"
+        },
+        {
+          "name": "restore-init-revalidation",
+          "source_sha256": "db33f71eafe442cc3647e373ba09003a27103d4efef6d61fe3237b3648200207",
+          "compile_log": "build\\t483-s5-p225\\restore-init-revalidation-compile.log",
+          "link_log": "build\\t483-s5-p225\\restore-init-revalidation-link.log",
+          "run_exit": 3,
+          "run_log": "SEH=c0000005 edge=6 child=0"
+        }
+      ],
+      "counter_review": {
+        "fixture": "Build-only derivative catches SEH to avoid crash dialogs;otherwise actual creator and existing retirement doubles unchanged. Production fixture not modified.",
+        "result": "Current passes;four isolated original-restoration variants access null PDLG after simulated retirement. This is not a real native HWND-reuse reproduction.",
+        "new_limitation": "wow_user_borrow_leave restores saved callback cache before returning. Creator enters a borrow scope without setting its newly-created HWND as callback. Therefore generic callback-first resolution does not prove post-WM_INITDIALOG revalidation actually returns the retired creator WND. The fixture always returning retired WND overstates that case.",
+        "next_check": "Trace actual callback cache after SendMessageWorker returns and native handle/current generation resolution. Do not admit R2207/R2212 as necessary from the fixture alone.",
+        "allocation_source": "client.c GetEditDS -> registered W32GlobalAlloc16 -> GlobalAllocLock16;trace allocator callback before claiming GlobalNotify destruction as production evidence.",
+        "callee_source": "dlgmgr2.c xxxCheckDefPushButton revalidates new focus then sends WM_GETDLGCODE;caller child guard must be assessed with actual callback cache/identity, not merely asserted redundant."
+      },
+      "byte_preservation": "Exact pre-edit bytes except header/comment #line removal;existing LF preserved.",
+      "child_restoration": {
+        "points": [
+          "R2194",
+          "R2204",
+          "R2205-child-only",
+          "R2206-child-only"
+        ],
+        "reason": "Original creator does not equate a child destroying itself during notification with CreateWindow failure. Added NoCreate changes behavior and can destroy the live parent.",
+        "native_control": "root-live=1 child-live=0 query-result=0 child-query-calls=0 error=1400",
+        "native_exit": 0,
+        "creator_control": "original-creator-lifetime failures=0",
+        "creator_exit": 0,
+        "limits": "Native control proves ordinary destruction with no replacement creation. No claim of comprehensive same-numeric-HWND reuse testing. No observed or concrete supported-path failure established requiring deviation from original child semantics.",
+        "fixture_correction": "Removed mirror-specific parent-destruction expectation for child retirement;retains both DS_NOFAILCREATE settings and checks parent success/no destroy. Dead child query returns0 as native control proves. Root-retirement tests unchanged.",
+        "native_control_source": "#include <windows.h>\n#include <stdio.h>\nstatic unsigned queries;\nstatic LRESULT CALLBACK child_proc(HWND w, UINT m, WPARAM a, LPARAM b)\n{\n    if (m == WM_SETFONT) { DestroyWindow(w); return 0; }\n    if (m == WM_GETDLGCODE) { ++queries; return DLGC_DEFPUSHBUTTON; }\n    return DefWindowProcW(w, m, a, b);\n}\nint main(void)\n{\n    WNDCLASSW wc = {0}; HWND root, child; LRESULT result;\n    wc.lpfnWndProc = child_proc; wc.lpszClassName = L\"P225ChildRetirement\";\n    wc.hInstance = GetModuleHandleW(NULL);\n    if (!RegisterClassW(&wc)) return 2;\n    root = CreateWindowExW(0, L\"STATIC\", L\"P225\", 0, 0, 0, 10, 10,\n        HWND_MESSAGE, NULL, wc.hInstance, NULL);\n    child = CreateWindowExW(0, wc.lpszClassName, L\"child\", WS_CHILD,\n        0, 0, 10, 10, root, NULL, wc.hInstance, NULL);\n    if (!root || !child) return 3;\n    SendMessageW(child, WM_SETFONT, 0, 0);\n    SetLastError(0);\n    result = SendMessageW(child, WM_GETDLGCODE, 0, 0);\n    printf(\"root-live=%d child-live=%d query-result=%ld child-query-calls=%u error=%lu\\n\",\n        IsWindow(root), IsWindow(child), (long)result, queries, GetLastError());\n    if (!IsWindow(root) || IsWindow(child) || result || queries) return 4;\n    DestroyWindow(root); UnregisterClassW(wc.lpszClassName, wc.hInstance);\n    return 0;\n}\n",
+        "native_control_source_sha256": "8a633796f654e47a06c09210050a5d891dfd67c78966e97fbce835fedd6120b3",
+        "native_compile_command": "MSVC x86 cl /TC /MT /W4 native-child-retirement.c /link user32.lib; all outputs under build/t483-s5-p225",
+        "source_scope": "No original guest code or binaries modified. Native HWND test was hidden and noninteractive."
+      },
+      "edit_handle_minimization": {
+        "point": "R2195",
+        "change": "Remove added HANDLE hEditDS;reuse original HANDLE hmodCreate for allocation result before transfer. Original next statement already sets hmodCreate to PDLG hData.",
+        "retained_boundary": "GetEditDS -> W32GlobalAlloc16 -> WOWGlobalAllocLock16 -> CallBack16 RET_GLOBALALLOCLOCK;original kernel31 3gmoreme gnotify invokes registered TDB_GNotifyProc. Allocation reentrancy is real. Resource transfer/check remains for R2202 review."
+      },
+      "line_update": {
+        "point": "R2196",
+        "change": "#line286 before DEBUG endif,existing selected post-endif line mapping retained;error body unchanged."
+      },
+      "promotion_controls": {
+        "promotion-current": {
+          "exit": 0,
+          "log": "promotion-failed result=00000000 creates=1 destroys=1\nslot-failed result=00000000 creates=1 destroys=1\noriginal-creator-lifetime failures=0"
+        },
+        "promotion-original": {
+          "exit": 1,
+          "log": "promotion-failed result=00000000 creates=1 destroys=0\nFAIL line=165 edge=0 child=0\nslot-failed result=00000000 creates=1 destroys=1\noriginal-creator-lifetime failures=1"
+        }
+      },
+      "promotion_conclusion": {
+        "points": [
+          "R2197",
+          "R2198"
+        ],
+        "before_diff": 11,
+        "after_diff": 7,
+        "delta": -4,
+        "source": "ValidateDialogPwnd can return FALSE on native slot initialization or lookaside initialization/allocation failure. InternalCreateDialog already owns a created HWND. Original DeleteFontAndMenuAndFail does not destroy it;caller receives NULL and has no handle to retire. Current exact path destroys once and clears attached-menu local before original cleanup.",
+        "limits": "Injected promotion failure runs actual creator with explicit native creation/destroy doubles;not a live low-memory reproduction. Counts establish exact call flow,source establishes real failure returns. No claim invalid ValidateHwnd NULL cleanup is fixed.",
+        "minimization": "Removed local profile ifdef/endif and two explanatory comment lines. Existing supported creator contexts all select native dialog procedure owner;cleanup itself is independent of procedure storage.",
+        "remaining": "Necessary cleanup and closing brace remain pending owner decision,not approved retention."
+      },
+      "native_slot_conclusion": {
+        "point": "R2199",
+        "delta": -1,
+        "remaining_diff": "+12/-1",
+        "evidence": "Selected original DefDlgProcWorker calls host_notify for WM_NOTIFYFORMAT and host_call for procedure dispatch. Both actual native DefDlgProc A/W encoding and public Get/SetWindowLong dialog slots must observe one procedure. A private PDLG assignment alone cannot publish it to USER;mirroring both requires additional synchronization and a second authority.",
+        "probe_exit": 0,
+        "probe_log": "ansi=0 prior=00000000 replaced=00000000\nansi=1 prior=00000000 replaced=FFFF0BA7\nWOW_DIALOG_NATIVE_OWNER errors=0 iterations=64 callbacks=256 terminal=32",
+        "probe_sha256": "f32af670ddf9e8593ab64d75bce08399220bb35757d71794a11734ddf0774371",
+        "scope": "Existing native slot/A-W ownership probe executable,not a new whole-product build or guest runtime test. Initialization failure is covered by new creator slot-failure injection.",
+        "decision": "Remove explanatory comment;keep native set plus failure rollback pending owner review;do not restore private slot as competing state."
+      },
+      "final_diff_delta": -41,
+      "restored_points_final": [
+        "R2193",
+        "R2194",
+        "R2195",
+        "R2196",
+        "R2204",
+        "R2207",
+        "R2208",
+        "R2209",
+        "R2210",
+        "R2211",
+        "R2212"
+      ],
+      "policy_retained": [
+        "R2200"
+      ],
+      "pending_points_final": [
+        "R2197",
+        "R2198",
+        "R2199",
+        "R2201",
+        "R2202",
+        "R2203",
+        "R2205",
+        "R2206"
+      ],
+      "final_line_proof": {
+        "scope": "Literal source mapping plus actual product dialog/combo and fixture dialog preprocessing;expanded rows recorded separately.",
+        "exact_original_lines": [
+          {
+            "physical": 1,
+            "logical": 1
+          },
+          {
+            "physical": 2,
+            "logical": 2
+          },
+          {
+            "physical": 3,
+            "logical": 3
+          },
+          {
+            "physical": 4,
+            "logical": 4
+          },
+          {
+            "physical": 5,
+            "logical": 5
+          },
+          {
+            "physical": 6,
+            "logical": 6
+          },
+          {
+            "physical": 7,
+            "logical": 7
+          },
+          {
+            "physical": 8,
+            "logical": 8
+          },
+          {
+            "physical": 9,
+            "logical": 9
+          },
+          {
+            "physical": 15,
+            "logical": 15
+          },
+          {
+            "physical": 17,
+            "logical": 17
+          },
+          {
+            "physical": 19,
+            "logical": 19
+          },
+          {
+            "physical": 20,
+            "logical": 20
+          },
+          {
+            "physical": 21,
+            "logical": 21
+          },
+          {
+            "physical": 22,
+            "logical": 22
+          },
+          {
+            "physical": 23,
+            "logical": 23
+          },
+          {
+            "physical": 25,
+            "logical": 25
+          },
+          {
+            "physical": 26,
+            "logical": 26
+          },
+          {
+            "physical": 27,
+            "logical": 27
+          },
+          {
+            "physical": 28,
+            "logical": 28
+          },
+          {
+            "physical": 29,
+            "logical": 29
+          },
+          {
+            "physical": 31,
+            "logical": 31
+          },
+          {
+            "physical": 33,
+            "logical": 33
+          },
+          {
+            "physical": 34,
+            "logical": 34
+          },
+          {
+            "physical": 36,
+            "logical": 36
+          },
+          {
+            "physical": 37,
+            "logical": 37
+          },
+          {
+            "physical": 38,
+            "logical": 38
+          },
+          {
+            "physical": 39,
+            "logical": 39
+          },
+          {
+            "physical": 40,
+            "logical": 40
+          },
+          {
+            "physical": 41,
+            "logical": 41
+          },
+          {
+            "physical": 43,
+            "logical": 43
+          },
+          {
+            "physical": 44,
+            "logical": 44
+          },
+          {
+            "physical": 45,
+            "logical": 45
+          },
+          {
+            "physical": 46,
+            "logical": 46
+          },
+          {
+            "physical": 47,
+            "logical": 47
+          },
+          {
+            "physical": 48,
+            "logical": 48
+          },
+          {
+            "physical": 51,
+            "logical": 51
+          },
+          {
+            "physical": 52,
+            "logical": 52
+          },
+          {
+            "physical": 53,
+            "logical": 53
+          },
+          {
+            "physical": 54,
+            "logical": 54
+          },
+          {
+            "physical": 55,
+            "logical": 55
+          },
+          {
+            "physical": 56,
+            "logical": 56
+          },
+          {
+            "physical": 57,
+            "logical": 57
+          },
+          {
+            "physical": 59,
+            "logical": 59
+          },
+          {
+            "physical": 60,
+            "logical": 60
+          },
+          {
+            "physical": 61,
+            "logical": 61
+          },
+          {
+            "physical": 62,
+            "logical": 62
+          },
+          {
+            "physical": 63,
+            "logical": 63
+          },
+          {
+            "physical": 64,
+            "logical": 64
+          },
+          {
+            "physical": 65,
+            "logical": 65
+          },
+          {
+            "physical": 66,
+            "logical": 66
+          },
+          {
+            "physical": 67,
+            "logical": 67
+          },
+          {
+            "physical": 69,
+            "logical": 69
+          },
+          {
+            "physical": 71,
+            "logical": 71
+          },
+          {
+            "physical": 72,
+            "logical": 72
+          },
+          {
+            "physical": 73,
+            "logical": 73
+          },
+          {
+            "physical": 74,
+            "logical": 74
+          },
+          {
+            "physical": 75,
+            "logical": 75
+          },
+          {
+            "physical": 76,
+            "logical": 76
+          },
+          {
+            "physical": 78,
+            "logical": 78
+          },
+          {
+            "physical": 79,
+            "logical": 79
+          },
+          {
+            "physical": 80,
+            "logical": 80
+          },
+          {
+            "physical": 81,
+            "logical": 81
+          },
+          {
+            "physical": 82,
+            "logical": 82
+          },
+          {
+            "physical": 84,
+            "logical": 84
+          },
+          {
+            "physical": 85,
+            "logical": 85
+          },
+          {
+            "physical": 87,
+            "logical": 87
+          },
+          {
+            "physical": 88,
+            "logical": 88
+          },
+          {
+            "physical": 89,
+            "logical": 89
+          },
+          {
+            "physical": 90,
+            "logical": 90
+          },
+          {
+            "physical": 91,
+            "logical": 91
+          },
+          {
+            "physical": 92,
+            "logical": 92
+          },
+          {
+            "physical": 93,
+            "logical": 93
+          },
+          {
+            "physical": 94,
+            "logical": 94
+          },
+          {
+            "physical": 95,
+            "logical": 95
+          },
+          {
+            "physical": 96,
+            "logical": 96
+          },
+          {
+            "physical": 97,
+            "logical": 97
+          },
+          {
+            "physical": 99,
+            "logical": 99
+          },
+          {
+            "physical": 100,
+            "logical": 100
+          },
+          {
+            "physical": 102,
+            "logical": 102
+          },
+          {
+            "physical": 103,
+            "logical": 103
+          },
+          {
+            "physical": 106,
+            "logical": 106
+          },
+          {
+            "physical": 108,
+            "logical": 108
+          },
+          {
+            "physical": 110,
+            "logical": 110
+          },
+          {
+            "physical": 112,
+            "logical": 112
+          },
+          {
+            "physical": 113,
+            "logical": 113
+          },
+          {
+            "physical": 115,
+            "logical": 115
+          },
+          {
+            "physical": 116,
+            "logical": 116
+          },
+          {
+            "physical": 118,
+            "logical": 118
+          },
+          {
+            "physical": 119,
+            "logical": 119
+          },
+          {
+            "physical": 120,
+            "logical": 120
+          },
+          {
+            "physical": 121,
+            "logical": 121
+          },
+          {
+            "physical": 122,
+            "logical": 122
+          },
+          {
+            "physical": 124,
+            "logical": 124
+          },
+          {
+            "physical": 125,
+            "logical": 125
+          },
+          {
+            "physical": 126,
+            "logical": 126
+          },
+          {
+            "physical": 127,
+            "logical": 127
+          },
+          {
+            "physical": 128,
+            "logical": 128
+          },
+          {
+            "physical": 129,
+            "logical": 129
+          },
+          {
+            "physical": 130,
+            "logical": 130
+          },
+          {
+            "physical": 131,
+            "logical": 131
+          },
+          {
+            "physical": 132,
+            "logical": 132
+          },
+          {
+            "physical": 133,
+            "logical": 133
+          },
+          {
+            "physical": 134,
+            "logical": 134
+          },
+          {
+            "physical": 135,
+            "logical": 135
+          },
+          {
+            "physical": 136,
+            "logical": 136
+          },
+          {
+            "physical": 137,
+            "logical": 137
+          },
+          {
+            "physical": 138,
+            "logical": 138
+          },
+          {
+            "physical": 139,
+            "logical": 139
+          },
+          {
+            "physical": 140,
+            "logical": 140
+          },
+          {
+            "physical": 141,
+            "logical": 141
+          },
+          {
+            "physical": 142,
+            "logical": 142
+          },
+          {
+            "physical": 144,
+            "logical": 144
+          },
+          {
+            "physical": 145,
+            "logical": 145
+          },
+          {
+            "physical": 146,
+            "logical": 146
+          },
+          {
+            "physical": 148,
+            "logical": 148
+          },
+          {
+            "physical": 149,
+            "logical": 149
+          },
+          {
+            "physical": 150,
+            "logical": 150
+          },
+          {
+            "physical": 151,
+            "logical": 151
+          },
+          {
+            "physical": 153,
+            "logical": 153
+          },
+          {
+            "physical": 154,
+            "logical": 154
+          },
+          {
+            "physical": 164,
+            "logical": 164
+          },
+          {
+            "physical": 165,
+            "logical": 165
+          },
+          {
+            "physical": 166,
+            "logical": 166
+          },
+          {
+            "physical": 167,
+            "logical": 167
+          },
+          {
+            "physical": 168,
+            "logical": 168
+          },
+          {
+            "physical": 169,
+            "logical": 169
+          },
+          {
+            "physical": 170,
+            "logical": 170
+          },
+          {
+            "physical": 171,
+            "logical": 171
+          },
+          {
+            "physical": 172,
+            "logical": 172
+          },
+          {
+            "physical": 173,
+            "logical": 173
+          },
+          {
+            "physical": 174,
+            "logical": 174
+          },
+          {
+            "physical": 176,
+            "logical": 176
+          },
+          {
+            "physical": 177,
+            "logical": 177
+          },
+          {
+            "physical": 178,
+            "logical": 178
+          },
+          {
+            "physical": 179,
+            "logical": 179
+          },
+          {
+            "physical": 180,
+            "logical": 180
+          },
+          {
+            "physical": 181,
+            "logical": 181
+          },
+          {
+            "physical": 182,
+            "logical": 182
+          },
+          {
+            "physical": 183,
+            "logical": 183
+          },
+          {
+            "physical": 184,
+            "logical": 184
+          },
+          {
+            "physical": 185,
+            "logical": 185
+          },
+          {
+            "physical": 186,
+            "logical": 186
+          },
+          {
+            "physical": 187,
+            "logical": 187
+          },
+          {
+            "physical": 188,
+            "logical": 188
+          },
+          {
+            "physical": 190,
+            "logical": 189
+          },
+          {
+            "physical": 191,
+            "logical": 190
+          },
+          {
+            "physical": 192,
+            "logical": 191
+          },
+          {
+            "physical": 193,
+            "logical": 192
+          },
+          {
+            "physical": 194,
+            "logical": 193
+          },
+          {
+            "physical": 195,
+            "logical": 194
+          },
+          {
+            "physical": 196,
+            "logical": 195
+          },
+          {
+            "physical": 197,
+            "logical": 196
+          },
+          {
+            "physical": 198,
+            "logical": 197
+          },
+          {
+            "physical": 199,
+            "logical": 198
+          },
+          {
+            "physical": 200,
+            "logical": 199
+          },
+          {
+            "physical": 201,
+            "logical": 200
+          },
+          {
+            "physical": 202,
+            "logical": 201
+          },
+          {
+            "physical": 203,
+            "logical": 202
+          },
+          {
+            "physical": 205,
+            "logical": 203
+          },
+          {
+            "physical": 206,
+            "logical": 204
+          },
+          {
+            "physical": 207,
+            "logical": 205
+          },
+          {
+            "physical": 208,
+            "logical": 206
+          },
+          {
+            "physical": 209,
+            "logical": 207
+          },
+          {
+            "physical": 210,
+            "logical": 208
+          },
+          {
+            "physical": 211,
+            "logical": 209
+          },
+          {
+            "physical": 212,
+            "logical": 210
+          },
+          {
+            "physical": 213,
+            "logical": 211
+          },
+          {
+            "physical": 214,
+            "logical": 212
+          },
+          {
+            "physical": 216,
+            "logical": 214
+          },
+          {
+            "physical": 218,
+            "logical": 216
+          },
+          {
+            "physical": 220,
+            "logical": 218
+          },
+          {
+            "physical": 221,
+            "logical": 219
+          },
+          {
+            "physical": 222,
+            "logical": 220
+          },
+          {
+            "physical": 223,
+            "logical": 221
+          },
+          {
+            "physical": 225,
+            "logical": 223
+          },
+          {
+            "physical": 226,
+            "logical": 224
+          },
+          {
+            "physical": 227,
+            "logical": 225
+          },
+          {
+            "physical": 228,
+            "logical": 226
+          },
+          {
+            "physical": 229,
+            "logical": 227
+          },
+          {
+            "physical": 230,
+            "logical": 228
+          },
+          {
+            "physical": 231,
+            "logical": 229
+          },
+          {
+            "physical": 232,
+            "logical": 230
+          },
+          {
+            "physical": 233,
+            "logical": 231
+          },
+          {
+            "physical": 234,
+            "logical": 232
+          },
+          {
+            "physical": 235,
+            "logical": 233
+          },
+          {
+            "physical": 236,
+            "logical": 234
+          },
+          {
+            "physical": 237,
+            "logical": 235
+          },
+          {
+            "physical": 238,
+            "logical": 236
+          },
+          {
+            "physical": 240,
+            "logical": 238
+          },
+          {
+            "physical": 241,
+            "logical": 239
+          },
+          {
+            "physical": 242,
+            "logical": 240
+          },
+          {
+            "physical": 243,
+            "logical": 241
+          },
+          {
+            "physical": 244,
+            "logical": 242
+          },
+          {
+            "physical": 245,
+            "logical": 243
+          },
+          {
+            "physical": 246,
+            "logical": 244
+          },
+          {
+            "physical": 247,
+            "logical": 245
+          },
+          {
+            "physical": 248,
+            "logical": 246
+          },
+          {
+            "physical": 249,
+            "logical": 247
+          },
+          {
+            "physical": 250,
+            "logical": 248
+          },
+          {
+            "physical": 251,
+            "logical": 249
+          },
+          {
+            "physical": 252,
+            "logical": 250
+          },
+          {
+            "physical": 254,
+            "logical": 252
+          },
+          {
+            "physical": 255,
+            "logical": 253
+          },
+          {
+            "physical": 256,
+            "logical": 254
+          },
+          {
+            "physical": 257,
+            "logical": 255
+          },
+          {
+            "physical": 258,
+            "logical": 256
+          },
+          {
+            "physical": 260,
+            "logical": 258
+          },
+          {
+            "physical": 261,
+            "logical": 259
+          },
+          {
+            "physical": 263,
+            "logical": 261
+          },
+          {
+            "physical": 264,
+            "logical": 262
+          },
+          {
+            "physical": 265,
+            "logical": 263
+          },
+          {
+            "physical": 266,
+            "logical": 264
+          },
+          {
+            "physical": 267,
+            "logical": 265
+          },
+          {
+            "physical": 268,
+            "logical": 266
+          },
+          {
+            "physical": 269,
+            "logical": 267
+          },
+          {
+            "physical": 270,
+            "logical": 268
+          },
+          {
+            "physical": 271,
+            "logical": 269
+          },
+          {
+            "physical": 272,
+            "logical": 270
+          },
+          {
+            "physical": 273,
+            "logical": 271
+          },
+          {
+            "physical": 274,
+            "logical": 272
+          },
+          {
+            "physical": 275,
+            "logical": 273
+          },
+          {
+            "physical": 276,
+            "logical": 274
+          },
+          {
+            "physical": 277,
+            "logical": 275
+          },
+          {
+            "physical": 278,
+            "logical": 276
+          },
+          {
+            "physical": 279,
+            "logical": 277
+          },
+          {
+            "physical": 280,
+            "logical": 278
+          },
+          {
+            "physical": 281,
+            "logical": 279
+          },
+          {
+            "physical": 282,
+            "logical": 280
+          },
+          {
+            "physical": 283,
+            "logical": 281
+          },
+          {
+            "physical": 293,
+            "logical": 289
+          },
+          {
+            "physical": 294,
+            "logical": 290
+          },
+          {
+            "physical": 295,
+            "logical": 291
+          },
+          {
+            "physical": 296,
+            "logical": 292
+          },
+          {
+            "physical": 297,
+            "logical": 293
+          },
+          {
+            "physical": 298,
+            "logical": 294
+          },
+          {
+            "physical": 300,
+            "logical": 296
+          },
+          {
+            "physical": 301,
+            "logical": 297
+          },
+          {
+            "physical": 302,
+            "logical": 298
+          },
+          {
+            "physical": 303,
+            "logical": 299
+          },
+          {
+            "physical": 305,
+            "logical": 301
+          },
+          {
+            "physical": 306,
+            "logical": 302
+          },
+          {
+            "physical": 308,
+            "logical": 304
+          },
+          {
+            "physical": 309,
+            "logical": 305
+          },
+          {
+            "physical": 310,
+            "logical": 306
+          },
+          {
+            "physical": 311,
+            "logical": 307
+          },
+          {
+            "physical": 313,
+            "logical": 309
+          },
+          {
+            "physical": 314,
+            "logical": 310
+          },
+          {
+            "physical": 315,
+            "logical": 311
+          },
+          {
+            "physical": 316,
+            "logical": 312
+          },
+          {
+            "physical": 318,
+            "logical": 314
+          },
+          {
+            "physical": 319,
+            "logical": 315
+          },
+          {
+            "physical": 321,
+            "logical": 317
+          },
+          {
+            "physical": 322,
+            "logical": 318
+          },
+          {
+            "physical": 324,
+            "logical": 320
+          },
+          {
+            "physical": 325,
+            "logical": 321
+          },
+          {
+            "physical": 326,
+            "logical": 322
+          },
+          {
+            "physical": 327,
+            "logical": 323
+          },
+          {
+            "physical": 328,
+            "logical": 324
+          },
+          {
+            "physical": 329,
+            "logical": 325
+          },
+          {
+            "physical": 330,
+            "logical": 326
+          },
+          {
+            "physical": 332,
+            "logical": 328
+          },
+          {
+            "physical": 333,
+            "logical": 329
+          },
+          {
+            "physical": 335,
+            "logical": 331
+          },
+          {
+            "physical": 336,
+            "logical": 332
+          },
+          {
+            "physical": 337,
+            "logical": 333
+          },
+          {
+            "physical": 338,
+            "logical": 334
+          },
+          {
+            "physical": 339,
+            "logical": 335
+          },
+          {
+            "physical": 341,
+            "logical": 337
+          },
+          {
+            "physical": 342,
+            "logical": 338
+          },
+          {
+            "physical": 343,
+            "logical": 339
+          },
+          {
+            "physical": 344,
+            "logical": 340
+          },
+          {
+            "physical": 345,
+            "logical": 341
+          },
+          {
+            "physical": 347,
+            "logical": 343
+          },
+          {
+            "physical": 348,
+            "logical": 344
+          },
+          {
+            "physical": 349,
+            "logical": 345
+          },
+          {
+            "physical": 350,
+            "logical": 346
+          },
+          {
+            "physical": 351,
+            "logical": 347
+          },
+          {
+            "physical": 352,
+            "logical": 348
+          },
+          {
+            "physical": 354,
+            "logical": 350
+          },
+          {
+            "physical": 355,
+            "logical": 351
+          },
+          {
+            "physical": 358,
+            "logical": 354
+          },
+          {
+            "physical": 359,
+            "logical": 355
+          },
+          {
+            "physical": 361,
+            "logical": 357
+          },
+          {
+            "physical": 362,
+            "logical": 358
+          },
+          {
+            "physical": 363,
+            "logical": 359
+          },
+          {
+            "physical": 364,
+            "logical": 360
+          },
+          {
+            "physical": 365,
+            "logical": 361
+          },
+          {
+            "physical": 367,
+            "logical": 363
+          },
+          {
+            "physical": 368,
+            "logical": 364
+          },
+          {
+            "physical": 369,
+            "logical": 365
+          },
+          {
+            "physical": 370,
+            "logical": 366
+          },
+          {
+            "physical": 371,
+            "logical": 367
+          },
+          {
+            "physical": 372,
+            "logical": 368
+          },
+          {
+            "physical": 373,
+            "logical": 369
+          },
+          {
+            "physical": 374,
+            "logical": 370
+          },
+          {
+            "physical": 375,
+            "logical": 371
+          },
+          {
+            "physical": 376,
+            "logical": 372
+          },
+          {
+            "physical": 377,
+            "logical": 373
+          },
+          {
+            "physical": 378,
+            "logical": 374
+          },
+          {
+            "physical": 380,
+            "logical": 376
+          },
+          {
+            "physical": 381,
+            "logical": 377
+          },
+          {
+            "physical": 382,
+            "logical": 378
+          },
+          {
+            "physical": 383,
+            "logical": 379
+          },
+          {
+            "physical": 386,
+            "logical": 382
+          },
+          {
+            "physical": 388,
+            "logical": 384
+          },
+          {
+            "physical": 390,
+            "logical": 386
+          },
+          {
+            "physical": 391,
+            "logical": 387
+          },
+          {
+            "physical": 393,
+            "logical": 389
+          },
+          {
+            "physical": 394,
+            "logical": 390
+          },
+          {
+            "physical": 395,
+            "logical": 391
+          },
+          {
+            "physical": 396,
+            "logical": 392
+          },
+          {
+            "physical": 397,
+            "logical": 393
+          },
+          {
+            "physical": 399,
+            "logical": 395
+          },
+          {
+            "physical": 400,
+            "logical": 396
+          },
+          {
+            "physical": 401,
+            "logical": 397
+          },
+          {
+            "physical": 402,
+            "logical": 398
+          },
+          {
+            "physical": 403,
+            "logical": 399
+          },
+          {
+            "physical": 404,
+            "logical": 400
+          },
+          {
+            "physical": 405,
+            "logical": 401
+          },
+          {
+            "physical": 406,
+            "logical": 402
+          },
+          {
+            "physical": 407,
+            "logical": 403
+          },
+          {
+            "physical": 408,
+            "logical": 404
+          },
+          {
+            "physical": 409,
+            "logical": 405
+          },
+          {
+            "physical": 410,
+            "logical": 406
+          },
+          {
+            "physical": 411,
+            "logical": 407
+          },
+          {
+            "physical": 412,
+            "logical": 408
+          },
+          {
+            "physical": 414,
+            "logical": 410
+          },
+          {
+            "physical": 415,
+            "logical": 411
+          },
+          {
+            "physical": 416,
+            "logical": 412
+          },
+          {
+            "physical": 417,
+            "logical": 413
+          },
+          {
+            "physical": 418,
+            "logical": 414
+          },
+          {
+            "physical": 419,
+            "logical": 415
+          },
+          {
+            "physical": 420,
+            "logical": 416
+          },
+          {
+            "physical": 422,
+            "logical": 418
+          },
+          {
+            "physical": 423,
+            "logical": 419
+          },
+          {
+            "physical": 424,
+            "logical": 420
+          },
+          {
+            "physical": 425,
+            "logical": 421
+          },
+          {
+            "physical": 426,
+            "logical": 422
+          },
+          {
+            "physical": 427,
+            "logical": 423
+          },
+          {
+            "physical": 428,
+            "logical": 424
+          },
+          {
+            "physical": 430,
+            "logical": 426
+          },
+          {
+            "physical": 431,
+            "logical": 427
+          },
+          {
+            "physical": 432,
+            "logical": 428
+          },
+          {
+            "physical": 433,
+            "logical": 429
+          },
+          {
+            "physical": 434,
+            "logical": 430
+          },
+          {
+            "physical": 435,
+            "logical": 431
+          },
+          {
+            "physical": 436,
+            "logical": 432
+          },
+          {
+            "physical": 437,
+            "logical": 433
+          },
+          {
+            "physical": 438,
+            "logical": 434
+          },
+          {
+            "physical": 439,
+            "logical": 435
+          },
+          {
+            "physical": 441,
+            "logical": 437
+          },
+          {
+            "physical": 442,
+            "logical": 438
+          },
+          {
+            "physical": 443,
+            "logical": 439
+          },
+          {
+            "physical": 444,
+            "logical": 440
+          },
+          {
+            "physical": 445,
+            "logical": 441
+          },
+          {
+            "physical": 447,
+            "logical": 443
+          },
+          {
+            "physical": 448,
+            "logical": 444
+          },
+          {
+            "physical": 449,
+            "logical": 445
+          },
+          {
+            "physical": 450,
+            "logical": 446
+          },
+          {
+            "physical": 451,
+            "logical": 447
+          },
+          {
+            "physical": 453,
+            "logical": 449
+          },
+          {
+            "physical": 454,
+            "logical": 450
+          },
+          {
+            "physical": 456,
+            "logical": 452
+          },
+          {
+            "physical": 457,
+            "logical": 453
+          },
+          {
+            "physical": 458,
+            "logical": 454
+          },
+          {
+            "physical": 459,
+            "logical": 455
+          },
+          {
+            "physical": 460,
+            "logical": 456
+          },
+          {
+            "physical": 462,
+            "logical": 458
+          },
+          {
+            "physical": 464,
+            "logical": 460
+          },
+          {
+            "physical": 465,
+            "logical": 461
+          },
+          {
+            "physical": 467,
+            "logical": 463
+          },
+          {
+            "physical": 468,
+            "logical": 464
+          },
+          {
+            "physical": 469,
+            "logical": 465
+          },
+          {
+            "physical": 471,
+            "logical": 467
+          },
+          {
+            "physical": 472,
+            "logical": 468
+          },
+          {
+            "physical": 473,
+            "logical": 469
+          },
+          {
+            "physical": 474,
+            "logical": 470
+          },
+          {
+            "physical": 475,
+            "logical": 471
+          },
+          {
+            "physical": 476,
+            "logical": 472
+          },
+          {
+            "physical": 477,
+            "logical": 473
+          },
+          {
+            "physical": 478,
+            "logical": 474
+          },
+          {
+            "physical": 479,
+            "logical": 475
+          },
+          {
+            "physical": 481,
+            "logical": 477
+          },
+          {
+            "physical": 482,
+            "logical": 478
+          },
+          {
+            "physical": 483,
+            "logical": 479
+          },
+          {
+            "physical": 484,
+            "logical": 480
+          },
+          {
+            "physical": 486,
+            "logical": 482
+          },
+          {
+            "physical": 487,
+            "logical": 483
+          },
+          {
+            "physical": 488,
+            "logical": 484
+          },
+          {
+            "physical": 490,
+            "logical": 486
+          },
+          {
+            "physical": 491,
+            "logical": 487
+          },
+          {
+            "physical": 493,
+            "logical": 489
+          },
+          {
+            "physical": 494,
+            "logical": 490
+          },
+          {
+            "physical": 495,
+            "logical": 491
+          },
+          {
+            "physical": 496,
+            "logical": 492
+          },
+          {
+            "physical": 497,
+            "logical": 493
+          },
+          {
+            "physical": 499,
+            "logical": 495
+          },
+          {
+            "physical": 500,
+            "logical": 496
+          },
+          {
+            "physical": 501,
+            "logical": 497
+          },
+          {
+            "physical": 502,
+            "logical": 498
+          },
+          {
+            "physical": 504,
+            "logical": 500
+          },
+          {
+            "physical": 505,
+            "logical": 501
+          },
+          {
+            "physical": 506,
+            "logical": 502
+          },
+          {
+            "physical": 508,
+            "logical": 504
+          },
+          {
+            "physical": 509,
+            "logical": 505
+          },
+          {
+            "physical": 510,
+            "logical": 506
+          },
+          {
+            "physical": 511,
+            "logical": 507
+          },
+          {
+            "physical": 513,
+            "logical": 509
+          },
+          {
+            "physical": 514,
+            "logical": 510
+          },
+          {
+            "physical": 515,
+            "logical": 511
+          },
+          {
+            "physical": 516,
+            "logical": 512
+          },
+          {
+            "physical": 517,
+            "logical": 513
+          },
+          {
+            "physical": 518,
+            "logical": 514
+          },
+          {
+            "physical": 519,
+            "logical": 515
+          },
+          {
+            "physical": 520,
+            "logical": 516
+          },
+          {
+            "physical": 521,
+            "logical": 517
+          },
+          {
+            "physical": 522,
+            "logical": 518
+          },
+          {
+            "physical": 523,
+            "logical": 519
+          },
+          {
+            "physical": 525,
+            "logical": 521
+          },
+          {
+            "physical": 526,
+            "logical": 522
+          },
+          {
+            "physical": 528,
+            "logical": 524
+          },
+          {
+            "physical": 529,
+            "logical": 525
+          },
+          {
+            "physical": 530,
+            "logical": 526
+          },
+          {
+            "physical": 531,
+            "logical": 527
+          },
+          {
+            "physical": 532,
+            "logical": 528
+          },
+          {
+            "physical": 533,
+            "logical": 529
+          },
+          {
+            "physical": 534,
+            "logical": 530
+          },
+          {
+            "physical": 535,
+            "logical": 531
+          },
+          {
+            "physical": 536,
+            "logical": 532
+          },
+          {
+            "physical": 537,
+            "logical": 533
+          },
+          {
+            "physical": 538,
+            "logical": 534
+          },
+          {
+            "physical": 539,
+            "logical": 535
+          },
+          {
+            "physical": 540,
+            "logical": 536
+          },
+          {
+            "physical": 541,
+            "logical": 537
+          },
+          {
+            "physical": 542,
+            "logical": 538
+          },
+          {
+            "physical": 543,
+            "logical": 539
+          },
+          {
+            "physical": 545,
+            "logical": 541
+          },
+          {
+            "physical": 546,
+            "logical": 542
+          },
+          {
+            "physical": 547,
+            "logical": 543
+          },
+          {
+            "physical": 548,
+            "logical": 544
+          },
+          {
+            "physical": 549,
+            "logical": 545
+          },
+          {
+            "physical": 550,
+            "logical": 546
+          },
+          {
+            "physical": 551,
+            "logical": 547
+          },
+          {
+            "physical": 552,
+            "logical": 548
+          },
+          {
+            "physical": 553,
+            "logical": 549
+          },
+          {
+            "physical": 554,
+            "logical": 550
+          },
+          {
+            "physical": 555,
+            "logical": 551
+          },
+          {
+            "physical": 556,
+            "logical": 552
+          },
+          {
+            "physical": 557,
+            "logical": 553
+          },
+          {
+            "physical": 558,
+            "logical": 554
+          },
+          {
+            "physical": 560,
+            "logical": 556
+          },
+          {
+            "physical": 562,
+            "logical": 558
+          },
+          {
+            "physical": 563,
+            "logical": 559
+          },
+          {
+            "physical": 564,
+            "logical": 560
+          },
+          {
+            "physical": 565,
+            "logical": 561
+          },
+          {
+            "physical": 572,
+            "logical": 563
+          },
+          {
+            "physical": 576,
+            "logical": 565
+          },
+          {
+            "physical": 577,
+            "logical": 566
+          },
+          {
+            "physical": 579,
+            "logical": 568
+          },
+          {
+            "physical": 580,
+            "logical": 569
+          },
+          {
+            "physical": 581,
+            "logical": 570
+          },
+          {
+            "physical": 582,
+            "logical": 571
+          },
+          {
+            "physical": 584,
+            "logical": 573
+          },
+          {
+            "physical": 585,
+            "logical": 574
+          },
+          {
+            "physical": 586,
+            "logical": 575
+          },
+          {
+            "physical": 587,
+            "logical": 576
+          },
+          {
+            "physical": 588,
+            "logical": 577
+          },
+          {
+            "physical": 589,
+            "logical": 578
+          },
+          {
+            "physical": 590,
+            "logical": 579
+          },
+          {
+            "physical": 592,
+            "logical": 581
+          },
+          {
+            "physical": 593,
+            "logical": 582
+          },
+          {
+            "physical": 595,
+            "logical": 584
+          },
+          {
+            "physical": 596,
+            "logical": 585
+          },
+          {
+            "physical": 597,
+            "logical": 586
+          },
+          {
+            "physical": 598,
+            "logical": 587
+          },
+          {
+            "physical": 599,
+            "logical": 588
+          },
+          {
+            "physical": 600,
+            "logical": 589
+          },
+          {
+            "physical": 601,
+            "logical": 590
+          },
+          {
+            "physical": 603,
+            "logical": 592
+          },
+          {
+            "physical": 604,
+            "logical": 593
+          },
+          {
+            "physical": 605,
+            "logical": 594
+          },
+          {
+            "physical": 606,
+            "logical": 595
+          },
+          {
+            "physical": 607,
+            "logical": 596
+          },
+          {
+            "physical": 609,
+            "logical": 598
+          },
+          {
+            "physical": 610,
+            "logical": 599
+          },
+          {
+            "physical": 625,
+            "logical": 601
+          },
+          {
+            "physical": 626,
+            "logical": 602
+          },
+          {
+            "physical": 628,
+            "logical": 604
+          },
+          {
+            "physical": 629,
+            "logical": 605
+          },
+          {
+            "physical": 630,
+            "logical": 606
+          },
+          {
+            "physical": 637,
+            "logical": 610
+          },
+          {
+            "physical": 638,
+            "logical": 611
+          },
+          {
+            "physical": 639,
+            "logical": 612
+          },
+          {
+            "physical": 641,
+            "logical": 613
+          },
+          {
+            "physical": 643,
+            "logical": 615
+          },
+          {
+            "physical": 644,
+            "logical": 616
+          },
+          {
+            "physical": 645,
+            "logical": 617
+          },
+          {
+            "physical": 646,
+            "logical": 618
+          },
+          {
+            "physical": 648,
+            "logical": 620
+          },
+          {
+            "physical": 649,
+            "logical": 621
+          },
+          {
+            "physical": 650,
+            "logical": 622
+          },
+          {
+            "physical": 651,
+            "logical": 623
+          },
+          {
+            "physical": 652,
+            "logical": 624
+          },
+          {
+            "physical": 653,
+            "logical": 625
+          },
+          {
+            "physical": 654,
+            "logical": 626
+          },
+          {
+            "physical": 655,
+            "logical": 627
+          },
+          {
+            "physical": 656,
+            "logical": 628
+          },
+          {
+            "physical": 657,
+            "logical": 629
+          },
+          {
+            "physical": 658,
+            "logical": 630
+          },
+          {
+            "physical": 660,
+            "logical": 632
+          },
+          {
+            "physical": 661,
+            "logical": 633
+          },
+          {
+            "physical": 662,
+            "logical": 634
+          },
+          {
+            "physical": 663,
+            "logical": 635
+          },
+          {
+            "physical": 664,
+            "logical": 636
+          },
+          {
+            "physical": 666,
+            "logical": 638
+          },
+          {
+            "physical": 668,
+            "logical": 640
+          },
+          {
+            "physical": 669,
+            "logical": 641
+          },
+          {
+            "physical": 670,
+            "logical": 642
+          },
+          {
+            "physical": 671,
+            "logical": 643
+          },
+          {
+            "physical": 672,
+            "logical": 644
+          },
+          {
+            "physical": 675,
+            "logical": 645
+          },
+          {
+            "physical": 676,
+            "logical": 646
+          },
+          {
+            "physical": 678,
+            "logical": 648
+          },
+          {
+            "physical": 679,
+            "logical": 649
+          },
+          {
+            "physical": 681,
+            "logical": 651
+          },
+          {
+            "physical": 682,
+            "logical": 652
+          },
+          {
+            "physical": 683,
+            "logical": 653
+          },
+          {
+            "physical": 684,
+            "logical": 654
+          },
+          {
+            "physical": 685,
+            "logical": 655
+          },
+          {
+            "physical": 687,
+            "logical": 657
+          },
+          {
+            "physical": 688,
+            "logical": 658
+          },
+          {
+            "physical": 689,
+            "logical": 659
+          },
+          {
+            "physical": 690,
+            "logical": 660
+          },
+          {
+            "physical": 691,
+            "logical": 661
+          },
+          {
+            "physical": 692,
+            "logical": 662
+          },
+          {
+            "physical": 693,
+            "logical": 663
+          },
+          {
+            "physical": 694,
+            "logical": 664
+          },
+          {
+            "physical": 695,
+            "logical": 665
+          },
+          {
+            "physical": 696,
+            "logical": 666
+          },
+          {
+            "physical": 697,
+            "logical": 667
+          },
+          {
+            "physical": 698,
+            "logical": 668
+          },
+          {
+            "physical": 699,
+            "logical": 669
+          },
+          {
+            "physical": 701,
+            "logical": 671
+          },
+          {
+            "physical": 702,
+            "logical": 672
+          },
+          {
+            "physical": 703,
+            "logical": 673
+          },
+          {
+            "physical": 704,
+            "logical": 674
+          },
+          {
+            "physical": 706,
+            "logical": 676
+          },
+          {
+            "physical": 708,
+            "logical": 678
+          },
+          {
+            "physical": 709,
+            "logical": 679
+          },
+          {
+            "physical": 710,
+            "logical": 680
+          },
+          {
+            "physical": 711,
+            "logical": 681
+          },
+          {
+            "physical": 712,
+            "logical": 682
+          },
+          {
+            "physical": 713,
+            "logical": 683
+          },
+          {
+            "physical": 714,
+            "logical": 684
+          },
+          {
+            "physical": 715,
+            "logical": 685
+          },
+          {
+            "physical": 716,
+            "logical": 686
+          },
+          {
+            "physical": 717,
+            "logical": 687
+          },
+          {
+            "physical": 718,
+            "logical": 688
+          },
+          {
+            "physical": 720,
+            "logical": 690
+          },
+          {
+            "physical": 722,
+            "logical": 692
+          },
+          {
+            "physical": 723,
+            "logical": 693
+          },
+          {
+            "physical": 724,
+            "logical": 694
+          },
+          {
+            "physical": 725,
+            "logical": 695
+          },
+          {
+            "physical": 726,
+            "logical": 696
+          },
+          {
+            "physical": 727,
+            "logical": 697
+          },
+          {
+            "physical": 729,
+            "logical": 699
+          },
+          {
+            "physical": 730,
+            "logical": 700
+          },
+          {
+            "physical": 731,
+            "logical": 701
+          },
+          {
+            "physical": 732,
+            "logical": 702
+          },
+          {
+            "physical": 733,
+            "logical": 703
+          },
+          {
+            "physical": 734,
+            "logical": 704
+          },
+          {
+            "physical": 735,
+            "logical": 705
+          },
+          {
+            "physical": 736,
+            "logical": 706
+          },
+          {
+            "physical": 738,
+            "logical": 708
+          },
+          {
+            "physical": 739,
+            "logical": 709
+          },
+          {
+            "physical": 740,
+            "logical": 710
+          },
+          {
+            "physical": 741,
+            "logical": 711
+          },
+          {
+            "physical": 742,
+            "logical": 712
+          },
+          {
+            "physical": 743,
+            "logical": 713
+          },
+          {
+            "physical": 744,
+            "logical": 714
+          },
+          {
+            "physical": 745,
+            "logical": 715
+          },
+          {
+            "physical": 746,
+            "logical": 716
+          },
+          {
+            "physical": 748,
+            "logical": 718
+          },
+          {
+            "physical": 749,
+            "logical": 719
+          },
+          {
+            "physical": 750,
+            "logical": 720
+          },
+          {
+            "physical": 751,
+            "logical": 721
+          },
+          {
+            "physical": 752,
+            "logical": 722
+          },
+          {
+            "physical": 753,
+            "logical": 723
+          },
+          {
+            "physical": 754,
+            "logical": 724
+          },
+          {
+            "physical": 755,
+            "logical": 725
+          },
+          {
+            "physical": 756,
+            "logical": 726
+          },
+          {
+            "physical": 757,
+            "logical": 727
+          },
+          {
+            "physical": 758,
+            "logical": 728
+          },
+          {
+            "physical": 759,
+            "logical": 729
+          },
+          {
+            "physical": 760,
+            "logical": 730
+          },
+          {
+            "physical": 761,
+            "logical": 731
+          },
+          {
+            "physical": 762,
+            "logical": 732
+          },
+          {
+            "physical": 763,
+            "logical": 733
+          },
+          {
+            "physical": 765,
+            "logical": 735
+          },
+          {
+            "physical": 766,
+            "logical": 736
+          },
+          {
+            "physical": 767,
+            "logical": 737
+          },
+          {
+            "physical": 768,
+            "logical": 738
+          },
+          {
+            "physical": 769,
+            "logical": 739
+          },
+          {
+            "physical": 770,
+            "logical": 740
+          },
+          {
+            "physical": 771,
+            "logical": 741
+          },
+          {
+            "physical": 772,
+            "logical": 742
+          },
+          {
+            "physical": 773,
+            "logical": 743
+          },
+          {
+            "physical": 774,
+            "logical": 744
+          },
+          {
+            "physical": 776,
+            "logical": 746
+          },
+          {
+            "physical": 777,
+            "logical": 747
+          },
+          {
+            "physical": 778,
+            "logical": 748
+          },
+          {
+            "physical": 779,
+            "logical": 749
+          },
+          {
+            "physical": 787,
+            "logical": 751
+          },
+          {
+            "physical": 788,
+            "logical": 752
+          },
+          {
+            "physical": 789,
+            "logical": 753
+          },
+          {
+            "physical": 791,
+            "logical": 755
+          },
+          {
+            "physical": 792,
+            "logical": 756
+          },
+          {
+            "physical": 793,
+            "logical": 757
+          },
+          {
+            "physical": 794,
+            "logical": 758
+          },
+          {
+            "physical": 795,
+            "logical": 759
+          },
+          {
+            "physical": 797,
+            "logical": 761
+          },
+          {
+            "physical": 799,
+            "logical": 763
+          },
+          {
+            "physical": 800,
+            "logical": 764
+          },
+          {
+            "physical": 801,
+            "logical": 765
+          },
+          {
+            "physical": 802,
+            "logical": 766
+          },
+          {
+            "physical": 803,
+            "logical": 767
+          },
+          {
+            "physical": 804,
+            "logical": 768
+          },
+          {
+            "physical": 805,
+            "logical": 769
+          },
+          {
+            "physical": 806,
+            "logical": 770
+          },
+          {
+            "physical": 807,
+            "logical": 771
+          },
+          {
+            "physical": 809,
+            "logical": 773
+          },
+          {
+            "physical": 810,
+            "logical": 774
+          },
+          {
+            "physical": 811,
+            "logical": 775
+          },
+          {
+            "physical": 812,
+            "logical": 776
+          },
+          {
+            "physical": 813,
+            "logical": 777
+          },
+          {
+            "physical": 814,
+            "logical": 778
+          },
+          {
+            "physical": 815,
+            "logical": 779
+          },
+          {
+            "physical": 816,
+            "logical": 780
+          },
+          {
+            "physical": 817,
+            "logical": 781
+          },
+          {
+            "physical": 818,
+            "logical": 782
+          },
+          {
+            "physical": 820,
+            "logical": 784
+          },
+          {
+            "physical": 821,
+            "logical": 785
+          },
+          {
+            "physical": 822,
+            "logical": 786
+          },
+          {
+            "physical": 823,
+            "logical": 787
+          },
+          {
+            "physical": 824,
+            "logical": 788
+          },
+          {
+            "physical": 825,
+            "logical": 789
+          },
+          {
+            "physical": 826,
+            "logical": 790
+          },
+          {
+            "physical": 827,
+            "logical": 791
+          },
+          {
+            "physical": 828,
+            "logical": 792
+          },
+          {
+            "physical": 829,
+            "logical": 793
+          },
+          {
+            "physical": 830,
+            "logical": 794
+          },
+          {
+            "physical": 831,
+            "logical": 795
+          },
+          {
+            "physical": 832,
+            "logical": 796
+          },
+          {
+            "physical": 834,
+            "logical": 798
+          },
+          {
+            "physical": 835,
+            "logical": 799
+          },
+          {
+            "physical": 836,
+            "logical": 800
+          },
+          {
+            "physical": 837,
+            "logical": 801
+          },
+          {
+            "physical": 838,
+            "logical": 802
+          },
+          {
+            "physical": 839,
+            "logical": 803
+          },
+          {
+            "physical": 840,
+            "logical": 804
+          },
+          {
+            "physical": 841,
+            "logical": 805
+          },
+          {
+            "physical": 843,
+            "logical": 807
+          },
+          {
+            "physical": 844,
+            "logical": 808
+          },
+          {
+            "physical": 845,
+            "logical": 809
+          },
+          {
+            "physical": 846,
+            "logical": 810
+          },
+          {
+            "physical": 847,
+            "logical": 811
+          },
+          {
+            "physical": 848,
+            "logical": 812
+          },
+          {
+            "physical": 849,
+            "logical": 813
+          },
+          {
+            "physical": 850,
+            "logical": 814
+          },
+          {
+            "physical": 851,
+            "logical": 815
+          },
+          {
+            "physical": 852,
+            "logical": 816
+          },
+          {
+            "physical": 853,
+            "logical": 817
+          },
+          {
+            "physical": 854,
+            "logical": 818
+          },
+          {
+            "physical": 855,
+            "logical": 819
+          },
+          {
+            "physical": 856,
+            "logical": 820
+          },
+          {
+            "physical": 857,
+            "logical": 821
+          },
+          {
+            "physical": 861,
+            "logical": 823
+          },
+          {
+            "physical": 862,
+            "logical": 824
+          },
+          {
+            "physical": 863,
+            "logical": 825
+          },
+          {
+            "physical": 864,
+            "logical": 826
+          },
+          {
+            "physical": 865,
+            "logical": 827
+          },
+          {
+            "physical": 866,
+            "logical": 828
+          },
+          {
+            "physical": 867,
+            "logical": 829
+          },
+          {
+            "physical": 868,
+            "logical": 830
+          },
+          {
+            "physical": 869,
+            "logical": 831
+          },
+          {
+            "physical": 870,
+            "logical": 832
+          },
+          {
+            "physical": 871,
+            "logical": 833
+          },
+          {
+            "physical": 872,
+            "logical": 834
+          },
+          {
+            "physical": 873,
+            "logical": 835
+          },
+          {
+            "physical": 874,
+            "logical": 836
+          },
+          {
+            "physical": 875,
+            "logical": 837
+          },
+          {
+            "physical": 878,
+            "logical": 839
+          },
+          {
+            "physical": 879,
+            "logical": 840
+          },
+          {
+            "physical": 881,
+            "logical": 842
+          },
+          {
+            "physical": 882,
+            "logical": 843
+          },
+          {
+            "physical": 883,
+            "logical": 844
+          },
+          {
+            "physical": 884,
+            "logical": 845
+          },
+          {
+            "physical": 885,
+            "logical": 846
+          },
+          {
+            "physical": 886,
+            "logical": 847
+          },
+          {
+            "physical": 889,
+            "logical": 848
+          },
+          {
+            "physical": 891,
+            "logical": 850
+          },
+          {
+            "physical": 892,
+            "logical": 851
+          },
+          {
+            "physical": 893,
+            "logical": 852
+          },
+          {
+            "physical": 898,
+            "logical": 854
+          },
+          {
+            "physical": 899,
+            "logical": 855
+          },
+          {
+            "physical": 900,
+            "logical": 856
+          },
+          {
+            "physical": 901,
+            "logical": 857
+          },
+          {
+            "physical": 902,
+            "logical": 858
+          },
+          {
+            "physical": 903,
+            "logical": 859
+          },
+          {
+            "physical": 904,
+            "logical": 860
+          },
+          {
+            "physical": 905,
+            "logical": 861
+          },
+          {
+            "physical": 906,
+            "logical": 862
+          },
+          {
+            "physical": 908,
+            "logical": 864
+          },
+          {
+            "physical": 909,
+            "logical": 865
+          },
+          {
+            "physical": 910,
+            "logical": 866
+          },
+          {
+            "physical": 911,
+            "logical": 867
+          },
+          {
+            "physical": 913,
+            "logical": 869
+          },
+          {
+            "physical": 914,
+            "logical": 870
+          },
+          {
+            "physical": 915,
+            "logical": 871
+          },
+          {
+            "physical": 917,
+            "logical": 873
+          },
+          {
+            "physical": 918,
+            "logical": 874
+          },
+          {
+            "physical": 919,
+            "logical": 875
+          },
+          {
+            "physical": 920,
+            "logical": 876
+          },
+          {
+            "physical": 921,
+            "logical": 877
+          },
+          {
+            "physical": 922,
+            "logical": 878
+          },
+          {
+            "physical": 924,
+            "logical": 880
+          },
+          {
+            "physical": 926,
+            "logical": 882
+          },
+          {
+            "physical": 927,
+            "logical": 883
+          },
+          {
+            "physical": 928,
+            "logical": 884
+          },
+          {
+            "physical": 929,
+            "logical": 885
+          },
+          {
+            "physical": 930,
+            "logical": 886
+          },
+          {
+            "physical": 931,
+            "logical": 887
+          },
+          {
+            "physical": 932,
+            "logical": 888
+          },
+          {
+            "physical": 933,
+            "logical": 889
+          },
+          {
+            "physical": 934,
+            "logical": 890
+          },
+          {
+            "physical": 935,
+            "logical": 891
+          },
+          {
+            "physical": 936,
+            "logical": 892
+          },
+          {
+            "physical": 937,
+            "logical": 893
+          },
+          {
+            "physical": 939,
+            "logical": 895
+          },
+          {
+            "physical": 940,
+            "logical": 896
+          },
+          {
+            "physical": 941,
+            "logical": 897
+          },
+          {
+            "physical": 942,
+            "logical": 898
+          },
+          {
+            "physical": 943,
+            "logical": 899
+          },
+          {
+            "physical": 944,
+            "logical": 900
+          },
+          {
+            "physical": 945,
+            "logical": 901
+          },
+          {
+            "physical": 948,
+            "logical": 903
+          },
+          {
+            "physical": 950,
+            "logical": 904
+          },
+          {
+            "physical": 951,
+            "logical": 905
+          },
+          {
+            "physical": 952,
+            "logical": 906
+          },
+          {
+            "physical": 954,
+            "logical": 908
+          },
+          {
+            "physical": 956,
+            "logical": 909
+          },
+          {
+            "physical": 957,
+            "logical": 910
+          },
+          {
+            "physical": 958,
+            "logical": 911
+          },
+          {
+            "physical": 959,
+            "logical": 912
+          },
+          {
+            "physical": 960,
+            "logical": 913
+          },
+          {
+            "physical": 961,
+            "logical": 914
+          },
+          {
+            "physical": 962,
+            "logical": 915
+          },
+          {
+            "physical": 963,
+            "logical": 916
+          },
+          {
+            "physical": 964,
+            "logical": 917
+          },
+          {
+            "physical": 965,
+            "logical": 918
+          },
+          {
+            "physical": 967,
+            "logical": 920
+          },
+          {
+            "physical": 968,
+            "logical": 921
+          },
+          {
+            "physical": 969,
+            "logical": 922
+          },
+          {
+            "physical": 970,
+            "logical": 923
+          },
+          {
+            "physical": 971,
+            "logical": 924
+          },
+          {
+            "physical": 972,
+            "logical": 925
+          },
+          {
+            "physical": 973,
+            "logical": 926
+          },
+          {
+            "physical": 975,
+            "logical": 927
+          },
+          {
+            "physical": 976,
+            "logical": 928
+          },
+          {
+            "physical": 977,
+            "logical": 929
+          },
+          {
+            "physical": 978,
+            "logical": 930
+          },
+          {
+            "physical": 979,
+            "logical": 931
+          },
+          {
+            "physical": 981,
+            "logical": 933
+          },
+          {
+            "physical": 982,
+            "logical": 934
+          },
+          {
+            "physical": 984,
+            "logical": 935
+          },
+          {
+            "physical": 985,
+            "logical": 936
+          },
+          {
+            "physical": 987,
+            "logical": 938
+          },
+          {
+            "physical": 988,
+            "logical": 939
+          },
+          {
+            "physical": 990,
+            "logical": 941
+          },
+          {
+            "physical": 991,
+            "logical": 942
+          },
+          {
+            "physical": 992,
+            "logical": 943
+          },
+          {
+            "physical": 993,
+            "logical": 944
+          },
+          {
+            "physical": 994,
+            "logical": 945
+          },
+          {
+            "physical": 995,
+            "logical": 946
+          },
+          {
+            "physical": 997,
+            "logical": 947
+          },
+          {
+            "physical": 998,
+            "logical": 948
+          },
+          {
+            "physical": 1000,
+            "logical": 950
+          },
+          {
+            "physical": 1001,
+            "logical": 951
+          }
+        ],
+        "errors": [
+          {
+            "physical": 287,
+            "logical": 283,
+            "text": "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+          },
+          {
+            "physical": 622,
+            "logical": 600,
+            "text": "#error Unsupported excluded original configuration"
+          },
+          {
+            "physical": 633,
+            "logical": 607,
+            "text": "#error Unsupported excluded original configuration"
+          }
+        ],
+        "remaining_adaptation_lines": [
+          {
+            "physical": 566,
+            "logical": 562,
+            "text": "    if (pwnd == NULL || !ValidateDialogPwnd(pwnd)) {"
+          },
+          {
+            "physical": 567,
+            "logical": 563,
+            "text": "        if (pwnd != NULL) {"
+          },
+          {
+            "physical": 568,
+            "logical": 564,
+            "text": "            NtUserDestroyWindow(hwnd);"
+          },
+          {
+            "physical": 569,
+            "logical": 565,
+            "text": "            hMenu = NULL;"
+          },
+          {
+            "physical": 570,
+            "logical": 566,
+            "text": "        }"
+          },
+          {
+            "physical": 573,
+            "logical": 564,
+            "text": "    }"
+          },
+          {
+            "physical": 612,
+            "logical": 601,
+            "text": "    SetLastError(0);"
+          },
+          {
+            "physical": 613,
+            "logical": 602,
+            "text": "    wow_dialog_host_set(hwnd, DWL_DLGPROC, (LONG)lpfnDialog,"
+          },
+          {
+            "physical": 614,
+            "logical": 603,
+            "text": "        (fSCDLGFlags & SCDLG_ANSI) != 0);"
+          },
+          {
+            "physical": 615,
+            "logical": 604,
+            "text": "    if (GetLastError()) {"
+          },
+          {
+            "physical": 616,
+            "logical": 605,
+            "text": "        NtUserDestroyWindow(hwnd);"
+          },
+          {
+            "physical": 617,
+            "logical": 606,
+            "text": "        hMenu = NULL; /* DestroyWindow owns its attached menu. */"
+          },
+          {
+            "physical": 618,
+            "logical": 607,
+            "text": "        goto DeleteFontAndMenuAndFail;"
+          },
+          {
+            "physical": 619,
+            "logical": 608,
+            "text": "    }"
+          },
+          {
+            "physical": 673,
+            "logical": 645,
+            "text": "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;"
+          },
+          {
+            "physical": 780,
+            "logical": 750,
+            "text": "                hmodCreate = GetEditDS();"
+          },
+          {
+            "physical": 781,
+            "logical": 751,
+            "text": "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {"
+          },
+          {
+            "physical": 782,
+            "logical": 752,
+            "text": "                    if (hmodCreate) ReleaseEditDS(hmodCreate);"
+          },
+          {
+            "physical": 783,
+            "logical": 753,
+            "text": "                    goto CreateDialogReturn;"
+          },
+          {
+            "physical": 784,
+            "logical": 754,
+            "text": "                }"
+          },
+          {
+            "physical": 785,
+            "logical": 755,
+            "text": "                PDLG(pwnd)->hData = hmodCreate;"
+          },
+          {
+            "physical": 859,
+            "logical": 823,
+            "text": "        if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;"
+          },
+          {
+            "physical": 887,
+            "logical": 848,
+            "text": "                if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;"
+          },
+          {
+            "physical": 894,
+            "logical": 853,
+            "text": "            fSuccess = SendMessage(hwnd2, WM_GETDLGCODE, 0, 0L) & DLGC_DEFPUSHBUTTON;"
+          },
+          {
+            "physical": 895,
+            "logical": 854,
+            "text": "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) goto CreateDialogReturn;"
+          },
+          {
+            "physical": 896,
+            "logical": 855,
+            "text": "            if (fSuccess) {"
+          }
+        ]
+      },
+      "post_init_restoration": {
+        "points": "R2207-R2212",
+        "reason": "Original creator does not publish its new HWND as outer callback identity. Nested callback leave restores prior cache. Native handle validation and original IsWindow checks handle actual destruction;fixture formerly forced retired identity at every lookup and kept destroyed HWND live.",
+        "source_contracts": [
+          "wow_dialog_creation_binding.c wow_dialog_call_scope_enter opens scope without set_callback",
+          "wow_user_borrow_scope.c wow_user_borrow_leave restores saved callback before returning",
+          "wow_user_borrow_window_state validates current handle when callback cache does not match",
+          "Original xxxCheckDefPushButton revalidates HWND arguments;selected callee owns its callback/traversal checks"
+        ],
+        "control_exit": 0,
+        "control_log": "promotion-failed result=00000000 creates=1 destroys=1\nslot-failed result=00000000 creates=1 destroys=1\noriginal-creator-lifetime failures=0",
+        "limits": "Creator body and real HWND destruction exercised;native dispatch/PDLG cleanup are explicit doubles. No exhaustive numeric-HWND reuse or full guest-runtime proof. Did not transfer removed checks into adapters or callee.",
+        "fixture_change": "Real hidden HWND pairs per case;retirement destroys HWND;validation returns NULL for destroyed HWND;UpdateWindow invalid target returns FALSE without simulated paint. Original SCDLG_NOREVALIDATE and post-init pre4.0 return semantics checked separately. Existing root resource and DS_NOFAILCREATE child cases retained."
+      },
+      "r2200_policy": {
+        "reason": "Retain excluded private-procedure ANSI-state body as #error under explicit owner rule. Selected native slot is authoritative for A/W;legacy reader/setter in ntstubs exists only in opposite owner branch.",
+        "limit": "No claim that an isolated redundant flags write itself causes a runtime failure. This is preservation of the approved excluded profile,not a defect finding or new private-owner admission."
+      },
+      "verification": "Final source hash matches frozen checkpoint;cached full build,publish11x2,focused32,Full20,governance passed.",
+      "counter_review_final": {
+        "role": "Same agent independent second pass over final source and fixture diff",
+        "confirmed": [
+          "No guest edit or new adapter/callee path. Removed creator checks were not moved elsewhere.",
+          "Native procedure ownership remains one real USER slot. Promotion cleanup remains once,menu local cleared before original rollback.",
+          "Shared edit allocation reuses original hmodCreate;untransferred handle is released on root retirement.",
+          "Existing root font/allocation/child create/child query resource cases retained. Added promotion and native-slot failure coverage.",
+          "Fixture now uses real HWND destruction and native liveness instead of treating every retired handle as live. DS_NOFAILCREATE both values remain exercised for self-destroyed children.",
+          "Original explicit SCDLG_NOREVALIDATE exemption and pre4.0 return rule are separately checked."
+        ],
+        "limits": [
+          "Default-button callee is a double in creator fixture;selected actual callee independently validates HWND arguments and owns its existing callback/traversal checks. This audit does not approve all later dlgmgr2 differences.",
+          "Real hidden HWND retirement is not numeric HWND reuse. No repeated-handle recycling stress or full original NT USER execution equivalence claimed.",
+          "All final source delivery still contingent on Full and governance results."
+        ]
+      },
+      "final_preprocessing": {
+        "product-dialog": {
+          "selected_rows": 545,
+          "literal_original_line_matches": 299
+        },
+        "fixture-dialog": {
+          "selected_rows": 545,
+          "literal_original_line_matches": 299
+        },
+        "product-combo": {
+          "selected_rows": 1202,
+          "literal_original_line_matches": 646
+        }
+      },
+      "source_checkpoint": {
+        "files": [
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+            "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e"
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+            "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b"
+          },
+          {
+            "path": "test/adapter-mvdm-host-out/wow/wow_dialog_creator_lifetime_fixture.c",
+            "sha256": "ce3354b0f5074004b6ffa95df200dbdac28db0006476ff0d41dc750141a4135a"
+          }
+        ],
+        "deleted": [],
+        "source_files": 3
+      },
+      "publication": {
+        "status": "published",
+        "package": "d9756a47-0fca-44e6-b3ce-7acb508ed4d9",
+        "images": 11,
+        "destinations": [
+          "O:\\winnt\\system32",
+          "O:\\repos.hobby\\ntvdm64\\assets\\release"
+        ],
+        "hashVerified": true
+      },
+      "focused_final": {
+        "exit": 0,
+        "creator_log": "promotion-failed result=00000000 creates=1 destroys=1\nslot-failed result=00000000 creates=1 destroys=1\noriginal-creator-lifetime failures=0"
+      },
+      "full": {
+        "Suite": "Full",
+        "ElapsedMs": 399244,
+        "InputPolicy": "Observed",
+        "WindowOwnedConsole": false,
+        "PreparationMs": 6726,
+        "Gates": [
+          {
+            "Gate": "guest-media",
+            "ElapsedMs": 1118,
+            "CleanupMs": 397,
+            "Passed": true
+          },
+          {
+            "Gate": "startup-presentation",
+            "ElapsedMs": 11408,
+            "CleanupMs": 400,
+            "Passed": true
+          },
+          {
+            "Gate": "console-font-restore",
+            "ElapsedMs": 10516,
+            "CleanupMs": 341,
+            "Passed": true
+          },
+          {
+            "Gate": "console-input-batch",
+            "ElapsedMs": 10280,
+            "CleanupMs": 373,
+            "Passed": true
+          },
+          {
+            "Gate": "ntvdm-export-ordinals",
+            "ElapsedMs": 205,
+            "CleanupMs": 411,
+            "Passed": true
+          },
+          {
+            "Gate": "wow-frontiers",
+            "ElapsedMs": 65894,
+            "CleanupMs": 363,
+            "Passed": true
+          },
+          {
+            "Gate": "Console-17",
+            "ElapsedMs": 44919,
+            "CleanupMs": 380,
+            "Passed": true
+          },
+          {
+            "Gate": "Window-17",
+            "ElapsedMs": 43261,
+            "CleanupMs": 409,
+            "Passed": true
+          },
+          {
+            "Gate": "rpc",
+            "ElapsedMs": 14716,
+            "CleanupMs": 371,
+            "Passed": true
+          },
+          {
+            "Gate": "native-gui",
+            "ElapsedMs": 10309,
+            "CleanupMs": 615,
+            "Passed": true
+          },
+          {
+            "Gate": "version-negatives",
+            "ElapsedMs": 45257,
+            "CleanupMs": 378,
+            "Passed": true
+          },
+          {
+            "Gate": "strict-dir",
+            "ElapsedMs": 12437,
+            "CleanupMs": 354,
+            "Passed": true
+          },
+          {
+            "Gate": "modern-edit-return",
+            "ElapsedMs": 29087,
+            "CleanupMs": 424,
+            "Passed": true
+          },
+          {
+            "Gate": "cooked-return",
+            "ElapsedMs": 30873,
+            "CleanupMs": 399,
+            "Passed": true
+          },
+          {
+            "Gate": "rapid-relaunch",
+            "ElapsedMs": 3414,
+            "CleanupMs": 393,
+            "Passed": true
+          },
+          {
+            "Gate": "interactive-relaunch",
+            "ElapsedMs": 8129,
+            "CleanupMs": 365,
+            "Passed": true
+          },
+          {
+            "Gate": "session-isolation",
+            "ElapsedMs": 9643,
+            "CleanupMs": 345,
+            "Passed": true
+          },
+          {
+            "Gate": "retirement-wiring",
+            "ElapsedMs": 4238,
+            "CleanupMs": 328,
+            "Passed": true
+          },
+          {
+            "Gate": "nested-window-handoff",
+            "ElapsedMs": 7396,
+            "CleanupMs": 416,
+            "Passed": true
+          },
+          {
+            "Gate": "dos4gw-nesticle",
+            "ElapsedMs": 19987,
+            "CleanupMs": 432,
+            "Passed": true
+          }
+        ]
+      },
+      "cumulative": {
+        "files": 365,
+        "total": 103794,
+        "baseline": 119913,
+        "net_reduction": 16119,
+        "changed_since_p209": [
+          {
+            "path": "src/mvdm-host/dpmi32/dpmiint.c",
+            "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+            "total": 328
+          },
+          {
+            "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+            "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+            "total": 769
+          },
+          {
+            "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+            "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+            "total": 32
+          },
+          {
+            "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+            "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+            "total": 3
+          },
+          {
+            "path": "src/mvdm-host/wow32/precomp.h",
+            "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+            "total": 14
+          },
+          {
+            "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+            "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+            "total": 13
+          },
+          {
+            "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+            "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+            "total": 363
+          },
+          {
+            "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+            "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+            "total": 16
+          },
+          {
+            "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+            "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+            "total": 253
+          },
+          {
+            "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+            "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+            "total": 29
+          },
+          {
+            "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+            "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+            "total": 140
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+            "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+            "total": 19
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+            "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+            "total": 2
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+            "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+            "total": 39
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+            "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+            "total": 3572
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+            "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+            "total": 343
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+            "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+            "total": 1535
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+            "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+            "total": 3437
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+            "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+            "total": 17
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+            "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+            "total": 44
+          },
+          {
+            "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+            "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+            "total": 2666
+          }
+        ]
+      }
+    }
+  ],
+  "publication": {
+    "status": "published",
+    "package": "d9756a47-0fca-44e6-b3ce-7acb508ed4d9",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 399244,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6726,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1118,
+        "CleanupMs": 397,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11408,
+        "CleanupMs": 400,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 10516,
+        "CleanupMs": 341,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10280,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 205,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65894,
+        "CleanupMs": 363,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44919,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43261,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14716,
+        "CleanupMs": 371,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10309,
+        "CleanupMs": 615,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 45257,
+        "CleanupMs": 378,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12437,
+        "CleanupMs": 354,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29087,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30873,
+        "CleanupMs": 399,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3414,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8129,
+        "CleanupMs": 365,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9643,
+        "CleanupMs": 345,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4238,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7396,
+        "CleanupMs": 416,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19987,
+        "CleanupMs": 432,
+        "Passed": true
+      }
+    ]
+  },
+  "cumulative": {
+    "files": 365,
+    "total": 103794,
+    "baseline": 119913,
+    "net_reduction": 16119,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "total": 2666
+      }
+    ]
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_creator_lifetime_fixture.c",
+        "sha256": "ce3354b0f5074004b6ffa95df200dbdac28db0006476ff0d41dc750141a4135a"
+      }
+    ],
+    "deleted": [],
+    "source_files": 3
+  },
+  "limits": [
+    "Default-button callee is a double in creator fixture;selected actual callee independently validates HWND arguments and owns its existing callback/traversal checks. This audit does not approve all later dlgmgr2 differences.",
+    "Real hidden HWND retirement is not numeric HWND reuse. No repeated-handle recycling stress or full original NT USER execution equivalence claimed."
+  ],
+  "git": "Accompanying commit and push complete delivery;not claimed by this receipt alone."
+}

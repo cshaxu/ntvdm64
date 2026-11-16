@@ -1,0 +1,37 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+  "point": "T483-R2192",
+  "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+  "before_sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+  "after_sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+  "change": "Add #line1763 before original LATER endif. Existing active #line1764 after endif unchanged.",
+  "mirror_diff": {
+    "before": 17,
+    "after": 17,
+    "delta": 0,
+    "add": 2,
+    "delete": 15
+  },
+  "normalized_original_differences": [
+    {
+      "original_start": 1507,
+      "original_count": 1,
+      "current_count": 1,
+      "replacement": [
+        "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+      ]
+    },
+    {
+      "original_start": 1749,
+      "original_count": 14,
+      "current_count": 1,
+      "replacement": [
+        "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register."
+      ]
+    }
+  ],
+  "selected_code": "All other lines equal original when diagnostic directives omitted. Both errors retained. No execution or binding change.",
+  "line_limit": "Inserted directive maps original closing frame in source/selected-LATER negative context. In normal LATER-disabled context its body is not preprocessed;existing post-endif directive1764 owns following selected diagnostic lines.",
+  "verification": "Actual product preprocessing;cached full build,publish11x2,focused32,Full20 and governance passed;no combo algorithm change.",
+  "status": "P225 published/verified;Git delivery accompanies receipt"
+}

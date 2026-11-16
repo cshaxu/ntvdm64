@@ -1328,3 +1328,11 @@ P224: [clres investigation and build-only candidate](p224-clres-investigation.js
 P224: [whole-file clres review](p224-clres-review.json);source applied,full delivery pending.
 
 P224: [delivery receipt](batch-p224-checkpoint.json). Cached,publish11x2,32 controls,Full20 and governance passed;clres4129->3437(-692);four restored points,five residual decisions.
+
+P225: [combo line-only review](p225-combo-review.json);local,batch delivery pending.
+
+P225: [dlgbegin active investigation](p225-dlgbegin-investigation.json);not completed audit or production repair.
+
+P225: [dlgbegin complete source review](p225-dlgbegin-review.json);85->44,final-code delivery pending.
+
+P225: [delivery receipt](batch-p225-checkpoint.json). Cached,publish11x2,32 controls,Full20 and governance passed;dlgbegin85->44(-41),combo line metadata restored.

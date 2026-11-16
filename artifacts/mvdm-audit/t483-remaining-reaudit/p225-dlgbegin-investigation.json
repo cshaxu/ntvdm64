@@ -1,0 +1,159 @@
+{
+  "status": "R2193-R2199 handled;R2200 next;whole-file review and final-code delivery incomplete",
+  "file": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+  "points": "R2193-R2212",
+  "before_sha256": "09b5a77268835e633f174cba5bb6715d7dc9158374bd05f3ea3ac4a77133b838",
+  "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+  "before_metric": {
+    "add": 72,
+    "delete": 13
+  },
+  "comment_candidate_metric": {
+    "add": 52,
+    "delete": 13
+  },
+  "original_client_lock_finding": {
+    "path": "O:/repos.external/OpenNT/windows/core/ntuser/client/usercli.h",
+    "lines": "330-341",
+    "finding": "Original client ThreadLock and ThreadLockAlways macros only reference the local lock variable. Do not claim original client ThreadLock pins native HWND or prevents PDLG cleanup."
+  },
+  "production_chain": [
+    "wow_user_modal_dialog_box enters task/borrow/call scope then original InternalCreateDialog",
+    "wow_dialog_host_set is SetWindowLongA/W DWL_DLGPROC;modern USER owns actual procedure slot",
+    "wow_window_client_validate_window calls callback-first wow_user_borrow_window_state;NoRip shares resolver",
+    "wow_window_words_binding terminal marks WFDESTROYED then invokes wow_dialog_finalize_bound",
+    "original dlgmgr DoCleanup releases shared edit DS/font and clears PDLG through SFI_SETDIALOGPOINTER"
+  ],
+  "fixture_limit": "wow_dialog_creator_lifetime_fixture uses explicit native call doubles and leaves real hidden handles valid after simulated retirement. It cannot alone prove real native handle-reuse or every new guard necessary. Existing production cleanup/source contract must be matched per edge.",
+  "next_actions": [
+    "Finish each ordered lifetime/resource/failure point;compare original existing revalidation before retaining any added check.",
+    "Verify candidate against actual product context and relevant original-restoration negative controls.",
+    "Finish whole file before applying substantive changes and building accumulated combo+dlgbegin batch."
+  ],
+  "current_sha256": "abd7666a528e989b32e75665a77f029b04d4c0ca7127697107ff79d2fe350d57",
+  "current_metric": {
+    "add": 55,
+    "delete": 13
+  },
+  "restored_points": [
+    {
+      "id": "T483-R2193",
+      "before": "+3/-0",
+      "after": "+0/-0",
+      "proof": "Exact original first12 lines;redundant #line11 removed with three added comment lines. No executable or binding change;all error bodies untouched."
+    }
+  ],
+  "isolated_lifetime_controls": [
+    {
+      "name": "current",
+      "source_sha256": "0f5b5ce34213d140f6e34d0846aee5bb4989cee15b0d3c51e7c683b0486e8cd8",
+      "compile_log": "build\\t483-s5-p225\\current-compile.log",
+      "link_log": "build\\t483-s5-p225\\current-link.log",
+      "run_exit": 0,
+      "run_log": "original-creator-lifetime failures=0"
+    },
+    {
+      "name": "restore-root-font",
+      "source_sha256": "5f6f34cfc03658940d86005819136d3624efa4e9b51ba9ed2f8dc6ea69a61e4a",
+      "compile_log": "build\\t483-s5-p225\\restore-root-font-compile.log",
+      "link_log": "build\\t483-s5-p225\\restore-root-font-link.log",
+      "run_exit": 3,
+      "run_log": "SEH=c0000005 edge=1 child=0"
+    },
+    {
+      "name": "restore-edit-allocation",
+      "source_sha256": "a364ec7b5da3e49b7f48c4e329c540b7e3519579eac3607760738e7f9b95e690",
+      "compile_log": "build\\t483-s5-p225\\restore-edit-allocation-compile.log",
+      "link_log": "build\\t483-s5-p225\\restore-edit-allocation-link.log",
+      "run_exit": 3,
+      "run_log": "SEH=c0000005 edge=2 child=0"
+    },
+    {
+      "name": "restore-child-query",
+      "source_sha256": "31a6f329179bd9de25ea1d10c857faeb93052af44eee20386094484a9c3d1515",
+      "compile_log": "build\\t483-s5-p225\\restore-child-query-compile.log",
+      "link_log": "build\\t483-s5-p225\\restore-child-query-link.log",
+      "run_exit": 3,
+      "run_log": "SEH=c0000005 edge=5 child=0"
+    },
+    {
+      "name": "restore-init-revalidation",
+      "source_sha256": "db33f71eafe442cc3647e373ba09003a27103d4efef6d61fe3237b3648200207",
+      "compile_log": "build\\t483-s5-p225\\restore-init-revalidation-compile.log",
+      "link_log": "build\\t483-s5-p225\\restore-init-revalidation-link.log",
+      "run_exit": 3,
+      "run_log": "SEH=c0000005 edge=6 child=0"
+    }
+  ],
+  "counter_review": {
+    "fixture": "Build-only derivative catches SEH to avoid crash dialogs;otherwise actual creator and existing retirement doubles unchanged. Production fixture not modified.",
+    "result": "Current passes;four isolated original-restoration variants access null PDLG after simulated retirement. This is not a real native HWND-reuse reproduction.",
+    "new_limitation": "wow_user_borrow_leave restores saved callback cache before returning. Creator enters a borrow scope without setting its newly-created HWND as callback. Therefore generic callback-first resolution does not prove post-WM_INITDIALOG revalidation actually returns the retired creator WND. The fixture always returning retired WND overstates that case.",
+    "next_check": "Trace actual callback cache after SendMessageWorker returns and native handle/current generation resolution. Do not admit R2207/R2212 as necessary from the fixture alone.",
+    "allocation_source": "client.c GetEditDS -> registered W32GlobalAlloc16 -> GlobalAllocLock16;trace allocator callback before claiming GlobalNotify destruction as production evidence.",
+    "callee_source": "dlgmgr2.c xxxCheckDefPushButton revalidates new focus then sends WM_GETDLGCODE;caller child guard must be assessed with actual callback cache/identity, not merely asserted redundant."
+  },
+  "byte_preservation": "Exact pre-edit bytes except header/comment #line removal;existing LF preserved.",
+  "child_restoration": {
+    "points": [
+      "R2194",
+      "R2204",
+      "R2205-child-only",
+      "R2206-child-only"
+    ],
+    "reason": "Original creator does not equate a child destroying itself during notification with CreateWindow failure. Added NoCreate changes behavior and can destroy the live parent.",
+    "native_control": "root-live=1 child-live=0 query-result=0 child-query-calls=0 error=1400",
+    "native_exit": 0,
+    "creator_control": "original-creator-lifetime failures=0",
+    "creator_exit": 0,
+    "limits": "Native control proves ordinary destruction with no replacement creation. No claim of comprehensive same-numeric-HWND reuse testing. No observed or concrete supported-path failure established requiring deviation from original child semantics.",
+    "fixture_correction": "Removed mirror-specific parent-destruction expectation for child retirement;retains both DS_NOFAILCREATE settings and checks parent success/no destroy. Dead child query returns0 as native control proves. Root-retirement tests unchanged.",
+    "native_control_source": "#include <windows.h>\n#include <stdio.h>\nstatic unsigned queries;\nstatic LRESULT CALLBACK child_proc(HWND w, UINT m, WPARAM a, LPARAM b)\n{\n    if (m == WM_SETFONT) { DestroyWindow(w); return 0; }\n    if (m == WM_GETDLGCODE) { ++queries; return DLGC_DEFPUSHBUTTON; }\n    return DefWindowProcW(w, m, a, b);\n}\nint main(void)\n{\n    WNDCLASSW wc = {0}; HWND root, child; LRESULT result;\n    wc.lpfnWndProc = child_proc; wc.lpszClassName = L\"P225ChildRetirement\";\n    wc.hInstance = GetModuleHandleW(NULL);\n    if (!RegisterClassW(&wc)) return 2;\n    root = CreateWindowExW(0, L\"STATIC\", L\"P225\", 0, 0, 0, 10, 10,\n        HWND_MESSAGE, NULL, wc.hInstance, NULL);\n    child = CreateWindowExW(0, wc.lpszClassName, L\"child\", WS_CHILD,\n        0, 0, 10, 10, root, NULL, wc.hInstance, NULL);\n    if (!root || !child) return 3;\n    SendMessageW(child, WM_SETFONT, 0, 0);\n    SetLastError(0);\n    result = SendMessageW(child, WM_GETDLGCODE, 0, 0);\n    printf(\"root-live=%d child-live=%d query-result=%ld child-query-calls=%u error=%lu\\n\",\n        IsWindow(root), IsWindow(child), (long)result, queries, GetLastError());\n    if (!IsWindow(root) || IsWindow(child) || result || queries) return 4;\n    DestroyWindow(root); UnregisterClassW(wc.lpszClassName, wc.hInstance);\n    return 0;\n}\n",
+    "native_control_source_sha256": "8a633796f654e47a06c09210050a5d891dfd67c78966e97fbce835fedd6120b3",
+    "native_compile_command": "MSVC x86 cl /TC /MT /W4 native-child-retirement.c /link user32.lib; all outputs under build/t483-s5-p225",
+    "source_scope": "No original guest code or binaries modified. Native HWND test was hidden and noninteractive."
+  },
+  "edit_handle_minimization": {
+    "point": "R2195",
+    "change": "Remove added HANDLE hEditDS;reuse original HANDLE hmodCreate for allocation result before transfer. Original next statement already sets hmodCreate to PDLG hData.",
+    "retained_boundary": "GetEditDS -> W32GlobalAlloc16 -> WOWGlobalAllocLock16 -> CallBack16 RET_GLOBALALLOCLOCK;original kernel31 3gmoreme gnotify invokes registered TDB_GNotifyProc. Allocation reentrancy is real. Resource transfer/check remains for R2202 review."
+  },
+  "line_update": {
+    "point": "R2196",
+    "change": "#line286 before DEBUG endif,existing selected post-endif line mapping retained;error body unchanged."
+  },
+  "promotion_controls": {
+    "promotion-current": {
+      "exit": 0,
+      "log": "promotion-failed result=00000000 creates=1 destroys=1\nslot-failed result=00000000 creates=1 destroys=1\noriginal-creator-lifetime failures=0"
+    },
+    "promotion-original": {
+      "exit": 1,
+      "log": "promotion-failed result=00000000 creates=1 destroys=0\nFAIL line=165 edge=0 child=0\nslot-failed result=00000000 creates=1 destroys=1\noriginal-creator-lifetime failures=1"
+    }
+  },
+  "promotion_conclusion": {
+    "points": [
+      "R2197",
+      "R2198"
+    ],
+    "before_diff": 11,
+    "after_diff": 7,
+    "delta": -4,
+    "source": "ValidateDialogPwnd can return FALSE on native slot initialization or lookaside initialization/allocation failure. InternalCreateDialog already owns a created HWND. Original DeleteFontAndMenuAndFail does not destroy it;caller receives NULL and has no handle to retire. Current exact path destroys once and clears attached-menu local before original cleanup.",
+    "limits": "Injected promotion failure runs actual creator with explicit native creation/destroy doubles;not a live low-memory reproduction. Counts establish exact call flow,source establishes real failure returns. No claim invalid ValidateHwnd NULL cleanup is fixed.",
+    "minimization": "Removed local profile ifdef/endif and two explanatory comment lines. Existing supported creator contexts all select native dialog procedure owner;cleanup itself is independent of procedure storage.",
+    "remaining": "Necessary cleanup and closing brace remain pending owner decision,not approved retention."
+  },
+  "native_slot_conclusion": {
+    "point": "R2199",
+    "delta": -1,
+    "remaining_diff": "+12/-1",
+    "evidence": "Selected original DefDlgProcWorker calls host_notify for WM_NOTIFYFORMAT and host_call for procedure dispatch. Both actual native DefDlgProc A/W encoding and public Get/SetWindowLong dialog slots must observe one procedure. A private PDLG assignment alone cannot publish it to USER;mirroring both requires additional synchronization and a second authority.",
+    "probe_exit": 0,
+    "probe_log": "ansi=0 prior=00000000 replaced=00000000\nansi=1 prior=00000000 replaced=FFFF0BA7\nWOW_DIALOG_NATIVE_OWNER errors=0 iterations=64 callbacks=256 terminal=32",
+    "probe_sha256": "f32af670ddf9e8593ab64d75bce08399220bb35757d71794a11734ddf0774371",
+    "scope": "Existing native slot/A-W ownership probe executable,not a new whole-product build or guest runtime test. Initialization failure is covered by new creator slot-failure injection.",
+    "decision": "Remove explanatory comment;keep native set plus failure rollback pending owner review;do not restore private slot as competing state."
+  }
+}

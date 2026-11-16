@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2191 reviewed:820 restored/confirmed published,0 local restorations,8 approved,
-1363 qualified pending;529 unreviewed. Files308/365 audited,57 remain.
-P224 file308 verified/published;Git delivery accompanies receipt.
+2212 reviewed:832 restored/confirmed published,0 local restorations,9 approved/policy,
+1371 qualified pending;508 unreviewed. Files310/365 audited,55 remain.
+P225 file310 verified/published;Git delivery accompanies receipt.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -52,14 +52,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P224 package `05f3b4f9-c015-4629-86f6-73b4e7b4d390` published11x2;hashes verified.
-clres4129->3437(-692);original ordering restored and selectors
-consolidated. Four restored/confirmed points;five residual owner decisions.
-Cached x86/x64,32 controls,Full20 including DOS4GW and governance passed.
-P222 DPMI repair remains included. No guest/winnt.zip changes.
-Cumulative365-file diff119913->103835(-16078).
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p224-checkpoint.json).
-Git delivery accompanies receipt;ordered audit resumes at R2192.
+P225 package `d9756a47-0fca-44e6-b3ce-7acb508ed4d9` published11x2;hashes verified.
+combo exclusion-only diagnostic mapping;dlgbegin85->44(-41). Original
+child/post-init/revalidation behavior restored;necessary rollback and PDLG
+checks minimized. Cached x86/x64,32 controls,Full20 including DOS4GW and
+governance passed. No guest/winnt.zip changes.
+Cumulative365-file diff119913->103794(-16119).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p225-checkpoint.json).
+Git delivery accompanies receipt;ordered audit resumes at R2213.
 
 ## Remaining Scope
 
@@ -173,3 +173,10 @@ preprocessing;935 original source lines and10 errors checked. Cached x86/x64,
 publish11x2,32 controls,Full20 and governance passed.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p224-checkpoint.json).
 Cumulative365-file mirror reduction16078. NextR2192.
+
+P225 verified/published:combo line mapping and dlgbegin85->44(-41).
+Twelve restored/confirmed points,eight minimized decisions,one retained
+excluded-profile point. Actual native destruction replaced an overstrict
+fixture assumption;all final controls and Full20 pass. HWND reuse stress
+is not claimed. NextR2213;Git delivery accompanies receipt.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p225-checkpoint.json).
