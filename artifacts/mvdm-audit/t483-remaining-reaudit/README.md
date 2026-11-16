@@ -1408,3 +1408,10 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P237 winmgrc source review](p237-winmgrc-review.json): restored pragma and compatibility getter body;mirror517->500(-17),residual native/private boundaries pending owner;delivery receipt below.
 
 - [P237 delivery](batch-p237-checkpoint.json): winmgrc original pragma/getter restored;cached,publish11x2,focused34,Full20;mirror delta-17.
+
+### P238 whole-file audit
+
+- [Source/ABI and real compile-link controls](p238-wow-investigation.json).
+- [Final local subset and line review](p238-wow-review.json): client/wow.c, R2427–R2436, mirror1059→1046(−13); delivery verified below.
+
+- [P238 delivery](batch-p238-checkpoint.json): wow.c selected original subset restored;cached,publish11x2,focused34,Full20;fixed mirror metric1059->1046(-13).

@@ -1,0 +1,110 @@
+{
+  "batch": "P238",
+  "file": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/wow.c",
+  "baseline_commit": "59c4d47e1141831b9244c7e01da07a59bd387243",
+  "baseline_sha256": "b667d09291a27bc607da80aa6765d3c0835051a5325880ba2368983804969c3a",
+  "final_sha256": "b8e6073c1a208e6e97a60be15e3129743d7ea4213a572e443f927bbb141912fa",
+  "before": {
+    "added": 39,
+    "deleted": 1020,
+    "total": 1059
+  },
+  "after": {
+    "added": 38,
+    "deleted": 1008,
+    "total": 1046
+  },
+  "mirror_diff_delta": -13,
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+        "sha256": "b8e6073c1a208e6e97a60be15e3129743d7ea4213a572e443f927bbb141912fa",
+        "exact_original_logical_rows": 94,
+        "error_bodies": 12,
+        "unexplained_line_mismatches": 0,
+        "proof": "Every non-error, non-line row equals the pinned original at its effective logical line; all original outer conditionals in original order; 12 excluded bodies contain only bare #error."
+      }
+    ]
+  },
+  "points": [
+    {
+      "review_id": "T483-R2427",
+      "decision": "pending-owner-native-boundary",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "validation ABI"
+    },
+    {
+      "review_id": "T483-R2428",
+      "decision": "pending-owner-native-boundary",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "class/desktop ownership"
+    },
+    {
+      "review_id": "T483-R2429",
+      "decision": "pending-owner-native-boundary",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "public native USER queries"
+    },
+    {
+      "review_id": "T483-R2430",
+      "decision": "pending-owner-native-boundary",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "native hook-chain ownership"
+    },
+    {
+      "review_id": "T483-R2431",
+      "decision": "restored-selected-original-or-policy-subset",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "pragma restore"
+    },
+    {
+      "review_id": "T483-R2432",
+      "decision": "restored-selected-original-or-policy-subset",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "preamble selected macros and comments restore"
+    },
+    {
+      "review_id": "T483-R2433",
+      "decision": "restored-selected-original-or-policy-subset",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "unchanged original _GetDlgItem"
+    },
+    {
+      "review_id": "T483-R2434",
+      "decision": "restored-selected-original-or-policy-subset",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "WOW16 GetKeyState exclusion"
+    },
+    {
+      "review_id": "T483-R2435",
+      "decision": "restored-selected-original-or-policy-subset",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "WOW16 hook exclusion"
+    },
+    {
+      "review_id": "T483-R2436",
+      "decision": "restored-selected-original-or-policy-subset",
+      "residual_error_exclusions": "Retain approved unsupported WOW16/accesscheck outer branches; excluded code is not restored",
+      "scope": "conditional order/bare error/original line normalization"
+    }
+  ],
+  "validation": "Cached x86/x64,publish11x2,focused34,Full20,shared-boundary/governance/links passed;Git delivery accompanies receipt",
+  "evidence": "p238-wow-investigation.json",
+  "metric_reconciliation": {
+    "fixed_metric": "Original-relative SequenceMatcher autojunk=False;CRLF normalized;split on LF retaining terminal empty item;remove #line rows only from current",
+    "superseded_splitlines_values": {
+      "before": 1061,
+      "after": 994,
+      "delta": -67
+    },
+    "correct_fixed_values": {
+      "before": 1059,
+      "after": 1046,
+      "delta": -13
+    },
+    "cause": "Terminal empty item alters ambiguous blank/conditional row alignment;source unchanged;use fixed cumulative metric consistently."
+  },
+  "delivery_receipt": "batch-p238-checkpoint.json"
+}

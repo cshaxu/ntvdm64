@@ -1,0 +1,568 @@
+{
+  "batch": "P238",
+  "file": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "baseline_commit": "59c4d47e1141831b9244c7e01da07a59bd387243",
+  "source_sha256": "b667d09291a27bc607da80aa6765d3c0835051a5325880ba2368983804969c3a",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/wow.c",
+  "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+  "original_relative": {
+    "added": 39,
+    "deleted": 1020,
+    "total": 1059
+  },
+  "point_range": [
+    "T483-R2427",
+    "T483-R2436"
+  ],
+  "status": "Whole-file source/counter-review complete;cached full,publish11x2,focused34,Full20 passed;Git delivery accompanies receipt",
+  "current_point": "T483-R2436",
+  "actual_contexts": [
+    "WOW32 control-body-wow.obj with control-client/precomp.h and WOW_ORIGINAL_EDIT_CLIENT",
+    "call-boundaries original_wow.obj navigation fixture"
+  ],
+  "evidence": [
+    "Original ValidateHwnd/NoRip reads CLIENTINFO.CallbackWnd raw WND then HMValidateHandle/NoRip",
+    "wow_user_borrow_scope.c349: callback generation pin precedes ordinary handle validation;retain_window_generation consumes pin;graph materialized before returning WND",
+    "wow_window_client_state_bindings.c177 wrapper enters runtime owner;237 NoRip preserves last error",
+    "mvdm_softpc_wow_page_domain.c2333 reads callback identity with c_sas_dw_at from guest TEB; returned backing is ULONG guest address, not native WND pointer. It pins exact retired callback generation before current handle lookup.",
+    "wow_task_init_bindings.h9-18 existing client projection has scalar guest_callback[2], explicitly inactive; wow_edit_client_info() returns task-owned metadata, no native callback WND view.",
+    "test/mvdm-host/wow_page_domain_fixture.c retired-window-borrow checks retire, republish same HWND, nested callback, restoration of old backing. Inspected test contract; not newly executed in P238."
+  ],
+  "unresolved": "No unresolved source classification. R2427-R2430 residual owner decisions; no new runtime success claim.",
+  "validation_compile_control": {
+    "current_exit": 0,
+    "restored_exit": 2,
+    "candidate_sha256": "27db157b9d895008419100f8c01e11101df29e758ed5de97db3d2a0d260c1922",
+    "diagnostics": [
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(154): error C2373: 'wow_window_client_validate_window': redefinition; different type modifiers",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(157): error C2065: 'PCLIENTINFO': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(157): error C2146: syntax error: missing ';' before identifier 'pci'",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(157): error C2065: 'pci': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(162): error C2065: 'pci': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(162): error C2223: left of '->CallbackWnd' must point to struct/union",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(163): error C2065: 'pci': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(163): error C2223: left of '->CallbackWnd' must point to struct/union",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(173): error C2373: 'wow_window_client_validate_window_no_rip': redefinition; different type modifiers",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(176): error C2065: 'PCLIENTINFO': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(176): error C2146: syntax error: missing ';' before identifier 'pci'",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(176): error C2065: 'pci': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(181): error C2065: 'pci': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(181): error C2223: left of '->CallbackWnd' must point to struct/union",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(182): error C2065: 'pci': undeclared identifier",
+      "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-validation.c(182): error C2223: left of '->CallbackWnd' must point to struct/union"
+    ],
+    "process": {
+      "pid": 8584,
+      "started": "2026-11-16T17:00:15.7912575Z",
+      "command": "validation.cmd",
+      "deadlineSeconds": 180
+    },
+    "scope": "Exact two complete original function bodies, product compiler flags; compile control, not runtime proof. Initial incomplete extraction discarded and rerun."
+  },
+  "alternatives": [
+    {
+      "choice": "Use original CLIENTINFO and handle table without adaptation",
+      "result": "Native original dereferences callback WND and desktop shared pointers. Actual provider publishes guest addresses; direct native dereference violates address-space ABI. Compile additionally lacks original types/providers; missing declarations alone are not necessity proof."
+    },
+    {
+      "choice": "Expose existing wow_task_client_info guest_callback as native CallbackWnd",
+      "result": "Scalar inactive snapshot is neither current callback selection nor pinned native WND. Casting cannot meet original dereference/lifetime contract."
+    },
+    {
+      "choice": "Wrap original selector with a new native CLIENTINFO callback projection",
+      "result": "Would require acquiring and retaining the callback generation, constructing native WND view and adding failure propagation before original selector, alongside an ordinary HMValidate provider. Existing borrow already performs those operations together. No demonstrated reduction; cannot claim restoration by relocating identical complexity."
+    }
+  ],
+  "provider_controls": [
+    {
+      "function": "GetClassNameA",
+      "line": 193,
+      "lines": 26,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetClassNameA.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetClassNameA@12 already defined in GetClassNameA.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetClassNameA.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "55c04aac0904ebf0ee50bbe6afac8d27a43a2ed9c578a6a2aeceae271c5e1997"
+    },
+    {
+      "function": "GetDlgItem",
+      "line": 268,
+      "lines": 20,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetDlgItem.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetDlgItem@8 already defined in GetDlgItem.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetDlgItem.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "ec6e180dc3293e8b00e9cea5e30923ec122b4b3124f34b32f323fb83f0be3282"
+    },
+    {
+      "function": "GetKeyboardState",
+      "line": 301,
+      "lines": 10,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetKeyboardState.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetKeyboardState@4 already defined in GetKeyboardState.obj",
+        "GetKeyboardState.obj : error LNK2019: unresolved external symbol _NtUserGetKeyboardState@4 referenced in function _GetKeyboardState@4",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetKeyboardState.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "736e4c44b40185b1d951fdcd2eedc1593b3bedb24717468cf3e62b004095f25b"
+    },
+    {
+      "function": "GetMenu",
+      "line": 324,
+      "lines": 22,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetMenu.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetMenu@4 already defined in GetMenu.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetMenu.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "cc85ffdb2b9751ae25d5d373e0fed15cc1e225e70365d8b1f44ec1be079e81b2"
+    },
+    {
+      "function": "GetMenuItemCount",
+      "line": 357,
+      "lines": 12,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetMenuItemCount.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetMenuItemCount@4 already defined in GetMenuItemCount.obj",
+        "GetMenuItemCount.obj : error LNK2019: unresolved external symbol _HMValidateHandle@8 referenced in function _GetMenuItemCount@4",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetMenuItemCount.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "ef88c634d9f7e652c7c35b9851681e011c1dd3c9d71861efbef11c12ab838ab7"
+    },
+    {
+      "function": "GetMenuItemID",
+      "line": 378,
+      "lines": 24,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetMenuItemID.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetMenuItemID@8 already defined in GetMenuItemID.obj",
+        "GetMenuItemID.obj : error LNK2019: unresolved external symbol _HMValidateHandle@8 referenced in function _GetMenuItemID@8",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetMenuItemID.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "dd704b11e2292e5a1778464e723fd1e540b8652672b63ebe282d2ad69ee64a35"
+    },
+    {
+      "function": "GetMenuState",
+      "line": 404,
+      "lines": 15,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetMenuState.c",
+      "compile_exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetMenuState.c(413): error C2065: 'MF_VALID': undeclared identifier"
+      ],
+      "candidate_sha256": "242e497a75021cb151748ea543bd50f1f075cdffe1baf2a2dc9af1413886d8dc"
+    },
+    {
+      "function": "IsWindow",
+      "line": 421,
+      "lines": 43,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-IsWindow.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _IsWindow@4 already defined in IsWindow.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\IsWindow.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "2df3a8212cf960ac6c720f88817a0dbe4a271e9050882dc662eebfe583eb6f4a"
+    },
+    {
+      "function": "GetWindow",
+      "line": 466,
+      "lines": 13,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetWindow.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetWindow@8 already defined in GetWindow.obj",
+        "GetWindow.obj : error LNK2019: unresolved external symbol __GetWindow@8 referenced in function _GetWindow@8",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetWindow.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "f85547bdd06e5cdb8a501523cd3f447886b0d5b8d94b05cde187e3d70457e339"
+    },
+    {
+      "function": "GetParent",
+      "line": 480,
+      "lines": 12,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetParent.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetParent@4 already defined in GetParent.obj",
+        "GetParent.obj : error LNK2019: unresolved external symbol __GetParent@4 referenced in function _GetParent@4",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetParent.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "53b2bfae0017535522d28a04e0c772ad7007efbe7a77f3903827fcf210864ad4"
+    },
+    {
+      "function": "GetSubMenu",
+      "line": 493,
+      "lines": 14,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetSubMenu.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetSubMenu@8 already defined in GetSubMenu.obj",
+        "GetSubMenu.obj : error LNK2019: unresolved external symbol _HMValidateHandle@8 referenced in function _GetSubMenu@8",
+        "GetSubMenu.obj : error LNK2019: unresolved external symbol __GetSubMenu@8 referenced in function _GetSubMenu@8",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetSubMenu.dll : fatal error LNK1120: 2 unresolved externals"
+      ],
+      "candidate_sha256": "a688b7f28d345853b59f4e2e623f8e1b9b1ad680c1ceccd80cf5535a6727470c"
+    },
+    {
+      "function": "GetSysColor",
+      "line": 509,
+      "lines": 33,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetSysColor.c",
+      "compile_exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetSysColor.c(540): error C2039: 'psi': is not a member of 'wow_default_message_state_type'"
+      ],
+      "candidate_sha256": "643b9886d24d8c929d2543781cc8a55114a7a1ccc00192611c32f9ae2ba4b9fa"
+    },
+    {
+      "function": "GetSystemMetrics",
+      "line": 544,
+      "lines": 44,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetSystemMetrics.c",
+      "compile_exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetSystemMetrics.c(577): error C2039: 'psi': is not a member of 'wow_default_message_state_type'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetSystemMetrics.c(582): error C2039: 'psi': is not a member of 'wow_default_message_state_type'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetSystemMetrics.c(586): error C2039: 'psi': is not a member of 'wow_default_message_state_type'"
+      ],
+      "candidate_sha256": "eabfc78d9cc85b46a1f01a11a05c1db39f2484be79667137105f175a4669be82"
+    },
+    {
+      "function": "GetTopWindow",
+      "line": 601,
+      "lines": 19,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetTopWindow.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetTopWindow@4 already defined in GetTopWindow.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetTopWindow.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "bad78d668d5954046d86e08a63579ee6a4644560562d29a9839dbdd0ec5b2ba8"
+    },
+    {
+      "function": "IsChild",
+      "line": 622,
+      "lines": 16,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-IsChild.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _IsChild@8 already defined in IsChild.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\IsChild.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "b8ffd97126be709e1c811051ee570b917c81403f0677216d576ad3e0a76e41ec"
+    },
+    {
+      "function": "IsIconic",
+      "line": 639,
+      "lines": 12,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-IsIconic.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _IsIconic@4 already defined in IsIconic.obj",
+        "IsIconic.obj : error LNK2019: unresolved external symbol __IsIconic@4 referenced in function _IsIconic@4",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\IsIconic.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "fa9b053ae4762fc4fc59cf193a56f3944f1c700a9d2cce3efa65fa60c8b8304d"
+    },
+    {
+      "function": "IsWindowEnabled",
+      "line": 652,
+      "lines": 12,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-IsWindowEnabled.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _IsWindowEnabled@4 already defined in IsWindowEnabled.obj",
+        "IsWindowEnabled.obj : error LNK2019: unresolved external symbol __IsWindowEnabled@4 referenced in function _IsWindowEnabled@4",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\IsWindowEnabled.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "b9876fd5a0dbf0e19c6b304edbf3501a715c60c1fb7006f63e6ffd354cb8a1b8"
+    },
+    {
+      "function": "IsWindowVisible",
+      "line": 665,
+      "lines": 29,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-IsWindowVisible.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _IsWindowVisible@4 already defined in IsWindowVisible.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\IsWindowVisible.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "31b5bf3d706b8a95b33636146cbe4d87f57b70bddfe783fbda7ed34d3c5f72b6"
+    },
+    {
+      "function": "IsZoomed",
+      "line": 695,
+      "lines": 12,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-IsZoomed.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _IsZoomed@4 already defined in IsZoomed.obj",
+        "IsZoomed.obj : error LNK2019: unresolved external symbol __IsZoomed@4 referenced in function _IsZoomed@4",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\IsZoomed.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "7f45eb3882d9e95f8eaff1cb6e3e51f090f51103c117acadb3194a4c2165d3e4"
+    },
+    {
+      "function": "ClientToScreen",
+      "line": 708,
+      "lines": 22,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-ClientToScreen.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _ClientToScreen@8 already defined in ClientToScreen.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\ClientToScreen.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "f19f88b66c6e1377d01e49aec48e7aa940b88e898a92d033e2231aa70a739297"
+    },
+    {
+      "function": "GetClientRect",
+      "line": 731,
+      "lines": 13,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetClientRect.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetClientRect@8 already defined in GetClientRect.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetClientRect.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "5c89e0bf2ac5f645a55faa0323f9897939043ccf77698e19f7cb79ad1cdacb3e"
+    },
+    {
+      "function": "GetCursorPos",
+      "line": 746,
+      "lines": 18,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetCursorPos.c",
+      "compile_exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetCursorPos.c(760): error C2039: 'psi': is not a member of 'wow_default_message_state_type'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetCursorPos.c(761): error C2039: 'psi': is not a member of 'wow_default_message_state_type'"
+      ],
+      "candidate_sha256": "c6585d2da2c4461bd5cec0cc49b3e7c0266d74aa95ce9aa35a1a1ad76ff7962b"
+    },
+    {
+      "function": "GetWindowRect",
+      "line": 765,
+      "lines": 18,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetWindowRect.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetWindowRect@8 already defined in GetWindowRect.obj",
+        "GetWindowRect.obj : error LNK2019: unresolved external symbol __GetWindowRect@8 referenced in function _GetWindowRect@8",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetWindowRect.dll : fatal error LNK1120: 1 unresolved externals"
+      ],
+      "candidate_sha256": "46173f4d52bfd370e5ef38ebecfe21c1bab1c2fcb23c5d79c7cce272a32c6562"
+    },
+    {
+      "function": "ScreenToClient",
+      "line": 784,
+      "lines": 22,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-ScreenToClient.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _ScreenToClient@8 already defined in ScreenToClient.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\ScreenToClient.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "68f4ea565ba3a4c7fc11c7d478a4ef7be02f5413c05a834a4be9d7f6296856cd"
+    },
+    {
+      "function": "EnableMenuItem",
+      "line": 807,
+      "lines": 34,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-EnableMenuItem.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1120,
+      "link_diagnostics": [
+        "wow_menu_native_bindings.obj : error LNK2005: _wow_menu_native_EnableMenuItem@12 already defined in EnableMenuItem.obj",
+        "EnableMenuItem.obj : error LNK2019: unresolved external symbol _HMValidateHandle@8 referenced in function _wow_menu_native_EnableMenuItem@12",
+        "EnableMenuItem.obj : error LNK2019: unresolved external symbol _MNLookUpItem@16 referenced in function _wow_menu_native_EnableMenuItem@12",
+        "EnableMenuItem.obj : error LNK2019: unresolved external symbol _NtUserEnableMenuItem@12 referenced in function _wow_menu_native_EnableMenuItem@12",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\EnableMenuItem.dll : fatal error LNK1120: 3 unresolved externals"
+      ],
+      "candidate_sha256": "cfd5cf386ae068fad3fb00a67e7ac6d4a3be969c9a54ef3408b84c192d654f1e"
+    },
+    {
+      "function": "_PhkNext",
+      "line": 853,
+      "lines": 17,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c",
+      "compile_exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c(853): error C2061: syntax error: identifier '_PhkNext'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c(853): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c(854): error C2146: syntax error: missing ')' before identifier 'phk'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c(854): error C2061: syntax error: identifier 'phk'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c(854): error C2059: syntax error: ')'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c(855): error C2449: found '{' at file scope (missing function header?)",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_PhkNext.c(869): error C2059: syntax error: '}'"
+      ],
+      "candidate_sha256": "7fa8cd5463dace1d323549a24ec3c0e64e092d48a5d1d78ca38197bef297ef3d"
+    },
+    {
+      "function": "CallNextHookEx",
+      "line": 879,
+      "lines": 187,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c",
+      "compile_exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(888): error C2065: 'PHOOK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(888): error C2146: syntax error: missing ';' before identifier 'phk'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(888): error C2065: 'phk': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(889): error C2065: 'PCLIENTINFO': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(889): error C2146: syntax error: missing ';' before identifier 'pci'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(889): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(899): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(900): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(900): error C2223: left of '->dwHookCurrent' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(907): error C2065: 'phk': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(907): error C2065: 'PHOOK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(907): error C2064: term does not evaluate to a function taking 0 arguments",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(907): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(907): error C2223: left of '->phkCurrent' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(907): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(907): error C2223: left of '->ulClientDelta' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(930): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(930): error C2223: left of '->CI_flags' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(930): error C2065: 'CI_INTERTHREAD_HOOK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(931): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(931): error C2223: left of '->dwHookData' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(933): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(933): error C2223: left of '->CI_flags' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(933): error C2065: 'CI_INTERTHREAD_HOOK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(935): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(935): error C2223: left of '->CI_flags' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(935): error C2065: 'CI_INTERTHREAD_HOOK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(944): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(944): error C2065: 'FNID_HKINLPCWPEXSTRUCT': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(946): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(946): error C2223: left of '->dwHookData' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(952): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(952): error C2065: 'FNID_HKINLPCWPRETEXSTRUCT': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(958): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(958): error C2223: left of '->CI_flags' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(958): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(958): error C2223: left of '->CI_flags' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(958): error C2065: 'CI_INTERTHREAD_HOOK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(959): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(959): error C2223: left of '->dwHookData' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(982): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(992): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(1000): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(1009): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(1020): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(1033): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(1042): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(1050): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-CallNextHookEx.c(1059): error C2065: 'FNID_CALLNEXTHOOKPROC': undeclared identifier"
+      ],
+      "candidate_sha256": "64f120a12ca5f8597b6242bc446cd6db33a323aa73d066ede7302f08d3db223e"
+    },
+    {
+      "function": "_GetDesktopWindow",
+      "line": 229,
+      "lines": 10,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c",
+      "compile_exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(231): error C2065: 'PCLIENTINFO': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(231): error C2146: syntax error: missing ';' before identifier 'pci'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(231): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(235): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(236): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(236): error C2223: left of '->pDeskInfo' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(237): error C2065: 'pci': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-_GetDesktopWindow.c(237): error C2223: left of '->ulClientDelta' must point to struct/union"
+      ],
+      "candidate_sha256": "455a6193f36bc93caea9eaa8c84f79bbdc05ed5dc75476687339f02c6a1cb6ae"
+    },
+    {
+      "function": "GetDesktopWindow",
+      "line": 242,
+      "lines": 7,
+      "candidate": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\restore-GetDesktopWindow.c",
+      "compile_exit": 0,
+      "diagnostics": [],
+      "link_exit": 1169,
+      "link_diagnostics": [
+        "user32.lib(USER32.dll) : error LNK2005: _GetDesktopWindow@0 already defined in GetDesktopWindow.obj",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p238\\GetDesktopWindow.dll : fatal error LNK1169: one or more multiply defined symbols found"
+      ],
+      "candidate_sha256": "2aeca47b208b55b5c03913a6b995177ed75fb28812f0ce493c0eda31fc20a78f"
+    }
+  ],
+  "provider_controls_limit": "Per-function restoration with real product flags and 22 full-product link controls. A first malformed probe preamble was discarded and rerun. Missing declarations or link collisions alone are not full ownership proof; source caller/provider evidence below supplies the boundary.",
+  "source_ownership": {
+    "class_desktop": "wow_user_object_bindings.c442 reads class through native GetClassNameA to construct view; wow_user_borrow_scope.c374 resolves native desktop before graph materialization. Restoring public original GetClassNameA/GetDesktopWindow makes view construction consume itself, not native USER state. _GetDesktopWindow requires NT4 CLIENTINFO mapped desktop pointers.",
+    "window_menu": "Public HWND/HMENU getters query modern USER objects, including unenrolled native/system windows. Selected original internal _GetDlgItem/rtl algorithms consume scoped projected state. Original public wrappers depend on private HMValidateHandle/_GetWindow/_GetParent providers, not interchangeable modern handles. wow_menu_native_bindings.h owns native mutation imports; EnableMenuItem must invoke actual native mutation, not duplicate owner.",
+    "metrics_input": "Original ClientSharedInfo()->psi supplies global metrics/colors/cursor, and NtUserGetKeyboardState supplies actual input queue. Modern USER owns these values; gSharedInfo binding is message-dispatch metadata, not original SERVERINFO. Supplying a private SERVERINFO copy duplicates OS state instead of restoring original owner.",
+    "hooks": "Original WOW32 wowhooks.c invokes CallNextHookEx for guest thunk forwarding. wow_user_task_lifecycle.c1028 delegates actual native chain with existing callback scope; wow_idle_hook_binding.c84 preserves later native hooks. Original _PhkNext/CallNextHookEx needs NT4 HOOK/CLIENTINFO current/global lists and private NtUser thunk services absent from modern public ABI."
+  },
+  "counter_review": [
+    "Original native HWND publication is outside this mirror closure; retaining public modern USER boundary is not rejection of original internal algorithms.",
+    "Compile controls do not prove every current adapter line necessary; present decision covers four mirror omissions only. No standalone adapter audit claimed.",
+    "No new CLIENTINFO/HOOK/SERVERINFO projection introduced to move mirror complexity into shim.",
+    "Current required _GetDlgItem retained byte-for-byte, original preprocessor skeleton restored only to outer excluded conditions, nested discarded conditions not revived."
+  ],
+  "metric_reconciliation": {
+    "fixed_metric": "Original-relative SequenceMatcher autojunk=False;CRLF normalized;split on LF retaining terminal empty item;remove #line rows only from current",
+    "superseded_splitlines_values": {
+      "before": 1061,
+      "after": 994,
+      "delta": -67
+    },
+    "correct_fixed_values": {
+      "before": 1059,
+      "after": 1046,
+      "delta": -13
+    },
+    "cause": "Terminal empty item alters ambiguous blank/conditional row alignment;source unchanged;use fixed cumulative metric consistently."
+  }
+}
