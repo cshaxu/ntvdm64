@@ -8,38 +8,79 @@
 * 04-11-91 ScottLu Created.
 \***************************************************************************/
 
+#include "precomp.h"
+#pragma hdrstop
+
 #line 23
 #ifdef DEBUG
 #line 24
 #error Unsupported original DEBUG branch
 #endif
 #line 26
-#line 11
-/* DIVERGENCE(OPENNT-HOST-120): complete original GetCPD, separate selection.
- * Remaining clmsg bodies outside admitted default/GetCPD slices are omitted. */
-#if defined(WOW_ORIGINAL_CLIENT_CPD)
-#include "precomp.h"
-#pragma hdrstop
+#line 270
+#ifdef FE_SB // SendMessageWorker()
+#line 271
+#error Unsupported FE_SB original branch
+#endif // FE_SB
+#line 274
 
-/***********************************************************************\
-* GetCPD
-*
-* This function calls the server to allocate a CPD structure.
-*
-* History:
-* 11-15-94 JimA         Created.
-\***********************************************************************/
+#line 327
+#ifdef FE_IME // SendMessageWorker()
+#line 328
+#error Excluded unsupported original FE_IME branch
+#endif // FE_IME
+#line 331
 
-#line 1916
-DWORD GetCPD(
-    PVOID pWndOrCls,
-    DWORD options,
-    DWORD dwData)
-{
-    return NtUserGetCPD(HW(pWndOrCls), options, dwData);
-}
-#endif
 
+#line 331
+#ifdef FE_SB // SendMessageWorker()
+#line 332
+#error Unsupported FE_SB original branch
+#else
+#line 356
+#endif // FE_SB
+#line 364
+
+#line 373
+#ifndef LATER
+#line 374
+#line 400
+#ifdef FE_SB // SendMessageWorker()
+#line 401
+#error Excluded unsupported original FE_SB branch
+#else
+#line 413
+#endif // FE_SB
+#line 415
+#line 416
+#ifdef FE_SB // SendMessageWorker()
+#line 417
+#error Excluded unsupported original FE_SB branch
+#else
+#line 429
+#endif // FE_SB
+#line 431
+#line 433
+#ifdef FE_SB // SendMessageWorker()
+#line 434
+#error Excluded unsupported original FE_SB branch
+#else
+#line 447
+#endif // FE_SB
+#line 449
+#endif /* !LATER */
+#line 452
+
+#line 453
+#ifdef FE_SB // SendMessageWorker()
+#line 454
+#error Unsupported FE_SB original branch
+#else
+#line 467
+#endif // FE_SB
+#line 470
+
+#line 546
 /***************************************************************************\
 * DefWindowProcWorker
 *
@@ -49,11 +90,7 @@ DWORD GetCPD(
 * 03-31-92 DarrinM      Created.
 \***************************************************************************/
 
-/* OPENNT-HOST-089: complete original client default-window algorithm. */
 #if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
-#include "precomp.h"
-#pragma hdrstop
-#include "wow_default_window_bindings.h"
 
 #line 555
 LONG DefWindowProcWorker(
@@ -67,7 +104,6 @@ LONG DefWindowProcWorker(
     int icolBack;
     int icolFore;
     PWND pwndParent;
-#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
 #line 566
 #ifdef FE_IME
 #line 567
@@ -80,7 +116,6 @@ LONG DefWindowProcWorker(
 #error Excluded unsupported original DEBUG default-window path
 #endif
 
-#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
 #line 580
     if (FDEFWINDOWMSG(message, DefWindowMsgs)) {
         return CsSendMessage(hwnd, message, wParam, lParam, 0L,
@@ -149,8 +184,6 @@ LONG DefWindowProcWorker(
                     pwnd->rcClient.top  - pwndParent->rcClient.top), fAnsi);
         }
 
-        /* DIVERGENCE(OPENNT-HOST-089): a WM_MOVE callback can destroy the
-         * native window; retained copied WND storage does not pin its HWND. */
         if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
 #line 647
         if ((ppos->flags & SWP_STATECHANGE) || !(ppos->flags & SWP_NOCLIENTSIZE)) {
@@ -411,26 +444,22 @@ LONG DefWindowProcWorker(
             return(TestWF(pwnd, WFANSICREATOR) ? NFR_ANSI : NFR_UNICODE);
         break;
 
-#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
 #line 905
 #if defined(FE_IME) // DefWindowProcWorker()
 #line 906
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
-#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
 #line 1210
     }
 
     return 0;
 
-#endif /* WOW_ORIGINAL_DEFAULT_WINDOW */
 #line 1214
 #ifdef DEBUG
 #line 1215
 #error Excluded unsupported original DEBUG default-window close
 #endif
-#if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
 #line 1217
 }
 #endif
@@ -443,45 +472,12 @@ LONG DefWindowProcWorker(
 #line 1677
 
 
-#line 327
-#ifdef FE_IME // SendMessageWorker()
-#line 328
-#error Excluded unsupported original FE_IME branch
-#endif // FE_IME
-#line 331
-
-
-#line 270
-#ifdef FE_SB // SendMessageWorker()
-#line 271
-#error Unsupported FE_SB original branch
-#endif // FE_SB
-#line 274
-
 #line 1719
 #ifdef FE_SB // DispatchMessageWorker()
 #line 1720
 #error Unsupported FE_SB original branch
 #endif // FE_SB
 #line 1722
-
-#line 331
-#ifdef FE_SB // SendMessageWorker()
-#line 332
-#error Unsupported FE_SB original branch
-#else
-#line 356
-#endif // FE_SB
-#line 364
-
-#line 453
-#ifdef FE_SB // SendMessageWorker()
-#line 454
-#error Unsupported FE_SB original branch
-#else
-#line 467
-#endif // FE_SB
-#line 470
 
 #line 1777
 #ifdef FE_SB // DispatchMessageWorker()
@@ -501,33 +497,23 @@ LONG DefWindowProcWorker(
 #endif // FE_SB
 #line 1853
 
-#line 373
-#ifndef LATER
-#line 374
-#line 400
-#ifdef FE_SB // SendMessageWorker()
-#line 401
-#error Excluded unsupported original FE_SB branch
-#else
-#line 413
-#endif // FE_SB
-#line 415
-#line 416
-#ifdef FE_SB // SendMessageWorker()
-#line 417
-#error Excluded unsupported original FE_SB branch
-#else
-#line 429
-#endif // FE_SB
-#line 431
-#line 433
-#ifdef FE_SB // SendMessageWorker()
-#line 434
-#error Excluded unsupported original FE_SB branch
-#else
-#line 447
-#endif // FE_SB
-#line 449
-#endif /* !LATER */
-#line 452
+#if defined(WOW_ORIGINAL_CLIENT_CPD)
+#line 1906
+/***********************************************************************\
+* GetCPD
+*
+* This function calls the server to allocate a CPD structure.
+*
+* History:
+* 11-15-94 JimA         Created.
+\***********************************************************************/
 
+#line 1916
+DWORD GetCPD(
+    PVOID pWndOrCls,
+    DWORD options,
+    DWORD dwData)
+{
+    return NtUserGetCPD(HW(pWndOrCls), options, dwData);
+}
+#endif

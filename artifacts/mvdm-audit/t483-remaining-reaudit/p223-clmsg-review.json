@@ -1,0 +1,1545 @@
+{
+  "status": "Final cached build,11x2 publication,32 controls,Full20 and governance passed;Git delivery accompanies receipt",
+  "file": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "points": [
+    {
+      "id": "T483-R2175",
+      "problem": "Private USER closure and composition",
+      "evidence": "Original SendMessageWorker uses NT4 PWND/PTHREADINFO/PCLIENTINFO,private message/FNID tables and CALLPROC_WOWCHECKPWW. Actual full-original translation fails at messages.h;with original messages.h supplied it fails at gapfnScSendMessage/CFNSCSENDMESSAGE/PSBWND. Modern window transport and system window procedures belong to USER32;current wow_window_client_send_message and wow_default_CsSendMessage enter native SendMessage/DefWindowProc through the existing task boundary. This is not proof original NT code is defective.",
+      "change": "Restore common original include/pragma and original GetCPD location;retain only selected function guards/native closure omission for owner decision.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2176",
+      "problem": "Default function declaration/header",
+      "evidence": "Final before/candidate preprocessing is identical in both actual supported selections. Original declaration and algorithm retained.",
+      "change": "Remove redundant binding include/comment;restore original declaration position.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2177",
+      "problem": "Split default function selection",
+      "evidence": "Default function originally has one body;repeated project selectors add no selected behavior. All16 error bodies retained.",
+      "change": "Merge outer function selection;retain original FE_IME/DEBUG conditions.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2178",
+      "problem": "Post-WM_MOVE native lifetime",
+      "evidence": "Original createw.c marks WFDESTROYED1590 and FNID_DELETED_BIT1948 and retains original object lifetime through thread locks. Current wow_user_borrow_client_state229 returns the already borrowed WND even after native destruction;wow_window_client_send_message then forwards its numeric head.h through wow_native_SendMessage. native_call_begin keeps invalid operands on the native failure route rather than pinning HWND lifetime. Thus copied WND lifetime does not exclude native handle retirement/reuse during WM_MOVE. One-line guard prevents subsequent WM_SIZE using that retired identity. This is a source-level lifecycle counterexample,not a reproduced HWND-reuse race;the flag-only fixture is not native proof.",
+      "change": "Remove two comment lines;retain one-line check pending owner. No second state machine or new provider.",
+      "fully_restored": false
+    },
+    {
+      "id": "T483-R2179",
+      "problem": "FE_IME tail and continuation",
+      "evidence": "Final selected code identical;original excluded branch and its line906 error retained.",
+      "change": "Remove repeated outer project selectors,retain original function close.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2180",
+      "problem": "Disabled original handler",
+      "evidence": "Original #if0 at1650 remains with error1651;not a runtime path.",
+      "change": "Keep original exclusion and correct position.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2181",
+      "problem": "Displaced excluded frames",
+      "evidence": "All16 prior errors are preserved verbatim;whole groups sorted into original source order,including nested LATER/FE_SB.",
+      "change": "Restore original relative ordering,without restoring excluded content.",
+      "fully_restored": true
+    },
+    {
+      "id": "T483-R2182",
+      "problem": "Logical positions",
+      "evidence": "Final default declaration555 and GetCPD1916 verified in actual preprocessing;exact original source matches checked.",
+      "change": "Restore source ordering and retain necessary line directives.",
+      "fully_restored": true
+    }
+  ],
+  "mirror_before": 1608,
+  "mirror_after": 1535,
+  "mirror_delta": -73,
+  "line_proof": {
+    "before": {
+      "add": 79,
+      "delete": 1529
+    },
+    "after": {
+      "add": 35,
+      "delete": 1500
+    },
+    "mirror_reduction": 73,
+    "preserved_error_branches": 16,
+    "production_unchanged": false,
+    "candidate_sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+    "contexts": {
+      "default": {
+        "preprocessor_code_identical": true,
+        "lines": 44548
+      },
+      "cpd": {
+        "preprocessor_code_identical": true,
+        "lines": 47348
+      }
+    },
+    "source_exact_original_lines": 332,
+    "selected": {
+      "default": [
+        {
+          "line": 12,
+          "text": "#pragma hdrstop"
+        },
+        {
+          "line": 555,
+          "text": "LONG wow_original_default_window_proc("
+        },
+        {
+          "line": 556,
+          "text": "    PWND pwnd,"
+        },
+        {
+          "line": 557,
+          "text": "    UINT message,"
+        },
+        {
+          "line": 558,
+          "text": "    WPARAM wParam,"
+        },
+        {
+          "line": 559,
+          "text": "    LPARAM lParam,"
+        },
+        {
+          "line": 560,
+          "text": "    DWORD fAnsi)"
+        },
+        {
+          "line": 561,
+          "text": "{"
+        },
+        {
+          "line": 562,
+          "text": "    HWND hwnd = ((HWND)((HANDLE)(((PHEAD)pwnd)->h)));"
+        },
+        {
+          "line": 563,
+          "text": "    int icolBack;"
+        },
+        {
+          "line": 564,
+          "text": "    int icolFore;"
+        },
+        {
+          "line": 565,
+          "text": "    PWND pwndParent;"
+        },
+        {
+          "line": 580,
+          "text": "    if (((message <= (wow_default_message_state.DefWindowMsgs.maxMsgs)) && ((wow_default_message_state.DefWindowMsgs.abMsgs)[message / 8] & (1 << (message & 7))))) {"
+        },
+        {
+          "line": 581,
+          "text": "        return wow_default_CsSendMessage(hwnd, message, wParam, lParam, 0L,"
+        },
+        {
+          "line": 582,
+          "text": "                0x0000029E, fAnsi);"
+        },
+        {
+          "line": 583,
+          "text": "    } else if (!((message <= (wow_default_message_state.DefWindowSpecMsgs.maxMsgs)) && ((wow_default_message_state.DefWindowSpecMsgs.abMsgs)[message / 8] & (1 << (message & 7))))) {"
+        },
+        {
+          "line": 584,
+          "text": "        return 0;"
+        },
+        {
+          "line": 585,
+          "text": "    }"
+        },
+        {
+          "line": 595,
+          "text": "    switch (message) {"
+        },
+        {
+          "line": 597,
+          "text": "    case 0x0053:"
+        },
+        {
+          "line": 598,
+          "text": "        {"
+        },
+        {
+          "line": 599,
+          "text": "        PWND  pwndDest;"
+        },
+        {
+          "line": 605,
+          "text": "        pwndDest = (((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0FC0)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0FC0)) & 0xff))) == ((BYTE)(((DWORD_PTR)(0x0F40)) & 0xff))) ? pwnd->spwndParent : pwnd->spwndOwner);"
+        },
+        {
+          "line": 606,
+          "text": "        if (pwndDest) {"
+        },
+        {
+          "line": 607,
+          "text": "            pwndDest = (pwndDest);"
+        },
+        {
+          "line": 608,
+          "text": "            if (pwndDest != wow_window_client_desktop())"
+        },
+        {
+          "line": 609,
+          "text": "                return wow_native_SendMessageW(((HWND)((HANDLE)(((PHEAD)pwndDest)->h))), 0x0053, wParam, lParam);;"
+        },
+        {
+          "line": 610,
+          "text": "        }"
+        },
+        {
+          "line": 611,
+          "text": "        return(0L);"
+        },
+        {
+          "line": 612,
+          "text": "        }"
+        },
+        {
+          "line": 614,
+          "text": "    case 0x020A:"
+        },
+        {
+          "line": 615,
+          "text": "        if (((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0FC0)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0FC0)) & 0xff))) == ((BYTE)(((DWORD_PTR)(0x0F40)) & 0xff)))) {"
+        },
+        {
+          "line": 616,
+          "text": "            pwndParent = ((pwnd)->spwndParent);"
+        },
+        {
+          "line": 617,
+          "text": "            wow_native_SendMessageW(((HWND)((HANDLE)((pwndParent) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwndParent))->h))), 0x020A, wParam, lParam);"
+        },
+        {
+          "line": 618,
+          "text": "        }"
+        },
+        {
+          "line": 619,
+          "text": "        break;"
+        },
+        {
+          "line": 621,
+          "text": "    case 0x007B:"
+        },
+        {
+          "line": 622,
+          "text": "        if (((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0FC0)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0FC0)) & 0xff))) == ((BYTE)(((DWORD_PTR)(0x0F40)) & 0xff)))) {"
+        },
+        {
+          "line": 623,
+          "text": "            pwndParent = ((pwnd)->spwndParent);"
+        },
+        {
+          "line": 624,
+          "text": "            wow_native_SendMessageW(((HWND)((HANDLE)((pwndParent) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwndParent))->h))), 0x007B,"
+        },
+        {
+          "line": 625,
+          "text": "                    (WPARAM)hwnd, lParam);"
+        },
+        {
+          "line": 626,
+          "text": "        }"
+        },
+        {
+          "line": 627,
+          "text": "        break;"
+        },
+        {
+          "line": 632,
+          "text": "    case 0x0205:"
+        },
+        {
+          "line": 633,
+          "text": "        lParam = ((LONG)(((WORD)(((DWORD_PTR)(((WORD)(((DWORD_PTR)(lParam)) & 0xffff)) + pwnd->rcClient.left)) & 0xffff)) | ((DWORD)((WORD)(((DWORD_PTR)(((WORD)((((DWORD_PTR)(lParam)) >> 16) & 0xffff)) + pwnd->rcClient.top)) & 0xffff))) << 16));"
+        },
+        {
+          "line": 634,
+          "text": "        wow_window_client_send_message(pwnd, 0x007B, (WPARAM)hwnd, lParam, fAnsi);"
+        },
+        {
+          "line": 635,
+          "text": "        break;"
+        },
+        {
+          "line": 637,
+          "text": "    case 0x0047: {"
+        },
+        {
+          "line": 638,
+          "text": "        PWINDOWPOS ppos = (PWINDOWPOS)lParam;"
+        },
+        {
+          "line": 640,
+          "text": "        if (!(ppos->flags & 0x1000)) {"
+        },
+        {
+          "line": 641,
+          "text": "            pwndParent = ((pwnd)->spwndParent);"
+        },
+        {
+          "line": 642,
+          "text": "            wow_window_client_send_message(pwnd, 0x0003, 0,"
+        },
+        {
+          "line": 643,
+          "text": "                    ((LONG)(((WORD)(((DWORD_PTR)(pwnd->rcClient.left - pwndParent->rcClient.left)) & 0xffff)) | ((DWORD)((WORD)(((DWORD_PTR)(pwnd->rcClient.top - pwndParent->rcClient.top)) & 0xffff))) << 16)), fAnsi);"
+        },
+        {
+          "line": 645,
+          "text": "        }"
+        },
+        {
+          "line": 647,
+          "text": "        if ((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0380)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0380)) & 0xff))) || (pwnd->fnid & (0x00004000 | 0x00008000))) return 0;"
+        },
+        {
+          "line": 647,
+          "text": "        if ((ppos->flags & 0x8000) || !(ppos->flags & 0x0800)) {"
+        },
+        {
+          "line": 648,
+          "text": "            UINT cmd;"
+        },
+        {
+          "line": 649,
+          "text": "            RECT rc;"
+        },
+        {
+          "line": 651,
+          "text": "            if ((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0F20)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0F20)) & 0xff))))"
+        },
+        {
+          "line": 652,
+          "text": "                cmd = 1;"
+        },
+        {
+          "line": 653,
+          "text": "            else if ((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0F01)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0F01)) & 0xff))))"
+        },
+        {
+          "line": 654,
+          "text": "                cmd = 2;"
+        },
+        {
+          "line": 655,
+          "text": "            else"
+        },
+        {
+          "line": 656,
+          "text": "                cmd = 0;"
+        },
+        {
+          "line": 666,
+          "text": "            _GetClientRect(pwnd, &rc);"
+        },
+        {
+          "line": 667,
+          "text": "            wow_window_client_send_message(pwnd, 0x0005, cmd,"
+        },
+        {
+          "line": 668,
+          "text": "                    ((LONG)(((WORD)(((DWORD_PTR)(rc.right - rc.left)) & 0xffff)) | ((DWORD)((WORD)(((DWORD_PTR)(rc.bottom - rc.top)) & 0xffff))) << 16)), fAnsi);"
+        },
+        {
+          "line": 670,
+          "text": "        }"
+        },
+        {
+          "line": 671,
+          "text": "        return 0;"
+        },
+        {
+          "line": 672,
+          "text": "        }"
+        },
+        {
+          "line": 674,
+          "text": "    case 0x0021: {"
+        },
+        {
+          "line": 675,
+          "text": "        PWND pwndT;"
+        },
+        {
+          "line": 676,
+          "text": "        LONG lt;"
+        },
+        {
+          "line": 681,
+          "text": "        pwndT = (((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0FC0)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0FC0)) & 0xff))) == ((BYTE)(((DWORD_PTR)(0x0F40)) & 0xff))) ? pwnd->spwndParent : ((void *)0));"
+        },
+        {
+          "line": 682,
+          "text": "        if (pwndT != ((void *)0)) {"
+        },
+        {
+          "line": 683,
+          "text": "            pwndT = (pwndT);"
+        },
+        {
+          "line": 684,
+          "text": "            lt = wow_window_client_send_message(pwndT, 0x0021, wParam, lParam, fAnsi);"
+        },
+        {
+          "line": 685,
+          "text": "            if (lt != 0)"
+        },
+        {
+          "line": 686,
+          "text": "                return lt;"
+        },
+        {
+          "line": 687,
+          "text": "        }"
+        },
+        {
+          "line": 692,
+          "text": "        return ((((WORD)(((DWORD_PTR)(lParam)) & 0xffff)) == 2) && (((WORD)((((DWORD_PTR)(lParam)) >> 16) & 0xffff)) == 0x0201 )) ?"
+        },
+        {
+          "line": 693,
+          "text": "                (LONG)3 : (LONG)1;"
+        },
+        {
+          "line": 694,
+          "text": "        }"
+        },
+        {
+          "line": 696,
+          "text": "    case 0x0137:"
+        },
+        {
+          "line": 697,
+          "text": "        if (((wow_default_current->screen).BitCount < 8) || ((wow_default_current->server.argbSystem[20]) != (wow_default_current->server.argbSystem[0])) ||"
+        },
+        {
+          "line": 698,
+          "text": "            ((wow_default_current->server.argbSystem[20]) == (wow_default_current->server.argbSystem[5])))"
+        },
+        {
+          "line": 699,
+          "text": "        {"
+        },
+        {
+          "line": 707,
+          "text": "            SetBkColor((HDC)wParam, (wow_default_current->server.argbSystem[20]));"
+        },
+        {
+          "line": 708,
+          "text": "            SetTextColor((HDC)wParam, (wow_default_current->server.argbSystem[15]));"
+        },
+        {
+          "line": 709,
+          "text": "            return((LRESULT)wow_edit_gray_brush);"
+        },
+        {
+          "line": 710,
+          "text": "        }"
+        },
+        {
+          "line": 712,
+          "text": "        icolBack = 20;"
+        },
+        {
+          "line": 713,
+          "text": "        icolFore = 18;"
+        },
+        {
+          "line": 714,
+          "text": "        goto SetColor;"
+        },
+        {
+          "line": 716,
+          "text": "    case 0x0135:"
+        },
+        {
+          "line": 717,
+          "text": "        if (pwnd == ((void *)0))"
+        },
+        {
+          "line": 718,
+          "text": "            goto ColorDefault;"
+        },
+        {
+          "line": 720,
+          "text": "        if ((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0480)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0480)) & 0xff)))) {"
+        },
+        {
+          "line": 721,
+          "text": "            icolBack = 15;"
+        },
+        {
+          "line": 722,
+          "text": "            icolFore = 18;"
+        },
+        {
+          "line": 723,
+          "text": "        } else {"
+        },
+        {
+          "line": 724,
+          "text": "            goto ColorDefault;"
+        },
+        {
+          "line": 725,
+          "text": "        }"
+        },
+        {
+          "line": 726,
+          "text": "        goto SetColor;"
+        },
+        {
+          "line": 728,
+          "text": "    case 0x0138:"
+        },
+        {
+          "line": 729,
+          "text": "    case 0x0136:"
+        },
+        {
+          "line": 730,
+          "text": "    case 0x0132:"
+        },
+        {
+          "line": 735,
+          "text": "        if (pwnd == ((void *)0))"
+        },
+        {
+          "line": 736,
+          "text": "            goto ColorDefault;"
+        },
+        {
+          "line": 738,
+          "text": "        if ((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0480)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0480)) & 0xff)))) {"
+        },
+        {
+          "line": 739,
+          "text": "            icolBack = 15;"
+        },
+        {
+          "line": 740,
+          "text": "            icolFore = 8;"
+        },
+        {
+          "line": 741,
+          "text": "            goto SetColor;"
+        },
+        {
+          "line": 742,
+          "text": "        }"
+        },
+        {
+          "line": 745,
+          "text": "    case 0x0019:              "
+        },
+        {
+          "line": 746,
+          "text": "    case 0x0134:"
+        },
+        {
+          "line": 747,
+          "text": "    case 0x0133:"
+        },
+        {
+          "line": 748,
+          "text": "      ColorDefault:"
+        },
+        {
+          "line": 749,
+          "text": "        icolBack = 5;"
+        },
+        {
+          "line": 750,
+          "text": "        icolFore = 8;"
+        },
+        {
+          "line": 752,
+          "text": "      SetColor:"
+        },
+        {
+          "line": 753,
+          "text": "        SetBkColor((HDC)wParam, (&wow_default_current->server)->argbSystem[icolBack]);"
+        },
+        {
+          "line": 754,
+          "text": "        SetTextColor((HDC)wParam, (&wow_default_current->server)->argbSystem[icolFore]);"
+        },
+        {
+          "line": 755,
+          "text": "        return (LONG)wow_edit_system_brushes[icolBack];"
+        },
+        {
+          "line": 757,
+          "text": "    case 0x0084:"
+        },
+        {
+          "line": 758,
+          "text": "        return wow_default_find_nc_hit(pwnd, lParam);"
+        },
+        {
+          "line": 760,
+          "text": "    case 0x000D:"
+        },
+        {
+          "line": 761,
+          "text": "        if (wParam != 0) {"
+        },
+        {
+          "line": 763,
+          "text": "            LPWSTR lpszText;"
+        },
+        {
+          "line": 764,
+          "text": "            UINT   cchSrc;"
+        },
+        {
+          "line": 766,
+          "text": "            if (pwnd->strName.Length) {"
+        },
+        {
+          "line": 768,
+          "text": "                lpszText = ((pwnd)->strName.Buffer);"
+        },
+        {
+          "line": 769,
+          "text": "                cchSrc = (UINT)pwnd->strName.Length / sizeof(WCHAR);"
+        },
+        {
+          "line": 771,
+          "text": "                if (fAnsi) {"
+        },
+        {
+          "line": 773,
+          "text": "                    LPSTR lpName = (LPSTR)lParam;"
+        },
+        {
+          "line": 780,
+          "text": "                    cchSrc = WCSToMBEx(0, lpszText, cchSrc, (LPSTR *)&lpName, (wParam - 1), 0);"
+        },
+        {
+          "line": 786,
+          "text": "                    lpName[cchSrc] = '\\0';"
+        },
+        {
+          "line": 788,
+          "text": "                } else {"
+        },
+        {
+          "line": 790,
+          "text": "                    LPWSTR lpwName = (LPWSTR)lParam;"
+        },
+        {
+          "line": 792,
+          "text": "                    cchSrc = (((cchSrc) < ((UINT)(wParam - 1))) ? (cchSrc) : ((UINT)(wParam - 1)));"
+        },
+        {
+          "line": 793,
+          "text": "                    memcpy((lpwName),(lpszText),(cchSrc * sizeof(WCHAR)));"
+        },
+        {
+          "line": 794,
+          "text": "                    lpwName[cchSrc] = 0;"
+        },
+        {
+          "line": 795,
+          "text": "                }"
+        },
+        {
+          "line": 797,
+          "text": "                return cchSrc;"
+        },
+        {
+          "line": 798,
+          "text": "            }"
+        },
+        {
+          "line": 803,
+          "text": "            if (fAnsi) {"
+        },
+        {
+          "line": 804,
+          "text": "                ((LPSTR)lParam)[0] = 0;"
+        },
+        {
+          "line": 805,
+          "text": "            } else {"
+        },
+        {
+          "line": 806,
+          "text": "                ((LPWSTR)lParam)[0] = 0;"
+        },
+        {
+          "line": 807,
+          "text": "            }"
+        },
+        {
+          "line": 808,
+          "text": "        }"
+        },
+        {
+          "line": 810,
+          "text": "        return 0;"
+        },
+        {
+          "line": 812,
+          "text": "    case 0x000E:"
+        },
+        {
+          "line": 813,
+          "text": "        if (pwnd->strName.Length) {"
+        },
+        {
+          "line": 814,
+          "text": "            UINT cch;"
+        },
+        {
+          "line": 815,
+          "text": "            if (fAnsi) {"
+        },
+        {
+          "line": 816,
+          "text": "                RtlUnicodeToMultiByteSize(&cch,"
+        },
+        {
+          "line": 817,
+          "text": "                                          ((pwnd)->strName.Buffer),"
+        },
+        {
+          "line": 818,
+          "text": "                                          pwnd->strName.Length);"
+        },
+        {
+          "line": 819,
+          "text": "            } else {"
+        },
+        {
+          "line": 820,
+          "text": "                cch = pwnd->strName.Length / sizeof(WCHAR);"
+        },
+        {
+          "line": 821,
+          "text": "            }"
+        },
+        {
+          "line": 822,
+          "text": "            return cch;"
+        },
+        {
+          "line": 823,
+          "text": "        }"
+        },
+        {
+          "line": 824,
+          "text": "        return 0L;"
+        },
+        {
+          "line": 826,
+          "text": "    case 0x0013:"
+        },
+        {
+          "line": 827,
+          "text": "    case 0x0011:"
+        },
+        {
+          "line": 828,
+          "text": "    case 0x0219:"
+        },
+        {
+          "line": 829,
+          "text": "    case 0x0218:"
+        },
+        {
+          "line": 830,
+          "text": "        return 1;"
+        },
+        {
+          "line": 832,
+          "text": "    case 0x0100:"
+        },
+        {
+          "line": 833,
+          "text": "        if (wParam == 0x79)"
+        },
+        {
+          "line": 834,
+          "text": "            return wow_default_CsSendMessage(hwnd, message, wParam, lParam, 0L,"
+        },
+        {
+          "line": 835,
+          "text": "                    0x0000029E, fAnsi);"
+        },
+        {
+          "line": 836,
+          "text": "        break;"
+        },
+        {
+          "line": 838,
+          "text": "    case 0x0104:"
+        },
+        {
+          "line": 839,
+          "text": "        if ((((WORD)((((DWORD_PTR)(lParam)) >> 16) & 0xffff)) & 0x2000) || (wParam == 0x79) ||"
+        },
+        {
+          "line": 840,
+          "text": "                (wParam == 0x1B))"
+        },
+        {
+          "line": 841,
+          "text": "            return wow_default_CsSendMessage(hwnd, message, wParam, lParam, 0L,"
+        },
+        {
+          "line": 842,
+          "text": "                    0x0000029E, fAnsi);"
+        },
+        {
+          "line": 843,
+          "text": "        break;"
+        },
+        {
+          "line": 845,
+          "text": "    case 0x002F:"
+        },
+        {
+          "line": 846,
+          "text": "    case 0x002E:"
+        },
+        {
+          "line": 850,
+          "text": "        return -1;"
+        },
+        {
+          "line": 852,
+          "text": "    case 0x0006:"
+        },
+        {
+          "line": 853,
+          "text": "        if (((WORD)(((DWORD_PTR)(wParam)) & 0xffff)))"
+        },
+        {
+          "line": 854,
+          "text": "            return wow_default_CsSendMessage(hwnd, message, wParam, lParam, 0L,"
+        },
+        {
+          "line": 855,
+          "text": "                    0x0000029E, fAnsi);"
+        },
+        {
+          "line": 856,
+          "text": "        break;"
+        },
+        {
+          "line": 858,
+          "text": "    case 0x0018:"
+        },
+        {
+          "line": 859,
+          "text": "        if (lParam != 0)"
+        },
+        {
+          "line": 860,
+          "text": "            return wow_default_CsSendMessage(hwnd, message, wParam, lParam, 0L,"
+        },
+        {
+          "line": 861,
+          "text": "                    0x0000029E, fAnsi);"
+        },
+        {
+          "line": 862,
+          "text": "        break;"
+        },
+        {
+          "line": 864,
+          "text": "    case 0x022A:"
+        },
+        {
+          "line": 865,
+          "text": "       return 0x454C4946L;"
+        },
+        {
+          "line": 867,
+          "text": "    case 0x0046:"
+        },
+        {
+          "line": 872,
+          "text": "        if (!(((WINDOWPOS *)lParam)->flags & 0x0001))"
+        },
+        {
+          "line": 873,
+          "text": "            return wow_default_CsSendMessage(hwnd, message, wParam, lParam, 0L,"
+        },
+        {
+          "line": 874,
+          "text": "                    0x0000029E, fAnsi);"
+        },
+        {
+          "line": 876,
+          "text": "        break;"
+        },
+        {
+          "line": 878,
+          "text": "    case 0x008B:"
+        },
+        {
+          "line": 879,
+          "text": "        {"
+        },
+        {
+          "line": 880,
+          "text": "        SHELLHOOKINFO shi;"
+        },
+        {
+          "line": 881,
+          "text": "        LPRECT lprc = (LPRECT)lParam;"
+        },
+        {
+          "line": 883,
+          "text": "        shi.hwnd = (HWND)wParam;"
+        },
+        {
+          "line": 884,
+          "text": "        CopyRect(&(shi.rc),(LPRECT)lParam);"
+        },
+        {
+          "line": 885,
+          "text": "        if ((&wow_default_current->server)->uiShellMsg == 0)"
+        },
+        {
+          "line": 886,
+          "text": "            wow_default_ensure_shell_message(((void *)0));"
+        },
+        {
+          "line": 887,
+          "text": "        wow_window_client_send_message(pwnd, (&wow_default_current->server)->uiShellMsg, 5,"
+        },
+        {
+          "line": 888,
+          "text": "                (LPARAM)&shi, fAnsi);"
+        },
+        {
+          "line": 893,
+          "text": "        lprc->left   = (SHORT)((WORD)(((DWORD_PTR)(shi.rc.left)) & 0xffff));  "
+        },
+        {
+          "line": 894,
+          "text": "        lprc->top    = (SHORT)((WORD)((((DWORD_PTR)(shi.rc.left)) >> 16) & 0xffff));  "
+        },
+        {
+          "line": 895,
+          "text": "        lprc->right  = (SHORT)((WORD)(((DWORD_PTR)(shi.rc.top)) & 0xffff));   "
+        },
+        {
+          "line": 896,
+          "text": "        lprc->bottom = (SHORT)((WORD)((((DWORD_PTR)(shi.rc.top)) >> 16) & 0xffff));   "
+        },
+        {
+          "line": 897,
+          "text": "        break;"
+        },
+        {
+          "line": 898,
+          "text": "        }"
+        },
+        {
+          "line": 900,
+          "text": "    case 0x0055:"
+        },
+        {
+          "line": 901,
+          "text": "        if (lParam == 3)"
+        },
+        {
+          "line": 902,
+          "text": "            return((*(((BYTE *)(pwnd)) + (sizeof(WND) - sizeof(WW) + (0x3 * sizeof(DWORD))) + (int)((BYTE)((((DWORD_PTR)(0x0320)) >> 8) & 0xff))) & ((BYTE)(((DWORD_PTR)(0x0320)) & 0xff))) ? 1 : 2);"
+        },
+        {
+          "line": 903,
+          "text": "        break;"
+        },
+        {
+          "line": 1210,
+          "text": "    }"
+        },
+        {
+          "line": 1212,
+          "text": "    return 0;"
+        },
+        {
+          "line": 1217,
+          "text": "}"
+        }
+      ],
+      "cpd": [
+        {
+          "line": 12,
+          "text": "#pragma hdrstop"
+        },
+        {
+          "line": 1916,
+          "text": "DWORD GetCPD("
+        },
+        {
+          "line": 1917,
+          "text": "    PVOID pWndOrCls,"
+        },
+        {
+          "line": 1918,
+          "text": "    DWORD options,"
+        },
+        {
+          "line": 1919,
+          "text": "    DWORD dwData)"
+        },
+        {
+          "line": 1920,
+          "text": "{"
+        },
+        {
+          "line": 1921,
+          "text": "    return wow_edit_native_NtUserGetCPD(((HWND)((HANDLE)((pWndOrCls) == ((void *)0) ? ((void *)0) : ((PHEAD)(pWndOrCls))->h))), options, dwData);"
+        },
+        {
+          "line": 1922,
+          "text": "}"
+        }
+      ]
+    },
+    "excluded_lines": [
+      24,
+      271,
+      328,
+      332,
+      401,
+      417,
+      434,
+      454,
+      567,
+      573,
+      906,
+      1215,
+      1651,
+      1720,
+      1778,
+      1804
+    ]
+  },
+  "original_compilation": {
+    "status": "Whole-file review in progress;no production changes or completed-point increment",
+    "packet": "M0 T483 S5 P223",
+    "head": "02798ba3b8d78ef5cbcf392d2aed57d1bf02fc22",
+    "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clmsg.c",
+    "source_sha256": "e8a0639ec579b21823d536369408c12160220219d60e6aaed0fdd089d7530fc0",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+    "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+    "point_range": "R2175-R2182",
+    "mirror_diff": {
+      "add": 79,
+      "delete": 1529,
+      "total": 1608,
+      "hunks": [
+        {
+          "kind": "insert",
+          "original_start": 11,
+          "delete": 0,
+          "current_start": 11,
+          "add": 6
+        },
+        {
+          "kind": "insert",
+          "original_start": 14,
+          "delete": 0,
+          "current_start": 20,
+          "add": 8
+        },
+        {
+          "kind": "replace",
+          "original_start": 15,
+          "delete": 10,
+          "current_start": 29,
+          "add": 7
+        },
+        {
+          "kind": "delete",
+          "original_start": 26,
+          "delete": 519,
+          "current_start": 37,
+          "add": 0
+        },
+        {
+          "kind": "insert",
+          "original_start": 554,
+          "delete": 0,
+          "current_start": 46,
+          "add": 6
+        },
+        {
+          "kind": "insert",
+          "original_start": 566,
+          "delete": 0,
+          "current_start": 64,
+          "add": 1
+        },
+        {
+          "kind": "replace",
+          "original_start": 567,
+          "delete": 3,
+          "current_start": 66,
+          "add": 1
+        },
+        {
+          "kind": "replace",
+          "original_start": 573,
+          "delete": 4,
+          "current_start": 70,
+          "add": 1
+        },
+        {
+          "kind": "replace",
+          "original_start": 579,
+          "delete": 1,
+          "current_start": 73,
+          "add": 1
+        },
+        {
+          "kind": "insert",
+          "original_start": 647,
+          "delete": 0,
+          "current_start": 141,
+          "add": 3
+        },
+        {
+          "kind": "insert",
+          "original_start": 905,
+          "delete": 0,
+          "current_start": 402,
+          "add": 1
+        },
+        {
+          "kind": "replace",
+          "original_start": 906,
+          "delete": 302,
+          "current_start": 404,
+          "add": 1
+        },
+        {
+          "kind": "insert",
+          "original_start": 1210,
+          "delete": 0,
+          "current_start": 407,
+          "add": 1
+        },
+        {
+          "kind": "insert",
+          "original_start": 1214,
+          "delete": 0,
+          "current_start": 412,
+          "add": 1
+        },
+        {
+          "kind": "replace",
+          "original_start": 1215,
+          "delete": 1,
+          "current_start": 414,
+          "add": 1
+        },
+        {
+          "kind": "replace",
+          "original_start": 1217,
+          "delete": 458,
+          "current_start": 416,
+          "add": 1
+        },
+        {
+          "kind": "insert",
+          "original_start": 1678,
+          "delete": 0,
+          "current_start": 420,
+          "add": 3
+        },
+        {
+          "kind": "delete",
+          "original_start": 1679,
+          "delete": 7,
+          "current_start": 424,
+          "add": 0
+        },
+        {
+          "kind": "replace",
+          "original_start": 1687,
+          "delete": 12,
+          "current_start": 425,
+          "add": 3
+        },
+        {
+          "kind": "delete",
+          "original_start": 1700,
+          "delete": 2,
+          "current_start": 429,
+          "add": 0
+        },
+        {
+          "kind": "replace",
+          "original_start": 1703,
+          "delete": 18,
+          "current_start": 430,
+          "add": 2
+        },
+        {
+          "kind": "delete",
+          "original_start": 1723,
+          "delete": 54,
+          "current_start": 434,
+          "add": 0
+        },
+        {
+          "kind": "replace",
+          "original_start": 1778,
+          "delete": 74,
+          "current_start": 435,
+          "add": 1
+        },
+        {
+          "kind": "replace",
+          "original_start": 1854,
+          "delete": 3,
+          "current_start": 438,
+          "add": 4
+        },
+        {
+          "kind": "replace",
+          "original_start": 1858,
+          "delete": 9,
+          "current_start": 443,
+          "add": 4
+        },
+        {
+          "kind": "replace",
+          "original_start": 1868,
+          "delete": 4,
+          "current_start": 448,
+          "add": 4
+        },
+        {
+          "kind": "replace",
+          "original_start": 1873,
+          "delete": 6,
+          "current_start": 453,
+          "add": 4
+        },
+        {
+          "kind": "replace",
+          "original_start": 1880,
+          "delete": 9,
+          "current_start": 458,
+          "add": 14
+        },
+        {
+          "kind": "delete",
+          "original_start": 1891,
+          "delete": 33,
+          "current_start": 474,
+          "add": 0
+        }
+      ]
+    },
+    "actual_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include/control-client\" /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_DEFAULT_WINDOW /O2 /Foobj/opennt-user/default-client.obj O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+    "original_compile": {
+      "exit": "2",
+      "first_failure": "messages.h missing at original21",
+      "log_sha256": "47148472cc64baf65d591a9c388aa74aadde2f3fbada4ebc4cfeeb3d93adf43d"
+    },
+    "original_with_messages": {
+      "exit": "2",
+      "failures": [
+        "messages.h16 gapfnScSendMessage function table type",
+        "messages.h1196 CFNSCSENDMESSAGE",
+        "clmsg160 PSBWND"
+      ],
+      "log_sha256": "6197850216572e6dcee89cfd76e4cb9c71f4d52c1f84fa1e1fd1500c22fa8004"
+    },
+    "conclusion": "Full original restoration is not a compatible drop-in: original private USER message-table/server object closure is absent. This does not prove every current omission or guard necessary. Current public message/DefWindowProc providers retain modern USER resource authority. Minimize composition separately before qualifying residual owner decisions.",
+    "next_checks": [
+      "Restore GetCPD original order without changing supported selections.",
+      "Remove duplicate include/pragma and reorganize preserved excluded frameworks by original location where diff decreases.",
+      "Audit post-WM_MOVE destruction guard through actual borrow/native send chain;existing fixture only sets a flag and is not proof of native failure.",
+      "Prove source/preprocessor lines for final complete file before building."
+    ],
+    "census": {
+      "reviewed": 2174,
+      "total": 2720,
+      "files_reviewed": 306,
+      "files_total": 365,
+      "restored_delivered": 810,
+      "approved": 8,
+      "pending": 1356,
+      "unreviewed": 546,
+      "cumulative_mirror_reduction": 15313
+    }
+  },
+  "limits": [
+    "Guard source counterexample is not a native HWND-reuse reproduction.",
+    "Original full USER closure is outside modern native owner boundary;owner decision remains.",
+    "No runtime claim from preprocessing equivalence."
+  ],
+  "publication": {
+    "status": "published",
+    "package": "0bdc09f3-fa83-46a3-b461-c843b0b57477",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 396691,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6235,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1087,
+        "CleanupMs": 395,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11173,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 10242,
+        "CleanupMs": 394,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 9922,
+        "CleanupMs": 412,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 161,
+        "CleanupMs": 360,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65776,
+        "CleanupMs": 427,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 45526,
+        "CleanupMs": 382,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44919,
+        "CleanupMs": 415,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14556,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10053,
+        "CleanupMs": 359,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 43828,
+        "CleanupMs": 363,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12693,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28381,
+        "CleanupMs": 464,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30751,
+        "CleanupMs": 443,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3172,
+        "CleanupMs": 379,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7506,
+        "CleanupMs": 415,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9628,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4356,
+        "CleanupMs": 375,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6977,
+        "CleanupMs": 344,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20316,
+        "CleanupMs": 368,
+        "Passed": true
+      }
+    ]
+  },
+  "cumulative": {
+    "files": 365,
+    "total": 104527,
+    "baseline": 119913,
+    "net_reduction": 15386,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+        "total": 2666
+      }
+    ]
+  },
+  "fixture_correction": {
+    "path": "test/adapter-mvdm-host-out/wow/wow_button_dc_fixture.c",
+    "sha256": "fe5cb0433de6ae6edd890738672999826227825473bb0f7a3231a5fe60f681b2",
+    "initial_failure": "case2 hidden native window did not receive WM_SETFOCUS;fixture executable does not link clmsg",
+    "change": "Existing test boundary explicitly sends focus callback in selected reentry case;real WndProc destroys actual window and changes capture. All original retirement/lifetime assertions retained. Other native focus cases unchanged.",
+    "scope": "Tests button reentry,not OS focus acquisition;no product change after publication.",
+    "final_log": "dead_dc_entry_exception=00000000\ndead_text_entry_exception=00000000\npaint_color_cleanup_exception=00000000\nsettext_color_cleanup_exception=00000000\ncase=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\nbutton_dc_failures=0 colors=4 cleanup=1 acquired=3 released=3\n"
+  }
+}

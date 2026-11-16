@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2174 reviewed:810 restored/confirmed published,0 local restorations,8 approved,
-1356 qualified pending;546 unreviewed. Files306/365 audited,59 remain.
-P221 file306 verified/published;Git delivery accompanies receipt.
+2182 reviewed:816 restored/confirmed published,0 local restorations,8 approved,
+1358 qualified pending;538 unreviewed. Files307/365 audited,58 remain.
+P223 file307 verified/published;Git delivery accompanies receipt.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -52,15 +52,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P222 package `0d88e43b-0bda-4e17-923e-ee932848a89d` published11x2;hashes verified.
-DPMI protected CLI/STI and bounded scalar I/O use original providers;successful
-emulation resumes the original CPU completion boundary, preserving FLAGS/TF/IRQ.
-Four files add74 mirror-diff lines;registered supplemental pending decision.
-Cached x86/x64,58 CCPU cases,Full20 including actual NESticle,and Win3.1
-four mode/DOSONLY profiles passed. Published menu and Escape transitions verified.
-Cumulative365-file diff119913->104600(-15313). Guest/winnt.zip unchanged.
-[Repair receipt](../../artifacts/mvdm-audit/dos4gw-pif-sti-20261115/main-production-candidate.json).
-Git delivery accompanies receipt;ordered audit resumes at R2175.
+P223 package `0bdc09f3-fa83-46a3-b461-c843b0b57477` published11x2;hashes verified.
+clmsg1608->1535(-73);original ordering/common headers restored and selectors
+consolidated. Six restored/confirmed points;two residual owner decisions.
+Cached x86/x64,32 controls,Full20 including DOS4GW and governance passed.
+P222 DPMI repair remains included. No guest/winnt.zip changes.
+Cumulative365-file diff119913->104527(-15386).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p223-checkpoint.json).
+Git delivery accompanies receipt;ordered audit resumes at R2183.
 
 ## Remaining Scope
 
@@ -160,3 +159,10 @@ DOSONLY0/1 startup and normal exit. Probe copy removed. Inherited large-agent
 environment COMMAND failure is separate;standard fixture uses minimal environment
 and the original short-PATH PIF. Strings/CLTS/LMSW/privileged MOV DR remain
 unimplemented,not claimed repaired. Necessary residual +74 remains pending.
+
+P223 verified/published:clmsg1608->1535(-73). Six restored/confirmed points,
+two minimized residual owner decisions. Default/CPD code identical after
+preprocessing;332 original source lines and16 errors checked. Cached x86/x64,
+publish11x2,32 controls,Full20 and governance passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p223-checkpoint.json).
+Cumulative365-file mirror reduction15386. NextR2183.

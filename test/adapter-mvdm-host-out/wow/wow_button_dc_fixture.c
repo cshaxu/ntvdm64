@@ -117,7 +117,14 @@ static void setup(void)
     control.pbutn=&data; data.spwnd=&control.wnd;
 }
 HWND WINAPI wow_native_SetCapture(HWND w){return SetCapture(w);}
-HWND WINAPI wow_native_SetFocus(HWND w){return SetFocus(w);}
+HWND WINAPI wow_native_SetFocus(HWND w)
+{
+    /* This case owns the reentry point, not desktop focus policy. Hidden
+     * windows need not receive native focus; dispatch the selected callback
+     * through the real WndProc, which destroys the window and changes capture. */
+    if(mode==2){SendMessageW(w,WM_SETFOCUS,0,0);return NULL;}
+    return SetFocus(w);
+}
 BOOL WINAPI wow_native_ReleaseCapture(void){return ReleaseCapture();}
 BOOL WINAPI wow_native_InvalidateRect(HWND w,const RECT*r,BOOL e){return InvalidateRect(w,r,e);}
 LRESULT WINAPI wow_native_SendMessageW(HWND w,UINT m,WPARAM p,LPARAM l)

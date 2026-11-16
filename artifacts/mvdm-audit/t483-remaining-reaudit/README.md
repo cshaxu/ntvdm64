@@ -1318,3 +1318,7 @@ P221: [clmenu whole-file review](p221-clmenu-review.json). Original parser/task 
 P221: [delivery receipt](batch-p221-checkpoint.json), [cumulative diff](cumulative-diff-p221-delta.json). Cached,publish11x2,menu-resource/32 controls,Full19 passed;12 restored points,2 residual decisions.
 
 P222: [DPMI/DOS4GW repair receipt](../dos4gw-pif-sti-20261115/main-production-candidate.json). Supplemental +74 mirror difference;cached,publish11x2,CCPU58,Full and Win3.1 four profiles passed. Original2720-point census unchanged;nextR2175.
+
+P223: [clmsg review](p223-clmsg-review.json), [original restoration controls](p223-clmsg-investigation.json). Whole-file1608->1535(-73);delivery pending.
+
+P223: [delivery receipt](batch-p223-checkpoint.json). Cached,publish11x2,32 controls,Full20 and governance passed;clmsg1608->1535(-73);six restored points,two residual decisions.
