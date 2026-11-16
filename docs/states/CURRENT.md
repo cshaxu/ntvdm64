@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2182 reviewed:816 restored/confirmed published,0 local restorations,8 approved,
-1358 qualified pending;538 unreviewed. Files307/365 audited,58 remain.
-P223 file307 verified/published;Git delivery accompanies receipt.
+2191 reviewed:820 restored/confirmed published,0 local restorations,8 approved,
+1363 qualified pending;529 unreviewed. Files308/365 audited,57 remain.
+P224 file308 verified/published;Git delivery accompanies receipt.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -52,14 +52,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P223 package `0bdc09f3-fa83-46a3-b461-c843b0b57477` published11x2;hashes verified.
-clmsg1608->1535(-73);original ordering/common headers restored and selectors
-consolidated. Six restored/confirmed points;two residual owner decisions.
+P224 package `05f3b4f9-c015-4629-86f6-73b4e7b4d390` published11x2;hashes verified.
+clres4129->3437(-692);original ordering restored and selectors
+consolidated. Four restored/confirmed points;five residual owner decisions.
 Cached x86/x64,32 controls,Full20 including DOS4GW and governance passed.
 P222 DPMI repair remains included. No guest/winnt.zip changes.
-Cumulative365-file diff119913->104527(-15386).
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p223-checkpoint.json).
-Git delivery accompanies receipt;ordered audit resumes at R2183.
+Cumulative365-file diff119913->103835(-16078).
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p224-checkpoint.json).
+Git delivery accompanies receipt;ordered audit resumes at R2192.
 
 ## Remaining Scope
 
@@ -166,3 +166,10 @@ preprocessing;332 original source lines and16 errors checked. Cached x86/x64,
 publish11x2,32 controls,Full20 and governance passed.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p223-checkpoint.json).
 Cumulative365-file mirror reduction15386. NextR2183.
+
+P224 verified/published:clres4129->3437(-692). Four restored/confirmed points,
+five minimized residual owner decisions. Thirteen selected function bodies identical after
+preprocessing;935 original source lines and10 errors checked. Cached x86/x64,
+publish11x2,32 controls,Full20 and governance passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p224-checkpoint.json).
+Cumulative365-file mirror reduction16078. NextR2192.

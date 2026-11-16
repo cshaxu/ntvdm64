@@ -10,15 +10,58 @@
 * 19-Sep-1995 ChrisWil  Win95/NT merge.
 \***************************************************************************/
 
-
 #if defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-/* DIVERGENCE(OPENNT-HOST-079): retain the original template-size walker
- * and modal entry as an isolated source selection. The complete dialog
- * producer/manager supplies the private precomp environment; no alternate
- * parser or native-modal fallback is introduced. */
 #line 13
 #include "precomp.h"
+#pragma hdrstop
+#else
+#ifndef WOW_BITMAP_FIXTURE_BINDINGS
+#include "wow_bitmap_bindings.h"
+#include "wow_menu_resource_bindings.h"
+#define WCSToMB(text, count, output, capacity, allocate) \
+    WCSToMBEx(0, text, count, output, capacity, allocate)
+#endif
+#endif
 
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 16
+/*
+ * Constants.
+ */
+#define BPP01_MAXCOLORS     2
+#define BPP04_MAXCOLORS    16
+#define BPP08_MAXCOLORS   256
+
+#define RESCLR_BLACK      0x00000000
+#define RESCLR_WHITE      0x00FFFFFF
+
+#line 30
+
+/*
+ * Bitmap resource IDs
+ */
+#define BMR_ICON    1
+#define BMR_BITMAP  2
+#define BMR_CURSOR  3
+
+typedef struct _OLDCURSOR {
+    BYTE bType;
+    BYTE bFormat;
+    WORD xHotSpot;  // 0 for icons
+    WORD yHotSpot;  // 0 for icons
+    WORD cx;
+    WORD cy;
+    WORD cxBytes;
+    WORD wReserved2;
+    BYTE abBitmap[1];
+} OLDCURSOR, *POLDCURSOR;
+typedef OLDCURSOR UNALIGNED *UPOLDCURSOR;
+
+
+#endif
+
+#if defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 411
 /***************************************************************************\
 * SkipIDorString
 *
@@ -26,7 +69,6 @@
 *
 \***************************************************************************/
 
-#line 418
 PBYTE SkipIDorString(
     LPBYTE pb)
 {
@@ -38,6 +80,7 @@ PBYTE SkipIDorString(
     return pb;
 }
 
+#line 429
 /***************************************************************************\
 * GetSizeDialogTemplate
 *
@@ -47,7 +90,6 @@ PBYTE SkipIDorString(
 * 07-Apr-1991 ScottLu   Created.
 \***************************************************************************/
 
-#line 438
 DWORD GetSizeDialogTemplate(
     HINSTANCE      hmod,
     LPCDLGTEMPLATE pdt)
@@ -197,404 +239,24 @@ int WINAPI DialogBoxIndirectParamAorW(
     return iRetCode;
 }
 
-#else
-/* DIVERGENCE(OPENNT-HOST-033): original bitmap conversion closure only.
- * The consuming binding supplies the USER precompiled environment;
- * unrelated resource families are omitted. */
-#ifndef WOW_BITMAP_FIXTURE_BINDINGS
-#include "wow_bitmap_bindings.h"
-#endif
-/* DIVERGENCE(OPENNT-HOST-044): restore original Unicode WOW resource-name
- * cover for the class-menu client. Bitmap-only extraction fixtures exclude
- * this unrelated entry; the formal provider includes it. */
-#ifndef WOW_BITMAP_FIXTURE_BINDINGS
-#include "wow_menu_resource_bindings.h"
-#define WCSToMB(text, count, output, capacity, allocate) \
-    WCSToMBEx(0, text, count, output, capacity, allocate)
-/***************************************************************************\
-* WOWFindResourceExWCover
-*
-* The WOW FindResource routines expect an ansi string so we have to
-* convert the calling string IFF it is not an ID
-*
-\***************************************************************************/
-
-#line 3923
-HANDLE WOWFindResourceExWCover(
-    HANDLE  hmod,
-    LPCWSTR rt,
-    LPCWSTR lpUniName,
-    WORD    LangId)
-{
-    LPSTR  lpAnsiName;
-    HANDLE hRes;
-
-    if (ID(lpUniName))
-        return FINDRESOURCEEXA(hmod, (LPSTR)lpUniName, (LPSTR)rt, LangId);
-
-    /*
-     * Otherwise convert the name of the menu then call LoadMenu
-     */
-    if (!WCSToMB(lpUniName, -1, &lpAnsiName, -1, TRUE))
-        return NULL;
-
-    hRes = FINDRESOURCEEXA(hmod, lpAnsiName, (LPSTR)rt, LangId);
-
-    UserLocalFree(lpAnsiName);
-
-    return hRes;
-}
 #endif
 
-#define BPP01_MAXCOLORS     2
-#define BPP04_MAXCOLORS    16
-#define BPP08_MAXCOLORS   256
+#line 881
+#ifdef DEBUG
+#line 882
+#error Unsupported DEBUG original branch
+#line 896
+#endif
 
-#define RESCLR_BLACK      0x00000000
-#define RESCLR_WHITE      0x00FFFFFF
+#line 1480
+#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
+#line 1481
+#error Excluded original disabled cursor branch
+#line 1483
+#endif
 
-
-#define BMR_ICON    1
-#define BMR_CURSOR  3
-
-typedef struct _OLDCURSOR {
-    BYTE bType;
-    BYTE bFormat;
-    WORD xHotSpot;  // 0 for icons
-    WORD yHotSpot;  // 0 for icons
-    WORD cx;
-    WORD cy;
-    WORD cxBytes;
-    WORD wReserved2;
-    BYTE abBitmap[1];
-} OLDCURSOR, *POLDCURSOR;
-typedef OLDCURSOR UNALIGNED *UPOLDCURSOR;
-
-/***************************************************************************\
-* HowManyColors
-*
-*
-\***************************************************************************/
-
-#line 2991
-DWORD HowManyColors(
-    IN  UPBITMAPINFOHEADER upbih,
-    IN  BOOL               fOldFormat,
-    OUT OPTIONAL LPBYTE    *ppColorTable)
-{
-#define upbch ((UPBITMAPCOREHEADER)upbih)
-
-    if (fOldFormat) {
-        if (ppColorTable != NULL) {
-            *ppColorTable = (LPBYTE)(upbch + 1);
-        }
-        if (upbch->bcBitCount <= 8)
-            return (1 << upbch->bcBitCount);
-    } else {
-        if (ppColorTable != NULL) {
-            *ppColorTable = (LPBYTE)(upbih + 1);
-        }
-        if (upbih->biClrUsed)
-            return (DWORD)upbih->biClrUsed;
-        else if (upbih->biBitCount <= 8)
-            return (1 << upbih->biBitCount);
-        else if ((upbih->biBitCount == 16) || (upbih->biBitCount == 32))
-            return 3;
-    }
-    return 0;
-
-#undef upbch
-}
-
-/***************************************************************************\
-* TrulyMonochrome
-*
-* Checks to see if a DIB colro table is truly monochrome.  ie: the color
-* table has black & white entries only.
-*
-\***************************************************************************/
-
-#line 3299
-BOOL TrulyMonochrome(
-    LPVOID lpColorTable,
-    BOOL   fOldFormat)
-{
-    #define lpRGB  ((UNALIGNED LONG *)lpColorTable)
-    #define lpRGBw ((UNALIGNED WORD *)lpColorTable)
-
-    if (fOldFormat) {
-
-        /*
-         * Honey - its triplets.
-         */
-        if (lpRGBw[0] == 0x0000)
-            return (lpRGBw[1] == 0xFF00) && (lpRGBw[2] == 0xFFFF);
-        else if (lpRGBw[0] == 0xFFFF)
-            return (lpRGBw[1] == 0x00FF) && (lpRGBw[2] == 0x0000);
-
-    } else {
-
-        /*
-         * Honey - its quadruplets!
-         */
-        if (lpRGB[0] == RESCLR_BLACK)
-            return (lpRGB[1] == RESCLR_WHITE);
-        else if (lpRGB[0] == RESCLR_WHITE)
-            return (lpRGB[1] == RESCLR_BLACK);
-    }
-
-    #undef lpRGB
-    #undef lpRGBw
-
-    return FALSE;
-}
-
-/***************************************************************************\
-* ChangeDibColors
-*
-* Given a DIB, processes LR_MONOCHROME, LR_LOADTRANSPARENT and
-* LR_LOADMAP3DCOLORS flags on the given header and colortable.
-*
-*
-\***************************************************************************/
-
-#line 3029
-VOID ChangeDibColors(
-    IN LPBITMAPINFOHEADER lpbih,
-    IN UINT               LR_flags)
-{
-    LPDWORD lpColorTable;
-    DWORD  rgb;
-    UINT   iColor;
-    UINT   cColors;
-
-    cColors = HowManyColors(lpbih, FALSE, &(LPBYTE)lpColorTable);
-
-    /*
-     * No color table!  Do nothing.
-     */
-    if (cColors == 0) {
-        RIPMSG0(RIP_WARNING, "ChangeDibColors: DIB doesn't have a color table");
-        return;
-    }
-
-    /*
-     * LR_MONOCHROME is the only option that handles PM dibs.
-     */
-    if (LR_flags & LR_MONOCHROME) {
-
-        lpbih->biBitCount = lpbih->biPlanes = 1;
-        lpColorTable[0] = RESCLR_BLACK;
-        lpColorTable[1] = RESCLR_WHITE;
-
-    } else if (LR_flags & LR_LOADTRANSPARENT) {
-
-        LPBYTE pb = (LPBYTE)(lpColorTable + cColors);
-
-        /*
-         * Change the first pixel's color table entry to RGB_WINDOW
-         * Gosh, I love small-endian
-         */
-        if (lpbih->biCompression == 0)
-            iColor = (UINT)pb[0];
-        else
-            /*
-             * RLE bitmap, will start with cnt,clr  or  0,cnt,clr
-             */
-            iColor = (UINT)(pb[0] == 0 ? pb[2] : pb[1]);
-
-        switch (cColors) {
-        case BPP01_MAXCOLORS:
-            iColor &= 0x01;
-            break;
-
-        case BPP04_MAXCOLORS:
-            iColor &= 0x0F;
-            break;
-
-        case BPP08_MAXCOLORS:
-            iColor &= 0xFF;
-            break;
-        }
-
-        rgb = (LR_flags & LR_LOADMAP3DCOLORS ? SYSRGB(3DFACE) : SYSRGB(WINDOW));
-
-        lpColorTable[iColor] = RGBX(rgb);
-
-    } else  if (LR_flags & LR_LOADMAP3DCOLORS) {
-
-        /*
-         * Fix up the color table, mapping shades of grey to the current
-         * 3D colors.
-         */
-        for (iColor = 0; iColor < cColors; iColor++) {
-
-            switch (*lpColorTable & 0x00FFFFFF) {
-
-            case RGBX(RGB(223, 223, 223)):
-                rgb = SYSRGB(3DLIGHT);
-                goto ChangeColor;
-
-            case RGBX(RGB(192, 192, 192)):
-                rgb = SYSRGB(3DFACE);
-                goto ChangeColor;
-
-            case RGBX(RGB(128, 128, 128)):
-                rgb = SYSRGB(3DSHADOW);
-
-                /*
-                 * NOTE: byte-order is different in DIBs than in RGBs
-                 */
-ChangeColor:
-                *lpColorTable = RGBX(rgb);
-                break;
-            }
-            lpColorTable++;
-        }
-    }
-}
-
-/***************************************************************************\
-* CopyDibHdr
-*
-* Copies and converts a DIB resource header
-*
-* Handles conversion of OLDICON, OLDCURSOR and BITMAPCOREHEADER
-* structures to BITMAPINFOHEADER headers.
-*
-* Note: fSingleHeightMasks is set for OLDICON and OLDCURSOR formats.
-*       This identifies that a monochrome AND/Color mask
-*       is NOT double height as it is in the newer formats.
-*
-* NOTE:  On the off chance that LR_LOADTRANSPARENT is used, we want to
-*     copy a DWORD of the bits.  Since DIB bits are DWORD aligned, we know
-*     at least a DWORD is there, even if the thing is a 1x1 mono bmp.
-*
-* The returned buffer is allocated in this function and needs to be
-* freed by the caller.
-*
-* 22-Oct-1995 SanfordS  Revised
-\***************************************************************************/
-
-#line 3355
-LPBITMAPINFOHEADER CopyDibHdr(
-    IN  UPBITMAPINFOHEADER upbih,
-    OUT LPSTR             *lplpBits,
-    OUT LPBOOL             lpfMono)
-{
-
-#define upbch ((UPBITMAPCOREHEADER)upbih)
-
-    DWORD              cColors;
-    DWORD              i;
-    LPBITMAPINFOHEADER lpbihNew;
-    DWORD              cbAlloc;
-    LPBYTE             lpColorTable;
-    struct  {
-        BITMAPINFOHEADER   bih;
-        DWORD              rgb[256];
-        DWORD              dwBuffer;
-    } Fake;
-
-    switch (upbih->biSize) {
-    case sizeof(BITMAPINFOHEADER):
-        /*
-         * Cool.  No conversion needed.
-         */
-        cColors   = HowManyColors(upbih, FALSE, &lpColorTable);
-        *lplpBits = (LPSTR)(((LPDWORD)lpColorTable) + cColors);
-        break;
-
-    case sizeof(BITMAPCOREHEADER):
-        /*
-         * Convert the BITMAPCOREHEADER to a BITMAPINFOHEADER
-         */
-        Fake.bih.biSize          = sizeof(BITMAPINFOHEADER);
-        Fake.bih.biWidth         = upbch->bcWidth;
-        Fake.bih.biHeight        = upbch->bcHeight;
-        Fake.bih.biPlanes        = upbch->bcPlanes;
-        Fake.bih.biBitCount      = upbch->bcBitCount;
-        Fake.bih.biCompression   =
-        Fake.bih.biXPelsPerMeter =
-        Fake.bih.biYPelsPerMeter =
-        Fake.bih.biClrImportant  = 0;
-        Fake.bih.biClrUsed       = cColors =
-                                   HowManyColors(upbih, TRUE, &lpColorTable);
-        Fake.bih.biSizeImage     =
-                BitmapWidth(Fake.bih.biWidth, Fake.bih.biBitCount) *
-                            Fake.bih.biHeight;
-        /*
-         * Copy and convert tripplet color table to rgbQuad color table.
-         */
-        for (i = 0; i < cColors; i++, lpColorTable += 3) {
-
-            Fake.rgb[i] = lpColorTable[0]        +
-                          (lpColorTable[1] << 8) +
-                          (lpColorTable[2] << 16);
-        }
-
-        Fake.rgb[i] = *(DWORD UNALIGNED *)lpColorTable;  // For LR_LOADTRANSPARENT
-        upbih       = (UPBITMAPINFOHEADER)&Fake;
-        *lplpBits   = lpColorTable;
-        break;
-
-    default:
-
-#define upOldIcoCur ((UPOLDCURSOR)upbih)
-
-        if (upOldIcoCur->bType == BMR_ICON ||
-                upOldIcoCur->bType == BMR_CURSOR) {
-            /*
-             * Convert OLDICON/OLDCURSOR header to BITMAPINFHEADER
-             */
-            RIPMSG0(RIP_WARNING, "USER32:Converting a OLD header. - email sanfords if you see this");
-            Fake.bih.biSize          = sizeof(BITMAPINFOHEADER);
-            Fake.bih.biWidth         = upOldIcoCur->cx;
-            Fake.bih.biHeight        = upOldIcoCur->cy * 2;
-            Fake.bih.biPlanes        =
-            Fake.bih.biBitCount      = 1;
-            Fake.bih.biCompression   =
-            Fake.bih.biXPelsPerMeter =
-            Fake.bih.biYPelsPerMeter =
-            Fake.bih.biClrImportant  = 0;
-            Fake.bih.biClrUsed       = cColors = BPP01_MAXCOLORS;
-            Fake.bih.biSizeImage     =
-                    BitmapWidth(upOldIcoCur->cx, 1) * upOldIcoCur->cy;
-            Fake.rgb[0]              = RESCLR_BLACK;
-            Fake.rgb[1]              = RESCLR_WHITE;
-            /* DIVERGENCE(OPENNT-HOST-034): capture input bits before
-             * redirecting upbih, which upOldIcoCur aliases, to local Fake. */
-            *lplpBits                = upOldIcoCur->abBitmap;
-#line 3440
-            upbih                    = (LPBITMAPINFOHEADER)&Fake;
-#line 3442
-            Fake.rgb[2]              = *((LPDWORD)*lplpBits);  // For LR_LOADTRANSPARENT
-
-        } else {
-
-            RIPMSG0(RIP_WARNING, "ConvertDIBBitmap: not a valid format");
-            return NULL;
-        }
-
-#undef pOldIcoCur
-
-        break;
-    }
-
-    *lpfMono = (cColors == BPP01_MAXCOLORS) &&
-            TrulyMonochrome((LPBYTE)upbih + sizeof(BITMAPINFOHEADER), FALSE);
-
-    cbAlloc = sizeof(BITMAPINFOHEADER) + (cColors * sizeof(RGBQUAD)) + 4;
-
-    if (lpbihNew = UserLocalAlloc(0, cbAlloc))
-        RtlCopyMemory(lpbihNew, upbih, cbAlloc);
-
-    return lpbihNew;
-
-#undef upbch
-
-}
-
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 1499
 /***************************************************************************\
 * Convert1BppToMonoBitmap
 *
@@ -609,7 +271,6 @@ LPBITMAPINFOHEADER CopyDibHdr(
 * 17-Apr-1996 ChrisWil  Created
 \***************************************************************************/
 
-#line 1513
 HBITMAP Convert1BppToMonoBitmap(
     HDC     hdcSrc,
     HBITMAP hbm1Bpp)
@@ -653,6 +314,7 @@ HBITMAP Convert1BppToMonoBitmap(
     return hbmMono;
 }
 
+#line 1556
 /***************************************************************************\
 * CreateScreenBitmap
 *
@@ -662,7 +324,6 @@ HBITMAP Convert1BppToMonoBitmap(
 *
 \***************************************************************************/
 
-#line 1565
 HBITMAP CreateScreenBitmap(
     int    cx,
     int    cy,
@@ -772,15 +433,11 @@ HBITMAP CreateScreenBitmap(
 
                 dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : oemInfo.BitCount;
 
-#endif /* WOW_ORIGINAL_DIALOG_TEMPLATE */
-#line 1674
 #if 0 // We use to do the dib-section create, but this breaks icons
 #line 1675
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #line 1691
 #else
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-#line 1692
 
                 dib1Vga.bi.biWidth  = cx;
                 dib1Vga.bi.biHeight = cy;
@@ -792,10 +449,6 @@ HBITMAP CreateScreenBitmap(
                                      (LPBITMAPINFO)&dib1Vga,
                                      DIB_RGB_COLORS);
 #endif
-#line 1702
-#endif
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-#line 1703
             }
         }
 
@@ -814,6 +467,33 @@ HBITMAP CreateScreenBitmap(
     return hbm;
 }
 
+#endif
+
+#line 2298
+#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
+#line 2299
+#error Excluded original disabled image branch
+#line 2301
+#endif
+
+#line 2624
+#if 0
+#line 2625
+#error Excluded original disabled icon-loading branch
+#else
+#line 2627
+#line 2628
+#endif
+
+#line 2640
+#ifdef LATER // SanfordS
+#line 2641
+#error Excluded unsupported original LATER branch
+#line 2667
+#endif
+
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 2783
 /***************************************************************************\
 * BitmapFromDIB
 *
@@ -823,7 +503,6 @@ HBITMAP CreateScreenBitmap(
 *
 \***************************************************************************/
 
-#line 2792
 HBITMAP BitmapFromDIB(
     int          cxNew,
     int          cyNew,
@@ -1017,6 +696,331 @@ HBITMAP BitmapFromDIB(
     return hbmpNew;
 }
 
+#line 2985
+/***************************************************************************\
+* HowManyColors
+*
+*
+\***************************************************************************/
+
+DWORD HowManyColors(
+    IN  UPBITMAPINFOHEADER upbih,
+    IN  BOOL               fOldFormat,
+    OUT OPTIONAL LPBYTE    *ppColorTable)
+{
+#define upbch ((UPBITMAPCOREHEADER)upbih)
+
+    if (fOldFormat) {
+        if (ppColorTable != NULL) {
+            *ppColorTable = (LPBYTE)(upbch + 1);
+        }
+        if (upbch->bcBitCount <= 8)
+            return (1 << upbch->bcBitCount);
+    } else {
+        if (ppColorTable != NULL) {
+            *ppColorTable = (LPBYTE)(upbih + 1);
+        }
+        if (upbih->biClrUsed)
+            return (DWORD)upbih->biClrUsed;
+        else if (upbih->biBitCount <= 8)
+            return (1 << upbih->biBitCount);
+        else if ((upbih->biBitCount == 16) || (upbih->biBitCount == 32))
+            return 3;
+    }
+    return 0;
+
+#undef upbch
+}
+
+#line 3020
+/***************************************************************************\
+* ChangeDibColors
+*
+* Given a DIB, processes LR_MONOCHROME, LR_LOADTRANSPARENT and
+* LR_LOADMAP3DCOLORS flags on the given header and colortable.
+*
+*
+\***************************************************************************/
+
+VOID ChangeDibColors(
+    IN LPBITMAPINFOHEADER lpbih,
+    IN UINT               LR_flags)
+{
+    LPDWORD lpColorTable;
+    DWORD  rgb;
+    UINT   iColor;
+    UINT   cColors;
+
+    cColors = HowManyColors(lpbih, FALSE, &(LPBYTE)lpColorTable);
+
+    /*
+     * No color table!  Do nothing.
+     */
+    if (cColors == 0) {
+        RIPMSG0(RIP_WARNING, "ChangeDibColors: DIB doesn't have a color table");
+        return;
+    }
+
+    /*
+     * LR_MONOCHROME is the only option that handles PM dibs.
+     */
+    if (LR_flags & LR_MONOCHROME) {
+
+        lpbih->biBitCount = lpbih->biPlanes = 1;
+        lpColorTable[0] = RESCLR_BLACK;
+        lpColorTable[1] = RESCLR_WHITE;
+
+    } else if (LR_flags & LR_LOADTRANSPARENT) {
+
+        LPBYTE pb = (LPBYTE)(lpColorTable + cColors);
+
+        /*
+         * Change the first pixel's color table entry to RGB_WINDOW
+         * Gosh, I love small-endian
+         */
+        if (lpbih->biCompression == 0)
+            iColor = (UINT)pb[0];
+        else
+            /*
+             * RLE bitmap, will start with cnt,clr  or  0,cnt,clr
+             */
+            iColor = (UINT)(pb[0] == 0 ? pb[2] : pb[1]);
+
+        switch (cColors) {
+        case BPP01_MAXCOLORS:
+            iColor &= 0x01;
+            break;
+
+        case BPP04_MAXCOLORS:
+            iColor &= 0x0F;
+            break;
+
+        case BPP08_MAXCOLORS:
+            iColor &= 0xFF;
+            break;
+        }
+
+        rgb = (LR_flags & LR_LOADMAP3DCOLORS ? SYSRGB(3DFACE) : SYSRGB(WINDOW));
+
+        lpColorTable[iColor] = RGBX(rgb);
+
+    } else  if (LR_flags & LR_LOADMAP3DCOLORS) {
+
+        /*
+         * Fix up the color table, mapping shades of grey to the current
+         * 3D colors.
+         */
+        for (iColor = 0; iColor < cColors; iColor++) {
+
+            switch (*lpColorTable & 0x00FFFFFF) {
+
+            case RGBX(RGB(223, 223, 223)):
+                rgb = SYSRGB(3DLIGHT);
+                goto ChangeColor;
+
+            case RGBX(RGB(192, 192, 192)):
+                rgb = SYSRGB(3DFACE);
+                goto ChangeColor;
+
+            case RGBX(RGB(128, 128, 128)):
+                rgb = SYSRGB(3DSHADOW);
+
+                /*
+                 * NOTE: byte-order is different in DIBs than in RGBs
+                 */
+ChangeColor:
+                *lpColorTable = RGBX(rgb);
+                break;
+            }
+            lpColorTable++;
+        }
+    }
+}
+
+#line 3291
+/***************************************************************************\
+* TrulyMonochrome
+*
+* Checks to see if a DIB colro table is truly monochrome.  ie: the color
+* table has black & white entries only.
+*
+\***************************************************************************/
+
+BOOL TrulyMonochrome(
+    LPVOID lpColorTable,
+    BOOL   fOldFormat)
+{
+    #define lpRGB  ((UNALIGNED LONG *)lpColorTable)
+    #define lpRGBw ((UNALIGNED WORD *)lpColorTable)
+
+    if (fOldFormat) {
+
+        /*
+         * Honey - its triplets.
+         */
+        if (lpRGBw[0] == 0x0000)
+            return (lpRGBw[1] == 0xFF00) && (lpRGBw[2] == 0xFFFF);
+        else if (lpRGBw[0] == 0xFFFF)
+            return (lpRGBw[1] == 0x00FF) && (lpRGBw[2] == 0x0000);
+
+    } else {
+
+        /*
+         * Honey - its quadruplets!
+         */
+        if (lpRGB[0] == RESCLR_BLACK)
+            return (lpRGB[1] == RESCLR_WHITE);
+        else if (lpRGB[0] == RESCLR_WHITE)
+            return (lpRGB[1] == RESCLR_BLACK);
+    }
+
+    #undef lpRGB
+    #undef lpRGBw
+
+    return FALSE;
+}
+
+#line 3333
+/***************************************************************************\
+* CopyDibHdr
+*
+* Copies and converts a DIB resource header
+*
+* Handles conversion of OLDICON, OLDCURSOR and BITMAPCOREHEADER
+* structures to BITMAPINFOHEADER headers.
+*
+* Note: fSingleHeightMasks is set for OLDICON and OLDCURSOR formats.
+*       This identifies that a monochrome AND/Color mask
+*       is NOT double height as it is in the newer formats.
+*
+* NOTE:  On the off chance that LR_LOADTRANSPARENT is used, we want to
+*     copy a DWORD of the bits.  Since DIB bits are DWORD aligned, we know
+*     at least a DWORD is there, even if the thing is a 1x1 mono bmp.
+*
+* The returned buffer is allocated in this function and needs to be
+* freed by the caller.
+*
+* 22-Oct-1995 SanfordS  Revised
+\***************************************************************************/
+
+LPBITMAPINFOHEADER CopyDibHdr(
+    IN  UPBITMAPINFOHEADER upbih,
+    OUT LPSTR             *lplpBits,
+    OUT LPBOOL             lpfMono)
+{
+
+#define upbch ((UPBITMAPCOREHEADER)upbih)
+
+    DWORD              cColors;
+    DWORD              i;
+    LPBITMAPINFOHEADER lpbihNew;
+    DWORD              cbAlloc;
+    LPBYTE             lpColorTable;
+    struct  {
+        BITMAPINFOHEADER   bih;
+        DWORD              rgb[256];
+        DWORD              dwBuffer;
+    } Fake;
+
+    switch (upbih->biSize) {
+    case sizeof(BITMAPINFOHEADER):
+        /*
+         * Cool.  No conversion needed.
+         */
+        cColors   = HowManyColors(upbih, FALSE, &lpColorTable);
+        *lplpBits = (LPSTR)(((LPDWORD)lpColorTable) + cColors);
+        break;
+
+    case sizeof(BITMAPCOREHEADER):
+        /*
+         * Convert the BITMAPCOREHEADER to a BITMAPINFOHEADER
+         */
+        Fake.bih.biSize          = sizeof(BITMAPINFOHEADER);
+        Fake.bih.biWidth         = upbch->bcWidth;
+        Fake.bih.biHeight        = upbch->bcHeight;
+        Fake.bih.biPlanes        = upbch->bcPlanes;
+        Fake.bih.biBitCount      = upbch->bcBitCount;
+        Fake.bih.biCompression   =
+        Fake.bih.biXPelsPerMeter =
+        Fake.bih.biYPelsPerMeter =
+        Fake.bih.biClrImportant  = 0;
+        Fake.bih.biClrUsed       = cColors =
+                                   HowManyColors(upbih, TRUE, &lpColorTable);
+        Fake.bih.biSizeImage     =
+                BitmapWidth(Fake.bih.biWidth, Fake.bih.biBitCount) *
+                            Fake.bih.biHeight;
+        /*
+         * Copy and convert tripplet color table to rgbQuad color table.
+         */
+        for (i = 0; i < cColors; i++, lpColorTable += 3) {
+
+            Fake.rgb[i] = lpColorTable[0]        +
+                          (lpColorTable[1] << 8) +
+                          (lpColorTable[2] << 16);
+        }
+
+        Fake.rgb[i] = *(DWORD UNALIGNED *)lpColorTable;  // For LR_LOADTRANSPARENT
+        upbih       = (UPBITMAPINFOHEADER)&Fake;
+        *lplpBits   = lpColorTable;
+        break;
+
+    default:
+
+#define upOldIcoCur ((UPOLDCURSOR)upbih)
+
+        if (upOldIcoCur->bType == BMR_ICON ||
+                upOldIcoCur->bType == BMR_CURSOR) {
+            /*
+             * Convert OLDICON/OLDCURSOR header to BITMAPINFHEADER
+             */
+            RIPMSG0(RIP_WARNING, "USER32:Converting a OLD header. - email sanfords if you see this");
+            Fake.bih.biSize          = sizeof(BITMAPINFOHEADER);
+            Fake.bih.biWidth         = upOldIcoCur->cx;
+            Fake.bih.biHeight        = upOldIcoCur->cy * 2;
+            Fake.bih.biPlanes        =
+            Fake.bih.biBitCount      = 1;
+            Fake.bih.biCompression   =
+            Fake.bih.biXPelsPerMeter =
+            Fake.bih.biYPelsPerMeter =
+            Fake.bih.biClrImportant  = 0;
+            Fake.bih.biClrUsed       = cColors = BPP01_MAXCOLORS;
+            Fake.bih.biSizeImage     =
+                    BitmapWidth(upOldIcoCur->cx, 1) * upOldIcoCur->cy;
+            Fake.rgb[0]              = RESCLR_BLACK;
+            Fake.rgb[1]              = RESCLR_WHITE;
+#line 3441
+            *lplpBits                = upOldIcoCur->abBitmap;
+#line 3440
+            upbih                    = (LPBITMAPINFOHEADER)&Fake;
+#line 3442
+            Fake.rgb[2]              = *((LPDWORD)*lplpBits);  // For LR_LOADTRANSPARENT
+
+        } else {
+
+            RIPMSG0(RIP_WARNING, "ConvertDIBBitmap: not a valid format");
+            return NULL;
+        }
+
+#undef pOldIcoCur
+
+        break;
+    }
+
+    *lpfMono = (cColors == BPP01_MAXCOLORS) &&
+            TrulyMonochrome((LPBYTE)upbih + sizeof(BITMAPINFOHEADER), FALSE);
+
+    cbAlloc = sizeof(BITMAPINFOHEADER) + (cColors * sizeof(RGBQUAD)) + 4;
+
+    if (lpbihNew = UserLocalAlloc(0, cbAlloc))
+        RtlCopyMemory(lpbihNew, upbih, cbAlloc);
+
+    return lpbihNew;
+
+#undef upbch
+
+}
+
+#line 3469
 /***************************************************************************\
 * ConvertDIBBitmap
 *
@@ -1036,7 +1040,6 @@ HBITMAP BitmapFromDIB(
 * 04-Oct-1995 SanfordS  Recreated.
 \***************************************************************************/
 
-#line 3488
 HBITMAP ConvertDIBBitmap(
     IN  UPBITMAPINFOHEADER           upbih,
     IN  DWORD                        cxDesired,
@@ -1160,16 +1163,70 @@ HBITMAP ConvertDIBBitmap(
     return hBmpRet;
 }
 
+#endif
 
-/* DIVERGENCE(OPENNT-HOST-033): other original resource owners omitted. */
+#line 3751
+#if 0 //CHRISWIL: Not in Win95
+#line 3752
+#error Excluded original disabled image-matching branch
+#line 3757
+#else
+#line 3758
+#line 3762
+#endif
 
+#line 3901
+#ifdef DEBUG
+#line 3902
+#error Unsupported DEBUG original branch
+#line 3905
+#endif
+
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE) && !defined(WOW_BITMAP_FIXTURE_BINDINGS)
+#line 3915
+/***************************************************************************\
+* WOWFindResourceExWCover
+*
+* The WOW FindResource routines expect an ansi string so we have to
+* convert the calling string IFF it is not an ID
+*
+\***************************************************************************/
+
+HANDLE WOWFindResourceExWCover(
+    HANDLE  hmod,
+    LPCWSTR rt,
+    LPCWSTR lpUniName,
+    WORD    LangId)
+{
+    LPSTR  lpAnsiName;
+    HANDLE hRes;
+
+    if (ID(lpUniName))
+        return FINDRESOURCEEXA(hmod, (LPSTR)lpUniName, (LPSTR)rt, LangId);
+
+    /*
+     * Otherwise convert the name of the menu then call LoadMenu
+     */
+    if (!WCSToMB(lpUniName, -1, &lpAnsiName, -1, TRUE))
+        return NULL;
+
+    hRes = FINDRESOURCEEXA(hmod, lpAnsiName, (LPSTR)rt, LangId);
+
+    UserLocalFree(lpAnsiName);
+
+    return hRes;
+}
+
+#endif
+
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 3948
 /***************************************************************************\
 * WOWLoadBitmapA
 *
 *
 \***************************************************************************/
 
-#line 3954
 HBITMAP WOWLoadBitmapA(
     HINSTANCE hmod,
     LPCSTR    lpName,
@@ -1204,44 +1261,7 @@ HBITMAP WOWLoadBitmapA(
     return hRet;
 }
 
-#endif /* WOW_ORIGINAL_DIALOG_TEMPLATE */
-
-#line 1480
-#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
-#line 1481
-#error Excluded original disabled cursor branch
-#line 1483
 #endif
-#line 1484
-
-#line 2298
-#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
-#line 2299
-#error Excluded original disabled image branch
-#line 2301
-#endif
-#line 2302
-
-#line 2624
-#if 0
-#line 2625
-#error Excluded original disabled icon-loading branch
-#else
-#line 2627
-#line 2628
-#endif
-#line 2629
-
-#line 3751
-#if 0 //CHRISWIL: Not in Win95
-#line 3752
-#error Excluded original disabled image-matching branch
-#line 3757
-#else
-#line 3758
-#line 3762
-#endif
-#line 3763
 
 #line 4516
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
@@ -1249,7 +1269,6 @@ HBITMAP WOWLoadBitmapA(
 #error Excluded original disabled image-copy branch
 #line 4519
 #endif
-#line 4520
 
 #line 4574
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
@@ -1257,29 +1276,4 @@ HBITMAP WOWLoadBitmapA(
 #error Excluded original disabled directory branch
 #line 4577
 #endif
-#line 4578
 
-#line 2640
-#ifdef LATER // SanfordS
-#line 2641
-#error Excluded unsupported original LATER branch
-#line 2667
-#endif
-#line 2668
-
-
-#line 881
-#ifdef DEBUG
-#line 882
-#error Unsupported DEBUG original branch
-#line 896
-#endif
-#line 897
-
-#line 3901
-#ifdef DEBUG
-#line 3902
-#error Unsupported DEBUG original branch
-#line 3905
-#endif
-#line 3906

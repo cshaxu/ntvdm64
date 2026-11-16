@@ -1322,3 +1322,9 @@ P222: [DPMI/DOS4GW repair receipt](../dos4gw-pif-sti-20261115/main-production-ca
 P223: [clmsg review](p223-clmsg-review.json), [original restoration controls](p223-clmsg-investigation.json). Whole-file1608->1535(-73);delivery pending.
 
 P223: [delivery receipt](batch-p223-checkpoint.json). Cached,publish11x2,32 controls,Full20 and governance passed;clmsg1608->1535(-73);six restored points,two residual decisions.
+
+P224: [clres investigation and build-only candidate](p224-clres-investigation.json);not production delivery.
+
+P224: [whole-file clres review](p224-clres-review.json);source applied,full delivery pending.
+
+P224: [delivery receipt](batch-p224-checkpoint.json). Cached,publish11x2,32 controls,Full20 and governance passed;clres4129->3437(-692);four restored points,five residual decisions.

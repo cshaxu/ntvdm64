@@ -1,0 +1,150 @@
+{
+  "status": "Investigation and build-only whole-file candidate;production source unchanged;not complete-file audit or delivery",
+  "file": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "points": "R2183-R2191",
+  "source_head": "99a373e3c",
+  "original": {
+    "path": "O:/repos.external/OpenNT/windows/core/ntuser/client/clres.c",
+    "sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5"
+  },
+  "before_sha256": "e60cfe1ab3d8bd8b8486e2012c617c0f066a7ab387a61f82b575d2407dd37a73",
+  "candidate_sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+  "mirror_metric": {
+    "before": {
+      "add": 378,
+      "delete": 3751,
+      "total": 4129
+    },
+    "candidate": {
+      "add": 34,
+      "delete": 3403,
+      "total": 3437
+    },
+    "candidate_reduction": 692,
+    "scope": "CRLF normalized;#line omitted;#error retained;SequenceMatcher autojunk=False;not yet applied"
+  },
+  "commands": {
+    "bitmap": "cl.exe /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/opennt-user/clres.obj O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clres.c",
+    "dialog": "cl.exe /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include/control-client\" /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_TEMPLATE /O2 /Foobj/opennt-user/dialog-template.obj O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clres.c"
+  },
+  "actual_context_controls": {
+    "before-bitmap": {
+      "exit": 0,
+      "errors": []
+    },
+    "before-dialog": {
+      "exit": 0,
+      "errors": []
+    },
+    "original-bitmap": {
+      "exit": 2,
+      "errors": [
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(111): error C2065: 'hmodUser': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(136): error C2065: 'RIP_WARNING': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(261): error C2065: 'FLASTKEY': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(263): error C2065: 'FLASTKEY': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(264): error C2065: 'RIP_WARNING': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(271): error C2065: 'FLASTKEY': undeclared identifier"
+      ]
+    },
+    "original-dialog": {
+      "exit": 2,
+      "errors": [
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(261): error C2065: 'FLASTKEY': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(263): error C2065: 'FLASTKEY': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(271): error C2065: 'FLASTKEY': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(368): error C2065: 'prescalls': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(407): error C2065: 'prescalls': undeclared identifier",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p224/original.c(665): error C2040: 'CreateDialogIndirectParamAorW': 'HWND (HANDLE,LPCDLGTEMPLATE,HWND,DLGPROC,LPARAM,UINT)' differs in levels of indirection from 'int ()'"
+      ]
+    },
+    "candidate-bitmap": {
+      "exit": 0,
+      "errors": []
+    },
+    "candidate-dialog": {
+      "exit": 0,
+      "errors": []
+    }
+  },
+  "body_equivalence": {
+    "bitmap": {
+      "WOWFindResourceExWCover": {
+        "equal": true,
+        "tokens": 118
+      },
+      "HowManyColors": {
+        "equal": true,
+        "tokens": 181
+      },
+      "TrulyMonochrome": {
+        "equal": true,
+        "tokens": 200
+      },
+      "ChangeDibColors": {
+        "equal": true,
+        "tokens": 1342
+      },
+      "CopyDibHdr": {
+        "equal": true,
+        "tokens": 677
+      },
+      "Convert1BppToMonoBitmap": {
+        "equal": true,
+        "tokens": 181
+      },
+      "CreateScreenBitmap": {
+        "equal": true,
+        "tokens": 493
+      },
+      "BitmapFromDIB": {
+        "equal": true,
+        "tokens": 802
+      },
+      "ConvertDIBBitmap": {
+        "equal": true,
+        "tokens": 460
+      },
+      "WOWLoadBitmapA": {
+        "equal": true,
+        "tokens": 155
+      }
+    },
+    "dialog": {
+      "SkipIDorString": {
+        "equal": true,
+        "tokens": 47
+      },
+      "GetSizeDialogTemplate": {
+        "equal": true,
+        "tokens": 445
+      },
+      "wow_original_DialogBoxIndirectParamAorW": {
+        "equal": true,
+        "tokens": 93
+      }
+    }
+  },
+  "body_equivalence_scope": "All13 selected function bodies compared as preprocessed tokens;only before/candidate source filename strings normalized. No line-number normalization. Not a whole-program semantic proof.",
+  "candidate_plan": "Restore original function/constant order;preserve all10 error bodies;consolidate split selectors;restore unused original BMR_BITMAP definition with original constant block;retain bounded providers and old-format pointer order. No new shim.",
+  "runtime_controls": {
+    "candidate": {
+      "compile_exit": 0,
+      "run_exit": 0,
+      "log": "old-format=3 bits=005FFC36 expected=005FFC36 mono=1 height=2\nold-format=4 bits=005FFC36 expected=005FFC36 mono=1 height=2\nWOW_ORIGINAL_BITMAP_GDI_OK repetitions=30 gdi-before=2 gdi-after=2\nWOW_ORIGINAL_BITMAP_HEADER_OK info=6 core=1 old=2 allocation-failure=1 invalid=1\n"
+    },
+    "original": {
+      "compile_exit": 0,
+      "run_exit": 1,
+      "log": "old-format=3 bits=0077F626 expected=0077FB5A mono=1 height=2\nFAIL line 132\n"
+    }
+  },
+  "R2183_evidence": "Two actual product objects select original dialog template/modal entry and original bitmap/resource algorithms. Current compiles both;full original fails both. Missing FLASTKEY/prescalls/CURSORDATA and NtUser private cursor calls belong to broader USER closure,not evidence original algorithms are defective. Keep bounded selection pending owner and minimize its layout.",
+  "coupled_pointer_evidence": "upOldIcoCur macro aliases upbih;original assigns upbih=&Fake before extracting abBitmap. Original negative fixture returns pointer different from input abBitmap;candidate returns input address. No guest change.",
+  "remaining_work": [
+    "Finish ordered per-point dispositions R2183-R2191 and exact line/error proof.",
+    "Apply whole-file candidate only after review;update main register and pending decisions together.",
+    "Cached full build,publish11x2,appropriate tests/Full,commit,push."
+  ],
+  "initial_fixture_runner_error": "Initial build-only command omitted include directory and /link;no executable ran. Corrected runner then compiled both controls;production unaffected."
+}
