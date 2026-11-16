@@ -1,0 +1,770 @@
+{
+  "task": "M0 T483 S5 P216",
+  "status": "Verified/published;commit and origin/main push accompany this receipt",
+  "scope": {
+    "task": "M0 T483 S5 P216",
+    "head": "7952ccbcd5a21ebd123a8efabed65584516cfca4",
+    "file": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "points": [
+      "R2107",
+      "R2108",
+      "R2109",
+      "R2110",
+      "R2111",
+      "R2112",
+      "R2113",
+      "R2114",
+      "R2115",
+      "R2116",
+      "R2117",
+      "R2118",
+      "R2119",
+      "R2120",
+      "R2121",
+      "R2122",
+      "R2123",
+      "R2124",
+      "R2125",
+      "R2126",
+      "R2127",
+      "R2128",
+      "R2129",
+      "R2130",
+      "R2131",
+      "R2132",
+      "R2133",
+      "R2134",
+      "R2135",
+      "R2136",
+      "R2137",
+      "R2138",
+      "R2139",
+      "R2140"
+    ],
+    "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/btnctl.c",
+    "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+    "before_sha256": "896f3a004fc74d626e4010479ecc710db1847ee86a2955f7c4c822070d687494",
+    "owner": "single-agent initial and counter-review",
+    "budget": "focused controls30min;cached full30min;Full45min;temporary cap4GiB;observe live PID before any no-progress conclusion",
+    "scope": "Whole original BUTTON file;trace native callback/destruction/DC semantics;preserve two excluded LATER bodies;no guest changes"
+  },
+  "review": "p216-button-review.json",
+  "source_inputs": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_button_dc_fixture.c",
+      "sha256": "c72282fb5a2dbb13685bb00a530641512fc19a35cf3964cd0a296101ef729c9b"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_button_dc_unreached.c",
+      "sha256": "6dfff1e78e24322754116323ce3bb7a57b2eb027ff50b5529a7e20a87106f9b8"
+    },
+    {
+      "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+      "sha256": "20ce3c909e12a549550b2d27b558b5cf56fff5dfec4c2ce033f56c69db7e70cb"
+    }
+  ],
+  "mirror_metrics": {
+    "before": {
+      "core": {
+        "added": 71,
+        "deleted": 16,
+        "total": 87
+      },
+      "raw": {
+        "added": 105,
+        "deleted": 18,
+        "total": 123
+      }
+    },
+    "after": {
+      "core": {
+        "added": 14,
+        "deleted": 5,
+        "total": 19
+      },
+      "raw": {
+        "added": 29,
+        "deleted": 5,
+        "total": 34
+      }
+    }
+  },
+  "mirror_reduction": 68,
+  "ordinary_diff_lines": 13,
+  "excluded_diff_lines": 6,
+  "restored_points": 22,
+  "residual_pending_points": 12,
+  "no_new_product_helper_or_state": true,
+  "verification": {
+    "cached": "cached.exit=0;x86/x64 and inner link targets rebuilt/verified",
+    "publication": {
+      "status": "published",
+      "package": "44b3f7ef-6738-479d-9e9d-e4c1f152d4a1",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    },
+    "package": "44b3f7ef-6738-479d-9e9d-e4c1f152d4a1",
+    "focused_cases": [
+      "wow_dialog_getset_fixture",
+      "wow_window_client_message_fixture",
+      "wow_dialog_creator_lifetime_fixture",
+      "wow_dialog_lifetime_fixture",
+      "wow_dialog_call_fixture",
+      "wow_edit_call_fixture",
+      "wow_edit_memory_callbacks_fixture",
+      "wow_control_brush_fixture",
+      "wow_default_window_binding_fixture",
+      "wow_dialog_context_fixture",
+      "wow_dialog_creation_entry_fixture",
+      "wow_dialog_finalization_fixture",
+      "wow_dialog_end_original_fixture",
+      "wow_dialog_keyboard_entry_fixture",
+      "wow_dialog_mnemonic_lifetime_fixture",
+      "wow_dialog_keyboard_lifetime_fixture",
+      "wow_control_string_fixture",
+      "wow_text_measure_failure_fixture",
+      "wow_mnemonic_drawing_fixture",
+      "wow_default_original_fixture",
+      "wow_button_drawing_fixture",
+      "wow_button_resources_fixture",
+      "wow_control_draw_state_fixture",
+      "wow_dialog_navigation_fixture",
+      "wow_edit_view_fixture",
+      "wow_button_lifetime_fixture",
+      "wow_button_dc_fixture",
+      "wow_dialog_native_owner_probe",
+      "wow_dialog_initialization_fixture"
+    ],
+    "final_button_fixture": "dead_dc_entry_exception=00000000\ndead_text_entry_exception=00000000\npaint_color_cleanup_exception=00000000\nsettext_color_cleanup_exception=00000000\ncase=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\nbutton_dc_failures=0 colors=4 cleanup=1 acquired=3 released=3\n",
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 405167,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6053,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1131,
+          "CleanupMs": 468,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 13933,
+          "CleanupMs": 582,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15839,
+          "CleanupMs": 625,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 12344,
+          "CleanupMs": 487,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 235,
+          "CleanupMs": 484,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 67808,
+          "CleanupMs": 544,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 47241,
+          "CleanupMs": 504,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 46070,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 17911,
+          "CleanupMs": 488,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11171,
+          "CleanupMs": 394,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 48062,
+          "CleanupMs": 474,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12453,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28680,
+          "CleanupMs": 470,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30928,
+          "CleanupMs": 423,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3469,
+          "CleanupMs": 455,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7861,
+          "CleanupMs": 459,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10999,
+          "CleanupMs": 475,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4383,
+          "CleanupMs": 452,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7819,
+          "CleanupMs": 476,
+          "Passed": true
+        }
+      ]
+    },
+    "isolated_package_equivalence": {
+      "images": [
+        {
+          "name": "VCDEX.DLL",
+          "restoredSha256": "E17967C5716DBFD04A88B3A35E78484DE7910BB050FF8BE201199A8C0D192A64",
+          "identical": true,
+          "publishedSha256": "E17967C5716DBFD04A88B3A35E78484DE7910BB050FF8BE201199A8C0D192A64"
+        },
+        {
+          "name": "run16.exe",
+          "restoredSha256": "87C37997605BB85F706C1E206EF6A554D8F3E76C701117DDB0058B1BA86DF27F",
+          "identical": true,
+          "publishedSha256": "87C37997605BB85F706C1E206EF6A554D8F3E76C701117DDB0058B1BA86DF27F"
+        },
+        {
+          "name": "ntsrv.exe",
+          "restoredSha256": "665AF7C4D9F66CD1BFA41909FA6904EFA2588B4897917313363136C993C8FE98",
+          "identical": true,
+          "publishedSha256": "665AF7C4D9F66CD1BFA41909FA6904EFA2588B4897917313363136C993C8FE98"
+        },
+        {
+          "name": "ntcon.exe",
+          "restoredSha256": "601FBEF57F6512C8CC0C9264DC5F66AB34042F8A7A942A942D7292A6C3AD082A",
+          "identical": true,
+          "publishedSha256": "601FBEF57F6512C8CC0C9264DC5F66AB34042F8A7A942A942D7292A6C3AD082A"
+        },
+        {
+          "name": "ntvdm.exe",
+          "restoredSha256": "98C8216F897CF80EC3E5BD3EA984116AB377B53C65B05818D7C427D250EFF892",
+          "identical": true,
+          "publishedSha256": "98C8216F897CF80EC3E5BD3EA984116AB377B53C65B05818D7C427D250EFF892"
+        },
+        {
+          "name": "ntvwm.exe",
+          "restoredSha256": "E97D75233A6E9F52EFBA870EF669B8B9DDC574BC4265A0EC53F14261A94DD0D0",
+          "identical": true,
+          "publishedSha256": "E97D75233A6E9F52EFBA870EF669B8B9DDC574BC4265A0EC53F14261A94DD0D0"
+        },
+        {
+          "name": "ntmon.exe",
+          "restoredSha256": "1BF965A38A1EAA16C1F30C1BAF3888B7B609AFC479860502D0D109B739E0331F",
+          "identical": true,
+          "publishedSha256": "1BF965A38A1EAA16C1F30C1BAF3888B7B609AFC479860502D0D109B739E0331F"
+        },
+        {
+          "name": "WOW32.DLL",
+          "restoredSha256": "064523E9440A09D52059F5E3E7899CE35D05807523D7CF6F4AA82CDE0FF5E0C7",
+          "identical": true,
+          "publishedSha256": "064523E9440A09D52059F5E3E7899CE35D05807523D7CF6F4AA82CDE0FF5E0C7"
+        },
+        {
+          "name": "VDMREDIR.DLL",
+          "restoredSha256": "872B1DD2EC0FDCC67B3EB0B2403FDD3648550A812FEB61BE7CFA7BEFAEB7512C",
+          "identical": true,
+          "publishedSha256": "872B1DD2EC0FDCC67B3EB0B2403FDD3648550A812FEB61BE7CFA7BEFAEB7512C"
+        },
+        {
+          "name": "nthook32.dll",
+          "restoredSha256": "832BF4DDFEDFF8D5E781DE4558077C9E9516CA829503C559CBCC5BEFFE890EBD",
+          "identical": true,
+          "publishedSha256": "832BF4DDFEDFF8D5E781DE4558077C9E9516CA829503C559CBCC5BEFFE890EBD"
+        },
+        {
+          "name": "nthook64.dll",
+          "restoredSha256": "E5BB219884D9CA1159CC29EA2D391EF0E776AAD52E908C65F4FA81EEC35E2417",
+          "identical": true,
+          "publishedSha256": "E5BB219884D9CA1159CC29EA2D391EF0E776AAD52E908C65F4FA81EEC35E2417"
+        }
+      ],
+      "testPackage": "305d6394-4a01-493a-9121-275040a35761",
+      "publishedPackage": "44b3f7ef-6738-479d-9e9d-e4c1f152d4a1"
+    },
+    "lines": {
+      "source": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+      "retained_source_lines": 1851,
+      "errors": [
+        246,
+        296
+      ],
+      "retained_condition_frames": "All original conditions retained at original diagnostic lines",
+      "contexts": [
+        {
+          "name": "wow32-button-client",
+          "retained_selected_lines": 1157,
+          "changes": [
+            {
+              "before": [],
+              "after": [
+                [
+                  265,
+                  "    if (!pwnd) return ((void *)0);"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  273,
+                  "        if (!pbutn->spwnd) { ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc); return ((void *)0); }"
+                ]
+              ]
+            },
+            {
+              "before": [
+                [
+                  304,
+                  "    ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc);"
+                ]
+              ],
+              "after": [
+                [
+                  304,
+                  "    ReleaseDC(((HWND)((HANDLE)((pwnd) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwnd))->h))), hdc);"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  583,
+                  "    if (!pwnd) return 0;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  616,
+                  "    if (pwnd->fnid & (0x00004000 | 0x00008000)) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  649,
+                  "    if (!pwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  653,
+                  "        if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  663,
+                  "                if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  674,
+                  "                    if (!pbutn->spwnd) { (&tlpwndT); return; }"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  726,
+                  "    if (!pwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  1180,
+                  "    if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  1726,
+                  "        if (!pbutn->spwnd) break;"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "call-boundaries-button_dc_owner",
+          "retained_selected_lines": 1157,
+          "changes": [
+            {
+              "before": [],
+              "after": [
+                [
+                  265,
+                  "    if (!pwnd) return ((void *)0);"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  273,
+                  "        if (!pbutn->spwnd) { fixture_button_release_dc(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc); return ((void *)0); }"
+                ]
+              ]
+            },
+            {
+              "before": [
+                [
+                  304,
+                  "    fixture_button_release_dc(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc);"
+                ]
+              ],
+              "after": [
+                [
+                  304,
+                  "    fixture_button_release_dc(((HWND)((HANDLE)((pwnd) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwnd))->h))), hdc);"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  583,
+                  "    if (!pwnd) return 0;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  616,
+                  "    if (pwnd->fnid & (0x00004000 | 0x00008000)) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  649,
+                  "    if (!pwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  653,
+                  "        if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  663,
+                  "                if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  674,
+                  "                    if (!pbutn->spwnd) { (&tlpwndT); return; }"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  726,
+                  "    if (!pwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  1180,
+                  "    if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  1726,
+                  "        if (!pbutn->spwnd) break;"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "call-boundaries-original_btnctl",
+          "retained_selected_lines": 1157,
+          "changes": [
+            {
+              "before": [],
+              "after": [
+                [
+                  265,
+                  "    if (!pwnd) return ((void *)0);"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  273,
+                  "        if (!pbutn->spwnd) { ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc); return ((void *)0); }"
+                ]
+              ]
+            },
+            {
+              "before": [
+                [
+                  304,
+                  "    ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc);"
+                ]
+              ],
+              "after": [
+                [
+                  304,
+                  "    ReleaseDC(((HWND)((HANDLE)((pwnd) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwnd))->h))), hdc);"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  583,
+                  "    if (!pwnd) return 0;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  616,
+                  "    if (pwnd->fnid & (0x00004000 | 0x00008000)) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  649,
+                  "    if (!pwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  653,
+                  "        if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  663,
+                  "                if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  674,
+                  "                    if (!pbutn->spwnd) { (&tlpwndT); return; }"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  726,
+                  "    if (!pwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  1180,
+                  "    if (!pbutn->spwnd) return;"
+                ]
+              ]
+            },
+            {
+              "before": [],
+              "after": [
+                [
+                  1726,
+                  "        if (!pbutn->spwnd) break;"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "builds": "3 actual-context compiles;6 preprocessings;LATER rejected at first excluded body246;second body296 verified by source mapping,not reached after fatal compiler stop"
+    },
+    "zip_unchanged": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924"
+  },
+  "execution_corrections": [
+    "First cached runner omitted mandatory VsDevCmd generator argument;only that owned waiting child was stopped. Required test compile then found missing product ABI forced include.",
+    "First whole WOW cohort also exposed that missing entry in other test units. Unified supplemental graph /FI nt.h with product;29 final cases pass. Product code was unchanged by this test-context correction.",
+    "Final test review preserved old output-parameter and exact DC-count assertions. Only changed fixture rebuilt/reran;other28 cases and product dependencies unchanged.",
+    "Transient local documentation code-page conversion corrected back to original UTF-8;governance checks final text."
+  ],
+  "test_input_reuse": "Product source matched pre-build checkpoint;only supplemental test graph/fixture changed after publication. Final test binary recompiled and run. Published/test package only differs by package identity,which was reversed to prove11 exact image hashes.",
+  "limits": [
+    "No original guest modifications/rebuild;winnt.zip unchanged.",
+    "Full external DOS4GW/Nesticle remains SKIP because external fixture not supplied;not counted passed.",
+    "Original source C4701/C4703 drawing warnings remain.",
+    "Native callback fixtures retain explicit private-state boundary doubles;Full provides separate product/guest regression evidence.",
+    "12 minimized residual mirror differences remain pending owner approval;not claimed byte-identical or exclusion-only."
+  ],
+  "cumulative": "cumulative-diff-p216-delta.json",
+  "processes": [
+    {
+      "started": "2026-11-15T20:51:49.7229454-08:00",
+      "script": "84166650FB533C6BB71CCACF785A1D9C9AB805178157EBCFA42E510990E564A4",
+      "host": "C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe",
+      "pid": 13956
+    },
+    {
+      "host": "C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe",
+      "started": "2026-11-15T20:58:27.6888372-08:00",
+      "pid": 31796,
+      "script": "D01F1051687F9CC1B207A8F6F64FAAD3495BD0B192BAAB53D1F5AB24BAB60663"
+    },
+    {
+      "pid": 13452,
+      "script": "FFEAA10F3F25705083F0D92D2EC58ED7497D708DB98631BA41A723A9AFB9FB9A",
+      "started": "2026-11-15T21:02:35.2048418-08:00",
+      "host": "C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe"
+    },
+    {
+      "started": "2026-11-15T21:00:33.5599683-08:00",
+      "script": "FAA96EEE7D32A3E8A17B27B556CD2A455D5E038C9435455C4F683FA6AAF7888E",
+      "host": "C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe",
+      "pid": 35184
+    }
+  ],
+  "final_review": {
+    "boundary": "143 selected WOW objects;9 private-header negative controls;pass",
+    "governance": "pass",
+    "relative_links": "pass",
+    "git_diff_check": "pass",
+    "owned_process": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "deadlineSeconds": 180,
+      "pid": 23124,
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p216/review-check.ps1",
+      "started": "2026-11-16T05:13:03.7478355Z"
+    },
+    "exit_code": 0,
+    "review": "Single-agent counter-review of final product/test/build graph,original-relative metrics and final input hashes;README provisional wording reconciled after gates."
+  }
+}

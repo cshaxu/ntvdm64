@@ -1,0 +1,799 @@
+{
+  "task": "M0 T483 S5 P216",
+  "status": "Whole-file audit and implementation verified/published;Git delivery accompanies receipt",
+  "scope": {
+    "task": "M0 T483 S5 P216",
+    "head": "7952ccbcd5a21ebd123a8efabed65584516cfca4",
+    "file": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "points": [
+      "R2107",
+      "R2108",
+      "R2109",
+      "R2110",
+      "R2111",
+      "R2112",
+      "R2113",
+      "R2114",
+      "R2115",
+      "R2116",
+      "R2117",
+      "R2118",
+      "R2119",
+      "R2120",
+      "R2121",
+      "R2122",
+      "R2123",
+      "R2124",
+      "R2125",
+      "R2126",
+      "R2127",
+      "R2128",
+      "R2129",
+      "R2130",
+      "R2131",
+      "R2132",
+      "R2133",
+      "R2134",
+      "R2135",
+      "R2136",
+      "R2137",
+      "R2138",
+      "R2139",
+      "R2140"
+    ],
+    "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/btnctl.c",
+    "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+    "before_sha256": "896f3a004fc74d626e4010479ecc710db1847ee86a2955f7c4c822070d687494",
+    "owner": "single-agent initial and counter-review",
+    "budget": "focused controls30min;cached full30min;Full45min;temporary cap4GiB;observe live PID before any no-progress conclusion",
+    "scope": "Whole original BUTTON file;trace native callback/destruction/DC semantics;preserve two excluded LATER bodies;no guest changes"
+  },
+  "metric": "Original added+deleted;LF/CRLF normalized;diagnostic #line excluded;required #error included. Ordinary code13,excluded6,total19. Git raw change additionally restores original CRLF.",
+  "metrics": {
+    "before": {
+      "core": {
+        "added": 71,
+        "deleted": 16,
+        "total": 87
+      },
+      "raw": {
+        "added": 105,
+        "deleted": 18,
+        "total": 123
+      }
+    },
+    "after": {
+      "core": {
+        "added": 14,
+        "deleted": 5,
+        "total": 19
+      },
+      "raw": {
+        "added": 29,
+        "deleted": 5,
+        "total": 34
+      }
+    }
+  },
+  "points": [
+    {
+      "id": "T483-R2107",
+      "original_line": "227",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Remove duplicate inner color check: xxxBNInitDC uses retained local WND/BUTN; both callers own post-color cleanup. Native color/original NC tests pass with only caller checks."
+    },
+    {
+      "id": "T483-R2108",
+      "original_line": "228",
+      "before": 0,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original comment and conditional diagnostic locations. All1851 retained source lines and1157 selected lines per3 contexts match."
+    },
+    {
+      "id": "T483-R2109",
+      "original_line": "265",
+      "before": 5,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Native cleanup clears spwnd. Calling original DC entry then faults C0000005; final candidate returns NULL. Entry is reached by restored KILLFOCUS continuation."
+    },
+    {
+      "id": "T483-R2110",
+      "original_line": "271",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore NtUserGetDC(HWq(pwnd)); original local WND is retained by invocation/borrow scope. No independent HWND copy needed."
+    },
+    {
+      "id": "T483-R2111",
+      "original_line": "273",
+      "before": 2,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Real native NtUserGetControlColor callback invokes DestroyWindow and original WM_NCDESTROY. Original GetDC returns dead DC; caller restoration exposes subsequent NULL-spwnd drawing. Final candidate releases/returnsNULL."
+    },
+    {
+      "id": "T483-R2112",
+      "original_line": "291",
+      "before": 3,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original two-argument BNReleaseDC; native/original ReleaseDC discards HWND, nullable original HW suffices at leaf."
+    },
+    {
+      "id": "T483-R2113",
+      "original_line": "293",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original PWND local in BNReleaseDC; nullable HW avoids null dereference without propagated captured-handle parameter."
+    },
+    {
+      "id": "T483-R2114",
+      "original_line": "304",
+      "before": 3,
+      "after": 2,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Original WM_NCDESTROY clears spwnd; original BNReleaseDC HWq(NULL) raisesC0000005. Original HW is nullable and original/native ReleaseDC ignores HWND; candidate returns safely."
+    },
+    {
+      "id": "T483-R2115",
+      "original_line": "583",
+      "before": 3,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "BM_CLICK/KEYDOWN can continue after native callback destroys source. Null-spwnd uncaptured-state counterexample: deleting only this check raisesC0000005 at case10. WND/BUTN storage remains pinned."
+    },
+    {
+      "id": "T483-R2116",
+      "original_line": "587",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Remove post-SetCapture return: pinned WND/BUTN remain readable; subsequent native call rejects destroyed HWND. Real capture callback destruction keeps foreign capture and produces no dead notification."
+    },
+    {
+      "id": "T483-R2117",
+      "original_line": "597",
+      "before": 3,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Remove post-SetFocus return: remaining operations only use retained button state; later helpers own null entry and parent notification guards. Real focus destruction control passes."
+    },
+    {
+      "id": "T483-R2118",
+      "original_line": "616",
+      "before": 3,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Native ReleaseCapture callback destroys button. Removing only central guard delivers BN_CLICKED carrying invalid source HWND; observed after_death=1,final=0."
+    },
+    {
+      "id": "T483-R2119",
+      "original_line": "649",
+      "before": 3,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Native retirement gives capture to other window. Retained state has BST_CAPTURED without BST_PUSHED; removing entry guard releases foreign capture atcase9. Final preserves it."
+    },
+    {
+      "id": "T483-R2120",
+      "original_line": "653",
+      "before": 2,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Ordinary pushbutton mode3 destroys itself in native callback; removing only post-state guard releases foreign capture. Final preserves it."
+    },
+    {
+      "id": "T483-R2121",
+      "original_line": "663",
+      "before": 2,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Auto-checkbox mode4 destroys itself in native callback; removing only post-check guard releases foreign capture. Final preserves it."
+    },
+    {
+      "id": "T483-R2122",
+      "original_line": "672",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Remove earlier radio-callback check; retained post-call guard R2123 handles both GETDLGCODE and BM_SETCHECK destruction. Native send rejects a destroyed full HWND."
+    },
+    {
+      "id": "T483-R2123",
+      "original_line": "674",
+      "before": 2,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "With real original dlgmgrc.c navigation linked and a retained one-child WND graph, removing only R2123 lets native GETDLGCODE/BM_SETCHECK destruction continue through the completed group loop and ReleaseCapture incorrectly releases the other window capture (cases5/6 foreign_capture=0). Final candidate preserves it. No navigation substitute executes;unused Tab dependency rejects if reached."
+    },
+    {
+      "id": "T483-R2124",
+      "original_line": "678",
+      "before": 3,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original radio iteration condition. _GetNextDlgGroupItem->_NextControl returns a nonnull root for a valid nonnull input; invalid input fails before this condition. No supported null-success path requires added test."
+    },
+    {
+      "id": "T483-R2125",
+      "original_line": "688",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Remove after-ReleaseCapture duplicate: central parent guard R2118 owns notification rejection after native capture callback destroys source."
+    },
+    {
+      "id": "T483-R2126",
+      "original_line": "726",
+      "before": 3,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Original BNPaint BS_USERBUTTON sends BN_PAINT then may call DrawText for BST_FOCUS. Parent can destroy button. Null entry original faultsC0000005; final returns. Physical lifetime cannot restore logical back-reference."
+    },
+    {
+      "id": "T483-R2127",
+      "original_line": "1180",
+      "before": 3,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Real native color callback invokes original NC cleanup. Original Paint proceeds into drawing with NULLspwnd and faultsC0000005; candidate returns safely after initialization."
+    },
+    {
+      "id": "T483-R2128",
+      "original_line": "1369",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original two-argument BNReleaseDC call; same coupled DC-release proof R2114. No captured HWND argument or new caller state."
+    },
+    {
+      "id": "T483-R2129",
+      "original_line": "1464",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original KILLFOCUS continuation: retained BUTN fields remain valid; GetDC null-entry guard and central parent guard own the subsequent boundaries."
+    },
+    {
+      "id": "T483-R2130",
+      "original_line": "1468",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original two-argument BNReleaseDC call; same coupled DC-release proof R2114. No captured HWND argument or new caller state."
+    },
+    {
+      "id": "T483-R2131",
+      "original_line": "1473",
+      "before": 3,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore native InvalidateRect after KILLFOCUS notification. It receives original full HWND and native USER rejects destroyed handles; no concrete reuse failure supports duplicate check."
+    },
+    {
+      "id": "T483-R2132",
+      "original_line": "1572",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore BM_CLICK continuation after synthetic DOWN: state remains pinned and native/worker send rejects destroyed HWND; helper entries handle null state."
+    },
+    {
+      "id": "T483-R2133",
+      "original_line": "1573",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore BM_CLICK continuation after UP: original flag cleanup and helper-level checks suffice; no second lifecycle state."
+    },
+    {
+      "id": "T483-R2134",
+      "original_line": "1611",
+      "before": 3,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original SYSKEYUP default dispatch: DefWindowProcWorker uses native CsSendMessage/default boundary; retained WND remains readable and native USER validates full HWND."
+    },
+    {
+      "id": "T483-R2135",
+      "original_line": "1643",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original two-argument BNReleaseDC call; same coupled DC-release proof R2114. No captured HWND argument or new caller state."
+    },
+    {
+      "id": "T483-R2136",
+      "original_line": "1689",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original two-argument BNReleaseDC call; same coupled DC-release proof R2114. No captured HWND argument or new caller state."
+    },
+    {
+      "id": "T483-R2137",
+      "original_line": "1698",
+      "before": 3,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore BM_SETSTYLE continuation. Actual provider uses native NtUserAlterWindowStyle without public setter notifications; existing style notification controls explicitly distinguish these APIs."
+    },
+    {
+      "id": "T483-R2138",
+      "original_line": "1722",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original two-argument BNReleaseDC call; same coupled DC-release proof R2114. No captured HWND argument or new caller state."
+    },
+    {
+      "id": "T483-R2139",
+      "original_line": "1726",
+      "before": 2,
+      "after": 1,
+      "decision": "Minimized residual pending owner;not approved retention",
+      "evidence": "Remove only post-group cleanup check from final candidate: actual color/native destruction then original SETTEXT->DoEnable->BNPaint raisesC0000005. Full candidate returns normally."
+    },
+    {
+      "id": "T483-R2140",
+      "original_line": "1738",
+      "before": 2,
+      "after": 0,
+      "decision": "restore-original",
+      "evidence": "Restore original two-argument BNReleaseDC call; same coupled DC-release proof R2114. No captured HWND argument or new caller state."
+    }
+  ],
+  "line_proof": {
+    "source": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+    "retained_source_lines": 1851,
+    "errors": [
+      246,
+      296
+    ],
+    "retained_condition_frames": "All original conditions retained at original diagnostic lines",
+    "contexts": [
+      {
+        "name": "wow32-button-client",
+        "retained_selected_lines": 1157,
+        "changes": [
+          {
+            "before": [],
+            "after": [
+              [
+                265,
+                "    if (!pwnd) return ((void *)0);"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                273,
+                "        if (!pbutn->spwnd) { ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc); return ((void *)0); }"
+              ]
+            ]
+          },
+          {
+            "before": [
+              [
+                304,
+                "    ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc);"
+              ]
+            ],
+            "after": [
+              [
+                304,
+                "    ReleaseDC(((HWND)((HANDLE)((pwnd) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwnd))->h))), hdc);"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                583,
+                "    if (!pwnd) return 0;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                616,
+                "    if (pwnd->fnid & (0x00004000 | 0x00008000)) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                649,
+                "    if (!pwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                653,
+                "        if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                663,
+                "                if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                674,
+                "                    if (!pbutn->spwnd) { (&tlpwndT); return; }"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                726,
+                "    if (!pwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                1180,
+                "    if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                1726,
+                "        if (!pbutn->spwnd) break;"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "call-boundaries-button_dc_owner",
+        "retained_selected_lines": 1157,
+        "changes": [
+          {
+            "before": [],
+            "after": [
+              [
+                265,
+                "    if (!pwnd) return ((void *)0);"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                273,
+                "        if (!pbutn->spwnd) { fixture_button_release_dc(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc); return ((void *)0); }"
+              ]
+            ]
+          },
+          {
+            "before": [
+              [
+                304,
+                "    fixture_button_release_dc(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc);"
+              ]
+            ],
+            "after": [
+              [
+                304,
+                "    fixture_button_release_dc(((HWND)((HANDLE)((pwnd) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwnd))->h))), hdc);"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                583,
+                "    if (!pwnd) return 0;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                616,
+                "    if (pwnd->fnid & (0x00004000 | 0x00008000)) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                649,
+                "    if (!pwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                653,
+                "        if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                663,
+                "                if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                674,
+                "                    if (!pbutn->spwnd) { (&tlpwndT); return; }"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                726,
+                "    if (!pwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                1180,
+                "    if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                1726,
+                "        if (!pbutn->spwnd) break;"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "call-boundaries-original_btnctl",
+        "retained_selected_lines": 1157,
+        "changes": [
+          {
+            "before": [],
+            "after": [
+              [
+                265,
+                "    if (!pwnd) return ((void *)0);"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                273,
+                "        if (!pbutn->spwnd) { ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc); return ((void *)0); }"
+              ]
+            ]
+          },
+          {
+            "before": [
+              [
+                304,
+                "    ReleaseDC(((HWND)((HANDLE)(((PHEAD)pwnd)->h))), hdc);"
+              ]
+            ],
+            "after": [
+              [
+                304,
+                "    ReleaseDC(((HWND)((HANDLE)((pwnd) == ((void *)0) ? ((void *)0) : ((PHEAD)(pwnd))->h))), hdc);"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                583,
+                "    if (!pwnd) return 0;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                616,
+                "    if (pwnd->fnid & (0x00004000 | 0x00008000)) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                649,
+                "    if (!pwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                653,
+                "        if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                663,
+                "                if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                674,
+                "                    if (!pbutn->spwnd) { (&tlpwndT); return; }"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                726,
+                "    if (!pwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                1180,
+                "    if (!pbutn->spwnd) return;"
+              ]
+            ]
+          },
+          {
+            "before": [],
+            "after": [
+              [
+                1726,
+                "        if (!pbutn->spwnd) break;"
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "builds": "3 actual-context compiles;6 preprocessings;LATER rejected at first excluded body246;second body296 verified by source mapping,not reached after fatal compiler stop"
+  },
+  "controls": {
+    "before": "dead_dc_entry_exception=00000000\ndead_text_entry_exception=00000000\npaint_color_cleanup_exception=00000000\nsettext_color_cleanup_exception=00000000\ndc_lifetime_failures=0 colors=4 cleanup=4 acquired=3 released=3\n",
+    "original": "original_release_exception=c0000005\noriginal_color_returned_dead_dc=1\ndead_dc_entry_exception=c0000005\ndead_text_entry_exception=c0000005\npaint_color_cleanup_exception=c0000005\ndc_lifetime_failures=0 colors=3 cleanup=3 acquired=2 released=0\n",
+    "whole": "dead_dc_entry_exception=00000000\ndead_text_entry_exception=00000000\npaint_color_cleanup_exception=00000000\nsettext_color_cleanup_exception=00000000\ndc_lifetime_failures=0 colors=4 cleanup=4 acquired=3 released=3\n",
+    "without-settext": "dead_dc_entry_exception=00000000\ndead_text_entry_exception=00000000\npaint_color_cleanup_exception=00000000\nsettext_color_cleanup_exception=c0000005\ndc_lifetime_failures=0 colors=4 cleanup=4 acquired=4 released=3\n"
+  },
+  "capture_positive": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncapture_failures=0\n",
+  "capture_negatives": {
+    "2115": {
+      "exit": 1,
+      "output": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=c0000005 foreign_capture=1 notifications=0 after_death=0\nfailure=100 mode=10 error=0\ncapture_failures=1\n"
+    },
+    "2118": {
+      "exit": 1,
+      "output": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=1\nfailure=100 mode=7 error=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncapture_failures=1\n"
+    },
+    "2119": {
+      "exit": 1,
+      "output": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=0 notifications=0 after_death=0\nfailure=100 mode=9 error=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncapture_failures=1\n"
+    },
+    "2120": {
+      "exit": 1,
+      "output": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=0 notifications=0 after_death=0\nfailure=100 mode=3 error=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncapture_failures=1\n"
+    },
+    "2121": {
+      "exit": 1,
+      "output": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=0 notifications=0 after_death=0\nfailure=100 mode=4 error=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncapture_failures=1\n"
+    },
+    "2123": {
+      "exit": 99,
+      "output": "UNEXPECTED button DC dependency: _GetNextDlgGroupItem\n"
+    }
+  },
+  "counter_review": [
+    "Distinguished retained storage from logical live window;original NC cleanup still clears spwnd.",
+    "Original ReleaseDC discards HWND;original HW provides existing nullable conversion. Restored original two-argument API and six callers.",
+    "Removed callback guards where only retained fields/native validation remain;central parent check prevents demonstrated invalid-source notification.",
+    "Group navigation NULL check had no supported null-return provider path;restored original loop. Kept one post-callback anchor guard with explicit source/fixture limit.",
+    "Actual native style provider does not issue public SetWindowLong style notifications. Restored original style continuation.",
+    "No copied drawing algorithm,new production helper,new state machine or transferred shim complexity.",
+    "All original conditions and required LATER errors preserved;original source CRLF restored."
+  ],
+  "test_limits": [
+    "Real native USER callbacks and original ButtonWndProcWorker NC destruction;private view storage/physical free and uncalled boundaries are explicit fixture doubles.",
+    "Initial mutation controls did not cover uncaptured NULL entry and captured-but-not-pushed state;test setup corrected and prior unsuccessful controls retained in build evidence.",
+    "MSVC LATER fatal stops at246;second296 error placement is source proof.",
+    "Original C4701/C4703 drawing warnings persist;do not report as introduced or repaired.",
+    "Earlier R2123 unexpected-boundary negative was insufficient by itself;superseded by actual original navigation/foreign-capture result. Original nav first compile required actual product forced nt.h input;first link required explicit uncalled Tab rejection provider. Neither is a product failure."
+  ],
+  "source_inputs": "Original and local hashes pinned in p216-button-investigation.json and line proof;final test fixture checked in at existing path.",
+  "product_status": "Cached x86/x64,11x2 publication,29 WOW fixtures,final button fixture and isolated Full19 passed",
+  "restored_local": 0,
+  "residual_pending": 12,
+  "file_mirror_reduction": 68,
+  "cumulative_local_reduction": 15123,
+  "cumulative_delivered_reduction": 15123,
+  "radio_original_provider": {
+    "result": "pass",
+    "actual_navigation_source": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+    "source_sha256": "ffc8da234cfcc2c446b9e30eb1a5b0c05c485a178ed0da78bbc1596877e413ed",
+    "positive": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=6 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncapture_failures=0\n",
+    "negative": "case=1 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=2 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=3 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=4 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=5 fired=1 exception=00000000 foreign_capture=0 notifications=0 after_death=0\nfailure=100 mode=5 error=0\ncase=6 fired=1 exception=00000000 foreign_capture=0 notifications=0 after_death=0\nfailure=100 mode=6 error=0\ncase=7 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=8 fired=1 exception=00000000 foreign_capture=1 notifications=1 after_death=0\ncase=9 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncase=10 fired=1 exception=00000000 foreign_capture=1 notifications=0 after_death=0\ncapture_failures=2\n",
+    "explanation": "With real original dlgmgrc.c navigation linked and a retained one-child WND graph, removing only R2123 lets native GETDLGCODE/BM_SETCHECK destruction continue through the completed group loop and ReleaseCapture incorrectly releases the other window capture (cases5/6 foreign_capture=0). Final candidate preserves it. No navigation substitute executes;unused Tab dependency rejects if reached.",
+    "process": {
+      "script": "D6A69D4B992D61C3826CF1A9A492FD2BAF33561259640B2C9FCCCA86EC666B10",
+      "host": "C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/native/powershell/pwsh.exe",
+      "started": "2026-11-15T20:57:21.6891208-08:00",
+      "pid": 27408
+    }
+  },
+  "test_context_correction": {
+    "cause": "P214 restored original RTL declarations;the supplemental cohort omitted production /FI nt.h,so local RTL-to-Win32 macros rewrote late declarations into conflicting VOID/NTSTATUS signatures.",
+    "fix": "One shared /FI nt.h in supplemental graph,matching product ABI entry. No type suppression or mirror modification.",
+    "status": "Complete cohort29/29 pass;preserved original output/call-count assertions in final button fixture,which passed separately"
+  },
+  "published_package": "44b3f7ef-6738-479d-9e9d-e4c1f152d4a1",
+  "restored_verified_published": 22
+}

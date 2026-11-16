@@ -1296,3 +1296,9 @@ P213: [RTL declaration restoration](batch-p213-checkpoint.json):ntrtl6101->253(-
 P214: [NTURTL restoration](batch-p214-checkpoint.json):nturtl1021->29(-992),precomp15->14(-1);2 restored,1 qualified pending;original common/WOW types and declarations unified. Final cached,publish11x2,path/RTL/command and Full pass. [Cumulative witness](cumulative-diff-p214-delta.json):119913->104858,net15055;fixed365 files.
 
 P215: [VDM debug header original line mapping](batch-p215-checkpoint.json):no non-exclusion diff;three errors retained;core140 unchanged,raw146->142. Four actual contexts and2 negatives pass;P214 product reused. [Cumulative witness](cumulative-diff-p215-delta.json):net15055 unchanged.
+
+P216 initial investigation, superseded: [BUTTON original/DC lifetime investigation](p216-button-investigation.json). The intermediate87->63 proposal was not applied;the complete-file review and final87->19 delivery below replace that provisional conclusion.
+
+P216: [whole BUTTON review and controls](p216-button-review.json):87->19(-68),22 verified/published restorations and12 minimized residual decisions;cached,11x2,29 WOW fixtures andFull19 passed. Earlier investigation is superseded by this complete-file review.
+
+P216: [delivery receipt](batch-p216-checkpoint.json),[cumulative witness](cumulative-diff-p216-delta.json):net15123.12 residual points remain pending owner decisions.

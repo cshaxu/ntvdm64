@@ -185,7 +185,8 @@ $launcher = @('@echo off', 'set "T447_S3_FIXTURE_CWD=%CD%"',
 $lines = [Collections.Generic.List[string]]::new()
 $lines.Add('ninja_required_version = 1.10')
 $lines.Add('environment = ' + (NinjaValue $environment))
-$lines.Add('cflags = /nologo /TC /MT /O2 /W4 /Gz /DSTD_CALL /DUNICODE /D_UNICODE /showIncludes ' + ($includes -join ' '))
+# Match the product's ABI declaration entry before control-local RTL aliases.
+$lines.Add('cflags = /nologo /TC /MT /O2 /W4 /Gz /DSTD_CALL /DUNICODE /D_UNICODE /showIncludes /FI "' + (NinjaValue (Join-Path $root 'src/compat/include/nt.h')) + '" ' + ($includes -join ' '))
 $lines.Add('rule cc')
 $lines.Add('  command = cmd /d /c ""$environment" '+$compilerCommand+' $cflags $extra /c /Fo$out $in"')
 $lines.Add('  deps = msvc')

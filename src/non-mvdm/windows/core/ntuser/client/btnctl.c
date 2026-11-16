@@ -224,14 +224,11 @@ HBRUSH xxxBNInitDC(
     }
 
     hbr = GetControlBrush(HWq(pwnd), hdc, wColor);
-    /* DIVERGENCE(OPENNT-HOST-117): color callbacks may destroy this control. */
-    if (!pbutn->spwnd) return NULL;
 
     /*
      * Select in the user's font if set, and save the old font so that we can
      * restore it when we release the dc.
      */
-#line 232
     if (pbutn->hFont) {
         SelectObject(hdc, pbutn->hFont);
     }
@@ -245,10 +242,9 @@ HBRUSH xxxBNInitDC(
             pwnd->rcClient.bottom - pwnd->rcClient.top);
     }
 
-#line 245
 #ifdef LATER
-#line 246
-#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
+#error
+#line 248
 #endif
 #line 249
 
@@ -267,24 +263,19 @@ HDC xxxBNGetDC(
 {
     HDC hdc;
     PWND pwnd = pbutn->spwnd;
-    HWND hwnd;
-
-    /* DIVERGENCE(OPENNT-HOST-117): IsVisible(NULL) is TRUE in the original. */
     if (!pwnd) return NULL;
-    hwnd = HWq(pwnd);
+#line 265
 
-#line 266
     CheckLock(pwnd);
 
     if (IsVisible(pwnd)) {
         HBRUSH  hbr;
 
-        hdc = NtUserGetDC(hwnd);
+        hdc = NtUserGetDC(HWq(pwnd));
         hbr = xxxBNInitDC(pbutn, hdc);
-        /* DIVERGENCE(OPENNT-HOST-117): unwind a DC after color destruction. */
-        if (!pbutn->spwnd) { ReleaseDC(hwnd, hdc); return NULL; }
+        if (!pbutn->spwnd) { ReleaseDC(HWq(pwnd), hdc); return NULL; }
+#line 273
 
-#line 274
         if (lphbr!=NULL)
             *lphbr = hbr;
 
@@ -302,25 +293,21 @@ HDC xxxBNGetDC(
 
 void BNReleaseDC(
     PBUTN pbutn,
-    HDC hdc,
-    HWND hwnd) /* DIVERGENCE(OPENNT-HOST-117): captured before any callout. */
-#line 292
+    HDC hdc)
 {
-#line 295
-#ifdef LATER
-#line 296
-#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
-#endif
-#line 298
+    PWND pwnd = pbutn->spwnd;
 
-#line 300
+#ifdef LATER
+#error
+#line 298
+#endif
+#line 299
+
     if (pbutn->hFont) {
         SelectObject(hdc, ghFontSys);
     }
 
-    /* DIVERGENCE(OPENNT-HOST-117): cleanup cannot dereference cleared spwnd. */
-    ReleaseDC(hwnd, hdc);
-#line 305
+    ReleaseDC(HW(pwnd), hdc);
 }
 
 /***************************************************************************\
@@ -599,17 +586,12 @@ BOOL xxxBNSetCapture(
 
     BUTTONSTATE(pbutn) |= codeMouse;
 
-    /* DIVERGENCE(OPENNT-HOST-117): a preceding callback may have destroyed it. */
     if (!pwnd) return FALSE;
-
 #line 583
     CheckLock(pwnd);
 
     if (!(BUTTONSTATE(pbutn) & BST_CAPTURED)) {
         NtUserSetCapture(HWq(pwnd));
-        /* DIVERGENCE(OPENNT-HOST-117): capture changes can call application code. */
-        if (!pbutn->spwnd) return FALSE;
-#line 587
         BUTTONSTATE(pbutn) |= BST_CAPTURED;
 
         /*
@@ -621,10 +603,6 @@ BOOL xxxBNSetCapture(
 
         NtUserSetFocus(HWq(pwnd));
 
-        /* DIVERGENCE(OPENNT-HOST-117): focus notification may destroy it. */
-        if (!pbutn->spwnd) return FALSE;
-
-#line 598
         BUTTONSTATE(pbutn) &= ~BST_INCLICK;
     }
     return(BUTTONSTATE(pbutn) & BST_CAPTURED);
@@ -643,11 +621,9 @@ void xxxButtonNotifyParent(
 {
     TL tlpwndParent;
     PWND pwndParent;            // Parent if it exists
-
-    /* DIVERGENCE(OPENNT-HOST-117): retained storage is not a live control. */
     if (pwnd->fnid & FNID_STATUS_BITS) return;
+#line 616
 
-#line 617
     CheckLock(pwnd);
 
     if (pwnd->spwndParent)
@@ -680,15 +656,12 @@ void xxxBNReleaseCapture(
     TL tlpwndT;
     PWND pwnd = pbutn->spwnd;
 
-    /* DIVERGENCE(OPENNT-HOST-117): no capture operation on a destroyed control. */
     if (!pwnd) return;
-
 #line 649
     CheckLock(pwnd);
 
     if (BUTTONSTATE(pbutn) & BST_PUSHED) {
         SendMessageWorker(pwnd, BM_SETSTATE, FALSE, 0, FALSE);
-        /* DIVERGENCE(OPENNT-HOST-117): no more behavior after logical cleanup. */
         if (!pbutn->spwnd) return;
 #line 653
         if (fCheck) {
@@ -701,7 +674,6 @@ void xxxBNReleaseCapture(
                     check = BST_UNCHECKED;
                 }
                 SendMessageWorker(pwnd, BM_SETCHECK, check, 0, FALSE);
-                /* DIVERGENCE(OPENNT-HOST-117): painting can call the parent. */
                 if (!pbutn->spwnd) return;
 #line 663
                 break;
@@ -713,21 +685,15 @@ void xxxBNReleaseCapture(
 
                     if ((UINT)SendMessage(HW(pwndT), WM_GETDLGCODE, 0, 0L) &
                             DLGC_RADIOBUTTON) {
-                        /* DIVERGENCE(OPENNT-HOST-117): preserve lock pairing. */
-                        if (!pbutn->spwnd) { ThreadUnlock(&tlpwndT); return; }
-#line 672
                         SendMessage(HW(pwndT), BM_SETCHECK, (pwnd == pwndT), 0L);
                     }
-                    /* DIVERGENCE(OPENNT-HOST-117): either radio call may destroy. */
                     if (!pbutn->spwnd) { ThreadUnlock(&tlpwndT); return; }
 #line 674
                     pwndT = _GetNextDlgGroupItem(REBASEPWND(pwndT, spwndParent),
                             pwndT, FALSE);
                     ThreadUnlock(&tlpwndT);
 
-                /* DIVERGENCE(OPENNT-HOST-117): callback may remove the group. */
-                } while (pwndT && pwndT != pwnd);
-#line 679
+                } while (pwndT != pwnd);
             }
 
             fNotifyParent = TRUE;
@@ -737,9 +703,6 @@ void xxxBNReleaseCapture(
     if (BUTTONSTATE(pbutn) & BST_CAPTURED) {
         BUTTONSTATE(pbutn) &= ~(BST_CAPTURED | BST_MOUSE);
         NtUserReleaseCapture();
-        /* DIVERGENCE(OPENNT-HOST-117): capture notification may destroy it. */
-        if (!pbutn->spwnd) return;
-#line 688
     }
 
     if (fNotifyParent) {
@@ -778,11 +741,9 @@ void xxxBNDrawText(
     BTNDATA bdt;
     UINT    pbfPush;
     PWND    pwnd = pbutn->spwnd;
-
-    /* DIVERGENCE(OPENNT-HOST-117): BS_USERBUTTON notifies before drawing text. */
     if (!pwnd) return;
+#line 726
 
-#line 727
     bStyle = TestWF(pwnd, BFTYPEMASK);
 
     if (bStyle > sizeof(mpStyleCbr)) {
@@ -1236,9 +1197,7 @@ void xxxBNPaint(
 
     hbr = xxxBNInitDC(pbutn, hdc);
 
-    /* DIVERGENCE(OPENNT-HOST-117): caller still owns EndPaint/ReleaseDC. */
     if (!pbutn->spwnd) return;
-
 #line 1180
     bsWnd = TestWF(pwnd, BFTYPEMASK);
     pbfPush = IsPushButton(pwnd);
@@ -1429,7 +1388,7 @@ LONG APIENTRY ButtonWndProcWorker(
         if ((hdc = xxxBNGetDC(pbutn, NULL)) != NULL) {
             xxxBNDrawText(pbutn, hdc, DBT_FOCUS, FALSE);
 
-            BNReleaseDC(pbutn, hdc, hwnd);
+            BNReleaseDC(pbutn, hdc);
         }
 
         if (TestWF(pwnd, BFNOTIFY))
@@ -1524,28 +1483,21 @@ LONG APIENTRY ButtonWndProcWorker(
 
         xxxBNReleaseCapture(pbutn, TRUE);
 
-        /* DIVERGENCE(OPENNT-HOST-117): BN_CLICKED can destroy during focus loss. */
-        if (!pbutn->spwnd) break;
-#line 1464
         BUTTONSTATE(pbutn) &= ~BST_FOCUS;
         if ((hdc = xxxBNGetDC(pbutn, NULL)) != NULL) {
             xxxBNDrawText(pbutn, hdc, DBT_FOCUS, FALSE);
 
-            BNReleaseDC(pbutn, hdc, hwnd);
+            BNReleaseDC(pbutn, hdc);
         }
 
         if (TestWF(pwnd, BFNOTIFY))
             xxxButtonNotifyParent(pwnd, BN_KILLFOCUS);
-
-        /* DIVERGENCE(OPENNT-HOST-117): avoid invalidating a reused HWND. */
-        if (!pbutn->spwnd) break;
 
         /*
          * Since the bold border around the defpushbutton is done by
          * someone else, we need to invalidate the rect so that the
          * focus rect is repainted properly.
          */
-#line 1479
         NtUserInvalidateRect(hwnd, NULL, FALSE);
         break;
 
@@ -1639,13 +1591,7 @@ SetCheck:
 
         BUTTONSTATE(pbutn) |= BST_INBMCLICK;
         SendMessageWorker(pwnd, WM_LBUTTONDOWN, 0, 0, FALSE);
-        /* DIVERGENCE(OPENNT-HOST-117): stop synthetic clicks after teardown. */
-        if (!pbutn->spwnd) break;
-#line 1572
         SendMessageWorker(pwnd, WM_LBUTTONUP, 0, 0, FALSE);
-        /* DIVERGENCE(OPENNT-HOST-117): no key-path fallthrough after teardown. */
-        if (!pbutn->spwnd) break;
-#line 1573
         BUTTONSTATE(pbutn) &= ~BST_INBMCLICK;
 
         /*
@@ -1684,10 +1630,6 @@ SetCheck:
          */
         xxxBNReleaseCapture(pbutn, (wParam == VK_SPACE));
 
-        /* DIVERGENCE(OPENNT-HOST-117): do not default-dispatch a destroyed control. */
-        if (!pbutn->spwnd) break;
-
-#line 1611
         if (message == WM_SYSKEYUP) {
             goto CallDWP;
         }
@@ -1720,7 +1662,7 @@ SetCheck:
                 xxxButtonDrawNewState(pbutn, hdc, hbr, wOldState);
             }
 
-            BNReleaseDC(pbutn, hdc, hwnd);
+            BNReleaseDC(pbutn, hdc);
         }
         break;
 
@@ -1766,7 +1708,7 @@ CheckIt:
                     } else {
                         xxxButtonDrawCheck(pbutn, hdc, hbr);
                     }
-                    BNReleaseDC(pbutn, hdc, hwnd);
+                    BNReleaseDC(pbutn, hdc);
                 }
             }
             break;
@@ -1776,10 +1718,6 @@ CheckIt:
     case BM_SETSTYLE:
         NtUserAlterWindowStyle(hwnd, BS_TYPEMASK, wParam);
 
-        /* DIVERGENCE(OPENNT-HOST-117): native style calls may notify. */
-        if (!pbutn->spwnd) break;
-
-#line 1699
         if (lParam) {
             NtUserInvalidateRect(hwnd, NULL, TRUE);
         }
@@ -1803,11 +1741,10 @@ CheckIt:
                 PaintRect(HW(pwndParent), hwnd, hdc, hbr, &rc);
                 ThreadUnlock(&tlpwndParent);
 
-                BNReleaseDC(pbutn, hdc, hwnd);
+                BNReleaseDC(pbutn, hdc);
             }
         }
 
-        /* DIVERGENCE(OPENNT-HOST-117): group background painting may notify. */
         if (!pbutn->spwnd) break;
 #line 1726
         lResult = _DefSetText(hwnd, (LPWSTR)lParam, (BOOL)fAnsi);
@@ -1822,7 +1759,7 @@ DoEnable:
         if (IsVisible(pwnd)) {
             hdc = NtUserGetDC(hwnd);
             xxxBNPaint(pbutn, hdc);
-            BNReleaseDC(pbutn, hdc, hwnd);
+            BNReleaseDC(pbutn, hdc);
         }
         return lResult;
 

@@ -1,0 +1,238 @@
+{
+  "task": "M0 T483 S5 P216",
+  "state": "Whole-file investigation in progress;not a delivery or pending-owner admission",
+  "scope": {
+    "task": "M0 T483 S5 P216",
+    "head": "7952ccbcd5a21ebd123a8efabed65584516cfca4",
+    "file": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "points": [
+      "R2107",
+      "R2108",
+      "R2109",
+      "R2110",
+      "R2111",
+      "R2112",
+      "R2113",
+      "R2114",
+      "R2115",
+      "R2116",
+      "R2117",
+      "R2118",
+      "R2119",
+      "R2120",
+      "R2121",
+      "R2122",
+      "R2123",
+      "R2124",
+      "R2125",
+      "R2126",
+      "R2127",
+      "R2128",
+      "R2129",
+      "R2130",
+      "R2131",
+      "R2132",
+      "R2133",
+      "R2134",
+      "R2135",
+      "R2136",
+      "R2137",
+      "R2138",
+      "R2139",
+      "R2140"
+    ],
+    "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/btnctl.c",
+    "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+    "before_sha256": "896f3a004fc74d626e4010479ecc710db1847ee86a2955f7c4c822070d687494",
+    "owner": "single-agent initial and counter-review",
+    "budget": "focused controls30min;cached full30min;Full45min;temporary cap4GiB;observe live PID before any no-progress conclusion",
+    "scope": "Whole original BUTTON file;trace native callback/destruction/DC semantics;preserve two excluded LATER bodies;no guest changes"
+  },
+  "question": "Which BUTTON callback/destruction differences are necessary after tracing actual original and modern owners?",
+  "original_chain": [
+    "btnctl.c xxxBNInitDC -> GetControlBrush -> original explicit-recipient color service -> application callback -> DestroyWindow",
+    "kernel/createw.c xxxFreeWindow: WM_NCDESTROY is sent at1872 before final object unlock;client btnctl.c Unlock clears spwnd and FreeLookasideEntry releases BUTN",
+    "client/usercli.h client ThreadLock/ThreadUnlock are no-ops;they do not preserve BUTN.spwnd",
+    "client/client.c ReleaseDC885 explicitly ignores HWND;calls server with HDC only"
+  ],
+  "current_chain": [
+    "wow_edit_entry_bindings owns task callback/USER borrow scope;wow_button_invoke owns same-control invocation scope",
+    "wow_control_brush_bindings retains original recipient selection and invokes wow_edit_NtUserGetControlColor -> real native color service",
+    "wow_button_free_state defers physical BUTN release until oldest invocation returns;logical NC destruction still clears spwnd immediately",
+    "Retained WND/BUTN storage and a live window are distinct;private pointer pinning alone is not proof that all post-callback guards can be dropped"
+  ],
+  "findings": [
+    {
+      "points": [
+        "R2112",
+        "R2113",
+        "R2114",
+        "R2128",
+        "R2130",
+        "R2135",
+        "R2136",
+        "R2138",
+        "R2140"
+      ],
+      "conclusion": "Original two-argument BNReleaseDC and six callers can be restored. Keep a minimal HWq->HW nullable-handle difference at the release leaf.",
+      "necessity": "Actual native destruction reenters original ButtonWndProcWorker WM_NCDESTROY;original BNReleaseDC then dereferences null spwnd through HWq and raises C0000005. Current and two-argument candidate both return normally.",
+      "minimality": "Original HW macro already handles NULL and ReleaseDC ignores HWND. No new parameter,state,helper or shim is required.",
+      "status": "Candidate proof only;coupled whole-file review and line mapping still required before product application"
+    },
+    {
+      "points": [
+        "R2107",
+        "R2110"
+      ],
+      "conclusion": "Candidate removes the inner color-return guard and restores the original DC-acquisition expression;outer caller still detects logical destruction.",
+      "necessity": "After GetControlBrush,xxxBNInitDC reads retained local pwnd and retained BUTN fields;it does not read spwnd again. Both callers already own post-call checks. Candidate passed real color callback/destruction control.",
+      "status": "Candidate proof only;whole-file retained-storage and all-callsite counter-review remains required"
+    },
+    {
+      "points": [
+        "R2108"
+      ],
+      "conclusion": "Original comment228-231 is shifted;both LATER end boundaries also need original diagnostic-line verification.",
+      "status": "Line correction deferred until the final whole-file candidate;not yet counted restored"
+    },
+    {
+      "points": [
+        "R2109",
+        "R2111"
+      ],
+      "conclusion": "HWND copy is redundant. Outer post-color cleanup has a concrete dead-DC continuation boundary;null-entry guard must be reviewed together with original WM_KILLFOCUS and other caller restorations.",
+      "status": "Do not admit an unchanged guard to pending decisions until the actual caller necessity is resolved"
+    }
+  ],
+  "native_witness": {
+    "process": {
+      "pid": 26292,
+      "script": "4418AC021933A5F36A75B2265D6CC0A96D33343852042EA2E1694EBA3F168179",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "started": "2026-11-15T20:09:51.6628574-08:00"
+    },
+    "exit": 0,
+    "result": "native-dc.c\nnative-dc.c(42): warning C4152: nonstandard extension, function/data pointer conversion in expression\ndestroyed_dc_release_null=0\ndestroyed_dc_release_old_handle=0\nnative_dc_failures=0 callbacks=1\n",
+    "meaning": "Live HDC releases with original HWND,other HWND or NULL all returned1. After child destruction,old HWND and NULL both returned0. Actual native color callback destroyed the child.",
+    "limitation": "This demonstrates installed USER/GDI behavior plus original source intent,not a universal Windows-version guarantee."
+  },
+  "original_body_controls": {
+    "process": {
+      "script": "D84C2AAB947CBD07EF090A5F572D192EAB86F9B22CF0EAA3F0C145985039C641",
+      "started": "2026-11-15T20:16:12.2252976-08:00",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "pid": 15872
+    },
+    "exit": 0,
+    "results": {
+      "before": "dc_lifetime_failures=0 colors=2 cleanup=2 acquired=2 released=2\n",
+      "original": "original_release_exception=c0000005\noriginal_color_returned_dead_dc=1\ndc_lifetime_failures=0 colors=2 cleanup=2 acquired=2 released=0\n",
+      "candidate": "dc_lifetime_failures=0 colors=2 cleanup=2 acquired=2 released=2\n"
+    },
+    "initial_failed_attempt": "First harness call used DestroyWindow macro from production precomp and reached intentional unreached stub. Corrected test-only native call binding;no product change. Failed evidence preserved in dc-attempt1.",
+    "meaning": "Real USER/GDI callback and real original NC logical cleanup;whole original btnctl.c compiled in all three controls. Original-only expected access violation is caught and asserted,not a passing product result.",
+    "limits": "Window graph/state storage and physical release are explicit boundary doubles. This is not integrated WOW/guest acceptance. Existing original drawing C4701/C4703 warnings remain disclosed."
+  },
+  "source_inputs": [
+    {
+      "path": "src/wow32-dll/source/wow_button_lifetime.c",
+      "sha256": "10fa2c3b601efd2036d5a4f81df5ab00b8a4e5962341f8b600d10a0e65e16e44"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_edit_entry_bindings.c",
+      "sha256": "ec80fb7d280dbf2ec62e23788baa9d5db38e3c7fc43ef6e90150445060ba9d4a"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_edit_state_bindings.c",
+      "sha256": "287c43b258e735a06cfb3b90c76e1390db59bbde2394cb3d0f9d29b985474e65"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_control_brush_bindings.c",
+      "sha256": "9a20472b39134c3f61b0dc7965514a9922a4ae35e24f3eed5a3e8e6cfad829e4"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_edit_call_bindings.c",
+      "sha256": "aae75d219ad8bac84fabc897fa73664b9db89ab68a6e7a398db534ae0599bc12"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_borrow_scope.c",
+      "sha256": "d3209c424ee1037d5bfe41716a5dfa6151ea7500403377f63a656fea0bed1faf"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_window_words_binding.c",
+      "sha256": "f3373eff80582bc6c6d7cb20d55f046209384fd4fca39d54ee5567f144e74384"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_window_client_access_bindings.c",
+      "sha256": "a59e41958744681e972d2767a549e5fc20f77e4aa5b35c5a8f3e76e84e2c0e31"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "sha256": "cd1bc65bb851b9b6ccb3f708ee1b79d0af63f9d757b478fad48c8068a34acb98"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "sha256": "ffc8da234cfcc2c446b9e30eb1a5b0c05c485a178ed0da78bbc1596877e413ed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "sha256": "e3c22ccfc76affb9911b67437a2e9dc09692dc5c70143ebd386a0c9de4701fb1"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/windows/core/ntuser/kernel/createw.c",
+      "sha256": "da4a0c0e0a85dbe88130f01ccceecf9da08a0febf3f841458d2a3cbd707a57d7"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/windows/core/ntuser/kernel/handtabl.c",
+      "sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/windows/core/ntuser/client/client.c",
+      "sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472"
+    }
+  ],
+  "diagnostic_inputs": [
+    {
+      "path": "native-dc.c",
+      "sha256": "b6b8e208c1b8dacb58bd0eff753aefdf26b0e2cf02a47effbe7f656e2e687c64"
+    },
+    {
+      "path": "native-dc.cmd",
+      "sha256": "b5fbc64aad009ff79205f76f584b5d017d8fc59b01d766be0aaf9777c222be27"
+    },
+    {
+      "path": "dc-lifetime.c",
+      "sha256": "3af360575265d69f6c43598e3e5e6e585b8e13da44441c64be1863ad5d17796d"
+    },
+    {
+      "path": "prepare-dc.py",
+      "sha256": "4b53d747b909f03bca100509d41b89c4f07194d53a4e781973faf8664d9c21eb"
+    },
+    {
+      "path": "dc-controls.cmd",
+      "sha256": "3c8e6ade87d72baaa08e77e707726225acf3a9c12aa82086590b6889c64c3e2c"
+    },
+    {
+      "path": "dc-unreached.c",
+      "sha256": "2b676750cb06648c2d6f69c7eec2c211f496137ea52f4a3a5dba2fd2526a7f8d"
+    }
+  ],
+  "candidate_sha256": "3d0f67e1daf22b245877770cf7a0489bcdee1e9cd606daec39ed410353681a24",
+  "before_metric": {
+    "added": 71,
+    "deleted": 16,
+    "total": 87
+  },
+  "candidate_metric": {
+    "added": 57,
+    "deleted": 6,
+    "total": 63
+  },
+  "candidate_reduction": 24,
+  "applied_mirror_reduction": 0,
+  "cumulative_delivered_reduction": 15055,
+  "error_line_status": "Two required LATER errors remain in candidate;final original diagnostic-line checks not yet run.",
+  "product_status": "Current product/source unchanged. No full build,publication,Full runtime,commit or push claimed for P216.",
+  "progress": "Authoritative completed counts remain2106/2720 points and301/365 files. No unfinished finding entered pending-decisions.csv.",
+  "next": "Complete R2115-R2140 callback/capture/navigation/notification review in order;finish same-file minimal candidate;then apply once,prove lines,build,publish,test,commit,push."
+}
