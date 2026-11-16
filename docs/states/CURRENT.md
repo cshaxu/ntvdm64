@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2379 reviewed:911 restored/confirmed published,0 local restorations,37 approved/policy,
-1431 qualified pending;341 unreviewed. Files331/365 source-reviewed,34 remain;
-P234 file331 verified/published;Git delivery accompanies receipt.
+2382 reviewed:913 restored/confirmed published,0 local restorations,37 approved/policy,
+1432 qualified pending;338 unreviewed. Files332/365 source-reviewed,33 remain;
+P235 file332 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P234 package `49f458dd-ee28-4007-96eb-3ff6e009caa3` published11x2;hashes verified.
-Original ntstubs function order and metadata restored;all16#error retained.
-Mirror2141->2022(-119);5 body/order points restored,14 exclusion-policy points,7 pending.
-Cached x86/x64,33 focused,Full20 including DOS4GW and governance passed.
-Cumulative365-file mirror diff119913->102401(-17512).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p234-checkpoint.json).
-Git delivery accompanies receipt;R2380 next.
+P235 package `35de5568-e9f8-42ff-a787-2cdf99a5fc00` published11x2;hashes verified.
+Original rtlinit large capture restored;capture/lookaside use one product object.
+Mirror91->16(-75);2 restored points,1 four-line header residual pending.
+308 original nonempty logical lines and4 bare#error exclusions checked.
+Cached x86/x64,34 focused,Full20 including DOS4GW and governance passed.
+Cumulative365-file mirror diff119913->102326(-17587).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p235-checkpoint.json).
+Git delivery accompanies receipt;R2383 next.
 
 ## Remaining Scope
 

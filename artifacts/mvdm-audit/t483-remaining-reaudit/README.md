@@ -1390,3 +1390,7 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P234 ntstubs review](p234-ntstubs-review.json): original source order/metadata restored;five compile contexts and private USER boundary evidence;mirror delta-119.
 
 - [P234 delivery](batch-p234-checkpoint.json): ntstubs original ordering and metadata;cached,publish11x2,focused33,Full20;mirror delta-119.
+
+- [P235 rtlinit review](p235-rtlinit-review.json): original large capture restored;single product object;mirror91->16(-75);delivery verified below.
+
+- [P235 delivery](batch-p235-checkpoint.json): rtlinit original large capture and single product object;cached,publish11x2,focused34,Full20;mirror delta-75.

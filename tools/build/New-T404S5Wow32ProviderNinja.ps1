@@ -513,13 +513,6 @@ foreach ($userOwner in @('clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clme
     }
 }
 $classLookupObject = 'obj/opennt-user/class.obj'
-# rtlinit's existing capture implementation and original control allocator
-# are disjoint registered subsets. Keep distinct object identities and retain
-# the capture object above; changing its flags would remove that provider.
-$controlLookasideObject = 'obj/opennt-user/control-lookaside.obj'
-$objects.Add($controlLookasideObject)
-$ninja.Add('build ' + $controlLookasideObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c')))
-$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_LOOKASIDE')
 # Original dialog initialization and shared EDIT DS callbacks use the same
 # registered WOW table as LOCAL*. Do not replace these bodies in an adapter.
 $dialogMemoryObject = 'obj/opennt-user/dialog-memory.obj'

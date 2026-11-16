@@ -89,6 +89,7 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
         STARTUPINFOW startup;
         GetStartupInfoW(&startup);
         state->Teb.StaticUnicodeString.Buffer = state->StaticBuffer;
+        state->Teb.StaticUnicodeBuffer = state->StaticBuffer;
         state->Teb.StaticUnicodeString.MaximumLength = (USHORT)sizeof(state->StaticBuffer);
         state->Parameters.CurrentDirectory.DosPath.Buffer = state->CurrentDirectory;
         state->Parameters.CurrentDirectory.DosPath.MaximumLength = (USHORT)sizeof(state->CurrentDirectory);

@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /* Supplemental host allocator contract only, not guest EDIT acceptance.
- * Link the original rtlinit.c WOW_ORIGINAL_EDIT_LOOKASIDE selection. */
+ * Link the original rtlinit.c allocator and capture translation unit. */
 static unsigned errors;
 /* This fixture does not link the original editor. Its disposable pool is
  * not a second production definition of editec.c's EditLookaside. */

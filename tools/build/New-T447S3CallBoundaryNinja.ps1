@@ -30,6 +30,9 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 # Original state guards and color client must be separate selections: their
 # preprocessor subsets are mutually exclusive, as in the product generator.
 $units = @(
+    @('capture_fixture', 'test/adapter-mvdm-host-out/wow/wow_user_capture_fixture.c', ''),
+    @('capture_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/Gy'),
+    @('capture_tls', 'src/compat/opennt_support_rtl.c', '/Gy'),
     @('def_bits_fixture', 'test/adapter-mvdm-host-out/wow/wow_def_window_bits_fixture.c', ''),
     @('def_bits_owner', 'src/non-mvdm/windows/core/ntuser/client/client.c', '/DWOW_ORIGINAL_DEF_WINDOW_BITS'),
     @('def_bits_boundary', 'src/wow32-dll/source/wow_private_user_compat.c', '/Gy'),
@@ -37,7 +40,6 @@ $units = @(
     @('def_bits_state', 'src/wow32-dll/source/wow_default_message_bindings.c', ''),
     @('original_globals', 'src/non-mvdm/windows/core/ntuser/client/clglobal.c', ''),
     @('lookaside_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_lookaside_fixture.c', ''),
-    @('lookaside_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/DWOW_ORIGINAL_EDIT_LOOKASIDE'),
     @('lookaside_adapter', 'src/wow32-dll/source/wow_edit_lookaside_bindings.c', ''),
     @('conversion_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_conversion_fixture.c', ''),
     @('conversion_adapter', 'src/wow32-dll/source/wow_edit_conversion_bindings.c', ''),
@@ -186,6 +188,7 @@ foreach ($unit in $units) {
 $includes = @('src', 'src/wow32-dll/include', 'src/ntvdm-exe/wow/include',
     'src/ntvdm-exe/softpc/include', 'src/compat/include',
     'src/non-mvdm/public/internal/windows/inc',
+    'src/non-mvdm/public/internal/ds/inc',
     'src/non-mvdm/public/sdk/inc') | ForEach-Object {
         '/I "' + (NinjaValue (Join-Path $root $_)) + '"'
     }
@@ -210,6 +213,9 @@ foreach ($unit in $units) {
     $lines.Add('build obj/' + $unit[0] + '.obj: cc ' + (NinjaPath (Join-Path $root $unit[1])))
     $lines.Add('  extra = ' + $unit[2])
 }
+$lines.Add('build bin/wow_user_capture_fixture.exe: link obj/capture_fixture.obj obj/capture_owner.obj obj/capture_tls.obj obj/original_globals.obj')
+$lines.Add('  libs = ntdll.lib /opt:ref')
+$lines.Add('build original-user-capture-boundary: phony bin/wow_user_capture_fixture.exe')
 $lines.Add('build bin/wow_dialog_call_fixture.exe: link obj/dialog_fixture.obj obj/dialog_adapter.obj')
 $lines.Add('build bin/wow_style_notification_probe.exe: link obj/style_notification_probe.obj')
 $lines.Add('build style-notification-research: phony bin/wow_style_notification_probe.exe')
@@ -275,7 +281,7 @@ $lines.Add('build bin/wow_button_focus_service_probe.exe: link obj/button_focus_
 $lines.Add('build button-focus-research: phony bin/wow_button_focus_service_probe.exe')
 $lines.Add('build dialog-context-boundaries: phony bin/wow_dialog_context_fixture.exe bin/wow_dialog_creation_entry_fixture.exe bin/wow_dialog_finalization_fixture.exe')
 $lines.Add('build call-boundaries: phony bin/wow_dialog_call_fixture.exe bin/wow_edit_call_fixture.exe bin/wow_edit_memory_callbacks_fixture.exe bin/wow_control_brush_fixture.exe bin/wow_default_window_binding_fixture.exe')
-$lines.Add('build bin/wow_edit_lookaside_fixture.exe: link obj/lookaside_fixture.obj obj/lookaside_owner.obj obj/lookaside_adapter.obj obj/original_globals.obj')
+$lines.Add('build bin/wow_edit_lookaside_fixture.exe: link obj/lookaside_fixture.obj obj/capture_owner.obj obj/lookaside_adapter.obj obj/original_globals.obj obj/capture_tls.obj')
 $lines.Add('  libs = ntdll.lib')
 $lines.Add('build bin/wow_edit_conversion_fixture.exe: link obj/conversion_fixture.obj obj/conversion_adapter.obj obj/original_globals.obj')
 $lines.Add('build original-control-globals: phony bin/wow_edit_lookaside_fixture.exe bin/wow_edit_conversion_fixture.exe')

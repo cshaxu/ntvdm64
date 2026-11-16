@@ -1202,8 +1202,8 @@ clinit.c registers six private bytes, not sizeof(PED). EDITWND contains only
 the first four-byte pointer; its size is not the class-registration extent.
 The pinned rtlinit.c SHA-256 is
 D8841BD2F13E5825A84F670EC7CC60923977BF80618D737CBAC2208F94C6523C.
-The existing capture branch remains selected unchanged; a separate
-WOW_ORIGINAL_EDIT_LOOKASIDE branch stages the recovered allocator. The
+P235 restores the original large capture body and composes all capture and
+lookaside functions in one rtlinit product object, without a local selector. The
 private wow_edit_lookaside_bindings boundary supplies a process-lifetime
 initialized critical section and native process-heap operations only.
 Its two original zone declarations derive from public/halkit/inc/nthal.h,
@@ -1211,9 +1211,9 @@ SHA-256 160A574E5C4B0CCF1494735408923A32A1C76CA4E88E5DB27F1562B96DE003E9;
 no kernel zone service is imported. Original free-list, zeroing, fallback,
 cleanup guards and failure ordering are retained rather than replaced by
 an adapter allocator. Guest text remains owned by original WOW callbacks.
-This source is unselected pending the complete EDIT dependency group; grouped
-acceptance must cover pool reuse/exhaustion, allocation failure and terminal
-control cleanup. No guest source or executable modification is admitted.
+Current selection and acceptance are recorded in the P235 mirror audit
+delivery. The maintained allocator fixture covers the original pool contract;
+no guest source or executable modification is admitted.
 
 T447 S3 registers OPENNT-HOST-073: the seven complete original EDIT C units
 under windows/core/ntuser/client, pinned OpenNT revision

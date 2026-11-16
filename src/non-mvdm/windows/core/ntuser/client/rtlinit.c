@@ -11,11 +11,14 @@
 * 14-Jan-1991 mikeke
 \***************************************************************************/
 
-#if !defined(WOW_ORIGINAL_EDIT_LOOKASIDE)
-/* DIVERGENCE(OPENNT-HOST-040): retain original RtlCaptureAnsiString.
- * Other USER initialization/capture routines and private precompiled headers
- * are excluded. The existing worker TLS/heap boundary supplies resources. */
+#define MOVE_TO_RTL
+
 #include "wow_user_capture_bindings.h"
+#include "wow_edit_lookaside_bindings.h"
+#line 17
+#pragma hdrstop
+#line 19
+
 
 #line 21
 /**************************************************************************\
@@ -83,10 +86,69 @@ BOOL RtlCaptureAnsiString(
     return TRUE;
 }
 
-#else
-/* DIVERGENCE(OPENNT-HOST-074): unchanged original control lookaside bodies;
- * only their private USER environment is supplied by the finite binding. */
-#include "wow_edit_lookaside_bindings.h"
+/**************************************************************************\
+* RtlCaptureLargeAnsiString
+*
+* Captures a large ANSI string in the same manner as
+* RtlCaptureAnsiString.
+*
+* 03-22-95 JimA         Created.
+\**************************************************************************/
+
+BOOL RtlCaptureLargeAnsiString(
+    PLARGE_IN_STRING plstr,
+    LPCSTR psz,
+    UINT cchLimit,
+    BOOL fForceAlloc)
+{
+    int cchSrc;
+    UINT uLength;
+
+    plstr->fAllocated = FALSE;
+    plstr->pstr = &plstr->strCapture;
+
+    if (psz) {
+        cchSrc = strlen(psz) + 1;
+
+        /*
+         * If the allocation is forced or if the string is
+         * too long to fit in the TEB, allocate a buffer.
+         * Otherwise, store the result in the TEB.
+         */
+        if (fForceAlloc || cchSrc > STATIC_UNICODE_BUFFER_LENGTH) {
+            plstr->strCapture.Buffer = RtlAllocateHeap(RtlProcessHeap(),
+                    0, cchSrc * sizeof(WCHAR));
+            if (plstr->strCapture.Buffer == NULL)
+                return FALSE;
+            plstr->fAllocated = TRUE;
+            plstr->strCapture.MaximumLength = cchSrc * sizeof(WCHAR);
+        } else {
+            plstr->strCapture.Buffer = NtCurrentTeb()->StaticUnicodeBuffer;
+            plstr->strCapture.MaximumLength =
+                    (UINT)(STATIC_UNICODE_BUFFER_LENGTH * sizeof(WCHAR));
+        }
+
+        /*
+         * Convert the string to Unicode
+         */
+        if (RtlMultiByteToUnicodeN(plstr->pstr->Buffer,
+                plstr->pstr->MaximumLength, &uLength,
+                (LPSTR)psz, cchSrc)) {
+            RIPMSG0(RIP_WARNING, "Unicode conversion failed");
+            if (plstr->fAllocated) {
+                RtlFreeHeap(RtlProcessHeap(), 0, plstr->strCapture.Buffer);
+                plstr->fAllocated = FALSE;
+            }
+            return FALSE;
+        }
+        plstr->pstr->Length = uLength - sizeof(WCHAR);
+    } else {
+        plstr->strCapture.Length = plstr->strCapture.MaximumLength = 0;
+        plstr->strCapture.Buffer = NULL;
+    }
+    return TRUE;
+#line 147
+}
 
 //++
 //
@@ -111,7 +173,6 @@ BOOL RtlCaptureAnsiString(
 /***************************************************************************\
 \***************************************************************************/
 
-#line 172
 #define AllocateFromZone(Zone) \
     (PVOID)((Zone)->FreeList.Next); \
     if ( (Zone)->FreeList.Next ) (Zone)->FreeList.Next = (Zone)->FreeList.Next->Next
@@ -261,10 +322,9 @@ PVOID AllocLookasideEntry(
          */
 #line 319
 #if DBG
-#line 320
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#error
+#line 321
 #endif // DBG
-#line 322
 #line 322
         if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
             return NULL;
@@ -272,10 +332,9 @@ PVOID AllocLookasideEntry(
     RtlZeroMemory(pEntry, pla->EntrySize);
 #line 326
 #if DBG
-#line 327
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#error
+#line 332
 #endif // DBG
-#line 333
 #line 333
 
     return pEntry;
@@ -295,10 +354,9 @@ void FreeLookasideEntry(
 {
 #line 349
 #if DBG
-#line 350
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#error
+#line 351
 #endif // DBG
-#line 352
 #line 352
 
     //
@@ -311,13 +369,12 @@ void FreeLookasideEntry(
     } else {
 #line 361
 #if DBG
-#line 362
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
+#error
+#line 363
 #endif // DBG
-#line 364
 #line 364
         UserLocalFree(pEntry);
     }
 }
 
-#endif /* WOW_ORIGINAL_EDIT_LOOKASIDE */
+

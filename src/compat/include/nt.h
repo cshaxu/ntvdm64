@@ -191,6 +191,7 @@ typedef struct _OPENNT_SUPPORT_PEB {
 typedef struct _OPENNT_SUPPORT_TEB {
     NT_TIB NtTib;
     UNICODE_STRING StaticUnicodeString;
+    PWSTR StaticUnicodeBuffer;
     CLIENT_ID ClientId;
     /* DIVERGENCE(ADAPTER-WIN32-057): selected original RTL error.c records
      * the converted NTSTATUS in the historical per-thread LastStatusValue.

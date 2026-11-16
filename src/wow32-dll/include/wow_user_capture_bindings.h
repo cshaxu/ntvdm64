@@ -11,6 +11,17 @@ typedef struct _IN_STRING {
     BOOL fAllocated;
 } IN_STRING, *PIN_STRING;
 
+/* Original user.h/usercli.h large-capture declarations (Microsoft). */
+#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
+typedef struct _LARGE_IN_STRING {
+    LARGE_UNICODE_STRING strCapture;
+    PLARGE_UNICODE_STRING pstr;
+    BOOL fAllocated;
+} LARGE_IN_STRING, *PLARGE_IN_STRING;
+BOOL WINAPI RtlCaptureLargeAnsiString(PLARGE_IN_STRING, LPCSTR, UINT, BOOL);
+
 /* Original ntpsapi.h constant. Reuse existing opennt_support_current_teb's
  * scratch descriptor; never read or overwrite the modern Windows TEB. */
 #ifndef STATIC_UNICODE_BUFFER_LENGTH

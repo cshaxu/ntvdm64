@@ -1,0 +1,95 @@
+{
+  "points": "R2380-R2382",
+  "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+  "source_pin": {
+    "head": "2b9aaf96a11c8c09ee9131ca45bdbbfabdb7c147",
+    "before_sha256": "6cad16a9876d8a7ab5a926b63848b4106b0b70564fb1f998762e5969ff5c82d4",
+    "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c"
+  },
+  "after_sha256": "eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd",
+  "metric": {
+    "before": {
+      "add": 14,
+      "delete": 77,
+      "total": 91
+    },
+    "after": {
+      "add": 6,
+      "delete": 10,
+      "total": 16
+    }
+  },
+  "delta": -75,
+  "restored": [
+    2380,
+    2381
+  ],
+  "pending": [
+    2382
+  ],
+  "dispositions": {
+    "R2380": "Original RtlCaptureLargeAnsiString body and comment restored verbatim. Original LARGE_UNICODE_STRING selected from existing user.h; original five-line LARGE_IN_STRING declaration exposed in existing binding. Existing TLS StaticBuffer is retained; private support TEB receives a stable pointer, not native Windows TEB layout. No new allocation algorithm. No current production call to Large capture is claimed.",
+    "R2381": "Original zone allocator source and position restored/confirmed. Capture and lookaside now compiled together once in product. Remove redundant control-lookaside product object and WOW_ORIGINAL_EDIT_LOOKASIDE selection. Four pre-existing excluded DBG bodies remain bare#error;original logical lines restored.",
+    "R2382": "Original RtlCaptureAnsiString unchanged. Remaining non-exclusion difference is two original includes replaced by two finite binding headers (+2/-2=4). Actual original precomp restoration fails on private CSR declarations and missing ntos.h;ntimage.h missing and unused by all selected bodies. No new precomp shim."
+  },
+  "complete_call_chain": {
+    "capture": "WOW message conversion -> original RtlCaptureAnsiString -> existing support TLS / NTDLL conversion / process heap;Large restored to same original translation unit,with direct fixture caller.",
+    "lookaside": "Recovered EDIT/dialog pools -> original InitLookaside/AllocLookasideEntry/FreeLookasideEntry -> original clglobal gcsLookaside + existing initialization facade + native critical section/heap.",
+    "ownership": "One original rtlinit product object. Private compatibility TEB owns thread scratch storage;Windows TEB is not accessed with this layout."
+  },
+  "four_rung_ledger": {
+    "original": "All five original function bodies now composed unchanged outside excluded DBG. Original MOVE_TO_RTL and pragma restored.",
+    "smallest_facade": "Existing two binding headers provide original declarations and modern heap/critical section names;two-line stable buffer field/init uses existing allocation. Original precomp closure requires unsupported NT4 CSR/kernel headers.",
+    "external_intrusion": "Not applicable;no external/guest change.",
+    "new_behavior": "No new capture or allocation algorithm. Test and build wiring changes only beyond the finite carrier declaration."
+  },
+  "counter_review": {
+    "descriptor_alias_rejected": "StaticUnicodeString.Buffer is mutable. Large capture requires stable StaticUnicodeBuffer;fixture rebinds descriptor to separate buffer and asserts it remains unchanged.",
+    "no_complexity_transfer": "Removed product duplicate object/selector. No copied function body or second algorithm added to compat.",
+    "line_proof": {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "sha256": "eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd",
+      "matching_nonempty_original_rows": 308,
+      "mismatches": [],
+      "error_count": 4,
+      "all_errors_bare": true,
+      "newline": "CRLF",
+      "files": [
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+          "sha256": "eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd"
+        }
+      ]
+    },
+    "initial_focused_failures": [
+      "Missing ntimage.h, omitted with concrete compile proof",
+      "New fixture omitted existing ds/inc crypt.h include path,corrected",
+      "Combined full original unit exposes existing gcsLookaside dependency in capture fixture;link existing original_globals object,do not fake global or re-add selector"
+    ],
+    "post_build_nonfunctional_comment_change": [
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_edit_lookaside_fixture.c",
+        "before_sha256": "ed496cb2f203d43a1867df6db94aed8d7cf1775ef5470fbc07637810dc391748",
+        "proof": "Only same-line C comment text changed;all non-comment characters and line count identical",
+        "after_sha256": "cfc8be3bf5081c6774516dc0e7a17b63c79364de135e31f9c05499748718845a"
+      }
+    ]
+  },
+  "evidence_paths": [
+    "build/t483-s5-p235/header-compile.log",
+    "build/t483-s5-p235/focused-repaired/build.stdout.log",
+    "build/t483-s5-p235/focused-combined/build.stdout.log",
+    "build/t483-s5-p235/source-checkpoint.json"
+  ],
+  "verification": "Final cached x86/x64,publication11x2,focused34,Full20,logical lines and governance passed",
+  "product_link_owner_proof": {
+    "symbols": [
+      "0001:0004c3a0       _AllocLookasideEntry@4     1004d3a0 f   rtlinit.obj",
+      "0001:0004c400       _FreeLookasideEntry@8      1004d400 f   rtlinit.obj",
+      "0001:0004c450       _InitLookaside@12          1004d450 f   rtlinit.obj",
+      "0001:0004c520       _RtlCaptureAnsiString@12   1004d520 f   rtlinit.obj"
+    ],
+    "large_capture": "No production caller;normal dead-code removal omits Large capture from final WOW32 map. Actual original function is compiled and exercised by maintained fixture;no claim of new runtime consumer."
+  },
+  "delivery_receipt": "batch-p235-checkpoint.json"
+}

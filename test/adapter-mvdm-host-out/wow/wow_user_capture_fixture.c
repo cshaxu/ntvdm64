@@ -50,6 +50,36 @@ static void capture_case(const char *text, BOOL force, BOOL allocated)
     if (value.fAllocated) CHECK(HeapFree(GetProcessHeap(), 0, value.strCapture.Buffer));
 }
 
+static void large_capture_cases(void)
+{
+    LARGE_IN_STRING value = {0};
+    POPENNT_SUPPORT_TEB teb = NtCurrentTeb();
+    PWSTR buffer = teb->StaticUnicodeBuffer;
+    UNICODE_STRING saved = teb->StaticUnicodeString;
+    WCHAR other[8] = L"keep";
+    char boundary[263];
+    CHECK(RtlCaptureLargeAnsiString(&value, NULL, (UINT)-1, FALSE));
+    CHECK(!value.fAllocated && !value.pstr->Buffer && !value.pstr->Length);
+    teb->StaticUnicodeString.Buffer = other;
+    CHECK(RtlCaptureLargeAnsiString(&value, "large", (UINT)-1, FALSE));
+    CHECK(!value.fAllocated && value.pstr->Buffer == buffer);
+    CHECK(value.pstr->Length == 10 && !wcscmp(buffer, L"large"));
+    CHECK(!wcscmp(other, L"keep"));
+    teb->StaticUnicodeString = saved;
+    CHECK(RtlCaptureLargeAnsiString(&value, "forced", (UINT)-1, TRUE));
+    CHECK(value.fAllocated && value.pstr->Buffer != buffer);
+    CHECK(!wcscmp(value.pstr->Buffer, L"forced"));
+    if (value.fAllocated) CHECK(HeapFree(GetProcessHeap(), 0, value.pstr->Buffer));
+    memset(boundary, 'x', sizeof(boundary));
+    boundary[260] = 0;
+    CHECK(RtlCaptureLargeAnsiString(&value, boundary, (UINT)-1, FALSE));
+    CHECK(!value.fAllocated && value.pstr->Length == 520);
+    boundary[260] = 'x'; boundary[261] = 0;
+    CHECK(RtlCaptureLargeAnsiString(&value, boundary, (UINT)-1, FALSE));
+    CHECK(value.fAllocated && value.pstr->Length == 522);
+    if (value.fAllocated) CHECK(HeapFree(GetProcessHeap(), 0, value.pstr->Buffer));
+}
+
 int __cdecl main(void)
 {
     char boundary[131];
@@ -57,6 +87,7 @@ int __cdecl main(void)
     IN_STRING main_value, rejected;
     HANDLE thread;
     DWORD result = 1;
+    large_capture_cases();
     capture_case(NULL, FALSE, FALSE);
     capture_case(NULL, TRUE, FALSE);
     capture_case("", FALSE, FALSE);

@@ -786,11 +786,12 @@ allocator fixture uses its own private pool rather than supplying a production
 control global. The adapter owns only the shared host lock initialization.
 No second lock, pool or allocator is introduced. Entry failure/order fixtures
 are staged but unrun; complete group selection and acceptance remain pending.
-The production generator now names these staged bindings and selects original
-rtlinit.c's lookaside subset as a distinct control-lookaside object, retaining
-its existing string-capture object. Original EDIT/dialog/getset body selection
-and private-precomp wiring are still pending: the intermediate source graph
-is not a link-complete or validated candidate.
+P235 supersedes the earlier split: the product now compiles original rtlinit.c
+once for ordinary/large string capture and lookaside allocation. The private
+TEB exposes its existing stable scratch buffer to the original large-capture
+body; no native Windows TEB layout is assumed. Maintained capture and allocator
+fixtures link this same original translation unit. Current delivery evidence
+is indexed by the active mirror-diff audit register.
 
 The EDIT-private menu compile seam binds original hmodUser to the existing
 WOW32 DllInitialize module handle, where OPENNT-HOST-087's menu is linked.
