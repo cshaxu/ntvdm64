@@ -1,0 +1,48 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+  "before_sha256": "6f580cc7ab234048548f5afb2829a519a5249c40eb6c418a6f1cec5b9e739274",
+  "after_sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d",
+  "original_sha256": "fb9dd31919b7b90db2f713daa83684f1231558e7653ae72cd72458f1212000f1",
+  "non_exclusion_diff": 0,
+  "excluded": [
+    {
+      "original_start": 400,
+      "original_count": 4,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register."
+    }
+  ],
+  "line_corrections": [
+    {
+      "source": "#else",
+      "before": 401,
+      "original": 404
+    }
+  ],
+  "original_literal_nonempty_lines": 487,
+  "status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "metric": {
+    "add": 1,
+    "delete": 4,
+    "delta": 0
+  },
+  "actual_product_preprocessing": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+    "sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d",
+    "selected_rows": 270,
+    "literal_original_matches_at_mapped_line": 221
+  },
+  "cached_full_build": "x86/x64 passed;build-run.exit0",
+  "publication": {
+    "status": "published",
+    "package": "c1df284c-da52-4c49-9c59-6e69c983940c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p231-checkpoint.json",
+  "initial_source_review_status": "Original selected bodies confirmed;only line metadata repaired;actual preprocessing pending next batch"
+}

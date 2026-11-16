@@ -53,6 +53,7 @@ LONG SLCreate(
 #ifdef SUPPORT_LPK
 #line 53
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 55
 #endif
 #line 56
 
@@ -125,6 +126,7 @@ BOOL SLUndo(
 #ifdef NEVER
 #line 123
 #error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
+#line 129
 #else
 #line 130
 

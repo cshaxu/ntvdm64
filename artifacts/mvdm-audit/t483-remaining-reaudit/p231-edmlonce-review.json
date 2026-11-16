@@ -1,0 +1,48 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+  "before_sha256": "82c8d05db575da9d6e3ede1464b61a06a4f8f6aa17ecc9f1af87f605761e9ab9",
+  "after_sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069",
+  "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
+  "non_exclusion_diff": 0,
+  "excluded": [
+    {
+      "original_start": 73,
+      "original_count": 4,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    }
+  ],
+  "line_corrections": [
+    {
+      "source": "#else",
+      "before": 74,
+      "original": 77
+    }
+  ],
+  "original_literal_nonempty_lines": 99,
+  "status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "metric": {
+    "add": 1,
+    "delete": 4,
+    "delta": 0
+  },
+  "actual_product_preprocessing": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+    "sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069",
+    "selected_rows": 43,
+    "literal_original_matches_at_mapped_line": 25
+  },
+  "cached_full_build": "x86/x64 passed;build-run.exit0",
+  "publication": {
+    "status": "published",
+    "package": "c1df284c-da52-4c49-9c59-6e69c983940c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p231-checkpoint.json",
+  "initial_source_review_status": "Original selected bodies confirmed;only line metadata repaired;actual preprocessing pending next batch"
+}

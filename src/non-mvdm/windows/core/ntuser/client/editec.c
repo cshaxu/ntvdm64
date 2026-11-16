@@ -310,6 +310,7 @@ void  ECMenu(
 #ifdef SUPPORT_LPK
 #line 310
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 312
 #endif // SUPPORT_LPK
 #line 313
 
@@ -353,6 +354,7 @@ void  ECMenu(
 #ifdef SUPPORT_LPK
 #line 351
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 355
 #endif // SUPPORT_LPK
 #line 356
 
@@ -511,6 +513,7 @@ UINT ECTabTheTextOut(
 #ifdef DEBUG
 #line 509
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#line 517
 #endif
 #line 518
 
@@ -1683,6 +1686,7 @@ BOOL ECInsertText(
 #ifdef SUPPORT_LPK
 #line 1685
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 1688
 #endif // SUPPORT_LPK
 #line 1689
 
@@ -1957,6 +1961,7 @@ void   ECResetTextInfo(PED ped)
 #ifdef SUPPORT_LPK
 #line 1958
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 1960
 #endif // SUPPORT_LPK
 #line 1961
     if (ped->fSingle) {
@@ -1967,6 +1972,7 @@ void   ECResetTextInfo(PED ped)
 #ifdef BOGUS
 #line 1966
 #error DIVERGENCE OPENNT-HOST-131: BOGUS branch is not selected; see mirror register.
+#line 1970
 #endif
 #line 1971
         MLBuildchLines(ped, 0, 0, FALSE, NULL, NULL);
@@ -2034,6 +2040,7 @@ BOOL ECSetText(
 #ifdef NEVER
 #line 2033
 #error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
+#line 2041
 #endif
 #line 2042
 
@@ -2328,6 +2335,7 @@ LONG EditWndProc(
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
 #line 2331
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 2340
 #endif // SUPPORT_LPK
 #line 2341
             goto HandleEditMsg;
@@ -2338,6 +2346,7 @@ LONG EditWndProc(
 #ifdef SUPPORT_LPK
 #line 2346
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 2355
 #endif // SUPPORT_LPK
 #line 2356
 
@@ -2346,6 +2355,7 @@ LONG EditWndProc(
 #ifdef SUPPORT_LPK
 #line 2359
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 2362
 #endif // SUPPORT_LPK
 #line 2363
         goto HandleEditMsg;
@@ -2891,7 +2901,6 @@ HBRUSH ECGetControlBrush(
     UserAssert(pwndSend);
 
     if (PtiCurrent() != GETPTI(pwndSend)) {
-        /* DIVERGENCE(OPENNT-HOST-103): bounded host-default color adapter. */
 #line 2906
         return (HBRUSH)wow_edit_default_control_color(pwndSend, message,
                 (DWORD)hdc, (LONG)pwndEdit, ped->fAnsi);

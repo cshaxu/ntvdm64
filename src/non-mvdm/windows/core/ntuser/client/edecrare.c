@@ -23,6 +23,7 @@ typedef BOOL (*PFNCHARWIDTH)(HDC, UINT, UINT, LPINT);
 #ifdef SUPPORT_LPK
 #line 23
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 58
 #endif // SUPPORT_LPK
 #line 59
 
@@ -287,6 +288,7 @@ BOOL ECCreate(
 #ifdef SUPPORT_LPK
 #line 318
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 321
 #endif // SUPPORT_LPK
 #line 322
     return TRUE;
@@ -345,6 +347,7 @@ void ECNcDestroyHandler(
 #ifdef SUPPORT_LPK
 #line 375
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 378
 #endif // SUPPORT_LPK
 #line 379
 
@@ -396,6 +399,7 @@ void ECSetPasswordChar(
 #ifdef SUPPORT_LPK
 #line 425
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 427
 #endif // SUPPORT_LPK
 #line 428
 
@@ -623,6 +627,7 @@ void   ECSetFont(
 #ifdef DEBUG
 #line 650
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#line 653
 #endif
 #line 654
     } else {
@@ -724,6 +729,7 @@ void   ECSetFont(
 #ifdef SUPPORT_LPK
 #line 750
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 770
 #endif // SUPPORT_LPK
 #line 771
 

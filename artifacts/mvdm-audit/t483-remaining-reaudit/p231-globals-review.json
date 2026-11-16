@@ -1,0 +1,72 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+  "before_sha256": "a71a30beeb6a3bce234b549e6a8554f95f570d8af5ac7214069a044a34b22150",
+  "after_sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8",
+  "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+  "metric": {
+    "before": 81,
+    "after": 13,
+    "add": 2,
+    "delete": 11
+  },
+  "binding_header_before_sha256": "dc77035bddfbc9f5428286e09511cca2ad1b2bf38a34301a33e7123a87272a6a",
+  "binding_header_after_sha256": "8d4db19c0ee552ce3bc3f3cb270ad6cec80c173a3e8f6bac5efa31dcdd1c00c4",
+  "retained_omitted_original_lines": [
+    27,
+    37,
+    38,
+    42,
+    77
+  ],
+  "evidence": "Three actual product compile commands:full-original failed2 each;partial declarations passed0 each;early original callback declarations passed0 each. Overlay early include evidence is not final product validation.",
+  "status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "line_proof": {
+    "nonempty_original_rows": 104,
+    "errors": 0,
+    "excluded": 2
+  },
+  "final_product_compiles": {
+    "editec": 0,
+    "dlgmgr": 0,
+    "combo": 0,
+    "overlay": false,
+    "forced_header": false
+  },
+  "residual_evidence": {
+    "27": "PSERVERINFO is original private server state;selected EDIT binding uses smaller wow_edit_current;original declaration type unavailable,real compiler C2061. Original USER server state not imported.",
+    "37,38": "RESCALLS/PRESCALLS private resource provider table types absent at real consumer;resource operations delegated to existing host bindings,not original server registration. Real compiler C2061.",
+    "42": "CFNSCSENDMESSAGE private CSR/server dispatch type absent;actual selected service boundaries use native USER bindings. Real compiler C2061.",
+    "77": "ICLS_MAX private class registry count unavailable;original server class-table owner not imported. Real compiler C2065/C2057."
+  },
+  "actual_product_preprocessing": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+    "sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8",
+    "selected_rows": 51,
+    "literal_original_matches_at_mapped_line": 44
+  },
+  "cached_full_build": "x86/x64 passed;build-run.exit0",
+  "publication": {
+    "status": "published",
+    "package": "c1df284c-da52-4c49-9c59-6e69c983940c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "focused_first_failure": {
+    "phase": "fixture compilation",
+    "case": "conversion_fixture",
+    "reason": "Redundant globals.h include lacks private declaration types;fixture only uses its already declared gabThunkMessage table",
+    "resolution": "Remove unused globals.h include;keep all assertions and real original table link",
+    "product_source_changed": false
+  },
+  "focused_repaired": {
+    "exit": 0,
+    "case_exits": 33
+  },
+  "delivery_receipt": "batch-p231-checkpoint.json",
+  "initial_source_review_status": "Local whole-file candidate;final actual compile/build/publication/test/commit/push pending"
+}

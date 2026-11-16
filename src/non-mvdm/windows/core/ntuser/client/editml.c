@@ -33,6 +33,7 @@ UINT MLGetLineWidth(HDC hdc, LPSTR lpstr, int nCnt, PED ped)
 #ifdef SUPPORT_LPK
 #line 33
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 37
 #endif
 #line 38
     return(ECTabTheTextOut(hdc, 0, 0, 0, 0, lpstr, nCnt, 0, ped, 0, ECT_CALC, NULL));
@@ -518,6 +519,7 @@ void MLIchToXYPos(
 #ifdef SUPPORT_LPK
 #line 518
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 522
 #endif
 #line 523
         if (ped->format != ES_LEFT) {
@@ -575,6 +577,7 @@ ICH MLMouseToIch(
 #ifdef SUPPORT_LPK
 #line 572
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 575
 #endif
 #line 576
 
@@ -1397,6 +1400,7 @@ void MLBuildchLines(
 #ifdef SUPPORT_LPK
 #line 1393
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 1400
 #endif
 #line 1401
                 {
@@ -1482,6 +1486,7 @@ void MLBuildchLines(
 #if 0
 #line 1482
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 1488
 #endif
 #line 1489
         while (AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, ' ') ||
@@ -2346,6 +2351,7 @@ ICH PASCAL NEAR MLPasteText(
 #ifdef UNDO_CLEANUP           // #ifdef Added in Chicago  - johnl
 #line 2346
 #error DIVERGENCE OPENNT-HOST-133: UNDO_CLEANUP branch is not selected; see mirror register.
+#line 2355
 #endif
 #line 2356
 
@@ -2748,6 +2754,7 @@ AddDelta:
 #ifdef SUPPORT_LPK
 #line 2753
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 2762
 #endif
 #line 2763
             fUp = TRUE;
@@ -2814,6 +2821,7 @@ void MLSetFocus(
 #ifdef SUPPORT_LPK
 #line 2824
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 2827
 #endif
 #line 2828
             bDoCaret = TRUE;
@@ -2891,6 +2899,7 @@ void MLKillFocus(
 #ifdef SUPPORT_LPK
 #line 2898
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 2901
 #endif
 #line 2902
             bKillCaret = TRUE;
@@ -3112,6 +3121,7 @@ LONG MLEditWndProc(
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
 #line 3118
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 3139
 #endif
 #line 3140
 
@@ -3125,6 +3135,7 @@ LONG MLEditWndProc(
 #ifdef SUPPORT_LPK
 #line 3148
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 3154
 #endif
 #line 3155
         MLKeyDown(ped, (UINT)wParam, 0);
@@ -3140,6 +3151,7 @@ LONG MLEditWndProc(
 #ifdef SUPPORT_LPK
 #line 3165
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 3171
 #endif
 #line 3172
         MLKillFocus(ped);
@@ -3571,6 +3583,7 @@ void MLDrawText(
 #ifdef SUPPORT_LPK
 #line 3598
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
+#line 3605
 #endif
 #line 3606
 

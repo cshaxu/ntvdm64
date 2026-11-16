@@ -400,6 +400,7 @@ void MLSetSelection(
 #ifdef KOREA
 #line 400
 #error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.
+#line 404
 #else
 #line 405
     if (!fDoNotScrollCaret)

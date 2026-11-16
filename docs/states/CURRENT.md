@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2312 reviewed:894 restored/confirmed published,0 local restorations,13 approved/policy,
-1405 qualified pending;408 unreviewed. Files316/365 source-reviewed,49 remain;
-P230 file316 verified/published;Git delivery accompanies receipt.
+2325 reviewed:896 restored/confirmed published,0 local restorations,21 approved/policy,
+1408 qualified pending;395 unreviewed. Files324/365 source-reviewed,41 remain;
+P231 file324 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P230 package `5f136ccb-db61-4d7c-b254-220c48d0e61f` published11x2;hashes verified.
-Drawtext original Unicode bodies restored;ANSI provider boundary pending owner.
-Mirror diff239->137(-102);two points partially restored,not counted as whole restores.
-Cached x86/x64,32 fixtures,Full20 including DOS4GW and governance passed.
-Cumulative365-file diff119913->102829(-17084).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p230-checkpoint.json).
-Git delivery accompanies receipt;R2313 next.
+P231 package `c1df284c-da52-4c49-9c59-6e69c983940c` published11x2;hashes verified.
+Original globals declarations and callback include ordering restored;seven EDIT
+files have line/comment-only corrections. Mirror delta-69;two whole restores,
+three minimized pending boundaries,remaining points exclusion-policy.
+Cached x86/x64,32 focused,Full20 including DOS4GW and governance passed.
+Cumulative365-file mirror diff119913->102760(-17153).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p231-checkpoint.json).
+Git delivery accompanies receipt;R2326 next.
 
 ## Remaining Scope
 
@@ -208,3 +209,9 @@ P230 verified/published:drawtext239->137(-102);Unicode source restored,
 ANSI residuals remain pending. Actual original full link fails;partial restored
 product and fixture pass. Cached,publish11x2,focused32,Full20,governance passed.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p230-checkpoint.json).
+
+P231 verified/published:8 mirror files,13 points;line/comment repairs and
+original globals declaration recovery. First focused compilation failure was
+an unused fixture globals include;removed it,kept assertions,repaired32 pass.
+Full20 passes;owner boundary decisions remain separate from restored points.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p231-checkpoint.json).

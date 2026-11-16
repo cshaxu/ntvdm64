@@ -1,6 +1,5 @@
 #include "wow_edit_conversion_bindings.h"
 #include "wow_edit_entry_bindings.h"
-#include "non-mvdm/windows/core/ntuser/client/globals.h"
 #include <stdio.h>
 
 extern CONST BOOLEAN gabThunkMessage[WM_USER];

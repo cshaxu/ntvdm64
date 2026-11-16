@@ -1,0 +1,183 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+  "before_sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+  "after_sha256": "fc4b0192251586b594ef38052282667b613e2afa939dc0d2683f8eca5b9e6258",
+  "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+  "non_exclusion_diff": 0,
+  "excluded": [
+    {
+      "original_start": 33,
+      "original_count": 4,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 518,
+      "original_count": 4,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 532,
+      "original_count": 1,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 572,
+      "original_count": 3,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1393,
+      "original_count": 7,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 1482,
+      "original_count": 6,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+    },
+    {
+      "original_start": 1746,
+      "original_count": 1,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+    },
+    {
+      "original_start": 2346,
+      "original_count": 9,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-133: UNDO_CLEANUP branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 2753,
+      "original_count": 9,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 2824,
+      "original_count": 3,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 2846,
+      "original_count": 1,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register."
+    },
+    {
+      "original_start": 2898,
+      "original_count": 3,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 3118,
+      "original_count": 21,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 3148,
+      "original_count": 6,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 3165,
+      "original_count": 6,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 3598,
+      "original_count": 7,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    }
+  ],
+  "line_corrections": [
+    {
+      "source": "#endif",
+      "before": 34,
+      "original": 37
+    },
+    {
+      "source": "#endif",
+      "before": 519,
+      "original": 522
+    },
+    {
+      "source": "#endif",
+      "before": 573,
+      "original": 575
+    },
+    {
+      "source": "#endif",
+      "before": 1394,
+      "original": 1400
+    },
+    {
+      "source": "#endif",
+      "before": 1483,
+      "original": 1488
+    },
+    {
+      "source": "#endif",
+      "before": 2347,
+      "original": 2355
+    },
+    {
+      "source": "#endif",
+      "before": 2754,
+      "original": 2762
+    },
+    {
+      "source": "#endif",
+      "before": 2825,
+      "original": 2827
+    },
+    {
+      "source": "#endif",
+      "before": 2899,
+      "original": 2901
+    },
+    {
+      "source": "#endif",
+      "before": 3119,
+      "original": 3139
+    },
+    {
+      "source": "#endif",
+      "before": 3149,
+      "original": 3154
+    },
+    {
+      "source": "#endif",
+      "before": 3166,
+      "original": 3171
+    },
+    {
+      "source": "#endif",
+      "before": 3599,
+      "original": 3605
+    }
+  ],
+  "original_literal_nonempty_lines": 3158,
+  "status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "metric": {
+    "add": 16,
+    "delete": 91,
+    "delta": 0
+  },
+  "actual_product_preprocessing": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+    "sha256": "fc4b0192251586b594ef38052282667b613e2afa939dc0d2683f8eca5b9e6258",
+    "selected_rows": 1888,
+    "literal_original_matches_at_mapped_line": 1397
+  },
+  "cached_full_build": "x86/x64 passed;build-run.exit0",
+  "publication": {
+    "status": "published",
+    "package": "c1df284c-da52-4c49-9c59-6e69c983940c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p231-checkpoint.json",
+  "initial_source_review_status": "Original selected bodies confirmed;only line metadata repaired;actual preprocessing pending next batch"
+}

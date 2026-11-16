@@ -1,0 +1,102 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+  "before_sha256": "fa407b77a11dddfecfbeb780140e679553f2fe8706c16adc13b25f82c1bb43e8",
+  "after_sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+  "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+  "line_corrections": [
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 311,
+      "original": 312
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 352,
+      "original": 355
+    },
+    {
+      "source": "#endif",
+      "before": 510,
+      "original": 517
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 1686,
+      "original": 1688
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 1959,
+      "original": 1960
+    },
+    {
+      "source": "#endif",
+      "before": 1967,
+      "original": 1970
+    },
+    {
+      "source": "#endif",
+      "before": 2034,
+      "original": 2041
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 2332,
+      "original": 2340
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 2347,
+      "original": 2355
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 2360,
+      "original": 2362
+    }
+  ],
+  "original_literal_nonempty_lines": 2426,
+  "excluded_branches": 10,
+  "metric": {
+    "before": 65,
+    "after": 64,
+    "add": 11,
+    "delete": 53,
+    "delta": -1
+  },
+  "R2314": "Source line correction complete;selected preprocessing pending accumulated batch",
+  "R2315": {
+    "decision": "Retain one renamed call pending owner;remove redundant provenance comment",
+    "evidence": [
+      "Original clmsg.c WM_CTLCOLORSTATIC reads WFWIN40COMPAT and selects COLOR_3DFACE or COLOR_WINDOW.",
+      "wow_window_words_binding.c resource-state projection zero-initializes WND and copies public style/geometry/module;it deliberately has no creator version. Thus restoring the original call on an observed native parent uses a fabricated false compatibility flag.",
+      "ECGetControlBrush selects different-thread parent or owner;this can be a resource-only native graph node. General default dispatch cannot treat every LPARAM as PWND:other callers pass public HWND.",
+      "wow_edit_default_control_color keeps original worker for known creation facts;for missing native facts it converts the exact source PWND to HWND and delegates USER policy. No additional provider or copied color algorithm is proposed."
+    ],
+    "alternatives": "Cannot recover private creator compatibility from public style,module or current process version without guessing. Aliasing the complete DefWindowProcWorker name to this color entry would misinterpret other LPARAM callers;moving equivalent special handling into another shim does not simplify ownership.",
+    "limits": "Source/ABI necessity proof for native-recipient boundary;existing stub tests do not establish live cross-thread color result. That runtime coverage is not claimed.",
+    "remaining_diff": "+1/-1 renamed call;no net-new code"
+  },
+  "status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "newline": "Original CRLF retained",
+  "actual_product_preprocessing": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+    "sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+    "selected_rows": 1429,
+    "literal_original_matches_at_mapped_line": 1089
+  },
+  "cached_full_build": "x86/x64 passed;build-run.exit0",
+  "publication": {
+    "status": "published",
+    "package": "c1df284c-da52-4c49-9c59-6e69c983940c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p231-checkpoint.json",
+  "initial_source_review_status": "Whole-file source audit complete;line metadata and comment-only reduction;actual preprocessing and delivery pending"
+}

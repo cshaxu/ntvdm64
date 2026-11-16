@@ -1,0 +1,99 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+  "before_sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
+  "after_sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47",
+  "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+  "non_exclusion_diff": 0,
+  "excluded": [
+    {
+      "original_start": 23,
+      "original_count": 35,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 318,
+      "original_count": 3,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 375,
+      "original_count": 3,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 425,
+      "original_count": 2,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    },
+    {
+      "original_start": 650,
+      "original_count": 3,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected"
+    },
+    {
+      "original_start": 750,
+      "original_count": 20,
+      "replacement": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register."
+    }
+  ],
+  "line_corrections": [
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 24,
+      "original": 58
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 319,
+      "original": 321
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 376,
+      "original": 378
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 426,
+      "original": 427
+    },
+    {
+      "source": "#endif",
+      "before": 651,
+      "original": 653
+    },
+    {
+      "source": "#endif // SUPPORT_LPK",
+      "before": 751,
+      "original": 770
+    }
+  ],
+  "original_literal_nonempty_lines": 657,
+  "status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "metric": {
+    "add": 6,
+    "delete": 66,
+    "delta": 0
+  },
+  "newline": "Original CRLF retained",
+  "actual_product_preprocessing": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+    "sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47",
+    "selected_rows": 395,
+    "literal_original_matches_at_mapped_line": 272
+  },
+  "cached_full_build": "x86/x64 passed;build-run.exit0",
+  "publication": {
+    "status": "published",
+    "package": "c1df284c-da52-4c49-9c59-6e69c983940c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_status": "Cached x86/x64,11x2 publication,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "delivery_receipt": "batch-p231-checkpoint.json",
+  "initial_source_review_status": "Original selected bodies confirmed;only line metadata repaired;actual preprocessing pending next batch"
+}

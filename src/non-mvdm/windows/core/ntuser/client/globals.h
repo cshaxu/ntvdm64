@@ -14,37 +14,83 @@
 #ifndef _GLOBALS_
 #define _GLOBALS_
 
-#line 18
+// Debug globals
 #if DBG
-#line 19
 #error Excluded unsupported original DBG globals
 #endif
-#line 21
+
+int gcWheelDelta;
+
+extern WCHAR awchSlashStar[];
+extern CHAR achSlashStar[];
+
+#line 28
+extern SHAREDINFO gSharedInfo;
+
+extern HMODULE hmodUser;            // USER.DLL's hmodule
+extern HMODULE hModApp;             // The application's module
+
+extern BOOL gfServerProcess;        // USER is linked on the CSR server side.
+extern BOOL gfSystemInitialized;    // System has been initialized
+extern ACCESS_MASK gamWinSta;       // ACCESS_MASK for the current WindowStation
+
+#line 38
+#line 39
+
+extern PVOID pUserHeap;
 
 #line 43
 extern CONST BOOLEAN gabThunkMessage[];
-#line 47
-extern WCHAR szOneChar[];
 
-#line 79
+extern WCHAR szUSER32[];
+extern WCHAR szNull[];
+extern WCHAR szOneChar[];
+extern WCHAR szSLASHSTARDOTSTAR[];
+extern LPWSTR pTimeTagArray[];
+
+extern RECT rcScreen;
+
+extern BYTE mpTypeCcmd[];
+extern BYTE mpTypeIich[];
+extern unsigned int SEBbuttons[];
+extern BYTE rgReturn[];
+
+extern WCHAR szERROR[];
+
+extern ATOM atomBwlProp;
+extern ATOM atomMsgBoxCallback;
+
+extern CRITICAL_SECTION gcsLookaside;
+extern CRITICAL_SECTION gcsHdc;
+extern CRITICAL_SECTION gcsClipboard;
+
+extern HDC    ghdcBits2;
+extern HDC    ghdcGray;
+extern HFONT  ghFontSys;
+extern HBRUSH ghbrWindowText;
+extern int    gcxGray;
+extern int    gcyGray;
+extern PCHAR  gpOemToAnsi;
+extern PCHAR  gpAnsiToOem;
+
+
+#line 78
+
 /*
  * LATER: client-side user needs to use moveable memory objects for
  * WOW compatibility (at least until/if/when we copy all the edit control
  * code into 16-bit space);  that's also why we can't just party with
  * handles like LMHtoP does... -JeffPar
  */
-#line 85
 #ifndef RC_INVOKED       // RC can't handle #pragmas
-#line 86
 #undef  LHND
 #define LHND                (LMEM_MOVEABLE | LMEM_ZEROINIT)
 
 #undef  LMHtoP
 #define LMHtoP(handle)      // Don't use this macro
 #endif
-#line 92
 
-#line 93
+
 /*
  * WOW HACK - apps can pass a global handle as the hInstance on a call
  * to CreateWindow for an edit control and expect allocations for the
@@ -55,7 +101,6 @@ extern WCHAR szOneChar[];
  * (SAS 6-18-92) added hack for all macros
  */
 
-#line 104
 #define LOCALALLOC(dwFlags, dwBytes, hInstance)         \
                             (*pfnLocalAlloc)(dwFlags, dwBytes, hInstance)
 #define LOCALREALLOC(hMem, dwBytes, dwFlags, hInstance, ppv) \
@@ -69,14 +114,28 @@ extern WCHAR szOneChar[];
 #define LOCALFREE(hMem, hInstance)                      \
                             (*pfnLocalFree)(hMem, hInstance)
 
+extern PFNLALLOC            pfnLocalAlloc;
+extern PFNLREALLOC          pfnLocalReAlloc;
+extern PFNLLOCK             pfnLocalLock;
+extern PFNLUNLOCK           pfnLocalUnlock;
+extern PFNLSIZE             pfnLocalSize;
+extern PFNLFREE             pfnLocalFree;
+extern PFNGETEXPWINVER      pfnGetExpWinVer;
+extern PFNINITDLGCB         pfnInitDlgCallback;
+extern PFN16GALLOC          pfn16GlobalAlloc;
+extern PFN16GFREE           pfn16GlobalFree;
+extern PFNGETMODFNAME       pfnGetModFileName;
+extern PFNEMPTYCB           pfnWowEmptyClipBoard;
+extern PFNWOWWNDPROCEX      pfnWowWndProcEx;
+extern PFNWOWEDITNEXTWORD   pfnWowEditNextWord;
+extern PFNWOWSETFAKEDIALOGCLASS   pfnWowSetFakeDialogClass;
+extern PFNWOWCBSTOREHANDLE  pfnWowCBStoreHandle;
 
 
-#line 135
 #ifdef WX86
-#line 136
 #error Excluded unsupported original WX86 globals
+#line 141
 #endif
-#line 142
+
 
 #endif // ndef _GLOBALS_
-#line 145

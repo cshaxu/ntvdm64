@@ -1360,3 +1360,15 @@ evidence;the existing retirement guard remains. See P229 receipt below.
 P229: [delivery receipt](batch-p229-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;two-file net mirror reduction114;R2308 retirement guard retained on actual navigation evidence.
 
 P230: [delivery receipt](batch-p230-checkpoint.json). Drawtext239->137(-102);original Unicode bodies restored;ANSI native boundary pending. Cached,publish11x2,focused32,Full20 and governance passed.
+
+P231 source-only reviews (delivery pending):
+
+- [editml](p231-editml-review.json): original selected bodies confirmed; logical-line repair.
+- [editsl](p231-editsl-review.json): original selected bodies confirmed; logical-line repair.
+- [edmlonce](p231-edmlonce-review.json): original selected bodies confirmed; logical-line repair.
+- [edmlrare](p231-edmlrare-review.json): original selected bodies confirmed; logical-line repair.
+
+- [edslrare](p231-edslrare-review.json): exclusion-only line correction.
+- [globals](p231-globals-review.json): original declaration restoration;delivery pending.
+
+- [P231 delivery](batch-p231-checkpoint.json): original globals declarations and EDIT line mapping;cached,publish11x2,focused32,Full20.
