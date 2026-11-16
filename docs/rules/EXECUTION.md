@@ -811,3 +811,12 @@ points completely restored/confirmed, residual pending points and policy
 exclusions. A shorter diff, a merged block, or a partial restoration does not
 prove a complete register point disappeared. Distinguish local candidates from
 delivered results, and do not inflate audited progress for metric backfills.
+
+Owner excluded-body reporting clarification: retain prior progress and total
+mirror-diff metrics, but show residual differences separately after normalizing
+proven excluded branch bodies to the same #error in original and current.
+Do not expand those excluded bodies in owner-facing diff reports once their
+original conditional structure and logical lines are verified. Unconditional
+function omissions and omitted selected-branch statements are not #error
+exclusions; report their purpose and evidence explicitly. State normalization
+and do not add counts from independently aligned lexical diff metrics.

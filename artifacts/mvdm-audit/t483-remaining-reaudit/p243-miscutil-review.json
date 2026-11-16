@@ -1,0 +1,66 @@
+{
+  "batch": "P243",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+  "source_proof": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+    "baseline_sha256": "da1796ff7d6857acd766499dc4cdaf39bba649e989f5f386870e453f720b4e11",
+    "original_sha256": "3ee6d2ec087b1c6e32de266861ff2111514da909b40ec4914105b0f4480e8ae1",
+    "candidate_sha256": "cbc58c0dfacf774822507dee0aa3097284a7abeaae1b096e51f1949666967c28",
+    "before": {
+      "blocks": 3,
+      "added": 3,
+      "deleted": 201
+    },
+    "after": {
+      "blocks": 3,
+      "added": 0,
+      "deleted": 198
+    },
+    "logical_line_verification": "original lines1-15 and23-38 exactly restored;function24-37 unchanged;no original conditional groups",
+    "status": "Format-only cleanup verified/published in P243"
+  },
+  "mirror_diff_delta": -6,
+  "lexical_blocks_delta": 0,
+  "points": [
+    {
+      "id": "T483-R2598",
+      "evidence": "Original include/pragma retained and added divergence prose removed. Production graph selects control-state/precomp.h,whose finite layout includes original WND/DIALOG;no header-binding change. Original header bytes1-15 restored.",
+      "disposition": "restored-or-confirmed-original-verified-published"
+    },
+    {
+      "id": "T483-R2599",
+      "evidence": "ZapActiveAndFocus calls PtiCurrent()->pq and Unlock on spwndActive/spwndFocus. Those are native kernel Q/window-lock objects;current native focus/capture are USER32-owned,not fields of retained dialog state. Restoring the helper alone would not clear real native focus;keep omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2600",
+      "evidence": "SetDialogPointer24-37 is exact original. wow_dialog_set_pointer validates retained WND extent and calls this body;original layout offset assertions check DIALOG pdlg/resultWP/unused. Function is not replaced by modern NtUserSetDialogPointer or an autonomous duplicate. Blank separators restored.",
+      "disposition": "restored-or-confirmed-original-verified-published"
+    },
+    {
+      "id": "T483-R2601",
+      "evidence": "_SetProgmanWindow/_SetTaskmanWindow register locked PWNDs in real desktop PDESKTOPINFO. WOW guest Progman is an application,not host desktop shell replacement. Actual selected shell-message init registers SHELLHOOK atom in wow_default_message_bindings.c and does not unregister host Taskman. Native desktop registration boundary remains pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2602",
+      "evidence": "xxxSetShellWindow owns spwndShell/spwndBkGnd,idShellProcess,Ctrl-Esc hotkey and bottommost host Z-order using original ETHREAD/PWND. Restoring those kernel assignments to retained guest window states would not configure the real desktop,and calling native shell registration would change host ownership. Keep native desktop boundary pending owner;no copied shell state introduced.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2603",
+      "evidence": "_InitPwSB allocates SBINFO from pwnd->head.rpdesk->hheapDesktop and writes native scrollbar state through PWND. Native SetScrollInfo/ScrollWindow bindings in wow_user_task_lifecycle.c operate actual HWND state. Retained dialog extra bytes are not a native desktop heap or scrollbar object. Keep original private allocator omitted pending owner.",
+      "disposition": "qualified-pending-owner"
+    }
+  ],
+  "validation": "Initial/counter review complete;source tokens excluding comments/line directives identical;all retained original lines exactly mapped;no conditional/error groups exist;no new compile/runtime validation",
+  "source_evidence": [
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1:530-560",
+    "src/wow32-dll/include/control-state/precomp.h",
+    "src/wow32-dll/source/wow_dialog_state_bindings.c:5-25",
+    "src/wow32-dll/source/wow_default_message_bindings.c:31-38",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:1467-1498"
+  ],
+  "status": "Whole file reviewed,verified and published;Git delivery accompanies P243 receipt;qualified residuals pending owner",
+  "delivery_verification": "P243 cached x86/x64,publish11x2,focused36,Full20,boundary143/9,governance passed;batch-p243-checkpoint.json"
+}

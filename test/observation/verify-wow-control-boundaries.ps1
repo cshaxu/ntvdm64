@@ -65,7 +65,7 @@ try {
         'original-string-boundaries','original-mnemonic-drawing-boundaries','original-button-drawing-boundaries','original-button-resource-boundaries','original-state-drawing-boundaries',
         'dialog-navigation-boundaries','original-window-view-boundaries','original-button-lifetime-boundaries')
     $targets += 'dialog-native-owner-research'
-    $targets += 'dialog-initialization-boundary'
+    $targets += 'dialog-initialization-boundary', 'original-profile-boundary'
     $targets += 'original-control-globals', 'original-dde-data-boundary'
     $targets += 'original-default-bits-boundary', 'original-user-capture-boundary'
     if ($CpdWindowResearch) { $targets = @('cpd-window-research') }
@@ -83,7 +83,7 @@ try {
                 'wow_default_original_fixture','wow_button_drawing_fixture','wow_button_resources_fixture','wow_control_draw_state_fixture',
                 'wow_dialog_navigation_fixture','wow_edit_view_fixture','wow_button_lifetime_fixture','wow_button_dc_fixture')
         $cases += 'wow_dialog_native_owner_probe'
-        $cases += 'wow_dialog_initialization_fixture'
+        $cases += 'wow_dialog_initialization_fixture', 'wow_task_profile_fixture', 'wow_task_profile_existing_fixture'
         $cases += 'wow_edit_lookaside_fixture', 'wow_edit_conversion_fixture'
         $cases += 'wow_def_window_bits_fixture', 'wow_original_dde_free_fixture', 'wow_user_capture_fixture'
         if ($CpdWindowResearch) { $cases = @('wow_cpd_window_normalization_probe') }

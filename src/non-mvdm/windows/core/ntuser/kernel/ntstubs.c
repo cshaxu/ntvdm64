@@ -10,37 +10,487 @@
 * 08-12-96 jparsons         Added lparam validate for WM_NCCREATE [51986]
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-076): retain NtUserSetWindowFNID unchanged;
- * scoped original EDITWND storage replaces the unavailable receive shell. */
 #define WOW_ORIGINAL_EDIT_STATE
+#line 13
 #include "wow_edit_state_bindings.h"
+#pragma hdrstop
 
-#line 149
+/*
+ * Setup and control macros
+ */
+#define BEGINRECV(type, err)    \
+    type retval;        \
+    type errret = err;  \
+    EnterCrit();
+
+#define BEGINRECV_SHARED(type, err) \
+    type retval;        \
+    type errret = err;  \
+    EnterSharedCrit();
+
+#define BEGINRECV_VOID() \
+    EnterCrit();
+
+#line 41
+
+#define BEGINRECV_HWND_VOID(hwnd) \
+    PWND pwnd;                                      \
+    EnterCrit();                                    \
+    if ((pwnd = ValidateHwnd((hwnd))) == NULL) {    \
+        goto errorexit;                             \
+    }
+
+#define BEGINRECV_HWND_SHARED(type, err, hwnd) \
+    type retval;                                    \
+    type errret = err;                              \
+    PWND pwnd;                                      \
+    EnterSharedCrit();                              \
+    if ((pwnd = ValidateHwnd((hwnd))) == NULL) {    \
+        retval = errret;                            \
+        goto errorexit;                             \
+    }
+
+#define BEGINRECV_HWNDLOCK(type, err, hwnd) \
+    type retval;                                    \
+    type errret = err;                              \
+    PWND pwnd;                                      \
+    TL tlpwnd;                                      \
+    PTHREADINFO ptiCurrent;                         \
+    EnterCrit();                                    \
+    if ((pwnd = ValidateHwnd((hwnd))) == NULL) {    \
+        LeaveCrit();                                \
+        return err;                                 \
+    }                                               \
+    ptiCurrent = PtiCurrent();                      \
+    ThreadLockAlwaysWithPti(ptiCurrent, pwnd, &tlpwnd);
+
+#define BEGINRECV_HWNDLOCK_OPT(type, err, hwnd) \
+    type retval;                                    \
+    type errret = err;                              \
+    PWND pwnd;                                      \
+    TL tlpwnd;                                      \
+    PTHREADINFO ptiCurrent;                         \
+    EnterCrit();                                    \
+    if (hwnd) {                                     \
+        if ((pwnd = ValidateHwnd(hwnd)) == NULL) {  \
+            LeaveCrit();                            \
+            return err;                             \
+        }                                           \
+    } else {                                        \
+        pwnd = NULL;                                \
+    }                                               \
+    ptiCurrent = PtiCurrent();                      \
+    ThreadLockWithPti(ptiCurrent, pwnd, &tlpwnd);
+
+#define BEGINRECV_HWNDLOCK_VOID(hwnd) \
+    PWND pwnd;                                          \
+    TL tlpwnd;                                          \
+    PTHREADINFO ptiCurrent;                             \
+    EnterCrit();                                        \
+    if ((pwnd = ValidateHwnd((hwnd))) == NULL) {        \
+        LeaveCrit();                                    \
+        return;                                         \
+    }                                                   \
+    ptiCurrent = PtiCurrent();                          \
+    ThreadLockAlwaysWithPti(ptiCurrent, pwnd, &tlpwnd);
+
+#define CLEANUPRECV() \
+cleanupexit:
+
+#define ENDRECV() \
+    goto errorexit; \
+errorexit:          \
+    LeaveCrit();    \
+    return retval;
+
+#define ENDRECV_VOID() \
+    goto errorexit; \
+errorexit:          \
+    LeaveCrit();    \
+    return;
+
+#line 123
+
+#define ENDRECV_HWNDLOCK() \
+    goto errorexit;         \
+errorexit:                  \
+    ThreadUnlock(&tlpwnd);  \
+    LeaveCrit();            \
+    return retval;
+
+#define ENDRECV_HWNDLOCK_VOID() \
+    goto errorexit;         \
+errorexit:                  \
+    ThreadUnlock(&tlpwnd);  \
+    LeaveCrit();            \
+    return;
+
+#define MSGERROR() { \
+    retval = errret;    \
+    goto errorexit; }
+
+#define MSGERROR_VOID() { \
+    goto errorexit; }
+
+#define MSGERRORCLEANUP() { \
+    retval = errret;    \
+    goto cleanupexit; }
+
 #if DBG
-#error Excluded unsupported original DBG stub exception handler
+#error
 #else
-#line 153
+#define StubExceptionHandler()  EXCEPTION_EXECUTE_HANDLER
 #endif
-#line 154
 
+#define TESTFLAGS(flags, mask) \
+    if (((flags) & ~(mask)) != 0) { \
+        RIPERR2(ERROR_INVALID_FLAGS, RIP_WARNING, "Invalid flags, %x & ~%x != 0 " #mask, \
+            flags, mask); \
+        MSGERROR();   \
+    }
+
+#define LIMITVALUE(value, limit, szText) \
+    if ((value) > (limit)) {     \
+        RIPERR3(ERROR_INVALID_PARAMETER, RIP_WARNING, "Invalid parameter, %d > %d in %s", \
+             value, limit, szText); \
+        MSGERROR();     \
+    }
+
+#define MESSAGECALL(api) \
+LONG NtUserfn ## api(    \
+    HWND hwnd,           \
+    UINT msg,            \
+    DWORD wParam,        \
+    LONG lParam,         \
+    DWORD xParam,        \
+    DWORD xpfnProc,      \
+    BOOL bAnsi)
+
+#line 180
+
+/*
+ * Validation macros
+ */
+#define ValidateHWNDNoRIP(p,h)              \
+    if ((p = ValidateHwnd(h)) == NULL)      \
+        MSGERROR();
+
+#define ValidateHWND(p,h)                   \
+    if ((p = ValidateHwnd(h)) == NULL)      \
+        MSGERROR();
+
+#define ValidateHWNDND(p,h)                 \
+    if ( ((p = ValidateHwnd(h)) == NULL) || \
+         (p == _GetDesktopWindow()) )       \
+        MSGERROR();
+
+#define ValidateHWNDOPT(p,h) \
+    if (h) {                                \
+        if ((p = ValidateHwnd(h)) == NULL)  \
+            MSGERROR();                     \
+    } else {                                \
+        p = NULL;                           \
+    }
+
+#define ValidateHWNDIA(p,h)                      \
+    if (h == (HWND)0x0000FFFF) {                 \
+        h = (HWND)-1;                            \
+    }                                            \
+    if (h != HWND_TOP &&                         \
+        h != HWND_BOTTOM &&                      \
+        h != HWND_TOPMOST &&                     \
+        h != HWND_NOTOPMOST) {                   \
+        if ( ((p = ValidateHwnd(h)) == NULL) ||  \
+             (p == _GetDesktopWindow()) )        \
+            MSGERROR();                          \
+    } else {                                     \
+        p = (PWND)h;                             \
+    }
+
+#define ValidateHWNDFF(p,h) \
+    if ((h != (HWND)-1) && (h !=(HWND)0xffff)) { \
+        if ((p = ValidateHwnd(h)) == NULL)       \
+            MSGERROR();                          \
+    } else {                                     \
+        p = (PWND)-1;                            \
+    }
+
+#define ValidateHMENUOPT(p,h) \
+    if (h) {                                \
+        if ((p = ValidateHmenu(h)) == NULL) \
+            MSGERROR();                     \
+    } else {                                \
+        p = NULL;                           \
+    }
+
+#define ValidateHMENU(p,h) \
+    if ((p = ValidateHmenu(h)) == NULL) \
+        MSGERROR();
+
+#define ValidateHACCEL(p,h) \
+    if ((p = HMValidateHandle(h, TYPE_ACCELTABLE)) == NULL) \
+        MSGERROR();
+
+#define ValidateHCURSOR(p,h) \
+    if ((p = HMValidateHandle(h, TYPE_CURSOR)) == NULL) \
+        MSGERROR();
+
+#define ValidateHCURSOROPT(p,h) \
+    if (h) {                                 \
+        if ((p = HMValidateHandle(h, TYPE_CURSOR)) == NULL) \
+        MSGERROR();                          \
+    } else {                                \
+        p = NULL;                           \
+    }
+
+#define ValidateHICON(p,h) \
+    if ((p = HMValidateHandle(h, TYPE_CURSOR)) == NULL) \
+        MSGERROR();
+
+#define ValidateHHOOK(p,h) \
+    if ((p = HMValidateHandle(h, TYPE_HOOK)) == NULL) \
+        MSGERROR();
+
+#define ValidateHDWP(p,h) \
+    if ((p = HMValidateHandle(h, TYPE_SETWINDOWPOS)) == NULL) \
+        MSGERROR();
+
+#ifdef FE_IME
+#error
+#line 280
+#endif
+#line 282
+#if DBG
+#error
+#line 300
+#endif
+#line 352
+#if defined(_X86_)
+#line 354
+#else
+#error
+#line 359
+#endif
+#line 390
+#if defined(_X86_)
+#line 392
+#else
+#error
+#endif
+#line 563
+#if defined(_X86_)
+#line 565
+#else
+#error
+#endif
+#line 715
+#if defined(_X86_)
+#line 717
+#else
+#error
+#endif
+#line 738
+#if defined(_X86_)
+#line 740
+#else
+#error
+#endif
+#line 964
+#if defined(_X86_)
+#line 966
+#else
+#error
+#endif
+#line 1135
+#if defined(_X86_)
+#line 1138
+#else
+#error
+#line 1141
+#endif
+#line 1229
+#if defined(_X86_)
+#line 1231
+#else
+#error
+#endif
+#line 1312
+#if defined(_X86_)
+#line 1314
+#else
+#error
+#endif
 #line 1405
 #ifdef NEVER
-#error Excluded original disabled USER server stub
+#error
 #line 1427
 #endif
-#line 1428
 #line 1543
 #ifdef NEVER
-#error Excluded original disabled USER server stub
+#error
 #line 1563
 #endif
-#line 1564
 #line 1793
 #ifdef NEVER
-#error Excluded original disabled USER server stub
+#error
 #line 1815
 #endif
-#line 1816
+#line 1957
+#if defined(_X86_)
+#line 1959
+#else
+#error
+#endif
+#line 2027
+#if defined(_X86_)
+#line 2029
+#else
+#error
+#endif
+#line 2112
+#if defined(_X86_)
+#line 2114
+#else
+#error
+#endif
+#line 2288
+#if defined(_X86_)
+#line 2290
+#else
+#error
+#endif
+#line 2369
+#if defined(_X86_)
+#line 2371
+#else
+#error
+#endif
+#line 2723
+#if defined(_X86_)
+#line 2725
+#else
+#error
+#endif
+#line 2747
+#ifdef MEMPHIS_MENUS
+#error
+#endif // MEMPHIS_MENUS
+#line 2756
+#ifdef MEMPHIS_MENUS
+#error
+#line 2763
+#else
+#line 2768
+#endif // MEMPHIS_MENUS
+#line 3107
+#if defined(_X86_)
+#line 3109
+#else
+#error
+#endif
+#line 3158
+#if defined(_X86_)
+#line 3160
+#else
+#error
+#endif
+#line 3431
+#ifdef MEMPHIS_MENUS
+#error
+#endif // MEMPHIS_MENUS
+#line 3446
+#if defined(_X86_)
+#line 3448
+#else
+#error
+#endif
+#line 3461
+#ifdef MEMPHIS_MENUS
+#error
+#endif // MEMPHIS_MENUS
+#line 3465
+#ifdef MEMPHIS_MENUS
+#error
+#else
+#line 3469
+#endif // MEMPHIS_MENUS
+#line 3476
+#ifdef MEMPHIS_MENUS
+#error
+#else
+#line 3480
+#endif // MEMPHIS_MENUS
+#line 3486
+#ifdef MEMPHIS_MENUS
+#error
+#endif // MEMPHIS_MENUS
+#line 3494
+#ifdef MEMPHIS_MENU_WATERMARKS
+#error
+#line 3528
+#endif // MEMPHIS_MENU_WATERMARKS
+#line 3972
+#if defined(_X86_)
+#line 3974
+#else
+#error
+#endif
+#line 4318
+#if defined(_X86_)
+#line 4320
+#else
+#error
+#line 4323
+#endif
+#line 4410
+#ifdef MEMPHIS_MENUS
+#error
+#endif // MEMPHIS_MENUS
+#line 4420
+#ifdef MEMPHIS_MENUS
+#error
+#line 4427
+#else
+#line 4432
+#endif // MEMPHIS_MENUS
+#line 4727
+#if defined(_X86_)
+#line 4730
+#else
+#error
+#line 4733
+#endif
+#line 5472
+#if defined(_X86_)
+#line 5474
+#else
+#error
+#endif
+#line 5506
+#if defined(_X86_)
+#line 5508
+#else
+#error
+#endif
+#line 5768
+#if defined(_X86_)
+#line 5770
+#else
+#error
+#endif
+#line 5823
+#if defined(_X86_)
+#line 5825
+#else
+#error
+#endif
+#line 5986
+#if defined(_X86_)
+#line 5988
+#else
+#error
+#line 5991
+#endif
 #line 6170
 BOOL NtUserSetWindowFNID(
     IN HWND hwnd,
@@ -62,671 +512,204 @@ BOOL NtUserSetWindowFNID(
     ENDRECV_HWND();
 }
 
+#line 6241
+#ifdef FE_IME
+#error
+#line 6248
+#endif
+#line 6312
+#if defined(_X86_)
+#line 6314
+#else
+#error
+#line 6317
+#endif
+#line 6417
+#if defined(_X86_)
+#line 6435
+#else
+#error
+#line 6453
+#endif
+#line 6689
+#if defined(_X86_)
+#line 6691
+#else
+#error
+#endif
+#line 6929
+#if defined(_X86_)
+#line 6932
+#else
+#error
+#line 6935
+#endif
+#line 6977
+#if defined(_X86_)
+#line 6980
+#else
+#error
+#line 6983
+#endif
+#line 7026
+#if defined(_X86_)
+#line 7031
+#else
+#error
+#line 7036
+#endif
+#line 7071
+#if defined(_X86_)
+#line 7074
+#else
+#error
+#line 7077
+#endif
+#line 7102
+#if defined(_X86_)
+#line 7104
+#else
+#error
+#endif
+#line 7131
+#if defined(_X86_)
+#line 7133
+#else
+#error
+#endif
+#line 7161
+#if defined(_X86_)
+#line 7163
+#else
+#error
+#endif
+#line 7188
+#if defined(_X86_)
+#line 7190
+#else
+#error
+#endif
 #line 7261
 #if defined(_X86_)
-#line 7264
+#define DATAALIGN sizeof(BYTE)
+#define CHARALIGN sizeof(BYTE)
 #else
-#line 7265
-#error Excluded unsupported original non-x86 class-registration alignment
+#error
 #line 7267
 #endif
 #line 7313
-#line 7315
-#line 8377
-#if 0
-#error Excluded original disabled full-screen message stub
-#line 8411
-#endif
-#line 8412
-
-#line 268
-#ifdef FE_IME
-#error Excluded unsupported original FE_IME branch
-#line 280
-#endif
-#line 281
-
-#line 6241
-#ifdef FE_IME
-#error Excluded unsupported original FE_IME branch
-#line 6248
-#endif
-#line 6249
-
-#line 7849
-#ifdef FE_IME
-#error Excluded unsupported original FE_IME branch
-#line 7857
-#endif
-#line 7858
-
-#line 9993
-#ifdef FE_IME
-#error Excluded unsupported original FE_IME branch
-#line 10309
-#endif
-#line 10310
-
-#line 282
-#if DBG
-#error Excluded unsupported original DBG branch
-#line 300
-#endif
-#line 301
-
-#line 9851
-#ifdef DEBUG
-#error Excluded unsupported original DEBUG branch
-#line 9855
-#endif
-#line 9856
-
-#line 2747
-#ifdef MEMPHIS_MENUS
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#endif
-#line 2750
-
-#line 3431
-#ifdef MEMPHIS_MENUS
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#endif
-#line 3434
-
-#line 3461
-#ifdef MEMPHIS_MENUS
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#endif
-#line 3464
-
-#line 3486
-#ifdef MEMPHIS_MENUS
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#endif
-#line 3489
-
-#line 4410
-#ifdef MEMPHIS_MENUS
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#endif
-#line 4413
-
-#line 3494
-#ifdef MEMPHIS_MENU_WATERMARKS
-#error Excluded unsupported original MEMPHIS_MENU_WATERMARKS branch
-#line 3528
-#endif
-#line 3529
-
-#line 352
-#if defined(_X86_)
-#line 353
-#line 354
-#else
-#line 355
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 359
-#endif
-#line 360
-
-#line 390
-#if defined(_X86_)
-#line 391
-#line 392
-#else
-#line 393
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 395
-
-#line 563
-#if defined(_X86_)
-#line 564
-#line 565
-#else
-#line 566
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 568
-
-#line 715
-#if defined(_X86_)
-#line 716
-#line 717
-#else
-#line 718
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 720
-
-#line 738
-#if defined(_X86_)
-#line 739
-#line 740
-#else
-#line 741
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 743
-
-#line 964
-#if defined(_X86_)
-#line 965
-#line 966
-#else
-#line 967
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 969
-
-#line 1135
-#if defined(_X86_)
-#line 1136
-#line 1138
-#else
-#line 1139
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 1141
-#endif
-#line 1142
-
-#line 1229
-#if defined(_X86_)
-#line 1230
-#line 1231
-#else
-#line 1232
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 1234
-
-#line 1312
-#if defined(_X86_)
-#line 1313
-#line 1314
-#else
-#line 1315
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 1317
-
-#line 1957
-#if defined(_X86_)
-#line 1958
-#line 1959
-#else
-#line 1960
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 1962
-
-#line 2027
-#if defined(_X86_)
-#line 2028
-#line 2029
-#else
-#line 2030
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 2032
-
-#line 2112
-#if defined(_X86_)
-#line 2113
-#line 2114
-#else
-#line 2115
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 2117
-
-#line 2288
-#if defined(_X86_)
-#line 2289
-#line 2290
-#else
-#line 2291
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 2293
-
-#line 2369
-#if defined(_X86_)
-#line 2370
-#line 2371
-#else
-#line 2372
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 2374
-
-#line 2723
-#if defined(_X86_)
-#line 2724
-#line 2725
-#else
-#line 2726
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 2728
-
-#line 3107
-#if defined(_X86_)
-#line 3108
-#line 3109
-#else
-#line 3110
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 3112
-
-#line 3158
-#if defined(_X86_)
-#line 3159
-#line 3160
-#else
-#line 3161
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 3163
-
-#line 3446
-#if defined(_X86_)
-#line 3447
-#line 3448
-#else
-#line 3449
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 3451
-
-#line 3972
-#if defined(_X86_)
-#line 3973
-#line 3974
-#else
-#line 3975
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 3977
-
-#line 4318
-#if defined(_X86_)
-#line 4319
-#line 4320
-#else
-#line 4321
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 4323
-#endif
-#line 4324
-
-#line 4727
-#if defined(_X86_)
-#line 4728
-#line 4730
-#else
-#line 4731
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 4733
-#endif
-#line 4734
-
-#line 5472
-#if defined(_X86_)
-#line 5473
-#line 5474
-#else
-#line 5475
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 5477
-
-#line 5506
-#if defined(_X86_)
-#line 5507
-#line 5508
-#else
-#line 5509
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 5511
-
-#line 5768
-#if defined(_X86_)
-#line 5769
-#line 5770
-#else
-#line 5771
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 5773
-
-#line 5823
-#if defined(_X86_)
-#line 5824
-#line 5825
-#else
-#line 5826
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 5828
-
-#line 5986
-#if defined(_X86_)
-#line 5987
-#line 5988
-#else
-#line 5989
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 5991
-#endif
-#line 5992
-
-#line 6312
-#if defined(_X86_)
-#line 6313
-#line 6314
-#else
-#line 6315
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 6317
-#endif
-#line 6318
-
-#line 6417
-#if defined(_X86_)
-#line 6418
-#line 6435
-#else
-#line 6436
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 6453
-#endif
-#line 6454
-
-#line 6689
-#if defined(_X86_)
-#line 6690
-#line 6691
-#else
-#line 6692
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 6694
-
-#line 6929
-#if defined(_X86_)
-#line 6930
-#line 6932
-#else
-#line 6933
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 6935
-#endif
-#line 6936
-
-#line 6977
-#if defined(_X86_)
-#line 6978
-#line 6980
-#else
-#line 6981
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 6983
-#endif
-#line 6984
-
-#line 7026
-#if defined(_X86_)
-#line 7027
-#line 7031
-#else
-#line 7032
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 7036
-#endif
-#line 7037
-
-#line 7071
-#if defined(_X86_)
-#line 7072
-#line 7074
-#else
-#line 7075
-#error Excluded unsupported original non-x86 receive-stub branch
-#line 7077
-#endif
-#line 7078
-
-#line 7102
-#if defined(_X86_)
-#line 7103
-#line 7104
-#else
-#line 7105
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 7107
-
-#line 7131
-#if defined(_X86_)
-#line 7132
-#line 7133
-#else
-#line 7134
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 7136
-
-#line 7161
-#if defined(_X86_)
-#line 7162
-#line 7163
-#else
-#line 7164
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 7166
-
-#line 7188
-#if defined(_X86_)
-#line 7189
-#line 7190
-#else
-#line 7191
-#error Excluded unsupported original non-x86 receive-stub branch
-#endif
-#line 7193
-
+#undef DATAALIGN
+#undef CHARALIGN
 #line 7333
 #if defined(_X86_)
-#line 7334
 #line 7335
 #else
-#line 7336
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #endif
-#line 7338
-
 #line 7363
 #if defined(_X86_)
-#line 7364
 #line 7365
 #else
-#line 7366
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #endif
-#line 7368
-
 #line 7439
 #if defined(_X86_)
-#line 7440
 #line 7441
 #else
-#line 7442
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #endif
-#line 7444
-
+#line 7849
+#ifdef FE_IME
+#error
+#line 7857
+#endif
 #line 7917
 #if defined(_X86_)
-#line 7918
 #line 7919
 #else
-#line 7920
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #endif
-#line 7922
-
+#line 8377
+#if 0
+#error
+#line 8411
+#endif // 0
 #line 8558
 #if defined(_X86_)
-#line 8559
 #line 8561
 #else
-#line 8562
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 8564
 #endif
-#line 8565
-
 #line 8571
 #if defined(_X86_)
-#line 8572
 #line 8574
 #else
-#line 8575
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 8577
 #endif
-#line 8578
-
 #line 8687
 #if defined(_X86_)
-#line 8688
 #line 8689
 #else
-#line 8690
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 8692
 #endif
-#line 8693
-
 #line 8747
 #if defined(_X86_)
-#line 8748
 #line 8749
 #else
-#line 8750
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 8752
 #endif
-#line 8753
-
 #line 9237
 #if defined(_X86_)
-#line 9238
 #line 9239
 #else
-#line 9240
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 9242
 #endif
-#line 9243
-
 #line 9303
 #if defined(_X86_)
-#line 9304
 #line 9305
 #else
-#line 9306
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 9308
 #endif
-#line 9309
-
 #line 9354
 #if defined(_X86_)
-#line 9355
 #line 9356
 #else
-#line 9357
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 9359
 #endif
-#line 9360
-
 #line 9395
 #if defined(_X86_)
-#line 9396
 #line 9397
 #else
-#line 9398
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #endif
-#line 9400
-
 #line 9435
 #if defined(_X86_)
-#line 9436
 #line 9438
 #else
-#line 9439
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 9441
 #endif
-#line 9442
-
 #line 9558
 #if defined(_X86_)
-#line 9559
 #line 9561
 #else
-#line 9562
-#error Excluded unsupported original non-x86 receive-stub branch
+#error
 #line 9564
 #endif
-#line 9565
-
-#line 2756
-#ifdef MEMPHIS_MENUS
-#line 2757
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#line 2763
-#else
-#line 2764
-#line 2768
-#endif // MEMPHIS_MENUS
-#line 2769
-
-#line 3465
-#ifdef MEMPHIS_MENUS
-#line 3466
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#else
-#line 3468
-#line 3469
-#endif // MEMPHIS_MENUS
-#line 3470
-
-#line 3476
-#ifdef MEMPHIS_MENUS
-#line 3477
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#else
-#line 3479
-#line 3480
-#endif // MEMPHIS_MENUS
-#line 3481
-
-#line 4420
-#ifdef MEMPHIS_MENUS
-#line 4421
-#error Excluded unsupported original MEMPHIS_MENUS branch
-#line 4427
-#else
-#line 4428
-#line 4432
-#endif // MEMPHIS_MENUS
-#line 4433
-
+#line 9851
+#ifdef DEBUG
+#error
+#line 9855
+#endif
+#line 9993
+#ifdef FE_IME
+#error
+#line 10309
+#endif

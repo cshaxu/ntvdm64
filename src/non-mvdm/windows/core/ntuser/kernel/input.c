@@ -10,45 +10,127 @@
 * 02-14-91 mikeke       Added Revalidation code
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-057): original grouping bodies; explicit current
- * thread replaces implicit USER context. Native queue lifetime is required. */
 #include "wow_input_group_bindings.h"
+#pragma hdrstop
 
+//#define MARKPATH
+#ifdef MARKPATH
+#error
+#endif
+#line 22
+#ifdef TRACESYSPEEK // is defined in userk.h
+#error
+#line 56
+#endif //TRACESYSPEEK
+#line 58
+#if DBG
+#error
+#line 84
+#endif  // DBG
+#line 91
+#if DBG
+#error
+#line 97
+#endif // DBG
 #line 238
 #ifdef MARKPATH
-#line 239
-#error Excluded unsupported original MARKPATH get-message instrumentation
+#error
+#line 243
 #else
-#line 244
 #define PATHTAKEN(x)
 #define DUMPPATHTAKEN()
 #endif
-#line 247
+#line 1154
+#ifdef SYSMODALWINDOWS
+#error
+#line 1181
+#endif //LATER
 #line 1409
 #if 0
-#line 1410
-#error Excluded original disabled input branch
+#error
+#line 1430
 #endif
-#line 1431
+#line 1641
+#if DBG
+#error
+#endif // DBG
+#line 1647
+#if DBG
+#error
+#line 1653
+#endif // DBG
+#line 1669
+#if DBG
+#error
+#endif // DBG
+#line 1679
+#if DBG
+#error
+#endif // DBG
+#line 1764
+#if (CBKEYSTATERECENTDOWN % 4) != 0
+#error "CBKEYSTATERECENTDOWN assumed to be an integral number of DWORDs"
+#endif
 #line 2295
 #ifdef NEVER
-#line 2296
-#error Excluded unsupported original NEVER input branch
+#error
+#line 2309
 #endif
-#line 2310
-#line 3310
+#line 2924
+#ifdef TRACESYSPEEK
+#error
+#endif
+#line 2928
+#ifdef DEBUG
+#error
+#line 2949
+#endif
+#line 2957
+#ifdef DEBUG
+#error
+#line 2964
+#endif
+#line 2971
+#ifdef DEBUG
+#error
+#endif
+#line 3188
+#if DBG
+#error
+#line 3230
+#endif  // DBG
+#line 3307
+#ifdef FE_IME
+#error
+#endif
 #ifdef MARKPATH
-#line 3311
-#error Excluded unsupported original MARKPATH system-queue instrumentation
+#error
+#line 3320
 #else
-#line 3321
 #define PATHTAKEN(x)
 #define PATHTAKEN2(x)
 #define PATHTAKEN3(x)
 #define DUMPPATHTAKEN()
 #define DUMPSUBPATHTAKEN(p, x)
 #endif
-#line 3327
+#line 4551
+#ifdef FE_IME
+#error
+#line 4575
+#endif
+#line 4750
+#ifdef FE_IME
+#error
+#line 4757
+#else
+#line 4759
+#endif
+#line 4764
+#if DBG
+#error
+#line 4767
+#endif  // DBG
+#line 4991
 /***************************************************************************\
 * RecalcThreadAttachment
 * Recalc2
@@ -73,7 +155,6 @@
 * 01-Oct-1993 mikeke    Fixed to work with MWOWs
 \***************************************************************************/
 
-#line 5015
 void AddAttachment(
     PTHREADINFO pti,
     PQ pqAttach,
@@ -103,7 +184,6 @@ void AddAttachment(
     }
 }
 
-#line 5044
 void Recalc2(
     PQ pqAttach,
     PTHREADINFO ptiCurrent)
@@ -170,153 +250,13 @@ void Recalc2(
         }
     } while (fChanged);
 }
-
-#line 58
-#if DBG
-#line 59
-#error Excluded unsupported original DBG branch
-#endif
-#line 85
-
-#line 91
-#if DBG
-#line 92
-#error Excluded unsupported original DBG branch
-#endif
-#line 98
-
-#line 3188
-#if DBG
-#line 3189
-#error Excluded unsupported original DBG branch
-#endif
-#line 3231
-
-#line 17
-#ifdef MARKPATH
-#line 18
-#error Excluded unsupported original MARKPATH branch
-#endif
-#line 20
-
-#line 22
-#ifdef TRACESYSPEEK
-#line 23
-#error Excluded unsupported original TRACESYSPEEK branch
-#endif
-#line 57
-
-#line 1154
-#ifdef SYSMODALWINDOWS
-#line 1155
-#error Excluded unsupported original SYSMODALWINDOWS branch
-#endif
-#line 1182
-
-#line 1764
-#if (CBKEYSTATERECENTDOWN % 4) != 0
-#line 1765
-#error "CBKEYSTATERECENTDOWN assumed to be an integral number of DWORDs"
-#endif
-#line 1767
-
-#line 1641
-#if DBG
-#line 1642
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 1644
-
-#line 1647
-#if DBG
-#line 1648
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 1654
-
-#line 1669
-#if DBG
-#line 1670
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 1672
-
-#line 1679
-#if DBG
-#line 1680
-#error Excluded unsupported original DBG branch
-#endif // DBG
-#line 1682
-
-#line 2924
-#ifdef TRACESYSPEEK
-#line 2925
-#error Excluded unsupported original TRACESYSPEEK branch
-#endif
-#line 2927
-
-#line 4764
-#if DBG
-#line 4765
-#error Excluded unsupported original DBG branch
-#endif  // DBG
-#line 4768
-
 #line 5295
 #if DBG
-#line 5296
-#error Excluded unsupported original DBG branch
+#error
+#line 5299
 #endif
-#line 5300
-
 #line 5316
 #if DBG
-#line 5317
-#error Excluded unsupported original DBG branch
+#error
+#line 5320
 #endif
-#line 5321
-
-
-#line 2928
-#ifdef DEBUG
-#line 2929
-#error Unsupported DEBUG original branch
-#endif
-#line 2950
-
-#line 2957
-#ifdef DEBUG
-#line 2958
-#error Unsupported DEBUG original branch
-#endif
-#line 2965
-
-#line 2971
-#ifdef DEBUG
-#line 2972
-#error Unsupported DEBUG original branch
-#endif
-#line 2974
-
-#line 3307
-#ifdef FE_IME
-#line 3308
-#error Unsupported FE_IME original branch
-#endif
-#line 3310
-
-#line 4551
-#ifdef FE_IME
-#line 4552
-#error Unsupported FE_IME original branch
-#endif
-#line 4576
-
-#line 4750
-#ifdef FE_IME
-#line 4751
-#error Unsupported FE_IME original branch
-#else
-#line 4758
-#endif
-#line 4760

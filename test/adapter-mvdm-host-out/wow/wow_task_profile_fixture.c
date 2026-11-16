@@ -24,6 +24,7 @@ int __cdecl main(void)
     WCHAR expected[256],output[256];
     struct { WCHAR before; WCHAR data[2]; WCHAR after; } guarded;
     DWORD bytes=sizeof(expected),type=0,before,after,result;
+    DWORD expected_dword, dword_bytes=sizeof(expected_dword), dword_type;
     HKEY key=(HKEY)wow_profile_open_key(14,KEY_READ);
     unsigned i;
     UNICODE_STRING native_name;
@@ -55,11 +56,17 @@ int __cdecl main(void)
         RegCloseKey(key);return 99;
     }
     CHECK(expected[bytes/sizeof(WCHAR)-1]==0);
+    CHECK(RegQueryValueExW(key,L"InstallDate",NULL,&dword_type,
+        (BYTE *)&expected_dword,&dword_bytes)==ERROR_SUCCESS);
+    CHECK(dword_type==REG_DWORD && dword_bytes==sizeof(expected_dword));
+    if(errors){RegCloseKey(key);return 1;}
     bytes=sizeof(output);
     CHECK(RegQueryValueExW(key,L"S40_41865857_MISSING_VALUE",NULL,NULL,(BYTE *)output,&bytes)==ERROR_FILE_NOT_FOUND);
     RegCloseKey(key);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
     for(i=0;i<32;++i) {
+        CHECK(FastGetProfileDwordW(14,L"InstallDate",0)==expected_dword);
+        CHECK(FastGetProfileDwordW(14,L"S40_41865857_MISSING_VALUE",0x12345678)==0x12345678);
         result=FastGetProfileStringW(14,L"ProductName",L"",output,256);
         CHECK(result==wcslen(expected)+1 && !memcmp(output,expected,result*sizeof(WCHAR)));
         guarded.before=0x5a5a;guarded.after=0x6b6b;guarded.data[0]=guarded.data[1]=L'?';
@@ -74,7 +81,7 @@ int __cdecl main(void)
         CHECK(!FastGetProfileStringW(14,L"S40_41865857_MISSING_VALUE",NULL,output,256) && output[0]==L'?');
     }
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
-    printf("WOW_PROFILE_EXISTING errors=%u repeats=32 success=1 truncation=2 missing=2\n",errors);
+    printf("WOW_PROFILE_EXISTING errors=%u repeats=32 success=1 truncation=2 missing=2 dword_success=1 dword_missing=1\n",errors);
     return errors!=0;
 }
 #else
@@ -91,6 +98,7 @@ int __cdecl main(void)
     if(key)RegCloseKey(key);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
     for(i=0;i<32;++i) {
+        CHECK(FastGetProfileDwordW(14,L"S40_PROFILE_MISSING",0x12345678)==0x12345678);
         output[0]=L'?';
         CHECK(wow_task_profile(NULL,14,L"S40_PROFILE_MISSING",L"",output,80)==1 && !output[0]);
         CHECK(wow_task_profile(NULL,14,L"S40_PROFILE_MISSING",L"safe",output,80)==5 && !memcmp(output,L"safe",5*sizeof(WCHAR)));

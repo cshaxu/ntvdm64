@@ -1449,3 +1449,13 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P242 inctlpan audit](p242-inctlpan-review.json): R2566-R2581;mirror1065->1052(-13),blocks8->5;static table restored,extern/separate object removed;batch -83,full delivery required.
 
 - [P242 delivery](batch-p242-checkpoint.json): six mirrors -83;static table restoration and equivalent cleanup;cached,publish11x2,focused34,Full20 passed;Git delivery accompanies receipt.
+
+- [P243 input review](p243-input-review.json): R2582-R2597;mirror5890->5814(-76),blocks25->49;original frames/lines restored;14 qualified residuals,2 original confirmations;format-only local batch,not delivered.
+
+- [P243 miscutil review](p243-miscutil-review.json): R2598-R2603;mirror204->198(-6),blocks3->3;original body/line proof;4 residuals pending owner,2 restored/confirmed;format-only local batch.
+
+- [P243 ntstubs review](p243-ntstubs-review.json) and [non-error diff](p243-ntstubs-non-error.diff):73 excluded bodies normalized for residual review;whole-file complete;mirror10575->10014(-561),raw blocks19->155;non-error +2/-9237;6residuals,1original confirmation;not delivered.
+
+- [P243 profile review](p243-profile-review.json): R2611-R2617;mirror982->882(-100),blocks19->8;original DWORD reader restored,partial R2614 remains pending;full cumulative delivery required.
+
+- [P243 delivery](batch-p243-checkpoint.json): four files,mirror -743;cached x86/x64,publish11x2,focused36,Full20,boundary/governance passed;R2614 residual remains pending owner.

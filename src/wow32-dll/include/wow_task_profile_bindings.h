@@ -9,6 +9,7 @@ UINT WINAPI wow_task_profile(wow_task_order_process *, UINT, LPCWSTR, LPCWSTR, L
 HANDLE WINAPI wow_profile_open_key(UINT, ACCESS_MASK);
 DWORD WINAPI FastGetProfileStringW(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
 UINT WINAPI FastGetProfileIntW(UINT, LPCWSTR, UINT);
+DWORD WINAPI FastGetProfileDwordW(UINT, LPCWSTR, DWORD);
 #ifdef WOW_ORIGINAL_PROFILE
 #define OpenCacheKeyEx wow_profile_open_key
 #define UserAllocPoolWithQuota(bytes, tag) HeapAlloc(GetProcessHeap(),0,bytes)

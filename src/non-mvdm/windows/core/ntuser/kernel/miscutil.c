@@ -9,12 +9,10 @@
 * 14-Feb-1991 mikeke    Added Revalidation code (None)
 \****************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-083): true subset, SetDialogPointer only.
- * Original body unchanged; retained host WND/DIALOG, not modern USER storage.
- * No queue/desktop/shell/server implementation is imported. */
-#line 12
 #include "precomp.h"
 #pragma hdrstop
+
+
 #line 23
 
 VOID SetDialogPointer(PWND pwnd, LONG lPtr) {
@@ -31,3 +29,4 @@ VOID SetDialogPointer(PWND pwnd, LONG lPtr) {
         SetWF(pwnd, WFDIALOGWINDOW);
     }
 }
+

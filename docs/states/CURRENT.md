@@ -34,10 +34,13 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2581 reviewed:970 restored/confirmed delivered,0 local,50 approved/policy,
-1561 qualified pending;139 unreviewed. Files344/365 reviewed and delivered;
-21 remain. P242 six-file mirror reduction83;static table restored;cached,
-publish11x2,focused34,Full20 and governance passed;Git delivery accompanies receipt.
+2617 reviewed:977 restored/confirmed delivered,0 local,50 approved/policy,
+1590 qualified pending;103 unreviewed. Files348/365 reviewed and verified;
+17 remain. P243 four files:mirror reduction743. Original DWORD reader restored
+with existing bindings;R2614 partial remains pending owner. Cached x86/x64,
+publish11x2,focused36,Full20,boundary/governance passed. Git delivery accompanies
+receipt;next R2618. Cumulative mirror reduction22838,remaining97075.
+Non-error residuals recorded separately from excluded branch bodies.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -54,12 +57,12 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P242 package `e6c51343-bbab-4414-85eb-ba04afdd94fa` published11x2;hashes verified.
-Six mirror files reduced83 lines;per-file block counts and original line proofs recorded.
-Original static bitmap table restored;extern/separate object removed.
-Cached x86/x64,focused34,Full20,boundary/governance passed.
-Cumulative365-file mirror diff119913->97818(-22095).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p242-checkpoint.json).
+P243 package `a96bc6f3-f65a-42fd-b6b5-ad5bdd19734e` published11x2;hashes verified.
+Four mirror files reduced743 lines;per-file block counts and original line proofs recorded.
+Original profile DWORD reader restored;existing profile fixtures connected to gate.
+Cached x86/x64,focused36,Full20,boundary/governance passed.
+Cumulative365-file mirror diff119913->97075(-22838).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p243-checkpoint.json).
 Git delivery accompanies receipt;R2582 next.
 
 ## Remaining Scope

@@ -1,0 +1,507 @@
+{
+  "batch": "P243",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "sha256": "db5d5f21f8729a0f9eb7f3f63462635de8d6b01299996fed223a4727bbaae49d"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+        "sha256": "cbc58c0dfacf774822507dee0aa3097284a7abeaae1b096e51f1949666967c28"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+        "sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+        "sha256": "430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_task_profile_bindings.h",
+        "sha256": "8b42df8db4b74d74f136d08ca257894976e91402432992d103325add07146b8b"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c",
+        "sha256": "b6fd05e1ce3a197ab61cef65594d3128bee69cd179cbf075d6632fd368c0dbcd"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "8481cb1ff61f9e651760c88072ad9627aa94f45e78eedeb9c3796205456ac1d0"
+      },
+      {
+        "path": "test/observation/verify-wow-control-boundaries.ps1",
+        "sha256": "c1e373720e8c1b7b47f4b487fe8259b162e514c6245eb1a61dceb93d978c796e"
+      }
+    ],
+    "deleted": [],
+    "source_files": 8
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "sha256": "db5d5f21f8729a0f9eb7f3f63462635de8d6b01299996fed223a4727bbaae49d"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+        "sha256": "cbc58c0dfacf774822507dee0aa3097284a7abeaae1b096e51f1949666967c28"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+        "sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+        "sha256": "430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911"
+      }
+    ],
+    "evidence": "p243 per-file original logical line proofs"
+  },
+  "cumulative": {
+    "files": 365,
+    "total": 97075,
+    "baseline": 119913,
+    "net_reduction": 22838,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c",
+        "total": 42
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+        "total": 304
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+        "sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15",
+        "total": 67
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+        "total": 88
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+        "sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+        "total": 27
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+        "sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+        "total": 137
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+        "sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47",
+        "total": 72
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+        "sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+        "total": 64
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+        "sha256": "fc4b0192251586b594ef38052282667b613e2afa939dc0d2683f8eca5b9e6258",
+        "total": 107
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+        "sha256": "815c7b2fdec2d031adce1d75416fe198fd86760e572c242dc1421a022bab1059",
+        "total": 97
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+        "sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069",
+        "total": 5
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+        "sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d",
+        "total": 5
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+        "sha256": "a356c448d85fcdbb213e693b366416ef44f3943d5227c3f1439fd57427c16a72",
+        "total": 12
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+        "sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+        "sha256": "0d095e359b39e83b2ee5fb09e34d1a5d50c66d1ed6a113a9a1fac8930fcd0e7c",
+        "total": 300
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+        "sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+        "total": 442
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+        "sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+        "total": 4
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+        "sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+        "sha256": "7cdd5e3985e5bb437b3785e23f9dd2c36b1eb4b4274e6a96757367307a66edb9",
+        "total": 2022
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+        "sha256": "eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "sha256": "6be381616f0b58392a6356566315cff18b6420f2bade76e4f66e8688aea7c8c3",
+        "total": 556
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+        "sha256": "888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5",
+        "total": 500
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+        "sha256": "b8e6073c1a208e6e97a60be15e3129743d7ea4213a572e443f927bbb141912fa",
+        "total": 1046
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+        "sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb",
+        "total": 1205
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+        "sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+        "total": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c",
+        "total": 265
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+        "sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2",
+        "total": 1394
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+        "sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3",
+        "total": 68
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+        "sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+        "total": 498
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+        "sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d",
+        "total": 724
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+        "sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+        "total": 2166
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+        "sha256": "1b7ae99a06a1acb4430357e8450e1756bdc737433e1e9228b25bcb1dbe027333",
+        "total": 1052
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "sha256": "db5d5f21f8729a0f9eb7f3f63462635de8d6b01299996fed223a4727bbaae49d",
+        "total": 5814
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+        "sha256": "cbc58c0dfacf774822507dee0aa3097284a7abeaae1b096e51f1949666967c28",
+        "total": 198
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+        "sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19",
+        "total": 10014
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+        "sha256": "430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911",
+        "total": 882
+      }
+    ]
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 398872,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6122,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1125,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11486,
+        "CleanupMs": 318,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 10822,
+        "CleanupMs": 389,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10162,
+        "CleanupMs": 379,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 180,
+        "CleanupMs": 456,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65389,
+        "CleanupMs": 362,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44572,
+        "CleanupMs": 349,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43595,
+        "CleanupMs": 351,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15065,
+        "CleanupMs": 399,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9431,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 47711,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12644,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28370,
+        "CleanupMs": 351,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31080,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3340,
+        "CleanupMs": 326,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7548,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9808,
+        "CleanupMs": 375,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4213,
+        "CleanupMs": 356,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7265,
+        "CleanupMs": 298,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19881,
+        "CleanupMs": 357,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "count": 36,
+    "exit": 0,
+    "evidence": "build/t483-s5-p243/focused-profile-final"
+  },
+  "publication": {
+    "status": "published",
+    "package": "a96bc6f3-f65a-42fd-b6b5-ad5bdd19734e",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "mirror_diff": {
+    "before": 97818,
+    "after": 97075,
+    "delta": -743
+  },
+  "git": "Accompanying commit and push required",
+  "scope": "R2582-R2617;four complete files;original DWORD restored;R2614 partial remains pending;guest and winnt.zip unchanged",
+  "file_receipts": [
+    "p243-input-review.json",
+    "p243-miscutil-review.json",
+    "p243-ntstubs-review.json",
+    "p243-profile-review.json"
+  ]
+}

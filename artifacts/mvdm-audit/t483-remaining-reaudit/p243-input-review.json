@@ -1,0 +1,425 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "baseline_sha256": "60d175ef3364c1627999b79fef4450088fefd3a5a738df607b488bd568af72cc",
+  "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+  "candidate_sha256": "db5d5f21f8729a0f9eb7f3f63462635de8d6b01299996fed223a4727bbaae49d",
+  "before": {
+    "blocks": 25,
+    "added": 80,
+    "deleted": 5810
+  },
+  "after": {
+    "blocks": 49,
+    "added": 31,
+    "deleted": 5783
+  },
+  "original_lines_verified": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    14,
+    16,
+    17,
+    19,
+    22,
+    56,
+    58,
+    84,
+    91,
+    97,
+    238,
+    243,
+    244,
+    245,
+    246,
+    1154,
+    1181,
+    1409,
+    1430,
+    1641,
+    1643,
+    1647,
+    1653,
+    1669,
+    1671,
+    1679,
+    1681,
+    1764,
+    1765,
+    1766,
+    2295,
+    2309,
+    2924,
+    2926,
+    2928,
+    2949,
+    2957,
+    2964,
+    2971,
+    2973,
+    3188,
+    3230,
+    3307,
+    3309,
+    3310,
+    3320,
+    3321,
+    3322,
+    3323,
+    3324,
+    3325,
+    3326,
+    4551,
+    4575,
+    4750,
+    4757,
+    4759,
+    4764,
+    4767,
+    4991,
+    4992,
+    4993,
+    4994,
+    4995,
+    4996,
+    4997,
+    4998,
+    4999,
+    5000,
+    5001,
+    5002,
+    5003,
+    5004,
+    5005,
+    5006,
+    5007,
+    5008,
+    5009,
+    5010,
+    5011,
+    5012,
+    5013,
+    5015,
+    5016,
+    5017,
+    5018,
+    5019,
+    5020,
+    5021,
+    5022,
+    5023,
+    5024,
+    5025,
+    5026,
+    5027,
+    5028,
+    5029,
+    5030,
+    5031,
+    5032,
+    5033,
+    5034,
+    5035,
+    5036,
+    5037,
+    5038,
+    5039,
+    5040,
+    5041,
+    5042,
+    5044,
+    5046,
+    5047,
+    5048,
+    5049,
+    5050,
+    5052,
+    5053,
+    5054,
+    5055,
+    5056,
+    5057,
+    5059,
+    5060,
+    5061,
+    5062,
+    5063,
+    5064,
+    5065,
+    5067,
+    5068,
+    5069,
+    5070,
+    5071,
+    5072,
+    5073,
+    5074,
+    5075,
+    5076,
+    5077,
+    5078,
+    5079,
+    5080,
+    5081,
+    5082,
+    5084,
+    5085,
+    5086,
+    5087,
+    5088,
+    5089,
+    5090,
+    5092,
+    5093,
+    5094,
+    5095,
+    5096,
+    5098,
+    5099,
+    5100,
+    5101,
+    5102,
+    5103,
+    5104,
+    5105,
+    5106,
+    5107,
+    5295,
+    5299,
+    5316,
+    5320
+  ],
+  "conditional_groups": [
+    [
+      17,
+      19
+    ],
+    [
+      22,
+      56
+    ],
+    [
+      58,
+      84
+    ],
+    [
+      91,
+      97
+    ],
+    [
+      238,
+      246
+    ],
+    [
+      1154,
+      1181
+    ],
+    [
+      1409,
+      1430
+    ],
+    [
+      1641,
+      1643
+    ],
+    [
+      1647,
+      1653
+    ],
+    [
+      1669,
+      1671
+    ],
+    [
+      1679,
+      1681
+    ],
+    [
+      1764,
+      1766
+    ],
+    [
+      2295,
+      2309
+    ],
+    [
+      2924,
+      2926
+    ],
+    [
+      2928,
+      2949
+    ],
+    [
+      2957,
+      2964
+    ],
+    [
+      2971,
+      2973
+    ],
+    [
+      3188,
+      3230
+    ],
+    [
+      3307,
+      3309
+    ],
+    [
+      3310,
+      3326
+    ],
+    [
+      4551,
+      4575
+    ],
+    [
+      4750,
+      4759
+    ],
+    [
+      4764,
+      4767
+    ],
+    [
+      5295,
+      5299
+    ],
+    [
+      5316,
+      5320
+    ]
+  ],
+  "selected_bodies_original_equal": true,
+  "status": "Whole file reviewed,verified and published;Git delivery accompanies P243 receipt;qualified residuals pending owner",
+  "preprocessing": {
+    "context": "actual production x86 WOW32 cflags; MSVC /P, not compilation or execution",
+    "baseline_exit": 0,
+    "candidate_exit": 0,
+    "token_count_each": 132649,
+    "tokens_equal": true,
+    "logs": [
+      "build/t483-s5-p243/baseline-preprocess.log",
+      "build/t483-s5-p243/candidate-preprocess.log"
+    ],
+    "limitations": "No cached full build, runtime test or publication performed for this format-only local batch."
+  },
+  "changes": [
+    "Restore original pragma and conditional directive comments",
+    "Order all 25 retained condition frames by original source line",
+    "Replace 24 excluded bodies with bare #error; preserve original authored assertion at1765",
+    "Correct original conditional terminator and retained function logical lines",
+    "Remove added divergence comment; unchanged include dependency and Recalc2 explicit current-thread argument"
+  ],
+  "review_passes": {
+    "initial": "Original source ranges, kernel header closure, selected function bodies and production call chain read",
+    "counter": "25 original frames accounted for; selected C token streams identical under actual production preprocessing; AddAttachment and Recalc2 implementation bodies equal original",
+    "remaining": "No unfinished per-point disposition in this file. Qualified boundary choices await owner;this is not new runtime validation or approval of residual diffs."
+  },
+  "batch": "P243",
+  "points": [
+    {
+      "id": "T483-R2582",
+      "evidence": "Original precomp.h imports ntos.h,w32p.h,gre.h,userk.h;userk.h111-121 resolves current thread through kernel gptiCurrent/W32GetCurrentThread. This is the NT4 kernel compilation boundary,not the modern native HWND/USER32 process boundary. Keep explicit finite declarations pending owner;restore original pragma and remove added prose.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2583",
+      "evidence": "Overlapping whole-input omission: original owns kernel QMSG queues,raw-input desktop,foreground,capture and hooks. Actual production messages are read through USER32 PeekMessageA/W in wow_user_task_lifecycle.c::peek_message_published and sent dispatch through wow_user_message_bridge.c::native_peek. Restoring original code cannot access those system-owned queue objects. Restore conditional order/comments/line mappings;leave native-system boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2584",
+      "evidence": "Original xxxWaitMessage/xxxInternalGetMessage enumerate posted/input/paint/timer queues and call private scheduler/queue primitives. Production lifecycle_message/peek_message_published reads actual USER32 queues and sleep_message_task invokes original xxxSleepTask for WOW scheduling. Restoring a local NT4 queue copy would not consume the actual native messages;keep omitted kernel owner pending decision.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2585",
+      "evidence": "Original xxxDispatchMessage/_PostMessage/_PostThreadMessage/_PostQuitMessage operate PWND and private message lists. Native DispatchMessageA/W target binding and public USER32 queue API address actual native windows/threads;NT4 PWND/list operations cannot substitute for those native objects. Omission remains a native ownership choice,not evidence that original algorithm is defective.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2586",
+      "evidence": "PostMove/SetFMouseMoved/foreground helpers/PostInputMessage/WakeSomeone modify original system mouse,foreground and queue wake state. Their inputs include global raw-input/current desktop and kernel Q references. Actual native input/capture are controlled by USER32;local assignments cannot change its real mouse or wake queue. Preserve omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2587",
+      "evidence": "InitKeyStateLookaside uses UserAllocPool and ExInitializeZone;AllocKeyState/FreeKeyState and key-state events allocate/transfer kernel queue state. Modern queue key state is native USER-owned;importing a local pool would create unrelated storage rather than update native input. Original CBKEYSTATERECENTDOWN assertion is separately retained verbatim.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2588",
+      "evidence": "CheckOnTop/xxxActiveWindowTracking/xxxMouseActivate/TrackMouseEvent depend on native window Z order,activation,capture and desktop window pointers. Their NT4 PWND objects are not HWNDs or public USER-owned windows. Actual SetCapture/ReleaseCapture are native calls in wow_user_task_lifecycle.c. Keep original kernel ownership outside this selected subset pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2589",
+      "evidence": "xxxGetNextSysMsg/xxxSkipSysMsg/UpdateKeyState plus screensaver/playback helpers traverse QMSG/MLIST and kernel journal/raw-input desktop state;xxxGetNextSysMsg2696 explicitly accesses desktop hook chain and grpdeskRitInput. Current real messages are native PeekMessage results. Import alone cannot operate the native queue/hook chain;retain boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2590",
+      "evidence": "xxxScanSysQueue interprets and removes private QMSG objects,locks PWNDs and dispatches kernel mouse/keyboard hooks. The production message path reads USER32 queues;substituting a projected Q cannot supply its message storage. Original conditional frames are kept at their original source positions with bare errors where excluded;body omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2591",
+      "evidence": "IdleTimerProc owns OS screensaver/foreground globals. WakeInputIdle4904-4957 uses W32GetCurrentProcess,SET_PSEUDO_EVENT and process startup cursor state;SleepInputIdle4959-4989 resets same kernel events. Selected wake_input_idle in wow_user_task_lifecycle.c clears FIRSTIDLE and signals present per-task native HANDLE. Original pseudo-event and W32PROCESS cannot be used as these native handle objects;retained per-task behavior is evidenced by source,not a new runtime claim. Whole original kernel-owner restoration remains pending.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2592",
+      "evidence": "AddAttachment5015-5043 already matches original byte-for-byte after newline normalization;full body comparison preserved after cleanup. No independent implementation deviation remains at this historical anchor.",
+      "disposition": "restored-or-confirmed-original-verified-published"
+    },
+    {
+      "id": "T483-R2593",
+      "evidence": "Original Recalc2 obtains gptiCurrent and global gpai via kernel USER context. Production reattach gets current_task under existing runtime ownership and passes its projected thread through wow_input_group_commit. The explicit argument also selects that desktop attachment list. Direct signature restoration loses its argument;adding an ambient global/TLS accessor would introduce state/indirection instead of reducing total complexity. Keep one explicit parameter pending owner;fixed-point body remains original.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2594",
+      "evidence": "RedistributeInput splices QMSG/MLIST ownership;CancelInputState/CheckTransferState/AttachToQueue transfer private focus,capture,active and caret pointers;ReattachThreads changes foreground/journal Q objects. Actual AttachThreadInput(native TIDs) in wow_input_group_lifetime.c commits grouping to real USER queues. Original component grouping is reused via AddAttachment/Recalc2,while original Q storage cannot represent the native queues. No copy of private queue lifecycle is introduced;boundary pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2595",
+      "evidence": "Original _AttachThreadInput5871-5953 allocates ATTACHINFO using UserAllocPool and invokes ReattachThreads on private kernel queues. Actual grouping owner attaches native thread IDs through USER32 AttachThreadInput and holds their handles for death/reuse checks. The original API is not a user-mode callable substitute for native USER ownership;keep omission pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2596",
+      "evidence": "Original _SetMessageExtraInfo5963-end reads/writes PtiCurrent()->pq->ExtraInfo. That field belongs to the actual native USER queue,not the scratch grouping label. Restoring a local field assignment would not change the native API extra-info value. Keep omitted kernel implementation pending owner.",
+      "disposition": "qualified-pending-owner"
+    },
+    {
+      "id": "T483-R2597",
+      "evidence": "Original lines1764-1766 including its authored #error diagnostic are unchanged;#line placement now maps original assertion/framework exactly. It is not a replacement for deleted implementation and must not lose its original diagnostic.",
+      "disposition": "restored-or-confirmed-original-verified-published"
+    }
+  ],
+  "mirror_diff_delta": -76,
+  "lexical_blocks_delta": 24,
+  "source_evidence": [
+    "O:/repos.external/OpenNT/windows/core/ntuser/kernel/precomp.h",
+    "O:/repos.external/OpenNT/windows/core/ntuser/kernel/userk.h:111-121",
+    "O:/repos.external/OpenNT/windows/core/ntuser/kernel/globals.h:19,58",
+    "src/wow32-dll/source/wow_input_group_lifetime.c:163-211",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c:212-224,349-357,735-774",
+    "src/wow32-dll/source/wow_user_message_bridge.c:11-25,37-53,69-94",
+    "src/wow32-dll/include/wow_input_group_bindings.h",
+    "test/adapter-mvdm-host-out/wow/wow_input_membership_fixture.c",
+    "test/adapter-mvdm-host-out/wow/wow_input_lifetime_fixture.c"
+  ],
+  "delivery_verification": "P243 cached x86/x64,publish11x2,focused36,Full20,boundary143/9,governance passed;batch-p243-checkpoint.json"
+}

@@ -8,56 +8,72 @@
 * History:
 * 30-Nov-1993 SanfordS  Created.
 \***************************************************************************/
-/* DIVERGENCE(OPENNT-HOST-055): exact string/integer reader subset.
- * ADAPTER-WOW-042 binds PMAP_COMPAT and EDIT's PMAP_DESKTOP read-only access. */
 #define WOW_ORIGINAL_PROFILE
+#line 11
 #include "wow_task_profile_bindings.h"
+#pragma hdrstop
 
+#line 68
+#ifdef FE_SB // PMAP_WINLOGON
+#error
+#endif // FE_SB
+#line 235
 /*****************************************************************************\
-* FastGetProfileIntW()
+* FastGetProfileDwordW
 *
-* Implements a fast version of the standard API using predefined registry
-* section indecies (PMAP_) that reference lazy-opened, cached registry
-* handles.  FastCloseProfileUserMapping() should be called to clean up
-* cached entries when fast profile calls are completed.
+* Reads a REG_DWORD type key from the registry.
+*
+* returns value read or default value on failure.
 *
 * History:
 * 02-Dec-1993 SanfordS  Created.
 \*****************************************************************************/
-#line 548
-UINT FastGetProfileIntW(
+DWORD FastGetProfileDwordW(
     UINT    idSection,
     LPCWSTR lpKeyName,
-    UINT    nDefault)
+    DWORD   dwDefault)
 {
-    WCHAR          ValueBuf[40];
-    UNICODE_STRING Value;
-    UINT           ReturnValue;
+    HANDLE         hKey;
+    DWORD          cbSize;
+    DWORD          dwRet;
+    LONG           Status;
+    UNICODE_STRING UnicodeString;
+    BYTE           Buf[sizeof(KEY_VALUE_PARTIAL_INFORMATION) + sizeof(DWORD)];
 
     UserAssert(idSection <= PMAP_LAST);
 
-    Value.Length        = 0;
-    Value.MaximumLength = sizeof(ValueBuf);
-    Value.Buffer        = ValueBuf;
-
-    RtlIntegerToUnicodeString(nDefault, 10, &Value);
-    if (!FastGetProfileStringW(idSection,
-                               lpKeyName,
-                               (LPWSTR)Value.Buffer,
-                               Value.Buffer,
-                               sizeof(ValueBuf) / sizeof(WCHAR))) {
-        return nDefault;
+    if ((hKey = OpenCacheKeyEx(idSection, KEY_READ)) == NULL) {
+        RIPMSG1(RIP_WARNING, "FastGetProfileDwordW: Failed to open cache-key (%ws)", lpKeyName);
+        return dwDefault;
     }
 
-    /*
-     * Convert string to int.
-     */
-    Value.Length = wcslen(Value.Buffer) * sizeof(WCHAR);
-    RtlUnicodeStringToInteger(&Value, 10, &ReturnValue);
+    RtlInitUnicodeString(&UnicodeString, lpKeyName);
+    Status = ZwQueryValueKey(hKey,
+                             &UnicodeString,
+                             KeyValuePartialInformation,
+                             (PKEY_VALUE_PARTIAL_INFORMATION)Buf,
+                             sizeof(Buf),
+                             &cbSize);
 
-    return ReturnValue;
+    dwRet = dwDefault;
+
+    if (NT_SUCCESS(Status)) {
+
+        dwRet = *((PDWORD)((PKEY_VALUE_PARTIAL_INFORMATION)Buf)->Data);
+
+    } else if (Status != STATUS_OBJECT_NAME_NOT_FOUND) {
+
+        RIPMSG1(RIP_WARNING,
+                "FastGetProfileDwordW: ObjectName not found: %ws",
+                lpKeyName);
+    }
+
+    ZwClose(hKey);
+
+    return dwRet;
 }
 
+#line 431
 /*****************************************************************************\
 * FastGetProfileStringW()
 *
@@ -71,7 +87,6 @@ UINT FastGetProfileIntW(
 * History:
 * 02-Dec-1993 SanfordS  Created.
 \*****************************************************************************/
-#line 444
 DWORD FastGetProfileStringW(
     UINT    idSection,
     LPCWSTR lpKeyName,
@@ -165,28 +180,56 @@ DefExit:
     return 0;
 }
 
+/*****************************************************************************\
+* FastGetProfileIntW()
+*
+* Implements a fast version of the standard API using predefined registry
+* section indecies (PMAP_) that reference lazy-opened, cached registry
+* handles.  FastCloseProfileUserMapping() should be called to clean up
+* cached entries when fast profile calls are completed.
+*
+* History:
+* 02-Dec-1993 SanfordS  Created.
+\*****************************************************************************/
+UINT FastGetProfileIntW(
+    UINT    idSection,
+    LPCWSTR lpKeyName,
+    UINT    nDefault)
+{
+    WCHAR          ValueBuf[40];
+    UNICODE_STRING Value;
+    UINT           ReturnValue;
 
+    UserAssert(idSection <= PMAP_LAST);
 
+    Value.Length        = 0;
+    Value.MaximumLength = sizeof(ValueBuf);
+    Value.Buffer        = ValueBuf;
 
-#line 68
-#ifdef FE_SB // PMAP_WINLOGON
-#line 69
-#error Unsupported FE_SB original branch
-#endif // FE_SB
-#line 71
+    RtlIntegerToUnicodeString(nDefault, 10, &Value);
+    if (!FastGetProfileStringW(idSection,
+                               lpKeyName,
+                               (LPWSTR)Value.Buffer,
+                               Value.Buffer,
+                               sizeof(ValueBuf) / sizeof(WCHAR))) {
+        return nDefault;
+    }
 
+    /*
+     * Convert string to int.
+     */
+    Value.Length = wcslen(Value.Buffer) * sizeof(WCHAR);
+    RtlUnicodeStringToInteger(&Value, 10, &ReturnValue);
+
+    return ReturnValue;
+}
 #line 745
 #ifdef DEBUG
-#line 746
-#error Unsupported DEBUG original branch
+#error
 #line 750
 #endif
-#line 751
-
 #line 827
 #ifdef DEBUG
-#line 828
-#error Unsupported DEBUG original branch
+#error
 #line 832
 #endif
-#line 833
