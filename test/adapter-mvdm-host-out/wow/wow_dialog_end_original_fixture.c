@@ -17,17 +17,15 @@ static WND owner;
 static HWND child, active;
 static BOOL valid, is_dialog;
 static unsigned failures, enables, focuses, hides, activates, zaps;
-enum callout { NO_FAULT, VALIDATE, ENABLE, FOCUS, HIDE, ACTIVATE };
+enum callout { NO_FAULT, ENABLE, FOCUS, HIDE, ACTIVATE };
 static enum callout fault;
 static unsigned retirement;
 static void callback(enum callout point)
 {
     if (point != fault) return;
-    /* Exact terminal-state inputs from the existing owner: backing WND
-     * remains borrowed, but original dialog cleanup has released PDLG.
-     * The real HWND intentionally remains valid to detect numeric-only
-     * revalidation or an unwanted wake to a replacement identity. This is
-     * a deterministic lifetime double, not Windows handle-reuse evidence. */
+    /* Native HWND destruction is real; retained WND/PDLG terminal states
+     * remain explicit doubles of original cleanup, not handle-reuse proof. */
+    DestroyWindow(dialog.wnd.head.h);
     if (retirement & 1) SetWF(&dialog.wnd, WFDESTROYED);
     if (retirement & 2) dialog.wnd.fnid |= FNID_CLEANEDUP_BIT;
     dialog.pdlg = NULL;
@@ -36,7 +34,7 @@ static void callback(enum callout point)
 PWND WINAPI wow_window_client_validate_window(HWND window)
 { return valid && window == dialog.wnd.head.h ? &dialog.wnd : NULL; }
 BOOL ValidateDialogPwnd(PWND window)
-{ CHECK(window == &dialog.wnd); callback(VALIDATE); return is_dialog; }
+{ CHECK(window == &dialog.wnd); return is_dialog; }
 HWND WINAPI wow_native_GetActiveWindow(void) { return active; }
 HWND WINAPI wow_native_GetFocus(void) { return child; }
 BOOL WINAPI wow_native_EnableWindow(HWND window, BOOL enable)
@@ -46,18 +44,25 @@ HWND WINAPI wow_native_SetFocus(HWND window)
 BOOL WINAPI wow_native_SetWindowPos(HWND window, HWND after, int x, int y,
     int cx, int cy, UINT flags)
 {
-    CHECK(window == dialog.wnd.head.h && data.fEnd && dialog.pdlg && !after && !x && !y && !cx && !cy);
+    CHECK(window == dialog.wnd.head.h && data.fEnd && !after && !x && !y && !cx && !cy);
     CHECK(flags == (SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER));
+    if (!IsWindow(window)) return FALSE;
     ++hides; callback(HIDE); return TRUE;
 }
 HWND WINAPI wow_native_SetActiveWindow(HWND window)
-{ CHECK(window == owner.head.h && hides == 1 && dialog.pdlg); ++activates; active = window; callback(ACTIVATE); return dialog.wnd.head.h; }
+{ CHECK(window == owner.head.h); ++activates; active = window; callback(ACTIVATE); return dialog.wnd.head.h; }
 VOID WINAPI wow_dialog_zap_active_and_focus(void)
 { CHECK(hides == 1); ++zaps; active = NULL; }
 static void reset(BOOL owned, BOOL was_active, BOOL disabled)
 {
     MSG message;
     while (PeekMessageW(&message, dialog.wnd.head.h, WM_NULL, WM_NULL, PM_REMOVE)) {}
+    if (IsWindow(dialog.wnd.head.h)) DestroyWindow(dialog.wnd.head.h);
+    dialog.wnd.head.h = CreateWindowExW(0, L"STATIC", L"dialog", WS_POPUP,
+        0, 0, 1, 1, owner.head.h, NULL, GetModuleHandleW(NULL), NULL);
+    child = CreateWindowExW(0, L"STATIC", L"child", WS_CHILD,
+        0, 0, 1, 1, dialog.wnd.head.h, NULL, GetModuleHandleW(NULL), NULL);
+    CHECK(dialog.wnd.head.h && child);
     ZeroMemory(&data, sizeof(data));
     ClrWF(&dialog.wnd, WFDESTROYED);
     dialog.wnd.fnid = FNID_DIALOG;
@@ -103,7 +108,7 @@ int __cdecl main(void)
     CHECK(!wow_original_EndDialog(dialog.wnd.head.h, 7));
     CHECK(!data.fEnd && !enables && !focuses && !hides && !activates && !zaps);
     CHECK(!PeekMessageW(&message, dialog.wnd.head.h, WM_NULL, WM_NULL, PM_REMOVE));
-    for (point = VALIDATE; point <= ACTIVATE; ++point)
+    for (point = ENABLE; point <= ACTIVATE; ++point)
         for (mode = 1; mode <= 3; ++mode) {
             BOOL result = FALSE, raised = FALSE;
             reset(TRUE, TRUE, FALSE);
@@ -111,19 +116,19 @@ int __cdecl main(void)
             __try { result = wow_original_EndDialog(dialog.wnd.head.h, -49); }
             __except (GetExceptionCode() == EXCEPTION_ACCESS_VIOLATION ?
                     EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { raised = TRUE; }
-            CHECK(!raised && !dialog.pdlg && IsWindow(dialog.wnd.head.h));
+            CHECK(!raised && !dialog.pdlg && !IsWindow(dialog.wnd.head.h));
             CHECK(result == (point >= FOCUS));
             CHECK(data.fEnd == (point >= FOCUS));
             CHECK(data.result == (point >= FOCUS ? -49 : 0));
             CHECK(enables == (unsigned)(point >= ENABLE));
             CHECK(focuses == (unsigned)(point >= FOCUS));
             CHECK(hides == (unsigned)(point >= HIDE));
-            CHECK(activates == (unsigned)(point >= ACTIVATE) && !zaps);
+            CHECK(activates == (unsigned)(point >= FOCUS) && !zaps);
             CHECK(!PeekMessageW(&message, dialog.wnd.head.h, WM_NULL, WM_NULL, PM_REMOVE));
         }
-    CHECK(DestroyWindow(dialog.wnd.head.h));
+    if (IsWindow(dialog.wnd.head.h)) CHECK(DestroyWindow(dialog.wnd.head.h));
     CHECK(!IsWindow(child));
     CHECK(DestroyWindow(owner.head.h));
-    printf("dialog-end-original cases=25 failures=%u\n", failures);
+    printf("dialog-end-original cases=22 failures=%u\n", failures);
     return failures ? 1 : 0;
 }

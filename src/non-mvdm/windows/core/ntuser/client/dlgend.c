@@ -8,12 +8,9 @@
 * 12-Feb-1991 mikeke    Added Revalidation code
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-080): complete original EndDialog body.
- * Same dialog state/owner as the original creator and modal manager;
- * private precomp is supplied by the consuming group. */
-#line 11
 #include "precomp.h"
 #pragma hdrstop
+
 
 /***************************************************************************\
 * EndDialog
@@ -22,7 +19,6 @@
 * 11-Dec-1990 mikeke  ported from win30
 \***************************************************************************/
 
-#line 22
 BOOL EndDialog(
     HWND hwnd,
     int result)
@@ -35,6 +31,7 @@ BOOL EndDialog(
 #ifdef SYSMODALWINDOWS
 #line 31
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
+#line 32
 #endif
 #line 33
 
@@ -49,10 +46,6 @@ BOOL EndDialog(
      */
     if (!ValidateDialogPwnd(pwnd))
         return 0;
-
-    /* DIVERGENCE(OPENNT-HOST-080): validation can destroy retained state. */
-    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
-        return FALSE;
 
 #line 46
     if (SAMEWOWHANDLE(hwnd, GetActiveWindow())) {
@@ -81,7 +74,6 @@ BOOL EndDialog(
     /*
      * Terminate Mode Loop.
      */
-    /* DIVERGENCE(OPENNT-HOST-080): owner-enable can release this PDLG. */
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
         return FALSE;
 #line 72
@@ -104,22 +96,16 @@ BOOL EndDialog(
         NtUserSetFocus(hwnd);
     }
 
-    /* DIVERGENCE(OPENNT-HOST-080): end committed; do not hide a reused HWND. */
-    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
-        return TRUE;
 #line 91
     NtUserSetWindowPos(hwnd, NULL, 0, 0, 0, 0,
                        SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOMOVE |
                        SWP_NOSIZE | SWP_NOZORDER);
 
-    /* DIVERGENCE(OPENNT-HOST-080): hide callbacks may complete destruction. */
-    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
-        return TRUE;
-
 #line 95
 #ifdef SYSMODALWINDOWS
 #line 96
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
+#line 115
 #endif
 #line 116
 
@@ -153,6 +139,7 @@ BOOL EndDialog(
 #ifdef SYSMODALWINDOWS
 #line 144
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
+#line 161
 #endif
 #line 162
 
@@ -164,9 +151,6 @@ BOOL EndDialog(
      * the window. This happens when the dialog is obscured.
      * This is a problem with winfile and its copy/move dialog.
      */
-    /* DIVERGENCE(OPENNT-HOST-080): activation may retire the exact dialog. */
-    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
-        return TRUE;
 #line 171
     PostMessage(hwnd, WM_NULL, 0, 0);
 

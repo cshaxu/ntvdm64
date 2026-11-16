@@ -1336,3 +1336,7 @@ P225: [dlgbegin active investigation](p225-dlgbegin-investigation.json);not comp
 P225: [dlgbegin complete source review](p225-dlgbegin-review.json);85->44,final-code delivery pending.
 
 P225: [delivery receipt](batch-p225-checkpoint.json). Cached,publish11x2,32 controls,Full20 and governance passed;dlgbegin85->44(-41),combo line metadata restored.
+
+P226 active: [dlgend review](p226-dlgend-review.json). Two format points restored locally; functional review and delivery remain pending.
+
+P226: [delivery receipt](batch-p226-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;dlgend61->42(-19).
