@@ -3,23 +3,8 @@
 #include "nt.h"
 #include <string.h>
 
-/* Original usercli.h IN_STRING declaration, Copyright Microsoft Corporation.
- * ADAPTER-WOW-034: finite USER capture ABI; this is not a native TEB layout. */
-typedef struct _IN_STRING {
-    UNICODE_STRING strCapture;
-    PUNICODE_STRING pstr;
-    BOOL fAllocated;
-} IN_STRING, *PIN_STRING;
+#include "wow_edit_lookaside_bindings.h"
 
-/* Original user.h/usercli.h large-capture declarations (Microsoft). */
-#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
-typedef struct _LARGE_IN_STRING {
-    LARGE_UNICODE_STRING strCapture;
-    PLARGE_UNICODE_STRING pstr;
-    BOOL fAllocated;
-} LARGE_IN_STRING, *PLARGE_IN_STRING;
 BOOL WINAPI RtlCaptureLargeAnsiString(PLARGE_IN_STRING, LPCSTR, UINT, BOOL);
 
 /* Original ntpsapi.h constant. Reuse existing opennt_support_current_teb's

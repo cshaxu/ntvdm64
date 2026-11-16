@@ -12,110 +12,175 @@
 * 04-27-91 DarrinM      Created from PROTO.H, MACRO.H and STRTABLE.H
 \***************************************************************************/
 
-#line 15
 #ifndef _USERCLI_
 #define _USERCLI_
 
-#ifndef OPENNT_USERCLI_LOOKASIDE_SUBSET_H
-#define OPENNT_USERCLI_LOOKASIDE_SUBSET_H
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 18
+#define OEMRESOURCE 1
 
-/* OPENNT-HOST-090: original default-window bitmap predicate. */
+#include <windows.h>
+#endif
+#line 22
+#if DBG
+#error
+#line 24
+#endif
+#line 26
+#ifdef RIP_COMPONENT
+#error
+#line 28
+#endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 30
+
+#include <stddef.h>
+#include <wingdip.h>
+#include <ddeml.h>
+#line 38
+#include <dde.h>
+#line 42
+#include <memory.h>
+#endif
+#line 44
+#ifndef WOW
+#line 46
+#endif
+#line 47
+#ifdef FE_IME
+#error
+#line 50
+#endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 53
+
+/*
+ * This prototype is needed in client\globals.h which is included unintentionally
+ * from usersrv.h
+ */
+typedef LONG (APIENTRY *CFNSCSENDMESSAGE)(HWND, UINT, DWORD, LONG,
+        DWORD, DWORD, BOOL);
+
+#line 61
+/***************************************************************************\
+* Typedefs and Macros
+*
+* Here are defined all types and macros that are shared across the User's
+* client-side code modules.  Types and macros that are unique to a single
+* module should be defined at the head of that module, not in this file.
+*
+\***************************************************************************/
+
+#line 70
+#ifdef DEBUG
+#error
+#line 103
+#else
+
+#define USERGLOBALLOCK(h, p)   p = GlobalLock((HANDLE)(h))
+#define USERGLOBALUNLOCK(h)    GlobalUnlock((HANDLE)(h))
+#define UserGlobalFree(h)      GlobalFree((HANDLE)(h))
+#endif
+#line 109
+
+#define UserGlobalAlloc(flags, size)        GlobalAlloc(flags, size)
+#define UserGlobalReAlloc(pmem, cnt, flags) GlobalReAlloc(pmem,cnt,flags)
+#define UserGlobalSize(pmem)                GlobalSize(pmem)
+#line 113
+#define WOWGLOBALFREE(pmem)                 GlobalFree(pmem)
+
+#define RESERVED_MSG_BITS   (0xFFFE0000)
+
+#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 117
+#define MSGFLAG_SPECIAL_THUNK       0x10000000      // server->client thunk needs special handling
+#endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 118
+
+/*
+ * A macro for testing bits in the message bit-arrays.  Messages in the
+ * the bit arrays must be processed
+ */
+#line 123
 #define FDEFWINDOWMSG(msg, procname) \
     ((msg <= (gSharedInfo.procname.maxMsgs)) && \
             ((gSharedInfo.procname.abMsgs)[msg / 8] & (1 << (msg & 7))))
 #define FWINDOWMSG(msg, fnid) \
     ((msg <= (gSharedInfo.awmControl[fnid - FNID_START].maxMsgs)) && \
             ((gSharedInfo.awmControl[fnid - FNID_START].abMsgs)[msg / 8] & (1 << (msg & 7))))
-
-/* OPENNT-HOST-087: original ID for the retained EDIT menu resource. */
-#define ID_EC_PROPERTY_MENU      1
-
-/* OPENNT-HOST-074: unchanged client-side pointer macros, not server locks.
- * Opt in only for original client bodies whose caller retains the objects. */
-#ifdef WOW_ORIGINAL_EDIT_CLIENT
-#undef ThreadLock
-#undef ThreadLockAlways
-#undef ThreadLockWithPti
-#undef ThreadLockAlwaysWithPti
-#undef ThreadUnlock
-#undef Lock
-#undef Unlock
-#define CheckLock(pobj)
-#define ThreadLock(pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
-#define ThreadLockAlways(pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
-#define ThreadLockWithPti(pti, pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
-#define ThreadLockAlwaysWithPti(pti, pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
-#define ThreadUnlock(ptl) (ptl)
-#define Lock(ppobj, pobj) (*ppobj = pobj)
-#define Unlock(ppobj) (*ppobj = NULL)
-
-#line 346
-#ifndef USEREXTS
-typedef struct _TL {
-    int iBogus;
-} TL;
 #endif
-#line 351
-#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 129
 
-/* DIVERGENCE(OPENNT-HOST-075): original native heap and retail global
- * memory macros. These are distinct from globals.h's guest-capable LOCAL*. */
-#define UserLocalAlloc(uFlag,uBytes) HeapAlloc(pUserHeap, uFlag, (uBytes))
-#define UserLocalReAlloc(p, uBytes, uFlags) HeapReAlloc(pUserHeap, uFlags, (LPSTR)(p), (uBytes))
-#define UserLocalFree(p)    HeapFree(pUserHeap, 0, (LPSTR)(p))
-#define UserLocalSize(p)    HeapSize(pUserHeap, 0, (LPSTR)(p))
-#define UserLocalLock(p)    (LPSTR)(p)
-#define UserLocalUnlock(p)
-#define UserLocalFlags(p)   0
-#define UserLocalHandle(p)  (HLOCAL)(p)
+#define CsSendMessage(hwnd, msg, wParam, lParam, xParam, pfn, bAnsi) \
+        ((msg) >= WM_USER) ? \
+            NtUserfnDWORD(hwnd, msg, wParam, lParam, xParam, pfn, bAnsi) : \
+            gapfnScSendMessage[msg & 0xffff](hwnd, msg, wParam, lParam, xParam, pfn, bAnsi)
 
-#define USERGLOBALLOCK(h, p)   p = GlobalLock((HANDLE)(h))
-#define USERGLOBALUNLOCK(h)    GlobalUnlock((HANDLE)(h))
-#define UserGlobalFree(h)      GlobalFree((HANDLE)(h))
-#define UserGlobalAlloc(flags, size)        GlobalAlloc(flags, size)
-#define UserGlobalReAlloc(pmem, cnt, flags) GlobalReAlloc(pmem,cnt,flags)
-#define UserGlobalSize(pmem)                GlobalSize(pmem)
-
-/* OPENNT-HOST-075: original module-specific callback, not task version. */
-#define GETEXPWINVER(hModule)                        ((*(pfnGetExpWinVer))((hModule)?(hModule):GetModuleHandle(NULL)))
-
-/* DIVERGENCE(OPENNT-HOST-075): retain the distinct original current-task
- * query; GetClientInfo binds to the existing task initialization owner. */
-#define GetAppVer(pti) GetClientInfo()->dwExpWinVer
+#define GetWindowProcess(hwnd) (DWORD)NtUserQueryWindow(hwnd, WindowProcess)
+#define GETPROCESSID() ((DWORD)NtCurrentTeb()->ClientId.UniqueProcess)
 
 /*
- * Lookaside definitions
+ * Macro to mask off uniqueness bits for WOW handles
  */
-#line 305
-typedef struct _LOOKASIDE {
-    PVOID LookasideBase;
-    PVOID LookasideBounds;
-    ZONE_HEADER LookasideZone;
-    DWORD EntrySize;
-#line 310
-#if DBG
-#line 311
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#endif // DBG
-#line 317
-} LOOKASIDE, *PLOOKASIDE;
+#line 141
+#define SAMEWOWHANDLE(h1, h2)  ((BOOL)!(((UINT)(h1) ^ (UINT)(h2)) & 0xffff))
+#line 142
+#define DIFFWOWHANDLE(h1, h2)  (!SAMEWOWHANDLE(h1, h2))
 
-NTSTATUS InitLookaside(PLOOKASIDE pla, DWORD cbEntry, DWORD cEntries);
-PVOID AllocLookasideEntry(PLOOKASIDE pla);
-void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
-#endif
+/*
+ * This macro can check to see if a function pointer is a server side
+ * procedure.
+ */
+// #define ISSERVERSIDEPROC(p) (((DWORD)p) >= FNID_START && ((DWORD)p) <= FNID_END)
 
-#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+/*
+ * For callbacks to the client - for msg and hook thunks, callback addresses
+ * are passed as addresses, not function indexes as they are from client to
+ * server.
+ */
+typedef int (WINAPI *GENERICPROC)();
 
+#define CALLPROC(p) ((GENERICPROC)p)
+
+#define CALLPROC_WOWCHECK(pfn, hwnd, msg, wParam, lParam)       \
+    ((WNDPROC_WOW & (DWORD)pfn) ? (*pfnWowWndProcEx)(hwnd, msg, wParam, lParam, (DWORD)pfn, NULL) : ((WNDPROC)pfn)(hwnd, msg, wParam, lParam))
+
+#define CALLPROC_WOWCHECKPWW(pfn, hwnd, msg, wParam, lParam, pww)       \
+    ((WNDPROC_WOW & (DWORD)pfn) ? (*pfnWowWndProcEx)(hwnd, msg, wParam, lParam, (DWORD)pfn, pww) : ((WNDPROC)pfn)(hwnd, msg, wParam, lParam))
+
+#define RevalidateHwnd(hwnd)        ValidateHwndNoRip(hwnd)
+#define VALIDATEHMENU(hmenu)        ((PMENU)HMValidateHandle(hmenu, TYPE_MENU))
+
+
+/*
+ * REBASE macros take kernel desktop addresses and convert them into
+ * user addresses.
+ *
+ * REBASEALWAYS converts a kernel address contained in an object
+ * REBASEPWND casts REBASEALWAYS to a PWND
+ * REBASE only converts if the address is in kernel space.  Also works for NULL
+ * REBASEPTR converts a random kernel address
+ */
+
+#define REBASEALWAYS(p, elem) ((PVOID)(((PBYTE)(p) + ((PBYTE)(p)->elem - (p)->head.pSelf))))
+#define REBASEPTR(obj, p) ((PVOID)((PBYTE)(p) - ((PBYTE)(obj)->head.pSelf - (PBYTE)(obj))))
+
+#define REBASE(p, elem) ((PVOID)((p)->elem) <= MM_HIGHEST_USER_ADDRESS ? \
+        ((p)->elem) : REBASEALWAYS(p, elem))
+#define REBASEPWND(p, elem) ((PWND)REBASE(p, elem))
+
+#line 186
+#ifndef USEREXTS
+#line 190
 /*
  * Window Proc Window Validation macro. This macro assumes
  * that pwnd and hwnd are existing variables pointing to the window.
  * Checking the BUTTON is for Mavis Beacon.
  */
 
-#line 186
-#ifndef USEREXTS
-#line 196
 #define VALIDATECLASSANDSIZE(pwnd, inFNID)                                      \
     switch ((pwnd)->fnid) {                                                     \
     case inFNID:                                                                \
@@ -181,17 +246,166 @@ void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
     }
 
 #endif
-#line 360
+#line 261
 
-typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
+#define ConnectIfNecessary()                                            \
+    {                                                                   \
+        PTEB pteb = NtCurrentTeb();                                     \
+                                                                        \
+        if (pteb->Win32ThreadInfo == NULL &&                            \
+                NtUserGetThreadState(-1) != (DWORD)STATUS_SUCCESS) {    \
+            return 0;                                                   \
+        }                                                               \
+    }
+
+/*
+ * Bitmap related macroes.
+ */
+#define SetBestStretchMode(hdc, planes, bpp) \
+    SetStretchBltMode(hdc, (((planes) * (bpp)) == 1 ? BLACKONWHITE : COLORONCOLOR))
+
+#define BitmapSize(cx, cy, planes, bits) \
+        (BitmapWidth(cx, bits) * (cy) * (planes))
+
+#define BitmapWidth(cx, bpp)  (((((cx)*(bpp)) + 31) & ~31) >> 3)
+
+#define RGBX(rgb)  RGB(GetBValue(rgb), GetGValue(rgb), GetRValue(rgb))
 
 #endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 285
+/*
+ * Typedefs used for capturing string arguments to be passed
+ * to the kernel.
+ */
+typedef struct _IN_STRING {
+    UNICODE_STRING strCapture;
+    PUNICODE_STRING pstr;
+    BOOL fAllocated;
+} IN_STRING, *PIN_STRING;
 
-/* DIVERGENCE(OPENNT-HOST-095): unchanged original ComboBox state and its
- * private constants, selected only for the recovered collaboration group.
- * These declarations never describe a native USER allocation. */
-#if defined(WOW_ORIGINAL_COMBO_STATE_LAYOUT) && !defined(OPENNT_COMBO_STATE_LAYOUT_H)
-#define OPENNT_COMBO_STATE_LAYOUT_H
+typedef struct _LARGE_IN_STRING {
+    LARGE_UNICODE_STRING strCapture;
+    PLARGE_UNICODE_STRING pstr;
+    BOOL fAllocated;
+} LARGE_IN_STRING, *PLARGE_IN_STRING;
+
+
+/*
+ * Lookaside definitions
+ */
+#line 305
+typedef struct _LOOKASIDE {
+    PVOID LookasideBase;
+    PVOID LookasideBounds;
+    ZONE_HEADER LookasideZone;
+    DWORD EntrySize;
+#if DBG
+#error
+#line 316
+#endif // DBG
+} LOOKASIDE, *PLOOKASIDE;
+
+NTSTATUS InitLookaside(PLOOKASIDE pla, DWORD cbEntry, DWORD cEntries);
+PVOID AllocLookasideEntry(PLOOKASIDE pla);
+void FreeLookasideEntry(PLOOKASIDE pla, PVOID pEntry);
+
+#line 323
+/***************************************************************************\
+*
+* Thread and structure locking routines - we'll just define these to do
+* nothing for now until we figure out what needs to be done
+*
+\***************************************************************************/
+
+#undef ThreadLock
+#undef ThreadLockAlways
+#undef ThreadLockWithPti
+#undef ThreadLockAlwaysWithPti
+#undef ThreadUnlock
+#undef Lock
+#undef Unlock
+#define CheckLock(pobj)
+#define ThreadLock(pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
+#define ThreadLockAlways(pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
+#define ThreadLockWithPti(pti, pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
+#define ThreadLockAlwaysWithPti(pti, pobj, ptl) DBG_UNREFERENCED_LOCAL_VARIABLE(*ptl)
+#define ThreadUnlock(ptl) (ptl)
+#define Lock(ppobj, pobj) (*ppobj = pobj)
+#define Unlock(ppobj) (*ppobj = NULL)
+
+#ifndef USEREXTS
+typedef struct _TL {
+    int iBogus;
+} TL;
+#endif
+#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 351
+
+/***************************************************************************\
+*
+* International mult-keyboard layout/font support
+*
+\***************************************************************************/
+
+typedef LONG (PASCAL *TABTEXTCALLBACK)(HDC, int, int, LPCSTR, int, int,
+        LPINT, int, BOOL, int, int);
+typedef void (PASCAL  *LPFNTEXTOUT)(HDC, int, int, LPCSTR, int);
+#line 361
+typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
+#line 362
+
+typedef struct tagCHARSETBLOCK
+{
+    UINT            iCharset;   // 0x00
+    HANDLE          hlibLPK;    // 0x02
+    EDITCHARSETPROC lpfnEditCall;
+    TABTEXTCALLBACK lpfnTabTextCall;
+    FARPROC         lpfnDrawTextCall;
+    LPFNTEXTOUT     lpfnPSMTextOutCall;
+} CHARSETBLOCK, *PCHARSETBLOCK;
+
+extern PCHARSETBLOCK gpCharset;
+extern UINT gnCharset;
+
+#line 376
+/***************************************************************************\
+*
+* Button Controls
+*
+\***************************************************************************/
+
+/*
+ *  Note: The button data structures are now found in user.h because the
+ *        kernel needs to handle a special case of SetWindowWord on index
+ *        0L to change the state of the button.
+ */
+
+#define BUTTONSTATE(pbutn)   (pbutn->buttonState)
+
+#define BST_CHECKMASK       0x0003
+#define BST_INCLICK         0x0010
+#define BST_CAPTURED        0x0020
+#define BST_MOUSE           0x0040
+#define BST_DONTCLICK       0x0080
+#define BST_INBMCLICK       0x0100
+
+#define PBF_PUSHABLE     0x0001
+#define PBF_DEFAULT      0x0002
+
+/*
+ * BNDrawText codes
+ */
+#define DBT_TEXT    0x0001
+#define DBT_FOCUS   0x0002
+#line 407
+/***************************************************************************\
+*
+* ComboBox
+*
+\***************************************************************************/
+
 /*
  * ID numbers (hMenu) for the child controls in the combo box
  */
@@ -228,7 +442,6 @@ typedef LRESULT (cdecl *EDITCHARSETPROC)(struct tagED *, UINT, ...);
  */
 #define LBS_COMBOBOX    0x8000L
 
-#line 449
 typedef struct tagCBox {
     struct tagWND *spwnd;      /* Window for the combo box */
     struct tagWND *spwndParent;/* Parent of the combo box */
@@ -279,10 +492,81 @@ typedef struct tagCBox {
                                 */
 } CBOX, *PCBOX;
 
-#endif
+#line 499
+typedef struct tagCOMBOWND {
+    WND wnd;
+    PCBOX pcbox;
+} COMBOWND, *PCOMBOWND;
 
+#line 504
+/*
+ * combo.h - Include file for combo boxes.
+ */
+
+/*
+ * This macro is used to isolate the combo box style bits.  Ie if it the combo
+ * box is simple, atomic, dropdown, or a dropdown listbox.
+ */
+#define COMBOBOXSTYLE(style)   ((LOBYTE(style)) & 3)
+
+#line 514
+#define IsComboVisible(pcbox) (!pcbox->fNoRedraw && IsVisible(pcbox->spwnd))
+#line 515
+
+/*
+ * Note that I depend on the fact that these CBN_ defines are the same as
+ * their listbox counterparts.  These defines are found in windows.h.
+ * #define CBN_ERRSPACE  (-1)
+ * #define CBN_SELCHANGE 1
+ * #define CBN_DBLCLK    2
+ */
+
+
+/***************************************************************************\
+*
+* Edit Control Types/Macros
+*
+\***************************************************************************/
+
+/*
+ * hooks for edit class to allow intl versions to use the same code but
+ * do special processing.  Each of these translates into a call as follows...
+ *
+ *  if (ped->lpfnCharset)
+ *      (* ped->lpfnCharset)(ped, msg, ...);
+ */
+#define EDITINTL_SETFONT         0
+#define EDITINTL_SLICHTOX        1
+#define EDITINTL_CREATE          2
+#define EDITINTL_CREATEMLSL      3
+#define EDITINTL_INSERTTEXT      4
+#define EDITINTL_DESTROY         5
+#define EDITINTL_SLDRAWTEXT      6
+#define EDITINTL_SLDRAWLINE      7
+#define EDITINTL_MOUSETOICH      8
+#define EDITINTL_KEYMESSAGE      9
+#define EDITINTL_INPUTLANGREQ   10
+#define EDITINTL_INPUTLANGCHNG  11
+#define EDITINTL_SETFOCUS       12
+#define EDITINTL_GETCLIPRECT    13
+#define EDITINTL_SLSCROLLTEXT   14
+#define EDITINTL_MLDRAWTEXT     15
+#define EDITINTL_MLICHTOXY      16
+#define EDITINTL_MLMOUSETOICH   17
+#define EDITINTL_MLGETLINEWIDTH 18
+#define EDITINTL_SETPASSWORD    19
+#define EDITINTL_CCHINWIDTH     20
+#define EDITINTL_MLSCROLL       21
+#define EDITINTL_STYLECHANGE    22
+#define EDITINTL_SETMENU        23
+#define EDITINTL_PROCESSMENU    24
+#endif
+#line 563
+#ifdef WINDOWS_PE
+#error
+#line 568
+#endif
 #if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
-#define OPENNT_USERCLI_EDIT_STATE_SUBSET_H
 #line 570
 /* Window extra bytes */
 #define CBEDITEXTRA 6
@@ -322,18 +606,19 @@ typedef struct tagCBox {
 #define SHCTDOWN   3 /* Shift and control keys down = CTRLDOWN + SHFTDOWN */
 #define NOMODIFY   4 /* Neither shift nor control down */
 
-#line 617
-#define UNDO_NONE   0  /* We can't undo the last operation. */
-#define UNDO_INSERT 1  /* We can undo the user's insertion of characters */
-#define UNDO_DELETE 2  /* We can undo the user's deletion of characters */
 
-/* OPENNT-HOST-075: original native/WOW word-break dispatch. */
 #define CALLWORDBREAKPROC(proc, pText, iStart, cch, iAction)                \
     (((DWORD)(proc) & WNDPROC_WOW) ?                                        \
         (* pfnWowEditNextWord)(pText, iStart, cch, iAction, (DWORD)proc) :  \
         (* proc)(pText, iStart, cch, iAction))
 
-#line 621
+/*
+ * Types of undo supported in this ped
+ */
+#define UNDO_NONE   0  /* We can't undo the last operation. */
+#define UNDO_INSERT 1  /* We can undo the user's insertion of characters */
+#define UNDO_DELETE 2  /* We can undo the user's deletion of characters */
+
 typedef struct tagUNDO {
     UINT    undoType;          /* Current type of undo we support */
     PBYTE   hDeletedText;      /* Pointer to text which has been deleted (for
@@ -515,14 +800,12 @@ typedef struct tagEDITWND {
     PED ped;
 } EDITWND, *PEDITWND;
 
-/* DIVERGENCE(OPENNT-HOST-075): original EDIT cross-unit declarations. */
 /*
  * The following structure is used to store a selection block; In Multiline
  * edit controls, "StPos" and "EndPos" fields contain the Starting and Ending
  * lines of the block. In Single line edit controls, "StPos" and "EndPos"
  * contain the Starting and Ending character positions of the block;
  */
-#line 808
 typedef struct tagBLOCK {
     ICH StPos;
     ICH EndPos;
@@ -539,149 +822,45 @@ typedef  struct {
 }  STRIPINFO;
 typedef  STRIPINFO FAR *LPSTRIPINFO;
 
-#line 1177
-PSTR ECLock(PED ped);
-#line 1178
-void ECUnlock(PED ped);
-BOOL ECNcCreate(PED, PWND, LPCREATESTRUCT);
-void ECInvalidateClient(PED ped, BOOL fErase);
-BOOL ECCreate(PWND, PED, LONG);
-void ECWord(PED, ICH, BOOL, ICH*, ICH*);
-ICH  ECFindTab(LPSTR, ICH);
-void ECNcDestroyHandler(PWND, PED);
-BOOL ECSetText(PED, LPSTR);
-void ECSetPasswordChar(PED, UINT);
-ICH  ECCchInWidth(PED, HDC, LPSTR, ICH, int, BOOL);
-void ECEmptyUndo(PUNDO);
-void ECSaveUndo(PUNDO pundoFrom, PUNDO pundoTo, BOOL fClear);
-BOOL ECInsertText(PED, LPSTR, ICH);
-ICH  ECDeleteText(PED);
-void ECResetTextInfo(PED ped);
-void ECNotifyParent(PED, int);
-void ECSetEditClip(PED, HDC, BOOL);
-HDC  ECGetEditDC(PED, BOOL);
-void ECReleaseEditDC(PED, HDC, BOOL);
-ICH  ECGetText(PED, ICH, LPSTR, BOOL);
-void ECSetFont(PED, HFONT, BOOL);
-void ECSetMargin(PED, UINT, long, BOOL);
-ICH  ECCopy(PED);
-BOOL ECCalcChangeSelection(PED, ICH, ICH, LPBLOCK, LPBLOCK);
-void ECFindXORblks(LPBLOCK, LPBLOCK, LPBLOCK, LPBLOCK);
-BOOL ECIsCharNumeric(PED ped, DWORD keyPress);
+#line 824
 
-// ECTabTheTextOut draw codes
-#define ECT_CALC        0
-#define ECT_NORMAL      1
-#define ECT_SELECTED    2
+/***************************************************************************\
+*
+* ListBox
+*
+\***************************************************************************/
 
-UINT ECTabTheTextOut(HDC, int, int, int, int,
-                     LPSTR, int, ICH, PED, int, BOOL, LPSTRIPINFO);
-HBRUSH ECGetControlBrush(PED, HDC, LONG);
-HBRUSH ECGetBrush(PED ped, HDC hdc);
-int  ECGetCaretWidth(BOOL);
-int  ECGetModKeys(int);
-void ECSize( PED, LPRECT, BOOL);
+#line 831
+#define IsLBoxVisible(plb)  (plb->fRedraw && IsVisible(plb->spwnd))
+#line 832
 
-ICH  MLInsertText(PED, LPSTR, ICH, BOOL);
-ICH  MLDeleteText(PED);
-BOOL MLEnsureCaretVisible(PED);
-void MLDrawText(PED, HDC, ICH, ICH, BOOL);
-void MLDrawLine(PED, HDC, int, ICH, int, BOOL);
-void MLPaintABlock(PED, HDC, int, int);
-int  GetBlkEndLine(int, int, BOOL FAR *, int, int);
-void MLBuildchLines(PED, ICH, int, BOOL, PLONG, PLONG);
-void MLShiftchLines(PED, ICH, int);
-BOOL MLInsertchLine(PED, ICH, ICH, BOOL);
-void MLSetCaretPosition(PED,HDC);
-void MLIchToXYPos(PED, HDC, ICH, BOOL, LPPOINT);
-int  MLIchToLine(PED, ICH);
-void MLRepaintChangedSelection(PED, HDC, ICH, ICH);
-void MLMouseMotion(PED, UINT, UINT, LPPOINT);
-ICH  MLLine(PED, ICH);
-void MLStripCrCrLf(PED);
-int  MLCalcXOffset(PED, HDC, int);
-BOOL MLUndo(PED);
-LONG MLEditWndProc(HWND, PED, UINT, DWORD, LONG);
-void MLChar(PED, DWORD, int);
-void MLKeyDown(PED, UINT, int);
-ICH  MLPasteText(PED);
-void MLSetSelection(PED, BOOL, ICH, ICH);
-LONG MLCreate(HWND, PED, LPCREATESTRUCT);
-BOOL MLInsertCrCrLf(PED);
-void MLSetHandle(PED, HANDLE);
-LONG MLGetLine(PED, ICH, ICH, LPSTR);
-ICH  MLLineIndex(PED, ICH);
-void MLSize(PED, BOOL);
-void MLChangeSelection(PED, HDC, ICH, ICH);
-void MLSetRectHandler(PED, LPRECT);
-BOOL MLExpandTabs(PED);
-BOOL MLSetTabStops(PED, int, LPINT);
-LONG MLScroll(PED, BOOL, int, int, BOOL);
-int  MLThumbPosFromPed(PED, BOOL);
-void MLUpdateiCaretLine(PED ped);
-ICH  MLLineLength(PED, ICH);
-
-void SLReplaceSel(PED, LPSTR);
-BOOL SLUndo(PED);
-void SLSetCaretPosition(PED, HDC);
-int  SLIchToLeftXPos(PED, HDC, ICH);
-void SLChangeSelection(PED, HDC, ICH, ICH);
-void SLDrawText(PED, HDC, ICH);
-void SLDrawLine(PED, HDC, int, int, ICH, int, BOOL);
-int  SLGetBlkEnd(PED, ICH, ICH, BOOL FAR *);
-BOOL SLScrollText(PED, HDC);
-void SLSetSelection(PED,ICH, ICH);
-ICH  SLInsertText(PED, LPSTR, ICH);
-ICH  SLPasteText(PED);
-void SLChar(PED, DWORD);
-void SLKeyDown(PED, DWORD, int);
-ICH  SLMouseToIch(PED, HDC, LPPOINT);
-void SLMouseMotion(PED, UINT, UINT, LPPOINT);
-LONG SLCreate(HWND, PED, LPCREATESTRUCT);
-void SLPaint(PED, HDC);
-void SLSetFocus(PED);
-void SLKillFocus(PED, HWND);
-LONG SLEditWndProc(HWND, PED, UINT, DWORD, LONG);
-LONG EditWndProc(PWND, UINT, DWORD, LONG);
-
-
-#define ISDELIMETERA(ch) ((ch == ' ') || (ch == '\t'))
-#define ISDELIMETERW(ch) ((ch == L' ') || (ch == L'\t'))
-
-#define AWCOMPARECHAR(ped,pbyte,awchar) (ped->fAnsi ? (*(PUCHAR)(pbyte) == (UCHAR)(awchar)) : (*(LPWSTR)(pbyte) == (WCHAR)(awchar)))
-
-/* OPENNT-HOST-088: original client state-operation declarations. */
-#line 1465
-void SetWindowState(PWND pwnd, UINT flags);
-void ClearWindowState(PWND pwnd, UINT flags);
-#endif /* full EDIT declarations */
-
-/* OPENNT-HOST-086: exact listbox declarations required to preserve the
- * original _SetWindowLong initialized-style guard. Not native USER memory. */
-#if defined(WOW_ORIGINAL_DIALOG_GETSET_LAYOUT) && !defined(OPENNT_DIALOG_GETSET_LB_LAYOUT_H)
-#define OPENNT_DIALOG_GETSET_LB_LAYOUT_H
-/* OPENNT-HOST-086: unchanged original list storage/search declarations,
- * also needed when compiling the full list client, not just its setter. */
+/*
+ * Number of list box items we allocated whenever we grow the list box
+ * structures.
+ */
+#line 837
 #define CITEMSALLOC     32
+
+/* Return Values */
 #define EQ        0
 #define PREFIX    1
 #define LT        2
 #define GT        3
+
 #define XCOORD(l)   ((int)LOWORD(l))
 #define YCOORD(l)   ((int)HIWORD(l))
 #define mod(a,b)    (a - a/b*b)
+
 #define         SINGLESEL       0
 #define         MULTIPLESEL     1
 #define         EXTENDEDSEL     2
+
 #define LBI_ADD     0x0004
-#define LBUP_RELEASECAPTURE 0x0001
-#define LBUP_RESETSELECTION 0x0002
-#define LBUP_NOTIFY         0x0004
-#define LBUP_SUCCESS        0x0008
-#define LBUP_SELCHANGE      0x0010
-#ifndef OPENNT_COMBO_STATE_LAYOUT_H
-typedef struct tagCBox *PCBOX;
-#endif
+#line 854
+
+/*
+ * List Box Instance Variables
+ */
 #line 858
 typedef struct _SCROLLPOS {
     INT cItems;
@@ -801,6 +980,54 @@ typedef struct tagLBIV {
     SCROLLPOS VPos;
 } LBIV, *PLBIV;
 
+#line 976
+/*
+ *  The various bits of wFileDetails field are used as mentioned below:
+ *      0x0001    Should the file name be in upper case.
+ *      0x0002    Should the file size be shown.
+ *      0x0004    Date stamp of the file to be shown ?
+ *      0x0008    Time stamp of the file to be shown ?
+ *      0x0010    The dos attributes of the file ?
+ *      0x0020    In xxxDlgDirSelectEx(), along with file name
+ *                all other details also will be returned
+ *
+ */
+
+#line 988
+#define LBUP_RELEASECAPTURE 0x0001
+#define LBUP_RESETSELECTION 0x0002
+#define LBUP_NOTIFY         0x0004
+#define LBUP_SUCCESS        0x0008
+#define LBUP_SELCHANGE      0x0010
+#line 993
+
+/*
+ * rgpch is set up as follows:  First there are cMac 2 byte pointers to the
+ * start of the strings in hStrings or if ownerdraw, it is 4 bytes of data
+ * supplied by the app and hStrings is not used.  Then if multiselection
+ * listboxes, there are cMac 1 byte selection state bytes (one for each item
+ * in the list box).  If variable height owner draw, there will be cMac 1 byte
+ * height bytes (once again, one for each item in the list box.).
+ *
+ * CHANGES DONE BY SANKAR:
+ *      The selection byte in rgpch is divided into two nibbles. The lower
+ * nibble is the selection state (1 => Selected; 0 => de-selected)
+ * and higher nibble is the display state(1 => Hilited and 0 => de-hilited).
+ * You must be wondering why on earth we should store this selection state and
+ * the display state seperately.Well! The reason is as follows:
+ *      While Ctrl+Dragging or Shift+Ctrl+Dragging, the user can adjust the
+ * selection before the mouse button is up. If the user enlarges a range and
+ * and before the button is up if he shrinks the range, then the old selection
+ * state has to be preserved for the individual items that do not fall in the
+ * range finally.
+ *      Please note that the display state and the selection state for an item
+ * will be the same except when the user is dragging his mouse. When the mouse
+ * is dragged, only the display state is updated so that the range is hilited
+ * or de-hilited) but the selection state is preserved. Only when the button
+ * goes up, for all the individual items in the range, the selection state is
+ * made the same as the display state.
+ */
+
 #line 1021
 typedef struct tagLBItem {
     LONG offsz;
@@ -815,70 +1042,970 @@ typedef struct tagLBWND {
     WND wnd;
     PLBIV pLBIV;
 } LBWND, *PLBWND;
+#line 1034
+
+
+/***************************************************************************\
+*
+* Static Controls
+*
+\***************************************************************************/
+
+#line 1042
+typedef struct tagSTAT {
+    PWND spwnd;
+    union {
+        HANDLE hFont;
+        BOOL   fDeleteIt;
+    };
+    HANDLE hImage;
+    UINT cicur;
+    UINT iicur;
+} STAT, *PSTAT;
+
+typedef struct tagSTATWND {
+    WND wnd;
+    PSTAT pstat;
+} STATWND, *PSTATWND;
+
+#line 1058
+
+typedef struct tagCURSORRESOURCE {
+    WORD xHotspot;
+    WORD yHotspot;
+    BITMAPINFOHEADER bih;
+} CURSORRESOURCE, *PCURSORRESOURCE;
+
+
+#line 1066
+#ifndef NextWordBoundary
+#line 1066
+#define NextWordBoundary(p)     ((PBYTE)(p) + ((DWORD)(p) & 1))
 #endif
+#line 1067
+#define NextDWordBoundary(p)    ((PBYTE)(p) + ((DWORD)(-(LONG)(p)) & 3))
+#line 1068
+
+// DDEML stub prototypes
+
+#line 1072
+PVOID CsValidateInstance(HANDLE hInst);
+
+/***************************************************************************\
+* WOW Prototypes, Typedefs and Defines
+*
+* WOW registers resource callback functions so it can load 16 bit resources
+* transparently for Win32.  At resource load time, these WOW functions are
+* called.
+*
+\***************************************************************************/
+
+/*
+ * This is the structure these callback addresses are kept in.
+ */
+typedef struct _RESCALLS {
+    PFNFINDA    pfnFindResourceExA;
+    PFNFINDW    pfnFindResourceExW;
+    PFNLOAD     pfnLoadResource;
+    PFNLOCK     pfnLockResource;
+    PFNUNLOCK   pfnUnlockResource;
+    PFNFREE     pfnFreeResource;
+    PFNSIZEOF   pfnSizeofResource;
+} RESCALLS;
+typedef RESCALLS *PRESCALLS;
+
+BOOL  APIENTRY _FreeResource(HANDLE hResData, HINSTANCE hModule);
+LPSTR APIENTRY _LockResource(HANDLE hResData, HINSTANCE hModule);
+BOOL  APIENTRY _UnlockResource(HANDLE hResData, HINSTANCE hModule);
+
+#define FINDRESOURCEA(hModule,lpName,lpType)         ((*(prescalls->pfnFindResourceExA))(hModule, lpType, lpName, 0))
+#define FINDRESOURCEW(hModule,lpName,lpType)         ((*(prescalls->pfnFindResourceExW))(hModule, lpType, lpName, 0))
+#define FINDRESOURCEEXA(hModule,lpName,lpType,wLang) ((*(prescalls->pfnFindResourceExA))(hModule, lpType, lpName, wLang))
+#define FINDRESOURCEEXW(hModule,lpName,lpType,wLang) ((*(prescalls->pfnFindResourceExW))(hModule, lpType, lpName, wLang))
+#define LOADRESOURCE(hModule,hResInfo)               ((*(prescalls->pfnLoadResource))(hModule, hResInfo))
+#define LOCKRESOURCE(hResData, hModule)              ((*(prescalls->pfnLockResource))(hResData, hModule))
+#define UNLOCKRESOURCE(hResData, hModule)            ((*(prescalls->pfnUnlockResource))(hResData, hModule))
+#define FREERESOURCE(hResData, hModule)              ((*(prescalls->pfnFreeResource))(hResData, hModule))
+#define SIZEOFRESOURCE(hModule,hResInfo)             ((*(prescalls->pfnSizeofResource))(hModule, hResInfo))
+#endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 1110
+#define GETEXPWINVER(hModule)                        ((*(pfnGetExpWinVer))((hModule)?(hModule):GetModuleHandle(NULL)))
+#line 1111
+
+/*
+ * Pointers to unaligned-bits.  These are necessary for handling
+ * bitmap-info's loaded from file.
+ */
+typedef BITMAPINFO       UNALIGNED *UPBITMAPINFO;
+typedef BITMAPINFOHEADER UNALIGNED *UPBITMAPINFOHEADER;
+typedef BITMAPCOREHEADER UNALIGNED *UPBITMAPCOREHEADER;
+
+#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1120
+#define CCHFILEMAX      MAX_PATH
+#line 1121
+
+HANDLE LocalReallocSafe(HANDLE hMem, DWORD dwBytes, DWORD dwFlags, PPED pped);
+
+HLOCAL WINAPI DispatchLocalAlloc(
+    UINT uFlags,
+    UINT uBytes,
+    HANDLE hInstance);
+
+HLOCAL WINAPI DispatchLocalReAlloc(
+    HLOCAL hMem,
+    UINT uBytes,
+    UINT uFlags,
+    HANDLE hInstance,
+    PVOID* ppv);
+
+LPVOID WINAPI DispatchLocalLock(
+    HLOCAL hMem,
+    HANDLE hInstance);
+
+BOOL WINAPI DispatchLocalUnlock(
+    HLOCAL hMem,
+    HANDLE hInstance);
+
+UINT WINAPI DispatchLocalSize(
+    HLOCAL hMem,
+    HANDLE hInstance);
+
+HLOCAL WINAPI DispatchLocalFree(
+    HLOCAL hMem,
+    HANDLE hInstance);
+
+#endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 1152
+#define UserLocalAlloc(uFlag,uBytes) HeapAlloc(pUserHeap, uFlag, (uBytes))
+#define UserLocalReAlloc(p, uBytes, uFlags) HeapReAlloc(pUserHeap, uFlags, (LPSTR)(p), (uBytes))
+#define UserLocalFree(p)    HeapFree(pUserHeap, 0, (LPSTR)(p))
+#define UserLocalSize(p)    HeapSize(pUserHeap, 0, (LPSTR)(p))
+#define UserLocalLock(p)    (LPSTR)(p)
+#define UserLocalUnlock(p)
+#define UserLocalFlags(p)   0
+#define UserLocalHandle(p)  (HLOCAL)(p)
+#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1160
+
+LONG TabTextOut(HDC hdc, int x, int y, LPCWSTR lpstring, int nCount,
+        int nTabPositions, LPINT lpTabPositions, int iTabOrigin, BOOL fDrawTheText);
+
+#endif
+#line 1164
+#ifndef _USERK_
+#line 1170
+#endif  // !_USERK_
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1171
+
+PWND FASTCALL ValidateHwnd(HWND hwnd);
+PWND FASTCALL ValidateHwndNoRip(HWND hwnd);
+
+NTSTATUS MapDeviceName(LPCWSTR lpszDeviceName, PUNICODE_STRING pstrDeviceName, BOOL bAnsi);
+
+#line 1177
+PSTR ECLock(PED ped);
+void ECUnlock(PED ped);
+BOOL ECNcCreate(PED, PWND, LPCREATESTRUCT);
+void ECInvalidateClient(PED ped, BOOL fErase);
+BOOL ECCreate(PWND, PED, LONG);
+void ECWord(PED, ICH, BOOL, ICH*, ICH*);
+ICH  ECFindTab(LPSTR, ICH);
+void ECNcDestroyHandler(PWND, PED);
+BOOL ECSetText(PED, LPSTR);
+void ECSetPasswordChar(PED, UINT);
+ICH  ECCchInWidth(PED, HDC, LPSTR, ICH, int, BOOL);
+void ECEmptyUndo(PUNDO);
+void ECSaveUndo(PUNDO pundoFrom, PUNDO pundoTo, BOOL fClear);
+BOOL ECInsertText(PED, LPSTR, ICH);
+ICH  ECDeleteText(PED);
+void ECResetTextInfo(PED ped);
+void ECNotifyParent(PED, int);
+void ECSetEditClip(PED, HDC, BOOL);
+HDC  ECGetEditDC(PED, BOOL);
+void ECReleaseEditDC(PED, HDC, BOOL);
+ICH  ECGetText(PED, ICH, LPSTR, BOOL);
+void ECSetFont(PED, HFONT, BOOL);
+void ECSetMargin(PED, UINT, long, BOOL);
+ICH  ECCopy(PED);
+BOOL ECCalcChangeSelection(PED, ICH, ICH, LPBLOCK, LPBLOCK);
+void ECFindXORblks(LPBLOCK, LPBLOCK, LPBLOCK, LPBLOCK);
+BOOL ECIsCharNumeric(PED ped, DWORD keyPress);
+
+// ECTabTheTextOut draw codes
+#define ECT_CALC        0
+#define ECT_NORMAL      1
+#define ECT_SELECTED    2
+
+UINT ECTabTheTextOut(HDC, int, int, int, int,
+                     LPSTR, int, ICH, PED, int, BOOL, LPSTRIPINFO);
+HBRUSH ECGetControlBrush(PED, HDC, LONG);
+HBRUSH ECGetBrush(PED ped, HDC hdc);
+int  ECGetCaretWidth(BOOL);
+int  ECGetModKeys(int);
+void ECSize( PED, LPRECT, BOOL);
+
+ICH  MLInsertText(PED, LPSTR, ICH, BOOL);
+ICH  MLDeleteText(PED);
+BOOL MLEnsureCaretVisible(PED);
+void MLDrawText(PED, HDC, ICH, ICH, BOOL);
+void MLDrawLine(PED, HDC, int, ICH, int, BOOL);
+void MLPaintABlock(PED, HDC, int, int);
+int  GetBlkEndLine(int, int, BOOL FAR *, int, int);
+void MLBuildchLines(PED, ICH, int, BOOL, PLONG, PLONG);
+void MLShiftchLines(PED, ICH, int);
+BOOL MLInsertchLine(PED, ICH, ICH, BOOL);
+void MLSetCaretPosition(PED,HDC);
+void MLIchToXYPos(PED, HDC, ICH, BOOL, LPPOINT);
+int  MLIchToLine(PED, ICH);
+void MLRepaintChangedSelection(PED, HDC, ICH, ICH);
+void MLMouseMotion(PED, UINT, UINT, LPPOINT);
+ICH  MLLine(PED, ICH);
+void MLStripCrCrLf(PED);
+int  MLCalcXOffset(PED, HDC, int);
+BOOL MLUndo(PED);
+LONG MLEditWndProc(HWND, PED, UINT, DWORD, LONG);
+void MLChar(PED, DWORD, int);
+void MLKeyDown(PED, UINT, int);
+ICH  MLPasteText(PED);
+void MLSetSelection(PED, BOOL, ICH, ICH);
+LONG MLCreate(HWND, PED, LPCREATESTRUCT);
+BOOL MLInsertCrCrLf(PED);
+void MLSetHandle(PED, HANDLE);
+LONG MLGetLine(PED, ICH, ICH, LPSTR);
+ICH  MLLineIndex(PED, ICH);
+void MLSize(PED, BOOL);
+void MLChangeSelection(PED, HDC, ICH, ICH);
+void MLSetRectHandler(PED, LPRECT);
+BOOL MLExpandTabs(PED);
+BOOL MLSetTabStops(PED, int, LPINT);
+LONG MLScroll(PED, BOOL, int, int, BOOL);
+int  MLThumbPosFromPed(PED, BOOL);
+void MLUpdateiCaretLine(PED ped);
+ICH  MLLineLength(PED, ICH);
+
+void SLReplaceSel(PED, LPSTR);
+BOOL SLUndo(PED);
+void SLSetCaretPosition(PED, HDC);
+int  SLIchToLeftXPos(PED, HDC, ICH);
+void SLChangeSelection(PED, HDC, ICH, ICH);
+void SLDrawText(PED, HDC, ICH);
+void SLDrawLine(PED, HDC, int, int, ICH, int, BOOL);
+int  SLGetBlkEnd(PED, ICH, ICH, BOOL FAR *);
+BOOL SLScrollText(PED, HDC);
+void SLSetSelection(PED,ICH, ICH);
+ICH  SLInsertText(PED, LPSTR, ICH);
+ICH  SLPasteText(PED);
+void SLChar(PED, DWORD);
+void SLKeyDown(PED, DWORD, int);
+ICH  SLMouseToIch(PED, HDC, LPPOINT);
+void SLMouseMotion(PED, UINT, UINT, LPPOINT);
+LONG SLCreate(HWND, PED, LPCREATESTRUCT);
+void SLPaint(PED, HDC);
+void SLSetFocus(PED);
+void SLKillFocus(PED, HWND);
+LONG SLEditWndProc(HWND, PED, UINT, DWORD, LONG);
+LONG EditWndProc(PWND, UINT, DWORD, LONG);
+
+#endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 1280
+#define GetAppVer(pti) GetClientInfo()->dwExpWinVer
+#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1281
+
+UINT HelpMenu(HWND hwnd, PPOINT ppt);
+#line 1283
+
+#define ISDELIMETERA(ch) ((ch == ' ') || (ch == '\t'))
+#define ISDELIMETERW(ch) ((ch == L' ') || (ch == L'\t'))
+
+#define AWCOMPARECHAR(ped,pbyte,awchar) (ped->fAnsi ? (*(PUCHAR)(pbyte) == (UCHAR)(awchar)) : (*(LPWSTR)(pbyte) == (WCHAR)(awchar)))
+
+#endif
+#if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
+#line 1289
+/* Menu that comes up when you press the right mouse button on an edit
+ * control
+ */
+#define ID_EC_PROPERTY_MENU      1
+#line 1293
+
+#define IDD_MDI_ACTIVATE         9
+
+#define OPENNT_USERCLI_LOOKASIDE_SUBSET_H
+#endif
+#line 1296
+#ifndef _USERK_
+/*
+ * String IDs
+ */
+#define STR_ERROR                        0x00000002L
+#define STR_MOREWINDOWS                  0x0000000DL
+#define STR_NOMEMBITMAP                  0x0000000EL
+#endif  // !_USERK_
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1304
 
 
-/* OPENNT-HOST-099: unchanged combo/list collaboration declarations.
- * Caller supplies original CBOX/LBIV layouts and the native public types. */
-#if defined(WOW_ORIGINAL_CONTROL_PROTOTYPES) && !defined(OPENNT_CONTROL_PROTOTYPES_H)
-#define OPENNT_CONTROL_PROTOTYPES_H
-/* OPENNT-HOST-105: unchanged collaboration and shared RTL declarations. */
-#define IsComboVisible(pcbox) (!pcbox->fNoRedraw && IsVisible(pcbox->spwnd))
-#define IsLBoxVisible(plb)  (plb->fRedraw && IsVisible(plb->spwnd))
-#define SAMEWOWHANDLE(h1, h2)  ((BOOL)!(((UINT)(h1) ^ (UINT)(h2)) & 0xffff))
+void InitClientDrawing();
+
+/***************************************************************************\
+* Function Prototypes
+*
+* NOTE: Only prototypes for GLOBAL (across module) functions should be put
+* here.  Prototypes for functions that are global to a single module should
+* be put at the head of that module.
+*
+\***************************************************************************/
+
+BOOL IsMetaFile(HDC hdc);
+
+void DrawDiagonal(HDC hdc, LPRECT lprc, HBRUSH hbrTL, HBRUSH hbrBR, UINT flags);
+void FillTriangle(HDC hdc, LPRECT lprc, HBRUSH hbr, UINT flags);
+
+BOOL   _ClientFreeLibrary(HANDLE hmod);
+DWORD  _ClientGetListboxString(PWND pwnd, UINT msg, DWORD wParam, LPSTR lParam,
+        DWORD xParam, PROC xpfn);
+#line 1326
+
+
+
+void RW_RegisterEdit(void);
+
+/*
+ * Message thunks.
+ */
+#define fnCOPYDATA                      NtUserfnCOPYDATA
+#define fnDDEINIT                       NtUserfnDDEINIT
+#define fnDWORD                         NtUserfnDWORD
+#define fnDWORDOPTINLPMSG               NtUserfnDWORDOPTINLPMSG
+#define fnGETTEXTLENGTHS                NtUserfnGETTEXTLENGTHS
+#endif
+#line 1339
+#ifdef FE_SB // fnGETTEXTLENGTHS()
+#error
+#line 1341
+#endif // FE_SB
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1342
+#define fnINLPCOMPAREITEMSTRUCT         NtUserfnINLPCOMPAREITEMSTRUCT
+#define fnINLPDELETEITEMSTRUCT          NtUserfnINLPDELETEITEMSTRUCT
+#define fnINLPHELPINFOSTRUCT            NtUserfnINLPHELPINFOSTRUCT
+#define fnINLPHLPSTRUCT                 NtUserfnINLPHLPSTRUCT
+#define fnINLPWINDOWPOS                 NtUserfnINLPWINDOWPOS
+#define fnINOUTDRAG                     NtUserfnINOUTDRAG
+#define fnINOUTLPMEASUREITEMSTRUCT      NtUserfnINOUTLPMEASUREITEMSTRUCT
+#define fnINOUTLPPOINT5                 NtUserfnINOUTLPPOINT5
+#define fnINOUTLPRECT                   NtUserfnINOUTLPRECT
+#define fnINOUTLPSCROLLINFO             NtUserfnINOUTLPSCROLLINFO
+#define fnINOUTLPWINDOWPOS              NtUserfnINOUTLPWINDOWPOS
+#define fnINOUTNCCALCSIZE               NtUserfnINOUTNCCALCSIZE
+#define fnINOUTNEXTMENU                 NtUserfnINOUTNEXTMENU
+#define fnINOUTSTYLECHANGE              NtUserfnINOUTSTYLECHANGE
+#define fnOPTOUTLPDWORDOPTOUTLPDWORD    NtUserfnOPTOUTLPDWORDOPTOUTLPDWORD
+#define fnOUTLPRECT                     NtUserfnOUTLPRECT
+#define fnPOPTINLPUINT                  NtUserfnPOPTINLPUINT
+#define fnPOUTLPINT                     NtUserfnPOUTLPINT
+#define fnSENTDDEMSG                    NtUserfnSENTDDEMSG
+#define fnOUTDWORDINDWORD               NtUserfnOUTDWORDINDWORD
+
+#define MESSAGEPROTO(func) \
+LONG CALLBACK fn ## func(                               \
+        HWND hwnd, UINT msg, DWORD wParam, LONG lParam, \
+        DWORD xParam, DWORD xpfnWndProc, BOOL bAnsi)
+
+MESSAGEPROTO(BITMAP);
+MESSAGEPROTO(COPYGLOBALDATA);
+MESSAGEPROTO(FULLSCREEN);
+MESSAGEPROTO(HDCDWORD);
+MESSAGEPROTO(HFONTDWORD);
+MESSAGEPROTO(HFONTDWORDDWORD);
+MESSAGEPROTO(HRGNDWORD);
+MESSAGEPROTO(INCBOXSTRING);
+MESSAGEPROTO(INCNTOUTSTRING);
+MESSAGEPROTO(INCNTOUTSTRINGNULL);
+MESSAGEPROTO(INDEVICECHANGE);
+MESSAGEPROTO(INLBOXSTRING);
+MESSAGEPROTO(INLPCREATESTRUCT);
+MESSAGEPROTO(INLPDRAWITEMSTRUCT);
+MESSAGEPROTO(INLPDROPSTRUCT);
+MESSAGEPROTO(INLPMDICREATESTRUCT);
+MESSAGEPROTO(INPAINTCLIPBRD);
+MESSAGEPROTO(INPOSTEDSTRING);
+MESSAGEPROTO(INSIZECLIPBRD);
+MESSAGEPROTO(INSTRING);
+MESSAGEPROTO(INSTRINGNULL);
+MESSAGEPROTO(INWPARAMCHAR);
+#endif
+#line 1390
+#ifdef FE_SB // fnINWPARAMDBCSCHAR()
+#error
+#line 1392
+#endif // FE_SB
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1393
+MESSAGEPROTO(OPTOUTDWORDDWORD);
+MESSAGEPROTO(OUTCBOXSTRING);
+MESSAGEPROTO(OUTLBOXSTRING);
+MESSAGEPROTO(OUTSTRING);
+MESSAGEPROTO(PAINT);
+MESSAGEPROTO(SETLOCALE);
+MESSAGEPROTO(WMCTLCOLOR);
+MESSAGEPROTO(KERNELONLY);
+
+/*
+ * clhook.c
+ */
+#define IsHooked(pci, fsHook) \
+    ((fsHook & (pci->fsHooks | pci->pDeskInfo->fsHooks)) != 0)
+
+DWORD fnHkINLPCWPSTRUCTW(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD xParam);
+DWORD fnHkINLPCWPSTRUCTA(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD xParam);
+DWORD fnHkINLPCWPRETSTRUCTW(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD xParam);
+DWORD fnHkINLPCWPRETSTRUCTA(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD xParam);
+DWORD fnHkINLPCBTCREATESTRUCT(UINT msg, DWORD wParam, LPCBT_CREATEWND pcbt,
+        DWORD xpfnProc, BOOL bAnsi);
+DWORD DispatchHookW(int dw, WPARAM wParam, LPARAM lParam, HOOKPROC pfn);
+DWORD DispatchHookA(int dw, WPARAM wParam, LPARAM lParam, HOOKPROC pfn);
+DWORD DispatchDlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam, WNDPROC pfn);
+
+/*
+ * client.c
+ */
+LONG APIENTRY ButtonWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ButtonWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MenuWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MenuWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY DesktopWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY DesktopWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ScrollBarWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ScrollBarWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ListBoxWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ListBoxWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY StaticWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY StaticWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY DialogWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY DialogWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ComboBoxWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ComboBoxWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ComboListBoxWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY ComboListBoxWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MDIClientWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MDIClientWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY TitleWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY TitleWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MB_DlgProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MB_DlgProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MDIActivateDlgProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY MDIActivateDlgProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY EditWndProcA(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LONG APIENTRY EditWndProcW(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+#endif
+#line 1453
+#ifdef FE_IME
+#error
+#line 1456
+#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1457
+LONG SendMessageWorker(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam, BOOL fAnsi);
+LONG SendMessageTimeoutWorker(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam,
+            UINT fuFlags, UINT uTimeout, LPDWORD lpdwResult, BOOL fAnsi);
+
+void ClientEmptyClipboard(void);
+VOID GetActiveKeyboardName(LPWSTR lpszName);
+HANDLE OpenKeyboardLayoutFile(LPWSTR lpszKLName, UINT uFlags, PUINT poffTable, PUINT pKbdInputLocale);
+VOID LoadPreloadKeyboardLayouts(void);
+#line 1465
+void SetWindowState(PWND pwnd, UINT flags);
+void ClearWindowState(PWND pwnd, UINT flags);
+#line 1467
+
+/*
+ * Worker routines called from both the window procs and
+ * the callback thunks.
+ */
+LONG DispatchClientMessage(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD pfn);
+LONG DefWindowProcWorker(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD fAnsi);
+LONG ButtonWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
+        LPARAM lParam, DWORD fAnsi);
+LONG ListBoxWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
+        LPARAM lParam, DWORD fAnsi);
+LONG StaticWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
+        LPARAM lParam, DWORD fAnsi);
 #line 1482
 LONG ComboBoxWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
+        LPARAM lParam, DWORD fAnsi);
+#line 1484
+LONG ComboListBoxWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
+        LPARAM lParam, DWORD fAnsi);
+LONG MDIClientWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
         LPARAM lParam, DWORD fAnsi);
 #line 1488
 LONG EditWndProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
         LPARAM lParam, DWORD fAnsi);
-BOOL _GetClientRect(PWND pwnd, LPRECT prc);
-BOOL _IsChild(PWND pwndParent, PWND pwnd);
-BOOL _AdjustWindowRectEx(LPRECT lprc, LONG style, BOOL fMenu, DWORD dwExStyle);
-BOOL _ClientToScreen(PWND pwnd, PPOINT ppt);
-BOOL _ScreenToClient(PWND pwnd, PPOINT ppt);
-BOOL _IsWindowVisible(PWND pwnd);
-BOOL IsVisible(PWND pwnd);
-HWND InternalCreateDialog(HANDLE hmod, LPDLGTEMPLATE lpDlgTemplate, DWORD cb,
-        HWND hwndOwner, DLGPROC pfnWndProc, LONG dwInitParam, UINT fFlags);
-#line 2158
-PWND _FindDlgItem(PWND pwndParent, DWORD id);
-PWND _GetDlgItem(PWND, int);
-#line 2163
-VOID xxxRemoveDefaultButton(PWND pwndDlg, PWND pwndStart);
-VOID xxxCheckDefPushButton(PWND pwndDlg, HWND hwndOldFocus, HWND hwndNewFocus);
-#line 2166
-VOID DlgSetFocus(HWND hwnd);
-#line 2167
-void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
-#line 2168
-BOOL ValidateDialogPwnd(PWND pwnd);
-PWND GetTopLevelWindow(PWND pwnd);
-/* OPENNT-HOST-106: original Tab-navigation collaborator declarations. */
-PWND _NextControl(PWND pwndDlg, PWND pwnd, UINT uFlags);
-PWND _PrevControl(PWND pwndDlg, PWND pwnd, UINT uFlags);
-PWND _GetChildControl(PWND pwndDlg, PWND pwndLevel);
-PWND _GetNextDlgTabItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);
-/* OPENNT-HOST-109: original dialog group-navigation collaborator. */
-PWND _GetNextDlgGroupItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);
-BOOL _IsDescendant(PWND pwndParent, PWND pwndChild);
-BOOL FChildVisible(HWND hwnd);
-DWORD FindCharPosition(LPWSTR lpString, WCHAR ch);
-UINT TextCopy(PLARGE_UNICODE_STRING pstr, LPWSTR lpstr, UINT size);
-DWORD wcsncpycch(LPWSTR pwsDest, LPCWSTR pwszSrc, DWORD cch);
-VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING plstr, LPCWSTR psz,
-        UINT cchLimit);
-/* OPENNT-HOST-105: original resource alignment and dialog helper ABI. */
-#ifndef NextWordBoundary
-#define NextWordBoundary(p)     ((PBYTE)(p) + ((DWORD)(p) & 1))
+#line 1490
+LONG DefDlgProcWorker(PWND pwnd, UINT msg, WPARAM wParam,
+        LPARAM lParam, DWORD fAnsi);
 #endif
-#define NextDWordBoundary(p)    ((PBYTE)(p) + ((DWORD)(-(LONG)(p)) & 3))
-#define CCHFILEMAX      MAX_PATH
-#define MSGFLAG_SPECIAL_THUNK       0x10000000
-extern WCHAR awchSlashStar[];
-extern CHAR achSlashStar[];
-extern WCHAR szOneChar[];
-extern WCHAR szSLASHSTARDOTSTAR[];
+#line 1492
+#ifdef FE_IME
+#error
+#line 1495
+#endif
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 1496
+
+/*
+ * Server Stubs - ntstubs.c
+ */
+
+LONG _SetWindowLong(
+    HWND hWnd,
+    int nIndex,
+    LONG dwNewLong,
+    BOOL bAnsi);
+
+BOOL _GetMessage(
+    LPMSG pmsg,
+    HWND hwnd,
+    UINT wMsgFilterMin,
+    UINT wMsgFilterMax,
+    BOOL bAnsi);
+
+BOOL _PeekMessage(
+    LPMSG pmsg,
+    HWND hwnd,
+    UINT wMsgFilterMin,
+    UINT wMsgFilterMax,
+    UINT wRemoveMsg,
+    BOOL bAnsi);
+
+LONG _DispatchMessage(
+    CONST MSG *pmsg,
+    BOOL bAnsi);
+
+BOOL _PostMessage(
+    HWND hwnd,
+    UINT msg,
+    DWORD wParam,
+    LONG lParam,
+    BOOL bAnsi);
+
+BOOL _SendNotifyMessage(
+    HWND hWnd,
+    UINT wMsg,
+    DWORD wParam,
+    LONG lParam,
+    BOOL bAnsi);
+
+BOOL _SendMessageCallback(
+    HWND hWnd,
+    UINT wMsg,
+    DWORD wParam,
+    LONG lParam,
+    SENDASYNCPROC lpResultCallBack,
+    DWORD dwData,
+    BOOL bAnsi);
+
+int _ToUnicodeEx(
+    UINT wVirtKey,
+    UINT wScanCode,
+    PBYTE lpKeyState,
+    LPWSTR pwszBuff,
+    int cchBuff,
+    UINT wFlags,
+    HKL hkl);
+
+BOOL _DefSetText(
+    HWND hwnd,
+    LPCWSTR pstr,
+    BOOL bAnsi);
+
+HCURSOR _GetCursorInfo(
+    HCURSOR hcur,
+    LPWSTR id,
+    int iFrame,
+    LPDWORD pjifRate,
+    LPINT pccur);
+
+HWND _CreateWindowEx(
+    DWORD dwExStyle,
+    LPCTSTR pClassName,
+    LPCTSTR pWindowName,
+    DWORD dwStyle,
+    int x,
+    int y,
+    int nWidth,
+    int nHeight,
+    HWND hwndParent,
+    HMENU hmenu,
+    HANDLE hModule,
+    LPVOID pParam,
+    DWORD dwFlags,
+    LPDWORD pWOW);
+
+HKL _LoadKeyboardLayoutEx(
+    HANDLE hFile,
+    UINT offTable,
+    HKL hkl,
+    LPCWSTR pwszKL,
+    UINT KbdInputLocale,
+    UINT Flags);
+
+DWORD _GetListboxString(
+    HWND hwnd,
+    UINT msg,
+    DWORD wParam,
+    DWORD cch,
+    LPTSTR pString,
+    DWORD xParam,
+    DWORD xpfn,
+    BOOL bAnsi);
+
+HACCEL _CreateAcceleratorTable(
+    LPACCEL lpAccel,
+    INT cbElem,
+    INT nElem);
+
+#line 1618
+
+HANDLE CreateLocalMemHandle(
+    HANDLE hMem);
+
+HANDLE ConvertMemHandle(
+    HANDLE hMem,
+    UINT cbNULL);
+
+BOOL FillWindow(
+    HWND hwndBrush,
+    HWND hwndPaint,
+    HDC hdc,
+    HBRUSH hbr);
+
+HBRUSH GetControlBrush(
+    HWND hwnd,
+    HDC hdc,
+    UINT msg);
+
+HBRUSH GetControlColor(
+    HWND hwndParent,
+    HWND hwndCtl,
+    HDC hdc,
+    UINT msg);
+
+HHOOK _SetWindowsHookEx(
+    HANDLE hmod,
+    LPTSTR pszLib,
+    DWORD idThread,
+    int nFilterType,
+    PROC pfnFilterProc,
+    BOOL bAnsi);
+
+/*
+ * classc.c
+ */
+void InitClassOffsets(void);
+
+DWORD _GetClassData(
+    PCLS pcls,
+    PWND pwnd,
+    int index,
+    BOOL bAnsi);
+
+DWORD _GetClassLong(
+    PWND pwnd,
+    int index,
+    BOOL bAnsi);
+
+/*
+ * mngrayc.c
+ */
+BOOL BitBltSysBmp(
+    HDC hdc,
+    int x,
+    int y,
+    UINT i);
+
+
+/*
+ * clenum.c
+ */
+DWORD BuildHwndList(
+    HDESK hdesk,
+    HWND hwndNext,
+    BOOL fEnumChildren,
+    DWORD idThread,
+    HWND **phwndFirst);
+
+/*
+ * cltxt.h
+ */
+ATOM RegisterClassExWOWA(
+    PWNDCLASSEXA lpWndClass,
+    LPDWORD pdwWOWstuff,
+    PROC lpfnWorker,
+    WORD fnid);
+
+ATOM RegisterClassExWOWW(
+    PWNDCLASSEXW lpWndClass,
+    LPDWORD pdwWOWstuff,
+    PROC lpfnWorker,
+    WORD fnid);
+
+/*
+ * csrstubs.c
+ */
+int ServiceMessageBox(
+    LPCWSTR pText,
+    LPCWSTR pCaption,
+    UINT wType,
+    BOOL fAnsi);
+
+
+/*
+ * dlgmgrc.c
+ */
+PWND _NextControl(
+    PWND pwndDlg,
+    PWND pwnd,
+    UINT uFlags);
+
+PWND _PrevControl(
+    PWND pwndDlg,
+    PWND pwnd,
+    UINT uFlags);
+
+PWND _GetNextDlgGroupItem(
+    PWND pwndDlg,
+    PWND pwnd,
+    BOOL fPrev);
+
+PWND _GetNextDlgTabItem(
+    PWND pwndDlg,
+    PWND pwnd,
+    BOOL fPrev);
+
+PWND _GetChildControl(
+    PWND pwndDlg,
+    PWND pwndLevel);
+
+/*
+ * winmgrc.c
+ */
+BOOL FChildVisible(
+    HWND hwnd);
+
+/*
+ * draw.c
+ */
+BOOL PaintRect(
+    HWND hwndBrush,
+    HWND hwndPaint,
+    HDC hdc,
+    HBRUSH hbr,
+    LPRECT lprc);
+
+/*
+ * dc.c
+ */
+HDC _GetDCEx(
+    HWND hwnd,
+    HRGN hrgnClip,
+    DWORD flags);
+
+#define NtUserReleaseDC(hwnd,hdc)  NtUserCallOneParam((DWORD)(hdc), SFI__RELEASEDC)
+#define NtUserArrangeIconicWindows(hwnd)  (UINT)NtUserCallHwndLock((hwnd), SFI_XXXARRANGEICONICWINDOWS)
+#define NtUserBeginDeferWindowPos(nNumWindows) (HANDLE)NtUserCallOneParamTranslate((nNumWindows),SFI__BEGINDEFERWINDOWPOS)
+#define NtUserCreateMenu()   (HMENU)NtUserCallNoParamTranslate(SFI__CREATEMENU)
+#define NtUserDestroyCaret() (BOOL)NtUserCallNoParam(SFI__DESTROYCARET)
+#define NtUserEnableWindow(hwnd, bEnable) (BOOL)NtUserCallHwndParamLock((hwnd), (bEnable),SFI_XXXENABLEWINDOW)
+#define NtUserGetMessagePos() (DWORD)NtUserCallNoParam(SFI__GETMESSAGEPOS)
+#define NtUserKillSystemTimer(hwnd,nIDEvent)  (BOOL)NtUserCallHwndParam((hwnd), (nIDEvent), SFI__KILLSYSTEMTIMER)
+#define NtUserMessageBeep(wType)  (BOOL)NtUserCallOneParam((wType), SFI_XXXMESSAGEBEEP)
+#define NtUserSetWindowContextHelpId(hwnd,id) (BOOL)NtUserCallHwndParam((hwnd), (id), SFI__SETWINDOWCONTEXTHELPID)
+#define NtUserGetWindowContextHelpId(hwnd)   (BOOL)NtUserCallHwnd((hwnd), SFI__GETWINDOWCONTEXTHELPID)
+#define NtUserRedrawFrame(hwnd)   NtUserCallHwndLock((hwnd), SFI_XXXREDRAWFRAME)
+#define NtUserRedrawFrameAndHook(hwnd)  NtUserCallHwndLock((hwnd), SFI_XXXREDRAWFRAMEANDHOOK)
+#define NtUserRedrawTitle(hwnd, wFlags)  NtUserCallHwndParamLock((hwnd), (wFlags), SFI_XXXREDRAWTITLE)
+#define NtUserReleaseCapture()  (BOOL)NtUserCallNoParam(SFI_XXXRELEASECAPTURE)
+#define NtUserSetCaretPos(X,Y)  (BOOL)NtUserCallTwoParam((DWORD)(X), (DWORD)(Y), SFI__SETCARETPOS)
+#define NtUserSetCursorPos(X, Y)  (BOOL)NtUserCallTwoParam((X), (Y), SFI__SETCURSORPOS)
+#define NtUserSetForegroundWindow(hwnd)  (BOOL)NtUserCallHwndLock((hwnd), SFI_XXXSETFOREGROUNDWINDOW)
+#define NtUserSetSysMenu(hwnd)  NtUserCallHwndLock((hwnd), SFI_SETSYSMENU)
+#define NtUserSetVisible(hwnd,fSet)  NtUserCallHwndParam((hwnd), (fSet), SFI_SETVISIBLE)
+#define NtUserShowCursor(bShow)   (int)NtUserCallOneParam((bShow), SFI__SHOWCURSOR)
+#define NtUserUpdateClientRect(hwnd) NtUserCallHwndLock((hwnd), SFI_XXXUPDATECLIENTRECT)
+
+/*
+ * dmmnem.c
+ */
+int FindMnemChar(
+    LPWSTR lpstr,
+    WCHAR ch,
+    BOOL fFirst,
+    BOOL fPrefix);
+
+/*
+ * clres.c
+ */
+BOOL WowGetModuleFileName(
+    HMODULE hModule,
+    LPWSTR pwsz,
+    DWORD  cchMax);
+
+HICON WowServerLoadCreateCursorIcon(
+    HANDLE hmod,
+    LPTSTR lpModName,
+    DWORD dwExpWinVer,
+    LPCTSTR lpName,
+    DWORD cb,
+    PVOID pcr,
+    LPTSTR lpType,
+    BOOL fClient);
+
+HANDLE InternalCopyImage(
+    HANDLE hImage,
+    UINT IMAGE_flag,
+    int cxNew,
+    int cyNew,
+    UINT LR_flags);
+
+HMENU CreateMenuFromResource(
+    LPBYTE);
+
+/*
+ * acons.c
+ */
+#define BFT_ICON    0x4349  //  'IC'
+#define BFT_BITMAP  0x4D42  //  'BM'
+#define BFT_CURSOR  0x5450  //  'PT'
+
+typedef struct _FILEINFO {
+    LPBYTE  pFileMap;
+    LPBYTE  pFilePtr;
+    LPBYTE  pFileEnd;
+    LPCWSTR pszName;
+} FILEINFO, *PFILEINFO;
+
+HANDLE LoadCursorIconFromFileMap(
+    IN PFILEINFO   pfi,
+    IN OUT LPWSTR *prt,
+    IN DWORD       cxDesired,
+    IN DWORD       cyDesired,
+    IN DWORD       LR_flags,
+    OUT LPBOOL     pfAni);
+
+DWORD GetIcoCurWidth(
+    DWORD cxOrg,
+    BOOL  fIcon,
+    UINT  LR_flags,
+    DWORD cxDesired);
+
+DWORD GetIcoCurHeight(
+    DWORD cyOrg,
+    BOOL  fIcon,
+    UINT  LR_flags,
+    DWORD cyDesired);
+
+DWORD GetIcoCurBpp(
+    UINT LR_flags);
+
+HICON LoadIcoCur(
+    HINSTANCE hmod,
+    LPCWSTR   lpName,
+    LPWSTR    type,
+    DWORD     cxDesired,
+    DWORD     cyDesired,
+    UINT      LR_flags);
+
+HANDLE ObjectFromDIBResource(
+    HINSTANCE hmodOwner,
+    HINSTANCE hmod,
+    LPCWSTR   lpName,
+    LPWSTR    type,
+    DWORD     cxDesired,
+    DWORD     cyDesired,
+    UINT      LR_flags);
+
+HANDLE RtlLoadObjectFromDIBFile(
+    LPCWSTR lpszName,
+    DWORD   type,
+    DWORD   cxDesired,
+    DWORD   cyDesired,
+    UINT    LR_flags);
+
+HCURSOR LoadCursorOrIconFromFile(
+    LPCWSTR pszFilename,
+    BOOL    fIcon);
+
+HBITMAP ConvertDIBBitmap(
+    UPBITMAPINFOHEADER lpbih,
+    DWORD              cxDesired,
+    DWORD              cyDesired,
+    UINT               flags,
+    LPBITMAPINFOHEADER *lplpbih,
+    LPSTR              *lplpBits);
+
+HICON ConvertDIBIcon(
+    LPBITMAPINFOHEADER lpbih,
+    HINSTANCE          hmodOwner,
+    HINSTANCE          hmod,
+    LPCWSTR            lpName,
+    BOOL               fIcon,
+    DWORD              cxNew,
+    DWORD              cyNew,
+    UINT               LR_flags);
+
+int SmartStretchDIBits(
+    HDC          hdc,
+    int          xD,
+    int          yD,
+    int          dxD,
+    int          dyD,
+    int          xS,
+    int          yS,
+    int          dxS,
+    int          dyS,
+    LPVOID       lpBits,
+    LPBITMAPINFO lpbi,
+    UINT         wUsage,
+    DWORD        rop);
+
+
+/*
+ * OFFSET for different DPI resources.
+ * This allows us to take a resource number and "map" to an actual resource
+ * based on what DPI the user selected
+ */
+
+#define OFFSET_SCALE_DPI 000
+#define OFFSET_96_DPI    100
+#define OFFSET_120_DPI   200
+#define OFFSET_160_DPI   300
+
+/*
+ * defines the highest resource number so we can do math on the resource
+ * number.
+ */
+
+#define MAX_RESOURCE_INDEX 32768
+
+
+#line 1941
 /*
  * Parameter for xxxAlterHilite()
  */
@@ -896,7 +2023,6 @@ extern WCHAR szSLASHSTARDOTSTAR[];
 /*
  * Procedures for combo boxes.
  */
-#line 1958
 LONG  xxxCBCommandHandler(PCBOX, DWORD, HWND);
 long  xxxCBMessageItemHandler(PCBOX, UINT, LPVOID);
 int   xxxCBDir(PCBOX, UINT, LPWSTR);
@@ -1081,34 +2207,114 @@ INT   LBGetVariableHeightItemHeight(PLBIV, INT);
 INT  xxxLBSetCount(PLBIV, INT);
 
 UINT LBCalcAllocNeeded(PLBIV, INT);
+#line 2142
+
+
+/***************************************************************************\
+*
+* Dialog Boxes
+*
+\***************************************************************************/
+
+#line 2150
+HWND   InternalCreateDialog(HANDLE hmod,
+        LPDLGTEMPLATE lpDlgTemplate, DWORD cb,
+        HWND hwndOwner , DLGPROC pfnWndProc, LONG dwInitParam,
+        UINT fFlags);
+#line 2154
+int    InternalDialogBox(HANDLE hmod,
+        LPDLGTEMPLATE lpDlgTemplate, DWORD cb,
+        HWND hwndOwner , DLGPROC pfnWndProc, LONG dwInitParam,
+        UINT fFlags);
+#line 2158
+PWND _FindDlgItem(PWND pwndParent, DWORD id);
+PWND _GetDlgItem(PWND, int);
+#line 2160
+long _GetDialogBaseUnits(VOID);
+PWND GetParentDialog(PWND pwndDialog);
+LONG xxxDefDlgProc(PWND, UINT, DWORD, LONG);
+#line 2163
+VOID xxxRemoveDefaultButton(PWND pwndDlg, PWND pwndStart);
+VOID xxxCheckDefPushButton(PWND pwndDlg, HWND hwndOldFocus, HWND hwndNewFocus);
+#line 2165
+PWND xxxGotoNextMnem(PWND pwndDlg, PWND pwndStart, WCHAR ch);
+#line 2166
+VOID DlgSetFocus(HWND hwnd);
+void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
+BOOL ValidateDialogPwnd(PWND pwnd);
+#line 2169
+/* Bounded native USER collaborator declarations. */
+BOOL _GetClientRect(PWND pwnd, LPRECT prc);
+BOOL _IsChild(PWND pwndParent, PWND pwnd);
+BOOL _AdjustWindowRectEx(LPRECT lprc, LONG style, BOOL fMenu, DWORD dwExStyle);
+BOOL _ClientToScreen(PWND pwnd, PPOINT ppt);
+BOOL _ScreenToClient(PWND pwnd, PPOINT ppt);
+BOOL _IsWindowVisible(PWND pwnd);
+BOOL IsVisible(PWND pwnd);
+PWND GetTopLevelWindow(PWND pwnd);
+/* OPENNT-HOST-106: original Tab-navigation collaborator declarations. */
+PWND _NextControl(PWND pwndDlg, PWND pwnd, UINT uFlags);
+PWND _PrevControl(PWND pwndDlg, PWND pwnd, UINT uFlags);
+PWND _GetChildControl(PWND pwndDlg, PWND pwndLevel);
+PWND _GetNextDlgTabItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);
+/* OPENNT-HOST-109: original dialog group-navigation collaborator. */
+PWND _GetNextDlgGroupItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);
+BOOL _IsDescendant(PWND pwndParent, PWND pwndChild);
+BOOL FChildVisible(HWND hwnd);
+DWORD FindCharPosition(LPWSTR lpString, WCHAR ch);
+UINT TextCopy(PLARGE_UNICODE_STRING pstr, LPWSTR lpstr, UINT size);
+DWORD wcsncpycch(LPWSTR pwsDest, LPCWSTR pwszSrc, DWORD cch);
+VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING plstr, LPCWSTR psz,
+        UINT cchLimit);
+extern WCHAR awchSlashStar[];
+extern CHAR achSlashStar[];
+extern WCHAR szOneChar[];
+extern WCHAR szSLASHSTARDOTSTAR[];
+#line 2170
+DWORD  WOWDlgInit(HWND hwndDlg, LONG lParam);
+HANDLE GetEditDS(VOID);
+VOID   ReleaseEditDS(HANDLE h);
+
+/***************************************************************************\
+*
+* Menus
+*
+\***************************************************************************/
 #endif
+#line 2179
+#ifdef MEMPHIS_MENUS
+#error
+#line 2204
+#endif // MEMPHIS_MENUS
+#line 2205
+#ifdef MEMPHIS_MENU_WATERMARKS
+#error
+#line 2210
+#endif // MEMPHIS_MENU_WATERMARKS
+#if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
+#line 2211
+/***************************************************************************\
+*
+* Message Boxes
+*
+\***************************************************************************/
 
-/* OPENNT-HOST-093: original canonical client-control extent declarations. */
-#if defined(WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT) && !defined(OPENNT_CONTROL_EXTENT_CLIENT_LAYOUT_H)
-#define OPENNT_CONTROL_EXTENT_CLIENT_LAYOUT_H
-#line 499
-typedef struct tagCOMBOWND {
-    WND wnd;
-    PCBOX pcbox;
-} COMBOWND, *PCOMBOWND;
 
-#line 1042
-typedef struct tagSTAT {
-    PWND spwnd;
-    union {
-        HANDLE hFont;
-        BOOL   fDeleteIt;
-    };
-    HANDLE hImage;
-    UINT cicur;
-    UINT iicur;
-} STAT, *PSTAT;
+#define WINDOWLIST_PROP_NAME    TEXT("SysBW")
+#define MSGBOX_CALLBACK         TEXT("SysMB")
 
-typedef struct tagSTATWND {
-    WND wnd;
-    PSTAT pstat;
-} STATWND, *PSTATWND;
+/***************************************************************************\
+*
+* MDI Windows
+*
+\***************************************************************************/
 
+/* maximum number of MDI children windows listed in "Window" menu */
+#define MAXITEMS         10
+
+/*
+ * MDI typedefs
+ */
 #line 2233
 typedef struct tagMDI {
     UINT    cKids;
@@ -1126,114 +2332,64 @@ typedef struct tagMDIWND {
     UINT    dwReserved;         // quattro pro 1.0 stores stuff here!!
     PMDI    pmdi;
 } MDIWND, *PMDIWND;
-#endif
+#line 2249
 
-/* OPENNT-HOST-117: original Button private state declarations. */
-/* OPENNT-HOST-119: state-only use by the original dialog collaborators. */
-#if (defined(WOW_ORIGINAL_BUTTON_CLIENT) || defined(WOW_ORIGINAL_BUTTON_STATE)) && !defined(OPENNT_BUTTON_CLIENT_STATE_H)
-#define OPENNT_BUTTON_CLIENT_STATE_H
-#define BUTTONSTATE(pbutn)   (pbutn->buttonState)
-#define BST_CHECKMASK       0x0003
-#define BST_INCLICK         0x0010
-#define BST_CAPTURED        0x0020
-#define BST_MOUSE           0x0040
-#define BST_DONTCLICK       0x0080
-#define BST_INBMCLICK       0x0100
-#define PBF_PUSHABLE        0x0001
-#define PBF_DEFAULT         0x0002
-#define DBT_TEXT            0x0001
-#define DBT_FOCUS           0x0002
-#endif
-#line 22
-#if DBG
-#line 23
-#error Excluded unsupported original USER client condition
-#endif
-#line 25
-#line 26
-#ifdef RIP_COMPONENT
-#line 27
-#error T476-S1: branch not selected by product build
-#endif
-#line 29
-#line 44
-#ifndef WOW
-#line 45
-#endif
-#line 47
-#line 47
-#ifdef FE_IME
-#line 48
-#error Excluded unsupported original USER client condition
-#endif
-#line 51
-#line 70
-#ifdef DEBUG
-#line 71
-#error Excluded unsupported original USER client condition
-#else
-#line 104
-#endif
-#line 109
-#line 563
-#ifdef WINDOWS_PE
-#line 564
-#error Excluded unsupported original USER client condition
-#endif
-#line 569
-#line 1164
-#ifndef _USERK_
-#line 1165
-#endif
-#line 1171
-#line 1296
-#ifndef _USERK_
-#line 1297
-#endif
-#line 1304
-#line 1339
-#ifdef FE_SB // fnGETTEXTLENGTHS()
-#line 1340
-#error Excluded unsupported original USER client condition
-#endif
-#line 1342
-#line 1390
-#ifdef FE_SB // fnINWPARAMDBCSCHAR()
-#line 1391
-#error Excluded unsupported original USER client condition
-#endif
-#line 1393
-#line 1453
-#ifdef FE_IME
-#line 1454
-#error Excluded unsupported original USER client condition
-#endif
-#line 1457
-#line 1492
-#ifdef FE_IME
-#line 1493
-#error Excluded unsupported original USER client condition
-#endif
-#line 1496
-#line 2179
-#ifdef MEMPHIS_MENUS
-#line 2180
-#error Excluded unsupported original USER client condition
-#endif
-#line 2205
-#line 2205
-#ifdef MEMPHIS_MENU_WATERMARKS
-#line 2206
-#error Excluded unsupported original USER client condition
-#endif
-#line 2211
+typedef struct tagSHORTCREATE {
+    int         cy;
+    int         cx;
+    int         y;
+    int         x;
+    LONG        style;
+    HMENU       hMenu;
+} SHORTCREATE, *PSHORTCREATE;
 
+BOOL CreateMDIChild(PSHORTCREATE pcs, LPMDICREATESTRUCT pmcs, DWORD dwExpWinVerAndFlags, HMENU *phSysMenu, PWND pwndParent);
+BOOL MDICompleteChildCreation(HWND hwndChild, HMENU hSysMenu, BOOL fVisible, BOOL fDisabled);
+
+/*
+ * MDI defines
+ */
+#define WS_MDISTYLE     (WS_CHILD | WS_CLIPSIBLINGS | WS_SYSMENU|WS_CAPTION|WS_THICKFRAME|WS_MAXIMIZEBOX|WS_MINIMIZEBOX)
+#define WS_MDICOMMANDS  (WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX)
+#define WS_MDIALLOWED   (WS_MINIMIZE | WS_MAXIMIZE | WS_CLIPCHILDREN | WS_DISABLED | WS_HSCROLL | WS_VSCROLL | 0x0000FFFFL)
+
+#define HAS_SBVERT      0x0100
+#define HAS_SBHORZ      0x0200
+#define OTHERMAXING     0x0400
+#define CALCSCROLL      0x0800
+
+#define SCROLLSUPPRESS  0x0003
+#define SCROLLCOUNT     0x00FF
+
+#define CKIDS(pmdi)     (pmdi->cKids)
+#define MAXED(pmdi)     (pmdi->hwndMaxedChild)
+#define ACTIVE(pmdi)    (pmdi->hwndActiveChild)
+#define WINDOW(pmdi)    (pmdi->hmenuWindow)
+#define FIRST(pmdi)     (pmdi->idFirstChild)
+#define SCROLL(pmdi)    (pmdi->wScroll)
+#define ITILELEVEL(pmdi)    (pmdi->iChildTileLevel)
+#define HTITLE(pmdi)    (pmdi->pTitle)
+
+#define PROP_MDICLIENT  MAKEINTRESOURCE(0x8CAC)
+
+PWND  FindPwndChild(PWND pwndMDI, UINT wChildID);
+int   MakeMenuItem(LPWSTR lpOut, PWND pwnd);
+VOID  ModifyMenuItem(PWND pwnd);
+BOOL  MDIAddSysMenu(HMENU hmenuFrame, HWND hwndChild);
+BOOL  MDIRemoveSysMenu(HMENU hMenuFrame, HWND hwndChild, BOOL fRedraw);
+VOID  ShiftMenuIDs(PWND pwnd, PWND pwndVictim);
+LONG  MDIActivateDlgProc(HWND, UINT, UINT, LONG);
+HMENU MDISetMenu(PWND,BOOL,HMENU,HMENU);
+
+
+#define OPENNT_USERCLI_EDIT_STATE_SUBSET_H
+#endif
 #line 2303
-#endif /* _USERCLI_ */
+#endif // !_USERCLI_
 #line 2307
 #if DBG
 #line 2308
-#error Excluded unsupported DBG HANDLE_WARNING profile
+#error
 #else
 #line 2317
 #define HANDLE_WARNING()
@@ -1242,7 +2398,7 @@ typedef struct tagMDIWND {
 #line 2320
 #if DBG
 #line 2321
-#error Excluded unsupported DBG CHECK_HANDLE_WARNING profile
+#error
 #else
 #line 2337
 #define CHECK_HANDLE_WARNING(h,bZ)
@@ -1250,7 +2406,7 @@ typedef struct tagMDIWND {
 #line 2342
 #if HANDLE_FIXUP
 #line 2343
-#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLE profile
+#error
 #else
 #line 2352
 #define FIXUP_HANDLE(h)                                 \
@@ -1262,7 +2418,7 @@ typedef struct tagMDIWND {
 #line 2358
 #if HANDLE_FIXUP
 #line 2359
-#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLEZ profile
+#error
 #else
 #line 2368
 #define FIXUP_HANDLEZ(h)                                \
@@ -1273,7 +2429,7 @@ typedef struct tagMDIWND {
 
 #line 2374
 #ifdef FE_SB // DBCS Messaging macros for client side.
-#error Excluded unsupported FE_SB client messaging macros
+#error
 #line 2671
 #endif // FE_SB
 #line 2672

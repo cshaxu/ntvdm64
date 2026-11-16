@@ -1,0 +1,113 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "points": "R2383-R2402",
+  "status": "Verified/published;Git delivery accompanies receipt",
+  "before": {
+    "add": 344,
+    "delete": 1826,
+    "total": 2170
+  },
+  "after": {
+    "add": 94,
+    "delete": 462,
+    "total": 556
+  },
+  "mirror_delta": -1614,
+  "restored": [
+    2384,
+    2385,
+    2388,
+    2389,
+    2391,
+    2392,
+    2397,
+    2398,
+    2400
+  ],
+  "policy": [
+    2386,
+    2390,
+    2399,
+    2402
+  ],
+  "pending": [
+    2383,
+    2387,
+    2393,
+    2394,
+    2395,
+    2396,
+    2401
+  ],
+  "dispositions": {
+    "R2383": "Restore public includes and capture typedefs;delete adapter typedef copies. Two include phases replace five optional families. Pure lookaside clients have no WND/ED client-layout closure; full original private includes fail in actual compilation (missing ddemlp.h and private USER types). Remaining include boundary needs owner decision.",
+    "R2384": "Original ThreadLock/Lock macros and TL declaration restored at original positions,without EDIT_CLIENT selection. Actual callers compile;primary-source tokens identical.",
+    "R2385": "Original native/global heap macros and module/task version macros restored to original positions. No new allocation or version policy.",
+    "R2386": "Original LOOKASIDE and functions restored;only previously excluded DBG body remains bare#error.",
+    "R2387": "Original same-handle/rebase predicates and validation macros restored. Original PtiCurrent declaration still requires PTHREADINFO,an NT4 private thread object absent from the native HWND borrower. Do not invent a thread-layout shim merely to declare an uncalled private query.",
+    "R2388": "Original EDIT declarations and charset callback/state restored;shared full-client inclusion boundary recorded once under R2383.",
+    "R2389": "Original CHARSETBLOCK and related declarations restored,not replaced by a local layout.",
+    "R2390": "Original combo declarations restored;WINDOWS_PE body remains excluded by existing policy.",
+    "R2391": "Original list state and constants restored in original order,with no separate list selector.",
+    "R2392": "Original list field documentation and LBUP constants restored at original positions.",
+    "R2393": "Original static/cursor-resource/alignment declarations restored. Event(PEVENT_PACKET) remains omitted: actual restore fails on missing private DDE packet type. Original user.h owns that packet;modern DDE boundary is not a private server event consumer. Alternative is a separately audited original type closure,not an invented substitute.",
+    "R2394": "Original thunk prototypes,macros and string-ID constants restored. HFill(LPHLP) remains omitted: actual control compile lacks private help ABI. Existing WOW help carrier is separately owned;do not include its whole private facade only for an uncalled original helper.",
+    "R2395": "Retain bounded collaborator prototypes required by native control/navigation adapters. Original private user/winuser headers cannot be included as a full native ABI. These are declarations only;no new algorithm or duplicate runtime path. Pending decision covers restoring original header ownership as a complete dependency group.",
+    "R2396": "Original server-stub prototypes restored except SetCursorIconData/FindExistingCursorIcon. Their PCURSORDATA/PCURSORFIND types are absent;original CURSORDATA embeds private cursor animation PJIF/PCURSOR dependencies. Actual restore fails. Native cursor APIs retain modern USER ownership;no fake private layout added.",
+    "R2397": "Original COMBOWND/STATWND/MDIWND extents restored in order,sharing the full-client phase instead of a separate extent selector.",
+    "R2398": "Original dialog and MDI helper declarations restored;native collaborator declarations remain separately accounted under R2395.",
+    "R2399": "All17 excluded condition bodies use bare#error at original locations;original logical rows verified. No nested discarded branch skeleton retained.",
+    "R2400": "Original Button constants and formatting restored;no separate button selection in usercli.",
+    "R2401": "Original SHORTCREATE/MDI declarations restored. Final ddemlcli/globals/cscall/ntuser private includes remain omitted;actual full restoration fails at ddemlcli.h and private headers. Including full original USER server/CSR state is not a compatible native USER binding.",
+    "R2402": "Original retail handle macros preserved;DBG/HANDLE_FIXUP/FE_SB excluded bodies remain bare#error. No runtime handle-fixup implementation added."
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "sha256": "6be381616f0b58392a6356566315cff18b6420f2bade76e4f66e8688aea7c8c3"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+        "sha256": "810e85481ad0065ae727057e851e01395c5d53ba0cf4f772e70406d5b3fa8f28"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_user_capture_bindings.h",
+        "sha256": "843682131b8054cfbfce6a9f81df26248fd9824bd359ed9310b0cc2fe9273529"
+      },
+      {
+        "path": "test/mvdm-host/wow_page_domain_fixture.c",
+        "sha256": "80953d78980c7c340fc0c53185bfab092bd9ed5e2cd0f71221dd37e3ed4acce5"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_edit_state_bindings.c",
+        "sha256": "673260d695c24bb915f4b923f2f037cb0fd91cdb8b4bb5ba27b2b55cee2b75b4"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_control_extent_bindings.c",
+        "sha256": "50298692d2fabb63c0a1e4251dba7ee9beec2e2033c679b20bc9bbcf2a46f379"
+      },
+      {
+        "path": "src/wow32-dll/include/control-client/precomp.h",
+        "sha256": "df054ea003d1b2a474e69003a88f967b7a8641e8c3901ee60f76a4f398bcd347"
+      }
+    ],
+    "source_files": 7,
+    "deleted": []
+  },
+  "line_proof": {
+    "rows": 1868,
+    "bare_errors": 17,
+    "path": "build/t483-s5-p236/line-proof.json"
+  },
+  "evidence": "p236-usercli-investigation.json",
+  "counter_review": [
+    "Full private header restoration is not rejected merely because of duplicate local types;the original cursor/server structures require NT4-private owners. Finite original declarations were restored instead.",
+    "No runtime algorithm moved to compat. Capture declarations moved back to the original owner;two unused selectors deleted from consumers.",
+    "Lifecycle fixture Gd differs from product Gz;two restored original declarations receive existing WINAPI ABI at the fixture include only. All seven compile variants retain their assertions.",
+    "104 actual compile contexts and104 identical primary-C token streams validate the sealed isolated candidate,not final full runtime acceptance. Added final string-ID constants and removal of dead consumer selectors require final cached/Full checks."
+  ],
+  "remaining_validation": "None for this batch;seven residual owner decisions remain",
+  "verification": "cached x86/x64,publish11x2,focused34,Full20,logical lines and governance passed",
+  "delivery_receipt": "batch-p236-checkpoint.json"
+}

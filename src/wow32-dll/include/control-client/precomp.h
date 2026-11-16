@@ -43,9 +43,7 @@ LONG GetPrefixCount(LPCWSTR lpstr, int cb, LPWSTR lpstrCopy, int cbCopy);
  * must restore the surrounding ABI before any owned state is declared. */
 C_ASSERT(sizeof(DLGTEMPLATE2) == 26);
 C_ASSERT(sizeof(DLGITEMTEMPLATE2) == 24);
-#define WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #define WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
-#define WOW_ORIGINAL_CONTROL_PROTOTYPES
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #include "wow_edit_call_bindings.h"
 /* OPENNT-HOST-118: original construction, bounded native storage service. */
@@ -86,10 +84,8 @@ DWORD WINAPI xxxSetWindowLong(PWND, int, DWORD, BOOL);
 DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #endif
 #include "compat/include/opennt_usercli_multipass.h"
-#undef WOW_ORIGINAL_CONTROL_PROTOTYPES
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
-#undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
 
 /* General resource identity is distinct from the private-state validator.
  * Original usercli.h makes RevalidateHwnd exactly the NoRip operation. */

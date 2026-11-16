@@ -104,11 +104,14 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #include "wow32-dll/include/wow_edit_entry_bindings.h"
 #include "wow32-dll/include/wow_dialog_state_bindings.h"
 #include "wow32-dll/include/wow_edit_lookaside_bindings.h"
-#define WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
+/* Original USER client declarations inherit /Gz in the product. */
+#define DispatchClientMessage WINAPI DispatchClientMessage
+#define CreateMenuFromResource WINAPI CreateMenuFromResource
 #include "non-mvdm/windows/core/ntuser/client/usercli.h"
+#undef CreateMenuFromResource
+#undef DispatchClientMessage
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #include "wow32-dll/include/wow_user_registered_callbacks.h"
 extern HANDLE WINAPI W32LocalAlloc(UINT, UINT, HANDLE);
 extern HANDLE WINAPI W32LocalReAlloc(HANDLE, UINT, UINT, HANDLE, PVOID *);

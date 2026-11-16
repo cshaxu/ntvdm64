@@ -3,11 +3,9 @@
 #include "wow_edit_state_bindings.h"
 #define WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#define WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #include "compat/include/opennt_usercli_multipass.h"
 #include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
 
 C_ASSERT(sizeof(void *) == 4);
