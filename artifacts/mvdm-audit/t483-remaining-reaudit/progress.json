@@ -1,7 +1,7 @@
 {
   "source_head": "4cf4e5a35546249a003387a3a7df79037e6985ac",
   "prior_register_sha256": "cb1eceabe1120f57ea323b6549b13336951e0b217aac2a1d87b160d466970e57",
-  "new_register_sha256": "6d0485f2001ba290bbc60966068e80d90e924baf17ec1a6f41ccef78596473f1",
+  "new_register_sha256": "47b00ae6c40564267666435d70ec5e8d8e2b7cff56c0d4fc23e7eed7b640d12d",
   "entries": 2720,
   "files": 365,
   "previous_categories": {
@@ -15,8 +15,8 @@
     "already-byte-identical-to-original": 1
   },
   "completed": 41,
-  "pending": 272,
-  "next": "T483-R2449",
+  "pending": 261,
+  "next": "T483-R2460",
   "live_host_c_h_census": 1052,
   "limits": [
     "This is a freshly source-pinned re-audit worklist, not2720 proved surviving semantic defects. Per-point ranges must be relocated before review; whole-file identity checks already removed D2258.",
@@ -24,27 +24,27 @@
     "Nine non-C/H file origins require predecessor source pin verification before their turn. No unverified origin is claimed pinned."
   ],
   "awaiting_owner_approval": 1471,
-  "reviewed": 2448,
+  "reviewed": 2459,
   "restored_pending_delivery": 0,
   "batch_modified_implementation_files": 0,
   "batch_mirror_diff_delta": 0,
   "execution_state": "active",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
   "pending_decisions": 1471,
-  "restored_verified_published": 936,
-  "last_batch_mirror_diff_delta": -168,
-  "last_delivery": "batch-p239-checkpoint.json",
+  "restored_verified_published": 947,
+  "last_batch_mirror_diff_delta": -212,
+  "last_delivery": "batch-p240-checkpoint.json",
   "backlog_admission_policy": "Concrete original-restoration failure evidence required; technical unknowns are unfinished agent investigation.",
   "backlog_entries_requiring_admission_review": 0,
   "qualified_pending_decisions": 1471,
-  "pending_decisions_count_note": "936 restored delivered;0 local;41 approved/policy;1471 pending;272 unreviewed.",
-  "active_rework": "P239 verified/published;Git delivery accompanies receipt;nextR2449",
-  "active_investigation": "No unresolved P239 source investigation;six residual owner decisions recorded",
+  "pending_decisions_count_note": "947 restored delivered;0 local;41 approved/policy;1471 pending;261 unreviewed.",
+  "active_rework": "P240 verified/published;Git delivery accompanies receipt;nextR2460",
+  "active_investigation": "No unresolved P240 source investigation;all11 original restorations;no residual owner decision",
   "backlog_requalification_completed": 58,
   "batch_cadence": "No numeric threshold. Finish current file and coupled batch edits before semantic batch build/test/publication/commit/push.",
   "investigation_incomplete": 0,
-  "sequential_files_disposition_complete": 336,
-  "sequential_files_remaining": 29,
+  "sequential_files_disposition_complete": 337,
+  "sequential_files_remaining": 28,
   "batch_modified_mirror_files": 0,
   "batch_format_only_files": [],
   "partial_restoration_pending_delivery": [],
@@ -67,15 +67,15 @@
   "partial_file_review_not_delivery": false,
   "cumulative_mirror_diff": {
     "baseline_total": 119913,
-    "previous_total": 100682,
-    "current_total": 100514,
-    "net_reduction": 19399,
+    "previous_total": 100514,
+    "current_total": 100302,
+    "net_reduction": 19611,
     "files": 365,
-    "batch_reduction": 168,
+    "batch_reduction": 212,
     "metric": "Original-relative adds+deletes;CRLF normalized;split LF retains terminal empty item;#line omitted;#error retained",
-    "evidence": "batch-p239-checkpoint.json"
+    "evidence": "batch-p240-checkpoint.json"
   },
-  "last_file_classification": "Selected original wrappers,ordered conditional subset restored;6 residual native boundary decisions",
+  "last_file_classification": "Exact original header bytes restored;no residual difference",
   "supplemental_repair_pending": [
     {
       "id": "T483-P222-COMPLETION",
@@ -85,5 +85,5 @@
     }
   ],
   "supplemental_count_note": "P222 priority-repair records are separate from the fixed2720-point original re-audit census.",
-  "last_file": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h"
+  "last_file": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h"
 }

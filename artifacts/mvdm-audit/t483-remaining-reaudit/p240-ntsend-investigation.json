@@ -1,0 +1,111 @@
+{
+  "batch": "P240",
+  "file": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+  "baseline_commit": "db4d96252650df9dbf94bb18e9dcda3100d42025",
+  "baseline_sha256": "0c6402b1444df4cad026ade4751202af7e7ddc81ab9bf607fb8260864939ea13",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/inc/ntsend.h",
+  "original_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+  "status": "Whole-file source/counter-review complete;cached full,publish11x2,focused34,Full20 passed;Git delivery accompanies receipt",
+  "contexts": [
+    {
+      "name": "ntstubs",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "flags": "/nologo /EP /TC /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\""
+    },
+    {
+      "name": "control-text",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "flags": "/I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include/control-client\" /nologo /EP /TC /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_CONTROL_TEXT"
+    },
+    {
+      "name": "control-color",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "flags": "/nologo /EP /TC /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_CONTROL_COLOR"
+    },
+    {
+      "name": "control-brush-client",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "flags": "/nologo /EP /TC /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT"
+    },
+    {
+      "name": "private-word-client",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "flags": "/I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include/control-client\" /nologo /EP /TC /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_GETSET"
+    },
+    {
+      "name": "class-client",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/client.c",
+      "flags": "/nologo /EP /TC /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /DWOW_ORIGINAL_CLASS_CLIENT"
+    }
+  ],
+  "preprocess_comparison": [
+    {
+      "context": "ntstubs",
+      "nonblank_preprocessed_lines_identical": true,
+      "before_lines": 44588,
+      "after_lines": 44588,
+      "before_sha256": "51e8195584e9f85280f6d1b2b2b35d901668887c215163fe77a9cbd16af3ae98",
+      "after_sha256": "1133a845dce6e74ef4c618b0dee053936a1094033aae2e0454eada6563fd3541"
+    },
+    {
+      "context": "control-text",
+      "nonblank_preprocessed_lines_identical": true,
+      "before_lines": 48292,
+      "after_lines": 48292,
+      "before_sha256": "a38ef89f7973a869003273bab7bfe9b62aa6a839f91e74771c6074ad11c4286b",
+      "after_sha256": "24a294200508d7bd258474862d6d160e1f9a90209f40464307804f5ec85e51c2"
+    },
+    {
+      "context": "control-color",
+      "nonblank_preprocessed_lines_identical": true,
+      "before_lines": 44332,
+      "after_lines": 44332,
+      "before_sha256": "45fc208a4d292fc988ed5163b158d49dcafe9015ebbe99aa670e17ba31028ef7",
+      "after_sha256": "b68b4073906c1bdf558c2186aa68c6b748ce468a71bfdf1fde3f24cc1e8dea10"
+    },
+    {
+      "context": "control-brush-client",
+      "nonblank_preprocessed_lines_identical": true,
+      "before_lines": 44329,
+      "after_lines": 44329,
+      "before_sha256": "fd8ab871bb41b75be1fe82fc47232bb0d7c76fe45bd03d5c54c939dac38025d0",
+      "after_sha256": "5c1bdadf304d69c6f1d145da77a13243e35c6e7bc40830987b9d7eb667f34248"
+    },
+    {
+      "context": "private-word-client",
+      "nonblank_preprocessed_lines_identical": true,
+      "before_lines": 48321,
+      "after_lines": 48321,
+      "before_sha256": "aee068734db53dbe9e2dc9120d27ffdc12a2ec2b706d87e7a90e6be8fb30f17f",
+      "after_sha256": "0b3a5f69f7a1390ae559045195a151d9e9e68ae44ca1b16a589112281cfa3f11"
+    },
+    {
+      "context": "class-client",
+      "nonblank_preprocessed_lines_identical": true,
+      "before_lines": 44948,
+      "after_lines": 44948,
+      "before_sha256": "6486ae73c7db6760a18b35d2ffe11632039052307640bb537f905860827852ce",
+      "after_sha256": "c2fd7c10b42530fd049428ba2ecf5a0dc1330cf962bdf74ddc2bfc8210c24a9c"
+    }
+  ],
+  "counter_review": {
+    "method": "single agent initial/counter-review",
+    "original_presumption": "Old subset rationale supplies no failure proof;macro definitions do not invoke private services without expansion.",
+    "existing_definition_check": "13 unique retained macro names compare equal to original;Unicode/ANSI alias branches restored without changing selected existing captures.",
+    "actual_inclusion_closure": "ntcftxt class-client;ntstubs class-query/control-text/control-color/control-brush/private-word contexts;dialog getset fixture covered by focused regression.",
+    "line_and_subset": "Original bytes restored,including CRLF;286 source lines;existing error count was0 and remains0.",
+    "limits": "Whitespace-normalized preprocessor identity is not itself a runtime acceptance;cached full build,focused andFull remain required.",
+    "configuration_coverage": {
+      "ANSI": [
+        "ntstubs",
+        "class-client"
+      ],
+      "UNICODE": [
+        "control-text",
+        "control-color",
+        "control-brush-client",
+        "private-word-client"
+      ]
+    }
+  }
+}

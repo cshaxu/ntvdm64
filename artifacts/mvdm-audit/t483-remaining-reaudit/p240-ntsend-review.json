@@ -1,0 +1,102 @@
+{
+  "batch": "P240",
+  "file": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/inc/ntsend.h",
+  "baseline_commit": "db4d96252650df9dbf94bb18e9dcda3100d42025",
+  "baseline_sha256": "0c6402b1444df4cad026ade4751202af7e7ddc81ab9bf607fb8260864939ea13",
+  "final_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+  "before": {
+    "added": 7,
+    "deleted": 205,
+    "total": 212
+  },
+  "after": {
+    "added": 0,
+    "deleted": 0,
+    "total": 0
+  },
+  "mirror_diff_delta": -212,
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+        "sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+        "exact_original_logical_rows": 286,
+        "error_bodies": 0,
+        "unexplained_line_mismatches": 0,
+        "proof": "Exact byte identity with pinned original B708F1FE; no pre-existing error bodies; original Unicode/ANSI structure retained; six actual product preprocess contexts unchanged except whitespace."
+      }
+    ]
+  },
+  "points": [
+    {
+      "review_id": "T483-R2449",
+      "scope": "Thread connection macro definitions",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2450",
+      "scope": "Void call/error/return macro definitions",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2451",
+      "scope": "Error/message declaration and ANSI capture definitions",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2452",
+      "scope": "Optional/large ANSI capture definitions",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2453",
+      "scope": "First-capture ANSI definitions",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2454",
+      "scope": "Unicode capture definitions",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2455",
+      "scope": "Large/optional/ordinal Unicode capture definitions",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2456",
+      "scope": "Original call/error macros",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2457",
+      "scope": "Original ANSI ID capture macro",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2458",
+      "scope": "Original Unicode ID capture macro",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    },
+    {
+      "review_id": "T483-R2459",
+      "scope": "Complete original width-neutral aliases",
+      "decision": "restore-original",
+      "evidence": "Exact original byte restoration;existing13 unique macro names unchanged;all6 actual product preprocessed line sequences unchanged except whitespace"
+    }
+  ],
+  "validation": "Cached x86/x64,publish11x2,focused34,Full20,shared-boundary/governance/links passed;Git delivery accompanies receipt",
+  "evidence": "p240-ntsend-investigation.json",
+  "delivery_receipt": "batch-p240-checkpoint.json"
+}

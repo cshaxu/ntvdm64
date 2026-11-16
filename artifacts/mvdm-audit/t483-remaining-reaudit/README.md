@@ -1421,3 +1421,9 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [Review](p239-ntcftxt-review.json) and [counter-review evidence](p239-ntcftxt-investigation.json): R2437-R2448 ntcftxt.h;mirror1373->1205(-168),421 original logical rows,23 error bodies. Two display wrappers restored; six residual native-boundary/cleanup decisions. Delivery verified below;Git delivery accompanies receipt.
 
 - [P239 delivery](batch-p239-checkpoint.json): ntcftxt.h selected original subset restored;cached,publish11x2,focused34,Full20;fixed mirror metric1373->1205(-168).
+
+### P240 whole-file audit
+
+- [Review](p240-ntsend-review.json) and [counter-review](p240-ntsend-investigation.json): R2449-R2459 ntsend.h restored byte-identical to original;mirror212->0(-212);six actual preprocess contexts unchanged apart from whitespace. Delivery verified below;Git delivery accompanies receipt.
+
+- [P240 delivery](batch-p240-checkpoint.json): ntsend.h selected original subset restored;cached,publish11x2,focused34,Full20;fixed mirror metric212->0(-212).
