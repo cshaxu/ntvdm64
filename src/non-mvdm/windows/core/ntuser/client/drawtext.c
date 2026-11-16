@@ -9,10 +9,69 @@
 * 02-12-92 mikeke   Moved Drawtext to the client side
 \***************************************************************************/
 
-#line 12
 #include "precomp.h"
 #pragma hdrstop
-#line 156
+
+#define CR 13
+#define LF 10
+
+#define DT_HFMTMASK 0x03
+
+/***************************************************************************\
+* IsMetaFile
+*
+* History:
+* 30-Nov-1992 mikeke    Created
+\***************************************************************************/
+
+BOOL IsMetaFile(
+    HDC hdc)
+{
+    DWORD dwType = GetObjectType(hdc);
+    return (dwType == OBJ_METAFILE ||
+            dwType == OBJ_METADC ||
+            dwType == OBJ_ENHMETAFILE ||
+            dwType == OBJ_ENHMETADC);
+}
+
+#line 70
+/***************************************************************************\
+* DrawTextW (API)
+*
+* History:
+* 30-11-92 mikeke      Created
+\***************************************************************************/
+
+int DrawTextW(
+    HDC hdc,
+    LPCWSTR lpchText,
+    int cchText,
+    LPRECT lprc,
+    UINT format)
+{
+    DRAWTEXTPARAMS      DTparams;
+    LPDRAWTEXTPARAMS    lpDTparams = NULL;
+
+    /* v-ronaar: fix bug #24985
+     * Disallow negative string lengths, except -1 (which has special meaning).
+     */
+    if (cchText < -1)
+        return(0);
+
+    if (format & DT_TABSTOP)
+    {
+        DTparams.cbSize      = sizeof(DRAWTEXTPARAMS);
+        DTparams.iLeftMargin = DTparams.iRightMargin = 0;
+        DTparams.iTabLength  = (format & 0xff00) >> 8;
+        lpDTparams           = &DTparams;
+        format              &= 0xffff00ff;
+    }
+
+    return DrawTextExW(hdc, (LPWSTR)lpchText, cchText, lprc, format, lpDTparams);
+}
+
+#line 155
+
 /***************************************************************************\
 * ClientTabTheTextOutForWimps
 *
@@ -211,3 +270,47 @@ LONG TabTextOut(
     }
     return MAKELONG((x - initialx), (short)textextent.cy);
 }
+
+
+
+/***************************************************************************\
+*  TabbedTextOutW
+*
+* effects: Outputs the tabbed text and returns the
+* textextent of the tabbed text.
+*
+* nCount                    Count of bytes in string
+* nTabPositions             Count of tabstops in tabstop array
+* lpintTabStopPositions     Tab stop positions in pixels
+* iTabOrigin                Tab stops are with respect to this
+*
+* History:
+* 19-Jan-1993 mikeke   Client side
+\***************************************************************************/
+
+LONG TabbedTextOutW(
+    HDC hdc,
+    int x,
+    int y,
+    LPCWSTR lpstring,
+    int cchChars,
+    int nTabPositions,
+    LPINT lpintTabStopPositions,
+    int iTabOrigin)
+{
+    return TabTextOut(hdc, x, y, lpstring, cchChars,
+        nTabPositions, lpintTabStopPositions, iTabOrigin, TRUE);
+}
+
+#line 419
+DWORD GetTabbedTextExtentW(
+    HDC hdc,
+    LPCWSTR pString,
+    int chCount,
+    int nTabPositions,
+    LPINT pnTabStopPositions)
+{
+    return TabTextOut(hdc, 0, 0, pString, chCount,
+        nTabPositions, pnTabStopPositions, 0, FALSE);
+}
+

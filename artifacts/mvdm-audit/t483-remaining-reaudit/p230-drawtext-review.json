@@ -1,0 +1,222 @@
+{
+  "batch": "P230",
+  "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+  "before_sha256": "b0a803cd55d6dcd6c8a43a8e368ecf0ecd90ed42011f7b14d5933a2c55970267",
+  "original_sha256": "014e568b4f4ae57d54b8afc4502c890cd19ef1a698273561d9627b1b9c9ec10a",
+  "before": {
+    "add": 0,
+    "delete": 239,
+    "total": 239
+  },
+  "current": {
+    "add": 0,
+    "delete": 137,
+    "total": 137
+  },
+  "status": "Cached x86/x64,publish11x2,focused32,Full20 and governance passed;Git delivery accompanies receipt",
+  "proof": {
+    "full_original_compile_exit": "0",
+    "full_original_link_exit": "1120",
+    "link_failures": "user32.lib(USER32.dll) : error LNK2005: _DrawTextA@20 already defined in drawtext-original.obj\nuser32.lib(USER32.dll) : error LNK2005: _TabbedTextOutA@32 already defined in drawtext-original.obj\nuser32.lib(USER32.dll) : error LNK2005: _GetTabbedTextExtentA@20 already defined in drawtext-original.obj\nO:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored\nO:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommHandle' specified multiple times; using first specification\nO:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommShadowMSR' specified multiple times; using first specification\n   Creating library O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p230\\original.lib and object O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p230\\original.exp\noriginal.exp : warning LNK4070: /OUT:wow32.dll directive in .EXP differs from output filename 'O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p230\\original.dll'; ignoring directive\ndrawtext-original.obj : error LNK2019: unresolved external symbol _GdiGetCodePage@4 referenced in function _DrawTextA@20\ndrawtext-original.obj : error LNK2019: unresolved external symbol _UserLocalFree@4 referenced in function _DrawTextA@20\nO:\\repos.hobby\\ntvdm64\\build\\t483-s5-p230\\original.dll : fatal error LNK1120: 2 unresolved externals\n",
+    "unicode_compile_exit": "0",
+    "unicode_link_exit": "0"
+  },
+  "points": {
+    "T483-R2311": {
+      "before": "+0/-142",
+      "restored": "Original constants,IsMetaFile and DrawTextW",
+      "residual": "DrawTextExA and DrawTextA;native USER32 ownership and private GdiGetCodePage dependency",
+      "after": "+0/-83",
+      "delta": -59
+    },
+    "T483-R2312": {
+      "before": "+0/-97",
+      "restored": "TabbedTextOutW and GetTabbedTextExtentW",
+      "residual": "TabbedTextOutA and GetTabbedTextExtentA;native USER32 symbol collisions and private codepage/allocation leaves",
+      "after": "+0/-54",
+      "delta": -43
+    }
+  },
+  "boundary": "No ANSI binding change,no new shim;current WOW ANSI thunks in wuser.c/wutext.c keep modern USER32 ownership. Unicode wrapper restoration is not proof of all public API behavioral equivalence.",
+  "line_proof": {
+    "candidate_sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+    "original_literal_lines": 270,
+    "errors": 0,
+    "add": 0,
+    "delete": 137,
+    "total": 137,
+    "mismatches": [],
+    "scope": "Every retained source row matches original at explicit logical line;no heuristic alignment of repeated function comments",
+    "preprocessing": [
+      {
+        "context": "product",
+        "selected_nonempty_rows": 173,
+        "literal_original_matches_at_correct_line": 150
+      },
+      {
+        "context": "fixture",
+        "selected_nonempty_rows": 173,
+        "literal_original_matches_at_correct_line": 150
+      }
+    ]
+  },
+  "test_plan": "Existing control draw-state fixture now links actual client drawtext and aliases restored Unicode functions directly;system reference obtained via GetProcAddress. Covers custom tabs,draw/measure extent,zero count,negative DrawText length and calculated rectangle. Prior unconnected native-fixture edit discarded;no new test executable.",
+  "line_verification_note": "Generic SequenceMatcher-based insertion misaligned repeated wrapper headers;candidate restored from pinned explicit original ranges and every retained logical line checked directly. Failed preparation did not compile or publish.",
+  "after_sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+        "sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_control_draw_state_fixture.c",
+        "sha256": "38f31b847223e57ad112ed0642698672bb319a1ba66e30ae8e4a75d7581c11db"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "90dc5134bd1ec76e5ddd837ea1c39037a322ac2372117404e715673beeaf9c92"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "tests": {
+    "focused": "32 fixtures;actual restored Unicode bodies via direct linker aliases compared with native USER32 exports",
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 419534,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6284,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1171,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11594,
+          "CleanupMs": 302,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 10268,
+          "CleanupMs": 378,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 9639,
+          "CleanupMs": 417,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 179,
+          "CleanupMs": 364,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 65708,
+          "CleanupMs": 411,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 45706,
+          "CleanupMs": 390,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 48573,
+          "CleanupMs": 426,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15336,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11646,
+          "CleanupMs": 458,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 58641,
+          "CleanupMs": 464,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12664,
+          "CleanupMs": 435,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28501,
+          "CleanupMs": 498,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30608,
+          "CleanupMs": 444,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3630,
+          "CleanupMs": 458,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7521,
+          "CleanupMs": 443,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9955,
+          "CleanupMs": 417,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4204,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7537,
+          "CleanupMs": 449,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20135,
+          "CleanupMs": 409,
+          "Passed": true
+        }
+      ]
+    }
+  },
+  "counter_review": {
+    "method": "Single agent independent source/provider/final-diff review",
+    "native_boundary": "ANSI thunks remain native;full original link failure does not justify deleting independent Unicode bodies",
+    "proof_correction": "An intermediate preprocessing selector matched RTL drawtext rather than client drawtext;full path selection rerun passes both contexts",
+    "limit": "Focused tests cover tab extents,drawing return,empty count,negative DrawText length and rectangle calculation;not exhaustive font,metafile or every public DrawText option"
+  }
+}

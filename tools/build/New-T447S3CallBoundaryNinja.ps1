@@ -136,6 +136,7 @@ $units += ,@('state_drawing_brushes', 'src/wow32-dll/source/wow_edit_drawing_bin
 $units += ,@('state_drawing_atlas', 'src/wow32-dll/source/wow_button_resources.c', '')
 $units += ,@('state_drawing_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_draw_state_fixture.c', '')
 $units += ,@('state_drawing_text', 'src/non-mvdm/windows/core/ntuser/rtl/drawtext.c', $textFlags)
+$units += ,@('state_tab_text', 'src/non-mvdm/windows/core/ntuser/client/drawtext.c', $textFlags)
 $units += ,@('button_lifetime_adapter', 'src/wow32-dll/source/wow_button_lifetime.c', '')
 $units += ,@('button_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_lifetime_fixture.c', '')
 $buttonLifetimeResourceFlags = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-lifetime/resource-leaves.h')) + '"'
@@ -248,7 +249,7 @@ $lines.Add('build bin/wow_button_drawing_fixture.exe: link obj/push_fixture.obj 
 $lines.Add('build original-button-drawing-boundaries: phony bin/wow_button_drawing_fixture.exe')
 $lines.Add('build bin/wow_button_resources_fixture.exe: link obj/button_resources_fixture.obj obj/button_resources_body.obj obj/button_resources_table.obj')
 $lines.Add('build original-button-resource-boundaries: phony bin/wow_button_resources_fixture.exe')
-$lines.Add('build bin/wow_control_draw_state_fixture.exe: link obj/state_drawing_fixture.obj obj/state_drawing_adapter.obj obj/state_drawing_body.obj obj/state_drawing_brushes.obj obj/state_drawing_atlas.obj obj/button_resources_table.obj obj/state_drawing_text.obj obj/string_extent.obj obj/string_services.obj')
+$lines.Add('build bin/wow_control_draw_state_fixture.exe: link obj/state_drawing_fixture.obj obj/state_drawing_adapter.obj obj/state_drawing_body.obj obj/state_drawing_brushes.obj obj/state_drawing_atlas.obj obj/button_resources_table.obj obj/state_drawing_text.obj obj/state_tab_text.obj obj/string_extent.obj obj/string_services.obj')
 $lines.Add('build original-state-drawing-boundaries: phony bin/wow_control_draw_state_fixture.exe')
 $lines.Add('build bin/wow_button_lifetime_fixture.exe: link obj/button_lifetime_fixture.obj obj/button_lifetime_adapter.obj obj/button_blit_owner.obj obj/button_lifetime_resources.obj obj/button_resources_table.obj')
 $lines.Add('build bin/wow_button_dc_fixture.exe: link obj/button_dc_fixture.obj obj/button_dc_owner.obj obj/button_dc_unreached.obj')

@@ -1358,3 +1358,5 @@ R2308 guard-removal candidate was rejected by actual original navigation
 evidence;the existing retirement guard remains. See P229 receipt below.
 
 P229: [delivery receipt](batch-p229-checkpoint.json). Cached,publish11x2,focused32,Full20 and governance passed;two-file net mirror reduction114;R2308 retirement guard retained on actual navigation evidence.
+
+P230: [delivery receipt](batch-p230-checkpoint.json). Drawtext239->137(-102);original Unicode bodies restored;ANSI native boundary pending. Cached,publish11x2,focused32,Full20 and governance passed.

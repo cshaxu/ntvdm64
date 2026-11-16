@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2310 reviewed:894 restored/confirmed published,0 local restorations,13 approved/policy,
-1403 qualified pending;410 unreviewed. Files315/365 source-reviewed,50 remain;
-P229 file315 verified/published;Git delivery accompanies receipt.
+2312 reviewed:894 restored/confirmed published,0 local restorations,13 approved/policy,
+1405 qualified pending;408 unreviewed. Files316/365 source-reviewed,49 remain;
+P230 file316 verified/published;Git delivery accompanies receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P229 package `741dc6c5-0745-4549-ae5a-22f7830f820f` published11x2;hashes verified.
-Dialog navigation order and mnemonic continuations restored;qualified residuals pending.
-Mirror diff:dlgmgrc151->88,dmmnem78->27,total reduction114.
+P230 package `5f136ccb-db61-4d7c-b254-220c48d0e61f` published11x2;hashes verified.
+Drawtext original Unicode bodies restored;ANSI provider boundary pending owner.
+Mirror diff239->137(-102);two points partially restored,not counted as whole restores.
 Cached x86/x64,32 fixtures,Full20 including DOS4GW and governance passed.
-Cumulative365-file diff119913->102931(-16982).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p229-checkpoint.json).
-Git delivery accompanies receipt;R2311 next.
+Cumulative365-file diff119913->102829(-17084).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p230-checkpoint.json).
+Git delivery accompanies receipt;R2313 next.
 
 ## Remaining Scope
 
@@ -203,3 +203,8 @@ P229 verified/published:two files net reduction114;14 restored points,2 policy
 points and6 pending decisions. Actual original navigation probe rejected R2308
 guard removal before publication. Cached,publish11x2,focused32,Full20 passed.
 [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p229-checkpoint.json).
+
+P230 verified/published:drawtext239->137(-102);Unicode source restored,
+ANSI residuals remain pending. Actual original full link fails;partial restored
+product and fixture pass. Cached,publish11x2,focused32,Full20,governance passed.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p230-checkpoint.json).
