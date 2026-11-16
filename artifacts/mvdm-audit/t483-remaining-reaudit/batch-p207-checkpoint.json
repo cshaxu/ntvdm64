@@ -1,0 +1,49 @@
+{
+  "status": "original selected FLOATOBJ declarations confirmed;conditional line mapping minimized",
+  "proof": {
+    "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+    "sha256": "4de5a2189a96c6bf8ce23dacf47837b6cbea3a0c1d2c5589e928e32eef1a5aa3",
+    "original_sha256": "f3ba4a33dbbb58768c2fb8aacc205a017f05d11521ad1650e39a998be5344f4a",
+    "source_lines": 2040,
+    "contexts": [
+      {
+        "unit": "wow32fax",
+        "selected_header_lines": 1357,
+        "tokens_and_lines_identical": true
+      }
+    ],
+    "mirror_before": 41,
+    "mirror_after": 41,
+    "mirror_delta": 0,
+    "raw_before": 44,
+    "raw_after": 43,
+    "errors": 1,
+    "line_directives_before": 3,
+    "line_directives_after": 2,
+    "negative_controls": [
+      "_X86_=1"
+    ],
+    "line_endings": "Original CRLF matches pinned source; before-byte counts recorded separately",
+    "ordinary_semantic_diff": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "sha256": "4de5a2189a96c6bf8ce23dacf47837b6cbea3a0c1d2c5589e928e32eef1a5aa3"
+    }
+  ],
+  "reviewed_source": {
+    "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+    "sha256": "4de5a2189a96c6bf8ce23dacf47837b6cbea3a0c1d2c5589e928e32eef1a5aa3"
+  },
+  "mirror_before": 41,
+  "mirror_after": 41,
+  "mirror_delta": 0,
+  "raw_before": 44,
+  "raw_after": 43,
+  "change": "Remove redundant2366/2410/2447;add else2406 and continuation2407. Three directives become two;_X86_ error retained.",
+  "counter_review": "Only direct include is wow32fax.c. Actual per-file Ninja flags include wow_registry_binding.h. Exact variant inclusion and full TU tokens match;1357 selected header lines and2040 retained source lines match original. Host x86 architecture does not imply historical _X86_ macro;selected FLOAT variant confirmed.",
+  "verification": "Three preprocessings;_X86_=1 C1189 negative control;no new product link or runtime pass claimed.",
+  "product_verification": "Reuse P187 cached build and publication for token-equivalent diagnostic-only change;verify11 images at both destinations. Current shared RDP Clipboard18 passed in P205.",
+  "delivery": "P207 governance commit push accompany receipt"
+}

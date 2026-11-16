@@ -2363,13 +2363,13 @@ EngEscape(
 
 
 #ifdef _X86_
-#line 2366
 #error Unsupported excluded original configuration
+#line 2406
 #else
+#line 2407
 
     // any platform that has support for floats in the kernel
 
-#line 2410
     typedef FLOAT FLOATOBJ;
     typedef FLOAT *PFLOATOBJ;
 
@@ -2407,7 +2407,6 @@ EngEscape(
 
 
 #endif // _FLOATOBJ_
-#line 2447
 
 typedef struct  tagFLOATOBJ_XFORM
 {
