@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2459 reviewed:947 restored/confirmed published,0 local,41 approved/policy,
-1471 qualified pending;261 unreviewed. Files337/365 source-reviewed and
-verified/published,28 remain;Git delivery accompanies P240 receipt.
+2483 reviewed:957 restored/confirmed delivered,0 local,41 approved/policy,
+1485 qualified pending;237 unreviewed. Files338/365 source-reviewed and delivered;
+27 remain. Git delivery accompanies P241 receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,13 +53,13 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P240 package `8a491e42-80b4-476b-89c0-c00dd3b08845` published11x2;hashes verified.
-ntsend.h byte-identical to original;
-0 error bodies,286 exact original logical rows. Mirror212->0(-212).
-Cached x86/x64,34 focused,Full20 and governance pass. All11 points restored;no new pending decisions or shim.
-Cumulative365-file mirror diff119913->100302(-19611).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p240-checkpoint.json).
-Git delivery accompanies receipt;R2460 next.
+P241 package `77738d74-ec23-4d13-a42e-8ebc4b368597` published11x2;hashes verified.
+user.h mirror2666->265(-2401);2494 exact original logical rows,23 excluded bodies.
+Cached x86/x64,focused34,Full20,boundary and governance passed.
+10 original restorations;14 minimized residuals remain pending owner decision.
+Cumulative365-file mirror diff119913->97901(-22012).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p241-checkpoint.json).
+Git delivery accompanies receipt;R2484 next.
 
 ## Remaining Scope
 

@@ -29,15 +29,6 @@ WCSToMBEx(0, pUnicodeString, cbUnicodeChar, ppAnsiString, nAnsiChar, bAllocateMe
 #define MBToWCS(pAnsiString, nAnsiChar, ppUnicodeString, cbUnicodeChar,\
 bAllocateMem)\
 MBToWCSEx(0, pAnsiString, nAnsiChar, ppUnicodeString, cbUnicodeChar, bAllocateMem)
-/* Original inc/user.h string leaves; no conversion or allocation policy. */
-__inline BOOL IsEmptyString(PVOID p, ULONG bAnsi)
-{
-    return (BOOL)!(bAnsi ? *(LPSTR)p : *(LPWSTR)p);
-}
-__inline UINT StringLength(PVOID p, ULONG bAnsi)
-{
-    return (bAnsi ? strlen((LPSTR)p) : wcslen((LPWSTR)p));
-}
 #include <pshpack2.h>
 typedef struct {
     WORD wDlgVer;

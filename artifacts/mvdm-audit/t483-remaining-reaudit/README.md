@@ -1427,3 +1427,9 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [Review](p240-ntsend-review.json) and [counter-review](p240-ntsend-investigation.json): R2449-R2459 ntsend.h restored byte-identical to original;mirror212->0(-212);six actual preprocess contexts unchanged apart from whitespace. Delivery verified below;Git delivery accompanies receipt.
 
 - [P240 delivery](batch-p240-checkpoint.json): ntsend.h selected original subset restored;cached,publish11x2,focused34,Full20;fixed mirror metric212->0(-212).
+
+### P241 whole-file candidate
+
+- [Investigation](p241-user-investigation.json): user.h R2460-R2483;original-order candidate and duplicate binding removal applied;mirror2666->265(-2401). Isolated110 contexts and full WOW link pass;cached build/publication/runtime/Git pending.
+
+- [P241 delivery](batch-p241-checkpoint.json): user.h original order restored;mirror2666->265(-2401);cached,publish11x2,focused34,Full20 passed;14 residuals pending owner;Git delivery accompanies receipt.

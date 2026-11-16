@@ -1,0 +1,4362 @@
+{
+  "batch": "P241",
+  "file": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "baseline_commit": "963b936327073ea3dc17e64da835aa4ec5887805",
+  "pins": {
+    "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\windows\\core\\ntuser\\inc\\user.h",
+    "baseline_sha256": "8dc0783c8890faa6911fab8307f30b6fb58454ee439fddf55475e1b1b53d5f83",
+    "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+    "original_winerrp_sha256": "a04d4685c2a5fef4c68614161a616eac40b4fd97efbcb5c0c9b52f2169e3ceff",
+    "production_changed": true
+  },
+  "before": {
+    "added": 365,
+    "deleted": 2301,
+    "total": 2666
+  },
+  "status": "Whole-file source/counter-review,cached build,publish11x2,focused34,Full20 passed;Git delivery accompanies receipt",
+  "contexts": [
+    {
+      "name": "control-body-editec",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "flags": "/I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include/control-client\" /nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_EDIT_CLIENT"
+    },
+    {
+      "name": "control-text-rtl",
+      "source": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "flags": "/I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include/control-drawing\" /nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE"
+    },
+    {
+      "name": "wow_user_object_bindings",
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_object_bindings.c",
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWINNT /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\""
+    },
+    {
+      "name": "wow_default_message_bindings",
+      "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_default_message_bindings.c",
+      "flags": "/nologo /TC /c /MT /W3 /Gz  /D_NO_CRT_STDIO_INLINE /DWINNT /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\""
+    }
+  ],
+  "compile_controls": [
+    {
+      "variant": "current",
+      "context": "control-body-editec",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "current",
+      "context": "control-text-rtl",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "current",
+      "context": "wow_user_object_bindings",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "current",
+      "context": "wow_default_message_bindings",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "original",
+      "context": "control-body-editec",
+      "exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2065: 'COLOR_MAX': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2057: expected constant expression",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(977): error C2229: struct 'tagSERVERINFO' has an illegal zero-sized array"
+      ]
+    },
+    {
+      "variant": "original",
+      "context": "control-text-rtl",
+      "exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2065: 'COLOR_MAX': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2057: expected constant expression",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(977): error C2229: struct 'tagSERVERINFO' has an illegal zero-sized array"
+      ]
+    },
+    {
+      "variant": "original",
+      "context": "wow_user_object_bindings",
+      "exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2065: 'COLOR_MAX': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2057: expected constant expression",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(977): error C2229: struct 'tagSERVERINFO' has an illegal zero-sized array"
+      ]
+    },
+    {
+      "variant": "original",
+      "context": "wow_default_message_bindings",
+      "exit": 2,
+      "first_errors": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2065: 'COLOR_MAX': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(976): error C2057: expected constant expression",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p241\\original\\non-mvdm/windows/core/ntuser/inc/user.h(977): error C2229: struct 'tagSERVERINFO' has an illegal zero-sized array"
+      ]
+    },
+    {
+      "variant": "preamble",
+      "context": "control-body-editec",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "preamble",
+      "context": "control-text-rtl",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "preamble",
+      "context": "wow_user_object_bindings",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "preamble",
+      "context": "wow_default_message_bindings",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "warning",
+      "context": "control-body-editec",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "warning",
+      "context": "control-text-rtl",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "warning",
+      "context": "wow_user_object_bindings",
+      "exit": 0,
+      "first_errors": []
+    },
+    {
+      "variant": "warning",
+      "context": "wow_default_message_bindings",
+      "exit": 0,
+      "first_errors": []
+    }
+  ],
+  "link_controls": {
+    "current": 0,
+    "preamble": 0,
+    "warning": 0
+  },
+  "conclusions": {
+    "R2460": "Original preamble and original4101 pragma each compile in4real contexts and link in actual full WOW product. Existing omission cannot be justified by presumed failure. Restoring include also needs pinned original winerrp.h dependency;whole-file plan must account for its source policy and diff scale.",
+    "whole_original": "All4 full-original contexts fail beginning at SERVERINFO dependencies;this is not evidence against every local restoration.",
+    "original_error_owner": "winerrp.h retail macros call UserSetLastError;original rtl/debug.c390-408 writes TEB LastErrorValue and converts NTSTATUS. No such function was added to product; tested prefix link currently succeeds.",
+    "execution": "First link-script generation rejected a mixed-separator match before any linker run;corrected normalized response paths,then all3 real link controls passed.",
+    "R2461": "Original48-122 declarations/macros compile in four actual product contexts and full WOW link passes; no evidence justifies wholesale omission. Candidate restoration, not delivered.",
+    "R2462": "Original early declarations and inline helpers compile/link in four contexts when duplicate compat helper bodies are removed. Negative control proves C2084 duplicate definitions. Existing EDIT task GetClientInfo override remains the actual expansion. Remaining consumers and whole-file original ordering must still be completed.",
+    "R2463": "Original471-557 declarations with existing unsupported MEMPHIS bodies replaced by bare error compile in four actual product contexts. No product source change yet; candidate logical-line finalization and all-consumer validation belong to whole-file batch.",
+    "R2464": "Whole original range can be substantially restored.108 actual users identify finite pointer-namespace conflicts;declarations refer to NT4 kernel objects or guest16 structures with different ownership and layout. Candidate restricts omission to these declarations rather than whole constants/callback-table block.Original-order final integration and remaining points not yet complete."
+  },
+  "remaining_file_work": "R2471-R2483 complete explicit dispositions, final original logical-line verification and exclusion checks;final /O2 actual110 compilation and full WOW link;then production edit,cached full,publish,test,commit,push. File not counted delivered.",
+  "early_range_controls": {
+    "r2461": {
+      "control-body-editec": 0,
+      "control-text-rtl": 0,
+      "wow_user_object_bindings": 0,
+      "wow_default_message_bindings": 0
+    },
+    "r2462-no-getter": {
+      "control-body-editec": 0,
+      "control-text-rtl": 0,
+      "wow_user_object_bindings": 0,
+      "wow_default_message_bindings": 0
+    },
+    "r2462-getter": {
+      "control-body-editec": 0,
+      "control-text-rtl": 0,
+      "wow_user_object_bindings": 0,
+      "wow_default_message_bindings": 0
+    },
+    "r2463": {
+      "control-body-editec": 0,
+      "control-text-rtl": 0,
+      "wow_user_object_bindings": 0,
+      "wow_default_message_bindings": 0
+    }
+  },
+  "early_range_links": {
+    "r2461": 0,
+    "r2462-no-getter": 0,
+    "r2462-getter": 0
+  },
+  "duplicate_negative_control": {
+    "exit": 2,
+    "diagnostics": [
+      "O:/repos.hobby/ntvdm64/src\\compat/include/wow_control_resource_abi.h(33): error C2084: function 'BOOL IsEmptyString(PVOID,ULONG)' already has a body",
+      "O:/repos.hobby/ntvdm64/src\\compat/include/wow_control_resource_abi.h(37): error C2084: function 'UINT StringLength(PVOID,ULONG)' already has a body"
+    ]
+  },
+  "getter_preprocessor_control": {
+    "identical_nonblank_stripped_lines": true,
+    "wow_edit_client_info_lines": 2,
+    "teb_getter_expansion_lines": 0,
+    "scope": "actual editec compilation only; other consumers still require binding review"
+  },
+  "all_consumers_R2464": {
+    "source": "Ninja live dependencies:108 actual WOW product users of user.h",
+    "results": [
+      {
+        "target": "obj/wuclip.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(290): error C2371: 'PTDB': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wuser31.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(290): error C2371: 'PTDB': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/opennt-user/control-body-edmlrare.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-edmlonce.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-comboini.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-combo.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-edecrare.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-lb1.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl3.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxvar.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-edslrare.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgbegin.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl1.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-editsl.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-editml.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-combodir.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-editec.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxmult.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxrare.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl2.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgrc.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-wow.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/clglobal.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-dmmnem.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/dialog-memory.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgend.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-view-winmgr.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-view-wow.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgr.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/clmenu.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/rtlinit.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/ntstubs.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-winmgrc.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/dialog-template.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgr2.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-state.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/private-word-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/private-word-reader.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-text-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/default-messages.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-fnid.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-draw.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-text.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/private-word-setter.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/dialog-pointer.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-color.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/default-borders.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-brush-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-text-rtl.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/default-window-bits.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-brush.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/default-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/cleanup.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(188): error C2371: 'PQ': redefinition; different basic types",
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(189): error C2371: 'PTHREADINFO': redefinition; different basic types",
+          "O:/repos.hobby/ntvdm64/src/wow32-dll/include\\wow_cleanup_bindings.h(60): error C2371: 'PWND': redefinition; different basic types",
+          "O:/repos.hobby/ntvdm64/src/wow32-dll/include\\wow_cleanup_bindings.h(62): error C2371: 'PPROCESSINFO': redefinition; different basic types",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(86): error C2037: left of 'spwndChild' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(86): error C2037: left of 'spwndNext' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(92): error C2037: left of 'pcls' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(92): error C2037: left of 'thread' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(104): error C2037: left of 'serverSideProc' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(113): error C2037: left of 'spwndChild' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(265): error C2037: left of 'procedure_is_guest' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(265): error C2037: left of 'lpfnWndProc' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(267): error C2037: left of 'lpfnWndProc' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(267): error C2198: 'BOOL WowWndProcInSelList(WNDPROC_PWND,PWORD)': too few arguments for call",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(296): error C2037: left of 'classes' specifies undefined struct/union 'tagPROCESSINFO'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(358): error C2037: left of 'classes' specifies undefined struct/union 'tagPROCESSINFO'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(384): error C2037: left of 'serverSideProc' specifies undefined struct/union 'tagWND'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(402): error C2037: left of 'classes' specifies undefined struct/union 'tagPROCESSINFO'",
+          "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c(420): error C2037: left of 'classes' specifies undefined struct/union 'tagPROCESSINFO'"
+        ]
+      },
+      {
+        "target": "obj/opennt-user/control-client-draw.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/handtabl.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-client-mngrayc.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/button-blit.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/class-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/button-atlas-table.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/control-text-extent.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/opennt-user/button-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_message_bridge.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(188): error C2371: 'PQ': redefinition; different basic types",
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(189): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_object_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_cleanup_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(188): error C2371: 'PQ': redefinition; different basic types",
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(189): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_private_user_compat.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_menu_client_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_menu_native_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_task_lifecycle.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(188): error C2371: 'PQ': redefinition; different basic types",
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(189): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_borrow_scope.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(188): error C2371: 'PQ': redefinition; different basic types",
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(189): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_discovery.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_class_client_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_words_binding.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_keyboard_binding.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_call_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_finalization_binding.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_draw_state.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_conversion_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_button_lifetime.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_brush_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_state_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_button_resources.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_native_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_procedure_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(188): error C2371: 'PQ': redefinition; different basic types",
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(189): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_context_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_message_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_native_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_window_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_state_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_creation_binding.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_call_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_hook_callback.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(290): error C2371: 'PTDB': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_lookaside_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_client_access_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_client_state_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_entry_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_thread_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_state_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_extent_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_common_dialog_callback.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_native_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/adapter-win32/chartran.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_private_access.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_standard_class_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(188): error C2371: 'PQ': redefinition; different basic types",
+          "build\\t483-s5-p241\\r2464\\non-mvdm/windows/core/ntuser/inc/user.h(189): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_class_words_binding.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/adapter-win32/help.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/adapter-win32/random.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_registration_bridge.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_creation_binding.obj",
+        "exit": 2,
+        "errors": [
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(20): error C2371: 'PQ': redefinition; different basic types",
+          "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\include\\wow_input_group_bindings.h(21): error C2371: 'PTHREADINFO': redefinition; different basic types"
+        ]
+      }
+    ],
+    "passed": 79,
+    "failed": 29,
+    "invalid_previous_run": "all-r2464 used unexpanded Ninja O$:/ include paths;not product evidence;valid run decodes O$:/ to O:/",
+    "extra_nonconsumers": "class-remove and class-register do not include user.h;their compile success is not header coverage"
+  },
+  "PTDB_control": {
+    "original_user": "user.h53 tagTDB pointer",
+    "original_wow": "mvdm-host/inc/tdb16.h96 TDB UNALIGNED pointer;guest16 task database",
+    "minimal_omission_compile_exits": [
+      0,
+      0
+    ],
+    "status": "candidate;not product change;remaining types and whole-file proof in progress"
+  },
+  "minimal_type_omission_retry": {
+    "results": [
+      {
+        "index": 0,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 1,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 52,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 61,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 63,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 65,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 66,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 67,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 68,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 69,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 71,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 72,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 73,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 74,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 77,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 78,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 82,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 83,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 85,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 88,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 89,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 90,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 94,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 95,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 96,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 102,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 103,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 106,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 107,
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(572): error C2061: syntax error: identifier 'PWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(573): error C2059: syntax error: '}'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(599): error C2061: syntax error: identifier 'CALLBACKWND'",
+          "build\\t483-s5-p241\\r2464-types-minimal\\non-mvdm/windows/core/ntuser/inc/user.h(619): error C2059: syntax error: '}'"
+        ]
+      }
+    ],
+    "scope": "29 previously failed actual consumers only;79 earlier successes have not yet been rebuilt against this refined candidate",
+    "source_basis": {
+      "PTDB": "original user.h53 references USER tagTDB;original tdb16.h96 references guest16 TDB",
+      "PQ": "original kernel/userk.h2156 contains full native raw input and capture/focus state;current wow_task_order_queue is scheduler projection",
+      "PTHREADINFO": "original kernel/userk.h2260 embeds W32THREAD and kernel lock lists",
+      "PPROCESSINFO": "original kernel/userk.h2386 embeds W32PROCESS/windowstation and desktop state",
+      "PWND": "cleanup uses owned wow_cleanup_window;original tagWND is separate original layout projection;do not conflate"
+    },
+    "remaining": "Finish entire file in original order and test final candidate;do not count compile conflict alone as proof every existing adapter is necessary"
+  },
+  "closed_type_retry": {
+    "results": [
+      {
+        "index": 0,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 1,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 52,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 61,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 63,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 65,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 66,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 67,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 68,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 69,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 71,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 72,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 73,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 74,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 77,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 78,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 82,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 83,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 85,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 88,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 89,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 90,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 94,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 95,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 96,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 102,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 103,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 106,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 107,
+        "exit": 0,
+        "errors": []
+      }
+    ],
+    "candidate_change": "CALLBACKWND::pwnd uses struct tagWND *: exact expansion of original PWND, no layout or runtime change. Conflicting forward aliases remain omitted;existing current product not edited.",
+    "status": "29/29 previously failing consumers compile;whole108 refined candidate run underway"
+  },
+  "R2465_tail_controls": {
+    "control-body-editec": 0,
+    "control-text-rtl": 0,
+    "wow_user_object_bindings": 0,
+    "wow_default_message_bindings": 0
+  },
+  "R2465_scope": "1073-1126 USERCONNECT/version/metric aliases/clipboard structures restored in shadow candidate. SERVERINFO/OEMINFO802-1052 still require explicit declaration dependency closure. Do not use this tail result as whole R2465 restoration proof.",
+  "all_consumers_R2465_tail": {
+    "count": 108,
+    "results": [
+      {
+        "target": "obj/wuclip.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wuser31.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edmlrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edmlonce.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-comboini.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-combo.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edecrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lb1.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl3.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxvar.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edslrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgbegin.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl1.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-editsl.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-editml.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-combodir.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-editec.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxmult.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl2.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgrc.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-wow.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/clglobal.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dmmnem.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/dialog-memory.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgend.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-view-winmgr.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-view-wow.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgr.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/clmenu.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/rtlinit.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/ntstubs.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-winmgrc.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/dialog-template.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgr2.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-state.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/private-word-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/private-word-reader.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-messages.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-fnid.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-draw.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/private-word-setter.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/dialog-pointer.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-color.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-borders.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-brush-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text-rtl.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-window-bits.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-brush.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/cleanup.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-client-draw.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/handtabl.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-client-mngrayc.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/button-blit.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/class-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/button-atlas-table.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text-extent.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/button-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_message_bridge.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_object_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_cleanup_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_private_user_compat.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_menu_client_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_menu_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_task_lifecycle.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_borrow_scope.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_discovery.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_class_client_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_words_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_keyboard_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_call_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_finalization_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_draw_state.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_conversion_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_button_lifetime.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_brush_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_button_resources.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_procedure_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_context_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_message_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_window_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_creation_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_call_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_hook_callback.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_lookaside_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_client_access_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_client_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_entry_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_thread_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_extent_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_common_dialog_callback.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/adapter-win32/chartran.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_private_access.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_standard_class_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_class_words_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/adapter-win32/help.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/adapter-win32/random.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_registration_bridge.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_creation_binding.obj",
+        "exit": 0
+      }
+    ],
+    "owner_exit": 0,
+    "production_mutation": false
+  },
+  "all_consumers_R2465_server": {
+    "count": 108,
+    "results": [
+      {
+        "target": "obj/wuclip.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wuser31.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edmlrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edmlonce.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-comboini.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-combo.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edecrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lb1.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl3.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxvar.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-edslrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgbegin.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl1.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-editsl.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-editml.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-combodir.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-editec.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxmult.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxrare.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-lboxctl2.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgrc.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-wow.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/clglobal.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dmmnem.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/dialog-memory.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgend.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-view-winmgr.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-view-wow.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgr.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/clmenu.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/rtlinit.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/ntstubs.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-winmgrc.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/dialog-template.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-body-dlgmgr2.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-state.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/private-word-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/private-word-reader.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-messages.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-fnid.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-draw.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/private-word-setter.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/dialog-pointer.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-color.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-borders.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-brush-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text-rtl.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-window-bits.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-brush.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/default-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/cleanup.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-client-draw.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/handtabl.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-client-mngrayc.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/button-blit.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/class-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/button-atlas-table.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/control-text-extent.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/opennt-user/button-client.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_message_bridge.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_object_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_cleanup_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_private_user_compat.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_menu_client_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_menu_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_task_lifecycle.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_borrow_scope.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_discovery.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_class_client_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_words_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_keyboard_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_call_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_finalization_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_draw_state.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_conversion_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_button_lifetime.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_brush_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_button_resources.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_procedure_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_context_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_message_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_default_window_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_creation_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_dialog_call_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_hook_callback.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_lookaside_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_client_access_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_client_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_entry_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_thread_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_state_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_control_extent_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_common_dialog_callback.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_edit_native_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/adapter-win32/chartran.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_private_access.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_standard_class_bindings.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_class_words_binding.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/adapter-win32/help.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/adapter-win32/random.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_user_registration_bridge.obj",
+        "exit": 0
+      },
+      {
+        "target": "obj/wow32-dll/wow_window_creation_binding.obj",
+        "exit": 0
+      }
+    ],
+    "changes": "Original802-1052 restored in shadow;two function-pointer member declarations expand original typedefs;argbSystem array expands original COLOR_MAX=COLOR_INFOBK+1;old OEMBITMAPINFO copy removed to avoid duplicate definitions.",
+    "limitation": "Compile evidence only. Layout proof,whole-file original order,logical lines,full link/runtime/publication remain required."
+  },
+  "R2465_layout_proof": {
+    "exit": 0,
+    "source": "build/t483-s5-p241/server-layout.c",
+    "checks": "Original SERVERINFO source body vs expanded-alias candidate:sizeof and offsetof/member-size mpFnidPfn,aStoCidPfn,argbSystem,oemInfo,dwAsyncKeyCache",
+    "scope": "Same actual product SDK/macros;not native NT4/modern private USER ABI compatibility;no native object access introduced.",
+    "invalid_initial_probe": "Generator replaced substring twice in probe alias name;preserved initial log,corrected only probe name and reran. Not a production failure."
+  },
+  "R2466_handles_controls": {
+    "results": [
+      {
+        "index": 0,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 1,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 2,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 3,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 4,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 5,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 6,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 7,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 8,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 9,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 10,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 11,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 12,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 13,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 14,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 15,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 16,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 17,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 18,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 19,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 20,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 21,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 22,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 23,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 24,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 25,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 26,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 27,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 28,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 29,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 30,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 31,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 32,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 33,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 34,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 35,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 36,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 37,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 38,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 39,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 40,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 41,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 42,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 43,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 44,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 45,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 46,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 47,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 48,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 49,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 50,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 51,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 52,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 53,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 54,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 55,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 56,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 57,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 58,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 59,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 60,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 61,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 62,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 63,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 64,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 65,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 66,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 67,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 68,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 69,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 70,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 71,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 72,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 73,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 74,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 75,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 76,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 77,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 78,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 79,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 80,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 81,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 82,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 83,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 84,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 85,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 86,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 87,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 88,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 89,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 90,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 91,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 92,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 93,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 94,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 95,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 96,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 97,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 98,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 99,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 100,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 101,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 102,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 103,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 104,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 105,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 106,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 107,
+        "exit": 0,
+        "errors": []
+      }
+    ],
+    "candidate": "HEAD moved to common original declaration;HANDLEENTRY restored except conflicting PHE alias;original handle macros/class flags restored;unsupported DEBUG/FE_IME bodies bare error. CALLPROCDATA stays in existing original client-view-dependent profile.",
+    "scope": "Shadow only;pending final file ordering,logical lines and runtime validation."
+  },
+  "R2466_class_menu_restoration": {
+    "original": "user.h1308-1313",
+    "duplicate": "wow32-dll/include/wow_class_words_binding.h36-41",
+    "candidate": "r2466-complete restores original declaration, removes duplicate and includes mirror via existing multipass header;restores SBDATA/SBINFO original declarations",
+    "status": "Prepared;not yet compiled;not production change"
+  },
+  "R2467_candidate": {
+    "range": "original1439-1598",
+    "restoration": "PROP,HOOK,PHYSICAL_DEV_INFO,DISPLAYINFO and macros in existing client-view profile;FE_IME/HOOKBATCH bodies retain error exclusion",
+    "remaining_omission": "CWINHOOKS definition: supplied NT4 value14 currently protects immutable desktop layout against modern WH_MAX;need explicit counter-control and final full-context validation",
+    "status": "Shadow candidate prepared;not production change,not counted delivered"
+  },
+  "R2468_candidate": {
+    "range": "1630-2145",
+    "action": "Restore cursor/window-state/menu/scroll declarations;PJIF expands original DWORD pointer from original public/internal/windows/inc/winuserp.h1521;MEMPHIS bodies error;remove old duplicate ITEM/MENU bodies",
+    "status": "Part of R2470 combined shadow compile"
+  },
+  "R2469_candidate": {
+    "range": "2175-2395",
+    "action": "Restore thread flags/client thread info/key-state macros/scrollbar/message timeout declarations;FE_IME/FE_SB bodies error",
+    "status": "Part of R2470 combined shadow compile;SBWND moved after prerequisite SBCALC/SBTRACK to correct generator dependency order"
+  },
+  "R2470_candidate": {
+    "range": "2434-2639",
+    "action": "Restore original messagebox/hook/shared prototypes in existing client-view profile",
+    "status": "Part of combined shadow compile;not proof functions are linked or called"
+  },
+  "R2470_initial_combined": {
+    "results": [
+      {
+        "index": 0,
+        "target": "obj/wuclip.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 1,
+        "target": "obj/wuser31.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 2,
+        "target": "obj/opennt-user/control-body-edmlrare.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 3,
+        "target": "obj/opennt-user/control-body-edmlonce.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 4,
+        "target": "obj/opennt-user/control-body-comboini.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 5,
+        "target": "obj/opennt-user/control-body-combo.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 6,
+        "target": "obj/opennt-user/control-body-edecrare.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 7,
+        "target": "obj/opennt-user/control-body-lb1.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 8,
+        "target": "obj/opennt-user/control-body-lboxctl3.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 9,
+        "target": "obj/opennt-user/control-body-lboxvar.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 10,
+        "target": "obj/opennt-user/control-body-edslrare.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 11,
+        "target": "obj/opennt-user/control-body-dlgbegin.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 12,
+        "target": "obj/opennt-user/control-body-lboxctl1.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 13,
+        "target": "obj/opennt-user/control-body-editsl.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 14,
+        "target": "obj/opennt-user/control-body-editml.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 15,
+        "target": "obj/opennt-user/control-body-combodir.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 16,
+        "target": "obj/opennt-user/control-body-editec.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 17,
+        "target": "obj/opennt-user/control-body-lboxmult.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 18,
+        "target": "obj/opennt-user/control-body-lboxrare.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 19,
+        "target": "obj/opennt-user/control-body-lboxctl2.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 20,
+        "target": "obj/opennt-user/control-body-dlgmgrc.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 21,
+        "target": "obj/opennt-user/control-body-wow.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 22,
+        "target": "obj/opennt-user/clglobal.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 23,
+        "target": "obj/opennt-user/control-body-dmmnem.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 24,
+        "target": "obj/opennt-user/dialog-memory.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 25,
+        "target": "obj/opennt-user/control-body-dlgend.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 26,
+        "target": "obj/opennt-user/control-view-winmgr.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 27,
+        "target": "obj/opennt-user/control-view-wow.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 28,
+        "target": "obj/opennt-user/control-body-dlgmgr.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 29,
+        "target": "obj/opennt-user/clmenu.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 30,
+        "target": "obj/opennt-user/rtlinit.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 31,
+        "target": "obj/opennt-user/ntstubs.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 32,
+        "target": "obj/opennt-user/control-body-winmgrc.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 33,
+        "target": "obj/opennt-user/dialog-template.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 34,
+        "target": "obj/opennt-user/control-body-dlgmgr2.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 35,
+        "target": "obj/opennt-user/control-state.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 36,
+        "target": "obj/opennt-user/private-word-client.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 37,
+        "target": "obj/opennt-user/private-word-reader.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 38,
+        "target": "obj/opennt-user/control-text-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 39,
+        "target": "obj/opennt-user/default-messages.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 40,
+        "target": "obj/opennt-user/control-fnid.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 41,
+        "target": "obj/opennt-user/control-draw.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 42,
+        "target": "obj/opennt-user/control-text.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 43,
+        "target": "obj/opennt-user/private-word-setter.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 44,
+        "target": "obj/opennt-user/dialog-pointer.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 45,
+        "target": "obj/opennt-user/control-color.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 46,
+        "target": "obj/opennt-user/default-borders.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 47,
+        "target": "obj/opennt-user/control-brush-client.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 48,
+        "target": "obj/opennt-user/control-text-rtl.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 49,
+        "target": "obj/opennt-user/default-window-bits.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 50,
+        "target": "obj/opennt-user/control-brush.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 51,
+        "target": "obj/opennt-user/default-client.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 52,
+        "target": "obj/opennt-user/cleanup.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 53,
+        "target": "obj/opennt-user/control-client-draw.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 54,
+        "target": "obj/opennt-user/handtabl.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 55,
+        "target": "obj/opennt-user/control-client-mngrayc.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 56,
+        "target": "obj/opennt-user/button-blit.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 57,
+        "target": "obj/opennt-user/class-client.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 58,
+        "target": "obj/opennt-user/button-atlas-table.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 59,
+        "target": "obj/opennt-user/control-text-extent.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 60,
+        "target": "obj/opennt-user/button-client.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 61,
+        "target": "obj/wow32-dll/wow_user_message_bridge.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 62,
+        "target": "obj/wow32-dll/wow_user_object_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 63,
+        "target": "obj/wow32-dll/wow_cleanup_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 64,
+        "target": "obj/wow32-dll/wow_private_user_compat.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 65,
+        "target": "obj/wow32-dll/wow_menu_client_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 66,
+        "target": "obj/wow32-dll/wow_menu_native_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 67,
+        "target": "obj/wow32-dll/wow_user_task_lifecycle.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 68,
+        "target": "obj/wow32-dll/wow_user_borrow_scope.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 69,
+        "target": "obj/wow32-dll/wow_user_discovery.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 70,
+        "target": "obj/wow32-dll/wow_class_client_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 71,
+        "target": "obj/wow32-dll/wow_window_words_binding.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 72,
+        "target": "obj/wow32-dll/wow_dialog_keyboard_binding.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 73,
+        "target": "obj/wow32-dll/wow_edit_call_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 74,
+        "target": "obj/wow32-dll/wow_dialog_finalization_binding.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 75,
+        "target": "obj/wow32-dll/wow_control_draw_state.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 76,
+        "target": "obj/wow32-dll/wow_edit_conversion_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 77,
+        "target": "obj/wow32-dll/wow_button_lifetime.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 78,
+        "target": "obj/wow32-dll/wow_control_brush_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 79,
+        "target": "obj/wow32-dll/wow_default_state_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 80,
+        "target": "obj/wow32-dll/wow_button_resources.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 81,
+        "target": "obj/wow32-dll/wow_dialog_native_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 82,
+        "target": "obj/wow32-dll/wow_dialog_procedure_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 83,
+        "target": "obj/wow32-dll/wow_dialog_context_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 84,
+        "target": "obj/wow32-dll/wow_default_message_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 85,
+        "target": "obj/wow32-dll/wow_default_native_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 86,
+        "target": "obj/wow32-dll/wow_default_window_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 87,
+        "target": "obj/wow32-dll/wow_dialog_state_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 88,
+        "target": "obj/wow32-dll/wow_dialog_creation_binding.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 89,
+        "target": "obj/wow32-dll/wow_dialog_call_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 90,
+        "target": "obj/wow32-dll/wow_hook_callback.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 91,
+        "target": "obj/wow32-dll/wow_edit_lookaside_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 92,
+        "target": "obj/wow32-dll/wow_window_client_access_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 93,
+        "target": "obj/wow32-dll/wow_window_client_state_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 94,
+        "target": "obj/wow32-dll/wow_edit_entry_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 95,
+        "target": "obj/wow32-dll/wow_edit_thread_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 96,
+        "target": "obj/wow32-dll/wow_edit_state_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 97,
+        "target": "obj/wow32-dll/wow_control_extent_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 98,
+        "target": "obj/wow32-dll/wow_common_dialog_callback.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 99,
+        "target": "obj/wow32-dll/wow_edit_native_bindings.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 100,
+        "target": "obj/adapter-win32/chartran.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 101,
+        "target": "obj/wow32-dll/wow_user_private_access.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 102,
+        "target": "obj/wow32-dll/wow_standard_class_bindings.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 103,
+        "target": "obj/wow32-dll/wow_class_words_binding.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 104,
+        "target": "obj/adapter-win32/help.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 105,
+        "target": "obj/adapter-win32/random.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 106,
+        "target": "obj/wow32-dll/wow_user_registration_bridge.obj",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 107,
+        "target": "obj/wow32-dll/wow_window_creation_binding.obj",
+        "exit": 2,
+        "errors": [
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2541): error C2061: syntax error: identifier 'SBCALC'",
+          "build\\t483-s5-p241\\r2470\\non-mvdm/windows/core/ntuser/inc/user.h(2542): error C2059: syntax error: '}'"
+        ]
+      },
+      {
+        "index": 108,
+        "target": "class-remove",
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 109,
+        "target": "class-register",
+        "exit": 0,
+        "errors": []
+      }
+    ],
+    "include_proof_scope": "Cloned complete WOW include tree with patched class_words_binding header;all actual WOW include paths rewritten to clone. Earlier isolated class-menu clone had not yet been compiled and is not claimed coverage.",
+    "failure_cause": "64 contexts see SBWND before SBCALC because of candidate insertion order;corrected order in shadow. Not production regression.",
+    "count": 110
+  },
+  "R2470_order_retry": {
+    "results": [
+      {
+        "index": 2,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 3,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 4,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 5,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 6,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 7,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 8,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 9,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 10,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 11,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 12,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 13,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 14,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 15,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 16,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 17,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 18,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 19,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 20,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 21,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 23,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 24,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 25,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 26,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 27,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 28,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 32,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 33,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 34,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 35,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 36,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 37,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 40,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 42,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 43,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 44,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 45,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 47,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 50,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 51,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 53,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 60,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 67,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 68,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 71,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 73,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 74,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 77,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 78,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 85,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 86,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 87,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 89,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 92,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 93,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 94,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 95,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 96,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 97,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 101,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 102,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 103,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 104,
+        "exit": 0,
+        "errors": []
+      },
+      {
+        "index": 107,
+        "exit": 0,
+        "errors": []
+      }
+    ],
+    "scope": "64 previously failed contexts;46 previous successful contexts not rebuilt after declaration reorder;no full final candidate claim"
+  },
+  "ordered_candidate": {
+    "sha256": "afff7fa59c7b7462e63fa965e9ca51760cc09249d7d083ba35a52856bad8e98e",
+    "diff": {
+      "added": 117,
+      "deleted": 146,
+      "total": 263,
+      "baseline": 2666,
+      "reduction": 2403
+    },
+    "original_exact_rows": 2495,
+    "excluded_body_count": 23,
+    "compile_count": 110,
+    "compile_failures": 0,
+    "full_WOW_link_exit": 1120,
+    "state": "Shadow candidate;no production edit or delivery yet",
+    "new_dependency": "Exact original ntuser/inc/winerrp.h;source provenance and registry must accompany production import"
+  },
+  "ordered_counter_review": {
+    "full_link_failure": 1120,
+    "abs": "Probe compiler omitted Ninja release_cflags /O2;not established production regression. Final candidate compilation uses /O2.",
+    "R2460_actual_closure": "Restored winerrp.h activates retail RIPERR macros in full consumer set;full WOW link lacks UserSetLastError. Original rtl/debug.c390-408 writes current TEB LastErrorValue, current selected bindings call supported SetLastError. Final candidate leaves original include18 omitted and retains existing binding;no new error implementation or dependency imported.",
+    "point_state": "qualified residual for pending decision;not blanket justification to omit other declarations",
+    "final_candidate_diff": {
+      "added": 118,
+      "deleted": 147,
+      "total": 265,
+      "reduction": 2401
+    },
+    "final_candidate_sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c",
+    "new_dependency_import": false,
+    "delivery": false
+  },
+  "R2471_R2483_counter_review": [
+    {
+      "id": "R2471",
+      "proposed_disposition": "restore",
+      "basis": "Original Unicode/ANSI template and byte-count condition structure/order restored;pointer-name omissions separately owned by R2461.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2472",
+      "proposed_disposition": "restore",
+      "basis": "WNDMSG restored exactly in original location;no profile-specific copy.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2473",
+      "proposed_disposition": "restore",
+      "basis": "Original LARGE_STRING family restored in original location as shared declarations;remove added group guard.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2474",
+      "proposed_disposition": "minimize-pending",
+      "basis": "Original HEAD body restored globally;SHROBJHEAD/THROBJHEAD/PROCOBJHEAD/WND/CLS/DESKTOP bodies retain client-view gating because native cleanup objects and original guest-published layouts are distinct. Full declarations without scoped ownership cause measured C2371 conflicts.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2475",
+      "proposed_disposition": "restore",
+      "basis": "Original state-offset and TestWF/SetWF/ClrWF macros restored at original location;bindings still require final runtime verification.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2476",
+      "proposed_disposition": "restore",
+      "basis": "Original class-style comment and constants restored;no independent substantive behavior change.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2477",
+      "proposed_disposition": "minimize-pending",
+      "basis": "Original DLG/DIALOG bytes/order restored;retain existing dialog selector and once-guard for late multipass declaration.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2478",
+      "proposed_disposition": "minimize-pending",
+      "basis": "CALLPROCDATA restored ahead of CLS within client-view declaration pass;remove extra forward alias and separate repeated declaration. Selected THROBJHEAD ownership remains necessary.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2479",
+      "proposed_disposition": "minimize-pending",
+      "basis": "BUTN/BUTNWND original bodies/order restored;existing extent-selector remains due WND dependency and late declaration consumers.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2480",
+      "proposed_disposition": "minimize-pending",
+      "basis": "GRC constants and timeout declarations restored;SBWND kept in client-view scope with original WND and SBCALC dependencies;ordering fixed.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2481",
+      "proposed_disposition": "restore",
+      "basis": "Original OEMBITMAPINFO and OBI constants restored globally,eliminating duplicated resource-only body and formatting differences.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2482",
+      "proposed_disposition": "restore",
+      "basis": "Original DEBUG conditional framework and retail PtoHq/HW macros restored;excluded DEBUG contents bare error.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    },
+    {
+      "id": "R2483",
+      "proposed_disposition": "minimize-pending",
+      "basis": "All declarations assembled in original order;23 excluded bodies retain original outer frame and bare error. Shared/client/dialog/button once guards preserve actual multipass inclusion;line records map2495 exact original rows. Final preprocessor logical-line audit still required.",
+      "status": "candidate;not delivered or promoted into authoritative completed counts"
+    }
+  ],
+  "ordered_final_compile_link": {
+    "compile_count": 110,
+    "compile_failures": 0,
+    "flags": "Ninja extracted context flags plus actual /O2 release flag",
+    "full_WOW_link_exit": 0,
+    "status": "Shadow compile/link only;not cached full or runtime/publication proof"
+  },
+  "current_source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c"
+      },
+      {
+        "path": "src/compat/include/wow_control_resource_abi.h",
+        "sha256": "5b85852e0bc8a13e589110a601c964fad2fc7ed13c66807ac503528968948ed5"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_class_words_binding.h",
+        "sha256": "46a0f7749191df709a3873ea1a577dd702e5ba6db0901edb2f75e270435206a1"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "current_line_proof": {
+    "file": "src\\non-mvdm\\windows\\core\\ntuser\\inc\\user.h",
+    "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+    "exact_rows": 2494,
+    "all_mapped_rows": 2534,
+    "excluded_bodies": 23,
+    "checks": "Every emitted original row logical #line verified;every bare error body contains no code/nested condition;exact rows byte content verified after CRLF normalization",
+    "candidate_sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c",
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c",
+        "exact_original_logical_rows": 2494,
+        "excluded_bodies": 23,
+        "unexplained_line_mismatches": 0
+      }
+    ]
+  },
+  "current_cumulative": {
+    "files": 365,
+    "total": 97901,
+    "baseline": 119913,
+    "net_reduction": 22012,
+    "changed_since_p209": [
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+        "total": 328
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+        "total": 769
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+        "sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+        "total": 32
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+        "sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+        "total": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+        "total": 14
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+        "total": 363
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+        "total": 253
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6",
+        "total": 140
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+        "total": 19
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+        "total": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2",
+        "total": 39
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+        "sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0",
+        "total": 3572
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+        "total": 343
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c",
+        "total": 1535
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a",
+        "total": 3437
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+        "total": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b",
+        "total": 44
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+        "sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c",
+        "total": 42
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70",
+        "total": 304
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+        "sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15",
+        "total": 67
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+        "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+        "total": 88
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+        "sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+        "total": 27
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+        "sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+        "total": 137
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+        "sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47",
+        "total": 72
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+        "sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+        "total": 64
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+        "sha256": "fc4b0192251586b594ef38052282667b613e2afa939dc0d2683f8eca5b9e6258",
+        "total": 107
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+        "sha256": "815c7b2fdec2d031adce1d75416fe198fd86760e572c242dc1421a022bab1059",
+        "total": 97
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+        "sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069",
+        "total": 5
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+        "sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d",
+        "total": 5
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+        "sha256": "a356c448d85fcdbb213e693b366416ef44f3943d5227c3f1439fd57427c16a72",
+        "total": 12
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+        "sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8",
+        "total": 13
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+        "sha256": "0d095e359b39e83b2ee5fb09e34d1a5d50c66d1ed6a113a9a1fac8930fcd0e7c",
+        "total": 300
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+        "sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+        "total": 442
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+        "sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+        "total": 4
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+        "sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572",
+        "total": 29
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+        "sha256": "7cdd5e3985e5bb437b3785e23f9dd2c36b1eb4b4274e6a96757367307a66edb9",
+        "total": 2022
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+        "sha256": "eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd",
+        "total": 16
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "sha256": "6be381616f0b58392a6356566315cff18b6420f2bade76e4f66e8688aea7c8c3",
+        "total": 556
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+        "sha256": "888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5",
+        "total": 500
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+        "sha256": "b8e6073c1a208e6e97a60be15e3129743d7ea4213a572e443f927bbb141912fa",
+        "total": 1046
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+        "sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb",
+        "total": 1205
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+        "sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf",
+        "total": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c",
+        "total": 265
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "77738d74-ec23-4d13-a42e-8ebc4b368597",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "delivery_receipt": "batch-p241-checkpoint.json"
+}
