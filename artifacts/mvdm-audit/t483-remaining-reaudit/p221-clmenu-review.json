@@ -1,0 +1,1559 @@
+{
+  "status": "Final cached build/publication/tests complete;Git delivery follows",
+  "file": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+  "points": [
+    {
+      "id": "T483-R2161",
+      "problem": "Original USER private header closure",
+      "evidence": "Actual full-original compile exits2 at ntcsrmsg.h108 PORT_MESSAGE and private CSR dependencies. Native USER32 owns windows/menus; selected parser needs finite modern task bindings, not a second NT4 USER/CSR environment.",
+      "change": "Restore original pragma; keep two-line binding instead of original precomp.h pending owner.",
+      "fully_restored": false,
+      "before": 6,
+      "after": 3
+    },
+    {
+      "id": "T483-R2162",
+      "problem": "Diagnostic source position",
+      "evidence": "Final source and actual preprocessor line maps checked.",
+      "change": "Correct original logical lines.",
+      "fully_restored": true,
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "T483-R2163",
+      "problem": "Extra invocation commentary",
+      "evidence": "Original queue.c::xxxInitTask270/303 owns TIF_16BIT and CLIENTINFO.dwTIFlags; wow_user_task_lifecycle binds task.client before original task initialization; original wkman rejects failed InitTask. Existing wow_edit_client_info reads that same current bound object. Native menu creation already requires the bound task. No native TEB overlay or new state is needed.",
+      "change": "Remove obsolete explanation of explicit wow16 argument.",
+      "fully_restored": true,
+      "before": 3,
+      "after": 0
+    },
+    {
+      "id": "T483-R2164",
+      "problem": "Recursive parser signature",
+      "evidence": "Original queue.c::xxxInitTask270/303 owns TIF_16BIT and CLIENTINFO.dwTIFlags; wow_user_task_lifecycle binds task.client before original task initialization; original wkman rejects failed InitTask. Existing wow_edit_client_info reads that same current bound object. Native menu creation already requires the bound task. No native TEB overlay or new state is needed.",
+      "change": "Restore original two-argument signature.",
+      "fully_restored": true,
+      "before": 3,
+      "after": 0
+    },
+    {
+      "id": "T483-R2165",
+      "problem": "Owner-draw task predicate",
+      "evidence": "Original queue.c::xxxInitTask270/303 owns TIF_16BIT and CLIENTINFO.dwTIFlags; wow_user_task_lifecycle binds task.client before original task initialization; original wkman rejects failed InitTask. Existing wow_edit_client_info reads that same current bound object. Native menu creation already requires the bound task. No native TEB overlay or new state is needed.",
+      "change": "Restore original GetClientInfo()->dwTIFlags predicate through existing accessor.",
+      "fully_restored": true,
+      "before": 2,
+      "after": 0
+    },
+    {
+      "id": "T483-R2166",
+      "problem": "Recursive invocation state",
+      "evidence": "Original queue.c::xxxInitTask270/303 owns TIF_16BIT and CLIENTINFO.dwTIFlags; wow_user_task_lifecycle binds task.client before original task initialization; original wkman rejects failed InitTask. Existing wow_edit_client_info reads that same current bound object. Native menu creation already requires the bound task. No native TEB overlay or new state is needed.",
+      "change": "Remove wow16 propagation; restore original recursive call.",
+      "fully_restored": true,
+      "before": 2,
+      "after": 0
+    },
+    {
+      "id": "T483-R2167",
+      "problem": "Resource parser signature",
+      "evidence": "Original queue.c::xxxInitTask270/303 owns TIF_16BIT and CLIENTINFO.dwTIFlags; wow_user_task_lifecycle binds task.client before original task initialization; original wkman rejects failed InitTask. Existing wow_edit_client_info reads that same current bound object. Native menu creation already requires the bound task. No native TEB overlay or new state is needed.",
+      "change": "Restore original one-argument signature and all coupled callers.",
+      "fully_restored": true,
+      "before": 3,
+      "after": 0
+    },
+    {
+      "id": "T483-R2168",
+      "problem": "Version pointer advancement",
+      "evidence": "Actual product MSVC original-cast control exits0; original syntax is supported. Historical modern-C explanation lacks necessity evidence.",
+      "change": "Restore original cast-lvalue increment.",
+      "fully_restored": true,
+      "before": 4,
+      "after": 0
+    },
+    {
+      "id": "T483-R2169",
+      "problem": "Header pointer advancement",
+      "evidence": "Same actual compiler control as R2168; final product translation exits0.",
+      "change": "Restore original cast-lvalue increment.",
+      "fully_restored": true,
+      "before": 3,
+      "after": 0
+    },
+    {
+      "id": "T483-R2170",
+      "problem": "Parser invocation parameter",
+      "evidence": "Original queue.c::xxxInitTask270/303 owns TIF_16BIT and CLIENTINFO.dwTIFlags; wow_user_task_lifecycle binds task.client before original task initialization; original wkman rejects failed InitTask. Existing wow_edit_client_info reads that same current bound object. Native menu creation already requires the bound task. No native TEB overlay or new state is needed.",
+      "change": "Restore original call without wow16.",
+      "fully_restored": true,
+      "before": 2,
+      "after": 0
+    },
+    {
+      "id": "T483-R2171",
+      "problem": "SetMenu modern service boundary",
+      "evidence": "Original358-363 calls NT4 private NtUserSetMenu(HWND,HMENU,TRUE). Actual current call boundary resolves task-owned native HWND/HMENU, releases inherited lock across public USER32 SetMenu callouts, restores it, then publishes the native menu edge. Original mnapi.c::xxxSetMenu owns original server PWND/PMENU and frame redrawing; those private objects are not modern opaque USER32 handles. Keeping original private service wrapper does not supply this boundary. This is native ownership, not a defect in original SetMenu.",
+      "change": "Restore original adjacent comments; retain only six-line wrapper omission pending owner boundary decision.",
+      "fully_restored": false,
+      "before": 29,
+      "after": 6
+    },
+    {
+      "id": "T483-R2172",
+      "problem": "CommonLoadMenu invocation",
+      "evidence": "Original queue.c::xxxInitTask270/303 owns TIF_16BIT and CLIENTINFO.dwTIFlags; wow_user_task_lifecycle binds task.client before original task initialization; original wkman rejects failed InitTask. Existing wow_edit_client_info reads that same current bound object. Native menu creation already requires the bound task. No native TEB overlay or new state is needed.",
+      "change": "Restore original single-argument parser call and remove invocation comment.",
+      "fully_restored": true,
+      "before": 3,
+      "after": 0
+    },
+    {
+      "id": "T483-R2173",
+      "problem": "Watermark exclusion",
+      "evidence": "Final negative compilation reaches original677; whole excluded body remains bare error.",
+      "change": "Restore original outer framework jointly with R2174; no excluded inner conditions retained.",
+      "fully_restored": true,
+      "before": null,
+      "after": null
+    },
+    {
+      "id": "T483-R2174",
+      "problem": "Watermark outer closing structure",
+      "evidence": "Original endif754 restored; body677-753 replaced once. Joint R2173/R2174 diff80->78.",
+      "change": "Restore original closing structure and logical lines; retain exclusion.",
+      "fully_restored": true,
+      "before": 80,
+      "after": 78
+    }
+  ],
+  "mirror_core_before": 396,
+  "mirror_core_after": 343,
+  "mirror_core_delta": -53,
+  "ordinary_residual": 9,
+  "exclusion_diff": 334,
+  "retained_source_lines_matched": 340,
+  "selected_lines": 222,
+  "excluded_errors": 7,
+  "line_proof": {
+    "before": 396,
+    "added": 9,
+    "deleted": 334,
+    "total": 343,
+    "reduction": 53,
+    "retained_original_lines": 340,
+    "adapted_lines": [],
+    "excluded": {
+      "99": 101,
+      "143": 143,
+      "209": 209,
+      "236": 240,
+      "284": 284,
+      "435": 673,
+      "677": 753
+    },
+    "source_sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+    "original_selected_comments_restored": true,
+    "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+    "selected_lines": 222,
+    "selected_contexts": {
+      "actual_wow32_menu": [
+        {
+          "line": 15,
+          "text": "#pragma hdrstop",
+          "original": "#pragma hdrstop"
+        },
+        {
+          "line": 29,
+          "text": "LPBYTE MenuLoadWinTemplates(",
+          "original": "LPBYTE MenuLoadWinTemplates("
+        },
+        {
+          "line": 30,
+          "text": "    LPBYTE lpMenuTemplate,",
+          "original": "    LPBYTE lpMenuTemplate,"
+        },
+        {
+          "line": 31,
+          "text": "    HMENU *phMenu)",
+          "original": "    HMENU *phMenu)"
+        },
+        {
+          "line": 32,
+          "text": "{",
+          "original": "{"
+        },
+        {
+          "line": 33,
+          "text": "    HMENU hMenu;",
+          "original": "    HMENU hMenu;"
+        },
+        {
+          "line": 34,
+          "text": "    UINT menuFlags = 0;",
+          "original": "    UINT menuFlags = 0;"
+        },
+        {
+          "line": 35,
+          "text": "    long menuId = 0;",
+          "original": "    long menuId = 0;"
+        },
+        {
+          "line": 36,
+          "text": "    LPWSTR lpmenuText;",
+          "original": "    LPWSTR lpmenuText;"
+        },
+        {
+          "line": 37,
+          "text": "    MENUITEMINFOW    mii;",
+          "original": "    MENUITEMINFO    mii;"
+        },
+        {
+          "line": 38,
+          "text": "    UNICODE_STRING str;",
+          "original": "    UNICODE_STRING str;"
+        },
+        {
+          "line": 40,
+          "text": "    if (!(hMenu = wow_menu_native_CreateMenu()))",
+          "original": "    if (!(hMenu = NtUserCreateMenu()))"
+        },
+        {
+          "line": 41,
+          "text": "        goto memoryerror;",
+          "original": "        goto memoryerror;"
+        },
+        {
+          "line": 43,
+          "text": "    do {",
+          "original": "    do {"
+        },
+        {
+          "line": 48,
+          "text": "        menuFlags = (UINT)(*(WORD *)lpMenuTemplate);",
+          "original": "        menuFlags = (UINT)(*(WORD *)lpMenuTemplate);"
+        },
+        {
+          "line": 49,
+          "text": "        lpMenuTemplate += 2;",
+          "original": "        lpMenuTemplate += 2;"
+        },
+        {
+          "line": 51,
+          "text": "        if (menuFlags & ~((0x00000000L | 0x00000080L | 0x00000100L | 0x00000200L | 0x00001000L | 0x00000000L | 0x00000400L | 0x00000800L | 0x00000000L | 0x00000001L | 0x00000002L | 0x00000000L | 0x00000008L | 0x00000200L | 0x00000000L | 0x00000004L | 0x00000100L | 0x00000010L | 0x00000020L | 0x00000040L | 0x00000000L | 0x00000080L | 0x00002000L) | 0x00004000L | 0x00008000L)) {",
+          "original": "        if (menuFlags & ~MF_VALID) {"
+        },
+        {
+          "line": 52,
+          "text": "            SetLastError(13L);",
+          "original": "            RIPERR1(ERROR_INVALID_DATA, RIP_WARNING, \"Menu Flags %lX are invalid\", menuFlags);"
+        },
+        {
+          "line": 53,
+          "text": "            goto memoryerror;",
+          "original": "            goto memoryerror;"
+        },
+        {
+          "line": 54,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 57,
+          "text": "        if (!(menuFlags & 0x00000010L)) {",
+          "original": "        if (!(menuFlags & MF_POPUP)) {"
+        },
+        {
+          "line": 58,
+          "text": "            menuId = *(WORD *)lpMenuTemplate;",
+          "original": "            menuId = *(WORD *)lpMenuTemplate;"
+        },
+        {
+          "line": 59,
+          "text": "            lpMenuTemplate += 2;",
+          "original": "            lpMenuTemplate += 2;"
+        },
+        {
+          "line": 60,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 62,
+          "text": "        lpmenuText = (LPWSTR)lpMenuTemplate;",
+          "original": "        lpmenuText = (LPWSTR)lpMenuTemplate;"
+        },
+        {
+          "line": 64,
+          "text": "        if (*lpmenuText) {",
+          "original": "        if (*lpmenuText) {"
+        },
+        {
+          "line": 70,
+          "text": "            if ((menuFlags & 0x00000100L)",
+          "original": "            if ((menuFlags & MFT_OWNERDRAW)"
+        },
+        {
+          "line": 71,
+          "text": "                    && (wow_edit_client_info()->dwTIFlags & 0x00000002u)) {",
+          "original": "                    && (GetClientInfo()->dwTIFlags & TIF_16BIT)) {"
+        },
+        {
+          "line": 72,
+          "text": "                lpmenuText = (LPWSTR)(*(DWORD  *)lpMenuTemplate);",
+          "original": "                lpmenuText = (LPWSTR)(*(DWORD UNALIGNED *)lpMenuTemplate);"
+        },
+        {
+          "line": 76,
+          "text": "                lpMenuTemplate += sizeof(DWORD) - sizeof(WCHAR);",
+          "original": "                lpMenuTemplate += sizeof(DWORD) - sizeof(WCHAR);"
+        },
+        {
+          "line": 77,
+          "text": "            } else {",
+          "original": "            } else {"
+        },
+        {
+          "line": 81,
+          "text": "                RtlInitUnicodeString(&str, lpmenuText);",
+          "original": "                RtlInitUnicodeString(&str, lpmenuText);"
+        },
+        {
+          "line": 82,
+          "text": "                lpMenuTemplate = lpMenuTemplate + str.Length;",
+          "original": "                lpMenuTemplate = lpMenuTemplate + str.Length;"
+        },
+        {
+          "line": 83,
+          "text": "            }",
+          "original": "            }"
+        },
+        {
+          "line": 85,
+          "text": "        } else {",
+          "original": "        } else {"
+        },
+        {
+          "line": 86,
+          "text": "            lpmenuText = ((void *)0);",
+          "original": "            lpmenuText = NULL;"
+        },
+        {
+          "line": 87,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 93,
+          "text": "        lpMenuTemplate += sizeof(WCHAR);",
+          "original": "        lpMenuTemplate += sizeof(WCHAR);"
+        },
+        {
+          "line": 94,
+          "text": "        lpMenuTemplate = ((PBYTE)(lpMenuTemplate) + ((DWORD)(lpMenuTemplate) & 1));",
+          "original": "        lpMenuTemplate = NextWordBoundary(lpMenuTemplate);"
+        },
+        {
+          "line": 96,
+          "text": "        memset((&mii),0,(sizeof(mii)));",
+          "original": "        RtlZeroMemory(&mii, sizeof(mii));"
+        },
+        {
+          "line": 97,
+          "text": "        mii.cbSize = sizeof(MENUITEMINFOW);",
+          "original": "        mii.cbSize = sizeof(MENUITEMINFO);"
+        },
+        {
+          "line": 103,
+          "text": "        mii.fMask = 0x00000010 | 0x00000002 | 0x00000001;",
+          "original": "        mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;"
+        },
+        {
+          "line": 105,
+          "text": "        if (menuFlags & 0x00000010L) {",
+          "original": "        if (menuFlags & MF_POPUP) {"
+        },
+        {
+          "line": 106,
+          "text": "            mii.fMask |= 0x00000004;",
+          "original": "            mii.fMask |= MIIM_SUBMENU;"
+        },
+        {
+          "line": 107,
+          "text": "            lpMenuTemplate = MenuLoadWinTemplates(lpMenuTemplate,",
+          "original": "            lpMenuTemplate = MenuLoadWinTemplates(lpMenuTemplate,"
+        },
+        {
+          "line": 108,
+          "text": "                    (HMENU *)&menuId);",
+          "original": "                    (HMENU *)&menuId);"
+        },
+        {
+          "line": 109,
+          "text": "            if (!lpMenuTemplate)",
+          "original": "            if (!lpMenuTemplate)"
+        },
+        {
+          "line": 110,
+          "text": "                goto memoryerror;",
+          "original": "                goto memoryerror;"
+        },
+        {
+          "line": 112,
+          "text": "            mii.hSubMenu = (HMENU)menuId;",
+          "original": "            mii.hSubMenu = (HMENU)menuId;"
+        },
+        {
+          "line": 113,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 120,
+          "text": "        if (menuFlags & 0x00000004L) {",
+          "original": "        if (menuFlags & MF_BITMAP) {"
+        },
+        {
+          "line": 125,
+          "text": "            menuFlags = (UINT)((menuFlags | 0x00004000L) & ~0x00000004L);",
+          "original": "            menuFlags = (UINT)((menuFlags | MFT_RIGHTJUSTIFY) & ~MF_BITMAP);"
+        },
+        {
+          "line": 126,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 131,
+          "text": "        mii.fState = (menuFlags & 0x0000008BL) & ~0x00000080L;",
+          "original": "        mii.fState = (menuFlags & MFS_OLDAPI_MASK) & ~MFS_HILITE;"
+        },
+        {
+          "line": 132,
+          "text": "        mii.fType = (menuFlags & 0x00004B64L);",
+          "original": "        mii.fType = (menuFlags & MFT_OLDAPI_MASK);"
+        },
+        {
+          "line": 133,
+          "text": "        if (menuFlags & 0x00000100L)",
+          "original": "        if (menuFlags & MFT_OWNERDRAW)"
+        },
+        {
+          "line": 134,
+          "text": "        {",
+          "original": "        {"
+        },
+        {
+          "line": 135,
+          "text": "            mii.fMask |= 0x00000020;",
+          "original": "            mii.fMask |= MIIM_DATA;"
+        },
+        {
+          "line": 136,
+          "text": "            mii.dwItemData = (DWORD) lpmenuText;",
+          "original": "            mii.dwItemData = (DWORD) lpmenuText;"
+        },
+        {
+          "line": 137,
+          "text": "            lpmenuText = 0;",
+          "original": "            lpmenuText = 0;"
+        },
+        {
+          "line": 138,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 139,
+          "text": "        mii.dwTypeData = (LPWSTR) lpmenuText;",
+          "original": "        mii.dwTypeData = (LPWSTR) lpmenuText;"
+        },
+        {
+          "line": 140,
+          "text": "        mii.cch = (UINT)-1;",
+          "original": "        mii.cch = (UINT)-1;"
+        },
+        {
+          "line": 141,
+          "text": "        mii.wID = menuId;",
+          "original": "        mii.wID = menuId;"
+        },
+        {
+          "line": 145,
+          "text": "        if (!wow_menu_native_InsertMenuItemW(hMenu, ((UINT)-1), 1, &mii)) {",
+          "original": "        if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,"
+        },
+        {
+          "line": 147,
+          "text": "            if (menuFlags & 0x00000010L)",
+          "original": "            if (menuFlags & MF_POPUP)"
+        },
+        {
+          "line": 148,
+          "text": "                wow_menu_native_DestroyMenu(mii.hSubMenu);",
+          "original": "                NtUserDestroyMenu(mii.hSubMenu);"
+        },
+        {
+          "line": 149,
+          "text": "            goto memoryerror;",
+          "original": "            goto memoryerror;"
+        },
+        {
+          "line": 150,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 152,
+          "text": "    } while (!(menuFlags & 0x00000080L));",
+          "original": "    } while (!(menuFlags & MF_END));"
+        },
+        {
+          "line": 154,
+          "text": "    *phMenu = hMenu;",
+          "original": "    *phMenu = hMenu;"
+        },
+        {
+          "line": 155,
+          "text": "    return lpMenuTemplate;",
+          "original": "    return lpMenuTemplate;"
+        },
+        {
+          "line": 157,
+          "text": "memoryerror:",
+          "original": "memoryerror:"
+        },
+        {
+          "line": 158,
+          "text": "    if (hMenu != ((void *)0))",
+          "original": "    if (hMenu != NULL)"
+        },
+        {
+          "line": 159,
+          "text": "        wow_menu_native_DestroyMenu(hMenu);",
+          "original": "        NtUserDestroyMenu(hMenu);"
+        },
+        {
+          "line": 160,
+          "text": "    *phMenu = ((void *)0);",
+          "original": "    *phMenu = NULL;"
+        },
+        {
+          "line": 161,
+          "text": "    return ((void *)0);",
+          "original": "    return NULL;"
+        },
+        {
+          "line": 162,
+          "text": "}",
+          "original": "}"
+        },
+        {
+          "line": 176,
+          "text": "PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(",
+          "original": "PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates("
+        },
+        {
+          "line": 177,
+          "text": "    PMENUITEMTEMPLATE2 lpMenuTemplate,",
+          "original": "    PMENUITEMTEMPLATE2 lpMenuTemplate,"
+        },
+        {
+          "line": 178,
+          "text": "    HMENU *phMenu,",
+          "original": "    HMENU *phMenu,"
+        },
+        {
+          "line": 179,
+          "text": "    WORD wResInfo)",
+          "original": "    WORD wResInfo)"
+        },
+        {
+          "line": 180,
+          "text": "{",
+          "original": "{"
+        },
+        {
+          "line": 181,
+          "text": "    HMENU hMenu;",
+          "original": "    HMENU hMenu;"
+        },
+        {
+          "line": 182,
+          "text": "    HMENU hSubMenu;",
+          "original": "    HMENU hSubMenu;"
+        },
+        {
+          "line": 183,
+          "text": "    long menuId = 0;",
+          "original": "    long menuId = 0;"
+        },
+        {
+          "line": 184,
+          "text": "    LPWSTR lpmenuText;",
+          "original": "    LPWSTR lpmenuText;"
+        },
+        {
+          "line": 185,
+          "text": "    MENUITEMINFOW    mii;",
+          "original": "    MENUITEMINFO    mii;"
+        },
+        {
+          "line": 186,
+          "text": "    UNICODE_STRING str;",
+          "original": "    UNICODE_STRING str;"
+        },
+        {
+          "line": 187,
+          "text": "    DWORD           dwHelpID;",
+          "original": "    DWORD           dwHelpID;"
+        },
+        {
+          "line": 189,
+          "text": "    if (!(hMenu = wow_menu_native_CreateMenu()))",
+          "original": "    if (!(hMenu = NtUserCreateMenu()))"
+        },
+        {
+          "line": 190,
+          "text": "        goto memoryerror;",
+          "original": "        goto memoryerror;"
+        },
+        {
+          "line": 192,
+          "text": "    do {",
+          "original": "    do {"
+        },
+        {
+          "line": 193,
+          "text": "        if (!(wResInfo & 0x01)) {",
+          "original": "        if (!(wResInfo & MFR_POPUP)) {"
+        },
+        {
+          "line": 198,
+          "text": "            lpMenuTemplate = (PMENUITEMTEMPLATE2)(((LPBYTE)lpMenuTemplate) -",
+          "original": "            lpMenuTemplate = (PMENUITEMTEMPLATE2)(((LPBYTE)lpMenuTemplate) -"
+        },
+        {
+          "line": 199,
+          "text": "                    sizeof(lpMenuTemplate->dwHelpID));",
+          "original": "                    sizeof(lpMenuTemplate->dwHelpID));"
+        },
+        {
+          "line": 200,
+          "text": "            dwHelpID = 0;",
+          "original": "            dwHelpID = 0;"
+        },
+        {
+          "line": 201,
+          "text": "        } else",
+          "original": "        } else"
+        },
+        {
+          "line": 202,
+          "text": "            dwHelpID = lpMenuTemplate->dwHelpID;",
+          "original": "            dwHelpID = lpMenuTemplate->dwHelpID;"
+        },
+        {
+          "line": 204,
+          "text": "        menuId = lpMenuTemplate->menuId;",
+          "original": "        menuId = lpMenuTemplate->menuId;"
+        },
+        {
+          "line": 206,
+          "text": "        memset((&mii),0,(sizeof(mii)));",
+          "original": "        RtlZeroMemory(&mii, sizeof(mii));"
+        },
+        {
+          "line": 207,
+          "text": "        mii.cbSize = sizeof(MENUITEMINFOW);",
+          "original": "        mii.cbSize = sizeof(MENUITEMINFO);"
+        },
+        {
+          "line": 211,
+          "text": "        mii.fMask = 0x00000010 | 0x00000002 | 0x00000001;",
+          "original": "        mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;"
+        },
+        {
+          "line": 214,
+          "text": "        mii.fType = lpMenuTemplate->fType;",
+          "original": "        mii.fType = lpMenuTemplate->fType;"
+        },
+        {
+          "line": 215,
+          "text": "        if (mii.fType & ~0x00034B64L) {",
+          "original": "        if (mii.fType & ~MFT_MASK) {"
+        },
+        {
+          "line": 216,
+          "text": "            SetLastError(13L);",
+          "original": "            RIPERR1(ERROR_INVALID_DATA, RIP_WARNING, \"Menu Type flags %lX are invalid\", mii.fType);"
+        },
+        {
+          "line": 217,
+          "text": "            goto memoryerror;",
+          "original": "            goto memoryerror;"
+        },
+        {
+          "line": 218,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 220,
+          "text": "        mii.fState  = lpMenuTemplate->fState;",
+          "original": "        mii.fState  = lpMenuTemplate->fState;"
+        },
+        {
+          "line": 221,
+          "text": "        if (mii.fState & ~0x0000108BL) {",
+          "original": "        if (mii.fState & ~MFS_MASK) {"
+        },
+        {
+          "line": 222,
+          "text": "            SetLastError(13L);",
+          "original": "            RIPERR1(ERROR_INVALID_DATA, RIP_WARNING, \"Menu State flags %lX are invalid\", mii.fState);"
+        },
+        {
+          "line": 223,
+          "text": "            goto memoryerror;",
+          "original": "            goto memoryerror;"
+        },
+        {
+          "line": 224,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 226,
+          "text": "        wResInfo = lpMenuTemplate->wResInfo;",
+          "original": "        wResInfo = lpMenuTemplate->wResInfo;"
+        },
+        {
+          "line": 227,
+          "text": "        if (wResInfo & ~(0x00000080L | 0x01)) {",
+          "original": "        if (wResInfo & ~(MF_END | MFR_POPUP)) {"
+        },
+        {
+          "line": 228,
+          "text": "            SetLastError(13L);",
+          "original": "            RIPERR1(ERROR_INVALID_DATA, RIP_WARNING, \"Menu ResInfo flags %lX are invalid\", wResInfo);"
+        },
+        {
+          "line": 229,
+          "text": "            goto memoryerror;",
+          "original": "            goto memoryerror;"
+        },
+        {
+          "line": 230,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 232,
+          "text": "        if (dwHelpID) {",
+          "original": "        if (dwHelpID) {"
+        },
+        {
+          "line": 233,
+          "text": "            SetMenuContextHelpId(hMenu,dwHelpID);",
+          "original": "            NtUserSetMenuContextHelpId(hMenu,dwHelpID);"
+        },
+        {
+          "line": 234,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 242,
+          "text": "        lpmenuText = lpMenuTemplate->mtString[0] ?",
+          "original": "        lpmenuText = lpMenuTemplate->mtString[0] ?"
+        },
+        {
+          "line": 243,
+          "text": "                lpMenuTemplate->mtString : ((void *)0);",
+          "original": "                lpMenuTemplate->mtString : NULL;"
+        },
+        {
+          "line": 245,
+          "text": "        RtlInitUnicodeString(&str, lpmenuText);",
+          "original": "        RtlInitUnicodeString(&str, lpmenuText);"
+        },
+        {
+          "line": 247,
+          "text": "        mii.dwTypeData = (LPWSTR) lpmenuText;",
+          "original": "        mii.dwTypeData = (LPWSTR) lpmenuText;"
+        },
+        {
+          "line": 252,
+          "text": "        lpMenuTemplate = (PMENUITEMTEMPLATE2)",
+          "original": "        lpMenuTemplate = (PMENUITEMTEMPLATE2)"
+        },
+        {
+          "line": 253,
+          "text": "                (((LPBYTE)lpMenuTemplate) +",
+          "original": "                (((LPBYTE)lpMenuTemplate) +"
+        },
+        {
+          "line": 254,
+          "text": "                sizeof(MENUITEMTEMPLATE2) +",
+          "original": "                sizeof(MENUITEMTEMPLATE2) +"
+        },
+        {
+          "line": 255,
+          "text": "                ((str.Length + 3) & ~3));",
+          "original": "                ((str.Length + 3) & ~3));"
+        },
+        {
+          "line": 257,
+          "text": "        if (mii.fType & 0x00000100L)",
+          "original": "        if (mii.fType & MFT_OWNERDRAW)"
+        },
+        {
+          "line": 258,
+          "text": "        {",
+          "original": "        {"
+        },
+        {
+          "line": 259,
+          "text": "            mii.fMask |= 0x00000020;",
+          "original": "            mii.fMask |= MIIM_DATA;"
+        },
+        {
+          "line": 260,
+          "text": "            mii.dwItemData = (DWORD) mii.dwTypeData;",
+          "original": "            mii.dwItemData = (DWORD) mii.dwTypeData;"
+        },
+        {
+          "line": 261,
+          "text": "            mii.dwTypeData = 0;",
+          "original": "            mii.dwTypeData = 0;"
+        },
+        {
+          "line": 262,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 264,
+          "text": "        if (wResInfo & 0x01) {",
+          "original": "        if (wResInfo & MFR_POPUP) {"
+        },
+        {
+          "line": 265,
+          "text": "            mii.fMask |= 0x00000004;",
+          "original": "            mii.fMask |= MIIM_SUBMENU;"
+        },
+        {
+          "line": 266,
+          "text": "            lpMenuTemplate = MenuLoadChicagoTemplates(lpMenuTemplate,",
+          "original": "            lpMenuTemplate = MenuLoadChicagoTemplates(lpMenuTemplate,"
+        },
+        {
+          "line": 267,
+          "text": "                    &hSubMenu, 0x01);",
+          "original": "                    &hSubMenu, MFR_POPUP);"
+        },
+        {
+          "line": 268,
+          "text": "            if (lpMenuTemplate == ((void *)0))",
+          "original": "            if (lpMenuTemplate == NULL)"
+        },
+        {
+          "line": 269,
+          "text": "                goto memoryerror;",
+          "original": "                goto memoryerror;"
+        },
+        {
+          "line": 270,
+          "text": "            mii.hSubMenu = hSubMenu;",
+          "original": "            mii.hSubMenu = hSubMenu;"
+        },
+        {
+          "line": 271,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 273,
+          "text": "        if (mii.fType & 0x00000004L) {",
+          "original": "        if (mii.fType & MFT_BITMAP) {"
+        },
+        {
+          "line": 278,
+          "text": "            mii.fType = (mii.fType | 0x00004000L) & ~0x00000004L;",
+          "original": "            mii.fType = (mii.fType | MFT_RIGHTJUSTIFY) & ~MFT_BITMAP;"
+        },
+        {
+          "line": 279,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 281,
+          "text": "        mii.cch = (UINT)-1;",
+          "original": "        mii.cch = (UINT)-1;"
+        },
+        {
+          "line": 282,
+          "text": "        mii.wID = menuId;",
+          "original": "        mii.wID = menuId;"
+        },
+        {
+          "line": 286,
+          "text": "        if (!wow_menu_native_InsertMenuItemW(hMenu, ((UINT)-1), 1, &mii)) {",
+          "original": "        if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,"
+        },
+        {
+          "line": 288,
+          "text": "            if (wResInfo & 0x01)",
+          "original": "            if (wResInfo & MFR_POPUP)"
+        },
+        {
+          "line": 289,
+          "text": "                wow_menu_native_DestroyMenu(mii.hSubMenu);",
+          "original": "                NtUserDestroyMenu(mii.hSubMenu);"
+        },
+        {
+          "line": 290,
+          "text": "            goto memoryerror;",
+          "original": "            goto memoryerror;"
+        },
+        {
+          "line": 291,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 292,
+          "text": "        wResInfo &= ~0x01;",
+          "original": "        wResInfo &= ~MFR_POPUP;"
+        },
+        {
+          "line": 293,
+          "text": "    } while (!(wResInfo & 0x80));",
+          "original": "    } while (!(wResInfo & MFR_END));"
+        },
+        {
+          "line": 295,
+          "text": "    *phMenu = hMenu;",
+          "original": "    *phMenu = hMenu;"
+        },
+        {
+          "line": 296,
+          "text": "    return lpMenuTemplate;",
+          "original": "    return lpMenuTemplate;"
+        },
+        {
+          "line": 298,
+          "text": "memoryerror:",
+          "original": "memoryerror:"
+        },
+        {
+          "line": 299,
+          "text": "    if (hMenu != ((void *)0))",
+          "original": "    if (hMenu != NULL)"
+        },
+        {
+          "line": 300,
+          "text": "        wow_menu_native_DestroyMenu(hMenu);",
+          "original": "        NtUserDestroyMenu(hMenu);"
+        },
+        {
+          "line": 301,
+          "text": "    *phMenu = ((void *)0);",
+          "original": "    *phMenu = NULL;"
+        },
+        {
+          "line": 302,
+          "text": "    return ((void *)0);",
+          "original": "    return NULL;"
+        },
+        {
+          "line": 303,
+          "text": "}",
+          "original": "}"
+        },
+        {
+          "line": 319,
+          "text": "HMENU CreateMenuFromResource(",
+          "original": "HMENU CreateMenuFromResource("
+        },
+        {
+          "line": 320,
+          "text": "    LPBYTE lpMenuTemplate)",
+          "original": "    LPBYTE lpMenuTemplate)"
+        },
+        {
+          "line": 321,
+          "text": "{",
+          "original": "{"
+        },
+        {
+          "line": 322,
+          "text": "    HMENU hMenu = ((void *)0);",
+          "original": "    HMENU hMenu = NULL;"
+        },
+        {
+          "line": 323,
+          "text": "    UINT menuTemplateVersion;",
+          "original": "    UINT menuTemplateVersion;"
+        },
+        {
+          "line": 324,
+          "text": "    UINT menuTemplateHeaderSize;",
+          "original": "    UINT menuTemplateHeaderSize;"
+        },
+        {
+          "line": 330,
+          "text": "    menuTemplateVersion = *((WORD *)lpMenuTemplate)++;",
+          "original": "    menuTemplateVersion = *((WORD *)lpMenuTemplate)++;"
+        },
+        {
+          "line": 331,
+          "text": "    if (menuTemplateVersion > 1) {",
+          "original": "    if (menuTemplateVersion > 1) {"
+        },
+        {
+          "line": 332,
+          "text": "        ((void)0);",
+          "original": "        RIPMSG0(RIP_WARNING, \"Menu Version number > 1\");"
+        },
+        {
+          "line": 333,
+          "text": "        return ((void *)0);",
+          "original": "        return NULL;"
+        },
+        {
+          "line": 334,
+          "text": "    }",
+          "original": "    }"
+        },
+        {
+          "line": 335,
+          "text": "    menuTemplateHeaderSize = *((WORD *)lpMenuTemplate)++;",
+          "original": "    menuTemplateHeaderSize = *((WORD *)lpMenuTemplate)++;"
+        },
+        {
+          "line": 336,
+          "text": "    lpMenuTemplate += menuTemplateHeaderSize;",
+          "original": "    lpMenuTemplate += menuTemplateHeaderSize;"
+        },
+        {
+          "line": 337,
+          "text": "    switch (menuTemplateVersion) {",
+          "original": "    switch (menuTemplateVersion) {"
+        },
+        {
+          "line": 338,
+          "text": "    case 0:",
+          "original": "    case 0:"
+        },
+        {
+          "line": 339,
+          "text": "        MenuLoadWinTemplates(lpMenuTemplate, (HMENU *)&hMenu);",
+          "original": "        MenuLoadWinTemplates(lpMenuTemplate, (HMENU *)&hMenu);"
+        },
+        {
+          "line": 340,
+          "text": "        break;",
+          "original": "        break;"
+        },
+        {
+          "line": 342,
+          "text": "    case 1:",
+          "original": "    case 1:"
+        },
+        {
+          "line": 343,
+          "text": "        MenuLoadChicagoTemplates((PMENUITEMTEMPLATE2)lpMenuTemplate, (HMENU *)&hMenu, 0);",
+          "original": "        MenuLoadChicagoTemplates((PMENUITEMTEMPLATE2)lpMenuTemplate, (HMENU *)&hMenu, 0);"
+        },
+        {
+          "line": 344,
+          "text": "        break;",
+          "original": "        break;"
+        },
+        {
+          "line": 345,
+          "text": "    }",
+          "original": "    }"
+        },
+        {
+          "line": 346,
+          "text": "    return hMenu;",
+          "original": "    return hMenu;"
+        },
+        {
+          "line": 347,
+          "text": "}",
+          "original": "}"
+        },
+        {
+          "line": 378,
+          "text": "HMENU CommonLoadMenu(",
+          "original": "HMENU CommonLoadMenu("
+        },
+        {
+          "line": 379,
+          "text": "    HINSTANCE hmod,",
+          "original": "    HINSTANCE hmod,"
+        },
+        {
+          "line": 380,
+          "text": "    HANDLE hResInfo",
+          "original": "    HANDLE hResInfo"
+        },
+        {
+          "line": 381,
+          "text": "    )",
+          "original": "    )"
+        },
+        {
+          "line": 382,
+          "text": "{",
+          "original": "{"
+        },
+        {
+          "line": 383,
+          "text": "    HANDLE h;",
+          "original": "    HANDLE h;"
+        },
+        {
+          "line": 384,
+          "text": "    PVOID p;",
+          "original": "    PVOID p;"
+        },
+        {
+          "line": 385,
+          "text": "    HMENU hMenu = ((void *)0);",
+          "original": "    HMENU hMenu = NULL;"
+        },
+        {
+          "line": 387,
+          "text": "    if (h = W32LoadResource(hmod, hResInfo)) {",
+          "original": "    if (h = LOADRESOURCE(hmod, hResInfo)) {"
+        },
+        {
+          "line": 389,
+          "text": "        if (p = W32LockResource(h, hmod)) {",
+          "original": "        if (p = LOCKRESOURCE(h, hmod)) {"
+        },
+        {
+          "line": 391,
+          "text": "            hMenu = CreateMenuFromResource(p);",
+          "original": "            hMenu = CreateMenuFromResource(p);"
+        },
+        {
+          "line": 393,
+          "text": "            W32UnlockResource(h, hmod);",
+          "original": "            UNLOCKRESOURCE(h, hmod);"
+        },
+        {
+          "line": 394,
+          "text": "        }",
+          "original": "        }"
+        },
+        {
+          "line": 405,
+          "text": "    }",
+          "original": "    }"
+        },
+        {
+          "line": 407,
+          "text": "    return (hMenu);",
+          "original": "    return (hMenu);"
+        },
+        {
+          "line": 408,
+          "text": "}",
+          "original": "}"
+        },
+        {
+          "line": 410,
+          "text": "HMENU __stdcall wow_user_load_menuA(",
+          "original": "HMENU WINAPI LoadMenuA("
+        },
+        {
+          "line": 411,
+          "text": "    HINSTANCE hmod,",
+          "original": "    HINSTANCE hmod,"
+        },
+        {
+          "line": 412,
+          "text": "    LPCSTR lpName)",
+          "original": "    LPCSTR lpName)"
+        },
+        {
+          "line": 413,
+          "text": "{",
+          "original": "{"
+        },
+        {
+          "line": 414,
+          "text": "    HANDLE hRes;",
+          "original": "    HANDLE hRes;"
+        },
+        {
+          "line": 416,
+          "text": "    if (hRes = W32FindResource(hmod, (LPSTR)((LPSTR)((ULONG_PTR)((WORD)(4)))), (LPSTR)lpName, 0))",
+          "original": "    if (hRes = FINDRESOURCEA(hmod, (LPSTR)lpName, (LPSTR)RT_MENU))"
+        },
+        {
+          "line": 417,
+          "text": "        return CommonLoadMenu(hmod, hRes);",
+          "original": "        return CommonLoadMenu(hmod, hRes);"
+        },
+        {
+          "line": 418,
+          "text": "    else",
+          "original": "    else"
+        },
+        {
+          "line": 419,
+          "text": "        return ((void *)0);",
+          "original": "        return NULL;"
+        },
+        {
+          "line": 420,
+          "text": "}",
+          "original": "}"
+        },
+        {
+          "line": 422,
+          "text": "HMENU __stdcall wow_user_load_menuW(",
+          "original": "HMENU WINAPI LoadMenuW("
+        },
+        {
+          "line": 423,
+          "text": "    HINSTANCE hmod,",
+          "original": "    HINSTANCE hmod,"
+        },
+        {
+          "line": 424,
+          "text": "    LPCWSTR lpName)",
+          "original": "    LPCWSTR lpName)"
+        },
+        {
+          "line": 425,
+          "text": "{",
+          "original": "{"
+        },
+        {
+          "line": 426,
+          "text": "    HANDLE hRes;",
+          "original": "    HANDLE hRes;"
+        },
+        {
+          "line": 428,
+          "text": "    if (hRes = WOWFindResourceExWCover(hmod, (LPCWSTR)(((LPSTR)((ULONG_PTR)((WORD)(4))))), (LPWSTR)lpName, 0))",
+          "original": "    if (hRes = FINDRESOURCEW(hmod, (LPWSTR)lpName, RT_MENU))"
+        },
+        {
+          "line": 429,
+          "text": "        return CommonLoadMenu(hmod, hRes);",
+          "original": "        return CommonLoadMenu(hmod, hRes);"
+        },
+        {
+          "line": 430,
+          "text": "    else",
+          "original": "    else"
+        },
+        {
+          "line": 431,
+          "text": "        return ((void *)0);",
+          "original": "        return NULL;"
+        },
+        {
+          "line": 432,
+          "text": "}",
+          "original": "}"
+        }
+      ]
+    },
+    "negative_locations": [
+      "user.h:484",
+      "clmenu.c:677"
+    ],
+    "limits": [
+      "MEMPHIS is rejected in included user.h:484 before clmenu.c; its clmenu alternatives are source-verified, not independently hit in the final translation.",
+      "Source line identity and actual preprocessing prove location, not runtime behavior."
+    ]
+  },
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+        "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_menu_parser_bindings.h",
+        "sha256": "f54a2788dd9f90c602db3b08e4b6d6357ef7b3f30b84149b0e7f0ceeae2e0a25"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_private_user_compat.c",
+        "sha256": "7d6392e71fff4fee054cb2eedec29f6ff3d711d2d849c58ac9252970c6fdd40c"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_cursor_resource_fixture.c",
+        "sha256": "1ab87f1a08bbd2ff7e7a576a2a792abf19d34b19612f9575166c032872648dfc"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_def_window_bits_fixture.c",
+        "sha256": "39ce4f5b961ebb1b2680bcc7d5466b277476d2620a99a932dffb9b69046b4597"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_original_menu_resource_fixture.c",
+        "sha256": "b1a629e8b8d087832b6eeced89c75fd94fc70ea17db8bfddc8c1eac514a6c212"
+      },
+      {
+        "path": "test/mvdm-host/wow_page_domain_fixture.c",
+        "sha256": "5deb2b3ad61301b7ed1cde8edb0f9617e7d5874aeb37881f3c36b00308bcedad"
+      }
+    ],
+    "source_files": 7,
+    "deleted": []
+  },
+  "limits": [
+    "Header3 and SetMenu6 residual differences await owner decision;not approved retention.",
+    "MEMPHIS is rejected in user.h484 before this file;its local alternatives are source-verified,not hit by the final negative compile.",
+    "Full external DOS4GW case is not supplied;side session owns its failure. No guest changes."
+  ],
+  "fixture_correction": {
+    "failure": "native-removed-message ERROR_INVALID_STATE before parser cases",
+    "cause": "Test change set thread.TIF_flags=16BIT on existing resource-only no-scheduler carrier. native_call_begin980 correctly rejects real-WOW flag without ppi->pwpi.",
+    "correction": "Keep native resource carrier TIF_flags unchanged; vary only CLIENTINFO.dwTIFlags used by original parser. No product changes.",
+    "changed": [
+      "test/adapter-mvdm-host-out/wow/wow_original_menu_resource_fixture.c",
+      "test/mvdm-host/wow_page_domain_fixture.c"
+    ],
+    "product_sources_unchanged": true,
+    "initial_evidence": "menu-resource/stderr.txt",
+    "rerun": "menu-resource-final"
+  },
+  "original_source": "O:/repos.external/OpenNT/windows/core/ntuser/client/clmenu.c",
+  "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+  "before_sha256": "64b64c159b3965631f11e7823bf5b87f0d4831526c26726625edf9bb57464fe2",
+  "after_sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+  "menu_resource_result": {
+    "status": "passed after fixture-only correction",
+    "resource_cases": 16,
+    "parser_cases": 7,
+    "invalid_repeats": 64,
+    "thunk_cases": 6,
+    "log": "build/t483-s5-p221/menu-resource-final/stderr.txt"
+  },
+  "controls_result": {
+    "exit": 0,
+    "cases": 32,
+    "log": "build/t483-s5-p221/focused-final.log"
+  },
+  "publication": {
+    "status": "published",
+    "package": "bf48125e-5657-4ce3-ac9d-5b11b188c1df",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 430523,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6621,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1315,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 16865,
+        "CleanupMs": 489,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 16787,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 13721,
+        "CleanupMs": 539,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 232,
+        "CleanupMs": 480,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65936,
+        "CleanupMs": 453,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47666,
+        "CleanupMs": 450,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45758,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16441,
+        "CleanupMs": 478,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11755,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 76109,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 11964,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28074,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30329,
+        "CleanupMs": 403,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3703,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7519,
+        "CleanupMs": 398,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9575,
+        "CleanupMs": 376,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3730,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6458,
+        "CleanupMs": 408,
+        "Passed": true
+      }
+    ]
+  },
+  "isolated_identity": {
+    "testPackage": "28a40a3e-7724-429a-9dda-f23701012764",
+    "images": [
+      {
+        "restoredSha256": "C380943FEF2102CE40A3FFF284C02F160511C904814C5D0FEDC8A584F4B5C094",
+        "name": "VCDEX.DLL",
+        "identical": true,
+        "publishedSha256": "C380943FEF2102CE40A3FFF284C02F160511C904814C5D0FEDC8A584F4B5C094"
+      },
+      {
+        "restoredSha256": "1FCEBA192B8EBAF6FB73114DFA8FF40FD5D260D8F87A17853F3DDA92DA2E55A7",
+        "name": "run16.exe",
+        "identical": true,
+        "publishedSha256": "1FCEBA192B8EBAF6FB73114DFA8FF40FD5D260D8F87A17853F3DDA92DA2E55A7"
+      },
+      {
+        "restoredSha256": "E95D66449C164D4FE642053C8BC96B5F46ECC029FA99BCF08F8F21F61EEBB8ED",
+        "name": "ntsrv.exe",
+        "identical": true,
+        "publishedSha256": "E95D66449C164D4FE642053C8BC96B5F46ECC029FA99BCF08F8F21F61EEBB8ED"
+      },
+      {
+        "restoredSha256": "4E11582B729BE29A345F46DF26E8F9AF686F3C83442FF937372D726827E029E1",
+        "name": "ntcon.exe",
+        "identical": true,
+        "publishedSha256": "4E11582B729BE29A345F46DF26E8F9AF686F3C83442FF937372D726827E029E1"
+      },
+      {
+        "restoredSha256": "E067688FC9830CAECFE92A5E7E12CDCA387444096D4289C55033F6384D2D3AF2",
+        "name": "ntvdm.exe",
+        "identical": true,
+        "publishedSha256": "E067688FC9830CAECFE92A5E7E12CDCA387444096D4289C55033F6384D2D3AF2"
+      },
+      {
+        "restoredSha256": "9A24331219DC89DB45EE865D080C41A7604122D2E6F523F1BCC3504ADDACB20B",
+        "name": "ntvwm.exe",
+        "identical": true,
+        "publishedSha256": "9A24331219DC89DB45EE865D080C41A7604122D2E6F523F1BCC3504ADDACB20B"
+      },
+      {
+        "restoredSha256": "EC18075B407679478F2071D81B9C96B7299A39BD0317698E2AD905894EC59F0F",
+        "name": "ntmon.exe",
+        "identical": true,
+        "publishedSha256": "EC18075B407679478F2071D81B9C96B7299A39BD0317698E2AD905894EC59F0F"
+      },
+      {
+        "restoredSha256": "EC4A8DA69D5F6B944E9E12107D22BE7B11CD55DEC5D7686896B28C7AC8784C77",
+        "name": "WOW32.DLL",
+        "identical": true,
+        "publishedSha256": "EC4A8DA69D5F6B944E9E12107D22BE7B11CD55DEC5D7686896B28C7AC8784C77"
+      },
+      {
+        "restoredSha256": "27E2D510EC5E6F6D6D8DBC6635D8CA78A8E56CFB75F7B7A8391192F6A30C114E",
+        "name": "VDMREDIR.DLL",
+        "identical": true,
+        "publishedSha256": "27E2D510EC5E6F6D6D8DBC6635D8CA78A8E56CFB75F7B7A8391192F6A30C114E"
+      },
+      {
+        "restoredSha256": "24AA85425C9A94E20B64F1D5D913E65D3B62B5DDCE0C32FD01D04BEC2526A5E9",
+        "name": "nthook32.dll",
+        "identical": true,
+        "publishedSha256": "24AA85425C9A94E20B64F1D5D913E65D3B62B5DDCE0C32FD01D04BEC2526A5E9"
+      },
+      {
+        "restoredSha256": "007A00C9DF70414D2AD323ECAB26D70B8A821FC8ADBFCDF2912923F736514764",
+        "name": "nthook64.dll",
+        "identical": true,
+        "publishedSha256": "007A00C9DF70414D2AD323ECAB26D70B8A821FC8ADBFCDF2912923F736514764"
+      }
+    ],
+    "publishedPackage": "bf48125e-5657-4ce3-ac9d-5b11b188c1df"
+  },
+  "focused_log_sha256": "67738c2bb67364853aeda1ce1bdf30768c2a143fad01664b0e6e9224ed2ab5ff",
+  "verification": "Actual final preprocessor222 selected/340 exact source lines;default compile0;two negative controls;cached x86/x64;publish11x2;menu-resource and32 control fixtures;Full19;shared-boundary/governance/links passed"
+}

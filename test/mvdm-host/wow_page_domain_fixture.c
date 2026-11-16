@@ -4605,6 +4605,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     wow_user_runtime_thread binding = {0};
     wow_task_order_thread thread = {0};
     wow_task_order_entry task = {0};
+    wow_task_client_info client = {0};
     HMENU root = NULL, child = NULL, alias;
     HWND window = NULL, short_window;
     wow_cleanup_window window_record = {0};
@@ -4615,6 +4616,9 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     const char *step = "bind";
     thread.ppi = process;
     thread.ptdb = &task;
+    /* Resource-only fixture has no scheduler; CLIENTINFO selects the format. */
+    thread.pClientInfo = &client;
+    client.dwTIFlags = WOW_TASK_TIF_16BIT;
     task.hTaskWow = 0x4321u;
     runtime.lifecycle = &native_owner; /* No second task/handoff in this fixture. */
     if (!wow_user_runtime_bind(&binding, &runtime, &thread, NULL)) return FALSE;
@@ -4721,7 +4725,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         fprintf(stderr, "WOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1\n");
     }
     {
-        extern HMENU WINAPI CreateMenuFromResource(LPBYTE, BOOL);
+        extern HMENU WINAPI CreateMenuFromResource(LPBYTE);
         WORD resource[] = {0, 0, MF_POPUP | MF_END, 'P', 0,
             MF_END, 31, 'C', 0};
         /* Extended root succeeds in allocating before its invalid item is
@@ -4736,7 +4740,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         MENUITEMINFOW info = {sizeof(info)};
         ULONG i, before = 0, after = 0;
         step = "original-resource-creation";
-        root = CreateMenuFromResource((LPBYTE)resource, TRUE);
+        root = CreateMenuFromResource((LPBYTE)resource);
         child = root ? GetSubMenu(root, 0) : NULL;
         if (!root || !child ||
                 process->objects->entries[LOWORD(root)].bType != TYPE_MENU ||
@@ -4757,15 +4761,18 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
             goto cleanup;
         root = child = NULL;
         step = "original-resource-extended-and-ownerdraw";
-        root = CreateMenuFromResource((LPBYTE)extended, FALSE);
+        client.dwTIFlags = 0;
+        root = CreateMenuFromResource((LPBYTE)extended);
         if (!root || GetMenuItemID(root, 0) != 51 ||
                 !wow_menu_native_DestroyMenu(root)) goto cleanup;
-        root = CreateMenuFromResource((LPBYTE)empty_owner, TRUE);
+        client.dwTIFlags = WOW_TASK_TIF_16BIT;
+        root = CreateMenuFromResource((LPBYTE)empty_owner);
         info.fMask = MIIM_DATA | MIIM_FTYPE;
         if (!root || !GetMenuItemInfoW(root, 0, TRUE, &info) ||
                 info.dwItemData || !(info.fType & MFT_OWNERDRAW) ||
                 !wow_menu_native_DestroyMenu(root)) goto cleanup;
-        root = CreateMenuFromResource((LPBYTE)owner_resource, FALSE);
+        client.dwTIFlags = 0;
+        root = CreateMenuFromResource((LPBYTE)owner_resource);
         if (!root || !GetMenuItemInfoW(root, 0, TRUE, &info) ||
                 info.dwItemData != (ULONG_PTR)&owner_resource[4] ||
                 !wow_menu_native_DestroyMenu(root)) goto cleanup;
@@ -4773,11 +4780,12 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         for (i = 0; i <= process->objects->last_handle; ++i)
             if (process->objects->entries[i].bType != TYPE_FREE) ++before;
         step = "original-resource-failure-cleanup";
-        if (CreateMenuFromResource((LPBYTE)version, TRUE) != NULL) goto cleanup;
+        client.dwTIFlags = WOW_TASK_TIF_16BIT;
+        if (CreateMenuFromResource((LPBYTE)version) != NULL) goto cleanup;
         for (i = 0; i != 64; ++i) {
-            if (CreateMenuFromResource((LPBYTE)invalid, TRUE) != NULL ||
+            if (CreateMenuFromResource((LPBYTE)invalid) != NULL ||
                     GetLastError() != ERROR_INVALID_DATA ||
-                    CreateMenuFromResource((LPBYTE)invalid_child, TRUE) != NULL)
+                    CreateMenuFromResource((LPBYTE)invalid_child) != NULL)
                 goto cleanup;
         }
         for (i = 0; i <= process->objects->last_handle; ++i)

@@ -14,6 +14,7 @@
 #include "wow_private_user_compat.h"
 #include "wow_menu_native_bindings.h"
 #include "wow_user_runtime.h"
+#include "wow_task_init_bindings.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -87,14 +88,16 @@ static void parser_cases(void)
     MENUITEMINFOW item = {0};
     HMENU menu, child;
     unsigned repeat;
-    menu = CreateMenuFromResource((LPBYTE)popup, TRUE);
+    wow_task_order_thread *thread = wow_user_runtime_current()->thread;
+    DWORD client_flags = thread->pClientInfo->dwTIFlags;
+    menu = CreateMenuFromResource((LPBYTE)popup);
     CHECK(menu != NULL);
     if (menu) {
         child = GetSubMenu(menu, 0);
         CHECK(child && GetMenuItemID(child, 0) == 31);
         CHECK(DestroyMenu(menu));
     }
-    menu = CreateMenuFromResource((LPBYTE)empty_owner, TRUE);
+    menu = CreateMenuFromResource((LPBYTE)empty_owner);
     CHECK(menu != NULL);
     item.cbSize = sizeof(item); item.fMask = MIIM_DATA | MIIM_FTYPE;
     if (menu) {
@@ -102,25 +105,28 @@ static void parser_cases(void)
         CHECK(item.dwItemData == 0 && (item.fType & MFT_OWNERDRAW));
         CHECK(DestroyMenu(menu));
     }
-    menu = CreateMenuFromResource((LPBYTE)owner_resource, FALSE);
+    /* Exercise the original native-format predicate through its actual state. */
+    thread->pClientInfo->dwTIFlags &= ~WOW_TASK_TIF_16BIT;
+    menu = CreateMenuFromResource((LPBYTE)owner_resource);
     CHECK(menu != NULL);
     if (menu) {
         CHECK(GetMenuItemInfoW(menu, 0, TRUE, &item));
         CHECK(item.dwItemData == (ULONG_PTR)&owner_resource[4]);
         CHECK(DestroyMenu(menu));
     }
-    menu = CreateMenuFromResource((LPBYTE)extended, FALSE);
+    menu = CreateMenuFromResource((LPBYTE)extended);
     CHECK(menu != NULL);
     if (menu) {
         CHECK(GetMenuItemID(menu, 0) == 51);
         CHECK(DestroyMenu(menu));
     }
-    CHECK(CreateMenuFromResource((LPBYTE)version, TRUE) == NULL);
+    thread->pClientInfo->dwTIFlags = client_flags;
+    CHECK(CreateMenuFromResource((LPBYTE)version) == NULL);
     for (repeat = 0; repeat != 64; ++repeat) {
         SetLastError(0);
-        CHECK(CreateMenuFromResource((LPBYTE)invalid, TRUE) == NULL);
+        CHECK(CreateMenuFromResource((LPBYTE)invalid) == NULL);
         CHECK(GetLastError() == ERROR_INVALID_DATA);
-        CHECK(CreateMenuFromResource((LPBYTE)invalid_child, TRUE) == NULL);
+        CHECK(CreateMenuFromResource((LPBYTE)invalid_child) == NULL);
     }
 }
 

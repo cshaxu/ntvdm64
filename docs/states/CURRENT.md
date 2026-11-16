@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2160 reviewed:798 restored/confirmed published,0 local restorations,8 approved,
-1354 qualified pending;560 unreviewed. Files305/365 audited,60 remain.
-P220 file305 verified/published;Git delivery accompanies receipt.
+2174 reviewed:810 restored/confirmed published,0 local restorations,8 approved,
+1356 qualified pending;546 unreviewed. Files306/365 audited,59 remain.
+P221 file306 verified/published;Git delivery accompanies receipt.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -52,14 +52,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P220 package `7fe90997-4dae-4832-858f-59c084d38d18` published11x2;hashes verified.
-client.c3664->3572(-92);original retail assertion,comments/order and lines restored.
-Four restored points;seven residual decisions pending owner. Cached x86/x64,
-32 focused fixtures,Full19 and governance passed. Cumulative365-file diff
-119913->104579(-15334). Original guest/winnt.zip unchanged. DOS4GW issue is
-assigned to side session and not claimed repaired.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p220-checkpoint.json).
-NextR2161.
+P221 package `bf48125e-5657-4ce3-ac9d-5b11b188c1df` published11x2;hashes verified.
+clmenu396->343(-53);original parser signatures,CLIENTINFO predicate and cast
+increments restored.12 restored points;2 minimized residual decisions pending.
+Cached x86/x64,menu-resource/32 controls,Full19 and governance passed.
+Cumulative365-file diff119913->104526(-15387). Guest/winnt.zip unchanged.
+DOS4GW remains assigned to side session,not claimed repaired.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p221-checkpoint.json).
+Next:P222 DPMI/DOS4GW repair,then R2175.
 
 ## Remaining Scope
 
@@ -164,3 +164,15 @@ final button assertions andFull19 passed. Cumulative mirror reduction15123.
 P219 DOS4GW supplement is delegated by owner to a separate session. Current PIF and direct minimal-environment runs failed to reach graphics; retained diagnostics are not acceptance. Preserve its uncommitted test changes; this session does not debug that issue.
 
 P220 verified/published:client.c3664->3572(-92);four restored points,seven minimized residual decisions.163 source/76 selected lines,three bare errors;cached x86/x64,publish11x2,32 focused,Full19 and governance passed. Package 7fe90997-4dae-4832-858f-59c084d38d18. Cumulative365-file mirror diff119913->104579(-15334). DOS4GW debugging remains assigned to side session,not claimed repaired. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p220-checkpoint.json). NextR2161.
+
+## Owner-priority regression repair after P221
+
+Owner assigns P222 to the source-proven P103 DPMI/DOS4GW regression after
+clmenu delivery. Retain CCPU checks and host hook delegation; repair bounded
+DPMI instruction/FLAGS/IRQ semantics and make actual NESticle graphics startup
+mandatory in Full. Necessary mirror increases enter pending decisions. Preserve
+side-session test edits;no guest changes,Computer Use or unrelated sevid019 fix.
+[Plan](../../artifacts/mvdm-audit/dos4gw-pif-sti-20261115/main-repair-plan.json).
+Resume ordered R2175 audit after this repair is delivered.
+
+P221 verified/published:clmenu396->343(-53);original parser signatures,CLIENTINFO predicate and cast increments restored.12 points restored/confirmed;header3 and SetMenu6 pending owner.340 source/222 selected lines;cached,publish11x2,menu-resource/32 controls,Full19 and governance passed. Package bf48125e-5657-4ce3-ac9d-5b11b188c1df. Cumulative mirror reduction15387. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p221-checkpoint.json). Next:P222 DPMI/DOS4GW repair,then R2175.

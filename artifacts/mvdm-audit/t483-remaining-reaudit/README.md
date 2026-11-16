@@ -1307,8 +1307,12 @@ P217: [cldib whole-file review](p217-cldib-review.json):7->2(-5),one restored di
 
 P218: [clglobal whole-file review](p218-clglobal-review.json):133->39(-94),coupled user.h -20;three restored points,four minimized residual decisions;cached,publish11x2,31 focused/Full19 passed. [Receipt](batch-p218-checkpoint.json). [Cumulative witness](cumulative-diff-p218-delta.json):net15242.
 
-P220 in progress: [client restoration and verification state](p220-client-progress.json). Mirror diff3664->3572(-92);final delivery pending;not a completed-file receipt.
+P220 source-stage record (superseded by the delivery receipt below): [client restoration and verification state](p220-client-progress.json). Mirror diff3664->3572(-92);initial verification state retained for traceability.
 
-P220: [whole-file dispositions and final source controls](p220-client-review.json). Four local restorations,seven minimized residual decisions;final product delivery pending.
+P220: [whole-file dispositions and final source controls](p220-client-review.json). Four restorations,seven minimized residual decisions;final product delivery recorded below.
 
 P220: [delivery receipt](batch-p220-checkpoint.json), [cumulative diff](cumulative-diff-p220-delta.json). Cached,publish11x2,32 focused,Full19 passed;four restored points,seven residual decisions.
+
+P221: [clmenu whole-file review](p221-clmenu-review.json). Original parser/task predicate restored;396->343(-53);runtime delivery pending.
+
+P221: [delivery receipt](batch-p221-checkpoint.json), [cumulative diff](cumulative-diff-p221-delta.json). Cached,publish11x2,menu-resource/32 controls,Full19 passed;12 restored points,2 residual decisions.

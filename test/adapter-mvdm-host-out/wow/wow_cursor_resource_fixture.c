@@ -16,10 +16,9 @@ WORD WINAPI WowGetDefWindowProcBits(PBYTE bits, WORD byte_count)
     (void)byte_count;
     return 0;
 }
-HMENU WINAPI CreateMenuFromResource(LPBYTE template_bits, BOOL call_client)
+HMENU WINAPI CreateMenuFromResource(LPBYTE template_bits)
 {
     (void)template_bits;
-    (void)call_client;
     return NULL;
 }
 

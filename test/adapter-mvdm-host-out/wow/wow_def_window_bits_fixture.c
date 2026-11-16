@@ -4,9 +4,9 @@
 #include <stdlib.h>
 
 /* Unrelated entry in the shared boundary object must never be reached. */
-HMENU WINAPI CreateMenuFromResource(LPBYTE bits, BOOL client)
+HMENU WINAPI CreateMenuFromResource(LPBYTE bits)
 {
-    (void)bits; (void)client;
+    (void)bits;
     abort();
 }
 

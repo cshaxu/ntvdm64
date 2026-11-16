@@ -1,0 +1,42 @@
+{
+  "status": "Owner-authorized P222 follows P221 delivery;implementation not started",
+  "parent_packet": "M0 T483 S5",
+  "regression": {
+    "good": "4da94a64d30b755586cb62ab366086485beeeb67",
+    "bad": "9078b7168d570646590b5a7c74a403c5f3751eec"
+  },
+  "scope": [
+    "Retain CCPU privilege checks and original host exception delegation;implement only DPMI-owned emulation.",
+    "Define successful emulation flags,virtual IF,TF/debug and IRQ timing;unsupported cases fall back.",
+    "Bound scalar I/O and CLI/STI decoding:prefixes,widths,15-byte maximum,segment/page fetch,complete validation before port effects.",
+    "Audit existing MOV CR0 coupling;classify unproven string I/O,CLTS,LMSW,DR without restoring entire monitor.",
+    "Extend existing actual CCPU/DPMI fixtures,including no-handler and guest-VMM ownership.",
+    "Make real PIF+DOS4GW+NESticle startup mandatory in Full using pinned external inputs;missing fixtures fail acceptance.",
+    "Build,test,publish;rerun startup against published package;commit,push;then resume R2175."
+  ],
+  "constraints": [
+    "No guest modification/rebuild;no global IOPL3;no filename-specific emulation;no Computer Use.",
+    "Do not modify unrelated sevid019 odd-copy defect.",
+    "Necessary mirror increases must be measured and entered in pending tracker.",
+    "Preserve and integrate side-session two test-file edits,not overwrite them."
+  ],
+  "startup_acceptance": "Actual rendered NESticle graphics/menu;no ROM/gameplay requirement.",
+  "candidate_status": "Research evidence only;known 16-bit width/prefix/boundary limits;not production-ready.",
+  "pinned_start": {
+    "src/mvdm-host/dpmi32/dpmiint.c": "1d93cd566f1dcef1442bff00f2b6bd703372f3a555e2cdf95de957f6b2de54b1",
+    "src/mvdm-host/softpc.new/host/src/nt_inthk.c": "0792f971d765eb9523ed73620ebfdcac710704db01cfad6601f65b60b9bf8542",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": "a4259569853ba4336646b4006bf8e28cfbcbcfa66fda221a8dcabedd6c8fcd99",
+    "src/mvdm-host/inc/vint.h": "e88cc5f8624a4a899095a4f1794c697754c71aeb7e480d20d51fd6a976d612d1",
+    "test/mvdm-host/ccpu_monitor_boundary_fixture.c": "fcca7cfbca68c1ba7994657c7c18c0bbed7ff5238840f97f79799deea0f3a6cb",
+    "test/observation/verify-ccpu-monitor-boundary.ps1": "003c22146fda2a28e69af206ba891a91cbb34b3439840e61ee6eb82964fb18c2",
+    "test/integration/verify-dos4gw-nesticle.ps1": "b45f52b03f52be9d2556cc4dafd9ea9dcc7e8392293bffcf557a24fd18e76bf4",
+    "tools/audit/Invoke-ProductVerification.ps1": "ec486ecd8d2af6b8790dcb3cb83400365fc50e8c3626ce01a1e31f1d83d8b410"
+  },
+  "head_at_admission": "e8c3f39e8b3c7cac70fa7433e087f383b9867993",
+  "external_fixture_hashes": {
+    "O:\\winnt\\DOS4GW.EXE": "b8265123ac8a189637448618409ef3ecd2e9f3e1a47062c685a02240f688dec1",
+    "O:\\winnt\\NESTICLE.EXE": "224e348e1fd5c11b16ef096ff5607c7c57c49d65fa7e4dbbc9b2a5c9c53e832b",
+    "O:\\winnt\\DOS4GW.PIF": "90e2be3c99b662e5dbe936445b7da0b522464dbd5fba4478721a6b517368e098",
+    "O:\\winnt\\DOS4GW.NT": "7bcc18771c394e4b5797409cbcf7798b8bf852de64b231d6c92ef7c37416aba2"
+  }
+}

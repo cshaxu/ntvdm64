@@ -3,12 +3,15 @@
 #include <windows.h>
 #include <winternl.h>
 
-/* ADAPTER-WOW-037: explicit invocation kind replaces only the unavailable
- * CLIENTINFO TIF_16BIT read. These entry points are not USER32 overrides. */
-HMENU WINAPI CreateMenuFromResource(LPBYTE, BOOL);
+/* Original menu parsing uses the bound task CLIENTINFO, not the native TEB. */
+HMENU WINAPI CreateMenuFromResource(LPBYTE);
 HMENU WINAPI wow_user_load_menu_indirect(const MENUTEMPLATEW *);
 
 #ifdef WOW_ORIGINAL_MENU_CLIENT
+#include "wow_task_init_bindings.h"
+#include "wow_edit_call_bindings.h"
+#define GetClientInfo() wow_edit_client_info()
+#define TIF_16BIT WOW_TASK_TIF_16BIT
 /* The retained parser's allocation, insertion and failure destruction must
  * use the same task-associated native boundary as the WOW menu thunks. */
 #include "wow_menu_native_bindings.h"

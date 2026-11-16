@@ -85,11 +85,10 @@ DWORD WINAPI wow_private_user_get_menu_index(HMENU menu, HMENU submenu)
 
 HMENU WINAPI wow_user_load_menu_indirect(const MENUTEMPLATEW *menu_template)
 {
-    /* ADAPTER-WOW-037: called only by the original Win16 menu consumers,
-     * after ConvertMenu16. Native templates may instead use the original
-     * parser with wow16=FALSE; no process-wide task flag is fabricated. */
+    /* Original Win16 consumers call after ConvertMenu16; the retained parser
+     * reads the current task CLIENTINFO to interpret owner-draw data. */
     if (!menu_template) return NULL;
-    return CreateMenuFromResource((LPBYTE)menu_template, TRUE);
+    return CreateMenuFromResource((LPBYTE)menu_template);
 }
 
 HMENU WINAPI wow_private_user_load_create_menu(HANDLE module, LPTSTR name,
@@ -101,8 +100,8 @@ HMENU WINAPI wow_private_user_load_create_menu(HANDLE module, LPTSTR name,
      * private output slot.  WU32LoadMenu retains the original ConvertMenu16
      * call and passes its converted menu template here. NT4
      * routed that template through WowServerLoadCreateMenu to
-     * CreateMenuFromResource. Use that original parser with the explicit
-     * Win16 invocation contract: ConvertMenuItems16 stores a packed guest
+     * CreateMenuFromResource. Use that original parser with the original
+     * task CLIENTINFO contract: ConvertMenuItems16 stores a packed guest
      * pointer for owner-draw items, not native Unicode text.
      *
      * The historical module/name/client fields identify server bookkeeping,

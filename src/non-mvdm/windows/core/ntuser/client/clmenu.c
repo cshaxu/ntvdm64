@@ -11,10 +11,10 @@
 * 29-Nov-1994 JimA          Moved from server.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-043/045): retain original menu resource clients
- * and parsers. Other menu APIs and private USER environment are excluded. */
 #define WOW_ORIGINAL_MENU_CLIENT
 #include "wow_menu_resource_bindings.h"
+#line 15
+#pragma hdrstop
 
 
 /***************************************************************************\
@@ -28,15 +28,9 @@
 * 28-Sep-1990 mikeke     from win30
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-045): original menu parsers. The original
- * TIF_16BIT predicate is an explicit invocation parameter, not fabricated
- * private TEB state. Recursion carries the same value. */
-#line 29
 LPBYTE MenuLoadWinTemplates(
     LPBYTE lpMenuTemplate,
-    HMENU *phMenu,
-    BOOL wow16)
-#line 32
+    HMENU *phMenu)
 {
     HMENU hMenu;
     UINT menuFlags = 0;
@@ -76,7 +70,7 @@ LPBYTE MenuLoadWinTemplates(
              * So WOW has given us the proper pointer from the 16 bit resource.
              */
             if ((menuFlags & MFT_OWNERDRAW)
-                    && wow16) {
+                    && (GetClientInfo()->dwTIFlags & TIF_16BIT)) {
                 lpmenuText = (LPWSTR)(*(DWORD UNALIGNED *)lpMenuTemplate);
                 /*
                  * We'll skip one WCHAR later; so skip only the difference now.
@@ -103,10 +97,9 @@ LPBYTE MenuLoadWinTemplates(
 
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
-#line 98
 #ifdef MEMPHIS_MENUS
-#line 99
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#error
+#line 102
 #else
 #line 103
         mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
@@ -115,7 +108,7 @@ LPBYTE MenuLoadWinTemplates(
         if (menuFlags & MF_POPUP) {
             mii.fMask |= MIIM_SUBMENU;
             lpMenuTemplate = MenuLoadWinTemplates(lpMenuTemplate,
-                    (HMENU *)&menuId, wow16);
+                    (HMENU *)&menuId);
             if (!lpMenuTemplate)
                 goto memoryerror;
 
@@ -149,10 +142,9 @@ LPBYTE MenuLoadWinTemplates(
         mii.dwTypeData = (LPWSTR) lpmenuText;
         mii.cch = (UINT)-1;
         mii.wID = menuId;
-#line 142
 #ifdef MEMPHIS_MENUS
-#line 143
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#error
+#line 144
 #endif // MEMPHIS_MENUS
 #line 145
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
@@ -218,10 +210,9 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
 
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
-#line 208
 #ifdef MEMPHIS_MENUS
-#line 209
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#error
+#line 210
 #else
 #line 211
         mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
@@ -249,10 +240,9 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
         if (dwHelpID) {
             NtUserSetMenuContextHelpId(hMenu,dwHelpID);
         }
-#line 235
 #ifdef MEMPHIS_MENUS
-#line 236
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#error
+#line 241
 #else
 #line 242
         lpmenuText = lpMenuTemplate->mtString[0] ?
@@ -297,10 +287,9 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
 
         mii.cch = (UINT)-1;
         mii.wID = menuId;
-#line 283
 #ifdef MEMPHIS_MENUS
-#line 284
-#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
+#error
+#line 285
 #endif // MEMPHIS_MENUS
 #line 286
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
@@ -337,9 +326,7 @@ memoryerror:
 \***************************************************************************/
 
 HMENU CreateMenuFromResource(
-    LPBYTE lpMenuTemplate,
-    BOOL wow16)
-#line 321
+    LPBYTE lpMenuTemplate)
 {
     HMENU hMenu = NULL;
     UINT menuTemplateVersion;
@@ -349,21 +336,16 @@ HMENU CreateMenuFromResource(
      * Win3 menu resource: First, strip version number word out of the menu
      * template.  This value should be 0 for Win3, 1 for win4.
      */
-    /* DIVERGENCE(OPENNT-HOST-045): modern C pointer advancement. */
-    menuTemplateVersion = *(WORD *)lpMenuTemplate;
-    lpMenuTemplate += sizeof(WORD);
-#line 331
+    menuTemplateVersion = *((WORD *)lpMenuTemplate)++;
     if (menuTemplateVersion > 1) {
         RIPMSG0(RIP_WARNING, "Menu Version number > 1");
         return NULL;
     }
-    menuTemplateHeaderSize = *(WORD *)lpMenuTemplate;
-    lpMenuTemplate += sizeof(WORD);
-#line 336
+    menuTemplateHeaderSize = *((WORD *)lpMenuTemplate)++;
     lpMenuTemplate += menuTemplateHeaderSize;
     switch (menuTemplateVersion) {
     case 0:
-        MenuLoadWinTemplates(lpMenuTemplate, (HMENU *)&hMenu, wow16);
+        MenuLoadWinTemplates(lpMenuTemplate, (HMENU *)&hMenu);
         break;
 
     case 1:
@@ -373,7 +355,30 @@ HMENU CreateMenuFromResource(
     return hMenu;
 }
 
-#line 378
+/***************************************************************************\
+* SetMenu (API)
+*
+* Sets the menu for the hwnd.
+*
+* History:
+* 10-Mar-1996 ChrisWil  Created.
+\***************************************************************************/
+
+#line 364
+
+/***************************************************************************\
+* LoadMenu (API)
+*
+* Loads the menu resource named by lpMenuName from the executable
+* file associated by the module specified by the hInstance parameter. The
+* menu is loaded only if it hasn't been previously loaded. Otherwise it
+* retrieves a handle to the loaded resource. Returns NULL if unsuccessful.
+*
+* History:
+* 04-05-91 ScottLu Fixed to work with client/server.
+* 28-Sep-1990 mikeke from win30
+\***************************************************************************/
+
 HMENU CommonLoadMenu(
     HINSTANCE hmod,
     HANDLE hResInfo
@@ -387,10 +392,8 @@ HMENU CommonLoadMenu(
 
         if (p = LOCKRESOURCE(h, hmod)) {
 
-            /* DIVERGENCE(OPENNT-HOST-045): WOW-only resource client. */
-            hMenu = CreateMenuFromResource(p, TRUE);
+            hMenu = CreateMenuFromResource(p);
 
-#line 393
             UNLOCKRESOURCE(h, hmod);
         }
         /*
@@ -432,16 +435,14 @@ HMENU WINAPI LoadMenuW(
         return NULL;
 }
 
-#line 434
 #ifdef MEMPHIS_MENUS
-#line 435
-#error Excluded unsupported Memphis menu conversion profile
+#error
+#line 674
 #endif // MEMPHIS_MENUS
 #line 675
 
-#line 676
 #ifdef MEMPHIS_MENU_WATERMARKS
-#line 677
-#error Excluded unsupported Memphis menu watermark profile
-#endif
+#error
+#line 754
+#endif // MEMPHIS_MENU_WATERMARKS
 #line 755
