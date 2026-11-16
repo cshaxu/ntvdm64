@@ -1290,3 +1290,5 @@ P210: [LPC header original mappings](batch-p210-checkpoint.json):13 excluded dif
 P211: [Process/thread declaration restoration](batch-p211-checkpoint.json):1268->363(-905);original native alert binding;3 restored/3 qualified pending;cached/publish/Full passed. [Cumulative witness](cumulative-diff-p211-delta.json):119913->112172,net7741;365 fixed files.
 
 P212: [Registry declaration restoration](batch-p212-checkpoint.json):469->16(-453);two minimized qualified pending points;cached,publish11x2,focused registry/Full passed. [Cumulative witness](cumulative-diff-p212-delta.json):119913->111719,net8194;365 fixed files.
+
+P213: [RTL declaration restoration](batch-p213-checkpoint.json):ntrtl6101->253(-5848),nturtl-19,precomp-1;42 restored/confirmed,2 qualified pending. Final cached,publish11x2,focused native/time/RTL and Full passed. [Cumulative witness](cumulative-diff-p213-delta.json):119913->105851,net14062;365 fixed files.

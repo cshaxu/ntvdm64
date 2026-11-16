@@ -268,7 +268,7 @@ $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
                           'mvdm_command_native_child.c')
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
-$adapterDebuggerNames = @('dbg_registers.c', 'dbg_prompt.c')
+$adapterDebuggerNames = @('dbg_registers.c')
 $adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c',
                               'mvdm_redirector_async.c')
 # `vrnetapi.c` directly consumes this original OpenNT status-to-LAN-Manager
@@ -490,7 +490,7 @@ foreach ($entry in @(
     # WOW32's original task-lifecycle body converts NTSTATUS through the
     # selected parent RTL implementation.  Export the existing body; this is
     # an import-surface declaration, not a standalone replacement.
-    'OpenNtRtlNtStatusToDosError=_OpenNtRtlNtStatusToDosError@4',
+    'RtlNtStatusToDosError=_RtlNtStatusToDosError@4',
     # VDMREDIR's original asynchronous compatibility boundary still imports
     # these worker-thread helpers.  WOW32 no longer imports them directly;
     # it uses its narrow wow_user_worker_active query instead.
@@ -1230,10 +1230,6 @@ $openntRtlX86Objects = foreach ($name in $openntRtlX86Names) {
 $openntRtlObjects = foreach ($name in $openntRtlNames) {
     $object = 'obj/opennt-rtl/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc_rtl ' + (NinjaPath (Join-Path $openntRtlRoot $name)))
-    if ($name -eq 'time.c') {
-        # NetLib consumes this conversion with the original cdecl ABI.
-        $graph.Add('  rtl_cflags = ' + $baseFlags)
-    }
     # error.c's non-kernel branch only emits historical DbgPrint diagnostics.
     # The selected standalone closure has no kernel debug provider, while the
     # original mapping and LastStatusValue logic is identical in this branch.

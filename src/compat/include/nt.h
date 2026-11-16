@@ -29,25 +29,46 @@
  * opennt-host.  The adapter's type binding is deliberately established
  * first, then the original historical declaration shape is made visible. */
 #include <ntpsapi.h>
-/* The selected OpenNT declaration subset is the source-facing contract for
- * the historical RTL helpers implemented by this adapter. */
-typedef short CSHORT;
-#include <ntrtl.h>
-#include <nturtl.h>
-
-/* Original registry declarations own the query layouts, selectors and calls. */
-#include <ntregapi.h>
-
-/* DIVERGENCE: The selected historical netlibnt.h declaration carrier uses
- * NT_PRODUCT_TYPE. The modern SDK's winnt.h exposes its own foundational
- * definitions but not this retired enum, while including ntdef.h after
- * windows.h duplicates SDK structures. Preserve the exact three-value NT4
- * declaration shape locally; it declares no service or product policy. */
+/* Finite original ntdef/ntexapi/ntnls declarations absent from the public
+ * Win32 headers. Private NLS/process information is exposed only as opaque
+ * pointers; fixed-width strings retain the original ABI layout. */
 typedef enum _NT_PRODUCT_TYPE {
     NtProductWinNt = 1,
     NtProductLanManNt,
     NtProductServer
 } NT_PRODUCT_TYPE, *PNT_PRODUCT_TYPE;
+typedef ULONG CLONG;
+typedef const STRING *PCSTRING;
+typedef USHORT RTL_ATOM, *PRTL_ATOM;
+typedef struct _CPTABLEINFO *PCPTABLEINFO;
+typedef struct _NLSTABLEINFO *PNLSTABLEINFO;
+typedef struct _RTL_USER_PROCESS_INFORMATION *PRTL_USER_PROCESS_INFORMATION;
+#define FASTCALL __fastcall
+typedef struct _STRING32 {
+    USHORT   Length;
+    USHORT   MaximumLength;
+    ULONG  Buffer;
+} STRING32;
+typedef STRING32 UNICODE_STRING32;
+typedef struct _STRING64 {
+    USHORT   Length;
+    USHORT   MaximumLength;
+    ULONGLONG  Buffer;
+} STRING64;
+typedef STRING64 UNICODE_STRING64;
+typedef short CSHORT;
+/* This closure links original RTL locally and native RTL through import
+ * libraries. Ordinary external declarations cover both without per-function
+ * mirror omissions; restore the SDK decoration immediately afterwards. */
+#pragma push_macro("NTSYSAPI")
+#undef NTSYSAPI
+#define NTSYSAPI
+#include <ntrtl.h>
+#pragma pop_macro("NTSYSAPI")
+#include <nturtl.h>
+
+/* Original registry declarations own the query layouts, selectors and calls. */
+#include <ntregapi.h>
 
 /* DIVERGENCE: Original DEM storage declarations require historical
  * devioctl.h and own GetDiskSpaceInformation as an unrelated BOOL helper.
@@ -142,14 +163,7 @@ NTSTATUS NTAPI NtWaitForMultipleObjects(
 #define MAXULONG ((ULONG)0xFFFFFFFFUL)
 #endif
 
-typedef STRING OEM_STRING, *POEM_STRING;
-typedef const OEM_STRING *PCOEM_STRING;
-
-typedef struct _OPENNT_SUPPORT_CURDIR {
-    UNICODE_STRING DosPath;
-    HANDLE Handle;
-} OPENNT_SUPPORT_CURDIR, *POPENNT_SUPPORT_CURDIR;
-typedef OPENNT_SUPPORT_CURDIR CURDIR, *PCURDIR;
+typedef CURDIR OPENNT_SUPPORT_CURDIR, *POPENNT_SUPPORT_CURDIR;
 
 typedef struct _OPENNT_SUPPORT_PROCESS_PARAMETERS {
     OPENNT_SUPPORT_CURDIR CurrentDirectory;

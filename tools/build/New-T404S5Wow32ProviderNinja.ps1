@@ -291,7 +291,7 @@ foreach ($alias in @(
     # cdecl import-library spelling (including its leading underscore).
     # Name-decoration binding to the public stdcall adapter, not CPU40 cdecl.
     [pscustomobject]@{ Decorated = 'call_ica_hw_interrupt@12'; Raw = 'call_ica_hw_interrupt' },
-    [pscustomobject]@{ Decorated = 'OpenNtRtlNtStatusToDosError@4'; Raw = 'OpenNtRtlNtStatusToDosError' },
+    [pscustomobject]@{ Decorated = 'RtlNtStatusToDosError@4'; Raw = 'RtlNtStatusToDosError' },
     [pscustomobject]@{ Decorated = 'GetNextVDMCommand@4'; Raw = 'GetNextVDMCommand' },
     [pscustomobject]@{ Decorated = 'RegisterWowExec@4'; Raw = 'RegisterWowExec' },
     [pscustomobject]@{ Decorated = 'GetCurrentDirectoryOem@8'; Raw = 'GetCurrentDirectoryOem' },

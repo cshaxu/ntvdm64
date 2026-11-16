@@ -220,7 +220,6 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID)
     return &state->Peb;
 }
 
-PVOID NTAPI RtlProcessHeap(VOID) { return GetProcessHeap(); }
 PVOID NTAPI RtlAllocateHeap(PVOID heap, ULONG flags, SIZE_T size) { return HeapAlloc((HANDLE)heap, flags, size); }
 BOOLEAN NTAPI RtlFreeHeap(PVOID heap, ULONG flags, PVOID value) { (void)flags; return (BOOLEAN)HeapFree((HANDLE)heap, 0, value); }
 VOID NTAPI RtlInitString(PSTRING value, PCSZ text) { RtlInitAnsiString((PANSI_STRING)value, text); }
@@ -272,7 +271,6 @@ VOID NTAPI RtlFreeUnicodeString(PUNICODE_STRING value) { if (value != NULL && va
 VOID NTAPI RtlFreeOemString(POEM_STRING value) { RtlFreeAnsiString((PANSI_STRING)value); }
 VOID NTAPI RtlFreeAnsiString(PANSI_STRING value) { if (value != NULL && value->Buffer != NULL) HeapFree(GetProcessHeap(), 0, value->Buffer); if (value != NULL) { value->Buffer = NULL; value->Length = value->MaximumLength = 0; } }
 BOOLEAN NTAPI RtlEqualUnicodeString(PCUNICODE_STRING left, PCUNICODE_STRING right, BOOLEAN insensitive) { if (left == NULL || right == NULL || left->Length != right->Length) return FALSE; return (BOOLEAN)(CompareStringOrdinal(left->Buffer, left->Length / sizeof(WCHAR), right->Buffer, right->Length / sizeof(WCHAR), insensitive) == CSTR_EQUAL); }
-ULONG NTAPI RtlOemStringToUnicodeSize(PCOEM_STRING value) { int characters; if (value == NULL || (value->Length != 0 && value->Buffer == NULL)) return 0; characters = MultiByteToWideChar(CP_OEMCP, 0, value->Buffer, value->Length, NULL, 0); return characters < 0 ? 0u : (ULONG)((characters + 1) * sizeof(WCHAR)); }
 ULONG NTAPI RtlGetFullPathName_U(PCWSTR path, ULONG size, PWSTR buffer, PWSTR *part) { DWORD result = GetFullPathNameW(path, size / sizeof(WCHAR), buffer, part); return result * sizeof(WCHAR); }
 ULONG NTAPI RtlGetCurrentDirectory_U(ULONG size, PWSTR buffer) { DWORD result = GetCurrentDirectoryW(size / sizeof(WCHAR), buffer); return result * sizeof(WCHAR); }
 NTSTATUS NTAPI RtlSetCurrentDirectory_U(PUNICODE_STRING path) { WCHAR local[MAX_PATH + 2]; SIZE_T chars; if (path == NULL || path->Buffer == NULL || (path->Length % sizeof(WCHAR)) != 0) return STATUS_INVALID_PARAMETER; chars = path->Length / sizeof(WCHAR); if (chars >= sizeof(local) / sizeof(local[0])) return STATUS_BUFFER_OVERFLOW; memcpy(local, path->Buffer, path->Length); local[chars] = L'\0'; return SetCurrentDirectoryW(local) ? 0 : opennt_support_last_error_status(); }

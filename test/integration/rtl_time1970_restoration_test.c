@@ -1,9 +1,8 @@
 /* Exercise the selected original RTL time object against Windows' public
  * FILETIME calendar conversion, including the full unsigned input boundary. */
-#include <windows.h>
+#include <nt.h>
 #include <stdio.h>
 
-VOID RtlSecondsSince1970ToTime(ULONG seconds, PLARGE_INTEGER time);
 
 int main(void)
 {

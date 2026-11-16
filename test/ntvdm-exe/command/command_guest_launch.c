@@ -4,12 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#undef RtlNtStatusToDosError
-
-/* The product selects OpenNT's status table. This composition-only unit uses
- * the public host converter; it does not claim to test that original table. */
-ULONG NTAPI OpenNtRtlNtStatusToDosError(NTSTATUS status)
-{ return RtlNtStatusToDosError(status); }
 
 static unsigned checks, transforms, prepares;
 static BOOL fail_transform, bad_transform;
@@ -59,6 +53,9 @@ int main(void)
     char command[] = "echo \x82", directory[] = "C:\\\x82";
     unsigned before;
     ANSI_STRING prepared_command = {0}, prepared_environment = {0};
+    /* This composition fixture links the native converter, not the product's
+     * original OpenNT status table. Exercise that binding explicitly. */
+    CHECK(RtlNtStatusToDosError((NTSTATUS)0xc0000022L)==ERROR_ACCESS_DENIED);
     CHECK(OemToCharA(command,expected_command));
     CHECK(OemToCharA(directory,expected_directory));
     before=transforms;

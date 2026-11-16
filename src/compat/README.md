@@ -1,10 +1,10 @@
 # shared compatibility bindings
 
 The project-owned RTL and XACTSRV declaration boundaries (`ntrtlp.h`,
-`environapi.h`, `zwapi.h`, `xactsrv_wksta_minimal.h`) and the shared
-WOW character-conversion declaration subset `ntrtl_wow32.h` are kept in
-`include/`, outside the original mirror. Their contents and owners did not
-change when their source paths were corrected.
+`environapi.h`, `zwapi.h`, `xactsrv_wksta_minimal.h`) are kept in `include/`,
+outside the original mirror. T483 S5 P213 restores original `ntrtl.h`
+declarations and removes the duplicate `ntrtl_wow32.h` facade; WOW uses the
+same original RTL declarations as the other selected callers.
 
 ADAPTER-WIN32-042 declaration recovery extension (T447 S3): expose only the
 existing original public/sdk/inc/wownt32.h WOWGetVDMPointer declaration in

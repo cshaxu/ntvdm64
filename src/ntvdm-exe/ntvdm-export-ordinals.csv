@@ -17,7 +17,7 @@ OpenNtBaseClientBindWowTask,15
 OpenNtBaseClientFailWowTaskClose,16
 OpenNtBaseClientRetireWowTask,17
 OpenNtBaseClientWowStarted,18
-OpenNtRtlNtStatusToDosError,19
+RtlNtStatusToDosError,19
 RegisterWowExec,20
 RemoveFontResourceOem,21
 SetCurrentDirectoryOem,22

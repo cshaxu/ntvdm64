@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2058 reviewed:723 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1327 qualified pending;662 unreviewed. Files298/365 audited,67 remain.
+2102 reviewed:765 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1329 qualified pending;618 unreviewed. Files299/365 audited,66 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,50 +51,16 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P181 candidate `08431d90-1f10-49d0-b505-574e4a79f22f` published11x2;hashes match.
-No guest or winnt.zip changes; absent external fixtures remain skips.
-S5 remains active; demmisc.c whole-file verification found only the retained DBG
-#error exclusion and diagnostic #line directives; no source change or new restored
-point. See [file check](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0114-r0116-whole-file-check.json).
-demsrch.c dispositions complete; P14 restores three exact FETCHWORD expressions
-(net mirror diff -7: six expression lines plus one extra blank), correcting earlier
-equivalent-but-not-exact restoration claims. P14 was delivered in `4820f90b4`;
-its [receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p14-checkpoint.json) retains the verification.
-[Requalification](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0117-r0133-requalification.json).
-data.c R0134-R0136 is source-complete: required guest-address/table publication
-remains pending owner choice; IDT minimum-size comparison shrinks mirror diff by3.
-P15 final build/publication/tests passed; this receipt accompanies Git delivery.
-[Requalification](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0134-r0136-requalification.json).
-dpmi32.c R0137-R0139 audit corrected the CVIDC wrapper/prototype attribution;
-comment-only cleanup reduces mirror diff by4, with executable tokens unchanged.
-P15 remains the build/publication/runtime baseline; no fresh runtime check claimed.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0137-r0139-requalification.json).
-dpmi32p.h R0140-R0142 is requalified against original guest/kernel and CCPU
-address domains; mirror bytes unchanged. Removed one identical redundant
-autonomous function declaration without behavior/binding change.
-[Header review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0140-r0142-requalification.json).
-dpmidata.h R0143-R0146 source review is complete; mirror diff60 to50, net-10.
-Duplicate conditional and explicit prototype removed; original macro-expanded
-prototype remains. Two points are restored/verified/published, two residual
-boundaries remain pending owner decision.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0143-r0146-requalification.json).
-P16 cached build, publication11x2, descriptor2097152, Full16 and governance
-passed; this receipt accompanies Git delivery. dpmiint.c whole-file disposition is complete in P17. R0147 remains restored; R0148
-is source-qualified. Actual DOSX binary identity/build rules select486/dxintr.asm,
-so earlier top-level guest lock-state citations require correction. R0149-R0151
-and coupled PM-address necessity were re-examined; the restoration candidate below
-supersedes that investigation checkpoint.
-[Source attribution](../../artifacts/mvdm-audit/t483-remaining-reaudit/dpmiint-guest-source-attribution.json).
-That read-only checkpoint is followed by the active local restoration below.
-
-P102-P106 delivered;see active audit README indexed receipts.
-
-P107-P109 delivered;see active audit README indexed receipts.
-
-P110-P112 delivered;see active audit README indexed receipts.
-
-P113 nt_timer.c mirror109->96(-13);cached build,publish11x2,native alert/Full19 passed.
-[Checkpoint](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p113-checkpoint.json).
+P213 package `ee6a21b1-626f-47fb-a128-c3ea5749c36e` published11x2;hashes verified.
+ntrtl.h6101->253(-5848),nturtl.h1040->1021(-19),precomp.h16->15(-1).
+Batch mirror diff reduction5868;cumulative fixed365 files119913->105851(-14062).
+Metric excludes diagnostic #line and includes required #error subset differences;
+raw ntrtl6317->298(-6019). No guest or winnt.zip changes.
+Final cached x86/x64,focused RTL/time/native imports,Full and governance passed.
+Post-review command fixture recursion removed;final x86/x64 CTest passed. Product hashes unchanged.
+External DOS4GW/Nesticle fixture remains SKIP. Two precise residual points await owner.
+Prior receipts remain indexed in the active audit README;S5 remains active,nextR2103.
+[P213 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p213-checkpoint.json).
 
 ## Remaining Scope
 

@@ -28,6 +28,27 @@ Revision History:
 #line 28
 #ifndef _NTURTL_
 #define _NTURTL_
+#line 118
+NTSYSAPI
+NTSTATUS
+NTAPI
+RtlEnterCriticalSection(
+    PRTL_CRITICAL_SECTION CriticalSection
+    );
+#line 125
+NTSYSAPI
+NTSTATUS
+NTAPI
+RtlLeaveCriticalSection(
+    PRTL_CRITICAL_SECTION CriticalSection
+    );
+#line 139
+NTSYSAPI
+NTSTATUS
+NTAPI
+RtlInitializeCriticalSection(
+    PRTL_CRITICAL_SECTION CriticalSection
+    );
 #line 255
 ULONG
 NTAPI
@@ -68,5 +89,7 @@ RtlDosPathNameToNtPathName_U(
     PWSTR *FilePart OPTIONAL,
     PVOID RelativeName OPTIONAL
     );
+#line 528
+#define RtlProcessHeap() (NtCurrentPeb()->ProcessHeap)
 #line 1103
 #endif  // _NTURTL_

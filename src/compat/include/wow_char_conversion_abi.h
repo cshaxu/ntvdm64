@@ -8,7 +8,6 @@
  */
 
 #include <nt.h>
-#include "ntrtl_wow32.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT

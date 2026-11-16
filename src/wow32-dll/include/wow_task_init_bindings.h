@@ -1,6 +1,7 @@
 #ifndef WOW_TASK_INIT_BINDINGS_H
 #define WOW_TASK_INIT_BINDINGS_H
 #include "wow_task_order_bindings.h"
+#include <nt.h>
 
 /* ADAPTER-WOW-041: explicit original initialization views. Required native
  * queue/profile/presentation operations have no default implementations.
@@ -62,6 +63,5 @@ typedef wow_task_order_process *PW32PROCESS;
 #define try __try
 #define except __except
 #endif
-NTSYSAPI NTSTATUS NTAPI RtlUnicodeStringToInteger(PCUNICODE_STRING, ULONG, PULONG);
 #endif
 #endif

@@ -1,0 +1,1139 @@
+{
+  "status": "Whole-file dispositions and final delivery complete;two minimized residuals pending owner",
+  "proof": {
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+    "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+    "metric": {
+      "before": {
+        "core": {
+          "add": 107,
+          "delete": 5994,
+          "total": 6101
+        },
+        "raw": {
+          "add": 312,
+          "delete": 6005,
+          "total": 6317
+        }
+      },
+      "after": {
+        "core": {
+          "add": 10,
+          "delete": 243,
+          "total": 253
+        },
+        "raw": {
+          "add": 55,
+          "delete": 243,
+          "total": 298
+        }
+      }
+    },
+    "source_lines_checked": 5187,
+    "mismatches": [],
+    "errors": 10,
+    "selected": {
+      "x86-worker-opennt_support_rtl": 2885,
+      "x86-worker-srvvdm": 2885,
+      "x64-frontend-opennt_support_rtl": 2779,
+      "x64-launcher-environ": 2779,
+      "x64-service-srvvdm": 2779,
+      "x86-wow32-profile": 2885,
+      "x86-worker-error": 2885,
+      "x64-launcher-error": 2779
+    },
+    "negative": {
+      "cpp": [
+        57
+      ],
+      "dbg": [
+        68
+      ],
+      "ntsystem": [
+        1595
+      ],
+      "mips": [
+        1033
+      ],
+      "alpha": [
+        1033
+      ],
+      "oldmsc": [
+        6341
+      ]
+    },
+    "remaining": {
+      "exclude": [
+        [
+          57,
+          57
+        ],
+        [
+          68,
+          85
+        ],
+        [
+          1033,
+          1044
+        ],
+        [
+          1595,
+          1598
+        ],
+        [
+          2245,
+          2248
+        ],
+        [
+          3167,
+          3175
+        ],
+        [
+          3252,
+          3290
+        ],
+        [
+          3423,
+          3427
+        ],
+        [
+          6334,
+          6334
+        ],
+        [
+          6341,
+          6343
+        ]
+      ],
+      "omit": [
+        [
+          2778,
+          2812
+        ],
+        [
+          2990,
+          2996
+        ],
+        [
+          5628,
+          5632
+        ],
+        [
+          5636,
+          5640
+        ],
+        [
+          5642,
+          5645
+        ],
+        [
+          2977,
+          2983
+        ],
+        [
+          3187,
+          3203
+        ],
+        [
+          3214,
+          3238
+        ],
+        [
+          6148,
+          6155
+        ],
+        [
+          6157,
+          6164
+        ],
+        [
+          6176,
+          6188
+        ],
+        [
+          6189,
+          6201
+        ]
+      ],
+      "foundation_provenance": "OpenNT public/sdk/inc/ntdef.h CLONG503,PCSTRING,STRING32 1151-1155/1158,STRING64 1165-1169/1172; ntexapi RTL_ATOM1787; ntnls opaque pointer declarations26-46; all finite declarations, no state/algorithm",
+      "declaration_binding": "nt.h scopes NTSYSAPI empty only while importing original ntrtl.h: ordinary external linkage allows selected local definitions and native import-library thunks. SDK declarations stay unchanged."
+    }
+  },
+  "points": [
+    {
+      "id": "T483-R2059",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 31,
+        "original_count": 28,
+        "current_start": 35,
+        "current_count": 1
+      },
+      "change": "Restore original MSVC warning/string header preamble; remove reverse ntrtl -> nt include.",
+      "evidence": "Original top-block controls pass actual x86/x64 consumers; no original defect established.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2060",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 44,
+        "current_count": 1
+      },
+      "change": "Remove added RtlProcessHeap function declaration and GetProcessHeap forwarding implementation; restore original nturtl.h528 macro.",
+      "evidence": "Original private NtCurrentPeb already initializes ProcessHeap. Final real-support x86/x64 heap allocation/free matches GetProcessHeap and preserves observed LastError 0x4321. WOW already imports NtCurrentPeb.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2061",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2002,
+        "original_count": 1,
+        "current_start": 62,
+        "current_count": 1
+      },
+      "change": "Restore complete original RtlUnicodeStringToOemSize macro and native NLS declarations.",
+      "evidence": "Actual x86/x64 original macro compile/link/runtime passes; NlsMbOemCodePageTag and Rtlx size functions available in native NTDLL import library; no selected WOW size-macro caller.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2062",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2062,
+        "original_count": 1,
+        "current_start": 69,
+        "current_count": 1
+      },
+      "change": "Restore complete original RtlOemStringToUnicodeSize macro; delete autonomous MultiByteToWideChar size wrapper.",
+      "evidence": "Same native NLS evidence as R2061; final RTL fixture checks abc OEM/Unicode sizes4/8.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2063",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 70,
+        "current_count": 1
+      },
+      "change": "Confirm earlier restored path declaration at original nturtl.h position; no new source credit.",
+      "evidence": "Already restored in S4 P6 a00fb9577; current header has no added ntrtl declaration.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2064",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 71,
+        "current_count": 1
+      },
+      "change": "Confirm earlier restored path declaration at original nturtl.h position; no new source credit.",
+      "evidence": "Already restored in S4 P6 a00fb9577; current header has no added ntrtl declaration.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2065",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 72,
+        "current_count": 1
+      },
+      "change": "Confirm earlier restored path declaration at original nturtl.h position; no new source credit.",
+      "evidence": "Already restored in S4 P6 a00fb9577; current header has no added ntrtl declaration.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2066",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 5772,
+        "original_count": 15,
+        "current_start": 77,
+        "current_count": 1
+      },
+      "change": "Restore original status-conversion declarations/names; remove OpenNtRtlNtStatusToDosError and NoTeb renaming; preserve export ordinal19 and original selected error.c table/TEB ownership.",
+      "evidence": "Actual x86/x64 original-name compile/link/runtime controls pass. WOW finite legacy-wow-ntdll import list does not export these names; parent import alias binds original name to NTVDM. Whole build/imports and original error fixture verify final binding.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2067",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 142,
+        "current_count": 1
+      },
+      "change": "Remove duplicate critical-section declaration; restore original nturtl.h118-123.",
+      "evidence": "Native API already imported; original declared shape preserved, actual final build uses original prototype.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2068",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 143,
+        "current_count": 1
+      },
+      "change": "Remove duplicate critical-section declaration; restore original nturtl.h125-130.",
+      "evidence": "Native API already imported; original declared shape preserved, actual final build uses original prototype.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2069",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 144,
+        "current_count": 1
+      },
+      "change": "Remove duplicate critical-section declaration; restore original nturtl.h139-144.",
+      "evidence": "Native API already imported; original declared shape preserved, actual final build uses original prototype.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2070",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 0,
+        "original_count": 1,
+        "current_start": 145,
+        "current_count": 1
+      },
+      "change": "Remove duplicate NtTerminateProcess declaration.",
+      "evidence": "Original ntpsapi.h already owns exact declaration; the removed duplicate caused inconsistent-linkage warning. No replacement or provider change.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2071",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 4938,
+        "original_count": 32,
+        "current_start": 159,
+        "current_count": 1
+      },
+      "change": "Restore both exact original signed/unsigned LUID inline bodies and original positions.",
+      "evidence": "Original definitions compile under actual supported profiles; final RTL fixture checks signed -1 and unsigned 0xffffffff high-part behavior.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2072",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 34,
+        "original_count": 1,
+        "current_start": 183,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2073",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 35,
+        "original_count": 1,
+        "current_start": 186,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2074",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 37,
+        "original_count": 1,
+        "current_start": 189,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2075",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 44,
+        "original_count": 1,
+        "current_start": 198,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2076",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 67,
+        "original_count": 1,
+        "current_start": 206,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2077",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 1032,
+        "original_count": 1,
+        "current_start": 216,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2078",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 1575,
+        "original_count": 1,
+        "current_start": 226,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2079",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 1594,
+        "original_count": 1,
+        "current_start": 235,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2080",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2234,
+        "original_count": 1,
+        "current_start": 245,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2081",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2238,
+        "original_count": 1,
+        "current_start": 251,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2082",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2242,
+        "original_count": 1,
+        "current_start": 257,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2083",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2244,
+        "original_count": 1,
+        "current_start": 260,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2084",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2814,
+        "original_count": 1,
+        "current_start": 272,
+        "current_count": 1
+      },
+      "change": "Restore original fixed-width process parameter body and conditional frame.",
+      "evidence": "Original ntdef STRING32/UNICODE_STRING32 and STRING64/UNICODE_STRING64 layouts supplied as finite foundational declarations; actual final x86/x64 contexts pass; fixture checks sizes8/16.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2085",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 2864,
+        "original_count": 1,
+        "current_start": 278,
+        "current_count": 1
+      },
+      "change": "Restore original fixed-width process parameter body and conditional frame.",
+      "evidence": "Original ntdef STRING32/UNICODE_STRING32 and STRING64/UNICODE_STRING64 layouts supplied as finite foundational declarations; actual final x86/x64 contexts pass; fixture checks sizes8/16.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2086",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3052,
+        "original_count": 1,
+        "current_start": 284,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2087",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3078,
+        "original_count": 1,
+        "current_start": 287,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2088",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3126,
+        "original_count": 1,
+        "current_start": 296,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2089",
+      "status": "pending",
+      "historical_anchor": {
+        "original_start": 3164,
+        "original_count": 1,
+        "current_start": 305,
+        "current_count": 1
+      },
+      "change": "Restore architecture conditional frame and RtlCopyMemory32; omit only original3187-3203 and3214-3238 ordinary memory prototypes.",
+      "evidence": "Final-foundation original x64 control fails when RtlMove/Copy/Fill/ZeroMemory names expand existing SDK memmove/memcpy/memset macros. SDK remains memory API owner; retain42-line omission pending owner. No alternate function or macro override.",
+      "remaining_ordinary_diff": 42,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2090",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3166,
+        "original_count": 1,
+        "current_start": 308,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2091",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3251,
+        "original_count": 1,
+        "current_start": 324,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2092",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3422,
+        "original_count": 1,
+        "current_start": 334,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2093",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3436,
+        "original_count": 1,
+        "current_start": 344,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2094",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3486,
+        "original_count": 1,
+        "current_start": 350,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2095",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 3751,
+        "original_count": 1,
+        "current_start": 359,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2096",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 5691,
+        "original_count": 1,
+        "current_start": 368,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2097",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 6166,
+        "original_count": 1,
+        "current_start": 374,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2098",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 6203,
+        "original_count": 1,
+        "current_start": 383,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2099",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 6337,
+        "original_count": 1,
+        "current_start": 392,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2100",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 6338,
+        "original_count": 1,
+        "current_start": 395,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2101",
+      "status": "restored-confirmed",
+      "historical_anchor": {
+        "original_start": 6333,
+        "original_count": 1,
+        "current_start": 407,
+        "current_count": 1
+      },
+      "change": "Restore/confirm this original conditional frame and selected original body; keep existing rejected body as #error.",
+      "evidence": "Exact original source and final MSVC-selected logical-line comparisons; supported x86/x64 consumers compile. Deliberate rejected profiles still trigger C1189; inner rejected code is not restored.",
+      "remaining_ordinary_diff": 0,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    },
+    {
+      "id": "T483-R2102",
+      "status": "pending",
+      "historical_anchor": {
+        "original_start": 59,
+        "original_count": 6288,
+        "current_start": 413,
+        "current_count": 1
+      },
+      "change": "Restore all remaining original ordinary declarations, macros, inline bodies, comments and positions except147 precisely listed native-SDK/private-type boundary lines; preserve10 rejected bodies.",
+      "evidence": "Final-foundation raw-original x86/x64 compile controls identify SDK duplicate RTL_USER_PROCESS_PARAMETERS, message resource and OSVERSION layouts; missing private SECTION_IMAGE_INFORMATION and64 layout; x64 memory macro collisions. Finite foundational aliases plus original CURDIR eliminate the old bulk omission. All original NTSYSAPI tokens restored using one scoped ordinary-linkage boundary in nt.h, not per-function omissions.",
+      "remaining_ordinary_diff": 147,
+      "scope_note": "Historical point scopes overlap; do not sum. Whole-file exact original-relative metric6101->253; R2089 residual42 is included in R2102 residual147."
+    }
+  ],
+  "residual_compile_controls": {
+    "x86": {
+      "exit": 2,
+      "sha256": "af5ffa04bed8abb55bce71917039da36e4d3c2a359f4bea71fcc837058a30aff",
+      "errors": [
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2778): error C2011: '_RTL_USER_PROCESS_PARAMETERS': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2982): error C2061: syntax error: identifier 'SECTION_IMAGE_INFORMATION'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2983): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2995): error C2061: syntax error: identifier 'SECTION_IMAGE_INFORMATION64'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2996): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(5628): error C2011: '_MESSAGE_RESOURCE_ENTRY': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(5636): error C2011: '_MESSAGE_RESOURCE_BLOCK': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(5642): error C2011: '_MESSAGE_RESOURCE_DATA': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6148): error C2011: '_OSVERSIONINFOA': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6157): error C2011: '_OSVERSIONINFOW': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6176): error C2011: '_OSVERSIONINFOEXA': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6189): error C2011: '_OSVERSIONINFOEXW': 'struct' type redefinition"
+      ]
+    },
+    "x64": {
+      "exit": 2,
+      "sha256": "755f34056c4fade1dd143497f3b039e20c70c28e58d45eab23f08bbc532892ac",
+      "errors": [
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2778): error C2011: '_RTL_USER_PROCESS_PARAMETERS': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2982): error C2061: syntax error: identifier 'SECTION_IMAGE_INFORMATION'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2983): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2995): error C2061: syntax error: identifier 'SECTION_IMAGE_INFORMATION64'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(2996): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3190): error C2059: syntax error: '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3199): error C2143: syntax error: missing ')' before '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3199): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3199): error C2059: syntax error: '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3199): error C2143: syntax error: missing ')' before 'const'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3199): error C2091: function returns function",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3199): error C2143: syntax error: missing '{' before 'const'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3199): error C2059: syntax error: '<parameter-list>'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3217): error C2143: syntax error: missing ')' before '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3217): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3217): error C2059: syntax error: '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3217): error C2143: syntax error: missing ')' before 'const'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3217): error C2091: function returns function",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3217): error C2143: syntax error: missing '{' before 'const'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3217): error C2059: syntax error: '<parameter-list>'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2143: syntax error: missing ')' before '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2059: syntax error: '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2146: syntax error: missing ')' before identifier 'UCHAR'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2091: function returns function",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2169: 'memset': intrinsic function, cannot be defined",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2085: 'Fill': not in formal parameter list",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3226): error C2059: syntax error: '<parameter-list>'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2143: syntax error: missing ')' before '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2059: syntax error: 'constant'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2059: syntax error: '('",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2146: syntax error: missing ')' before identifier 'ULONG'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2091: function returns function",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2169: 'memset': intrinsic function, cannot be defined",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3235): error C2085: 'Length': not in formal parameter list",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3245): error C2082: redefinition of formal parameter 'RtlCompareMemory'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3304): error C2085: 'RtlCompareMemoryUlong': not in formal parameter list",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3313): error C2085: 'RtlFillMemoryUlong': not in formal parameter list",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3322): error C2085: 'RtlFillMemoryUlonglong': not in formal parameter list",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3356): error C2085: 'RTL_PROCESS_LOCK_INFORMATION': not in formal parameter list",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3356): error C2085: 'PRTL_PROCESS_LOCK_INFORMATION': not in formal parameter list",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3361): error C2061: syntax error: identifier 'RTL_PROCESS_LOCK_INFORMATION'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(3362): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(5628): error C2011: '_MESSAGE_RESOURCE_ENTRY': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(5636): error C2011: '_MESSAGE_RESOURCE_BLOCK': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(5642): error C2011: '_MESSAGE_RESOURCE_DATA': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6148): error C2011: '_OSVERSIONINFOA': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6157): error C2011: '_OSVERSIONINFOW': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6176): error C2011: '_OSVERSIONINFOEXA': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/build/t483-s5-p213/original\\ntrtl.h(6189): error C2011: '_OSVERSIONINFOEXW': 'struct' type redefinition"
+      ]
+    }
+  },
+  "coupled_changes": [
+    "Original nturtl critical-section declarations and ProcessHeap macro;19 mirror diff reduction.",
+    "Delete duplicated own RTL prototypes/macros;original CURDIR replaces own copied struct.",
+    "Restore original public error conversion names across finite NTVDM/WOW import/export bindings;ordinal19 unchanged.",
+    "Remove wrong-cdecl DbgPrompt dynamic wrapper;native original import links/loads x86/x64.",
+    "Remove incorrect cdecl exception for original time.c;use common /Gz and original test declaration.",
+    "Remove duplicate ntrtl_wow32 facade and include;precomp.h R1306 residual minimized16->15 without claiming complete retention approval."
+  ],
+  "files": [
+    {
+      "path": "src/compat/README.md",
+      "sha256": "ae3e87c942a61a31079b050709ad7b2beb44186223f5a60a43589c8b62514093"
+    },
+    {
+      "path": "src/compat/include/nt.h",
+      "sha256": "c00dcd4fe0dd563c3beea5e934ff90bcf4eedf794aafb0b012f98c5998b670e8"
+    },
+    {
+      "path": "src/compat/include/wow_char_conversion_abi.h",
+      "sha256": "ed994265effc71962345e45913cdb06c870d8d91dabe323fc0ad08da294f5ee7"
+    },
+    {
+      "path": "src/compat/opennt_support_rtl.c",
+      "sha256": "83e33dd19fb80d7d2c02b0d0fd506e513cc8e91835adb86eff290cbe8575d757"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "sha256": "deed0baf62ea8d7fb611af116639aed5d81b4d267ff96ba95e22f980acc3eb7a"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "sha256": "cdda8b0cf27a19deea6b14e3a8ecb5c0f10d9f57fd8903197ec2a13bbf3f5581"
+    },
+    {
+      "path": "src/ntvdm-exe/debugger/README.md",
+      "sha256": "38925ef972d6f01920cf96f631adc336c0d2138ca5708bb12ef0ef7c06e479ac"
+    },
+    {
+      "path": "src/ntvdm-exe/ntvdm-export-ordinals.csv",
+      "sha256": "82c2f1a3992ddeb046bffd2c6a6a205f7f3c85b9d35443de5ab3199a788ddba5"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_edit_native_bindings.h",
+      "sha256": "6ff550139b2c00294eff2e219422160d0b78269396336904085a45ae288e250d"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_init_bindings.h",
+      "sha256": "f0060844c4d6a3ff26edea75e61afb43deca3d276a49cf9c1e506cb9161674be"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_profile_bindings.h",
+      "sha256": "f6967608b36c9a3a8475bfb5d0f00e8f27049a5fab9dc4d4953fbd40a6a4cb91"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_capture_bindings.h",
+      "sha256": "ff8ebb4bf7003a0ee77e4adcd411b8a4e9802459852690eba024cab3c0d6b547"
+    },
+    {
+      "path": "test/integration/rtl_time1970_restoration_test.c",
+      "sha256": "1405433b599a846c682917d730abdd0a1916b2f64cf5989e3a318307333d885b"
+    },
+    {
+      "path": "test/ntvdm-exe/command/command_guest_launch.c",
+      "sha256": "77f760675b4e576df794ca594dcc84285b09e87ad2f687f661cd380cc2640d86"
+    },
+    {
+      "path": "test/opennt-host/rtl_x86_fixture.c",
+      "sha256": "619a27fa9e3537f8f0a4ad83ad2e9a448d22f5d4c223ad9dc530ceef09c0280a"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "09d42e9379edc28ee41ccf768aabda552e7561627fb042c30da0086c86f8192e"
+    },
+    {
+      "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "sha256": "2ebd143ddb7061a83016bd0c356fae8e156f1597f2dc07aea2a57da9e9416527"
+    },
+    {
+      "path": "test/ntvdm-exe/command/CMakeLists.txt",
+      "sha256": "02f270f13dbb68ec4f507376733bc7447f3dda3aaef9ffa54a944e3f9e43d562"
+    },
+    {
+      "path": "src/non-mvdm/README.md",
+      "sha256": "0fdd4b72e5d342b4403dc96f5615367abe68ed92723bcd43b4f195ef897058cd"
+    }
+  ],
+  "deleted": [
+    "src/compat/include/ntrtl_wow32.h",
+    "src/ntvdm-exe/debugger/source/dbg_prompt.c"
+  ],
+  "mirror_before": 6101,
+  "mirror_after": 253,
+  "mirror_delta": -5848,
+  "coupled_mirrors": {
+    "nturtl.h": {
+      "before": {
+        "add": 1,
+        "delete": 1039,
+        "total": 1040
+      },
+      "before_raw": {
+        "add": 8,
+        "delete": 1039,
+        "total": 1047
+      },
+      "after": {
+        "add": 1,
+        "delete": 1020,
+        "total": 1021
+      },
+      "after_raw": {
+        "add": 12,
+        "delete": 1020,
+        "total": 1032
+      }
+    },
+    "precomp.h": {
+      "before": {
+        "add": 15,
+        "delete": 1,
+        "total": 16
+      },
+      "before_raw": {
+        "add": 17,
+        "delete": 1,
+        "total": 18
+      },
+      "after": {
+        "add": 14,
+        "delete": 1,
+        "total": 15
+      },
+      "after_raw": {
+        "add": 16,
+        "delete": 1,
+        "total": 17
+      }
+    }
+  },
+  "batch_mirror_diff_delta": -5868,
+  "raw_before": 6317,
+  "raw_after": 298,
+  "line_mapping": {
+    "checked": 5187,
+    "mismatches": [],
+    "selected": {
+      "x86-worker-opennt_support_rtl": 2885,
+      "x86-worker-srvvdm": 2885,
+      "x64-frontend-opennt_support_rtl": 2779,
+      "x64-launcher-environ": 2779,
+      "x64-service-srvvdm": 2779,
+      "x86-wow32-profile": 2885,
+      "x86-worker-error": 2885,
+      "x64-launcher-error": 2779
+    },
+    "negative": {
+      "cpp": [
+        57
+      ],
+      "dbg": [
+        68
+      ],
+      "ntsystem": [
+        1595
+      ],
+      "mips": [
+        1033
+      ],
+      "alpha": [
+        1033
+      ],
+      "oldmsc": [
+        6341
+      ]
+    }
+  },
+  "nturtl_lines": {
+    "restored_original_lines": 19,
+    "original_ranges": [
+      [
+        118,
+        123
+      ],
+      [
+        125,
+        130
+      ],
+      [
+        139,
+        144
+      ],
+      [
+        528,
+        528
+      ]
+    ],
+    "mismatches": []
+  },
+  "precomp_lines": "Only added include removed;original #line22 immediately after adaptation block preserved;all later original mapping unchanged.",
+  "cumulative_evidence": "cumulative-diff-p213-delta.json",
+  "package": "ee6a21b1-626f-47fb-a128-c3ea5749c36e",
+  "verification": "Final cached x86/x64 full build0;native DbgPrompt import-link-load x86/x64 0;original time fixture0;publish11x2 hashes match;isolated Full0 and all11 normalized test images match publication;governance/shared boundary/links/diff check0. Post-review command composition fixture rebuilt and CTest passed on x86/x64;product identity unchanged.",
+  "linked_owner_proof": {
+    "ntvdm": {
+      "map_sha256": "451de9d7b26c58ab4b81b8ec7759d79ba4ede50ca605579d1b0ef119db195cc7",
+      "lines": [
+        " 0001:00160150       _RtlNtStatusToDosError@4   00561150 f   original-opennt-rtl-x86:error.obj",
+        " 0001:0017f0ee       _DbgPrompt@12              005800ee f   ntdll:ntdll.dll",
+        " 0002:00000550       __imp__DbgPrompt@12        00591550     ntdll:ntdll.dll"
+      ]
+    },
+    "wow32": {
+      "map_sha256": "6d0a409ab6b9383c8f4996ecf99416ee34f788d231e320b3448877d54c025bdc",
+      "lines": [
+        " 0001:0008d48f       _RtlMultiByteToUnicodeN    1008e48f f   legacy-wow-ntdll:NTDLL.DLL",
+        " 0001:0008d48f       _RtlMultiByteToUnicodeN@20 1008e48f f   legacy-wow-ntdll:NTDLL.DLL",
+        " 0001:0008d597       RtlNtStatusToDosError      1008e597 f   ntvdm:ntvdm.exe",
+        " 0001:0008d597       _RtlNtStatusToDosError@4   1008e597 f   ntvdm:ntvdm.exe",
+        " 0002:000006b4       __imp__RtlMultiByteToUnicodeN 1008f6b4     legacy-wow-ntdll:NTDLL.DLL",
+        " 0002:00000eac       __imp_RtlNtStatusToDosError 1008feac     ntvdm:ntvdm.exe"
+      ]
+    }
+  },
+  "rtl_fixture_exits": {
+    "x86": 0,
+    "x64": 0
+  },
+  "focused": {
+    "heap_x86": "heap_match=1 last_error=17185",
+    "heap_x64": "heap_match=1 last_error=17185",
+    "time": "PASS original RTL time: epoch, leap day, signed boundary, ULONG maximum and output guards",
+    "source_line_check": 5187,
+    "actual_contexts": 8,
+    "rejected_profiles": 6
+  },
+  "counter_review": "Distinguished native API ownership from original defects. Removed copied own declarations and dynamic DbgPrompt forwarding instead of using their dependency as necessity. Removed incorrect time.c cdecl build exception;original mirror body unchanged. Ordinary NTSYSAPI scope binds local RTL plus native import thunks;SDK declarations outside scope unchanged. Whole current file and linked reductions completed;no replacement algorithms or guest edits. Final review also removed the stale status-converter test wrapper rather than carrying a same-name recursive shim.",
+  "limits": [
+    "Source declaration restoration does not claim every newly visible dormant API has a product caller.",
+    "Memory prototype omissions are a current native-SDK boundary,not an original OpenNT defect.",
+    "DbgPrompt import-load test does not invoke interactive debugger input.",
+    "Original source has legacy SDK macro/const/linkage warnings;no warning-free claim.",
+    "External DOS4GW/Nesticle fixture remains absent/SKIP,not pass.",
+    "Restoring declarations does not certify all unused original RTL APIs or future SDKs."
+  ],
+  "corrected_failures": [
+    "Initial preprocessing helper removed /c substrings inside paths;regenerated exact switch tokens.",
+    "WOW own duplicated RTL declarations conflicted with restored original declarations;removed copies.",
+    "Full build exposed wrong-cdecl DbgPrompt wrapper;removed wrapper and used native original import.",
+    "Full build exposed time.c cdecl override;removed override and restored original calling convention.",
+    "Full build exposed remaining ntrtl_wow32 copied declarations;removed facade and includes.",
+    "Final review found obsolete converter test wrapper now self-recursive;removed it, tested the actual native binding, and repaired standalone fixture external-header classification. Final x86/x64 CTest both pass."
+  ],
+  "process": {
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+    "script": "C69A03C38511F8E54B73CAF7F61B9F11F6AC4055CAF8BB68AAE58E4BC8A71F3A",
+    "started": "2026-11-15T18:56:48.8198669-08:00",
+    "pid": 31768
+  },
+  "delivery": "P213 reviewed commit and origin/main push accompany receipt",
+  "post_full_review": {
+    "changed_test": {
+      "path": "test/ntvdm-exe/command/command_guest_launch.c",
+      "previous_sha256": "cc80529641308f2c80cece2a211cfcbb27e53916b9d507c5652d3fdd3a03fcef",
+      "sha256": "77f760675b4e576df794ca594dcc84285b09e87ad2f687f661cd380cc2640d86"
+    },
+    "fix": "Remove obsolete native status-converter test forwarding;after original symbol restoration it became self-recursive. Call the linked NTDLL converter directly and exercise STATUS_ACCESS_DENIED explicitly.",
+    "build_boundary": "Keep /W4 /WX on project code;mark original SDK mirror include directory SYSTEM so unchanged legacy header warnings are external diagnostics. No product build or source change.",
+    "verification": "Rebuild final mvdm-command-guest-launch-test and run its CTest on x86 and x64;both pass. Full product package is unchanged and its earlier final-product results remain applicable.",
+    "process": {
+      "pid": 3064,
+      "script": "05DF4A45F324C63364C8BAF5597689EB3F396C5B5B206CC742E6F9449234AD40",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "started": "2026-11-15T19:16:38.6592798-08:00"
+    },
+    "product_source_hashes_unchanged": true,
+    "publication_hashes_rechecked": 22
+  }
+}

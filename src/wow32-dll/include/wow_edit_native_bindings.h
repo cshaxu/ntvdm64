@@ -1,7 +1,6 @@
 #ifndef WOW_EDIT_NATIVE_BINDINGS_H
 #define WOW_EDIT_NATIVE_BINDINGS_H
-#include <windows.h>
-#include <winternl.h>
+#include <nt.h>
 #include "wow_native_gui_thread.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
@@ -26,9 +25,4 @@ VOID WINAPI wow_edit_native_NtUserClearWindowState(HWND, UINT);
 VOID WINAPI wow_edit_native_NtUserAlterWindowStyle(HWND, DWORD, DWORD);
 BOOL WINAPI wow_edit_native_NtUserFillWindow(HWND, HWND, HDC, HBRUSH);
 HBRUSH WINAPI wow_edit_native_NtUserGetControlColor(HWND, HWND, HDC, UINT);
-/* Original public/sdk/inc/ntrtl.h ABI consumed by editec.c ECLock/ECUnlock.
- * NTDLL owns the in-place byte transform; original EDIT retains the seed,
- * counted text extent, lock nesting and encoded-state transitions. */
-NTSYSAPI VOID NTAPI RtlRunEncodeUnicodeString(PUCHAR, PUNICODE_STRING);
-NTSYSAPI VOID NTAPI RtlRunDecodeUnicodeString(UCHAR, PUNICODE_STRING);
 #endif

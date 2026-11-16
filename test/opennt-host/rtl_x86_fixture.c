@@ -19,6 +19,7 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(void)
     static OPENNT_SUPPORT_PEB peb;
 
     peb.ProcessParameters = &parameters;
+    peb.ProcessHeap = GetProcessHeap();
     return &peb;
 }
 
@@ -50,6 +51,19 @@ int main(void)
     WCHAR queryBuffer[16];
     NTSTATUS status;
     int result;
+
+    /* Original scalar conversions and fixed-width header layouts. */
+    if (RtlConvertLongToLuid(-1).HighPart != -1 ||
+        RtlConvertUlongToLuid(0xffffffffu).HighPart != 0) return 101;
+    if (sizeof(STRING32) != 8 || sizeof(STRING64) != 16) return 102;
+    {
+        UNICODE_STRING unicode;
+        OEM_STRING oem;
+        RtlInitUnicodeString(&unicode, L"abc");
+        RtlInitAnsiString(&oem, "abc");
+        if (RtlUnicodeStringToOemSize(&unicode) != 4 ||
+            RtlOemStringToUnicodeSize(&oem) != 8) return 103;
+    }
 
     /* Original list macros must preserve both directions and the removed node,
      * including singleton-to-empty and head/tail insertion. */

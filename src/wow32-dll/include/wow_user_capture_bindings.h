@@ -19,11 +19,9 @@ typedef struct _IN_STRING {
 #ifndef MAXUSHORT
 #define MAXUSHORT 0xffff
 #endif
-#define RtlProcessHeap() GetProcessHeap()
 #define RtlAllocateHeap HeapAlloc
 #define RtlFreeHeap HeapFree
 #define RIPMSG0(level, text) ((void)0)
-NTSYSAPI NTSTATUS NTAPI RtlMultiByteToUnicodeN(PWCH, ULONG, PULONG, PCCH, ULONG);
 BOOL WINAPI RtlCaptureAnsiString(PIN_STRING, LPCSTR, BOOL);
 
 /* The original body passes signed cbDst to the unsigned NTDLL byte-count
