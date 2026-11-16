@@ -1,0 +1,199 @@
+{
+  "batch": "P247",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+        "sha256": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_task_order_bindings.h",
+        "sha256": "5f62772261f5d056356a8e35ddf5671166333e80081178c1320a5f7f62b0d81d"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+        "sha256": "c86be3760f9aa431dba3b1ab7f17a9e19be48c2cf850d4eb9c3f24e904bba179"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c",
+        "sha256": "ce8218007ddb7a0a7d505a94a2900ab0bc4524a4a5e22660bf9e1db8f14230fb"
+      }
+    ],
+    "deleted": [],
+    "source_files": 4
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+        "sha256": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb"
+      }
+    ],
+    "compiler_observed": {
+      "WakeWowTask": 30,
+      "InsertTask": 60,
+      "DestroyTask": 129,
+      "xxxSleepTask": 234,
+      "xxxUserYield": 518,
+      "DirectedScheduleTask": 575,
+      "xxxDirectedYield": 672,
+      "CurrentTaskLock": 728
+    }
+  },
+  "publication": {
+    "status": "published",
+    "package": "cf66ae2a-e181-4bcd-8f8a-e2a2ebf0930d",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 394240,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6354,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1146,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 10898,
+        "CleanupMs": 352,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 10557,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 9834,
+        "CleanupMs": 358,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 182,
+        "CleanupMs": 358,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65515,
+        "CleanupMs": 370,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44327,
+        "CleanupMs": 377,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43271,
+        "CleanupMs": 337,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14943,
+        "CleanupMs": 347,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9980,
+        "CleanupMs": 377,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 44425,
+        "CleanupMs": 344,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12741,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28724,
+        "CleanupMs": 385,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31078,
+        "CleanupMs": 361,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3800,
+        "CleanupMs": 360,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7644,
+        "CleanupMs": 342,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9644,
+        "CleanupMs": 382,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3873,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6216,
+        "CleanupMs": 337,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20246,
+        "CleanupMs": 336,
+        "Passed": true
+      }
+    ]
+  },
+  "focused_log": "build/t483-s5-p247/focused-linked.log",
+  "mirror_diff": {
+    "before": 95,
+    "after": 45,
+    "delta": -50,
+    "blocks_before": 32,
+    "blocks_after": 17,
+    "non_error": "Same metric:no excluded branches"
+  },
+  "cumulative": {
+    "before": 96712,
+    "after": 96662,
+    "baseline": 119913,
+    "reduction": 23251
+  },
+  "scope": "R2646-R2657;six restored/confirmed,six residual pending;no guest/zip changes",
+  "git": "Accompanying commit and push required"
+}

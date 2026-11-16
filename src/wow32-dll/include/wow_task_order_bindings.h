@@ -2,6 +2,7 @@
 #define WOW_TASK_ORDER_BINDINGS_H
 #include <windows.h>
 #include <winternl.h>
+#include "common/wow/user_runtime.h"
 
 /* Shared terminal outcome when an acquired execution scope cannot unwind. */
 __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *, DWORD);
@@ -145,13 +146,13 @@ void WINAPI InsertTask(wow_task_order_process *, wow_task_order_entry *);
 void WINAPI WakeWowTask(wow_task_order_thread *);
 void WINAPI DirectedScheduleTask(wow_task_order_thread *, wow_task_order_thread *,
     BOOL, wow_task_order_message *);
-DWORD WINAPI CurrentTaskLock(DWORD, wow_task_order_process *);
+DWORD WINAPI CurrentTaskLock(DWORD);
 /* DestroyTask consumes heap-owned task/waiter records and their independently
  * retained idle-event handle. Thread and process records survive the call. */
 void WINAPI DestroyTask(wow_task_order_process *, wow_task_order_thread *);
 BOOL WINAPI xxxSleepTask(BOOL, HANDLE, wow_task_order_thread *);
 BOOL WINAPI xxxUserYield(wow_task_order_thread *);
-void WINAPI xxxDirectedYield(DWORD, wow_task_order_thread *);
+void WINAPI xxxDirectedYield(DWORD);
 /* Borrowed native callback frame; original taskman remains execution owner. */
 typedef struct wow_task_callback_scope {
     struct wow_user_runtime_thread *binding;
@@ -178,6 +179,8 @@ BOOL WINAPI wow_task_reference_event(HANDLE, HANDLE *);
 #define WOW_TASK_SMF_SEND 0x2000u
 
 #ifdef WOW_ORIGINAL_TASK_ORDER
+#define PpiCurrent() (wow_user_runtime_current()->thread->ppi)
+#define PtiCurrent() (wow_user_runtime_current()->thread)
 typedef wow_task_order_entry *PTDB;
 typedef wow_task_order_state *PWOWPROCESSINFO;
 typedef wow_task_order_state WOWPROCESSINFO;

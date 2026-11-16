@@ -1,0 +1,227 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+  "points": "R2646-R2657",
+  "status": "Whole file reviewed,built,published,tested;Git delivery accompanies receipt",
+  "before": {
+    "added": 51,
+    "deleted": 44,
+    "blocks": 32
+  },
+  "baseline_sha256": "3af6d27e2baafd39ad745a92a5345a4797e73626875b7ce1d72cc2e8d6ea0af3",
+  "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e",
+  "findings": [
+    "Existing common WOW runtime has current-thread/process identity;CurrentTaskLock explicit-process deviation can be removed without new state",
+    "SleepTask has actual non-current execution-owner caller park_native_owner;do not equate its explicit argument with CurrentTaskLock",
+    "No conditional compilation groups or error exclusions in this file"
+  ],
+  "after_local": {
+    "added": 24,
+    "deleted": 21,
+    "blocks": 17
+  },
+  "current_task_lock": {
+    "conclusion": "Restore original signature and body using existing common WOW runtime PpiCurrent binding;no new state",
+    "test_change": "Existing lock/relock/wrong-cookie/unlock/no-WOW cases now establish and change actual runtime context",
+    "verification": "Source comparison only;whole-file audit must finish before cached full build/test/publication",
+    "body_identity": "Exact original signature/body through end of function;trailing whitespace excluded"
+  },
+  "candidate_sha256": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb",
+  "directed_yield": {
+    "conclusion": "Restore original signature and PtiCurrent query;all three production callers use current binding thread",
+    "caller_evidence": [
+      "wow_user_task_lifecycle.c:673-678 current_task(owner)",
+      "wow_user_task_lifecycle.c:885-910 callback_enter binding->thread",
+      "wow_user_task_lifecycle.c:1152-1171 native_call_end current binding validation, sender=binding->thread"
+    ],
+    "remaining_diff": "Shared event accounting and SleepTask explicit subject remain separate adaptations",
+    "verification": "Source proof;not yet built/tested"
+  },
+  "ready_guard_audit": "Of five guard deviations,restore four;only runnable selection retains concrete paused-native counterexample. No added checks.",
+  "self_wake_R2654": {
+    "conclusion": "Restored original condition;existing no-event assertion remains unchanged",
+    "source_proof": [
+      "Original HEVENT_REMOVEME clears queue event before returning",
+      "CurrentTaskLock has no production call sites;only original lock function writes positive task lock",
+      "Native handoff and park_native_owner explicitly avoid lock-held parking"
+    ],
+    "diagnostic": "Isolated frozen P246 source/header and existing linked fixture;baseline versus only restored self-wake condition;full final P247 delivery pending",
+    "evidence": "build/t483-s5-p247/guard-diagnostic/self-wake-results.json",
+    "line_mapping": "KeSetEvent retains original #line 415;no excluded branches in file",
+    "diagnostic_results": [
+      {
+        "name": "baseline",
+        "exit": 0,
+        "stage": "build"
+      },
+      {
+        "name": "baseline",
+        "exit": 0,
+        "stage": "run"
+      },
+      {
+        "name": "original-self-wake",
+        "exit": 0,
+        "stage": "build"
+      },
+      {
+        "name": "original-self-wake",
+        "exit": 0,
+        "stage": "run"
+      }
+    ],
+    "diagnostic_identity": {
+      "wow_task_order_bindings.h": "dbac3bc207e97bb0f63fae99d62e541432d043d744c068bf00900128b8a80568",
+      "baseline\\taskman.c": "3af6d27e2baafd39ad745a92a5345a4797e73626875b7ce1d72cc2e8d6ea0af3",
+      "original-self-wake\\taskman.c": "77b5427531161fda38c03646be418ca7abb84bfe8233428b15e4701c1f055389",
+      "baseline\\fixture.exe": "cbef7781f407e113b049302215370982a2d735aaa400be714dcbf6057b990abf",
+      "original-self-wake\\fixture.exe": "be002676211aaa940b42831458e3c6930a0359dfc28a1306ca45a5747a8df751"
+    },
+    "scope": "Both frozen-source variants compile/link/run exit0;this proves the existing guard assertion does not require the deviation,not final modified API integration or guest acceptance."
+  },
+  "execution_correction": {
+    "owner_instruction": "No compilation or runtime diagnostic before the entire current file is audited and all reducible differences are handled;diagnostic variants are not an exception.",
+    "violation": "Intermediate frozen-source diagnostic builds were run before taskman.c review completed.",
+    "runner_state": "PID33036 command-checked after owner correction:already exited;no process stopped.",
+    "next_action": "Source-only review for all remaining taskman.c points;one cumulative build,publish,test,commit,push after complete file."
+  },
+  "loop_guard_R2655": {
+    "conclusion": "Restore original loop condition;no replacement check",
+    "source_proof": [
+      "native_call_begin,park_native_owner,callback_leave invoke SleepTask(FALSE,HEVENT_REMOVEME),which returns before the loop tail",
+      "Ordinary yielding/message/hardware waits enter on guest execution or callback ready scope",
+      "wait_for_task_or_message -> receive_wait -> native_peek completes native_call_end_wait in finally;native_call_end marks ready then pops its own scope",
+      "callback_enter pushes ready scope and callback_leave restores its predecessor;failure paths do not return successful partial scopes"
+    ],
+    "sources": [
+      "src/wow32-dll/source/wow_user_task_lifecycle.c:233-289,739-750,871-1015,1152-1175",
+      "src/wow32-dll/source/wow_user_message_bridge.c:10-26,80-88"
+    ],
+    "line_mapping": "Original condition restored at logical line483",
+    "verification": "Source review complete for this point;previous prematurely executed isolated original-loop diagnostic passed;final batch not built or delivered"
+  },
+  "idle_hardware_R2652_R2653": {
+    "conclusion": "Restore original conditions;paused native handoffs use FALSE and HEVENT_REMOVEME,ordinary idle/hardware calls are ready continuations",
+    "test_contract": "Existing two cases now exercise ready idle callback and ready hardware return;keep event-count/owner assertions;remove artificial paused-normal-wait state and its test-only unblock callback",
+    "verification": "Source-only;final full-file batch pending"
+  },
+  "selection_R2651": {
+    "conclusion": "Necessary residual pending owner",
+    "counterexample": "A has pending events but is suspended in native code. B parks with HEVENT_REMOVEME;without eligibility check original priority scan selects A rather than ready C. A cannot run guest until native return. Existing real caller native_call_begin marks A false before releasing original execution.",
+    "evidence": "Existing persistent_eligibility A/B/C assertions;prior original-selection diagnostic exits1;not used as substitute for final batch."
+  },
+  "format_and_lines": {
+    "format": "Restored whitespace-only difference blocks to original;retained necessary divergence explanations",
+    "line_mapping": "Regenerated resets at original-matching lines outside block comments;no conditionals/excluded branches",
+    "verification": "Source mapping only,compiler line proof pending full batch"
+  },
+  "point_conclusions": {
+    "R2646": {
+      "decision": "minimized-pending-owner",
+      "reason": "Restore pragma and original comments;retain explicit standalone scheduler ABI and original userk.h. Original precomp.h imports NT4 kernel USER object/lock declarations unavailable in the native DLL;selected structures and finite host operations are in wow_task_order_bindings.h."
+    },
+    "R2647": {
+      "decision": "restored-local",
+      "reason": "CurrentTaskLock signature/body now original through existing runtime current process."
+    },
+    "R2648": {
+      "decision": "pending-owner",
+      "reason": "DestroyTask must use the supplied process event/waiter domain,not ambient current process. Original global names have no selected standalone definitions;restoring via a new ambient selector would add state and break non-current cleanup. Retain direct existing process-owned access."
+    },
+    "R2649": {
+      "decision": "pending-owner",
+      "reason": "park_native_owner(receiver) passes another CSOwningThread to original HEVENT_REMOVEME;PtiCurrent is receiver at this point. Restoring current-thread lookup would deschedule wrong task. Keep explicit subject;other current-only APIs restored."
+    },
+    "R2650": {
+      "decision": "partial-restoration-pending-owner",
+      "reason": "Historical broad omission anchor overlaps now retained original SleepTask body;remaining explicit subject/shared-domain and selection readiness handled at R2648/R2649/R2651. Not a fully restored point."
+    },
+    "R2651": {
+      "decision": "pending-owner",
+      "reason": "A has pending events but is suspended in native code. B parks with HEVENT_REMOVEME;without eligibility check original priority scan selects A rather than ready C. A cannot run guest until native return. Existing real caller native_call_begin marks A false before releasing original execution."
+    },
+    "R2652": {
+      "decision": "restored-local",
+      "reason": "Idle guard removed;normal idle wait uses ready continuation,paused native parks with fInputIdle FALSE."
+    },
+    "R2653": {
+      "decision": "restored-local",
+      "reason": "Hardware guard removed;paused native uses HEVENT_REMOVEME rather than registered WOWEXEC event."
+    },
+    "R2654": {
+      "decision": "restored-local",
+      "reason": "Original self-wake condition restored;REMOVEME clears event before return."
+    },
+    "R2655": {
+      "decision": "restored-local",
+      "reason": "Original loop predicate restored;temporary callback/native scopes popped before outer wait resumes."
+    },
+    "R2656": {
+      "decision": "minimized-pending-owner",
+      "reason": "Restore DirectedYield signature and current-thread lookup;remaining explicit SleepTask subject and process-shared event accounting have same domain evidence."
+    },
+    "R2657": {
+      "decision": "confirmed-original-local",
+      "reason": "InsertTask retains original priority insertion body;no new scheduler or ordering logic."
+    }
+  },
+  "counting": "Six restored/confirmed verified points and six residual pending;Git delivery accompanies receipt.",
+  "source_line_proof": {
+    "matched_nonempty_lines": 597,
+    "mismatches": [],
+    "source_sha256": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb",
+    "compiler_verification": "Pending batch;not claimed by this source mapping check"
+  },
+  "counter_review": {
+    "complete": true,
+    "findings": [
+      "Normal hardware return precedes apEvent allocation;test now asserts no allocation instead of freeing NULL",
+      "Removed unused mock wait context after retiring synthetic unblocking",
+      "Original current-thread APIs use existing runtime binding;all production callers and test bindings checked",
+      "Every original-matching nonempty line has original logical number;no conditionals/error branches",
+      "No remaining unhandled reduction identified in the12 point dispositions"
+    ],
+    "scope": "Source review complete,not runtime or delivery completion"
+  },
+  "publication": {
+    "status": "published",
+    "package": "cf66ae2a-e181-4bcd-8f8a-e2a2ebf0930d",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "compiler_line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+        "sha256": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb"
+      }
+    ],
+    "compiler_observed": {
+      "WakeWowTask": 30,
+      "InsertTask": 60,
+      "DestroyTask": 129,
+      "xxxSleepTask": 234,
+      "xxxUserYield": 518,
+      "DirectedScheduleTask": 575,
+      "xxxDirectedYield": 672,
+      "CurrentTaskLock": 728
+    }
+  },
+  "focused_verification": {
+    "exit": 0,
+    "control_cases": 37,
+    "task_order": "WOW_FIXTURE_OK case=task-order;errors=0",
+    "log": "build/t483-s5-p247/focused-linked.log",
+    "scope": "Final candidate,not frozen diagnostic variant"
+  },
+  "full_verification": {
+    "status": "passed",
+    "gates": 20,
+    "evidence": "batch-p247-checkpoint.json"
+  },
+  "verification": "Cached x86/x64,compiler line proof,publish11x2,focused37/task-order,Full20,boundary/governance passed",
+  "governance_correction": "CURRENT UTF8 encoding repaired;governance and links rerun successfully;no product change or runtime-test rerun"
+}

@@ -770,6 +770,12 @@ instructions for this audit:
     build. Do not build while another reducible difference in that file remains
     unhandled. There is no numerical file-count threshold.
 
+Owner clarification: this whole-file boundary also covers diagnostic and
+negative-control compilation or execution. They are not exceptions permitting
+intermediate builds before all points in the current file have been audited
+and all reducible differences handled. Source-only investigation continues
+until the file is ready for the cumulative delivery batch.
+
 Owner delivery-order clarification: the required order is build, publish,
 test, commit, push. After a successful coherent build, publish and hash-verify
 both destinations immediately so owner testing can run in parallel. Do not

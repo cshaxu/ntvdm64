@@ -12,15 +12,23 @@
 *                       multiple WOW VDM support.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-047/048/049/050/051): original scheduler bodies;
- * current-thread/process reads use explicit views. Runtime registration and
- * host message/death/idle bindings remain required, not success stubs. */
 #define WOW_ORIGINAL_TASK_ORDER
 #include "wow_task_order_bindings.h"
 #include "userk.h"
-#line 17
+#line 16
+#pragma hdrstop
 
-#line 29
+
+/*
+ * WakeWowTask
+ *
+ * if needed the wowtask is woken by setting its event
+ * It is assumed that if any wow task is currently scheduled
+ * that it is a waste of time to wake the specified wow task
+ * since rescheduling will occur when the currently scheduled
+ * wow task enters xxxSleepTask
+ *
+ */
 VOID
 WakeWowTask(
    PTHREADINFO pti
@@ -33,6 +41,7 @@ WakeWowTask(
        KeSetEvent(pti->pEventQueueServer, EVENT_INCREMENT, FALSE);
        }
 }
+
 
 
 
@@ -51,7 +60,6 @@ WakeWowTask(
 * 19-Nov-1993 mikeke    Created
 \***************************************************************************/
 
-#line 60
 void InsertTask(
     PPROCESSINFO ppi,
     PTDB ptdbNew)
@@ -121,7 +129,6 @@ void InsertTask(
 * 02-27-91 MikeHar      Created.
 \***************************************************************************/
 
-#line 129
 void DestroyTask(
     PPROCESSINFO ppi,
     PTHREADINFO ptiToRemove)
@@ -211,6 +218,7 @@ void DestroyTask(
 
 /* DIVERGENCE(OPENNT-HOST-050): explicit current thread replaces PtiCurrent;
  * original wait/selection/message policy and UserYield ordering are retained. */
+#line 219
 /***************************************************************************\
 * xxxSleepTask
 *
@@ -226,7 +234,6 @@ void DestroyTask(
 * 12-17-93 Jonle        add wowexec hotpath for VirtualInterrupts
 \***************************************************************************/
 
-#line 234
 BOOL xxxSleepTask(
     BOOL   fInputIdle,
     HANDLE hEvent,
@@ -348,10 +355,7 @@ rescan:
                     // idle if no tasks are ready to run. Call the idle
                     // hook if there is one.
                     //
-                    /* DIVERGENCE(OPENNT-HOST-123): do not enter guest idle
-                     * hooks on a suspended native stack. */
-                    if (fInputIdle && wow_task_execution_ready(pti) &&
-#line 352
+                    if (fInputIdle &&
                             pwpi->ptiScheduled == NULL &&
                             IsHooked(pti, WHF_FOREGROUNDIDLE)) {
 
@@ -393,10 +397,7 @@ rescan:
              *  wowexec to service virtual hardware interrupts
              */
             } else if (ppi->W32PF_Flags & W32PF_WAKEWOWEXEC) {
-                /* DIVERGENCE(OPENNT-HOST-123): retain the real hardware
-                 * branch only on a ready continuation. */
-                if (pwpi->hEventWowExecClient == hEvent && wow_task_execution_ready(pti)) {
-#line 394
+                if (pwpi->hEventWowExecClient == hEvent) {
                     pwpi->ptiScheduled = pti;
                     ppi->W32PF_Flags &= ~W32PF_WAKEWOWEXEC;
                     InsertTask(ppi, pti->ptdb);
@@ -417,9 +418,7 @@ rescan:
             }
 
         } else if (pwpi->nTaskLock > 0 && pwpi->ptiScheduled == pti
-                   /* DIVERGENCE(OPENNT-HOST-123): no false self wake. */
-                   && pti->ptdb->nEvents > 0 && wow_task_execution_ready(pti)) {
-#line 415
+                   && pti->ptdb->nEvents > 0) {
              KeSetEvent(pwpi->ptiScheduled->pEventQueueServer,
                     EVENT_INCREMENT, FALSE);
         }
@@ -488,9 +487,7 @@ rescan:
             ClientDeliverUserApc();
         }
 
-    /* DIVERGENCE(OPENNT-HOST-123): selection alone cannot admit a still
-     * suspended native frame after a nested callback. */
-    } while (pwpi->ptiScheduled != pti || !wow_task_execution_ready(pti));
+    } while (pwpi->ptiScheduled != pti);
 
 
     /*
@@ -498,7 +495,6 @@ rescan:
      * Place ourselves at the far end of tasks in the same priority
      * so that next time we sleep someone else will run.
      */
-#line 491
     pti->ptdb->nEvents--;
     (ppi->shared)->nEvents--;
     UserAssert((ppi->shared)->nEvents >= 0);
@@ -517,7 +513,6 @@ rescan:
 
 
 
-#line 509
 /***************************************************************************\
 * xxxUserYield
 *
@@ -576,14 +571,13 @@ BOOL xxxUserYield(
     return TRUE;
 }
 
+
 /***************************************************************************\
 * DirectedScheduleTask
 *
 * History:
 * 25-Jun-1992 mikeke    Created.
 \***************************************************************************/
-
-#line 574
 
 VOID DirectedScheduleTask(
      PTHREADINFO ptiOld,
@@ -675,8 +669,6 @@ VOID DirectedScheduleTask(
 
 
 
-/* DIVERGENCE(OPENNT-HOST-051): explicit current thread, including SleepTask;
- * thread lookup remains a required host operation under the USER lock. */
 /***************************************************************************\
 * xxxDirectedYield
 *
@@ -684,18 +676,15 @@ VOID DirectedScheduleTask(
 * 09-17-92 JimA         Created.
 \***************************************************************************/
 
-#line 672
 void xxxDirectedYield(
-    DWORD dwThreadId,
-    PTHREADINFO currentThread)
-#line 674
+    DWORD dwThreadId)
 {
     PTHREADINFO ptiOld;
     PTHREADINFO ptiNew;
 
     CheckCritIn();
 
-    ptiOld = currentThread;
+    ptiOld = PtiCurrent();
     if (!(ptiOld->TIF_flags & TIF_16BIT) || !ptiOld->ppi->pwpi) {
          RIPMSG0(RIP_ERROR, "DirectedYield called from 32 bit thread!");
          return;
@@ -730,8 +719,7 @@ void xxxDirectedYield(
     xxxSleepTask(TRUE, NULL, ptiOld);
 }
 
-/* DIVERGENCE(OPENNT-HOST-048): caller supplies original current process
- * explicitly; no fake PpiCurrent thread environment is constructed. */
+
 /***************************************************************************\
 * CurrentTaskLock
 *
@@ -744,13 +732,10 @@ void xxxDirectedYield(
 * History:
 * 13-Apr-1992 jonpa      Created.
 \***************************************************************************/
-#line 728
 DWORD CurrentTaskLock(
-    DWORD hlck,
-    PPROCESSINFO ppi)
-#line 730
+    DWORD hlck)
 {
-    PWOWPROCESSINFO pwpi = ppi->pwpi;
+    PWOWPROCESSINFO pwpi = PpiCurrent()->pwpi;
 
     if (!pwpi)
         return 0;
@@ -764,5 +749,3 @@ DWORD CurrentTaskLock(
 
     return 0;
 }
-
-

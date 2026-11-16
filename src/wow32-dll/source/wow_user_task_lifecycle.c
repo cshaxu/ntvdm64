@@ -675,7 +675,7 @@ VOID WINAPI wow_user_task_lifecycle_directed_yield(wow_user_task_lifecycle *owne
         SetLastError(ERROR_INVALID_STATE); return;
     }
     __try {
-        xxxDirectedYield(thread_id, &task->thread);
+        xxxDirectedYield(thread_id);
         publish_scheduled_return(wow_user_runtime_current());
     }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
@@ -907,7 +907,7 @@ static BOOL callback_enter(wow_task_callback_scope *scope, BOOL resource_cleanup
         /* The callback has actually arrived, even when native SendMessage's
          * wait dispatched it without our queue-wait observer. Original
          * OldYield records runnable work before entering SleepTask. */
-        xxxDirectedYield((DWORD)-1, thread);
+        xxxDirectedYield((DWORD)-1);
         scope->resumed = TRUE;
     }
     if (thread->ppi->pwpi->CSOwningThread != thread)
@@ -1168,7 +1168,7 @@ static BOOL native_call_end(wow_user_native_call *call, BOOL scheduler_wait,
      * private SMS relation. Reacquire only execution owned on entry. */
     call->execution.ready = TRUE;
     if (call->execution_held && sender->ppi->pwpi->CSOwningThread != sender)
-        (void)xxxDirectedYield((DWORD)-1, sender);
+        (void)xxxDirectedYield((DWORD)-1);
     if (call->execution_held && sender->ppi->pwpi->CSOwningThread != sender)
         wow_user_native_call_failed("native-return-execution", ERROR_INVALID_STATE);
     execution_pop(sender, &call->execution);
