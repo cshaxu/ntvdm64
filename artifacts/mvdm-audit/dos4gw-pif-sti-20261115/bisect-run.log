@@ -1,0 +1,9 @@
+CHANGED=1
+PASS DOS4GW NESticle remains active with a visible graphics window; gameplay and rendered pixels are not asserted
+p77 PASS
+CHANGED=1
+PASS DOS4GW NESticle remains active with a visible graphics window; gameplay and rendered pixels are not asserted
+p78 PASS
+CHANGED=1
+PASS DOS4GW NESticle remains active with a visible graphics window; gameplay and rendered pixels are not asserted
+p95 PASS

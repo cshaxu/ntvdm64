@@ -1,0 +1,41 @@
+--- src/mvdm-host/dpmi32/dpmiint.c
++++ candidate/dpmiint.c
+@@ -1409,6 +1409,38 @@
+     pCode++;
+ #line 1277
+     switch (Opcode) {
++        case 0xfa:
++        case 0xfb:
++            {
++                extern unsigned char *c_GetPhyAdd(unsigned long);
++                volatile LONG *state=(volatile LONG *)c_GetPhyAdd(FIXED_NTVDMSTATE_LINEAR);
++                if(Opcode==0xfb) InterlockedOr(state,VIRTUAL_INTERRUPT_BIT);
++                else InterlockedAnd(state,~VIRTUAL_INTERRUPT_BIT);
++            }
++            setIF(Opcode == 0xfb);
++            setEIP(CodeOffset + 1);
++            bReturn = TRUE;
++            break;
++        case 0xe4: case 0xe5: case 0xe6: case 0xe7:
++        case 0xec: case 0xed: case 0xee: case 0xef:
++            {
++                extern void IN8(unsigned long *,unsigned long),IN16(unsigned long *,unsigned long);
++                extern void OUT8(unsigned long,unsigned long),OUT16(unsigned long,unsigned long);
++                ULONG port=getDX(),value=0,size=1;
++                if(Opcode<0xe8) {
++                    UCHAR imm;
++                    if(!DpmiMappedCodeByte(CodeBase,CodeOffset+1,&imm)) break;
++                    port=imm;size=2;
++                }
++                switch(Opcode&3) {
++                  case 0: IN8(&value,port);setAL((UCHAR)value);break;
++                  case 1: IN16(&value,port);setAX((USHORT)value);break;
++                  case 2: OUT8(port,getAL());break;
++                  case 3: OUT16(port,getAX());break;
++                }
++                setEIP(CodeOffset+size);bReturn=TRUE;
++            }
++            break;
+         case 0xf:
+             if (!CheckEIP(1)) {
+                 break;

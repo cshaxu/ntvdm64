@@ -1,0 +1,6 @@
+CHANGED=1
+p144 FAIL NESticle did not remain running with a visible graphics window (observer exit 0)
+CHANGED=1
+p218 FAIL NESticle did not remain running with a visible graphics window (observer exit 0)
+CHANGED=1
+p181 FAIL NESticle did not remain running with a visible graphics window (observer exit 0)

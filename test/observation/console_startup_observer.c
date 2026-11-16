@@ -2017,6 +2017,48 @@ done:
     free(pixels);CloseHandle(process);return ok;
 }
 
+/* Opt-in graphics startup witness on the observer's private desktop. Reuse
+ * frame capture and scoped key delivery; never activate the user's desktop. */
+static BOOL observer_graphics_escape_witness(const char *launcher,const char *report)
+{
+    char desktop[96],image[MAX_PATH],expected[MAX_PATH],*slash;
+    DWORD needed,pid=0,length=sizeof(image); HANDLE process;
+    HWND window; INPUT_RECORD keys[2]={0}; BOOL ok=FALSE;
+    const char *suffixes[]={"graphics-before","graphics-hidden","graphics-restored"};
+    unsigned phase;
+    if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17) ||
+        strlen(launcher)>=sizeof(expected))return FALSE;
+    strcpy(expected,launcher);slash=strrchr(expected,'\\');
+    if(!slash)slash=strrchr(expected,'/');
+    if(!slash)return FALSE;
+    strcpy(slash+1,"ntcon.exe");
+    window=FindWindowW(L"LibKvmWindow",NULL);
+    if(!window || !IsWindowVisible(window))return FALSE;
+    GetWindowThreadProcessId(window,&pid);
+    process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);
+    if(!process)return FALSE;
+    ok=QueryFullProcessImageNameA(process,0,image,&length) && !_stricmp(image,expected);
+    CloseHandle(process);if(!ok)return FALSE;
+    scripted_window_frontend=pid;
+    keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+    keys[0].Event.KeyEvent.wRepeatCount=1;keys[0].Event.KeyEvent.wVirtualKeyCode=VK_ESCAPE;
+    keys[0].Event.KeyEvent.wVirtualScanCode=1;
+    keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+    for(phase=0;phase<3;++phase) {
+        ULONGLONG deadline;
+        if(phase && !write_window_key_records(keys,2))return FALSE;
+        if(phase)Sleep(500); /* Test input pacing, not a product wait. */
+        deadline=GetTickCount64()+2000;
+        do {
+            ok=observer_capture_window_graphics(report,suffixes[phase]);
+            if(!ok)Sleep(25);
+        }while(!ok && GetTickCount64()<deadline);
+        if(!ok)return FALSE;
+    }
+    return TRUE;
+}
+
 int main(int argc, char **argv)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -3309,6 +3351,14 @@ managed_close_done: ;
     if(mouse_burst_started)mouse_burst_elapsed=(DWORD)(GetTickCount64()-mouse_burst_started);
     capture_process_image(child.dwProcessId, &image_identity);
     if (wait_status == WAIT_TIMEOUT) {
+        if(GetEnvironmentVariableA("MVDM_OBSERVER_GRAPHICS_ESCAPE_WITNESS",NULL,0)) {
+            char witness[MAX_PATH];FILE *record;
+            BOOL ok=observer_graphics_escape_witness(argv[1],argv[3]);
+            snprintf(witness,sizeof(witness),"%s.graphics-witness.txt",argv[3]);
+            if((record=fopen(witness,"w"))!=NULL) {
+                fprintf(record,"capture-and-input=%s\n",ok ? "pass" : "fail");fclose(record);
+            }
+        }
         /* Preserve peer state before terminating the launcher: its death can
          * cancel bootstrap/request I/O and erase the original wait relation.
          * Child snapshots restore their own suspend increments. */

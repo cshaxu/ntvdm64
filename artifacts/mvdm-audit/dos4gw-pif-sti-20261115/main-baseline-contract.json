@@ -1,0 +1,36 @@
+{
+  "status": "Unmodified production baseline observed through real CCPU -> host hook -> DpmiFaultHandler",
+  "source_head": "0d124164bd574cffc39f1f8fa6fdd44398e21bb8",
+  "fixture_sha256": "0904ed203ba2af9e8f867f864b570a96769ba4f4bc2188fc36c0c253d46b126f",
+  "cases": [
+    {
+      "case": 177,
+      "exit": 1,
+      "output": "DPMI_COMPLETION case=177 pass=0 faults=1 declined=1 flags=00000ed7 traps=0 trap_ip=00000000"
+    },
+    {
+      "case": 178,
+      "exit": 0,
+      "output": "DPMI_COMPLETION case=178 pass=1 faults=1 declined=0 flags=00000ed7 traps=0 trap_ip=00000000"
+    },
+    {
+      "case": 179,
+      "exit": 1,
+      "output": "DPMI_COMPLETION case=179 pass=0 faults=1 declined=0 flags=00000ed7 traps=0 trap_ip=00000000"
+    },
+    {
+      "case": 180,
+      "exit": 1,
+      "output": "DPMI_COMPLETION case=180 pass=0 faults=1 declined=0 flags=00003cd7 traps=0 trap_ip=00000000"
+    }
+  ],
+  "interpretation": {
+    "177": "CPL3/IOPL0 CLI is declined; no continuation to STI or marker.",
+    "178": "CPL3/IOPL0 existing MOV CR0 preserves initial IF because original setFLAGS refuses IF writes at that privilege. Positive baseline.",
+    "179": "Existing MOV CR0 with TF loses single-step; no #DB at completed instruction EIP1003.",
+    "180": "CPL3/IOPL3 existing MOV CR0 clears IF on successful emulation (3ed7 ->3cd7)."
+  },
+  "superseded_initial_probe": "First attempt did not explicitly set IF at CPL3/IOPL0;do not use it as IF-loss evidence. Logs retained in build/t483-s5-p222/baseline-*.",
+  "bounds": "Fault witness delegates to real DPMI,does not emulate;decline/repeat aborts to probe-only BOP exit. Each process has20-second deadline. No original guest touched.",
+  "next": "Preserve pre-fault flags on successful emulation;reuse CCPU existing inter-instruction processing for completed emulations while retaining STI delay;add bounded scalar decoder and tests."
+}

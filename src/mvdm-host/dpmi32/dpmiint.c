@@ -40,6 +40,14 @@ Comments:
 #include <softpc.h>
 #include <dpmiint.h>
 #include <intapi.h>
+extern ULONG c_getCS_BASE(void), c_getCS_LIMIT(void);
+extern USHORT c_getCS_AR(void);
+extern int c_getCPL(void);
+extern int c_getVM(void);
+extern VOID IN8(PULONG, ULONG), IN16(PULONG, ULONG), IN32(PULONG, ULONG);
+extern VOID OUT8(ULONG, ULONG), OUT16(ULONG, ULONG), OUT32(ULONG, ULONG);
+extern void ccpu386CompleteInstruction(void);
+#line 43
 
 
 VOID
@@ -529,6 +537,7 @@ Return Value:
 #line 529
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 530
 
     if (!(getMSW() & MSW_PE)) {
 
@@ -907,18 +916,22 @@ Return Value:
     SaveEFLAGS = getEFLAGS();
     SaveEIP = getEIP();
     SaveCS  = getCS();
+    /* Completed emulation owns the instruction's FLAGS. Only exception
+     * dispatch clears IF/TF; successful I/O and CR0 moves do not. */
+    if ((getMSW() & MSW_PE) && ((IntNumber == 13) || (IntNumber == 6)) &&
+            DpmiEmulateInstruction()) {
+        return TRUE;
+    }
+#line 898
     setEFLAGS(SaveEFLAGS & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK));
+#line 899
 
     if (!(getMSW() & MSW_PE)) {
         ReflectV86Int(IntNumber, getEFLAGS());
         return TRUE;
     }
 
-    if ((IntNumber == 13) || (IntNumber == 6)) {
-        if (DpmiEmulateInstruction()) {
-            return TRUE;
-        }
-    }
+#line 910
 
     if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
 #if defined(CPU_40_STYLE) && defined(CCPU)
@@ -1294,33 +1307,40 @@ Return Value:
 --*/
 
 {
-    //BUGBUG NEED TO RETURN FALSE HERE IF EIP WOULD BE OFF THE END OF SEGMENT
-    return TRUE;
+    ULONG Offset = (c_getCS_AR() & 0x4000) ? getEIP() : getIP();
+    ULONG Limit = c_getCS_LIMIT();
+    return Offset <= Limit && Increment <= Limit - Offset;
 }
 
 #ifndef i386
 #if defined(CPU_40_STYLE) && defined(CCPU)
-/* DIVERGENCE(MVDM-HOST-DIV-488): SIM32 maps the selector base, not an entire linear address range.  A
- * subsequent guest code page can therefore have an unrelated host alias.
- * Keep the existing SIM32 fallback for cases this non-faulting lookup cannot
- * resolve; exception delivery for those cases remains a separate boundary. */
+/* Fetch through the active CCPU CS cache and its page translation. A failed
+ * lookup declines emulation; it must not read an unrelated contiguous alias. */
 static BOOL
 DpmiMappedCodeByte(ULONG Base, ULONG Offset, PUCHAR Value)
 {
-    extern unsigned long c_getCR0(void);
     extern int xtrn2phy(unsigned long, unsigned char, unsigned long *);
     extern unsigned char *c_GetPhyAdd(unsigned long);
     ULONG physical = Base + Offset;
 
-    /* SIM32 owns a separate scratch alias for linear video memory. */
-    if ((Base >= 0xa0000UL && Base <= 0xbffffUL) ||
-        (physical >= 0xa0000UL && physical <= 0xbffffUL))
+    if (Offset > c_getCS_LIMIT() ||
+        ((getCR0() & 0x80000000UL) &&
+         !xtrn2phy(physical, c_getCPL() == 3 ? 6 : 4, &physical)))
         return FALSE;
-
-    if ((c_getCR0() & 0x80000000UL) &&
-        !xtrn2phy(physical, 0, &physical))
+    /* Device memory is not a host instruction alias. */
+    if (physical >= 0xa0000UL && physical <= 0xbffffUL)
         return FALSE;
     *Value = *c_GetPhyAdd(physical);
+    return TRUE;
+}
+
+static BOOL
+DpmiNextCodeByte(ULONG Offset, PULONG Length, PUCHAR Value)
+{
+    if (*Length >= 15 || !CheckEIP(*Length) ||
+        !DpmiMappedCodeByte(c_getCS_BASE(), Offset + *Length, Value))
+        return FALSE;
+    ++*Length;
     return TRUE;
 }
 #endif
@@ -1349,85 +1369,72 @@ Return Value:
 --*/
 
 {
-    PUCHAR pCode;
-    UCHAR Opcode;
-    ULONG SegCS;
+    UCHAR Opcode, Operands[2];
+    ULONG SegCS = getCS(), Length = 0;
+    BOOL Big = (c_getCS_AR() & 0x4000) != 0, Operand32 = Big;
+    ULONG Offset = Big ? getEIP() : getIP();
     BOOL bReturn = FALSE;
 
-#if defined(CPU_40_STYLE)
-#if defined(CCPU)
-    ULONG CodeBase, CodeOffset;
-    BOOL MappedCode;
-    UCHAR MappedOpcode, Operands[2];
-    extern UCHAR *__cdecl Sim32pGetVDMPointerWithLinear(ULONG, UCHAR, ULONG *);
-#endif
-#endif
-
-#line 1267
-    SegCS = getCS();
-#if defined(CPU_40_STYLE) && defined(CCPU)
-    pCode = Sim32pGetVDMPointerWithLinear(SegCS<<16, TRUE, &CodeBase);
-#else
-#line 1268
-#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
-#endif
-
-    /* A rejected SIM32 selector leaves dispatch to the original fault path. */
-    if (pCode == NULL) {
+    /* Only DPMI protected-mode exceptions reach this service. Prefixes do
+     * not acquire side effects; all operands are validated before dispatch. */
+    if (!(getMSW() & MSW_PE) || c_getVM())
         return FALSE;
+    for (;;) {
+        if (!DpmiNextCodeByte(Offset, &Length, &Opcode))
+            return FALSE;
+        switch (Opcode) {
+        case 0x66: Operand32 = !Big; continue;
+        case 0x67: case 0x26: case 0x2e: case 0x36: case 0x3e:
+        case 0x64: case 0x65: case 0xf2: case 0xf3: continue;
+        case 0xf0: return FALSE; /* LOCK is invalid for these instructions. */
+        }
+        break;
     }
-
-#if defined(CPU_40_STYLE)
-    /* INT 2Ah updates the CCPU LDT independently of DOSX's source table. */
-    if (Cpu40LdtShadowAddress == 0u)
-        return FALSE;
-#if defined(CCPU)
-    MappedCode = TRUE;
-#endif
-    if (((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))
-            [(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big) {
-#else
-#line 1270
-#error Unsupported non-CPU40 DPMI selector carrier
-#endif
-        CodeOffset = getEIP();
-#line 1271
-        pCode += getEIP();
-    } else {
-        CodeOffset = getIP();
-#line 1273
-        pCode += getIP();
-    }
-
-#if defined(CPU_40_STYLE) && defined(CCPU)
-DecodeInstruction:
-    if (MappedCode)
-        MappedCode = DpmiMappedCodeByte(CodeBase, CodeOffset, &Opcode);
-    if (!MappedCode)
-#endif
-        Opcode = *pCode;
-    pCode++;
-#line 1277
     switch (Opcode) {
+        case 0xfa:
+        case 0xfb:
+        {
+            extern unsigned char *c_GetPhyAdd(unsigned long);
+            volatile LONG *State = (volatile LONG *)c_GetPhyAdd(FIXED_NTVDMSTATE_LINEAR);
+            if (Opcode == 0xfb)
+                InterlockedOr(State, VIRTUAL_INTERRUPT_BIT);
+            else
+                InterlockedAnd(State, ~VIRTUAL_INTERRUPT_BIT);
+            setIF(Opcode == 0xfb);
+            bReturn = TRUE;
+            break;
+        }
+        case 0xe4: case 0xe5: case 0xe6: case 0xe7:
+        case 0xec: case 0xed: case 0xee: case 0xef:
+        {
+            ULONG Port = getDX(), Value;
+            if (Opcode < 0xe8) {
+                if (!DpmiNextCodeByte(Offset, &Length, &Operands[0]))
+                    return FALSE;
+                Port = Operands[0];
+            }
+            switch (Opcode & 3) {
+            case 0: IN8(&Value, Port); setAL((UCHAR)Value); break;
+            case 1:
+                if (Operand32) { IN32(&Value, Port); setEAX(Value); }
+                else { IN16(&Value, Port); setAX((USHORT)Value); }
+                break;
+            case 2: OUT8(Port, getAL()); break;
+            case 3:
+                if (Operand32) OUT32(Port, getEAX());
+                else OUT16(Port, getAX());
+                break;
+            }
+            bReturn = TRUE;
+            break;
+        }
         case 0xf:
-            if (!CheckEIP(1)) {
+            if (!DpmiNextCodeByte(Offset, &Length, &Operands[0]) ||
+                (Operands[0] != 0x20 && Operands[0] != 0x22) ||
+                !DpmiNextCodeByte(Offset, &Length, &Operands[1]))
                 break;
-            }
-#if defined(CPU_40_STYLE) && defined(CCPU)
-            if (MappedCode) {
-                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 1, &Operands[0]) ||
-                    ((Operands[0] == 0x20 || Operands[0] == 0x22) &&
-                     !DpmiMappedCodeByte(CodeBase, CodeOffset + 2, &Operands[1]))) {
-                    MappedCode = FALSE;
-                    --pCode;
-                    goto DecodeInstruction;
-                }
-                bReturn = DpmiOp0f(Operands);
-                break;
-            }
-#endif
 #line 1282
-            bReturn = DpmiOp0f(pCode);
+            bReturn = DpmiOp0f(Operands);
             break;
 
         case 0x8e:
@@ -1437,35 +1444,32 @@ DecodeInstruction:
             // then zero them out.
             // BUGBUG currently only looking for FS, GS
             //
-            if (!CheckEIP(2)) {
+            if (!DpmiNextCodeByte(Offset, &Length, &Operands[0]))
                 break;
-            }
-#if defined(CPU_40_STYLE) && defined(CCPU)
-            if (SegCS == DosxRmCodeSelector && MappedCode) {
-                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 1, &MappedOpcode)) {
-                    MappedCode = FALSE;
-                    --pCode;
-                    goto DecodeInstruction;
-                }
-                pCode = &MappedOpcode;
-            }
-#endif
 #line 1295
             //
             // Look for code in dxutil.asm EnterProtectedMode
             //
 #line 1298
             if ((SegCS == DosxRmCodeSelector) &&
-                ((*pCode == 0xe0)  ||               // mov fs, ax
-                 (*pCode == 0xe8))                  // mov gs, ax
+                ((Operands[0] == 0xe0) ||          // mov fs, ax
+                 (Operands[0] == 0xe8))            // mov gs, ax
                     ) {
-                setEIP(getEIP()+2);
+#line 1303
                 bReturn = TRUE;
             }
             break;
     }
 
+#line 1308
     DBGTRACE(DPMI_OP_EMULATION, Opcode, (ULONG) bReturn, 0);
+    if (bReturn) {
+        setEIP(Offset + Length);
+        /* Like native CCPU STI, delay interrupt delivery by one instruction. */
+        if (Opcode != 0xfb)
+            ccpu386CompleteInstruction();
+    }
+#line 1309
     return bReturn;
 }
 

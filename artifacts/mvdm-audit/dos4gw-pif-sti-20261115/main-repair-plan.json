@@ -1,5 +1,5 @@
 {
-  "status": "Owner-authorized P222 follows P221 delivery;implementation not started",
+  "status": "Implemented and verified;production evidence in main-production-candidate.json;Git delivery accompanies receipt",
   "parent_packet": "M0 T483 S5",
   "regression": {
     "good": "4da94a64d30b755586cb62ab366086485beeeb67",
@@ -38,5 +38,20 @@
     "O:\\winnt\\NESTICLE.EXE": "224e348e1fd5c11b16ef096ff5607c7c57c49d65fa7e4dbbc9b2a5c9c53e832b",
     "O:\\winnt\\DOS4GW.PIF": "90e2be3c99b662e5dbe936445b7da0b522464dbd5fba4478721a6b517368e098",
     "O:\\winnt\\DOS4GW.NT": "7bcc18771c394e4b5797409cbcf7798b8bf852de64b231d6c92ef7c37416aba2"
-  }
+  },
+  "source_findings": [
+    "DpmiFaultHandler saves flags then clears IF/TF before successful emulation return.",
+    "CheckEIP unconditionally returns TRUE.",
+    "c_xcptn.c contributory_exception clears contributory state after successful hook then c_cpu_continue; c_cpu_continue clears debug_exception_pending and resumes c_main NEXT_INST.",
+    "Completed IN/OUT with TF must be tested at its own boundary; merely restoring TF resumes next guest instruction first.",
+    "Existing CCPU STI goes directly NEXT_INST,delaying IRQ by one instruction;reuse actual boundary rather than immediate PIC acknowledgement."
+  ],
+  "baseline_contract": "main-baseline-contract.json",
+  "implementation_direction": [
+    "Restore flags contract by attempting protected instruction emulation before clearing IF/TF for exception dispatch;failure keeps original dispatch.",
+    "Use existing CPU CS base/limit/AR and bounded per-byte translation for decoder;all bytes validated before I/O effects.",
+    "Distinguish a completed emulation from an exception dispatch using the existing per-thread CPU simulation frame;reuse existing post-instruction debug/IRQ block,do not copy PIC dispatch. STI retains original next-instruction delay."
+  ],
+  "completion_candidate": "main-completion-diff.json",
+  "production_evidence": "main-production-candidate.json"
 }

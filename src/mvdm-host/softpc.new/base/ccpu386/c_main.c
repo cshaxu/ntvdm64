@@ -788,7 +788,11 @@ IFN1(
 #line 769
 #ifdef NTVDM
 #line 770
-   setjmp(*ccpu386ThrdExptnPtr());
+   if (setjmp(*ccpu386ThrdExptnPtr()) == CCPU_COMPLETED_INSTRUCTION) {
+      start_trap = GET_TF();
+      CCPU_save_EIP = GET_EIP();
+      goto HOST_INSTRUCTION_COMPLETE;
+   }
 #line 771
 #else
 #line 772
@@ -4256,8 +4260,10 @@ TYPEFF_3:
 #line 4330
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
+HOST_INSTRUCTION_COMPLETE:
 #line 4332
    quick_mode = FALSE;
+#line 4333
 
    /* Action RESET first. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 #ifdef SYNCH_TIMERS

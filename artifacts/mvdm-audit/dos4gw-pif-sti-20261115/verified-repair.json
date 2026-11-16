@@ -1,0 +1,17 @@
+{
+  "status": "Owner startup acceptance met by isolated host-only candidate; production files not changed or published",
+  "acceptance": "Owner explicitly accepts reaching the rendered NESticle screen; no gameplay or general instruction-compatibility claim required",
+  "regression": "9078b7168 P103, parent 4da94a64d P102 good",
+  "repair": "Add scoped virtual CLI/STI and scalar port I/O handling to the existing DPMI protected-fault emulation path; synchronize virtual interrupt flag and CCPU IF, advance EIP, route ports to existing CCPU device providers. Retain original host_exint_hook delegation and CPU privilege checks. Do not restore all removed monitor decoder code.",
+  "candidate": "candidate.patch",
+  "verification": [
+    "Current P218-based isolated candidate renders the NESticle menu",
+    "Same candidate with real CreateEnvironmentBlock logon environment and original PIF short PATH renders NESticle menu",
+    "Two scoped Escape scan-code messages hide and restore the menu; rendered frames retained"
+  ],
+  "limits": [
+    "Candidate not installed to O:/winnt, committed or pushed",
+    "Candidate demonstrates requested startup repair; production implementation should retain bounded decoding and correct instruction width/unsupported-opcode fallback",
+    "Long PATH DOS4GW guest overflow remains handled by the existing explicit PIF configuration"
+  ]
+}

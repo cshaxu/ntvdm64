@@ -52,14 +52,15 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P221 package `bf48125e-5657-4ce3-ac9d-5b11b188c1df` published11x2;hashes verified.
-clmenu396->343(-53);original parser signatures,CLIENTINFO predicate and cast
-increments restored.12 restored points;2 minimized residual decisions pending.
-Cached x86/x64,menu-resource/32 controls,Full19 and governance passed.
-Cumulative365-file diff119913->104526(-15387). Guest/winnt.zip unchanged.
-DOS4GW remains assigned to side session,not claimed repaired.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p221-checkpoint.json).
-Next:P222 DPMI/DOS4GW repair,then R2175.
+P222 package `0d88e43b-0bda-4e17-923e-ee932848a89d` published11x2;hashes verified.
+DPMI protected CLI/STI and bounded scalar I/O use original providers;successful
+emulation resumes the original CPU completion boundary, preserving FLAGS/TF/IRQ.
+Four files add74 mirror-diff lines;registered supplemental pending decision.
+Cached x86/x64,58 CCPU cases,Full20 including actual NESticle,and Win3.1
+four mode/DOSONLY profiles passed. Published menu and Escape transitions verified.
+Cumulative365-file diff119913->104600(-15313). Guest/winnt.zip unchanged.
+[Repair receipt](../../artifacts/mvdm-audit/dos4gw-pif-sti-20261115/main-production-candidate.json).
+Git delivery accompanies receipt;ordered audit resumes at R2175.
 
 ## Remaining Scope
 
@@ -133,33 +134,8 @@ P17–P149 historical batch receipts and reviews remain indexed in the
 [active audit evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md).
 The latest published baseline and active work are reported above.
 
-P176 final:environ14->11(-3);ordinary semantic diff removed,excluded11 retained;449 MSVC lines match. Original RTL names restored with x86/x64 provider and private-PEB clone proof. Cached,publish11x2,focused,Full19,RDP Clipboard18 passed. First RDP failure was confirmed RadeonSoftware Clipboard occupancy;unchanged retry passed. Package 83adbf7e-5ee3-4e21-b906-e339b3085d6a;Git accompanies receipt.
-
-P181 srvvdm.c93->84(-9):redundant comment/null-output guard removed;CRLF and endif logical lines restored;2317 original lines match. Notification current5/5,original control3 failures;native casts fail actual x64 build. Cached,publish11x2,service/Full passed;10 residual decisions;Git accompanies receipt.
-
-P186 apimsg533->7(-526):original descriptors and complete function bodies restored;header binding2 remains pending,excluded5 retained. 276 MSVC-selected lines match original;cached,publish11x2,Full and actual DOS NetMessage failure/retirement passed. Prior-package shared RDP Clipboard recheck remains unsuccessful due recorded external ownership;not a new pass. Git accompanies receipt.
-
-P187 apisrv1067->190(-877):original linkable bodies and error semantics restored;includes4 and Enum3 omission180 pending,excluded6 retained.901 source/607 MSVC lines match;focused37,cached,publish11x2,Full passed. Original C4701 remains disclosed;RDP shared Clipboard still fails with external holders. Git accompanies receipt.
-
-P206 rapdebug.h8 unchanged(all excluded),raw12->10(-2):else60 restored;DBG#error retained;2 actual contexts/6 preprocessings equal;35 source lines match;DBG negative passes. P187 product and P205 RDP evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p206-checkpoint.json).
-
-P207 winddi.h41 unchanged(all excluded),raw44->43(-1):else2406 restored;_X86_#error retained;actual WOW32 fax context tokens/1357 lines equal;2040 source lines match;negative passes. P187 product and P205 RDP evidence reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p207-checkpoint.json).
-
-P208 ntcsrmsg.h6->4(-2),raw7->4(-3):original comments/natural lines restored;two native-width capture fields remain pending. x86 three controls pass;x64 original header misaligns captured STARTUPINFOA,before/final pass;ABI evidence,not user crash.108 retained lines match;no behavior change. P187 product reused. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p208-checkpoint.json).
-P209 ntexapi.h1777->1188(-589):ordinary original declarations restored;11 points restored/confirmed,7 SDK/shared-type boundaries pending;531 retained lines match;9 errors retained,6 negative profiles. Cached full x86/x64,publish11x2,isolated Full passed;external DOS4GW fixture remains skip. Package bf035245-2b15-4945-8aac-0d8751d60635. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p209-checkpoint.json).
-
-P210 ntlpcapi.h13 unchanged(all excluded),raw24->17(-7):else48/endif134 restored;5 errors retained;11 line directives reduced to4.28 actual contexts/84 preprocessings tokens and212 header lines match;285 retained source lines match;3 negative controls. P209 product reused;365-file cumulative mirror reduction6836 unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p210-checkpoint.json).
-
-P211 ntpsapi.h1268->363(-905),raw1313->411(-902):original declarations and imported NtAlertThread restored;local forwarder removed;WOW duplicate declarations removed;3 restored,3 precise SDK/PEB residuals pending.729 source lines and339/340 selected lines match;5 errors retained. Final cached,publish11x2,Full,focused x86/x64 thread tests passed;external DOS4GW skip. Cumulative365-file reduction7741. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p211-checkpoint.json).
-
-P212 ntregapi.h469->16(-453),raw479->21(-458):ordinary declarations restored;copied compat registry types/prototypes removed. Only two SDK duplicate types and3 import decorators pending;2 C++ errors retained.423 source lines and292 selected lines per profile/binding context match original. Final cached,publish11x2,focused registry/Full passed;external DOS4GW skip. Cumulative365-file reduction8194. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p212-checkpoint.json).
-
-P215 vdmdbg.h: no non-exclusion diff;three errors retained. Core140 unchanged,raw146->142(-4);330 source lines and188 selected lines in4 actual contexts match;12 preprocessings,4 compiles and2 negatives pass. P214 product reused and11x2 hashes reverified. Cumulative reduction15055 unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p215-checkpoint.json).
-
-P216 delivered: whole BUTTON file complete;87->19(-68),12 minimized residual
-decisions remain;not exclusion-only. Cached,publish11x2,29 focused fixtures,
-final button assertions andFull19 passed. Cumulative mirror reduction15123.
-[Review](../../artifacts/mvdm-audit/t483-remaining-reaudit/p216-button-review.json).
+P176–P218 delivery details remain indexed in the active audit README; their
+receipts retain source, line, publication and test evidence.
 
 P219 DOS4GW supplement is delegated by owner to a separate session. Current PIF and direct minimal-environment runs failed to reach graphics; retained diagnostics are not acceptance. Preserve its uncommitted test changes; this session does not debug that issue.
 
@@ -175,4 +151,12 @@ side-session test edits;no guest changes,Computer Use or unrelated sevid019 fix.
 [Plan](../../artifacts/mvdm-audit/dos4gw-pif-sti-20261115/main-repair-plan.json).
 Resume ordered R2175 audit after this repair is delivered.
 
-P221 verified/published:clmenu396->343(-53);original parser signatures,CLIENTINFO predicate and cast increments restored.12 points restored/confirmed;header3 and SetMenu6 pending owner.340 source/222 selected lines;cached,publish11x2,menu-resource/32 controls,Full19 and governance passed. Package bf48125e-5657-4ce3-ac9d-5b11b188c1df. Cumulative mirror reduction15387. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p221-checkpoint.json). Next:P222 DPMI/DOS4GW repair,then R2175.
+P221 verified/published:clmenu396->343(-53);original parser signatures,CLIENTINFO predicate and cast increments restored.12 points restored/confirmed;header3 and SetMenu6 pending owner.340 source/222 selected lines;cached,publish11x2,menu-resource/32 controls,Full19 and governance passed. Package bf48125e-5657-4ce3-ac9d-5b11b188c1df. Cumulative mirror reduction15387. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p221-checkpoint.json). P222 DPMI/DOS4GW repair is active;R2175 follows its delivery.
+
+
+P222 acceptance:actual published NESticle menu/Escape;Full20;58 CCPU cases
+(including48 scalar combinations and16 decode controls);Win3.1 std/386 x
+DOSONLY0/1 startup and normal exit. Probe copy removed. Inherited large-agent
+environment COMMAND failure is separate;standard fixture uses minimal environment
+and the original short-PATH PIF. Strings/CLTS/LMSW/privileged MOV DR remain
+unimplemented,not claimed repaired. Necessary residual +74 remains pending.

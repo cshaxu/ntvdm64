@@ -1,0 +1,67 @@
+{
+  "status": "Local candidate:completion cases178/179/180 pass;CLI case177 not yet implemented;not published",
+  "owner_scope": "P222 requested correct FLAGS,TF and IRQ boundaries with necessary mirror differences registered",
+  "points": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+      "before_sha256": "619cf740374a4271c8a4bca763eba6909ab5bbc737cdf64d5eff243b13dc14ec",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntthread.h",
+      "before": 1,
+      "after": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+      "before_sha256": "4b2d93eb4c2658e350bec5a4e1cbac60b852f0e410ac665eeed8c57a2f4b9442",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntthread.c",
+      "before": 15,
+      "after": 32
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "before_sha256": "a4259569853ba4336646b4006bf8e28cfbcbcfa66fda221a8dcabedd6c8fcd99",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "before": 764,
+      "after": 769
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "before_sha256": "1d93cd566f1dcef1442bff00f2b6bd703372f3a555e2cdf95de957f6b2de54b1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "before": 278,
+      "after": 292
+    }
+  ],
+  "net_mirror_diff_increase": 38,
+  "proof": "main-baseline-contract.json cases179/180 demonstrate TF/IF failures;case178 is the IOPL0 positive control",
+  "design": "Existing per-thread simulation frame holds one completion flag;existing exception cleanup and host callback remain unchanged;CCPU resumes existing completed-instruction event block. No copied interrupt dispatcher.",
+  "pending_decision": "Retained minimum completion adaptation to be reviewed after full verification;record remains pending,not silently approved as permanent mirror difference.",
+  "verification": [
+    {
+      "case": 177,
+      "exit": 1,
+      "output": "DPMI_COMPLETION case=177 pass=0 faults=1 declined=1 flags=00000ed7 traps=0 trap_ip=00000000"
+    },
+    {
+      "case": 178,
+      "exit": 0,
+      "output": "DPMI_COMPLETION case=178 pass=1 faults=1 declined=0 flags=00000ed7 traps=0 trap_ip=00000000"
+    },
+    {
+      "case": 179,
+      "exit": 0,
+      "output": "DPMI_COMPLETION case=179 pass=1 faults=1 declined=0 flags=00000ed7 traps=1 trap_ip=00001003"
+    },
+    {
+      "case": 180,
+      "exit": 0,
+      "output": "DPMI_COMPLETION case=180 pass=1 faults=1 declined=0 flags=00003ed7 traps=0 trap_ip=00000000"
+    }
+  ],
+  "line_correction": "c_main quick_mode remains original logical4332;label moved before #line after test,code tokens unchanged",
+  "current_source_hashes": {
+    "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+    "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": "f6905af0be43fbb00524e7f3eb56c5dce640b81b4e9e0600d6de5f16e5b83232",
+    "src/mvdm-host/dpmi32/dpmiint.c": "8fe29786441fa66d62cdd3190d03cc1483787c7a07c97b600c939edc732b0fe0"
+  }
+}

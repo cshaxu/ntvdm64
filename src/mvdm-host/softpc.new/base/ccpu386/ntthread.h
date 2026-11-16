@@ -8,4 +8,7 @@ extern void ccpu386AbandonSimulate(jmp_buf *frame);
 #line 7
 extern jmp_buf *ccpu386ThrdExptnPtr();
 extern void ccpu386GotoThrdExptnPt();
+#define CCPU_COMPLETED_INSTRUCTION 2
+extern void ccpu386CompleteInstruction(void);
+#line 9
 

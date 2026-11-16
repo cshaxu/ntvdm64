@@ -3,7 +3,9 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$FixtureRoot,
     [Parameter(Mandatory)][string]$ReportRoot,
-    [switch]$MinimalEnvironment
+    [Parameter(Mandatory)][string]$PifPath,
+    [string]$Python='python',
+    [switch]$MinimalEnvironment=$true
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -20,14 +22,52 @@ $expected=@{
 foreach($name in $expected.Keys) {
     if((Get-IsolatedFileSha256 (Join-Path $FixtureRoot $name)) -ne $expected[$name]) { throw "Fixture identity mismatch: $name" }
 }
+$pifInputs=@{}
+$pifTool=Join-Path $repo 'assets/release/PIF.EXE'
+if($PifPath) {
+    $PifPath=(Resolve-Path -LiteralPath $PifPath).Path
+    $FixtureRoot=(Resolve-Path -LiteralPath $FixtureRoot).Path
+    $fields=@{}
+    & $pifTool show $PifPath | ForEach-Object {
+        $pair=$_ -split '=',2
+        if($pair.Count -eq 2) { $fields[$pair[0]]=$pair[1] }
+    }
+    if($LASTEXITCODE) { throw 'Cannot read fixture PIF' }
+    if($fields.PROGRAM -ine (Join-Path $FixtureRoot 'DOS4GW.EXE') -or
+       $fields.DIRECTORY -ine $FixtureRoot -or $fields.ARGUMENTS -or $fields.'W386.ARGUMENTS') {
+        throw 'PIF must select fixture DOS4GW with its fixture directory and no preset arguments'
+    }
+    foreach($path in @($PifPath,$fields.CONFIG,$fields.AUTOEXEC)) {
+        $pifInputs[$path]=Get-IsolatedFileSha256 $path
+    }
+}
 $stage=$null; $scope=$null
 try {
-    $stage=New-PhysicalRuntimeStage $RuntimeRoot -FreshPackageIdentity
+    $stage=New-PhysicalRuntimeStage $RuntimeRoot
     $scope=New-IsolatedPackageScope $stage
     foreach($name in $expected.Keys) {
         Copy-Item -LiteralPath (Join-Path $FixtureRoot $name) -Destination (Join-Path $stage $name)
         if((Get-IsolatedFileSha256 (Join-Path $stage $name)) -ne $expected[$name]) { throw "Fixture copy mismatch: $name" }
     }
+    $target=Join-Path $stage 'DOS4GW.EXE'
+    if($PifPath) {
+        $target=Join-Path $stage 'DOS4GW.PIF'
+        Copy-Item -LiteralPath $PifPath -Destination $target
+        foreach($field in @('CONFIG','AUTOEXEC')) {
+            $destination=Join-Path $stage ($field+'.NT')
+            $text=[Text.Encoding]::Latin1.GetString([IO.File]::ReadAllBytes($fields[$field]))
+            $text=$text.Replace($FixtureRoot,$stage,[StringComparison]::OrdinalIgnoreCase)
+            [IO.File]::WriteAllBytes($destination,[Text.Encoding]::Latin1.GetBytes($text))
+        }
+        & $pifTool replace-root $target --from $FixtureRoot --to $stage
+        if($LASTEXITCODE) { throw 'Cannot relocate isolated PIF' }
+        & $pifTool update $target --config (Join-Path $stage 'CONFIG.NT') --autoexec (Join-Path $stage 'AUTOEXEC.NT')
+        if($LASTEXITCODE) { throw 'Cannot bind isolated PIF configuration' }
+        & $pifTool show $target | Set-Content -LiteralPath (Join-Path $out 'staged-pif.txt')
+        if($LASTEXITCODE) { throw 'Cannot verify isolated PIF' }
+    }
+    @{FixtureHashes=$expected;PifInputs=$pifInputs;PifPath=$PifPath;MinimalEnvironment=[bool]$MinimalEnvironment} |
+        ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $out 'inputs.json')
     Copy-Item -LiteralPath (Join-Path $stage 'product-system32-manifest.json') -Destination (Join-Path $out 'runtime-manifest.json')
     $launcher=Join-Path (Get-PackageBinaryRoot $stage) 'run16.exe'
     $report=Join-Path $out 'nesticle.txt'
@@ -45,9 +85,18 @@ try {
     }
     $start.Environment['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
     $start.Environment['MVDM_OBSERVER_SHORT_HISTORY']='1'
-    foreach($arg in @($launcher,$stage,$report,(Join-Path $stage 'DOS4GW.EXE'),'NESTICLE.EXE','--observation-timeout-ms','15000')) { $start.ArgumentList.Add($arg) }
+    $start.Environment['MVDM_OBSERVER_GRAPHICS_ESCAPE_WITNESS']='1'
+    foreach($arg in @($launcher,$stage,$report,$target,'NESTICLE.EXE','--observation-timeout-ms','15000')) { $start.ArgumentList.Add($arg) }
     $process=[Diagnostics.Process]::Start($start)
-    try { $process.WaitForExit(); $observerExit=$process.ExitCode } finally { $process.Dispose() }
+    @{ObserverPid=$process.Id;Command=$start.FileName;Arguments=@($start.ArgumentList);DeadlineSeconds=45} |
+        ConvertTo-Json -Depth 4 | Set-Content (Join-Path $out 'observer-process.json')
+    try {
+        if(!$process.WaitForExit(45000)) {
+            & taskkill.exe /PID $process.Id /T /F | Out-Null
+            throw 'DOS4GW observer exceeded its 45-second test deadline'
+        }
+        $observerExit=$process.ExitCode
+    } finally { $process.Dispose() }
     if(!(Test-Path -LiteralPath $report)) { throw "Observer failed without report (exit $observerExit)" }
     $result=Get-Content -LiteralPath $report -Raw
     $console=if(Test-Path "$report.console.txt") {Get-Content "$report.console.txt" -Raw} else {''}
@@ -57,11 +106,20 @@ try {
     if($result -notmatch '(?m)^result=timeout\r?$' -or $live -notmatch '(?m)^window pid=\d+ visible=1 class=LibKvmWindow\b') {
         throw "NESticle did not remain running with a visible graphics window (observer exit $observerExit)"
     }
-    'PASS DOS4GW NESticle remains active with a visible graphics window; gameplay and rendered pixels are not asserted'
+    if(!(Test-Path "$report.graphics-witness.txt") -or
+       (Get-Content "$report.graphics-witness.txt" -Raw) -notmatch 'capture-and-input=pass') {
+        throw 'Graphics capture or scoped Escape input failed'
+    }
+    & $Python "$PSScriptRoot/check-nesticle-frames.py" $report
+    if($LASTEXITCODE){throw 'NESticle rendered menu/keyboard witness failed'}
+    'PASS DOS4GW NESticle renders its menu and responds to Escape; ROM gameplay is outside this test'
 } finally {
     if($scope) { Stop-IsolatedPackageScope $scope }
     if($stage) { Remove-PhysicalRuntimeStage $stage }
     foreach($name in $expected.Keys) {
         if((Get-IsolatedFileSha256 (Join-Path $FixtureRoot $name)) -ne $expected[$name]) { throw "Original fixture changed: $name" }
+    }
+    foreach($path in $pifInputs.Keys) {
+        if((Get-IsolatedFileSha256 $path) -ne $pifInputs[$path]) { throw "Original PIF input changed: $path" }
     }
 }

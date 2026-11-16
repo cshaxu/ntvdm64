@@ -1,0 +1,5 @@
+CHANGED=1
+PASS DOS4GW NESticle remains active with a visible graphics window; gameplay and rendered pixels are not asserted
+p102 PASS
+CHANGED=1
+p103 FAIL NESticle did not remain running with a visible graphics window (observer exit 0)

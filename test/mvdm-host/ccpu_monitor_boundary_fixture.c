@@ -5,6 +5,7 @@
 #include <host_def.h>
 #include <xt.h>
 #include <ios.h>
+#include <vint.h>
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_ccpu_wait.h"
@@ -563,6 +564,235 @@ static int protected_cursor_copy_loop(void) {
     }
     return 1;
 }
+
+/* Observe actual CCPU -> registered DPMI dispatch, with a bounded escape
+ * on failure. The witness never emulates the instruction under test. */
+static ULONG dpmi_completed_traps, dpmi_completed_ip, dpmi_declines;
+static ULONG dpmi_escape_ip;
+static BOOL dpmi_completion_witness(ULONG vector, ULONG error)
+{
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    BOOL handled;
+    if (vector == 1) {
+        ++dpmi_completed_traps;
+        dpmi_completed_ip = c_getEIP();
+        c_setEFLAGS(c_getEFLAGS() & ~0x100u);
+        return TRUE;
+    }
+    ++test_fault;
+    if (test_fault > 4) {
+        ++dpmi_declines;
+        c_setEIP(dpmi_escape_ip);
+        c_setEFLAGS(c_getEFLAGS() & ~0x100u);
+        return TRUE;
+    }
+    handled = DpmiFaultHandler(vector, error);
+    if (!handled) {
+        ++dpmi_declines;
+        c_setEIP(dpmi_escape_ip);
+        c_setEFLAGS(c_getEFLAGS() & ~0x100u);
+    }
+    return TRUE;
+}
+static int dpmi_completed_instruction(void)
+{
+    UCHAR ldt[40] = {0};
+    const UCHAR cli_sti[] = {0xfa,0xfb,0xb8,0xef,0xbe,0xd6,0xfe};
+    const UCHAR cr0[] = {0x0f,0x20,0xc0,0xbb,0xef,0xbe,0xd6,0xfe};
+    const ULONG flags = 0xed7u; /* OF/DF/IF/SF/ZF/AF/PF/CF, IOPL0. */
+    ULONG actual;
+    BOOL ok;
+    char line[220];
+    c_cpu_init();
+    *(ULONG *)(ldt+0x18)=0x0000ffffu;
+    *(ULONG *)(ldt+0x1c)=0x0000fa0fu;
+    *(ULONG *)(ldt+0x20)=0x0000ffffu;
+    *(ULONG *)(ldt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt));
+    CopyMemory(c_GetPhyAdd(0xf1000),test_case==177 ? cli_sti : cr0,
+               test_case==177 ? sizeof(cli_sti) : sizeof(cr0));
+    c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
+    c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27);
+    c_setSP(0x800); c_setIOPL(0); c_setEIP(0x1000); c_setBX(0); c_setEAX(0);
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0);
+    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000); Cpu40LdtShadowAddress=0x3000;
+    ZeroMemory(DpmiFaultHandlers,sizeof(FAULT_HANDLER)*32);
+    *(ULONG *)c_GetPhyAdd(FIXED_NTVDMSTATE_LINEAR)=VIRTUAL_INTERRUPT_BIT;
+    c_setIOPL(test_case==180 ? 3 : 0);
+    c_setEFLAGS(flags | (test_case==179 ? 0x100u : 0));
+    c_setIF(1); /* c_setEFLAGS deliberately obeys CPL/IOPL for IF. */
+    test_fault=dpmi_completed_traps=dpmi_completed_ip=dpmi_declines=0;
+    dpmi_escape_ip=test_case==177 ? 0x1005 : 0x1006;
+    VdmInstallFaultHandler((void *)dpmi_completion_witness);
+    c_cpu_simulate(); VdmInstallFaultHandler(NULL);
+    actual=c_getEFLAGS();
+    ok=!dpmi_declines && (actual & flags)==flags;
+    if(test_case==177) ok=ok && test_fault==2 && c_getAX()==0xbeef &&
+        (*(ULONG *)c_GetPhyAdd(FIXED_NTVDMSTATE_LINEAR)&VIRTUAL_INTERRUPT_BIT);
+    else ok=ok && test_fault==1 && c_getBX()==0xbeef;
+    if(test_case==179) ok=ok && dpmi_completed_traps==1 && dpmi_completed_ip==0x1003;
+    wsprintfA(line,"DPMI_COMPLETION case=%d pass=%d faults=%lu declined=%lu flags=%08lx traps=%lu trap_ip=%08lx\n",
+        test_case,ok,test_fault,dpmi_declines,actual,dpmi_completed_traps,dpmi_completed_ip);
+    report(line); return ok;
+}
+
+static unsigned scalar_calls, scalar_width, scalar_bad;
+static ULONG scalar_value;
+static void scalar_inb(io_addr port, half_word *value)
+{
+    if(port!=0x80) ++scalar_bad;
+    ++scalar_calls; scalar_width=1; *value=0xa5;
+}
+static void scalar_inw(io_addr port, word *value)
+{
+    if(port!=0x80+2*scalar_calls) ++scalar_bad;
+    ++scalar_calls; scalar_width=2; *value=port==0x80 ? 0xa55a : 0xc33c;
+}
+static void scalar_outb(io_addr port, half_word value)
+{
+    if(port!=0x80) ++scalar_bad;
+    ++scalar_calls; scalar_width=1; scalar_value=value;
+}
+static void scalar_outw(io_addr port, word value)
+{
+    if(port!=0x80+2*scalar_calls) ++scalar_bad;
+    scalar_value|=(ULONG)value<<(16*scalar_calls);
+    ++scalar_calls; scalar_width=2;
+}
+static void dpmi_scalar_setup(BOOL big, ULONG limit)
+{
+    UCHAR ldt[40]={0};
+    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
+    c_cpu_init(); io_init();
+    io_define_inb(adapter,scalar_inb); io_define_outb(adapter,scalar_outb);
+    Ios_inw_function[adapter]=scalar_inw; Ios_outw_function[adapter]=scalar_outw;
+    io_connect_port(0x80,adapter,IO_READ_WRITE);
+    io_connect_port(0x82,adapter,IO_READ_WRITE);
+    *(ULONG *)(ldt+0x18)=limit;
+    *(ULONG *)(ldt+0x1c)=0x0000fa0fu|(big ? 0x00400000u : 0);
+    *(ULONG *)(ldt+0x20)=0xffff;
+    *(ULONG *)(ldt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt));
+    c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
+    c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27);
+    c_setSP(0x800); c_setIOPL(0); c_setEIP(0x1000); c_setEAX(0x12345678);
+    CCPU_GR[2]=0x80;
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0);
+    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000); Cpu40LdtShadowAddress=0x3000;
+    ZeroMemory(DpmiFaultHandlers,sizeof(FAULT_HANDLER)*32);
+    c_setEFLAGS(0xed7); c_setIF(1);
+    scalar_calls=scalar_width=scalar_bad=scalar_value=0;
+    test_fault=dpmi_declines=dpmi_completed_traps=dpmi_completed_ip=0;
+}
+/* Execute every scalar encoding through the real permission fault and DPMI
+ * callback. The endpoint records width, port and value independently. */
+static int dpmi_scalar_matrix(void)
+{
+    const UCHAR opcodes[]={0xe4,0xe5,0xe6,0xe7,0xec,0xed,0xee,0xef};
+    unsigned big,prefix,k,total=0;
+    for(big=0;big<2;++big) for(prefix=0;prefix<3;++prefix) for(k=0;k<8;++k) {
+        UCHAR code[20]; unsigned n=0,width,expected_calls;
+        ULONG mask,expected; BOOL ok; char line[220];
+        dpmi_scalar_setup(big,0xffff);
+        if(prefix) code[n++]=0x66;
+        if(prefix==2) {code[n++]=0x66;code[n++]=0x67;code[n++]=0x2e;}
+        code[n++]=opcodes[k]; if(k<4) code[n++]=0x80;
+        dpmi_escape_ip=0x1000+n;
+        code[n++]=0xd6;code[n++]=0xfe;
+        CopyMemory(c_GetPhyAdd(0xf1000),code,n);
+        c_setEFLAGS(c_getEFLAGS()|0x100);
+        VdmInstallFaultHandler((void *)dpmi_completion_witness);
+        c_cpu_simulate(); VdmInstallFaultHandler(NULL);
+        width=(k&1) ? ((big != (prefix!=0)) ? 4 : 2) : 1;
+        expected_calls=width==4 ? 2 : 1;
+        mask=width==4 ? 0xffffffffu : width==2 ? 0xffff : 0xff;
+        expected=(k&2) ? (0x12345678&mask) :
+            (width==4 ? 0xc33ca55a : width==2 ? 0x1234a55a : 0x123456a5);
+        ok=!dpmi_declines && test_fault==1 && !scalar_bad &&
+            scalar_calls==expected_calls && scalar_width==(width==1 ? 1 : 2) &&
+            ((k&2) ? scalar_value : c_getEAX())==expected &&
+            (c_getEFLAGS()&0xed7)==0xed7 && dpmi_completed_traps==1 &&
+            dpmi_completed_ip==dpmi_escape_ip;
+        wsprintfA(line,"DPMI_SCALAR big=%u prefix=%u opcode=%02x pass=%d width=%u calls=%u faults=%lu decline=%lu flags=%lx trap=%lx\n",
+            big,prefix,opcodes[k],ok,width,scalar_calls,test_fault,dpmi_declines,c_getEFLAGS(),dpmi_completed_ip);
+        report(line); if(!ok)return 0; ++total;
+    }
+    return total==48;
+}
+
+static int dpmi_decode_boundaries(void)
+{
+    extern BOOL DpmiEmulateInstruction(void);
+    const UCHAR unsupported[][3]={{0xf0,0xe6,0x80},{0x6c,0,0},{0x6e,0,0},
+        {0x0f,0x06,0},{0x0f,0x01,0xf0},{0x0f,0x21,0xc0},{0x0f,0x23,0xc0},
+        {0x0f,0x0b,0},{0x0f,0x20,0}};
+    UCHAR code[17]; unsigned k,i; BOOL handled,ok;
+    ULONG before,offset; char line[160];
+    for(k=0;k<16;++k) {
+        dpmi_scalar_setup(FALSE,k==9 ? 0x1000 : 0xffff);
+        ZeroMemory(code,sizeof(code));offset=0x1000;
+        if(k<9)CopyMemory(code,unsupported[k],3);
+        else if(k==9){code[0]=0xe6;code[1]=0x80;}
+        else if(k==10 || k==11) {
+            memset(code,0x66,k==10 ? 14 : 15);code[k==10 ? 14 : 15]=0xee;
+        } else {
+            ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);
+            offset=0xfff; code[0]=0xe6; code[1]=0x80;
+            ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
+            for(i=0;i<512;++i)pte[i]=(i<<12)|7;
+            pte[0xf1]=k==12 ? 0 : k==13 ? 0x6003 : 0x6007;
+            /* Selected 386 combines PDE/PTE U/S with OR, unlike 486. */
+            if(k==13)*(ULONG *)c_GetPhyAdd(0x4000)=0x5003;
+            *c_GetPhyAdd(0x6000)=0x80;
+            *c_GetPhyAdd(0xf1000)=0x81; /* A contiguous-alias fallback is wrong. */
+            if(k==15) {pte[0xf0]=0; offset=0xfff;}
+            c_setCR3(0x4000);c_setPG(1);
+        }
+        if(k>=12)*c_GetPhyAdd(0xf0fff)=code[0];
+        else CopyMemory(c_GetPhyAdd(0xf1000),code,sizeof(code));
+        c_setEIP(offset); before=c_getEFLAGS();
+        handled=DpmiEmulateInstruction();
+        if(k>=12)c_setPG(0);
+        ok=handled==(k==10 || k==14) && !scalar_bad &&
+            scalar_calls==(handled ? 1u : 0u) && c_getEFLAGS()==before &&
+            c_getEIP()==offset+(handled ? (k==10 ? 15 : 2) : 0);
+        wsprintfA(line,"DPMI_DECODE_BOUNDARY case=%u pass=%d handled=%d calls=%u ip=%lx\n",
+            k,ok,handled,scalar_calls,c_getEIP());report(line);if(!ok)return 0;
+    }
+    return 1;
+}
+static ULONG dpmi_irq_ip,dpmi_irq_bx,dpmi_irq_state;
+static BOOL dpmi_pending_irq(ULONG vector)
+{
+    ++test_irq;dpmi_irq_ip=c_getEIP();dpmi_irq_bx=c_getBX();
+    dpmi_irq_state=*(ULONG *)c_GetPhyAdd(FIXED_NTVDMSTATE_LINEAR);
+    if(vector!=8)++scalar_bad;
+    ica_outb(0x20,0x20);return TRUE;
+}
+static int dpmi_irq_boundary(void)
+{
+    const UCHAR code[]={0xfa,0x90,0xfb,0xbb,0x11,0x11,0x90,0xd6,0xfe};
+    UCHAR isr,irr; BOOL ok;char line[180];
+    dpmi_scalar_setup(FALSE,0xffff);c_setBX(0);
+    CopyMemory(c_GetPhyAdd(0xf1000),code,sizeof(code));dpmi_escape_ip=0x1007;
+    *(ULONG *)c_GetPhyAdd(FIXED_NTVDMSTATE_LINEAR)=VIRTUAL_INTERRUPT_BIT;
+    InitializeIcaLock();ica0_init();ica1_init();DelayIrqLine=0;
+    ica_outb(0x20,0x11);ica_outb(0x21,8);ica_outb(0x21,4);
+    ica_outb(0x21,1);ica_outb(0x21,0xfe);
+    test_irq=dpmi_irq_ip=dpmi_irq_bx=0;
+    VdmInstallFaultHandler((void *)dpmi_completion_witness);
+    VdmInstallHardwareIntHandler((void *)dpmi_pending_irq);
+    ica_hw_interrupt(0,0,1);c_cpu_simulate();
+    VdmInstallHardwareIntHandler(NULL);VdmInstallFaultHandler(NULL);
+    ica_outb(0x20,0x0b);ica_inb(0x20,&isr);ica_outb(0x20,0x0a);ica_inb(0x20,&irr);
+    ok=!dpmi_declines && !scalar_bad && test_fault==2 && test_irq==1 &&
+        dpmi_irq_ip==0x1006 && dpmi_irq_bx==0x1111 &&
+        (dpmi_irq_state&VIRTUAL_INTERRUPT_BIT) && !(isr&1) && !(irr&1);
+    wsprintfA(line,"DPMI_IRQ_BOUNDARY pass=%d faults=%lu irq=%lu ip=%lx bx=%lx state=%lx isr=%x irr=%x\n",
+        ok,test_fault,test_irq,dpmi_irq_ip,dpmi_irq_bx,dpmi_irq_state,isr,irr);
+    report(line);return ok;
+}
+
 int main(int argc, char **argv) {
     session owner;
     int ok;
@@ -573,7 +803,11 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();c_cpu_init();
-    if(test_case>=173 && test_case<=176) ok=protected_cursor_copy_loop();
+    if(test_case==183) ok=dpmi_irq_boundary();
+    else if(test_case==182) ok=dpmi_decode_boundaries();
+    else if(test_case==181) ok=dpmi_scalar_matrix();
+    else if(test_case>=177 && test_case<=180) ok=dpmi_completed_instruction();
+    else if(test_case>=173 && test_case<=176) ok=protected_cursor_copy_loop();
     else if(test_case>=168 && test_case<=172) ok=protected_monitor_ownership();
     else if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();

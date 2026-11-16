@@ -1,0 +1,19 @@
+{
+  "status": "Confirmed adjacent published-commit regression",
+  "good": "4da94a64d30b755586cb62ab366086485beeeb67 (P102)",
+  "bad": "9078b7168d570646590b5a7c74a403c5f3751eec (P103)",
+  "relation": "bad parent equals good",
+  "date_bad": "2026-11-14 06:13:28 -0800",
+  "method": "Restore all eleven published images and release manifest directly from each Git revision into isolated packages; identical original DOS4GW.PIF configuration, pinned guests, short environment, observer and 30-second deadline. Probe captures real rendered window at eight seconds. Original inputs preserved. No checkout/reset of active main tree.",
+  "results": {
+    "P77": "rendered NESticle menu",
+    "P78": "graphics startup passed",
+    "P95": "graphics startup passed",
+    "P102": "rendered NESticle menu; screenshot identical to P77",
+    "P103": "timeout, no graphics window",
+    "P144/P181/P218": "previous controls timeout, no graphics"
+  },
+  "cause": "P103 restores original nt_inthk.c and deletes the protected DPMI #GP instruction-emulation path including virtual CLI/STI and port I/O. Current hardware GP probes prove repeated STI privilege faults CPL3/IOPL0. P103 review tested DOSX at IOPL3 and skipped the external DOS4GW fixture; that did not cover this supported IOPL0 path.",
+  "repair_constraints": "Do not blindly restore every deleted decoder or remove CPU privilege checks. Recover the required DPMI host virtualization contract, including virtual interrupt state and I/O; validate actual DOS4GW startup. The isolated CLI/STI-only candidate advances beyond the hang but fails later at 033F:002672B4, so that candidate is insufficient and is not deployed.",
+  "scope_limit": "Confirmed startup regression boundary; not gameplay or full guest compatibility acceptance."
+}

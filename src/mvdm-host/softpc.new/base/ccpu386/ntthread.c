@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <setjmp.h>
+#include "ntthread.h"
+#line 8
 
 #define BADID   ((DWORD)-1)
 
@@ -14,6 +16,8 @@ typedef struct {
     IS32 level;
     jmp_buf sims[MAXDEPTH];
     jmp_buf excepts[MAXDEPTH];
+    BOOL completed[MAXDEPTH];
+#line 17
 } ThreadSimBuf, *ThreadSimBufPtr;
     
 typedef struct tids {
@@ -181,7 +185,9 @@ jmp_buf *ccpu386SimulatePtr()
       /* return pointer to current context and invoke a new CPU level */
       /* can't setjmp here & return otherwise stack unwinds & context lost */
 
+    simstack->completed[simstack->level] = FALSE;
     return(&simstack->sims[simstack->level++]);
+#line 185
 }
 
 /* DIVERGENCE(MVDM-HOST-DIV-348): abandon only this unwound frame, without longjmp. */
@@ -248,7 +254,18 @@ jmp_buf *ccpu386ThrdExptnPtr()
     return(&simstack->excepts[simstack->level - 1]);
 }
 
+/* A host-emulated instruction completed in this simulation frame. Direct
+ * decoder tests outside simulate have no instruction boundary to resume. */
+void ccpu386CompleteInstruction(void)
+{
+    ThreadSimBufPtr simstack = ccpuSimId == BADID ? NULL :
+        (ThreadSimBufPtr)TlsGetValue(ccpuSimId);
+    if (simstack && simstack->level > 0)
+        simstack->completed[simstack->level - 1] = TRUE;
+}
+
 /* take exception */
+#line 236
 void ccpu386GotoThrdExptnPt()
 {
     ThreadSimBufPtr simstack;
@@ -265,5 +282,10 @@ void ccpu386GotoThrdExptnPt()
         return ;
     }
     
+    if (simstack->completed[simstack->level - 1]) {
+        simstack->completed[simstack->level - 1] = FALSE;
+        longjmp(simstack->excepts[simstack->level - 1], CCPU_COMPLETED_INSTRUCTION);
+    }
     longjmp(simstack->excepts[simstack->level - 1], 1);
+#line 253
 }
