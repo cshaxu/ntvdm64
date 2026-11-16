@@ -2,8 +2,9 @@
 
 The original ntpsapi.h now owns the thread structure and service declarations.
 `include/ntpsapi_wow32.h` supplies only the ThreadBasicInformation ordinal
-omitted by the modern SDK enum. `include/nturtl_wow32.h` carries the remaining
-source-derived WOW32 declarations.
+omitted by the modern SDK enum. Original `nturtl.h` owns the per-thread
+directory association and critical-section declarations; the duplicate WOW
+declaration facade was removed by T483 S5 P214.
 
 ADAPTER-WOW-108 preserves the first error from the window-retirement sweep
 while continuing all later pending retirements and releases. A controlled

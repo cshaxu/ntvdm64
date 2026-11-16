@@ -34,8 +34,8 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2102 reviewed:765 restored/confirmed published,0 local confirmations/restorations,8 approved,
-1329 qualified pending;618 unreviewed. Files299/365 audited,66 remain.
+2105 reviewed:767 restored/confirmed published,0 local confirmations/restorations,8 approved,
+1330 qualified pending;615 unreviewed. Files300/365 audited,65 remain.
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
 
@@ -51,16 +51,17 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P213 package `ee6a21b1-626f-47fb-a128-c3ea5749c36e` published11x2;hashes verified.
-ntrtl.h6101->253(-5848),nturtl.h1040->1021(-19),precomp.h16->15(-1).
-Batch mirror diff reduction5868;cumulative fixed365 files119913->105851(-14062).
-Metric excludes diagnostic #line and includes required #error subset differences;
-raw ntrtl6317->298(-6019). No guest or winnt.zip changes.
-Final cached x86/x64,focused RTL/time/native imports,Full and governance passed.
-Post-review command fixture recursion removed;final x86/x64 CTest passed. Product hashes unchanged.
-External DOS4GW/Nesticle fixture remains SKIP. Two precise residual points await owner.
-Prior receipts remain indexed in the active audit README;S5 remains active,nextR2103.
-[P213 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p213-checkpoint.json).
+P214 package `31b5215b-6e0b-42d5-a99f-55531833a85a` published11x2;hashes verified.
+nturtl.h1021->29(-992),coupled precomp.h15->14(-1);batch mirror reduction993.
+Cumulative fixed365 files119913->104858(-15055). Metric excludes diagnostic
+#line and includes required #error subset differences;raw nturtl1032->32(-1000).
+Original only include guard retained;915 source and711 selected lines per8
+contexts match. Three SDK-owned type omissions(29 lines) remain pending owner.
+Final cached x86/x64,path/RTL/command fixtures,Full and governance passed.
+First failed WOW duplicate-header build was corrected before publication.
+External DOS4GW/Nesticle fixture remains SKIP. No guest or winnt.zip changes.
+S5 remains active,nextR2106. [P214 receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p214-checkpoint.json).
+Prior receipts and their limits remain indexed in the active audit README.
 
 ## Remaining Scope
 

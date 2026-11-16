@@ -43,6 +43,8 @@ typedef USHORT RTL_ATOM, *PRTL_ATOM;
 typedef struct _CPTABLEINFO *PCPTABLEINFO;
 typedef struct _NLSTABLEINFO *PNLSTABLEINFO;
 typedef struct _RTL_USER_PROCESS_INFORMATION *PRTL_USER_PROCESS_INFORMATION;
+/* Original ntldr.h pointer-only dependency of RTL_DEBUG_INFORMATION. */
+typedef struct _RTL_PROCESS_MODULES *PRTL_PROCESS_MODULES;
 #define FASTCALL __fastcall
 typedef struct _STRING32 {
     USHORT   Length;
@@ -64,8 +66,8 @@ typedef short CSHORT;
 #undef NTSYSAPI
 #define NTSYSAPI
 #include <ntrtl.h>
-#pragma pop_macro("NTSYSAPI")
 #include <nturtl.h>
+#pragma pop_macro("NTSYSAPI")
 
 /* Original registry declarations own the query layouts, selectors and calls. */
 #include <ntregapi.h>

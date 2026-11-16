@@ -1,0 +1,63 @@
+{
+  "base_evidence": "cumulative-diff-p209.json",
+  "baseline_commit": "4cf4e5a35546249a003387a3a7df79037e6985ac",
+  "files": 365,
+  "metric": "Original-relative added+deleted lines;normalize CRLF/LF;exclude diagnostic #line directives;include mandated #error subset differences;one before/after comparison per file",
+  "unchanged_current_hashes": 359,
+  "changed": [
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "previous_sha256": "5fe597ec3eb07edeff970f54748b504f516a832c2ee9f4972e6b8b0b1103769a",
+      "current_sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+      "previous_total": 16,
+      "current_total": 14,
+      "reduction": 2
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "previous_sha256": "f6a3e397e878eccf05b5126b3c68cbfefb33cda2e058adf239da2bff6c74b7f8",
+      "current_sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37",
+      "previous_total": 13,
+      "current_total": 13,
+      "reduction": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "previous_sha256": "534aad7024d6429f5dc5c8aa8a133596781429e76d94c1a04a97d9055d56a611",
+      "current_sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+      "previous_total": 1268,
+      "current_total": 363,
+      "reduction": 905
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "previous_sha256": "5ae1450035008742e0503a0573199d6901eee168321c2d7d489f04b92dfbe24d",
+      "current_sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+      "previous_total": 469,
+      "current_total": 16,
+      "reduction": 453
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "previous_sha256": "f990266666c8a3cbcfbae4f231c6573a9d11f895608cab01e9008c78b05fd39a",
+      "current_sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+      "previous_total": 6101,
+      "current_total": 253,
+      "reduction": 5848
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "previous_sha256": "f48eabadd27d8ecdd97ae5d222e9d221f508416d83d821ab53c07760fed97a71",
+      "current_sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+      "previous_total": 1040,
+      "current_total": 29,
+      "reduction": 1011
+    }
+  ],
+  "baseline_total": 119913,
+  "current_total": 104858,
+  "net_reduction": 15055,
+  "reduced_files": 224,
+  "increased_files": 1,
+  "unchanged_files": 140
+}

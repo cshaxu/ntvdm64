@@ -24,7 +24,6 @@
 #include <wow_clipboard_epoch.h>
 #include <common/wow/paths.h>
 #include <ntpsapi_wow32.h>
-#include <nturtl_wow32.h>
 #undef _X86_
 #line 22
 #include "wow32.h"

@@ -2653,3 +2653,11 @@ Only147 native-SDK/private-layout boundary lines and10 mandated rejected bodies
 remain omitted. Original critical-section declarations and RtlProcessHeap macro
 return to `nturtl.h`;copied autonomous declarations and forwarding are removed.
 See [P213 evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p213-checkpoint.json).
+
+T483 S5 P214 supersedes the historical bulk `nturtl.h` subset rationale:
+all ordinary declarations, macros and types return to the original header,
+except three definitions already owned by the modern Windows SDK. Restoring
+those definitions fails the actual x86/x64 compilation controls. The remaining
+29 deleted original lines and their diagnostic mappings await owner review;
+the common and WOW copies of the restored declarations are removed.
+See [P214 evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p214-checkpoint.json).

@@ -1,0 +1,385 @@
+{
+  "status": "Whole file and coupled minimization verified and published;one minimized residual pending owner",
+  "proof": {
+    "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+    "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+    "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+    "omissions": [
+      [
+        36,
+        44
+      ],
+      [
+        49,
+        62
+      ],
+      [
+        69,
+        74
+      ]
+    ],
+    "metric": {
+      "before": {
+        "core": {
+          "add": 1,
+          "delete": 1020,
+          "total": 1021
+        },
+        "raw": {
+          "add": 12,
+          "delete": 1020,
+          "total": 1032
+        }
+      },
+      "after": {
+        "core": {
+          "add": 0,
+          "delete": 29,
+          "total": 29
+        },
+        "raw": {
+          "add": 3,
+          "delete": 29,
+          "total": 32
+        }
+      }
+    },
+    "source_lines_checked": 915,
+    "errors": 0,
+    "conditional_structure": "Original only _NTURTL_ include guard;no excluded conditional bodies exist",
+    "mismatches": []
+  },
+  "points": [
+    {
+      "id": "T483-R2103",
+      "original_lines": [
+        254,
+        261,
+        271,
+        279,
+        291
+      ],
+      "before_diff": {
+        "add": 0,
+        "delete": 5
+      },
+      "status": "restored",
+      "remaining_ordinary_diff": 0,
+      "change": "Restore all five original NTSYSAPI tokens via the existing scoped ordinary-linkage boundary covering ntrtl and nturtl together. No per-function omissions or forwarding.",
+      "evidence": "nt.h push_macro/undef/empty NTSYSAPI/include both original headers/pop_macro;original definitions and native import thunks coexist. Eight actual final contexts compile;later final whole-product link proves selected providers."
+    },
+    {
+      "id": "T483-R2104",
+      "original_lines": [
+        298
+      ],
+      "before_diff": {
+        "add": 1,
+        "delete": 1
+      },
+      "status": "restored",
+      "remaining_ordinary_diff": 0,
+      "change": "Restore original PRTL_RELATIVE_NAME parameter and four-line structure;remove copied common/base_srv structure.",
+      "evidence": "demgset/demsrch native calls pass NULL fourth argument. BaseClient binds existing OpenNtBaseDosPathNameToNtPathName_U,which invokes native with NULL and clears original output only. PVOID did not prevent old-size native output;restored type does not change those calls. Scoped path/guard witness covers x86/x64."
+    },
+    {
+      "id": "T483-R2105",
+      "original_lines": [
+        30,
+        1102
+      ],
+      "status": "pending",
+      "remaining_ordinary_diff": 29,
+      "change": "Restore all other original declarations,types,macros,comments and positions. Omit only original36-44,49-62,69-74 SDK-owned critical-section/resource-debug definitions.",
+      "evidence": "Raw original actual x86/x64 controls report C2011 at36/49 and C2371 at74;modern winnt.h declares RTL_CRITICAL_SECTION_DEBUG and aliases RTL_RESOURCE_DEBUG. A pointer-only ntldr.h forward declaration satisfies RTL_DEBUG_INFORMATION without importing runtime code. Final8 contexts compile and selected lines match.",
+      "scope_note": "Old broad hunk overlaps the precise R2103/R2104 anchors;do not sum point sizes."
+    }
+  ],
+  "residual_compile_controls": {
+    "x86-worker-opennt_support_rtl": [
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(36): error C2011: '_RTL_CRITICAL_SECTION_DEBUG': 'struct' type redefinition",
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(49): error C2011: '_RTL_CRITICAL_SECTION': 'struct' type redefinition",
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(74): error C2371: 'RTL_RESOURCE_DEBUG': redefinition; different basic types",
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(74): error C2371: 'PRTL_RESOURCE_DEBUG': redefinition; different basic types"
+    ],
+    "x64-frontend-opennt_support_rtl": [
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(36): error C2011: '_RTL_CRITICAL_SECTION_DEBUG': 'struct' type redefinition",
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(49): error C2011: '_RTL_CRITICAL_SECTION': 'struct' type redefinition",
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(74): error C2371: 'RTL_RESOURCE_DEBUG': redefinition; different basic types",
+      "O:/repos.hobby/ntvdm64/build/t483-s5-p214/original\\nturtl.h(74): error C2371: 'PRTL_RESOURCE_DEBUG': redefinition; different basic types"
+    ]
+  },
+  "files": [
+    {
+      "path": "src/common/base_srv/base_classifier.h",
+      "sha256": "67512a96c77ae943f2fbbda3fa3174d4939580836179dc1bf24b4fd6a7743625"
+    },
+    {
+      "path": "src/compat/include/nt.h",
+      "sha256": "7f98f8c1fb36ac12d03b1bd6ee751dffb0e74c3fb362cd121a04767e7bbfe502"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/include/base_server.h",
+      "sha256": "92bf5a4f2270625564416bebd5fcac759a73eb9cdee0f6514f2cd8e95b60787c"
+    },
+    {
+      "path": "src/wow32-dll/README.md",
+      "sha256": "3c4b0692de8683d4060980f74b5e7bc1da37167a22c4cb9e2b3b0d34315a6447"
+    }
+  ],
+  "deleted": [
+    "src/wow32-dll/include/nturtl_wow32.h"
+  ],
+  "mirror_before": 1021,
+  "mirror_after": 29,
+  "mirror_delta": -992,
+  "coupled_mirrors": {
+    "precomp.h": {
+      "before": {
+        "add": 14,
+        "delete": 1,
+        "total": 15
+      },
+      "after": {
+        "add": 13,
+        "delete": 1,
+        "total": 14
+      }
+    }
+  },
+  "batch_mirror_diff_delta": -993,
+  "raw_before": 1032,
+  "raw_after": 32,
+  "line_mapping": {
+    "checked": 915,
+    "mismatches": [],
+    "selected": {
+      "x86-worker-opennt_support_rtl": 711,
+      "x86-worker-srvvdm": 711,
+      "x64-frontend-opennt_support_rtl": 711,
+      "x64-launcher-environ": 711,
+      "x64-service-srvvdm": 711,
+      "x86-wow32-profile": 711,
+      "x86-worker-error": 711,
+      "x64-launcher-error": 711
+    },
+    "errors": 0,
+    "original_only_condition": "_NTURTL_ include guard"
+  },
+  "cumulative_evidence": "cumulative-diff-p214-delta.json",
+  "package": "31b5215b-6e0b-42d5-a99f-55531833a85a",
+  "verification": "Final cached x86/x64 full build;publish11x2 verified;focused8 actual contexts and original/final line equivalence;path/critical-section,RTL and command fixtures x86/x64;isolated Full and governance passed.",
+  "focused_results": {
+    "path-binding-x86": "path case=0 result=1 original-relative-size=12 guards=unchanged\npath case=1 result=1 original-relative-size=12 guards=unchanged\npath case=2 result=0 original-relative-size=12 guards=unchanged\nPASS original relative-name boundary and native critical-section declarations",
+    "path-binding-x64": "path case=0 result=1 original-relative-size=24 guards=unchanged\npath case=1 result=1 original-relative-size=24 guards=unchanged\npath case=2 result=0 original-relative-size=24 guards=unchanged\nPASS original relative-name boundary and native critical-section declarations",
+    "rtl-x86": "",
+    "rtl-x64": ""
+  },
+  "counter_review": "Modern SDK ownership is a valid boundary,not an original defect. Whole header restore minimizes to three type definitions. Original typed relative output is safe at actual calls because native receives NULL;do not claim direct native old-size output is compatible. WOW copied per-thread association was removed;existing NtCurrentTeb mapping and only NULL CurrentDirectories caller remain. No replacement algorithms or new state owners.",
+  "limits": [
+    "Declarations alone do not prove unused original APIs ABI-compatible with every modern native implementation.",
+    "Native relative output remains wider than original;actual wrapper intentionally requests full path only.",
+    "No guest modification or compilation.",
+    "Expected raw-original compile errors are negative controls,not uncorrected final product failures.",
+    "Legacy SDK macro/linkage/callback-signedness warnings are disclosed;no warning-free or dormant-API-runtime claim.",
+    "External DOS4GW/Nesticle fixture absent/SKIP;not pass."
+  ],
+  "corrected_failures": [
+    "First cached build exposed duplicate RTL_PERTHREAD_CURDIR and RtlDeleteCriticalSection in nturtl_wow32.h. Removed copied facade/include,retained original macro and existing TEB binding,rechecked final whole build. No first-pass package was published."
+  ],
+  "process": {
+    "script": "0757718627334E44F4D31ADA0FECE5D594B9A2C5DE8FA1599230ABA5BE05B92D",
+    "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+    "pid": 21260,
+    "started": "2026-11-15T19:37:04.3323728-08:00"
+  },
+  "delivery": "P214 reviewed commit and origin/main push accompany receipt",
+  "selected_provider_bindings": [
+    {
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "4c43cf88170ca0346fee9d9b8a3d5ceff1d25895189bf8608214ea0f041a90a3",
+      "resolved_symbols": [
+        "0001:00173780       _RtlGetCurrentDirectory_U@8 00574780 f   softpc-win32-bindings:opennt_support_rtl.obj",
+        "0001:001737a0       _RtlGetFullPathName_U@16   005747a0 f   softpc-win32-bindings:opennt_support_rtl.obj",
+        "0001:001739a0       _RtlSetCurrentDirectory_U@4 005749a0 f   softpc-win32-bindings:opennt_support_rtl.obj",
+        "0001:0017f094       _RtlInitializeCriticalSection@4 00580094 f   ntdll:ntdll.dll",
+        "0001:0017f0be       _RtlIsDosDeviceName_U@4    005800be f   ntdll:ntdll.dll",
+        "0001:0017f0c4       _RtlDosPathNameToNtPathName_U@16 005800c4 f   ntdll:ntdll.dll"
+      ]
+    },
+    {
+      "map": "build\\.ninja\\msvc-x64-release\\launcher\\run16.exe.map",
+      "sha256": "d8dfb18eb0daf63ec447bef2325f89c1c756a61f0f8cae663b1fd63211242131",
+      "resolved_symbols": [
+        "0001:00002970       RtlGetCurrentDirectory_U   0000000140003970 f   support.obj",
+        "0001:0000a000       OpenNtBaseDosPathNameToNtPathName_U 000000014000b000 f   common-base-srv-bindings:classifier-path.obj",
+        "0001:0000dec6       RtlDosPathNameToNtPathName_U 000000014000eec6 f   ntdll:ntdll.dll"
+      ]
+    },
+    {
+      "map": "build\\.ninja\\msvc-x86-release\\wow32\\WOW32.DLL.map",
+      "sha256": "30b9ba5ca3ce52c2d10508805ffe255e68cb6b6b23e01418f3cb90666c1a54c2",
+      "resolved_symbols": [
+        "0001:0008d485       _RtlInitializeCriticalSection 1008e485 f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008d485       _RtlInitializeCriticalSection@4 1008e485 f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008d48b       _RtlDeleteCriticalSection  1008e48b f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008d48b       _RtlDeleteCriticalSection@4 1008e48b f   legacy-wow-ntdll:NTDLL.DLL"
+      ]
+    }
+  ],
+  "final_source_evidence": {
+    "path_fixture_sha256": "d60a619baa89baef0a75151596373a102f588634658eb68534a01c46a7e12db9",
+    "focused_contexts": "build/t483-s5-p214/contexts.json",
+    "diagnostic_root": "build\\t483-s5-p214",
+    "full_summary": "build/t483-s5-p214/full-isolated/timings.json"
+  },
+  "full_results": {
+    "Suite": "Full",
+    "ElapsedMs": 390354,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5735,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1276,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11462,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 11951,
+        "CleanupMs": 486,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10688,
+        "CleanupMs": 486,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 196,
+        "CleanupMs": 438,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66615,
+        "CleanupMs": 436,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44202,
+        "CleanupMs": 528,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45861,
+        "CleanupMs": 492,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15450,
+        "CleanupMs": 453,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11118,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 47571,
+        "CleanupMs": 532,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13068,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28853,
+        "CleanupMs": 415,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30846,
+        "CleanupMs": 482,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4548,
+        "CleanupMs": 445,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7632,
+        "CleanupMs": 481,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11511,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3963,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7572,
+        "CleanupMs": 419,
+        "Passed": true
+      }
+    ]
+  },
+  "final_review": {
+    "process": {
+      "root": "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p214",
+      "script": "E4E26280DF9A2DA5959676B0EB64D02B69264C4D09700C315D8A61FC7E70048E",
+      "started": "2026-11-15T19:49:21.6515574-08:00",
+      "pid": 18392,
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    "exit_code": 0,
+    "source": "PASS final frozen sources, original/own newline policy, register/backlog counts, cumulative metric, immutable guest and 11x2 publication hashes",
+    "governance": "PASS 143 selected WOW objects; 9 private-header negative controls; no NTVDM private dependency\nDocumentation governance verification passed.\nDocumentation relative-link verification passed."
+  },
+  "current_file_cumulative_diff": {
+    "baseline_commit": "4cf4e5a35546249a003387a3a7df79037e6985ac",
+    "baseline": 1040,
+    "current": 29,
+    "net_reduction": 1011
+  }
+}
