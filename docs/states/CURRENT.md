@@ -34,9 +34,9 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2402 reviewed:922 restored/confirmed published,0 local restorations,41 approved/policy,
-1439 qualified pending;318 unreviewed. Files333/365 source-reviewed,32 remain;
-P236 file333 verified/published;Git delivery accompanies receipt.
+2426 reviewed:924 restored/confirmed published,0 local,41 approved/policy,
+1461 qualified pending;294 unreviewed. Files334/365 source-reviewed and
+verified/published,31 remain;Git delivery accompanies P237 receipt.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -53,15 +53,14 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 
 ## Current Technical Baseline
 
-P236 package `0a7033e8-02ed-45b4-a497-69a1cd9d7fce` published11x2;hashes verified.
-Original usercli declarations/order recovered;two inclusion phases replace
-five optional families;capture typedefs returned to original owner.
-Mirror2170->556(-1614);9 restored points,4 policy,7 residual owner decisions.
-1868 original logical rows and17 bare#error bodies checked.
-Cached x86/x64,34 focused,Full20 including DOS4GW and governance passed.
-Cumulative365-file mirror diff119913->100712(-19201).No guest/winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p236-checkpoint.json).
-Git delivery accompanies receipt;R2403 next.
+P237 package `3241bb5c-c0ed-434d-87a4-99536fc7afe4` published11x2;hashes verified.
+winmgrc original pragma and compatibility getter restored;native USER service
+boundaries and one type spelling remain pending owner. Mirror517->500(-17).
+88 exact original logical rows;cached x86/x64,34 focused,Full20 and governance pass.
+Navigation fixture links existing native connector;getter flags/error contract tested.
+Cumulative365-file mirror diff119913->100695(-19218).No guest/winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p237-checkpoint.json).
+Git delivery accompanies receipt;R2427 next.
 
 ## Remaining Scope
 

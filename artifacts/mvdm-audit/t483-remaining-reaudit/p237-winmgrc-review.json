@@ -1,0 +1,458 @@
+{
+  "batch": "P237",
+  "file": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/winmgrc.c",
+  "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+  "source_sha256": "888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5",
+  "before": {
+    "added": 3,
+    "deleted": 514,
+    "total": 517
+  },
+  "after": {
+    "added": 4,
+    "deleted": 496,
+    "total": 500
+  },
+  "delta": -17,
+  "points": [
+    {
+      "id": "T483-R2412",
+      "evidence": "Original _GetLastActivePopup requires original popup state; actual restoration duplicates wow_native_GetLastActivePopup and lacks internal provider. wow_user_discovery.c89 performs native query then publishes discovered handle."
+    },
+    {
+      "id": "T483-R2413",
+      "evidence": "Original uses private THREADINFO equality and NtUserQueryWindow process/thread selectors. Native HWND generation/real process ownership is queried in wow_user_discovery.c44-67. Actual restoration C2065 WindowProcess/WindowThread; old selector values cannot be presumed modern ABI."
+    },
+    {
+      "id": "T483-R2414",
+      "evidence": "Original directly dereferences WND.pSBInfo.Vert/Horz; current retained WND projection has no authoritative native SBINFO. Actual C2037; WU32GetScrollPos delegates USER32."
+    },
+    {
+      "id": "T483-R2415",
+      "evidence": "Original directly dereferences SBINFO/SBDATA ranges; native scroll service owns them. Actual C2065 PSBDATA and undefined SBINFO; WU32GetScrollRange delegates USER32."
+    },
+    {
+      "id": "T483-R2416",
+      "evidence": "Original needs private SBINFO/SBDATA plus NtUserSBGetParms. The native public GetScrollInfo import remains provider; merely defining struct would not populate native state. Actual private type compile failure."
+    },
+    {
+      "id": "T483-R2417",
+      "evidence": "Original calls NT4 UserThreadStateActiveWindow. Actual selector compile failure; native GetActiveWindow feeds discovered-handle publication in wow_user_discovery.c87."
+    },
+    {
+      "id": "T483-R2418",
+      "evidence": "Original calls NT4 UserThreadStateCursor. Actual selector compile failure; WU32GetCursor wuser31.c108 delegates native GetCursor and maps native HCURSOR."
+    },
+    {
+      "id": "T483-R2419",
+      "evidence": "Original validates TYPE_MENU against shared USER handle manager; native menu validity belongs to native USER. Actual restored link duplicates IsMenu and lacks HMValidateHandle."
+    },
+    {
+      "id": "T483-R2420",
+      "evidence": "Original body restored; unused parameter uses existing PWOW_CLIENT_THREADINFO alias to original opaque tagTHREADINFO. Original PTHREADINFO spelling absent in this context, but alias candidate compiles and links exact product closure. No state or algorithm moved."
+    },
+    {
+      "id": "T483-R2421",
+      "evidence": "Original reads WFANSIPROC directly from NT4 WND. Actual C2065 WFANSIPROC; modern window-procedure encoding is native state, not supplied by retained original view. Do not invent a mirrored encoding-state owner."
+    },
+    {
+      "id": "T483-R2422",
+      "evidence": "Original same-thread/process test does not establish ownership of retained client storage. Actual private access maps TestWindowProcess to wow_window_client_owns_state; state_bindings.c264 checks exact enrolled alias and excludes copied/resource-only WND. Restoring generic identity check would not supply that stronger storage contract; original also lacks WindowProcess selector."
+    },
+    {
+      "id": "T483-R2423",
+      "evidence": "Original hung-state query uses NtUserQueryWindow(WindowIsHung). Actual C2065; modern service/selector ABI not admitted. No current general hung-state provider restoration claimed."
+    },
+    {
+      "id": "T483-R2424",
+      "evidence": "Original reads native TEB.Win32ThreadInfo as NT4 THREADINFO, initializes through NtUserGetThreadState(-1). This is not current task owner or modern private layout. Actual existing PtiCurrent macro collision confirms incompatible current composition; not itself the semantic proof."
+    },
+    {
+      "id": "T483-R2425",
+      "evidence": "Original _AdjustWindowRectEx function body exact. Removing guard causes actual edit-view fixture missing geometry/task dependencies. Fixture tests only view geometry and FChildVisible; importing product task/runtime ownership just to remove guard expands closure. Keep two-line shared guard pending owner."
+    },
+    {
+      "id": "T483-R2426",
+      "evidence": "FChildVisible original52-64 body exact and retains original location/order; no adapter statement in body."
+    }
+  ],
+  "source_status": "Verified/published;Git delivery accompanies receipt",
+  "line_proof": {
+    "exact_rows": 88,
+    "rows": [
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        6,
+        6
+      ],
+      [
+        7,
+        7
+      ],
+      [
+        8,
+        8
+      ],
+      [
+        9,
+        9
+      ],
+      [
+        10,
+        10
+      ],
+      [
+        12,
+        12
+      ],
+      [
+        13,
+        13
+      ],
+      [
+        16,
+        52
+      ],
+      [
+        17,
+        53
+      ],
+      [
+        18,
+        54
+      ],
+      [
+        19,
+        55
+      ],
+      [
+        21,
+        57
+      ],
+      [
+        23,
+        59
+      ],
+      [
+        24,
+        60
+      ],
+      [
+        26,
+        62
+      ],
+      [
+        27,
+        63
+      ],
+      [
+        31,
+        447
+      ],
+      [
+        32,
+        448
+      ],
+      [
+        33,
+        449
+      ],
+      [
+        34,
+        450
+      ],
+      [
+        35,
+        451
+      ],
+      [
+        36,
+        452
+      ],
+      [
+        37,
+        453
+      ],
+      [
+        38,
+        454
+      ],
+      [
+        39,
+        455
+      ],
+      [
+        41,
+        457
+      ],
+      [
+        43,
+        459
+      ],
+      [
+        44,
+        460
+      ],
+      [
+        46,
+        462
+      ],
+      [
+        47,
+        463
+      ],
+      [
+        50,
+        541
+      ],
+      [
+        51,
+        542
+      ],
+      [
+        52,
+        543
+      ],
+      [
+        53,
+        544
+      ],
+      [
+        54,
+        545
+      ],
+      [
+        55,
+        546
+      ],
+      [
+        56,
+        547
+      ],
+      [
+        57,
+        548
+      ],
+      [
+        60,
+        550
+      ],
+      [
+        61,
+        551
+      ],
+      [
+        62,
+        552
+      ],
+      [
+        63,
+        553
+      ],
+      [
+        64,
+        554
+      ],
+      [
+        65,
+        555
+      ],
+      [
+        66,
+        556
+      ],
+      [
+        67,
+        557
+      ],
+      [
+        68,
+        558
+      ],
+      [
+        69,
+        559
+      ],
+      [
+        70,
+        560
+      ],
+      [
+        71,
+        561
+      ],
+      [
+        72,
+        562
+      ],
+      [
+        73,
+        563
+      ],
+      [
+        74,
+        564
+      ],
+      [
+        75,
+        565
+      ],
+      [
+        76,
+        566
+      ],
+      [
+        78,
+        568
+      ],
+      [
+        79,
+        569
+      ],
+      [
+        80,
+        570
+      ],
+      [
+        81,
+        571
+      ],
+      [
+        83,
+        573
+      ],
+      [
+        84,
+        574
+      ],
+      [
+        85,
+        575
+      ],
+      [
+        86,
+        576
+      ],
+      [
+        87,
+        577
+      ],
+      [
+        89,
+        579
+      ],
+      [
+        90,
+        580
+      ],
+      [
+        91,
+        581
+      ],
+      [
+        92,
+        582
+      ],
+      [
+        93,
+        583
+      ],
+      [
+        94,
+        584
+      ],
+      [
+        96,
+        586
+      ],
+      [
+        97,
+        587
+      ],
+      [
+        98,
+        588
+      ],
+      [
+        99,
+        589
+      ],
+      [
+        100,
+        590
+      ],
+      [
+        102,
+        592
+      ],
+      [
+        103,
+        593
+      ],
+      [
+        104,
+        594
+      ],
+      [
+        106,
+        596
+      ],
+      [
+        107,
+        597
+      ],
+      [
+        108,
+        598
+      ],
+      [
+        110,
+        600
+      ],
+      [
+        111,
+        601
+      ]
+    ],
+    "unexplained": [],
+    "bare_errors": 0
+  },
+  "controls": "p237-winmgrc-investigation.json",
+  "limits": "No new runtime claim. Negative controls are failed restoration experiments, not accepted product failures. Remaining boundaries require owner decisions.",
+  "counter_review": {
+    "result": "Initial and counter-review complete;residual owner decisions retained",
+    "body": "Original GetAppCompatFlags body retained; existing opaque tagTHREADINFO pointer alias only; no new runtime state. FChildVisible/_AdjustWindowRectEx exact.88 exact logical rows,no unexplained line mismatch.",
+    "fixture_failure": "Navigation fixture originally omitted real GUI-thread connector; function-level dead stripping experiment failed and was removed.",
+    "fixture_fix": "Link existing wow_edit_native_bindings.c; retain navigation assertions and verify real GUI conversion,zero/nonzero client flags and LastError preservation.",
+    "verification": "Cached x86/x64;11x2 published hashes;34 focused including restored getter;Full20;governance passed. Earlier failed fixture link and unsuccessful dead-strip attempt preserved as history,not passes."
+  },
+  "format_identity": {
+    "change": "Restore pinned original CRLF from existing LF",
+    "compiled_lf_sha256": "68617aad6ac0569b52a606c4994a91babe5d1d190d196cda76154c766c088ec6",
+    "final_crlf_sha256": "888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5",
+    "normalized_bytes_identical": true,
+    "non_line_ending_changes": 0,
+    "semantic_diff_delta": 0
+  },
+  "delivery_receipt": "batch-p237-checkpoint.json"
+}

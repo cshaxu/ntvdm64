@@ -152,6 +152,7 @@ $units += ,@('button_dc_unreached', 'test/adapter-mvdm-host-out/wow/wow_button_d
 $geometryFlags = '/DWOW_ORIGINAL_DEFAULT_GEOMETRY /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-geometry')) + '"'
 $units += ,@('navigation_borders', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $geometryFlags)
 $viewFlags = '/I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/edit-view')) + '"'
+$units += ,@('navigation_native', 'src/wow32-dll/source/wow_edit_native_bindings.c', '')
 $units += ,@('view_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_view_fixture.c', $viewFlags)
 $units += ,@('view_wow', 'src/non-mvdm/windows/core/ntuser/rtl/wow.c', $viewFlags)
 $units += ,@('view_winmgr', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $viewFlags)
@@ -263,7 +264,7 @@ $lines.Add('build original-state-drawing-boundaries: phony bin/wow_control_draw_
 $lines.Add('build bin/wow_button_lifetime_fixture.exe: link obj/button_lifetime_fixture.obj obj/button_lifetime_adapter.obj obj/button_blit_owner.obj obj/button_lifetime_resources.obj obj/button_resources_table.obj')
 $lines.Add('build bin/wow_button_dc_fixture.exe: link obj/button_dc_fixture.obj obj/button_dc_owner.obj obj/button_dc_unreached.obj')
 $lines.Add('build original-button-lifetime-boundaries: phony bin/wow_button_lifetime_fixture.exe bin/wow_button_dc_fixture.exe')
-$lines.Add('build bin/wow_dialog_navigation_fixture.exe: link obj/navigation_fixture.obj obj/navigation_graph.obj obj/navigation_help.obj obj/navigation_borders.obj obj/original_dlgmgrc.obj obj/original_dlgmgr2.obj obj/original_wow.obj obj/original_winmgrc.obj')
+$lines.Add('build bin/wow_dialog_navigation_fixture.exe: link obj/navigation_fixture.obj obj/navigation_graph.obj obj/navigation_help.obj obj/navigation_borders.obj obj/original_dlgmgrc.obj obj/original_dlgmgr2.obj obj/original_wow.obj obj/original_winmgrc.obj obj/navigation_native.obj')
 $lines.Add('build dialog-navigation-boundaries: phony bin/wow_dialog_navigation_fixture.exe')
 $lines.Add('build bin/wow_edit_view_fixture.exe: link obj/view_fixture.obj obj/view_wow.obj obj/view_winmgr.obj obj/view_client.obj')
 $lines.Add('build original-window-view-boundaries: phony bin/wow_edit_view_fixture.exe')

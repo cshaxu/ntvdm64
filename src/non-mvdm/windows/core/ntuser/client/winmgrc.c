@@ -10,6 +10,7 @@
 \***************************************************************************/
 
 #include "precomp.h"
+#pragma hdrstop
 
 #line 52
 BOOL FChildVisible(
@@ -26,6 +27,26 @@ BOOL FChildVisible(
 }
 
 #ifdef WOW_ORIGINAL_EDIT_CLIENT
+#line 447
+/***************************************************************************\
+* GetAppCompatFlags
+*
+* Compatibility flags for < Win 3.1 apps running on 3.1
+*
+* History:
+* 01-Apr-1992 ScottLu   Created.
+* 04-May-1992 DarrinM   Moved to USERRTL.DLL.
+\***************************************************************************/
+
+DWORD GetAppCompatFlags(
+    PWOW_CLIENT_THREADINFO pti)
+{
+    ConnectIfNecessary();
+
+    return GetClientInfo()->dwCompatFlags;
+}
+
+#line 541
 /***************************************************************************\
 * _AdjustWindowRectEx (API)
 *

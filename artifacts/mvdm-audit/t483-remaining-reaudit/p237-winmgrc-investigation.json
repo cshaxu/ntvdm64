@@ -1,0 +1,559 @@
+{
+  "batch": "P237",
+  "file": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+  "status": "Historical isolated investigation;completed review and delivery recorded separately",
+  "baseline_commit": "f2c6a08df79f06e5941bc98c344d70db53df1cc7",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\winmgrc.c",
+  "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+  "before_sha256": "7fc717f15fce6db0ac10e7728b7321ac5cecfd14a5c72611cb5b33f01ed682a9",
+  "current_sha256": "fa11828e449d4eef452919cb529baa7d0311260512144a3adb7db08ad2eb0ec2",
+  "before": {
+    "added": 3,
+    "deleted": 514,
+    "total": 517
+  },
+  "current": {
+    "added": 3,
+    "deleted": 513,
+    "total": 516
+  },
+  "point": "T483-R2403",
+  "change": "Restore original #pragma hdrstop at original line13. Existing #line52 and #line550 unchanged; no executable statement changed; existing LF preserved.",
+  "validation": "Restored pragma compiles in product and edit-view contexts. No full build, runtime, publication or delivery claim.",
+  "contexts": [
+    "Product control-client precomp with WOW_ORIGINAL_EDIT_CLIENT",
+    "view_client fixture uses test/adapter-mvdm-host-out/wow/edit-view/precomp.h"
+  ],
+  "remaining": "R2404-R2426: native public wrapper omissions and fixture-dependent _AdjustWindowRectEx guard; no final disposition yet.",
+  "compile_controls": [
+    {
+      "name": "current-product",
+      "exit": 0,
+      "log_sha256": "d23bdd51ad3c6c7f907c832c610ac6ae24f6dc57657350fcd0373bc225fe2376",
+      "diagnostics": []
+    },
+    {
+      "name": "original-product",
+      "exit": 2,
+      "log_sha256": "34691190b61b03650b88cace3502452e3988fc2e7ce5a5e1b66f6286b11c7c09",
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(45): warning C4013: '_GetWindowLong' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(48): warning C4013: '_GetWindowWord' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(86): warning C4013: 'NtUserGetClassName' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(92): warning C4013: 'NtUserGetThreadState' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(92): error C2065: 'UserThreadStateFocusWindow': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(98): error C2065: 'UserThreadStateCaptureWindow': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(133): error C2065: 'PCLIENTTHREADINFO': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(133): error C2146: syntax error: missing ';' before identifier 'pcti'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(133): error C2065: 'pcti': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(133): error C2039: 'pClientThreadInfo': is not a member of 'wow_task_client_info'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(135): error C2065: 'pcti': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(135): error C2065: 'pcti': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(135): error C2223: left of '->fsChangeBits' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(136): error C2065: 'UserThreadStateInputState': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(179): warning C4013: '_MapWindowPoints' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(198): warning C4013: '_GetLastActivePopup' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(236): warning C4013: 'NtUserQueryWindow' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(236): error C2065: 'WindowProcess': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(237): error C2065: 'WindowThread': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(273): error C2037: left of 'Vert' specifies undefined struct/union 'tagSBINFO'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(273): error C2037: left of 'Horz' specifies undefined struct/union 'tagSBINFO'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(318): error C2065: 'PSBDATA': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(318): error C2146: syntax error: missing ';' before identifier 'pSBData'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(318): error C2065: 'pSBData': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(319): error C2065: 'pSBData': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(319): error C2037: left of 'Vert' specifies undefined struct/union 'tagSBINFO'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(319): error C2037: left of 'Horz' specifies undefined struct/union 'tagSBINFO'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(320): error C2065: 'pSBData': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(320): error C2223: left of '->posMin' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(321): error C2065: 'pSBData': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(321): error C2223: left of '->posMax' must point to struct/union",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(353): error C2065: 'PSBDATA': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(353): error C2146: syntax error: missing ';' before identifier 'pSBData'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(353): error C2065: 'pSBData': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(366): error C2065: 'SIF_MASK': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(391): error C2065: 'pSBData': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(391): error C2037: left of 'Vert' specifies undefined struct/union 'tagSBINFO'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(391): error C2037: left of 'Horz' specifies undefined struct/union 'tagSBINFO'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(393): warning C4013: 'NtUserSBGetParms' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(393): error C2065: 'pSBData': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(414): error C2065: 'UserThreadStateActiveWindow': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(426): error C2065: 'UserThreadStateCursor': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(441): warning C4013: 'HMValidateHandle' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(458): error C2146: syntax error: missing ')' before identifier 'pti'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(458): error C2061: syntax error: identifier 'pti'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(458): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(458): error C2059: syntax error: ')'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(459): error C2449: found '{' at file scope (missing function header?)",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(463): error C2059: syntax error: '}'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(500): error C2065: 'WindowProcess': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(512): error C2065: 'WindowIsHung': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(526): error C2061: syntax error: identifier 'GetCurrentThreadId'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(526): error C2059: syntax error: ';'",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\original-winmgrc.c(526): error C2059: syntax error: '<parameter-list>'"
+      ]
+    },
+    {
+      "name": "current-fixture",
+      "exit": 0,
+      "log_sha256": "da1cea5b8e58ef52f56556493b6b7fa578d906d3ccce83edac1611c3aef4efdd",
+      "diagnostics": []
+    },
+    {
+      "name": "unguarded-fixture",
+      "exit": 2,
+      "log_sha256": "c3423c6e5e54c5001b3525c08c87586c78dc418a4ea478e9f6e134c553dcd3fa",
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(568): warning C4013: 'NeedsWindowEdge' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(568): warning C4013: 'GetAppVer' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(568): warning C4013: 'PtiCurrent' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(568): error C2065: 'VER40': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(577): error C2065: 'view_fixture_CYMENU': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(583): error C2065: 'view_fixture_CYSMCAPTION': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(583): error C2065: 'view_fixture_CYCAPTION': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(596): warning C4013: 'GetWindowBorders' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(597): error C2065: 'view_fixture_CXBORDER': undeclared identifier",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\unguarded-winmgrc.c(597): error C2065: 'view_fixture_CYBORDER': undeclared identifier"
+      ]
+    }
+  ],
+  "interpretation": "Original whole-file restoration fails in actual product context. This alone does not establish necessity of each omission. Missing declaration/provider evidence must be distinguished from unavailable native private state. Unguarded fixture fails on missing geometry bindings; investigate common product-context composition before retaining guard.",
+  "next_point": "T483-R2412",
+  "r2404": {
+    "disposition": "pending-owner",
+    "original_body": "28-49,22 lines",
+    "provider": "Original client/getsetc.c26-95; NT4 WND tail and PBUTN",
+    "actual_consumer": "mvdm-host/wow32/wuwind.c2149",
+    "link": "build/.ninja/msvc-x86-release/wow32/wow32.dll.map3651 __imp__GetWindowWord@8 USER32",
+    "boundary": "Public native extra bytes cannot be read through retained NT4 projection."
+  },
+  "public_boundary_controls": [
+    {
+      "id": "T483-R2405",
+      "function": "AdjustWindowRectEx",
+      "original_lines": [
+        65,
+        74
+      ],
+      "evidence": "Original wrapper compiles; real product link gives LNK2005/LNK1169 against USER32 _AdjustWindowRectEx@16. WU32AdjustWindowRectEx calls native public API; dlgbegin calls retained internal _AdjustWindowRectEx.",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 0,
+          "log_sha256": "0717e69d40d6b4d19a5f40afc232204b02311980f4c6b2b758ee895f089b978e",
+          "diagnostics": []
+        },
+        {
+          "kind": "link",
+          "exit": 1169,
+          "log_sha256": "e1f88aac3b67f40e4e5fffbcd99374233bd962f05f2b803d675848cd79ad0f51",
+          "diagnostics": [
+            "user32.lib(USER32.dll) : error LNK2005: _AdjustWindowRectEx@16 already defined in restore-adjust.obj",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\restore-adjust.dll : fatal error LNK1169: one or more multiply defined symbols found"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T483-R2406",
+      "function": "GetClassNameW",
+      "original_lines": [
+        77,
+        87
+      ],
+      "evidence": "Original wrapper compiles; real product link fails LNK2019 _NtUserGetClassName@8. Native class-name service remains outside admitted original USER client closure.",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 0,
+          "log_sha256": "5137f1f3d59496eb9adc353d9af230f474a613e8ed241d07ec1eba2d155f7378",
+          "diagnostics": []
+        },
+        {
+          "kind": "link",
+          "exit": 1120,
+          "log_sha256": "872d05f2c4c0568f97a88fb9b935376cd19c9845cb607a55b3f2b1a799067296",
+          "diagnostics": [
+            "r2406.obj : error LNK2019: unresolved external symbol _NtUserGetClassName@8 referenced in function _GetClassNameW@12",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\r2406.dll : fatal error LNK1120: 1 unresolved externals"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T483-R2407",
+      "function": "GetFocus",
+      "original_lines": [
+        90,
+        93
+      ],
+      "evidence": "Actual product compile C2065 UserThreadStateFocusWindow. Native USER owns focus; product map binds __imp__GetFocus@0. Existing dialog NtUserGetThreadState facade is only symbolic foreground selection, not general NT4 enum dispatch.",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "log_sha256": "3b86343377111da6a5cb5aab1cdc563fc0551ba94473dc0e03041e1480710bc3",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2407.c(92): error C2065: 'UserThreadStateFocusWindow': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "T483-R2408",
+      "function": "GetCapture",
+      "original_lines": [
+        96,
+        99
+      ],
+      "evidence": "Actual product compile C2065 UserThreadStateCaptureWindow. Native USER owns capture; product map binds __imp__GetCapture@0. Restoring enum constants alone does not supply native service or valid enum ABI.",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "log_sha256": "dde84bfc799f6b0e9c6cd4e60dd66bf79b63ece7eb88f19346cd1e2016d2fdb4",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2408.c(98): error C2065: 'UserThreadStateCaptureWindow': undeclared identifier"
+          ]
+        }
+      ]
+    }
+  ],
+  "remaining_original_controls": [
+    {
+      "id": 2409,
+      "start": 110,
+      "end": 121,
+      "removed_lines": 12,
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 0,
+          "sha256": "2a781179b59deaddf447da6f71ae0ccc62476dc4a935c1eddcfec70aeae84115",
+          "diagnostics": []
+        },
+        {
+          "kind": "link",
+          "exit": 1169,
+          "sha256": "d0be9be34b11827f6908ba2347ba8485d655e50fc23961b91997c48578ea4271",
+          "diagnostics": [
+            "user32.lib(USER32.dll) : error LNK2005: _AnyPopup@0 already defined in r2409.obj",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\r2409.dll : fatal error LNK1169: one or more multiply defined symbols found"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2410,
+      "start": 131,
+      "end": 139,
+      "removed_lines": 9,
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "3dc7bb3557483597f081f48f5a35e2c975ada63b4441ea34169b13d74527828c",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(133): error C2065: 'PCLIENTTHREADINFO': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(133): error C2146: syntax error: missing ';' before identifier 'pcti'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(133): error C2065: 'pcti': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(133): error C2039: 'pClientThreadInfo': is not a member of 'wow_task_client_info'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(135): error C2065: 'pcti': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(135): error C2065: 'pcti': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(135): error C2223: left of '->fsChangeBits' must point to struct/union",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2410.c(136): error C2065: 'UserThreadStateInputState': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2411,
+      "start": 149,
+      "end": 180,
+      "removed_lines": 32,
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 0,
+          "sha256": "0c5f7c4479f3b8096cec18c56268b4c961d36e5d47fbe8d318983b8570e98ac9",
+          "diagnostics": []
+        },
+        {
+          "kind": "link",
+          "exit": 1120,
+          "sha256": "7b84db506551423fedfceaa0b17b93ec39e2e64a9b26cd74b4190a934a119eb3",
+          "diagnostics": [
+            "user32.lib(USER32.dll) : error LNK2005: _MapWindowPoints@16 already defined in r2411.obj",
+            "r2411.obj : error LNK2019: unresolved external symbol __MapWindowPoints@16 referenced in function _MapWindowPoints@16",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\r2411.dll : fatal error LNK1120: 1 unresolved externals"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2412,
+      "start": 190,
+      "end": 201,
+      "removed_lines": 12,
+      "signature": "HWND GetLastActivePopup(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 0,
+          "sha256": "8e22119fdfe839f674f964d3001bcb153c218840eddfc74cd740a7df38e4eb38",
+          "diagnostics": []
+        },
+        {
+          "kind": "link",
+          "exit": 1120,
+          "sha256": "2546c035e70c2d8fff9948bf4bccd449fc019cd5b1339f7689d46a44755ec0d2",
+          "diagnostics": [
+            "wow_user_discovery.obj : error LNK2005: _wow_native_GetLastActivePopup@4 already defined in r2412.obj",
+            "r2412.obj : error LNK2019: unresolved external symbol __GetLastActivePopup@4 referenced in function _wow_native_GetLastActivePopup@4",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\r2412.dll : fatal error LNK1120: 1 unresolved externals"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2413,
+      "start": 211,
+      "end": 244,
+      "removed_lines": 34,
+      "signature": "DWORD GetWindowThreadProcessId(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "c9293b3c53b8ef72463144cb3bf7f881d800a8904e922e8f315f876b856f6ddf",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2413.c(236): error C2065: 'WindowProcess': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2413.c(237): error C2065: 'WindowThread': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2414,
+      "start": 256,
+      "end": 287,
+      "removed_lines": 32,
+      "signature": "int GetScrollPos(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "900d5a844b3d2c71702f1df455ef8e374f664d3391576a4311b9b03b288033c9",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2414.c(273): error C2037: left of 'Vert' specifies undefined struct/union 'tagSBINFO'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2414.c(273): error C2037: left of 'Horz' specifies undefined struct/union 'tagSBINFO'"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2415,
+      "start": 298,
+      "end": 337,
+      "removed_lines": 40,
+      "signature": "BOOL GetScrollRange(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "3342d1f25600166258b15c7bbf31bb6c2e0d9e07f7f08ecd009dcf6ea0db6c44",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(318): error C2065: 'PSBDATA': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(318): error C2146: syntax error: missing ';' before identifier 'pSBData'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(318): error C2065: 'pSBData': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(319): error C2065: 'pSBData': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(319): error C2037: left of 'Vert' specifies undefined struct/union 'tagSBINFO'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(319): error C2037: left of 'Horz' specifies undefined struct/union 'tagSBINFO'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(320): error C2065: 'pSBData': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(320): error C2223: left of '->posMin' must point to struct/union",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(321): error C2065: 'pSBData': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2415.c(321): error C2223: left of '->posMax' must point to struct/union"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2416,
+      "start": 346,
+      "end": 402,
+      "removed_lines": 57,
+      "signature": "BOOL GetScrollInfo(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "5a4eebcfb69b39ce33d97487caa90f9f97729f31c735ae50e62d542b997f2986",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(353): error C2065: 'PSBDATA': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(353): error C2146: syntax error: missing ';' before identifier 'pSBData'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(353): error C2065: 'pSBData': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(366): error C2065: 'SIF_MASK': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(391): error C2065: 'pSBData': undeclared identifier",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(391): error C2037: left of 'Vert' specifies undefined struct/union 'tagSBINFO'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(391): error C2037: left of 'Horz' specifies undefined struct/union 'tagSBINFO'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2416.c(393): error C2065: 'pSBData': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2417,
+      "start": 412,
+      "end": 415,
+      "removed_lines": 4,
+      "signature": "HWND GetActiveWindow(VOID)",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "0877276f8e201a33d20c8dca23737a5164f960fb63b0b16cf0d98c30aca465fe",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2417.c(414): error C2065: 'UserThreadStateActiveWindow': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2418,
+      "start": 424,
+      "end": 427,
+      "removed_lines": 4,
+      "signature": "HCURSOR GetCursor(VOID)",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "360c87182e969b6db361ec63aaec73b1d23ace5af5a752f2dbb274c2a2ef78d4",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2418.c(426): error C2065: 'UserThreadStateCursor': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2419,
+      "start": 438,
+      "end": 445,
+      "removed_lines": 8,
+      "signature": "BOOL IsMenu(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 0,
+          "sha256": "b694bcda337b7a886c8cf6f32ffc80f4b2831f5ae9ff16abb01aa458081ce047",
+          "diagnostics": []
+        },
+        {
+          "kind": "link",
+          "exit": 1120,
+          "sha256": "6df7b35bc6812a1b6573af9e13272a217370d3aa22c220970fa9ff42df0470a0",
+          "diagnostics": [
+            "user32.lib(USER32.dll) : error LNK2005: _IsMenu@4 already defined in r2419.obj",
+            "r2419.obj : error LNK2019: unresolved external symbol _HMValidateHandle@8 referenced in function _IsMenu@4",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237\\r2419.dll : fatal error LNK1120: 1 unresolved externals"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2420,
+      "start": 457,
+      "end": 463,
+      "removed_lines": 7,
+      "signature": "DWORD GetAppCompatFlags(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "7cad8279733681287b62c906a679ef976c2d1dc5881104d59003a4da127b9760",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2420.c(458): error C2146: syntax error: missing ')' before identifier 'pti'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2420.c(458): error C2061: syntax error: identifier 'pti'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2420.c(458): error C2059: syntax error: ';'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2420.c(458): error C2059: syntax error: ')'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2420.c(459): error C2449: found '{' at file scope (missing function header?)",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2420.c(463): error C2059: syntax error: '}'"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2421,
+      "start": 471,
+      "end": 481,
+      "removed_lines": 11,
+      "signature": "BOOL IsWindowUnicode(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "194934b7ee0111ef24cc9490a07a5dd21e1d875aebaf2e27092546cfa0e0c3a6",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2421.c(480): error C2065: 'WFANSIPROC': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2422,
+      "start": 489,
+      "end": 501,
+      "removed_lines": 13,
+      "signature": "BOOL TestWindowProcess(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "a47edf5cdae81dd16206bd3a82fce91ff3562f0ab9d4da497373819b08d79ebb",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2422.c(500): error C2065: 'WindowProcess': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2423,
+      "start": 509,
+      "end": 513,
+      "removed_lines": 5,
+      "signature": "BOOL IsHungAppWindow(",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "6f40b6d5c692f22af560872bbc95e7b5cb8505a3f33b36e19944a53319c2b417",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2423.c(512): error C2065: 'WindowIsHung': undeclared identifier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2424,
+      "start": 526,
+      "end": 538,
+      "removed_lines": 13,
+      "signature": "PTHREADINFO PtiCurrent(VOID)",
+      "controls": [
+        {
+          "kind": "compile",
+          "exit": 2,
+          "sha256": "021b375778f1d37e2bfbfcfaf419092662aa0427c908099af5af117428b80fb9",
+          "diagnostics": [
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2424.c(526): error C2061: syntax error: identifier 'GetCurrentThreadId'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2424.c(526): error C2059: syntax error: ';'",
+            "O:\\repos.hobby\\ntvdm64\\build\\t483-s5-p237/r2424.c(526): error C2059: syntax error: '<parameter-list>'"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Compile failures caused by omitted declarations alone are not sufficient necessity proof. Original state owner and reusable provider closure must also be checked. R2412 onward not dispositioned.",
+  "final_review": "p237-winmgrc-review.json",
+  "delivery_receipt": "batch-p237-checkpoint.json"
+}

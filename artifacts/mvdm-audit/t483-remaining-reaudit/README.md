@@ -1402,3 +1402,9 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 - [P236 usercli final source review](p236-usercli-review.json): original declaration recovery and two-phase consolidation;mirror2170->556(-1614);delivery pending.
 
 - [P236 delivery](batch-p236-checkpoint.json): usercli original declaration recovery and shared inclusion phases;cached,publish11x2,focused34,Full20;mirror delta-1614.
+
+- [P237 winmgrc investigation](p237-winmgrc-investigation.json): individual original restoration compile/link controls;negative results are not product-test passes.
+
+- [P237 winmgrc source review](p237-winmgrc-review.json): restored pragma and compatibility getter body;mirror517->500(-17),residual native/private boundaries pending owner;delivery receipt below.
+
+- [P237 delivery](batch-p237-checkpoint.json): winmgrc original pragma/getter restored;cached,publish11x2,focused34,Full20;mirror delta-17.

@@ -11,6 +11,7 @@ VOID xxxCheckDefPushButton(PWND, HWND, HWND);
 BOOL _AdjustWindowRectEx(LPRECT, LONG, BOOL, DWORD);
 BOOL NeedsWindowEdge(DWORD, DWORD, BOOL);
 __declspec(thread) wow_default_context *wow_default_current;
+DWORD WINAPI GetAppCompatFlags(PWOW_CLIENT_THREADINFO);
 static wow_task_client_info client;
 const wow_task_client_info *WINAPI wow_edit_client_info(void) { return &client; }
 static WND desktop, root, first, container, nested, disabled, last, outside;
@@ -224,6 +225,14 @@ int __cdecl main(void)
     verify_dialog_controls();
     verify_dialog_groups();
     verify_dialog_geometry();
+    client.dwCompatFlags = 0;
+    SetLastError(0x483);
+    CHECK(GetAppCompatFlags(NULL) == 0);
+    CHECK(IsGUIThread(FALSE));
+    CHECK(GetLastError() == 0x483);
+    client.dwCompatFlags = 0x12345678;
+    CHECK(GetAppCompatFlags(NULL) == 0x12345678);
+    CHECK(GetLastError() == 0x483);
     if (!failures) puts("WOW_DIALOG_NAVIGATION_OK");
     return failures ? 1 : 0;
 }
