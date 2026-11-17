@@ -259,3 +259,10 @@ lines retired by owner approval. Cached build,targeted tests and publish11x2 pas
 [P24 receipt](batch-p24-checkpoint.json) and [verification evidence](p24-verification-evidence.zip).
 Current census:1058 files,250 nonzero,2085 blocks/32812 lines.
 The P20 ratio snapshot predates the now-retired client/client.c.
+
+[P25 RTL time retirement](rtl-time-retirement.json):6 points/1216 lines.
+Unused member removal;cached build,archive verification,publish11x2 and targeted tests passed.
+
+[P25 receipt](batch-p25-checkpoint.json) and [verification evidence](p25-verification-evidence.zip).
+Current census:1057 files,249 nonzero,2079 blocks/31596 lines.
+P20 usage ratios predate the now-removed RTL time.c.

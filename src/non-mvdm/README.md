@@ -2678,3 +2678,7 @@ records remain provenance only,not current mirror exceptions.
 T483 S6 P24 retires client/client.c in favor of five compat units preserving
 its eight selected original functions. Historical entries are provenance only;
 ntcftxt.h remains an original mirror dependency. No other mirror changes.
+
+T483 S6 P25 supersedes the base/ntos/rtl/time.c subset:the unused RTL archive
+member and its local-body-only test are removed by owner approval. No compat
+replacement;historical restoration records remain provenance only.

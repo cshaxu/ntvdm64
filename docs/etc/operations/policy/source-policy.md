@@ -397,3 +397,9 @@ its eight selected functions in five responsibility-specific compat units.
 Preserve original bodies,ABI and existing binding contracts,including original
 ntcftxt.h registration. This retires source-selection scaffolding,not original
 algorithms;it does not establish minimality of the registration or wait adapters.
+
+### T483 S6 P25 owner-approved unused RTL time retirement
+
+Retire base/ntos/rtl/time.c only after current product links and archive-member
+checks confirm it is unnecessary. Remove its local-body-only test;do not
+replace it with autonomous code or change other RTL/Netlib mirror bodies.

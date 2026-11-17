@@ -279,7 +279,7 @@ $openntNetapiNames = @('apibuff.c')
 $openntXactSrvNames = @('apiwksta.c', 'apiuse.c', 'apimsg.c', 'apisvc.c', 'apisrv.c', 'xssubs.c', 'strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'xsunicod.c', 'auxdata.c', 'parmnum.c')
 $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'auxdata.c', 'parmnum.c')
 $openntBaseVdmNames = @('vdm.c')
-$openntRtlNames = @('environ.c', 'error.c', 'time.c')
+$openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',

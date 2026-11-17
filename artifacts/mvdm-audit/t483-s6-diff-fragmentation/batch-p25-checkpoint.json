@@ -1,0 +1,74 @@
+{
+  "packet": "M0 T483 S6 P25",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/README.md",
+        "sha256": "6c92605f343d3170752ea65b6f2c58c278a03300c3b7d52ee0ed7290d55af89f"
+      },
+      {
+        "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "sha256": "ce6f7b1578e3ee9c0d6f6657bc40627411e12d95dd58b7e0219cb136d7915648"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/base/ntos/rtl/time.c",
+      "test/integration/rtl_time1970_restoration_test.c"
+    ],
+    "source_files": 2
+  },
+  "publication": {
+    "status": "published",
+    "package": "6d87841b-7c62-4629-9637-7ed981a15caa",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "time-provider": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1057,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 249,
+    "blocks": 2079,
+    "lines": 31596,
+    "reviewed_live_files": 29,
+    "remaining_files": 220,
+    "retired_reviewed_files": 6,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 214,
+    "extraction_blocks": 208,
+    "unused_removal_blocks": 6,
+    "owner_retired_lines": 21733,
+    "extraction_lines": 20517,
+    "unused_removal_lines": 1216,
+    "total_census_reduction_blocks": 254,
+    "total_census_reduction_lines": 22927
+  },
+  "limits": [
+    "Owner-approved unused archive-member removal, no compat replacement",
+    "All retained mirrors and original guest unchanged",
+    "Native NTDLL seven calendar vectors passed on x86 and x64; no product caller newly redirected",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}
