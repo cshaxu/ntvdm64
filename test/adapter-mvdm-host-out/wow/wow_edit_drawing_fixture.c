@@ -77,6 +77,25 @@ static void push_button_contract(void)
     DrawPushButton(NULL, &rect, DFCS_PUSHED, 0);
     CHECK(edge_kind == EDGE_SUNKEN && filled == ahbrSystem[COLOR_3DFACE]);
 }
+static void mapping_sign_contract(void)
+{
+    HDC dc = CreateCompatibleDC(NULL);
+    POINT sign = {0};
+    CHECK(dc != NULL);
+    if (!dc) return;
+    CHECK(GetSignFromMappingMode(dc, &sign));
+    CHECK(sign.x == 1 && sign.y == 1);
+    CHECK(SetMapMode(dc, MM_ANISOTROPIC) != 0);
+    CHECK(SetWindowExtEx(dc, 10, 10, NULL));
+    CHECK(SetViewportExtEx(dc, -20, 30, NULL));
+    CHECK(GetSignFromMappingMode(dc, &sign));
+    CHECK(sign.x == -1 && sign.y == 1);
+    CHECK(SetViewportExtEx(dc, 20, -30, NULL));
+    CHECK(GetSignFromMappingMode(dc, &sign));
+    CHECK(sign.x == 1 && sign.y == -1);
+    CHECK(DeleteDC(dc));
+    CHECK(!GetSignFromMappingMode(NULL, &sign));
+}
 int __cdecl main(void)
 {
     RECT input = {10, 20, 110, 90}, output = {0};
@@ -101,6 +120,7 @@ int __cdecl main(void)
     rectangle(3, 108, 23, 2, 67, ghbrGray);
     CHECK(EqualRect(&input, &output));
     push_button_contract();
+    mapping_sign_contract();
     printf("original_edit_drawing_failures=%u\n", failures);
     return failures != 0;
 }

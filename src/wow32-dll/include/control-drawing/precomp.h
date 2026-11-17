@@ -44,4 +44,10 @@ VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
 #define UserSetBkColor SetBkColor
 #define UserSetTextColor SetTextColor
 VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
+/* Public GDI leaves for the restored original drawing helpers. */
+#define UserSelectBrush(dc, brush) ((HBRUSH)SelectObject((dc), (brush)))
+#define UserGetViewportExtEx GetViewportExtEx
+#define UserGetWindowExtEx GetWindowExtEx
+#define ghbrWhite ((HBRUSH)GetStockObject(WHITE_BRUSH))
+#define ghbrBlack ((HBRUSH)GetStockObject(BLACK_BRUSH))
 #endif

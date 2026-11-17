@@ -1667,3 +1667,7 @@ P248 userk.h and coupled queue restoration: [receipt](batch-p248-checkpoint.json
 P249 chartran.c: [whole-file source review](p249-chartran-review.json);original conversion unit and NLS data import restored;two residual boundaries pending,validation not yet complete.
 
 P249 [delivery receipt](batch-p249-checkpoint.json):26->17blocks,226->149mirror diff lines;four points restored/confirmed,two residual decisions. Cached build,publish11x2,focused37/task-order and Full20 passed.
+
+P250 draw.c: [source review](p250-draw-review.json);complete helpers restored,public USER provider boundary retained pending owner;validation pending.
+
+P250 [delivery receipt](batch-p250-checkpoint.json):8->6blocks,1080->392mirror diff lines;three points restored/confirmed,two residual decisions. Cached build,publish11x2,focused37/task-order and Full20 passed.

@@ -1,0 +1,215 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+  "points": "R2673-R2677",
+  "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+  "before": {
+    "blocks": 8,
+    "added": 5,
+    "deleted": 1075,
+    "total": 1080
+  },
+  "after_local": {
+    "blocks": 6,
+    "added": 2,
+    "deleted": 390,
+    "total": 392
+  },
+  "source_sha256": "c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb",
+  "status": "Whole-file source review,cached full,publish11x2,focused37/task-order,Full20,boundary/governance PASS;two residual boundaries pending owner;Git accompanies receipt",
+  "line_check": {
+    "matched": 677,
+    "adaptations": [
+      {
+        "line": 11,
+        "text": "#include \"precomp.h\""
+      }
+    ]
+  },
+  "restored": "Original constants and complete DrawDiagonalLine,FillTriangle,DrawDiagonal,DrawGrip,DrawBox,DrawMenuMark,DrawIt,DrawWindowSize,DrawScrollArrow,GetSignFromMappingMode,ClientFrame;original DrawPushButton/DrawFrame unchanged;WINDOWS_ME#error moved to original relative order",
+  "remaining": [
+    {
+      "point": "R2673",
+      "boundary": "One precomp include supplies selected declaration and GDI service names;original translation unit relied on upstream precompiled environment. Restoring no include requires moving the same header into forced build input;no complexity reduction."
+    },
+    {
+      "point": "R2674",
+      "boundary": "Original FillRect/InvertRect/DrawFrameControl/DrawEdge share public USER32 API names imported through windows.h;defining these dllimport APIs in the same selected source is a compile conflict and changes provider ownership. Helpers restored without replacing the native entrypoints. Native-vs-original provider choice remains owner decision."
+    }
+  ],
+  "metric_note": "Six blocks include one#error-bearing block;remaining original omission is the four public API units,not all helper functions. Fixed lexical metric excludes#line but retains#error.",
+  "build_dependency_correction": {
+    "first_attempt": "build/t483-s5-p250/cached.log: C2065 DFCS_SCROLLHORZ/DFCS_SCROLLMAX",
+    "owner": "Original public/internal/windows/inc/winuserp.h267-268",
+    "action": "Copy exact two declaration constants to existing compat/wow_user_declarations.h already force-included by product and fixture;mirror unchanged"
+  },
+  "compiler_line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+        "sha256": "c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb"
+      }
+    ],
+    "compiler_observed": {
+      "DrawDiagonalLine": 82,
+      "FillTriangle": 270,
+      "DrawDiagonal": 311,
+      "DrawGrip": 363,
+      "DrawBox": 416,
+      "DrawMenuMark": 527,
+      "DrawIt": 570,
+      "DrawWindowSize": 616,
+      "DrawScrollArrow": 633,
+      "DrawPushButton": 1004,
+      "DrawFrame": 1067,
+      "GetSignFromMappingMode": 1138,
+      "ClientFrame": 1167
+    }
+  },
+  "publication": {
+    "package": "087a2dac-58bb-40b5-8db5-50b964f7e458",
+    "images": 11,
+    "destinations": 2,
+    "hash_verified": true
+  },
+  "focused_first_attempt": {
+    "result": "Build deadline exceeded300s at157/174;no fixture pass claimed",
+    "cleanup": "Owned build terminated;WMI confirmed no call-boundaries compiler remains",
+    "retry": "build/t483-s5-p250/focused-linked-retry.log;session59104"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 467715,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 7044,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1213,
+        "CleanupMs": 526,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 17281,
+        "CleanupMs": 522,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 19506,
+        "CleanupMs": 539,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 15026,
+        "CleanupMs": 501,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 255,
+        "CleanupMs": 519,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66688,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 51503,
+        "CleanupMs": 522,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 50154,
+        "CleanupMs": 520,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 17583,
+        "CleanupMs": 527,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 13516,
+        "CleanupMs": 487,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 73224,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12455,
+        "CleanupMs": 339,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27867,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30611,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3900,
+        "CleanupMs": 434,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7639,
+        "CleanupMs": 533,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10190,
+        "CleanupMs": 546,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3690,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6694,
+        "CleanupMs": 565,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19902,
+        "CleanupMs": 486,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "result": "PASS",
+    "fixtures": 37,
+    "task_order": "PASS",
+    "evidence": "build/t483-s5-p250/focused-linked-retry.log",
+    "first_attempt": "Owned fixture build exceeded300s at157/174;terminated and absence verified;cached retry covers all fixtures"
+  }
+}

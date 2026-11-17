@@ -19,4 +19,8 @@ typedef VOID (APIENTRY *PFNW32ET)(VOID);
 LPVOID WINAPI WOWGetVDMPointer(DWORD vp, DWORD dwBytes,
                                BOOL fProtectedMode);
 
+/* Original public/internal/windows/inc/winuserp.h:267-268. */
+#define DFCS_SCROLLMAX          0x0001
+#define DFCS_SCROLLHORZ         0x0002
+
 #endif

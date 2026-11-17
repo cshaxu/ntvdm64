@@ -29,4 +29,12 @@ COLORREF WINAPI drawing_fore(HDC, COLORREF);
 #define UserSetBkColor drawing_back
 #define UserSetTextColor drawing_fore
 VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
+/* Public GDI leaves for the restored original drawing helpers. */
+#define UserSelectBrush(dc, brush) ((HBRUSH)SelectObject((dc), (brush)))
+#define UserGetViewportExtEx GetViewportExtEx
+#define UserGetWindowExtEx GetWindowExtEx
+#define ghbrWhite ((HBRUSH)GetStockObject(WHITE_BRUSH))
+#define ghbrBlack ((HBRUSH)GetStockObject(BLACK_BRUSH))
+#define UserTextOutW TextOutW
+BOOL WINAPI GetSignFromMappingMode(HDC, PPOINT);
 #endif
