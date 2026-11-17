@@ -1,0 +1,188 @@
+{
+  "packet": "M0 T483 S7 P9",
+  "prior_delivery": "a9733d0fca6ddff117692a23cad040e1c32b382c",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "before": {
+        "blocks": 12,
+        "added": 49,
+        "deleted": 11
+      },
+      "after": {
+        "blocks": 12,
+        "added": 49,
+        "deleted": 11
+      },
+      "source_sha256": "671d14c3f1ca7e8351f0a874579c2962d7c9a4a671a1437370b22ec891e5d0f1",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+      "decision": "Keep native HWND conversion, scoped procedure identity and exception ownership. Source controls distinguish numeric guest procedures, native token carriers, and mapping lifetime. Three local error guards have no original alternative and stay counted.",
+      "evidence": "../t483-remaining-reaudit/r1914-r1930-wuwind-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "before": {
+        "blocks": 4,
+        "added": 8,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 4,
+        "added": 8,
+        "deleted": 0
+      },
+      "source_sha256": "3ccaff846af99bd34046d43b8b9f30c114f373e5ca6f35d7cc966e996ee460c2",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "decision": "Restore original blank row before NO_STRING_OPERATIONS. Current selected callback types already match original. Local unsupported-profile guards still count.",
+      "evidence": "../t483-remaining-reaudit/cpu_vid-h-file-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "before": {
+        "blocks": 1,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 4,
+        "deleted": 0
+      },
+      "source_sha256": "531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b",
+      "original_sha256": "5147fce6825d1f7e8d69298e4da617f0fe414150963cff391ee53c856a0f5b2a",
+      "decision": "Keep minimum standalone Windows/type inclusion context. Original function bodies retained without independent helpers.",
+      "evidence": "../t483-remaining-reaudit/p253-random-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "before": {
+        "blocks": 10,
+        "added": 15,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 10,
+        "added": 15,
+        "deleted": 6
+      },
+      "source_sha256": "fdccb451d0a5c9c3002139249ee02c6ada70d06aefbaf8cd3f423fc61eaf3981",
+      "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "decision": "Actual original compile fails on CPU30 descriptor type and functions. Existing CPU40 table providers supply the same owner. The alternate numeric output represents guest location before native alias creation. Keep the original ABI wrapper and existing early lifecycle escape.",
+      "evidence": "../t483-remaining-reaudit/r1242-r1248-sim32-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "before": {
+        "blocks": 4,
+        "added": 25,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 4,
+        "added": 23,
+        "deleted": 0
+      },
+      "source_sha256": "d070c2f83723b0bcc3098419cdb9dc6501c5a4f88497fd4fcf0f28f5d12cdea1",
+      "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+      "decision": "Remove the two-line added explanation. CHAIN2 byte pairs share even-plane coordinates, so the selected marker must handle bitmap, bounds and bank through the existing EGA marker. Keep the required vector binding and mode4 selection.",
+      "evidence": "../t483-remaining-reaudit/r0489-r0494-ev-glue-review.json"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "before": {
+        "blocks": 11,
+        "added": 0,
+        "deleted": 147
+      },
+      "after": {
+        "blocks": 11,
+        "added": 0,
+        "deleted": 147
+      },
+      "source_sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+      "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+      "decision": "Actual x86/x64 original controls show duplicate SDK layout declarations, missing private image-information types and modern memory macro collisions. Selected unaffected declarations and original architecture guards already restored.",
+      "evidence": "../t483-remaining-reaudit/batch-p213-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "before": {
+        "blocks": 4,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 4,
+        "added": 4,
+        "deleted": 0
+      },
+      "source_sha256": "83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4",
+      "original_sha256": "867a2c65cbc1b0980ac6a07002072fcfb638e4c24ebe8e513f4c93f3d1c6fe6c",
+      "decision": "Retain two coherent CPU40 guards. Original unconditioned table macros would override original direct register accessors and call through a different selected vector owner.",
+      "evidence": "../t483-remaining-reaudit/r0496-r0499-evidgen-review.json"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "before": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "7c72f522a841a78f78494e950190588fcaf26a2251412a7725171db25258b949",
+      "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+      "decision": "Keep native-width local capture metadata. The original PULONG control misaligns captured x64 STARTUPINFOA to remainder four modulo eight. x86 controls agree.",
+      "evidence": "../t483-remaining-reaudit/batch-p208-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "source_sha256": "7c4a0fd51a07ad761b9ea35a5e288f66bca7fd47416675c239cea871d9e2816f",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "decision": "Remove one extra empty row before line182. Selected code already returns to the original native timing and alert contract. Retain excluded errors.",
+      "evidence": "../t483-remaining-reaudit/r1231-r1233-nt-timer-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "before": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 0
+      },
+      "source_sha256": "2448aec8c1645a93f237cfeb394227a12d1c1c4306d25a1c26516fc2c782806c",
+      "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+      "decision": "Original stream lookup cannot read the firmware that product builds embed as named RCDATA. Keep the bounded resource hook. Original uncalled write path was already restored.",
+      "evidence": "../t483-remaining-reaudit/r1206-r1208-nt-rez-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 77,
+    "remaining": 136,
+    "nonzero_files": 237,
+    "non_error_points": 2027,
+    "non_error_lines": 28434,
+    "source_reduction_s7": {
+      "points": 21,
+      "lines": 544
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Restored blank placement in two files and removed one added explanatory comment. Continue using the P7 published runtime."
+}

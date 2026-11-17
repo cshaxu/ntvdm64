@@ -92,6 +92,7 @@ typedef struct
 #line 87
 #error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile
 #endif
+
 #line 90
 #ifndef	NO_STRING_OPERATIONS
 #if defined(CPU_40_STYLE) && defined(C_VID)

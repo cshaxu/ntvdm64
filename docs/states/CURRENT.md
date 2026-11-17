@@ -99,9 +99,15 @@ S7 P8 completes ten more reviews and removes two added blank lines in
 The P7 runtime package is retained.
 [P8 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p8-checkpoint.json).
 
-S7 progress is 67 reviewed and 146 remaining. Source restorations reduce
-20 points and 540 changed lines in S7. The current census is 2,028 non-error
-points and 28,438 changed lines across 238 mirrors with filtered differences.
+S7 P9 completes ten more file reviews. It restores original blank
+placement in `cpu_vid.h` and `nt_timer.c` and removes an added comment
+in `ev_glue.c`. The code and original diagnostic anchors are preserved.
+The P7 runtime package is retained.
+[P9 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p9-checkpoint.json).
+
+S7 progress is 77 reviewed and 136 remaining. Source restorations reduce
+21 points and 544 changed lines in S7. The current census is 2,027 non-error
+points and 28,434 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

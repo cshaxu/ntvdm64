@@ -182,7 +182,6 @@ ERROR RECOVERY    :     errors are ignored
 #include "nt_event.h"
 
 
-
 #line 182
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::: INTERMODULE EXPORTS */
 

@@ -672,8 +672,6 @@ OUTPUT: None.
 
 ====================================================================
 */
-/* DIVERGENCE(T88-CHAIN2-DIRTY): CHAIN2 CPU bytes select even plane offsets
- * in pairs (T99 hardware layout); the selected EGA marker owns bitmap, bounds and bank units. */
 LOCAL IUH chain2_mark_string IFN4(IUH, v1, IUH, v2, IUH, v3, IUH, v4)
 {
 	IU32 offset = (IU32)jccc_parm1, count = (IU32)jccc_parm2;
