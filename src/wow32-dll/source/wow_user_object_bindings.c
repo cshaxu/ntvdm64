@@ -16,9 +16,7 @@ static __declspec(thread) PHE original_shared_entry;
 #define gpsi (&original_handle_limits)
 #define WowSharedHandleEntry(index) (original_shared_entry)
 #define HMIndexFromHandle(handle) ((DWORD)(WORD)(handle))
-#define GetFullUserHandle wow_original_full_user_handle
-#include "non-mvdm/windows/core/ntuser/client/handles.c"
-#undef GetFullUserHandle
+#include "compat/include/wow_full_user_handle.h"
 #undef HMIndexFromHandle
 #undef WowSharedHandleEntry
 #undef gpsi
@@ -37,7 +35,7 @@ DWORD WINAPI wow_user_full_handle(wow_user_object_table *table, WORD handle)
     entry.wUniq = HIWORD(metadata);
     previous = original_shared_entry;
     original_shared_entry = &entry;
-    result = wow_original_full_user_handle(handle);
+    result = GetFullUserHandle(handle);
     original_shared_entry = previous;
     return result;
 }

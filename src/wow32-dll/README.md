@@ -249,7 +249,7 @@ and the historical HWND input of the native thread/process query. Original
 wuclass/wuwind/walias bodies remain unchanged: UnregisterClassA enters the
 already imported ntcftxt/class removal chain, including client-menu release,
 instead of deleting only the native registration. GetWindowThreadProcessId
-normalizes short inputs with the existing original handles.c owner, then asks
+normalizes short inputs with the retained GetFullUserHandle in compat, then asks
 native USER for real identities; it neither invents task IDs nor walks a new
 registry. Caller data locking/last-error/output failure behavior is preserved.
 Published class-release failure after native unregister is terminal, not an

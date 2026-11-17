@@ -440,3 +440,11 @@ sysBmpStyles, lines 25–95, to src/compat/include/wow_button_style_table.h
 with its original static linkage, dimensions, and initializer bytes
 (normalizing only line endings). The WOW button resource carrier and
 fixture include this table after the existing OBI declarations.
+
+### T483 S6 P30 owner-approved full USER handle extraction
+
+Retire the OpenNT windows/core/ntuser/client/handles.c subset. Move
+GetFullUserHandle, lines 293–320, to src/compat/include/wow_full_user_handle.h
+and use its original symbol and DWORD(WORD) signature with the existing x86
+calling convention. Preserve the single selected-metadata accessor from
+OPENNT-HOST-070 and the existing DDE short-handle fallback.

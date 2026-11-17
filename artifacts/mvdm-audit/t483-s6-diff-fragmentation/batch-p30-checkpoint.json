@@ -1,0 +1,73 @@
+{
+  "packet": "M0 T483 S6 P30",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 2,
+    "files": [
+      {
+        "path": "src/compat/include/wow_full_user_handle.h",
+        "sha256": "1ddb8a1dbb3394c43341c364012016e71eedd77d33628737eff24524993bbae3"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_user_object_bindings.c",
+        "sha256": "70cdcb1dbf4a1239a4bca5c75eb1d9fb4e67ac5df98486d33fc39368e883550d"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/client/handles.c"
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "e4cd062e-4b64-4a33-8cff-5d00768d33fa",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "retirement": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1052,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 244,
+    "blocks": 2060,
+    "lines": 29531,
+    "reviewed_live_files": 29,
+    "remaining_files": 215,
+    "retired_reviewed_files": 11,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 233,
+    "extraction_blocks": 227,
+    "unused_removal_blocks": 6,
+    "owner_retired_lines": 23798,
+    "extraction_lines": 22582,
+    "unused_removal_lines": 1216,
+    "total_census_reduction_blocks": 273,
+    "total_census_reduction_lines": 24992
+  },
+  "limits": [
+    "Owner-approved full USER handle extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "Original GetFullUserHandle name restored with the existing metadata accessor",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

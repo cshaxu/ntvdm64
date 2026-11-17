@@ -18,3 +18,4 @@ Original paths are relative to OpenNT revision `5c5b979ec08c17d3ca2eb70e8aad62d2
 | P24 | `windows/core/ntuser/client/client.c` | 2834–2840 (7) | `void ClearWindowState( PWND pwnd, UINT flags)` | `wow_control_state.c` | Original signature retained. |
 | P27 | `windows/core/ntuser/rtl/rect.c` | 46–56 (11) | `BOOL APIENTRY CopyInflateRect( LPRECT prcDst, CONST RECT *prcSrc, int cx, int cy)` | `wow_control_rect.c` | Original signature retained. |
 | P28 | `windows/core/ntuser/kernel/miscutil.c` | 24–37 (14) | `VOID SetDialogPointer(PWND pwnd, LONG lPtr)` | `wow_dialog_pointer.c` | Original x86 /Gz calling convention retained. Destination `VOID SetDialogPointer(PWND pwnd, LONG lPtr)`. |
+| P30 | `windows/core/ntuser/client/handles.c` | 293–320 (28) | `DWORD GetFullUserHandle(WORD wHandle)` | `include/wow_full_user_handle.h` | Original symbol and x86 /Gz signature retained. Existing shared metadata accessor retained. |
