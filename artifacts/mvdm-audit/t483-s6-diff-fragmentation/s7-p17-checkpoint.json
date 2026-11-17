@@ -1,0 +1,208 @@
+{
+  "packet": "M0 T483 S7 P17",
+  "prior_delivery": "4d746e6b2",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "before": {
+        "blocks": 4,
+        "added": 11,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 4,
+        "added": 11,
+        "deleted": 2
+      },
+      "source_sha256": "406863948f5e8c06d9da183622d691f68313abdfeaa7fb99af4fc7b772a0c200",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "decision": "Keep standalone session begin and common finish around the original host entry, the package registry view, and NTAPI on the local DbgBreakPoint. The actual selected compile rejects the original calling convention; /Gz would change unrelated ABI.",
+      "evidence": "../t483-remaining-reaudit/r1251-r1255-entry-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "source_sha256": "a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "decision": "Use the existing new-debug-event latch at original TSS T-bit match. DR6.BT remains guest-visible history; it is not a new event. Keep the declaration include and one assignment.",
+      "evidence": "../t483-remaining-reaudit/r0416-r0417-task-debug-event.json"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "source_sha256": "62dcc16fa98eb2dea499a194d01691bfde0ed6c5110aac9025fff391b7c0d998",
+      "original_sha256": "f590ef866f87ce80671c4b6f4e3bbe94347342e6b723bc062ed6f044fbb3820f",
+      "decision": "Retain the independent reentry completion flag and existing worker pending-wait query. Original command-event reset is not authoritative for native reentry completion. Source/provider comparison and existing worker fixtures cover the distinct acknowledgements.",
+      "evidence": "../t483-remaining-reaudit/batch-p182-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "before": {
+        "blocks": 16,
+        "added": 55,
+        "deleted": 15
+      },
+      "after": {
+        "blocks": 13,
+        "added": 52,
+        "deleted": 12
+      },
+      "source_sha256": "5a4c7821cc9703f3fa0f82d9310d79137b07833bada8d6e67370ab915da22c44",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "decision": "Restore three original closing-conditional comments. Keep caller BDA-selected regeneration bounds, deterministic no-update flag and existing standalone SAS writes. Three local conditional safeguards have no matching original inner arms; their overhead remains counted.",
+      "evidence": "../t483-remaining-reaudit/r0954-r0969-video-review.json",
+      "retained_local_guards": {
+        "1600": "local standalone SAS guard inside an original compound arm; no original inner condition",
+        "1679": "local standalone SAS guard inside an original compound arm; no original inner condition",
+        "2182": "local standalone SAS guard inside an original compound arm; no original inner condition"
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "before": {
+        "blocks": 4,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 2
+      },
+      "source_sha256": "a1c34a9b9554b9db8a7163742433521c0280e79621e9626fc68fe9aee6592936",
+      "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+      "decision": "Restore harmless original CallCsrFlag declaration. Keep actual guest shared-info and CSR flag address publication; a native static address cannot satisfy original USER16 memory consumers. Two selected x86 object controls differ only in the COFF timestamp.",
+      "evidence": "../t483-remaining-reaudit/r1855-r1859-wuman-review.json",
+      "x86_control": {
+        "exit_codes": [
+          0,
+          0
+        ],
+        "different_offsets": [
+          4
+        ],
+        "size": 4785,
+        "normalized_sha256": "06b6bd45a63452f653788a2d9235bd4ef737d4b949f9f5e509781ce519898e35",
+        "local_evidence_directory": "build/t483-s7-p17"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "4053cf58e9c439bdcc74611d31bbddcc21a24884b1eb8d0df9f9595127e202ae",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "decision": "Keep privilege-changing CALL stack width selected from new SS.B. The original gate operand width is independent of stack address size; original-only negative fails both mixed-width cases.",
+      "evidence": "../t483-remaining-reaudit/r0433-r0437-call-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "before": {
+        "blocks": 4,
+        "added": 4,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 4,
+        "added": 4,
+        "deleted": 1
+      },
+      "source_sha256": "f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8",
+      "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+      "decision": "Keep exact-source-proven allocation checks and the signed cleanup predicate for tab arrays. The break prevents EM_SETTABSTOPS cleanup from entering the subsequent independent case.",
+      "evidence": "../t483-remaining-reaudit/r1661-r1665-wmsgem-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "before": {
+        "blocks": 2,
+        "added": 13,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 12,
+        "deleted": 0
+      },
+      "source_sha256": "e79eeb341a379cf62b4f06b438b1b7c9bdbb63300f58203640a640e7a39dfd03",
+      "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234",
+      "decision": "Remove one extra blank before the original registerCX anchor. Legacy fast BOP has already been removed. Retain separate ordinary 53:00 publication into the actual CCPU LDT/GDT tables.",
+      "evidence": "../t483-remaining-reaudit/r0183-r0186-fast-path-dependency-review.json"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "before": {
+        "blocks": 15,
+        "added": 35,
+        "deleted": 20
+      },
+      "after": {
+        "blocks": 15,
+        "added": 35,
+        "deleted": 20
+      },
+      "source_sha256": "2a329bee7eac3b511b967a82c3cbdf7b6fad9bec1eb48c9f8e0b67f7100599eb",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "decision": "Preserve original network query and formatting policy. Guest output buffers can cross noncontiguous pages; narrow copy helpers handle selectors and capacity without treating guest addresses as native aliases. Username length uses the actual wide field.",
+      "evidence": "../t483-remaining-reaudit/r1269-r1279-vrnetapi-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+      "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+      "decision": "Keep finite WOW bitmap owner header. The original PCH requires unavailable private USER/CSR/kernel declarations. Restoring unqualified include selects unrelated WOW PCH and leaves five references unresolved. Original bitmap algorithms remain.",
+      "evidence": "../t483-remaining-reaudit/p217-cldib-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 149,
+    "remaining": 64,
+    "nonzero_files": 237,
+    "non_error_points": 2017,
+    "non_error_lines": 28411,
+    "source_reduction_s7": {
+      "points": 30,
+      "lines": 565
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Three original conditional comments and one original gap were restored, and the harmless original wuman.c declaration was restored after selected x86 COFF comparison. Seven sources remain byte-identical. Effective selected executable line anchors and exclusions are preserved. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run.",
+  "restored_pending_points": [
+    "T483-R1857"
+  ]
+}

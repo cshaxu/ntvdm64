@@ -356,3 +356,7 @@ and 28,422 changed lines.
 [S7 P16 receipt](s7-p16-checkpoint.json) records ten file reviews, one
 source formatting reduction, and a separate constant-false mask correction.
 The filtered census is 2,022 points and 28,419 changed lines.
+
+[S7 P17 receipt](s7-p17-checkpoint.json) records ten file reviews and three
+source restorations, including the x86 COFF control for `wuman.c`. The
+filtered census is 2,017 points and 28,411 changed lines.

@@ -1618,7 +1618,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 #line 1514
 #error Excluded unsupported non-monitor video profile
 #line 1524
-#endif /* NTVDM & MONITOR */
+#endif	/* NTVDM & MONITOR */
 #line 1525
 			cpos += 2;
 		}
@@ -1701,7 +1701,7 @@ GLOBAL void vd_write_char IFN0()
 #line 1582
 #error Excluded unsupported non-monitor video profile
 #line 1592
-#endif
+#endif	/* NTVDM & MONITOR */
 #line 1593
 			cpos += 2;
 		}
@@ -2204,7 +2204,7 @@ GLOBAL void vd_write_teletype IFN0()
 #line 2045
 #error Excluded unsupported non-monitor video profile
 #line 2055
-#endif
+#endif	/* ( NTVDM & MONITOR ) | GISP_SVGA */
 #line 2056
 	    }
 	}

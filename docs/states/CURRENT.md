@@ -143,9 +143,14 @@ one repeated logical-line directive in `nt_graph.c`. Matching the constant
 false arm in `copy_fnc.c` corrects the census by one point and two lines.
 [P16 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p16-checkpoint.json).
 
-S7 progress is 139 reviewed and 74 remaining. Source restorations reduce
-25 points and 557 changed lines in S7. The current census is 2,022 non-error
-points and 28,419 changed lines across 237 mirrors with filtered differences.
+S7 P17 completes ten file reviews. It restores three original closing
+comments, the original DPMI gap and the unused original `CallCsrFlag`
+declaration. Selected x86 object controls differ only by COFF timestamp.
+[P17 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p17-checkpoint.json).
+
+S7 progress is 149 reviewed and 64 remaining. Source restorations reduce
+30 points and 565 changed lines in S7. The current census is 2,017 non-error
+points and 28,411 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

@@ -114,7 +114,6 @@ Return Value:
         (UCHAR) (getMSW() & MSW_PE));
 
 
-
 #line 113
     registerCX =  getCX();
     for (i = 0; i < registerCX; i++) {
