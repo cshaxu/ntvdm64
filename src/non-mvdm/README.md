@@ -472,8 +472,9 @@ terminator-capacity, per-call scratch and exception-cleanup correction.
 See the T447 S3 source ledger for hashes, dependency boundaries and pending
 grouped verification. Neither entry selects complete button behavior.
 
-OPENNT-HOST-113 retains only kernel/inctlpan.c's complete read-only
-sysBmpStyles table (static linkage removed), not its USER server factories.
+OPENNT-HOST-113 recovered the original kernel/inctlpan.c sysBmpStyles table.
+T483 S6 P29 retires the mirror subset and keeps the complete original static
+table in ../compat/include/wow_button_style_table.h.
 Source SHA2560E3999DF8610405C990760EE1A417BF312E3B76744F8F9387BBD94583F9D800D.
 Original OEMBITMAPINFO/button indices are opt-in inc/user.h declarations.
 The scoped native resource carrier consumes button rows only; the source

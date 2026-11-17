@@ -1,8 +1,8 @@
 #include "wow_button_resources.h"
-#include "non-mvdm/windows/core/ntuser/kernel/inctlpan.c"
+#include "compat/include/wow_button_style_table.h"
 
-/* OPENNT-HOST-113 resource boundary. Original inctlpan.c owns the state
- * table; native GDI owns objects. The derived layout is scoped, not a second
+/* OPENNT-HOST-113 resource boundary. The extracted OpenNT table defines the state
+ * values; native GDI owns objects. The derived layout is scoped, not a second
  * button state engine or a view of the host USER atlas. */
 #define BUTTON_IMAGE_SIZE 13
 #define BUTTON_ATLAS_HEIGHT ((OBI_COUNT - OBI_RADIOMASK) * BUTTON_IMAGE_SIZE)

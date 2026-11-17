@@ -1,0 +1,90 @@
+{
+  "packet": "M0 T483 S6 P29",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 6,
+    "files": [
+      {
+        "path": "src/compat/include/wow_button_style_table.h",
+        "sha256": "e11bec7ee4d0a391c3a08b29fb27e520d3ab4d4b51b33123aaabc5e4a5b3196e"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_button_resources.c",
+        "sha256": "53a74371f6b8b89136172d306850bad16987e6af41d6a0e9bc5f5e1baf4b520e"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_button_resources_fixture.c",
+        "sha256": "10c7c4c506735f680aff42277397a589b3f0e3f5263e6dbd5c169c5910be6466"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "b770187c559261593d3be32d04d3bcd18d2137c103618b3831e4826a8437e90b"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "817d5319ac49844ee4e8d2c56b87748d4efadebc7df3601114fafee4792fc246"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "567fc9baaa1cace8d7780b08bdf9fb223f616ea9d3ec25c1f8592fd4158c9834"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "src/wow32-dll/include/button-resources/precomp.h"
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "80700809-491c-444e-a2e8-a029fb3768dc",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "controls": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1053,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 245,
+    "blocks": 2065,
+    "lines": 29810,
+    "reviewed_live_files": 29,
+    "remaining_files": 216,
+    "retired_reviewed_files": 10,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 228,
+    "extraction_blocks": 222,
+    "unused_removal_blocks": 6,
+    "owner_retired_lines": 23519,
+    "extraction_lines": 22303,
+    "unused_removal_lines": 1216,
+    "total_census_reduction_blocks": 268,
+    "total_census_reduction_lines": 24713
+  },
+  "limits": [
+    "Owner-approved button style table extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "Original static sysBmpStyles table preserved in WOW button resources",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

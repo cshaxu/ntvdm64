@@ -280,3 +280,5 @@ P20 usage ratios predate the now-retired support/xt.c.
 [P28 dialog pointer extraction](miscutil-compat-extraction.json), [receipt](batch-p28-checkpoint.json) and [verification evidence](p28-verification-evidence.zip). The live census is 1054 files, 246 nonzero, 2069 blocks and 30691 lines.
 
 [Original function paths, signatures and line ranges](extracted-function-provenance.md).
+
+[P29 button style table extraction](inctlpan-compat-extraction.json), [receipt](batch-p29-checkpoint.json) and [verification evidence](p29-verification-evidence.zip). The live census is 1053 files, 245 nonzero, 2065 blocks and 29810 lines.

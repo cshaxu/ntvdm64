@@ -677,9 +677,7 @@ foreach ($source in $providerSupportSources) {
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
-    if ([IO.Path]::GetFileName($source) -eq 'wow_button_resources.c') {
-        $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-resources')) + '" $adapter_cflags')
-    } elseif ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
+    if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
         $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase) -or
         $source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
         $ninja.Add('  cflags = $adapter_cflags')

@@ -118,7 +118,6 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 124,src/non-mvdm/base/ntos/ex/probe.c,4,2,97,2,0,pending-file-review,T483-R1952;T483-R1953;T483-R1954;T483-R1955;T483-R1956,92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f
 125,src/non-mvdm/ds/netapi/api/apibuff.c,4,0,174,0,0,pending-file-review,T483-R1994;T483-R1995;T483-R1996,d44c57d9837dc754024ac2567dd232e9f5a543797d5c17954f0caa68b867db51
 126,src/non-mvdm/windows/core/ntuser/client/globals.h,4,0,5,2,0,pending-file-review,T483-R2321;T483-R2322;T483-R2323;T483-R2324;T483-R2325,5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8
-127,src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c,4,1,880,1,0,pending-file-review,T483-R2566;T483-R2567;T483-R2568;T483-R2569;T483-R2570;T483-R2571;T483-R2572;T483-R2573;T483-R2574;T483-R2575;T483-R2576;T483-R2577;T483-R2578;T483-R2579;T483-R2580;T483-R2581,1b7ae99a06a1acb4430357e8450e1756bdc737433e1e9228b25bcb1dbe027333
 128,src/non-mvdm/windows/core/ntuser/rtl/text.c,4,11,3,0,0,pending-file-review,T483-R2704;T483-R2705;T483-R2706;T483-R2707,9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c
 129,src/mvdm-host/dos/dem/demgset.c,3,6,1,0,0,pending-file-review,T483-R0097;T483-R0098;T483-R0099;T483-R0100;T483-R0101,35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e
 130,src/mvdm-host/softpc.new/base/ccpu386/c_debug.c,3,3,0,0,0,pending-file-review,T483-R0354;T483-R0355;T483-R0356,b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9

@@ -105,7 +105,7 @@ if ($link -notmatch '\bobj/compat/wow-dialog-lookup\.obj\b') {
 }
 if ($link -notmatch '\bobj/wow32-dll/wow_button_resources\.obj\b' -or
     [IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/source/wow_button_resources.c')) -notmatch
-        '#include "non-mvdm/windows/core/ntuser/kernel/inctlpan\.c"') {
+        '#include "compat/include/wow_button_style_table\.h"') {
     throw 'The button resource owner must compile the original static atlas table.'
 }
 

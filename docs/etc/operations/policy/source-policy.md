@@ -432,3 +432,11 @@ Retire the OpenNT windows/core/ntuser/kernel/miscutil.c subset. Move
 SetDialogPointer, lines 24–37, to src/compat/wow_dialog_pointer.c with
 its original body, types and x86 calling convention. Keep the existing
 window state and dialog layout bindings.
+
+### T483 S6 P29 owner-approved button style table extraction
+
+Retire the OpenNT windows/core/ntuser/kernel/inctlpan.c subset. Move
+sysBmpStyles, lines 25–95, to src/compat/include/wow_button_style_table.h
+with its original static linkage, dimensions, and initializer bytes
+(normalizing only line endings). The WOW button resource carrier and
+fixture include this table after the existing OBI declarations.
