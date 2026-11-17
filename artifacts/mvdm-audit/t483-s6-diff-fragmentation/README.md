@@ -288,3 +288,5 @@ P20 usage ratios predate the now-retired support/xt.c.
 [P31 control brush extraction](random-compat-extraction.json), [receipt](batch-p31-checkpoint.json) and [verification evidence](p31-verification-evidence.zip). The live census is 1051 files, 243 nonzero, 2054 blocks and 29170 lines.
 
 [P32 unused NetAPI archive retirement](apibuff-retirement.json), [receipt](batch-p32-checkpoint.json) and [verification evidence](p32-verification-evidence.zip). The live census is 1050 files, 242 nonzero, 2050 blocks and 28996 lines.
+
+[S7 P1 receipt](s7-p1-checkpoint.json) and [verification evidence](s7-p1-verification-evidence.zip) record the packstr and illegalp restorations and file-by-file audit dispositions.

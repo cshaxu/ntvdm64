@@ -57,7 +57,102 @@ Revision History:
 #include <tstring.h>    // STRCPY(), STRLEN(), STRNCPY().
 
 
-#line 156
+DWORD
+NetpPackString(
+    IN OUT LPTSTR * string,     // pointer by reference: string to be copied.
+    IN LPBYTE dataend,          // pointer to end of fixed size data.
+    IN OUT LPTSTR * laststring  // pointer by reference: top of string data.
+    )
+
+/*++
+
+Routine Description:
+
+    NetPackString is used to stuff variable-length data, which
+    is pointed to by (surpise!) a pointer.  The data is assumed
+    to be a nul-terminated string (ASCIIZ).  Repeated calls to
+    this function are used to pack data from an entire structure.
+
+    Upon first call, the laststring pointer should point to just
+    past the end of the buffer.  Data will be copied into the buffer from
+    the end, working towards the beginning.  If a data item cannot
+    fit, the pointer will be set to NULL, else the pointer will be
+    set to the new data location.
+
+    Pointers which are passed in as NULL will be set to be pointer
+    to and empty string, as the NULL-pointer is reserved for
+    data which could not fit as opposed to data not available.
+
+    See the test case for sample usage.  (tst/packtest.c)
+
+
+Arguments:
+
+    string - pointer by reference:  string to be copied.
+
+    dataend - pointer to end of fixed size data.
+
+    laststring - pointer by reference:  top of string data.
+
+Return Value:
+
+    0  - if it could not fit data into the buffer.  Or...
+
+    sizeOfData - the size of data stuffed (guaranteed non-zero)
+
+--*/
+
+{
+    DWORD size;
+
+    IF_DEBUG(PACKSTR) {
+        NetpKdPrint(("NetpPackString:\n"));
+        NetpKdPrint(("  string=" FORMAT_LPVOID
+                ", *string=" FORMAT_LPVOID
+                ", **string='" FORMAT_LPSTR "'\n",
+                (LPVOID) string, (LPVOID) *string, *string));
+        NetpKdPrint(("  end=" FORMAT_LPVOID "\n", (LPVOID) dataend));
+        NetpKdPrint(("  last=" FORMAT_LPVOID
+                ", *last=" FORMAT_LPVOID
+                ", **last='" FORMAT_LPSTR "'\n",
+                (LPVOID) laststring, (LPVOID) *laststring, *laststring));
+    }
+
+    //
+    //  convert NULL ptr to pointer to NULL string
+    //
+
+    if (*string == NULL) {
+        // BUG 20.1160 - replaced (dataend +1) with dataend
+        // to allow for a NULL ptr to be packed
+        // (as a NULL string) with one byte left in the
+        // buffer. - ERICPE
+        //
+
+        if ( *laststring > (LPTSTR)dataend ) {
+            *(--(*laststring)) = 0;
+            *string = *laststring;
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    //
+    //  is there room for the string?
+    //
+
+    size = STRLEN(*string) + 1;
+    if ( ((DWORD)(*laststring - (LPTSTR)dataend)) < size) {
+        *string = NULL;
+        return(0);
+    } else {
+        *laststring -= size;
+        STRCPY(*laststring, *string);
+        *string = *laststring;
+        return(size);
+    }
+} // NetpPackString
 
 
 BOOL
@@ -188,7 +283,127 @@ Return Value:
 } // NetpCopyStringToBuffer
 
 
-#line 408
+BOOL
+NetpCopyDataToBuffer (
+    IN LPBYTE Data,
+    IN DWORD ByteCount,
+    IN LPBYTE FixedDataEnd,
+    IN OUT LPBYTE *EndOfVariableData,
+    OUT LPBYTE *VariableDataPointer,
+    IN DWORD Alignment
+    )
+
+/*++
+
+Routine Description:
+
+    This routine puts the specified data into an output buffer.
+    The data is not written if it would overwrite the last fixed structure
+    in the buffer.
+
+    The output buffer is aligned as requested.
+
+    Sample usage:
+
+            LPBYTE FixedDataEnd = OutputBuffer + sizeof(WKSTA_INFO_202);
+            LPBYTE EndOfVariableData = OutputBuffer + OutputBufferSize;
+
+            //
+            // Copy Logon hours
+            //
+
+            NetpCopyDataToBuffer(
+                StructurePointer,
+                sizeof( STRUCTURE_TYPE),
+                FixedDataEnd,
+                &EndOfVariableData,
+                &UserInfo->usri2->LogonHours,
+                sizeof(ULONG)
+                );
+
+Arguments:
+
+    Data - Supplies a pointer to the source data to copy into the
+        output buffer.  If Data is null then a null pointer is returned in
+        VariableDataPointer.
+
+    ByteCount - Supplies the length of Data.
+
+    FixedDataEnd - Supplies a pointer to just after the end of the last
+        fixed structure in the buffer.
+
+    EndOfVariableData - Supplies an address to a pointer to just after the
+        last position in the output buffer that variable data can occupy.
+        Returns a pointer to the data written in the output buffer.
+
+    VariableDataPointer - Supplies a pointer to the place in the fixed
+        portion of the output buffer where a pointer to the variable data
+        should be written.
+
+    Alignment - Supplies the required alignment of the data expressed
+        as the number of bytes in the primitive datatype (e.g., 1 for byte,
+        2 for short, 4 for long, and 8 for quad).
+
+Return Value:
+
+    Returns TRUE if data fits into output buffer, FALSE otherwise.
+
+--*/
+{
+
+    LPBYTE NewEndOfVariableData;
+
+    //
+    // If there is no data to copy, just return success.
+    //
+
+    if ( Data == NULL ) {
+        *VariableDataPointer = NULL;
+        return TRUE;
+    }
+
+    //
+    // Compute where the data will be copied to (taking alignment into
+    //  consideration).
+    //
+    // We may end up with a few unused byte after the copied data.
+    //
+
+    NetpAssert((Alignment == 1) || (Alignment == 2) ||
+               (Alignment == 4) || (Alignment == 8));
+
+    NewEndOfVariableData = (LPBYTE)
+        ( ((DWORD)(*EndOfVariableData - ByteCount)) &
+        (0xFFFFFFFF - (Alignment - 1)));
+
+    //
+    // If the data doesn't fit into the buffer, error out
+    //
+
+    if ( NewEndOfVariableData < FixedDataEnd) {
+        *VariableDataPointer = NULL;
+        return FALSE;
+    }
+
+    //
+    // Copy the data to the buffer
+    //
+
+    if (ByteCount > 0) {
+        NetpMoveMemory(NewEndOfVariableData, Data, ByteCount);
+    }
+
+    //
+    // Return the pointer to the new data and update the pointer to
+    // how much of the buffer we've used so far.
+    //
+
+    *VariableDataPointer = NewEndOfVariableData;
+    *EndOfVariableData = NewEndOfVariableData;
+
+    return TRUE;
+
+} // NetpCopyDataToBuffer
 
 
 #line 670

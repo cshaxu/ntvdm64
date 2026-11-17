@@ -98,7 +98,6 @@ void illegal_op_int()
 	ip = sas_hw_at(stack) + (sas_hw_at(stack+1)<<8);
 	cs = sas_hw_at(stack+2) + (sas_hw_at(stack+3)<<8);
 
-
 #line 97
 	where(string, cs, ip);
 

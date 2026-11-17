@@ -28,7 +28,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 30,src/mvdm-host/wow32/wsdata.c,20,161,13,174,0,0,35,pending-file-review,c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def
 31,src/non-mvdm/base/win32/client/vdm.c,20,38,594,632,2,0,30,reviewed-verified-p16-residuals-pending-owner,c8fbc28a468f39a7cb409866efdb06c5a3c5fcc16ea039da6897120fbfedd1db
 32,src/non-mvdm/windows/core/ntuser/kernel/cleanup.c,20,24,20,44,1,0,33,reviewed-verified-p18-residuals-pending-owner,277eab261158aed8d5545d70a3874c7dd70a09502254df49b63adbce6948be2d
-33,src/non-mvdm/windows/core/ntuser/kernel/server.c,20,2,1533,1535,14,0,36,pending-file-review,e59818734a049670e98fa66db663eeae013dfee2c56a1e6f410068aef5e44ab0
+33,src/non-mvdm/windows/core/ntuser/kernel/server.c,20,2,1533,1535,14,0,36,s7-reviewed-residuals-pending,e59818734a049670e98fa66db663eeae013dfee2c56a1e6f410068aef5e44ab0
 34,src/non-mvdm/public/sdk/inc/ntexapi.h,19,0,952,952,9,0,37,pending-file-review,43c01f46bf3e0ec3dc62e6f5035378443e59149b0b54c61ee45493919126422e
 35,src/mvdm-host/dos/command/cmdexec.c,17,67,15,82,0,0,28,reviewed-verified-p14-residuals-pending-owner,5603f2a1335ed0828ec6c09cb8cd2f10f45db36ce278ccc5c3b3b53802d7d64c
 36,src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,17,37,205,242,1,4,31,reviewed-verified-p17-residuals-pending-owner,19e51c0fffe398d44c7486b6df65c16838ac10e060441754b5cb67061bd0a9b3
@@ -51,7 +51,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 53,src/mvdm-host/oemuni/file.c,12,26,11,37,0,0,54,pending-file-review,d8557d2b6b4b9aafb99736570288a3a800108c94c0e8e73c48600324c801698a
 54,src/mvdm-host/wow32/wuwind.c,12,49,11,60,5,3,55,pending-mask-review,671d14c3f1ca7e8351f0a874579c2962d7c9a4a671a1437370b22ec891e5d0f1
 55,src/non-mvdm/windows/core/ntuser/client/btnctl.c,12,12,1,13,2,0,56,pending-file-review,b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1
-56,src/non-mvdm/windows/core/ntuser/kernel/class.c,12,16,1374,1390,2,0,57,pending-file-review,14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2
+56,src/non-mvdm/windows/core/ntuser/kernel/class.c,12,16,1374,1390,2,0,57,s7-reviewed-residuals-pending,14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2
 57,src/non-mvdm/windows/core/ntuser/rtl/userrtl.h,12,7,41,48,10,0,58,pending-file-review,5dda58b7aa4a49e83ac993525badf626c7fa7b124477054f731723c24bed2165
 58,src/mvdm-host/inc/softpc.h,11,35,35,70,2,0,59,pending-file-review,90414e65ce628b379ac9bbf8051307839eaae61f802924dcac4b47b9d70b0aeb
 59,src/mvdm-host/softpc.new/base/cvidc/sevid017.c,11,18,18,36,0,0,60,pending-file-review,178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2
@@ -63,7 +63,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 65,src/mvdm-host/softpc.new/host/src/sim32.c,10,15,6,21,3,0,66,pending-file-review,fdccb451d0a5c9c3002139249ee02c6ada70d06aefbaf8cd3f423fc61eaf3981
 66,src/non-mvdm/base/win32/server/srvvdm.c,10,46,8,54,3,0,67,pending-file-review,f3cb247cbefe3ebd6fd1bc7864ab6f8ae3246988806d57e2f2cea4e0de694b88
 67,src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,10,33,7,40,1,2,68,pending-mask-review,7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b
-68,src/non-mvdm/windows/core/ntuser/kernel/getset.c,10,5,673,678,6,0,69,pending-file-review,b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d
+68,src/non-mvdm/windows/core/ntuser/kernel/getset.c,10,5,673,678,6,0,69,s7-reviewed-residuals-pending,b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d
 69,src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h,9,18,8,26,3,0,70,pending-file-review,8a83af2254588831515340e0fb2ddcbf38ce17bc836cda439401663ec5f47ce9
 70,src/mvdm-host/softpc.new/base/cvidc/sevid018.c,9,16,16,32,0,0,71,pending-file-review,571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471
 71,src/mvdm-host/vdmredir/vrnmpipe.c,9,22,29,51,80,0,72,pending-file-review,a83b99a6f2021f9b86db1947301983f5f908fdeae915b950d56fa20f0dc7d108
@@ -80,14 +80,14 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 83,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,61,8,69,5,3,84,pending-mask-review,84e0daa501996dfc43f0492ec3f1dc1a014fc6c1b1ebed84c9e177e7262336d8
 84,src/mvdm-host/wow32/wuclass.c,7,41,7,48,6,3,85,pending-mask-review,ceb60357f24f8a6bc728ee5dfb83131a4a30875bc914f625009a48eaa597ab09
 85,src/non-mvdm/base/ntdll/csrutil.c,7,7,615,622,0,0,86,pending-file-review,75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a
-86,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,866,3,0,87,pending-file-review,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
+86,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,866,3,0,87,s7-reviewed-residuals-pending,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
 87,src/mvdm-host/dpmi32/dpmimemr.c,6,4,19,23,0,0,88,pending-file-review,568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4
 88,src/mvdm-host/dpmi32/modesw.c,6,28,6,34,2,0,89,pending-file-review,401d13ac2ec3e9705c45cfa857916e15cff1ec19897bd893356ca4fc78ec7f97
 89,src/mvdm-host/softpc.new/base/ccpu386/ntthread.c,6,32,0,32,0,0,90,pending-file-review,4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045
 90,src/mvdm-host/softpc.new/host/src/nt_mouse.c,6,24,1,25,17,0,91,pending-file-review,361a27377098703c97ce1a0a67cc7fc4683285bec8a5171e2ae81641ba94b9c1
 91,src/mvdm-host/softpc.new/host/src/nt_msscs.c,6,16,58,74,9,1,92,pending-mask-review,97989e20250ea2e3b97e6321316d7104e8d8fd3de1e8fa8713b76031740234cf
 92,src/mvdm-host/wow32/walias.h,6,11,4,15,1,0,93,pending-file-review,f20548935ced3d6ace5ad0885dfe890cddd2f193f911e3afc2db5e813e580a61
-94,src/non-mvdm/windows/core/ntuser/client/winmgrc.c,6,4,496,500,0,0,95,pending-file-review,888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5
+94,src/non-mvdm/windows/core/ntuser/client/winmgrc.c,6,4,496,500,0,0,95,s7-reviewed-residuals-pending,888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5
 96,src/non-mvdm/windows/core/ntuser/rtl/winmgr.c,6,11,301,312,0,0,97,pending-file-review,ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3
 97,src/mvdm-host/inc/memapi.h,5,5,5,10,0,0,98,pending-file-review,26515fc97789f77e6e1632d3d3c19e810ade63539650de1b7dcbf6056688d546
 98,src/mvdm-host/softpc.new/base/bios/virtual.c,5,22,0,22,3,0,99,pending-file-review,aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622
@@ -97,7 +97,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 102,src/mvdm-host/wow32/wkfileio.c,5,6,4,10,3,0,103,pending-file-review,e8a9a5246447394670edb7427068c4567e5532885049e10207be60b901b8513a
 103,src/mvdm-host/wow32/wmsgcb.c,5,11,9,20,1,0,104,pending-file-review,5b644af487c3c9f56adbd12ce36f36fd26a81bb5571b6f9514e79fa5be0f64d2
 104,src/mvdm-host/xms.486/xmsblock.c,5,19,13,32,1,0,105,pending-file-review,0d3a037dcfa2ce80719165ad4d890369f4b6d591157d68b9bb1c938400e0d9fc
-105,src/non-mvdm/ds/netapi/netlib/packstr.c,5,0,478,478,0,0,106,pending-file-review,d456a3974ffc388a8d68f8339d6ded655701f20097fcbd9486fa5669a49a27a1
+105,src/non-mvdm/ds/netapi/netlib/packstr.c,3,0,261,261,0,0,106,s7-partial-restoration-delivered-p1-residual-pending,12276ab2954e4c74bbe7a4e895ff96ea49800cdfff72a678781728c3803b5b91
 106,src/non-mvdm/public/sdk/inc/ntregapi.h,5,0,12,12,2,0,107,pending-file-review,815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b
 107,src/non-mvdm/windows/core/ntuser/client/dmmnem.c,5,11,1,12,3,0,108,pending-file-review,34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1
 108,src/non-mvdm/windows/core/ntuser/client/drawtext.c,5,0,137,137,0,0,109,pending-file-review,507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1
@@ -181,7 +181,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 192,src/non-mvdm/windows/core/ntuser/server/exports.c,2,1,85,86,1,0,193,pending-file-review,40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d
 193,src/mvdm-host/dbg/dbg.c,1,1,1,2,35,0,194,pending-file-review,f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27
 194,src/mvdm-host/dos/dem/dem.h,1,1,0,1,9,0,195,pending-file-review,9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c
-195,src/mvdm-host/dpmi32/data.c,1,47,0,47,1,0,196,pending-file-review,55f67e81cde1c395bfb1c3733b1b9ed87ee5db8122ac86333df61895907e2d35
+195,src/mvdm-host/dpmi32/data.c,1,47,0,47,1,0,196,s7-reviewed-residuals-pending,55f67e81cde1c395bfb1c3733b1b9ed87ee5db8122ac86333df61895907e2d35
 196,src/mvdm-host/dpmi32/dpmi32p.h,1,11,0,11,3,0,197,pending-file-review,6213f844c816a919ae6ec1bccaf1c0a178070efe219574eeab58701c706b8e36
 197,src/mvdm-host/dpmi32/xmem.c,1,1,1,2,5,0,198,pending-file-review,ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b
 198,src/mvdm-host/inc/dbgexp.h,1,3,3,6,0,0,199,pending-file-review,dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2
@@ -203,7 +203,6 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 214,src/mvdm-host/softpc.new/base/inc/timeval.h,1,1,1,2,2,0,215,pending-file-review,ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2
 215,src/mvdm-host/softpc.new/base/support/ios.c,1,32,0,32,24,0,216,pending-file-review,9a3e1bde1aab4dae562720da1fcef95a85ee6e2e17bccfe1055417b731033eff
 216,src/mvdm-host/softpc.new/base/system/idetect.c,1,0,1,1,12,0,217,pending-file-review,a54e261d0e1649c48e5219b8a63b76effd024627ac769d38c59801f5732b881a
-217,src/mvdm-host/softpc.new/base/system/illegalp.c,1,1,0,1,9,0,218,pending-file-review,04d0a96b8ca057226181fae83516c316c5b8c6d40d32422e30cab7474f603869
 218,src/mvdm-host/softpc.new/base/video/cga.c,1,2,0,2,19,0,219,pending-file-review,d164721c7f16202e31409963cb1758a8ca9f11d7a26826088820ba2e7dcc85e0
 219,src/mvdm-host/softpc.new/base/video/ega_vide.c,1,12,0,12,40,0,220,pending-file-review,6852d6f38de18e87ab96481f6f1b370e7e1b0e1c33984179f77b30b8e4271e0d
 220,src/mvdm-host/softpc.new/host/inc/nt_event.h,1,0,1,1,2,0,221,pending-file-review,e51b328381e985bed87991865e6a548233223e1ec4f18b0439717b3582f568b7

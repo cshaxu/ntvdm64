@@ -1,0 +1,245 @@
+{
+  "packet": "M0 T483 S7 P1",
+  "source_checkpoint": {
+    "source_files": 3,
+    "files": [
+      {
+        "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+        "sha256": "12276ab2954e4c74bbe7a4e895ff96ea49800cdfff72a678781728c3803b5b91"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+        "sha256": "4d1f5114376ef5142aade4aa8a8fc53aaf9c8cfa2eecb8f3df68b147f73d39b4"
+      },
+      {
+        "path": "src/common/protocol/version.h",
+        "sha256": "fe2114b485cc4542a1a92c3bd8bc442da855c48fafc386624db937aa0c759d19"
+      }
+    ],
+    "deleted": []
+  },
+  "publication": {
+    "status": "published",
+    "package": "dee7d711-ad95-4e21-a76e-31e4daafeeab",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "targeted": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed",
+    "full-isolated": "passed",
+    "full-supervisor": "passed",
+    "final-docs": "passed"
+  },
+  "full": {
+    "status": "passed",
+    "suite": "Full",
+    "gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1199,
+        "CleanupMs": 471,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 15784,
+        "CleanupMs": 426,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 15441,
+        "CleanupMs": 444,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 15314,
+        "CleanupMs": 462,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 225,
+        "CleanupMs": 474,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67325,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48448,
+        "CleanupMs": 444,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 49941,
+        "CleanupMs": 524,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16163,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12163,
+        "CleanupMs": 438,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 76214,
+        "CleanupMs": 488,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13215,
+        "CleanupMs": 524,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29423,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30726,
+        "CleanupMs": 460,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5348,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7879,
+        "CleanupMs": 521,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11230,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4690,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7690,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20725,
+        "CleanupMs": 463,
+        "Passed": true
+      }
+    ],
+    "elapsed_ms": 466559,
+    "runtime_hashes": {
+      "run16.exe": "D0EA3CAFB0BEC9F083223A6F3F5747549E4CF09E8799F120DC0F102DC8D45539",
+      "ntsrv.exe": "106AF04E95A6821BFAB2F77E7560947B181A2AB7F5AB18E49C3DE5A00C9A8B27",
+      "ntcon.exe": "C9F28BE1A803D9D33D1365AA509482C079C964EB33FA4E6CDF7FAF3664B5CE11",
+      "ntvdm.exe": "7B583BF22A0B54A85D454643739BB5E422DEEE390021409BD504ED5C3F2C5333",
+      "ntvwm.exe": "1CEB11C2C8941DBACDE00B151EEFCCC0F17D35D793DF91B9F21986FB9AA725BE",
+      "ntmon.exe": "59824C307FB142452897FA31B23F35BE3675365B7D880914B858F8C810FD60AB",
+      "wow32.dll": "7EF122FBDF2348207C7239B8E04CF91D34E545B71B24518F4EC2620B658A7797",
+      "vdmredir.dll": "083CE2DE0ACEE56F61C5EEBFBD771F922DA549FF628D80EBD7BE2F9FC8386ECF",
+      "nthook32.dll": "C24240B9903DD43B07BF26DE4B9AD02A865E6DB406605A1BF132643C6CDBB53A",
+      "nthook64.dll": "AEB99BB769AFE48B4C1B5442EE652AC6210564D7333BA2C40C2899B3BBA7750D",
+      "vcdex.dll": "00B7A1DDE95E15C3FD95A26BACD797BA1E351C02430BDA1F34D7E960011FB2AF"
+    },
+    "matches_both_published_destinations": true,
+    "initial_failure": "The first package carried version 0.0.480, exposed by the version-negatives gate after the active packet was written in the required format. The corrected package reports 0.0.483.",
+    "future_batches": "Applicable targeted tests by default as directed by the owner."
+  },
+  "global_counts": {
+    "files": 1050,
+    "strict_equal": 511,
+    "filtered_zero": 809,
+    "nonzero_files": 241,
+    "blocks": 2047,
+    "lines": 28778,
+    "reviewed_live_files": 37,
+    "remaining_files": 205,
+    "retired_reviewed_files": 13,
+    "original_restoration_blocks": 43,
+    "original_restoration_lines": 1412,
+    "owner_retired_blocks": 243,
+    "extraction_blocks": 233,
+    "unused_removal_blocks": 10,
+    "owner_retired_lines": 24333,
+    "extraction_lines": 22943,
+    "unused_removal_lines": 1390,
+    "total_census_reduction_blocks": 286,
+    "total_census_reduction_lines": 25745
+  },
+  "restoration": {
+    "blocks": 3,
+    "changed_lines": 218
+  },
+  "packstr_original_units": [
+    {
+      "symbol": "NetpPackString",
+      "lines": [
+        60,
+        155
+      ]
+    },
+    {
+      "symbol": "NetpCopyDataToBuffer",
+      "lines": [
+        286,
+        406
+      ]
+    }
+  ],
+  "packstr_limits": "NetpAllocateEnumBuffer needs the omitted rpcutil.h and MIDL allocation provider. Both restored packing routines are discarded by the production link.",
+  "source_evidence": {
+    "class.c": "../t483-remaining-reaudit/p242-class-review.json",
+    "winmgrc.c": "../t483-remaining-reaudit/p237-winmgrc-review.json",
+    "profile.c": "../t483-remaining-reaudit/p243-profile-review.json",
+    "getset.c": "../t483-remaining-reaudit/p242-getset-review.json",
+    "clmsg.c": "clmsg-whole-file-review.json",
+    "server.c": "../t483-remaining-reaudit/p246-server-in-progress.json",
+    "dpmi32/data.c": "../t483-remaining-reaudit/r0134-r0136-requalification.json"
+  },
+  "application_version": "0.0.483",
+  "protocol": 67,
+  "winnt_zip_sha256": "61C79CBD7651A1C8C79AF9FB77E46C21E1E0981CCAA0D62ACAE017F6A91C0924",
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}
