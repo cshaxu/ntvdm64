@@ -203,3 +203,7 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 - [keyba whole-file review](keyba-whole-file-review.json) and [preprocessor proof](keyba-preprocessor-proof.zip):24->24 points,72->56 lines;P15 build/publication/keyboard/Full passed;Git delivery follows receipt.
 
 [P15 receipt](batch-p15-checkpoint.json) and [evidence](p15-verification-evidence.zip):keyba24->24 points,72->56 lines;keyboard/PIC90 and Full20 passed.
+
+[P16 client VDM review](client-vdm-whole-file-review.json):four original functions restored;23->20 blocks,796->632 lines;cached build,publish11x2,Full20 passed;Git accompanies receipt.
+
+[P16 receipt](batch-p16-checkpoint.json) and [evidence](p16-verification-evidence.zip).

@@ -40,7 +40,71 @@ static VOID BaseSetLastNTError(NTSTATUS Status)
 
 #if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
 #include <base_classifier.h>
-#line 91
+#line 27
+BOOL
+APIENTRY
+GetBinaryTypeA(
+    IN  LPCSTR   lpApplicationName,
+    OUT LPDWORD  lpBinaryType
+    )
+
+/*++
+
+Routine Description: ANSI version of GetBinaryTypeW.
+    This API returns the binary type of lpApplicationName.
+
+Arguments:
+    lpApplicationName - Full pathname of the binary
+    lpBinaryType - pointer where binary type will be returned.
+
+Return Value:
+    TRUE - if SUCCESS; lpBinaryType has following
+                SCS_32BIT_BINARY    - Win32 Binary (NT or Chicago)
+                SCS_DOS_BINARY      - DOS Binary
+                SCS_WOW_BINARY      - Windows 3.X Binary
+                SCS_PIF_BINARY      - PIF file
+                SCS_POSIX_BINARY    - POSIX Binary
+                SCS_OS216_BINARY    - OS/2 Binary
+    FALSE - if file not found or of unknown type. More info with GetLastError
+--*/
+{
+    NTSTATUS Status;
+    PUNICODE_STRING CommandLine;
+    ANSI_STRING AnsiString;
+    UNICODE_STRING DynamicCommandLine;
+    BOOLEAN bReturn = FALSE;
+
+    CommandLine = &NtCurrentTeb()->StaticUnicodeString;
+    RtlInitAnsiString(&AnsiString,lpApplicationName);
+    if ( (ULONG)AnsiString.Length<<1 < (ULONG)NtCurrentTeb()->StaticUnicodeString.MaximumLength ) {
+        DynamicCommandLine.Buffer = NULL;
+        Status = RtlAnsiStringToUnicodeString(CommandLine,&AnsiString,FALSE);
+        if ( !NT_SUCCESS(Status) ) {
+            BaseSetLastNTError(Status);
+            return FALSE;
+            }
+        }
+    else {
+        Status = RtlAnsiStringToUnicodeString(&DynamicCommandLine,&AnsiString,TRUE);
+        if ( !NT_SUCCESS(Status) ) {
+            BaseSetLastNTError(Status);
+            return FALSE;
+            }
+	}
+
+    bReturn = GetBinaryTypeW(
+	     DynamicCommandLine.Buffer ? DynamicCommandLine.Buffer : CommandLine->Buffer,
+	     lpBinaryType);
+
+    if (DynamicCommandLine.Buffer) {
+	RtlFreeUnicodeString(&DynamicCommandLine);
+	DynamicCommandLine.Buffer = NULL;
+    }
+    return(bReturn);
+
+}
+
+
 BOOL
 WINAPI
 #line 93
@@ -265,8 +329,42 @@ GBTtryexit:;
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 #include "common/base_srv/base_client.h"
+#include <base_config.h>
+#line 304
+VOID
+APIENTRY
+VDMOperationStarted
+(
+    BOOL    IsWowCaller
+    )
 
-#line 338
+/*++
+
+Routine Description:
+    This routine is used by MVDM to tell base that it has hooked
+    ctrl-c handler with console. If the cmd window is killed
+    before VDM could hook ctrl-c, then we wont get a chance to
+    cleanup our data structures. The absence of this call tells
+    base that it has to clean up the resources next time a
+    call is made to create a VDM.
+
+Arguments:
+    IsWowCaller - TRUE if the caller is WOWVDM
+
+Return Value:
+
+    None
+--*/
+
+{
+    BaseUpdateVDMEntry(UPDATE_VDM_HOOKED_CTRLC,
+		       NULL,
+		       0,
+		       IsWowCaller);
+    return;
+}
+
+
 BOOL
 APIENTRY
 GetNextVDMCommand(
@@ -979,7 +1077,41 @@ Return Value:
     return;
 }
 
-#line 1084
+
+#line 1051
+/*++
+
+Routine Description:
+    This routine is used to close standard IO handles before returning to the
+    caller
+
+
+Arguments:
+    pVDMInfo - VDM Info record containing stdio handles
+
+Return Value:
+    None
+
+--*/
+VOID
+BaseCloseStandardHandle(
+    IN PVDMINFO pVDMInfo
+    )
+{
+    if (pVDMInfo->StdIn)
+	NtClose (pVDMInfo->StdIn);
+
+    if (pVDMInfo->StdOut)
+	NtClose (pVDMInfo->StdOut);
+
+    if (pVDMInfo->StdErr)
+	NtClose (pVDMInfo->StdErr);
+
+    pVDMInfo->StdIn  = 0;
+    pVDMInfo->StdOut = 0;
+    pVDMInfo->StdErr = 0;
+}
+
 #ifdef OLD_CFG_BASED
 #line 1085
 #error Excluded unsupported original OLD_CFG_BASED configuration
@@ -987,7 +1119,35 @@ Return Value:
 #endif
 #line 1150
 
-#line 1274
+#line 1246
+BOOL
+GetVDMConfigValue(
+    HANDLE hKey,
+    LPWSTR Keyword,
+    LPWSTR UnicodeBuffer
+    )
+{
+    NTSTATUS NtStatus;
+    UNICODE_STRING ValueName;
+    PKEY_VALUE_FULL_INFORMATION pKeyValueInformation = (PVOID) UnicodeBuffer;
+    ULONG ValueLength;
+
+    RtlInitUnicodeString(&ValueName, Keyword);
+    NtStatus = NtQueryValueKey(hKey,
+			       &ValueName,
+			       KeyValueFullInformation,
+			       pKeyValueInformation,
+			       FULL_INFO_BUFFER_SIZE,
+			       &ValueLength);
+
+    if (NT_SUCCESS(NtStatus))
+	    return TRUE;
+    else {
+	 BaseSetLastNTError (NtStatus);
+	 return FALSE;
+    }
+}
+
 BOOL
 BaseCheckVDM(
     IN	ULONG BinaryType,
@@ -1928,6 +2088,9 @@ BaseUpdateVDMEntry(
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+
+
+
 #line 2212
 ULONG
 BaseIsDosApplication(
@@ -1993,7 +2156,8 @@ Return Value:
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
-#include <base_config.h>
+
+
 #line 2275
 BOOL
 BaseGetVdmConfigInfo(
@@ -2205,6 +2369,10 @@ Notes:
     RtlFreeHeap(RtlProcessHeap(), 0, NewCmdLine);
     return TRUE;
 }
+
+
+
+
 
 #line 2489
 BOOL

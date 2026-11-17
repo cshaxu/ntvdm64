@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #define MAX_VDM_CFG_LINE 256
+#define FULL_INFO_BUFFER_SIZE (sizeof(KEY_VALUE_FULL_INFORMATION) + MAX_VDM_CFG_LINE)
 #define CMDLINE L"cmdline"
 #define WOWCMDLINE L"wowcmdline"
 #define DOSSIZE L"size"

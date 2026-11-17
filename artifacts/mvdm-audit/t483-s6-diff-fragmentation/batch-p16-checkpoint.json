@@ -1,0 +1,183 @@
+{
+  "packet": "M0 T483 S6 P16",
+  "status": "Build publication Full verified;governance and Git follow",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/base/win32/client/vdm.c",
+        "sha256": "c8fbc28a468f39a7cb409866efdb06c5a3c5fcc16ea039da6897120fbfedd1db"
+      },
+      {
+        "path": "src/common/base_srv/base_classifier.h",
+        "sha256": "58ca4ee1b1cb58ca30d4c8eb3410eb8b5c29e3d82e14de864e5f449b1204ed13"
+      },
+      {
+        "path": "src/common/base_srv/base_config.h",
+        "sha256": "0741037db26a1beb485156c06d4ff2a6c64a9140645515590accdc32c26a8d16"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "publication": {
+    "status": "published",
+    "package": "62106c2c-314f-4418-887d-4e8def3daf4c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 455911,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5332,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1178,
+        "CleanupMs": 513,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 15575,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 15742,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 13555,
+        "CleanupMs": 514,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 420,
+        "CleanupMs": 497,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67137,
+        "CleanupMs": 456,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 52479,
+        "CleanupMs": 445,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 48746,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15904,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12899,
+        "CleanupMs": 493,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 67653,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12883,
+        "CleanupMs": 482,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29153,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30737,
+        "CleanupMs": 475,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5163,
+        "CleanupMs": 493,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7983,
+        "CleanupMs": 476,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11142,
+        "CleanupMs": 439,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4076,
+        "CleanupMs": 472,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7318,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20036,
+        "CleanupMs": 451,
+        "Passed": true
+      }
+    ]
+  },
+  "global_counts": {
+    "files": 1063,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 255,
+    "blocks": 2299,
+    "lines": 53404,
+    "reviewed_files": 30,
+    "remaining_files": 225,
+    "cumulative_reduction_blocks": 34,
+    "cumulative_reduction_lines": 1119
+  },
+  "reduction": {
+    "blocks": 3,
+    "lines": 164
+  },
+  "autonomous_changes": "Two declaration/binding lines,not transferred implementation",
+  "limits": [
+    "Four original functions restored;residual decisions remain pending owner",
+    "No guest/winnt.zip changes",
+    "Historical cast negative evidence reused,not newly rerun"
+  ]
+}

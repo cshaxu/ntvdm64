@@ -5,7 +5,8 @@
 #define OPENNT_BASE_CLASSIFIER_H
 #include "non-mvdm/public/sdk/inc/nturtl.h"
 #include "non-mvdm/base/win32/inc/basevdm.h"
-/* Private symbol avoids colliding with Kernel32's imported GetBinaryTypeW. */
+/* Private symbols avoid colliding with Kernel32 GetBinaryType imports. */
+#define GetBinaryTypeA OpenNtBaseGetBinaryTypeA
 #define GetBinaryTypeW OpenNtBaseGetBinaryTypeW
 /* This owner consumes an NT path; the DEM DOS-path adapter is not its edge. */
 #undef NtOpenFile
