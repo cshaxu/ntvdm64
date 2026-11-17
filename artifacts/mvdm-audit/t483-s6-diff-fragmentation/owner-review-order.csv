@@ -72,7 +72,6 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 74,src/mvdm-host/wow32/wcall16.c,8,24,5,29,9,0,75,pending-file-review,1bff5cf3ea48e92725c733b9c4bf7e5ae72fdbd5196c86b2851cd80a196e44a0
 75,src/mvdm-host/wow32/wow32fax.c,8,15,5,20,2,0,76,pending-file-review,a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad
 76,src/mvdm-host/wow32/wudlg.c,8,17,2,19,5,0,77,pending-file-review,f98049a1afa471764fb825ccdd498a8ad189a697a181c347eba6ee8464ec542b
-77,src/non-mvdm/windows/core/ntuser/client/client.c,8,25,3539,3564,3,0,78,pending-file-review,f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0
 78,src/non-mvdm/windows/core/ntuser/client/mngrayc.c,8,14,1,15,2,0,79,pending-file-review,9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572
 79,src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,8,2,245,247,12,0,80,pending-file-review,e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9
 80,src/non-mvdm/windows/core/ntuser/rtl/getset.c,8,14,223,237,0,0,81,pending-file-review,1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b

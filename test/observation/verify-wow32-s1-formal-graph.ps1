@@ -71,23 +71,28 @@ $expectedUser = @(
     'control-body-dlgend', 'control-body-dlgmgr', 'control-body-dlgmgrc',
     'control-body-dlgmgr2', 'control-body-dmmnem',
     'control-body-winmgrc', 'control-view-winmgr', 'control-view-wow',
-    'hdata', 'clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clmenu',
-    'clglobal', 'dialog-template', 'dialog-memory',
+    'hdata', 'clres', 'cldib', 'rtlinit', 'ntstubs', 'clmenu',
+    'clglobal', 'dialog-template',
     'control-text', 'control-color', 'control-brush-client', 'control-brush',
-    'control-state', 'control-fnid', 'dialog-pointer', 'control-rect',
+    'control-fnid', 'dialog-pointer', 'control-rect',
     'default-client', 'private-word-reader', 'private-word-client',
-    'private-word-setter', 'default-window-bits',
+    'private-word-setter',
     'default-borders', 'default-messages', 'control-draw',
     'control-text-client', 'control-text-rtl', 'control-text-extent',
     'control-client-draw', 'control-client-mngrayc', 'button-client',
     'button-blit', 'cleanup', 'probe',
     'class-remove', 'class-register', 'taskman', 'profile', 'queue',
-    'exitwin', 'class-client', 'class'
+    'exitwin', 'class'
 )
 $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
     ForEach-Object { $_.Groups[1].Value })
 if (@(Compare-Object $expectedUser $actualUser).Count) {
     throw 'The original OpenNT USER-owner object set differs from the admitted formal graph.'
+}
+foreach ($unit in @('wow-client-dispatch','wow-dialog-memory','wow-control-state','wow-default-window-bits','wow-class-client')) {
+    if ($link -notmatch ('\bobj/compat/' + $unit + '\.obj\b')) {
+        throw "Missing extracted USER client unit: $unit"
+    }
 }
 if ($link -notmatch '\bobj/compat/wow-object-ownership\.obj\b') {
     throw 'The compat object ownership table must be linked into the formal graph.'

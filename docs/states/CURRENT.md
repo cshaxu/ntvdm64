@@ -33,12 +33,12 @@ and retiring that mirror file and its active difference entries (P19).
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-33/255 initial difference files reviewed;222 remain. P19,P21,P22 and P23 retire four already
-reviewed files by owner approval;live population is29 reviewed/251,222 remain. Twenty-five changed files
-verified across P2-P18;eight reviewed unchanged. Current census:1059 files
-(1050 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
-normalized/error-masked differences,and251 nonzero files.
-Current delivered total2093 blocks/36376 lines. P19 retires130 blocks/9237
+34/255 initial difference files reviewed;221 remain. P19,P21-P24 retire five
+reviewed files by owner approval;live population is29 reviewed/250,221 remain. Twenty-five changed files
+verified across P2-P18;eight reviewed unchanged. Current census:1058 files
+(1049 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
+normalized/error-masked differences,and250 nonzero files.
+Current delivered total2085 blocks/32812 lines. P19 retires130 blocks/9237
 lines;this is mirror reclassification,not original restoration. Prior delivered
 reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correction remains separate.
 
@@ -68,6 +68,7 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/userk.h |27->27|117->115|P12 two added comments removed;Full20 passed|
 | wow32/wdde.c |26->26|143->143|P12 reviewed unchanged;residual decisions pending|
 | kernel/handtabl.c |24->retired|1381->retired|P23 compat extraction;original ownership and targeted lifecycle passed|
+| client/client.c |8->retired|3564->retired|P24 five compat units;original bodies and targeted lifecycle passed|
 | kernel/input.c |25->retired|5503->retired|P22 compat extraction;targeted input and lifecycle passed|
 | sevid001.c |25->25|50->50|Unchanged;25 evidenced decisions;prior-source identity checked|
 | wow32/wkman.c |25->25|46->45|P14 extra blank removed;Full20 passed|
@@ -79,7 +80,7 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/cleanup.c |21->20|66->44|P18 original ClientDied restored;focused37,lifecycle and Full20 passed|
 
 
-The canonical pending backlog has1608 rows after retiring kernel/ntstubs,client/wow,kernel/input and kernel/handtabl records,
+The canonical pending backlog has1601 rows after retiring five owner-approved mirror files,
 plus2 non-R items. Extraction removes active mirror entries;it is not original-code restoration.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
@@ -93,13 +94,13 @@ non-error blocks descending,path ascending for ties. Await owner file selection.
 
 ## Current Technical Baseline
 
-P23 cached build and owner-selected targeted verification passed:original
-ownership/cleanup source proof,focused controls,formal graph and actual WOW
-lifecycle. Full was not run,per owner approval. Package 2b15b1ee-a52d-40c4-bbfd-349c107948da
+P24 cached build and owner-selected targeted verification passed:eight original
+function bodies,ownership/cleanup source proof,focused controls,formal graph and
+actual WOW lifecycle. Full was not run,per owner approval. Package 763c62a6-45d2-4169-b9a3-9d354669f096
 contains11 images,published and hash-verified to assets/release and O:/winnt/system32.
 Other mirrors,guest and winnt.zip are unchanged.
-[P23 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p23-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p23-verification-evidence.zip).
+[P24 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p24-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p24-verification-evidence.zip).
 
 ## Remaining Scope
 
@@ -167,3 +168,17 @@ P23 retires24 blocks/1381 lines;combined extractions retire200 blocks/16953 line
 With original restoration40 blocks/1194 lines,the census is down240 blocks/18147 lines.
 Main register2664 rows;pending1608 rows. Cached build,targeted verification
 and publish11x2 passed;governance and Git accompany receipt. No next-file admission.
+
+## P24 Delivery
+
+Owner approves extracting client/client.c into five responsibility-specific
+compat units, preserving all eight original bodies and existing ABI/bindings.
+Keep original ntcftxt.h registration implementation;remove multi-entry source
+selection. Only this mirror is admitted. Cached full build,publish11x2,original
+body comparison,focused controls,formal graph and actual WOW lifecycle,then
+commit/push. Related targeted verification replaces Full by owner approval.
+
+P24 retires8 blocks/3564 lines;combined extractions retire208 blocks/20517 lines.
+With original restoration40 blocks/1194 lines,the census is down248 blocks/21711 lines.
+Main register2653 rows;pending1601 rows. Cached build,targeted tests and
+publish11x2 passed;governance and Git accompany receipt. No next-file admission.

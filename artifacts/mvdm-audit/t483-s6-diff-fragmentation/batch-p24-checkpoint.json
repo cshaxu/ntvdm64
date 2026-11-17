@@ -1,0 +1,103 @@
+{
+  "packet": "M0 T483 S6 P24",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/compat/README.md",
+        "sha256": "07cf1349d4aa8de7f0d6147a04d406303951d04e98bfd27a741b06adb5d60ff6"
+      },
+      {
+        "path": "src/non-mvdm/README.md",
+        "sha256": "6d183c7d9774b865f46a0cf7e96684452a8b9bb76045cbc2435fa442cdf91a52"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "c232ee61bcee7053623c05fdc6aed06278f3c55942bdb0b283b62a7eac33c275"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "9ad5350b641648a3534ac44d377b804ba39f4a569167cf44d48859e80453fc08"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "7d61525b7ce797bd235969bcf9748d15db6f729c17fe6034e2963a27c4701cdf"
+      },
+      {
+        "path": "src/compat/wow_class_client.c",
+        "sha256": "0e760bd9568b912ee92d713629afd4b9ad1c94439a913db8b86b03df3db2dbb9"
+      },
+      {
+        "path": "src/compat/wow_default_window_bits.c",
+        "sha256": "2cd4deda860a8361855a30078f4aa4cb62770df87a61670b4d2e3f66a71e1de5"
+      },
+      {
+        "path": "src/compat/wow_dialog_memory.c",
+        "sha256": "ce0facbd87ae1b515292ddd345218d71a8bc42a6a1ceb0e0a1bb0b78ce327845"
+      },
+      {
+        "path": "src/compat/wow_client_dispatch.c",
+        "sha256": "9b6ff3287e0eaae8b18bad2218488b7863ede1f3dd7c7389cb34299622f63300"
+      },
+      {
+        "path": "src/compat/wow_control_state.c",
+        "sha256": "0c63a06a8b05182793db23b7b6d5a1bf2cbf0d3b9578985c2c11fb75262777a6"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/client/client.c"
+    ],
+    "source_files": 10
+  },
+  "publication": {
+    "status": "published",
+    "package": "763c62a6-45d2-4169-b9a3-9d354669f096",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "original-bodies": "passed",
+    "ownership": "passed",
+    "controls": "passed",
+    "formal-graph": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1058,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 250,
+    "blocks": 2085,
+    "lines": 32812,
+    "reviewed_live_files": 29,
+    "remaining_files": 221,
+    "retired_reviewed_files": 5,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 208,
+    "owner_retired_lines": 20517,
+    "total_census_reduction_blocks": 248,
+    "total_census_reduction_lines": 21711
+  },
+  "limits": [
+    "Owner-approved extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "Eight original bodies and ntcftxt.h preserved; registration/wait adapters unchanged",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

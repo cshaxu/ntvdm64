@@ -389,3 +389,11 @@ src/compat/wow_object_ownership.c with provenance. Preserve original values,
 type/flag definitions and the cleanup consumer. Unused unexported residual
 definitions are removed;this does not admit NT4 kernel handle allocation or
 change the modern USER ownership boundary.
+
+### T483 S6 P24 owner-approved USER client extraction
+
+The owner approves retiring windows/core/ntuser/client/client.c and retaining
+its eight selected functions in five responsibility-specific compat units.
+Preserve original bodies,ABI and existing binding contracts,including original
+ntcftxt.h registration. This retires source-selection scaffolding,not original
+algorithms;it does not establish minimality of the registration or wait adapters.

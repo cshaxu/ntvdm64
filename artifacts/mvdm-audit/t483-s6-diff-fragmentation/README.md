@@ -252,3 +252,10 @@ Full waived by owner.
 [P23 receipt](batch-p23-checkpoint.json) and [verification evidence](p23-verification-evidence.zip).
 Current census:1059 files,251 nonzero,2093 blocks/36376 lines.
 The P20 ratio snapshot also predates the now-retired kernel/handtabl.c.
+
+[P24 USER client extraction](client-compat-extraction.json):8 non-error blocks/3564
+lines retired by owner approval. Cached build,targeted tests and publish11x2 passed.
+
+[P24 receipt](batch-p24-checkpoint.json) and [verification evidence](p24-verification-evidence.zip).
+Current census:1058 files,250 nonzero,2085 blocks/32812 lines.
+The P20 ratio snapshot predates the now-retired client/client.c.

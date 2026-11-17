@@ -2674,3 +2674,7 @@ T483 S6 P23 supersedes kernel/handtabl.c mirror admission. Its consumed
 object-ownership table resides in src/compat/wow_object_ownership.c;the former
 mirror and unused unexported residual definitions are retired. Historical
 records remain provenance only,not current mirror exceptions.
+
+T483 S6 P24 retires client/client.c in favor of five compat units preserving
+its eight selected original functions. Historical entries are provenance only;
+ntcftxt.h remains an original mirror dependency. No other mirror changes.

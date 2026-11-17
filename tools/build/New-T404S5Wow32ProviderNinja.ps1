@@ -506,7 +506,7 @@ foreach ($viewBody in @('winmgr','wow')) {
 $ddeDataObject = 'obj/opennt-user/hdata.obj'
 $objects.Add($ddeDataObject)
 $ninja.Add('build ' + $ddeDataObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/hdata.c')))
-foreach ($userOwner in @('clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clmenu', 'clglobal')) {
+foreach ($userOwner in @('clres', 'cldib', 'rtlinit', 'ntstubs', 'clmenu', 'clglobal')) {
     $object = 'obj/opennt-user/' + $userOwner + '.obj'
     $objects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/windows/core/ntuser/client/' + $userOwner + '.c'))))
@@ -516,10 +516,12 @@ foreach ($userOwner in @('clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clme
         $ninja.Add('  cflags = $cflags $control_user_flags')
     }
 }
+$objects.Add('obj/compat/wow-client-dispatch.obj')
+$ninja.Add('build obj/compat/wow-client-dispatch.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_client_dispatch.c')))
 $classLookupObject = 'obj/opennt-user/class.obj'
 # Original dialog initialization and shared EDIT DS callbacks use the same
 # registered WOW table as LOCAL*. Do not replace these bodies in an adapter.
-$dialogMemoryObject = 'obj/opennt-user/dialog-memory.obj'
+$dialogMemoryObject = 'obj/compat/wow-dialog-memory.obj'
 # OPENNT-HOST-079: original modal template entry, separate from clres's
 # bitmap slice. The existing modal entry owns context/task/borrow lifetimes.
 $dialogTemplateObject = 'obj/opennt-user/dialog-template.obj'
@@ -527,8 +529,8 @@ $objects.Add($dialogTemplateObject)
 $ninja.Add('build ' + $dialogTemplateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clres.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_TEMPLATE')
 $objects.Add($dialogMemoryObject)
-$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/client.c')))
-$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DIALOG_EDIT')
+$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_memory.c')))
+$ninja.Add('  cflags = $cflags $control_user_flags')
 # Original state transitions, not replacements in the binding units. The
 # kernel ntstubs subset has its registered receive facade in the source;
 # miscutil keeps precomp.h and receives only its finite original layouts.
@@ -549,10 +551,10 @@ $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_BRUSH_
 $objects.Add($controlBrushObject)
 $ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/random.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
-$controlStateObject = 'obj/opennt-user/control-state.obj'
+$controlStateObject = 'obj/compat/wow-control-state.obj'
 $objects.Add($controlStateObject)
-$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/client.c')))
-$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_STATE')
+$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_state.c')))
+$ninja.Add('  cflags = $cflags $control_user_flags')
 $objects.Add($controlFnidObject)
 $ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_fnid.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
@@ -572,7 +574,7 @@ $defaultClientObject = 'obj/opennt-user/default-client.obj'
 $objects.Add($defaultClientObject)
 $ninja.Add('build ' + $defaultClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clmsg.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_WINDOW')
-$defaultBitsObject = 'obj/opennt-user/default-window-bits.obj'
+$defaultBitsObject = 'obj/compat/wow-default-window-bits.obj'
 $privateWordSetterObject = 'obj/opennt-user/private-word-setter.obj'
 # The public private-word access facade calls these original client owners.
 # Keep reader/client/server as distinct objects: selecting only the server
@@ -590,8 +592,8 @@ $objects.Add($privateWordSetterObject)
 $ninja.Add('build ' + $privateWordSetterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/getset.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_SETTER')
 $objects.Add($defaultBitsObject)
-$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/client.c')))
-$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DEF_WINDOW_BITS')
+$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_default_window_bits.c')))
+$ninja.Add('  cflags = $cflags $control_user_flags')
 $defaultBordersObject = 'obj/opennt-user/default-borders.obj'
 $objects.Add($defaultBordersObject)
 $ninja.Add('build ' + $defaultBordersObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c')))
@@ -652,7 +654,7 @@ $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_REGISTRATION')
 $taskOrderObject = 'obj/opennt-user/taskman.obj'
 $objects.Add($taskOrderObject)
 $ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/taskman.c')))
-$classClientObject = 'obj/opennt-user/class-client.obj'
+$classClientObject = 'obj/compat/wow-class-client.obj'
 $inputGroupObject = 'obj/compat/wow-input-membership.obj'
 $objects.Add($inputGroupObject)
 $ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_input_membership.c')))
@@ -666,8 +668,8 @@ $taskRegisterObject = 'obj/opennt-user/exitwin.obj'
 $objects.Add($taskRegisterObject)
 $ninja.Add('build ' + $taskRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/exitwin.c')))
 $objects.Add($classClientObject)
-$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/client.c')))
-$ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_CLIENT')
+$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_class_client.c')))
+$ninja.Add('  cflags = $cflags')
 $objects.Add($classLookupObject)
 $ninja.Add('build ' + $classLookupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/class.c')))
 foreach ($source in $providerSupportSources) {
