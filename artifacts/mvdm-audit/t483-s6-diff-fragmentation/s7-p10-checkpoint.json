@@ -184,5 +184,37 @@
       "lines": 547
     }
   },
-  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Removed one added blank and restored the exact spacing of one original conditional. Continue using the P7 published runtime."
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Removed one added blank and restored the exact spacing of one original conditional. Continue using the P7 published runtime.",
+  "postpublication_full": {
+    "source_checkpoint": "2b9711645d629f02cbf1b2de6cac1e6ff57da607",
+    "package": "619955ae-00b2-4174-b75a-471ac49f7add",
+    "images_verified_in_both_destinations": 11,
+    "runtime_manifest_matches_publication": true,
+    "suite": "Full",
+    "elapsed_ms": 484738,
+    "gates_passed": [
+      "guest-media",
+      "startup-presentation",
+      "console-font-restore",
+      "console-input-batch",
+      "ntvdm-export-ordinals",
+      "wow-frontiers",
+      "Console-17",
+      "Window-17",
+      "rpc",
+      "native-gui",
+      "version-negatives",
+      "strict-dir",
+      "modern-edit-return",
+      "cooked-return",
+      "rapid-relaunch",
+      "interactive-relaunch",
+      "session-isolation",
+      "retirement-wiring",
+      "nested-window-handoff",
+      "dos4gw-nesticle"
+    ],
+    "dos4gw_nesticle": "Rendered menu pixels and responded to Escape hide/restore.",
+    "local_evidence_directory": "build/t483-s7-p10-full/full-isolated"
+  }
 }

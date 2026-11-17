@@ -22,7 +22,7 @@ winmgrc.c, profile.c and illegalp.c work belongs to S7.
 | Reference Baseline | P32, commit 861d7be0fabf2428f83ee24b5b58e62f90614f0d, package 520c9909-bee6-40e6-9345-dc6d85e6cf5f. OpenNT revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. |
 | Files And ABI Surface | Remaining classified host mirror files, actual caller/provider boundaries, and active review ledgers. |
 | Applicable Rules | Original-first, whole-unit comparison, bare #error branch policy and original logical-line preservation. |
-| Verification | Verify file hashes and original line anchors. Accumulate format-only changes. After a substantive file is fully reviewed, run cached x86/x64 builds, publish all 11 images to both destinations, verify, commit and push. Run Full against the published S7 P1 package once. Subsequent batches default to applicable targeted verification. |
+| Verification | Verify file hashes and original line anchors. Accumulate format-only changes. After a substantive file is fully reviewed, run cached x86/x64 builds, publish all 11 images to both destinations, verify, commit and push. Full passed against the published S7 P1 package and again against the current published package at P10 on owner request. Subsequent batches default to applicable targeted verification. |
 | Expected Markers | Before/after non-error blocks and changed lines per file, source and ABI evidence, local versus delivered totals. |
 | Asset Needs | Existing pinned originals, caches, and project fixtures. |
 | Reporting Requirements | Report non-error blocks and changed lines before and after each file, S7 cumulative reductions, current global totals, and remaining file count. Identify measurement corrections separately from source restorations. Record necessary unapproved residuals in the pending backlog. |
@@ -108,6 +108,9 @@ The P7 runtime package is retained.
 S7 P10 completes ten more file reviews and restores formatting in
 `nt_emm.c` and `wow32.c`. The selected statements, exclusions and original
 diagnostic anchors are preserved. The P7 runtime package is retained.
+Postpublication Full passed all 20 gates against the retained P7 package.
+The test manifest matches the 11 images at both published destinations.
+DOS4GW/NESticle rendered its menu and passed Escape hide/restore.
 [P10 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p10-checkpoint.json).
 
 S7 progress is 87 reviewed and 126 remaining. Source restorations reduce
