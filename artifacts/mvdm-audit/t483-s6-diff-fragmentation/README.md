@@ -11,10 +11,11 @@ files or renumber the old R evidence to hide an unresolved difference.
 
 ## Counting contract
 
-Inventory covers1052 existing host C/H mirrors plus9 already-audited build,
-include and DEF text files:1061 total. Deleted files,guest,binaries and other
-resources are outside this source queue.509 files are byte-identical to origin.
-Normalized/masked comparison has806 zero-difference files and255 nonzero files.
+Initial inventory covered1052 host C/H plus9 other text mirrors:1061 total.
+P10 recovers one byte-exact original header:current1053 host C/H plus9 other
+text mirrors,1062 total. Deleted files,guest,binaries and other
+resources are outside this source queue.510 files are byte-identical to origin.
+Normalized/masked comparison has807 zero-difference files and255 nonzero files.
 These are not the old fixed365-file S5 totals.
 
 Normalize CRLF,retain terminal empty line,ignore#line only for difference
@@ -170,3 +171,7 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [Mouse whole-file review](mouse-io-whole-file-review.json):33 points/349 lines unchanged;prior351 count had one false original-arm pairing. Maintained inventory now refuses the three added host-arrow guard pairings. This -2 counting correction is separate from19 blocks/85 lines delivered source reduction. Historical source-inventory snapshot remains immutable.
 
 [P9 receipt](batch-p9-checkpoint.json) and [evidence](p9-verification-evidence.zip):wumsg33->32 points,113->109 lines;single-use rollback cleanup inlined,634 shared original compiler lines unchanged,all required gates passed.
+
+[clres whole-file candidate](clres-whole-file-review.json):31->30 non-error points,3352->2733 difference lines;full original units restored. P10 cached full running;not delivered. Byte-exact newres.h declaration recovery is separately recorded,not a mirror-diff reduction.
+
+[P10 receipt](batch-p10-checkpoint.json) and [evidence](p10-verification-evidence.zip):clres31->30 blocks,3352->2733 lines. Cached full,publish11x2,bitmap/focused/Full20 passed;final#line-only rebuild differs solely in PE timestamps.28 retained function compiler anchors match original. Residual decisions remain pending owner.

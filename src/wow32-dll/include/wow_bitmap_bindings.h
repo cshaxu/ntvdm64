@@ -2,6 +2,7 @@
 #define WOW_BITMAP_BINDINGS_H
 #include <windows.h>
 #include <assert.h>
+#include "non-mvdm/public/internal/windows/inc/newres.h"
 
 /* Finite USER client environment for the original bitmap owners.
  * No resource parser, palette algorithm or guest pointer policy lives here. */
@@ -33,6 +34,9 @@ void WINAPI wow_bitmap_bindings_shutdown(void);
 #define SelectBitmap(hdc, bitmap) ((HBITMAP)SelectObject(hdc, bitmap))
 #define UserAssert(condition) assert(condition)
 #define RIPMSG0(level, message) ((void)0)
+#define RIPMSG1(flags, format, value)
+#define WIDTHBYTES(i) ((((i) + 31) & ~31) >> 3)
+#define SYSMET(index) GetSystemMetrics(SM_##index)
 #define BitmapWidth(cx, bpp) (((((cx)*(bpp)) + 31) & ~31) >> 3)
 #define SetBestStretchMode(hdc, planes, bpp) \
     SetStretchBltMode(hdc, (((planes) * (bpp)) == 1 ? BLACKONWHITE : COLORONCOLOR))

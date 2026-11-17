@@ -1,0 +1,120 @@
+{
+  "status": "Whole-file reviewed,cached full,publish11x2,focused/Full20 passed;Git delivery accompanies receipt",
+  "file": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "before": {
+    "blocks": 31,
+    "added": 23,
+    "deleted": 3329,
+    "lines": 3352
+  },
+  "after": {
+    "blocks": 30,
+    "added": 27,
+    "deleted": 2706,
+    "lines": 2733
+  },
+  "reduction": {
+    "blocks": 1,
+    "lines": 619
+  },
+  "sha256": "108a2eaabba53c84d2f0f96b55ddfe41bd0b2d1d8299bb39b3d1762969cc0af8",
+  "initial_review": "Do not infer whole omitted region necessary from full-original compiler failure. Independent original units were separately recovered with their declaration dependencies.",
+  "counter_review": "Independent second pass identified and corrected selected-else#line. All28 retained function anchors now match original;1447 original source lines matched. Three-helper extra restoration was investigated but not applied because it increases block count;residual owner decisions remain open.",
+  "restored_units": [
+    "MyAbs",
+    "Magnitude",
+    "MatchImage",
+    "GetBestImage",
+    "GetIcoCurBpp",
+    "DIBFromBitmap",
+    "CopyBmp",
+    "_FreeResource",
+    "_LockResource",
+    "_UnlockResource",
+    "WowGetModuleFileName",
+    "WowGetModuleHandle",
+    "GetIcoCurWidth",
+    "GetIcoCurHeight",
+    "RtlGetIdFromDirectory"
+  ],
+  "declarations_restored": [
+    "RESOURCE_ACCEL",
+    "ISRIFFFORMAT",
+    "MR_FAILFOR40",
+    "MR_MONOCHROME",
+    "MAPRES",
+    "CopyBmp prototype"
+  ],
+  "line_proof": {
+    "exact_nonblank_lines": 1447,
+    "non_original_lines": [
+      {
+        "physical": 22,
+        "logical": 20,
+        "source": "    WCSToMBEx(0, text, count, output, capacity, allocate)"
+      }
+    ]
+  },
+  "error_bodies": {
+    "count": 10,
+    "changed": false,
+    "matching_issues": 0
+  },
+  "header_provenance": {
+    "path": "src/non-mvdm/public/internal/windows/inc/newres.h",
+    "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\newres.h",
+    "sha256": "d3205362f3b641cde008f2f98fd006091873b1fe45fac01e32f0b0ba7b8b79f8",
+    "byte_exact": true,
+    "purpose": "Original packed NEWHEADER/RESDIR declarations required by recovered clres MatchImage/GetBestImage/RtlGetIdFromDirectory; no implementation or new runtime provider."
+  },
+  "binding_additions": {
+    "RIPMSG1": "Original winerrp.h release diagnostic semantics",
+    "WIDTHBYTES": "Exact original user.h arithmetic",
+    "SYSMET": "Modern USER GetSystemMetrics at existing native bitmap environment boundary; original shared USER server array is unavailable."
+  },
+  "pending": [
+    {
+      "ids": [
+        "R2183",
+        "R2184"
+      ],
+      "evidence": "Two separate product objects select bitmap and Unicode dialog owners. Original full precomp depends on private USER globals/layouts; prior real original compile controls fail. New units compiled in actual bitmap/dialog flags. Native DC/capability binding remains owner decision."
+    },
+    {
+      "ids": [
+        "R2185"
+      ],
+      "evidence": "Existing original chartran provider is WCSToMBEx; retained macro supplies original default codepage0. No change."
+    },
+    {
+      "ids": [
+        "R2187"
+      ],
+      "evidence": "Original upOldIcoCur expands through upbih; setting upbih=&Fake before reading abBitmap selects wrong source. Existing positive/negative fixture demonstrates pointer mismatch. Retain two swapped statements pending owner."
+    },
+    {
+      "ids": [
+        "R2189"
+      ],
+      "evidence": "Remaining native resource ownership uses hmodUser/prescalls/private CURSORDATA and NtUser cursor creation/destruction; original public wrappers would own USER objects now owned by modern USER32. Pure independently composable units restored. Three additional helpers have a concrete separate candidate requiring resource-provider fixture guards:34 blocks (vs31 baseline), so not applied without approval. GetIconIdEx also reports ANSI RT_ICON versus LPCWSTR comparison warning.",
+      "additional_candidate": "SplFindResource,GetIconIdEx,WowServerLoadCreateMenu",
+      "decision": "Pending owner boundary/net-increase decision,not blanket approval of residual deletion."
+    }
+  ],
+  "validation": {
+    "cached_full": "passed before and after sole#line correction",
+    "publication": {
+      "status": "published",
+      "package": "2420a098-829e-46cc-b913-a00c35630772",
+      "images": 11,
+      "destinations": [
+        "O:\\winnt\\system32",
+        "O:\\repos.hobby\\ntvdm64\\assets\\release"
+      ],
+      "hashVerified": true
+    },
+    "runtime": "bitmap/message/DDE/controls/task-order/Full20 passed;final equivalent build evidence reused as receipt specifies",
+    "compiler_lines": "28 function anchors verified in actual bitmap/dialog preprocessing;no missing/mismatched anchors",
+    "delivery": "receipt batch-p10-checkpoint.json;Git delivery accompanies receipt"
+  }
+}

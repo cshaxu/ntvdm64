@@ -35,6 +35,12 @@
 #define RESCLR_BLACK      0x00000000
 #define RESCLR_WHITE      0x00FFFFFF
 
+#line 26
+typedef struct {
+    ACCEL accel;
+    WORD  padding;
+} RESOURCE_ACCEL, *PRESOURCE_ACCEL;
+
 #line 30
 
 /*
@@ -57,10 +63,102 @@ typedef struct _OLDCURSOR {
 } OLDCURSOR, *POLDCURSOR;
 typedef OLDCURSOR UNALIGNED *UPOLDCURSOR;
 
+#line 60
+#define ISRIFFFORMAT(p) \
+    (((UNALIGNED RTAG *)(p))->ckID == FOURCC_RIFF)
+
+#define MR_FAILFOR40    0x01
+#define MR_MONOCHROME   0x02
+
+
+typedef struct tagMAPRES {
+    WORD idDisp;                // display driver ID
+    WORD idUser;                // USER ID
+    BYTE bFlags;                // Flags
+    BYTE bReserved;             // unused
+} MAPRES, *LPMAPRES, *PMAPRES;
+
+
+HBITMAP CopyBmp(HBITMAP hbmpOrg, int cxNew, int cyNew, UINT LR_flags);
 
 #endif
 
 #if defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 117
+/***********************************************************************\
+* WowGetModuleFileName
+*
+* This converts a WOW or non-WOW module handle to a string form that
+* can be restored even for WOW handles.
+*
+* Returns: fSuccess
+*
+* 29-Nov-1995 SanfordS  Created.
+\***********************************************************************/
+
+BOOL WowGetModuleFileName(
+    HMODULE hModule,
+    LPWSTR  pwsz,
+    DWORD   cchMax)
+{
+    if (!GetModuleFileName(hModule, pwsz, cchMax)) {
+
+        if (cchMax < 10) {
+            RIPMSG0(RIP_WARNING, "WowGetModuleFileName: exceeded Char-Max");
+            return FALSE;
+        }
+
+        wsprintf(pwsz, TEXT("\001%08lx"), hModule);
+    }
+
+    return TRUE;
+}
+
+/***********************************************************************\
+* WowGetModuleHandle
+*
+* This restores the string form of a module handle created by
+* WowGetModuleFileName to the original handle.
+*
+* Returns: fSuccess
+*
+* 29-Nov-1995 Created   SanfordS
+\***********************************************************************/
+
+HMODULE WowGetModuleHandle(
+    LPCWSTR pwsz)
+{
+    HMODULE hMod = NULL;
+    DWORD   digit;
+
+    if (pwsz[0] == TEXT('\001')) {
+
+        /*
+         * Cant seem to link to swscanf without CRT0 problems so just
+         * do it by hand.
+         */
+        while (*(++pwsz)) {
+
+            if (*pwsz == TEXT(' '))
+                continue;
+
+            digit = *pwsz - TEXT('0');
+
+            if (digit > 9)
+                digit += (DWORD)(TEXT('0') - TEXT('a') + 10);
+
+            (DWORD)hMod <<= 4;
+            (DWORD)hMod += digit;
+        }
+
+    } else {
+
+        hMod = GetModuleHandle(pwsz);
+    }
+
+    return hMod;
+}
+
 #line 411
 /***************************************************************************\
 * SkipIDorString
@@ -248,6 +346,47 @@ int WINAPI DialogBoxIndirectParamAorW(
 #line 896
 #endif
 
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 1317
+/***************************************************************************\
+* _FreeResource   (API)
+* _LockResource   (API)
+* _UnlockResource (API)
+*
+* These are dummy routines that need to exist for the apfnResCallNative
+* array, which is used when calling the run-time libraries.
+*
+\***************************************************************************/
+
+BOOL WINAPI _FreeResource(
+    HANDLE    hResData,
+    HINSTANCE hModule)
+{
+    UNREFERENCED_PARAMETER(hResData);
+    UNREFERENCED_PARAMETER(hModule);
+
+    return FALSE;
+}
+
+LPSTR WINAPI _LockResource(
+    HANDLE    hResData,
+    HINSTANCE hModule)
+{
+    UNREFERENCED_PARAMETER(hModule);
+
+    return (LPSTR)(hResData);
+}
+
+BOOL WINAPI _UnlockResource(
+    HANDLE    hResData,
+    HINSTANCE hModule)
+{
+    UNREFERENCED_PARAMETER(hResData);
+    UNREFERENCED_PARAMETER(hModule);
+
+    return TRUE;
+}
+
 #line 1480
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
 #line 1481
@@ -255,7 +394,6 @@ int WINAPI DialogBoxIndirectParamAorW(
 #line 1483
 #endif
 
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
 #line 1499
 /***************************************************************************\
 * Convert1BppToMonoBitmap
@@ -1163,23 +1301,312 @@ HBITMAP ConvertDIBBitmap(
     return hBmpRet;
 }
 
-#endif
+#line 3611
+/***************************************************************************\
+* MyAbs
+*
+* Calcules my weighted absolute value of the difference between 2 nums.
+* This of course normalizes values to >= zero.  But it also doubles them
+* if valueHave < valueWant.  This is because you get worse results trying
+* to extrapolate from less info up then interpolating from more info down.
+* I paid $150 to take the SAT.  I'm damned well going to get my vocab's
+* money worth.
+*
+\***************************************************************************/
 
-#line 3751
+UINT MyAbs(
+    int valueHave,
+    int valueWant)
+{
+    int diff = (valueHave - valueWant);
+
+    if (diff < 0)
+        diff = 2 * (-diff);
+
+    return (UINT)diff;
+}
+
+/***************************************************************************\
+* Magnitude
+*
+* Used by the color-delta calculations.  The reason is that num colors is
+* always a power of 2.  So we use the log 2 of the want vs. have values
+* to avoid having weirdly huge sets.
+*
+\***************************************************************************/
+
+UINT Magnitude(
+    int nValue)
+{
+    if (nValue < 4)
+        return 1;
+    else if (nValue < 8)
+        return 2;
+    else if (nValue < 16)
+        return 3;
+    else if (nValue < 256)
+        return 4;
+    else
+        return 8;
+}
+
+#line 3659
+/***************************************************************************\
+* MatchImage
+*
+* This function takes LPINTs for width & height in case of "real size".
+* For this option, we use dimensions of 1st icon in resdir as size to
+* load, instead of system metrics.
+*
+* Returns a number that measures how "far away" the given image is
+* from a desired one.  The value is 0 for an exact match.  Note that our
+* formula has the following properties:
+*     (1) Differences in width/height count much more than differences in
+*         color format.
+*     (2) Fewer colors give a smaller difference than more
+*     (3) Bigger images are better than smaller, since shrinking produces
+*             better results than stretching.
+*
+* The formula is the sum of the following terms:
+*     Log2(colors wanted) - Log2(colors really), times -2 if the image
+*         has more colors than we'd like.  This is because we will lose
+*         information when converting to fewer colors, like 16 color to
+*         monochrome.
+*     Log2(width really) - Log2(width wanted), times -2 if the image is
+*         narrower than what we'd like.  This is because we will get a
+*         better result when consolidating more information into a smaller
+*         space, than when extrapolating from less information to more.
+*     Log2(height really) - Log2(height wanted), times -2 if the image is
+*         shorter than what we'd like.  This is for the same reason as
+*         the width.
+*
+* Let's step through an example.  Suppose we want a 16 color, 32x32 image,
+* and are choosing from the following list:
+*     16 color, 64x64 image
+*     16 color, 16x16 image
+*      8 color, 32x32 image
+*      2 color, 32x32 image
+*
+* We'd prefer the images in the following order:
+*      8 color, 32x32         : Match value is 0 + 0 + 1     == 1
+*     16 color, 64x64         : Match value is 1 + 1 + 0     == 2
+*      2 color, 32x32         : Match value is 0 + 0 + 3     == 3
+*     16 color, 16x16         : Match value is 2*1 + 2*1 + 0 == 4
+*
+\***************************************************************************/
+
+UINT MatchImage(
+    LPRESDIR lprd,
+    LPINT    lpcxWant,
+    LPINT    lpcyWant,
+    UINT     uColorsWant,
+    BOOL     fIcon)
+{
+    UINT uColorsNew;
+    int  cxNew;
+    int  cyNew;
+
+    cxNew = lprd->Icon.Width;
+    cyNew = lprd->Icon.Height;
+
+    if (fIcon) {
+        uColorsNew = lprd->Icon.ColorCount;
+    } else {
+        cyNew >>= 1;
+        uColorsNew = BPP01_MAXCOLORS;
+    }
+
+    /*
+     * 0 really means maximum size (256) or colors (256).
+     */
+    if (!cxNew)
+        cxNew = BPP08_MAXCOLORS;
+
+    if (!*lpcxWant)
+        *lpcxWant = cxNew;
+
+    if (!cyNew)
+        cyNew = BPP08_MAXCOLORS;
+
+    if (!*lpcyWant)
+        *lpcyWant = cyNew;
+
+    if (!uColorsNew)
+        uColorsNew = BPP08_MAXCOLORS;
+
+    /*
+     * Here are the rules for our "match" formula:
+     *      (1) A close size match is much preferable to a color match
+     *      (2) Fewer colors are better than more
+     *      (3) Bigger icons are better than smaller
+     *
+     * The color count, width, and height are powers of 2.  So we use Magnitude()
+     * which calculates the order of magnitude in base 2.
+     */
 #if 0 //CHRISWIL: Not in Win95
 #line 3752
 #error Excluded original disabled image-matching branch
 #line 3757
 #else
 #line 3758
-#line 3762
-#endif
 
-#line 3901
+    return( 2*MyAbs(Magnitude(uColorsWant), Magnitude(uColorsNew)) +
+              MyAbs(cxNew, *lpcxWant) +
+              MyAbs(cyNew, *lpcyWant));
+#endif
+}
+
+/***************************************************************************\
+* GetBestImage
+*
+* Among the different forms of images, choose the one that best matches the
+* color format & dimensions of the request.  We try to match the size, then
+* the color info.  So we find the item that
+*
+* (1) Has closest dimensions (smaller or bigger equally good) to minimize
+*     the width, height difference
+* (2) Has best colors.  We favor less over more colors.
+*
+* If we find an identical match, we return immediately.
+*
+\***************************************************************************/
+
+UINT GetBestImage(
+    LPRESDIR lprd,
+    UINT     uCount,
+    int      cxDesired,
+    int      cyDesired,
+    UINT     bpp,
+    BOOL     fIcon)
+{
+    UINT uIndex;
+    UINT uT;
+    UINT uIndexBest = 0;
+    UINT uBest = (UINT)-1;
+
+
+    /*
+     * Get desired number of colors in # value, not bits value.  Note that
+     * we do NOT allow you to have  16- or 32- or 24- bit color icons.
+     *
+     * the icon resources can be 16, 24, 32 bpp, but the restable only has
+     * a color count, so a HiColor icon would have a max value in the
+     * restable.  we treat a 0 in the color count as "max colors"
+     */
+    if (bpp == 0)
+        bpp = (UINT)oemInfo.BitCount;
+
+    if (bpp > 8)
+        bpp = 8;
+
+    bpp = 1 << bpp;
+
+    /*
+     * Loop through resource entries, saving the "closest" item so far.  Most
+     * of the real work is in MatchImage(), which uses a fabricated formula
+     * to give us the results that we desire.  Namely, an image as close in
+     * size to what we want preferring bigger over smaller, then an image
+     * with the right color format
+     */
+    for (uIndex = 0; uIndex < uCount; uIndex++, lprd++) {
+
+        /*
+         * Get "matching" value.  How close are we to what we want?
+         */
+        uT = MatchImage(lprd, &cxDesired, &cyDesired, bpp, fIcon);
+
+        if (!uT) {
+
+            /*
+             * We've found an exact match!
+             */
+            return uIndex;
+
+        } else if (uT < uBest) {
+
+            /*
+             * We've found a better match than the current alternative.
+             */
+            uBest = uT;
+            uIndexBest = uIndex;
+        }
+    }
+
+    return uIndexBest;
+}
+
+#line 3844
+/***************************************************************************\
+* GetIcoCurWidth
+*
+* When zero is passed in for a dimension, calculates what size we should
+* really used.  Done in a couple o' places, so made it a FN().
+*
+\***************************************************************************/
+
+_inline DWORD GetIcoCurWidth(
+    DWORD cxOrg,
+    BOOL  fIcon,
+    UINT  lrFlags,
+    DWORD cxDes)
+{
+    if (cxOrg) {
+        return cxOrg;
+    } else if (lrFlags & LR_DEFAULTSIZE) {
+        return (fIcon ? SYSMET(CXICON) : SYSMET(CXCURSOR));
+    } else {
+        return cxDes;
+    }
+}
+
+/***************************************************************************\
+* GetIcoCurHeight
+*
+* Vertical counterpart to GetWidth().
+*
+\***************************************************************************/
+
+_inline DWORD GetIcoCurHeight(
+    DWORD cyOrg,
+    BOOL  fIcon,
+    UINT  lrFlags,
+    DWORD cyDes)
+{
+    if (cyOrg) {
+        return cyOrg;
+    } else if (lrFlags & LR_DEFAULTSIZE) {
+        return (fIcon ? SYSMET(CYICON) : SYSMET(CYCURSOR));
+    } else {
+        return cyDes;
+    }
+}
+
+#line 3889
+/***************************************************************************\
+* GetIcoCurBpp
+*
+* Returns best match Bpp based on lr-flags.
+*
+\***************************************************************************/
+
+_inline DWORD GetIcoCurBpp(
+    UINT lrFlags)
+{
+    if (lrFlags & LR_MONOCHROME) {
+
 #ifdef DEBUG
 #line 3902
 #error Unsupported DEBUG original branch
 #line 3905
+#endif
+        return 1;
+
+    } else if (gpsi->fPaletteDisplay || (lrFlags & LR_VGACOLOR)) {
+        return 4;
+    } else {
+        return 0;
+    }
+}
 #endif
 
 #if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE) && !defined(WOW_BITMAP_FIXTURE_BINDINGS)
@@ -1261,6 +1688,154 @@ HBITMAP WOWLoadBitmapA(
     return hRet;
 }
 
+#line 4053
+/***********************************************************************\
+* DIBFromBitmap()
+*
+*  Creates a memory block with DIB information from a physical bitmap tagged
+*  to a specific DC.
+*
+*  A DIB block consists of a BITMAPINFOHEADER + RGB colors + DIB bits.
+*
+* Returns: UserLocalAlloc pointer to DIB info.
+*
+* 03-Nov-1995 SanfordS  Created.
+\***********************************************************************/
+
+PVOID DIBFromBitmap(
+    HBITMAP hbmp,
+    HDC     hdc)
+{
+    BITMAP             bmp;
+    LPBITMAPINFOHEADER lpbi;
+    DWORD              cbBits;
+    DWORD              cbPalette;
+    DWORD              cbTotal;
+    WORD               cBits;
+
+    UserAssert(hbmp);
+    UserAssert(hdc);
+
+    GetObject(hbmp, sizeof(BITMAP), &bmp);
+    cBits = ((WORD)bmp.bmPlanes * (WORD)bmp.bmBitsPixel);
+
+TrySmallerDIB:
+
+    cbBits = (DWORD)WIDTHBYTES((WORD)bmp.bmWidth * cBits) * (DWORD)bmp.bmHeight;
+
+    cbPalette = 0;
+    if (cBits <= 8)
+        cbPalette = (1 << cBits) * sizeof(RGBQUAD);
+    else
+        cbPalette = 3 * sizeof(RGBQUAD);
+
+    cbTotal  = sizeof(BITMAPINFOHEADER) + cbPalette + cbBits;
+    lpbi = (LPBITMAPINFOHEADER)UserLocalAlloc(HEAP_ZERO_MEMORY, cbTotal);
+    if (lpbi == NULL) {
+
+        /*
+         * Try a smaller DIB, if we can.  We can't if the DIB is mono.
+         */
+        switch (cBits) {
+        case 4:
+            cBits = 1;
+            break;
+
+        case 8:
+            cBits = 4;
+            break;
+
+        case 16:
+            cBits = 8;
+            break;
+
+        case 24:
+            cBits = 16;
+            break;
+
+        case 32:
+            cBits = 24;
+            break;
+
+        default:
+            return NULL;   // 1 or wierd.
+        }
+
+        RIPMSG1(RIP_WARNING, "Not enough memory to create large color DIB, trying %d bpp.", cBits);
+        goto TrySmallerDIB;
+    }
+
+    RtlZeroMemory(lpbi, sizeof(BITMAPINFOHEADER));
+    lpbi->biSize        = sizeof(BITMAPINFOHEADER);
+    lpbi->biWidth       = bmp.bmWidth;
+    lpbi->biHeight      = bmp.bmHeight;
+    lpbi->biPlanes      = 1;
+    lpbi->biBitCount    = cBits;
+
+    /*
+     * Get old bitmap's DIB bits, using the current DC.
+     */
+    GetDIBits(hdc,
+              hbmp,
+              0,
+              lpbi->biHeight,
+              ((LPSTR)lpbi) + lpbi->biSize + cbPalette,
+              (LPBITMAPINFO)lpbi,
+              DIB_RGB_COLORS);
+
+    lpbi->biClrUsed   = cbPalette / sizeof(RGBQUAD);
+    lpbi->biSizeImage = cbBits;
+
+    return lpbi;
+}
+
+/***************************************************************************\
+* CopyBmp
+*
+* Creates a new bitmap and copies the given bitmap to the new one,
+* stretching and color-converting the bits if desired.
+*
+* 03-Nov-1995 SanfordS  Created.
+\***************************************************************************/
+
+HBITMAP CopyBmp(
+    HBITMAP hbmpOrg,
+    int     cxNew,
+    int     cyNew,
+    UINT    LR_flags)
+{
+    HBITMAP hbmNew = NULL;
+    LPBITMAPINFOHEADER pdib;
+
+    RtlEnterCriticalSection(&gcsHdc);
+
+    if (pdib = DIBFromBitmap(hbmpOrg, ghdcBits2)) {
+
+        if (LR_flags & LR_COPYRETURNORG) {
+
+            DWORD bpp = GetIcoCurBpp(LR_flags);
+
+            if ((cxNew == 0 || cxNew == pdib->biWidth)  &&
+                (cyNew == 0 || cyNew == pdib->biHeight) &&
+                (bpp == 0 || bpp == pdib->biBitCount)) {
+
+                hbmNew = hbmpOrg;
+            }
+        }
+
+        if (hbmNew == NULL)
+            hbmNew = ConvertDIBBitmap(pdib, cxNew, cyNew, LR_flags, NULL, NULL);
+
+        UserLocalFree(pdib);
+    }
+
+    RtlLeaveCriticalSection(&gcsHdc);
+
+    if ((LR_flags & LR_COPYDELETEORG) && hbmNew && (hbmNew != hbmpOrg))
+        DeleteObject(hbmpOrg);
+
+    return hbmNew;
+}
 #endif
 
 #line 4516
@@ -1270,10 +1845,68 @@ HBITMAP WOWLoadBitmapA(
 #line 4519
 #endif
 
-#line 4574
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
+#line 4538
+/***************************************************************************\
+* RtlGetIdFromDirectory
+*
+* History:
+* 06-Apr-1991 ScottLu   Cleaned up, make work with client/server.
+* 16-Nov-1995 SanfordS  Now uses LookupIconIdFromDirectoryEx
+\***************************************************************************/
+
+int RtlGetIdFromDirectory(
+    PBYTE  presbits,
+    BOOL   fIcon,
+    int    cxDesired,
+    int    cyDesired,
+    DWORD  LR_flags,
+    PDWORD pdwResSize)
+{
+    LPNEWHEADER lpnh;
+    LPRESDIR    lprsd;
+    UINT        iImage;
+    UINT        cImage;
+    UINT        bpp;
+
+    /*
+     * Make sure this is pointing to valid resource bits.
+     */
+    if (presbits == NULL)
+        return 0;
+
+    lpnh = (LPNEWHEADER)presbits;
+
+    /*
+     * Fill in defaults.
+     */
+    cxDesired = GetIcoCurWidth(cxDesired, fIcon, LR_flags, 0);
+    cyDesired = GetIcoCurHeight(cyDesired, fIcon, LR_flags, 0);
+
 #if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
 #line 4575
 #error Excluded original disabled directory branch
 #line 4577
 #endif
 
+    bpp = GetIcoCurBpp(LR_flags);
+
+    /*
+     * We'll use the first image in the directory if we can't find one
+     * that's appropriate.
+     */
+    cImage = lpnh->ResCount;
+    lprsd  = (LPRESDIR)(lpnh + 1);
+
+    iImage = GetBestImage(lprsd, cImage, cxDesired, cyDesired, bpp, fIcon);
+
+    if (iImage == cImage)
+        iImage = 0;
+
+    if (pdwResSize != NULL)
+        *pdwResSize = (lprsd + iImage)->BytesInRes;
+
+    return ((LPRESDIR)(lprsd + iImage))->idIcon;
+}
+
+#endif

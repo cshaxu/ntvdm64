@@ -24,7 +24,7 @@ files+= [r['path'] for r in prior['files'] if r['path'] not in files]
 rows=[]
 for path in sorted(files):
  p=ROOT/path
- op=Path(origins[path]['original']) if path in origins else Path('O:/repos.external/OpenNT/base/mvdm')/path.removeprefix('src/mvdm-host/')
+ op=Path(origins[path]['original']) if path in origins else (Path('O:/repos.external/OpenNT')/path.removeprefix('src/non-mvdm/') if path.startswith('src/non-mvdm/') else Path('O:/repos.external/OpenNT/base/mvdm')/path.removeprefix('src/mvdm-host/'))
  raw=p.read_bytes();oldraw=op.read_bytes();oldhash=hashlib.sha256(oldraw).hexdigest()
  if path in origins:assert oldhash==origins[path]['original_sha256'],path
  old=oldraw.decode('latin1').replace('\r\n','\n').split('\n');new=raw.decode('latin1').replace('\r\n','\n').split('\n');oa,oe=parse(oldraw);na,ne=parse(raw)
@@ -76,7 +76,7 @@ for path in sorted(files):
  rows.append(dict(path=path,original=str(op),original_sha256=oldhash,current_sha256=hashlib.sha256(raw).hexdigest(),raw=rawmetric,filtered=filtered,excluded=excluded,issues=issues))
 rows.sort(key=lambda r:(-r['filtered']['blocks'],r['path']))
 for i,r in enumerate(rows):r['rank']=i+1
-out=dict(scope='1052 live host C/H plus9 existing audited build/include/def text mirrors;no guest/binary/resources/deleted files',metric='Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.',files=rows)
+out=dict(scope='Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files',metric='Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.',files=rows)
 output.write_text(json.dumps(out,indent=2)+'\n',encoding='utf-8',newline='\n')
 print('files',len(rows),'issues',sum(bool(x['issues']) for x in rows),'blocks',sum(x['filtered']['blocks'] for x in rows))
 for r in rows[:20]:print(r['filtered']['blocks'],r['path'],len(r['issues']))

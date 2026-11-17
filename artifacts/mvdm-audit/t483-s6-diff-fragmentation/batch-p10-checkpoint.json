@@ -1,0 +1,416 @@
+{
+  "packet": "M0 T483 S6 P10",
+  "status": "Verified and published;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 3,
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "sha256": "108a2eaabba53c84d2f0f96b55ddfe41bd0b2d1d8299bb39b3d1762969cc0af8"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_bitmap_bindings.h",
+        "sha256": "614623372f07e8c69c46a0e69fc73f99d0ecad97c4ccd68b239325431fc63406"
+      },
+      {
+        "path": "src/non-mvdm/public/internal/windows/inc/newres.h",
+        "sha256": "d3205362f3b641cde008f2f98fd006091873b1fe45fac01e32f0b0ba7b8b79f8"
+      }
+    ],
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 1,
+    "lines": 619
+  },
+  "publication": {
+    "status": "published",
+    "package": "2420a098-829e-46cc-b913-a00c35630772",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 411854,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6409,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1122,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11626,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 12281,
+        "CleanupMs": 477,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10784,
+        "CleanupMs": 450,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 222,
+        "CleanupMs": 426,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66186,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46548,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45685,
+        "CleanupMs": 449,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14984,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11600,
+        "CleanupMs": 417,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 46729,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12727,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29260,
+        "CleanupMs": 469,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31001,
+        "CleanupMs": 488,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3968,
+        "CleanupMs": 459,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8239,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10391,
+        "CleanupMs": 393,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4126,
+        "CleanupMs": 377,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7371,
+        "CleanupMs": 460,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20224,
+        "CleanupMs": 449,
+        "Passed": true
+      }
+    ]
+  },
+  "line_only_rebuild": {
+    "before_sha256": "a05c898e14063c893e3c0b46ec969bbd566cceab0746d64c5f74bb4aef4881fd",
+    "after_sha256": "108a2eaabba53c84d2f0f96b55ddfe41bd0b2d1d8299bb39b3d1762969cc0af8",
+    "change": "Insert #line 3758 after selected #else",
+    "only_change": true
+  },
+  "raw_build_comparison": [
+    {
+      "name": "ntvdm.exe",
+      "before_sha256": "8323270b8328ba7eaa4012f5b356b732a21619ce9c8eedbf92191cbb3609e151",
+      "after_sha256": "47fa6625df4411ca249a2f8d36345670b99564286e5dd532d06a7755b372449c",
+      "classification": "coff-and-debug-directory-timestamps-only",
+      "before_size": 2107392,
+      "after_size": 2107392,
+      "different_bytes": 4
+    },
+    {
+      "name": "VCDEX.DLL",
+      "before_sha256": "41dd3079bc3dc6940b8d50246696ca2bc323383af8199145cf940c9dc2d46ea0",
+      "after_sha256": "41dd3079bc3dc6940b8d50246696ca2bc323383af8199145cf940c9dc2d46ea0",
+      "classification": "identical",
+      "before_size": 9728,
+      "after_size": 9728,
+      "different_bytes": 0
+    },
+    {
+      "name": "VDMREDIR.dll",
+      "before_sha256": "86b1bcdc621f4c5faf33bbb900f40f60b70de678de1e664e2c86c467a371b0f9",
+      "after_sha256": "86b1bcdc621f4c5faf33bbb900f40f60b70de678de1e664e2c86c467a371b0f9",
+      "classification": "identical",
+      "before_size": 209408,
+      "after_size": 209408,
+      "different_bytes": 0
+    },
+    {
+      "name": "nthook32.dll",
+      "before_sha256": "506b40a6cdfa3dabd07e0309e803d2dd1cee23b8a0591695c645a22c2258d11f",
+      "after_sha256": "3cfc79b79dbb0847a2b8b13bc0148217510ee32e61ac36aea684b87e53d06c4b",
+      "classification": "coff-and-debug-directory-timestamps-only",
+      "before_size": 215552,
+      "after_size": 215552,
+      "different_bytes": 4
+    },
+    {
+      "name": "wow32.dll",
+      "before_sha256": "5b8d9e771d0cb49b37f293fba7e3a80c5eaa215a77d1b6545e79170fccee4b9d",
+      "after_sha256": "6e3d5483a42d893b98611bdb25af258dbbb452362542e7ef9f0828fd61061451",
+      "classification": "coff-and-debug-directory-timestamps-only",
+      "before_size": 707584,
+      "after_size": 707584,
+      "different_bytes": 4
+    },
+    {
+      "name": "ntvwm.exe",
+      "before_sha256": "12ac64be96e8bdb5648a7591e1e9c5a56ec71ba31ad11d60fd911b243f4dfe92",
+      "after_sha256": "466174671312dd389877c8ebd5946e8d7116917fdab43c13e39e33249cfd3e9b",
+      "classification": "coff-and-debug-directory-timestamps-only",
+      "before_size": 326656,
+      "after_size": 326656,
+      "different_bytes": 4
+    },
+    {
+      "name": "ntcon.exe",
+      "before_sha256": "357292141869cf3e4a7827b160f257d9a768cb3dbacae9d09f741c9a21e8bcc8",
+      "after_sha256": "06ade7e3b7c513b4b0d065ceb31fb9c3f58ff8f17eac2a7c9733c9eb8e99900d",
+      "classification": "coff-and-debug-directory-timestamps-only",
+      "before_size": 356864,
+      "after_size": 356864,
+      "different_bytes": 4
+    },
+    {
+      "name": "ntmon.exe",
+      "before_sha256": "32b5b964626a4272bb6815b985fec3626f0ec11581276f15935edb56f73d014d",
+      "after_sha256": "32b5b964626a4272bb6815b985fec3626f0ec11581276f15935edb56f73d014d",
+      "classification": "identical",
+      "before_size": 169472,
+      "after_size": 169472,
+      "different_bytes": 0
+    },
+    {
+      "name": "run16.exe",
+      "before_sha256": "325e35f745a6df69d04fa0a6bedc572a80c422f459bcf603e541adb05b48b7ec",
+      "after_sha256": "bf77c882f9d1150f772ed5accd61a22a1a88090b27820b21de3d3a1990d18c02",
+      "classification": "coff-and-debug-directory-timestamps-only",
+      "before_size": 307712,
+      "after_size": 307712,
+      "different_bytes": 4
+    },
+    {
+      "name": "ntsrv.exe",
+      "before_sha256": "e50658201618c4136a7bf8541137f43f2d4db072ebaac78b73c7186ed1d885fd",
+      "after_sha256": "aac23ef6c626201ca9d55d9c71de9a6546857f3f5cc3ddfc9add232f905c3a84",
+      "classification": "coff-and-debug-directory-timestamps-only",
+      "before_size": 410624,
+      "after_size": 410624,
+      "different_bytes": 4
+    },
+    {
+      "name": "nthook64.dll",
+      "before_sha256": "5c17bdb26b637fba26b266b0889a43351c443bcf3cc37a0c8a44c10f8cbc449e",
+      "after_sha256": "5c17bdb26b637fba26b266b0889a43351c443bcf3cc37a0c8a44c10f8cbc449e",
+      "classification": "identical",
+      "before_size": 260608,
+      "after_size": 260608,
+      "different_bytes": 0
+    }
+  ],
+  "runtime_evidence_reuse": "Full20 and focused tests ran on pre-line-fix package. Sole final source change is#line3758;four raw images byte-identical,seven differ only COFF/debug-directory timestamp fields. Owner-authorized no repeated runtime tests for timestamp/line-only changes.",
+  "compiler_lines": {
+    "expected": {
+      "WowGetModuleFileName": 128,
+      "WowGetModuleHandle": 157,
+      "SkipIDorString": 418,
+      "GetSizeDialogTemplate": 438,
+      "DialogBoxIndirectParamAorW": 593,
+      "_FreeResource": 1327,
+      "_LockResource": 1337,
+      "_UnlockResource": 1346,
+      "Convert1BppToMonoBitmap": 1513,
+      "CreateScreenBitmap": 1565,
+      "BitmapFromDIB": 2792,
+      "HowManyColors": 2991,
+      "ChangeDibColors": 3029,
+      "TrulyMonochrome": 3299,
+      "CopyDibHdr": 3355,
+      "ConvertDIBBitmap": 3488,
+      "MyAbs": 3623,
+      "Magnitude": 3644,
+      "MatchImage": 3703,
+      "GetBestImage": 3780,
+      "GetIcoCurWidth": 3852,
+      "GetIcoCurHeight": 3874,
+      "GetIcoCurBpp": 3896,
+      "WOWFindResourceExWCover": 3923,
+      "WOWLoadBitmapA": 3954,
+      "DIBFromBitmap": 4066,
+      "CopyBmp": 4162,
+      "RtlGetIdFromDirectory": 4546
+    },
+    "contexts": {
+      "bitmap": {
+        "function_anchors": {
+          "_FreeResource": [
+            1327
+          ],
+          "_LockResource": [
+            1337
+          ],
+          "_UnlockResource": [
+            1346
+          ],
+          "Convert1BppToMonoBitmap": [
+            1513
+          ],
+          "CreateScreenBitmap": [
+            1565
+          ],
+          "BitmapFromDIB": [
+            2792
+          ],
+          "HowManyColors": [
+            2991
+          ],
+          "ChangeDibColors": [
+            3029
+          ],
+          "TrulyMonochrome": [
+            3299
+          ],
+          "CopyDibHdr": [
+            3355
+          ],
+          "ConvertDIBBitmap": [
+            3488
+          ],
+          "MyAbs": [
+            3623
+          ],
+          "Magnitude": [
+            3644
+          ],
+          "MatchImage": [
+            3703
+          ],
+          "GetBestImage": [
+            3780
+          ],
+          "GetIcoCurWidth": [
+            3852
+          ],
+          "GetIcoCurHeight": [
+            3874
+          ],
+          "GetIcoCurBpp": [
+            3896
+          ],
+          "WOWFindResourceExWCover": [
+            3923
+          ],
+          "WOWLoadBitmapA": [
+            3954
+          ],
+          "DIBFromBitmap": [
+            4066
+          ],
+          "CopyBmp": [
+            4162
+          ],
+          "RtlGetIdFromDirectory": [
+            4546
+          ]
+        },
+        "mismatches": {}
+      },
+      "dialog": {
+        "function_anchors": {
+          "WowGetModuleFileName": [
+            128
+          ],
+          "WowGetModuleHandle": [
+            157
+          ],
+          "SkipIDorString": [
+            418
+          ],
+          "GetSizeDialogTemplate": [
+            438
+          ],
+          "DialogBoxIndirectParamAorW": [
+            593
+          ]
+        },
+        "mismatches": {}
+      }
+    },
+    "missing": []
+  },
+  "global": {
+    "files": 1062,
+    "strict_equal": 510,
+    "filtered_zero": 807,
+    "nonzero_files": 255,
+    "blocks": 2312,
+    "lines": 53815,
+    "reviewed_files": 20,
+    "remaining_files": 235,
+    "cumulative_reduction_blocks": 21,
+    "cumulative_reduction_lines": 708
+  },
+  "winnt_zip_unchanged": true,
+  "final_documentation": "governance,relative links and git diff --check passed after restoring required Current headings"
+}
