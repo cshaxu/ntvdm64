@@ -1,0 +1,82 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "status": "Whole-file reviewed,implemented,verified and published;residual decisions remain pending owner",
+  "before": {
+    "blocks": 26,
+    "added": 61,
+    "deleted": 1420
+  },
+  "after": {
+    "blocks": 24,
+    "added": 54,
+    "deleted": 1327
+  },
+  "reduction": {
+    "blocks": 2,
+    "lines": 100
+  },
+  "source_sha256": "ffe709bfb792e29d9b85531b744b9e9e7d99b14cae2f5b2706d2a641784e372c",
+  "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+  "excluded_bodies": 29,
+  "mask_issues": [],
+  "restored_units": [
+    "Original14-38 lock flag and handle-page declarations",
+    "Original60-116 allocation tag table,function prototypes and initial sizing macros",
+    "TRACE_OBJECT_ALLOCS and TYPE_MAXTYPES macros",
+    "Complete KernelPtoH with byte-exact original winerrp.h dependency"
+  ],
+  "new_original_header": {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/winerrp.h",
+    "origin": "O:/repos.external/OpenNT/windows/core/ntuser/inc/winerrp.h",
+    "sha256": "a04d4685c2a5fef4c68614161a616eac40b4fd97efbcb5c0c9b52f2169e3ceff",
+    "role": "Original UserAssert Release macro for KernelPtoH;no replacement behavior;no runtime provider"
+  },
+  "remaining_boundaries": [
+    {
+      "ids": "R2552",
+      "evidence": "Original kernel precomp requires private NT4 kernel headers;existing actual P242 include-chain negative evidence. Finite SDK and original selected layout retained;winerrp now explicit original dependency."
+    },
+    {
+      "ids": "R2557-R2559,R2561-R2564",
+      "evidence": "Original functions directly use gSharedInfo.aheList,gpsi,ghReadOnlySharedSection,UserAllocPool,desktop pool allocators,private destructor table and process/thread ownership. Current handtabl context supplies no shared USER kernel table or pool provider;native APIs own actual handles. gSharedInfo absent in actual preprocessed handtabl-lines.i. Restoring callable allocator/destructor bodies needs unavailable original kernel state,not merely unused declarations."
+    },
+    {
+      "ids": "R2560",
+      "evidence": "Assignment helpers reference HMUnlockObjectInternal;both full production links,with and without function sections,fail LNK2019. Internal unlock requires gSharedInfo/private destructor;thread unlock requires original thread-lock chain and kernel stack bounds."
+    }
+  ],
+  "approval_tradeoff": {
+    "original_lines": [
+      2037,
+      2038
+    ],
+    "unit": "OBJECT_OWNER_IGNORE and NUM_USER_TYPES",
+    "evidence": "Both harmless macros can be restored,but isolated original location raises selected candidate25->27 blocks (entry26);no production application of net-increasing variant. Await owner decision or a later reduction that offsets fragmentation.",
+    "candidate": "build/t483-s6-handtabl-review/selected.json"
+  },
+  "verification": {
+    "compile": "Final cached x86/x64 full build and link passed;Full20 and focused gates passed",
+    "line": "All29 error-only arms paired;153 retained nonempty mapped rows exact;6 actual preprocessed definition anchors exact.",
+    "rejected": "Initial16-block measurement invalid due cut-boundary error,never applied;corrected candidate and actual compile replace it"
+  },
+  "counter_review": "Unused alone is not deletion evidence. Restored data,prototypes and KernelPtoH. Assignment helpers were tried and withdrawn after actual unresolved-provider link failures;no fake provider or additional handle manager. Residuals pending owner.",
+  "link_failure": {
+    "initial": "HMUnlockObjectInternal unresolved through HMAssignmentLock",
+    "function_sections": "Same error with handtabl /Gy;build-only trial reverted",
+    "disposition": "Assignment helper restoration withdrawn;keep original omission pending owner with real link evidence;no stub added",
+    "logs": [
+      "build/t483-s6-p12/attempt1-cached.log",
+      "build/t483-s6-p12/attempt2-cached.log"
+    ]
+  },
+  "publication": {
+    "package": "fdefbd32-482c-4625-a129-b2edebd20bcd",
+    "images": 11,
+    "destinations": [
+      "assets/release",
+      "O:/winnt/system32"
+    ],
+    "hash_verified": true
+  },
+  "delivery": "P12 cached full,published11x2,focused and Full20 passed;Git delivery accompanies receipt"
+}

@@ -179,3 +179,13 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [clmsg whole-file candidate](clmsg-whole-file-review.json):27->27 non-error blocks,1042->979 difference lines;two original functions and five macros restored. P11 cached full pending;not delivered.
 
 [P11 receipt](batch-p11-checkpoint.json) and [evidence](p11-verification-evidence.zip):clmsg27->27 blocks,1042->979 lines;cached full,publish11x2,focused and Full20 passed. Residual owner decisions remain pending.
+
+[userk whole-file review](userk-whole-file-review.json):27->27 non-error points,117->115 lines;two added comments removed,original line resets and production tokens unchanged. Accumulated for next substantive batch;residual ABI/native-owner and block-count tradeoffs remain pending.
+
+[wdde whole-file review](wdde-whole-file-review.json):26 points,+128/-15=143 lines unchanged;original-body failure controls and current conversion/callback/retirement chain support residual decisions. P11 DDE service-double scope is stated precisely;no repeated build.
+
+[handtabl investigation](handtabl-investigation.json): declaration restoration candidate only; whole-file review and compilation pending. Rejected conditional-reorder trial increases fragmentation and was not applied.
+
+[handtabl whole-file review](handtabl-whole-file-review.json):26->24 blocks,1481->1381 lines;original declarations and KernelPtoH restored;delivery pending. Assignment helpers withdrawn after actual full link failures;see review evidence. Adds byte-exact original winerrp.h dependency.
+
+[P12 receipt](batch-p12-checkpoint.json) and [evidence](p12-verification-evidence.zip):whole-file restorations,failed link controls,final cached build,publish11x2 and Full20. Net reduction2 blocks/102 lines;residual decisions pending.

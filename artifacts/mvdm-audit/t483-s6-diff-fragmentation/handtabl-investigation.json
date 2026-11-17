@@ -1,0 +1,40 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "status": "Investigation in progress;whole-file review not complete;production source unchanged",
+  "entry_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+  "before": {
+    "blocks": 26,
+    "added": 61,
+    "deleted": 1420
+  },
+  "declaration_candidate": {
+    "metric": {
+      "blocks": 25,
+      "added": 56,
+      "deleted": 1395
+    },
+    "issues": [],
+    "excluded_bodies": 29,
+    "path": "build\\t483-s6-handtabl-review\\declarations.c",
+    "sha256": "b782d69daad4a891056d3827176517f17eda99ca710244f39676d43f0a91c731",
+    "units": [
+      "Original14-38 lock flag and handle-page declaration unit;DEBUG_LOCKS excluded body preserved",
+      "Remove duplicate relocated DEBUG_LOCKS framework"
+    ],
+    "validation": "Source/counting only;not compiled or applied"
+  },
+  "rejected_trial": {
+    "metric": {
+      "blocks": 32,
+      "added": 4,
+      "deleted": 1372
+    },
+    "reason": "Whole-file conditional sorting increases blocks26->32;not applied"
+  },
+  "old_evidence_correction": "P242 unused allocator argument does not prove its independent declarations must be deleted. Native USER ownership is relevant to allocator function integration,not sufficient to delete harmless declarations.",
+  "remaining": [
+    "Audit all other omitted declaration/function units and concrete dependencies",
+    "Choose whole-file candidate reducing both blocks and lines",
+    "Validate original logical lines and complete cached delivery after whole-file changes"
+  ]
+}

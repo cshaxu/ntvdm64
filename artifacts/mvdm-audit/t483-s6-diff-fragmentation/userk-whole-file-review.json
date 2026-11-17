@@ -1,0 +1,419 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "status": "Whole-file reviewed,implemented,verified and published;residual decisions remain pending owner",
+  "before": {
+    "blocks": 27,
+    "added": 7,
+    "deleted": 110
+  },
+  "after": {
+    "blocks": 27,
+    "added": 5,
+    "deleted": 110
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 2
+  },
+  "source_sha256": "7eb1dabe7de56a6eb4404b0e2d5843ed1fcd821b4724539c17e4b7f392611b94",
+  "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+  "excluded_bodies": 40,
+  "mask_issues": [],
+  "changes": [
+    "Remove two added client-context comments;both calls and ordering unchanged"
+  ],
+  "counter_review": {
+    "token_identity": "After removing block comments and whitespace,before/after byte streams identical",
+    "line_identity": "Each removed comment precedes a project-added callback followed immediately by unchanged #line3997 or4018;all original statements and subsequent coordinates unchanged",
+    "historical_evidence": "P248 current baseline hash exactly matches entry file;its four-context compiler evidence remains historical baseline evidence,not a fresh compilation",
+    "restorable_declarations": "33 original rows in3193-3228 are not necessary deletions;three macro collisions prevent whole-block restoration. Partial restoration raises block count2;existing pending tradeoff retained."
+  },
+  "boundaries": {
+    "shared_wow_header_boundary": {
+      "original_range": [
+        75,
+        75
+      ],
+      "evidence": "Original wowuserp has no include guard and defines NEMODULESEG at12-20. Existing checked layout requires WW from that header and includes it via wow_shared_user_abi before userk. Direct original include repeats concrete struct/typedef definitions.",
+      "alternatives": "Keep one-line omission or redesign single include ownership;adding a mirror guard changes another original file and needs separate diff accounting. No shadow header/include alias added.",
+      "validation": "Source inclusion proof;not a runtime defect or blanket approval of omissions."
+    },
+    "task_type_boundary": {
+      "range": "2219-2238",
+      "diff": "+0/-20",
+      "evidence": "Original PWOWTHREADINFO has idWaitObject/idParentProcess and idle-event-last;actual host waiter has next,event,idTask. Original TDB orders nEvents before nPriority;host entry reverses them. queue allocation sizeof(TDB) currently uses host typedef. Unconditional InsertTask binds host PTDB,so raw original pointer typedefs conflict and cannot reinterpret objects.",
+      "option": "Restore named bodies but omit pointer aliases after proving allocation size and eliminating duplicate named TDB. Two residual closing lines can split this one hunk into two;requires fragmentation approval before that variant. No duplicate live structures or casts.",
+      "validation": "Source/alias/layout proof;final build pending;not approved retention."
+    },
+    "wowprocessinfo_declaration_tradeoff": {
+      "original_range": [
+        2362,
+        2375
+      ],
+      "current_diff": "+0/-14,one block",
+      "candidate_diff": "+1/-1,one block;original body restored,host PWOWPROCESSINFO alias retained",
+      "evidence": "src search finds named WOWPROCESSINFO only in task_order binding typedef and exitwin.c allocation sizeof. Original and host state layouts contain six pointer-width members and five32-bit members;target x86 size44;actual typed accesses remain via host pointer. Restored declaration needs registration consumer include,currently absent.",
+      "candidate_coupling": "Remove duplicate host named WOWPROCESSINFO typedef;retain host PWOWPROCESSINFO;restore body closing as }WOWPROCESSINFO;include userk.h in exitwin before registration. Require final compiler size equality assertion in fixture.",
+      "mirror_tradeoff": {
+        "userk_lines": -12,
+        "userk_blocks": 0,
+        "exitwin_lines": 1,
+        "exitwin_blocks": 0,
+        "net_lines": -11,
+        "net_blocks": 0
+      },
+      "decision": "Not applied:exitwin per-file mirror increase requires owner approval. No new build-selector macro or extra wrapper proposed.",
+      "validation": "Candidate measured in memory only. No compiler/ABI acceptance claimed."
+    },
+    "remaining_scheduler_macro_review": {
+      "CheckForClientDeath": {
+        "original_row": 123,
+        "original": "empty macro",
+        "actual_chain": [
+          "taskman.c checks immediately before releasing USER lock/wait and after wait before reacquiring",
+          "host check_death -> wow_user_worker_active -> session_thread_current.state == ACTIVE",
+          "session_request_cancellation sets CANCELLED without terminating native thread",
+          "lifecycle_failure -> opennt_exit_thread"
+        ],
+        "counterexample": "Cancellation does not itself destroy the native worker thread. Empty original macro removes cancellation checks at both original scheduling boundaries;ordinary event wake and lock reacquire do not test session state. Callback lease checks do not cover every ordinary scheduler continuation.",
+        "classification": "External lifecycle boundary with source evidence;runtime cancellation counterexample not yet executed on this batch."
+      },
+      "IsHooked": {
+        "original_rows": [
+          2670,
+          2671
+        ],
+        "actual_call": "taskman.c uses WHF_FOREGROUNDIDLE;binding queries existing WOW TD hIdleHook registration under gcsWOW",
+        "original_dependency": "THREADINFO.fsHooks and DESKTOPINFO.fsHooks are NT4 USER-owned registration projections,not native USER32 hook memory accessible to the current host.",
+        "authority": "Original WOW TD registration list and current task selection;do not invent a second hook registry to restore a macro.",
+        "classification": "External hook-registration ownership boundary;source-qualified,current-code tests pending."
+      },
+      "FJOURNAL": {
+        "original_rows": [
+          2552,
+          2553
+        ],
+        "original_dependency": "GETDESKINFO(PtiCurrent())->asphkStart entries",
+        "current": "journal_hooked returns FALSE;queue InitTask consequently calls existing native input reattach provider.",
+        "counterreview": "wuhook.c WU32SetWindowsHookInternal still routes journal IDs to native SetWindowsHookEx and records successful hHook. Therefore current provider comment does not prove journal hooks absent or FALSE semantically equivalent.",
+        "classification": "Direct original macro restoration is incompatible with absent NT4 desktop hook storage;integration-contract decision required. Constant FALSE is not proven semantically equivalent. No runtime journal failure claimed.",
+        "next_action": "Owner decision on journal integration contract:do not approve constant FALSE merely because ordinary initialization tests pass;any implementation must use native ownership rather than fabricated desktop fields.",
+        "actual_registration_chain": [
+          "wuhook.c WU32SetWindowsHookInternal selects thread0 for journal IDs",
+          "wow_native_SetWindowsHookExA changes module only for nonzero same-process thread;thread0 passes native inputs unchanged",
+          "native SetWindowsHookExA result stored by W32SetHookStateData"
+        ],
+        "actual_queue_chain": [
+          "original queue.c xxxInitTask tests both FJOURNAL macros",
+          "both current journal_hooked calls return FALSE",
+          "ReattachThreads binding -> lifecycle reattach -> wow_input_group_commit",
+          "commit invokes AttachThreadInput(TRUE) for newly joined pairs and native detach for removed pairs"
+        ]
+      }
+    },
+    "receive_macro_boundary_review": {
+      "original_rows": [
+        3154,
+        3156
+      ],
+      "omitted_original_lines": 3,
+      "scope": "R2658/R2666 residual declaration/macro omission;does not classify all other omissions.",
+      "responsibility": "Deliver synchronous sent messages when original taskman xxxUserYield reaches its receive points.",
+      "original_owner": "OpenNT kernel/sendmsg.c::xxxReceiveMessage line1876 consumes THREADINFO.psmsReceiveList,mutates SMS flags,and clears CLIENTTHREADINFO wake/change bits.",
+      "current_chain": [
+        "taskman.c xxxUserYield receive points",
+        "wow_task_order_bindings.h xxxReceiveMessages -> thread->host->receive",
+        "wow_user_task_lifecycle.c receive -> wow_user_message_bridge_receive",
+        "native_peek PM_NOREMOVE|PM_QS_SENDMESSAGE with USER lock release/restore",
+        "sync clears shadow QS_SENDMESSAGE;native USER32 owns actual queue"
+      ],
+      "counterexample": "A pending native sent message can coexist with shadow fsWakeBits==0. Restoring original while loop skips the callback entirely;binding only xxxReceiveMessage would not remedy skipped loop entry. Original kernel receive body cannot consume native USER32 SMS objects through this user-mode host view.",
+      "minimization": "Keep the single existing macro boundary instead of adding synchronized shadow queue state,duplicating SMS ownership,or moving equivalent looping logic into another shim. No additional code proposed.",
+      "test_evidence_boundary": "Existing tests cover native sent-only receive and posted/quit retention, but were not run on this candidate. Do not treat comments about posted dispatch as proof of this contract.",
+      "status": "Source-qualified external-integration boundary;remaining diff needs owner decision at whole-file disposition.",
+      "original_source_sha256": "af68badcb022efcb3947968fc6e3dbf148b697072ebeb2898f97fbcb774039f3"
+    },
+    "class_lookup_declaration_boundary": {
+      "original_ranges": [
+        [
+          3146,
+          3146
+        ],
+        [
+          4766,
+          4767
+        ]
+      ],
+      "difference": {
+        "added": 0,
+        "deleted": 3
+      },
+      "chain": [
+        "wow_class_words_binding.c:113/243 passes wow_class_lookup_context and metadata entry lists",
+        "class.c selected lookup slice binds PPROCESSINFO/PPCLS through wow_class_lookup_bindings",
+        "cleanup includes that header before userk;original user.h supplies distinct tagCLS private layout"
+      ],
+      "evidence": "Original GetClassPtr argument is private PROCESSINFO;actual function accepts four-field class lookup context. Original CLS and host metadata have different field positions (host fnid/hModule before flags;original cWndReferenceCount and server class layout). Restoring userk prototypes conflicts with actual declarations and would claim incompatible return/list pointer contracts.",
+      "minimum": "Keep existing omissions of three original rows. No cast,second class registry,duplicate function or kernel CLS reconstruction.",
+      "validation": "Source signature/layout proof. Final candidate compilation pending."
+    },
+    "declaration_group_tradeoff": {
+      "original_range": [
+        3193,
+        3228
+      ],
+      "current": {
+        "added": 0,
+        "deleted": 36
+      },
+      "restore_ranges": [
+        [
+          3193,
+          3205
+        ],
+        [
+          3207,
+          3207
+        ],
+        [
+          3209,
+          3209
+        ],
+        [
+          3211,
+          3228
+        ]
+      ],
+      "macro_conflicts": {
+        "3206": "PtiFromThreadId(id) expands ptiOld->host->find_thread in declaration",
+        "3208": "ReattachThreads(journal) expands ppi->init->reattach in declaration",
+        "3210": "DestroyQueue(queue,thread) expands thread->rpdesk->destroy_queue in declaration"
+      },
+      "candidate_file_metric": {
+        "added": 46,
+        "deleted": 561,
+        "total": 607,
+        "blocks": 73
+      },
+      "current_file_metric": {
+        "added": 46,
+        "deleted": 594,
+        "blocks": 71,
+        "total": 640
+      },
+      "status": "not-applied;33 original rows are restorable,not necessary deletions",
+      "options": [
+        "Reorganize macro/include ownership without new runtime providers or mirror branches",
+        "Owner accepts +2 lexical blocks for -33 changed lines;retain only three macro-collision omissions"
+      ],
+      "evidence": "Current binding definitions task_order:224,task_init:57,input_group:27. Candidate evaluated only in memory;source and counters unchanged.",
+      "limitation": "Macro-collision proof establishes direct restoration failure for3 declarations only;it does not justify retaining other33 rows."
+    },
+    "lock_declaration_boundary_review": {
+      "original_ranges": [
+        [
+          3281,
+          3281
+        ],
+        [
+          3284,
+          3284
+        ]
+      ],
+      "responsibility": "Original taskman releases USER serialization before alertable event wait and reacquires afterward. The reached standalone owner uses one shared host runtime domain.",
+      "original_provider": "OpenNT/windows/core/ntuser/kernel/validate.c:537-570 EnterCrit/LeaveCrit call KeEnterCriticalRegion,KeBoostCurrentThread,ExAcquireResourceExclusiveLite(gpresUser),ExReleaseResource and KeLeaveCriticalRegion. Private kernel resource ownership is outside admitted USER closure.",
+      "actual_chain": [
+        "taskman.c -> LeaveCrit/EnterCrit macro",
+        "wow_task_order_bindings.h:207-208 -> thread host release_lock/acquire_lock",
+        "wow_user_task_lifecycle.c:163-175 -> wow_user_runtime_leave/enter",
+        "src/ntvdm-exe/wow/wow_user_runtime.c:66-91 -> same runtime SRW lock and owner checks"
+      ],
+      "specific_diff": "The two original function prototypes are omitted. With current function-like macros selected before userk.h, EnterCrit(VOID) and LeaveCrit(VOID) are invalid macro invocations (zero-argument macro given VOID);this is a source preprocessing conflict,not a runtime result.",
+      "alternatives": [
+        "Keep these two one-line omissions and existing finite lock binding pending owner.",
+        "Recover declarations by reorganizing declaration/binding include order across taskman and queue;that is a coupled header-boundary design,not evidence that the declarations themselves are wrong.",
+        "Parenthesized names change both original lines rather than remove them:two added plus two deleted versus two deleted. That increases mirror difference and is not implemented.",
+        "Do not introduce new forwarding functions solely to save two mirror lines."
+      ],
+      "validation": "Original/current source and real include order inspected. No new build/runtime run;whole-file verification remains pending.",
+      "disposition": "Qualified partial pending decision;no source change and no entire R-point completion.",
+      "source_hashes": {
+        "O:/repos.external/OpenNT/windows/core/ntuser/kernel/validate.c": "661748c142e662966844c3820cceb09670f192c9b981586f80fa696106a15a62",
+        "src/wow32-dll/include/wow_task_order_bindings.h": "b06d12aeb4db1caaf2e4458b26063ab49c479a2dc2a584e4ef99cceebeb531d4",
+        "src/wow32-dll/source/wow_user_task_lifecycle.c": "c86be3760f9aa431dba3b1ab7f17a9e19be48c2cf850d4eb9c3f24e904bba179",
+        "src/ntvdm-exe/wow/wow_user_runtime.c": "5f657738423daae9ea225f6dcd2b63ab57c83141da9aab8ab1aa96194df4377c"
+      }
+    },
+    "menu_thread_inline_boundary": {
+      "range": "3517-3524",
+      "diff": "+0/-8",
+      "evidence": "Both original inline functions dereference PTHREADINFO->pMenuState;host PTHREADINFO is wow_task_order_thread with no pMenuState. Other PWND-based menu getters were restored and use actual original tagTHREADINFO. No selected caller of these two inline helpers found.",
+      "option": "Can restore complete functions using explicit original struct tagTHREADINFO pointers;two changed signature lines replace one deletion hunk with two small hunks. This is a block-count tradeoff,not proof the original bodies must stay deleted;do not add dummy menu state.",
+      "validation": "Source/alias/layout proof;final build pending;not approved retention."
+    },
+    "startup_cursor_declaration_boundary": {
+      "key": "startup_cursor_declaration_boundary",
+      "line": [
+        3812,
+        3812
+      ],
+      "diff": "+0/-1",
+      "source": "OpenNT kernel/queue.c431-515;current queue.c334/414;wow_user_task_lifecycle.c360-367;wow_task_init_bindings.h58",
+      "proof": "Original CalcStartCursorHide maintains gpwpCalcFirst/NextStart/StartCursorHideTime and invokes UpdateCursorImage. Existing host process view has no kernel startup list and provider start_cursor intentionally ignores both arguments. Original declaration expands through active two-argument function macro into member-call expression,not a C declaration.",
+      "decision": "Qualified boundary decision:do not claim present no-presentation behavior equals original. Retain omission pending decision on native cursor responsibility;full kernel cursor owner must not be imported to solve declaration visibility.",
+      "minimization": "Prototype restoration requires macro binding after declarations or a named dispatch function;new wrapper solely to erase one deleted line transfers complexity and is not recommended.",
+      "validation": "Source-level call/ABI proof only;not final candidate compile/runtime acceptance.",
+      "counterreview": "Responsibility of host provider is not alone proof that declaration must be deleted. A concrete local alternative is a parenthesized function declarator:it suppresses function-like macro expansion without changing callsites or adding a provider. Compared with omission,it introduces one changed original declaration line (+1/-1) instead of one deletion (+0/-1);net mirror increase1. Grouped include-order restoration remains a separate design alternative,not proven impossible.",
+      "minimum_local_alternative": "Parenthesize original function name in declaration;no runtime change,no forwarding shim;requires approval for +1 mirror line. Omission remains smaller but is not approved retention."
+    },
+    "sleep_subject_boundary": {
+      "original_range": [
+        3978,
+        3978
+      ],
+      "current_difference": {
+        "added": 0,
+        "deleted": 1
+      },
+      "chain": [
+        "wow_user_task_lifecycle.c:callback_enter obtains current receiver binding",
+        "park_native_owner(receiver) selects receiver->ppi->pwpi->CSOwningThread",
+        "xxxSleepTask(FALSE,HEVENT_REMOVEME,owner) parks non-current execution owner",
+        "taskman.c uses explicit currentThread before original scheduler body"
+      ],
+      "evidence": "Lifecycle source873-879 and903 confirms P247 R2649 evidence: current receiver B may differ from retained native execution owner A. Restoring two-argument current-thread lookup would park B instead of A. Existing current-only APIs are already restored;this case is not ambient identity.",
+      "minimum": "Keep one original prototype omitted;actual three-argument declaration belongs to task-order boundary. Restoring a modified prototype adds a mirror line;adding a second wrapper adds complexity.",
+      "validation": "Fresh source cross-check;P247 evidence applies to unchanged scheduler implementation,not proof of P248 whole-file compilation."
+    },
+    "client_context_transfer_boundary": {
+      "original_ranges": [
+        [
+          3997,
+          3996
+        ],
+        [
+          4018,
+          4017
+        ]
+      ],
+      "evidence": "Enter/Exit ownership invokes lifecycle client_context under runtime lock. Page-domain exchange reads previous guest TEB cached HWND/WND,validates identities,sets expected version and next cached pair,saves previous pair. These values differ per WOW task while one emulated CPU view is shared. Merely changing CSOwningThread omits the projection handoff.",
+      "minimum": "Existing two calls at actual owner transition;no second scheduling state machine.",
+      "limitation": "Source-chain proof complete:production assigns host_ops before scheduler use;native-only fixture states omit host and require existing guard. Actual final-code runtime verification remains pending."
+    },
+    "idle_event_declaration_boundary": {
+      "key": "idle_event_declaration_boundary",
+      "line": [
+        4193,
+        4193
+      ],
+      "diff": "+0/-1",
+      "source": "OpenNT kernel/input.c4904-4967;taskman.c413-416;wow_user_task_lifecycle.c212-225;wow_task_order_bindings.h219",
+      "proof": "Original chooses thread waiter only with TIF_SHAREDWOW,otherwise ptiMainThread and W32PROCESS.InputIdleEvent;also touches screensaver priority/start cursor. Selected host provider clears FIRSTIDLE and signals existing task waiter handle,allowing absent WOWEXEC waiter. Kernel event pointers and per-task HANDLE ownership are distinct. Active macro conflicts with restored prototype.",
+      "decision": "Qualified interface boundary,not proof that all original WakeInputIdle behavior is unnecessary. Keep explicit event ownership;do not reinterpret handle as kernel event or copy whole kernel event/state manager.",
+      "minimization": "No runtime change merely to restore a declaration. Grouped include-order redesign may restore prototype without adding dispatch wrapper;must preserve production/test provider selection.",
+      "validation": "Source-level call/ABI proof only;not final candidate compile/runtime acceptance.",
+      "counterreview": "Responsibility of host provider is not alone proof that declaration must be deleted. A concrete local alternative is a parenthesized function declarator:it suppresses function-like macro expansion without changing callsites or adding a provider. Compared with omission,it introduces one changed original declaration line (+1/-1) instead of one deletion (+0/-1);net mirror increase1. Grouped include-order restoration remains a separate design alternative,not proven impossible.",
+      "minimum_local_alternative": "Parenthesize original function name in declaration;no runtime change,no forwarding shim;requires approval for +1 mirror line. Omission remains smaller but is not approved retention."
+    },
+    "registration_process_boundary": {
+      "original_range": [
+        4595,
+        4595
+      ],
+      "difference": {
+        "added": 0,
+        "deleted": 1
+      },
+      "chain": [
+        "registered_hung_handlers -> ensure_lifecycle -> wow_user_task_lifecycle_register",
+        "register requires initialized owner,not yet registered;passes owner->process",
+        "lifecycle_init requires owner->registered and binding->thread==NULL before installing first task"
+      ],
+      "evidence": "Registration must precede first task initialization. PtiCurrent()->ppi is unavailable in that admitted state;owner->process is already created. This differs from InitTask,which executes after set_context.",
+      "minimum": "Existing three-argument declaration in task-order boundary;retain one omitted original prototype. No bootstrap fake thread or new ambient process selector.",
+      "validation": "Source ordering proof,not a new runtime acceptance result."
+    },
+    "apc_boundary_review": {
+      "original_range": [
+        4786,
+        4786
+      ],
+      "source_sha256": {
+        "O:/repos.external/OpenNT/windows/core/ntuser/inc/ntcb.h": "eb09b59f4ab36bfbdda4f579a91f255ce8b011d533bb197e3e9c5ae95111adad",
+        "src/wow32-dll/source/wow_user_task_lifecycle.c": "c86be3760f9aa431dba3b1ab7f17a9e19be48c2cf850d4eb9c3f24e904bba179",
+        "src/non-mvdm/windows/core/ntuser/kernel/taskman.c": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb",
+        "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c": "ce8218007ddb7a0a7d505a94a2900ab0bc4524a4a5e22660bf9e1db8f14230fb"
+      },
+      "original_chain": "taskman STATUS_USER_APC branch asserts terminating thread,then ntcb.h SENDSIDE releases USER lock,KeUserModeCallback(FI_CLIENTDELIVERUSERAPC),reacquires. RECVSIDE returns NtCallbackReturn. This is an NT kernel/client transition,not an unconditional fatal leaf.",
+      "current_chain": "wait_for_task_or_message uses MWMO_ALERTABLE;WAIT_IO_COMPLETION maps to0xC0;taskman invokes ClientDeliverUserApc macro;deliver_apc calls lifecycle_failure(ERROR_OPERATION_ABORTED).",
+      "actual_boundary": "Native alertable-wait completion and historical kernel termination APC are not proved equivalent. Current prototype also expands through a zero-argument macro;restoring the declaration alone cannot restore kernel callback semantics.",
+      "minimal_options": [
+        "Keep native wait ownership and define ordinary APC-completion versus cancelled-session handling at that one wait boundary;do not import kernel APC machinery.",
+        "Then reassess whether ClientDeliverUserApc binding is still needed and whether original prototype can be restored without extra forwarding functions."
+      ],
+      "counterreview": "Current terminal behavior is not approved by this source proof. No product APC producer/reproducer established;no claim of observed crash. Existing fixture maps WAIT_IO_COMPLETION similarly but its callback is unexpected and no QueueUserAPC case was found,so its prior pass is not this coverage.",
+      "verification_required": "After entire file audit,real alertable wait with ordinary queued APC plus independent cancellation case;check continuation/termination and lock ownership. No intermediate build performed.",
+      "disposition": "Pending integration-semantics decision;not a necessary-bugfix claim and not complete restoration."
+    },
+    "server_include_boundary": {
+      "range": "4900-4903",
+      "diff": "+0/-4",
+      "evidence": "globals.h declares extern PTHREADINFO gptiCurrent,which conflicts with actual runtime-current macro;ddemlsvr.h uses PSVR_INSTANCE_INFO/PEVENT_PACKET server instance/event contracts;ntuser kernel/client interface headers belong to original USER server build. Current selected consumers bind native USER providers and finite host views,not this global kernel server.",
+      "option": "Keep four include omissions pending source-boundary decision. Do not import a complete server/global owner solely for unused declarations;restoring individual declaration dependencies remains allowed as already done.",
+      "validation": "Source/alias/layout proof;final build pending;not approved retention."
+    },
+    "cleanup_result_boundary": {
+      "original_range": [
+        4959,
+        4963
+      ],
+      "evidence": "Actual cleanup consumes supplied context for handles,shared classes and current task. Native DestroyClass can fail without unlinking;cleanup.c287/392 returns FALSE,wrapper preserves failure and restores borrowed desktop tree in finally,lifecycle retirement aborts on FALSE. Original void/four-argument declaration cannot describe this existing provider.",
+      "minimum": "Existing five-row prototype omission;native BOOL/five-argument declaration stays in cleanup owner. A replacement prototype would increase mirror difference. Do not create another cleanup registry or turn failure into success.",
+      "limitation": "This proves present ABI/failure boundary;it does not prove all existing cleanup adaptations minimal. No new runtime test executed."
+    },
+    "profile_declaration_boundary": {
+      "key": "profile_declaration_boundary",
+      "line": [
+        5049,
+        5050
+      ],
+      "diff": "+0/-2",
+      "source": "OpenNT kernel/profile.c860-887 and FastOpenProfileUserMapping160;queue.c146;wow_task_init_bindings.h59-60;wow_task_profile_binding.c30-45;wow_task_order_fixture.c737-808",
+      "proof": "Original UT wrapper opens/closes server user impersonation mapping around FastGetProfileStringW. Actual selected call is PMAP_COMPAT(machine-wide);existing provider calls recovered FastGetProfileStringW and explicit64-bit HKLM key. Process-scoped provider is exercised by existing allocation/profile tests. Current macro consumes five args and injects process owner;restored prototype would expand as an expression.",
+      "decision": "Qualified impersonation/registry boundary;no duplicate registry algorithm needed. Existing original FastGetProfileStringW remains provider. Restoring raw UT body would add unavailable server impersonation/cache ownership.",
+      "minimization": "Keep2-row omission pending grouped declaration/binding-order decision;do not add an extra forwarding function solely to remove this hunk.",
+      "validation": "Source-level call/ABI proof only;not final candidate compile/runtime acceptance.",
+      "counterreview": "Responsibility of host provider is not alone proof that declaration must be deleted. A concrete local alternative is a parenthesized function declarator:it suppresses function-like macro expansion without changing callsites or adding a provider. Compared with omission,it introduces one changed original declaration line (+1/-1) instead of one deletion (+0/-1);net mirror increase1. Grouped include-order restoration remains a separate design alternative,not proven impossible.",
+      "minimum_local_alternative": "Parenthesize original function name in declaration;no runtime change,no forwarding shim;requires approval for +1 mirror line. Omission remains smaller but is not approved retention."
+    },
+    "idle_hook_declaration_boundary": {
+      "key": "idle_hook_declaration_boundary",
+      "line": [
+        3881,
+        3881
+      ],
+      "diff": "+0/-1",
+      "source": "OpenNT kernel/hooks.c954 onward;taskman.c368;wow_user_task_lifecycle.c192-209;wow_task_order_bindings.h218",
+      "proof": "Original prototype returns int and accepts generic hook code/wp/lp/hook. Selected call only HC_ACTION,0,0,WH_FOREGROUNDIDLE and ignores result. Native provider verifies current scheduled task then invokes worker idle-hook vector;macro intentionally exposes only this finite call. Restored prototype expands through macro into invalid declaration.",
+      "decision": "Qualified finite callback boundary;not approval to use this binding for arbitrary hook sites. Existing IsHooked pending case owns callback-domain difference.",
+      "minimization": "Grouped macro visibility correction can restore declaration;new generic hook wrapper or kernel hook-chain ownership is not warranted by this one caller.",
+      "validation": "Source-level call/ABI proof only;not final candidate compile/runtime acceptance.",
+      "counterreview": "Responsibility of host provider is not alone proof that declaration must be deleted. A concrete local alternative is a parenthesized function declarator:it suppresses function-like macro expansion without changing callsites or adding a provider. Compared with omission,it introduces one changed original declaration line (+1/-1) instead of one deletion (+0/-1);net mirror increase1. Grouped include-order restoration remains a separate design alternative,not proven impossible.",
+      "minimum_local_alternative": "Parenthesize original function name in declaration;no runtime change,no forwarding shim;requires approval for +1 mirror line. Omission remains smaller but is not approved retention."
+    },
+    "scheduler_guard_boundary": {
+      "range": "3989 and4027 insertions",
+      "diff": "+2/-0",
+      "evidence": "handtabl uses flags-only original views;cleanup has host views but no scheduler PWOWPROCESSINFO contract. Enter/Exit inline bodies access host client_context and scheduler state. Guard prevents parsing scheduler-only inline functions in declaration/flag consumers. Production taskman and queue select unguarded body;fixtures also exercise native-only states with null host.",
+      "option": "Keep one existing outer compile guard and two null-host checks;no second scheduler and no synthetic providers for non-scheduler consumers. Original separators restored. Caller scope and context transfer remain pending owner decision.",
+      "validation": "Source/alias/layout proof;final build pending;not approved retention."
+    }
+  },
+  "current_source_checks": [
+    "wow_task_order_bindings.h current host aliases and macros inspected",
+    "wow_cleanup_bindings.h current explicit cleanup context/BOOL return inspected",
+    "actual source closure retains source-proven native USER ownership;no new fake kernel/provider"
+  ],
+  "verification": "No build/runtime rerun for comment-only changes;production tokens unchanged. Final batch gates pending.",
+  "delivery": "P12 cached full,published11x2,focused and Full20 passed;Git delivery accompanies receipt"
+}

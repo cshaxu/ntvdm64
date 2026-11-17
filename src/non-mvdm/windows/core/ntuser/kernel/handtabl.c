@@ -12,8 +12,35 @@
 #include "compat/include/opennt_user_multipass.h"
 #define WOW_USER_OBJECT_FLAGS_ONLY
 #include "userk.h"
+#include "winerrp.h"
 #line 12
 #pragma hdrstop
+
+#line 14
+/*
+ * Turning this variable on results in lock tracking, for debugging
+ * purposes. This is FALSE by default.
+ */
+#ifdef DEBUG_LOCKS
+#error
+#else
+BOOL gfTrackLocks = FALSE;
+#endif
+
+/*
+ * Handle table allocation globals.  The purpose of keeping per-page free
+ * lists is to keep the table as small as is practical and to minimize
+ * the number of pages touched while performing handle table operations.
+ */
+#define CPAGEENTRIESINIT    4
+
+typedef struct _HANDLEPAGE {
+    DWORD iheLimit; /* first handle index past the end of the page */
+    DWORD iheFree;  /* first free handle in the page */
+} HANDLEPAGE, *PHANDLEPAGE;
+
+DWORD gcHandlePages;
+PHANDLEPAGE gpHandlePages;
 
 #line 39
 CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
@@ -41,6 +68,57 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 59
 };
 
+#line 60
+
+/*
+ * Tag array for objects allocated from pool
+ */
+CONST DWORD gdwAllocTag[TYPE_CTYPES] = {
+    0,              /* free */
+    0,              /* window */
+    0,              /* menu */
+    TAG_CURSOR,     /* cursor/icon */
+    TAG_SWP,        /* hswpi (SetWindowPos Information) */
+    0,              /* hook */
+    TAG_THREADINFO, /* thread info object (internal) */
+    TAG_CLIPBOARD,  /* clipboard data (internal) */
+    0,              /* CALLPROCDATA */
+    TAG_ACCEL,      /* accel table */
+    TAG_DDE9,       /* dde access */
+    TAG_DDEa,       /* dde conversation */
+    TAG_DDEb,       /* ddex */
+    0,              /* zombie */
+    TAG_KBDLAYOUT,  /* keyboard layout */
+    TAG_KBDFILE,    /* keyboard file */
+#ifdef FE_IME
+#error
+#line 83
+#endif
+};
+
+#ifdef DEBUG
+#error
+#line 98
+#endif
+
+void HMDestroyUnlockedObject(PHE phe);
+void HMRecordLock(PVOID ppobj, PVOID pobj, DWORD cLockObj, PVOID pfn);
+BOOL HMUnrecordLock(PVOID ppobj, PVOID pobj);
+VOID ShowLocks(PHE);
+BOOL HMRelocateLockRecord(PVOID ppobjNew, int cbDelta);
+
+/***************************************************************************\
+* HMInitHandleTable
+*
+* Initialize the handle table. Unused entries are linked together.
+*
+* 01-13-92 ScottLu      Created.
+\***************************************************************************/
+
+#define CHANDLEENTRIESINIT 200
+#define CLOCKENTRIESINIT   100
+
+
 #line 544
 #if 0
 #line 545
@@ -49,24 +127,6 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #endif
 #line 564
 
-
-#line 18
-#ifdef DEBUG_LOCKS
-#line 19
-#error
-#else
-#line 21
-#line 22
-#endif
-#line 23
-
-#line 86
-#ifdef DEBUG
-#line 87
-#error
-#line 98
-#endif
-#line 99
 
 #line 852
 #ifdef DEBUG
@@ -151,6 +211,10 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #endif // DEBUG
 #line 2014
 
+#line 283
+#define TRACE_OBJECT_ALLOCS  0
+#define TYPE_MAXTYPES       20
+
 #line 286
 #if (DBG || TRACE_OBJECT_ALLOCS)
 #line 287
@@ -158,13 +222,6 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 302
 #endif // TRACE_OBJECT_ALLOCS
 #line 303
-
-#line 81
-#ifdef FE_IME
-#line 82
-#error
-#endif
-#line 84
 
 #line 134
 #ifdef DEBUG
@@ -269,3 +326,26 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
 #line 712
 #endif
 #line 713
+
+#line 2137
+/***************************************************************************\
+* KernelPtoH
+*
+* This function is called from the client to convert pool-based object
+* pointers, such as a cursor pointer, to a handle.
+*
+* HISTORY:
+* 11/22/95       BradG            Created
+\***************************************************************************/
+HANDLE KernelPtoH( PVOID pObj ) {
+    HANDLE h;
+
+    UserAssert( pObj != NULL );
+
+    try {
+        h = PtoHq( pObj );
+    } except (EXCEPTION_EXECUTE_HANDLER) {
+        h = NULL;
+    }
+    return h;
+}

@@ -31,13 +31,13 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-21/255 initial difference files reviewed;234 remain. Sixteen changed files
-verified across P2-P11;five reviewed unchanged. Current census:1062 files
-(1053 host C/H plus9 other text mirrors),510 original-byte matches,807 zero
-normalized/error-masked differences,and255 nonzero files. P10 adds one
-byte-exact original declaration header;it is not a reduced difference point.
-Current total2312 blocks/53752 lines;cumulative delivered reduction21 blocks/
-771 lines. Mouse's earlier two-line counting correction remains separate.
+24/255 initial difference files reviewed;231 remain. Eighteen changed files
+verified across P2-P12;six reviewed unchanged. Current census:1063 files
+(1054 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
+normalized/error-masked differences,and255 nonzero files. P12 adds original
+winerrp.h byte-exact;this is not itself a reduced difference point.
+Current total2310 blocks/53650 lines;cumulative delivered reduction23 blocks/
+873 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -62,27 +62,31 @@ Current total2312 blocks/53752 lines;cumulative delivered reduction21 blocks/
 | wumsg.c |33->32|113->109|P9 single-use cleanup inlined;Full20 passed|
 | client/clres.c |31->30|3352->2733|P10 original complete units restored;Full20 and final equivalent build passed|
 | client/clmsg.c |27->27|1042->979|P11 two complete original functions and five macros restored;Full20 passed|
+| kernel/userk.h |27->27|117->115|P12 two added comments removed;Full20 passed|
+| wow32/wdde.c |26->26|143->143|P12 reviewed unchanged;residual decisions pending|
+| kernel/handtabl.c |26->24|1481->1381|P12 original declarations and KernelPtoH restored;Full20 passed|
 
 
-The canonical pending backlog remains1644 rows/1649 historical R identifiers.
-Partial restorations do not close residual owner decisions. Historical R points
-are not the current zero-context difference block count. Do not repeat already
-completed file reviews. Next:ntuser/kernel/userk.h,27 non-error blocks.
+The canonical pending backlog remains1641 rows/1646 historical R identifiers.
+Partial restorations do not close residual owner decisions. Three complete
+handtabl restorations removed from pending;remaining private-kernel and ABI
+boundaries remain pending. Historical R identifiers are not current diff blocks.
+Next file follows the worklist after handtabl;do not repeat completed reviews.
 
 ## Current Technical Baseline
 
-P11 cached x86/x64 full builds passed. Packagee01121ca-8682-4a96-8705-743ca5061054 contains11
+P12 cached x86/x64 full builds passed. Packagefdefbd32-482c-4625-a129-b2edebd20bcd contains11
 images,published and hash-verified to assets/release and O:/winnt/system32.
 Bitmap/message/DDE,controls/task-order,Full20 including real DOS4GW/NESticle,
-shared-boundary and governance passed. Final source identity matches the
-built/published/tested checkpoint. Four original function compiler anchors
-match;16 error bodies remain unchanged. No guest or winnt.zip changes.
+shared-boundary and governance passed. Cleanup source audit passed;not a
+runtime proof. Six compiler anchors and153 static original rows match.
+Two assignment-helper candidates failed linking and were withdrawn;no stub
+or /Gy build change retained. No guest or winnt.zip changes.
 
-[P11 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p11-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p11-verification-evidence.zip)
-bind source,package and tests. [Whole-file review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/clmsg-whole-file-review.json)
-records original units restored and residual owner decisions. Earlier receipts
-remain indexed in the worklist. Git delivery accompanies this receipt.
+[P12 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p12-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p12-verification-evidence.zip)
+bind final source,package and tests. [Whole-file review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/handtabl-whole-file-review.json)
+records restorations and residual owner decisions. Git delivery accompanies receipt.
 
 ## Remaining Scope
 

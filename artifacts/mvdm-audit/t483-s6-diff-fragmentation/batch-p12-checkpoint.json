@@ -1,0 +1,206 @@
+{
+  "packet": "M0 T483 S6 P12",
+  "status": "Verified and published;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 3,
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+        "sha256": "ffe709bfb792e29d9b85531b744b9e9e7d99b14cae2f5b2706d2a641784e372c"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "sha256": "7eb1dabe7de56a6eb4404b0e2d5843ed1fcd821b4724539c17e4b7f392611b94"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/winerrp.h",
+        "sha256": "a04d4685c2a5fef4c68614161a616eac40b4fd97efbcb5c0c9b52f2169e3ceff"
+      }
+    ],
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 2,
+    "lines": 102
+  },
+  "publication": {
+    "status": "published",
+    "package": "fdefbd32-482c-4625-a129-b2edebd20bcd",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 410802,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6475,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1204,
+        "CleanupMs": 386,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11525,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 11533,
+        "CleanupMs": 457,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10836,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 179,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66304,
+        "CleanupMs": 452,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46132,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46241,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15104,
+        "CleanupMs": 457,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11026,
+        "CleanupMs": 453,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 47110,
+        "CleanupMs": 469,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12670,
+        "CleanupMs": 495,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28797,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30634,
+        "CleanupMs": 529,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3653,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8251,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10361,
+        "CleanupMs": 547,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3838,
+        "CleanupMs": 473,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7985,
+        "CleanupMs": 432,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20172,
+        "CleanupMs": 446,
+        "Passed": true
+      }
+    ]
+  },
+  "compiler_lines": {
+    "source_files": 3,
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+        "sha256": "ffe709bfb792e29d9b85531b744b9e9e7d99b14cae2f5b2706d2a641784e372c"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "sha256": "7eb1dabe7de56a6eb4404b0e2d5843ed1fcd821b4724539c17e4b7f392611b94"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/winerrp.h",
+        "sha256": "a04d4685c2a5fef4c68614161a616eac40b4fd97efbcb5c0c9b52f2169e3ceff"
+      }
+    ],
+    "deleted": [],
+    "compiler_anchors": {
+      "BOOL gfTrackLocks": 21,
+      "DWORD gcHandlePages": 36,
+      "PHANDLEPAGE gpHandlePages": 37,
+      "gabObjectCreateFlags[": 39,
+      "gdwAllocTag[": 64,
+      "KernelPtoH( PVOID": 2146
+    },
+    "preprocessed_sha256": "7da48b359ee08d3bfddb60347a33c5f44a34f3c34cb4ee9f3f22a2e19e3dc8e1"
+  },
+  "global": {
+    "files": 1063,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 255,
+    "blocks": 2310,
+    "lines": 53650,
+    "reviewed_files": 24,
+    "remaining_files": 231,
+    "cumulative_reduction_blocks": 23,
+    "cumulative_reduction_lines": 873
+  },
+  "failed_candidates": "Two assignment helpers failed actual linking;restoration and /Gy trial withdrawn. Final candidate passed full build.",
+  "winnt_zip_unchanged": true
+}
