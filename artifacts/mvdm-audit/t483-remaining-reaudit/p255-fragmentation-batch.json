@@ -1,0 +1,3691 @@
+{
+  "batch": "T483 S5 P255",
+  "scope": "All nine eligible P254 files,one ordered batch;queue.c excluded as already resolved",
+  "files": [
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "before": {
+        "blocks": 13,
+        "added": 17,
+        "deleted": 1377,
+        "total": 1394
+      },
+      "after": {
+        "blocks": 13,
+        "added": 17,
+        "deleted": 1377,
+        "total": 1394
+      },
+      "restored_blank_ranges": [],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2",
+      "after_sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2",
+      "evidence": "p242-class-review.json",
+      "conclusion": "Original precomp fails C1083 ntos.h in all three real contexts. Class registration/removal owns desktop heap, class clone and CPD lifetimes;current callers use native class registration and explicit contexts. The extra block follows hdrstop recovery; deleting that original pragma is not an admissible reduction. Moving FE_SB into another selector was rejected because it changes its rejection context.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            15,
+            15
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            17,
+            66
+          ],
+          "added": 2,
+          "deleted": 50,
+          "touches_error": false
+        },
+        {
+          "original": [
+            86,
+            86
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            132,
+            476
+          ],
+          "added": 2,
+          "deleted": 345,
+          "touches_error": false
+        },
+        {
+          "original": [
+            503,
+            503
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            555,
+            555
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            559,
+            889
+          ],
+          "added": 3,
+          "deleted": 331,
+          "touches_error": false
+        },
+        {
+          "original": [
+            976,
+            975
+          ],
+          "added": 1,
+          "deleted": 0,
+          "touches_error": false
+        },
+        {
+          "original": [
+            977,
+            1068
+          ],
+          "added": 0,
+          "deleted": 92,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1071,
+            1073
+          ],
+          "added": 1,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1075,
+            1075
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1077,
+            1087
+          ],
+          "added": 4,
+          "deleted": 11,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1089,
+            1628
+          ],
+          "added": 0,
+          "deleted": 540,
+          "touches_error": false
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "before": {
+        "blocks": 22,
+        "added": 25,
+        "deleted": 43,
+        "total": 68
+      },
+      "after": {
+        "blocks": 22,
+        "added": 25,
+        "deleted": 43,
+        "total": 68
+      },
+      "restored_blank_ranges": [],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3",
+      "after_sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3",
+      "evidence": "p242-cleanup-review.json",
+      "conclusion": "Original sizeof(spfnwp) iteration is a byte count for a pointer array;restoring it indexes beyond the array. Native window/class setters must update native USER ownership,not just a projected field. BOOL cleanup failure and explicit context are coupled to those fallible native calls. The extra block follows original hdrstop recovery.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            13,
+            13
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            17,
+            38
+          ],
+          "added": 0,
+          "deleted": 22,
+          "touches_error": false
+        },
+        {
+          "original": [
+            76,
+            76
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            105,
+            105
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            114,
+            114
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            182,
+            182
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            186,
+            186
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            227,
+            227
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            232,
+            232
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            255,
+            255
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            265,
+            265
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            271,
+            271
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            305,
+            305
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            315,
+            315
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            340,
+            340
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            342,
+            342
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            346,
+            347
+          ],
+          "added": 2,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            360,
+            360
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            385,
+            385
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            389,
+            389
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            408,
+            408
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            457,
+            456
+          ],
+          "added": 1,
+          "deleted": 0,
+          "touches_error": false
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "before": {
+        "blocks": 5,
+        "added": 14,
+        "deleted": 484,
+        "total": 498
+      },
+      "after": {
+        "blocks": 5,
+        "added": 14,
+        "deleted": 484,
+        "total": 498
+      },
+      "restored_blank_ranges": [],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+      "after_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+      "evidence": "p242-exitwin-review.json",
+      "conclusion": "Only the WOW hung-app handler registration unit is selected;remaining original units perform workstation shutdown,process signaling and kernel event references. The owner is modern Windows rather than the guest task. Existing explicit currentProcess avoids treating a surrogate process as kernel PPROCESSINFO. Extra block follows original hdrstop recovery.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            13,
+            13
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            15,
+            495
+          ],
+          "added": 4,
+          "deleted": 481,
+          "touches_error": false
+        },
+        {
+          "original": [
+            510,
+            510
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            544,
+            544
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            559,
+            558
+          ],
+          "added": 6,
+          "deleted": 0,
+          "touches_error": true
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "before": {
+        "blocks": 34,
+        "added": 81,
+        "deleted": 2085,
+        "total": 2166
+      },
+      "after": {
+        "blocks": 34,
+        "added": 81,
+        "deleted": 2085,
+        "total": 2166
+      },
+      "restored_blank_ranges": [],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+      "after_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+      "evidence": "p242-handtabl-review.json",
+      "conclusion": "Selected gabObjectCreateFlags is original. Omitted handle allocation/destruction accesses NT4 USER handle-table entries,kernel pools and object/thread locks;native USER owns those handles.29 preserved excluded branches split the omissions. Do not delete original condition structures to reduce reported blocks.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            11,
+            11
+          ],
+          "added": 4,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            13,
+            37
+          ],
+          "added": 0,
+          "deleted": 25,
+          "touches_error": false
+        },
+        {
+          "original": [
+            57,
+            57
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            61,
+            543
+          ],
+          "added": 0,
+          "deleted": 483,
+          "touches_error": false
+        },
+        {
+          "original": [
+            545,
+            562
+          ],
+          "added": 1,
+          "deleted": 18,
+          "touches_error": true
+        },
+        {
+          "original": [
+            566,
+            586
+          ],
+          "added": 3,
+          "deleted": 21,
+          "touches_error": true
+        },
+        {
+          "original": [
+            589,
+            711
+          ],
+          "added": 2,
+          "deleted": 123,
+          "touches_error": true
+        },
+        {
+          "original": [
+            714,
+            762
+          ],
+          "added": 3,
+          "deleted": 49,
+          "touches_error": true
+        },
+        {
+          "original": [
+            765,
+            770
+          ],
+          "added": 2,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            772,
+            775
+          ],
+          "added": 2,
+          "deleted": 4,
+          "touches_error": true
+        },
+        {
+          "original": [
+            778,
+            796
+          ],
+          "added": 0,
+          "deleted": 19,
+          "touches_error": false
+        },
+        {
+          "original": [
+            798,
+            802
+          ],
+          "added": 1,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            804,
+            850
+          ],
+          "added": 0,
+          "deleted": 47,
+          "touches_error": false
+        },
+        {
+          "original": [
+            853,
+            852
+          ],
+          "added": 2,
+          "deleted": 0,
+          "touches_error": true
+        },
+        {
+          "original": [
+            854,
+            858
+          ],
+          "added": 4,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            860,
+            861
+          ],
+          "added": 3,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            863,
+            863
+          ],
+          "added": 3,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            865,
+            867
+          ],
+          "added": 3,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            869,
+            869
+          ],
+          "added": 3,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            871,
+            875
+          ],
+          "added": 3,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            877,
+            879
+          ],
+          "added": 3,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            881,
+            885
+          ],
+          "added": 3,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            887,
+            896
+          ],
+          "added": 3,
+          "deleted": 10,
+          "touches_error": true
+        },
+        {
+          "original": [
+            898,
+            900
+          ],
+          "added": 3,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            902,
+            903
+          ],
+          "added": 3,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            905,
+            904
+          ],
+          "added": 3,
+          "deleted": 0,
+          "touches_error": true
+        },
+        {
+          "original": [
+            906,
+            909
+          ],
+          "added": 3,
+          "deleted": 4,
+          "touches_error": true
+        },
+        {
+          "original": [
+            911,
+            920
+          ],
+          "added": 3,
+          "deleted": 10,
+          "touches_error": true
+        },
+        {
+          "original": [
+            922,
+            921
+          ],
+          "added": 3,
+          "deleted": 0,
+          "touches_error": true
+        },
+        {
+          "original": [
+            923,
+            931
+          ],
+          "added": 3,
+          "deleted": 9,
+          "touches_error": true
+        },
+        {
+          "original": [
+            933,
+            933
+          ],
+          "added": 3,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            935,
+            951
+          ],
+          "added": 2,
+          "deleted": 17,
+          "touches_error": true
+        },
+        {
+          "original": [
+            955,
+            1068
+          ],
+          "added": 6,
+          "deleted": 114,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1071,
+            2158
+          ],
+          "added": 0,
+          "deleted": 1088,
+          "touches_error": false
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "before": {
+        "blocks": 49,
+        "added": 31,
+        "deleted": 5783,
+        "total": 5814
+      },
+      "after": {
+        "blocks": 46,
+        "added": 31,
+        "deleted": 5779,
+        "total": 5810
+      },
+      "restored_blank_ranges": [
+        [
+          20,
+          21
+        ],
+        [
+          57,
+          57
+        ],
+        [
+          2927,
+          2927
+        ]
+      ],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "db5d5f21f8729a0f9eb7f3f63462635de8d6b01299996fed223a4727bbaae49d",
+      "after_sha256": "6ac1ca790b536a8065b25c56a73cb8cb1f219b1bb4f548faeda433ce19f87644",
+      "evidence": "p243-input-review.json",
+      "conclusion": "Original AddAttachment/Recalc2 selected bodies retained;explicit current thread is the native group boundary. Other units own kernel queue messages,lookaside allocation and wake-state;they cannot simply bind to the modern native queue.25 original condition frames were restored in P243 and split omitted functions. Three all-blank deletion hunks restored completely;all nonempty logical rows unchanged.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            13,
+            13
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            18,
+            18
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            23,
+            55
+          ],
+          "added": 1,
+          "deleted": 33,
+          "touches_error": true
+        },
+        {
+          "original": [
+            59,
+            83
+          ],
+          "added": 1,
+          "deleted": 25,
+          "touches_error": true
+        },
+        {
+          "original": [
+            85,
+            90
+          ],
+          "added": 0,
+          "deleted": 6,
+          "touches_error": false
+        },
+        {
+          "original": [
+            92,
+            96
+          ],
+          "added": 1,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            98,
+            237
+          ],
+          "added": 0,
+          "deleted": 140,
+          "touches_error": false
+        },
+        {
+          "original": [
+            239,
+            242
+          ],
+          "added": 1,
+          "deleted": 4,
+          "touches_error": true
+        },
+        {
+          "original": [
+            247,
+            1153
+          ],
+          "added": 0,
+          "deleted": 907,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1155,
+            1180
+          ],
+          "added": 1,
+          "deleted": 26,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1182,
+            1408
+          ],
+          "added": 0,
+          "deleted": 227,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1410,
+            1429
+          ],
+          "added": 1,
+          "deleted": 20,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1431,
+            1640
+          ],
+          "added": 0,
+          "deleted": 210,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1642,
+            1642
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1644,
+            1646
+          ],
+          "added": 0,
+          "deleted": 3,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1648,
+            1652
+          ],
+          "added": 1,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1654,
+            1668
+          ],
+          "added": 0,
+          "deleted": 15,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1670,
+            1670
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1672,
+            1678
+          ],
+          "added": 0,
+          "deleted": 7,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1680,
+            1680
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1682,
+            1763
+          ],
+          "added": 0,
+          "deleted": 82,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1767,
+            2294
+          ],
+          "added": 0,
+          "deleted": 528,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2296,
+            2308
+          ],
+          "added": 1,
+          "deleted": 13,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2310,
+            2923
+          ],
+          "added": 0,
+          "deleted": 614,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2925,
+            2925
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2929,
+            2948
+          ],
+          "added": 1,
+          "deleted": 20,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2950,
+            2956
+          ],
+          "added": 0,
+          "deleted": 7,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2958,
+            2963
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2965,
+            2970
+          ],
+          "added": 0,
+          "deleted": 6,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2972,
+            2972
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2974,
+            3187
+          ],
+          "added": 0,
+          "deleted": 214,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3189,
+            3229
+          ],
+          "added": 1,
+          "deleted": 41,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3231,
+            3306
+          ],
+          "added": 0,
+          "deleted": 76,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3308,
+            3308
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3311,
+            3319
+          ],
+          "added": 1,
+          "deleted": 9,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3327,
+            4550
+          ],
+          "added": 0,
+          "deleted": 1224,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4552,
+            4574
+          ],
+          "added": 1,
+          "deleted": 23,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4576,
+            4749
+          ],
+          "added": 0,
+          "deleted": 174,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4751,
+            4756
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4758,
+            4758
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4760,
+            4763
+          ],
+          "added": 0,
+          "deleted": 4,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4765,
+            4766
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4768,
+            4990
+          ],
+          "added": 0,
+          "deleted": 223,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5045,
+            5045
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5108,
+            5107
+          ],
+          "added": 6,
+          "deleted": 0,
+          "touches_error": true
+        },
+        {
+          "original": [
+            5109,
+            5972
+          ],
+          "added": 0,
+          "deleted": 864,
+          "touches_error": false
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "before": {
+        "blocks": 155,
+        "added": 127,
+        "deleted": 9887,
+        "total": 10014
+      },
+      "after": {
+        "blocks": 154,
+        "added": 127,
+        "deleted": 9886,
+        "total": 10013
+      },
+      "restored_blank_ranges": [
+        [
+          281,
+          281
+        ]
+      ],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19",
+      "after_sha256": "4902f92078ba3aabb306bec2c939b76561914bd8344af7dfa82d8c6c4bbf8914",
+      "evidence": "p243-ntstubs-review.json",
+      "conclusion": "Selected NtUserSetWindowFNID uses native HWND validation and existing caller borrow scope. BEGINRECV_HWND/ENDRECV_HWND require kernel EnterCrit/LeaveCrit if restored;CALLPROC already comes from selected client/usercli.h with a different client-pointer contract. Other stubs are NT4 system-call implementations,including ProbeForRead/Write,object references and desktop/window-station ownership.73 original frames retained;empty selected branches must not be removed or confused with selected executable implementations. One whole blank deletion hunk restored.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            13,
+            13
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            32,
+            40
+          ],
+          "added": 0,
+          "deleted": 9,
+          "touches_error": false
+        },
+        {
+          "original": [
+            118,
+            122
+          ],
+          "added": 0,
+          "deleted": 5,
+          "touches_error": false
+        },
+        {
+          "original": [
+            150,
+            150
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            179,
+            179
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            269,
+            279
+          ],
+          "added": 1,
+          "deleted": 11,
+          "touches_error": true
+        },
+        {
+          "original": [
+            283,
+            299
+          ],
+          "added": 1,
+          "deleted": 17,
+          "touches_error": true
+        },
+        {
+          "original": [
+            301,
+            351
+          ],
+          "added": 0,
+          "deleted": 51,
+          "touches_error": false
+        },
+        {
+          "original": [
+            353,
+            353
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            355,
+            358
+          ],
+          "added": 1,
+          "deleted": 4,
+          "touches_error": true
+        },
+        {
+          "original": [
+            360,
+            389
+          ],
+          "added": 0,
+          "deleted": 30,
+          "touches_error": false
+        },
+        {
+          "original": [
+            391,
+            391
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            393,
+            393
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            395,
+            562
+          ],
+          "added": 0,
+          "deleted": 168,
+          "touches_error": false
+        },
+        {
+          "original": [
+            564,
+            564
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            566,
+            566
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            568,
+            714
+          ],
+          "added": 0,
+          "deleted": 147,
+          "touches_error": false
+        },
+        {
+          "original": [
+            716,
+            716
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            718,
+            718
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            720,
+            737
+          ],
+          "added": 0,
+          "deleted": 18,
+          "touches_error": false
+        },
+        {
+          "original": [
+            739,
+            739
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            741,
+            741
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            743,
+            963
+          ],
+          "added": 0,
+          "deleted": 221,
+          "touches_error": false
+        },
+        {
+          "original": [
+            965,
+            965
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            967,
+            967
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            969,
+            1134
+          ],
+          "added": 0,
+          "deleted": 166,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1136,
+            1137
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1139,
+            1140
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1142,
+            1228
+          ],
+          "added": 0,
+          "deleted": 87,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1230,
+            1230
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1232,
+            1232
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1234,
+            1311
+          ],
+          "added": 0,
+          "deleted": 78,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1313,
+            1313
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1315,
+            1315
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1317,
+            1404
+          ],
+          "added": 0,
+          "deleted": 88,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1406,
+            1426
+          ],
+          "added": 1,
+          "deleted": 21,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1428,
+            1542
+          ],
+          "added": 0,
+          "deleted": 115,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1544,
+            1562
+          ],
+          "added": 1,
+          "deleted": 19,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1564,
+            1792
+          ],
+          "added": 0,
+          "deleted": 229,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1794,
+            1814
+          ],
+          "added": 1,
+          "deleted": 21,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1816,
+            1956
+          ],
+          "added": 0,
+          "deleted": 141,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1958,
+            1958
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1960,
+            1960
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1962,
+            2026
+          ],
+          "added": 0,
+          "deleted": 65,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2028,
+            2028
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2030,
+            2030
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2032,
+            2111
+          ],
+          "added": 0,
+          "deleted": 80,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2113,
+            2113
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2115,
+            2115
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2117,
+            2287
+          ],
+          "added": 0,
+          "deleted": 171,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2289,
+            2289
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2291,
+            2291
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2293,
+            2368
+          ],
+          "added": 0,
+          "deleted": 76,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2370,
+            2370
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2372,
+            2372
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2374,
+            2722
+          ],
+          "added": 0,
+          "deleted": 349,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2724,
+            2724
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2726,
+            2726
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2728,
+            2746
+          ],
+          "added": 0,
+          "deleted": 19,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2748,
+            2748
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2750,
+            2755
+          ],
+          "added": 0,
+          "deleted": 6,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2757,
+            2762
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2764,
+            2767
+          ],
+          "added": 0,
+          "deleted": 4,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2769,
+            3106
+          ],
+          "added": 0,
+          "deleted": 338,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3108,
+            3108
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3110,
+            3110
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3112,
+            3157
+          ],
+          "added": 0,
+          "deleted": 46,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3159,
+            3159
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3161,
+            3161
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3163,
+            3430
+          ],
+          "added": 0,
+          "deleted": 268,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3432,
+            3432
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3434,
+            3445
+          ],
+          "added": 0,
+          "deleted": 12,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3447,
+            3447
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3449,
+            3449
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3451,
+            3460
+          ],
+          "added": 0,
+          "deleted": 10,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3462,
+            3462
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3464,
+            3464
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3466,
+            3466
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3468,
+            3468
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3470,
+            3475
+          ],
+          "added": 0,
+          "deleted": 6,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3477,
+            3477
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3479,
+            3479
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3481,
+            3485
+          ],
+          "added": 0,
+          "deleted": 5,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3487,
+            3487
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3489,
+            3493
+          ],
+          "added": 0,
+          "deleted": 5,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3495,
+            3527
+          ],
+          "added": 1,
+          "deleted": 33,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3529,
+            3971
+          ],
+          "added": 0,
+          "deleted": 443,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3973,
+            3973
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3975,
+            3975
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3977,
+            4317
+          ],
+          "added": 0,
+          "deleted": 341,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4319,
+            4319
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4321,
+            4322
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4324,
+            4409
+          ],
+          "added": 0,
+          "deleted": 86,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4411,
+            4411
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4413,
+            4419
+          ],
+          "added": 0,
+          "deleted": 7,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4421,
+            4426
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4428,
+            4431
+          ],
+          "added": 0,
+          "deleted": 4,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4433,
+            4726
+          ],
+          "added": 0,
+          "deleted": 294,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4728,
+            4729
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4731,
+            4732
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4734,
+            5471
+          ],
+          "added": 0,
+          "deleted": 738,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5473,
+            5473
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5475,
+            5475
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            5477,
+            5505
+          ],
+          "added": 0,
+          "deleted": 29,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5507,
+            5507
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5509,
+            5509
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            5511,
+            5767
+          ],
+          "added": 0,
+          "deleted": 257,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5769,
+            5769
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5771,
+            5771
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            5773,
+            5822
+          ],
+          "added": 0,
+          "deleted": 50,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5824,
+            5824
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5826,
+            5826
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            5828,
+            5985
+          ],
+          "added": 0,
+          "deleted": 158,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5987,
+            5987
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5989,
+            5990
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            5992,
+            6169
+          ],
+          "added": 0,
+          "deleted": 178,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6190,
+            6240
+          ],
+          "added": 0,
+          "deleted": 51,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6242,
+            6247
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            6249,
+            6311
+          ],
+          "added": 0,
+          "deleted": 63,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6313,
+            6313
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6315,
+            6316
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            6318,
+            6416
+          ],
+          "added": 0,
+          "deleted": 99,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6418,
+            6434
+          ],
+          "added": 0,
+          "deleted": 17,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6436,
+            6452
+          ],
+          "added": 1,
+          "deleted": 17,
+          "touches_error": true
+        },
+        {
+          "original": [
+            6454,
+            6688
+          ],
+          "added": 0,
+          "deleted": 235,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6690,
+            6690
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6692,
+            6692
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            6694,
+            6928
+          ],
+          "added": 0,
+          "deleted": 235,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6930,
+            6931
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6933,
+            6934
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            6936,
+            6976
+          ],
+          "added": 0,
+          "deleted": 41,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6978,
+            6979
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            6981,
+            6982
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            6984,
+            7025
+          ],
+          "added": 0,
+          "deleted": 42,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7027,
+            7030
+          ],
+          "added": 0,
+          "deleted": 4,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7032,
+            7035
+          ],
+          "added": 1,
+          "deleted": 4,
+          "touches_error": true
+        },
+        {
+          "original": [
+            7037,
+            7070
+          ],
+          "added": 0,
+          "deleted": 34,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7072,
+            7073
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7075,
+            7076
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            7078,
+            7101
+          ],
+          "added": 0,
+          "deleted": 24,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7103,
+            7103
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7105,
+            7105
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            7107,
+            7130
+          ],
+          "added": 0,
+          "deleted": 24,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7132,
+            7132
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7134,
+            7134
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            7136,
+            7160
+          ],
+          "added": 0,
+          "deleted": 25,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7162,
+            7162
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7164,
+            7164
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            7166,
+            7187
+          ],
+          "added": 0,
+          "deleted": 22,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7189,
+            7189
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7191,
+            7191
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            7193,
+            7260
+          ],
+          "added": 0,
+          "deleted": 68,
+          "touches_error": false
+        },
+        {
+          "original": [
+            7265,
+            7266
+          ],
+          "added": 71,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            7269,
+            10310
+          ],
+          "added": 0,
+          "deleted": 3042,
+          "touches_error": false
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "before": {
+        "blocks": 7,
+        "added": 3,
+        "deleted": 362,
+        "total": 365
+      },
+      "after": {
+        "blocks": 7,
+        "added": 3,
+        "deleted": 362,
+        "total": 365
+      },
+      "restored_blank_ranges": [],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac",
+      "after_sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac",
+      "evidence": "p245-random-review.json",
+      "conclusion": "Original CheckPwndFilter and xxxGetControlBrush units are restored. Remaining Set/ClearWindowState has a client provider;Gre clip ownership,quota allocation and hard-error desktop control are kernel/native boundaries. Growth includes those recovered complete units and DEBUG exclusion framework;do not delete them to merge hunks.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            15,
+            15
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            17,
+            89
+          ],
+          "added": 0,
+          "deleted": 73,
+          "touches_error": false
+        },
+        {
+          "original": [
+            113,
+            184
+          ],
+          "added": 0,
+          "deleted": 72,
+          "touches_error": false
+        },
+        {
+          "original": [
+            186,
+            188
+          ],
+          "added": 1,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            190,
+            195
+          ],
+          "added": 0,
+          "deleted": 6,
+          "touches_error": false
+        },
+        {
+          "original": [
+            234,
+            241
+          ],
+          "added": 0,
+          "deleted": 8,
+          "touches_error": false
+        },
+        {
+          "original": [
+            243,
+            441
+          ],
+          "added": 0,
+          "deleted": 199,
+          "touches_error": false
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "before": {
+        "blocks": 30,
+        "added": 20,
+        "deleted": 1669,
+        "total": 1689
+      },
+      "after": {
+        "blocks": 29,
+        "added": 20,
+        "deleted": 1668,
+        "total": 1688
+      },
+      "restored_blank_ranges": [
+        [
+          56,
+          56
+        ]
+      ],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b",
+      "after_sha256": "e59818734a049670e98fa66db663eeae013dfee2c56a1e6f410068aef5e44ab0",
+      "evidence": "p246-server-in-progress.json",
+      "conclusion": "Original complete InitMessageTables/InitWindowMsgTable retained. szEDITCLASS already defined in selected client/dlgbegin.c;restoring another global duplicates it. Real restoration of xxxDesktopWndProc prototype failed C2146/C2061 because PWND absent from message-table context. Remaining original units initialize USER kernel shared sections and server function tables.15 original conditional groups split omissions. One whole blank deletion hunk restored.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            11,
+            11
+          ],
+          "added": 2,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            20,
+            21
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            23,
+            25
+          ],
+          "added": 0,
+          "deleted": 3,
+          "touches_error": false
+        },
+        {
+          "original": [
+            37,
+            38
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            54,
+            54
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            462,
+            462
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            482,
+            497
+          ],
+          "added": 1,
+          "deleted": 16,
+          "touches_error": true
+        },
+        {
+          "original": [
+            584,
+            595
+          ],
+          "added": 1,
+          "deleted": 12,
+          "touches_error": true
+        },
+        {
+          "original": [
+            599,
+            606
+          ],
+          "added": 0,
+          "deleted": 8,
+          "touches_error": false
+        },
+        {
+          "original": [
+            618,
+            832
+          ],
+          "added": 0,
+          "deleted": 215,
+          "touches_error": false
+        },
+        {
+          "original": [
+            834,
+            838
+          ],
+          "added": 1,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            840,
+            849
+          ],
+          "added": 0,
+          "deleted": 10,
+          "touches_error": false
+        },
+        {
+          "original": [
+            851,
+            876
+          ],
+          "added": 1,
+          "deleted": 26,
+          "touches_error": true
+        },
+        {
+          "original": [
+            878,
+            878
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            919,
+            933
+          ],
+          "added": 0,
+          "deleted": 15,
+          "touches_error": false
+        },
+        {
+          "original": [
+            935,
+            938
+          ],
+          "added": 1,
+          "deleted": 4,
+          "touches_error": true
+        },
+        {
+          "original": [
+            940,
+            989
+          ],
+          "added": 0,
+          "deleted": 50,
+          "touches_error": false
+        },
+        {
+          "original": [
+            991,
+            991
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            993,
+            993
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            995,
+            1001
+          ],
+          "added": 0,
+          "deleted": 7,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1003,
+            1018
+          ],
+          "added": 1,
+          "deleted": 16,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1020,
+            1021
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1055,
+            1055
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1057,
+            1148
+          ],
+          "added": 0,
+          "deleted": 92,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1164,
+            1208
+          ],
+          "added": 1,
+          "deleted": 45,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1212,
+            1255
+          ],
+          "added": 0,
+          "deleted": 44,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1263,
+            1702
+          ],
+          "added": 0,
+          "deleted": 440,
+          "touches_error": false
+        },
+        {
+          "original": [
+            1704,
+            1704
+          ],
+          "added": 7,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1707,
+            2352
+          ],
+          "added": 0,
+          "deleted": 646,
+          "touches_error": false
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "before": {
+        "blocks": 67,
+        "added": 47,
+        "deleted": 444,
+        "total": 491
+      },
+      "after": {
+        "blocks": 67,
+        "added": 47,
+        "deleted": 444,
+        "total": 491
+      },
+      "restored_blank_ranges": [],
+      "nonblank_logical_lines_identical": true,
+      "before_sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01",
+      "after_sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01",
+      "evidence": "p248-userk-review.json",
+      "conclusion": "40 excluded bodies remain#error. Residual declarations include concrete host alias conflicts (PTDB/PWOWPROCESSINFO/PSMS),macro-expanded prototypes and private server includes. Original scheduling receive uses kernel SMS/wakebits;native provider uses USER sent-message queue. Original per-thread TEB differs from one CCPU projected TEB;client-context handoff has an explicit source counterexample. Prior whole-unit alternatives for private named types/inline helpers require changed signatures and more blocks;no unilateral tradeoff or complexity transfer.",
+      "scope": "Fragmentation follow-up of complete prior file audit;residual semantics remain pending owner,not newly approved.",
+      "remaining_blocks": [
+        {
+          "original": [
+            23,
+            57
+          ],
+          "added": 1,
+          "deleted": 35,
+          "touches_error": true
+        },
+        {
+          "original": [
+            62,
+            62
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            66,
+            66
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            75,
+            75
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            82,
+            83
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            114,
+            115
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            122,
+            123
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            254,
+            265
+          ],
+          "added": 1,
+          "deleted": 12,
+          "touches_error": true
+        },
+        {
+          "original": [
+            791,
+            791
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            800,
+            841
+          ],
+          "added": 1,
+          "deleted": 42,
+          "touches_error": true
+        },
+        {
+          "original": [
+            894,
+            894
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            912,
+            916
+          ],
+          "added": 1,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            932,
+            937
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            949,
+            953
+          ],
+          "added": 1,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            967,
+            968
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            980,
+            981
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1049,
+            1054
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1085,
+            1094
+          ],
+          "added": 1,
+          "deleted": 10,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1220,
+            1244
+          ],
+          "added": 1,
+          "deleted": 25,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1272,
+            1277
+          ],
+          "added": 1,
+          "deleted": 6,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1536,
+            1537
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1556,
+            1558
+          ],
+          "added": 1,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1623,
+            1632
+          ],
+          "added": 1,
+          "deleted": 10,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1660,
+            1660
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1799,
+            1799
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1876,
+            1877
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            1978,
+            1978
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2219,
+            2238
+          ],
+          "added": 0,
+          "deleted": 20,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2344,
+            2346
+          ],
+          "added": 1,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2362,
+            2375
+          ],
+          "added": 0,
+          "deleted": 14,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2552,
+            2553
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2596,
+            2597
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2615,
+            2615
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2670,
+            2671
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            2739,
+            2741
+          ],
+          "added": 1,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2908,
+            2908
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            2912,
+            2912
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3023,
+            3025
+          ],
+          "added": 1,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3146,
+            3146
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3155,
+            3156
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3193,
+            3228
+          ],
+          "added": 0,
+          "deleted": 36,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3281,
+            3281
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3284,
+            3284
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3517,
+            3524
+          ],
+          "added": 0,
+          "deleted": 8,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3548,
+            3552
+          ],
+          "added": 1,
+          "deleted": 5,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3569,
+            3569
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3762,
+            3763
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3795,
+            3801
+          ],
+          "added": 1,
+          "deleted": 7,
+          "touches_error": true
+        },
+        {
+          "original": [
+            3812,
+            3812
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3881,
+            3881
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3978,
+            3978
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3989,
+            3988
+          ],
+          "added": 1,
+          "deleted": 0,
+          "touches_error": false
+        },
+        {
+          "original": [
+            3997,
+            3996
+          ],
+          "added": 2,
+          "deleted": 0,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4018,
+            4017
+          ],
+          "added": 2,
+          "deleted": 0,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4027,
+            4026
+          ],
+          "added": 1,
+          "deleted": 0,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4105,
+            4111
+          ],
+          "added": 1,
+          "deleted": 7,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4122,
+            4122
+          ],
+          "added": 1,
+          "deleted": 1,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4193,
+            4193
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4595,
+            4595
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4766,
+            4767
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4786,
+            4786
+          ],
+          "added": 0,
+          "deleted": 1,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4789,
+            4791
+          ],
+          "added": 1,
+          "deleted": 3,
+          "touches_error": true
+        },
+        {
+          "original": [
+            4900,
+            4903
+          ],
+          "added": 0,
+          "deleted": 4,
+          "touches_error": false
+        },
+        {
+          "original": [
+            4959,
+            4963
+          ],
+          "added": 0,
+          "deleted": 5,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5024,
+            5025
+          ],
+          "added": 1,
+          "deleted": 2,
+          "touches_error": true
+        },
+        {
+          "original": [
+            5049,
+            5050
+          ],
+          "added": 0,
+          "deleted": 2,
+          "touches_error": false
+        },
+        {
+          "original": [
+            5106,
+            5214
+          ],
+          "added": 1,
+          "deleted": 109,
+          "touches_error": true
+        }
+      ],
+      "block_inventory_limit": "touches_error is lexical adjacency only;does not classify all deleted rows in a mixed block as excluded.",
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c"
+    }
+  ],
+  "changes": "Only six original blank lines restored in three files,removing five complete deletion hunks;no new code,shim,ABI or excluded-branch edits.",
+  "before": {
+    "blocks": 382,
+    "total": 22499
+  },
+  "after": {
+    "blocks": 377,
+    "total": 22493
+  },
+  "global_current": {
+    "blocks": 4862,
+    "added": 7272,
+    "deleted": 82107,
+    "total": 89379
+  },
+  "cumulative_reduction": {
+    "blocks": 435,
+    "total": 30534
+  },
+  "progress": {
+    "files_reviewed": 365,
+    "total_files": 365,
+    "points_reviewed": 2720,
+    "total_points": 2720,
+    "restored_delivered": 1018,
+    "approved": 52,
+    "pending_owner": 1650,
+    "unreviewed": 0
+  },
+  "verification": "cached x86/x64,published11x2,focused37/task-order,Full20,boundary143/negative9,governance PASS;Git accompanies receipt",
+  "limits": [
+    "This is not removal of every residual difference. Pending owner boundaries and block-vs-line tradeoffs remain.",
+    "Do not count a six-line format restoration as full restoration of any R point.",
+    "Historical compile evidence reused by source identity;this batch still executes cached build,publication and Full tests as requested."
+  ]
+}

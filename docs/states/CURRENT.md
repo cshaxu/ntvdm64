@@ -6,7 +6,7 @@
 
 Owner supersedes the category-only continuation with one ordered re-audit of
 all remaining differences, including formerly retained items. S2–S4 and the
-completed P1/P2 items remain closed. No separate S6 admission is made.
+completed P1/P2 items remain closed. Owner now authorizes S5 closure after P255 and immediate S6 admission.
 The [new worklist](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md)
 is the sole active audit order; the old D-register is historical evidence.
 
@@ -39,8 +39,8 @@ contains2720 points in365 files, with1052 live host C/H mirror files.
 P253 final seven files:2061->1249lines(-812),66->54blocks(-12).
 Eight restored/confirmed points;sixteen residual owner-boundary points.
 Cached full,compiler33 function anchors,publish11x2,focused37/task-order,
-Full20,boundary/governance PASS. Current89385lines/4867blocks;cumulative
-reduction30528lines/430blocks versus audit baseline. This is file-pass
+Full20,boundary/governance PASS. Current89379lines/4862blocks;cumulative
+reduction30534lines/435blocks versus audit baseline. This is file-pass
 completion,not owner-decision approval or S5/T closure.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
@@ -67,10 +67,17 @@ ntstubs experiment withdrawn;source equals delivered HEAD.
 9 prior block-growth files remain,ordered by the existing R register;
 queue.c27->23blocks is resolved for this criterion and is not reopened.
 Evidence-only P254;production/package and P253 verification identities unchanged.
+Owner requests one final combined batch for the9 eligible files.
+[P255 follow-up](../../artifacts/mvdm-audit/t483-remaining-reaudit/p255-fragmentation-batch.json):
+all9 source-reviewed;three files restore6 original blank lines,5blocks removed.
+Nonempty source/logical lines and#error unchanged;cached/publish11x2,
+focused37/task-order and Full20 pass. Final governance/Git delivery pending.
+Residual owner decisions remain open and transfer to S6 after this delivery.
+[S5 closure](../etc/evidence/m0-t483-s5-closure.md) records the owner decision.
 
 ## Current Technical Baseline
 
-P253 package `4fb73fd5-eafc-4e92-80bf-74cade34b1d9` published11x2;hash verified.
+P255 package `87c73097-d004-454e-925b-fea9a16f9552` published11x2;hash verified.
 Final seven-file whole-unit restoration and test closure integration delivered.
 No new production shim;residual boundaries remain pending owner.
 Cached x86/x64,compiler33 anchors,focused37/task-order,Full20 and governance pass.
@@ -96,143 +103,23 @@ no queue changes remain pending in this batch.
 
 ## Recent M0 Closures
 
-- [T483 S4](../etc/evidence/m0-t483-s4-closure.md): 117 minimize/consolidate entries verified and delivered.
+- [T483 S4](../etc/evidence/m0-t483-s4-closure.md):prior minimization batch.
+- [T483 S5 closure record](../etc/evidence/m0-t483-s5-closure.md):P255 final delivery in progress;residual decisions transfer to S6 after push.
 
-- [T483 S3](../etc/evidence/m0-t483-s3-closure.md): redundant additions and coupled tests removed; isolated input verification repaired.
-- [T483 S2](../etc/evidence/m0-t483-s2-closure.md): original restoration and verified delivery.
-- [T483 S1](../etc/evidence/m0-t483-s1-closure.md): mirror audit, bounded cleanup and verified delivery.
-- [T482](../history/m0-t482-closure.md): investigation transferred, not repaired.
-- [T481](../history/m0-t481-closure.md): guest multitask delivery with explicit boundaries.
+Older P receipts remain indexed in the [S5 worklist](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md);they are historical evidence,not the current packet.
 
 ## Recent Governance
 
-See the [execution rules](../rules/EXECUTION.md). Queue/proposal delivery is
-complete; S5 proceeds under the owner-approved S2–S5 sequence.
+See [execution rules](../rules/EXECUTION.md). P255 final delivery and owner-approved S5 closure precede the newly authorized S6 packet. No T queue reorder.
 
 ## Current Owner Execution Rules
 
-Review in list order, beginning with historical pending items. Restore original
-where supported; speculative races and current-adapter dependencies alone do not
-prove necessity. Necessary non-original alternatives remain pending owner choice.
-Synchronize the register and backlog, removing restored portions promptly.
-Report each point's ID, added/deleted scope, original rationale, evidence,
-disposition and cumulative counts; distinguish source proof from runtime results.
-
-There is no numeric file threshold. Pure formatting/newline/reference changes
-without behavioral or binding effects may accumulate. A semantic restoration
-triggers cached full build, publication, tests, commit and push of the accumulated
-batch only after all outstanding points in the current file and coupled edits
-have been handled. Never build repeatedly for partially handled points in a file.
-Unresolved investigation is not file completion. Source-qualified owner decisions
-are not approved retention or implemented repairs. S5 remains active.
-
-## Owner refinement: same-file minimization
-
-Implement supported necessary-diff reductions directly; another original
-restoration in that file is not a prerequisite.
-Net increases still need prior approval. Minimization does not approve residual
-differences: keep them in the pending backlog with current evidence and size.
-Only fully restored points leave that list.
-
-R0029 removes activate and restores original cmdExec32 assignments; two captured
-pointer callsites remain pending. The prior P6 candidate passed Full, but does
-not validate these newer edits. [Evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/r0029-minimization.json).
-
-The owner's consolidated [17 execution rules](../rules/EXECUTION.md#original-first-mirror-diff-audit)
-now govern this packet, superseding earlier minimization-approval restrictions.
-Residual minimized differences remain pending; final-code verification is required.
-
-P9-P13 delivered; per-batch receipts remain indexed in the active audit README.
-
-## Earlier Delivery Evidence
-
-P17–P149 historical batch receipts and reviews remain indexed in the
-[active audit evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md).
-The latest published baseline and active work are reported above.
-
-P176–P218 delivery details remain indexed in the active audit README; their
-receipts retain source, line, publication and test evidence.
-
-P219 DOS4GW supplement is delegated by owner to a separate session. Current PIF and direct minimal-environment runs failed to reach graphics; retained diagnostics are not acceptance. Preserve its uncommitted test changes; this session does not debug that issue.
-
-P220 delivery receipt and scope remain indexed in the active audit README.
-
-## Owner-priority regression repair after P221
-
-Owner assigns P222 to the source-proven P103 DPMI/DOS4GW regression after
-clmenu delivery. Retain CCPU checks and host hook delegation; repair bounded
-DPMI instruction/FLAGS/IRQ semantics and make actual NESticle graphics startup
-mandatory in Full. Necessary mirror increases enter pending decisions. Preserve
-side-session test edits;no guest changes,Computer Use or unrelated sevid019 fix.
-[Plan](../../artifacts/mvdm-audit/dos4gw-pif-sti-20261115/main-repair-plan.json).
-Resume ordered R2175 audit after this repair is delivered.
-
-P221 verified/published:clmenu396->343(-53);original parser signatures,CLIENTINFO predicate and cast increments restored.12 points restored/confirmed;header3 and SetMenu6 pending owner.340 source/222 selected lines;cached,publish11x2,menu-resource/32 controls,Full19 and governance passed. Package bf48125e-5657-4ce3-ac9d-5b11b188c1df. Cumulative mirror reduction15387. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p221-checkpoint.json). P222 DPMI/DOS4GW repair is active;R2175 follows its delivery.
-
-
-P222 acceptance:actual published NESticle menu/Escape;Full20;58 CCPU cases
-(including48 scalar combinations and16 decode controls);Win3.1 std/386 x
-DOSONLY0/1 startup and normal exit. Probe copy removed. Inherited large-agent
-environment COMMAND failure is separate;standard fixture uses minimal environment
-and the original short-PATH PIF. Strings/CLTS/LMSW/privileged MOV DR remain
-unimplemented,not claimed repaired. Necessary residual +74 remains pending.
-
-P223 verified/published:clmsg1608->1535(-73). Six restored/confirmed points,
-two minimized residual owner decisions. Default/CPD code identical after
-preprocessing;332 original source lines and16 errors checked. Cached x86/x64,
-publish11x2,32 controls,Full20 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p223-checkpoint.json).
-Cumulative365-file mirror reduction15386. NextR2183.
-
-P224 verified/published:clres4129->3437(-692). Four restored/confirmed points,
-five minimized residual owner decisions. Thirteen selected function bodies identical after
-preprocessing;935 original source lines and10 errors checked. Cached x86/x64,
-publish11x2,32 controls,Full20 and governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p224-checkpoint.json).
-Cumulative365-file mirror reduction16078. NextR2192.
-
-P225 verified/published:combo line mapping and dlgbegin85->44(-41).
-Twelve restored/confirmed points,eight minimized decisions,one retained
-excluded-profile point. Actual native destruction replaced an overstrict
-fixture assumption;all final controls and Full20 pass. HWND reuse stress
-is not claimed. NextR2213;Git delivery accompanies receipt.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p225-checkpoint.json).
-
-P226 verified/published:dlgend61->42(-19);six restored points,one minimized
-pending decision. Real owner-enable destruction plus guard-removal negative
-control;22 EndDialog cases pass.116 source lines and two preprocessing contexts
-checked;cached,publish11x2,focused32,Full20,governance pass. NextR2220.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p226-checkpoint.json).
-
-P227 verified/published:dlgmgr918->304(-614);13 restored points,one
-exclusion-policy point,11 pending decisions. Native slot initialization
-with/without control and two guard-removal negatives recorded.
-916 original source rows and3 selected preprocessing contexts checked.
-Cached,publish11x2,focused32,Full20,governance passed;Git delivery accompanies receipt.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p227-checkpoint.json).
-
-P228 verified/published:dlgmgr2 183->67(-116);29 restored points,one
-exclusion-policy point,14 pending decisions.539 original source rows,3 selected
-preprocessing contexts;cached,publish11x2,focused32,Full20,governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p228-checkpoint.json).
-
-P229 verified/published:two files net reduction114;14 restored points,2 policy
-points and6 pending decisions. Actual original navigation probe rejected R2308
-guard removal before publication. Cached,publish11x2,focused32,Full20 passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p229-checkpoint.json).
-
-P230 verified/published:drawtext239->137(-102);Unicode source restored,
-ANSI residuals remain pending. Actual original full link fails;partial restored
-product and fixture pass. Cached,publish11x2,focused32,Full20,governance passed.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p230-checkpoint.json).
-
-P231 verified/published:8 mirror files,13 points;line/comment repairs and
-original globals declaration recovery. First focused compilation failure was
-an unused fixture globals include;removed it,kept assertions,repaired32 pass.
-Full20 passes;owner boundary decisions remain separate from restored points.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p231-checkpoint.json).
-
-P232 verified/published:handles307->300(-7),hdata593->442(-151).
-Original DDE copy functions restored through original public allocation macros
-and existing DC boundary. Private manager/header omissions remain pending.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p232-checkpoint.json).
+Original validity is presumed. Require concrete full-call-chain evidence for
+retention;adapter dependencies alone are not proof. Synchronize main and pending
+registers;only full restoration retires a point. Report file/point progress,
+original-relative blocks and added+deleted lines,including cumulative reductions.
+Complete each file before substantive delivery;do not remove harmless original
+code or transfer complexity into shims to shrink counts. Preserve#error and
+logical lines. Owner overrides the batch cadence for P255:all9 files together,
+then cached build,publish,test,commit,push. S6 changes file order to descending
+non-error difference blocks;other evidence and approval rules persist.

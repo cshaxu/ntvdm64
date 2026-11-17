@@ -1386,3 +1386,5 @@ the pinned source intersection, compatibility findings and generic-test plan.
 - [T483 S3 closure](evidence/m0-t483-s3-closure.md): redundant additions removed and isolated queue tests repaired.
 
 - [T483 S4 closure](evidence/m0-t483-s4-closure.md): 117 minimization entries delivered with original source order and verified publication.
+
+- [T483 S5 closure](evidence/m0-t483-s5-closure.md):final nine-file batch,verified publication and explicit residual-decision handoff to S6.

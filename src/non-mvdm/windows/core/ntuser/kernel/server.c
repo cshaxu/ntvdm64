@@ -52,6 +52,7 @@ LPCWSTR  szDDEMLSERVERCLASSA   = L"DDEMLAnsiServer";
 #ifdef FE_IME
 #error
 #endif
+
 #line 57
 /***************************************************************************\
 * Message Tables

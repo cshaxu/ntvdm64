@@ -259,6 +259,7 @@ LONG NtUserfn ## api(    \
 #error
 #line 280
 #endif
+
 #line 282
 #if DBG
 #error

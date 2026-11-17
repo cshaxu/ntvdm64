@@ -17,11 +17,14 @@
 #ifdef MARKPATH
 #error
 #endif
+
+
 #line 22
 #ifdef TRACESYSPEEK // is defined in userk.h
 #error
 #line 56
 #endif //TRACESYSPEEK
+
 #line 58
 #if DBG
 #error
@@ -80,6 +83,7 @@
 #ifdef TRACESYSPEEK
 #error
 #endif
+
 #line 2928
 #ifdef DEBUG
 #error

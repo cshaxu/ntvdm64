@@ -924,7 +924,7 @@ P135 [whole-file restoration checkpoint](batch-p135-checkpoint.json), [line proo
 
 P135 final cached build,publish11x2,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror164->135(-29);342 selected lines match.187/365 files;1311/2720 points:499 delivered/confirmed,8 approved,804 pending,1409 unreviewed. Final governance and Git accompany receipt.
 
-P136 [whole-file checkpoint](batch-p136-checkpoint.json), [line proof](batch-p136-line-check.json):walias.h mirror51->31(-20);six unused macros restored;remaining six residuals pending owner.188/365 files;1323/2720 reviewed;499 delivered,6 local,8 approved,810 pending,1397 unreviewed. Cached build/publication/tests/Git pending.
+P136 [whole-file checkpoint](batch-p136-checkpoint.json), [line proof](batch-p136-line-check.json):walias.h mirror51->31(-20);six unused macros restored;remaining six residuals pending owner.188/365 files;1323/2720 reviewed;499 delivered,6 local,8 approved,810 pending,1397 unreviewed. Cached x86/x64,publish11x2,focused37/task-order and Full20 passed;Git accompanies receipt.
 
 P136 final cached build,publish11x2,source contrasts,public ABI,menu-resource,Full19 and WOW boundary passed. Mirror51->31(-20);82 selected lines per normal/Unicode context match.188/365 files;1323/2720 points:505 delivered/confirmed,8 approved,810 pending,1397 unreviewed. Final governance and Git accompany receipt.
 
@@ -1687,3 +1687,7 @@ P253 final seven-file batch (verified/published): [random](p253-random-review.js
 P253 [delivery receipt](batch-p253-checkpoint.json):seven files66->54blocks,2061->1249mirror diff lines;all365 files/2720points classified,1018 restored/confirmed delivered,52 approved/policy,1650 owner decisions remain. Full20 final rerun and focused37/task-order passed;first failed attempts remain explicit.
 
 P254 [current fragmentation baseline](p254-fragmentation-current-baseline.json):rechecked all10 previously listed files against pinned original and P253 source identity;queue.c already reduced27->23blocks,so9 remain eligible. Historical P248 trial sizes are not current metrics. Evidence-only reconciliation;P253 runtime remains unchanged.
+
+P255 [nine-file fragmentation follow-up](p255-fragmentation-batch.json):all nine eligible files reviewed as one batch;three files restore six original blank lines,382->377blocks and22499->22493diff lines. Nonempty logical lines and#error unchanged. Residual ownership/ABI decisions are not approved by this pass. Cached x86/x64,publish11x2,focused37/task-order and Full20 passed;Git accompanies receipt.
+
+P255 [delivery and S5 handoff](batch-p255-checkpoint.json), [global count](p255-global-diff-count.json):4862blocks/89379lines;net435blocks/30534lines reduced from fixed365-file baseline. Owner closes S5 after this delivery and authorizes S6 descending non-error-block reduction;1650 residual decisions remain unapproved.
