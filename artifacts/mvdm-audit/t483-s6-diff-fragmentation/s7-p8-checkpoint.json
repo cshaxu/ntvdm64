@@ -1,0 +1,187 @@
+{
+  "packet": "M0 T483 S7 P8",
+  "prior_delivery": "ac1d0c8bcce3bfe5db0144a2da11e4d9d16c680e",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "before": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "source_sha256": "d18350215388f68a97817da37acb9df032c47074f0fb3354c2e212166a37058c",
+      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+      "decision": "Keep x86 granularity. Actual callback-span fixture shows original 64 KiB rounding crosses the 987136-byte reservation, and selected 4 KiB rounding stays within it.",
+      "evidence": "../t483-remaining-reaudit/r0273-suballocator-granularity-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 7
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 7
+      },
+      "source_sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+      "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+      "decision": "Keep finite native menu bindings and the selected Windows SetMenu owner. Original menu parser and applicable formatting have already been restored with focused resource and parser checks.",
+      "evidence": "../t483-remaining-reaudit/p221-clmenu-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "before": {
+        "blocks": 5,
+        "added": 10,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 5,
+        "added": 8,
+        "deleted": 0
+      },
+      "source_sha256": "0315e62e7ad7d78585b0c41f2904627753e8341a665c8768b6a2a63a756ac4f4",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "decision": "Remove two blanks around local lifetime state. Original exit does not cover a surviving admitted session; selected one-bit lifecycle retains shutdown ownership.",
+      "evidence": "../t483-remaining-reaudit/r1202-r1205-nt-reset-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "source_sha256": "af61cd179ed3a251f43a4db257ea13737061e7ff449dab12f2974f324b373366",
+      "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+      "decision": "The two remaining declarations agree with actual IU16/void ev_glue providers. The eight previously restored original declarations retain equivalent object sections.",
+      "evidence": "../t483-remaining-reaudit/r0842-r0845-ega-writ-review.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "4f93fc169d83f72b1e193aef8759fc47d9511ded5f5be899164743644b905eea",
+      "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+      "decision": "The request owns per-operation asynchronous state used across prepare, completion and release. The native overlapped buffer cannot depend on the lifetime of a guest alias.",
+      "evidence": "../t483-remaining-reaudit/r1281-r1296-vrnmpipe-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "source_sha256": "120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3",
+      "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+      "decision": "Three exact original condition controls independently fail selected packed stride, planar stride or wrap; keep the direct condition changes.",
+      "evidence": "../t483-remaining-reaudit/r0947-r0949-vga-mode-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140",
+      "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+      "decision": "Keep command-port EOI. Original port writes the mask register instead and leaves the interrupt in service. Historical actual PIC/BIOS fixture supplies the counterexample.",
+      "evidence": "../t483-remaining-reaudit/r0344-slave-eoi-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "before": {
+        "blocks": 8,
+        "added": 15,
+        "deleted": 411
+      },
+      "after": {
+        "blocks": 8,
+        "added": 15,
+        "deleted": 411
+      },
+      "source_sha256": "5044e92f636b864b54922ad5b2339d4c8c1e026f0d0697655ee3e730571c595d",
+      "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+      "decision": "Keep selected plane address arithmetic, backed by scalar controls and the shared physical video layout. Two local exclusion frameworks count because the original has no paired conditional.",
+      "evidence": "../t483-remaining-reaudit/r0846-r0851-egawrtm0-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "before": {
+        "blocks": 2,
+        "added": 5,
+        "deleted": 5
+      },
+      "after": {
+        "blocks": 2,
+        "added": 5,
+        "deleted": 5
+      },
+      "source_sha256": "a5c144ad5d99806af6ed57b5cfb6aad92bc4e3474bc83f8be74942abc69be29d",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "decision": "Honor the existing owner decision to remove monitor-only declarations. The current SoftPcEoi boundary copies to the actual PIC line type instead of passing a pointer with a different C type.",
+      "evidence": "../t483-remaining-reaudit/r1047-nt-eoi-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c",
+      "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "decision": "Keep the single location header. Reached demhndl read/write paths require location and lease declarations. Moving the include to a caller would move the same mirror difference and would not restore the original memory owner."
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 67,
+    "remaining": 146,
+    "nonzero_files": 238,
+    "non_error_points": 2028,
+    "non_error_lines": 28438,
+    "source_reduction_s7": {
+      "points": 20,
+      "lines": 540
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Two blank-only changes. Continue using the P7 published runtime."
+}

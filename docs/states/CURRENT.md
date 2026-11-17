@@ -94,9 +94,14 @@ All 11 images match P5 after normalizing COFF and debug directory timestamps
 and the package GUID.
 [P7 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p7-checkpoint.json).
 
-S7 progress is 57 reviewed and 156 remaining. Source restorations reduce
-20 points and 538 changed lines in S7. The current census is 2,028 non-error
-points and 28,440 changed lines across 238 mirrors with filtered differences.
+S7 P8 completes ten more reviews and removes two added blank lines in
+`nt_reset.c`. Selected code and preserved diagnostic anchors are unchanged.
+The P7 runtime package is retained.
+[P8 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p8-checkpoint.json).
+
+S7 progress is 67 reviewed and 146 remaining. Source restorations reduce
+20 points and 540 changed lines in S7. The current census is 2,028 non-error
+points and 28,438 changed lines across 238 mirrors with filtered differences.
 
 ## S1 Closure Record
 

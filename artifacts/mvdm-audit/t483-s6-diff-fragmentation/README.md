@@ -320,3 +320,7 @@ two original blank-line restorations, and original byte identity for
 [verification evidence](s7-p7-verification.zip) record eight reviewed files,
 restoration of the original `ios.c` carrier boundary and two format changes.
 The current census is 2,028 non-error points and 28,440 changed lines.
+
+[S7 P8 receipt](s7-p8-checkpoint.json) records ten reviewed files and the
+formatting cleanup in `nt_reset.c`. The current census is 2,028 non-error
+points and 28,438 changed lines.

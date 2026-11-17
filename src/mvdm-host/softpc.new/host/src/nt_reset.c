@@ -90,7 +90,6 @@ GLOBAL HANDLE MainThread;
 GLOBAL ULONG DosSessionId = 0;
 GLOBAL UINT VdmExitCode = 0xFF;
 GLOBAL BOOL StreamIoSwitchOn = TRUE;
-
 static BOOL HostApplicationActive = FALSE;
 #line 86
 
@@ -185,7 +184,6 @@ void  host_applInit(int argc,char *argv[])
 {
     char	*psz;
     int  temp_argc = argc;
-
     HostApplicationActive = TRUE;
 #line 175
     char         **temp_argv = argv;
