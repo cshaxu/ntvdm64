@@ -1,0 +1,52 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+  "points": "R2692-R2696",
+  "before": {
+    "blocks": 3,
+    "added": 9,
+    "deleted": 37,
+    "total": 46
+  },
+  "local": {
+    "blocks": 2,
+    "added": 4,
+    "deleted": 2,
+    "total": 6
+  },
+  "restored_units": [
+    "FIsParentDude",
+    "EnumPwndDlgChildProc"
+  ],
+  "boundary": "GetContextHelpId private property acquisition remains mapped to retained native context-help observation",
+  "evidence": [
+    "Original DLGENUMDATA and helper declarations already exposed by user.h client-view selection",
+    "IsVisible existing original rtl/winmgr.c body",
+    "wow_window_client_context_help reads pinned view.context_help_id;original private property atom not supplied by modern USER32"
+  ],
+  "state": "Whole-file review,cached full,publish11x2,compiler lines,focused37/task-order,Full20,boundary/governance PASS;residual decisions pending owner",
+  "source_sha256": "71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668",
+  "original_sha256": "7ffe7d97c36f1aa6ab119eb7f0c9ca70fd8eb57cbefe322e40d0c5df041be16f",
+  "publication": {
+    "status": "published",
+    "package": "467d8433-a201-4b64-b28f-7cc590d3a36c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "validation_progress": {
+    "cached_x86_x64": "PASS",
+    "compiler_function_lines": "PASS",
+    "focused_37_and_task_order": "PASS",
+    "boundary_and_governance": "PASS",
+    "full": "PASS20",
+    "git": "Accompanying commit/push required"
+  },
+  "delivery": "batch-p252-checkpoint.json;Git accompanies receipt",
+  "remaining": [
+    "Owner decision on evidenced residual boundaries"
+  ],
+  "compiler_line_evidence": "build/t483-s5-p252/line-proof.json"
+}

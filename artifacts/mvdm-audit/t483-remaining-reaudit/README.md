@@ -1675,3 +1675,9 @@ P250 [delivery receipt](batch-p250-checkpoint.json):8->6blocks,1080->392mirror d
 P251 [drawtext investigation](p251-drawtext-investigation.json):whole-file source review complete;32->20blocks,1766->935lines;final verification pending.
 
 P251 [delivery receipt](batch-p251-checkpoint.json):32->20blocks,1766->935mirror diff lines;five points restored/confirmed,three residual decisions. Cached,publish11x2,focused37/task-order and Full20 passed.
+
+P252 [getset source review](p252-getset-review.json):9->8blocks,251->237mirror diff lines. Two original declarations restored;selected statements unchanged. Five owner-boundary decisions and one original-confirmed point;compiler/batch delivery pending.
+
+P252 [help source review](p252-help-review.json):3->2blocks,46->6lines;two complete helpers restored. Batch two files -2blocks/-54lines;compiler four function lines passed,cached full running.
+
+P252 [delivery receipt](batch-p252-checkpoint.json):two files12->10blocks,297->243mirror diff lines;three restored/confirmed,eight pending boundary points. Cached,publish11x2,focused37/task-order,Full20 and governance passed.

@@ -8,13 +8,18 @@
 * History:
 * 23-May-95 BradG   Created for Kernel mode
 \***************************************************************************/
-/* DIVERGENCE(OPENNT-HOST-107): retain only GetContextHelpId; omit unrelated
- * FIsParentDude/EnumPwndDlgChildProc. Standalone host layout/binding includes
- * replace the enclosing original RTL compilation environment. */
+
 #include "wow_user_client_view_layout.h"
 #include "wow_window_client_state_bindings.h"
 #include "userrtl.h"
-#line 19
+#line 12
+BOOL FIsParentDude(PWND pwnd)
+{
+    return(TestWF(pwnd, WEFCONTROLPARENT) || TestWF(pwnd, WFDIALOGWINDOW) ||
+        ((GETFNID(pwnd) == FNID_BUTTON) &&
+         (TestWF(pwnd, BFTYPEMASK) == BS_GROUPBOX)));
+}
+
 
 /***************************************************************************\
 * GetContextHelpId()
@@ -29,8 +34,6 @@ DWORD GetContextHelpId(
 {
     DWORD  dwContextId;
 
-    /* DIVERGENCE(OPENNT-HOST-107): only the private property read changes;
-     * use the pinned observation, never re-resolve a possibly reused HWND. */
     while (!(dwContextId = wow_window_client_context_help(pwnd))) {
 #line 35
         pwnd = (TestwndChild(pwnd) ?
@@ -41,4 +44,31 @@ DWORD GetContextHelpId(
     }
 
     return dwContextId;
+}
+
+
+
+
+/*
+ * Dialog Child enumeration proc
+ *
+ * Enumerates children of a dialog looking for the child under the mouse.
+ *
+ */
+BOOL CALLBACK EnumPwndDlgChildProc(PWND pwnd, LPARAM lParam)
+{
+    PDLGENUMDATA pDlgEnumData = (PDLGENUMDATA)lParam;
+
+    if (pwnd != pDlgEnumData->pwndDialog && IsVisible(pwnd) &&
+            PtInRect(&pwnd->rcWindow, pDlgEnumData->ptCurHelp)) {
+        /*
+         * If it's a group box, keep enumerating. This takes care of
+         * the case where we have a disabled control in a group box.
+         * We'll find the group box first, and keep enumerating until we
+         * hit the disabled control.
+         */
+        pDlgEnumData->pwndControl = pwnd;
+        return (FIsParentDude(pwnd));
+    }
+    return TRUE;
 }

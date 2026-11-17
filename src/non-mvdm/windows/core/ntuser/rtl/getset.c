@@ -11,14 +11,10 @@
 * 08-Feb-1991 IanJa     Unicode/ANSI aware and neutral
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-085): complete _GetWindowLong only.
- * Original body unchanged; scoped retained WND and finite private bindings.
- * No native modern USER object-layout overlay or server import. */
 #include "precomp.h"
-#pragma hdrstop
-
-#line 15
-
+#line 14
+DWORD MapServerToClientPfn(DWORD dw, BOOL bAnsi);
+DWORD GetWindowData(PWND pwnd, int index, BOOL bAnsi);
 
 /***************************************************************************\
 * _GetWindowLong (supports GetWindowLongA/W API)
@@ -30,6 +26,7 @@
 * History:
 * 11-26-90 darrinm      Wrote.
 \***************************************************************************/
+
 #line 28
 DWORD _GetWindowLong(
     PWND pwnd,
@@ -61,7 +58,6 @@ DWORD _GetWindowLong(
                 }
 
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-                /* DIVERGENCE(OPENNT-HOST-121): public native slot, not CPD layout. */
                 return wow_dialog_host_get(HW(pwnd), index, bAnsi);
 #else
 #line 57
@@ -168,10 +164,6 @@ DWORD _GetWindowLong(
 
     if (index < 0) {
 #ifdef WOW_ORIGINAL_PRIVATE_WORD_GETTER
-        /* DIVERGENCE(OPENNT-HOST-085): production selects only private
-         * extra-word access. Its sole caller rejects negative indices;
-         * public negative access keeps its existing owner. Do not import
-         * the unused NT4 server/client-procedure mapping closure. */
         RIPERR0(ERROR_INVALID_INDEX, RIP_VERBOSE, "");
         return 0;
 #else

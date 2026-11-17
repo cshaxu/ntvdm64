@@ -1,0 +1,218 @@
+{
+  "batch": "P252",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+        "sha256": "1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+        "sha256": "71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668"
+      }
+    ],
+    "source_files": 2,
+    "deleted": []
+  },
+  "publication": {
+    "status": "published",
+    "package": "467d8433-a201-4b64-b28f-7cc590d3a36c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+        "sha256": "1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b",
+        "compiler_observed": {
+          "_GetWindowLong": 28
+        }
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+        "sha256": "71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668",
+        "compiler_observed": {
+          "FIsParentDude": 12,
+          "GetContextHelpId": 28,
+          "EnumPwndDlgChildProc": 54
+        }
+      }
+    ]
+  },
+  "focused": {
+    "cases": 37,
+    "task_order": "PASS",
+    "evidence": "build/t483-s5-p252/focused.log"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 431260,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6708,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1274,
+        "CleanupMs": 515,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13509,
+        "CleanupMs": 499,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 13694,
+        "CleanupMs": 567,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 12623,
+        "CleanupMs": 573,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 225,
+        "CleanupMs": 591,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67645,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47238,
+        "CleanupMs": 554,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 44934,
+        "CleanupMs": 528,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14761,
+        "CleanupMs": 509,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11236,
+        "CleanupMs": 459,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 62045,
+        "CleanupMs": 529,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12547,
+        "CleanupMs": 496,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28235,
+        "CleanupMs": 505,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30091,
+        "CleanupMs": 510,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3914,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7545,
+        "CleanupMs": 446,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9778,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3878,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6854,
+        "CleanupMs": 486,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20625,
+        "CleanupMs": 515,
+        "Passed": true
+      }
+    ]
+  },
+  "mirror_diff": {
+    "files": 2,
+    "before": {
+      "blocks": 12,
+      "lines": 297
+    },
+    "after": {
+      "blocks": 10,
+      "lines": 243
+    },
+    "blocks_reduced": 2,
+    "lines_reduced": 54
+  },
+  "global": {
+    "baseline": {
+      "added": 13333,
+      "deleted": 106580,
+      "total": 119913,
+      "blocks": 5297
+    },
+    "delivered": {
+      "added": 7313,
+      "deleted": 82938,
+      "total": 90251,
+      "blocks": 4881
+    },
+    "worktree": {
+      "added": 7297,
+      "deleted": 82900,
+      "total": 90197,
+      "blocks": 4879
+    }
+  },
+  "scope": "R2686-R2696;three restored/confirmed points,eight pending boundary points. Complete original declarations and two helper functions restored;no new shim or guest change.",
+  "counter_review": "Verified complete-unit restoration,original CRLF,unchanged getset executable tokens,actual compiler function lines,existing IsVisible provider and no excluded-branch alteration.",
+  "runner_note": "First restricted detached launch disappeared without result;reused successful execution context. Corrected empty cmd exit receipts caused by echo 0> stream parsing;terminal exits and logs retained.",
+  "git": "Accompanying reviewed commit/push required"
+}
