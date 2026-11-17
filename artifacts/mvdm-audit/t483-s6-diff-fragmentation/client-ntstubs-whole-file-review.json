@@ -1,0 +1,69 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "before": {
+    "blocks": 35,
+    "added": 26,
+    "deleted": 1779
+  },
+  "after": {
+    "blocks": 35,
+    "added": 25,
+    "deleted": 1778
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 2
+  },
+  "source_sha256": "aa0d284cd631c81071c1714ed7884421daaea540e75df0a8731cb67061636de8",
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "excluded_bodies": 16,
+  "mask_issues": [],
+  "change": "Restore original ntsend.h spelling;existing actual include path selects same single original provider in five product contexts",
+  "equivalence": [
+    {
+      "profile": "ntstubs",
+      "equal": true,
+      "before": "c94db07206860a322f399ae105456f8570936c92bbb61ae8f939a650415dcd77",
+      "after": "c94db07206860a322f399ae105456f8570936c92bbb61ae8f939a650415dcd77"
+    },
+    {
+      "profile": "control-text",
+      "equal": true,
+      "before": "70a7dd0a7800160b8dc4eabcd356ce730ddf20e837f3caa8409ec9685510b3f6",
+      "after": "70a7dd0a7800160b8dc4eabcd356ce730ddf20e837f3caa8409ec9685510b3f6"
+    },
+    {
+      "profile": "control-color",
+      "equal": true,
+      "before": "b83c6b9569eac918356278effbc4747ddd7c405e595e05993719c0f9aea061ca",
+      "after": "b83c6b9569eac918356278effbc4747ddd7c405e595e05993719c0f9aea061ca"
+    },
+    {
+      "profile": "control-brush-client",
+      "equal": true,
+      "before": "1af6e9d955d844c361e77a460f4bae39a6e263ba9d44856d28d2b9a5646e85ea",
+      "after": "1af6e9d955d844c361e77a460f4bae39a6e263ba9d44856d28d2b9a5646e85ea"
+    },
+    {
+      "profile": "private-word-client",
+      "equal": true,
+      "before": "f0bc909d7505db5b12921de697680608438114f267c5781a135527fc08236bbf",
+      "after": "f0bc909d7505db5b12921de697680608438114f267c5781a135527fc08236bbf"
+    }
+  ],
+  "line_check": "Only one include spelling changed;all original logical row anchors and every #error body unchanged. Existing original-map proof p234 retained;no new code movement.",
+  "unit_review": {
+    "header_and_selection": "Five production object contexts verified from actual Ninja edge flags;class,text,color,brush,dialog use distinct private declarations;no new selector or declaration shim introduced.",
+    "removed_client_apis": "Private NT4 client services rely on original server receive/probe/process/queue owners. Historical four range controls fail in each of five contexts;source chain,not compilation alone,establishes boundary.47 distinct removed NtUser call spellings inventoried.",
+    "fill_window": "Actual EDIT boundary also owns native callback context and GDI handles;thin original FillWindow does not replace wow_user_native_call_begin/end. No duplicate unused wrapper with unresolved NtUserFillWindow introduced.",
+    "dialog_setter": "Original PDLG fields/CPD identities are not real native HWND procedure slot. Actual wow_dialog_host_set uses SetWindowLongA/W.Original fallback retained for original-layout context.",
+    "window_creation": "Original14-slot NtUserCreateWindowEx is not current17-slot native binding;private message captures depend on original receive ABI.",
+    "harmless_units": "No standalone omitted declaration identified for restoration;retained original bodies/comments/order preserved. Do not restore comments in isolated islands within necessarily omitted functions."
+  },
+  "prior_evidence": "../t483-remaining-reaudit/p234-ntstubs-review.json",
+  "residuals": "Seven historical residual decisions remain pending owner,not approved;only header spelling portion restored",
+  "validation_status": "Five actual-context preprocessing comparisons identical after dropping compiler #line directives only;not a new runtime pass",
+  "delivery_status": "Final cached full,publish11x2,focused andFull20 passed;Git delivery accompanies receipt",
+  "final_delivery": "batch-p8-checkpoint.json",
+  "status": "Whole-file review and verification complete;residual pending owner"
+}

@@ -1,0 +1,42 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "before": {
+    "blocks": 35,
+    "added": 5,
+    "deleted": 4173
+  },
+  "after": {
+    "blocks": 35,
+    "added": 5,
+    "deleted": 4168
+  },
+  "source_sha256": "25063755ffb0e0dfd2a35fe1e34d1c889d6e7a1973897b5681d2289aa2c80854",
+  "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+  "reduction": {
+    "blocks": 0,
+    "lines": 5
+  },
+  "restored": [
+    "PVOID QEntryLookasideBase",
+    "PVOID QEntryLookasideBounds",
+    "#define QUEUE_ENTRIES 16",
+    "original adjacent blank lines"
+  ],
+  "necessity_correction": "Prior omission of entire allocator declaration group overreached;these three independent declarations compile with existing types and have no duplicate definition or active consumer. Restore unused harmless originals rather than inventing deletion justification.",
+  "remaining_units": {
+    "header_types": "PQ/PETHREAD/ZONE_HEADER unavailable in selected projected task binding;existing original-range compile controls prove this,without inventing kernel ABI typedefs.",
+    "compat": "Original EThread->PEB image name cannot dereference user-mode projected object;existing nonnull app-name path and one fallback substitution retained. szHex count must be WCHAR element capacity,not bytes;profile callee multiplies by WCHAR and copies result.",
+    "startup": "Original PsCreateWin32Process,EPROCESS/windowstation/shared-WOW parent ownership outside native user-mode slice.",
+    "cursor": "RIT global cursor timer and UpdateCursorImage belong to native USER;start feedback projection is explicit boundary,not full presentation equivalence.",
+    "queue_objects": "xxxCreateThreadInfo/AllocQueue/DestroyQueue and message list operations require real kernel Q,ETHREAD,desktop locks,zone and key state. Native USER owns actual queue;original ParseReserved already retained.",
+    "wait_objects": "Kernel referenced object and closed HANDLE differ;WaitOnPseudoEvent cannot be restored using opaque user HANDLE as object pointer. Native message bridge and original taskman own task wait.",
+    "csrss": "Query/SetInformationThread and ConsoleControl require caller gpepCSRSS and referenced ETHREAD;ordinary WOW DLL is not that owner."
+  },
+  "counter_review": "Independent original declarations restored,unavailable owner algorithms not replaced by new shims. No further complete independent unit identified. Existing four declarations requiring PQ/PETHREAD remain pending,not excluded with#error.",
+  "prior_evidence": "../t483-remaining-reaudit/p244-queue-in-progress.json",
+  "error_line": "All error bodies unchanged. Restored variables original logical40/41;constant51. Existing #line43/54 remain. Compiler verification pending.",
+  "status": "Whole-file review and verification complete;residual pending owner",
+  "residuals": "All remaining historical decisions remain pending owner;partial restoration is not whole-point approval",
+  "final_delivery": "batch-p8-checkpoint.json",
+  "delivery_status": "Final cached full,publish11x2,focused andFull20 passed;Git delivery accompanies receipt"
+}

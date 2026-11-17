@@ -158,3 +158,9 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [c_main whole-file review](c-main-whole-file-review.json):36->36 points,163->158 lines;P7 local final candidate,verification/delivery pending. Prior progress record is historical candidate evidence.
 
 [P7 receipt](batch-p7-checkpoint.json), [verification evidence](p7-verification-evidence.zip):c_main36->36 blocks,163->158 lines;all gates passed,residuals pending owner.
+
+[Client ntstubs whole-file review](client-ntstubs-whole-file-review.json):35->35 blocks,1805->1803 lines;five include-equivalence contexts pass;P8 verification complete,delivery accompanies receipt.
+
+[Queue whole-file review](queue-whole-file-review.json):35->35 points,4178->4173 lines;harmless original allocator declarations/constant restored. P8 verification complete,combined with client include restoration (-7 lines).
+
+[P8 receipt](batch-p8-checkpoint.json) and [evidence](p8-verification-evidence.zip):client ntstubs -2 lines and queue -5 lines,0 block change;cached full,publish11x2,focused,Full20 and governance passed. Residuals remain pending owner.

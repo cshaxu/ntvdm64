@@ -1,0 +1,215 @@
+{
+  "packet": "M0 T483 S6 P8",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+        "sha256": "aa0d284cd631c81071c1714ed7884421daaea540e75df0a8731cb67061636de8"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "sha256": "25063755ffb0e0dfd2a35fe1e34d1c889d6e7a1973897b5681d2289aa2c80854"
+      }
+    ],
+    "source_files": 2,
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 7
+  },
+  "publication": {
+    "status": "published",
+    "package": "91a237ec-2924-4e4b-b472-e1b933981346",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 410497,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6040,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1185,
+          "CleanupMs": 473,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 12464,
+          "CleanupMs": 475,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 12055,
+          "CleanupMs": 473,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10416,
+          "CleanupMs": 503,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 181,
+          "CleanupMs": 414,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66102,
+          "CleanupMs": 492,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 45504,
+          "CleanupMs": 462,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 45407,
+          "CleanupMs": 454,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14754,
+          "CleanupMs": 517,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11019,
+          "CleanupMs": 460,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 47420,
+          "CleanupMs": 570,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12666,
+          "CleanupMs": 523,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28869,
+          "CleanupMs": 451,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30996,
+          "CleanupMs": 441,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4101,
+          "CleanupMs": 517,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7857,
+          "CleanupMs": 441,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10650,
+          "CleanupMs": 432,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4095,
+          "CleanupMs": 416,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7420,
+          "CleanupMs": 409,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20211,
+          "CleanupMs": 453,
+          "Passed": true
+        }
+      ]
+    },
+    "cached": 0,
+    "message": 0,
+    "focused": 0,
+    "review": 0
+  },
+  "queue_compiler_line_mapping": {
+    "shared_selected_lines": 194,
+    "mismatches": [],
+    "restored_original_declarations": [
+      [
+        "PVOID QEntryLookasideBase;",
+        40
+      ],
+      [
+        "PVOID QEntryLookasideBounds;",
+        41
+      ]
+    ],
+    "other_selected_code_identical": true,
+    "source_sha256": "25063755ffb0e0dfd2a35fe1e34d1c889d6e7a1973897b5681d2289aa2c80854"
+  },
+  "client_include_contexts": [
+    {
+      "profile": "ntstubs",
+      "equal": true,
+      "before": "c94db07206860a322f399ae105456f8570936c92bbb61ae8f939a650415dcd77",
+      "after": "c94db07206860a322f399ae105456f8570936c92bbb61ae8f939a650415dcd77"
+    },
+    {
+      "profile": "control-text",
+      "equal": true,
+      "before": "70a7dd0a7800160b8dc4eabcd356ce730ddf20e837f3caa8409ec9685510b3f6",
+      "after": "70a7dd0a7800160b8dc4eabcd356ce730ddf20e837f3caa8409ec9685510b3f6"
+    },
+    {
+      "profile": "control-color",
+      "equal": true,
+      "before": "b83c6b9569eac918356278effbc4747ddd7c405e595e05993719c0f9aea061ca",
+      "after": "b83c6b9569eac918356278effbc4747ddd7c405e595e05993719c0f9aea061ca"
+    },
+    {
+      "profile": "control-brush-client",
+      "equal": true,
+      "before": "1af6e9d955d844c361e77a460f4bae39a6e263ba9d44856d28d2b9a5646e85ea",
+      "after": "1af6e9d955d844c361e77a460f4bae39a6e263ba9d44856d28d2b9a5646e85ea"
+    },
+    {
+      "profile": "private-word-client",
+      "equal": true,
+      "before": "f0bc909d7505db5b12921de697680608438114f267c5781a135527fc08236bbf",
+      "after": "f0bc909d7505db5b12921de697680608438114f267c5781a135527fc08236bbf"
+    }
+  ],
+  "status": "All required verification passed;Git delivery accompanies receipt"
+}

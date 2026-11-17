@@ -38,12 +38,17 @@ PW32PROCESS gpwpCalcFirst = NULL;
 #define TraceDdeMsg(m, h1, h2, c)
 #endif // DEBUG
 #line 39
+
+PVOID QEntryLookasideBase;
+PVOID QEntryLookasideBounds;
 #line 43
 #if DBG
 #error
 #line 49
 #endif // DBG
 #line 50
+
+#define QUEUE_ENTRIES 16
 #line 54
 #ifdef DEBUG
 #error

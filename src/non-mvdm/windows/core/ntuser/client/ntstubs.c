@@ -22,7 +22,7 @@
 
 #define CLIENTSIDE 1
 
-#include "../inc/ntsend.h"
+#include "ntsend.h"
 
 #line 77
 #ifdef FE_IME
