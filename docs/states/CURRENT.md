@@ -124,9 +124,14 @@ VDD registration casts gives C2440 at both original logical lines.
 Both evidenced residuals are recorded for owner decision.
 [P12 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p12-checkpoint.json).
 
-S7 progress is 101 reviewed and 112 remaining. Source restorations reduce
-21 points and 547 changed lines in S7. The current census is 2,027 non-error
-points and 28,431 changed lines across 237 mirrors with filtered differences.
+S7 P13 completes eight file reviews. It restores the original conditional
+spelling in `dpmidata.h` and removes one added blank in `nt_mem.c`.
+The selected code tokens and executable logical lines are preserved.
+[P13 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p13-checkpoint.json).
+
+S7 progress is 109 reviewed and 104 remaining. Source restorations reduce
+22 points and 550 changed lines in S7. The current census is 2,026 non-error
+points and 28,428 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

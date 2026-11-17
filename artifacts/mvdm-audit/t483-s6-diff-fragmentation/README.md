@@ -340,3 +340,7 @@ The production files retain their prior bytes and the census remains
 [S7 P12 receipt](s7-p12-checkpoint.json) records eight reviewed files and
 two VDD cast counterexamples from actual x86 compilation. Production
 source remains byte-identical to P11 and the filtered census is unchanged.
+
+[S7 P13 receipt](s7-p13-checkpoint.json) records eight reviewed files and
+two source formatting restorations. The filtered census is 2,026 points
+and 28,428 changed lines.

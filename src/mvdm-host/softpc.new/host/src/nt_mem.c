@@ -258,7 +258,6 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
         FreeIntelMemory();
         return((IU8 *) NULL);
     }
-
     /*
      * Initialise linked list with pointers to initial 1M and remaining free
      * space and store initial size of free space.

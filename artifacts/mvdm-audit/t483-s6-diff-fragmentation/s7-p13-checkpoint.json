@@ -1,0 +1,154 @@
+{
+  "packet": "M0 T483 S7 P13",
+  "prior_delivery": "1d1ad92d8",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "decision": "Keep the XMS owner include. Original selected compile without it reports two implicit-int declarations for existing VOID(void) providers; this is a compile interface discrepancy, with no reproduced runtime failure.",
+      "evidence": "../t483-remaining-reaudit/r0345-tape-xms-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "before": {
+        "blocks": 3,
+        "added": 8,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 3,
+        "added": 7,
+        "deleted": 0
+      },
+      "source_sha256": "e3fa1b2f51ff24a997059b18c0b97874d01f9aed16c768a17ad37591405ac1ab",
+      "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+      "decision": "Keep binding of the CCPU backing mapping to InitIntelMemory and FreeIntelMemory. The real WOW clock page enters through VdmAddVirtualMemory and the record is consulted by CCPU address translation. PIF memory sizing frees and recreates this backing in the same session. Remove one nonoriginal blank before the existing comment and #line 256; executable logical locations are preserved.",
+      "evidence": "../t483-remaining-reaudit/r1173-r1175-nt-mem-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "before": {
+        "blocks": 16,
+        "added": 63,
+        "deleted": 27
+      },
+      "after": {
+        "blocks": 16,
+        "added": 63,
+        "deleted": 27
+      },
+      "source_sha256": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b",
+      "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+      "decision": "Keep native HWND acquisition and inverse lookup, success-dependent ownership for the four clipboard payload conversions, and existing original OLE converter binding. Prior actual provider control identified missing native OLETHK32 WOW callbacks. Original thunk HWND casts cannot resolve independently published native windows.",
+      "evidence": "../t483-remaining-reaudit/r1824-r1843-wuclip-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "before": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "source_sha256": "59ff5502badd8e75136da1ab1b4bf69b50add4b2d11731bd2fd678f83d842cab",
+      "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+      "decision": "Keep omission of the lone _sys_errlist declaration. UCRT defines the symbol as an accessor macro; actual original declaration compile fails C2090. Original _sys_nerr declaration and diagnostic body remain.",
+      "evidence": "../t483-remaining-reaudit/r1234-r1239-nt-unix-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "before": {
+        "blocks": 4,
+        "added": 10,
+        "deleted": 25
+      },
+      "after": {
+        "blocks": 3,
+        "added": 9,
+        "deleted": 24
+      },
+      "source_sha256": "8faa539458af27c74b40771a15c62f17da670e532971825d827df851e46ae825",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "decision": "Restore the exact original i386 condition row including its trailing space. Keep original unsupported body excluded. CPU40 dispatch slot 1 must consume the protected-entry frame from unmodified DOSX; the original non-i386 alias rejects the service. The Windows SDK supplies the sole LDT_ENTRY type.",
+      "evidence": "../t483-remaining-reaudit/r0143-r0146-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd",
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "decision": "All original capture and lookaside bodies remain. Original precomp.h fails against unavailable private CSR declarations and ntos.h; ntimage.h is unavailable and unused by selected bodies. Existing two binding headers supply only the required boundary.",
+      "evidence": "../t483-remaining-reaudit/p235-rtlinit-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "before": {
+        "blocks": 3,
+        "added": 14,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 3,
+        "added": 14,
+        "deleted": 1
+      },
+      "source_sha256": "743120dd27c03fd5df08af236c428ff63afc117416bc1d642886419500bedb57",
+      "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+      "decision": "Keep original parameter map operations around the refresh boundary. Original body controls show failed refresh and simulated SEH leave the incremented reference; NULL address refresh also destroys the key. Current finally rolls back only this acquisition and retains the error result.",
+      "evidence": "../t483-remaining-reaudit/r1768-r1771-parameter-map-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "source_sha256": "c9f8117fef04f59a161f8fced9d404b7c7e7cba2e00efc49e3c373b7168a7f3c",
+      "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+      "decision": "Keep both provider declarations. Actual selected C compilation without them reports C4013 for calls to original VOID implementations; the returned value is unused, and no runtime failure is claimed.",
+      "evidence": "../t483-remaining-reaudit/r0835-r0836-ega-prts-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 109,
+    "remaining": 104,
+    "nonzero_files": 237,
+    "non_error_points": 2026,
+    "non_error_lines": 28428,
+    "source_reduction_s7": {
+      "points": 22,
+      "lines": 550
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Restored one original directive line and removed one nonoriginal blank. Selected code tokens and effective diagnostic anchors remain; six other production files remain byte-identical. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}

@@ -28,7 +28,7 @@ Revision History:
 // Defines to allow us to use a common dispatch table without having
 // to add a bunch of stub functions
 //
-#ifdef i386
+#ifdef i386 
 #line 32
 #error Excluded unsupported i386 kernel VDM DPMI state
 #else
