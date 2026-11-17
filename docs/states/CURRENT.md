@@ -55,8 +55,15 @@ graphics and input check passed in the complete run.
 | kernel/server.c | 20 → 20 | 1,535 → 1,535 | Original message initialization remains selected. Other globals and private kernel declarations conflict with the selected provider or require kernel types. |
 | dpmi32/data.c | 1 → 1 | 47 → 47 | Keep separate guest descriptor domains and the relocated IDT query. Original CCPU descriptor fetch has different paging and fault semantics. |
 
-S7 progress: 8 newly reviewed, 205 remaining. Delivered total:
-2,047 non-error blocks and 28,778 changed lines.
+S7 P2 completes eight more file reviews. The three restored directive
+comments in `userrtl.h` remove 3 non-error points and 6 changed lines.
+The corrected exclusion pairing in `nt_fulsc.c` removes another 2 points
+and 18 lines from the measurement. This correction changes no source.
+[P2 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p2-checkpoint.json).
+
+S7 progress is 16 reviewed and 197 remaining. Source restorations reduce
+6 points and 224 changed lines in S7. The current census is 2,042 non-error
+points and 28,754 changed lines across 241 mirrors with filtered differences.
 
 ## S1 Closure Record
 

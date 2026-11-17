@@ -1,0 +1,816 @@
+{
+  "packet": "M0 T483 S7 P2",
+  "prior_delivery": "69a6df684e8954dd347648806cedafac51ea424d",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "before": [
+        14,
+        68
+      ],
+      "after": [
+        12,
+        50
+      ],
+      "source_changed": false,
+      "decision": "Counting correction with exact paired #error ranges. The synthetic former runtime guards still count. Retained register transitions and original getter remain.",
+      "exclusion_pairing": {
+        "excluded": [
+          {
+            "original": [
+              26,
+              26
+            ],
+            "current": [
+              26,
+              27
+            ]
+          },
+          {
+            "original": [
+              72,
+              74
+            ],
+            "current": [
+              75,
+              76
+            ]
+          },
+          {
+            "original": [
+              78,
+              78
+            ],
+            "current": [
+              82,
+              83
+            ]
+          },
+          {
+            "original": [
+              143,
+              143
+            ],
+            "current": [
+              149,
+              150
+            ]
+          },
+          {
+            "original": [
+              160,
+              161
+            ],
+            "current": [
+              168,
+              169
+            ]
+          },
+          {
+            "original": [
+              221,
+              509
+            ],
+            "current": [
+              235,
+              236
+            ]
+          },
+          {
+            "original": [
+              617,
+              617
+            ],
+            "current": [
+              355,
+              356
+            ]
+          },
+          {
+            "original": [
+              543,
+              551
+            ],
+            "current": [
+              275,
+              276
+            ]
+          },
+          {
+            "original": [
+              676,
+              685
+            ],
+            "current": [
+              396,
+              397
+            ]
+          },
+          {
+            "original": [
+              622,
+              645
+            ],
+            "current": [
+              362,
+              363
+            ]
+          },
+          {
+            "original": [
+              700,
+              703
+            ],
+            "current": [
+              413,
+              414
+            ]
+          },
+          {
+            "original": [
+              719,
+              749
+            ],
+            "current": [
+              431,
+              432
+            ]
+          },
+          {
+            "original": [
+              790,
+              814
+            ],
+            "current": [
+              474,
+              475
+            ]
+          },
+          {
+            "original": [
+              837,
+              873
+            ],
+            "current": [
+              499,
+              500
+            ]
+          },
+          {
+            "original": [
+              879,
+              880
+            ],
+            "current": [
+              507,
+              508
+            ]
+          },
+          {
+            "original": [
+              903,
+              923
+            ],
+            "current": [
+              533,
+              534
+            ]
+          },
+          {
+            "original": [
+              927,
+              962
+            ],
+            "current": [
+              539,
+              540
+            ]
+          },
+          {
+            "original": [
+              975,
+              1203
+            ],
+            "current": [
+              555,
+              556
+            ]
+          },
+          {
+            "original": [
+              1491,
+              1552
+            ],
+            "current": [
+              617,
+              618
+            ]
+          },
+          {
+            "original": [
+              1559,
+              1560
+            ],
+            "current": [
+              626,
+              627
+            ]
+          },
+          {
+            "original": [
+              1572,
+              1572
+            ],
+            "current": [
+              643,
+              644
+            ]
+          },
+          {
+            "original": [
+              1583,
+              1586
+            ],
+            "current": [
+              656,
+              657
+            ]
+          },
+          {
+            "original": [
+              1660,
+              1763
+            ],
+            "current": [
+              733,
+              734
+            ]
+          },
+          {
+            "original": [
+              1843,
+              1844
+            ],
+            "current": [
+              815,
+              816
+            ]
+          },
+          {
+            "original": [
+              1882,
+              1900
+            ],
+            "current": [
+              857,
+              858
+            ]
+          },
+          {
+            "original": [
+              2027,
+              2027
+            ],
+            "current": [
+              1000,
+              1001
+            ]
+          },
+          {
+            "original": [
+              2095,
+              2360
+            ],
+            "current": [
+              1061,
+              1062
+            ]
+          },
+          {
+            "original": [
+              1215,
+              1403
+            ],
+            "current": [
+              569,
+              570
+            ]
+          },
+          {
+            "original": [
+              1415,
+              1463
+            ],
+            "current": [
+              587,
+              588
+            ]
+          }
+        ],
+        "opcodes": [
+          {
+            "original": [
+              [
+                202,
+                "\tif (sc.ScreenState == WINDOWED)"
+              ]
+            ],
+            "current": [
+              [
+                211,
+                "#ifdef X86GFX"
+              ],
+              [
+                213,
+                "#error Unsupported excluded original configuration"
+              ],
+              [
+                214,
+                "#endif"
+              ]
+            ]
+          },
+          {
+            "original": [
+              [
+                535,
+                "    if (sc.ScreenState == WINDOWED)"
+              ]
+            ],
+            "current": [
+              [
+                263,
+                "#ifdef X86GFX"
+              ],
+              [
+                265,
+                "#error Unsupported excluded original configuration"
+              ],
+              [
+                266,
+                "#endif"
+              ]
+            ]
+          },
+          {
+            "original": [
+              [
+                594,
+                "    if (sc.ScreenState == WINDOWED)"
+              ]
+            ],
+            "current": [
+              [
+                320,
+                "#ifdef X86GFX"
+              ],
+              [
+                322,
+                "#error Unsupported excluded original configuration"
+              ],
+              [
+                323,
+                "#endif"
+              ]
+            ]
+          },
+          {
+            "original": [],
+            "current": [
+              [
+                340,
+                "\tif (charHeight != get_char_height())"
+              ],
+              [
+                341,
+                "\t{"
+              ],
+              [
+                342,
+                "\t    extern void load_font(sys_addr, int, int, int, int);"
+              ],
+              [
+                343,
+                "\t    load_font(charHeight == 8 ? EGA_CGDDOT :"
+              ],
+              [
+                344,
+                "\t              charHeight == 14 ? EGA_CGMN : EGA_HIFONT,"
+              ],
+              [
+                345,
+                "\t              256, 0, 0, charHeight);"
+              ],
+              [
+                346,
+                "\t}"
+              ]
+            ]
+          },
+          {
+            "original": [],
+            "current": [
+              [
+                571,
+                "#endif /* X86GFX */"
+              ],
+              [
+                573,
+                ""
+              ]
+            ]
+          },
+          {
+            "original": [],
+            "current": [
+              [
+                586,
+                "#ifdef X86GFX"
+              ]
+            ]
+          },
+          {
+            "original": [
+              [
+                1878,
+                "\tto += 3;\t// skipping interleaved font planes."
+              ]
+            ],
+            "current": [
+              [
+                853,
+                "\tto += 7;\t// CHAIN2: next character is eight plane bytes away."
+              ]
+            ]
+          },
+          {
+            "original": [
+              [
+                1986,
+                "    if (sc.ScreenState == WINDOWED)"
+              ]
+            ],
+            "current": [
+              [
+                945,
+                "#ifdef X86GFX"
+              ],
+              [
+                947,
+                "#error Unsupported excluded original configuration"
+              ],
+              [
+                948,
+                "#endif"
+              ]
+            ]
+          },
+          {
+            "original": [
+              [
+                2010,
+                "    if (sc.ScreenState == WINDOWED)"
+              ]
+            ],
+            "current": [
+              [
+                973,
+                "#ifdef X86GFX"
+              ],
+              [
+                975,
+                "#error Unsupported excluded original configuration"
+              ],
+              [
+                976,
+                "#endif"
+              ]
+            ]
+          },
+          {
+            "original": [],
+            "current": [
+              [
+                991,
+                "#ifdef X86GFX"
+              ],
+              [
+                993,
+                "#error Unsupported excluded original configuration"
+              ],
+              [
+                994,
+                "#endif"
+              ]
+            ]
+          },
+          {
+            "original": [
+              [
+                2037,
+                "}"
+              ],
+              [
+                2038,
+                ""
+              ],
+              [
+                2039,
+                "VOID AddTempIVTFixups()"
+              ],
+              [
+                2040,
+                "{"
+              ],
+              [
+                2041,
+                "\t\t   /* BOP        17,   IRET */"
+              ],
+              [
+                2042,
+                "    UTINY code[] = { 0xc4, 0xc4, 0x17, 0xcf };"
+              ],
+              [
+                2043,
+                ""
+              ],
+              [
+                2044,
+                "    //location is random but should be safe until DOS is initialised!!!"
+              ],
+              [
+                2045,
+                "    sas_stores(0x40000, code, sizeof(code));\t// new Int 17 code"
+              ],
+              [
+                2046,
+                "    sas_storew(0x17*4, 0);\t\t\t// Int 17h offset"
+              ],
+              [
+                2047,
+                "    sas_storew((0x17*4) + 2, 0x4000);\t\t// Int 17h segment"
+              ]
+            ],
+            "current": []
+          },
+          {
+            "original": [
+              [
+                2410,
+                "    if (sc.ScreenState == WINDOWED)"
+              ]
+            ],
+            "current": [
+              [
+                1113,
+                "#ifdef X86GFX"
+              ],
+              [
+                1115,
+                "#error Unsupported excluded original configuration"
+              ],
+              [
+                1116,
+                "#endif"
+              ]
+            ]
+          }
+        ],
+        "added_guards": [
+          211,
+          263,
+          320,
+          945,
+          973,
+          991,
+          1113
+        ]
+      },
+      "measurement_only": true,
+      "after_detail": [
+        12,
+        32,
+        18
+      ],
+      "current_sha256": "f8e19853b3da68601daf8882f32bd506f50ec131d5e608e2dea1275a6100edd9",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "paired_error_bodies": 29,
+      "original_references": "base/mvdm/softpc.new/host/src/nt_fulsc.c"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "before": [
+        4,
+        99
+      ],
+      "after": [
+        4,
+        99
+      ],
+      "source_changed": false,
+      "decision": "Retain the selected product ProbeForRead and compatibility binding. Original ProbeForWrite control fails C2065 for PAGE_SIZE under the actual x86 production compile command.",
+      "after_detail": [
+        4,
+        2,
+        97
+      ],
+      "current_sha256": "92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "paired_error_bodies": 2,
+      "original_references": "base/ntos/ex/probe.c"
+    },
+    {
+      "path": "src/non-mvdm/base/ntdll/csrutil.c",
+      "before": [
+        7,
+        622
+      ],
+      "after": [
+        7,
+        622
+      ],
+      "source_changed": false,
+      "decision": "Three whole original capture helpers pass isolated x86/x64 compile. Candidate is 8 points and 456 lines. Hold because it splits one existing diff; the rest of the original tail fails the x64 ABI and needs private CSR support.",
+      "after_detail": [
+        7,
+        7,
+        615
+      ],
+      "current_sha256": "75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a",
+      "original_sha256": "7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a",
+      "paired_error_bodies": 0,
+      "original_references": "base/ntdll/csrutil.c",
+      "compiled_candidate": {
+        "points": 8,
+        "lines": 456,
+        "original_unit_lines": [
+          572,
+          735
+        ],
+        "objects": {
+          "x86": "398477f479ebeea30e487d6ce83aafb73a872bde72418c77ac58773eb6079131",
+          "x64": "591152860568a2dca071c1ada376e1e0d20a0d86fd70ecefc463914ef8626528"
+        }
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "before": [
+        9,
+        26
+      ],
+      "after": [
+        9,
+        26
+      ],
+      "source_changed": false,
+      "decision": "Production operand macros retain x87 second-page rights, the original transfer sizes and signed bit displacement with original effective-address wrap. Prior evidence source hash matches; three exclusions untouched.",
+      "evidence": "artifacts/mvdm-audit/t483-remaining-reaudit/r0399-r0408-operand-review.json",
+      "after_detail": [
+        9,
+        18,
+        8
+      ],
+      "current_sha256": "8a83af2254588831515340e0fb2ddcbf38ce17bc836cda439401663ec5f47ce9",
+      "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
+      "paired_error_bodies": 3,
+      "original_references": "base/mvdm/softpc.new/base/ccpu386/c_oprnd.h"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrica.h",
+      "before": [
+        1,
+        2
+      ],
+      "after": [
+        1,
+        2
+      ],
+      "source_changed": false,
+      "decision": "Keep sole explicit stdcall prototype at original line 24. Original declaration failed actual link; four /Gz conversions introduced 42 unresolved references.",
+      "evidence": "artifacts/mvdm-audit/t483-remaining-reaudit/r1264-r1265-redir-abi-review.json",
+      "after_detail": [
+        1,
+        1,
+        1
+      ],
+      "current_sha256": "12b035d868e78ccee22a945a3e369e23642d9fc4fb66b562fea05876ee1d74af",
+      "original_sha256": "b93042ce17ae454d6bff085b15d93221bc86adb1fde50620675bf41ee34d8d75",
+      "paired_error_bodies": 0,
+      "original_references": "base/mvdm/vdmredir/vrica.h"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "before": [
+        3,
+        14
+      ],
+      "after": [
+        3,
+        14
+      ],
+      "source_changed": false,
+      "decision": "Real omission controls cover production declarations and _X86_ selection. Keep the include of the existing supplied vdm.h and scoped private USER and Win16 menu bindings.",
+      "evidence": "artifacts/mvdm-audit/t483-remaining-reaudit/batch-p133-checkpoint.json",
+      "after_detail": [
+        3,
+        13,
+        1
+      ],
+      "current_sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d",
+      "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+      "paired_error_bodies": 0,
+      "original_references": "base/mvdm/wow32/precomp.h"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "before": [
+        12,
+        48
+      ],
+      "after": [
+        9,
+        42
+      ],
+      "source_changed": true,
+      "decision": "Exact original comments restored on three directives in the candidate. Line anchors, errors and token-bearing code are unchanged. Retain the private USER state and modern SDK NLS boundary.",
+      "evidence": "artifacts/mvdm-audit/t483-remaining-reaudit/p253-userrtl-review.json",
+      "restored_directives": [
+        {
+          "physical_line": 115,
+          "original_text": "#endif  // _USERK_"
+        },
+        {
+          "physical_line": 127,
+          "original_text": "#ifdef FE_SB // Prototype for FarEast Line break & NLS conversion."
+        },
+        {
+          "physical_line": 131,
+          "original_text": "#endif // FE_SB"
+        }
+      ],
+      "after_detail": [
+        9,
+        4,
+        38
+      ],
+      "current_sha256": "6b3175b55cbc4737485e9b4672a35bb916ee2b15adf1c6aeb20ef4ae668c79f3",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+      "paired_error_bodies": 10,
+      "original_references": "windows/core/ntuser/rtl/userrtl.h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "before": [
+        2,
+        18
+      ],
+      "after": [
+        2,
+        18
+      ],
+      "source_changed": false,
+      "decision": "The nested CCPU guard is local and stays counted. Restoring original ICA constants produces duplicate case 0 in c_main.c. The other six exclusions pair with original conditions.",
+      "evidence": "artifacts/mvdm-audit/t483-remaining-reaudit/ica-h-file-review.json",
+      "after_detail": [
+        2,
+        4,
+        14
+      ],
+      "current_sha256": "31e096dc998733ceb056eb3af26176051e1ca441d3160782932fefc0534761ab",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "paired_error_bodies": 6,
+      "original_references": "base/mvdm/softpc.new/base/inc/ica.h"
+    }
+  ],
+  "counts": {
+    "live_mirrors": 1050,
+    "byte_identical": 511,
+    "masked_zero": 809,
+    "with_filtered_diff": 241,
+    "s7_reviewed": 16,
+    "remaining": 197,
+    "non_error_points": 2042,
+    "non_error_changed_lines": 28754
+  },
+  "source_reduction_p2": {
+    "points": 3,
+    "lines": 6
+  },
+  "measurement_correction_p2": {
+    "points": 2,
+    "lines": 18
+  },
+  "source_reduction_s7": {
+    "points": 6,
+    "lines": 224
+  },
+  "validation": "Pinned inputs, normalized diff metric, same physical rows and tokens for the restored directive comments, and identical #error/#line directives. This format and evidence batch retains P1 package and does not rerun runtime tests.",
+  "verification": {
+    "pinned_source_and_ledger": "passed",
+    "documentation_governance": "passed",
+    "documentation_links": "passed",
+    "diff_check": "passed",
+    "product_package_in_repository": "unchanged from P1"
+  }
+}

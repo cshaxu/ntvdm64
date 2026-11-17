@@ -290,3 +290,8 @@ P20 usage ratios predate the now-retired support/xt.c.
 [P32 unused NetAPI archive retirement](apibuff-retirement.json), [receipt](batch-p32-checkpoint.json) and [verification evidence](p32-verification-evidence.zip). The live census is 1050 files, 242 nonzero, 2050 blocks and 28996 lines.
 
 [S7 P1 receipt](s7-p1-checkpoint.json) and [verification evidence](s7-p1-verification-evidence.zip) record the packstr and illegalp restorations and file-by-file audit dispositions.
+
+[S7 P2 receipt](s7-p2-checkpoint.json) records eight additional dispositions,
+the `userrtl.h` comment restoration, and the reviewed `nt_fulsc.c` mask
+override for the census. The current non-error census is 2,042 points and
+28,754 changed lines. The worklist keeps its historical rank for traceability.

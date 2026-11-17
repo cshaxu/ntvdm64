@@ -112,7 +112,7 @@ DWORD NtUserCallOneParam(
     IN DWORD xpfnProc);
 
 #line 107
-#endif /* _USERK_ */
+#endif  // _USERK_
 #line 108
 
 #line 111
@@ -124,11 +124,11 @@ VOID UserRtlFreeMem(
     PVOID pMem);
 
 #line 118
-#ifdef FE_SB
+#ifdef FE_SB // Prototype for FarEast Line break & NLS conversion.
 #line 119
 #error Excluded unsupported original FE_SB user RTL profile
 #line 129
-#endif
+#endif // FE_SB
 #line 130
 
 #line 131
