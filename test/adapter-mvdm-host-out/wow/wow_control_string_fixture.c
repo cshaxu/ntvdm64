@@ -13,6 +13,7 @@ DWORD wcsncpycch(LPWSTR, LPCWSTR, DWORD);
 LONG GetPrefixCount(LPCWSTR, int, LPWSTR, int);
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
 BOOL RtlMBMessageWParamCharToWCS(DWORD, PDWORD);
+BOOL RtlWCSMessageWParamCharToMB(DWORD, PDWORD);
 USHORT WINAPI OpenNtUserThreadCodePage(VOID);
 static int failures;
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d: %s\n", __LINE__, #x); ++failures; } } while (0)
@@ -29,12 +30,16 @@ static void message_character_contract(void)
         value = 0x4241;
         CHECK(RtlMBMessageWParamCharToWCS(messages[i], &value));
         CHECK(value == 0x00420041); /* Two characters, not only the low byte. */
+        CHECK(RtlWCSMessageWParamCharToMB(messages[i], &value));
+        CHECK(value == 0x4241); /* Original reverse path preserves both characters. */
         value = 'A';
         CHECK(RtlMBMessageWParamCharToWCS(messages[i], &value));
         CHECK(value == 'A');
     }
     value = 0xdeadbeef;
     CHECK(RtlMBMessageWParamCharToWCS(WM_USER, &value));
+    CHECK(value == 0xdeadbeef);
+    CHECK(RtlWCSMessageWParamCharToMB(WM_USER, &value));
     CHECK(value == 0xdeadbeef);
 }
 static void password_transform_boundary(void)

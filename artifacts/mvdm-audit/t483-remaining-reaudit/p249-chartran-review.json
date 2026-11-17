@@ -1,0 +1,245 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "points": "R2667-R2672",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "before": {
+    "blocks": 26,
+    "added": 27,
+    "deleted": 199
+  },
+  "after_local": {
+    "blocks": 17,
+    "added": 17,
+    "deleted": 132,
+    "total": 149
+  },
+  "restored_unit": "Original314-441,except six previously excluded branch bodies retained as#error with next original#line",
+  "original_lines_checked": 87,
+  "remaining": [
+    {
+      "point": "R2667",
+      "evidence": "Source needs UserRtlAllocMem/FreeMem and LARGE_STRING declarations;actual chartran build has only nt.h forced include;standalone header supplies original multipass LARGE_STRING declarations and host LocalAlloc/Free binding used by existing callers. Remaining include is +1 original-relative;NTDLL declaration restored.",
+      "decision": "Residual include pending owner;do not add repeated declarations to mirror or a new facade."
+    },
+    {
+      "point": "R2668",
+      "evidence": "Original user.h:GetClientInfo casts NtCurrentTeb()->Win32ClientInfo to NT4 CLIENTINFO;CodePage belongs to that private USER layout. Modern SDK TEB does not expose this field and project original client-view header explicitly represents guest NT4 layout,not native USER. Original client.c ToAsciiEx uses GetKeyboardLayout/GetLocaleInfo-style locale query,matching current provider boundary.",
+      "decision": "Retain query pending owner;do not fabricate CLIENTINFO state or access modern private TEB offsets."
+    }
+  ],
+  "status": "Whole-file source review,cached build,publish11x2,focused37/task-order,Full20,boundary/governance passed;residual two decisions pending;Git accompanies receipt",
+  "current_sha256": "ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35",
+  "selected_line_check": {
+    "matched_nonempty": 418,
+    "adaptations": [
+      {
+        "line": 16,
+        "text": "#include \"compat/include/wow_char_conversion_abi.h\""
+      },
+      {
+        "line": 20,
+        "text": "#define THREAD_CODEPAGE() OpenNtUserThreadCodePage()"
+      }
+    ]
+  },
+  "error_blocks": 15,
+  "non_error_blocks": [
+    {
+      "original_first": 16,
+      "original_last": 15,
+      "added": [
+        "#include \"compat/include/wow_char_conversion_abi.h\""
+      ],
+      "removed": []
+    },
+    {
+      "original_first": 20,
+      "original_last": 20,
+      "added": [
+        "#define THREAD_CODEPAGE() OpenNtUserThreadCodePage()"
+      ],
+      "removed": [
+        "#define THREAD_CODEPAGE() (GetClientInfo()->CodePage)"
+      ]
+    }
+  ],
+  "nls_evidence": {
+    "binary": "C:/Windows/SysWOW64/ntdll.dll",
+    "export": "NlsAnsiCodePage ordinal210 RVA0013B89C",
+    "import_library": "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x86/ntdll.lib",
+    "symbols": [
+      "_NlsAnsiCodePage",
+      "__imp__NlsAnsiCodePage"
+    ],
+    "action": "Original dllimport data declaration restored;GetACP wrapper removed;existing import definition gains DATA export"
+  },
+  "compiler_line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+        "sha256": "ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35"
+      }
+    ],
+    "compiler_observed": {
+      "WCSToMBEx": 50,
+      "MBToWCSEx": 190,
+      "RtlWCSMessageWParamCharToMB": 323,
+      "RtlMBMessageWParamCharToWCS": 442,
+      "RtlInitLargeAnsiString": 559,
+      "RtlInitLargeUnicodeString": 587
+    }
+  },
+  "publication": {
+    "status": "published",
+    "package": "d4c7b3c3-89ed-412a-80b8-9628f5e1cce4",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full_initial_attempt": {
+    "result": "not-started",
+    "reason": "Existing live broker27176 atO:/WINNT/system32/ntsrv.exe;test ownership refused",
+    "disposition": "Verified exact product paths and terminated under permanent owner authorization;retry has separate log root",
+    "evidence": "build/t483-s5-p249/full-preflight-owned-processes.json"
+  },
+  "focused": "PASS37,including restored reverse character conversion;task-order PASS;build/t483-s5-p249/focused-linked.log",
+  "newline_identity": {
+    "original": "605/605 LF bytes are CRLF",
+    "previous_commit": "504 LF-only lines",
+    "candidate": "541/541 LF bytes are CRLF",
+    "disposition": "Restores original CRLF form;Git-to-previous-commit whole-file change is newline restoration,not semantic mirror growth. Original-relative fixed metric still17 blocks149 lines."
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 400681,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3660,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1253,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13739,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 14873,
+        "CleanupMs": 427,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11089,
+        "CleanupMs": 241,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 109,
+        "CleanupMs": 254,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65984,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44411,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 40077,
+        "CleanupMs": 427,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13584,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9498,
+        "CleanupMs": 362,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53387,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12400,
+        "CleanupMs": 375,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27733,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30191,
+        "CleanupMs": 345,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3784,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7438,
+        "CleanupMs": 445,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9655,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3478,
+        "CleanupMs": 364,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6095,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19204,
+        "CleanupMs": 362,
+        "Passed": true
+      }
+    ]
+  },
+  "governance": "Final pass after restoring UTF-8 status from committed base;initial corruption failure retained in build/t483-s5-p249/review-check.log"
+}

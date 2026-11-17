@@ -34,13 +34,12 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2666 source-reviewed:995 restored/confirmed verified/published,0 local,
-52 approved/policy,1619 pending;54 unreviewed. Files353/365 verified;
-12 unaudited. P248 userk.h:mirror5294->491(-4803),blocks13->67(+54).
-Queue:mirror4438->4426(-12),blocks28->23(-5). Six points restored/confirmed.
-Cached x86/x64,publish11x2,focused37/task-order,Full20,boundary/governance passed.
-Cumulative119913->91847(-28066),5297->4904blocks(-393).
-Versus P247:4815 fewer diff lines,49 more blocks;growth remains explicit pending.
+2672 source-reviewed:999 restored/confirmed delivered,0 local,52 approved/policy,
+1621 pending;48 unreviewed. Files354/365 verified;11 unaudited.
+P249 chartran.c:mirror226->149(-77),blocks26->17(-9);four restored/confirmed points,
+two residual boundaries pending. Cached x86/x64,compiler lines,publish11x2,
+focused37/task-order,Full20,boundary/governance pass. Current91770lines/4895blocks;
+cumulative reduction28143lines/402blocks versus audit baseline.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -65,12 +64,13 @@ ntstubs experiment withdrawn;source equals delivered HEAD.
 
 ## Current Technical Baseline
 
-P248 package `316fac6d-a205-489b-82d8-e6c8041bd2ea` published11x2;hashes verified.
+P249 package `d4c7b3c3-89ed-412a-80b8-9628f5e1cce4` published11x2;hashes verified.
+Original complete Unicode-message conversion and NLS data import restored.
 Cached x86/x64,compiler lines,focused37/task-order,Full20,boundary/governance pass.
-First focused build timed out;unchanged-source cached retry passed all assertions.
-Guest/winnt.zip unchanged. Whole-file source review is not owner approval of residuals.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p248-checkpoint.json).
-Next ordered point R2667 after Git delivery.
+Full preflight ownership conflict cleared through authorized product-process cleanup;
+failed attempt retained. Status UTF-8 correction passed governance. Guest/zip unchanged.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p249-checkpoint.json).
+P248 Git:f1bf4cfa4. P249 Git accompanies receipt;next ordered point R2673.
 
 ## Remaining Scope
 

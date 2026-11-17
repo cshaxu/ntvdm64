@@ -22,13 +22,6 @@ USHORT WINAPI OpenNtUserThreadCodePage(VOID)
     return (USHORT)page;
 }
 
-USHORT WINAPI OpenNtUserNlsAnsiCodePage(VOID)
-{
-    UINT code_page = GetACP();
-
-    return code_page <= 0xffffu ? (USHORT)code_page : (USHORT)CP_ACP;
-}
-
 PVOID WINAPI OpenNtUserRtlAllocMem(SIZE_T bytes)
 {
     return LocalAlloc(LMEM_FIXED, bytes);

@@ -14,7 +14,8 @@
 \***************************************************************************/
 
 #include "compat/include/wow_char_conversion_abi.h"
-/* DIVERGENCE(OPENNT-HOST-119): current layout input, no native CLIENTINFO cast. */
+#line 16
+extern __declspec(dllimport) USHORT NlsAnsiCodePage;
 #line 17
 #ifdef _USERK_
 #line 18
@@ -295,61 +296,94 @@ int MBToWCSEx(
 }
 
 
+#line 314
+/**************************************************************************\
+* RtlWCSMessageWParmCharToMB
+*
+* Converts a Wide Character to a Multibyte character; in place
+* Returns the number of characters converted or zero if failure
+*
+* 11-Feb-1992  JohnC    Created
+\**************************************************************************/
 
-
-#line 326
+BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam)
+{
+    DWORD dwAnsi;
 #ifdef FE_SB
-#line 327
-#error Excluded unsupported original FE_SB branch
+#error
+#line 328
 #endif
-#line 329
+    NTSTATUS Status;
+    WORD CodePage = THREAD_CODEPAGE();
 
+    /*
+     * Only these messages have CHARs: others are passed through
+     */
 
-#line 337
+    switch(msg) {
 #ifdef FE_IME // RtlWCSMessageWParamCharToMB()
-#line 338
-#error Unsupported FE_IME original branch
+#error
 #line 340
 #endif // FE_IME
-#line 341
-#line 351
+    case WM_CHAR:
+    case WM_CHARTOITEM:
+    case EM_SETPASSWORDCHAR:
+    case WM_DEADCHAR:
+    case WM_SYSCHAR:
+    case WM_SYSDEADCHAR:
+    case WM_MENUCHAR:
+
+        dwAnsi = 0;
+
 #ifdef FE_SB // RtlWCSMessageWParamCharToMB()
-#line 352
-#error Excluded unsupported original FE_SB branch
+#error
 #line 362
 #else
-#line 363
-#line 364
+#define NWCH 2
 #endif // FE_SB
-#line 365
 
-#line 378
+        if (IS_ACP(CodePage)) {
+            Status = RtlUnicodeToMultiByteN((LPSTR)&dwAnsi, sizeof(dwAnsi),
+                    NULL, (LPWSTR)pWParam, NWCH * sizeof(WCHAR));
+            if (!NT_SUCCESS(Status)) {
+                // LATER IanJa: returning FALSE makes GetMessage fail, which
+                // terminates the app.  We should use some default 'bad character'
+                // I use 0x00 for now.
+                *pWParam = 0x00;
+                return TRUE;
+            }
+        } else {
+            int cwch;
 #ifdef _USERK_
-#line 379
-#error Excluded unsupported original _USERK_ branch
+#error
 #line 382
 #else
-#line 383
-#line 386
+            cwch = WideCharToMultiByte(CodePage, 0,
+                    (LPCWSTR)pWParam, NWCH,
+                    (LPSTR)&dwAnsi, sizeof(dwAnsi), NULL, NULL);
 #endif // _USERK_
-#line 387
-
-#line 393
+            // KdPrint(("0x%04x -> 0x%02x (%d)\n", *pWParam, dwAnsi, CodePage));
+            if (cwch == 0) {
+                *pWParam = 0x00;
+                return TRUE;
+            }
+        }
 #ifdef FE_SB // RtlWCSMessageWParamCharToMB()
-#line 394
-#error Excluded unsupported original FE_SB branch
+#error
 #line 416
 #else
-#line 418
+        // LATER!!!; in product 2 handle DBCS correctly.
 #ifdef DEBUG
-#line 419
-#error Excluded unsupported original DEBUG branch
+#error
 #line 422
 #endif
-#line 423
-#line 424
+        *pWParam = dwAnsi;
 #endif // FE_SB
-#line 425
+        break;
+    }
+
+    return TRUE;
+}
 
 
 /**************************************************************************\
@@ -361,6 +395,7 @@ int MBToWCSEx(
 * 11-Feb-1992  JohnC    Created
 * 13-Jan-1993  IanJa    Translate 2 characters (Publisher posts these!)
 \**************************************************************************/
+
 #line 442
 BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 {
@@ -454,6 +489,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 *
 * 03-22-95 JimA         Created.
 \**************************************************************************/
+
 #line 559
 VOID RtlInitLargeAnsiString(
     PLARGE_ANSI_STRING plstr,
@@ -482,6 +518,7 @@ VOID RtlInitLargeAnsiString(
 *
 * 03-22-95 JimA         Created.
 \**************************************************************************/
+
 #line 587
 VOID RtlInitLargeUnicodeString(
     PLARGE_UNICODE_STRING plstr,

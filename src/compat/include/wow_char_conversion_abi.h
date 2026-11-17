@@ -12,12 +12,10 @@
 #include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 
-USHORT WINAPI OpenNtUserNlsAnsiCodePage(VOID);
 USHORT WINAPI OpenNtUserThreadCodePage(VOID);
 PVOID WINAPI OpenNtUserRtlAllocMem(SIZE_T bytes);
 VOID WINAPI OpenNtUserRtlFreeMem(PVOID value);
 
-#define NlsAnsiCodePage OpenNtUserNlsAnsiCodePage()
 #define UserRtlAllocMem OpenNtUserRtlAllocMem
 #define UserRtlFreeMem OpenNtUserRtlFreeMem
 

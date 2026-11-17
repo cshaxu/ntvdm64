@@ -1663,3 +1663,7 @@ Candidate316fac6d-a205-489b-82d8-e6c8041bd2ea published11x2,hashes verified.
 Focused and Full acceptance,Git delivery remain pending;not a closure claim.
 
 P248 userk.h and coupled queue restoration: [receipt](batch-p248-checkpoint.json);cached build,publish11x2,focused37/task-order and Full20 passed. Batch diff lines -4815,blocks +49;residual decisions and growth remain explicit pending.
+
+P249 chartran.c: [whole-file source review](p249-chartran-review.json);original conversion unit and NLS data import restored;two residual boundaries pending,validation not yet complete.
+
+P249 [delivery receipt](batch-p249-checkpoint.json):26->17blocks,226->149mirror diff lines;four points restored/confirmed,two residual decisions. Cached build,publish11x2,focused37/task-order and Full20 passed.

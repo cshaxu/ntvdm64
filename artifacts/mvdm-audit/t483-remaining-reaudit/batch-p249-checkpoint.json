@@ -1,0 +1,221 @@
+{
+  "batch": "P249",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+        "sha256": "ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35"
+      },
+      {
+        "path": "src/compat/include/wow_char_conversion_abi.h",
+        "sha256": "404c310cf50872df9a8379d92bbfed1b7c3619ed1940d04996f12b16aadd1b8a"
+      },
+      {
+        "path": "src/wow32-dll/source/ntuser_rtl_compat.c",
+        "sha256": "6ccf31b3bbe8387fea9a71a8e364e9a455af5985f7320e3931951fb931bdfc2d"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "40546e62fdac6327dfa4290ac82ab78bdff852868577b92c8a14ddf58f4e2265"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_control_string_fixture.c",
+        "sha256": "324084d6252c323611acaf82ce98db651bc317ee10605cad7795aa46e2f1565a"
+      }
+    ],
+    "source_files": 5,
+    "deleted": []
+  },
+  "publication": {
+    "status": "published",
+    "package": "d4c7b3c3-89ed-412a-80b8-9628f5e1cce4",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+        "sha256": "ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35"
+      }
+    ],
+    "compiler_observed": {
+      "WCSToMBEx": 50,
+      "MBToWCSEx": 190,
+      "RtlWCSMessageWParamCharToMB": 323,
+      "RtlMBMessageWParamCharToWCS": 442,
+      "RtlInitLargeAnsiString": 559,
+      "RtlInitLargeUnicodeString": 587
+    }
+  },
+  "focused": "PASS37,including restored reverse character conversion;task-order PASS;build/t483-s5-p249/focused-linked.log",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 400681,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3660,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1253,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13739,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 14873,
+        "CleanupMs": 427,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11089,
+        "CleanupMs": 241,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 109,
+        "CleanupMs": 254,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65984,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44411,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 40077,
+        "CleanupMs": 427,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13584,
+        "CleanupMs": 408,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9498,
+        "CleanupMs": 362,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53387,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12400,
+        "CleanupMs": 375,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27733,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30191,
+        "CleanupMs": 345,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3784,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7438,
+        "CleanupMs": 445,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9655,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3478,
+        "CleanupMs": 364,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6095,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19204,
+        "CleanupMs": 362,
+        "Passed": true
+      }
+    ]
+  },
+  "mirror_diff": {
+    "before": {
+      "blocks": 26,
+      "lines": 226
+    },
+    "after": {
+      "blocks": 17,
+      "lines": 149
+    },
+    "blocks_reduced": 9,
+    "lines_reduced": 77,
+    "error_bearing_blocks": 15,
+    "non_error_blocks": 2
+  },
+  "global": {
+    "baseline": {
+      "added": 13333,
+      "deleted": 106580,
+      "total": 119913,
+      "blocks": 5297
+    },
+    "delivered": {
+      "added": 7357,
+      "deleted": 84490,
+      "blocks": 4904,
+      "total": 91847
+    },
+    "worktree": {
+      "added": 7347,
+      "deleted": 84423,
+      "total": 91770,
+      "blocks": 4895
+    }
+  },
+  "scope": "R2667-R2672;four restored/confirmed points,two partial restorations with residual owner decisions. Original function and native NLS data import restored;no guest change.",
+  "git": "Accompanying commit and push required"
+}

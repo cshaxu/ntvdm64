@@ -1,0 +1,8059 @@
+{
+  "scope": "Fixed 365 remaining-reaudit files;not the entire 1052-file mirror census",
+  "baseline": "4cf4e5a35546249a003387a3a7df79037e6985ac",
+  "head": "f1bf4cfa467c63fe331d1ebbfdf75e67aa84a20c",
+  "metric": "Pinned original;latin1;CRLF normalized;terminal empty line retained;candidate #line excluded;SequenceMatcher autojunk=False;#error included",
+  "register_points": 2720,
+  "totals": {
+    "baseline": {
+      "added": 13333,
+      "deleted": 106580,
+      "total": 119913,
+      "blocks": 5297
+    },
+    "delivered": {
+      "added": 7357,
+      "deleted": 84490,
+      "blocks": 4904,
+      "total": 91847
+    },
+    "worktree": {
+      "added": 7347,
+      "deleted": 84423,
+      "total": 91770,
+      "blocks": 4895
+    }
+  },
+  "files": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "baseline": {
+        "added": 36,
+        "deleted": 352,
+        "total": 388,
+        "blocks": 36
+      },
+      "delivered": {
+        "added": 36,
+        "deleted": 352,
+        "total": 388,
+        "blocks": 36
+      },
+      "worktree": {
+        "added": 36,
+        "deleted": 352,
+        "total": 388,
+        "blocks": 36
+      },
+      "worktree_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "baseline": {
+        "added": 9,
+        "deleted": 28,
+        "total": 37,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 9,
+        "deleted": 24,
+        "total": 33,
+        "blocks": 9
+      },
+      "worktree": {
+        "added": 9,
+        "deleted": 24,
+        "total": 33,
+        "blocks": 9
+      },
+      "worktree_sha256": "120e96fbde998abf320ca677e8a33846d8c35f7a43fafdaae7ae169ac13a1452"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "baseline": {
+        "added": 10,
+        "deleted": 3,
+        "total": 13,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 3,
+        "total": 13,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 3,
+        "total": 13,
+        "blocks": 4
+      },
+      "worktree_sha256": "6862008d8ee625ebd3b1c734b9493411414382f71b5d8c9ddf341fbac5c90aab"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "baseline": {
+        "added": 0,
+        "deleted": 3,
+        "total": 3,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "baseline": {
+        "added": 24,
+        "deleted": 1,
+        "total": 25,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "70983be18d1ee9f37950755f11845a46e284bcc4051a8ce983500fe0cdbd7bc3"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "baseline": {
+        "added": 176,
+        "deleted": 79,
+        "total": 255,
+        "blocks": 41
+      },
+      "delivered": {
+        "added": 101,
+        "deleted": 22,
+        "total": 123,
+        "blocks": 24
+      },
+      "worktree": {
+        "added": 101,
+        "deleted": 22,
+        "total": 123,
+        "blocks": 24
+      },
+      "worktree_sha256": "159e827469d1c5fe06eba380e8fdd51d12f11fb35ec98fb1565e67d585b95854"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 1,
+        "total": 4,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 1,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 1,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree_sha256": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "baseline": {
+        "added": 227,
+        "deleted": 92,
+        "total": 319,
+        "blocks": 30
+      },
+      "delivered": {
+        "added": 53,
+        "deleted": 63,
+        "total": 116,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 53,
+        "deleted": 63,
+        "total": 116,
+        "blocks": 11
+      },
+      "worktree_sha256": "dbda6b348870d058edfdff547b0a876e952acd436b3b43e1c8257bed63eb261c"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 1,
+        "total": 6,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "baseline": {
+        "added": 14,
+        "deleted": 2,
+        "total": 16,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "baseline": {
+        "added": 9,
+        "deleted": 8,
+        "total": 17,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 8,
+        "total": 12,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 8,
+        "total": 12,
+        "blocks": 4
+      },
+      "worktree_sha256": "e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "baseline": {
+        "added": 19,
+        "deleted": 19,
+        "total": 38,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 16,
+        "total": 26,
+        "blocks": 10
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 16,
+        "total": 26,
+        "blocks": 10
+      },
+      "worktree_sha256": "9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.h",
+      "baseline": {
+        "added": 4,
+        "deleted": 1,
+        "total": 5,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "de5bd5e437c17a34af71999e6e6e7c0e749d9d9da61bc5cc8420c0406e1a2c35"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdata.c",
+      "baseline": {
+        "added": 8,
+        "deleted": 3,
+        "total": 11,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "3245d8d20e080e77b657a780ee752ee3578cbbea1199e9c378c7003921a9e22f"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "baseline": {
+        "added": 17,
+        "deleted": 98,
+        "total": 115,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 96,
+        "total": 100,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 96,
+        "total": 100,
+        "blocks": 4
+      },
+      "worktree_sha256": "dea773aec3be59a16ed8d9e3cc0febb07b4ddcb0ff174431bbc3fe6def85e3fd"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfcb.c",
+      "baseline": {
+        "added": 24,
+        "deleted": 6,
+        "total": 30,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "baseline": {
+        "added": 67,
+        "deleted": 38,
+        "total": 105,
+        "blocks": 18
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 24,
+        "total": 30,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 24,
+        "total": 30,
+        "blocks": 6
+      },
+      "worktree_sha256": "128da4b626b661731a5a230696d18bfb75ecf9a2aefa4dc635a6309001c14824"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "baseline": {
+        "added": 39,
+        "deleted": 11,
+        "total": 50,
+        "blocks": 10
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 1,
+        "total": 7,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 1,
+        "total": 7,
+        "blocks": 3
+      },
+      "worktree_sha256": "35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "baseline": {
+        "added": 53,
+        "deleted": 37,
+        "total": 90,
+        "blocks": 16
+      },
+      "delivered": {
+        "added": 34,
+        "deleted": 35,
+        "total": 69,
+        "blocks": 14
+      },
+      "worktree": {
+        "added": 34,
+        "deleted": 35,
+        "total": 69,
+        "blocks": 14
+      },
+      "worktree_sha256": "ac47089e2cd2f60b9509d3eb1ab84f8c52bb65a68be896206c9cc6ae0549f902"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmisc.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 8,
+        "total": 14,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree_sha256": "4b8e9992445025633f5aa49139c0c48705371c9d29ea207bf26e97d555b87e12"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "baseline": {
+        "added": 79,
+        "deleted": 64,
+        "total": 143,
+        "blocks": 28
+      },
+      "delivered": {
+        "added": 39,
+        "deleted": 57,
+        "total": 96,
+        "blocks": 19
+      },
+      "worktree": {
+        "added": 39,
+        "deleted": 57,
+        "total": 96,
+        "blocks": 19
+      },
+      "worktree_sha256": "314f9ccb35e63eecf06451bfb84964b08d9094f16234bc5f9fe98eccd779f6e1"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "baseline": {
+        "added": 57,
+        "deleted": 2,
+        "total": 59,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 48,
+        "deleted": 2,
+        "total": 50,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 48,
+        "deleted": 2,
+        "total": 50,
+        "blocks": 2
+      },
+      "worktree_sha256": "55f67e81cde1c395bfb1c3733b1b9ed87ee5db8122ac86333df61895907e2d35"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "baseline": {
+        "added": 40,
+        "deleted": 5,
+        "total": 45,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 36,
+        "deleted": 5,
+        "total": 41,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 36,
+        "deleted": 5,
+        "total": 41,
+        "blocks": 4
+      },
+      "worktree_sha256": "5f0702d00a7f5c603db8d9bcf49145b3d3b4dac79a3a8226c15b652e550e1e15"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "baseline": {
+        "added": 22,
+        "deleted": 15,
+        "total": 37,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 14,
+        "deleted": 15,
+        "total": 29,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 14,
+        "deleted": 15,
+        "total": 29,
+        "blocks": 4
+      },
+      "worktree_sha256": "6213f844c816a919ae6ec1bccaf1c0a178070efe219574eeab58701c706b8e36"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "baseline": {
+        "added": 22,
+        "deleted": 38,
+        "total": 60,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 12,
+        "deleted": 38,
+        "total": 50,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 12,
+        "deleted": 38,
+        "total": 50,
+        "blocks": 5
+      },
+      "worktree_sha256": "8fe20c3a4f9acb6cdbcfcf9470d151d269af6cd3c16dd691659f2e09530d0a5c"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "baseline": {
+        "added": 310,
+        "deleted": 108,
+        "total": 418,
+        "blocks": 47
+      },
+      "delivered": {
+        "added": 200,
+        "deleted": 128,
+        "total": 328,
+        "blocks": 49
+      },
+      "worktree": {
+        "added": 200,
+        "deleted": 128,
+        "total": 328,
+        "blocks": 49
+      },
+      "worktree_sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimscr.c",
+      "baseline": {
+        "added": 10,
+        "deleted": 0,
+        "total": 10,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "41494b9f44e53863d31527ca082dfc286f34e2b4cace556baf501274d3eba061"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "baseline": {
+        "added": 115,
+        "deleted": 11,
+        "total": 126,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 17,
+        "deleted": 11,
+        "total": 28,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 17,
+        "deleted": 11,
+        "total": 28,
+        "blocks": 5
+      },
+      "worktree_sha256": "1aabde58162f2c6d5f3252d500b842c47b2e4fb12353ea1cfa099a82cef68d76"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "baseline": {
+        "added": 63,
+        "deleted": 96,
+        "total": 159,
+        "blocks": 31
+      },
+      "delivered": {
+        "added": 43,
+        "deleted": 96,
+        "total": 139,
+        "blocks": 30
+      },
+      "worktree": {
+        "added": 43,
+        "deleted": 96,
+        "total": 139,
+        "blocks": 30
+      },
+      "worktree_sha256": "cab0302a375381a69124e9c5e108622e69e5226071e11f625cbf8e7dfa8dca9b"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "baseline": {
+        "added": 192,
+        "deleted": 10,
+        "total": 202,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 30,
+        "deleted": 10,
+        "total": 40,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 30,
+        "deleted": 10,
+        "total": 40,
+        "blocks": 8
+      },
+      "worktree_sha256": "401d13ac2ec3e9705c45cfa857916e15cff1ec19897bd893356ca4fc78ec7f97"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/sources",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "5e88950101f309fd999f42bd613e33cb4daf9a83ffee083f0bb4d84b161b3506"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "baseline": {
+        "added": 8,
+        "deleted": 7,
+        "total": 15,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 6,
+        "total": 12,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 6,
+        "total": 12,
+        "blocks": 6
+      },
+      "worktree_sha256": "ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "baseline": {
+        "added": 18,
+        "deleted": 314,
+        "total": 332,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 33,
+        "deleted": 232,
+        "total": 265,
+        "blocks": 15
+      },
+      "worktree": {
+        "added": 33,
+        "deleted": 232,
+        "total": 265,
+        "blocks": 15
+      },
+      "worktree_sha256": "e6e31737a2b8378a62bd5f429ebaadecc76c31621c20ef7ed1700b12b1dfdedf"
+    },
+    {
+      "path": "src/mvdm-host/inc/dbgexp.h",
+      "baseline": {
+        "added": 6,
+        "deleted": 3,
+        "total": 9,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree_sha256": "dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2"
+    },
+    {
+      "path": "src/mvdm-host/inc/demexp.h",
+      "baseline": {
+        "added": 6,
+        "deleted": 3,
+        "total": 9,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree_sha256": "e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788"
+    },
+    {
+      "path": "src/mvdm-host/inc/makefile",
+      "baseline": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "22619f4bdd9be2f377ab919997527aa9797dfdb0e10d5082ebf424cddf7280d9"
+    },
+    {
+      "path": "src/mvdm-host/inc/memapi.h",
+      "baseline": {
+        "added": 8,
+        "deleted": 5,
+        "total": 13,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 5,
+        "total": 10,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 5,
+        "total": 10,
+        "blocks": 5
+      },
+      "worktree_sha256": "26515fc97789f77e6e1632d3d3c19e810ade63539650de1b7dcbf6056688d546"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "baseline": {
+        "added": 9,
+        "deleted": 18,
+        "total": 27,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 17,
+        "total": 24,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 17,
+        "total": 24,
+        "blocks": 5
+      },
+      "worktree_sha256": "24db8a244bbbd4880e7c18fff338c33659d28864f04ce3efd2b4810925a05f0f"
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "baseline": {
+        "added": 42,
+        "deleted": 336,
+        "total": 378,
+        "blocks": 16
+      },
+      "delivered": {
+        "added": 37,
+        "deleted": 336,
+        "total": 373,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 37,
+        "deleted": 336,
+        "total": 373,
+        "blocks": 13
+      },
+      "worktree_sha256": "90414e65ce628b379ac9bbf8051307839eaae61f802924dcac4b47b9d70b0aeb"
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "baseline": {
+        "added": 5,
+        "deleted": 0,
+        "total": 5,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "d18350215388f68a97817da37acb9df032c47074f0fb3354c2e212166a37058c"
+    },
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "baseline": {
+        "added": 11,
+        "deleted": 3,
+        "total": 14,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 2
+      },
+      "worktree_sha256": "4f93fc169d83f72b1e193aef8759fc47d9511ded5f5be899164743644b905eea"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "baseline": {
+        "added": 10,
+        "deleted": 21,
+        "total": 31,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 20,
+        "total": 27,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 20,
+        "total": 27,
+        "blocks": 7
+      },
+      "worktree_sha256": "1a44a3a9de28ce28f05a42be0540f21610c57453c901c977711310c87692576f"
+    },
+    {
+      "path": "src/mvdm-host/oemuni/file.c",
+      "baseline": {
+        "added": 41,
+        "deleted": 12,
+        "total": 53,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 26,
+        "deleted": 11,
+        "total": 37,
+        "blocks": 12
+      },
+      "worktree": {
+        "added": 26,
+        "deleted": 11,
+        "total": 37,
+        "blocks": 12
+      },
+      "worktree_sha256": "d8557d2b6b4b9aafb99736570288a3a800108c94c0e8e73c48600324c801698a"
+    },
+    {
+      "path": "src/mvdm-host/oemuni/process.c",
+      "baseline": {
+        "added": 153,
+        "deleted": 237,
+        "total": 390,
+        "blocks": 50
+      },
+      "delivered": {
+        "added": 121,
+        "deleted": 236,
+        "total": 357,
+        "blocks": 48
+      },
+      "worktree": {
+        "added": 121,
+        "deleted": 236,
+        "total": 357,
+        "blocks": 48
+      },
+      "worktree_sha256": "11ed9917bce4b87fedf03dba69958cfa719e61bbf923823f92eef13a614b2782"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "baseline": {
+        "added": 74,
+        "deleted": 369,
+        "total": 443,
+        "blocks": 55
+      },
+      "delivered": {
+        "added": 74,
+        "deleted": 369,
+        "total": 443,
+        "blocks": 55
+      },
+      "worktree": {
+        "added": 74,
+        "deleted": 369,
+        "total": 443,
+        "blocks": 55
+      },
+      "worktree_sha256": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "baseline": {
+        "added": 44,
+        "deleted": 384,
+        "total": 428,
+        "blocks": 40
+      },
+      "delivered": {
+        "added": 44,
+        "deleted": 384,
+        "total": 428,
+        "blocks": 40
+      },
+      "worktree": {
+        "added": 44,
+        "deleted": 384,
+        "total": 428,
+        "blocks": 40
+      },
+      "worktree_sha256": "408dfbee8fb31878424df9a20a24e6a69847d006eedb6e948d93872c387c9ac8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 9,
+        "total": 14,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 8,
+        "total": 11,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 8,
+        "total": 11,
+        "blocks": 3
+      },
+      "worktree_sha256": "c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "baseline": {
+        "added": 15,
+        "deleted": 46,
+        "total": 61,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 13,
+        "deleted": 46,
+        "total": 59,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 13,
+        "deleted": 46,
+        "total": 59,
+        "blocks": 13
+      },
+      "worktree_sha256": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "baseline": {
+        "added": 58,
+        "deleted": 3,
+        "total": 61,
+        "blocks": 10
+      },
+      "delivered": {
+        "added": 25,
+        "deleted": 3,
+        "total": 28,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 25,
+        "deleted": 3,
+        "total": 28,
+        "blocks": 8
+      },
+      "worktree_sha256": "aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 0,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 0,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree_sha256": "c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 0,
+        "total": 3,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 0,
+        "total": 3,
+        "blocks": 3
+      },
+      "worktree_sha256": "b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 0,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 0,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree_sha256": "66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "baseline": {
+        "added": 269,
+        "deleted": 563,
+        "total": 832,
+        "blocks": 112
+      },
+      "delivered": {
+        "added": 208,
+        "deleted": 561,
+        "total": 769,
+        "blocks": 111
+      },
+      "worktree": {
+        "added": 208,
+        "deleted": 561,
+        "total": 769,
+        "blocks": 111
+      },
+      "worktree_sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "baseline": {
+        "added": 26,
+        "deleted": 14,
+        "total": 40,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 21,
+        "deleted": 14,
+        "total": 35,
+        "blocks": 12
+      },
+      "worktree": {
+        "added": 21,
+        "deleted": 14,
+        "total": 35,
+        "blocks": 12
+      },
+      "worktree_sha256": "8a83af2254588831515340e0fb2ddcbf38ce17bc836cda439401663ec5f47ce9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 180,
+        "total": 186,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 180,
+        "total": 182,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 180,
+        "total": 182,
+        "blocks": 2
+      },
+      "worktree_sha256": "5bc1871b2dd550072d29865103bc38c9f608a11348bb37a956cdc10de11b8f88"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "baseline": {
+        "added": 8,
+        "deleted": 122,
+        "total": 130,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 122,
+        "total": 126,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 122,
+        "total": 126,
+        "blocks": 4
+      },
+      "worktree_sha256": "1d6fc134b08a768a4146c8cf6c25e7526eed878cec95a1c8e597e34b62a2b1a4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "baseline": {
+        "added": 24,
+        "deleted": 3,
+        "total": 27,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 11,
+        "deleted": 3,
+        "total": 14,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 11,
+        "deleted": 3,
+        "total": 14,
+        "blocks": 4
+      },
+      "worktree_sha256": "983bcd1de050928237f211ea391b5e4d9f5191a7a1ed04e60f23e79f93e2a51b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "baseline": {
+        "added": 29,
+        "deleted": 167,
+        "total": 196,
+        "blocks": 15
+      },
+      "delivered": {
+        "added": 11,
+        "deleted": 166,
+        "total": 177,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 11,
+        "deleted": 166,
+        "total": 177,
+        "blocks": 11
+      },
+      "worktree_sha256": "75fdba51e67f65f2d4eb46ab38682856000635d6e5a15d83bb1cfb32cbfe360c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 9,
+        "total": 15,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 9,
+        "total": 14,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 9,
+        "total": 14,
+        "blocks": 5
+      },
+      "worktree_sha256": "a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "baseline": {
+        "added": 32,
+        "deleted": 30,
+        "total": 62,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 23,
+        "deleted": 16,
+        "total": 39,
+        "blocks": 20
+      },
+      "worktree": {
+        "added": 23,
+        "deleted": 16,
+        "total": 39,
+        "blocks": 20
+      },
+      "worktree_sha256": "c5844ce336dee9f1c1a3a42baa78ea8fd31f27439538e89cab4b66e4820697ed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 20,
+        "total": 23,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 20,
+        "total": 22,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 20,
+        "total": 22,
+        "blocks": 2
+      },
+      "worktree_sha256": "c2d760ddcc93a440a89af32f4994bae227e7532571217576048c376e403150f7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 2,
+        "total": 8,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "a547b3f45e7ed95abffedc23e73203045d81f5fb8ab8ab466d8ae8bfd09ff669"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "baseline": {
+        "added": 47,
+        "deleted": 33,
+        "total": 80,
+        "blocks": 10
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 30,
+        "total": 37,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 30,
+        "total": 37,
+        "blocks": 7
+      },
+      "worktree_sha256": "4053cf58e9c439bdcc74611d31bbddcc21a24884b1eb8d0df9f9595127e202ae"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "5aeaaa72f958ef891628c267ee4849a0203c25af0fbe67b3fdc890b75dfb3fd8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "baseline": {
+        "added": 38,
+        "deleted": 59,
+        "total": 97,
+        "blocks": 23
+      },
+      "delivered": {
+        "added": 27,
+        "deleted": 59,
+        "total": 86,
+        "blocks": 23
+      },
+      "worktree": {
+        "added": 27,
+        "deleted": 59,
+        "total": 86,
+        "blocks": 23
+      },
+      "worktree_sha256": "b035518e1bd3b9d4884516d2af18e2fcbbc7cfbb40517e9b308e48fd1841c1d7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "baseline": {
+        "added": 234,
+        "deleted": 1562,
+        "total": 1796,
+        "blocks": 228
+      },
+      "delivered": {
+        "added": 215,
+        "deleted": 1549,
+        "total": 1764,
+        "blocks": 215
+      },
+      "worktree": {
+        "added": 215,
+        "deleted": 1549,
+        "total": 1764,
+        "blocks": 215
+      },
+      "worktree_sha256": "1a21caf7f22b7271e4be6df6cb23a891fd8af6d31998a593692551a0e7fb6055"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "baseline": {
+        "added": 17,
+        "deleted": 48,
+        "total": 65,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 44,
+        "total": 52,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 44,
+        "total": 52,
+        "blocks": 7
+      },
+      "worktree_sha256": "6e4b42a75cfa9aeef551b83ac147b6199d059abb5d6cddedce29e77be2f978b0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 6,
+        "total": 8,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 6,
+        "total": 8,
+        "blocks": 2
+      },
+      "worktree_sha256": "22a4c8ea19036b35388a5286a992bbd63b19ecfa05157cd71f075f73546c382b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 3,
+        "total": 10,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 2
+      },
+      "worktree_sha256": "d18bbac0667a59b7a1acd040a8e925482f7145d185e00048a3d059def1e26984"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+      "baseline": {
+        "added": 23,
+        "deleted": 2,
+        "total": 25,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 32,
+        "deleted": 0,
+        "total": 32,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 32,
+        "deleted": 0,
+        "total": 32,
+        "blocks": 6
+      },
+      "worktree_sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 0,
+        "total": 3,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 0,
+        "total": 3,
+        "blocks": 2
+      },
+      "worktree_sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "66c4fcaf0f3329dc6d7021a0ad8ba910fa775e84d63ad35404ee2a3134dd46c3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 6,
+        "total": 8,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 6,
+        "total": 8,
+        "blocks": 2
+      },
+      "worktree_sha256": "033ed0ac65d26a9ec5105fdf6ebb1992eb635080d463bb975a2dc16a178b7cc6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 1,
+        "total": 6,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sources",
+      "baseline": {
+        "added": 0,
+        "deleted": 1,
+        "total": 1,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 1,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 1,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree_sha256": "7f87b0cff6f41a59084e736b906e6f2457f7580dfc2cdf98682d8855a13f4432"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "baseline": {
+        "added": 8,
+        "deleted": 15,
+        "total": 23,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 13,
+        "total": 15,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 13,
+        "total": 15,
+        "blocks": 2
+      },
+      "worktree_sha256": "d574ec80aa660373212d12f1859534ffe78911665491f1caa47cd8e9359a9f85"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "de75d67c7168f04ae82715b4dd56663093589d3fdd36bd828c6267bd6d041a6d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "baseline": {
+        "added": 54,
+        "deleted": 3,
+        "total": 57,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 26,
+        "deleted": 2,
+        "total": 28,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 26,
+        "deleted": 2,
+        "total": 28,
+        "blocks": 5
+      },
+      "worktree_sha256": "c40447aff97b367b132a2be29b09356252723079ae98e8fff4c20dd72231eb7e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.h",
+      "baseline": {
+        "added": 13,
+        "deleted": 17,
+        "total": 30,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "31efdd4784c2b796f14965e4a7177595aec0924b8bf0a7950e6b6197c3f394d3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "baseline": {
+        "added": 7,
+        "deleted": 0,
+        "total": 7,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 4
+      },
+      "worktree_sha256": "83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "f8e31bc5d63f810f73da165084a5a498a8261e48ff20daf7efdc1393216f2f48"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "baseline": {
+        "added": 3,
+        "deleted": 5,
+        "total": 8,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree_sha256": "6d6f8e99e437c8dcc7cde9afd3e215bd6f85c0f9d1076ddcb853ef4de9be7e80"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+      "baseline": {
+        "added": 80,
+        "deleted": 80,
+        "total": 160,
+        "blocks": 70
+      },
+      "delivered": {
+        "added": 66,
+        "deleted": 66,
+        "total": 132,
+        "blocks": 64
+      },
+      "worktree": {
+        "added": 66,
+        "deleted": 66,
+        "total": 132,
+        "blocks": 64
+      },
+      "worktree_sha256": "208ca0085de613aeb8beb33f6e20b7e006df89b93a9462b6ab25929b80f15278"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+      "baseline": {
+        "added": 37,
+        "deleted": 37,
+        "total": 74,
+        "blocks": 33
+      },
+      "delivered": {
+        "added": 25,
+        "deleted": 25,
+        "total": 50,
+        "blocks": 25
+      },
+      "worktree": {
+        "added": 25,
+        "deleted": 25,
+        "total": 50,
+        "blocks": 25
+      },
+      "worktree_sha256": "2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid004.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree_sha256": "b239bbed52f17d86e5a21a86f1cdac71c98363f4495a8c699efa46d421d17da2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 6,
+        "total": 12,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 6,
+        "total": 12,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 6,
+        "total": 12,
+        "blocks": 4
+      },
+      "worktree_sha256": "636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+      "baseline": {
+        "added": 18,
+        "deleted": 18,
+        "total": 36,
+        "blocks": 11
+      },
+      "delivered": {
+        "added": 18,
+        "deleted": 18,
+        "total": 36,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 18,
+        "deleted": 18,
+        "total": 36,
+        "blocks": 11
+      },
+      "worktree_sha256": "178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+      "baseline": {
+        "added": 16,
+        "deleted": 16,
+        "total": 32,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 16,
+        "deleted": 16,
+        "total": 32,
+        "blocks": 9
+      },
+      "worktree": {
+        "added": 16,
+        "deleted": 16,
+        "total": 32,
+        "blocks": 9
+      },
+      "worktree_sha256": "571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+      "baseline": {
+        "added": 77,
+        "deleted": 69,
+        "total": 146,
+        "blocks": 49
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree_sha256": "c763b216c1caef24611efb43faa133423d47a193bf700a870e99ec0c2c125f6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid020.c",
+      "baseline": {
+        "added": 22,
+        "deleted": 22,
+        "total": 44,
+        "blocks": 16
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "54c1f06723e0811f896e57bb414836d4f98446292cbf86f546c11e105260c3b3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "baseline": {
+        "added": 31,
+        "deleted": 356,
+        "total": 387,
+        "blocks": 27
+      },
+      "delivered": {
+        "added": 26,
+        "deleted": 355,
+        "total": 381,
+        "blocks": 25
+      },
+      "worktree": {
+        "added": 26,
+        "deleted": 355,
+        "total": 381,
+        "blocks": 25
+      },
+      "worktree_sha256": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ckmalloc.h",
+      "baseline": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "9f05409d3a7414620614b1b4c0f050b0ec2a81dfb792a0f3ced264a684804f3f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "baseline": {
+        "added": 15,
+        "deleted": 17,
+        "total": 32,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 9,
+        "deleted": 14,
+        "total": 23,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 9,
+        "deleted": 14,
+        "total": 23,
+        "blocks": 5
+      },
+      "worktree_sha256": "69b40895ba5dc74e008e28363d991a765bbbe1110ca6282ae418472779321984"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "baseline": {
+        "added": 16,
+        "deleted": 133,
+        "total": 149,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 132,
+        "total": 139,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 132,
+        "total": 139,
+        "blocks": 5
+      },
+      "worktree_sha256": "6f5294aa77cda5216b7378fa1d84f2a8040a3a440279dbd398648268f02fe0bb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 415,
+        "total": 417,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 415,
+        "total": 416,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 415,
+        "total": 416,
+        "blocks": 1
+      },
+      "worktree_sha256": "0a62769272b358c3b577d7247cca718e8c8a0ccc993b60beafaeefc3bfbb1cf4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "baseline": {
+        "added": 12,
+        "deleted": 9,
+        "total": 21,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 4,
+        "total": 7,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 4,
+        "total": 7,
+        "blocks": 3
+      },
+      "worktree_sha256": "7dd7c1e0dc8f82004358cd132b0cb4217f79c24118d8c1dd682d6d39e1a841ea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "baseline": {
+        "added": 14,
+        "deleted": 21,
+        "total": 35,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 14,
+        "total": 20,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 14,
+        "total": 20,
+        "blocks": 4
+      },
+      "worktree_sha256": "34fc10d6c02b7cd3a2c609dc793ef6373f29604933940b92f9b67cf750dfeb21"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "baseline": {
+        "added": 8,
+        "deleted": 36,
+        "total": 44,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 36,
+        "total": 43,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 36,
+        "total": 43,
+        "blocks": 7
+      },
+      "worktree_sha256": "10e0a5f9639787bdbc7f7937c42b51d09056f1b6fabb13a895b90a3814365e89"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "baseline": {
+        "added": 7,
+        "deleted": 9,
+        "total": 16,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 8,
+        "total": 11,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 8,
+        "total": 11,
+        "blocks": 3
+      },
+      "worktree_sha256": "6e6713cd491e58e42a721e2fad5ba3b6231488eaf39815c5ce83c28c90d67d87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "baseline": {
+        "added": 14,
+        "deleted": 123,
+        "total": 137,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 123,
+        "total": 133,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 123,
+        "total": 133,
+        "blocks": 8
+      },
+      "worktree_sha256": "31e096dc998733ceb056eb3af26176051e1ca441d3160782932fefc0534761ab"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "baseline": {
+        "added": 15,
+        "deleted": 28,
+        "total": 43,
+        "blocks": 11
+      },
+      "delivered": {
+        "added": 13,
+        "deleted": 28,
+        "total": 41,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 13,
+        "deleted": 28,
+        "total": 41,
+        "blocks": 11
+      },
+      "worktree_sha256": "626208b777a1b33c072a76d4f9026244b0d5f11b38b51909283586f2bb02887b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "baseline": {
+        "added": 17,
+        "deleted": 471,
+        "total": 488,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 470,
+        "total": 480,
+        "blocks": 10
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 470,
+        "total": 480,
+        "blocks": 10
+      },
+      "worktree_sha256": "c82e004edf4be6f26a7c5bf5ce78af88172540c9c5c40f688c59055dd945ef26"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "baseline": {
+        "added": 3,
+        "deleted": 14,
+        "total": 17,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 14,
+        "total": 17,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 14,
+        "total": 17,
+        "blocks": 3
+      },
+      "worktree_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "baseline": {
+        "added": 8,
+        "deleted": 1033,
+        "total": 1041,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 1033,
+        "total": 1041,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 1033,
+        "total": 1041,
+        "blocks": 8
+      },
+      "worktree_sha256": "0e1cb38308754edacca018ab297daf76794a35b4d6a8d33af4c765cade710156"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "baseline": {
+        "added": 195,
+        "deleted": 766,
+        "total": 961,
+        "blocks": 100
+      },
+      "delivered": {
+        "added": 134,
+        "deleted": 766,
+        "total": 900,
+        "blocks": 93
+      },
+      "worktree": {
+        "added": 134,
+        "deleted": 766,
+        "total": 900,
+        "blocks": 93
+      },
+      "worktree_sha256": "a9ad670c2d5c026d1f4af57d906d798ec23b7d9d1020dc0e2c57c321525fae70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "baseline": {
+        "added": 40,
+        "deleted": 469,
+        "total": 509,
+        "blocks": 29
+      },
+      "delivered": {
+        "added": 31,
+        "deleted": 469,
+        "total": 500,
+        "blocks": 29
+      },
+      "worktree": {
+        "added": 31,
+        "deleted": 469,
+        "total": 500,
+        "blocks": 29
+      },
+      "worktree_sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "baseline": {
+        "added": 264,
+        "deleted": 996,
+        "total": 1260,
+        "blocks": 140
+      },
+      "delivered": {
+        "added": 191,
+        "deleted": 952,
+        "total": 1143,
+        "blocks": 125
+      },
+      "worktree": {
+        "added": 191,
+        "deleted": 952,
+        "total": 1143,
+        "blocks": 125
+      },
+      "worktree_sha256": "9a77ed941309cb36ca22ca705f14d366d725456744f228d35cde586ce29ef4e2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "baseline": {
+        "added": 29,
+        "deleted": 83,
+        "total": 112,
+        "blocks": 26
+      },
+      "delivered": {
+        "added": 27,
+        "deleted": 82,
+        "total": 109,
+        "blocks": 25
+      },
+      "worktree": {
+        "added": 27,
+        "deleted": 82,
+        "total": 109,
+        "blocks": 25
+      },
+      "worktree_sha256": "9a3e1bde1aab4dae562720da1fcef95a85ee6e2e17bccfe1055417b731033eff"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "baseline": {
+        "added": 44,
+        "deleted": 83,
+        "total": 127,
+        "blocks": 30
+      },
+      "delivered": {
+        "added": 30,
+        "deleted": 82,
+        "total": 112,
+        "blocks": 28
+      },
+      "worktree": {
+        "added": 30,
+        "deleted": 82,
+        "total": 112,
+        "blocks": 28
+      },
+      "worktree_sha256": "f5bb86d7fada1b989786beb80b506b44a66b88767bb67b1afb693f8792877dea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "baseline": {
+        "added": 19,
+        "deleted": 24,
+        "total": 43,
+        "blocks": 16
+      },
+      "delivered": {
+        "added": 16,
+        "deleted": 24,
+        "total": 40,
+        "blocks": 16
+      },
+      "worktree": {
+        "added": 16,
+        "deleted": 24,
+        "total": 40,
+        "blocks": 16
+      },
+      "worktree_sha256": "005c813035553aa01a906ec80303e57b509789dfca59add23d38bcc2948f5664"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "baseline": {
+        "added": 24,
+        "deleted": 512,
+        "total": 536,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 512,
+        "total": 522,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 512,
+        "total": 522,
+        "blocks": 5
+      },
+      "worktree_sha256": "97985ab274b50e7fe91ecc42383a217b5bfc4d4ea48800ccf0047af8ff79ac24"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "baseline": {
+        "added": 93,
+        "deleted": 911,
+        "total": 1004,
+        "blocks": 76
+      },
+      "delivered": {
+        "added": 86,
+        "deleted": 911,
+        "total": 997,
+        "blocks": 76
+      },
+      "worktree": {
+        "added": 86,
+        "deleted": 911,
+        "total": 997,
+        "blocks": 76
+      },
+      "worktree_sha256": "6ccbdd1c1a00457fff9d236321f69b80d87fc2abe88bc31eb8f64617247e2304"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "baseline": {
+        "added": 13,
+        "deleted": 99,
+        "total": 112,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 12,
+        "deleted": 99,
+        "total": 111,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 12,
+        "deleted": 99,
+        "total": 111,
+        "blocks": 13
+      },
+      "worktree_sha256": "a54e261d0e1649c48e5219b8a63b76effd024627ac769d38c59801f5732b881a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "baseline": {
+        "added": 40,
+        "deleted": 272,
+        "total": 312,
+        "blocks": 21
+      },
+      "delivered": {
+        "added": 36,
+        "deleted": 270,
+        "total": 306,
+        "blocks": 20
+      },
+      "worktree": {
+        "added": 36,
+        "deleted": 270,
+        "total": 306,
+        "blocks": 20
+      },
+      "worktree_sha256": "d164721c7f16202e31409963cb1758a8ca9f11d7a26826088820ba2e7dcc85e0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "baseline": {
+        "added": 24,
+        "deleted": 614,
+        "total": 638,
+        "blocks": 22
+      },
+      "delivered": {
+        "added": 22,
+        "deleted": 614,
+        "total": 636,
+        "blocks": 22
+      },
+      "worktree": {
+        "added": 22,
+        "deleted": 614,
+        "total": 636,
+        "blocks": 22
+      },
+      "worktree_sha256": "c9f8117fef04f59a161f8fced9d404b7c7e7cba2e00efc49e3c373b7168a7f3c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "baseline": {
+        "added": 114,
+        "deleted": 333,
+        "total": 447,
+        "blocks": 30
+      },
+      "delivered": {
+        "added": 110,
+        "deleted": 333,
+        "total": 443,
+        "blocks": 30
+      },
+      "worktree": {
+        "added": 110,
+        "deleted": 333,
+        "total": 443,
+        "blocks": 30
+      },
+      "worktree_sha256": "f21775fefd79782e792bf430b651cf4f49defcf538d9b5a33c29196da6f142cb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "baseline": {
+        "added": 62,
+        "deleted": 246,
+        "total": 308,
+        "blocks": 43
+      },
+      "delivered": {
+        "added": 57,
+        "deleted": 244,
+        "total": 301,
+        "blocks": 41
+      },
+      "worktree": {
+        "added": 57,
+        "deleted": 244,
+        "total": 301,
+        "blocks": 41
+      },
+      "worktree_sha256": "6852d6f38de18e87ab96481f6f1b370e7e1b0e1c33984179f77b30b8e4271e0d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "baseline": {
+        "added": 61,
+        "deleted": 304,
+        "total": 365,
+        "blocks": 52
+      },
+      "delivered": {
+        "added": 48,
+        "deleted": 296,
+        "total": 344,
+        "blocks": 50
+      },
+      "worktree": {
+        "added": 48,
+        "deleted": 296,
+        "total": 344,
+        "blocks": 50
+      },
+      "worktree_sha256": "af61cd179ed3a251f43a4db257ea13737061e7ff449dab12f2974f324b373366"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "baseline": {
+        "added": 41,
+        "deleted": 532,
+        "total": 573,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 30,
+        "deleted": 532,
+        "total": 562,
+        "blocks": 12
+      },
+      "worktree": {
+        "added": 30,
+        "deleted": 532,
+        "total": 562,
+        "blocks": 12
+      },
+      "worktree_sha256": "5044e92f636b864b54922ad5b2339d4c8c1e026f0d0697655ee3e730571c595d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "baseline": {
+        "added": 53,
+        "deleted": 556,
+        "total": 609,
+        "blocks": 20
+      },
+      "delivered": {
+        "added": 42,
+        "deleted": 556,
+        "total": 598,
+        "blocks": 19
+      },
+      "worktree": {
+        "added": 42,
+        "deleted": 556,
+        "total": 598,
+        "blocks": 19
+      },
+      "worktree_sha256": "ba364e0597af92f8530214a8f43479e9d141c4e8579d0a78c15ab9d0dee037d3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "baseline": {
+        "added": 178,
+        "deleted": 1043,
+        "total": 1221,
+        "blocks": 136
+      },
+      "delivered": {
+        "added": 128,
+        "deleted": 1001,
+        "total": 1129,
+        "blocks": 117
+      },
+      "worktree": {
+        "added": 128,
+        "deleted": 1001,
+        "total": 1129,
+        "blocks": 117
+      },
+      "worktree_sha256": "d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 8,
+        "total": 13,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 8,
+        "total": 11,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 8,
+        "total": 11,
+        "blocks": 3
+      },
+      "worktree_sha256": "4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "baseline": {
+        "added": 16,
+        "deleted": 13,
+        "total": 29,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 11,
+        "total": 19,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 11,
+        "total": 19,
+        "blocks": 6
+      },
+      "worktree_sha256": "e2854333cd759430c3104208152a362d79f824d3fb2157b48a5a652cbef38427"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "baseline": {
+        "added": 34,
+        "deleted": 85,
+        "total": 119,
+        "blocks": 29
+      },
+      "delivered": {
+        "added": 29,
+        "deleted": 85,
+        "total": 114,
+        "blocks": 29
+      },
+      "worktree": {
+        "added": 29,
+        "deleted": 85,
+        "total": 114,
+        "blocks": 29
+      },
+      "worktree_sha256": "120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "baseline": {
+        "added": 47,
+        "deleted": 449,
+        "total": 496,
+        "blocks": 38
+      },
+      "delivered": {
+        "added": 38,
+        "deleted": 440,
+        "total": 478,
+        "blocks": 36
+      },
+      "worktree": {
+        "added": 38,
+        "deleted": 440,
+        "total": 478,
+        "blocks": 36
+      },
+      "worktree_sha256": "09d340437223c9b7593cc2ed7ef40dd5b530be98c42335e8719d2d5b441d4502"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "baseline": {
+        "added": 103,
+        "deleted": 286,
+        "total": 389,
+        "blocks": 76
+      },
+      "delivered": {
+        "added": 95,
+        "deleted": 284,
+        "total": 379,
+        "blocks": 73
+      },
+      "worktree": {
+        "added": 95,
+        "deleted": 284,
+        "total": 379,
+        "blocks": 73
+      },
+      "worktree_sha256": "a8becf7361d53ebe329b4cf1fbcc3069b94967bf16ff451c37aa4b951017c110"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "baseline": {
+        "added": 41,
+        "deleted": 50,
+        "total": 91,
+        "blocks": 17
+      },
+      "delivered": {
+        "added": 38,
+        "deleted": 50,
+        "total": 88,
+        "blocks": 16
+      },
+      "worktree": {
+        "added": 38,
+        "deleted": 50,
+        "total": 88,
+        "blocks": 16
+      },
+      "worktree_sha256": "71d576e975b49379a2cad1cfc0f6a82579a2e81b4e096222363a70147cfb1535"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "baseline": {
+        "added": 31,
+        "deleted": 424,
+        "total": 455,
+        "blocks": 11
+      },
+      "delivered": {
+        "added": 13,
+        "deleted": 183,
+        "total": 196,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 13,
+        "deleted": 183,
+        "total": 196,
+        "blocks": 11
+      },
+      "worktree_sha256": "f1e5de5a5b037b67da9b8b8a6e405f2549dd49f0f5491a912c3630328f3a536c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "baseline": {
+        "added": 24,
+        "deleted": 4,
+        "total": 28,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 4,
+        "total": 11,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 4,
+        "total": 11,
+        "blocks": 4
+      },
+      "worktree_sha256": "71b0afcd5906ef2dddac4ca2fa546aa4ceedd8302d097fb62ab71ee0b4b1254e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 219,
+        "total": 221,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 219,
+        "total": 221,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 219,
+        "total": 221,
+        "blocks": 2
+      },
+      "worktree_sha256": "6d734877e3226e675435255fffc2eeabe2358916953d55175778853a23a61970"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree_sha256": "a9edb2008fb5fecabac890520195a4c6ddd2c8ccf156edf606a1875a1933366f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fdisk.h",
+      "baseline": {
+        "added": 0,
+        "deleted": 1,
+        "total": 1,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "d681eb7fc45dedcc5501cb43516a8e9d1c7d94d6f70ebbf72517364134fe1c87"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "baseline": {
+        "added": 22,
+        "deleted": 385,
+        "total": 407,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 17,
+        "deleted": 384,
+        "total": 401,
+        "blocks": 17
+      },
+      "worktree": {
+        "added": 17,
+        "deleted": 384,
+        "total": 401,
+        "blocks": 17
+      },
+      "worktree_sha256": "7debece9647e74d74aca69be379a8e97810452b3a34c8e9f69b8942e693d329c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 32,
+        "total": 38,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 30,
+        "total": 36,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 30,
+        "total": 36,
+        "blocks": 6
+      },
+      "worktree_sha256": "a5d17a7e5d2d48fe58dbe0e265a9c1291bc14076aa8c5fa858a641c0edc51660"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "baseline": {
+        "added": 109,
+        "deleted": 124,
+        "total": 233,
+        "blocks": 43
+      },
+      "delivered": {
+        "added": 49,
+        "deleted": 124,
+        "total": 173,
+        "blocks": 41
+      },
+      "worktree": {
+        "added": 49,
+        "deleted": 124,
+        "total": 173,
+        "blocks": 41
+      },
+      "worktree_sha256": "2f4fb290be2e0e5967aa370189bf77dfe74d60a07698da391db7ecae7265b321"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "baseline": {
+        "added": 19,
+        "deleted": 315,
+        "total": 334,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 19,
+        "deleted": 300,
+        "total": 319,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 19,
+        "deleted": 300,
+        "total": 319,
+        "blocks": 13
+      },
+      "worktree_sha256": "3007cc09956a602dfc27460e615bdd77f934bff57ed09576f3ed26a7180e6bc7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "baseline": {
+        "added": 69,
+        "deleted": 119,
+        "total": 188,
+        "blocks": 29
+      },
+      "delivered": {
+        "added": 23,
+        "deleted": 95,
+        "total": 118,
+        "blocks": 17
+      },
+      "worktree": {
+        "added": 23,
+        "deleted": 95,
+        "total": 118,
+        "blocks": 17
+      },
+      "worktree_sha256": "84f296121ff4113db0b9ea39a17dde187e7c7c9fbfaa4e4f219f2447f99003f6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "baseline": {
+        "added": 105,
+        "deleted": 26,
+        "total": 131,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 66,
+        "deleted": 26,
+        "total": 92,
+        "blocks": 12
+      },
+      "worktree": {
+        "added": 66,
+        "deleted": 26,
+        "total": 92,
+        "blocks": 12
+      },
+      "worktree_sha256": "84e0daa501996dfc43f0492ec3f1dc1a014fc6c1b1ebed84c9e177e7262336d8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "baseline": {
+        "added": 13,
+        "deleted": 85,
+        "total": 98,
+        "blocks": 10
+      },
+      "delivered": {
+        "added": 13,
+        "deleted": 85,
+        "total": 98,
+        "blocks": 10
+      },
+      "worktree": {
+        "added": 13,
+        "deleted": 85,
+        "total": 98,
+        "blocks": 10
+      },
+      "worktree_sha256": "a5c144ad5d99806af6ed57b5cfb6aad92bc4e3474bc83f8be74942abc69be29d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "baseline": {
+        "added": 22,
+        "deleted": 30,
+        "total": 52,
+        "blocks": 14
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 24,
+        "total": 32,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 24,
+        "total": 32,
+        "blocks": 8
+      },
+      "worktree_sha256": "23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "baseline": {
+        "added": 158,
+        "deleted": 95,
+        "total": 253,
+        "blocks": 57
+      },
+      "delivered": {
+        "added": 94,
+        "deleted": 93,
+        "total": 187,
+        "blocks": 55
+      },
+      "worktree": {
+        "added": 94,
+        "deleted": 93,
+        "total": 187,
+        "blocks": 55
+      },
+      "worktree_sha256": "596636a5d61295fe3ff8d2ce8d407576dc0d0f81117439a3e3675d72ef44c337"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "baseline": {
+        "added": 32,
+        "deleted": 8,
+        "total": 40,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "baseline": {
+        "added": 55,
+        "deleted": 1445,
+        "total": 1500,
+        "blocks": 38
+      },
+      "delivered": {
+        "added": 60,
+        "deleted": 1442,
+        "total": 1502,
+        "blocks": 39
+      },
+      "worktree": {
+        "added": 60,
+        "deleted": 1442,
+        "total": 1502,
+        "blocks": 39
+      },
+      "worktree_sha256": "f8e19853b3da68601daf8882f32bd506f50ec131d5e608e2dea1275a6100edd9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "baseline": {
+        "added": 157,
+        "deleted": 172,
+        "total": 329,
+        "blocks": 45
+      },
+      "delivered": {
+        "added": 94,
+        "deleted": 168,
+        "total": 262,
+        "blocks": 40
+      },
+      "worktree": {
+        "added": 94,
+        "deleted": 168,
+        "total": 262,
+        "blocks": 40
+      },
+      "worktree_sha256": "a996a56fdb41b3dcc651d8283d84987f42b19c6f98b028428ef4404844b98c03"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "baseline": {
+        "added": 33,
+        "deleted": 53,
+        "total": 86,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 51,
+        "total": 56,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 51,
+        "total": 56,
+        "blocks": 5
+      },
+      "worktree_sha256": "a1f23673515b408894109ed5367821bb50f77bc156a643cea997798da9865aa7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "baseline": {
+        "added": 323,
+        "deleted": 15,
+        "total": 338,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 15,
+        "total": 22,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 15,
+        "total": 22,
+        "blocks": 7
+      },
+      "worktree_sha256": "0792f971d765eb9523ed73620ebfdcac710704db01cfad6601f65b60b9bf8542"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree_sha256": "eee7e08dd0bc4b094907d176b465d0cbb29fabf61dc9dcf0954fb88fe72fa794"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "baseline": {
+        "added": 40,
+        "deleted": 105,
+        "total": 145,
+        "blocks": 30
+      },
+      "delivered": {
+        "added": 34,
+        "deleted": 105,
+        "total": 139,
+        "blocks": 29
+      },
+      "worktree": {
+        "added": 34,
+        "deleted": 105,
+        "total": 139,
+        "blocks": 29
+      },
+      "worktree_sha256": "c3998fba15a90d4cbf3f66b20fdf37daf6a33c0dae52503b55bb91facef6266b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "baseline": {
+        "added": 55,
+        "deleted": 661,
+        "total": 716,
+        "blocks": 26
+      },
+      "delivered": {
+        "added": 41,
+        "deleted": 657,
+        "total": 698,
+        "blocks": 23
+      },
+      "worktree": {
+        "added": 41,
+        "deleted": 657,
+        "total": 698,
+        "blocks": 23
+      },
+      "worktree_sha256": "361a27377098703c97ce1a0a67cc7fc4683285bec8a5171e2ae81641ba94b9c1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "baseline": {
+        "added": 55,
+        "deleted": 116,
+        "total": 171,
+        "blocks": 21
+      },
+      "delivered": {
+        "added": 25,
+        "deleted": 104,
+        "total": 129,
+        "blocks": 14
+      },
+      "worktree": {
+        "added": 25,
+        "deleted": 104,
+        "total": 129,
+        "blocks": 14
+      },
+      "worktree_sha256": "97989e20250ea2e3b97e6321316d7104e8d8fd3de1e8fa8713b76031740234cf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+      "baseline": {
+        "added": 23,
+        "deleted": 8,
+        "total": 31,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 6,
+        "total": 14,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 6,
+        "total": 14,
+        "blocks": 5
+      },
+      "worktree_sha256": "94bba68ddaa77ceac7fe5eef585e439f9b4b05b69829866488efd0913e63731a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "baseline": {
+        "added": 32,
+        "deleted": 83,
+        "total": 115,
+        "blocks": 16
+      },
+      "delivered": {
+        "added": 19,
+        "deleted": 80,
+        "total": 99,
+        "blocks": 14
+      },
+      "worktree": {
+        "added": 19,
+        "deleted": 80,
+        "total": 99,
+        "blocks": 14
+      },
+      "worktree_sha256": "c5de0f587bad56710c42094f0e337a7195f508fb03e9cca5670ee1abb051f887"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "baseline": {
+        "added": 12,
+        "deleted": 3,
+        "total": 15,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 1,
+        "total": 5,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 1,
+        "total": 5,
+        "blocks": 2
+      },
+      "worktree_sha256": "2448aec8c1645a93f237cfeb394227a12d1c1c4306d25a1c26516fc2c782806c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "baseline": {
+        "added": 89,
+        "deleted": 313,
+        "total": 402,
+        "blocks": 55
+      },
+      "delivered": {
+        "added": 38,
+        "deleted": 301,
+        "total": 339,
+        "blocks": 38
+      },
+      "worktree": {
+        "added": 38,
+        "deleted": 301,
+        "total": 339,
+        "blocks": 38
+      },
+      "worktree_sha256": "b969ec4e1d4501472b0a5ca281222673eea78cf067130cc0f2087c8c68f40507"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 1,
+        "total": 4,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "4f34340926f9fb942befeb2c8051765e8cda7750e3f514a8960f4d0f900ab0ec"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "baseline": {
+        "added": 8,
+        "deleted": 2,
+        "total": 10,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree_sha256": "fe4b7fcd886663109de83b204ad89cd57b5630d2ccd1c13933babbe4aef9e381"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "baseline": {
+        "added": 23,
+        "deleted": 86,
+        "total": 109,
+        "blocks": 15
+      },
+      "delivered": {
+        "added": 12,
+        "deleted": 84,
+        "total": 96,
+        "blocks": 12
+      },
+      "worktree": {
+        "added": 12,
+        "deleted": 84,
+        "total": 96,
+        "blocks": 12
+      },
+      "worktree_sha256": "aa57ec5d0d77585bc0fbce0235b9f4cd9cb2ca8d2f21682d0680497db6b27f99"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "baseline": {
+        "added": 30,
+        "deleted": 70,
+        "total": 100,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 27,
+        "total": 29,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 27,
+        "total": 29,
+        "blocks": 3
+      },
+      "worktree_sha256": "59ff5502badd8e75136da1ab1b4bf69b50add4b2d11731bd2fd678f83d842cab"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "baseline": {
+        "added": 13,
+        "deleted": 553,
+        "total": 566,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 11,
+        "deleted": 553,
+        "total": 564,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 11,
+        "deleted": 553,
+        "total": 564,
+        "blocks": 5
+      },
+      "worktree_sha256": "e02b45a17b7ae8c171a880c2dc4df3d87e478126a2b8ce1c479667e17b96e03e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "baseline": {
+        "added": 30,
+        "deleted": 121,
+        "total": 151,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 18,
+        "deleted": 108,
+        "total": 126,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 18,
+        "deleted": 108,
+        "total": 126,
+        "blocks": 13
+      },
+      "worktree_sha256": "fdccb451d0a5c9c3002139249ee02c6ada70d06aefbaf8cd3f423fc61eaf3981"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sources",
+      "baseline": {
+        "added": 1,
+        "deleted": 2,
+        "total": 3,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 1,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 1,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree_sha256": "d98e4e87d136d13c385f1ac8c1bcda6766dd708ce2dffd1c833bb3fb9f014771"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "baseline": {
+        "added": 11,
+        "deleted": 269,
+        "total": 280,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 268,
+        "total": 276,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 268,
+        "total": 276,
+        "blocks": 8
+      },
+      "worktree_sha256": "283a7d60ca1e0279a884d8e1b2380f43fd9ced8f763fb28d4a9e9528da3b14c8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "baseline": {
+        "added": 24,
+        "deleted": 12,
+        "total": 36,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 15,
+        "deleted": 12,
+        "total": 27,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 15,
+        "deleted": 12,
+        "total": 27,
+        "blocks": 8
+      },
+      "worktree_sha256": "406863948f5e8c06d9da183622d691f68313abdfeaa7fb99af4fc7b772a0c200"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/sources",
+      "baseline": {
+        "added": 4,
+        "deleted": 1,
+        "total": 5,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "03ef1b5edc1b0443c3dde5a0562a8bd5e07ec83ee35b35735a1272bd00fd67b0"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/sources",
+      "baseline": {
+        "added": 0,
+        "deleted": 3,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "50d324042a3423752201374d694725b9077f74bd3aa2d46c9f6713cfa857a237"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "8da33b50d26bf86d1c7bdf22548338f8ec7912fae26705962a00e1bd6b668f52"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 54,
+        "total": 60,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 54,
+        "total": 60,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 54,
+        "total": 60,
+        "blocks": 6
+      },
+      "worktree_sha256": "e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 23,
+        "total": 30,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 23,
+        "total": 30,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 23,
+        "total": 30,
+        "blocks": 7
+      },
+      "worktree_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree_sha256": "205baabd2d10ebeeb49a016c78634b7a4931c4ba961b009cd47cde0c1d53ebff"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "baseline": {
+        "added": 19,
+        "deleted": 145,
+        "total": 164,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 19,
+        "deleted": 145,
+        "total": 164,
+        "blocks": 19
+      },
+      "worktree": {
+        "added": 19,
+        "deleted": 145,
+        "total": 164,
+        "blocks": 19
+      },
+      "worktree_sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 67,
+        "total": 70,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 67,
+        "total": 70,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 67,
+        "total": 70,
+        "blocks": 3
+      },
+      "worktree_sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrica.h",
+      "baseline": {
+        "added": 3,
+        "deleted": 1,
+        "total": 4,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "12b035d868e78ccee22a945a3e369e23642d9fc4fb66b562fea05876ee1d74af"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree_sha256": "a2e4878558786715e56bda92357c5e1db94cef2949c1b0879bed44f1e7807866"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree_sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "baseline": {
+        "added": 36,
+        "deleted": 179,
+        "total": 215,
+        "blocks": 36
+      },
+      "delivered": {
+        "added": 36,
+        "deleted": 179,
+        "total": 215,
+        "blocks": 36
+      },
+      "worktree": {
+        "added": 36,
+        "deleted": 179,
+        "total": 215,
+        "blocks": 36
+      },
+      "worktree_sha256": "9fe36a96396cdc776db8b58e0b5c189104f030f733163052566ec09c0015c726"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "baseline": {
+        "added": 125,
+        "deleted": 689,
+        "total": 814,
+        "blocks": 75
+      },
+      "delivered": {
+        "added": 99,
+        "deleted": 648,
+        "total": 747,
+        "blocks": 79
+      },
+      "worktree": {
+        "added": 99,
+        "deleted": 648,
+        "total": 747,
+        "blocks": 79
+      },
+      "worktree_sha256": "2a329bee7eac3b511b967a82c3cbdf7b6fad9bec1eb48c9f8e0b67f7100599eb"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 30,
+        "total": 34,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 30,
+        "total": 34,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 30,
+        "total": 34,
+        "blocks": 4
+      },
+      "worktree_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "baseline": {
+        "added": 138,
+        "deleted": 547,
+        "total": 685,
+        "blocks": 96
+      },
+      "delivered": {
+        "added": 102,
+        "deleted": 544,
+        "total": 646,
+        "blocks": 89
+      },
+      "worktree": {
+        "added": 102,
+        "deleted": 544,
+        "total": 646,
+        "blocks": 89
+      },
+      "worktree_sha256": "a83b99a6f2021f9b86db1947301983f5f908fdeae915b950d56fa20f0dc7d108"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "ca92d822cc6626218ae76b957dac963711e9895c36072781a4c691e53c0b91a8"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "baseline": {
+        "added": 23,
+        "deleted": 20,
+        "total": 43,
+        "blocks": 11
+      },
+      "delivered": {
+        "added": 18,
+        "deleted": 16,
+        "total": 34,
+        "blocks": 10
+      },
+      "worktree": {
+        "added": 18,
+        "deleted": 16,
+        "total": 34,
+        "blocks": 10
+      },
+      "worktree_sha256": "e85a1f718c4b19c370a2a3f52f6c1c7726113628392c203ce14b7081b53c6689"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "baseline": {
+        "added": 4,
+        "deleted": 45,
+        "total": 49,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 45,
+        "total": 49,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 45,
+        "total": 49,
+        "blocks": 4
+      },
+      "worktree_sha256": "8a1d959854751dcba6a8b9f624e28d92b41836ded4b406968de34f9a18852608"
+    },
+    {
+      "path": "src/mvdm-host/wow32/isvwow.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "de0c0839707c033582c23a706eae019cd9c42f3424815e5ba0d9ec6135e06e08"
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 12,
+        "total": 13,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 12,
+        "total": 13,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 12,
+        "total": 13,
+        "blocks": 1
+      },
+      "worktree_sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381"
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "baseline": {
+        "added": 40,
+        "deleted": 1,
+        "total": 41,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 13,
+        "deleted": 1,
+        "total": 14,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 13,
+        "deleted": 1,
+        "total": 14,
+        "blocks": 3
+      },
+      "worktree_sha256": "2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d"
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 9,
+        "total": 12,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 9,
+        "total": 12,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 9,
+        "total": 12,
+        "blocks": 3
+      },
+      "worktree_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e"
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 162,
+        "total": 164,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 133,
+        "total": 135,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 133,
+        "total": 135,
+        "blocks": 2
+      },
+      "worktree_sha256": "15ea7ed69f6acd6d2c10196339b6eec4b4a1d2898879dbff7be1eb73d4cda544"
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "baseline": {
+        "added": 26,
+        "deleted": 25,
+        "total": 51,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 12,
+        "deleted": 19,
+        "total": 31,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 12,
+        "deleted": 19,
+        "total": 31,
+        "blocks": 7
+      },
+      "worktree_sha256": "f20548935ced3d6ace5ad0885dfe890cddd2f193f911e3afc2db5e813e580a61"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "baseline": {
+        "added": 55,
+        "deleted": 167,
+        "total": 222,
+        "blocks": 21
+      },
+      "delivered": {
+        "added": 33,
+        "deleted": 165,
+        "total": 198,
+        "blocks": 17
+      },
+      "worktree": {
+        "added": 33,
+        "deleted": 165,
+        "total": 198,
+        "blocks": 17
+      },
+      "worktree_sha256": "1bff5cf3ea48e92725c733b9c4bf7e5ae72fdbd5196c86b2851cd80a196e44a0"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "baseline": {
+        "added": 54,
+        "deleted": 32,
+        "total": 86,
+        "blocks": 35
+      },
+      "delivered": {
+        "added": 37,
+        "deleted": 32,
+        "total": 69,
+        "blocks": 34
+      },
+      "worktree": {
+        "added": 37,
+        "deleted": 32,
+        "total": 69,
+        "blocks": 34
+      },
+      "worktree_sha256": "3d592e96fd4f53002609ecad220af5d73162be932277a17a3847944cfda7e141"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "baseline": {
+        "added": 23,
+        "deleted": 216,
+        "total": 239,
+        "blocks": 14
+      },
+      "delivered": {
+        "added": 18,
+        "deleted": 216,
+        "total": 234,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 18,
+        "deleted": 216,
+        "total": 234,
+        "blocks": 13
+      },
+      "worktree_sha256": "7949bf8bb815824c507cfa7fbcc85b4c9c87001522aa5e1ae1bc8016abcdec1f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "baseline": {
+        "added": 153,
+        "deleted": 18,
+        "total": 171,
+        "blocks": 29
+      },
+      "delivered": {
+        "added": 128,
+        "deleted": 15,
+        "total": 143,
+        "blocks": 26
+      },
+      "worktree": {
+        "added": 128,
+        "deleted": 15,
+        "total": 143,
+        "blocks": 26
+      },
+      "worktree_sha256": "9188581c7528581372c4d700ad22d6fd61cd05c33246f36047728c639e073fc7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.h",
+      "baseline": {
+        "added": 24,
+        "deleted": 4,
+        "total": 28,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 20,
+        "deleted": 4,
+        "total": 24,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 20,
+        "deleted": 4,
+        "total": 24,
+        "blocks": 5
+      },
+      "worktree_sha256": "2e1cd19f01befb3f5e077fa433cfdc041ae5326da831922f57324a062309a1fe"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 3,
+        "total": 7,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 3,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree_sha256": "aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 30,
+        "total": 33,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 30,
+        "total": 32,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 30,
+        "total": 32,
+        "blocks": 2
+      },
+      "worktree_sha256": "a0bc00db06a8d45b56798d7263e6827f95ead9b5e0add8ef44d134aced88b793"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 26,
+        "total": 32,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 26,
+        "total": 31,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 26,
+        "total": 31,
+        "blocks": 5
+      },
+      "worktree_sha256": "cf9f03650cce420116b6bf87f1a9c95f21b8a26ce4861159520e95453aaf9a41"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 7,
+        "total": 12,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 7,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 7,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree_sha256": "b641b59025211900d4b01ce610879983f3bf5e88c1b92b100c41028c0d5386b5"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 33,
+        "total": 35,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 33,
+        "total": 35,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 33,
+        "total": 35,
+        "blocks": 2
+      },
+      "worktree_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgpal.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "1c29cff4af4ec8565f9d2e1931a1596dccd21c1b8285563b9c3d203d617c1cb1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "baseline": {
+        "added": 11,
+        "deleted": 30,
+        "total": 41,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 30,
+        "total": 38,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 30,
+        "total": 38,
+        "blocks": 4
+      },
+      "worktree_sha256": "ee0a7c3ad040edfd9712eccd02c2eec1b89d85861b00d3b49ffc5ecfb3a00ce2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree_sha256": "087f929d0cbaa781849d4021ca6d9ed5afa5c0711b85b1c162102252108806cd"
+    },
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "baseline": {
+        "added": 26,
+        "deleted": 0,
+        "total": 26,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 17,
+        "deleted": 0,
+        "total": 17,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 17,
+        "deleted": 0,
+        "total": 17,
+        "blocks": 3
+      },
+      "worktree_sha256": "14bfe1a54324736958561935ac88df621b330f2b362b2aa31bfdf8e30b06f2d2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "baseline": {
+        "added": 58,
+        "deleted": 108,
+        "total": 166,
+        "blocks": 25
+      },
+      "delivered": {
+        "added": 30,
+        "deleted": 103,
+        "total": 133,
+        "blocks": 16
+      },
+      "worktree": {
+        "added": 30,
+        "deleted": 103,
+        "total": 133,
+        "blocks": 16
+      },
+      "worktree_sha256": "a31be79d597a27a6e438a19ae2747285d9225965b22f8c339a2ba5770caeb6d1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "baseline": {
+        "added": 17,
+        "deleted": 12,
+        "total": 29,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 9,
+        "deleted": 11,
+        "total": 20,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 9,
+        "deleted": 11,
+        "total": 20,
+        "blocks": 8
+      },
+      "worktree_sha256": "e8a9a5246447394670edb7427068c4567e5532885049e10207be60b901b8513a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 13,
+        "total": 17,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 13,
+        "total": 16,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 13,
+        "total": 16,
+        "blocks": 3
+      },
+      "worktree_sha256": "c826aaeceff4640a7a205eefb6b504713f65c868b499f4902c1fb915f0a3f26e"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "baseline": {
+        "added": 101,
+        "deleted": 217,
+        "total": 318,
+        "blocks": 51
+      },
+      "delivered": {
+        "added": 57,
+        "deleted": 215,
+        "total": 272,
+        "blocks": 49
+      },
+      "worktree": {
+        "added": 57,
+        "deleted": 215,
+        "total": 272,
+        "blocks": 49
+      },
+      "worktree_sha256": "55a6b94e3dc18e119747d5cb8f65e6d3147efcbfb6ec1f9c3d4e377daaa345f8"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.h",
+      "baseline": {
+        "added": 8,
+        "deleted": 5,
+        "total": 13,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree_sha256": "1f05fb10908781eb2c28ffd1886dd6baedad43a4b547c0e43fb1b99791773db4"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 58,
+        "total": 60,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 58,
+        "total": 60,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 58,
+        "total": 60,
+        "blocks": 2
+      },
+      "worktree_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 2,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 2,
+        "total": 3,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 2,
+        "total": 3,
+        "blocks": 1
+      },
+      "worktree_sha256": "b5dfa8bba416e5be06599b09e21e4be922ffe00666b9e678ce298a719c7648d2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "baseline": {
+        "added": 219,
+        "deleted": 175,
+        "total": 394,
+        "blocks": 103
+      },
+      "delivered": {
+        "added": 143,
+        "deleted": 154,
+        "total": 297,
+        "blocks": 89
+      },
+      "worktree": {
+        "added": 143,
+        "deleted": 154,
+        "total": 297,
+        "blocks": 89
+      },
+      "worktree_sha256": "30da6fd5349b8811b40e79d79c0b8976d168724e9d7c8813d35bb891b597b63e"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "baseline": {
+        "added": 7,
+        "deleted": 5,
+        "total": 12,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 5,
+        "total": 8,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 5,
+        "total": 8,
+        "blocks": 3
+      },
+      "worktree_sha256": "3dd14fded39eb89dff3e8f5a3c5ca15056ae374d0ecabe195eb875fa0bb2ce97"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "baseline": {
+        "added": 10,
+        "deleted": 99,
+        "total": 109,
+        "blocks": 10
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 99,
+        "total": 109,
+        "blocks": 10
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 99,
+        "total": 109,
+        "blocks": 10
+      },
+      "worktree_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree_sha256": "7b9696ef8c12eaf2b917d6fd4c187426bdd7fdc258d77acf47f4984351ad42ac"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 31,
+        "total": 32,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 31,
+        "total": 32,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 31,
+        "total": 32,
+        "blocks": 1
+      },
+      "worktree_sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 11,
+        "total": 12,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 11,
+        "total": 12,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 11,
+        "total": 12,
+        "blocks": 1
+      },
+      "worktree_sha256": "7938034986ce5547725f9a1056f211310d3e6d0cca686dc3cf0f2d0a92e8bc15"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "baseline": {
+        "added": 172,
+        "deleted": 95,
+        "total": 267,
+        "blocks": 53
+      },
+      "delivered": {
+        "added": 116,
+        "deleted": 83,
+        "total": 199,
+        "blocks": 40
+      },
+      "worktree": {
+        "added": 116,
+        "deleted": 83,
+        "total": 199,
+        "blocks": 40
+      },
+      "worktree_sha256": "a764326d0d62768cafd0e6b9fe5b59acc07ff84b2611793fe52ddf5949680765"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 5,
+        "total": 7,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 5,
+        "total": 7,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 5,
+        "total": 7,
+        "blocks": 2
+      },
+      "worktree_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 20,
+        "total": 21,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 20,
+        "total": 21,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 20,
+        "total": 21,
+        "blocks": 1
+      },
+      "worktree_sha256": "52fd5d7707b47d7d9ad99343c65f167d70e4fd15b0701a659ecbdf223d353356"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "baseline": {
+        "added": 17,
+        "deleted": 49,
+        "total": 66,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 12,
+        "deleted": 49,
+        "total": 61,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 12,
+        "deleted": 49,
+        "total": 61,
+        "blocks": 6
+      },
+      "worktree_sha256": "5b644af487c3c9f56adbd12ce36f36fd26a81bb5571b6f9514e79fa5be0f64d2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "baseline": {
+        "added": 9,
+        "deleted": 49,
+        "total": 58,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 49,
+        "total": 54,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 49,
+        "total": 54,
+        "blocks": 5
+      },
+      "worktree_sha256": "f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 52,
+        "total": 59,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 52,
+        "total": 56,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 52,
+        "total": 56,
+        "blocks": 4
+      },
+      "worktree_sha256": "568a6e3c253f84e4bb7904c90846585d1ad8dbc66135b9dbda37fd986551a694"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 20,
+        "total": 21,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 20,
+        "total": 21,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 20,
+        "total": 21,
+        "blocks": 1
+      },
+      "worktree_sha256": "7932d60818f79517f1de608ba021dd4d6d2aa2c9d1ef748ca30a7cf972b402af"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 2,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 2,
+        "total": 3,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 2,
+        "total": 3,
+        "blocks": 1
+      },
+      "worktree_sha256": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "baseline": {
+        "added": 71,
+        "deleted": 26,
+        "total": 97,
+        "blocks": 17
+      },
+      "delivered": {
+        "added": 29,
+        "deleted": 13,
+        "total": 42,
+        "blocks": 15
+      },
+      "worktree": {
+        "added": 29,
+        "deleted": 13,
+        "total": 42,
+        "blocks": 15
+      },
+      "worktree_sha256": "0886f412a895bc71c09e3140038695eadcbcfdaf6f005940a8ab9bf47cfcbf74"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "baseline": {
+        "added": 118,
+        "deleted": 842,
+        "total": 960,
+        "blocks": 55
+      },
+      "delivered": {
+        "added": 65,
+        "deleted": 828,
+        "total": 893,
+        "blocks": 49
+      },
+      "worktree": {
+        "added": 65,
+        "deleted": 828,
+        "total": 893,
+        "blocks": 49
+      },
+      "worktree_sha256": "57ecbebf107dedf72febabe2c9e2040b0deb7e86707b445b1a58af87933ac49f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.def",
+      "baseline": {
+        "added": 1,
+        "deleted": 0,
+        "total": 1,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 0,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 0,
+        "total": 1,
+        "blocks": 1
+      },
+      "worktree_sha256": "458e4c62bbd2f832f472b66303dd2e920f8b0cfe047fec3acd51cdf52efbee1f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "baseline": {
+        "added": 25,
+        "deleted": 124,
+        "total": 149,
+        "blocks": 25
+      },
+      "delivered": {
+        "added": 25,
+        "deleted": 124,
+        "total": 149,
+        "blocks": 25
+      },
+      "worktree": {
+        "added": 25,
+        "deleted": 124,
+        "total": 149,
+        "blocks": 25
+      },
+      "worktree_sha256": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "baseline": {
+        "added": 25,
+        "deleted": 16,
+        "total": 41,
+        "blocks": 11
+      },
+      "delivered": {
+        "added": 17,
+        "deleted": 13,
+        "total": 30,
+        "blocks": 10
+      },
+      "worktree": {
+        "added": 17,
+        "deleted": 13,
+        "total": 30,
+        "blocks": 10
+      },
+      "worktree_sha256": "a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "baseline": {
+        "added": 118,
+        "deleted": 33,
+        "total": 151,
+        "blocks": 45
+      },
+      "delivered": {
+        "added": 95,
+        "deleted": 30,
+        "total": 125,
+        "blocks": 40
+      },
+      "worktree": {
+        "added": 95,
+        "deleted": 30,
+        "total": 125,
+        "blocks": 40
+      },
+      "worktree_sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.h",
+      "baseline": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "15e0dd57428921940933d6340b88dc8354f009b631679fba0fcb3fab8c2f734a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 138,
+        "total": 142,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 138,
+        "total": 142,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 138,
+        "total": 142,
+        "blocks": 4
+      },
+      "worktree_sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 13,
+        "total": 14,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 13,
+        "total": 14,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 13,
+        "total": 14,
+        "blocks": 1
+      },
+      "worktree_sha256": "6f0847322a1151fdce4f7dbc9aee24d4130358804259d9b10804ef96bb1c01c3"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "baseline": {
+        "added": 34,
+        "deleted": 72,
+        "total": 106,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 22,
+        "deleted": 72,
+        "total": 94,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 22,
+        "deleted": 72,
+        "total": 94,
+        "blocks": 11
+      },
+      "worktree_sha256": "743120dd27c03fd5df08af236c428ff63afc117416bc1d642886419500bedb57"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 2,
+        "total": 5,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "f4ede08ef2d6bc949cd2500c75af546ec68c0e017abecc1a6c624f7c1b5a0d20"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "63fb72740460f367cb75fb014562f7c278b515b73689ee0c981481f96d5961c1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 35,
+        "total": 36,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 35,
+        "total": 36,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 35,
+        "total": 36,
+        "blocks": 1
+      },
+      "worktree_sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "baseline": {
+        "added": 218,
+        "deleted": 13,
+        "total": 231,
+        "blocks": 22
+      },
+      "delivered": {
+        "added": 161,
+        "deleted": 13,
+        "total": 174,
+        "blocks": 20
+      },
+      "worktree": {
+        "added": 161,
+        "deleted": 13,
+        "total": 174,
+        "blocks": 20
+      },
+      "worktree_sha256": "c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "baseline": {
+        "added": 13,
+        "deleted": 1,
+        "total": 14,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 1,
+        "total": 8,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 1,
+        "total": 8,
+        "blocks": 4
+      },
+      "worktree_sha256": "23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "baseline": {
+        "added": 14,
+        "deleted": 3,
+        "total": 17,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 1,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 1,
+        "total": 6,
+        "blocks": 3
+      },
+      "worktree_sha256": "8b3af16397353e6adb69bd11d1303a72143e1c001810d2812279399cb755b75b"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "baseline": {
+        "added": 10,
+        "deleted": 79,
+        "total": 89,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 78,
+        "total": 85,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 78,
+        "total": 85,
+        "blocks": 7
+      },
+      "worktree_sha256": "4a7300940a0da14ead319b6b8ce2451b21932a2dfd6fcc9390e6f5d6b98dd0bd"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 269,
+        "total": 271,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 269,
+        "total": 271,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 269,
+        "total": 271,
+        "blocks": 2
+      },
+      "worktree_sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "baseline": {
+        "added": 46,
+        "deleted": 15,
+        "total": 61,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 43,
+        "deleted": 15,
+        "total": 58,
+        "blocks": 9
+      },
+      "worktree": {
+        "added": 43,
+        "deleted": 15,
+        "total": 58,
+        "blocks": 9
+      },
+      "worktree_sha256": "ceb60357f24f8a6bc728ee5dfb83131a4a30875bc914f625009a48eaa597ab09"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "baseline": {
+        "added": 116,
+        "deleted": 39,
+        "total": 155,
+        "blocks": 21
+      },
+      "delivered": {
+        "added": 64,
+        "deleted": 37,
+        "total": 101,
+        "blocks": 17
+      },
+      "worktree": {
+        "added": 64,
+        "deleted": 37,
+        "total": 101,
+        "blocks": 17
+      },
+      "worktree_sha256": "6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 8,
+        "total": 10,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 8,
+        "total": 10,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 8,
+        "total": 10,
+        "blocks": 2
+      },
+      "worktree_sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 21,
+        "total": 22,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 21,
+        "total": 22,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 21,
+        "total": 22,
+        "blocks": 1
+      },
+      "worktree_sha256": "5af5c5965602bb4d13e03451f35f991c0046ed8280b3530210e385859259b015"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "baseline": {
+        "added": 24,
+        "deleted": 13,
+        "total": 37,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 22,
+        "deleted": 13,
+        "total": 35,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 22,
+        "deleted": 13,
+        "total": 35,
+        "blocks": 13
+      },
+      "worktree_sha256": "f98049a1afa471764fb825ccdd498a8ad189a697a181c347eba6ee8464ec542b"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 30,
+        "total": 37,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 29,
+        "total": 34,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 29,
+        "total": 34,
+        "blocks": 6
+      },
+      "worktree_sha256": "f7850d8b710d31df0dea3f01fce697e3abf42fba55037380ae70915cca7104c8"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "baseline": {
+        "added": 114,
+        "deleted": 29,
+        "total": 143,
+        "blocks": 37
+      },
+      "delivered": {
+        "added": 102,
+        "deleted": 29,
+        "total": 131,
+        "blocks": 36
+      },
+      "worktree": {
+        "added": 102,
+        "deleted": 29,
+        "total": 131,
+        "blocks": 36
+      },
+      "worktree_sha256": "e4ac488c1bc3ec1cf5f1ea34e7c22ed73ef392bf815bdcbdba7d0f8ab88893d7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "870f8b15e374da3c6c752982e15f881ddc60a29c93b832bbfd100766c96841b7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "baseline": {
+        "added": 31,
+        "deleted": 148,
+        "total": 179,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 15,
+        "deleted": 144,
+        "total": 159,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 15,
+        "deleted": 144,
+        "total": 159,
+        "blocks": 7
+      },
+      "worktree_sha256": "801b1d94a99891fda430bb021365c75c19c3f23424f90baf8b92a02eeff11792"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "baseline": {
+        "added": 17,
+        "deleted": 23,
+        "total": 40,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 22,
+        "total": 29,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 22,
+        "total": 29,
+        "blocks": 7
+      },
+      "worktree_sha256": "3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 28,
+        "total": 29,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 28,
+        "total": 29,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 28,
+        "total": 29,
+        "blocks": 1
+      },
+      "worktree_sha256": "4c47550427950f24fb0995a540b66893dda3b64160dbef820d11817503ceef5e"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutmr.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 1,
+        "total": 3,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "ac32decdb5712f1dbfcdd0948095c2995426f6734b2b284bd85e6ee28a59c296"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "baseline": {
+        "added": 62,
+        "deleted": 26,
+        "total": 88,
+        "blocks": 17
+      },
+      "delivered": {
+        "added": 50,
+        "deleted": 19,
+        "total": 69,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 50,
+        "deleted": 19,
+        "total": 69,
+        "blocks": 13
+      },
+      "worktree_sha256": "671d14c3f1ca7e8351f0a874579c2962d7c9a4a671a1437370b22ec891e5d0f1"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "baseline": {
+        "added": 7,
+        "deleted": 12,
+        "total": 19,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 12,
+        "total": 19,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 12,
+        "total": 19,
+        "blocks": 7
+      },
+      "worktree_sha256": "6cc99e7bb7d7833b7f1b7475b97734830d3b7c395b22d1715b22fc787360b45f"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 24,
+        "total": 26,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 24,
+        "total": 26,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 24,
+        "total": 26,
+        "blocks": 2
+      },
+      "worktree_sha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "baseline": {
+        "added": 37,
+        "deleted": 18,
+        "total": 55,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 20,
+        "deleted": 14,
+        "total": 34,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 20,
+        "deleted": 14,
+        "total": 34,
+        "blocks": 6
+      },
+      "worktree_sha256": "0d3a037dcfa2ce80719165ad4d890369f4b6d591157d68b9bb1c938400e0d9fc"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 7,
+        "total": 8,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 7,
+        "total": 8,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 7,
+        "total": 8,
+        "blocks": 1
+      },
+      "worktree_sha256": "a062de312853f50f47764882f0e929a971a390ba50e08b4fff39c1aa8bdde774"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "baseline": {
+        "added": 9,
+        "deleted": 21,
+        "total": 30,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree_sha256": "40c236c96768a5a5a3d03c61a00b5b594552f4987a2d3ddde912912e1afba478"
+    },
+    {
+      "path": "src/non-mvdm/base/ntdll/csrutil.c",
+      "baseline": {
+        "added": 14,
+        "deleted": 636,
+        "total": 650,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 615,
+        "total": 622,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 615,
+        "total": 622,
+        "blocks": 7
+      },
+      "worktree_sha256": "75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "baseline": {
+        "added": 9,
+        "deleted": 116,
+        "total": 125,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 113,
+        "total": 117,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 113,
+        "total": 117,
+        "blocks": 6
+      },
+      "worktree_sha256": "92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 10,
+        "total": 14,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree_sha256": "e838fb88985f2f1c2f8ef982285ab3bbe31157ea0b4b23adb4bb5d28422af747"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 9,
+        "total": 11,
+        "blocks": 2
+      },
+      "worktree_sha256": "77faa5a534f8e5d97ff13d152b80b210df9cc6bbf0e0d4ab0644367daec175c5"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 1218,
+        "total": 1225,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1218,
+        "total": 1219,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1218,
+        "total": 1219,
+        "blocks": 7
+      },
+      "worktree_sha256": "ce01257bc0bb0a87f3c14e3630160029069a7cd7addc901ba7575845a8cdffa8"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "baseline": {
+        "added": 59,
+        "deleted": 832,
+        "total": 891,
+        "blocks": 26
+      },
+      "delivered": {
+        "added": 38,
+        "deleted": 832,
+        "total": 870,
+        "blocks": 25
+      },
+      "worktree": {
+        "added": 38,
+        "deleted": 832,
+        "total": 870,
+        "blocks": 25
+      },
+      "worktree_sha256": "7493d21348acfd824b4364c81493d8e1df59da00cbb47d8e6264cbad91953c9b"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "baseline": {
+        "added": 6,
+        "deleted": 1,
+        "total": 7,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 1,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 1,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree_sha256": "dd05fe7525c25cec41b3ac0d613547440e1ac8d46c2d004b60fedf1444da5d5a"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "baseline": {
+        "added": 58,
+        "deleted": 35,
+        "total": 93,
+        "blocks": 14
+      },
+      "delivered": {
+        "added": 49,
+        "deleted": 35,
+        "total": 84,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 49,
+        "deleted": 35,
+        "total": 84,
+        "blocks": 13
+      },
+      "worktree_sha256": "f3cb247cbefe3ebd6fd1bc7864ab6f8ae3246988806d57e2f2cea4e0de694b88"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+      "baseline": {
+        "added": 4,
+        "deleted": 0,
+        "total": 4,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 0,
+        "total": 2,
+        "blocks": 2
+      },
+      "worktree_sha256": "62dcc16fa98eb2dea499a194d01691bfde0ed6c5110aac9025fff391b7c0d998"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/api/apibuff.c",
+      "baseline": {
+        "added": 8,
+        "deleted": 180,
+        "total": 188,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 174,
+        "total": 174,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 174,
+        "total": 174,
+        "blocks": 4
+      },
+      "worktree_sha256": "d44c57d9837dc754024ac2567dd232e9f5a543797d5c17954f0caa68b867db51"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 50,
+        "total": 57,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 50,
+        "total": 57,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 50,
+        "total": 57,
+        "blocks": 7
+      },
+      "worktree_sha256": "484efc535758d10727c99d61840db32ba86374c7c4895b8a63b4b4a588973385"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 26,
+        "total": 33,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 26,
+        "total": 33,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 26,
+        "total": 33,
+        "blocks": 7
+      },
+      "worktree_sha256": "73874720f6cb913f200d40b32f314ce099dbed7ff5857a9f17ecb7f57817b69c"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 529,
+        "total": 533,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 5,
+        "total": 7,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 5,
+        "total": 7,
+        "blocks": 2
+      },
+      "worktree_sha256": "a5957f51780bd7a8e76e1330438aab1168688378e7ff71ff82b70ec04f9bd548"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+      "baseline": {
+        "added": 10,
+        "deleted": 1057,
+        "total": 1067,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 187,
+        "total": 190,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 187,
+        "total": 190,
+        "blocks": 3
+      },
+      "worktree_sha256": "a99164a46963e5fb81a2e998438eadb8284cabd185886ca379251e15f6064711"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree_sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "9fc9f7ea082b2e7c75087f3fde34a2a97ade86af0e7fe0ec97c1cad4581789e0"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 17,
+        "total": 18,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 17,
+        "total": 18,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 17,
+        "total": 18,
+        "blocks": 1
+      },
+      "worktree_sha256": "525692fc0e27d5913d9c8892917f52cd9c95293b57293b1cb82014646aea357c"
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 73,
+        "total": 75,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 73,
+        "total": 75,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 73,
+        "total": 75,
+        "blocks": 2
+      },
+      "worktree_sha256": "56c79410f528b52e1577725b413437a0ddfd50821aab4588e46bf72a941a3895"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "baseline": {
+        "added": 3,
+        "deleted": 7,
+        "total": 10,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 7,
+        "total": 10,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 7,
+        "total": 10,
+        "blocks": 3
+      },
+      "worktree_sha256": "4c890dbc827308c06d7014f0c3ab40d0b4f53a84b85e7caef37befb0d3a3438a"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "baseline": {
+        "added": 3,
+        "deleted": 63,
+        "total": 66,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 63,
+        "total": 66,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 63,
+        "total": 66,
+        "blocks": 3
+      },
+      "worktree_sha256": "18144a49d2c6093c9ed428c2862a1be9388a780feb638b186bcfc6820d568364"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 3,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree_sha256": "5d992f962c41f8cd776c2715d469097980e556d9a164200279625fcc15d2eacb"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "baseline": {
+        "added": 40,
+        "deleted": 206,
+        "total": 246,
+        "blocks": 40
+      },
+      "delivered": {
+        "added": 40,
+        "deleted": 206,
+        "total": 246,
+        "blocks": 40
+      },
+      "worktree": {
+        "added": 40,
+        "deleted": 206,
+        "total": 246,
+        "blocks": 40
+      },
+      "worktree_sha256": "f4ca1b63917a19b03aa99704adf11bf06c78797dae61b6f94d60ce49a5dc27f5"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree_sha256": "6293f2cf5a7ab0ae828c33b8232e7a6c9380f8f80e3abfc2acb79b348d4f3c3e"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "baseline": {
+        "added": 4,
+        "deleted": 8,
+        "total": 12,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 8,
+        "total": 12,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 8,
+        "total": 12,
+        "blocks": 4
+      },
+      "worktree_sha256": "dfc802009e9094fe90c8df69e8ffcbd275ea60015dd67da7543c452e0daafe72"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "baseline": {
+        "added": 5,
+        "deleted": 21,
+        "total": 26,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 21,
+        "total": 26,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 21,
+        "total": 26,
+        "blocks": 5
+      },
+      "worktree_sha256": "354c6c1af9f9f8b43d775538ab9c335da5ec5505c82683151ad5508cfcd0a0b5"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 5,
+        "total": 6,
+        "blocks": 1
+      },
+      "worktree_sha256": "a78caf76be221cc7f06a88a56bc9325749ae46d10c4bf43b8638cbc6506c17b8"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "baseline": {
+        "added": 13,
+        "deleted": 367,
+        "total": 380,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 13,
+        "deleted": 367,
+        "total": 380,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 13,
+        "deleted": 367,
+        "total": 380,
+        "blocks": 13
+      },
+      "worktree_sha256": "1a8d74421a84848af1fe0dbaba5df2445ab5ecb46dca94d58aeee703bfa5b75a"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "baseline": {
+        "added": 5,
+        "deleted": 16,
+        "total": 21,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 16,
+        "total": 21,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 16,
+        "total": 21,
+        "blocks": 5
+      },
+      "worktree_sha256": "9e4bc3ec41e8f4782e96a3e59d0e653cb272644027980313a9631de7d25ac635"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 30,
+        "total": 31,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 30,
+        "total": 31,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 30,
+        "total": 31,
+        "blocks": 1
+      },
+      "worktree_sha256": "85ce6b7f702fdefa865ee66d736f1b6a2cdea1f86f21973e6a8f72206038f146"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 7,
+        "total": 8,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 7,
+        "total": 8,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 7,
+        "total": 8,
+        "blocks": 1
+      },
+      "worktree_sha256": "d88d16222378f74e58919e17892c67e7f8ee0e66ca6bd1153d8c0ba5b9dd8804"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 40,
+        "total": 41,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 40,
+        "total": 41,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 40,
+        "total": 41,
+        "blocks": 1
+      },
+      "worktree_sha256": "4de5a2189a96c6bf8ce23dacf47837b6cbea3a0c1d2c5589e928e32eef1a5aa3"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "baseline": {
+        "added": 4,
+        "deleted": 2,
+        "total": 6,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 1
+      },
+      "worktree_sha256": "7c72f522a841a78f78494e950190588fcaf26a2251412a7725171db25258b949"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "baseline": {
+        "added": 11,
+        "deleted": 1766,
+        "total": 1777,
+        "blocks": 26
+      },
+      "delivered": {
+        "added": 9,
+        "deleted": 1179,
+        "total": 1188,
+        "blocks": 28
+      },
+      "worktree": {
+        "added": 9,
+        "deleted": 1179,
+        "total": 1188,
+        "blocks": 28
+      },
+      "worktree_sha256": "43c01f46bf3e0ec3dc62e6f5035378443e59149b0b54c61ee45493919126422e"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "baseline": {
+        "added": 5,
+        "deleted": 8,
+        "total": 13,
+        "blocks": 5
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 8,
+        "total": 13,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 8,
+        "total": 13,
+        "blocks": 5
+      },
+      "worktree_sha256": "6e30df406c4619e6de957ab6dcc0855146adee5f6a92539519a47218b0dc7c37"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "baseline": {
+        "added": 25,
+        "deleted": 1243,
+        "total": 1268,
+        "blocks": 16
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 358,
+        "total": 363,
+        "blocks": 43
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 358,
+        "total": 363,
+        "blocks": 43
+      },
+      "worktree_sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 467,
+        "total": 469,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 14,
+        "total": 16,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 14,
+        "total": 16,
+        "blocks": 7
+      },
+      "worktree_sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "baseline": {
+        "added": 107,
+        "deleted": 5994,
+        "total": 6101,
+        "blocks": 59
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 243,
+        "total": 253,
+        "blocks": 21
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 243,
+        "total": 253,
+        "blocks": 21
+      },
+      "worktree_sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "baseline": {
+        "added": 1,
+        "deleted": 1039,
+        "total": 1040,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 29,
+        "total": 29,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 29,
+        "total": 29,
+        "blocks": 3
+      },
+      "worktree_sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "baseline": {
+        "added": 3,
+        "deleted": 137,
+        "total": 140,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 137,
+        "total": 140,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 137,
+        "total": 140,
+        "blocks": 3
+      },
+      "worktree_sha256": "c8ba7e1a0ad5a9de27a7847c08d1828157bf6d87688aa8647d3f6b5a41430ad6"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "baseline": {
+        "added": 71,
+        "deleted": 16,
+        "total": 87,
+        "blocks": 35
+      },
+      "delivered": {
+        "added": 14,
+        "deleted": 5,
+        "total": 19,
+        "blocks": 14
+      },
+      "worktree": {
+        "added": 14,
+        "deleted": 5,
+        "total": 19,
+        "blocks": 14
+      },
+      "worktree_sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 2,
+        "total": 7,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 1,
+        "total": 2,
+        "blocks": 1
+      },
+      "worktree_sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "baseline": {
+        "added": 10,
+        "deleted": 123,
+        "total": 133,
+        "blocks": 11
+      },
+      "delivered": {
+        "added": 8,
+        "deleted": 31,
+        "total": 39,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 8,
+        "deleted": 31,
+        "total": 39,
+        "blocks": 8
+      },
+      "worktree_sha256": "83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "baseline": {
+        "added": 69,
+        "deleted": 3595,
+        "total": 3664,
+        "blocks": 15
+      },
+      "delivered": {
+        "added": 26,
+        "deleted": 3546,
+        "total": 3572,
+        "blocks": 9
+      },
+      "worktree": {
+        "added": 26,
+        "deleted": 3546,
+        "total": 3572,
+        "blocks": 9
+      },
+      "worktree_sha256": "f6d97d0571113c850682f3ebbbff31a2d8f25ccb21ae56fbc61123744f57aaf0"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "baseline": {
+        "added": 29,
+        "deleted": 367,
+        "total": 396,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 9,
+        "deleted": 334,
+        "total": 343,
+        "blocks": 9
+      },
+      "worktree": {
+        "added": 9,
+        "deleted": 334,
+        "total": 343,
+        "blocks": 9
+      },
+      "worktree_sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "baseline": {
+        "added": 79,
+        "deleted": 1529,
+        "total": 1608,
+        "blocks": 29
+      },
+      "delivered": {
+        "added": 35,
+        "deleted": 1500,
+        "total": 1535,
+        "blocks": 35
+      },
+      "worktree": {
+        "added": 35,
+        "deleted": 1500,
+        "total": 1535,
+        "blocks": 35
+      },
+      "worktree_sha256": "327fdab236b63f2caf07fa265a4eda5e8dc7f9ea592851b7703d6d5dac89893c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "baseline": {
+        "added": 378,
+        "deleted": 3751,
+        "total": 4129,
+        "blocks": 58
+      },
+      "delivered": {
+        "added": 34,
+        "deleted": 3403,
+        "total": 3437,
+        "blocks": 40
+      },
+      "worktree": {
+        "added": 34,
+        "deleted": 3403,
+        "total": 3437,
+        "blocks": 40
+      },
+      "worktree_sha256": "64cafda7d5bab2affa6fa0d6be83dff3b81ad6ea820ff2f0134c35a72536668a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 15,
+        "total": 17,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 15,
+        "total": 17,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 15,
+        "total": 17,
+        "blocks": 2
+      },
+      "worktree_sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "baseline": {
+        "added": 72,
+        "deleted": 13,
+        "total": 85,
+        "blocks": 20
+      },
+      "delivered": {
+        "added": 34,
+        "deleted": 10,
+        "total": 44,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 34,
+        "deleted": 10,
+        "total": 44,
+        "blocks": 11
+      },
+      "worktree_sha256": "7b7722267d384c0159a7b14b36da9cb680101a5cfd15ef7039f0eb24cfa6297b"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "baseline": {
+        "added": 23,
+        "deleted": 38,
+        "total": 61,
+        "blocks": 10
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 37,
+        "total": 42,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 37,
+        "total": 42,
+        "blocks": 4
+      },
+      "worktree_sha256": "e81f0c08d70b16780804c13087f2b13a3599f11de570fc09faa3667cfd7ef42c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "baseline": {
+        "added": 365,
+        "deleted": 553,
+        "total": 918,
+        "blocks": 24
+      },
+      "delivered": {
+        "added": 40,
+        "deleted": 264,
+        "total": 304,
+        "blocks": 23
+      },
+      "worktree": {
+        "added": 40,
+        "deleted": 264,
+        "total": 304,
+        "blocks": 23
+      },
+      "worktree_sha256": "2532a069a2db7338386bbdfaf364615f3e77f07a66d0d32844dfed47dcfadb70"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "baseline": {
+        "added": 131,
+        "deleted": 52,
+        "total": 183,
+        "blocks": 44
+      },
+      "delivered": {
+        "added": 29,
+        "deleted": 38,
+        "total": 67,
+        "blocks": 17
+      },
+      "worktree": {
+        "added": 29,
+        "deleted": 38,
+        "total": 67,
+        "blocks": 17
+      },
+      "worktree_sha256": "47908dc4e2d529646bcbfa13d1831ba3a6b72b05fdac52bc8107071af6cd9b15"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "baseline": {
+        "added": 40,
+        "deleted": 111,
+        "total": 151,
+        "blocks": 15
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 85,
+        "total": 88,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 85,
+        "total": 88,
+        "blocks": 5
+      },
+      "worktree_sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "baseline": {
+        "added": 64,
+        "deleted": 14,
+        "total": 78,
+        "blocks": 18
+      },
+      "delivered": {
+        "added": 14,
+        "deleted": 13,
+        "total": 27,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 14,
+        "deleted": 13,
+        "total": 27,
+        "blocks": 8
+      },
+      "worktree_sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "baseline": {
+        "added": 0,
+        "deleted": 239,
+        "total": 239,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 137,
+        "total": 137,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 137,
+        "total": 137,
+        "blocks": 5
+      },
+      "worktree_sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "baseline": {
+        "added": 6,
+        "deleted": 66,
+        "total": 72,
+        "blocks": 6
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 66,
+        "total": 72,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 66,
+        "total": 72,
+        "blocks": 6
+      },
+      "worktree_sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "baseline": {
+        "added": 12,
+        "deleted": 53,
+        "total": 65,
+        "blocks": 11
+      },
+      "delivered": {
+        "added": 11,
+        "deleted": 53,
+        "total": 64,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 11,
+        "deleted": 53,
+        "total": 64,
+        "blocks": 11
+      },
+      "worktree_sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "baseline": {
+        "added": 16,
+        "deleted": 91,
+        "total": 107,
+        "blocks": 16
+      },
+      "delivered": {
+        "added": 16,
+        "deleted": 91,
+        "total": 107,
+        "blocks": 16
+      },
+      "worktree": {
+        "added": 16,
+        "deleted": 91,
+        "total": 107,
+        "blocks": 16
+      },
+      "worktree_sha256": "fc4b0192251586b594ef38052282667b613e2afa939dc0d2683f8eca5b9e6258"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "baseline": {
+        "added": 14,
+        "deleted": 83,
+        "total": 97,
+        "blocks": 14
+      },
+      "delivered": {
+        "added": 14,
+        "deleted": 83,
+        "total": 97,
+        "blocks": 14
+      },
+      "worktree": {
+        "added": 14,
+        "deleted": 83,
+        "total": 97,
+        "blocks": 14
+      },
+      "worktree_sha256": "815c7b2fdec2d031adce1d75416fe198fd86760e572c242dc1421a022bab1059"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree_sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 4,
+        "total": 5,
+        "blocks": 1
+      },
+      "worktree_sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 9,
+        "total": 12,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 9,
+        "total": 12,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 9,
+        "total": 12,
+        "blocks": 3
+      },
+      "worktree_sha256": "a356c448d85fcdbb213e693b366416ef44f3943d5227c3f1439fd57427c16a72"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "baseline": {
+        "added": 2,
+        "deleted": 79,
+        "total": 81,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 11,
+        "total": 13,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 11,
+        "total": 13,
+        "blocks": 6
+      },
+      "worktree_sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 300,
+        "total": 307,
+        "blocks": 7
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 298,
+        "total": 300,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 298,
+        "total": 300,
+        "blocks": 6
+      },
+      "worktree_sha256": "0d095e359b39e83b2ee5fb09e34d1a5d50c66d1ed6a113a9a1fac8930fcd0e7c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 588,
+        "total": 593,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 441,
+        "total": 442,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 441,
+        "total": 442,
+        "blocks": 2
+      },
+      "worktree_sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 10,
+        "total": 11,
+        "blocks": 1
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 10,
+        "total": 11,
+        "blocks": 1
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 10,
+        "total": 11,
+        "blocks": 1
+      },
+      "worktree_sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "baseline": {
+        "added": 4,
+        "deleted": 9,
+        "total": 13,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 9,
+        "total": 13,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 9,
+        "total": 13,
+        "blocks": 4
+      },
+      "worktree_sha256": "54d79ac2804e45da36760642a2d7af0c807cd119a65a228fd41ba23894bad078"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 2,
+        "total": 5,
+        "blocks": 2
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 2,
+        "total": 4,
+        "blocks": 2
+      },
+      "worktree_sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "baseline": {
+        "added": 38,
+        "deleted": 72,
+        "total": 110,
+        "blocks": 17
+      },
+      "delivered": {
+        "added": 16,
+        "deleted": 13,
+        "total": 29,
+        "blocks": 10
+      },
+      "worktree": {
+        "added": 16,
+        "deleted": 13,
+        "total": 29,
+        "blocks": 10
+      },
+      "worktree_sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "baseline": {
+        "added": 115,
+        "deleted": 2026,
+        "total": 2141,
+        "blocks": 39
+      },
+      "delivered": {
+        "added": 53,
+        "deleted": 1969,
+        "total": 2022,
+        "blocks": 37
+      },
+      "worktree": {
+        "added": 53,
+        "deleted": 1969,
+        "total": 2022,
+        "blocks": 37
+      },
+      "worktree_sha256": "7cdd5e3985e5bb437b3785e23f9dd2c36b1eb4b4274e6a96757367307a66edb9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "baseline": {
+        "added": 14,
+        "deleted": 77,
+        "total": 91,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 6,
+        "deleted": 10,
+        "total": 16,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 6,
+        "deleted": 10,
+        "total": 16,
+        "blocks": 6
+      },
+      "worktree_sha256": "eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "baseline": {
+        "added": 344,
+        "deleted": 1826,
+        "total": 2170,
+        "blocks": 47
+      },
+      "delivered": {
+        "added": 94,
+        "deleted": 462,
+        "total": 556,
+        "blocks": 66
+      },
+      "worktree": {
+        "added": 94,
+        "deleted": 462,
+        "total": 556,
+        "blocks": 66
+      },
+      "worktree_sha256": "6be381616f0b58392a6356566315cff18b6420f2bade76e4f66e8688aea7c8c3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 514,
+        "total": 517,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 4,
+        "deleted": 496,
+        "total": 500,
+        "blocks": 6
+      },
+      "worktree": {
+        "added": 4,
+        "deleted": 496,
+        "total": 500,
+        "blocks": 6
+      },
+      "worktree_sha256": "888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "baseline": {
+        "added": 39,
+        "deleted": 1020,
+        "total": 1059,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 38,
+        "deleted": 1008,
+        "total": 1046,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 38,
+        "deleted": 1008,
+        "total": 1046,
+        "blocks": 8
+      },
+      "worktree_sha256": "b8e6073c1a208e6e97a60be15e3129743d7ea4213a572e443f927bbb141912fa"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "baseline": {
+        "added": 119,
+        "deleted": 1254,
+        "total": 1373,
+        "blocks": 24
+      },
+      "delivered": {
+        "added": 34,
+        "deleted": 1171,
+        "total": 1205,
+        "blocks": 79
+      },
+      "worktree": {
+        "added": 34,
+        "deleted": 1171,
+        "total": 1205,
+        "blocks": 79
+      },
+      "worktree_sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "baseline": {
+        "added": 7,
+        "deleted": 205,
+        "total": 212,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 0,
+        "total": 0,
+        "blocks": 0
+      },
+      "worktree_sha256": "b708f1fee46e93735c4c931d556e16daa9679e6352d72620904d18ad21396abf"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "baseline": {
+        "added": 362,
+        "deleted": 2324,
+        "total": 2686,
+        "blocks": 41
+      },
+      "delivered": {
+        "added": 118,
+        "deleted": 147,
+        "total": 265,
+        "blocks": 68
+      },
+      "worktree": {
+        "added": 118,
+        "deleted": 147,
+        "total": 265,
+        "blocks": 68
+      },
+      "worktree_sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "baseline": {
+        "added": 28,
+        "deleted": 1412,
+        "total": 1440,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 17,
+        "deleted": 1377,
+        "total": 1394,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 17,
+        "deleted": 1377,
+        "total": 1394,
+        "blocks": 13
+      },
+      "worktree_sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "baseline": {
+        "added": 36,
+        "deleted": 46,
+        "total": 82,
+        "blocks": 21
+      },
+      "delivered": {
+        "added": 25,
+        "deleted": 43,
+        "total": 68,
+        "blocks": 22
+      },
+      "worktree": {
+        "added": 25,
+        "deleted": 43,
+        "total": 68,
+        "blocks": 22
+      },
+      "worktree_sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "baseline": {
+        "added": 17,
+        "deleted": 485,
+        "total": 502,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 14,
+        "deleted": 484,
+        "total": 498,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 14,
+        "deleted": 484,
+        "total": 498,
+        "blocks": 5
+      },
+      "worktree_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "baseline": {
+        "added": 21,
+        "deleted": 706,
+        "total": 727,
+        "blocks": 12
+      },
+      "delivered": {
+        "added": 18,
+        "deleted": 706,
+        "total": 724,
+        "blocks": 11
+      },
+      "worktree": {
+        "added": 18,
+        "deleted": 706,
+        "total": 724,
+        "blocks": 11
+      },
+      "worktree_sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "baseline": {
+        "added": 83,
+        "deleted": 2086,
+        "total": 2169,
+        "blocks": 33
+      },
+      "delivered": {
+        "added": 81,
+        "deleted": 2085,
+        "total": 2166,
+        "blocks": 34
+      },
+      "worktree": {
+        "added": 81,
+        "deleted": 2085,
+        "total": 2166,
+        "blocks": 34
+      },
+      "worktree_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 1060,
+        "total": 1065,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 1050,
+        "total": 1052,
+        "blocks": 5
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 1050,
+        "total": 1052,
+        "blocks": 5
+      },
+      "worktree_sha256": "1b7ae99a06a1acb4430357e8450e1756bdc737433e1e9228b25bcb1dbe027333"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "baseline": {
+        "added": 80,
+        "deleted": 5810,
+        "total": 5890,
+        "blocks": 25
+      },
+      "delivered": {
+        "added": 31,
+        "deleted": 5783,
+        "total": 5814,
+        "blocks": 49
+      },
+      "worktree": {
+        "added": 31,
+        "deleted": 5783,
+        "total": 5814,
+        "blocks": 49
+      },
+      "worktree_sha256": "db5d5f21f8729a0f9eb7f3f63462635de8d6b01299996fed223a4727bbaae49d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c",
+      "baseline": {
+        "added": 3,
+        "deleted": 201,
+        "total": 204,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 0,
+        "deleted": 198,
+        "total": 198,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 0,
+        "deleted": 198,
+        "total": 198,
+        "blocks": 3
+      },
+      "worktree_sha256": "cbc58c0dfacf774822507dee0aa3097284a7abeaae1b096e51f1949666967c28"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "baseline": {
+        "added": 324,
+        "deleted": 10251,
+        "total": 10575,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 127,
+        "deleted": 9887,
+        "total": 10014,
+        "blocks": 155
+      },
+      "worktree": {
+        "added": 127,
+        "deleted": 9887,
+        "total": 10014,
+        "blocks": 155
+      },
+      "worktree_sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "baseline": {
+        "added": 33,
+        "deleted": 949,
+        "total": 982,
+        "blocks": 19
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 875,
+        "total": 882,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 875,
+        "total": 882,
+        "blocks": 8
+      },
+      "worktree_sha256": "430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "baseline": {
+        "added": 91,
+        "deleted": 4410,
+        "total": 4501,
+        "blocks": 27
+      },
+      "delivered": {
+        "added": 64,
+        "deleted": 4362,
+        "blocks": 23,
+        "total": 4426
+      },
+      "worktree": {
+        "added": 64,
+        "deleted": 4362,
+        "blocks": 23,
+        "total": 4426
+      },
+      "worktree_sha256": "237dd8a0da335db734e72faa3c4d52a1bd91b9c970c01e5cc87db06f6fa72335"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "baseline": {
+        "added": 8,
+        "deleted": 388,
+        "total": 396,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 3,
+        "deleted": 362,
+        "total": 365,
+        "blocks": 7
+      },
+      "worktree": {
+        "added": 3,
+        "deleted": 362,
+        "total": 365,
+        "blocks": 7
+      },
+      "worktree_sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "baseline": {
+        "added": 46,
+        "deleted": 1912,
+        "total": 1958,
+        "blocks": 18
+      },
+      "delivered": {
+        "added": 20,
+        "deleted": 1669,
+        "total": 1689,
+        "blocks": 30
+      },
+      "worktree": {
+        "added": 20,
+        "deleted": 1669,
+        "total": 1689,
+        "blocks": 30
+      },
+      "worktree_sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "baseline": {
+        "added": 51,
+        "deleted": 44,
+        "total": 95,
+        "blocks": 32
+      },
+      "delivered": {
+        "added": 24,
+        "deleted": 21,
+        "total": 45,
+        "blocks": 17
+      },
+      "worktree": {
+        "added": 24,
+        "deleted": 21,
+        "total": 45,
+        "blocks": 17
+      },
+      "worktree_sha256": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "baseline": {
+        "added": 149,
+        "deleted": 5145,
+        "total": 5294,
+        "blocks": 13
+      },
+      "delivered": {
+        "blocks": 67,
+        "added": 47,
+        "deleted": 444,
+        "total": 491
+      },
+      "worktree": {
+        "blocks": 67,
+        "added": 47,
+        "deleted": 444,
+        "total": 491
+      },
+      "worktree_sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "baseline": {
+        "added": 27,
+        "deleted": 199,
+        "total": 226,
+        "blocks": 26
+      },
+      "delivered": {
+        "added": 27,
+        "deleted": 199,
+        "total": 226,
+        "blocks": 26
+      },
+      "worktree": {
+        "blocks": 17,
+        "added": 17,
+        "deleted": 132,
+        "total": 149
+      },
+      "worktree_sha256": "ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "baseline": {
+        "added": 5,
+        "deleted": 1075,
+        "total": 1080,
+        "blocks": 8
+      },
+      "delivered": {
+        "added": 5,
+        "deleted": 1075,
+        "total": 1080,
+        "blocks": 8
+      },
+      "worktree": {
+        "added": 5,
+        "deleted": 1075,
+        "total": 1080,
+        "blocks": 8
+      },
+      "worktree_sha256": "db7291ed0d0c88752195e45e4bb7d00262cbcf21c8326924bd617ebc7872535f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "baseline": {
+        "added": 45,
+        "deleted": 1721,
+        "total": 1766,
+        "blocks": 32
+      },
+      "delivered": {
+        "added": 45,
+        "deleted": 1721,
+        "total": 1766,
+        "blocks": 32
+      },
+      "worktree": {
+        "added": 45,
+        "deleted": 1721,
+        "total": 1766,
+        "blocks": 32
+      },
+      "worktree_sha256": "727c7d0d9db37906236b54ed554c20f9f068689750501a92172929920ffa9185"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "baseline": {
+        "added": 25,
+        "deleted": 226,
+        "total": 251,
+        "blocks": 9
+      },
+      "delivered": {
+        "added": 25,
+        "deleted": 226,
+        "total": 251,
+        "blocks": 9
+      },
+      "worktree": {
+        "added": 25,
+        "deleted": 226,
+        "total": 251,
+        "blocks": 9
+      },
+      "worktree_sha256": "0cbc2bcbd53a1f10841f2a66c5b51c086ddde931f8c95cd91a82d8cc30c72e16"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+      "baseline": {
+        "added": 9,
+        "deleted": 37,
+        "total": 46,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 9,
+        "deleted": 37,
+        "total": 46,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 9,
+        "deleted": 37,
+        "total": 46,
+        "blocks": 3
+      },
+      "worktree_sha256": "d56c1550a4e1969665434b9acf8e8c339c0771a0c26e5887fc0b33ec24bfaf2b"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 99,
+        "total": 106,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 99,
+        "total": 106,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 99,
+        "total": 106,
+        "blocks": 4
+      },
+      "worktree_sha256": "16fe6ac52ac0365b94a37272a8c80cd47a1edfd0042c9f076cb94c0ad1c427e4"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+      "baseline": {
+        "added": 1,
+        "deleted": 390,
+        "total": 391,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 1,
+        "deleted": 390,
+        "total": 391,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 1,
+        "deleted": 390,
+        "total": 391,
+        "blocks": 3
+      },
+      "worktree_sha256": "e156cf5a19cdd03c90152b91e26235c06be7beb915d7941f4e29cff9b6e35863"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "baseline": {
+        "added": 28,
+        "deleted": 10,
+        "total": 38,
+        "blocks": 4
+      },
+      "delivered": {
+        "added": 28,
+        "deleted": 10,
+        "total": 38,
+        "blocks": 4
+      },
+      "worktree": {
+        "added": 28,
+        "deleted": 10,
+        "total": 38,
+        "blocks": 4
+      },
+      "worktree_sha256": "f4b570b778fc22b1f42ab7e4327183e87aab99c9630d197f1a0bba760089857d"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "baseline": {
+        "added": 27,
+        "deleted": 204,
+        "total": 231,
+        "blocks": 17
+      },
+      "delivered": {
+        "added": 27,
+        "deleted": 204,
+        "total": 231,
+        "blocks": 17
+      },
+      "worktree": {
+        "added": 27,
+        "deleted": 204,
+        "total": 231,
+        "blocks": 17
+      },
+      "worktree_sha256": "f20911c98a0b6fa2e19f5952428aa5a5fb0f5385166fa523a3da723290212a85"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "baseline": {
+        "added": 10,
+        "deleted": 528,
+        "total": 538,
+        "blocks": 13
+      },
+      "delivered": {
+        "added": 10,
+        "deleted": 528,
+        "total": 538,
+        "blocks": 13
+      },
+      "worktree": {
+        "added": 10,
+        "deleted": 528,
+        "total": 538,
+        "blocks": 13
+      },
+      "worktree_sha256": "efe40b062547f1b6201fd81455c1a4b32de265cc81ae55795c8ed0fd72f69e74"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "baseline": {
+        "added": 7,
+        "deleted": 652,
+        "total": 659,
+        "blocks": 22
+      },
+      "delivered": {
+        "added": 7,
+        "deleted": 652,
+        "total": 659,
+        "blocks": 22
+      },
+      "worktree": {
+        "added": 7,
+        "deleted": 652,
+        "total": 659,
+        "blocks": 22
+      },
+      "worktree_sha256": "92ee276bdde1f5a48d85903d3627826a09210be0b7977773148addb5a05c77bb"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "baseline": {
+        "added": 2,
+        "deleted": 96,
+        "total": 98,
+        "blocks": 3
+      },
+      "delivered": {
+        "added": 2,
+        "deleted": 96,
+        "total": 98,
+        "blocks": 3
+      },
+      "worktree": {
+        "added": 2,
+        "deleted": 96,
+        "total": 98,
+        "blocks": 3
+      },
+      "worktree_sha256": "0f4f3b63034459ac1f0eb7c3e951348776512a7167f75733cc4c64da62a28cbd"
+    }
+  ]
+}

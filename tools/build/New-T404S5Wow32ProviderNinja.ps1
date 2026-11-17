@@ -241,7 +241,7 @@ $systemImportAliases = @(
   '    RtlMultiByteToUnicodeN', '    RtlUnicodeStringToAnsiString',
   '    RtlUnicodeToMultiByteSize', '    RtlIsNameLegalDOS8Dot3',
   '    RtlRunEncodeUnicodeString', '    RtlRunDecodeUnicodeString',
-  '    RtlUnicodeToMultiByteN', '    RtlUnicodeStringToInteger', '    RtlIntegerToUnicodeString', '    RtlRaiseStatus', '    DbgBreakPoint') |
+  '    NlsAnsiCodePage DATA', '    RtlUnicodeToMultiByteN', '    RtlUnicodeStringToInteger', '    RtlIntegerToUnicodeString', '    RtlRaiseStatus', '    DbgBreakPoint') |
     Set-Content -LiteralPath $legacyNtdllDefinition -Encoding ascii
 $systemImportAliasSource = Join-Path $build 'wow32-system-import-abi-aliases.c'
 $systemImportAliases += [pscustomobject]@{ Decorated = 'RtlUnicodeStringToInteger@12'; Raw = 'RtlUnicodeStringToInteger' }
