@@ -113,7 +113,12 @@ The test manifest matches the 11 images at both published destinations.
 DOS4GW/NESticle rendered its menu and passed Escape hide/restore.
 [P10 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p10-checkpoint.json).
 
-S7 progress is 87 reviewed and 126 remaining. Source restorations reduce
+S7 P11 completes six file reviews with production source unchanged.
+A virtual.c blank-line experiment was reverted because it split a filtered
+difference point. The reviewed residuals remain in the pending decision list.
+[P11 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p11-checkpoint.json).
+
+S7 progress is 93 reviewed and 120 remaining. Source restorations reduce
 21 points and 547 changed lines in S7. The current census is 2,027 non-error
 points and 28,431 changed lines across 237 mirrors with filtered differences.
 

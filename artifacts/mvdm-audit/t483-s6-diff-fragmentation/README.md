@@ -332,3 +332,7 @@ differences. The current census is 2,027 points and 28,434 changed lines.
 [S7 P10 receipt](s7-p10-checkpoint.json) records ten reviewed files and two
 formatting restorations. The current census is 2,027 non-error points and
 28,431 changed lines.
+
+[S7 P11 receipt](s7-p11-checkpoint.json) records six reviewed files.
+The production files retain their prior bytes and the census remains
+2,027 non-error points and 28,431 changed lines.

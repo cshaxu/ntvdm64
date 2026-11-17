@@ -1,0 +1,120 @@
+{
+  "packet": "M0 T483 S7 P11",
+  "prior_delivery": "f699f81d0",
+  "reviews": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 2
+      },
+      "source_sha256": "71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668",
+      "original_sha256": "7ffe7d97c36f1aa6ab119eb7f0c9ca70fd8eb57cbefe322e40d0c5df041be16f",
+      "decision": "Retain native GetWindowContextHelpId acquisition through the pinned client view. The original ancestor traversal and two original helper bodies are preserved. NT4 _GetProp depends on private atom and property state that the projected window does not contain.",
+      "evidence": "../t483-remaining-reaudit/p252-help-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.h",
+      "before": {
+        "blocks": 5,
+        "added": 20,
+        "deleted": 4
+      },
+      "after": {
+        "blocks": 5,
+        "added": 20,
+        "deleted": 4
+      },
+      "source_sha256": "2e1cd19f01befb3f5e077fa433cfdc041ae5326da831922f57324a062309a1fe",
+      "original_sha256": "05839ffe54047bacc09dbc2d9ad76e8e6dfc4adfa9d0de324c7d9f25001609d4",
+      "decision": "Keep bounded per-conversion ownership, embedded COPYDATA provenance and the initiator publication result. Original/current controls demonstrated incomplete output after subobject allocation failure and loss of an outer initiator after failed nested allocation. The declarations match actual production consumers.",
+      "evidence": "../t483-remaining-reaudit/r1413-r1417-wdde-header-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "before": {
+        "blocks": 5,
+        "added": 0,
+        "deleted": 137
+      },
+      "after": {
+        "blocks": 5,
+        "added": 0,
+        "deleted": 137
+      },
+      "source_sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+      "original_sha256": "014e568b4f4ae57d54b8afc4502c890cd19ef1a698273561d9627b1b9c9ec10a",
+      "decision": "Keep original Unicode implementations. The actual full-original link reports duplicate ANSI exports from USER32 and unresolved GdiGetCodePage and UserLocalFree. The existing Unicode candidate links and is covered by direct wrapper tests.",
+      "evidence": "../t483-remaining-reaudit/p230-drawtext-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "before": {
+        "blocks": 5,
+        "added": 22,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 5,
+        "added": 22,
+        "deleted": 0
+      },
+      "source_sha256": "aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622",
+      "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+      "decision": "A blank-only experiment saved one line but split a diff point and was reverted. Keep the companion driver BOP boundary outside the original NIDDB dispatch, its actual typed cleanup provider, rollback of the unpublished allocation table, and validation before indexing the 80-slot table. Original branches and exclusions remain.",
+      "evidence": "../t483-remaining-reaudit/r0346-r0352-virtual-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.h",
+      "before": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "source_sha256": "15e0dd57428921940933d6340b88dc8354f009b631679fba0fcb3fab8c2f734a",
+      "original_sha256": "82e539d3278858b018a742c1890862471bca2f2e7166c663fbebba0c02e20dc3",
+      "decision": "Keep the two original-owned TLS extern declarations. The native callback uses them to restore the nested hook index and parameters; original W32GetHookParams is read-only. Relocation would keep the same dependency.",
+      "evidence": "../t483-remaining-reaudit/r1765-wowhooks-header-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/winsockp.h",
+      "before": {
+        "blocks": 3,
+        "added": 17,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 3,
+        "added": 17,
+        "deleted": 0
+      },
+      "source_sha256": "14bfe1a54324736958561935ac88df621b330f2b362b2aa31bfdf8e30b06f2d2",
+      "original_sha256": "08e825ba1ce4b4226bf46045ffb2c0dad08e38a6a9bbb18653215c64a05086d1",
+      "decision": "Keep per-task async request serial and retirement state plus the two remaining declarations used by actual Winsock cancellation/teardown callers. Original finder returns already-retired contexts and original public cancellation is a stub. P155 already removed seven lines and reused the original remover; do not count that twice.",
+      "evidence": "../t483-remaining-reaudit/batch-p155-checkpoint.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 93,
+    "remaining": 120,
+    "nonzero_files": 237,
+    "non_error_points": 2027,
+    "non_error_lines": 28431,
+    "source_reduction_s7": {
+      "points": 21,
+      "lines": 547
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. A virtual.c whitespace experiment was discarded because it increased the number of filtered points. All six production files retain their exact prior bytes. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}
