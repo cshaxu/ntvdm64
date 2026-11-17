@@ -36,8 +36,8 @@ normalized/error-masked differences;255 have nonzero counts. The initial2333
 block sum is conservative:75 mask-review cases in31 files remain counted.
 These are counting uncertainties,not permission to delete or retain code.
 Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
-S6 review16/255 complete;239 files remain. Thirteen changed files verified across
-P2/P3/P4/P5/P6/P7/P8,three unchanged files fully reviewed. Current census2314 blocks;
+S6 review17/255 complete;238 files remain. Thirteen changed files verified across
+P2/P3/P4/P5/P6/P7/P8,four unchanged files fully reviewed. Current census2314 blocks;
 cumulative delivered reduction19 blocks/85 lines;P8 reduction0 blocks/7 lines. P5 cached full,publish11x2,focused,
 Full20 and governance passed;Git delivery accompanies the P5 receipt.
 
@@ -66,7 +66,7 @@ boundary143/9 and governance passes. Git delivery accompanies the receipt.
 Per-file evidence is indexed in the worklist README. Residual decisions remain
 pending owner,not approved. Known sevid000 CHAIN4 word/UNCHAINED string
 limitations are not represented as passing tests. Backlog1644 rows/1649 R points;
-R1519 remains restored,not deferred. P5 committed/pushed f6d6f78c5. wmsg16.c whole-file review complete;P6 verified delivery accompanies receipt. P6 committed/pushed2202c9239. P7 committed/pushed e1d946570. Client ntstubs whole-file review complete;nonbehavioral include restoration delivered in P8. queue.c whole-file review complete;P8 verification complete;delivery accompanies receipt. Next:wow32/wcntl32.c,34 blocks. nt_event.c reviewed:43->43 blocks,
+R1519 remains restored,not deferred. P5 committed/pushed f6d6f78c5. wmsg16.c whole-file review complete;P6 verified delivery accompanies receipt. P6 committed/pushed2202c9239. P7 committed/pushed e1d946570. Client ntstubs whole-file review complete;nonbehavioral include restoration delivered in P8. queue.c whole-file review complete;P8 verification complete;delivery accompanies receipt. P8 committed/pushed8b4f50ecd. wcntl32.c reviewed unchanged;Next:keymouse/mouse_io.c,33 conservative blocks. nt_event.c reviewed:43->43 blocks,
 124->121 lines;two added X86GFX exclusions remain conservatively counted.
 [P4 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p4-checkpoint.json)
 records final cached/full/publication/message/focused/boundary/governance passes.
@@ -134,3 +134,5 @@ S6 is owner-admitted after S5's verified,pushed closure. Current stays below
 [Queue review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/queue-whole-file-review.json):35->35 points,4178->4173 lines;P8 also includes client ntstubs -2 lines. Verified and delivered in P8.
 
 [P8 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p8-checkpoint.json) binds the two-file batch,compiler equivalence and Full20.
+
+[wcntl32 review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/wcntl32-whole-file-review.json):34->34 points,+37/-32=69 lines unchanged;P8 source-identical evidence reused,residuals pending owner.

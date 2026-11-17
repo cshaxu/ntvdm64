@@ -164,3 +164,5 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [Queue whole-file review](queue-whole-file-review.json):35->35 points,4178->4173 lines;harmless original allocator declarations/constant restored. P8 verification complete,combined with client include restoration (-7 lines).
 
 [P8 receipt](batch-p8-checkpoint.json) and [evidence](p8-verification-evidence.zip):client ntstubs -2 lines and queue -5 lines,0 block change;cached full,publish11x2,focused,Full20 and governance passed. Residuals remain pending owner.
+
+[wcntl32 whole-file review](wcntl32-whole-file-review.json):34 points,+37/-32=69 lines unchanged;all remaining allocation/release and mapped-reference differences retain concrete failure evidence,pending owner. No source edit or repeated build.

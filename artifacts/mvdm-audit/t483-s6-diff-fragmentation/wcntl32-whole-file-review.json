@@ -1,0 +1,395 @@
+{
+  "file": "src/mvdm-host/wow32/wcntl32.c",
+  "source_sha256": "3d592e96fd4f53002609ecad220af5d73162be932277a17a3847944cfda7e141",
+  "original_sha256": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59",
+  "before": {
+    "blocks": 34,
+    "added": 37,
+    "deleted": 32
+  },
+  "after": {
+    "blocks": 34,
+    "added": 37,
+    "deleted": 32
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 0
+  },
+  "status": "Whole-file source and counter-review complete;no source change;residual decisions pending owner",
+  "points": [
+    {
+      "id": "T483-R1336",
+      "original_line": 17,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Explicit lifetime declaration",
+      "evidence": "Original exceptional control conversions skip normal free16; concrete exact-original body fixture demonstrates unreleased heap buffers. Remaining APIs use WINAPI and CB_DIR uses WOW_TEXT_ACTIVE/MAPPED constants declared in this header; do not replace with implicit declarations.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1337",
+      "original_line": 107,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1338",
+      "original_line": 113,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1339",
+      "original_line": 131,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1340",
+      "original_line": 137,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1341",
+      "original_line": 182,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1342",
+      "original_line": 194,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1343",
+      "original_line": 232,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1344",
+      "original_line": 246,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1345",
+      "original_line": 320,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1346",
+      "original_line": 327,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1347",
+      "original_line": 409,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1348",
+      "original_line": 419,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1349",
+      "original_line": 447,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Consumed ownership snapshot",
+      "evidence": "Keep the single local snapshot while clearing dwParam before DeleteParamMap/free16. Initialize at function entry instead of separate unthunk assignment. No extra state owner or failure path.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1350",
+      "original_line": 448,
+      "before": 2,
+      "after": 0,
+      "delta": -2,
+      "problem": "Redundant initialization",
+      "evidence": "Restore original absence of these two resets. W32Win16WndProcEx, W32DialogFunc, ThunkCallWndProcHook, ThunkMsgFilterHook and WCD32CommonDialogProc initialize fresh WM32MSGPARAMEX to zero. putmsg16 selects only COMMAND/DDE/DROPFILES and cannot dispatch CB_DIR. Null input already carries null lParam; successful map/heap acquisition assigns lParam; pre-acquisition failure has no ACTIVE bit so unthunk does not free an incoming native pointer.",
+      "decision": "restore original"
+    },
+    {
+      "id": "T483-R1351",
+      "original_line": 456,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Borrowed map acquisition",
+      "evidence": "Original GetParam16 increments map reference count. A callback exception skips normal DeleteParamMap. Captured MAPPED/ACTIVE provenance enables exactly one reference release and prevents treating borrowed guest storage as heap ownership.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1352",
+      "original_line": 464,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "Heap acquisition",
+      "evidence": "CB_DIR fallback malloc16 succeeds before putstr16, which can fault. ACTIVE records the actual acquired allocation without classifying an incoming native pointer as guest ownership.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1353",
+      "original_line": 467,
+      "before": 9,
+      "after": 8,
+      "delta": -1,
+      "problem": "Consume original map/heap provenance",
+      "evidence": "Original unthunk does not record consumed ownership. Calling it on normal exit and final cleanup decrements the borrowed reference twice, or frees heap twice. Retain consumed-state release using original DeleteParamMap/free16; remove only duplicate local assignment. Original map count and heap release fixtures cover normal/abort/repeated cleanup.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1354",
+      "original_line": 472,
+      "before": 1,
+      "after": 1,
+      "delta": 0,
+      "problem": "No acquisition or already consumed",
+      "evidence": "Without ACTIVE, pre-acquisition fault cleanup could use the incoming native lParam, or repeated cleanup could release already consumed storage. Gate release on acquired state, not pointer nonzeroness.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1355",
+      "original_line": 554,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1356",
+      "original_line": 575,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1357",
+      "original_line": 593,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1358",
+      "original_line": 599,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1359",
+      "original_line": 727,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1360",
+      "original_line": 760,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1361",
+      "original_line": 815,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1362",
+      "original_line": 826,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1363",
+      "original_line": 846,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1364",
+      "original_line": 854,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1365",
+      "original_line": 871,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1366",
+      "original_line": 878,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1367",
+      "original_line": 893,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1368",
+      "original_line": 899,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1369",
+      "original_line": 953,
+      "before": 3,
+      "after": 2,
+      "delta": -1,
+      "problem": "Capture heap allocation",
+      "evidence": "Exact pinned original converter body leaks the acquired buffer when construction, callback or copyback escapes before normal free16. Existing per-call dwTmp[1] records only completed malloc16. lParam alone is not a safe ownership marker: it initially contains a native pointer, and LB_DIR assigns the acquired local vp only after putstr16. A generic lParam-only finalizer would need converter-specific construction tracking; moving that table into a shim does not simplify the complete solution. Remove redundant standalone comment; retain one wrapper pending owner decision.",
+      "decision": "residual pending owner"
+    },
+    {
+      "id": "T483-R1370",
+      "original_line": 963,
+      "before": 2,
+      "after": 2,
+      "delta": 0,
+      "problem": "Consume captured heap key",
+      "evidence": "Normal original free16 does not clear the captured ownership key. The existing finalizer must also clean exceptional exits, so restoring only this free would leave a stale key and cause a second release. The current helper consumes the key before invoking original free16; normal output copy order remains unchanged. Retain minimal single-call substitution pending owner decision.",
+      "decision": "residual pending owner"
+    }
+  ],
+  "call_chain": [
+    "wmdisp32.c W32Win16WndProc zero-initialized call record -> selected control constructor -> CallBack16 -> normal unthunk -> finally wow_message_unwind32",
+    "wowhooks.c call-owned records and finalizers use the same lifetime provider",
+    "wow_message_heap32 records successful allocation in existing dwTmp[1]; release consumes it before free16"
+  ],
+  "counter_review": [
+    "Removing allocation capture loses LB_DIR allocation if putstr16 fails before lParam assignment. A generic lParam cleanup requires per-converter construction states and is not a simplification.",
+    "Restoring normal free alone leaves captured key live for final cleanup. Moving release to finally must still distinguish completed output conversion and exceptional construction; no smaller complete solution established.",
+    "CB_DIR must distinguish acquired map reference from heap and consume once; current ambient thunk flag cannot prove acquisition ownership.",
+    "No harmless original declarations or complete deleted units remain to restore. No changes to mirror/autonomous code or second resource table."
+  ],
+  "line_evidence": {
+    "source_identical_to_verified_P138": true,
+    "shared_selected_lines": 540,
+    "mismatches": 0,
+    "error_branches": 0
+  },
+  "validation": {
+    "P8_receipt": "batch-p8-checkpoint.json",
+    "current_fixture": "191 scenarios failures=0; exact-body service doubles,not guest proof",
+    "negative_fixture": "78 failures across entire fixture;not 78 defects in this file",
+    "scope": "Reused final P8 source-identical transaction and Full20 evidence;no redundant build for documentation-only review"
+  }
+}
