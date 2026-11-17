@@ -17,7 +17,7 @@ BOOL WINAPI wow_button_resources_initialize(wow_button_resources *resources)
     ZeroMemory(resources->bm, sizeof(resources->bm));
     for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
         OEMBITMAPINFO *image = &resources->bm[i];
-        if (i >= OBI_3STATE && !(sysBmpStyles[i][1] & DFCS_CHECKED)) {
+        if (i >= OBI_3STATE && !(sysBmpStyles[i - OBI_RADIOMASK][1] & DFCS_CHECKED)) {
             /* Registered correction: derive the offset, not stale8. */
             *image = resources->bm[i - (OBI_3STATE - OBI_CHECK)];
         } else {
@@ -78,10 +78,10 @@ BOOL WINAPI wow_button_resources_ready(wow_button_resources *resources)
         for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
             OEMBITMAPINFO *image = &resources->bm[i];
             RECT rect = {image->x, image->y, image->x + image->cx, image->y + image->cy};
-            if (i >= OBI_3STATE && !(sysBmpStyles[i][1] & DFCS_CHECKED))
+            if (i >= OBI_3STATE && !(sysBmpStyles[i - OBI_RADIOMASK][1] & DFCS_CHECKED))
                 continue; /* Alias already rendered by its earlier owner. */
-            if (!DrawFrameControl(pending.dc, &rect, sysBmpStyles[i][0],
-                    sysBmpStyles[i][1])) goto failed;
+            if (!DrawFrameControl(pending.dc, &rect, sysBmpStyles[i - OBI_RADIOMASK][0],
+                    sysBmpStyles[i - OBI_RADIOMASK][1])) goto failed;
         }
         resources->dc = pending.dc;
         resources->bitmap = pending.bitmap;

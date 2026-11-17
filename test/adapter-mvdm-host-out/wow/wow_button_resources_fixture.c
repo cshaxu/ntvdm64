@@ -162,7 +162,7 @@ static void native_images(void)
         unsigned owner = i;
         if (i == OBI_3STATE) owner = OBI_CHECK;
         if (i == OBI_3STATE_D) owner = OBI_CHECK_D;
-        CHECK(DrawFrameControl(reference, &rect, sysBmpStyles[owner][0], sysBmpStyles[owner][1]));
+        CHECK(DrawFrameControl(reference, &rect, sysBmpStyles[owner - OBI_RADIOMASK][0], sysBmpStyles[owner - OBI_RADIOMASK][1]));
         CHECK(wow_button_resources_blit(&first, target, 0, 0, 13, 13,
             first.bm[i].x, first.bm[i].y, SRCCOPY));
         for (y = 0; y < 13; ++y) for (x = 0; x < 13; ++x)

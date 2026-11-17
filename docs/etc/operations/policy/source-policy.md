@@ -448,3 +448,12 @@ GetFullUserHandle, lines 293–320, to src/compat/include/wow_full_user_handle.h
 and use its original symbol and DWORD(WORD) signature with the existing x86
 calling convention. Preserve the single selected-metadata accessor from
 OPENNT-HOST-070 and the existing DDE short-handle fallback.
+
+### T483 S6 P31 production-only brush and button resources
+
+Choose extraction units from actual production callers and data consumers.
+A compiled or test-only unit is not evidence of production use. Retire the
+OpenNT windows/core/ntuser/kernel/random.c subset and preserve only the
+original xxxGetControlBrush, lines 208–232, with its symbol, signature and
+calling convention. The sysBmpStyles table in compat keeps the 16 production
+rows from windows/core/ntuser/kernel/inctlpan.c:79–94 in original order.

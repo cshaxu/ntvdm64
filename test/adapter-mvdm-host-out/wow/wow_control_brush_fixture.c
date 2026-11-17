@@ -2,11 +2,6 @@
 #include "wow_edit_call_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include <stdio.h>
-#include <stdlib.h>
-
-/* Restored sibling traversal is outside this fixture; never fake success. */
-DWORD WINAPI GetAppCompatFlags(PWOW_CLIENT_THREADINFO thread)
-{ (void)thread; fputs("Unexpected GetAppCompatFlags boundary\n", stderr); abort(); }
 
 /* Actual original client/server bodies and adapter, with explicit lifetime
  * and color-service doubles. Not a real HWND/guest lifetime acceptance. */
@@ -15,8 +10,6 @@ static HWND expected;
 static unsigned failures, depth, calls, retains, leaves;
 static BOOL deny_enter, deny_validate, deny_retain, raise_color;
 static PWND rejected_state;
-BOOL WINAPI CheckPwndFilter(PWND, PWND);
-int view_fixture_CXMINIMIZED, view_fixture_CYMINIMIZED;
 #define TEST_EXCEPTION ((DWORD)0xe0424473)
 #define CHECK(c) do { if (!(c)) { ++failures; printf("FAIL %d\n", __LINE__); } } while (0)
 
@@ -76,8 +69,6 @@ int __cdecl main(void)
 {
     unsigned before;
     BOOL caught;
-    view_fixture_CXMINIMIZED = GetSystemMetrics(SM_CXMINIMIZED);
-    view_fixture_CYMINIMIZED = GetSystemMetrics(SM_CYMINIMIZED);
     control.head.h = (HWND)(ULONG_PTR)1;
     parent.head.h = (HWND)(ULONG_PTR)2;
     owner.head.h = (HWND)(ULONG_PTR)3;
@@ -87,16 +78,6 @@ int __cdecl main(void)
     check_selection(0, &parent, &owner, parent.head.h);
     check_selection(WS_POPUP, &parent, NULL, control.head.h);
     check_selection(WS_CHILD, NULL, &owner, control.head.h);
-    CHECK(CheckPwndFilter(&control, NULL));
-    CHECK(CheckPwndFilter(&control, &control));
-    CHECK(CheckPwndFilter(NULL, (PWND)1));
-    CHECK(!CheckPwndFilter(NULL, &parent));
-    control.style = WS_CHILD; control.spwndParent = &parent;
-    parent.style = WS_CHILD; parent.spwndParent = &owner;
-    CHECK(CheckPwndFilter(&control, &parent));
-    CHECK(CheckPwndFilter(&control, &owner));
-    control.style = WS_POPUP;
-    CHECK(!CheckPwndFilter(&control, &parent));
     before = calls;
     CHECK(!GetControlBrush(control.head.h, NULL, WM_CTLCOLORLISTBOX));
     CHECK(calls == before && depth == 0);

@@ -543,13 +543,13 @@ $controlColorObject = 'obj/opennt-user/control-color.obj'
 $objects.Add($controlColorObject)
 $ninja.Add('build ' + $controlColorObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_COLOR')
-$controlBrushObject = 'obj/opennt-user/control-brush.obj'
+$controlBrushObject = 'obj/compat/wow-control-brush.obj'
 $controlBrushClientObject = 'obj/opennt-user/control-brush-client.obj'
 $objects.Add($controlBrushClientObject)
 $ninja.Add('build ' + $controlBrushClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT')
 $objects.Add($controlBrushObject)
-$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/random.c')))
+$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_brush.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $controlStateObject = 'obj/compat/wow-control-state.obj'
 $objects.Add($controlStateObject)

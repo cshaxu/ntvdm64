@@ -73,7 +73,7 @@ $expectedUser = @(
     'control-body-winmgrc', 'control-view-winmgr', 'control-view-wow',
     'hdata', 'clres', 'cldib', 'rtlinit', 'ntstubs', 'clmenu',
     'clglobal', 'dialog-template',
-    'control-text', 'control-color', 'control-brush-client', 'control-brush',
+    'control-text', 'control-color', 'control-brush-client',
     'control-fnid',
     'default-client', 'private-word-reader', 'private-word-client',
     'private-word-setter',
@@ -89,7 +89,7 @@ $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
 if (@(Compare-Object $expectedUser $actualUser).Count) {
     throw 'The original OpenNT USER-owner object set differs from the admitted formal graph.'
 }
-foreach ($unit in @('wow-client-dispatch','wow-dialog-memory','wow-control-state','wow-default-window-bits','wow-class-client','wow-control-rect','wow-dialog-pointer')) {
+foreach ($unit in @('wow-client-dispatch','wow-dialog-memory','wow-control-state','wow-default-window-bits','wow-class-client','wow-control-rect','wow-dialog-pointer','wow-control-brush')) {
     if ($link -notmatch ('\bobj/compat/' + $unit + '\.obj\b')) {
         throw "Missing extracted USER client unit: $unit"
     }

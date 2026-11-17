@@ -473,8 +473,8 @@ See the T447 S3 source ledger for hashes, dependency boundaries and pending
 grouped verification. Neither entry selects complete button behavior.
 
 OPENNT-HOST-113 recovered the original kernel/inctlpan.c sysBmpStyles table.
-T483 S6 P29 retires the mirror subset and keeps the complete original static
-table in ../compat/include/wow_button_style_table.h.
+T483 S6 P29 retires the mirror subset. P31 keeps the 16 original rows read
+by production in ../compat/include/wow_button_style_table.h.
 Source SHA2560E3999DF8610405C990760EE1A417BF312E3B76744F8F9387BBD94583F9D800D.
 Original OEMBITMAPINFO/button indices are opt-in inc/user.h declarations.
 The scoped native resource carrier consumes button rows only; the source
@@ -583,6 +583,7 @@ unchanged-body description for editec.c in OPENNT-HOST-073 only.
 OPENNT-HOST-102 admits the unchanged GetControlBrush client wrapper from
 windows/core/ntuser/client/ntstubs.c and xxxGetControlBrush from
 windows/core/ntuser/kernel/random.c in the pinned OpenNT revision below.
+P31 preserves the brush body in ../compat/wow_control_brush.c.
 Only subset selection/include environment changes: original null-DC check,
 popup-owner/parent/self selection and color-call ordering remain. The private
 facade retains exact WND allocations in the existing call borrow scope and

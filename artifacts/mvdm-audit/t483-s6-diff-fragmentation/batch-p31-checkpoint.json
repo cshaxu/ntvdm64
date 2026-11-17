@@ -1,0 +1,96 @@
+{
+  "packet": "M0 T483 S6 P31",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 8,
+    "files": [
+      {
+        "path": "src/compat/wow_control_brush.c",
+        "sha256": "4e955efa2db53cf1f65c84fdf853d5e302cc2287a0d77fcdc2d6ff25555c36c1"
+      },
+      {
+        "path": "src/compat/include/wow_button_style_table.h",
+        "sha256": "6f2e55a7ed0ea50b77554a0cac667c35549dd4dcab116d965f5f73bc852d5745"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_button_resources.c",
+        "sha256": "476df50c67a39f7c32bc38b6af48f592e1f2c50f40ed66df3fc3d2203969d5d8"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_button_resources_fixture.c",
+        "sha256": "da2ec66f9cf0b519f07531e34a11c8dc38a7edecfa1fd142338081cd18c2edce"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c",
+        "sha256": "23257fefb3b76acbf0e96312fff05586cc2617bfb5acbcc3655821ae3f008505"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "c8ab2acc1dad567a6ee3fa2ef697d34c43b6be86f91ec1b4e5013e4881062b5e"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "5737712446eb24fd53d179dee53541b808901664a0fdbfd0edf473561cfcd159"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "c39b18fcb8fd824e128d9dcfbf676532d76e1df992a8bb277496ae5e744fd640"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/kernel/random.c"
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "b8e9e430-0aaa-429d-b290-8953a257e5de",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "targeted": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1051,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 243,
+    "blocks": 2054,
+    "lines": 29170,
+    "reviewed_live_files": 29,
+    "remaining_files": 214,
+    "retired_reviewed_files": 12,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 239,
+    "extraction_blocks": 233,
+    "unused_removal_blocks": 6,
+    "owner_retired_lines": 24159,
+    "extraction_lines": 22943,
+    "unused_removal_lines": 1216,
+    "total_census_reduction_blocks": 279,
+    "total_census_reduction_lines": 25353
+  },
+  "limits": [
+    "Owner-approved control brush extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "Original xxxGetControlBrush preserved and button table reduced to 16 production entries",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

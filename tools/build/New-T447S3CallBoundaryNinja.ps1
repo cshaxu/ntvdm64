@@ -76,7 +76,7 @@ $units = @(
     @('dialog_memory', 'src/compat/wow_dialog_memory.c', ''),
     @('brush_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c', ''),
     @('brush_adapter', 'src/wow32-dll/source/wow_control_brush_bindings.c', ''),
-    @('brush_owner', 'src/non-mvdm/windows/core/ntuser/kernel/random.c', ''),
+    @('brush_owner', 'src/compat/wow_control_brush.c', ''),
     @('brush_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT'),
     @('default_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_window_binding_fixture.c', ''),
     @('default_adapter', 'src/wow32-dll/source/wow_default_window_bindings.c', ''),
@@ -239,7 +239,7 @@ $lines.Add('build bin/wow_dialog_getset_fixture.exe: link obj/getset_fixture.obj
 $lines.Add('build original-getset-boundary: phony bin/wow_dialog_getset_fixture.exe')
 $lines.Add('build bin/wow_edit_call_fixture.exe: link obj/edit_fixture.obj obj/edit_adapter.obj obj/control_extent.obj obj/state_guards.obj obj/color_client.obj')
 $lines.Add('build bin/wow_edit_memory_callbacks_fixture.exe: link obj/memory_fixture.obj obj/dialog_memory.obj')
-$lines.Add('build bin/wow_control_brush_fixture.exe: link obj/brush_fixture.obj obj/brush_adapter.obj obj/brush_owner.obj obj/brush_client.obj obj/view_wow.obj')
+$lines.Add('build bin/wow_control_brush_fixture.exe: link obj/brush_fixture.obj obj/brush_adapter.obj obj/brush_owner.obj obj/brush_client.obj')
 $lines.Add('build bin/wow_default_window_binding_fixture.exe: link obj/default_fixture.obj obj/default_adapter.obj')
 $lines.Add('build bin/wow_default_original_fixture.exe: link obj/default_original_fixture.obj obj/original_default.obj obj/default_view.obj obj/string_conversion.obj obj/string_services.obj')
 $lines.Add('  libs = ntdll.lib')
