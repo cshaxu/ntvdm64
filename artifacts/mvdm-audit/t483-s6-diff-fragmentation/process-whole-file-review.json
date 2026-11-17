@@ -1,0 +1,182 @@
+{
+  "file": "src/mvdm-host/oemuni/process.c",
+  "before_sha256": "11ed9917bce4b87fedf03dba69958cfa719e61bbf923823f92eef13a614b2782",
+  "after_sha256": "2bbc93661cd832f65b13c2185994ddd6bc0b0eb2afea9c7a5175d22a2d32bd47",
+  "original_sha256": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+  "before": {
+    "blocks": 47,
+    "added": 120,
+    "deleted": 48,
+    "lines": 168
+  },
+  "after": {
+    "blocks": 47,
+    "added": 119,
+    "deleted": 48,
+    "lines": 167
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 1
+  },
+  "restored": [
+    "One added empty line removed;tokens unchanged."
+  ],
+  "points": {
+    "292": "Original allocation narrows caller byte capacity to USHORT WCHAR storage; zero/short OEM queries cannot return correct encoded byte requirement without obtaining complete Unicode result. CP932 example10 WCHARs ->11 bytes ->12 includingNUL.",
+    "293": "Independent full-result capacity must be supplied to original GetSystemDirectoryW, not derived from caller OEM capacity. Provider name restored; only capacity handling remains.",
+    "294": "A zero result is failure; required-capacity result >= allocated capacity is not initialized text. Bound check must precede conversion/narrowing.",
+    "295": "Original required count is WCHARs; it is not an OEM byte requirement. Failed/grown acquisition cannot return that as a valid OEM result.",
+    "296": "Once full query result is bounded, assign exact byte Length before original RTL converter consumes it; original inline provider assignment cannot carry both required-size and narrowed length safely.",
+    "297": "Original uSize+1 grants an extra byte. CP932 11-byte output plusNUL needs12; capacity11 must report12, not write beyond the caller. Saturation avoids65536 truncating to0.",
+    "298": "Windows-directory counterpart of R0292: obtain full Unicode before byte sizing; guard USHORT carrier bound.",
+    "299": "Original GetWindowsDirectoryW provider restored, independent query capacity retained for correct OEM sizing.",
+    "300": "Windows-directory success must be nonzero and strictly smaller than supplied WCHAR capacity before conversion.",
+    "301": "Failed/grown Unicode result is not a valid OEM capacity result; return failure without converting uninitialized contents.",
+    "302": "Publish checked Unicode byte Length for RTL only after bounded full query succeeds.",
+    "303": "Windows-directory caller-byte bound and required OEM size; original uSize+1 can permit NUL overrun.",
+    "304": "Original RtlAllocateHeap failure goto bail0 reaches return ReturnValue without assignment. Keep zero initialization. Capacity and return DWORD declarations combined to reduce diff.",
+    "306": "Original caller-sized Unicode buffer cannot determine OEM requirement for short output. Query full path then allocate checked WCHAR capacity.",
+    "307": "SearchPathW must receive actual allocated Unicode capacity, not unrelated caller OEM byte capacity.",
+    "308": "Original <= treats required-size equality as success, then RtlInitUnicodeString reads an unfilled path. Strict < is required.",
+    "309": "Full Unicode result may encode to more OEM bytes. Check actual required bytes before conversion; never advertise nBufferLength+1.",
+    "310": "Successful result is OEM byte length, not previous SearchPathW WCHAR length.",
+    "311": "Original pointer difference counts WCHARs. CP932 prefix must be encoded byte offset, as original BaseClient DBCS correction also demonstrates.",
+    "312": "Growth between query and fill is insufficient-buffer result, not a usable path. Fail and release, no retry introduced.",
+    "313": "Temp path uses same complete-result OEM size requirement; original caller-sized USHORT allocation can wrap.",
+    "314": "GetTempPathW must fill actual Unicode capacity; reject failed or grown results before treating them as initialized bytes.",
+    "315": "Original returned WCHAR requirement is not OEM required byte count; fail on invalid acquisition.",
+    "316": "Assign checked Unicode Length after fill, before original converter.",
+    "317": "Original nBufferLength+1 can overrun; size OEM before conversion and saturate carrier capacity.",
+    "318": "ANSI environment value may fit fewer bytes than OEM; obtain full ANSI intermediate independently from caller. Bounded USHORT before allocation.",
+    "319": "After new query ReturnValue contains size; allocation failure must reset0 rather than return successful-looking size.",
+    "320": "Actual native probe: empty environment query/fill leaves preexisting LastError123 unchanged; initialize SUCCESS before distinguishing empty success from missing/failure.",
+    "321": "Empty value returns0 but writesNUL when capacity allows, or requires1 at zero capacity. Without this path original leaves caller data unchanged.",
+    "322": "Second ANSI query must be checked against its allocated ANSI capacity, not caller OEM capacity; growth must not be interpreted as initialized text.",
+    "323": "Original falls through after failed ANSI->Unicode conversion and invokes OEM conversion on failed state; goto keeps first error and prevents invalid subsequent conversion.",
+    "324": "Original USHORT nSize truncates65536 and uses ANSI length as OEM requirement. Compute encoded requirement before bounded output.",
+    "325": "Success must return OemString.Length; grown ANSI query must fail without converting. Existing final DBCS fixture covers both.",
+    "326": "ExpandEnvironmentStrings ANSI success value otherwise survives failed subsequent conversion; reset before conversions.",
+    "327": "RtlInitString makes Value.Buffer borrow lpDst. Failure before OEM allocation reaches original finally and frees that borrowed pointer unless detached.",
+    "328": "Original performs OEM conversion into allocated Value then frees it, leaving ANSI lpDst. Copy bounded OEM bytes and return size includingNUL.",
+    "329": "Conversion can fail before assigning UString.Buffer; finally unconditionally calls RtlFreeUnicodeString. Zero initialization prevents cleanup of uninitialized storage.",
+    "330": "Original conversion/allocation early return enters finally, which frees lpDstW and returns ReturnValue. Initialize pointer and result before all early paths.",
+    "331": "Independent UnicodeCapacity is needed to keep WCHAR provider capacity distinct from OEM cchDst and success byte count.",
+    "332": "Query complete short path even for zero/short output; original direct query returns WCHAR count, not OEM requirement.",
+    "333": "Allocate using checked Unicode capacity rather than caller byte capacity; needed for complete OEM size query.",
+    "334": "Original null-destination branch sets cchDst0 and skips full acquisition; cannot compute encoded OEM requirement. Unified acquisition replaces this branch.",
+    "335": "GetShortPathNameW receives actual allocated WCHAR capacity.",
+    "336": "Original <= admits insufficient-buffer equality; obtain encoded requirement and only convert when caller bytes suffice.",
+    "337": "Original MaximumLength=cchDst*sizeofWCHAR advertises twice caller bytes. Current RTL initializer prepares complete Unicode result before OEM-size computation; no duplicate state introduced.",
+    "338": "Original finally return ReturnValue overrides return0 on conversion failure; explicit0 is required.",
+    "339": "Return converted OEM bytes rather than prior WCHAR length.",
+    "340": "Growing short-path query must fail instead of returning unconverted WCHAR capacity as OEM success."
+  },
+  "source_recheck": [
+    "OpenNT base/ntos/rtl/nls.c RtlUnicodeStringToOemString checks byte Length against MaximumLength and writes NUL. Original +1 capacity can exceed caller buffer.",
+    "cmdpif.c calls SearchPathOem/GetShortPathNameOem with MAX_PATH+1 bytes and consumes OEM filename/part. cmdmisc/cmdenv/wdos consume OEM environment;nt_pif consumes OEM expansion.",
+    "DirectoryOem/TempPathOem have no found production callers. Retention basis is demonstrated byte-contract failure,not production break or unusedness.",
+    "Query/fill capacities,strict success bounds and initialized error returns are coupled to complete encoded sizing;no new shim or second state machine.",
+    "Original short-path finally returns ReturnValue,overriding early return0;pointer and return initialization plus explicit failure assignment are required for original cleanup."
+  ],
+  "controls": {
+    "scope": "Whole original function substitution into current source, existing CP932 fixture. Test-only providers; not guest runtime evidence. No production source edit.",
+    "initial_attempts": "PID4748 terminated without output;PID21956 compiler command incorrectly treated libraries as C sources;corrected /link placement. Neither counted as source evidence.",
+    "final_pid": 18964,
+    "terminal": true,
+    "results": [
+      {
+        "variant": "current",
+        "build_exit": 0,
+        "run_exit": 0,
+        "source_sha256": "11ed9917bce4b87fedf03dba69958cfa719e61bbf923823f92eef13a614b2782",
+        "fixture_sha256": "afb6f13159ce7fb1af38d8f09aa3052205a37503d68cdc84835c9161cdbd4003",
+        "log": "current.run.log"
+      },
+      {
+        "variant": "GetSystemDirectoryOem",
+        "build_exit": 0,
+        "run_exit": 10,
+        "source_sha256": "6fd48582e2a3fd623e4cdabb3deaefe215e4182887eca79d04b97b5f25e9d8ed",
+        "fixture_sha256": "e62ad573041029898ac05bd4e91372690dd0b21421050d9045e90dae99bf919e",
+        "log": "GetSystemDirectoryOem.run.log"
+      },
+      {
+        "variant": "GetWindowsDirectoryOem",
+        "build_exit": 0,
+        "run_exit": 11,
+        "source_sha256": "e73d380806c4db02b887c9f2b47cfdf69f456c292101604cc627d6a2ba70b48a",
+        "fixture_sha256": "2f3616ea815305f298bf1feec02d4f9bb877359ba667ec10c8540cb6c6b283e5",
+        "log": "GetWindowsDirectoryOem.run.log"
+      },
+      {
+        "variant": "GetTempPathOem",
+        "build_exit": 0,
+        "run_exit": 12,
+        "source_sha256": "842c32ec95ccc1ec03796dfd5dfd4502fb72e4f340eed139e2cbee5183cb7f9e",
+        "fixture_sha256": "db34fa089c5c247500fcc12dd5a10a1176f5894b85e2c76fdcdfc82c6a770dbb",
+        "log": "GetTempPathOem.run.log"
+      },
+      {
+        "variant": "SearchPathOem",
+        "build_exit": 0,
+        "run_exit": 9,
+        "source_sha256": "fca4afcdedd61505cb3603ab0e15edac1c3eaccea319290eace1e97a1c37c8e3",
+        "fixture_sha256": "e85cc8bcca602757e77061a5cfbda5623ac22a7085377190c64ef5c9cc1a5d8a",
+        "log": "SearchPathOem.run.log"
+      },
+      {
+        "variant": "GetEnvironmentVariableOem",
+        "build_exit": 0,
+        "run_exit": 36,
+        "source_sha256": "b984930ac37790830b402a54c9042eac9232e20e16a8ebfdb1b9b37911ed4a0b",
+        "fixture_sha256": "0c8e45341117fe9debf1be110320dc5236602d5a76da0eb3c82b26da15948361",
+        "log": "GetEnvironmentVariableOem.run.log"
+      },
+      {
+        "variant": "GetShortPathNameOem",
+        "build_exit": 0,
+        "run_exit": 24,
+        "source_sha256": "941891297eeb228e3fec7a3f17644c6bf7ccf4ffc4f9d40bf21b125eca1eb360",
+        "fixture_sha256": "2fe1f4cc9a7d14616b08c69de4e2adb0671d30d41f8ab2d94f66203cde89d07a",
+        "log": "GetShortPathNameOem.run.log"
+      }
+    ],
+    "next": "Assess each residual block against these complete-function failures; function failure alone does not prove every block necessary. Check smaller restorations and original logical lines before completing file."
+  },
+  "expansion_controls": {
+    "expand-current-failure": {
+      "build_exit": 0,
+      "run_exit": 0,
+      "output": "S37_EXPAND_FAILURE stage=1 result=0 error=8 borrowed_frees=0\nS37_EXPAND_FAILURE stage=2 result=0 error=8 borrowed_frees=0\nS37_EXPAND_CONVERSION_FAILURE_ZERO_AND_SAFE_CLEANUP_OK\nS37_ENV_FAILURE stage=1 result=0 error=8 oem_calls=0\nS37_ENV_FAILURE stage=2 result=0 error=8 oem_calls=1\nS37_ENV_CONVERSION_FAILURE_ORDER_OK\n"
+    },
+    "expand-current-native": {
+      "build_exit": 0,
+      "run_exit": 0,
+      "output": "OEMUNI_HOST_CODEPAGES OEM=437 ANSI=1252\nS37_OEM_FULLPATH_NONASCII_PART_SHORT_BUFFER_OK\nS37_OEM_EXPAND_NONASCII_OK\nS37_OEM_ENV_NONASCII_DELETE_MISSING_OK\nS37_ENV_LARGE result=3 expected=3 error=0 copied=1\nS37_ENV_LARGE_SHORT_EMPTY_DELETE_OK\n"
+    },
+    "expand-original-failure": {
+      "build_exit": 0,
+      "run_exit": 1,
+      "output": "S37_EXPAND_FAILURE stage=1 result=4 error=8 borrowed_frees=1\n"
+    },
+    "expand-original-native": {
+      "build_exit": 0,
+      "run_exit": 13,
+      "output": "OEMUNI_HOST_CODEPAGES OEM=437 ANSI=1252\nS37_OEM_FULLPATH_NONASCII_PART_SHORT_BUFFER_OK\nS37_OEM_EXPAND_MISMATCH actual=e9 expected=82 length=2\n"
+    }
+  },
+  "line_error_proof": {
+    "original_matching_line_pins_preserved": 569,
+    "error_bodies_unchanged": 1,
+    "tokens_unchanged": true
+  },
+  "counter_review": "Whole-function failures do not prove every hunk independently necessary. Individual source contracts above and prior per-point proof were rechecked. Bounds/return/cleanup are coupled;no evidence-backed smaller semantic replacement identified. Residuals remain pending owner,not approved.",
+  "limits": [
+    "CP932 uses test-only providers;not guest runtime evidence.",
+    "No new runtime claims for unused directory wrappers.",
+    "Whitespace-only edit was accumulated into P4;final candidate verification is recorded separately."
+  ],
+  "verification": "All7 DBSC variants compiled;current passed and6 original functions failed asserted contracts. Current expansion native/failure passed;original failed encoding and borrowed-free/return-value cases.",
+  "final_verification": "P4 final source cached x86/x64 full build,11x2 publication/hash,message/focused/task-order,Full20,boundary/governance passed;Git delivery accompanies P4 receipt."
+}

@@ -98,3 +98,17 @@ P3 final verification/publication passed;residual groups stay pending.
 [P3 checkpoint](batch-p3-checkpoint.json):cached full and11x2 publication
 completed;message/focused/task-order,Full20,boundary143/9 and governance passed.
 Git delivery accompanies the receipt;remote push is checked after commit.
+
+[Seventh-file review](process-whole-file-review.json):47 blocks remain;168->167
+lines,one added blank removed. [Controls](process-controls.zip) contain diagnostic
+source/scripts/logs,no binaries. Six original functions fail CP932 contracts;
+original expansion fails native encoding and cleanup controls. Residuals remain
+pending. Formatting-only edit delivered with P4.
+
+[Eighth-file review](user-whole-file-review.json):45->45 blocks,112->110lines;
+remove redundant final common-marker guard. Complete-file review finished;
+remaining ABI/layout/multipass decisions stay pending. P4 verification passed.
+
+[P4 checkpoint](batch-p4-checkpoint.json) records the frozen source and owned
+delivery:cached full,publish11x2,message/focused/task-order,Full20,boundary
+and governance passed. Git delivery accompanies receipt.

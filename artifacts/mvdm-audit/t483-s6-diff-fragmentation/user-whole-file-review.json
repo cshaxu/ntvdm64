@@ -1,0 +1,224 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "before_sha256": "edc07343eac9449f070907d0bd30e7b477cedf8c4ad5485f5b616f28f8a9dc9c",
+  "after_sha256": "0c09ef59ed8b07ed5db86093c095f7bcf66d383d440462cfbffa175ceb1a4e4c",
+  "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+  "before": {
+    "blocks": 45,
+    "added": 95,
+    "deleted": 17,
+    "lines": 112
+  },
+  "after": {
+    "blocks": 45,
+    "added": 93,
+    "deleted": 17,
+    "lines": 110
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 2
+  },
+  "restored": [],
+  "simplified": [
+    "Remove redundant #if !defined/common-marker #endif around empty #define at original line2640. The macro has only this definition and no external definitions/undefinitions in src. Identical empty redefinition preserves preprocessing state and declarations on every multipass."
+  ],
+  "remaining": [
+    {
+      "review_id": "T483-R2460",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original winerrp include activates UserSetLastError;the full supported WOW link reports unresolved references. Original rtl/debug.c390-408 sets current TEB LastErrorValue;existing public SetLastError binding already owns that operation. Keep one omitted include for owner decision;no new helper/import.",
+      "original_restoration_evidence": "Original winerrp include activates UserSetLastError;the full supported WOW link reports unresolved references. Original rtl/debug.c390-408 sets current TEB LastErrorValue;existing public SetLastError binding already owns that operation. Keep one omitted include for owner decision;no new helper/import.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2461",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original PTDB is USER kernel tagTDB;WOW tdb16.h96 defines guest TDB UNALIGNED*. Actual wuclip/wuser31/hook compilations report C2371 when both are restored. Keep only conflicting forward aliases omitted;restore the remaining original48-122 declarations.",
+      "original_restoration_evidence": "Original PTDB is USER kernel tagTDB;WOW tdb16.h96 defines guest TDB UNALIGNED*. Actual wuclip/wuser31/hook compilations report C2371 when both are restored. Keep only conflicting forward aliases omitted;restore the remaining original48-122 declarations.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2462",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original callback record requires struct tagWND*,whereas selected native cleanup PWND has a different layout. Expand that exact pointer type in CALLBACKWND instead of importing a conflicting PWND alias. Original string helpers restored and duplicate compat definitions deleted;duplicate negative control reports C2084.110 final contexts compile and complete WOW link passes.",
+      "original_restoration_evidence": "Original callback record requires struct tagWND*,whereas selected native cleanup PWND has a different layout. Expand that exact pointer type in CALLBACKWND instead of importing a conflicting PWND alias. Original string helpers restored and duplicate compat definitions deleted;duplicate negative control reports C2084.110 final contexts compile and complete WOW link passes.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2464",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Actual108 consumers identify C2371 conflicts for PQ/PTHREADINFO/PPROCESSINFO/PWND namespace. Original userk.h2156/2260/2386 types own NT4 kernel thread/process/queue state;native cleanup structures have different layouts. Keep those finite aliases omitted,restore constants and callback declarations;use exact function pointer member types instead of conflicting typedef names.",
+      "original_restoration_evidence": "Actual108 consumers identify C2371 conflicts for PQ/PTHREADINFO/PPROCESSINFO/PWND namespace. Original userk.h2156/2260/2386 types own NT4 kernel thread/process/queue state;native cleanup structures have different layouts. Keep those finite aliases omitted,restore constants and callback declarations;use exact function pointer member types instead of conflicting typedef names.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2465",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "SERVERINFO restored;mpFnidPfn/aStoCidPfn use exact original inline function pointer types and argbSystem uses COLOR_INFOBK+1,original COLOR_MAX expansion. Same-context original/candidate size and member-offset assertions pass;does not assert modern private USER ABI equivalence. Original client-view layout declarations remain selected separately from native cleanup object types.",
+      "original_restoration_evidence": "SERVERINFO restored;mpFnidPfn/aStoCidPfn use exact original inline function pointer types and argbSystem uses COLOR_INFOBK+1,original COLOR_MAX expansion. Same-context original/candidate size and member-offset assertions pass;does not assert modern private USER ABI equivalence. Original client-view layout declarations remain selected separately from native cleanup object types.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2466",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original HANDLEENTRY body restored;PHE alias omitted to avoid selected context namespace collision. CLSMENUNAME restored at original location;duplicate class binding definition deleted and existing multipass include reused. Client WND/CLS objects retain existing layout selector;110 final actual contexts compile/link.",
+      "original_restoration_evidence": "Original HANDLEENTRY body restored;PHE alias omitted to avoid selected context namespace collision. CLSMENUNAME restored at original location;duplicate class binding definition deleted and existing multipass include reused. Client WND/CLS objects retain existing layout selector;110 final actual contexts compile/link.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2467",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original remaining object and cursor declarations restored in order;CURSORDATA uses DWORD* for original PJIF alias. CWINHOOKS remains supplied as14 by existing client-view binding;modern SDK WH_MAX differs from NT4 and existing DESKTOPINFO100-byte contract must remain intact. No alternative object state introduced.",
+      "original_restoration_evidence": "Original remaining object and cursor declarations restored in order;CURSORDATA uses DWORD* for original PJIF alias. CWINHOOKS remains supplied as14 by existing client-view binding;modern SDK WH_MAX differs from NT4 and existing DESKTOPINFO100-byte contract must remain intact. No alternative object state introduced.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2468",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original client structures and controls restored in original order;client/dialog/button late inclusion selectors remain because selected consumers have native cleanup WND and original client WND with distinct layouts. Full unscoped inclusion produces measured C2371 conflicts. Unsupported FE/DEBUG bodies retain error and original outer structure.",
+      "original_restoration_evidence": "Original client structures and controls restored in original order;client/dialog/button late inclusion selectors remain because selected consumers have native cleanup WND and original client WND with distinct layouts. Full unscoped inclusion produces measured C2371 conflicts. Unsupported FE/DEBUG bodies retain error and original outer structure.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2474",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original HEAD body restored globally;SHROBJHEAD/THROBJHEAD/PROCOBJHEAD/WND/CLS/DESKTOP bodies retain client-view gating because native cleanup objects and original guest-published layouts are distinct. Full declarations without scoped ownership cause measured C2371 conflicts.",
+      "original_restoration_evidence": "Original HEAD body restored globally;SHROBJHEAD/THROBJHEAD/PROCOBJHEAD/WND/CLS/DESKTOP bodies retain client-view gating because native cleanup objects and original guest-published layouts are distinct. Full declarations without scoped ownership cause measured C2371 conflicts.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2477",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "Original DLG/DIALOG bytes/order restored;retain existing dialog selector and once-guard for late multipass declaration.",
+      "original_restoration_evidence": "Original DLG/DIALOG bytes/order restored;retain existing dialog selector and once-guard for late multipass declaration.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2478",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "CALLPROCDATA restored ahead of CLS within client-view declaration pass;remove extra forward alias and separate repeated declaration. Selected THROBJHEAD ownership remains necessary.",
+      "original_restoration_evidence": "CALLPROCDATA restored ahead of CLS within client-view declaration pass;remove extra forward alias and separate repeated declaration. Selected THROBJHEAD ownership remains necessary.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2479",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "BUTN/BUTNWND original bodies/order restored;existing extent-selector remains due WND dependency and late declaration consumers.",
+      "original_restoration_evidence": "BUTN/BUTNWND original bodies/order restored;existing extent-selector remains due WND dependency and late declaration consumers.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2480",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "GRC constants and timeout declarations restored;SBWND kept in client-view scope with original WND and SBCALC dependencies;ordering fixed.",
+      "original_restoration_evidence": "GRC constants and timeout declarations restored;SBWND kept in client-view scope with original WND and SBCALC dependencies;ordering fixed.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    },
+    {
+      "review_id": "T483-R2483",
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "problem": "All declarations assembled in original order;23 excluded bodies retain original outer frame and bare error. Shared/client/dialog/button once guards preserve actual multipass inclusion;line records map2494 exact original rows. Final logical-line proof records2494 matching original rows and zero unexplained mismatches.",
+      "original_restoration_evidence": "All declarations assembled in original order;23 excluded bodies retain original outer frame and bare error. Shared/client/dialog/button once guards preserve actual multipass inclusion;line records map2494 exact original rows. Final logical-line proof records2494 matching original rows and zero unexplained mismatches.",
+      "options": "Whole-file ordered original restoration;remaining scope/alias decisions recorded in p241-user-investigation.json",
+      "recommendation": "Implemented whole-file original restoration and finite residual minimization;owner decision remains for surviving adaptation described in evidence.",
+      "mirror_diff_delta": "Whole file2666->265(-2401);point ranges overlap;not additive",
+      "evidence": "p241-user-investigation.json",
+      "status": "minimized-pending-owner-decision",
+      "owner_decision": ""
+    }
+  ],
+  "source_recheck": [
+    "PTDB names guest16 TDB in tdb16.h but original USER kernel tagTDB in user.h;not interchangeable ownership.",
+    "PWND/PQ/PTHREADINFO/PPROCESSINFO and PHE alias native cleanup or handle-table layouts in selected binders;original fixed guest-published bodies remain source-owned under client-view gates.",
+    "wow_user_client_view_layout.h defines guest x86 sizes/offset assertions and14hooks. Original modern WH_MAX expression would enlarge DESKTOPINFO;fixed14 is not general modern USER ABI.",
+    "COLOR_MAX can be undefined or modern EDIT color count;original SERVERINFO needs COLOR_INFOBK+1.",
+    "PJIF DWORD pointer expansion avoids undefined alias in common consumers;current compat winuserp declares it only selected private contexts.",
+    "opennt_user_multipass.h explicitly pushes/undefines _USER_ then restores it;shared/client/dialog/button sets can be requested in successive inclusions. Removing per-group once/select gates causes redeclaration or imports mismatched object bodies.",
+    "Original winerrp.h full selected link activates unresolved UserSetLastError;original rtl/debug.c writes TEB error,existing SetLastError binding covers it. No duplicate error provider imported."
+  ],
+  "prior_evidence": "../t483-remaining-reaudit/p241-user-investigation.json",
+  "prior_actual_compile_link": {
+    "compile_count": 110,
+    "compile_failures": 0,
+    "flags": "Ninja extracted context flags plus actual /O2 release flag",
+    "full_WOW_link_exit": 0,
+    "status": "Shadow compile/link only;not cached full or runtime/publication proof"
+  },
+  "prior_controls_scope": "Historical source/ABI countercontrols,not final candidate verification. Final cached/full gates pending.",
+  "line_error_proof": {
+    "original_matching_pins_preserved": 2119,
+    "excluded_bodies": 24,
+    "mask_issues": [],
+    "all_error_body_bytes_unchanged": true
+  },
+  "initial_review": "Whole file45 non-error blocks reviewed;preserve original order,types and finite public/private ownership boundaries.",
+  "counter_review": "Do not restore aliases solely because names match:guest16,fixed NT4 client and native cleanup layouts differ. Do not justify every boundary by current adapter dependency alone:original owner layouts and compiler conflicts are corroborating evidence. The redundant final marker guard has no ownership role and is removed. No code moved to shim.",
+  "verification": "Source review complete;current complete-file candidate awaits P4 final build/publication/test.",
+  "final_verification": "P4 final source cached x86/x64 full build,11x2 publication/hash,message/focused/task-order,Full20,boundary/governance passed;Git delivery accompanies P4 receipt."
+}

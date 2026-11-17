@@ -36,9 +36,9 @@ normalized/error-masked differences;255 have nonzero counts. The initial2333
 block sum is conservative:75 mask-review cases in31 files remain counted.
 These are counting uncertainties,not permission to delete or retain code.
 Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
-S6 review6/255 complete;249 files remain. Four changed files delivered across
-P2/P3,two unchanged files fully reviewed. Current census2322 blocks;
-cumulative reduction11 blocks/24 lines,all verified for delivery.
+S6 review8/255 complete;247 files remain. Six changed files delivered across
+P2/P3/P4,two unchanged files fully reviewed. Current census2322 blocks;
+cumulative delivered reduction11 blocks/27 lines;no unverified source candidate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -48,6 +48,8 @@ cumulative reduction11 blocks/24 lines,all verified for delivery.
 | sevid000.c |64->64|132->132|No code edit;64 evidenced pending decisions|
 | gfx_updt.c |58->58|138->138|No code edit;58 evidenced pending decisions|
 | usercli.h |49->45|125->114|P3 restored declaration/macros/format|
+| process.c |47->47|168->167|P4 removed added blank;residuals pending owner|
+| user.h |45->45|112->110|P4 redundant marker guard removed|
 
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p3-checkpoint.json)
 records cached x86/x64,publish11x2,message/focused/task-order,Full20,
@@ -55,7 +57,10 @@ boundary143/9 and governance passes. Git delivery accompanies the receipt.
 Per-file evidence is indexed in the worklist README. Residual decisions remain
 pending owner,not approved. Known sevid000 CHAIN4 word/UNCHAINED string
 limitations are not represented as passing tests. Backlog1644 rows/1649 R points;
-R1519 remains restored,not deferred. Next file:oemuni/process.c,47 blocks.
+R1519 remains restored,not deferred. Next file:nt_event.c,43 conservative blocks;resolve its2 mask cases first.
+[P4 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p4-checkpoint.json)
+records final cached/full/publication/message/focused/boundary/governance passes.
+Owned build/pipeline are terminal;Git delivery accompanies receipt.
 Do not restart completed file reviews.
 
 S5's2720-point register is historical identity/evidence:1018 restored/confirmed
@@ -68,10 +73,10 @@ accumulate;substantive whole-file batches follow build,publish,test,commit,push.
 
 ## Current Technical Baseline
 
-S6 P3:11 images published/hash-verified to assets/release and O:/winnt/system32.
-Package6ef59923-8351-4d2c-bcdf-6c56936ef62c. Full20 includes actual NESticle
-menu/Escape. No guest or winnt.zip changes. P3 receipt binds final source,
-manifest and test results;P2 publication is superseded.
+S6 P4:11 images published/hash-verified to assets/release and O:/winnt/system32.
+Package17dd6123-a94e-47ba-b0e6-0135d5cf616d. Full20 includes actual NESticle
+menu/Escape. No guest or winnt.zip changes. P4 receipt binds final source,
+manifest and test results;P3 publication is superseded.
 
 S5 fixed365-file raw metric:#error included,#line excluded,4862blocks/89379lines;
 cumulative reduction435blocks/30534lines. Do not compare this directly to the

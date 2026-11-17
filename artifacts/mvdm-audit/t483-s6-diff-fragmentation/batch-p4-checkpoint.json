@@ -1,0 +1,177 @@
+{
+  "packet": "M0 T483 S6 P4",
+  "status": "Cached full,publish11x2,message,focused/task-order,Full20,boundary and governance passed;Git delivery accompanies receipt",
+  "build_pid": 7984,
+  "pipeline_pid": 13212,
+  "evidence_root": "build/t483-s6-p4",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/mvdm-host/oemuni/process.c",
+        "sha256": "2bbc93661cd832f65b13c2185994ddd6bc0b0eb2afea9c7a5175d22a2d32bd47"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "sha256": "0c09ef59ed8b07ed5db86093c095f7bcf66d383d440462cfbffa175ceb1a4e4c"
+      }
+    ],
+    "source_files": 2,
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 3
+  },
+  "files": [
+    "process.c",
+    "user.h"
+  ],
+  "delivery": "Accompanying P4 commit;verify remote after push",
+  "cached_exit": 0,
+  "publication": {
+    "status": "published",
+    "package": "17dd6123-a94e-47ba-b0e6-0135d5cf616d",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "message_exit": 0,
+  "focused_exit": 0,
+  "verification": {
+    "exit": 0,
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 406622,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 5383,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1242,
+          "CleanupMs": 523,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11257,
+          "CleanupMs": 413,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 11049,
+          "CleanupMs": 459,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10413,
+          "CleanupMs": 454,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 329,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 65980,
+          "CleanupMs": 408,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 46045,
+          "CleanupMs": 398,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 46157,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14936,
+          "CleanupMs": 428,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10893,
+          "CleanupMs": 463,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 46069,
+          "CleanupMs": 467,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12682,
+          "CleanupMs": 453,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28818,
+          "CleanupMs": 505,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 31006,
+          "CleanupMs": 480,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3871,
+          "CleanupMs": 425,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7629,
+          "CleanupMs": 432,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10340,
+          "CleanupMs": 412,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4128,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7717,
+          "CleanupMs": 417,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20301,
+          "CleanupMs": 490,
+          "Passed": true
+        }
+      ]
+    },
+    "boundary": "143 objects/9 private-header negative controls passed",
+    "governance": "passed;final documentation recheck exit0"
+  }
+}

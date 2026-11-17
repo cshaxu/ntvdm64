@@ -728,7 +728,6 @@ ExpandEnvironmentStringsOem(
                 BaseSetLastNTError( Status );
                 goto try_exit;
                 }
-
             ReturnValue = Value.Length + 1;
             if (ReturnValue <= cchDst)
                 RtlMoveMemory(lpDst, Value.Buffer, ReturnValue);

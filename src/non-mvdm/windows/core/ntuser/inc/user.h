@@ -2642,9 +2642,7 @@ PCURSOR ClassSetSmallIcon(
 void KernelBP(void);
 
 #endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
 #define OPENNT_USER_OBJECT_TYPES_SUBSET_H
-#endif
 #if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
 #define OPENNT_USER_CLIENT_VIEW_LAYOUT_H
 #endif
