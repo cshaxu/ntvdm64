@@ -295,3 +295,7 @@ P20 usage ratios predate the now-retired support/xt.c.
 the `userrtl.h` comment restoration, and the reviewed `nt_fulsc.c` mask
 override for the census. The current non-error census is 2,042 points and
 28,754 changed lines. The worklist keeps its historical rank for traceability.
+
+[S7 P3 receipt](s7-p3-checkpoint.json) records eight reviewed files and
+the original comment and blank-line restoration in `nt_cga.c`. The current
+census is 2,041 non-error points and 28,751 changed lines.

@@ -1,0 +1,161 @@
+{
+  "packet": "M0 T483 S7 P3",
+  "prior_delivery": "7bc009451f1db79d100b058065518e8419786322",
+  "reviews": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "before": {
+        "blocks": 5,
+        "added": 14,
+        "deleted": 480
+      },
+      "after": {
+        "blocks": 5,
+        "added": 14,
+        "deleted": 480
+      },
+      "source_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "evidence": "../t483-remaining-reaudit/p242-exitwin-review.json",
+      "decision": "Retain original task ordering in WOW. Native shutdown work requires a kernel-owned context. Current provider supplies process and event boundaries with real compile and task-order evidence."
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "source_sha256": "24db8a244bbbd4880e7c18fff338c33659d28864f04ce3efd2b4810925a05f0f",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "evidence": "../t483-remaining-reaudit/r0235-mvdm-access-review.json",
+      "decision": "Active unaligned accessor macros match original. The added non-x86 error guard is local policy and stays counted. No original paired arm exists for that guard."
+    },
+    {
+      "path": "src/mvdm-host/inc/dbgexp.h",
+      "before": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "source_sha256": "dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2",
+      "original_sha256": "a915256a7a3796424ba8eb7ea2a257864a3986633752c870fe34762f3737ce95",
+      "evidence": "../t483-remaining-reaudit/r0222-r0224-debug-abi-review.json",
+      "decision": "Keep the three explicit cdecl declarations. Original /Gz caller would target mismatched symbols. Moving the convention to the entire provider changes four additional external entrypoints."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "before": {
+        "blocks": 7,
+        "added": 13,
+        "deleted": 36
+      },
+      "after": {
+        "blocks": 6,
+        "added": 13,
+        "deleted": 33
+      },
+      "source_sha256": "036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "evidence": "../t483-remaining-reaudit/r1015-r1020-nt-cga-review.json",
+      "decision": "Restore two original output-buffer comments and original blank at 364. Retain chain-2 odd/even addressing and width-dependent text gather, supported by 54-case extracted-body control (399 wrong cells original, zero selected)."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15",
+      "original_sha256": "5a7e4cefa28c674ad3047741cf8f78c9882f3c2362af09ae3a3dc0df336eed17",
+      "evidence": "../t483-remaining-reaudit/r0353-ccpu-flags-declaration.json",
+      "decision": "Original c_intr needs unsigned IU32 prototype for c_getEFLAGS. Actual omission control C4013 defaults to int. Retain one declaration."
+    },
+    {
+      "path": "src/mvdm-host/inc/demexp.h",
+      "before": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "source_sha256": "e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788",
+      "original_sha256": "dfb912ee16a360e36d149bca01592a61ec11ff0f1d1b148edcffb42fda52d5c4",
+      "evidence": "../t483-remaining-reaudit/r0225-r0227-dem-abi-review.json",
+      "decision": "Actual original-header objects reference decorated stdcall symbols. The three DEM providers define cdecl symbols. Retain explicit cdecl across the mixed-ABI boundary."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "before": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 0
+      },
+      "source_sha256": "626208b777a1b33c072a76d4f9026244b0d5f11b38b51909283586f2bb02887b",
+      "original_sha256": "6387d3317faaa0ab35c3652abc52283601a996bcb0f3019234a2cdb246a6662a",
+      "evidence": "../t483-remaining-reaudit/mouse-io-h-file-review.json",
+      "decision": "Keep save-time renderer and address. The old restore path used current mode/page and a bounded fixture reproduces wrong restoration after transition. Metadata is outside guest INT33 context."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+      "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+      "evidence": "../t483-remaining-reaudit/timeval-h-file-review.json",
+      "decision": "Actual nt_unix.c omission control emits C2371 with current CRT time_t. Keep long to match existing original definition. No runtime failure claimed for the uncalled function."
+    }
+  ],
+  "totals": {
+    "non_error_points": 2041,
+    "non_error_lines": 28751,
+    "differing_files": 241,
+    "reviewed_in_s7": 24,
+    "remaining": 189
+  },
+  "source_reduction_p3": {
+    "points": 1,
+    "lines": 3
+  },
+  "source_reduction_s7": {
+    "points": 7,
+    "lines": 227
+  },
+  "verification": {
+    "source": "Pinned source hashes, masked count and selected code bytes verified. Existing errors and anchors preserved. Restored comments occupy original 352\u2013353 and blank original 364.",
+    "package": "Prior P1 published package retained. P3 consists of comment, blank line and diagnostic mapping changes."
+  }
+}

@@ -303,6 +303,9 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
 	// the size of each cell was defined by TEXT_INCVAL
 	//
 
+#line 352
+	/*::::::::::::::::::::::::::::::::::::::::::::: Construct output buffer */
+	//Start location of repaint region
     to = &textBuffer[(ScreenY*now_width + ScreenX) * TEXT_INCVAL];
     for (lines = height; lines; lines--)
     {
@@ -314,6 +317,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
         to += now_width * TEXT_INCVAL;
 #line 362
     }
+
 
 #line 365 "nt_cga.c"
     /*:::::::::::::::::::::::::::::::::::::::::::::: Calculate write region */

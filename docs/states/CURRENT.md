@@ -61,9 +61,13 @@ The corrected exclusion pairing in `nt_fulsc.c` removes another 2 points
 and 18 lines from the measurement. This correction changes no source.
 [P2 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p2-checkpoint.json).
 
-S7 progress is 16 reviewed and 197 remaining. Source restorations reduce
-6 points and 224 changed lines in S7. The current census is 2,042 non-error
-points and 28,754 changed lines across 241 mirrors with filtered differences.
+S7 P3 completes eight more file reviews and restores original comments and
+an empty source row in `nt_cga.c`. Existing error exclusions and selected
+code are preserved. [P3 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p3-checkpoint.json).
+
+S7 progress is 24 reviewed and 189 remaining. Source restorations reduce
+7 points and 227 changed lines in S7. The current census is 2,041 non-error
+points and 28,751 changed lines across 241 mirrors with filtered differences.
 
 ## S1 Closure Record
 
