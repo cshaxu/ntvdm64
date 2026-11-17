@@ -1,0 +1,634 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+  "status": "whole-file source review complete;cached full building",
+  "before": {
+    "blocks": 22,
+    "added": 39,
+    "deleted": 256,
+    "lines": 295
+  },
+  "after": {
+    "blocks": 17,
+    "added": 37,
+    "deleted": 205,
+    "lines": 242
+  },
+  "reduction": {
+    "blocks": 5,
+    "lines": 53
+  },
+  "source_sha256": "19e51c0fffe398d44c7486b6df65c16838ac10e060441754b5cb67061bd0a9b3",
+  "restored": [
+    "Original CvtDec entire function",
+    "UNICODE_MINUS_SIGN macro",
+    "ValidateCallback and hCurCursor declarations",
+    "Original xxxRestoreDlgFocus/InternalDialogBox/RepositionRect comments and spacing"
+  ],
+  "line_proof": {
+    "matched_nontrivial_lines": 789,
+    "mismatches": [],
+    "delimiter_alignment_note": "A repeated comment delimiter at original258 aligns to current DefDlgProc440 under generic diff;excluded only delimiter from proof,header text at440 remains original."
+  },
+  "remaining_hunks": [
+    {
+      "old_line": 18,
+      "new_line": 18,
+      "old": [],
+      "new": [
+        "#if defined(WOW_ORIGINAL_DIALOG_MANAGER)"
+      ]
+    },
+    {
+      "old_line": 19,
+      "new_line": 20,
+      "old": [],
+      "new": [
+        "#endif"
+      ]
+    },
+    {
+      "old_line": 27,
+      "new_line": 29,
+      "old": [],
+      "new": [
+        "#if defined(WOW_ORIGINAL_DIALOG_MANAGER)"
+      ]
+    },
+    {
+      "old_line": 125,
+      "new_line": 128,
+      "old": [],
+      "new": [
+        "            if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return fRestored;"
+      ]
+    },
+    {
+      "old_line": 149,
+      "new_line": 153,
+      "old": [
+        "",
+        "",
+        "int GetDlgCtrlID(",
+        "    HWND hwnd)",
+        "{",
+        "    PWND pwnd;",
+        "",
+        "    pwnd = ValidateHwnd(hwnd);",
+        "    if (pwnd == NULL)",
+        "        return 0;",
+        "",
+        "    return (int)pwnd->spmenu;",
+        "}",
+        "",
+        ""
+      ],
+      "new": []
+    },
+    {
+      "old_line": 209,
+      "new_line": 198,
+      "old": [],
+      "new": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "    if (!wow_dialog_host_initialize(HW(pwnd)))",
+        "        return FALSE;",
+        "#endif"
+      ]
+    },
+    {
+      "old_line": 259,
+      "new_line": 252,
+      "old": [
+        "* SetDlgItemInt",
+        "*",
+        "* History:",
+        "\\***************************************************************************/",
+        "",
+        "BOOL SetDlgItemInt(",
+        "    HWND hwnd,",
+        "    int item,",
+        "    UINT u,",
+        "    BOOL fSigned)",
+        "{",
+        "    LPWSTR lpch;",
+        "    WCHAR rgch[16];",
+        "",
+        "    lpch = rgch;",
+        "    if (fSigned) {",
+        "        if ((int)u < 0) {",
+        "            *lpch++ = TEXT('-');",
+        "            u = (UINT)(-(int)u);",
+        "        }",
+        "    } else {",
+        "        if (u & 0x80000000) {",
+        "            CvtDec(u / 10, (LPWSTR FAR *)&lpch);",
+        "            u = u % 10;",
+        "        }",
+        "    }",
+        "",
+        "    CvtDec(u, (LPWSTR FAR *)&lpch);",
+        "    *lpch = 0;",
+        "",
+        "    return SetDlgItemTextW(hwnd, item, rgch);",
+        "}",
+        "",
+        "",
+        "/***************************************************************************\\",
+        "* CheckDlgButton",
+        "*",
+        "* History:",
+        "\\***************************************************************************/",
+        "",
+        "BOOL CheckDlgButton(",
+        "    HWND hwnd,",
+        "    int id,",
+        "    UINT cmdCheck)",
+        "{",
+        "    if ((hwnd = GetDlgItem(hwnd, id)) == NULL) {",
+        "        return FALSE;",
+        "    }",
+        "",
+        "    SendMessage(hwnd, BM_SETCHECK, cmdCheck, 0);",
+        "",
+        "    return TRUE;",
+        "}",
+        "",
+        "",
+        "/***************************************************************************\\",
+        "* GetDlgItemInt",
+        "*",
+        "* History:",
+        "\\***************************************************************************/",
+        "",
+        "UINT GetDlgItemInt(",
+        "    HWND hwnd,",
+        "    int item,",
+        "    BOOL FAR *lpfValOK,",
+        "    BOOL fSigned)",
+        "{",
+        "    int i, digit, ch;",
+        "    BOOL fOk, fNeg;",
+        "    LPWSTR lpch;",
+        "    WCHAR rgch[48];",
+        "    WCHAR rgchDigits[48];",
+        "",
+        "    fOk = FALSE;",
+        "    if (lpfValOK != NULL)",
+        "        *lpfValOK = FALSE;",
+        "",
+        "    if (!GetDlgItemTextW(hwnd, item, rgch, sizeof(rgch)/sizeof(WCHAR) - 1))",
+        "        return 0;",
+        "",
+        "    lpch = rgch;",
+        "",
+        "    /*",
+        "     * Skip leading white space.",
+        "     */",
+        "    while (*lpch == TEXT(' '))",
+        "        lpch++;",
+        "",
+        "    fNeg = FALSE;",
+        "    while (fSigned && ((*lpch == L'-') || (*lpch == UNICODE_MINUS_SIGN))) {",
+        "        lpch++;",
+        "        fNeg ^= TRUE;",
+        "    }",
+        "",
+        "    /*",
+        "     * Convert all decimal digits to ASCII Unicode digits 0x0030 - 0x0039",
+        "     */",
+        "    FoldStringW(MAP_FOLDDIGITS, lpch, -1, rgchDigits,",
+        "            sizeof(rgchDigits)/sizeof(rgchDigits[0]));",
+        "    lpch = rgchDigits;",
+        "",
+        "    i = 0;",
+        "    while (ch = *lpch++) {",
+        "        digit = ch - TEXT('0');",
+        "        if (digit < 0 || digit > 9) {",
+        "            break;",
+        "        }",
+        "        if (fSigned) {",
+        "            if (i > (INT_MAX - digit) / 10) {",
+        "                return(0);",
+        "            }",
+        "        } else {",
+        "            if ((UINT)i > (UINT)((UINT_MAX - digit) / 10)) {",
+        "                return(0);",
+        "            }",
+        "        }",
+        "",
+        "        fOk = TRUE;",
+        "        i = ((UINT)i * 10) + digit;",
+        "    }",
+        "",
+        "    if (fNeg)",
+        "        i = -i;",
+        "",
+        "    if (lpfValOK != NULL)",
+        "        *lpfValOK = ((ch == 0) && fOk);",
+        "",
+        "    return (UINT)i;",
+        "}",
+        "",
+        "/***************************************************************************\\",
+        "* CheckRadioButton",
+        "*",
+        "* History:",
+        "\\***************************************************************************/",
+        "",
+        "BOOL CheckRadioButton(",
+        "    HWND hwnd,",
+        "    int idFirst,",
+        "    int idLast,",
+        "    int id)",
+        "{",
+        "    PWND pwnd, pwndDialog;",
+        "    BOOL    fCheckOn;",
+        "",
+        "    pwndDialog = ValidateHwnd(hwnd);",
+        "    if (pwndDialog == NULL)",
+        "        return 0;",
+        "",
+        "    for (pwnd = REBASE(pwndDialog, spwndChild); pwnd; pwnd = REBASE(pwnd, spwndNext)) {",
+        "",
+        "        if (((LONG)(DWORD)pwnd->spmenu >= idFirst) &&",
+        "            ((LONG)(DWORD)pwnd->spmenu <= idLast)) {",
+        "",
+        "            fCheckOn = ((LONG)(DWORD)pwnd->spmenu == id);",
+        "            SendMessage(PtoHq(pwnd), BM_SETCHECK, fCheckOn, 0L);",
+        "        }",
+        "    }",
+        "",
+        "    return TRUE;",
+        "}",
+        "",
+        "",
+        "/***************************************************************************\\",
+        "* IsDlgButtonChecked",
+        "*",
+        "* History:",
+        "\\***************************************************************************/",
+        "",
+        "UINT IsDlgButtonChecked(",
+        "    HWND hwnd,",
+        "    int id)",
+        "{",
+        "    if ((hwnd = GetDlgItem(hwnd, id)) != NULL) {",
+        "        return (UINT)SendMessage(hwnd, BM_GETCHECK, 0, 0);",
+        "    }",
+        "",
+        "    return FALSE;",
+        "}",
+        "",
+        "",
+        "/***************************************************************************\\"
+      ],
+      "new": []
+    },
+    {
+      "old_line": 474,
+      "new_line": 285,
+      "old": [
+        "    if (((PDIALOG)pwnd)->resultWP != 0)"
+      ],
+      "new": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "    if (message == WM_NOTIFYFORMAT)",
+        "        return wow_dialog_host_notify(hwnd, message, wParam, lParam, fAnsi);",
+        "    if (message != WM_FINALDESTROY &&",
+        "            wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi) != 0)",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "old_line": 482,
+      "new_line": 300,
+      "old": [
+        "    if (PDLG(pwnd)->lpfnDlg != NULL) {",
+        "        result = (PDLG(pwnd)->lpfnDlg)(hwnd, message, wParam, lParam);"
+      ],
+      "new": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "    if (wow_dialog_host_get(hwnd, DWL_DLGPROC, fAnsi) != 0) {",
+        "        result = wow_dialog_host_call(hwnd, message, wParam, lParam, fAnsi);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "old_line": 735,
+      "new_line": 557,
+      "old": [
+        "                PDLG(pwndT1)->result = wParam;"
+      ],
+      "new": [
+        "                if (!TestWF(pwndT1, WFDESTROYED) && !(pwndT1->fnid & FNID_STATUS_BITS))",
+        "                    PDLG(pwndT1)->result = wParam;"
+      ]
+    },
+    {
+      "old_line": 884,
+      "new_line": 707,
+      "old": [
+        "            if (lParam == NF_QUERY)",
+        "                return((PDLG(pwnd)->flags & DLGF_ANSI ) ? NFR_ANSI : NFR_UNICODE);"
+      ],
+      "new": [
+        "#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "old_line": 937,
+      "new_line": 761,
+      "old": [
+        "        return ((PDIALOG)pwnd)->resultWP;"
+      ],
+      "new": [
+        "#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+        "        return wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi);",
+        "#else",
+        "#error Unsupported excluded original configuration",
+        "#endif"
+      ]
+    },
+    {
+      "old_line": 982,
+      "new_line": 810,
+      "old": [],
+      "new": [
+        "#endif"
+      ]
+    },
+    {
+      "old_line": 1033,
+      "new_line": 862,
+      "old": [],
+      "new": [
+        "    if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;"
+      ]
+    },
+    {
+      "old_line": 1180,
+      "new_line": 1010,
+      "old": [
+        "    BOOL fDisabled;"
+      ],
+      "new": [
+        "    BOOL fDisabled = FALSE;"
+      ]
+    },
+    {
+      "old_line": 1278,
+      "new_line": 1108,
+      "old": [],
+      "new": [
+        "#if defined(WOW_ORIGINAL_DIALOG_MANAGER)"
+      ]
+    },
+    {
+      "old_line": 1355,
+      "new_line": 1186,
+      "old": [],
+      "new": [
+        "#endif"
+      ]
+    }
+  ],
+  "mask_resolution": "Four current WOW_NATIVE_DIALOG_PROCEDURE_OWNER arms have no original conditional counterpart. Keep their semantic differences counted;do not restore excluded bodies or treat them as original matched exclusions. Existing real original excluded arm unchanged.",
+  "retained_points": {
+    "T483-R2221": {
+      "decision": "minimize-pending-owner",
+      "before": "+2/-0",
+      "after": "+1/-0",
+      "reason": "SendMessage WM_CANCELMODE can synchronously destroy dialog;original cleanup frees/clears PDLG before DialogBox2 fDisabled store. Native probe confirms HWND destruction;cleanup coupling separately source-proved."
+    },
+    "T483-R2228": {
+      "decision": "minimize-pending-owner",
+      "before": "+2/-1",
+      "after": "+1/-1",
+      "reason": "Original owner=NULL path reads fDisabled before initialization in failure expression and DialogBox2 argument. Retain FALSE initializer,remove comment. Existing no-owner success/failure fixture retained."
+    },
+    "T483-R2229": {
+      "decision": "minimize-pending-owner",
+      "before": "Moved LOOKASIDE plus manager conditional",
+      "after": "Original function order;declaration and manager subsets guarded",
+      "reason": "Product manager profile builds complete dependency group;maintained modal lifetime fixture compiles only modal functions and lacks manager ABI/leaves. Keep bounded selection,restore original placement rather than expand doubles/shims."
+    },
+    "T483-R2231": {
+      "decision": "minimize-pending-owner",
+      "before": "+11/-2",
+      "after": "one added PDLG guard",
+      "reason": "Restore original helper and SetFocus calls;retain only one root terminal check before PDLG hwndFocusSave store. Both helper and SetFocus can synchronously destroy parent and release PDLG;native focus to dead child declines without additional mirror state."
+    },
+    "T483-R2235": {
+      "decision": "minimize-pending-owner",
+      "before": "+6/-0",
+      "after": "+4/-0",
+      "reason": "Actual native control: without initialization first DefDlgProc(WM_NOTIFYFORMAT) clears installed DWL_DLGPROC and calls application zero times; preinitialized HWND preserves procedure and calls once. Original lookaside PDLG cannot initialize native USER storage.",
+      "line_check": "Existing #line209 follows retained selected conditional;no excluded body changed."
+    },
+    "T483-R2236": {
+      "decision": "retain-pending-owner",
+      "before": "+2/-0 overlapping R2235",
+      "after": "+2/-0 overlapping R2235",
+      "reason": "Overlapping two-line failure-return subreview of R2235. Native initialization can fail its SetWindowLong operation;continuing would publish PDLG without required native storage. Existing initialization fixture injects this failure and asserts FALSE and no callbacks. No new state or fallback is needed.",
+      "line_check": "Existing #line209 follows retained selected conditional;no excluded body changed."
+    },
+    "T483-R2237": {
+      "decision": "retain-pending-owner",
+      "before": "+8/-1",
+      "after": "+8/-1",
+      "delta": 0,
+      "reason": "Application public SetWindowLong changes actual HWND DWL_MSGRESULT while private PDIALOG.resultWP stays0 (real native probe). Original private read loses message result/reset state. Native WM_NOTIFYFORMAT owns actual A/W slot flags and invokes app once;original PDLG flags do not carry opaque native encoding. WM_FINALDESTROY is separately called after native retirement by finalization binding;skip native reads then,retain original private cleanup.",
+      "alternatives": "Private restoration requires additional synchronization of native slots and encoding;relocating same logic to shim does not reduce complexity. No smaller equivalent change established.",
+      "line_check": "Excluded original #error retained;selected continuation #line475 or484 unchanged."
+    },
+    "T483-R2238": {
+      "decision": "retain-pending-owner",
+      "before": "+6/-2",
+      "after": "+6/-2",
+      "delta": 0,
+      "reason": "Application/native A/W setters own DWL_DLGPROC. Actual probe produces opposite-encoding opaque token (FFFF0BA7 in retained run),requires CallWindowProc for A/W conversion;private PDLG.lpfnDlg remainsNULL. Restoring private direct call would omit procedure or bypass token conversion. Existing host_call reads native slot and delegates existing CallWindowProc boundary,without a second procedure registry.",
+      "alternatives": "Private restoration requires additional synchronization of native slots and encoding;relocating same logic to shim does not reduce complexity. No smaller equivalent change established.",
+      "line_check": "Excluded original #error retained;selected continuation #line475 or484 unchanged."
+    },
+    "T483-R2240": {
+      "decision": "minimize-pending-owner",
+      "before": "+3/-1",
+      "after": "+2/-1",
+      "reason": "xxxCheckDefPushButton sends synchronous WM_GETDLGCODE/BM_SETSTYLE callbacks. Root destruction runs original DoCleanup and SetDialogPointer(NULL);caller then writes PDLG->result. Retain one terminal condition before this write;remove comment. Existing DM_SETDEFID query/style retirement tests cover exact continuation;final negative control pending.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2242": {
+      "decision": "retain-exclusion-policy",
+      "before": "+3/-2",
+      "after": "unchanged",
+      "reason": "Preserve excluded private PDLG ANSI query as #error under owner policy. Selected WM_NOTIFYFORMAT returns through native owner before switch.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2243": {
+      "decision": "retain-pending-owner",
+      "before": "+5/-1",
+      "after": "unchanged",
+      "reason": "Native DWL_MSGRESULT is application-visible result authority;actual native probe stores0x3141 while private resultWP stays0. Original fallback after cleanup unchanged.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    },
+    "T483-R2244": {
+      "decision": "retain-pending-owner",
+      "before": "+1/-0",
+      "after": "unchanged",
+      "reason": "Closing manager selection paired with R2229. Isolated modal fixture compiles DialogBox2/InternalDialogBox without manager private dependencies;product/full control contexts include manager. Preserve boundary with restored original function order.",
+      "line_check": "Existing #line648,739,813,886,938 preserved;excluded #error unchanged. Full preprocessor proof pending."
+    }
+  },
+  "fresh_source_trace": [
+    "wow_dialog_procedure_bindings.c host_get reads public A/W GetWindowLong;host_call routes actual native proc through matching A/W caller;private PDIALOG cannot substitute opaque native slot authority",
+    "wow_dialog_finalization_binding.c calls original WM_FINALDESTROY/DoCleanup and releases PDLG during synchronous retirement;mirror continuation writes require terminal check",
+    "Original fDisabled read occurs on null-owner path before any assignment unless initialized",
+    "Public GetDlgCtrlID/SetDlgItemInt/GetDlgItemInt/CheckDlgButton/CheckRadioButton/IsDlgButtonChecked remain native USER APIs;restoring their definitions collides with SDK imports and changes actual ownership,unlike standalone CvtDec"
+  ],
+  "historical_controls_reused": [
+    "build/t483-s5-p227/negative-default.log EXPECTED_PDLG_ACCESS_VIOLATION",
+    "build/t483-s5-p227/negative-focus.log EXPECTED_PDLG_ACCESS_VIOLATION",
+    "p227-dlgmgr-review.json native initialization and A/W slot controls"
+  ],
+  "limits": [
+    "Historical negative controls reused,not newly rerun",
+    "Residual boundaries remain pending owner;full test pass is not approval",
+    "No guest changes;no excluded-body edits;original current LF preserved"
+  ],
+  "delivery": "P17 cached full,publish11x2,Full20 passed;governance and Git accompany receipt",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 420890,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5172,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1175,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13107,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 13316,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11258,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 227,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66548,
+        "CleanupMs": 460,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47777,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46389,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15459,
+        "CleanupMs": 389,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11772,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 52574,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12753,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28552,
+        "CleanupMs": 374,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30876,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4548,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8297,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9845,
+        "CleanupMs": 385,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4540,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7041,
+        "CleanupMs": 346,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19807,
+        "CleanupMs": 418,
+        "Passed": true
+      }
+    ]
+  }
+}

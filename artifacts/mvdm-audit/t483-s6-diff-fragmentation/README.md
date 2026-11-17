@@ -207,3 +207,7 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [P16 client VDM review](client-vdm-whole-file-review.json):four original functions restored;23->20 blocks,796->632 lines;cached build,publish11x2,Full20 passed;Git accompanies receipt.
 
 [P16 receipt](batch-p16-checkpoint.json) and [evidence](p16-verification-evidence.zip).
+
+[P17 dlgmgr review](client-dlgmgr-whole-file-review.json):22->17 blocks,295->242 lines;cached build,publish11x2,Full20 passed;Git accompanies receipt.
+
+[P17 receipt](batch-p17-checkpoint.json) and [evidence](p17-verification-evidence.zip).

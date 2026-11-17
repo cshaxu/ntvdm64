@@ -12,10 +12,16 @@
 #include "precomp.h"
 #pragma hdrstop
 
+#define UNICODE_MINUS_SIGN 0x2212
+
+
 #if defined(WOW_ORIGINAL_DIALOG_MANAGER)
 #line 18
 LOOKASIDE DialogLookaside;
 #endif
+
+#line 20
+BOOL ValidateCallback(HANDLE h);
 
 #line 22
 #define IsInForegroundQueue(hwnd) \
@@ -24,7 +30,6 @@ LOOKASIDE DialogLookaside;
     ((BOOL)NtUserGetThreadState(UserThreadStateIsForeground))
 
 #if defined(WOW_ORIGINAL_DIALOG_MANAGER)
-
 #line 27
 /***************************************************************************\
 *
@@ -99,7 +104,18 @@ BOOL xxxSaveDlgFocus(
     return FALSE;
 }
 
-#line 108
+#line 97
+/***************************************************************************\
+* xxxRestoreDlgFocus
+*
+* History:
+* 02-18-92 JimA             Ported from Win31 sources
+\***************************************************************************/
+
+// LATER
+// 21-Mar-1992 mikeke
+// does pwndFocusSave need to be unlocked when the dialog is destroyed?
+
 BOOL xxxRestoreDlgFocus(
     PWND pwnd)
 {
@@ -126,6 +142,7 @@ BOOL xxxRestoreDlgFocus(
 
     return fRestored;
 }
+
 
 #line 134
 /***************************************************************************\
@@ -224,6 +241,29 @@ BOOL ValidateDialogPwnd(
 
     return TRUE;
 }
+
+
+#line 237
+/***************************************************************************\
+* CvtDec
+*
+* LATER!!! convert to itoa?
+*
+* History:
+\***************************************************************************/
+
+void CvtDec(
+    int u,
+    LPWSTR *lplpch)
+{
+    if (u >= 10) {
+        CvtDec(u / 10, lplpch);
+        u %= 10;
+    }
+
+    *(*lplpch)++ = (WCHAR)(u + '0');
+}
+
 
 #line 440
 /***************************************************************************\
@@ -760,6 +800,7 @@ CallDWP:
         return result;
 }
 
+
 #line 943
 /***************************************************************************\
 * DefDlgProc
@@ -998,7 +1039,18 @@ ShowIt:
     return result;
 }
 
-#line 1177
+
+#line 1167
+/***************************************************************************\
+* InternalDialogBox
+*
+* Server portion of DialogBoxIndirectParam.
+*
+* 04-05-91 ScottLu      Created.
+\***************************************************************************/
+
+extern HCURSOR hCurCursor;
+
 int InternalDialogBox(
     HANDLE hModule,
     LPDLGTEMPLATE lpdt,
@@ -1118,8 +1170,6 @@ int InternalDialogBox(
 **  desktop area after they've resized.
 **
 \***************************************************************************/
-
-#line 1293
 void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle)
 {
     LPRECT lprcClip;

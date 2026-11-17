@@ -31,12 +31,12 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-30/255 initial difference files reviewed;225 remain. Twenty-three changed files
-verified across P2-P16;seven reviewed unchanged. Current census:1063 files
+31/255 initial difference files reviewed;224 remain. Twenty-four changed files
+verified across P2-P17;seven reviewed unchanged. Current census:1063 files
 (1054 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
 normalized/error-masked differences,and255 nonzero files.
-Current total2299 blocks/53404 lines;cumulative delivered reduction34 blocks/
-1119 lines. Mouse's earlier two-line counting correction remains separate.
+Current total2294 blocks/53351 lines;cumulative delivered reduction39 blocks/
+1172 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -70,6 +70,7 @@ Current total2299 blocks/53404 lines;cumulative delivered reduction34 blocks/
 | command/cmdexec.c |24->17|123->82|P14 declaration/format restored;Full20 passed|
 | keymouse/keyba.c |24->24|72->56|P15 added guard pairs removed;actual keyboard90 and Full20 passed|
 | client/vdm.c |23->20|796->632|P16 four original functions restored;six compile contexts and Full20 passed|
+| client/dlgmgr.c |22->17|295->242|P17 original declarations/CvtDec/comments restored;focused37 and Full20 passed|
 
 
 The canonical pending backlog has1641 rows/1643 distinct historical R identifiers,
@@ -79,19 +80,19 @@ handtabl restorations removed from pending;remaining private-kernel and ABI
 boundaries remain pending. Historical R identifiers are not current diff blocks.
 P13 original input declarations are restored and verified. Seven scattered
 harmless macros would increase file blocks26->27;owner approval remains pending.
-No residual omission is silently approved. Next file is src/non-mvdm/windows/core/ntuser/client/dlgmgr.c.
+No residual omission is silently approved. Next file is src/non-mvdm/windows/core/ntuser/client/wow.c.
 
 ## Current Technical Baseline
 
-P16 cached x86/x64 full,six actual object contexts and Full20 passed.
-Package 62106c2c-314f-4418-887d-4e8def3daf4c contains11 images,published and
+P17 cached x86/x64 full,WOW focused37 and Full20 passed.
+Package b6c99780-5180-408f-be40-8570ebc1d364 contains11 images,published and
 hash-verified to assets/release and O:/winnt/system32. Full includes actual
-DOS4GW/NESticle. No guest or winnt.zip changes. Four original client functions
-restored;1868 matched nonblank lines retain original logical numbering.
+DOS4GW/NESticle. No guest or winnt.zip changes. Original CvtDec,declarations/comments
+restored;789 nontrivial matched lines retain original logical numbering.
 Governance and Git delivery accompany the receipt. Residual decisions are pending.
 
-[P16 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p16-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p16-verification-evidence.zip).
+[P17 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p17-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p17-verification-evidence.zip).
 
 ## Remaining Scope
 

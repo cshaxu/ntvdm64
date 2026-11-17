@@ -1,0 +1,219 @@
+{
+  "packet": "M0 T483 S6 P17",
+  "status": "Build publication Full verified;governance and Git follow",
+  "source_checkpoint": {
+    "source_files": 1,
+    "deleted": [],
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "sha256": "19e51c0fffe398d44c7486b6df65c16838ac10e060441754b5cb67061bd0a9b3"
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "b6c99780-5180-408f-be40-8570ebc1d364",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 420890,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5172,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1175,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13107,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 13316,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11258,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 227,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66548,
+        "CleanupMs": 460,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47777,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46389,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15459,
+        "CleanupMs": 389,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11772,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 52574,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12753,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28552,
+        "CleanupMs": 374,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30876,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4548,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8297,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9845,
+        "CleanupMs": 385,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4540,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7041,
+        "CleanupMs": 346,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19807,
+        "CleanupMs": 418,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "count": 37,
+    "passed": 37,
+    "cases": [
+      "wow_dialog_getset_fixture",
+      "wow_window_client_message_fixture",
+      "wow_dialog_creator_lifetime_fixture",
+      "wow_dialog_lifetime_fixture",
+      "wow_default_messages_fixture",
+      "wow_dialog_call_fixture",
+      "wow_edit_call_fixture",
+      "wow_edit_memory_callbacks_fixture",
+      "wow_control_brush_fixture",
+      "wow_default_window_binding_fixture",
+      "wow_dialog_context_fixture",
+      "wow_dialog_creation_entry_fixture",
+      "wow_dialog_finalization_fixture",
+      "wow_dialog_end_original_fixture",
+      "wow_dialog_keyboard_entry_fixture",
+      "wow_dialog_mnemonic_lifetime_fixture",
+      "wow_dialog_keyboard_lifetime_fixture",
+      "wow_control_string_fixture",
+      "wow_text_measure_failure_fixture",
+      "wow_mnemonic_drawing_fixture",
+      "wow_default_original_fixture",
+      "wow_button_drawing_fixture",
+      "wow_button_resources_fixture",
+      "wow_control_draw_state_fixture",
+      "wow_dialog_navigation_fixture",
+      "wow_edit_view_fixture",
+      "wow_button_lifetime_fixture",
+      "wow_button_dc_fixture",
+      "wow_dialog_native_owner_probe",
+      "wow_dialog_initialization_fixture",
+      "wow_task_profile_fixture",
+      "wow_task_profile_existing_fixture",
+      "wow_edit_lookaside_fixture",
+      "wow_edit_conversion_fixture",
+      "wow_def_window_bits_fixture",
+      "wow_original_dde_free_fixture",
+      "wow_user_capture_fixture"
+    ],
+    "exit": "0"
+  },
+  "global_counts": {
+    "files": 1063,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 255,
+    "blocks": 2294,
+    "lines": 53351,
+    "reviewed_files": 31,
+    "remaining_files": 224,
+    "cumulative_reduction_blocks": 39,
+    "cumulative_reduction_lines": 1172
+  },
+  "reduction": {
+    "blocks": 5,
+    "lines": 53
+  },
+  "autonomous_changes": "None;all restored content remains in original mirror owner",
+  "limits": [
+    "Original CvtDec,declarations/comments restored;residual decisions remain pending owner",
+    "No guest/winnt.zip changes",
+    "Historical native dialog and retirement controls reused,not newly rerun"
+  ]
+}
