@@ -79,9 +79,15 @@ with an implicit-int warning on the selected MSVC profile. Package
 publication, and the targeted WOW, DOS and DOS4GW/NESticle checks.
 [P5 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p5-checkpoint.json).
 
-S7 progress is 40 reviewed and 173 remaining. Source restorations reduce
-9 points and 493 changed lines in S7. The current census is 2,039 non-error
-points and 28,485 changed lines across 240 mirrors with filtered differences.
+S7 P6 completes nine more file reviews. It restores original blank source
+rows in `dpmi386.c` and `nt_cpu.c` and returns `lmsw.c` to byte identity
+with its pinned original. Original diagnostic coordinates are preserved.
+The P5 runtime package is retained.
+[P6 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p6-checkpoint.json).
+
+S7 progress is 49 reviewed and 164 remaining. Source restorations reduce
+13 points and 497 changed lines in S7. The current census is 2,035 non-error
+points and 28,481 changed lines across 239 mirrors with filtered differences.
 
 ## S1 Closure Record
 

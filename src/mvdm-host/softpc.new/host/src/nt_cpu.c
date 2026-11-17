@@ -245,6 +245,7 @@ GLOBAL void InitNtCpuInfo IFN0()
 #error Unsupported excluded original configuration
 #endif
 #line 286
+
 #line 287
     nt_cpu_info.universe = &GLOBAL_CurrentUniverse;
 

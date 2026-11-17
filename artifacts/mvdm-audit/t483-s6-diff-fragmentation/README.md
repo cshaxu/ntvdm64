@@ -311,3 +311,7 @@ census is 2,041 non-error points and 28,487 changed lines.
 two original declaration restorations, and targeted verification of the
 11-image published package. The current census is 2,039 non-error points
 and 28,485 changed lines.
+
+[S7 P6 receipt](s7-p6-checkpoint.json) records nine more reviews,
+two original blank-line restorations, and original byte identity for
+`lmsw.c`. The current census is 2,035 non-error points and 28,481 changed lines.

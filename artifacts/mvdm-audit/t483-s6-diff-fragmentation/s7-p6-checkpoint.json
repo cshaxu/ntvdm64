@@ -1,0 +1,176 @@
+{
+  "packet": "M0 T483 S7 P6",
+  "prior_delivery": "ab75535492aefded8aa82f1b1c646d79f62ce157",
+  "reviews": [
+    {
+      "restored_original_line": 185,
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "decision": "Restore the original blank at 185. The CPU40-only debug-read guard is local and counts. Keep the existing page-domain handoff and length-aware snapshot, with the original contiguous memory and native VDM owner counterexamples.",
+      "before": {
+        "blocks": 15,
+        "added": 33,
+        "deleted": 232
+      },
+      "after": {
+        "blocks": 14,
+        "added": 33,
+        "deleted": 231
+      },
+      "source_sha256": "5a95e294c01e250a3276717e57c72e266588e30bd17f233c0cb79a6739f53d10",
+      "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+      "evidence": "../t483-remaining-reaudit/r0217-r0221-dpmi386-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "decision": "Keep initialisation-time EOI cancellation. Original ICW1 erases IRQ ownership while the device still waits. Current reset reports the retired lines through the original EOI callback. Source proof and the established PIC fixture cover the boundary.",
+      "before": {
+        "blocks": 3,
+        "added": 13,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 3,
+        "added": 13,
+        "deleted": 0
+      },
+      "source_sha256": "6ccbdd1c1a00457fff9d236321f69b80d87fc2abe88bc31eb8f64617247e2304",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "evidence": "../t483-remaining-reaudit/r0829-r0831-ica-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "decision": "Current _ReleaseDC and token logic already reuse original scope. Other omitted units call private CSR desktop, sound or palette owners. Existing native desktop management continues to supply those boundaries.",
+      "before": {
+        "blocks": 2,
+        "added": 1,
+        "deleted": 85
+      },
+      "after": {
+        "blocks": 2,
+        "added": 1,
+        "deleted": 85
+      },
+      "source_sha256": "40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d",
+      "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+      "evidence": "../t483-remaining-reaudit/p253-exports-review.json"
+    },
+    {
+      "restored_original_line": 286,
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "decision": "Restore original blank at 286. The synthetic non-CCPU guard counts. Runtime lifecycle startup and CCPU unsimulation delivery require their existing providers. Fixed original GDP offsets do not name the selected storage.",
+      "before": {
+        "blocks": 7,
+        "added": 13,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 6,
+        "added": 13,
+        "deleted": 2
+      },
+      "source_sha256": "abecf7f744685be29e8eeee98983c0519a8abe78eb7b47553527c3daf2781d10",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "evidence": "../t483-remaining-reaudit/r1021-r1039-nt-cpu-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "decision": "Original implicit declarations compile with mismatched signedness or return types. Retained explicit IU32/void declarations match the existing dispatch table and original ev_glue provider.",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 3
+      },
+      "source_sha256": "f21775fefd79782e792bf430b651cf4f49defcf538d9b5a33c29196da6f142cb",
+      "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+      "evidence": "../t483-remaining-reaudit/r0837-r0838-ega-read-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "decision": "Original selected startup order remains restored. Retain correctly typed void declarations for the actual CPU startup and mouse-initialisation providers. The original consumer would assume int for both.",
+      "before": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 0
+      },
+      "source_sha256": "f5bb86d7fada1b989786beb80b506b44a66b88767bb67b1afb693f8792877dea",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "evidence": "../t483-remaining-reaudit/r0820-main-declaration-review.json",
+      "mouse_declaration_evidence": "../t483-remaining-reaudit/r0821-main-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "decision": "Keep one call and declaration for lifecycle exit ownership. An asynchronous second entrant can otherwise see already_called and call exit(0) before first-owner cleanup finishes. The source-level ordering witness describes the eligible interleaving.",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "source_sha256": "005c813035553aa01a906ec80303e57b509789dfca59add23d38bcc2948f5664",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "evidence": "../t483-remaining-reaudit/r0823-r0824-terminat-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "decision": "Five complete selected geometry helpers already match original. Omitted private icon/property handling requires original server types absent from the current owner. Existing USER hit-testing provides the host boundary.",
+      "before": {
+        "blocks": 6,
+        "added": 11,
+        "deleted": 301
+      },
+      "after": {
+        "blocks": 6,
+        "added": 11,
+        "deleted": 301
+      },
+      "source_sha256": "ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3",
+      "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+      "evidence": "../t483-remaining-reaudit/p253-winmgr-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+      "source_sha256": "8bc5bad26249b91c1cc9b3be756575c081b2da322bb8dcc7e9f554d4f68a4e96",
+      "original_sha256": "8bc5bad26249b91c1cc9b3be756575c081b2da322bb8dcc7e9f554d4f68a4e96",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "decision": "Restore complete OpenNT file with original newline bytes. Removed only surplus blank rows and compensating line directives. Ordered nonempty rows and logical coordinates are identical."
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 49,
+    "remaining": 164,
+    "nonzero_files": 239,
+    "non_error_points": 2035,
+    "non_error_lines": 28481,
+    "source_reduction_s7": {
+      "points": 13,
+      "lines": 497
+    }
+  },
+  "verification": {
+    "source": "Pinned source and original hashes checked. Two original blank lines restored with unchanged directives. LMSW is byte-identical to original with unchanged nonempty logical coordinates.",
+    "package": "Prior P5 published package retained. No new runtime tests for the formatting-only changes."
+  }
+}

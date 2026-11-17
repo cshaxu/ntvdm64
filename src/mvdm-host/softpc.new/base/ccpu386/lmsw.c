@@ -23,7 +23,6 @@ LMSW CPU functions.
 #include <c_xcptn.h>
 #include	<c_reg.h>
 #include <lmsw.h>
-#line 26
 
 
 /*
@@ -49,13 +48,9 @@ IFN1(
    /* kill off bits which can not be set */
    op1 = op1 & ~no_set;
 
-
-#line 51
    /* retain bits which can not be cleared */
    temp = GET_CR(CR_STAT) & no_clear;
 
    /* thus update only the bits allowed */
    SET_CR(CR_STAT, temp | op1);
-
-#line 56
    }
