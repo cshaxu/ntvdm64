@@ -99,7 +99,7 @@ Routine Description:
 #ifdef i386
 #line 89
 #error Excluded unsupported VdmSetInt21Handler kernel VDM path
-#endif
+#endif      //i386
 #line 107
 
     setAX(0);
@@ -528,7 +528,6 @@ Return Value:
         return FALSE;
     }
 
-
 #line 526
     SaveEFLAGS = getEFLAGS();
     //BUGBUG turn off task bits
@@ -729,7 +728,6 @@ Routine Description:
         VdmStackPointer += getSP();
     }
 
-
 #line 686
     //
     // Fast iret (without executing final 16-bit iret)
@@ -788,7 +786,6 @@ Routine Description:
 
     }
 #endif // i386
-
 
     #line 763
     DBGTRACE(DPMI_INT_IRET16, 0, 0, 0);
@@ -869,7 +866,6 @@ Routine Description:
     setCS(HIWORD(DosxIretd));
     setEIP((ULONG)LOWORD(DosxIretd));
 #endif // i386
-
 
     #line 856
     DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);
@@ -994,10 +990,8 @@ Return Value:
         setSP((WORD)NewSP);
     }
 
-
 #line 961
     setCS(Handlers[IntNumber].CsSelector);
-
 
 #if DBG
 #line 964
@@ -1038,7 +1032,6 @@ Routine Description:
     } else {
         VdmStackPointer += getSP();
     }
-
 
 #line 1006
     EndUseLockedPMStack();
@@ -1369,10 +1362,12 @@ Return Value:
 --*/
 
 {
+    PUCHAR pCode;
     UCHAR Opcode, Operands[2];
     ULONG SegCS = getCS(), Length = 0;
     BOOL Big = (c_getCS_AR() & 0x4000) != 0, Operand32 = Big;
     ULONG Offset = Big ? getEIP() : getIP();
+#line 1265
     BOOL bReturn = FALSE;
 
     /* Only DPMI protected-mode exceptions reach this service. Prefixes do

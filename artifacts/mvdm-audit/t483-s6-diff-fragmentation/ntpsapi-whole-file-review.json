@@ -1,0 +1,86 @@
+{
+  "file": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+  "before_sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+  "after_sha256": "30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2",
+  "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+  "before": {
+    "blocks": 38,
+    "added": 0,
+    "deleted": 339,
+    "lines": 339
+  },
+  "after": {
+    "blocks": 38,
+    "added": 1,
+    "deleted": 309,
+    "lines": 310
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 29
+  },
+  "restored": [
+    "Three complete original NT query/set signatures restored with only NTSYSAPI lines omitted. SDK has ordinary declarations; importing after them fails C2375.",
+    "PPS_POST_PROCESS_INIT_ROUTINE original typedef restored with NTAPI calling convention on its pointer. Original cdecl conflicts on x86;modern x64 calling conventions coincide."
+  ],
+  "retained": {
+    "structures": "PEB_LDR_DATA,CLIENT_ID,PEB,NT_TIB,TEB,EXCEPTION_REGISTRATION_RECORD,PROCESS_BASIC_INFORMATION,QUOTA_LIMITS,IO_COUNTERS and JOB records duplicate selected SDK owners;P211 real-consumer C2011 controls enumerate them. Private NT4 layout is not the modern runtime layout.",
+    "enums": "PROCESSINFOCLASS,THREADINFOCLASS,JOBOBJECTINFOCLASS conflict with SDK definitions;ordinary declarations/constants already restored.",
+    "NtCurrentPeb": "Original macro reads native TEB ProcessEnvironmentBlock;current compatibility provider returns private OPENNT_SUPPORT_PEB and synchronizes cwd/stdhandles. Restoration changes state ownership,not an equivalent header cleanup;retains pending decision.",
+    "excluded": "Five original #error bodies and frameworks unchanged;no mask ambiguity."
+  },
+  "tests": {
+    "complete": 0,
+    "consumers-complete": 0,
+    "consumers-runner": 0,
+    "nt_eoi": 0,
+    "nt_timer": 0,
+    "runner": 0,
+    "second-runner": 255,
+    "wkman": 0,
+    "x64-callback-ntapi-TC": 0,
+    "x64-callback-ntapi-TP": 0,
+    "x64-callback-original-TC": 0,
+    "x64-callback-original-TP": 0,
+    "x64-extern-c-TC": 2,
+    "x64-extern-c-TP": 2,
+    "x64-no-import-TC": 0,
+    "x64-no-import-TP": 0,
+    "x64-original-TC": 2,
+    "x64-original-TP": 2,
+    "x86-callback-ntapi-TC": 0,
+    "x86-callback-ntapi-TP": 0,
+    "x86-callback-original-TC": 2,
+    "x86-callback-original-TP": 2,
+    "x86-extern-c-TC": 2,
+    "x86-extern-c-TP": 2,
+    "x86-no-import-TC": 0,
+    "x86-no-import-TP": 0,
+    "x86-original-TC": 2,
+    "x86-original-TP": 2
+  },
+  "test_limit": "Header C/C++ x86/x64 plus three actual current source consumers under reused established profiles. No new runtime/full-package pass yet. Second combined script exited255 from repeated compiler-environment command length;all8 callback controls completed;three consumers rerun separately with response files and passed.",
+  "line_proof": {
+    "PPS_POST_PROCESS_INIT_ROUTINE": "original154-158;NTAPI modifies original156",
+    "NtQueryInformationProcess": "original887-895 retained;886 NTSYSAPI omitted",
+    "NtQueryInformationThread": "original982-990 retained;981 omitted",
+    "NtSetInformationThread": "original994-1001 retained;993 omitted",
+    "status": "original logical anchors inserted;full final-source preprocessing/build remains pending"
+  },
+  "evidence": [
+    "ntpsapi-declaration-controls.json",
+    "ntpsapi-controls.zip",
+    "../t483-remaining-reaudit/batch-p211-checkpoint.json"
+  ],
+  "delivery": "whole-file audit complete;local reduction awaiting P5 cached full/publish/tests/commit/push;residual differences not approved",
+  "final_delivery": {
+    "receipt": "batch-p5-checkpoint.json",
+    "source": "final checkpoint hash matched",
+    "cached_full": 0,
+    "published_images": 11,
+    "destinations": 2,
+    "Full_gates": 20,
+    "status": "verified;Git delivery accompanies receipt",
+    "residuals": "pending owner,not approved"
+  }
+}

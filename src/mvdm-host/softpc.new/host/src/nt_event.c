@@ -2014,12 +2014,18 @@ void cmdPushExitInConsoleBuffer (void)
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 extern void Reset6805and8042(void);
+#line 1910
+extern int keys_in_6805_buff(int *part_key_transferred);
 
 int CalcNumberOfUnusedKeyEvents()
 {
+    int part_key_transferred;
     unsigned pending = PendingKeyboardHistory();
+#line 1915
 
+    //Get the number of keys in the 6805 buffer
     Reset6805and8042();
+#line 1917
     return (pending + KeyQueue.KeyCount);
 #line 1918
 }

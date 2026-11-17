@@ -141,6 +141,12 @@ typedef CLIENT_ID64 *PCLIENT_ID64;
 #define TLS_MINIMUM_AVAILABLE 64    // winnt
 #define TLS_EXPANSION_SLOTS   1024
 
+#line 154
+typedef
+VOID
+(NTAPI *PPS_POST_PROCESS_INIT_ROUTINE) (
+    VOID
+    );
 #line 159
 
 #line 166
@@ -662,6 +668,16 @@ NtTerminateProcess(
 #line 884
 
 // begin_ntddk
+#line 887
+NTSTATUS
+NTAPI
+NtQueryInformationProcess(
+    IN HANDLE ProcessHandle,
+    IN PROCESSINFOCLASS ProcessInformationClass,
+    OUT PVOID ProcessInformation,
+    IN ULONG ProcessInformationLength,
+    OUT PULONG ReturnLength OPTIONAL
+    );
 #line 896
 // end_ntddk
 
@@ -748,9 +764,28 @@ NtSetContextThread(
     IN PCONTEXT ThreadContext
     );
 
+#line 982
+NTSTATUS
+NTAPI
+NtQueryInformationThread(
+    IN HANDLE ThreadHandle,
+    IN THREADINFOCLASS ThreadInformationClass,
+    OUT PVOID ThreadInformation,
+    IN ULONG ThreadInformationLength,
+    OUT PULONG ReturnLength OPTIONAL
+    );
 #line 991
 
 // begin_ntsrv
+#line 994
+NTSTATUS
+NTAPI
+NtSetInformationThread(
+    IN HANDLE ThreadHandle,
+    IN THREADINFOCLASS ThreadInformationClass,
+    IN PVOID ThreadInformation,
+    IN ULONG ThreadInformationLength
+    );
 #line 1002
 // end_ntsrv
 

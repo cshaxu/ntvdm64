@@ -1,0 +1,63 @@
+{
+  "file": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+  "status": "partial investigation;no product edit;whole-file completion not claimed",
+  "source_sha256": "e040dcfb5cbb84e0afe5049a7c5fde574b243a541c5386bae78388926cce977c",
+  "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+  "question": "Can three omitted original NT query/set declarations be restored instead of deleted wholesale?",
+  "controls": {
+    "complete": 0,
+    "runner": 0,
+    "x64-extern-c-TC": 2,
+    "x64-extern-c-TP": 2,
+    "x64-no-import-TC": 0,
+    "x64-no-import-TP": 0,
+    "x64-original-TC": 2,
+    "x64-original-TP": 2,
+    "x86-extern-c-TC": 2,
+    "x86-extern-c-TP": 2,
+    "x86-no-import-TC": 0,
+    "x86-no-import-TP": 0,
+    "x86-original-TC": 2,
+    "x86-original-TP": 2
+  },
+  "conclusion": "NTSYSAPI import decoration conflicts with prior SDK declarations in both C and C++. EXTERN_C does not solve it. Restore complete original signatures while omitting only NTSYSAPI is viable in four header contexts.",
+  "limits": [
+    "Header compile controls,not real consumer build/link/runtime.",
+    "Other omitted types and callback typedef still require final whole-file review.",
+    "Candidate needs original logical-line pins before application."
+  ],
+  "ownership": {
+    "first_pid": 22568,
+    "first_result": "restricted launch ended without compiler artifacts;confirmed absent via elevated process query;not a test result",
+    "supervisor_pid": 35264,
+    "child": {
+      "pid": 31988,
+      "timeout_ms": 120000,
+      "start": "2026-11-17T01:24:57.0506460-08:00"
+    },
+    "runner_exit": 0
+  },
+  "inputs": {
+    "controls.cmd": "30bbeecc4be9a7cfbdb8f55952707a2f91e401ca9a58211dfe748fabfa66925d",
+    "run.ps1": "8501a7b21b882182d51d20c6bc60b9da1e2fcce3d5609b0c4d243a157b4b1b64",
+    "header.c": "36703968d9ef88eb8ca3961049b5960dc5f4adc06405c7f65d035deb7b0c9b4f"
+  },
+  "logs": {
+    "commands.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "supervisor.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "x64-extern-c-TC.log": "7a73b6e70654c3fb9272b7b946316a0f558af3e008d64bc99fba2d6f616c25fc",
+    "x64-extern-c-TP.log": "7a73b6e70654c3fb9272b7b946316a0f558af3e008d64bc99fba2d6f616c25fc",
+    "x64-no-import-TC.log": "43b069c1661dc9f9ae3e8713a9844bfc8dc679fc118feedc449c18ee52b6366b",
+    "x64-no-import-TP.log": "43b069c1661dc9f9ae3e8713a9844bfc8dc679fc118feedc449c18ee52b6366b",
+    "x64-original-TC.log": "9f4145873725e9a25e71ef3bd535dabd8d1d7d22cff60a770cd8ca8d3b7d1008",
+    "x64-original-TP.log": "9f4145873725e9a25e71ef3bd535dabd8d1d7d22cff60a770cd8ca8d3b7d1008",
+    "x86-extern-c-TC.log": "7a73b6e70654c3fb9272b7b946316a0f558af3e008d64bc99fba2d6f616c25fc",
+    "x86-extern-c-TP.log": "7a73b6e70654c3fb9272b7b946316a0f558af3e008d64bc99fba2d6f616c25fc",
+    "x86-no-import-TC.log": "43b069c1661dc9f9ae3e8713a9844bfc8dc679fc118feedc449c18ee52b6366b",
+    "x86-no-import-TP.log": "43b069c1661dc9f9ae3e8713a9844bfc8dc679fc118feedc449c18ee52b6366b",
+    "x86-original-TC.log": "9f4145873725e9a25e71ef3bd535dabd8d1d7d22cff60a770cd8ca8d3b7d1008",
+    "x86-original-TP.log": "9f4145873725e9a25e71ef3bd535dabd8d1d7d22cff60a770cd8ca8d3b7d1008"
+  },
+  "next": "Finish all ntpsapi.h points,repair source lines,verify real consumers,then apply authorized net reduction and deliver whole accumulated batch."
+}

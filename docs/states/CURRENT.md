@@ -36,9 +36,10 @@ normalized/error-masked differences;255 have nonzero counts. The initial2333
 block sum is conservative:75 mask-review cases in31 files remain counted.
 These are counting uncertainties,not permission to delete or retain code.
 Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
-S6 review8/255 complete;247 files remain. Six changed files delivered across
-P2/P3/P4,two unchanged files fully reviewed. Current census2322 blocks;
-cumulative delivered reduction11 blocks/27 lines;no unverified source candidate.
+S6 review12/255 complete;243 files remain. Nine changed files verified across
+P2/P3/P4/P5,three unchanged files fully reviewed. Current census2314 blocks;
+cumulative reduction19 blocks/69 lines. P5 cached full,publish11x2,focused,
+Full20 and governance passed;Git delivery accompanies the P5 receipt.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -50,6 +51,10 @@ cumulative delivered reduction11 blocks/27 lines;no unverified source candidate.
 | usercli.h |49->45|125->114|P3 restored declaration/macros/format|
 | process.c |47->47|168->167|P4 removed added blank;residuals pending owner|
 | user.h |45->45|112->110|P4 redundant marker guard removed|
+| nt_event.c |43->43|124->121|P5 original declarations/comment restored|
+| dpmiint.c |42->34|231->221|P5 original formatting/declaration restored|
+| wowhooks.c |38->38|114->114|No edit;residual decisions remain pending|
+| ntpsapi.h |38->38|339->310|P5 original signatures/typedef restored|
 
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p3-checkpoint.json)
 records cached x86/x64,publish11x2,message/focused/task-order,Full20,
@@ -57,7 +62,8 @@ boundary143/9 and governance passes. Git delivery accompanies the receipt.
 Per-file evidence is indexed in the worklist README. Residual decisions remain
 pending owner,not approved. Known sevid000 CHAIN4 word/UNCHAINED string
 limitations are not represented as passing tests. Backlog1644 rows/1649 R points;
-R1519 remains restored,not deferred. Next file:nt_event.c,43 conservative blocks;resolve its2 mask cases first.
+R1519 remains restored,not deferred. Next file:wmsg16.c,37 conservative blocks;P5 verified;Git delivery next. nt_event.c reviewed:43->43 blocks,
+124->121 lines;two added X86GFX exclusions remain conservatively counted.
 [P4 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p4-checkpoint.json)
 records final cached/full/publication/message/focused/boundary/governance passes.
 Owned build/pipeline are terminal;Git delivery accompanies receipt.
@@ -71,12 +77,21 @@ Complete each file,then update both register and backlog;recount and reorder
 unprocessed files when masks or differences change. Pure formatting may
 accumulate;substantive whole-file batches follow build,publish,test,commit,push.
 
+[P5 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p5-checkpoint.json)
+records final source hashes,logical-line checks and Full20 (419006ms).
+[Verification evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p5-verification-evidence.zip)
+retains the initial failed WOW frontier and fresh-process passing control.
+Added keyboard fixtures imported VS environment into the first parent runner;
+subsequent execution isolates them in child processes. No product change or
+weakened assertion separated the failed and passing package runs.
+
 ## Current Technical Baseline
 
-S6 P4:11 images published/hash-verified to assets/release and O:/winnt/system32.
-Package17dd6123-a94e-47ba-b0e6-0135d5cf616d. Full20 includes actual NESticle
-menu/Escape. No guest or winnt.zip changes. P4 receipt binds final source,
-manifest and test results;P3 publication is superseded.
+S6 P5:11 images published/hash-verified to assets/release and O:/winnt/system32.
+Package302142c9-8fa7-465c-9e4b-437812f33880. Full20 includes actual NESticle
+menu/Escape. No guest or winnt.zip changes. P5 receipt binds final source,
+manifest and test results;P4 publication is superseded. All owned runners are
+terminal. Git delivery accompanies this receipt;S6 remains active.
 
 S5 fixed365-file raw metric:#error included,#line excluded,4862blocks/89379lines;
 cumulative reduction435blocks/30534lines. Do not compare this directly to the

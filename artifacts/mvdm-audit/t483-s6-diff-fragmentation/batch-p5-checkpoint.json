@@ -1,0 +1,466 @@
+{
+  "packet": "M0 T483 S6 P5",
+  "status": "cached full,publish11x2,message,keyboard,focused/task-order,Full20,boundary/governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+        "sha256": "9e8b177f0c28eacc60eb06f5d3b2ae82a4f5c8e8d971e3f881a943ac3054a4e2"
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "b3707284a029fc127f5380213e4b3c32c5730a4eff9d39aa9af4bd8c344f1cb8"
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 8,
+    "lines": 42
+  },
+  "publication": {
+    "status": "published",
+    "package": "302142c9-8fa7-465c-9e4b-437812f33880",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 419006,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 8291,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1257,
+          "CleanupMs": 533,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 12937,
+          "CleanupMs": 486,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 11292,
+          "CleanupMs": 455,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10273,
+          "CleanupMs": 494,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 220,
+          "CleanupMs": 369,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66555,
+          "CleanupMs": 542,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 47226,
+          "CleanupMs": 469,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 46340,
+          "CleanupMs": 467,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15056,
+          "CleanupMs": 428,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 12018,
+          "CleanupMs": 473,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 48065,
+          "CleanupMs": 450,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12663,
+          "CleanupMs": 519,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 29083,
+          "CleanupMs": 507,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 31202,
+          "CleanupMs": 455,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4187,
+          "CleanupMs": 492,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 8198,
+          "CleanupMs": 441,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 11151,
+          "CleanupMs": 403,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4170,
+          "CleanupMs": 447,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7529,
+          "CleanupMs": 533,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20268,
+          "CleanupMs": 406,
+          "Passed": true
+        }
+      ]
+    },
+    "cached": 0,
+    "message": 0,
+    "keyboard": 0,
+    "focused": 0,
+    "post_full": 0
+  },
+  "initial_failure": {
+    "initial_failure": {
+      "root": "full-isolated",
+      "exit": 1,
+      "gate": "wow-frontiers/winmine",
+      "observation": "worker alive but no application windows in four samples"
+    },
+    "identified_runner_difference": "verification.ps1 invoked verify-keyboard-buffer-count.ps1 in-process; fixture imports all VsDevCmd environment variables without restoring parent environment",
+    "environment_measurement": {
+      "kind": "metadata-only VsDevCmd environment comparison, no values recorded",
+      "beforeChars": 6816.0,
+      "afterChars": 15516.0,
+      "changed": [
+        {
+          "name": "__DOTNET_ADD_32BIT",
+          "beforeLength": null,
+          "afterLength": 1
+        },
+        {
+          "name": "__DOTNET_ADD_64BIT",
+          "beforeLength": null,
+          "afterLength": 1
+        },
+        {
+          "name": "__DOTNET_PREFERRED_BITNESS",
+          "beforeLength": null,
+          "afterLength": 2
+        },
+        {
+          "name": "__VSCMD_PREINIT_INCLUDE",
+          "beforeLength": null,
+          "afterLength": 244
+        },
+        {
+          "name": "__VSCMD_PREINIT_PATH",
+          "beforeLength": null,
+          "afterLength": 2904
+        },
+        {
+          "name": "CommandPromptType",
+          "beforeLength": null,
+          "afterLength": 5
+        },
+        {
+          "name": "DevEnvDir",
+          "beforeLength": null,
+          "afterLength": 75
+        },
+        {
+          "name": "ExtensionSdkDir",
+          "beforeLength": null,
+          "afterLength": 67
+        },
+        {
+          "name": "EXTERNAL_INCLUDE",
+          "beforeLength": null,
+          "afterLength": 581
+        },
+        {
+          "name": "Framework40Version",
+          "beforeLength": null,
+          "afterLength": 4
+        },
+        {
+          "name": "FrameworkDir",
+          "beforeLength": null,
+          "afterLength": 37
+        },
+        {
+          "name": "FrameworkDir32",
+          "beforeLength": null,
+          "afterLength": 35
+        },
+        {
+          "name": "FrameworkDir64",
+          "beforeLength": null,
+          "afterLength": 37
+        },
+        {
+          "name": "FrameworkVersion",
+          "beforeLength": null,
+          "afterLength": 10
+        },
+        {
+          "name": "FrameworkVersion32",
+          "beforeLength": null,
+          "afterLength": 10
+        },
+        {
+          "name": "FrameworkVersion64",
+          "beforeLength": null,
+          "afterLength": 10
+        },
+        {
+          "name": "INCLUDE",
+          "beforeLength": 244,
+          "afterLength": 826
+        },
+        {
+          "name": "LIB",
+          "beforeLength": null,
+          "afterLength": 286
+        },
+        {
+          "name": "LIBPATH",
+          "beforeLength": null,
+          "afterLength": 387
+        },
+        {
+          "name": "NETFXSDKDir",
+          "beforeLength": null,
+          "afterLength": 49
+        },
+        {
+          "name": "Path",
+          "beforeLength": 2904,
+          "afterLength": 4415
+        },
+        {
+          "name": "PreferredToolArchitecture",
+          "beforeLength": null,
+          "afterLength": 3
+        },
+        {
+          "name": "PROMPT",
+          "beforeLength": null,
+          "afterLength": 4
+        },
+        {
+          "name": "UCRTVersion",
+          "beforeLength": null,
+          "afterLength": 12
+        },
+        {
+          "name": "UniversalCRTSdkDir",
+          "beforeLength": null,
+          "afterLength": 39
+        },
+        {
+          "name": "VCIDEInstallDir",
+          "beforeLength": null,
+          "afterLength": 78
+        },
+        {
+          "name": "VCINSTALLDIR",
+          "beforeLength": null,
+          "afterLength": 66
+        },
+        {
+          "name": "VCPKG_ROOT",
+          "beforeLength": null,
+          "afterLength": 71
+        },
+        {
+          "name": "VCToolsInstallDir",
+          "beforeLength": null,
+          "afterLength": 89
+        },
+        {
+          "name": "VCToolsRedistDir",
+          "beforeLength": null,
+          "afterLength": 90
+        },
+        {
+          "name": "VCToolsVersion",
+          "beforeLength": null,
+          "afterLength": 11
+        },
+        {
+          "name": "VisualStudioVersion",
+          "beforeLength": null,
+          "afterLength": 4
+        },
+        {
+          "name": "VS170COMNTOOLS",
+          "beforeLength": null,
+          "afterLength": 77
+        },
+        {
+          "name": "VSCMD_ARG_app_plat",
+          "beforeLength": null,
+          "afterLength": 7
+        },
+        {
+          "name": "VSCMD_ARG_HOST_ARCH",
+          "beforeLength": null,
+          "afterLength": 3
+        },
+        {
+          "name": "VSCMD_ARG_TGT_ARCH",
+          "beforeLength": null,
+          "afterLength": 3
+        },
+        {
+          "name": "VSCMD_VER",
+          "beforeLength": null,
+          "afterLength": 7
+        },
+        {
+          "name": "VSINSTALLDIR",
+          "beforeLength": null,
+          "afterLength": 63
+        },
+        {
+          "name": "WindowsLibPath",
+          "beforeLength": null,
+          "afterLength": 128
+        },
+        {
+          "name": "WindowsSDK_ExecutablePath_x64",
+          "beforeLength": null,
+          "afterLength": 77
+        },
+        {
+          "name": "WindowsSDK_ExecutablePath_x86",
+          "beforeLength": null,
+          "afterLength": 73
+        },
+        {
+          "name": "WindowsSdkBinPath",
+          "beforeLength": null,
+          "afterLength": 43
+        },
+        {
+          "name": "WindowsSdkDir",
+          "beforeLength": null,
+          "afterLength": 39
+        },
+        {
+          "name": "WindowsSDKLibVersion",
+          "beforeLength": null,
+          "afterLength": 13
+        },
+        {
+          "name": "WindowsSdkVerBinPath",
+          "beforeLength": null,
+          "afterLength": 56
+        },
+        {
+          "name": "WindowsSDKVersion",
+          "beforeLength": null,
+          "afterLength": 13
+        }
+      ]
+    },
+    "control": {
+      "same_package": "302142c9-8fa7-465c-9e4b-437812f33880",
+      "root": "full-fresh",
+      "runner": "run-full-fresh.ps1",
+      "status": "Full20 passed in fresh process; no product changes between failed and successful runs",
+      "assertions": "unchanged Full gate"
+    },
+    "fix": "invoke keyboard fixtures through current modern pwsh in separate child processes; no product change or weakened assertion",
+    "limits": "Fresh Full not yet complete; do not count failed run as passing or claim exact guest memory corruption site from this comparison"
+  },
+  "line_mapping": {
+    "files": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+        "sha256": "9e8b177f0c28eacc60eb06f5d3b2ae82a4f5c8e8d971e3f881a943ac3054a4e2",
+        "retained_runs_checked": 957,
+        "mismatches": [],
+        "noncode_line_differences": [
+          {
+            "original": 79,
+            "current": 88,
+            "text": "External references."
+          },
+          {
+            "original": 80,
+            "current": 89,
+            "text": "================================================================*/"
+          }
+        ]
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "sha256": "b3707284a029fc127f5380213e4b3c32c5730a4eff9d39aa9af4bd8c344f1cb8",
+        "retained_runs_checked": 718,
+        "mismatches": [],
+        "noncode_line_differences": []
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "sha256": "30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2",
+        "retained_runs_checked": 385,
+        "mismatches": [],
+        "noncode_line_differences": []
+      }
+    ],
+    "scope": "Source logical-line comparison of retained equal runs>=4;not preprocessor proof."
+  },
+  "evidence_root": "build\\t483-s6-p5",
+  "delivery": "Accompanying P5 commit;verify remote after push"
+}

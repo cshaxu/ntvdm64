@@ -112,3 +112,36 @@ remaining ABI/layout/multipass decisions stay pending. P4 verification passed.
 [P4 checkpoint](batch-p4-checkpoint.json) records the frozen source and owned
 delivery:cached full,publish11x2,message/focused/task-order,Full20,boundary
 and governance passed. Git delivery accompanies receipt.
+
+[Ninth-file review](nt-event-whole-file-review.json):43->43 conservative non-error
+blocks,124->121 lines. Restore original harmless prototype/local/comment with
+original line pins. Two locally added X86GFX exclusions stay conservatively
+counted;no fabricated masking reduction. Residual lifecycle correction findings
+remain pending. P5 cached/full/publication verified;see final receipt.
+
+[Tenth-file review](dpmiint-whole-file-review.json):42->34 conservative blocks,
+231->221 lines. Seven surplus blanks,original endif comment and unused pCode
+declaration restored;execution expressions unchanged. P222 DOS4GW repair stays
+intact;historical alias-fallback options reconciled in both registers. Local
+format/declaration batch verified in P5;see final receipt.
+
+[Eleventh-file review](wowhooks-whole-file-review.json):38 blocks/114 lines
+unchanged. Original CBT closure failure and per-thread storage controls remain
+qualified diagnostic evidence. Exact prior final-source hash and line proof
+match;no new source edit/build/runtime claim. Residual decisions stay pending.
+
+[Twelfth-file declaration controls](ntpsapi-declaration-controls.json):12 actual
+x86/x64 C/C++ compilations isolate NTSYSAPI import decoration as the conflict
+for three omitted query/set declarations. Omitting only that line passes;
+EXTERN_C does not. Historical investigation checkpoint;the whole-file result below supersedes it.
+
+[Twelfth-file review](ntpsapi-whole-file-review.json):38->38 blocks,339->310
+lines. Four over-broad omissions narrowed after [compiler controls](ntpsapi-controls.zip).
+Original logical anchors restored;SDK type/PEB boundary decisions remain pending.
+Whole-file candidate passed P5 cached build,publication and Full20.
+
+[P5 checkpoint](batch-p5-checkpoint.json) and [verification archive](p5-verification-evidence.zip)
+record 8 fewer blocks/42 fewer lines,source identity,11-image dual publication,
+message/keyboard/focused/task-order/Full20 and boundary/governance passes.
+The initial runner-environment failure is retained alongside the same-package
+fresh-process pass;residual differences remain pending owner decisions.

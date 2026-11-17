@@ -1,0 +1,134 @@
+{
+  "file": "src/mvdm-host/dpmi32/dpmiint.c",
+  "before_sha256": "55730257853b2ca116778f6a15915e9278ee8ae8375c1134c8240229262d39d3",
+  "after_sha256": "b3707284a029fc127f5380213e4b3c32c5730a4eff9d39aa9af4bd8c344f1cb8",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "before": {
+    "blocks": 42,
+    "added": 192,
+    "deleted": 39,
+    "lines": 231
+  },
+  "after": {
+    "blocks": 34,
+    "added": 184,
+    "deleted": 37,
+    "lines": 221
+  },
+  "reduction": {
+    "blocks": 8,
+    "lines": 10
+  },
+  "restored": [
+    "Seven surplus blank-line insertions at original526,686,762,855,961,963,1005 removed.",
+    "Original #endif //i386 comment restored exactly.",
+    "Original harmless unused PUCHAR pCode declaration restored; original BOOL bReturn pinned1265."
+  ],
+  "remaining_groups": {
+    "iret_frame": "Original12-byte DWORD frame wrote CS and FLAGS both at+4;retain FLAGS+8. Direct source overwrite proof,not a new runtime reproduction.",
+    "handler_width": "Registered VDM_INT_32 belongs to the handler;CurrentAppFlags belongs to interrupted program. Keep width-aware frame construction. Four other original callers retain original ABI. A single-function option changes their/header diffs and remains owner decision,not silently implemented.",
+    "failed_dispatch": "CCPU resumes exception delivery after FALSE using current registers. Delay TF commit until successful frame;restore EFLAGS/ESP on rejected fault frame because nested EndUseLockedPMStack does not restore outer stack.",
+    "excluded_frameworks": "Preserve all #error frames. Nine conservative masking cases include locally introduced CPU40 frames;do not infer original arms or subtract them as original-body matches.",
+    "instruction_decode": "P222 supersedes historical alias-fallback implementation. Active CS cache/segment limit/paging fetch,15-byte bound and full operand fetch precede I/O. Unreadable bytes decline;no guessed contiguous alias.",
+    "flags_and_completion": "P222 successful simulation precedes dispatcher IF/TF clearing. CLI/STI synchronize virtual state;original IN/OUT own device operations. Original CCPU completion block owns TF/PIC;STI retains follower delay.",
+    "actual_regression": "P102/P103 bisect and published NESticle menu/Escape prove removal can break supported execution. P22258 cases include48 scalar and16 fetch/unsupported subcases;prior evidence only,not a test of this new whitespace/declaration candidate.",
+    "unsupported": "INS/OUTS,CLTS,LMSW,privileged MOV DR are not implemented here;negative dispatch tests are not full compatibility proof."
+  },
+  "evidence": [
+    {
+      "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r0147-r0179-file-completion.json",
+      "sha256": "e17d6fa633a70429d5b06b70712647d6c5747d93b28e047426ae0d8f41728b0e"
+    },
+    {
+      "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r0147-r0148-review.json",
+      "sha256": "2d9f703f7ada3b7c29a43e520629b38a8b5ca28a8cd4d31c3ff1175deccb8dc3"
+    },
+    {
+      "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r0152-width-interface-options.json",
+      "sha256": "bf7a78bc6027732560abc1c8cea197abbb20f45fe37b12935433a70b0ef132c0"
+    },
+    {
+      "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r0154-r0157-ccpu-fallback.json",
+      "sha256": "9fd66cbbefa1cc8c8934739305d8feb5c24ddfe61445e28f7ce70cd3e730e031"
+    },
+    {
+      "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r0163-r0164-fallback-minimization.json",
+      "sha256": "771cb7baf50836e5898c1c5c227349abe89ea84efa8f6b274f2d78926b45259e"
+    },
+    {
+      "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r0170-restoration.json",
+      "sha256": "e02b214d870b9214028da6613cfcc270e266ce19a0ff94f6c9cd69b6e09f0321"
+    },
+    {
+      "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r0172-mapping-source-review.json",
+      "sha256": "3edc2a012c480da88f30fe6309937e4afae6266debe01dc90f51272aa86c341e"
+    },
+    {
+      "path": "artifacts/mvdm-audit/dos4gw-pif-sti-20261115/main-production-candidate.json",
+      "sha256": "02e525e7caf817d6601a1eaf2d5d7c1cd52abc52306c5ea1e1bede75de2973ea"
+    }
+  ],
+  "line_and_token_proof": {
+    "nonbinding_original_declaration_only": true,
+    "otherwise_token_identical": true,
+    "error_directives_identical": true,
+    "restored_pCode_original_line": 1262,
+    "restored_bReturn_original_line": 1265,
+    "blank_removal": "Original statements retain adjacent #line anchors;DBG conditional moves back to original963.",
+    "limit": "Source proof,not fresh preprocessor/build evidence."
+  },
+  "mask_cases": [
+    {
+      "line": 535,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 560,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 571,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 582,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 603,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 1095,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 1165,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 1235,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 1274,
+      "reason": "ambiguous-original-arm"
+    }
+  ],
+  "verification": {
+    "new_build": "not run",
+    "new_runtime": "not run",
+    "publication": "P4 unchanged",
+    "delivery": "local nonbinding declarations/format;accumulate with nt_event per owner rule;residuals pending owner"
+  },
+  "final_delivery": {
+    "receipt": "batch-p5-checkpoint.json",
+    "source": "final checkpoint hash matched",
+    "cached_full": 0,
+    "published_images": 11,
+    "destinations": 2,
+    "Full_gates": 20,
+    "status": "verified;Git delivery accompanies receipt",
+    "residuals": "pending owner,not approved"
+  }
+}

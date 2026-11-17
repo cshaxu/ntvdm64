@@ -1,0 +1,176 @@
+{
+  "file": "src/mvdm-host/wow32/wowhooks.c",
+  "before_sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836",
+  "after_sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836",
+  "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+  "before": {
+    "blocks": 38,
+    "added": 93,
+    "deleted": 21,
+    "lines": 114
+  },
+  "after": {
+    "blocks": 38,
+    "added": 93,
+    "deleted": 21,
+    "lines": 114
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 0
+  },
+  "source_changed": false,
+  "prior_evidence": {
+    "path": "artifacts/mvdm-audit/t483-remaining-reaudit/r1721-r1764-hook-investigation.json",
+    "sha256": "a76fa3507ce18439a84493c28634c2ebb529f8f9eadc1a1f2f8ebe8f11b975e7"
+  },
+  "current_call_chain_review": {
+    "native_entry": "32 original native stubs -> WU32StdHookProc wrapper -> WowOriginalStdHookProc -> selected original converter -> CallBack16. Wrapper owns task/USER borrowing before private-window conversion.",
+    "lifetime": "Converters allocate before CallBack16 snapshots its stack. Outer stack scope covers that earlier acquisition. Shared unwind uses original allocation/unthunk providers,not a second allocation registry.",
+    "ownership": "wow_message_free16 consumes key before reentrant free. finally restores recursion and caller DDE state even if release raises.",
+    "status": "ThunkMsg16 HWND result is not conversion success;fThunkSucceeded protects callback payloads. COPYDATA has separate original protocol flags.",
+    "state": "TLS isolates native threads;wrapper snapshots restore same-thread recursion."
+  },
+  "source_hashes": {
+    "src/wow32-dll/source/wow_hook_callback.c": "29379edbe91fe3e317388324baf39868bbba9487ff722b960bdfc1f77339aac6",
+    "src/wow32-dll/source/wow_message_lifetime.c": "be18f3ed2de3ee8602a22d08f37605b4015d560ea3c681fd70c8a8c795d704b6"
+  },
+  "retained_evidence": {
+    "original_cbt_closure_control": {
+      "question": "Does the original-only CBT control fail merely because current Create converters require new ownership bookkeeping?",
+      "substitution": "Pinned original complete ThunkCbtHook, WM32Create and WM32MDICreate; all other exact bodies and fixture service doubles retained.",
+      "original_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+      "compiler_exit": 0,
+      "run_exit": 1,
+      "cbt_modes": [
+        {
+          "mode": "callback exception",
+          "trapped": true,
+          "outstanding_allocations": 2,
+          "foreign_free": 0,
+          "cursor_restored": false,
+          "init_restored": false
+        },
+        {
+          "mode": "callback rejected",
+          "trapped": false,
+          "outstanding_allocations": 0,
+          "foreign_free": 0,
+          "cursor_restored": false,
+          "init_restored": false
+        },
+        {
+          "mode": "normal return",
+          "trapped": false,
+          "outstanding_allocations": 0,
+          "foreign_free": 0,
+          "cursor_restored": false,
+          "init_restored": false,
+          "interpretation": "No CBT assertion fails; normal original stack convention is not rollback."
+        }
+      ],
+      "conclusion": "Original full selected Create closure releases normally. Exception bypasses its normal unthunk and leaks two allocations; rejected callback has no rollback of pre-call stack allocations. Do not use the earlier mixed-current-converter normal-path failure as proof of original deficiency.",
+      "production_source_crosscheck": "walloc16.c stackalloc16 mutates vpCBStack/INIT before CallBack16. wcall16.c current abnormal restoration snapshots at CallBack16 entry, after converter allocations; it cannot restore the earlier converter cursor. The wrapper may reject before calling original callback. Guest normal return and terminal teardown remain separate cases.",
+      "limits": "Fault injection and service doubles, not production guest reproduction. This supplies bounded lifetime evidence, not proof that every current helper or header dependency is minimal. Other fixture failures from restored Create/MDICreate are outside CBT and not counted as independent proof here.",
+      "hashes": {
+        "wmdisp32.original.c": "0092319153a95e147513ad966947813634b61bee02fe8fad8fdf20c250dbffba",
+        "original-cbt-closure/message_construction_exact_body.h": "03de3ede0010b45403946ce4d9cf72ff6efd05e046501e97afea27942064b55e",
+        "original-cbt-closure/fixture.c": "3a90096a92a1af3d02e778ffb9308526854ec86d879f54fdb4bdc6e8cee0ed23",
+        "original-cbt-closure/compile.log": "2f97a77084ba90d92dc3c08edf2f2487abda4d0d36774442aa09e351cf23a4f3",
+        "original-cbt-closure/run.log": "3b9c5c72b609f364b6f49ff46d362220285eb1d77142a6700b48fad3d597da27"
+      },
+      "owner_processes": "9384 terminal before compiler startup;34416 and20012 terminal. Final run is20012.",
+      "production_changed": false
+    },
+    "tls_storage_control": {
+      "reader": "Exact pinned original W32GetHookDDEMsglParam body",
+      "cases": [
+        {
+          "case": 0,
+          "meaning": "both global",
+          "compile_exit": 0,
+          "run_exit": 1,
+          "output": "HOOK_STORAGE_INTERLEAVING A=00002222 B=00002222 correct=0 scheduler_proof=0"
+        },
+        {
+          "case": 1,
+          "meaning": "both TLS",
+          "compile_exit": 0,
+          "run_exit": 0,
+          "output": "HOOK_STORAGE_INTERLEAVING A=00001111 B=00002222 correct=1 scheduler_proof=0"
+        },
+        {
+          "case": 2,
+          "meaning": "parameter TLS only",
+          "compile_exit": 0,
+          "run_exit": 1,
+          "output": "HOOK_STORAGE_INTERLEAVING A=0000aaaa B=00002222 correct=0 scheduler_proof=0"
+        },
+        {
+          "case": 3,
+          "meaning": "index TLS only",
+          "compile_exit": 0,
+          "run_exit": 1,
+          "output": "HOOK_STORAGE_INTERLEAVING A=0000bbbb B=00002222 correct=0 scheduler_proof=0"
+        }
+      ],
+      "scope": "Event-ordered two native threads; storage control, not real scheduler or guest reproduction. Same-thread nesting is independently covered by existing wrapper fixture.",
+      "source_applicability": "Original dispatcher writes both values; wmsg16.c DDE paths consume original reader. Actual callback entry acquires task ownership, and native_call_begin with unlocked/non-inline owner calls xxxSleepTask and releases runtime lock; callback lifetime is not globally atomic. No hook-specific lock in guest WOW16HookProc.",
+      "minimality": "Both values must follow the calling native thread; moving them to a new per-task accessor or snapshot manager adds indirection and equivalent state. Existing wrapper scopes same-thread recursion; TLS addresses cross-thread storage independently.",
+      "hashes": {
+        "hook-storage.c": "eca8f0b6ac2fa5669f2029e55b30266530fa3b10a45cbbcb727c831c96c2e29b",
+        "hook-storage.ps1": "df5c6f3369da96957ce53e7bd31c6b03c1bc2fa3bff24c9b4ae7f2209b1e5949",
+        "hook-storage-case0.cmd": "2d8b31ed3a27e88f666ff80b50fc7201f8b6a2987976bc4db130d6fdfe85530c",
+        "hook-storage-case1.cmd": "0d68186c67c4b6858eb1d9f16b30176c854dd80659445c18eb26c809a25a4d42",
+        "hook-storage-case2.cmd": "1f8d6ee09c2f7dcf18c1532f8605ccdabff1192072fedc4275fb5987c13f0d6f",
+        "hook-storage-case3.cmd": "5a2dc236f4d5cdb26212d384a8e9d88c34b3359d7cff46ec0d0cdf2e4610b897",
+        "hook-storage-case0.run.log": "6735f0f87b6c16b31a5dfeddba8038d0a90360388a3f4698527ac6906aa72dbe",
+        "hook-storage-case1.run.log": "cd302d83f383bff5acb18b05177e3c0f007cf2dfdf9a696ba57a0c741afb098e",
+        "hook-storage-case2.run.log": "e87549856d085db7d8f339a8229f118cd7578fc5e14f94bb1a356f95eb18aae1",
+        "hook-storage-case3.run.log": "cca0461cf671d9f455d8c7cfb26e911f4a2488070f6a4a9b4185b67ef3a5e3e8"
+      },
+      "attempts": "16796 stopped on cmd forward-path error;29496 had cmd equals-token splitting and no valid runs;8244 fixed-command run completed. Earlier empty run exits are not evidence."
+    },
+    "wrapper_boundary_review": {
+      "original_assumption": "Original dispatcher assumes WOW CURRENTPTD and private USER window words before converter dispatch.",
+      "actual_boundary": "wow_user_get_window_longA routes GWL_WOWWORDS to scoped borrowed aliases;wrapper enters task/borrow and enrolls CBT creation before original converters. Native USER does not provide original NT4 private structures.",
+      "minimum": "Remove added comment;one original definition rename is smaller than copying stubs or per-TU macro/link indirection.",
+      "test_limit": "Current fixture uses real wrapper but a dispatcher double;no claim of complete guest acceptance."
+    },
+    "completion_reduction_control": {
+      "scenarios": 183,
+      "failures": 0,
+      "cases": "Journal/Mouse x normal,rejected,callback-exception,output-exception",
+      "initial_failure": "Early completed with return inside try misclassified normal return because AbnormalTermination TRUE;output Journal fault index also corrected. Failed log retained.",
+      "final_solution": "Normal fallthrough through finally;original return follows it. Callback result is completed;actual exception OR !completed triggers stack restore.",
+      "scope": "Exact functions with service doubles;not real guest acceptance.",
+      "hashes": {
+        "run.log": "d947c942615c7c1aaaa012b7db301c83b48c8959957a2465f64ddba0d4ca34e8",
+        "failed-early-completed.log": "e6b5440ff87e9b19af6642c9e0939c45874035c3207ef0757958b36369ea2c20",
+        "fixture.c": "33485745f92e9619f97aa3ce698c09ec0d96fbe25d2f402b546d53ac5949b2e1",
+        "message_construction_exact_body.h": "d871841d41e50a96dfb95ea0b19e3d2a7278e290acc667e44d1fbee9d69c75a3"
+      }
+    }
+  },
+  "line_proof": {
+    "path": "src/mvdm-host/wow32/wowhooks.c",
+    "before": 151,
+    "after": 125,
+    "delta": -26,
+    "selected_lines": 1048,
+    "logical_line_mismatches": [],
+    "errors_unchanged": true,
+    "source_sha256": "2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836",
+    "scope": "1048 selected retained original lines;explicit original return lines1181 and1249 retained;altered callback statements inspected in actual product preprocessor."
+  },
+  "mask": {
+    "excluded_bodies": 2,
+    "issues": []
+  },
+  "disposition": "Residuals pending owner;no new reduction identified after whole-file/provider counter-review. No blanket approval of autonomous implementations.",
+  "verification": {
+    "historical": "Exact mirror hash matches prior183-case/Full19 delivery;diagnostic controls are not guest reproductions.",
+    "new_tests": "No build/test rerun:mirror unchanged.",
+    "current_batch": "nt_event/dpmiint local declaration/format changes remain pending validation/delivery."
+  }
+}
