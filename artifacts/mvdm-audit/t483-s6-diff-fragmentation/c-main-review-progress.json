@@ -1,0 +1,813 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "status": "whole-file review in progress; no product edits or build authorized by this record",
+  "entry": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+    "current_sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+    "raw": {
+      "blocks": 111,
+      "added": 208,
+      "deleted": 561
+    },
+    "filtered": {
+      "blocks": 36,
+      "added": 133,
+      "deleted": 30
+    },
+    "excluded": [
+      {
+        "original": [
+          26,
+          26
+        ],
+        "current": [
+          26,
+          27
+        ]
+      },
+      {
+        "original": [
+          156,
+          161
+        ],
+        "current": [
+          170,
+          172
+        ]
+      },
+      {
+        "original": [
+          198,
+          202
+        ],
+        "current": [
+          210,
+          212
+        ]
+      },
+      {
+        "original": [
+          209,
+          210
+        ],
+        "current": [
+          220,
+          222
+        ]
+      },
+      {
+        "original": [
+          222,
+          222
+        ],
+        "current": [
+          236,
+          237
+        ]
+      },
+      {
+        "original": [
+          227,
+          227
+        ],
+        "current": [
+          244,
+          245
+        ]
+      },
+      {
+        "original": [
+          283,
+          303
+        ],
+        "current": [
+          328,
+          330
+        ]
+      },
+      {
+        "original": [
+          331,
+          334
+        ],
+        "current": [
+          359,
+          361
+        ]
+      },
+      {
+        "original": [
+          474,
+          495
+        ],
+        "current": [
+          502,
+          504
+        ]
+      },
+      {
+        "original": [
+          513,
+          535
+        ],
+        "current": [
+          523,
+          525
+        ]
+      },
+      {
+        "original": [
+          539,
+          543
+        ],
+        "current": [
+          530,
+          532
+        ]
+      },
+      {
+        "original": [
+          593,
+          596
+        ],
+        "current": [
+          615,
+          617
+        ]
+      },
+      {
+        "original": [
+          600,
+          605
+        ],
+        "current": [
+          622,
+          624
+        ]
+      },
+      {
+        "original": [
+          631,
+          636
+        ],
+        "current": [
+          651,
+          653
+        ]
+      },
+      {
+        "original": [
+          762,
+          765
+        ],
+        "current": [
+          781,
+          783
+        ]
+      },
+      {
+        "original": [
+          772,
+          772
+        ],
+        "current": [
+          798,
+          799
+        ]
+      },
+      {
+        "original": [
+          776,
+          781
+        ],
+        "current": [
+          803,
+          805
+        ]
+      },
+      {
+        "original": [
+          794,
+          794
+        ],
+        "current": [
+          820,
+          821
+        ]
+      },
+      {
+        "original": [
+          804,
+          805
+        ],
+        "current": [
+          832,
+          834
+        ]
+      },
+      {
+        "original": [
+          1098,
+          1104
+        ],
+        "current": [
+          1130,
+          1132
+        ]
+      },
+      {
+        "original": [
+          1223,
+          1227
+        ],
+        "current": [
+          1254,
+          1256
+        ]
+      },
+      {
+        "original": [
+          1237,
+          1241
+        ],
+        "current": [
+          1269,
+          1271
+        ]
+      },
+      {
+        "original": [
+          1250,
+          1252
+        ],
+        "current": [
+          1282,
+          1284
+        ]
+      },
+      {
+        "original": [
+          1404,
+          1404
+        ],
+        "current": [
+          1437,
+          1438
+        ]
+      },
+      {
+        "original": [
+          1476,
+          1476
+        ],
+        "current": [
+          1511,
+          1512
+        ]
+      },
+      {
+        "original": [
+          1527,
+          1535
+        ],
+        "current": [
+          1565,
+          1567
+        ]
+      },
+      {
+        "original": [
+          1545,
+          1565
+        ],
+        "current": [
+          1580,
+          1582
+        ]
+      },
+      {
+        "original": [
+          1574,
+          1574
+        ],
+        "current": [
+          1593,
+          1594
+        ]
+      },
+      {
+        "original": [
+          1644,
+          1644
+        ],
+        "current": [
+          1666,
+          1667
+        ]
+      },
+      {
+        "original": [
+          1706,
+          1715
+        ],
+        "current": [
+          1732,
+          1734
+        ]
+      },
+      {
+        "original": [
+          1725,
+          1747
+        ],
+        "current": [
+          1747,
+          1749
+        ]
+      },
+      {
+        "original": [
+          1764,
+          1779
+        ],
+        "current": [
+          1769,
+          1771
+        ]
+      },
+      {
+        "original": [
+          2200,
+          2200
+        ],
+        "current": [
+          2194,
+          2195
+        ]
+      },
+      {
+        "original": [
+          2241,
+          2241
+        ],
+        "current": [
+          2237,
+          2238
+        ]
+      },
+      {
+        "original": [
+          2264,
+          2264
+        ],
+        "current": [
+          2262,
+          2263
+        ]
+      },
+      {
+        "original": [
+          2305,
+          2305
+        ],
+        "current": [
+          2305,
+          2306
+        ]
+      },
+      {
+        "original": [
+          2318,
+          2360
+        ],
+        "current": [
+          2320,
+          2322
+        ]
+      },
+      {
+        "original": [
+          2366,
+          2385
+        ],
+        "current": [
+          2329,
+          2331
+        ]
+      },
+      {
+        "original": [
+          2832,
+          2845
+        ],
+        "current": [
+          2779,
+          2781
+        ]
+      },
+      {
+        "original": [
+          3317,
+          3322
+        ],
+        "current": [
+          3255,
+          3257
+        ]
+      },
+      {
+        "original": [
+          3330,
+          3338
+        ],
+        "current": [
+          3266,
+          3268
+        ]
+      },
+      {
+        "original": [
+          3502,
+          3510
+        ],
+        "current": [
+          3434,
+          3436
+        ]
+      },
+      {
+        "original": [
+          3675,
+          3678
+        ],
+        "current": [
+          3603,
+          3605
+        ]
+      },
+      {
+        "original": [
+          3703,
+          3722
+        ],
+        "current": [
+          3632,
+          3634
+        ]
+      },
+      {
+        "original": [
+          3750,
+          3750
+        ],
+        "current": [
+          3663,
+          3664
+        ]
+      },
+      {
+        "original": [
+          3767,
+          3767
+        ],
+        "current": [
+          3682,
+          3683
+        ]
+      },
+      {
+        "original": [
+          3779,
+          3779
+        ],
+        "current": [
+          3696,
+          3697
+        ]
+      },
+      {
+        "original": [
+          3795,
+          3804
+        ],
+        "current": [
+          3714,
+          3716
+        ]
+      },
+      {
+        "original": [
+          3830,
+          3830
+        ],
+        "current": [
+          3743,
+          3744
+        ]
+      },
+      {
+        "original": [
+          3878,
+          3878
+        ],
+        "current": [
+          3793,
+          3794
+        ]
+      },
+      {
+        "original": [
+          3895,
+          3895
+        ],
+        "current": [
+          3812,
+          3813
+        ]
+      },
+      {
+        "original": [
+          3907,
+          3907
+        ],
+        "current": [
+          3826,
+          3827
+        ]
+      },
+      {
+        "original": [
+          3923,
+          3923
+        ],
+        "current": [
+          3844,
+          3845
+        ]
+      },
+      {
+        "original": [
+          3949,
+          3949
+        ],
+        "current": [
+          3872,
+          3873
+        ]
+      },
+      {
+        "original": [
+          4002,
+          4006
+        ],
+        "current": [
+          3928,
+          3930
+        ]
+      },
+      {
+        "original": [
+          4197,
+          4201
+        ],
+        "current": [
+          4127,
+          4129
+        ]
+      },
+      {
+        "original": [
+          4330,
+          4330
+        ],
+        "current": [
+          4260,
+          4261
+        ]
+      },
+      {
+        "original": [
+          4336,
+          4336
+        ],
+        "current": [
+          4270,
+          4271
+        ]
+      },
+      {
+        "original": [
+          4354,
+          4354
+        ],
+        "current": [
+          4293,
+          4294
+        ]
+      },
+      {
+        "original": [
+          4400,
+          4400
+        ],
+        "current": [
+          4340,
+          4341
+        ]
+      },
+      {
+        "original": [
+          4421,
+          4441
+        ],
+        "current": [
+          4369,
+          4371
+        ]
+      },
+      {
+        "original": [
+          4445,
+          4485
+        ],
+        "current": [
+          4376,
+          4378
+        ]
+      },
+      {
+        "original": [
+          4493,
+          4496
+        ],
+        "current": [
+          4404,
+          4406
+        ]
+      },
+      {
+        "original": [
+          4528,
+          4528
+        ],
+        "current": [
+          4441,
+          4442
+        ]
+      },
+      {
+        "original": [
+          4639,
+          4639
+        ],
+        "current": [
+          4554,
+          4555
+        ]
+      },
+      {
+        "original": [
+          4642,
+          4642
+        ],
+        "current": [
+          4558,
+          4559
+        ]
+      },
+      {
+        "original": [
+          4658,
+          4681
+        ],
+        "current": [
+          4576,
+          4578
+        ]
+      },
+      {
+        "original": [
+          4739,
+          4739
+        ],
+        "current": [
+          4642,
+          4643
+        ]
+      },
+      {
+        "original": [
+          4774,
+          4775
+        ],
+        "current": [
+          4680,
+          4682
+        ]
+      },
+      {
+        "original": [
+          4801,
+          4801
+        ],
+        "current": [
+          4715,
+          4716
+        ]
+      },
+      {
+        "original": [
+          4813,
+          4814
+        ],
+        "current": [
+          4731,
+          4733
+        ]
+      },
+      {
+        "original": [
+          4841,
+          4841
+        ],
+        "current": [
+          4768,
+          4769
+        ]
+      },
+      {
+        "original": [
+          4858,
+          4858
+        ],
+        "current": [
+          4796,
+          4797
+        ]
+      },
+      {
+        "original": [
+          4873,
+          4885
+        ],
+        "current": [
+          4813,
+          4815
+        ]
+      },
+      {
+        "original": [
+          4890,
+          4920
+        ],
+        "current": [
+          4821,
+          4823
+        ]
+      }
+    ],
+    "issues": [
+      {
+        "line": 4361,
+        "reason": "ambiguous-original-arm"
+      }
+    ],
+    "rank": 1
+  },
+  "finding": {
+    "point": "T483-R0366 / T483-R0385",
+    "problem": "Deliver accepted PIC IRQ through installed DPMI handler, falling back to original CPU dispatch",
+    "evidence": [
+      "dpmiint.c DpmiInit installs DpmiHwIntHandler; nt_inthk.c host_hwint_hook invokes installed handler",
+      "rg over src/test/tools finds one helper definition and one remaining caller; historical second STI caller no longer exists"
+    ],
+    "conclusion": "Hook remains necessary integration boundary; single-use helper no longer needs independent abstraction. Inline candidate retains signed rejection check, assignment, EXT, SYNCH_TICK, hook, fallback and EIP update in order.",
+    "candidate_metric": {
+      "blocks": 36,
+      "added": 129,
+      "deleted": 30
+    },
+    "rejected_candidate": {
+      "metric": {
+        "blocks": 38,
+        "added": 126,
+        "deleted": 27
+      },
+      "reason": "Restoring outer indentation within nested guard fragmented point count36->38; not applied"
+    },
+    "remaining_work": [
+      "Complete other units and original-source/ABI evidence review",
+      "Check candidate logical lines and all excluded bodies before applying",
+      "Whole-file final cached build,publish,test,commit,push required"
+    ],
+    "candidate_only": true
+  },
+  "delivered_progress_unchanged": {
+    "files_reviewed": 13,
+    "files_remaining": 242,
+    "blocks_reduced": 19,
+    "lines_reduced": 73
+  }
+}

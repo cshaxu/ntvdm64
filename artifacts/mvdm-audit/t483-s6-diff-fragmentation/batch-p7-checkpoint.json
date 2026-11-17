@@ -1,0 +1,172 @@
+{
+  "packet": "M0 T483 S6 P7",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "sha256": "0893e5236657d778168a8511809a7e79117da54197ced324937652014b543a53"
+      }
+    ],
+    "source_files": 1,
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 5
+  },
+  "publication": {
+    "status": "published",
+    "package": "a8ea2240-24e6-46e2-ad17-0ea2a3e3a654",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 405027,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6371,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1182,
+          "CleanupMs": 457,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11310,
+          "CleanupMs": 474,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 11471,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10060,
+          "CleanupMs": 454,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 160,
+          "CleanupMs": 435,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66043,
+          "CleanupMs": 369,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 45557,
+          "CleanupMs": 436,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 44753,
+          "CleanupMs": 450,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14921,
+          "CleanupMs": 425,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 11000,
+          "CleanupMs": 410,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 46030,
+          "CleanupMs": 429,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12692,
+          "CleanupMs": 522,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28813,
+          "CleanupMs": 511,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30909,
+          "CleanupMs": 430,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3921,
+          "CleanupMs": 414,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7851,
+          "CleanupMs": 457,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10131,
+          "CleanupMs": 433,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4136,
+          "CleanupMs": 437,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7292,
+          "CleanupMs": 439,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20045,
+          "CleanupMs": 459,
+          "Passed": true
+        }
+      ]
+    },
+    "cached": 0,
+    "cpu_boundary_cases": 58,
+    "cpu_debug": 0,
+    "cpu_notification_rounds": 4096,
+    "review": 0
+  },
+  "compiler_line_mapping": {
+    "original_selected_lines": 3103,
+    "current_selected_lines": 3166,
+    "shared_lines_checked": 3054,
+    "mismatches": [],
+    "source_sha256": "0893e5236657d778168a8511809a7e79117da54197ced324937652014b543a53",
+    "method": "Actual production CCPU preprocessing; shared runs>=3,adapted statements not claimed original"
+  },
+  "status": "All required verification passed;Git delivery accompanies receipt"
+}

@@ -152,3 +152,9 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 #line mapping checked against compiler preprocessing;P6 delivery pending.
 
 [P6 delivery receipt](batch-p6-checkpoint.json) and [verification evidence](p6-verification-evidence.zip): wmsg16.c 37->37 non-error blocks,150->146 changed lines;cached full,publish11x2,message,focused/task-order,Full20 and governance passed. Residual decisions remain pending owner.
+
+[c_main.c review progress](c-main-review-progress.json): entry36 non-error blocks,+133/-30;single-use IRQ helper reduction candidate only. Whole-file review and delivery remain incomplete;not counted among completed files.
+
+[c_main whole-file review](c-main-whole-file-review.json):36->36 points,163->158 lines;P7 local final candidate,verification/delivery pending. Prior progress record is historical candidate evidence.
+
+[P7 receipt](batch-p7-checkpoint.json), [verification evidence](p7-verification-evidence.zip):c_main36->36 blocks,163->158 lines;all gates passed,residuals pending owner.

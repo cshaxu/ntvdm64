@@ -1,0 +1,57 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "before": {
+    "blocks": 36,
+    "added": 133,
+    "deleted": 30
+  },
+  "after": {
+    "blocks": 36,
+    "added": 128,
+    "deleted": 30
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 5
+  },
+  "before_sha256": "58899ab458427bb5fe27a14e20a1cc729de4375d56a127a8dadb6ade4918a36d",
+  "after_sha256": "0893e5236657d778168a8511809a7e79117da54197ced324937652014b543a53",
+  "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+  "excluded_bodies_unchanged": true,
+  "mask_issue": {
+    "line": 4350,
+    "reason": "New NTVDM dispatch alternative has no original matching arm; remains counted conservatively,not masked"
+  },
+  "unit_dispositions": {
+    "declarations": "Original c_addr/c_seg/ica/timer providers supply actual signatures; prior paired product compiler C4013 evidence reviewed; explicit unsupported declarations not re-invented.",
+    "event_map": "HeartBeatThread publishes CPU_TIMER_TICK after host_ica_unlock; c_cpu consumer has no matching lock. Retain atomic snapshot/raise/take to avoid read-modify-write lost notifications.",
+    "halt": "Original busy polling cost measured in T440 S7;retain existing wait and notification with original event ownership.",
+    "debug": "Original MOV_DR updates simulated DR bank and breakpoint caches; native hardware thread registers cannot replace it. Retain task-specific bank/resume and new-event latch distinct from sticky DR6.",
+    "completed_instruction": "DpmiEmulateInstruction calls ccpu386CompleteInstruction after successful emulation; ntthread per-frame completion selects return2; CPU completes interrupt/trap boundary before next instruction. Do not restore prior DOS4GW STI retry regression.",
+    "irq": "ica_intack signed -1 rejection retained. DpmiInit installs handler;host_hwint_hook invokes it;fallback do_intrupt and EIP bookkeeping unchanged. Removed now-single-use helper and inlined exactly in same caller.",
+    "unwind": "ccpu386SimulatePtr increments TLS depth;FE normal path decrements before longjmp;SEH abnormal exit otherwise leaves abandoned frame. Retain conditional finally cleanup by frame identity.",
+    "reset_continue": "Clear transient debug event on reset/continue;DR6 status remains separately guest visible."
+  },
+  "proof_sources": [
+    "r0358-r0359-main-declarations.json",
+    "r0360-r0362-main-provider-review.json",
+    "r0363-r0365-debug-boundary-review.json",
+    "r0366-r0368-irq-frame-review.json",
+    "r0369-r0373-halt-review.json",
+    "r0374-r0382-boundary-review.json",
+    "r0383-r0398-tail-review.json"
+  ],
+  "counter_review": "One remaining helper caller confirmed repository-wide. Hook-return, IRQ rejection and callback order unchanged; no new state,shim or guest changes. Alternative increasing diff points rejected. No additional harmless original-unit deletions identified.",
+  "line_check": "All #error directives unchanged; original #line547 and4419 bound edits. Before/after3540 matched lines have one moved project-added function closing-brace coordinate573->562;original following anchors unchanged. Compiler/build verification pending.",
+  "status": "Verified final candidate;Git delivery accompanies P7 receipt",
+  "residuals": "All necessary residuals remain pending owner,not approved",
+  "final_delivery": "batch-p7-checkpoint.json",
+  "compiler_line_check": {
+    "original_selected_lines": 3103,
+    "current_selected_lines": 3166,
+    "shared_lines_checked": 3054,
+    "mismatches": [],
+    "source_sha256": "0893e5236657d778168a8511809a7e79117da54197ced324937652014b543a53",
+    "method": "Actual production CCPU preprocessing; shared runs>=3,adapted statements not claimed original"
+  }
+}

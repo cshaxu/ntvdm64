@@ -551,17 +551,6 @@ GLOBAL VOID ccpu_restore_debug_context IFN2(const IU32 *, registers, BOOL, pendi
    debug_context_resume_check = TRUE;
 }
 
-static VOID ccpu_dispatch_accepted_irq IFN1(IS32, vector)
-{
-   extern BOOL host_hwint_hook IPT1(IS32, int_no);
-   cpu_hw_interrupt_number = (IU16)vector;
-   EXT = EXTERNAL;
-   SYNCH_TICK();
-   if (!host_hwint_hook(vector))
-      do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
-   CCPU_save_EIP = GET_EIP();
-}
-
 #endif
 
 
@@ -4357,7 +4346,13 @@ CPU_RESTORED_RESET:
 	 if (acknowledged_interrupt != -1)
 	 {
 #ifdef NTVDM
-	     ccpu_dispatch_accepted_irq(acknowledged_interrupt);
+	    extern BOOL host_hwint_hook IPT1(IS32, int_no);
+	    cpu_hw_interrupt_number = (IU16)acknowledged_interrupt;
+	    EXT = EXTERNAL;
+	    SYNCH_TICK();
+	    if (!host_hwint_hook(acknowledged_interrupt))
+	       do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
+	    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
 #else
 #line 4413
 #error Excluded unsupported non-NTVDM CCPU interrupt dispatch
