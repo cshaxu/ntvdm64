@@ -129,9 +129,13 @@ spelling in `dpmidata.h` and removes one added blank in `nt_mem.c`.
 The selected code tokens and executable logical lines are preserved.
 [P13 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p13-checkpoint.json).
 
-S7 progress is 109 reviewed and 104 remaining. Source restorations reduce
-22 points and 550 changed lines in S7. The current census is 2,026 non-error
-points and 28,428 changed lines across 237 mirrors with filtered differences.
+S7 P14 completes ten file reviews. It removes one redundant blank in
+`nt_mouse.c` while preserving selected tokens and original line anchors.
+[P14 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p14-checkpoint.json).
+
+S7 progress is 119 reviewed and 94 remaining. Source restorations reduce
+22 points and 551 changed lines in S7. The current census is 2,026 non-error
+points and 28,427 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

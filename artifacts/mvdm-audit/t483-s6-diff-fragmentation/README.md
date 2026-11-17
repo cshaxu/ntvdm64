@@ -344,3 +344,7 @@ source remains byte-identical to P11 and the filtered census is unchanged.
 [S7 P13 receipt](s7-p13-checkpoint.json) records eight reviewed files and
 two source formatting restorations. The filtered census is 2,026 points
 and 28,428 changed lines.
+
+[S7 P14 receipt](s7-p14-checkpoint.json) records ten reviewed files and
+one source formatting restoration. The filtered census is 2,026 points
+and 28,427 changed lines.

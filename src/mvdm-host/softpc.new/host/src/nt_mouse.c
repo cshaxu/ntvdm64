@@ -33,7 +33,6 @@
 /* DIVERGENCE(MVDM-HOST-DIV-318): Window-relative input uses original
  * coordinates and callback masks, not Console warping. */
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
-
 /* DIVERGENCE(MVDM-HOST-DIV-274): original NT USER's cursor producer publishes
  * the already bounded virtual position before dispatching guest mouse work.
  * The standalone worker retains that one shared-data update at SoftPC's

@@ -1,0 +1,188 @@
+{
+  "packet": "M0 T483 S7 P14",
+  "prior_delivery": "1fa7b8676",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "before": {
+        "blocks": 12,
+        "added": 32,
+        "deleted": 14
+      },
+      "after": {
+        "blocks": 12,
+        "added": 32,
+        "deleted": 14
+      },
+      "source_sha256": "ac47089e2cd2f60b9509d3eb1ab84f8c52bb65a68be896206c9cc6ae0549f902",
+      "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+      "decision": "Actual CCPU/SIM32 controls show an arbitrary DOS buffer need not have a contiguous host alias. Keep the existing bounded guest lease, success scatter and release on all paths. The original flush/free pair cannot release this representation.",
+      "evidence": "../t483-remaining-reaudit/r0102-r0113-requalification.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "before": {
+        "blocks": 6,
+        "added": 24,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 6,
+        "added": 23,
+        "deleted": 1
+      },
+      "source_sha256": "9287115bab8384d6421d03e42f443e149d8736d83a092db464a3bcfbe9c49478",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "decision": "Keep the active relative-input adapter at the original locked dispatch, reset/set-position ordering, and publication of the bounded position into the shared view read directly by original WOW16. Remove one redundant blank between local provider includes; original anchor 35 and the complete suffix retain their bytes.",
+      "evidence": "../t483-remaining-reaudit/r1176-r1183-nt-mouse-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "3dd14fded39eb89dff3e8f5a3c5ca15056ae374d0ecabe195eb875fa0bb2ce97",
+      "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+      "decision": "Keep the minimal four scratch slots needed for simultaneous outer and nested class/title/record ownership. TLS prevents restoring a stale DDE mode sampled before task admission from another host thread. The latter is a source ordering counterexample.",
+      "evidence": "../t483-remaining-reaudit/r1594-r1596-wmdisp32-header-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "before": {
+        "blocks": 5,
+        "added": 11,
+        "deleted": 9
+      },
+      "after": {
+        "blocks": 5,
+        "added": 11,
+        "deleted": 9
+      },
+      "source_sha256": "5b644af487c3c9f56adbd12ce36f36fd26a81bb5571b6f9514e79fa5be0f64d2",
+      "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+      "decision": "Preserve explicit ownership and retirement of CB_DIR text mapping across conversion failure and exceptional unwind. Original cleanup infers ownership from the current thunk flag and cannot distinguish a rejected AddParamMap; existing lifetime tests and source analysis establish the boundary.",
+      "evidence": "../t483-remaining-reaudit/r1654-r1660-wmsgcb-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "before": {
+        "blocks": 6,
+        "added": 28,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 6,
+        "added": 28,
+        "deleted": 6
+      },
+      "source_sha256": "401d13ac2ec3e9705c45cfa857916e15cff1ec19897bd893356ca4fc78ec7f97",
+      "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+      "decision": "Keep CCPU-specific PE/CPL and cached descriptor sequencing. Original passive native CONTEXT setters and selected immediate CCPU segment loads differ. Real/protected helpers require restoring WOW page view and the continuation selectors; selected original bodies remain.",
+      "evidence": "../t483-remaining-reaudit/r0204-r0213-call-chain-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "before": {
+        "blocks": 13,
+        "added": 17,
+        "deleted": 10
+      },
+      "after": {
+        "blocks": 13,
+        "added": 17,
+        "deleted": 10
+      },
+      "source_sha256": "b035518e1bd3b9d4884516d2af18e2fcbbc7cfbb40517e9b308e48fd1841c1d7",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "decision": "Keep original SAS dispatch with physical alias resolution. Actual CCPU page-table controls show original CPL predicates fail 24 of 90 checks; extracted fallback controls also show original IU8 cast truncation when the BIOS routine returns AX or EAX. Width proof uses stubbed paging/execution.",
+      "evidence": "../t483-remaining-reaudit/r0439-r0453-investigation.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.h",
+      "before": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "1f05fb10908781eb2c28ffd1886dd6baedad43a4b547c0e43fb1b99791773db4",
+      "original_sha256": "730ec4dee5b07377c8533a82596ba9a9934ce74af355603aa6bad2637ad3bc8c",
+      "decision": "Retain cdecl on two idle functions. Actual WOW /Gz caller produces stdcall references under the original declarations while the worker objects export cdecl. A symbol alias would not repair stack cleanup.",
+      "evidence": "../t483-remaining-reaudit/r1497-r1501-wkman-header-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "before": {
+        "blocks": 2,
+        "added": 0,
+        "deleted": 75
+      },
+      "after": {
+        "blocks": 2,
+        "added": 0,
+        "deleted": 75
+      },
+      "source_sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+      "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+      "decision": "Keep original internal navigation bodies and input/output discovery at the native public entrypoints. Literal original wrappers conflict with the selected definitions, and the group wrapper lacks the selected WINAPI shape.",
+      "evidence": "../t483-remaining-reaudit/p229-dlgmgrc-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 2
+      },
+      "source_sha256": "09d340437223c9b7593cc2ed7ef40dd5b530be98c42335e8719d2d5b441d4502",
+      "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+      "decision": "Original CRTC start comparison ignores the cursor-off bit and cursor recomputation can overwrite the hidden state. Keep whole-register comparison and final visibility gate. Extracted original/current bitfield controls demonstrate both cases.",
+      "evidence": "../t483-remaining-reaudit/r0950-r0953-vga-ports-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+      "original_sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+      "decision": "Owner approved preserving omission of private ntdbg.h. Both actual compile contexts reject the restoration including the LPC-header control. Existing blank preserves original subsequent line positions, and selected RaiseException calls do not need the private providers.",
+      "evidence": "../t483-remaining-reaudit/r0001-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 119,
+    "remaining": 94,
+    "nonzero_files": 237,
+    "non_error_points": 2026,
+    "non_error_lines": 28427,
+    "source_reduction_s7": {
+      "points": 22,
+      "lines": 551
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Removed one redundant blank before the original logical-line anchor in nt_mouse.c. Selected code tokens and effective diagnostic anchors remain; nine other production files remain byte-identical. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}
