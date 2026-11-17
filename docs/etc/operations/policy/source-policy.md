@@ -417,3 +417,18 @@ Retire the OpenNT ntuser/rtl/rect.c subset. Preserve the original
 CopyInflateRect implementation in src/compat/wow_control_rect.c for WOW
 controls. The product links no CopyOffsetRect. Public rectangle APIs remain
 owned by USER32.
+
+### Function extraction provenance
+
+For each mirror function moved into compatibility code, record the pinned
+original revision, relative path including the original filename, inclusive
+original line range, destination, and signature. Preserve the symbol name,
+parameter and return types, and calling convention. Record any proposed
+exception for owner decision before extraction.
+
+### T483 S6 P28 owner-approved dialog pointer extraction
+
+Retire the OpenNT windows/core/ntuser/kernel/miscutil.c subset. Move
+SetDialogPointer, lines 24–37, to src/compat/wow_dialog_pointer.c with
+its original body, types and x86 calling convention. Keep the existing
+window state and dialog layout bindings.

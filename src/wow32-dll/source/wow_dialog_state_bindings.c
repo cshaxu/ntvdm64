@@ -1,7 +1,7 @@
 #include "wow_dialog_state_bindings.h"
 #include <stddef.h>
 
-/* Original miscutil.c, built with the provider's original x86 /Gz ABI. */
+/* Original miscutil.c:24-37, now in compat, built with the provider's original x86 /Gz ABI. */
 VOID WINAPI SetDialogPointer(PWND, LONG);
 C_ASSERT(sizeof(void *) == 4);
 C_ASSERT(offsetof(DIALOG, resultWP) == sizeof(WND));

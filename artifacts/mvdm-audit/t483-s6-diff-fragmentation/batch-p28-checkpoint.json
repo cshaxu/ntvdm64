@@ -1,0 +1,85 @@
+{
+  "packet": "M0 T483 S6 P28",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 5,
+    "files": [
+      {
+        "path": "src/compat/wow_dialog_pointer.c",
+        "sha256": "2f3351b70696edf985d1cdf6a7bbd51451cdbf3ffbffc49fd825ee588c225114"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "cbea467bef147a3ca9e607464a297234b552ca83e08de49286813efc6c906011"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "3a01a673d9dac80bf600668760792f884d9cdf3779e712d45b64d7f90fb346f5"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "030502d76354fbb8adb564243bbc01379044338e42ddc1da32af0903d8ae500e"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_dialog_state_bindings.c",
+        "sha256": "978a356b113bf8edd9bb7d765e0c66ecd08e1d19a641473ad81126683c9e3b66"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/kernel/miscutil.c"
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "886f04d3-b179-4c3e-ac20-67073a5e8e91",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "controls": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1054,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 246,
+    "blocks": 2069,
+    "lines": 30691,
+    "reviewed_live_files": 29,
+    "remaining_files": 217,
+    "retired_reviewed_files": 9,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 224,
+    "extraction_blocks": 218,
+    "unused_removal_blocks": 6,
+    "owner_retired_lines": 22638,
+    "extraction_lines": 21422,
+    "unused_removal_lines": 1216,
+    "total_census_reduction_blocks": 264,
+    "total_census_reduction_lines": 23832
+  },
+  "limits": [
+    "Owner-approved dialog pointer extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "SetDialogPointer body preserved and linked from compat",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}
