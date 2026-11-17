@@ -1,0 +1,34 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+  "source_sha256": "b8e6073c1a208e6e97a60be15e3129743d7ea4213a572e443f927bbb141912fa",
+  "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+  "before": {
+    "blocks": 21,
+    "added": 0,
+    "deleted": 832
+  },
+  "after": {
+    "blocks": 21,
+    "added": 0,
+    "deleted": 832
+  },
+  "source_changed": false,
+  "logical_line_check": {
+    "checked": 94,
+    "mismatches": []
+  },
+  "historical_controls_reused_not_rerun": 29,
+  "current_source_checks": [
+    "wow_user_borrow_scope.c:350-377 selects and pins callback generation before graph projection",
+    "wow_task_init_bindings.h:9-18 stores guest scalar callback addresses, not native CLIENTINFO pointers",
+    "wow_user_object_bindings.c:442 obtains class identity from native GetClassNameA",
+    "wow_user_task_lifecycle.c:1028-1036 and wow_idle_hook_binding.c:84 delegate to actual modern USER hook chain"
+  ],
+  "disposition": "Whole-file source counter-review complete; no code change, no new build/runtime claim; residual omissions remain pending owner.",
+  "limits": [
+    "Historical compile/link controls were not rerun in this review",
+    "No new runtime verification claimed",
+    "Compile collisions alone are insufficient; current native ownership and address-space source checks are required"
+  ],
+  "historical_evidence": "artifacts/mvdm-audit/t483-remaining-reaudit/p238-wow-investigation.json"
+}

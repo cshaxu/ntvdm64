@@ -53,6 +53,11 @@ void WINAPI wow_cleanup_set_window_procedure(wow_cleanup_context *,
 void WINAPI wow_cleanup_set_class_procedure(wow_class_lookup_entry *, WNDPROC);
 
 #ifdef WOW_ORIGINAL_CLEANUP
+/* Original ClientDied raises a noncontinuable status exception. Use the
+ * existing native RTL exception provider at this user-mode boundary. */
+NTSYSAPI VOID NTAPI RtlRaiseStatus(NTSTATUS);
+#define ExRaiseStatus RtlRaiseStatus
+#define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
 typedef wow_task_order_process *PPROCESSINFO;
 typedef wow_task_order_message *PSMS;
 typedef wow_task_order_entry *PTDB;

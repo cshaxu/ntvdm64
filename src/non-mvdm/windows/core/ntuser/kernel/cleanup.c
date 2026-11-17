@@ -17,7 +17,28 @@
 
 extern CONST BYTE gabObjectCreateFlags[];
 
-#line 40
+/***************************************************************************\
+* CheckForClientDeath
+*
+* Check to see if the client thread that is paired to the current running
+* server thread has died.  If it has, we raise an exception so this thread
+* can perform its cleanup duties.  NOTE: If the client has died, this
+* will not be returning back to its caller.
+*
+* History:
+* 05-23-91 DarrinM      Created.
+\***************************************************************************/
+
+VOID ClientDied(VOID)
+{
+
+    /*
+     * Raise an exception to force cleanup.
+     */
+    ExRaiseStatus( STATUS_PORT_DISCONNECTED );
+}
+
+
 /*
  * Determines if a Wow wndproc is in a selector list
  */

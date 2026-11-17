@@ -12,6 +12,7 @@
 #include "wow_common_dialog_calls.h"
 #endif
 
+VOID WINAPI ClientDied(VOID);
 static unsigned errors;
 static unsigned native_direct_calls;
 #ifdef WOW_NATIVE_NESTED_FIXTURE
@@ -1213,6 +1214,21 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
 }
 #endif
 
+static void verify_client_death_exception(void)
+{
+    BOOL caught = FALSE;
+    __try {
+        ClientDied();
+        CHECK(FALSE);
+    } __except (GetExceptionCode() == (DWORD)0xc0000037 &&
+            GetExceptionInformation()->ExceptionRecord->NumberParameters == 0 &&
+            (GetExceptionInformation()->ExceptionRecord->ExceptionFlags &
+                EXCEPTION_NONCONTINUABLE) ?
+            EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        caught = TRUE;
+    }
+    CHECK(caught);
+}
 int __cdecl main(int argc,char **argv)
 {
     session owner;
@@ -1226,6 +1242,7 @@ int __cdecl main(int argc,char **argv)
     MSG message;
     HANDLE wowexec = CreateEventW(NULL, FALSE, FALSE, NULL);
 
+    verify_client_death_exception();
     CHECK(wowexec != NULL);
     session_initialize(&owner, 42040u);
     CHECK(session_activate(&owner));

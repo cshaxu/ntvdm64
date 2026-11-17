@@ -1,0 +1,10 @@
+{
+  "scope": "All current nonzero normalized/error-masked mirror files,including reviewed/pending files;not only unaudited files",
+  "sort": "non_error_blocks descending,path ascending for ties",
+  "files": 255,
+  "blocks": 2293,
+  "lines": 53329,
+  "mask_uncertainty_files": 31,
+  "note": "Only proven paired error bodies masked. Ambiguous or added conditions remain counted;do not mislabel these as proved semantic differences. Source hashes checked against fresh census.",
+  "execution": "Owner manual review;no automatic next-file admission after P18"
+}

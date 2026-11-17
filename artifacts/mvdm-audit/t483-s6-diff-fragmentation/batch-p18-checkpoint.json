@@ -1,0 +1,188 @@
+{
+  "packet": "M0 T483 S6 P18",
+  "status": "Build publication Full verified;governance and Git follow",
+  "source_checkpoint": {
+    "source_files": 3,
+    "deleted": [],
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+        "sha256": "277eab261158aed8d5545d70a3874c7dd70a09502254df49b63adbce6948be2d"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_cleanup_bindings.h",
+        "sha256": "14a6a3b91c4a312c94475927875b2a1f4bd7ad8f0d84b5ce373104dcaea6ef7a"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+        "sha256": "72bb4d7007ebae0bc28ac1a28002aa5f901ba69337d2ad4fdd8c253f900f68fd"
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "160cb119-0892-44a7-a24f-7f6e50692f45",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 416802,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5204,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1182,
+        "CleanupMs": 463,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13330,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 12109,
+        "CleanupMs": 444,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11330,
+        "CleanupMs": 501,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 226,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66346,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46788,
+        "CleanupMs": 422,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46096,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14982,
+        "CleanupMs": 475,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10718,
+        "CleanupMs": 400,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 52861,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12920,
+        "CleanupMs": 443,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28442,
+        "CleanupMs": 499,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30931,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4321,
+        "CleanupMs": 400,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8180,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10476,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3685,
+        "CleanupMs": 374,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6978,
+        "CleanupMs": 462,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19640,
+        "CleanupMs": 389,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "count": 37,
+    "passed": 37
+  },
+  "lifecycle": "errors=0;restored ClientDied contract included",
+  "global_counts": {
+    "files": 1063,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 255,
+    "blocks": 2293,
+    "lines": 53329,
+    "reviewed_files": 33,
+    "remaining_files": 222,
+    "cumulative_reduction_blocks": 40,
+    "cumulative_reduction_lines": 1194
+  },
+  "reduction": {
+    "blocks": 1,
+    "lines": 22
+  },
+  "autonomous_changes": "Five binding-header lines:comment,declaration,existing RTL alias and original status constant;no new function or state",
+  "limits": [
+    "ClientDied restored;no new production caller",
+    "client/wow.c reviewed unchanged;historical controls not rerun",
+    "Residual owner decisions remain pending;no guest/winnt.zip changes"
+  ]
+}

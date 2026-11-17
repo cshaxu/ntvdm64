@@ -211,3 +211,13 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [P17 dlgmgr review](client-dlgmgr-whole-file-review.json):22->17 blocks,295->242 lines;cached build,publish11x2,Full20 passed;Git accompanies receipt.
 
 [P17 receipt](batch-p17-checkpoint.json) and [evidence](p17-verification-evidence.zip).
+
+[client/wow whole-file review](client-wow-whole-file-review.json):21->21 non-error blocks,+0/-832 unchanged;94 original logical rows exact. Current native ownership checked against29 historical function controls;no repeated build/runtime claim. Residual decisions remain pending.
+
+[cleanup whole-file candidate](cleanup-whole-file-review.json):21->20 non-error blocks,66->44 lines;original ClientDied restored through existing native RTL exception boundary. P18 cached full,publish11x2,focused37,lifecycle and Full20 passed;Git accompanies receipt.
+
+[P18 receipt](batch-p18-checkpoint.json) and [evidence](p18-verification-evidence.zip).
+
+## Owner manual review order after P18
+
+[Current descending file list](owner-review-order.csv) and [counting summary](owner-review-order.json) cover every remaining nonzero mirror,including already reviewed files. Sort by non-error blocks descending,then path ascending. Prior worklist ranks remain as history. Ambiguous exclusion matches remain counted and explicitly flagged. The owner selects the next file;automatic progression stops after P18 delivery.

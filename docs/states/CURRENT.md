@@ -31,12 +31,12 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-31/255 initial difference files reviewed;224 remain. Twenty-four changed files
-verified across P2-P17;seven reviewed unchanged. Current census:1063 files
+33/255 initial difference files reviewed;222 remain. Twenty-five changed files
+verified across P2-P18;eight reviewed unchanged. Current census:1063 files
 (1054 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
 normalized/error-masked differences,and255 nonzero files.
-Current total2294 blocks/53351 lines;cumulative delivered reduction39 blocks/
-1172 lines. Mouse's earlier two-line counting correction remains separate.
+Current total2293 blocks/53329 lines;cumulative delivered reduction40 blocks/
+1194 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -71,6 +71,8 @@ Current total2294 blocks/53351 lines;cumulative delivered reduction39 blocks/
 | keymouse/keyba.c |24->24|72->56|P15 added guard pairs removed;actual keyboard90 and Full20 passed|
 | client/vdm.c |23->20|796->632|P16 four original functions restored;six compile contexts and Full20 passed|
 | client/dlgmgr.c |22->17|295->242|P17 original declarations/CvtDec/comments restored;focused37 and Full20 passed|
+| client/wow.c |21->21|832->832|No source change;94 original logical rows match;residual decisions pending|
+| kernel/cleanup.c |21->20|66->44|P18 original ClientDied restored;focused37,lifecycle and Full20 passed|
 
 
 The canonical pending backlog has1641 rows/1643 distinct historical R identifiers,
@@ -80,19 +82,22 @@ handtabl restorations removed from pending;remaining private-kernel and ABI
 boundaries remain pending. Historical R identifiers are not current diff blocks.
 P13 original input declarations are restored and verified. Seven scattered
 harmless macros would increase file blocks26->27;owner approval remains pending.
-No residual omission is silently approved. Next file is src/non-mvdm/windows/core/ntuser/client/wow.c.
+No residual omission is silently approved. Owner superseding direction:after P18,
+stop automatic progression and hand over every remaining nonzero file ordered by
+non-error blocks descending,path ascending for ties. Await owner file selection.
+[Manual review order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/owner-review-order.csv).
 
 ## Current Technical Baseline
 
-P17 cached x86/x64 full,WOW focused37 and Full20 passed.
-Package b6c99780-5180-408f-be40-8570ebc1d364 contains11 images,published and
+P18 cached x86/x64 full,WOW focused37,actual lifecycle and Full20 passed.
+Package 160cb119-0892-44a7-a24f-7f6e50692f45 contains11 images,published and
 hash-verified to assets/release and O:/winnt/system32. Full includes actual
-DOS4GW/NESticle. No guest or winnt.zip changes. Original CvtDec,declarations/comments
-restored;789 nontrivial matched lines retain original logical numbering.
-Governance and Git delivery accompany the receipt. Residual decisions are pending.
+DOS4GW/NESticle. No guest or winnt.zip changes. Original ClientDied restored
+through existing native RTL exception provider;254 meaningful original logical
+lines match. Residual decisions remain pending;governance and Git accompany receipt.
 
-[P17 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p17-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p17-verification-evidence.zip).
+[P18 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p18-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p18-verification-evidence.zip).
 
 ## Remaining Scope
 
