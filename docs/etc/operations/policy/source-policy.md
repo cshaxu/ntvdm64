@@ -353,3 +353,14 @@ point. Net increases require approval before implementation. Missing evidence
 remains unfinished investigation, never a pending owner choice. Complete the
 whole file and coupled batch changes before final-identity verification and
 delivery. Do not transfer equal complexity into autonomous code or shims.
+
+### T483 S6 P19 owner-approved FNID extraction
+
+The owner explicitly retires non-mvdm/windows/core/ntuser/kernel/ntstubs.c:
+only NtUserSetWindowFNID (original lines 6170-6188) was used. Preserve that
+OpenNT-derived operation in src/compat/wow_control_fnid.c with its source
+notice and the existing local HWND validation binding. This file-specific
+exception removes the former mirror from the current diff census and pending
+backlog; it does not count as restoration of the omitted kernel USER server,
+authorize other extractions, or erase source provenance. Original state update,
+calling convention and failure behavior remain unchanged.

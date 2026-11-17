@@ -221,3 +221,7 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 ## Owner manual review order after P18
 
 [Current descending file list](owner-review-order.csv) and [counting summary](owner-review-order.json) cover every remaining nonzero mirror,including already reviewed files. Sort by non-error blocks descending,then path ascending. Prior worklist ranks remain as history. Ambiguous exclusion matches remain counted and explicitly flagged. The owner selects the next file;automatic progression stops after P18 delivery.
+
+[P19 owner-approved FNID extraction](ntstubs-compat-extraction.json): retire kernel/ntstubs.c from the mirror census and active registers; preserve its sole selected function in src/compat. Removed from mirror accounting:130 non-error blocks/9237 changed lines. This is source reclassification, not original restoration. Cached full,publish11x2,focused38,lifecycle and Full20 passed;Git accompanies receipt.
+
+[P19 receipt](batch-p19-checkpoint.json) and [evidence](p19-verification-evidence.zip).

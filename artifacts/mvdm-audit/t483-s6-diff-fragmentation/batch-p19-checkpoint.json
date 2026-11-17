@@ -1,0 +1,218 @@
+{
+  "packet": "M0 T483 S6 P19",
+  "status": "Build publication focused/lifecycle/Full and governance passed; Git commit contains this receipt",
+  "source_checkpoint": {
+    "source_files": 7,
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c"
+    ],
+    "files": [
+      {
+        "path": "src/compat/wow_control_fnid.c",
+        "sha256": "3fba58040f47d8c851548fadf5764df031d21563ff24b6a20e6e909a6c71c2d9"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_edit_state_bindings.h",
+        "sha256": "36f668c18f041545ef91030c760bdf23bcbd9e2089b860148b831e2f43c3594f"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "c87bc539637d31da1f5bb2d515126e9869d4f20d6810e1cbb5cf0b7c36c09221"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_edit_state_fixture.c",
+        "sha256": "b3c991f4e2b97f22fc8b0af422286fd1ae6c871a413af0e91489f6721ef0326e"
+      },
+      {
+        "path": "test\\compat\\wow_control_fnid_fixture.c",
+        "sha256": "bbab655f9da960e4a0f5416338b7ee3af5124d8fd6a55fb3873a17940efea626"
+      },
+      {
+        "path": "tools\\build\\New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "2e2442f7671bd0339ea129b73351ed242f2464ccac77538988b9184aa3c0ccbc"
+      },
+      {
+        "path": "test\\observation\\verify-wow-control-boundaries.ps1",
+        "sha256": "f6594fcefe2b5a42c3805d94d3e3831cf863dd179347c5b5cf84b9b537b34fc3"
+      }
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "c414128d-9140-4333-bf2b-28c608ad3b7b",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 416885,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5450,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1195,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13049,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 12433,
+        "CleanupMs": 505,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10896,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 230,
+        "CleanupMs": 350,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66600,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46189,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45393,
+        "CleanupMs": 395,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15084,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9957,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 52819,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12867,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28637,
+        "CleanupMs": 487,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31218,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4287,
+        "CleanupMs": 399,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8243,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10574,
+        "CleanupMs": 385,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3984,
+        "CleanupMs": 394,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7159,
+        "CleanupMs": 377,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 21000,
+        "CleanupMs": 342,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "count": 38,
+    "passed": 38,
+    "fnid": "12 contract assertions, errors=0; controlled HWND boundary, real production operation"
+  },
+  "lifecycle": "errors=0",
+  "global_counts": {
+    "files": 1062,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 254,
+    "blocks": 2163,
+    "lines": 44092,
+    "reviewed_live_files": 32,
+    "remaining_files": 222,
+    "retired_reviewed_files": 1,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 130,
+    "owner_retired_lines": 9237,
+    "total_census_reduction_blocks": 170,
+    "total_census_reduction_lines": 10431
+  },
+  "retirement": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+    "blocks": 130,
+    "lines": 9237,
+    "classification": "Owner-approved compat extraction, not original restoration"
+  },
+  "limits": [
+    "No new guest changes or winnt.zip changes",
+    "Other mirrors unchanged by hash",
+    "No automatic next-file admission"
+  ],
+  "governance": {
+    "passed": true,
+    "initial_failure": "UTF-8 documentation encoding corrected; no production-source change",
+    "retry": "final-docs.log; exit=0"
+  }
+}

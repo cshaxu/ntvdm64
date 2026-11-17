@@ -11,14 +11,4 @@
 BOOL WINAPI wow_control_finalize_window(HWND);
 BOOL WINAPI wow_edit_set_window_fnid(HWND, WORD);
 
-#ifdef WOW_ORIGINAL_EDIT_STATE
-#define NtUserSetWindowFNID wow_edit_set_window_fnid
-#define NtUserSetWindowLong wow_window_client_set_window_long
-#define BEGINRECV_HWND(type, failure, handle) \
-    type retval = (failure); \
-    PWND pwnd = wow_window_client_validate_hwnd(handle); \
-    if (!pwnd) return (failure)
-#define ENDRECV_HWND() return retval
-#define TRACE(text) ((void)0)
-#endif
 #endif

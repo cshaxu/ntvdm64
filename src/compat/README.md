@@ -191,3 +191,19 @@ Frontend teardown cancels synchronous reads and drains outstanding pipe I/O.
 | ADAPTER-WIN32-020 | Original SoftPC heartbeat shutdown calls private `NtAlertThread(HANDLE)` to interrupt an alertable NT wait. | The historical native declaration is absent from the selected public headers; substituting only `QueueUserAPC` changes the durable pending-alert contract and did not release the reached original heartbeat. | Keep the original name, handle parameter and `NTSTATUS` direction. Resolve the still-exported NTDLL `NtAlertThread` at runtime and call it when available; retain a no-op `QueueUserAPC` wake-up only as a public-API fallback when that entry is absent. The original source separately recognizes `STATUS_USER_APC` as a termination event. | `include/nt_thread_alert_compat.h`, `source/nt_thread_alert_compat.c`, `../../../mvdm-host/softpc.new/host/src/nt_timer.c` |
 | ADAPTER-WIN32-029 | Original SoftPC event, heartbeat and communications NT multiple-object waits. | SDK declaration availability only; the NTDLL provider is available. Win32 waits consume STATUS_ALERTED and are not equivalent. | Retain only the NTSTATUS-shaped declaration and link the original API from ntdll.lib. Remove the autonomous timeout/result translation. S35 native Console and pending-alert probes pass; full product validation remains pending. | `include/nt.h`; `../../mvdm/softpc.new/host/src/{nt_event,nt_timer,nt_ntfun}.c` |
 | ADAPTER-WIN32-REDIR-001 | Original Redirector async-pipe worker calls `CreateThread` with a cdecl callback form. | Modern public `CreateThread` requires a `WINAPI` callback; calling the original form directly is ABI-unsafe on x86. | A forced source binding retains the original call text and fails with `ERROR_CALL_NOT_IMPLEMENTED` until S4 supplies the separately admitted session-worker thunk. | `include/mvdm_redirector_thread.h`, `source/mvdm_redirector_thread.c` |
+
+## OpenNT-derived control FNID operation
+
+T483 S6 P19 owner-approved extraction: `wow_control_fnid.c` retains
+NtUserSetWindowFNID from pinned OpenNT revision
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c,
+windows/core/ntuser/kernel/ntstubs.c:6170-6188. Original file SHA256:
+a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918.
+The function continues using the existing borrowed local HWND/PWND state;
+no kernel USER lock or new lifetime owner is introduced. The original file
+was 10,309 lines; only this 19-line function was selected. The retired mirror's
+130 non-error blocks/9,237 changed lines are a census retirement, not an
+original-code restoration. The active test/compat/wow_control_fnid_fixture.c covers invalid HWND, first
+assignment, conflicting reassignment, cleanup and repeated cleanup through the
+production compat operation; the boundary supplies only a controlled PWND.
+Actual WOW lifetime and Full guest tests remain separate delivery evidence.

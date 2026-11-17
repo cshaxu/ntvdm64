@@ -48,7 +48,7 @@ function RunOwned([string]$name, [string]$exe, [string[]]$arguments, [int]$secon
 try {
     & "$root/tools/build/New-T447S3CallBoundaryNinja.ps1" -RepositoryRoot $root -BuildRoot $build -VsDevCmd $VsDevCmd
     # Include untracked staged sources: git diff alone omits new original slices.
-    $sourceRoots = @('src/wow32-dll','src/non-mvdm/windows/core/ntuser','src/compat/include','test/adapter-mvdm-host-out/wow','tools/build/New-T447S3CallBoundaryNinja.ps1')
+    $sourceRoots = @('src/wow32-dll','src/non-mvdm/windows/core/ntuser','src/compat','test/compat','test/adapter-mvdm-host-out/wow','tools/build/New-T447S3CallBoundaryNinja.ps1')
     $deletedPaths = @(& git -C $root ls-files -d -- @sourceRoots)
     if ($LASTEXITCODE) { throw 'Cannot enumerate deleted source inputs.' }
     $paths = @(& git -C $root ls-files -co --exclude-standard -- @sourceRoots) | Sort-Object -Unique
@@ -64,7 +64,7 @@ try {
     $targets = @('original-control-bodies','original-getset-boundary','window-access-boundary','original-dialog-creator-lifetime','original-dialog-modal-lifetime','original-dialog-end-boundary','original-default-boundary','call-boundaries','dialog-context-boundaries','dialog-keyboard-boundary','original-mnemonic-lifetime-boundary','original-keyboard-lifetime-boundary',
         'original-string-boundaries','original-mnemonic-drawing-boundaries','original-button-drawing-boundaries','original-button-resource-boundaries','original-state-drawing-boundaries',
         'dialog-navigation-boundaries','original-window-view-boundaries','original-button-lifetime-boundaries')
-    $targets += 'dialog-native-owner-research'
+    $targets += 'dialog-native-owner-research', 'control-fnid-boundary'
     $targets += 'dialog-initialization-boundary', 'original-profile-boundary'
     $targets += 'original-control-globals', 'original-dde-data-boundary'
     $targets += 'original-default-bits-boundary', 'original-user-capture-boundary'
@@ -82,7 +82,7 @@ try {
                 'wow_control_string_fixture','wow_text_measure_failure_fixture','wow_mnemonic_drawing_fixture',
                 'wow_default_original_fixture','wow_button_drawing_fixture','wow_button_resources_fixture','wow_control_draw_state_fixture',
                 'wow_dialog_navigation_fixture','wow_edit_view_fixture','wow_button_lifetime_fixture','wow_button_dc_fixture')
-        $cases += 'wow_dialog_native_owner_probe'
+        $cases += 'wow_dialog_native_owner_probe', 'wow_control_fnid_fixture'
         $cases += 'wow_dialog_initialization_fixture', 'wow_task_profile_fixture', 'wow_task_profile_existing_fixture'
         $cases += 'wow_edit_lookaside_fixture', 'wow_edit_conversion_fixture'
         $cases += 'wow_def_window_bits_fixture', 'wow_original_dde_free_fixture', 'wow_user_capture_fixture'

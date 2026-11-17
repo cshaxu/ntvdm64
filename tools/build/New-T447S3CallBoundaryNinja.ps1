@@ -31,6 +31,8 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 # preprocessor subsets are mutually exclusive, as in the product generator.
 $messageFaults = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/wow_default_messages_faults.h')) + '"'
 $units = @(
+    @('control_fnid_fixture', 'test/compat/wow_control_fnid_fixture.c', ''),
+    @('control_fnid_owner', 'src/compat/wow_control_fnid.c', ''),
     @('default_messages_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c', ''),
     @('default_messages_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', $messageFaults),
     @('default_messages_state', 'src/wow32-dll/source/wow_default_message_bindings.c', $messageFaults),
@@ -312,5 +314,7 @@ $lines.Add('build dialog-native-owner-research: phony bin/wow_dialog_native_owne
 $lines.Add('build bin/wow_dialog_initialization_fixture.exe: link obj/dialog_initialization_fixture.obj obj/dialog_initialization_adapter.obj')
 $lines.Add('build dialog-initialization-boundary: phony bin/wow_dialog_initialization_fixture.exe')
 $lines.Add('build original-control-bodies: phony ' + ($controlObjects -join ' '))
+$lines.Add('build bin/wow_control_fnid_fixture.exe: link obj/control_fnid_fixture.obj obj/control_fnid_owner.obj')
+$lines.Add('build control-fnid-boundary: phony bin/wow_control_fnid_fixture.exe')
 [IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $lines, [Text.UTF8Encoding]::new($false))
 Write-Output "Configured supplemental call-boundary graph: $build (not built or run)"

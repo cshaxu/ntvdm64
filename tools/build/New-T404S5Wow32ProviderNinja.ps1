@@ -551,7 +551,7 @@ $objects.Add($controlStateObject)
 $ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/client.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_STATE')
 $objects.Add($controlFnidObject)
-$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c')))
+$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_fnid.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $dialogPointerObject = 'obj/opennt-user/dialog-pointer.obj'
 $objects.Add($dialogPointerObject)

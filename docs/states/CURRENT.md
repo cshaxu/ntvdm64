@@ -6,7 +6,9 @@
 
 Owner closes S5 after its final batch and admits S6. S5 delivery8c1c54aea is
 pushed;all required verification passed. T483 remains active. This is the owner
-superseding the earlier S6 hold,not admission of compat/component minimization.
+superseding the earlier S6 hold,not general admission of compat/component minimization. Owner now explicitly
+authorizes moving the sole retained ntstubs.c FNID function into src/compat
+and retiring that mirror file and its active difference entries (P19).
 
 ## Active Packet
 
@@ -31,16 +33,18 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-33/255 initial difference files reviewed;222 remain. Twenty-five changed files
-verified across P2-P18;eight reviewed unchanged. Current census:1063 files
-(1054 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
-normalized/error-masked differences,and255 nonzero files.
-Current total2293 blocks/53329 lines;cumulative delivered reduction40 blocks/
-1194 lines. Mouse's earlier two-line counting correction remains separate.
+33/255 initial difference files reviewed;222 remain. P19 retires one already
+reviewed file by owner approval;live population is32 reviewed/254,222 remain. Twenty-five changed files
+verified across P2-P18;eight reviewed unchanged. Current census:1062 files
+(1053 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
+normalized/error-masked differences,and254 nonzero files.
+Current delivered total2163 blocks/44092 lines. P19 retires130 blocks/9237
+lines;this is mirror reclassification,not original restoration. Prior delivered
+reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
-| ntstubs.c |131->130|9238->9237|P2 restored original declaration|
+| ntstubs.c |130->retired|9237->retired|P19 compat extraction;focused38 and Full20 passed|
 | wmdisp32.c |78->75|228->224|P2 restored original stores/format|
 | ntcftxt.h |65->62|1065->1057|P3 restored seven original declarations|
 | sevid000.c |64->64|132->132|No code edit;64 evidenced pending decisions|
@@ -75,7 +79,7 @@ Current total2293 blocks/53329 lines;cumulative delivered reduction40 blocks/
 | kernel/cleanup.c |21->20|66->44|P18 original ClientDied restored;focused37,lifecycle and Full20 passed|
 
 
-The canonical pending backlog has1641 rows/1643 distinct historical R identifiers,
+The canonical pending backlog has1635 rows after retiring six kernel/ntstubs pending records,
 plus2 non-R items. Corrected counting only;not a source reduction.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
@@ -89,15 +93,14 @@ non-error blocks descending,path ascending for ties. Await owner file selection.
 
 ## Current Technical Baseline
 
-P18 cached x86/x64 full,WOW focused37,actual lifecycle and Full20 passed.
-Package 160cb119-0892-44a7-a24f-7f6e50692f45 contains11 images,published and
+P19 cached full,WOW focused38,actual lifecycle and Full20 passed.
+Package c414128d-9140-4333-bf2b-28c608ad3b7b contains11 images,published and
 hash-verified to assets/release and O:/winnt/system32. Full includes actual
-DOS4GW/NESticle. No guest or winnt.zip changes. Original ClientDied restored
-through existing native RTL exception provider;254 meaningful original logical
-lines match. Residual decisions remain pending;governance and Git accompany receipt.
+DOS4GW/NESticle. The owner-approved FNID extraction retires kernel/ntstubs.c;
+its existing semantics now reside in compat. No guest or winnt.zip changes.
 
-[P18 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p18-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p18-verification-evidence.zip).
+[P19 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p19-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p19-verification-evidence.zip).
 
 ## Remaining Scope
 
@@ -116,3 +119,7 @@ owner-admitted.
 Follow [execution rules](../rules/EXECUTION.md) and
 [source policy](../etc/operations/policy/source-policy.md). Prior P receipts
 are indexed in the worklist README. Current remains below16KiB.
+
+## P19 Delivery
+
+[Owner-approved extraction](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/ntstubs-compat-extraction.json) moves the sole selected FNID function to compat, removes its dedicated macros and mirror file, and updates active registers. Cached build,publish11x2,focused38,lifecycle and Full20 passed;Git accompanies receipt. No next-file admission.
