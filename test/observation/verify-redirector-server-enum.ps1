@@ -16,7 +16,7 @@ if($flags -notmatch '/DCPU_40_STYLE\b' -or $flags -match '/DCPU_30_STYLE\b'){thr
 ($flags+' /Gy /FI"'+$repo+'/test/mvdm-host/vdmredir/server_enum_fixture_binding.h" /Fo"'+$out+'/apisrv-test.obj" "'+$repo+'/src/non-mvdm/ds/netapi/xactsrv/apisrv.c"') | Set-Content "$out/original.rsp"
 ($flags+' /Gy /Fo"'+$out+'/enum-test.obj" "'+$repo+'/test/mvdm-host/vdmredir/server_enum_test.c"') | Set-Content "$out/fixture.rsp"
 $args=@('/nologo','/OPT:REF',"/OUT:$out/enum-test.exe","/MAP:$out/enum-test.map","$out/enum-test.obj","$out/apisrv-test.obj","$cache/obj/vdmredir-dll/mvdm_redirector_remote_unavailable.obj")
-foreach($lib in @('original-opennt-xactsrv.lib','original-opennt-netlib.lib','original-opennt-rtl-x86.lib','original-opennt-netapi-api.lib','lib-crt-compat.lib')){$args+=Join-Path $cache $lib}
+foreach($lib in @('original-opennt-xactsrv.lib','original-opennt-netlib.lib','original-opennt-rtl-x86.lib','lib-crt-compat.lib')){$args+=Join-Path $cache $lib}
 $args+=@('netapi32.lib','kernel32.lib','ntdll.lib','advapi32.lib','legacy_stdio_definitions.lib')
 $args | ForEach-Object {'"'+$_+'"'} | Set-Content "$out/link.rsp"
 @('@echo off','call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',

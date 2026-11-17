@@ -1,0 +1,76 @@
+{
+  "packet": "M0 T483 S6 P32",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 3,
+    "files": [
+      {
+        "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "sha256": "e638b66a806671f6f145709de6434f898b72420a4db7bbeedc02d5623706d70f"
+      },
+      {
+        "path": "test/observation/verify-redirector-oem-capacity.ps1",
+        "sha256": "4ca3477dff9870d58955fc6dd7c481b2e5fa1dd8df7f9b5f92ef950ee001b783"
+      },
+      {
+        "path": "test/observation/verify-redirector-server-enum.ps1",
+        "sha256": "f784da322be6d756271e85fb8492c4aafe4fea136e47f0d54d5b0e6b08292bcc"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/ds/netapi/api/apibuff.c"
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "520c9909-bee6-40e6-9345-dc6d85e6cf5f",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "targeted": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1050,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 242,
+    "blocks": 2050,
+    "lines": 28996,
+    "reviewed_live_files": 29,
+    "remaining_files": 213,
+    "retired_reviewed_files": 13,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 243,
+    "extraction_blocks": 233,
+    "unused_removal_blocks": 10,
+    "owner_retired_lines": 24333,
+    "extraction_lines": 22943,
+    "unused_removal_lines": 1390,
+    "total_census_reduction_blocks": 283,
+    "total_census_reduction_lines": 25527
+  },
+  "limits": [
+    "Owner-approved unused archive removal",
+    "All retained mirrors and original guest unchanged",
+    "exitwin.c retains its explicit pre-task registration owner",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

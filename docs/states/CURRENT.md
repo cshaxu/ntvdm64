@@ -33,12 +33,12 @@ and retiring that mirror file and its active difference entries (P19).
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-41/255 initial difference files reviewed;214 remain. P19,P21-P31 retire twelve
-reviewed files by owner approval;live population is29 reviewed/243,214 remain. Twenty-five changed files
-verified across P2-P18;eight reviewed unchanged. Current census:1051 files
-(1042 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
-normalized/error-masked differences,and243 nonzero files.
-Current delivered total2054 blocks/29170 lines. P19 retires130 blocks/9237
+42/255 initial difference files reviewed;213 remain. P19,P21-P32 retire thirteen
+reviewed files by owner approval;live population is29 reviewed/242,213 remain. Twenty-five changed files
+verified across P2-P18;eight reviewed unchanged. Current census:1050 files
+(1041 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
+normalized/error-masked differences,and242 nonzero files.
+Current delivered total2050 blocks/28996 lines. P19 retires130 blocks/9237
 lines;this is mirror reclassification,not original restoration. Prior delivered
 reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correction remains separate.
 
@@ -70,6 +70,7 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/handtabl.c |24->retired|1381->retired|P23 compat extraction;original ownership and targeted lifecycle passed|
 | client/client.c |8->retired|3564->retired|P24 five compat units;original bodies and targeted lifecycle passed|
 | rtl/time.c |6->removed|1216->removed|P25 unused archive member removed;no compat replacement|
+| api/apibuff.c |4->removed|174->removed|P32 unused Redirector archive removed|
 | kernel/random.c |6->retired|361->retired|P31 xxxGetControlBrush extraction and 16-row button table|
 | client/handles.c |5->retired|279->retired|P30 GetFullUserHandle extraction; targeted WOW validation passed|
 | kernel/inctlpan.c |4->retired|881->retired|P29 sysBmpStyles extraction; targeted WOW validation passed|
@@ -87,7 +88,7 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/cleanup.c |21->20|66->44|P18 original ClientDied restored;focused37,lifecycle and Full20 passed|
 
 
-The canonical pending backlog has1566 rows after retiring twelve owner-approved mirror files,
+The canonical pending backlog has1564 rows after retiring thirteen owner-approved mirror files,
 plus2 non-R items. Extraction removes active mirror entries;it is not original-code restoration.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
@@ -101,13 +102,15 @@ non-error blocks descending,path ascending for ties. Await owner file selection.
 
 ## Current Technical Baseline
 
-P31 cached x86/x64 build, link provider and import checks, WOW formal graph,
-brush, button resource, drawing and lifetime fixtures passed. Package b8e9e430-0aaa-429d-b290-8953a257e5de contains
+P32 cached x86/x64 build, link and import checks, Redirector OEM capacity
+and server enumeration fixtures passed. Package 520c9909-bee6-40e6-9345-dc6d85e6cf5f contains
 11 images published and hash verified in assets/release and O:/winnt/system32.
-[Receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p31-checkpoint.json).
+[Receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p32-checkpoint.json).
 Full was outside the owner-approved targeted scope.
 
 ## Remaining Scope
+
+P32 retains exitwin.c after checking pre-task registration and its explicit process owner.
 
 Owner reviewed queue.c for extraction and elected to retain the mirror.
 

@@ -96,7 +96,6 @@ $demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
 $commandRoot = Join-Path $root 'src/mvdm-host/dos/command'
 $redirRoot = Join-Path $root 'src/mvdm-host/vdmredir'
 $openntNetlibRoot = Join-Path $root 'src/non-mvdm/ds/netapi/netlib'
-$openntNetapiRoot = Join-Path $root 'src/non-mvdm/ds/netapi/api'
 $openntXactSrvRoot = Join-Path $root 'src/non-mvdm/ds/netapi/xactsrv'
 $openntRapRoot = Join-Path $root 'src/non-mvdm/ds/netapi/rap'
 $openntBaseVdmRoot = Join-Path $root 'src/non-mvdm/base/win32/client'
@@ -276,7 +275,6 @@ $adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c',
 # conversion algorithm.  Keep it in its separately mirrored non-MVDM owner
 # rather than duplicating a status table in Redirector or an adapter.
 $openntNetlibNames = @('ntstatus.c', 'copystr.c', 'allocstr.c', 'initoem.c', 'memalloc.c', 'time.c', 'timezone.c', 'xlatesvc.c', 'svcinfo.c', 'packstr.c')
-$openntNetapiNames = @('apibuff.c')
 $openntXactSrvNames = @('apiwksta.c', 'apiuse.c', 'apimsg.c', 'apisvc.c', 'apisrv.c', 'xssubs.c', 'strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'xsunicod.c', 'auxdata.c', 'parmnum.c')
 $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'auxdata.c', 'parmnum.c')
 $openntBaseVdmNames = @('vdm.c')
@@ -401,9 +399,6 @@ foreach ($name in $adapterVddNames) {
 }
 foreach ($name in $openntNetlibNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntNetlibRoot $name))) { throw "Original OpenNT netlib source missing: $name" }
-}
-foreach ($name in $openntNetapiNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $openntNetapiRoot $name))) { throw "Original OpenNT NetAPI source missing: $name" }
 }
 foreach ($name in $openntXactSrvNames) {
     $sourceRoot = if ($name -in $openntRapNames) { $openntRapRoot } else { $openntXactSrvRoot }
@@ -1257,13 +1252,9 @@ $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
         # COMDATs let the final /OPT:REF link retain the byte-identical
         # directly reached allocation algorithms without importing the wider
         # historical RPC/MIDL NetAPI product shell solely for that dead edge.
-        $graph.Add('  cflags = ' + $baseFlags + ' /Gy')
+        # The removed NetapipBufferAllocate wrapper only forwards to this API.
+        $graph.Add('  cflags = ' + $baseFlags + ' /Gy /DNetapipBufferAllocate=NetApiBufferAllocate')
     }
-    $object
-}
-$openntNetapiObjects = foreach ($name in $openntNetapiNames) {
-    $object = 'obj/opennt-netapi-api/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntNetapiRoot $name)))
     $object
 }
 $openntXactSrvObjects = foreach ($name in $openntXactSrvNames) {
@@ -2063,7 +2054,6 @@ $graph.Add('build softpc-fixture-bindings.lib: lib ' + ($adapterSoftpcFixtureObj
 $graph.Add('build vdmredir-dll-bindings.lib: lib ' + ($adapterRedirObjects -join ' '))
 $graph.Add('build vdd-bindings.lib: lib ' + ($adapterVddObjects -join ' '))
 $graph.Add('build original-opennt-netlib.lib: lib ' + ($openntNetlibObjects -join ' '))
-$graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects -join ' '))
 $graph.Add('build original-opennt-xactsrv.lib: lib ' + ($openntXactSrvObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
 $graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
@@ -2082,7 +2072,7 @@ $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
 $graph.Add('build debugger-bindings.lib: lib ' + ((@($adapterDebuggerObjects) + @($originalDebuggerObject)) -join ' '))
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdmredir-dll-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdmredir-dll-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
 $graph.Add('build product-programs: phony run16.exe ntsrv.exe ntvdm.exe ntvwm.exe ntcon.exe ntmon.exe VDMREDIR.dll')
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_halt_reset_test.c')))
 $hostFixtureSeamsObject = 'obj/tests/ccpu_host_fixture_seams.obj'
@@ -2205,7 +2195,7 @@ $graph.Add('  cflags = /nologo /c /MT /W3 /showIncludes /I "' + (NinjaPath (Join
 $graph.Add('build wow-user-client-view-layout-test.exe: memory_test_link obj/tests/wow_user_client_view_layout_fixture.obj')
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $cvidcSasFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)
-$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib common-worker-thread.lib lib-thread.lib common-opennt-compat.lib')
+$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib common-worker-thread.lib lib-thread.lib common-opennt-compat.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 # Select neutral archives only through explicit provider dependencies. Do not

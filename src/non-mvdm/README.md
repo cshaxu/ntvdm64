@@ -1832,11 +1832,11 @@ initialisation and error direction; their remaining NetLib dependencies are
 likewise admitted only when the formal link audit proves a finite original
 source path.
 
-`ds/netapi/api/apibuff.c` retains the source-identified `NetapipBufferAllocate`
-true subset required by the selected `allocstr.c` unit.  It preserves the
-original internal forwarding contract to public `NetApiBufferAllocate`; the
-unreached RPC/MIDL allocator routines from the same original file are not
-admitted merely to make the larger historical API product shell link.
+T483 S6 P32 retires the `apibuff.c` subset and its standalone archive.
+The sole caller is `NetpAllocTStrFromString` in `allocstr.c`, a NetConfig
+function discarded by the VDMREDIR link. The remaining allocation paths
+call the public NetAPI provider. The allocstr.c compile edge resolves the legacy
+name to that same provider before the linker removes the dead caller.
 
 ## Divergence register
 
@@ -1950,7 +1950,7 @@ test covers dispatch/deep copy, hotkey conversion and pre-dispatch failures.
 | OPENNT-HOST-010 | `ntrtl.h` declares the original mutable RTL environment APIs reached by COMMAND. | The selected declaration subset initially omitted this small source-facing cluster, leaving original callers to compile by implicit declaration. | Retain the original declaration shapes; selected consumers enter the private `OpenNtRtl*` symbol domain implemented by the admitted original D11 body, not modern NTDLL or an adapter algorithm. | `public/sdk/inc/ntrtl.h`; `base/ntos/rtl/environ.c`; `src/compat/include/environapi.h` |
 | OPENNT-HOST-011 | `ntrtl.h` declares `RtlOemToUnicodeN`, reached by original SoftPC keyboard conversion. | The selected true subset omitted this fixed-buffer OEM-to-Unicode form although the original `nt_keycd.c` includes and calls it. | Restore only the original declaration shape; the public Win32 implementation remains adapter-owned. | `public/sdk/inc/ntrtl.h`; `../mvdm-host/softpc.new/host/src/nt_keycd.c` |
 | OPENNT-HOST-012 | `ntrtl.h` declares OEM conversion forms reached by original NetLib `copystr.c`. | The admitted true subset omitted the fixed-buffer conversion and size contracts although the selected original Redirector dependency includes them. | Restore only the original signatures; the selected x86 NTDLL/import-library binding is verified as part of the Redirector network closure. | `public/sdk/inc/ntrtl.h`; `ds/netapi/netlib/copystr.c` |
-| OPENNT-HOST-013 | `ds/netapi/api/apibuff.c` provides historical public and internal NetAPI buffer entry points. | The selected Redirector NetLib closure reaches only its `NetapipBufferAllocate` compatibility forwarder; importing the other functions falsely pulls an RPC/MIDL product shell. | Preserve the original function unchanged as a source-identified true subset and call the public modern `NetApiBufferAllocate` contract. | `ds/netapi/api/apibuff.c`; `ds/netapi/netlib/allocstr.c` |
+| OPENNT-HOST-013 | Historical `ds/netapi/api/apibuff.c` subset. | The redirector has no production caller of `NetapipBufferAllocate`. | Archive and mirror retired in T483 S6 P32. | `ds/netapi/netlib/allocstr.c` |
 | OPENNT-HOST-014 | `base/win32/client/vdm.c` supplies `BaseCreateVDMEnvironment`, `BaseDestroyVDMEnvironment`, and `BaseGetEnvNameType_U` before original Base creates an NTVDM child. | The full source file pulls the excluded Base/CSR process-creation product shell, while the selected CLI needs this exact environment projection before its direct SoftPC entry. | Preserve the three original bodies as a source-identified true subset. Its clone uses the admitted original D11 RTL body; the separate adapter owns only current-process installation/restoration around direct entry. | `base/win32/client/vdm.c`; `base/ntos/rtl/environ.c`; `../ntvdm/win32/mvdm_base_vdm_environment.c` |
 | OPENNT-HOST-015 | `base/ntos/rtl/environ.c` provides original create/clone/query/mutate/destroy ownership for ordered UTF-16 MULTI_SZ environments. | Original MVDM/VDM callers require the complete D11 algorithm, but standalone cannot expose NT4's real PEB or private kernel VM service shell. | Preserve the selected body under its original-relative path. Its only outgoing closure is a private PEB projection, PEB lock, public user-mode NTDLL `Zw*VirtualMemory` declarations and private symbol names, supplied by the bounded adapter seams. | `base/ntos/rtl/environ.c`; `src/compat/include/{ntrtlp.h,environapi.h,zwapi.h}`; direct consumers `base/win32/client/vdm.c`, `../mvdm-host/dos/command/cmdenv.c` |
 | OPENNT-HOST-016 | Original `error.c`/`error.h` own status conversion and LastStatusValue. | The standalone process requires its finite private TEB carrier; duplicate NTDLL names do not prevent local original linkage. | T483 S5 P213 restores original public function names and declarations, removes the renaming macros, and retains the selected original table. Finite WOW parent import binds the original name to NTVDM;ordinal19 unchanged. | `base/ntos/rtl/{error.c,error.h}`; `src/compat/include/ntrtlp.h`; `public/sdk/inc/ntrtl.h`; P213 receipt |
