@@ -191,3 +191,11 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [P12 receipt](batch-p12-checkpoint.json) and [evidence](p12-verification-evidence.zip):whole-file restorations,failed link controls,final cached build,publish11x2 and Full20. Net reduction2 blocks/102 lines;residual decisions pending.
 
 [P13 receipt](batch-p13-checkpoint.json) and [evidence](p13-verification-evidence.zip):input.c26->25 non-error blocks,5527->5503 lines. Original declarations restored,Full20 and actual-provider input services/lifetime passed;scattered macro block-count choice remains pending.
+
+[sevid001 review](sevid001-whole-file-review.json):25 non-error points/+25/-25=50 lines unchanged;prior per-point counterexamples and current chain reviewed. Known UNCHAINED baseline failure remains explicit;no repeated runtime claim.
+
+- [wkman whole-file review](wkman-whole-file-review.json):25->25 blocks,46->45 lines;format-only local restoration,remaining boundaries pending owner.
+
+- [cmdexec whole-file review](cmdexec-whole-file-review.json):24->17 blocks,123->82 lines;P14 build/publication/Full passed; governance/Git follow receipt.
+
+[P14 receipt](batch-p14-checkpoint.json) and [evidence](p14-verification-evidence.zip):combined7 blocks/42 lines restored;Full20 passed.

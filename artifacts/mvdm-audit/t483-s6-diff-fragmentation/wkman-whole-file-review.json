@@ -1,0 +1,445 @@
+{
+  "file": "src/mvdm-host/wow32/wkman.c",
+  "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+  "before_sha256": "55a6b94e3dc18e119747d5cb8f65e6d3147efcbfb6ec1f9c3d4e377daaa345f8",
+  "after_sha256": "f6a57202203d62dbe4fa6dff6991660d7f3aa281456abec6f1e0c40c683b388f",
+  "before": {
+    "blocks": 25,
+    "added": 33,
+    "deleted": 13,
+    "lines": 46
+  },
+  "after": {
+    "blocks": 25,
+    "added": 32,
+    "deleted": 13,
+    "lines": 45
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 1
+  },
+  "points": [
+    {
+      "id": "T483-R1470",
+      "original_line": 25,
+      "problem": "Task management declaration",
+      "before": {
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "NTSRV BindWowTask allocates/owns64bit management identity for authenticated original iTask;DLL stores HTASK mapping to invoke original hung handler. Original ExitVDM only completes original iTask;it cannot retire DLL ticket mapping or reopen rejected close. Original user cancellation keeps task live;FailWowTaskClose clears existing close state.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1471",
+      "original_line": 26,
+      "problem": "Worker exit declaration",
+      "before": {
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1472",
+      "original_line": 28,
+      "problem": "Local context selection",
+      "before": {
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "added": 3,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Actual selected compiler rejects missing _X86_ scope with C1189. Supplying pinned original ntseapi.h instead of merely failing its lookup produces C2011 SDK type redefinitions (GENERIC_MAPPING,LUID_AND_ATTRIBUTES,SID_NAME_USE,SID_AND_ATTRIBUTES,ACL). No used unique security declaration requires that broad header.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1473",
+      "original_line": 29,
+      "problem": "Restore caller macro and omit conflicting header",
+      "before": {
+        "added": 4,
+        "deleted": 1
+      },
+      "after": {
+        "added": 1,
+        "deleted": 1
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Actual selected compiler rejects missing _X86_ scope with C1189. Supplying pinned original ntseapi.h instead of merely failing its lookup produces C2011 SDK type redefinitions (GENERIC_MAPPING,LUID_AND_ATTRIBUTES,SID_NAME_USE,SID_AND_ATTRIBUTES,ACL). No used unique security declaration requires that broad header.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1474",
+      "original_line": 31,
+      "problem": "Idle and registry dependencies",
+      "before": {
+        "added": 10,
+        "deleted": 0
+      },
+      "after": {
+        "added": 2,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Original handler calls CallBack16 immediately. Current native hook entry must enter original task/guest borrow scope and leave before forwarding native hook chain. Modern USER does not restore CCPU task context. Per-thread observers borrowed by original TD intent are created/retired by same lifecycle owner;restoring original unhook would separately destroy borrowed handle. Registry header redirects Reg* only;four Nt* undefs are redundant;compile removal passes.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1475",
+      "original_line": 330,
+      "problem": "Duplicate WOWEXEC successful no-op",
+      "before": {
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Run16 wait_wow_startup maps completion0 without started latch to DLL_INIT_FAILED;duplicate WOWEXEC original no-op skips InitTask. Existing explicit exact-task started notice supplies success for this original no-op only.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1476",
+      "original_line": 560,
+      "problem": "Failure exit result",
+      "before": {
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1477",
+      "original_line": 563,
+      "problem": "Failure authorization",
+      "before": {
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1478",
+      "original_line": 564,
+      "problem": "Failure result propagation",
+      "before": {
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "added": 1,
+        "deleted": 1
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1479",
+      "original_line": 715,
+      "problem": "Native idle entry scope",
+      "before": {
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "added": 1,
+        "deleted": 1
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Original handler calls CallBack16 immediately. Current native hook entry must enter original task/guest borrow scope and leave before forwarding native hook chain. Modern USER does not restore CCPU task context. Per-thread observers borrowed by original TD intent are created/retired by same lifecycle owner;restoring original unhook would separately destroy borrowed handle.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1480",
+      "original_line": 764,
+      "problem": "Borrow existing thread idle observer",
+      "before": {
+        "added": 3,
+        "deleted": 4
+      },
+      "after": {
+        "added": 1,
+        "deleted": 4
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Original handler calls CallBack16 immediately. Current native hook entry must enter original task/guest borrow scope and leave before forwarding native hook chain. Modern USER does not restore CCPU task context. Per-thread observers borrowed by original TD intent are created/retired by same lifecycle owner;restoring original unhook would separately destroy borrowed handle.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1481",
+      "original_line": 1081,
+      "problem": "Bind exact task identity",
+      "before": {
+        "added": 6,
+        "deleted": 0
+      },
+      "after": {
+        "added": 2,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "NTSRV BindWowTask allocates/owns64bit management identity for authenticated original iTask;DLL stores HTASK mapping to invoke original hung handler. Original ExitVDM only completes original iTask;it cannot retire DLL ticket mapping or reopen rejected close. Original user cancellation keeps task live;FailWowTaskClose clears existing close state. Current bind return is ignored by existing product. This review does not claim allocation/RPC failures produce a management-visible task,or silently repair that preexisting behavior. Retained minimum binding is necessary for requested single-task management;failure policy remains explicit owner boundary.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1482",
+      "original_line": 1449,
+      "problem": "Destroy windows before original resource cleanup",
+      "before": {
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "added": 1,
+        "deleted": 1
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Original FreeTask releases DCs,timers,comm,sockets,resources. Modern native windows can remain until their thread exits;guest callbacks during destruction need guest resources still live. Existing wrapper runs terminal-window teardown before original resources;original SG_EXIT normally covers but failed/remote task paths may not.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1483",
+      "original_line": 1512,
+      "problem": "Idle observer single owner",
+      "before": {
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "added": 0,
+        "deleted": 1
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "Original handler calls CallBack16 immediately. Current native hook entry must enter original task/guest borrow scope and leave before forwarding native hook chain. Modern USER does not restore CCPU task context. Per-thread observers borrowed by original TD intent are created/retired by same lifecycle owner;restoring original unhook would separately destroy borrowed handle.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1484",
+      "original_line": 1720,
+      "problem": "Retire management identity",
+      "before": {
+        "added": 5,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "NTSRV BindWowTask allocates/owns64bit management identity for authenticated original iTask;DLL stores HTASK mapping to invoke original hung handler. Original ExitVDM only completes original iTask;it cannot retire DLL ticket mapping or reopen rejected close. Original user cancellation keeps task live;FailWowTaskClose clears existing close state.",
+      "current_disposition": "One added blank line restored; retirement call remains pending owner decision"
+    },
+    {
+      "id": "T483-R1485",
+      "original_line": 2910,
+      "problem": "Cancel task close",
+      "before": {
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "NTSRV BindWowTask allocates/owns64bit management identity for authenticated original iTask;DLL stores HTASK mapping to invoke original hung handler. Original ExitVDM only completes original iTask;it cannot retire DLL ticket mapping or reopen rejected close. Original user cancellation keeps task live;FailWowTaskClose clears existing close state.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1486",
+      "original_line": 2977,
+      "problem": "Cancel hung close",
+      "before": {
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "NTSRV BindWowTask allocates/owns64bit management identity for authenticated original iTask;DLL stores HTASK mapping to invoke original hung handler. Original ExitVDM only completes original iTask;it cannot retire DLL ticket mapping or reopen rejected close. Original user cancellation keeps task live;FailWowTaskClose clears existing close state.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1487",
+      "original_line": 2982,
+      "problem": "Whole worker hung exit",
+      "before": {
+        "added": 6,
+        "deleted": 2
+      },
+      "after": {
+        "added": 5,
+        "deleted": 2
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1488",
+      "original_line": 2991,
+      "problem": "Task missing close result",
+      "before": {
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "NTSRV BindWowTask allocates/owns64bit management identity for authenticated original iTask;DLL stores HTASK mapping to invoke original hung handler. Original ExitVDM only completes original iTask;it cannot retire DLL ticket mapping or reopen rejected close. Original user cancellation keeps task live;FailWowTaskClose clears existing close state.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1491",
+      "original_line": 4351,
+      "problem": "Kernel exit result",
+      "before": {
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1492",
+      "original_line": 4362,
+      "problem": "Capture kernel exit code",
+      "before": {
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE. C argument is evaluated by value before call;selected FREEARGPTR expands empty. No guest pointer is read after wait.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1493",
+      "original_line": 4363,
+      "problem": "Kernel exit result propagation",
+      "before": {
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "added": 1,
+        "deleted": 1
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1494",
+      "original_line": 4382,
+      "problem": "Fatal exit result",
+      "before": {
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1495",
+      "original_line": 4396,
+      "problem": "Capture fatal exit code",
+      "before": {
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "added": 1,
+        "deleted": 0
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE. C argument is evaluated by value before call;selected FREEARGPTR expands empty. No guest pointer is read after wait.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    },
+    {
+      "id": "T483-R1496",
+      "original_line": 4397,
+      "problem": "Fatal exit result propagation",
+      "before": {
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "added": 1,
+        "deleted": 1
+      },
+      "conclusion": "Minimal residual pending owner decision",
+      "historical_control": "worker_lifecycle owns NTSRV request/wait/quiesce;original ExitVDM retires original records but does not request worker authorization. Therefore authorization remains before retirement;original exit code survives unless server loss mapped INVALID_HANDLE.",
+      "current_disposition": "Residual pending owner decision; no approval inferred"
+    }
+  ],
+  "source_chain_rechecked": {
+    "exit": "worker_lifecycle.c::NtvdmAuthorizeExit -> ntvdm_worker_lifecycle_authorize_exit -> request worker close / wait server authorization / quiesce. Four wkman callers authorize before ExitVDM; folding into later ExitProcess changes ordering.",
+    "identity": "wkman binds original iTask and HTASK; wow_task_termination.c stores server ticket -> lifecycle.c::BindWowTask authenticates worker and resolves original WOWRECORD or pending label. Retire clears bound/close state and local mapping. Fail clears close-requested for original user-cancel/missing-task paths without completing task.",
+    "idle": "wow_user_task_lifecycle.c installs per-thread WH_FOREGROUNDIDLE and owns UnhookWindowsHookEx. wkman borrows handle. wow_idle_hook_binding.c enters task callback and USER borrow scopes before original callback and leaves before native CallNextHookEx. Direct original registration lacks these scopes; restoring original unhook duplicates ownership.",
+    "cleanup": "wow_task_cleanup_entry.c::W32FreeTask runs wow_user_task_prepare_exit before original resource/DC/timer/socket cleanup. Original body remains; remote and incomplete-startup paths do not necessarily issue SG_EXIT.",
+    "startup": "Duplicate WOWEXEC skips original InitTask. wow_user_notify_startup_noop latches exact iTask startup before original ExitVDM. run16 wait_wow_startup otherwise maps zero completion without started flag to DLL_INIT_FAILED.",
+    "headers": "Reused historical actual compiler controls: missing local _X86_ yields C1189; original ntseapi.h supplied explicitly yields SDK C2011 conflicts. Header omission is not justified merely by file lookup failure."
+  },
+  "limitations": [
+    "Ignored task bind return is preexisting; no claim that allocation/RPC failure gives a manageable task.",
+    "Historical compiler controls are reused, not newly rerun.",
+    "No fresh runtime result claimed; only one blank line removed."
+  ],
+  "line_proof": "All nonblank physical lines byte-identical. Removed blank is followed only by blanks/comment before unchanged #line 1723; no token or diagnostic-bearing code line changes. Historical original selected-line proof remains applicable.",
+  "error_proof": {
+    "paired_bodies": 24,
+    "mask_issues": [],
+    "all_nonblank_lines_unchanged": true
+  },
+  "delivery": "P14 cached full, publish11x2, COMMAND fixtures, Full20 and governance passed; Git delivery accompanies receipt",
+  "validation": "Final cmdexec physical newline correction is normalized-byte-identical to compiled source; no other postbuild source edits"
+}

@@ -1,0 +1,309 @@
+{
+  "file": "src/mvdm-host/dos/command/cmdexec.c",
+  "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+  "before_sha256": "159e827469d1c5fe06eba380e8fdd51d12f11fb35ec98fb1565e67d585b95854",
+  "after_sha256": "5603f2a1335ed0828ec6c09cb8cd2f10f45db36ce278ccc5c3b3b53802d7d64c",
+  "before": {
+    "blocks": 24,
+    "added": 101,
+    "deleted": 22,
+    "lines": 123
+  },
+  "after": {
+    "blocks": 17,
+    "added": 67,
+    "deleted": 15,
+    "lines": 82
+  },
+  "reduction": {
+    "blocks": 7,
+    "lines": 41
+  },
+  "remaining_hunks": [
+    {
+      "original_line": 18,
+      "added": 9,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "#include \"ntvdm-exe/command/include/mvdm_command_native_child.h\"",
+        "#include \"compat/include/thread_start_compat.h\"",
+        "#undef CreateThread",
+        "#define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \\",
+        "    opennt_create_void_cdecl_thread_named((attributes), (stack_bytes), \\",
+        "        (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \\",
+        "        (flags), (thread_id), #start_routine)",
+        "#include \"compat/include/command_process_compat.h\"",
+        "#include \"ntvdm-exe/softpc/include/mvdm_shadow_registry.h\""
+      ]
+    },
+    {
+      "original_line": 312,
+      "added": 1,
+      "deleted": 1,
+      "original": [
+        "    HANDLE hStd16In,hStd16Out,hStd16Err;"
+      ],
+      "current": [
+        "    HANDLE hStd16In = (HANDLE)-1,hStd16Out = (HANDLE)-1,hStd16Err = (HANDLE)-1;"
+      ]
+    },
+    {
+      "original_line": 318,
+      "added": 1,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "    BOOL  StdHandlesValid = TRUE;"
+      ]
+    },
+    {
+      "original_line": 323,
+      "added": 1,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "    ULONG SnapshotStdHandles[3];"
+      ]
+    },
+    {
+      "original_line": 342,
+      "added": 4,
+      "deleted": 1,
+      "original": [
+        "    pStdHandles = (PSTD_HANDLES) GetVDMAddr (getSS(), getBP());"
+      ],
+      "current": [
+        "    pStdHandles = (PSTD_HANDLES)SnapshotStdHandles;",
+        "    if (!mvdm_command_native_child_std_handles(SnapshotStdHandles))",
+        "        StdHandlesValid = FALSE;",
+        "    else {"
+      ]
+    },
+    {
+      "original_line": 351,
+      "added": 1,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "    }"
+      ]
+    },
+    {
+      "original_line": 363,
+      "added": 5,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "    if (!StdHandlesValid) {",
+        "        SetLastError(ERROR_INVALID_HANDLE);",
+        "        Status = FALSE;",
+        "        }",
+        "    else {"
+      ]
+    },
+    {
+      "original_line": 394,
+      "added": 1,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "    }"
+      ]
+    },
+    {
+      "original_line": 396,
+      "added": 1,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "    mvdm_command_native_child_finish();"
+      ]
+    },
+    {
+      "original_line": 456,
+      "added": 1,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "        mvdm_command_native_child_abort();"
+      ]
+    },
+    {
+      "original_line": 516,
+      "added": 14,
+      "deleted": 1,
+      "original": [
+        "    pEnv = (PCHAR) GetVDMAddr ((USHORT)getES(),0);"
+      ],
+      "current": [
+        "    if (!mvdm_command_native_child_capture_host_command(Buffer,",
+        "            (USHORT)getES(), 0u, (USHORT)getSS(), (USHORT)getBP())) {",
+        "        setCF(0);",
+        "        setAL((UCHAR)ERROR_INVALID_ADDRESS);",
+        "        return;",
+        "    }",
+        "    if (!mvdm_command_native_child_select_command_service(",
+        "            MVDM_COMMAND_SERVICE_INTERACTIVE)) {",
+        "        mvdm_command_native_child_abort();",
+        "        setCF(0);",
+        "        setAL((UCHAR)ERROR_INVALID_ADDRESS);",
+        "        return;",
+        "    }",
+        "    pEnv = (PCHAR)mvdm_command_native_child_environment();"
+      ]
+    },
+    {
+      "original_line": 520,
+      "added": 1,
+      "deleted": 1,
+      "original": [
+        "    cmdExec32 (Buffer,pEnv);"
+      ],
+      "current": [
+        "    cmdExec32 ((PCHAR)mvdm_command_native_child_command(),pEnv);"
+      ]
+    },
+    {
+      "original_line": 547,
+      "added": 6,
+      "deleted": 7,
+      "original": [
+        "    pCommandTail = (PCHAR) GetVDMAddr ((USHORT)getDS(),(USHORT)getSI());",
+        "    pEnv = (PCHAR) GetVDMAddr ((USHORT)getES(),0);",
+        "    for (i=0 ; i<124 ; i++) {",
+        "        if (pCommandTail[i] == 0x0d){",
+        "            pCommandTail[i] = 0;",
+        "            break;",
+        "        }"
+      ],
+      "current": [
+        "    if (!mvdm_command_native_child_capture_guest((USHORT)getDS(),",
+        "            (USHORT)getSI(), (USHORT)getES(), 0u, (USHORT)getSS(),",
+        "            (USHORT)getBP())) {",
+        "        setCF(0);",
+        "        setAL((UCHAR)GetLastError());",
+        "        return;"
+      ]
+    },
+    {
+      "original_line": 555,
+      "added": 4,
+      "deleted": 2,
+      "original": [
+        "",
+        "    if (i == 124){"
+      ],
+      "current": [
+        "    pCommandTail = (PCHAR)mvdm_command_native_child_command();",
+        "    pEnv = (PCHAR)mvdm_command_native_child_environment();",
+        "    if (pCommandTail == NULL || pEnv == NULL) {",
+        "        mvdm_command_native_child_abort();"
+      ]
+    },
+    {
+      "original_line": 571,
+      "added": 1,
+      "deleted": 0,
+      "original": [],
+      "current": [
+        "            mvdm_command_native_child_abort();"
+      ]
+    },
+    {
+      "original_line": 576,
+      "added": 2,
+      "deleted": 1,
+      "original": [
+        "        if ((dwRet + 4 + strlen(pCommandTail)) > MAX_PATH) {"
+      ],
+      "current": [
+        "        if ((dwRet + 4 + strlen(pCommandTail)) >= MAX_PATH) {",
+        "            mvdm_command_native_child_abort();"
+      ]
+    },
+    {
+      "original_line": 584,
+      "added": 14,
+      "deleted": 1,
+      "original": [
+        "        cmdExec32 (Buffer,pEnv);"
+      ],
+      "current": [
+        "        if (!mvdm_command_native_child_select_command_service(",
+        "                MVDM_COMMAND_SERVICE_EXECUTE)) {",
+        "            mvdm_command_native_child_abort();",
+        "            setCF(0);",
+        "            setAL((UCHAR)ERROR_INVALID_ADDRESS);",
+        "            return;",
+        "        }",
+        "        if (!mvdm_command_native_child_replace_command(Buffer)) {",
+        "            mvdm_command_native_child_abort();",
+        "            setCF(0);",
+        "            setAL((UCHAR)ERROR_BAD_FORMAT);",
+        "            return;",
+        "        }",
+        "        cmdExec32 ((PCHAR)mvdm_command_native_child_command(),pEnv);"
+      ]
+    }
+  ],
+  "restorations": [
+    "Original DWORD i declaration even though currently unused.",
+    "Original whitespace in all three standard-handle read/set pairs; retained current guard braces without moving complexity.",
+    "Remove five added explanatory comments and inserted blank-only hunks."
+  ],
+  "token_proof": {
+    "before_sha256": "159e827469d1c5fe06eba380e8fdd51d12f11fb35ec98fb1565e67d585b95854",
+    "after_sha256": "5603f2a1335ed0828ec6c09cb8cd2f10f45db36ce278ccc5c3b3b53802d7d64c",
+    "only_nonformat_change": "Restored original DWORD i declaration at logical541",
+    "all_other_tokens_identical": true
+  },
+  "line_proof": {
+    "scope": "identical original runs >=4 physical lines; source-level logical #line proof, no compiler claim",
+    "checked_code_lines": 406,
+    "mismatches": []
+  },
+  "error_bodies": 0,
+  "evidence": [
+    {
+      "group": "capture and handle failure guard",
+      "source": "r0021-scheduling-requalification.json",
+      "conclusion": "Source-order counterexample: detached thread increments reentry count before consuming SS:BP; independent inherited-context request can resume CPU. Keep pre-reentry owned input and current initialization/failure/lifetime handling. Not a reproduced race claim."
+    },
+    {
+      "group": "thread ABI",
+      "source": "src/compat/include/thread_start_compat.h",
+      "conclusion": "Original void cdecl cmdCreateProcess is not WINAPI DWORD(void*) on x86. Existing bridge preserves source call order and session attachment; bare function-pointer cast does not repair ABI."
+    },
+    {
+      "group": "standard streams",
+      "source": "src/ntvdm-exe/win32/command_process_compat.c",
+      "conclusion": "Native worker has process-global streams; selected binding stores overrides per-thread and passes child STARTUPINFO plus frontend/execution capability. Original SetStdHandle alone cannot provide that integration boundary."
+    },
+    {
+      "group": "service selector",
+      "source": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "conclusion": "INTERACTIVE versus EXECUTE is taken from original call branch before COMSPEC replacement. Consumer routes through Run16 without guessing names or reparsing command; retain minimal calls and failure cleanup."
+    },
+    {
+      "group": "capacity",
+      "source": "r0029-r0036-requalification.json",
+      "conclusion": "137+4+119=260 fills MAX_PATH without terminator; original > check permits NUL overflow. Keep >= and captured-state cleanup."
+    }
+  ],
+  "limits": [
+    "Source evidence distinguishes required input ownership from blanket approval of all snapshot code. Residuals remain pending owner.",
+    "Current shared source proof is not actual compiler preprocessing.",
+    "Cached full build started separately; no success, publication, test or Git delivery claimed yet."
+  ],
+  "delivery": "P14 cached full, publish11x2, COMMAND fixtures, Full20 and governance passed; Git delivery accompanies receipt",
+  "newline_identity": {
+    "reason": "Preserve mixed existing physical line endings; candidate initially normalized all lines to CRLF, corrected before commit.",
+    "compiled_source_sha256": "525c55b4701a34b147ba13ca52762f676e578495338ab2f52d2ac141723f277b",
+    "final_source_sha256": "5603f2a1335ed0828ec6c09cb8cd2f10f45db36ce278ccc5c3b3b53802d7d64c",
+    "normalized_bytes_identical": true,
+    "crlf_before": 3,
+    "crlf_final": 3
+  },
+  "validation": "Final cmdexec physical newline correction is normalized-byte-identical to compiled source; no other postbuild source edits"
+}

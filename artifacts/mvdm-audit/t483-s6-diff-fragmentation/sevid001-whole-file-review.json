@@ -1,0 +1,488 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "original_sha256": "963affcefa6e16b2754365787ada8c2a7944b8890d96807d1a98df44ccae2c84",
+  "original_lf_sha256": "77b08a47e90ab64182118de473a1b7f0c921585a5a92acc0454a3b773d542644",
+  "current_sha256": "2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5",
+  "before": {
+    "blocks": 25,
+    "added": 25,
+    "deleted": 25,
+    "lines": 50
+  },
+  "after": {
+    "blocks": 25,
+    "added": 25,
+    "deleted": 25,
+    "lines": 50
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 0
+  },
+  "source_changed": false,
+  "points": [
+    {
+      "review_id": "T483-R0573",
+      "original_line": 1166,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "prior_control": {
+        "evidence": "r0573-r0579-backward-string-review.json",
+        "id": "T483-R0573",
+        "reason": "For mapping f(a)=4*(a&~1)+(a&1), backward even-to-odd distance is7, not3.",
+        "restore_control": "string cases=128 failures=56",
+        "decision": "qualified pending owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0574",
+      "original_line": 1170,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32\t*)((*((IHPE\t*)&(r1)))\t+\t*((IHPE\t*)&(r20)))\t)\t+\t*((IU32\t*)(LocalIUH+1)\t+\tREGLONG)\t;\t\t",
+      "current": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32\t*)((*((IHPE\t*)&(r1)))\t+\t*((IHPE\t*)&(r20)))\t)\t+\t((*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & ~1u) << 2) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: odd/even plane address. */\t;\t\t",
+      "prior_control": {
+        "evidence": "r0573-r0579-backward-string-review.json",
+        "id": "T483-R0574",
+        "reason": "Host passes CPU offset (eaOff minus gvi_pc_low_regen); original base+offset does not map the shared four-plane backing. Current f(a) does.",
+        "restore_control": "string cases=128 failures=128",
+        "decision": "qualified pending owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0575",
+      "original_line": 1191,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "prior_control": {
+        "evidence": "r0573-r0579-backward-string-review.json",
+        "id": "T483-R0575",
+        "reason": "Destination-forward branch must alternate backward source distances1/7; XOR6 performs this, XOR2 instead gives3/5.",
+        "restore_control": "string cases=128 failures=48",
+        "decision": "qualified pending owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0577",
+      "original_line": 1218,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "prior_control": {
+        "evidence": "r0573-r0579-backward-string-review.json",
+        "id": "T483-R0577",
+        "reason": "Destination-backward branch independently needs source distances1/7; original XOR2 breaks this.",
+        "restore_control": "string cases=128 failures=48",
+        "decision": "qualified pending owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0578",
+      "original_line": 1226,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "prior_control": {
+        "evidence": "r0573-r0579-backward-string-review.json",
+        "id": "T483-R0578",
+        "reason": "After reading, adding7 corrects the decremented next-source pointer to select the last accessed shared plane cell; original3 selects wrong latch cell for half the starts/counts.",
+        "restore_control": "string cases=128 failures=64",
+        "decision": "qualified pending owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0579",
+      "original_line": 1228,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t",
+      "prior_control": {
+        "evidence": "r0573-r0579-backward-string-review.json",
+        "id": "T483-R0579",
+        "reason": "Final latch starts at shared8-byte CHAIN2 cell base; original4-byte alignment selects gap planes for half the starts/counts.",
+        "restore_control": "string cases=128 failures=64",
+        "decision": "qualified pending owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0581",
+      "original_line": 1478,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0581",
+        "reason": "Backward even-to-odd physical distance is7 under shared f(a)=4*(a&~1)+(a&1),not3.",
+        "restore_control": "stringloop cases=512 failures=112",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0582",
+      "original_line": 1487,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0582",
+        "reason": "Extracted CPU address>>1 must scale8 to preserve shared-plane A0 gap;original scale4 aliases compact positions.",
+        "restore_control": "stringloop cases=512 failures=512",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0583",
+      "original_line": 1492,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG)\t;\t",
+      "current": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: retain the selected odd/even lane. */\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0583",
+        "reason": "Address calculation must retain original CPU parity as selected lane;original assignment drops it.",
+        "restore_control": "stringloop cases=512 failures=192",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0584",
+      "original_line": 1505,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0584",
+        "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=128",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0585",
+      "original_line": 1509,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1380)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0585",
+        "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=192",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0586",
+      "original_line": 1517,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0586",
+        "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=128",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0587",
+      "original_line": 1520,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1380)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0587",
+        "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=192",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0588",
+      "original_line": 1532,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0588",
+        "reason": "Destination-forward loop requires source strides1/7,alternated with XOR6;original XOR2 gives wrong subsequent source.",
+        "restore_control": "stringloop cases=512 failures=192",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0590",
+      "original_line": 1550,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0590",
+        "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=128",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0591",
+      "original_line": 1554,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1380)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0591",
+        "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=192",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0592",
+      "original_line": 1562,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0592",
+        "reason": "Original offset1379 reads high byte of shared compare field;bounded real UNCHAINED5/10 -> CHAIN2 uniform15/0 transition needs low byte1376 for original per-plane comparison result. Restoration miscompares reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=128",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0593",
+      "original_line": 1565,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1380)\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0593",
+        "reason": "Original offset1383 reads high byte of shared care field;bounded real updater transition needs low byte1380. Restoration loses care semantics in reachable bytes.",
+        "restore_control": "stringloop cases=512 failures=192",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0594",
+      "original_line": 1577,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0594",
+        "reason": "Destination-backward loop independently requires XOR6 for source strides1/7.",
+        "restore_control": "stringloop cases=512 failures=192",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0595",
+      "original_line": 1585,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0595",
+        "reason": "Post-loop correction7 recovers last accessed8byte shared cell before latch alignment;original3 gives wrong cell.",
+        "restore_control": "stringloop cases=512 failures=256",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0596",
+      "original_line": 1587,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t",
+      "prior_control": {
+        "evidence": "r0581-r0596-mode1-backward-review.json",
+        "id": "T483-R0596",
+        "reason": "Final shared-plane latch aligns8bytes;original4byte mask can select unused gap half.",
+        "restore_control": "stringloop cases=512 failures=256",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0597",
+      "original_line": 1640,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "prior_control": {
+        "evidence": "r0597-r0604-final-backward-review.json",
+        "id": "T483-R0597",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0,
+        "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=64 nonzero_output_bytes=2304"
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0598",
+      "original_line": 1644,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(1380)\t;\t",
+      "prior_control": {
+        "evidence": "r0597-r0604-final-backward-review.json",
+        "id": "T483-R0598",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0,
+        "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=128 nonzero_output_bytes=2304"
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0599",
+      "original_line": 1670,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "prior_control": {
+        "evidence": "r0597-r0604-final-backward-review.json",
+        "id": "T483-R0599",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0,
+        "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=64 nonzero_output_bytes=2304"
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    },
+    {
+      "review_id": "T483-R0600",
+      "original_line": 1674,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1380)\t;\t",
+      "prior_control": {
+        "evidence": "r0597-r0604-final-backward-review.json",
+        "id": "T483-R0600",
+        "decision": "qualified-pending-owner",
+        "mirror_diff_delta": 0,
+        "control": "laststring chain=0 cases=512 byte_oracle_failures=512 nonzero_output_bytes=0\nlaststring chain=2 cases=512 byte_oracle_failures=128 nonzero_output_bytes=2304"
+      },
+      "decision": "evidenced-residual-pending-owner",
+      "minimum": "One changed original-relative line;no smaller nonzero diff. Do not delete intervening original rows to merge blocks."
+    }
+  ],
+  "physical_lines": 3498,
+  "matched_original_line_mismatches": [],
+  "excluded_bodies": 0,
+  "line_directives": 0,
+  "actual_chain": [
+    "ev_glue.c::read_str_bwd_ev_glue passes CPU offset/count/RAM destination",
+    "evidfunc.c read tables select S_2119/S_2122/S_2123",
+    "ega_read.c::ega_read_routines_update writes actual comparison/care state;CHAIN4 scalar0/ff occupies low byte",
+    "m0-t479-s9-delivery.md independently records guest-visible cross-mode shared-plane need"
+  ],
+  "evidence_reuse": "Current raw bytes exactly match P56 delivered source;original historical hash uses LF normalization,recorded separately from raw. Prior controls reviewed against current source;no fresh runtime claim.",
+  "limits": [
+    "CHAIN2 mode1 counterexamples cover actual UNCHAINED5/10 to CHAIN2 uniform15/0 transitions,not all state histories.",
+    "UNCHAINED backward mode1 512/512 byte-oracle failure remains a baseline defect,not a passing result.",
+    "No new guest interaction or reentrancy claim."
+  ],
+  "status": "whole-file reviewed unchanged;25 residual decisions remain pending owner"
+}

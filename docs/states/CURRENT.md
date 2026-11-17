@@ -17,7 +17,7 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 | Objective | Reduce unnecessary original-relative difference blocks by restoring complete original units;keep changed-line count from growing without approval. |
 | Non-goals | No guest modification/rebuild,no#error-policy changes,no unrelated compat/component audit,no deletion of harmless original code to merge hunks. |
 | Reference Baseline | S5 commit8c1c54aeac9b97d020e86f5db50ca7d744aebd91;published package87c73097-d004-454e-925b-fea9a16f9552;pinned original sources. |
-| Files And ABI Surface | 1053 current host C/H plus9 previously audited text mirrors;255 nonzero files in initial conservative inventory;semantic changes require complete caller/provider review. |
+| Files And ABI Surface | 1054 current host C/H plus9 previously audited text mirrors;255 nonzero files in initial conservative inventory;semantic changes require complete caller/provider review. |
 | Applicable Rules | Source policy,original-first execution rules,mirror subset/logical-line policy;modern USER ownership can be a valid boundary. |
 | Verification | Pair error-only bodies before counting;per-file source/ABI and#line proof;cached x86/x64,publish11x2,focused and Full gates,governance,commit,push for substantive batches. |
 | Expected Markers | Current file hash/origin,raw and filtered blocks/lines,precise restored units,remaining evidence and decisions,final artifact identities. |
@@ -31,12 +31,12 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-25/255 initial difference files reviewed;230 remain. Nineteen changed files
-verified across P2-P13;six reviewed unchanged. Current census:1063 files
+28/255 initial difference files reviewed;227 remain. Twenty-one changed files
+verified across P2-P14;seven reviewed unchanged. Current census:1063 files
 (1054 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
 normalized/error-masked differences,and255 nonzero files.
-Current total2309 blocks/53626 lines;cumulative delivered reduction24 blocks/
-897 lines. Mouse's earlier two-line counting correction remains separate.
+Current total2302 blocks/53584 lines;cumulative delivered reduction31 blocks/
+939 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -65,30 +65,32 @@ Current total2309 blocks/53626 lines;cumulative delivered reduction24 blocks/
 | wow32/wdde.c |26->26|143->143|P12 reviewed unchanged;residual decisions pending|
 | kernel/handtabl.c |26->24|1481->1381|P12 original declarations and KernelPtoH restored;Full20 passed|
 | kernel/input.c |26->25|5527->5503|P13 original declarations restored;Full20 and input services/lifetime passed|
+| sevid001.c |25->25|50->50|Unchanged;25 evidenced decisions;prior-source identity checked|
+| wow32/wkman.c |25->25|46->45|P14 extra blank removed;Full20 passed|
+| command/cmdexec.c |24->17|123->82|P14 declaration/format restored;Full20 passed|
 
 
-The canonical pending backlog remains1641 rows/1646 historical R identifiers.
+The canonical pending backlog has1641 rows/1643 distinct historical R identifiers,
+plus2 non-R items. Corrected counting only;not a source reduction.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
 boundaries remain pending. Historical R identifiers are not current diff blocks.
 P13 original input declarations are restored and verified. Seven scattered
 harmless macros would increase file blocks26->27;owner approval remains pending.
-No residual omission is silently approved. Next file is sevid001.c.
+No residual omission is silently approved. Next file is src/mvdm-host/softpc.new/base/keymouse/keyba.c.
 
 ## Current Technical Baseline
 
-P13 cached x86/x64 full passed. Package272d7100-3694-4bda-8ba0-c2b08742067d contains11
-images,published and hash-verified to assets/release and O:/winnt/system32.
-Bitmap/message/DDE,controls/task-order,Full20 including real DOS4GW/NESticle,
-shared-boundary/governance and actual-provider native input services/lifetime
-passed. Original declaration anchors and existing function code identity checked.
-Standalone fixture compile dependencies were corrected by using the cached
-product object;no assertion waiver. No guest or winnt.zip changes.
+P14 cached x86/x64 full, COMMAND capture/launch fixtures and Full20 passed.
+Package49fa049e-b14e-46b0-9eea-263885d4aa62 contains11 images, published and
+hash-verified to assets/release and O:/winnt/system32. Full includes the real
+DOS4GW/NESticle gate. No guest or winnt.zip changes. Final physical newline
+correction is normalized-byte-identical to compiled source; preserved existing
+three CRLF lines. Governance passed;Git delivery accompanies the evidence receipt.
 
-[P13 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p13-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p13-verification-evidence.zip)
-bind final source,package and tests. [Whole-file review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/input-whole-file-review.json)
-records restorations and residual owner decisions. Git delivery accompanies receipt.
+[P14 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p14-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p14-verification-evidence.zip)
+bind sources, package and tests. Pending decisions are not approved by test success.
 
 ## Remaining Scope
 

@@ -1,0 +1,208 @@
+{
+  "packet": "M0 T483 S6 P14",
+  "status": "Built, published, focused/Full and governance verified; Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 2,
+    "files": [
+      {
+        "path": "src/mvdm-host/dos/command/cmdexec.c",
+        "sha256": "525c55b4701a34b147ba13ca52762f676e578495338ab2f52d2ac141723f277b"
+      },
+      {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "sha256": "f6a57202203d62dbe4fa6dff6991660d7f3aa281456abec6f1e0c40c683b388f"
+      }
+    ],
+    "deleted": []
+  },
+  "final_newline_identity": {
+    "reason": "Preserve mixed existing physical line endings; candidate initially normalized all lines to CRLF, corrected before commit.",
+    "compiled_source_sha256": "525c55b4701a34b147ba13ca52762f676e578495338ab2f52d2ac141723f277b",
+    "final_source_sha256": "5603f2a1335ed0828ec6c09cb8cd2f10f45db36ce278ccc5c3b3b53802d7d64c",
+    "normalized_bytes_identical": true,
+    "crlf_before": 3,
+    "crlf_final": 3
+  },
+  "reduction": {
+    "blocks": 7,
+    "lines": 42
+  },
+  "publication": {
+    "status": "published",
+    "package": "49fa049e-b14e-46b0-9eea-263885d4aa62",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 424375,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 5113,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1237,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 13280,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 13052,
+        "CleanupMs": 460,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11765,
+        "CleanupMs": 422,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 210,
+        "CleanupMs": 387,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65645,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 48913,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 46143,
+        "CleanupMs": 416,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14886,
+        "CleanupMs": 377,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11091,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53525,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12832,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29104,
+        "CleanupMs": 452,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30939,
+        "CleanupMs": 430,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5937,
+        "CleanupMs": 443,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8308,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10566,
+        "CleanupMs": 389,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3971,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7747,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20483,
+        "CleanupMs": 332,
+        "Passed": true
+      }
+    ]
+  },
+  "global_counts": {
+    "files": 1063,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 255,
+    "blocks": 2302,
+    "lines": 53584,
+    "reviewed_files": 28,
+    "remaining_files": 227,
+    "cumulative_reduction_blocks": 31,
+    "cumulative_reduction_lines": 939
+  },
+  "line_proof": {
+    "scope": "identical original runs >=4 physical lines; source-level logical #line proof, no compiler claim",
+    "checked_code_lines": 406,
+    "mismatches": []
+  },
+  "winnt_zip_unchanged": true,
+  "limits": [
+    "No runtime semantic change claimed from restored unused declaration.",
+    "Source-level line proof is not a separate preprocessor run.",
+    "sevid001 remains unchanged; existing source/controls reviewed, no new device test claim.",
+    "Residual owner decisions remain pending."
+  ],
+  "governance": {
+    "documentation": true,
+    "relative_links": true,
+    "git_diff_check": true
+  },
+  "pending_counts": {
+    "rows": 1641,
+    "distinct_R_identifiers": 1643,
+    "R_identifier_mentions": 1683,
+    "non_R_items": [
+      "MVDM-HOST-DIV-901",
+      "T483-P222-COMPLETION"
+    ],
+    "method": "Split comma/semicolon combined R identifiers, expand implicit T483 prefix, deduplicate R identifiers; separate non-R items. No deletion/restoration inferred from corrected count."
+  }
+}

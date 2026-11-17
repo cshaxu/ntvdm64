@@ -1722,7 +1722,6 @@ VOID W32DestroyTask( PTD ptd)
 
     wow_task_termination_retire(ptd->htask16);
 
-
     // Remove this task from the linked list of tasks
 
 #line 1723

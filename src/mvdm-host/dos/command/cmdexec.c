@@ -16,27 +16,13 @@
 #line 16
 #include <oemuni.h>
 #include <wowcmpat.h>
-/* DIVERGENCE(MVDM-HOST-DIV-196): original cmdExec32 leaves guest command,
- * environment and STD_HANDLES aliases in globals until its detached worker
- * runs.  Snapshot those same bounded inputs in the session adapter before
- * the worker starts; the original COMMAND worker remains the owner of every
- * conversion, process, wait, exit-code and re-entry decision. */
 #include "ntvdm-exe/command/include/mvdm_command_native_child.h"
-/* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
- * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
- * body and original CreateThread call ordering while binding that call to
- * the adapter's void-worker bridge, which carries the creator session and
- * records only the original worker spelling for a default-off disposal
- * diagnostic. */
 #include "compat/include/thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
     opennt_create_void_cdecl_thread_named((attributes), (stack_bytes), \
         (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \
         (flags), (thread_id), #start_routine)
-/* DIVERGENCE(MVDM-HOST-DIV-149): retain the source's standard-handle swap
- * order but bind it to a child-only STARTUPINFO carrier, not this app's
- * process-wide standard streams. */
 #include "compat/include/command_process_compat.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 #line 18
@@ -211,8 +197,7 @@ VOID cmdCheckBinary (VOID)
     }
 
 
-#line 187
-
+#line 188
     if (BinaryType == SCS_DOS_BINARY) {
         setCF(0);
         return;         // DOS Exe
@@ -355,8 +340,6 @@ VOID cmdCreateProcess ( VOID )
     ULONG SnapshotStdHandles[3];
 #line 323
     ANSI_STRING Env_A;
-
-
 #line 324
 
     // we have one more 32 executable active
@@ -380,16 +363,17 @@ VOID cmdCreateProcess ( VOID )
     if (!mvdm_command_native_child_std_handles(SnapshotStdHandles))
         StdHandlesValid = FALSE;
     else {
-        if ((hStd16In = (HANDLE)FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
+#line 343
+    if ((hStd16In = (HANDLE) FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
 #line 344
-            SetStdHandle (STD_INPUT_HANDLE, hStd16In);
+        SetStdHandle (STD_INPUT_HANDLE, hStd16In);
 #line 345
 
-        if ((hStd16Out = (HANDLE)FETCHDWORD(pStdHandles->hStdOut)) != (HANDLE)-1)
-            SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
+    if ((hStd16Out = (HANDLE) FETCHDWORD(pStdHandles->hStdOut)) != (HANDLE)-1)
+        SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
 
-        if ((hStd16Err = (HANDLE)FETCHDWORD(pStdHandles->hStdErr)) != (HANDLE)-1)
-            SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
+    if ((hStd16Err = (HANDLE) FETCHDWORD(pStdHandles->hStdErr)) != (HANDLE)-1)
+        SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
     }
 #line 351
 
@@ -445,12 +429,6 @@ VOID cmdCreateProcess ( VOID )
 #line 394
     if (Status == FALSE)
         dwExitCode32 = GetLastError ();
-
-
-    /* DIVERGENCE(MVDM-HOST-DIV-196): CreateProcess has consumed the copied
-     * command/environment and the standard handles are already local.
-     * Release before ResumeThread can request another guest command; keeping
-     * the singleton capture until child exit rejects original nested EXEC. */
     mvdm_command_native_child_finish();
 
 #line 397
@@ -467,7 +445,6 @@ VOID cmdCreateProcess ( VOID )
 	ResumeThread (ProcessInformation.hThread);
         WaitForSingleObject(ProcessInformation.hProcess, (DWORD)-1);
         GetExitCodeProcess (ProcessInformation.hProcess, &dwExitCode32);
-
 #line 410
         CloseHandle (ProcessInformation.hProcess);
         CloseHandle (ProcessInformation.hThread);
@@ -503,12 +480,10 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
 
-#line 440
-
+#line 441
     nt_block_event_thread(0);
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
-
 
 #line 445
     if((hThread = CreateThread (NULL,
@@ -623,6 +598,8 @@ VOID cmdExecComspec32 (VOID)
 VOID cmdExec (VOID)
 {
 
+#line 541
+    DWORD   i;
 #line 542
     DWORD   dwRet;
     PCHAR   pCommandTail;
@@ -674,8 +651,6 @@ VOID cmdExec (VOID)
 
         strcat (Buffer, " /c ");
         strcat (Buffer, pCommandTail);
-        /* Preserve this source branch explicitly before replacement changes
-         * the session snapshot from the original tail to COMSPEC /c tail. */
         if (!mvdm_command_native_child_select_command_service(
                 MVDM_COMMAND_SERVICE_EXECUTE)) {
             mvdm_command_native_child_abort();
