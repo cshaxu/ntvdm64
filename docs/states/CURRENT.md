@@ -123,3 +123,8 @@ are indexed in the worklist README. Current remains below16KiB.
 ## P19 Delivery
 
 [Owner-approved extraction](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/ntstubs-compat-extraction.json) moves the sole selected FNID function to compat, removes its dedicated macros and mirror file, and updates active registers. Cached build,publish11x2,focused38,lifecycle and Full20 passed;Git accompanies receipt. No next-file admission.
+
+## P20 Usage Ratio Scan
+
+Owner requests all254 nonzero mirror files sorted by original-source usage ratio.
+[Read-only report](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/usage-ratio/REPORT.md) records806 successful current-product preprocessing contexts and unchanged object hashes. It lists200 C implementations,51 headers and3 build/export descriptions. Original function spans include internal comments/blanks; macros/header usage limits are explicit. Six C files have a proved footprint below5 percent;13 below10 percent. This is a lower-bound source-footprint census,not runtime coverage or deletion authority. No source,package or audited-file-count change;owner selection remains required.

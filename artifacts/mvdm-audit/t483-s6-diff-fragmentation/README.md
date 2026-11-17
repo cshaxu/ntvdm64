@@ -225,3 +225,7 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [P19 owner-approved FNID extraction](ntstubs-compat-extraction.json): retire kernel/ntstubs.c from the mirror census and active registers; preserve its sole selected function in src/compat. Removed from mirror accounting:130 non-error blocks/9237 changed lines. This is source reclassification, not original restoration. Cached full,publish11x2,focused38,lifecycle and Full20 passed;Git accompanies receipt.
 
 [P19 receipt](batch-p19-checkpoint.json) and [evidence](p19-verification-evidence.zip).
+
+## P20 owner-requested usage-ratio scan
+
+[Full 254-file report](usage-ratio/REPORT.md), [ascending CSV](usage-ratio/all-diff-files-by-usage.csv), [summary](usage-ratio/summary.json), [receipt](usage-ratio/receipt.json), and [evidence](usage-ratio/evidence.zip). 806 current product contexts passed read-only preprocessing; all objects remain unchanged. C function scopes and header declaration lower bounds are distinguished; macro definitions are not silently classified unused. This scan changes no mirror, publication or per-file semantic-audit status and admits no extraction.

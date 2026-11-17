@@ -1,0 +1,14 @@
+{
+  "packet": "M0 T483 S6 P20",
+  "scope": "Read-only owner-requested usage-ratio census; not per-diff re-audit or extraction approval",
+  "source_head": "956d1ce30e18b83367c17a9fffca2afdcfb7bd97",
+  "files": 254,
+  "contexts": 806,
+  "objects_unchanged": 806,
+  "product_source_changed": false,
+  "runtime_rebuilt_or_republished": false,
+  "metric": "Proven retained original function spans plus emitted original declarations/data; macro and header limitations explicit",
+  "archive_sha256": "7e46a000531eb1f880e79ff09ef969b4d54fd391db4f4bd3eac23b9ebad8545f",
+  "initial_scanner_limitations": "Initial restricted launch had no output; escaped-path parser observations were discarded. Valid escaped-path run resumed without repeating completed contexts after replacing slow filesystem path resolution with lexical normalization.",
+  "verification": "All original/current source pins and all observed object hashes match; totals reconcile to P19; 19-line reference calibration passes; governance and relative links passed."
+}

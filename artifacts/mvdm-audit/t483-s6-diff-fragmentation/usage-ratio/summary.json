@@ -1,0 +1,26 @@
+{
+  "head": "956d1ce30e18b83367c17a9fffca2afdcfb7bd97",
+  "files": 254,
+  "categories": {
+    "header declarations": 51,
+    "C implementation": 200,
+    "build/export description": 3
+  },
+  "contexts": 806,
+  "passed_contexts": 806,
+  "unbalanced_contexts": [],
+  "diff_points": 2163,
+  "diff_lines": 44092,
+  "C_below_1_percent": 0,
+  "C_below_5_percent": 6,
+  "C_below_10_percent": 13,
+  "line_unit": "physical LF lines, drop terminal empty row; never current file total as denominator",
+  "limitations": [
+    "Integration numerator counts retained original function scope rows (comments and blanks included), plus emitted matching original declaration/data rows outside functions. Excludes #error/#line/framework and new adaptation rows.",
+    "This is evidenced source footprint, NOT exact executable runtime coverage or a complete dependency slice. Macro definitions outside those scopes are listed separately, not silently counted as used or unused.",
+    "Headers are declaration lower bounds; macro expansion does not attribute body rows to definition headers in normal MSVC /E output. Their ratios are not directly comparable to complete C function ranges.",
+    "Conditional #line ambiguity is reported from the existing conservative census; affected entries need local source review before an extraction decision.",
+    "Product compile/link-input closure includes archive members, not proof every compiled function survives linker garbage collection. No inference of safety to delete.",
+    "Two sources files and wow32.def have no C numerator; they are included with N/A, never zero."
+  ]
+}
