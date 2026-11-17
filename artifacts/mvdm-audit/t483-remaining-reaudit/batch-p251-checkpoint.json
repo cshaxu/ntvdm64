@@ -1,0 +1,245 @@
+{
+  "batch": "P251",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+        "sha256": "e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9"
+      },
+      {
+        "path": "src/wow32-dll/include/control-drawing/precomp.h",
+        "sha256": "ecd1fc05f60b7dcabf45676a71027a90b9b24ce68bd34c09bd68a17f6edd093e"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/mnemonic-drawing/precomp.h",
+        "sha256": "7ec73d46da3b2918411f4d7981698664ae16d8a179d40bbfbc25d30ed544389c"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_mnemonic_drawing_fixture.c",
+        "sha256": "513b822640af044aaf55783b2c869fb54eba87dc990a800223f90902dc1ea042"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "9497361cba7516b2c6865be68a0f5aa8769109b5c722039f603e3e9ff143f8d0"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_text_drawing_context.c",
+        "sha256": "494402e77739aa6a5800889f0267654ef70d3d240b223071d8e43c812ea3b2e7"
+      }
+    ],
+    "source_files": 6,
+    "deleted": []
+  },
+  "publication": {
+    "status": "published",
+    "package": "2c007ff5-0607-4738-9ca1-7f010c8121c9",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+        "sha256": "e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9"
+      }
+    ],
+    "compiler_observed": {
+      "GetNextWordbreak": 649,
+      "GetPrefixCount": 761,
+      "DT_GetExtentMinusPrefixes": 866,
+      "DT_DrawStr": 900,
+      "DT_DrawJustifiedLine": 960,
+      "DT_InitDrawTextInfo": 997,
+      "DT_AdjustWhiteSpaces": 1131,
+      "DT_BreakAWord": 1170,
+      "DT_GetLineBreak": 1201,
+      "NeedsEndEllipsis": 1311,
+      "PathFindFileName": 1402,
+      "AddPathEllipsis": 1420,
+      "AddEllipsisAndDrawLine": 1492,
+      "PSMTextOut": 1867,
+      "IsSysFontAndDefaultMode": 1971
+    }
+  },
+  "focused": {
+    "cases": 37,
+    "task_order": "PASS",
+    "evidence": "build/t483-s5-p251/focused-linked-verified.log"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 434472,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6776,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1314,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 14840,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 12188,
+        "CleanupMs": 474,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11781,
+        "CleanupMs": 539,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 197,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66511,
+        "CleanupMs": 462,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46449,
+        "CleanupMs": 452,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41155,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15487,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 14781,
+        "CleanupMs": 530,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 66817,
+        "CleanupMs": 501,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12159,
+        "CleanupMs": 542,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28785,
+        "CleanupMs": 567,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30395,
+        "CleanupMs": 478,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4630,
+        "CleanupMs": 538,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7884,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10133,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3797,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6414,
+        "CleanupMs": 449,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20368,
+        "CleanupMs": 495,
+        "Passed": true
+      }
+    ]
+  },
+  "mirror_diff": {
+    "before": {
+      "blocks": 32,
+      "lines": 1766
+    },
+    "after": {
+      "blocks": 20,
+      "lines": 935
+    },
+    "blocks_reduced": 12,
+    "lines_reduced": 831,
+    "excluded_branches": 12
+  },
+  "global": {
+    "baseline": {
+      "added": 13333,
+      "deleted": 106580,
+      "total": 119913,
+      "blocks": 5297
+    },
+    "delivered": {
+      "added": 7344,
+      "deleted": 83738,
+      "total": 91082,
+      "blocks": 4893
+    },
+    "worktree": {
+      "added": 7313,
+      "deleted": 82938,
+      "total": 90251,
+      "blocks": 4881
+    }
+  },
+  "scope": "R2678-R2685;five restored/confirmed;three residual boundaries. Original complete helpers/static scratch/normal cleanup restored;only >=255 correction remains in PSMTextOut. No guest change.",
+  "failed_attempts": {
+    "initial": "Three narrow fixtures missing wow_edit_current and real GDI provider after helper restoration",
+    "rejected_trial": "/Gy and /opt:ref failed;both removed",
+    "final": "Shared4-line fixture context plus existing navigation_native object compiled from actual wow_edit_native_bindings.c",
+    "running": "Final37 fixtures/task-order PASS:build/t483-s5-p251/focused-linked-verified.log",
+    "scope": "Only test linkage changed after publication;product hashes unchanged;Full still uses published final source",
+    "counter_review": "Restored unrelated preexisting user-capture /opt:ref after trial rollback;final37 and task-order rerun PASS"
+  },
+  "git": "Accompanying commit/push required"
+}

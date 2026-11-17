@@ -15,6 +15,7 @@
 /* OPENNT-HOST-097: original TabTextOut and its font/mapping predicate. */
 #define gpsi wow_edit_current
 #define GdiGetCharDimensions wow_edit_native_GdiGetCharDimensions
+#define UserGetCharDimensionsW GdiGetCharDimensions
 #define UserGetHFONT(dc) ((HFONT)GetCurrentObject((dc), OBJ_FONT))
 #define UserGetMapMode GetMapMode
 #define ghFontSys ((HFONT)GetStockObject(SYSTEM_FONT))

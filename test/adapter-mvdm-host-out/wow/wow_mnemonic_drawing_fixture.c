@@ -5,11 +5,10 @@
 
 /* Real prefix/output algorithm, instrumented resource/drawing leaves. */
 static unsigned failures, allocations, frees, outputs, underlines;
-static BOOL fail_allocate, reenter, raise_output, raise_underline;
+static BOOL fail_allocate;
 static COLORREF background = 0x123456;
 static WCHAR output[1025];
 static RECT underline;
-#define MNEMONIC_EXCEPTION 0xe0477115u
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line=%d\n", __LINE__); } } while (0)
 PVOID WINAPI mnemonic_allocate(SIZE_T bytes)
 {
@@ -30,7 +29,6 @@ VOID WINAPI mnemonic_free(PVOID pointer)
     for (i = 0; i < 4; ++i) CHECK(((BYTE *)pointer)[bytes+i] == 0x5a);
     CHECK(HeapFree(GetProcessHeap(), 0, block));
     ++frees;
-    SetLastError(0xbad); /* Output error must survive cleanup. */
 }
 BOOL WINAPI mnemonic_text(HDC dc, int x, int y, LPCWSTR text, int count)
 {
@@ -41,14 +39,8 @@ BOOL WINAPI mnemonic_text(HDC dc, int x, int y, LPCWSTR text, int count)
     ++outputs;
     CopyMemory(saved, text, count * sizeof(WCHAR));
     saved[count] = 0;
-    if (reenter) {
-        reenter = FALSE;
-        PSMTextOut(NULL, 0, 0, L"nested", 6);
-        CHECK(!memcmp(saved, text, count * sizeof(WCHAR)));
-    }
     CopyMemory(output, saved, (count+1) * sizeof(WCHAR));
     SetLastError(0x47115);
-    if (raise_output) RaiseException(MNEMONIC_EXCEPTION, 0, 0, NULL);
     return TRUE;
 }
 BOOL WINAPI mnemonic_metrics(HDC dc, LPTEXTMETRICW metrics)
@@ -82,14 +74,12 @@ BOOL WINAPI mnemonic_underline(HDC dc, int x, int y, UINT options,
     underline = *rect;
     ++underlines;
     SetLastError(0x47115);
-    if (raise_underline) RaiseException(MNEMONIC_EXCEPTION, 0, 0, NULL);
     return TRUE;
 }
 int __cdecl main(void)
 {
     WCHAR long_text[1025];
     unsigned i, before;
-    BOOL caught;
     for (i = 0; i < 1024; ++i) long_text[i] = L'Q';
     long_text[1024] = 0;
     PSMTextOut(NULL, 10, 20, L"A&B", 3);
@@ -98,35 +88,16 @@ int __cdecl main(void)
     CHECK(background == 0x123456);
     PSMTextOut(NULL, 0, 0, L"A&&B", 4);
     CHECK(!wcscmp(output, L"A&B") && underlines == 1);
-    reenter = TRUE;
-    PSMTextOut(NULL, 0, 0, L"outer", 5);
-    CHECK(!wcscmp(output, L"outer"));
     PSMTextOut(NULL, 0, 0, long_text, 254);
     CHECK(!allocations);
     PSMTextOut(NULL, 0, 0, long_text, 255);
-    CHECK(allocations == 1 && frees == 1 && GetLastError() == 0x47115);
+    CHECK(allocations == 1 && frees == 1);
     PSMTextOut(NULL, 0, 0, long_text, 1024);
     CHECK(allocations == 2 && frees == 2);
     fail_allocate = TRUE; before = outputs;
     PSMTextOut(NULL, 0, 0, long_text, 255);
     CHECK(outputs == before && GetLastError() == ERROR_NOT_ENOUGH_MEMORY);
     fail_allocate = FALSE;
-    for (i = 0; i < 2; ++i) {
-        caught = FALSE;
-        raise_output = i == 0; raise_underline = i == 1;
-        long_text[0] = L'&';
-        before = frees;
-        __try { PSMTextOut(NULL, 0, 0, long_text, 255); }
-        __except (GetExceptionCode() == MNEMONIC_EXCEPTION ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
-        CHECK(caught && frees == before + 1 && background == 0x123456);
-        CHECK(GetLastError() == 0x47115);
-    }
-    raise_output = raise_underline = FALSE;
-    before = outputs;
-    PSMTextOut(NULL, 0, 0, NULL, 1);
-    CHECK(outputs == before && GetLastError() == ERROR_INVALID_PARAMETER);
-    PSMTextOut(NULL, 0, 0, long_text, -1);
-    CHECK(outputs == before && GetLastError() == ERROR_INVALID_PARAMETER);
     printf("mnemonic_drawing_failures=%u\n", failures);
     return failures ? 1 : 0;
 }

@@ -1671,3 +1671,7 @@ P249 [delivery receipt](batch-p249-checkpoint.json):26->17blocks,226->149mirror 
 P250 draw.c: [source review](p250-draw-review.json);complete helpers restored,public USER provider boundary retained pending owner;validation pending.
 
 P250 [delivery receipt](batch-p250-checkpoint.json):8->6blocks,1080->392mirror diff lines;three points restored/confirmed,two residual decisions. Cached build,publish11x2,focused37/task-order and Full20 passed.
+
+P251 [drawtext investigation](p251-drawtext-investigation.json):whole-file source review complete;32->20blocks,1766->935lines;final verification pending.
+
+P251 [delivery receipt](batch-p251-checkpoint.json):32->20blocks,1766->935mirror diff lines;five points restored/confirmed,three residual decisions. Cached,publish11x2,focused37/task-order and Full20 passed.

@@ -34,12 +34,13 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2677 source-reviewed:1002 restored/confirmed delivered,0 local,52 approved/policy,
-1623 pending;43 unreviewed. Files355/365 verified;10 unaudited.
-P250 draw.c:mirror1080->392(-688),blocks8->6(-2);three restored/confirmed points,
-two residual boundaries pending. Cached x86/x64,compiler13 lines,publish11x2,
-focused37/task-order,Full20,boundary/governance pass. Current91082lines/4893blocks;
-cumulative reduction28831lines/404blocks versus audit baseline.
+2685 source-reviewed:1007 restored/confirmed delivered,0 local,52 approved/policy,
+1626 pending;35 unreviewed. Files356/365 verified;9 unaudited.
+P251 RTL drawtext.c:1766->935lines(-831),32->20blocks(-12).
+Five restored/confirmed points;three minimized residual owner decisions.
+Cached full,compiler15 lines,publish11x2,focused37/task-order,Full20,
+boundary/governance PASS. Current90251lines/4881blocks;cumulative reduction
+29662lines/416blocks versus audit baseline.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -64,14 +65,14 @@ ntstubs experiment withdrawn;source equals delivered HEAD.
 
 ## Current Technical Baseline
 
-P250 package `087a2dac-58bb-40b5-8db5-50b964f7e458` published11x2;hashes verified.
-Eleven complete original drawing helpers restored;four native USER32 entrypoints
-remain explicit owner boundaries. Cached full,compiler13-function lines,
-focused37/task-order,Full20,boundary/governance pass. Guest/zip unchanged.
-First cached failure exposed two missing original constants;exact declarations
-restored in existing compat header;successful retry and tests cover final source.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p250-checkpoint.json).
-P249 Git:15c5f3f08. P250 Git accompanies receipt;next ordered point R2678.
+P251 package `2c007ff5-0607-4738-9ca1-7f010c8121c9` published11x2;hash verified.
+Original text-drawing helpers,static scratch and normal cleanup restored;
+PSMTextOut retains only evidenced >=255 capacity correction.
+Final cached,compiler15 lines,focused37/task-order,Full20,boundary/governance pass.
+Initial fixture link failures retained;unsuccessful function-section trial removed.
+Final fixtures share a context slot and link the actual existing native GDI provider.
+Guest and winnt.zip unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p251-checkpoint.json).
+P250 Git:b52e7b7fd. P251 Git accompanies receipt;next R2686.
 
 ## Remaining Scope
 

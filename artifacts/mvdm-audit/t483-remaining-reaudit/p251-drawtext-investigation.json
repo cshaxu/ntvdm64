@@ -1,0 +1,267 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+  "points": "R2678-R2685",
+  "status": "Whole-file source,final cached,publish11x2,compiler15 lines,focused37/task-order,Full20 PASS;residual3 decisions pending;Git accompanies receipt",
+  "before": {
+    "blocks": 32,
+    "added": 45,
+    "deleted": 1721,
+    "total": 1766
+  },
+  "source_sha256": "727c7d0d9db37906236b54ed554c20f9f068689750501a92172929920ffa9185",
+  "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+  "established_facts": [
+    {
+      "subject": "PSMTextOut capacity",
+      "original": "static WCHAR achWorkBuffer[255]; allocation only cch>255",
+      "callee": "Original GetPrefixCount stores terminating zero after copied characters",
+      "counterexample": "cch=255 ordinary non-prefix characters writes achWorkBuffer[255]",
+      "scope": "Proves >= threshold correction;does not prove static removal,argument guards,SEH/finally or last-error preservation necessary"
+    },
+    {
+      "subject": "Existing test evidence limitation",
+      "file": "test/adapter-mvdm-host-out/wow/wow_mnemonic_drawing_fixture.c",
+      "detail": "mnemonic_text reenters explicitly and raises a test exception;real UserTextOutW binds TextOutW. Synthetic callbacks alone do not prove production reentry or exception contract."
+    },
+    {
+      "subject": "Restoration candidates",
+      "functions": [
+        "GetNextWordbreak",
+        "DT_GetExtentMinusPrefixes",
+        "DT_DrawStr",
+        "DT_DrawJustifiedLine",
+        "DT_InitDrawTextInfo",
+        "DT_AdjustWhiteSpaces",
+        "DT_BreakAWord",
+        "DT_GetLineBreak",
+        "NeedsEndEllipsis",
+        "PathFindFileName",
+        "AddPathEllipsis",
+        "AddEllipsisAndDrawLine"
+      ],
+      "dependency": "Existing font state has cySysFontChar/tmSysFont;viewport/window GDI leaves already available after P250;UserGetCharDimensionsW needs exact binding verification"
+    },
+    {
+      "subject": "Public provider boundary",
+      "detail": "DrawTextExW is public USER32 API;must verify declaration/provider conflict separately from helper restoration."
+    }
+  ],
+  "remaining": [
+    "Owner decision on standalone include,255-character threshold and native DrawTextExW provider"
+  ],
+  "delivery": "Verified/published;commit and push accompany receipt",
+  "helper_candidate": {
+    "blocks": 27,
+    "added": 32,
+    "deleted": 927,
+    "total": 959
+  },
+  "preserved_error_branches": 12,
+  "restoration_binding": "Original userrtl.h223 UserGetCharDimensionsW=GdiGetCharDimensions,using existing native provider",
+  "current_local_metric": {
+    "blocks": 20,
+    "added": 14,
+    "deleted": 921,
+    "total": 935
+  },
+  "local_changes": [
+    "Restored complete drawing helper units;kept12 exclusions",
+    "Restored PSMTextOut normal cleanup and allocation expression;removed speculative validation/SEH/last-error machinery",
+    "Retained local buffer and >= threshold pending final individual dispositions",
+    "Fixture removes synthetic exception and invalid-input requirements;keeps prefix,capacity,allocation-failure checks",
+    "Mnemonic fixture reuses production declarations then overrides instrumented GDI/allocation leaves"
+  ],
+  "source_sha256_local": "e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9",
+  "compiler_line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+        "sha256": "e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9"
+      }
+    ],
+    "compiler_observed": {
+      "GetNextWordbreak": 649,
+      "GetPrefixCount": 761,
+      "DT_GetExtentMinusPrefixes": 866,
+      "DT_DrawStr": 900,
+      "DT_DrawJustifiedLine": 960,
+      "DT_InitDrawTextInfo": 997,
+      "DT_AdjustWhiteSpaces": 1131,
+      "DT_BreakAWord": 1170,
+      "DT_GetLineBreak": 1201,
+      "NeedsEndEllipsis": 1311,
+      "PathFindFileName": 1402,
+      "AddPathEllipsis": 1420,
+      "AddEllipsisAndDrawLine": 1492,
+      "PSMTextOut": 1867,
+      "IsSysFontAndDefaultMode": 1971
+    }
+  },
+  "dispositions": {
+    "restored": [
+      "R2679",
+      "R2680",
+      "R2681",
+      "R2683",
+      "R2684"
+    ],
+    "pending": [
+      "R2678",
+      "R2682",
+      "R2685"
+    ]
+  },
+  "static_buffer_review": "Original static restored:edit_entry enters WOW callback task ownership;PSMTextOut native GDI leaves contain no custom reentry/yield. Test-only recursive mnemonic_text was not production evidence.",
+  "publication": {
+    "status": "published",
+    "package": "2c007ff5-0607-4738-9ca1-7f010c8121c9",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "fixture_link_correction": {
+    "initial": "Three narrow fixtures missing wow_edit_current and real GDI provider after helper restoration",
+    "rejected_trial": "/Gy and /opt:ref failed;both removed",
+    "final": "Shared4-line fixture context plus existing navigation_native object compiled from actual wow_edit_native_bindings.c",
+    "running": "Final37 fixtures/task-order PASS:build/t483-s5-p251/focused-linked-verified.log",
+    "scope": "Only test linkage changed after publication;product hashes unchanged;Full still uses published final source",
+    "counter_review": "Restored unrelated preexisting user-capture /opt:ref after trial rollback;final37 and task-order rerun PASS"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 434472,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6776,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1314,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 14840,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 12188,
+        "CleanupMs": 474,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11781,
+        "CleanupMs": 539,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 197,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66511,
+        "CleanupMs": 462,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 46449,
+        "CleanupMs": 452,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41155,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15487,
+        "CleanupMs": 544,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 14781,
+        "CleanupMs": 530,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 66817,
+        "CleanupMs": 501,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12159,
+        "CleanupMs": 542,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28785,
+        "CleanupMs": 567,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30395,
+        "CleanupMs": 478,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4630,
+        "CleanupMs": 538,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7884,
+        "CleanupMs": 458,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10133,
+        "CleanupMs": 504,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3797,
+        "CleanupMs": 407,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6414,
+        "CleanupMs": 449,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20368,
+        "CleanupMs": 495,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "cases": 37,
+    "task_order": "PASS",
+    "evidence": "build/t483-s5-p251/focused-linked-verified.log"
+  }
+}
