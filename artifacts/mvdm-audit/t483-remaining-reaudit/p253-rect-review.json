@@ -1,0 +1,24 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+  "points": "R2701-R2703",
+  "before": {
+    "blocks": 3,
+    "added": 1,
+    "deleted": 390,
+    "total": 391
+  },
+  "local": {
+    "blocks": 3,
+    "added": 1,
+    "deleted": 367,
+    "total": 368
+  },
+  "restored_units": [
+    "CopyOffsetRect"
+  ],
+  "remaining_evidence": "CopyInflateRect unchanged original. Public SetRect/CopyRect/etc have existing WINUSERAPI dllimport declarations and public USER32 ownership; defining these functions locally conflicts with DLL-import definitions. Private CopyOffsetRect is independently composable and restored.",
+  "source_sha256": "5cbde517fff979b223fee8942c5a5d5813d6d656aad35445c2d3ff5e397649e7",
+  "errors_unchanged": true,
+  "state": "Cached full,publish11x2,compiler33 function anchors,focused37/task-order,Full20,boundary/governance PASS;remaining decisions pending owner",
+  "delivery": "batch-p253-checkpoint.json;Git accompanies receipt"
+}

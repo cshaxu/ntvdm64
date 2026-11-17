@@ -1,14 +1,20 @@
 #ifndef WOW_EDIT_VIEW_FIXTURE_PRECOMP_H
 #define WOW_EDIT_VIEW_FIXTURE_PRECOMP_H
-#include "wow_user_client_view_layout.h"
+#define WOW_ORIGINAL_EDIT_CLIENT
+#include "control-client/precomp.h"
 #ifdef WOW
 #error Original host client view must use native RECT, not guest WORD rectangles
 #endif
 /* Test-owned original WNDs have ordinary scoped parent pointers. */
 #define REBASEPWND(p, member) ((p)->member)
-#define SYSMET(index) view_fixture_##index
+/* Use the production declarations for restored, unreferenced helpers.
+ * Only minimized dimensions and HWND lookup are owned by this fixture. */
+#undef SYSMET
+#define SYSMET(index) (SM_##index == SM_CXMINIMIZED ? view_fixture_CXMINIMIZED : \
+    SM_##index == SM_CYMINIMIZED ? view_fixture_CYMINIMIZED : GetSystemMetrics(SM_##index))
 extern int view_fixture_CXMINIMIZED, view_fixture_CYMINIMIZED;
 PWND WINAPI view_fixture_validate(HWND);
+#undef ValidateHwnd
 #define ValidateHwnd view_fixture_validate
 BOOL WINAPI _IsWindowVisible(PWND);
 BOOL WINAPI _GetClientRect(PWND, LPRECT);

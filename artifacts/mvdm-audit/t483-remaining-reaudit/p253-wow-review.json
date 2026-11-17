@@ -1,0 +1,31 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "points": "R2715-R2717",
+  "before": {
+    "blocks": 22,
+    "added": 7,
+    "deleted": 652,
+    "total": 659
+  },
+  "local": {
+    "blocks": 20,
+    "added": 8,
+    "deleted": 303,
+    "total": 311
+  },
+  "restored_units": [
+    "non-WOW macro cohort",
+    "MNLookUpItem",
+    "_GetMenuState",
+    "GetPrevPwnd",
+    "_GetWindow",
+    "_GetParent",
+    "_GetSubMenu",
+    "_GetWindowRect"
+  ],
+  "remaining_evidence": "Original handle validation requires gSharedInfo.aheList, gpsi.cHandleEntries, CLIENTINFO desktop bounds and shared kernel handle entries. Host public HWND is not that private array index. Existing scoped retained-object validator remains provider; complete menu/window helpers restored without replacing validation or adding state.",
+  "source_sha256": "0b36740a808be207287bde91dc90f3e0c42a3d82eb7e1f64ffaba085560311d6",
+  "errors_unchanged": true,
+  "state": "Cached full,publish11x2,compiler33 function anchors,focused37/task-order,Full20,boundary/governance PASS;remaining decisions pending owner",
+  "delivery": "batch-p253-checkpoint.json;Git accompanies receipt"
+}

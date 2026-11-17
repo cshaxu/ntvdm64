@@ -1,5 +1,6 @@
 #include "edit-view/precomp.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /* Compile the three actual OPENNT-HOST-078 units with the isolated
  * edit-view precomp and /Gz. Synthetic WND relationships are supplemental;
@@ -7,6 +8,13 @@
 int view_fixture_CXMINIMIZED = 90, view_fixture_CYMINIMIZED = 30;
 static WND desktop, parent, leaf;
 static unsigned failures;
+__declspec(thread) wow_edit_context *wow_edit_current;
+PWND WINAPI wow_window_client_desktop(void) { return &desktop; }
+/* These restored sibling helpers are outside this relationship fixture. */
+BOOL WINAPI wow_edit_native_ensure_gui_thread(void) { abort(); }
+const struct wow_task_client_info *WINAPI wow_edit_client_info(void) { abort(); }
+int WINAPI GetWindowBorders(LONG style, DWORD ex, BOOL window, BOOL client)
+{ (void)style; (void)ex; (void)window; (void)client; abort(); }
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line %d\n", __LINE__); } } while (0)
 PWND WINAPI view_fixture_validate(HWND hwnd)
 {

@@ -123,9 +123,12 @@ static void mnemonic_extent_contract(void)
             CHECK(actual.cx == native.cx && actual.cy == native.cy);
         }
     }
-    actual.cx = actual.cy = 99;
-    CHECK(!PSMGetTextExtent(dc, L"x", -1, &actual));
-    CHECK(GetLastError() == ERROR_INVALID_PARAMETER && !actual.cx && !actual.cy);
+    /* Original wrapper ignores GDI failure; it does not zero SIZE or
+     * synthesize ERROR_INVALID_PARAMETER. Match the real GDI output. */
+    actual.cx = actual.cy = native.cx = native.cy = 99;
+    GetTextExtentPointW(dc, L"x", -1, &native);
+    CHECK(PSMGetTextExtent(dc, L"x", -1, &actual));
+    CHECK(actual.cx == native.cx && actual.cy == native.cy);
     CHECK(DeleteDC(dc));
 }
 int main(void)

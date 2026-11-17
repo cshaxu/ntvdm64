@@ -1,6 +1,11 @@
 #define WOW_ORIGINAL_DEFAULT_WINDOW
 #include "control-client/default-precomp.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+/* Restored sibling traversal is outside this fixture; never fake success. */
+DWORD WINAPI GetAppCompatFlags(PWOW_CLIENT_THREADINFO thread)
+{ (void)thread; fputs("Unexpected GetAppCompatFlags boundary\n", stderr); abort(); }
 #include <string.h>
 #include <wchar.h>
 LONG WINAPI wow_original_default_window_proc(PWND, UINT, WPARAM, LPARAM, DWORD);

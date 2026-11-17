@@ -90,3 +90,11 @@ _UserTestTokenForInteractive(
 
     return Status;
 }
+
+#line 170
+BOOL _ReleaseDC(
+    HDC hdc)
+{
+    return ReleaseDC(NULL, hdc);
+}
+

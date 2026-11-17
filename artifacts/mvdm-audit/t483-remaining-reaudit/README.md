@@ -1681,3 +1681,7 @@ P252 [getset source review](p252-getset-review.json):9->8blocks,251->237mirror d
 P252 [help source review](p252-help-review.json):3->2blocks,46->6lines;two complete helpers restored. Batch two files -2blocks/-54lines;compiler four function lines passed,cached full running.
 
 P252 [delivery receipt](batch-p252-checkpoint.json):two files12->10blocks,297->243mirror diff lines;three restored/confirmed,eight pending boundary points. Cached,publish11x2,focused37/task-order,Full20 and governance passed.
+
+P253 final seven-file batch (verified/published): [random](p253-random-review.json), [rect](p253-rect-review.json), [text](p253-text-review.json), [userrtl](p253-userrtl-review.json), [winmgr](p253-winmgr-review.json), [wow](p253-wow-review.json), [exports](p253-exports-review.json); [global diff count](p253-global-diff-count.json). Owner directs one combined build, publication, tests, commit and push.
+
+P253 [delivery receipt](batch-p253-checkpoint.json):seven files66->54blocks,2061->1249mirror diff lines;all365 files/2720points classified,1018 restored/confirmed delivered,52 approved/policy,1650 owner decisions remain. Full20 final rerun and focused37/task-order passed;first failed attempts remain explicit.

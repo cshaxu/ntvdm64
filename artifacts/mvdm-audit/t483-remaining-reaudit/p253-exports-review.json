@@ -1,0 +1,24 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+  "points": "R2718-R2720",
+  "before": {
+    "blocks": 3,
+    "added": 2,
+    "deleted": 96,
+    "total": 98
+  },
+  "local": {
+    "blocks": 3,
+    "added": 2,
+    "deleted": 89,
+    "total": 91
+  },
+  "restored_units": [
+    "_ReleaseDC"
+  ],
+  "remaining_evidence": "Original token test remains. AttachToWindowStation requires CSR thread and NtUserResolveDesktop; UserSoundSentry/LockCSSelectPalette require private USER services. NTSRV uses public Windows desktop/token resources, not private CSR/winsrv services. _ReleaseDC directly composes public ReleaseDC and is restored.",
+  "source_sha256": "40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d",
+  "errors_unchanged": true,
+  "state": "Cached full,publish11x2,compiler33 function anchors,focused37/task-order,Full20,boundary/governance PASS;remaining decisions pending owner",
+  "delivery": "batch-p253-checkpoint.json;Git accompanies receipt"
+}

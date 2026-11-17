@@ -34,13 +34,14 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2696 source-reviewed:1010 restored/confirmed delivered,0 local,52 approved/policy,
-1634 pending;24 unreviewed. Files358/365 verified;7 unaudited.
-P252 getset/help:297->243lines(-54),12->10blocks(-2).
-Three restored/confirmed points;eight residual owner-boundary points.
-Cached full,compiler4 lines,publish11x2,focused37/task-order,Full20,
-boundary/governance PASS. Current90197lines/4879blocks;cumulative reduction
-29716lines/418blocks versus audit baseline.
+2720 source-reviewed:1018 restored/confirmed delivered,0 local,52 approved/policy,
+1650 pending owner;0 unreviewed. Files365/365 verified;0 remaining in this pass.
+P253 final seven files:2061->1249lines(-812),66->54blocks(-12).
+Eight restored/confirmed points;sixteen residual owner-boundary points.
+Cached full,compiler33 function anchors,publish11x2,focused37/task-order,
+Full20,boundary/governance PASS. Current89385lines/4867blocks;cumulative
+reduction30528lines/430blocks versus audit baseline. This is file-pass
+completion,not owner-decision approval or S5/T closure.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -58,19 +59,20 @@ not a reproduced runtime race; it does not prove every capture helper necessary.
 P247 Git delivery:0490f544b. P248 userk.h R2658-R2666 verified/published;
 Git delivery accompanies receipt. Residual differences remain pending owner;
 verification does not approve their semantics or block-growth tradeoff.
-Owner order:remaining12 files/54 points,complete-unit restoration;
-prior-file fragmentation follow-up waits until this pass ends.
+Owner-ordered complete-unit file pass is finished. Previously recorded
+fragmentation and remaining owner decisions require their own next action.
 ntstubs experiment withdrawn;source equals delivered HEAD.
 [Fragment inventory](../../artifacts/mvdm-audit/t483-remaining-reaudit/p248-block-growth-followup.json).
 
 ## Current Technical Baseline
 
-P252 package `467d8433-a201-4b64-b28f-7cc590d3a36c` published11x2;hash verified.
-Original getset declarations and two complete help helpers restored.
-No new shim;native dialog/help ownership boundaries remain pending owner.
-Cached x86/x64,compiler4 lines,focused37/task-order,Full20,boundary/governance pass.
-Guest and winnt.zip unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p252-checkpoint.json).
-P251 Git:3d95a3395. P252 Git accompanies receipt;next R2697.
+P253 package `4fb73fd5-eafc-4e92-80bf-74cade34b1d9` published11x2;hash verified.
+Final seven-file whole-unit restoration and test closure integration delivered.
+No new production shim;residual boundaries remain pending owner.
+Cached x86/x64,compiler33 anchors,focused37/task-order,Full20 and governance pass.
+First Full version-negative1740 failed;separate isolated rerun passed.
+Guest and winnt.zip unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p253-checkpoint.json).
+P252 Git:5d6f81242. P253 Git accompanies receipt;ordered pass finished.
 
 ## Remaining Scope
 

@@ -1,0 +1,424 @@
+{
+  "batch": "P253",
+  "scope": "All seven remaining files R2697-R2720;owner-approved single combined delivery",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+        "sha256": "531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+        "sha256": "5cbde517fff979b223fee8942c5a5d5813d6d656aad35445c2d3ff5e397649e7"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+        "sha256": "9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+        "sha256": "5dda58b7aa4a49e83ac993525badf626c7fa7b124477054f731723c24bed2165"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+        "sha256": "ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+        "sha256": "0b36740a808be207287bde91dc90f3e0c42a3d82eb7e1f64ffaba085560311d6"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+        "sha256": "40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_text_measure_failure_fixture.c",
+        "sha256": "4d33e4606cdc74f4d95d6489e00a369c31024a3924b6ecb26477425658f4594a"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/edit-view/precomp.h",
+        "sha256": "f6c49396943ac2d084fb001f4a94665fe5834ebd5d3d496698d80493b69a7798"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "3813c45c45978d1113eb2173ffcff4774639ec6635bc172f52034b52a9dd9fb8"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c",
+        "sha256": "f29374f703d6c05554640389e7a6141053582e264182864844f0549d78fa7378"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_default_original_fixture.c",
+        "sha256": "4b4de0eeaad907decd6404cc62f0a9876aa4f936c8a93adf0aa3dd7c0a5410d1"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_edit_view_fixture.c",
+        "sha256": "c04c92520a6be3ceb6a9e7d321d11d666dce82ffcbaa1fe0301802acd84517a7"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c",
+        "sha256": "5fc77189f3167a9a9cde5236f4e2a205d5cb3c4afc33a2a6886e7bfc0152f13b"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_control_string_fixture.c",
+        "sha256": "00b96e839e350fd0552eb96cc1fbd0719b9028d7be9dce8e6dc42600db71cc8e"
+      }
+    ],
+    "source_files": 15,
+    "deleted": []
+  },
+  "publication": {
+    "status": "published",
+    "package": "4fb73fd5-eafc-4e92-80bf-74cade34b1d9",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+        "sha256": "531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b",
+        "compiler_observed": {
+          "RtlGetExpWinVer": [
+            28
+          ],
+          "FindCharPosition": [
+            80
+          ],
+          "TextCopy": [
+            108
+          ],
+          "wcsncpycch": [
+            146
+          ],
+          "strncpycch": [
+            184
+          ]
+        },
+        "header_note": "",
+        "matched_original_code_rows_checked": 55
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/rect.c",
+        "sha256": "5cbde517fff979b223fee8942c5a5d5813d6d656aad35445c2d3ff5e397649e7",
+        "compiler_observed": {
+          "CopyInflateRect": [
+            46
+          ],
+          "CopyOffsetRect": [
+            67
+          ]
+        },
+        "header_note": "",
+        "matched_original_code_rows_checked": 20
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+        "sha256": "9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c",
+        "compiler_observed": {
+          "PSMGetTextExtent": [
+            28
+          ]
+        },
+        "header_note": "",
+        "matched_original_code_rows_checked": 12
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+        "sha256": "5dda58b7aa4a49e83ac993525badf626c7fa7b124477054f731723c24bed2165",
+        "compiler_observed": {},
+        "header_note": "Header selected by actual help/default-borders preprocessing;original conditional/error structure retained",
+        "matched_original_code_rows_checked": 9
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+        "sha256": "ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3",
+        "compiler_observed": {
+          "_FChildVisible": [
+            258
+          ],
+          "_MapWindowPoints": [
+            280
+          ],
+          "GetRealClientRect": [
+            323
+          ],
+          "_GetLastActivePopup": [
+            390
+          ],
+          "GetTopLevelTiled": [
+            409
+          ],
+          "_IsDescendant": [
+            432
+          ],
+          "IsVisible": [
+            456
+          ],
+          "GetWindowBorders": [
+            501
+          ],
+          "SizeBoxHwnd": [
+            555
+          ],
+          "NeedsWindowEdge": [
+            613
+          ],
+          "GetTopLevelWindow": [
+            703
+          ]
+        },
+        "header_note": "",
+        "matched_original_code_rows_checked": 156
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+        "sha256": "0b36740a808be207287bde91dc90f3e0c42a3d82eb7e1f64ffaba085560311d6",
+        "compiler_observed": {
+          "MNLookUpItem": [
+            358
+          ],
+          "_GetMenuState": [
+            455
+          ],
+          "GetPrevPwnd": [
+            494
+          ],
+          "_GetWindow": [
+            531
+          ],
+          "_GetParent": [
+            618
+          ],
+          "_GetSubMenu": [
+            652
+          ],
+          "_IsChild": [
+            682
+          ],
+          "_IsWindowVisible": [
+            716
+          ],
+          "_ClientToScreen": [
+            749
+          ],
+          "_GetClientRect": [
+            769
+          ],
+          "_GetWindowRect": [
+            818
+          ],
+          "_ScreenToClient": [
+            836
+          ]
+        },
+        "header_note": "",
+        "matched_original_code_rows_checked": 191
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+        "sha256": "40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d",
+        "compiler_observed": {
+          "_UserTestTokenForInteractive": [
+            103
+          ],
+          "_ReleaseDC": [
+            170
+          ]
+        },
+        "header_note": "",
+        "matched_original_code_rows_checked": 37
+      }
+    ],
+    "scope": "Actual product preprocessing;function-name logical lines compared to pinned OpenNT. Not a claim of every comment line identity. Matched original code rows checked by source logical-line mapping;not claims about removed branch bodies."
+  },
+  "focused": {
+    "cases": 37,
+    "task_order": "PASS"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 403965,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3181,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1255,
+        "CleanupMs": 434,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11792,
+        "CleanupMs": 471,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 11865,
+        "CleanupMs": 490,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11445,
+        "CleanupMs": 542,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 227,
+        "CleanupMs": 499,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66017,
+        "CleanupMs": 455,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44324,
+        "CleanupMs": 464,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41465,
+        "CleanupMs": 453,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14235,
+        "CleanupMs": 511,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10546,
+        "CleanupMs": 443,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53390,
+        "CleanupMs": 499,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12495,
+        "CleanupMs": 518,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28318,
+        "CleanupMs": 557,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30518,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3917,
+        "CleanupMs": 499,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7598,
+        "CleanupMs": 478,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10133,
+        "CleanupMs": 529,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3821,
+        "CleanupMs": 405,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6223,
+        "CleanupMs": 441,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20272,
+        "CleanupMs": 484,
+        "Passed": true
+      }
+    ]
+  },
+  "mirror_diff": {
+    "before": {
+      "blocks": 66,
+      "lines": 2061
+    },
+    "after": {
+      "blocks": 54,
+      "lines": 1249
+    },
+    "blocks_reduced": 12,
+    "lines_reduced": 812
+  },
+  "global": {
+    "baseline": {
+      "added": 13333,
+      "deleted": 106580,
+      "total": 119913,
+      "blocks": 5297
+    },
+    "delivered": {
+      "added": 7297,
+      "deleted": 82900,
+      "total": 90197,
+      "blocks": 4879
+    },
+    "worktree": {
+      "added": 7272,
+      "deleted": 82113,
+      "total": 89385,
+      "blocks": 4867
+    }
+  },
+  "points": {
+    "restored_confirmed_this_batch": 8,
+    "pending_this_batch": 16,
+    "reviewed_total": 2720,
+    "restored_delivered": 1018,
+    "approved_policy": 52,
+    "pending": 1650,
+    "unreviewed": 0
+  },
+  "counter_review": "Original complete units restored;all7 original CRLF/error directives preserved;33 actual compiler function anchors checked;no product shim added;original-sized buffer overflow protection retained;test fixture boundaries abort on unexpected calls. Guest and winnt.zip unchanged.",
+  "limitations": [
+    "First Full failed at version-negative with owned server exit1740;isolated rerun evidence retained separately. No claim that the intermittent test endpoint issue was a product fix.",
+    "Existing owner decisions and previously registered fragmentation remain unresolved;finishing this file pass is not S5/T closure."
+  ],
+  "failed_attempts": [
+    "cached-rip-negative.log:original RIP macro conflicts with subsequent usercli error guard",
+    "focused-first-failure through focused-contract-failure:old fixture compile/link closure and non-original validation assertions;final37 cases passed without removing existing capacity coverage",
+    "full-first-failure/timings.json:version-negative1740;not counted as pass"
+  ],
+  "git": "Accompanying reviewed commit/push required"
+}

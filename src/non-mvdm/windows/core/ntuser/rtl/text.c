@@ -10,7 +10,9 @@
 * 11-20-90 DarrinM      Merged in User text APIs.
 * 02-07-91 DarrinM      Removed TextOut, ExtTextOut, and GetTextExtentPoint stubs.
 \***************************************************************************/
+
 #include "precomp.h"
+#line 15
 /***************************************************************************\
 * PSMGetTextExtent
 *
@@ -23,7 +25,6 @@
 * History:
 * 11-13-90  JimA        Ported.
 \***************************************************************************/
-#line 27
 
 BOOL PSMGetTextExtent(
     HDC hdc,
@@ -32,40 +33,28 @@ BOOL PSMGetTextExtent(
     PSIZE psize)
 {
     int result;
-    WCHAR szTemp[255];
+    WCHAR szTemp[255]; /* Strings w/prefix chars must be under 256 chars long.*/
     WCHAR *pchOut = szTemp;
+
+    if (cch >= (int)(sizeof(szTemp)/sizeof(WCHAR))) {
+        pchOut = (WCHAR *)UserRtlAllocMem(((SIZE_T)cch + 1) * sizeof(WCHAR));
+        if (!pchOut) return FALSE;
+    }
 #line 36
 
-    if (!psize || !lpstr || cch < 0 ||
-            (SIZE_T)cch > ((SIZE_T)-1) / sizeof(WCHAR) - 1) {
-        if (psize) psize->cx = psize->cy = 0;
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
-    }
-    if ((SIZE_T)cch >= sizeof(szTemp) / sizeof(WCHAR)) {
-        pchOut = (WCHAR *)UserRtlAllocMem(((SIZE_T)cch + 1) * sizeof(WCHAR));
-        if (!pchOut) {
-            psize->cx = psize->cy = 0;
-            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-            return FALSE;
-        }
-    }
-    __try {
-        result = HIWORD(GetPrefixCount(lpstr, cch, pchOut, cch));
-#line 38
+    result = HIWORD(GetPrefixCount(lpstr, cch, pchOut, cch));
 
-        if (!result)
-            UserGetTextExtentPointW(hdc, lpstr, cch, psize);
-        else
-            UserGetTextExtentPointW(hdc, pchOut, cch - result, psize);
-    } __finally {
-        DWORD error = GetLastError();
-        if (pchOut != szTemp) UserRtlFreeMem(pchOut);
-        SetLastError(error);
-    }
+    if (!result)
+        UserGetTextExtentPointW(hdc, lpstr, cch, psize);
+    else
+        UserGetTextExtentPointW(hdc, pchOut, cch - result, psize);
+
+    if (pchOut != szTemp) UserRtlFreeMem(pchOut);
+#line 43
+
+
     /*
      * IanJa everyone seems to ignore the ret val
      */
-#line 48
     return TRUE;
 }

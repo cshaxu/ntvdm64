@@ -2,6 +2,11 @@
 #include "wow_edit_call_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+/* Restored sibling traversal is outside this fixture; never fake success. */
+DWORD WINAPI GetAppCompatFlags(PWOW_CLIENT_THREADINFO thread)
+{ (void)thread; fputs("Unexpected GetAppCompatFlags boundary\n", stderr); abort(); }
 
 /* Actual original client/server bodies and adapter, with explicit lifetime
  * and color-service doubles. Not a real HWND/guest lifetime acceptance. */

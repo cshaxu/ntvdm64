@@ -3,6 +3,7 @@
 #include "wow_default_window_bindings.h"
 #include "wow_task_init_bindings.h"
 #include <stdio.h>
+#include "wow_edit_entry_bindings.h"
 PWND _GetNextDlgTabItem(PWND, PWND, BOOL);
 PWND _GetNextDlgGroupItem(PWND, PWND, BOOL);
 PWND _GetDlgItem(PWND, int);
@@ -15,6 +16,8 @@ DWORD WINAPI GetAppCompatFlags(PWOW_CLIENT_THREADINFO);
 static wow_task_client_info client;
 const wow_task_client_info *WINAPI wow_edit_client_info(void) { return &client; }
 static WND desktop, root, first, container, nested, disabled, last, outside;
+__declspec(thread) wow_edit_context *wow_edit_current;
+PWND WINAPI wow_window_client_desktop(void) { return &desktop; }
 static int failures;
 static DWORD root_help, first_help, container_help, desktop_help;
 static UINT first_code, last_code, style_writes;

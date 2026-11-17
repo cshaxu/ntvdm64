@@ -1,0 +1,24 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+  "points": "R2704-R2707",
+  "before": {
+    "blocks": 4,
+    "added": 28,
+    "deleted": 10,
+    "total": 38
+  },
+  "local": {
+    "blocks": 4,
+    "added": 11,
+    "deleted": 3,
+    "total": 14
+  },
+  "restored_units": [
+    "original measurement flow and return contract"
+  ],
+  "remaining_evidence": "GetPrefixCount writes a terminating WCHAR after copying count characters; original szTemp[255] and copy count255 write past end at length255. Keep size-aware allocation only. Remove speculative SEH and LastError preservation; original GDI measurement return contract restored. Existing 254/255/300 canary tests retained, artificial exception expectations removed.",
+  "source_sha256": "9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c",
+  "errors_unchanged": true,
+  "state": "Cached full,publish11x2,compiler33 function anchors,focused37/task-order,Full20,boundary/governance PASS;remaining decisions pending owner",
+  "delivery": "batch-p253-checkpoint.json;Git accompanies receipt"
+}

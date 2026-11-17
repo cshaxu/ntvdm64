@@ -1,0 +1,28 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+  "points": "R2711-R2714",
+  "before": {
+    "blocks": 13,
+    "added": 10,
+    "deleted": 528,
+    "total": 538
+  },
+  "local": {
+    "blocks": 6,
+    "added": 11,
+    "deleted": 301,
+    "total": 312
+  },
+  "restored_units": [
+    "_MapWindowPoints",
+    "GetRealClientRect",
+    "_GetLastActivePopup",
+    "GetTopLevelTiled",
+    "SizeBoxHwnd"
+  ],
+  "remaining_evidence": "Complete selected geometry and relationship helpers restored. FindNCHit depends on _HasCaptionIcon and private icon properties; existing native FindNCHit binding owns modern nonclient hit-testing. _HasCaptionIcon requires SERVERINFO atomIconSmProp/atomIconProp/hIconSmWindows/hIcoWindows and private GetProp/handle layout not represented by client geometry context. Separate existing default/edit geometry contexts retain existing owners; no copied implementation or shim added.",
+  "source_sha256": "ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3",
+  "errors_unchanged": true,
+  "state": "Cached full,publish11x2,compiler33 function anchors,focused37/task-order,Full20,boundary/governance PASS;remaining decisions pending owner",
+  "delivery": "batch-p253-checkpoint.json;Git accompanies receipt"
+}

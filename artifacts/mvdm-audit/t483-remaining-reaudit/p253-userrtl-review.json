@@ -1,0 +1,26 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+  "points": "R2708-R2710",
+  "before": {
+    "blocks": 17,
+    "added": 27,
+    "deleted": 204,
+    "total": 231
+  },
+  "local": {
+    "blocks": 17,
+    "added": 20,
+    "deleted": 129,
+    "total": 149
+  },
+  "restored_units": [
+    "public headers and typedef",
+    "unused original client declarations",
+    "original graphics macro cohort"
+  ],
+  "remaining_evidence": "Modern WND objects are process-local retained objects, not NT kernel desktop addresses. Keep pointer-preserving REBASE boundary. gpsi and gSharedInfo are explicit scoped context macros with different layouts (wow_default_window_bindings.h:44-45), incompatible with original PSERVERINFO/SHAREDINFO globals. Restored RIP_COMPONENT fails actual build at usercli.h:27 #error; cached-rip-negative.log. Original NLS prototypes produce C4273 DLL linkage mismatch with SDK declarations; retain SDK owner. Private ntgdistr/winuserp/winuserk/wowuserp/user closure is not a modern USER provider.",
+  "source_sha256": "5dda58b7aa4a49e83ac993525badf626c7fa7b124477054f731723c24bed2165",
+  "errors_unchanged": true,
+  "state": "Cached full,publish11x2,compiler33 function anchors,focused37/task-order,Full20,boundary/governance PASS;remaining decisions pending owner",
+  "delivery": "batch-p253-checkpoint.json;Git accompanies receipt"
+}

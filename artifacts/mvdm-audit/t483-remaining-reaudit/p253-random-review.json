@@ -1,0 +1,25 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+  "points": "R2697-R2700",
+  "before": {
+    "blocks": 4,
+    "added": 7,
+    "deleted": 99,
+    "total": 106
+  },
+  "local": {
+    "blocks": 1,
+    "added": 4,
+    "deleted": 0,
+    "total": 4
+  },
+  "restored_units": [
+    "RtlGetExpWinVer",
+    "strncpycch"
+  ],
+  "remaining_evidence": "Original code bodies restored completely. The standalone include supplies Windows and original LARGE_STRING layout; forced compat nt.h supplies RtlImageNtHeader. Original source has no standalone include. No new shim.",
+  "source_sha256": "531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b",
+  "errors_unchanged": true,
+  "state": "Cached full,publish11x2,compiler33 function anchors,focused37/task-order,Full20,boundary/governance PASS;remaining decisions pending owner",
+  "delivery": "batch-p253-checkpoint.json;Git accompanies receipt"
+}
