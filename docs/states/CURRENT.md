@@ -2,124 +2,78 @@
 
 ## Current Work
 
-**Active: M0 T483 S5 — remaining mirror differences, original-first re-audit.**
+**Active: M0 T483 S6 — descending non-error mirror difference reduction.**
 
-Owner supersedes the category-only continuation with one ordered re-audit of
-all remaining differences, including formerly retained items. S2–S4 and the
-completed P1/P2 items remain closed. Owner now authorizes S5 closure after P255 and immediate S6 admission.
-The [new worklist](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md)
-is the sole active audit order; the old D-register is historical evidence.
+Owner closes S5 after its final batch and admits S6. S5 delivery8c1c54aea is
+pushed;all required verification passed. T483 remains active. This is the owner
+superseding the earlier S6 hold,not admission of compat/component minimization.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T483 S5, Ordinary Mode; one agent, initial and counter-review passes. |
-| Admission And Approval | Owner authorizes remaining-diff re-audit in exact new-list order, direct original restoration, and exact original restoration; alternatives go to the pending decision backlog while ordered audit continues. |
-| Objective | For each remaining point prove why original restoration would fail in an actual supported context; restore original where appropriate, otherwise minimize necessary differences. |
-| Non-goals | Do not reopen completed points or deleted files; no guest edits/rebuild, unrelated compat audit, or automatic retention from old classifications. |
-| Reference Baseline | Source4cf4e5a35 / published3ac24c6a7 package; new R identifiers link old D records and pinned current file bytes. |
-| Files And ABI Surface | 2720 pending points across365 existing files;1052 live host C/H mirrors. Dependencies may be read without advancing later points. |
-| Applicable Rules | Source policy, mirror subset/line rules, original contracts, native boundary judgments and category plan. |
-| Verification | Original/current range and logical-line checks per changed file; applicable focused tests, cached full build, Full regression, publication hashes, governance and Git checks per batch. |
-| Expected Markers | Per-point current ranges, actual call/build context, concrete original-failure evidence, minimal option, original-relative diff delta, line proof and delivery status. |
-| Asset Needs | Existing pinned sources, build cache and maintained fixtures; preserve winnt.zip. |
-| Reporting Requirements | File start/end and point start/end reports: list position, path/IDs, original-relative diff scope/delta, dispositions, separate file/point counts and build/publication/test/commit/push state. |
-| Stop Conditions | If the proposed disposition preserves a diff unchanged or increases it, record the decision and continue; obtain owner approval before implementation. Unproved risk is not retention evidence. |
-| Exit Criteria | Every admitted remaining point has an owner-compliant evidenced disposition and applicable implementation/delivery; list initialization alone is not audit completion. |
-| Original Owner Request | Re-audit all remaining categories with presumption of original validity; exact list order; restore directly where justified; ask before unchanged or larger diff. |
-| Similar-Issue Sweep | Read coupled callers as evidence, finish each point in list order, and do not reopen previously completed points. Retire vanished points with byte/range proof. |
+| Identifier Mode | M0 T483 S6,Ordinary Mode;single agent,initial and counter-review passes. |
+| Admission And Approval | Owner:close S5 after current batch;admit S6,sort mirrors by remaining diff point count after excluding#error,largest first,and synchronize pending decisions. |
+| Objective | Reduce unnecessary original-relative difference blocks by restoring complete original units;keep changed-line count from growing without approval. |
+| Non-goals | No guest modification/rebuild,no#error-policy changes,no unrelated compat/component audit,no deletion of harmless original code to merge hunks. |
+| Reference Baseline | S5 commit8c1c54aeac9b97d020e86f5db50ca7d744aebd91;published package87c73097-d004-454e-925b-fea9a16f9552;pinned original sources. |
+| Files And ABI Surface | 1052 current host C/H plus9 previously audited text mirrors;255 nonzero files in initial conservative inventory;semantic changes require complete caller/provider review. |
+| Applicable Rules | Source policy,original-first execution rules,mirror subset/logical-line policy;modern USER ownership can be a valid boundary. |
+| Verification | Pair error-only bodies before counting;per-file source/ABI and#line proof;cached x86/x64,publish11x2,focused and Full gates,governance,commit,push for substantive batches. |
+| Expected Markers | Current file hash/origin,raw and filtered blocks/lines,precise restored units,remaining evidence and decisions,final artifact identities. |
+| Asset Needs | Existing pinned OpenNT sources,build caches and fixtures;no new guest assets or winnt.zip changes. |
+| Reporting Requirements | File/point start and end;blocks and lines before/after,cumulative reductions,file/point progress;distinguish classification,implementation,verification and delivery. |
+| Stop Conditions | Net mirror increase requires prior owner approval;unsupported necessity is investigation,not a pending choice. No unsafe masking or guessed original match. |
+| Exit Criteria | Every admitted file has a complete evidenced disposition,appropriate reductions and delivery;remaining owner decisions explicitly handed off,never silently approved. |
+| Original Owner Request | After this batch close S5 and admit a new S;sort mirror files by descending diff points excluding#error,reduce points file by file,and update pending decisions. |
+| Similar-Issue Sweep | Restore complete code/declaration units;avoid isolated comment islands and deleting harmless declarations;read coupled callers without jumping the worklist. |
 
-## S5 Progress
+## S6 Progress
 
-The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
-contains2720 points in365 files, with1052 live host C/H mirror files.
-2720 source-reviewed:1018 restored/confirmed delivered,0 local,52 approved/policy,
-1650 pending owner;0 unreviewed. Files365/365 verified;0 remaining in this pass.
-P253 final seven files:2061->1249lines(-812),66->54blocks(-12).
-Eight restored/confirmed points;sixteen residual owner-boundary points.
-Cached full,compiler33 function anchors,publish11x2,focused37/task-order,
-Full20,boundary/governance PASS. Current89379lines/4862blocks;cumulative
-reduction30534lines/435blocks versus audit baseline. This is file-pass
-completion,not owner-decision approval or S5/T closure.
+[Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
+1061 files inventoried;509 strict original-byte matches.806 files have zero
+normalized/error-masked differences;255 have nonzero counts. The initial2333
+block sum is conservative:75 mask-review cases in31 files remain counted.
+These are counting uncertainties,not permission to delete or retain code.
+Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
+S6 file implementation0/255;no S6 production edits yet.
 
-Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
-Point counts are not completed-file or reproduced-defect counts.
-
-Backlog requalification began at R0010. Prior cmdexec.c restorations and
-R0171 residual evidence are delivered/indexed in the ordered register.
-
-The [pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
-contains only unresolved portions of these points. All current entries have been requalified; historical speculation is not
-established necessity. A concrete
-source/ABI failure or observed failure is required for decision admission.
-The current concurrency evidence is a source-level eligible ordering counterexample,
-not a reproduced runtime race; it does not prove every capture helper necessary.
-
-P247 Git delivery:0490f544b. P248 userk.h R2658-R2666 verified/published;
-Git delivery accompanies receipt. Residual differences remain pending owner;
-verification does not approve their semantics or block-growth tradeoff.
-Owner-ordered complete-unit file pass is finished. Previously recorded
-fragmentation and remaining owner decisions require their own next action.
-ntstubs experiment withdrawn;source equals delivered HEAD.
-[Fragment inventory](../../artifacts/mvdm-audit/t483-remaining-reaudit/p248-block-growth-followup.json).
-[Current recheck](../../artifacts/mvdm-audit/t483-remaining-reaudit/p254-fragmentation-current-baseline.json):
-9 prior block-growth files remain,ordered by the existing R register;
-queue.c27->23blocks is resolved for this criterion and is not reopened.
-Evidence-only P254;production/package and P253 verification identities unchanged.
-Owner requests one final combined batch for the9 eligible files.
-[P255 follow-up](../../artifacts/mvdm-audit/t483-remaining-reaudit/p255-fragmentation-batch.json):
-all9 source-reviewed;three files restore6 original blank lines,5blocks removed.
-Nonempty source/logical lines and#error unchanged;cached/publish11x2,
-focused37/task-order and Full20 pass. Final governance/Git delivery pending.
-Residual owner decisions remain open and transfer to S6 after this delivery.
-[S5 closure](../etc/evidence/m0-t483-s5-closure.md) records the owner decision.
+S5's2720-point register is historical identity/evidence:1018 restored/confirmed
+and delivered,52 approved/policy,1650 pending owner. The
+[pending backlog](../../artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv)
+remains canonical.2333 counted blocks are not additional R identifiers.
+Complete each file,then update both register and backlog;recount and reorder
+unprocessed files when masks or differences change. Pure formatting may
+accumulate;substantive whole-file batches follow build,publish,test,commit,push.
 
 ## Current Technical Baseline
 
-P255 package `87c73097-d004-454e-925b-fea9a16f9552` published11x2;hash verified.
-Final seven-file whole-unit restoration and test closure integration delivered.
-No new production shim;residual boundaries remain pending owner.
-Cached x86/x64,compiler33 anchors,focused37/task-order,Full20 and governance pass.
-First Full version-negative1740 failed;separate isolated rerun passed.
-Guest and winnt.zip unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p253-checkpoint.json).
-P252 Git:5d6f81242. P253 Git:8345a60c4;ordered pass finished.
+S5 P255:11 images published/hash-verified to assets/release and O:/winnt/system32.
+Package87c73097-d004-454e-925b-fea9a16f9552. Cached x86/x64,focused37/task-order,
+Full20 (including actual NESticle menu/Escape),boundary143/negative9 and final
+governance/link checks passed. No guest or winnt.zip changes.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p255-checkpoint.json).
+S6 admission is documentation/evidence-only and reuses that exact publication.
+
+S5 fixed365-file raw metric:#error included,#line excluded,4862blocks/89379lines;
+cumulative reduction435blocks/30534lines. Do not compare this directly to the
+new1061-file error-body-masked census.
 
 ## Remaining Scope
 
-Functional recommendations and evidence gaps remain in the new register.
-Modern Windows API ownership can be the correct original closure boundary;
-original omissions alone do not justify restoring code. Subjective boundary
-choices require owner review. Compat and product-component minimization are
-later work under the
-[admitted T scope](../proposals/proposal-original-source-implementation-minimization-review-001.md).
-
-The DOS identity/wrong-waiter defect and Win95 exit-code boundary remain in
-[TODO](TODO.md). Win95 restart-to-DOS belongs to the
-[XP baseline-upgrade package](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md).
-
-The approved queue reorder and Win203 proposal were delivered in `0fbbe5768`;
-no queue changes remain pending in this batch.
+Owner decisions and concrete boundary choices transfer to S6,not approved by
+S5 closure. Broader compat/autonomous and eleven-component minimization remain
+later work in the admitted T. Existing DOS identity and Win95 exit-code debt
+stays in [TODO](TODO.md);restart-to-DOS belongs to the XP-baseline queue item.
+No T queue reorder.
 
 ## Recent M0 Closures
 
-- [T483 S4](../etc/evidence/m0-t483-s4-closure.md):prior minimization batch.
-- [T483 S5 closure record](../etc/evidence/m0-t483-s5-closure.md):P255 final delivery in progress;residual decisions transfer to S6 after push.
-
-Older P receipts remain indexed in the [S5 worklist](../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md);they are historical evidence,not the current packet.
+- [T483 S5](../etc/evidence/m0-t483-s5-closure.md):delivered8c1c54aea;residual decisions handed off.
+- [T483 S4](../etc/evidence/m0-t483-s4-closure.md):prior bounded minimization.
 
 ## Recent Governance
 
-See [execution rules](../rules/EXECUTION.md). P255 final delivery and owner-approved S5 closure precede the newly authorized S6 packet. No T queue reorder.
-
-## Current Owner Execution Rules
-
-Original validity is presumed. Require concrete full-call-chain evidence for
-retention;adapter dependencies alone are not proof. Synchronize main and pending
-registers;only full restoration retires a point. Report file/point progress,
-original-relative blocks and added+deleted lines,including cumulative reductions.
-Complete each file before substantive delivery;do not remove harmless original
-code or transfer complexity into shims to shrink counts. Preserve#error and
-logical lines. Owner overrides the batch cadence for P255:all9 files together,
-then cached build,publish,test,commit,push. S6 changes file order to descending
-non-error difference blocks;other evidence and approval rules persist.
+S6 is owner-admitted after S5's verified,pushed closure. Current stays below
+16KiB;older P details remain in the indexed S5 evidence. Follow
+[execution rules](../rules/EXECUTION.md) and [source policy](../etc/operations/policy/source-policy.md).

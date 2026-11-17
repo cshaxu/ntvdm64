@@ -28,7 +28,7 @@
   "restored_pending_delivery": 0,
   "batch_modified_implementation_files": 3,
   "batch_mirror_diff_delta": -6,
-  "execution_state": "active",
+  "execution_state": "closed-owner-directed-handoff-to-S6",
   "decision_policy": "queue required approvals in pending-decisions.csv and continue ordered review",
   "pending_decisions": 1650,
   "restored_verified_published": 1018,
@@ -38,7 +38,7 @@
   "backlog_entries_requiring_admission_review": 0,
   "qualified_pending_decisions": 1650,
   "pending_decisions_count_note": "1018 delivered;0 local;52 approved/policy;1650 pending;0 unreviewed",
-  "active_rework": "S5 closure delivery;S6 owner-authorized descending non-error diff-block worklist next",
+  "active_rework": "S6 owns descending non-error block reduction",
   "active_investigation": "None in P255;residual decisions explicitly transfer",
   "backlog_requalification_completed": 58,
   "batch_cadence": "Owner all9 fragmentation files in one build,publish,test,commit,push batch",
@@ -96,5 +96,7 @@
     "status": "P255 verified/published;Git accompanies receipt"
   },
   "verified_files": 365,
-  "source_reviewed": 2720
+  "source_reviewed": 2720,
+  "closure_commit": "8c1c54aeac9b97d020e86f5db50ca7d744aebd91",
+  "successor_worklist": "../t483-s6-diff-fragmentation/file-worklist.csv"
 }

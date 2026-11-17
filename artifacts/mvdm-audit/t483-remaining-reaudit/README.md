@@ -1,7 +1,7 @@
 # Remaining mirror differences: original-first re-audit
 
-[review-register.csv](review-register.csv) is the current ordered re-audit
-worklist. [progress.json](progress.json) records the baseline and counts;
+S5 closed at8c1c54aea;[S6 worklist](../t483-s6-diff-fragmentation/README.md) now owns file order.
+[review-register.csv](review-register.csv) retains completed-pass identities and evidence. [progress.json](progress.json) records the baseline and counts;
 [file-pins.json](file-pins.json) pins current file bytes;
 [excluded-records.json](excluded-records.json) prevents reopening completed
 work or counting deleted files as current mirrors. The old T483-D register and
