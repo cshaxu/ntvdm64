@@ -175,3 +175,7 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [clres whole-file candidate](clres-whole-file-review.json):31->30 non-error points,3352->2733 difference lines;full original units restored. P10 cached full running;not delivered. Byte-exact newres.h declaration recovery is separately recorded,not a mirror-diff reduction.
 
 [P10 receipt](batch-p10-checkpoint.json) and [evidence](p10-verification-evidence.zip):clres31->30 blocks,3352->2733 lines. Cached full,publish11x2,bitmap/focused/Full20 passed;final#line-only rebuild differs solely in PE timestamps.28 retained function compiler anchors match original. Residual decisions remain pending owner.
+
+[clmsg whole-file candidate](clmsg-whole-file-review.json):27->27 non-error blocks,1042->979 difference lines;two original functions and five macros restored. P11 cached full pending;not delivered.
+
+[P11 receipt](batch-p11-checkpoint.json) and [evidence](p11-verification-evidence.zip):clmsg27->27 blocks,1042->979 lines;cached full,publish11x2,focused and Full20 passed. Residual owner decisions remain pending.

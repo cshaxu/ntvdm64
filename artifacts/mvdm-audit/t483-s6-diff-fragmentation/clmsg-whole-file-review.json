@@ -1,0 +1,112 @@
+{
+  "packet": "T483 S6 P11",
+  "file": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "status": "Whole-file reviewed,implemented,verified and published;Git delivery accompanies receipt",
+  "before": {
+    "blocks": 27,
+    "added": 9,
+    "deleted": 1033
+  },
+  "after": {
+    "blocks": 27,
+    "added": 6,
+    "deleted": 973
+  },
+  "source_sha256": "7fd2fa3fad305c62465ba79557938dd0afe8bea3a26d233d771ceb4d525b70d4",
+  "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+  "excluded_bodies": 16,
+  "mask_issues": [],
+  "restored": [
+    "Four message thunk macros at original15-19",
+    "CCHCAPTIONMAX at1563",
+    "Complete _ClientGetListboxString at1315-1341",
+    "Complete fnKERNELONLY at1678-1701",
+    "Original #endif at451 and original whitespace"
+  ],
+  "binding": [
+    "Original usercli.h155 GENERICPROC declaration,only default-client context lacked it",
+    "Original winerrp.h131 Release RIPMSG0 definition;no evaluation or runtime state"
+  ],
+  "remaining_groups": [
+    {
+      "group": "Desktop/menu/scrollbar/title procedure workers and public wrappers",
+      "evidence": "Original FWINDOWMSG private message table;PSBWND/SBCalc layout;FNID_MENU and FNID_ICONTITLE services. wow_default_CsSendMessage explicitly accepts only FNID_DEFWINDOWPROC with extra0;modern USER32 owns actual native window classes. Restoring wrappers alone would bind to absent or semantically different provider."
+    },
+    {
+      "group": "SendMessageWorker/SendMessageTimeoutWorker/DispatchMessageWorker",
+      "evidence": "Original PTHREADINFO/PCLIENTINFO/PCLS and gapfnScSendMessage/FNID tables plus CALLPROC_WOWCHECKPWW and NtUserDispatchMessage. Previous actual full-original compile failures retained in p223 review. Native message dispatch and timeout scheduling belong to modern USER;no equivalent private object closure imported."
+    },
+    {
+      "group": "CallWindowProcAorW/A/W and MenuWindowProcA/W",
+      "evidence": "Original ISCPDTAG/HMValidateHandleNoRip/TYPE_CALLPROC/gabThunkMessage and CALLPROC_WOWCHECK;modern CPD translation in wow_user_registration_bridge call_previous_window_proc uses native CallWindowProc and existing tagged WOW callback. Original public API definitions also conflict with SDK dllimport. MenuWindowProc requires non-default FNID_MENU with extra HWND unavailable at default provider."
+    },
+    {
+      "group": "fnIN/OUTLBOXSTRING,fnIN/OUTCBOXSTRING,fnHDCDWORD,fnHRGNDWORD,fnHFONTDWORD,fnHFONTDWORDDWORD",
+      "evidence": "Require original fnDWORD/fnINSTRING/fnINSTRINGNULL/fnOUTSTRING/FIXUP_HANDLE service closure. Those thunks are original client/server marshal endpoints;native USER and GDI own modern handles and cross-process marshaling. Restored standalone callback and no-op diagnostic function do not require these providers."
+    },
+    {
+      "group": "GetMessageTime/GetMessageExtraInfo/SetMessageExtraInfo/InSendMessage",
+      "evidence": "Native SDK imported APIs and original private NtUserGetThreadState/UserThreadState plus NtUserCallOneParam;current task bindings call public USER APIs. Reintroducing definitions is not harmless declaration recovery."
+    },
+    {
+      "group": "Two composition guards",
+      "evidence": "default product context selects DefWindowProcWorker through default-specific gpsi/oemInfo/bindings;CPD context selects GetCPD through its original caller-provider fixture. Merging guards would mix incompatible source owners."
+    },
+    {
+      "group": "Post-WM_MOVE retirement guard",
+      "evidence": "Original NT4 object lifetime differs from copied host WND lifetime;WM_MOVE may destroy native window. Retained original field flags prevent subsequent WM_SIZE on retired/reused native HWND. Prior p223 source counterexample retained,not claimed native handle-reuse repro."
+    }
+  ],
+  "residual_decisions": [
+    "T483-R2175",
+    "T483-R2178"
+  ],
+  "verification": "P11 cached full,publish11x2,bitmap/message/DDE,control/task-order,Full20,shared boundary and governance passed;final source identity matches checkpoint",
+  "counter_review": {
+    "source_sha256": "7fd2fa3fad305c62465ba79557938dd0afe8bea3a26d233d771ceb4d525b70d4",
+    "error_bodies_unchanged": true,
+    "no_additional_runtime_provider": true,
+    "new_definitions": "GENERICPROC exact original usercli.h155;RIPMSG0 exact Release winerrp.h131",
+    "metrics": "27->27 blocks,1042->979 lines;no mirror increase",
+    "limits": "Residual native USER boundary and retirement guard remain owner decisions;not approved by restoration."
+  },
+  "compiler_lines": {
+    "expected": {
+      "DefWindowProcWorker": 555,
+      "_ClientGetListboxString": 1331,
+      "fnKERNELONLY": 1687,
+      "GetCPD": 1916
+    },
+    "contexts": {
+      "default": {
+        "function_anchors": {
+          "DefWindowProcWorker": [
+            555
+          ],
+          "_ClientGetListboxString": [
+            1331
+          ],
+          "fnKERNELONLY": [
+            1687
+          ]
+        },
+        "mismatches": {}
+      },
+      "cpd": {
+        "function_anchors": {
+          "_ClientGetListboxString": [
+            1331
+          ],
+          "fnKERNELONLY": [
+            1687
+          ],
+          "GetCPD": [
+            1916
+          ]
+        },
+        "mismatches": {}
+      }
+    },
+    "missing": []
+  }
+}

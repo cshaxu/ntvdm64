@@ -11,6 +11,13 @@
 #include "precomp.h"
 #pragma hdrstop
 
+
+#define fnINDESTROYCLIPBRD      fnDWORD
+#define fnOUTDWORDDWORD         fnDWORD
+
+#define MSGFN(func) fn ## func
+#define FNSCSENDMESSAGE CFNSCSENDMESSAGE
+
 #line 23
 #ifdef DEBUG
 #line 24
@@ -30,8 +37,6 @@
 #error Excluded unsupported original FE_IME branch
 #endif // FE_IME
 #line 331
-
-
 #line 331
 #ifdef FE_SB // SendMessageWorker()
 #line 332
@@ -68,7 +73,7 @@
 #line 447
 #endif // FE_SB
 #line 449
-#endif /* !LATER */
+#endif
 #line 452
 
 #line 453
@@ -115,6 +120,7 @@ LONG DefWindowProcWorker(
 #line 573
 #error Excluded unsupported original DEBUG default-window path
 #endif
+
 
 #line 580
     if (FDEFWINDOWMSG(message, DefWindowMsgs)) {
@@ -464,6 +470,36 @@ LONG DefWindowProcWorker(
 }
 #endif
 
+#line 1315
+/***************************************************************************\
+* _ClientGetListboxString
+*
+* This special function exists because LB_GETTEXT and CB_GETLBTEXT don't have
+* buffer counts in them anywhere. Because there is no buffer count we have
+* no idea how much room to reserved in the shared memory stack for this
+* string to be copied into. The solution is to get the string length ahead
+* of time, and send the message with this buffer length. Since this buffer
+* length isn't a part of the original message, this routine is used for
+* just this purpose.
+*
+* This routine gets called from the server.
+*
+* 04-13-91 ScottLu Created.
+\***************************************************************************/
+
+DWORD WINAPI _ClientGetListboxString(
+    PWND pwnd,
+    UINT msg,
+    DWORD wParam,
+    LPSTR lParam, // May be a unicode or ANSI string
+    DWORD xParam,
+    PROC xpfn)
+{
+    return ((GENERICPROC)xpfn)(pwnd, msg, wParam, (LPARAM)lParam, xParam);
+}
+
+#line 1563
+#define CCHCAPTIONMAX 80
 #line 1650
 #if 0
 #line 1651
@@ -471,7 +507,31 @@ LONG DefWindowProcWorker(
 #endif
 #line 1677
 
+#line 1678
 
+/******************************Public*Routine******************************\
+*
+*
+* History:
+* 15-Feb-1996 -by- Corneliu Lupu [clupu]
+* Wrote it.
+\**************************************************************************/
+
+LONG fnKERNELONLY(
+    HWND hwnd,
+    UINT msg,
+    DWORD wParam,
+    LONG lParam,
+    DWORD xParam,
+    DWORD xpfn,
+    BOOL bAnsi)
+{
+    RIPMSG0(RIP_WARNING,
+            "Message sent from client to kernel for a process "
+            "which has only kernel side\n" );
+
+    return 0L;
+}
 #line 1719
 #ifdef FE_SB // DispatchMessageWorker()
 #line 1720

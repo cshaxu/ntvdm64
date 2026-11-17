@@ -12,6 +12,8 @@
 
 /* Exact operands/types from pinned OpenNT user.h and winuserp.h. These
  * describe copied message data, not modern private resource structures. */
+#define RIPMSG0(flags, szFmt)
+typedef int (WINAPI *GENERICPROC)();
 #define GetChildParent(pwnd) (TestwndChild(pwnd) ? pwnd->spwndParent : NULL)
 #define DO_DROPFILE 0x454C4946L
 #define WFMAXIMIZED             0x0F01

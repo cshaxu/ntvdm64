@@ -31,13 +31,13 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-20/255 initial difference files reviewed;235 remain. Fifteen changed files
-verified across P2-P10;five reviewed unchanged. Current census:1062 files
+21/255 initial difference files reviewed;234 remain. Sixteen changed files
+verified across P2-P11;five reviewed unchanged. Current census:1062 files
 (1053 host C/H plus9 other text mirrors),510 original-byte matches,807 zero
 normalized/error-masked differences,and255 nonzero files. P10 adds one
 byte-exact original declaration header;it is not a reduced difference point.
-Current total2312 blocks/53815 lines;cumulative delivered reduction21 blocks/
-708 lines. Mouse's earlier two-line counting correction remains separate.
+Current total2312 blocks/53752 lines;cumulative delivered reduction21 blocks/
+771 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -61,33 +61,28 @@ Current total2312 blocks/53815 lines;cumulative delivered reduction21 blocks/
 | mouse_io.c |33->33|349->349|No edit;separate two-line counting correction|
 | wumsg.c |33->32|113->109|P9 single-use cleanup inlined;Full20 passed|
 | client/clres.c |31->30|3352->2733|P10 original complete units restored;Full20 and final equivalent build passed|
+| client/clmsg.c |27->27|1042->979|P11 two complete original functions and five macros restored;Full20 passed|
 
 
 The canonical pending backlog remains1644 rows/1649 historical R identifiers.
 Partial restorations do not close residual owner decisions. Historical R points
 are not the current zero-context difference block count. Do not repeat already
-completed file reviews. Next:ntuser/client/clmsg.c,27 non-error blocks.
+completed file reviews. Next:ntuser/kernel/userk.h,27 non-error blocks.
 
 ## Current Technical Baseline
 
-P10 cached x86/x64 full builds passed. Final package2420a098-829e-46cc-b913-a00c35630772
-contains11 images,published and hash-verified to assets/release and
-O:/winnt/system32. Bitmap/message/DDE,controls/task-order,Full20 (including
-actual NESticle menu/Escape),boundary143/9 and governance passed.
-A final sole#line correction restores GetBestImage's original3780 coordinate.
-Actual preprocessing verifies all28 retained function anchors. Four raw images
-are byte-identical to the tested build;seven differ only COFF/debug-directory
-timestamps. Owner-authorized equivalent-build evidence reuse avoids rerunning
-runtime tests. This is not a claim that final raw hashes are all identical.
-No guest or winnt.zip changes. Git delivery accompanies the P10 receipt.
+P11 cached x86/x64 full builds passed. Packagee01121ca-8682-4a96-8705-743ca5061054 contains11
+images,published and hash-verified to assets/release and O:/winnt/system32.
+Bitmap/message/DDE,controls/task-order,Full20 including real DOS4GW/NESticle,
+shared-boundary and governance passed. Final source identity matches the
+built/published/tested checkpoint. Four original function compiler anchors
+match;16 error bodies remain unchanged. No guest or winnt.zip changes.
 
-[P10 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p10-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p10-verification-evidence.zip)
-bind final source,line proof,package identity and actual tests.
-[Whole-file review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/clres-whole-file-review.json)
-records restored units and remaining decisions. Three additional resource-helper
-restorations would increase difference blocks and remain pending owner approval;
-no extra resource-provider path was introduced.
+[P11 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p11-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p11-verification-evidence.zip)
+bind source,package and tests. [Whole-file review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/clmsg-whole-file-review.json)
+records original units restored and residual owner decisions. Earlier receipts
+remain indexed in the worklist. Git delivery accompanies this receipt.
 
 ## Remaining Scope
 

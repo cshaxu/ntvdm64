@@ -1,0 +1,213 @@
+{
+  "packet": "M0 T483 S6 P11",
+  "status": "Verified and published;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "source_files": 2,
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+        "sha256": "7fd2fa3fad305c62465ba79557938dd0afe8bea3a26d233d771ceb4d525b70d4"
+      },
+      {
+        "path": "src/wow32-dll/include/control-client/default-precomp.h",
+        "sha256": "84678007ea48f3d0774138bf292c0f81e853c0445c869be8507e904d5ca0a5c9"
+      }
+    ],
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 63
+  },
+  "publication": {
+    "status": "published",
+    "package": "e01121ca-8682-4a96-8705-743ca5061054",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 404236,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6249,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1205,
+        "CleanupMs": 527,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 11788,
+        "CleanupMs": 535,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 11276,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 10275,
+        "CleanupMs": 612,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 178,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66177,
+        "CleanupMs": 443,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44848,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45234,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14724,
+        "CleanupMs": 492,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10074,
+        "CleanupMs": 411,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 45552,
+        "CleanupMs": 413,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12800,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28678,
+        "CleanupMs": 479,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31002,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3588,
+        "CleanupMs": 464,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8117,
+        "CleanupMs": 422,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9836,
+        "CleanupMs": 418,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4598,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7215,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20084,
+        "CleanupMs": 449,
+        "Passed": true
+      }
+    ]
+  },
+  "compiler_lines": {
+    "expected": {
+      "DefWindowProcWorker": 555,
+      "_ClientGetListboxString": 1331,
+      "fnKERNELONLY": 1687,
+      "GetCPD": 1916
+    },
+    "contexts": {
+      "default": {
+        "function_anchors": {
+          "DefWindowProcWorker": [
+            555
+          ],
+          "_ClientGetListboxString": [
+            1331
+          ],
+          "fnKERNELONLY": [
+            1687
+          ]
+        },
+        "mismatches": {}
+      },
+      "cpd": {
+        "function_anchors": {
+          "_ClientGetListboxString": [
+            1331
+          ],
+          "fnKERNELONLY": [
+            1687
+          ],
+          "GetCPD": [
+            1916
+          ]
+        },
+        "mismatches": {}
+      }
+    },
+    "missing": []
+  },
+  "global": {
+    "files": 1062,
+    "strict_equal": 510,
+    "filtered_zero": 807,
+    "nonzero_files": 255,
+    "blocks": 2312,
+    "lines": 53752,
+    "reviewed_files": 21,
+    "remaining_files": 234,
+    "cumulative_reduction_blocks": 21,
+    "cumulative_reduction_lines": 771
+  },
+  "winnt_zip_unchanged": true
+}
