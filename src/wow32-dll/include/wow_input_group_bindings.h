@@ -18,8 +18,11 @@ typedef struct wow_input_desktop {
 void WINAPI AddAttachment(wow_task_order_thread *, wow_task_order_queue *, LPBOOL);
 void WINAPI Recalc2(wow_task_order_queue *, wow_task_order_thread *);
 typedef wow_task_order_queue *PQ;
-typedef wow_task_order_thread THREADINFO, *PTHREADINFO;
+typedef wow_task_order_thread *PTHREADINFO;
+#ifndef WOW_ORIGINAL_CLEANUP
+typedef wow_task_order_thread THREADINFO;
 typedef wow_input_attachment *PATTACHINFO;
+#endif
 #define PtiCurrent() ptiCurrent
 #define gpai (ptiCurrent->rpdesk->attachments)
 #define DestroyQueue(queue, thread) (thread)->rpdesk->destroy_queue(queue,thread)

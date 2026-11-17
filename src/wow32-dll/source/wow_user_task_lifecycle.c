@@ -572,7 +572,7 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     RtlInitUnicodeString(&name, wide);
     __try {
         status = xxxInitTask(version, &name, task_id, hotkey, shared_id, x, y,
-            width, height, show, &task->thread);
+            width, height, show);
     } __finally {
         wow_input_group_release_plan(task->input_plan);
         task->input_plan = NULL;

@@ -34,13 +34,13 @@ is the sole active audit order; the old D-register is historical evidence.
 
 The [ordered register](../../artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv)
 contains2720 points in365 files, with1052 live host C/H mirror files.
-2657 reviewed:989 restored/confirmed delivered,0 local,52 approved/policy,
-1616 qualified pending;63 unreviewed. Files352/365 reviewed and verified;
-13 remain. P247 taskman.c:mirror95->45(-50),blocks32->17(-15).
-Six restored/confirmed points;six residual points pending owner.
-No excluded branches;597 original nonempty lines and8 compiler functions mapped.
+2666 source-reviewed:995 restored/confirmed verified/published,0 local,
+52 approved/policy,1619 pending;54 unreviewed. Files353/365 verified;
+12 unaudited. P248 userk.h:mirror5294->491(-4803),blocks13->67(+54).
+Queue:mirror4438->4426(-12),blocks28->23(-5). Six points restored/confirmed.
 Cached x86/x64,publish11x2,focused37/task-order,Full20,boundary/governance passed.
-Cumulative mirror119913->96662(-23251);next R2658 after Git delivery.
+Cumulative119913->91847(-28066),5297->4904blocks(-393).
+Versus P247:4815 fewer diff lines,49 more blocks;growth remains explicit pending.
 
 Prior batch receipts and their scope/limitations are indexed in the ordered worklist README. Approved synchronization remains R1797 revisit.
 Point counts are not completed-file or reproduced-defect counts.
@@ -55,15 +55,22 @@ source/ABI failure or observed failure is required for decision admission.
 The current concurrency evidence is a source-level eligible ordering counterexample,
 not a reproduced runtime race; it does not prove every capture helper necessary.
 
+P247 Git delivery:0490f544b. P248 userk.h R2658-R2666 verified/published;
+Git delivery accompanies receipt. Residual differences remain pending owner;
+verification does not approve their semantics or block-growth tradeoff.
+Owner order:remaining12 files/54 points,complete-unit restoration;
+prior-file fragmentation follow-up waits until this pass ends.
+ntstubs experiment withdrawn;source equals delivered HEAD.
+[Fragment inventory](../../artifacts/mvdm-audit/t483-remaining-reaudit/p248-block-growth-followup.json).
+
 ## Current Technical Baseline
 
-P247 package `cf66ae2a-e181-4bcd-8f8a-e2a2ebf0930d` published11x2;hashes verified.
-Original current lookup and four redundant scheduler conditions restored.
-Cached x86/x64,focused37/task-order,Full20 and governance passed.
-Final compiler lines verified;597 retained original nonempty lines checked.
-Guest/winnt.zip unchanged;cumulative mirror reduction23251.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p247-checkpoint.json).
-Git delivery accompanies receipt;R2658 next.
+P248 package `316fac6d-a205-489b-82d8-e6c8041bd2ea` published11x2;hashes verified.
+Cached x86/x64,compiler lines,focused37/task-order,Full20,boundary/governance pass.
+First focused build timed out;unchanged-source cached retry passed all assertions.
+Guest/winnt.zip unchanged. Whole-file source review is not owner approval of residuals.
+[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p248-checkpoint.json).
+Next ordered point R2667 after Git delivery.
 
 ## Remaining Scope
 
@@ -142,7 +149,7 @@ receipts retain source, line, publication and test evidence.
 
 P219 DOS4GW supplement is delegated by owner to a separate session. Current PIF and direct minimal-environment runs failed to reach graphics; retained diagnostics are not acceptance. Preserve its uncommitted test changes; this session does not debug that issue.
 
-P220 verified/published:client.c3664->3572(-92);four restored points,seven minimized residual decisions.163 source/76 selected lines,three bare errors;cached x86/x64,publish11x2,32 focused,Full19 and governance passed. Package 7fe90997-4dae-4832-858f-59c084d38d18. Cumulative365-file mirror diff119913->104579(-15334). DOS4GW debugging remains assigned to side session,not claimed repaired. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p220-checkpoint.json). NextR2161.
+P220 delivery receipt and scope remain indexed in the active audit README.
 
 ## Owner-priority regression repair after P221
 

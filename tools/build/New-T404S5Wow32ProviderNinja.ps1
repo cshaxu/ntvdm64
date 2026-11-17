@@ -382,6 +382,7 @@ $includeRoots = @(
     'src/mvdm-host/softpc.new/host/inc',
     'src/non-mvdm/public/sdk/inc',
     'src/non-mvdm/public/internal/base/inc',
+    'src/non-mvdm/windows/core/ntuser/inc',
     'src/non-mvdm/public/internal/windows/inc',
     'src/non-mvdm/public/internal/shell/inc',
     'src/non-mvdm/private/windows/inc',
@@ -632,6 +633,7 @@ $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-
   $handleFlagsObject = 'obj/opennt-user/handtabl.obj'
   $objects.Add($handleFlagsObject)
   $ninja.Add('build ' + $handleFlagsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/handtabl.c')))
+  $ninja.Add('  cflags = $cflags /FI "wow_user_client_view_layout.h"')
   $objects.Add($cleanupObject)
   $ninja.Add('build ' + $cleanupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/cleanup.c')))
 $objects.Add($probeObject)

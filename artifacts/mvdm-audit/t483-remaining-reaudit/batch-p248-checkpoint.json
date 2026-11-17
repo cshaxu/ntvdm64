@@ -1,0 +1,380 @@
+{
+  "batch": "P248",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/common/base_srv/base_client.h",
+        "sha256": "7706078e89c817d14d09a654a5e07f741aec5fdd2910b239b650eafd8d9f87e7"
+      },
+      {
+        "path": "src/compat/include/nt.h",
+        "sha256": "f8f0bcbe67038ea857ce943834414afef798da0dca79e5870edfd0ba72e523ac"
+      },
+      {
+        "path": "src/compat/include/winuserp.h",
+        "sha256": "165c278656fd98d48bb28a4c6300f36e14cf5b8b434b0582e6f21cc8bda086a2"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "sha256": "237dd8a0da335db734e72faa3c4d52a1bd91b9c970c01e5cc87db06f6fa72335"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01"
+      },
+      {
+        "path": "src/ntsrv-exe/opennt/include/base_server.h",
+        "sha256": "16d57d207012d17d0dc8c619a3398f744a6c604f3ad8084dad0d2732f6164dbe"
+      },
+      {
+        "path": "src/ntsrv-exe/opennt/include/service_internal.h",
+        "sha256": "82b605297f9a16c854688375c6942d12738240f829058ef01a96276f21706fed"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_cleanup_bindings.h",
+        "sha256": "f29899031731183b1c899d163d38314eab17d66247a58ef4e2320416f3e4e11f"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_input_group_bindings.h",
+        "sha256": "6e8fe391ec23741c504e739701a04bb94c15f5bb47104a97545752164326673e"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_task_init_bindings.h",
+        "sha256": "13be8161450b6d715252ffe6ac0edde31331d2f885ed49ce92016f02c14be7e6"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_task_order_bindings.h",
+        "sha256": "e611eca14b4ea942a188fe52865fecf50cb28851b0baadfb79d053fa4364c0a2"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+        "sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_init_allocation_fixture.c",
+        "sha256": "b702f3a220bc3e267507d6c8212ee7218e5fd03f8b404f6cf80323ac01b679ca"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c",
+        "sha256": "c57d0180b116fdb840a3107b4e0154341bf1bf47045f219c0ed777a77c56b987"
+      },
+      {
+        "path": "test/observation/wow_startup_failure_provider.c",
+        "sha256": "d3d901315b8a9d37b0bfa622c620930fcf50edee630d7be4be5a731cf09ce55a"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "7a9859dea565aee6081bb25feea597626a987101e74fe235df2c866cc4292621"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "5c5f7c84a5834b4719732aa37a741885680e790d5b32a9a4f5781031f72ec6ac"
+      },
+      {
+        "path": "src/compat/include/nt_event_declarations.h",
+        "sha256": "1bdfe032eb47f06e0cc0164ac9b2936227ec8968ef6152913a76dd61e1539d5c"
+      }
+    ],
+    "source_files": 18,
+    "deleted": [
+      "src/common/base_srv/base_event.h"
+    ]
+  },
+  "publication": {
+    "status": "published",
+    "package": "316fac6d-a205-489b-82d8-e6c8041bd2ea",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 429325,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 7047,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1310,
+        "CleanupMs": 467,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 18422,
+        "CleanupMs": 446,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 17858,
+        "CleanupMs": 406,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 14849,
+        "CleanupMs": 484,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 295,
+        "CleanupMs": 468,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66329,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44976,
+        "CleanupMs": 358,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 43306,
+        "CleanupMs": 340,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15251,
+        "CleanupMs": 325,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9855,
+        "CleanupMs": 317,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 53622,
+        "CleanupMs": 355,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12740,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28652,
+        "CleanupMs": 400,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31143,
+        "CleanupMs": 403,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3769,
+        "CleanupMs": 355,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8180,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10466,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3893,
+        "CleanupMs": 344,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7619,
+        "CleanupMs": 291,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20432,
+        "CleanupMs": 406,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "source_sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01",
+    "log": "build/t483-s5-p248/focused-linked-retry.log",
+    "exit": 0,
+    "cases": [
+      "wow_dialog_getset_fixture",
+      "wow_window_client_message_fixture",
+      "wow_dialog_creator_lifetime_fixture",
+      "wow_dialog_lifetime_fixture",
+      "wow_default_messages_fixture",
+      "wow_dialog_call_fixture",
+      "wow_edit_call_fixture",
+      "wow_edit_memory_callbacks_fixture",
+      "wow_control_brush_fixture",
+      "wow_default_window_binding_fixture",
+      "wow_dialog_context_fixture",
+      "wow_dialog_creation_entry_fixture",
+      "wow_dialog_finalization_fixture",
+      "wow_dialog_end_original_fixture",
+      "wow_dialog_keyboard_entry_fixture",
+      "wow_dialog_mnemonic_lifetime_fixture",
+      "wow_dialog_keyboard_lifetime_fixture",
+      "wow_control_string_fixture",
+      "wow_text_measure_failure_fixture",
+      "wow_mnemonic_drawing_fixture",
+      "wow_default_original_fixture",
+      "wow_button_drawing_fixture",
+      "wow_button_resources_fixture",
+      "wow_control_draw_state_fixture",
+      "wow_dialog_navigation_fixture",
+      "wow_edit_view_fixture",
+      "wow_button_lifetime_fixture",
+      "wow_button_dc_fixture",
+      "wow_dialog_native_owner_probe",
+      "wow_dialog_initialization_fixture",
+      "wow_task_profile_fixture",
+      "wow_task_profile_existing_fixture",
+      "wow_edit_lookaside_fixture",
+      "wow_edit_conversion_fixture",
+      "wow_def_window_bits_fixture",
+      "wow_original_dde_free_fixture",
+      "wow_user_capture_fixture"
+    ],
+    "task_order": "PASS",
+    "first_attempt": {
+      "log": "build/t483-s5-p248/focused-linked.log",
+      "result": "FAIL:300-second build deadline;no fixture pass claimed",
+      "build_log": "build/t483-s5-p248/focused-linked/build.stdout.log",
+      "observation": "Log reaches174/174;subsequent elevated process inventory found no remaining compiler/ninja children."
+    },
+    "retry": "Same source,existing cache,new evidence directory,same deadlines;build exit0 in0.493 seconds;all assertions retained.",
+    "full_status": "PASS20;identical11-file package"
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "sha256": "237dd8a0da335db734e72faa3c4d52a1bd91b9c970c01e5cc87db06f6fa72335"
+      }
+    ],
+    "compiler_observed": [
+      {
+        "context": "taskman",
+        "functions": {
+          "WakeWowTask": 30,
+          "InsertTask": 60,
+          "DestroyTask": 129,
+          "xxxSleepTask": 234,
+          "xxxUserYield": 518,
+          "DirectedScheduleTask": 575,
+          "xxxDirectedYield": 672,
+          "CurrentTaskLock": 728
+        },
+        "types": {
+          "} THREADINFO;": 2348,
+          "} PROCESSINFO;": 2413,
+          "} SMS;": 2615
+        }
+      },
+      {
+        "context": "queue",
+        "functions": {
+          "SetAppCompatFlags": 526,
+          "xxxInitTask": 658,
+          "_ShowStartGlass": 867
+        },
+        "types": {
+          "} THREADINFO;": 2348,
+          "} PROCESSINFO;": 2413,
+          "} SMS;": 2615
+        }
+      },
+      {
+        "context": "cleanup",
+        "functions": {},
+        "types": {
+          "} THREADINFO;": 2348,
+          "} PROCESSINFO;": 2413,
+          "} SMS;": 2615
+        }
+      },
+      {
+        "context": "handtabl",
+        "functions": {},
+        "types": {
+          "} THREADINFO;": 2348,
+          "} PROCESSINFO;": 2413,
+          "} SMS;": 2615
+        }
+      }
+    ]
+  },
+  "mirror_diff": {
+    "userk": {
+      "before_lines": 5294,
+      "after_lines": 491,
+      "delta_lines": -4803,
+      "before_blocks": 13,
+      "after_blocks": 67,
+      "delta_blocks": 54,
+      "error_bearing_blocks": 40,
+      "other_blocks": 27
+    },
+    "queue": {
+      "before_lines": 4438,
+      "after_lines": 4426,
+      "delta_lines": -12,
+      "before_blocks": 28,
+      "after_blocks": 23,
+      "delta_blocks": -5
+    }
+  },
+  "cumulative": {
+    "baseline": {
+      "added": 13333,
+      "deleted": 106580,
+      "total": 119913,
+      "blocks": 5297
+    },
+    "delivered": {
+      "added": 7466,
+      "deleted": 89196,
+      "total": 96662,
+      "blocks": 4855
+    },
+    "worktree": {
+      "added": 7357,
+      "deleted": 84490,
+      "blocks": 4904,
+      "total": 91847
+    }
+  },
+  "limitation": "Residual differences remain owner-pending;validation does not approve block growth or all retained semantics. No guest changes;winnt.zip unchanged.",
+  "git": "Accompanying commit/push required"
+}

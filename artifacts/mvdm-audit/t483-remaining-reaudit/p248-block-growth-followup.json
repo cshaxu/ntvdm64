@@ -1,0 +1,182 @@
+{
+  "scope": "Owner expressly requested revisit of prior files with increased text-block counts;no new T/S queue",
+  "files": [
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "evidence": "p248-userk-review.json",
+      "before": {
+        "added": 149,
+        "deleted": 5145,
+        "blocks": 13
+      },
+      "after": {
+        "added": 89,
+        "deleted": 2580,
+        "blocks": 464
+      },
+      "status": "Whole-file source review complete;cached build and focused validation passed;Full and Git delivery pending;block-growth disposition remains explicit.",
+      "superseded_intermediate_trial": {
+        "added": 53,
+        "deleted": 2228,
+        "blocks": 504
+      },
+      "current_local": {
+        "added": 47,
+        "deleted": 444,
+        "blocks": 67,
+        "total": 491
+      },
+      "current_sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "evidence": "p243-ntstubs-review.json",
+      "before": {
+        "blocks": 19,
+        "added": 324,
+        "deleted": 10251
+      },
+      "after": {
+        "blocks": 155,
+        "added": 127,
+        "deleted": 9887
+      },
+      "status": "Trial withdrawn;source equals delivered HEAD;no local restoration claimed.",
+      "superseded_intermediate_trial": {
+        "added": 185,
+        "deleted": 6932,
+        "text_blocks": 1722
+      },
+      "current_local": {
+        "added": 127,
+        "deleted": 9887,
+        "blocks": 155,
+        "total": 10014
+      },
+      "current_sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "evidence": "p243-input-review.json",
+      "before": {
+        "blocks": 25,
+        "added": 80,
+        "deleted": 5810
+      },
+      "after": {
+        "blocks": 49,
+        "added": 31,
+        "deleted": 5783
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "evidence": "p246-server-in-progress.json",
+      "before": {
+        "added": 46,
+        "deleted": 1912,
+        "blocks": 18
+      },
+      "after": {
+        "added": 20,
+        "deleted": 1669,
+        "blocks": 30
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "evidence": "p245-random-review.json",
+      "before": {
+        "added": 8,
+        "deleted": 388,
+        "blocks": 4
+      },
+      "after": {
+        "added": 3,
+        "deleted": 362,
+        "blocks": 7
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "evidence": "batch-p242-checkpoint.json",
+      "before": {
+        "blocks": 12,
+        "added": 28,
+        "deleted": 1412
+      },
+      "after": {
+        "blocks": 13,
+        "added": 17,
+        "deleted": 1377
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "evidence": "batch-p242-checkpoint.json",
+      "before": {
+        "blocks": 21,
+        "added": 36,
+        "deleted": 46
+      },
+      "after": {
+        "blocks": 22,
+        "added": 25,
+        "deleted": 43
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "evidence": "batch-p242-checkpoint.json",
+      "before": {
+        "blocks": 4,
+        "added": 17,
+        "deleted": 485
+      },
+      "after": {
+        "blocks": 5,
+        "added": 14,
+        "deleted": 484
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "evidence": "batch-p242-checkpoint.json",
+      "before": {
+        "blocks": 33,
+        "added": 83,
+        "deleted": 2086
+      },
+      "after": {
+        "blocks": 34,
+        "added": 81,
+        "deleted": 2085
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "evidence": "p244-queue-in-progress.json",
+      "before": {
+        "blocks": 27,
+        "added": 91,
+        "deleted": 4410
+      },
+      "after": {
+        "blocks": 28,
+        "added": 71,
+        "deleted": 4367
+      },
+      "status": "follow-up candidate;not yet re-audited"
+    }
+  ],
+  "counting": "These are previously reviewed files;do not increment original 365-file completion count twice",
+  "ntstubs_experiment_status": "Withdrawn;current source equals delivered HEAD:10014 changed lines,155 blocks. Historical experiment metrics are not current reductions.",
+  "owner_sequence": "Finish current userk.h and remaining ordered files first,using complete-unit restoration and both diff metrics immediately. Prior-file fragmentation sweep is a subsequent round;do not expand current pass by revisiting those files."
+}

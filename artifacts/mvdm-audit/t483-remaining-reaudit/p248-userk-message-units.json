@@ -1,0 +1,40 @@
+{
+  "point": "R2658",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "units": [
+    "MDICREATESTRUCTEX",
+    "CWPSTRUCTEX",
+    "CWPRETSTRUCTEX",
+    "INTRSENDMSGEX with complete ISM constants"
+  ],
+  "ranges": [
+    [
+      2572,
+      2588
+    ],
+    [
+      2635,
+      2655
+    ]
+  ],
+  "before": {
+    "added": 46,
+    "deleted": 2595,
+    "blocks": 267
+  },
+  "after": {
+    "added": 46,
+    "deleted": 2559,
+    "blocks": 267
+  },
+  "sha256": "14174d8648f0860aedc4965cfc7ccf62fb7e28f4465ef745105ff22187719285",
+  "evidence": [
+    "SDK WinUser.h declares MDICREATESTRUCT,tagCWPSTRUCT,LRESULT,SENDASYNCPROC;winternl.h declares UNICODE_STRING",
+    "tagSMS is referenced by pointer only;no new private layout dependency",
+    "Only other INTRSENDMSGEX declaration is standalone wow_reply_contract_fixture.c;runner includes generated original_reply_body.inc,not userk.h",
+    "Product MSVC flags do not select /Za;original anonymous member syntax retained for final compiler validation"
+  ],
+  "limitation": "No compilation/runtime claim;whole-file review still incomplete",
+  "line_check": "38 restored original rows at original logical lines;40 bare errors unchanged",
+  "metric_result": "Blocks unchanged267;changed lines2641->2605 (-36);no register point retirement"
+}

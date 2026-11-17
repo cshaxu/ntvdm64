@@ -1,0 +1,34 @@
+{
+  "point": "R2658",
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "complete_groups": "Original allocation TAG constants,SMF and MSGFLAG constants,and selected PMAP_LAST branch completed",
+  "restored_rows": [
+    1158,
+    1169,
+    1171,
+    1176,
+    2619,
+    2622,
+    2624,
+    2634,
+    5027
+  ],
+  "evidence": [
+    "taskman.c439/queue.c210,277 pass TAG tokens to adapter macros that discard pool tags;current tokens had no definitions and cannot be evaluated in this path",
+    "SMF_SENDERDIED/CB_REQUEST/CB_CLIENT duplicate definitions only in standalone reply fixture,which never includes userk.h",
+    "MSGFLAG_SPECIAL_THUNK exact duplicate of original client/usercli.h97",
+    "PMAP_LAST selected FE_SB false branch equals original highest KBDLAYOUTTOGGLE index36;profile assertions previously compiled out"
+  ],
+  "before": {
+    "added": 46,
+    "deleted": 2559,
+    "blocks": 267
+  },
+  "after": {
+    "added": 46,
+    "deleted": 2550,
+    "blocks": 258
+  },
+  "sha256": "c9af6143586c9ce8461915215fda37a81addc362114ce9785dfd0ae4faa59095",
+  "verification": "Source/caller proof only;no build or publication;physical order and40 errors retained"
+}

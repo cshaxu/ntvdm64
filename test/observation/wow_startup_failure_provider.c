@@ -36,15 +36,15 @@ static PVOID WINAPI startup_allocate(SIZE_T bytes)
     return HeapAlloc(GetProcessHeap(), 0, bytes);
 }
 
-#undef UserAllocPoolWithQuota
-#define UserAllocPoolWithQuota(bytes, tag) startup_allocate(bytes)
+#undef ExAllocatePoolWithQuota
+#define ExAllocatePoolWithQuota(pool, bytes) startup_allocate(bytes)
 #define xxxInitTask diagnostic_original_InitTask
 #include "../../src/non-mvdm/windows/core/ntuser/kernel/queue.c"
 #undef xxxInitTask
 
 NTSTATUS WINAPI xxxInitTask(UINT version, PUNICODE_STRING name, DWORD task,
     DWORD hotkey, DWORD id, DWORD x, DWORD y, DWORD width, DWORD height,
-    WORD unused, wow_task_order_thread *thread)
+    WORD unused)
 {
     static const WCHAR selected[] = L"GENPROBE";
     unsigned saved = failing_allocation;
@@ -57,7 +57,7 @@ NTSTATUS WINAPI xxxInitTask(UINT version, PUNICODE_STRING name, DWORD task,
     if (failing_allocation) startup_identity(task);
     __try {
         result = diagnostic_original_InitTask(version, name, task, hotkey, id,
-            x, y, width, height, unused, thread);
+            x, y, width, height, unused);
     } __finally {
         failing_allocation = saved;
     }

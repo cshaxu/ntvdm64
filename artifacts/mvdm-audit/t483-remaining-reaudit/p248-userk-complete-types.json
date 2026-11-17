@@ -1,0 +1,49 @@
+{
+  "point_scope": "R2658/R2666 partial file audit, not final disposition",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/kernel/userk.h",
+  "before_sha256": "e1811345f39aa38264fc6bb078862686074eda0628e6077e9bb241a44bfc0f21",
+  "after_sha256": "cd113a66b499de0f290d20cb1935f9a8027d2bcb5f98379f57b85d1bfb043e6a",
+  "before": {
+    "added": 46,
+    "deleted": 2549,
+    "total": 2595,
+    "blocks": 257
+  },
+  "after": {
+    "added": 46,
+    "deleted": 2469,
+    "total": 2515,
+    "blocks": 255
+  },
+  "units": [
+    {
+      "name": "USER heap layouts",
+      "first": 1182,
+      "last": 1212
+    },
+    {
+      "name": "CLIP",
+      "first": 2014,
+      "last": 2018
+    },
+    {
+      "name": "MOVESIZEDATA",
+      "first": 2080,
+      "last": 2102
+    },
+    {
+      "name": "SPB",
+      "first": 2533,
+      "last": 2541
+    },
+    {
+      "name": "BROADCASTMSG",
+      "first": 2692,
+      "last": 2703
+    }
+  ],
+  "evidence": "Complete original declarations; public scalar/Win32 types, self pointers, or incomplete struct tagWND pointer. No matching autonomous definitions/references found. PSPB existing forward pointer in original user.h has identical tag. No executable bodies or new private layout consumers.",
+  "validation": "Source-only. Whole-file cached build/test remains pending; no claim of compiled compatibility.",
+  "excluded_branch_count": 40,
+  "original_logical_rows_verified": 80
+}

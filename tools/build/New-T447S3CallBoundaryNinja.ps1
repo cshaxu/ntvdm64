@@ -195,6 +195,7 @@ foreach ($unit in $units) {
 }
 $includes = @('src', 'src/wow32-dll/include', 'src/ntvdm-exe/wow/include',
     'src/ntvdm-exe/softpc/include', 'src/compat/include',
+    'src/non-mvdm/windows/core/ntuser/inc',
     'src/non-mvdm/public/internal/windows/inc',
     'src/non-mvdm/public/internal/ds/inc',
     'src/non-mvdm/public/sdk/inc') | ForEach-Object {

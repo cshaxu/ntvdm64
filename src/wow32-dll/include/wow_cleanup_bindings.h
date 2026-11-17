@@ -53,18 +53,25 @@ void WINAPI wow_cleanup_set_window_procedure(wow_cleanup_context *,
 void WINAPI wow_cleanup_set_class_procedure(wow_class_lookup_entry *, WNDPROC);
 
 #ifdef WOW_ORIGINAL_CLEANUP
+typedef wow_task_order_process *PPROCESSINFO;
+typedef wow_task_order_message *PSMS;
+typedef wow_task_order_entry *PTDB;
 #define WOW_USER_OBJECT_FLAGS_ONLY
 #include "non-mvdm/windows/core/ntuser/kernel/userk.h"
 #undef WOW_USER_OBJECT_FLAGS_ONLY
-typedef wow_cleanup_window *PWND;
-typedef wow_class_lookup_entry *PCLS, **PPCLS;
-typedef wow_task_order_process *PPROCESSINFO;
-typedef wow_cleanup_handle *PHE;
-typedef wow_cleanup_process_object *PPROCOBJHEAD;
-typedef WNDPROC WNDPROC_PWND;
-#undef PtiCurrent
-#define PtiCurrent() (context->thread)
-#define PpiCurrent() (context->thread->ppi)
+typedef wow_cleanup_window *wow_cleanup_pwnd;
+#define PWND wow_cleanup_pwnd
+typedef wow_class_lookup_entry *wow_cleanup_pcls, **wow_cleanup_ppcls;
+#define PPCLS wow_cleanup_ppcls
+#define PCLS wow_cleanup_pcls
+typedef wow_cleanup_handle *wow_cleanup_phe;
+#define PHE wow_cleanup_phe
+typedef wow_cleanup_process_object *wow_cleanup_pprocobjhead;
+#define PPROCOBJHEAD wow_cleanup_pprocobjhead
+#define WNDPROC_PWND WNDPROC
+#undef gptiCurrent
+#define gptiCurrent (context->thread)
+#define W32GetCurrentProcess() (context->thread->ppi)
 #define pclsPrivateList classes->pclsPrivateList
 #define pclsPublicList classes->pclsPublicList
 #define pclsNext next
@@ -80,8 +87,8 @@ typedef WNDPROC WNDPROC_PWND;
 #define HANDLEF_DESTROY 0x01
 #define DestroyClass(link) context->destroy_class(context,link)
 #define HMDestroyUnlockedObject(handle) context->destroy_object(context,handle)
-#define UserAllocPoolWithQuota(size, tag) context->allocate(size)
-#define UserFreePool(memory) context->release(memory)
+#define ExAllocatePoolWithQuota(pool, size) context->allocate(size)
+#define ExFreePool(memory) context->release(memory)
 #define RIPMSG0(level, message) ((void)0)
 #define RIPMSG1(level, message, arg) ((void)0)
 #define try __try

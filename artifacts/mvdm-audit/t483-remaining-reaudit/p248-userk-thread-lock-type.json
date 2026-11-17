@@ -1,0 +1,31 @@
+{
+  "scope": "R2658/R2666 complete selected TL structure",
+  "original_rows": [
+    1532,
+    1533,
+    1534,
+    1539
+  ],
+  "before": {
+    "added": 46,
+    "deleted": 2456,
+    "total": 2502,
+    "blocks": 245
+  },
+  "after": {
+    "added": 46,
+    "deleted": 2452,
+    "total": 2498,
+    "blocks": 243
+  },
+  "before_sha256": "8af9895f13e02781f1afc8e31a1f8fd2345bbc36bebe01199360cc83ebaedda9",
+  "after_sha256": "0f0f88ebb8aee5f51b403f5f69a177d9306030d798ed2a53a320ec0d6d0eef8e",
+  "evidence": [
+    "Selected TL has self pointer and PVOID only; original DEBUG members remain #error.",
+    "Original user.h PTL forward declaration uses the same _TL tag.",
+    "Different client usercli TL and WOW_ORIGINAL_CONTROL_BRUSH macro are not in taskman/queue/handtabl/cleanup userk include chains."
+  ],
+  "validation": "Source-only;whole-file compilation pending",
+  "error_count": 40,
+  "logical_rows_verified": 4
+}

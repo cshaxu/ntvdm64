@@ -1,0 +1,107 @@
+{
+  "scope": "R2658/R2666 complete macro units;whole file open",
+  "before": {
+    "added": 46,
+    "deleted": 2452,
+    "total": 2498,
+    "blocks": 243
+  },
+  "after": {
+    "added": 46,
+    "deleted": 2364,
+    "total": 2410,
+    "blocks": 230
+  },
+  "before_sha256": "0f0f88ebb8aee5f51b403f5f69a177d9306030d798ed2a53a320ec0d6d0eef8e",
+  "after_sha256": "84f7aa44c2fe94d8b07f4bc3607b7136ffdf53bf4aba733cf6419bf76d5190f0",
+  "units": [
+    {
+      "name": "GetClientInfo",
+      "first": 121,
+      "last": 121
+    },
+    {
+      "name": "CheckLock retail",
+      "first": 793,
+      "last": 793
+    },
+    {
+      "name": "TRACE_INIT retail",
+      "first": 844,
+      "last": 844
+    },
+    {
+      "name": "TRACE retail",
+      "first": 846,
+      "last": 846
+    },
+    {
+      "name": "RevalidateHwnd",
+      "first": 879,
+      "last": 879
+    },
+    {
+      "name": "TID",
+      "first": 883,
+      "last": 883
+    },
+    {
+      "name": "assignment Lock/Unlock",
+      "first": 890,
+      "last": 891
+    },
+    {
+      "name": "ThreadLock retail",
+      "first": 896,
+      "last": 908
+    },
+    {
+      "name": "ThreadLockAlways retail",
+      "first": 918,
+      "last": 928
+    },
+    {
+      "name": "ThreadLockAlwaysWithPti retail",
+      "first": 939,
+      "last": 945
+    },
+    {
+      "name": "ThreadLockWithPti retail",
+      "first": 955,
+      "last": 963
+    },
+    {
+      "name": "ThreadUnlock retail",
+      "first": 970,
+      "last": 970
+    },
+    {
+      "name": "class and size validation",
+      "first": 1326,
+      "last": 1360
+    },
+    {
+      "name": "display dimensions",
+      "first": 2004,
+      "last": 2005
+    },
+    {
+      "name": "DCC",
+      "first": 2482,
+      "last": 2482
+    },
+    {
+      "name": "DCCACHE",
+      "first": 2488,
+      "last": 2488
+    }
+  ],
+  "logical_rows_verified": 88,
+  "error_count": 40,
+  "evidence": [
+    "Exact-name search corrects previous prefix matching that confused ThreadLock with ThreadLockPool and TRACE with TRACE_SWITCH.",
+    "Actual userk consumers: taskman, queue, handtabl, cleanup via cleanup bindings. Source and included binding headers have no calls or conflicting macro definitions for restored names.",
+    "Macro bodies remain original token sequences; no dependency implementation or call added. DEBUG/DBG exclusions unchanged."
+  ],
+  "validation": "Source-only;whole-file cached build and tests pending"
+}

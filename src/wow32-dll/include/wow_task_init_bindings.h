@@ -25,18 +25,17 @@ typedef struct wow_task_init_ops {
         LPCWSTR key, LPCWSTR fallback, LPWSTR output, DWORD capacity);
 } wow_task_init_ops;
 NTSTATUS WINAPI xxxInitTask(UINT, PUNICODE_STRING, DWORD, DWORD, DWORD,
-    DWORD, DWORD, DWORD, DWORD, WORD, wow_task_order_thread *);
+    DWORD, DWORD, DWORD, DWORD, WORD);
 void WINAPI SetAppCompatFlags(wow_task_order_thread *);
-void WINAPI _ShowStartGlass(DWORD, wow_task_order_process *);
+void WINAPI _ShowStartGlass(DWORD);
 
 #ifdef WOW_ORIGINAL_TASK_ORDER
 typedef wow_task_order_entry TDB;
-typedef wow_task_order_process *PW32PROCESS;
 #undef gpsi
 #define gpwtiFirst (ppi->shared->pwtiFirst)
 #define gppiStarting (ppi->shared->ppiStarting)
 #define gfAllowForegroundActivate (ppi->shared->allowForegroundActivate)
-#define UserAllocPoolWithQuota(bytes, tag) HeapAlloc(GetProcessHeap(),0,bytes)
+#define ExAllocatePoolWithQuota(pool, bytes) HeapAlloc(GetProcessHeap(),0,bytes)
 #define W32PF_APPSTARTING 0x00000040
 #define W32PF_HAVECOMPATFLAGS 0x00000080
 #define W32PF_ALLOWFOREGROUNDACTIVATE 0x00000100

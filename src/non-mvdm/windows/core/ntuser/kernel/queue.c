@@ -187,9 +187,7 @@ NTSTATUS xxxInitTask(
     DWORD dwY,
     DWORD dwXSize,
     DWORD dwYSize,
-    WORD  wUnusedAndAvailable,
-#line 668
-    PTHREADINFO currentThread)
+    WORD  wUnusedAndAvailable)
 {
     PTHREADINFO pti;
     PTDB ptdb;
@@ -198,7 +196,7 @@ NTSTATUS xxxInitTask(
 
     UNREFERENCED_PARAMETER(wUnusedAndAvailable);
 
-    pti = currentThread;
+    pti = PtiCurrent();
     ppi = pti->ppi;
 
     /*
@@ -374,7 +372,7 @@ NTSTATUS xxxInitTask(
     /*
      * ensure app gets focus
      */
-    _ShowStartGlass(10000, ppi);
+    _ShowStartGlass(10000);
 
     return STATUS_SUCCESS;
 }
@@ -389,9 +387,7 @@ NTSTATUS xxxInitTask(
 \***************************************************************************/
 
 void _ShowStartGlass(
-    DWORD dwTimeout,
-#line 868
-    PPROCESSINFO currentProcess)
+    DWORD dwTimeout)
 {
     PPROCESSINFO ppi;
 
@@ -401,7 +397,7 @@ void _ShowStartGlass(
      * info - we don't want to set it again because it may have been
      * purposefully cleared when the user hit a key or mouse clicked.
      */
-    ppi = currentProcess;
+    ppi = PtiCurrent()->ppi;
     if (ppi->W32PF_Flags & W32PF_SHOWSTARTGLASSCALLED) {
         /*
          * Allow this wow app to come to the foreground. This'll be cancelled

@@ -10,7 +10,7 @@
 #include "non-mvdm/base/win32/inc/basemsg.h"
 #include "non-mvdm/base/win32/inc/basevdm.h"
 #include <vdmapi.h>
-#include <base_event.h>
+#include <nt_event_declarations.h>
 #ifndef STATUS_PORT_DISCONNECTED
 #define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
 #endif

@@ -1099,21 +1099,21 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 
 - [P148 counter-review](p148-counter-review.json):source freeze,ownership boundaries and synchronized pending residuals;all gates passed.
 
-- [R1661â€“R1665](r1661-r1665-wmsgem-review.json): Edit converter whole-file review;comment/line-only diff-4,141 retained lines;P149 full delivery verified.
+- [R1661Ã¢â‚¬â€œR1665](r1661-r1665-wmsgem-review.json): Edit converter whole-file review;comment/line-only diff-4,141 retained lines;P149 full delivery verified.
 
-- [R1666â€“R1669](r1666-r1669-wmsglb-review.json): ListBox full-file review;comments-only diff-3;original consumer and line evidence,P149 delivered.
+- [R1666Ã¢â‚¬â€œR1669](r1666-r1669-wmsglb-review.json): ListBox full-file review;comments-only diff-3;original consumer and line evidence,P149 delivered.
 
 - [R1670](r1670-wmsgsbm-review.json): whole-file original selected code and line identity;no source edits.
 
 - [R1671](r1671-wmtbl32-review.json): whole-file original selected code and line identity;no source edits.
 
-- [R1672â€“R1686](r1672-r1686-wole2-review.json): whole-file OLE alias reduction97->42;native evidence and original line proof;P149 gates passed.
+- [R1672Ã¢â‚¬â€œR1686](r1672-r1686-wole2-review.json): whole-file OLE alias reduction97->42;native evidence and original line proof;P149 gates passed.
 
 - [P149 checkpoint](batch-p149-checkpoint.json) and [line proof](batch-p149-line-check.json): frozen whole-file batch,all delivery gates passed.
 
 - [P149 counter-review](p149-counter-review.json): source freeze,original contracts,ownership and ordered-register reconciliation.
 
-- [R1687â€“R1708](r1687-r1708-wow32-review.json): complete wow32.c dispositions,net mirror diff-37;[line proof](batch-p150-line-check.json). P150 full delivery verified.
+- [R1687Ã¢â‚¬â€œR1708](r1687-r1708-wow32-review.json): complete wow32.c dispositions,net mirror diff-37;[line proof](batch-p150-line-check.json). P150 full delivery verified.
 
 - [P150 receipt](batch-p150-checkpoint.json) and [counter-review](p150-counter-review.json): cached build,publish11x2,focused andFull19 passed.
 
@@ -1121,13 +1121,13 @@ P146 final gates passed:cached x86/x64,publish11x2,focused controls,isolated Ful
 
 - [R1710 wow32.h](r1710-wow32-header-review.json):25 approved exclusion blocks only;102 selected original logical lines match actual MSVC preprocessing;no source change.227/365 files;1710/2720 points,1010 remain.
 
-- [R1711â€“R1720 fax investigation](r1711-r1720-fax-investigation.json): original/current/minimized exact-function contrasts;candidate diff41->30,not applied or delivered;full-file line/binding review remains.
+- [R1711Ã¢â‚¬â€œR1720 fax investigation](r1711-r1720-fax-investigation.json): original/current/minimized exact-function contrasts;candidate diff41->30,not applied or delivered;full-file line/binding review remains.
 
-- [R1711â€“R1720 complete source review](r1711-r1720-fax-review.json):mirror41->30(-11),698 logical lines match;3 local restorations,7 minimized/necessary residuals;P151 delivery pending.
+- [R1711Ã¢â‚¬â€œR1720 complete source review](r1711-r1720-fax-review.json):mirror41->30(-11),698 logical lines match;3 local restorations,7 minimized/necessary residuals;P151 delivery pending.
 
 - [P151 receipt](batch-p151-checkpoint.json):cached full,publish11x2,final fax135,Full19/shared boundary/governance passed;mirror diff net-11;Git accompanies receipt.
 
-- [R1721â€“R1764 hook investigation](r1721-r1764-hook-investigation.json):fixed baseline and complete diff;actual wrapper/scheduler chain and fixture limitations;not a completed disposition.
+- [R1721Ã¢â‚¬â€œR1764 hook investigation](r1721-r1764-hook-investigation.json):fixed baseline and complete diff;actual wrapper/scheduler chain and fixture limitations;not a completed disposition.
 
 - [P152 line proof](batch-p152-line-check.json) and [delivery checkpoint](batch-p152-checkpoint.json):wowhooks mirror151->125;1048 original selected lines match;cached/full delivery pending.
 
@@ -1159,9 +1159,9 @@ P155 failed-run follow-up: [TaskLoss callback boundary](p155-taskloss-stack-revi
 
 - [P155 final receipt](batch-p155-checkpoint.json):mirror net-59;cached,publish11x2,focused353,five Win16 modes,Full19 passed. Approved completion synchronization retained for revisit.
 
-- [R1799–R1800 whole-file review](r1799-r1800-wsext-review.json):comments restored;mirror19->8;residual decisions retained.
+- [R1799â€“R1800 whole-file review](r1799-r1800-wsext-review.json):comments restored;mirror19->8;residual decisions retained.
 
-- [R1801–R1809 whole-file review](r1801-r1809-wspool-review.json):original GetPrn16 restored;mirror17->6;three proven residuals remain pending.
+- [R1801â€“R1809 whole-file review](r1801-r1809-wspool-review.json):original GetPrn16 restored;mirror17->6;three proven residuals remain pending.
 
 - [P156 receipt](batch-p156-checkpoint.json) and [line proof](batch-p156-line-check.json):mirror-22;cached,publish11x2,focused72,raw-spool witness,Full19 passed.
 
@@ -1412,7 +1412,7 @@ P233 [lboxrare review](p233-lboxrare-review.json): original HeapFree BOOL counte
 ### P238 whole-file audit
 
 - [Source/ABI and real compile-link controls](p238-wow-investigation.json).
-- [Final local subset and line review](p238-wow-review.json): client/wow.c, R2427–R2436, mirror1059→1046(−13); delivery verified below.
+- [Final local subset and line review](p238-wow-review.json): client/wow.c, R2427â€“R2436, mirror1059â†’1046(âˆ’13); delivery verified below.
 
 - [P238 delivery](batch-p238-checkpoint.json): wow.c selected original subset restored;cached,publish11x2,focused34,Full20;fixed mirror metric1059->1046(-13).
 
@@ -1473,3 +1473,193 @@ P246 server.c: [review](p246-server-in-progress.json), [delivery](batch-p246-che
 - P247 [taskman.c review](p247-taskman-review.json): ordered source audit and original restoration in progress;not delivered.
 
 P247 taskman.c: [review](p247-taskman-review.json), [delivery](batch-p247-checkpoint.json);mirror diff reduced50,lexical blocks reduced15;six residual points pending owner.
+
+P248 userk.h ordered source review: [working evidence](p248-userk-review.json);not verified or delivered.
+
+Owner-requested text-block growth follow-up: [candidate inventory](p248-block-growth-followup.json).
+[ntstubs format experiment](p248-ntstubs-format-review.json) was rejected and
+withdrawn:source is byte-identical to delivered HEAD;the claimed2897-line
+local reduction is withdrawn. P248 whole-file gate remains.
+
+P248 [remaining declaration inventory](p248-userk-declarations.json): prior
+missing-type classification withdrawn where based solely on expanded identifier
+absence;69 complete original declarations restored with logical-line checks.
+Whole-file audit, compilation and delivery remain incomplete.
+
+[Fragmentation review](p248-fragmentation-review.json) records the rejected
+pre-withdrawal candidates, not current source metrics. The ntstubs withdrawal
+is authoritative in its experiment record.
+
+[P248 global count](p248-global-diff-count.json): all365 fixed re-audit files
+recomputed from pinned originals and Git baseline/HEAD/current bytes.
+Blocks5297->4855 delivered->5099 local;changed lines119913->96662->93963.
+The current userk candidate still adds244 blocks over delivered HEAD;
+it is not accepted for delivery. Register2720 IDs are a separate measure.
+
+[Userk isolated-format withdrawal](p248-userk-island-withdrawal.json): rejected
+logical-line sorting candidate never applied;physical-order withdrawal preserves
+code tokens and errors. Current267 blocks/2641 changed lines;whole file unfinished.
+
+[Complete message data units](p248-userk-message-units.json): four original
+structures and ISM flags restored;38 logical rows checked;blocks267 unchanged,
+changed lines2641->2605. Final whole-file compile remains outstanding.
+
+[Completed constant groups](p248-userk-constant-groups.json): nine unjustified
+omissions restored in allocation/message/profile constant groups;diff blocks
+267->258 and changed lines2605->2596. Source evidence,not final build validation.
+
+[Original critical-section assertion group](p248-userk-critical-check.json):
+restore empty release CheckCritIn and remove scheduler duplicate;mirror -1line,
+-1block,autonomous -1line. Final whole-file validation remains pending.
+
+[Complete original type units](p248-userk-complete-types.json): five units,80 original rows restored and logical lines checked;userk2595->2515,blocks257->255. Whole file remains open;source-only,not compiled or delivered. Global current93963->93883,blocks5099->5097;2720 register points unchanged.
+
+[Public declaration units](p248-userk-public-units.json) and [selected TL structure](p248-userk-thread-lock-type.json):17 original rows restored with logical-line proof,40 #error retained;userk2515->2498,blocks255->243. Source-only;file audit and final build remain outstanding. Global current93866 lines/5085 blocks;delivered totals unchanged.
+
+[Complete macro groups](p248-userk-macro-units.json):88 original rows restored,40 #error retained;userk2498->2410,blocks243->230. Exact-name matching corrected prefix confusion. Source-only;no batch build. Current global93778 lines/5072 blocks;delivered baseline unchanged.
+
+P248 public constants/type follow-up is recorded in [current review](p248-userk-review.json):17 original rows restored,HEVENT duplicate removed from binding;userk2410->2393,blocks230->229,40 #error unchanged. Source-only. Current global93761 lines/5071 blocks;no new completed file or delivered point.
+
+P248 [whole-file source line check](p248-userk-review.json):corrected two assignment-line offsets by moving existing #line;2365 retained original nonempty rows now match,including repeated text. Six added hook/guard rows listed;105 original conditional directives match after excluded-body normalization;all40 excluded bodies contain only #error and optional #line. No semantic or measured diff change;actual compiler verification remains pending.
+
+P248 [pool macro recovery](p248-userk-review.json):restored original quota allocation/free macros;existing native bindings and two fault-injection providers now bind ExAllocatePoolWithQuota/ExFreePool without new functions or state. Mirror2393->2390,blocks229->227;2368 original nonempty source rows mapped. Source-only;allocation failure tests and delivery pending.
+
+P248 [current-owner macro recovery](p248-userk-review.json):restored original PpiCurrent/PtiCurrent;existing TLS/context expressions bind W32GetCurrentProcess/gptiCurrent with no new state/functions. Mirror2390->2387,blocks227->225;2371 original nonempty source rows mapped. Global93755 lines/5067 blocks. Source-only;whole file remains open.
+
+P248 [public prototype group](p248-userk-review.json):ten declaration/macro units plus their five original separators restored;mirror2387->2372,blocks225 unchanged. Rejected un-applied formatting candidate would have made226 blocks.2381 original nonempty rows map correctly;40 errors unchanged. Source-only;current global93740 lines/5067 blocks.
+
+P248 [retained macro groups](p248-userk-review.json):restored original abs and Atom macro units;no actual binding changes. Mirror2372->2360,blocks225->224;current file5294->2360(-2934),13->224blocks(+211),still open. Global93728lines/5066blocks across fixed365 files. Source logical-line check passes;40 excluded errors unchanged. No compilation/publication/test/commit/push yet.
+
+P248 [header/process macro group](p248-userk-review.json):original68-73,108-109 restored as complete units;SDK include dependency already present,no new shim or runtime call. Mirror2360->2352,blocks224 unchanged;global93720lines/5066blocks. Whole file still open;source-line check only,delivery pending.
+
+P248 [accelerator/exit declarations](p248-userk-review.json):kernel/client signature suspicion resolved by actual separate inclusion contexts;both original kernel declarations and ClientExitProcess restored. Mirror2352->2349,blocks224 unchanged;global93717lines/5066blocks.2401 original rows map correctly,40 errors retained. Source-only,current file open.
+
+P248 [dependent declarations](p248-userk-review.json):SharedAlloc,xxxDrawDragRect,FreeCopyHandle restored;actual local header closure has no binding conflict. Mirror2349->2346,blocks224 unchanged;global93714lines/5066blocks.2404 source rows map,40 errors retained. Whole file open;delivery pending.
+
+P248 [shared header/type units](p248-userk-review.json):original user.h and winuserp includes restored,product/fixture include paths updated;complete CLIPDATA and selected CAPTIONCACHE restored without new shim. Corrected earlier winuserp restoration statement:previous range stopped at winuser.h. Mirror2346->2330,blocks224 unchanged;global93698lines/5066blocks. Source mapping verified;no compilation yet.
+
+P248 [whole deletion blocks](p248-userk-review.json):10 complete declaration deletion blocks removed;mirror2330->2306,blocks224->214. No71-unit fragmented candidate applied. Source mapping/error-body integrity verified;current file and delivery remain open.
+
+P248 [whole type/comment blocks](p248-userk-review.json):SYSCFGICO,CREATESTRUCTEX and2 complete section descriptions restored;mirror2306->2273,blocks214->210. Original source mapping and40 errors verified;no build/runtime verification yet.
+
+P248 latest local checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): five complete message/menu/cursor/title declaration blocks restored in this pass,122->117 blocks and1663->1585 changed lines (-5/-78),without new compatibility code. File against delivered baseline:13->117 blocks (+104),5294->1585 lines (-3709);still unfinished,not an accepted final result. Fixed365-file census:4959 blocks/92953 changed lines,down338 blocks/26960 lines from audit baseline.3080 nonempty original rows mapped;40 error-only excluded bodies unchanged. Source-only;whole-file completion precedes build,publish,test,commit,push. Delivered totals remain352/365 files and2657/2720 points.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): message-thunk,window and listbox declaration groups restored;this pass117->111 blocks and1585->1485 changed lines (-6/-100). Existing winuserp declaration boundary gains original opaque PSMS outside the task-order binding;no runtime provider/layout added. File baseline13->111 blocks (+98),5294->1485 lines (-3809),still open. Fixed365-file total4953 blocks/92853 lines (-344/-27060 versus audit baseline).3175 original nonempty rows mapped;40 error-only bodies unchanged. No build,publish,test,commit or push yet;delivered totals unchanged.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): keyboard layout types and associated declarations restored,111->106 blocks and1485->1446 changed lines (-5/-39). Original tagKbdLayer pointer declaration added to existing winuserp boundary;no keyboard implementation imported. File baseline13->106 blocks (+93),5294->1446 lines (-3848),still incomplete. Fixed365-file total4948 blocks/92814 lines (-349/-27099 versus audit baseline).3209 original nonempty rows mapped;40 error-only bodies unchanged. Updated full current-file lexical block inventory is evidence,not completed disposition. No build,publish,test,commit,push;delivered counts unchanged.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): seven whole desktop/keyboard/broadcast/task-window declaration deletions restored,106->99 blocks and1446->1413 lines (-7/-33),no added compatibility code. File baseline13->99 blocks (+86),5294->1413 lines (-3881);whole file still open. Fixed365-file total4941 blocks/92781 lines (-356/-27132 versus audit baseline).3239 original nonempty rows mapped;40 excluded error bodies unchanged. Current inventory:40 error-bearing and59 other lexical blocks. SMS and original-layout dependency findings recorded as investigation,not approved retention. No build,publish,test,commit,push;delivered counts unchanged.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): restored two whole scroll/window declaration blocks;99->97 blocks,1413->1385 lines (-2/-28). Three original opaque pointer declarations added to existing boundary;cleanup name mappings verified to follow userk include. File baseline13->97 blocks (+84),5294->1385 lines (-3909). Fixed365-file total4939 blocks/92753 lines (-358/-27160 versus audit baseline).3266 original nonempty rows mapped;40 error-only bodies unchanged;57 non-error lexical blocks remain. Source-only;whole file and delivery incomplete.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): restored two class API declaration blocks after proving registration/removal adapters use separate class.c inclusion contexts.97->95 blocks,1385->1370 lines (-2/-15);no new compatibility code. File baseline13->95 blocks (+82),5294->1370 lines (-3924). Fixed365-file total4937 blocks/92738 lines (-360/-27175 versus audit baseline).3281 original nonempty rows mapped;40 error bodies unchanged;55 non-error blocks remain. Source-only;whole file and delivery incomplete.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): original ProcessKeyEvent declaration restored using original tagKE pointer only.95->94 blocks,1370->1366 lines (-1/-4). File baseline13->94 blocks (+81),5294->1366 lines (-3928). Fixed365-file total4936 blocks/92734 lines (-361/-27179 versus audit baseline).3285 original nonempty rows mapped;40 error bodies unchanged;54 non-error blocks remain. Source-only;whole-file review and delivery pending.
+
+P248 [lock declaration boundary](p248-userk-review.json#lock_declaration_boundary_review): traced original kernel gpresUser ownership to selected host SRW domain and verified the two prototype/macro conflicts. Added partial pending decision for original3281/3284 with include-order alternative;no wrapper or source change. This does not complete R2658/R2666 or the file. Metrics unchanged94 blocks/1366 lines locally,4936/92734 across365 files;build and delivery pending.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): restored two device declaration blocks with original HDEV and opaque resource-lock declarations.94->92 blocks,1366->1338 lines (-2/-28). Existing nt_event.c and wow32.h include nt.h before winuserp.h;userk products force nt.h. No kernel resource layout or provider imported. File baseline13->92 blocks (+79),5294->1338 lines (-3956). Fixed365-file total4934 blocks/92706 lines (-363/-27207 versus audit baseline).3307 original nonempty rows mapped;40 excluded error bodies unchanged;52 non-error blocks remain. Source-only;whole-file review and all delivery actions pending.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): complete DESKTOP,WINDOWSTATION/DESKTOPTHREADINIT and selected POPUPMENU restored with existing dependencies;92->90 blocks,1338->1162 lines (-2/-176),no new compatibility code. Adjacent by-value WND types remain separate unresolved dependencies. File baseline13->90 blocks (+77),5294->1162 lines (-4132). Fixed365-file total4932 blocks/92530 lines (-365/-27383 versus audit baseline).3459 original nonempty rows mapped;40 error bodies unchanged;50 non-error blocks remain. Source-only;whole-file review,build,publication,tests,commit and push pending.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): MENUSTATE and related whole declaration blocks restored as one group,90->88 blocks and1162->1068 lines (-2/-94). Original enumeration callback declaration added to existing boundary;no new menu runtime. File baseline13->88 blocks (+75),5294->1068 lines (-4226). Fixed365-file total4930 blocks/92436 lines (-367/-27477 versus audit baseline).3547 original nonempty rows mapped;40 error bodies unchanged;48 non-error blocks remain. Source-only;whole-file review and all delivery actions pending.
+
+P248 latest source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): restored complete units adjoining retained binding omissions,1068->1015 changed lines (-53),88 blocks unchanged. Includes HOOKMSGSTRUCT,three independent menu inline functions and whole declarations;no new compatibility code. Receive-macro backlog now records restored declaration and only remaining two-line macro omission. File baseline13->88 blocks (+75),5294->1015 lines (-4279). Fixed365-file total4930 blocks/92383 lines (-367/-27530 versus audit baseline).3593 original nonempty rows mapped;40 error bodies unchanged;48 non-error blocks remain. Compiler/link behavior including unused inline emission remains unverified;whole-file review precedes all delivery actions.
+
+P248 source checkpoint ([review](p248-userk-review.json), [census](p248-global-diff-count.json)): paint/property declaration block and profile array declaration restored;88->86 blocks,1015->984 changed lines (-2/-31). Exact original profile constants added to existing private-header boundary;no new runtime. File baseline13->86 blocks (+73),5294->984 lines (-4310). Fixed365-file total4928 blocks/92352 lines (-369/-27561 versus audit baseline).3623 original nonempty rows mapped;40 error-bearing/46 other blocks. Source-only;whole-file review and build,publish,test,commit,push pending.
+
+P248 declaration batch ([review](p248-userk-review.json)): eight boundary ranges restore complete message/window/paint/DDE prototypes without new compatibility declarations;86->86 blocks,984->937 lines. 3667 original nonempty rows mapped;40 error bodies unchanged. Source-only;whole-file audit and all delivery pending.
+
+P248 query/DDE declaration checkpoint ([review](p248-userk-review.json)): three whole omissions restored,86->83 blocks and937->917 lines (-3/-20). Two exact original private USER enums and two opaque DDE tag pointers supplied in the existing declaration boundary;no runtime implementation. File13->83 blocks (+70),5294->917 lines (-4377). Fixed365-file total4925 blocks/92285 lines (-372/-27628 versus audit baseline). Logical original rows checked;40 error bodies unchanged. Source-only;current file remains open and build/publication/test/commit/push pending.
+
+P248 object callback/accelerator checkpoint ([review](p248-userk-review.json)): restore53 original declaration lines,83->81 blocks and917->864 lines. Exact original enum and opaque pointers supplied in existing NT/USER boundaries;no object-manager implementation. File13->81 blocks (+68),5294->864 lines (-4430). Fixed365-file total4923 blocks/92232 lines (-374/-27681 versus audit baseline). Source/logical-line proof only;40 error bodies unchanged. CURRENT five mojibake dashes repaired to UTF-8;not mirror reduction. Whole-file audit and build,publish,test,commit,push pending.
+
+P248 scheduler boundary counter-review ([evidence](p248-userk-review.json#scheduler_boundary_counterreview)): two partial source-proven cases admitted to pending,CheckForClientDeath and IsHooked. Separates needed responsibility,original private-owner gap and specific binding placement;no claim that current omission is the only possible implementation. APC not admitted. Mirror metrics unchanged81 blocks/864 lines;no build or delivery and no additional completed file/register point.
+
+P248 APC boundary review ([evidence](p248-userk-review.json#apc_boundary_review)): trace native alertable wait to STATUS_USER_APC and current terminal provider,contrasted with original kernel/client callback. Partial integration-contract decision recorded;no observed product APC failure or equivalence claim. Existing scheduler fixture does not supply real queued-APC coverage. Source unchanged81 blocks/864 lines;current file remains open;no build/delivery or completed-point increment.
+
+P248 desktop-view group ([review](p248-userk-review.json)): complete DESKTOPVIEW and related declarations restored together;81->80 blocks,864->855 lines (-1/-9). Existing cleanup process typedef moved before userk;flags-only consumer gains original opaque process pointer under existing branch. No new selector/runtime. File13->80 blocks (+67),5294->855 lines (-4439);fixed365-file total4922/92223 (-375 blocks/-27690 lines versus audit baseline).40 error bodies unchanged;source/logical-line evidence only. Whole-file audit and all delivery pending.
+
+P248 switch-info restoration ([review](p248-userk-review.json)): complete26-line PHWND/SWITCHWNDINFO unit restored,no compatibility addition.80 blocks unchanged,855->829 lines. Only separate4-line SWITCHWND still depends on by-value WND. File13->80 blocks (+67),5294->829 lines (-4465);fixed365-file total4922/92197 (-375 blocks/-27716 lines versus audit baseline).40 error bodies unchanged;source/logical-line only. Whole-file audit and delivery pending.
+
+P248 existing-layout reuse ([review](p248-userk-review.json)): five whole type gaps restored using existing checked original client layout header;80->75 blocks,829->779 lines (-5/-50). No copied layout or relaxed assertions;selected binding includes and handtabl forced include updated,cleanup two pointer aliases separated after original declarations. File13->75 blocks (+62),5294->779 lines (-4515);fixed365-file total4917/92147 (-380 blocks/-27766 lines versus audit baseline).40 error bodies unchanged. Source-only candidate;whole-file audit and final include/ABI/build/test/delivery pending.
+
+P248 DDE complete-type restoration ([review](p248-userk-review.json)): full32-line type group restored;75->74 blocks,779->747 lines. Existing original object layout reused;exact security context declaration and opaque DDE-info pointer added without provider or runtime. File13->74 blocks (+61),5294->747 lines (-4547);fixed365-file total4916/92115 (-381 blocks/-27798 lines versus audit baseline).40 error bodies unchanged;source-only,whole-file audit and final compilation/delivery pending.
+
+P248 DCE whole-unit restoration ([review](p248-userk-review.json)):55 original lines restored with no added compatibility code;74 blocks unchanged,747->692 lines. DCE has no dependency on adjacent omitted PROCESSINFO layout. File13->74 blocks (+61),5294->692 lines (-4602);fixed365-file total4916/92060 (-381 blocks/-27853 lines versus audit baseline).40 error bodies unchanged;source/logical-line proof only. Whole-file audit and final build,publish,test,commit,push pending.
+
+P248 handle-entry declaration ([review](p248-userk-review.json)): entire5-line omission restored,74->73 blocks and692->687 lines. Original opaque PHE and cleanup-local host alias separated without new provider/table. File13->73 blocks (+60),5294->687 lines (-4607);fixed365-file total4915/92055 (-382 blocks/-27858 lines versus audit baseline).40 error bodies unchanged;source-only,whole-file build and delivery pending.
+
+P248 scheduler declaration group ([review](p248-userk-review.json)): four original prototypes and associated comment restored,73 blocks unchanged,687->678 lines (-9). Cleanup PSMS now matches its existing host declaration context;standalone opaque context unchanged. No message state added. Unguarded wowuserp include partial boundary registered separately. File13->73 blocks (+60),5294->678 lines (-4616);fixed365-file total4915/92046 (-382 blocks/-27867 lines).40 error bodies unchanged;source-only and all delivery pending.
+
+P248 source checkpoint: complete ATTACHINFO restoration (2200-2208),
+73->72 blocks and678->669 difference lines. Cleanup has no PATTACHINFO use;
+existing input alias remains outside cleanup. Original logical lines checked;
+whole-file build/publication pending.
+
+P248 source checkpoint: restored original cleanup/InsertTask declarations
+3964-3977;72 blocks unchanged,669->655 difference lines. xxxSleepTask signature
+remains separate. Source mapping checked;whole-file build pending.
+
+P248 coupled correction: [initialization current-binding proof](p248-init-current-restoration.json)
+disproves P244 R2623/R2626 guest-publication rationale. Original InitTask and
+ShowStartGlass contracts restored locally;removed both pending rows and marked
+local-awaiting-verification in main register. queue28->23 blocks,4438->4426
+difference lines;userk72 blocks,655->650. No whole-file build yet.
+
+P248 source checkpoint: original kernel-entry declaration group3179-3188
+restored;userk72->71 blocks and650->640 difference lines. Existing host
+PW32PROCESS alias moved to task-order owner;original opaque pointers cover
+other declaration contexts. No kernel provider imported;build pending.
+
+P248 counterreview corrected cleanup PTDB to the existing host entry (InsertTask
+prototype consistency);mirror metrics unchanged. Source chains for cleanup
+failure propagation and client-context exchange recorded. A33-row declaration
+restoration candidate would add2 blocks while removing33 lines;not applied or
+counted as restored. Backlog distinguishes metric tradeoff from necessary
+retention;macro composition and remaining types are unfinished.
+
+P248 SMS complete-unit restoration: retained original body plus existing DBG
+#error,omitted only PSMS alias conflicting with real host message ABI.
+71->70 blocks,640->619 difference lines;residual alias is pending,not fully
+restored. Source/logical lines checked;whole-file build still pending.
+
+P248 complete THREADINFO and two menu getters restored:70->68 blocks,
+619->524 difference lines. Existing input-only host THREADINFO alias no longer
+leaks into cleanup. Original prefix declaration provenance recorded;no new
+kernel provider/state. Logical lines checked;whole-file build pending.
+
+P248 PROCESSINFO declaration restored as a complete original unit (2382-2413):
+userk 68->67 blocks,524->492 diff lines. Existing host pointer bindings unchanged;
+compat adds only original prefix/bitmap declaration dependencies.40 errors and
+prior non-original logical rows unchanged. Source-only;whole-file build pending.
+See `p248-userk-review.json` process_declaration_restoration.
+
+P248 scheduler separator restored at original4027:67 blocks unchanged,
+492->491 diff lines;guard/code unchanged. WOWPROCESSINFO restoration candidate
+measured but not applied:needs exitwin +1 mirror line,userk -12;owner decision
+recorded in pending backlog and p248-userk-review.json. No compilation yet.
+
+P248 finite source-chain review:startup cursor is currently an explicit no-op,
+not original-equivalent presentation;idle events use task handles,profile calls
+retain original FastGetProfileStringW behind machine-registry ownership,and
+idle hooks use the worker callback domain. Four declaration subcases recorded
+with actual caller/macro/provider evidence;no new dispatcher or source mutation.
+Whole-file build and remaining audit still pending.
+
+P248 whole-file source dispositions recorded for R2658-R2666:four original
+units restored/confirmed locally,five minimized/boundary points pending owner.
+Source review353/365;verified files remain352. Points2666/2720 source-reviewed;
+989 delivered,6 local,52 approved/policy,1619 pending,54 unreviewed.
+No build/test/publication claim;pending alternatives retain block-growth caveats.
+
+P248 first cached build exposed duplicate RTL_BITMAP in compat/nt.h;removed
+the duplicate and reused its existing original ntrtl.h include. Mirror diff
+unchanged;fresh cached x86/x64 retry running,not yet passed.
+
+P248 final cached x86/x64 passed after consolidating event declarations and
+scoping kernel-only pointers/types;all four actual compiler line contexts pass.
+Candidate316fac6d-a205-489b-82d8-e6c8041bd2ea published11x2,hashes verified.
+Focused and Full acceptance,Git delivery remain pending;not a closure claim.
+
+P248 userk.h and coupled queue restoration: [receipt](batch-p248-checkpoint.json);cached build,publish11x2,focused37/task-order and Full20 passed. Batch diff lines -4815,blocks +49;residual decisions and growth remain explicit pending.

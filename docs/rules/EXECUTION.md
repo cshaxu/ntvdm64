@@ -826,3 +826,34 @@ original conditional structure and logical lines are verified. Unconditional
 function omissions and omitted selected-branch statements are not #error
 exclusions; report their purpose and evidence explicitly. State normalization
 and do not add counts from independently aligned lexical diff metrics.
+
+### Mirror minimization: block count and line count
+
+Owner requires both original-relative lexical difference-block count and
+added-plus-deleted line count to decrease in principle. Do not treat lower
+line count alone as a completed minimization when isolated comment, blank-line
+or declaration restoration fragments a file into many more blocks. Audit and
+restore complete original units and their conditional structure. Do not delete
+valid original content merely to merge blocks, or hide changes by altering the
+fixed metric. Explain any unavoidable tradeoff before accepting it for delivery.
+Report both before/after counts and separately report retired register points.
+The owner authorizes revisiting earlier block-growth files in the active batch;
+this does not increment the completed-file count a second time.
+
+Owner clarification: withdrawing an unaccepted local experiment does not need
+new approval merely because it reverses that experiment's claimed reduction.
+Verify the exact preimage and preserve unrelated or delivered changes;record
+the withdrawn metrics. This does not authorize reverting delivered repairs or
+implementing a new net-increasing mirror adaptation.
+
+This two-metric requirement applies to every audit/delivery batch, not just
+the current experiment. Before delivery compare total lexical blocks and
+changed lines over the fixed re-audit file population against both the pinned
+audit baseline and the preceding delivery. Register-entry retirement is a
+separate measure and cannot conceal newly fragmented source differences.
+
+Owner retained-branch clarification: do not re-audit the contents of branches
+already excluded by #error. In retained mirror branches, preserve original
+code units even when unused. Non-use is not evidence for deletion. A retained
+deviation needs concrete bug-fix, compilation/ABI, or external-integration
+boundary evidence; the adaptation relying on itself is not such evidence.

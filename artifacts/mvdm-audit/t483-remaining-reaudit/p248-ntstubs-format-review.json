@@ -1,0 +1,333 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "scope": "Owner-requested follow-up on text block growth;format restoration only;prior functional decisions not revalidated here",
+  "before_sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19",
+  "after_sha256": "ca0dbe919bb2b9693376ab2a62dc990e90e9db16c0622e891aee66cb91c49dde",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "before": {
+    "added": 127,
+    "deleted": 9887,
+    "text_blocks": 155
+  },
+  "after_local": {
+    "added": 185,
+    "deleted": 6932,
+    "text_blocks": 1722
+  },
+  "restored_comment_blocks": 667,
+  "restored_comment_lines": 1260,
+  "restored_blank_lines": 1753,
+  "excluded_ranges_preserved": [
+    [
+      150,
+      150
+    ],
+    [
+      269,
+      279
+    ],
+    [
+      283,
+      299
+    ],
+    [
+      355,
+      358
+    ],
+    [
+      393,
+      393
+    ],
+    [
+      566,
+      566
+    ],
+    [
+      718,
+      718
+    ],
+    [
+      741,
+      741
+    ],
+    [
+      967,
+      967
+    ],
+    [
+      1139,
+      1140
+    ],
+    [
+      1232,
+      1232
+    ],
+    [
+      1315,
+      1315
+    ],
+    [
+      1406,
+      1426
+    ],
+    [
+      1544,
+      1562
+    ],
+    [
+      1794,
+      1814
+    ],
+    [
+      1960,
+      1960
+    ],
+    [
+      2030,
+      2030
+    ],
+    [
+      2115,
+      2115
+    ],
+    [
+      2291,
+      2291
+    ],
+    [
+      2372,
+      2372
+    ],
+    [
+      2726,
+      2726
+    ],
+    [
+      2748,
+      2748
+    ],
+    [
+      2757,
+      2762
+    ],
+    [
+      3110,
+      3110
+    ],
+    [
+      3161,
+      3161
+    ],
+    [
+      3432,
+      3432
+    ],
+    [
+      3449,
+      3449
+    ],
+    [
+      3462,
+      3462
+    ],
+    [
+      3466,
+      3466
+    ],
+    [
+      3477,
+      3477
+    ],
+    [
+      3487,
+      3487
+    ],
+    [
+      3495,
+      3527
+    ],
+    [
+      3975,
+      3975
+    ],
+    [
+      4321,
+      4322
+    ],
+    [
+      4411,
+      4411
+    ],
+    [
+      4421,
+      4426
+    ],
+    [
+      4731,
+      4732
+    ],
+    [
+      5475,
+      5475
+    ],
+    [
+      5509,
+      5509
+    ],
+    [
+      5771,
+      5771
+    ],
+    [
+      5826,
+      5826
+    ],
+    [
+      5989,
+      5990
+    ],
+    [
+      6242,
+      6247
+    ],
+    [
+      6315,
+      6316
+    ],
+    [
+      6436,
+      6452
+    ],
+    [
+      6692,
+      6692
+    ],
+    [
+      6933,
+      6934
+    ],
+    [
+      6981,
+      6982
+    ],
+    [
+      7032,
+      7035
+    ],
+    [
+      7075,
+      7076
+    ],
+    [
+      7105,
+      7105
+    ],
+    [
+      7134,
+      7134
+    ],
+    [
+      7164,
+      7164
+    ],
+    [
+      7191,
+      7191
+    ],
+    [
+      7265,
+      7266
+    ],
+    [
+      7336,
+      7336
+    ],
+    [
+      7366,
+      7366
+    ],
+    [
+      7442,
+      7442
+    ],
+    [
+      7850,
+      7856
+    ],
+    [
+      7920,
+      7920
+    ],
+    [
+      8378,
+      8410
+    ],
+    [
+      8562,
+      8563
+    ],
+    [
+      8575,
+      8576
+    ],
+    [
+      8690,
+      8691
+    ],
+    [
+      8750,
+      8751
+    ],
+    [
+      9240,
+      9241
+    ],
+    [
+      9306,
+      9307
+    ],
+    [
+      9357,
+      9358
+    ],
+    [
+      9398,
+      9398
+    ],
+    [
+      9439,
+      9440
+    ],
+    [
+      9562,
+      9563
+    ],
+    [
+      9852,
+      9854
+    ],
+    [
+      9994,
+      10308
+    ]
+  ],
+  "lexical_check": {
+    "equal": true,
+    "tokens": 2003,
+    "limits": "Source lexer only;not actual compiler validation;#line handling checked separately before delivery"
+  },
+  "verification": "Not compiled,published,tested,committed or pushed in this batch",
+  "status": "Rejected experiment withdrawn with owner clarification;source exactly equals HEAD. No delivered changes reverted.",
+  "withdrawal": {
+    "restored_sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19",
+    "equals_head": true,
+    "current_metric": {
+      "added": 127,
+      "deleted": 9887,
+      "text_blocks": 155
+    },
+    "claimed_local_reduction_withdrawn": 2897,
+    "reason": "Isolated comment/blank restoration fragmented omitted implementation bodies;not acceptable minimization.",
+    "validation": "Exact byte identity with previously delivered file;no new build or runtime claim."
+  }
+}

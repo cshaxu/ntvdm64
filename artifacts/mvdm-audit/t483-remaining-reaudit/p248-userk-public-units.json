@@ -1,0 +1,79 @@
+{
+  "scope": "R2658/R2666 complete declaration units;whole file unfinished",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\userk.h",
+  "before_sha256": "cd113a66b499de0f290d20cb1935f9a8027d2bcb5f98379f57b85d1bfb043e6a",
+  "after_sha256": "8af9895f13e02781f1afc8e31a1f8fd2345bbc36bebe01199360cc83ebaedda9",
+  "before": {
+    "added": 46,
+    "deleted": 2469,
+    "total": 2515,
+    "blocks": 255
+  },
+  "after": {
+    "added": 46,
+    "deleted": 2456,
+    "total": 2502,
+    "blocks": 245
+  },
+  "units": [
+    {
+      "name": "bitmap pointer aliases",
+      "first": 2830,
+      "last": 2830
+    },
+    {
+      "name": "SetMinMaxInfo",
+      "first": 3168,
+      "last": 3168
+    },
+    {
+      "name": "unsigned min/max",
+      "first": 3717,
+      "last": 3718
+    },
+    {
+      "name": "GetHmodTableIndex",
+      "first": 3928,
+      "last": 3928
+    },
+    {
+      "name": "_ToUnicodeEx",
+      "first": 4238,
+      "last": 4239
+    },
+    {
+      "name": "_DrawState",
+      "first": 4451,
+      "last": 4452
+    },
+    {
+      "name": "_ShowCursor",
+      "first": 4516,
+      "last": 4516
+    },
+    {
+      "name": "LW_BrushInit",
+      "first": 4605,
+      "last": 4605
+    },
+    {
+      "name": "CreateFontFromWinIni",
+      "first": 4626,
+      "last": 4626
+    },
+    {
+      "name": "_ResetDblClk",
+      "first": 4643,
+      "last": 4643
+    }
+  ],
+  "evidence": [
+    "All declarations use existing public Win32/scalar types.",
+    "Source-wide name search: no conflicting bindings in userk consumers. editec umin/umax are file-local macros in separate TU without userk.",
+    "usercli _ToUnicodeEx signature matches original userk, PBYTE and LPBYTE denote BYTE pointers.",
+    "No function implementations/calls added; no guest edits."
+  ],
+  "original_logical_rows_verified": 13,
+  "validation": "Source-only;final whole-file compile/test pending",
+  "error_count": 40
+}

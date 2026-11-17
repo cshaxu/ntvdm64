@@ -38,6 +38,85 @@ typedef enum _NT_PRODUCT_TYPE {
     NtProductServer
 } NT_PRODUCT_TYPE, *PNT_PRODUCT_TYPE;
 typedef ULONG CLONG;
+
+/* Original ntddk.h:81,204,9260-9264. Types required by retained USER
+ * declarations only; no kernel object or system-thread provider is imported. */
+typedef struct _OBJECT_TYPE *POBJECT_TYPE;
+typedef CCHAR KPROCESSOR_MODE;
+
+/* Original ke.h:318-326 selected x86/x64 declaration and w32p.h:47-54.
+ * Declaration-only prefix; no kernel table, ETHREAD access or provider. */
+typedef struct _ETHREAD *PETHREAD;
+typedef struct _KSERVICE_TABLE_DESCRIPTOR {
+    PULONG_PTR Base;
+    PULONG Count;
+    ULONG Limit;
+    PUCHAR Number;
+} KSERVICE_TABLE_DESCRIPTOR, *PKSERVICE_TABLE_DESCRIPTOR;
+typedef struct _W32THREAD {
+    KSERVICE_TABLE_DESCRIPTOR ServiceDescriptorTable[2];
+    PETHREAD    Thread;
+    CLIENT_ID   RealClientId;
+    HANDLE      GdiCachedProcessHandle;
+    PVOID       pgdiDcattr;
+    PVOID       pgdiBrushAttr;
+} W32THREAD;
+
+/* Original ntddk.h:77,12498-12520; pointer-only object dependencies. */
+typedef struct _EPROCESS *PEPROCESS;
+typedef struct _ACCESS_STATE *PACCESS_STATE;
+/* Original public/ifskit/inc/ntifs.h:17965-17971. */
+typedef enum _OB_OPEN_REASON {
+    ObCreateHandle,
+    ObOpenHandle,
+    ObDuplicateHandle,
+    ObInheritHandle,
+    ObMaxOpenReason
+} OB_OPEN_REASON;
+
+/* Original public/ifskit/inc/ntifs.h:1410-1417; declaration only. */
+typedef struct _SECURITY_CLIENT_CONTEXT {
+    SECURITY_QUALITY_OF_SERVICE SecurityQos;
+    PACCESS_TOKEN ClientToken;
+    BOOLEAN DirectlyAccessClientToken;
+    BOOLEAN DirectAccessEffectiveOnly;
+    BOOLEAN ServerIsRemote;
+    TOKEN_CONTROL ClientTokenControl;
+    } SECURITY_CLIENT_CONTEXT, *PSECURITY_CLIENT_CONTEXT;
+/* Original event tag is pointer-only here;its kernel body is not imported. */
+typedef struct _KEVENT *PKEVENT;
+
+/* Original w32p.h:82,88-108.
+ * Declaration-only PROCESSINFO dependencies; no kernel process state.
+ * NextStart spells the original tag directly so PW32PROCESS remains
+ * available to the existing host binding. */
+typedef USHORT W32PID;
+typedef struct _PID_HANDLE_TRACK
+{
+    ULONG       Pid;
+    LONG        HandleCount;
+    struct _PID_HANDLE_TRACK *pNext;
+    struct _PID_HANDLE_TRACK *pPrev;
+}PID_HANDLE_TRACK,*PPID_HANDLE_TRACK;
+typedef struct _W32PROCESS {
+    PEPROCESS   Process;
+    ULONG       W32PF_Flags;
+    PKEVENT     InputIdleEvent;
+    ULONG       StartCursorHideTime;
+    struct _W32PROCESS *NextStart;
+    PVOID       pDCAttrList;
+    PVOID       pBrushAttrList;
+    W32PID      W32Pid;
+    PID_HANDLE_TRACK pidHandleTrack;
+} W32PROCESS;
+/* Original ntddk.h:11204-11221; resource object remains opaque. */
+typedef struct _ERESOURCE *PERESOURCE;
+#include <nt_event_declarations.h>
+typedef
+VOID
+(*PKSTART_ROUTINE) (
+    IN PVOID StartContext
+    );
 typedef const STRING *PCSTRING;
 typedef USHORT RTL_ATOM, *PRTL_ATOM;
 typedef struct _CPTABLEINFO *PCPTABLEINFO;

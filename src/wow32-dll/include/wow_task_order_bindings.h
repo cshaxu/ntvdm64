@@ -4,6 +4,11 @@
 #include <winternl.h>
 #include "common/wow/user_runtime.h"
 
+/* Original kernel declarations share the existing checked client layouts. */
+#if defined(WOW_ORIGINAL_TASK_ORDER) || defined(WOW_ORIGINAL_CLEANUP)
+#include "wow_user_client_view_layout.h"
+#endif
+
 /* Shared terminal outcome when an acquired execution scope cannot unwind. */
 __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *, DWORD);
 
@@ -179,25 +184,20 @@ BOOL WINAPI wow_task_reference_event(HANDLE, HANDLE *);
 #define WOW_TASK_SMF_SEND 0x2000u
 
 #ifdef WOW_ORIGINAL_TASK_ORDER
-#define PpiCurrent() (wow_user_runtime_current()->thread->ppi)
-#define PtiCurrent() (wow_user_runtime_current()->thread)
+#define W32GetCurrentProcess() (wow_user_runtime_current()->thread->ppi)
+#define gptiCurrent (wow_user_runtime_current()->thread)
 typedef wow_task_order_entry *PTDB;
 typedef wow_task_order_state *PWOWPROCESSINFO;
 typedef wow_task_order_state WOWPROCESSINFO;
 typedef wow_task_end_callback PFNW32ET;
 typedef wow_task_order_process *PPROCESSINFO;
+typedef wow_task_order_process *PW32PROCESS;
 typedef wow_task_order_thread *PTHREADINFO;
 typedef wow_task_order_message *PSMS;
 typedef wow_task_order_waiter *PWOWTHREADINFO;
 #define TIF_16BIT WOW_TASK_TIF_16BIT
-#define SMF_WOWRECEIVE WOW_TASK_SMF_RECEIVE
-#define SMF_WOWSEND WOW_TASK_SMF_SEND
-#define SMF_REPLY 0x0001
-#define SMF_RECEIVEDMESSAGE 0x0010
-#define SMF_RECEIVERBUSY 0x4000
 #define TIF_SHAREDWOW 0x00001000
 #define W32PF_WAKEWOWEXEC 0x00010000
-#define HEVENT_REMOVEME ((HANDLE)0xFFFFFFFF)
 #define QS_EVENT 0x2000
 /* Original winuser.h mask excludes modern QS_RAWINPUT. This is the
  * historical queue view, not the native host's GetQueueStatus mask. */
@@ -205,11 +205,7 @@ typedef wow_task_order_waiter *PWOWTHREADINFO;
 #define QS_INPUT (QS_MOUSE | QS_KEY)
 #undef QS_ALLINPUT
 #define QS_ALLINPUT (QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE)
-#define POLL_EVENT_CNT 5
-#define IEV_TASK 3
-#define IEV_WOWEXEC 4
 #define STATUS_WAIT_1 ((NTSTATUS)1)
-typedef HANDLE PKEVENT;
 #define KeClearEvent(event) ResetEvent(event)
 #define ExAllocatePoolWithTag(pool, bytes, tag) HeapAlloc(GetProcessHeap(),0,bytes)
 #define KeWaitForMultipleObjects(count, events, kind, reason, mode, alert, timeout, blocks) \
@@ -230,10 +226,11 @@ typedef HANDLE PKEVENT;
  * and lifetime remain the complete scheduler binding's responsibility. */
 #define KeSetEvent(event, increment, wait) SetEvent(event)
 #define ObDereferenceObject(event) CloseHandle(event)
-#define UserFreePool(pointer) HeapFree(GetProcessHeap(), 0, pointer)
+#define ExFreePool(pointer) HeapFree(GetProcessHeap(), 0, pointer)
+/* Original userk.h macro also needed by registration without that header. */
+#define UserFreePool(p) ExFreePool(p);
 /* These original checks are non-evaluating in the selected retail profile;
  * this is not a substitute for the scheduler owner's critical section. */
-#define CheckCritIn() ((void)0)
 #define UserAssert(expression) ((void)0)
 #endif
 #endif

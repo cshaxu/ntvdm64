@@ -1,0 +1,22 @@
+{
+  "point": "R2658",
+  "unit": "Selected non-DEBUG critical-section assertion macro group",
+  "before": {
+    "added": 46,
+    "deleted": 2550,
+    "blocks": 258
+  },
+  "after": {
+    "added": 46,
+    "deleted": 2549,
+    "blocks": 257
+  },
+  "mirror_sha256": "e1811345f39aa38264fc6bb078862686074eda0628e6077e9bb241a44bfc0f21",
+  "autonomous_change": "Removed duplicate CheckCritIn definition from wow_task_order_bindings.h;other class-removal owner remains unchanged",
+  "evidence": [
+    "Original userk.h1095-1101:all selected checking macros empty",
+    "Every production CheckCritIn call is in taskman.c or class.c;taskman includes userk.h,while class owns WOW_ORIGINAL_CLASS_REMOVAL and a separate binding",
+    "CheckForClientDeath host callback retained and not equated with empty assertions"
+  ],
+  "validation": "Original logical1096 restored;40 errors unchanged;final full-file build pending"
+}

@@ -17,7 +17,7 @@
 #include <base_wait.h>
 #include <base_stream.h>
 #include <base_interactive.h>
-#include <base_event.h>
+#include <nt_event_declarations.h>
 #include <base_config.h>
 #include "ntsrv-exe/transport/vdm_receipt.h"
 #include "ntsrv-exe/transport/worker_spawn.h"

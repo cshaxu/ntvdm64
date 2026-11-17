@@ -1,0 +1,72 @@
+{
+  "status": "local-restored-pending-whole-file-build",
+  "points": [
+    "T483-R2623",
+    "T483-R2626"
+  ],
+  "reason": "P244 conflated guest client publication with host current binding. Production set_context precedes InitTask;PtiCurrent uses existing TLS binding. Restore original signatures/lookups/call;no new ambient state.",
+  "production_chain": [
+    "wow_user_task_lifecycle_init checks current binding and holds runtime lock",
+    "wow_user_runtime_set_context assigns task before original InitTask",
+    "original PtiCurrent resolves current binding thread",
+    "original ShowStartGlass called within InitTask uses same process"
+  ],
+  "measurements": {
+    "src/non-mvdm/windows/core/ntuser/kernel/queue.c": {
+      "before": {
+        "added": 71,
+        "deleted": 4367,
+        "blocks": 28,
+        "total": 4438
+      },
+      "after": {
+        "added": 64,
+        "deleted": 4362,
+        "blocks": 23,
+        "total": 4426
+      }
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/userk.h": {
+      "before": {
+        "added": 46,
+        "deleted": 609,
+        "blocks": 72,
+        "total": 655
+      },
+      "after": {
+        "added": 46,
+        "deleted": 604,
+        "blocks": 72,
+        "total": 650
+      }
+    }
+  },
+  "files": {
+    "src/non-mvdm/windows/core/ntuser/kernel/queue.c": {
+      "before_sha256": "1aa7cf178d3596678426984626ae3965edcc56dc58dc4edc73b4eae4e3c3fa89",
+      "after_sha256": "237dd8a0da335db734e72faa3c4d52a1bd91b9c970c01e5cc87db06f6fa72335"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/userk.h": {
+      "before_sha256": "17494b697781184ef4fb06393ae5e462a432efae2e22f37955c093e337fc6bb7",
+      "after_sha256": "5b6986ebe09cd84413227c3d8a2dc8e4b77b7a1c791c42fe2333c841c408c3df"
+    },
+    "src/wow32-dll/include/wow_task_init_bindings.h": {
+      "before_sha256": "7176914ff053a6db559351881c3258cf2f1e8822599671d632e1782627c49c1c",
+      "after_sha256": "11f2a5973229c88a77a544c2c9b86b4ee79bebd083e55b5c90a22c54fe4c6969"
+    },
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": {
+      "before_sha256": "c86be3760f9aa431dba3b1ab7f17a9e19be48c2cf850d4eb9c3f24e904bba179",
+      "after_sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089"
+    },
+    "test/observation/wow_startup_failure_provider.c": {
+      "before_sha256": "47cafbd4811ee1b4ca834952c1db300ec0247f3d1e3d6c271bbab7a2c7a26519",
+      "after_sha256": "d3d901315b8a9d37b0bfa622c620930fcf50edee630d7be4be5a731cf09ce55a"
+    },
+    "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c": {
+      "before_sha256": "ce8218007ddb7a0a7d505a94a2900ab0bc4524a4a5e22660bf9e1db8f14230fb",
+      "after_sha256": "c57d0180b116fdb840a3107b4e0154341bf1bf47045f219c0ed777a77c56b987"
+    }
+  },
+  "validation": "All unchanged nonoriginal logical rows retained;restored rows map to original. Existing fixture now binds real runtime;not yet built or run.",
+  "excluded": "SleepTask explicit non-current subject and registration-before-task remain separate."
+}

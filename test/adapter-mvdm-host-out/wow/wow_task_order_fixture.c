@@ -769,6 +769,8 @@ static void initialization(void)
         wow_task_order_thread thread={0};
         wow_task_client_info client={0};
         init_test test={0};
+        wow_user_runtime runtime=WOW_USER_RUNTIME_INITIALIZER;
+        wow_user_runtime_thread binding={0};
         UNICODE_STRING name={14,16,L"APP.EXE"};
         HANDLE event=CreateEventW(NULL,FALSE,FALSE,NULL);
         DWORD version=(mode==2 ? 0x0400 : 0x030a);
@@ -781,6 +783,7 @@ static void initialization(void)
         process.init=(mode==7 ? &native_profile_ops : &ops);process.init_context=&test;
         process.usi.dwFlags=STARTF_USESHOWWINDOW|STARTF_USEPOSITION|STARTF_USESIZE;
         thread.ppi=&process;thread.pClientInfo=&client;
+        CHECK(wow_user_runtime_bind(&binding,&runtime,&thread,NULL));
         if(mode==1) {
             waiter=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*waiter));
             CHECK(waiter!=NULL);if(!waiter)ExitProcess(99);
@@ -789,12 +792,12 @@ static void initialization(void)
         if(mode==5) {
             WCHAR *invalid=VirtualAlloc(NULL,4096,MEM_RESERVE|MEM_COMMIT,PAGE_NOACCESS);
             CHECK(invalid!=NULL);name.Buffer=invalid;
-            CHECK(xxxInitTask(version,&name,0x1234,7,0,position,20,position,40,0,&thread)==(NTSTATUS)0xc0000033);
+            CHECK(xxxInitTask(version,&name,0x1234,7,0,position,20,position,40,0)==(NTSTATUS)0xc0000033);
             CHECK(thread.pstrAppName==NULL && thread.ptdb==NULL && shared.ppiStarting==NULL);
             CHECK(!test.attached && !test.cursor && !test.profile);
             CHECK(VirtualFree(invalid,0,MEM_RELEASE));name.Buffer=L"APP.EXE";
         }
-        CHECK(xxxInitTask(version,&name,0x1234,7,task_id,position,20,position,40,0,&thread)==0);
+        CHECK(xxxInitTask(version,&name,0x1234,7,task_id,position,20,position,40,0)==0);
         CHECK(thread.pstrAppName && thread.pstrAppName->Length==name.Length);
         CHECK(!memcmp(thread.pstrAppName->Buffer,name.Buffer,name.Length));
         CHECK(thread.ptdb->hTaskWow==0x1234 && thread.ptdb->pwti==waiter);
@@ -819,6 +822,7 @@ static void initialization(void)
         CHECK(CloseHandle(process.pwpi->pEventWowExec));
         CHECK(HeapFree(GetProcessHeap(),0,process.pwpi));
         CHECK(CloseHandle(event));
+        CHECK(wow_user_runtime_unbind(&binding));
     }
 }
 
