@@ -16,7 +16,6 @@
 
 #include "precomp.h"
 #pragma hdrstop
-
 #include "common/wow/page_domain.h"
 
 

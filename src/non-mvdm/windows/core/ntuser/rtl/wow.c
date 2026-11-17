@@ -10,6 +10,7 @@
 * History:
 * 29-DEC-93 NanduriR      shared user32/user16 code.
 \***************************************************************************/
+
 #include "precomp.h"
 
 #line 15
@@ -47,6 +48,7 @@
 #line 144
 #else
 #line 145
+
 #line 146
 #ifdef _USERK_
 #line 147
@@ -436,6 +438,8 @@ BOOL _IsChild(
     return FALSE;
 }
 
+
+
 /***************************************************************************\
 * _IsWindowVisible (API)
 *
@@ -473,6 +477,7 @@ BOOL _IsWindowVisible(
     return TRUE;
 }
 
+
 /***************************************************************************\
 * _ClientToScreen (API)
 *
@@ -492,6 +497,7 @@ BOOL _ClientToScreen(
 
     return TRUE;
 }
+
 
 /***************************************************************************\
 * _GetClientRect (API)
@@ -547,7 +553,6 @@ BOOL _GetClientRect(
 
     return TRUE;
 }
-
 #line 807
 
 
@@ -568,6 +573,7 @@ BOOL _GetWindowRect(
 
     return TRUE;
 }
+
 /***************************************************************************\
 * _ScreenToClient (API)
 *

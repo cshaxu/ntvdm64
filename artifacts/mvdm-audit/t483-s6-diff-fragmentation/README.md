@@ -315,3 +315,8 @@ and 28,485 changed lines.
 [S7 P6 receipt](s7-p6-checkpoint.json) records nine more reviews,
 two original blank-line restorations, and original byte identity for
 `lmsw.c`. The current census is 2,035 non-error points and 28,481 changed lines.
+
+[S7 P7 receipt](s7-p7-checkpoint.json) and
+[verification evidence](s7-p7-verification.zip) record eight reviewed files,
+restoration of the original `ios.c` carrier boundary and two format changes.
+The current census is 2,028 non-error points and 28,440 changed lines.

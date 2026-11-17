@@ -1,0 +1,353 @@
+{
+  "packet": "M0 T483 S7 P7",
+  "prior_delivery": "1a199294144433e9c8c26070a62b9d3ba33b9c42",
+  "publication": {
+    "status": "published",
+    "package": "619955ae-00b2-4174-b75a-471ac49f7add",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "ios_link_control": {
+    "verified": true,
+    "normalized_sha256": "42ff9ba044a75690fe999db4b940129b4e5df0798c0c0fb26072b3b49126b947",
+    "normalized_coff_and_debug_timestamp_offsets": [
+      280,
+      1710068
+    ],
+    "bytes": 2107392,
+    "original_error": "preserved"
+  },
+  "normalized_package_comparison": {
+    "fields": [
+      "COFF timestamp",
+      "debug directory timestamps",
+      "package GUID"
+    ],
+    "files": [
+      {
+        "name": "VCDEX.DLL",
+        "equal": true,
+        "before": "72f0e1afeb79d31d0f827def75bfaa851f1121bc9270c5e0638d323dcb5360f4",
+        "after": "72f0e1afeb79d31d0f827def75bfaa851f1121bc9270c5e0638d323dcb5360f4"
+      },
+      {
+        "name": "run16.exe",
+        "equal": true,
+        "before": "aecb6aff6d0587a0a1c0d921f813df15b71d9fdca43691e985fca351358a4493",
+        "after": "aecb6aff6d0587a0a1c0d921f813df15b71d9fdca43691e985fca351358a4493"
+      },
+      {
+        "name": "ntsrv.exe",
+        "equal": true,
+        "before": "ef6c68a3a6a13c833817441f0cf6d31225614235a38dc0d297052c6781e3a0cc",
+        "after": "ef6c68a3a6a13c833817441f0cf6d31225614235a38dc0d297052c6781e3a0cc"
+      },
+      {
+        "name": "ntcon.exe",
+        "equal": true,
+        "before": "ad53b1fce9f6982eaf4f5bf582f5d901248730a4620a001361ae50e9b9a85ced",
+        "after": "ad53b1fce9f6982eaf4f5bf582f5d901248730a4620a001361ae50e9b9a85ced"
+      },
+      {
+        "name": "ntvdm.exe",
+        "equal": true,
+        "before": "b618bba233180a2f722e944ca3d374243d773588dc67be6c5c3fa0101c03bbbc",
+        "after": "b618bba233180a2f722e944ca3d374243d773588dc67be6c5c3fa0101c03bbbc"
+      },
+      {
+        "name": "ntvwm.exe",
+        "equal": true,
+        "before": "48ae205c24647fc4da4666a226f46d792ae6b5aaea7e1b7f3fe68e7877522d17",
+        "after": "48ae205c24647fc4da4666a226f46d792ae6b5aaea7e1b7f3fe68e7877522d17"
+      },
+      {
+        "name": "ntmon.exe",
+        "equal": true,
+        "before": "18662b309adff66b1542fc91a6c8b84aa2fa624994140be844e626e41c6a53e4",
+        "after": "18662b309adff66b1542fc91a6c8b84aa2fa624994140be844e626e41c6a53e4"
+      },
+      {
+        "name": "WOW32.DLL",
+        "equal": true,
+        "before": "a093ac565925ff85ff7bd7e1a77c72ea815745d75a97f133bd043c235f78f2c2",
+        "after": "a093ac565925ff85ff7bd7e1a77c72ea815745d75a97f133bd043c235f78f2c2"
+      },
+      {
+        "name": "VDMREDIR.DLL",
+        "equal": true,
+        "before": "c89e68567cb431bd4c4279bdee62f7bdea985f6314018e58b43af0dee9676c5c",
+        "after": "c89e68567cb431bd4c4279bdee62f7bdea985f6314018e58b43af0dee9676c5c"
+      },
+      {
+        "name": "nthook32.dll",
+        "equal": true,
+        "before": "0cb6735b7160bdaf62e01c87985ae179ae39ece767323f79d264997d769d72b8",
+        "after": "0cb6735b7160bdaf62e01c87985ae179ae39ece767323f79d264997d769d72b8"
+      },
+      {
+        "name": "nthook64.dll",
+        "equal": true,
+        "before": "28af9b64ad46a13fee9ece6a2824f71e326697236e9d2d8016a8995861c39c2b",
+        "after": "28af9b64ad46a13fee9ece6a2824f71e326697236e9d2d8016a8995861c39c2b"
+      }
+    ]
+  },
+  "retired_pending_ids": [
+    "T483-R0817",
+    "T483-R0818"
+  ],
+  "verification": {
+    "cached": "x86/x64 passed",
+    "targeted": [
+      "CCPU boundary",
+      "NTVDM ordinals",
+      "WOW Minesweeper",
+      "repeat MEM",
+      "guest-seven",
+      "DOS4GW/NESticle menu and Escape"
+    ],
+    "runtime_manifest": [
+      {
+        "Name": "VCDEX.DLL",
+        "RelativePath": "system32\\VCDEX.DLL",
+        "Sha256": "F6D53AE57DF32835CD28A769B7AE3585321B5BFD3FE1F387D7B0353DA5F719B8",
+        "Machine": 332,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "41DD3079BC3DC6940B8D50246696CA2BC323383AF8199145CF940C9DC2D46EA0"
+      },
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "34995F15578B5D6CCD48D545EF2A6458A6B94502B63D1176F6839C93A2C202B4",
+        "Machine": 34404,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "2E1FAA566659167952D3104F12F9EEB2DD1FD206C918B11A0FDCFC4DE824CB07"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "B4ED5F2139AFB71DC7C2E3AF45101DA5E0C184C4237DF125954533F0E9CE4820",
+        "Machine": 34404,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "48B94A5A3A19248F50B31B745F3D386B31915208BF16BA308E93B741471F2C31"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "FBC90B0944425C44FF070D3C2CBA0FD3F8ACF32110962C6563B1E3A4BF107AE9",
+        "Machine": 34404,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "1276AA9B0E9556906A99309AFBEA04CBF3145301CB6767898AC56E2698BAF23A"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "1F409DA96F56FEEA254D1D1CCAAB6F6081B69FFAC8893EFC86494550A64ABACE",
+        "Machine": 332,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "8A04EDE1E05FFB0FF388B91617CA804FD8BE762089160A92355270C0DBE6C077"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "C90D6FB50591FF452237B66E8753C84C6FFE3FADB474DEA2F0C5B531F2142678",
+        "Machine": 34404,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "79961232C248D40538FB28EB4322003D7394EDB021E4855784245FE9CFBCCB8E"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "D3DF7E7EDF3195B6D8647037E5FA6595921A160589CEA6B348C79EC992C2DB9C",
+        "Machine": 34404,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "A7A614692C4A41B08C0F3BC3776A5BF337942FA5A5D48372DA90E9F49B5F5B01"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "8E2D25544B5A77F95352C11D3636437C989FF0F90FB68539FC4C67F162B39D7D",
+        "Machine": 332,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "FFEA0386499C2C8602CE185549335ADED2E1664078343D1AAEA01E2A7E2874D7"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "693DED67FBD0A21E7844F949DE2C4E6B5D17DD50FBA8A8CAAE28C0913098F4F9",
+        "Machine": 332,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "1A6FC93CC5DD2AA796B7CD361D0C57B703AA44CE6AED8C8B21923C4FA7132326"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "B7044A9CEE3FC1855BF5FAC53D829FFC399103A313848D8053729AB50E41B74F",
+        "Machine": 332,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "845CA5F9BEABC78E4B9D25015074D1241D0F41C9BD95507931F007A6E35F06FF"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "86692E6CC9DA50CD2F6DE6525E62879E442CB6B5BFABE7145C3DA2D3C695D441",
+        "Machine": 34404,
+        "PackageId": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "InputSha256": "FDFB120FA5A42D328E145FAFE36F15E08D8DC0E2614BC69230F21A2D20EACAE7"
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "before": {
+        "blocks": 8,
+        "added": 17,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 8,
+        "added": 17,
+        "deleted": 2
+      },
+      "decision": "Keep scoped cleanup and conversion results. Original entry controls leak allocation or leave the callback cursor advanced after exceptions. The positive control covers 199 bounded scenarios.",
+      "source_sha256": "f98049a1afa471764fb825ccdd498a8ad189a697a181c347eba6ee8464ec542b",
+      "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+      "evidence": "../t483-remaining-reaudit/r1846-r1854-wudlg-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "before": {
+        "blocks": 14,
+        "added": 21,
+        "deleted": 438
+      },
+      "after": {
+        "blocks": 14,
+        "added": 21,
+        "deleted": 438
+      },
+      "decision": "Two large exclusion guards are local, with no original conditional counterparts. Keep their measured differences. The 64-case scalar and independent guest-plane controls support the original-layout adaptations.",
+      "source_sha256": "ba364e0597af92f8530214a8f43479e9d141c4e8579d0a78c15ab9d0dee037d3",
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "evidence": "../t483-remaining-reaudit/r0852-r0863-egwrtm12-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "before": {
+        "blocks": 3,
+        "added": 11,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 3,
+        "added": 10,
+        "deleted": 2
+      },
+      "decision": "Remove one extra blank adjacent to an added include. Existing native HWND and copied color-table boundaries remain grounded in their owner and caller contracts.",
+      "source_sha256": "62f14787286d88e26433b04700256adaf43d80ec2662a5751ed97ab822cf93fc",
+      "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+      "evidence": "../t483-remaining-reaudit/r1896-r1905-wuser-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "before": {
+        "blocks": 8,
+        "added": 2,
+        "deleted": 245
+      },
+      "after": {
+        "blocks": 8,
+        "added": 2,
+        "deleted": 245
+      },
+      "decision": "Preserve selected original helper bodies. Native DrawTextExW owns the public entry. A 255-character original GetPrefixCount copy writes the terminator at index 255, so retain the exact capacity guard.",
+      "source_sha256": "e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "evidence": "../t483-remaining-reaudit/p251-drawtext-investigation.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "before": {
+        "blocks": 4,
+        "added": 11,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 4,
+        "added": 11,
+        "deleted": 3
+      },
+      "decision": "Retain size-aware allocation at the same original terminator boundary. Prior 254/255/300 tests distinguish fit, boundary, and heap case.",
+      "source_sha256": "9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c",
+      "original_sha256": "d2dae26e4766c2567225cb6bfc8147b4e80955b4ca49dcaf97b6193e7067a8e2",
+      "evidence": "../t483-remaining-reaudit/p253-text-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "before": {
+        "blocks": 14,
+        "added": 2,
+        "deleted": 183
+      },
+      "after": {
+        "blocks": 8,
+        "added": 1,
+        "deleted": 176
+      },
+      "decision": "Restore original blank rows and remove one duplicate. All existing nonempty source rows and directives remain. Header-only include coordinates shift; original comment coordinates and executable logical lines are preserved or restored.",
+      "source_sha256": "a93ae54fa9aec8ab9063ff752544a16e11ba6198011612aa105522dcde9af37e",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "evidence": "../t483-remaining-reaudit/p253-wow-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "before": {
+        "blocks": 2,
+        "added": 6,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 6,
+        "deleted": 2
+      },
+      "decision": "The local exclusions have no original conditional counterparts. Applying original BOP fudge on CPU40 would return at T-2; the actual continuation has no compensating addition.",
+      "source_sha256": "408dfbee8fb31878424df9a20a24e6a69847d006eedb6e948d93872c387c9ac8",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "evidence": "../t483-remaining-reaudit/r0342-r0343-reset-call-chain.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "before": {
+        "blocks": 1,
+        "added": 32,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "decision": "Remove the added CCPU alternative that duplicated unsupported monitor wrappers. The DPMI boundary currently needs scalar I/O. Neither current map nor actual isolated link selects these wrappers. Preserved original monitor conditional and #error.",
+      "source_sha256": "445ce1e86a07b988a76984cfeb6778984aeb0984b58336c877feadb26f121e96",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "evidence": "../t483-remaining-reaudit/r0818-ios-string-selection-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 57,
+    "remaining": 156,
+    "nonzero_files": 238,
+    "non_error_points": 2028,
+    "non_error_lines": 28440,
+    "source_reduction_s7": {
+      "points": 20,
+      "lines": 538
+    }
+  }
+}

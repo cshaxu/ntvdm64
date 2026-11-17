@@ -85,9 +85,18 @@ with its pinned original. Original diagnostic coordinates are preserved.
 The P5 runtime package is retained.
 [P6 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p6-checkpoint.json).
 
-S7 progress is 49 reviewed and 164 remaining. Source restorations reduce
-13 points and 497 changed lines in S7. The current census is 2,035 non-error
-points and 28,481 changed lines across 239 mirrors with filtered differences.
+S7 P7 completes eight more file reviews. It restores formatting in
+`rtl/wow.c` and `wuser.c` and removes the unlinked CCPU alternative to
+the excluded monitor carrier in `ios.c`. Package
+`619955ae-00b2-4174-b75a-471ac49f7add` passed both cached builds,
+dual publication, and targeted CCPU, WOW, DOS and DOS4GW checks.
+All 11 images match P5 after normalizing COFF and debug directory timestamps
+and the package GUID.
+[P7 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p7-checkpoint.json).
+
+S7 progress is 57 reviewed and 156 remaining. Source restorations reduce
+20 points and 538 changed lines in S7. The current census is 2,028 non-error
+points and 28,440 changed lines across 238 mirrors with filtered differences.
 
 ## S1 Closure Record
 

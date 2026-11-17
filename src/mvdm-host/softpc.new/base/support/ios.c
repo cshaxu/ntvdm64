@@ -410,39 +410,6 @@ LOCAL VOID generic_outsd IFN3(io_addr, io_address, double_word *, valarray, word
 #if defined(NTVDM) && defined(MONITOR)
 #line 414
 #error Excluded unsupported monitor IOS carrier
-#else
-#if defined(NTVDM) && defined(CCPU)
-#line 414
-#undef LOCAL
-#define LOCAL static
-/*
- *  string byte handlers for monitor
- */
-VOID insb IFN3(io_addr, io_address, half_word *, valarray, word, count)
-{
-    (*Ios_insb_function[getIOInAdapter(io_address)])
-            (io_address, valarray, count);
-}
-
-VOID outsb IFN3(io_addr, io_address, half_word *, valarray,word, count)
-{
-    (*Ios_outsb_function[getIOInAdapter(io_address)])
-            (io_address, valarray, count);
-}
-
-VOID insw IFN3(io_addr, io_address, word *, valarray, word, count)
-{
-    (*Ios_insw_function[getIOInAdapter(io_address)])
-            (io_address, valarray, count);
-}
-
-VOID outsw IFN3(io_addr, io_address, word *, valarray, word, count)
-{
-    (*Ios_outsw_function[getIOInAdapter(io_address)])
-            (io_address, valarray, count);
-}
-
-#endif
 #endif	/* NTVDM & MONITOR */
 #line 444
 
