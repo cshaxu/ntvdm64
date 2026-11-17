@@ -1,0 +1,81 @@
+{
+  "packet": "M0 T483 S6 P27",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/compat/wow_control_rect.c",
+        "sha256": "1e25becfb243d7bcae9fc4b753951ea16a6f7535fd6b07c2e5e40f396f349ab6"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "261a08b8b9c3c60a96a67410d4806029b2c17390280a1304f88692204c784510"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "04dbf766ffcac416a4d45679394cf654031fcfbc3cbaed61a94a7ca4b826a29d"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "cee238a1fea937efbfa341927dd8de8428355896318e0397ad2d295505871485"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/rtl/rect.c"
+    ],
+    "source_files": 4
+  },
+  "publication": {
+    "status": "published",
+    "package": "e9d391ed-0078-48ba-8b9f-313104673a70",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "controls": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1055,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 247,
+    "blocks": 2072,
+    "lines": 30889,
+    "reviewed_live_files": 29,
+    "remaining_files": 218,
+    "retired_reviewed_files": 8,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 221,
+    "extraction_blocks": 215,
+    "unused_removal_blocks": 6,
+    "owner_retired_lines": 22440,
+    "extraction_lines": 21224,
+    "unused_removal_lines": 1216,
+    "total_census_reduction_blocks": 261,
+    "total_census_reduction_lines": 23634
+  },
+  "limits": [
+    "Owner-approved rectangle helper extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "CopyInflateRect body preserved and linked from compat",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

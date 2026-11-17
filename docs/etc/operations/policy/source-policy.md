@@ -410,3 +410,10 @@ Retire softpc.new/base/support/xt.c and retain int verbose in the existing
 shared SoftPC execution storage. Preserve original startup initialization,
 CCPU providers and source manifest bytes;filter the retired entry in the
 current build generator. No other mirror change or CPU behavior modification.
+
+### T483 S6 P27 owner-approved rectangle helper extraction
+
+Retire the OpenNT ntuser/rtl/rect.c subset. Preserve the original
+CopyInflateRect implementation in src/compat/wow_control_rect.c for WOW
+controls. The product links no CopyOffsetRect. Public rectangle APIs remain
+owned by USER32.

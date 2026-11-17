@@ -564,9 +564,9 @@ $ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Joi
 # This must precede global include roots: MVDM also has a precomp.h, whose
 # declarations belong to a different translation-unit contract.
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
-$controlRectObject = 'obj/opennt-user/control-rect.obj'
+$controlRectObject = 'obj/compat/wow-control-rect.obj'
 $objects.Add($controlRectObject)
-$ninja.Add('build ' + $controlRectObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/rect.c')))
+$ninja.Add('build ' + $controlRectObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_rect.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
 $controlDrawObject = 'obj/opennt-user/control-draw.obj'
 $defaultMessagesObject = 'obj/opennt-user/default-messages.obj'

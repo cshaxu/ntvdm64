@@ -144,7 +144,6 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 150,src/non-mvdm/public/sdk/inc/nturtl.h,3,0,29,0,0,pending-file-review,T483-R2103;T483-R2104;T483-R2105,b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f
 151,src/non-mvdm/windows/core/ntuser/client/clglobal.c,3,3,20,5,0,pending-file-review,T483-R2143;T483-R2144;T483-R2145;T483-R2146;T483-R2147;T483-R2148;T483-R2149,83a2da02cc706ff4602fe314545db9941d76895b81604ef488b43332489cdda2
 152,src/non-mvdm/windows/core/ntuser/kernel/miscutil.c,3,0,198,0,0,pending-file-review,T483-R2598;T483-R2599;T483-R2600;T483-R2601;T483-R2602;T483-R2603,cbc58c0dfacf774822507dee0aa3097284a7abeaae1b096e51f1949666967c28
-153,src/non-mvdm/windows/core/ntuser/rtl/rect.c,3,1,367,0,0,pending-file-review,T483-R2701;T483-R2702;T483-R2703,5cbde517fff979b223fee8942c5a5d5813d6d656aad35445c2d3ff5e397649e7
 154,src/mvdm-host/dos/command/cmdconf.c,2,8,1,2,0,pending-file-review,T483-R0007,6862008d8ee625ebd3b1c734b9493411414382f71b5d8c9ddf341fbac5c90aab
 155,src/mvdm-host/dos/command/cmdkeyb.c,2,3,1,0,0,pending-file-review,T483-R0037;T483-R0038,c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f
 156,src/mvdm-host/dos/dem/dem.c,2,2,1,2,0,pending-file-review,T483-R0067;T483-R0068,e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d

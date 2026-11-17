@@ -227,3 +227,7 @@ P24 extracts client/client.c into wow_class_client.c,wow_default_window_bits.c,
 wow_dialog_memory.c,wow_client_dispatch.c and wow_control_state.c. All eight
 OpenNT bodies retain their bindings and ABI;original ntcftxt.h still implements
 class registration. Provenance is recorded in each unit.
+
+P27 preserves the original OpenNT CopyInflateRect implementation in
+[wow_control_rect.c](wow_control_rect.c) for the WOW controls. The remaining
+public rectangle operations used by the product come from USER32.
