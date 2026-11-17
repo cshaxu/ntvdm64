@@ -132,7 +132,7 @@ InitialiseDosEmulation(int argc, char **argv)
 #else
 #line 126
 #error Unsupported excluded original configuration
-#endif /* i386 */
+#endif
 #line 128
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
 

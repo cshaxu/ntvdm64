@@ -133,9 +133,14 @@ S7 P14 completes ten file reviews. It removes one redundant blank in
 `nt_mouse.c` while preserving selected tokens and original line anchors.
 [P14 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p14-checkpoint.json).
 
-S7 progress is 119 reviewed and 94 remaining. Source restorations reduce
-22 points and 551 changed lines in S7. The current census is 2,026 non-error
-points and 28,427 changed lines across 237 mirrors with filtered differences.
+S7 P15 completes ten file reviews. Original conditional spelling in
+`nt_msscs.c`, original indentation in `nt_rflop.c`, and original comment
+spacing and line mapping in `wcall16.c` were restored.
+[P15 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p15-checkpoint.json).
+
+S7 progress is 129 reviewed and 84 remaining. Source restorations reduce
+25 points and 556 changed lines in S7. The current census is 2,023 non-error
+points and 28,422 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

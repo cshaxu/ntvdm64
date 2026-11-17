@@ -348,3 +348,7 @@ and 28,428 changed lines.
 [S7 P14 receipt](s7-p14-checkpoint.json) records ten reviewed files and
 one source formatting restoration. The filtered census is 2,026 points
 and 28,427 changed lines.
+
+[S7 P15 receipt](s7-p15-checkpoint.json) records ten file reviews and
+three original-format restorations. The filtered census is 2,023 points
+and 28,422 changed lines.

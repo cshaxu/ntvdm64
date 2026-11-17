@@ -748,7 +748,7 @@ HANDLE get_drive_handle(UTINY drive, USHORT pdb, BOOL auto_lock)
 	    flp->auto_locked = auto_lock;
 	    flp->owner_pdb = pdb;
 	    (*(pFDAccess))++;
-		    break;
+	    break;
 #line 843
 	}
 	if (auto_lock && GetLastError() == ERROR_SHARING_VIOLATION &&

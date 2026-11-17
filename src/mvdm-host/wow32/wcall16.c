@@ -674,10 +674,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     setIP(SaveIp);
     ptd->vpStack = VDMSTACK();
 #endif
-#line 779
+#line 784
 
     // after return from callback ptd->vpStack will point to PCBVDMFRAME
-
 
     // consistency check
 #line 788
