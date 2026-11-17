@@ -1,0 +1,77 @@
+{
+  "packet": "M0 T483 S6 P26",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/ntvdm-exe/softpc/README.md",
+        "sha256": "fe2f438c82c204b3cb0460e0769e0dbfbcf65dfff8ac5902e6918c9b7b3be26d"
+      },
+      {
+        "path": "src/ntvdm-exe/softpc/mvdm_softpc_execution.c",
+        "sha256": "bddac89df99a4dea34140fd9a72b335216d3a9c748ab6227809940314985eba9"
+      },
+      {
+        "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "sha256": "d9bc544b125ed3a75edd0dbfab9ac304cbc17060851e3dc1ac0a20e6f8e5c95b"
+      }
+    ],
+    "deleted": [
+      "src/mvdm-host/softpc.new/base/support/xt.c"
+    ],
+    "source_files": 3
+  },
+  "publication": {
+    "status": "published",
+    "package": "c03136f7-0977-4ca8-b2c8-bce883712e62",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "provider-proof": "passed",
+    "ccpu": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1056,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 248,
+    "blocks": 2075,
+    "lines": 31257,
+    "reviewed_live_files": 29,
+    "remaining_files": 219,
+    "retired_reviewed_files": 7,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 218,
+    "extraction_blocks": 212,
+    "unused_removal_blocks": 6,
+    "owner_retired_lines": 22072,
+    "extraction_lines": 20856,
+    "unused_removal_lines": 1216,
+    "total_census_reduction_blocks": 258,
+    "total_census_reduction_lines": 23266
+  },
+  "limits": [
+    "Owner-approved one-global extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "Original CPU interrupt/parity providers unchanged; verbose storage relocated only",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

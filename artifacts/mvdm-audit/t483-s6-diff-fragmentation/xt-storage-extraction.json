@@ -1,0 +1,93 @@
+{
+  "packet": "M0 T483 S6 P26",
+  "file": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "target": "src/ntvdm-exe/softpc/mvdm_softpc_execution.c",
+  "classification": "Owner-approved one-global extraction; no CPU behavior replacement",
+  "retired_blocks": 4,
+  "retired_lines": 339,
+  "source_identity": {
+    "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+    "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+    "current_sha256": "97985ab274b50e7fe91ecc42383a217b5bfc4d4ea48800ccf0047af8ff79ac24",
+    "raw": {
+      "blocks": 5,
+      "added": 10,
+      "deleted": 512
+    },
+    "filtered": {
+      "blocks": 4,
+      "added": 8,
+      "deleted": 331
+    },
+    "excluded": [
+      {
+        "original": [
+          159,
+          338
+        ],
+        "current": [
+          97,
+          98
+        ]
+      },
+      {
+        "original": [
+          650,
+          650
+        ],
+        "current": [
+          155,
+          156
+        ]
+      }
+    ],
+    "issues": [
+      {
+        "line": 76,
+        "reason": "ambiguous-original-arm"
+      },
+      {
+        "line": 106,
+        "reason": "ambiguous-original-arm"
+      }
+    ],
+    "rank": 118
+  },
+  "retired_register_rows": {
+    "artifacts/mvdm-audit/t483-remaining-reaudit/review-register.csv": [
+      "T483-R0825,825,T483-D0931,681,src/mvdm-host/softpc.new/base/support/xt.c,8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996,76,1,75,1,historical anchor; relocate against current diff before decision,correct,not-implemented,c_main.c:391-437; c_reg.h:55-187; original xt.c:75 selects CCPU.,restored-verified-published,xt.c original register75 or parity346 condition,CPU40 CCPU selected product,\"Actual xt.obj compiler parameters: current source exits0; only restoring original register block exits2 with C2061/C2059 at mreg MSW. CPU40 c_reg.h and c_main use CCPU_GR/SR/FLAGS. Original block is old CCPU, not hardware monitor.\",Comment unnecessary,Remove explanations; keep original outer guard and minimal CPU40 exclusion.,restore original comment-free text,Removed8-line register and6-line parity explanations; restored CRLF. Corrected existing #line340 to342 for original parity comment. Original guards and #error unchanged.,-8,r0825-r0828-xt-review.json: no matching-block mismatch; #error unchanged.,\"build/t483-s5-p68/current.exit=0;original-registers.exit=2;PID22440. Parity source/map proof, not fresh duplicate-link test. Selected code unchanged; no new runtime pass.; P68 cached full0, published11x2, Full gates passed; batch-p68-checkpoint.json\",Direct format restoration authorized,P68 verified/published; included in this Git delivery\n",
+      "T483-R0826,826,T483-D0932,681,src/mvdm-host/softpc.new/base/support/xt.c,8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996,75,1,84,1,historical anchor; relocate against current diff before decision,retain,not-required,CPU40 register macros address CCPU_GR/SR; old reg A/B/CS/MSW definitions are a different representation.,qualified-pending-owner-decision,xt.c original register75 or parity346 condition,CPU40 CCPU selected product,\"Actual xt.obj compiler parameters: current source exits0; only restoring original register block exits2 with C2061/C2059 at mreg MSW. CPU40 c_reg.h and c_main use CCPU_GR/SR/FLAGS. Original block is old CCPU, not hardware monitor.\",Exclude incompatible old representation or duplicate initialized provider.,Remove explanations; keep original outer guard and minimal CPU40 exclusion.,minimal exclusion pending owner,Removed8-line register and6-line parity explanations; restored CRLF. Corrected existing #line340 to342 for original parity comment. Original guards and #error unchanged.,0,r0825-r0828-xt-review.json: no matching-block mismatch; #error unchanged.,\"build/t483-s5-p68/current.exit=0;original-registers.exit=2;PID22440. Parity source/map proof, not fresh duplicate-link test. Selected code unchanged; no new runtime pass.; P68 cached full0, published11x2, Full gates passed; batch-p68-checkpoint.json\",Pending residual approval,P68 verified/published; included in this Git delivery\n",
+      "T483-R0827,827,T483-D0933,681,src/mvdm-host/softpc.new/base/support/xt.c,8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996,346,1,115,1,historical anchor; relocate against current diff before decision,correct,not-implemented,Original xt.c:346 guard; c_main.c:486 owns identical 256 values.,restored-verified-published,xt.c original register75 or parity346 condition,CPU40 CCPU selected product,Original xt.c and c_main.c parity arrays each contain256 identical values. Production ntvdm.exe.map attributes _pf_table to original-ccpu386:c_main.obj. Original xt.c would introduce a second initialized external definition. No distinct provider or missing table.,Comment unnecessary,Remove explanations; keep original outer guard and minimal CPU40 exclusion.,restore original comment-free text,Removed8-line register and6-line parity explanations; restored CRLF. Corrected existing #line340 to342 for original parity comment. Original guards and #error unchanged.,-6,r0825-r0828-xt-review.json: no matching-block mismatch; #error unchanged.,\"build/t483-s5-p68/current.exit=0;original-registers.exit=2;PID22440. Parity source/map proof, not fresh duplicate-link test. Selected code unchanged; no new runtime pass.; P68 cached full0, published11x2, Full gates passed; batch-p68-checkpoint.json\",Direct format restoration authorized,P68 verified/published; included in this Git delivery\n",
+      "T483-R0828,828,T483-D0934,681,src/mvdm-host/softpc.new/base/support/xt.c,8bed82996166e7577f483bcef63d29532596fb0687be2d93ace08a080c0fb996,346,1,121,1,historical anchor; relocate against current diff before decision,retain,not-required,All 256 original xt.c and selected c_main.c parity entries compared equal.,qualified-pending-owner-decision,xt.c original register75 or parity346 condition,CPU40 CCPU selected product,Original xt.c and c_main.c parity arrays each contain256 identical values. Production ntvdm.exe.map attributes _pf_table to original-ccpu386:c_main.obj. Original xt.c would introduce a second initialized external definition. No distinct provider or missing table.,Exclude incompatible old representation or duplicate initialized provider.,Remove explanations; keep original outer guard and minimal CPU40 exclusion.,minimal exclusion pending owner,Removed8-line register and6-line parity explanations; restored CRLF. Corrected existing #line340 to342 for original parity comment. Original guards and #error unchanged.,0,r0825-r0828-xt-review.json: no matching-block mismatch; #error unchanged.,\"build/t483-s5-p68/current.exit=0;original-registers.exit=2;PID22440. Parity source/map proof, not fresh duplicate-link test. Selected code unchanged; no new runtime pass.; P68 cached full0, published11x2, Full gates passed; batch-p68-checkpoint.json\",Pending residual approval,P68 verified/published; included in this Git delivery\n"
+    ],
+    "artifacts/mvdm-audit/t483-remaining-reaudit/pending-decisions.csv": [
+      "T483-R0826,src/mvdm-host/softpc.new/base/support/xt.c,CPU40 original provider selection,\"Actual xt.obj compiler parameters: current source exits0; only restoring original register block exits2 with C2061/C2059 at mreg MSW. CPU40 c_reg.h and c_main use CCPU_GR/SR/FLAGS. Original block is old CCPU, not hardware monitor.\",Keep original outer structure and current CPU40 exclusion.,Retain minimal guard; no replacement state or table.,0; current added guard pair,r0825-r0828-xt-review.json,pending-owner-decision-source-proof,\n",
+      "T483-R0828,src/mvdm-host/softpc.new/base/support/xt.c,CPU40 original provider selection,Original xt.c and c_main.c parity arrays each contain256 identical values. Production ntvdm.exe.map attributes _pf_table to original-ccpu386:c_main.obj. Original xt.c would introduce a second initialized external definition. No distinct provider or missing table.,Keep original outer structure and current CPU40 exclusion.,Retain minimal guard; no replacement state or table.,0; current added guard pair,r0825-r0828-xt-review.json,pending-owner-decision-source-proof,\n"
+    ],
+    "artifacts/mvdm-audit/t483-s6-diff-fragmentation/file-worklist.csv": [
+      "118,src/mvdm-host/softpc.new/base/support/xt.c,4,8,331,2,2,pending-mask-review,T483-R0825;T483-R0826;T483-R0827;T483-R0828,97985ab274b50e7fe91ecc42383a217b5bfc4d4ea48800ccf0047af8ff79ac24\n"
+    ],
+    "artifacts/mvdm-audit/t483-s6-diff-fragmentation/owner-review-order.csv": [
+      "117,src/mvdm-host/softpc.new/base/support/xt.c,4,8,331,339,2,2,118,pending-mask-review,97985ab274b50e7fe91ecc42383a217b5bfc4d4ea48800ccf0047af8ff79ac24\n"
+    ]
+  },
+  "consumed_declaration": "int verbose;",
+  "consumer": "Original support/main.c writes FALSE; final map contains verbose",
+  "removed_unconsumed": [
+    "CsIsBig",
+    "cpu_interrupt_map",
+    "cpu_int_translate",
+    "cpu_int_delay",
+    "ica_lock"
+  ],
+  "existing_original_providers": {
+    "cpu_interrupt_map": "ccpu386/c_main.c",
+    "pf_table": "ccpu386/c_main.c",
+    "trap_delay_count": "host/src/stubs.c"
+  },
+  "count_limit": "Two ambiguous-original-arm masks are part of historical4/339 census; not all339 lines are active semantic differences.",
+  "status": "Cached build,targeted verification and publish11x2 passed;governance and Git accompany receipt",
+  "other_mirrors_unchanged": true,
+  "placement_correction": "First full build proved standalone worker is excluded from CCPU fixtures; common execution unit supplies one definition to both closures."
+}

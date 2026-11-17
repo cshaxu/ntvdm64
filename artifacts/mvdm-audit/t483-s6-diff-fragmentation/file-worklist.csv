@@ -110,7 +110,6 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 115,src/mvdm-host/softpc.new/base/cvidc/evidgen.h,4,4,0,0,0,pending-file-review,T483-R0496;T483-R0497;T483-R0498;T483-R0499,83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4
 116,src/mvdm-host/softpc.new/base/cvidc/sevid016.c,4,6,6,0,0,pending-file-review,T483-R0608;T483-R0609;T483-R0610;T483-R0611,636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc
 117,src/mvdm-host/softpc.new/base/inc/cpu_vid.h,4,8,1,1,2,pending-mask-review,T483-R0701;T483-R0702,69b40895ba5dc74e008e28363d991a765bbbe1110ca6282ae418472779321984
-118,src/mvdm-host/softpc.new/base/support/xt.c,4,8,331,2,2,pending-mask-review,T483-R0825;T483-R0826;T483-R0827;T483-R0828,97985ab274b50e7fe91ecc42383a217b5bfc4d4ea48800ccf0047af8ff79ac24
 119,src/mvdm-host/softpc.new/host/src/nt_rflop.c,4,4,3,34,0,pending-file-review,T483-R1209;T483-R1210;T483-R1211;T483-R1212;T483-R1213;T483-R1214;T483-R1215;T483-R1216;T483-R1217;T483-R1218;T483-R1219;T483-R1220;T483-R1221;T483-R1222;T483-R1223;T483-R1224;T483-R1225;T483-R1226;T483-R1227;T483-R1228,b969ec4e1d4501472b0a5ca281222673eea78cf067130cc0f2087c8c68f40507
 120,src/mvdm-host/softpc.new/obj.vdm/ntvdm.c,4,11,2,4,0,pending-file-review,T483-R1251;T483-R1252;T483-R1253;T483-R1254;T483-R1255,406863948f5e8c06d9da183622d691f68313abdfeaa7fb99af4fc7b772a0c200
 121,src/mvdm-host/wow32/wmsgem.c,4,4,1,1,0,pending-file-review,T483-R1661;T483-R1662;T483-R1663;T483-R1664;T483-R1665,f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8

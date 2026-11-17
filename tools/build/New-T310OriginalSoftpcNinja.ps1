@@ -179,7 +179,8 @@ $biosNames = Get-OriginalSources $biosManifest
 $keymouseNames = Get-OriginalSources $keymouseManifest
 $systemNames = Get-OriginalSources $systemManifest
 $disksNames = Get-OriginalSources $disksManifest
-$supportNames = Get-OriginalSources $supportManifest
+# xt.c is retired; its consumed verbose storage belongs to the worker.
+$supportNames = @(Get-OriginalSources $supportManifest | Where-Object { $_ -ne 'xt.c' })
 $videoNames = Get-OriginalSources $videoManifest
 # CCPU's original C-language video-memory access backend.  It complements
 # ccpu386 instruction execution and base/video device state; it is not an

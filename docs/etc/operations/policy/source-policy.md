@@ -403,3 +403,10 @@ algorithms;it does not establish minimality of the registration or wait adapters
 Retire base/ntos/rtl/time.c only after current product links and archive-member
 checks confirm it is unnecessary. Remove its local-body-only test;do not
 replace it with autonomous code or change other RTL/Netlib mirror bodies.
+
+### T483 S6 P26 owner-approved SoftPC global extraction
+
+Retire softpc.new/base/support/xt.c and retain int verbose in the existing
+shared SoftPC execution storage. Preserve original startup initialization,
+CCPU providers and source manifest bytes;filter the retired entry in the
+current build generator. No other mirror change or CPU behavior modification.

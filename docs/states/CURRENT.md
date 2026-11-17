@@ -33,12 +33,12 @@ and retiring that mirror file and its active difference entries (P19).
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-35/255 initial difference files reviewed;220 remain. P19,P21-P25 retire six
-reviewed files by owner approval;live population is29 reviewed/249,220 remain. Twenty-five changed files
-verified across P2-P18;eight reviewed unchanged. Current census:1057 files
-(1048 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
-normalized/error-masked differences,and249 nonzero files.
-Current delivered total2079 blocks/31596 lines. P19 retires130 blocks/9237
+36/255 initial difference files reviewed;219 remain. P19,P21-P26 retire seven
+reviewed files by owner approval;live population is29 reviewed/248,219 remain. Twenty-five changed files
+verified across P2-P18;eight reviewed unchanged. Current census:1056 files
+(1047 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
+normalized/error-masked differences,and248 nonzero files.
+Current delivered total2075 blocks/31257 lines. P19 retires130 blocks/9237
 lines;this is mirror reclassification,not original restoration. Prior delivered
 reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correction remains separate.
 
@@ -70,6 +70,7 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/handtabl.c |24->retired|1381->retired|P23 compat extraction;original ownership and targeted lifecycle passed|
 | client/client.c |8->retired|3564->retired|P24 five compat units;original bodies and targeted lifecycle passed|
 | rtl/time.c |6->removed|1216->removed|P25 unused archive member removed;no compat replacement|
+| support/xt.c |4->retired|339->retired|P26 verbose storage extraction;historical mask ambiguity retained in evidence|
 | kernel/input.c |25->retired|5503->retired|P22 compat extraction;targeted input and lifecycle passed|
 | sevid001.c |25->25|50->50|Unchanged;25 evidenced decisions;prior-source identity checked|
 | wow32/wkman.c |25->25|46->45|P14 extra blank removed;Full20 passed|
@@ -81,7 +82,7 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/cleanup.c |21->20|66->44|P18 original ClientDied restored;focused37,lifecycle and Full20 passed|
 
 
-The canonical pending backlog has1596 rows after retiring six owner-approved mirror files,
+The canonical pending backlog has1594 rows after retiring seven owner-approved mirror files,
 plus2 non-R items. Extraction removes active mirror entries;it is not original-code restoration.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
@@ -95,13 +96,13 @@ non-error blocks descending,path ascending for ties. Await owner file selection.
 
 ## Current Technical Baseline
 
-P25 cached x86/x64 build and targeted verification passed:RTL archive member
-checks,native NTDLL seven calendar cases on both architectures,and actual WOW
-lifecycle. Full was not run,per owner-selected targeted scope. Package 6d87841b-7c62-4629-9637-7ed981a15caa
+P26 cached x86/x64 build and targeted verification passed:archive/symbol and
+11-image import proof,CCPU boundary/halt/reset/debug tests,and actual WOW
+lifecycle. Full was not run,per owner-selected targeted scope. Package c03136f7-0977-4ca8-b2c8-bce883712e62
 contains11 images,published and hash-verified to assets/release and O:/winnt/system32.
 Retained mirrors,guest and winnt.zip are unchanged.
-[P25 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p25-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p25-verification-evidence.zip).
+[P26 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p26-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p26-verification-evidence.zip).
 
 ## Remaining Scope
 
@@ -198,3 +199,18 @@ restoration40 blocks/1194 lines,compat extractions208 blocks/20517 lines,
 unused removal6 blocks/1216 lines:total254 blocks/22927 lines.
 Main register2648 rows;pending1596 rows. Build,publish11x2,targeted tests
 passed;governance and Git accompany receipt. No next-file admission.
+
+## P26 Delivery
+
+Owner approves retiring support/xt.c and retaining its sole consumed global
+int verbose in existing shared SoftPC execution compatibility storage.
+Original main.c initialization,CCPU interrupt/parity owners and sources manifest
+remain unchanged. Exclude xt.c in the build generator;require full cached
+x86/x64 link,archive/symbol proof,CCPU boundary tests and WOW lifecycle.
+Publish11x2,commit/push;targeted verification replaces Full. No next file.
+
+P26 retires4 recorded blocks/339 lines,including two historical mask ambiguities.
+Cumulative original restoration40 blocks/1194 lines,extractions212 blocks/20856
+lines,unused removal6 blocks/1216 lines:total258 blocks/23266 lines.
+Main register2644 rows;pending1594 rows. Build,publish11x2,targeted tests passed;
+governance and Git accompany receipt. No next-file admission.

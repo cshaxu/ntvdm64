@@ -118,3 +118,8 @@ and regression check; original DPMI DpmiSimulateIretCF is the real caller.
 Retired recovery experiments that replaced CCPU40 registers, SAS, frame
 transactions, WOW pointer scopes, or `host_simulate` have no repository copy;
 any retained comparison material is external-only and is not a production input.
+
+T483 S6 P26: shared SoftPC execution storage retains int verbose from
+OpenNT base/mvdm/softpc.new/base/support/xt.c (revision
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c). Original main.c initializes it;
+retired xt.c supplies no CPU implementation. CCPU and stubs providers remain.

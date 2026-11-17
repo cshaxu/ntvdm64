@@ -2,6 +2,10 @@
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_softpc_termination.h"
 
+/* Original support/xt.c process storage, shared by product and execution
+ * fixtures. Original main.c retains initialization. */
+int verbose;
+
 /* Original SoftPC host spelling; its body remains in mvdm-host. */
 extern void host_start_cpu(void);
 extern void host_applClose(void);

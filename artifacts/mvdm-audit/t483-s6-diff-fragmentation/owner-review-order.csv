@@ -110,7 +110,6 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 114,src/mvdm-host/softpc.new/base/cvidc/evidgen.h,4,4,0,4,0,0,115,pending-file-review,83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4
 115,src/mvdm-host/softpc.new/base/cvidc/sevid016.c,4,6,6,12,0,0,116,pending-file-review,636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc
 116,src/mvdm-host/softpc.new/base/inc/cpu_vid.h,4,8,1,9,1,2,117,pending-mask-review,69b40895ba5dc74e008e28363d991a765bbbe1110ca6282ae418472779321984
-117,src/mvdm-host/softpc.new/base/support/xt.c,4,8,331,339,2,2,118,pending-mask-review,97985ab274b50e7fe91ecc42383a217b5bfc4d4ea48800ccf0047af8ff79ac24
 118,src/mvdm-host/softpc.new/host/src/nt_rflop.c,4,4,3,7,34,0,119,pending-file-review,b969ec4e1d4501472b0a5ca281222673eea78cf067130cc0f2087c8c68f40507
 119,src/mvdm-host/softpc.new/obj.vdm/ntvdm.c,4,11,2,13,4,0,120,pending-file-review,406863948f5e8c06d9da183622d691f68313abdfeaa7fb99af4fc7b772a0c200
 120,src/mvdm-host/wow32/wmsgem.c,4,4,1,5,1,0,121,pending-file-review,f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8

@@ -266,3 +266,11 @@ Unused member removal;cached build,archive verification,publish11x2 and targeted
 [P25 receipt](batch-p25-checkpoint.json) and [verification evidence](p25-verification-evidence.zip).
 Current census:1057 files,249 nonzero,2079 blocks/31596 lines.
 P20 usage ratios predate the now-removed RTL time.c.
+
+[P26 xt storage extraction](xt-storage-extraction.json):4 recorded points/339
+lines;includes two historical ambiguous-arm masks. Cached build,archive/symbol
+proof,publish11x2 and targeted CCPU/WOW verification passed.
+
+[P26 receipt](batch-p26-checkpoint.json) and [verification evidence](p26-verification-evidence.zip).
+Current census:1056 files,248 nonzero,2075 blocks/31257 lines.
+P20 usage ratios predate the now-retired support/xt.c.
