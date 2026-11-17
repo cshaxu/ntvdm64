@@ -244,3 +244,11 @@ Full is explicitly not required for this batch.
 [P22 receipt](batch-p22-checkpoint.json) and [verification evidence](p22-verification-evidence.zip).
 Current census:1060 files,252 nonzero,2117 blocks/37757 lines.
 The P20 ratio snapshot also predates the now-retired kernel/input.c.
+
+[P23 owner-approved object ownership extraction](handtabl-compat-extraction.json)
+retires kernel/handtabl.c:24 non-error blocks/1381 lines. Cached build,targeted tests and publish11x2 passed;Git accompanies receipt.
+Full waived by owner.
+
+[P23 receipt](batch-p23-checkpoint.json) and [verification evidence](p23-verification-evidence.zip).
+Current census:1059 files,251 nonzero,2093 blocks/36376 lines.
+The P20 ratio snapshot also predates the now-retired kernel/handtabl.c.

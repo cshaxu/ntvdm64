@@ -633,9 +633,9 @@ $ninja.Add('build ' + $buttonBlitObject + ': cc ' + (ConvertTo-NinjaPath (Join-P
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_BLIT_ONLY')
   $probeObject = 'obj/opennt-user/probe.obj'
   $cleanupObject = 'obj/opennt-user/cleanup.obj'
-  $handleFlagsObject = 'obj/opennt-user/handtabl.obj'
+  $handleFlagsObject = 'obj/compat/wow-object-ownership.obj'
   $objects.Add($handleFlagsObject)
-  $ninja.Add('build ' + $handleFlagsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/handtabl.c')))
+  $ninja.Add('build ' + $handleFlagsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_object_ownership.c')))
   $ninja.Add('  cflags = $cflags /FI "wow_user_client_view_layout.h"')
   $objects.Add($cleanupObject)
   $ninja.Add('build ' + $cleanupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/cleanup.c')))

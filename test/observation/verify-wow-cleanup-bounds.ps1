@@ -17,7 +17,9 @@ $handlePath='windows/core/ntuser/kernel/handtabl.c'
 $handleSource=Read-ObjectSource $handlePath 'F0B56314A93423599F06645D17104391F19A0CA07C3944853B065D8866493F7C'
 $tablePattern='(?s)CONST BYTE gabObjectCreateFlags\[TYPE_CTYPES\] = \{.*?\n\};'
 $originalTable=[regex]::Match($handleSource,$tablePattern).Value
-$mirrorTable=[regex]::Match((Read-ObjectMirror $handlePath),$tablePattern).Value
+$ownershipSource=[IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/compat/wow_object_ownership.c'))
+if ($ownershipSource.Contains("`r")) { throw 'Compat ownership table must use LF' }
+$mirrorTable=[regex]::Match($ownershipSource,$tablePattern).Value
 # Reconstruct only the one excluded body; line directives are not source content.
 function Restore-ExcludedBody([string]$text, [string]$originalBody) {
     if ([regex]::Matches($text, '(?m)^#error[^\n]*$').Count -ne 1) {
@@ -29,7 +31,8 @@ $imeOriginal = '    OCF_THREADOWNED | OCF_MARKTHREAD,                   /* input
 if ([regex]::Matches($originalTable, [regex]::Escape($imeOriginal)).Count -ne 1) {
     throw 'Original FE_IME table body changed'
 }
-$mirrorTable = Restore-ExcludedBody $mirrorTable $imeOriginal
+# Compare the actual selected non-IME table; types and flags remain original.
+$originalTable = $originalTable.Replace("#ifdef FE_IME`n$imeOriginal`n#endif`n", '')
 if (!$originalTable -or $originalTable -cne $mirrorTable) { throw 'Object ownership table differs from OpenNT' }
 $typesPath='windows/core/ntuser/inc/user.h'
 $typesSource=Read-ObjectSource $typesPath 'ADCF0AC89C4779D9B7908610976F4A47D2385403EDC37496C8AB004B016CF6C1'

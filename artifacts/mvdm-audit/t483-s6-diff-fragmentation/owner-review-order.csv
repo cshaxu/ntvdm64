@@ -24,7 +24,6 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 23,src/mvdm-host/softpc.new/base/cvidc/sevid001.c,25,25,25,50,0,0,26,reviewed-no-code-change-residuals-pending-owner,2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5
 24,src/mvdm-host/wow32/wkman.c,25,32,13,45,24,0,27,reviewed-verified-p14-residuals-pending-owner,f6a57202203d62dbe4fa6dff6991660d7f3aa281456abec6f1e0c40c683b388f
 26,src/mvdm-host/softpc.new/base/keymouse/keyba.c,24,49,7,56,69,0,29,reviewed-verified-p15-residuals-pending-owner,98f124308ee7c089cc4a6156e3de2f5887a01b637950eff5f616d07961e06fab
-27,src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,24,54,1327,1381,29,0,24,reviewed-verified-p12-residuals-pending-owner,ffe709bfb792e29d9b85531b744b9e9e7d99b14cae2f5b2706d2a641784e372c
 29,src/mvdm-host/softpc.new/host/src/nt_graph.c,20,74,11,85,20,5,34,pending-mask-review,a996a56fdb41b3dcc651d8283d84987f42b19c6f98b028428ef4404844b98c03
 30,src/mvdm-host/wow32/wsdata.c,20,161,13,174,0,0,35,pending-file-review,c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def
 31,src/non-mvdm/base/win32/client/vdm.c,20,38,594,632,2,0,30,reviewed-verified-p16-residuals-pending-owner,c8fbc28a468f39a7cb409866efdb06c5a3c5fcc16ea039da6897120fbfedd1db

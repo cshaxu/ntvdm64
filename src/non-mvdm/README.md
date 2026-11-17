@@ -2669,3 +2669,8 @@ this mirror. Historical provenance and review records remain evidence only.
 T483 S6 P22 supersedes the kernel/input.c subset admission: AddAttachment and
 Recalc2 now reside in src/compat/wow_input_membership.c. Historical mirror
 records remain provenance only; no other kernel input services are admitted.
+
+T483 S6 P23 supersedes kernel/handtabl.c mirror admission. Its consumed
+object-ownership table resides in src/compat/wow_object_ownership.c;the former
+mirror and unused unexported residual definitions are retired. Historical
+records remain provenance only,not current mirror exceptions.

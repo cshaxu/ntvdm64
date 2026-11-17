@@ -1,0 +1,90 @@
+{
+  "packet": "M0 T483 S6 P23",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/compat/README.md",
+        "sha256": "bbb13f440584ed9b5ae7608e127cd7f055a0ff67e041243536ac568a16651287"
+      },
+      {
+        "path": "src/non-mvdm/README.md",
+        "sha256": "8449b6eca2c78c966e7c8414b2baef16fb6ee634301d735d52fb2b03008c934e"
+      },
+      {
+        "path": "src/ntvdm-exe/wow/README.md",
+        "sha256": "cbfaaf3fd6529e6e9705ef33e53d1009f99472f94bbb9010a513953ef9c0eace"
+      },
+      {
+        "path": "test/observation/verify-wow-cleanup-bounds.ps1",
+        "sha256": "2bdeacc6f78635d9fadd8ffc93404ffd5405a2ae601abe281a70f8714134bb99"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "409e4786ff08800f21d19de96ff8d23d65892a8c4778f8a5d50ac03c99695e66"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "1be6b7962a2ab63be5e11b7c22ffd0a136ef70b27e7e10da952d3763d77ac66c"
+      },
+      {
+        "path": "src/compat/wow_object_ownership.c",
+        "sha256": "4facbf8abc0ebfda9f625fd80a3e084754e633fcda0438df51b66e75856d45a0"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c"
+    ],
+    "source_files": 7
+  },
+  "publication": {
+    "status": "published",
+    "package": "2b15b1ee-a52d-40c4-bbfd-349c107948da",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "ownership": "passed",
+    "controls": "passed",
+    "formal-graph": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner approved related targeted verification only",
+  "global_counts": {
+    "files": 1059,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 251,
+    "blocks": 2093,
+    "lines": 36376,
+    "reviewed_live_files": 29,
+    "remaining_files": 222,
+    "retired_reviewed_files": 4,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 200,
+    "owner_retired_lines": 16953,
+    "total_census_reduction_blocks": 240,
+    "total_census_reduction_lines": 18147
+  },
+  "limits": [
+    "Owner-approved extraction, not original restoration",
+    "All retained mirrors and original guest unchanged",
+    "Original ownership table values/types/flags unchanged",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

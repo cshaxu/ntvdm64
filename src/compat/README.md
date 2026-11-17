@@ -217,3 +217,8 @@ and dialog-navigation fixture link this same implementation.
 revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, by owner-approved P22
 extraction. The original algorithms and existing explicit current-thread ABI
 remain; modern native queue attachment stays with the existing caller.
+
+`wow_object_ownership.c` preserves the selected non-IME object ownership table
+from OpenNT kernel/handtabl.c lines39-59,revision
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. Owner-approved P23 extraction
+leaves original type/flag definitions and the WOW cleanup consumer unchanged.

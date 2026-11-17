@@ -380,3 +380,12 @@ retaining AddAttachment and Recalc2 in src/compat/wow_input_membership.c with
 provenance. Preserve both original algorithms and the existing explicit
 current-thread argument. This scoped extraction does not admit the omitted
 NT4 kernel input queues or change modern USER32 input ownership.
+
+### T483 S6 P23 owner-approved object ownership extraction
+
+The owner approves retiring non-mvdm/windows/core/ntuser/kernel/handtabl.c
+and retaining its selected non-IME object-ownership table in
+src/compat/wow_object_ownership.c with provenance. Preserve original values,
+type/flag definitions and the cleanup consumer. Unused unexported residual
+definitions are removed;this does not admit NT4 kernel handle allocation or
+change the modern USER ownership boundary.

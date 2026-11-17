@@ -40,14 +40,14 @@ retires before releasing the binding. This currently enrolls windows created
 through the bound A/W entry, not every native helper or process-owned resource.
 The table contains host views and is not yet a guest-visible shared USER table.
 
-Cleanup object classification now comes from the compiled original handtabl.c
+Cleanup object classification now comes from the original handtabl.c table extracted into compat/wow_object_ownership.c
 gabObjectCreateFlags and original TYPE/OCF declarations, not a caller-supplied
 table in the cleanup context. Native resource release bindings still belong
 to their actual producers/owners. Native USER remains the allocator; importing
 HMAllocObject unchanged would introduce another generated handle identity and
 would require a different, comprehensive handle-conversion architecture.
 
-Cleanup object classification now comes from the compiled original handtabl.c
+Cleanup object classification now comes from the original handtabl.c table extracted into compat/wow_object_ownership.c
 gabObjectCreateFlags and original TYPE/OCF declarations, not a caller-supplied
 table in the cleanup context. Native resource release bindings still belong
 to their actual producers/owners. Native USER remains the allocator; importing
