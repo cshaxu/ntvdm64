@@ -1,0 +1,92 @@
+{
+  "file": "src/mvdm-host/wow32/wmsg16.c",
+  "before_sha256": "a764326d0d62768cafd0e6b9fe5b59acc07ff84b2611793fe52ddf5949680765",
+  "after_sha256": "4033c6c31ead02a917dae947346ff68c054e456992061b2fd86e9385db5b00b7",
+  "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+  "before": {
+    "blocks": 37,
+    "added": 113,
+    "deleted": 37,
+    "lines": 150
+  },
+  "after": {
+    "blocks": 37,
+    "added": 111,
+    "deleted": 35,
+    "lines": 146
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 4
+  },
+  "excluded_bodies": [
+    {
+      "original": [
+        70,
+        110
+      ],
+      "current": [
+        73,
+        74
+      ]
+    },
+    {
+      "original": [
+        247,
+        247
+      ],
+      "current": [
+        223,
+        224
+      ]
+    },
+    {
+      "original": [
+        359,
+        362
+      ],
+      "current": [
+        339,
+        340
+      ]
+    }
+  ],
+  "mask_issues": [],
+  "restored": [
+    "R1636 remove premature HWND0/null-param rejection and surplus blank; mapped-header failure remains",
+    "R1651 restore original harmless LONG lParamNew declaration and blank"
+  ],
+  "counter_review": {
+    "status": "HWND0 is valid for thread messages; ThunkMsg16 return HWND is not status. Preserve fThunkSucceeded.",
+    "text": "AddParamMap allocation/refresh failure requires successful-acquisition tracking; cleanup must not decrement another mapping. Callback can change native lParam, so original guest key selects the acquired entry.",
+    "initiate": "Failed nested WI32DDEAddInitiator does not add a node; original unconditional delete can remove the outer same-HWND node.",
+    "dde": "Original DDEAddhandle failure leaves acquired packets unregistered. Pack failure after registration and PostMessage rejection require release of packed parameter and exact acquired pairs; synchronous SendMessage also selects POSTMESSAGE conversion, requiring local fallback.",
+    "execute": "Original duplicate-allocation/registration failure leaks packet; allocation failure performs two unlocks for one acquisition. Exact original control38 assertions/10 failures versus candidate0,source-boundary evidence only.",
+    "copydata": "Original SendDlgItemMessage reaches conversion without POSTMESSAGE and can lack preexisting node; find-or-construct required. Mem16 key must be guest address; native pointer is not guest identity.",
+    "release": "Callback can mutate converted header; immutable acquired keys and clear-before-release flags prevent freeing the substituted pointer and duplicate finally release.",
+    "guard": "Real PostThreadMessage rejects COPYDATA with1159; existing PostAppMessage normal unthunk/finally releases construction. Early guard removed; negative test now exercises native rejection."
+  },
+  "prior_evidence": "t483-remaining-reaudit/r1601-r1651 wmsg16 point records; previous restoration not counted again",
+  "native_probe": {
+    "exit": 0,
+    "output": "COPYDATA result=0 error=1159\nUSER result=1\n"
+  },
+  "verification": "Final-source preprocessing1003 shared lines/0 mismatches;COPYDATA59/filter14/queue18 pass and immutable filter negative7 failures preserved;cached full,publish11x2,message,focused,Full20,boundary/governance passed;Git delivery accompanies receipt",
+  "residuals": "Evidence-backed differences remain pending owner;no retention approval inferred",
+  "compiler_line_proof": {
+    "selected_shared_lines_checked": 1003,
+    "mismatches": [],
+    "source_sha256": "4033c6c31ead02a917dae947346ff68c054e456992061b2fd86e9385db5b00b7",
+    "limitation": "Aligned compiler-selected shared runs >=3; inserted/adapted lines retain their boundary anchors, not asserted original statements."
+  },
+  "final_delivery": {
+    "receipt": "batch-p6-checkpoint.json",
+    "source": "final checkpoint hash matched",
+    "cached_full": 0,
+    "published_images": 11,
+    "destinations": 2,
+    "Full_gates": 20,
+    "status": "verified;Git delivery accompanies receipt",
+    "residuals": "pending owner,not approved"
+  }
+}

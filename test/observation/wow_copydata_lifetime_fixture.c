@@ -145,7 +145,15 @@ typedef void *PVDMFRAME;
 #define MSG16NEEDSTHUNKING(p) ((p)->iClass!=WOWCLASS_NOTHUNK)
 #define RETURN(value) return (value)
 static BOOL fake_post(DWORD thread,UINT message,WPARAM wp,LPARAM lp){
-    CHECK(thread==7&&message==WM_USER+2&&wp==3&&lp==4);++posted;return TRUE;
+    CHECK(thread==7);++posted;
+    if(message==WM_COPYDATA){
+        MSG queued; BOOL result;
+        PeekMessage(&queued,NULL,0,0,PM_NOREMOVE);
+        result=PostThreadMessageA(GetCurrentThreadId(),message,wp,lp);
+        CHECK(!result&&GetLastError()==ERROR_MESSAGE_SYNC_ONLY);
+        return result;
+    }
+    CHECK(message==WM_USER+2&&wp==3&&lp==4);return TRUE;
 }
 #undef PostThreadMessage
 #define PostThreadMessage fake_post
@@ -215,7 +223,7 @@ static BOOL CallBack16(INT code,PARM16 *args,DWORD procedure,PVPVOID result) {
 }
 static void reset(unsigned failure) {
     task.vpCBStack=task.vpStack=0x04000000u+sizeof(guest_stack);
-    callbacks=0;
+    callbacks=posted=normal_unthunks=0;
     unsigned i;
     CHECK(live==0&&pCPDataFirst==NULL);
     for(i=0;i<64;i++)CHECK(!allocations[i].pointer);
@@ -242,7 +250,7 @@ int main(void) {
     }
     CHECK(VirtualProtect(native,4096,PAGE_READWRITE,&protection));
     {POSTAPPMESSAGE16 args={7,WM_COPYDATA,3,0x01000000};
-     reset(0);CHECK(!WU32PostAppMessage(&args)&&!posted&&!normal_unthunks&&!live);
+     reset(0);CHECK(!WU32PostAppMessage(&args)&&posted==1&&normal_unthunks==1&&!live&&!pCPDataFirst);
      reset(0);args.f2=WM_USER+2;args.f4=4;
      CHECK(WU32PostAppMessage(&args)==TRUE&&posted==1&&normal_unthunks==1&&!live);
     }
@@ -275,7 +283,7 @@ int main(void) {
     reset(0);native->cbData=0;a=forward(native);CHECK(WM32CopyData(&a)&&live==2);wow_message_unwind32(&a);
     input16.cbData=0;x=reverse();(void)ThunkMsg16(&x);CHECK(x.fThunkSucceeded&&live==2);wow_message_unwind16(&x);
     reset(0);x=reverse();x.Parm16.WndProc.hwnd=0;x.Parm16.WndProc.wMsg=WM_USER+2;CHECK(!ThunkMsg16(&x)&&x.fThunkSucceeded);
-    x=reverse();x.Parm16.WndProc.hwnd=0;(void)ThunkMsg16(&x);CHECK(!x.fThunkSucceeded&&!live);
+    x=reverse();x.Parm16.WndProc.hwnd=0;(void)ThunkMsg16(&x);CHECK(x.fThunkSucceeded&&live==4);wow_message_unwind16(&x);CHECK(!live&&!pCPDataFirst);
     {COPYDATASTRUCT embedded={123,8,input_bytes};
      reset(0);native->cbData=sizeof(embedded);native->lpData=&embedded;
      a=forward(native);CHECK(WM32CopyData(&a)&&live==4);

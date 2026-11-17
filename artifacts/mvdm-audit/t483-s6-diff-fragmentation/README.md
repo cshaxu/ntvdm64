@@ -145,3 +145,10 @@ record 8 fewer blocks/42 fewer lines,source identity,11-image dual publication,
 message/keyboard/focused/task-order/Full20 and boundary/governance passes.
 The initial runner-environment failure is retained alongside the same-package
 fresh-process pass;residual differences remain pending owner decisions.
+
+[Thirteenth-file review](wmsg16-whole-file-review.json):37->37 non-error blocks,
+150->146 lines. Restore original entry and harmless local declaration;real
+PostThreadMessage rejection and exact-body cleanup controls passed. Original
+#line mapping checked against compiler preprocessing;P6 delivery pending.
+
+[P6 delivery receipt](batch-p6-checkpoint.json) and [verification evidence](p6-verification-evidence.zip): wmsg16.c 37->37 non-error blocks,150->146 changed lines;cached full,publish11x2,message,focused/task-order,Full20 and governance passed. Residual decisions remain pending owner.

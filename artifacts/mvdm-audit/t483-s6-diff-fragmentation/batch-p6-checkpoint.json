@@ -1,0 +1,184 @@
+{
+  "packet": "M0 T483 S6 P6",
+  "status": "cached full,publish11x2,message,focused/task-order,Full20,boundary/governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/mvdm-host/wow32/wmsg16.c",
+        "sha256": "4033c6c31ead02a917dae947346ff68c054e456992061b2fd86e9385db5b00b7"
+      },
+      {
+        "path": "test/observation/wow_copydata_lifetime_fixture.c",
+        "sha256": "148e7a2c5651599021ce8f602bd2e20021d76c0a2d67d37a1ceeb741ac87ab09"
+      },
+      {
+        "path": "test/observation/verify-wow-copydata-lifetime.ps1",
+        "sha256": "a83a0a7afe192d3f43250d8dcc9541b8d0e4586fd1fd3e1f311978180ad4da1a"
+      }
+    ],
+    "source_files": 3,
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 4
+  },
+  "publication": {
+    "status": "published",
+    "package": "c99a42e7-fa08-4c9e-9dbe-893f27d7ab03",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 448022,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 7062,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1131,
+          "CleanupMs": 487,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 12693,
+          "CleanupMs": 538,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 13860,
+          "CleanupMs": 545,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 12227,
+          "CleanupMs": 546,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 253,
+          "CleanupMs": 536,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 67638,
+          "CleanupMs": 540,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 50409,
+          "CleanupMs": 478,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 53062,
+          "CleanupMs": 522,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15230,
+          "CleanupMs": 461,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 12680,
+          "CleanupMs": 513,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 60710,
+          "CleanupMs": 529,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 13010,
+          "CleanupMs": 519,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28835,
+          "CleanupMs": 526,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30663,
+          "CleanupMs": 555,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 4080,
+          "CleanupMs": 565,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7778,
+          "CleanupMs": 523,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 11099,
+          "CleanupMs": 516,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4664,
+          "CleanupMs": 508,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 8012,
+          "CleanupMs": 527,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20763,
+          "CleanupMs": 550,
+          "Passed": true
+        }
+      ]
+    },
+    "cached": 0,
+    "message": 0,
+    "focused": 0,
+    "review": 0,
+    "copydata_final4": 0
+  },
+  "line_mapping": {
+    "files": [
+      {
+        "path": "src/mvdm-host/wow32/wmsg16.c",
+        "sha256": "4033c6c31ead02a917dae947346ff68c054e456992061b2fd86e9385db5b00b7",
+        "mismatches": [],
+        "compiler_shared_lines": 1003
+      }
+    ]
+  },
+  "evidence_root": "build\\t483-s6-p6",
+  "delivery": "Accompanying P6 commit;verify remote after push"
+}

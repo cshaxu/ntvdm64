@@ -36,9 +36,9 @@ normalized/error-masked differences;255 have nonzero counts. The initial2333
 block sum is conservative:75 mask-review cases in31 files remain counted.
 These are counting uncertainties,not permission to delete or retain code.
 Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
-S6 review12/255 complete;243 files remain. Nine changed files verified across
-P2/P3/P4/P5,three unchanged files fully reviewed. Current census2314 blocks;
-cumulative reduction19 blocks/69 lines. P5 cached full,publish11x2,focused,
+S6 review13/255 complete;242 files remain. Ten changed files verified across
+P2/P3/P4/P5/P6,three unchanged files fully reviewed. Current census2314 blocks;
+cumulative delivered reduction19 blocks/73 lines;P6 reduction0 blocks/4 lines. P5 cached full,publish11x2,focused,
 Full20 and governance passed;Git delivery accompanies the P5 receipt.
 
 | File | Non-error blocks | Changed lines | Result |
@@ -55,6 +55,7 @@ Full20 and governance passed;Git delivery accompanies the P5 receipt.
 | dpmiint.c |42->34|231->221|P5 original formatting/declaration restored|
 | wowhooks.c |38->38|114->114|No edit;residual decisions remain pending|
 | ntpsapi.h |38->38|339->310|P5 original signatures/typedef restored|
+| wmsg16.c |37->37|150->146|P6 original entry/declaration restored;Full20 passed|
 
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p3-checkpoint.json)
 records cached x86/x64,publish11x2,message/focused/task-order,Full20,
@@ -62,12 +63,15 @@ boundary143/9 and governance passes. Git delivery accompanies the receipt.
 Per-file evidence is indexed in the worklist README. Residual decisions remain
 pending owner,not approved. Known sevid000 CHAIN4 word/UNCHAINED string
 limitations are not represented as passing tests. Backlog1644 rows/1649 R points;
-R1519 remains restored,not deferred. Next file:wmsg16.c,37 conservative blocks;P5 verified;Git delivery next. nt_event.c reviewed:43->43 blocks,
+R1519 remains restored,not deferred. P5 committed/pushed f6d6f78c5. wmsg16.c whole-file review complete;P6 verified delivery accompanies receipt. Next file after P6:c_main.c,36 conservative blocks. nt_event.c reviewed:43->43 blocks,
 124->121 lines;two added X86GFX exclusions remain conservatively counted.
 [P4 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p4-checkpoint.json)
 records final cached/full/publication/message/focused/boundary/governance passes.
 Owned build/pipeline are terminal;Git delivery accompanies receipt.
 Do not restart completed file reviews.
+[wmsg16 review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/wmsg16-whole-file-review.json)
+records native COPYDATA rejection,59/14/18 source cases,7 negative-control failures
+and compiler shared-line1003/0. P6 cached full,publish11x2,focused and Full20 passed.
 
 S5's2720-point register is historical identity/evidence:1018 restored/confirmed
 and delivered,52 approved/policy,1650 pending owner. The
@@ -87,10 +91,10 @@ weakened assertion separated the failed and passing package runs.
 
 ## Current Technical Baseline
 
-S6 P5:11 images published/hash-verified to assets/release and O:/winnt/system32.
-Package302142c9-8fa7-465c-9e4b-437812f33880. Full20 includes actual NESticle
-menu/Escape. No guest or winnt.zip changes. P5 receipt binds final source,
-manifest and test results;P4 publication is superseded. All owned runners are
+S6 P6:11 images published/hash-verified to assets/release and O:/winnt/system32.
+Packagec99a42e7-fa08-4c9e-9dbe-893f27d7ab03. Full20 includes actual NESticle
+menu/Escape. No guest or winnt.zip changes. P6 receipt binds final source,
+manifest and test results;P5 publication is superseded. All owned runners are
 terminal. Git delivery accompanies this receipt;S6 remains active.
 
 S5 fixed365-file raw metric:#error included,#line excluded,4862blocks/89379lines;
@@ -115,3 +119,5 @@ No T queue reorder.
 S6 is owner-admitted after S5's verified,pushed closure. Current stays below
 16KiB;older P details remain in the indexed S5 evidence. Follow
 [execution rules](../rules/EXECUTION.md) and [source policy](../etc/operations/policy/source-policy.md).
+
+[P6 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p6-checkpoint.json) binds the final whole-file restoration and published package.

@@ -1044,8 +1044,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
         DWORD data16;
 
-        if (!hwnd16 || !lParam) return FALSE;
-
 #line 989
         lpmpex->uParam = (LONG) HWND32(wParam);
 
@@ -1408,6 +1406,8 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
         {
             HWND16 hwnd16 = lpmpex->Parm16.WndProc.hwnd;
             WORD wParam   = lpmpex->Parm16.WndProc.wParam;
+            LONG lParamNew = lpmpex->lParam;
+
             DWORD owned = lpmpex->MsgBuffer->copydata.flags;
             DWORD header = lpmpex->MsgBuffer->copydata.header;
             DWORD data = lpmpex->MsgBuffer->copydata.data;
