@@ -6,7 +6,7 @@
 #include <sas.h>
 #line 5
 
-#line 7
+IHP Gdp;
 struct CpuVector Cpu;
 struct SasVector Sas;
 struct VideoVector Video;

@@ -61,5 +61,5 @@ void SyncToggleKeys(WORD wVirtualKeyCode, DWORD dwControlKeyState);
 extern DWORD ToggleKeyState;
 
 extern HANDLE hWndConsole;
-#line 59
+extern PointerAttachedWindowed;
 extern BOOL DelayedReattachMouse;

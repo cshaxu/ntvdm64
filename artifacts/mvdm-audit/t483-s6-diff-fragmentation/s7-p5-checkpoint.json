@@ -1,0 +1,271 @@
+{
+  "packet": "M0 T483 S7 P5",
+  "publication": {
+    "status": "published",
+    "package": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "x86 and x64 passed",
+    "targeted": [
+      "NTVDM ordinals",
+      "WOW Minesweeper",
+      "repeat MEM",
+      "guest-seven",
+      "DOS4GW/NESticle rendered menu and Escape hide/restore"
+    ],
+    "tested_manifest": [
+      {
+        "Name": "VCDEX.DLL",
+        "RelativePath": "system32\\VCDEX.DLL",
+        "Sha256": "0362FB411ED0500D4E0703F62DE724050777752DD839187C3923404F3BE8CD65",
+        "Machine": 332,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "41DD3079BC3DC6940B8D50246696CA2BC323383AF8199145CF940C9DC2D46EA0"
+      },
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "EA002D58622E84CE3032474B2F0BE52D379BC3C2534CDF3351473D69CDE516E3",
+        "Machine": 34404,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "A249690DD0718E38A8087EF00D3DC255C4ACEBC5F437D1F00D90DC1FD5094AAB"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "FA2BE6F227CD7BB973916DE1871BC761101892F8754D585BD65AF74204C3E4FE",
+        "Machine": 34404,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "614ED477A577269557F7726DFBDBD01E10C00DD8EA5D4596DBBC99C648C3BCBA"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "55B19BD52623F89E570C03D8DEBE7D303B243449EFB3305B7CF95C852F458852",
+        "Machine": 34404,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "243C923363EB51E336613A9A8551480FAEA6A77CFDCF3EA42234C407D52111D0"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "692B121ED999F3364FD78BB19E5D176CCBAEE27995A948B4AF50AB259752E034",
+        "Machine": 332,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "2E9CE551CC7B961F96972CCF5B98C0092F6D5F6F0A3728EDF7EC87A879B53BEF"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "AE7CE530FC49F9A149473BDD0CB1BBB5C8999FB6B7E5C40A1992E591BFCF838C",
+        "Machine": 34404,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "6F22CC227F009C0C58DACDF19FB86F66B165A3423093E8F5211E333EA862041B"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "F79B6649603DC686B75AFEA724DC1205D4C83E046A490DF88B820AFA20122378",
+        "Machine": 34404,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "A7A614692C4A41B08C0F3BC3776A5BF337942FA5A5D48372DA90E9F49B5F5B01"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "EA750D24A41AEC93E1A141D648D03B80647E780FD63C5E46182AD8E0898F2AF9",
+        "Machine": 332,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "340EC64B8EDE1B9E1470A2F3279D1038E1624A995F972E779E329E074EC37CC7"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "8FB36810D605A0DEC937BA148C5780A5982B2F7598010058C7EF417B0B2F2D53",
+        "Machine": 332,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "1A6FC93CC5DD2AA796B7CD361D0C57B703AA44CE6AED8C8B21923C4FA7132326"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "281E44E1C96B844D8A324EAAF91BD212796166B2DBECBF4CBE598708CEF5D233",
+        "Machine": 332,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "0E77D50F794CA539A7C534B67691E6828D145F701249EF3F8F42439E10FC9CC8"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "7DB7C0B10ED7C8780EF40A25DD60FEF0D2C89791BB964B1B4D531B3C20C115E2",
+        "Machine": 34404,
+        "PackageId": "ffb2a4c8-714f-4e75-b2f8-cab52be55db3",
+        "InputSha256": "FDFB120FA5A42D328E145FAFE36F15E08D8DC0E2614BC69230F21A2D20EACAE7"
+      }
+    ]
+  },
+  "gdp_common": {
+    "coff": {
+      "symbol-localfm": "00000004 UNDEF  notype       External     | _Gdp",
+      "symbol-provider": "00000004 UNDEF  notype       External     | _Gdp"
+    },
+    "isolated_link_map": "0003:00252790       _Gdp                       0080b790     <common>"
+  },
+  "initial_targeted_runner_error": "The DOS4GW step initially received multiple Python paths for a string parameter and did not start. The retry selected one interpreter and validated the same published package. Earlier targeted gates were already successful.",
+  "limitations": "Restored legacy extern produces MSVC warning C4431. On the selected compiler it infers the same type as the BOOL definition. The published suite is targeted.",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "before": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 2
+      },
+      "source_sha256": "71b0afcd5906ef2dddac4ca2fa546aa4ceedd8302d097fb62ab71ee0b4b1254e",
+      "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+      "evidence": "../t483-remaining-reaudit/r0994-r0997-host-def-review.json",
+      "decision": "Retain the selected CPU definition and exclusion boundary. Original header experiments produced 28 missing *_func providers. Fourteen real contexts confirm past complete original restoration where safe."
+    },
+    {
+      "path": "src/mvdm-host/wow32/isvwow.h",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "de0c0839707c033582c23a706eae019cd9c42f3424815e5ba0d9ec6135e06e08",
+      "original_sha256": "3b8357d8fa20cfbebcf5307d0abf0471ad93d1c74cd2c9bbe2ea42e9d2f4e132",
+      "evidence": "../t483-remaining-reaudit/r1303-isvwow-review.json",
+      "decision": "Selected WOW /Gz compiles with the original. The established external extension /Gd declaration contract fails C2440 with the original and passes with APIENTRY. Retain pending explicit change to the public contract."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "before": {
+        "blocks": 2,
+        "added": 1,
+        "deleted": 441
+      },
+      "after": {
+        "blocks": 2,
+        "added": 1,
+        "deleted": 441
+      },
+      "source_sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+      "original_sha256": "3bec21c4bb3caef0798208693a89012df6005c6a330f0f670f974a1ce821fca2",
+      "evidence": "../t483-remaining-reaudit/p232-hdata-review.json",
+      "decision": "The selected DDE copy functions are already original. Private manager restoration fails actual compilation and belongs to native DDEML ownership. Keep the verified stand-alone include boundary."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "before": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "source_sha256": "e589d9abae92a49627a601b53823033732b33eec06c7e97aae215ac926f98fe5",
+      "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969",
+      "evidence": "../t483-s3/execution.json",
+      "decision": "Restore exact original extern at logical line 58; modern MSVC C builds infer int, matching BOOL. Isolated real nt_event.c passes with C4431 warning. No new provider or state."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "source_sha256": "1296da38c0d62145e8b867f2f504e649d2caf449039be55acdf60e7e26cf6b67",
+      "original_sha256": "5dbb2bd74e82d5b87910db81f1411610c84a2d57a553e8cb78080871d19835df",
+      "evidence": "../t483-remaining-reaudit/r0474-r0475-localfm-review.json",
+      "decision": "Restore IHP Gdp at original logical line 6. Same-sized common symbol coalesces in actual without-/FORCE product link with the same map address. Keep two original layout includes; removing them fails C2079 under selected flags."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "source_sha256": "34fc10d6c02b7cd3a2c609dc793ef6373f29604933940b92f9b67cf750dfeb21",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "evidence": "../t483-remaining-reaudit/gmi-h-file-review.json",
+      "decision": "The six selected declarations are already original. The remaining local guard and excluded alternative count because original has no conditional counterpart. Keep established #error and #line policy."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "before": {
+        "blocks": 8,
+        "added": 14,
+        "deleted": 223
+      },
+      "after": {
+        "blocks": 8,
+        "added": 14,
+        "deleted": 223
+      },
+      "source_sha256": "1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "evidence": "../t483-remaining-reaudit/p252-getset-review.json",
+      "decision": "Native HWND owns procedure and message result slots. Original mapping functions require private USER process tables unavailable to the selected client. Retain the scoped boundary, original unaffected functions remain."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "before": {
+        "blocks": 4,
+        "added": 0,
+        "deleted": 5
+      },
+      "after": {
+        "blocks": 4,
+        "added": 0,
+        "deleted": 5
+      },
+      "source_sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8",
+      "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+      "evidence": "../t483-remaining-reaudit/p231-globals-review.json",
+      "decision": "Five remaining omitted original declarations require private types, or a private class-table constant, that fail the actual supported compile. The current code uses existing subsystem boundaries."
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 40,
+    "remaining": 173,
+    "nonzero_files": 240,
+    "non_error_points": 2039,
+    "non_error_lines": 28485,
+    "source_reduction_s7": {
+      "points": 9,
+      "lines": 493
+    }
+  }
+}

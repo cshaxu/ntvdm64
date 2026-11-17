@@ -71,9 +71,17 @@ passed cached x86 and x64 builds and was published with matching hashes at
 both destinations. Targeted export, WOW startup, and DOS lifecycle checks
 passed. [P4 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p4-checkpoint.json).
 
-S7 progress is 32 reviewed and 181 remaining. Source restorations reduce
-7 points and 491 changed lines in S7. The current census is 2,041 non-error
-points and 28,487 changed lines across 241 mirrors with filtered differences.
+S7 P5 restores the original `Gdp` common declaration in `localfm.c`
+and the original pointer-state extern in `nt_event.h`. The matching
+common symbol resolves to the same address. The legacy extern compiles
+with an implicit-int warning on the selected MSVC profile. Package
+`ffb2a4c8-714f-4e75-b2f8-cab52be55db3` passed cached builds, dual
+publication, and the targeted WOW, DOS and DOS4GW/NESticle checks.
+[P5 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p5-checkpoint.json).
+
+S7 progress is 40 reviewed and 173 remaining. Source restorations reduce
+9 points and 493 changed lines in S7. The current census is 2,039 non-error
+points and 28,485 changed lines across 240 mirrors with filtered differences.
 
 ## S1 Closure Record
 

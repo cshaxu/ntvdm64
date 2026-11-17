@@ -305,3 +305,9 @@ census is 2,041 non-error points and 28,751 changed lines.
 the original executive declaration groups restored in `ntexapi.h`, and
 the cached build, dual publication and targeted tests. The current
 census is 2,041 non-error points and 28,487 changed lines.
+
+[S7 P5 receipt](s7-p5-checkpoint.json) and
+[verification evidence](s7-p5-verification.zip) record eight more reviews,
+two original declaration restorations, and targeted verification of the
+11-image published package. The current census is 2,039 non-error points
+and 28,485 changed lines.
