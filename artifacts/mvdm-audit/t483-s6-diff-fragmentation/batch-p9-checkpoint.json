@@ -1,0 +1,192 @@
+{
+  "packet": "M0 T483 S6 P9",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/mvdm-host/wow32/wumsg.c",
+        "sha256": "545b921194156c22054cd7fd15727f105cea00ded9f6a918a8f31fd270b7ddb2"
+      },
+      {
+        "path": "test/observation/verify-wow-dde-alias.ps1",
+        "sha256": "1ca6bfef137319f66bf605d1840b384ae4c43c92d673aab3198625e1c34cb87b"
+      }
+    ],
+    "source_files": 2,
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 1,
+    "lines": 4
+  },
+  "publication": {
+    "status": "published",
+    "package": "0a6019d7-2626-4804-812e-89c36379a18b",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "line_proof": {
+    "files": [
+      {
+        "path": "src/mvdm-host/wow32/wumsg.c",
+        "sha256": "545b921194156c22054cd7fd15727f105cea00ded9f6a918a8f31fd270b7ddb2"
+      }
+    ],
+    "compiler": {
+      "shared_selected_lines_in_blocks_at_least_three": 634,
+      "mismatches": []
+    },
+    "cleanup": {
+      "cleanup_statement_equivalent_after_local_binding_substitution": true,
+      "error_directives_identical": true,
+      "source_sha256": "545b921194156c22054cd7fd15727f105cea00ded9f6a918a8f31fd270b7ddb2"
+    }
+  },
+  "verification": {
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 406322,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6259,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1246,
+          "CleanupMs": 513,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11481,
+          "CleanupMs": 466,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 10911,
+          "CleanupMs": 461,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 10196,
+          "CleanupMs": 485,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 160,
+          "CleanupMs": 459,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66811,
+          "CleanupMs": 454,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 46541,
+          "CleanupMs": 455,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 44990,
+          "CleanupMs": 428,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15047,
+          "CleanupMs": 465,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10904,
+          "CleanupMs": 390,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 46542,
+          "CleanupMs": 429,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12771,
+          "CleanupMs": 419,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28561,
+          "CleanupMs": 497,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30978,
+          "CleanupMs": 498,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3337,
+          "CleanupMs": 477,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7656,
+          "CleanupMs": 428,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9894,
+          "CleanupMs": 432,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 4022,
+          "CleanupMs": 517,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7273,
+          "CleanupMs": 370,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20157,
+          "CleanupMs": 455,
+          "Passed": true
+        }
+      ]
+    },
+    "cached": 0,
+    "DDE": {
+      "passed": true,
+      "scope": "Original alias/free bodies with service doubles; no guest/transport proof",
+      "candidateBodies": 15,
+      "baseline": "7835ba25e18b7b5e3f26cfb3e1e046d5789f4b92",
+      "baselineBodies": 12
+    },
+    "message": 0,
+    "focused": 0,
+    "review": 0
+  },
+  "initial_pipeline_failure": "Missing source-review proof stopped before staging/publication;proof supplied and publication resumed without rebuilding. Initial logs retained.",
+  "status": "Required gates passed;Git delivery accompanies receipt"
+}

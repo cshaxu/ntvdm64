@@ -36,9 +36,9 @@ normalized/error-masked differences;255 have nonzero counts. The initial2333
 block sum is conservative:75 mask-review cases in31 files remain counted.
 These are counting uncertainties,not permission to delete or retain code.
 Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
-S6 review18/255 complete;237 files remain. Thirteen changed files verified across
-P2/P3/P4/P5/P6/P7/P8,five unchanged files fully reviewed. Current census2314 blocks;
-cumulative delivered reduction19 blocks/85 lines;P8 reduction0 blocks/7 lines. P5 cached full,publish11x2,focused,
+S6 review19/255 complete;236 files remain. Fourteen changed files verified across
+P2/P3/P4/P5/P6/P7/P8/P9,five unchanged files fully reviewed. Current census2313 blocks;
+cumulative delivered reduction20 blocks/89 lines;P8 reduction0 blocks/7 lines. P5 cached full,publish11x2,focused,
 Full20 and governance passed;Git delivery accompanies the P5 receipt.
 
 | File | Non-error blocks | Changed lines | Result |
@@ -59,6 +59,9 @@ Full20 and governance passed;Git delivery accompanies the P5 receipt.
 | c_main.c |36->36|163->158|P7 single-use IRQ helper inlined;Full20 passed|
 | client/ntstubs.c |35->35|1805->1803|P8 original include restored;five contexts equivalent|
 | kernel/queue.c |35->35|4178->4173|P8 original declarations restored;Full20 passed|
+| wcntl32.c |34->34|69->69|No edit;residuals pending owner|
+| mouse_io.c |33->33|349->349|No edit;separate two-line counting correction|
+| wumsg.c |33->32|113->109|P9 single-use cleanup inlined;Full20 passed|
 
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p3-checkpoint.json)
 records cached x86/x64,publish11x2,message/focused/task-order,Full20,
@@ -66,7 +69,7 @@ boundary143/9 and governance passes. Git delivery accompanies the receipt.
 Per-file evidence is indexed in the worklist README. Residual decisions remain
 pending owner,not approved. Known sevid000 CHAIN4 word/UNCHAINED string
 limitations are not represented as passing tests. Backlog1644 rows/1649 R points;
-R1519 remains restored,not deferred. P5 committed/pushed f6d6f78c5. wmsg16.c whole-file review complete;P6 verified delivery accompanies receipt. P6 committed/pushed2202c9239. P7 committed/pushed e1d946570. Client ntstubs whole-file review complete;nonbehavioral include restoration delivered in P8. queue.c whole-file review complete;P8 verification complete;delivery accompanies receipt. P8 committed/pushed8b4f50ecd. wcntl32.c reviewed unchanged;mouse_io.c reviewed unchanged;Next:wow32/wumsg.c,33 blocks. nt_event.c reviewed:43->43 blocks,
+R1519 remains restored,not deferred. P5 committed/pushed f6d6f78c5. wmsg16.c whole-file review complete;P6 verified delivery accompanies receipt. P6 committed/pushed2202c9239. P7 committed/pushed e1d946570. Client ntstubs whole-file review complete;nonbehavioral include restoration delivered in P8. queue.c whole-file review complete;P8 verification complete;delivery accompanies receipt. P8 committed/pushed8b4f50ecd. wcntl32.c reviewed unchanged;mouse_io.c reviewed unchanged;wumsg.c delivered in P9;Next:ntuser/client/clres.c,31 blocks. nt_event.c reviewed:43->43 blocks,
 124->121 lines;two added X86GFX exclusions remain conservatively counted.
 [P4 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p4-checkpoint.json)
 records final cached/full/publication/message/focused/boundary/governance passes.
@@ -94,10 +97,10 @@ weakened assertion separated the failed and passing package runs.
 
 ## Current Technical Baseline
 
-S6 P8:11 images published/hash-verified to assets/release and O:/winnt/system32.
-Package91a237ec-2924-4e4b-b472-e1b933981346. Full20 includes actual NESticle
-menu/Escape. No guest or winnt.zip changes. P8 receipt binds final source,
-manifest and test results;P7 publication is superseded. All owned runners are
+S6 P9:11 images published/hash-verified to assets/release and O:/winnt/system32.
+Package0a6019d7-2626-4804-812e-89c36379a18b. Full20 includes actual NESticle
+menu/Escape. No guest or winnt.zip changes. P9 receipt binds final source,
+manifest and test results;P8 publication is superseded. All owned runners are
 terminal. Git delivery accompanies this receipt;S6 remains active.
 
 S5 fixed365-file raw metric:#error included,#line excluded,4862blocks/89379lines;
@@ -137,4 +140,8 @@ S6 is owner-admitted after S5's verified,pushed closure. Current stays below
 
 [wcntl32 review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/wcntl32-whole-file-review.json):34->34 points,+37/-32=69 lines unchanged;P8 source-identical evidence reused,residuals pending owner.
 
-[Mouse review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/mouse-io-whole-file-review.json):33 points,+319/-30=349 lines unchanged. Prior351-line count corrected by two lines,not source reduction. Current global54438 lines;delivered reduction remains85. Three added boundary guards remain explicit counting notes.
+[Mouse review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/mouse-io-whole-file-review.json):33 points,+319/-30=349 lines unchanged. Prior351-line count corrected by two lines,not source reduction. At mouse review global54438 lines;P9 now54434 lines,delivered reduction89. Three added boundary guards remain explicit counting notes.
+
+[wumsg candidate](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/wumsg-whole-file-review.json):whole-file source review complete;33->32 points,113->109 lines. P9 cached full,publish11x2,DDE/message/focused,Full20 passed;verified delivery accompanies receipt.
+
+[P9 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p9-checkpoint.json) and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p9-verification-evidence.zip):wumsg33->32 points,113->109 lines;residual cleanup remains pending owner.

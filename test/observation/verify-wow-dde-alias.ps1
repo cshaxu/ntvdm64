@@ -124,7 +124,14 @@ try {
             foreach ($name in @('DDETrackhandle', 'DDERollback32')) {
                 $bodies += Select-Body $source $name $variant
             }
-            $bodies += Select-Body (Read-Input 'src/mvdm-host/wow32/wumsg.c' $false) 'W32CancelDDEPost' $variant
+            # Exercise the actual single-use cleanup now owned by PostMessage.
+            $post = Read-Input 'src/mvdm-host/wow32/wumsg.c' $false
+            $start = $post.IndexOf('            DWORD error = GetLastError();', [StringComparison]::Ordinal)
+            $end = $post.IndexOf("`n        }`n        __finally { wow_message_unwind16(&mpex); }", $start, [StringComparison]::Ordinal)
+            if ($start -lt 0 -or $end -le $start) { throw 'PostMessage cleanup scope missing' }
+            $cleanup = $post.Substring($start, $end - $start).Replace('mpex.', 'mpex->').Replace('&postConversion', 'conversion')
+            $selections.Add([pscustomobject]@{variant=$variant;name='WU32PostMessage cleanup';offset=$start;length=$end-$start})
+            $bodies += "static VOID W32CancelDDEPost(LPMSGPARAMEX mpex, PDDECONVERSION conversion){`n$cleanup`n}"
         }
         $bodies += Select-Body (Read-Input 'src/mvdm-host/wow32/wmdisp32.c' $old) 'WM32DDEAck' $variant
         [IO.File]::WriteAllText("$directory/dde_alias_exact_bodies.h", ($bodies -join "`n`n"))

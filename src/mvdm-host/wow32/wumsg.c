@@ -1465,25 +1465,6 @@ ULONG FASTCALL WU32PostAppMessage(PVDMFRAME pFrame)
     .endcmt
 --*/
 
-/* DIV-363: abandon only resources produced by this undelivered conversion. */
-static VOID W32CancelDDEPost(LPMSGPARAMEX mpex, PDDECONVERSION conversion)
-{
-    DWORD error = GetLastError();
-    __try {
-        if (mpex->ddePostPacked) {
-            mpex->ddePostPacked = FALSE;
-            FreeDDElParam(mpex->Parm16.WndProc.wMsg, mpex->lParam);
-        }
-    }
-    __finally {
-        __try {
-            DDERollback32(conversion, mpex->Parm16.WndProc.hwnd,
-                          mpex->Parm16.WndProc.wParam);
-        }
-        __finally { SetLastError(error); }
-    }
-}
-
 #line 1396
 ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
 {
@@ -1594,7 +1575,22 @@ ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
     RETURN((ULONG)mpex.lReturn);
     } __finally {
-        __try { W32CancelDDEPost(&mpex, &postConversion); }
+        __try {
+            DWORD error = GetLastError();
+            __try {
+                if (mpex.ddePostPacked) {
+                    mpex.ddePostPacked = FALSE;
+                    FreeDDElParam(mpex.Parm16.WndProc.wMsg, mpex.lParam);
+                }
+            }
+            __finally {
+                __try {
+                    DDERollback32(&postConversion, mpex.Parm16.WndProc.hwnd,
+                                  mpex.Parm16.WndProc.wParam);
+                }
+                __finally { SetLastError(error); }
+            }
+        }
         __finally { wow_message_unwind16(&mpex); }
     }
 #line 1492
