@@ -1,0 +1,377 @@
+{
+  "source_head": "8345a60c44dfba3b7e89859c3b9953b3c83e7119",
+  "scope": "Previously identified10-file fragmentation follow-up,ordered by existing R register;not a new audit of all completed files;not a claim that current differences are necessary",
+  "metric": "Same fixed audit metric:latin1,CRLF normalized,terminal empty line retained,candidate #line removed,#error included",
+  "files": [
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "first_sequence": 2484,
+      "points": [
+        "T483-R2484",
+        "T483-R2485",
+        "T483-R2486",
+        "T483-R2487",
+        "T483-R2488",
+        "T483-R2489",
+        "T483-R2490",
+        "T483-R2491",
+        "T483-R2492",
+        "T483-R2493",
+        "T483-R2494",
+        "T483-R2495",
+        "T483-R2496",
+        "T483-R2497",
+        "T483-R2498",
+        "T483-R2499"
+      ],
+      "current": {
+        "blocks": 13,
+        "added": 17,
+        "deleted": 1377,
+        "total": 1394
+      },
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "current_sha256": "14f4b6ee19783e78140ffff5d0f1bc138e2a66c713d612f95039136679ae84e2",
+      "prior_pass_before": {
+        "blocks": 12,
+        "added": 28,
+        "deleted": 1412
+      },
+      "blocks_above_prior_before": 1,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "first_sequence": 2500,
+      "points": [
+        "T483-R2500",
+        "T483-R2501",
+        "T483-R2502",
+        "T483-R2503",
+        "T483-R2504",
+        "T483-R2505",
+        "T483-R2506",
+        "T483-R2507",
+        "T483-R2508",
+        "T483-R2509",
+        "T483-R2510",
+        "T483-R2511",
+        "T483-R2512",
+        "T483-R2513",
+        "T483-R2514",
+        "T483-R2515",
+        "T483-R2516",
+        "T483-R2517",
+        "T483-R2518",
+        "T483-R2519",
+        "T483-R2520",
+        "T483-R2521",
+        "T483-R2522",
+        "T483-R2523",
+        "T483-R2524",
+        "T483-R2525"
+      ],
+      "current": {
+        "blocks": 22,
+        "added": 25,
+        "deleted": 43,
+        "total": 68
+      },
+      "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+      "current_sha256": "486499db68c0719ae5eeb5a65c88d92743d45e8cb840e55ce36a719a6e7cc6c3",
+      "prior_pass_before": {
+        "blocks": 21,
+        "added": 36,
+        "deleted": 46
+      },
+      "blocks_above_prior_before": 1,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "first_sequence": 2526,
+      "points": [
+        "T483-R2526",
+        "T483-R2527",
+        "T483-R2528",
+        "T483-R2529",
+        "T483-R2530",
+        "T483-R2531",
+        "T483-R2532",
+        "T483-R2533",
+        "T483-R2534",
+        "T483-R2535",
+        "T483-R2536",
+        "T483-R2537",
+        "T483-R2538"
+      ],
+      "current": {
+        "blocks": 5,
+        "added": 14,
+        "deleted": 484,
+        "total": 498
+      },
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "current_sha256": "61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629",
+      "prior_pass_before": {
+        "blocks": 4,
+        "added": 17,
+        "deleted": 485
+      },
+      "blocks_above_prior_before": 1,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "first_sequence": 2552,
+      "points": [
+        "T483-R2552",
+        "T483-R2553",
+        "T483-R2554",
+        "T483-R2555",
+        "T483-R2556",
+        "T483-R2557",
+        "T483-R2558",
+        "T483-R2559",
+        "T483-R2560",
+        "T483-R2561",
+        "T483-R2562",
+        "T483-R2563",
+        "T483-R2564",
+        "T483-R2565"
+      ],
+      "current": {
+        "blocks": 34,
+        "added": 81,
+        "deleted": 2085,
+        "total": 2166
+      },
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "current_sha256": "07d9cbafaa419eb963cd9fbee8870ce037b71d1cb317a96137514a9d277a2014",
+      "prior_pass_before": {
+        "blocks": 33,
+        "added": 83,
+        "deleted": 2086
+      },
+      "blocks_above_prior_before": 1,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "first_sequence": 2582,
+      "points": [
+        "T483-R2582",
+        "T483-R2583",
+        "T483-R2584",
+        "T483-R2585",
+        "T483-R2586",
+        "T483-R2587",
+        "T483-R2588",
+        "T483-R2589",
+        "T483-R2590",
+        "T483-R2591",
+        "T483-R2592",
+        "T483-R2593",
+        "T483-R2594",
+        "T483-R2595",
+        "T483-R2596",
+        "T483-R2597"
+      ],
+      "current": {
+        "blocks": 49,
+        "added": 31,
+        "deleted": 5783,
+        "total": 5814
+      },
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "current_sha256": "db5d5f21f8729a0f9eb7f3f63462635de8d6b01299996fed223a4727bbaae49d",
+      "prior_pass_before": {
+        "blocks": 25,
+        "added": 80,
+        "deleted": 5810
+      },
+      "blocks_above_prior_before": 24,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "first_sequence": 2604,
+      "points": [
+        "T483-R2604",
+        "T483-R2605",
+        "T483-R2606",
+        "T483-R2607",
+        "T483-R2608",
+        "T483-R2609",
+        "T483-R2610"
+      ],
+      "current": {
+        "blocks": 155,
+        "added": 127,
+        "deleted": 9887,
+        "total": 10014
+      },
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "current_sha256": "acbb7a3819ae51611714c4d43df0d8f0503fe8500f2db8227bcc1839e263ed19",
+      "prior_pass_before": {
+        "blocks": 19,
+        "added": 324,
+        "deleted": 10251
+      },
+      "blocks_above_prior_before": 136,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "first_sequence": 2618,
+      "points": [
+        "T483-R2618",
+        "T483-R2619",
+        "T483-R2620",
+        "T483-R2621",
+        "T483-R2622",
+        "T483-R2623",
+        "T483-R2624",
+        "T483-R2625",
+        "T483-R2626",
+        "T483-R2627",
+        "T483-R2628",
+        "T483-R2629",
+        "T483-R2630",
+        "T483-R2631"
+      ],
+      "current": {
+        "blocks": 23,
+        "added": 64,
+        "deleted": 4362,
+        "total": 4426
+      },
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "current_sha256": "237dd8a0da335db734e72faa3c4d52a1bd91b9c970c01e5cc87db06f6fa72335",
+      "prior_pass_before": {
+        "blocks": 27,
+        "added": 91,
+        "deleted": 4410
+      },
+      "blocks_above_prior_before": -4,
+      "followup_status": "Resolved for prior block-growth criterion;do not reopen. Existing semantic owner decisions are unchanged."
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "first_sequence": 2632,
+      "points": [
+        "T483-R2632",
+        "T483-R2633",
+        "T483-R2634",
+        "T483-R2635",
+        "T483-R2636",
+        "T483-R2637",
+        "T483-R2638"
+      ],
+      "current": {
+        "blocks": 7,
+        "added": 3,
+        "deleted": 362,
+        "total": 365
+      },
+      "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+      "current_sha256": "6f1c2646d743fb5ffeee6806cacc4526660e8e1083b98772582e88fa3523a5ac",
+      "prior_pass_before": {
+        "added": 8,
+        "deleted": 388,
+        "blocks": 4
+      },
+      "blocks_above_prior_before": 3,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "first_sequence": 2639,
+      "points": [
+        "T483-R2639",
+        "T483-R2640",
+        "T483-R2641",
+        "T483-R2642",
+        "T483-R2643",
+        "T483-R2644",
+        "T483-R2645"
+      ],
+      "current": {
+        "blocks": 30,
+        "added": 20,
+        "deleted": 1669,
+        "total": 1689
+      },
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current_sha256": "d11bb8ef3897bc70af401c212be8b784b67f8d59a7ed8059384a9f45f920512b",
+      "prior_pass_before": {
+        "added": 46,
+        "deleted": 1912,
+        "blocks": 18
+      },
+      "blocks_above_prior_before": 12,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "first_sequence": 2658,
+      "points": [
+        "T483-R2658",
+        "T483-R2659",
+        "T483-R2660",
+        "T483-R2661",
+        "T483-R2662",
+        "T483-R2663",
+        "T483-R2664",
+        "T483-R2665",
+        "T483-R2666"
+      ],
+      "current": {
+        "blocks": 67,
+        "added": 47,
+        "deleted": 444,
+        "total": 491
+      },
+      "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+      "current_sha256": "0e8e41ce0d66f708e047367b156ee3080033628acffc77a0a1ae60e951736d01",
+      "prior_pass_before": {
+        "added": 149,
+        "deleted": 5145,
+        "blocks": 13
+      },
+      "blocks_above_prior_before": 54,
+      "followup_status": "Source identities and current metrics verified;whole-unit fragmentation remedy not yet re-audited"
+    }
+  ],
+  "totals": {
+    "blocks": 405,
+    "added": 429,
+    "deleted": 26496,
+    "total": 26925
+  },
+  "restrictions": [
+    "Excluded #error bodies remain out of review",
+    "Restore whole code units only;never reduce blocks by deleting harmless original islands",
+    "Both block and line metrics must decrease;any original-relative net increase requires owner approval",
+    "Prior365-file/2720-point completion counts must not be incremented on revisit",
+    "No S6 admission or compat/product-component audit is implied"
+  ],
+  "active_files": [
+    "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "src/non-mvdm/windows/core/ntuser/kernel/userk.h"
+  ],
+  "active_totals": {
+    "blocks": 382,
+    "added": 365,
+    "deleted": 22134,
+    "total": 22499
+  },
+  "delivery_scope": "Evidence reconciliation only;no production/test/package changes;reuse P253 verified package identity. No new repair claimed."
+}

@@ -1685,3 +1685,5 @@ P252 [delivery receipt](batch-p252-checkpoint.json):two files12->10blocks,297->2
 P253 final seven-file batch (verified/published): [random](p253-random-review.json), [rect](p253-rect-review.json), [text](p253-text-review.json), [userrtl](p253-userrtl-review.json), [winmgr](p253-winmgr-review.json), [wow](p253-wow-review.json), [exports](p253-exports-review.json); [global diff count](p253-global-diff-count.json). Owner directs one combined build, publication, tests, commit and push.
 
 P253 [delivery receipt](batch-p253-checkpoint.json):seven files66->54blocks,2061->1249mirror diff lines;all365 files/2720points classified,1018 restored/confirmed delivered,52 approved/policy,1650 owner decisions remain. Full20 final rerun and focused37/task-order passed;first failed attempts remain explicit.
+
+P254 [current fragmentation baseline](p254-fragmentation-current-baseline.json):rechecked all10 previously listed files against pinned original and P253 source identity;queue.c already reduced27->23blocks,so9 remain eligible. Historical P248 trial sizes are not current metrics. Evidence-only reconciliation;P253 runtime remains unchanged.

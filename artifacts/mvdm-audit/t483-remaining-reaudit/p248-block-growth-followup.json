@@ -178,5 +178,7 @@
   ],
   "counting": "These are previously reviewed files;do not increment original 365-file completion count twice",
   "ntstubs_experiment_status": "Withdrawn;current source equals delivered HEAD:10014 changed lines,155 blocks. Historical experiment metrics are not current reductions.",
-  "owner_sequence": "Finish current userk.h and remaining ordered files first,using complete-unit restoration and both diff metrics immediately. Prior-file fragmentation sweep is a subsequent round;do not expand current pass by revisiting those files."
+  "owner_sequence": "Finish current userk.h and remaining ordered files first,using complete-unit restoration and both diff metrics immediately. Prior-file fragmentation sweep is a subsequent round;do not expand current pass by revisiting those files.",
+  "superseded_current_inventory": "p254-fragmentation-current-baseline.json",
+  "historical_note": "Numeric before/after and trial states above are historical. P254 rechecked current bytes in original R order;queue.c no longer meets block-growth follow-up criterion."
 }

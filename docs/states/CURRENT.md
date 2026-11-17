@@ -63,6 +63,10 @@ Owner-ordered complete-unit file pass is finished. Previously recorded
 fragmentation and remaining owner decisions require their own next action.
 ntstubs experiment withdrawn;source equals delivered HEAD.
 [Fragment inventory](../../artifacts/mvdm-audit/t483-remaining-reaudit/p248-block-growth-followup.json).
+[Current recheck](../../artifacts/mvdm-audit/t483-remaining-reaudit/p254-fragmentation-current-baseline.json):
+9 prior block-growth files remain,ordered by the existing R register;
+queue.c27->23blocks is resolved for this criterion and is not reopened.
+Evidence-only P254;production/package and P253 verification identities unchanged.
 
 ## Current Technical Baseline
 
@@ -72,7 +76,7 @@ No new production shim;residual boundaries remain pending owner.
 Cached x86/x64,compiler33 anchors,focused37/task-order,Full20 and governance pass.
 First Full version-negative1740 failed;separate isolated rerun passed.
 Guest and winnt.zip unchanged. [Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p253-checkpoint.json).
-P252 Git:5d6f81242. P253 Git accompanies receipt;ordered pass finished.
+P252 Git:5d6f81242. P253 Git:8345a60c4;ordered pass finished.
 
 ## Remaining Scope
 
