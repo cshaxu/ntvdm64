@@ -189,3 +189,5 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [handtabl whole-file review](handtabl-whole-file-review.json):26->24 blocks,1481->1381 lines;original declarations and KernelPtoH restored;delivery pending. Assignment helpers withdrawn after actual full link failures;see review evidence. Adds byte-exact original winerrp.h dependency.
 
 [P12 receipt](batch-p12-checkpoint.json) and [evidence](p12-verification-evidence.zip):whole-file restorations,failed link controls,final cached build,publish11x2 and Full20. Net reduction2 blocks/102 lines;residual decisions pending.
+
+[P13 receipt](batch-p13-checkpoint.json) and [evidence](p13-verification-evidence.zip):input.c26->25 non-error blocks,5527->5503 lines. Original declarations restored,Full20 and actual-provider input services/lifetime passed;scattered macro block-count choice remains pending.

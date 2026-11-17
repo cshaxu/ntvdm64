@@ -1,0 +1,216 @@
+{
+  "packet": "M0 T483 S6 P13",
+  "status": "Verified and published;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "sha256": "2cb3afe85aa6c519c28bcf00f80ba8b43fa2e041d1750afc36832ea5939d9bd5"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_input_group_bindings.h",
+        "sha256": "6e8fe391ec23741c504e739701a04bb94c15f5bb47104a97545752164326673e"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+        "sha256": "810e85481ad0065ae727057e851e01395c5d53ba0cf4f772e70406d5b3fa8f28"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_user_client_view_layout.h",
+        "sha256": "047d728faf804702316bae9c34357f406fbfca5f448cbb6624de2539b46c2075"
+      }
+    ],
+    "source_files": 4,
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 1,
+    "lines": 24
+  },
+  "publication": {
+    "status": "published",
+    "package": "272d7100-3694-4bda-8ba0-c2b08742067d",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 437613,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 6692,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1241,
+        "CleanupMs": 497,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 14165,
+        "CleanupMs": 386,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 15246,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 11626,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 212,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66119,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 49135,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 51126,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15269,
+        "CleanupMs": 434,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10932,
+        "CleanupMs": 470,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 59053,
+        "CleanupMs": 426,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13067,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28552,
+        "CleanupMs": 377,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31039,
+        "CleanupMs": 409,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4613,
+        "CleanupMs": 336,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8220,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10232,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4335,
+        "CleanupMs": 401,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7056,
+        "CleanupMs": 354,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 19750,
+        "CleanupMs": 383,
+        "Passed": true
+      }
+    ]
+  },
+  "compiler_lines": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "sha256": "2cb3afe85aa6c519c28bcf00f80ba8b43fa2e041d1750afc36832ea5939d9bd5"
+      }
+    ],
+    "candidate_proof": {
+      "scope": "candidate compiler evidence;not full/runtime",
+      "function_machine_code_equal": true,
+      "anchors": {
+        "input-declarations": {
+          "LangToggleKeyState": 86,
+          "KeyStateLookasideBase": 88,
+          "KeyStateLookasideBounds": 89,
+          "KeyStateLookasideZone": 90,
+          "void AddAttachment(": 5015,
+          "void Recalc2(": 5044
+        },
+        "input-all-macros": {
+          "LangToggleKeyState": 86,
+          "KeyStateLookasideBase": 88,
+          "KeyStateLookasideBounds": 89,
+          "KeyStateLookasideZone": 90,
+          "void AddAttachment(": 5015,
+          "void Recalc2(": 5044
+        }
+      },
+      "prior_failure": "inactive DBG #line did not reset restored declaration lines; added active #line 85 and98"
+    },
+    "identity": "Actual source equals compiled candidate after newline normalization"
+  },
+  "global": {
+    "files": 1063,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 255,
+    "blocks": 2309,
+    "lines": 53626,
+    "reviewed_files": 25,
+    "remaining_files": 230,
+    "cumulative_reduction_blocks": 24,
+    "cumulative_reduction_lines": 897
+  },
+  "input_specialized": "Native input services and lifetime passed against actual cached product input.obj;existing positive and terminal negatives retained",
+  "failed_attempts": "Standalone input recompilation lacked newly reached headers;tests now link actual provider object. No assertion weakened. Initial inactive DBG line pins corrected before cached build.",
+  "winnt_zip_unchanged": true
+}

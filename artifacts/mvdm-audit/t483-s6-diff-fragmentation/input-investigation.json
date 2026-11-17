@@ -1,0 +1,1356 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+  "status": "Historical first-pass candidate;superseded by input-whole-file-review.json",
+  "entry": {
+    "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\input.c",
+    "sha256": "6ac1ca790b536a8065b25c56a73cb8cb1f219b1bb4f548faeda433ce19f87644",
+    "entry": {
+      "blocks": 26,
+      "added": 3,
+      "deleted": 5524
+    },
+    "candidate_original_ranges": [
+      [
+        85,
+        89
+      ],
+      [
+        98,
+        109
+      ]
+    ],
+    "status": "candidate-only;not compiled or applied;whole-file review ongoing"
+  },
+  "candidate": {
+    "original_ranges": [
+      [
+        85,
+        89
+      ],
+      [
+        98,
+        109
+      ]
+    ],
+    "filtered": {
+      "blocks": 26,
+      "added": 3,
+      "deleted": 5507
+    },
+    "block_reduction": 0,
+    "line_reduction": 17,
+    "excluded_bodies": 25,
+    "mask_issues": [],
+    "sha256": "d274e11252ecf0caca301bd7fb2cdb0cfb4c4048c5f8424bb18b222c1a992c88"
+  },
+  "diagnostic_scope": "Actual current x86 WOW32 input compiler flags;one exact original function appended per probe. Missing declarations identify next dependency investigation,not sufficient evidence of necessary omission. No link or runtime acceptance claimed. GetMouseKeyFlags compiles only with C4013 TestKeyStateDown;not a successful restoration.",
+  "controls": [
+    {
+      "name": "input-candidate",
+      "exit": 0,
+      "errors": [],
+      "implicit_declarations": [],
+      "log_sha256": "b944d2acab1bb816b9e59973f3e7b9d02e83993645b1f8302d9db8ac27e72541"
+    },
+    {
+      "name": "xxxWaitMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxWaitMessage.c(131): error C2065: 'QS_EVENT': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\xxxWaitMessage.c(131): warning C4013: 'xxxSleepThread' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "50f35cba841ba24fc0ee1334f722fb7cd2dd4a4f71d87e0e24f7d94e63905c16"
+    },
+    {
+      "name": "CheckProcessForeground",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\CheckProcessForeground.c(181): error C2037: left of 'cSpins' specifies undefined struct/union 'wow_task_client_info'",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(182): error C2065: 'TIF_SPINNING': undeclared identifier",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(183): error C2037: left of 'dwTIFlags' specifies undefined struct/union 'wow_task_client_info'",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(185): error C2065: 'W32PF_FORCEBACKGROUNDPRIORITY': undeclared identifier",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(190): error C2039: 'ptiList': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(190): error C2039: 'ptiSibling': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(191): error C2065: 'TIF_SPINNING': undeclared identifier",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(195): error C2065: 'W32PF_FORCEBACKGROUNDPRIORITY': undeclared identifier",
+        "build\\t483-s6-p13\\CheckProcessForeground.c(196): error C2065: 'gppiWantForegroundPriority': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\CheckProcessForeground.c(197): warning C4013: 'SetForegroundPriority' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "6b2cd706787eb2c6e5c9d817533293c7e5604c9ac38f0f2e4f814e3f8d4a9a9e"
+    },
+    {
+      "name": "xxxInternalGetMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(231): error C2065: 'PW32PROCESS': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(231): error C2146: syntax error: missing ';' before identifier 'W32Process'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(231): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(232): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(232): error C2146: syntax error: missing ';' before identifier 'pwndFilter'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(232): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(234): error C2065: 'TL': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(234): error C2146: syntax error: missing ';' before identifier 'tlpwndFilter'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(234): error C2065: 'tlpwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(250): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(263): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(274): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(274): error C2065: 'tlpwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(278): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(278): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(278): error C2146: syntax error: missing ';' before identifier 'hwndFilter'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(287): error C2037: left of 'cSpins' specifies undefined struct/union 'wow_task_client_info'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(292): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(293): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(293): error C2223: left of '->W32PF_Flags' must point to struct/union",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(293): error C2065: 'W32PF_STARTGLASS': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(299): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(299): error C2223: left of '->W32PF_Flags' must point to struct/union",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(299): error C2065: 'W32PF_STARTGLASS': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(307): error C2039: 'cSysExpunge': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(307): error C2065: 'gcSysExpunge': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(308): error C2039: 'cSysExpunge': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(308): error C2065: 'gcSysExpunge': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(309): error C2039: 'dwhmodLibLoadedMask': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(309): error C2065: 'gdwSysExpungeMask': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(333): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(333): error C2039: 'idSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(333): error C2039: 'idLast': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(336): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(338): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(338): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(339): error C2039: 'pDeskInfo': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(353): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(356): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(357): error C2039: 'CTIF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(357): error C2065: 'CTIF_SYSQUEUELOCKED': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(371): error C2039: 'fsChangeBitsRemoved': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(377): error C2065: 'TIF_DELAYEDEVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(378): error C2065: 'QS_EVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(379): error C2065: 'QS_EVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(380): error C2065: 'TIF_DELAYEDEVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(388): error C2039: 'fsWakeBitsJournal': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(395): error C2065: 'gpdeskRecalcQueueAttach': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(396): error C2065: 'gpdeskRecalcQueueAttach': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(421): error C2039: 'fsChangeBitsRemoved': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(447): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(448): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(448): error C2065: 'QF_LOCKNOREMOVE': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(452): error C2065: 'QS_EVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(453): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(455): error C2065: 'QS_EVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(467): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(478): error C2065: 'QS_EVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(479): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(481): error C2065: 'QS_EVENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(501): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(544): error C2065: 'pwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(594): error C2065: 'WHF_GETMESSAGE': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(632): error C2065: 'tlpwndFilter': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(639): error C2037: left of 'cSpins' specifies undefined struct/union 'wow_task_client_info'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(639): error C2065: 'CSPINBACKGROUND': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(641): error C2037: left of 'cSpins' specifies undefined struct/union 'wow_task_client_info'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(643): error C2065: 'TIF_SPINNING': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(645): error C2065: 'TIF_SPINNING': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(646): error C2037: left of 'dwTIFlags' specifies undefined struct/union 'wow_task_client_info'",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(648): error C2065: 'W32PF_FORCEBACKGROUNDPRIORITY': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(650): error C2065: 'W32PF_FORCEBACKGROUNDPRIORITY': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(652): error C2065: 'gppiWantForegroundPriority': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(675): error C2065: 'HEVENT_REMOVEME': undeclared identifier",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(675): error C2198: 'BOOL xxxSleepTask(BOOL,HANDLE,wow_task_order_thread *)': too few arguments for call",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(682): error C2065: 'DY_OLDYIELD': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(248): warning C4013: 'CheckCritIn' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(263): warning C4013: 'ValidateHwnd' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(274): warning C4013: 'ThreadLockAlwaysWithPti' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(292): warning C4013: 'W32GetCurrentProcess' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(300): warning C4013: 'CalcStartCursorHide' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(310): warning C4013: 'xxxDoSysExpunge' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(335): warning C4013: 'CheckSysLock' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(370): warning C4013: 'CalcWakeMask' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(398): warning C4013: 'FJOURNALRECORD' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(398): warning C4013: 'FJOURNALPLAYBACK' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(399): warning C4013: 'ReattachThreads' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(433): warning C4013: 'xxxReceiveMessages' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(453): warning C4013: 'xxxScanSysQueue' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(467): warning C4013: 'xxxReadPostMessage' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(501): warning C4013: 'DoPaint' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(521): warning C4013: 'WakeInputIdle' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(544): warning C4013: 'DoTimer' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(586): warning C4013: 'xxxSleepThread' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(594): warning C4013: 'IsHooked' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(595): warning C4013: 'xxxCallHook' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(622): warning C4013: 'SET_TIME_LAST_READ' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(632): warning C4013: 'ThreadUnlock' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(653): warning C4013: 'SetForegroundPriority' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(677): warning C4013: 'LeaveCrit' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(678): warning C4013: 'ZwYieldExecution' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(679): warning C4013: 'CheckForClientDeath' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxInternalGetMessage.c(680): warning C4013: 'EnterCrit' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "dffc5654a1a1df0842270e29b6a2d4dbd0865257ef8cba3e6392d5686d6b3880"
+    },
+    {
+      "name": "xxxDispatchMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(706): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(706): error C2146: syntax error: missing ';' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(706): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(707): error C2065: 'WNDPROC_PWND': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(707): error C2146: syntax error: missing ';' before identifier 'lpfnWndProc'",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(707): error C2065: 'lpfnWndProc': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(708): error C2065: 'TL': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(708): error C2146: syntax error: missing ';' before identifier 'tlpwnd'",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(708): error C2065: 'tlpwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(710): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(712): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(729): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(729): error C2223: left of '->TIF_flags' must point to struct/union",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(730): error C2065: 'RIP_WARNING': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(741): error C2065: 'MSGFLAG_WOW_RESERVED': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(744): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(744): error C2065: 'tlpwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(750): error C2065: 'WM_SYSTIMER': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(756): error C2065: 'WM_SYSTIMER': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(763): error C2065: 'PTIMER': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(763): error C2146: syntax error: missing ';' before identifier 'ptmr'",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(763): error C2065: 'ptmr': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(765): error C2065: 'ptmr': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(765): error C2065: 'gptmrFirst': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(765): error C2065: 'ptmr': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(765): error C2065: 'ptmr': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(765): error C2065: 'ptmr': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(765): error C2223: left of '->ptmrNext' must point to struct/union",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(766): error C2065: 'ptmr': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(766): error C2223: left of '->pfn' must point to struct/union",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(767): error C2065: 'ptmr': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(767): error C2223: left of '->pfn' must point to struct/union",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(767): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(767): error C2065: 'WM_SYSTIMER': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(777): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(779): error C2065: 'TIF_SYSTEMTHREAD': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(782): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(796): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(806): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(806): error C2065: 'WFPAINTNOTPROCESSED': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(813): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(813): error C2065: 'WFSERVERSIDEPROC': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(816): error C2065: 'SfnDWORD': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(817): error C2065: 'gapfnScSendMessage': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(817): error C2109: subscript requires array or pointer type",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(822): error C2065: 'SfnINWPARAMCHAR': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(822): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(822): error C2065: 'WFANSIPROC': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(823): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(823): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(827): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(827): error C2223: left of '->lpfnWndProc' must point to struct/union",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(827): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(836): error C2065: 'lpfnWndProc': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(836): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(836): error C2223: left of '->lpfnWndProc' must point to struct/union",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(843): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(843): error C2065: 'WFANSIPROC': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(844): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(844): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(846): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(847): error C2065: 'lpfnWndProc': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(849): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(850): error C2065: 'lpfnWndProc': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(859): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(859): error C2065: 'WFPAINTNOTPROCESSED': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(862): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(862): error C2065: 'WFWMPAINTSENT': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(863): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(867): error C2065: 'tlpwnd': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(712): warning C4013: 'ValidateHwnd' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(725): warning C4013: 'TESTSYNCONLYMESSAGE' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(730): warning C4013: 'RIPERR1' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(744): warning C4013: 'ThreadLock' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(768): warning C4013: 'NtGetTickCount' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(782): warning C4013: 'CallClientProcA' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(806): warning C4013: 'SetWF' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(813): warning C4013: 'TestWF' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(823): warning C4013: 'UserAssert' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(823): warning C4013: 'GETPTI' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(824): warning C4013: 'RtlMBMessageWParamCharToWCS' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(845): warning C4013: 'RtlWCSMessageWParamCharToMB' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(849): warning C4013: 'CallClientProcW' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(858): warning C4013: 'RevalidateHwnd' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(862): warning C4013: 'ClrWF' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(863): warning C4013: 'xxxSimpleDoSyncPaint' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\xxxDispatchMessage.c(867): warning C4013: 'ThreadUnlock' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "2c1a13d27cc4ff39e7349094c06c1ba97313dd66bf43d29ec86f950c61005e83"
+    },
+    {
+      "name": "AdjustForCoalescing",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\AdjustForCoalescing.c(882): error C2146: syntax error: missing ')' before identifier 'pml'",
+        "build\\t483-s6-p13\\AdjustForCoalescing.c(882): error C2061: syntax error: identifier 'pml'",
+        "build\\t483-s6-p13\\AdjustForCoalescing.c(882): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\AdjustForCoalescing.c(882): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\AdjustForCoalescing.c(884): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "5b1207e602589a1e33fa0c0d7494ce1a83f3e61e4a86ffe1bda04587d6ad449f"
+    },
+    {
+      "name": "_PostMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\_PostMessage.c(919): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\_PostMessage.c(919): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\_PostMessage.c(919): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\_PostMessage.c(919): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\_PostMessage.c(922): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "9caa6ca66874f0e20d5e8e90e98cbd3f866b3451a4c331e5ec7fce8530123732"
+    },
+    {
+      "name": "_PostQuitMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\_PostQuitMessage.c(1044): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\_PostQuitMessage.c(1046): error C2039: 'cQuit': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\_PostQuitMessage.c(1047): error C2039: 'exitCode': is not a member of 'wow_task_order_thread'"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\_PostQuitMessage.c(1048): warning C4013: 'SetWakeBit' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "1b7d1b6e44bebc7d005f58285683d8d3602996adb66341747505507e1cb06c09"
+    },
+    {
+      "name": "_PostThreadMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1070): error C2065: 'PQMSG': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1070): error C2146: syntax error: missing ';' before identifier 'pqmsg'",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1070): error C2065: 'pqmsg': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1073): error C2065: 'TIF_GUITHREADINITIALIZED': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1074): error C2065: 'TIF_INCLEANUP': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1076): error C2065: 'RIP_VERBOSE': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1089): error C2065: 'RIP_WARNING': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1100): error C2039: 'mlPost': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1105): error C2065: 'pqmsg': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1105): error C2039: 'mlPost': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1111): error C2065: 'pqmsg': undeclared identifier",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1126): error C2039: 'ptiSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1127): error C2039: 'idSysLock': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1127): error C2065: 'pqmsg': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1076): warning C4013: 'RIPERR0' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1087): warning C4013: 'TESTSYNCONLYMESSAGE' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1088): warning C4013: 'RIPERR1' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1100): warning C4013: 'AdjustForCoalescing' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1105): warning C4013: 'AllocQEntry' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1111): warning C4013: 'StoreQMessage' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_PostThreadMessage.c(1112): warning C4013: 'SetWakeBit' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "ec092259c4077645b81983fd96bee2beb4cfda0abfcbacfeaae5f9e3c269cba3"
+    },
+    {
+      "name": "_GetMessagePos",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\_GetMessagePos.c(1147): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\_GetMessagePos.c(1149): error C2039: 'ptLast': is not a member of 'wow_task_order_thread'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "e08ee96c2c34b7e38ab659448946668cb9323809c6552969c4d0424eba145f5f"
+    },
+    {
+      "name": "PostMove",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\PostMove.c(1196): error C2065: 'ptCursor': undeclared identifier",
+        "build\\t483-s6-p13\\PostMove.c(1196): error C2224: left of '.x' must have struct/union type",
+        "build\\t483-s6-p13\\PostMove.c(1196): error C2224: left of '.y' must have struct/union type",
+        "build\\t483-s6-p13\\PostMove.c(1197): error C2065: 'dwMouseMoveExtraInfo': undeclared identifier",
+        "build\\t483-s6-p13\\PostMove.c(1199): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostMove.c(1199): error C2065: 'QF_MOUSEMOVED': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\PostMove.c(1195): warning C4013: 'PostInputMessage' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "64738e7d7b5ae5086c68355ef7182b84cd96659c4ba28cd8e497d650628de8ee"
+    },
+    {
+      "name": "SetFMouseMoved",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1216): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1216): error C2146: syntax error: missing ';' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1216): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1217): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1217): error C2146: syntax error: missing ';' before identifier 'pwndOldCursor'",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1217): error C2065: 'pwndOldCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1224): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1224): error C2065: 'gspwndScreenCapture': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1225): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1225): error C2065: 'gspwndMouseOwner': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1226): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1226): error C2065: 'gspwndInternalCapture': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1227): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1227): error C2065: 'grpdeskRitInput': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1227): error C2223: left of '->pDeskInfo' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1227): error C2065: 'ptCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1232): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1239): error C2065: 'pwndOldCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1239): error C2065: 'gspwndCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1239): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1245): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1245): error C2223: left of '->pq' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1246): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1252): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1253): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1253): error C2223: left of '->spwndCapture' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1254): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1254): error C2223: left of '->QF_flags' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1254): error C2065: 'QF_MOUSEMOVED': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1255): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1255): error C2223: left of '->spwndCapture' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1255): error C2708: 'GETPTI': actual parameters length in bytes differs from previous call or reference",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1257): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1257): error C2223: left of '->spwndLastMouseMessage' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1258): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1258): error C2223: left of '->QF_flags' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1258): error C2065: 'QF_MOUSEMOVED': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1259): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1259): error C2223: left of '->spwndLastMouseMessage' must point to struct/union",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1259): error C2708: 'GETPTI': actual parameters length in bytes differs from previous call or reference",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1268): error C2065: 'gpqCursor': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1282): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1282): error C2065: 'QF_MOUSEMOVED': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1288): error C2039: 'ptiMouse': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1288): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1299): error C2065: 'dwMouseMoveExtraInfo': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1227): warning C4013: 'SpeedHitTest' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1239): warning C4013: 'Lock' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1245): warning C4013: 'GETPTI' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1255): warning C4013: 'SetWakeBit' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1274): warning C4013: 'UpdateCursorImage' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\SetFMouseMoved.c(1293): warning C4013: 'WakeSomeone' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "3fa6d450e3fd7de2ee33d043c22ffbcc615908c949973201d4d5ab344e64ab86"
+    },
+    {
+      "name": "CancelForegroundActivate",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1318): error C2065: 'PPROCESSINFO': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1318): error C2146: syntax error: missing ';' before identifier 'ppiT'",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1318): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1320): error C2065: 'gfAllowForegroundActivate': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1322): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1322): error C2065: 'gppiStarting': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1322): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1322): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1322): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1322): error C2223: left of '->ppiNext' must point to struct/union",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1329): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1329): error C2223: left of '->Process' must point to struct/union",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1330): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1330): error C2223: left of '->W32PF_Flags' must point to struct/union",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1330): error C2065: 'W32PF_ALLOWFOREGROUNDACTIVATE': undeclared identifier",
+        "build\\t483-s6-p13\\CancelForegroundActivate.c(1333): error C2065: 'gfAllowForegroundActivate': undeclared identifier"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "a086025b783ebccec616f636fd85807d37fd0ea0dceaf0397c61a6057014bf7c"
+    },
+    {
+      "name": "RestoreForegroundActivate",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1349): error C2065: 'PPROCESSINFO': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1349): error C2146: syntax error: missing ';' before identifier 'ppiT'",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1349): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1352): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1352): error C2065: 'gppiStarting': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1352): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1352): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1352): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1352): error C2223: left of '->ppiNext' must point to struct/union",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1353): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1353): error C2223: left of '->W32PF_Flags' must point to struct/union",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1353): error C2065: 'W32PF_APPSTARTING': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1354): error C2065: 'ppiT': undeclared identifier",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1354): error C2223: left of '->W32PF_Flags' must point to struct/union",
+        "build\\t483-s6-p13\\RestoreForegroundActivate.c(1354): error C2065: 'W32PF_ALLOWFOREGROUNDACTIVATE': undeclared identifier"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "675309b36ebe2a078ed9fee002e0eb526e6b8ac0ed3bc8b03fb5ab1266e4e511"
+    },
+    {
+      "name": "PostInputMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\PostInputMessage.c(1374): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\PostInputMessage.c(1374): error C2081: 'PWND': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\PostInputMessage.c(1374): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\PostInputMessage.c(1374): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\PostInputMessage.c(1374): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\PostInputMessage.c(1378): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "4b736f6d6e45de423fda6e8568db64282a67903b65b49dcfea8246d3d17f24c1"
+    },
+    {
+      "name": "WakeSomeone",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\WakeSomeone.c(1463): error C2146: syntax error: missing ')' before identifier 'pqmsg'",
+        "build\\t483-s6-p13\\WakeSomeone.c(1463): error C2081: 'PQMSG': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\WakeSomeone.c(1463): error C2061: syntax error: identifier 'pqmsg'",
+        "build\\t483-s6-p13\\WakeSomeone.c(1463): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\WakeSomeone.c(1463): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\WakeSomeone.c(1464): error C2449: found '{' at file scope (missing function header?)",
+        "build\\t483-s6-p13\\WakeSomeone.c(1581): error C2059: syntax error: '}'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "93c7ba0d31a74bc78dc03d402339499cf01d98c7f852c680c81929497c8b136c"
+    },
+    {
+      "name": "InitKeyStateLookaside",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\InitKeyStateLookaside.c(1599): error C2065: 'CBKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\InitKeyStateLookaside.c(1599): error C2065: 'CBKEYSTATERECENTDOWN': undeclared identifier",
+        "build\\t483-s6-p13\\InitKeyStateLookaside.c(1600): error C2065: 'ZONE_SEGMENT_HEADER': undeclared identifier",
+        "build\\t483-s6-p13\\InitKeyStateLookaside.c(1602): error C2065: 'TAG_LOOKASIDE': undeclared identifier",
+        "build\\t483-s6-p13\\InitKeyStateLookaside.c(1610): error C2065: 'KeyStateLookasideZone': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\InitKeyStateLookaside.c(1602): warning C4013: 'UserAllocPool' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\InitKeyStateLookaside.c(1610): warning C4013: 'ExInitializeZone' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "82bb5538334a0b8ab0eee25179de4072f38f620c67ef757704999af8bd75b39c"
+    },
+    {
+      "name": "AllocKeyState",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\AllocKeyState.c(1635): error C2065: 'KeyStateLookasideZone': undeclared identifier",
+        "build\\t483-s6-p13\\AllocKeyState.c(1644): error C2065: 'CBKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\AllocKeyState.c(1644): error C2065: 'CBKEYSTATERECENTDOWN': undeclared identifier",
+        "build\\t483-s6-p13\\AllocKeyState.c(1644): error C2065: 'TAG_KBDSTATE': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\AllocKeyState.c(1635): warning C4013: 'ExAllocateFromZone' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\AllocKeyState.c(1644): warning C4013: 'UserAllocPool' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "97b6092c1885a836abca39f669742f77da56fdf635eefc11f7f32ba13594ffa7"
+    },
+    {
+      "name": "FreeKeyState",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\FreeKeyState.c(1677): error C2065: 'KeyStateLookasideZone': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\FreeKeyState.c(1677): warning C4013: 'ExFreeToZone' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\FreeKeyState.c(1682): warning C4013: 'UserFreePool' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "6e8403249c78a51a16bc6b13b9b35c8a3c75b14e32fb69d6ff057447f3a30992"
+    },
+    {
+      "name": "PostUpdateKeyStateEvent",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1733): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1733): error C2065: 'QF_UPDATEKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1739): error C2039: 'ptiKeyboard': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1739): error C2065: 'gptiRit': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1743): error C2039: 'mlInput': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1745): error C2065: 'PQMSG': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1745): error C2146: syntax error: missing ';' before identifier 'pqmsg'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1745): error C2065: 'pqmsg': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1745): error C2039: 'mlInput': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1751): error C2065: 'pqmsg': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1751): error C2223: left of '->dwQEvent' must point to struct/union",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1751): error C2065: 'QEVENT_UPDATEKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1753): error C2065: 'pqmsg': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1753): error C2223: left of '->msg' must point to struct/union",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1754): error C2065: 'CBKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1759): error C2065: 'gafAsyncKeyState': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1759): error C2065: 'CBKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1767): error C2065: 'CBKEYSTATERECENTDOWN': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1768): error C2039: 'afKeyRecentDown': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1775): error C2039: 'ptiKeyboard': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1775): error C2065: 'QS_EVENTSET': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1788): error C2065: 'gafAsyncKeyState': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1788): error C2065: 'CBKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1789): error C2065: 'CBKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1789): error C2039: 'afKeyRecentDown': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1789): error C2065: 'CBKEYSTATERECENTDOWN': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1789): error C2168: 'memcpy': too few actual parameters for intrinsic function",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1791): error C2039: 'ptiKeyboard': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1791): error C2065: 'QEVENT_UPDATEKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1802): error C2039: 'afKeyRecentDown': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1802): error C2065: 'CBKEYSTATERECENTDOWN': undeclared identifier",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1802): error C2168: 'memset': too few actual parameters for intrinsic function",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1803): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1803): error C2065: 'QF_UPDATEKEYSTATE': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1775): warning C4013: 'SetWakeBit' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1784): warning C4013: 'AllocKeyState' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1791): warning C4013: 'PostEventMessage' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\PostUpdateKeyStateEvent.c(1793): warning C4013: 'FreeKeyState' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "e4b161c25531e4c52ea9328553a629ed8adff1e80926df345c82053d7e139fb6"
+    },
+    {
+      "name": "ProcessUpdateKeyStateEvent",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1825): error C2065: 'CBKEYSTATE': undeclared identifier",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1826): error C2065: 'CBKEYSTATERECENTDOWN': undeclared identifier",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1855): error C2065: 'SWAPBUTTON': undeclared identifier",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1876): error C2065: 'gpsi': undeclared identifier",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1876): error C2223: left of '->dwKeyCache' must point to struct/union"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1844): warning C4013: 'TestKeyRecentDownBit' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1854): warning C4013: 'UserAssert' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1855): warning C4013: 'SYSMET' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1859): warning C4013: 'TestKeyDownBit' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1860): warning C4013: 'SetKeyStateDown' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1862): warning C4013: 'ClearKeyStateDown' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1865): warning C4013: 'TestKeyToggleBit' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1866): warning C4013: 'SetKeyStateToggle' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1868): warning C4013: 'ClearKeyStateToggle' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ProcessUpdateKeyStateEvent.c(1881): warning C4013: 'FreeKeyState' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "ad9609794908599e1603b997306e1f16fb27feaf24333a46cf538423a4f3e97f"
+    },
+    {
+      "name": "PostEventMessage",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\PostEventMessage.c(1897): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\PostEventMessage.c(1897): error C2081: 'PWND': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\PostEventMessage.c(1897): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\PostEventMessage.c(1897): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\PostEventMessage.c(1897): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\PostEventMessage.c(1900): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "d1d32e97385f5b8d19ed67155bc61f24aa0503f97e0df428a8bd4db2463783dc"
+    },
+    {
+      "name": "CheckOnTop",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\CheckOnTop.c(1972): error C2146: syntax error: missing ')' before identifier 'pwndTop'",
+        "build\\t483-s6-p13\\CheckOnTop.c(1972): error C2081: 'PWND': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\CheckOnTop.c(1972): error C2061: syntax error: identifier 'pwndTop'",
+        "build\\t483-s6-p13\\CheckOnTop.c(1972): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\CheckOnTop.c(1972): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\CheckOnTop.c(1972): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "ac8c7ac07d85964d6f6be59f07833255c0146b08a332f70e9cdfc1e5b05069a4"
+    },
+    {
+      "name": "xxxActiveWindowTracking",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxActiveWindowTracking.c(2006): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\xxxActiveWindowTracking.c(2006): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\xxxActiveWindowTracking.c(2006): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\xxxActiveWindowTracking.c(2006): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\xxxActiveWindowTracking.c(2008): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "e5b9274902374ab4a040edcac36dd1f94b3be6161bd53c8198b4cf43fd62c094"
+    },
+    {
+      "name": "xxxMouseActivate",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxMouseActivate.c(2181): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\xxxMouseActivate.c(2181): error C2081: 'PWND': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\xxxMouseActivate.c(2181): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\xxxMouseActivate.c(2181): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\xxxMouseActivate.c(2181): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\xxxMouseActivate.c(2184): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "eda95471bab06bcb79f450d9d8ca16371a1bfe890bae72c9d12eae4781566d7e"
+    },
+    {
+      "name": "xxxMouseHoverTimer",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxMouseHoverTimer.c(2378): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\xxxMouseHoverTimer.c(2378): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\xxxMouseHoverTimer.c(2378): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\xxxMouseHoverTimer.c(2378): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\xxxMouseHoverTimer.c(2381): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "226ba26117f4934f737571f0575f8ca82f70e48f3cdf27dca1370c9f2efcb6b4"
+    },
+    {
+      "name": "ResetMouseHover",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\ResetMouseHover.c(2460): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2460): error C2223: left of '->pq' must point to struct/union",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2465): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2465): error C2065: 'QF_TRACKMOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2468): error C2039: 'spwndLastMouseMessage': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2476): error C2039: 'spwndLastMouseMessage': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2476): error C2065: 'IDSYS_MOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2477): error C2039: 'dwMouseHoverTime': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2477): error C2065: 'xxxMouseHoverTimer': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2482): error C2039: 'rcMouseHover': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2483): error C2065: 'gcxMouseHover': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2484): error C2065: 'gcyMouseHover': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2485): error C2065: 'gcxMouseHover': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2486): error C2065: 'gcyMouseHover': undeclared identifier",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2482): error C2198: 'BOOL SetRect(LPRECT,int,int,int,int)': too few arguments for call"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\ResetMouseHover.c(2469): warning C4013: 'ResetMouseTracking' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ResetMouseHover.c(2476): warning C4013: '_SetSystemTimer' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "2fa6c576d0ae3745da00b5d3aee31fed8a3f59b8484323bc8d7c2ccb1ae8d6f3"
+    },
+    {
+      "name": "CancelMouseHover",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\CancelMouseHover.c(2499): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelMouseHover.c(2499): error C2065: 'QF_TRACKMOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\CancelMouseHover.c(2500): error C2039: 'spwndLastMouseMessage': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelMouseHover.c(2501): error C2039: 'spwndLastMouseMessage': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelMouseHover.c(2501): error C2065: 'IDSYS_MOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\CancelMouseHover.c(2503): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelMouseHover.c(2503): error C2065: 'QF_TRACKMOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\CancelMouseHover.c(2503): error C2065: 'QF_TRACKMOUSEFIRING': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\CancelMouseHover.c(2501): warning C4013: '_KillSystemTimer' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "524c35dafaf9818997a2fde6f9dacc92bd6b72ee91a82ee9d46c9d09d99b5b43"
+    },
+    {
+      "name": "MouseEnter",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\MouseEnter.c(2517): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\MouseEnter.c(2517): error C2081: 'PWND': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\MouseEnter.c(2517): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\MouseEnter.c(2517): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\MouseEnter.c(2517): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\MouseEnter.c(2518): error C2449: found '{' at file scope (missing function header?)",
+        "build\\t483-s6-p13\\MouseEnter.c(2539): error C2059: syntax error: '}'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "ad50ed2950561136d4e1e491eb3dc3b9d069f0bfd32607bb57360173629e909c"
+    },
+    {
+      "name": "ResetMouseTracking",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\ResetMouseTracking.c(2551): error C2146: syntax error: missing ')' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\ResetMouseTracking.c(2551): error C2081: 'PWND': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\ResetMouseTracking.c(2551): error C2061: syntax error: identifier 'pwnd'",
+        "build\\t483-s6-p13\\ResetMouseTracking.c(2551): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\ResetMouseTracking.c(2551): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\ResetMouseTracking.c(2552): error C2449: found '{' at file scope (missing function header?)",
+        "build\\t483-s6-p13\\ResetMouseTracking.c(2557): error C2059: syntax error: '}'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "630d76014a067bb3394e07cfa61a8770d05f0b3607bb3aa832122ee9181bad73"
+    },
+    {
+      "name": "QueryTrackMouseEvent",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2570): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2570): error C2223: left of '->pq' must point to struct/union",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2581): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2581): error C2065: 'QF_TRACKMOUSELEAVE': undeclared identifier",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2581): error C2065: 'QF_TRACKMOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2581): error C2039: 'spwndLastMouseMessage': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2587): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2587): error C2065: 'QF_TRACKMOUSELEAVE': undeclared identifier",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2590): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2590): error C2065: 'QF_TRACKMOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2592): error C2039: 'dwMouseHoverTime': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2595): error C2039: 'spwndLastMouseMessage': is not a member of 'wow_task_order_queue'"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\QueryTrackMouseEvent.c(2595): warning C4013: 'HWq' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "224376ae41712c3ab184ddcfc8ae50399775af9a4bb8080c111fccc8a1773b1e"
+    },
+    {
+      "name": "TrackMouseEvent",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2611): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2611): error C2146: syntax error: missing ';' before identifier 'pwnd'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2611): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2614): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2614): error C2223: left of '->pq' must point to struct/union",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2619): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2626): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2626): error C2039: 'spwndLastMouseMessage': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2635): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2635): error C2065: 'QF_TRACKMOUSEHOVER': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2636): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2636): error C2065: 'QF_TRACKMOUSEFIRING': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2637): error C2039: 'dwMouseHoverTime': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2639): error C2039: 'dwMouseHoverTime': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2639): error C2039: 'dwMouseHoverTime': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2640): error C2039: 'dwMouseHoverTime': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2640): error C2065: 'gdtMouseHover': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2642): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2642): error C2223: left of '->ptLast' must point to struct/union",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2644): error C2039: 'codeCapture': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2644): error C2065: 'SCREEN_CAPTURE': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2645): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2645): error C2223: left of '->rcClient' must point to struct/union",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2646): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2646): error C2223: left of '->rcClient' must point to struct/union",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2661): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2661): error C2065: 'QF_TRACKMOUSELEAVE': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2663): error C2065: 'pwnd': undeclared identifier",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2666): error C2039: 'QF_flags': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2666): error C2065: 'QF_TRACKMOUSELEAVE': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2619): warning C4013: 'ValidateHwnd' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2642): warning C4013: 'GETPTI' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2649): warning C4013: 'ResetMouseHover' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2651): warning C4013: 'CancelMouseHover' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\TrackMouseEvent.c(2663): warning C4013: '_PostMessage' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "1ebb5f46ce02b9a1d5daf06eb9407181939a47f7655551ffb12e3fae1aa9ba57"
+    },
+    {
+      "name": "xxxGetNextSysMsg",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxGetNextSysMsg.c(2684): error C2061: syntax error: identifier 'xxxGetNextSysMsg'",
+        "build\\t483-s6-p13\\xxxGetNextSysMsg.c(2684): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\xxxGetNextSysMsg.c(2685): error C2059: syntax error: '<parameter-list>'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "be7746d72a3cd72968cdb8690a4568ffabb0d2088f6cda42e2b60a9e30ccb3e6"
+    },
+    {
+      "name": "UpdateKeyState",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\UpdateKeyState.c(2820): error C2065: 'CVKKEYCACHE': undeclared identifier",
+        "build\\t483-s6-p13\\UpdateKeyState.c(2821): error C2065: 'gpsi': undeclared identifier",
+        "build\\t483-s6-p13\\UpdateKeyState.c(2821): error C2223: left of '->dwKeyCache' must point to struct/union"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\UpdateKeyState.c(2800): warning C4013: 'TestKeyStateDown' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\UpdateKeyState.c(2801): warning C4013: 'TestKeyStateToggle' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\UpdateKeyState.c(2802): warning C4013: 'ClearKeyStateToggle' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\UpdateKeyState.c(2804): warning C4013: 'SetKeyStateToggle' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\UpdateKeyState.c(2812): warning C4013: 'SetKeyStateDown' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\UpdateKeyState.c(2814): warning C4013: 'ClearKeyStateDown' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "977496bf2fdeab87a4a83ed39c668876a0ba5b9d4a849813ab09ff04c4a8a78e"
+    },
+    {
+      "name": "EqualMsg",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\EqualMsg.c(2835): error C2146: syntax error: missing ')' before identifier 'pqmsg1'",
+        "build\\t483-s6-p13\\EqualMsg.c(2835): error C2061: syntax error: identifier 'pqmsg1'",
+        "build\\t483-s6-p13\\EqualMsg.c(2835): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\EqualMsg.c(2835): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\EqualMsg.c(2835): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "8fa6c77ab9a2860a33534972fa58d1d7556accf1b3e3716fefa30f321bf00d53"
+    },
+    {
+      "name": "xxxSkipSysMsg",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxSkipSysMsg.c(2866): error C2146: syntax error: missing ')' before identifier 'pqmsg'",
+        "build\\t483-s6-p13\\xxxSkipSysMsg.c(2866): error C2081: 'PQMSG': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\xxxSkipSysMsg.c(2866): error C2061: syntax error: identifier 'pqmsg'",
+        "build\\t483-s6-p13\\xxxSkipSysMsg.c(2866): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\xxxSkipSysMsg.c(2866): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\xxxSkipSysMsg.c(2867): error C2449: found '{' at file scope (missing function header?)",
+        "build\\t483-s6-p13\\xxxSkipSysMsg.c(3080): error C2059: syntax error: '}'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "bc8814a4459b70426de530bbc93204687281b10325e5211dcc81840b2208bf7f"
+    },
+    {
+      "name": "CloseScrennSaverWindow",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3092): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3092): error C2146: syntax error: missing ';' before identifier 'pwndDesktop'",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3092): error C2065: 'pwndDesktop': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3092): error C2065: 'pwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3094): error C2065: 'PDESKTOPINFO': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3094): error C2146: syntax error: missing ';' before identifier 'pdi'",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3094): error C2065: 'pdi': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3096): error C2065: 'pdi': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3096): error C2039: 'pDeskInfo': is not a member of 'wow_task_order_thread'",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3098): error C2065: 'pdi': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3101): error C2065: 'pwndDesktop': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3101): error C2065: 'pdi': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3101): error C2223: left of '->spwnd' must point to struct/union",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3103): error C2065: 'pwndDesktop': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3106): error C2065: 'pwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3106): error C2065: 'pwndDesktop': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3106): error C2223: left of '->spwndChild' must point to struct/union",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3108): error C2065: 'pwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3109): error C2065: 'pwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3109): error C2223: left of '->head' must point to struct/union",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3115): error C2065: 'pwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3118): error C2065: 'pwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3118): error C2065: 'pwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3118): error C2223: left of '->spwndNext' must point to struct/union"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\CloseScrennSaverWindow.c(3115): warning C4013: '_PostMessage' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "606dff8016b994e4ba969559395ee55ead94aae1addd333867396cf189ab5202"
+    },
+    {
+      "name": "ScreenSaverCheck",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3151): error C2065: 'TIF_SCREENSAVER': undeclared identifier",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3159): error C2065: 'ptCursor': undeclared identifier",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3159): error C2224: left of '.x' must have struct/union type",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3159): error C2168: 'abs': too few actual parameters for intrinsic function",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3159): error C2065: 'THRESHOLD': undeclared identifier",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3160): error C2065: 'ptCursor': undeclared identifier",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3160): error C2224: left of '.y' must have struct/union type",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3160): error C2168: 'abs': too few actual parameters for intrinsic function",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3160): error C2065: 'THRESHOLD': undeclared identifier",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3169): error C2065: 'TIF_SCREENSAVER': undeclared identifier",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3180): error C2039: 'cQuit': is not a member of 'wow_task_order_thread'"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3170): warning C4013: 'SetForegroundPriority' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ScreenSaverCheck.c(3172): warning C4013: 'CloseScrennSaverWindow' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "5fe752227704de9d03d08b3f79738af83fcd8ae160089dab08116061b03a08ec"
+    },
+    {
+      "name": "GetMouseKeyFlags",
+      "exit": 0,
+      "errors": [],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\GetMouseKeyFlags.c(3246): warning C4013: 'TestKeyStateDown' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "95bcde073dab012c021599cea2ffce05bd963bbc8ad2b3761eaa1d5dfbc1b386"
+    },
+    {
+      "name": "xxxScanSysQueue",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\xxxScanSysQueue.c(3278): error C2146: syntax error: missing ')' before identifier 'pwndFilter'",
+        "build\\t483-s6-p13\\xxxScanSysQueue.c(3278): error C2081: 'PWND': name in formal parameter list illegal",
+        "build\\t483-s6-p13\\xxxScanSysQueue.c(3278): error C2061: syntax error: identifier 'pwndFilter'",
+        "build\\t483-s6-p13\\xxxScanSysQueue.c(3278): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\xxxScanSysQueue.c(3278): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\xxxScanSysQueue.c(3282): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "b4efc72eb52d96beacd2783d20b3fbc48d9be922076d9513295ccde160356283"
+    },
+    {
+      "name": "IdleTimerProc",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\IdleTimerProc.c(4872): error C2065: 'iScreenSaveTimeOut': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4872): error C2065: 'timeLastInputMessage': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4877): error C2065: 'timeLastInputMessage': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4878): error C2065: 'iScreenSaveTimeOut': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4884): error C2065: 'timeLastInputMessage': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4886): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4886): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4886): error C2223: left of '->spwndActive' must point to struct/union",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4887): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4887): error C2223: left of '->spwndActive' must point to struct/union"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\IdleTimerProc.c(4861): warning C4013: 'CheckCritIn' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4863): warning C4013: '_GetAsyncKeyState' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4877): warning C4013: 'NtGetTickCount' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4887): warning C4013: '_PostMessage' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\IdleTimerProc.c(4890): warning C4013: 'StartScreenSaver' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "2b08f3c246c4b80aa4f006598008d4189421729241a613f461154fe3c52264a5"
+    },
+    {
+      "name": "WakeInputIdle",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\WakeInputIdle.c(4907): error C2065: 'PW32PROCESS': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4907): error C2146: syntax error: missing ';' before identifier 'W32Process'",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4907): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4912): error C2065: 'TIF_FIRSTIDLE': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4918): error C2065: 'TIF_SCREENSAVER': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4925): error C2065: 'TIF_SHAREDWOW': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4935): error C2039: 'ptiMainThread': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4936): error C2039: 'ptiMainThread': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4941): error C2039: 'ptiMainThread': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4942): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4942): error C2223: left of '->InputIdleEvent' must point to struct/union",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4942): error C2708: 'SET_PSEUDO_EVENT': actual parameters length in bytes differs from previous call or reference",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4949): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4949): error C2223: left of '->W32PF_Flags' must point to struct/union",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4949): error C2065: 'W32PF_STARTGLASS': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4954): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4954): error C2223: left of '->W32PF_Flags' must point to struct/union",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4954): error C2065: 'W32PF_STARTGLASS': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\WakeInputIdle.c(4907): warning C4013: 'W32GetCurrentProcess' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4919): warning C4013: 'SetForegroundPriority' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4926): warning C4013: 'UserAssert' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4928): warning C4013: 'SET_PSEUDO_EVENT' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\WakeInputIdle.c(4955): warning C4013: 'CalcStartCursorHide' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "896afbc1bbb29e2b1951f0205aa774d210bffea3ecb673119051204798ab0bc9"
+    },
+    {
+      "name": "SleepInputIdle",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\SleepInputIdle.c(4962): error C2065: 'PW32PROCESS': undeclared identifier",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4962): error C2146: syntax error: missing ';' before identifier 'W32Process'",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4962): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4968): error C2065: 'TIF_SHAREDWOW': undeclared identifier",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4978): error C2039: 'ptiMainThread': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4979): error C2039: 'ptiMainThread': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4984): error C2039: 'ptiMainThread': is not a member of 'wow_task_order_process'",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4985): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4986): error C2065: 'W32Process': undeclared identifier",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4986): error C2223: left of '->InputIdleEvent' must point to struct/union",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4986): error C2708: 'RESET_PSEUDO_EVENT': actual parameters length in bytes differs from previous call or reference"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\SleepInputIdle.c(4969): warning C4013: 'UserAssert' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4971): warning C4013: 'RESET_PSEUDO_EVENT' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\SleepInputIdle.c(4985): warning C4013: 'W32GetCurrentProcess' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "cf79ed50d610788af5e6741f80f6268b229530e730e1fe9e2f37f98dba544700"
+    },
+    {
+      "name": "RecalcThreadAttachment",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\RecalcThreadAttachment.c(5119): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\RecalcThreadAttachment.c(5119): error C2223: left of '->rpdesk' must point to struct/union",
+        "build\\t483-s6-p13\\RecalcThreadAttachment.c(5149): error C2198: 'void Recalc2(PQ,PTHREADINFO)': too few arguments for call"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\RecalcThreadAttachment.c(5134): warning C4013: 'AllocQueue' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "0d2cbc497462119b9222b04879085e9365a665a1f580cf37e5d1522b92ad60e4"
+    },
+    {
+      "name": "RedistributeInput",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\RedistributeInput.c(5166): error C2146: syntax error: missing ')' before identifier 'pqmsgS'",
+        "build\\t483-s6-p13\\RedistributeInput.c(5166): error C2061: syntax error: identifier 'pqmsgS'",
+        "build\\t483-s6-p13\\RedistributeInput.c(5166): error C2059: syntax error: ';'",
+        "build\\t483-s6-p13\\RedistributeInput.c(5166): error C2059: syntax error: ','",
+        "build\\t483-s6-p13\\RedistributeInput.c(5167): error C2059: syntax error: ')'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "970be54d71c02696d1ee2439f16a9d0b1f26293bda902c802f5b664de7d1f0d8"
+    },
+    {
+      "name": "CancelInputState",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\CancelInputState.c(5349): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5349): error C2146: syntax error: missing ';' before identifier 'pwndT'",
+        "build\\t483-s6-p13\\CancelInputState.c(5349): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5350): error C2065: 'TL': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5350): error C2146: syntax error: missing ';' before identifier 'tlpwndT'",
+        "build\\t483-s6-p13\\CancelInputState.c(5350): error C2065: 'tlpwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5351): error C2065: 'TL': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5351): error C2146: syntax error: missing ';' before identifier 'tlpwndChild'",
+        "build\\t483-s6-p13\\CancelInputState.c(5351): error C2065: 'tlpwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5352): error C2065: 'AAS': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5352): error C2146: syntax error: missing ';' before identifier 'aas'",
+        "build\\t483-s6-p13\\CancelInputState.c(5352): error C2065: 'aas': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5367): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5367): error C2039: 'spwndActive': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5368): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5368): error C2065: 'tlpwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5370): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5371): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5372): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5372): error C2065: 'WFMINIMIZED': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5375): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5375): error C2039: 'spwndActive': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5376): error C2039: 'spwndActive': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5378): error C2065: 'aas': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5378): error C2224: left of '.ptiNotify' must have struct/union type",
+        "build\\t483-s6-p13\\CancelInputState.c(5378): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5379): error C2065: 'aas': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5379): error C2224: left of '.tidActDeact' must have struct/union type",
+        "build\\t483-s6-p13\\CancelInputState.c(5379): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5379): error C2223: left of '->Thread' must point to struct/union",
+        "build\\t483-s6-p13\\CancelInputState.c(5380): error C2065: 'aas': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5380): error C2224: left of '.fActivating' must have struct/union type",
+        "build\\t483-s6-p13\\CancelInputState.c(5381): error C2065: 'aas': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5381): error C2224: left of '.fQueueNotify' must have struct/union type",
+        "build\\t483-s6-p13\\CancelInputState.c(5387): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5387): error C2223: left of '->rpdesk' must point to struct/union",
+        "build\\t483-s6-p13\\CancelInputState.c(5387): error C2065: 'tlpwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5387): error C2708: 'ThreadLockWithPti': actual parameters length in bytes differs from previous call or reference",
+        "build\\t483-s6-p13\\CancelInputState.c(5388): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5388): error C2223: left of '->rpdesk' must point to struct/union",
+        "build\\t483-s6-p13\\CancelInputState.c(5389): error C2065: 'WNDENUMPROC_PWND': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5389): error C2146: syntax error: missing ')' before identifier 'xxxActivateApp'",
+        "build\\t483-s6-p13\\CancelInputState.c(5390): error C2065: 'tlpwndChild': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5392): error C2065: 'tlpwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5399): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5399): error C2039: 'spwndFocus': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5400): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5400): error C2065: 'tlpwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5402): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5403): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5403): error C2039: 'spwndFocus': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5404): error C2039: 'spwndFocus': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5406): error C2065: 'tlpwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5413): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5413): error C2039: 'spwndCapture': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5414): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5414): error C2065: 'tlpwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5416): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5417): error C2065: 'pwndT': undeclared identifier",
+        "build\\t483-s6-p13\\CancelInputState.c(5417): error C2039: 'spwndCapture': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5418): error C2039: 'spwndCapture': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\CancelInputState.c(5420): error C2065: 'tlpwndT': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\CancelInputState.c(5368): warning C4013: 'ThreadLockWithPti' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\CancelInputState.c(5370): warning C4013: 'QueueNotifyMessage' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\CancelInputState.c(5372): warning C4013: 'TestWF' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\CancelInputState.c(5376): warning C4013: 'Unlock' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\CancelInputState.c(5378): warning C4013: 'GETPTI' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\CancelInputState.c(5388): warning C4013: 'xxxInternalEnumWindow' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\CancelInputState.c(5390): warning C4013: 'ThreadUnlock' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "b05edc5c7708b2c5c95888c7806fe9c4a740e9e77ae85c7cc9df5bb0ae611651"
+    },
+    {
+      "name": "CheckTransferState",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\CheckTransferState.c(5449): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5449): error C2146: syntax error: missing ';' before identifier 'pwndOld'",
+        "build\\t483-s6-p13\\CheckTransferState.c(5449): error C2065: 'pwndOld': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5449): error C2065: 'pwndNew': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5449): error C2065: 'pwndForegroundState': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5456): error C2065: 'pwndOld': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5456): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5456): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\CheckTransferState.c(5457): error C2065: 'pwndNew': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5457): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5457): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\CheckTransferState.c(5463): error C2065: 'pwndOld': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5463): error C2065: 'pwndOld': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5464): error C2065: 'CTS_DONOTHING': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5469): error C2065: 'pwndNew': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5470): error C2065: 'CTS_CANCELOLD': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5475): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5476): error C2065: 'CTS_TRANSFER': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5482): error C2065: 'pwndForegroundState': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5482): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5482): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\CheckTransferState.c(5483): error C2065: 'pwndForegroundState': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5483): error C2065: 'pwndOld': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5483): error C2065: 'pwndForegroundState': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5484): error C2065: 'CTS_TRANSFER': undeclared identifier",
+        "build\\t483-s6-p13\\CheckTransferState.c(5490): error C2065: 'CTS_CANCELOLD': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\CheckTransferState.c(5463): warning C4013: 'GETPTI' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "6010a47c8f909af06c1b9962351d956efb630b3139fc8c182373b0bc38e93181"
+    },
+    {
+      "name": "AttachToQueue",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\AttachToQueue.c(5499): error C2065: 'PQMSG': undeclared identifier",
+        "build\\t483-s6-p13\\AttachToQueue.c(5499): error C2146: syntax error: missing ';' before identifier 'pqmsgT'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5499): error C2065: 'pqmsgT': undeclared identifier",
+        "build\\t483-s6-p13\\AttachToQueue.c(5506): error C2065: 'Q': undeclared identifier",
+        "build\\t483-s6-p13\\AttachToQueue.c(5506): error C2059: syntax error: ')'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5511): error C2065: 'CTS_TRANSFER': undeclared identifier",
+        "build\\t483-s6-p13\\AttachToQueue.c(5512): error C2039: 'spwndActive': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5512): error C2039: 'spwndActive': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5518): error C2039: 'caret': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5520): error C2039: 'caret': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5525): error C2039: 'caret': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5526): error C2039: 'caret': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5526): error C2039: 'caret': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5527): error C2039: 'caret': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5509): error C2043: illegal break",
+        "build\\t483-s6-p13\\AttachToQueue.c(5511): error C2046: illegal case",
+        "build\\t483-s6-p13\\AttachToQueue.c(5531): error C2043: illegal break",
+        "build\\t483-s6-p13\\AttachToQueue.c(5537): error C2059: syntax error: 'switch'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5551): error C2059: syntax error: 'switch'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5566): error C2059: syntax error: 'switch'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5587): error C2059: syntax error: 'switch'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5608): error C2059: syntax error: 'if'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5625): error C2059: syntax error: 'if'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5635): error C2143: syntax error: missing '{' before '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5635): error C2059: syntax error: '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5640): error C2143: syntax error: missing '{' before '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5640): error C2059: syntax error: '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5641): error C2143: syntax error: missing '{' before '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5641): error C2059: syntax error: '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5648): error C2059: syntax error: 'if'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5656): error C2065: 'pti': undeclared identifier",
+        "build\\t483-s6-p13\\AttachToQueue.c(5656): error C2223: left of '->pq' must point to struct/union",
+        "build\\t483-s6-p13\\AttachToQueue.c(5663): error C2143: syntax error: missing '{' before '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5663): error C2059: syntax error: '->'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5669): error C2059: syntax error: 'if'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5695): error C2059: syntax error: 'else'",
+        "build\\t483-s6-p13\\AttachToQueue.c(5699): error C2059: syntax error: '}'"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\AttachToQueue.c(5505): warning C4013: 'CheckTransferState' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\AttachToQueue.c(5512): warning C4013: 'Lock' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\AttachToQueue.c(5520): warning C4013: 'GETPTI' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "059686d00b09e38e6f19b5a19195d0608046b0fc6b56b14a6bb2ce08235d852f"
+    },
+    {
+      "name": "ReattachThreads",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\ReattachThreads.c(5738): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5753): error C2039: 'cLockCount': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5763): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5763): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5763): error C2223: left of '->spwndActive' must point to struct/union",
+        "build\\t483-s6-p13\\ReattachThreads.c(5764): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5764): error C2223: left of '->spwndActive' must point to struct/union",
+        "build\\t483-s6-p13\\ReattachThreads.c(5764): error C2223: left of '->pqAttach' must point to struct/union",
+        "build\\t483-s6-p13\\ReattachThreads.c(5768): error C2065: 'gpqForegroundPrev': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5768): error C2065: 'gpqForegroundPrev': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5768): error C2223: left of '->spwndActivePrev' must point to struct/union",
+        "build\\t483-s6-p13\\ReattachThreads.c(5769): error C2065: 'gpqForegroundPrev': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5769): error C2223: left of '->spwndActivePrev' must point to struct/union",
+        "build\\t483-s6-p13\\ReattachThreads.c(5769): error C2223: left of '->pqAttach' must point to struct/union",
+        "build\\t483-s6-p13\\ReattachThreads.c(5813): error C2065: 'PQMSG': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5813): error C2146: syntax error: missing ';' before identifier 'pqmsgRedist'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5813): error C2065: 'pqmsgRedist': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5815): error C2039: 'cLockCount': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5816): error C2039: 'cLockCount': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5817): error C2065: 'pqmsgRedist': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5817): error C2039: 'mlInput': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5819): error C2039: 'mlInput': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5820): error C2039: 'mlInput': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5821): error C2039: 'mlInput': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5822): error C2065: 'pqmsgRedist': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5837): error C2065: 'grpdeskRitInput': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5844): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5845): error C2065: 'gpqForegroundPrev': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5847): error C2065: 'gpqForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5848): error C2065: 'PWND': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5848): error C2146: syntax error: missing ';' before identifier 'pwndNewForeground'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5848): error C2065: 'pwndNewForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5851): error C2065: 'pwndNewForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5851): error C2037: left of 'spwnd' specifies undefined struct/union 'wow_cleanup_desktop_info'",
+        "build\\t483-s6-p13\\ReattachThreads.c(5859): error C2065: 'pwndNewForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5860): error C2065: 'pwndNewForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5860): error C2708: 'GETPTI': actual parameters length in bytes differs from previous call or reference",
+        "build\\t483-s6-p13\\ReattachThreads.c(5861): error C2065: 'pwndNewForeground': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5861): error C2708: 'GETPTI': actual parameters length in bytes differs from previous call or reference",
+        "build\\t483-s6-p13\\ReattachThreads.c(5861): error C2223: left of '->pq' must point to struct/union",
+        "build\\t483-s6-p13\\ReattachThreads.c(5861): error C2065: 'QEVENT_ACTIVATE': undeclared identifier",
+        "build\\t483-s6-p13\\ReattachThreads.c(5862): error C2065: 'pwndNewForeground': undeclared identifier"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\ReattachThreads.c(5733): warning C4013: 'RecalcThreadAttachment' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5764): warning C4013: 'GETPTI' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5805): warning C4013: 'AttachToQueue' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5815): warning C4013: 'UserAssert' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5822): warning C4013: 'RedistributeInput' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5851): warning C4013: '_GetNextQueueWindow' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5860): warning C4013: 'PostEventMessage' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5862): warning C4013: 'HWq' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\ReattachThreads.c(5866): warning C4013: 'SetFMouseMoved' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "d1d98455896d531508bfd25ab283421859fa459831e43f6bdf28c859241dab44"
+    },
+    {
+      "name": "_AttachThreadInput",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5888): error C2065: 'TIF_DONTATTACHQUEUE': undeclared identifier",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5890): error C2065: 'TIF_DONTATTACHQUEUE': undeclared identifier",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5909): error C2065: 'ATTACHINFO': undeclared identifier",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5909): error C2065: 'TAG_ATTACHINFO': undeclared identifier",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5913): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5913): error C2223: left of '->rpdesk' must point to struct/union",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5914): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5914): error C2223: left of '->rpdesk' must point to struct/union",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5923): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5923): error C2223: left of '->rpdesk' must point to struct/union"
+      ],
+      "implicit_declarations": [
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5876): warning C4013: 'CheckCritIn' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5909): warning C4013: 'UserAllocPool' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5928): warning C4013: 'UserFreePool' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5950): warning C4013: 'FJOURNALRECORD' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5950): warning C4013: 'FJOURNALPLAYBACK' undefined; assuming extern returning int",
+        "build\\t483-s6-p13\\_AttachThreadInput.c(5951): warning C4013: 'ReattachThreads' undefined; assuming extern returning int"
+      ],
+      "log_sha256": "ff3e1220c53105bba9a15fef5a92586d4e6814aab4ebf45bb28018472d07ee26"
+    },
+    {
+      "name": "_SetMessageExtraInfo",
+      "exit": 2,
+      "errors": [
+        "build\\t483-s6-p13\\_SetMessageExtraInfo.c(5966): error C2065: 'ptiCurrent': undeclared identifier",
+        "build\\t483-s6-p13\\_SetMessageExtraInfo.c(5968): error C2039: 'ExtraInfo': is not a member of 'wow_task_order_queue'",
+        "build\\t483-s6-p13\\_SetMessageExtraInfo.c(5969): error C2039: 'ExtraInfo': is not a member of 'wow_task_order_queue'"
+      ],
+      "implicit_declarations": [],
+      "log_sha256": "c42dd2455189c7101bd594d07b560cac66c3530fb1febf711a0935841da93d6e"
+    }
+  ],
+  "remaining": [
+    "Trace original dependency closure for failed units rather than treating current projection as proof.",
+    "Inspect declaration-only restoration and fragmentation tradeoffs throughout whole file.",
+    "Check retained Recalc2 explicit-context boundary and all original logical lines.",
+    "Only after whole-file candidate completion apply and perform required cached build/publication/tests/commit/push."
+  ],
+  "production_changes": false,
+  "evidence_archive": "input-first-pass-controls.zip"
+}

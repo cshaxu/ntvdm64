@@ -10,7 +10,10 @@
 * 02-14-91 mikeke       Added Revalidation code
 \***************************************************************************/
 
+#include "wow_user_client_view_layout.h"
 #include "wow_input_group_bindings.h"
+#include "wow_edit_lookaside_bindings.h"
+#line 14
 #pragma hdrstop
 
 //#define MARKPATH
@@ -30,11 +33,39 @@
 #error
 #line 84
 #endif  // DBG
+#line 85
+
+int LangToggleKeyState = 0;
+
+PVOID KeyStateLookasideBase;
+PVOID KeyStateLookasideBounds;
+ZONE_HEADER KeyStateLookasideZone;
 #line 91
 #if DBG
 #error
 #line 97
 #endif // DBG
+#line 98
+
+#define CANCEL_ACTIVESTATE  0
+#define CANCEL_FOCUSSTATE   1
+#define CANCEL_CAPTURESTATE 2
+
+#define KEYSTATESIZE    (CBKEYSTATE + CBKEYSTATERECENTDOWN)
+
+
+/*
+ * xxxGetNextSysMsg return values
+ */
+#define PQMSG_PLAYBACK       ((PQMSG)1)
+
+BOOL xxxScanSysQueue(PTHREADINFO ptiCurrent, LPMSG lpMsg, PWND pwndFilter,
+        UINT msgMinFilter, UINT msgMaxFilter, DWORD flags, DWORD fsReason);
+BOOL xxxReadPostMessage(PTHREADINFO pti, LPMSG lpMsg, PWND pwndFilter,
+        UINT msgMin, UINT msgMax, BOOL fRemoveMsg);
+void CleanEventMessage(PQMSG pqmsg);
+void FreeQEntry(PQMSG pqmsg);
+UINT GetMouseKeyFlags(PQ pq);
 #line 238
 #ifdef MARKPATH
 #error

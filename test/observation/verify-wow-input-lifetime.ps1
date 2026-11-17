@@ -1,12 +1,14 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$CompilerDriver,
- [Parameter(Mandatory)][string]$BuildRoot)
+ [Parameter(Mandatory)][string]$BuildRoot,
+ [Parameter(Mandatory)][string]$ProviderBuildRoot)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
 $null=New-Item -ItemType Directory $root
 $driver=(Resolve-Path $CompilerDriver).Path
+$originalObject=(Resolve-Path (Join-Path $ProviderBuildRoot 'obj/opennt-user/input.obj')).Path
 function Owned($name,$image,$line,$seconds,$expected=0){
  $p=Start-Process $image -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$image;command=$line;timeoutSeconds=$seconds}|ConvertTo-Json|Set-Content "$root/$name.process.json"
@@ -19,12 +21,13 @@ function Owned($name,$image,$line,$seconds,$expected=0){
 try{
  $fixture="$repo/test/adapter-mvdm-host-out/wow/wow_input_lifetime_fixture.c"
  $original="$repo/src/non-mvdm/windows/core/ntuser/kernel/input.c"
- Get-FileHash $PSCommandPath,$driver,$fixture,$original,"$repo/test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h",
+ Get-FileHash $PSCommandPath,$driver,$originalObject,$fixture,$original,"$repo/test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h",
   "$repo/src/wow32-dll/source/wow_input_group_lifetime.c",
   "$repo/src/wow32-dll/include/wow_input_group_lifetime.h",
   "$repo/src/wow32-dll/include/wow_input_group_bindings.h",
   "$repo/src/wow32-dll/include/wow_task_order_bindings.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
- foreach($spec in @(@('fixture',$fixture),@('original-input',$original))){
+ Copy-Item $originalObject "$root/original-input.obj"
+ foreach($spec in ,@('fixture',$fixture)){
   $line='/d /s /c ""'+$driver+'" cl.exe /nologo /c /MT /O2 /Gz /W4 /WX /I"'+$repo+'/src" /I"'+$repo+'/src/wow32-dll/include" /Fo"'+$root+'/'+$spec[0]+'.obj" "'+$spec[1]+'""'
   Owned ('compile-'+$spec[0]) $env:ComSpec $line 120
  }

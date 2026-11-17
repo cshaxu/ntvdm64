@@ -31,13 +31,12 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-24/255 initial difference files reviewed;231 remain. Eighteen changed files
-verified across P2-P12;six reviewed unchanged. Current census:1063 files
+25/255 initial difference files reviewed;230 remain. Nineteen changed files
+verified across P2-P13;six reviewed unchanged. Current census:1063 files
 (1054 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
-normalized/error-masked differences,and255 nonzero files. P12 adds original
-winerrp.h byte-exact;this is not itself a reduced difference point.
-Current total2310 blocks/53650 lines;cumulative delivered reduction23 blocks/
-873 lines. Mouse's earlier two-line counting correction remains separate.
+normalized/error-masked differences,and255 nonzero files.
+Current total2309 blocks/53626 lines;cumulative delivered reduction24 blocks/
+897 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -65,27 +64,30 @@ Current total2310 blocks/53650 lines;cumulative delivered reduction23 blocks/
 | kernel/userk.h |27->27|117->115|P12 two added comments removed;Full20 passed|
 | wow32/wdde.c |26->26|143->143|P12 reviewed unchanged;residual decisions pending|
 | kernel/handtabl.c |26->24|1481->1381|P12 original declarations and KernelPtoH restored;Full20 passed|
+| kernel/input.c |26->25|5527->5503|P13 original declarations restored;Full20 and input services/lifetime passed|
 
 
 The canonical pending backlog remains1641 rows/1646 historical R identifiers.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
 boundaries remain pending. Historical R identifiers are not current diff blocks.
-Next file follows the worklist after handtabl;do not repeat completed reviews.
+P13 original input declarations are restored and verified. Seven scattered
+harmless macros would increase file blocks26->27;owner approval remains pending.
+No residual omission is silently approved. Next file is sevid001.c.
 
 ## Current Technical Baseline
 
-P12 cached x86/x64 full builds passed. Packagefdefbd32-482c-4625-a129-b2edebd20bcd contains11
+P13 cached x86/x64 full passed. Package272d7100-3694-4bda-8ba0-c2b08742067d contains11
 images,published and hash-verified to assets/release and O:/winnt/system32.
 Bitmap/message/DDE,controls/task-order,Full20 including real DOS4GW/NESticle,
-shared-boundary and governance passed. Cleanup source audit passed;not a
-runtime proof. Six compiler anchors and153 static original rows match.
-Two assignment-helper candidates failed linking and were withdrawn;no stub
-or /Gy build change retained. No guest or winnt.zip changes.
+shared-boundary/governance and actual-provider native input services/lifetime
+passed. Original declaration anchors and existing function code identity checked.
+Standalone fixture compile dependencies were corrected by using the cached
+product object;no assertion waiver. No guest or winnt.zip changes.
 
-[P12 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p12-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p12-verification-evidence.zip)
-bind final source,package and tests. [Whole-file review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/handtabl-whole-file-review.json)
+[P13 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p13-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p13-verification-evidence.zip)
+bind final source,package and tests. [Whole-file review](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/input-whole-file-review.json)
 records restorations and residual owner decisions. Git delivery accompanies receipt.
 
 ## Remaining Scope
