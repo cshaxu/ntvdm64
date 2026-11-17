@@ -199,3 +199,7 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 - [cmdexec whole-file review](cmdexec-whole-file-review.json):24->17 blocks,123->82 lines;P14 build/publication/Full passed; governance/Git follow receipt.
 
 [P14 receipt](batch-p14-checkpoint.json) and [evidence](p14-verification-evidence.zip):combined7 blocks/42 lines restored;Full20 passed.
+
+- [keyba whole-file review](keyba-whole-file-review.json) and [preprocessor proof](keyba-preprocessor-proof.zip):24->24 points,72->56 lines;P15 build/publication/keyboard/Full passed;Git delivery follows receipt.
+
+[P15 receipt](batch-p15-checkpoint.json) and [evidence](p15-verification-evidence.zip):keyba24->24 points,72->56 lines;keyboard/PIC90 and Full20 passed.

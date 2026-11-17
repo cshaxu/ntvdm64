@@ -1,0 +1,202 @@
+{
+  "failed_attempt": "Initial Full failed WOW frontier after in-process VS environment import. Same-package clean/VS-imported pair reproduced difference; subsequent Full executes in a clean process. No product change or assertion waiver.",
+  "environment_pair": [
+    {
+      "environmentChars": 3990,
+      "case": "clean",
+      "expectedWindow": true,
+      "environmentVariables": 84,
+      "workerAlive": true
+    },
+    {
+      "environmentChars": 8315,
+      "case": "vs-imported",
+      "expectedWindow": false,
+      "environmentVariables": 128,
+      "workerAlive": true
+    }
+  ],
+  "packet": "M0 T483 S6 P15",
+  "status": "Built, published and keyboard/Full verified; governance/Git delivery follows receipt",
+  "source_checkpoint": {
+    "source_files": 1,
+    "files": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+        "sha256": "98f124308ee7c089cc4a6156e3de2f5887a01b637950eff5f616d07961e06fab"
+      }
+    ],
+    "deleted": []
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 16
+  },
+  "publication": {
+    "status": "published",
+    "package": "c57f1a4a-185c-450a-9770-48086f94f6ef",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 422438,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3273,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1297,
+        "CleanupMs": 471,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 14482,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 13716,
+        "CleanupMs": 537,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 12517,
+        "CleanupMs": 445,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 211,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66051,
+        "CleanupMs": 449,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47294,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 45443,
+        "CleanupMs": 391,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15496,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11332,
+        "CleanupMs": 461,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 55248,
+        "CleanupMs": 463,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12931,
+        "CleanupMs": 483,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28605,
+        "CleanupMs": 395,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31044,
+        "CleanupMs": 410,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3968,
+        "CleanupMs": 415,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8277,
+        "CleanupMs": 416,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10057,
+        "CleanupMs": 465,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3724,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6840,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20131,
+        "CleanupMs": 456,
+        "Passed": true
+      }
+    ]
+  },
+  "global_counts": {
+    "files": 1063,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 255,
+    "blocks": 2302,
+    "lines": 53568,
+    "reviewed_files": 29,
+    "remaining_files": 226,
+    "cumulative_reduction_blocks": 31,
+    "cumulative_reduction_lines": 955
+  },
+  "keyboard_controller": {
+    "profile": "x86 /MT NTVDM CCPU40",
+    "elapsed_ms": 228,
+    "executable_sha256": "3377BC9096C10DAB159776BB0971C0B0F9AE5BE651CEDDFE82545102AEB007C9",
+    "keyba_sha256": "98F124308EE7C089CC4A6156E3DE2F5887A01B637950EFF5F616D07961E06FAB",
+    "ica_sha256": "6CCBDD1C1A00457FFF9D236321F69B80D87FC2ABE88BC31EB8F64617247E2304",
+    "controller_reply": "C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes",
+    "scope": "Actual controller/PIC; normal and early EOI slot order, whole-device reset cancellation, controlled host callbacks, no BIOS ISR/timer acceptance"
+  },
+  "preprocessor_proof": "keyba-preprocessor-proof.zip: exact product-command before/candidate code identical",
+  "winnt_zip_unchanged": true,
+  "limits": [
+    "Historical necessity evidence reused and separately identified; no new failure baseline claim.",
+    "No original conditional framework or excluded branch changed.",
+    "Remaining state/provenance/reset boundaries still pending owner decision."
+  ]
+}

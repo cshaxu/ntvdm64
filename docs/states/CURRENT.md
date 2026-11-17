@@ -31,12 +31,12 @@ superseding the earlier S6 hold,not admission of compat/component minimization.
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-28/255 initial difference files reviewed;227 remain. Twenty-one changed files
-verified across P2-P14;seven reviewed unchanged. Current census:1063 files
+29/255 initial difference files reviewed;226 remain. Twenty-two changed files
+verified across P2-P15;seven reviewed unchanged. Current census:1063 files
 (1054 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
 normalized/error-masked differences,and255 nonzero files.
-Current total2302 blocks/53584 lines;cumulative delivered reduction31 blocks/
-939 lines. Mouse's earlier two-line counting correction remains separate.
+Current total2302 blocks/53568 lines;cumulative delivered reduction31 blocks/
+955 lines. Mouse's earlier two-line counting correction remains separate.
 
 | File | Non-error blocks | Changed lines | Result |
 | --- | --- | --- | --- |
@@ -68,6 +68,7 @@ Current total2302 blocks/53584 lines;cumulative delivered reduction31 blocks/
 | sevid001.c |25->25|50->50|Unchanged;25 evidenced decisions;prior-source identity checked|
 | wow32/wkman.c |25->25|46->45|P14 extra blank removed;Full20 passed|
 | command/cmdexec.c |24->17|123->82|P14 declaration/format restored;Full20 passed|
+| keymouse/keyba.c |24->24|72->56|P15 added guard pairs removed;actual keyboard90 and Full20 passed|
 
 
 The canonical pending backlog has1641 rows/1643 distinct historical R identifiers,
@@ -77,20 +78,20 @@ handtabl restorations removed from pending;remaining private-kernel and ABI
 boundaries remain pending. Historical R identifiers are not current diff blocks.
 P13 original input declarations are restored and verified. Seven scattered
 harmless macros would increase file blocks26->27;owner approval remains pending.
-No residual omission is silently approved. Next file is src/mvdm-host/softpc.new/base/keymouse/keyba.c.
+No residual omission is silently approved. Next file is src/non-mvdm/base/win32/client/vdm.c.
 
 ## Current Technical Baseline
 
-P14 cached x86/x64 full, COMMAND capture/launch fixtures and Full20 passed.
-Package49fa049e-b14e-46b0-9eea-263885d4aa62 contains11 images, published and
-hash-verified to assets/release and O:/winnt/system32. Full includes the real
-DOS4GW/NESticle gate. No guest or winnt.zip changes. Final physical newline
-correction is normalized-byte-identical to compiled source; preserved existing
-three CRLF lines. Governance passed;Git delivery accompanies the evidence receipt.
+P15 cached x86/x64 full,actual keyboard/PIC90,origin-device and Full20 passed.
+Packagec57f1a4a-185c-450a-9770-48086f94f6ef contains11 images,published and
+hash-verified to assets/release and O:/winnt/system32. Full includes actual
+DOS4GW/NESticle. No guest or winnt.zip changes. Before/candidate selected
+preprocessed code is identical;all69 excluded bodies and original frameworks
+remain. Governance and Git delivery follow the evidence receipt.
 
-[P14 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p14-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p14-verification-evidence.zip)
-bind sources, package and tests. Pending decisions are not approved by test success.
+[P15 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p15-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p15-verification-evidence.zip)
+bind source,package and tests. Remaining owner decisions are not approved by test success.
 
 ## Remaining Scope
 

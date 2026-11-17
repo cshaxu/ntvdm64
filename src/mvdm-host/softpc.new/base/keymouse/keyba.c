@@ -88,11 +88,9 @@
 
 #include "debug.h"
 
-#ifdef NTVDM
 #include "mvdm_keyboard_history.h"
 extern mvdm_keyboard_history nt_keyboard_history;
 extern void mvdm_keyboard_reset_pending_irq(int pending); /* DIVERGENCE(MVDM-HOST-DIV-321) */
-#endif
 
 
 #line 90
@@ -820,18 +818,14 @@ LOCAL VOID add_to_6805_buff IFN2(half_word,code,int, immediate)
 	 {
 	 /* queue at start */
 	 buff_6805_out_ptr = (buff_6805_out_ptr - 1) & BUFF_6805_PMASK;
-#ifdef NTVDM
          nt_keyboard_history.device[buff_6805_out_ptr]=0; /* DIV-317: response, not user input. */
-#endif
 #line 951
 	 buff_6805[buff_6805_out_ptr]=code;
 	 }
       else
 	 {
 	 /* queue at end */
-#ifdef NTVDM
         nt_keyboard_history.device[buff_6805_in_ptr]=nt_keyboard_history.active; /* DIV-317 */
-#endif
 #line 956
 	buff_6805[buff_6805_in_ptr]=code;
 	buff_6805_in_ptr = (buff_6805_in_ptr + 1) & BUFF_6805_PMASK;
@@ -1239,9 +1233,7 @@ GLOBAL VOID host_key_down IFN1(int,key)
 if (scanning_discontinued)
 	{
 	held_event_type[held_event_count]=KEY_DOWN_EVENT;
-#ifdef NTVDM
         nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
-#endif
 #line 1356
 	held_event_key[held_event_count++]=key;
 
@@ -1284,9 +1276,7 @@ GLOBAL VOID host_key_up IFN1(int,key)
 if (scanning_discontinued)
 	{
 	held_event_type[held_event_count]=KEY_UP_EVENT;
-#ifdef NTVDM
         nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
-#endif
 #line 1411
 	held_event_key[held_event_count++]=key;
 
@@ -2046,9 +2036,7 @@ if (scanning_discontinued && !waiting_for_next_code)
 		{
 		for (i=0;i<held_event_count;i++)
 			{
-#ifdef NTVDM
                         nt_keyboard_history.active=nt_keyboard_history.held[i]; /* DIV-317 */
-#endif
 #line 2158
 			switch (held_event_type[i])
 				{
@@ -2061,9 +2049,7 @@ if (scanning_discontinued && !waiting_for_next_code)
 				}
 			}
 		}
-#ifdef NTVDM
         nt_keyboard_history.active=0; /* DIV-317: later internal actions have no raw origin. */
-#endif
 #line 2169
 	scanning_discontinued=FALSE;
 	}
@@ -2504,9 +2490,7 @@ if (translating)
 			}
 		else {
 			waiting_for_upcode=TRUE;
-#ifdef NTVDM
                         nt_keyboard_history.prefix=nt_keyboard_history.translated; /* DIV-317 */
-#endif
 #line 2647
 			}
 		}
