@@ -44,6 +44,10 @@ for path in sorted(files):
  used=set();om=[];nm=[]
  for i,x in enumerate(na):
   if not x['excluded']:continue
+  # These added guards replace runtime host-arrow calls, not original #if arms.
+  # Pairing them by sequence would consume the later cursor_display arm.
+  if path.endswith('/keymouse/mouse_io.c') and 'DIVERGENCE(MVDM-HOST-DIV-318)' in new[x['line']-1] and x['directive']=='ifndef' and x['expression']=='NTVDM':
+   issues.append({'line':x['line'],'reason':'added-host-boundary-guard-no-original-conditional-counterpart'});continue
   if 'end_line' not in x:issues.append({'line':x['line'],'reason':'unclosed'});continue
   interior=new[x['line']:x['end_line']-1]
   reduced=[s for s in clean('\n'.join(interior)).split('\n') if s.strip() and not re.match(r'^\s*#\s*line\b',s)]

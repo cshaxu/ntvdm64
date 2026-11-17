@@ -166,3 +166,5 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 [P8 receipt](batch-p8-checkpoint.json) and [evidence](p8-verification-evidence.zip):client ntstubs -2 lines and queue -5 lines,0 block change;cached full,publish11x2,focused,Full20 and governance passed. Residuals remain pending owner.
 
 [wcntl32 whole-file review](wcntl32-whole-file-review.json):34 points,+37/-32=69 lines unchanged;all remaining allocation/release and mapped-reference differences retain concrete failure evidence,pending owner. No source edit or repeated build.
+
+[Mouse whole-file review](mouse-io-whole-file-review.json):33 points/349 lines unchanged;prior351 count had one false original-arm pairing. Maintained inventory now refuses the three added host-arrow guard pairings. This -2 counting correction is separate from19 blocks/85 lines delivered source reduction. Historical source-inventory snapshot remains immutable.

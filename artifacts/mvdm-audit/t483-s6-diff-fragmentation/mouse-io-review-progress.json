@@ -1,0 +1,48 @@
+{
+  "status": "Historical progress;superseded by mouse-io-whole-file-review.json",
+  "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "source_sha256": "9a77ed941309cb36ca22ca705f14d366d725456744f228d35cde586ce29ef4e2",
+  "previous_metric": {
+    "blocks": 33,
+    "added": 320,
+    "deleted": 31
+  },
+  "candidate_corrected_metric": {
+    "blocks": 33,
+    "added": 319,
+    "deleted": 30
+  },
+  "finding": "Current physical guard4995 around excluded host warp was incorrectly matched by sequence fallback to original cursor_display outer conditional5250. Guards3099/4995/5069 are added wrappers of original runtime host-arrow calls,not original preprocessor branches;do not mask original unrelated arm for them.",
+  "evidence": {
+    "original_lines": [
+      3316,
+      3318,
+      3320,
+      5238,
+      5240,
+      5250,
+      5301,
+      5311
+    ],
+    "current_guard_lines": [
+      3099,
+      4995,
+      5069
+    ],
+    "corrected_issues": [
+      {
+        "line": 3099,
+        "reason": "added-host-boundary-guard-no-original-conditional-counterpart"
+      },
+      {
+        "line": 4995,
+        "reason": "added-host-boundary-guard-no-original-conditional-counterpart"
+      },
+      {
+        "line": 5069,
+        "reason": "added-host-boundary-guard-no-original-conditional-counterpart"
+      }
+    ]
+  },
+  "next": "Integrate proven pairing correction into maintained counting tool,then finish all retained source changes and provider review before whole-file disposition. No source reduction claimed;do not update delivered reduction using counting correction."
+}
