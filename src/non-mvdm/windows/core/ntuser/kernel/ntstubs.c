@@ -166,6 +166,7 @@ LONG NtUserfn ## api(    \
     DWORD xpfnProc,      \
     BOOL bAnsi)
 
+#define CALLPROC(p) FNID(p)
 #line 180
 
 /*

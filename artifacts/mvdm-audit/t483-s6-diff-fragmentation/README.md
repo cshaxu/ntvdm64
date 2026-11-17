@@ -58,3 +58,20 @@ Report file/point entry and exit,raw and error-masked blocks/lines,delta and
 cumulative progress. Finish the whole file and coupled changes before cached
 full build,publish,test,commit,push. Pure format-only changes may accumulate.
 Do not modify/rebuild guest,change#error policy or enter compat/component audit.
+
+## First whole-file review
+
+[ntstubs review](ntstubs-whole-unit-review.json) records282 complete function
+probes and the restored unused CALLPROC declaration. [Diagnostic evidence](ntstubs-diagnostic-evidence.zip)
+contains generators,actual commands and result logs,not product binaries.
+Non-error blocks131->130 and changed lines9238->9237;remaining omissions
+are evidence-backed owner decisions,not approved. Worklist is current;the
+compressed admission inventory stays immutable. Full P2 delivery evidence is recorded below.
+
+[Second-file progress](wmdisp32-progress.json) records the completed wmdisp32.c whole-file
+source review. R1519 is restored locally and removed from pending decisions;
+final P2 verification is complete.
+
+[P2 delivery checkpoint](batch-p2-checkpoint.json):cached build and dual publication
+complete;message191,focused37/task-order,Full20 and governance passed. The P2
+commit accompanies the receipt;remote push is verified separately.

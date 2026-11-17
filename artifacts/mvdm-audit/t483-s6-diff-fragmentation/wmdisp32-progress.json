@@ -1,0 +1,924 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.c",
+  "status": "whole-file-reviewed-and-verified",
+  "before": {
+    "blocks": 78,
+    "added": 132,
+    "deleted": 96
+  },
+  "after": {
+    "blocks": 75,
+    "added": 130,
+    "deleted": 94
+  },
+  "current_sha256": "c395f44b41ad187a317539453a125aab9145ef89f0c5a97ce1036505e1bf5272",
+  "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+  "restorations": [
+    {
+      "review_id": "T483-R1519",
+      "original_lines": [
+        495,
+        496
+      ],
+      "before": {
+        "added": 0,
+        "deleted": 2
+      },
+      "after": {
+        "added": 0,
+        "deleted": 0
+      },
+      "reason": "Early key captures remain before fallible copies. Original successful-tail assignments write initialized local vpClass/vpName; no intervening path changes those locals. Atom/NULL class remains ignored by HIWORD-based free. Removing harmless original successful-tail stores was not justified by calling them redundant.",
+      "validation": "Source flow reviewed;both restored lines have original logical495/496. Functional restoration requires accumulated full delivery after whole-file completion."
+    },
+    {
+      "kind": "format",
+      "reason": "Remove two extra blank lines around CallBack16;existing line197/199 resets retained.",
+      "removed_added_lines": 2
+    }
+  ],
+  "excluded_bodies": 11,
+  "mask_issues": [],
+  "remaining": "All residuals stay pending owner. Full final-code delivery underway;no runtime pass claimed yet.",
+  "delivery": {
+    "build": "cached x86/x64 passed",
+    "publish": "11 images verified at both destinations;package 603b38aa-213d-44f2-9096-2528fb865a59",
+    "test": "message191,focused37/task-order,Full20,boundary143/9 and governance passed",
+    "commit": "accompanying P2 commit",
+    "push": "verified separately by delivery command"
+  },
+  "blocks": [
+    {
+      "number": 1,
+      "original_start": 19,
+      "original_end": 18,
+      "current_start": 19,
+      "added": 1,
+      "deleted": 0,
+      "function": "entry declarations",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 2,
+      "original_start": 23,
+      "original_end": 23,
+      "current_start": 25,
+      "added": 1,
+      "deleted": 1,
+      "function": "entry declarations",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 3,
+      "original_start": 40,
+      "original_end": 40,
+      "current_start": 46,
+      "added": 4,
+      "deleted": 1,
+      "function": "W32Win16WndProcEx",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 4,
+      "original_start": 130,
+      "original_end": 129,
+      "current_start": 147,
+      "added": 1,
+      "deleted": 0,
+      "function": "W32Win16WndProcEx",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 5,
+      "original_start": 243,
+      "original_end": 242,
+      "current_start": 274,
+      "added": 1,
+      "deleted": 0,
+      "function": "W32Win16WndProcEx",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 6,
+      "original_start": 249,
+      "original_end": 248,
+      "current_start": 282,
+      "added": 4,
+      "deleted": 0,
+      "function": "W32Win16WndProcEx",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 7,
+      "original_start": 430,
+      "original_end": 429,
+      "current_start": 438,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 8,
+      "original_start": 448,
+      "original_end": 447,
+      "current_start": 458,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 9,
+      "original_start": 456,
+      "original_end": 455,
+      "current_start": 468,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 10,
+      "original_start": 469,
+      "original_end": 469,
+      "current_start": 483,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 11,
+      "original_start": 478,
+      "original_end": 478,
+      "current_start": 492,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 12,
+      "original_start": 480,
+      "original_end": 479,
+      "current_start": 495,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 13,
+      "original_start": 481,
+      "original_end": 480,
+      "current_start": 498,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 14,
+      "original_start": 517,
+      "original_end": 518,
+      "current_start": 537,
+      "added": 1,
+      "deleted": 2,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 15,
+      "original_start": 536,
+      "original_end": 570,
+      "current_start": 556,
+      "added": 1,
+      "deleted": 35,
+      "function": "WM32Create",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 16,
+      "original_start": 667,
+      "original_end": 666,
+      "current_start": 656,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32SetText",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 17,
+      "original_start": 676,
+      "original_end": 675,
+      "current_start": 667,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32SetText",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 18,
+      "original_start": 679,
+      "original_end": 678,
+      "current_start": 672,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32SetText",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 19,
+      "original_start": 685,
+      "original_end": 684,
+      "current_start": 680,
+      "added": 2,
+      "deleted": 0,
+      "function": "WM32SetText",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 20,
+      "original_start": 730,
+      "original_end": 730,
+      "current_start": 730,
+      "added": 2,
+      "deleted": 1,
+      "function": "WM32GetText",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 21,
+      "original_start": 732,
+      "original_end": 731,
+      "current_start": 734,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32GetText",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 22,
+      "original_start": 818,
+      "original_end": 818,
+      "current_start": 822,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32GetText",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 23,
+      "original_start": 925,
+      "original_end": 925,
+      "current_start": 929,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32GetDlgCode",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 24,
+      "original_start": 937,
+      "original_end": 937,
+      "current_start": 941,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32GetDlgCode",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 25,
+      "original_start": 1455,
+      "original_end": 1454,
+      "current_start": 1459,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 26,
+      "original_start": 1456,
+      "original_end": 1456,
+      "current_start": 1461,
+      "added": 2,
+      "deleted": 1,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 27,
+      "original_start": 1469,
+      "original_end": 1468,
+      "current_start": 1476,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 28,
+      "original_start": 1486,
+      "original_end": 1485,
+      "current_start": 1495,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 29,
+      "original_start": 1498,
+      "original_end": 1498,
+      "current_start": 1509,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 30,
+      "original_start": 1515,
+      "original_end": 1514,
+      "current_start": 1527,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 31,
+      "original_start": 1519,
+      "original_end": 1520,
+      "current_start": 1533,
+      "added": 2,
+      "deleted": 2,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 32,
+      "original_start": 1526,
+      "original_end": 1532,
+      "current_start": 1541,
+      "added": 1,
+      "deleted": 7,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 33,
+      "original_start": 1537,
+      "original_end": 1537,
+      "current_start": 1547,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 34,
+      "original_start": 1542,
+      "original_end": 1542,
+      "current_start": 1553,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 35,
+      "original_start": 1547,
+      "original_end": 1546,
+      "current_start": 1559,
+      "added": 3,
+      "deleted": 0,
+      "function": "WM32MDICreate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 36,
+      "original_start": 1685,
+      "original_end": 1684,
+      "current_start": 1702,
+      "added": 2,
+      "deleted": 0,
+      "function": "WM32SizeClipBoard",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 37,
+      "original_start": 1687,
+      "original_end": 1686,
+      "current_start": 1707,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32SizeClipBoard",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 38,
+      "original_start": 1693,
+      "original_end": 1693,
+      "current_start": 1715,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32SizeClipBoard",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 39,
+      "original_start": 1701,
+      "original_end": 1700,
+      "current_start": 1723,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32SizeClipBoard",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 40,
+      "original_start": 1712,
+      "original_end": 1712,
+      "current_start": 1736,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32SizeClipBoard",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 41,
+      "original_start": 1731,
+      "original_end": 1731,
+      "current_start": 1755,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32AskCBFormatName",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 42,
+      "original_start": 1741,
+      "original_end": 1741,
+      "current_start": 1766,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32AskCBFormatName",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 43,
+      "original_start": 1778,
+      "original_end": 1778,
+      "current_start": 1803,
+      "added": 2,
+      "deleted": 1,
+      "function": "WM32DDEInitiate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 44,
+      "original_start": 1781,
+      "original_end": 1781,
+      "current_start": 1808,
+      "added": 4,
+      "deleted": 1,
+      "function": "WM32DDEInitiate",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 45,
+      "original_start": 1978,
+      "original_end": 1978,
+      "current_start": 2012,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DDEAdvise",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 46,
+      "original_start": 1982,
+      "original_end": 1982,
+      "current_start": 2016,
+      "added": 5,
+      "deleted": 1,
+      "function": "WM32DDEAdvise",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 47,
+      "original_start": 1984,
+      "original_end": 1983,
+      "current_start": 2023,
+      "added": 4,
+      "deleted": 0,
+      "function": "WM32DDEAdvise",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 48,
+      "original_start": 2021,
+      "original_end": 2020,
+      "current_start": 2065,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32DDEData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 49,
+      "original_start": 2024,
+      "original_end": 2023,
+      "current_start": 2070,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32DDEData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 50,
+      "original_start": 2038,
+      "original_end": 2038,
+      "current_start": 2086,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DDEData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 51,
+      "original_start": 2046,
+      "original_end": 2045,
+      "current_start": 2094,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32DDEData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 52,
+      "original_start": 2058,
+      "original_end": 2058,
+      "current_start": 2108,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DDEData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 53,
+      "original_start": 2062,
+      "original_end": 2062,
+      "current_start": 2112,
+      "added": 6,
+      "deleted": 1,
+      "function": "WM32DDEData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 54,
+      "original_start": 2105,
+      "original_end": 2104,
+      "current_start": 2161,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32DDEPoke",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 55,
+      "original_start": 2108,
+      "original_end": 2107,
+      "current_start": 2166,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32DDEPoke",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 56,
+      "original_start": 2132,
+      "original_end": 2132,
+      "current_start": 2192,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DDEPoke",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 57,
+      "original_start": 2141,
+      "original_end": 2140,
+      "current_start": 2201,
+      "added": 1,
+      "deleted": 0,
+      "function": "WM32DDEPoke",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 58,
+      "original_start": 2151,
+      "original_end": 2151,
+      "current_start": 2213,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DDEPoke",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 59,
+      "original_start": 2155,
+      "original_end": 2155,
+      "current_start": 2217,
+      "added": 6,
+      "deleted": 1,
+      "function": "WM32DDEPoke",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 60,
+      "original_start": 2218,
+      "original_end": 2218,
+      "current_start": 2288,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DDEExecute",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 61,
+      "original_start": 2222,
+      "original_end": 2222,
+      "current_start": 2292,
+      "added": 4,
+      "deleted": 1,
+      "function": "WM32DDEExecute",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 62,
+      "original_start": 2375,
+      "original_end": 2375,
+      "current_start": 2449,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DropObject",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 63,
+      "original_start": 2394,
+      "original_end": 2394,
+      "current_start": 2468,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32DropObject",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 64,
+      "original_start": 2451,
+      "original_end": 2451,
+      "current_start": 2525,
+      "added": 2,
+      "deleted": 1,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 65,
+      "original_start": 2461,
+      "original_end": 2460,
+      "current_start": 2539,
+      "added": 3,
+      "deleted": 0,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 66,
+      "original_start": 2462,
+      "original_end": 2461,
+      "current_start": 2544,
+      "added": 3,
+      "deleted": 0,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 67,
+      "original_start": 2464,
+      "original_end": 2464,
+      "current_start": 2551,
+      "added": 0,
+      "deleted": 1,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 68,
+      "original_start": 2471,
+      "original_end": 2470,
+      "current_start": 2557,
+      "added": 3,
+      "deleted": 0,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 69,
+      "original_start": 2474,
+      "original_end": 2474,
+      "current_start": 2565,
+      "added": 2,
+      "deleted": 1,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 70,
+      "original_start": 2488,
+      "original_end": 2488,
+      "current_start": 2583,
+      "added": 2,
+      "deleted": 1,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 71,
+      "original_start": 2492,
+      "original_end": 2502,
+      "current_start": 2589,
+      "added": 8,
+      "deleted": 11,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 72,
+      "original_start": 2506,
+      "original_end": 2505,
+      "current_start": 2601,
+      "added": 4,
+      "deleted": 0,
+      "function": "WM32CopyData",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 73,
+      "original_start": 2522,
+      "original_end": 2522,
+      "current_start": 2623,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32WinHelp",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 74,
+      "original_start": 2528,
+      "original_end": 2528,
+      "current_start": 2630,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32WinHelp",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    },
+    {
+      "number": 75,
+      "original_start": 2541,
+      "original_end": 2541,
+      "current_start": 2644,
+      "added": 1,
+      "deleted": 1,
+      "function": "WM32WinHelp",
+      "disposition": "evidenced residual pending owner",
+      "evidence": "Existing ordered R1504-R1593 register plus current whole-file caller/provider review;see groups below."
+    }
+  ],
+  "line_proof": {
+    "preserved_nonempty_logical_lines": 2041,
+    "lost_code_lines": [],
+    "corrected_original_comment_line": {
+      "before": 497,
+      "after": 499
+    },
+    "added_original_lines": [
+      495,
+      496
+    ],
+    "excluded_arms_unchanged": 11
+  },
+  "groups": [
+    {
+      "points": "R1504-R1510",
+      "reason": "Call-owned resource cleanup starts before conversion;exception filter and callback registration do not own converter allocation keys. TLS DDE snapshot precedes task entry on native hook threads;global restoration permits stale cross-thread mode restoration.",
+      "evidence": "r1504-r1510-entry-group-review.json;wow_hook_callback.c:100-101,150"
+    },
+    {
+      "points": "R1511-R1521",
+      "reason": "Retain early captures through dead-window/throwing-copy exits and nested MDI ownership transfer. Original late stores are harmless and restored;whole-original CREATE unthunk rereads mutable guest pointers and re-resolves a dead window.",
+      "evidence": "r1516-r1521-create-owner-review.json;R1519 prior redundancy rationale withdrawn"
+    },
+    {
+      "points": "R1522-R1546",
+      "reason": "Acquisition/consumption state distinguishes borrowed mapping refs,partial buffer construction and completed releases. Nested MDI record needs local cleanup before ownership transfers to parent. Do not replay output conversions during unwind.",
+      "evidence": "r1522-r1529-text-review.json;r1530-r1546-heap-mdi-review.json;message-mdi-simplified/result.json"
+    },
+    {
+      "points": "R1547-R1554",
+      "reason": "Native lock release belongs to native lock owner;guest movable memory must be relocked by stable handle after normal unlock. Original controls fail locked-abort and format-name release cases.",
+      "evidence": "r1548-r1554-clipboard-ownership-review.json;original-controls.json"
+    },
+    {
+      "points": "R1555-R1572",
+      "reason": "Original same-HWND initiator deletion after failed inner allocation removes outer node. Packet publication can fail after guest memory/subobjects acquired. Child rollback is required only for DATA/POKE;previous unnecessary ADVISE/EXECUTE transactions already removed.",
+      "evidence": "wdde.c:31,697,744;r1555-r1556-dde-initiate-review.json;r1557-r1561-dde-ack-advise-review.json;r1562-r1572-dde-data-poke-execute-review.json"
+    },
+    {
+      "points": "R1573-R1593",
+      "reason": "COPYDATA ownership must distinguish partial allocations from published nodes and borrowed values. Native header can become invalid across guest callback;original global allocator writes output handle only on success,so WinHelp zero initialization prevents uninitialized output after failure.",
+      "evidence": "r1573-r1576-drop-copydata-entry-review.json;r1577-r1593-copydata-winhelp-review.json;wcall16.c:248-271"
+    }
+  ],
+  "counter_review": "Retained paths were traced to original allocation/callback/list owners,not justified merely by helpers using keys. Rejected R1519 redundant-work rationale. No extra provider/shim/state map added. Runtime controls are service-double evidence,not guest timing proof.",
+  "delivery_receipt": "batch-p2-checkpoint.json"
+}

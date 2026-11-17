@@ -36,7 +36,18 @@ normalized/error-masked differences;255 have nonzero counts. The initial2333
 block sum is conservative:75 mask-review cases in31 files remain counted.
 These are counting uncertainties,not permission to delete or retain code.
 Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
-S6 file implementation0/255;no S6 production edits yet.
+S6 file review2/255 complete;P2 delivers both files with all required gates.
+ntstubs.c:131->130 non-error blocks,9238->9237 changed lines.
+wmdisp32.c:78->75 blocks,228->224 lines. Restored original CALLPROC and R1519
+class/name stores;removed two pure-format differences. Remaining boundaries
+stay pending owner. Current census2329 blocks;cumulative reduction4 blocks/5 lines.
+[ntstubs evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/ntstubs-whole-unit-review.json)
+and [wmdisp32 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/wmdisp32-progress.json).
+[P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p2-checkpoint.json):
+cached x86/x64,publish11x2,message191,focused37/task-order,Full20,boundary143/9,
+governance/links passed. Git identity is the accompanying delivery commit.
+Current backlog1644 rows/1649 R points;R1519 restored,not deferred.
+Next file:ntcftxt.h,65 non-error blocks. Do not restart completed files.
 
 S5's2720-point register is historical identity/evidence:1018 restored/confirmed
 and delivered,52 approved/policy,1650 pending owner. The
@@ -48,12 +59,11 @@ accumulate;substantive whole-file batches follow build,publish,test,commit,push.
 
 ## Current Technical Baseline
 
-S5 P255:11 images published/hash-verified to assets/release and O:/winnt/system32.
-Package87c73097-d004-454e-925b-fea9a16f9552. Cached x86/x64,focused37/task-order,
-Full20 (including actual NESticle menu/Escape),boundary143/negative9 and final
-governance/link checks passed. No guest or winnt.zip changes.
-[Receipt](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p255-checkpoint.json).
-S6 admission is documentation/evidence-only and reuses that exact publication.
+S6 P2:11 images published/hash-verified to assets/release and O:/winnt/system32.
+Package603b38aa-213d-44f2-9096-2528fb865a59. Full20 includes actual NESticle
+menu/Escape. No guest or winnt.zip changes. P2 receipt above binds final source,
+manifest and test results. S5 package87c73097-d004-454e-925b-fea9a16f9552 is
+superseded by this verified P2 publication.
 
 S5 fixed365-file raw metric:#error included,#line excluded,4862blocks/89379lines;
 cumulative reduction435blocks/30534lines. Do not compare this directly to the

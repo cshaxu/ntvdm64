@@ -218,10 +218,8 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     BlockWOWIdle(FALSE);
 
-
 #line 197
     fSuccess = CallBack16(RET_WNDPROC, &wm32mpex.Parm16, vpWndProc16, (PVPVOID)&wm32mpex.lReturn);
-
 
 #line 199
     BlockWOWIdle(TRUE);
@@ -513,6 +511,8 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
             STOREDWORD(pcws16->vpszWindow, vpName);
             STOREDWORD(pcws16->vpCreateParams, vpCreateParams);
 
+            lpwm32mpex->dwTmp[0] = vpClass; // store for later freeing
+            lpwm32mpex->dwTmp[1] = vpName;
 
 
             // BUGBUG 08-Apr-91 JeffPar -- What if hModule is for a 32-bit task?

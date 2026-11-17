@@ -1,0 +1,3593 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+  "baseline_commit": "6b69b6ebde4a2648513f5a8eaba1a5bdb25691bb",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "before_sha256": "4902f92078ba3aabb306bec2c939b76561914bd8344af7dfa82d8c6c4bbf8914",
+  "after_sha256": "bd2a8c9a1b9b92b2f6eb0b0669254eda470e3f66982256e376e5f76e0aedc6fb",
+  "before": {
+    "blocks": 131,
+    "added": 2,
+    "deleted": 9236
+  },
+  "after": {
+    "blocks": 130,
+    "added": 2,
+    "deleted": 9235
+  },
+  "raw_before": {
+    "blocks": 154,
+    "added": 127,
+    "deleted": 9886
+  },
+  "raw_after": {
+    "blocks": 153,
+    "added": 127,
+    "deleted": 9885
+  },
+  "excluded_bodies": 73,
+  "mask_issues": [],
+  "original_line_checks": 433,
+  "line_mismatches": 0,
+  "restored": "Original line179 CALLPROC definition. Existing C4005 warning is not a compilation or link failure. Macro is not expanded by retained function. No adapter or guest changes.",
+  "functions": [
+    {
+      "name": "NtUserHardErrorControl",
+      "original_lines": [
+        302,
+        312
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "e279454231ccfa5b6a3fad2b98737575f037ea085cc88ac672d8e313eb43e1db",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserHardErrorControl.c(303): error C2146: syntax error: missing ')' before identifier 'dwCmd'"
+    },
+    {
+      "name": "NtUserSetDebugErrorLevel",
+      "original_lines": [
+        314,
+        323
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "e211a4c806366883930fc78c8c8fc60bc9c94907822c7eba2e2868cd0fc41b27",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "4b07036f99940d4d0a591b6d6b70c49e9b42b1f021191107ed210dfae8b54dff",
+      "link_errors": [
+        "NtUserSetDebugErrorLevel.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetDebugErrorLevel@4",
+        "NtUserSetDebugErrorLevel.obj : error LNK2019: unresolved external symbol __SetDebugErrorLevel@4 referenced in function _NtUserSetDebugErrorLevel@4",
+        "NtUserSetDebugErrorLevel.obj : error LNK2019: unresolved external symbol _TRACEVOID@4 referenced in function _NtUserSetDebugErrorLevel@4",
+        "NtUserSetDebugErrorLevel.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetDebugErrorLevel@4"
+      ]
+    },
+    {
+      "name": "NtUserRegisterLogonProcess",
+      "original_lines": [
+        325,
+        335
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "8b6a38c0f0df44e7e771a921ac30657203127bf600f4f35092bea7dba6b95142",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "070f06b792381aa8966f9de38342ef6def21f3e957c6879e5b496a44b25cb5ae",
+      "link_errors": [
+        "NtUserRegisterLogonProcess.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserRegisterLogonProcess@8",
+        "NtUserRegisterLogonProcess.obj : error LNK2019: unresolved external symbol __RegisterLogonProcess@8 referenced in function _NtUserRegisterLogonProcess@8",
+        "NtUserRegisterLogonProcess.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserRegisterLogonProcess@8"
+      ]
+    },
+    {
+      "name": "NtUserGetObjectInformation",
+      "original_lines": [
+        337,
+        376
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "eb1611752443416c9fdc3c491738af44e7eabd71a0331d7a6ee0bef9a24412b2",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "b6d2ea7f53777ceb4050b942bcba5b6afa533ab9f3c3a577caf37d78d16092aa",
+      "link_errors": [
+        "NtUserGetObjectInformation.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetObjectInformation@20",
+        "NtUserGetObjectInformation.obj : error LNK2019: unresolved external symbol _ProbeForWrite@12 referenced in function _NtUserGetObjectInformation@20",
+        "NtUserGetObjectInformation.obj : error LNK2019: unresolved external symbol _ProbeForWriteUlong@4 referenced in function _NtUserGetObjectInformation@20",
+        "NtUserGetObjectInformation.obj : error LNK2019: unresolved external symbol __GetUserObjectInformation@20 referenced in function _NtUserGetObjectInformation@20",
+        "NtUserGetObjectInformation.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetObjectInformation@20"
+      ]
+    },
+    {
+      "name": "NtUserSetObjectInformation",
+      "original_lines": [
+        378,
+        405
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "09bfe65e7395a50f294f9c21f1a9706f3abdc4380d2dcf027291af1affcd9212",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "27964b9beab692c7872bddc79ee707a915615121003a90401e5f708603e06b86",
+      "link_errors": [
+        "NtUserSetObjectInformation.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetObjectInformation@16",
+        "NtUserSetObjectInformation.obj : error LNK2019: unresolved external symbol __SetUserObjectInformation@16 referenced in function _NtUserSetObjectInformation@16",
+        "NtUserSetObjectInformation.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetObjectInformation@16"
+      ]
+    },
+    {
+      "name": "NtUserConsoleControl",
+      "original_lines": [
+        407,
+        473
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "3a6c217bc7123e6b2fb2c3d3b510a37e13d352d5c1386c666561ec37bcaa2c89",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserConsoleControl.c(408): error C2146: syntax error: missing ')' before identifier 'ConsoleCommand'"
+    },
+    {
+      "name": "InternalUserCreateWindowStation",
+      "original_lines": [
+        475,
+        519
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "899d305ac541bea31c1a49980f2ffd1bf1403dc74f69e287ad8994083cb88950",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\InternalUserCreateWindowStation.c(488): error C2065: 'PKL': undeclared identifier"
+    },
+    {
+      "name": "NtUserCreateWindowStation",
+      "original_lines": [
+        522,
+        693
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "418b71aadf7fc50d721384cba2e7d701498e7862f8b4512b9103bc9dd1e24f5e",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCreateWindowStation.c(542): error C2065: 'PKL': undeclared identifier"
+    },
+    {
+      "name": "NtUserOpenWindowStation",
+      "original_lines": [
+        696,
+        774
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b6903f0dddde2a624168b3efb674273d91a23fc9af0cf4d3e561330391d073b6",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserOpenWindowStation.c(725): error C2065: 'UserMode': undeclared identifier"
+    },
+    {
+      "name": "NtUserCloseWindowStation",
+      "original_lines": [
+        776,
+        797
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "dd63f3ed71be38757917235718a414db9ef6122b2bc838b7a065517aca574002",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "eb990bbb601109bafaba01af6d0e7fd9f49989031a921810190e9e1d59761b2b",
+      "link_errors": [
+        "NtUserCloseWindowStation.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserCloseWindowStation@4",
+        "NtUserCloseWindowStation.obj : error LNK2019: unresolved external symbol _ValidateHwinsta@12 referenced in function _NtUserCloseWindowStation@4",
+        "NtUserCloseWindowStation.obj : error LNK2019: unresolved external symbol __GetProcessWindowStation@4 referenced in function _NtUserCloseWindowStation@4",
+        "NtUserCloseWindowStation.obj : error LNK2019: unresolved external symbol _ZwClose@4 referenced in function _NtUserCloseWindowStation@4",
+        "NtUserCloseWindowStation.obj : error LNK2019: unresolved external symbol _ObDereferenceObject@4 referenced in function _NtUserCloseWindowStation@4",
+        "NtUserCloseWindowStation.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserCloseWindowStation@4"
+      ]
+    },
+    {
+      "name": "NtUserSetProcessWindowStation",
+      "original_lines": [
+        799,
+        808
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "471c08f86702ee039420d618e69044f8ad8e5ba7012e39750d2de53d88abd88c",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "7a7ce59c86fad42f48ddf687d77de18e670d3b01dca5bb1fb674499604b6c6fe",
+      "link_errors": [
+        "NtUserSetProcessWindowStation.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetProcessWindowStation@4",
+        "NtUserSetProcessWindowStation.obj : error LNK2019: unresolved external symbol _xxxSetProcessWindowStation@4 referenced in function _NtUserSetProcessWindowStation@4",
+        "NtUserSetProcessWindowStation.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetProcessWindowStation@4"
+      ]
+    },
+    {
+      "name": "NtUserGetProcessWindowStation",
+      "original_lines": [
+        810,
+        819
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "baf704b9e8d8da5a0206b5d5f45f326ed207e09b38890917ef0f63bdf6d5d237",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "12738dd720439a2dbf66d002645ef16f2d9a02a702ed14d3eaf9fc48b2d7eb98",
+      "link_errors": [
+        "NtUserGetProcessWindowStation.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetProcessWindowStation@0",
+        "NtUserGetProcessWindowStation.obj : error LNK2019: unresolved external symbol __GetProcessWindowStation@4 referenced in function _NtUserGetProcessWindowStation@0",
+        "NtUserGetProcessWindowStation.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetProcessWindowStation@0"
+      ]
+    },
+    {
+      "name": "NtUserCreateDesktop",
+      "original_lines": [
+        821,
+        867
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "57067f48923cf8d84f7267b152137db180cba697344e16911e246f64feb4b818",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCreateDesktop.c(845): error C2065: 'UserMode': undeclared identifier"
+    },
+    {
+      "name": "NtUserOpenDesktop",
+      "original_lines": [
+        869,
+        882
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "9c2f0c2a11662ab4fee3760d48b09c5c6d017cebcd6e651c029da0ff4f86c577",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "d7399487045222933a4daf300ccc5956cc18ee44b6de5eeaa0b662e26b051e79",
+      "link_errors": [
+        "NtUserOpenDesktop.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserOpenDesktop@12",
+        "NtUserOpenDesktop.obj : error LNK2019: unresolved external symbol _xxxOpenDesktop@16 referenced in function _NtUserOpenDesktop@12",
+        "NtUserOpenDesktop.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserOpenDesktop@12"
+      ]
+    },
+    {
+      "name": "NtUserOpenInputDesktop",
+      "original_lines": [
+        884,
+        938
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "461f328e769cd4e2de6c6497b56522f1df14f99c27de7dac1f3ec2e96d6f6155",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserOpenInputDesktop.c(895): error C2065: 'grpdeskRitInput': undeclared identifier"
+    },
+    {
+      "name": "NtUserResolveDesktop",
+      "original_lines": [
+        940,
+        1005
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5728dda41615d98d6f2ffe449bd97c6fd4db7ab43f20c78984cd23b08b7beb6e",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserResolveDesktop.c(948): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserCloseDesktop",
+      "original_lines": [
+        1007,
+        1016
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "967dd5cff37c540f120bc4f5daba12a7c3ff82aeba020cd24ddd19dfae002b5e",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "bfb9032a183c4852a73946819c4f011d36ee2849e5da7fdd7c9195c674515600",
+      "link_errors": [
+        "NtUserCloseDesktop.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserCloseDesktop@4",
+        "NtUserCloseDesktop.obj : error LNK2019: unresolved external symbol _xxxCloseDesktop@4 referenced in function _NtUserCloseDesktop@4",
+        "NtUserCloseDesktop.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserCloseDesktop@4"
+      ]
+    },
+    {
+      "name": "NtUserSetThreadDesktop",
+      "original_lines": [
+        1018,
+        1037
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4331d4a9af981023f97ae280f3b32212d4090c34860a546379b753ddce76c897",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetThreadDesktop.c(1030): error C2065: 'gpepCSRSS': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetThreadDesktop",
+      "original_lines": [
+        1039,
+        1049
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "a745865464d3a552c2ed8b87b26cdc3c5d6d051289bb0d84ccb68636694b76b4",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "29497e1a851f025daf65892313262c02221e2b87958079e2a6011ef84662611a",
+      "link_errors": [
+        "NtUserGetThreadDesktop.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetThreadDesktop@8",
+        "NtUserGetThreadDesktop.obj : error LNK2019: unresolved external symbol _xxxGetThreadDesktop@8 referenced in function _NtUserGetThreadDesktop@8",
+        "NtUserGetThreadDesktop.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetThreadDesktop@8"
+      ]
+    },
+    {
+      "name": "NtUserSwitchDesktop",
+      "original_lines": [
+        1051,
+        1079
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "92da781e163a77820bfae4d163b7511bbf7fd5f20038f628b37018764fe21f42",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSwitchDesktop.c(1056): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserInitializeClientPfnArrays",
+      "original_lines": [
+        1081,
+        1107
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "31b63106cd9372db434336662d1416d9646014ab00d97a87b176c725c6177544",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "0102b95c31127193ecc919a5dc9a3ca3fdf272b9180358f9687f4169a77e8e54",
+      "link_errors": [
+        "NtUserInitializeClientPfnArrays.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserInitializeClientPfnArrays@12",
+        "NtUserInitializeClientPfnArrays.obj : error LNK2019: unresolved external symbol _InitializeClientPfnArrays@12 referenced in function _NtUserInitializeClientPfnArrays@12",
+        "NtUserInitializeClientPfnArrays.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserInitializeClientPfnArrays@12"
+      ]
+    },
+    {
+      "name": "NtUserWaitForMsgAndEvent",
+      "original_lines": [
+        1109,
+        1118
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "40dbfa2936f27838462b204f54dbaff9946baa3bf6909778129a6cf9b3d1164c",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "2c96490cec100558dda8605cfa69207c8e6d6a0579176b049ee41b760edb47db",
+      "link_errors": [
+        "NtUserWaitForMsgAndEvent.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserWaitForMsgAndEvent@4",
+        "NtUserWaitForMsgAndEvent.obj : error LNK2019: unresolved external symbol _xxxSleepTask@8 referenced in function _NtUserWaitForMsgAndEvent@4",
+        "NtUserWaitForMsgAndEvent.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserWaitForMsgAndEvent@4"
+      ]
+    },
+    {
+      "name": "NtUserWOWFindWindow",
+      "original_lines": [
+        1120,
+        1156
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "de8fe6ecd7c5ea0b91ed6cefb4fec4717f53ef24ab4c6bde7dc789d0fca3c52f",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserWOWFindWindow.c(1133): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserDragObject",
+      "original_lines": [
+        1158,
+        1197
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "8bb338c15e0af2cad4dbe81c627d2a71db732993338c35293b6cdec5a232c616",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDragObject.c(1177): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetIconInfo",
+      "original_lines": [
+        1199,
+        1248
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "3265a1b79322d49f684525eb227fd164780043d7d104f66b9e8b4961ab7fcd20",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetIconInfo.c(1207): error C2065: 'PICON': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetIconSize",
+      "original_lines": [
+        1250,
+        1281
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "c181724c7f40089a5393192b538392ef458182dc6362b6871aca3981b6afd6a2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetIconSize.c(1262): error C2037: left of 'CURSORF_flags' specifies undefined struct/union 'tagCURSOR'"
+    },
+    {
+      "name": "NtUserDrawIconEx",
+      "original_lines": [
+        1285,
+        1338
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "d855d2ca2288afd154efcf3fb3d9a47ffc6125abc98b89e77e5050865cdd0c17",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDrawIconEx.c(1305): error C2037: left of 'CURSORF_flags' specifies undefined struct/union 'tagCURSOR'"
+    },
+    {
+      "name": "NtUserDeferWindowPos",
+      "original_lines": [
+        1340,
+        1442
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "41a3a718ee2392749c32c8ef1b08df40cd7be30503aa201de1bee9b242632f10",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDeferWindowPos.c(1352): error C2065: 'PSMWP': undeclared identifier"
+    },
+    {
+      "name": "NtUserEndDeferWindowPosEx",
+      "original_lines": [
+        1444,
+        1465
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b1fa1f1d21f9cf761aba9a38f9845f89bc3e122be33bf05287ba1094815d41b2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserEndDeferWindowPosEx.c(1448): error C2065: 'PSMWP': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetMessage",
+      "original_lines": [
+        1467,
+        1496
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "7de192bb2e7c30f892e586764e927743b025dc2d258e1cc2797165044afa140a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetMessage.c(1488): error C2275: 'MSG': expected an expression instead of a type"
+    },
+    {
+      "name": "NtUserMoveWindow",
+      "original_lines": [
+        1498,
+        1579
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "23a7b51d2dcf5198e934f30dd256d32844f57c2c7ca6e62ef020c3043c186755",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserMoveWindow.c(1516): error C2065: 'SHRT_MAX': undeclared identifier"
+    },
+    {
+      "name": "NtUserDeleteObject",
+      "original_lines": [
+        1581,
+        1599
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "ab39783454cb965e37701136c4220cc6af96411fd7f7fbfae1f9fd1296584270",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "8c0175016db8188b7a0046ca78b817ab0133fe5fd40e8c14609c71d97e7645f6",
+      "link_errors": [
+        "NtUserDeleteObject.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserDeleteObject@8",
+        "NtUserDeleteObject.obj : error LNK2019: unresolved external symbol _GreDeleteObject@4 referenced in function _NtUserDeleteObject@8",
+        "NtUserDeleteObject.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserDeleteObject@8"
+      ]
+    },
+    {
+      "name": "NtUserTranslateAccelerator",
+      "original_lines": [
+        1601,
+        1648
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "89b07754fecad5c630884192c3f436fa88ff763641b0df2944f2541a24f4d3c9",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserTranslateAccelerator.c(1607): error C2065: 'LPACCELTABLE': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetClassLong",
+      "original_lines": [
+        1650,
+        1694
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "d29078082fab118405d7683c7014b650823b770ca2dc4945a1778ff723739561",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetClassLong.c(1664): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetKeyboardState",
+      "original_lines": [
+        1696,
+        1714
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "adaf20db6e3212c4d199cda4ca9ea6a393256c5edb990634db09c0aa6b0e52d0",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "89a439d4ac71e8e86747eaa01516d619e7ad2769613a4dc29886d4807b519408",
+      "link_errors": [
+        "NtUserSetKeyboardState.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetKeyboardState@4",
+        "NtUserSetKeyboardState.obj : error LNK2019: unresolved external symbol __SetKeyboardState@4 referenced in function _NtUserSetKeyboardState@4",
+        "NtUserSetKeyboardState.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetKeyboardState@4"
+      ]
+    },
+    {
+      "name": "NtUserSetWindowPos",
+      "original_lines": [
+        1716,
+        1850
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "92c8eff92ac37f111f49cc421ce45b537b6ee4cc251dae412554876c20e60ac1",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetWindowPos.c(1730): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetShellWindowEx",
+      "original_lines": [
+        1852,
+        1878
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "cb9d4c502645fdf6a925ed7d7b618ff26e80bc8d7932e9fbd36f56c51dc9a5b1",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetShellWindowEx.c(1860): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSystemParametersInfo",
+      "original_lines": [
+        1880,
+        2135
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "73141e04d0856fea6143ca8b8c6f0d92d14ef609e23dfc7fbbe9515b54d07204",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSystemParametersInfo.c(1906): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserUpdatePerUserSystemParameters",
+      "original_lines": [
+        2137,
+        2146
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "d7194c3657edb5289611386e00a013272079dd247c411dc72bbbba1a6cde2350",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "e3be3443a5aef8b81dd594d6056101dba0ae94ffbff38cc71ecaad58873d35c2",
+      "link_errors": [
+        "NtUserUpdatePerUserSystemParameters.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserUpdatePerUserSystemParameters@4",
+        "NtUserUpdatePerUserSystemParameters.obj : error LNK2019: unresolved external symbol _xxxUpdatePerUserSystemParameters@4 referenced in function _NtUserUpdatePerUserSystemParameters@4",
+        "NtUserUpdatePerUserSystemParameters.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserUpdatePerUserSystemParameters@4"
+      ]
+    },
+    {
+      "name": "NtUserDdeInitialize",
+      "original_lines": [
+        2148,
+        2181
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "e289cdf4d481493c3a40fd36a95dbd6bcd98d38f868619d3d3b0631239771551",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "f5417beecbab830bab018e6e6ebab5936160a754cef6d739f992830f0da76240",
+      "link_errors": [
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserDdeInitialize@20",
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _xxxCsDdeInitialize@20 referenced in function _NtUserDdeInitialize@20",
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _ProbeAndWriteUlong@8 referenced in function _NtUserDdeInitialize@20",
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _ProbeAndWriteHandle@8 referenced in function _NtUserDdeInitialize@20",
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _xxxDestroyThreadDDEObject@8 referenced in function _NtUserDdeInitialize@20",
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _PtiCurrent@0 referenced in function _NtUserDdeInitialize@20",
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _HtoP@4 referenced in function _NtUserDdeInitialize@20",
+        "NtUserDdeInitialize.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserDdeInitialize@20"
+      ]
+    },
+    {
+      "name": "NtUserUpdateInstance",
+      "original_lines": [
+        2183,
+        2203
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "1572e04226dda307fba69dae72c82808d3893ffbf1e6413f0eebeb5c60d1d93e",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "59ae25ee03709e4649ee71f15fc6af085739ca93894ba1f1ae5d2183f6667c39",
+      "link_errors": [
+        "NtUserUpdateInstance.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserUpdateInstance@12",
+        "NtUserUpdateInstance.obj : error LNK2019: unresolved external symbol _ProbeForWriteUlong@4 referenced in function _NtUserUpdateInstance@12",
+        "NtUserUpdateInstance.obj : error LNK2019: unresolved external symbol __CsUpdateInstance@12 referenced in function _NtUserUpdateInstance@12",
+        "NtUserUpdateInstance.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserUpdateInstance@12"
+      ]
+    },
+    {
+      "name": "NtUserEvent",
+      "original_lines": [
+        2205,
+        2224
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "a1c51c4c3b0308456b97c13f4f4bbe068b80f4ee09630f3d94658ff470a88aa0",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "45fa27f9d566d3f0be2d61f0170f9455ac4bf712d3ada8298d28166304b28125",
+      "link_errors": [
+        "NtUserEvent.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserEvent@4",
+        "NtUserEvent.obj : error LNK2019: unresolved external symbol _xxxCsEvent@4 referenced in function _NtUserEvent@4",
+        "NtUserEvent.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserEvent@4"
+      ]
+    },
+    {
+      "name": "NtUserFillWindow",
+      "original_lines": [
+        2226,
+        2258
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b964a1133aa3f9807e0eca48e4b5c7c644d621a2a3912b932c5f28ded907ad3e",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserFillWindow.c(2242): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetInputEvent",
+      "original_lines": [
+        2260,
+        2270
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "1d37303fbe521c3ead40b1bd8086050cf90c0df6a70e7ffe6f5edddf7272f686",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "a034b47eee733f8cbdf80255f883bbc3af2229436e3722ffc836342b596c4bd9",
+      "link_errors": [
+        "NtUserGetInputEvent.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserGetInputEvent@4",
+        "NtUserGetInputEvent.obj : error LNK2019: unresolved external symbol _xxxGetInputEvent@4 referenced in function _NtUserGetInputEvent@4",
+        "NtUserGetInputEvent.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetInputEvent@4"
+      ]
+    },
+    {
+      "name": "NtUserGetWOWClass",
+      "original_lines": [
+        2272,
+        2303
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "9a62d72fe66dfae08e59afbba2d4ca37a656a4c08f783e83f9010e1ae96cddfa",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetWOWClass.c(2284): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserGetInternalWindowPos",
+      "original_lines": [
+        2305,
+        2339
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5076ae53141f285e8b4b7158799a1ff014fceec0682795ef20df1d2f6e248d05",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetInternalWindowPos.c(2316): error C2094: label 'errorexit' was undefined"
+    },
+    {
+      "name": "NtUserInitTask",
+      "original_lines": [
+        2341,
+        2392
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b39104621f5e0ef7ad8e95137c220663ac2e264ab5218ae3cd8fefbb40ec3180",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserInitTask.c(2360): error C2223: left of '->pwpi' must point to struct/union"
+    },
+    {
+      "name": "NtUserPostThreadMessage",
+      "original_lines": [
+        2394,
+        2432
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "a49380bd55652340d07436b358782e4b08bf3c5ed6dc8eaf434ee6b55c402018",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserPostThreadMessage.c(2400): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserRegisterTasklist",
+      "original_lines": [
+        2434,
+        2450
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "1d3223bfdc4d81992f35ae032f0d8c95efef3bed6d23c8d1801ac9fc3f3f6326",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "1eb676daeb62982e0c92efdf9710d698a87cc0b8210d5e9b24794220ad9ab348",
+      "link_errors": [
+        "NtUserRegisterTasklist.obj : error LNK2019: unresolved external symbol __RegisterTasklist@4 referenced in function _NtUserRegisterTasklist@4"
+      ]
+    },
+    {
+      "name": "NtUserSetClipboardData",
+      "original_lines": [
+        2452,
+        2478
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4d4dac233443d5ca43e37de69d8f8599f85825097673adab866bad76a2eaa80f",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetClipboardData.c(2465): error C2440: '=': cannot convert from 'int' to 'SETCLIPBDATA'"
+    },
+    {
+      "name": "NtUserConvertMemHandle",
+      "original_lines": [
+        2480,
+        2501
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "2368890649b47202428df48bd3034b94d6977a5c2cb537666ed94aa81da12e53",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "f91761185086d1758d96990b03cf86903a1e8aaa4d09d2952228e486f64277ee",
+      "link_errors": [
+        "NtUserConvertMemHandle.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserConvertMemHandle@8",
+        "NtUserConvertMemHandle.obj : error LNK2019: unresolved external symbol __ConvertMemHandle@8 referenced in function _NtUserConvertMemHandle@8",
+        "NtUserConvertMemHandle.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserConvertMemHandle@8"
+      ]
+    },
+    {
+      "name": "NtUserCreateLocalMemHandle",
+      "original_lines": [
+        2503,
+        2541
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "21c3176d6d460896bfb17a1ebb5d5e3ad815be3fc529259a53588dbbf1e482a4",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCreateLocalMemHandle.c(2509): error C2065: 'PCLIPDATA': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetWindowsHookEx",
+      "original_lines": [
+        2543,
+        2579
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b3824b5f6a552b2d26cf4bd7eda7b4ab2dde82ebef1ea6a5ec4a55e25f4c5e1c",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetWindowsHookEx.c(2551): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetInternalWindowPos",
+      "original_lines": [
+        2581,
+        2614
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "acdbc8a9251b1f5b09d08a5c62e955f5321c36a5a66b240a00c51956e9027ee6",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetInternalWindowPos.c(2594): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserChangeClipboardChain",
+      "original_lines": [
+        2617,
+        2644
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "d97bc57956aa2eb53690e682848af025a9fbdbb6e0aaaaed16f2bbe6e39afbde",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserChangeClipboardChain.c(2631): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserCheckMenuItem",
+      "original_lines": [
+        2646,
+        2666
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2c0bd3f7801697c321c75b42e0ef613c4e4754f28e7b21b9a1c775fcb5b8d8ff",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCheckMenuItem.c(2655): error C2065: 'MF_VALID': undeclared identifier"
+    },
+    {
+      "name": "NtUserChildWindowFromPointEx",
+      "original_lines": [
+        2668,
+        2686
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "1911b6bef0f804d920c865c8d2e9cc751b7a239bbd5807f5a32963e13d1b537b",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "87acda63ae6f88ffa2d7dbc5346414bf6fc41a109615a4727432f5012177142b",
+      "link_errors": [
+        "NtUserChildWindowFromPointEx.obj : error LNK2019: unresolved external symbol __ChildWindowFromPointEx@16 referenced in function _NtUserChildWindowFromPointEx@16"
+      ]
+    },
+    {
+      "name": "NtUserClipCursor",
+      "original_lines": [
+        2688,
+        2711
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5a8e0164c56faa1ceb72267ada9e26427bb064c8b50b49117d5540a109c8b8c2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserClipCursor.c(2700): error C2440: '=': cannot convert from 'int' to 'RECT'"
+    },
+    {
+      "name": "NtUserCreateAcceleratorTable",
+      "original_lines": [
+        2713,
+        2739
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "1170d773d2b27b9a16fca4e461d348bb0217a4b2ba7e40dc60a6a054130ff797",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCreateAcceleratorTable.c(2732): error C2198: 'HACCEL _CreateAcceleratorTable(LPACCEL,INT,INT)': too few arguments for call"
+    },
+    {
+      "name": "NtUserDeleteMenu",
+      "original_lines": [
+        2741,
+        2772
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "3d0f31c223c2d601f9eaae1f90b5b9215250a9125212ad231463c1caa88d6391",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDeleteMenu.c(2753): error C2065: 'MF_VALID': undeclared identifier"
+    },
+    {
+      "name": "NtUserDestroyAcceleratorTable",
+      "original_lines": [
+        2774,
+        2793
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "ad74a8489575686491943ed4b3389c056690f9f8f854a338e0d0bac50301df2a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDestroyAcceleratorTable.c(2777): error C2065: 'LPACCELTABLE': undeclared identifier"
+    },
+    {
+      "name": "NtUserDestroyCursor",
+      "original_lines": [
+        2795,
+        2810
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "8aa311ac1caf478cc573aaf7b74b98235ce4b06f17826bf0d20cbbcc41004129",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "fea5f9c8f6f9cbf70b20d7b499f3bc9121e7ce9854bb2010a471d37f8d4cc302",
+      "link_errors": [
+        "NtUserDestroyCursor.obj : error LNK2019: unresolved external symbol @HMValidateHandle@8 referenced in function _NtUserDestroyCursor@8",
+        "NtUserDestroyCursor.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserDestroyCursor@8",
+        "NtUserDestroyCursor.obj : error LNK2019: unresolved external symbol __DestroyCursor@8 referenced in function _NtUserDestroyCursor@8",
+        "NtUserDestroyCursor.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserDestroyCursor@8"
+      ]
+    },
+    {
+      "name": "NtUserGetClipboardData",
+      "original_lines": [
+        2812,
+        2852
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "beb753f47c563e02418a51b0d19ed7883782f2ff181945ff1dbf3801a2e31bcf",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetClipboardData.c(2816): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserDestroyMenu",
+      "original_lines": [
+        2854,
+        2868
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "7e3f3dd0660380c27869fc86e5c7375e6c56603e5645282151007eb15035c28b",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "b9a9475443ec4021fd8a2fa86f175f6240af686a889eddcf60b5a965411ae63a",
+      "link_errors": [
+        "NtUserDestroyMenu.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserDestroyMenu@4",
+        "NtUserDestroyMenu.obj : error LNK2019: unresolved external symbol _ValidateHmenu@4 referenced in function _NtUserDestroyMenu@4",
+        "NtUserDestroyMenu.obj : error LNK2019: unresolved external symbol __DestroyMenu@4 referenced in function _NtUserDestroyMenu@4",
+        "NtUserDestroyMenu.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserDestroyMenu@4"
+      ]
+    },
+    {
+      "name": "NtUserDestroyWindow",
+      "original_lines": [
+        2870,
+        2885
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "c1448db94508c2fe20187657cd3faaa8959117bde3314384f173e3c496a6bda9",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "88c4557d884fae1fa871409824e60080da16db157fc55a7922abc84b4f9661a6",
+      "link_errors": [
+        "NtUserDestroyWindow.obj : error LNK2019: unresolved external symbol _xxxDestroyWindow@4 referenced in function _NtUserDestroyWindow@4"
+      ]
+    },
+    {
+      "name": "NtUserDispatchMessage",
+      "original_lines": [
+        2887,
+        2907
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "aa0bac42c7ea2060586795a4877fc87c5bfe8fd679fc2ac96fac1ec8f14b2efb",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDispatchMessage.c(2898): error C2440: '=': cannot convert from 'int' to 'MSG'"
+    },
+    {
+      "name": "NtUserEnableMenuItem",
+      "original_lines": [
+        2909,
+        2929
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2f0291e3030d6390d4566e58df81887ce54e07bbaa9e25b94d82835e07011d45",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserEnableMenuItem.c(2918): error C2065: 'MF_VALID': undeclared identifier"
+    },
+    {
+      "name": "NtUserAttachThreadInput",
+      "original_lines": [
+        2931,
+        2958
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "57ac7ed88b046513a1385543e658ae4a5ce75b06bd00afdfcae3dcb697036a89",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserAttachThreadInput.c(2936): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetWindowPlacement",
+      "original_lines": [
+        2960,
+        2985
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "ba99e749259fe281ec3e4f9efa01dd6d36dc07e6a5ac40da77f744658da295d3",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetWindowPlacement.c(2970): error C2094: label 'errorexit' was undefined"
+    },
+    {
+      "name": "NtUserSetWindowPlacement",
+      "original_lines": [
+        2987,
+        3025
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "c4328ffdf56bb656e87691946076edec99c1cf71a31b1bd0859515f5e9f8866a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetWindowPlacement.c(2999): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserLockWindowUpdate",
+      "original_lines": [
+        3027,
+        3043
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "70eb6f1aeaa0831a10755d30f194571b4df45801651dfa30c99adf04bdf0f5bb",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "eca6c140f7fd5acf59915737ff877efdcdff05d559e9a1b8264f8c818c50ab98",
+      "link_errors": [
+        "NtUserLockWindowUpdate.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserLockWindowUpdate@4",
+        "NtUserLockWindowUpdate.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserLockWindowUpdate@4",
+        "NtUserLockWindowUpdate.obj : error LNK2019: unresolved external symbol _xxxLockWindowUpdate2@8 referenced in function _NtUserLockWindowUpdate@4",
+        "NtUserLockWindowUpdate.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserLockWindowUpdate@4"
+      ]
+    },
+    {
+      "name": "NtUserGetClipCursor",
+      "original_lines": [
+        3045,
+        3063
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "2bce3f7f89f651a92d0a6935ad390ac0bac7c096fa0ba697a8ed22421f31bb66",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "d424d48f86e8fcc3abbf7882c9dc4864955f7a5adcf76653cda444e3836b29fa",
+      "link_errors": [
+        "NtUserGetClipCursor.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetClipCursor@4",
+        "NtUserGetClipCursor.obj : error LNK2019: unresolved external symbol _ProbeForWriteRect@4 referenced in function _NtUserGetClipCursor@4",
+        "NtUserGetClipCursor.obj : error LNK2019: unresolved external symbol __GetClipCursor@4 referenced in function _NtUserGetClipCursor@4",
+        "NtUserGetClipCursor.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetClipCursor@4"
+      ]
+    },
+    {
+      "name": "NtUserEnableScrollBar",
+      "original_lines": [
+        3065,
+        3083
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "104d45955901b48cac9b24e9861d800afb2c9d9462341e4e8c6640063007bda1",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserEnableScrollBar.c(3077): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserDdeSetQualityOfService",
+      "original_lines": [
+        3085,
+        3129
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "a1574d6e3c7c33af1892e10bb51f0e8d91b76283c33e7078837a7a4caaccfe3f",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDdeSetQualityOfService.c(3100): error C2065: 'errret': undeclared identifier"
+    },
+    {
+      "name": "NtUserDdeGetQualityOfService",
+      "original_lines": [
+        3131,
+        3174
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "262e15b7bd264b14a75eaa47bfe669cc18a86b013826ac022cace780c2568637",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDdeGetQualityOfService.c(3143): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetMenuIndex",
+      "original_lines": [
+        3176,
+        3202
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "1d6eb78b51eeabf7682292842afe4b1d8a35b7f1ccfd55d6b7b2941c213ad191",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "0c4008010ce5d4efef8f772fbf5cb07601ee9bad7dd97bec008aa745dd906d47",
+      "link_errors": [
+        "NtUserGetMenuIndex.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetMenuIndex@8",
+        "NtUserGetMenuIndex.obj : error LNK2019: unresolved external symbol _ValidateHmenu@4 referenced in function _NtUserGetMenuIndex@8",
+        "NtUserGetMenuIndex.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetMenuIndex@8"
+      ]
+    },
+    {
+      "name": "NtUserCallNoParam",
+      "original_lines": [
+        3204,
+        3218
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "ec640afa284046046b0d47c1c6110c16544a1bf6c1ed726da077eba8d1ad311f",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallNoParam.c(3210): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserBreak",
+      "original_lines": [
+        3220,
+        3230
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "f7c774d518e537b51c5719e4d134560fe3fa110b34389458d0a6d8227d255d43",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserBreak.c(3223): error C2065: 'KdDebuggerEnabled': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallNoParamTranslate",
+      "original_lines": [
+        3232,
+        3247
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2bd9b59ba81e70de4b5da1eb34fa43cea40cb54cf6365fa90e8478883ab313af",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallNoParamTranslate.c(3238): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallOneParam",
+      "original_lines": [
+        3249,
+        3264
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "3b1bab8c2937a6ec898143bdd934ca92202550c173f3e4c650743821437bfa0e",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallOneParam.c(3256): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallOneParamTranslate",
+      "original_lines": [
+        3266,
+        3282
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "96eb6d30a742b35d6de1696adea9354eb7189290a4ad166243323e1698e02240",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallOneParamTranslate.c(3273): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallHwnd",
+      "original_lines": [
+        3284,
+        3305
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4fc31ff065ad051cc425d20719bc5c25244f4fc2028b57bf511989dba0f9fcf2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallHwnd.c(3297): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallHwndLock",
+      "original_lines": [
+        3307,
+        3329
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4a7cb519a8b4f2a0c7b6c5b3a84a74877d57da76067924aaa0ccd039d63264dc",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallHwndLock.c(3318): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallHwndOpt",
+      "original_lines": [
+        3331,
+        3350
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "88cd7de7909af1c68ad620a7fa181a80915926a5b80f62123cf9db7ecb38a831",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallHwndOpt.c(3340): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallTwoParam",
+      "original_lines": [
+        3352,
+        3368
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "645ca59836e9e27a44c0707c125fcde9d7dcc4d33f5309aaa616b5a00326f737",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallTwoParam.c(3360): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallHwndParam",
+      "original_lines": [
+        3370,
+        3392
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "030fe7e34c562c919dcd06a76bd3e6d574066596d138d07148e67156c1e96160",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallHwndParam.c(3384): error C2065: 'ulMaxSimpleCall': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallHwndParamLock",
+      "original_lines": [
+        3394,
+        3417
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "7f90a317e027c5cb563269279f223db60317def3136acf36af81d1a0c77bbd3d",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCallHwndParamLock.c(3406): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserThunkedMenuItemInfo",
+      "original_lines": [
+        3419,
+        3492
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "82d3635d599f6f5c3390ef9fa8acb9784e77663eb06829f63730335d8cb5f4ed",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserThunkedMenuItemInfo.c(3442): error C2440: '=': cannot convert from 'int' to 'MENUITEMINFO'"
+    },
+    {
+      "name": "NtUserCheckMenuRadioItem",
+      "original_lines": [
+        3530,
+        3552
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "27dddd0e72fa316065b2e575a37623439b8f6c49e2b05c3a6e156072c493bdac",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "4f627e742a12496d3988c93932f36505cdcc01f2ec94717b78c82c5e2f392b09",
+      "link_errors": [
+        "NtUserCheckMenuRadioItem.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserCheckMenuRadioItem@20",
+        "NtUserCheckMenuRadioItem.obj : error LNK2019: unresolved external symbol _ValidateHmenu@4 referenced in function _NtUserCheckMenuRadioItem@20",
+        "NtUserCheckMenuRadioItem.obj : error LNK2019: unresolved external symbol __CheckMenuRadioItem@20 referenced in function _NtUserCheckMenuRadioItem@20",
+        "NtUserCheckMenuRadioItem.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserCheckMenuRadioItem@20"
+      ]
+    },
+    {
+      "name": "NtUserSetMenuDefaultItem",
+      "original_lines": [
+        3554,
+        3572
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "629c768893814175254fbea0c2f902e5a86de0869b985b9b006f9dfa7a3e9a6b",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "8b0be92bc638262930cc02bec83c1a6266e44fa91efa31c3062f26956f39ee42",
+      "link_errors": [
+        "NtUserSetMenuDefaultItem.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetMenuDefaultItem@12",
+        "NtUserSetMenuDefaultItem.obj : error LNK2019: unresolved external symbol _ValidateHmenu@4 referenced in function _NtUserSetMenuDefaultItem@12",
+        "NtUserSetMenuDefaultItem.obj : error LNK2019: unresolved external symbol __SetMenuDefaultItem@12 referenced in function _NtUserSetMenuDefaultItem@12",
+        "NtUserSetMenuDefaultItem.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetMenuDefaultItem@12"
+      ]
+    },
+    {
+      "name": "NtUserSetMenuContextHelpId",
+      "original_lines": [
+        3574,
+        3590
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "8ebfcf7921e04248dd9d4c0cf6b9940653e7f98c4a8dc6720df26cd74d524be7",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "a066faed040758d1ad172a6d37a3bffed49b1c5f429dcf3b3f43dc434f05a9e0",
+      "link_errors": [
+        "NtUserSetMenuContextHelpId.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetMenuContextHelpId@8",
+        "NtUserSetMenuContextHelpId.obj : error LNK2019: unresolved external symbol _ValidateHmenu@4 referenced in function _NtUserSetMenuContextHelpId@8",
+        "NtUserSetMenuContextHelpId.obj : error LNK2019: unresolved external symbol __SetMenuContextHelpId@8 referenced in function _NtUserSetMenuContextHelpId@8",
+        "NtUserSetMenuContextHelpId.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetMenuContextHelpId@8"
+      ]
+    },
+    {
+      "name": "NtUserInitBrushes",
+      "original_lines": [
+        3592,
+        3614
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "0681bd8072aece8dcd243cd6c3b86451bd2135be601eb0fa1b492057bc6442b3",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserInitBrushes.c(3602): error C2065: 'COLOR_MAX': undeclared identifier"
+    },
+    {
+      "name": "NtUserDrawAnimatedRects",
+      "original_lines": [
+        3616,
+        3658
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "ac5a7a7152ec62b485754666c22b210ff468928d431d258f5311be443a9fd6de",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDrawAnimatedRects.c(3635): error C2440: '=': cannot convert from 'int' to 'RECT'"
+    },
+    {
+      "name": "NtUserDrawCaption",
+      "original_lines": [
+        3661,
+        3690
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "73981ae73fd99e6d2cdceb0511e2848b3e4cd785d1eed377907c399845ad69a3",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDrawCaption.c(3675): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserPaintDesktop",
+      "original_lines": [
+        3692,
+        3709
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "c262e855d62198a4240b6c3e643166252ce9661d57a2e219c45aafdfe044ca49",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserPaintDesktop.c(3695): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetAsyncKeyState",
+      "original_lines": [
+        3711,
+        3750
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "59e6702299697abee695379bc8073e840627f421efaaf9661ee8126b59ab529a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetAsyncKeyState.c(3715): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetControlBrush",
+      "original_lines": [
+        3752,
+        3773
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "8fb8658237ad77f57851b2f32bbf6791dc39be17de898f568871dba06d1681e2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetControlBrush.c(3764): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetControlColor",
+      "original_lines": [
+        3775,
+        3807
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "53e9fb0fb31a6ec7ef6fe92909f9241bab7da667eb77eae62c29851837838dc7",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetControlColor.c(3791): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserEndMenu",
+      "original_lines": [
+        3809,
+        3824
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4d2af6c742b3461f854f2eebc90f0c0ccd823e8e1024dd654bd24527bbf6a7a9",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserEndMenu.c(3811): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserCountClipboardFormats",
+      "original_lines": [
+        3826,
+        3844
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "73f48d29ca07b425cab94eb89b88ee915f9c0e7a6573d5458f34798eb030844b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCountClipboardFormats.c(3840): error C2037: left of 'cNumClipFormats' specifies undefined struct/union 'tagWINDOWSTATION'"
+    },
+    {
+      "name": "NtUserGetCaretBlinkTime",
+      "original_lines": [
+        3846,
+        3862
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "9ae7007032ab4c6dccd441d569e66704c5ea788fe2eeabc4c515e669b935a9c3",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetCaretBlinkTime.c(3854): error C2223: left of '->amwinsta' must point to struct/union"
+    },
+    {
+      "name": "NtUserGetClipboardOwner",
+      "original_lines": [
+        3864,
+        3882
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "bfa15403a9bcbd246b1a984e99e4c4507a41d3e7f0909a08e396859b83832fab",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetClipboardOwner.c(3878): error C2037: left of 'spwndClipOwner' specifies undefined struct/union 'tagWINDOWSTATION'"
+    },
+    {
+      "name": "NtUserGetClipboardViewer",
+      "original_lines": [
+        3884,
+        3902
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2a81b52b74c007c88067ea330afb1b798fb747061cd6e2660ad9280adfdd03c2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetClipboardViewer.c(3898): error C2037: left of 'spwndClipViewer' specifies undefined struct/union 'tagWINDOWSTATION'"
+    },
+    {
+      "name": "NtUserGetDoubleClickTime",
+      "original_lines": [
+        3904,
+        3920
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "48b70316f47ef307380bc288979e1bc80fd698eb7edaedba868e73aec710ef4b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetDoubleClickTime.c(3912): error C2223: left of '->amwinsta' must point to struct/union"
+    },
+    {
+      "name": "NtUserGetForegroundWindow",
+      "original_lines": [
+        3922,
+        3940
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "76c165e788ba510da6b7840ed366547631fead349f096d765669f3b4b8f2efba",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetForegroundWindow.c(3931): error C2065: 'gpqForeground': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetOpenClipboardWindow",
+      "original_lines": [
+        3942,
+        3960
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "a670469e2deddde1b1886f2f32f05bb3730f0e8c61ce87f5bff3552a140d91f0",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetOpenClipboardWindow.c(3956): error C2037: left of 'spwndClipOpen' specifies undefined struct/union 'tagWINDOWSTATION'"
+    },
+    {
+      "name": "NtUserGetPriorityClipboardFormat",
+      "original_lines": [
+        3962,
+        3987
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "09cfc7c257996f3e630a773576a7eb6e629fb1add59e2c5222243e05b7041bed",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "c622e54e2beda146630e800609b18d4a82915cd2af3bb1a41a951d4958d1cd93",
+      "link_errors": [
+        "NtUserGetPriorityClipboardFormat.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetPriorityClipboardFormat@8",
+        "NtUserGetPriorityClipboardFormat.obj : error LNK2019: unresolved external symbol __GetPriorityClipboardFormat@8 referenced in function _NtUserGetPriorityClipboardFormat@8",
+        "NtUserGetPriorityClipboardFormat.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetPriorityClipboardFormat@8"
+      ]
+    },
+    {
+      "name": "NtUserGetSystemMenu",
+      "original_lines": [
+        3989,
+        4006
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "848ca4f4375ad70d97a482a284261fa025af5509db34dce1b7072835f6c18983",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "a07cfccc8994d4dc64b093365e8c1912564aa2384046f1342aaa1f0e62e982ab",
+      "link_errors": [
+        "NtUserGetSystemMenu.obj : error LNK2019: unresolved external symbol __GetSystemMenu@8 referenced in function _NtUserGetSystemMenu@8"
+      ]
+    },
+    {
+      "name": "NtUserGetUpdateRect",
+      "original_lines": [
+        4008,
+        4039
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2e1ea5792bd5e2253e269277e0cc2a1cd3f7e9afad64470f452bfcf41ade408a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetUpdateRect.c(4020): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserHideCaret",
+      "original_lines": [
+        4041,
+        4054
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "411ccfe0d6c03238aa0f179fc124c2926b01419e87c31040ca943f47db2b5818",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "98bca98fdc624eeeaadd41b0193d3183945ef82f27c8c500952934a734967009",
+      "link_errors": [
+        "NtUserHideCaret.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserHideCaret@4",
+        "NtUserHideCaret.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserHideCaret@4",
+        "NtUserHideCaret.obj : error LNK2019: unresolved external symbol __HideCaret@4 referenced in function _NtUserHideCaret@4",
+        "NtUserHideCaret.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserHideCaret@4"
+      ]
+    },
+    {
+      "name": "NtUserHiliteMenuItem",
+      "original_lines": [
+        4056,
+        4090
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "078cf680b6bdff267826507871223df3ce4d656d473f65afc4e9961c565e2680",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserHiliteMenuItem.c(4072): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserInvalidateRect",
+      "original_lines": [
+        4092,
+        4128
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "de156972c65aa40d6f189755d9d7a85ad86e39a699047b301917f4705e38316b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserInvalidateRect.c(4110): error C2440: '=': cannot convert from 'int' to 'RECT'"
+    },
+    {
+      "name": "NtUserIsClipboardFormatAvailable",
+      "original_lines": [
+        4130,
+        4148
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "6f4a158ea8232ed848898f34e299f48bd9dffd71232609907f7d0062c75f0cbf",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "ceaaaca9f973cc70b432d292a58bab22d9a8fee0a7b80cf5b05e4d1869256323",
+      "link_errors": [
+        "NtUserIsClipboardFormatAvailable.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserIsClipboardFormatAvailable@4",
+        "NtUserIsClipboardFormatAvailable.obj : error LNK2019: unresolved external symbol _CheckClipboardAccess@4 referenced in function _NtUserIsClipboardFormatAvailable@4",
+        "NtUserIsClipboardFormatAvailable.obj : error LNK2019: unresolved external symbol _FindClipFormat@8 referenced in function _NtUserIsClipboardFormatAvailable@4",
+        "NtUserIsClipboardFormatAvailable.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserIsClipboardFormatAvailable@4"
+      ]
+    },
+    {
+      "name": "NtUserKillTimer",
+      "original_lines": [
+        4150,
+        4166
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "1e45a7df39143bd3657280b9f0f21799cf29d82f3516aff32028dec248a8729e",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "7fade4861eee82cc2a857dd68e2b2814910c63c8275a7139befd8ad462d1ad26",
+      "link_errors": [
+        "NtUserKillTimer.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserKillTimer@8",
+        "NtUserKillTimer.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserKillTimer@8",
+        "NtUserKillTimer.obj : error LNK2019: unresolved external symbol __KillTimer@8 referenced in function _NtUserKillTimer@8",
+        "NtUserKillTimer.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserKillTimer@8"
+      ]
+    },
+    {
+      "name": "NtUserMinMaximize",
+      "original_lines": [
+        4168,
+        4190
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4c27277223ac139fbf1c4c8b101545292eb83740080567bcdabbeff76cee66c6",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserMinMaximize.c(4180): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserOpenClipboard",
+      "original_lines": [
+        4192,
+        4221
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "b4878d7ebb4863a0d7d02c36aa0f149791a1c1e61a92759968b450207a700914",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "f9b7c63392a1a4a8bf66ef9d6d48d8befe2f7ca57098b5b281cc3a1db5793d7a",
+      "link_errors": [
+        "NtUserOpenClipboard.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserOpenClipboard@8",
+        "NtUserOpenClipboard.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserOpenClipboard@8",
+        "NtUserOpenClipboard.obj : error LNK2019: unresolved external symbol _xxxOpenClipboard@8 referenced in function _NtUserOpenClipboard@8",
+        "NtUserOpenClipboard.obj : error LNK2019: unresolved external symbol _ProbeAndWriteUlong@8 referenced in function _NtUserOpenClipboard@8",
+        "NtUserOpenClipboard.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserOpenClipboard@8"
+      ]
+    },
+    {
+      "name": "NtUserPeekMessage",
+      "original_lines": [
+        4223,
+        4259
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "f561950f9ad1abe0f8afd215931452db9e236717b997374a655850dc970d9b62",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserPeekMessage.c(4235): error C2065: 'PM_VALID': undeclared identifier"
+    },
+    {
+      "name": "NtUserPostMessage",
+      "original_lines": [
+        4261,
+        4300
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2a2492f0b75f6f82dd79e466a8ac358c0b409270260a39fe32e5b1b549466cfb",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserPostMessage.c(4292): error C2198: 'BOOL _PostMessage(HWND,UINT,DWORD,LONG,BOOL)': too few arguments for call"
+    },
+    {
+      "name": "NtUserSendNotifyMessage",
+      "original_lines": [
+        4302,
+        4346
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "af91c450c1a1a92ad6ad966955bc3c83b583addce71b059fd77de4c18469108a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSendNotifyMessage.c(4317): error C2440: '=': cannot convert from 'int' to 'LARGE_STRING'"
+    },
+    {
+      "name": "NtUserSendMessageCallback",
+      "original_lines": [
+        4348,
+        4380
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "17025ceda05b71deb127a20d2aa63081e5b477831971b4e184e02b2446a38c9e",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "60a73cfe8c8b9e73c77406285f13226351ee88c5022ff0b447c2b4d4a5ede928",
+      "link_errors": [
+        "NtUserSendMessageCallback.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserSendMessageCallback@24",
+        "NtUserSendMessageCallback.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSendMessageCallback@24",
+        "NtUserSendMessageCallback.obj : error LNK2019: unresolved external symbol _xxxSendMessageCallback@28 referenced in function _NtUserSendMessageCallback@24",
+        "NtUserSendMessageCallback.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSendMessageCallback@24"
+      ]
+    },
+    {
+      "name": "NtUserRegisterHotKey",
+      "original_lines": [
+        4382,
+        4402
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "a9bad74c0229f1511956b2310eb699beb61cd64e58a4a2d50cc8ecbaf799be01",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "ada86e97bcd05a2b7aa30edaf1de169c5ab559c20e3d28052c0367008a5d4a2a",
+      "link_errors": [
+        "NtUserRegisterHotKey.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserRegisterHotKey@16",
+        "NtUserRegisterHotKey.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserRegisterHotKey@16",
+        "NtUserRegisterHotKey.obj : error LNK2019: unresolved external symbol __RegisterHotKey@16 referenced in function _NtUserRegisterHotKey@16",
+        "NtUserRegisterHotKey.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserRegisterHotKey@16"
+      ]
+    },
+    {
+      "name": "NtUserRemoveMenu",
+      "original_lines": [
+        4404,
+        4435
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "c1ece0dcc042c5cd2ba80e66f4fc46e68924d3779021f1136e684996fd948b24",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserRemoveMenu.c(4416): error C2065: 'MF_VALID': undeclared identifier"
+    },
+    {
+      "name": "NtUserScrollWindowEx",
+      "original_lines": [
+        4437,
+        4491
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "8294e7b0e397c2a0dcf4652220d340ebd84a4d9c466cdaa72e0fd91e08e6adc2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserScrollWindowEx.c(4457): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetActiveWindow",
+      "original_lines": [
+        4493,
+        4512
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "6ec2c8456b432bcf42ec39df55a2db3e5971458120df0420fcf3311f87e3d9a2",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "6ff748d0e3091461bb5b49b119f50d1abd3326307c6262e519b24dcba90d053a",
+      "link_errors": [
+        "NtUserSetActiveWindow.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserSetActiveWindow@4",
+        "NtUserSetActiveWindow.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetActiveWindow@4",
+        "NtUserSetActiveWindow.obj : error LNK2019: unresolved external symbol _xxxSetActiveWindow@4 referenced in function _NtUserSetActiveWindow@4",
+        "NtUserSetActiveWindow.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetActiveWindow@4"
+      ]
+    },
+    {
+      "name": "NtUserSetCapture",
+      "original_lines": [
+        4514,
+        4533
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "f02ac282d9541e07fa90ef12d6b1830e30c0eb1810d88f929eb127d70475936f",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "2fe8b3f8c66d3a5f9217e21e6cb009448f25a98e07d439b15209484649a5dc24",
+      "link_errors": [
+        "NtUserSetCapture.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserSetCapture@4",
+        "NtUserSetCapture.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetCapture@4",
+        "NtUserSetCapture.obj : error LNK2019: unresolved external symbol _xxxSetCapture@4 referenced in function _NtUserSetCapture@4",
+        "NtUserSetCapture.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetCapture@4"
+      ]
+    },
+    {
+      "name": "NtUserSetClassWord",
+      "original_lines": [
+        4535,
+        4555
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "88cf36595da2e1b07cce6becb9733e807103a26c49744e8644a39039c5203a83",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "07dee496491b87b75d71a9381708db4ab86d198ff66b096c0dbf1fd555d92a6a",
+      "link_errors": [
+        "NtUserSetClassWord.obj : error LNK2019: unresolved external symbol __SetClassWord@12 referenced in function _NtUserSetClassWord@12"
+      ]
+    },
+    {
+      "name": "NtUserSetClipboardViewer",
+      "original_lines": [
+        4557,
+        4576
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "ed898effca6ef982c570916a785804b104d8d1d21deb59f2fa9b231bd0b81ce8",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "cd4d24fef17feea6e5979d260b8c55514e1f7cb16fdab8c221e76bc286e3cf6f",
+      "link_errors": [
+        "NtUserSetClipboardViewer.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserSetClipboardViewer@4",
+        "NtUserSetClipboardViewer.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetClipboardViewer@4",
+        "NtUserSetClipboardViewer.obj : error LNK2019: unresolved external symbol _xxxSetClipboardViewer@4 referenced in function _NtUserSetClipboardViewer@4",
+        "NtUserSetClipboardViewer.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetClipboardViewer@4"
+      ]
+    },
+    {
+      "name": "NtUserSetCursor",
+      "original_lines": [
+        4578,
+        4592
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "f01dd3129ca720570b95026754bf5c53dff52b0d3760405349994a8c05bb7653",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "bf846df345bdeaf3b39e257a91c10bff0f092fb8de75d55bb97191b41ffb5705",
+      "link_errors": [
+        "NtUserSetCursor.obj : error LNK2019: unresolved external symbol @HMValidateHandle@8 referenced in function _NtUserSetCursor@4",
+        "NtUserSetCursor.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetCursor@4",
+        "NtUserSetCursor.obj : error LNK2019: unresolved external symbol __SetCursor@4 referenced in function _NtUserSetCursor@4",
+        "NtUserSetCursor.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetCursor@4"
+      ]
+    },
+    {
+      "name": "NtUserSetFocus",
+      "original_lines": [
+        4594,
+        4613
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "c83a9d9c6dfd3a12702349cb3336d185293f9b5d1858b88f293bc121164eef1a",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "614da3d0b5a5b5c2a4ce783debdded1c02b39480c6554383ea927eafd4ce9ed1",
+      "link_errors": [
+        "NtUserSetFocus.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserSetFocus@4",
+        "NtUserSetFocus.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetFocus@4",
+        "NtUserSetFocus.obj : error LNK2019: unresolved external symbol _xxxSetFocus@4 referenced in function _NtUserSetFocus@4",
+        "NtUserSetFocus.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetFocus@4"
+      ]
+    },
+    {
+      "name": "NtUserSetMenu",
+      "original_lines": [
+        4615,
+        4645
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "200ae913f57f512764e99d37e0963a0499d992ac3f36a4f7ddba47bb23393e82",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetMenu.c(4630): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetParent",
+      "original_lines": [
+        4647,
+        4676
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "a5e5f657c8c21a157708c66bb704b900d514b55776c95d2c4eba291f13a5f33a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetParent.c(4661): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetScrollInfo",
+      "original_lines": [
+        4678,
+        4713
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5e4cb5913f45e51b9431066a4b81b7707f282f8887b51948b87051269f3ba68e",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetScrollInfo.c(4692): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetSysColors",
+      "original_lines": [
+        4715,
+        4747
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "3f39aa17f7f12f1c99c7ca6cbc7b354e745400d1b56c69a9ade7bbb0c4bc4053",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "d45984ceb61f171c1e921767dadacc6e87de13726ded27cc33c9d2dd228e0c88",
+      "link_errors": [
+        "NtUserSetSysColors.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetSysColors@16",
+        "NtUserSetSysColors.obj : error LNK2019: unresolved external symbol _xxxSetSysColors@16 referenced in function _NtUserSetSysColors@16",
+        "NtUserSetSysColors.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetSysColors@16"
+      ]
+    },
+    {
+      "name": "NtUserSetTimer",
+      "original_lines": [
+        4749,
+        4769
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "49ad01e0429a05a340da37262466af1cd930b26628f58f0a4a39320dfe097385",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "1a0e35d3ec8795c4886b1589e41f84494a55f3a2c73a81388764c423450cd134",
+      "link_errors": [
+        "NtUserSetTimer.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserSetTimer@16",
+        "NtUserSetTimer.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetTimer@16",
+        "NtUserSetTimer.obj : error LNK2019: unresolved external symbol __SetTimer@16 referenced in function _NtUserSetTimer@16",
+        "NtUserSetTimer.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetTimer@16"
+      ]
+    },
+    {
+      "name": "NtUserSetWindowLong",
+      "original_lines": [
+        4771,
+        4793
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b3a139fca024ec49ec6dfc5cec259245619922aff9341368a13f41da373107be",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetWindowLong.c(4783): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetWindowWord",
+      "original_lines": [
+        4795,
+        4815
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "c4d61089456cfa8455c443fae432e42674e144f715d249d16cc943d84c4d7b17",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "1b11af82cc27cfde21277530255d28d80123e6cc6e2948e6b6e4653c082c0054",
+      "link_errors": [
+        "NtUserSetWindowWord.obj : error LNK2019: unresolved external symbol __SetWindowWord@12 referenced in function _NtUserSetWindowWord@12"
+      ]
+    },
+    {
+      "name": "NtUserSetWindowsHookAW",
+      "original_lines": [
+        4817,
+        4831
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "738f899c92b2dfe4c1dc28f0537c127ef018a08cd1282ffe2698e3dfe16146ab",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "33bb9a5e019d7d8d77d99be0217022aff9c18eb2c688f71eb418ea0b0116b129",
+      "link_errors": [
+        "NtUserSetWindowsHookAW.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetWindowsHookAW@12",
+        "NtUserSetWindowsHookAW.obj : error LNK2019: unresolved external symbol __SetWindowsHookAW@12 referenced in function _NtUserSetWindowsHookAW@12",
+        "NtUserSetWindowsHookAW.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetWindowsHookAW@12"
+      ]
+    },
+    {
+      "name": "NtUserShowCaret",
+      "original_lines": [
+        4833,
+        4847
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "62c02c910f1ce30455d6654c7948c76fc313f1a9fbf738923e03009f1a393cc8",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "1fa85bf1523e74d8eb5530158436b66c2b472ee069a001e5ae8161b5f38c48bf",
+      "link_errors": [
+        "NtUserShowCaret.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserShowCaret@4",
+        "NtUserShowCaret.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserShowCaret@4",
+        "NtUserShowCaret.obj : error LNK2019: unresolved external symbol __ShowCaret@4 referenced in function _NtUserShowCaret@4",
+        "NtUserShowCaret.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserShowCaret@4"
+      ]
+    },
+    {
+      "name": "NtUserShowScrollBar",
+      "original_lines": [
+        4849,
+        4872
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "6933aa973a3c1fb8e51a4bc6585d9fd16a03b345e80b161f0d48509fb22ea3b2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserShowScrollBar.c(4861): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserShowWindowAsync",
+      "original_lines": [
+        4874,
+        4897
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "1b76cc8b3dbc026c2a9b6a43d58d79f5c25c9c0663fe91a5260486c0b4472bd0",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserShowWindowAsync.c(4883): error C2065: 'RIP_WARNING': undeclared identifier"
+    },
+    {
+      "name": "NtUserShowWindow",
+      "original_lines": [
+        4899,
+        4934
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2c43e32baeeeeb3a83f3e93181a8d6965f1c505cc9da4a9f247acdee16c87d9c",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserShowWindow.c(4908): error C2065: 'RIP_WARNING': undeclared identifier"
+    },
+    {
+      "name": "NtUserTrackMouseEvent",
+      "original_lines": [
+        4936,
+        4968
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2ebdd575f880a1eb8568c7cf2d1a47976aeba81bb37734f0c1a5291e2920aadb",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserTrackMouseEvent.c(4947): error C2440: '=': cannot convert from 'int' to 'TRACKMOUSEEVENT'"
+    },
+    {
+      "name": "NtUserTrackPopupMenuEx",
+      "original_lines": [
+        4970,
+        5020
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "cd9114d12def28aa0f8c5d7288cd6cfa2730d94d4747b0e2010590c4855ff6b5",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserTrackPopupMenuEx.c(4982): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserTranslateMessage",
+      "original_lines": [
+        5022,
+        5047
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "d3931c345d8ef4910901b17224634e126aa561662e3fc5effa2566516221b018",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "52f4815860c645038748fe046326fdb2831cf6ac0fdbd130d4dce829365808c9",
+      "link_errors": [
+        "NtUserTranslateMessage.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserTranslateMessage@8",
+        "NtUserTranslateMessage.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserTranslateMessage@8",
+        "NtUserTranslateMessage.obj : error LNK2019: unresolved external symbol _ProbeMessage@4 referenced in function _NtUserTranslateMessage@8",
+        "NtUserTranslateMessage.obj : error LNK2019: unresolved external symbol __TranslateMessage@8 referenced in function _NtUserTranslateMessage@8",
+        "NtUserTranslateMessage.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserTranslateMessage@8"
+      ]
+    },
+    {
+      "name": "NtUserUnhookWindowsHookEx",
+      "original_lines": [
+        5049,
+        5063
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "e936b9c2b39bf615529aead1be724a222078780636cd6446bf2d6bc5d7abc82b",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "f7af592023a12dfdab5b28fa9a24f122435f17725424c037f7a537f1be5188d4",
+      "link_errors": [
+        "NtUserUnhookWindowsHookEx.obj : error LNK2019: unresolved external symbol @HMValidateHandle@8 referenced in function _NtUserUnhookWindowsHookEx@4",
+        "NtUserUnhookWindowsHookEx.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserUnhookWindowsHookEx@4",
+        "NtUserUnhookWindowsHookEx.obj : error LNK2019: unresolved external symbol __UnhookWindowsHookEx@4 referenced in function _NtUserUnhookWindowsHookEx@4",
+        "NtUserUnhookWindowsHookEx.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserUnhookWindowsHookEx@4"
+      ]
+    },
+    {
+      "name": "NtUserUnregisterHotKey",
+      "original_lines": [
+        5065,
+        5081
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "886b27bc02a89512ae09cc65de5291736c49bd51f068ae1355a3af7c07657ff7",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "d0a8d2161b2f387908db8be553476e5fadcdbb7bbc82523bf79b78957def161d",
+      "link_errors": [
+        "NtUserUnregisterHotKey.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserUnregisterHotKey@8",
+        "NtUserUnregisterHotKey.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserUnregisterHotKey@8",
+        "NtUserUnregisterHotKey.obj : error LNK2019: unresolved external symbol __UnregisterHotKey@8 referenced in function _NtUserUnregisterHotKey@8",
+        "NtUserUnregisterHotKey.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserUnregisterHotKey@8"
+      ]
+    },
+    {
+      "name": "NtUserValidateRect",
+      "original_lines": [
+        5083,
+        5115
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "369144a78c8fd66b2c46094a8bdb695c1aa645488e360331ab4ddffda4ea722c",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserValidateRect.c(5098): error C2440: '=': cannot convert from 'int' to 'RECT'"
+    },
+    {
+      "name": "NtUserWaitForInputIdle",
+      "original_lines": [
+        5117,
+        5131
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "fbe45a66bee0223ce4186881a1f8b8ab9bdfea7c88d1512849e41cba655f6724",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "39bfd472264d0c578d907c260727ae54d6c33b740266a027880f11bcd7e0f3ff",
+      "link_errors": [
+        "NtUserWaitForInputIdle.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserWaitForInputIdle@12",
+        "NtUserWaitForInputIdle.obj : error LNK2019: unresolved external symbol _xxxWaitForInputIdle@12 referenced in function _NtUserWaitForInputIdle@12",
+        "NtUserWaitForInputIdle.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserWaitForInputIdle@12"
+      ]
+    },
+    {
+      "name": "NtUserWindowFromPoint",
+      "original_lines": [
+        5133,
+        5144
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "5d198aaf5d4f4e0457d259e414aa24a96011aa557a296e972ad9ed0279d0ee1b",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "7912edfbe2fa752dd54dbff7e21a2a7d3f05b549109a133820e4658ac6677458",
+      "link_errors": [
+        "NtUserWindowFromPoint.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserWindowFromPoint@8",
+        "NtUserWindowFromPoint.obj : error LNK2019: unresolved external symbol _xxxWindowFromPoint@8 referenced in function _NtUserWindowFromPoint@8",
+        "NtUserWindowFromPoint.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserWindowFromPoint@8"
+      ]
+    },
+    {
+      "name": "NtUserBeginPaint",
+      "original_lines": [
+        5146,
+        5175
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "c03b9b55b9aaf351207b12df1ba5d620575ab646a8f92f9d5a5b60a25219a06d",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserBeginPaint.c(5158): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserCreateCaret",
+      "original_lines": [
+        5177,
+        5200
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "696c81631eab88f6b81049ab08aba987e437aaf6b0c7f3d0156ccf517ca80b56",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "32978181c19a762bacb4ef35ab96a2a5b093c949eeffcce4c43e190c9ebbecf4",
+      "link_errors": [
+        "NtUserCreateCaret.obj : error LNK2019: unresolved external symbol __CreateCaret@16 referenced in function _NtUserCreateCaret@16"
+      ]
+    },
+    {
+      "name": "NtUserEndPaint",
+      "original_lines": [
+        5202,
+        5228
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b0690881531215b67673e1138520276ee209e96bedbd79fad68064984a309886",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserEndPaint.c(5219): error C2440: '=': cannot convert from 'int' to 'PAINTSTRUCT'"
+    },
+    {
+      "name": "NtUserExcludeUpdateRgn",
+      "original_lines": [
+        5230,
+        5246
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "55acbfdb1f9c9828413ed26c353a0ada02afc5e335801702d58c92ec6eb786a0",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "50b53194ca6bec7ac277c55bbd7733eadb4a5d27a36c698ac7bd85071867e70c",
+      "link_errors": [
+        "NtUserExcludeUpdateRgn.obj : error LNK2019: unresolved external symbol __ExcludeUpdateRgn@8 referenced in function _NtUserExcludeUpdateRgn@8"
+      ]
+    },
+    {
+      "name": "NtUserGetDC",
+      "original_lines": [
+        5248,
+        5262
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "2be4767c027be96b21dd43dae6fb0973914cff0b141590f010493c26a0fb0dd2",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "44b74a0a368910914da9e8d429460dafd242ae4aa3d9db3379080d7d83a99b85",
+      "link_errors": [
+        "NtUserGetDC.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserGetDC@4",
+        "NtUserGetDC.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserGetDC@4",
+        "NtUserGetDC.obj : error LNK2019: unresolved external symbol __GetDC@4 referenced in function _NtUserGetDC@4",
+        "NtUserGetDC.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetDC@4"
+      ]
+    },
+    {
+      "name": "NtUserGetDCEx",
+      "original_lines": [
+        5264,
+        5282
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "4bb898e743df0b889a2cae02be2c5d4e293b44f948d5811992a856e4eb496c87",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "7a8bd237c3329360b562016b28245570eef191d944ffca966308f1ce3a9c57bd",
+      "link_errors": [
+        "NtUserGetDCEx.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserGetDCEx@12",
+        "NtUserGetDCEx.obj : error LNK2019: unresolved external symbol __GetDCEx@12 referenced in function _NtUserGetDCEx@12",
+        "NtUserGetDCEx.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserGetDCEx@12",
+        "NtUserGetDCEx.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetDCEx@12"
+      ]
+    },
+    {
+      "name": "NtUserGetWindowDC",
+      "original_lines": [
+        5284,
+        5297
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "e2696d06e3ecebdfc921db2927272caa2becac45f26f77485b98e5e6f6b498c3",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "15eea91805059cd3ca81cbd4b93f73cb9c1289da4fa5ddda79866fcbc37cd638",
+      "link_errors": [
+        "NtUserGetWindowDC.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserGetWindowDC@4",
+        "NtUserGetWindowDC.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserGetWindowDC@4",
+        "NtUserGetWindowDC.obj : error LNK2019: unresolved external symbol __GetWindowDC@4 referenced in function _NtUserGetWindowDC@4",
+        "NtUserGetWindowDC.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetWindowDC@4"
+      ]
+    },
+    {
+      "name": "NtUserGetUpdateRgn",
+      "original_lines": [
+        5299,
+        5320
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "24a6af5699a130ced902189fb94498f476d685c5bfcef4f185ec1d5dbf147ab1",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetUpdateRgn.c(5311): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserRedrawWindow",
+      "original_lines": [
+        5322,
+        5360
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "58adc79834e3ee06dbb017ec375e0bad64fc17d402a7e86047e9608b6c98bb43",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserRedrawWindow.c(5336): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserInvalidateRgn",
+      "original_lines": [
+        5362,
+        5383
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "f4178162e96924bda7bf8977cf78cf9a0d0ff7eeda65d89264e07826ec9d5e8b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserInvalidateRgn.c(5374): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetWindowRgn",
+      "original_lines": [
+        5385,
+        5406
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "03517a3958fae6297521be9698c32993813e2dbdd1fab24415abb5c11a5cf0d5",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetWindowRgn.c(5397): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserScrollDC",
+      "original_lines": [
+        5408,
+        5453
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "bd815b5b41d83a0bab86e42516951016c83daaf21a9558b344219d09fae6cee8",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserScrollDC.c(5428): error C2440: '=': cannot convert from 'int' to 'RECT'"
+    },
+    {
+      "name": "NtUserInternalGetWindowText",
+      "original_lines": [
+        5455,
+        5488
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "510f54b91927a4ad432c1b11f2d37d36de3e23b54b1a85d2d2225958aaa29efb",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserInternalGetWindowText.c(5466): error C2094: label 'errorexit' was undefined"
+    },
+    {
+      "name": "NtUserToUnicodeEx",
+      "original_lines": [
+        5490,
+        5526
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "a1138ae4c89f6a7b9b200e7748fdcf8e13b6197fb78d793ed19d4bcea391d325",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "81f1551c65efd00f1440b6264a4d492e9186a425de8b1261c17a1a1b1d6cf542",
+      "link_errors": [
+        "NtUserToUnicodeEx.obj : error LNK2019: unresolved external symbol __ToUnicodeEx@28 referenced in function _NtUserToUnicodeEx@28",
+        "NtUserToUnicodeEx.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserToUnicodeEx@28",
+        "NtUserToUnicodeEx.obj : error LNK2019: unresolved external symbol _ProbeForWrite@12 referenced in function _NtUserToUnicodeEx@28",
+        "NtUserToUnicodeEx.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserToUnicodeEx@28"
+      ]
+    },
+    {
+      "name": "NtUserYieldTask",
+      "original_lines": [
+        5528,
+        5563
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "1ec7990d95302105ad55d5478b93e445486cc82ec3d4fd274f08d928f82d42c3",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserYieldTask.c(5531): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserWaitMessage",
+      "original_lines": [
+        5565,
+        5574
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "f9df45a1a598464e77bcd028a18472ec68a437aecf2d69345876a6801158db96",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "5b185f80b6685357203a269c3f0f736343c6ad9c7af01df9308d5667f47a2691",
+      "link_errors": [
+        "NtUserWaitMessage.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserWaitMessage@0",
+        "NtUserWaitMessage.obj : error LNK2019: unresolved external symbol _xxxWaitMessage@0 referenced in function _NtUserWaitMessage@0",
+        "NtUserWaitMessage.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserWaitMessage@0"
+      ]
+    },
+    {
+      "name": "NtUserLockWindowStation",
+      "original_lines": [
+        5576,
+        5594
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "5e126914cddd6b80f1073606b6f02bfd73e766b22fcb750827ca8a6ccfb8898c",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "d90a7ecfd5146cd5e57aeded7c327e4eca24115d3dedf32920869921773123dd",
+      "link_errors": [
+        "NtUserLockWindowStation.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserLockWindowStation@4",
+        "NtUserLockWindowStation.obj : error LNK2019: unresolved external symbol _ValidateHwinsta@12 referenced in function _NtUserLockWindowStation@4",
+        "NtUserLockWindowStation.obj : error LNK2019: unresolved external symbol __LockWindowStation@4 referenced in function _NtUserLockWindowStation@4",
+        "NtUserLockWindowStation.obj : error LNK2019: unresolved external symbol _ObDereferenceObject@4 referenced in function _NtUserLockWindowStation@4",
+        "NtUserLockWindowStation.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserLockWindowStation@4"
+      ]
+    },
+    {
+      "name": "NtUserUnlockWindowStation",
+      "original_lines": [
+        5596,
+        5614
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "67afd0c1a6452bc5400b395dcf0af09733e137d7a9ecf3faa3c219f740a0cfbf",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "f450df7f379c736c87ee980cca3996c54b9760f188461cf9a7cf6781cd469078",
+      "link_errors": [
+        "NtUserUnlockWindowStation.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserUnlockWindowStation@4",
+        "NtUserUnlockWindowStation.obj : error LNK2019: unresolved external symbol _ValidateHwinsta@12 referenced in function _NtUserUnlockWindowStation@4",
+        "NtUserUnlockWindowStation.obj : error LNK2019: unresolved external symbol __UnlockWindowStation@4 referenced in function _NtUserUnlockWindowStation@4",
+        "NtUserUnlockWindowStation.obj : error LNK2019: unresolved external symbol _ObDereferenceObject@4 referenced in function _NtUserUnlockWindowStation@4",
+        "NtUserUnlockWindowStation.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserUnlockWindowStation@4"
+      ]
+    },
+    {
+      "name": "NtUserSetWindowStationUser",
+      "original_lines": [
+        5616,
+        5647
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "64c0b129b5833cd56496a3a6ed1b5bfc445f488559db3a3a930b36f8607160a1",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "b5831d942b6a0c4c50cf37a83da3886220f44e41fbc58577b485532be9611d31",
+      "link_errors": [
+        "NtUserSetWindowStationUser.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetWindowStationUser@16",
+        "NtUserSetWindowStationUser.obj : error LNK2019: unresolved external symbol _ValidateHwinsta@12 referenced in function _NtUserSetWindowStationUser@16",
+        "NtUserSetWindowStationUser.obj : error LNK2019: unresolved external symbol __SetWindowStationUser@16 referenced in function _NtUserSetWindowStationUser@16",
+        "NtUserSetWindowStationUser.obj : error LNK2019: unresolved external symbol _ObDereferenceObject@4 referenced in function _NtUserSetWindowStationUser@16",
+        "NtUserSetWindowStationUser.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetWindowStationUser@16"
+      ]
+    },
+    {
+      "name": "NtUserSetLogonNotifyWindow",
+      "original_lines": [
+        5649,
+        5674
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "644a80114722232753835f2cba6131d74ee4c847785df06ffec5e1521cfaedf0",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetLogonNotifyWindow.c(5666): error C2065: 'errret': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetSystemCursor",
+      "original_lines": [
+        5676,
+        5692
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "07e1198aabcab75c38c1115256ae9076ec505e22056cae5c73cbabfc37a2f8cb",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "6e032a4871d33559bdf606ba9f88da01020ef51924fdf67bdb07f33e40ebea53",
+      "link_errors": [
+        "NtUserSetSystemCursor.obj : error LNK2019: unresolved external symbol @HMValidateHandle@8 referenced in function _NtUserSetSystemCursor@8",
+        "NtUserSetSystemCursor.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetSystemCursor@8",
+        "NtUserSetSystemCursor.obj : error LNK2019: unresolved external symbol __SetSystemCursor@8 referenced in function _NtUserSetSystemCursor@8",
+        "NtUserSetSystemCursor.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetSystemCursor@8"
+      ]
+    },
+    {
+      "name": "NtUserGetCursorInfo",
+      "original_lines": [
+        5694,
+        5725
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "43a5fdce5617c534c0bbc1b5d37ba8f103df4d419e8a97832fc68268b25c92b9",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetCursorInfo.c(5713): error C2198: 'HCURSOR _GetCursorInfo(HCURSOR,LPWSTR,int,LPDWORD,LPINT)': too few arguments for call"
+    },
+    {
+      "name": "NtUserSetCursorContents",
+      "original_lines": [
+        5727,
+        5743
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "55b8cb58824f78a1a17ae247b71fb8626a031b73b023eb212a3519fe1e7a54b7",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "13173794327ef8f058639a06d302d404e055cefbf59d17030bc28f1cfe03d45c",
+      "link_errors": [
+        "NtUserSetCursorContents.obj : error LNK2019: unresolved external symbol @HMValidateHandle@8 referenced in function _NtUserSetCursorContents@8",
+        "NtUserSetCursorContents.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSetCursorContents@8",
+        "NtUserSetCursorContents.obj : error LNK2019: unresolved external symbol __SetCursorContents@8 referenced in function _NtUserSetCursorContents@8",
+        "NtUserSetCursorContents.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSetCursorContents@8"
+      ]
+    },
+    {
+      "name": "NtUserFindExistingCursorIcon",
+      "original_lines": [
+        5745,
+        5798
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "a2d711062d2b1c1c38d576832fcb86fd05148075d593b863fdda2d96ea580abb",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserFindExistingCursorIcon.c(5763): error C2440: '=': cannot convert from 'int' to 'CURSORFIND'"
+    },
+    {
+      "name": "NtUserSetCursorIconData",
+      "original_lines": [
+        5800,
+        5843
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "0f701f125a8281d57a719f83e2d7127ecfa7efb641b4439e553923862e5090d1",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetCursorIconData.c(5820): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserWOWCleanup",
+      "original_lines": [
+        5845,
+        5861
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "e79001cd326866610d376b39bc2d1e0313b11293bbdc819510fbacad9946e84f",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "35675355655fd2b43c5d19ba0ad8773e3646c3d4e96c44b79afb80ae0b3d95df",
+      "link_errors": [
+        "NtUserWOWCleanup.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserWOWCleanup@16",
+        "NtUserWOWCleanup.obj : error LNK2019: unresolved external symbol __WOWCleanup@16 referenced in function _NtUserWOWCleanup@16",
+        "NtUserWOWCleanup.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserWOWCleanup@16"
+      ]
+    },
+    {
+      "name": "NtUserGetMenuItemRect",
+      "original_lines": [
+        5863,
+        5906
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "3473a4a36f2e98f38b4b60dd38681d28b1275eb7153e2b9a00df3135e6b6d4d2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetMenuItemRect.c(5879): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserMenuItemFromPoint",
+      "original_lines": [
+        5908,
+        5938
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b7b81769c15200eb3d6571ed7b189ca90a810f9c8d196a06d4aa65da3c510465",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserMenuItemFromPoint.c(5923): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetCaretPos",
+      "original_lines": [
+        5940,
+        5965
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "ed0c0bb8e1acb1a085af04df468085d5f72e3c1abf5889484550e461e74410a7",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "9d8cfbaf422d54fb0b20ac6225972c3b69766e666e9ab2bef467dac976f31a6a",
+      "link_errors": [
+        "NtUserGetCaretPos.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetCaretPos@4",
+        "NtUserGetCaretPos.obj : error LNK2019: unresolved external symbol _ProbeForWritePoint@4 referenced in function _NtUserGetCaretPos@4",
+        "NtUserGetCaretPos.obj : error LNK2019: unresolved external symbol __GetCaretPos@4 referenced in function _NtUserGetCaretPos@4",
+        "NtUserGetCaretPos.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetCaretPos@4"
+      ]
+    },
+    {
+      "name": "NtUserDefSetText",
+      "original_lines": [
+        5967,
+        6004
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "0d1a555ead4fe67770412fc564cbc5f807d4471747ab43f20e1f0228b444cc49",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDefSetText.c(5985): error C2440: '=': cannot convert from 'int' to 'LARGE_STRING'"
+    },
+    {
+      "name": "NtUserQueryInformationThread",
+      "original_lines": [
+        6006,
+        6048
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "39366dc5c33e27d1503a1ca445fa0bd43e1004e589cad11170457eeb5c3ebbb3",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserQueryInformationThread.c(6008): error C2146: syntax error: missing ')' before identifier 'ThreadInfoClass'"
+    },
+    {
+      "name": "NtUserSetInformationThread",
+      "original_lines": [
+        6050,
+        6074
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "c3016f3b4edf33cc7e6656e1575cd92184991e852cebf984b06d42d5d80d37bf",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetInformationThread.c(6052): error C2146: syntax error: missing ')' before identifier 'ThreadInfoClass'"
+    },
+    {
+      "name": "NtUserNotifyProcessCreate",
+      "original_lines": [
+        6076,
+        6094
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "7b16e0b5c369280cc6358293fafc7da5642f0876dab604bb54f2fd44be3b3a30",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "7524297e3220ddb83d2d4017f6173e4c7957b1928f7020758798956be270034d",
+      "link_errors": [
+        "NtUserNotifyProcessCreate.obj : error LNK2019: unresolved external symbol _UserNotifyProcessCreate@16 referenced in function _NtUserNotifyProcessCreate@16",
+        "NtUserNotifyProcessCreate.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserNotifyProcessCreate@16",
+        "NtUserNotifyProcessCreate.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserNotifyProcessCreate@16"
+      ]
+    },
+    {
+      "name": "NtUserSoundSentry",
+      "original_lines": [
+        6096,
+        6106
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "a6048b985a6f7b6abbe330ecacf162983bd706ca9ad60749ba8050e9bbabf0f9",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "96108b4558c7284262084850927b8eef85f501fa38e08b28ba9d3e495ab88bfa",
+      "link_errors": [
+        "NtUserSoundSentry.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSoundSentry@4",
+        "NtUserSoundSentry.obj : error LNK2019: unresolved external symbol __UserSoundSentryWorker@4 referenced in function _NtUserSoundSentry@4",
+        "NtUserSoundSentry.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSoundSentry@4"
+      ]
+    },
+    {
+      "name": "NtUserTestForInteractiveUser",
+      "original_lines": [
+        6108,
+        6127
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "419e66f931c6a875b1a3cb901f68df2dc04e998648719905d586b43cf9c2e8b7",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserTestForInteractiveUser.c(6119): error C2065: 'PQUAD': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetConsoleReserveKeys",
+      "original_lines": [
+        6129,
+        6146
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "9a3c8559dfdfb67e529695c4e7853ce511d0fc94076636c3f610873ebaaf62d5",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "f290cb895f2443dfb4a53d39776b059393a2d5f3196aebe4002ca78d2b056226",
+      "link_errors": [
+        "NtUserSetConsoleReserveKeys.obj : error LNK2019: unresolved external symbol __SetConsoleReserveKeys@8 referenced in function _NtUserSetConsoleReserveKeys@8"
+      ]
+    },
+    {
+      "name": "NtUserGetUserStartupInfoFlags",
+      "original_lines": [
+        6148,
+        6157
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "edc9d834e0601d370a43031b66594d3b0c213f2571702903ad4076a5218c4294",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetUserStartupInfoFlags.c(6153): error C2223: left of '->usi' must point to struct/union"
+    },
+    {
+      "name": "NtUserSetUserStartupInfoFlags",
+      "original_lines": [
+        6159,
+        6168
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "f7b8bdd87505cf40cf482ee40676770879e9e64cb83e28005ea4e428f360a2e0",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetUserStartupInfoFlags.c(6164): error C2223: left of '->usi' must point to struct/union"
+    },
+    {
+      "name": "NtUserAlterWindowStyle",
+      "original_lines": [
+        6190,
+        6201
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "3a123e4d408166315b2f50c96ccd9ebb6ef8a745cba3f413708b5d07429a4721",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "34aa9e19326481017b89e9568018816e38d64b2bc4b01ad8d988688ac5e21a7c",
+      "link_errors": [
+        "NtUserAlterWindowStyle.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserAlterWindowStyle@12",
+        "NtUserAlterWindowStyle.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserAlterWindowStyle@12",
+        "NtUserAlterWindowStyle.obj : error LNK2019: unresolved external symbol _TRACEVOID@4 referenced in function _NtUserAlterWindowStyle@12",
+        "NtUserAlterWindowStyle.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserAlterWindowStyle@12"
+      ]
+    },
+    {
+      "name": "NtUserSetThreadState",
+      "original_lines": [
+        6203,
+        6222
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b5267cac791633cb7ab7ae3b21cd102d20777437be0e6440559057d3bc28b163",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetThreadState.c(6207): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetThreadState",
+      "original_lines": [
+        6224,
+        6283
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "14366b67556dd06f84951940b55ff8397641f3f933a43344133a53a4127ff455",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetThreadState.c(6225): error C2146: syntax error: missing ')' before identifier 'ThreadState'"
+    },
+    {
+      "name": "NtUserGetListboxString",
+      "original_lines": [
+        6285,
+        6360
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "19972b96e26b0907b5ed6d33341f9407442d57dbee6a967ebee5957646c5174d",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetListboxString.c(6305): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserCreateWindowEx",
+      "original_lines": [
+        6362,
+        6485
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2108b80aa096344838e09c7d3954a1bd806cf9aa96375061095bf6a0ebfa7860",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCreateWindowEx.c(6385): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserBuildHwndList",
+      "original_lines": [
+        6487,
+        6576
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "a374f617aff2ca2458df6a0912f055482ea16878a88e3eafee8dfe9e00e0a870",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserBuildHwndList.c(6498): error C2065: 'PBWL': undeclared identifier"
+    },
+    {
+      "name": "NtUserBuildPropList",
+      "original_lines": [
+        6578,
+        6604
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "839ed1817ac9b417b2dc37eb06bba48a1134351d75928e5b8f6383f66a4cf1f0",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserBuildPropList.c(6584): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserBuildNameList",
+      "original_lines": [
+        6606,
+        6650
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "b6d4869e0c510e181bf626dfca7b586bad4a4b044d17563ec4a65c6338529b97",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "f8df1c5e3af3dc4b59c75ff23582758fcc0dcef5b02a5c58a50cb6f46c919971",
+      "link_errors": [
+        "NtUserBuildNameList.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserBuildNameList@16",
+        "NtUserBuildNameList.obj : error LNK2019: unresolved external symbol _ValidateHwinsta@12 referenced in function _NtUserBuildNameList@16",
+        "NtUserBuildNameList.obj : error LNK2019: unresolved external symbol _ProbeForWriteUlong@4 referenced in function _NtUserBuildNameList@16",
+        "NtUserBuildNameList.obj : error LNK2019: unresolved external symbol _ProbeForWrite@12 referenced in function _NtUserBuildNameList@16",
+        "NtUserBuildNameList.obj : error LNK2019: unresolved external symbol __BuildNameList@16 referenced in function _NtUserBuildNameList@16",
+        "NtUserBuildNameList.obj : error LNK2019: unresolved external symbol _ObDereferenceObject@4 referenced in function _NtUserBuildNameList@16",
+        "NtUserBuildNameList.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserBuildNameList@16"
+      ]
+    },
+    {
+      "name": "NtUserActivateKeyboardLayout",
+      "original_lines": [
+        6652,
+        6665
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "7a4daf14078a54e874cd20eec5dd9a0a3660c2b49277d4a9b73ae2ec835cd2ec",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "646215c8ffaa716d1f6588a7e9de079fc810bae6e080c29a30a4f500521644bf",
+      "link_errors": [
+        "NtUserActivateKeyboardLayout.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserActivateKeyboardLayout@8",
+        "NtUserActivateKeyboardLayout.obj : error LNK2019: unresolved external symbol _xxxActivateKeyboardLayout@12 referenced in function _NtUserActivateKeyboardLayout@8",
+        "NtUserActivateKeyboardLayout.obj : error LNK2019: unresolved external symbol __GetProcessWindowStation@4 referenced in function _NtUserActivateKeyboardLayout@8",
+        "NtUserActivateKeyboardLayout.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserActivateKeyboardLayout@8"
+      ]
+    },
+    {
+      "name": "NtUserLoadKeyboardLayoutEx",
+      "original_lines": [
+        6667,
+        6712
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b4ba6cd0f8198cb99b64e4e941bb4d95019c169d733f82656d0fa406b65d90d7",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserLoadKeyboardLayoutEx.c(6677): error C2065: 'PKL': undeclared identifier"
+    },
+    {
+      "name": "NtUserUnloadKeyboardLayout",
+      "original_lines": [
+        6714,
+        6725
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "bffc2b59e4713f590c39f524f832272a050fd6bc909fa3e7c61f14650813616c",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "972047c23350cfc3b48d85aead4c9223510f96be1de589466e24d64f948d50f9",
+      "link_errors": [
+        "NtUserUnloadKeyboardLayout.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserUnloadKeyboardLayout@4",
+        "NtUserUnloadKeyboardLayout.obj : error LNK2019: unresolved external symbol _xxxUnloadKeyboardLayout@8 referenced in function _NtUserUnloadKeyboardLayout@4",
+        "NtUserUnloadKeyboardLayout.obj : error LNK2019: unresolved external symbol __GetProcessWindowStation@4 referenced in function _NtUserUnloadKeyboardLayout@4",
+        "NtUserUnloadKeyboardLayout.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserUnloadKeyboardLayout@4"
+      ]
+    },
+    {
+      "name": "NtUserSetSystemMenu",
+      "original_lines": [
+        6727,
+        6753
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5658bf9b72f3599884bf97fd9a98280366761e3434b633d58522bb0f4c0b39b6",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserSetSystemMenu.c(6741): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserDragDetect",
+      "original_lines": [
+        6755,
+        6772
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5fe27302b8ceae0d1f8afbe3321de25738b6333513c206cb034b734cfe5fd88e",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDragDetect.c(6766): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserSetSystemTimer",
+      "original_lines": [
+        6774,
+        6796
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "a34091d06d1e709a205cc071f37b1e5d8ce20fabc263fa58621b9188f46f0967",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "266019026ed8efc7846d588ea8c50ca16e147fbdbd03119695f307b107fc8916",
+      "link_errors": [
+        "NtUserSetSystemTimer.obj : error LNK2019: unresolved external symbol __SetSystemTimer@16 referenced in function _NtUserSetSystemTimer@16"
+      ]
+    },
+    {
+      "name": "NtUserQuerySendMessage",
+      "original_lines": [
+        6798,
+        6817
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "3a9408e3720161577e8b30e5f268ac27ce1520165ab9313b6f0a09445b73eb0c",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "bcd6829bcec5a81a5f46b1c0d8895948e20632459f8c240d440a512dd2e99659",
+      "link_errors": [
+        "NtUserQuerySendMessage.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserQuerySendMessage@4",
+        "NtUserQuerySendMessage.obj : error LNK2019: unresolved external symbol _ProbeForWriteMessage@4 referenced in function _NtUserQuerySendMessage@4",
+        "NtUserQuerySendMessage.obj : error LNK2019: unresolved external symbol __QuerySendMessage@4 referenced in function _NtUserQuerySendMessage@4",
+        "NtUserQuerySendMessage.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserQuerySendMessage@4"
+      ]
+    },
+    {
+      "name": "NtUserkeybd_event",
+      "original_lines": [
+        6819,
+        6835
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "1d172202d019e0b061ac1fee800ad2df2bf51bac182bde0633587906e6c9c57e",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "17b5823638f19fd37157352b8031156c531149e6ef5b4b97fd742160cae7c86e",
+      "link_errors": [
+        "NtUserkeybd_event.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserkeybd_event@16",
+        "NtUserkeybd_event.obj : error LNK2019: unresolved external symbol _InternalKeyEvent@16 referenced in function _NtUserkeybd_event@16",
+        "NtUserkeybd_event.obj : error LNK2019: unresolved external symbol _TRACEVOID@4 referenced in function _NtUserkeybd_event@16",
+        "NtUserkeybd_event.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserkeybd_event@16"
+      ]
+    },
+    {
+      "name": "NtUsermouse_event",
+      "original_lines": [
+        6837,
+        6855
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "6ea47a0cbdd9e84aed4da6bcb57895803bc3b17d4cbaa1b23f617ec6728f07ee",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "408d5ed5c3e79cca504cbfa7810f8be5bb60451389c5da15285da688c8fc4a7c",
+      "link_errors": [
+        "NtUsermouse_event.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUsermouse_event@20",
+        "NtUsermouse_event.obj : error LNK2019: unresolved external symbol __MouseEvent@20 referenced in function _NtUsermouse_event@20",
+        "NtUsermouse_event.obj : error LNK2019: unresolved external symbol _TRACEVOID@4 referenced in function _NtUsermouse_event@20",
+        "NtUsermouse_event.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUsermouse_event@20"
+      ]
+    },
+    {
+      "name": "NtUserImpersonateDdeClientWindow",
+      "original_lines": [
+        6857,
+        6885
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "982970e734135cf5811b08814b630fe8737354ccd98fbe30b4d03a815e05c441",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserImpersonateDdeClientWindow.c(6871): error C2065: 'errret': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetCPD",
+      "original_lines": [
+        6887,
+        6908
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "62f6c25c11127999fe284ffd85d49a709313fd953eff0c1e254f776c30790258",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetCPD.c(6901): error C2065: 'errret': undeclared identifier"
+    },
+    {
+      "name": "NtUserCopyAcceleratorTable",
+      "original_lines": [
+        6910,
+        6948
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "448389ad046cf012d479887efa796b847bc6ff3ead05592aaf7be2bec402725d",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserCopyAcceleratorTable.c(6915): error C2065: 'LPACCELTABLE': undeclared identifier"
+    },
+    {
+      "name": "NtUserFindWindowEx",
+      "original_lines": [
+        6950,
+        7003
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4dcebae37e7ad2e3594c3ba19f1e760b823bb5b34c9c7593717bd184752efa9c",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserFindWindowEx.c(6960): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetClassInfo",
+      "original_lines": [
+        7005,
+        7051
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "68656e3aad194314bfeeec65dcfd5055efcc0e1063e424feda7fc1041fad6577",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetClassInfo.c(7020): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserGetClassName",
+      "original_lines": [
+        7053,
+        7089
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "19fc167ec5a6d443ff0a6679023c98dcd8f4dfc4e735601802f557e34f86ef50",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetClassName.c(7070): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserGetClipboardFormatName",
+      "original_lines": [
+        7091,
+        7118
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "dfbfa62948b350494a8c919ff1ba9c152f2b1a5cb298ea92153b8b25b65c78b4",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "9ed98a260a4a59715d40afbbfc49cd244d738a196fe096828c6606d7a09dccda",
+      "link_errors": [
+        "NtUserGetClipboardFormatName.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetClipboardFormatName@12",
+        "NtUserGetClipboardFormatName.obj : error LNK2019: unresolved external symbol _ProbeForWrite@12 referenced in function _NtUserGetClipboardFormatName@12",
+        "NtUserGetClipboardFormatName.obj : error LNK2019: unresolved external symbol __GetClipboardFormatName@12 referenced in function _NtUserGetClipboardFormatName@12",
+        "NtUserGetClipboardFormatName.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetClipboardFormatName@12"
+      ]
+    },
+    {
+      "name": "NtUserGetKeyNameText",
+      "original_lines": [
+        7120,
+        7147
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "709ae9bad2d7ffc1877060c691889fe01b171f5c01248fcf860420956e8894ce",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "7d94296cb91da1f57624a2e2129bfd7bee7c8eb6c71caaf0602c949142a31156",
+      "link_errors": [
+        "NtUserGetKeyNameText.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetKeyNameText@12",
+        "NtUserGetKeyNameText.obj : error LNK2019: unresolved external symbol _ProbeForWrite@12 referenced in function _NtUserGetKeyNameText@12",
+        "NtUserGetKeyNameText.obj : error LNK2019: unresolved external symbol __GetKeyNameText@12 referenced in function _NtUserGetKeyNameText@12",
+        "NtUserGetKeyNameText.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetKeyNameText@12"
+      ]
+    },
+    {
+      "name": "NtUserGetKeyboardLayoutName",
+      "original_lines": [
+        7149,
+        7174
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "550e7b5c6e2b104eab5fd28d581e1c7094703e1055c24d1b56787eb6d2969a6b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetKeyboardLayoutName.c(7160): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserGetKeyboardLayoutList",
+      "original_lines": [
+        7176,
+        7202
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "c00a2e5668c096dcbe9551e404c7f89d78be0eb88b62917d3e0dd703bb886ba9",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "511816808026a442eb5b49276b5b0278c2e2084b386acc0c8e8f0893e0758787",
+      "link_errors": [
+        "NtUserGetKeyboardLayoutList.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserGetKeyboardLayoutList@8",
+        "NtUserGetKeyboardLayoutList.obj : error LNK2019: unresolved external symbol _ProbeForWrite@12 referenced in function _NtUserGetKeyboardLayoutList@8",
+        "NtUserGetKeyboardLayoutList.obj : error LNK2019: unresolved external symbol __GetProcessWindowStation@4 referenced in function _NtUserGetKeyboardLayoutList@8",
+        "NtUserGetKeyboardLayoutList.obj : error LNK2019: unresolved external symbol __GetKeyboardLayoutList@12 referenced in function _NtUserGetKeyboardLayoutList@8",
+        "NtUserGetKeyboardLayoutList.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetKeyboardLayoutList@8"
+      ]
+    },
+    {
+      "name": "NtUserGetStats",
+      "original_lines": [
+        7204,
+        7220
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "b66ddd7e88f93494165dd840c596015a553eb0ebcfd11c367ded79e9434a7842",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "5d6e18b5507440780be34e52bc8f403a3da9bb293ad0aafbbc14d62709bee2f5",
+      "link_errors": [
+        "NtUserGetStats.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserGetStats@16",
+        "NtUserGetStats.obj : error LNK2019: unresolved external symbol _HMGetStats@16 referenced in function _NtUserGetStats@16",
+        "NtUserGetStats.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserGetStats@16"
+      ]
+    },
+    {
+      "name": "NtUserMapVirtualKeyEx",
+      "original_lines": [
+        7222,
+        7250
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "660f91ee4eb2191dfe12672d8f1fa2d901d1c29efdefd9999e7a3fc6eaa7415f",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserMapVirtualKeyEx.c(7228): error C2065: 'PKL': undeclared identifier"
+    },
+    {
+      "name": "NtUserRegisterClassExWOW",
+      "original_lines": [
+        7252,
+        7316
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "60254d5bc5db94f0e2095e41569a68b1a49a1b23ee6a387be87158802777cdce",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserRegisterClassExWOW.c(7281): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserRegisterClipboardFormat",
+      "original_lines": [
+        7318,
+        7346
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "fb8450d3dd3a2b7a3b734ecf2dc6dbb293e3e1fdd370d1e6f6fb3a81829bd195",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserRegisterClipboardFormat.c(7329): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserRegisterWindowMessage",
+      "original_lines": [
+        7348,
+        7377
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "3698d4de5f75e828d708850ebb64ae02328b66407947a540c644a4c7bf98c86c",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserRegisterWindowMessage.c(7359): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserRemoveProp",
+      "original_lines": [
+        7379,
+        7395
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "cb3cc29ceac3772ed5758a627eebd4aa1ba732e50c61c8ea0cfe2780df0dd45d",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "d232ae7329bd1b5918f1abb894cf11e70c8199cebe19873fd1c5d738a979bbf7",
+      "link_errors": [
+        "NtUserRemoveProp.obj : error LNK2019: unresolved external symbol _InternalRemoveProp@12 referenced in function _NtUserRemoveProp@8"
+      ]
+    },
+    {
+      "name": "NtUserSetProp",
+      "original_lines": [
+        7397,
+        7418
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "6857eb0d8bae26e96fd730b0b0da8def6a191a3a59115e55228a1af06d9fa86c",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "86c97fdfbf1fcbe4fecd54a89d51de518720a2671de14bfb3f68476a50bddba7",
+      "link_errors": [
+        "NtUserSetProp.obj : error LNK2019: unresolved external symbol _InternalSetProp@16 referenced in function _NtUserSetProp@12"
+      ]
+    },
+    {
+      "name": "NtUserUnregisterClass",
+      "original_lines": [
+        7420,
+        7458
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "325f0c6abe9f5303c82368566ad6893d1dc278fe478326fdbd5d6253d40f4dd2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserUnregisterClass.c(7434): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserVkKeyScanEx",
+      "original_lines": [
+        7460,
+        7487
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "22de100b42e533a553efb058df80b0d13ca25b6c1412514983b5d2b77a18c9bb",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserVkKeyScanEx.c(7465): error C2065: 'PKL': undeclared identifier"
+    },
+    {
+      "name": "NtUserEnumDisplayDevices",
+      "original_lines": [
+        7489,
+        7566
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "333483f3412ddac80cfedd1598e5f19717059aec02e6fc7a02874bdf4b505300",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserEnumDisplayDevices.c(7517): error C2065: 'cphysDevInfo': undeclared identifier"
+    },
+    {
+      "name": "NtUserCallMsgFilter",
+      "original_lines": [
+        7568,
+        7593
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "2c2bae194269de830a7ae26bc083ce5091eb1d1556f739680af1633cb9f5e3cf",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "db10f7dcd0119d8491ec6ce3f5a3fe90b689396dc8de18cffd04c38a84c99ee4",
+      "link_errors": [
+        "NtUserCallMsgFilter.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserCallMsgFilter@8",
+        "NtUserCallMsgFilter.obj : error LNK2019: unresolved external symbol _ProbeForWriteMessage@4 referenced in function _NtUserCallMsgFilter@8",
+        "NtUserCallMsgFilter.obj : error LNK2019: unresolved external symbol __CallMsgFilter@8 referenced in function _NtUserCallMsgFilter@8",
+        "NtUserCallMsgFilter.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserCallMsgFilter@8"
+      ]
+    },
+    {
+      "name": "NtUserDrawMenuBarTemp",
+      "original_lines": [
+        7595,
+        7639
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "b95b422077ec244dc4b1da74ccbca805969b93cfd87738738177e4461db14388",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDrawMenuBarTemp.c(7613): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserDrawCaptionTemp",
+      "original_lines": [
+        7641,
+        7711
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4f0e83036e831671652eb1a0b2dff2f5d19073425fd61d1afa78af07871098d7",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserDrawCaptionTemp.c(7656): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetKeyboardState",
+      "original_lines": [
+        7713,
+        7742
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "ce4382872fdc912505d214c2c016d85e8e1dd9c8d3c17b28c674026efb887724",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetKeyboardState.c(7717): error C2065: 'PQ': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetKeyState",
+      "original_lines": [
+        7744,
+        7785
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "8ca23698877332735092d1f364a505974ec4095ba7190350c659e527fb45fe5c",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetKeyState.c(7747): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserQueryWindow",
+      "original_lines": [
+        7793,
+        7861
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "880d447c2f68318aa0c2e8ffd20ef3e846c172672a3b75e17f5aff3864138b8a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserQueryWindow.c(7795): error C2146: syntax error: missing ')' before identifier 'WindowInfo'"
+    },
+    {
+      "name": "NtUserSBGetParms",
+      "original_lines": [
+        7863,
+        7900
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "5b2ff02cbea3bf33a480b05fb076268d0951a106325b689c1d944ebaef1c8628",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "aeff0b109fb8a2ec2ff15e02b93ef804841e979f124a13c15279c8d18f266e85",
+      "link_errors": [
+        "NtUserSBGetParms.obj : error LNK2019: unresolved external symbol __SBGetParms@16 referenced in function _NtUserSBGetParms@16",
+        "NtUserSBGetParms.obj : error LNK2019: unresolved external symbol @ValidateHwnd@4 referenced in function _NtUserSBGetParms@16",
+        "NtUserSBGetParms.obj : error LNK2019: unresolved external symbol _EnterSharedCrit@0 referenced in function _NtUserSBGetParms@16",
+        "NtUserSBGetParms.obj : error LNK2019: unresolved external symbol _ProbeForWriteScrollInfo@4 referenced in function _NtUserSBGetParms@16",
+        "NtUserSBGetParms.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSBGetParms@16"
+      ]
+    },
+    {
+      "name": "NtUserPlayEventSound",
+      "original_lines": [
+        7902,
+        7927
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "610c65f632d0d5d69863487c81750fd8842b152e5429256160e1f8c50fcca07f",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserPlayEventSound.c(7913): error C2440: '=': cannot convert from 'int' to 'UNICODE_STRING'"
+    },
+    {
+      "name": "NtUserBitBltSysBmp",
+      "original_lines": [
+        7929,
+        7953
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "69552058ed161db2e397e831aad3fb5f01390623b3574612a7c416bbcce65126",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserBitBltSysBmp.c(7946): error C2065: 'gpDispInfo': undeclared identifier"
+    },
+    {
+      "name": "NtUserSelectPalette",
+      "original_lines": [
+        7955,
+        7965
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "ca6f11538f48a6b6f44ad9c46094c8efb890715cc9d13b4c3fc91586b831d8d6",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "018c4af5e087827277d11b7f3404001f467bb81dad41045016e4023bf5407fb0",
+      "link_errors": [
+        "NtUserSelectPalette.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserSelectPalette@12",
+        "NtUserSelectPalette.obj : error LNK2019: unresolved external symbol __SelectPalette@12 referenced in function _NtUserSelectPalette@12",
+        "NtUserSelectPalette.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserSelectPalette@12"
+      ]
+    },
+    {
+      "name": "NtUserfnINLPMDICREATESTRUCT",
+      "original_lines": [
+        8528,
+        8595
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "6eef23b01651493493f6e1f0c9dc1de3583d697a57deb1e771b7487bbbb25c7b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserfnINLPMDICREATESTRUCT.c(8545): error C2065: 'MDICREATESTRUCTEX': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnHkINLPCBTCREATESTRUCT",
+      "original_lines": [
+        9533,
+        9594
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5d15da5d1d9c35a4d14f9418cffd3ab9858212280c4a340cfba49e0792f64d65",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserfnHkINLPCBTCREATESTRUCT.c(9542): error C2065: 'CREATESTRUCTEX': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnHkINLPRECT",
+      "original_lines": [
+        9596,
+        9626
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "7078b757d282c85c380ff04f1bd49de852020d4996f7d58bdd7478bca86ba077",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserfnHkINLPRECT.c(9614): error C2440: '=': cannot convert from 'int' to 'RECT'"
+    },
+    {
+      "name": "NtUserfnHkINDWORD",
+      "original_lines": [
+        9628,
+        9647
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "d5395e6af0b13e9543aba887211530eee06291e17defebac2494e2d9d391ebe2",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "b81bbf853203729572e406423106747f352640cee4a479d3f2bc58f0ac5af817",
+      "link_errors": [
+        "NtUserfnHkINDWORD.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserfnHkINDWORD@20",
+        "NtUserfnHkINDWORD.obj : error LNK2019: unresolved external symbol _xxxCallNextHookEx@12 referenced in function _NtUserfnHkINDWORD@20",
+        "NtUserfnHkINDWORD.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserfnHkINDWORD@20"
+      ]
+    },
+    {
+      "name": "NtUserfnHkINLPMSG",
+      "original_lines": [
+        9649,
+        9679
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "1bd78b665e97358d435409e7113cdf1d6fc9155d2923e10dcc6b8592b741eda8",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserfnHkINLPMSG.c(9667): error C2440: '=': cannot convert from 'int' to 'MSG'"
+    },
+    {
+      "name": "NtUserfnHkINLPDEBUGHOOKSTRUCT",
+      "original_lines": [
+        9681,
+        9711
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "841e61a0934b6596b7fe533611c985413d2ef485b386826734159d71254adf0f",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserfnHkINLPDEBUGHOOKSTRUCT.c(9699): error C2440: '=': cannot convert from 'int' to 'DEBUGHOOKINFO'"
+    },
+    {
+      "name": "NtUserfnHkOPTINLPEVENTMSG",
+      "original_lines": [
+        9713,
+        9754
+      ],
+      "compile_exit": 0,
+      "compile_log_sha256": "d7a612a7a33003a9900533aa15319e4b0d3b2000120f3869ac066be3895ba175",
+      "first_compile_error": null,
+      "link_exit": 1120,
+      "link_log_sha256": "56d58afff3baca0dc7e382aae646bb8a552083052603831df705e98853cde9a3",
+      "link_errors": [
+        "NtUserfnHkOPTINLPEVENTMSG.obj : error LNK2019: unresolved external symbol _EnterCrit@0 referenced in function _NtUserfnHkOPTINLPEVENTMSG@20",
+        "NtUserfnHkOPTINLPEVENTMSG.obj : error LNK2019: unresolved external symbol _ProbeForWriteEvent@4 referenced in function _NtUserfnHkOPTINLPEVENTMSG@20",
+        "NtUserfnHkOPTINLPEVENTMSG.obj : error LNK2019: unresolved external symbol _xxxCallNextHookEx@12 referenced in function _NtUserfnHkOPTINLPEVENTMSG@20",
+        "NtUserfnHkOPTINLPEVENTMSG.obj : error LNK2019: unresolved external symbol _LeaveCrit@0 referenced in function _NtUserfnHkOPTINLPEVENTMSG@20"
+      ]
+    },
+    {
+      "name": "NtUserfnHkINLPMOUSEHOOKSTRUCT",
+      "original_lines": [
+        9756,
+        9786
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "9a639acbd9e8a27a01de0a583ec2185209e03e755ecc39662eeda81a80d2ac45",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserfnHkINLPMOUSEHOOKSTRUCT.c(9774): error C2440: '=': cannot convert from 'int' to 'MOUSEHOOKSTRUCT'"
+    },
+    {
+      "name": "NtUserfnHkINLPCBTACTIVATESTRUCT",
+      "original_lines": [
+        9788,
+        9818
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "ebaf8695a331480f79df44476c43482638e9462dc52b824702ed6c2807f764ca",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserfnHkINLPCBTACTIVATESTRUCT.c(9806): error C2440: '=': cannot convert from 'int' to 'CBTACTIVATESTRUCT'"
+    },
+    {
+      "name": "NtUserECQueryInputLangChange",
+      "original_lines": [
+        9830,
+        9919
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "187b69215fafcfffe2d0730e2d7d17daf6a0ecb381f2fcbba6af8c6742007f85",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserECQueryInputLangChange.c(9838): error C2065: 'PKL': undeclared identifier"
+    },
+    {
+      "name": "NtUserGetMediaChangeEvents",
+      "original_lines": [
+        9922,
+        9990
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "f2ce5f909867dde7001207dd96853207979225811a660f518e9a519153561fd1",
+      "first_compile_error": "build\\t483-s6\\ntstubs-units\\NtUserGetMediaChangeEvents.c(9930): error C2065: 'PCONFIGURATION_INFORMATION': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnDWORD",
+      "original_lines": [
+        7971,
+        7985
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "2ac8cdb90c5b9feed0129910105e93b71fcd437fd2f9a414b668b3db956a480b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnDWORD.c(7973): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnOPTOUTLPDWORDOPTOUTLPDWORD",
+      "original_lines": [
+        7987,
+        8023
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "898bb64ab2bc5df3f6fd4d2f064709c2fc2aa15cb5a8f46f65ae68f51fbb7be8",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnOPTOUTLPDWORDOPTOUTLPDWORD.c(7997): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTNEXTMENU",
+      "original_lines": [
+        8025,
+        8059
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "7eecb8a81f68fafc0626b360be3f316db4cc87a1c0a659c99fb010595edd0f9b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTNEXTMENU.c(8035): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnDWORDOPTINLPMSG",
+      "original_lines": [
+        8061,
+        8095
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4ab212bf4bcaa4177c433541120be63f42f248454a42f118cf042b728bd21476",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnDWORDOPTINLPMSG.c(8071): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnCOPYGLOBALDATA",
+      "original_lines": [
+        8097,
+        8131
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "eedfae38790caea01eeb4a236310a83b4e1a8973a31ac6730f6b6285e54cbf82",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnCOPYGLOBALDATA.c(8106): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnCOPYDATA",
+      "original_lines": [
+        8133,
+        8173
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "e5e0ddb11b630139413d4ef9267e2d937391f5acec917a618c73ee998ea739e2",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnCOPYDATA.c(8143): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnSENTDDEMSG",
+      "original_lines": [
+        8175,
+        8218
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "39f1e437b3a5902ce5dbe3208948182c5def642e6a8709fc390a2c85128b6c28",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnSENTDDEMSG.c(8177): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnDDEINIT",
+      "original_lines": [
+        8220,
+        8301
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "0ddf8df60e7b662f92cd2b1bab6baa2a3e412d88b23bd98e23f7940ce0253702",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnDDEINIT.c(8231): error C2065: 'PDDEIMP': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINPAINTCLIPBRD",
+      "original_lines": [
+        8303,
+        8338
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "62cd86f1e55dbdd0521b363519ad27e929efb0f1a703d20c53e68c6a2ce5594a",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINPAINTCLIPBRD.c(8316): error C2440: '=': cannot convert from 'int' to 'PAINTSTRUCT'"
+    },
+    {
+      "name": "NtUserfnINSIZECLIPBRD",
+      "original_lines": [
+        8340,
+        8375
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "feb52998aaa803296e957ab5a33f8146605d024c157a6d2c6eec23e4c0496072",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINSIZECLIPBRD.c(8353): error C2440: '=': cannot convert from 'int' to 'RECT'"
+    },
+    {
+      "name": "NtUserfnINOUTDRAG",
+      "original_lines": [
+        8413,
+        8447
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "838e82f5828d5db107bd10bed2d3248d949a46618212db278728c5345822c0e9",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTDRAG.c(8423): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnGETTEXTLENGTHS",
+      "original_lines": [
+        8449,
+        8470
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "75117db3b2861252cb100e5a4f84c30a2097202db512c7b0cac6a6fefcdf5c8d",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnGETTEXTLENGTHS.c(8458): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINLPCREATESTRUCT",
+      "original_lines": [
+        8472,
+        8526
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "8a2e2bc5cf885d21fe900e077c1a86ebe911cb3cb84c28b5c31db2d3d5b583f3",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINLPCREATESTRUCT.c(8474): error C2065: 'CREATESTRUCTEX': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTLPSCROLLINFO",
+      "original_lines": [
+        8597,
+        8631
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "42ed96575a58a29e192b579626bf9b454e08662f389921fd90215ea3a8d688e5",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTLPSCROLLINFO.c(8607): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTLPPOINT5",
+      "original_lines": [
+        8633,
+        8667
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "e1828d2f3193f7f2516c2b48f2ba5b3d9772edbb6825ba290ecaa2453a7000b7",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTLPPOINT5.c(8643): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINSTRING",
+      "original_lines": [
+        8669,
+        8726
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "76ef9b6976152b1560cc4f3d979bcdfed3de2adf4f0d00c2372862525b3eb88c",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINSTRING.c(8679): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINSTRINGNULL",
+      "original_lines": [
+        8728,
+        8771
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "6b48eb8486a766e2309ca8f64934a22828f250560ab158120cd0a38bad52e668",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINSTRINGNULL.c(8738): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINDEVICECHANGE",
+      "original_lines": [
+        8773,
+        8811
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "f5d460e76b35bad740d4e3d7367323ad36ba5325c10a9b17f809ba0d976a2cb6",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINDEVICECHANGE.c(8784): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTNCCALCSIZE",
+      "original_lines": [
+        8814,
+        8868
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "fe05d9f75aa1e1304028d63d8188bc2d0d54a410ba632769eae2e52f567f2e0b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTNCCALCSIZE.c(8828): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTSTYLECHANGE",
+      "original_lines": [
+        8870,
+        8904
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "8b3c11ee06030d71ac128438b31252d053c4b2c461fe08e02feed6bb6ff159c8",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTSTYLECHANGE.c(8880): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTLPRECT",
+      "original_lines": [
+        8906,
+        8940
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "179bfd86851176d914367089bbce3646f1fd5423654adbc6f6d0ffd72d5bbafd",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTLPRECT.c(8916): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnOUTLPSCROLLINFO",
+      "original_lines": [
+        8942,
+        8974
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "9543b13aa1bc9b6c101a5043e37cb39d4f1de0effcab1c3ebe330eb57376d73b",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnOUTLPSCROLLINFO.c(8952): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnOUTLPRECT",
+      "original_lines": [
+        8976,
+        9008
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "346cb7319509db5c6306923a7877f3435e4421f15ba710bbffd1d7760ec22825",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnOUTLPRECT.c(8986): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINLPCOMPAREITEMSTRUCT",
+      "original_lines": [
+        9010,
+        9041
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "85a71ef7a40343777fd8cd2d204477e40c428f01d2274e8c6c1c4ad57c946a80",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINLPCOMPAREITEMSTRUCT.c(9020): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINLPDELETEITEMSTRUCT",
+      "original_lines": [
+        9043,
+        9074
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "1365c9b8007c6f9e17715c6be736cc0640133043932096bd0e0519af023dc7d5",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINLPDELETEITEMSTRUCT.c(9053): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINLPHLPSTRUCT",
+      "original_lines": [
+        9076,
+        9111
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "df38e2c532787561a40354d26aa08a76043df5d71e3fb434911f6bb999a7aa98",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINLPHLPSTRUCT.c(9078): error C2065: 'HLP': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINLPHELPINFOSTRUCT",
+      "original_lines": [
+        9113,
+        9148
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "ba6829205bb921c96b075503c63212506eceaa5ad75c7c902ef2aec3a82fad37",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINLPHELPINFOSTRUCT.c(9123): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINLPDRAWITEMSTRUCT",
+      "original_lines": [
+        9150,
+        9181
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "5f61014305ff4a88dff1c70c5c9bbefa02a26d7fc5c280aa0774783a4f775b8e",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINLPDRAWITEMSTRUCT.c(9160): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTLPMEASUREITEMSTRUCT",
+      "original_lines": [
+        9183,
+        9217
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "e893da488279c8c84a5a78db318a196cb91abda396b2b72cead825f8fd8e1c16",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTLPMEASUREITEMSTRUCT.c(9193): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnOUTSTRING",
+      "original_lines": [
+        9219,
+        9260
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "9dbb160c0ef37ff11f72de696e4dd71bb7a3005f1d910511a9cae32e3d5644ce",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnOUTSTRING.c(9229): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnOUTDWORDINDWORD",
+      "original_lines": [
+        9262,
+        9287
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "7146a17cabcf49ceee3595cf1d3d8add82b1d0aaf73e0d67af0fc80163e2b229",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnOUTDWORDINDWORD.c(9266): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINCNTOUTSTRING",
+      "original_lines": [
+        9289,
+        9334
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "aaafa65cda732fa61df24a1d8ee729aa35ce5ea9e96c338f6f78c2392bf57847",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINCNTOUTSTRING.c(9302): error C2440: '=': cannot convert from 'int' to 'LARGE_STRING'"
+    },
+    {
+      "name": "NtUserfnINCNTOUTSTRINGNULL",
+      "original_lines": [
+        9336,
+        9377
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "463587b841c7a3cac50e65da3a9750c8b0f27d300d74d9b5204b90eaf66197c9",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINCNTOUTSTRINGNULL.c(9346): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnPOUTLPINT",
+      "original_lines": [
+        9379,
+        9417
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "4a71dd822a23b79d5c85ee2410f1759d45a5e48fe50110cef589c4f6a77763db",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnPOUTLPINT.c(9388): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnPOPTINLPUINT",
+      "original_lines": [
+        9419,
+        9458
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "119af83d559cf11bd4e076280ae146253800e958054904781ef0e2e5a313e1ba",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnPOPTINLPUINT.c(9428): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINOUTLPWINDOWPOS",
+      "original_lines": [
+        9460,
+        9494
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "d469ac326a8e748ed6e7590d9f7d61d97da9f56ec4c4da7e7bbc308ea177356d",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINOUTLPWINDOWPOS.c(9470): error C2065: 'PTHREADINFO': undeclared identifier"
+    },
+    {
+      "name": "NtUserfnINLPWINDOWPOS",
+      "original_lines": [
+        9496,
+        9527
+      ],
+      "compile_exit": 2,
+      "compile_log_sha256": "bea9101cb4b69d9a8ffa799b83c6196d0a0018e16cf1224bb11b1f501e53c171",
+      "first_compile_error": "build\\t483-s6\\ntstubs-macros\\NtUserfnINLPWINDOWPOS.c(9506): error C2065: 'PTHREADINFO': undeclared identifier"
+    }
+  ],
+  "macro_checks": [
+    {
+      "name": "original-header",
+      "compile_exit": 2,
+      "link_exit": 1181
+    },
+    {
+      "name": "original-recv-macros",
+      "compile_exit": 0,
+      "link_exit": 1120
+    },
+    {
+      "name": "original-callproc",
+      "compile_exit": 0,
+      "link_exit": 0
+    }
+  ],
+  "combined_link": {
+    "unresolved": 111,
+    "exit": 1120,
+    "function_level_link_exit": 1120,
+    "function_level_explicit_ref_exit": 1120
+  },
+  "boundary": "Original validate.c:537 EnterCrit/LeaveCrit own kernel critical region, gpresUser executive resource and W32GetCurrentThread. Restoring the active receive macros fails actual link on ValidateHwnd/EnterCrit/LeaveCrit. precomp.h restoration fails at missing ntos.h. No new kernel provider or shim added.",
+  "limitations": [
+    "Function candidates use retained product binding header; this tests literal body recovery in actual selected context, not independent rehosting of Win32k.",
+    "Header candidate link1181 is missing object after compile failure, not an independent link result.",
+    "Full P2 cached build,dual publication,focused and Full runtime verification passed;unused macro restoration has no new runtime capability claim."
+  ],
+  "procedure": {
+    "compile_command_file": "build\\t483-s6\\ntstubs-units\\combined-gy.cmd",
+    "link_input_sha256": "6f9613abfb42a64e7d92c52806e00ca4b09e5bbf1a58a4e6cc4e13e0b9efffb8",
+    "generators": [
+      "build\\t483-s6\\ntstubs-units\\prepare.py",
+      "build/t483-s6/ntstubs-macros/prepare.py",
+      "build\\t483-s6\\ntstubs-units\\prepare-individual-link.py",
+      "build\\t483-s6\\ntstubs-units\\prepare-macro-check.py"
+    ],
+    "processes": [
+      {
+        "pid": 31660,
+        "result": "restricted launch vanished without result; elevated process lookup confirmed absent"
+      },
+      {
+        "pid": 22664,
+        "result": "explicit OPT:REF link exit1120"
+      },
+      {
+        "pid": 22536,
+        "result": "91 individual links complete"
+      },
+      {
+        "pid": 38788,
+        "result": "3 macro/header variants complete"
+      }
+    ]
+  },
+  "delivery_receipt": "batch-p2-checkpoint.json"
+}
