@@ -1,0 +1,164 @@
+{
+  "packet": "M0 T483 S7 P12",
+  "prior_delivery": "d1af23a44",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 1
+      },
+      "source_sha256": "e2854333cd759430c3104208152a362d79f824d3fb2157b48a5a652cbef38427",
+      "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+      "decision": "Original is_bad_vid_mode masks bit 7 but V7 validation does not; BL E7 rejects supported mode 67 with memory preservation. Original EGA dispatch returns after V7 setup, bypassing the usual completion that refreshes mouse coordinate extents. Keep the mask and the call to the original mouse provider.",
+      "evidence": "../t483-remaining-reaudit/r0943-r0946-v7-video-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "a1f23673515b408894109ed5367821bb50f77bc156a643cea997798da9865aa7",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "decision": "Keep the QuickEdit mode normalization. NTCON forwards native input modes as requested; original mouse activation sets ENABLE_MOUSE_INPUT but does not clear native selection interception. Original conditional activation and worker stream ownership remain.",
+      "evidence": "../t483-remaining-reaudit/r1146-r1150-nt-hosts-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "before": {
+        "blocks": 11,
+        "added": 19,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 11,
+        "added": 19,
+        "deleted": 6
+      },
+      "source_sha256": "2f4fb290be2e0e5967aa370189bf77dfe74d60a07698da391db7ecae7265b321",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "decision": "Keep WOW page-domain publication and descriptor activation, VM command callback bridge, software V86 address mode and real DLL unload. The native loader requires an explicit WOW dispatch cast to MYFARPROC; two VDD locals instead are FARPROC. This batch compiled current production x86 source and confirmed both original casts produce C2440 in the same control translation unit.",
+      "evidence": "../t483-remaining-reaudit/r1005-r1014-nt-bop-review.json",
+      "x86_control": {
+        "current_exit": 0,
+        "original_casts_exit": 2,
+        "diagnostics": [
+          "(846): error C2440: '=': cannot convert from 'MYFARPROC' to 'FARPROC'",
+          "(865): error C2440: '=': cannot convert from 'MYFARPROC' to 'FARPROC'"
+        ],
+        "command_source": "../t483-remaining-reaudit/r1005-r1014-nt-bop-review.json",
+        "local_evidence_directory": "build/t483-s7-p12"
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "before": {
+        "blocks": 5,
+        "added": 0,
+        "deleted": 12
+      },
+      "after": {
+        "blocks": 5,
+        "added": 0,
+        "deleted": 12
+      },
+      "source_sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+      "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+      "decision": "Keep narrowly omitted SDK type declarations and three import decorators. Whole-original compile in actual WOW contexts found duplicate KEY_SET_INFORMATION_CLASS and KEY_VALUE_ENTRY and conflicting imports. Registry function declarations and remaining structures stay original.",
+      "evidence": "../t483-remaining-reaudit/batch-p212-checkpoint.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "source_sha256": "ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "decision": "Keep original string-conversion bodies. Local header supplies the types and allocator aliases required for standalone compilation; existing codepage provider uses the native keyboard locale. Original macro expects an NT4 USER private client-view field from the native TEB.",
+      "evidence": "../t483-remaining-reaudit/p249-chartran-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "before": {
+        "blocks": 5,
+        "added": 1,
+        "deleted": 388
+      },
+      "after": {
+        "blocks": 5,
+        "added": 1,
+        "deleted": 388
+      },
+      "source_sha256": "c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "decision": "Keep original implemented helpers and one explicit compilation-environment include. Restoring the four public USER entrypoints in this translation unit conflicts with the imported declarations and changes the selected provider. Preserve existing native ownership.",
+      "evidence": "../t483-remaining-reaudit/p250-draw-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.h",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "870f8b15e374da3c6c752982e15f881ddc60a29c93b832bbfd100766c96841b7",
+      "original_sha256": "1f18e9770131f758947986de78dcb6c974730bcbaad3137e3c69a615f0f79324",
+      "decision": "Keep TLS declaration for fWhoCalled. Native hook snapshots it before task admission and restores it on return; two native threads can otherwise save and restore a stale global DDE conversion mode, which changes copied versus borrowed ownership. This is source ordering evidence.",
+      "evidence": "../t483-remaining-reaudit/r1895-wumsg-header-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "before": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 4
+      },
+      "after": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 4
+      },
+      "source_sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "decision": "Keep three bounded host-address changes. Effective address is a guest linear value. SAS word lookup consumes that value, while table and stream-buffer consumers dereference host pointers into the SAS allocation. Original identity-mapping assumptions do not hold with selected backing.",
+      "evidence": "../t483-remaining-reaudit/keybd-io-c-file-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 101,
+    "remaining": 112,
+    "nonzero_files": 237,
+    "non_error_points": 2027,
+    "non_error_lines": 28431,
+    "source_reduction_s7": {
+      "points": 21,
+      "lines": 547
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. All eight production files retain their exact prior bytes. A production x86 translation-unit comparison covers the two newly qualified original VDD casts. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}

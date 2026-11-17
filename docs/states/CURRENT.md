@@ -118,7 +118,13 @@ A virtual.c blank-line experiment was reverted because it split a filtered
 difference point. The reviewed residuals remain in the pending decision list.
 [P11 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p11-checkpoint.json).
 
-S7 progress is 93 reviewed and 120 remaining. Source restorations reduce
+S7 P12 completes eight file reviews with production source unchanged.
+The actual x86 translation unit passes, and restoring the two original
+VDD registration casts gives C2440 at both original logical lines.
+Both evidenced residuals are recorded for owner decision.
+[P12 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p12-checkpoint.json).
+
+S7 progress is 101 reviewed and 112 remaining. Source restorations reduce
 21 points and 547 changed lines in S7. The current census is 2,027 non-error
 points and 28,431 changed lines across 237 mirrors with filtered differences.
 

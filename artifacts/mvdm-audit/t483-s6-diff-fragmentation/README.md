@@ -336,3 +336,7 @@ formatting restorations. The current census is 2,027 non-error points and
 [S7 P11 receipt](s7-p11-checkpoint.json) records six reviewed files.
 The production files retain their prior bytes and the census remains
 2,027 non-error points and 28,431 changed lines.
+
+[S7 P12 receipt](s7-p12-checkpoint.json) records eight reviewed files and
+two VDD cast counterexamples from actual x86 compilation. Production
+source remains byte-identical to P11 and the filtered census is unchanged.
