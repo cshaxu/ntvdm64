@@ -1,0 +1,96 @@
+{
+  "packet": "M0 T483 S6 P22",
+  "status": "Cached build,targeted tests,publication and governance passed;Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/compat/README.md",
+        "sha256": "1c52b3043866fa7bcae3d533dd95d20699697042bc930f844302a86810325c63"
+      },
+      {
+        "path": "src/non-mvdm/README.md",
+        "sha256": "a22a7f5e92716fd63a10c316141d427a3561e3b8841520fe25d4e56bd603dc6e"
+      },
+      {
+        "path": "test/observation/verify-native-input-services.ps1",
+        "sha256": "a16f6bedaa22068ac510e3765d12511acc148221ad266aa8198517124ab689ee"
+      },
+      {
+        "path": "test/observation/verify-wow-input-lifetime.ps1",
+        "sha256": "4a1503183c2f05a985cd95d6e13e400d5e2c7c0eb13351dad0e94de7e59b580e"
+      },
+      {
+        "path": "test/observation/verify-wow-recovered-owner-bodies.ps1",
+        "sha256": "260c563eb73853d0ce5cbf14a7b800c85c507ce6932c2372c7c948107d186fdf"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "5e7aaa10a81025762f1f961af283685a31c0f842f19c3da7acf3bafffed5fadd"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "e3aacaec3513d8991594e42d9d1f4fa819df1487f9c1e4c5756fb4c19f27298a"
+      },
+      {
+        "path": "src/compat/wow_input_membership.c",
+        "sha256": "fc9f4c0981afdda83c7d7872c5b4e041be7d2b36f96a5f1560728c7fcfad3bee"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/kernel/input.c"
+    ],
+    "source_files": 8
+  },
+  "publication": {
+    "status": "published",
+    "package": "7648a5f1-7f8f-48f9-8a49-1155818b8215",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "passed",
+    "original-bodies": "passed",
+    "native-input": "passed",
+    "input-lifetime": "passed",
+    "formal-graph": "passed",
+    "lifecycle": "passed",
+    "stage": "passed",
+    "publish": "passed",
+    "pipeline": "passed",
+    "pipeline-supervisor": "passed"
+  },
+  "full": "Not run: owner explicitly approved related targeted verification only",
+  "global_counts": {
+    "files": 1060,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 252,
+    "blocks": 2117,
+    "lines": 37757,
+    "reviewed_live_files": 30,
+    "remaining_files": 222,
+    "retired_reviewed_files": 3,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 176,
+    "owner_retired_lines": 15572,
+    "total_census_reduction_blocks": 216,
+    "total_census_reduction_lines": 16766
+  },
+  "limits": [
+    "Owner-approved extraction, not original restoration",
+    "Other mirrors and original guest unchanged",
+    "Original Recalc2 explicit current-thread parameter retained",
+    "Native input fixtures use owned private desktops; no Computer Use",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

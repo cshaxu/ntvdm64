@@ -236,3 +236,11 @@ retires client/wow.c:21 non-error blocks/832 lines. Cached full,publish11x2,focu
 [P21 receipt](batch-p21-checkpoint.json) and [verification evidence](p21-verification-evidence.zip).
 Current census:1061 files,253 nonzero,2142 blocks/43260 lines.
 P20 usage-ratio reports remain the immutable pre-extraction snapshot;client/wow.c is now retired.
+
+[P22 owner-approved input membership extraction](input-compat-extraction.json)
+retires kernel/input.c:25 non-error blocks/5503 lines. Cached build,targeted input/lifecycle verification and publish11x2 passed;Git accompanies receipt.
+Full is explicitly not required for this batch.
+
+[P22 receipt](batch-p22-checkpoint.json) and [verification evidence](p22-verification-evidence.zip).
+Current census:1060 files,252 nonzero,2117 blocks/37757 lines.
+The P20 ratio snapshot also predates the now-retired kernel/input.c.

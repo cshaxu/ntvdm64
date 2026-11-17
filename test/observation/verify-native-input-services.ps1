@@ -9,7 +9,7 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
 $null=New-Item -ItemType Directory $root
 $driver=(Resolve-Path $CompilerDriver).Path
-$originalObject=(Resolve-Path (Join-Path $ProviderBuildRoot 'obj/opennt-user/input.obj')).Path
+$originalObject=(Resolve-Path (Join-Path $ProviderBuildRoot 'obj/compat/wow-input-membership.obj')).Path
 function Owned($name,$exe,$line,$seconds){
  $p=Start-Process $exe -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$exe;command=$line;timeoutSeconds=$seconds}|ConvertTo-Json|Set-Content "$root/$name.process.json"
@@ -19,7 +19,7 @@ function Owned($name,$exe,$line,$seconds){
  }finally{$p.Dispose()}
 }
 try{
- $original="$repo/src/non-mvdm/windows/core/ntuser/kernel/input.c"
+ $original="$repo/src/compat/wow_input_membership.c"
  $sources=@('wow_native_input_group_fixture','wow_native_input_focus_fixture','wow_input_membership_fixture')
  $inputs=@($PSCommandPath,$driver,$originalObject,$original,"$repo/src/wow32-dll/include/wow_input_group_bindings.h","$repo/src/wow32-dll/include/wow_task_order_bindings.h")
  $inputs+="$repo/test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h"

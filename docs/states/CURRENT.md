@@ -33,12 +33,12 @@ and retiring that mirror file and its active difference entries (P19).
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-33/255 initial difference files reviewed;222 remain. P19 and P21 retire two already
-reviewed files by owner approval;live population is31 reviewed/253,222 remain. Twenty-five changed files
-verified across P2-P18;eight reviewed unchanged. Current census:1061 files
-(1052 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
-normalized/error-masked differences,and253 nonzero files.
-Current delivered total2142 blocks/43260 lines. P19 retires130 blocks/9237
+33/255 initial difference files reviewed;222 remain. P19,P21 and P22 retire three already
+reviewed files by owner approval;live population is30 reviewed/252,222 remain. Twenty-five changed files
+verified across P2-P18;eight reviewed unchanged. Current census:1060 files
+(1051 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
+normalized/error-masked differences,and252 nonzero files.
+Current delivered total2117 blocks/37757 lines. P19 retires130 blocks/9237
 lines;this is mirror reclassification,not original restoration. Prior delivered
 reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correction remains separate.
 
@@ -68,7 +68,7 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/userk.h |27->27|117->115|P12 two added comments removed;Full20 passed|
 | wow32/wdde.c |26->26|143->143|P12 reviewed unchanged;residual decisions pending|
 | kernel/handtabl.c |26->24|1481->1381|P12 original declarations and KernelPtoH restored;Full20 passed|
-| kernel/input.c |26->25|5527->5503|P13 original declarations restored;Full20 and input services/lifetime passed|
+| kernel/input.c |25->retired|5503->retired|P22 compat extraction;targeted input and lifecycle passed|
 | sevid001.c |25->25|50->50|Unchanged;25 evidenced decisions;prior-source identity checked|
 | wow32/wkman.c |25->25|46->45|P14 extra blank removed;Full20 passed|
 | command/cmdexec.c |24->17|123->82|P14 declaration/format restored;Full20 passed|
@@ -79,13 +79,13 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | kernel/cleanup.c |21->20|66->44|P18 original ClientDied restored;focused37,lifecycle and Full20 passed|
 
 
-The canonical pending backlog has1631 rows after retiring six kernel/ntstubs and four client/wow pending records,
+The canonical pending backlog has1617 rows after retiring kernel/ntstubs,client/wow and kernel/input records,
 plus2 non-R items. Extraction removes active mirror entries;it is not original-code restoration.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
 boundaries remain pending. Historical R identifiers are not current diff blocks.
-P13 original input declarations are restored and verified. Seven scattered
-harmless macros would increase file blocks26->27;owner approval remains pending.
+P13 original input declarations are restored and verified. The later P22 owner-approved extraction retires the input mirror and its
+previous residual macro decisions;history remains in the extraction record.
 No residual omission is silently approved. Owner superseding direction:after P18,
 stop automatic progression and hand over every remaining nonzero file ordered by
 non-error blocks descending,path ascending for ties. Await owner file selection.
@@ -93,12 +93,13 @@ non-error blocks descending,path ascending for ties. Await owner file selection.
 
 ## Current Technical Baseline
 
-P21 cached full,WOW focused38,lifecycle and Full20 passed.
-Package fe2d496b-78aa-47dd-a091-e665beedce15 contains11 images,published and hash-verified
-to assets/release and O:/winnt/system32. Full includes real DOS4GW/NESticle.
-The owner-approved dialog lookup extraction changes no other mirror or guest.
-[P21 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p21-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p21-verification-evidence.zip).
+P22 cached build and owner-selected targeted verification passed:original input
+bodies,native input services,input lifetime,formal graph and actual WOW lifecycle.
+Full was not run,per explicit owner approval. Package 7648a5f1-7f8f-48f9-8a49-1155818b8215
+contains11 images,published and hash-verified to assets/release and O:/winnt/system32.
+Other mirrors,guest and winnt.zip are unchanged.
+[P22 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p22-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p22-verification-evidence.zip).
 
 ## Remaining Scope
 
@@ -139,3 +140,16 @@ P21 retires21 blocks/832 lines;combined P19/P21 retire151 blocks/10069 lines.
 Together with original restoration reductions40 blocks/1194 lines,the census
 is down191 blocks/11263 lines. Main register2703 rows;pending1631 rows.
 No next-file admission.
+
+## P22 Delivery
+
+Owner approves extraction of kernel/input.c AddAttachment/Recalc2 into compat.
+Preserve both algorithms and the existing explicit current-thread argument.
+Only this file is admitted. Owner replaces Full with related targeted tests:
+cached build,input membership/native focus/input lifetime,WOW lifecycle and
+formal graph verification,then publish11x2,commit,push. No Full claim.
+
+P22 retires25 blocks/5503 lines;combined extractions retire176 blocks/15572 lines.
+With original restoration40 blocks/1194 lines,the census is down216 blocks/16766 lines.
+Main register2687 rows;pending1617 rows. All targeted checks and publish11x2
+passed;governance and Git accompany receipt. No next-file admission.

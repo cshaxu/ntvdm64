@@ -653,9 +653,9 @@ $taskOrderObject = 'obj/opennt-user/taskman.obj'
 $objects.Add($taskOrderObject)
 $ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/taskman.c')))
 $classClientObject = 'obj/opennt-user/class-client.obj'
-$inputGroupObject = 'obj/opennt-user/input.obj'
+$inputGroupObject = 'obj/compat/wow-input-membership.obj'
 $objects.Add($inputGroupObject)
-$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/input.c')))
+$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_input_membership.c')))
 $taskInitObject = 'obj/opennt-user/queue.obj'
 $profileObject = 'obj/opennt-user/profile.obj'
 $objects.Add($profileObject)

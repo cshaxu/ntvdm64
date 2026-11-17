@@ -1,5 +1,6 @@
 param(
     [string]$OriginalRoot = 'O:/repos.external/OpenNT',
+    [switch]$InputOnly,
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 )
 $ErrorActionPreference = 'Stop'
@@ -21,22 +22,20 @@ $classSource = Read-Pinned 'class.c' '82528443BC5F6C227E0E14FE8A9DBC928BA735F98C
 $checks = @(
     @{ File='input.c'; Name='AddAttachment'; Source=$inputSource },
     @{ File='input.c'; Name='Recalc2'; Source=$inputSource },
-    @{ File='input.c'; Name='RecalcThreadAttachment'; Source=$inputSource },
     @{ File='class.c'; Name='_RegisterClassEx'; Source=$classSource },
     @{ File='class.c'; Name='_UnregisterClass'; Source=$classSource }
 )
+if ($InputOnly) { $checks = @($checks | Where-Object { $_.File -eq 'input.c' }) }
 foreach ($check in $checks) {
-    $path = Join-Path $RepositoryRoot ('src/non-mvdm/windows/core/ntuser/kernel/' + $check.File)
+    $path = if ($check.File -eq 'input.c') {
+        Join-Path $RepositoryRoot 'src/compat/wow_input_membership.c'
+    } else { Join-Path $RepositoryRoot ('src/non-mvdm/windows/core/ntuser/kernel/' + $check.File) }
     $mirror = [IO.File]::ReadAllText($path)
-    if ($mirror -match '(?<!\r)\n') { throw "Non-original LF in mirror: $path" }
+    if ($check.File -ne 'input.c' -and $mirror -match '(?<!\r)\n') { throw "Non-original LF in mirror: $path" }
     $actual = Body ($mirror.Replace("`r`n", "`n")) $check.Name
     switch ($check.Name) {
         'Recalc2' {
             $actual = $actual.Replace("PQ pqAttach,`n    PTHREADINFO ptiCurrent)", 'PQ pqAttach)')
-        }
-        'RecalcThreadAttachment' {
-            $actual = $actual.Replace('RecalcThreadAttachment(PTHREADINFO ptiCurrent)', 'RecalcThreadAttachment()')
-            $actual = $actual.Replace('Recalc2(pti->pqAttach, ptiCurrent);', 'Recalc2(pti->pqAttach);')
         }
         '_RegisterClassEx' {
             $actual = $actual.Replace("LPDWORD pdwWOW,`n    wow_class_register_context *context )", 'LPDWORD pdwWOW )')
@@ -51,6 +50,7 @@ foreach ($check in $checks) {
     }
     Write-Output "Original owner body verified: $($check.Name)"
 }
+if ($InputOnly) { return }
 $probePath = Join-Path $OriginalRoot 'base/ntos/ex/probe.c'
 if ((Get-FileHash -LiteralPath $probePath -Algorithm SHA256).Hash -ne
     '0D1CAE414B609C624E6BDF04FA28EBD84FF38DBB9687A63D8BC9E840C2F2372B') {
@@ -66,7 +66,7 @@ if (!$originalProbe.Contains($marker) -or !$mirrorProbe.Contains($marker) -or
     throw 'Unregistered original-owner body change: ProbeForRead'
 }
 Write-Output 'Original owner body verified: ProbeForRead'
-Write-Output 'Six owner bodies match pinned OpenNT after registered boundary adaptations.'
+Write-Output 'Five owner bodies match pinned OpenNT after registered boundary adaptations.'
 
 $userPath = Join-Path $OriginalRoot 'windows/core/ntuser/inc/user.h'
 if ((Get-FileHash -LiteralPath $userPath -Algorithm SHA256).Hash -ne

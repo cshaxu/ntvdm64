@@ -212,3 +212,8 @@ Actual WOW lifetime and Full guest tests remain separate delivery evidence.
 revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. Owner-approved P21
 extraction preserves the original PWND child-list algorithm and ABI. Product
 and dialog-navigation fixture link this same implementation.
+
+`wow_input_membership.c` retains OpenNT kernel/input.c AddAttachment/Recalc2,
+revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, by owner-approved P22
+extraction. The original algorithms and existing explicit current-thread ABI
+remain; modern native queue attachment stays with the existing caller.

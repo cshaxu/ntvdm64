@@ -81,13 +81,16 @@ $expectedUser = @(
     'control-text-client', 'control-text-rtl', 'control-text-extent',
     'control-client-draw', 'control-client-mngrayc', 'button-client',
     'button-blit', 'handtabl', 'cleanup', 'probe',
-    'class-remove', 'class-register', 'taskman', 'input', 'profile', 'queue',
+    'class-remove', 'class-register', 'taskman', 'profile', 'queue',
     'exitwin', 'class-client', 'class'
 )
 $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
     ForEach-Object { $_.Groups[1].Value })
 if (@(Compare-Object $expectedUser $actualUser).Count) {
     throw 'The original OpenNT USER-owner object set differs from the admitted formal graph.'
+}
+if ($link -notmatch '\bobj/compat/wow-input-membership\.obj\b') {
+    throw 'The compat input membership must be linked into the formal graph.'
 }
 if ($link -notmatch '\bobj/compat/wow-dialog-lookup\.obj\b') {
     throw 'The compat dialog lookup must be linked into the formal graph.'

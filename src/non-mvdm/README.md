@@ -2665,3 +2665,7 @@ See [P214 evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p214
 T483 S6 P21 supersedes the client/wow.c subset admission above: owner-approved
 extraction retains _GetDlgItem in src/compat/wow_dialog_lookup.c and retires
 this mirror. Historical provenance and review records remain evidence only.
+
+T483 S6 P22 supersedes the kernel/input.c subset admission: AddAttachment and
+Recalc2 now reside in src/compat/wow_input_membership.c. Historical mirror
+records remain provenance only; no other kernel input services are admitted.

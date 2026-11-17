@@ -372,3 +372,11 @@ retaining its sole selected _GetDlgItem function (original lines 251-265) in
 src/compat/wow_dialog_lookup.c with provenance. Preserve its algorithm, ABI
 and callers. This file-specific reclassification does not restore omitted
 USER services or establish equivalence of all modern system metrics.
+
+### T483 S6 P22 owner-approved input membership extraction
+
+The owner approves retiring non-mvdm/windows/core/ntuser/kernel/input.c,
+retaining AddAttachment and Recalc2 in src/compat/wow_input_membership.c with
+provenance. Preserve both original algorithms and the existing explicit
+current-thread argument. This scoped extraction does not admit the omitted
+NT4 kernel input queues or change modern USER32 input ownership.
