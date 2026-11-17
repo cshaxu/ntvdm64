@@ -1,0 +1,379 @@
+{
+  "packet": "M0 T483 S7 P4",
+  "prior_delivery": "0e79d6711cbb7951ec4c89f7d0eeca3b05339d39",
+  "publication": {
+    "status": "published",
+    "package": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "verification": {
+    "cached": "x86 and x64 passed",
+    "targeted": "NTVDM export ordinals, actual WOW Minesweeper window, DOS repeated MEM and guest return code passed",
+    "runtime_manifest": [
+      {
+        "Name": "VCDEX.DLL",
+        "RelativePath": "system32\\VCDEX.DLL",
+        "Sha256": "1D1CC0FA9CA522B83B823DF65F9C0307664AC0832A20F0A407393D7B73F409A1",
+        "Machine": 332,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "41DD3079BC3DC6940B8D50246696CA2BC323383AF8199145CF940C9DC2D46EA0"
+      },
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "292D947110404234F7FB796F3293F57040B948E9F678878CAD7150CF80FD4CC3",
+        "Machine": 34404,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "89A469CAA0A15B2853ABD189FFC40886EA9293E7077BFFCDAA66680619FA87B8"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "961A2EF49F8F58B54936B3D2F6ADEB8D88AEC1FCEB9369D25EDEA944BB8130FA",
+        "Machine": 34404,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "C0294E4AFAFB1CFD80DF156E1EBE02F6FC28B51FC3CDC73E71D4861B14DD9A91"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "9FAAD7E71BF749CA2A5963D86B329BAE2EB4028D3B2E605935EE67D2CA8AA312",
+        "Machine": 34404,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "B815809F261E4DE5D3287C8A913EDD7035FA38A3151240FE6A3DDFB9ADA446AF"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "CBA3A22FE33C8B597D07A73F9C5095EFB71524D95C36F22DF111945DFE0595F9",
+        "Machine": 332,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "3DA9580347968A943F9C7BD47EEBA64FA498961FE0AA5DE82498738A296ACA3B"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "B7DA7B01554991C8B585A5BBC4EA60564859DF5EA70BBA30B57F43119BFED462",
+        "Machine": 34404,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "A21D8D3558ED46A7A66D23E82C30448D1538D0AABA5831516C7836F80AE28EE8"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "103BFCAC583C3666C7BE2DEE5A5AA572EE3079D99FE999138C7BE13812293993",
+        "Machine": 34404,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "A7A614692C4A41B08C0F3BC3776A5BF337942FA5A5D48372DA90E9F49B5F5B01"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "777BA1B52CC9254EED4EF505F817063108514EF8F65096EF7B255CBE1C3D9517",
+        "Machine": 332,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "340EC64B8EDE1B9E1470A2F3279D1038E1624A995F972E779E329E074EC37CC7"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "915AD8D80799E0FDD3DD560BD1B3DB7641C032855925601E110DA30B3F11CA9E",
+        "Machine": 332,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "1A6FC93CC5DD2AA796B7CD361D0C57B703AA44CE6AED8C8B21923C4FA7132326"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "225EBFF4CBC10A9E2B4F3CA5EAC800C6240F72B774A84328851810B9338A71C9",
+        "Machine": 332,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "6A09341739E4FE580D7A0E99D7D183E61DF25C3AD416E9CED6758CA29301FE37"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "3AB1158673D9A788BA1C73D121995C673125937DC209D5C22096988AADD0C8E9",
+        "Machine": 34404,
+        "PackageId": "25f82d1b-6746-4022-b5e9-ec3f0f319fdc",
+        "InputSha256": "FDFB120FA5A42D328E145FAFE36F15E08D8DC0E2614BC69230F21A2D20EACAE7"
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "source_sha256": "71d576e975b49379a2cad1cfc0f6a82579a2e81b4e096222363a70147cfb1535",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "before": {
+        "blocks": 14,
+        "added": 36,
+        "deleted": 12
+      },
+      "after": {
+        "blocks": 14,
+        "added": 36,
+        "deleted": 12
+      },
+      "evidence": "../t483-remaining-reaudit/r0970-r0984-cfpu-review.json",
+      "decision": "Six layout guards are local and count. Six isolated original structure variants misread known bytes. CRT status and exception-mask controls independently support the two remaining macro adaptations."
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "source_sha256": "db757608e8e96893436dafa677333cafc639442c6e65291170eb4083f1e856ba",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "before": {
+        "blocks": 19,
+        "added": 0,
+        "deleted": 952
+      },
+      "after": {
+        "blocks": 19,
+        "added": 0,
+        "deleted": 688
+      },
+      "evidence": "../t483-remaining-reaudit/batch-p209-checkpoint.json",
+      "decision": "Restore complete original delay/system-environment and event-pair/mutant/semaphore declaration groups without growing the number of blocks. The event, timer, profiling, SDK duplicate and shared-page type controls still require their documented boundaries."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "source_sha256": "66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f",
+      "original_sha256": "aa692f4f8680b717ab51489055c0c7578d0498f8af0702d17c4a0c56b165a88e",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "evidence": "../t483-remaining-reaudit/r0357-debug-event-interface.json",
+      "decision": "Keep one declaration for newly pending debug exception state. Original sticky DR6 remains guest-visible and cannot identify fresh delivery."
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "source_sha256": "90414e65ce628b379ac9bbf8051307839eaae61f802924dcac4b47b9d70b0aeb",
+      "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+      "before": {
+        "blocks": 11,
+        "added": 35,
+        "deleted": 35
+      },
+      "after": {
+        "blocks": 11,
+        "added": 35,
+        "deleted": 35
+      },
+      "evidence": "../t483-remaining-reaudit/r0236-r0272-softpc-abi-review.json",
+      "decision": "Thirty-five explicit cdecl declarations agree with the linked original providers. The actual /Gz caller objects with the original unannotated header request different symbols. Two thread declarations are already original."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "source_sha256": "10e0a5f9639787bdbc7f7937c42b51d09056f1b6fabb13a895b90a3814365e89",
+      "original_sha256": "c4dfbf2bb2d6e8d79e9fd607f6ab50b149a5edb2768b25d2475002e2e9940716",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "evidence": "../t483-remaining-reaudit/gvi-h-file-review.json",
+      "decision": "Keep one address mapping for the selected chain-2 storage. Original compact lookup failed 12 of 16 selected backing offsets."
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "source_sha256": "f20548935ced3d6ace5ad0885dfe890cddd2f193f911e3afc2db5e813e580a61",
+      "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+      "before": {
+        "blocks": 6,
+        "added": 11,
+        "deleted": 4
+      },
+      "after": {
+        "blocks": 6,
+        "added": 11,
+        "deleted": 4
+      },
+      "evidence": "../t483-remaining-reaudit/batch-p136-checkpoint.json",
+      "decision": "Retain native GDI mapping and retirement and per-call message conversion ownership. Prior negative controls separate alternate handle layout, stale alias lifetime, nested COPYDATA and failed DDE post cleanup."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "source_sha256": "a54e261d0e1649c48e5219b8a63b76effd024627ac769d38c59801f5732b881a",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "before": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "evidence": "../t483-remaining-reaudit/r0832-idetect-review.json",
+      "decision": "Original relative include actually fails C1083. No live declaration need remains after MONITOR exclusions, and the historical omission control matches relevant original-path-independent object sections."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "source_sha256": "f1e5de5a5b037b67da9b8b8a6e405f2549dd49f0f5491a912c3630328f3a536c",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+      "before": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 2
+      },
+      "evidence": "../t483-remaining-reaudit/r0985-r0993-host-cpu-review.json",
+      "decision": "Local endian guard counts. Original port byte order failed 65280 of 65536 values. The original host_simulate macro collides with the selected function definition. Other original selected declaration groups are already restored."
+    }
+  ],
+  "line_proof": {
+    "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+    "original": "O:\\repos.external\\OpenNT\\public\\sdk\\inc\\ntexapi.h",
+    "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+    "before": {
+      "blocks": 19,
+      "added": 0,
+      "deleted": 952
+    },
+    "after": {
+      "blocks": 19,
+      "added": 0,
+      "deleted": 688
+    },
+    "sha256": "db757608e8e96893436dafa677333cafc639442c6e65291170eb4083f1e856ba",
+    "excluded": [
+      {
+        "original": [
+          31,
+          31
+        ],
+        "current": [
+          34,
+          35
+        ]
+      },
+      {
+        "original": [
+          1064,
+          1244
+        ],
+        "current": [
+          540,
+          542
+        ]
+      },
+      {
+        "original": [
+          1440,
+          1440
+        ],
+        "current": [
+          712,
+          714
+        ]
+      },
+      {
+        "original": [
+          1460,
+          1460
+        ],
+        "current": [
+          719,
+          721
+        ]
+      },
+      {
+        "original": [
+          1468,
+          1470
+        ],
+        "current": [
+          731,
+          733
+        ]
+      },
+      {
+        "original": [
+          1481,
+          1481
+        ],
+        "current": [
+          746,
+          748
+        ]
+      },
+      {
+        "original": [
+          1574,
+          1584
+        ],
+        "current": [
+          753,
+          755
+        ]
+      },
+      {
+        "original": [
+          1603,
+          1629
+        ],
+        "current": [
+          768,
+          770
+        ]
+      },
+      {
+        "original": [
+          1843,
+          1843
+        ],
+        "current": [
+          985,
+          987
+        ]
+      }
+    ],
+    "original_restored_ranges": [
+      [
+        29,
+        29
+      ],
+      [
+        33,
+        68
+      ],
+      [
+        163,
+        389
+      ]
+    ]
+  },
+  "prior_control_limits": "Compile failures establish specific type and linkage collisions. They do not prove every line in the remaining omitted runs individually necessary.",
+  "counts": {
+    "files_reviewed_in_s7": 32,
+    "remaining_files": 181,
+    "non_error_points": 2041,
+    "non_error_lines": 28487,
+    "source_reduction_s7": {
+      "points": 7,
+      "lines": 491
+    }
+  }
+}

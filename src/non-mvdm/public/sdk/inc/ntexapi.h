@@ -28,11 +28,277 @@ Revision History:
 #if _MSC_VER > 1000
 #pragma once
 #endif
+
 #line 30
 #ifdef __cplusplus
 #line 31
 #error Excluded unsupported C++ NT executive declaration context
 #endif
+#line 33
+
+
+//
+// Delay thread execution.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtDelayExecution (
+    IN BOOLEAN Alertable,
+    IN PLARGE_INTEGER DelayInterval
+    );
+
+//
+// Query and set system environment variables.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtQuerySystemEnvironmentValue (
+    IN PUNICODE_STRING VariableName,
+    OUT PWSTR VariableValue,
+    IN USHORT ValueLength,
+    OUT PUSHORT ReturnLength OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetSystemEnvironmentValue (
+    IN PUNICODE_STRING VariableName,
+    IN PUNICODE_STRING VariableValue
+    );
+
+#line 163
+
+//
+// Event Specific Access Rights.
+//
+
+#define EVENT_PAIR_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED|SYNCHRONIZE)
+
+//
+// Event pair object function definitions.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtCreateEventPair (
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtOpenEventPair(
+    OUT PHANDLE EventPairHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtWaitLowEventPair(
+    IN HANDLE EventPairHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtWaitHighEventPair(
+    IN HANDLE EventPairHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetLowWaitHighEventPair(
+    IN HANDLE EventPairHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetHighWaitLowEventPair(
+    IN HANDLE EventPairHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetLowWaitHighThread(
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetHighWaitLowThread(
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetLowEventPair(
+    IN HANDLE EventPairHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetHighEventPair(
+    IN HANDLE EventPairHandle
+    );
+
+//
+// Mutant Specific Access Rights.
+//
+
+// begin_winnt
+#define MUTANT_QUERY_STATE      0x0001
+
+#define MUTANT_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED|SYNCHRONIZE|\
+                          MUTANT_QUERY_STATE)
+// end_winnt
+
+//
+// Mutant Information Classes.
+//
+
+typedef enum _MUTANT_INFORMATION_CLASS {
+    MutantBasicInformation
+} MUTANT_INFORMATION_CLASS;
+
+//
+// Mutant Information Structures.
+//
+
+typedef struct _MUTANT_BASIC_INFORMATION {
+    LONG CurrentCount;
+    BOOLEAN OwnedByCaller;
+    BOOLEAN AbandonedState;
+} MUTANT_BASIC_INFORMATION, *PMUTANT_BASIC_INFORMATION;
+
+//
+// Mutant object function definitions.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtCreateMutant (
+    IN PHANDLE MutantHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN BOOLEAN InitialOwner
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtOpenMutant (
+    OUT PHANDLE MutantHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtQueryMutant (
+    IN HANDLE MutantHandle,
+    IN MUTANT_INFORMATION_CLASS MutantInformationClass,
+    OUT PVOID MutantInformation,
+    IN ULONG MutantInformationLength,
+    OUT PULONG ReturnLength OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtReleaseMutant (
+    IN HANDLE MutantHandle,
+    OUT PLONG PreviousCount OPTIONAL
+    );
+
+// begin_ntifs begin_wdm begin_ntddk
+//
+// Semaphore Specific Access Rights.
+//
+
+#define SEMAPHORE_QUERY_STATE       0x0001
+#define SEMAPHORE_MODIFY_STATE      0x0002  // winnt
+
+#define SEMAPHORE_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED|SYNCHRONIZE|0x3) // winnt
+
+// end_ntifs end_wdm end_ntddk
+
+//
+// Semaphore Information Classes.
+//
+
+typedef enum _SEMAPHORE_INFORMATION_CLASS {
+    SemaphoreBasicInformation
+} SEMAPHORE_INFORMATION_CLASS;
+
+//
+// Semaphore Information Structures.
+//
+
+typedef struct _SEMAPHORE_BASIC_INFORMATION {
+    LONG CurrentCount;
+    LONG MaximumCount;
+} SEMAPHORE_BASIC_INFORMATION, *PSEMAPHORE_BASIC_INFORMATION;
+
+//
+// Semaphore object function definitions.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtCreateSemaphore (
+    OUT PHANDLE SemaphoreHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN LONG InitialCount,
+    IN LONG MaximumCount
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtOpenSemaphore(
+    OUT PHANDLE SemaphoreHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtQuerySemaphore (
+    IN HANDLE SemaphoreHandle,
+    IN SEMAPHORE_INFORMATION_CLASS SemaphoreInformationClass,
+    OUT PVOID SemaphoreInformation,
+    IN ULONG SemaphoreInformationLength,
+    OUT PULONG ReturnLength OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtReleaseSemaphore(
+    IN HANDLE SemaphoreHandle,
+    IN LONG ReleaseCount,
+    OUT PLONG PreviousCount OPTIONAL
+    );
+
 #line 615
 //
 // Performance Counter Definitions

@@ -299,3 +299,9 @@ override for the census. The current non-error census is 2,042 points and
 [S7 P3 receipt](s7-p3-checkpoint.json) records eight reviewed files and
 the original comment and blank-line restoration in `nt_cga.c`. The current
 census is 2,041 non-error points and 28,751 changed lines.
+
+[S7 P4 receipt](s7-p4-checkpoint.json) and
+[verification evidence](s7-p4-verification.zip) record eight more reviews,
+the original executive declaration groups restored in `ntexapi.h`, and
+the cached build, dual publication and targeted tests. The current
+census is 2,041 non-error points and 28,487 changed lines.

@@ -65,9 +65,15 @@ S7 P3 completes eight more file reviews and restores original comments and
 an empty source row in `nt_cga.c`. Existing error exclusions and selected
 code are preserved. [P3 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p3-checkpoint.json).
 
-S7 progress is 24 reviewed and 189 remaining. Source restorations reduce
-7 points and 227 changed lines in S7. The current census is 2,041 non-error
-points and 28,751 changed lines across 241 mirrors with filtered differences.
+S7 P4 restores 264 original lines in `ntexapi.h` without increasing the
+number of difference points. Package `25f82d1b-6746-4022-b5e9-ec3f0f319fdc`
+passed cached x86 and x64 builds and was published with matching hashes at
+both destinations. Targeted export, WOW startup, and DOS lifecycle checks
+passed. [P4 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p4-checkpoint.json).
+
+S7 progress is 32 reviewed and 181 remaining. Source restorations reduce
+7 points and 491 changed lines in S7. The current census is 2,041 non-error
+points and 28,487 changed lines across 241 mirrors with filtered differences.
 
 ## S1 Closure Record
 
