@@ -148,9 +148,14 @@ comments, the original DPMI gap and the unused original `CallCsrFlag`
 declaration. Selected x86 object controls differ only by COFF timestamp.
 [P17 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p17-checkpoint.json).
 
-S7 progress is 149 reviewed and 64 remaining. Source restorations reduce
-30 points and 565 changed lines in S7. The current census is 2,017 non-error
-points and 28,411 changed lines across 237 mirrors with filtered differences.
+S7 P18 completes ten file reviews and restores original blank-line
+layout in `demsrch.c` and `wole2.c`. The existing line anchors, mixed
+line endings and excluded branches are preserved.
+[P18 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p18-checkpoint.json).
+
+S7 progress is 159 reviewed and 54 remaining. Source restorations reduce
+33 points and 569 changed lines in S7. The current census is 2,014 non-error
+points and 28,407 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

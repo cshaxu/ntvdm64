@@ -17,7 +17,6 @@
 MODNAME(wole.c);
 
 #define STATUS_INFO_LENGTH_MISMATCH ((NTSTATUS)0xC0000004L)
-
 #line 19
 /*
 ** Under OLE 2.0, the IMessageFilter interface passes HTASKs/THREADIDs.  It

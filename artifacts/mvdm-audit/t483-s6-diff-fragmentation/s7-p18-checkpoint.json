@@ -1,0 +1,188 @@
+{
+  "packet": "M0 T483 S7 P18",
+  "prior_delivery": "c21d98439",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "before": {
+        "blocks": 6,
+        "added": 4,
+        "deleted": 19
+      },
+      "after": {
+        "blocks": 6,
+        "added": 4,
+        "deleted": 19
+      },
+      "source_sha256": "568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4",
+      "original_sha256": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+      "decision": "Retain original portable SAAllocate, SAFree, SAReallocate and query ownership of ExtMemSA selected for CPU40. The original native Vdm allocator branch uses the WOW virtual-memory owner, which does not account for the shared XMS/DPMI pool. Existing DPMI request callers consume the selected portable results.",
+      "evidence": "../t483-remaining-reaudit/r0215-r0216-xmem-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "before": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 1
+      },
+      "source_sha256": "c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f",
+      "original_sha256": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+      "decision": "Keep package registry projection and immutable firmware directory. Original native system32 does not hold package keyboard data. Preserve original keyboard selection and parsing.",
+      "evidence": "../t483-remaining-reaudit/r0037-r0038-requalification.json"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "before": {
+        "blocks": 8,
+        "added": 28,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 5,
+        "added": 25,
+        "deleted": 0
+      },
+      "source_sha256": "07c466258a44779f55158209cc10a58f901a8a0970355ecdfa26618544723427",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "decision": "Restore three original whitespace ranges before existing logical anchors. Keep original enumeration and only retain buffered successor hint/retry when reclamation loses a remembered anchor. Existing original/current controls cover missing anchor and unread buffered entries.",
+      "evidence": "../t483-remaining-reaudit/r0117-r0133-requalification.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "before": {
+        "blocks": 13,
+        "added": 27,
+        "deleted": 10
+      },
+      "after": {
+        "blocks": 13,
+        "added": 26,
+        "deleted": 10
+      },
+      "source_sha256": "9284b1e593d60d86c68ccaff1dbc6b99a7704ada793a0e33893e1ec2210c697b",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "decision": "Remove the added blank following the size status macro. Actual native query needed 731040 bytes where original reserved 16KiB. Existing allocation and release plus conversion bounds are retained with no retry loop.",
+      "evidence": "../t483-remaining-reaudit/r1672-r1686-wole2-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+      "before": {
+        "blocks": 5,
+        "added": 8,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 5,
+        "added": 8,
+        "deleted": 6
+      },
+      "source_sha256": "94bba68ddaa77ceac7fe5eef585e439f9b4b05b69829866488efd0913e63731a",
+      "original_sha256": "4ae2c1d2c4a66dc63c9b2ddd673fcae067f2fbdab953dc8d96aecfcf03c262bc",
+      "decision": "Keep package-relative default CONFIG/AUTOEXEC paths and OEM conversion while retaining original PIF parsing. Current path-size guard and ownership cleanup preserve caller storage and release allocated paths on the established failure path.",
+      "evidence": "../t483-remaining-reaudit/r1196-r1201-nt-pif-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "033ed0ac65d26a9ec5105fdf6ebb1992eb635080d463bb975a2dc16a178b7cc6",
+      "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
+      "decision": "SS.B controls the outer restored stack-address width. The operand width controls frame reads and is independent. Existing mixed-width return controls reject the original predicate.",
+      "evidence": "../t483-remaining-reaudit/r0481-ret-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "e8f6583e07f1f79036c56c454a22574dfb5987f3e0e1dab9afcb0a6f717f6af7",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "decision": "Keep both long format specifiers. Original host_com_ioctl declares arg as long and forwards it to variadic formatting; %d requires int. Type proof only; no serial device failure claimed.",
+      "evidence": "../t483-s4/batch3-source-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "decision": "Keep BOOL failure interpretation from the original selected portable reallocator. NT_SUCCESS(0) misclassifies its false result and would publish an unallocated zero address.",
+      "evidence": "../t483-remaining-reaudit/r0215-r0216-xmem-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "before": {
+        "blocks": 11,
+        "added": 25,
+        "deleted": 5
+      },
+      "after": {
+        "blocks": 11,
+        "added": 25,
+        "deleted": 5
+      },
+      "source_sha256": "a31be79d597a27a6e438a19ae2747285d9225965b22f8c339a2ba5770caeb6d1",
+      "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+      "decision": "Retain existing session system.ini projection for explicit private-profile access. Original control with invalid module or zero/negative capacity faults during unconditional strlen evaluation; keep bounded flush and guard. Original thunk and query providers stay in use.",
+      "evidence": "../t483-remaining-reaudit/r1439-r1459-wkernel-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "before": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 1
+      },
+      "source_sha256": "6e4b42a75cfa9aeef551b83ac147b6199d059abb5d6cddedce29e77be2f978b0",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+      "decision": "Keep existing rounding helper before the original 64-bit integer conversion. Actual original-rounding object fails four of 16 FISTP cases; unchanged conversion preserves original representation.",
+      "evidence": "../t483-remaining-reaudit/r0467-r0472-fpu-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 159,
+    "remaining": 54,
+    "nonzero_files": 237,
+    "non_error_points": 2014,
+    "non_error_lines": 28407,
+    "source_reduction_s7": {
+      "points": 33,
+      "lines": 569
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Removed four nonoriginal blanks in two sources without changing executable tokens, original line anchors, or excluded source. Eight sources remain byte-identical. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}

@@ -278,7 +278,6 @@ VOID demFindFirst (VOID)
 #line 268
 
 
-
 #line 270
 DWORD demFileFindFirst (
     PVOID pvDTA,
@@ -431,7 +430,6 @@ VOID demFindNext (VOID)
 }
 #line 425
 #line 426
-
 
 
 #line 428
@@ -2223,7 +2221,6 @@ DemHeartBeat(void)
    PLIST_ENTRY    pFFindHeadList;
    PPSP_FFINDLIST pPspFFindEntry;
    PFFINDLIST  pFFindEntry;
-
 
 #line 2199
    if (!NumFindBuffer ||
