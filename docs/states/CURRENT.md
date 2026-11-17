@@ -33,12 +33,12 @@ and retiring that mirror file and its active difference entries (P19).
 ## S6 Progress
 
 [Worklist and counting contract](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-33/255 initial difference files reviewed;222 remain. P19 retires one already
-reviewed file by owner approval;live population is32 reviewed/254,222 remain. Twenty-five changed files
-verified across P2-P18;eight reviewed unchanged. Current census:1062 files
-(1053 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
-normalized/error-masked differences,and254 nonzero files.
-Current delivered total2163 blocks/44092 lines. P19 retires130 blocks/9237
+33/255 initial difference files reviewed;222 remain. P19 and P21 retire two already
+reviewed files by owner approval;live population is31 reviewed/253,222 remain. Twenty-five changed files
+verified across P2-P18;eight reviewed unchanged. Current census:1061 files
+(1052 host C/H plus9 other text mirrors),511 original-byte matches,808 zero
+normalized/error-masked differences,and253 nonzero files.
+Current delivered total2142 blocks/43260 lines. P19 retires130 blocks/9237
 lines;this is mirror reclassification,not original restoration. Prior delivered
 reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correction remains separate.
 
@@ -75,12 +75,12 @@ reduction remains40 blocks/1194 lines. Mouse's earlier two-line counting correct
 | keymouse/keyba.c |24->24|72->56|P15 added guard pairs removed;actual keyboard90 and Full20 passed|
 | client/vdm.c |23->20|796->632|P16 four original functions restored;six compile contexts and Full20 passed|
 | client/dlgmgr.c |22->17|295->242|P17 original declarations/CvtDec/comments restored;focused37 and Full20 passed|
-| client/wow.c |21->21|832->832|No source change;94 original logical rows match;residual decisions pending|
+| client/wow.c |21->retired|832->retired|P21 compat extraction;focused38 and Full20 passed|
 | kernel/cleanup.c |21->20|66->44|P18 original ClientDied restored;focused37,lifecycle and Full20 passed|
 
 
-The canonical pending backlog has1635 rows after retiring six kernel/ntstubs pending records,
-plus2 non-R items. Corrected counting only;not a source reduction.
+The canonical pending backlog has1631 rows after retiring six kernel/ntstubs and four client/wow pending records,
+plus2 non-R items. Extraction removes active mirror entries;it is not original-code restoration.
 Partial restorations do not close residual owner decisions. Three complete
 handtabl restorations removed from pending;remaining private-kernel and ABI
 boundaries remain pending. Historical R identifiers are not current diff blocks.
@@ -93,14 +93,12 @@ non-error blocks descending,path ascending for ties. Await owner file selection.
 
 ## Current Technical Baseline
 
-P19 cached full,WOW focused38,actual lifecycle and Full20 passed.
-Package c414128d-9140-4333-bf2b-28c608ad3b7b contains11 images,published and
-hash-verified to assets/release and O:/winnt/system32. Full includes actual
-DOS4GW/NESticle. The owner-approved FNID extraction retires kernel/ntstubs.c;
-its existing semantics now reside in compat. No guest or winnt.zip changes.
-
-[P19 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p19-checkpoint.json)
-and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p19-verification-evidence.zip).
+P21 cached full,WOW focused38,lifecycle and Full20 passed.
+Package fe2d496b-78aa-47dd-a091-e665beedce15 contains11 images,published and hash-verified
+to assets/release and O:/winnt/system32. Full includes real DOS4GW/NESticle.
+The owner-approved dialog lookup extraction changes no other mirror or guest.
+[P21 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p21-checkpoint.json)
+and [evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/p21-verification-evidence.zip).
 
 ## Remaining Scope
 
@@ -128,3 +126,16 @@ are indexed in the worklist README. Current remains below16KiB.
 
 Owner requests all254 nonzero mirror files sorted by original-source usage ratio.
 [Read-only report](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/usage-ratio/REPORT.md) records806 successful current-product preprocessing contexts and unchanged object hashes. It lists200 C implementations,51 headers and3 build/export descriptions. Original function spans include internal comments/blanks; macros/header usage limits are explicit. Six C files have a proved footprint below5 percent;13 below10 percent. This is a lower-bound source-footprint census,not runtime coverage or deletion authority. No source,package or audited-file-count change;owner selection remains required.
+
+## P21 Delivery
+
+Owner approves extraction of client/wow.c::_GetDlgItem into compat, preserving
+its original algorithm and callers. Only this file is admitted;no next-file
+progression. Update product/fixture selection and active difference registers;
+Cached full,publish11x2,focused38,lifecycle and Full20 passed;Git accompanies receipt.
+The system-metrics compatibility boundary remains recorded,not declared fixed.
+
+P21 retires21 blocks/832 lines;combined P19/P21 retire151 blocks/10069 lines.
+Together with original restoration reductions40 blocks/1194 lines,the census
+is down191 blocks/11263 lines. Main register2703 rows;pending1631 rows.
+No next-file admission.

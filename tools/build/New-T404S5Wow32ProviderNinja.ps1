@@ -476,7 +476,7 @@ $ninja.Add('build wow-macro-boundary-test: phony obj/tests/wow-boundary-adapter.
 foreach ($controlBody in @('editec','edecrare','editsl','editml','edmlonce',
         'edmlrare','edslrare','combo','combodir','comboini','lb1','lboxctl1',
         'lboxctl2','lboxctl3','lboxmult','lboxrare','lboxvar','dlgbegin',
-        'dlgend','dlgmgr','dlgmgrc','dlgmgr2','dmmnem','wow','winmgrc')) {
+        'dlgend','dlgmgr','dlgmgrc','dlgmgr2','dmmnem','winmgrc')) {
     $controlBodyPath = Join-Path $root ('src/non-mvdm/windows/core/ntuser/client/' + $controlBody + '.c')
     if (!(Test-Path -LiteralPath $controlBodyPath -PathType Leaf)) {
         throw "Missing admitted original control body: $controlBodyPath"
@@ -493,6 +493,9 @@ foreach ($controlBody in @('editec','edecrare','editsl','editml','edmlonce',
     if ($controlBody -eq 'dlgmgr') { $bodyFlags += ' /DWOW_ORIGINAL_DIALOG_DEFAULT' }
     $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags' + $bodyFlags)
 }
+$objects.Add('obj/compat/wow-dialog-lookup.obj')
+$ninja.Add('build obj/compat/wow-dialog-lookup.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_lookup.c')))
+$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT')
 foreach ($viewBody in @('winmgr','wow')) {
     $viewObject = 'obj/opennt-user/control-view-' + $viewBody + '.obj'
     $objects.Add($viewObject)

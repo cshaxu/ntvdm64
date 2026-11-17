@@ -1,0 +1,213 @@
+{
+  "packet": "M0 T483 S6 P21",
+  "status": "Build publication tests and governance passed; Git delivery accompanies receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/compat/README.md",
+        "sha256": "6468775098d037ce401fd26d0153fb215822063b125baa446f8f88ad73e15956"
+      },
+      {
+        "path": "src/non-mvdm/README.md",
+        "sha256": "9f7010415f831be414db49ab778c6d2d7b2c5af753ed6802e478f71b138f6145"
+      },
+      {
+        "path": "test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c",
+        "sha256": "657bddaddfbaba4074531524eadbea80cf670368c93ac7a1364dfd4b7153029e"
+      },
+      {
+        "path": "test/observation/verify-wow32-s1-formal-graph.ps1",
+        "sha256": "1aab4347319dc02d8650d56130461d041cc71a8084cb610c5f82599a3366a003"
+      },
+      {
+        "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "sha256": "a1fba5f0fa284aa3def069f3ed631ca591416c0f933bff51c4d23ecffcf8b637"
+      },
+      {
+        "path": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "sha256": "acb80911423ccfc80358f10abcef74e678412de4df43d15de8d6481c36b131c5"
+      },
+      {
+        "path": "src/compat/wow_dialog_lookup.c",
+        "sha256": "47baf07f9dbc8f626d559e2037baeed6057681751c41aa72ad2c8c5b621cd6cf"
+      }
+    ],
+    "deleted": [
+      "src/non-mvdm/windows/core/ntuser/client/wow.c"
+    ],
+    "source_files": 7
+  },
+  "publication": {
+    "status": "published",
+    "package": "fe2d496b-78aa-47dd-a091-e665beedce15",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 467430,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 7075,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1334,
+        "CleanupMs": 527,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 16747,
+        "CleanupMs": 485,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 15891,
+        "CleanupMs": 494,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 13767,
+        "CleanupMs": 492,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 254,
+        "CleanupMs": 476,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 67535,
+        "CleanupMs": 451,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 50530,
+        "CleanupMs": 477,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 51224,
+        "CleanupMs": 475,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 16491,
+        "CleanupMs": 529,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 12387,
+        "CleanupMs": 452,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 71694,
+        "CleanupMs": 554,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 13019,
+        "CleanupMs": 501,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 29676,
+        "CleanupMs": 485,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31618,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 5539,
+        "CleanupMs": 517,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8239,
+        "CleanupMs": 523,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 11021,
+        "CleanupMs": 442,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4325,
+        "CleanupMs": 432,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7881,
+        "CleanupMs": 397,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20022,
+        "CleanupMs": 430,
+        "Passed": true
+      }
+    ]
+  },
+  "focused": {
+    "passed": 38,
+    "count": 38,
+    "dialog_lookup": "Existing real-source navigation fixture extended with later-sibling hit and leaf miss"
+  },
+  "lifecycle": "errors=0",
+  "global_counts": {
+    "files": 1061,
+    "strict_equal": 511,
+    "filtered_zero": 808,
+    "nonzero_files": 253,
+    "blocks": 2142,
+    "lines": 43260,
+    "reviewed_live_files": 31,
+    "remaining_files": 222,
+    "retired_reviewed_files": 2,
+    "prior_delivered_reduction_blocks": 40,
+    "prior_delivered_reduction_lines": 1194,
+    "owner_retired_blocks": 151,
+    "owner_retired_lines": 10069,
+    "total_census_reduction_blocks": 191,
+    "total_census_reduction_lines": 11263
+  },
+  "limits": [
+    "Owner-approved source reclassification, not restoration",
+    "Other mirrors unchanged by hash",
+    "System-metrics compatibility remains a source-review boundary, not claimed fixed",
+    "No next-file admission"
+  ],
+  "governance": {
+    "documentation": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed"
+  }
+}

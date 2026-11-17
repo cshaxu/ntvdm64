@@ -69,10 +69,10 @@ $expectedUser = @(
     'control-body-lboxctl2', 'control-body-lboxctl3', 'control-body-lboxmult',
     'control-body-lboxrare', 'control-body-lboxvar', 'control-body-dlgbegin',
     'control-body-dlgend', 'control-body-dlgmgr', 'control-body-dlgmgrc',
-    'control-body-dlgmgr2', 'control-body-dmmnem', 'control-body-wow',
+    'control-body-dlgmgr2', 'control-body-dmmnem',
     'control-body-winmgrc', 'control-view-winmgr', 'control-view-wow',
     'hdata', 'clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clmenu',
-    'clglobal', 'control-lookaside', 'dialog-template', 'dialog-memory',
+    'clglobal', 'dialog-template', 'dialog-memory',
     'control-text', 'control-color', 'control-brush-client', 'control-brush',
     'control-state', 'control-fnid', 'dialog-pointer', 'control-rect',
     'default-client', 'private-word-reader', 'private-word-client',
@@ -88,6 +88,9 @@ $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
     ForEach-Object { $_.Groups[1].Value })
 if (@(Compare-Object $expectedUser $actualUser).Count) {
     throw 'The original OpenNT USER-owner object set differs from the admitted formal graph.'
+}
+if ($link -notmatch '\bobj/compat/wow-dialog-lookup\.obj\b') {
+    throw 'The compat dialog lookup must be linked into the formal graph.'
 }
 if ($link -notmatch '\bobj/wow32-dll/wow_button_resources\.obj\b' -or
     [IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/source/wow_button_resources.c')) -notmatch

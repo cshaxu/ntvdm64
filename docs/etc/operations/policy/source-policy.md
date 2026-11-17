@@ -364,3 +364,11 @@ exception removes the former mirror from the current diff census and pending
 backlog; it does not count as restoration of the omitted kernel USER server,
 authorize other extractions, or erase source provenance. Original state update,
 calling convention and failure behavior remain unchanged.
+
+### T483 S6 P21 owner-approved dialog lookup extraction
+
+The owner approves retiring non-mvdm/windows/core/ntuser/client/wow.c and
+retaining its sole selected _GetDlgItem function (original lines 251-265) in
+src/compat/wow_dialog_lookup.c with provenance. Preserve its algorithm, ABI
+and callers. This file-specific reclassification does not restore omitted
+USER services or establish equivalence of all modern system metrics.

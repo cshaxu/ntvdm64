@@ -2661,3 +2661,7 @@ those definitions fails the actual x86/x64 compilation controls. The remaining
 29 deleted original lines and their diagnostic mappings await owner review;
 the common and WOW copies of the restored declarations are removed.
 See [P214 evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p214-checkpoint.json).
+
+T483 S6 P21 supersedes the client/wow.c subset admission above: owner-approved
+extraction retains _GetDlgItem in src/compat/wow_dialog_lookup.c and retires
+this mirror. Historical provenance and review records remain evidence only.

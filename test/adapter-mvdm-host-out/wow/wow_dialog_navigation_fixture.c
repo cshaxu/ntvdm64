@@ -82,6 +82,8 @@ static void verify_dialog_controls(void)
     first.spmenu = (PMENU)1; last.spmenu = (PMENU)2; nested.spmenu = (PMENU)3;
     CHECK(_GetDlgItem(NULL, 1) == NULL);
     CHECK(_GetDlgItem(&root, 1) == &first);
+    CHECK(_GetDlgItem(&root, 2) == &last);
+    CHECK(_GetDlgItem(&last, 2) == NULL);
     CHECK(_GetDlgItem(&root, 3) == NULL);
     CHECK(_FindDlgItem(&root, 3) == NULL); /* Pre-4.0 direct-child contract. */
     SetWF(&root, WFWIN40COMPAT);

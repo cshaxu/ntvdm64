@@ -207,3 +207,8 @@ original-code restoration. The active test/compat/wow_control_fnid_fixture.c cov
 assignment, conflicting reassignment, cleanup and repeated cleanup through the
 production compat operation; the boundary supplies only a controlled PWND.
 Actual WOW lifetime and Full guest tests remain separate delivery evidence.
+
+`wow_dialog_lookup.c` retains OpenNT client/wow.c::_GetDlgItem (251-265),
+revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. Owner-approved P21
+extraction preserves the original PWND child-list algorithm and ABI. Product
+and dialog-navigation fixture link this same implementation.

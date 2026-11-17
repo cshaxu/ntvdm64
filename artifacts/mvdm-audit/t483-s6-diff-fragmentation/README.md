@@ -229,3 +229,10 @@ PostThreadMessage rejection and exact-body cleanup controls passed. Original
 ## P20 owner-requested usage-ratio scan
 
 [Full 254-file report](usage-ratio/REPORT.md), [ascending CSV](usage-ratio/all-diff-files-by-usage.csv), [summary](usage-ratio/summary.json), [receipt](usage-ratio/receipt.json), and [evidence](usage-ratio/evidence.zip). 806 current product contexts passed read-only preprocessing; all objects remain unchanged. C function scopes and header declaration lower bounds are distinguished; macro definitions are not silently classified unused. This scan changes no mirror, publication or per-file semantic-audit status and admits no extraction.
+
+[P21 owner-approved dialog lookup extraction](client-wow-compat-extraction.json)
+retires client/wow.c:21 non-error blocks/832 lines. Cached full,publish11x2,focused38,lifecycle and Full20 passed;Git accompanies receipt.
+
+[P21 receipt](batch-p21-checkpoint.json) and [verification evidence](p21-verification-evidence.zip).
+Current census:1061 files,253 nonzero,2142 blocks/43260 lines.
+P20 usage-ratio reports remain the immutable pre-extraction snapshot;client/wow.c is now retired.
