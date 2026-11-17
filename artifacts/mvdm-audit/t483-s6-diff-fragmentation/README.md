@@ -328,3 +328,7 @@ points and 28,438 changed lines.
 [S7 P9 receipt](s7-p9-checkpoint.json) records ten reviewed files and
 three formatting restorations. `nt_timer.c` reaches zero non-error
 differences. The current census is 2,027 points and 28,434 changed lines.
+
+[S7 P10 receipt](s7-p10-checkpoint.json) records ten reviewed files and two
+formatting restorations. The current census is 2,027 non-error points and
+28,431 changed lines.

@@ -1,0 +1,188 @@
+{
+  "packet": "M0 T483 S7 P10",
+  "prior_delivery": "ace2394c63f7e590777dbe95a7b78634c30fcdba",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "before": {
+        "blocks": 7,
+        "added": 61,
+        "deleted": 8
+      },
+      "after": {
+        "blocks": 7,
+        "added": 60,
+        "deleted": 8
+      },
+      "source_sha256": "2c1e7aa432712b0ed7e156e2cad32d609f6e628b4fd96a47bf9252aedfbd0c39",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "decision": "Remove one added separator blank. Original fast paths remain available for unaliased spans. Physical alias copy and error propagation retain the documented non-contiguous backing and failure cases. Local BACK_M guards still count.",
+      "evidence": "../t483-remaining-reaudit/r1040-r1046-nt-emm-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "source_sha256": "6f5294aa77cda5216b7378fa1d84f2a8040a3a440279dbd398648268f02fe0bb",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "decision": "Retain the local C_VID guard and selected original declarations. No matching original alternative exists for the unsupported fallback.",
+      "evidence": "../t483-remaining-reaudit/egacpu-h-file-review.json"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "before": {
+        "blocks": 5,
+        "added": 19,
+        "deleted": 13
+      },
+      "after": {
+        "blocks": 5,
+        "added": 19,
+        "deleted": 13
+      },
+      "source_sha256": "0d3a037dcfa2ce80719165ad4d890369f4b6d591157d68b9bb1c938400e0d9fc",
+      "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+      "decision": "Retain bounded MoveInfo capture and forward copy across current mappings. Original DOSX and actual backing ownership make a flat alias unsafe for selected transfers. Original unaffected dispatch code remains.",
+      "evidence": "../t483-remaining-reaudit/r1933-r1941-xmsblock-review.json"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "before": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 1
+      },
+      "source_sha256": "dd05fe7525c25cec41b3ac0d613547440e1ac8d46c2d004b60fedf1444da5d5a",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "decision": "Current explicit BaseSrv header supplies selected declarations. Restoring original ntdddfs.h include fails C1083 in actual product context; the unused DFS component is outside scope.",
+      "evidence": "../t483-remaining-reaudit/batch-p180-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "before": {
+        "blocks": 1,
+        "added": 11,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 11,
+        "deleted": 0
+      },
+      "source_sha256": "6213f844c816a919ae6ec1bccaf1c0a178070efe219574eeab58701c706b8e36",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "decision": "Keep typed CPU40 GDT/LDT state publication and the final IDT backing descriptor accessor. Original descriptor read can raise a paging fault where synchronous size validation is required.",
+      "evidence": "../t483-remaining-reaudit/r0140-r0142-requalification.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "before": {
+        "blocks": 1,
+        "added": 190,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 190,
+        "deleted": 0
+      },
+      "source_sha256": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe",
+      "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+      "decision": "Restore attempts with original condition omit LIM_b_write and LIM_w_write referenced by actual CCPU object. Selected real EMS alias runtime uses SAS_RAM. Existing evidence distinguishes link contract from runtime writeback usage.",
+      "evidence": "../t483-remaining-reaudit/emm-mngr-file-review.json"
+    },
+    {
+      "path": "src/mvdm-host/inc/memapi.h",
+      "before": {
+        "blocks": 5,
+        "added": 5,
+        "deleted": 5
+      },
+      "after": {
+        "blocks": 5,
+        "added": 5,
+        "deleted": 5
+      },
+      "source_sha256": "26515fc97789f77e6e1632d3d3c19e810ade63539650de1b7dcbf6056688d546",
+      "original_sha256": "0e72109252dbec2a9c79b54d28d0c2bda0967644dd9d1d1d2d789e8fd8aa8c99",
+      "decision": "Original declarations in actual WOW /Gz callers produce stdcall references absent from the five cdecl providers. Changing caller ABI would break other proven symbols.",
+      "evidence": "../t483-remaining-reaudit/r0230-r0234-memory-abi-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "source_sha256": "e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d",
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "decision": "Package-local DOS firmware must be located before demLoadDos opens it. The host system directory returned by the original API lacks the shipped files.",
+      "evidence": "../t483-remaining-reaudit/r0067-r0068-requalification.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "7debece9647e74d74aca69be379a8e97810452b3a34c8e9f69b8942e693d329c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "decision": "Keep one selected WOW registry include. RegOpenKeyEx and RegQueryValueEx in original configuration bodies use the existing package registry projection.",
+      "evidence": "../t483-remaining-reaudit/batch-p78-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "before": {
+        "blocks": 15,
+        "added": 31,
+        "deleted": 13
+      },
+      "after": {
+        "blocks": 15,
+        "added": 30,
+        "deleted": 12
+      },
+      "source_sha256": "b11970d3862c1a74b0d710030c8f167790018c17c9852c9b4afaefba2a5caaae",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "decision": "Restore exact original spacing in the registry conditional. Keep absence handling, directory bindings, thunk callback/exception ownership and worker exit. Local DEBUG exclusion is not an original paired arm.",
+      "evidence": "../t483-remaining-reaudit/r1687-r1708-wow32-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 87,
+    "remaining": 126,
+    "nonzero_files": 237,
+    "non_error_points": 2027,
+    "non_error_lines": 28431,
+    "source_reduction_s7": {
+      "points": 21,
+      "lines": 547
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Removed one added blank and restored the exact spacing of one original conditional. Continue using the P7 published runtime."
+}

@@ -105,9 +105,14 @@ in `ev_glue.c`. The code and original diagnostic anchors are preserved.
 The P7 runtime package is retained.
 [P9 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p9-checkpoint.json).
 
-S7 progress is 77 reviewed and 136 remaining. Source restorations reduce
-21 points and 544 changed lines in S7. The current census is 2,027 non-error
-points and 28,434 changed lines across 237 mirrors with filtered differences.
+S7 P10 completes ten more file reviews and restores formatting in
+`nt_emm.c` and `wow32.c`. The selected statements, exclusions and original
+diagnostic anchors are preserved. The P7 runtime package is retained.
+[P10 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p10-checkpoint.json).
+
+S7 progress is 87 reviewed and 126 remaining. Source restorations reduce
+21 points and 547 changed lines in S7. The current census is 2,027 non-error
+points and 28,431 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

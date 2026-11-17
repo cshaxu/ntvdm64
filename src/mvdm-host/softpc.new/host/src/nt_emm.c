@@ -121,7 +121,6 @@ Defines are:
 #line 126
 
 #define EM_PAGE_ADDRESS(page_no)    (EM_base_address + page_no * EMM_PAGE_SIZE)
-
 static int em_loads(sys_addr from, unsigned char *to, int length)
 {
 #ifdef BACK_M

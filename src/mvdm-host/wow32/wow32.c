@@ -586,7 +586,7 @@ BOOL W32Init(VOID)
                0,
                KEY_QUERY_VALUE,
                &WowKey
-             ) != 0) {
+             ) != 0){
 #ifdef DEBUG
 #line 582
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
