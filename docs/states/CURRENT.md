@@ -138,9 +138,14 @@ S7 P15 completes ten file reviews. Original conditional spelling in
 spacing and line mapping in `wcall16.c` were restored.
 [P15 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p15-checkpoint.json).
 
-S7 progress is 129 reviewed and 84 remaining. Source restorations reduce
-25 points and 556 changed lines in S7. The current census is 2,023 non-error
-points and 28,422 changed lines across 237 mirrors with filtered differences.
+S7 P16 completes ten file reviews. It removes one redundant blank and
+one repeated logical-line directive in `nt_graph.c`. Matching the constant
+false arm in `copy_fnc.c` corrects the census by one point and two lines.
+[P16 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p16-checkpoint.json).
+
+S7 progress is 139 reviewed and 74 remaining. Source restorations reduce
+25 points and 557 changed lines in S7. The current census is 2,022 non-error
+points and 28,419 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

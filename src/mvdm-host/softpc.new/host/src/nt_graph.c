@@ -774,7 +774,6 @@ void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
 
-
 #if defined(CCPU) && defined(X86GFX)
 #line 803
 #error Unsupported excluded original configuration
@@ -922,7 +921,6 @@ void nt_graphics_tick(void)
 #line 903
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 905
 #line 905
                     (void)(*update_alg.calc_update)();
 

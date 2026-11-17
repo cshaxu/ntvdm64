@@ -1,0 +1,200 @@
+{
+  "packet": "M0 T483 S7 P16",
+  "prior_delivery": "f4df4290b",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "before": {
+        "blocks": 1,
+        "added": 12,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 12,
+        "deleted": 0
+      },
+      "source_sha256": "6852d6f38de18e87ab96481f6f1b370e7e1b0e1c33984179f77b30b8e4271e0d",
+      "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+      "decision": "Keep the V86 CRTC height read through the original I/O virtualization. Historical isolated traces disagree between virtual and physical register state and show corrected text row count.",
+      "evidence": "../t483-remaining-reaudit/r0839-r0841-ega-vide-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "a5d17a7e5d2d48fe58dbe0e265a9c1291bc14076aa8c5fa858a641c0edc51660",
+      "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+      "decision": "Retain byte conversion in both API length and destination advance. Production original/current controls differ on four-word fill and across 132 cases. Separately mask corresponding constant-false branches, including the remaining unreachable original line. Source bytes unchanged.",
+      "evidence": "../t483-remaining-reaudit/r0998-r1004-host-small-review.json",
+      "measurement_correction": {
+        "points": -1,
+        "lines": -2,
+        "reason": "Matching original and local #if 0 then arms were left unmasked because the local excluded body contains an original unreachable line after #error."
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 1
+      },
+      "source_sha256": "568a6e3c253f84e4bb7904c90846585d1ad8dbc66135b9dbda37fd986551a694",
+      "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+      "decision": "Keep two allocation-failure checks before listbox consumers dereference arrays, plus the signed tab-count predicate for cleanup. Exact original-body negatives fail all three corresponding controls.",
+      "evidence": "../t483-remaining-reaudit/r1666-r1669-wmsglb-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 0
+      },
+      "source_sha256": "b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9",
+      "original_sha256": "56cf805a5a78fe257f4337f94b55aec634f6d7d6139296993623fa08a0655e91",
+      "decision": "Keep one new-match latch and two producer writes. Original exception continuation preserves architectural DR6 history; using those sticky flags as a fresh event repeats delivery. Existing fixtures separately verify event/status separation.",
+      "evidence": "../t483-remaining-reaudit/r0354-r0356-debug-events.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3",
+      "original_sha256": "d02575bd0594f9ccc3a23ad7ed0eb208ec7c1414eeffd558dd1ce6b648f1991b",
+      "decision": "Keep bit-7 transition predicate and scanout-based cursor coordinates. Original operator precedence misses every bit transition, and CPU aperture mode does not indicate pixel geometry. Original negative controls cover both.",
+      "evidence": "../t483-remaining-reaudit/r0941-r0942-v7-ports-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "before": {
+        "blocks": 20,
+        "added": 74,
+        "deleted": 11
+      },
+      "after": {
+        "blocks": 20,
+        "added": 73,
+        "deleted": 11
+      },
+      "source_sha256": "78e7780313585d26c51bf161caaa482404186ba78b7f08831b6636e118d339bc",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "decision": "Remove redundant blank before the local unsupported flush arm and one immediately repeated line directive. Text presentation, route synchronization, flush completion, cursor paint and V7 geometry/palette bindings remain. Five formerly ambiguous cases are confirmed local conditional additions or guards over original unconditional code, so none is newly masked.",
+      "evidence": "../t483-remaining-reaudit/batch-p101-checkpoint.json",
+      "retained_local_guards": {
+        "92": "new DAC_data_bits alternative",
+        "724": "new non-CCPU under the original X86GFX group",
+        "778": "new compound flush guard; original simple X86GFX arm remains separately masked",
+        "828": "new incompatible tick profile guard",
+        "2103": "new guard scoped over original unconditional fullscreen-return behavior"
+      }
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "before": {
+        "blocks": 9,
+        "added": 22,
+        "deleted": 29
+      },
+      "after": {
+        "blocks": 9,
+        "added": 22,
+        "deleted": 29
+      },
+      "source_sha256": "a83b99a6f2021f9b86db1947301983f5f908fdeae915b950d56fa20f0dc7d108",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "decision": "Keep authoritative error on GetOverlappedResult failure and the existing request-owned async staging. Native completion control produces broken-pipe and more-data errors; original ignored the result. Actual CCPU mapping counterexample prevents retaining a flat guest pointer across I/O completion.",
+      "evidence": "../t483-remaining-reaudit/r1281-r1296-vrnmpipe-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "before": {
+        "blocks": 3,
+        "added": 6,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 3,
+        "added": 6,
+        "deleted": 1
+      },
+      "source_sha256": "35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e",
+      "original_sha256": "19c5999308a479cc9c0fcb30d23e8301d9a835408417aa965b85523dfb8a1653",
+      "decision": "Keep the original media query and correct the FileSystemType padding destination; original negative fails on VolumeID overwrite. The registry projection selects package configuration, and the DOSWOWDATA registration supplies the discovered guest CDS location to VM directory synchronization without fixed offsets.",
+      "evidence": "../t483-remaining-reaudit/r0098-requalification.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutmr.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "ac32decdb5712f1dbfcdd0948095c2995426f6734b2b284bd85e6ee28a59c296",
+      "original_sha256": "e42bc0c7e9dc199ae19414461d65ecf86b7acc55c6d7523792812d73f158bef5",
+      "decision": "Keep distinct original timer body name. The native callback must enter the task and borrow scope before the original timer table/list reads; the later original CallBack16 is too late. No duplicate timer table or dispatcher.",
+      "evidence": "../t483-remaining-reaudit/r1913-wutmr-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "source_sha256": "23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "decision": "Keep WINAPI for declaration and definition. Actual worker compiler rejects original cdecl callback at CreateThread with C2440; selected thread entry provides the required x86 stack convention.",
+      "evidence": "../t483-remaining-reaudit/r1048-r1055-nt-error-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 139,
+    "remaining": 74,
+    "nonzero_files": 237,
+    "non_error_points": 2022,
+    "non_error_lines": 28419,
+    "source_reduction_s7": {
+      "points": 25,
+      "lines": 557
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Removed one redundant blank and one repeated line directive from nt_graph.c. Verified the retained line resets and original exclusions. Nine other production files remain byte-identical; copy_fnc.c count correction is separate from source savings. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}
