@@ -75,3 +75,26 @@ final P2 verification is complete.
 [P2 delivery checkpoint](batch-p2-checkpoint.json):cached build and dual publication
 complete;message191,focused37/task-order,Full20 and governance passed. The P2
 commit accompanies the receipt;remote push is verified separately.
+
+[Third-file review](ntcftxt-whole-file-review.json):non-error65->62 blocks,
+1065->1057 lines. Seven harmless original declarations restored;23 excluded
+bodies unchanged. P3 final verification/publication passed;see receipt below.
+[Prior controls](ntcftxt-prior-controls.zip) preserve historical per-function
+compiler/linker and real capture logs,not a pass for the new candidate.
+
+[Fourth-file review](sevid000-whole-file-review.json):64 blocks and132 lines
+remain unchanged,each linked to its specific restoration counterexample.
+Known CHAIN4 word and original UNCHAINED string limitations remain explicit;
+source review does not imply those tests passed. No product edit or new run.
+
+[Fifth-file review](gfx-updt-whole-file-review.json):58 blocks/138 lines
+unchanged;span-only results distinguished from pixel failures. Selected-code
+logical lines checked;no new build or runtime claim.
+
+[Sixth-file review](usercli-whole-file-review.json):49->45 blocks,125->114
+lines;original harmless declaration/macros and contiguous formatting restored.
+P3 final verification/publication passed;residual groups stay pending.
+
+[P3 checkpoint](batch-p3-checkpoint.json):cached full and11x2 publication
+completed;message/focused/task-order,Full20,boundary143/9 and governance passed.
+Git delivery accompanies the receipt;remote push is checked after commit.

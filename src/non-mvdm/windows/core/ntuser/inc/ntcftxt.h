@@ -27,7 +27,9 @@
 #ifndef UNICODE
 #line 64
 #endif
-#line 111
+#line 109
+extern WNDPROC mpPfnAddress[];
+
 BOOL GetClassInfo(
     HINSTANCE hmod OPTIONAL,
     LPCTSTR pszClassName,
@@ -96,7 +98,8 @@ BOOL GetClassInfo(
 #endif
 #line 271
 #ifndef UNICODE
-#line 274
+static HKL  hGMCachedHKL = 0;
+static UINT uGMCachedCP  = 0;
 #endif
 #line 293
 #ifdef FE_SB // GetMessage()
@@ -144,7 +147,8 @@ BOOL GetClassInfo(
 #endif
 #line 414
 #ifndef UNICODE
-#line 417
+static HKL  hMVKCachedHKL = 0;
+static UINT uMVKCachedCP  = 0;
 #endif
 #line 431
 #ifndef UNICODE
@@ -455,7 +459,8 @@ BOOL UnregisterClass(
 #endif // UNICODE
 #line 1111
 #ifndef UNICODE
-#line 1114
+static HKL  hVKSCachedHKL = 0;
+static UINT uVKSCachedCP  = 0;
 #endif
 #line 1122
 #ifdef UNICODE

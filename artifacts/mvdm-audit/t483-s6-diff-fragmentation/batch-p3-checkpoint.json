@@ -1,0 +1,184 @@
+{
+  "packet": "M0 T483 S6 P3",
+  "status": "All build/publication/verification gates passed;Git delivery accompanies this receipt",
+  "source_checkpoint": {
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+        "sha256": "44778462fc1f280645a50b93486d103cc785149a2ca6f2a1da558023f15e85c9"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "sha256": "ba13187c71a1f977e2e5bca413b1ac325c16c4aee18ad3f9f3f6a59057b5a037"
+      }
+    ],
+    "source_files": 2,
+    "deleted": []
+  },
+  "publication": {
+    "status": "published",
+    "package": "6ef59923-8351-4d2c-bcdf-6c56936ef62c",
+    "images": 11,
+    "destinations": [
+      "O:\\winnt\\system32",
+      "O:\\repos.hobby\\ntvdm64\\assets\\release"
+    ],
+    "hashVerified": true
+  },
+  "cached_exit": 0,
+  "publication_exit": 0,
+  "verification_pid": 8244,
+  "source_reduction": {
+    "ntcftxt": {
+      "blocks": 3,
+      "lines": 8
+    },
+    "usercli": {
+      "blocks": 4,
+      "lines": 11
+    }
+  },
+  "unchanged_reviewed": [
+    "sevid000.c",
+    "gfx_updt.c"
+  ],
+  "evidence_root": "build/t483-s6-p3",
+  "winnt_zip_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "verification": {
+    "exit": 0,
+    "focused_exit": 0,
+    "message_exit": 0,
+    "Full": {
+      "Suite": "Full",
+      "ElapsedMs": 405411,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": false,
+      "PreparationMs": 6313,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1122,
+          "CleanupMs": 481,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 11508,
+          "CleanupMs": 507,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 10792,
+          "CleanupMs": 473,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 9805,
+          "CleanupMs": 447,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 179,
+          "CleanupMs": 382,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 66122,
+          "CleanupMs": 439,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 46394,
+          "CleanupMs": 461,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 45446,
+          "CleanupMs": 410,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 15332,
+          "CleanupMs": 482,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 10140,
+          "CleanupMs": 437,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 46271,
+          "CleanupMs": 486,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12761,
+          "CleanupMs": 436,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 28696,
+          "CleanupMs": 538,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 30982,
+          "CleanupMs": 477,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3927,
+          "CleanupMs": 431,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7700,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9869,
+          "CleanupMs": 414,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3953,
+          "CleanupMs": 436,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7466,
+          "CleanupMs": 416,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20098,
+          "CleanupMs": 455,
+          "Passed": true
+        }
+      ]
+    },
+    "boundary": "143 selected objects and9 negative controls passed",
+    "governance": "passed;final document recheck exit 0"
+  },
+  "git": "Accompanying P3 commit;remote push verified after commit"
+}

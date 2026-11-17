@@ -1,0 +1,187 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+  "before_sha256": "6be381616f0b58392a6356566315cff18b6420f2bade76e4f66e8688aea7c8c3",
+  "after_sha256": "ba13187c71a1f977e2e5bca413b1ac325c16c4aee18ad3f9f3f6a59057b5a037",
+  "before": {
+    "blocks": 49,
+    "added": 77,
+    "deleted": 48,
+    "lines": 125
+  },
+  "after": {
+    "blocks": 45,
+    "added": 75,
+    "deleted": 39,
+    "lines": 114
+  },
+  "reduction": {
+    "blocks": 4,
+    "lines": 11
+  },
+  "restored": [
+    "Original primitive-only RtlGetIdFromDirectory declaration at1167, no current consumer found in selected adapters.",
+    "Original NEEDS_FIXING macro at2305, no selected expansion; DBG/HANDLE_FIXUP error bodies remain.",
+    "Original NextWordBoundary definition without extra guard: existing menu binding uses identical preprocessing tokens.",
+    "Original adjacent blanks and HANDLE_FIXUP comment as complete original groups."
+  ],
+  "retained_evidence": [
+    "p236-usercli-review.json",
+    "p236-usercli-investigation.json"
+  ],
+  "counter_review": [
+    "Lookaside-first inclusion deliberately undefines _USERCLI_ through compat/include/opennt_usercli_multipass.h,then full ED declarations follow. Restoring RIP_COMPONENT definition on first pass makes original retained #ifdef RIP_COMPONENT/#error hit on second pass;no unsupported profile enabled.",
+    "Lookaside-only context lacks PRESCALLS,PDISPLAYINFO,PTHREADINFO and cursor/help/private DDE objects. RtlGetIdFromDirectory uses only Windows primitives and does not share that obstacle.",
+    "Original capture declarations lack explicit WINAPI; supported Gd fixtures and current explicit WINAPI providers require consistent calling ABI. No entire private USER closure imported solely to restore unused declarations.",
+    "NextWordBoundary macro body is identical in selected wow_menu_parser_bindings.h;no alternate definition found in selected adapter/compat sources.",
+    "No independent implementation, shim or local macro state added. Necessary include phases and remaining private boundary declarations stay owner decisions."
+  ],
+  "line_error_proof": {
+    "excluded_bodies": 17,
+    "mask_issues": [],
+    "nonoriginal_nondirective_rows": [
+      {
+        "physical": 2247,
+        "logical": 2169,
+        "text": "/* Bounded native USER collaborator declarations. */"
+      },
+      {
+        "physical": 2248,
+        "logical": 2170,
+        "text": "BOOL _GetClientRect(PWND pwnd, LPRECT prc);"
+      },
+      {
+        "physical": 2249,
+        "logical": 2171,
+        "text": "BOOL _IsChild(PWND pwndParent, PWND pwnd);"
+      },
+      {
+        "physical": 2250,
+        "logical": 2172,
+        "text": "BOOL _AdjustWindowRectEx(LPRECT lprc, LONG style, BOOL fMenu, DWORD dwExStyle);"
+      },
+      {
+        "physical": 2251,
+        "logical": 2173,
+        "text": "BOOL _ClientToScreen(PWND pwnd, PPOINT ppt);"
+      },
+      {
+        "physical": 2252,
+        "logical": 2174,
+        "text": "BOOL _ScreenToClient(PWND pwnd, PPOINT ppt);"
+      },
+      {
+        "physical": 2253,
+        "logical": 2175,
+        "text": "BOOL _IsWindowVisible(PWND pwnd);"
+      },
+      {
+        "physical": 2254,
+        "logical": 2176,
+        "text": "BOOL IsVisible(PWND pwnd);"
+      },
+      {
+        "physical": 2255,
+        "logical": 2177,
+        "text": "PWND GetTopLevelWindow(PWND pwnd);"
+      },
+      {
+        "physical": 2256,
+        "logical": 2178,
+        "text": "/* OPENNT-HOST-106: original Tab-navigation collaborator declarations. */"
+      },
+      {
+        "physical": 2257,
+        "logical": 2179,
+        "text": "PWND _NextControl(PWND pwndDlg, PWND pwnd, UINT uFlags);"
+      },
+      {
+        "physical": 2258,
+        "logical": 2180,
+        "text": "PWND _PrevControl(PWND pwndDlg, PWND pwnd, UINT uFlags);"
+      },
+      {
+        "physical": 2259,
+        "logical": 2181,
+        "text": "PWND _GetChildControl(PWND pwndDlg, PWND pwndLevel);"
+      },
+      {
+        "physical": 2260,
+        "logical": 2182,
+        "text": "PWND _GetNextDlgTabItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);"
+      },
+      {
+        "physical": 2261,
+        "logical": 2183,
+        "text": "/* OPENNT-HOST-109: original dialog group-navigation collaborator. */"
+      },
+      {
+        "physical": 2262,
+        "logical": 2184,
+        "text": "PWND _GetNextDlgGroupItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);"
+      },
+      {
+        "physical": 2263,
+        "logical": 2185,
+        "text": "BOOL _IsDescendant(PWND pwndParent, PWND pwndChild);"
+      },
+      {
+        "physical": 2264,
+        "logical": 2186,
+        "text": "BOOL FChildVisible(HWND hwnd);"
+      },
+      {
+        "physical": 2265,
+        "logical": 2187,
+        "text": "DWORD FindCharPosition(LPWSTR lpString, WCHAR ch);"
+      },
+      {
+        "physical": 2266,
+        "logical": 2188,
+        "text": "UINT TextCopy(PLARGE_UNICODE_STRING pstr, LPWSTR lpstr, UINT size);"
+      },
+      {
+        "physical": 2267,
+        "logical": 2189,
+        "text": "DWORD wcsncpycch(LPWSTR pwsDest, LPCWSTR pwszSrc, DWORD cch);"
+      },
+      {
+        "physical": 2268,
+        "logical": 2190,
+        "text": "VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING plstr, LPCWSTR psz,"
+      },
+      {
+        "physical": 2269,
+        "logical": 2191,
+        "text": "        UINT cchLimit);"
+      },
+      {
+        "physical": 2270,
+        "logical": 2192,
+        "text": "extern WCHAR awchSlashStar[];"
+      },
+      {
+        "physical": 2271,
+        "logical": 2193,
+        "text": "extern CHAR achSlashStar[];"
+      },
+      {
+        "physical": 2272,
+        "logical": 2194,
+        "text": "extern WCHAR szOneChar[];"
+      },
+      {
+        "physical": 2273,
+        "logical": 2195,
+        "text": "extern WCHAR szSLASHSTARDOTSTAR[];"
+      }
+    ],
+    "restored_original_lines": [
+      1167,
+      2305,
+      2341
+    ],
+    "status": "Original restored locations pinned by#line;excluded bodies untouched. P3 cached x86/x64 compilation and final verification passed."
+  },
+  "verification": "P3 cached x86/x64,11x2 hash-verified publication,message and focused/task-order,Full20,boundary143/9,governance passed. Receipt batch-p3-checkpoint.json;Git delivery accompanies receipt."
+}

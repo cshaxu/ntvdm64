@@ -1,0 +1,315 @@
+{
+  "file": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "baseline_commit": "70d661c3132dd2f331ee7fdd998fdb825bdeaa6b",
+  "before_sha256": "ba3a564e89f166648c338fcc5a69be97bc694e1bc66683860790546c619a11fb",
+  "after_sha256": "44778462fc1f280645a50b93486d103cc785149a2ca6f2a1da558023f15e85c9",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "before": {
+    "blocks": 65,
+    "added": 2,
+    "deleted": 1063,
+    "lines": 1065
+  },
+  "after": {
+    "blocks": 62,
+    "added": 2,
+    "deleted": 1055,
+    "lines": 1057
+  },
+  "reduction": {
+    "blocks": 3,
+    "lines": 8
+  },
+  "restored_original_lines": [
+    109,
+    272,
+    273,
+    415,
+    416,
+    1112,
+    1113
+  ],
+  "restoration": "Restore complete extern and three static cache declaration units, plus original adjacent blank. No call, initializer value, selected function body, macro binding or provider changed. Restored names have no references outside these declarations in current non-mvdm/wow32-dll source.",
+  "whole_file_review": "All residual masked blocks inventoried; omissions belong to the individually controlled native USER functions. Both originally restorable display wrappers are already present. Do not re-delete unused declarations.",
+  "retained_decisions": [
+    "T483-R2438",
+    "T483-R2439",
+    "T483-R2440",
+    "T483-R2441",
+    "T483-R2444",
+    "T483-R2445"
+  ],
+  "provider_controls": [
+    {
+      "function": "CopyAcceleratorTable",
+      "original_line": 26,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\CopyAcceleratorTable.log",
+      "link_log": "build\\t483-s5-p239\\CopyAcceleratorTable-link.log"
+    },
+    {
+      "function": "FindWindowEx",
+      "original_line": 70,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\FindWindowEx.log",
+      "link_log": "build\\t483-s5-p239\\FindWindowEx-link.log"
+    },
+    {
+      "function": "FindWindow",
+      "original_line": 102,
+      "compile_exit": 0,
+      "link_exit": 1169,
+      "compile_log": "build\\t483-s5-p239\\FindWindow.log",
+      "link_log": "build\\t483-s5-p239\\FindWindow-link.log"
+    },
+    {
+      "function": "GetClassInfoEx",
+      "original_line": 157,
+      "compile_exit": 0,
+      "link_exit": 1169,
+      "compile_log": "build\\t483-s5-p239\\GetClassInfoEx.log",
+      "link_log": "build\\t483-s5-p239\\GetClassInfoEx-link.log"
+    },
+    {
+      "function": "GetClipboardFormatName",
+      "original_line": 197,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetClipboardFormatName.log",
+      "link_log": "build\\t483-s5-p239\\GetClipboardFormatName-link.log"
+    },
+    {
+      "function": "GetKeyNameText",
+      "original_line": 234,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetKeyNameText.log",
+      "link_log": "build\\t483-s5-p239\\GetKeyNameText-link.log"
+    },
+    {
+      "function": "GetMessage",
+      "original_line": 276,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetMessage.log",
+      "link_log": "build\\t483-s5-p239\\GetMessage-link.log"
+    },
+    {
+      "function": "GetKeyboardLayoutName",
+      "original_line": 350,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\GetKeyboardLayoutName.log",
+      "link_log": "build\\t483-s5-p239\\GetKeyboardLayoutName-link.log"
+    },
+    {
+      "function": "MapVirtualKey",
+      "original_line": 383,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\MapVirtualKey.log",
+      "link_log": "build\\t483-s5-p239\\MapVirtualKey-link.log"
+    },
+    {
+      "function": "MapVirtualKeyEx",
+      "original_line": 418,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\MapVirtualKeyEx.log",
+      "link_log": "build\\t483-s5-p239\\MapVirtualKeyEx-link.log"
+    },
+    {
+      "function": "PostMessage",
+      "original_line": 471,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\PostMessage.log",
+      "link_log": null
+    },
+    {
+      "function": "PostThreadMessage",
+      "original_line": 534,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\PostThreadMessage.log",
+      "link_log": "build\\t483-s5-p239\\PostThreadMessage-link.log"
+    },
+    {
+      "function": "SetClassLong",
+      "original_line": 639,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\SetClassLong.log",
+      "link_log": null
+    },
+    {
+      "function": "RegisterClipboardFormat",
+      "original_line": 846,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\RegisterClipboardFormat.log",
+      "link_log": "build\\t483-s5-p239\\RegisterClipboardFormat-link.log"
+    },
+    {
+      "function": "RegisterWindowMessage",
+      "original_line": 867,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\RegisterWindowMessage.log",
+      "link_log": "build\\t483-s5-p239\\RegisterWindowMessage-link.log"
+    },
+    {
+      "function": "RemoveProp",
+      "original_line": 889,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\RemoveProp.log",
+      "link_log": "build\\t483-s5-p239\\RemoveProp-link.log"
+    },
+    {
+      "function": "SendMessageCallback",
+      "original_line": 917,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\SendMessageCallback.log",
+      "link_log": "build\\t483-s5-p239\\SendMessageCallback-link.log"
+    },
+    {
+      "function": "SendNotifyMessage",
+      "original_line": 957,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\SendNotifyMessage.log",
+      "link_log": "build\\t483-s5-p239\\SendNotifyMessage-link.log"
+    },
+    {
+      "function": "SetProp",
+      "original_line": 1018,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\SetProp.log",
+      "link_log": "build\\t483-s5-p239\\SetProp-link.log"
+    },
+    {
+      "function": "VkKeyScan",
+      "original_line": 1089,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\VkKeyScan.log",
+      "link_log": "build\\t483-s5-p239\\VkKeyScan-link.log"
+    },
+    {
+      "function": "VkKeyScanEx",
+      "original_line": 1115,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\VkKeyScanEx.log",
+      "link_log": "build\\t483-s5-p239\\VkKeyScanEx-link.log"
+    },
+    {
+      "function": "EnumDisplayDevices",
+      "original_line": 1163,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\EnumDisplayDevices.log",
+      "link_log": "build\\t483-s5-p239\\EnumDisplayDevices-link.log"
+    },
+    {
+      "function": "EnumDisplaySettings",
+      "original_line": 1222,
+      "compile_exit": 0,
+      "link_exit": 0,
+      "compile_log": "build\\t483-s5-p239\\EnumDisplaySettings.log",
+      "link_log": "build\\t483-s5-p239\\EnumDisplaySettings-link.log"
+    },
+    {
+      "function": "EnumDisplaySettingsEx",
+      "original_line": 1239,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\EnumDisplaySettingsEx.log",
+      "link_log": null
+    },
+    {
+      "function": "ChangeDisplaySettings",
+      "original_line": 1389,
+      "compile_exit": 0,
+      "link_exit": 0,
+      "compile_log": "build\\t483-s5-p239\\ChangeDisplaySettings.log",
+      "link_log": "build\\t483-s5-p239\\ChangeDisplaySettings-link.log"
+    },
+    {
+      "function": "ChangeDisplaySettingsEx",
+      "original_line": 1403,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\ChangeDisplaySettingsEx.log",
+      "link_log": "build\\t483-s5-p239\\ChangeDisplaySettingsEx-link.log"
+    },
+    {
+      "function": "CallMsgFilter",
+      "original_line": 1480,
+      "compile_exit": 2,
+      "link_exit": null,
+      "compile_log": "build\\t483-s5-p239\\CallMsgFilter.log",
+      "link_log": null
+    },
+    {
+      "function": "DrawCaptionTemp",
+      "original_line": 1544,
+      "compile_exit": 0,
+      "link_exit": 1120,
+      "compile_log": "build\\t483-s5-p239\\DrawCaptionTemp.log",
+      "link_log": "build\\t483-s5-p239\\DrawCaptionTemp-link.log"
+    }
+  ],
+  "prior_control_warning": "Historical controls apply to unchanged omitted original units and source boundaries. They are not a compile/test pass for the new declaration restoration.",
+  "cleanup_evidence": {
+    "input": "65536 ANSI characters, no injected allocation failure",
+    "real_capture": "original RtlCaptureAnsiString rejects length exceeding MAXUSHORT",
+    "original": {
+      "allocations": 2,
+      "frees": 0,
+      "retained": 2
+    },
+    "current": {
+      "allocations": 2,
+      "frees": 2,
+      "retained": 0
+    },
+    "normal_capture_cleanup": "both pass",
+    "production_changed": false,
+    "logs": [
+      "build\\t483-s5-p239\\menu-original-run.log",
+      "build\\t483-s5-p239\\menu-current-run.log"
+    ]
+  },
+  "counter_review": [
+    "Current query_native calls modern GetClassInfoExA; original GetClassInfoEx would reenter that same private mapping.",
+    "Original SetClassLong menu protocol passes CLSMENUNAME and exchanges old allocations, unlike native public SetClassLongA.",
+    "Actual GetMessage original control reports missing NtUserGetMessage and RtlWCSMessageWParamCharToMB.",
+    "Real original menu capture overflow allocates two strings and frees none; current cleanup frees both.",
+    "Warning-only, unused declarations do not justify deletion; seven original declarations restored."
+  ],
+  "line_proof": {
+    "nonempty_exact_original_rows": 371,
+    "explained_nonoriginal_rows": [
+      {
+        "logical": 631,
+        "text": "    LocalFree(pcmn->pszClientAnsiMenuName);"
+      },
+      {
+        "logical": 632,
+        "text": "    LocalFree(pcmn->pwszClientUnicodeMenuName);"
+      }
+    ],
+    "unexplained_mismatches": 0,
+    "error_bodies": 23,
+    "mask_issues": []
+  },
+  "verification": "P3 cached x86/x64,11x2 hash-verified publication,message and focused/task-order,Full20,boundary143/9,governance passed. Receipt batch-p3-checkpoint.json;Git delivery accompanies receipt.",
+  "evidence_archive": "ntcftxt-prior-controls.zip"
+}

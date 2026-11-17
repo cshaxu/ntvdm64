@@ -36,18 +36,27 @@ normalized/error-masked differences;255 have nonzero counts. The initial2333
 block sum is conservative:75 mask-review cases in31 files remain counted.
 These are counting uncertainties,not permission to delete or retain code.
 Top8 order is unaffected. First file:ntuser/kernel/ntstubs.c,131 blocks.
-S6 file review2/255 complete;P2 delivers both files with all required gates.
-ntstubs.c:131->130 non-error blocks,9238->9237 changed lines.
-wmdisp32.c:78->75 blocks,228->224 lines. Restored original CALLPROC and R1519
-class/name stores;removed two pure-format differences. Remaining boundaries
-stay pending owner. Current census2329 blocks;cumulative reduction4 blocks/5 lines.
-[ntstubs evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/ntstubs-whole-unit-review.json)
-and [wmdisp32 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/wmdisp32-progress.json).
-[P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p2-checkpoint.json):
-cached x86/x64,publish11x2,message191,focused37/task-order,Full20,boundary143/9,
-governance/links passed. Git identity is the accompanying delivery commit.
-Current backlog1644 rows/1649 R points;R1519 restored,not deferred.
-Next file:ntcftxt.h,65 non-error blocks. Do not restart completed files.
+S6 review6/255 complete;249 files remain. Four changed files delivered across
+P2/P3,two unchanged files fully reviewed. Current census2322 blocks;
+cumulative reduction11 blocks/24 lines,all verified for delivery.
+
+| File | Non-error blocks | Changed lines | Result |
+| --- | --- | --- | --- |
+| ntstubs.c |131->130|9238->9237|P2 restored original declaration|
+| wmdisp32.c |78->75|228->224|P2 restored original stores/format|
+| ntcftxt.h |65->62|1065->1057|P3 restored seven original declarations|
+| sevid000.c |64->64|132->132|No code edit;64 evidenced pending decisions|
+| gfx_updt.c |58->58|138->138|No code edit;58 evidenced pending decisions|
+| usercli.h |49->45|125->114|P3 restored declaration/macros/format|
+
+[P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/batch-p3-checkpoint.json)
+records cached x86/x64,publish11x2,message/focused/task-order,Full20,
+boundary143/9 and governance passes. Git delivery accompanies the receipt.
+Per-file evidence is indexed in the worklist README. Residual decisions remain
+pending owner,not approved. Known sevid000 CHAIN4 word/UNCHAINED string
+limitations are not represented as passing tests. Backlog1644 rows/1649 R points;
+R1519 remains restored,not deferred. Next file:oemuni/process.c,47 blocks.
+Do not restart completed file reviews.
 
 S5's2720-point register is historical identity/evidence:1018 restored/confirmed
 and delivered,52 approved/policy,1650 pending owner. The
@@ -59,11 +68,10 @@ accumulate;substantive whole-file batches follow build,publish,test,commit,push.
 
 ## Current Technical Baseline
 
-S6 P2:11 images published/hash-verified to assets/release and O:/winnt/system32.
-Package603b38aa-213d-44f2-9096-2528fb865a59. Full20 includes actual NESticle
-menu/Escape. No guest or winnt.zip changes. P2 receipt above binds final source,
-manifest and test results. S5 package87c73097-d004-454e-925b-fea9a16f9552 is
-superseded by this verified P2 publication.
+S6 P3:11 images published/hash-verified to assets/release and O:/winnt/system32.
+Package6ef59923-8351-4d2c-bcdf-6c56936ef62c. Full20 includes actual NESticle
+menu/Escape. No guest or winnt.zip changes. P3 receipt binds final source,
+manifest and test results;P2 publication is superseded.
 
 S5 fixed365-file raw metric:#error included,#line excluded,4862blocks/89379lines;
 cumulative reduction435blocks/30534lines. Do not compare this directly to the

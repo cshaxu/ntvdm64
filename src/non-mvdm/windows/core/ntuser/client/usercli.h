@@ -399,6 +399,8 @@ extern UINT gnCharset;
  */
 #define DBT_TEXT    0x0001
 #define DBT_FOCUS   0x0002
+
+
 #line 407
 /***************************************************************************\
 *
@@ -1078,10 +1080,7 @@ typedef struct tagCURSORRESOURCE {
 
 
 #line 1066
-#ifndef NextWordBoundary
-#line 1066
 #define NextWordBoundary(p)     ((PBYTE)(p) + ((DWORD)(p) & 1))
-#endif
 #line 1067
 #define NextDWordBoundary(p)    ((PBYTE)(p) + ((DWORD)(-(LONG)(p)) & 3))
 #line 1068
@@ -1198,6 +1197,8 @@ LONG TabTextOut(HDC hdc, int x, int y, LPCWSTR lpstring, int nCount,
 #endif
 #line 1164
 #ifndef _USERK_
+#line 1167
+int             RtlGetIdFromDirectory(PBYTE, BOOL, int, int, DWORD, PDWORD);
 #line 1170
 #endif  // !_USERK_
 #if !defined(WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY) && !defined(OPENNT_USERCLI_EDIT_STATE_SUBSET_H)
@@ -2386,7 +2387,10 @@ HMENU MDISetMenu(PWND,BOOL,HMENU,HMENU);
 #endif
 #line 2303
 #endif // !_USERCLI_
-#line 2307
+#line 2304
+
+#define NEEDS_FIXING(h)    (!((ULONG)h & 0xffff0000))
+
 #if DBG
 #line 2308
 #error
@@ -2403,7 +2407,10 @@ HMENU MDISetMenu(PWND,BOOL,HMENU,HMENU);
 #line 2337
 #define CHECK_HANDLE_WARNING(h,bZ)
 #endif
-#line 2342
+#line 2339
+
+
+//needs to turn HANDLE_FIXUP on inorder to fix up the handles
 #if HANDLE_FIXUP
 #line 2343
 #error

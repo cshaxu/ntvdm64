@@ -1,0 +1,1079 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+  "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+  "current_sha256": "d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602",
+  "before": {
+    "blocks": 58,
+    "added": 69,
+    "deleted": 69,
+    "lines": 138
+  },
+  "after": {
+    "blocks": 58,
+    "added": 69,
+    "deleted": 69,
+    "lines": 138
+  },
+  "reduction": {
+    "blocks": 0,
+    "lines": 0
+  },
+  "source_changed": false,
+  "points": [
+    {
+      "review_id": "T483-R0866",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 text scan/copy backing stride",
+      "original_restoration_evidence": "9/9 scan failures on exact original expression restoration; current control passes. CHAIN2 text characters occupy plane01 at eight-byte backing spacing; video_copy is compact two-byte character/attribute. Independent real guest VDD cross-mode evidence is indexed by r0846-r0851-egawrtm0-review.json. No new compact backing path is introduced.",
+      "options": "Keep minimal expression; no repacking or new helper",
+      "recommendation": "Retain with observed negative control",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0866-r0870-gfx-dirty-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0867",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 text scan/copy backing stride",
+      "original_restoration_evidence": "9/9 scan failures on exact original expression restoration; current control passes. CHAIN2 text characters occupy plane01 at eight-byte backing spacing; video_copy is compact two-byte character/attribute. Independent real guest VDD cross-mode evidence is indexed by r0846-r0851-egawrtm0-review.json. No new compact backing path is introduced.",
+      "options": "Keep minimal expression; no repacking or new helper",
+      "recommendation": "Retain with observed negative control",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0866-r0870-gfx-dirty-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0868",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 text scan/copy backing stride",
+      "original_restoration_evidence": "6/9 scan failures on exact original expression restoration; current control passes. CHAIN2 text characters occupy plane01 at eight-byte backing spacing; video_copy is compact two-byte character/attribute. Independent real guest VDD cross-mode evidence is indexed by r0846-r0851-egawrtm0-review.json. No new compact backing path is introduced.",
+      "options": "Keep minimal expression; no repacking or new helper",
+      "recommendation": "Retain with observed negative control",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0866-r0870-gfx-dirty-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0869",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 text scan/copy backing stride",
+      "original_restoration_evidence": "8/12 copied cells wrong on exact original expression restoration; current control passes. CHAIN2 text characters occupy plane01 at eight-byte backing spacing; video_copy is compact two-byte character/attribute. Independent real guest VDD cross-mode evidence is indexed by r0846-r0851-egawrtm0-review.json. No new compact backing path is introduced.",
+      "options": "Keep minimal expression; no repacking or new helper",
+      "recommendation": "Retain with observed negative control",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0866-r0870-gfx-dirty-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0870",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 text scan/copy backing stride",
+      "original_restoration_evidence": "9/12 copied cells wrong on exact original expression restoration; current control passes. CHAIN2 text characters occupy plane01 at eight-byte backing spacing; video_copy is compact two-byte character/attribute. Independent real guest VDD cross-mode evidence is indexed by r0846-r0851-egawrtm0-review.json. No new compact backing path is introduced.",
+      "options": "Keep minimal expression; no repacking or new helper",
+      "recommendation": "Retain with observed negative control",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0866-r0870-gfx-dirty-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0875",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0876",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0878",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0879",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0880",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0882",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0883",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0886",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0888",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0889",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0891",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0892",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0894",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0895",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0896",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0898",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0899",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0900",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0901",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0902",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 nonzero address or character stride",
+      "original_restoration_evidence": "Shared EVID plane backing proven by r0502 and r0846-r0851; CHAIN2 A0 separates planes0/1, and next character uses next even plane slot. For logical display offset4, required backing8 vs original4. USHORT stride4 gives8 bytes vs original stride2 gives4 bytes. Cursor attribute at dirty offset4+1 requires backing9 vs original5. Restoring these expressions reads intervening plane storage or wrong character; actual scan/copy controls in r0866-r0870 confirm this contract. No assumption that historical compact layout was invalid in its own context.",
+      "options": "Keep existing expression; no extra representation",
+      "recommendation": "Retain minimal correction with source counterexample",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0871-r0902-gfx-callback-text-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0904",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=8191 clean_fail=0 partial_fail=0",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0905",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=240",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0906",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "Original search stride samples interleaved storage and expands dirty spans; final pixel copies remain correct in these cases. Both fail3/3 expected repaint-span checks while current passes. Retain only as qualified dirty-range/performance decision, not a claim of pixel corruption. full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0 span_fail=3",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0907",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=157",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0908",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=80",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0909",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=158",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0910",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=240",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0911",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "Original search stride samples interleaved storage and expands dirty spans; final pixel copies remain correct in these cases. Both fail3/3 expected repaint-span checks while current passes. Retain only as qualified dirty-range/performance decision, not a claim of pixel corruption. full_cells=8192 full_fail=0 clean_fail=0 partial_fail=0 span_fail=3",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0912",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=157",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0913",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=0 partial_fail=80",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0914",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CGA CHAIN2 copy/dirty-span addressing",
+      "original_restoration_evidence": "full_cells=8192 full_fail=0 clean_fail=1 partial_fail=158",
+      "options": "Keep existing expression; no new helper",
+      "recommendation": "Minimum residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0903-r0914-gfx-cga-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0915",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=8 rectangle_fail=8 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +3/-3 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0916",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=0 rectangle_fail=4 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0917",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=0 rectangle_fail=8 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0918",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=8 rectangle_fail=12 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0919",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0920",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0921",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0922",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=12 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0923",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=6 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0924",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0925",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0926",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +2/-2 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0927",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=4 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0928",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=16 backing_fail=2 rectangle_fail=0 refusal_fail=0 16 cases: up/down, zero/nonzero column, one/two-line scroll, full/nonblank/blank-right-column reduction; compare entire backing including untouched planes and host rectangle; host rejection and V86 refusal preserve memory. Exact two product bodies with controlled host/getter boundaries.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0932",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "Original assertion makes no SetMarkPointers call. After SIMPLE_MARKING, entering CHAIN2 would retain simple EVID pointers: original simple marker increments total but leaves EGA bitmap empty. Real prior marker control and consumer chain in r0489-r0494-ev-glue-review.json qualify required bitmap selection, independently of calling current helper. Current ev_glue case4 reuses original unchained byte/word owners plus previously minimized string conversion.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0934",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=20 copied_cell_fail=80 span_fail=9 cursor_fail=0 20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0935",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=20 copied_cell_fail=14 span_fail=0 cursor_fail=0 20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0936",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=20 copied_cell_fail=0 span_fail=12 cursor_fail=0 20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0937",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=20 copied_cell_fail=0 span_fail=8 cursor_fail=0 20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0938",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=20 copied_cell_fail=56 span_fail=8 cursor_fail=0 20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0939",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=20 copied_cell_fail=118 span_fail=18 cursor_fail=0 20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    },
+    {
+      "review_id": "T483-R0940",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "problem": "CHAIN2 display/scroll contract",
+      "original_restoration_evidence": "cases=20 copied_cell_fail=0 span_fail=0 cursor_fail=20 20 cases: screen starts0/1, full/unchanged/single-cell edits at8 positions; compare copied cells, dirty span and cursor attribute. Exact product function, controlled getters/rectangle sink.",
+      "options": "Minimum current expression, no second representation",
+      "recommendation": "Residual pending owner",
+      "mirror_diff_delta": "0; remaining +1/-1 original-relative lines",
+      "evidence": "r0915-r0940-gfx-final-review.json",
+      "status": "qualified-pending-owner-decision",
+      "owner_decision": "pending"
+    }
+  ],
+  "line_error_review": {
+    "excluded_bodies": 59,
+    "mask_issues": [],
+    "nonoriginal_nondirective_rows": [
+      {
+        "physical": 542,
+        "logical": 549,
+        "text": "\t\tfrom = (IU32 *) &planes[(offset<<2)];"
+      },
+      {
+        "physical": 543,
+        "logical": 550,
+        "text": "\t\tfor(j=0;j<shorts_per_line;j++,from+=2)"
+      },
+      {
+        "physical": 545,
+        "logical": 552,
+        "text": "\t\t\tif(*to++ != get_char_attr(from))"
+      },
+      {
+        "physical": 547,
+        "logical": 554,
+        "text": "\t\t\t\tto--;"
+      },
+      {
+        "physical": 548,
+        "logical": 555,
+        "text": "\t\t\t\tfor(k=shorts_per_line-1-j;*(to+k) == get_char_attr(from+(k<<1));k--)"
+      },
+      {
+        "physical": 591,
+        "logical": 596,
+        "text": "\t\tfrom = (USHORT *)get_chain2_screen_ptr(get_dirty_offset(i)+get_dirty_start(i));"
+      },
+      {
+        "physical": 596,
+        "logical": 601,
+        "text": "\t\t\tfrom += 4;\t\t\t/* skip over the planes 2,3 */"
+      },
+      {
+        "physical": 772,
+        "logical": 772,
+        "text": "\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      },
+      {
+        "physical": 790,
+        "logical": 790,
+        "text": "\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 800,
+        "logical": 800,
+        "text": "\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 820,
+        "logical": 820,
+        "text": "\t\t\tfrom = (USHORT * ) get_chain2_screen_ptr(screen_start);"
+      },
+      {
+        "physical": 826,
+        "logical": 826,
+        "text": "\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 846,
+        "logical": 846,
+        "text": "\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 870,
+        "logical": 870,
+        "text": "\t\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,"
+      },
+      {
+        "physical": 889,
+        "logical": 889,
+        "text": "\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0, split_line, screen_start );"
+      },
+      {
+        "physical": 931,
+        "logical": 931,
+        "text": "\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      },
+      {
+        "physical": 946,
+        "logical": 946,
+        "text": "\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 964,
+        "logical": 964,
+        "text": "\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 984,
+        "logical": 984,
+        "text": "\t\t\t\t\tget_chain2_screen_ptr(screen_start) , 0, split_line, screen_start );"
+      },
+      {
+        "physical": 1021,
+        "logical": 1021,
+        "text": "\t\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      },
+      {
+        "physical": 1026,
+        "logical": 1026,
+        "text": "\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 1080,
+        "logical": 1080,
+        "text": "\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,"
+      },
+      {
+        "physical": 1095,
+        "logical": 1095,
+        "text": "\t\t\t\t\t\tget_chain2_screen_ptr(screen_start), 0,"
+      },
+      {
+        "physical": 1130,
+        "logical": 1130,
+        "text": "\t\tfrom = (USHORT *) get_chain2_screen_ptr(screen_start);"
+      },
+      {
+        "physical": 1135,
+        "logical": 1135,
+        "text": "\t\t\tfrom += 4;\t\t/* planes 2,3 interleaved */"
+      },
+      {
+        "physical": 1152,
+        "logical": 1152,
+        "text": "\t\t\tget_chain2_screen_ptr(screen_start), 0, lines_per_screen, screen_start);"
+      },
+      {
+        "physical": 1169,
+        "logical": 1169,
+        "text": "\t\tattr = *(get_chain2_screen_ptr(dirty_curs_offs + 1));"
+      },
+      {
+        "physical": 1459,
+        "logical": 1457,
+        "text": "\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 1497,
+        "logical": 1495,
+        "text": "\t\t    from = (USHORT *)get_chain2_screen_ptr((start_line *"
+      },
+      {
+        "physical": 1508,
+        "logical": 1506,
+        "text": "\t\t\t\t\t\tfor(k=j-1;*(to+k)== *(from+(k<<2));k--)"
+      },
+      {
+        "physical": 1527,
+        "logical": 1525,
+        "text": "\t\t\t\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 1532,
+        "logical": 1530,
+        "text": "\t\t\t\t\t\tfrom += l << 2;"
+      },
+      {
+        "physical": 1538,
+        "logical": 1536,
+        "text": "\t\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 1544,
+        "logical": 1542,
+        "text": "\t\t\tfrom = (USHORT *) get_chain2_screen_ptr((start_line * SCAN_LINE_LENGTH + ODD_OFFSET) << 1);"
+      },
+      {
+        "physical": 1553,
+        "logical": 1551,
+        "text": "\t\t\t\t\t\tfor(k=j-1;*(to+k)== *(from+(k<<2));k--)"
+      },
+      {
+        "physical": 1570,
+        "logical": 1568,
+        "text": "\t\t\t\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 1575,
+        "logical": 1573,
+        "text": "\t\t\t\t\t\tfrom += l << 2;"
+      },
+      {
+        "physical": 1581,
+        "logical": 1579,
+        "text": "\t\t\t\t\tfrom += 4;"
+      },
+      {
+        "physical": 2405,
+        "logical": 2398,
+        "text": "\t    top_left_ptr = (short *) get_chain2_screen_ptr((start - gvi_pc_low_regen)<<1);"
+      },
+      {
+        "physical": 2406,
+        "logical": 2399,
+        "text": "        top_right_ptr    = top_left_ptr + 2 * (width - 2);"
+      },
+      {
+        "physical": 2407,
+        "logical": 2400,
+        "text": "\t    bottom_right_ptr = top_right_ptr + 2 * bpl * (height - 1);"
+      },
+      {
+        "physical": 2415,
+        "logical": 2408,
+        "text": "\t\t        top_right_ptr -= 4;\t/* yes go to bottom of next */"
+      },
+      {
+        "physical": 2416,
+        "logical": 2409,
+        "text": "\t\t        bottom_right_ptr -= 4;"
+      },
+      {
+        "physical": 2422,
+        "logical": 2415,
+        "text": "\t\t        ptr -= 2 * bpl;\t/* skipping interleaved planes */"
+      },
+      {
+        "physical": 2425,
+        "logical": 2418,
+        "text": "\t    width = (int)(top_right_ptr - top_left_ptr + 4);"
+      },
+      {
+        "physical": 2484,
+        "logical": 2475,
+        "text": "\tdest = get_chain2_screen_ptr((start - gvi_pc_low_regen)<<1);"
+      },
+      {
+        "physical": 2485,
+        "logical": 2476,
+        "text": "\tsrc = dest + lines * bpl * 4;"
+      },
+      {
+        "physical": 2496,
+        "logical": 2487,
+        "text": "\t\t\td_ptr += 4;\t\t\t/* skip FONT and plane 3 */"
+      },
+      {
+        "physical": 2497,
+        "logical": 2488,
+        "text": "\t\t\ts_ptr += 4;"
+      },
+      {
+        "physical": 2500,
+        "logical": 2491,
+        "text": "\t\tdest += bpl * 4;"
+      },
+      {
+        "physical": 2501,
+        "logical": 2492,
+        "text": "\t\tsrc += bpl * 4;"
+      },
+      {
+        "physical": 2523,
+        "logical": 2511,
+        "text": "\t\t\td_ptr += 4;"
+      },
+      {
+        "physical": 2526,
+        "logical": 2514,
+        "text": "\t\tdest += bpl * 4;"
+      },
+      {
+        "physical": 2624,
+        "logical": 2612,
+        "text": "\tdest = get_chain2_screen_ptr((start - gvi_pc_low_regen)<<1) + (height-1) * bpl * 4;"
+      },
+      {
+        "physical": 2625,
+        "logical": 2613,
+        "text": "\tsrc = dest - lines * bpl * 4;"
+      },
+      {
+        "physical": 2636,
+        "logical": 2624,
+        "text": "\t\t\td_ptr += 4;"
+      },
+      {
+        "physical": 2637,
+        "logical": 2625,
+        "text": "\t\t\ts_ptr += 4;"
+      },
+      {
+        "physical": 2640,
+        "logical": 2628,
+        "text": "\t\tdest -= bpl * 4;"
+      },
+      {
+        "physical": 2641,
+        "logical": 2629,
+        "text": "\t\tsrc -= bpl * 4;"
+      },
+      {
+        "physical": 2663,
+        "logical": 2648,
+        "text": "\t\t\td_ptr += 4;"
+      },
+      {
+        "physical": 2666,
+        "logical": 2651,
+        "text": "\t\tdest -= bpl * 4;"
+      },
+      {
+        "physical": 3623,
+        "logical": 3682,
+        "text": "\t\t\t\t\tSetMarkPointers(4);"
+      },
+      {
+        "physical": 4016,
+        "logical": 4739,
+        "text": "    from = (unsigned short *) get_chain2_screen_ptr(screen_start);"
+      },
+      {
+        "physical": 4023,
+        "logical": 4746,
+        "text": "\t    from += 4;\t\t/* planes 2,3 interleaved */"
+      },
+      {
+        "physical": 4040,
+        "logical": 4763,
+        "text": "\t\t    wfrom = from + k*4;"
+      },
+      {
+        "physical": 4043,
+        "logical": 4766,
+        "text": "\t\t    for(;*wto== *wfrom;k--,wto--,wfrom-=4){};"
+      },
+      {
+        "physical": 4065,
+        "logical": 4788,
+        "text": "\t\t\tfrom+=4;"
+      },
+      {
+        "physical": 4071,
+        "logical": 4794,
+        "text": "\t\t    to++; from +=4;"
+      },
+      {
+        "physical": 4091,
+        "logical": 4814,
+        "text": "\t\tattr = *(get_chain2_screen_ptr(dirty_curs_offs + 1));"
+      }
+    ],
+    "scope": "All nonempty non-directive rows map exactly to original logical lines except the69 registered changed rows. Excluded-body directives may themselves retain compressed logical positions; selected code resets remain correct. A global SequenceMatcher on repeated endif falsely pairs different groups and is not used as line proof."
+  },
+  "counter_review": [
+    "get_chain2_screen_ptr maps logical4 to backing8; original get_screen_ptr maps it to4. Current USHORT stride4 follows8-byte cells. Prior independent guest VDD transitions establish shared backing requirement.",
+    "Zero-offset calls and compatible original callback declarations already restored. No standalone harmless deletion or formatting hunk remains.",
+    "R0906/R0911/R0916/R0917/R0936/R0937 demonstrate dirty span or rectangle differences only,not corrupted copied pixels.",
+    "R0932 original assertion leaves simple marking selected with empty EGA bitmap; case4 reuses original unchained scalar marker providers."
+  ],
+  "verification": "Source review and prior exact-body/address counterexamples reused;no new build/runtime claim. Remaining changes pending owner,not approved."
+}
