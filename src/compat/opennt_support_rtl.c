@@ -19,14 +19,12 @@ typedef struct _OPENNT_SUPPORT_THREAD_STATE {
     OPENNT_SUPPORT_TEB Teb;
     OPENNT_SUPPORT_PROCESS_PARAMETERS Parameters;
     OPENNT_SUPPORT_PEB Peb;
-    CRITICAL_SECTION PebLock;
     WCHAR CurrentDirectory[MAX_PATH + 2];
 } OPENNT_SUPPORT_THREAD_STATE;
 
 static __declspec(thread) OPENNT_SUPPORT_THREAD_STATE opennt_support_thread_state;
 static INIT_ONCE opennt_support_lock_once = INIT_ONCE_STATIC_INIT;
 static CRITICAL_SECTION opennt_support_lock;
-static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void);
 
 /* DIVERGENCE(ADAPTER-WIN32-026): the imported OpenNT RTL owns environment
  * allocation, mutation, replacement and release.  A standalone worker lacks
@@ -34,41 +32,29 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void);
  * private, page-backed snapshot at TLS initialization.  This is only the
  * finite PEB ingress used by the original clone path; it is never a guest
  * pointer and contains no environment-editing policy. */
-static PVOID opennt_support_environment_snapshot(void)
+BOOL OpenNtRtlRefreshEnvironmentSnapshot(VOID)
 {
     PWCHAR source;
     PVOID snapshot;
+    PVOID previous;
     SIZE_T units = 0u;
 
     source = GetEnvironmentStringsW();
-    if (source == NULL) return NULL;
+    if (source == NULL) return FALSE;
     while (units < 32767u && !(source[units] == L'\0' &&
         source[units + 1u] == L'\0')) ++units;
     if (units == 32767u) {
         FreeEnvironmentStringsW(source);
-        return NULL;
+        return FALSE;
     }
     units += 2u;
     snapshot = VirtualAlloc(NULL, units * sizeof(WCHAR),
         MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
     if (snapshot != NULL) memcpy(snapshot, source, units * sizeof(WCHAR));
     FreeEnvironmentStringsW(source);
-    return snapshot;
-}
-
-/* The original clone path reads its current PEB environment exactly once.
- * Refresh its private ingress immediately before that path is selected, so a
- * Base-client projection observes the current Win32 environment rather than
- * the first TLS consumer's startup-time snapshot. */
-BOOL OpenNtRtlRefreshEnvironmentSnapshot(VOID)
-{
-    OPENNT_SUPPORT_THREAD_STATE *state = opennt_support_thread();
-    PVOID replacement = opennt_support_environment_snapshot();
-    PVOID previous;
-
-    if (replacement == NULL) return FALSE;
-    previous = state->Parameters.Environment;
-    state->Parameters.Environment = replacement;
+    if (snapshot == NULL) return FALSE;
+    previous = opennt_support_thread_state.Parameters.Environment;
+    opennt_support_thread_state.Parameters.Environment = snapshot;
     if (previous != NULL) (void)VirtualFree(previous, 0u, MEM_RELEASE);
     return TRUE;
 }
@@ -82,10 +68,16 @@ static BOOL CALLBACK opennt_support_initialize_lock(PINIT_ONCE once, PVOID param
     return TRUE;
 }
 
+static CRITICAL_SECTION *opennt_support_peb_lock(void)
+{
+    InitOnceExecuteOnce(&opennt_support_lock_once, opennt_support_initialize_lock, NULL, NULL);
+    return &opennt_support_lock;
+}
+
 static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
 {
     OPENNT_SUPPORT_THREAD_STATE *state = &opennt_support_thread_state;
-    if (state->Teb.StaticUnicodeString.Buffer == NULL) {
+    if (state->Peb.ProcessParameters == NULL) {
         STARTUPINFOW startup;
         GetStartupInfoW(&startup);
         state->Teb.StaticUnicodeString.Buffer = state->StaticBuffer;
@@ -95,12 +87,11 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
         state->Parameters.CurrentDirectory.DosPath.MaximumLength = (USHORT)sizeof(state->CurrentDirectory);
         state->Parameters.ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         state->Parameters.WindowFlags = startup.dwFlags;
-        state->Parameters.Environment = opennt_support_environment_snapshot();
+        if (state->Parameters.Environment == NULL) (void)OpenNtRtlRefreshEnvironmentSnapshot();
         state->Peb.ProcessParameters = &state->Parameters;
         state->Peb.ProcessHeap = GetProcessHeap();
         state->Peb.ImageBaseAddress = GetModuleHandleW(NULL);
-        InitializeCriticalSection(&state->PebLock);
-        state->Peb.FastPebLock = &state->PebLock;
+        state->Peb.FastPebLock = opennt_support_peb_lock();
         state->Teb.ClientId.UniqueProcess = (HANDLE)(ULONG_PTR)GetCurrentProcessId();
         state->Teb.ClientId.UniqueThread = (HANDLE)(ULONG_PTR)GetCurrentThreadId();
     }
@@ -238,33 +229,6 @@ NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING destination, PCOEM_ST
     }
     return opennt_support_convert_to_unicode(destination, source, CP_OEMCP, allocate);
 }
-/* DIVERGENCE(ADAPTER-WIN32-027): preserve the original fixed-buffer RTL
- * contract while routing its OEM conversion through the public modern API.
- * The caller owns both buffers; no host pointer becomes a guest identity. */
-NTSTATUS NTAPI RtlOemToUnicodeN(PWSTR destination, ULONG maximum_bytes,
-                                PULONG converted_bytes, PCHAR source,
-                                ULONG source_bytes) {
-    int characters;
-    ULONG required_bytes;
-    if (converted_bytes != NULL) *converted_bytes = 0u;
-    if (source_bytes == 0u) return STATUS_SUCCESS;
-    if (source == NULL || destination == NULL || source_bytes > (ULONG)INT_MAX) {
-        return STATUS_INVALID_PARAMETER;
-    }
-    characters = MultiByteToWideChar(CP_OEMCP, 0, source, (int)source_bytes,
-                                     NULL, 0);
-    if (characters == 0 && source_bytes != 0u) return opennt_support_last_error_status();
-    if ((ULONG)characters > ULONG_MAX / (ULONG)sizeof(WCHAR)) return STATUS_BUFFER_OVERFLOW;
-    required_bytes = (ULONG)characters * (ULONG)sizeof(WCHAR);
-    if (converted_bytes != NULL) *converted_bytes = required_bytes;
-    if (required_bytes > maximum_bytes) return STATUS_BUFFER_OVERFLOW;
-    if (characters != 0 &&
-        MultiByteToWideChar(CP_OEMCP, 0, source, (int)source_bytes,
-                            destination, characters) != characters) {
-        return opennt_support_last_error_status();
-    }
-    return STATUS_SUCCESS;
-}
 NTSTATUS NTAPI RtlAnsiStringToUnicodeString(PUNICODE_STRING destination, PCANSI_STRING source, BOOLEAN allocate) { return opennt_support_convert_to_unicode(destination, (PCOEM_STRING)source, CP_ACP, allocate); }
 NTSTATUS NTAPI RtlUnicodeStringToOemString(POEM_STRING destination, PCUNICODE_STRING source, BOOLEAN allocate) { return opennt_support_convert_from_unicode((PANSI_STRING)destination, source, CP_OEMCP, allocate); }
 NTSTATUS NTAPI RtlUnicodeStringToAnsiString(PANSI_STRING destination, PCUNICODE_STRING source, BOOLEAN allocate) { return opennt_support_convert_from_unicode(destination, source, CP_ACP, allocate); }
@@ -275,5 +239,5 @@ BOOLEAN NTAPI RtlEqualUnicodeString(PCUNICODE_STRING left, PCUNICODE_STRING righ
 ULONG NTAPI RtlGetFullPathName_U(PCWSTR path, ULONG size, PWSTR buffer, PWSTR *part) { DWORD result = GetFullPathNameW(path, size / sizeof(WCHAR), buffer, part); return result * sizeof(WCHAR); }
 ULONG NTAPI RtlGetCurrentDirectory_U(ULONG size, PWSTR buffer) { DWORD result = GetCurrentDirectoryW(size / sizeof(WCHAR), buffer); return result * sizeof(WCHAR); }
 NTSTATUS NTAPI RtlSetCurrentDirectory_U(PUNICODE_STRING path) { WCHAR local[MAX_PATH + 2]; SIZE_T chars; if (path == NULL || path->Buffer == NULL || (path->Length % sizeof(WCHAR)) != 0) return STATUS_INVALID_PARAMETER; chars = path->Length / sizeof(WCHAR); if (chars >= sizeof(local) / sizeof(local[0])) return STATUS_BUFFER_OVERFLOW; memcpy(local, path->Buffer, path->Length); local[chars] = L'\0'; return SetCurrentDirectoryW(local) ? 0 : opennt_support_last_error_status(); }
-VOID NTAPI RtlAcquirePebLock(VOID) { InitOnceExecuteOnce(&opennt_support_lock_once, opennt_support_initialize_lock, NULL, NULL); EnterCriticalSection(&opennt_support_lock); }
+VOID NTAPI RtlAcquirePebLock(VOID) { EnterCriticalSection(opennt_support_peb_lock()); }
 VOID NTAPI RtlReleasePebLock(VOID) { LeaveCriticalSection(&opennt_support_lock); }

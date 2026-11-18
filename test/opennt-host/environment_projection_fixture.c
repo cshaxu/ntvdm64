@@ -30,6 +30,10 @@ int main(void)
     FreeEnvironmentStringsW(current);
     if (!ok) return 3;
     if (!OpenNtRtlRefreshEnvironmentSnapshot()) return 4;
+    RtlAcquirePebLock();
+    ok = NtCurrentPeb()->FastPebLock->OwningThread == NtCurrentTeb()->ClientId.UniqueThread;
+    RtlReleasePebLock();
+    if (!ok) return 7;
     ok = BaseCreateVDMEnvironment(NULL, &clonedAnsi, &clonedUnicode);
     if (!ok) return 5;
     ok = explicitUnicode.Length == clonedUnicode.Length &&
