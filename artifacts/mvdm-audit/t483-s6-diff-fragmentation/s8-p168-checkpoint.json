@@ -1,0 +1,47 @@
+{
+  "packet": "T483 S8 P168",
+  "position": 211,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+  "review_ids": [
+    "T483-R2646",
+    "T483-R2648",
+    "T483-R2649",
+    "T483-R2650",
+    "T483-R2651",
+    "T483-R2656"
+  ],
+  "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e",
+  "current_sha256": "4321a7b4b60f6a65f5ee7d3beec75b8f6ddd55a971774d0230567d5d109ac99f",
+  "before": {
+    "blocks": 15,
+    "added": 20,
+    "deleted": 16
+  },
+  "after": {
+    "blocks": 15,
+    "added": 19,
+    "deleted": 15
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 211,
+    "remaining": 20,
+    "files": 231,
+    "points": 1912,
+    "lines": 26385,
+    "pending": 1532
+  },
+  "decision": "R2651 retains native readiness in the same short-circuit order and restores the original event-count line verbatim. park_native_owner(receiver) selects CSOwningThread, which can differ from receiver; replacing explicit task with PtiCurrent() breaks that call. Cleanup and send accounting use the supplied process domain; a global alias would lose that ownership. Native task binding provides projected structures and event primitives.",
+  "verification": {
+    "scope": "Rebuilt x86 product taskman.obj using its cached Ninja target; byte comparison with previous object excluding the COFF timestamp is identical.",
+    "bytes": 5579,
+    "byte_identical": false,
+    "old_sha256": "56cd13307f4b95cce310fe5ea3a47da0cff44fc6cbc694093a0e22b241e8880a",
+    "new_sha256": "d46b0237375dc89ddb44c69024e8315317c48c70d8f69c3a57f0408a664d2cc2"
+  }
+}

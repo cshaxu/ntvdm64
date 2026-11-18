@@ -32,7 +32,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 34,src/non-mvdm/public/sdk/inc/ntexapi.h,24,0,453,453,9,0,37,s8-p132-reviewed,9e703868a12ccf5e9a7857a51157ec378caf4d1c96f627bf367a2a55275d6bef
 35,src/mvdm-host/dos/command/cmdexec.c,16,63,15,78,0,0,28,s7-p47-verified-residuals-pending-owner,ee1c313dd9153d9e65c5751fc03074cfd4da4ca5dd9a6d98c13b86b3c5441538
 36,src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,17,20,205,225,1,0,31,s8-p145-reviewed,859c909bcb7110f031b503f853bb18af7a5a840b942759496c59ad2f40b7d3cb
-37,src/non-mvdm/windows/core/ntuser/kernel/taskman.c,15,20,16,36,0,0,38,s7-p19-reviewed,3a993b151b013a70768345c54cb10c340d871739171926bd81cf6fb4569dbcca
+37,src/non-mvdm/windows/core/ntuser/kernel/taskman.c,15,19,15,34,0,0,38,s8-p168-reviewed,4321a7b4b60f6a65f5ee7d3beec75b8f6ddd55a971774d0230567d5d109ac99f
 38,src/mvdm-host/dpmi32/int21map.c,16,27,6,33,14,0,39,s8-p5-rechecked-residuals-pending-owner,23c9046e7c7f862a71700411b0f024c1497391b606ff8b57307856c29904f542
 39,src/mvdm-host/softpc.new/base/video/video.c,13,49,12,61,57,0,40,s8-p40-reviewed,e76cdce88dc8bad15f84afc903f265f37f78e9d0fe5e5fb846c42863235e99da
 40,src/mvdm-host/wow32/wuclip.c,16,42,23,65,1,0,41,s8-p107-reviewed,f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47

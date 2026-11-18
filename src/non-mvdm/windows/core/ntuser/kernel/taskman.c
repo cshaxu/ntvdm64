@@ -332,8 +332,8 @@ BOOL xxxSleepTask(
 rescan:
             if (pwpi->nRecvLock >= pwpi->nSendLock) {
                 for (ptdb = pwpi->ptdbHead; ptdb; ptdb = ptdb->ptdbNext) {
-                    /* DIVERGENCE(OPENNT-HOST-123): native-stack readiness. */
-                    if (ptdb->nEvents > 0 && wow_task_execution_ready(ptdb->pti) &&
+                    if (ptdb->nEvents > 0 &&
+                            wow_task_execution_ready(ptdb->pti) && /* DIVERGENCE(OPENNT-HOST-123): native-stack readiness. */
 #line 330
                             !(hEvent == HEVENT_REMOVEME && ptdb->pti == pti)) {
                         pwpi->ptiScheduled = ptdb->pti;
