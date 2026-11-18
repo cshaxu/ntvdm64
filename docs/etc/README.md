@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T483 S10 component migration and closure](evidence/m0-t483-s10-components.md) records the verified baseline for S11.
+
+[T483 S8 closure](evidence/m0-t483-s8-closure.md) records the preceding mirror review.
+
 [T483 mirror register migration](operations/m0-t483-mirror-register.md) defines the owner-requested review order and successor exception register.
 
 [T481 S19 test-root cleanup](evidence/m0-t481-s19-test-root-cleanup.md) records complete migration, reference repair, root hygiene and delivery checks.
