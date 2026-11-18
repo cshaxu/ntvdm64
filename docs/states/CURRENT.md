@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P18 completed review through CCPU `localfm.c`. Next is position 44, `ntthread.c`.
+S8 P21 completed review through C-VID `ev_glue.c`. Next is position 49, `evidgen.h`.
 
 ## Active Packet
 
@@ -34,8 +34,8 @@ S8 P18 completed review through CCPU `localfm.c`. Next is position 44, `ntthread
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P18, 43 of 231 positions are covered and 188 remain queued.
-S8 has removed 18 points and 101 diff lines, leaving 1,956 points and 27,109 lines. The live pending backlog has 1,549 rows.
+IDs. After S8 P21, 48 of 231 positions are covered and 183 remain queued.
+S8 has removed 21 points and 103 diff lines, leaving 1,953 points and 27,107 lines. The live pending backlog has 1,549 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p3-checkpoint.json).
@@ -54,6 +54,9 @@ S8 has removed 18 points and 101 diff lines, leaving 1,956 points and 27,109 lin
 [P16 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p16-checkpoint.json).
 [P17 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p17-checkpoint.json).
 [P18 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p18-checkpoint.json).
+[P19 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p19-checkpoint.json).
+[P20 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p20-checkpoint.json).
+[P21 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p21-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

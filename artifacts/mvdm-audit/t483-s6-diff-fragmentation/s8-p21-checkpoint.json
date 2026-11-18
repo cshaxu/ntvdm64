@@ -1,0 +1,71 @@
+{
+  "packet": "T483 S8 P21",
+  "position": 48,
+  "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+  "source_sha256": "b016c166b818e1619f03ae7f7ffc1feca886872cd088bda6f7ab102e45f7cc54",
+  "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+  "before": {
+    "blocks": 4,
+    "added": 23,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 3,
+    "added": 22,
+    "deleted": 0
+  },
+  "pending": [
+    "R0490",
+    "R0492",
+    "R0493",
+    "R0494"
+  ],
+  "decisions": [
+    "Group the binding header and private CHAIN2 marker inside existing C_VID scope. Both consumers are within that scope. The original setMarkPointers comment is again immediately adjacent to the original function.",
+    "Snapshot offset and count once in their original IUH register type. The x86 provider uses unsigned 32-bit arithmetic for alignment, count and wraparound as before. Keep the original four callback arguments, alias mapping, zero guard and scratch restoration.",
+    "Keep markset 4 and startup binding. Original selector has no case 4 and leaves stale pointers. Existing startup negative control leaves Cpu.Private, Sas and Video unbound. Original string marker uses an inclusive endpoint and contributes its length argument to dirty_total. Substituting count-1 alone changes the latter."
+  ],
+  "evidence": "../t483-remaining-reaudit/r0489-r0494-ev-glue-review.json",
+  "exclusions": [
+    {
+      "original": [
+        772,
+        773
+      ],
+      "current": [
+        798,
+        799
+      ]
+    }
+  ],
+  "lines": "All nonblank original non-directive lines outside the excluded body matched at original logical coordinates. Conditional structure checked separately by the paired-body audit.",
+  "verification": {
+    "cached": [
+      "x86",
+      "x64"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "2d51111c-b56a-4fa1-9b7d-f4fc965fe9f6",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "focused": [
+      "cvidc-vector-binding-fixture.exe",
+      "289 before/after pairs using extracted real marker and a recording callback; argument pairs, number of calls, return and restored registers checked"
+    ],
+    "manifest_sha256": "7e4b10b3f42ad04911e68459eac34fc8070c14cd7c7d6748a2cddbf19c49d1b5"
+  },
+  "coverage": {
+    "complete": 48,
+    "remaining": 183,
+    "files": 231,
+    "points": 1953,
+    "lines": 27107,
+    "pending": 1549
+  }
+}

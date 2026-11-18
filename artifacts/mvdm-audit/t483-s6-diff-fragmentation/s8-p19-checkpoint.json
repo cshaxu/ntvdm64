@@ -1,0 +1,56 @@
+{
+  "packet": "T483 S8 P19",
+  "position": 44,
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+  "source_sha256": "8dd53012bfac7fc25b818ce78017766420fec650772fbdc7c68825b87c82e188",
+  "original_sha256": "3fd33dc3055ac59e0958a8335c9f3d3155d36d76ac1e178c7dd1e4232deb5528",
+  "before": {
+    "blocks": 6,
+    "added": 32,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 5,
+    "added": 31,
+    "deleted": 0
+  },
+  "pending": [
+    "T483-R0476",
+    "T483-P222-COMPLETION"
+  ],
+  "decisions": [
+    "Group the two TLS frame operations. Initialize the frame pointer at declaration after saving LastError. Preserve exact top-frame matching, in_C and LastError on native unwind. Original Unsimulate jumps to the retired context.",
+    "Per-frame completion separates a DPMI-emulated instruction from an ordinary fault at decoder resumption. Set on success, clear on first delivery, initialize on frame reuse. Header owns the completion reason."
+  ],
+  "line_check": {
+    "excluded_bodies": 0,
+    "nonblank_original_lines_verified": 212,
+    "mismatches": []
+  },
+  "verification": {
+    "cached": [
+      "x86",
+      "x64"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "78a2674c-dda8-411d-a36a-94d8f1cc9cd0",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "targeted": "Not run. Owner specified cached build and publication for this source rearrangement.",
+    "manifest_sha256": "78e1ececa0e7dc064cf268b79e994c4a44107d4c7e9757887c3f0aa2611cdd8b"
+  },
+  "coverage": {
+    "complete": 44,
+    "remaining": 187,
+    "files": 231,
+    "points": 1955,
+    "lines": 27108,
+    "pending": 1549
+  }
+}
