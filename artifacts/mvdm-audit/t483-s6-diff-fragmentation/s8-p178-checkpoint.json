@@ -1,0 +1,48 @@
+{
+  "packet": "T483 S8 P178",
+  "position": 221,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+  "review_ids": [
+    "T483-R2711",
+    "T483-R2712",
+    "T483-R2713",
+    "T483-R2714"
+  ],
+  "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b",
+  "current_sha256": "78d510df047693a43f08450d38ac36c69d053f7035506cc06e52ab5e25163dbe",
+  "before": {
+    "blocks": 6,
+    "added": 10,
+    "deleted": 301
+  },
+  "after": {
+    "blocks": 5,
+    "added": 7,
+    "deleted": 301
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_mismatches": [],
+  "decision": "The geometry precomp already supplies wow_default_window_bindings.h. Removed the redundant include and local whitespace. Both production object owners remain; the default object exports GetWindowBorders using its bound server state, while the view object exports the window relationship helpers. Original FindNCHit and _HasCaptionIcon need private window/icon state; both native hit-test callers bind to wow_default_find_nc_hit, which uses DefWindowProcW(WM_NCHITTEST).",
+  "verification": {
+    "objects": {
+      "wow32/obj/opennt-user/control-view-winmgr.obj": "COFF timestamp only",
+      "wow32/obj/opennt-user/default-borders.obj": "COFF timestamp only",
+      "call-boundaries/obj/navigation_graph.obj": "COFF timestamp only",
+      "call-boundaries/obj/navigation_borders.obj": "COFF timestamp only",
+      "call-boundaries/obj/view_winmgr.obj": "COFF timestamp only"
+    },
+    "tests": [
+      "original_edit_view_failures=0",
+      "WOW_DIALOG_NAVIGATION_OK"
+    ]
+  },
+  "coverage": {
+    "complete": 221,
+    "remaining": 10,
+    "files": 231,
+    "points": 1910,
+    "lines": 26342,
+    "pending": 1532
+  }
+}

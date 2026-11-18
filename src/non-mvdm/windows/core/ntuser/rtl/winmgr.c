@@ -9,8 +9,8 @@
 * 02-20-92 DarrinM      Pulled functions from user\server.
 * 11-11-94 JimA         Separated from client.
 \***************************************************************************/
-#include "precomp.h"
 
+#include "precomp.h"
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
 #line 258
 BOOL _FChildVisible(
@@ -244,9 +244,7 @@ BOOL IsVisible(
 }
 
 
-
 #else
-#include "wow_default_window_bindings.h"
 #define gpsi (&wow_default_current->server)
 #line 489
 /***************************************************************************\
@@ -300,7 +298,6 @@ int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 }
 
 #endif
-
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
 #line 539
 
