@@ -1,0 +1,71 @@
+{
+  "packet": "M0 T483 S8 P1",
+  "baseline": "c849430ee9a455a943c4a4fa80215e9d97a43048",
+  "covered_before": 3,
+  "covered_after": 5,
+  "remaining": 226,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1974,
+    "lines": 27210
+  },
+  "cumulative_s8_reduction": {
+    "points": 0,
+    "lines": 0
+  },
+  "pending_rows": 1566,
+  "files": [
+    {
+      "position": 4,
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "review_ids": [
+        "T483-R0067",
+        "T483-R0068"
+      ],
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "current_sha256": "e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d",
+      "before_after": {
+        "points": [
+          2,
+          2
+        ],
+        "added": [
+          2,
+          2
+        ],
+        "deleted": [
+          1,
+          1
+        ]
+      },
+      "result": "Pending. Original DemInit selects the native system directory. demLoadDos appends ntdos.sys and opens it directly; the startup file is present in the product directory and absent in both system-directory views. NTIO.SYS is checked separately by the BIOS-directory path and is not the reason to retain this diff.",
+      "directives": "Both DBG excluded arms and existing logical anchors retain the verified current source bytes."
+    },
+    {
+      "position": 5,
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "review_ids": [
+        "T483-R0070"
+      ],
+      "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "current_sha256": "9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c",
+      "before_after": {
+        "points": [
+          1,
+          1
+        ],
+        "added": [
+          1,
+          1
+        ],
+        "deleted": [
+          0,
+          0
+        ]
+      },
+      "result": "Pending. The live demRead/demWrite lease declarations consume mvdm_guest_location.h through dem.h. Moving the inclusion to the consumer would relocate the same deviation. Reassess the necessity of the lease implementations at demhndl.c.",
+      "directives": "Nine excluded arms and current logical anchors have no source change."
+    }
+  ],
+  "verification": "Source pins, original-relative comparison, actual build entries and read-only deployed resource checks. No product sources changed and no build or runtime test rerun."
+}
