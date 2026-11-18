@@ -1,0 +1,82 @@
+{
+  "packet": "T483 S8 P174",
+  "position": 217,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+  "review_ids": [
+    "T483-R2692",
+    "T483-R2694;T483-R2695"
+  ],
+  "original_sha256": "7ffe7d97c36f1aa6ab119eb7f0c9ca70fd8eb57cbefe322e40d0c5df041be16f",
+  "current_sha256": "71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668",
+  "before": {
+    "blocks": 2,
+    "added": 4,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 2,
+    "added": 4,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 217,
+    "remaining": 14,
+    "files": 231,
+    "points": 1912,
+    "lines": 26354,
+    "pending": 1532
+  },
+  "verification": {
+    "scope": "Five isolated x86 compiles using help.obj production flags plus original source directory for quoted userrtl.h. Source comparison, #line verification and caller/provider inspection. No runtime or publication.",
+    "controls": {
+      "current": {
+        "exit": 0,
+        "errors": [],
+        "implicit": []
+      },
+      "omit_wow_user_client_view_layout": {
+        "exit": 2,
+        "errors": [
+          "C2146: syntax error: missing ')' before identifier 'pwnd'",
+          "C2061: syntax error: identifier 'pwnd'",
+          "C2059: syntax error: ';'",
+          "C2059: syntax error: ')'"
+        ],
+        "implicit": []
+      },
+      "omit_wow_window_client_state_bindings": {
+        "exit": 0,
+        "errors": [],
+        "implicit": [
+          "'wow_window_client_context_help' undefined; assuming extern returning int"
+        ]
+      },
+      "omit_userrtl": {
+        "exit": 2,
+        "errors": [
+          "C2065: 'spwndParent': undeclared identifier",
+          "C2065: 'spwndOwner': undeclared identifier"
+        ],
+        "implicit": [
+          "'REBASEPWND' undefined; assuming extern returning int"
+        ]
+      },
+      "original_property": {
+        "exit": 2,
+        "errors": [
+          "C2065: 'gpsi': undeclared identifier",
+          "C2223: left of '->atomContextHelpIdProp' must point to struct/union",
+          "C2198: 'HANDLE _GetProp(PWND,LPWSTR,BOOL)': too few arguments for call"
+        ],
+        "implicit": []
+      }
+    }
+  },
+  "decision": "R2692 three independent omission controls: layout supplies PWND; state bindings supplies typed DWORD WINAPI context-help prototype; original userrtl supplies REBASEPWND. R2694/R2695 original _GetProp uses gpsi->atomContextHelpIdProp; product has no such kernel state. Host capture obtains GetWindowContextHelpId(window), scalar read pins that captured generation then releases it. Original child/parent versus popup/owner traversal retained. No second property owner or ambient atom introduced."
+}
