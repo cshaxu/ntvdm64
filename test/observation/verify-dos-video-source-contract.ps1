@@ -5,7 +5,8 @@ if(!$RepositoryRoot){$RepositoryRoot=Split-Path -Parent (Split-Path -Parent $PSS
 # Source guard only. This does not certify copied frames or Window rendering.
 function ReadCode([string]$path) {
     $text=Get-Content -LiteralPath (Join-Path $RepositoryRoot $path) -Raw
-    [regex]::Replace($text,'(?s)/\*.*?\*/|//[^\r\n]*',' ')
+    $text=[regex]::Replace($text,'(?s)/\*.*?\*/|//[^\r\n]*',' ')
+    [regex]::Replace($text,'(?m)^[ \t]*#[ \t]*line[ \t]+\d+[^\r\n]*',' ')
 }
 function Require([string]$text,[string]$pattern,[string]$label) {
     if($text -notmatch $pattern){throw "Video source contract changed: $label"}

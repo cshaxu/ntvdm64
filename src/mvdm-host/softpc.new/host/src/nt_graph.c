@@ -87,12 +87,8 @@ extern int  ega_int_enable;
 #line 79
 #endif
 
-#ifdef V7VGA
+#line 82
 extern int DAC_data_bits;
-#else
-#line 80
-#error Unsupported excluded original configuration
-#endif
 #line 80
 
 extern byte  *video_copy;
@@ -721,10 +717,6 @@ void nt_clear_screen(void)
     if(sc.ScreenBufHandle) return;
 
 #ifndef X86GFX
-#if !defined(X86GFX) && !defined(CCPU)
-#line 761
-#error DIVERGENCE MVDM-HOST-DIV-580: non-CCPU non-X86GFX display branch is not selected
-#endif
 #line 761
     if (sc.ScreenState == FULLSCREEN)   // don't want sudden screen clears
         return;
@@ -774,17 +766,12 @@ void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
 
-#if defined(CCPU) && defined(X86GFX)
-#line 803
-#error Unsupported excluded original configuration
-#endif
 #line 844
 
-#if defined(CCPU) && !defined(X86GFX)
+#line 846
     if (sc.ScreenState == FULLSCREEN && sc.ModeType == TEXT) {
         mvdm_softpc_text_video_flush(publish_text_update);return;
     }
-#endif
 
 #line 800
     if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE &&
@@ -819,15 +806,10 @@ void nt_mark_screen_refresh(void)
 void nt_graphics_tick(void)
 {
     BOOL software_update_completed = FALSE;
-#if defined(CCPU) && !defined(X86GFX)
+#line 828
     if (CntrlHandlerState & CNTRL_VDMBLOCKED) return;
     if (!mvdm_softpc_text_video_sync_route())
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
-#endif
-#if !defined(CCPU) || defined(X86GFX)
-#line 827
-#error Unsupported excluded original configuration
-#endif
 #line 827
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
@@ -2098,10 +2080,6 @@ void graphicsResize(void)
         DWORD    headerSize;
         LPBITMAPINFO     infoStructPtr;
 
-#ifdef X86GFX
-#line 2067
-#error Unsupported excluded original configuration
-#endif
 #line 2069
 
         /* Destroy previous data. */

@@ -123,10 +123,7 @@ Defines are:
 #define EM_PAGE_ADDRESS(page_no)    (EM_base_address + page_no * EMM_PAGE_SIZE)
 static int em_loads(sys_addr from, unsigned char *to, int length)
 {
-#ifdef BACK_M
-#line 103
-#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
-#endif
+#line 134
     if (!mvdm_softpc_physical_mapping_span_is_aliased(from, length)) {
         EM_loads(from, to, length);
         return SUCCESS;
@@ -137,10 +134,7 @@ static int em_loads(sys_addr from, unsigned char *to, int length)
 
 static int em_stores(sys_addr to, unsigned char *from, int length)
 {
-#ifdef BACK_M
-#line 104
-#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
-#endif
+#line 148
     if (!mvdm_softpc_physical_mapping_span_is_aliased(to, length)) {
         EM_stores(to, from, length);
         return SUCCESS;
@@ -152,10 +146,7 @@ static int em_stores(sys_addr to, unsigned char *from, int length)
 
 static int em_moves(sys_addr from, sys_addr to, int length)
 {
-#ifdef BACK_M
-#line 107
-#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
-#endif
+#line 163
     if (!mvdm_softpc_physical_mapping_span_is_aliased(from, length) &&
         !mvdm_softpc_physical_mapping_span_is_aliased(to, length)) {
         EM_moves(from, to, length);

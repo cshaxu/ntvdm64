@@ -412,3 +412,8 @@ decisions remain in the pending ledger.
 frames removed from three CPU and DPMI files. Selected source and logical
 lines match at all six supported worker compile entries. The filtered census
 is 2,003 points and 28,291 changed lines across 235 differing mirrors.
+
+[S7 P29 receipt](s7-p29-checkpoint.json) records ten local frames removed
+from `nt_emm.c` and `nt_graph.c`. The filtered census is 2,002 points and
+28,262 changed lines across 235 differing mirrors. The paired evidence
+keeps the existing original exclusion groups and selected logical lines.

@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-44 points and 685 changed lines in S7. The current census is 2,003 non-error
-points and 28,291 changed lines across 235 mirrors with filtered differences.
+45 points and 714 changed lines in S7. The current census is 2,002 non-error
+points and 28,262 changed lines across 235 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. All are local conditional frames without a matching original
@@ -187,20 +187,12 @@ arm. Both ledgers have zero unresolved mask
 cases. Residual source decisions remain recorded in the pending ledger.
 [P24 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p24-checkpoint.json).
 
-P25 removes all nineteen redundant local frames. A new local conditional
-requires concrete build, ABI or behavior evidence from a supported context.
-The original conditional structure and its excluded bodies remain. Eleven
-actual MSVC compile entries yield identical selected text and logical lines
-before and after the cleanup. Both published copies of the eleven images
-still match the P10 Full manifest. R0158 is restored and leaves the pending
-ledger. [P25 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p25-checkpoint.json).
+P25 removes nineteen local frames and restores R0158. Any new local
+conditional requires build, ABI or behavior evidence in a supported context.
+[P25 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p25-checkpoint.json).
 
-P26 restores `xmsmemr.c` byte-for-byte from pinned OpenNT. Its local CPU40
-wrapper accounted for both remaining points and all four changed lines.
-The two worker and two XMS fixture compile entries produce identical
-selected text and logical lines. The mapped XMS fixture passes. The historical
-startup fixture has the same seven unresolved link symbols with either source.
-The P10 Full package is still present at both release destinations.
+P26 restores `xmsmemr.c` byte-for-byte. The mapped XMS fixture passes.
+The historical startup fixture fails to link identically before and after.
 [P26 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p26-checkpoint.json).
 
 P27 removes seven local X86GFX frames from `nt_fulsc.c`. The filtered file
@@ -217,6 +209,13 @@ text and logical lines. The original CPU30 frames in `reset.c` stay in
 place. The reset continuation and DPMI register-read adaptations remain
 pending with their existing evidence.
 [P28 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p28-checkpoint.json).
+
+P29 removes ten local compile frames from `nt_emm.c` and `nt_graph.c`.
+The original BACK_M and X86GFX exclusions remain in their original groups.
+R1127 is restored and leaves the pending ledger. Four actual worker
+preprocessing comparisons preserve selected text and logical lines.
+The display tick fixture and video source contract checks pass.
+[P29 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p29-checkpoint.json).
 
 ## S1 Closure Record
 

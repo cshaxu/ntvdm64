@@ -1,0 +1,171 @@
+{
+  "packet": "M0 T483 S7 P29",
+  "prior_checkpoint": "f995214ba",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": {
+      "before": {
+        "blocks": 20,
+        "added": 73,
+        "deleted": 11
+      },
+      "after": {
+        "blocks": 19,
+        "added": 53,
+        "deleted": 11
+      },
+      "removed_local_frame_ranges": [
+        [
+          90,
+          90,
+          "anchor"
+        ],
+        [
+          92,
+          95,
+          "drop"
+        ],
+        [
+          724,
+          727,
+          "drop"
+        ],
+        [
+          777,
+          780,
+          "drop"
+        ],
+        [
+          783,
+          783,
+          "anchor"
+        ],
+        [
+          787,
+          787,
+          "drop"
+        ],
+        [
+          822,
+          822,
+          "anchor"
+        ],
+        [
+          826,
+          826,
+          "drop"
+        ],
+        [
+          827,
+          830,
+          "drop"
+        ],
+        [
+          2101,
+          2104,
+          "drop"
+        ]
+      ],
+      "original_error_pairs": 20,
+      "prior_sha256": "78e7780313585d26c51bf161caaa482404186ba78b7f08831b6636e118d339bc",
+      "current_sha256": "42389bd1b9757b757361ae5705a71a246661a9d8f5878b3cf6317ce5c54bdea1",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_emm.c": {
+      "before": {
+        "blocks": 7,
+        "added": 60,
+        "deleted": 8
+      },
+      "after": {
+        "blocks": 7,
+        "added": 51,
+        "deleted": 8
+      },
+      "removed_local_frame_ranges": [
+        [
+          126,
+          129,
+          "anchor"
+        ],
+        [
+          140,
+          143,
+          "anchor"
+        ],
+        [
+          155,
+          158,
+          "anchor"
+        ]
+      ],
+      "original_error_pairs": 5,
+      "prior_sha256": "2c1e7aa432712b0ed7e156e2cad32d609f6e628b4fd96a47bf9252aedfbd0c39",
+      "current_sha256": "6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729"
+    }
+  },
+  "removed_frames": {
+    "nt_emm.c": 3,
+    "nt_graph.c": 7
+  },
+  "retained_boundaries": {
+    "nt_emm.c": "Existing BACK_M macro group and original ordinary RAM macros. Reversed-page failure controls support the remaining mapped-copy adaptation.",
+    "nt_graph.c": "Original X86GFX branches, including the original branch at logical line 802, and existing Video7 DAC and software fullscreen behavior. Both real production profiles and the extracted tick fixture select the same publication path."
+  },
+  "census": {
+    "non_error_points": 2002,
+    "non_error_lines": 28262,
+    "nonzero_mirrors": 235,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 45,
+      "lines": 714
+    },
+    "pending_decisions": 1566,
+    "removed_pending_id": "T483-R1127"
+  },
+  "verification": {
+    "preprocessing": [
+      {
+        "context": "worker-x86-nt_emm",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/host/nt_emm.obj",
+        "selected_lines": 47834,
+        "comparison_sha256": "9339f14f58c97d4340f7d78f0eff2f75f5d9b6600988c1fe5dda9285d6e97482"
+      },
+      {
+        "context": "worker-x86-nt_graph",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/host/nt_graph.obj",
+        "selected_lines": 50201,
+        "comparison_sha256": "4cf149bf45f53592c52dc7beeb4def1bd239132e0897283a92b423d232cfe5e2"
+      },
+      {
+        "context": "worker-reference-x86-nt_emm",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/host/nt_emm.obj",
+        "selected_lines": 47834,
+        "comparison_sha256": "9339f14f58c97d4340f7d78f0eff2f75f5d9b6600988c1fe5dda9285d6e97482"
+      },
+      {
+        "context": "worker-reference-x86-nt_graph",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/host/nt_graph.obj",
+        "selected_lines": 50201,
+        "comparison_sha256": "4cf149bf45f53592c52dc7beeb4def1bd239132e0897283a92b423d232cfe5e2"
+      }
+    ],
+    "targeted": {
+      "x86_and_x64_package_worker_object_builds": "pass",
+      "video_tick_and_flush_fixture": "pass",
+      "video_source_contract_assertions": 16,
+      "source_contract_correction": "Ignore logical line directives between adjacent executable statements."
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun because selected product text and logical lines match.",
+      "p10_full_package_id": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}
