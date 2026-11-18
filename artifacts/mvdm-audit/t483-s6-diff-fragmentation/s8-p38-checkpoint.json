@@ -1,0 +1,87 @@
+{
+  "packet": "T483 S8 P38",
+  "files": [
+    {
+      "position": 78,
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "current_sha256": "4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3",
+      "original_sha256": "d02575bd0594f9ccc3a23ad7ed0eb208ec7c1414eeffd558dd1ce6b648f1991b",
+      "review_ids": [
+        "T483-R0941",
+        "T483-R0942"
+      ],
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 2
+      },
+      "excluded_pairs": 1,
+      "mask_issues": [],
+      "decision": "Retain pending owner; existing original-restoration counterexamples and selected source were checked.",
+      "evidence": "r0941-r0942-v7-ports-review.json"
+    },
+    {
+      "position": 79,
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "current_sha256": "30a54762cb9bf8acb3a2d7d23b64e9ac41092ab83f4327b5742710e4e1be1d0b",
+      "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525",
+      "review_ids": [
+        "T483-R0944",
+        "T483-R0946"
+      ],
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "excluded_pairs": 4,
+      "mask_issues": [],
+      "decision": "Retain pending owner; existing original-restoration counterexamples and selected source were checked.",
+      "evidence": "r0943-r0946-v7-video-review.json"
+    },
+    {
+      "position": 80,
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "current_sha256": "120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3",
+      "original_sha256": "d0ea64ba445b8a7c8cb4b11963cece808793b0595183f8be7f115c060eb1f0d9",
+      "review_ids": [
+        "T483-R0947",
+        "T483-R0948",
+        "T483-R0949"
+      ],
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "excluded_pairs": 26,
+      "mask_issues": [],
+      "decision": "Retain pending owner; existing original-restoration counterexamples and selected source were checked.",
+      "evidence": "r0947-r0949-vga-mode-review.json"
+    }
+  ],
+  "coverage": {
+    "complete": 80,
+    "remaining": 151,
+    "files": 231,
+    "points": 1946,
+    "lines": 27094,
+    "pending": 1549
+  },
+  "verification": "Source and existing evidence checked. No new build or runtime test."
+}

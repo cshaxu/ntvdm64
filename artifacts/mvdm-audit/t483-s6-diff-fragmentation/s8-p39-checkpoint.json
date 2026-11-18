@@ -1,0 +1,51 @@
+{
+  "packet": "T483 S8 P39",
+  "position": 81,
+  "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+  "current_sha256": "63144c55a5f74c99cf5d4da74f9fe547f16ade2e84d32b64f5dcce517dea12ac",
+  "original_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc",
+  "review_ids": [
+    "T483-R0951",
+    "T483-R0952"
+  ],
+  "before": {
+    "blocks": 2,
+    "added": 4,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "excluded_pairs": 34,
+  "mask_issues": [],
+  "decision": "Test the disable bit in the original off-screen visibility condition. All bounds getters read display fields and the setter assigns a field. Compare the complete stored register directly with the existing eight-bit new.value. Original lines 631,632,634,1418,1419 verified. Both residuals remain pending.",
+  "coverage": {
+    "complete": 81,
+    "remaining": 150,
+    "files": 231,
+    "points": 1946,
+    "lines": 27092,
+    "pending": 1549
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "917f1709-44ec-4a8b-938a-69796e6bc9a3",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "targeted_test": {
+    "script": "test/integration/verify-vga-cursor-disable.ps1",
+    "result": "PASS register readback and three ordered unchanged-text frames; count=5",
+    "scope": "Private desktop; diagnostic worker built from same source, original product release used for publication."
+  }
+}

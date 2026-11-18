@@ -1,0 +1,71 @@
+{
+  "packet": "T483 S8 P32",
+  "files": [
+    {
+      "position": 71,
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "review_ids": [
+        "T483-R0835",
+        "T483-R0836"
+      ],
+      "current_sha256": "c9f8117fef04f59a161f8fced9d404b7c7e7cba2e00efc49e3c373b7168a7f3c",
+      "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+      "metrics": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "before": [
+        2,
+        2,
+        0
+      ],
+      "issues": [],
+      "decision": "MSVC isolated controls: current exit 0, removing each declaration individually causes C4013 at original line 1882 or 2948; grouping Glue_set_vid_wrt_ptrs with the earlier declaration fails with C2143 because WRT_POINTERS is not declared there."
+    },
+    {
+      "position": 72,
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "review_ids": [
+        "T483-R0837",
+        "T483-R0838"
+      ],
+      "current_sha256": "06d7da506981765b0a90277781dab567da67d8399bb423a6618a1dd8b2575e53",
+      "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+      "metrics": {
+        "blocks": 1,
+        "added": 4,
+        "deleted": 3
+      },
+      "before": [
+        2,
+        4,
+        3
+      ],
+      "issues": [],
+      "decision": "Move setReadPointers prototype into the existing CPU40 C_VID declarations block. egacpu.h maps to the direct typed provider for C_VID; other configurations use the original indirect vector. Group with typed read entries. No callable code moved."
+    }
+  ],
+  "coverage": {
+    "complete": 72,
+    "remaining": 159,
+    "files": 231,
+    "points": 1947,
+    "lines": 27096,
+    "pending": 1549
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a8b04f16-9b6b-48bd-8460-8530b9e5c46d",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  }
+}

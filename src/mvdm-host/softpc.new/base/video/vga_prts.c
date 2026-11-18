@@ -630,10 +630,9 @@ GLOBAL VOID	do_new_cursor IFN0()
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
 
-	if (crt_controller.cursor_start.as_bfld.cursor_off)
-		set_cursor_visible(FALSE);
-#line 631
 	if(( get_cur_y() < 0 ) ||
+			crt_controller.cursor_start.as_bfld.cursor_off ||
+#line 632
 			((( get_cur_y() + 1 ) * get_char_height()) > get_screen_height() ))
 	{
 		set_cursor_visible( FALSE );
@@ -1438,8 +1437,8 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 						else
 							set_cursor_visible(TRUE);
 
-						if (crt_controller.cursor_start.as.abyte != 
-							((CURSOR_START*)&new)->as.abyte)
+						if (crt_controller.cursor_start.as.abyte != new.value)
+#line 1418
 						{
 							crt_controller.cursor_start.as.abyte = value;
 						}

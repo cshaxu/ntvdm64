@@ -1,0 +1,47 @@
+{
+  "packet": "T483 S8 P35",
+  "position": 75,
+  "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+  "review_ids": [
+    "T483-R0846",
+    "T483-R0847",
+    "T483-R0848",
+    "T483-R0850"
+  ],
+  "metrics": {
+    "blocks": 6,
+    "added": 8,
+    "deleted": 4
+  },
+  "before": [
+    6,
+    9,
+    4
+  ],
+  "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+  "current_sha256": "ab98c3c4c19f079908ab3e8688e5dbca6e910028510c585e279b27c22f846b04",
+  "mask_issues": [],
+  "decision": "Two WRT_POINTERS definitions share their declaration, as in the matching extern declaration in ega_writ.c. Both remain separate objects. Retain each scalar CHAIN2 address correction with the individual negative controls recorded in pending-decisions.csv. Excluded legacy tables and logical line reset unchanged.",
+  "coverage": {
+    "complete": 75,
+    "remaining": 156,
+    "files": 231,
+    "points": 1946,
+    "lines": 27095,
+    "pending": 1549
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "d6a3cca5-bf54-44ed-b402-247339d2a09d",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  }
+}

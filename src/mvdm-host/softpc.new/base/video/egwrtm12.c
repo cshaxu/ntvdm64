@@ -163,8 +163,7 @@ SIGNALS ISSUED	  :	NONE
 #else
 #line 205
 #if defined(CPU_40_STYLE)
-WRT_POINTERS mode1_handlers;
-WRT_POINTERS mode2_handlers;
+WRT_POINTERS mode1_handlers, mode2_handlers;
 #else
 #line 205
 #error Excluded unsupported non-CPU40 writer-table profile

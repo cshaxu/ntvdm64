@@ -1,0 +1,23 @@
+{
+  "packet": "T483 S8 P33",
+  "position": 73,
+  "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+  "review_id": "T483-R0839",
+  "metrics": {
+    "blocks": 1,
+    "added": 12,
+    "deleted": 0
+  },
+  "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+  "current_sha256": "6852d6f38de18e87ab96481f6f1b370e7e1b0e1c33984179f77b30b8e4271e0d",
+  "mask_issues": [],
+  "decision": "Keep virtual CRTC read and restoration of index. Current and pinned original recalc_text selection compiled into isolated harnesses with controlled registers. VDE low=0x8f, overflow=2, control=0, host height=480, font height=8. Selected 401 scanlines/50 rows, 4 reads/4 writes; original 481/60, 0 port accesses. Both finish with entry index 5. This checks the calculation and I/O boundary, not a new guest run.",
+  "coverage": {
+    "complete": 73,
+    "remaining": 158,
+    "files": 231,
+    "points": 1947,
+    "lines": 27096,
+    "pending": 1549
+  }
+}

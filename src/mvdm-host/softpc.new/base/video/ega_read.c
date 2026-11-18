@@ -135,8 +135,6 @@ ERROR RECOVERY	  :	none.
 #include	"ga_mark.h"
 #include	"ga_defs.h"
 #include	"cpu_vid.h"
-IMPORT void setReadPointers IPT1(IUH, readset);
-#line 138
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
@@ -287,6 +285,7 @@ GLOBAL READ_POINTERS read_pointers;
 extern IU32 read_byte_ev_glue IPT1(IU32, eaOff);
 extern IU32 read_word_ev_glue IPT1(IU32, eaOff);
 extern void read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);
+IMPORT void setReadPointers IPT1(IUH, readset);
 #line 385
 READ_POINTERS Glue_reads = 
 {

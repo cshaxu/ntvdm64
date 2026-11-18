@@ -1,0 +1,41 @@
+{
+  "packet": "T483 S8 P31",
+  "files": [
+    {
+      "position": 69,
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "review_id": "T483-R0832",
+      "current_sha256": "a54e261d0e1649c48e5219b8a63b76effd024627ac769d38c59801f5732b881a",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "metrics": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "issues": [],
+      "decision": "Current product compile exits 0. Restoring the original relative include with source-directory lookup exits 2, C1083. Omission retained."
+    },
+    {
+      "position": 70,
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "review_id": "T483-R0833",
+      "current_sha256": "d164721c7f16202e31409963cb1758a8ca9f11d7a26826088820ba2e7dcc85e0",
+      "original_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777",
+      "metrics": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "issues": [],
+      "decision": "MSVC /w14013 product command: baseline exits 0 with neither selector warning; omit both prototypes and the same compile exits 0 with C4013 for both; put them at the existing C_VID selector declarations in a temporary egacpu.h and both warnings disappear. Keep production unchanged pending owner because egacpu.h would gain mirror differences. ega_read.c and ega_writ.c also declare the corresponding entry points; caller-wide build and impact measurement required before adopting the shared declaration."
+    }
+  ],
+  "coverage": {
+    "complete": 70,
+    "remaining": 161,
+    "files": 231,
+    "points": 1948,
+    "lines": 27096,
+    "pending": 1549
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "packet": "T483 S8 P34",
+  "files": [
+    {
+      "position": 74,
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "review_ids": [
+        "T483-R0842",
+        "T483-R0843"
+      ],
+      "current_sha256": "d6167d5c18d7eca27d8076a0575b78ece2d24d48d1b45f575ddc0df1d6c9d98c",
+      "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+      "before": [
+        2,
+        2,
+        1
+      ],
+      "metrics": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 1
+      },
+      "decision": "Group existing setWritePointers prototype with fill_word_ev_glue before original line 310. Both provider declarations retained."
+    }
+  ],
+  "coverage": {
+    "complete": 74,
+    "remaining": 157,
+    "files": 231,
+    "points": 1946,
+    "lines": 27096,
+    "pending": 1549
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "cd0f5136-ea5d-4bd0-a8f5-13d179954f4e",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  }
+}
