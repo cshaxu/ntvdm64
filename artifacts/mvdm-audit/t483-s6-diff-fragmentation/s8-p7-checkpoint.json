@@ -1,0 +1,50 @@
+{
+  "packet": "M0 T483 S8 P7",
+  "prior_checkpoint": "9b5c13be8",
+  "covered_before": 24,
+  "covered_after": 25,
+  "remaining": 206,
+  "pending_rows": 1566,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1974,
+    "lines": 27185
+  },
+  "cumulative_s8_reduction": {
+    "points": 0,
+    "lines": 25
+  },
+  "files": [
+    {
+      "position": 25,
+      "path": "src/mvdm-host/oemuni/file.c",
+      "source_sha256": "d8557d2b6b4b9aafb99736570288a3a800108c94c0e8e73c48600324c801698a",
+      "original_sha256": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df",
+      "review_ids": "T483-R0279;T483-R0280;T483-R0281;T483-R0282;T483-R0283;T483-R0284;T483-R0285;T483-R0286;T483-R0287;T483-R0288;T483-R0289;T483-R0290",
+      "before": {
+        "blocks": 12,
+        "added": 26,
+        "deleted": 11
+      },
+      "after": {
+        "blocks": 12,
+        "added": 26,
+        "deleted": 11
+      },
+      "prior_fixture_evidence": "../t483-remaining-reaudit/r0278-r0290-oem-file-review.json",
+      "disposition": {
+        "R0279-R0280": "Retain pending. DOS/DEM and WOW consume the OEM path result and file-part pointer. CP932 original/current control verifies wrong output length and byte offset.",
+        "R0281-R0283": "Retain pending. WOW directory lookup requires byte capacity and required size. CP932 capacity controls show incorrect write at capacity 11 and truncated capacity at 65536. Large capacities qualify the API contract.",
+        "R0284-R0285": "Retain pending. DEM and WOW volume callers provide their own capacities. The existing fixture reproduces an extra terminator write with the original on both outputs.",
+        "R0286-R0290": "Retain pending. DEM consumes the OEM computer name and its length. Independent Unicode query capacity, bounded OEM capacity and conversion status are exercised by the original/current fixture."
+      }
+    }
+  ],
+  "verification": {
+    "line_anchors": "Every matched nonblank original source line keeps its original logical line number under the current #line directives. No #error arms in this file.",
+    "manifest_sha256": "0ae16e9c0490c3cc7ae726fc9d0376786e8d481bf8b47dc4b51ff2ffa667ec19",
+    "images_per_destination": 11,
+    "publication": "Both destinations match existing P4 release manifest and hashes.",
+    "runtime_suite": "Documentation and ledger checkpoint only. Historical CP932 evidence reused. No new build, publication, or runtime test."
+  }
+}

@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P6 completed review through `vrnmpipe.h`. Next is position 25, OEM `file.c`.
+S8 P7 completed review through OEM `file.c`. Next is position 26, OEM `process.c`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P6 completed review through `vrnmpipe.h`. Next is position 25, OEM `file.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P6, 24 of 231 positions are covered and 207 remain queued.
+IDs. After S8 P7, 25 of 231 positions are covered and 206 remain queued.
 S8 has removed 25 diff lines, leaving 1,974 points and 27,185 lines.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
@@ -42,6 +42,7 @@ S8 has removed 25 diff lines, leaving 1,974 points and 27,185 lines.
 [P4 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p4-checkpoint.json).
 [P5 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p5-checkpoint.json).
 [P6 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p6-checkpoint.json).
+[P7 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p7-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live
