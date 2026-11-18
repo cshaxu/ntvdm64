@@ -214,10 +214,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
    CHAR *lpszzEnv, *lpszName;
    CHAR cchEnv;
 
-   /* DIVERGENCE(MVDM-HOST-DIV-158): Use the package root for guest COMMAND paths. */
-#line 209
-   dw = NtvdmGetWindowsDirectoryA(achRawFile, sizeof(achRawFile));
-#line 210
+   dw = NtvdmGetWindowsDirectoryA(achRawFile, sizeof(achRawFile)); /* DIVERGENCE(MVDM-HOST-DIV-158): Use the package root for guest COMMAND paths. */
    dwLenSysRoot = GetShortPathNameA(achRawFile, achSysRoot, sizeof(achSysRoot));
    if (dwLenSysRoot >= sizeof(achSysRoot)) {
 	dwLenSysRoot = 0;

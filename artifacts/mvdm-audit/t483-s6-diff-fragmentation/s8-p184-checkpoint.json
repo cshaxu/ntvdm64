@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P184",
+  "position": 227,
+  "path": "src/mvdm-host/dos/command/cmdconf.c",
+  "review_ids": [
+    "T483-R0007",
+    "MVDM-HOST-DIV-158"
+  ],
+  "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+  "current_sha256": "202939ff32f8e9d624a70b073e423b1d6ef89c6281d80fb84d489c35cce84572",
+  "before": {
+    "blocks": 2,
+    "added": 3,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 1
+  },
+  "paired_error_bodies": 2,
+  "line_mismatches": [],
+  "decision": "Preserve owner-approved explicit declaration. ExpandConfigFiles takes the package root through the existing firmware helper and uses it for the generated SHELL line and SystemRoot expansion. System32/command.com is absent under the actual host Windows root and present in O:/winnt/system32. Attach existing provenance to the changed call at original line 209; remove two redundant line directives. No binding change.",
+  "verification": {
+    "objects": {
+      "worker": "COFF timestamp only",
+      "reference": "COFF timestamp only"
+    },
+    "tests": "File existence contrast; no new guest run."
+  },
+  "coverage": {
+    "complete": 227,
+    "remaining": 4,
+    "files": 231,
+    "points": 1903,
+    "lines": 26245,
+    "pending": 1532
+  }
+}
