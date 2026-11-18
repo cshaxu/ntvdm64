@@ -1,0 +1,77 @@
+{
+  "packet": "T483 S8 P106",
+  "position": 150,
+  "path": "src/mvdm-host/wow32/wuclass.c",
+  "review_ids": [
+    "T483-R1817",
+    "T483-R1818",
+    "T483-R1819",
+    "T483-R1820",
+    "T483-R1821",
+    "T483-R1822",
+    "T483-R1823"
+  ],
+  "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d",
+  "current_sha256": "e88dbe493e58e12f8fd2b55395e8ebcff1ce7858c06a3dae944c5c3e742e4485",
+  "before": {
+    "blocks": 7,
+    "added": 19,
+    "deleted": 7
+  },
+  "after": {
+    "blocks": 7,
+    "added": 13,
+    "deleted": 7
+  },
+  "source_changed": true,
+  "paired_error_bodies": 6,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        161,
+        156,
+        "#endif"
+      ],
+      [
+        721,
+        724,
+        "                // Look to see if the new 16:16 proc is a thunk for a 32-bit proc."
+      ],
+      [
+        1042,
+        1041,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 150,
+    "remaining": 81,
+    "files": 231,
+    "points": 1908,
+    "lines": 26971,
+    "pending": 1534
+  },
+  "decision": "R1817-R1823 remain pending. Class reads and exchanges need origin because 0xffff0004 is a possible native CPD or tagged guest selector. Failed exchange must precede guest class word update. Both decoders directly recognize a CPD high word or a tagged guest value; only the native CPD uses the USER thunk. Since the 0xffff high word implies the tag bit, this factors the same predicates and removes two redundant line resets. No new binding or helper.",
+  "verification": {
+    "scope": "Production-linked class-procedure fixture on this host, no guest OS run",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "36de3be8-217a-432c-9684-ecabc48668a3",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "truth_table": "262144 route comparisons with both actual old and new source predicate pairs across 65536 high words and both origins; low word unused",
+    "cached": "x86 and x64 full cached builds passed",
+    "fixture": [
+      "WOW_TYPED_PROCEDURE_CALLERS errors=0 actual_wu32=4 guest_ffff=1 setters=4 getters=4",
+      "WOW_CLASS_PROCEDURE errors=0 callbacks=40",
+      "WOW_FIXTURE_OK case=class-procedure"
+    ]
+  }
+}

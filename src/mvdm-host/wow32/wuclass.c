@@ -274,22 +274,15 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
                 dwProc32 = wow_user_get_procedure(hwnd, TRUE, &procedureIsGuest);
 #line 273
 
-                if ( (dwProc32 & WNDPROC_WOW)
+                if ( HIWORD(dwProc32) == WNDPROC_HANDLE ||
+                     (procedureIsGuest && (dwProc32 & WNDPROC_WOW)) ) {
+                    if ( HIWORD(dwProc32) == WNDPROC_HANDLE && !procedureIsGuest ) {
 #line 276
-                     && (procedureIsGuest || HIWORD(dwProc32) == WNDPROC_HANDLE)
-#line 278
-                   ) {
-                    if ( HIWORD(dwProc32) == WNDPROC_HANDLE
-#line 281
-                         && !procedureIsGuest
-#line 283
-                       ) {
                         //
                         // Class has a window proc which is really a handle
                         // to a proc.  This happens when there is some
                         // unicode to ansi transition or vice versa.
                         //
-#line 281
                         pww = FindPWW( hwnd, WOWCLASS_UNKNOWN);
                         if ( pww == NULL ) {
                             ul = 0;
@@ -780,20 +773,13 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                     SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, LONG32(parg16->f3));
                 }
 
-                if ( (dwWndProc32Old & WNDPROC_WOW)
+                if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE ||
+                     (previousIsGuest && (dwWndProc32Old & WNDPROC_WOW)) ) {
+                    if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE && !previousIsGuest ) {
 #line 759
-                     && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)
-#line 761
-                   ) {
-                    if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE
-#line 764
-                         && !previousIsGuest
-#line 766
-                       ) {
                         //
                         // If the return value is a handle, then just thunk it.
                         //
-#line 762
                         pww = FindPWW(HWND32(parg16->f1), WOWCLASS_UNKNOWN);
                         if ( pww == NULL ) {
                             ul = 0;

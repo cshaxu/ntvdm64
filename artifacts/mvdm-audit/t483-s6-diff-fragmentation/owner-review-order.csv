@@ -76,7 +76,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 79,src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,8,2,245,247,12,0,80,s7-p7-reviewed-residual-pending,e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9
 80,src/non-mvdm/windows/core/ntuser/rtl/getset.c,8,14,223,237,0,0,81,s7-p5-reviewed-residual-pending,1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b
 81,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,59,5,0,84,s8-p46-reviewed,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
-82,src/mvdm-host/wow32/wuclass.c,7,19,7,26,6,0,85,s7-p15-reviewed,1c6a49f1f38126cc200734faf2a2c8ecebca734ff969584386e16e4db60c2b3c
+82,src/mvdm-host/wow32/wuclass.c,7,13,7,20,6,0,85,s8-p106-reviewed,e88dbe493e58e12f8fd2b55395e8ebcff1ce7858c06a3dae944c5c3e742e4485
 83,src/non-mvdm/base/ntdll/csrutil.c,7,7,615,622,0,0,86,s7-p2-reviewed-residual-pending,75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a
 84,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,866,3,0,87,s7-reviewed-residuals-pending,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
 85,src/mvdm-host/softpc.new/host/src/nt_cpu.c,4,4,2,6,10,0,83,s8-p45-reviewed,23c6f5890fb60aae48f319b7b0426ed8c9dff8656c8eaf8a2f911acf23b700fc
