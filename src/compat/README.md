@@ -6,27 +6,16 @@ outside the original mirror. T483 S5 P213 restores original `ntrtl.h`
 declarations and removes the duplicate `ntrtl_wow32.h` facade; WOW uses the
 same original RTL declarations as the other selected callers.
 
-ADAPTER-WIN32-042 declaration recovery extension (T447 S3): expose only the
-existing original public/sdk/inc/wownt32.h WOWGetVDMPointer declaration in
-wow_user_declarations.h, already selected by nt.h. Preserve WINAPI and the
-DWORD/DWORD/BOOL inputs. The incompatible modern WOW header remains excluded;
-the original WOW32 body remains the provider. This removes the project-added
-prototype from original wow32.h instead of retaining an unnecessary mirror
-intrusion. No source body, memory lease, mapping owner or runtime policy is
-introduced. Pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c and the
-existing exact ABI carrier supply provenance; grouped /Gz builds and original
-callback/guest acceptance remain required before delivery.
+T447 S3 (ADAPTER-WIN32-042) exposes the original `WOWGetVDMPointer` ABI
+through `include/wow_user_declarations.h`. WOW32 provides the function.
+The control/resource and character conversion declarations live in
+`include/wow_control_resource_abi.h` and `include/wow_char_conversion_abi.h`
+(OPENNT-HOST-105). These bindings preserve original layouts and calling
+conventions from OpenNT revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
 
-T447 S3 places its declaration-only WOW control/resource and character
-conversion facades in include/wow_control_resource_abi.h and
-include/wow_char_conversion_abi.h. They replace the invented controlabi.h and
-chartranapi.h filenames formerly placed in the OpenNT mirror. OPENNT-HOST-105
-provenance and original layout assertions remain; the conversion service
-signatures and bindings are unchanged. These files introduce no runtime owner.
-
-Same-shaped historical Win32/NTDLL/OEM facade used by imported `mvdm-host`
-source. It uses public modern Windows APIs where the original private NT4
-product composition no longer exists.
+The worker RTL adapter owns its surrogate process and thread state. Its PEB
+exposes the same lock that the local RTL acquires. Environment refresh owns
+the page-backed snapshot. Original RTL owns environment mutation and cloning.
 
 ## Registered divergences
 
@@ -41,6 +30,8 @@ they do not authorize a second copy under this shared ABI root.
 | ADAPTER-WIN32-060 | OpenNT nt_event.c::CntrlHandler and ntcon/server/input.c::CreateCtrlThread close a Console-associated VDM. | Private Console Server remote callbacks, process-list ownership and hung-close UI cannot be imported; root run16 is the owner-approved standalone session lifetime. | console_client waits the existing broker-authenticated root process capability, invokes unchanged CntrlHandler(CTRL_CLOSE_EVENT) on a session-bound callback thread, then bounds unresolved close at five seconds and terminates only itself. A vanished frontend cannot present a close-cancel dialog; this forced-close choice and grace are product policy, not an assertion of exact NT4 timeout configuration. Ordinary pipe errors/non-root death do not close the session. No new mirror diff, transport or process tree. Native callback/hung-callback/broken-pipe fixtures and the real NOIO root-normal/abnormal tests cover it. |
 | ADAPTER-WIN32-059 | config/nt_det/nt_event GetConsoleDisplayMode and SetConsoleDisplayMode; OpenNT ntcon/client/private.c | Original client needs private CSR/Console server. | Same-shaped conapi names bind to console_client; protocol 9 copies flags/dimensions to run16's native APIs. No-channel calls stay native; no fullscreen emulation or mirror body changes. Native-result and malformed-payload tests accompany the binding. |
 | ADAPTER-WIN32-058 | nt_graph CreateConsoleScreenBuffer/SetConsoleActiveScreenBuffer/CloseHandle and palette/invalidation; ntcon/server/bitmap.c provides shared bitmap/mutex. | Native graphics allocation fails 87; CSR section/client/server ownership cannot compose. | `ntvdm-exe/win32/console_bitmap.c` retains local packed backing and independent painter mutex; `console_graphics.c` binds original calls and copies frames introduced in protocol 8. Context follows the existing console-client teardown, no worker Window/library. Real-channel tests cover creation, palette, pixels, invalid rectangle and text/close; `test/integration/verify-video-frame-delivery.ps1` proves real guest pixels/palette and subsequent text retirement. Window rendering remains S4 work. |
+
+The following T423 notes describe the frontend and protocol at that revision. Current NTCON geometry handling is in `src/ntcon-exe/console_frontend.c` and `frontend_session.c`.
 
 T423 S2 routes the original COMMAND input-code-page query and SoftPC output-
 code-page queries through the same authenticated frontend channel.
@@ -146,7 +137,7 @@ Frontend teardown cancels synchronous reads and drains outstanding pipe I/O.
 | ADAPTER-WIN32-002 | Reached OEM calls reuse `TEB.StaticUnicodeString` after temporary `RtlInitUnicodeString` rebinding. | A real modern TEB cannot provide the historical scratch field safely. | Restore only the adapter-owned TLS buffer before a non-allocating OEM-to-Unicode conversion. | `source/opennt_support_rtl.c` |
 | ADAPTER-WIN32-026 | Bind the reached original `RtlCreateEnvironment`, `RtlDestroyEnvironment` and `RtlSetEnvironmentVariable` APIs. | NT4 supplied mutable, ordered environment blocks through its private RTL/PEB composition; modern NTDLL exports the historical names, but cannot safely be mixed with the selected original body. | The original algorithm is now `../../non-mvdm/base/ntos/rtl/environ.c`. The adapter owns only a page-backed private PEB snapshot, finite VM declarations, the selected-consumer private symbol domain, and default-off phase/status observation; it neither parses nor mutates a MULTI_SZ block. | `source/{opennt_support_rtl,mvdm_base_vdm_environment}.c`; `../../non-mvdm/base/ntos/rtl/{environ.c,environapi.h,ntrtlp.h,zwapi.h}`; consumers `../../mvdm-host/dos/command/cmdenv.c`, `../../non-mvdm/base/win32/client/vdm.c` |
 | ADAPTER-WIN32-046 | Original Base `BaseCheckVDM` gives `BaseCreateVDMEnvironment` output to a newly created `ntvdm.exe` child. | The selected CLI directly calls original SoftPC in its own process, so there is no child creation boundary at which the original block is inherited. | Invoke the retained original Base function unchanged, install its full projected block only around the original MVDM entry, then restore the app block. No variable is filtered, capped, or synthesized. | `include/mvdm_base_vdm_environment.h`; `source/mvdm_base_vdm_environment.c`; `../../non-mvdm/base/win32/client/vdm.c`; `../../../app/entry.c` |
-| ADAPTER-WIN32-027 | Original SoftPC keyboard conversion calls the fixed-buffer `RtlOemToUnicodeN` form. | The selected OpenNT declaration subset now exposes the original contract, but the modern public SDK does not provide its complete historical source binding. | Preserve `NTSTATUS`, byte-count, fixed-buffer and OEM code-page semantics with public `MultiByteToWideChar`; the caller retains ownership of both host-local buffers. | `source/opennt_support_rtl.c`; declaration mirror `../../non-mvdm/public/sdk/inc/ntrtl.h`; caller `../../mvdm-host/softpc.new/host/src/nt_keycd.c` |
+| ADAPTER-WIN32-027 (retired, T483 S9 P5) | Original keyboard and redirector clients call the fixed-buffer `RtlOemToUnicodeN`. | The original declaration links directly to NTDLL. | NTDLL writes the converted prefix on short buffers and reports bytes actually written. | `src/non-mvdm/public/sdk/inc/ntrtl.h`; `src/mvdm-host/softpc.new/host/src/nt_keycd.c` |
 | ADAPTER-WIN32-030 | Original SoftPC host input calls NT4 Console Server input and mouse operations. | Public record/coordinate APIs compose; historical VDM prepend availability is checked separately. | Retain caller shapes; DOS read/peek and readiness use the authenticated run16 channel, no-channel callers retain native input. ADAPTER-WIN32-051 binds native prepend. Unsupported display selectors fail explicitly. | `../../ntvdm-exe/win32/console_compat.c`, `include/conapi.h`; original `nt_event.c`, `nt_mouse.c` |
 | ADAPTER-WIN32-031 | Original host-video callers use the NT4 Console Server DIB invalidation, output-palette and event-active call shapes. | Modern public Console APIs expose neither the DIB/palette operation nor the paired Console Server event protocol. | Retain the original names and parameter forms.  A bound session forwards typed dirty-rectangle/palette/activity events to an app-owned presenter; no presenter returns `ERROR_CALL_NOT_IMPLEMENTED` for BOOL operations, while the original void activity form only records session-local activity.  This adapter creates no controller, window or GUI. | `include/conapi.h`, `source/console_compat.c`, `../../../session/{session.c,session.h}` |
 | ADAPTER-WIN32-032 | Original SoftPC fullscreen/detach paths register a VDM with the private NT4 Console Server using `RegisterConsoleVDM`. | The original operation duplicates hardware events and maps VDM state/text sections inside Console Server; modern public Console APIs expose neither that registration protocol nor an equivalent state mapping. | Preserve the complete function name and pointer-bearing ABI. For the selected windowed CPU40 path, acquire only the original caller's required host-local text buffer from the session-owned bounded text-plane contract; return a zero-length/null hardware-state mapping, which the original source accepts when fullscreen hardware is unavailable. `CONSOLE_UNREGISTER_VDM` detaches presentation but deliberately retains that caller-visible buffer until session disposal or safe replacement, matching the original pointer lifetime across `doNullRegister()`. App presentation can obtain only a copy through session, never this adapter-facing pointer. Fullscreen/controller event and shared Console-Server mappings remain unavailable. | `include/conapi.h`, `source/console_compat.c`; callers `../../../mvdm-host/softpc.new/host/src/{nt_det.c,nt_fulsc.c}`; `../../../session/session.[ch]` |

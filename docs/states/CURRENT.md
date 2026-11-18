@@ -21,7 +21,7 @@ Owner closed S8 and admitted the sequential non-mirror code quality audit.
 
 ## Progress
 
-P3 screened all 40 files and compiled isolated candidates. Its [findings](../../artifacts/t483-s9-non-mirror-audit/p3.md) are leads for the file-by-file review. The sequential audit has completed 2/40 files. P5 reduced compat by 36 physical lines and published the verified 11-image package. Next is README.md. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
+P3 screened all 40 files and compiled isolated candidates. Its [findings](../../artifacts/t483-s9-non-mirror-audit/p3.md) are leads for the file-by-file review. The sequential audit has completed 7/40 files. P5 reduced compat by 36 physical lines and published the verified 11-image package. P6 updated the historical register and reviewed four original WOW units. Next is wow_control_rect.c. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
 
 ## S1 Closure Record
 
