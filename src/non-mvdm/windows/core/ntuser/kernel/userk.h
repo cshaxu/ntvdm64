@@ -3220,7 +3220,38 @@ NTSTATUS xxxInitTask(UINT dwExpWinVer, PUNICODE_STRING pstrAppName,
                 DWORD hTaskWow, DWORD dwHotkey, DWORD idTask,
                 DWORD dwX, DWORD dwY, DWORD dwXSize, DWORD dwYSize,
                 WORD wShowWindow);
-#line 3229
+VOID    DestroyTask(PPROCESSINFO ppi, PTHREADINFO ptiToRemove);
+void    PostInputMessage(PQ pq, PWND pwnd, UINT message, DWORD wParam,
+                LONG lParam, DWORD dwExtraInfo);
+VOID    PostSetForeground(PTHREADINFO pti, PQMSG pqmsg, DWORD wParam);
+BOOL    PostHotkeyMessage(PQ pq, PWND pwnd, DWORD wParam, LONG lParam);
+PWND    PwndForegroundCapture(VOID);
+BOOL    xxxSleepThread(UINT fsWakeMask, DWORD Timeout, BOOL fForegroundIdle);
+VOID    WakeThread(PTHREADINFO pti);
+VOID    SetWakeBit(PTHREADINFO pti, UINT wWakeBit);
+VOID    WakeSomeone(PQ pq, UINT message, PQMSG pqmsg);
+VOID    ClearWakeBit(PTHREADINFO pti, UINT wWakeBit, BOOL fSysCheck);
+BOOL    InitProcessInfo(PW32PROCESS);
+
+#line 3211
+PQMSG   AllocQEntry(PMLIST pml);
+void    DelQEntry(PMLIST pml, PQMSG pqmsg);
+void    AttachToQueue(PTHREADINFO pti, PQ pqAttach, PQ pqJournal,
+        BOOL fJoiningForeground);
+BOOL    WriteMessage(PTHREADINFO pti, PWND pwnd, UINT message, DWORD wParam,
+                LONG lParam, DWORD flags, DWORD dwExtraInfo);
+VOID    xxxProcessEventMessage(PTHREADINFO pti, PQMSG pqmsg);
+VOID    xxxProcessSetWindowPosEvent(PSMWP psmwpT);
+VOID    xxxProcessAsyncSendMessage(PASYNCSENDMSG pmsg);
+VOID    BoostQ(PTHREADINFO pti, DWORD dwBoostType);
+PQMSG   FindMessage(UINT message, PQMSG pqmsgRead, PQMSG pqmsgWrite);
+PQMSG   xxxGetNextMessage(PTHREADINFO pti, PQ pq, PQMSG *ppqmsgRead,
+                PQMSG *ppqmsgWrite, PQMSG pqmsgPrev, PQMSG pqmsg, int nQueue);
+PQMSG   GetPrevMessage(UINT message, PQMSG pqmsgRead, PQMSG pqmsgWrite);
+BOOL    xxxRemoveMessage(PQ pq, PQMSG *ppqmsgRead, PQMSG *ppqmsgWrite,
+                PQMSG *ppqmsgLast, PQMSG pqmsg, PQMSG pqmsgPrev, int nQueue);
+BOOL    PostEventMessage(PTHREADINFO pti, PQ pq, DWORD dwQEvent, PWND pwnd, UINT message, DWORD wParam, LONG lParam);
+
 BOOL    DoPaint(PWND pwndFilter, LPMSG lpMsg);
 BOOL    DoTimer(PWND pwndFilter, UINT wMsgFilterMin, UINT wMsgFilterMax);
 VOID    InvalidateDC(PWND pwnd, LPRECT lprcInvalidOld);

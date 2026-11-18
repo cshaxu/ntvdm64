@@ -19,7 +19,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 18,src/mvdm-host/wow32/wumsg.c,32,93,14,107,3,0,19,s8-p110-reviewed,c73b954e96c769d07f2a48ade2ee8147f41a8894c830369670b135b099bfa465
 19,src/non-mvdm/windows/core/ntuser/client/clres.c,28,24,2706,2730,10,0,20,s8-p142-reviewed,4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436
 20,src/non-mvdm/windows/core/ntuser/client/clmsg.c,27,6,973,979,16,0,21,s8-p141-reviewed,fc6bbaa3a31d557e8faf231e1eb9a5545db1eaec07f4d3e1dd963233054740a7
-21,src/non-mvdm/windows/core/ntuser/kernel/userk.h,27,5,110,115,40,0,22,reviewed-verified-p12-residuals-pending-owner,7eb1dabe7de56a6eb4404b0e2d5843ed1fcd821b4724539c17e4b7f392611b94
+21,src/non-mvdm/windows/core/ntuser/kernel/userk.h,27,5,79,84,40,0,22,s8-p169-reviewed,8b61c20827c75e612da271c86a665cb38bb3018eeb9777c702bb5ed522589505
 22,src/mvdm-host/wow32/wdde.c,25,123,15,138,0,0,23,s8-p75-reviewed,8f288d930793eb9449a926071d0688b9d3fda1e4d0dd94e50a978c457e8acfe7
 23,src/mvdm-host/softpc.new/base/cvidc/sevid001.c,25,25,25,50,0,0,26,s8-p22-reviewed,2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5
 24,src/mvdm-host/wow32/wkman.c,17,19,16,35,24,0,27,s8-p96-reviewed,675eb55367e0d442ef50496625fd806add1ba7374100dde0dacae6e2863afb8e

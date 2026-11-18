@@ -1,0 +1,92 @@
+{
+  "packet": "T483 S8 P169",
+  "position": 212,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+  "review_ids": [
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666",
+    "T483-R2658,R2666"
+  ],
+  "original_sha256": "9260e0ba3cc89974e10b3804ed66d18b9864f4ae7d1175cce6dde8ee79d66e8c",
+  "current_sha256": "8b61c20827c75e612da271c86a665cb38bb3018eeb9777c702bb5ed522589505",
+  "before": {
+    "blocks": 27,
+    "added": 5,
+    "deleted": 110
+  },
+  "after": {
+    "blocks": 27,
+    "added": 5,
+    "deleted": 79
+  },
+  "source_changed": true,
+  "paired_error_bodies": 40,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        2020,
+        2032,
+        "/*"
+      ],
+      [
+        2490,
+        2501,
+        "/*"
+      ]
+    ],
+    "direct_check": "Both ambiguous opening comments and all 31 restored rows match their original logical coordinates."
+  },
+  "coverage": {
+    "complete": 212,
+    "remaining": 19,
+    "files": 231,
+    "points": 1912,
+    "lines": 26354,
+    "pending": 1532
+  },
+  "decision": "Restored original rows 3193-3205 and 3211-3228. Three verified function-macro collisions at 3206,3208,3210 remain. Two independently restorable prototypes in between require splitting that single hunk. Existing scheduler ABI, event/lock receivers, private class/menu types and flags-only inclusion boundary retain the individual pending dispositions. Journal equivalence and APC semantics remain explicitly open in the ledger.",
+  "verification": {
+    "scope": "Five production x86 object targets rebuilt. Four prior objects byte-compared; no before/after byte-identity claim for the message bridge. No full build, new runtime test or publication.",
+    "objects": {
+      "obj/opennt-user/cleanup.obj": {
+        "bytes": 4085,
+        "same_except_coff_timestamp": true,
+        "identical": false
+      },
+      "obj/opennt-user/queue.obj": {
+        "bytes": 4233,
+        "same_except_coff_timestamp": true,
+        "identical": false
+      },
+      "obj/opennt-user/taskman.obj": {
+        "bytes": 5579,
+        "same_except_coff_timestamp": true,
+        "identical": false
+      },
+      "obj/compat/wow-object-ownership.obj": {
+        "bytes": 693,
+        "same_except_coff_timestamp": true,
+        "identical": false
+      }
+    }
+  }
+}
