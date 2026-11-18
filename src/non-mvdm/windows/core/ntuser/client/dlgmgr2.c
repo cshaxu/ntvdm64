@@ -215,7 +215,6 @@ SetNewDefault:
 \***************************************************************************/
 
 #line 213
-#line 213
 BOOL IsDialogMessageA(
     HWND hwndDlg,
     LPMSG lpmsg)
@@ -548,11 +547,9 @@ CallDefWindowProcAndReturnTrue:
              * #4358.
              */
 #line 538
-#line 538
             if (code & (DLGC_UNDEFPUSHBUTTON | DLGC_DEFPUSHBUTTON)) {
                 PBUTN pbutn;
                 BOOL fIsNTButton = (GETFNID(pwnd2) == FNID_BUTTON);
-                /* DIVERGENCE(OPENNT-HOST-119): dialog focus also borrows BUTN. */
                 wow_button_scope buttonScope;
                 if (fIsNTButton) wow_button_scope_enter(&buttonScope, pwnd2);
                 __try {
@@ -562,7 +559,6 @@ CallDefWindowProcAndReturnTrue:
                     BUTTONSTATE(pbutn) |= BST_DONTCLICK;
                 }
                 DlgSetFocus(hwnd2);
-                /* DIVERGENCE(OPENNT-HOST-119): restore before releasing BUTN. */
                 } __finally {
 #line 546
                 if (fIsNTButton) {
@@ -572,9 +568,7 @@ CallDefWindowProcAndReturnTrue:
 #line 548
                 }
 #line 549
-#line 549
                 xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
-#line 550
 #line 550
             } else if (code & DLGC_RADIOBUTTON) {
                 DlgSetFocus(hwnd2);
@@ -675,7 +669,6 @@ ReturnProcessed: /* DIVERGENCE(OPENNT-HOST-119): shared existing unlock exit. */
 *
 \***************************************************************************/
 
-#line 645
 #line 645
 PWND _FindDlgItem(PWND pwndParent, DWORD id)
 {

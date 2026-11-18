@@ -1,0 +1,191 @@
+{
+  "packet": "M0 T483 S7 P20",
+  "prior_delivery": "ccec54ac0",
+  "reviews": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "decision": "Keep original edit color request body and route only its private default color fallback through the existing provider. Original kernel DefWindowProcWorker requires unavailable private client/server state.",
+      "evidence": "../t483-remaining-reaudit/p231-editec-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "before": {
+        "blocks": 5,
+        "added": 6,
+        "deleted": 4
+      },
+      "after": {
+        "blocks": 5,
+        "added": 6,
+        "deleted": 4
+      },
+      "source_sha256": "e8a9a5246447394670edb7427068c4567e5532885049e10207be60b901b8513a",
+      "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+      "decision": "Preserve original mapped-file cache around the bounded fixes. Closing clears the cached mapping handle; teardown visits the final node and snapshots next before freeing. Named-pipe classification starts false before conditional assignment. Existing controls isolate the original failures.",
+      "evidence": "../t483-remaining-reaudit/r1460-r1466-wkfileio-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "before": {
+        "blocks": 3,
+        "added": 7,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 3,
+        "added": 7,
+        "deleted": 0
+      },
+      "source_sha256": "ee0a7c3ad040edfd9712eccd02c2eec1b89d85861b00d3b49ffc5ecfb3a00ce2",
+      "original_sha256": "7e53074328ace93ae8ce39fb218fa780ff868999b40f7904fdbbff45fbd7b990",
+      "decision": "Keep freeing the staged print strings on early failures. Sequential allocation means a later failure does not release earlier successful copies. Original success and spooler call bodies are already retained.",
+      "evidence": "../t483-remaining-reaudit/r1430-r1433-wgprnset-review.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 182
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 182
+      },
+      "source_sha256": "a99164a46963e5fb81a2e998438eadb8284cabd185886ca379251e15f6064711",
+      "original_sha256": "070437121d8a1ee57ea07672ea9aba3e85a8f4b80b802034cc208383dca4e5cd",
+      "decision": "Keep original XsNetServerEnum2 reachable path and other restored routines. Actual whole-original object compiles but VDMREDIR link fails unresolved NetServerEnumEx. Original browser provider requires private service/transport and first-name continuation; public numeric resume has a different contract. Existing minimal declarations are the admitted boundary.",
+      "evidence": "../t483-remaining-reaudit/batch-p187-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "before": {
+        "blocks": 11,
+        "added": 16,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 11,
+        "added": 16,
+        "deleted": 6
+      },
+      "source_sha256": "7949bf8bb815824c507cfa7fbcc85b4c9c87001522aa5e1ae1bc8016abcdec1f",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "decision": "Keep callback admission before original body and one common-dialog message cleanup scope. Share-message guest buffer acquisition/release, regular conversion and reverse output remain the existing single lifetime; original raw free cannot honor partial or exceptional cleanup.",
+      "evidence": "../t483-remaining-reaudit/batch-p139-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "source_sha256": "40c236c96768a5a5a3d03c61a00b5b594552f4987a2d3ddde912912e1afba478",
+      "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+      "decision": "Original GetVDMAddr/RtlMoveMemory/SAS body and allocation call chain remain intact. The CPU40 condition and unsupported-profile error are a local safeguard with no matching original arm; all four lines remain in the tracked non-error total.",
+      "evidence": "../t483-remaining-reaudit/r1943-r1944-xmsmemr-review.json",
+      "retained_local_guards": {
+        "168": "New CPU_40_STYLE fallback; original move body is unconditional."
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgpal.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "1c29cff4af4ec8565f9d2e1931a1596dccd21c1b8285563b9c3d203d617c1cb1",
+      "original_sha256": "942bd3c12615416a532638df4b53a08e963bd1e60dd0d081fd34765ace0872c8",
+      "decision": "Keep returning only the actual native palette count to the original guest converter. The 19-check real GDI control fails five under original, which supplies requested capacity and copies unfilled entries.",
+      "evidence": "../t483-remaining-reaudit/r1428-r1429-wgpal-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "before": {
+        "blocks": 8,
+        "added": 14,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 8,
+        "added": 14,
+        "deleted": 1
+      },
+      "source_sha256": "9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572",
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "decision": "Keep production drawing-cohort guards, cleanup on callback unwind, ownership of a failed bitmap selection and corrected Y extent. Prior original-body and actual compile controls show these are separate functional and compilation boundaries.",
+      "evidence": "../t483-remaining-reaudit/p233-mngrayc-review.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "9fc9f7ea082b2e7c75087f3fde34a2a97ade86af0e7fe0ec97c1cad4581789e0",
+      "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+      "decision": "Retain original Unicode functions and the one finite header substitution. Full original header fails C1083 on absent SMB declarations under the real compile command; original/current selected function preprocessing is identical.",
+      "evidence": "../t483-remaining-reaudit/batch-p192-checkpoint.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "before": {
+        "blocks": 15,
+        "added": 25,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 15,
+        "added": 23,
+        "deleted": 0
+      },
+      "source_sha256": "0cb29a05517e3276d751b8e83b01a50e4326dc1f4b708efacc294ffc9ab28954",
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "decision": "Remove two redundant explanatory comments and five immediately repeated line resets. Retain actual keyboard compilation cohorts and original keyboard/default-button traversal. Preserve the retirement and borrow-scope checks across synchronous native callbacks.",
+      "evidence": "../t483-remaining-reaudit/p228-dlgmgr2-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 179,
+    "remaining": 34,
+    "nonzero_files": 237,
+    "non_error_points": 2013,
+    "non_error_lines": 28398,
+    "source_reduction_s7": {
+      "points": 34,
+      "lines": 578
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable tokens and original logical lines checked. Removed two repeated divergence comments and five immediately repeated line resets in dlgmgr2.c, preserving executable tokens and effective original anchors. Four local scope rows move one logical line each. Nine sources remain byte-identical. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}

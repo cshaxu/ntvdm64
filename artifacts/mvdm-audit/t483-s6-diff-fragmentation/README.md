@@ -368,3 +368,7 @@ four blank-line removals across two sources. The filtered census is
 [S7 P19 receipt](s7-p19-checkpoint.json) records ten file reviews and
 nonfunctional restorations in two DOS command sources. The filtered
 census is 2,013 points and 28,400 changed lines.
+
+[S7 P20 receipt](s7-p20-checkpoint.json) records ten file reviews and
+format cleanup in `dlgmgr2.c`. The filtered census is 2,013 points and
+28,398 changed lines.

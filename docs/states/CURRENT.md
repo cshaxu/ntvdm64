@@ -158,9 +158,14 @@ in `cmdmisc.c` and minimizes the package-root comment in `cmdconf.c`
 while restoring the original logical line for the call.
 [P19 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p19-checkpoint.json).
 
-S7 progress is 169 reviewed and 44 remaining. Source restorations reduce
-34 points and 576 changed lines in S7. The current census is 2,013 non-error
-points and 28,400 changed lines across 237 mirrors with filtered differences.
+S7 P20 completes ten file reviews. It removes two redundant comments and
+five repeated line resets in `dlgmgr2.c`. Existing original code anchors
+and the excluded branches are preserved.
+[P20 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p20-checkpoint.json).
+
+S7 progress is 179 reviewed and 34 remaining. Source restorations reduce
+34 points and 578 changed lines in S7. The current census is 2,013 non-error
+points and 28,398 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 
