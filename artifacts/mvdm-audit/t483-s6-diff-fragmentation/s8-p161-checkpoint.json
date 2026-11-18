@@ -1,0 +1,55 @@
+{
+  "packet": "T483 S8 P161",
+  "position": 204,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+  "review_ids": [
+    "T483-R2484",
+    "T483-R2485",
+    "T483-R2486",
+    "T483-R2487",
+    "T483-R2488",
+    "T483-R2489",
+    "T483-R2490",
+    "T483-R2492",
+    "T483-R2493",
+    "T483-R2495",
+    "T483-R2496",
+    "T483-R2499"
+  ],
+  "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+  "current_sha256": "56ecb777d126c5614e0e9a2008529b9471f1aae71d553bb2ee9a34e714f97ef3",
+  "before": {
+    "blocks": 12,
+    "added": 16,
+    "deleted": 1374
+  },
+  "after": {
+    "blocks": 12,
+    "added": 16,
+    "deleted": 1374
+  },
+  "source_changed": true,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        1074,
+        1072,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 204,
+    "remaining": 27,
+    "files": 231,
+    "points": 1912,
+    "lines": 26391,
+    "pending": 1532
+  },
+  "verification": {
+    "scope": "Final byte/hash/filtered diff and nonblank line coordinates checked, current native provider and historical three-profile compile controls examined. No runtime rerun."
+  },
+  "decision": "P242 raw original header C1083 ntos.h in lookup, registration and removal. WOW class publication calls native RegisterClassExA, whereas OpenNT allocates NT4 desktop and kernel CLS objects and locks private cursors. Lookup retains original ordered root traversal against task-owned metadata; registration and removal pass the explicit publication/removal contexts. Retain these distinct ownership boundaries. Removed only #line 1075 covering a blank before #line 375 and #line 380 at EOF. Full nonblank non-marker logical coordinate stream identical; both #error bodies remain."
+}

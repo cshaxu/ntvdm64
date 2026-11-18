@@ -270,7 +270,6 @@ PPCLS GetClassPtr(
 #line 1071
 #error
 #endif
-#line 1075
 
 #line 375
 #ifdef FE_SB // InternalRegisterClassEx()
@@ -279,4 +278,3 @@ PPCLS GetClassPtr(
 #else
 #line 378
 #endif // FE_SB
-#line 380
