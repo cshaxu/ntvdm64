@@ -20,7 +20,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 19,src/non-mvdm/windows/core/ntuser/client/clres.c,28,24,2706,2730,10,0,20,reviewed-verified-p10-residuals-pending-owner,4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436
 20,src/non-mvdm/windows/core/ntuser/client/clmsg.c,27,6,973,979,16,0,21,reviewed-verified-p11-residuals-pending-owner,a22c50a3f3ec311a0ccda253bcecb0b8a8a1a8fe57deb30f1e7cdbe09f40a325
 21,src/non-mvdm/windows/core/ntuser/kernel/userk.h,27,5,110,115,40,0,22,reviewed-verified-p12-residuals-pending-owner,7eb1dabe7de56a6eb4404b0e2d5843ed1fcd821b4724539c17e4b7f392611b94
-22,src/mvdm-host/wow32/wdde.c,26,128,15,143,0,0,23,reviewed-verified-p12-residuals-pending-owner,9188581c7528581372c4d700ad22d6fd61cd05c33246f36047728c639e073fc7
+22,src/mvdm-host/wow32/wdde.c,25,123,15,138,0,0,23,s8-p75-reviewed,8f288d930793eb9449a926071d0688b9d3fda1e4d0dd94e50a978c457e8acfe7
 23,src/mvdm-host/softpc.new/base/cvidc/sevid001.c,25,25,25,50,0,0,26,s8-p22-reviewed,2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5
 24,src/mvdm-host/wow32/wkman.c,25,32,13,45,24,0,27,reviewed-verified-p14-residuals-pending-owner,f6a57202203d62dbe4fa6dff6991660d7f3aa281456abec6f1e0c40c683b388f
 26,src/mvdm-host/softpc.new/base/keymouse/keyba.c,24,49,7,56,69,0,29,s8-p26-reviewed,98f124308ee7c089cc4a6156e3de2f5887a01b637950eff5f616d07961e06fab

@@ -51,8 +51,6 @@ BOOL WI32DDEAddInitiator (HAND16 Initiator)
         DDEInitiateList = Node;
 
         LOGDEBUG(12, ("WOW::WI32DDEInitiator(): thunking -- adding an Initiator %04lX\n", Initiator));
-        return (TRUE);
-#line 54
     }
     else {
 
@@ -62,9 +60,9 @@ BOOL WI32DDEAddInitiator (HAND16 Initiator)
 
         LOGDEBUG(12, ("WOW::WI32DDEInitiator(): thunking -- Couldn't allocate memory\n"));
         WOW32ASSERT (FALSE);
-        return (FALSE);
-#line 63
     }
+    return Node != NULL;
+#line 64
 }
 
 
@@ -755,10 +753,8 @@ BOOL DDETrackhandle(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd
 
 VOID DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
 {
-    DDECONVERSIONPAIR *pPair;
-
     while (pConversion->Count) {
-        pPair = &pConversion->Pair[--pConversion->Count];
+        DDECONVERSIONPAIR *pPair = &pConversion->Pair[--pConversion->Count];
         if (DDEFindPair32(To_hwnd, From_hwnd, pPair->h16) == pPair->h32) {
             W32UnMarkDDEHandle(pPair->h16);
             if (DDEDeletehandle(pPair->h16, pPair->h32)) {
@@ -771,10 +767,8 @@ VOID DDERollback16(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
 
 VOID DDERollback32(PDDECONVERSION pConversion, HAND16 To_hwnd, HAND16 From_hwnd)
 {
-    DDECONVERSIONPAIR *pPair;
-
     while (pConversion->Count) {
-        pPair = &pConversion->Pair[--pConversion->Count];
+        DDECONVERSIONPAIR *pPair = &pConversion->Pair[--pConversion->Count];
         if (DDEFindPair16(To_hwnd, From_hwnd, pPair->h32) == pPair->h16 &&
                 DDEDeletehandle(pPair->h16, pPair->h32)) {
             if (!DDEFindNode16(pPair->h16)) {
