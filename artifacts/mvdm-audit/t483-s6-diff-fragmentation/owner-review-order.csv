@@ -38,7 +38,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 40,src/mvdm-host/wow32/wuclip.c,16,42,23,65,1,0,41,s8-p107-reviewed,f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47
 41,src/mvdm-host/vdmredir/vrnetapi.c,15,33,18,51,64,0,43,s8-p66-reviewed,481ef3fa15499d2b9b607099ce71b4a3e581ca66e2bcfe558a868aa30f00095d
 42,src/mvdm-host/wow32/wow32.c,13,24,12,36,34,0,44,s8-p96-reviewed,fb6e8b6fbf15f2b193f9b989f69d8fa17b53c5f2d26cf590553c9f5190cc676a
-43,src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,15,23,0,23,3,0,45,s7-p20-format-restored-residual-pending,0cb29a05517e3276d751b8e83b01a50e4326dc1f4b708efacc294ffc9ab28954
+43,src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,15,22,0,22,3,0,45,s8-p146-reviewed,e814918e8e7470a9bcaae9e8241b26627b2b0193d17a58fcdb1a7121d8a5f44d
 44,src/mvdm-host/dpmi32/i386/dpmi386.c,14,29,231,260,0,0,42,s8-p6-rechecked-residuals-pending-owner,59e1a591f708cc05ce6bbb2acb31204c5f33b86a8f3f306661d0ea8b8b4e31c1
 45,src/mvdm-host/softpc.new/base/video/egwrtm12.c,12,14,10,24,12,0,46,s8-p36-reviewed,b4ae6a56cfa1ed738d090a3415025be8c2ddadab822501af33be65f3de128137
 46,src/mvdm-host/softpc.new/host/inc/cfpu_def.h,14,12,12,24,2,0,47,s8-p41-reviewed,d6e31fea7dc2a9b5bc140d590d39075942c0459019284df1dd1642f91ef39250

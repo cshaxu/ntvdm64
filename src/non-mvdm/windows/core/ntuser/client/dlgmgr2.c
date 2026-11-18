@@ -534,7 +534,6 @@ CallDefWindowProcAndReturnTrue:
             code = (UINT)SendMessage(hwnd2, WM_GETDLGCODE, lpMsg->wParam,
                     (DWORD)lpMsg);
 
-            /* DIVERGENCE(OPENNT-HOST-119): do not borrow cleaned Button data. */
             if (pwnd2->fnid & FNID_STATUS_BITS) {
                 ThreadUnlock(&tlpwnd2);
                 goto ReturnProcessed;
@@ -638,7 +637,7 @@ HaveWindow:
                         MAKELONG(iOK, BN_CLICKED), (LONG)HW(pwnd2));
             }
 
-ReturnProcessed: /* DIVERGENCE(OPENNT-HOST-119): shared existing unlock exit. */
+ReturnProcessed:
 #line 618
             ThreadUnlock(&tlpwnd);
             if (fLockDlg)

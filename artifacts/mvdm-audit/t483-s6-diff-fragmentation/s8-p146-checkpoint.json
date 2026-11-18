@@ -1,0 +1,51 @@
+{
+  "packet": "T483 S8 P146",
+  "position": 189,
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+  "review_ids": [
+    "T483-R2258",
+    "T483-R2260",
+    "T483-R2261",
+    "T483-R2263",
+    "T483-R2264",
+    "T483-R2265",
+    "T483-R2268",
+    "T483-R2269",
+    "T483-R2275",
+    "T483-R2276",
+    "T483-R2278",
+    "T483-R2279",
+    "T483-R2287",
+    "T483-R2288"
+  ],
+  "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+  "current_sha256": "e814918e8e7470a9bcaae9e8241b26627b2b0193d17a58fcdb1a7121d8a5f44d",
+  "before": {
+    "blocks": 15,
+    "added": 23,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 15,
+    "added": 22,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 189,
+    "remaining": 42,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "decision": "Removed redundant local divergence prose at the FNID check and unlock label. R2258-65/2268-69/2288: product builds keyboard profile; navigation fixture uses a separate object and unsupported FE/LATER branches must still diagnose. R2275/2287: WM_GETDLGCODE may retire button before private state acquisition; unlock target then use existing exit. R2276/2278/2279: DlgSetFocus may reenter NCDESTROY or unwind. The button scope pins the private BUTN object and finally releases it, while the WND lock alone cannot. Original default-button helper remains unconditional. No change to C tokens, #error or #line.",
+  "verification": {
+    "scope": "Compared final file and compiler profiles, measured filtered diffs; no runtime test or publication for comment-only edits."
+  }
+}
