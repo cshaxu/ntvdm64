@@ -1,0 +1,144 @@
+{
+  "packet": "M0 T483 S7 P44",
+  "prior_checkpoint": "19fcbf095",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/non-mvdm/windows/core/ntuser/client/clres.c": {
+      "before": {
+        "blocks": 29,
+        "added": 26,
+        "deleted": 2706
+      },
+      "after": {
+        "blocks": 28,
+        "added": 24,
+        "deleted": 2706
+      },
+      "removed_local_frame_ranges": [
+        [
+          24,
+          24,
+          0
+        ],
+        [
+          26,
+          26,
+          0
+        ]
+      ],
+      "original_error_pairs": 10,
+      "prior_sha256": "e14a9580710191b742a7bb4ca72531f6e28ee7faf9275d0a337b46c471da8d3a",
+      "current_sha256": "4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5"
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c": {
+      "before": {
+        "blocks": 6,
+        "added": 11,
+        "deleted": 301
+      },
+      "after": {
+        "blocks": 6,
+        "added": 10,
+        "deleted": 301
+      },
+      "removed_local_frame_ranges": [
+        [
+          247,
+          247,
+          0
+        ],
+        [
+          249,
+          249,
+          1
+        ]
+      ],
+      "original_error_pairs": 0,
+      "prior_sha256": "ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3",
+      "current_sha256": "c7f03eb2d378e7577b6a90362ce9b0af38b2a8732becc6bb2924b9e6326b3d4c",
+      "original_sha256": "d7e87476cc3e703c94b88d53b9a0761642b284a6776c0152738daf4c74290d2b"
+    }
+  },
+  "decisions": {
+    "clres.c": "Keep constants and resource declarations in the already selected non-dialog branch. Remove the adjacent close-and-reopen directives for the same branch. Original exclusions and resource body ordering are preserved.",
+    "winmgr.c": "Use one if/else for the adjacent complementary client geometry and default border ranges. The later non-default range stays in its original source order."
+  },
+  "census": {
+    "non_error_points": 1975,
+    "non_error_lines": 27219,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 72,
+      "lines": 1755
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/clres.obj",
+          "selected_lines": 44747,
+          "sha256": "5ee15c28cea830ff17adfaf6c5933cbb6781efeaf0fdd95af3d455b050711253"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/control-view-winmgr.obj",
+          "selected_lines": 49079,
+          "sha256": "e494881f2a13b0cc49e1f4da7d015a238fd3520bf473a78c40db8788339b1f49"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/default-borders.obj",
+          "selected_lines": 44326,
+          "sha256": "b1cbe842ab46e27c67a347ac69059966223b8664c0ec67c0f33bc5e8c682ee8f"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/dialog-template.obj",
+          "selected_lines": 49060,
+          "sha256": "97896be7e52f4647f4a8183c267a8c885a35f4976164d28ea8537237c466e468"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/navigation_borders.obj",
+          "selected_lines": 44319,
+          "sha256": "ff3d48112669e3747b1b58cd717ec941ce7e120e9e81f49af2d28fb2b36c9213"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/navigation_graph.obj",
+          "selected_lines": 49609,
+          "sha256": "b380f414406ebeae13a9a733ec3aa52918fe878a22b178b2e6e5645fbe96b14b"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/view_winmgr.obj",
+          "selected_lines": 49620,
+          "sha256": "8100f85591b8fa40591313509970a469a032e3b1b3e1f42e48dd95235d3ff0e3"
+        },
+        {
+          "profile": "bitmap-fixture",
+          "target": "clres.c",
+          "selected_lines": 44721,
+          "sha256": "35cce92e1f589b2c805b8ed6f5557ca5a3b27be7989d872fabd6474de3e00e9a"
+        }
+      ]
+    },
+    "targeted": {
+      "wow_resource_and_geometry_objects": "pass",
+      "wow_bitmap_binding_and_failure_fixtures": "pass",
+      "wow_dialog_navigation_fixture": "pass",
+      "wow_edit_view_fixture": "pass"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Eight actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

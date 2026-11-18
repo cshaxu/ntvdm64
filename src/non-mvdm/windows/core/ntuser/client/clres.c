@@ -21,9 +21,7 @@
 #define WCSToMB(text, count, output, capacity, allocate) \
     WCSToMBEx(0, text, count, output, capacity, allocate)
 #endif
-#endif
 
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
 #line 16
 /*
  * Constants.

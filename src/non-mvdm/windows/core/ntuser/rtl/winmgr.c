@@ -244,9 +244,8 @@ BOOL IsVisible(
 }
 
 
-#endif
 
-#if defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
+#else
 #include "wow_default_window_bindings.h"
 #define gpsi (&wow_default_current->server)
 #line 489

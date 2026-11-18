@@ -483,3 +483,7 @@ and fails immediately if vector 14 unexpectedly enters instruction emulation.
 [S7 P43 receipt](s7-p43-checkpoint.json) removes the redundant local
 `winmgrc.c` selector. Three actual inputs retain identical preprocessing
 and logical lines, and the EDIT view fixture passes.
+
+[S7 P44 receipt](s7-p44-checkpoint.json) consolidates adjacent selectors in
+`clres.c` and `rtl/winmgr.c`. Eight actual compile inputs match, and bitmap,
+dialog navigation, and EDIT view fixtures pass.
