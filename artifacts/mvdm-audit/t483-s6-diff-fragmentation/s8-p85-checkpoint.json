@@ -1,0 +1,61 @@
+{
+  "packet": "T483 S8 P85",
+  "position": 129,
+  "path": "src/mvdm-host/wow32/wkfileio.c",
+  "review_ids": [
+    "T483-R1461",
+    "T483-R1462",
+    "T483-R1463",
+    "T483-R1464",
+    "T483-R1466"
+  ],
+  "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+  "current_sha256": "e8a9a5246447394670edb7427068c4567e5532885049e10207be60b901b8513a",
+  "before": {
+    "blocks": 5,
+    "added": 6,
+    "deleted": 4
+  },
+  "after": {
+    "blocks": 5,
+    "added": 6,
+    "deleted": 4
+  },
+  "source_changed": false,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        41,
+        40,
+        "#endif"
+      ],
+      [
+        558,
+        557,
+        "#endif"
+      ],
+      [
+        855,
+        853,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 129,
+    "remaining": 102,
+    "files": 231,
+    "points": 1926,
+    "lines": 27012,
+    "pending": 1541
+  },
+  "decision": "Retain current five points pending owner decision. R1461 clears the mapping handle after CloseHandle. R1463 includes the tail. R1466 initializes the named-pipe flag before the path-validation early exit. R1462/R1464 and the successor capture in R1463 avoid revisiting a prefix promoted by FindMapFileCache. With tail-inclusive traversal, rereading next did not lose a node. This corrects the old causal explanation.",
+  "verification": {
+    "prior": "r1460-r1466-wkfileio-review.json: original cache object had eight failures. Mapping failure/handle reuse is controlled; normal mappings use real files.",
+    "comparison": "Same production source in two instrumented x86 objects. Both passed all 577 cache checks. For occupancies 1..11, saved successor visited 11 nodes each time. Rereading the promoted link visited 11,12,14,17,21,26,32,39,47,56,66. Counts are outer loop visits, not elapsed time or total lookup complexity.",
+    "attributes": "52 checks passed",
+    "production_object": "577 cache checks passed"
+  }
+}
