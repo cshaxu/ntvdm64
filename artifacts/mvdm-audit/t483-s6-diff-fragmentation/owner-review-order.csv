@@ -100,7 +100,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 105,src/non-mvdm/public/sdk/inc/ntregapi.h,5,0,12,12,2,0,107,s8-p134-reviewed,815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b
 106,src/non-mvdm/windows/core/ntuser/client/dmmnem.c,5,11,1,12,3,0,108,s8-p148-reviewed,e59074c1e33943f5827af85d4c0fcaafd07e70fcc33bc9b2ff2c47e79f28f795
 107,src/non-mvdm/windows/core/ntuser/client/drawtext.c,5,0,137,137,0,0,109,s8-p149-reviewed,507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1
-108,src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,5,14,480,494,1,0,111,s7-p3-reviewed-residual-pending,61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629
+108,src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,5,14,478,492,1,0,111,s8-p163-reviewed,1a4a6b65882593cf8ec079e650366013a3b87ff4968d64f3b8e000624fa89197
 110,src/non-mvdm/windows/core/ntuser/rtl/draw.c,5,1,388,389,1,0,112,s7-p12-reviewed,c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb
 111,src/mvdm-host/dpmi32/dpmidata.h,2,1,26,27,2,0,113,s8-p4-rechecked-residuals-pending-owner,e4a48426f06d09ecf275a89c4c6067ff80b1221141649da8f323b88d24ff3c7d
 112,src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,3,22,0,22,1,0,114,s8-p21-reviewed,b016c166b818e1619f03ae7f7ffc1feca886872cd088bda6f7ab102e45f7cc54

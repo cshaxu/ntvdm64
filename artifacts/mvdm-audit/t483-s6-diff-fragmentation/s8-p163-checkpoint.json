@@ -1,0 +1,48 @@
+{
+  "packet": "T483 S8 P163",
+  "position": 206,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+  "review_ids": [
+    "T483-R2526",
+    "T483-R2527",
+    "T483-R2528",
+    "T483-R2529",
+    "T483-R2530",
+    "T483-R2531",
+    "T483-R2532",
+    "T483-R2533",
+    "T483-R2534",
+    "T483-R2536",
+    "T483-R2537"
+  ],
+  "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+  "current_sha256": "1a4a6b65882593cf8ec079e650366013a3b87ff4968d64f3b8e000624fa89197",
+  "before": {
+    "blocks": 5,
+    "added": 14,
+    "deleted": 480
+  },
+  "after": {
+    "blocks": 5,
+    "added": 14,
+    "deleted": 478
+  },
+  "source_changed": true,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 206,
+    "remaining": 25,
+    "files": 231,
+    "points": 1912,
+    "lines": 26389,
+    "pending": 1532
+  },
+  "verification": {
+    "scope": "Original bytes of macro and logical line verified. One paired LATER exclusion. No executable behavior change; no new build or release."
+  },
+  "decision": "R2527 partially restored: original line 16 OPTIONMASK has no expansion in this translation unit. Remaining private shutdown state belongs to native USER. NotifyLogon dereferences kernel windowstations; InitiateShutdown uses ETHREAD and privilege checks; EndShutdown and client shutdown access private desktop/window state. WU32ExitWindows uses public ExitWindows. Registration uses locked currentProcess and an independently retained, access-checked event via wow_task_reference_event."
+}

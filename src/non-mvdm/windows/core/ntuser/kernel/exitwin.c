@@ -14,6 +14,8 @@
 #include "wow_task_order_bindings.h"
 #line 14
 #pragma hdrstop
+
+#define OPTIONMASK (EWX_SHUTDOWN | EWX_REBOOT | EWX_FORCE)
 #define gpwpiFirstWow (currentProcess->shared->pwpiFirstWow)
 #define UserAllocPoolWithQuota(bytes, tag) HeapAlloc(GetProcessHeap(), 0, bytes)
 #define ObReferenceObjectByHandle(handle, access, type, mode, out, info) \
