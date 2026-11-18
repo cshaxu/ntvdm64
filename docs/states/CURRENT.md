@@ -36,7 +36,7 @@ S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
 IDs. After S8 P188, all 231 positions have review coverage, including the three carried from S7.
-P107 Win16 shared clipboard transfer remains deferred by owner direction. Both P106 and P107 failed at the same stage. The candidate passed 56 open-state checks and 24 ownership cases. Rerun the real transfer when native OpenClipboard succeeds.
+P190 passed the [Win16 shared clipboard transfer](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p190-clipboard.json) on the P189 release. All 18 checkpoints passed, closing the P107 verification gap. This standalone integration test runs separately from the Full runner.
 
 S8 has removed 71 points and 967 diff lines, leaving 1,903 points and 26,243 lines. The live pending backlog has 1,534 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).

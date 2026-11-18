@@ -1,0 +1,31 @@
+{
+  "packet": "T483 S8 P190",
+  "tested_commit": "e975c5354855f7407c3ee27f6b8ddcd33a0ebd5f",
+  "package": "95e3b5e3-8349-4295-83c3-06f68d41deaf",
+  "runner": "test/integration/verify-wow-clipboard-transfer.ps1 -SharedClipboard",
+  "result": "WOW_CLIPBOARD_TRANSFER_OK mode=transfer format=CF_TEXT render_handoff=direct checkpoints=18 guest_to_native=1 native_to_guest=1 rejected=1 deferred=1 replacement=1 owner_destroy_renderall=1 task_exit=0 desktop=shared",
+  "observer_exit": 0,
+  "report_sha256": "2B93CC17160E3789A2A65BB54CF938C2B38A8F6C75024D86CFE2646835CECDB2",
+  "checkpoints": 18,
+  "phases": [
+    12,
+    8,
+    9,
+    10,
+    11,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "errors": 0
+}
