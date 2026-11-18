@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P2 completed review through `demhndl.c`. Next is position 8, `demsrch.c`.
+S8 P3 completed review through `dpmi32p.h`. Next is position 12, `dpmidata.h`.
 
 ## Active Packet
 
@@ -34,10 +34,11 @@ S8 P2 completed review through `demhndl.c`. Next is position 8, `demsrch.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P2, 7 of 231 positions are covered and 224 remain queued.
-S8 has removed one diff line, leaving 1,974 points and 27,209 lines.
+IDs. After S8 P3, 11 of 231 positions are covered and 220 remain queued.
+S8 has removed 15 diff lines, leaving 1,974 points and 27,195 lines.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
+[P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p3-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

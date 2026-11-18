@@ -148,17 +148,9 @@ DpmiCpu40GetDosxIdtDescriptor(
     PULONG Base,
     PUSHORT Limit
     )
-/*++
-
-Routine Description:
-
-    Return the final protected-mode IDT descriptor published by WOW_x86
-    DOSX. `dxboot.asm` publishes SEL_IDT through NSetSegmentDscr only after
-    MoveDscrTables has copied the temporary low-memory tables to their final
-    XMS location. The CPU40 DPMI binding must use this descriptor, rather
-    than retaining the earlier 53:00 construction-buffer address.
-
---*/
+/* WOW DOSX publishes SEL_IDT after MoveDscrTables relocates the tables.
+ * Use that final descriptor in place of the 53:00 construction table. */
+#line 160
 {
     const USHORT DosxIdtSelector = 0x88u; /* pmdefs.inc, IFDEF WOW */
     PLDT_ENTRY Descriptor;

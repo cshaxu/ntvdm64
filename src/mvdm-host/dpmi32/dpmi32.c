@@ -317,14 +317,10 @@ Return Value:
         Cpu40LdtShadowAddress = Address + LDT_SIZE * sizeof(LDT_ENTRY);
         RtlCopyMemory((PVOID)(IntelBase + Cpu40GdtShadowAddress), Ldt,
             LDT_SIZE * sizeof(LDT_ENTRY));
-        /* `Ldt` is DOSX/KRNL386's selector-management table, not the
-         * process LDT which the x86 kernel publishes for protected selector
-         * loads.  Its unused entries form a next-free-selector chain (for
-         * example 83B7 contains 83B8); copying it into CCPU makes those
-         * bookkeeping words look like malformed descriptors and turns the
-         * original not-present fault into #GP.  A new process LDT starts
-         * with not-present descriptors.  The existing source-shaped 53:00
-         * and WOW x86 NtSetLdtEntries carriers publish real entries later. */
+        /* DOSX/KRNL386's Ldt stores free-selector links in unused entries.
+         * In CCPU those words would cause #GP instead of a not-present fault.
+         * The process LDT starts empty; the existing descriptor setters fill it. */
+#line 320
         RtlZeroMemory((PVOID)(IntelBase + Cpu40LdtShadowAddress),
             LDT_SIZE * sizeof(LDT_ENTRY));
     }

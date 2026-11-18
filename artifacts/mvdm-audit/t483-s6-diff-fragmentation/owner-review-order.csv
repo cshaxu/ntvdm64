@@ -67,7 +67,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 69,src/mvdm-host/softpc.new/base/cvidc/sevid018.c,9,16,16,32,0,0,71,s7-p23-reviewed,571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471
 70,src/mvdm-host/vdmredir/vrnmpipe.c,9,22,29,51,80,0,72,s7-p16-reviewed,a83b99a6f2021f9b86db1947301983f5f908fdeae915b950d56fa20f0dc7d108
 71,src/non-mvdm/windows/core/ntuser/rtl/wow.c,7,1,170,171,6,0,49,s7-p7-reviewed-residual-pending,cee4533a5bd742002e4cdcd025f061e91a217c9326a0944c4b3fe068ea0fcd65
-72,src/mvdm-host/dos/dem/demsrch.c,5,25,0,25,11,0,73,s7-p18-format-restored-residual-pending,d2fb6c3cae2b5f871d4ae0269c0d8166d74ac6567250238ad0007f6049bbc9d2
+72,src/mvdm-host/dos/dem/demsrch.c,5,25,0,25,11,0,73,s8-p3-rechecked-residuals-pending-owner,d2fb6c3cae2b5f871d4ae0269c0d8166d74ac6567250238ad0007f6049bbc9d2
 73,src/mvdm-host/softpc.new/base/video/egawrtm0.c,6,9,4,13,15,0,74,s7-p8-reviewed,b1aeb3e852ba79eb8f93885196463122f2a471858d8a8f6b6f86ecb873f9b2b8
 74,src/mvdm-host/wow32/wcall16.c,7,23,5,28,9,0,75,s7-p15-format-restored-residual-pending,8853ed166922757da97af47cefb3e793714e4975e533db4a8d51a5297c7f5b99
 75,src/mvdm-host/wow32/wow32fax.c,8,15,5,20,2,0,76,s7-p21-reviewed,a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad
@@ -141,7 +141,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 153,src/mvdm-host/dos/command/cmdconf.c,2,3,1,4,2,0,154,s7-p19-format-restored-residual-pending,478f296d38719375361638072fa0a19b37429881d168994e4e31cf019368b715
 154,src/mvdm-host/dos/command/cmdkeyb.c,2,3,1,4,0,0,155,s7-p48-audited-unchanged-residuals-pending-owner,c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f
 155,src/mvdm-host/dos/dem/dem.c,2,2,1,3,2,0,156,s7-p10-reviewed,e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d
-156,src/mvdm-host/dpmi32/dpmi32.c,2,32,0,32,2,0,157,s7-p19-reviewed,d7a1088cfb4c675e4ffce2fa91b12cee51951b8598e826617b0f6f54f4d19823
+156,src/mvdm-host/dpmi32/dpmi32.c,2,27,0,27,2,0,157,s8-p3-rechecked-residuals-pending-owner,3a8905b9973d2e7d8f48c6a55091d97270665fa4e9e8228ca1e10e69b7f88c96
 157,src/mvdm-host/dpmi32/dpmiselr.c,1,10,0,10,4,0,158,s7-p17-format-restored-residual-pending,d3a113eb2f1b6026f7bf68a8bc4d65b53f2296548bbe80a41c80949e53aa1905
 159,src/mvdm-host/softpc.new/base/bios/reset.c,2,0,2,2,38,0,160,s7-p7-reviewed-residual-pending,02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449
 160,src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c,2,2,0,2,3,0,161,s7-p17-reviewed,a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68
@@ -175,8 +175,8 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 192,src/mvdm-host/softpc.new/base/ccpu386/localfm.c,1,2,0,2,0,0,163,s7-p5-partial-original-restoration-residual-pending,1296da38c0d62145e8b867f2f504e649d2caf449039be55acdf60e7e26cf6b67
 193,src/mvdm-host/dbg/dbg.c,1,1,1,2,35,0,194,s7-p14-reviewed,f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27
 194,src/mvdm-host/dos/dem/dem.h,1,1,0,1,9,0,195,s7-p8-reviewed,9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c
-195,src/mvdm-host/dpmi32/data.c,1,45,0,45,1,0,196,s7-reviewed-residuals-pending,421514e7a39ab9d8fd19fad299f12fe16855224b870a2c5a199c625ac212ea48
-196,src/mvdm-host/dpmi32/dpmi32p.h,1,9,0,9,3,0,197,s7-p10-reviewed,1ad270afcedb0fb775f893b9a117f78163323ba23b47547754028ae8c8829276
+195,src/mvdm-host/dpmi32/data.c,1,36,0,36,1,0,196,s8-p3-rechecked-residuals-pending-owner,22f7f1a784d5bbd0e2d805f3b7e660ef782d1012c7d92efa610aae9658d0289b
+196,src/mvdm-host/dpmi32/dpmi32p.h,1,9,0,9,3,0,197,s8-p3-rechecked-residuals-pending-owner,1ad270afcedb0fb775f893b9a117f78163323ba23b47547754028ae8c8829276
 197,src/mvdm-host/dpmi32/xmem.c,1,1,1,2,5,0,198,s7-p18-reviewed,ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b
 198,src/mvdm-host/inc/dbgexp.h,1,3,3,6,0,0,199,s7-p3-reviewed-residual-pending,dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2
 199,src/mvdm-host/inc/demexp.h,1,3,3,6,0,0,200,s7-p3-reviewed-residual-pending,e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788

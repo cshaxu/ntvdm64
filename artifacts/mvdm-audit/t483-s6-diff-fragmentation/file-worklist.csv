@@ -67,7 +67,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 70,src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h,9,18,8,3,0,s7-p2-reviewed-residual-pending,T483-R0399;T483-R0400;T483-R0401;T483-R0402;T483-R0403;T483-R0404;T483-R0405;T483-R0406;T483-R0407;T483-R0408,8a83af2254588831515340e0fb2ddcbf38ce17bc836cda439401663ec5f47ce9
 71,src/mvdm-host/softpc.new/base/cvidc/sevid018.c,9,16,16,0,0,s7-p23-reviewed,T483-R0623;T483-R0624;T483-R0625;T483-R0626;T483-R0627;T483-R0628;T483-R0629;T483-R0630;T483-R0631,571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471
 72,src/mvdm-host/vdmredir/vrnmpipe.c,9,22,29,80,0,s7-p16-reviewed,T483-R1281;T483-R1282;T483-R1283;T483-R1284;T483-R1285;T483-R1286;T483-R1287;T483-R1288;T483-R1289;T483-R1290;T483-R1291;T483-R1292;T483-R1293;T483-R1294;T483-R1295;T483-R1296,a83b99a6f2021f9b86db1947301983f5f908fdeae915b950d56fa20f0dc7d108
-73,src/mvdm-host/dos/dem/demsrch.c,5,25,0,11,0,s7-p18-format-restored-residual-pending,T483-R0117;T483-R0118;T483-R0119;T483-R0120;T483-R0121;T483-R0122;T483-R0123;T483-R0124;T483-R0125;T483-R0126;T483-R0127;T483-R0128;T483-R0129;T483-R0130;T483-R0131;T483-R0132;T483-R0133,d2fb6c3cae2b5f871d4ae0269c0d8166d74ac6567250238ad0007f6049bbc9d2
+73,src/mvdm-host/dos/dem/demsrch.c,5,25,0,11,0,s8-p3-rechecked-residuals-pending-owner,T483-R0117;T483-R0118;T483-R0119;T483-R0120;T483-R0121;T483-R0122;T483-R0123;T483-R0124;T483-R0125;T483-R0126;T483-R0127;T483-R0128;T483-R0129;T483-R0130;T483-R0131;T483-R0132;T483-R0133,d2fb6c3cae2b5f871d4ae0269c0d8166d74ac6567250238ad0007f6049bbc9d2
 74,src/mvdm-host/softpc.new/base/video/egawrtm0.c,6,9,4,15,0,s7-p8-reviewed,T483-R0846;T483-R0847;T483-R0848;T483-R0849;T483-R0850;T483-R0851,b1aeb3e852ba79eb8f93885196463122f2a471858d8a8f6b6f86ecb873f9b2b8
 75,src/mvdm-host/wow32/wcall16.c,7,23,5,9,0,s7-p15-format-restored-residual-pending,T483-R1324;T483-R1325;T483-R1326;T483-R1327;T483-R1328;T483-R1329;T483-R1330;T483-R1331;T483-R1332;T483-R1333;T483-R1334;T483-R1335,8853ed166922757da97af47cefb3e793714e4975e533db4a8d51a5297c7f5b99
 76,src/mvdm-host/wow32/wow32fax.c,8,15,5,2,0,s7-p21-reviewed,T483-R1711;T483-R1712;T483-R1713;T483-R1714;T483-R1715;T483-R1716;T483-R1717;T483-R1718;T483-R1719;T483-R1720,a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad
@@ -142,7 +142,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 154,src/mvdm-host/dos/command/cmdconf.c,2,3,1,2,0,s7-p19-format-restored-residual-pending,T483-R0007,478f296d38719375361638072fa0a19b37429881d168994e4e31cf019368b715
 155,src/mvdm-host/dos/command/cmdkeyb.c,2,3,1,0,0,s7-p48-audited-unchanged-residuals-pending-owner,T483-R0037;T483-R0038,c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f
 156,src/mvdm-host/dos/dem/dem.c,2,2,1,2,0,s7-p10-reviewed,T483-R0067;T483-R0068,e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d
-157,src/mvdm-host/dpmi32/dpmi32.c,2,32,0,2,0,s7-p19-reviewed,T483-R0137;T483-R0138;T483-R0139,d7a1088cfb4c675e4ffce2fa91b12cee51951b8598e826617b0f6f54f4d19823
+157,src/mvdm-host/dpmi32/dpmi32.c,2,27,0,2,0,s8-p3-rechecked-residuals-pending-owner,T483-R0137;T483-R0138;T483-R0139,3a8905b9973d2e7d8f48c6a55091d97270665fa4e9e8228ca1e10e69b7f88c96
 158,src/mvdm-host/dpmi32/dpmiselr.c,1,10,0,4,0,s7-p17-format-restored-residual-pending,T483-R0183;T483-R0184;T483-R0185;T483-R0186,d3a113eb2f1b6026f7bf68a8bc4d65b53f2296548bbe80a41c80949e53aa1905
 159,src/mvdm-host/inc/mvdm.h,0,0,0,3,0,s7-p3-reviewed-residual-pending,T483-R0235,5a982e59142bd54c93d1bdfa3e2e204e93ed62d1045745c65627305203ee5d78
 160,src/mvdm-host/softpc.new/base/bios/reset.c,2,0,2,38,0,s7-p7-reviewed-residual-pending,T483-R0342;T483-R0343,02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449
@@ -181,8 +181,8 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 193,src/non-mvdm/windows/core/ntuser/server/exports.c,2,1,85,1,0,s7-p6-reviewed-residual-pending,T483-R2718;T483-R2719;T483-R2720,40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d
 194,src/mvdm-host/dbg/dbg.c,1,1,1,35,0,s7-p14-reviewed,T483-R0001,f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27
 195,src/mvdm-host/dos/dem/dem.h,1,1,0,9,0,s7-p8-reviewed,T483-R0069;T483-R0070;T483-R0071,9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c
-196,src/mvdm-host/dpmi32/data.c,1,45,0,1,0,s7-reviewed-residuals-pending,T483-R0134;T483-R0135;T483-R0136,421514e7a39ab9d8fd19fad299f12fe16855224b870a2c5a199c625ac212ea48
-197,src/mvdm-host/dpmi32/dpmi32p.h,1,9,0,3,0,s7-p10-reviewed,T483-R0140;T483-R0141;T483-R0142,1ad270afcedb0fb775f893b9a117f78163323ba23b47547754028ae8c8829276
+196,src/mvdm-host/dpmi32/data.c,1,36,0,1,0,s8-p3-rechecked-residuals-pending-owner,T483-R0134;T483-R0135;T483-R0136,22f7f1a784d5bbd0e2d805f3b7e660ef782d1012c7d92efa610aae9658d0289b
+197,src/mvdm-host/dpmi32/dpmi32p.h,1,9,0,3,0,s8-p3-rechecked-residuals-pending-owner,T483-R0140;T483-R0141;T483-R0142,1ad270afcedb0fb775f893b9a117f78163323ba23b47547754028ae8c8829276
 198,src/mvdm-host/dpmi32/xmem.c,1,1,1,5,0,s7-p18-reviewed,T483-R0215;T483-R0216,ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b
 199,src/mvdm-host/inc/dbgexp.h,1,3,3,0,0,s7-p3-reviewed-residual-pending,T483-R0222;T483-R0223;T483-R0224,dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2
 200,src/mvdm-host/inc/demexp.h,1,3,3,0,0,s7-p3-reviewed-residual-pending,T483-R0225;T483-R0226;T483-R0227,e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788

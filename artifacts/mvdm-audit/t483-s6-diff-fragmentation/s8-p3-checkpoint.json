@@ -1,0 +1,130 @@
+{
+  "packet": "M0 T483 S8 P3",
+  "prior_checkpoint": "ada0017a9",
+  "covered_before": 7,
+  "covered_after": 11,
+  "remaining": 220,
+  "pending_rows": 1566,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1974,
+    "lines": 27195
+  },
+  "cumulative_s8_reduction": {
+    "points": 0,
+    "lines": 15
+  },
+  "files": [
+    {
+      "position": 8,
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "source_sha256": "d2fb6c3cae2b5f871d4ae0269c0d8166d74ac6567250238ad0007f6049bbc9d2",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "before": [
+        5,
+        25
+      ],
+      "after": [
+        5,
+        25
+      ],
+      "review_ids": "T483-R0117;T483-R0118;T483-R0126;T483-R0127;T483-R0128",
+      "disposition": "Keep the terminal-status correction and the coupled restart hint pending. The historical negative restores the original failure return and misses the surviving successor."
+    },
+    {
+      "position": 9,
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "source_sha256": "22f7f1a784d5bbd0e2d805f3b7e660ef782d1012c7d92efa610aae9658d0289b",
+      "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+      "before": [
+        1,
+        45
+      ],
+      "after": [
+        1,
+        36
+      ],
+      "review_ids": "T483-R0135;T483-R0136",
+      "disposition": "Condense the IDT handoff comment. The backing-address and IDT descriptor binding remain pending."
+    },
+    {
+      "position": 10,
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "source_sha256": "3a8905b9973d2e7d8f48c6a55091d97270665fa4e9e8228ca1e10e69b7f88c96",
+      "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+      "before": [
+        2,
+        32
+      ],
+      "after": [
+        2,
+        27
+      ],
+      "review_ids": "T483-R0137;T483-R0138;T483-R0139",
+      "disposition": "Condense the process-LDT initialization comment. Existing typed setters and separate descriptor publication remain pending."
+    },
+    {
+      "position": 11,
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "source_sha256": "1ad270afcedb0fb775f893b9a117f78163323ba23b47547754028ae8c8829276",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "before": [
+        1,
+        9
+      ],
+      "after": [
+        1,
+        9
+      ],
+      "review_ids": "T483-R0140;T483-R0141",
+      "disposition": "Keep the typed addresses and IDT interface pending. Current consumers are descriptor publication and protected entry; moving declarations leaves the same dependency."
+    }
+  ],
+  "verification": {
+    "actual_directory_fixture": {
+      "assertions": 115,
+      "failures": 0,
+      "exit_code": 0,
+      "elapsed_ms": 350,
+      "original_sha256": "D2FB6C3CAE2B5F871D4AE0269C0D8166D74AC6567250238AD0007F6049BBC9D2",
+      "executable_sha256": "412C03F4339AE0EA2B10344FB93659D5486A9FC026C2B6EE19C480B4FA005400",
+      "scope": "Actual original DEM functions and real NT directory calls; provider fixture, not guest INT21 proof"
+    },
+    "preprocessing_identical_including_selected_logical_locations": [
+      {
+        "profile": "worker",
+        "target": "obj/dpmi/data.obj",
+        "selected_lines": 44642,
+        "sha256": "8371debb856db60b74dec9e216bb9ed18277f5461d7b5072ccf10d07275bd6c3"
+      },
+      {
+        "profile": "worker-reference-x86",
+        "target": "obj/dpmi/data.obj",
+        "selected_lines": 44642,
+        "sha256": "8371debb856db60b74dec9e216bb9ed18277f5461d7b5072ccf10d07275bd6c3"
+      },
+      {
+        "profile": "worker",
+        "target": "obj/dpmi/dpmi32.obj",
+        "selected_lines": 44867,
+        "sha256": "b4ee6ecbcb9d27761c1a31487d2a0005e17359bb950953f9ca1d45e96a296690"
+      },
+      {
+        "profile": "worker-reference-x86",
+        "target": "obj/dpmi/dpmi32.obj",
+        "selected_lines": 44867,
+        "sha256": "b4ee6ecbcb9d27761c1a31487d2a0005e17359bb950953f9ca1d45e96a296690"
+      },
+      {
+        "profile": "test-observation",
+        "target": "dpmi_dispatch_trace",
+        "selected_lines": 46613,
+        "sha256": "4c4f00dbed0b70e9af5437a05e1afc9e07723d3f10ba736b6cf2f468bf2b105b"
+      }
+    ],
+    "excluded_arms": "Existing #error directives retained. New #line resets preserve all selected code locations.",
+    "publication": "P2 host images reused after exact compiler-input and logical-line comparison. Both destinations match the verified P2 manifest.",
+    "manifest_sha256": "59441e2ae833e446a5c1f7d867fafd868c557c3bae7d4f2aba44a7eb640793f8",
+    "images_per_destination": 11
+  }
+}
