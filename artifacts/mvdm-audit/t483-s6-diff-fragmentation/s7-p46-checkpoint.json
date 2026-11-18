@@ -1,0 +1,253 @@
+{
+  "packet": "M0 T483 S7 P46",
+  "prior_checkpoint": "1cbc622ed",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "census": {
+    "non_error_points": 1975,
+    "non_error_lines": 27219,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 72,
+      "lines": 1755
+    },
+    "pending_decisions": 1566
+  },
+  "vdm_c": {
+    "kept_selected_commands_and_environment_frames": true,
+    "non_error_points": 20,
+    "added": 38,
+    "deleted": 594,
+    "sha256": "c8fbc28a468f39a7cb409866efdb06c5a3c5fcc16ea039da6897120fbfedd1db",
+    "line_and_error_directives": "Unchanged"
+  },
+  "build_minimization": {
+    "removed_native_recipe_lines": 13,
+    "added_configure_dependency_lines": 1,
+    "source_sha256": "9291b113b8519f5320e8571054bffd8980636ba99e338137a7a4f6575724c26d",
+    "native_edge": "build obj/opennt-base-bindings/config-command.obj: cc O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker-reference-x86/generated/base_vdm_config.c | obj/basesrv/service.h",
+    "configure_dependencies_verified": {
+      "x86": true,
+      "x64": true
+    },
+    "object_boundary": "Native service compiles the carrier under its own compiler flags. The reference graph supplies C text only."
+  },
+  "delivery": {
+    "cached_build": {
+      "x86": "passed",
+      "x64": "passed"
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "published_manifest_sha256": "2b29a51665c1c7139edef9ab217e81145da766882da7e0b9879b8d369fc314f1",
+    "previous_release_comparison": [
+      {
+        "name": "VCDEX.DLL",
+        "prior_sha256": "f6d53ae57df32835cd28a769b7ae3585321b5bfd3fe1f387d7b0353da5f719b8",
+        "staged_sha256": "f6d53ae57df32835cd28a769b7ae3585321b5bfd3fe1f387d7b0353da5f719b8",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 0,
+        "first_offsets": [],
+        "lengths": [
+          10240,
+          10240
+        ]
+      },
+      {
+        "name": "run16.exe",
+        "prior_sha256": "c829bc8ae53963962a8b169694e3590870e91b6403d719f0bf6ce096f80d18de",
+        "staged_sha256": "12d02e0472b32935c4b47bf0b420da8451830fc10218301f7157f00fdf78c68e",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 4,
+        "first_offsets": [
+          256,
+          257,
+          211428,
+          211429
+        ],
+        "lengths": [
+          308224,
+          308224
+        ]
+      },
+      {
+        "name": "ntsrv.exe",
+        "prior_sha256": "49e658a574215f3b080ce4ab3015cb95075c81c2ebbafef98151080d8783d1ee",
+        "staged_sha256": "6cff40e8a029813c4f8a2263d5bbd11f832a00dab99ba7eef8ad8775d7f3cc45",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 4,
+        "first_offsets": [
+          264,
+          265,
+          300004,
+          300005
+        ],
+        "lengths": [
+          411136,
+          411136
+        ]
+      },
+      {
+        "name": "ntcon.exe",
+        "prior_sha256": "dbc319c4a12dae9723a135eb043089f43280524971cdd30e51a51116e1414f17",
+        "staged_sha256": "abc5b412d449c9628b82decc80859bb5416a5193c6c7edd5eee959285ab2cd7f",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 4,
+        "first_offsets": [
+          264,
+          265,
+          250580,
+          250581
+        ],
+        "lengths": [
+          357376,
+          357376
+        ]
+      },
+      {
+        "name": "ntvdm.exe",
+        "prior_sha256": "ab660735da6620671625a667ce41589c8fa4aa39c93fdc59f136ad56fd04e734",
+        "staged_sha256": "6025f4aa25c22eb60852c1a1c918892e25e640cd437758abd09c6ddd019acbe1",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 4,
+        "first_offsets": [
+          280,
+          281,
+          1710068,
+          1710069
+        ],
+        "lengths": [
+          2107392,
+          2107392
+        ]
+      },
+      {
+        "name": "ntvwm.exe",
+        "prior_sha256": "ba1970324f5b4eaec61b4b0aa77d73af9491f6521fc55af57eafae3b330d5738",
+        "staged_sha256": "60fb1599accc153cce36039ff1cb5dff1d7b32cf1b634bfe930b07a0309ae6c6",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 4,
+        "first_offsets": [
+          248,
+          249,
+          227252,
+          227253
+        ],
+        "lengths": [
+          327168,
+          327168
+        ]
+      },
+      {
+        "name": "ntmon.exe",
+        "prior_sha256": "d3df7e7edf3195b6d8647037e5fa6595921a160589cea6b348c79ec992c2db9c",
+        "staged_sha256": "d3df7e7edf3195b6d8647037e5fa6595921a160589cea6b348c79ec992c2db9c",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 0,
+        "first_offsets": [],
+        "lengths": [
+          169984,
+          169984
+        ]
+      },
+      {
+        "name": "WOW32.DLL",
+        "prior_sha256": "c853314cff7488d573d21ec53fd33d89582fa99c2af34e90c585ea2733d68ecc",
+        "staged_sha256": "de65bf4ded67d5ad5743d6f49853f7b9a6e945f3aa56437089ba74b2fb84b360",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 6,
+        "first_offsets": [
+          304,
+          305,
+          306,
+          620404,
+          620405,
+          620406
+        ],
+        "lengths": [
+          707584,
+          707584
+        ]
+      },
+      {
+        "name": "VDMREDIR.DLL",
+        "prior_sha256": "b4a62c9997a190019e5ae9b9f2ebaaeff2873001226666e4f47ed791a9a845ef",
+        "staged_sha256": "0b463951b24dc113f3fa3c51c40ff7f2364e63f78a3582b03d98b26f3fef1a4d",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 6,
+        "first_offsets": [
+          280,
+          281,
+          282,
+          125268,
+          125269,
+          125270
+        ],
+        "lengths": [
+          209408,
+          209408
+        ]
+      },
+      {
+        "name": "nthook32.dll",
+        "prior_sha256": "612552bdd3f23c916aa5e0a03b5a60a451ea001a3be87fbc5baa621c9d4d98f2",
+        "staged_sha256": "7653e19f8182744554f833bddc88ef852b6ad93beaef12c6b69b5f637e1ff68a",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 6,
+        "first_offsets": [
+          272,
+          273,
+          274,
+          134228,
+          134229,
+          134230
+        ],
+        "lengths": [
+          216064,
+          216064
+        ]
+      },
+      {
+        "name": "nthook64.dll",
+        "prior_sha256": "86692e6cc9da50cd2f6de6525e62879e442cb6b5bfabe7145c3da2d3c695d441",
+        "staged_sha256": "86692e6cc9da50cd2f6de6525e62879e442cb6b5bfabe7145c3da2d3c695d441",
+        "same_except_coff_and_debug_timestamps": true,
+        "different_bytes": 0,
+        "first_offsets": [],
+        "lengths": [
+          261120,
+          261120
+        ]
+      }
+    ],
+    "targeted_fixtures": {
+      "x86": {
+        "native-service-layout-test": "PASS 32-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities",
+        "basesrv-service-reservation-test": "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+      },
+      "x64": {
+        "native-service-layout-test": "PASS 64-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities",
+        "basesrv-service-reservation-test": "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+      }
+    },
+    "published_bytes_probe": {
+      "case": "nested-console AMD64",
+      "result": "PASS actual CMD/DOS input, parent return and direct exit=23",
+      "matched_release_images": 10,
+      "isolated_stage_removed": true
+    },
+    "full_runtime_suite": "Not repeated under the targeted verification policy"
+  }
+}

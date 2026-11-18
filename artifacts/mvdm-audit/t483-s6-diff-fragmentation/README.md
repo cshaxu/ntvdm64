@@ -491,3 +491,9 @@ dialog navigation, and EDIT view fixtures pass.
 [S7 P45 receipt](s7-p45-checkpoint.json) removes thirteen consecutive duplicate
 `#line` directives from seven mirrors. All 27 selected compile inputs retain
 the same source and logical locations. The filtered census stays the same.
+
+[S7 P46 receipt](s7-p46-checkpoint.json) removes duplicate generation of the
+original VDM configuration source and tracks the mirror as a configure input.
+Cached x86/x64 builds, both release destinations, four service fixtures, and
+the isolated DOS handoff passed. The published payload differs from the prior
+package only in PE timestamps. The filtered mirror census stays the same.

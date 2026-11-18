@@ -223,11 +223,9 @@ P38 to P40 simplify guards, restore original spacing, and correct a mask pair.
 P41 to P43 simplify BaseSrv, DPMI and window-manager selectors.
 [Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
-P44 consolidates adjacent complementary resource and geometry selectors.
-[P44 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p44-checkpoint.json).
-
-P45 removes thirteen duplicate line anchors with 27 matching compile inputs.
-[P45 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p45-checkpoint.json).
+P44 and P45 consolidate selectors and line anchors. P46 unifies generation
+of the VDM configuration source and tracks its mirror input.
+[P46 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p46-checkpoint.json).
 
 ## S1 Closure Record
 

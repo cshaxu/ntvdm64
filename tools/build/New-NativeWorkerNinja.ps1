@@ -116,19 +116,6 @@ function Add-Edge([string]$target) {
  }
  if($edge.Rule -notin @('cc','cc_rtl')){throw "Unadmitted native rule: $target/$($edge.Rule)"}
  $source=$inputs[0]
- if($Component -eq 'Service' -and $target -eq 'obj/opennt-base-bindings/config-command.obj'){
-  # Same verbatim fragment recipe as the formal graph; architecture-local output.
-  $configSource=Join-Path $root 'src/non-mvdm/base/win32/client/vdm.c'
-  $configText=[IO.File]::ReadAllText($configSource)
-  $helper=[regex]::Matches($configText,'(?ms)^static VOID BaseSetLastNTError\(.*?^}')
-  $function=[regex]::Matches($configText,'(?ms)^#line 2275\r?\nBOOL\r?\nBaseGetVdmConfigInfo\(.*?^}')
-  if($helper.Count -ne 1 -or $function.Count -ne 1){throw 'Original VDM configuration closure is missing or ambiguous'}
-  $null=New-Item -ItemType Directory -Path (Join-Path $build 'generated') -Force
-  $configCarrier=Join-Path $build 'generated/base_vdm_config.c'
-  $preamble="#include <nt.h>`r`n#include <ntrtl.h>`r`n#include <wchar.h>`r`n#include <basevdm.h>`r`n#include <base_config.h>`r`n#define VDM_TAG 0`r`n#define MAKE_TAG(Tag) 0`r`n"
-  [IO.File]::WriteAllText($configCarrier,$preamble+$helper[0].Value+"`r`n"+$function[0].Value+"`r`n",[Text.UTF8Encoding]::new($false))
-  $source=NP $configCarrier
- }
  if($source -notmatch '\.c$'){throw "Native graph requires C source: $source"}
  if($source -notmatch '^O\$:/'){
   if($source -notin @('obj/basesrv/service_c.c','obj/basesrv/service_s.c','obj/basesrv/rpc_management_c.c')){throw "Unknown generated source: $source"}
