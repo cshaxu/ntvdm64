@@ -41,6 +41,12 @@
 #endif  // WOW
 #line 128
 
+
+/*
+ * We have three type of desktop validation:
+ *
+ */
+
 #line 135
 #ifdef WOW
 #line 136

@@ -1,0 +1,122 @@
+{
+  "packet": "M0 T483 S7 P40",
+  "prior_checkpoint": "c220d3483",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/non-mvdm/windows/core/ntuser/kernel/server.c": {
+      "before": {
+        "blocks": 20,
+        "added": 2,
+        "deleted": 1533
+      },
+      "after": {
+        "blocks": 19,
+        "added": 2,
+        "deleted": 1525
+      },
+      "original_error_pairs": 14,
+      "prior_sha256": "e59818734a049670e98fa66db663eeae013dfee2c56a1e6f410068aef5e44ab0",
+      "current_sha256": "aae6f7a6cfdf89be9ca1f41e027d4ab536978b9e9f3eb7897ec6693d11bcd283",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "restored_ranges": [
+        [
+          578,
+          577,
+          8
+        ]
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/wow.c": {
+      "before": {
+        "blocks": 8,
+        "added": 1,
+        "deleted": 176
+      },
+      "after": {
+        "blocks": 7,
+        "added": 1,
+        "deleted": 170
+      },
+      "original_error_pairs": 6,
+      "prior_sha256": "a93ae54fa9aec8ab9063ff752544a16e11ba6198011612aa105522dcde9af37e",
+      "current_sha256": "cee4533a5bd742002e4cdcd025f061e91a217c9326a0944c4b3fe068ea0fcd65",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "restored_ranges": [
+        [
+          44,
+          43,
+          6
+        ]
+      ]
+    }
+  },
+  "decisions": {
+    "server.c": "Restore exact original lines 599 to 606 before WRAPPFN. This is the original message dispatch section heading and spacing.",
+    "wow.c": "Restore exact original lines 129 to 134 before the desktop validation group. Retain adjacent #error bodies and original line resets."
+  },
+  "census": {
+    "non_error_points": 1977,
+    "non_error_lines": 27232,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 70,
+      "lines": 1742
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/control-view-wow.obj",
+          "selected_lines": 49144,
+          "sha256": "116011323a79c4c2e773d39e45b9451edc5b8e7ce6e0a566c44e0d8a64a3ef93"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/default-messages.obj",
+          "selected_lines": 44811,
+          "sha256": "13ece809aff764fffbd104da62bc3d728d1fede06c5913b57bf7a5256d7c043d"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/def_bits_tables.obj",
+          "selected_lines": 44804,
+          "sha256": "7fd9645e4eb1e2566d02918673c0086d701948431a5ff7b21dc7fd3532accc72"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/default_messages_tables.obj",
+          "selected_lines": 44807,
+          "sha256": "3c84fff708ef92933589984b3df3e5025eecdbf2a01a86f9130cfd777eb9fb2e"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/default_view.obj",
+          "selected_lines": 49674,
+          "sha256": "b5f3dd2e0b7035584c60733bc801691f703fb6ddd54de59ad469b7304fb1699b"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/view_wow.obj",
+          "selected_lines": 49685,
+          "sha256": "929a37b185f5efb1086647edf3887849ddd3559b958208b9cb485801ef2ce351"
+        }
+      ]
+    },
+    "targeted": {
+      "wow_message_and_view_objects": "pass",
+      "wow_default_messages_fixture": "pass",
+      "wow_def_window_bits_fixture": "pass",
+      "wow_edit_view_fixture": "pass"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Six actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

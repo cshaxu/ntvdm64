@@ -575,6 +575,14 @@ CONST WORD gawDefWindowSpecMsgs[] = {
 #line 597
     0
 };
+
+/***************************************************************************\
+* DispatchServerMessage
+*
+*
+* 19-Aug-1992 MikeKe    Created
+\***************************************************************************/
+
 #line 607
 #define WRAPPFN(pfn, type)                                   \
 LONG xxxWrap ## pfn(                                         \

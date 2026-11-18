@@ -464,3 +464,7 @@ fixtures pass.
 [S7 P39 receipt](s7-p39-checkpoint.json) restores original spacing and removes
 two local explanatory comments. It separately corrects the `host_def.h`
 MONITOR mask pairing to original line 40. The header source is unchanged.
+
+[S7 P40 receipt](s7-p40-checkpoint.json) restores the original dispatch and
+desktop validation section headings and spacing in `server.c` and `rtl/wow.c`.
+The six preprocessed streams match and the selected WOW fixtures pass.
