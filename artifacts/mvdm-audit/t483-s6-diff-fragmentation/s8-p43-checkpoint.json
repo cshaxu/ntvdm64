@@ -1,0 +1,83 @@
+{
+  "packet": "T483 S8 P43",
+  "position": 87,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+  "review_ids": [
+    "T483-R1007",
+    "T483-R1008",
+    "T483-R1009",
+    "T483-R1010",
+    "T483-R1012",
+    "T483-R1013",
+    "T483-R1014",
+    "T483-S7-P12-NTBOP-INIT",
+    "T483-S7-P12-NTBOP-DISPATCH"
+  ],
+  "current_sha256": "8ff3d15be855aef22138c04d74e3090bf36ca1b580bb2fb385e76c44ded8a158",
+  "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+  "before": {
+    "blocks": 11,
+    "added": 19,
+    "deleted": 6
+  },
+  "after": {
+    "blocks": 11,
+    "added": 15,
+    "deleted": 7
+  },
+  "decision": "R1009 shares W32Init failure branch; activation is short-circuited on failed init and skipped on warm dispatch. Other residuals: page-domain entry, native WOW dispatch cast, VM command callback, two software V86 address selections, actual DLL unload, original VDD casts incompatible with the FARPROC destinations. Retain evidenced residuals pending owner.",
+  "evidence": [
+    "../t483-remaining-reaudit/r1005-r1014-nt-bop-review.json",
+    "s7-p12-checkpoint.json"
+  ],
+  "line_error": "Selected condition line 242 and original failure block 243-249, initialized flag 251, subsequent statements and all error directives verified against corresponding original or pre-change source. Removed redundant #line 247.",
+  "coverage": {
+    "complete": 87,
+    "remaining": 144,
+    "files": 231,
+    "points": 1945,
+    "lines": 27083,
+    "pending": 1549
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "280c946b-20dc-45f7-ae19-bb6842e70a63",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "targeted": {
+    "bop": "Extracted MS_bop_1 before and after, controlled loader/WOW entries and returning termination witness, MSVC x86; 16 cases each. Verified event order and initialized flag; prior/current identical.",
+    "trace": [
+      "0 ET 0",
+      "1 ELIT 0",
+      "2 ET 0",
+      "3 ELIAT 0",
+      "4 ET 0",
+      "5 ELIT 0",
+      "6 ET 0",
+      "7 ELIAD 1",
+      "8 ET 1",
+      "9 ED 1",
+      "10 ET 1",
+      "11 ED 1",
+      "12 ET 1",
+      "13 ED 1",
+      "14 ET 1",
+      "15 ED 1"
+    ],
+    "page_domain": [
+      "WOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK",
+      "WOW_FIXTURE_OK case=page-domain"
+    ],
+    "limits": "Production provider lifecycle fixture and isolated BOP control; no new interactive guest run."
+  }
+}

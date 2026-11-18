@@ -246,17 +246,11 @@ void MS_bop_1(void) {
 
 
     // Call the init routine
-    if ((*WOWInitEntry)() == FALSE)
+    if ((*WOWInitEntry)() == FALSE || !mvdm_softpc_wow_page_domain_activate_wow_context())
     {
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-        TerminateVDM();
-        return;
-    }
-
-    if (!mvdm_softpc_wow_page_domain_activate_wow_context()) {
-#line 247
         TerminateVDM();
         return;
     }
