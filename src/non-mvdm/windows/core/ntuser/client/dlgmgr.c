@@ -23,7 +23,6 @@ LOOKASIDE DialogLookaside;
 #line 20
 BOOL ValidateCallback(HANDLE h);
 
-#line 22
 #define IsInForegroundQueue(hwnd) \
     ((BOOL)NtUserQueryWindow(hwnd, WindowIsForegroundThread))
 #define IsCurrentThreadForeground() \
@@ -829,7 +828,6 @@ LONG WINAPI DefDlgProcA(
 * History:
 \***************************************************************************/
 
-#line 989
 int PASCAL DialogBox2(
     HWND hwnd,
     HWND hwndOwner,
@@ -881,7 +879,6 @@ int PASCAL DialogBox2(
      * Set the 'parent disabled' flag for EndDialog().
      * convert BOOL to definite bit 0 or 1
      */
-#line 1038
     PDLG(pwnd)->fDisabled = !!fDisabled;
 
     fShown = TestWF(pwnd, WFVISIBLE);
@@ -897,11 +894,9 @@ int PASCAL DialogBox2(
     while (PDLG(pwnd) && (!PDLG(pwnd)->fEnd)) {
         if (!PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 ShowIt:
-#line 1053
             if (!fShown) {
                 fShown = TRUE;
 
-#line 1056
 #ifdef SYSMODALWINDOWS
 #line 1057
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
@@ -910,7 +905,6 @@ ShowIt:
 #line 1066
 
                 NtUserShowWindow(hwnd, SHOW_OPENWINDOW);
-#line 1068
                 UpdateWindow(hwnd);
             } else {
                 /*
@@ -943,13 +937,11 @@ ShowIt:
                 break;
             }
 
-#line 1100
             /*
              * Moved the msg filter hook call to IsDialogMessage to allow
              * messages to be hooked for both modal and modeless dialog
              * boxes.
              */
-#line 1105
             if (!IsDialogMessage(hwnd, &msg)) {
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
@@ -969,13 +961,11 @@ ShowIt:
                 goto ShowIt;
         }
 
-#line 1124
         if (!RevalidateHwnd(hwnd)) {
             /*
              * Bogus case - we've already been destroyed somehow (by app,
              * GP, etc.)
              */
-#line 1129
             RIPMSG0(RIP_WARNING,
                "Dialog should be dismissed with EndDialog, not DestroyWindow");
             return 0;
@@ -985,9 +975,7 @@ ShowIt:
     /*
      * Make sure the window still exists
      */
-#line 1138
     if (!RevalidateHwnd(hwnd)) {
-#line 1139
         return 0;
     }
 
@@ -1016,7 +1004,6 @@ ShowIt:
 }
 
 
-#line 1167
 /***************************************************************************\
 * InternalDialogBox
 *
@@ -1038,7 +1025,6 @@ int InternalDialogBox(
 {
     int i;
     BOOL fDisabled = FALSE;
-#line 1188
     HWND hwnd;
     PWND pwndOwner;
     BOOL fOwnerIsActiveWindow = FALSE;

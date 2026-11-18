@@ -1,0 +1,71 @@
+{
+  "packet": "T483 S8 P145",
+  "position": 188,
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+  "review_ids": [
+    "T483-R2221",
+    "T483-R2228",
+    "T483-R2229",
+    "T483-R2231",
+    "T483-R2235",
+    "T483-R2236",
+    "T483-R2237",
+    "T483-R2238",
+    "T483-R2240",
+    "T483-R2243",
+    "T483-R2244"
+  ],
+  "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+  "current_sha256": "859c909bcb7110f031b503f853bb18af7a5a840b942759496c59ad2f40b7d3cb",
+  "before": {
+    "blocks": 17,
+    "added": 20,
+    "deleted": 205
+  },
+  "after": {
+    "blocks": 17,
+    "added": 20,
+    "deleted": 205
+  },
+  "source_changed": true,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        258,
+        440,
+        "/***************************************************************************\\"
+      ]
+    ],
+    "alignment": "The repeated opening comment delimiter is identical at original lines 258 and 440. The retained DefDlgProcWorker header belongs to line 440.",
+    "removed_redundant_markers": [
+      22,
+      989,
+      1038,
+      1053,
+      1056,
+      1068,
+      1100,
+      1105,
+      1124,
+      1129,
+      1138,
+      1139,
+      1167,
+      1188
+    ]
+  },
+  "coverage": {
+    "complete": 188,
+    "remaining": 43,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "decision": "Retain original CvtDec and existing native USER API ownership for GetDlgCtrlID and five dialog convenience exports. R2221/R2231/R2240 cover destruction during WM_CANCELMODE, focus change or default-button callbacks before PDLG writes. R2228 initializes fDisabled when no owner exists. R2229/R2244 select product manager and isolated modal fixture; R2235-38/R2243 share the native dialog slots for public ANSI/Unicode procedures and DWL_MSGRESULT, including initialization failure. Removed redundant unconditional line directives only where a preceding anchor dominates with no intervening conditional boundary. Pre-edit and final logical coordinate streams match for every remaining non-marker line.",
+  "verification": {
+    "scope": "Reviewed current source and earlier native slot and callback controls. Compared final hashes, excluded branches, logical coordinates and filtered metrics; no runtime test rerun."
+  }
+}

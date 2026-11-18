@@ -31,7 +31,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 33,src/non-mvdm/windows/core/ntuser/kernel/server.c,19,2,1525,1527,14,0,36,s7-reviewed-residuals-pending,aae6f7a6cfdf89be9ca1f41e027d4ab536978b9e9f3eb7897ec6693d11bcd283
 34,src/non-mvdm/public/sdk/inc/ntexapi.h,24,0,453,453,9,0,37,s8-p132-reviewed,9e703868a12ccf5e9a7857a51157ec378caf4d1c96f627bf367a2a55275d6bef
 35,src/mvdm-host/dos/command/cmdexec.c,16,63,15,78,0,0,28,s7-p47-verified-residuals-pending-owner,ee1c313dd9153d9e65c5751fc03074cfd4da4ca5dd9a6d98c13b86b3c5441538
-36,src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,17,20,205,225,1,0,31,reviewed-verified-p17-residuals-pending-owner,fcde4b2905dce5e73b510af3ffe588684da11f311fb0124b0595065640c4ef7f
+36,src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,17,20,205,225,1,0,31,s8-p145-reviewed,859c909bcb7110f031b503f853bb18af7a5a840b942759496c59ad2f40b7d3cb
 37,src/non-mvdm/windows/core/ntuser/kernel/taskman.c,15,20,16,36,0,0,38,s7-p19-reviewed,3a993b151b013a70768345c54cb10c340d871739171926bd81cf6fb4569dbcca
 38,src/mvdm-host/dpmi32/int21map.c,16,27,6,33,14,0,39,s8-p5-rechecked-residuals-pending-owner,23c9046e7c7f862a71700411b0f024c1497391b606ff8b57307856c29904f542
 39,src/mvdm-host/softpc.new/base/video/video.c,13,49,12,61,57,0,40,s8-p40-reviewed,e76cdce88dc8bad15f84afc903f265f37f78e9d0fe5e5fb846c42863235e99da
