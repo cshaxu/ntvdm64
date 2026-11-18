@@ -13,7 +13,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 12,src/mvdm-host/softpc.new/base/ccpu386/c_main.c,36,116,30,146,75,0,14,reviewed-delivered-p7-residuals-pending-owner,837de6568a31820f73177d9d0764c6f9dc0067afd1d1967c3ff7f26a65fec2bf
 13,src/non-mvdm/windows/core/ntuser/client/ntstubs.c,35,25,1778,1803,16,0,15,reviewed-delivered-p8-residuals-pending-owner,aa0d284cd631c81071c1714ed7884421daaea540e75df0a8731cb67061636de8
 14,src/non-mvdm/windows/core/ntuser/kernel/queue.c,35,5,4168,4173,24,0,16,reviewed-delivered-p8-residuals-pending-owner,25063755ffb0e0dfd2a35fe1e34d1c889d6e7a1973897b5681d2289aa2c80854
-15,src/mvdm-host/dpmi32/dpmiint.c,30,147,37,184,8,0,10,reviewed-delivered-p5-residuals-pending-owner,97b227df99b8b176c03757b45d611a823201267314ff41dc55363dad9bbea7e7
+15,src/mvdm-host/dpmi32/dpmiint.c,30,143,37,180,8,0,10,s8-p4-rechecked-residuals-pending-owner,9082b02db98c67cc4378a61fccd39f71746214b58d13bfd6865b847c3f629935
 16,src/mvdm-host/wow32/wcntl32.c,34,37,32,69,0,0,17,reviewed-no-code-change-residuals-pending-owner,3d592e96fd4f53002609ecad220af5d73162be932277a17a3847944cfda7e141
 17,src/mvdm-host/softpc.new/base/keymouse/mouse_io.c,33,310,30,340,88,0,18,reviewed-no-code-change-residuals-pending-owner,63806d86356c919260146466365658b07dd3ef2d548d5e91ca62eec4f0456035
 18,src/mvdm-host/wow32/wumsg.c,32,95,14,109,3,0,19,reviewed-delivered-p9-residuals-pending-owner,545b921194156c22054cd7fd15727f105cea00ded9f6a918a8f31fd270b7ddb2
@@ -102,7 +102,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 107,src/non-mvdm/windows/core/ntuser/client/drawtext.c,5,0,137,137,0,0,109,s7-p11-reviewed,507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1
 108,src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,5,14,480,494,1,0,111,s7-p3-reviewed-residual-pending,61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629
 110,src/non-mvdm/windows/core/ntuser/rtl/draw.c,5,1,388,389,1,0,112,s7-p12-reviewed,c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb
-111,src/mvdm-host/dpmi32/dpmidata.h,2,1,26,27,2,0,113,s7-p13-format-restored-residual-pending,e4a48426f06d09ecf275a89c4c6067ff80b1221141649da8f323b88d24ff3c7d
+111,src/mvdm-host/dpmi32/dpmidata.h,2,1,26,27,2,0,113,s8-p4-rechecked-residuals-pending-owner,e4a48426f06d09ecf275a89c4c6067ff80b1221141649da8f323b88d24ff3c7d
 112,src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,4,23,0,23,1,0,114,s7-p9-format-restored-residual-pending,d070c2f83723b0bcc3098419cdb9dc6501c5a4f88497fd4fcf0f28f5d12cdea1
 113,src/mvdm-host/softpc.new/base/cvidc/evidgen.h,4,4,0,4,0,0,115,s7-p9-reviewed,83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4
 114,src/mvdm-host/softpc.new/base/cvidc/sevid016.c,4,6,6,12,0,0,116,s7-p23-reviewed,636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc
@@ -142,7 +142,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 154,src/mvdm-host/dos/command/cmdkeyb.c,2,3,1,4,0,0,155,s7-p48-audited-unchanged-residuals-pending-owner,c0570faf9a410e743b212fe66a518d48a7343bc260bde5a8cbfbd002b4024c7f
 155,src/mvdm-host/dos/dem/dem.c,2,2,1,3,2,0,156,s7-p10-reviewed,e80e86d813a7d6e7717ddb89c7402c5dc0111ecc2f23a1ae20782025b9e5893d
 156,src/mvdm-host/dpmi32/dpmi32.c,2,27,0,27,2,0,157,s8-p3-rechecked-residuals-pending-owner,3a8905b9973d2e7d8f48c6a55091d97270665fa4e9e8228ca1e10e69b7f88c96
-157,src/mvdm-host/dpmi32/dpmiselr.c,1,10,0,10,4,0,158,s7-p17-format-restored-residual-pending,d3a113eb2f1b6026f7bf68a8bc4d65b53f2296548bbe80a41c80949e53aa1905
+157,src/mvdm-host/dpmi32/dpmiselr.c,1,6,0,6,4,0,158,s8-p4-rechecked-residuals-pending-owner,7dbb3253292fcc1c3138c1867c2326f1a23b237c06e30a11b9dddd689c03c29e
 159,src/mvdm-host/softpc.new/base/bios/reset.c,2,0,2,2,38,0,160,s7-p7-reviewed-residual-pending,02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449
 160,src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c,2,2,0,2,3,0,161,s7-p17-reviewed,a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68
 162,src/mvdm-host/softpc.new/base/ccpu386/ntthread.h,2,3,0,3,0,0,164,s7-p21-reviewed,53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d

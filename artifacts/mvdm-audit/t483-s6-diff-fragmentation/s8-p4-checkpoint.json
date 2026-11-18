@@ -1,0 +1,141 @@
+{
+  "packet": "M0 T483 S8 P4",
+  "prior_checkpoint": "711be36eb",
+  "covered_before": 11,
+  "covered_after": 14,
+  "remaining": 217,
+  "pending_rows": 1566,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1974,
+    "lines": 27187
+  },
+  "cumulative_s8_reduction": {
+    "points": 0,
+    "lines": 23
+  },
+  "files": [
+    {
+      "position": 12,
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "source_sha256": "e4a48426f06d09ecf275a89c4c6067ff80b1221141649da8f323b88d24ff3c7d",
+      "review_ids": "T483-R0143;T483-R0145",
+      "points_before_after": [
+        2,
+        2
+      ],
+      "lines_before_after": [
+        27,
+        27
+      ],
+      "disposition": "Retain the actual protected-mode slot binding and SDK-owned LDT_ENTRY. The adjacent omitted original debug-register alias is covered by R0143: restoring it would route the selected handler to DpmiIllegalFunction."
+    },
+    {
+      "position": 13,
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "source_sha256": "9082b02db98c67cc4378a61fccd39f71746214b58d13bfd6865b847c3f629935",
+      "review_ids": "T483-R0148;T483-R0152;T483-R0154;T483-R0155;T483-R0156;T483-R0157;T483-R0159;T483-R0160;T483-R0161;T483-R0163;T483-R0164;T483-R0165;T483-R0166;T483-R0168;T483-R0171;T483-R0172;T483-R0174;T483-R0175;T483-R0176;T483-R0177;T483-R0178;T483-R0179;T483-P222-COMPLETION",
+      "points_before_after": [
+        30,
+        30
+      ],
+      "lines_before_after": [
+        184,
+        180
+      ],
+      "disposition": "Retain existing exception frame, rollback, and mapped decoder boundaries pending owner decisions. Compact four deviation comments with location-preserving line resets."
+    },
+    {
+      "position": 14,
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234",
+      "source_sha256": "7dbb3253292fcc1c3138c1867c2326f1a23b237c06e30a11b9dddd689c03c29e",
+      "review_ids": "T483-R0186",
+      "points_before_after": [
+        1,
+        1
+      ],
+      "lines_before_after": [
+        10,
+        6
+      ],
+      "disposition": "Use the original FlatAddress index expression in both CCPU publication writes. The original registerAX % 8 admission guard and 8-byte descriptor stride made the TI test redundant. Preserve the two independent initialized-table checks."
+    }
+  ],
+  "verification": {
+    "dpmiint_preprocessing_identity": [
+      {
+        "profile": "worker",
+        "target": "obj/dpmi/dpmiint.obj",
+        "selected_lines": 45509,
+        "sha256": "ad24a03315b2a33282df29d6fa0846c944b704b063655fc4f06e76301bd5404e"
+      },
+      {
+        "profile": "worker-reference-x86",
+        "target": "obj/dpmi/dpmiint.obj",
+        "selected_lines": 45509,
+        "sha256": "ad24a03315b2a33282df29d6fa0846c944b704b063655fc4f06e76301bd5404e"
+      },
+      {
+        "profile": "pm-allocation-observation",
+        "target": "dpmi_pm_allocation_failure.c",
+        "selected_lines": 45533,
+        "sha256": "f89ed6af36cc0ece76e7e639e6b5a1bca708df91b7f334bae531d64c1017e7d7"
+      }
+    ],
+    "excluded_arms": "All paired #error bodies unchanged. dpmiselr.c kept all line directives; dpmiint.c preserves selected logical locations.",
+    "cached_x86_x64": "pass",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "f8beee5f-e927-483a-961b-d33c536a86af",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "manifest_sha256": "0ae16e9c0490c3cc7ae726fc9d0376786e8d481bf8b47dc4b51ff2ffa667ec19",
+    "selector_arithmetic_proof": "Pinned SDK LDT_ENTRY=8. Exhaustive accepted nonzero aligned AX and the complete 16-bit CX loop domain.",
+    "descriptor_domain_fixture": "pass",
+    "ccpu_monitor_boundary_cases": 58,
+    "guest_dos_int21": [
+      {
+        "Result": "pass",
+        "ProbeSha256": "5870AC7A3A2BF24BF00BB815F5AF33F2ABFA7E26870813D1F5220AEF1DB0805C",
+        "ElapsedMs": 1554,
+        "Mode": "low",
+        "Route": "direct",
+        "Pid": 7656
+      },
+      {
+        "Result": "pass",
+        "ProbeSha256": "5870AC7A3A2BF24BF00BB815F5AF33F2ABFA7E26870813D1F5220AEF1DB0805C",
+        "ElapsedMs": 1504,
+        "Mode": "low",
+        "Route": "nested",
+        "Pid": 26020
+      },
+      {
+        "Result": "pass",
+        "ProbeSha256": "297419687231B779874F9054D393BB1F43CC798B5A79763AD60EF48F0CAEDF45",
+        "ElapsedMs": 1583,
+        "Mode": "high",
+        "Route": "direct",
+        "Pid": 29304
+      },
+      {
+        "Result": "pass",
+        "ProbeSha256": "297419687231B779874F9054D393BB1F43CC798B5A79763AD60EF48F0CAEDF45",
+        "ElapsedMs": 1388,
+        "Mode": "high",
+        "Route": "nested",
+        "Pid": 588
+      }
+    ],
+    "guest_package_note": "Isolated runner assigns fresh package identities and verifies each staged manifest.",
+    "full_suite": "Targeted checks only under active S8 packet."
+  }
+}

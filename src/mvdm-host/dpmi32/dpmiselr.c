@@ -167,16 +167,12 @@ Return Value:
 #endif
 #line 161
 #line 162
-            ULONG Selector = registerAX + i * sizeof(LDT_ENTRY);
-
-            /* Bind original 53:00 process-LDT publication to CCPU tables.
-             * TI=0 also updates the DOSX GDT; TI=1 updates only the LDT. */
+            ULONG Index = (registerAX >> 3) + i;
+            /* 53:00 accepts aligned selector values and publishes to both tables. */
             if (Cpu40LdtShadowAddress != 0)
-                ((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))[
-                    Selector >> 3] = Descriptors[i];
-            if (!(Selector & 4u) && Cpu40GdtShadowAddress != 0)
-                ((PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress))[Selector >> 3] =
-                    Descriptors[i];
+                ((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))[Index] = Descriptors[i];
+            if (Cpu40GdtShadowAddress != 0)
+                ((PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress))[Index] = Descriptors[i];
 #line 161
         }
     }

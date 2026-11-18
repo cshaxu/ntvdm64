@@ -546,9 +546,9 @@ Return Value:
         // Protect mode
 
 #line 541
-        /* DIVERGENCE(MVDM-HOST-DIV-481): the x86 monitor's PushInt
-         * selects the return frame from the registered handler flags, not
-         * the interrupted application's default width. */
+        /* DIVERGENCE(MVDM-HOST-DIV-481): PushInt selects the return frame
+         * width from the registered handler flags. */
+#line 544
         BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
         if (!BuildStackFrameWithWidth(3, WideFrame, &VdmStackPointer, &NewSP)) {
 #line 541
@@ -889,8 +889,8 @@ Return Value:
     SaveEFLAGS = getEFLAGS();
     SaveEIP = getEIP();
     SaveCS  = getCS();
-    /* Completed emulation owns the instruction's FLAGS. Only exception
-     * dispatch clears IF/TF; successful I/O and CR0 moves do not. */
+    /* Exception dispatch clears IF/TF after emulation declines. */
+#line 900
     if ((getMSW() & MSW_PE) && ((IntNumber == 13) || (IntNumber == 6)) &&
             DpmiEmulateInstruction()) {
         return TRUE;
@@ -1269,8 +1269,8 @@ Return Value:
 
 #ifndef i386
 #if defined(CPU_40_STYLE) && defined(CCPU)
-/* Fetch through the active CCPU CS cache and its page translation. A failed
- * lookup declines emulation; it must not read an unrelated contiguous alias. */
+/* Read through the active CS cache and page mapping. Reject lookup failures. */
+#line 1242
 static BOOL
 DpmiMappedCodeByte(ULONG Base, ULONG Offset, PUCHAR Value)
 {
@@ -1332,8 +1332,8 @@ Return Value:
 #line 1265
     BOOL bReturn = FALSE;
 
-    /* Only DPMI protected-mode exceptions reach this service. Prefixes do
-     * not acquire side effects; all operands are validated before dispatch. */
+    /* Validate instruction prefixes and operands before dispatching side effects. */
+#line 1269
     if (!(getMSW() & MSW_PE) || c_getVM())
         return FALSE;
     for (;;) {
