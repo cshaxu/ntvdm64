@@ -40,7 +40,6 @@ typedef struct {
     ACCEL accel;
     WORD  padding;
 } RESOURCE_ACCEL, *PRESOURCE_ACCEL;
-
 #line 30
 
 /*

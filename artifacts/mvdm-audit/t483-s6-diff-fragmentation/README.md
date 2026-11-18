@@ -460,3 +460,7 @@ fixture and CCPU boundary fixture pass.
 CCPU conditions and one V7 VGA condition. Five actual compile contexts keep
 identical selected source and logical lines. The CCPU, WOW callback and C-VID
 fixtures pass.
+
+[S7 P39 receipt](s7-p39-checkpoint.json) restores original spacing and removes
+two local explanatory comments. It separately corrects the `host_def.h`
+MONITOR mask pairing to original line 40. The header source is unchanged.

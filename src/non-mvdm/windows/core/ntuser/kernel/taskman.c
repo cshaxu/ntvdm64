@@ -120,8 +120,8 @@ void InsertTask(
     ptdbNew->ptdbNext = *pptdb;
     *pptdb = ptdbNew;
 }
-/* DIVERGENCE(OPENNT-HOST-049): bind this original function's shared USER
- * domain through its explicit process view rather than a global server. */
+
+
 /***************************************************************************\
 * DestroyTask()
 *
@@ -216,8 +216,9 @@ void DestroyTask(
 
 }
 
-/* DIVERGENCE(OPENNT-HOST-050): explicit current thread replaces PtiCurrent;
- * original wait/selection/message policy and UserYield ordering are retained. */
+
+
+
 #line 219
 /***************************************************************************\
 * xxxSleepTask

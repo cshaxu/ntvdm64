@@ -110,4 +110,3 @@ BOOL _AdjustWindowRectEx(
     return TRUE;
 }
 #endif
-

@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-62 points and 1,715 changed lines in S7. The current census is 1,985 non-error
-points and 27,261 changed lines across 231 mirrors with filtered differences.
+68 points and 1,728 changed lines in S7. The current census is 1,979 non-error
+points and 27,246 changed lines across 231 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -193,12 +193,8 @@ P26 restores `xmsmemr.c` byte-for-byte. The mapped XMS fixture passes.
 The historical startup fixture fails to link identically before and after.
 [P26 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p26-checkpoint.json).
 
-P27 removes seven local X86GFX frames. Both worker inputs match.
-The font fixture passes and the old-code control fails as expected.
-[P27 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p27-checkpoint.json).
-
-P28 removes four local CPU and DPMI frames with six matching worker controls.
-[P28 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p28-checkpoint.json).
+P27 and P28 simplify X86GFX and DPMI guards. Both worker selections match.
+[Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
 P29 removes ten local EMS and graphics frames, restores R1127 and passes
 the display fixtures.
@@ -228,6 +224,9 @@ P37 removes four DPMI CPU40 guards with 35 matching inputs.
 
 P38 removes five CCPU and V7 VGA guards with matching preprocess output.
 [P38 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p38-checkpoint.json).
+
+P39 restores original spacing in five mirrors and corrects one mask pair.
+[P39 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p39-checkpoint.json).
 
 ## S1 Closure Record
 

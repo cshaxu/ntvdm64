@@ -78,6 +78,7 @@ typedef struct _SECURITY_ATTRIBUTES *LPSECURITY_ATTRIBUTES;
 #error T476-S1: branch not selected by product build
 #line 76
 #else
+
 #line 78
 #ifndef WOW
 #line 79

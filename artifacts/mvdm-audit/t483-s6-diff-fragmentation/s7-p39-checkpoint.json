@@ -1,0 +1,194 @@
+{
+  "packet": "M0 T483 S7 P39",
+  "prior_checkpoint": "27fdc0d44",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/non-mvdm/windows/core/ntuser/client/usercli.h": {
+      "before": {
+        "blocks": 45,
+        "added": 75,
+        "deleted": 39
+      },
+      "after": {
+        "blocks": 44,
+        "added": 75,
+        "deleted": 38
+      },
+      "removed_local_frame_ranges": [
+        [
+          29,
+          28,
+          1
+        ]
+      ],
+      "original_error_pairs": 17,
+      "prior_sha256": "ba13187c71a1f977e2e5bca413b1ac325c16c4aee18ad3f9f3f6a59057b5a037",
+      "current_sha256": "d74581564575ea3a4e0ad27a762df8cdb65afacb693baab166ec19d83c223803",
+      "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/clres.c": {
+      "before": {
+        "blocks": 30,
+        "added": 27,
+        "deleted": 2706
+      },
+      "after": {
+        "blocks": 29,
+        "added": 26,
+        "deleted": 2706
+      },
+      "removed_local_frame_ranges": [
+        [
+          43,
+          43,
+          0
+        ]
+      ],
+      "original_error_pairs": 10,
+      "prior_sha256": "108a2eaabba53c84d2f0f96b55ddfe41bd0b2d1d8299bb39b3d1762969cc0af8",
+      "current_sha256": "e14a9580710191b742a7bb4ca72531f6e28ee7faf9275d0a337b46c471da8d3a",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/taskman.c": {
+      "before": {
+        "blocks": 17,
+        "added": 24,
+        "deleted": 21
+      },
+      "after": {
+        "blocks": 15,
+        "added": 20,
+        "deleted": 16
+      },
+      "removed_local_frame_ranges": [
+        [
+          123,
+          124,
+          2
+        ],
+        [
+          219,
+          220,
+          3
+        ]
+      ],
+      "original_error_pairs": 0,
+      "prior_sha256": "0aff6912cedf52b9419f597aaa1081a081ddeb9ef00e1ceb732b007ea5fd89fb",
+      "current_sha256": "3a993b151b013a70768345c54cb10c340d871739171926bd81cf6fb4569dbcca",
+      "original_sha256": "e37f4d724650d5758ee05c54e181771aa584aead15f5a1376b322ecb7016e64e"
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h": {
+      "before": {
+        "blocks": 9,
+        "added": 4,
+        "deleted": 38
+      },
+      "after": {
+        "blocks": 8,
+        "added": 4,
+        "deleted": 37
+      },
+      "removed_local_frame_ranges": [
+        [
+          81,
+          80,
+          1
+        ]
+      ],
+      "original_error_pairs": 10,
+      "prior_sha256": "6b3175b55cbc4737485e9b4672a35bb916ee2b15adf1c6aeb20ef4ae668c79f3",
+      "current_sha256": "9928d826d81e8a5eb272d1bb82b2628c02fe96d9ea5074092550d17fc41bbba6",
+      "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/winmgrc.c": {
+      "before": {
+        "blocks": 6,
+        "added": 4,
+        "deleted": 496
+      },
+      "after": {
+        "blocks": 5,
+        "added": 3,
+        "deleted": 496
+      },
+      "removed_local_frame_ranges": [
+        [
+          113,
+          113,
+          0
+        ]
+      ],
+      "original_error_pairs": 0,
+      "prior_sha256": "888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5",
+      "current_sha256": "066c3f3f2b5f48f5614fb5e356743cccd4fde83eafb077f682e8a98c9253dff4",
+      "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4"
+    }
+  },
+  "mask_correction": {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+    "source_sha256": "71b0afcd5906ef2dddac4ca2fa546aa4ceedd8302d097fb62ab71ee0b4b1254e",
+    "before": {
+      "blocks": 3,
+      "added": 5,
+      "deleted": 2
+    },
+    "after": {
+      "blocks": 3,
+      "added": 4,
+      "deleted": 1
+    },
+    "prior_original_range": [
+      42,
+      42
+    ],
+    "correct_original_range": [
+      40,
+      40
+    ],
+    "current_range": [
+      44,
+      45
+    ]
+  },
+  "decisions": {
+    "usercli.h": "Restore original blank line 25 between the DBG and RIP_COMPONENT groups.",
+    "clres.c": "Remove the extra blank before the preserved original line 30 reset.",
+    "taskman.c": "Restore both original blank-line groups. The traced native process and thread adapters remain in place and their provenance is retained in the existing evidence.",
+    "userrtl.h": "Restore original blank line 77 in the _USERK_ alternative.",
+    "winmgrc.c": "Remove the extra terminal blank. The original selected function remains intact."
+  },
+  "census": {
+    "non_error_points": 1979,
+    "non_error_lines": 27246,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 68,
+      "lines": 1728
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "streams": 120,
+      "comparison_sha256": "ffb298801ab1bd86bf866e3d9bd2c306dbeac132707defc6bc1d6180263eaa72",
+      "contexts_by_graph": {
+        "wow32": 52,
+        "call-boundaries": 67,
+        "bitmap-fixture": 1
+      },
+      "replay": "Read actual Ninja dependencies and expand existing compiler commands. Add the clres resource observation compile flags from verify-wow-bitmap-bindings.ps1. Compare the ordered hashes of nonblank selected rows with the logical file and line."
+    },
+    "targeted": {
+      "wow_control_objects": "pass",
+      "wow_edit_view_fixture": "pass",
+      "original_wow_task_order_fixture": "pass"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. 120 actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

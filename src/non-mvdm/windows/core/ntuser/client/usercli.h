@@ -26,6 +26,7 @@
 #error
 #line 24
 #endif
+
 #line 26
 #ifdef RIP_COMPONENT
 #error
