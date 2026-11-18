@@ -1,0 +1,90 @@
+{
+  "packet": "T483 S8 P15",
+  "files": [
+    {
+      "position": 37,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "source_sha256": "a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68",
+      "review_ids": "T483-R0416;T483-R0417",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      }
+    },
+    {
+      "position": 38,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "source_sha256": "7c446bc9f7647e5c00c8032c3d15bbde82d9118900be39eb89fcfecbd7ee4653",
+      "review_ids": "T483-R0419;T483-R0420;T483-R0421;T483-R0422;T483-R0423;T483-R0424;T483-R0425;T483-R0426;T483-R0427;T483-R0428;T483-R0429",
+      "before": {
+        "blocks": 12,
+        "added": 12,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 12,
+        "added": 12,
+        "deleted": 1
+      }
+    }
+  ],
+  "decisions": [
+    "Retain the TSS T-bit publication and its declaration. The current task-switch fixture verifies single delivery with persistent DR6 status.",
+    "Restore five original condition lines verbatim by placing the added opening braces on separate lines. The corrected guarded statements and original line directives remain. Keep the null trace stream guard and grouped fault-handling residuals pending."
+  ],
+  "verification": {
+    "normalized_coff_before_and_after": [
+      {
+        "profile": "msvc-x86-release/worker",
+        "size": 11934,
+        "normalized_sha256": "cb1bfd6f98d1334c68ef55c998f43a2dc00815accb654cbedd76f40a8f47ec4b"
+      },
+      {
+        "profile": "msvc-x64-release/worker-reference-x86",
+        "size": 11950,
+        "normalized_sha256": "c5d76dc58b6a906c964d1094ee87f3c4799007d7cc19f2b8da2c60a464dbcaaf"
+      }
+    ],
+    "normalization": "Only COFF header timestamp bytes 4 through 7 masked.",
+    "paired_excluded_bodies": 7,
+    "source_checks": [
+      "TSS_TBIT_SINGLE_DELIVERY",
+      "CCPU monitor boundary: 58 cases passed"
+    ],
+    "delivery": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "ee2e687d-0a0b-42f3-b04c-b3f2b8fa27b8",
+      "hashVerified": true,
+      "stopped": 3
+    },
+    "manifest_sha256": "107e9f49be873182649a6a112a648b1e7be87facb6015d8d8e4d20c34bfc0bc1",
+    "cached_builds": [
+      "x86",
+      "x64"
+    ],
+    "targeted_passed": [
+      "ccpu-halt-reset",
+      "ccpu-debug-match",
+      "ccpu-monitor-boundary (58 cases)",
+      "wow-callback-abort-ccpu"
+    ]
+  },
+  "coverage": {
+    "complete": 38,
+    "remaining": 193,
+    "files": 231,
+    "points": 1957,
+    "lines": 27109,
+    "pending": 1549
+  }
+}

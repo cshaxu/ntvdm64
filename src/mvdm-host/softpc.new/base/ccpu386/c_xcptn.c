@@ -255,7 +255,8 @@ IFN3(
     {
 	extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
+	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))
+	   {
 #line 253
         doing_contributory = FALSE;
 	    c_cpu_continue();	    /* DOES NOT RETURN */
@@ -320,7 +321,8 @@ IFN3(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
+	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))
+	     {
 #line 313
           doing_contributory = FALSE;
 	      c_cpu_continue();	/* DOES NOT RETURN */
@@ -386,7 +388,8 @@ IFN1(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE)) {
+	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE))
+	     {
 #line 374
             doing_double_fault = FALSE;
 		    c_cpu_continue(); /* DOES NOT RETURN */
@@ -455,7 +458,8 @@ GLOBAL VOID Int0 IFN0 ()
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE)) {
+	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE))
+	     {
 #line 438
           doing_fault = FALSE;
           doing_contributory = FALSE;
@@ -606,7 +610,8 @@ IFN2(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error)) {
+	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error))
+	     {
 #line 584
           doing_fault = FALSE;
           doing_page_fault = FALSE;
