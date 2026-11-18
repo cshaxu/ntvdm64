@@ -44,7 +44,7 @@ try{
   [IO.File]::WriteAllText("$dir/reverse_types.h",$types)
   $bodies=@((Slice $struct '#define STACKORHEAPALLOC' '#define PUTINTARRAY16' 'original stack-or-heap macros'))
   $user=Read 'src/non-mvdm/windows/core/ntuser/inc/user.h' $old
-  $bodies+=Slice $user '#define MultDiv' '#define XPixFromXDU' 'original dialog-unit arithmetic'
+  $bodies+=Slice $user '#define MultDiv(' "`n" 'original dialog-unit arithmetic'
   $conversions=Read 'src/mvdm-host/wow32/wstruc.c' $old
   foreach($name in @('getintarray16','putintarray16')){$bodies+=Body $conversions $name}
   foreach($pair in @(@('wmsgem.c','ThunkEMMsg16','UnThunkEMMsg16'),@('wmsglb.c','ThunkLBMsg16','UnThunkLBMsg16'))){$source=Read "src/mvdm-host/wow32/$($pair[0])" $old;foreach($name in $pair[1..2]){$bodies+=Body $source $name}}

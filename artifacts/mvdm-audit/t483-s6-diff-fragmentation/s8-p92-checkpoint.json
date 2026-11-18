@@ -1,0 +1,51 @@
+{
+  "packet": "T483 S8 P92",
+  "position": 136,
+  "path": "src/mvdm-host/wow32/wmsgcb.c",
+  "review_ids": [
+    "T483-R1655",
+    "T483-R1657",
+    "T483-R1658",
+    "T483-R1659",
+    "T483-R1660"
+  ],
+  "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+  "current_sha256": "e239a19bb680fbbaee05c01361a1ad23097f42ab04435b4d182d4dc9f2137337",
+  "before": {
+    "blocks": 5,
+    "added": 11,
+    "deleted": 9
+  },
+  "after": {
+    "blocks": 5,
+    "added": 11,
+    "deleted": 9
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        62,
+        23,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 136,
+    "remaining": 95,
+    "files": 231,
+    "points": 1915,
+    "lines": 27008,
+    "pending": 1538
+  },
+  "decision": "R1655, R1657, R1658, R1659 and R1660 remain pending. OLDCB_DIR identifies the acquired input even when a hook changes the native message and pointer. The successful mapping flag prevents removal of a preexisting reference on failed acquisition. Clearing state before release also handles unwind. Restoring the original native-message switch alone selects the wrong cleanup; restoring it alongside the existing cleanup permits accidental deletion when a hook changes a different message to CB_DIR.",
+  "verification": {
+    "passed": true,
+    "scope": "selected original release cache and exact extracted bodies with actual finalizer; lower services doubled, not actual guest",
+    "end": "2026-11-18T12:16:46.8847257Z",
+    "baseline": "18d0ec060024912e6b03aec69bdded6c9181af03"
+  }
+}

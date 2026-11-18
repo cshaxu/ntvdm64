@@ -1,0 +1,106 @@
+{
+  "packet": "T483 S8 P91",
+  "position": 135,
+  "path": "src/mvdm-host/wow32/wmsg16.c",
+  "review_ids": [
+    "T483-R1602",
+    "T483-R1604",
+    "T483-R1607",
+    "T483-R1609",
+    "T483-R1610",
+    "T483-R1611",
+    "T483-R1613",
+    "T483-R1615",
+    "T483-R1616",
+    "T483-R1617",
+    "T483-R1619",
+    "T483-R1620",
+    "T483-R1621",
+    "T483-R1623",
+    "T483-R1625",
+    "T483-R1626",
+    "T483-R1627",
+    "T483-R1630",
+    "T483-R1631",
+    "T483-R1632",
+    "T483-R1633",
+    "T483-R1634",
+    "T483-R1636",
+    "T483-R1637",
+    "T483-R1638",
+    "T483-R1639",
+    "T483-R1640",
+    "T483-R1641",
+    "T483-R1644",
+    "T483-R1645",
+    "T483-R1646",
+    "T483-R1647",
+    "T483-R1649",
+    "T483-R1650",
+    "T483-R1651"
+  ],
+  "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+  "current_sha256": "d2dac6782daed3b11a90fddaaf73f992b5d3179be076228351016c440921ac68",
+  "before": {
+    "blocks": 37,
+    "added": 110,
+    "deleted": 35
+  },
+  "after": {
+    "blocks": 37,
+    "added": 109,
+    "deleted": 35
+  },
+  "source_changed": true,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        111,
+        71,
+        "#endif"
+      ],
+      [
+        363,
+        360,
+        "#else"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 135,
+    "remaining": 96,
+    "files": 231,
+    "points": 1915,
+    "lines": 27008,
+    "pending": 1538
+  },
+  "verification": {
+    "dde": {
+      "cases": 8,
+      "scope": "Exact bodies; allocator/registration doubles; no guest proof",
+      "passed": true
+    },
+    "fixtureCorrection": "Extract only the single-line MultDiv definition. Both selected revisions define it on one line.",
+    "reverse": {
+      "baseline": "049ae27da",
+      "scope": "exact-source service doubles, not runtime acceptance",
+      "originalHelp": "allocation failure preserves successful NULL conversion and empty cleanup",
+      "negative": "four missing native buffers, two signed releases and native tab reset/failure",
+      "end": "2026-11-18T12:14:44.9923955Z",
+      "passed": true
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "1a180b4b-804c-43ed-a9a1-267494d0f1ab",
+      "hashVerified": true,
+      "stopped": 0
+    }
+  },
+  "decision": "R1616/R1620/R1626 share one result handler for packed DDE messages. Keep remaining ownership and rollback differences pending."
+}

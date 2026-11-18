@@ -315,7 +315,7 @@ UINT GetHtaskAliasProcessName(
     DWORD   dwThreadID32;
     DWORD   dwProcessID32;
     PSYSTEM_PROCESS_INFORMATION ProcessInfo;
-    PVOID ProcessBuffer;
+    PUCHAR LargeBuffer1;
     ULONG ProcessBufferSize = 0;
 #line 310
     NTSTATUS status;
@@ -337,21 +337,21 @@ UINT GetHtaskAliasProcessName(
                 SystemProcessInformation, NULL, 0, &ProcessBufferSize);
     if (status != STATUS_INFO_LENGTH_MISMATCH || !ProcessBufferSize)
         return(0);
-    ProcessBuffer = malloc_w(ProcessBufferSize);
-    if (!ProcessBuffer)
+    LargeBuffer1 = malloc_w(ProcessBufferSize);
+    if (!LargeBuffer1)
         return(0);
 
 #line 323
     status = NtQuerySystemInformation(
                 SystemProcessInformation,
-                ProcessBuffer,
+                LargeBuffer1,
                 ProcessBufferSize,
 #line 327
                 &TotalOffset
                 );
 
     if ( !NT_SUCCESS(status) ) {
-        free_w(ProcessBuffer);
+        free_w(LargeBuffer1);
 #line 331
         return( 0 );
     }
@@ -361,7 +361,7 @@ UINT GetHtaskAliasProcessName(
     // trying to find the one with the right process id.
     //
     TotalOffset = 0;
-    ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)ProcessBuffer;
+    ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)LargeBuffer1;
 
     while (TRUE) {
         if ( (DWORD)ProcessInfo->UniqueProcessId == dwProcessID32 ) {
@@ -395,9 +395,9 @@ UINT GetHtaskAliasProcessName(
             break;
         }
         TotalOffset += ProcessInfo->NextEntryOffset;
-        ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)((PBYTE)ProcessBuffer + TotalOffset);
+        ProcessInfo = (PSYSTEM_PROCESS_INFORMATION)&LargeBuffer1[TotalOffset];
     }
-    free_w(ProcessBuffer);
+    free_w(LargeBuffer1);
     return(cch);
 #line 371
 }

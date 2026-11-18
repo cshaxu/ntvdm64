@@ -1,0 +1,64 @@
+{
+  "packet": "T483 S8 P95",
+  "position": 139,
+  "path": "src/mvdm-host/wow32/wole2.c",
+  "review_ids": [
+    "T483-R1672",
+    "T483-R1673",
+    "T483-R1674",
+    "T483-R1675",
+    "T483-R1676",
+    "T483-R1677",
+    "T483-R1678",
+    "T483-R1680",
+    "T483-R1681",
+    "T483-R1682",
+    "T483-R1685",
+    "T483-R1686"
+  ],
+  "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+  "current_sha256": "77f388d69f68d6a4580efd033692e8b98b47030a2265d40781b49fa33a4a748a",
+  "before": {
+    "blocks": 13,
+    "added": 26,
+    "deleted": 10
+  },
+  "after": {
+    "blocks": 11,
+    "added": 23,
+    "deleted": 7
+  },
+  "source_changed": true,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 139,
+    "remaining": 92,
+    "files": 231,
+    "points": 1913,
+    "lines": 27002,
+    "pending": 1536
+  },
+  "decision": "Restore the original byte-buffer name and array indexing at initial selection and next-record traversal. Keep dynamic query sizing, allocation/release, conversion status and ANSI length validation: pinned prior 16-KiB query rejected with 731040 bytes required. R1678 and R1685 are fully restored.",
+  "verification": {
+    "build": "x86/x64 cached product graphs passed; x86 lib.exe required the VS developer environment.",
+    "alias": "WOW_MODULE_ALIAS_BOUNDS_AND_LIFETIME_OK",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "3b043d82-3470-4a2f-a106-6faf033731f7",
+      "hashVerified": true,
+      "stopped": 0
+    }
+  },
+  "fully_restored": [
+    "T483-R1678",
+    "T483-R1685"
+  ]
+}

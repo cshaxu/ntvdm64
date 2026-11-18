@@ -1,0 +1,48 @@
+{
+  "packet": "T483 S8 P93",
+  "position": 137,
+  "path": "src/mvdm-host/wow32/wmsgem.c",
+  "review_ids": [
+    "T483-R1662",
+    "T483-R1663",
+    "T483-R1664",
+    "T483-R1665"
+  ],
+  "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+  "current_sha256": "f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8",
+  "before": {
+    "blocks": 4,
+    "added": 4,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 4,
+    "added": 4,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        73,
+        26,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 137,
+    "remaining": 94,
+    "files": 231,
+    "points": 1915,
+    "lines": 27008,
+    "pending": 1538
+  },
+  "verification": {
+    "fixture": "P91 reverse-final: exact extracted bodies, scoped service doubles. Baseline failed EDIT_REPLACE_ALLOC, EDIT_TABS_ALLOC and EDIT_TABS_SIGNED_RELEASE; candidate passed all 21 scenarios.",
+    "source": "Matched fixture input hash against current source; inspected fallthrough separately."
+  },
+  "decision": "Keep R1662 and R1663 as distinct failure checks before native copy or positive-count edit dispatch. Keep R1664 for symmetric signed-count acquisition/release, and R1665 to terminate EM_SETTABSTOPS before unrelated word-break callback conversion. Both dispatch tables in wmsg16.c bind the reviewed functions."
+}

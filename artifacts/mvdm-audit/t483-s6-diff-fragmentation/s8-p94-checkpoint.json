@@ -1,0 +1,44 @@
+{
+  "packet": "T483 S8 P94",
+  "position": 138,
+  "path": "src/mvdm-host/wow32/wmsglb.c",
+  "review_ids": [
+    "T483-R1667",
+    "T483-R1668",
+    "T483-R1669"
+  ],
+  "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+  "current_sha256": "568a6e3c253f84e4bb7904c90846585d1ad8dbc66135b9dbda37fd986551a694",
+  "before": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        73,
+        23,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 138,
+    "remaining": 93,
+    "files": 231,
+    "points": 1915,
+    "lines": 27008,
+    "pending": 1538
+  },
+  "decision": "Retain R1667/R1668: LB_GETSELITEMS needs writable output, LB_SETTABSTOPS needs readable positive-count input. Allocation failure must stop dispatch in each case. R1669 retains signed cleanup matching the signed allocation count; 0xffff skips allocation and must also skip free.",
+  "verification": "Exact P91 reverse-final fixture matches source hash. Baseline fails LIST_SELECTION_ALLOC, LIST_TABS_ALLOC, LIST_TABS_SIGNED_RELEASE. Candidate passes 21 scenarios. Dispatch covers LISTBOX and COMBOLBOX; service doubles, not GUI acceptance."
+}

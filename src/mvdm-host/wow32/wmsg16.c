@@ -17,6 +17,17 @@
 #include "wmtbl32.h"
 #include "wow_message_lifetime.h"
 
+static BOOL W16FinishDDEPack(LPMSGPARAMEX message, PDDECONVERSION conversion,
+                             HWND16 receiver, WORD sender)
+{
+    if (!message->lParam) {
+        DDERollback32(conversion, receiver, sender);
+        return FALSE;
+    }
+    if (message->ddePostConversion) message->ddePostPacked = TRUE;
+    return TRUE;
+}
+
 #line 19
 MODNAME(wmsg16.c);
 
@@ -776,11 +787,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             }
 #line 782
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
-            if (!*plParamNew) {
-                DDERollback32(pConversion, hwnd16, wParam);
-                return FALSE;
-            }
-            if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;
+            return W16FinishDDEPack(lpmpex, pConversion, hwnd16, wParam);
 #line 783
         }
         else {
@@ -844,11 +851,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             }
 #line 834
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
-            if (!*plParamNew) {
-                DDERollback32(pConversion, hwnd16, wParam);
-                return FALSE;
-            }
-            if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;
+            return W16FinishDDEPack(lpmpex, pConversion, hwnd16, wParam);
 #line 835
         }
         else {
@@ -905,11 +908,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             }
 
             *plParamNew = PackDDElParam(wMsg, (LONG) h32, (LONG) HIWORD(lParam));
-            if (!*plParamNew) {
-                DDERollback32(pConversion, hwnd16, wParam);
-                return FALSE;
-            }
-            if (lpmpex->ddePostConversion) lpmpex->ddePostPacked = TRUE;
+            return W16FinishDDEPack(lpmpex, pConversion, hwnd16, wParam);
 #line 878
         }
         else {
