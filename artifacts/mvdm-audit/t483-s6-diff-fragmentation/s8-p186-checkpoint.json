@@ -1,0 +1,44 @@
+{
+  "packet": "T483 S8 P186",
+  "position": 229,
+  "path": "src/mvdm-host/dbg/dbg.c",
+  "review_ids": [
+    "T483-R0001"
+  ],
+  "original_sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+  "current_sha256": "f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 35,
+  "line_check": "Zero selected statement mismatches; 32 compressed branch delimiters precede subsequent logical line resets.",
+  "decision": "Preserve the approved ntdbg.h omission. The single blank preserves the following original coordinates without another directive. The selected code calls RaiseException.",
+  "verification": {
+    "header_sha256": "a5b4a6018a953d66d0e73008ceed9939e4f88917fca9250f6dbf780dcf1c332a",
+    "production_worker": {
+      "current": 0,
+      "restore": 2
+    },
+    "worker_reference_x86": {
+      "current": 0,
+      "restore": 2
+    },
+    "first_error": "ntdbg.h(200): C2061 PORT_MESSAGE in both compiler contexts"
+  },
+  "coverage": {
+    "complete": 229,
+    "remaining": 2,
+    "files": 231,
+    "points": 1903,
+    "lines": 26243,
+    "pending": 1533
+  }
+}
