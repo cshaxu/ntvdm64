@@ -1,0 +1,199 @@
+{
+  "packet": "M0 T483 S7 P31",
+  "prior_checkpoint": "af324acb3",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/softpc.new/base/inc/egacpu.h": {
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          98,
+          99,
+          0
+        ],
+        [
+          101,
+          104,
+          0
+        ]
+      ],
+      "original_error_pairs": 3,
+      "prior_sha256": "6f5294aa77cda5216b7378fa1d84f2a8040a3a440279dbd398648268f02fe0bb",
+      "current_sha256": "fabd64059e547345e0520a11fd54abf3d3298aad4dd61641c40f349c946d080e",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194"
+    },
+    "src/mvdm-host/softpc.new/base/inc/gmi.h": {
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          19,
+          20,
+          0
+        ],
+        [
+          28,
+          32,
+          0
+        ]
+      ],
+      "original_error_pairs": 2,
+      "prior_sha256": "34fc10d6c02b7cd3a2c609dc793ef6373f29604933940b92f9b67cf750dfeb21",
+      "current_sha256": "b9ed8a92dd5f758f4acff007422eb42151eec4f7a4982e2cfa87f51857fdfbfe",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a"
+    },
+    "src/mvdm-host/softpc.new/base/inc/ica.h": {
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 14
+      },
+      "after": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 2
+      },
+      "removed_local_frame_ranges": [
+        [
+          83,
+          90,
+          14
+        ]
+      ],
+      "original_error_pairs": 6,
+      "prior_sha256": "31e096dc998733ceb056eb3af26176051e1ca441d3160782932fefc0534761ab",
+      "current_sha256": "688f70b6522198847952c591f2c9a89e7222251a5468eb64ae425721edd9a34a",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316"
+    }
+  },
+  "decisions": {
+    "egacpu.h": "Remove the local C_VID wrapper inside the original HOST_VGA_GLOBALS group. Selected VGA_GLOBALS pointer retains its exact original form.",
+    "gmi.h": "Restore the original unconditional MEM_HANDLERS declarations. Preserve original excluded CCPU and EGATEST alternatives.",
+    "ica.h": "Restore the original CPU_30_STYLE frame, software interrupt macros and comments. Keep only the omission of the CPU_HW_INT and CPU_HW_INT_MASK definitions. CPU_HW_INT from original ICA would shadow the CCPU event enum and cause the tested duplicate case collision."
+  },
+  "census": {
+    "non_error_points": 1997,
+    "non_error_lines": 28229,
+    "nonzero_mirrors": 233,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 50,
+      "lines": 747
+    },
+    "pending_decisions": 1566,
+    "updated_pending_id": "T483-R0710"
+  },
+  "verification": {
+    "preprocessing": {
+      "matched_entries": 136,
+      "profiles": [
+        "worker",
+        "worker-reference-x86"
+      ],
+      "scope": "All 68 header consumer objects recorded in the active x86 Ninja dependencies, replayed in both actual worker graphs. Compare nonblank selected rows, logical file names and line numbers.",
+      "targets": [
+        "obj/ccpu/ccpusas4.obj",
+        "obj/ccpu/c_main.obj",
+        "obj/ccpu/zfrsrvd.obj",
+        "obj/system/ica.obj",
+        "obj/system/at_dma.obj",
+        "obj/keymouse/keyba.obj",
+        "obj/bios/reset.obj",
+        "obj/bios/tape_io.obj",
+        "obj/keymouse/keybd_io.obj",
+        "obj/system/cmosnt.obj",
+        "obj/system/qevnt.obj",
+        "obj/keymouse/mouse.obj",
+        "obj/keymouse/mouse_io.obj",
+        "obj/system/timestrb.obj",
+        "obj/system/timer.obj",
+        "obj/system/unexp_nt.obj",
+        "obj/disks/diskbios.obj",
+        "obj/disks/fdisk.obj",
+        "obj/support/time_day.obj",
+        "obj/disks/floppy_i.obj",
+        "obj/disks/fla.obj",
+        "obj/video/ega_mode.obj",
+        "obj/support/main.obj",
+        "obj/video/gvi.obj",
+        "obj/video/vga_mode.obj",
+        "obj/video/v7_ports.obj",
+        "obj/video/ega_prts.obj",
+        "obj/video/v7_video.obj",
+        "obj/video/video.obj",
+        "obj/video/gfx_updt.obj",
+        "obj/video/vga_prts.obj",
+        "obj/video/ega_vide.obj",
+        "obj/video/cga.obj",
+        "obj/video/ega_writ.obj",
+        "obj/video/ega_dmmy.obj",
+        "obj/video/egawrtm0.obj",
+        "obj/video/ega_read.obj",
+        "obj/video/vga_vide.obj",
+        "obj/video/egwrtm12.obj",
+        "obj/comms/printer.obj",
+        "obj/cvidc/ev_glue.obj",
+        "obj/comms/com.obj",
+        "obj/dos/emm_mngr.obj",
+        "obj/host/nt_timer.obj",
+        "obj/base-debug/trace.obj",
+        "obj/host/nt_input.obj",
+        "obj/host/nt_com.obj",
+        "obj/host/nt_hosts.obj",
+        "obj/host/nt_cga.obj",
+        "obj/host/nt_graph.obj",
+        "obj/host/nt_vga.obj",
+        "obj/host/nt_ega.obj",
+        "obj/host/sim32.obj",
+        "obj/host/nt_mouse.obj",
+        "obj/host/nt_event.obj",
+        "obj/host/nt_fulsc.obj",
+        "obj/host/nt_munge.obj",
+        "obj/host/nt_eoi.obj",
+        "obj/host/nt_det.obj",
+        "obj/host/nt_reset.obj",
+        "obj/redir/vrnmpipe.obj",
+        "obj/redir/vrinit.obj",
+        "obj/redir/vrnetb.obj",
+        "obj/redir/vrdlcpst.obj",
+        "obj/tests/cvidc_sas_fixture.obj",
+        "obj/tests/cvidc_vector_binding_fixture.obj",
+        "obj/tests/ccpu_bounded_execution_fixture.obj",
+        "obj/tests/keyboard_controller_pic_test.obj"
+      ],
+      "identical_result_sha256": "ec09372d0912eab1bc0b2540d8c963635940f58a2648759484d67042685c588c"
+    },
+    "targeted": {
+      "cvidc_vector_binding": "pass",
+      "pic_reset_eoi_assertions": 24,
+      "keyboard_pic_assertions": 90,
+      "softpc_text_video": "pass after replacing the stale removed resume test call with the actual route sync entry"
+    },
+    "release": {
+      "action": "No product relink, republication or repeated Full. Selected product text and logical lines match.",
+      "p10_full_package_id": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  },
+  "next_investigation": {
+    "egawrtm0.c": "Restored writer candidate compiles in isolated x86 control. Product link and behavior not verified.",
+    "egwrtm12.c": "Restored writer candidate compiles in isolated x86 control. Product link and behavior not verified."
+  }
+}

@@ -81,13 +81,19 @@
 #define CPU_AT_NPX_INT		5	/* NPX exception */
 #define CPU_AT_DISK_INT		6
 
+ 
 #ifndef CPU_30_STYLE
-#if !defined(CCPU)
-#line 79
-#error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
-#endif /* 3.0 CPU or CCPU */
-#line 90
-#endif /* CPU_30_STYLE */
+
+/* def of bits in the CPU_INTERRUPT_MAP ?? */
+
+/*
+ * CPU software interrupt definitions
+ */
+ 
+#define CPU_SW_INT              8
+#define CPU_SW_INT_MASK         (1 << CPU_SW_INT)
+#endif /* 3.0 CPU */
+
 #line 92
 #define DIVIDE_OVERFLOW_INT     0
 

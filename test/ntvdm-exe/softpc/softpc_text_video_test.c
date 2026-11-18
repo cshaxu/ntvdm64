@@ -99,7 +99,7 @@ int main(void)
     PCDisplay.mode_change_required=1;mvdm_softpc_text_video_flush(publish);
     CHECK(painted==1);PCDisplay.mode_change_required=0;
     mvdm_softpc_text_video_pause();CHECK(!async_active);
-    mvdm_softpc_text_video_resume();CHECK(async_active);
+    CHECK(mvdm_softpc_text_video_sync_route() && async_active);
     async_active=FALSE;mvdm_softpc_text_video_flush(publish);
     CHECK(async_active && painted==2 && published==2);
     requested=FALSE;CHECK(mvdm_softpc_text_video_sync_route() && !async_active);

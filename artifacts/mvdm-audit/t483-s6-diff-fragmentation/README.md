@@ -422,3 +422,8 @@ keeps the existing original exclusion groups and selected logical lines.
 framework removals and original WOW logging restoration. The filtered
 census is 2,002 points and 28,253 changed lines. Both worker controls
 and the byte-level WOW object comparison preserve selected behavior.
+
+[S7 P31 receipt](s7-p31-checkpoint.json) records three header restorations,
+136 matched worker/fixture preprocessing entries and four focused fixture
+outcomes. The filtered census is 1,997 points and 28,229 changed lines
+across 233 differing mirrors.

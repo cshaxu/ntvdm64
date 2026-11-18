@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-45 points and 723 changed lines in S7. The current census is 2,002 non-error
-points and 28,253 changed lines across 235 mirrors with filtered differences.
+50 points and 747 changed lines in S7. The current census is 1,997 non-error
+points and 28,229 changed lines across 233 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. All are local conditional frames without a matching original
@@ -195,12 +195,8 @@ P26 restores `xmsmemr.c` byte-for-byte. The mapped XMS fixture passes.
 The historical startup fixture fails to link identically before and after.
 [P26 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p26-checkpoint.json).
 
-P27 removes seven local X86GFX frames from `nt_fulsc.c`. The filtered file
-count falls from twelve to eleven points and from fifty to twenty-nine
-changed lines. Both worker compile entries retain identical selected
-text and logical lines. The focused font restoration fixture passes and
-its old-code control fails as expected. Six software fullscreen changes
-retain their pending decisions.
+P27 removes seven local X86GFX frames. Both worker inputs match.
+The font fixture passes and the old-code control fails as expected.
 [P27 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p27-checkpoint.json).
 
 P28 removes four local compile frames from `nt_cpu.c`, `reset.c` and
@@ -221,6 +217,11 @@ P30 restores original WOW logging and removes two local condition frames
 in WOW and DOS startup. Both worker inputs match. The WOW object control
 matches byte for byte. Focused WOW and DOS checks pass.
 [P30 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p30-checkpoint.json).
+
+P31 clears the non-error differences in `egacpu.h` and `gmi.h`.
+`ica.h` keeps only the omission of two conflicting hardware interrupt
+macros. All 136 preprocessing entries and four targeted fixtures pass.
+[P31 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p31-checkpoint.json).
 
 ## S1 Closure Record
 

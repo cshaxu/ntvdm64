@@ -150,9 +150,9 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 162,src/mvdm-host/softpc.new/base/ccpu386/lmsw.c,0,0,0,0,0,s7-p6-original-byte-identity-restored,,8bc5bad26249b91c1cc9b3be756575c081b2da322bb8dcc7e9f554d4f68a4e96
 163,src/mvdm-host/softpc.new/base/ccpu386/localfm.c,1,2,0,0,0,s7-p5-partial-original-restoration-residual-pending,T483-R0474;T483-R0475,1296da38c0d62145e8b867f2f504e649d2caf449039be55acdf60e7e26cf6b67
 164,src/mvdm-host/softpc.new/base/ccpu386/ntthread.h,2,3,0,0,0,s7-p21-reviewed,T483-R0479,53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d
-165,src/mvdm-host/softpc.new/base/inc/egacpu.h,2,4,0,3,0,s7-p10-reviewed,T483-R0703;T483-R0704,6f5294aa77cda5216b7378fa1d84f2a8040a3a440279dbd398648268f02fe0bb
-166,src/mvdm-host/softpc.new/base/inc/gmi.h,2,4,0,2,0,s7-p5-reviewed-residual-pending,T483-R0707,34fc10d6c02b7cd3a2c609dc793ef6373f29604933940b92f9b67cf750dfeb21
-167,src/mvdm-host/softpc.new/base/inc/ica.h,2,4,14,6,0,s7-p2-reviewed-residual-pending,T483-R0710,31e096dc998733ceb056eb3af26176051e1ca441d3160782932fefc0534761ab
+165,src/mvdm-host/softpc.new/base/inc/egacpu.h,0,0,0,3,0,s7-p10-reviewed,T483-R0703;T483-R0704,fabd64059e547345e0520a11fd54abf3d3298aad4dd61641c40f349c946d080e
+166,src/mvdm-host/softpc.new/base/inc/gmi.h,0,0,0,2,0,s7-p5-reviewed-residual-pending,T483-R0707,b9ed8a92dd5f758f4acff007422eb42151eec4f7a4982e2cfa87f51857fdfbfe
+167,src/mvdm-host/softpc.new/base/inc/ica.h,1,0,2,6,0,s7-p2-reviewed-residual-pending,T483-R0710,688f70b6522198847952c591f2c9a89e7222251a5468eb64ae425721edd9a34a
 168,src/mvdm-host/softpc.new/base/support/main.c,2,3,0,27,0,s7-p6-reviewed-residual-pending,T483-R0819;T483-R0820;T483-R0821;T483-R0822,f5bb86d7fada1b989786beb80b506b44a66b88767bb67b1afb693f8792877dea
 169,src/mvdm-host/softpc.new/base/support/terminat.c,2,2,0,14,0,s7-p6-reviewed-residual-pending,T483-R0823;T483-R0824,005c813035553aa01a906ec80303e57b509789dfca59add23d38bcc2948f5664
 170,src/mvdm-host/softpc.new/base/video/ega_prts.c,2,2,0,20,0,s7-p13-reviewed,T483-R0835;T483-R0836,c9f8117fef04f59a161f8fced9d404b7c7e7cba2e00efc49e3c373b7168a7f3c

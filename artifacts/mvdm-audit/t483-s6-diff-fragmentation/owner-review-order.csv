@@ -148,9 +148,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 159,src/mvdm-host/softpc.new/base/bios/reset.c,2,0,2,2,38,0,160,s7-p7-reviewed-residual-pending,02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449
 160,src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c,2,2,0,2,3,0,161,s7-p17-reviewed,a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68
 162,src/mvdm-host/softpc.new/base/ccpu386/ntthread.h,2,3,0,3,0,0,164,s7-p21-reviewed,53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d
-163,src/mvdm-host/softpc.new/base/inc/egacpu.h,2,4,0,4,3,0,165,s7-p10-reviewed,6f5294aa77cda5216b7378fa1d84f2a8040a3a440279dbd398648268f02fe0bb
-164,src/mvdm-host/softpc.new/base/inc/gmi.h,2,4,0,4,2,0,166,s7-p5-reviewed-residual-pending,34fc10d6c02b7cd3a2c609dc793ef6373f29604933940b92f9b67cf750dfeb21
-165,src/mvdm-host/softpc.new/base/inc/ica.h,2,4,14,18,6,0,167,s7-p2-reviewed-residual-pending,31e096dc998733ceb056eb3af26176051e1ca441d3160782932fefc0534761ab
+165,src/mvdm-host/softpc.new/base/inc/ica.h,1,0,2,2,6,0,167,s7-p2-reviewed-residual-pending,688f70b6522198847952c591f2c9a89e7222251a5468eb64ae425721edd9a34a
 166,src/mvdm-host/softpc.new/base/support/main.c,2,3,0,3,27,0,168,s7-p6-reviewed-residual-pending,f5bb86d7fada1b989786beb80b506b44a66b88767bb67b1afb693f8792877dea
 167,src/mvdm-host/softpc.new/base/support/terminat.c,2,2,0,2,14,0,169,s7-p6-reviewed-residual-pending,005c813035553aa01a906ec80303e57b509789dfca59add23d38bcc2948f5664
 168,src/mvdm-host/softpc.new/base/video/ega_prts.c,2,2,0,2,20,0,170,s7-p13-reviewed,c9f8117fef04f59a161f8fced9d404b7c7e7cba2e00efc49e3c373b7168a7f3c
