@@ -1,0 +1,122 @@
+{
+  "packet": "T483 S8 P171",
+  "position": 214,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+  "review_ids": [
+    "T483-R2673",
+    "T483-R2674"
+  ],
+  "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+  "current_sha256": "c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb",
+  "before": {
+    "blocks": 5,
+    "added": 1,
+    "deleted": 388
+  },
+  "after": {
+    "blocks": 5,
+    "added": 1,
+    "deleted": 388
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 214,
+    "remaining": 17,
+    "files": 231,
+    "points": 1912,
+    "lines": 26354,
+    "pending": 1532
+  },
+  "decision": "Native USER32 supplies all four public symbols in the product map. Do not duplicate those definitions. The source itself calls DrawEdge and FillRect via imported pointers. Private original drawing helpers are retained. Changing the provider remains an architectural decision.",
+  "verification": {
+    "scope": "Pinned source, isolated product x86 compile and link controls. One full original body at a time appended to current source; native import libraries and remaining product objects unchanged. No runtime equivalence claim.",
+    "compile": {
+      "current": {
+        "exit": 0,
+        "errors": []
+      },
+      "omit_header": {
+        "exit": 2,
+        "errors": [
+          "C2065: 'POLYPATBLT': undeclared identifier",
+          "C2146: syntax error: missing ';' before identifier 'ppbData'",
+          "C2065: 'ppbData': undeclared identifier",
+          "C2109: subscript requires array or pointer type"
+        ]
+      },
+      "FillRect": {
+        "exit": 2,
+        "errors": [
+          "C2065: 'COLOR_ENDCOLORS': undeclared identifier"
+        ]
+      },
+      "InvertRect": {
+        "exit": 0,
+        "errors": []
+      },
+      "DrawFrameControl": {
+        "exit": 0,
+        "errors": []
+      },
+      "DrawEdge": {
+        "exit": 0,
+        "errors": []
+      }
+    },
+    "link": {
+      "current": {
+        "exit": 0,
+        "diagnostics": [
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommHandle' specified multiple times; using first specification",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommShadowMSR' specified multiple times; using first specification",
+          "current.exp : warning LNK4070: /OUT:wow32.dll directive in .EXP differs from output filename 'O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p171\\current.dll'; ignoring directive"
+        ]
+      },
+      "InvertRect": {
+        "exit": 1120,
+        "diagnostics": [
+          "user32.lib(USER32.dll) : error LNK2005: _InvertRect@8 already defined in InvertRect.obj",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommHandle' specified multiple times; using first specification",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommShadowMSR' specified multiple times; using first specification",
+          "InvertRect.exp : warning LNK4070: /OUT:wow32.dll directive in .EXP differs from output filename 'O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p171\\InvertRect.dll'; ignoring directive",
+          "InvertRect.obj : error LNK2019: unresolved external symbol _UserPatBlt@24 referenced in function _InvertRect@8",
+          "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p171\\InvertRect.dll : fatal error LNK1120: 1 unresolved externals"
+        ]
+      },
+      "DrawFrameControl": {
+        "exit": 1120,
+        "diagnostics": [
+          "user32.lib(USER32.dll) : error LNK2005: _DrawFrameControl@16 already defined in DrawFrameControl.obj",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommHandle' specified multiple times; using first specification",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommShadowMSR' specified multiple times; using first specification",
+          "DrawFrameControl.exp : warning LNK4070: /OUT:wow32.dll directive in .EXP differs from output filename 'O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p171\\DrawFrameControl.dll'; ignoring directive",
+          "DrawFrameControl.obj : error LNK2019: unresolved external symbol _UserAssert@4 referenced in function _DrawFrameControl@16",
+          "DrawFrameControl.obj : error LNK2019: unresolved external symbol _UserCreateFontIndirectW@4 referenced in function _DrawFrameControl@16",
+          "DrawFrameControl.obj : error LNK2019: unresolved external symbol _UserSetBkMode@8 referenced in function _DrawFrameControl@16",
+          "DrawFrameControl.obj : error LNK2019: unresolved external symbol _UserSelectFont@8 referenced in function _DrawFrameControl@16",
+          "DrawFrameControl.obj : error LNK2019: unresolved external symbol _UserDeleteObject@4 referenced in function _DrawFrameControl@16",
+          "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p171\\DrawFrameControl.dll : fatal error LNK1120: 5 unresolved externals"
+        ]
+      },
+      "DrawEdge": {
+        "exit": 1169,
+        "diagnostics": [
+          "user32.lib(USER32.dll) : error LNK2005: _DrawEdge@16 already defined in DrawEdge.obj",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommHandle' specified multiple times; using first specification",
+          "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommShadowMSR' specified multiple times; using first specification",
+          "DrawEdge.exp : warning LNK4070: /OUT:wow32.dll directive in .EXP differs from output filename 'O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p171\\DrawEdge.dll'; ignoring directive",
+          "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p171\\DrawEdge.dll : fatal error LNK1169: one or more multiply defined symbols found"
+        ]
+      }
+    }
+  }
+}
