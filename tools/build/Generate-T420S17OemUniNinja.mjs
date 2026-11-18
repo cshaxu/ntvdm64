@@ -47,7 +47,7 @@ writeFileSync(`${build}/cmd-tail-source.sha256`, createHash("sha256").update(com
 
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
-  "/FI", `\"${root}/src/compat/include/nt.h\"`,
+  "/FI", `\"${root}/src/non-mvdm/public/sdk/inc/nt.h\"`,
   "/I", `\"${root}/src/mvdm-host/inc\"`,
   "/I", `\"${root}/src/mvdm-host/oemuni\"`,
   "/I", `\"${root}/src/ntvdm-exe/softpc/include\"`,

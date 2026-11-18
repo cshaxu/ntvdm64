@@ -376,7 +376,7 @@ USER services or establish equivalence of all modern system metrics.
 ### T483 S6 P22 owner-approved input membership extraction
 
 The owner approves retiring non-mvdm/windows/core/ntuser/kernel/input.c,
-retaining AddAttachment and Recalc2 in src/compat/wow_input_membership.c with
+retaining AddAttachment and Recalc2 in src/wow32-dll/source/wow_input_membership.c with
 provenance. Preserve both original algorithms and the existing explicit
 current-thread argument. This scoped extraction does not admit the omitted
 NT4 kernel input queues or change modern USER32 input ownership.
@@ -394,8 +394,7 @@ change the modern USER ownership boundary.
 
 The owner approves retiring windows/core/ntuser/client/client.c and retaining
 its eight selected functions in five units. WOW32 owns class registration,
-dialog memory callbacks and control state. Compat retains default window bits
-and client dispatch.
+dialog memory callbacks, control state, default window bits and client dispatch.
 Preserve original bodies,ABI and existing binding contracts,including original
 ntcftxt.h registration. This retires source-selection scaffolding,not original
 algorithms;it does not establish minimality of the registration or wait adapters.
@@ -431,7 +430,7 @@ exception for owner decision before extraction.
 ### T483 S6 P28 owner-approved dialog pointer extraction
 
 Retire the OpenNT windows/core/ntuser/kernel/miscutil.c subset. Move
-SetDialogPointer, lines 24–37, to src/compat/wow_dialog_pointer.c with
+SetDialogPointer, lines 24–37, to src/wow32-dll/source/wow_dialog_pointer.c with
 its original body, types and x86 calling convention. Keep the existing
 window state and dialog layout bindings.
 
@@ -459,3 +458,23 @@ OpenNT windows/core/ntuser/kernel/random.c subset and preserve only the
 original xxxGetControlBrush, lines 208–232, with its symbol, signature and
 calling convention. The sysBmpStyles table in compat keeps the 16 production
 rows from windows/core/ntuser/kernel/inctlpan.c:79–94 in original order.
+
+
+### T483 S11 P7 — approved NT and XACTSRV declaration subsets
+
+Both headers originate in OpenNT revision
+`5c5b979ec08c17d3ca2eb70e8aad62d26515d01c`. The x86 and x64 host
+compilers consume `src/non-mvdm/public/sdk/inc/nt.h` at the original SDK
+path. The B-owned SDK type bindings and surrogate PEB/TEB remain in
+`src/compat/include`. Historical process, registry and runtime declarations
+are selected by the C header. Local RTL and native imports share the
+original undecorated declaration context. The product header guard preserves
+the existing value of the historical NT_INCLUDED build selector.
+
+The seven selected XACTSRV sources consume the original spelling of
+`ds/netapi/xactsrv/xactsrvp.h`. Its host subset excludes the retired server
+and authentication header dependencies and preserves the release debug
+contract. Owner-approved raw mirror differences are 53 lines for nt.h
+and 24 for xactsrvp.h, offset by 14 restored lines in its seven callers.
+The B exceptions are restricted to the original dialog child-list lookup
+and the USER object ownership table in the x86 WOW32 link.

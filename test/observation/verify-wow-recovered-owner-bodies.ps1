@@ -28,7 +28,7 @@ $checks = @(
 if ($InputOnly) { $checks = @($checks | Where-Object { $_.File -eq 'input.c' }) }
 foreach ($check in $checks) {
     $path = if ($check.File -eq 'input.c') {
-        Join-Path $RepositoryRoot 'src/compat/wow_input_membership.c'
+        Join-Path $RepositoryRoot 'src/wow32-dll/source/wow_input_membership.c'
     } else { Join-Path $RepositoryRoot ('src/non-mvdm/windows/core/ntuser/kernel/' + $check.File) }
     $mirror = [IO.File]::ReadAllText($path)
     if ($check.File -ne 'input.c' -and $mirror -match '(?<!\r)\n') { throw "Non-original LF in mirror: $path" }

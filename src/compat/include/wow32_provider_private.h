@@ -2,7 +2,6 @@
 #define ADAPTER_MVDM_HOST_OUT_WIN32_WOW32_PROVIDER_PRIVATE_H
 
 #include <windows.h>
-#include <wingdip.h>
 #include "wow_control_message_abi.h"
 
 
@@ -55,7 +54,8 @@ int WINAPI DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW, HWND,
 HFONT WINAPI GetHFONT(HDC);
 DWORD WINAPI GetGlyphOutlineWow(HDC, UINT, UINT, LPGLYPHMETRICS, DWORD,
     LPVOID, const MAT2 *);
-BOOL GetETM(HDC, EXTTEXTMETRIC *);
+struct _EXTTEXTMETRIC;
+BOOL GetETM(HDC, struct _EXTTEXTMETRIC *);
 int AddFontResourceTracking(LPCSTR, UINT);
 int RemoveFontResourceTracking(LPCSTR, UINT);
 void UnloadNetworkFonts(UINT);

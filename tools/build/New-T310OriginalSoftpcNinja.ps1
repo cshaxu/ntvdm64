@@ -772,7 +772,7 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # `v7vga.rom` package already retained by mvdm-softpc-firmware rather than
 # fabricating an unavailable `vga.rom` alias.
 $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" ' +
     '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
@@ -781,7 +781,7 @@ $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
 $redirBaseFlags = $baseFlags.Replace('/FI "' + (NinjaPath $softpcSymbolCompat) + '" ', '')
 # Authored adapters consume the selected interfaces, not the SoftPC profile.
 $authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" '
+    '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" '
 $authoredSoftpcFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ')
 $ccpuFlags = $baseFlags
 $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
@@ -1152,7 +1152,8 @@ $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
 }
 $hostCompatObject = 'obj/opennt-abi-host-compat/opennt_support_rtl.obj'
 $graph.Add('build ' + $hostCompatObject + ': cc ' + (NinjaPath $hostCompatSource))
-$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$rtlFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT'
+$graph.Add('  cflags = ' + $rtlFlags)
 $adapterWin32Objects += $hostCompatObject
 $graph.Add('build common-opennt-compat.lib: lib ' + $hostCompatObject)
 $consoleGridObject = 'obj/opennt-abi-host-compat/console_grid.obj'
@@ -1655,7 +1656,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
     $graph.Add('build run16-gui-wait-target.exe: gui_wait_target_link obj/tests/run16_gui_wait.obj')
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/opennt_support_rtl.c')))
-    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /Gy')
+    $graph.Add('  cflags = ' + $rtlFlags + ' /Gy')
     $graph.Add('build obj/run16/rpc_client_core.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/base_srv/base_rpc_client_core.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseAdapterFlags + ' /I obj/basesrv')
     $graph.Add('build obj/run16/rpc_client_launch.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/base_srv/base_rpc_client_launch.c')) + ' | obj/basesrv/service.h')

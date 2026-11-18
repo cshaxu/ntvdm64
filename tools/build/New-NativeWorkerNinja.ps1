@@ -22,7 +22,7 @@ $includes=@([regex]::Matches($baseFlags,'/I "[^"]+"')|ForEach-Object {$_.Value})
 $nativeCompileFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00'
 $nativeFlags=$nativeCompileFlags+' '+($includes -join ' ')+' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'" /I obj/basesrv'
 if($Component -eq 'Service'){
- $nativeFlags+=' /we4312 /FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/inc'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/server'))+'"'
+ $nativeFlags+=' /we4312 /FI "'+(NP (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/inc'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/server'))+'"'
 }
 $edges=@{}
 foreach($match in [regex]::Matches($text,'(?m)^build ([^\r\n]+): ([^\r\n]+)\r?\n((?:[ \t]+[^\r\n]*\r?\n)*)')) {
@@ -137,6 +137,10 @@ function Add-Edge([string]$target) {
   $flags=$nativeCompileFlags+' /I "'+(NP (Join-Path $root 'src'))+'"'
   if($Component -eq 'Service'){$flags+=' /we4312'}
   if($source -match '/src/lib-nxvm/'){$flags+=' /I "'+(NP (Join-Path $root 'src/lib-nxvm'))+'"'}
+ }elseif($source -match '/src/compat/'){
+  $graph.Add('build '+$target+': cc '+$source)
+  $flags=$nativeCompileFlags
+  if($Component -eq 'Service'){$flags+=' /we4312'}
  }else{
   $graph.Add('build '+$target+': cc '+$source+' | '+$generatedHeaders)
   $flags=$nativeFlags
@@ -159,13 +163,15 @@ function Add-Edge([string]$target) {
    if($define.Value -notmatch '^/D(_X86_|CPU_[A-Z0-9_]+|NEW_CPU|CCPU|C_VID|SPC386|SIM32|V7VGA|NTVDM|ANSI|PROD|WIN32|WINNT|MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION|_NO_CRT_STDIO_INLINE|_WIN32_WINNT)($|=)'){$flags+=' '+$define.Value}
   }
  }
- if($target -in @('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')){$flags+=' /DNTOS_KERNEL_RUNTIME'}
+ if($target -in @('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')){
+  $flags+=' /DNTOS_KERNEL_RUNTIME /FI "'+(NP (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h'))+'"'
+ }
  if($target -eq 'obj/tests/rtl_x86_fixture.obj'){$flags+=' /DOPENNT_ENVIRONMENT_ONLY'}
  if($target -eq 'obj/opennt-base-client/classifier.obj'){$flags+=' /FI "'+(NP (Join-Path $root 'src/common/base_srv/legacy_classifier_arch.h'))+'"'}
  if($target -eq 'obj/run16/rpc_client_launch.obj'){
   # This existing client imports historical local Base message declarations.
   # Keep its source-facing ABI header, without injecting it into UI/worker TUs.
-  $flags+=' /FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'"'
+  $flags+=' /FI "'+(NP (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h'))+'"'
  }
  if($target -like 'obj/ntvwm/*'){$flags+=' /I frontend-font'}
  $graph.Add('  cflags = '+$flags)

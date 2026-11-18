@@ -65,6 +65,9 @@ foreach($source in $sources) {
         $unitFlags=$compileFlags+' /I "'+(NP (Join-Path $root 'src'))+'"'
         if($source -match '^src/lib-win32/process-hook/[^/]+[.]c$'){$unitFlags+=' /std:c11'}
         $graph.Add('  cflags = '+$unitFlags)
+    }elseif($source.StartsWith('src/compat/')){
+        $graph.Add($edge)
+        $graph.Add('  cflags = '+$compileFlags)
     }else{
         $graph.Add($edge+' | obj/basesrv/service.h')
     }
@@ -72,7 +75,7 @@ foreach($source in $sources) {
         $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/common/base_srv/legacy_classifier_arch.h'))+'"')
     }
     if($source -eq 'src/non-mvdm/base/ntos/rtl/error.c') {
-        $graph.Add('  cflags = $cflags /DNTOS_KERNEL_RUNTIME')
+        $graph.Add('  cflags = $cflags /DNTOS_KERNEL_RUNTIME /FI "'+(NP (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h'))+'"')
     }
     $manifest += @{path=$source;sha256=(Get-FileHash (Join-Path $root $source) -Algorithm SHA256).Hash;object=$object}
 }

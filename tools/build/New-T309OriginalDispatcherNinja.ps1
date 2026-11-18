@@ -61,7 +61,7 @@ $includes = @(
     'src/mvdm-host/softpc.new/base/inc'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM /DCPU_40_STYLE /DCCPU /DC_VID /DNEW_CPU /DPROD ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include/error_abi.h')) + '" ' +
     ($includes -join ' ')
 

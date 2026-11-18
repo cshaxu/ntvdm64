@@ -40,7 +40,7 @@ $environmentNinja = $environment.Replace('\', '/')
 # applies the same source form to both architecture graphs; it does not select
 # a provider or create a runtime route.
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +
-    '/FI ' + $root + '/src/compat/include/nt.h ' +
+    '/FI ' + $root + '/src/non-mvdm/public/sdk/inc/nt.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/softpc/include/mvdm_command_registers.h ' +
     '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/base/inc ' +

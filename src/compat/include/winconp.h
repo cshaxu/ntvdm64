@@ -1,15 +1,11 @@
 #ifndef OPENNT_SUPPORT_WINCONP_H
 #define OPENNT_SUPPORT_WINCONP_H
 
-/* DIVERGENCE(ADAPTER-WIN32-034): preserve all other original private-console
- * declarations verbatim, but prevent its DLL-import declaration from being
- * attached to the one ANSI layout query supplied by console_client.c. */
-#define GetConsoleKeyboardLayoutNameA opennt_private_GetConsoleKeyboardLayoutNameA
-#include "../../non-mvdm/public/internal/windows/inc/winconp.h"
-#undef GetConsoleKeyboardLayoutNameA
+#include <windows.h>
 
-BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR layout_name);
-/* The original COMMAND keyboard caller queries the frontend's Console. */
+BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR);
 UINT WINAPI MvdmGetConsoleCP(void);
+#define GetConsoleKeyboardLayoutName GetConsoleKeyboardLayoutNameA
 #define GetConsoleCP MvdmGetConsoleCP
+
 #endif

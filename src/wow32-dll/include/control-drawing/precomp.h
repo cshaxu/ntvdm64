@@ -4,7 +4,7 @@
 #include "wow_edit_native_bindings.h"
 #include "wow_edit_entry_bindings.h"
 #define COLOR_MAX WOW_EDIT_COLOR_COUNT
-#include "compat/include/opennt_user_multipass.h"
+#include "wow32-dll/include/opennt_user_multipass.h"
 
 /* OPENNT-HOST-077: resource/metric leaves only. Original DrawFrame retains
  * its geometry, raster operation, brush selection and return behavior. */
@@ -25,10 +25,7 @@ BOOL WINAPI IsSysFontAndDefaultMode(HDC);
 #define CH_PREFIX TEXT('&')
 LONG GetPrefixCount(LPCWSTR lpstr, int cb, LPWSTR lpstrCopy, int cbCopy);
 /* OPENNT-HOST-112: reuse the already selected RTL allocation service. */
-PVOID WINAPI OpenNtUserRtlAllocMem(SIZE_T);
-VOID WINAPI OpenNtUserRtlFreeMem(PVOID);
-#define UserRtlAllocMem OpenNtUserRtlAllocMem
-#define UserRtlFreeMem OpenNtUserRtlFreeMem
+#include "compat/include/wow_char_conversion_abi.h"
 #define UserGetTextExtentPointW GetTextExtentPointW
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
 /* OPENNT-HOST-115: original text/underline algorithm, public GDI leaves. */

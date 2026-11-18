@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "compat/include/nt.h"
+#include "non-mvdm/public/sdk/inc/nt.h"
 /* wowuserp.h normally receives this exact private callback typedef through
  * the original precompiled USER declarations.  The fixture needs only the
  * registration record, so retain the ABI spelling without importing the

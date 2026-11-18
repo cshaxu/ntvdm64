@@ -38,7 +38,7 @@ $includeRoots = @(
     'src/non-mvdm/private/inc') | ForEach-Object {
         '/I "' + (Join-Path $root $_).Replace('\', '/') + '"'
     }
-$nativeHeader = (Join-Path $root 'src/compat/include/nt.h').Replace('\', '/')
+$nativeHeader = (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h').Replace('\', '/')
 $threadHeader = (Join-Path $root 'src/compat/include/thread_start_compat.h').Replace('\', '/')
 $cflags = '/nologo /TC /c /std:c11 /MT /W4 /Gy /showIncludes /DWIN32 /DWINNT /DNTVDM /DVDMREDIR_DLL /DCPU_40_STYLE /DCCPU /FI "' +
     $nativeHeader + '" /FI "' + $threadHeader + '" ' + ($includeRoots -join ' ')

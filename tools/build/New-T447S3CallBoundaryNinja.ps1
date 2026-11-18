@@ -44,7 +44,7 @@ $units = @(
     @('capture_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/Gy'),
     @('capture_tls', 'src/compat/opennt_support_rtl.c', '/Gy'),
     @('def_bits_fixture', 'test/adapter-mvdm-host-out/wow/wow_def_window_bits_fixture.c', ''),
-    @('def_bits_owner', 'src/compat/wow_default_window_bits.c', ''),
+    @('def_bits_owner', 'src/wow32-dll/source/wow_default_window_bits.c', ''),
     @('def_bits_boundary', 'src/wow32-dll/source/wow_private_user_compat.c', '/Gy'),
     @('def_bits_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', ''),
     @('def_bits_state', 'src/wow32-dll/source/wow_default_message_bindings.c', ''),
@@ -61,8 +61,8 @@ $units = @(
     @('button_focus_probe', 'test/adapter-mvdm-host-out/wow/wow_button_focus_service_probe.c', ''),
     @('string_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_string_fixture.c', ''),
     @('string_owner', 'src/non-mvdm/windows/core/ntuser/rtl/random.c', ''),
-    @('string_conversion', 'src/non-mvdm/windows/core/ntuser/rtl/chartran.c', ''),
-    @('string_services', 'src/wow32-dll/source/ntuser_rtl_compat.c', ''),
+    @('string_conversion', 'src/non-mvdm/windows/core/ntuser/rtl/chartran.c', ('/DWOW_ORIGINAL_LARGE_STRING_LAYOUT /FI "' + (NinjaValue (Join-Path $root 'src/non-mvdm/windows/core/ntuser/inc/user.h')) + '"')),
+    @('string_services', 'src/compat/ntuser_rtl_compat.c', ''),
     @('dialog_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_call_fixture.c', ''),
     @('window_access_fixture', 'test/adapter-mvdm-host-out/wow/wow_window_client_message_fixture.c', ''),
     @('window_access_adapter', 'src/wow32-dll/source/wow_window_client_access_bindings.c', ''),
@@ -118,7 +118,7 @@ $modalLifetimeFlags = '/I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-h
 $units += ,@('modal_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c', '')
 $units += ,@('modal_lifetime_body', 'src/non-mvdm/windows/core/ntuser/client/dlgmgr.c', $modalLifetimeFlags)
 $units += ,@('modal_lifetime_end', 'src/non-mvdm/windows/core/ntuser/client/dlgend.c', $modalLifetimeFlags)
-$units += ,@('modal_lifetime_pointer', 'src/compat/wow_dialog_pointer.c', $modalLifetimeFlags)
+$units += ,@('modal_lifetime_pointer', 'src/wow32-dll/source/wow_dialog_pointer.c', $modalLifetimeFlags)
 $navigationFlags = '/DWOW_ORIGINAL_EDIT_CLIENT /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-client')) + '"'
 $units += ,@('navigation_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c', '')
 $units += ,@('navigation_graph', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $navigationFlags)
@@ -216,7 +216,7 @@ $lines = [Collections.Generic.List[string]]::new()
 $lines.Add('ninja_required_version = 1.10')
 $lines.Add('environment = ' + (NinjaValue $environment))
 # Match the product's ABI declaration entry before control-local RTL aliases.
-$lines.Add('cflags = /nologo /TC /MT /O2 /W4 /Gz /DSTD_CALL /DUNICODE /D_UNICODE /showIncludes /FI "' + (NinjaValue (Join-Path $root 'src/compat/include/nt.h')) + '" ' + ($includes -join ' '))
+$lines.Add('cflags = /nologo /TC /MT /O2 /W4 /Gz /DSTD_CALL /DUNICODE /D_UNICODE /showIncludes /FI "' + (NinjaValue (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" ' + ($includes -join ' '))
 $lines.Add('rule cc')
 $lines.Add('  command = cmd /d /c ""$environment" '+$compilerCommand+' $cflags $extra /c /Fo$out $in"')
 $lines.Add('  deps = msvc')

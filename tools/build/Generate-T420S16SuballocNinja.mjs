@@ -12,7 +12,7 @@ mkdirSync(`${build}/obj`, { recursive: true });
 
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/DWIN32", "/DWINNT",
-  "/FI", `\"${root}/src/compat/include/nt.h\"`,
+  "/FI", `\"${root}/src/non-mvdm/public/sdk/inc/nt.h\"`,
   "/I", `\"${root}/src/mvdm-host/inc\"`,
   "/I", `\"${root}/src/compat/include\"`,
   "/I", `\"${root}/src/non-mvdm/public/sdk/inc\"`

@@ -21,7 +21,7 @@ New-Item -ItemType Directory -Force $build | Out-Null
 # specifies WIN_32 and demexp.h exposes its original debug declarations only
 # under DEVL.  This archive contains no provider implementation or route.
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +
-    '/FI ' + $root + '/src/compat/include/nt.h ' +
+    '/FI ' + $root + '/src/non-mvdm/public/sdk/inc/nt.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/softpc/include/error_abi.h ' +
     '/I ' + $root + '/src ' +
     '/I ' + $root + '/src/compat/include ' +

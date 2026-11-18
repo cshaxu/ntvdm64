@@ -9,7 +9,7 @@
 | Field | Record |
 | --- | --- |
 | Original owner request | 合并B层和C层好了，先不管BC之间的相互依赖。接下来在本T中 准入一个S11，清理A->B的违规，把该挪到A的东西从B挪到A |
-| Objective | Both A libraries (`lib-win32`, `lib-nxvm`) build independently of the merged BC layer (`compat`, `mvdm-host`, `non-mvdm`). BC internal edges are outside S11. |
+| Objective | Both A libraries build independently of B through F. P7 also isolates B from C through F apart from the two approved WOW32 exceptions. |
 | Files And ABI Surface | Audit production compilation and link inputs for A-owned code across x86 and x64. Remove inherited historical build inputs. Move genuinely generic declarations or implementations from compat to their owning A library when a real A caller requires them. Preserve existing calling conventions, exported names, ordinals and caller behavior. |
 | Reference Baseline | The [WOW32 generator](../../tools/build/New-T404S5Wow32ProviderNinja.ps1) compiles [the A-owned CRT unit](../../src/lib-win32/crt-compat/crt_compat.c) with a forced compat nt.h. Its explicit includes are standard headers. Also inspect native service flags in [the native generator](../../tools/build/New-NativeWorkerNinja.ps1) and the [x86 generator](../../tools/build/New-T310OriginalSoftpcNinja.ps1). |
 | Applicable Rules | Apply the architecture, coding, source-layout and execution authorities indexed in [the guide](../README.md). Keep the two A libraries independent. Preserve historical declarations with their owner unless the source and actual caller justify relocation. Other layer violations are deferred. |
@@ -20,7 +20,8 @@
 | Admission And Approval | Owner reopened T483 for S11 following accepted S10. |
 | P3 scope amendment | Owner approved moving the extracted RegisterClassWOWA translation unit from compat to wow32-dll, which owns its class context and registration bindings. Preserve the source body, original x86 flags, exports and the parent import. Verify the production graph and class-client behavior. |
 | P6 scope amendment | Move the four WOW32-only brush, FNID, control state and dialog memory units from compat to their binding owner. Preserve their contents and x86 build contracts. |
-| Non-goals | Other B-layer dependencies, including RTL and forwarding headers, remain outside this batch. |
+| P7 scope amendment | The owner admitted removal of B dependencies on C through F, including generated build inputs, compatibility headers and linked providers. Verify the final cached x86/x64 builds, publish eleven images to both destinations, run Full verification, commit and push. |
+| Non-goals | Retain the approved x86 WOW32 dialog lookup and USER object table exceptions. Other layers and guest binaries are outside this packet. |
 | Expected Markers | No BC header, forced include or resolved BC provider in A-owned production units. |
 | Similar-Issue Sweep | Check both A libraries across native, worker, WOW32 and Hook builds. |
 | Reporting Requirements | Record affected objects, flags, dependency paths and ownership decisions. |
@@ -28,6 +29,8 @@
 | Exit Criteria | Evidence covers every selected A unit, relevant tests and verified product delivery. |
 
 ## Current Technical Baseline
+
+P7 delivered the compat boundary cleanup. The owner retained two B-to-C exceptions in the WOW32 build, `_GetDlgItem` and `gabObjectCreateFlags`. The four other WOW units have moved to their WOW32 owner. The three character conversion services now build in compat. The native Console provider retains keyboard layout and code page ownership. The x86 preflight, formal WOW32 graph, control string and dialog creator fixtures passed. The owner approved the XACTSRV net increase of 10 raw mirror lines and the NT SDK subset of 53 raw mirror lines. Both are in their original non-MVDM locations. All seven XACTSRV trial objects matched the forty production code sections. Cached x86 and x64 builds passed. Both release destinations matched all eleven manifest hashes. The Full suite passed all twenty gates, including the version rejection fixtures and DOS4GW/NESticle. The [P7 dependency and delivery record](../../artifacts/mvdm-audit/t483-s11-p7-compat-boundary.json) identifies the two exceptions and the checked production graphs.
 
 S11 P6 moved wow_control_brush, wow_control_fnid, wow_control_state and
 wow_dialog_memory to wow32-dll/source. Each source and all seven object code

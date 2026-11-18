@@ -33,7 +33,7 @@ BOOL WINAPI wow_class_words_destroy_native(wow_class_lookup_entry **,
     HINSTANCE, BOOL);
 /* Original windows/core/ntuser/inc/user.h declaration. The captured Unicode
  * descriptor is call-local; only the two client pointers survive register. */
-#include "compat/include/opennt_user_multipass.h"
+#include "wow32-dll/include/opennt_user_multipass.h"
 /* Caller holds its class-publication lock across all list operations.
  * Original server registration can publish hTaskWow. cWndReferenceCount tracks enrolled window
  * associations; acquire/release independently counts storage borrowers.

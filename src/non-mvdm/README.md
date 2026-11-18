@@ -2671,7 +2671,7 @@ extraction retains _GetDlgItem in src/compat/wow_dialog_lookup.c and retires
 this mirror. Historical provenance and review records remain evidence only.
 
 T483 S6 P22 supersedes the kernel/input.c subset admission: AddAttachment and
-Recalc2 now reside in src/compat/wow_input_membership.c. Historical mirror
+Recalc2 now reside in src/wow32-dll/source/wow_input_membership.c. Historical mirror
 records remain provenance only; no other kernel input services are admitted.
 
 T483 S6 P23 supersedes kernel/handtabl.c mirror admission. Its consumed

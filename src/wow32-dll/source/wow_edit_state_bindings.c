@@ -1,6 +1,6 @@
 #include "wow_edit_state_bindings.h"
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#include "compat/include/opennt_usercli_multipass.h"
+#include "wow32-dll/include/opennt_usercli_multipass.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #include "wow_edit_entry_bindings.h"
 #include "wow_user_borrow_scope.h"

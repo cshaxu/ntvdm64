@@ -91,23 +91,20 @@ if (@(Compare-Object $expectedUser $actualUser).Count) {
 if ($link -match '\bobj/compat/wow-(?:class-client|control-brush|control-state|dialog-memory)\.obj\b') {
     throw 'The WOW32 link still selects a former compat object.'
 }
-foreach ($unit in @('wow_class_client','wow_dialog_memory','wow_control_state','wow_control_fnid','wow_control_brush')) {
+foreach ($unit in @('wow_class_client','wow_dialog_memory','wow_control_state','wow_control_fnid','wow_control_brush','wow_client_dispatch','wow_default_window_bits','wow_dialog_pointer','wow_input_membership')) {
     $object = "obj/wow32-dll/$unit.obj"
     if (($link -split '\s+') -notcontains $object -or
         $ninja -notmatch ('(?m)^build ' + [regex]::Escape($object) + ': cc [^\r\n]*/src/wow32-dll/source/' + $unit + '\.c\s*$')) {
         throw "Missing WOW32-owned source or link input: $unit"
     }
 }
-foreach ($unit in @('wow-client-dispatch','wow-default-window-bits','wow-control-rect','wow-dialog-pointer')) {
+foreach ($unit in @('wow-control-rect')) {
     if ($link -notmatch ('\bobj/compat/' + $unit + '\.obj\b')) {
         throw "Missing extracted USER client unit: $unit"
     }
 }
 if ($link -notmatch '\bobj/compat/wow-object-ownership\.obj\b') {
     throw 'The compat object ownership table must be linked into the formal graph.'
-}
-if ($link -notmatch '\bobj/compat/wow-input-membership\.obj\b') {
-    throw 'The compat input membership must be linked into the formal graph.'
 }
 if ($link -notmatch '\bobj/compat/wow-dialog-lookup\.obj\b') {
     throw 'The compat dialog lookup must be linked into the formal graph.'
@@ -121,11 +118,11 @@ if ($link -notmatch '\bobj/wow32-dll/wow_button_resources\.obj\b' -or
 $targetSources = @([regex]::Matches([IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/sources')),
     '(?m)^\s*([A-Za-z0-9_]+)\.c\s*\\?\s*$') |
     ForEach-Object { $_.Groups[1].Value })
-# The target-only manifest has 29 bounded host bindings. Its full content is
+# The target-only manifest has 28 bounded host bindings. Its full content is
 # checked below against the link edge; this count catches accidental manifest
 # expansion or truncation without treating the earlier 21-entry recovery
 # checkpoint as the current production contract.
-if ($targetSources.Count -ne 29) { throw "Expected 29 WOW32 DLL bindings, found $($targetSources.Count)." }
+if ($targetSources.Count -ne 28) { throw "Expected 28 WOW32 DLL bindings, found $($targetSources.Count)." }
 $missingBindings = @($targetSources | Where-Object {
     $link -notmatch ('\bobj/wow32-dll/' + [regex]::Escape($_) + '\.obj\b')
 })

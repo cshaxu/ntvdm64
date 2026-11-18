@@ -21,7 +21,7 @@ New-Item -ItemType Directory -Force $build | Out-Null
 # existing same-shaped adapter boundary required by original demsrch.c; only
 # its declarations are compiled here, never its control implementation.
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +
-    '/FI ' + $root + '/src/compat/include/nt.h ' +
+    '/FI ' + $root + '/src/non-mvdm/public/sdk/inc/nt.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/monitor/include/monitor_context.h ' +
     '/I ' + $root + '/src ' +

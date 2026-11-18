@@ -44,7 +44,7 @@ try {
     const buildResult=spawnSync(ninja,['-j4','ntsrv.exe','obj/worker/stub.obj'],
         {cwd:build,env:toolEnv,windowsHide:true,stdio:['ignore',log,log],timeout:120000});
     assert.equal(buildResult.status,0,`Ninja failed: ${buildResult.error||''}; see idle-build.log`);
-    const flags=`/nologo /c /MT /W4 /Gy /I obj/basesrv /I "${root}/src"`;
+    const flags=`/nologo /c /MT /W4 /Gy /I obj/basesrv /I "${root}/src" /I "${root}/src/non-mvdm/public/internal/base/inc"`;
     compile(`cl.exe ${flags} "${root}/test/broker/ntsrv_idle_test.c" /Foidle-test.obj`);
     compile('link.exe /nologo /opt:ref /out:idle-test.exe idle-test.obj obj/basesrv/stub.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib');
     compile(`cl.exe ${flags} "${root}/test/broker/ntsrv_idle_client.c" /Foidle-client.obj`);

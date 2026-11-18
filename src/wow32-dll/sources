@@ -13,7 +13,6 @@ ORIGINAL_RESOURCE=../../mvdm/wow32/wow32.rc
 
 SOURCES= \
     wow_bitmap_bindings.c \
-    ntuser_rtl_compat.c \
     wow_callback_frame_lease.c \
     wow_class_client_bindings.c \
     wow_class_words_binding.c \

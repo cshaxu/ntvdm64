@@ -38,7 +38,7 @@ try {
     $ninja = (Get-Command ninja.exe -ErrorAction Stop).Source
     $objects = @('obj/wow32-dll/wow_bitmap_bindings.obj','obj/opennt-user/clres.obj',
         'obj/opennt-user/cldib.obj','obj/adapter-win32/chartran.obj',
-        'obj/wow32-dll/ntuser_rtl_compat.obj')
+        'obj/compat/ntuser_rtl_compat.obj')
     Build 'objects' ('"'+$ninja+'" -C "'+$provider+'" '+($objects -join ' '))
     $compile = & $ninja -C $provider -t commands obj/wow32-dll/wow_bitmap_bindings.obj
     if ($LASTEXITCODE -or @($compile).Count -ne 1) { throw 'Ambiguous production compile command' }

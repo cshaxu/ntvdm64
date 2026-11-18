@@ -25,7 +25,7 @@ Revision History:
 
 --*/
 
-#include "xactsrv_wksta_minimal.h"
+#include "XactSrvP.h"
 
 //
 // Declaration of descriptor strings.

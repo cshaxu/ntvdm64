@@ -53,7 +53,7 @@ $includes = @(
     $includePath = if ([IO.Path]::IsPathRooted($_)) { $_ } else { Join-Path $root $_ }
     '/I "' + (NinjaPath $includePath) + '"'
 }
-$nt = NinjaPath (Join-Path $root 'src/compat/include/nt.h')
+$nt = NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')
 $ntexapi = NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/ntexapi.h')
 $threadCompat = NinjaPath (Join-Path $root 'src/compat/include/thread_start_compat.h')
 $cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DV7VGA /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + $nt + '" /FI "' + $ntexapi + '" /FI "' + $threadCompat + '" ' + ($includes -join ' ')

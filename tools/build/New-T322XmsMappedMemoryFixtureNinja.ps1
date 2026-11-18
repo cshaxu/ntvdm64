@@ -43,7 +43,7 @@ $sources = @(
     'src/ntvdm-exe/session/session.c'
 )
 $cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DCPU_40_STYLE ' +
-    '/FI ' + $root + '/src/compat/include/nt.h ' +
+    '/FI ' + $root + '/src/non-mvdm/public/sdk/inc/nt.h ' +
     '/I ' + $root + '/src ' +
     '/I ' + $root + '/src/compat/include ' +
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +

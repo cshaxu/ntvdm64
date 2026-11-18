@@ -5,9 +5,16 @@
  * the reached subset with public Win32 APIs.  The compatibility TEB/PEB is
  * adapter-private and never exposes a real host pointer to a guest boundary.
  */
-#include <nt.h>
-#include <ntrtl.h>
-#include <crypt.h>
+#define WIN32_NO_STATUS
+#include "include/opennt_support_thread.h"
+#undef WIN32_NO_STATUS
+#include <ntstatus.h>
+
+/* Opaque arguments forwarded to the original Advapi32 entry points. */
+typedef CHAR *PLM_PASSWORD;
+typedef struct _LM_OWF_PASSWORD *PLM_OWF_PASSWORD;
+typedef struct _ENCRYPTED_LM_OWF_PASSWORD *PENCRYPTED_LM_OWF_PASSWORD;
+typedef struct _CLEAR_BLOCK *PLM_SESSION_KEY;
 
 #include <limits.h>
 #include <stdlib.h>

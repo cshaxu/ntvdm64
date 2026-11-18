@@ -2,7 +2,7 @@
 #define WOW_DIALOG_NATIVE_BINDINGS_H
 #include <windows.h>
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
+#include "wow32-dll/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 
 /* ADAPTER-WOW-062: native operation only, after the existing class owner

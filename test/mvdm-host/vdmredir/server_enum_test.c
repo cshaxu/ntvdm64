@@ -1,5 +1,5 @@
 /* Original handler/converters, controlled public NetAPI response. */
-#include "xactsrv_wksta_minimal.h"
+#include "xactsrvp.h"
 #include <stdio.h>
 #include <string.h>
 static unsigned mode,calls,frees,failures,checks;

@@ -1,7 +1,7 @@
 #ifndef NTVDM_COMMAND_TEXT_H
 #define NTVDM_COMMAND_TEXT_H
 
-#include "compat/include/nt.h"
+#include "non-mvdm/public/sdk/inc/nt.h"
 
 /* Original cmdCreateProcess preparation, shared with saved-VM requests.
  * Inputs remain borrowed and unchanged. A NULL environment preserves native

@@ -18,11 +18,11 @@ typedef struct _ZONE_HEADER {
 } ZONE_HEADER, *PZONE_HEADER;
 
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
+#include "wow32-dll/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 
 #define WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
-#include "compat/include/opennt_usercli_multipass.h"
+#include "wow32-dll/include/opennt_usercli_multipass.h"
 #undef WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
 
 /* Original USER initialized its global critical section before controls.

@@ -5,7 +5,10 @@
  * table. Original values and object type/flag definitions are unchanged.
  */
 #include <windows.h>
-#include "compat/include/opennt_user_multipass.h"
+#pragma push_macro("_USER_")
+#undef _USER_
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#pragma pop_macro("_USER_")
 #define WOW_USER_OBJECT_FLAGS_ONLY
 #include "non-mvdm/windows/core/ntuser/kernel/userk.h"
 

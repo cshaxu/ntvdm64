@@ -138,7 +138,6 @@ $providerSupportSources = @(
     (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/chartran.c'),
     (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/random.c'),
     (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/help.c'),
-    (Join-Path $adapterWow 'ntuser_rtl_compat.c'),
     (Join-Path $adapterWow 'wow_public_user_facade.c'),
     # This is the already-admitted narrow historical CRT spelling bridge.  It
     # has no parent-machine state, so the late-loaded DLL may own its copy.
@@ -394,7 +393,7 @@ $includeRoots = @(
     'src/ntvdm-exe/session'
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
-$force = '/FI "' + (Join-Path $root 'src/compat/include/nt.h') + '"'
+$force = '/FI "' + (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h') + '"'
 # Original NT x86 i386mk.inc defaults to /Gz. Keep this DLL's
 # internal ABI; worker-owned cdecl imports need explicit declarations, not a
 # package-wide /Gd override or aliases that conceal different stack cleanup.
@@ -518,8 +517,8 @@ foreach ($userOwner in @('clres', 'cldib', 'rtlinit', 'ntstubs', 'clmenu', 'clgl
         $ninja.Add('  cflags = $cflags $control_user_flags')
     }
 }
-$objects.Add('obj/compat/wow-client-dispatch.obj')
-$ninja.Add('build obj/compat/wow-client-dispatch.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_client_dispatch.c')))
+$objects.Add('obj/wow32-dll/wow_client_dispatch.obj')
+$ninja.Add('build obj/wow32-dll/wow_client_dispatch.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_client_dispatch.c')))
 $classLookupObject = 'obj/opennt-user/class.obj'
 # Original dialog initialization and shared EDIT DS callbacks use the same
 # registered WOW table as LOCAL*. Do not replace these bodies in an adapter.
@@ -560,23 +559,27 @@ $ninja.Add('  cflags = $cflags $control_user_flags')
 $objects.Add($controlFnidObject)
 $ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_fnid.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
-$dialogPointerObject = 'obj/compat/wow-dialog-pointer.obj'
+$dialogPointerObject = 'obj/wow32-dll/wow_dialog_pointer.obj'
 $objects.Add($dialogPointerObject)
-$ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_pointer.c')))
+$ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_dialog_pointer.c')))
 # This must precede global include roots: MVDM also has a precomp.h, whose
 # declarations belong to a different translation-unit contract.
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
+$stringServicesObject = 'obj/compat/ntuser_rtl_compat.obj'
+$objects.Add($stringServicesObject)
+$ninja.Add('build ' + $stringServicesObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/ntuser_rtl_compat.c')))
+$ninja.Add('  cflags = ' + $nativeCflags)
 $controlRectObject = 'obj/compat/wow-control-rect.obj'
 $objects.Add($controlRectObject)
 $ninja.Add('build ' + $controlRectObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_rect.c')))
-$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
+$ninja.Add('  cflags = ' + $nativeCflags + ' /DUNICODE')
 $controlDrawObject = 'obj/opennt-user/control-draw.obj'
 $defaultMessagesObject = 'obj/opennt-user/default-messages.obj'
 $defaultClientObject = 'obj/opennt-user/default-client.obj'
 $objects.Add($defaultClientObject)
 $ninja.Add('build ' + $defaultClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clmsg.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_WINDOW')
-$defaultBitsObject = 'obj/compat/wow-default-window-bits.obj'
+$defaultBitsObject = 'obj/wow32-dll/wow_default_window_bits.obj'
 $privateWordSetterObject = 'obj/opennt-user/private-word-setter.obj'
 # The public private-word access facade calls these original client owners.
 # Keep reader/client/server as distinct objects: selecting only the server
@@ -594,7 +597,7 @@ $objects.Add($privateWordSetterObject)
 $ninja.Add('build ' + $privateWordSetterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/getset.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_SETTER')
 $objects.Add($defaultBitsObject)
-$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_default_window_bits.c')))
+$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_default_window_bits.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $defaultBordersObject = 'obj/opennt-user/default-borders.obj'
 $objects.Add($defaultBordersObject)
@@ -657,9 +660,9 @@ $taskOrderObject = 'obj/opennt-user/taskman.obj'
 $objects.Add($taskOrderObject)
 $ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/taskman.c')))
 $classClientObject = 'obj/wow32-dll/wow_class_client.obj'
-$inputGroupObject = 'obj/compat/wow-input-membership.obj'
+$inputGroupObject = 'obj/wow32-dll/wow_input_membership.obj'
 $objects.Add($inputGroupObject)
-$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_input_membership.c')))
+$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_input_membership.c')))
 $taskInitObject = 'obj/opennt-user/queue.obj'
 $profileObject = 'obj/opennt-user/profile.obj'
 $objects.Add($profileObject)
@@ -679,7 +682,9 @@ foreach ($source in $providerSupportSources) {
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
-    if ($source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
+    if ([IO.Path]::GetFileName($source) -eq 'chartran.c') {
+        $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_LARGE_STRING_LAYOUT /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/inc/user.h')) + '"')
+    } elseif ($source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
         $ninja.Add('  cflags = ' + $nativeCflags)
     } elseif ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
         $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase)) {

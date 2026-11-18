@@ -22,7 +22,7 @@ Revision History:
 
 --*/
 
-#include "xactsrv_wksta_minimal.h"
+#include "XactSrvP.h"
 #include <WinBase.h>          // GetCurrentProcessId prototype
 #include <align.h>
 

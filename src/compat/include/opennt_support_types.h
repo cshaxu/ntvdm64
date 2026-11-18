@@ -1,10 +1,8 @@
 /*
- * Same-shaped subset of the historical OpenNT nt.h surface reached by the
- * original MVDM support libraries.  This is an adapter-owned binding header,
- * not a replacement for the OpenNT platform ABI mirror.
+ * SDK bindings used by the selected OpenNT host declarations.
  */
-#ifndef OPENNT_SUPPORT_NT_H
-#define OPENNT_SUPPORT_NT_H
+#ifndef OPENNT_SUPPORT_TYPES_H
+#define OPENNT_SUPPORT_TYPES_H
 
 /* DIVERGENCE(ADAPTER-WIN32-025): selected original user-mode VDM headers
  * expose their contract declarations when the historical NT base header's
@@ -22,13 +20,8 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 #include <windows.h>
-#include <devioctl.h>
 #include <winternl.h>
 #include "wow_user_declarations.h"
-/* `ntpsapi.h` is a selected original OpenNT declaration subset under
- * opennt-host.  The adapter's type binding is deliberately established
- * first, then the original historical declaration shape is made visible. */
-#include <ntpsapi.h>
 /* Finite original ntdef/ntexapi/ntnls declarations absent from the public
  * Win32 headers. Private NLS/process information is exposed only as opaque
  * pointers; fixed-width strings retain the original ABI layout. */
@@ -138,19 +131,6 @@ typedef struct _STRING64 {
 } STRING64;
 typedef STRING64 UNICODE_STRING64;
 typedef short CSHORT;
-/* This closure links original RTL locally and native RTL through import
- * libraries. Ordinary external declarations cover both without per-function
- * mirror omissions; restore the SDK decoration immediately afterwards. */
-#pragma push_macro("NTSYSAPI")
-#undef NTSYSAPI
-#define NTSYSAPI
-#include <ntrtl.h>
-#include <nturtl.h>
-#pragma pop_macro("NTSYSAPI")
-
-/* Original registry declarations own the query layouts, selectors and calls. */
-#include <ntregapi.h>
-
 /* DIVERGENCE: Original DEM storage declarations require historical
  * devioctl.h and own GetDiskSpaceInformation as an unrelated BOOL helper.
  * Keep the storage carrier visible and remove only the conflicting modern
@@ -244,53 +224,7 @@ NTSTATUS NTAPI NtWaitForMultipleObjects(
 #define MAXULONG ((ULONG)0xFFFFFFFFUL)
 #endif
 
-typedef CURDIR OPENNT_SUPPORT_CURDIR, *POPENNT_SUPPORT_CURDIR;
-
-typedef struct _OPENNT_SUPPORT_PROCESS_PARAMETERS {
-    OPENNT_SUPPORT_CURDIR CurrentDirectory;
-    PVOID Environment;
-    HANDLE ConsoleHandle;
-    /* DIVERGENCE(ADAPTER-WIN32-059): BaseCheckVDM reads only these original
-     * process-start fields; values come from public startup/std-handle APIs. */
-    HANDLE StandardInput, StandardOutput, StandardError;
-    ULONG WindowFlags;
-} OPENNT_SUPPORT_PROCESS_PARAMETERS, *POPENNT_SUPPORT_PROCESS_PARAMETERS;
-
-typedef struct _OPENNT_SUPPORT_PEB {
-    POPENNT_SUPPORT_PROCESS_PARAMETERS ProcessParameters;
-    PVOID ProcessHeap;
-    PRTL_CRITICAL_SECTION FastPebLock;
-    ULONG EnvironmentUpdateCount;
-    /* DIVERGENCE(ADAPTER-WIN32-058): original BaseClient classifier compares
-     * the process image's machine field. This is a local public-API value,
-     * not a cast of the modern PEB or a guest-visible address. */
-    PVOID ImageBaseAddress;
-} OPENNT_SUPPORT_PEB, *POPENNT_SUPPORT_PEB;
-
-typedef struct _OPENNT_SUPPORT_TEB {
-    NT_TIB NtTib;
-    UNICODE_STRING StaticUnicodeString;
-    PWSTR StaticUnicodeBuffer;
-    CLIENT_ID ClientId;
-    /* DIVERGENCE(ADAPTER-WIN32-057): selected original RTL error.c records
-     * the converted NTSTATUS in the historical per-thread LastStatusValue.
-     * This private TLS field is the finite observable carrier; it does not
-     * expose or reinterpret the modern host TEB. */
-    NTSTATUS LastStatusValue;
-    /* Reached historical TEB field: imported x86 DPMI sources locate their
-     * per-thread VDM TIB through this spelling. The value is assigned only
-     * by the monitor's bound-thread carrier and is never a guest value. */
-    PVOID Vdm;
-    /* DIVERGENCE(ADAPTER-WIN32-041): the selected original WOW32 source
-     * stores its per-thread TD through the NT4 TEB's WOW32Reserved slot.
-     * A modern public TEB does not expose that retired product field.  This
-     * adapter-private TLS carrier preserves the source spelling and its
-     * thread-local lifetime; it is host-private and is never a guest value. */
-    PVOID WOW32Reserved;
-} OPENNT_SUPPORT_TEB, *POPENNT_SUPPORT_TEB;
-
-POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID);
-POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID);
+#include "opennt_support_thread.h"
 
 /* winnt.h declares the real process TEB accessor.  Reached original sources
  * need only selected historical fields, so route their spelling to
@@ -318,6 +252,5 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID);
 #ifndef STATUS_VARIABLE_NOT_FOUND
 #define STATUS_VARIABLE_NOT_FOUND ((NTSTATUS)0xC0000100L)
 #endif
-#include <ntioapi.h>
 
 #endif

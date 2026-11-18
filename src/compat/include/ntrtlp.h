@@ -4,7 +4,7 @@
 /* The selected source body is original.  This header supplies only the
  * established standalone declaration boundary for its finite user-mode
  * dependencies; it supplies no environment algorithm. */
-#include <nt.h>
+#include <opennt_support_types.h>
 
 /* `winternl.h` exposes a reduced modern PEB layout.  The original body
  * reaches only these adapter-private historical fields, so bind its source

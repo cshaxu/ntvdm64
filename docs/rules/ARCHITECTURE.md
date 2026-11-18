@@ -21,9 +21,14 @@ on each other within C.
 Apply the rule to each source unit under its owning component, including
 when another product compiles it. Check direct, transitive and forced
 headers, generated build prerequisites, and the providers of linked symbols.
-For A, the [library boundary check](../../tools/audit/verify-library-build-boundary.py)
+For A and B, the [library boundary check](../../tools/audit/verify-library-build-boundary.py)
 verifies production compile commands, compiler-recorded headers and build
 prerequisites. Platform SDK and runtime libraries are outside this table.
+
+The x86 WOW32 build has two approved B-to-C exceptions. In compat,
+`_GetDlgItem` traverses the original USER window layout and
+`gabObjectCreateFlags` supplies the original USER object ownership flags.
+The approval is limited to these two symbols and their C layout dependencies.
 
 Record dependencies on named product images at launch, dynamic load, PE
 import or package validation separately from source dependencies. A shared

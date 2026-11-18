@@ -45,7 +45,7 @@ $includes = @('src', 'src/ntvdm-exe/softpc/include', 'src/compat/include',
     'src/mvdm-host/softpc.new/host/inc', 'src/mvdm-host/softpc.new/base/inc') |
     ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 /DDEVL ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include/error_abi.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/monitor/include/monitor_context.h')) + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()

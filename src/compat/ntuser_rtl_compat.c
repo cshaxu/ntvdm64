@@ -3,7 +3,7 @@
  * Allocation remains compatible with the reached WOW32 LocalFree ownership.
  */
 
-#include <windows.h>
+#include "include/wow_char_conversion_abi.h"
 
 /* OPENNT-HOST-119: native input layout owns this value. Original
  * client/client.c ToAsciiEx uses this public locale query; the original

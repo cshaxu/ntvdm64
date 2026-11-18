@@ -20,7 +20,7 @@ try{
   // Insert only inside the already authenticated observation call, never
   // in Direct launch/completion or worker control. No retry-to-success.
   fs.writeFileSync(path.join(build,`${name}.c`),source.replace(marker,replacement));
-  run(`cl.exe /nologo /c /MT /W4 /we4013 /I "${service}/obj/basesrv" /I "${root}/src" ${name}.c /Fo${name}.obj`);
+  run(`cl.exe /nologo /c /MT /W4 /we4013 /I "${service}/obj/basesrv" /I "${root}/src" /I "${root}/src/non-mvdm/public/internal/base/inc" ${name}.c /Fo${name}.obj`);
   run(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj "${service}/obj/basesrv/stub.obj" "${service}/obj/run16/support.obj" "${service}/opennt-base-server.lib" "${service}/opennt-base-bindings.lib" "${service}/common-base-srv-bindings.lib" "${service}/broker-transport.lib" "${service}/common-base-srv-transport.lib" "${service}/original-opennt-rtl-native.lib" "${service}/common-root.lib" "${service}/common-rpc.lib" "${service}/lib-rpc.lib" "${service}/lib-process-launch.lib" "${service}/lib-handle.lib" "${service}/lib-pipe.lib" "${service}/lib-process-observation.lib" "${service}/lib-file.lib" "${service}/common-codec.lib" "${service}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
  }
 }finally{fs.closeSync(logfile);}

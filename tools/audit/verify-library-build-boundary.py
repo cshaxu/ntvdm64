@@ -1,4 +1,4 @@
-"""Verify A-library inputs in the generated, compiled production Ninja graphs."""
+"""Verify A-library and B-compat inputs in the generated, compiled production Ninja graphs."""
 import re
 import subprocess
 from pathlib import Path
@@ -23,18 +23,32 @@ def ninja(directory, tool, *args):
     ).replace("\\", "/")
 
 
+# These two original USER units use mirror-owned data layouts. The exception
+# is limited to the WOW32 build of the named source, not to the component.
+WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
+
+
+def allowed_roots(owner):
+    roots = {ROOT / "src" / owner}
+    if owner == "compat":
+        roots.update(ROOT / "src" / library for library in ("lib-nxvm", "lib-win32"))
+    return roots
+
+
 def verify(graph, products):
     arch, component = graph.split("/")
     directory = ROOT / "build/.ninja" / f"msvc-{arch}-release" / component
     commands = ninja(directory, "commands", *products)
     units = {}
     for line in commands.splitlines():
-        match = re.search(r' /Fo("?)([^"]+?\.obj)\1\s+"?[^"]*/src/(lib-(?:nxvm|win32))/[^"]+\.c"?$', line, re.I)
+        match = re.search(r' /Fo("?)([^"]+?\.obj)\1\s+"?[^"]*/src/(lib-(?:nxvm|win32)|compat)/([^"]+\.c)"?$', line, re.I)
         if not match:
             continue
-        obj, owner = match.group(2, 3)
+        obj, owner, source = match.group(2, 3, 4)
+        if graph == "x86/wow32" and owner == "compat" and source in WOW_USER_EXCEPTIONS:
+            continue
         units[obj] = owner
-        roots = {(ROOT / "src").resolve(), (ROOT / "src" / owner).resolve()}
+        roots = {ROOT / "src"} | allowed_roots(owner)
         for path in re.finditer(r'(?:^| )/I\s*(?:"([^"]+)"|(\S+))', line, re.I):
             if (directory / (path[1] or path[2])).resolve() not in roots:
                 raise ValueError(f"{graph}/{obj}: unexpected include root {path[0]}")
@@ -52,17 +66,18 @@ def verify(graph, products):
                 valid.add(current)
         elif current in units:
             header = Path(line.strip()).resolve()
-            if header.is_relative_to(ROOT) and not header.is_relative_to(ROOT / "src" / units[current]):
+            if header.is_relative_to(ROOT) and not any(header.is_relative_to(root) for root in allowed_roots(units[current])):
                 raise ValueError(f"{graph}/{current}: reads {header}")
     if valid != set(units):
         raise ValueError(f"{graph}: missing current compiler evidence for {set(units) - valid}")
     # Collect actual explicit and implicit prerequisites without following product links.
-    prerequisites = ninja(directory, "inputs", *units)
-    for line in prerequisites.splitlines():
-        path = (directory / line.strip().strip('"')).resolve()
-        if path.is_relative_to(ROOT) and not any(path.is_relative_to(ROOT / "src" / owner) for owner in set(units.values())):
-            raise ValueError(f"{graph}: unexpected build prerequisite {path}")
-    print(f"{graph}: {len(units)} library objects")
+    for owner in set(units.values()):
+        objects = [obj for obj, component in units.items() if component == owner]
+        for line in ninja(directory, "inputs", *objects).splitlines():
+            path = (directory / line.strip().strip('"')).resolve()
+            if path.is_relative_to(ROOT) and not any(path.is_relative_to(root) for root in allowed_roots(owner)):
+                raise ValueError(f"{graph}/{owner}: unexpected build prerequisite {path}")
+    print(f"{graph}: {len(units)} A/B objects checked")
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T282/S7/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
-    '/FI ' + $root + '/src/compat/include/nt.h ' +
+    '/FI ' + $root + '/src/non-mvdm/public/sdk/inc/nt.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/monitor/include/monitor_context.h ' +
     '/I ' + $root + '/src ' +

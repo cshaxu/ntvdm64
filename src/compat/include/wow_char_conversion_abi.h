@@ -7,10 +7,7 @@
  * semantics; this header names only the unavailable product services.
  */
 
-#include <nt.h>
-#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include <windows.h>
 
 USHORT WINAPI OpenNtUserThreadCodePage(VOID);
 PVOID WINAPI OpenNtUserRtlAllocMem(SIZE_T bytes);

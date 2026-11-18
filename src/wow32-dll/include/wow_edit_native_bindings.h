@@ -3,7 +3,7 @@
 #include <nt.h>
 #include "wow_native_gui_thread.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
+#include "wow32-dll/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "non-mvdm/public/internal/windows/inc/wingdip.h"
 

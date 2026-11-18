@@ -21,7 +21,7 @@ Revision History:
 
 --*/
 
-#include "xactsrv_wksta_minimal.h"
+#include "XactSrvP.h"
 
 
 #define XACTSRV_CONVERT_SVC_EXITCODE(ob)                                       \

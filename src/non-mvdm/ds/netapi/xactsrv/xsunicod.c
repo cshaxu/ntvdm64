@@ -18,7 +18,7 @@ Revision History:
 
 --*/
 
-#include "xactsrv_wksta_minimal.h"
+#include "xactsrvp.h"
 #include <prefix.h>     // PREFIX_ equates.
 
 

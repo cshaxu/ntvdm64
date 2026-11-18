@@ -40,7 +40,7 @@ const includes = [
 const flags = [
   "/nologo", "/std:c11", "/MT", "/W4", "/showIncludes",
   "/DWIN32", "/DWINNT", "/DWIN_32", "/DCPU_40_STYLE", "/DDEVL",
-  `/FI "${source("src/compat/include/nt.h")}"`, includes
+  `/FI "${source("src/non-mvdm/public/sdk/inc/nt.h")}"`, includes
 ].join(" ");
 const objects = sources.map((path, index) => `obj/${String(index).padStart(2, "0")}-${basename(path, ".c")}.obj`);
 const lines = [

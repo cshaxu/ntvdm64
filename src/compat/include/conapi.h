@@ -37,9 +37,8 @@ BOOL WINAPI MvdmClipCursor(const RECT *);
 #define GetClipCursor MvdmGetClipCursor
 #define ClipCursor MvdmClipCursor
 
-UINT WINAPI MvdmGetConsoleCP(void);
+#include "winconp.h"
 UINT WINAPI MvdmGetConsoleOutputCP(void);
-#define GetConsoleCP MvdmGetConsoleCP
 #define GetConsoleOutputCP MvdmGetConsoleOutputCP
 
 BOOL WINAPI MvdmGetCurrentConsoleFont(HANDLE,BOOL,PCONSOLE_FONT_INFO);

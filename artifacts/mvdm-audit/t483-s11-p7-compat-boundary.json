@@ -1,0 +1,119 @@
+{
+  "packet": "T483 S11 P7",
+  "baseline": "449c717e8",
+  "release": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c3157146-0f1c-4d94-8a0d-0e7c31fec674",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "B_exceptions": {
+    "_GetDlgItem": "src/compat/wow_dialog_lookup.c",
+    "gabObjectCreateFlags": "src/compat/wow_object_ownership.c"
+  },
+  "production_dependency_audit": {
+    "binary-imports": {
+      "waived": 0,
+      "other": 0
+    },
+    "compiled-headers": {
+      "waived": 64,
+      "other": 0
+    },
+    "forced-includes": {
+      "waived": 0,
+      "other": 0
+    },
+    "generated-rpc-relocations": {
+      "waived": 0,
+      "other": 0
+    },
+    "linked-relocations": {
+      "waived": 0,
+      "other": 0
+    },
+    "literal-includes": {
+      "waived": 2,
+      "other": 0
+    },
+    "resolved-includes": {
+      "waived": 3,
+      "other": 0
+    },
+    "runtime-image-names": {
+      "waived": 0,
+      "other": 0
+    },
+    "search-paths": {
+      "waived": 0,
+      "other": 0
+    }
+  },
+  "object_boundary": [
+    "x86/worker: 25 A/B objects checked",
+    "x86/wow32: 3 A/B objects checked",
+    "x64/frontend: 28 A/B objects checked",
+    "x64/service: 13 A/B objects checked",
+    "x64/launcher: 17 A/B objects checked",
+    "x64/monitor: 2 A/B objects checked",
+    "x64/worker: 21 A/B objects checked",
+    "x64/hook: 12 A/B objects checked"
+  ],
+  "mirror_reference": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "approved_mirror_changes": {
+    "public/sdk/inc/nt.h": {
+      "inserted": 21,
+      "removed": 32
+    },
+    "ds/netapi/xactsrv/xactsrvp.h": {
+      "inserted": 14,
+      "removed": 10,
+      "restored_caller_diff_lines": 14
+    }
+  },
+  "XACTSRV": {
+    "translation_units": 7,
+    "matching_trial_text_sections": 40
+  },
+  "build": {
+    "x86": 0,
+    "x64": 0
+  },
+  "tests": {
+    "suite": "Full",
+    "passed_gates": [
+      "guest-media",
+      "startup-presentation",
+      "console-font-restore",
+      "console-input-batch",
+      "ntvdm-export-ordinals",
+      "wow-frontiers",
+      "Console-17",
+      "Window-17",
+      "rpc",
+      "native-gui",
+      "version-negatives",
+      "strict-dir",
+      "modern-edit-return",
+      "cooked-return",
+      "rapid-relaunch",
+      "interactive-relaunch",
+      "session-isolation",
+      "retirement-wiring",
+      "nested-window-handoff",
+      "dos4gw-nesticle"
+    ],
+    "elapsed_ms": 465178,
+    "targeted": [
+      "WOW32 formal graph",
+      "WOW control string",
+      "dialog creator lifetime",
+      "bitmap bindings"
+    ],
+    "full_receipt": "build/t483-s11-p7/full-r3/timings.json"
+  }
+}

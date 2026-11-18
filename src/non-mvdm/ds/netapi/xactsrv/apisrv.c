@@ -24,7 +24,7 @@ Revision History:
 
 --*/
 
-#include "xactsrv_wksta_minimal.h"
+#include "XactSrvP.h"
 #include "vdmredir-dll/include/remote_browser.h"       // Definition of I_BrowserServerEnum
 
 
