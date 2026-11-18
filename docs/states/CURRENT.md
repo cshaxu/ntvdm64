@@ -21,7 +21,7 @@ Owner closed S8 and admitted the sequential non-mirror code quality audit.
 
 ## Progress
 
-P3 completed the 40-file scope review and isolated comparison builds. [Findings and limits](../../artifacts/t483-s9-non-mirror-audit/p3.md). Production changes await disposition. P1 and P2 are historical scope records.
+P3 screened all 40 files and compiled isolated candidates. Its [findings](../../artifacts/t483-s9-non-mirror-audit/p3.md) are leads for the file-by-file review. The sequential audit has completed 1/40 files. Next is opennt_support_rtl.c. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
 
 ## S1 Closure Record
 
