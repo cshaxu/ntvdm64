@@ -1289,6 +1289,10 @@ component ABI.
 
 ## Dependency direction
 
+The [production component dependency layers](../rules/ARCHITECTURE.md#production-component-dependency-layers)
+define the permitted directions between source owners. The examples below
+also describe how the resulting products communicate at runtime.
+
 The finite `frontend-client.lib` implementation is launcher-owned under
 `run16-exe`: bootstrap and native request/receipt clients using service RPC.
 Their local declarations stay with the implementation. Wire declarations

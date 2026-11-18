@@ -1,6 +1,37 @@
 # Architecture Rules
 
-## T474 shared ownership direction
+## Production component dependency layers
+
+The table lists the host production components under `src/`, from innermost
+to outermost. A component may depend on components in any strictly inner
+layer, subject to their ownership restrictions. An inner component must never
+depend on an outer component. Distinct components in the same layer must
+remain independent, with one exception: `mvdm-host` and `non-mvdm` may depend
+on each other within C.
+
+| Layer | Components |
+| --- | --- |
+| A | `lib-nxvm`, `lib-win32` |
+| B | `compat` |
+| C | `mvdm-host`, `non-mvdm` |
+| D | `common` |
+| E | `frontend-base`, `worker-base` |
+| F | `ntcon-exe`, `nthook-dll`, `ntmon-exe`, `ntsrv-exe`, `ntvdm-exe`, `ntvwm-exe`, `run16-exe`, `vdmredir-dll`, `wow32-dll` |
+
+Apply the rule to each source unit under its owning component, including
+when another product compiles it. Check direct, transitive and forced
+headers, generated build prerequisites, and the providers of linked symbols.
+For A, the [library boundary check](../../tools/audit/verify-library-build-boundary.py)
+verifies production compile commands, compiler-recorded headers and build
+prerequisites. Platform SDK and runtime libraries are outside this table.
+
+Record dependencies on named product images at launch, dynamic load, PE
+import or package validation separately from source dependencies. A shared
+protocol can connect two products without either importing the other's
+private implementation. Requiring a specific peer image still creates a
+runtime dependency even when its name never appears in a source include.
+
+### Shared ownership restrictions
 
 Product components select shared source from common, lib-nxvm, lib-win32, mvdm-host and
 non-mvdm, not another product component's private implementation. NTVDM and
