@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-40 points and 647 changed lines in S7. The current census is 2,007 non-error
-points and 28,329 changed lines across 236 mirrors with filtered differences.
+42 points and 651 changed lines in S7. The current census is 2,005 non-error
+points and 28,325 changed lines across 235 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. All are local conditional frames without a matching original
@@ -194,6 +194,14 @@ actual MSVC compile entries yield identical selected text and logical lines
 before and after the cleanup. Both published copies of the eleven images
 still match the P10 Full manifest. R0158 is restored and leaves the pending
 ledger. [P25 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p25-checkpoint.json).
+
+P26 restores `xmsmemr.c` byte-for-byte from pinned OpenNT. Its local CPU40
+wrapper accounted for both remaining points and all four changed lines.
+The two worker and two XMS fixture compile entries produce identical
+selected text and logical lines. The mapped XMS fixture passes. The historical
+startup fixture has the same seven unresolved link symbols with either source.
+The P10 Full package is still present at both release destinations.
+[P26 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p26-checkpoint.json).
 
 ## S1 Closure Record
 

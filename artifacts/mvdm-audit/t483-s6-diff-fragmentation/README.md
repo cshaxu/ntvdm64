@@ -394,3 +394,10 @@ bytes and the filtered census of 2,011 points and 28,394 lines are unchanged.
 local frames and the exact selected-source and logical-line match across
 eleven real compilation entries. The filtered census is 2,007 points and
 28,329 changed lines. The published package remains the P10 Full package.
+
+[S7 P26 receipt](s7-p26-checkpoint.json) records the byte-exact OpenNT
+restoration of `xmsmemr.c`, the four preprocessing comparisons and both
+XMS fixture outcomes. The filtered census is 2,005 points and 28,325 changed
+lines across 235 differing mirrors. The inventory helper now reads only
+currently tracked paths, so historical rows for retired sources cannot
+abort the scan.

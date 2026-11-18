@@ -1,0 +1,97 @@
+{
+  "packet": "M0 T483 S7 P26",
+  "prior_checkpoint": "e16bfca5d",
+  "path": "src/mvdm-host/xms.486/xmsmemr.c",
+  "original": "base/mvdm/xms.486/xmsmemr.c",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "before_sha256": "40c236c96768a5a5a3d03c61a00b5b594552f4987a2d3ddde912912e1afba478",
+  "restored_and_original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+  "before": {
+    "blocks": 2,
+    "added": 4,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 0,
+    "added": 0,
+    "deleted": 0
+  },
+  "decision": "Remove the wholly local CPU_40_STYLE group around the original unconditional xmsMoveMemory body. Restore the complete pinned file and its logical line mapping. No original excluded condition was present in this file.",
+  "case_history": [
+    "T483-R1943",
+    "T483-R1944"
+  ],
+  "pending_decisions": {
+    "added": 0,
+    "removed": 0,
+    "total": 1567
+  },
+  "non_error_census": {
+    "diff_points": 2005,
+    "diff_lines": 28325,
+    "nonzero_mirrors": 235,
+    "historical_worklist_rows": 242,
+    "source_reduction_s7": {
+      "points": 42,
+      "lines": 651
+    }
+  },
+  "independent_inventory": {
+    "files": 1050,
+    "nonzero_mirrors": 235,
+    "raw_automatic_mask_points": 2008,
+    "raw_automatic_mask_lines": 28345,
+    "reconciliation": [
+      "nt_fulsc.c, exact arm pairing from s7-p2-checkpoint.json, minus two points and eighteen lines",
+      "copy_fnc.c, matching constant-false original arm in s7-p16-checkpoint.json, minus one point and two lines"
+    ],
+    "tool_repair": "Filter supplemental historical origin rows by current Git tracking so retired mirror paths do not prevent a new census."
+  },
+  "verification": {
+    "preprocessing": [
+      {
+        "context": "worker-x86",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/xms/xmsmemr.obj",
+        "selected_lines": 47823,
+        "comparison_sha256": "bcda314d721830320fd765b00e1a9ad5ec614d422f84d08bed85c89382e5bb17"
+      },
+      {
+        "context": "worker-reference-x86",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/xms/xmsmemr.obj",
+        "selected_lines": 47823,
+        "comparison_sha256": "bcda314d721830320fd765b00e1a9ad5ec614d422f84d08bed85c89382e5bb17"
+      },
+      {
+        "context": "mapped-xms",
+        "graph": "build/t483-s7-p26/mapped/x86",
+        "target": "obj/xmsmemr.obj",
+        "selected_lines": 48758,
+        "comparison_sha256": "a78fb5f9d68368b36b4227e89ad7919cb40198eb8d9810eee660aa8bc462eefc"
+      },
+      {
+        "context": "xms-startup",
+        "graph": "build/t483-s7-p26/startup",
+        "target": "obj/02-xmsmemr.obj",
+        "selected_lines": 48765,
+        "comparison_sha256": "d2a63244c5d2125a0bf7d77f19d8710cd24ff44765ce832056a024c1ca5b30d3"
+      }
+    ],
+    "mapped_xms_fixture": [
+      "S36_ORIGINAL_XMS_MANAGE_NO_BOUNCE_NO_ZERO_REUSE_OK",
+      "S36_ORIGINAL_XMS_OVERLAP_MOVE_OK"
+    ],
+    "historical_startup_fixture": {
+      "before_link_exit": 1120,
+      "restored_link_exit": 1120,
+      "same_unresolved_symbols": 7,
+      "runtime": "not reached"
+    },
+    "release": {
+      "action": "No production relink, republication or repeated Full run because selected inputs and original logical lines are identical.",
+      "p10_full_package_id": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "image_hashes_equal_in_both_destinations": 11
+    }
+  }
+}

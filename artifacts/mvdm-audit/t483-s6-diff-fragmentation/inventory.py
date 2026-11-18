@@ -17,10 +17,10 @@ def clean(raw):
 def metric(a,b):
  ops=[q for q in difflib.SequenceMatcher(None,a,b,autojunk=False).get_opcodes() if q[0]!='equal'];return dict(blocks=len(ops),added=sum(l-k for _,i,j,k,l in ops),deleted=sum(j-i for _,i,j,k,l in ops))
 origins={r['path']:r for r in csv.DictReader((A/'t480-s1-files.csv').open(encoding='utf-8-sig'))}
-tracked=subprocess.check_output(['git','ls-files','src/mvdm-host','src/non-mvdm'],text=True).splitlines()
+tracked=set(subprocess.check_output(['git','ls-files','src/mvdm-host','src/non-mvdm'],text=True).splitlines())
 files=[p for p in tracked if Path(p).suffix in ('.c','.h')]
 prior=json.loads((A/'t483-remaining-reaudit/p253-global-diff-count.json').read_text(encoding='utf-8'))
-files+= [r['path'] for r in prior['files'] if r['path'] not in files]
+files+= [r['path'] for r in prior['files'] if r['path'] in tracked and r['path'] not in files]
 rows=[]
 for path in sorted(files):
  p=ROOT/path

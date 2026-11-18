@@ -142,8 +142,6 @@ Return Value:
 
 --*/
 {
-#ifdef CPU_40_STYLE
-#line 145
     ULONG SoftpcBase;
     
     //
@@ -165,10 +163,5 @@ Return Value:
     // know is its "linear address".
 
     sas_overwrite_memory((PBYTE)Destination, Count);
-#else
-#line 150
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
-#line 166
 
 }
