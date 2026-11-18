@@ -1,0 +1,36 @@
+{
+  "packet": "T483 S8 P88",
+  "position": 132,
+  "path": "src/mvdm-host/wow32/wkman.h",
+  "review_ids": [
+    "T483-R1501"
+  ],
+  "original_sha256": "730ec4dee5b07377c8533a82596ba9a9934ce74af355603aa6bad2637ad3bc8c",
+  "current_sha256": "1f05fb10908781eb2c28ffd1886dd6baedad43a4b547c0e43fb1b99791773db4",
+  "before": {
+    "blocks": 1,
+    "added": 2,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 1,
+    "added": 2,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 132,
+    "remaining": 99,
+    "files": 231,
+    "points": 1918,
+    "lines": 27010,
+    "pending": 1538
+  },
+  "verification": "nm: current nt_eoi.obj defines _RegisterWOWIdle and _BlockWOWIdle; current wkman.obj references exactly those, and wkgthunk.obj references _BlockWOWIdle. Historical original-header object inspected this turn references _RegisterWOWIdle@0 and _BlockWOWIdle@4. No runtime test needed to establish the symbol mismatch; prior same-path COFF comparison is separate.",
+  "decision": "R1501 retained pending. Two adjacent cdecl declarations match the C ABI of the SoftPC host provider. Under the WOW /Gz default the original declarations select stdcall; a symbol alias cannot change stack cleanup of the BOOL argument."
+}

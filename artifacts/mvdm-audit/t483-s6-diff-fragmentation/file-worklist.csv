@@ -224,7 +224,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 236,src/mvdm-host/wow32/wgdi31.c,1,3,1,1,0,s8-p80-reviewed,T483-R1425;T483-R1426,b641b59025211900d4b01ce610879983f3bf5e88c1b92b100c41028c0d5386b5
 237,src/mvdm-host/wow32/wgpal.c,1,1,1,0,0,s8-p81-reviewed,T483-R1428;T483-R1429,1c29cff4af4ec8565f9d2e1931a1596dccd21c1b8285563b9c3d203d617c1cb1
 238,src/mvdm-host/wow32/wkgthunk.c,1,1,1,2,0,s8-p86-reviewed,T483-R1467;T483-R1468,c826aaeceff4640a7a205eefb6b504713f65c868b499f4902c1fb915f0a3f26e
-239,src/mvdm-host/wow32/wkman.h,1,2,2,0,0,s7-p14-reviewed,T483-R1497;T483-R1498;T483-R1499;T483-R1500;T483-R1501,1f05fb10908781eb2c28ffd1886dd6baedad43a4b547c0e43fb1b99791773db4
+239,src/mvdm-host/wow32/wkman.h,1,2,2,0,0,s8-p88-reviewed,T483-R1497;T483-R1498;T483-R1499;T483-R1500;T483-R1501,1f05fb10908781eb2c28ffd1886dd6baedad43a4b547c0e43fb1b99791773db4
 240,src/mvdm-host/wow32/wow32.def,1,1,0,0,0,s7-p23-reviewed,T483-R1709,458e4c62bbd2f832f472b66303dd2e920f8b0cfe047fec3acd51cdf52efbee1f
 241,src/mvdm-host/wow32/wowhooks.h,1,2,0,0,0,s7-p11-reviewed,T483-R1765,15e0dd57428921940933d6340b88dc8354f009b631679fba0fcb3fab8c2f734a
 242,src/mvdm-host/wow32/wumsg.h,1,1,1,0,0,s7-p12-reviewed,T483-R1895,870f8b15e374da3c6c752982e15f881ddc60a29c93b832bbfd100766c96841b7
