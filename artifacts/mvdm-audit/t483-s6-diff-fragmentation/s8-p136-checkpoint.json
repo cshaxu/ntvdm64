@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P136",
+  "position": 179,
+  "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+  "review_ids": [
+    "T483-R2105"
+  ],
+  "original_sha256": "c6b7844e2e1248ac38ee90dd8173f95ab0f7997d7a7cfbafda851cc07cc80921",
+  "current_sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+  "before": {
+    "blocks": 3,
+    "added": 0,
+    "deleted": 29
+  },
+  "after": {
+    "blocks": 3,
+    "added": 0,
+    "deleted": 29
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 179,
+    "remaining": 52,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "decision": "R2105 covers three complete omitted type definitions. winnt.h owns both critical-section tags and aliases RTL_RESOURCE_DEBUG to the SDK debug layout. Restoring the tags gives C2011; restoring the separate resource struct gives C2371. Prior raw-original x86/x64 controls identify all three source locations. Keep the original RTL_RESOURCE that follows and the two intervening constants.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  }
+}

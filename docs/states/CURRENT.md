@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P135 completed review through `ntrtl.h`. Next is position 179, `nturtl.h`.
+S8 P137 completed review through `btnctl.c`. Next is position 181, `cldib.c`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P135 completed review through `ntrtl.h`. Next is position 179, `nturtl.h`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P135, 178 of 231 positions are covered and 53 remain queued.
+IDs. After S8 P137, 180 of 231 positions are covered and 51 remain queued.
 P107 Win16 shared clipboard transfer remains deferred by owner direction. Both P106 and P107 failed at the same stage. The candidate passed 56 open-state checks and 24 ownership cases. Rerun the real transfer when native OpenClipboard succeeds.
 
 S8 has removed 62 points and 814 diff lines, leaving 1,912 points and 26,396 lines. The live pending backlog has 1,533 rows.
@@ -173,6 +173,8 @@ S8 has removed 62 points and 814 diff lines, leaving 1,912 points and 26,396 lin
 [P133 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p133-checkpoint.json).
 [P134 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p134-checkpoint.json).
 [P135 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p135-checkpoint.json).
+[P136 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p136-checkpoint.json).
+[P137 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p137-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

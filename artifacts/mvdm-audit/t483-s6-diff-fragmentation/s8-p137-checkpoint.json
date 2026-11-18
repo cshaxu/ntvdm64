@@ -1,0 +1,49 @@
+{
+  "packet": "T483 S8 P137",
+  "position": 180,
+  "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+  "review_ids": [
+    "T483-R2109",
+    "T483-R2111",
+    "T483-R2114",
+    "T483-R2115",
+    "T483-R2118",
+    "T483-R2119",
+    "T483-R2120",
+    "T483-R2121",
+    "T483-R2123",
+    "T483-R2126",
+    "T483-R2127",
+    "T483-R2139"
+  ],
+  "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+  "current_sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+  "before": {
+    "blocks": 12,
+    "added": 12,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 12,
+    "added": 12,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 180,
+    "remaining": 51,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "All twelve live changes coincide with native destruction or capture ownership counterexamples in the pending register. R2109/2111/2114 cover DC acquisition, color callback and release. R2115/2118/2119/2120/2121/2123 guard distinct continuations: original faults, delivers notification after destruction, or releases foreign capture. R2126/2127/2139 cover paint, text drawing and SETTEXT after destruction. Pinning storage does not keep spwnd attached after WM_NCDESTROY. Removing individual guards previously reproduced the recorded failures. No new branch or shim."
+}
