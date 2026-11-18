@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P9 completed review through BIOS `slave_bs.c`. Next is position 29, `tape_io.c`.
+S8 P10 completed review through BIOS `tape_io.c`. Next is position 30, `virtual.c`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P9 completed review through BIOS `slave_bs.c`. Next is position 29, `tape_io.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P9, 28 of 231 positions are covered and 203 remain queued.
+IDs. After S8 P10, 29 of 231 positions are covered and 202 remain queued.
 S8 has removed 17 points and 92 diff lines, leaving 1,957 points and 27,118 lines. The live pending backlog has 1,549 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
@@ -45,6 +45,7 @@ S8 has removed 17 points and 92 diff lines, leaving 1,957 points and 27,118 line
 [P7 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p7-checkpoint.json).
 [P8 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p8-checkpoint.json).
 [P9 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p9-checkpoint.json).
+[P10 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p10-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

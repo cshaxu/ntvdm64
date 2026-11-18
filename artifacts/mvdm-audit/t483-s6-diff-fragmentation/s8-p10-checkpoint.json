@@ -1,0 +1,54 @@
+{
+  "packet": "T483 S8 P10",
+  "position": 29,
+  "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+  "source_sha256": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9",
+  "prior_evidence": "../t483-remaining-reaudit/r0345-tape-xms-review.json",
+  "decision": "R0345 pending. Keep the one owner-header include for two VOID(void) functions in INT15 block move. All four variants compile. The two implicit int declarations conflict with the XMS definitions. No runtime failure demonstrated.",
+  "verification": [
+    {
+      "graph": "msvc-x86-release/worker",
+      "variant": "with",
+      "exit": 0,
+      "diagnostics": []
+    },
+    {
+      "graph": "msvc-x86-release/worker",
+      "variant": "without",
+      "exit": 0,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p10\\tape_io.c(184): warning C4013: 'xmsDisableA20Wrapping' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p10\\tape_io.c(186): warning C4013: 'xmsEnableA20Wrapping' undefined; assuming extern returning int"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release/worker-reference-x86",
+      "variant": "with",
+      "exit": 0,
+      "diagnostics": []
+    },
+    {
+      "graph": "msvc-x64-release/worker-reference-x86",
+      "variant": "without",
+      "exit": 0,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p10\\tape_io.c(184): warning C4013: 'xmsDisableA20Wrapping' undefined; assuming extern returning int",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p10\\tape_io.c(186): warning C4013: 'xmsEnableA20Wrapping' undefined; assuming extern returning int"
+      ]
+    }
+  ],
+  "before_and_after": {
+    "points": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "coverage": {
+    "complete": 29,
+    "remaining": 202,
+    "files": 231,
+    "points": 1957,
+    "lines": 27118,
+    "pending": 1549
+  },
+  "production": "P8 reused. No production edits."
+}

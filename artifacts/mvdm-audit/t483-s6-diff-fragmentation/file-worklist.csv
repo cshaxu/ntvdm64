@@ -189,7 +189,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 201,src/mvdm-host/inc/suballoc.h,1,2,0,1,0,s8-p6-rechecked-residuals-pending-owner,T483-R0273,d18350215388f68a97817da37acb9df032c47074f0fb3354c2e212166a37058c
 202,src/mvdm-host/inc/vrnmpipe.h,1,1,0,1,0,s8-p6-rechecked-residuals-pending-owner,T483-R0274;T483-R0275;T483-R0276,4f93fc169d83f72b1e193aef8759fc47d9511ded5f5be899164743644b905eea
 203,src/mvdm-host/softpc.new/base/bios/slave_bs.c,1,1,1,2,0,s8-p9-rechecked-residual-pending-owner,T483-R0344,c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140
-204,src/mvdm-host/softpc.new/base/bios/tape_io.c,1,1,0,12,0,s7-p13-reviewed,T483-R0345,e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9
+204,src/mvdm-host/softpc.new/base/bios/tape_io.c,1,1,0,12,0,s8-p10-rechecked-residual-pending-owner,T483-R0345,e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9
 205,src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h,1,1,0,0,0,s7-p3-reviewed-residual-pending,T483-R0353,c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15
 206,src/mvdm-host/softpc.new/base/ccpu386/c_debug.h,1,1,0,0,0,s7-p4-reviewed-residual-pending,T483-R0357,66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f
 207,src/mvdm-host/softpc.new/base/ccpu386/c_seg.c,1,8,0,3,0,s7-p19-reviewed,T483-R0411,983bcd1de050928237f211ea391b5e4d9f5191a7a1ed04e60f23e79f93e2a51b
