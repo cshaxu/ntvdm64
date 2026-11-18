@@ -1,0 +1,32 @@
+{
+  "packet": "T483 S8 P188",
+  "position": 231,
+  "path": "src/mvdm-host/softpc.new/host/src/sources",
+  "original_sha256": "a6c0b2b3dc29151d6a760335d607114835490b1d2fe67e04e5f5c68865dab7e7",
+  "current_sha256": "d98e4e87d136d13c385f1ac8c1bcda6766dd708ce2dffd1c833bb3fb9f014771",
+  "before": {
+    "blocks": 1,
+    "added": 0,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 0,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "decision": "Keep the previously closed x86_emm.c omission at original line 88. R1249 concerns the separate PPC declaration already restored at P117.",
+  "verification": "Executed the actual Get-OriginalSources function against both manifests. Original 46 members, current 45, sole delta x86_emm.c. File absent in product tree. New-T310OriginalSoftpcNinja.ps1 checks existence of each selected host source before emitting objects. Restoring the entry alone selects a missing source. No diagnostic directives in the delta.",
+  "coverage": {
+    "files": 231,
+    "complete": 231,
+    "remaining": 0,
+    "live_non_error_files": 229,
+    "worklist_hashes_checked": 242,
+    "points": 1903,
+    "added": 3869,
+    "deleted": 22374,
+    "lines": 26243,
+    "pending": 1534
+  }
+}
