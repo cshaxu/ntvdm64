@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P67 completed review through `vrnmpipe.c`. Next is position 112, `vrremote.c`.
+S8 P70 completed review through `precomp.h`. Next is position 115, `walias.h`.
 
 ## Active Packet
 
@@ -34,8 +34,8 @@ S8 P67 completed review through `vrnmpipe.c`. Next is position 112, `vrremote.c`
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P67, 111 of 231 positions are covered and 120 remain queued.
-S8 has removed 43 points and 184 diff lines, leaving 1,931 points and 27,026 lines. The live pending backlog has 1,543 rows.
+IDs. After S8 P70, 114 of 231 positions are covered and 117 remain queued.
+S8 has removed 43 points and 185 diff lines, leaving 1,931 points and 27,025 lines. The live pending backlog has 1,543 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p3-checkpoint.json).
@@ -103,6 +103,9 @@ S8 has removed 43 points and 184 diff lines, leaving 1,931 points and 27,026 lin
 [P65 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p65-checkpoint.json).
 [P66 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p66-checkpoint.json).
 [P67 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p67-checkpoint.json).
+[P68 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p68-checkpoint.json).
+[P69 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p69-checkpoint.json).
+[P70 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p70-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

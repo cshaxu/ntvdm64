@@ -1,0 +1,48 @@
+{
+  "packet": "T483 S8 P70",
+  "position": 114,
+  "path": "src/mvdm-host/wow32/precomp.h",
+  "review_ids": [
+    "T483-R1306",
+    "T483-R1307",
+    "T483-R1308"
+  ],
+  "original_sha256": "b4841d516682f6677332fede6ca47187bfdc132a288f71564378a1c87f7bb314",
+  "current_sha256": "2d023cf0ec5014d334eae420563eb966fc6777c019def155017504d307948f0d",
+  "before": {
+    "blocks": 3,
+    "added": 13,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 3,
+    "added": 12,
+    "deleted": 1
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 114,
+    "remaining": 117,
+    "files": 231,
+    "points": 1931,
+    "lines": 27025,
+    "pending": 1543
+  },
+  "decisions": {
+    "R1306": "Retain private provider, clipboard, package path and thread declarations and _X86_ boundary. P133 compilation controls show missing declarations or the unsupported native x86 stack profile; wuclip and wow32 consume the package APIs.",
+    "R1307": "Retain <vdm.h>. Original relative operand misses the moved header in the real product include roots.",
+    "R1308": "Removed the secondary thunk selector from the mirror and both adapter headers. Preserve private USER redirects and resource parser binding; authored and original-thunk marker fixtures exercise both profiles."
+  },
+  "verification": {
+    "preprocessor": "Compared 75 product Ninja compiler commands before and after with MSVC /EP. SHA-256 matched for each nonblank preprocessed body, including both macro boundary configurations.",
+    "build": "x86 and x64 cached full build exit 0",
+    "publication": "11 images hash verified at assets/release and O:/WINNT/system32, package 35b26902-c126-4cb8-bda5-31af3e48c3dc",
+    "abi": "Positive /Gd declaration check passed. Independent cdecl mutation of each pointer assignment failed with C2440.",
+    "menu": "Isolated desktop menu-resource pass, 16 resource cases, 7 parser cases, 64 repeated invalid cases, errors=0. Fixture includes SDK commctrl before private ptCursor macro."
+  }
+}

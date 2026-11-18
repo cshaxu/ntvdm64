@@ -1,0 +1,40 @@
+{
+  "packet": "T483 S8 P69",
+  "position": 113,
+  "path": "src/mvdm-host/wow32/isvwow.h",
+  "review_ids": [
+    "T483-R1303"
+  ],
+  "original_sha256": "3b8357d8fa20cfbebcf5307d0abf0471ad93d1c74cd2c9bbe2ea42e9d2f4e132",
+  "current_sha256": "de0c0839707c033582c23a706eae019cd9c42f3424815e5ba0d9ec6135e06e08",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 113,
+    "remaining": 118,
+    "files": 231,
+    "points": 1931,
+    "lines": 27026,
+    "pending": 1543
+  },
+  "verification": {
+    "scope": "Fresh x86 compile controls with actual headers; external ABI evidence only.",
+    "original": "/Gd exit 2 C2440 cdecl to stdcall, /Gz 0",
+    "current": "/Gd 0, /Gz 0"
+  },
+  "decision": "R1303: retain APIENTRY for the exported WOW32ResolveMemory declaration. Product /Gz already defaults to stdcall, but public WOW multimedia extension consumers compiling with /Gd otherwise see a cdecl function. Restoring the original header breaks binding to the exported callback type in this supported context."
+}

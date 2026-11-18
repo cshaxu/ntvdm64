@@ -28,7 +28,7 @@ BOOL WINAPI wow_menu_native_refresh_message(UINT, WPARAM, LPARAM);
 
 /* Selected only at original WOW/menu-client compile boundaries. The owned
  * implementation includes this header without redirects and calls USER32. */
-#if defined(WOW_USER_PRIVATE_REDIRECT) || defined(WOW_ORIGINAL_MENU_CLIENT)
+#if defined(WOW_ORIGINAL_THUNK_BUILD) || defined(WOW_ORIGINAL_MENU_CLIENT)
 #define CreateMenu wow_menu_native_CreateMenu
 #define CreatePopupMenu wow_menu_native_CreatePopupMenu
 #define GetMenu wow_menu_native_GetMenu

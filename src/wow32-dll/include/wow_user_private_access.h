@@ -133,7 +133,7 @@ BOOL WINAPI wow_native_EnumThreadWindows(DWORD, WNDENUMPROC, LPARAM);
 int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 /* Include only after SDK declarations in the selected original provider.
  * The implementation itself must call native USER without these mappings. */
-#if defined(WOW_USER_PRIVATE_REDIRECT) || defined(WOW_ORIGINAL_EDIT_CLIENT)
+#if defined(WOW_ORIGINAL_THUNK_BUILD) || defined(WOW_ORIGINAL_EDIT_CLIENT)
 #include "wow_menu_native_bindings.h"
 #define GetWindowLongA wow_user_get_window_longA
 #define SetWindowLongA wow_user_set_window_longA
@@ -191,7 +191,7 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define GetUpdateRect wow_native_GetUpdateRect
 #define GetUpdateRgn wow_native_GetUpdateRgn
 #define DragDetect wow_native_DragDetect
-#if defined(WOW_USER_PRIVATE_REDIRECT)
+#if defined(WOW_ORIGINAL_THUNK_BUILD)
 #define FlashWindow wow_native_FlashWindow
 #define ExcludeUpdateRgn wow_native_ExcludeUpdateRgn
 #define GetPropA wow_native_GetPropA

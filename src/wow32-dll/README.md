@@ -1025,7 +1025,7 @@ owner releases/restores execution permission and publishes return state;
 SetDlgItemText targets the child selected by its native item lookup, not the
 dialog's thread by assumption. The original-control facade explicitly selects
 the redirects, including the existing SendMessageW wrapper, without depending
-on MVDM's separate precomp defining WOW_USER_PRIVATE_REDIRECT. No original
+on the original WOW thunk build profile. No original
 paint, text, dialog or control algorithm changes. Supplemental real-HWND
 paint/text/nesting/failure checks in wow_user_task_lifecycle_fixture are staged,
 not run; original dialog-precomp selection remains an open group dependency.

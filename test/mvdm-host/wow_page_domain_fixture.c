@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
+#include <commctrl.h>
 
 #ifdef WOW_WINDOW_BORROW_FIXTURE
 /* Original header assumes its /Gz compilation environment. This CCPU

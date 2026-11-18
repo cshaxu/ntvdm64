@@ -45,7 +45,7 @@ try {
     $abi=$abi -replace '\S+wow_user_thunk_scope\.c$',('"'+$source+'"')
     if($abi -eq $command[0]){throw 'ABI fixture substitution failed'}
     Get-FileHash $source|Export-Csv -NoTypeInformation "$out/source-sha256.csv"
-    Compile public-abi ($abi+' /we4113 /we4047 /we4028 /we4273')
+    Compile public-abi $abi
     Get-FileHash "$out/abi.obj"|Export-Csv -NoTypeInformation "$out/artifact-sha256.csv"
     'WOW_PUBLIC_MEMORY_ABI_OK'|Set-Content "$out/result.txt"
     '0'|Set-Content "$out/exit.txt"

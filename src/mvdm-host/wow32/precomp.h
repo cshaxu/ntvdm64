@@ -121,7 +121,6 @@
 #include "wparam.h"
 #include <limits.h>
 #ifdef WOW_ORIGINAL_THUNK_BUILD
-#define WOW_USER_PRIVATE_REDIRECT
 #include "wow_user_private_access.h"
 #include "wow_menu_parser_bindings.h"
 #undef LoadMenuIndirect
