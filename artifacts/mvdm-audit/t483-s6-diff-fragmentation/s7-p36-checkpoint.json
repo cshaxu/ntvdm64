@@ -1,0 +1,102 @@
+{
+  "packet": "M0 T483 S7 P36",
+  "prior_checkpoint": "e86846b73",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c": {
+      "before": {
+        "blocks": 17,
+        "added": 22,
+        "deleted": 205
+      },
+      "after": {
+        "blocks": 17,
+        "added": 20,
+        "deleted": 205
+      },
+      "removed_local_frame_ranges": [
+        [
+          213,
+          213,
+          1
+        ],
+        [
+          216,
+          216,
+          0
+        ],
+        [
+          154,
+          154,
+          0
+        ],
+        [
+          182,
+          182,
+          0
+        ]
+      ],
+      "original_error_pairs": 1,
+      "prior_sha256": "94880f8c2bbd27a82cac654dcfa089eeaf477937a6b4fbcb3321c2ef930269f0",
+      "current_sha256": "a474a8a4a5f1b5a340c6f937072eb1cc712664cd5e08ad71f3c81a7234352cdc",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a"
+    }
+  },
+  "removed_frames": {
+    "dlgmgr.c": 1
+  },
+  "decisions": {
+    "dlgmgr.c": "Remove the redundant dialog-owner selector and two redundant line resets. The live dialog body retains native USER initialization. The modal-only fixture omits the entire enclosing body.",
+    "egwrtm12.c": "Preserve the mapped excluded writer-table body and original A_VID branch. No worktree change.",
+    "egawrtm0.c": "Preserve the mapped excluded writer-table body and original A_VID branch. No worktree change."
+  },
+  "census": {
+    "non_error_points": 1985,
+    "non_error_lines": 27279,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 62,
+      "lines": 1697
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "context": "wow-dlgmgr",
+          "graph": "build/.ninja/msvc-x86-release/wow32",
+          "target": "obj/opennt-user/control-body-dlgmgr.obj",
+          "selected_lines": 49544,
+          "comparison_sha256": "67b1ce07b5f077ee1f60abae4a6f7817c76d3adb5b862d1b4a37c30bcb9c1bf6"
+        },
+        {
+          "context": "fixture-original",
+          "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+          "target": "obj/original_dlgmgr.obj",
+          "selected_lines": 50074,
+          "comparison_sha256": "d77324b35fac16332ca49f399ef806c7b95e1eb39142c6c62a2b4b1f04f7d3a7"
+        },
+        {
+          "context": "fixture-modal",
+          "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+          "target": "obj/modal_lifetime_body.obj",
+          "selected_lines": 44485,
+          "comparison_sha256": "b474a3a9ef7bbaed1f8603c2b48f653c314d2ce8350c0649aa4e502c5d170d3b"
+        }
+      ]
+    },
+    "targeted": {
+      "wow_dialog_object": "pass",
+      "wow_dialog_keyboard_lifetime_fixture": "pass",
+      "wow_dialog_lifetime_fixture": "pass"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Three relevant generated compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

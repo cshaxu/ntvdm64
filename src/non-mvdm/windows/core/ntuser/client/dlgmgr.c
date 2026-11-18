@@ -152,7 +152,6 @@ BOOL xxxRestoreDlgFocus(
 \***************************************************************************/
 
 #line 140
-#line 140
 void DlgSetFocus(
     HWND hwnd)
 {
@@ -179,7 +178,6 @@ void DlgSetFocus(
 * 05-21-91 ScottLu      Created.
 \***************************************************************************/
 
-#line 180
 #line 180
 BOOL ValidateDialogPwnd(
     PWND pwnd)
@@ -210,10 +208,9 @@ BOOL ValidateDialogPwnd(
     /*
      * If the lookaside buffer has not been initialized, do it now.
      */
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
+#line 210
     if (!wow_dialog_host_initialize(HW(pwnd)))
         return FALSE;
-#endif
 #line 209
     if (sfInit) {
         if (!NT_SUCCESS(InitLookaside(&DialogLookaside, sizeof(DLG), 2))) {

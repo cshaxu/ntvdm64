@@ -446,3 +446,7 @@ The filtered census is 1,986 points and 27,336 changed lines across 231 mirrors.
 from the WOW procedure entry code, dialog creation and CCPU diagnostic
 configuration. The filtered census is 1,985 points and 27,281 changed lines,
 with all six tracked preprocessing inputs identical.
+
+[S7 P36 receipt](s7-p36-checkpoint.json) records removal of a redundant dialog
+validation selector and two duplicate line resets. The original exclusion and
+all three selected compile inputs are unchanged. Both dialog fixtures pass.
