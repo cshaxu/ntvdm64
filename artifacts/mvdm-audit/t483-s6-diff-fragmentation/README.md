@@ -407,3 +407,8 @@ X86GFX frames removed from `nt_fulsc.c` and both worker preprocessing
 comparisons. The filtered census is 2,004 points and 28,304 changed lines
 across 235 differing mirrors. The six affected software fullscreen
 decisions remain in the pending ledger.
+
+[S7 P28 receipt](s7-p28-checkpoint.json) records four local conditional
+frames removed from three CPU and DPMI files. Selected source and logical
+lines match at all six supported worker compile entries. The filtered census
+is 2,003 points and 28,291 changed lines across 235 differing mirrors.

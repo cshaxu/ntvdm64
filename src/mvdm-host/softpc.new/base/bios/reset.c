@@ -504,10 +504,6 @@ void reset()
 				sas_loadw(user_stack, &temp_word);
 #line 619
 #ifndef CPU_30_STYLE
-#if !defined(CPU_40_STYLE)
-#line 620
-#error Non-CPU40 reset continuation adjustment is not supported
-#endif
 #line 621
 #endif /* CPU_30_STYLE */
 #line 622
@@ -575,10 +571,6 @@ void reset()
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_INIT), &temp_word);
 #line 683
 #ifndef CPU_30_STYLE
-#if !defined(CPU_40_STYLE)
-#line 684
-#error Non-CPU40 reset continuation adjustment is not supported
-#endif
 #line 685
 #endif /* CPU_30_STYLE */
 #line 686

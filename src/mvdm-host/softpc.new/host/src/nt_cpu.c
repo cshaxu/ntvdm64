@@ -40,10 +40,6 @@ static char SccsID[]="@(#)sun4_a3cpu.c	1.2 5/24/91 Copyright Insignia Solutions 
 GLOBAL	quick_event_delays	host_delays;
 GLOBAL	host_addr Start_of_M_area;
 GLOBAL	IHPE Length_of_M_area;
-#ifndef CCPU
-#line 40
-#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
-#endif
 #line 42
 #ifdef A2CPU
 #line 43

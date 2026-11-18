@@ -1,0 +1,154 @@
+{
+  "packet": "M0 T483 S7 P28",
+  "prior_checkpoint": "17411ffc7",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": {
+      "before": {
+        "blocks": 14,
+        "added": 33,
+        "deleted": 231
+      },
+      "after": {
+        "blocks": 14,
+        "added": 29,
+        "deleted": 231
+      },
+      "removed_local_frame_ranges": [
+        [
+          181,
+          181
+        ],
+        [
+          184,
+          187
+        ]
+      ],
+      "original_error_pairs": 0,
+      "prior_sha256": "5a95e294c01e250a3276717e57c72e266588e30bd17f233c0cb79a6739f53d10",
+      "current_sha256": "eab875c345d4a55c532616c87eb3180f02f3f7ce3e769bf5a5c07d13da2fe55b",
+      "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_cpu.c": {
+      "before": {
+        "blocks": 6,
+        "added": 13,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 5,
+        "added": 10,
+        "deleted": 2
+      },
+      "removed_local_frame_ranges": [
+        [
+          43,
+          46
+        ]
+      ],
+      "original_error_pairs": 10,
+      "prior_sha256": "abecf7f744685be29e8eeee98983c0519a8abe78eb7b47553527c3daf2781d10",
+      "current_sha256": "ed1f783668ec45dd96994b1d344dbe2f27f9b1bd09cc0193bf9f6264df101a6e",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f"
+    },
+    "src/mvdm-host/softpc.new/base/bios/reset.c": {
+      "before": {
+        "blocks": 2,
+        "added": 6,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 0,
+        "deleted": 2
+      },
+      "removed_local_frame_ranges": [
+        [
+          507,
+          510
+        ],
+        [
+          578,
+          581
+        ]
+      ],
+      "original_error_pairs": 38,
+      "prior_sha256": "408dfbee8fb31878424df9a20a24e6a69847d006eedb6e948d93872c387c9ac8",
+      "current_sha256": "02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b"
+    }
+  },
+  "decisions": {
+    "T483-R1023": "Remove the non-CCPU rejection frame added after original unconditional globals. The original non-CCPU condition inside host_clear_hw_int and its excluded body remain.",
+    "T483-R0220": "Remove the added CPU40 fork. The 24-byte debug-register read still uses the existing mapped-read provider because an original contiguous pointer does not cover remapped spans.",
+    "T483-R0342,R0343": "Remove the two internally added non-CPU40 frames and retain the original CPU30 structure. The original BOP fudge would subtract two from the direct reset continuation and remains omitted."
+  },
+  "census": {
+    "non_error_points": 2003,
+    "non_error_lines": 28291,
+    "nonzero_mirrors": 235,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 44,
+      "lines": 685
+    },
+    "pending_decisions": 1567
+  },
+  "verification": {
+    "preprocessing": [
+      {
+        "context": "worker-x86-nt_cpu",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/host/nt_cpu.obj",
+        "selected_lines": 46952,
+        "comparison_sha256": "7df5ee9ba79a440564930c81fac609d8c2afd386ed3d0c809cded2aeb3769af9"
+      },
+      {
+        "context": "worker-x86-reset",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/bios/reset.obj",
+        "selected_lines": 49170,
+        "comparison_sha256": "ef9b5d14ac12f63a883e4cf958b69b6e40da2f8e41c6549d84cc9c82c973c0df"
+      },
+      {
+        "context": "worker-x86-dpmi386",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/dpmi/i386_dpmi386.obj",
+        "selected_lines": 45100,
+        "comparison_sha256": "007e9434716d221354012280157693059e1cbbd9249eaf94414f0f212f059b82"
+      },
+      {
+        "context": "worker-reference-x86-nt_cpu",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/host/nt_cpu.obj",
+        "selected_lines": 46952,
+        "comparison_sha256": "7df5ee9ba79a440564930c81fac609d8c2afd386ed3d0c809cded2aeb3769af9"
+      },
+      {
+        "context": "worker-reference-x86-reset",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/bios/reset.obj",
+        "selected_lines": 49170,
+        "comparison_sha256": "ef9b5d14ac12f63a883e4cf958b69b6e40da2f8e41c6549d84cc9c82c973c0df"
+      },
+      {
+        "context": "worker-reference-x86-dpmi386",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/dpmi/i386_dpmi386.obj",
+        "selected_lines": 45100,
+        "comparison_sha256": "007e9434716d221354012280157693059e1cbbd9249eaf94414f0f212f059b82"
+      }
+    ],
+    "targeted": {
+      "cached_x86_build": "pass",
+      "ccpu_monitor_boundary_cases": 58,
+      "ccpu_debug_context": "pass",
+      "protected_mode_entry_mock_cases": 65538
+    },
+    "release": {
+      "action": "No production relink, republication or repeated Full because selected product text and logical lines are identical.",
+      "p10_full_package_id": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}
