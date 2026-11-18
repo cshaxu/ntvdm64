@@ -385,3 +385,7 @@ two blank-line removals in `int21map.c`. The filtered census is
 The filtered census is 2,011 points and 28,394 changed lines. All 242
 worklist source hashes match. Five historical paths outside this pass
 still carry nineteen conservatively counted mask cases.
+
+[S7 P24 receipt](s7-p24-checkpoint.json) resolves the nineteen historical
+mask flags in those five paths. Each local frame stays counted. Source
+bytes and the filtered census of 2,011 points and 28,394 lines are unchanged.

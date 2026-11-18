@@ -1,0 +1,202 @@
+{
+  "packet": "M0 T483 S7 P24",
+  "source_checkpoint": "ea084b444",
+  "scope": "Reconcile historical unresolved mask flags after the admitted file pass. Prior source and owner dispositions remain.",
+  "reviewed_historical_guards": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_line": 1478,
+      "original_context_line": 1413,
+      "guard": "#ifdef X86GFX",
+      "original_excerpt": "if (sc.ScreenState != FULLSCREEN)",
+      "reason": "Original console-update and restore sequence is unconditional within the stream-mode else.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_line": 1507,
+      "original_context_line": 1428,
+      "guard": "#ifdef X86GFX",
+      "original_excerpt": "if (BlockFlags == 1 && sc.ScreenState == FULLSCREEN)",
+      "reason": "Original fullscreen exit check is unconditional within the stream-mode else; nearby MONITOR arm ends at 1424.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_line": 4356,
+      "original_context_line": 4413,
+      "guard": "#else",
+      "original_excerpt": "cpu_hw_interrupt_number = ica_intack(&hook_address);",
+      "reason": "Original hardware interrupt acknowledge lives under !SFELLOW but has no inner NTVDM alternate.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 535,
+      "original_context_line": 529,
+      "guard": "#if !defined(CPU_40_STYLE)",
+      "original_excerpt": "setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);",
+      "reason": "Original setEFLAGS is unconditional.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 560,
+      "original_context_line": 540,
+      "guard": "#else",
+      "original_excerpt": "if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {",
+      "reason": "Original BuildStackFrame call is unconditional within the protected interrupt branch.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 571,
+      "original_context_line": 529,
+      "guard": "#else",
+      "original_excerpt": "setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);",
+      "reason": "Local flag commit follows validated frame; original unconditionally commits at entry.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 582,
+      "original_context_line": 547,
+      "guard": "#else",
+      "original_excerpt": "*(PDWORD16)(VdmStackPointer-8) =  getCS();",
+      "reason": "Original CS frame store is unconditional within the runtime Frame32 branch.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 603,
+      "original_context_line": 549,
+      "guard": "#else",
+      "original_excerpt": "setEIP(Handlers[IntNumber].Eip);",
+      "reason": "Original EIP/SP commit belongs to the runtime frame-width branch.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 1095,
+      "original_context_line": 1058,
+      "guard": "#else",
+      "original_excerpt": "BuildStackFrame(",
+      "reason": "Original BuildStackFrame signature has no CPU-specific preprocessor alternate.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 1165,
+      "original_context_line": 1121,
+      "guard": "#else",
+      "original_excerpt": "if (CurrentAppFlags) {",
+      "reason": "Original width test is runtime CurrentAppFlags, with no CPU-specific preprocessor alternate.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 1235,
+      "original_context_line": 1174,
+      "guard": "#else",
+      "original_excerpt": "#endif // i386",
+      "reason": "Original #ifndef i386 has no else arm at this site.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_line": 1274,
+      "original_context_line": 1208,
+      "guard": "#else",
+      "original_excerpt": "#endif // i386",
+      "reason": "Original #ifndef i386 has no else arm at this site.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_line": 3099,
+      "original_context_line": 3316,
+      "guard": "#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): no host-arrow shape provider. */",
+      "original_excerpt": "if (host_mouse_installed())",
+      "reason": "Original runtime installed-host-arrow choice belongs to the MOUSE_16_BIT else within the outer !NTVDM region. This inner !NTVDM guard is local.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_line": 4995,
+      "original_context_line": 5238,
+      "guard": "#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): Window never warps host pointer. */",
+      "original_excerpt": "if (host_mouse_in_use())",
+      "reason": "Original runtime host-mouse-in-use choice belongs to the outer !NTVDM arm without another inner preprocessor guard.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_line": 5069,
+      "original_context_line": 5301,
+      "guard": "#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): bypass the Console host arrow. */",
+      "original_excerpt": "if (host_mouse_installed())",
+      "reason": "Original runtime arrow choice belongs to MOUSE_16_BIT else with no inner !NTVDM guard.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_line": 310,
+      "original_context_line": 474,
+      "guard": "#else",
+      "original_excerpt": "if (((PDIALOG)pwnd)->resultWP != 0)",
+      "reason": "Original private resultWP test has no preprocessor alternate.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_line": 325,
+      "original_context_line": 482,
+      "guard": "#else",
+      "original_excerpt": "if (PDLG(pwnd)->lpfnDlg != NULL) {",
+      "reason": "Original private lpfnDlg test and call have no preprocessor alternate.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_line": 736,
+      "original_context_line": 884,
+      "guard": "#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "original_excerpt": "if (lParam == NF_QUERY)",
+      "reason": "Original WM_NOTIFYFORMAT runtime test has no preprocessor guard.",
+      "decision": "count-local-conditional-framework"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_line": 794,
+      "original_context_line": 937,
+      "guard": "#else",
+      "original_excerpt": "return ((PDIALOG)pwnd)->resultWP;",
+      "reason": "Original private resultWP return has no preprocessor alternate.",
+      "decision": "count-local-conditional-framework"
+    }
+  ],
+  "remaining_mask_review_cases": 0,
+  "ledgers": [
+    {
+      "ledger": "file-worklist.csv",
+      "rows": 242,
+      "non_error_points": 2011,
+      "non_error_lines": 28394
+    },
+    {
+      "ledger": "owner-review-order.csv",
+      "rows": 236,
+      "non_error_points": 2011,
+      "non_error_lines": 28394
+    }
+  ],
+  "source_reduction_s7": {
+    "points": 36,
+    "lines": 582
+  },
+  "new_source_edits": 0,
+  "measurement_delta": {
+    "points": 0,
+    "lines": 0
+  }
+}

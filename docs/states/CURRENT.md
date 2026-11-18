@@ -181,9 +181,11 @@ The S7 file pass covers all 213 admitted paths. Source restorations reduce
 36 points and 582 changed lines in S7. The current census is 2,011 non-error
 points and 28,394 changed lines across 236 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
-Nineteen historical conservative mask cases remain in five previously
-reviewed paths outside the admitted S7 file pass. Residual owner decisions
-remain recorded in the pending decision ledger.
+P24 reconciles nineteen historical mask cases across five previously
+reviewed paths. All are local conditional frames without a matching original
+arm. The totals above include them. Both ledgers have zero unresolved mask
+cases. Residual source decisions remain recorded in the pending ledger.
+[P24 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p24-checkpoint.json).
 
 ## S1 Closure Record
 
