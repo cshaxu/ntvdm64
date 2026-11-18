@@ -16,7 +16,7 @@ $observerPath=(Resolve-Path $Observer).Path
 New-Item -ItemType Directory -Path $out | Out-Null
 $source=if($Case -eq 'Boundaries'){'xms_block_boundaries.asm'}else{'xms_capability.asm'}
 $defines=@(); if($Case -eq 'Existing'){$defines+= '-DDEFAULT_INT15'}
-& nasm @defines -f bin "$PSScriptRoot/$source" -o "$out/XMSCASE.COM"
+& nasm @defines -f bin "$PSScriptRoot/../observation/$source" -o "$out/XMSCASE.COM"
 if($LASTEXITCODE){throw 'XMS probe assembly failed'}
 $runtime=$null;$scope=$null;$process=$null
 $names=@('PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INITIAL_GEOMETRY')

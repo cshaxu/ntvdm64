@@ -1,0 +1,63 @@
+{
+  "packet": "T483 S8 P116",
+  "position": 160,
+  "path": "src/mvdm-host/xms.486/xmsblock.c",
+  "review_ids": [
+    "T483-R1934",
+    "T483-R1935",
+    "T483-R1937",
+    "T483-R1938",
+    "T483-R1941"
+  ],
+  "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+  "current_sha256": "b36334e5f935a1e9face8676b35d3752fa5658d5cc6392a0b61958b601af97ee",
+  "before": {
+    "blocks": 5,
+    "added": 19,
+    "deleted": 13
+  },
+  "after": {
+    "blocks": 5,
+    "added": 17,
+    "deleted": 12
+  },
+  "source_changed": true,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        208,
+        203,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 160,
+    "remaining": 71,
+    "files": 231,
+    "points": 1908,
+    "lines": 26934,
+    "pending": 1534
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "6f280dd8-9a6b-481a-acba-ad89a8a422ba",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "build": "cached x86/x64 exit 0",
+    "fixture": "Corrected stale NASM source directory in existing integration runner; both cases exercised on final package.",
+    "guest": [
+      "XMS-BOUNDARIES-PASS",
+      "S35_XMS_ALLOC_MOVE_REALLOC_FREE_A20_OK"
+    ]
+  },
+  "decision": "R1934 retain typed memory/cancellation prototypes. R1935 zero DX skips SAAllocate but returns BaseAddress; keep defined pool base. R1937/R1938 preserve numeric descriptor read across guest pages. Removed duplicate underflow check: for end in 0..11, uint32(end-12) exceeds UINT32_MAX-12; copy_from rejects before acquiring a lease. R1941 retain validated forward SAS transfer across nonaffine mappings; cancellation prevents false AX success. Restored blank before endif and removed redundant #line 186."
+}

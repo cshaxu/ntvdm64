@@ -182,11 +182,9 @@ VOID xmsMoveBlock (VOID)
 PBYTE	pExtMoveInfo,pSrc,pDst;
 ULONG	cbTransfer,SoftpcBase, DstSegOff;
 UCHAR MoveInfo[12];
-ULONG MoveInfoAddress;
+ULONG MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
 
-    MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
-    if (MoveInfoAddress < sizeof(MoveInfo) ||
-        !mvdm_softpc_guest_memory_copy_from(
+    if (!mvdm_softpc_guest_memory_copy_from(
             MoveInfoAddress - sizeof(MoveInfo), MoveInfo, sizeof(MoveInfo))) {
         mvdm_xms_cancel_current_operation();
         return;
@@ -197,7 +195,6 @@ ULONG MoveInfoAddress;
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
     cbTransfer = (FETCHDWORD(*(PULONG)pExtMoveInfo));
     cbTransfer *= 2;					// Get in bytes
-#line 186
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
     (DWORD)pSrc = FETCHDWORD(*(PULONG)pExtMoveInfo);
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
@@ -216,6 +213,7 @@ ULONG MoveInfoAddress;
         mvdm_xms_cancel_current_operation();
         return;
     }
+
 #endif
 #line 209
     setAX(1);
