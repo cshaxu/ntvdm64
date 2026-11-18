@@ -1,0 +1,136 @@
+{
+  "packet": "T483 S8 P141",
+  "position": 184,
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "review_ids": [
+    "T483-R2175",
+    "T483-R2178"
+  ],
+  "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+  "current_sha256": "fc6bbaa3a31d557e8faf231e1eb9a5545db1eaec07f4d3e1dd963233054740a7",
+  "before": {
+    "blocks": 27,
+    "added": 6,
+    "deleted": 973
+  },
+  "after": {
+    "blocks": 27,
+    "added": 6,
+    "deleted": 973
+  },
+  "source_changed": true,
+  "paired_error_bodies": 16,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        273,
+        272,
+        "#endif // FE_SB"
+      ],
+      [
+        330,
+        329,
+        "#endif // FE_IME"
+      ],
+      [
+        355,
+        333,
+        "#else"
+      ],
+      [
+        363,
+        356,
+        "#endif // FE_SB"
+      ],
+      [
+        412,
+        402,
+        "#else"
+      ],
+      [
+        414,
+        413,
+        "#endif // FE_SB"
+      ],
+      [
+        428,
+        418,
+        "#else"
+      ],
+      [
+        430,
+        429,
+        "#endif // FE_SB"
+      ],
+      [
+        446,
+        435,
+        "#else"
+      ],
+      [
+        448,
+        447,
+        "#endif // FE_SB"
+      ],
+      [
+        451,
+        449,
+        "#endif"
+      ],
+      [
+        466,
+        455,
+        "#else"
+      ],
+      [
+        469,
+        467,
+        "#endif // FE_SB"
+      ],
+      [
+        570,
+        568,
+        "#endif"
+      ],
+      [
+        577,
+        574,
+        "#endif"
+      ],
+      [
+        1208,
+        907,
+        "#endif"
+      ],
+      [
+        1676,
+        1652,
+        "#endif"
+      ],
+      [
+        1789,
+        1779,
+        "#else"
+      ],
+      [
+        1852,
+        1790,
+        "#endif // FE_SB"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 184,
+    "remaining": 47,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Original and final hashes and filtered hunks measured. GetCPD comment and following declaration explicitly checked against original lines 1907-1916. Remaining listed coordinates are conditional directives around omitted bodies; no selected C instruction changed. No build or runtime rerun for comment coordinates."
+  },
+  "decision": "Compared with S6 P11 (clmsg-whole-file-review.json), which enumerates seven residual groups and both compiler contexts. R2175: original dispatch, class/window procedures, GDI and string message thunks, and queue accessors require private USER tables and object layouts. SDK imports and current USER32 transport own the selected operations; default-only FNID provider cannot serve the omitted class procedures. Existing selectors isolate default worker and CPD contexts. R2178: WM_MOVE may retire native HWND before the following WM_SIZE even though WND storage remains borrowed. Source-level reentrancy proof only; no new runtime handle-reuse claim. Standalone original listbox callback, diagnostic function and original thunk macros already restored. Only prior change since P11 was deletion of consecutive duplicate #line 331. Corrected the comment before GetCPD from logical 1906 to 1907.",
+  "before_sha256": "a22c50a3f3ec311a0ccda253bcecb0b8a8a1a8fe57deb30f1e7cdbe09f40a325"
+}

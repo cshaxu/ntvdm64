@@ -557,7 +557,7 @@ LONG fnKERNELONLY(
 #line 1853
 
 #if defined(WOW_ORIGINAL_CLIENT_CPD)
-#line 1906
+#line 1907
 /***********************************************************************\
 * GetCPD
 *
