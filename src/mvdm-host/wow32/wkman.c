@@ -22,23 +22,26 @@
 --*/
 
 #include "precomp.h"
-#include "wow_task_termination.h"
-#line 25
 #pragma hdrstop
-extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
-#line 26
 #include <ntexapi.h>
 #include <sharewow.h>
-#pragma push_macro("_X86_")
-#undef _X86_
 #define _X86_
 #line 28
 #include <vdmdbg.h>
-#pragma pop_macro("_X86_")
+#undef _X86_
 #line 30
 #include "wowfax.h"
+#include "wow_task_termination.h"
 #include "wow_idle_hook_binding.h"
 #include <common/wow/registry.h>
+extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
+
+static VOID W32ExitWowProcess(DWORD exit_code)
+{
+    exit_code = NtvdmAuthorizeExit(exit_code);
+    ExitVDM(WOWVDM, ALL_TASKS);
+    ExitProcess(exit_code);
+}
 
 #line 32
 extern void UnloadNetworkFonts( UINT id );
@@ -539,15 +542,11 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
         SuspendTimerThread();       // turns timer thread off
 
     if (fBoot) {
-        DWORD exit_code;
-#line 560
         W32Thread((LPVOID)vpStack);    // SHOULD NEVER RETURN
 
         WOW32ASSERTMSG(FALSE, "\nWOW32: WK32WOWInitTask ERROR - Main Thread Returning - Contact DaveHart\n");
-        exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
-#line 563
-        ExitVDM(WOWVDM, ALL_TASKS);
-        ExitProcess(exit_code);
+        W32ExitWowProcess(EXIT_FAILURE);
+#line 565
     }
 
     hThread = host_CreateThread(NULL,
@@ -2977,12 +2976,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
 
             LOGDEBUG(LOG_ALWAYS, ("W32HungAppNotifyThread: Destroying WOW Process\n"));
 
-            {
-                DWORD exit_code = NtvdmAuthorizeExit(0);
-#line 2982
-                ExitVDM(WOWVDM, ALL_TASKS);
-                ExitProcess(exit_code);
-            }
+            W32ExitWowProcess(0);
 #line 2984
         }
 
@@ -4353,9 +4347,7 @@ Done:
 ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
 {
     PEXITKERNEL16 parg16;
-    DWORD exit_code;
 
-#line 4352
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
     WOW32ASSERTMSG(
@@ -4366,10 +4358,8 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
         "\n\n"
         );
 
-    exit_code = NtvdmAuthorizeExit(parg16->wExitCode);
-#line 4362
-    ExitVDM(WOWVDM, ALL_TASKS);
-    ExitProcess(exit_code);
+    W32ExitWowProcess(parg16->wExitCode);
+#line 4364
 
     return 0;   // Never executed, here to avoid compiler warning.
 }
@@ -4388,9 +4378,7 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
 ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 {
     PFATALEXIT16 parg16;
-    DWORD exit_code;
 
-#line 4383
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
     WOW32ASSERTMSGF(
@@ -4404,10 +4392,8 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 
     // Sometimes we get this with no harm done (app bug)
  
-    exit_code = NtvdmAuthorizeExit(parg16->f1);
-#line 4396
-    ExitVDM(WOWVDM, ALL_TASKS);
-    ExitProcess(exit_code);
+    W32ExitWowProcess(parg16->f1);
+#line 4398
 
     return 0;   // Never executed, here to avoid compiler warning.
 }

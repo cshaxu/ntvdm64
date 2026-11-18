@@ -1,0 +1,50 @@
+{
+  "packet": "T483 S8 P86",
+  "position": 130,
+  "path": "src/mvdm-host/wow32/wkgthunk.c",
+  "review_ids": [
+    "T483-R1468"
+  ],
+  "original_sha256": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+  "current_sha256": "c826aaeceff4640a7a205eefb6b504713f65c868b499f4902c1fb915f0a3f26e",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        35,
+        29,
+        "#endif"
+      ],
+      [
+        56,
+        52,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 130,
+    "remaining": 101,
+    "files": 231,
+    "points": 1926,
+    "lines": 27012,
+    "pending": 1541
+  },
+  "decision": "R1468 retained pending. Production selects the original x86 call body in WK32ICallProc32 while keeping the two loader FPU branches excluded. Restoring the single original condition selects the portable body. Defining i386 for the translation unit also selects both #error branches.",
+  "verification": {
+    "current": "Fresh x86 compile and link with callpr32.obj. All 12 host fixture cases passed including zero and 32 arguments, calling conventions and propagated exception.",
+    "prior": "Pinned original in r1467-r1468-wkgthunk-review.json exited C0000409. This turn reran the selected current body only; no guest run."
+  }
+}
