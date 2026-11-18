@@ -2245,7 +2245,6 @@ VOID DlgSetFocus(HWND hwnd);
 void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
 BOOL ValidateDialogPwnd(PWND pwnd);
 #line 2169
-/* Bounded native USER collaborator declarations. */
 BOOL _GetClientRect(PWND pwnd, LPRECT prc);
 BOOL _IsChild(PWND pwndParent, PWND pwnd);
 BOOL _AdjustWindowRectEx(LPRECT lprc, LONG style, BOOL fMenu, DWORD dwExStyle);
@@ -2254,12 +2253,10 @@ BOOL _ScreenToClient(PWND pwnd, PPOINT ppt);
 BOOL _IsWindowVisible(PWND pwnd);
 BOOL IsVisible(PWND pwnd);
 PWND GetTopLevelWindow(PWND pwnd);
-/* OPENNT-HOST-106: original Tab-navigation collaborator declarations. */
 PWND _NextControl(PWND pwndDlg, PWND pwnd, UINT uFlags);
 PWND _PrevControl(PWND pwndDlg, PWND pwnd, UINT uFlags);
 PWND _GetChildControl(PWND pwndDlg, PWND pwndLevel);
 PWND _GetNextDlgTabItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);
-/* OPENNT-HOST-109: original dialog group-navigation collaborator. */
 PWND _GetNextDlgGroupItem(PWND pwndDlg, PWND pwnd, BOOL fPrev);
 BOOL _IsDescendant(PWND pwndParent, PWND pwndChild);
 BOOL FChildVisible(HWND hwnd);

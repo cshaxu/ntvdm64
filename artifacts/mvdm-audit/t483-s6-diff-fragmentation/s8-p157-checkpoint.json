@@ -1,0 +1,65 @@
+{
+  "packet": "T483 S8 P157",
+  "position": 200,
+  "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "review_ids": [
+    "T483-R2383",
+    "T483-R2387",
+    "T483-R2393",
+    "T483-R2394",
+    "T483-R2395",
+    "T483-R2396",
+    "T483-R2401"
+  ],
+  "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+  "current_sha256": "d1c8c82ddc6237a50b048c0cb8d0f449e68865195b8b27f1b17e00b91e6d88ca",
+  "before": {
+    "blocks": 44,
+    "added": 75,
+    "deleted": 38
+  },
+  "after": {
+    "blocks": 44,
+    "added": 72,
+    "deleted": 38
+  },
+  "source_changed": true,
+  "paired_error_bodies": 17,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        2316,
+        2309,
+        "#else"
+      ],
+      [
+        2336,
+        2322,
+        "#else"
+      ],
+      [
+        2351,
+        2344,
+        "#else"
+      ],
+      [
+        2367,
+        2360,
+        "#else"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 200,
+    "remaining": 31,
+    "files": 231,
+    "points": 1912,
+    "lines": 26391,
+    "pending": 1533
+  },
+  "decision": "Removed three local comments from the added collaborator prototype block. All declarations and #line 2170 for the next original declaration are unchanged. Cross-checked the multipass wrapper that undefines _USERCLI_ and restores it after inclusion. Restoring RIP_COMPONENT would activate excluded diagnostics on the second pass. Lookaside-only declarations do not import private full USER/CSR layouts; existing x86 Gd provider uses WINAPI. Original harmless primitive declarations and macros previously restored remain intact. Residual groups R2383/R2387/R2393-96/R2401 remain pending.",
+  "verification": {
+    "scope": "Final header differs from starting header by three standalone comments only; final filtered metrics, #error pairing and original logical lines checked. No new build or runtime test."
+  }
+}
