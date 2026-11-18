@@ -1,0 +1,95 @@
+{
+  "packet": "T483 S8 P26",
+  "files": [
+    {
+      "position": 62,
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "current_sha256": "98f124308ee7c089cc4a6156e3de2f5887a01b637950eff5f616d07961e06fab",
+      "metrics": {
+        "blocks": 24,
+        "added": 49,
+        "deleted": 7
+      },
+      "paired_error_arms": 69,
+      "review_ids": [
+        "T483-R0718",
+        "T483-R0720",
+        "T483-R0721",
+        "T483-R0722",
+        "T483-R0723",
+        "T483-R0724",
+        "T483-R0725",
+        "T483-R0726",
+        "T483-R0728",
+        "T483-R0729",
+        "T483-R0730",
+        "T483-R0732",
+        "T483-R0733",
+        "T483-R0734",
+        "T483-R0735",
+        "T483-R0736",
+        "T483-R0737",
+        "T483-R0738",
+        "T483-R0739",
+        "T483-R0740",
+        "T483-R0741",
+        "T483-R0742",
+        "T483-R0744",
+        "T483-R0745",
+        "T483-R0747",
+        "T483-R0748"
+      ],
+      "decision": "Retain residuals pending owner. Production source and line directives unchanged.",
+      "evidence": [
+        "nt_event.c calls PendingKeyboardHistory before its handoff. Raw origin travels with the 6805 ring byte, held event, translation prefix and unread output; internal replies have no console receipt. Fresh extracted device fixture passed seven checks including wrap, prefix, replay and reset. Its host reset callback is controlled.",
+        "Reset6805and8042 snapshots pending user-origin output before clearing queues; mvdm_keyboard_reset_pending_irq cancels the delayed IRQ and the PIC line only for that case.",
+        "Real controller/PIC fixture: 90 assertions, 0 failures. Early EOI preserves unread 60h data, status reads do not consume it, ICW1 cancels it. Direct controller replies set output and status.",
+        "Original CPU reset arm names the private c_main.c interrupt map. cpu_interrupt(CPU_HW_RESET,0) reaches c_cpu_raise_event(CPU_RESET_EXCEPTION_MASK). Source checked; no fresh reset execution claimed.",
+        "In-memory EOI alternatives measured 23 points / 51 lines with duplicated pending-state clear, or 24 / 53 with a new goto. Existing structured block keeps a single pending-state clear and lock release."
+      ],
+      "device_fixture_sha256": "4b2022c61ecb33cf415cf1e06f72b2b42521c35552b698b872071cd2441427a9",
+      "controller": {
+        "profile": "x86 /MT NTVDM CCPU40",
+        "elapsed_ms": 339,
+        "executable_sha256": "5E9BB9272AB7C4BAC185761DBE0EBC79D0FDE770A0F1703995B94508F1E3D74D",
+        "keyba_sha256": "98F124308EE7C089CC4A6156E3DE2F5887A01B637950EFF5F616D07961E06FAB",
+        "ica_sha256": "6CCBDD1C1A00457FFF9D236321F69B80D87FC2ABE88BC31EB8F64617247E2304",
+        "controller_reply": "C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes",
+        "scope": "Actual controller/PIC; normal and early EOI slot order, whole-device reset cancellation, controlled host callbacks, no BIOS ISR/timer acceptance"
+      }
+    },
+    {
+      "position": 63,
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "current_sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9",
+      "metrics": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 4
+      },
+      "paired_error_arms": 26,
+      "review_ids": [
+        "T483-R0750",
+        "T483-R0751",
+        "T483-R0752"
+      ],
+      "decision": "Retain all three address-domain adaptations pending owner. Source and line directives unchanged.",
+      "evidence": [
+        "MS_bop_F calls kb_setup_vectors. CCPU SAS initialization obtains non-null Start_of_M_area from host_sas_init. Table entries are read via a host pointer relative to that base.",
+        "sas_loadw takes a guest address. Entry 12 is at byte offset 12*sizeof(word) in that address domain. Casting the rebased host pointer to sys_addr would supply the wrong address.",
+        "video.c indexes stream_io_buffer through the dirty-count pointer and gfx_updt.c dereferences it. Both need host addresses. The adjacent BIOS busy field stays a guest sys_addr."
+      ],
+      "validation": "Pinned-source comparison and consumer audit only."
+    }
+  ],
+  "coverage": {
+    "complete": 63,
+    "remaining": 168,
+    "files": 231,
+    "points": 1951,
+    "lines": 27106,
+    "pending": 1549
+  }
+}

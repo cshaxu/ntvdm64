@@ -54,7 +54,6 @@
 
 IMPORT VOID host_applClose IPT0();
 IMPORT VOID host_terminate IPT0();
-IMPORT VOID ntvdm_worker_lifecycle_authorize_exit IPT0();
 
 #line 56
 void terminate()
@@ -62,6 +61,7 @@ void terminate()
 	SAVED BOOL already_called_terminate = FALSE;
 	UTINY i;
 
+	IMPORT VOID ntvdm_worker_lifecycle_authorize_exit IPT0();
 	ntvdm_worker_lifecycle_authorize_exit();
 #line 61
 	if (already_called_terminate)

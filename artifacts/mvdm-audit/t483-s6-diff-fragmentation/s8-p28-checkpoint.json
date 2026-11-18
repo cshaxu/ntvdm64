@@ -1,0 +1,45 @@
+{
+  "packet": "T483 S8 P28",
+  "position": 65,
+  "path": "src/mvdm-host/softpc.new/base/support/main.c",
+  "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+  "current_sha256": "6975575c0c3b98e3cc4a246cd5910fbb93370506d593a13e212c1dfb69834898",
+  "before": [
+    2,
+    3,
+    0
+  ],
+  "after": [
+    1,
+    2,
+    0
+  ],
+  "review_ids": [
+    "T483-R0820",
+    "T483-R0821"
+  ],
+  "decision": "Original #endif restored immediately after excluded body. Move host_start_cpu prototype beside mouse_driver_initialisation. Same selected declarations, no function changes. Both decisions remain pending.",
+  "verification": [
+    "Current and no-declaration controls compile with product flags plus /w14013. Only the no-declaration control adds C4013 for each of the two void functions. Both also report the pre-existing InitialiseDosEmulation warning. /we4013 makes this common warning fatal in both.",
+    "Original CPU conditional remains fatal on the excluded arm. Logical coordinates for host_start_cpu (55), closing #endif (56), mouse declaration (57) and original init_virtual_drivers (58) preserved.",
+    "Cached x86 and x64 full builds completed with exit 0. Packaging and two-destination verification cover P27 and P28. No new runtime suite requested for layout-only changes."
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "1102aded-c6e6-436a-bc60-236ab90724e1",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "coverage": {
+    "complete": 65,
+    "remaining": 166,
+    "files": 231,
+    "points": 1950,
+    "lines": 27102,
+    "pending": 1549
+  }
+}

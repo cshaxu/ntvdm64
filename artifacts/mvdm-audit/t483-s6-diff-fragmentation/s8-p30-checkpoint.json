@@ -1,0 +1,56 @@
+{
+  "packet": "T483 S8 P30",
+  "position": 68,
+  "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+  "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+  "current_sha256": "e7ca87bf202df90d0f496c6ffb5e60e3b8e3f6298d4ca045f975be0d5734b37b",
+  "before": [
+    3,
+    13,
+    0
+  ],
+  "after": [
+    2,
+    7,
+    0
+  ],
+  "review_ids": [
+    "T483-R0829",
+    "T483-R0830",
+    "T483-R0831"
+  ],
+  "decision": "Place canceled in SWPIC_outb ICW1 scope. Remove three project-added NTVDM conditionals around the snapshot, lock and cancellation. The selected CPU40 product graph defines NTVDM; original excluded arms stay intact.",
+  "coverage": {
+    "complete": 68,
+    "remaining": 163,
+    "files": 231,
+    "points": 1948,
+    "lines": 27096,
+    "pending": 1549
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c4404da3-6c0b-4320-9b9b-1232cac4356e",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "pic_reset_eoi": {
+      "assertions": 24,
+      "failures": 0
+    },
+    "keyboard_pic": {
+      "assertions": 90,
+      "failures": 0
+    },
+    "scope": "Production-object controller fixtures with controlled host boundaries; no fresh DOS guest probe."
+  }
+}

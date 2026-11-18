@@ -1,0 +1,89 @@
+{
+  "packet": "T483 S8 P27",
+  "position": 64,
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "before": [
+    33,
+    310,
+    30
+  ],
+  "after": [
+    33,
+    311,
+    26
+  ],
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "current_sha256": "a41f2eea922987cdc43ab4c5d87558a79b13eb931997909fb48fe05bd0efee0a",
+  "paired_error_arms": 88,
+  "mask_issues": [],
+  "ids": [
+    "T483-R0753",
+    "T483-R0755",
+    "T483-R0756",
+    "T483-R0757",
+    "T483-R0758",
+    "T483-R0760",
+    "T483-R0762",
+    "T483-R0763",
+    "T483-R0764",
+    "T483-R0765",
+    "T483-R0767",
+    "T483-R0770",
+    "T483-R0773",
+    "T483-R0775",
+    "T483-R0776",
+    "T483-R0778",
+    "T483-R0779",
+    "T483-R0781",
+    "T483-R0782",
+    "T483-R0785",
+    "T483-R0786",
+    "T483-R0787",
+    "T483-R0790",
+    "T483-R0791",
+    "T483-R0792",
+    "T483-R0793",
+    "T483-R0794",
+    "T483-R0795",
+    "T483-R0796",
+    "T483-R0797",
+    "T483-R0798",
+    "T483-R0799",
+    "T483-R0800",
+    "T483-R0801",
+    "T483-R0802",
+    "T483-R0803",
+    "T483-R0804",
+    "T483-R0805",
+    "T483-R0806",
+    "T483-R0807",
+    "T483-R0808"
+  ],
+  "decision": "Four original statements restored verbatim by separating cursor metadata writes; all residuals remain pending. This is source layout only. One superseded #line 3712 removed.",
+  "verification": [
+    "No operation or operand changed. Original lines 5502, 5649, 5907, 6046 and their successors retain coordinates; 88 exclusion directives unchanged.",
+    "Reentry fixture against original: outer AX expected 1100, actual 0001. Selected production function bodies preserve frames.",
+    "Separate fixture records setIP at callback entry. Original offset adjustment yields 431f for registration at 4321; selected form gives 4321. The registered offset and the exclusion framework serve separate responsibilities.",
+    "A 56-line masked insertion includes 50 contiguous original lines from 3321. INT33 function 9 loads guest-supplied masks; copy_default_graphics_cursor expands existing arrays but does not fetch client masks. Keep paired exclusions and active original painter.",
+    "Remaining reviewed points retain mode-derived state, per-instance coordinates, route ownership, context checksum, captured representation and callback frame; see linked per-ID evidence. Original save checksum is zero; original restore sums cookie and context before comparing."
+  ],
+  "callback_entry": {
+    "selected": {
+      "exit": 0,
+      "stdout": "PASS: original callback bodies preserve independent nested guest frames"
+    },
+    "restore-original-ip": {
+      "exit": 3,
+      "stdout": "callback entry 431f expected 4321"
+    }
+  },
+  "delivery": "Local layout batch, no new binary delivered.",
+  "coverage": {
+    "complete": 64,
+    "remaining": 167,
+    "files": 231,
+    "points": 1951,
+    "lines": 27103,
+    "pending": 1549
+  }
+}

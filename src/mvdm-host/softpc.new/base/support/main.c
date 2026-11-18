@@ -58,10 +58,10 @@
 #ifndef CPU_40_STYLE	/* defined in CpuH */
 #line 55
 #error Excluded unsupported non-CPU40 host startup profile
-#else
+#line 56
+#endif
 #line 55
 extern void host_start_cpu(void);
-#endif
 #line 57
 extern void mouse_driver_initialisation(void);
 

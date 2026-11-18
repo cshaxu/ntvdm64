@@ -1,0 +1,88 @@
+{
+  "packet": "T483 S8 P29",
+  "files": [
+    {
+      "position": 66,
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "current_sha256": "8617a5690ccc0d8926fe948e2bd31e28192bfad74551085297ba34111bad500a",
+      "before": [
+        11,
+        11,
+        18
+      ],
+      "after": [
+        11,
+        11,
+        18
+      ],
+      "review_ids": [
+        "MVDM-HOST-DIV-901",
+        "T483-R1111",
+        "T483-R1112",
+        "T483-R1113",
+        "T483-R1114",
+        "T483-R1115",
+        "T483-R1116",
+        "T483-R1117",
+        "T483-R1118",
+        "T483-R1120",
+        "T483-R1121"
+      ],
+      "decision": "Keep evidenced residuals pending. Source, #error and #line unchanged.",
+      "verification": [
+        "Reproduced frozen count by replacing the generic ambiguous X86GFX mask with two exact pairs: original 1215-1403 and 1415-1463, each mapped to the corresponding #error body at its numbered anchor. The original state getter between the slices is retained and used by kb_setup_vectors.",
+        "Fresh extracted calcScreenParams test passes on selected function. Removing font loading fails cell_height==heights[i] && font_height==heights[i]. Preserves downloaded glyph on equal height. Controlled fixture; no fresh guest boot.",
+        "Original hardware WINDOWED tests skip geometry, software update enable and CRTC cursor updates for emulated fullscreen. Software presentation shares backing in both modes. The planar cell stride is 8 bytes (postincrement plus 7); original advances only 4.",
+        "Original nt_reset.c declares and calls AddTempIVTFixups only under MONITOR, to service native BIOS printer initialization. The excluded hardware monitor path is outside approved composition. No selected source caller found. No runtime fault inferred from the uncalled definition."
+      ]
+    },
+    {
+      "position": 67,
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "current_sha256": "ab8e3b60456e945b1f32864f9741ea0595a3ec5647774ce9ac3ab678a46743fb",
+      "before": [
+        2,
+        2,
+        0
+      ],
+      "after": [
+        1,
+        2,
+        0
+      ],
+      "review_ids": [
+        "T483-R0823",
+        "T483-R0824"
+      ],
+      "decision": "Single block-scope declaration for the single call. Both residuals pending owner. No runtime operations moved.",
+      "verification": [
+        "bios.obj and nt_reset.obj both reference _mvdm_softpc_terminate. BIOS dispatch table slot 19h directly targets terminate. Moving authorization solely into TerminateVDM misses this entry. Authorization serializes a competing entrant before the original unconditional exit(0) shortcut.",
+        "Verified identical content and logical coordinates on all 110 nonempty rows other than the two local additions; excluded directives are unchanged."
+      ]
+    }
+  ],
+  "coverage": {
+    "complete": 67,
+    "remaining": 164,
+    "files": 231,
+    "points": 1949,
+    "lines": 27102,
+    "pending": 1549
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ad4c5f03-cbfa-45b8-ad62-f4e68e4594d1",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  }
+}

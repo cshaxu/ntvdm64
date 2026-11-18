@@ -3487,7 +3487,6 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #line 3717
 #endif
-#line 3712
 #line 3718
 	note_trace0(MOUSE_VERBOSE, "mouse_io: mouse_save_state()");
 
@@ -5241,7 +5240,10 @@ GLOBAL void software_text_cursor_display IFN0()
 		/*
 		 *	Save area text cursor will cover
 		 */
-		sas_loadw(text_address, &text_cursor_background); saved_text_address = text_address; saved_cursor_kind = MOUSE_SAVED_TEXT;
+		sas_loadw(text_address, &text_cursor_background);
+		saved_text_address = text_address;
+		saved_cursor_kind = MOUSE_SAVED_TEXT;
+#line 5503
 		save_area_in_use = TRUE;
 		point_copy(&cursor_area.top_left, &save_position);
 
@@ -5391,7 +5393,9 @@ LOCAL EGA_graphics_cursor_display IFN0()
 		/*
 		 *	Record save position and screen area
 		 */
-		save_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_EGA;
+		save_area_in_use = TRUE;
+		saved_cursor_kind = MOUSE_SAVED_EGA;
+#line 5650
 		area_coerce_to_area(&save_area, &virtual_screen);
 		point_copy(&save_area.top_left, &save_position);
 
@@ -5653,7 +5657,9 @@ LOCAL VOID	VGA_graphics_cursor_display IFN0()
 		/*
 		 *	Record save position and screen area
 		 */
-		save_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_VGA;
+		save_area_in_use = TRUE;
+		saved_cursor_kind = MOUSE_SAVED_VGA;
+#line 5908
 		area_coerce_to_area(&save_area, &virtual_screen);
 		point_copy(&save_area.top_left, &save_position);
 
@@ -5795,7 +5801,9 @@ LOCAL void graphics_cursor_display IFN0()
 		/*
 		 *	Record save position and screen area
 		 */
-		save_area_in_use = TRUE; saved_cursor_kind = MOUSE_SAVED_CGA;
+		save_area_in_use = TRUE;
+		saved_cursor_kind = MOUSE_SAVED_CGA;
+#line 6047
 		point_copy(&save_area.top_left, &save_position);
 		area_coerce_to_area(&save_area, &virtual_screen);
 

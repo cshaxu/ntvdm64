@@ -835,10 +835,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 
     IU32 i;		/* Counter				  */
     IS32 line;			/* Interrupt line number 		  */
-#ifdef NTVDM
-    IU8 canceled;		/* Device ownership retired by ICW1 reset */
-#endif
-#line 868
 
     /*
      * First check the validity of the port
@@ -860,10 +856,9 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 
     if (((port & 1) == 0) && (value & 0x10))		/****  ICW1  ****/
     {
-#ifdef NTVDM
+	IU8 canceled;
 	host_ica_lock();
 	canceled = asp->ica_irr | asp->ica_isr;
-#endif
 #line 891
         asp->ica_irr  = 0;	/* Clear all pending interrupts		*/
         asp->ica_isr  = 0;	/* Clear all in-progress interrupts	*/
@@ -882,12 +877,10 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	asp->ica_cpu_int = FALSE;	/* No CPU INT outstanding	*/
 	sequence[adapter] = 2;		/* Prepare for the rest of the sequence	*/
 
-#ifdef NTVDM
 	for (i = 0; i < 8; ++i)
 	    if (canceled & (1 << i))
 		host_EOI_hook(i + (adapter << 3), -1);
 	host_ica_unlock();
-#endif
 #line 908
 #ifndef PROD
 #line 909
