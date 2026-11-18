@@ -1,0 +1,69 @@
+{
+  "packet": "T483 S8 P115",
+  "position": 159,
+  "path": "src/mvdm-host/wow32/wuwind.c",
+  "review_ids": [
+    "T483-R1916",
+    "T483-R1918",
+    "T483-R1919",
+    "T483-R1920",
+    "T483-R1921",
+    "T483-R1922",
+    "T483-R1923",
+    "T483-R1924",
+    "T483-R1926",
+    "T483-R1927",
+    "T483-R1928",
+    "T483-R1929"
+  ],
+  "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+  "current_sha256": "37753bd0f1dd5fd95be9c49f6759449dda18221c7a195792ece26397f63eccc8",
+  "before": {
+    "blocks": 12,
+    "added": 27,
+    "deleted": 11
+  },
+  "after": {
+    "blocks": 12,
+    "added": 21,
+    "deleted": 11
+  },
+  "source_changed": true,
+  "paired_error_bodies": 5,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        897,
+        890,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 159,
+    "remaining": 72,
+    "files": 231,
+    "points": 1908,
+    "lines": 26937,
+    "pending": 1534
+  },
+  "verification": {
+    "class_procedure": "actual_wu32=4 guest_ffff=1 setters=4 getters=4 errors=0",
+    "cached_build": "x86 and x64 passed",
+    "fixture_change": "Include SDK common controls before private USER macros, which expanded the SDK ptCursor member.",
+    "window_procedure": "tagged_calls=7 errors=0; native subclass forwarded=2 preserved=1",
+    "equivalent_comparisons": 262144
+  },
+  "decision": "Simplified both procedure origin guards. Native GetWindowDC translation, CPD versus guest provenance and previous setter origin, and guest text parameter mapping across reentry and exceptional cleanup remain required.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "dbbbac18-094c-468d-afd5-479c13c65d6e",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

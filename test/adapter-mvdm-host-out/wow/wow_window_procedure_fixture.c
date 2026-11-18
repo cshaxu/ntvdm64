@@ -1,3 +1,5 @@
+#include <windows.h>
+#include <commctrl.h>
 #include "wow_window_words_binding.h"
 #include "wow_user_private_access.h"
 #include "wow_task_order_bindings.h"
@@ -5,7 +7,6 @@
 #include "wow_class_client_bindings.h"
 #include "wow_user_object_bindings.h"
 #include <stdio.h>
-#include <commctrl.h>
 #pragma comment(lib, "comctl32.lib")
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)

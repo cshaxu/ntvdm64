@@ -1706,23 +1706,15 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
                 dwWndProc32Cur = wow_user_get_procedure(HWND32(parg16->f1), FALSE, &procedureIsGuest);
 #line 1705
 
-                if ( (dwWndProc32Cur & WNDPROC_WOW)
-#line 1708
-                     && (procedureIsGuest || HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE)
-#line 1710
-                   ) {
-                    if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE
-#line 1713
-                         && !procedureIsGuest
-#line 1715
-                       ) {
+                if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE ||
+                     (procedureIsGuest && (dwWndProc32Cur & WNDPROC_WOW)) ) {
+                    if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE && !procedureIsGuest ) {
 #line 1708
                         /*
                         ** Has a 32-bit WindowProc that is a handle-based value
                         ** (if it needs a 32-bit Ansi-Unicode transition, or
                         ** vice versa.)
                         */
-#line 1713
                         ul = GetThunkWindowProc( dwWndProc32Cur, NULL, pww, HWND32(parg16->f1) );
                     } else {
                         /*
@@ -2526,23 +2518,15 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 SETWL(HWND32(parg16->f1), GWL_WOWvpfnWndProc, LONG32(parg16->f3));
             }
 
-            if ( (dwWndProc32Old & WNDPROC_WOW)
-#line 2505
-                 && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)
-#line 2507
-               ) {
-                if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE
-#line 2510
-                     && !previousIsGuest
-#line 2512
-                   ) {
+            if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE ||
+                 (previousIsGuest && (dwWndProc32Old & WNDPROC_WOW)) ) {
+                if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE && !previousIsGuest ) {
 #line 2505
                     //
                     // If the return value was a handle to a proc (due to
                     // the need for unicode-ansi transitions, or vice versa)
                     // then treat it as a 32-bit thunk.
                     //
-#line 2510
                     ul = GetThunkWindowProc(dwWndProc32Old, NULL, pww, HWND32(parg16->f1));
                 } else {
                     //
