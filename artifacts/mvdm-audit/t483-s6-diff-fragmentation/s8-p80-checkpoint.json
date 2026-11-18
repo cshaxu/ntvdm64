@@ -1,0 +1,47 @@
+{
+  "packet": "T483 S8 P80",
+  "position": 124,
+  "path": "src/mvdm-host/wow32/wgdi31.c",
+  "review_ids": [
+    "T483-R1426"
+  ],
+  "original_sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6",
+  "current_sha256": "b641b59025211900d4b01ce610879983f3bf5e88c1b92b100c41028c0d5386b5",
+  "before": {
+    "blocks": 1,
+    "added": 3,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 3,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        827,
+        822,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 124,
+    "remaining": 107,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "verification": {
+    "fixture": "test/integration/verify-wow-font-output.ps1",
+    "current": "20 checks, 0 failures",
+    "native_pairs": 120,
+    "original": "20 checks, 2 failures: kerning tail untouched; no unavailable kerning output"
+  },
+  "decision": "Keep R1426 pending. Copy only the returned kerning pair count and skip writeback when no data was returned."
+}

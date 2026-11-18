@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P79 completed review through `wgdi.c`. Next is position 124, `wgdi31.c`.
+S8 P80 completed review through `wgdi31.c`. Next is position 125, `wgpal.c`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P79 completed review through `wgdi.c`. Next is position 124, `wgdi31.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P79, 123 of 231 positions are covered and 108 remain queued.
+IDs. After S8 P80, 124 of 231 positions are covered and 107 remain queued.
 S8 has removed 47 points and 197 diff lines, leaving 1,927 points and 27,013 lines. The live pending backlog has 1,542 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
@@ -115,6 +115,7 @@ S8 has removed 47 points and 197 diff lines, leaving 1,927 points and 27,013 lin
 [P77 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p77-checkpoint.json).
 [P78 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p78-checkpoint.json).
 [P79 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p79-checkpoint.json).
+[P80 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p80-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live
