@@ -410,7 +410,7 @@ static BOOL sbFirstCall = TRUE;
                     ((*ppcls)->flags & CSF_WOWDEFERDESTROY)) {
                 if ((*ppcls)->cWndReferenceCount == 0) {
                     if (!DestroyClass(ppcls))
-                            return FALSE;
+                        return FALSE;
 #line 409
                 } else {
                     RIPMSG0(RIP_ERROR, "Windows remain for a WOW class marked for destruction");

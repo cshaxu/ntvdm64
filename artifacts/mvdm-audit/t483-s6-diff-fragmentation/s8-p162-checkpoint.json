@@ -1,0 +1,58 @@
+{
+  "packet": "T483 S8 P162",
+  "position": 205,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+  "review_ids": [
+    "T483-R2500",
+    "T483-R2501",
+    "T483-R2504",
+    "T483-R2505",
+    "T483-R2506",
+    "T483-R2507",
+    "T483-R2508",
+    "T483-R2509",
+    "T483-R2512",
+    "T483-R2513",
+    "T483-R2514",
+    "T483-R2515",
+    "T483-R2517",
+    "T483-R2518",
+    "T483-R2519",
+    "T483-R2520",
+    "T483-R2521",
+    "T483-R2522",
+    "T483-R2523",
+    "T483-R2524",
+    "T483-R2525"
+  ],
+  "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+  "current_sha256": "888f066477eec6ed78d9a86bc45d5c2f7cd8ec2f4b4081d8e837305ba4f0334a",
+  "before": {
+    "blocks": 20,
+    "added": 24,
+    "deleted": 20
+  },
+  "after": {
+    "blocks": 20,
+    "added": 24,
+    "deleted": 20
+  },
+  "source_changed": true,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 205,
+    "remaining": 26,
+    "files": 231,
+    "points": 1912,
+    "lines": 26391,
+    "pending": 1532
+  },
+  "decision": "Retain explicit invocation context and BOOL outcome: registered_cleanup consumes wow_user_task_lifecycle_exit status; native procedure replacement can fail and records object_release_failed. Writing the copied WND alone leaves live callbacks installed. DestroyClass can reject a still-live native class: returning failure prevents a loop on the unchanged class-list entry. The procedure_is_guest discriminator, bounds of spfnwp, and original cleanup order remain intact. Matched indentation of the second DestroyClass failure return to its enclosing condition. No C tokens or line numbers changed.",
+  "verification": {
+    "scope": "Inspected original/current complete diff, registration callback, provider failure path and prior P242 controls. Verified whitespace-only byte edit, final hashes, #error pairing and logical line match. No runtime rerun."
+  }
+}
