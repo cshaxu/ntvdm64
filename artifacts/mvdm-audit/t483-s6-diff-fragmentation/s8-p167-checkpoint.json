@@ -1,0 +1,65 @@
+{
+  "packet": "T483 S8 P167",
+  "position": 210,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "review_ids": [
+    "T483-R2639",
+    "T483-R2640",
+    "T483-R2641",
+    "T483-R2645"
+  ],
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "current_sha256": "aae6f7a6cfdf89be9ca1f41e027d4ab536978b9e9f3eb7897ec6693d11bcd283",
+  "before": {
+    "blocks": 19,
+    "added": 2,
+    "deleted": 1525
+  },
+  "after": {
+    "blocks": 19,
+    "added": 2,
+    "deleted": 1525
+  },
+  "source_changed": false,
+  "paired_error_bodies": 14,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        1149,
+        1057,
+        "}"
+      ],
+      [
+        1705,
+        1863,
+        "#endif"
+      ]
+    ],
+    "verified_original_coordinates": [
+      1057,
+      1705,
+      1863
+    ]
+  },
+  "coverage": {
+    "complete": 210,
+    "remaining": 21,
+    "files": 231,
+    "points": 1912,
+    "lines": 26387,
+    "pending": 1532
+  },
+  "decision": "Original InitWindowMsgTable, InitMessageTables and their message arrays are retained. The actual process table is initialized by wow_default_message_bindings.c; gSharedInfo and SharedAlloc bind that storage. szEDITCLASS already has an external definition in the linked original client/dlgbegin.c. WRAPPFN expansion requires private PWND plus kernel procedures. GDI wrappers require Gre functions and tmSysFont; the production edit provider resolves GdiGetCharDimensions. Shared-section mapping and thread startup require kernel section, ERESOURCE and W32THREAD owners. No additional complete callable unit recovered.",
+  "verification": {
+    "scope": "Pinned hashes, original logical coordinates, filtered source metrics and isolated macro restoration trial. No source change or fresh build."
+  },
+  "isolated_CALC_DELTA_trial": {
+    "filtered": {
+      "blocks": 20,
+      "added": 2,
+      "deleted": 1520
+    },
+    "reason": "Unused original macro is independently restorable, but splits the deleted mapping block; point increase needs owner approval. Candidate only."
+  }
+}
