@@ -1,0 +1,128 @@
+{
+  "packet": "T483 S8 P73",
+  "position": 117,
+  "path": "src/mvdm-host/wow32/wcntl32.c",
+  "review_ids": [
+    "T483-R1336",
+    "T483-R1337",
+    "T483-R1338",
+    "T483-R1339",
+    "T483-R1340",
+    "T483-R1341",
+    "T483-R1342",
+    "T483-R1343",
+    "T483-R1344",
+    "T483-R1345",
+    "T483-R1346",
+    "T483-R1347",
+    "T483-R1348",
+    "T483-R1349",
+    "T483-R1351",
+    "T483-R1352",
+    "T483-R1353",
+    "T483-R1354",
+    "T483-R1355",
+    "T483-R1356",
+    "T483-R1357",
+    "T483-R1358",
+    "T483-R1359",
+    "T483-R1360",
+    "T483-R1361",
+    "T483-R1362",
+    "T483-R1363",
+    "T483-R1364",
+    "T483-R1365",
+    "T483-R1366",
+    "T483-R1367",
+    "T483-R1368",
+    "T483-R1369",
+    "T483-R1370"
+  ],
+  "original_sha256": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59",
+  "current_sha256": "584255ed1ad8119029647d26020ffad0a6112d8e213fd5ede60356175008f123",
+  "before": {
+    "blocks": 34,
+    "added": 37,
+    "deleted": 32
+  },
+  "after": {
+    "blocks": 33,
+    "added": 37,
+    "deleted": 32
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 117,
+    "remaining": 114,
+    "files": 231,
+    "points": 1930,
+    "lines": 27022,
+    "pending": 1543
+  },
+  "reviewed_points": {
+    "T483-R1336": "Explicit lifetime declaration",
+    "T483-R1337": "Capture heap allocation",
+    "T483-R1338": "Consume captured heap key",
+    "T483-R1339": "Capture heap allocation",
+    "T483-R1340": "Consume captured heap key",
+    "T483-R1341": "Capture heap allocation",
+    "T483-R1342": "Consume captured heap key",
+    "T483-R1343": "Capture heap allocation",
+    "T483-R1344": "Consume captured heap key",
+    "T483-R1345": "Capture heap allocation",
+    "T483-R1346": "Consume captured heap key",
+    "T483-R1347": "Capture heap allocation",
+    "T483-R1348": "Consume captured heap key",
+    "T483-R1349": "Consumed ownership snapshot",
+    "T483-R1351": "Borrowed map acquisition",
+    "T483-R1352": "Heap acquisition",
+    "T483-R1353": "Consume original map/heap provenance",
+    "T483-R1354": "No acquisition or already consumed",
+    "T483-R1355": "Capture heap allocation",
+    "T483-R1356": "Consume captured heap key",
+    "T483-R1357": "Capture heap allocation",
+    "T483-R1358": "Consume captured heap key",
+    "T483-R1359": "Capture heap allocation",
+    "T483-R1360": "Consume captured heap key",
+    "T483-R1361": "Capture heap allocation",
+    "T483-R1362": "Consume captured heap key",
+    "T483-R1363": "Capture heap allocation",
+    "T483-R1364": "Consume captured heap key",
+    "T483-R1365": "Capture heap allocation",
+    "T483-R1366": "Consume captured heap key",
+    "T483-R1367": "Capture heap allocation",
+    "T483-R1368": "Consume captured heap key",
+    "T483-R1369": "Capture heap allocation",
+    "T483-R1370": "Consume captured heap key"
+  },
+  "decisions": {
+    "heap allocation and retirement": "Snapshot the guest token at successful allocation. Original bare lParam is initially native, and LB_DIR assigns its guest result only after putstr16. Unwind after construction or copyback must consume only the captured allocation; an ordinary free without clearing that key risks a second release. Separate points are distinct converter sites. Existing historical negative controls in batch-p138-checkpoint.json and fresh transaction cases.",
+    "WM32CBDir": "The cleanup stage reads the acquisition mode before clearing it. Moving the snapshot from function entry to that arm restores original entry structure. Borrowed map and owned heap still need separate handling even if the runtime mapping flag changes between construction and release. R1349 remains a pending partial reduction.",
+    "include": "Control conversions require the actual shared lifetime helper declarations."
+  },
+  "verification": {
+    "build": "x86/x64 cached full build exit 0",
+    "publication": "b3c462aa-8be8-49b7-ace8-711d67b81214; 11 SHA256 verified in both destinations",
+    "line_check": "Actual MSVC preprocessed original and final: 540 shared selected lines, zero mismatches. Redundant #line 447 and 448 removed.",
+    "targeted": {
+      "map": {
+        "baseline": "18d0ec060024912e6b03aec69bdded6c9181af03",
+        "passed": true,
+        "end": "2026-11-18T11:00:34.7655648Z",
+        "scope": "selected original release cache and exact extracted bodies with actual finalizer; lower services doubled, not actual guest"
+      },
+      "msg": {
+        "passed": true,
+        "baseline": "4b8a7c8ae6eaaca3350d640650dd9d57201fd581",
+        "end": "2026-11-18T11:00:23.6907646Z",
+        "scope": "exact-body service doubles, not runtime/guest proof",
+        "negative": "six named source defects"
+      }
+    }
+  }
+}

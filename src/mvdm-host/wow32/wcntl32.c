@@ -452,10 +452,7 @@ BOOL FASTCALL  WM32CBAddString (LPWM32MSGPARAMEX lpwm32mpex)
 
 BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
 {
-    DWORD owned = lpwm32mpex->dwParam; /* DIVERGENCE(MVDM-HOST-DIV-347): actual acquisition mode. */
-#line 447
     if (lpwm32mpex->fThunk) {
-#line 448
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - CB_GETEDITSEL));
         if (lpwm32mpex->lParam) {
             INT cb;
@@ -479,6 +476,7 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
         }
     } else {
+        DWORD owned = lpwm32mpex->dwParam;
         lpwm32mpex->dwParam = 0;
         if (owned & WOW_TEXT_MAPPED) {
             DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);
