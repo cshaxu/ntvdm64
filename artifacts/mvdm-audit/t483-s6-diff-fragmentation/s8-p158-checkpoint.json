@@ -1,0 +1,62 @@
+{
+  "packet": "T483 S8 P158",
+  "position": 201,
+  "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+  "review_ids": [
+    "T483-R2404",
+    "T483-R2405",
+    "T483-R2406",
+    "T483-R2407",
+    "T483-R2408",
+    "T483-R2409",
+    "T483-R2410",
+    "T483-R2411",
+    "T483-R2412",
+    "T483-R2413",
+    "T483-R2414",
+    "T483-R2415",
+    "T483-R2416",
+    "T483-R2417",
+    "T483-R2418",
+    "T483-R2419",
+    "T483-R2420",
+    "T483-R2421",
+    "T483-R2422",
+    "T483-R2423",
+    "T483-R2424",
+    "T483-R2425"
+  ],
+  "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4",
+  "current_sha256": "7bdc635f086160eb4f0ac6902c890234c79169597e788943e97f4fdfbf5b0aa2",
+  "before": {
+    "blocks": 4,
+    "added": 1,
+    "deleted": 496
+  },
+  "after": {
+    "blocks": 4,
+    "added": 1,
+    "deleted": 496
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 201,
+    "remaining": 30,
+    "files": 231,
+    "points": 1912,
+    "lines": 26391,
+    "pending": 1532
+  },
+  "decision": "Three ranges omit complete USER client wrappers: actual USER32 duplicate AdjustWindowRectEx, unresolved NtUserGetClassName, and queries relying on private thread, queue and menu state are documented per API. GetAppCompatFlags retains original body and uses the opaque PWOW_CLIENT_THREADINFO spelling. The PTHREADINFO macro in wow_user_client_view_layout.h is undefined immediately after the layout include. R2425 no longer has any remaining source delta: S7 P43 removed the EDIT guard from _AdjustWindowRectEx. Retire this stale pending row without counting an additional source reduction.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "closed_pending": [
+    "T483-R2425"
+  ]
+}
