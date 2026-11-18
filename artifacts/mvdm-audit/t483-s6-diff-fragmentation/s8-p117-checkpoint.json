@@ -1,0 +1,47 @@
+{
+  "packet": "T483 S8 P117",
+  "position": 161,
+  "path": "src/non-mvdm/base/ntdll/csrutil.c",
+  "review_ids": [
+    "T483-R1945",
+    "T483-R1946",
+    "T483-R1947",
+    "T483-R1948",
+    "T483-R1949",
+    "T483-R1950",
+    "T483-R1951"
+  ],
+  "original_sha256": "7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a",
+  "current_sha256": "75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a",
+  "before": {
+    "blocks": 7,
+    "added": 7,
+    "deleted": 615
+  },
+  "after": {
+    "blocks": 7,
+    "added": 7,
+    "deleted": 615
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 161,
+    "remaining": 70,
+    "files": 231,
+    "points": 1908,
+    "lines": 26934,
+    "pending": 1534
+  },
+  "decision": "R1945 private CSR LPC client and port globals excluded; the heap is owned locally. R1946/R1949 reserve and pointer alignment verified by x64 negative controls. R1947/R1948 pointer-width offset storage and complete initialization required by local ABI. R1950 original cast rejected by /we4311. R1951 has two distinct outcomes: whole tail fails due to narrowing, CsrNtSysInfo and RtlRaiseStatus, but three contiguous original helpers compile unchanged on x86/x64. Restoring that island splits one deletion, 7/622 to 8/456: requires owner choice before editing. No source change.",
+  "verification": {
+    "candidate": "CsrCaptureMessageBuffer, CsrCaptureMessageString, CsrCaptureTimeout",
+    "delivery": "Audit only; production sources and released P116 package unchanged.",
+    "current": "Pinned original and live hashes, filtered metric, logical lines and function dependencies checked",
+    "controls": "Existing P174 x64 size/alignment and pointer controls; S7 P2 isolated x86/x64 compile succeeded for the three-function candidate"
+  }
+}
