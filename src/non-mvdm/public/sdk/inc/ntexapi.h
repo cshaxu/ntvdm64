@@ -71,7 +71,74 @@ NtSetSystemEnvironmentValue (
     IN PUNICODE_STRING VariableValue
     );
 
-#line 163
+
+// begin_ntifs begin_wdm begin_ntddk
+//
+// Event Specific Access Rights.
+//
+
+#define EVENT_QUERY_STATE       0x0001
+#define EVENT_MODIFY_STATE      0x0002  // winnt
+#define EVENT_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED|SYNCHRONIZE|0x3) // winnt
+
+// end_ntifs end_wdm end_ntddk
+
+#line 98
+//
+// Event object function definitions.
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtClearEvent (
+    IN HANDLE EventHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtCreateEvent (
+    OUT PHANDLE EventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN EVENT_TYPE EventType,
+    IN BOOLEAN InitialState
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtOpenEvent (
+    OUT PHANDLE EventHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtPulseEvent (
+    IN HANDLE EventHandle,
+    OUT PLONG PreviousState OPTIONAL
+    );
+
+#line 148
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtResetEvent (
+    IN HANDLE EventHandle,
+    OUT PLONG PreviousState OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetEvent (
+    IN HANDLE EventHandle,
+    OUT PLONG PreviousState OPTIONAL
+    );
 
 //
 // Event Specific Access Rights.
@@ -299,7 +366,180 @@ NtReleaseSemaphore(
     OUT PLONG PreviousCount OPTIONAL
     );
 
-#line 615
+
+// begin_winnt
+//
+// Timer Specific Access Rights.
+//
+
+#define TIMER_QUERY_STATE       0x0001
+#define TIMER_MODIFY_STATE      0x0002
+
+#define TIMER_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED|SYNCHRONIZE|\
+                          TIMER_QUERY_STATE|TIMER_MODIFY_STATE)
+
+
+// end_winnt
+
+//
+// Timer Information Classes.
+//
+
+typedef enum _TIMER_INFORMATION_CLASS {
+    TimerBasicInformation
+} TIMER_INFORMATION_CLASS;
+
+//
+// Timer Information Structures.
+//
+
+typedef struct _TIMER_BASIC_INFORMATION {
+    LARGE_INTEGER RemainingTime;
+    BOOLEAN TimerState;
+} TIMER_BASIC_INFORMATION, *PTIMER_BASIC_INFORMATION;
+
+// begin_ntddk
+//
+// Timer APC routine definition.
+//
+
+typedef
+VOID
+(*PTIMER_APC_ROUTINE) (
+    IN PVOID TimerContext,
+    IN ULONG TimerLowValue,
+    IN LONG TimerHighValue
+    );
+
+// end_ntddk
+
+//
+// Timer object function definitions.
+//
+
+#line 451
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtOpenTimer (
+    OUT PHANDLE TimerHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtCancelTimer (
+    IN HANDLE TimerHandle,
+    OUT PBOOLEAN CurrentState OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtQueryTimer (
+    IN HANDLE TimerHandle,
+    IN TIMER_INFORMATION_CLASS TimerInformationClass,
+    OUT PVOID TimerInformation,
+    IN ULONG TimerInformationLength,
+    OUT PULONG ReturnLength OPTIONAL
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetTimer (
+    IN HANDLE TimerHandle,
+    IN PLARGE_INTEGER DueTime,
+    IN PTIMER_APC_ROUTINE TimerApcRoutine OPTIONAL,
+    IN PVOID TimerContext OPTIONAL,
+    IN BOOLEAN ResumeTimer,
+    IN LONG Period OPTIONAL,
+    OUT PBOOLEAN PreviousState OPTIONAL
+    );
+
+//
+// System Time and Timer function definitions
+//
+
+#line 503
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetSystemTime (
+    IN PLARGE_INTEGER SystemTime,
+    OUT PLARGE_INTEGER PreviousTime OPTIONAL
+    );
+
+#line 520
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetTimerResolution (
+    IN ULONG DesiredTime,
+    IN BOOLEAN SetResolution,
+    OUT PULONG ActualTime
+    );
+
+//
+//  Locally Unique Identifier (LUID) allocation
+//
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtAllocateLocallyUniqueId(
+    OUT PLUID Luid
+    );
+
+
+//
+//  Universally Unique Identifier (UUID) time allocation
+//
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtSetUuidSeed (
+    IN PCHAR Seed
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtAllocateUuids(
+    OUT PULARGE_INTEGER Time,
+    OUT PULONG Range,
+    OUT PULONG Sequence,
+    OUT PCHAR Seed
+    );
+
+
+//
+// Profile Object Definitions
+//
+
+#define PROFILE_CONTROL           0x0001
+#define PROFILE_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED | PROFILE_CONTROL)
+
+#line 584
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtStartProfile (
+    IN HANDLE ProfileHandle
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+NtStopProfile (
+    IN HANDLE ProfileHandle
+    );
+
+#line 613
+
+
 //
 // Performance Counter Definitions
 //
