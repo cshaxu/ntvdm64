@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P114",
+  "position": 158,
+  "path": "src/mvdm-host/wow32/wutmr.c",
+  "review_ids": [
+    "T483-R1913"
+  ],
+  "original_sha256": "e42bc0c7e9dc199ae19414461d65ecf86b7acc55c6d7523792812d73f158bef5",
+  "current_sha256": "ac32decdb5712f1dbfcdd0948095c2995426f6734b2b284bd85e6ee28a59c296",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 158,
+    "remaining": 73,
+    "files": 231,
+    "points": 1908,
+    "lines": 26943,
+    "pending": 1534
+  },
+  "decision": "R1913 retain the body name at one definition. All 27 native TIMERPROC stubs still call W32TimerFunc. That entry acquires callback and borrow scopes, then delegates to the original body and unwinds on exit. The original body reads aptmrWOWTimers before CallBack16. Reverting just its symbol duplicates the adapter definition and removes its delegate. Bypassing the adapter would allow those reads outside the acquired scope. Renaming each stub call would increase mirror differences.",
+  "verification": {
+    "scope": "Rechecked the native entry, original stubs, timer slot read and CallBack16 order and fixture coverage. Source and linkage reasoning, no new guest run."
+  }
+}

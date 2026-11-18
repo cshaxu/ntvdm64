@@ -1,0 +1,61 @@
+{
+  "packet": "T483 S8 P113",
+  "position": 157,
+  "path": "src/mvdm-host/wow32/wuser31.c",
+  "review_ids": [
+    "T483-R1907",
+    "T483-R1909",
+    "T483-R1911"
+  ],
+  "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+  "current_sha256": "3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d",
+  "before": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 4,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        464,
+        459,
+        "#endif"
+      ],
+      [
+        670,
+        665,
+        "#endif"
+      ],
+      [
+        744,
+        740,
+        "#else"
+      ],
+      [
+        764,
+        762,
+        "#else"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 157,
+    "remaining": 74,
+    "files": 231,
+    "points": 1908,
+    "lines": 26943,
+    "pending": 1534
+  },
+  "verification": {
+    "scope": "Current source and fixed OpenNT, walias.h USER16/HWND32, native_window_argument, wow_user_window_public_guest_handle, prior MSVC preprocessor evidence. No product change or new runtime run."
+  },
+  "decision": "R1907 keep the declared HWND WINAPI public-result converter ABI. R1909 keep GetDCEx native-window argument mapping; the task DC cache still stores the guest window. R1911 GETHWND16 is a low-word cast, whereas the public result may name a foreign window; the existing converter refreshes and accepts the exact published full handle generation. Retain three residuals in the owner backlog. Moving this into the generic cast changes all callers."
+}
