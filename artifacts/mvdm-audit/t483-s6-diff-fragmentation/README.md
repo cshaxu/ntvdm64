@@ -364,3 +364,7 @@ filtered census is 2,017 points and 28,411 changed lines.
 [S7 P18 receipt](s7-p18-checkpoint.json) records ten file reviews and
 four blank-line removals across two sources. The filtered census is
 2,014 points and 28,407 changed lines.
+
+[S7 P19 receipt](s7-p19-checkpoint.json) records ten file reviews and
+nonfunctional restorations in two DOS command sources. The filtered
+census is 2,013 points and 28,400 changed lines.

@@ -153,9 +153,14 @@ layout in `demsrch.c` and `wole2.c`. The existing line anchors, mixed
 line endings and excluded branches are preserved.
 [P18 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p18-checkpoint.json).
 
-S7 progress is 159 reviewed and 54 remaining. Source restorations reduce
-33 points and 569 changed lines in S7. The current census is 2,014 non-error
-points and 28,407 changed lines across 237 mirrors with filtered differences.
+S7 P19 completes ten file reviews. It restores original blank-line layout
+in `cmdmisc.c` and minimizes the package-root comment in `cmdconf.c`
+while restoring the original logical line for the call.
+[P19 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p19-checkpoint.json).
+
+S7 progress is 169 reviewed and 44 remaining. Source restorations reduce
+34 points and 576 changed lines in S7. The current census is 2,013 non-error
+points and 28,400 changed lines across 237 mirrors with filtered differences.
 
 ## S1 Closure Record
 

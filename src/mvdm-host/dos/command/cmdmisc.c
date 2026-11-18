@@ -8,7 +8,6 @@
 
 #include "cmd.h"
 
-
 #line 11
 #include <cmdsvc.h>
 #include <demexp.h>
@@ -21,7 +20,6 @@
 #include "nt_uis.h"	  // For resource id
 #include "mvdm_guest_location.h"
 #include "mvdm_softpc_firmware.h"
-
 
 
 #line 22

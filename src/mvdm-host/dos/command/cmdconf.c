@@ -214,12 +214,8 @@ void ExpandConfigFiles(BOOLEAN bConfig)
    CHAR *lpszzEnv, *lpszName;
    CHAR cchEnv;
 
-   /* DIVERGENCE(MVDM-HOST-DIV-158): The original system root is an NT4
-    * installation directory.  Preserve its short-path normalization and all
-    * configuration expansion below, but obtain the current product's
-    * app-selected MVDM system root through the same adapter already used by
-    * original DEM.  A missing/oversize root retains the original zero-length
-    * error direction. */
+   /* DIVERGENCE(MVDM-HOST-DIV-158): Use the package root for guest COMMAND paths. */
+#line 209
    dw = NtvdmGetWindowsDirectoryA(achRawFile, sizeof(achRawFile));
 #line 210
    dwLenSysRoot = GetShortPathNameA(achRawFile, achSysRoot, sizeof(achSysRoot));
