@@ -294,9 +294,8 @@ GLOBAL	VOID FreeIntelMemory IFN0()
 #line 284
 #error Unsupported excluded original configuration
 #endif
-#line 284
-
     mvdm_softpc_physical_mapping_release();
+#line 286
 
     /* Free Intel memory */
     VirtualFree (intelMem, 0, MEM_RELEASE);

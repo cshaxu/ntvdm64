@@ -30,14 +30,7 @@
 #include "nt_event.h"
 #include <ntddvdeo.h>
 #include "nt_fulsc.h"
-/* DIVERGENCE(MVDM-HOST-DIV-318): Window-relative input uses original
- * coordinates and callback masks, not Console warping. */
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
-/* DIVERGENCE(MVDM-HOST-DIV-274): original NT USER's cursor producer publishes
- * the already bounded virtual position before dispatching guest mouse work.
- * The standalone worker retains that one shared-data update at SoftPC's
- * existing post-transform boundary; it does not introduce another mouse
- * queue, coordinate conversion or USER input owner. */
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 
@@ -440,10 +433,10 @@ GetNextMouseEvent();
    {
    ScaleToWindowedVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);
    }
-
 }
 (void)mvdm_softpc_wow_page_domain_publish_cursor((long)mcs->position.x,
                                                  (long)mcs->position.y);
+#line 560
 
 //
 // Create a condition mask for use by any call back installed

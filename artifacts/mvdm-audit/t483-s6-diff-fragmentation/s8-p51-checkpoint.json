@@ -1,0 +1,37 @@
+{
+  "packet": "T483 S8 P51",
+  "position": 95,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+  "review_ids": [
+    "T483-R1171",
+    "T483-R1172"
+  ],
+  "original_sha256": "4de067c013b25120a09ec7d7a0bb5f0fe16eaba59b665aadbcf891cdfba0caef",
+  "current_sha256": "eee7e08dd0bc4b094907d176b465d0cbb29fabf61dc9dcf0954fb88fe72fa794",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 95,
+    "remaining": 136,
+    "files": 231,
+    "points": 1935,
+    "lines": 27066,
+    "pending": 1547
+  },
+  "decision": "R1171/R1172 both retained pending owner. The regular and extended BYTE tables each require the index to be strictly smaller than their own element count. Each fix is one additional comparison character. Combining the comparisons would replace otherwise original branch bodies.",
+  "verification": "Byte-for-byte reversal of exactly two comparison edits reproduces the pinned original. Prior S5 P104 normal-key contract and bound evidence apply to the exact same current source SHA. No new runtime test."
+}

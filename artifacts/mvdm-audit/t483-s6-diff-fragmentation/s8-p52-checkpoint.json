@@ -1,0 +1,148 @@
+{
+  "packet": "T483 S8 P52",
+  "position": 96,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+  "review_ids": [
+    "T483-R1174",
+    "T483-R1175"
+  ],
+  "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+  "current_sha256": "268471dcdd53bb2366aa98bcad1fa66f3c9be89ec7e81afcc7a25f46935a1a56",
+  "before": {
+    "blocks": 3,
+    "added": 7,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 3,
+    "added": 6,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 26,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        27,
+        26,
+        "#endif"
+      ],
+      [
+        51,
+        48,
+        "#endif /* DEBUG_MEM */"
+      ],
+      [
+        175,
+        174,
+        "#endif"
+      ],
+      [
+        252,
+        256,
+        "    /*"
+      ],
+      [
+        253,
+        257,
+        "     * Initialise linked list with pointers to initial 1M and remaining free"
+      ],
+      [
+        254,
+        258,
+        "     * space and store initial size of free space."
+      ],
+      [
+        255,
+        259,
+        "     */"
+      ],
+      [
+        366,
+        365,
+        "#endif"
+      ],
+      [
+        453,
+        447,
+        "#endif"
+      ],
+      [
+        648,
+        646,
+        "#endif"
+      ],
+      [
+        703,
+        702,
+        "#endif"
+      ],
+      [
+        743,
+        742,
+        "#endif"
+      ],
+      [
+        892,
+        889,
+        "#endif"
+      ],
+      [
+        939,
+        938,
+        "#endif"
+      ],
+      [
+        978,
+        975,
+        "#endif"
+      ],
+      [
+        1003,
+        1000,
+        "#endif"
+      ],
+      [
+        1028,
+        1026,
+        "#endif"
+      ],
+      [
+        1038,
+        1036,
+        "#endif"
+      ],
+      [
+        1084,
+        1081,
+        "#endif /* !PROD */"
+      ],
+      [
+        1303,
+        1301,
+        "#endif"
+      ],
+      [
+        1357,
+        1352,
+        "#endif /* !PROD */"
+      ],
+      [
+        1453,
+        1414,
+        "#endif DEBUG_MEM"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 96,
+    "remaining": 135,
+    "files": 231,
+    "points": 1935,
+    "lines": 27065,
+    "pending": 1547
+  },
+  "verification": "Reviewed config.c sas_term then sas_init, nt_mem.c Init/FreeIntelMemory, mvdm_softpc_physical_mapping.c initialize/release and mvdm_softpc_wow_page_domain.c clock mapping. No executable-token change. Source-only batch; no fresh runtime test or publication.",
+  "decision": "Keep initialization after both original reservations and release before backing storage is freed. Only an extra blank and its line anchor changed; the first original following free remains at line 288. The adapter owns mapping slots for VdmSetPhysRecStructs used by VdmAddVirtualMemory; the production WOW clock page binds through that API. Same-session SAS teardown/reinitialization during PIF sizing precedes the final session teardown."
+}

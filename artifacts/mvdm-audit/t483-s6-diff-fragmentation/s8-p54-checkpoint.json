@@ -1,0 +1,87 @@
+{
+  "packet": "T483 S8 P54",
+  "position": 98,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+  "review_ids": [
+    "T483-R1185",
+    "T483-R1191",
+    "T483-R1194",
+    "T483-R1195"
+  ],
+  "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+  "current_sha256": "4e871543d8eed9260b556533c718512fd2868275312bf9da9b2120c00e45fea9",
+  "before": {
+    "blocks": 5,
+    "added": 11,
+    "deleted": 57
+  },
+  "after": {
+    "blocks": 5,
+    "added": 5,
+    "deleted": 56
+  },
+  "source_changed": true,
+  "paired_error_bodies": 9,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        89,
+        88,
+        "#endif"
+      ],
+      [
+        141,
+        140,
+        "#endif"
+      ],
+      [
+        555,
+        554,
+        "#endif"
+      ],
+      [
+        630,
+        628,
+        "#endif"
+      ],
+      [
+        1109,
+        1077,
+        "#endif //X86GFX"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 98,
+    "remaining": 133,
+    "files": 231,
+    "points": 1935,
+    "lines": 27050,
+    "pending": 1547
+  },
+  "decision": "R1191 partially restored: retain package system directory substitution, restore original condition. The real provider uses a MAX_PATH scratch buffer and returns at most 259 bytes for this 520-byte destination. With 9 suffix bytes and NUL, maximum total is 269. R1185 now includes the public Win32 registry projection directly; the native NT alias layer had no consumer here. R1194 retains MAX_PATH+12 to match GetPIFConfigFiles. R1195 retains optional-key omission pending owner: missing virtual VDD key is supported, allocation failure is also silenced; no claim the latter is required. Keep owner-approved DIV-134 empty AddSystemFiles body; reduce its comment. Original creation of real host boot-root files remains excluded.",
+  "verification": {
+    "cached_x64": 0,
+    "guest": "No new interactive guest test.",
+    "cached_x86": 0,
+    "tests": [
+      "firmware resource",
+      "media resource",
+      "WOW boot environment",
+      "WOW populated registry shutdown"
+    ],
+    "provider": "Actual directory-provider function bodies with a fixture session root and native filesystem. Valid path lengths 96,258,259 accepted, 260 and absent directory rejected. Both old and original caller predicates agree for all five. Real provider + real session also passed the official media fixture against the staged package.",
+    "symbols": "dumpbin /symbols of final nt_msscs.obj shows NtvdmGetSystemDirectoryA and shadow registry open/query-info/query-value/close; no direct ADVAPI32 registry operations.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "433ab7c0-2b0b-4bbc-ab70-587304108834",
+      "hashVerified": true,
+      "stopped": 0
+    }
+  }
+}

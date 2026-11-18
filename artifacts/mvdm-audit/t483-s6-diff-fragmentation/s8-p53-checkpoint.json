@@ -1,0 +1,121 @@
+{
+  "packet": "T483 S8 P53",
+  "position": 97,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+  "review_ids": [
+    "T483-R1177",
+    "T483-R1178",
+    "T483-R1179",
+    "T483-R1180",
+    "T483-R1181"
+  ],
+  "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+  "current_sha256": "853de6fccfa21b8a4465e4255db83bc119cb0424d6f761a1406486ca537ee472",
+  "before": {
+    "blocks": 6,
+    "added": 23,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 6,
+    "added": 15,
+    "deleted": 1
+  },
+  "source_changed": true,
+  "paired_error_bodies": 17,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        69,
+        60,
+        "#endif //X86GFX"
+      ],
+      [
+        131,
+        129,
+        "#endif //X86GFX"
+      ],
+      [
+        327,
+        332,
+        "#ifdef X86GFX"
+      ],
+      [
+        373,
+        329,
+        "#endif /*X86GFX */"
+      ],
+      [
+        402,
+        391,
+        "#endif //X86GFX"
+      ],
+      [
+        492,
+        422,
+        "#endif //X86GFX"
+      ],
+      [
+        527,
+        512,
+        "#endif"
+      ],
+      [
+        556,
+        551,
+        "#endif // X86GFX"
+      ],
+      [
+        700,
+        606,
+        "#endif\t   // X86GFX"
+      ],
+      [
+        718,
+        715,
+        "#endif //X86GFX"
+      ],
+      [
+        1039,
+        851,
+        "#endif // X86GFX"
+      ],
+      [
+        1773,
+        1742,
+        "#endif // X86GFX"
+      ],
+      [
+        1821,
+        1788,
+        "#endif // X86GFX"
+      ],
+      [
+        2243,
+        2225,
+        "#endif    //MONITOR"
+      ],
+      [
+        2398,
+        2348,
+        "#endif //X86GFX"
+      ],
+      [
+        2478,
+        2412,
+        "#endif // X86GFX"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 97,
+    "remaining": 134,
+    "files": 231,
+    "points": 1935,
+    "lines": 27057,
+    "pending": 1547
+  },
+  "verification": "Byte comparison after removing C block comments, whitespace-only lines and #line yielded identical lists of source lines. All #error bodies and original active-path calls retained. No new runtime test.",
+  "decision": "R1177 reset clears confinement on the relative route. R1178/R1179 INT33 reposition takes effect before the next nonzero relative displacement. R1180 consumes signed relative input under the ICA lock, falling back to the original Console consumer only if no sample. R1181 publishes the bounded cursor into WOW shared USER state before callback mask assembly; the provider checks active owner, paging and CR3. Retain all five functional residuals. Remove two mirror-only comments duplicated by the source register and one extra blank; restore the original following comment line anchor."
+}

@@ -38,10 +38,8 @@
 #include "emm.h"
 #include <demexp.h>
 #include <vint.h>
-
 #include "mvdm_softpc_firmware.h"
-#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
-
+#include "common/wow/registry.h"
 
 #line 41
 PMEM_HOOK_DATA MemHookHead = NULL;
@@ -178,7 +176,7 @@ InitialiseDosEmulation(int argc, char **argv)
 
 #line 169
      dw = NtvdmGetSystemDirectoryA(buffer, sizeof(buffer));
-     if (!dw || dw + sizeof("\\ntio.sys") > sizeof(buffer)) {
+     if (!dw || dw >= sizeof(buffer)) {
          host_error(EG_OWNUP, ERR_QUIT, "NTVDM:InitialiseDosEmulation fails");
          TerminateVDM();
          }
@@ -272,10 +270,7 @@ InitialiseDosEmulation(int argc, char **argv)
  */
 void AddSystemFiles(void)
 {
-   /* DIVERGENCE(MVDM-HOST-DIV-134): preserve the original first-session
-    * call site and void completion contract, but do not create Brief's
-    * installation-only C:\\MSDOS.SYS/C:\\IO.SYS placeholders on an admitted
-    * real host drive. This entry deliberately performs no host mutation. */
+   /* The host boot drive must remain untouched. */
 #line 313
 }
 

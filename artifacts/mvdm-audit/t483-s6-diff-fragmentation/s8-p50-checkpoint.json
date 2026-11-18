@@ -1,0 +1,60 @@
+{
+  "packet": "T483 S8 P50",
+  "position": 94,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+  "review_ids": [
+    "T483-R1146"
+  ],
+  "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+  "current_sha256": "a1f23673515b408894109ed5367821bb50f77bc156a643cea997798da9865aa7",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "source_changed": false,
+  "paired_error_bodies": 4,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        112,
+        113,
+        "    /*.............................................. Set new console mode */"
+      ],
+      [
+        343,
+        296,
+        "#endif /* HUNTER */"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 94,
+    "remaining": 137,
+    "files": 231,
+    "points": 1935,
+    "lines": 27066,
+    "pending": 1547
+  },
+  "verification": {
+    "method": "Compiled both mode expressions extracted from the current and pinned SetupConsoleMode. Applied them to a private native CONIN$ using GetConsoleMode/SetConsoleMode with and without stream I/O and initially enabled/disabled QuickEdit.",
+    "scope": "Console mode and exact restoration observed. No physical click or full guest test.",
+    "results": [
+      "original stream=0 initialQuick=0 observedQuick=0 restore=1",
+      "current stream=0 initialQuick=0 observedQuick=0 restore=1",
+      "original stream=0 initialQuick=1 observedQuick=1 restore=1",
+      "current stream=0 initialQuick=1 observedQuick=0 restore=1",
+      "original stream=1 initialQuick=0 observedQuick=0 restore=1",
+      "current stream=1 initialQuick=0 observedQuick=0 restore=1",
+      "original stream=1 initialQuick=1 observedQuick=1 restore=1",
+      "current stream=1 initialQuick=1 observedQuick=0 restore=1"
+    ]
+  },
+  "decision": "Retain R1146 pending owner. Native QuickEdit is disabled while guest owns input; nt_event restores the saved mode on handoff, and SetupConsoleMode reapplies the guest selection on resume."
+}
