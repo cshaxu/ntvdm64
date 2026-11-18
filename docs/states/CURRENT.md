@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-70 points and 1,744 changed lines in S7. The current census is 1,977 non-error
-points and 27,230 changed lines across 231 mirrors with filtered differences.
+70 points and 1,750 changed lines in S7. The current census is 1,977 non-error
+points and 27,224 changed lines across 231 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -211,13 +211,8 @@ P32 restores four original EGA writer ranges. Both published packages match
 the tested manifest and differ from P10 only in PE timestamps.
 [P32 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p32-checkpoint.json).
 
-P33 and P34 simplify compile guards and validate original line anchors and
-x87 layout. [Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
-
-P35 removes nineteen local frames with six matching compile inputs.
-[P35 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p35-checkpoint.json).
-
-[P36 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p36-checkpoint.json).
+P33 to P36 simplify local compile guards and preserve original line anchors.
+[Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
 P37 removes four DPMI CPU40 guards with 35 matching inputs.
 [P37 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p37-checkpoint.json).
@@ -227,6 +222,9 @@ P38 to P40 simplify guards, restore original spacing, and correct a mask pair.
 
 P41 removes the redundant BaseSrv selector and verifies 39 compile inputs.
 [P41 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p41-checkpoint.json).
+
+P42 removes three redundant CPU40-only guards from `dpmiint.c`.
+[P42 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p42-checkpoint.json).
 
 ## S1 Closure Record
 

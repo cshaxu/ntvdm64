@@ -473,3 +473,9 @@ The six preprocessed streams match and the selected WOW fixtures pass.
 retains the existing declaration include. The native x64 deletion control
 fails at `PORT_MESSAGE` when the include is absent. All 39 compile inputs
 retain the same preprocessed source and logical lines after simplification.
+
+[S7 P42 receipt](s7-p42-checkpoint.json) removes three redundant CPU40 guards
+from `dpmiint.c`. The two worker graphs and allocation-failure observation
+entry have identical selected preprocessing and logical lines. The original
+software-interrupt fixture uses the production CPU40/CCPU compile profile
+and fails immediately if vector 14 unexpectedly enters instruction emulation.

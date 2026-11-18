@@ -1,0 +1,124 @@
+{
+  "packet": "M0 T483 S7 P42",
+  "prior_checkpoint": "eb5b7815f",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/dpmi32/dpmiint.c": {
+      "before": {
+        "blocks": 30,
+        "added": 153,
+        "deleted": 37
+      },
+      "after": {
+        "blocks": 30,
+        "added": 147,
+        "deleted": 37
+      },
+      "removed_local_frame_ranges": [
+        [
+          491,
+          491,
+          1
+        ],
+        [
+          494,
+          494,
+          0
+        ],
+        [
+          539,
+          539,
+          1
+        ],
+        [
+          541,
+          541,
+          0
+        ],
+        [
+          1165,
+          1165,
+          1
+        ],
+        [
+          1171,
+          1171,
+          0
+        ]
+      ],
+      "original_error_pairs": 8,
+      "prior_sha256": "67db1983e72986ff2ff12cde9e504094ad6980806915f61cfd6a0f775599d514",
+      "current_sha256": "97b227df99b8b176c03757b45d611a823201267314ff41dc55363dad9bbea7e7",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa"
+    }
+  },
+  "decisions": {
+    "dpmiint.c": "Remove three redundant CPU40-only wrappers from the width-aware stack-builder forward declaration, the real-mode flags update, and the original-signature wrapper. The existing selected code, original exclusions and logical lines are preserved."
+  },
+  "census": {
+    "non_error_points": 1977,
+    "non_error_lines": 27224,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 70,
+      "lines": 1750
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/dpmiint.obj",
+          "selected_lines": 45509,
+          "sha256": "ad24a03315b2a33282df29d6fa0846c944b704b063655fc4f06e76301bd5404e"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/dpmiint.obj",
+          "selected_lines": 45509,
+          "sha256": "ad24a03315b2a33282df29d6fa0846c944b704b063655fc4f06e76301bd5404e"
+        },
+        {
+          "profile": "pm-allocation-observation",
+          "target": "dpmi_pm_allocation_failure.c",
+          "selected_lines": 45533,
+          "sha256": "f89ed6af36cc0ece76e7e639e6b5a1bca708df91b7f334bae531d64c1017e7d7"
+        }
+      ]
+    },
+    "targeted": {
+      "selected_swint_and_fault_return": "pass",
+      "selected_compile_profile": "CPU40 and CCPU",
+      "ccpu_monitor_boundary_cases_passed": 58
+    },
+    "fixture_maintenance": {
+      "baseline_and_candidate_initial_link_failure": "same 14 missing symbols, LNK1120",
+      "missing_symbols": [
+        "_getAL",
+        "_setAL",
+        "_c_getCS_BASE",
+        "_c_getCS_LIMIT",
+        "_c_getCS_AR",
+        "_c_getCPL",
+        "_c_getVM",
+        "_IN8",
+        "_IN16",
+        "_IN32",
+        "_OUT8",
+        "_OUT16",
+        "_OUT32",
+        "_ccpu386CompleteInstruction"
+      ],
+      "repair": "Use typed, abort-only fixture seams for emulation dependencies unreachable by vector 14, and check the real production profile instead of the retired P25 build rejection marker."
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Three actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

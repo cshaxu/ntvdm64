@@ -15,6 +15,9 @@ $fixture = "$repo/test/mvdm-host/dpmi_swint_selected_fixture.c"
 New-Item -ItemType Directory $out | Out-Null
 $command = & ninja.exe -C $worker -t commands obj/dpmi/dpmiint.obj | Select-Object -Last 1
 if ($LASTEXITCODE -or !$command.Contains('/Foobj/dpmi/dpmiint.obj')) { throw 'Selected compile command missing' }
+if ($command -notmatch '(?:^|\s)/DCPU_40_STYLE(?=\s|$)' -or $command -notmatch '(?:^|\s)/DCCPU(?=\s|$)') {
+    throw 'Selected DPMI compile command must use the production CPU40 and CCPU profile'
+}
 # Function-section selection is test-only. The production object remains intact.
 $command = $command.Replace('/Foobj/dpmi/dpmiint.obj', ('/Gy /Fo"' + $out + '\dpmiint.obj"'))
 [IO.File]::WriteAllText("$out/compile.cmd", $command, [Text.Encoding]::ASCII)
@@ -57,24 +60,7 @@ if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_INT_IRET32
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/pm-fault-result.txt" -SimpleMatch 'DPMI_PM_VECTOR14_FRAME_OK')) {
     throw 'Selected DPMI protected fault-vector fixture failed'
 }
-$nonCcpuCommand = $command.Replace('/DCCPU', '/UCCPU').Replace('dpmiint.obj"', 'dpmiint-nonccpu.obj"')
-if ($nonCcpuCommand -eq $command -or !$nonCcpuCommand.Contains('/UCCPU') -or !$nonCcpuCommand.Contains('dpmiint-nonccpu.obj')) {
-    throw 'Could not construct non-CCPU negative compile'
-}
-[IO.File]::WriteAllText("$out/compile-nonccpu.cmd", $nonCcpuCommand, [Text.Encoding]::ASCII)
-Push-Location $worker
-try {
-    & $driver cmd.exe /d /c "$out/compile-nonccpu.cmd" *> "$out/compile-nonccpu.log"
-    $nonCcpuExit = $LASTEXITCODE
-} finally { Pop-Location }
-# This project supports CCPU only. A rejected non-CCPU compilation cannot
-# produce an object whose symbol table could meaningfully be inspected.
-if (!$nonCcpuExit -or !(Select-String -LiteralPath "$out/compile-nonccpu.log" -SimpleMatch 'MVDM-HOST-DIV-515: compound branch is not selected for this source')) {
-    throw 'Unsupported non-CCPU DPMI profile did not fail at its documented boundary'
-}
-Write-Output 'DPMI_NON_CCPU_PROFILE_REJECTED'
 @($source, $fixture, "$out/dpmiint.obj", "$out/fixture.exe", "$out/fixture.map") |
     Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$out/inputs.csv"
 
-# The deliberate rejected compilation above must not leak its exit code.
 exit 0

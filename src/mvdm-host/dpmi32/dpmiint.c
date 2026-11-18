@@ -488,10 +488,9 @@ Arguments:
     setCS(*pIVT);
 }
 
-#if defined(CPU_40_STYLE)
+#line 495
 static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
     PUCHAR *pVdmStackPointer, ULONG *pNewSP);
-#endif
 
 #line 494
 BOOL
@@ -536,9 +535,8 @@ Return Value:
 
     if (!(getMSW() & MSW_PE)) {
 
-#if defined(CPU_40_STYLE)
+#line 534
         setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
-#endif
 #line 533
         ReflectV86Int(IntNumber, SaveEFLAGS);
 
@@ -1162,13 +1160,12 @@ Notes:
 
 }
 
-#if defined(CPU_40_STYLE)
+#line 1145
 BOOL
 BuildStackFrame(ULONG StackUnits, PUCHAR *pVdmStackPointer, ULONG *pNewSP)
 {
     return BuildStackFrameWithWidth(StackUnits, Frame32, pVdmStackPointer, pNewSP);
 }
-#endif
 
 #line 1144
 VOID

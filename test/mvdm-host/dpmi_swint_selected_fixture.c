@@ -34,7 +34,9 @@ ULONG PMLockOrigEIP,PMLockOrigSS,PMLockOrigESP,DosxFaultHandlerIret,DosxFaultHan
 ULONG DosxIntHandlerIret,DosxIntHandlerIretd,Cpu40LdtShadowAddress,DosxIret,DosxIretd;
 /* Explicitly unreachable non-test object dependencies terminate rather than
  * pretending to implement unrelated DPMI services. */
-#define UNREACHED(n) void n(void) { fprintf(stderr,"unexpected %s\n",#n); abort(); }
+#define UNREACHED_TYPED(result, name, parameters) \
+    result name parameters { fprintf(stderr,"unexpected %s\n",#name); abort(); }
+#define UNREACHED(name) UNREACHED_TYPED(void, name, (void))
 UNREACHED(getESI) UNREACHED(getEDI) UNREACHED(setECX) UNREACHED(setEDX)
 UNREACHED(setEBP) UNREACHED(setESI) UNREACHED(setEDI)
 UNREACHED(DpmiAllocateVirtualMemory) UNREACHED(RcErrorDialogBox) UNREACHED(TerminateVDM)
@@ -44,6 +46,23 @@ UNREACHED(setSTATUS) UNREACHED(setCR0)
 UNREACHED(VdmInstallHardwareIntHandler) UNREACHED(VdmInstallSoftwareIntHandler)
 UNREACHED(VdmInstallFaultHandler)
 UNREACHED(mvdm_softpc_report_dpmi_iret16_state)
+
+/* This fixture dispatches vector 14. The production CCPU fixture covers
+ * instruction emulation for vectors 6 and 13. */
+UNREACHED_TYPED(UCHAR, getAL, (void))
+UNREACHED_TYPED(void, setAL, (UCHAR value))
+UNREACHED_TYPED(ULONG, c_getCS_BASE, (void))
+UNREACHED_TYPED(ULONG, c_getCS_LIMIT, (void))
+UNREACHED_TYPED(USHORT, c_getCS_AR, (void))
+UNREACHED_TYPED(unsigned int, c_getCPL, (void))
+UNREACHED_TYPED(int, c_getVM, (void))
+UNREACHED_TYPED(void, IN8, (PULONG value, ULONG port))
+UNREACHED_TYPED(void, IN16, (PULONG value, ULONG port))
+UNREACHED_TYPED(void, IN32, (PULONG value, ULONG port))
+UNREACHED_TYPED(void, OUT8, (ULONG port, ULONG value))
+UNREACHED_TYPED(void, OUT16, (ULONG port, ULONG value))
+UNREACHED_TYPED(void, OUT32, (ULONG port, ULONG value))
+UNREACHED(ccpu386CompleteInstruction)
 static ULONG fault_dispatch_reports, fault_stack_reports;
 void mvdm_softpc_report_dpmi_fault_dispatch(ULONG number, ULONG error,
     USHORT handler_cs, ULONG handler_ip, USHORT active_cs, ULONG active_ip,
