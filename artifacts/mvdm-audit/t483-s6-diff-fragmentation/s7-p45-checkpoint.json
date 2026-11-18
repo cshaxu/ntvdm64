@@ -1,0 +1,382 @@
+{
+  "packet": "M0 T483 S7 P45",
+  "prior_checkpoint": "31579c53f",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/non-mvdm/windows/core/ntuser/client/clmsg.c": {
+      "before": {
+        "blocks": 27,
+        "added": 6,
+        "deleted": 973
+      },
+      "after": {
+        "blocks": 27,
+        "added": 6,
+        "deleted": 973
+      },
+      "prior_sha256": "7fd2fa3fad305c62465ba79557938dd0afe8bea3a26d233d771ceb4d525b70d4",
+      "current_sha256": "a22c50a3f3ec311a0ccda253bcecb0b8a8a1a8fe57deb30f1e7cdbe09f40a325",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "removed_redundant_resets": [
+        {
+          "physical_line": 39,
+          "logical_line": 331
+        }
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c": {
+      "before": {
+        "blocks": 17,
+        "added": 20,
+        "deleted": 205
+      },
+      "after": {
+        "blocks": 17,
+        "added": 20,
+        "deleted": 205
+      },
+      "prior_sha256": "a474a8a4a5f1b5a340c6f937072eb1cc712664cd5e08ad71f3c81a7234352cdc",
+      "current_sha256": "fcde4b2905dce5e73b510af3ffe588684da11f311fb0124b0595065640c4ef7f",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "removed_redundant_resets": [
+        {
+          "physical_line": 48,
+          "logical_line": 41
+        },
+        {
+          "physical_line": 272,
+          "logical_line": 446
+        },
+        {
+          "physical_line": 577,
+          "logical_line": 739
+        },
+        {
+          "physical_line": 795,
+          "logical_line": 952
+        },
+        {
+          "physical_line": 836,
+          "logical_line": 989
+        }
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": {
+      "before": {
+        "blocks": 19,
+        "added": 53,
+        "deleted": 11
+      },
+      "after": {
+        "blocks": 19,
+        "added": 53,
+        "deleted": 11
+      },
+      "prior_sha256": "42389bd1b9757b757361ae5705a71a246661a9d8f5878b3cf6317ce5c54bdea1",
+      "current_sha256": "c0b6e20da702e4fb9b02d9d008f4be57986ada35584c8f0206f78c466f36da4c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "removed_redundant_resets": [
+        {
+          "physical_line": 871,
+          "logical_line": 878
+        }
+      ]
+    },
+    "src/non-mvdm/public/sdk/inc/ntexapi.h": {
+      "before": {
+        "blocks": 19,
+        "added": 0,
+        "deleted": 688
+      },
+      "after": {
+        "blocks": 19,
+        "added": 0,
+        "deleted": 688
+      },
+      "prior_sha256": "db757608e8e96893436dafa677333cafc639442c6e65291170eb4083f1e856ba",
+      "current_sha256": "ced895224ae9b46f52e5da4cadca4d866bf49148bea003e63948fe3ec7f80067",
+      "original_sha256": "d4bddfbf3eadd81cbf913a60108f1c7cb3362c6c51b042701bba43da6bb8e52a",
+      "removed_redundant_resets": [
+        {
+          "physical_line": 723,
+          "logical_line": 1462
+        }
+      ]
+    },
+    "src/mvdm-host/dos/dem/demsrch.c": {
+      "before": {
+        "blocks": 5,
+        "added": 25,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 5,
+        "added": 25,
+        "deleted": 0
+      },
+      "prior_sha256": "07c466258a44779f55158209cc10a58f901a8a0970355ecdfa26618544723427",
+      "current_sha256": "d2fb6c3cae2b5f871d4ae0269c0d8166d74ac6567250238ad0007f6049bbc9d2",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "removed_redundant_resets": [
+        {
+          "physical_line": 247,
+          "logical_line": 240
+        }
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dmmnem.c": {
+      "before": {
+        "blocks": 5,
+        "added": 11,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 5,
+        "added": 11,
+        "deleted": 1
+      },
+      "prior_sha256": "34c0e22a73ea2f744427e7dd6b63d0a90a6a94c83ceca9e4207ac8f66f6630a1",
+      "current_sha256": "eeb614f1b459ac7bfef46ce89d4a13232f5b82b6e029e1b6964b0064095be3ed",
+      "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+      "removed_redundant_resets": [
+        {
+          "physical_line": 64,
+          "logical_line": 64
+        },
+        {
+          "physical_line": 295,
+          "logical_line": 285
+        },
+        {
+          "physical_line": 355,
+          "logical_line": 326
+        }
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/fpu.c": {
+      "before": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 1
+      },
+      "prior_sha256": "6e4b42a75cfa9aeef551b83ac147b6199d059abb5d6cddedce29e77be2f978b0",
+      "current_sha256": "a306e8e1c8623c891f32dfc9e693ce5b4bb7a873f76291daddfdc7f151f98921",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+      "removed_redundant_resets": [
+        {
+          "physical_line": 1870,
+          "logical_line": 1886
+        }
+      ]
+    }
+  },
+  "decisions": {
+    "adjacent_local_guards": "The two remaining adjacent cases are the trailing halves of clres and rtl/winmgr alternate modes. The modes select different original blocks in fixed source order. Keep those ranges.",
+    "line_resets": "Each pair assigns the same line twice with no source token or branch in between. Delete the first assignment. All bytes other than the removed directives remain."
+  },
+  "mask_countercheck": {
+    "result": "Six apparent differences disappear under the census LF-only coordinate system. host_def.h is the separately delivered P39 correction.",
+    "files": [
+      "ntexapi.h",
+      "vrnetapi.c",
+      "vrnmpipe.c",
+      "vrmslot.c",
+      "host_def.h"
+    ],
+    "method": "Compare exact original and current branch ranges on LF-delimited bytes. General splitlines also splits historical form feeds and can misplace both ranges."
+  },
+  "census": {
+    "non_error_points": 1975,
+    "non_error_lines": 27219,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 72,
+      "lines": 1755
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "worker",
+          "target": "obj/ccpu/fpu.obj",
+          "selected_lines": 48483,
+          "sha256": "7c16d76904d5ada29e11e976cd70e1a5ad7fbb09ead99ed553928b386284f18a"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dem/demsrch.obj",
+          "selected_lines": 49993,
+          "sha256": "80e7258c7fa8b6814df9596279af506d14ea6d045ecf743cd3487d82aa6620fe"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/host/nt_com.obj",
+          "selected_lines": 49631,
+          "sha256": "e73b1055c95976719fa35a1fa8fa1958cf1dfa746ad6877e71362eb288a040c4"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/host/nt_eoi.obj",
+          "selected_lines": 47385,
+          "sha256": "7791af4b88beb5794b2ac31f8ec0b32d36434b4435d8008db27e1d96bd985c13"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/host/nt_error.obj",
+          "selected_lines": 49391,
+          "sha256": "c9f6a828ce92b3ec64280c119fc3cb3e8e1eeed7339a0b0b3b75189e4d096d70"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/host/nt_event.obj",
+          "selected_lines": 51513,
+          "sha256": "797dcc0ffac3d6f35739ed9b9fb2ed249469e4492f2d616eac33d07010ab3a98"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/host/nt_graph.obj",
+          "selected_lines": 50201,
+          "sha256": "6dfc2e341ffdbd68b581a5f8fccfabd0ee1c9aa4548bee224077a7eaf9571277"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/host/nt_thred.obj",
+          "selected_lines": 45563,
+          "sha256": "efb7a8d75488876cb2b264da42e025c6a8bc54894f5edb6a749b3596fd3f37f0"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/host/nt_timer.obj",
+          "selected_lines": 49028,
+          "sha256": "5a209494d693c577aded8530b9acf120c15d06c76054e037898337dc64f0fa9b"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/ccpu/fpu.obj",
+          "selected_lines": 48483,
+          "sha256": "7c16d76904d5ada29e11e976cd70e1a5ad7fbb09ead99ed553928b386284f18a"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dem/demsrch.obj",
+          "selected_lines": 49993,
+          "sha256": "80e7258c7fa8b6814df9596279af506d14ea6d045ecf743cd3487d82aa6620fe"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/host/nt_com.obj",
+          "selected_lines": 49631,
+          "sha256": "e73b1055c95976719fa35a1fa8fa1958cf1dfa746ad6877e71362eb288a040c4"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/host/nt_eoi.obj",
+          "selected_lines": 47385,
+          "sha256": "7791af4b88beb5794b2ac31f8ec0b32d36434b4435d8008db27e1d96bd985c13"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/host/nt_error.obj",
+          "selected_lines": 49391,
+          "sha256": "c9f6a828ce92b3ec64280c119fc3cb3e8e1eeed7339a0b0b3b75189e4d096d70"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/host/nt_event.obj",
+          "selected_lines": 51513,
+          "sha256": "797dcc0ffac3d6f35739ed9b9fb2ed249469e4492f2d616eac33d07010ab3a98"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/host/nt_graph.obj",
+          "selected_lines": 50201,
+          "sha256": "6dfc2e341ffdbd68b581a5f8fccfabd0ee1c9aa4548bee224077a7eaf9571277"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/host/nt_thred.obj",
+          "selected_lines": 45563,
+          "sha256": "efb7a8d75488876cb2b264da42e025c6a8bc54894f5edb6a749b3596fd3f37f0"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/host/nt_timer.obj",
+          "selected_lines": 49028,
+          "sha256": "5a209494d693c577aded8530b9acf120c15d06c76054e037898337dc64f0fa9b"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/control-body-dlgmgr.obj",
+          "selected_lines": 49544,
+          "sha256": "7c3fd45b24aa418492ec0471ec09f5ec1a13bdad33b7d4289105b5d28c939afc"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/control-body-dmmnem.obj",
+          "selected_lines": 49120,
+          "sha256": "7971281302866b8ac6596de411f9c8b632870df7e470cf8e288fee7121473068"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/default-client.obj",
+          "selected_lines": 45782,
+          "sha256": "440b7a14a91dc4ae1435cff158e7cc98fb60d03f0459689bf813a0bf1f89923b"
+        },
+        {
+          "profile": "wow32",
+          "target": "obj/wkman.obj",
+          "selected_lines": 65274,
+          "sha256": "b1c589670a60c1055c76f6e5143313da5c7f078770d71d24697a8f82330d89c7"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/getset_callproc.obj",
+          "selected_lines": 46414,
+          "sha256": "9e28fa3506099ef7260f0844e6f9ac98a29d135b9864838bc22afa87c9ccc3c9"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/modal_lifetime_body.obj",
+          "selected_lines": 44485,
+          "sha256": "ac9308364bc29625a8d11a5f016c410440a0996d54363d19c1ec5d509d49a09c"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/original_default.obj",
+          "selected_lines": 45775,
+          "sha256": "26eddbc63409167b7248c08d10744a19588801c9eda4966f57b89070234abae9"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/original_dlgmgr.obj",
+          "selected_lines": 50074,
+          "sha256": "18fce781c457482e1d5ee1f71b40a28716006680783730edb8076abbf935894a"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/original_dmmnem.obj",
+          "selected_lines": 49650,
+          "sha256": "aad1c07a00a8e44759b938c45abc11eb1f9fa507ce054b4c3b66915b329f0f37"
+        }
+      ]
+    },
+    "targeted": {
+      "runtime_tests": "reused via selected input and logical line identity",
+      "removed_redundant_line_resets": 13
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Twenty-seven actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

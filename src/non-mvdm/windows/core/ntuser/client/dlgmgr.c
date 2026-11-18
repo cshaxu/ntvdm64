@@ -46,7 +46,6 @@ BOOL ValidateCallback(HANDLE h);
 \***************************************************************************/
 
 #line 41
-#line 41
 PWND GetParentDialog(PWND pwndDialog)
 {
     PWND    pwndParent;
@@ -269,7 +268,6 @@ void CvtDec(
 * History:
 \***************************************************************************/
 
-#line 446
 #line 446
 LONG DefDlgProcWorker(
     PWND pwnd,
@@ -575,7 +573,6 @@ DoCleanup:
 //                    Lock(&(PDLG(pwnd)->spwndFocusSave), pwndT2);
 //                }
 #line 739
-#line 739
             }
             ThreadUnlock(&tlpwndT1);
             return TRUE;
@@ -793,7 +790,6 @@ CallDWP:
 \***************************************************************************/
 
 #line 952
-#line 952
 LONG WINAPI DefDlgProcW(
     HWND hwnd,
     UINT message,
@@ -833,7 +829,6 @@ LONG WINAPI DefDlgProcA(
 * History:
 \***************************************************************************/
 
-#line 989
 #line 989
 int PASCAL DialogBox2(
     HWND hwnd,

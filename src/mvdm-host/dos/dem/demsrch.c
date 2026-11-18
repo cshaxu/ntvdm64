@@ -245,7 +245,6 @@ FreeFFindList(
  */
 
 #line 240
-#line 240
 VOID demFindFirst (VOID)
 {
     DWORD dwRet;

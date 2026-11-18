@@ -226,6 +226,9 @@ P41 to P43 simplify BaseSrv, DPMI and window-manager selectors.
 P44 consolidates adjacent complementary resource and geometry selectors.
 [P44 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p44-checkpoint.json).
 
+P45 removes thirteen duplicate line anchors with 27 matching compile inputs.
+[P45 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p45-checkpoint.json).
+
 ## S1 Closure Record
 
 [T483 S1 closure](../etc/evidence/m0-t483-s1-closure.md).

@@ -869,7 +869,6 @@ void nt_graphics_tick(void)
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 878
-#line 878
                         (void)(*update_alg.calc_update)();
 
 #line 880

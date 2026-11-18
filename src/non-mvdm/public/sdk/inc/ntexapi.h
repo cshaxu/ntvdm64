@@ -721,7 +721,6 @@ typedef enum _ALTERNATIVE_ARCHITECTURE_TYPE {
 #line 1461
 #endif
 #line 1462
-#line 1462
 
     //
     // Current 64-bit system time in 100ns units.

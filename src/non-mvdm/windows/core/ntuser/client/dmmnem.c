@@ -62,7 +62,6 @@ int FindMnemChar(
 #line 63
 #else
 #line 64
-#line 64
                     return 0x00;
 #endif
 #line 66
@@ -293,7 +292,6 @@ PWND xxxGotoNextMnem(
 #line 284
 #else
 #line 285
-#line 285
                     Sleep(1);
 #endif
 #line 287
@@ -352,7 +350,6 @@ PWND xxxGotoNextMnem(
                     }
 #line 325
 
-#line 326
 #line 326
                     /*
                      * Send click message if button has a UNIQUE mnemonic

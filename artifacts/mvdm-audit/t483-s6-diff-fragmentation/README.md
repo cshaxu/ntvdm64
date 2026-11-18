@@ -487,3 +487,7 @@ and logical lines, and the EDIT view fixture passes.
 [S7 P44 receipt](s7-p44-checkpoint.json) consolidates adjacent selectors in
 `clres.c` and `rtl/winmgr.c`. Eight actual compile inputs match, and bitmap,
 dialog navigation, and EDIT view fixtures pass.
+
+[S7 P45 receipt](s7-p45-checkpoint.json) removes thirteen consecutive duplicate
+`#line` directives from seven mirrors. All 27 selected compile inputs retain
+the same source and logical locations. The filtered census stays the same.
