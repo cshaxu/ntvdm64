@@ -1,0 +1,212 @@
+{
+  "packet": "M0 T483 S7 P21",
+  "prior_delivery": "bd9d7ab89",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "before": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 1
+      },
+      "source_sha256": "b641b59025211900d4b01ce610879983f3bf5e88c1b92b100c41028c0d5386b5",
+      "original_sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6",
+      "decision": "Keep actual native kerning pair count and guard zero. Original readback copies requested entries including uninitialized tail on short or failed results. Prior GDI original/current controls isolate the returned-count boundary.",
+      "evidence": "../t483-remaining-reaudit/r1425-r1426-wgdi31-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "before": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 1
+      },
+      "source_sha256": "8b3af16397353e6adb69bd11d1303a72143e1c001810d2812279399cb755b75b",
+      "original_sha256": "c76bec31ae9020ea0173c20d42986f36e6888a315a5d27e91e5cbf2579cb2ad8",
+      "decision": "Keep common original spooler code. The native printer acquisition requires close if Win16 handle publication or output conversion fails. The ambiguous handle path starts null, preserving safe cleanup when acquisition did not run.",
+      "evidence": "../t483-remaining-reaudit/r1801-r1809-wspool-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+      "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+      "decision": "Keep original tab-stop reset with the positive HeapFree result check. Real heap original-body control retains a freed pointer under the original negated condition.",
+      "evidence": "../t483-remaining-reaudit/p233-lboxrare-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+      "before": {
+        "blocks": 6,
+        "added": 32,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 6,
+        "added": 32,
+        "deleted": 0
+      },
+      "source_sha256": "4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045",
+      "original_sha256": "3fd33dc3055ac59e0958a8335c9f3d3155d36d76ac1e178c7dd1e4232deb5528",
+      "decision": "Keep native unwind retirement without longjmp and distinguish host-completed instruction resumption in the same simulation stack. Original ordinary Unsimulate jumps into a live frame and cannot retire an already detached frame. Companion DPMI completion uses the existing exception return edge.",
+      "evidence": "../t483-remaining-reaudit/r0476-r0478-ntthread-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "before": {
+        "blocks": 8,
+        "added": 15,
+        "deleted": 5
+      },
+      "after": {
+        "blocks": 8,
+        "added": 15,
+        "deleted": 5
+      },
+      "source_sha256": "a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad",
+      "original_sha256": "855ac6c5d6d6ca97cc78802994784e8612e5eb6197533790466664bf0e892700",
+      "decision": "Preserve original fax setup around checked allocation, failure cleanup, actual driver return and successful printer-handle close. Historical original/current controls distinguish allocation and spooler result boundaries.",
+      "evidence": "../t483-remaining-reaudit/r1711-r1720-fax-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "before": {
+        "blocks": 4,
+        "added": 7,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 4,
+        "added": 7,
+        "deleted": 1
+      },
+      "source_sha256": "23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5",
+      "original_sha256": "13a04aa32c045b6dfde4a12099d06c99ce2ec84362f30f296d677f7c47b200f7",
+      "decision": "Invoke WSAIsBlocking rather than testing a nonnull function pointer. Preserve task-owned async retirement on explicit WSACleanup and the previously approved lock around completion dispatch.",
+      "evidence": "../t483-remaining-reaudit/r1799-r1800-wsext-review.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "before": {
+        "blocks": 12,
+        "added": 12,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 12,
+        "added": 12,
+        "deleted": 1
+      },
+      "source_sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+      "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+      "decision": "Keep original button rendering and interaction logic around retired-window guards and GDI handle ownership. Existing callback controls qualify cleanup before later original dereferences, and the selected release argument follows the real acquisition owner.",
+      "evidence": "../t483-remaining-reaudit/p216-button-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "c826aaeceff4640a7a205eefb6b504713f65c868b499f4902c1fb915f0a3f26e",
+      "original_sha256": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+      "decision": "Keep narrow x86 generic-call selector. Actual original selection reaches the portable path and fails the controlled convention/stack case; selected original x86 helper passes. Other historical i386 branches are not changed.",
+      "evidence": "../t483-remaining-reaudit/r1467-r1468-wkgthunk-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.h",
+      "before": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "source_sha256": "14bed9c13085e4165a1912c69f0942da5637489fc536cc415f3883366ad034d6",
+      "original_sha256": "14bed9c13085e4165a1912c69f0942da5637489fc536cc415f3883366ad034d6",
+      "decision": "Restore unreferenced original handle conversion declaration with matching existing body signature. Actual selected provider object has identical nonmetadata sections, relocations and external symbols. The next original declaration remains at logical line 162.",
+      "evidence": "../t483-s3/batch5-review.json",
+      "x86_control": {
+        "selected_sections": 33,
+        "external_symbols": 69,
+        "ignored": [
+          ".debug$S",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".debug$F",
+          ".chks64"
+        ],
+        "equal": true,
+        "scope": "ordered section bytes/flags/sizes and symbol-resolved relocations, external symbol names, types and locations",
+        "local_evidence_directory": "build/t483-s7-p21",
+        "comparison_source": "Current generated WOW32 Ninja command for walias.obj"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ntthread.h",
+      "before": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 0
+      },
+      "source_sha256": "53c25863218daf9ed66b0bc744c1722f20ec864e23f67a652539fdffe35fa88d",
+      "original_sha256": "a30d41e57c90bc0b27366debdaa1e6a23c214cc07d757e9f46c7b43fa636328e",
+      "decision": "Keep declared no-jump retirement contract for actual original c_main unwind and the later bounded instruction completion reason. Removing the former prototype infers int for the real void provider; this is type evidence, not an observed crash.",
+      "evidence": "../t483-remaining-reaudit/r0479-ntthread-header-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 189,
+    "remaining": 24,
+    "nonzero_files": 236,
+    "non_error_points": 2012,
+    "non_error_lines": 28397,
+    "source_reduction_s7": {
+      "points": 35,
+      "lines": 579
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and original line anchors and retained exclusions checked. Restored one original wgdi.h declaration; selected x86 provider has equal link-relevant sections and bindings. Nine other files remain byte-identical. Actual compared objects are not byte-identical including debug metadata and raw symbol-table order. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}

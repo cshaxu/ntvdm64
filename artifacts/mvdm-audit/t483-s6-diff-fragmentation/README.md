@@ -372,3 +372,7 @@ census is 2,013 points and 28,400 changed lines.
 [S7 P20 receipt](s7-p20-checkpoint.json) records ten file reviews and
 format cleanup in `dlgmgr2.c`. The filtered census is 2,013 points and
 28,398 changed lines.
+
+[S7 P21 receipt](s7-p21-checkpoint.json) records ten file reviews and the
+original declaration restoration in `wgdi.h`. The filtered census is
+2,012 points and 28,397 changed lines.

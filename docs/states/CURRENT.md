@@ -163,9 +163,14 @@ five repeated line resets in `dlgmgr2.c`. Existing original code anchors
 and the excluded branches are preserved.
 [P20 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p20-checkpoint.json).
 
-S7 progress is 179 reviewed and 34 remaining. Source restorations reduce
-34 points and 578 changed lines in S7. The current census is 2,013 non-error
-points and 28,398 changed lines across 237 mirrors with filtered differences.
+S7 P21 completes ten file reviews. It restores the original unused
+`wgdi.h` declaration and verifies selected x86 provider object sections
+and symbol bindings. The header has no remaining non-error difference.
+[P21 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p21-checkpoint.json).
+
+S7 progress is 189 reviewed and 24 remaining. Source restorations reduce
+35 points and 579 changed lines in S7. The current census is 2,012 non-error
+points and 28,397 changed lines across 236 mirrors with filtered differences.
 
 ## S1 Closure Record
 
