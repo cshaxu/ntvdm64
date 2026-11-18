@@ -72,7 +72,7 @@ extern WORD BWVKey;
 extern char achES[];
 #endif
 
-#line 71
+#line 70
 #ifdef MONITOR
 #line 71
 #error Excluded unsupported monitor IVT declarations
@@ -91,7 +91,7 @@ GLOBAL ULONG DosSessionId = 0;
 GLOBAL UINT VdmExitCode = 0xFF;
 GLOBAL BOOL StreamIoSwitchOn = TRUE;
 static BOOL HostApplicationActive = FALSE;
-#line 86
+#line 85
 
 /*
  *
@@ -345,7 +345,6 @@ host_applClose(void)
  */
 void host_terminate(void)
 {
-    ntvdm_worker_lifecycle_authorize_exit();
 
 #ifdef HUNTER
 #line 325

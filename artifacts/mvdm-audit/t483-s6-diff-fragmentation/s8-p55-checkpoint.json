@@ -1,0 +1,40 @@
+{
+  "packet": "T483 S8 P55",
+  "position": 99,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+  "review_ids": [
+    "T483-R1197",
+    "T483-R1198",
+    "T483-R1199",
+    "T483-R1200",
+    "T483-R1201"
+  ],
+  "original_sha256": "4ae2c1d2c4a66dc63c9b2ddd673fcae067f2fbdab953dc8d96aecfcf03c262bc",
+  "current_sha256": "94bba68ddaa77ceac7fe5eef585e439f9b4b05b69829866488efd0913e63731a",
+  "before": {
+    "blocks": 5,
+    "added": 8,
+    "deleted": 6
+  },
+  "after": {
+    "blocks": 5,
+    "added": 8,
+    "deleted": 6
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 99,
+    "remaining": 132,
+    "files": 231,
+    "points": 1935,
+    "lines": 27050,
+    "pending": 1547
+  },
+  "decision": "R1197/1200 retain selected package directory binding. Current product provider stages the system directory inside MAX_PATH, so with this particular destination its oversize alternative is redundant; dropping only that expression would remove zero mirror points and zero diff lines. The zero-length path does require early return. R1198 preserves OEM-to-ANSI conversion between the OEM expander and ANSI open callers. R1199/1201 retain the selected strings across the LIM and DOS readers and release each old selection when the original linked-extension parser accepts a replacement.",
+  "verification": "Built the PIF parser and default-root fixtures against the current product nt_pif.obj and ran both. PIF_ORIGINAL_PARSER_8_ROWS_OK; PIF_ORIGINAL_REPEAT_IGNORE_REPLACE_OPEN_FAILURE_OK; PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK. Parser conversion stub checks the boundary only; actual converter uses CP_OEMCP -> UTF-16 -> CP_ACP in mvdm_softpc_firmware.c."
+}

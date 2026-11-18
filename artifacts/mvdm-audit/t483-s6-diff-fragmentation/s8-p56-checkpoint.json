@@ -1,0 +1,76 @@
+{
+  "packet": "T483 S8 P56",
+  "position": 100,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+  "review_ids": [
+    "T483-R1202",
+    "T483-R1204",
+    "T483-R1205"
+  ],
+  "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+  "current_sha256": "9b42cf3434167bef3bdaa5c981d5877d1489ad28f3eb4b6aa96c0648b6ef0ad8",
+  "before": {
+    "blocks": 5,
+    "added": 8,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 4,
+    "added": 7,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 9,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        123,
+        115,
+        "#endif  /* MONITOR */"
+      ],
+      [
+        295,
+        294,
+        "#endif // X86GFX"
+      ],
+      [
+        327,
+        326,
+        "#endif /* HUNTER */"
+      ],
+      [
+        422,
+        361,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 100,
+    "remaining": 131,
+    "files": 231,
+    "points": 1934,
+    "lines": 27049,
+    "pending": 1547
+  },
+  "decision": "Restore host_terminate body. Its sole product caller terminate already authorizes on entry and calls host_applClose immediately before it. The executor and registry reject admission under their closing locks and drain before close returns. Keep the entry authorization in host_applClose for independent session escape/return callers. Keep the single init/close entitlement because cleanup needs initialized devices and the return path can close twice. All three review IDs retain residuals.",
+  "verification": {
+    "lines": "Corrected selected MONITOR boundary and original comment coordinates; unchanged excluded closing directives retain post-endif original line resets.",
+    "tests": [
+      "Root COMMAND exit and root COMMAND -> ver -> mem -> exit both validated launcher and frontend exit",
+      "WRITE edited/saved 640 bytes and exited 0 on both clean starts"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "2bf462e1-487a-4fce-b151-85007fe055aa",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "build": "Both cached Release graphs exited 0"
+  }
+}
