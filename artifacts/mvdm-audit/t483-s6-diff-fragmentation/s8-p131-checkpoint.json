@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P131",
+  "position": 174,
+  "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+  "review_ids": [
+    "T483-R2031"
+  ],
+  "original_sha256": "896d25bb240d105c64f96ab06f97bee8e013ad7c4e679a0292b07c5e594c6fc7",
+  "current_sha256": "7c72f522a841a78f78494e950190588fcaf26a2251412a7725171db25258b949",
+  "before": {
+    "blocks": 1,
+    "added": 2,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 1,
+    "added": 2,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 174,
+    "remaining": 57,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "R2031 both slot arrays are local pointer-width storage. Original PULONG increments by four bytes; the x64 control misaligns captured STARTUPINFOA by four, original-pointer stores also truncate. x86 controls pass. Both names and original member order retained. P119 capture tests confirm production layout on both architectures. One minimal adjacent hunk remains pending."
+}

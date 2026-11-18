@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P127 completed review through `apiuse.c`. Next is position 171, `apiwksta.c`.
+S8 P131 completed review through `ntcsrmsg.h`. Next is position 175, `ntexapi.h`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P127 completed review through `apiuse.c`. Next is position 171, `apiwksta.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P127, 170 of 231 positions are covered and 61 remain queued.
+IDs. After S8 P131, 174 of 231 positions are covered and 57 remain queued.
 P107 Win16 shared clipboard transfer remains deferred by owner direction. Both P106 and P107 failed at the same stage. The candidate passed 56 open-state checks and 24 ownership cases. Rerun the real transfer when native OpenClipboard succeeds.
 
 S8 has removed 67 points and 579 diff lines, leaving 1,907 points and 26,631 lines. The live pending backlog has 1,533 rows.
@@ -165,6 +165,10 @@ S8 has removed 67 points and 579 diff lines, leaving 1,907 points and 26,631 lin
 [P125 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p125-checkpoint.json).
 [P126 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p126-checkpoint.json).
 [P127 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p127-checkpoint.json).
+[P128 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p128-checkpoint.json).
+[P129 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p129-checkpoint.json).
+[P130 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p130-checkpoint.json).
+[P131 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p131-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

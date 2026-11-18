@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P130",
+  "position": 173,
+  "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+  "review_ids": [
+    "T483-R2015"
+  ],
+  "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+  "current_sha256": "9fc9f7ea082b2e7c75087f3fde34a2a97ade86af0e7fe0ec97c1cad4581789e0",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 173,
+    "remaining": 58,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "Original string duplication and copy bodies are intact. P192 original-header C1083 at smb.h, with 93 selected lines matching under the finite header. No second conversion implementation. Single include remains pending."
+}

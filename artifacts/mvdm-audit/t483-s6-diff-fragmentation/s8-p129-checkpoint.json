@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P129",
+  "position": 172,
+  "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+  "review_ids": [
+    "T483-R2014"
+  ],
+  "original_sha256": "b3f3831e4a3a1eee6624b28fadaa48742465e1c51a093d6a75ffd9fefaecdd95",
+  "current_sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 172,
+    "remaining": 59,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "Only the private aggregate include differs. Original RAP packing and output counts remain owned by XsFillEnumBuffer, XsPackReturnData, XsSetDataCount. P191 original-header compile fails C1083 smb.h; 747 selected original lines equal. No internal adaptation to remove."
+}

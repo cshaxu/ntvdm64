@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P128",
+  "position": 171,
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+  "review_ids": [
+    "T483-R2013"
+  ],
+  "original_sha256": "8e0dbc5c1759aef57765c63ca8942550370bb260bfcd67d97f8b2e67281cd664",
+  "current_sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 171,
+    "remaining": 60,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "The selected XsNetWkstaGetInfo body and native NetWkstaGetInfo calls match original. Only private aggregate include differs. P190 actual original-header C1083 at smb.h, selected 490 lines equal; P186 expanded control then requires ntmsv1_0.h. Keep one explicit declaration boundary pending."
+}
