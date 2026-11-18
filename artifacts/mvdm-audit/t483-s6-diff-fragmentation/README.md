@@ -380,3 +380,8 @@ original declaration restoration in `wgdi.h`. The filtered census is
 [S7 P22 receipt](s7-p22-checkpoint.json) records ten file reviews and
 two blank-line removals in `int21map.c`. The filtered census is
 2,012 points and 28,395 changed lines.
+
+[S7 P23 receipt](s7-p23-checkpoint.json) completes the 213-path review pass.
+The filtered census is 2,011 points and 28,394 changed lines. All 242
+worklist source hashes match. Five historical paths outside this pass
+still carry nineteen conservatively counted mask cases.

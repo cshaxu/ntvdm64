@@ -920,6 +920,7 @@ NoCreate:
         if (!RevalidateHwnd(hwnd)) {
             goto CreateDialogReturn;
         }
+
 #line 880
         if (fSuccess && !PDLG(pwnd)->fEnd) {
 

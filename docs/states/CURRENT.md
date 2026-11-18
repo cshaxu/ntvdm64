@@ -173,9 +173,17 @@ layout around the EXEC translation in `int21map.c`. Existing logical
 line resets and excluded branches are preserved.
 [P22 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p22-checkpoint.json).
 
-S7 progress is 199 reviewed and 14 remaining. Source restorations reduce
-35 points and 581 changed lines in S7. The current census is 2,012 non-error
-points and 28,395 changed lines across 236 mirrors with filtered differences.
+S7 P23 completes the last fourteen file reviews and restores one original
+blank in `dlgbegin.c` before the existing logical-line reset.
+[P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
+
+The S7 file pass covers all 213 admitted paths. Source restorations reduce
+36 points and 582 changed lines in S7. The current census is 2,011 non-error
+points and 28,394 changed lines across 236 mirrors with filtered differences.
+The reconciled worklist has 242 unique paths and all source hashes match.
+Nineteen historical conservative mask cases remain in five previously
+reviewed paths outside the admitted S7 file pass. Residual owner decisions
+remain recorded in the pending decision ledger.
 
 ## S1 Closure Record
 

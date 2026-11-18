@@ -1,0 +1,271 @@
+{
+  "packet": "M0 T483 S7 P23",
+  "prior_delivery": "0f14c8ee9",
+  "reviews": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "before": {
+        "blocks": 10,
+        "added": 33,
+        "deleted": 7
+      },
+      "after": {
+        "blocks": 9,
+        "added": 33,
+        "deleted": 6
+      },
+      "source_sha256": "575a8e67626f75ebc1446cc3186e7d9f070be45271d2254394d47fee7e35211c",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "decision": "Restore the original blank before line 880. Preserve original dialog creation flow around native procedure registration and PDLG retirement checks after application/allocator callbacks. Both flagged exclusion guards are local frames with no counterpart in the original source.",
+      "evidence": "../t483-remaining-reaudit/p225-dlgbegin-review.json",
+      "retained_local_guards": {
+        "620": "local alternate around original unconditional dialog-procedure store",
+        "631": "local alternate around original unconditional ANSI flag update"
+      }
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "before": {
+        "blocks": 10,
+        "added": 46,
+        "deleted": 8
+      },
+      "after": {
+        "blocks": 10,
+        "added": 46,
+        "deleted": 8
+      },
+      "source_sha256": "f3cb247cbefe3ebd6fd1bc7864ab6f8ae3246988806d57e2f2cea4e0de694b88",
+      "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+      "decision": "Keep pointer-width-safe client ID and wait handle conversions plus the existing request-lock query and retained reentry completion notification. Ordinary DOS command state and service wait ownership remain original.",
+      "evidence": "../t483-remaining-reaudit/batch-p181-checkpoint.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b",
+      "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+      "decision": "Retain original Use API bodies. Actual original aggregate header cannot compose with the admitted workstation declarations; keep the finite include substitution.",
+      "evidence": "../t483-remaining-reaudit/batch-p189-checkpoint.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6",
+      "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+      "decision": "Retain original service API bodies and the one header substitution at the admitted XACTSRV boundary.",
+      "evidence": "../t483-remaining-reaudit/batch-p188-checkpoint.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5",
+      "original_sha256": "8e0dbc5c1759aef57765c63ca8942550370bb260bfcd67d97f8b2e67281cd664",
+      "decision": "Retain original workstation routines. Existing aggregate-header compile evidence qualifies the single include substitution.",
+      "evidence": "../t483-remaining-reaudit/batch-p190-checkpoint.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33",
+      "original_sha256": "b3f3831e4a3a1eee6624b28fadaa48742465e1c51a093d6a75ffd9fefaecdd95",
+      "decision": "Retain original message support routines and the finite declaration header. The original aggregate crosses missing SMB/private declarations.",
+      "evidence": "../t483-remaining-reaudit/batch-p191-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+      "before": {
+        "blocks": 11,
+        "added": 18,
+        "deleted": 18
+      },
+      "after": {
+        "blocks": 11,
+        "added": 18,
+        "deleted": 18
+      },
+      "source_sha256": "178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2",
+      "original_sha256": "110e8fd11ce828d7a3dfc7c51adcefb07faca83219a6a3d742d7f63bdc810706",
+      "decision": "Keep original algorithms around direct continuation labels and corrected odd/even address gap constants. Prior exact-source controls show original reentry loses the active frame and original strides write the wrong plane positions. Related controls are r0612-r0613 and r0614-r0616.",
+      "evidence": "../t483-remaining-reaudit/r0617-r0622-final-sevid017-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+      "before": {
+        "blocks": 9,
+        "added": 16,
+        "deleted": 16
+      },
+      "after": {
+        "blocks": 9,
+        "added": 16,
+        "deleted": 16
+      },
+      "source_sha256": "571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471",
+      "original_sha256": "df9f565cbac31789e833c9fb6a26c5b8a9ee12ce3cb2f366f61037deca6415da",
+      "decision": "Keep same-activation continuations and address-gap constants. Original recursive wrappers lose generated local allocations in exact-source controls. Related mode-two cases are r0623-r0625.",
+      "evidence": "../t483-remaining-reaudit/r0626-r0631-final-sevid018-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+      "before": {
+        "blocks": 4,
+        "added": 6,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 4,
+        "added": 6,
+        "deleted": 6
+      },
+      "source_sha256": "636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc",
+      "original_sha256": "e13a03dc8accb3746873c1482d19a168eaeb48641e5a509c0c20bba8ed5e9b3f",
+      "decision": "Keep the bounded continuation and interleaved-plane corrections. Original/current direct write controls separate saved-local lifetime from plane address calculation.",
+      "evidence": "../t483-remaining-reaudit/r0608-r0611-chain2-write-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "source_sha256": "c763b216c1caef24611efb43faa133423d47a193bf700a870e99ec0c2c125f6c",
+      "original_sha256": "4c3a5cd67165db676418868a2895d266ef61bfa9fed7e4389d0fbbf6b10b1c9c",
+      "decision": "Keep three proved address corrections. Prior byte and word controls qualify the original pitch/shift differences. Separately retain r0642-r0647-vram-copy-review.json baseline gap: odd-target full-copy oracle fails 28/56 on code shared with original. No independent copy fix or full-acceptance claim.",
+      "evidence": "../t483-remaining-reaudit/r0648-r0650-copy-word-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid004.c",
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 3
+      },
+      "source_sha256": "b239bbed52f17d86e5a21a86f1cdac71c98363f4495a8c699efa46d421d17da2",
+      "original_sha256": "92f4f394a1325293279cdaf520dc493b25be739a5c91c35078735fabdea9fbfa",
+      "decision": "Keep the three exact operand offsets from the established generic rotation controls. The original matrix isolates wrong read offsets; no whole generated routine replacement.",
+      "evidence": "../t483-remaining-reaudit/r0605-r0607-generic-rotation-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sources",
+      "before": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "source_sha256": "7f87b0cff6f41a59084e736b906e6f2457f7580dfc2cdf98682d8855a13f4432",
+      "original_sha256": "6dc49164a86efb90776924f463fc0e1ec064436e21339b92e709449a73779431",
+      "decision": "Original manifest reader selects each path and requires it to exist. Keep removal of retired ntstubs.c, which historically supplied duplicate alternative symbols. Existing ROM and CPU providers own the real implementations.",
+      "evidence": "../t483-remaining-reaudit/r0483-sources-review.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sources",
+      "before": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 0,
+        "deleted": 1
+      },
+      "source_sha256": "d98e4e87d136d13c385f1ac8c1bcda6766dd708ce2dffd1c833bb3fb9f014771",
+      "original_sha256": "a6c0b2b3dc29151d6a760335d607114835490b1d2fe67e04e5f5c68865dab7e7",
+      "decision": "Keep previously closed removal of x86_emm.c. The actual generator reads this general SOURCES list; retired source is absent. Existing nt_emm provider owns selected EMS. Original PPC list is already restored.",
+      "evidence": "../t483-remaining-reaudit/r1249-r1250-original-restoration.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.def",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "458e4c62bbd2f832f472b66303dd2e920f8b0cfe047fec3acd51cdf52efbee1f",
+      "original_sha256": "0df4286cc384d667dd95bf00b84d81f4afb6536a4fc387a5546b8e74b2f321b4",
+      "decision": "Keep exactly one named ticket export. The consumer resolves W32TerminateTaskTicket, and native termination requires the 64-bit request identifier. Original W32HungAppNotifyThread consumes HTASK with a different ABI.",
+      "evidence": "../t483-remaining-reaudit/r1709-wow32-def-review.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 213,
+    "remaining": 0,
+    "nonzero_files": 236,
+    "non_error_points": 2011,
+    "non_error_lines": 28394,
+    "source_reduction_s7": {
+      "points": 36,
+      "lines": 582
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Restored one original blank before logical line 880. Thirteen other files remain byte-identical. Selected original logical anchors and all exclusions are preserved. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run.",
+  "ledger_crosscheck": {
+    "rows": 242,
+    "unique_rows": 242,
+    "nonzero_rows": 236,
+    "source_hash_mismatches": 0,
+    "s7_reviewed_paths": 213,
+    "s7_pending_paths": 0,
+    "s7_unresolved_mask_cases": 0,
+    "historical_conservative_mask_cases": 19,
+    "historical_conservative_mask_files": 5
+  }
+}
