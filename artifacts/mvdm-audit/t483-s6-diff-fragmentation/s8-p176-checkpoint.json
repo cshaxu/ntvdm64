@@ -1,0 +1,43 @@
+{
+  "packet": "T483 S8 P176",
+  "position": 219,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+  "review_ids": [
+    "T483-R2704",
+    "T483-R2706"
+  ],
+  "original_sha256": "d2dae26e4766c2567225cb6bfc8147b4e80955b4ca49dcaf97b6193e7067a8e2",
+  "current_sha256": "9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c",
+  "before": {
+    "blocks": 4,
+    "added": 11,
+    "deleted": 3
+  },
+  "after": {
+    "blocks": 4,
+    "added": 11,
+    "deleted": 3
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 219,
+    "remaining": 12,
+    "files": 231,
+    "points": 1912,
+    "lines": 26351,
+    "pending": 1532
+  },
+  "verification": {
+    "scope": "Ran both original-string-boundaries x86 fixtures. Live GDI extent comparison for six lengths times three prefix modes; instrumented allocation/free, guard bytes, failure and GDI result contract. Not guest painting or full runtime acceptance.",
+    "results": [
+      "WOW_CONTROL_STRING_OK",
+      "text_measure_failure_failures=0"
+    ]
+  },
+  "decision": "Original PSMGetTextExtent supplies a fixed 255-WCHAR array; GetPrefixCount appends a null after copying ordinary characters. At 255 it needs 256 slots. For longer prefixed captions the measurement also needs the full transformed string. Retain stack use below the threshold, cch+1 allocation and matching release above it, and original GDI return behavior. Actual btnctl paths pass caption length and mngrayc passes caller length. No fixed maximum established by those calls."
+}
