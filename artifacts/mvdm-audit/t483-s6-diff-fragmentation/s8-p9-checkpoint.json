@@ -1,0 +1,40 @@
+{
+  "packet": "T483 S8 P9",
+  "position": 28,
+  "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+  "source_sha256": "c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140",
+  "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+  "decision": "R0344 pending owner. D11 must issue EOI on A0h. Writing 20h to A1h replaces the slave mask and leaves the IRQ in service.",
+  "before_and_after": {
+    "points": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "line_check": "Original operand line 110 retained at logical line 110. Both excluded arms unchanged.",
+  "coverage": {
+    "complete": 28,
+    "remaining": 203,
+    "files": 231,
+    "points": 1957,
+    "lines": 27118,
+    "pending": 1549
+  },
+  "verification": {
+    "current_checks": 79,
+    "failures": 0,
+    "artifacts": {
+      "exit": 0,
+      "identities": {
+        "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\slave_bios_eoi_test.c": "9E930F00C6ABBCB67A1612F6D1F727EBD9296D4BAEE1E07F62BCB07342604192",
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\bios\\slave_bs.c": "C745FABC4CB99F2E8A9E2173C49D2A8082B431D0F4B0A145BEA1FE08792C8140",
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c": "6CCBDD1C1A00457FFF9D236321F69B80D87FC2ABE88BC31EB8F64617247E2304",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p9\\slave-eoi\\fixture.exe": "3F87D98D2A0CFB6502ED6EA3801291B00D3A5E500A12D62015EF7E06C34DAEF8",
+        "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p9\\slave-eoi\\fixture.exe.map": "B65A96B54AF8031BD7A247BF95807D5CCDCA58D74BAA513EA349F568F746ABCF",
+        "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-bios.lib": "35F7439FA538472A88785B8E5A7C67BB7EF804711DBAE14C2B617F7CB80B2683",
+        "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-system.lib": "5279A6FB59E0B0F21D0398E642E76F11FE435A265584B60B2BE1C69A76C254BF"
+      }
+    },
+    "prior_original_control": "../t483-remaining-reaudit/r0344-slave-eoi-review.json",
+    "production": "Existing P8 package. Audit-only checkpoint."
+  }
+}

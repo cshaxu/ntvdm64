@@ -182,7 +182,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 199,src/mvdm-host/inc/demexp.h,1,3,3,6,0,0,200,s8-p6-rechecked-residuals-pending-owner,e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788
 200,src/mvdm-host/inc/suballoc.h,1,2,0,2,1,0,201,s8-p6-rechecked-residuals-pending-owner,d18350215388f68a97817da37acb9df032c47074f0fb3354c2e212166a37058c
 201,src/mvdm-host/inc/vrnmpipe.h,1,1,0,1,1,0,202,s8-p6-rechecked-residuals-pending-owner,4f93fc169d83f72b1e193aef8759fc47d9511ded5f5be899164743644b905eea
-202,src/mvdm-host/softpc.new/base/bios/slave_bs.c,1,1,1,2,2,0,203,s7-p8-reviewed,c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140
+202,src/mvdm-host/softpc.new/base/bios/slave_bs.c,1,1,1,2,2,0,203,s8-p9-rechecked-residual-pending-owner,c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140
 203,src/mvdm-host/softpc.new/base/bios/tape_io.c,1,1,0,1,12,0,204,s7-p13-reviewed,e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9
 204,src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h,1,1,0,1,0,0,205,s7-p3-reviewed-residual-pending,c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15
 205,src/mvdm-host/softpc.new/base/ccpu386/c_debug.h,1,1,0,1,0,0,206,s7-p4-reviewed-residual-pending,66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f
