@@ -44,7 +44,6 @@ typedef wow_task_order_entry TDB;
 #define CW2_USEDEFAULT 0x8000
 #define VER31 0x030a
 #define PMAP_COMPAT 14
-#define QUERY_VALUE_BUFFER 80
 /* This original USER kernel slice is Unicode even in the ANSI WOW client
  * build. Retain its TEXT literals without changing the original bodies. */
 #undef TEXT

@@ -59,7 +59,9 @@ PVOID QEntryLookasideBounds;
 #define DebugValidateMLISTandQMSG(pml, pqmsg)
 #endif
 #line 118
-#line 518
+#line 516
+#define QUERY_VALUE_BUFFER 80
+
 /***************************************************************************\
 * SetAppCompatFlags
 *

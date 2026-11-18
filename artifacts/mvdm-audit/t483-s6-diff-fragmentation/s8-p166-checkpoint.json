@@ -1,0 +1,69 @@
+{
+  "packet": "T483 S8 P166",
+  "position": 209,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+  "review_ids": [
+    "T483-R2618",
+    "T483-R2619",
+    "T483-R2620",
+    "T483-R2621",
+    "T483-R2622",
+    "T483-R2627",
+    "T483-R2628",
+    "T483-R2629",
+    "T483-R2630"
+  ],
+  "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+  "current_sha256": "393591adf5233a17ff9384fef39d9fd96baeb0df4bada2740d029e5f38a1d686",
+  "before": {
+    "blocks": 35,
+    "added": 5,
+    "deleted": 4168
+  },
+  "after": {
+    "blocks": 35,
+    "added": 5,
+    "deleted": 4166
+  },
+  "source_changed": true,
+  "paired_error_bodies": 24,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        646,
+        627,
+        "}"
+      ],
+      [
+        996,
+        3727,
+        "#endif"
+      ]
+    ],
+    "coordinate_verification": [
+      516,
+      627,
+      996,
+      3727
+    ]
+  },
+  "coverage": {
+    "complete": 209,
+    "remaining": 22,
+    "files": 231,
+    "points": 1912,
+    "lines": 26387,
+    "pending": 1532
+  },
+  "decision": "Restore QUERY_VALUE_BUFFER from binding header to original queue.c:516. The character count fix at the reader remains necessary for WCHAR[80]. The original client winmgrc.c already supplies GetAppCompatFlags; adding the kernel definition would duplicate that symbol. ETHREAD, kernel PQ/PQMSG, desktop and CSRSS operations cannot act on live native USER objects from this DLL. Remaining rows retain their individual evidence.",
+  "verification": {
+    "scope": "Production x86 queue.obj rebuilt with its cached Ninja rule. Original and mirror hashes, exclusion bodies and line coordinates checked.",
+    "coff": {
+      "length": 4233,
+      "old_sha256": "23972b7759722360a50db49d12b4b326ddd378e5f050ce1f7235335fec26c4d3",
+      "new_sha256": "3d0c24d0fd85c56d768844d67cbd1059c89b034b44b5264d39d5c955d66d8e8c",
+      "difference": "Only COFF timestamp field at offset 4 differs."
+    }
+  }
+}
