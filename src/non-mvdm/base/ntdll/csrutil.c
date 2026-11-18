@@ -264,3 +264,169 @@ Return Value:
 
     return( Length );
 }
+
+#line 572
+VOID
+CsrCaptureMessageBuffer(
+    IN OUT PCSR_CAPTURE_HEADER CaptureBuffer,
+    IN PVOID Buffer OPTIONAL,
+    IN ULONG Length,
+    OUT PVOID *CapturedBuffer
+    )
+
+/*++
+
+Routine Description:
+
+    This function captures an ASCII string into a counted string data
+    structure located in an API request message.
+
+Arguments:
+
+    CaptureBuffer - Pointer to a capture buffer allocated by
+        CsrAllocateCaptureBuffer.
+
+    Buffer - Optional pointer to the buffer.  If this parameter is
+        not present, then the counted string data structure is set to
+        the null string and no space is allocated from the capture
+        buffer.
+
+    Length - Length of the buffer.
+
+    CaptureString - Pointer to the field in the message that will
+        be filled in to point to the capture buffer.
+
+Return Value:
+
+    None.
+
+--*/
+
+{
+    //
+    // Set the length fields of the captured string structure and allocated
+    // the Length for the string from the capture buffer.
+    //
+
+    CsrAllocateMessagePointer( CaptureBuffer,
+                               Length,
+                               CapturedBuffer
+                             );
+
+    //
+    // If Buffer parameter is not present or the length of the data is zero,
+    // return.
+    //
+
+    if (!ARGUMENT_PRESENT( Buffer ) || (Length == 0)) {
+        return;
+        }
+
+    //
+    // Copy the buffer data to the capture area.
+    //
+
+    RtlMoveMemory( *CapturedBuffer, Buffer, Length );
+
+    return;
+}
+
+VOID
+CsrCaptureMessageString(
+    IN OUT PCSR_CAPTURE_HEADER CaptureBuffer,
+    IN PCSTR String OPTIONAL,
+    IN ULONG Length,
+    IN ULONG MaximumLength,
+    OUT PSTRING CapturedString
+    )
+
+/*++
+
+Routine Description:
+
+    This function captures an ASCII string into a counted string data
+    structure located in an API request message.
+
+Arguments:
+
+    CaptureBuffer - Pointer to a capture buffer allocated by
+        CsrAllocateCaptureBuffer.
+
+    String - Optional pointer to the ASCII string.  If this parameter is
+        not present, then the counted string data structure is set to
+        the null string and no space is allocated from the capture
+        buffer.
+
+    Length - Length of the ASCII string.
+
+    MaximumLength - Maximum length of the string.  Different for null
+        terminated strings, where Length does not include the null and
+        MaximumLength does.
+
+    CaptureString - Pointer to the counted string data structure that will
+        be filled in to point to the capture ASCII string.
+
+Return Value:
+
+    None.
+
+--*/
+
+{
+    //
+    // If String parameter is not present, then set the captured string
+    // to be the null string and returned.
+    //
+
+    if (!ARGUMENT_PRESENT( String )) {
+        CapturedString->Length = 0;
+        CapturedString->MaximumLength = (USHORT)MaximumLength;
+        CsrAllocateMessagePointer( CaptureBuffer,
+                                   MaximumLength,
+                                   (PVOID *)&CapturedString->Buffer
+                                 );
+        return;
+        }
+
+    //
+    // Set the length fields of the captured string structure and allocated
+    // the MaximumLength for the string from the capture buffer.
+    //
+
+    CapturedString->Length = (USHORT)Length;
+    CapturedString->MaximumLength = (USHORT)
+        CsrAllocateMessagePointer( CaptureBuffer,
+                                   MaximumLength,
+                                   (PVOID *)&CapturedString->Buffer
+                                 );
+    //
+    // If the Length of the ASCII string is non-zero then move it to the
+    // capture area.
+    //
+
+    if (Length != 0) {
+        RtlMoveMemory( CapturedString->Buffer, String, MaximumLength );
+        if (CapturedString->Length < CapturedString->MaximumLength) {
+            CapturedString->Buffer[ CapturedString->Length ] = '\0';
+            }
+        }
+
+    return;
+}
+
+
+
+PLARGE_INTEGER
+CsrCaptureTimeout(
+    IN ULONG MilliSeconds,
+    OUT PLARGE_INTEGER Timeout
+    )
+{
+    if (MilliSeconds == -1) {
+        return( NULL );
+        }
+    else {
+        Timeout->QuadPart = Int32x32To64( MilliSeconds, -10000 );
+        return( (PLARGE_INTEGER)Timeout );
+        }
+}

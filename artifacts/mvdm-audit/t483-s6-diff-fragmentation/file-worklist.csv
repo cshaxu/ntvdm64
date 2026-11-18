@@ -79,7 +79,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 83,src/mvdm-host/softpc.new/host/src/nt_cpu.c,4,4,2,10,0,s8-p45-reviewed,T483-R1021;T483-R1022;T483-R1023;T483-R1024;T483-R1025;T483-R1026;T483-R1027;T483-R1028;T483-R1029;T483-R1030;T483-R1031;T483-R1032;T483-R1033;T483-R1034;T483-R1035;T483-R1036;T483-R1037;T483-R1038;T483-R1039,23c6f5890fb60aae48f319b7b0426ed8c9dff8656c8eaf8a2f911acf23b700fc
 84,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,5,0,s8-p46-reviewed,T483-R1040;T483-R1041;T483-R1042;T483-R1043;T483-R1044;T483-R1045;T483-R1046,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
 85,src/mvdm-host/wow32/wuclass.c,7,13,7,6,0,s8-p106-reviewed,T483-R1816;T483-R1817;T483-R1818;T483-R1819;T483-R1820;T483-R1821;T483-R1822;T483-R1823,e88dbe493e58e12f8fd2b55395e8ebcff1ce7858c06a3dae944c5c3e742e4485
-86,src/non-mvdm/base/ntdll/csrutil.c,7,7,615,0,0,s8-p117-reviewed,T483-R1945;T483-R1946;T483-R1947;T483-R1948;T483-R1949;T483-R1950;T483-R1951,75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a
+86,src/non-mvdm/base/ntdll/csrutil.c,8,7,450,0,0,s8-p119-reviewed,T483-R1945;T483-R1946;T483-R1947;T483-R1948;T483-R1949;T483-R1950;T483-R1951,a424054e40fee1a72ecf6a8f37d367ffd84156d29cdf4cbd81826e84bef99415
 87,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,3,0,s7-reviewed-residuals-pending,T483-R2611;T483-R2612;T483-R2613;T483-R2614;T483-R2615;T483-R2616;T483-R2617,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
 88,src/mvdm-host/dpmi32/dpmimemr.c,6,4,19,0,0,s7-p18-reviewed,,568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4
 89,src/mvdm-host/dpmi32/modesw.c,6,26,6,2,0,s8-p5-rechecked-residuals-pending-owner,T483-R0204;T483-R0205;T483-R0206;T483-R0207;T483-R0208;T483-R0209;T483-R0210;T483-R0211;T483-R0212;T483-R0213,28836a7ec6efc3516e78f9e96daa1675c2b4540a2b72d4a14676d56fbf7f455c
@@ -113,7 +113,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 121,src/mvdm-host/wow32/wmsgem.c,4,4,1,1,0,s8-p93-reviewed,T483-R1661;T483-R1662;T483-R1663;T483-R1664;T483-R1665,f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8
 122,src/mvdm-host/wow32/wsext.c,4,7,1,0,0,s8-p103-reviewed,T483-R1799;T483-R1800,23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5
 123,src/mvdm-host/wow32/wuman.c,3,3,2,2,0,s8-p109-reviewed,T483-R1855;T483-R1856;T483-R1857;T483-R1858;T483-R1859,a1c34a9b9554b9db8a7163742433521c0280e79621e9626fc68fe9aee6592936
-124,src/non-mvdm/base/ntos/ex/probe.c,4,2,97,2,0,s7-p2-reviewed-residual-pending,T483-R1952;T483-R1953;T483-R1954;T483-R1955;T483-R1956,92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f
+124,src/non-mvdm/base/ntos/ex/probe.c,4,2,97,2,0,s8-p118-reviewed,T483-R1952;T483-R1953;T483-R1954;T483-R1955;T483-R1956,92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f
 126,src/non-mvdm/windows/core/ntuser/client/globals.h,4,0,5,2,0,s7-p5-reviewed-residual-pending,T483-R2321;T483-R2322;T483-R2323;T483-R2324;T483-R2325,5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8
 128,src/non-mvdm/windows/core/ntuser/rtl/text.c,4,11,3,0,0,s7-p7-reviewed-residual-pending,T483-R2704;T483-R2705;T483-R2706;T483-R2707,9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c
 129,src/mvdm-host/dos/dem/demgset.c,3,6,1,0,0,s8-p2-rechecked-residuals-pending-owner,T483-R0097;T483-R0098;T483-R0099;T483-R0100;T483-R0101,35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e

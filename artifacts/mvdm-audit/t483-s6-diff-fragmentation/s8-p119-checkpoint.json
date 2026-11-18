@@ -1,0 +1,56 @@
+{
+  "packet": "T483 S8 P119",
+  "position": 161,
+  "path": "src/non-mvdm/base/ntdll/csrutil.c",
+  "review_ids": [
+    "T483-R1945",
+    "T483-R1946",
+    "T483-R1947",
+    "T483-R1948",
+    "T483-R1949",
+    "T483-R1950",
+    "T483-R1951"
+  ],
+  "original_sha256": "7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a",
+  "current_sha256": "a424054e40fee1a72ecf6a8f37d367ffd84156d29cdf4cbd81826e84bef99415",
+  "before": {
+    "blocks": 7,
+    "added": 7,
+    "deleted": 615
+  },
+  "after": {
+    "blocks": 8,
+    "added": 7,
+    "deleted": 450
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 162,
+    "remaining": 69,
+    "files": 231,
+    "points": 1909,
+    "lines": 26769,
+    "pending": 1534
+  },
+  "verification": {
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "db0ab130-55fb-4e8a-ba27-400d16acb9bb",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "native_capture": "x86/x64 each 3462 checks, zero failures",
+    "helper_execution": "Linked final production capture.obj separately on both architectures: exact buffer bytes, counted string and null source, finite/infinite timeout passed",
+    "build": "Cached x86/x64 and explicit owning worker/launcher Ninja targets"
+  },
+  "decision": "R1951 partially restored. Three complete OpenNT helpers byte-identical at original lines 572-735, using #line 572. Restoring the island adds one measured block and removes 165 diff lines. Remaining original tail omissions keep their own ABI/private dependency evidence. Sequence remains through position 162."
+}

@@ -1,0 +1,43 @@
+{
+  "packet": "T483 S8 P118",
+  "position": 162,
+  "path": "src/non-mvdm/base/ntos/ex/probe.c",
+  "review_ids": [
+    "T483-R1953",
+    "T483-R1955"
+  ],
+  "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+  "current_sha256": "92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f",
+  "before": {
+    "blocks": 4,
+    "added": 2,
+    "deleted": 97
+  },
+  "after": {
+    "blocks": 4,
+    "added": 2,
+    "deleted": 97
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 162,
+    "remaining": 69,
+    "files": 231,
+    "points": 1908,
+    "lines": 26934,
+    "pending": 1534
+  },
+  "decision": "R1953 original exp.h requires the private Executive. The only product caller in kernel/cleanup.c validates selector alignment and range before its own guarded copy; the selected ProbeForRead retains the original body. The binding supplies the process address ceiling and exception provider. R1955 direct restoration of the whole non-Alpha ProbeForWrite fails under the same x86 WOW32 compiler options that accept the selected source. The page-touch loop uses PAGE_SIZE at original lines 104/126. Definitions local to unrelated source files do not supply it here. Adding a new page-size binding solely for an uncalled write routine would expand the user-mode adapter; keep this boundary pending. Both excluded bodies and original conditional order retained.",
+  "verification": {
+    "diagnostic": "C2065 PAGE_SIZE at 104 and 126",
+    "selected_compile": 0,
+    "restoration_control_exit": 2,
+    "historical_fixture": "WOW_ORIGINAL_PROBE errors=0 alignment=5 range=3 no_page_touch=1 access_fault_caught=1",
+    "scope": "Fresh object controls only; no release input changed."
+  }
+}
