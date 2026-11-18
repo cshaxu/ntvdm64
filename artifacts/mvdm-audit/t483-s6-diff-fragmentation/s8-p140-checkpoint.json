@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P140",
+  "position": 183,
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+  "review_ids": [
+    "T483-R2161",
+    "T483-R2171"
+  ],
+  "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+  "current_sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 7
+  },
+  "after": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 7
+  },
+  "source_changed": false,
+  "paired_error_bodies": 7,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 183,
+    "remaining": 48,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "decision": "R2161: selected parser uses private-to-public menu mappings selected by WOW_ORIGINAL_MENU_CLIENT; the raw original PCH control fails at PORT_MESSAGE in ntcsrmsg.h. R2171: original SetMenu forwards to the private three-argument NtUserSetMenu. Current wow_menu_native_SetMenu resolves the window, calls native USER32 outside the inherited lock and updates menu ownership after success. Restoring that wrapper would require the private NT4 menu server or would collide with the native binding. Keep the two sites pending; no change to template parsing.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  }
+}
