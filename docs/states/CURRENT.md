@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-42 points and 651 changed lines in S7. The current census is 2,005 non-error
-points and 28,325 changed lines across 235 mirrors with filtered differences.
+43 points and 672 changed lines in S7. The current census is 2,004 non-error
+points and 28,304 changed lines across 235 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. All are local conditional frames without a matching original
@@ -202,6 +202,14 @@ selected text and logical lines. The mapped XMS fixture passes. The historical
 startup fixture has the same seven unresolved link symbols with either source.
 The P10 Full package is still present at both release destinations.
 [P26 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p26-checkpoint.json).
+
+P27 removes seven local X86GFX frames from `nt_fulsc.c`. The filtered file
+count falls from twelve to eleven points and from fifty to twenty-nine
+changed lines. Both worker compile entries retain identical selected
+text and logical lines. The focused font restoration fixture passes and
+its old-code control fails as expected. Six software fullscreen changes
+retain their pending decisions.
+[P27 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p27-checkpoint.json).
 
 ## S1 Closure Record
 

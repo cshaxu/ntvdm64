@@ -1,0 +1,104 @@
+{
+  "packet": "M0 T483 S7 P27",
+  "prior_checkpoint": "a7107bca6",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "opennt_origin": "base/mvdm/softpc.new/host/src/nt_fulsc.c",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "prior_original_context_evidence": "s7-p2-checkpoint.json",
+  "before": {
+    "blocks": 12,
+    "added": 32,
+    "deleted": 18
+  },
+  "after": {
+    "blocks": 11,
+    "added": 11,
+    "deleted": 18
+  },
+  "removed_local_frames": [
+    [
+      211,
+      214
+    ],
+    [
+      263,
+      266
+    ],
+    [
+      320,
+      323
+    ],
+    [
+      945,
+      948
+    ],
+    [
+      973,
+      976
+    ],
+    [
+      991,
+      994
+    ],
+    [
+      1113,
+      1116
+    ]
+  ],
+  "checked_original_error_pairs": 29,
+  "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+  "restored_sha256": "8617a5690ccc0d8926fe948e2bd31e28192bfad74551085297ba34111bad500a",
+  "decision": "Remove seven local X86GFX abort frames. R1119 already has the original WINDOWED predicate and now also has its original conditional structure. Actual original preprocessor exclusions are preserved.",
+  "retained_boundaries": [
+    "The software fullscreen route still calls the original paint and VGA geometry/cursor operations. Restoring the original WINDOWED guards would skip these operations and in one path leave consoleHeight unassigned.",
+    "The original X86GFX hardware branch remains excluded. Its split retains getNtScreenState for the actual keyboard consumer while hardware mode-switch functions remain unselected.",
+    "The retained font restore and CHAIN2 differences have existing focused controls. The monitor-only AddTempIVTFixups provider remains within the established hardware-monitor exclusion scope."
+  ],
+  "pending_decisions": {
+    "updated": [
+      "T483-R1111",
+      "T483-R1112",
+      "T483-R1113",
+      "T483-R1117",
+      "T483-R1118",
+      "T483-R1121"
+    ],
+    "added": 0,
+    "removed": 0,
+    "total": 1567
+  },
+  "non_error_census": {
+    "diff_points": 2004,
+    "diff_lines": 28304,
+    "nonzero_mirrors": 235,
+    "historical_worklist_rows": 242,
+    "source_reduction_s7": {
+      "points": 43,
+      "lines": 672
+    }
+  },
+  "verification": {
+    "preprocessing": [
+      {
+        "context": "worker-x86",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/host/nt_fulsc.obj",
+        "selected_lines": 47654,
+        "comparison_sha256": "a49a9d80fca136d0d8465610feb9663088fa7e13c20a92ca1ff9af30b64c203a"
+      },
+      {
+        "context": "worker-reference-x86",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/host/nt_fulsc.obj",
+        "selected_lines": 47654,
+        "comparison_sha256": "a49a9d80fca136d0d8465610feb9663088fa7e13c20a92ca1ff9af30b64c203a"
+      }
+    ],
+    "console_font_fixture": "PASS font restoration; old-code control fails",
+    "release": {
+      "action": "No production relink, republication or repeat of Full. Selected product inputs and logical lines are identical.",
+      "p10_full_package_id": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "verified_image_hashes_in_both_destinations": 11
+    }
+  }
+}

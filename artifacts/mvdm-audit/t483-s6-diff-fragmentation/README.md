@@ -401,3 +401,9 @@ XMS fixture outcomes. The filtered census is 2,005 points and 28,325 changed
 lines across 235 differing mirrors. The inventory helper now reads only
 currently tracked paths, so historical rows for retired sources cannot
 abort the scan.
+
+[S7 P27 receipt](s7-p27-checkpoint.json) records seven redundant local
+X86GFX frames removed from `nt_fulsc.c` and both worker preprocessing
+comparisons. The filtered census is 2,004 points and 28,304 changed lines
+across 235 differing mirrors. The six affected software fullscreen
+decisions remain in the pending ledger.

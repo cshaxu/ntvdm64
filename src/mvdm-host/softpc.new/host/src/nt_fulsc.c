@@ -208,10 +208,6 @@ GLOBAL VOID nt_init_event_thread(VOID)
 	setVDMCursorPosition((UTINY)StartupCharHeight,
 					&ConsBufferInfo.dwCursorPosition);
                       
-#ifdef X86GFX
-#line 202
-#error Unsupported excluded original configuration
-#endif
 #line 203
 		enableUpdates();
     }
@@ -260,10 +256,6 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	ErrorExit();
 
     /* Now sync the SoftPC screen to the console. */
-#ifdef X86GFX
-#line 535
-#error Unsupported excluded original configuration
-#endif
 #line 536
     {
 	consoleWidth = ConsBufferInfo.srWindow.Right -
@@ -317,10 +309,6 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	charHeight = 8;
     }
 
-#ifdef X86GFX
-#line 594
-#error Unsupported excluded original configuration
-#endif
 #line 595
     {
         /* The app may have shutdown in a gfx mode - force text mode back */
@@ -942,10 +930,6 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 	cursorStart--;
     cursorEnd = height - 1;
 
-#ifdef X86GFX
-#line 1986
-#error Unsupported excluded original configuration
-#endif
 #line 1987
     {
 
@@ -970,10 +954,6 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
     pageOffset = cursorPos->Y * colsOnScreen * 2 + (cursorPos->X << 1);
     cursorWord = (currentPage * videoLen + pageOffset) / 2;
 
-#ifdef X86GFX
-#line 2010
-#error Unsupported excluded original configuration
-#endif
 #line 2011
     {
 
@@ -988,10 +968,6 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
     sas_storew_no_check(VID_CURPOS + (currentPage * 2),
 			(word) ((cursorPos->Y << 8) | (cursorPos->X & 0xff)));
 
-#ifdef X86GFX
-#line 2024
-#error Unsupported excluded original configuration
-#endif
 #line 2024
     if (sc.ScreenState == WINDOWED)
     {
@@ -1110,10 +1086,6 @@ void host_disable_stream_io(void)
     setVDMCursorPosition((UTINY)StartupCharHeight,
 				&ConsBufferInfo.dwCursorPosition);
 
-#ifdef X86GFX
-#line 2410
-#error Unsupported excluded original configuration
-#endif
 #line 2411
 	enableUpdates();
 
