@@ -39,3 +39,40 @@ Cached x86/x64 and all 11 published hashes passed for package 4ba45d7a-35a4-48ab
 21 lines unchanged. NtUserSetWindowFNID maps to wow_edit_set_window_fnid, linked from control-fnid.obj. The operation borrows HWND state, accepts an unset type or a cleanup bit, rejects conflicting assignments and allows repeated cleanup. Dialog initialization/finalization and class registration have different transition contracts; a general setter would obscure those rules. Preserve the small extracted body. Reviewed the existing fixture assertions and final product map; no new runtime test for unchanged C code.
 
 Through position 7: 7/40 complete, 33 remaining. Production C/header footprint 2,262 lines, down 36. Documentation separately down 9 lines.
+
+## 08 wow_control_rect.c
+
+25 to 25 lines. Source matches the four coordinate operations and return in original rtl/rect.c:46. lboxrare.c, editsl.c and combo.c call the same implementation. The WOW32 link map resolves CopyInflateRect to wow-control-rect.obj. SysWOW64 USER32 exports CopyRect and InflateRect individually; composing those would still need the existing ABI wrapper and two calls. Keep the original.
+
+## 09 wow_control_state.c
+
+23 to 23 lines. Button, combo, edit and dialog callers share the setter. SetWindowState skips a write when all requested bits are present; ClearWindowState skips it when none are present. Both use the same NtUserCallHwndParam path with different operations. A combined boolean-mode helper would still need both predicates and public entry points.
+
+## 10 wow_default_window_bits.c
+
+66 to 66 lines. wuman.c obtains the registered output callback. wow_private_user_get_def_window_proc_bits checks readiness, wide maximum and byte capacity, zeros the admitted span, and calls the original merge. Copying the ordinary bitmap then OR-ing the special bitmap respects the separate maxima. The apparent duplicate maximum is also needed for pre-write validation before narrowing to WORD. No second persisted bitmap or duplicate builder here.
+
+## 11 wow_dialog_lookup.c
+
+22 to 22 lines. Dialog, combo and listbox modules consume an exact PWND. The original searches direct children in sibling order, returning the first matching spmenu/id. The DLL links both this provider and public USER32 GetDlgItem. Substituting the latter would add handle-to-view lookup and lifetime requirements.
+
+## 12 wow_dialog_memory.c
+
+60 to 60 lines. Dialog initialization forwards its argument to the registered WOW callback. DS_LOCALEDIT allocation requests 256 shared movable zeroed bytes; failure unwind and destruction use the paired guest free callback on LOWORD of the handle. The bindings already use one registered table. Moving these calls into every creator/destroyer would duplicate the guest ABI policy.
+
+## 13 wow_dialog_pointer.c
+
+20 to 20 lines. The original changes the PDLG link, FNID and dialog flag together. wow_dialog_finalization_binding.c:131-149 handles three distinct states: completed, failed allocation before PDLG existed, and normal final destruction with an allocated PDLG. The explicit cleanup bit in the failed-allocation path owns no resources; it does not duplicate the ordinary destructor.
+
+## 14 wow_input_membership.c
+
+102 to 102 lines. AddAttachment handles queue-label replacement and reference counts. Recalc2 computes the transitive closure of explicit links and same-process Win16 peers. wow_input_group_commit seeds each component, maps labels to group IDs, clears all temporary queue pointers, then commits native links. Repeated passes are observable for transitive membership. The persistent link records are needed to retire actual native attachments. No replacement graph or new optimization without a measured need.
+
+## 15 wow_object_ownership.c
+
+29 to 29 lines. Single indexed gabObjectCreateFlags definition in WOW32, consumed by original cleanup.c:445. Entries retain type ordinals even for zero masks. A switch or sparse lookup would re-encode the table.
+
+## 16 include/command_process_compat.h
+
+35 to 30 lines. Keep declarations and the child-local standard-handle boundary. Replace the two argument-repeating macros with direct symbol aliases. cmdexec.c has only calls, the provider undefines both aliases before using native APIs, and the standalone test calls the explicitly named adapter. MSVC A/B compiles with the actual product worker flags selected the candidate header for cmdexec.obj and command_process_compat.obj; objdump -dr showed identical instructions and relocations. No original mirror edit. Local controls are in build/t483-s9-command.
+P7 delivery: cached x86/x64 builds passed. Both release destinations matched the 11-image package 7f373e53-fb05-4984-9e6d-5fa80d009be9. Independent command capture/launch and nested-window broker I/O passed, including parent return and direct exit 23. Completed 16/40, remaining 24. C/header lines 2298 to 2257 (-41), README separately -9.

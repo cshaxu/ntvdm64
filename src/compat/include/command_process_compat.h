@@ -23,13 +23,8 @@ BOOL opennt_command_create_process_a(
     LPPROCESS_INFORMATION process_information);
 
 #undef SetStdHandle
-#define SetStdHandle(standard_handle, handle) \
-    opennt_command_set_std_handle((standard_handle), (handle))
+#define SetStdHandle opennt_command_set_std_handle
 #undef CreateProcess
-#define CreateProcess(application_name, command_line, process_attributes, thread_attributes, inherit_handles, creation_flags, environment, current_directory, startup_info, process_information) \
-    opennt_command_create_process_a((application_name), (command_line), \
-        (process_attributes), (thread_attributes), (inherit_handles), \
-        (creation_flags), (environment), (current_directory), \
-        (startup_info), (process_information))
+#define CreateProcess opennt_command_create_process_a
 
 #endif
