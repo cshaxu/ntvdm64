@@ -17,7 +17,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 16,src/mvdm-host/wow32/wcntl32.c,33,37,32,69,0,0,17,s8-p73-reviewed,584255ed1ad8119029647d26020ffad0a6112d8e213fd5ede60356175008f123
 17,src/mvdm-host/softpc.new/base/keymouse/mouse_io.c,33,311,26,337,88,0,18,s8-p27-reviewed,a41f2eea922987cdc43ab4c5d87558a79b13eb931997909fb48fe05bd0efee0a
 18,src/mvdm-host/wow32/wumsg.c,32,93,14,107,3,0,19,s8-p110-reviewed,c73b954e96c769d07f2a48ade2ee8147f41a8894c830369670b135b099bfa465
-19,src/non-mvdm/windows/core/ntuser/client/clres.c,28,24,2706,2730,10,0,20,reviewed-verified-p10-residuals-pending-owner,4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436
+19,src/non-mvdm/windows/core/ntuser/client/clres.c,28,24,2706,2730,10,0,20,s8-p142-reviewed,4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436
 20,src/non-mvdm/windows/core/ntuser/client/clmsg.c,27,6,973,979,16,0,21,s8-p141-reviewed,fc6bbaa3a31d557e8faf231e1eb9a5545db1eaec07f4d3e1dd963233054740a7
 21,src/non-mvdm/windows/core/ntuser/kernel/userk.h,27,5,110,115,40,0,22,reviewed-verified-p12-residuals-pending-owner,7eb1dabe7de56a6eb4404b0e2d5843ed1fcd821b4724539c17e4b7f392611b94
 22,src/mvdm-host/wow32/wdde.c,25,123,15,138,0,0,23,s8-p75-reviewed,8f288d930793eb9449a926071d0688b9d3fda1e4d0dd94e50a978c457e8acfe7

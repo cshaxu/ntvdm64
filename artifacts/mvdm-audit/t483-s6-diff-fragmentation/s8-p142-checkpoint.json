@@ -1,0 +1,64 @@
+{
+  "packet": "T483 S8 P142",
+  "position": 185,
+  "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+  "review_ids": [
+    "T483-R2183",
+    "T483-R2184",
+    "T483-R2185",
+    "T483-R2187",
+    "T483-R2189"
+  ],
+  "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+  "current_sha256": "4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436",
+  "before": {
+    "blocks": 28,
+    "added": 24,
+    "deleted": 2706
+  },
+  "after": {
+    "blocks": 28,
+    "added": 24,
+    "deleted": 2706
+  },
+  "source_changed": false,
+  "paired_error_bodies": 10,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        409,
+        189,
+        "}"
+      ],
+      [
+        2301,
+        1721,
+        "#endif"
+      ],
+      [
+        3124,
+        3291,
+        "/***************************************************************************\\"
+      ],
+      [
+        4051,
+        3986,
+        "}"
+      ]
+    ],
+    "coordinate_review": "Three sequence matches use identical closing braces or comment delimiters; direct original lines 189,3291,3986 contain those exact tokens. The original #endif at 2301 is present after #line 2301. The extra composition #endif at logical 1721 is local. No selected C statement drift was identified by these four matches."
+  },
+  "coverage": {
+    "complete": 185,
+    "remaining": 46,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "R2183/R2184: the separate dialog and bitmap objects require their own resource and DC bindings. Original full context needs CURSORDATA and private resource providers. R2185: Unicode guest lookup selects the W32 resource callback through WCSToMBEx with the default codepage. R2187: abBitmap must be read before rebinding upbih to Fake; verified by original negative pointer-identity control. R2189: original cursor creation/destruction owns NT4 USER objects. Historical additional helper candidate remains a decision, not proof every missing helper is necessary. SplFindResource requires FINDRESOURCEW; GetIconIdEx requires lock/unlock of resource; WowServerLoadCreateMenu with null template calls LoadBitmapA and reaches end without returning HMENU, whereas current callback rejects missing template and dispatches a converted template into the original parser. See S6 P10 and S7 P39/P44 for prior restorations and later source changes."
+}
