@@ -26,7 +26,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 26,src/mvdm-host/softpc.new/base/keymouse/keyba.c,24,49,7,56,69,0,29,s8-p26-reviewed,98f124308ee7c089cc4a6156e3de2f5887a01b637950eff5f616d07961e06fab
 29,src/mvdm-host/softpc.new/host/src/nt_graph.c,16,43,10,53,20,0,34,s8-p49-reviewed,029acccddfa56c2d147603beefbaf1ef26240d9436561dc191cd89c7cfa700bc
 30,src/mvdm-host/wow32/wsdata.c,19,157,11,168,0,0,35,s8-p102-reviewed,748f8ffcf553696df0fd2fa313d01555417868f41a65e11bf79d692453ebe5e2
-31,src/non-mvdm/base/win32/client/vdm.c,20,38,594,632,2,0,30,reviewed-verified-p16-residuals-pending-owner,c8fbc28a468f39a7cb409866efdb06c5a3c5fcc16ea039da6897120fbfedd1db
+31,src/non-mvdm/base/win32/client/vdm.c,19,37,465,502,2,0,30,s8-p120-reviewed,b6adab886c5ddc55935f5969175f83d90543231cb7a94672647219607cb4855f
 32,src/non-mvdm/windows/core/ntuser/kernel/cleanup.c,20,24,20,44,1,0,33,reviewed-verified-p18-residuals-pending-owner,277eab261158aed8d5545d70a3874c7dd70a09502254df49b63adbce6948be2d
 33,src/non-mvdm/windows/core/ntuser/kernel/server.c,19,2,1525,1527,14,0,36,s7-reviewed-residuals-pending,aae6f7a6cfdf89be9ca1f41e027d4ab536978b9e9f3eb7897ec6693d11bcd283
 34,src/non-mvdm/public/sdk/inc/ntexapi.h,19,0,688,688,9,0,37,s7-p4-original-declarations-restored-residual-pending,ced895224ae9b46f52e5da4cadca4d866bf49148bea003e63948fe3ec7f80067

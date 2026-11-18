@@ -1,0 +1,61 @@
+{
+  "packet": "T483 S8 P120",
+  "position": 163,
+  "path": "src/non-mvdm/base/win32/client/vdm.c",
+  "review_ids": [
+    "T483-R1965",
+    "T483-R1966",
+    "T483-R1967",
+    "T483-R1968",
+    "T483-R1969",
+    "T483-R1970",
+    "T483-R1971",
+    "T483-R1972",
+    "T483-R1973",
+    "T483-R1974",
+    "T483-R1975",
+    "T483-R1976"
+  ],
+  "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+  "current_sha256": "b6adab886c5ddc55935f5969175f83d90543231cb7a94672647219607cb4855f",
+  "before": {
+    "blocks": 20,
+    "added": 38,
+    "deleted": 594
+  },
+  "after": {
+    "blocks": 19,
+    "added": 37,
+    "deleted": 465
+  },
+  "source_changed": true,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 163,
+    "remaining": 68,
+    "files": 231,
+    "points": 1908,
+    "lines": 26639,
+    "pending": 1534
+  },
+  "decision": "Restored OpenNT lines 2894-3021 exactly, including the original long-name predicate, DOS component macro and environment-function documentation. Restored original hdrstop and removed a trailing extra blank. The two GetShortPathName functions are already SDK imports in the actual client calls. Original BaseGetVDMKeyword would replace a linked package configuration provider with global WOW registry selection. Kept bounded classifier/command/environment translation-unit selectors, package executable end lookup, NT error binding, and native pointer conversions. The P179 compile and runtime controls distinguish these from the restorable helper.",
+  "verification": {
+    "environment_projection": "Ran product environment-projection-fixture; exit 0",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "ae4861f2-3a46-4f0f-bcd2-3f39e8dc5de1",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "build": "Cached x86 and x64 plus explicit client, classifier, environment, hook and product link targets",
+    "paths": "6 direct calls into production x86 original-opennt-base-vdm.lib. Checked BOOL and component pointer for empty, short, space, long base, long extension and dot-dot paths."
+  }
+}

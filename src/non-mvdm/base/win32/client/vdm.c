@@ -21,6 +21,8 @@ Revision History:
 #include <nt.h>
 #include <ntrtl.h>
 #include <wchar.h>
+#line 22
+#pragma hdrstop
 
 #define ENV_NAME_PATH L"PATH"
 #define ENV_NAME_WINDIR L"WINDIR"
@@ -2420,7 +2422,135 @@ BaseCheckForVDM(
 #if (!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT)
 UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength);
 
-#line 3022
+#line 2894
+/**
+    This function search a long name(invalid dos name) in the given string.
+    The following characters are not valid in file name domain:
+    * + , : ; < = > ? [ ] |
+    Input: lpPathName
+	   ppLongName
+    Output: FALSE if no LFN was found in the given pathname.
+	    *ppLongName will point to the last character(should be UNICODE_NULL)
+	    in the given pathname.
+	    TRUE if a LFN was found. *ppLongName points to the first
+	    character in the LFN
+    NOTE: space characters are valid for FAT file names. This function
+	  will return TRUE(long name found) if space characters are found
+	  in the given pathname.
+
+**/
+
+// (1). base name longer than 8 chars
+// (2). extention longer than 3 chars
+// (3). more than 2 dots.
+// (4). two dots but not ".."
+// (5). "basename."
+// (6). ".ext"
+// note that "basename." would never happen on win32 because
+// win32 api strips the trailing '.'
+#define IsInvalidDosFileName(BaseNameLen, ExtentionLen, Dots) \
+	    (BaseNameLen > 8 || ExtentionLen > 3 || Dots > 2 || \
+	     (Dots == 2 && (ExtentionLen + BaseNameLen)) || \
+	     (Dots == 1 && (!BaseNameLen && ExtentionLen)) || \
+	     (Dots == 1 && (BaseNameLen && !ExtentionLen)))
+
+BOOL	BaseSearchLongName_U(
+    LPCWSTR lpPathName,
+    LPWSTR  *ppLongName
+    )
+
+{
+    BOOL    fLongNameFound, Done;
+    UINT    BaseNameLen, ExtentionLen, Dots;
+    LPWSTR  p;
+
+    ASSERT(lpPathName && ppLongName);
+
+    p = (LPWSTR)lpPathName;
+    fLongNameFound = FALSE;
+    *ppLongName = p;
+    Dots = 0;
+    BaseNameLen = 0;
+    ExtentionLen = 0;
+    Done = FALSE;
+
+    while (!Done && !fLongNameFound) {
+	switch (*p) {
+	    case L'.':
+		Dots++;
+		p++;
+		break;
+	    case L'\\':
+	    case L'/':
+
+		if (IsInvalidDosFileName(BaseNameLen, ExtentionLen, Dots)) {
+		    fLongNameFound = TRUE;
+		    }
+		else {
+		    *ppLongName = ++p;
+		    // reset all counters for the next file/dir name
+		    Dots = 0;
+		    BaseNameLen = 0;
+		    ExtentionLen = 0;
+		    }
+		break;
+	    case UNICODE_NULL:
+		if (IsInvalidDosFileName(BaseNameLen, ExtentionLen, Dots)) {
+		    fLongNameFound = TRUE;
+		    }
+		else
+		    *ppLongName = p;
+		Done = TRUE;
+		break;
+
+	    // space is a valid char on FAT volume but not on NTFS.
+	    // we treated it like invalid one so the caller will be
+	    // aware of it.
+	    case L' ':
+	    case L'*':
+	    case L'+':
+	    case L',':
+	    case L':':
+	    case L';':
+	    case L'<':
+	    case L'=':
+	    case L'>':
+	    case L'?':
+	    case L'[':
+	    case L']':
+	    case L'|':
+		 fLongNameFound = TRUE;
+		 break;
+	    default:
+		if (!Dots)
+		    BaseNameLen++;
+		else
+		    ExtentionLen++;
+		p++;
+		break;
+	    }
+	}
+    return (fLongNameFound);
+}
+
+/**
+   function to create VDM environment for the new executable.
+   Input:   lpEnvironmen = optinal environment strings prototype in UNICODE.
+			   If it is NULL, this function use the environment
+			   block attached to the process
+	    pAStringEnv  = pointer to a ANSI_STRING to receive the
+			   new environment strings.
+	    pUStringEnv  = pointer to a UNICODE_STRING to receive the
+			   new environment strings.
+    Output: FALSE if the creattion failed.
+	    TRUE  creation successful, pAStringEnv has been setup.
+
+    This function was provided so that BaseCheckVdm can have correct
+    environment(includes the newly create NTVDM process). This was done
+    because before command.com gets the next command, users can have
+    tons of things specified in config.sys and autoexec.bat which
+    may rely on current directory of each drive.
+**/
 BOOL BaseCreateVDMEnvironment(
     PWCHAR lpEnvironment,
     ANSI_STRING * pAStringEnv,
@@ -2678,4 +2808,3 @@ static ENV_INFO     EnvInfoTable[STD_ENV_NAME_COUNT] = {
 }
 
 #endif
-
