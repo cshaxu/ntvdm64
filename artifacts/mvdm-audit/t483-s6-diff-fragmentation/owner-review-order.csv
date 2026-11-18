@@ -5,7 +5,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 4,src/mvdm-host/softpc.new/base/video/gfx_updt.c,58,69,69,138,59,0,5,s8-p37-reviewed,d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602
 5,src/mvdm-host/oemuni/process.c,30,74,26,100,1,0,7,s8-p8-restored-and-rechecked-residuals-pending-owner,a63520c503f095f3c31c76d45bee878832f9414e7079c90bdc87f36bfd224d89
 6,src/non-mvdm/windows/core/ntuser/client/usercli.h,44,72,38,110,17,0,6,s8-p157-reviewed,d1c8c82ddc6237a50b048c0cb8d0f449e68865195b8b27f1b17e00b91e6d88ca
-7,src/non-mvdm/windows/core/ntuser/inc/user.h,45,93,17,110,24,0,8,reviewed-delivered-p4-residuals-pending-owner,0c09ef59ed8b07ed5db86093c095f7bcf66d383d440462cfbffa175ceb1a4e4c
+7,src/non-mvdm/windows/core/ntuser/inc/user.h,45,93,17,110,24,0,8,s8-p160-reviewed,0c09ef59ed8b07ed5db86093c095f7bcf66d383d440462cfbffa175ceb1a4e4c
 8,src/mvdm-host/softpc.new/host/src/nt_event.c,37,76,39,115,12,0,9,s8-p48-reviewed,e4a9c4de74fb9c0df79a879b0ff4c97d3aa995495304c5c6bff3ce03927fbf7a
 9,src/mvdm-host/wow32/wowhooks.c,38,91,21,112,2,0,11,s8-p99-reviewed,5cecffbb0af6734cd797c4b8dc849a0fc4d923030964c10e25fe1f7fb999a6b1
 10,src/non-mvdm/public/sdk/inc/ntpsapi.h,38,1,309,310,5,0,12,s8-p133-reviewed,30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2

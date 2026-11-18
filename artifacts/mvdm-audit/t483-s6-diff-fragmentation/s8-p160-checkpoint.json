@@ -1,0 +1,51 @@
+{
+  "packet": "T483 S8 P160",
+  "position": 203,
+  "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+  "review_ids": [
+    "T483-R2460",
+    "T483-R2461",
+    "T483-R2462",
+    "T483-R2464",
+    "T483-R2465",
+    "T483-R2466",
+    "T483-R2467",
+    "T483-R2468",
+    "T483-R2474",
+    "T483-R2477",
+    "T483-R2478",
+    "T483-R2479",
+    "T483-R2480",
+    "T483-R2483"
+  ],
+  "original_sha256": "adcf0ac89c4779d9b7908610976f4a47d2385403edc37496c8ab004b016cf6c1",
+  "current_sha256": "0c09ef59ed8b07ed5db86093c095f7bcf66d383d440462cfbffa175ceb1a4e4c",
+  "before": {
+    "blocks": 45,
+    "added": 93,
+    "deleted": 17
+  },
+  "after": {
+    "blocks": 45,
+    "added": 93,
+    "deleted": 17
+  },
+  "source_changed": false,
+  "paired_error_bodies": 24,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 203,
+    "remaining": 28,
+    "files": 231,
+    "points": 1912,
+    "lines": 26391,
+    "pending": 1532
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "Final hash matches the complete S6 P4 source audit. Checked live opennt_user_multipass.h and layout consumers: the header is deliberately re-entered for distinct declaration groups. Original private PTDB/PWND/PTHREADINFO aliases conflict with guest or native binding types (C2371); original winerrp.h requests a missing UserSetLastError at link. COLOR_MAX is supplied by some drawing builds, but P241 original controls report C2065 in four contexts. Member extent uses original COLOR_INFOBK+1; PJIF spelling expands to the original DWORD pointer. Once guards avoid redeclarations across real inclusion phases. Retain existing residuals; no extra compatibility types or branches."
+}
