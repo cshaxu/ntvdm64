@@ -697,8 +697,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
     case WM_DDE_INITIATE:
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
-        lpmpex->MsgBuffer->ownershipFlags =
-            WI32DDEAddInitiator((HAND16) wParam) ? WOW_DDE_INITIATE_ACTIVE : 0;
+        lpmpex->MsgBuffer->ownershipFlags = WI32DDEAddInitiator((HAND16) wParam);
 #line 721
         break;
 
@@ -1387,7 +1386,7 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
         break;
 
     case WM_DDE_INITIATE:
-        if (lpmpex->MsgBuffer->ownershipFlags & WOW_DDE_INITIATE_ACTIVE) {
+        if (lpmpex->MsgBuffer->ownershipFlags) {
 #line 1301
             WI32DDEDeleteInitiator((HAND16) lpmpex->Parm16.WndProc.wParam);
         }

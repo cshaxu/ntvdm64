@@ -109,8 +109,6 @@ BOOL    WI32DDEAddInitiator (HAND16 Initiator);
 #line 95
 VOID    WI32DDEDeleteInitiator(HAND16 Initiator);
 BOOL    WI32DDEInitiate(HAND16 Initiator);
-#define WOW_DDE_INITIATE_ACTIVE 0x00000001
-#line 97
 BOOL    DDEDeletehandle(HAND16 h16, HANDLE h32);
 HANDLE  DDEFind32(HAND16 h16);
 HAND16  DDEFind16(HANDLE h32);

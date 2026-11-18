@@ -1800,12 +1800,11 @@ BOOL FASTCALL WM32DDEInitiate(LPWM32MSGPARAMEX lpwm32mpex)
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
         lpwm32mpex->Parm16.WndProc.lParam = lpwm32mpex->lParam;
-        lpwm32mpex->dwTmp[3] = WI32DDEAddInitiator((HAND16)lpwm32mpex->Parm16.WndProc.wParam) ?
-                              WOW_DDE_INITIATE_ACTIVE : 0;
+        lpwm32mpex->dwTmp[3] = WI32DDEAddInitiator((HAND16)lpwm32mpex->Parm16.WndProc.wParam);
 #line 1779
     }
     else {
-        if (lpwm32mpex->dwTmp[3] & WOW_DDE_INITIATE_ACTIVE) {
+        if (lpwm32mpex->dwTmp[3]) {
             lpwm32mpex->dwTmp[3] = 0;
             WI32DDEDeleteInitiator((HAND16)lpwm32mpex->Parm16.WndProc.wParam);
         }

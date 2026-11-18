@@ -1,0 +1,86 @@
+{
+  "packet": "T483 S8 P76",
+  "position": 120,
+  "path": "src/mvdm-host/wow32/wdde.h",
+  "review_ids": [
+    "T483-R1413",
+    "T483-R1414",
+    "T483-R1415",
+    "T483-R1416",
+    "T483-R1417"
+  ],
+  "original_sha256": "05839ffe54047bacc09dbc2d9ad76e8e6dfc4adfa9d0de324c7d9f25001609d4",
+  "current_sha256": "ed6c760e60bf40aba717d28a2bfe0e55f2fe24ac7683b72ea9066ef1acaa59b4",
+  "before": {
+    "blocks": 5,
+    "added": 20,
+    "deleted": 4
+  },
+  "after": {
+    "blocks": 4,
+    "added": 19,
+    "deleted": 4
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 120,
+    "remaining": 111,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "decisions": {
+    "R1413": "Conversion-local journal identifies only newly acquired aliases; two simultaneous conversations can reference the same source. P75 exact-body failure controls verify rollback.",
+    "R1414": "Both COPYDATA lookup directions require header discrimination; the P75 embedded-header cases cover payload/header alias collision.",
+    "R1415": "Boolean insertion outcome is necessary to retain the outer same-ID node after inner allocation rejection.",
+    "R1416": "Restore original header at this point. WM_DDE_INITIATE assigns the complete scratch word from a single boolean in both directions. No concurrent bit in either message field; use the result directly.",
+    "R1417": "Retain the explicit journal on conversion/rollback and mark-callback failure result. The original signatures cannot carry the per-call acquisitions or report a denied mark."
+  },
+  "caller_metrics": {
+    "src/mvdm-host/wow32/wmdisp32.c": {
+      "before": {
+        "blocks": 75,
+        "added": 130,
+        "deleted": 94
+      },
+      "after": {
+        "blocks": 75,
+        "added": 129,
+        "deleted": 94
+      },
+      "current_sha256": "1fa959a455d0acd3dfa08ff6bcdc8ccfdac8f0bf5e29d6e5ac09bbb124e8e034",
+      "unchanged_line_coordinate_changes": 0
+    },
+    "src/mvdm-host/wow32/wmsg16.c": {
+      "before": {
+        "blocks": 37,
+        "added": 111,
+        "deleted": 35
+      },
+      "after": {
+        "blocks": 37,
+        "added": 110,
+        "deleted": 35
+      },
+      "current_sha256": "f9cee82267d284c8533e0bd4f945ab32be63ed5026e5982fcabcfe0241bf34ef",
+      "unchanged_line_coordinate_changes": 0
+    }
+  },
+  "verification": {
+    "build": "Cached x86/x64 full build exit 0",
+    "publication": "f16b83c3-4eb6-430e-90d2-8ee74e46e4e7, 11 images verified at both destinations",
+    "callers": "Compiled production WM32DDEInitiate body and both wmsg16.c DDE_INITIATE cases with production node functions/type and an allocation double. Both directions preserve the outer on inner failure and release inner then outer on success.",
+    "scope": "Targeted source-body validation, no new guest DDE transport check.",
+    "dde_conversion": {
+      "passed": true,
+      "scope": "Exact bodies; allocator/registration doubles; no guest proof",
+      "cases": 8
+    }
+  }
+}
