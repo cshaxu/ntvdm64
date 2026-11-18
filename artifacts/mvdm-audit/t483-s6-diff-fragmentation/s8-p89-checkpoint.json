@@ -1,0 +1,147 @@
+{
+  "packet": "T483 S8 P89",
+  "position": 133,
+  "path": "src/mvdm-host/wow32/wmdisp32.c",
+  "review_ids": [
+    "T483-R1504",
+    "T483-R1505",
+    "T483-R1506",
+    "T483-R1507",
+    "T483-R1508",
+    "T483-R1509",
+    "T483-R1510",
+    "T483-R1511",
+    "T483-R1512",
+    "T483-R1514",
+    "T483-R1515",
+    "T483-R1516",
+    "T483-R1517",
+    "T483-R1520",
+    "T483-R1521",
+    "T483-R1524",
+    "T483-R1525",
+    "T483-R1526",
+    "T483-R1527",
+    "T483-R1528",
+    "T483-R1530",
+    "T483-R1531",
+    "T483-R1532",
+    "T483-R1533",
+    "T483-R1534",
+    "T483-R1535",
+    "T483-R1536",
+    "T483-R1537",
+    "T483-R1538",
+    "T483-R1539",
+    "T483-R1540",
+    "T483-R1541",
+    "T483-R1542",
+    "T483-R1543",
+    "T483-R1544",
+    "T483-R1546",
+    "T483-R1548",
+    "T483-R1549",
+    "T483-R1550",
+    "T483-R1551",
+    "T483-R1552",
+    "T483-R1553",
+    "T483-R1554",
+    "T483-R1555",
+    "T483-R1556",
+    "T483-R1560",
+    "T483-R1561",
+    "T483-R1562",
+    "T483-R1563",
+    "T483-R1564",
+    "T483-R1565",
+    "T483-R1566",
+    "T483-R1567",
+    "T483-R1568",
+    "T483-R1569",
+    "T483-R1572",
+    "T483-R1573",
+    "T483-R1574",
+    "T483-R1575",
+    "T483-R1578",
+    "T483-R1579",
+    "T483-R1580",
+    "T483-R1581",
+    "T483-R1583",
+    "T483-R1586",
+    "T483-R1587",
+    "T483-R1588",
+    "T483-R1590",
+    "T483-R1591",
+    "T483-R1593"
+  ],
+  "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+  "current_sha256": "8355e0a3379d836743f4af8e72ca4c8aaab04237119eeb9b784f10565f5287ac",
+  "before": {
+    "blocks": 75,
+    "added": 129,
+    "deleted": 94
+  },
+  "after": {
+    "blocks": 72,
+    "added": 128,
+    "deleted": 94
+  },
+  "source_changed": true,
+  "paired_error_bodies": 11,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        733,
+        734,
+        "        //"
+      ],
+      [
+        734,
+        735,
+        "        // non-zero fill to detect people who write more than they"
+      ],
+      [
+        735,
+        736,
+        "        // say that they do!"
+      ],
+      [
+        736,
+        737,
+        "        //"
+      ],
+      [
+        1534,
+        1528,
+        "            //  if HIWORD(class) is zero, class is an atom, else a pointer."
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 133,
+    "remaining": 98,
+    "files": 231,
+    "points": 1915,
+    "lines": 27009,
+    "pending": 1538
+  },
+  "remaining_groups": "TLS DDE mode and callback unwind, CREATE/MDI partial ownership, clipboard and heap acquisitions, publication and rollback of DDE pairs, COPYDATA snapshots and WinHelp rollback: evidence indexed by historical point in main register; partially simplified points remain pending.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "8e9f95dc-3175-49c1-9399-7e2b27a00700",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "focused": {
+    "dde": "8 converter cases passed. Additional controlled exact DATA/POKE bodies: 10 cases each on prechange and final source, zero failures, covering null handle, existing pair, failed conversion, failed publication and success.",
+    "message": "Exact message transaction bodies and six named negative controls passed.",
+    "param": "54 parameter-map scenarios, zero failures; finalizer checks passed.",
+    "scope": "Host fixtures; no new Win16 end-to-end execution. First construction and parameter runner invocations used a relative compiler driver and failed before running a case; both rerun with absolute driver."
+  },
+  "decision": "Keep 70 residual historical responsibilities pending after grouping them into 72 lexical differences. The count of historical IDs is distinct from actual lexical points. SETTEXT maps that return early retain a separate acquisition marker; only stack and heap success converge. DDE DATA/POKE declare and initialize the rollback record immediately before creating a new pair, in scope through failure cleanup. Existing/zero handles need no record. Excluded regions, guest and shared shims unchanged."
+}

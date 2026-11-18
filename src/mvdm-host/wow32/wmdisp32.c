@@ -664,14 +664,12 @@ BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX lpwm32mpex)
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
                 if (!(lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(cb)))
                     return FALSE;
-                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
-#line 676
             } else {
                 if (!(lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb)))
                     return FALSE;
-                lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
-#line 679
             }
+            lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
+#line 680
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
         }
     }
@@ -2061,12 +2059,10 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
     UINT    lLo = 0;
     UINT    lHi = 0;
     DDEINFO DdeInfo;
-    DDECONVERSION Conversion;
 
 
 #line 2023
     if (lpwm32mpex->fThunk) {
-        Conversion.Count = 0;
 #line 2024
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
@@ -2078,6 +2074,9 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
                                        (HANDLE) lLo)) {
             LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
         } else {
+            DDECONVERSION Conversion;
+            Conversion.Count = 0;
+#line 2034
             DdeInfo.Msg = lpwm32mpex->uMsg;
             h16 = DDECopyhData16((HAND16)GETHWND16(lpwm32mpex->hwnd),
                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
@@ -2157,12 +2156,10 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
     UINT    lLo = 0;
     UINT    lHi = 0;
     DDEINFO DdeInfo;
-    DDECONVERSION Conversion;
 
 
 #line 2107
     if (lpwm32mpex->fThunk) {
-        Conversion.Count = 0;
 #line 2108
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
@@ -2184,6 +2181,9 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
                                 (HANDLE) lLo)) {
             LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
         } else {
+            DDECONVERSION Conversion;
+            Conversion.Count = 0;
+#line 2128
             DdeInfo.Msg = lpwm32mpex->uMsg;
             h16 = DDECopyhData16((HAND16)GETHWND16(lpwm32mpex->hwnd),
                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
