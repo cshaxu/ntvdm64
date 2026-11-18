@@ -1,7 +1,7 @@
 rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,mask_review_cases,prior_worklist_rank,review_status,source_sha256
 1,src/mvdm-host/wow32/wmdisp32.c,72,127,94,221,11,0,2,s8-p99-reviewed,456124e440cdd6665b222fc76996eac9c3847ad94d68bf362cbd45a3a68abb34
 2,src/mvdm-host/softpc.new/base/cvidc/sevid000.c,64,66,66,132,0,0,4,s8-p22-reviewed,208ca0085de613aeb8beb33f6e20b7e006df89b93a9462b6ab25929b80f15278
-3,src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h,62,2,1055,1057,23,0,3,reviewed-delivered-p3-residuals-pending-owner,44778462fc1f280645a50b93486d103cc785149a2ca6f2a1da558023f15e85c9
+3,src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h,62,2,1055,1057,23,0,3,s8-p159-reviewed,44778462fc1f280645a50b93486d103cc785149a2ca6f2a1da558023f15e85c9
 4,src/mvdm-host/softpc.new/base/video/gfx_updt.c,58,69,69,138,59,0,5,s8-p37-reviewed,d336dc1717385196f26512f89a973a5f2ecc86bc4a0f78eeb2d067263f50b602
 5,src/mvdm-host/oemuni/process.c,30,74,26,100,1,0,7,s8-p8-restored-and-rechecked-residuals-pending-owner,a63520c503f095f3c31c76d45bee878832f9414e7079c90bdc87f36bfd224d89
 6,src/non-mvdm/windows/core/ntuser/client/usercli.h,44,72,38,110,17,0,6,s8-p157-reviewed,d1c8c82ddc6237a50b048c0cb8d0f449e68865195b8b27f1b17e00b91e6d88ca

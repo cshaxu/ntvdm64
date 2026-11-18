@@ -1,0 +1,87 @@
+{
+  "packet": "T483 S8 P159",
+  "position": 202,
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "review_ids": [
+    "T483-R2438",
+    "T483-R2439",
+    "T483-R2440",
+    "T483-R2441",
+    "T483-R2444",
+    "T483-R2445"
+  ],
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "current_sha256": "44778462fc1f280645a50b93486d103cc785149a2ca6f2a1da558023f15e85c9",
+  "before": {
+    "blocks": 62,
+    "added": 2,
+    "deleted": 1055
+  },
+  "after": {
+    "blocks": 62,
+    "added": 2,
+    "deleted": 1055
+  },
+  "source_changed": false,
+  "paired_error_bodies": 23,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        294,
+        310,
+        "#ifndef UNICODE"
+      ],
+      [
+        331,
+        340,
+        "#ifdef FE_SB // GetMessage()"
+      ],
+      [
+        337,
+        344,
+        "#endif // FE_SB"
+      ],
+      [
+        341,
+        369,
+        "#ifndef UNICODE"
+      ],
+      [
+        343,
+        377,
+        "#endif"
+      ],
+      [
+        358,
+        402,
+        "#endif"
+      ],
+      [
+        695,
+        632,
+        "}"
+      ]
+    ],
+    "coordinate_check": "All seven ambiguous sequence matches are identical to the actual original token at the logical line (310,340,344,369,377,402,632)."
+  },
+  "coverage": {
+    "complete": 202,
+    "remaining": 29,
+    "files": 231,
+    "points": 1912,
+    "lines": 26391,
+    "pending": 1532
+  },
+  "decision": "Verified live header SHA256 equals S6 P3 reviewed bytes. The compat WOW class client includes this template. Per-function original controls cover native USER exports, private NT4 menu/atom payloads, missing private services and duplicate providers; admitted display functions and harmless cache declarations remain. R2444: historical 65536-character failure control records 2 allocations, 0 freed on original failure versus 2 freed in current. This requires capture cleanup independently of public API provider ownership. Retain the six residual decisions. No new compile or runtime run.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "previous_controls": {
+    "compiled_and_linked": 2,
+    "link_1120": 20,
+    "link_1169": 2,
+    "compile_failed": 4,
+    "source": "ntcftxt-whole-file-review.json"
+  }
+}
