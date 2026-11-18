@@ -1,0 +1,369 @@
+{
+  "packet": "M0 T483 S7 P37",
+  "prior_checkpoint": "c7da76bad",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/dpmi32/dpmi32.c": {
+      "before": {
+        "blocks": 2,
+        "added": 34,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 2,
+        "added": 32,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          305,
+          305,
+          1
+        ],
+        [
+          336,
+          336,
+          0
+        ]
+      ],
+      "original_error_pairs": 2,
+      "prior_sha256": "5f0702d00a7f5c603db8d9bcf49145b3d3b4dac79a3a8226c15b652e550e1e15",
+      "current_sha256": "d7a1088cfb4c675e4ffce2fa91b12cee51951b8598e826617b0f6f54f4d19823",
+      "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca"
+    },
+    "src/mvdm-host/dpmi32/data.c": {
+      "before": {
+        "blocks": 1,
+        "added": 47,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 45,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          139,
+          139,
+          1
+        ],
+        [
+          185,
+          185,
+          0
+        ]
+      ],
+      "original_error_pairs": 1,
+      "prior_sha256": "55f67e81cde1c395bfb1c3733b1b9ed87ee5db8122ac86333df61895907e2d35",
+      "current_sha256": "421514e7a39ab9d8fd19fad299f12fe16855224b870a2c5a199c625ac212ea48",
+      "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde"
+    },
+    "src/mvdm-host/dpmi32/dpmi32p.h": {
+      "before": {
+        "blocks": 1,
+        "added": 11,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 9,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          115,
+          115,
+          1
+        ],
+        [
+          125,
+          125,
+          0
+        ]
+      ],
+      "original_error_pairs": 3,
+      "prior_sha256": "6213f844c816a919ae6ec1bccaf1c0a178070efe219574eeab58701c706b8e36",
+      "current_sha256": "1ad270afcedb0fb775f893b9a117f78163323ba23b47547754028ae8c8829276",
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9"
+    },
+    "src/mvdm-host/dpmi32/dpmiselr.c": {
+      "before": {
+        "blocks": 1,
+        "added": 12,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 10,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          169,
+          169,
+          1
+        ],
+        [
+          180,
+          180,
+          0
+        ]
+      ],
+      "original_error_pairs": 4,
+      "prior_sha256": "e79eeb341a379cf62b4f06b438b1b7c9bdbb63300f58203640a640e7a39dfd03",
+      "current_sha256": "d3a113eb2f1b6026f7bf68a8bc4d65b53f2296548bbe80a41c80949e53aa1905",
+      "original_sha256": "9bdd58d63029de9438633a62934af2b2b868206cb7f06cc868f537e030fbd234"
+    }
+  },
+  "removed_frames": {
+    "dpmi32.c": 1,
+    "dpmiselr.c": 1,
+    "data.c": 1,
+    "dpmi32p.h": 1
+  },
+  "decisions": {
+    "dpmi32.c": "Retain DpmiPassTableAddress allocation and publication via the existing selector and base-limit API. Remove the redundant CPU40 condition.",
+    "dpmiselr.c": "Retain 53:00 publication to the worker-owned CCPU descriptor domains. Remove the redundant CPU40 condition.",
+    "data.c": "Retain the DOSX final IDT descriptor query and separate table addresses. Remove the redundant CPU40 condition.",
+    "dpmi32p.h": "Retain shared declarations under the original non-i386 boundary. Remove the nested redundant CPU40 condition."
+  },
+  "census": {
+    "non_error_points": 1985,
+    "non_error_lines": 27271,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 62,
+      "lines": 1705
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/buffer.obj",
+          "selected_lines": 44911,
+          "sha256": "cee753d7c2cfbc9c0a2a57fdfd00b4fd5d486f93231cf70486bf5036355d298d"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/data.obj",
+          "selected_lines": 44642,
+          "sha256": "8371debb856db60b74dec9e216bb9ed18277f5461d7b5072ccf10d07275bd6c3"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/debug.obj",
+          "selected_lines": 44741,
+          "sha256": "a57bd3baac8d4c04a2480fd51ef6d421f095447c43e906ecf05a647897bc69b7"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/dpmi32.obj",
+          "selected_lines": 44867,
+          "sha256": "b4ee6ecbcb9d27761c1a31487d2a0005e17359bb950953f9ca1d45e96a296690"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/dpmiint.obj",
+          "selected_lines": 45509,
+          "sha256": "ad24a03315b2a33282df29d6fa0846c944b704b063655fc4f06e76301bd5404e"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/dpmimemr.obj",
+          "selected_lines": 44938,
+          "sha256": "b692c302b950ef79e1dbb86d738043a4583a147e48f82ca93e5c680e0bac71de"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/dpmimscr.obj",
+          "selected_lines": 44766,
+          "sha256": "b839d7d245ad19f3df53ea90d5f51f99573894d579cc9c5c4490afe8b54df298"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/dpmiselr.obj",
+          "selected_lines": 45034,
+          "sha256": "872bb7690821daf8e672a8419c203a6353c575abe0b02417da02bb87aebe0777"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/i386_dpmi386.obj",
+          "selected_lines": 45100,
+          "sha256": "ba141e3492918e5b0addba9e8a5b5909cdb6d6b2bc639bf315248e59b48be407"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/int21map.obj",
+          "selected_lines": 46125,
+          "sha256": "d026d398a18d6dca47e04f153169d14be015fe9b18bc7fab98369e317aa7c404"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/modesw.obj",
+          "selected_lines": 44898,
+          "sha256": "a46480e9b96b398fc0d29186ff9e16dcb49fdc3de6deab69835eb4db83711ad8"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/register.obj",
+          "selected_lines": 44874,
+          "sha256": "bc281051b76c86a78be2961cba22bc98fa88b5461ee384e7b91ec2836ac7e2f1"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/savestat.obj",
+          "selected_lines": 44951,
+          "sha256": "e580302e4363bc18834506295fe3816ecdc47d943a831cb2faffa2b35a99e8e6"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/stack.obj",
+          "selected_lines": 44791,
+          "sha256": "049f0e4d4d7a6ac2fc5234e2882286c65dfdd80eb2abc593a662a0e8430972ac"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/vxd.obj",
+          "selected_lines": 44799,
+          "sha256": "95153f002f509cde9ad3530b136bc03ce87b74e5c2b0900a6afce18d68f9cd04"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/dpmi/xmem.obj",
+          "selected_lines": 45062,
+          "sha256": "be1320efc8bb719a833d8ed21163b9681c3d1385a28272bccfb12da933ceb037"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/tests/cpu40_descriptor_domain_fixture.obj",
+          "selected_lines": 44647,
+          "sha256": "e236e7ceb55973dd1f89580442a3dbfaae5ea5b86e14e7d47f39095c9e0424cc"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/buffer.obj",
+          "selected_lines": 44911,
+          "sha256": "cee753d7c2cfbc9c0a2a57fdfd00b4fd5d486f93231cf70486bf5036355d298d"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/data.obj",
+          "selected_lines": 44642,
+          "sha256": "8371debb856db60b74dec9e216bb9ed18277f5461d7b5072ccf10d07275bd6c3"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/debug.obj",
+          "selected_lines": 44741,
+          "sha256": "a57bd3baac8d4c04a2480fd51ef6d421f095447c43e906ecf05a647897bc69b7"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/dpmi32.obj",
+          "selected_lines": 44867,
+          "sha256": "b4ee6ecbcb9d27761c1a31487d2a0005e17359bb950953f9ca1d45e96a296690"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/dpmiint.obj",
+          "selected_lines": 45509,
+          "sha256": "ad24a03315b2a33282df29d6fa0846c944b704b063655fc4f06e76301bd5404e"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/dpmimemr.obj",
+          "selected_lines": 44938,
+          "sha256": "b692c302b950ef79e1dbb86d738043a4583a147e48f82ca93e5c680e0bac71de"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/dpmimscr.obj",
+          "selected_lines": 44766,
+          "sha256": "b839d7d245ad19f3df53ea90d5f51f99573894d579cc9c5c4490afe8b54df298"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/dpmiselr.obj",
+          "selected_lines": 45034,
+          "sha256": "872bb7690821daf8e672a8419c203a6353c575abe0b02417da02bb87aebe0777"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/i386_dpmi386.obj",
+          "selected_lines": 45100,
+          "sha256": "ba141e3492918e5b0addba9e8a5b5909cdb6d6b2bc639bf315248e59b48be407"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/int21map.obj",
+          "selected_lines": 46125,
+          "sha256": "d026d398a18d6dca47e04f153169d14be015fe9b18bc7fab98369e317aa7c404"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/modesw.obj",
+          "selected_lines": 44898,
+          "sha256": "a46480e9b96b398fc0d29186ff9e16dcb49fdc3de6deab69835eb4db83711ad8"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/register.obj",
+          "selected_lines": 44874,
+          "sha256": "bc281051b76c86a78be2961cba22bc98fa88b5461ee384e7b91ec2836ac7e2f1"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/savestat.obj",
+          "selected_lines": 44951,
+          "sha256": "e580302e4363bc18834506295fe3816ecdc47d943a831cb2faffa2b35a99e8e6"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/stack.obj",
+          "selected_lines": 44791,
+          "sha256": "049f0e4d4d7a6ac2fc5234e2882286c65dfdd80eb2abc593a662a0e8430972ac"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/vxd.obj",
+          "selected_lines": 44799,
+          "sha256": "95153f002f509cde9ad3530b136bc03ce87b74e5c2b0900a6afce18d68f9cd04"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/dpmi/xmem.obj",
+          "selected_lines": 45062,
+          "sha256": "be1320efc8bb719a833d8ed21163b9681c3d1385a28272bccfb12da933ceb037"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/tests/cpu40_descriptor_domain_fixture.obj",
+          "selected_lines": 44647,
+          "sha256": "e236e7ceb55973dd1f89580442a3dbfaae5ea5b86e14e7d47f39095c9e0424cc"
+        },
+        {
+          "profile": "test-observation",
+          "target": "dpmi_dispatch_trace",
+          "selected_lines": 46613,
+          "sha256": "4c4f00dbed0b70e9af5437a05e1afc9e07723d3f10ba736b6cf2f468bf2b105b"
+        }
+      ]
+    },
+    "targeted": {
+      "cpu40_descriptor_domain_fixture": "pass",
+      "ccpu_monitor_boundary_cases_passed": 58,
+      "invocation": "Canonical verify-ccpu-monitor-boundary.ps1 enumerates case arguments. Initial argument-free wrapper returned 5 before executing a case."
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Thirty-five actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

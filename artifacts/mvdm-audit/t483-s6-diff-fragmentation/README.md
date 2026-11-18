@@ -450,3 +450,8 @@ with all six tracked preprocessing inputs identical.
 [S7 P36 receipt](s7-p36-checkpoint.json) records removal of a redundant dialog
 validation selector and two duplicate line resets. The original exclusion and
 all three selected compile inputs are unchanged. Both dialog fixtures pass.
+
+[S7 P37 receipt](s7-p37-checkpoint.json) records four redundant CPU40 guards
+removed across the DPMI descriptor path. Thirty-five selected preprocess
+streams match, including the observation wrapper. The descriptor domain
+fixture and CCPU boundary fixture pass.

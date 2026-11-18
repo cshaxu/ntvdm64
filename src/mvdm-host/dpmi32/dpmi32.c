@@ -302,7 +302,7 @@ Return Value:
 
     IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
 
-#if defined(CPU_40_STYLE)
+#line 298
     /* Separate published DOSX GDT and process LDT descriptor images. */
     if (!Cpu40GdtShadowAddress || !Cpu40LdtShadowAddress) {
         ULONG Address = 0;
@@ -333,6 +333,5 @@ Return Value:
     setLDT_SELECTOR(4);
     setLDT_BASE_LIMIT(Cpu40LdtShadowAddress,
         (ULONG)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
-#endif
 #line 297
 }

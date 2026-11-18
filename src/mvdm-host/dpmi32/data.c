@@ -136,7 +136,7 @@ ULONG DosxFaultHandlerIret;
 ULONG DosxFaultHandlerIretd;
 ULONG DosxIntHandlerIret;
 ULONG DosxIntHandlerIretd;
-#if defined(CPU_40_STYLE)
+#line 138
 /* Guest-linear descriptor images consumed separately by CCPU.  The DOSX
  * 53:00 table is a GDT source; original process-LDT publication is a
  * distinct owner. */
@@ -182,7 +182,6 @@ Routine Description:
     *Limit = (USHORT)(256u * sizeof(LDT_ENTRY) - 1u);
     return TRUE;
 }
-#endif
 #endif
 #line 138
 

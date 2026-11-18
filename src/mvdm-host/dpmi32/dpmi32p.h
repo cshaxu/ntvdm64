@@ -112,7 +112,7 @@ extern ULONG DosxFaultHandlerIret;
 extern ULONG DosxFaultHandlerIretd;
 extern ULONG DosxIntHandlerIret;
 extern ULONG DosxIntHandlerIretd;
-#if defined(CPU_40_STYLE)
+#line 121
 extern ULONG Cpu40GdtShadowAddress;
 extern ULONG Cpu40LdtShadowAddress;
 
@@ -122,7 +122,6 @@ DpmiCpu40GetDosxIdtDescriptor(
     PUSHORT Limit
     );
 
-#endif
 #endif
 #line 121
 extern ULONG DosxIret;

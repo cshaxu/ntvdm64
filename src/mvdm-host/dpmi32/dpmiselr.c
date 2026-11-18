@@ -166,7 +166,7 @@ Return Value:
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 161
-#if defined(CPU_40_STYLE)
+#line 162
             ULONG Selector = registerAX + i * sizeof(LDT_ENTRY);
 
             /* Bind original 53:00 process-LDT publication to CCPU tables.
@@ -177,7 +177,6 @@ Return Value:
             if (!(Selector & 4u) && Cpu40GdtShadowAddress != 0)
                 ((PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress))[Selector >> 3] =
                     Descriptors[i];
-#endif
 #line 161
         }
     }
