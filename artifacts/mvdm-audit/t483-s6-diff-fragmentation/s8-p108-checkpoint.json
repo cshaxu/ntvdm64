@@ -1,0 +1,67 @@
+{
+  "packet": "T483 S8 P108",
+  "position": 152,
+  "path": "src/mvdm-host/wow32/wudlg.c",
+  "review_ids": [
+    "T483-R1847",
+    "T483-R1848",
+    "T483-R1849",
+    "T483-R1850",
+    "T483-R1851",
+    "T483-R1852",
+    "T483-R1853",
+    "T483-R1854"
+  ],
+  "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+  "current_sha256": "1f8cb2f28e8f3d320cc322512b273915f20aed4a2aa336678c1c7d78acae9736",
+  "before": {
+    "blocks": 8,
+    "added": 16,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 8,
+    "added": 16,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 5,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        35,
+        34,
+        "#endif // WOWPROFILE"
+      ],
+      [
+        96,
+        94,
+        "#endif  // WOWPROFILE"
+      ],
+      [
+        122,
+        120,
+        "#endif // WOWPROFILE"
+      ],
+      [
+        145,
+        144,
+        "#endif // WOWPROFILE"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 152,
+    "remaining": 79,
+    "files": 231,
+    "points": 1908,
+    "lines": 26946,
+    "pending": 1534
+  },
+  "verification": {
+    "current": "Rechecked source, original and four inactive delimiter diagnostics against P99 coupled-file receipt. Five paired exclusion bodies. No production source changes or new execution.",
+    "prior": "s8-p99-wudlg.json; exact-body normal, conversion failure and callback exception controls with service doubles."
+  },
+  "decision": "P99 source and pinned original hashes match the freshly measured file. R1847 shared finalizer declarations; R1848 initialized partial conversion and saved callback cursor; R1849 synchronous DDE ACK ownership; R1850 completion only on successful dispatch; R1851 shared finish32; R1852 zero frame on partial input; R1853 reject failed thunk including valid null HWND distinction; R1854 release input mapping on exceptions. Retain the eight residual points pending. Previous shared finalizer reduction was booked at P99."
+}
