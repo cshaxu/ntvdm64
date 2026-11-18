@@ -1,0 +1,58 @@
+{
+  "packet": "T483 S8 P58",
+  "position": 102,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+  "review_ids": [
+    "T483-R1210",
+    "T483-R1225",
+    "T483-R1226"
+  ],
+  "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+  "current_sha256": "71408ce0c925397b2e2e0ba6176118390be2a7556a53e29e504379537ecb9b07",
+  "before": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 34,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        98,
+        92,
+        "#endif"
+      ],
+      [
+        1299,
+        1264,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 102,
+    "remaining": 129,
+    "files": 231,
+    "points": 1934,
+    "lines": 27049,
+    "pending": 1547
+  },
+  "verification": {
+    "fixture": [
+      "THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1",
+      "THREAD_PRE_CCPU actual_adapter=1 unbind_before_cpu=1 once=1",
+      "THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420",
+      "THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1"
+    ],
+    "scope": "Real common thread bridge and cleanup under x86; no physical floppy hardware exercised.",
+    "object": "x86 worker nt_rflop.obj: _fdc_thread defined, _opennt_create_void_cdecl_parameter_thread referenced"
+  },
+  "decision": "R1210/1225/1226 retain the typed FDC thread entry. x86 product object defines _fdc_thread (cdecl), calling the common void/cdecl parameter bridge. Original LPTHREAD_START_ROUTINE cast promises DWORD WINAPI; it changes neither the stack cleanup nor void return of the callback. Changing fdc_thread declaration and definition alone would also leave the session enter/finish boundary unresolved. Keep original callback and shared bridge."
+}

@@ -1,0 +1,53 @@
+{
+  "packet": "T483 S8 P57",
+  "position": 101,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+  "review_ids": [
+    "T483-R1207"
+  ],
+  "original_sha256": "12a6486b8cf81e2469b1acd7f9e9d03cada6b4690fad03ea171941802f0945fc",
+  "current_sha256": "2448aec8c1645a93f237cfeb394227a12d1c1c4306d25a1c26516fc2c782806c",
+  "before": {
+    "blocks": 1,
+    "added": 3,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 1,
+    "added": 3,
+    "deleted": 0
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 101,
+    "remaining": 130,
+    "files": 231,
+    "points": 1934,
+    "lines": 27049,
+    "pending": 1547
+  },
+  "decision": "Retain R1207 as the immutable ROM packaging boundary. load_ROM calls host_read_resource with ROMS_REZ_ID and ROM_BUFFER_SIZE. The original disk search cannot read named PE resources. The signed maxsize check protects the unsigned capacity contract; avoid merely rewrapping the expression to move the line metric.",
+  "verification": {
+    "published_image_sha256": "ef93fd34de28cb0dd3763c61fa75e4f7d1c9016b87b3b99bb573e085c109c4be",
+    "resource_bytes_verified_against_guest_roms": {
+      "bios1": {
+        "size": 28420,
+        "sha256": "1ce33544249fef59865b91308faf60f354563cf854f80eb196d47c968899a574"
+      },
+      "bios4": {
+        "size": 8191,
+        "sha256": "b09fdff1a500971d54233378ce9c36f1b6a58bf577e4a544da03a0d78d7e0d6f"
+      },
+      "v7vga": {
+        "size": 18832,
+        "sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0"
+      }
+    },
+    "loose_rom_files_in_staged_package": 0
+  }
+}

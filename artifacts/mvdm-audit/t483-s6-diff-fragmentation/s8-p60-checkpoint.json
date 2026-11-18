@@ -1,0 +1,56 @@
+{
+  "packet": "T483 S8 P60",
+  "position": 104,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+  "review_ids": [
+    "T483-R1240",
+    "T483-R1241"
+  ],
+  "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+  "current_sha256": "e02b45a17b7ae8c171a880c2dc4df3d87e478126a2b8ce1c479667e17b96e03e",
+  "before": {
+    "blocks": 2,
+    "added": 8,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 2,
+    "added": 8,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        39,
+        38,
+        "#endif /* MONITOR */ "
+      ],
+      [
+        2188,
+        1640,
+        "#endif /* MONITOR */"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 104,
+    "remaining": 127,
+    "files": 231,
+    "points": 1934,
+    "lines": 27049,
+    "pending": 1547
+  },
+  "decision": "R1240/R1241 retain both differences. The standard packed painter accepts a real 640x480 frame, clamps to both the destination DIB and remaining plane bytes with the current stride, and rejects an empty request before its original do/while loop. The original height bound rejects a supported frame. Removing the clip instead loses the visible intersection at the lower right. No extra renderer, buffering or error handling required.",
+  "verification": {
+    "controls": "Previously compiled original fails line 48; prior independently compiled no-clipping control fails line 53. Those controls are historical; the current production painter was rebuilt and run in this audit.",
+    "current": "PASS actual packed painter: 640x480, pitched rows, clipped damage, source end, invalid input, guards",
+    "inputs": {
+      "sourceSha256": "E02B45A17B7AE8C171A880C2DC4DF3D87E478126A2B8CE1C479667E17B96E03E",
+      "passed": true,
+      "fixtureSha256": "EF94D255A8D00D267151FBE52CD0CA8EA8A8D6072962696CBA3732AB77DC8FBD"
+    }
+  }
+}

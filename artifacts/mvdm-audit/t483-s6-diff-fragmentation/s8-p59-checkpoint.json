@@ -1,0 +1,47 @@
+{
+  "packet": "T483 S8 P59",
+  "position": 103,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+  "review_ids": [
+    "T483-R1235"
+  ],
+  "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+  "current_sha256": "59ff5502badd8e75136da1ab1b4bf69b50add4b2d11731bd2fd678f83d842cab",
+  "before": {
+    "blocks": 1,
+    "added": 0,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 0,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        99,
+        98,
+        "#endif"
+      ],
+      [
+        342,
+        319,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 103,
+    "remaining": 128,
+    "files": 231,
+    "points": 1934,
+    "lines": 27049,
+    "pending": 1547
+  },
+  "decision": "R1235 retain the one-line omission. The public UCRT _sys_errlist macro expands to a function accessor. The original array declaration becomes a declaration of a function returning an array. The native original error lookup body and _sys_nerr declaration already compile. Adding preprocessor machinery to retain that redundant array declaration would increase the mirror diff.",
+  "verification": "Identical current Ninja x86 worker compile flags. Current nt_unix.c exit 0; isolated copy with the single missing declaration restored exit 2 at line 43: C2090 function returns array."
+}

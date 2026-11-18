@@ -153,32 +153,21 @@ BOOL SetVideoMemory(ULONG iaddr)
  *               WILL NOT work for backward M.
  */
 #line 148
-UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)
+UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
 {
-#line 150
         sys_addr iaddr;
 
-#line 152
         if (pm && (addr == 0))
 	    return(NULL);
 
         convert_addr (iaddr, addr, pm, NULL);
-        if (linear) *linear = (ULONG)iaddr;
 //STF - need sas_wrap_mask with PE....iaddr &= Sas_wrap_mask;
 
-#line 158
         if (IsVideoMemory(iaddr)) {
-#line 159
             return GetVideoMemory(iaddr);
             }
 
-#line 162
         return (NtGetPtrToLinAddrByte(iaddr));
-}
-
-UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
-{
-        return Sim32pGetVDMPointerWithLinear(addr, pm, NULL);
 }
 
 /*

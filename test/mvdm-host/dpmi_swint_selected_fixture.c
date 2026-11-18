@@ -94,8 +94,6 @@ void setIP(USHORT x){ip=x;} void setEIP(ULONG x){ip=x;}
 void setSP(USHORT x){sp=(sp & 0xffff0000u)|x;} void setESP(ULONG x){sp=x;}
 void setSS(USHORT x){ss=x;}
 void *Sim32pGetVDMPointer(ULONG address,ULONG mode){(void)address;(void)mode;mappings++;return mapping_unavailable ? NULL : memory;}
-void *Sim32pGetVDMPointerWithLinear(ULONG address, UCHAR mode, ULONG *linear)
-{ *linear=sizeof(memory); return Sim32pGetVDMPointer(address,mode); }
 BOOL selector_outside_GDT_LDT(USHORT selector,ULONG *address)
 {*address=0x1000;return (selector & ~3u)==0 || !selector_resolves;}
 void mvdm_softpc_report_dpmi_swint(ULONG a,USHORT b,USHORT c,USHORT d,USHORT e,ULONG f)

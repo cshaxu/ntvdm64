@@ -1,0 +1,99 @@
+{
+  "packet": "T483 S8 P61",
+  "position": 105,
+  "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "review_ids": [
+    "T483-R1242",
+    "T483-R1243",
+    "T483-R1244",
+    "T483-R1245",
+    "T483-R1246",
+    "T483-R1247",
+    "T483-R1248"
+  ],
+  "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+  "current_sha256": "e9fb203a7f1797d6513f2046825def6a72d9b88f035a98c6e28f257da2335130",
+  "before": {
+    "blocks": 10,
+    "added": 15,
+    "deleted": 6
+  },
+  "after": {
+    "blocks": 7,
+    "added": 8,
+    "deleted": 5
+  },
+  "source_changed": true,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        250,
+        249,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 105,
+    "remaining": 126,
+    "files": 231,
+    "points": 1931,
+    "lines": 27041,
+    "pending": 1544
+  },
+  "verification": {
+    "scope": "Successful real DOS4GW graphics startup and Escape hide/restore. InitIntelMemory allocation failure not injected.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "3af40532-a5d4-482d-a742-5219d420a744",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "nesticle": {
+      "pass": true,
+      "frames": [
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p61\\nesticle\\nesticle.txt.graphics-before.ppm",
+          "width": 640,
+          "height": 400,
+          "menu_mask_sha256": "23cc9e02d7f682bd9963a2e85a4863c92c09967f8b7a6b6fcc1e0d4d75a3eeae",
+          "menu_present": true,
+          "menu_hidden": false
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p61\\nesticle\\nesticle.txt.graphics-hidden.ppm",
+          "width": 640,
+          "height": 400,
+          "menu_mask_sha256": "bfe492baf731a0dbf6e1e050f5bc3fe8c1b049383194dcdf82f023bfa409f462",
+          "menu_present": false,
+          "menu_hidden": true
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p61\\nesticle\\nesticle.txt.graphics-restored.ppm",
+          "width": 640,
+          "height": 400,
+          "menu_mask_sha256": "23cc9e02d7f682bd9963a2e85a4863c92c09967f8b7a6b6fcc1e0d4d75a3eeae",
+          "menu_present": true,
+          "menu_hidden": false
+        }
+      ]
+    },
+    "build": "cached x86 and x64 completed",
+    "swint": [
+      "DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1",
+      "DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2",
+      "DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2",
+      "DPMI_SWINT_INVALID_ALIAS_OK host_failure=1 no_dispatch=1",
+      "DPMI_SWINT_NONSELECTOR_NULL_OK prior_failure=preserved",
+      "DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full",
+      "DPMI_INT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 frame=full"
+    ]
+  },
+  "decision": "R1243/R1244/R1245 restored byte-for-byte from the reference function. The only caller of the WithLinear extension supplied NULL; no DPMI consumer or export imports that symbol. Deleted the unreferenced fixture substitute. R1242/R1248 retain the session termination boundary for failed memory startup. R1246/R1247 retain CPU40 descriptor access, CPU_DESCR from c_main.h and matching function prototypes from c_bsic.h."
+}
