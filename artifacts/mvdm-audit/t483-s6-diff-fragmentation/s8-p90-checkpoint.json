@@ -1,0 +1,46 @@
+{
+  "packet": "T483 S8 P90",
+  "position": 134,
+  "path": "src/mvdm-host/wow32/wmdisp32.h",
+  "review_ids": [
+    "T483-R1595",
+    "T483-R1596"
+  ],
+  "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+  "current_sha256": "3dd14fded39eb89dff3e8f5a3c5ca15056ae374d0ecabe195eb875fa0bb2ce97",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        56,
+        54,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 134,
+    "remaining": 97,
+    "files": 231,
+    "points": 1915,
+    "lines": 27009,
+    "pending": 1538
+  },
+  "decision": "R1595 and R1596 retained pending. Nested CREATE owns five simultaneously live keys: outer class and name, nested class, title and record. The original dwParam plus two scratch slots holds three. Release consumes captured keys, independent of guest edits or failed construction. The DDE mode must be isolated across concurrent thread save/restore operations.",
+  "verification": {
+    "dde": "Fresh two-TU x86 check using exact pinned original or current declaration and matching definition. Two threads synchronized by events. While the peek thread holds FALSE, a callback restores its previous TRUE value. Original subsequently reads TRUE (wrong), TLS reads FALSE. Models only the flag ordering; not a real guest race reproduction.",
+    "slots": "P89 unchanged header, exact selected message-construction fixture: 191 scenarios, 0 failures, 4 slots; nested MDI transaction checks exercise the production cleanup."
+  }
+}
