@@ -1,0 +1,50 @@
+{
+  "packet": "T483 S8 P123",
+  "position": 166,
+  "path": "src/non-mvdm/base/win32/server/srvvdm.h",
+  "review_ids": [
+    "T483-R1992",
+    "T483-R1993"
+  ],
+  "original_sha256": "f590ef866f87ce80671c4b6f4e3bbe94347342e6b723bc062ed6f044fbb3820f",
+  "current_sha256": "a62c55844a2000b67216a5eeb30bf85ccf0e7bd2b2adb3d3f662b08523682102",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 166,
+    "remaining": 65,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "decision": "R1992 retain the record-local early-completion bit. The event can be reset between child return and the next eligible Get; P181 original control timed out on early, nested and queued returns. R1993 restore original header region; move the single identical-signature wait-query declaration to base_server.h already present in both producer and consumer include chains. Removed obsolete #line 94. No additional interface or runtime path.",
+  "verification": {
+    "build": "cached x86/x64 including worker, service, and service reservation fixture compilation/link",
+    "runtime": "Declaration relocation only. Prior P122 10 runtime cases, no new runtime acceptance claimed.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "b9161e45-a318-40be-8b79-df7b0dfd70af",
+      "hashVerified": true,
+      "stopped": 0
+    }
+  }
+}
