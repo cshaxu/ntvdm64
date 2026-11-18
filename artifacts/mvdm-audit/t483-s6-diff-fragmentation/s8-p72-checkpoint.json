@@ -1,0 +1,101 @@
+{
+  "packet": "T483 S8 P72",
+  "position": 116,
+  "path": "src/mvdm-host/wow32/wcall16.c",
+  "review_ids": [
+    "T483-R1325",
+    "T483-R1326",
+    "T483-R1327",
+    "T483-R1328",
+    "T483-R1330",
+    "T483-R1331",
+    "T483-R1335"
+  ],
+  "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+  "current_sha256": "ebec54988f77dc3d6e72145603d85241ddffa383b9d00b1c8010d2e5195c2ecf",
+  "before": {
+    "blocks": 7,
+    "added": 23,
+    "deleted": 5
+  },
+  "after": {
+    "blocks": 7,
+    "added": 21,
+    "deleted": 5
+  },
+  "source_changed": true,
+  "paired_error_bodies": 9,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        125,
+        93,
+        "#else"
+      ],
+      [
+        551,
+        531,
+        "#endif // DEBUG"
+      ],
+      [
+        647,
+        585,
+        "#endif"
+      ],
+      [
+        652,
+        655,
+        "#if FASTBOPPING"
+      ],
+      [
+        653,
+        654,
+        "#else"
+      ],
+      [
+        694,
+        691,
+        "#endif"
+      ],
+      [
+        755,
+        722,
+        "#endif"
+      ],
+      [
+        777,
+        775,
+        "#else"
+      ],
+      [
+        778,
+        771,
+        "    // Time to get the IEU running task-time code again"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 116,
+    "remaining": 115,
+    "files": 231,
+    "points": 1931,
+    "lines": 27022,
+    "pending": 1543
+  },
+  "decisions": {
+    "R1325": "Keep the declared caller-continuation boundary. Native unwind bypasses normal guest return. The production restore service checks worker lifetime before touching abandoned state.",
+    "R1326/R1327": "Public DWORD export must return zero and Ex must return FALSE on denied admission. The original instead returns the preloaded argument size or unconditional TRUE. Preserve original output store order.",
+    "R1328": "Use a distinct symbol for the original body. A translation-unit-wide substitution would also redirect internal callers away from the admission facade.",
+    "R1330/R1331": "Capture the caller stack, callback cursor, INIT flag and CPU continuation before frame preparation mutates them. A scope restricted to guest simulation misses earlier failures.",
+    "R1335": "Use a single short-circuit condition. Preserve restore order, terminal-worker bypass, input-ignore guard and native exception propagation. Eliminate one nested test and matching closing brace."
+  },
+  "verification": {
+    "build": "x86 and x64 full cached build exit 0",
+    "publication": "97d1bbea-df42-4d5d-8de4-c9c619908a2a, 11 verified images at both destinations",
+    "public_exports": "WOW_PUBLIC_CALLBACK_REJECTION errors=0, no guest entry, original store and invalid size verified",
+    "frame": "Original callback frame and abnormal unwind scenarios passed, including teardown, terminal and selector cases",
+    "cpu": "verify-wow-callback-abort-ccpu passed real CCPU interface/control and three thread cases; targeted tests only",
+    "historical_controls": "batch-p137-checkpoint.json records the prior original-body failures; not rerun as current evidence."
+  }
+}

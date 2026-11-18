@@ -711,13 +711,11 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     FREEVDMPTR(pCBFrame);
 
     } __finally {
-        if (AbnormalTermination()) {
-            if (wow_callback_control_restore(&control, callerStack)) {
-                ptd->vpStack = callerStack;
-                ptd->vpCBStack = callerCallbackStack;
-                if (!(ptd->dwFlags & TDF_IGNOREINPUT))
-                    ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
-            }
+        if (AbnormalTermination() && wow_callback_control_restore(&control, callerStack)) {
+            ptd->vpStack = callerStack;
+            ptd->vpCBStack = callerCallbackStack;
+            if (!(ptd->dwFlags & TDF_IGNOREINPUT))
+                ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
         }
     }
 #line 818

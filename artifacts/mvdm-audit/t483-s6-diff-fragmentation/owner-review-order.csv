@@ -69,7 +69,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 71,src/non-mvdm/windows/core/ntuser/rtl/wow.c,7,1,170,171,6,0,49,s7-p7-reviewed-residual-pending,cee4533a5bd742002e4cdcd025f061e91a217c9326a0944c4b3fe068ea0fcd65
 72,src/mvdm-host/dos/dem/demsrch.c,5,25,0,25,11,0,73,s8-p3-rechecked-residuals-pending-owner,d2fb6c3cae2b5f871d4ae0269c0d8166d74ac6567250238ad0007f6049bbc9d2
 73,src/mvdm-host/softpc.new/base/video/egawrtm0.c,6,8,4,12,15,0,74,s8-p35-reviewed,ab98c3c4c19f079908ab3e8688e5dbca6e910028510c585e279b27c22f846b04
-74,src/mvdm-host/wow32/wcall16.c,7,23,5,28,9,0,75,s7-p15-format-restored-residual-pending,8853ed166922757da97af47cefb3e793714e4975e533db4a8d51a5297c7f5b99
+74,src/mvdm-host/wow32/wcall16.c,7,21,5,26,9,0,75,s8-p72-reviewed,ebec54988f77dc3d6e72145603d85241ddffa383b9d00b1c8010d2e5195c2ecf
 75,src/mvdm-host/wow32/wow32fax.c,8,15,5,20,2,0,76,s7-p21-reviewed,a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad
 76,src/mvdm-host/wow32/wudlg.c,8,17,2,19,5,0,77,s7-p7-reviewed-residual-pending,f98049a1afa471764fb825ccdd498a8ad189a697a181c347eba6ee8464ec542b
 78,src/non-mvdm/windows/core/ntuser/client/mngrayc.c,8,14,1,15,2,0,79,s7-p20-reviewed,9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572
