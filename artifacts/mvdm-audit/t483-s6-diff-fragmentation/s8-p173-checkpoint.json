@@ -1,0 +1,104 @@
+{
+  "packet": "T483 S8 P173",
+  "position": 216,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+  "review_ids": [
+    "T483-R2686",
+    "T483-R2687",
+    "T483-R2688",
+    "T483-R2690",
+    "T483-R2691"
+  ],
+  "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+  "current_sha256": "1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b",
+  "before": {
+    "blocks": 8,
+    "added": 14,
+    "deleted": 223
+  },
+  "after": {
+    "blocks": 8,
+    "added": 14,
+    "deleted": 223
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 216,
+    "remaining": 15,
+    "files": 231,
+    "points": 1912,
+    "lines": 26354,
+    "pending": 1532
+  },
+  "decision": "Product wow_window_client_try_get_long rejects negative indices before _GetWindowLong. GWL_WNDPROC, WOW words and ordinary negative indices then select their own authoritative providers in wow_user_private_access.c. Simply restoring the original negative call makes the product link fail LNK2019. Restoring the helper bodies also requires absent USER dispatch tables. The native dialog reader must use the same HWND slot as the writer; original local slot bodies retained for local-view builds. Compare P164 setter evidence.",
+  "verification": {
+    "compile": {
+      "current": {
+        "exit": 0,
+        "errors": [],
+        "GetWindowData_import": []
+      },
+      "no_header": {
+        "exit": 2,
+        "errors": [
+          "C2146: syntax error: missing ')' before identifier 'pwnd'",
+          "C2061: syntax error: identifier 'pwnd'",
+          "C2059: syntax error: ';'",
+          "C2059: syntax error: ','",
+          "C2059: syntax error: ')'",
+          "C2146: syntax error: missing ')' before identifier 'pwnd'",
+          "C2061: syntax error: identifier 'pwnd'",
+          "C2059: syntax error: ';'",
+          "C2059: syntax error: ','",
+          "C2059: syntax error: ')'"
+        ]
+      },
+      "original_negative": {
+        "exit": 0,
+        "errors": [],
+        "GetWindowData_import": [
+          "[ 17](sec  0)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000 _GetWindowData@12"
+        ]
+      },
+      "original_helpers": {
+        "exit": 2,
+        "errors": [
+          "C2065: 'GWL_WOWWORDS': undeclared identifier",
+          "C2065: 'GWL_WOWDWORD1': undeclared identifier",
+          "C2065: 'GWL_WOWDWORD2': undeclared identifier",
+          "C2065: 'GWL_WOWDWORD3': undeclared identifier",
+          "C2051: case expression not constant",
+          "C2051: case expression not constant",
+          "C2051: case expression not constant",
+          "C2051: case expression not constant",
+          "C2039: 'aStoCidPfn': is not a member of 'wow_edit_context'",
+          "C2039: 'apfnClientA': is not a member of 'wow_edit_context'",
+          "C2039: 'apfnClientW': is not a member of 'wow_edit_context'",
+          "C2039: 'apfnClientA': is not a member of 'wow_edit_context'",
+          "C2039: 'apfnClientW': is not a member of 'wow_edit_context'",
+          "C2039: 'apfnClientW': is not a member of 'wow_edit_context'",
+          "C2039: 'apfnClientA': is not a member of 'wow_edit_context'"
+        ]
+      }
+    },
+    "scope": "Fresh x86 product compile controls, two isolated links with product objects and libraries, source and logical-line comparison. No new runtime test or publication.",
+    "link": {
+      "current": {
+        "exit": 0,
+        "errors": []
+      },
+      "original_negative": {
+        "exit": 1120,
+        "errors": [
+          "original_negative.obj : error LNK2019: unresolved external symbol _GetWindowData@12 referenced in function __GetWindowLong@12",
+          "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p173\\original_negative.dll : fatal error LNK1120: 1 unresolved externals"
+        ]
+      }
+    }
+  }
+}
