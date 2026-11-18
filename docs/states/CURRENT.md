@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P15 completed review through CCPU `c_xcptn.c`. Next is position 39, `call.c`.
+S8 P16 completed review through CCPU `call.c`. Next is position 40, `ccpusas4.c`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P15 completed review through CCPU `c_xcptn.c`. Next is position 39, `call.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P15, 38 of 231 positions are covered and 193 remain queued.
+IDs. After S8 P16, 39 of 231 positions are covered and 192 remain queued.
 S8 has removed 17 points and 101 diff lines, leaving 1,957 points and 27,109 lines. The live pending backlog has 1,549 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
@@ -51,6 +51,7 @@ S8 has removed 17 points and 101 diff lines, leaving 1,957 points and 27,109 lin
 [P13 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p13-checkpoint.json).
 [P14 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p14-checkpoint.json).
 [P15 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p15-checkpoint.json).
+[P16 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p16-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

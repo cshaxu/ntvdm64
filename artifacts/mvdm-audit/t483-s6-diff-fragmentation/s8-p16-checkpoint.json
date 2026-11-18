@@ -1,0 +1,22 @@
+{
+  "packet": "T483 S8 P16",
+  "position": 39,
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+  "source_sha256": "4053cf58e9c439bdcc74611d31bbddcc21a24884b1eb8d0df9f9595127e202ae",
+  "decision": "T483-R0437 remains pending. New SS.B governs SP/ESP installation independently of the gate width. Replacing the one condition with a helper would remove additional original lines.",
+  "prior_counterexample": "../t483-remaining-reaudit/r0433-r0437-call-review.json",
+  "current_verification": "Fresh ccpu-stack-transition-test: 36 cases, 0 failures. Original negative control is historical. Source hash matches the frozen order; six exclusions and line anchors unchanged.",
+  "non_error": {
+    "points": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "coverage": {
+    "complete": 39,
+    "remaining": 192,
+    "files": 231,
+    "points": 1957,
+    "lines": 27109,
+    "pending": 1549
+  }
+}
