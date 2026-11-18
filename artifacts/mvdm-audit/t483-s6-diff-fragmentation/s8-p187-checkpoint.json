@@ -1,0 +1,45 @@
+{
+  "packet": "T483 S8 P187",
+  "position": 230,
+  "path": "src/mvdm-host/softpc.new/host/src/config.c",
+  "review_ids": [
+    "T483-S8-P187-CONFIG-REGISTRY"
+  ],
+  "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+  "current_sha256": "7debece9647e74d74aca69be379a8e97810452b3a34c8e9f69b8942e693d329c",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "source_changed": false,
+  "paired_error_bodies": 16,
+  "line_check": "Only added include and compressed branch delimiters differ at mapped nonempty coordinates; original selected statements match.",
+  "decision": "read_profile_int and GetVDMSize open and query the WOW configuration key. The one explicit header binds the three registry calls to worker projection functions. Without it the real product compile succeeds and COFF changes to ADVAPI imports RegOpenKeyExA, RegQueryValueExA and RegCloseKey. This bypasses the worker registry view; an admitted host section can also contribute values through that view. Leave explicit binding pending; no broader forced include.",
+  "verification": {
+    "compile_without_header": 0,
+    "COFF_current": [
+      "_ntvdm_shadow_reg_open_key_ex@20",
+      "_ntvdm_shadow_reg_query_value_ex@24",
+      "_ntvdm_shadow_reg_close_key@4"
+    ],
+    "COFF_without_header": [
+      "__imp__RegOpenKeyExA@20",
+      "__imp__RegQueryValueExA@24",
+      "__imp__RegCloseKey@4"
+    ]
+  },
+  "coverage": {
+    "complete": 230,
+    "remaining": 1,
+    "files": 231,
+    "points": 1903,
+    "lines": 26243,
+    "pending": 1534
+  }
+}
