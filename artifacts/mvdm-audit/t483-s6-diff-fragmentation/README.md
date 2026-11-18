@@ -455,3 +455,8 @@ all three selected compile inputs are unchanged. Both dialog fixtures pass.
 removed across the DPMI descriptor path. Thirty-five selected preprocess
 streams match, including the observation wrapper. The descriptor domain
 fixture and CCPU boundary fixture pass.
+
+[S7 P38 receipt](s7-p38-checkpoint.json) records removal of four redundant
+CCPU conditions and one V7 VGA condition. Five actual compile contexts keep
+identical selected source and logical lines. The CCPU, WOW callback and C-VID
+fixtures pass.

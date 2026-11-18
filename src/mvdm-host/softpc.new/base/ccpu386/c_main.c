@@ -533,7 +533,7 @@ IMPORT VOID dispatch_q_event();
 #endif	/* SFELLOW */
 #line 545
 
-#if defined(NTVDM) && !defined(SFELLOW)
+#line 547
 static BOOL debug_context_resume_check;
 GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)
 {
@@ -551,7 +551,6 @@ GLOBAL VOID ccpu_restore_debug_context IFN2(const IU32 *, registers, BOOL, pendi
    debug_context_resume_check = TRUE;
 }
 
-#endif
 
 
 #line 547
@@ -4262,9 +4261,8 @@ HOST_INSTRUCTION_COMPLETE:
    if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
 #line 4339
       {
-#if defined(NTVDM) && !defined(SFELLOW)
+#line 4341
 CPU_RESTORED_RESET:
-#endif
 #line 4341
       c_cpu_reset();
       doing_contributory = FALSE;
@@ -4376,7 +4374,7 @@ NEXT_INST:
 
    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
 
-#if defined(NTVDM) && !defined(SFELLOW)
+#line 4493
    if (debug_context_resume_check) {
       if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
          goto CPU_RESTORED_RESET;
@@ -4389,7 +4387,6 @@ NEXT_INST:
             Int1_f();
       }
    }
-#endif
 
 #line 4492
 #if defined(SFELLOW) && !defined(PROD)
@@ -4681,9 +4678,8 @@ LOCAL VOID
       SET_DR(DR_DAR3, 0);   /* Really Undefined */
       SET_DR(DR_DSR, 0);    /* Really Undefined */
       debug_exception_pending = FALSE;
-#if defined(NTVDM) && !defined(SFELLOW)
+#line 4785
       debug_context_resume_check = FALSE;
-#endif
 #line 4783
       MOV_DR((IU32) DR_DCR, (IU32) 0);   /* Disable Breakpoints */
 

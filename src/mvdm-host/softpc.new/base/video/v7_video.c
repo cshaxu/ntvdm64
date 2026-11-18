@@ -460,9 +460,8 @@ v7vga_extended_set_mode()
     }
     inb(EGA_IPSTAT1_REG,&temp_word);
     outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
-#if defined(NTVDM) && !defined(X86GFX)
+#line 457
     mouse_video_mode_changed(video_mode);
-#endif
 #line 456
 #ifndef PROD
 #line 457

@@ -1,0 +1,159 @@
+{
+  "packet": "M0 T483 S7 P38",
+  "prior_checkpoint": "7050e29f3",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": {
+      "before": {
+        "blocks": 36,
+        "added": 124,
+        "deleted": 30
+      },
+      "after": {
+        "blocks": 36,
+        "added": 116,
+        "deleted": 30
+      },
+      "removed_local_frame_ranges": [
+        [
+          536,
+          536,
+          1
+        ],
+        [
+          554,
+          554,
+          0
+        ],
+        [
+          4265,
+          4265,
+          1
+        ],
+        [
+          4267,
+          4267,
+          0
+        ],
+        [
+          4379,
+          4379,
+          1
+        ],
+        [
+          4392,
+          4392,
+          0
+        ],
+        [
+          4684,
+          4684,
+          1
+        ],
+        [
+          4686,
+          4686,
+          0
+        ]
+      ],
+      "original_error_pairs": 75,
+      "prior_sha256": "c59f05895bcc318df5e9cdcff1598eb1a9c1884b510ece039f0a9bb1887fa949",
+      "current_sha256": "837de6568a31820f73177d9d0764c6f9dc0067afd1d1967c3ff7f26a65fec2bf",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
+    },
+    "src/mvdm-host/softpc.new/base/video/v7_video.c": {
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "removed_local_frame_ranges": [
+        [
+          463,
+          463,
+          1
+        ],
+        [
+          465,
+          465,
+          0
+        ]
+      ],
+      "original_error_pairs": 4,
+      "prior_sha256": "e2854333cd759430c3104208152a362d79f824d3fb2157b48a5a652cbef38427",
+      "current_sha256": "30a54762cb9bf8acb3a2d7d23b64e9ac41092ab83f4327b5742710e4e1be1d0b",
+      "original_sha256": "ce5c8812c1bd5f125f007521b2c1c815739e4969fed1ff2e39600a5a47af0525"
+    }
+  },
+  "removed_frames": {
+    "c_main.c": 4,
+    "v7_video.c": 1
+  },
+  "decisions": {
+    "c_main.c": "The actual CCPU contexts all select the existing NTVDM debug context carrier. Remove four redundant local conditional frames. Preserve the original SFELLOW exclusions and the pending debug state boundary decisions.",
+    "v7_video.c": "The worker video objects both select the post-mode-change mouse callback. Remove the local repeat of the platform choice and keep the one existing callback; the V7 predicate fix is untouched."
+  },
+  "census": {
+    "non_error_points": 1985,
+    "non_error_lines": 27261,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 62,
+      "lines": 1715
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "worker",
+          "target": "obj/ccpu/c_main.obj",
+          "selected_lines": 51613,
+          "sha256": "ef47c82106d436d4795f88e88c2354cf49e63f537150a57e8f90cf60d41d1999"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/video/v7_video.obj",
+          "selected_lines": 46675,
+          "sha256": "21890868813cd2a2de5c6d9ccc5d00028e0e00fbd28e6a3352613ef2bfa94310"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/ccpu/c_main.obj",
+          "selected_lines": 51613,
+          "sha256": "ef47c82106d436d4795f88e88c2354cf49e63f537150a57e8f90cf60d41d1999"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/video/v7_video.obj",
+          "selected_lines": 46675,
+          "sha256": "21890868813cd2a2de5c6d9ccc5d00028e0e00fbd28e6a3352613ef2bfa94310"
+        },
+        {
+          "profile": "wow-callback-fixture",
+          "target": "c_main.c",
+          "selected_lines": 51613,
+          "sha256": "ef47c82106d436d4795f88e88c2354cf49e63f537150a57e8f90cf60d41d1999"
+        }
+      ]
+    },
+    "targeted": {
+      "cvidc_vector_binding_fixture": "pass",
+      "wow_callback_abort_ccpu_fixture": "pass",
+      "ccpu_monitor_boundary_cases_passed": 58
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Five actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

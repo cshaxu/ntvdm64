@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-62 points and 1,705 changed lines in S7. The current census is 1,985 non-error
-points and 27,271 changed lines across 231 mirrors with filtered differences.
+62 points and 1,715 changed lines in S7. The current census is 1,985 non-error
+points and 27,261 changed lines across 231 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -215,11 +215,8 @@ P32 restores four original EGA writer ranges. Both published packages match
 the tested manifest and differ from P10 only in PE timestamps.
 [P32 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p32-checkpoint.json).
 
-P33 simplifies three frames and restores the original register line anchor.
-[P33 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p33-checkpoint.json).
-
-P34 clears non-error differences in `cpu_vid.h` and `mvdm.h` and verifies x87.
-[P34 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p34-checkpoint.json).
+P33 and P34 simplify compile guards and validate original line anchors and
+x87 layout. [Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
 P35 removes nineteen local frames with six matching compile inputs.
 [P35 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p35-checkpoint.json).
@@ -228,6 +225,9 @@ P35 removes nineteen local frames with six matching compile inputs.
 
 P37 removes four DPMI CPU40 guards with 35 matching inputs.
 [P37 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p37-checkpoint.json).
+
+P38 removes five CCPU and V7 VGA guards with matching preprocess output.
+[P38 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p38-checkpoint.json).
 
 ## S1 Closure Record
 
