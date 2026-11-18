@@ -126,10 +126,11 @@ try {
             }
             # Exercise the actual single-use cleanup now owned by PostMessage.
             $post = Read-Input 'src/mvdm-host/wow32/wumsg.c' $false
-            $start = $post.IndexOf('            DWORD error = GetLastError();', [StringComparison]::Ordinal)
-            $end = $post.IndexOf("`n        }`n        __finally { wow_message_unwind16(&mpex); }", $start, [StringComparison]::Ordinal)
+            $start = $post.IndexOf('DWORD error = GetLastError();', $post.IndexOf('ULONG FASTCALL WU32PostMessage('), [StringComparison]::Ordinal)
+            $end = $post.IndexOf("`n    }`n#line 1492", $start, [StringComparison]::Ordinal)
             if ($start -lt 0 -or $end -le $start) { throw 'PostMessage cleanup scope missing' }
-            $cleanup = $post.Substring($start, $end - $start).Replace('mpex.', 'mpex->').Replace('&postConversion', 'conversion')
+            # The separate message-lifetime fixture exercises the generic unwind.
+            $cleanup = $post.Substring($start, $end - $start).Replace('wow_message_unwind16(&mpex);', '').Replace('mpex.', 'mpex->').Replace('&postConversion', 'conversion')
             $selections.Add([pscustomobject]@{variant=$variant;name='WU32PostMessage cleanup';offset=$start;length=$end-$start})
             $bodies += "static VOID W32CancelDDEPost(LPMSGPARAMEX mpex, PDDECONVERSION conversion){`n$cleanup`n}"
         }

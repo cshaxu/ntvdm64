@@ -1,0 +1,139 @@
+{
+  "packet": "T483 S8 P110",
+  "position": 154,
+  "path": "src/mvdm-host/wow32/wumsg.c",
+  "review_ids": [
+    "T483-R1861",
+    "T483-R1862",
+    "T483-R1863",
+    "T483-R1864",
+    "T483-R1865",
+    "T483-R1866",
+    "T483-R1867",
+    "T483-R1868",
+    "T483-R1869",
+    "T483-R1870",
+    "T483-R1871",
+    "T483-R1872",
+    "T483-R1873",
+    "T483-R1874",
+    "T483-R1875",
+    "T483-R1876",
+    "T483-R1877",
+    "T483-R1878",
+    "T483-R1879",
+    "T483-R1880",
+    "T483-R1881",
+    "T483-R1882",
+    "T483-R1883",
+    "T483-R1884",
+    "T483-R1885",
+    "T483-R1886",
+    "T483-R1887",
+    "T483-R1888",
+    "T483-R1889",
+    "T483-R1890",
+    "T483-R1891",
+    "T483-R1892",
+    "T483-R1893",
+    "T483-R1894"
+  ],
+  "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+  "current_sha256": "c73b954e96c769d07f2a48ade2ee8147f41a8894c830369670b135b099bfa465",
+  "before": {
+    "blocks": 32,
+    "added": 95,
+    "deleted": 14
+  },
+  "after": {
+    "blocks": 32,
+    "added": 93,
+    "deleted": 14
+  },
+  "source_changed": true,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        84,
+        85,
+        "    // Note: getmsg16 may have caused 16-bit memory movement"
+      ],
+      [
+        721,
+        722,
+        "    // Note: getmsg16 may have caused 16-bit memory movement"
+      ],
+      [
+        851,
+        849,
+        "#endif"
+      ],
+      [
+        1147,
+        1145,
+        "#endif"
+      ],
+      [
+        1918,
+        1910,
+        "#else"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 154,
+    "remaining": 77,
+    "files": 231,
+    "points": 1908,
+    "lines": 26944,
+    "pending": 1534
+  },
+  "verification": {
+    "message": "PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement",
+    "guest": {
+      "reverse": "Win16-owned EXECUTE posted -> native peer validates payload -> ACK returns original guest handle",
+      "native": {
+        "initiateAck": 1,
+        "ack": 1,
+        "released": 1,
+        "retired": 1
+      },
+      "taskLoss": "not selected",
+      "originalGuestChanged": false,
+      "release": "guest early GlobalFree request is deferred; native GlobalFree retires both aliases",
+      "initiate": "native WM_DDE_INITIATE service/topic atoms -> original initiator registration -> Win16 direct-atom WM_DDE_ACK -> original registration retirement",
+      "ack": "Win16 PostMessage WM_DDE_ACK -> original reverse thunk -> native packed lParam",
+      "guest": {
+        "releaseAttempt": 1,
+        "received": 1,
+        "retired": 1,
+        "reverseAck": 1
+      },
+      "scope": "INITIATE/ACK atom negotiation, EXECUTE/ACK both directions, sender-owned DATA/POKE/ADVISE CF_TEXT, and a test-only rejected DATA PostMessage rollback; no DDEML endpoint, item atoms beyond INITIATE, nested formats or heap-failure injection",
+      "packets": "Win16-to-native DATA/POKE/ADVISE CF_TEXT; guest free calls original WOW32 GlobalFree exactly once per native allocation, each returns success",
+      "execute": "native HGLOBAL -> original WM32DDEExecute -> Win16 alias"
+    },
+    "cached": "x86 and x64 all release targets passed",
+    "exception_control": "8 exact finalizer cases tested with controlled services: packet present/absent, normal completion and exceptions at each of the three cleanup services. Verified order, LastError at generic unwind entry and propagated exception.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "5d1dec90-6c41-433f-964f-7b7e93e9b6ab",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "alias": {
+      "candidateBodies": 15,
+      "baseline": "7835ba25e18b7b5e3f26cfb3e1e046d5789f4b92",
+      "passed": true,
+      "baselineBodies": 12,
+      "scope": "Original alias/free bodies with service doubles; no guest/transport proof"
+    }
+  },
+  "decision": "Keep per-call conversion frame initialization, success guards and finalizers across native message calls; conversions can allocate input before native dispatch raises. fWhoCalled is task-thread local; GetMessage/PeekMessage need nested restoration of the queue removal selector. Accepted DDE posts transfer packet/pairs to the receiver. For rejected posts, use two nested cleanup guards to free the packet, roll back the pairs and restore LastError before generic unwind, including when packet release or rollback raises. No change to delivery retries, guest code or excluded branches."
+}
