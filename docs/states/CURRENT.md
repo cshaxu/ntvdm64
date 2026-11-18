@@ -13,16 +13,15 @@ Owner closed S8 and admitted the sequential non-mirror code quality audit.
 | --- | --- |
 | Identifier Mode | M0 T483 S9, Ordinary Mode. |
 | Baseline | P190 at 4f4d6596c. |
-| Scope | All tracked entries in the 14 non-mirror production component roots under src, excluding src/addon. Review component build and test callers as evidence. Classify imported and generated inputs by provenance before recommending changes. |
-| Order | [Frozen directory/file inventory](../../artifacts/t483-s9-non-mirror-audit/order.csv). Walk directories in case-insensitive name order, listing their own files before descending into children. |
-| Objective | Check ownership, dependency direction, duplicated logic or state, unnecessary branches and adapters, failure cleanup, readability and applicable coding rules. |
-| Execution | Whole-file review in sequence. For findings identify the actual caller, evidence, simplest disposition and verification. Record clean files and provenance-only entries separately. |
-| Non-goals | No new mirror review or original guest rebuild. Audit admission authorizes findings; product changes require the applicable delivery and verification. |
-| Exit criteria | Reconcile every inventory row, distinguish completed reviews from fixes, summarize proven findings and pending owner decisions by component. |
+| Scope | Owner narrowed S9 to the 40 tracked files in src/compat. Follow callers in other components for evidence. |
+| Order | [Directory-ordered file audit](../../artifacts/t483-s9-non-mirror-audit/order.csv). |
+| Objective | Identify project-wide source or runtime reductions while preserving original ABI, ownership, errors and mirror boundaries. |
+| Execution | Separate duplicate declarations, test-only conveniences, native replacement candidates and original extracted implementations. |
+| Exit criteria | Record file-level disposition and evidence, distinguish estimated savings from delivered changes, and identify the verification needed for implementation. |
 
 ## Progress
 
-P2 applies the owner scope correction. All 46 add-on entries, including the two historical [P1 reviews](../../artifacts/t483-s9-non-mirror-audit/p1.md), are outside S9. The production directory inventory has 712 entries across 14 roots; 0 reviewed. First entry: src/common/README.md.
+P3 completed the 40-file scope review and isolated comparison builds. [Findings and limits](../../artifacts/t483-s9-non-mirror-audit/p3.md). Production changes await disposition. P1 and P2 are historical scope records.
 
 ## S1 Closure Record
 
