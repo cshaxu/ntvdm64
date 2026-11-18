@@ -143,7 +143,6 @@ Return Value:
 #line 220
     setIP((*(PUSHORT)(StackPointer + 6)));
     setCS(*(PUSHORT)(StackPointer + 8));
-#line 222
 
 #line 246
 }

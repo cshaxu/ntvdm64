@@ -1,0 +1,515 @@
+{
+  "packet": "M0 T483 S8 P6",
+  "prior_checkpoint": "e3a42dc07",
+  "covered_before": 17,
+  "covered_after": 24,
+  "remaining": 207,
+  "pending_rows": 1566,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1974,
+    "lines": 27185
+  },
+  "cumulative_s8_reduction": {
+    "points": 0,
+    "lines": 25
+  },
+  "files": [
+    {
+      "position": 18,
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+      "source_sha256": "59e1a591f708cc05ce6bbb2acb31204c5f33b86a8f3f306661d0ea8b8b4e31c1",
+      "review_ids": "T483-R0217;T483-R0218;T483-R0219;T483-R0220",
+      "before": {
+        "blocks": 14,
+        "added": 29,
+        "deleted": 231
+      },
+      "after": {
+        "blocks": 14,
+        "added": 29,
+        "deleted": 231
+      },
+      "disposition": "Retain selected mode switch, provider ownership and the copied debug-register span pending decisions. Original native FastBop and Sim32 implementations duplicate selected providers. Remove the superseded #line 222 before the blank and #line 246."
+    },
+    {
+      "position": 19,
+      "path": "src/mvdm-host/inc/dbgexp.h",
+      "original_sha256": "a915256a7a3796424ba8eb7ea2a257864a3986633752c870fe34762f3737ce95",
+      "source_sha256": "dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2",
+      "review_ids": "T483-R0222;T483-R0223;T483-R0224",
+      "before": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "disposition": "Retain three pending cdecl declarations. Current worker definitions and WOW callers match these symbols; original-header and whole-provider /Gz results qualify the incompatibility."
+    },
+    {
+      "position": 20,
+      "path": "src/mvdm-host/inc/demexp.h",
+      "original_sha256": "dfb912ee16a360e36d149bca01592a61ec11ff0f1d1b148edcffb42fda52d5c4",
+      "source_sha256": "e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788",
+      "review_ids": "T483-R0225;T483-R0226;T483-R0227",
+      "before": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "after": {
+        "blocks": 1,
+        "added": 3,
+        "deleted": 3
+      },
+      "disposition": "Retain three pending cdecl declarations. Current WOW and DEM objects match the three symbols. Original-header consumers reference incompatible stdcall decorations."
+    },
+    {
+      "position": 21,
+      "path": "src/mvdm-host/inc/memapi.h",
+      "original_sha256": "0e72109252dbec2a9c79b54d28d0c2bda0967644dd9d1d1d2d789e8fd8aa8c99",
+      "source_sha256": "26515fc97789f77e6e1632d3d3c19e810ade63539650de1b7dcbf6056688d546",
+      "review_ids": "T483-R0230;T483-R0231;T483-R0232;T483-R0233;T483-R0234",
+      "before": {
+        "blocks": 5,
+        "added": 5,
+        "deleted": 5
+      },
+      "after": {
+        "blocks": 5,
+        "added": 5,
+        "deleted": 5
+      },
+      "disposition": "Retain five pending cdecl declarations. Current WOW and worker object symbols match. Previous whole-caller /Gd comparison changes other WOW entrypoint ABIs."
+    },
+    {
+      "position": 22,
+      "path": "src/mvdm-host/inc/softpc.h",
+      "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+      "source_sha256": "90414e65ce628b379ac9bbf8051307839eaae61f802924dcac4b47b9d70b0aeb",
+      "review_ids": "T483-R0236;T483-R0237;T483-R0238;T483-R0240;T483-R0242;T483-R0243;T483-R0244;T483-R0245;T483-R0246;T483-R0247;T483-R0248;T483-R0249;T483-R0250;T483-R0251;T483-R0252;T483-R0253;T483-R0254;T483-R0255;T483-R0256;T483-R0257;T483-R0258;T483-R0259;T483-R0260;T483-R0261;T483-R0262;T483-R0263;T483-R0264;T483-R0265;T483-R0266;T483-R0267;T483-R0268;T483-R0269;T483-R0270;T483-R0271;T483-R0272",
+      "before": {
+        "blocks": 11,
+        "added": 35,
+        "deleted": 35
+      },
+      "after": {
+        "blocks": 11,
+        "added": 35,
+        "deleted": 35
+      },
+      "disposition": "Retain 35 pending cdecl declarations. Current WOW object references and worker link map agree. The two original WINAPI-thread declarations remain restored."
+    },
+    {
+      "position": 23,
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+      "source_sha256": "d18350215388f68a97817da37acb9df032c47074f0fb3354c2e212166a37058c",
+      "review_ids": "T483-R0273",
+      "before": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "disposition": "Keep the minimized 4 KB choice pending. The pinned callback-span control records out-of-reservation commit and decommit with the original 64 KB grain for this x86 pool. Historical i386 exclusion and the original other branch remain."
+    },
+    {
+      "position": 24,
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+      "source_sha256": "4f93fc169d83f72b1e193aef8759fc47d9511ded5f5be899164743644b905eea",
+      "review_ids": "T483-R0276",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "disposition": "Keep the request-private staging pointer pending. Live prepare, completion and disposal use the request field across async lifetime. Original single translated pointer cannot represent a noncontiguous mapped span."
+    }
+  ],
+  "verification": {
+    "selected_preprocessing_and_logical_locations_identical": [
+      {
+        "profile": "worker",
+        "target": "obj/dpmi/i386_dpmi386.obj",
+        "selected_lines": 45100,
+        "sha256": "ba141e3492918e5b0addba9e8a5b5909cdb6d6b2bc639bf315248e59b48be407"
+      },
+      {
+        "profile": "worker-reference-x86",
+        "target": "obj/dpmi/i386_dpmi386.obj",
+        "selected_lines": 45100,
+        "sha256": "ba141e3492918e5b0addba9e8a5b5909cdb6d6b2bc639bf315248e59b48be407"
+      }
+    ],
+    "debug_and_dem_object_abi": [
+      "DBGNotifyDebugged",
+      "DBGNotifyNewTask",
+      "DBGNotifyRemoteThreadAddress",
+      "demClientErrorEx",
+      "demFileFindFirst",
+      "demFileFindNext"
+    ],
+    "memory_object_abi": [
+      "VdmAddDescriptorMapping",
+      "VdmAddVirtualMemory",
+      "VdmAllocateVirtualMemory",
+      "VdmFreeVirtualMemory",
+      "VdmRemoveVirtualMemory"
+    ],
+    "softpc_matching_cdecl_symbols": {
+      "WOWSysErrorBox": {
+        "id": "T483-R0236",
+        "providers": [
+          "0001:00051420       _WOWSysErrorBox            00452420 f   original-softpc-host-roots:nt_error.obj"
+        ],
+        "references": [
+          "obj/wow32-dll/wow_user_thunk_scope.obj"
+        ]
+      },
+      "SetWOWforceIncrAlloc": {
+        "id": "T483-R0237",
+        "providers": [
+          "0001:000554e0       _SetWOWforceIncrAlloc      004564e0 f   original-softpc-host-roots:nt_mem.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "host_simulate": {
+        "id": "T483-R0238",
+        "providers": [
+          "0001:00051b40       _host_simulate             00452b40 f   original-softpc-host-roots:nt_cpu.obj"
+        ],
+        "references": [
+          "obj/wcall16.obj",
+          "obj/wkman.obj"
+        ]
+      },
+      "cpu_createthread": {
+        "id": "T483-R0240",
+        "providers": [
+          "0001:00005e80       _cpu_createthread          00406e80 f   original-softpc-host-roots:stubs.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "host_com_close": {
+        "id": "T483-R0242",
+        "providers": [
+          "0001:00059080       _host_com_close            0045a080 f   original-softpc-host-roots:nt_com.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "SuspendTimerThread": {
+        "id": "T483-R0243",
+        "providers": [
+          "0001:00051c70       _SuspendTimerThread        00452c70 f   original-softpc-host-roots:nt_timer.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "ResumeTimerThread": {
+        "id": "T483-R0244",
+        "providers": [
+          "0001:00051c30       _ResumeTimerThread         00452c30 f   original-softpc-host-roots:nt_timer.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "Sim32pGetVDMPointer": {
+        "id": "T483-R0245",
+        "providers": [
+          "0001:00051780       _Sim32pGetVDMPointer       00452780 f   original-softpc-host-roots:sim32.obj"
+        ],
+        "references": [
+          "obj/wow32.obj"
+        ]
+      },
+      "getAX": {
+        "id": "T483-R0246",
+        "providers": [
+          "0001:00093a40       _getAX                     00494a40 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getCX": {
+        "id": "T483-R0247",
+        "providers": [
+          "0001:00093af0       _getCX                     00494af0 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getDX": {
+        "id": "T483-R0248",
+        "providers": [
+          "0001:00093b50       _getDX                     00494b50 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getBX": {
+        "id": "T483-R0249",
+        "providers": [
+          "0001:00093a90       _getBX                     00494a90 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getSP": {
+        "id": "T483-R0250",
+        "providers": [
+          "0001:00093ca0       _getSP                     00494ca0 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wcall16.obj",
+          "obj/wkman.obj",
+          "obj/wow32.obj"
+        ]
+      },
+      "getBP": {
+        "id": "T483-R0251",
+        "providers": [
+          "0001:00093a80       _getBP                     00494a80 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getSI": {
+        "id": "T483-R0252",
+        "providers": [
+          "0001:00093c90       _getSI                     00494c90 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getDI": {
+        "id": "T483-R0253",
+        "providers": [
+          "0001:00093b20       _getDI                     00494b20 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getIP": {
+        "id": "T483-R0254",
+        "providers": [
+          "0001:00093c40       _getIP                     00494c40 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wcall16.obj",
+          "obj/wkman.obj",
+          "obj/wow32-dll/wow_callback_frame_lease.obj",
+          "obj/wow32-dll/wow_class_client_bindings.obj"
+        ]
+      },
+      "setAX": {
+        "id": "T483-R0255",
+        "providers": [
+          "0001:00093d70       _setAX                     00494d70 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setCX": {
+        "id": "T483-R0256",
+        "providers": [
+          "0001:00093e30       _setCX                     00494e30 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setDX": {
+        "id": "T483-R0257",
+        "providers": [
+          "0001:00093e90       _setDX                     00494e90 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setBX": {
+        "id": "T483-R0258",
+        "providers": [
+          "0001:00093dc0       _setBX                     00494dc0 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setSP": {
+        "id": "T483-R0259",
+        "providers": [
+          "0001:00094020       _setSP                     00495020 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wcall16.obj",
+          "obj/wkman.obj",
+          "obj/wow32-dll/wow_callback_frame_lease.obj",
+          "obj/wow32.obj"
+        ]
+      },
+      "setBP": {
+        "id": "T483-R0260",
+        "providers": [
+          "0001:00093db0       _setBP                     00494db0 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setSI": {
+        "id": "T483-R0261",
+        "providers": [
+          "0001:00094010       _setSI                     00495010 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setDI": {
+        "id": "T483-R0262",
+        "providers": [
+          "0001:00093e60       _setDI                     00494e60 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setIP": {
+        "id": "T483-R0263",
+        "providers": [
+          "0001:00093f90       _setIP                     00494f90 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wcall16.obj",
+          "obj/wkman.obj",
+          "obj/wow32-dll/wow_callback_frame_lease.obj"
+        ]
+      },
+      "getES": {
+        "id": "T483-R0264",
+        "providers": [
+          "0001:00093be0       _getES                     00494be0 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getCS": {
+        "id": "T483-R0265",
+        "providers": [
+          "0001:00093ae0       _getCS                     00494ae0 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj",
+          "obj/wow32-dll/wow_callback_frame_lease.obj",
+          "obj/wow32-dll/wow_class_client_bindings.obj"
+        ]
+      },
+      "getSS": {
+        "id": "T483-R0266",
+        "providers": [
+          "0001:00093cb0       _getSS                     00494cb0 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wcall16.obj",
+          "obj/wkman.obj",
+          "obj/wow32.obj"
+        ]
+      },
+      "getDS": {
+        "id": "T483-R0267",
+        "providers": [
+          "0001:00093b40       _getDS                     00494b40 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setES": {
+        "id": "T483-R0268",
+        "providers": [
+          "0001:00093f30       _setES                     00494f30 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setCS": {
+        "id": "T483-R0269",
+        "providers": [
+          "0001:00093e20       _setCS                     00494e20 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "setSS": {
+        "id": "T483-R0270",
+        "providers": [
+          "0001:00094030       _setSS                     00495030 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wcall16.obj",
+          "obj/wkman.obj",
+          "obj/wow32.obj"
+        ]
+      },
+      "setDS": {
+        "id": "T483-R0271",
+        "providers": [
+          "0001:00093e80       _setDS                     00494e80 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wkman.obj"
+        ]
+      },
+      "getMSW": {
+        "id": "T483-R0272",
+        "providers": [
+          "0001:00093c50       _getMSW                    00494c50 f   original-softpc-cvidc:accessfn.obj"
+        ],
+        "references": [
+          "obj/wow32.obj"
+        ]
+      }
+    },
+    "excluded_arms": "The changed source has no #error branch. Reviewed headers remain byte-identical to their admitted versions.",
+    "publication": "P4 images reused after exact compiler input check. Both destinations match the same manifest.",
+    "manifest_sha256": "0ae16e9c0490c3cc7ae726fc9d0376786e8d481bf8b47dc4b51ff2ffa667ec19",
+    "images_per_destination": 11,
+    "runtime_suite": "No fresh production build or runtime suite."
+  }
+}
