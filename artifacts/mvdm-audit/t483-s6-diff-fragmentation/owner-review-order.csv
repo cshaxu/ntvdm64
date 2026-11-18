@@ -102,7 +102,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 107,src/non-mvdm/windows/core/ntuser/client/drawtext.c,5,0,137,137,0,0,109,s7-p11-reviewed,507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1
 108,src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,5,14,480,494,1,0,111,s7-p3-reviewed-residual-pending,61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629
 110,src/non-mvdm/windows/core/ntuser/rtl/draw.c,5,1,388,389,1,0,112,s7-p12-reviewed,c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb
-111,src/mvdm-host/dpmi32/dpmidata.h,3,9,24,33,2,0,113,s7-p13-format-restored-residual-pending,8faa539458af27c74b40771a15c62f17da670e532971825d827df851e46ae825
+111,src/mvdm-host/dpmi32/dpmidata.h,2,1,26,27,2,0,113,s7-p13-format-restored-residual-pending,e4a48426f06d09ecf275a89c4c6067ff80b1221141649da8f323b88d24ff3c7d
 112,src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,4,23,0,23,1,0,114,s7-p9-format-restored-residual-pending,d070c2f83723b0bcc3098419cdb9dc6501c5a4f88497fd4fcf0f28f5d12cdea1
 113,src/mvdm-host/softpc.new/base/cvidc/evidgen.h,4,4,0,4,0,0,115,s7-p9-reviewed,83b3d0801daae92b64c3902924b9edaea423eb480b0858a68c64c438906ffae4
 114,src/mvdm-host/softpc.new/base/cvidc/sevid016.c,4,6,6,12,0,0,116,s7-p23-reviewed,636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc
@@ -124,7 +124,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 133,src/mvdm-host/softpc.new/base/keymouse/keybd_io.c,3,5,4,9,26,0,134,s7-p12-reviewed,241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9
 134,src/mvdm-host/softpc.new/base/system/ica.c,3,13,0,13,73,0,135,s7-p6-reviewed-residual-pending,6ccbdd1c1a00457fff9d236321f69b80d87fc2abe88bc31eb8f64617247e2304
 135,src/mvdm-host/softpc.new/base/video/vga_mode.c,3,3,3,6,26,0,136,s7-p8-reviewed,120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3
-136,src/mvdm-host/softpc.new/host/inc/host_cpu.h,3,5,2,7,8,0,137,s7-p4-reviewed-residual-pending,f1e5de5a5b037b67da9b8b8a6e405f2549dd49f0f5491a912c3630328f3a536c
+136,src/mvdm-host/softpc.new/host/inc/host_cpu.h,3,1,2,3,8,0,137,s7-p4-reviewed-residual-pending,68befcbaae9545cadb39bbbe2741ab647237ec42ca125d6ab1640fca76cdf343
 137,src/mvdm-host/softpc.new/host/inc/host_def.h,3,5,2,7,3,0,138,s7-p5-reviewed-residual-pending,71b0afcd5906ef2dddac4ca2fa546aa4ceedd8302d097fb62ab71ee0b4b1254e
 138,src/mvdm-host/softpc.new/host/src/copy_fnc.c,2,2,2,4,4,0,139,s7-p16-reviewed-mask-corrected-residual-pending,a5d17a7e5d2d48fe58dbe0e265a9c1291bc14076aa8c5fa858a641c0edc51660
 139,src/mvdm-host/softpc.new/host/src/nt_mem.c,3,7,0,7,26,0,140,s7-p13-format-restored-residual-pending,e3fa1b2f51ff24a997059b18c0b97874d01f9aed16c768a17ad37591405ac1ab

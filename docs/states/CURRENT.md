@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-54 points and 1,594 changed lines in S7. The current census is 1,993 non-error
-points and 27,382 changed lines across 233 mirrors with filtered differences.
+55 points and 1,604 changed lines in S7. The current census is 1,992 non-error
+points and 27,372 changed lines across 233 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -200,11 +200,8 @@ The font fixture passes and the old-code control fails as expected.
 P28 removes four local CPU and DPMI frames with six matching worker controls.
 [P28 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p28-checkpoint.json).
 
-P29 removes ten local compile frames from `nt_emm.c` and `nt_graph.c`.
-The original BACK_M and X86GFX exclusions remain in their original groups.
-R1127 is restored and leaves the pending ledger. Four actual worker
-preprocessing comparisons preserve selected text and logical lines.
-The display tick fixture and video source contract checks pass.
+P29 removes ten local EMS and graphics frames, restores R1127 and passes
+the display fixtures.
 [P29 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p29-checkpoint.json).
 
 P30 restores original WOW logging and removes two local condition frames
@@ -222,6 +219,11 @@ original BACK_M condition frames with excluded bodies. The cached builds,
 EGA fixture and timestamp-only link control pass. Both published manifests
 match all eleven staged images. Only PE timestamps differ from P10.
 [P32 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p32-checkpoint.json).
+
+P33 removes three local DPMI and word-layout frames. The protected-mode,
+descriptor and little-endian contracts pass. Two hundred compile entries
+match with the original line anchor for the `low` register field corrected.
+[P33 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p33-checkpoint.json).
 
 ## S1 Closure Record
 

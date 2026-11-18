@@ -1,0 +1,107 @@
+{
+  "packet": "M0 T483 S7 P33",
+  "prior_checkpoint": "ac908904d",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/dpmi32/dpmidata.h": {
+      "before": {
+        "blocks": 3,
+        "added": 9,
+        "deleted": 24
+      },
+      "after": {
+        "blocks": 2,
+        "added": 1,
+        "deleted": 26
+      },
+      "removed_local_frame_ranges": [
+        [
+          37,
+          37,
+          1
+        ],
+        [
+          39,
+          43,
+          0
+        ],
+        [
+          55,
+          60,
+          0
+        ]
+      ],
+      "original_error_pairs": 2,
+      "prior_sha256": "8faa539458af27c74b40771a15c62f17da670e532971825d827df851e46ae825",
+      "current_sha256": "e4a48426f06d09ecf275a89c4c6067ff80b1221141649da8f323b88d24ff3c7d",
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2"
+    },
+    "src/mvdm-host/softpc.new/host/inc/host_cpu.h": {
+      "before": {
+        "blocks": 3,
+        "added": 5,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 3,
+        "added": 1,
+        "deleted": 2
+      },
+      "removed_local_frame_ranges": [
+        [
+          37,
+          37,
+          1
+        ],
+        [
+          41,
+          44,
+          1
+        ]
+      ],
+      "original_error_pairs": 8,
+      "prior_sha256": "f1e5de5a5b037b67da9b8b8a6e405f2549dd49f0f5491a912c3630328f3a536c",
+      "current_sha256": "68befcbaae9545cadb39bbbe2741ab647237ec42ca125d6ab1640fca76cdf343",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95"
+    }
+  },
+  "decisions": {
+    "T483-R0143": "Local CPU40 fork removed. Retain only the selected protected-mode BOP provider binding.",
+    "T483-R0145": "Local _WINNT_ rejection and divergence comment removed. Public SDK LDT_ENTRY remains the sole type provider.",
+    "T483-R0985": "Remove the local endian selector and keep the verified low-then-high byte layout.",
+    "T483-R0986": "Remove the local rejection arm and keep the verified low-then-high byte layout."
+  },
+  "census": {
+    "non_error_points": 1992,
+    "non_error_lines": 27372,
+    "nonzero_mirrors": 233,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 55,
+      "lines": 1604
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "actual_entries": 200,
+      "distinct_targets": 100,
+      "worker_profiles": 2,
+      "rows_with_corrected_anchor": 166,
+      "original_anchor": "host_cpu.h low field, OpenNT logical line 130 replaces previous physical diagnostic line 38",
+      "normalized_final_sha256": "cbabbd710af80156a9bc08f847aed86ca16ef67987f9a814518cd9a5f2acdf8b",
+      "baseline_sha256": "cbabbd710af80156a9bc08f847aed86ca16ef67987f9a814518cd9a5f2acdf8b",
+      "compare": "Map only host_cpu.h half_word low at final logical line 130 to baseline diagnostic line 38. All other nonblank rows, file names and logical line numbers have strictly equal hashes."
+    },
+    "targeted": {
+      "ccpu_boundary_cases": 58,
+      "cpu40_descriptor_domain": "pass",
+      "host_cpu_endian_without_LITTLEND": "pass"
+    },
+    "release": {
+      "action": "No production relink, republication or repeated Full. Token-identical inputs with one original diagnostic line correction.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

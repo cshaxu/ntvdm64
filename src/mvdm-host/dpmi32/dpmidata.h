@@ -34,13 +34,8 @@ Revision History:
 #else
 #line 45
 
-#if defined(CPU_40_STYLE)
+#line 47
 #define switch_to_protected_mode        DpmiCpu40SwitchToProtectedMode
-#else
-#line 46
-#define switch_to_protected_mode        DpmiIllegalFunction
-#define DpmiSetDebugRegisters           DpmiIllegalFunction
-#endif
 #line 48
 
 //
@@ -52,12 +47,6 @@ Revision History:
 // is to put the definition here.
 //
 
-/* DIVERGENCE(MVDM-HOST-DIV-139): selected contexts obtain LDT_ENTRY
- * from the public Windows header; reject the unselected fallback. */
-#if !defined(_WINNT_)
-#line 58
-#error Unsupported DPMI profile without Windows descriptor declarations
-#endif
 #line 82
 
 //

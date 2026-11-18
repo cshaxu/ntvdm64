@@ -432,3 +432,8 @@ across 233 differing mirrors.
 ranges restored, fourteen original BACK_M exclusions and matching
 product code in the isolated before/after linker control. The filtered
 census is 1,993 points and 27,382 changed lines across 233 mirrors.
+
+[S7 P33 receipt](s7-p33-checkpoint.json) records three local frames removed
+from `dpmidata.h` and `host_cpu.h`. It matches 200 actual preprocessing
+entries apart from one original logical-line correction. The filtered
+census is 1,992 points and 27,372 changed lines across 233 mirrors.

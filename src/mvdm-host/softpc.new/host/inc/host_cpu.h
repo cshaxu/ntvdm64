@@ -34,14 +34,11 @@ typedef union
         word    X;
     struct
         {                               /* as two bytes */
-#ifdef LITTLEND
+#line 130
         half_word low;
 #line 129
         half_word high;
-#else
-#line 129
-#error DIVERGENCE MVDM-HOST-DIV-620: unsupported non-little-endian host register layout
-#endif
+#line 134
         word pad;
         } byte;
     struct
