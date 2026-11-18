@@ -81,7 +81,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 84,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,866,3,0,87,s8-p165-reviewed,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
 85,src/mvdm-host/softpc.new/host/src/nt_cpu.c,4,4,2,6,10,0,83,s8-p45-reviewed,23c6f5890fb60aae48f319b7b0426ed8c9dff8656c8eaf8a2f911acf23b700fc
 86,src/mvdm-host/softpc.new/host/src/nt_cga.c,6,13,33,46,6,0,82,s8-p44-reviewed,036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b
-87,src/mvdm-host/dpmi32/dpmimemr.c,6,4,19,23,0,0,88,s7-p18-reviewed,568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4
+87,src/mvdm-host/dpmi32/dpmimemr.c,4,4,17,21,0,0,88,s8-p182-reviewed,2a6ca4b6fa79f2bbd3d6902f3478769d94a77cbd4878341e6d0b2dbbd55d833a
 88,src/mvdm-host/dpmi32/modesw.c,6,26,6,32,2,0,89,s8-p5-rechecked-residuals-pending-owner,28836a7ec6efc3516e78f9e96daa1675c2b4540a2b72d4a14676d56fbf7f455c
 89,src/mvdm-host/softpc.new/base/ccpu386/ntthread.c,5,31,0,31,0,0,90,s8-p19-reviewed,8dd53012bfac7fc25b818ce78017766420fec650772fbdc7c68825b87c82e188
 90,src/mvdm-host/softpc.new/host/src/nt_mouse.c,6,15,1,16,17,0,91,s8-p53-reviewed,853de6fccfa21b8a4465e4255db83bc119cb0424d6f761a1406486ca537ee472

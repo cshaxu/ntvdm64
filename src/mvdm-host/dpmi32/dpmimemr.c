@@ -61,7 +61,6 @@ Return Value:
     BOOL Success;
     NTSTATUS Status;
 
-    /* CPU40 uses the original shared XMS pool (MVDM-HOST-DIV-224). */
 #line 66
     {
     
@@ -209,7 +208,7 @@ Return Value:
     PDPMIMEMINFO UNALIGNED MemInfo;
     MEMORYSTATUS MemStatus;
     ULONG TotalFree, LargestFree;
-#line 217
+    NTSTATUS Status;
 
     //
     // Get a pointer to the return structure
@@ -230,13 +229,14 @@ Return Value:
     //
     // Get the information on memory
     //
-#line 243
+#line 242
+    {
         SAQueryFree(
             ExtMemSA,
             &TotalFree,
             &LargestFree
             );
-#line 249
+    }
     
     //
     // Return the information.

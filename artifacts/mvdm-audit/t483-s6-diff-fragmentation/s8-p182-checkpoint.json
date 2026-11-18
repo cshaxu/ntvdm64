@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P182",
+  "position": 225,
+  "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+  "review_ids": [
+    "T483-S7-P18-DPMIMEMR"
+  ],
+  "original_sha256": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+  "current_sha256": "2a6ca4b6fa79f2bbd3d6902f3478769d94a77cbd4878341e6d0b2dbbd55d833a",
+  "before": {
+    "blocks": 6,
+    "added": 4,
+    "deleted": 19
+  },
+  "after": {
+    "blocks": 4,
+    "added": 4,
+    "deleted": 17
+  },
+  "paired_error_bodies": 0,
+  "decision": "XMSInit sets up ExtMemSA and xmem.c allocates through DpmiAllocateVirtualMemory. nt_mem.c VdmQueryFreeVirtualMemory returns STATUS_SUCCESS with totalFree and free headerTable extents, so the original STATUS_NOT_IMPLEMENTED fallback would skip the XMS query. VdmReallocateVirtualMemory likewise indexes headerTable, whereas SAReallocate takes ExtMemSA and the old byte count. Keep allocation, release, resize and free-space reporting with the same suballocator. Restored original local Status and query closing brace, aligned the four scopes and removed the redundant local comment. DIV-224 remains registered.",
+  "line_check": "All retained nonempty lines match the original at logical coordinates except the four intentional replacements of fallback condition with unconditional block at 66, 115, 169, 242.",
+  "verification": {
+    "objects": "Worker and worker-reference x86 rebuilt. Both COFF objects identical to respective starting object except timestamp. C4101 for restored original Status at 216.",
+    "tests": [
+      "XMS boundary assertions=135 failures=0"
+    ],
+    "scope": "The XMS fixture exercises the shared suballocator, not DPMI guest execution."
+  },
+  "coverage": {
+    "complete": 225,
+    "remaining": 6,
+    "files": 231,
+    "points": 1904,
+    "lines": 26248,
+    "pending": 1532
+  }
+}
