@@ -217,9 +217,9 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 229,src/mvdm-host/vdmredir/vrdlc5c.c,1,1,1,5,0,s8-p64-reviewed,T483-R1259;T483-R1260,e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695
 230,src/mvdm-host/vdmredir/vrica.h,1,1,1,0,0,s8-p65-reviewed,T483-R1265,12b035d868e78ccee22a945a3e369e23642d9fc4fb66b562fea05876ee1d74af
 231,src/mvdm-host/wow32/isvwow.h,1,1,1,0,0,s8-p69-reviewed,T483-R1303,de0c0839707c033582c23a706eae019cd9c42f3424815e5ba0d9ec6135e06e08
-232,src/mvdm-host/wow32/wdib.c,1,1,1,2,0,s7-p22-reviewed,T483-R1418;T483-R1419;T483-R1420,aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98
-233,src/mvdm-host/wow32/wdos.c,1,1,1,1,0,s7-p15-reviewed,T483-R1421;T483-R1422,a0bc00db06a8d45b56798d7263e6827f95ead9b5e0add8ef44d134aced88b793
-234,src/mvdm-host/wow32/wgdi.c,1,1,0,4,0,s7-p22-reviewed,T483-R1423;T483-R1424,cf9f03650cce420116b6bf87f1a9c95f21b8a26ce4861159520e95453aaf9a41
+232,src/mvdm-host/wow32/wdib.c,1,1,1,2,0,s8-p77-reviewed,T483-R1418;T483-R1419;T483-R1420,aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98
+233,src/mvdm-host/wow32/wdos.c,1,1,1,1,0,s8-p78-reviewed,T483-R1421;T483-R1422,a0bc00db06a8d45b56798d7263e6827f95ead9b5e0add8ef44d134aced88b793
+234,src/mvdm-host/wow32/wgdi.c,1,1,0,4,0,s8-p79-reviewed,T483-R1423;T483-R1424,cf9f03650cce420116b6bf87f1a9c95f21b8a26ce4861159520e95453aaf9a41
 235,src/mvdm-host/wow32/wgdi.h,0,0,0,0,0,s7-p21-original-declaration-restored,,14bed9c13085e4165a1912c69f0942da5637489fc536cc415f3883366ad034d6
 236,src/mvdm-host/wow32/wgdi31.c,1,3,1,1,0,s7-p21-reviewed,T483-R1425;T483-R1426,b641b59025211900d4b01ce610879983f3bf5e88c1b92b100c41028c0d5386b5
 237,src/mvdm-host/wow32/wgpal.c,1,1,1,0,0,s7-p20-reviewed,T483-R1428;T483-R1429,1c29cff4af4ec8565f9d2e1931a1596dccd21c1b8285563b9c3d203d617c1cb1

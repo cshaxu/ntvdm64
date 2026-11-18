@@ -1,0 +1,55 @@
+{
+  "packet": "T483 S8 P79",
+  "position": 123,
+  "path": "src/mvdm-host/wow32/wgdi.c",
+  "review_ids": [
+    "T483-R1424"
+  ],
+  "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+  "current_sha256": "cf9f03650cce420116b6bf87f1a9c95f21b8a26ce4861159520e95453aaf9a41",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "source_changed": false,
+  "paired_error_bodies": 4,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        711,
+        709,
+        "#endif"
+      ],
+      [
+        2052,
+        2044,
+        "#endif"
+      ],
+      [
+        4002,
+        3990,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 123,
+    "remaining": 108,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "decision": "R1424: retain one release at the failed loader return. No ownership transfer occurs after the parameter copy. Switching to a common label would modify both return and cleanup sites. Moving allocation after DLL loading would extend a guest flat-pointer lifetime across that boundary.",
+  "verification": {
+    "control": "Ran the loader-failure fixture with current prefixes and again with just WG32GetEnvironment from pinned OpenNT. Current: 72 checks, 0 failures. Original: 72 checks, 3 failures, all on copied-parameter release. Both retained the zero return.",
+    "scope": "Exact production prefixes and bounded allocation/loader doubles, not a real printer job."
+  }
+}

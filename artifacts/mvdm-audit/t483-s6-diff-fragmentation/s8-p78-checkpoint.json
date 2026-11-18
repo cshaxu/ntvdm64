@@ -1,0 +1,48 @@
+{
+  "packet": "T483 S8 P78",
+  "position": 122,
+  "path": "src/mvdm-host/wow32/wdos.c",
+  "review_ids": [
+    "T483-R1422"
+  ],
+  "original_sha256": "e87b5cb3825ed937266c3badd287efd03cec3af0c26acb32ccc86d71fa47f314",
+  "current_sha256": "a0bc00db06a8d45b56798d7263e6827f95ead9b5e0add8ef44d134aced88b793",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        770,
+        742,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 122,
+    "remaining": 109,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "decision": "R1422: retain the shared __cdecl declaration. An explicit __cdecl local redeclaration would duplicate the ABI at the same diff size. Both drive error callers use the worker entry.",
+  "verification": {
+    "method": "Read actual current WOW and worker object symbols using dumpbin. Recompiled byte-identical pinned wdos.c in an isolated directory with product WOW flags and current headers, then inspected its undefined symbol.",
+    "current_WOW_reference": "_demClientErrorEx",
+    "original_WOW_reference": "_demClientErrorEx@12",
+    "worker_definition": "_demClientErrorEx",
+    "scope": "Object ABI comparison; no new runtime claim."
+  }
+}

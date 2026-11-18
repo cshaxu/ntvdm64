@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P77",
+  "position": 121,
+  "path": "src/mvdm-host/wow32/wdib.c",
+  "review_ids": [
+    "T483-R1420"
+  ],
+  "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+  "current_sha256": "aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 121,
+    "remaining": 110,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "decision": "R1420: retain the one-line DeleteObject substitution pending owner disposition. W32HandleDibDrv obtains hbm from CreateDIBSection. Until W32AddDibInfo accepts ownership, its local failure finalizer must release the bitmap after deleting the DC. The file and mapping remain separate CloseHandle resources.",
+  "verification": {
+    "control": "Fresh x86 runs using extracted W32HandleDibDrv finalizers with real native GDI resources. Current: 82 checks, zero failures. Pinned OpenNT: 83 checks, one failure in the GetGuiResources postcondition. Additional check count is control-flow dependent.",
+    "scope": "Native cleanup boundary test, not a complete guest session. Product unchanged."
+  }
+}
