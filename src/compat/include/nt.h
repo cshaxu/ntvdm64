@@ -318,14 +318,6 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID);
 #ifndef STATUS_VARIABLE_NOT_FOUND
 #define STATUS_VARIABLE_NOT_FOUND ((NTSTATUS)0xC0000100L)
 #endif
-#ifndef RtlMoveMemory
-#define RtlMoveMemory(Destination, Source, Length) \
-    MoveMemory((Destination), (Source), (Length))
-#endif
-#ifndef RtlZeroMemory
-#define RtlZeroMemory(Destination, Length) ZeroMemory((Destination), (Length))
-#endif
-
 #include <ntioapi.h>
 
 #endif

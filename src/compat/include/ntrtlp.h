@@ -5,8 +5,6 @@
  * established standalone declaration boundary for its finite user-mode
  * dependencies; it supplies no environment algorithm. */
 #include <nt.h>
-#include <ntrtl.h>
-#include <nturtl.h>
 
 /* `winternl.h` exposes a reduced modern PEB layout.  The original body
  * reaches only these adapter-private historical fields, so bind its source

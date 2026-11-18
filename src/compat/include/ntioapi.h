@@ -40,17 +40,13 @@ typedef struct _OPENNT_OBJECT_NAME_INFORMATION {
 } OPENNT_OBJECT_NAME_INFORMATION, *POPENNT_OBJECT_NAME_INFORMATION;
 
 typedef enum _ADAPTER_FILE_INFORMATION_CLASS {
-    AdapterFileBothDirectoryInformation = 3,
-    AdapterFileAlignmentInformation = 17
+    FileBothDirectoryInformation = 3,
+    FileAlignmentInformation = 17
 } ADAPTER_FILE_INFORMATION_CLASS;
 
 typedef enum _ADAPTER_FS_INFORMATION_CLASS {
-    AdapterFileFsDeviceInformation = 4
+    FileFsDeviceInformation = 4
 } ADAPTER_FS_INFORMATION_CLASS;
-
-#define FileBothDirectoryInformation AdapterFileBothDirectoryInformation
-#define FileAlignmentInformation AdapterFileAlignmentInformation
-#define FileFsDeviceInformation AdapterFileFsDeviceInformation
 
 /* Exact reached OpenNT ntioapi.h constants. */
 #ifndef MAXIMUM_FILENAME_LENGTH

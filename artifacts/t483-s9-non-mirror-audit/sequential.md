@@ -76,3 +76,44 @@ Through position 7: 7/40 complete, 33 remaining. Production C/header footprint 2
 
 35 to 30 lines. Keep declarations and the child-local standard-handle boundary. Replace the two argument-repeating macros with direct symbol aliases. cmdexec.c has only calls, the provider undefines both aliases before using native APIs, and the standalone test calls the explicitly named adapter. MSVC A/B compiles with the actual product worker flags selected the candidate header for cmdexec.obj and command_process_compat.obj; objdump -dr showed identical instructions and relocations. No original mirror edit. Local controls are in build/t483-s9-command.
 P7 delivery: cached x86/x64 builds passed. Both release destinations matched the 11-image package 7f373e53-fb05-4984-9e6d-5fa80d009be9. Independent command capture/launch and nested-window broker I/O passed, including parent return and direct exit 23. Completed 16/40, remaining 24. C/header lines 2298 to 2257 (-41), README separately -9.
+
+## 17 include/conapi.h
+
+204 to 204 lines. Four source-facing declarations also occur in console_client.h (CreateFileA/W, GetFileType and WriteConsoleA bindings), with one provider for each. Including conapi.h in that provider would redirect native calls back to the adapter. Including console_client.h in the mirror boundary would expose session, video protocol and graphics types. Splitting out just the prototypes would require another included header; no redundant provider or state was found.
+
+## 18 include/console_grid.h
+
+6 to 6 lines. NTCON frontend_session.c and console_frontend.c and worker-local console_client.c call the same resize function. Row preservation and cursor adjustment already have a single implementation in console_grid.c.
+
+## 19 include/console_title.h
+
+9 to 9 lines. The product Ninja generator applies the scoped title include to COMMAND. conapi.h shares the same two aliases. Folding it into conapi.h would widen COMMAND's native API redirections. Get and set use separate protocol operations, sharing the existing console client exchange.
+
+## 20 include/environapi.h
+
+13 to 8 lines. nt.h includes ntrtl.h with the local linkage decoration. Four prototypes repeat the original. The fifth, RtlQueryEnvironmentVariable_U, repeats the ABI but spells Name PUNICODE_STRING instead of the original declaration's PCUNICODE_STRING. Deleting the redundant declarations selects the original header. Keep the snapshot ingress used by mvdm_base_vdm_environment.c. P3 compared generated x86 code for the header-only alternative.
+
+## 21 include/nt.h
+
+331 to 323 lines. The pinned SDK winnt.h defines RtlMoveMemory and RtlZeroMemory; the original x86 ntrtl.h memory macros use the same memmove/memset. No intermediate production header undefines them. Remove both redundant fallbacks. W32THREAD, W32PROCESS and SECURITY_CLIENT_CONTEXT are embedded by value in userk.h. The private PEB/TEB carry fields populated in opennt_support_rtl.c; they cannot be aliased to the public host layouts.
+
+## 22 include/nt_event_declarations.h
+
+12 to 12 lines. One shared native query contract serves base_client, base_server, service_internal and nt.h. frontend_registry.c checks the returned event type at capability registration, retire/restore and worker pipe registration. No event policy or duplicate lifetime state in this header.
+
+## 23 include/ntioapi.h
+
+190 to 186 lines. Use the original source-facing names directly in the two bounded information-class enums. Three aliases and their private enumerator spellings can disappear. Keep enum types and values (3, 17, 4). The facade fixture uses the production spelling. The separate status-block shape is required because the legacy Information field is ULONG and modern native Information is pointer-sized; ntioapi_facade.c copies the fields explicitly.
+
+## 24 include/ntrtlp.h
+
+18 to 16 lines. Keep PPEB/PTEB bindings used by original environ.c/error.c. nt.h includes both ntrtl.h and nturtl.h inside the intended NTSYSAPI scope. Their second inclusion adds no surface.
+
+## 25 include/opennt_user_multipass.h
+
+4 to 4 lines. wow_user_client_view_layout.h selects the original layout, temporarily binds PTHREADINFO and re-enters user.h. The macro stack restores the caller's guard after inclusion.
+
+## 26 include/opennt_usercli_multipass.h
+
+4 to 4 lines. wow_edit_state_bindings.c re-enters only usercli.h. wow_control_extent_bindings.c re-enters both original headers. Separate guard scopes preserve both consumers without broadening the selected layout.
+P8 delivery: 26/40 complete; C/header lines 2298 to 2238 (-60), README separately -9. Both cached release builds and 11-image staging passed. Package 4afc66ae-310c-4ca0-9cda-a10fdb2a980d was hash-verified at both release destinations. x86 environment projection and guest environment fixtures and both x86/x64 NT I/O facade fixtures returned zero. The latter exercises typed function bindings, layout and an invalid-handle query; it does not exercise successful directory enumeration. Refreshed the independent fixture generator include paths.

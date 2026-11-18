@@ -20,6 +20,6 @@ int main(void)
         ADAPTER_FS_INFORMATION_CLASS) = NtQueryVolumeInformationFile;
     if (directory == 0 || volume == 0) return 1;
     result = NtQueryVolumeInformationFile(INVALID_HANDLE_VALUE, &status,
-        &device, sizeof(device), AdapterFileFsDeviceInformation);
+        &device, sizeof(device), FileFsDeviceInformation);
     return result == STATUS_NOT_IMPLEMENTED;
 }

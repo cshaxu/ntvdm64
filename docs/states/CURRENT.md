@@ -21,7 +21,7 @@ Owner closed S8 and admitted the sequential non-mirror code quality audit.
 
 ## Progress
 
-P3 screened all 40 files and compiled isolated candidates. Its [findings](../../artifacts/t483-s9-non-mirror-audit/p3.md) are leads for the file-by-file review. The sequential audit has completed 16/40 files. P5 reduced compat by 36 physical lines and published the verified 11-image package. P6 updated the historical register and reviewed four original WOW units. P7 simplified COMMAND forwarding aliases and reviewed files 8 through 16. Cumulative C/header reduction is 41 lines. Next is include/conapi.h. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
+P3 screened all 40 files and compiled isolated candidates. Its [findings](../../artifacts/t483-s9-non-mirror-audit/p3.md) are leads for the file-by-file review. The sequential audit has completed 26/40 files. P5 reduced compat by 36 physical lines and published the verified 11-image package. P6 updated the historical register and reviewed four original WOW units. P7 simplified COMMAND forwarding aliases and reviewed files 8 through 16. P8 removed duplicate RTL declarations, memory macros, I/O class aliases and includes. Cumulative C/header reduction is 60 lines. Files 17 through 19 retain distinct console header scopes and share their existing providers. Next is include/thread_start_compat.h. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
 
 ## S1 Closure Record
 
