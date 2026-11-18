@@ -35,7 +35,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 37,src/non-mvdm/windows/core/ntuser/kernel/taskman.c,15,20,16,36,0,0,38,s7-p19-reviewed,3a993b151b013a70768345c54cb10c340d871739171926bd81cf6fb4569dbcca
 38,src/mvdm-host/dpmi32/int21map.c,16,27,6,33,14,0,39,s8-p5-rechecked-residuals-pending-owner,23c9046e7c7f862a71700411b0f024c1497391b606ff8b57307856c29904f542
 39,src/mvdm-host/softpc.new/base/video/video.c,13,49,12,61,57,0,40,s8-p40-reviewed,e76cdce88dc8bad15f84afc903f265f37f78e9d0fe5e5fb846c42863235e99da
-40,src/mvdm-host/wow32/wuclip.c,16,63,27,90,1,0,41,s7-p13-reviewed,6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b
+40,src/mvdm-host/wow32/wuclip.c,16,42,23,65,1,0,41,s8-p107-reviewed,f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47
 41,src/mvdm-host/vdmredir/vrnetapi.c,15,33,18,51,64,0,43,s8-p66-reviewed,481ef3fa15499d2b9b607099ce71b4a3e581ca66e2bcfe558a868aa30f00095d
 42,src/mvdm-host/wow32/wow32.c,13,24,12,36,34,0,44,s8-p96-reviewed,fb6e8b6fbf15f2b193f9b989f69d8fa17b53c5f2d26cf590553c9f5190cc676a
 43,src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,15,23,0,23,3,0,45,s7-p20-format-restored-residual-pending,0cb29a05517e3276d751b8e83b01a50e4326dc1f4b708efacc294ffc9ab28954

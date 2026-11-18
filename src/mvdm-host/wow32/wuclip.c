@@ -36,12 +36,8 @@ MODNAME(wuclip.c);
 /* MVDM-HOST-DIV-454: public USER requires the published native HWND. */
 static BOOL WU32NativeClipboardWindow(HWND hwnd16, HWND *native)
 {
-    if (!hwnd16) {
-        *native = NULL;
-        return TRUE;
-    }
     *native = wow_user_window_public_handle(hwnd16);
-    return *native != NULL;
+    return !hwnd16 || *native != NULL;
 }
 
 #line 33
@@ -862,14 +858,9 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                     hMem32 = W32ConvertObjDescriptor((HANDLE) parg16->f2, CFOLE_ANSI_TO_UNICODE);
                 }
                 ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
-                if (!parg16->f2 || ul) {
+                if (parg16->f2 && !ul) break;
 #line 837
-                    WU32ICBStoreHandle(parg16->f1, parg16->f2);
-                }
-                else if (hMem32) {
-                    GlobalFree(hMem32);
-                }
-#line 838
+		WU32ICBStoreHandle(parg16->f1, parg16->f2);
                 break;
             }
 
@@ -899,13 +890,9 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
             }
 
             ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
-            if (!hMem16 || ul) {
-                WU32ICBStoreHandle(parg16->f1, hMem16);
-            }
-            else if (hMem32) {
-                GlobalFree(hMem32);
-            }
-#line 869
+            if (hMem16 && !ul) break;
+#line 868
+            WU32ICBStoreHandle(parg16->f1, hMem16);
             break;
 
         case CF_HDROP:
@@ -915,13 +902,9 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                 hMem32 = CopyDropFilesFrom16(hMem16);
             }
             ul = (ULONG)SetClipboardData(WORD32(parg16->f1), hMem32);
-            if (!hMem16 || ul) {
-                WU32ICBStoreHandle(parg16->f1, hMem16);
-            }
-            else if (hMem32) {
-                GlobalFree(hMem32);
-            }
-#line 879
+            if (hMem16 && !ul) break;
+#line 878
+            WU32ICBStoreHandle(parg16->f1, hMem16);
             break;
 
         case CF_DSPBITMAP:
@@ -965,22 +948,21 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
 
             ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
 
-            if (!hMem16 || ul) {
-                WU32ICBStoreHandle(parg16->f1, hMem16);
-            }
-            else {
-                if (hMF32) {
-                    DeleteMetaFile(hMF32);
-                }
-                if (hMem32) {
-                    GlobalFree(hMem32);
-                }
-            }
-#line 923
+            if (hMem16 && !ul) break;
+#line 922
+            WU32ICBStoreHandle(parg16->f1, hMem16);
             break;
 
     }
 
+    if (!ul) {
+        if (hMF32) {
+            DeleteMetaFile(hMF32);
+        }
+        if (hMem32) {
+            GlobalFree(hMem32);
+        }
+    }
     if (parg16->f2 && ul) {
 #line 928
         ul = parg16->f2;

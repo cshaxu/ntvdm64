@@ -1,0 +1,81 @@
+{
+  "packet": "T483 S8 P107",
+  "position": 151,
+  "path": "src/mvdm-host/wow32/wuclip.c",
+  "review_ids": [
+    "T483-R1825",
+    "T483-R1827",
+    "T483-R1828",
+    "T483-R1830",
+    "T483-R1831",
+    "T483-R1832",
+    "T483-R1833",
+    "T483-R1834",
+    "T483-R1835",
+    "T483-R1836",
+    "T483-R1837",
+    "T483-R1838",
+    "T483-R1839",
+    "T483-R1840",
+    "T483-R1843"
+  ],
+  "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+  "current_sha256": "f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47",
+  "before": {
+    "blocks": 16,
+    "added": 63,
+    "deleted": 27
+  },
+  "after": {
+    "blocks": 16,
+    "added": 42,
+    "deleted": 23
+  },
+  "source_changed": true,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 151,
+    "remaining": 80,
+    "files": 231,
+    "points": 1908,
+    "lines": 26946,
+    "pending": 1534
+  },
+  "verification": {
+    "package": "e75ab0be-9a76-4072-b95d-f3196873c7db",
+    "images": 11,
+    "source": "f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47",
+    "guest_reports": [
+      {
+        "run": "previous-package-transfer",
+        "bytes": 84,
+        "phase": 1,
+        "errors": 1,
+        "sha256": "6A0D40AE03CEFBB04D86D161F11686EC3793DA081B8B3F978E5F7C63B157FB0B"
+      },
+      {
+        "run": "transfer",
+        "bytes": 84,
+        "phase": 1,
+        "errors": 1,
+        "sha256": "6A0D40AE03CEFBB04D86D161F11686EC3793DA081B8B3F978E5F7C63B157FB0B"
+      },
+      {
+        "run": "trace-transfer",
+        "bytes": 84,
+        "phase": 102,
+        "errors": 1,
+        "sha256": "969E73599E647C6DFE6BD71BC0C6A8530F3A0AFCB63147D84DD733AE4B48FFD7"
+      }
+    ],
+    "epoch": "clipboard-open assertions=56 failures=0 clears=6",
+    "ownership": "cases=24 strict=1 failures=0",
+    "complete": false
+  },
+  "deferred_gate": "Owner authorized proceeding to the next file. The Win16 shared clipboard transfer remains open. P106 and P107 generated identical failing reports; the diagnostic stopped at Win16 OpenClipboard(owner). Native OpenClipboard returned error 5. Rerun the unmodified shared transfer test on a working clipboard before claiming end-to-end coverage.",
+  "decision": "Reused the native window resolver NULL contract. Preserve original format conversions and cache calls, skip storing a rejected nonzero guest handle and free only the untransferred native copies at the shared switch exit. Delayed rendering retains original zero-handle cache replacement. Keep the remaining public USER HWND translation, clipboard generation and original OLE descriptor conversion binding pending."
+}
