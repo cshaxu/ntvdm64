@@ -1,0 +1,96 @@
+{
+  "packet": "T483 S8 P71",
+  "position": 115,
+  "path": "src/mvdm-host/wow32/walias.h",
+  "review_ids": [
+    "T483-R1312",
+    "T483-R1313",
+    "T483-R1314",
+    "T483-R1321",
+    "T483-R1322",
+    "T483-R1323"
+  ],
+  "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+  "current_sha256": "7ba414a62b4bd47e1d3ad158cbfc59aeff297ef9a9def19c4024b5313305bf1b",
+  "before": {
+    "blocks": 6,
+    "added": 11,
+    "deleted": 4
+  },
+  "after": {
+    "blocks": 6,
+    "added": 10,
+    "deleted": 4
+  },
+  "source_changed": true,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        22,
+        23,
+        "/* WOW class/handle type identifiers (see WARNING below)"
+      ],
+      [
+        23,
+        24,
+        " */"
+      ],
+      [
+        124,
+        110,
+        "#else"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 115,
+    "remaining": 116,
+    "files": 231,
+    "points": 1931,
+    "lines": 27024,
+    "pending": 1543
+  },
+  "decisions": {
+    "R1312/R1313": "Original hConvert16to32 reads ENTRYWOW.FullUnique through gpGdiHandleInfo. P136 real bitmap returned NULL from GdiQueryTable. Both directions must use the same alias table and its declared calling convention.",
+    "R1314/R1321": "Original empty release macros leave worker aliases mapping retired native handles. Wreldc handles cached DC release, WG32DeleteObject/DeleteDC retire after successful native deletion. GDI alias fixture verifies invalidated handles and reuse.",
+    "R1322": "Keep separate COPYDATA header/data ownership across nested callbacks. Text and DDE initiate use mutually exclusive messages and each previously read/wrote only its first DWORD. Unified those fields; discarded the two unused members. Other union arms dominate size.",
+    "R1323": "Conversion failure needs a separate success bit because a successful thread message can target HWND 0. Failed asynchronous post must roll back the conversion and packed parameter belonging to this call."
+  },
+  "coupled_caller_metrics": [
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "before": {
+        "blocks": 37,
+        "added": 111,
+        "deleted": 35
+      },
+      "after": {
+        "blocks": 37,
+        "added": 111,
+        "deleted": 35
+      },
+      "current_sha256": "635e2eeb1e40f3cd225ff0361a1a1eade42b2a2c938b364dd434e2d6ff223652"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "before": {
+        "blocks": 5,
+        "added": 11,
+        "deleted": 9
+      },
+      "after": {
+        "blocks": 5,
+        "added": 11,
+        "deleted": 9
+      },
+      "current_sha256": "e239a19bb680fbbaee05c01361a1ad23097f42ab04435b4d182d4dc9f2137337"
+    }
+  ],
+  "verification": {
+    "build": "cached full x86/x64 exit 0",
+    "publish": "a41892be-8495-4bb0-8c39-aa037dd59435, 11 verified at both destinations",
+    "scope": "GDI alias runtime and exact-body construction transaction, COPYDATA lifetime and DDE conversion targeted fixtures passed. No full suite or guest UI claim."
+  }
+}

@@ -25,7 +25,7 @@ typedef struct _MSGPARAMEX {
     VOID (FASTCALL *lpfnUnThunk16)(struct _MSGPARAMEX *);
     PWW pww; int iMsgThunkClass,iClass;
     union { struct { DWORD header,data,flags; } copydata;
-        struct {DWORD flags,native;} text; } MsgBuffer[1];
+        DWORD ownershipFlags; } MsgBuffer[1];
     BOOL fThunkSucceeded;
 } MSGPARAMEX,*LPMSGPARAMEX;
 typedef struct { DWORD dwData,cbData,lpData; } COPYDATASTRUCT16,*PCOPYDATASTRUCT16;

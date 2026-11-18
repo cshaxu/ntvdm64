@@ -242,7 +242,7 @@ static BOOL dialog_native_fault,dialog_convert_reject;
 BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX);
 VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX);
 static BOOL FASTCALL fixture_dialog_convert(LPMSGPARAMEX p){
- if(dialog_convert_reject){p->MsgBuffer->text.flags=0;return FALSE;}
+ if(dialog_convert_reject){p->MsgBuffer->ownershipFlags=0;return FALSE;}
  return ThunkWMMsg16(p);
 }
 static BOOL (FASTCALL *apfnThunkMsg16[])(LPMSGPARAMEX)={fixture_dialog_convert,fixture_dialog_convert};

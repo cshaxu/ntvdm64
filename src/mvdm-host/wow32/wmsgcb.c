@@ -102,12 +102,12 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
             case CB_DIR:
 #line 137
                 GETPSZPTR(lpmpex->Parm16.WndProc.lParam, (LPSZ)lpmpex->lParam);
-                if (lpmpex->lParam) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;
+                if (lpmpex->lParam) lpmpex->MsgBuffer->ownershipFlags = WOW_TEXT_ACTIVE;
 
 #line 139
                 if (W32CheckThunkParamFlag()) {
                     if (AddParamMap(lpmpex->lParam, lpmpex->Parm16.WndProc.lParam))
-                        lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;
+                        lpmpex->MsgBuffer->ownershipFlags |= WOW_TEXT_MAPPED;
 #line 141
                 }
                 break;
@@ -124,8 +124,8 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
 VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX lpmpex)
 {
     if (lpmpex->Parm16.WndProc.wMsg == OLDCB_DIR) {
-        DWORD owned = lpmpex->MsgBuffer->text.flags;
-        lpmpex->MsgBuffer->text.flags = 0;
+        DWORD owned = lpmpex->MsgBuffer->ownershipFlags;
+        lpmpex->MsgBuffer->ownershipFlags = 0;
         if (owned & WOW_TEXT_MAPPED)
             DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, NULL);
         return;

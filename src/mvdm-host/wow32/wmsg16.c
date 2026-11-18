@@ -187,11 +187,11 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
 #line 220
             GETPSZPTR(lParam, (LPSZ)lParamMap);
-            if (lParamMap) lpmpex->MsgBuffer->text.flags = WOW_TEXT_ACTIVE;
+            if (lParamMap) lpmpex->MsgBuffer->ownershipFlags = WOW_TEXT_ACTIVE;
 #line 221
             *plParamNew = (LONG)AddParamMap(lParamMap, lParam);
             if (*plParamNew)
-                lpmpex->MsgBuffer->text.flags |= WOW_TEXT_MAPPED;
+                lpmpex->MsgBuffer->ownershipFlags |= WOW_TEXT_MAPPED;
             else
                 *plParamNew = lParamMap;
 #line 222
@@ -697,7 +697,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
     case WM_DDE_INITIATE:
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
-        lpmpex->MsgBuffer->ddeinit.active =
+        lpmpex->MsgBuffer->ownershipFlags =
             WI32DDEAddInitiator((HAND16) wParam) ? WOW_DDE_INITIATE_ACTIVE : 0;
 #line 721
         break;
@@ -1252,9 +1252,9 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
     case WM_WININICHANGE:   // 01Ah, <SLPre,       LS>
     case WM_DEVMODECHANGE:  // 01Bh, <SLPre,       LS>
         {
-            DWORD owned = lpmpex->MsgBuffer->text.flags;
+            DWORD owned = lpmpex->MsgBuffer->ownershipFlags;
             BOOL fFreePtr = TRUE;
-            lpmpex->MsgBuffer->text.flags = 0;
+            lpmpex->MsgBuffer->ownershipFlags = 0;
             if (owned & WOW_TEXT_MAPPED)
                 DeleteParamMap(lpmpex->Parm16.WndProc.lParam, PARAM_16, &fFreePtr);
 #line 1172
@@ -1387,7 +1387,7 @@ VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex)
         break;
 
     case WM_DDE_INITIATE:
-        if (lpmpex->MsgBuffer->ddeinit.active & WOW_DDE_INITIATE_ACTIVE) {
+        if (lpmpex->MsgBuffer->ownershipFlags & WOW_DDE_INITIATE_ACTIVE) {
 #line 1301
             WI32DDEDeleteInitiator((HAND16) lpmpex->Parm16.WndProc.wParam);
         }

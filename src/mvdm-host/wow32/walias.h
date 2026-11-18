@@ -333,8 +333,7 @@ typedef union _MSGTHUNKBUFFER {
                                         sizeof(WINDOWPOS)];
     THUNKTEXTDWORD     thkdword;                            // LB_GETTEXT w/no HASSTRINGS
     struct { DWORD header, data, flags; } copydata;
-    struct { DWORD flags, native; } text;
-    struct { DWORD active, initiator; } ddeinit;
+    DWORD ownershipFlags;
 #line 343
 } MSGTHUNKBUFFER, *LPMSGTHUNKBUFFER;
 

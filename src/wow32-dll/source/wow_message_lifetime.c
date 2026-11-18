@@ -119,7 +119,7 @@ void WINAPI wow_message_unwind16(LPMSGPARAMEX message)
                message->Parm16.WndProc.wMsg == WM_DEVMODECHANGE)) ||
              (message->lpfnUnThunk16 == UnThunkCBMsg16 &&
               message->Parm16.WndProc.wMsg == OLDCB_DIR)) &&
-            (message->MsgBuffer->text.flags & WOW_TEXT_ACTIVE))
+            (message->MsgBuffer->ownershipFlags & WOW_TEXT_ACTIVE))
         message->lpfnUnThunk16(message);
     SetLastError(error);
 }
