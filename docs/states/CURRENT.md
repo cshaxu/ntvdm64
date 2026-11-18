@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P103 completed review through `wsext.c`. Next is position 148, `wspool.c`.
+S8 P105 completed review through `wstruc.c`. Next is position 150, `wuclass.c`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P103 completed review through `wsext.c`. Next is position 148, `wspool.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P103, 147 of 231 positions are covered and 84 remain queued.
+IDs. After S8 P105, 149 of 231 positions are covered and 82 remain queued.
 S8 has removed 66 points and 233 diff lines, leaving 1,908 points and 26,977 lines. The live pending backlog has 1,534 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
@@ -139,6 +139,8 @@ S8 has removed 66 points and 233 diff lines, leaving 1,908 points and 26,977 lin
 [P101 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p101-checkpoint.json).
 [P102 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p102-checkpoint.json).
 [P103 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p103-checkpoint.json).
+[P104 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p104-checkpoint.json).
+[P105 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p105-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

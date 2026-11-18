@@ -132,8 +132,8 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 142,src/mvdm-host/wow32/winsockp.h,3,17,0,17,0,0,143,s8-p83-reviewed,14bfe1a54324736958561935ac88df621b330f2b362b2aa31bfdf8e30b06f2d2
 143,src/mvdm-host/wow32/wmsglb.c,3,3,1,4,1,0,144,s8-p94-reviewed,568a6e3c253f84e4bb7904c90846585d1ad8dbc66135b9dbda37fd986551a694
 144,src/mvdm-host/wow32/wparam.c,3,12,1,13,8,0,145,s8-p101-reviewed,29575fcdc512fb86741fbcbf2eb06525085213e976bcf1f2afd51630049fd5b2
-145,src/mvdm-host/wow32/wspool.c,3,5,1,6,0,0,146,s7-p21-reviewed,8b3af16397353e6adb69bd11d1303a72143e1c001810d2812279399cb755b75b
-146,src/mvdm-host/wow32/wstruc.c,3,3,2,5,5,0,147,s7-p19-reviewed,4a7300940a0da14ead319b6b8ce2451b21932a2dfd6fcc9390e6f5d6b98dd0bd
+145,src/mvdm-host/wow32/wspool.c,3,5,1,6,0,0,146,s8-p104-reviewed,8b3af16397353e6adb69bd11d1303a72143e1c001810d2812279399cb755b75b
+146,src/mvdm-host/wow32/wstruc.c,3,3,2,5,5,0,147,s8-p105-reviewed,4a7300940a0da14ead319b6b8ce2451b21932a2dfd6fcc9390e6f5d6b98dd0bd
 147,src/mvdm-host/wow32/wuser.c,3,10,2,12,4,0,148,s7-p7-reviewed-residual-pending,62f14787286d88e26433b04700256adaf43d80ec2662a5751ed97ab822cf93fc
 148,src/mvdm-host/wow32/wuser31.c,3,3,2,5,4,0,149,s7-p22-reviewed,3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d
 149,src/non-mvdm/public/sdk/inc/nturtl.h,3,0,29,29,0,0,150,s7-p15-reviewed,b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f

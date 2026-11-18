@@ -1,0 +1,42 @@
+{
+  "packet": "T483 S8 P104",
+  "position": 148,
+  "path": "src/mvdm-host/wow32/wspool.c",
+  "review_ids": [
+    "T483-R1802",
+    "T483-R1803",
+    "T483-R1809"
+  ],
+  "original_sha256": "c76bec31ae9020ea0173c20d42986f36e6888a315a5d27e91e5cbf2579cb2ad8",
+  "current_sha256": "8b3af16397353e6adb69bd11d1303a72143e1c001810d2812279399cb755b75b",
+  "before": {
+    "blocks": 3,
+    "added": 5,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 3,
+    "added": 5,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 148,
+    "remaining": 83,
+    "files": 231,
+    "points": 1908,
+    "lines": 26977,
+    "pending": 1534
+  },
+  "verification": {
+    "scope": "Exact OpenNT and product bodies with the same controlled printer and Win16 allocation services. No physical printer involved.",
+    "original": "FAIL failed start retires native handle\r\nFAIL allocation failure closes native printer\r\nFAIL failed carrier lock has defined null result\r\nWOW_SPOOL_FAILURE checks=70 failures=3",
+    "selected": "WOW_SPOOL_FAILURE checks=72 failures=0"
+  },
+  "decision": "R1802 closes the native printer if the document starts but no Win16 handle is allocated. R1803 closes the opened printer if the document fails to start, after capturing the error. WG32OpenJob returns both handles and nonzero errors in ul, so ul cannot drive one shared failure cleanup. R1809 initializes the native handle on failure to lock a caller-supplied Win16 handle. All three residuals remain pending for owner decision."
+}

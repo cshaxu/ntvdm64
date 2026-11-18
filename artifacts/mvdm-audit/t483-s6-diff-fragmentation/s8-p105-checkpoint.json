@@ -1,0 +1,62 @@
+{
+  "packet": "T483 S8 P105",
+  "position": 149,
+  "path": "src/mvdm-host/wow32/wstruc.c",
+  "review_ids": [
+    "T483-R1811",
+    "T483-R1812",
+    "T483-R1813"
+  ],
+  "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+  "current_sha256": "4a7300940a0da14ead319b6b8ce2451b21932a2dfd6fcc9390e6f5d6b98dd0bd",
+  "before": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 5,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        359,
+        304,
+        "#endif"
+      ],
+      [
+        433,
+        431,
+        "#endif"
+      ],
+      [
+        742,
+        736,
+        "#endif"
+      ],
+      [
+        966,
+        957,
+        "#else"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 149,
+    "remaining": 82,
+    "files": 231,
+    "points": 1908,
+    "lines": 26977,
+    "pending": 1534
+  },
+  "verification": {
+    "source": "wstruc.c getmsg16; wumsg.c CallMsgFilter and DispatchMessage; wmsg16.c COPYDATA and DDE ownershipFlags; wdde.c initiator insertion and first matching delete",
+    "scope": "Source and ABI reasoning. No new guest run or production change. Four coordinate differences are preprocessor delimiters at original lines 359, 433, 742 and 966 after excluded bodies; following selected lines resume at 360, 434, 743 and 967."
+  },
+  "decision": "R1811 routes WM_COPYDATA through existing conversion for its segmented operand and sender. R1812 uses existing UnThunkWMMsg16 so a failed inner WI32DDEAddInitiator cannot retire an outer same-window record. R1813 marks scalar/timer conversions successful, including valid null HWND messages; both consumers read fThunkSucceeded before dispatch/filter. Retain all three pending points; moving them to consumers would duplicate conversion and ownership logic."
+}
