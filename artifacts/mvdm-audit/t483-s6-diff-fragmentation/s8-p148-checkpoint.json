@@ -1,0 +1,42 @@
+{
+  "packet": "T483 S8 P148",
+  "position": 191,
+  "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+  "review_ids": [
+    "T483-R2305",
+    "T483-R2306",
+    "T483-R2307",
+    "T483-R2308",
+    "T483-R2310"
+  ],
+  "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+  "current_sha256": "e59074c1e33943f5827af85d4c0fcaafd07e70fcc33bc9b2ff2c47e79f28f795",
+  "before": {
+    "blocks": 5,
+    "added": 11,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 5,
+    "added": 11,
+    "deleted": 1
+  },
+  "source_changed": true,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 191,
+    "remaining": 40,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Compared exact non-marker line coordinates, pinned original, historical linked controls and final filtered metrics. No behavior change or runtime rerun."
+  },
+  "decision": "Removed five redundant unconditional #line directives, retaining identical logical coordinates for all non-marker lines. R2305-08: a focus callback may retire the button and free its private allocation before BST_DONTCLICK restoration. Existing scope with finally defers release. The linked original navigation control shows a detached child cannot terminate the rescan after the loop reaches the dialog root. R2310: 513 disabled controls can exhaust the 512 iteration bound without cycling to the first match. Negative control dropping the final return fails; return NULL is required. Keep the five residuals pending."
+}

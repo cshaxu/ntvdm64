@@ -137,11 +137,9 @@ PWND xxxGNM_FindNextMnem(
         ThreadLock(pwndStart, &tlpwndStart);
 
         dwDlgCode = (DWORD)SendMessage(HWq(pwndT), WM_GETDLGCODE, 0, 0L);
-#line 138
         if (!(dwDlgCode & DLGC_WANTCHARS) &&
                 (!(dwDlgCode & DLGC_STATIC) || !(pwndT->style & SS_NOPREFIX))) {
             GetWindowText(HWq(pwndT), rgchText, sizeof(rgchText)/sizeof(WCHAR));
-#line 141
             if (FindMnemChar(rgchText, ch, FALSE, TRUE) != 0) {
                 ThreadUnlock(&tlpwndStart);
                 return pwndT;
@@ -169,11 +167,9 @@ PWND xxxGNM_FindNextMnem(
          * and control isn't a static control with SS_NOPREFIX
          */
         dwDlgCode = (DWORD)SendMessage(HW(pwnd), WM_GETDLGCODE, 0, 0L);
-#line 168
         if (!(dwDlgCode & DLGC_WANTCHARS) &&
                 (!(dwDlgCode & DLGC_STATIC) || !(pwnd->style & SS_NOPREFIX))) {
             GetWindowText(HW(pwnd), rgchText, sizeof(rgchText)/sizeof(WCHAR));
-#line 171
             if (FindMnemChar(rgchText, ch, FALSE, TRUE) != 0)
                 break;
         }
@@ -304,7 +300,6 @@ PWND xxxGotoNextMnem(
                     /*
                      * Send the WM_COMMAND message.
                      */
-#line 296
                     pwndT = REBASEPWND(pwnd, spwndParent);
                     SendMessage(HW(pwndT), WM_COMMAND,
                             MAKELONG(pwnd->spmenu, BN_CLICKED), (LONG)hwnd);

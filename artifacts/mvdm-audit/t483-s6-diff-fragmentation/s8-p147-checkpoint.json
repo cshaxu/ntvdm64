@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P147",
+  "position": 190,
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+  "review_ids": [
+    "T483-R2294"
+  ],
+  "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
+  "current_sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+  "before": {
+    "blocks": 2,
+    "added": 0,
+    "deleted": 75
+  },
+  "after": {
+    "blocks": 2,
+    "added": 0,
+    "deleted": 75
+  },
+  "source_changed": false,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 190,
+    "remaining": 41,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "decision": "R2294: original 299-335 and 389-426 are complete public HWND wrappers. Both underscored WND navigation algorithms remain original. The Win16 public calls reach wow_native_GetNextDlgTabItem/GroupItem, whose discovery wrappers call USER32 and publish native HWND identity. Reintroducing same names collides with those mapped providers; the original group entry also lacks the WINAPI convention of the x86 binding. No independent helper in either removed block. Keep public discovery boundary pending owner.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  }
+}
