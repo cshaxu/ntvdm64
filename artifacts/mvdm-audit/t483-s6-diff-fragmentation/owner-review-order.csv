@@ -8,7 +8,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 7,src/non-mvdm/windows/core/ntuser/inc/user.h,45,93,17,110,24,0,8,reviewed-delivered-p4-residuals-pending-owner,0c09ef59ed8b07ed5db86093c095f7bcf66d383d440462cfbffa175ceb1a4e4c
 8,src/mvdm-host/softpc.new/host/src/nt_event.c,37,76,39,115,12,0,9,s8-p48-reviewed,e4a9c4de74fb9c0df79a879b0ff4c97d3aa995495304c5c6bff3ce03927fbf7a
 9,src/mvdm-host/wow32/wowhooks.c,38,91,21,112,2,0,11,s8-p99-reviewed,5cecffbb0af6734cd797c4b8dc849a0fc4d923030964c10e25fe1f7fb999a6b1
-10,src/non-mvdm/public/sdk/inc/ntpsapi.h,38,1,309,310,5,0,12,reviewed-delivered-p5-residuals-pending-owner,30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2
+10,src/non-mvdm/public/sdk/inc/ntpsapi.h,38,1,309,310,5,0,12,s8-p133-reviewed,30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2
 11,src/mvdm-host/wow32/wmsg16.c,37,109,35,144,3,0,13,s8-p91-reviewed,d2dac6782daed3b11a90fddaaf73f992b5d3179be076228351016c440921ac68
 12,src/mvdm-host/softpc.new/base/ccpu386/c_main.c,36,112,30,142,75,0,14,s8-p13-reduced-residuals-pending-owner,4b2639592dea1d4ef6abf0fe3d0bb85e46f9d8294e8df822e589cb5d1d94312c
 13,src/non-mvdm/windows/core/ntuser/client/ntstubs.c,35,25,1778,1803,16,0,15,reviewed-delivered-p8-residuals-pending-owner,aa0d284cd631c81071c1714ed7884421daaea540e75df0a8731cb67061636de8
@@ -97,7 +97,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 102,src/mvdm-host/wow32/wkfileio.c,5,6,4,10,3,0,103,s8-p85-reviewed,e8a9a5246447394670edb7427068c4567e5532885049e10207be60b901b8513a
 103,src/mvdm-host/wow32/wmsgcb.c,5,11,9,20,1,0,104,s8-p92-reviewed,e239a19bb680fbbaee05c01361a1ad23097f42ab04435b4d182d4dc9f2137337
 104,src/mvdm-host/xms.486/xmsblock.c,5,17,12,29,1,0,105,s8-p116-reviewed,b36334e5f935a1e9face8676b35d3752fa5658d5cc6392a0b61958b601af97ee
-105,src/non-mvdm/public/sdk/inc/ntregapi.h,5,0,12,12,2,0,107,s7-p12-reviewed,815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b
+105,src/non-mvdm/public/sdk/inc/ntregapi.h,5,0,12,12,2,0,107,s8-p134-reviewed,815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b
 106,src/non-mvdm/windows/core/ntuser/client/dmmnem.c,5,11,1,12,3,0,108,s7-p19-reviewed,eeb614f1b459ac7bfef46ce89d4a13232f5b82b6e029e1b6964b0064095be3ed
 107,src/non-mvdm/windows/core/ntuser/client/drawtext.c,5,0,137,137,0,0,109,s7-p11-reviewed,507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1
 108,src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,5,14,480,494,1,0,111,s7-p3-reviewed-residual-pending,61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629

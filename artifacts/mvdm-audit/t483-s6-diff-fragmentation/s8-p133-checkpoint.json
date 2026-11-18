@@ -1,0 +1,40 @@
+{
+  "packet": "T483 S8 P133",
+  "position": 176,
+  "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+  "review_ids": [
+    "T483-R2051",
+    "T483-R2053",
+    "T483-R2056"
+  ],
+  "original_sha256": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+  "current_sha256": "30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2",
+  "before": {
+    "blocks": 38,
+    "added": 1,
+    "deleted": 309
+  },
+  "after": {
+    "blocks": 38,
+    "added": 1,
+    "deleted": 309
+  },
+  "source_changed": false,
+  "paired_error_bodies": 5,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 176,
+    "remaining": 55,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Measured current SHA and filtered hunks; checked direct logical coordinates, current NtCurrentPeb binding, P211 real-consumer SDK conflict controls, S6 callback and declaration controls and delivered P5 receipt. Audit-only; no new product build/test."
+  },
+  "decision": "Direct coordinate inventory: skipped declarations are modern SDK-owned types/fields/enums, the original NtCurrentPeb macro and three import decorations. The five excluded branches were paired separately. Restoring PEB or TEB fields independently would place members outside their defining types. Original callback pointer without NTAPI conflicts on x86. RtlProcessHeap consumes the private NtCurrentPeb provider; the native TEB macro changes its owner. Original query/set signatures remain intact apart from import attributes; checked historical C/C++ controls on both architectures. No whole original declaration left to restore independently in this header."
+}

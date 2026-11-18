@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P134",
+  "position": 177,
+  "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+  "review_ids": [
+    "T483-R2057",
+    "T483-R2058"
+  ],
+  "original_sha256": "0fb164317335d8b48c51122182922259c902c7f60afb28111bafa9fb75735a6a",
+  "current_sha256": "815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b",
+  "before": {
+    "blocks": 5,
+    "added": 0,
+    "deleted": 12
+  },
+  "after": {
+    "blocks": 5,
+    "added": 0,
+    "deleted": 12
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 177,
+    "remaining": 54,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "Two complete type omissions match the actual SDK definitions of KEY_SET_INFORMATION_CLASS and KEY_VALUE_ENTRY. Three Nt function signatures remain at the original positions without NTSYSCALLAPI. Real WOW profile consumer controls fail C2011 and C2375 upon direct restoration, compile with those omissions, and use the SDK types. Retain the five residual hunks; no second prototype, typedef or selector required."
+}
