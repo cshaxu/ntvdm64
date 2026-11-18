@@ -1,0 +1,41 @@
+{
+  "packet": "T483 S8 P44",
+  "position": 88,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+  "review_ids": [
+    "T483-R1015",
+    "T483-R1016",
+    "T483-R1017",
+    "T483-R1018",
+    "T483-R1019",
+    "T483-R1020"
+  ],
+  "current_sha256": "036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b",
+  "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+  "before": {
+    "blocks": 6,
+    "added": 13,
+    "deleted": 33
+  },
+  "after": {
+    "blocks": 6,
+    "added": 13,
+    "deleted": 33
+  },
+  "source_changed": false,
+  "decision": "Retain corrections pending owner. Linear source copy and a fixed 80-column destination fail on the selected plane representation. Source cells have stride 8 and output stride depends on visible buffer width. Restoring the original outer gather-loop spelling created 7 or 8 blocks vs 6; neither candidate installed. Preserve existing exclusion and line anchors.",
+  "verification": {
+    "text": "GCC -O2 compiled current and original nt_text bodies in controlled buffers using archived boundary fixtures. Cross 3 source widths, 3 destination widths, 2 pitches, 3 x and 3 y offsets, 2 heights. Checked requested cells; no host-console or clipping acceptance claimed.",
+    "current": "text-gather cases=324 mismatched-cells=0",
+    "original": "text-gather cases=324 mismatched-cells=2394",
+    "graphics": "Arithmetic check of source-selected pointer base and alternating steps: 64 starting guest bytes x 80 steps, compared to 4*(a & ~1)+(a & 1). 0 mismatches current, 5117 original. No new live graphics test."
+  },
+  "coverage": {
+    "complete": 88,
+    "remaining": 143,
+    "files": 231,
+    "points": 1945,
+    "lines": 27083,
+    "pending": 1549
+  }
+}

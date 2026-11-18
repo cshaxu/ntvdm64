@@ -77,6 +77,15 @@ int main(void)
     /* Mode selection alone must not consume the previous completed paint. */
     changing=1;mode_change_now=1;presentation_updated=TRUE;
     nt_graphics_tick();CHECK(!changing && presentation_updated && frames==5);
+    /* CGA/MDA use the alternate tick path. A pending text notification
+     * survives the first tick and is published once on the flush tick. */
+    video_adapter=0;flush_count=0;paints=frames=0;
+    nt_graphics_tick();
+    CHECK(!paints && !frames && presentation_updated && flush_count==1);
+    nt_graphics_tick();
+    CHECK(paints==1 && frames==1 && !presentation_updated && !flush_count);
+    nt_graphics_tick();
+    CHECK(paints==1 && frames==1 && flush_count==1);
     /* Fullscreen graphics must execute original repaint/gates, not merely
      * notify a publisher holding the previous DIB. Text retains its helper. */
     for(case_index=0;case_index<6;++case_index){

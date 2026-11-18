@@ -1,0 +1,54 @@
+{
+  "packet": "T483 S8 P46",
+  "position": 90,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+  "review_ids": [
+    "T483-R1040",
+    "T483-R1041",
+    "T483-R1042",
+    "T483-R1043",
+    "T483-R1044",
+    "T483-R1045",
+    "T483-R1046"
+  ],
+  "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+  "current_sha256": "6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7",
+  "before": {
+    "blocks": 7,
+    "added": 51,
+    "deleted": 8
+  },
+  "after": {
+    "blocks": 7,
+    "added": 51,
+    "deleted": 8
+  },
+  "source_changed": false,
+  "decision": {
+    "R1040": "Declarations match the two providers actually called.",
+    "R1041": "Ordinary contiguous RAM retains the original macros. For a span intersecting a mapping, the first translated byte does not describe the backing for the rest of the span. Aliased writes retain SAS overwrite notification.",
+    "R1042-R1044": "Production copy_exchange_data cases 0,1,2 propagate the host copy result. Original memmove failed on reversed adjacent pages. Guest lease reads and writes can fail. A direct-return spelling for all three measures seven blocks +48/-14 instead of +51/-8; increases total changed lines by three.",
+    "R1045-R1046": "Cases 4,5,6 require success of each ordered stage. On failure release the temp allocation before returning. The conventional-to-expanded exchange must not execute the final EM_memcpy after a failed guest write."
+  },
+  "verification": {
+    "source": "emm_mngr.c copy_exchange_data; bios/emm_fncs.c:2071-2074 maps FAILURE to guest AH=0x81; guest_memory_copy_from/copy_to/move lease and direction handling.",
+    "historical_control": "r1040-r1046-nt-emm-review.json records controls: original five operations restored together exit 0xc0000005 at memmove, four-byte reversed adjacent page test. All-operations fixture verifies five operations and five failure returns. Controls are historical; no fresh runtime test claimed.",
+    "line_review": "Compared matched original lines with #line logical coordinates: offsets differ only for comments or inactive-arm closing directives. All matching executable lines map to original coordinates.",
+    "paired_error_bodies": 5,
+    "mask_issues": [],
+    "candidate": {
+      "blocks": 7,
+      "added": 48,
+      "deleted": 14
+    },
+    "boundary": "Four-byte reversed pages do not prove arbitrary overlapping backing aliases."
+  },
+  "coverage": {
+    "complete": 90,
+    "remaining": 141,
+    "files": 231,
+    "points": 1944,
+    "lines": 27077,
+    "pending": 1548
+  }
+}

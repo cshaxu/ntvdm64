@@ -102,13 +102,6 @@ void	host_simulate()
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
 }
 
-extern void c_cpu_unsimulate(void);
-void host_unsimulate()
-{
-    c_cpu_unsimulate();
-}
-#line 106
-
 
 /*
 	Host_set_hw_int: Cause a hardware interrupt to be generated. For

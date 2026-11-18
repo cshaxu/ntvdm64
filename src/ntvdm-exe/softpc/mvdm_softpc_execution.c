@@ -9,6 +9,14 @@ int verbose;
 /* Original SoftPC host spelling; its body remains in mvdm-host. */
 extern void host_start_cpu(void);
 extern void host_applClose(void);
+extern void c_cpu_unsimulate(void);
+
+/* BIOS BOP FE returns from the current CCPU invocation. */
+void host_unsimulate(void)
+{
+    c_cpu_unsimulate();
+}
+
 /* The bounded execution fixture starts directly at host_start_cpu(), unlike
  * the original ntvdm.c -> host_main path.  It therefore retains this original
  * close cohort after that fixture-only entry returns. */

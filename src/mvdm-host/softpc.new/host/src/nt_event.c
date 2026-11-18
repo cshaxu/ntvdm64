@@ -43,8 +43,6 @@
 #include "gmi.h"
 #include "gfx_upd.h"
 #include "nt_graph.h"
-#include "nt_ega.h"
-#line 46
 #include "nt_uis.h"
 #include <stdio.h>
 #include "trace.h"
@@ -56,20 +54,7 @@
 #include "ica.h"
 
 #include "nt_mouse.h"
-#line 59
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
-#line 57
 #include "nt_event.h"
-#include "worker-base/connection.h"
-#line 60
-#include "mvdm_softpc_event_thread.h"
-#line 62
-#include "ntvdm-exe/win32/worker_lifecycle.h"
-#line 64
-#include "mvdm_keyboard_history.h"
-mvdm_keyboard_history nt_keyboard_history;
-extern unsigned PendingKeyboardHistory(void);
-#line 58
 #include "nt_vdd.h"
 #include "nt_timer.h"
 
@@ -90,14 +75,22 @@ extern unsigned PendingKeyboardHistory(void);
 #include "nt_com.h"
 #include "nt_pif.h"
 #include "yoda.h"
-#line 80
-extern BOOL ntvdm_console_set_active(BOOL active);
-#line 82
+#include "nt_ega.h"
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
+#include "worker-base/connection.h"
+#include "mvdm_softpc_event_thread.h"
+#include "ntvdm-exe/win32/worker_lifecycle.h"
+#include "mvdm_keyboard_history.h"
+#include "ntvdm-exe/win32/console_input.h"
 #include "ntvdm-exe/win32/console_text.h"
-#line 84
 #include "mvdm_softpc_text_video.h"
-#line 86
+#include "ntvdm-exe/win32/console_client.h"
 extern void mouse_pointer_route_changed(int);
+extern BOOL nt_init_called;
+extern unsigned PendingKeyboardHistory(void);
+extern void Reset6805and8042(void);
+mvdm_keyboard_history nt_keyboard_history;
+#line 78
 /*================================================================
 External references.
 ================================================================*/
@@ -105,7 +98,6 @@ External references.
 
 // Jonle Mod
 // defined in base\keymouse\keyba.c
-#line 85
 VOID KbdResume(VOID);
 VOID RaiseAllDownKeys(VOID);
 int IsKeyDown(int Key);
@@ -134,7 +126,6 @@ IMPORT void RestoreKbdLed(void);
 static PKEY_EVENT_RECORD key_history_head, key_history_tail;
 static PKEY_EVENT_RECORD key_history;
 static key_history_count;
-#line 113
 static INPUT_RECORD first_returned_key;
 
 #line 112
@@ -158,13 +149,10 @@ void nt_process_menu(PMENU_EVENT_RECORD MenuEvent);
 void nt_process_suspend_event();
 void nt_process_screen_scale(void);
 
-#line 134
-#include "ntvdm-exe/win32/console_input.h"
 
 //
 // keyboard control state syncronization
 //
-#line 136
 KEY_EVENT_RECORD fake_shift = { TRUE, 1, VK_SHIFT, 0x2a, 0, SHIFT_PRESSED };
 KEY_EVENT_RECORD fake_caps = { TRUE, 1, VK_CAPITAL, 0x3a, 0, CAPSLOCK_ON };
 KEY_EVENT_RECORD fake_ctl = { TRUE, 1, VK_CONTROL, 0x1d, 0, 0 };
@@ -324,7 +312,6 @@ void nt_start_event_thread(void)
 
 void nt_remove_event_thread(void)
 {
-    extern BOOL nt_init_called;
     /* Must make sure that the thread has terminated */
 #line 294
     if (!VDMForWOW && ThreadInfo.EventMgr.Handle)  {
@@ -2005,7 +1992,6 @@ void cmdPushExitInConsoleBuffer (void)
 /*:::::: Calculate no. of keys to return to console input buffer :::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-extern void Reset6805and8042(void);
 #line 1910
 extern int keys_in_6805_buff(int *part_key_transferred);
 

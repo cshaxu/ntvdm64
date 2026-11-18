@@ -54,12 +54,14 @@
 #include "video.h"
 #include "ckmalloc.h"
 #include "conapi.h"
+#include "ntvdm-exe/win32/console_graphics.h"
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
+extern int DAC_data_bits;
+extern void draw_v7ptr(void);
 
 #line 56
 #include "nt_graph.h"
-#include "ntvdm-exe/win32/console_graphics.h"
 #include "nt_cga.h"
 #include "nt_ega.h"
 #include "nt_event.h"
@@ -86,9 +88,6 @@
 extern int  ega_int_enable;
 #line 79
 #endif
-
-#line 82
-extern int DAC_data_bits;
 #line 80
 
 extern byte  *video_copy;
@@ -766,11 +765,10 @@ void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
 
-#line 844
-
 #line 846
     if (sc.ScreenState == FULLSCREEN && sc.ModeType == TEXT) {
-        mvdm_softpc_text_video_flush(publish_text_update);return;
+        mvdm_softpc_text_video_flush(publish_text_update);
+        return;
     }
 
 #line 800
@@ -805,7 +803,7 @@ void nt_mark_screen_refresh(void)
 
 void nt_graphics_tick(void)
 {
-    BOOL software_update_completed = FALSE;
+
 #line 828
     if (CntrlHandlerState & CNTRL_VDMBLOCKED) return;
     if (!mvdm_softpc_text_video_sync_route())
@@ -880,9 +878,10 @@ void nt_graphics_tick(void)
 		if (CursorResizeNeeded)
 		    make_cursor_change();
 
-                software_update_completed = TRUE;
 #line 888
                 flush_count = 0;
+                publish_text_update();
+#line 889
              }
         }
     }
@@ -905,12 +904,12 @@ void nt_graphics_tick(void)
 #line 905
                     (void)(*update_alg.calc_update)();
 
-            software_update_completed = TRUE;
 #line 907
             flush_count = 0;
+            publish_text_update();
+#line 908
         }
     }
-    if (software_update_completed) publish_text_update();
 #line 910
 }
 
@@ -920,10 +919,7 @@ void nt_graphics_tick(void)
 
 void nt_start_update(void)
 {
-   /* DIVERGENCE(VIDEO7-POINTER-UPDATE): keep pointer and original body
-    * painting in one source-owned update until the matching end. */
    ntvdm_console_graphics_begin_update();
-   /* DIVERGENCE(MVDM-HOST-DIV-314): original painter began an update. */
    presentation_updated = TRUE;
 #line 918
    IDLE_video();
@@ -934,12 +930,10 @@ void nt_start_update(void)
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 void nt_end_update(void) {
-#ifdef V7VGA
-   extern void draw_v7ptr(void);
    draw_v7ptr();
-#endif
    ntvdm_console_graphics_end_update();
 }
+#line 926
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::: Scroll screen up :::::::::::::::::::::::::::::*/
@@ -1570,10 +1564,9 @@ static void check_win_size(register int height)
     else
        width = CGA_WIN_WIDTH;
 
-#ifdef V7VGA
     if (paint_screen == nt_paint_funcs->v7vga_hi_graph)
         width = get_bytes_per_line();
-#endif
+#line 1575
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Resize window */
 
 #line 1577

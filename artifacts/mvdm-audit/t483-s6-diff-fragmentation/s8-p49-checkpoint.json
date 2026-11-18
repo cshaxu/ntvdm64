@@ -1,0 +1,85 @@
+{
+  "packet": "T483 S8 P49",
+  "position": 93,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "review_ids": [
+    "T483-R1122",
+    "T483-R1123",
+    "T483-R1124",
+    "T483-R1125",
+    "T483-R1128",
+    "T483-R1129",
+    "T483-R1130",
+    "T483-R1131",
+    "T483-R1132",
+    "T483-R1133",
+    "T483-R1134",
+    "T483-R1135",
+    "T483-R1140",
+    "T483-R1141",
+    "T483-R1142",
+    "T483-R1143",
+    "T483-R1144",
+    "T483-R1145"
+  ],
+  "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+  "before_sha256": "c0b6e20da702e4fb9b02d9d008f4be57986ada35584c8f0206f78c466f36da4c",
+  "current_sha256": "029acccddfa56c2d147603beefbaf1ef26240d9436561dc191cd89c7cfa700bc",
+  "before": {
+    "blocks": 19,
+    "added": 53,
+    "deleted": 11
+  },
+  "after": {
+    "blocks": 16,
+    "added": 43,
+    "deleted": 10
+  },
+  "decisions": {
+    "T483-R1122": "Group provider declarations beside conapi.h.",
+    "T483-R1123": "Graphics API still required, now adjacent to text provider includes.",
+    "T483-R1124": "DAC_data_bits declaration grouped with provider bindings; both 6- and 8-bit hardware DAC precision remain selectable in v7_ports.c.",
+    "T483-R1129": "Keep separate statements for fullscreen text flush and return.",
+    "T483-R1130": "Removed software_update_completed automatic variable; preserve blocked/stream/mode-settle gates.",
+    "T483-R1132": "EGA/VGA branch directly publishes after flush_count reset following repaint and cursor update.",
+    "T483-R1133": "CGA/MDA branch directly publishes after flush_count reset following repaint. Alternate-path regression covers before/on/after the eligible tick.",
+    "T483-R1134": "Original function tail restored; the two eligible branch endpoints R1132/R1133 retain the copied publication obligation.",
+    "T483-R1135": "Begin/end update and overlay paint preserved. Drop adapter-only V7VGA conditional because product cc_host defines V7VGA and the table/provider are available in this graph.",
+    "T483-R1141": "Keep packed width correction; remove local added V7VGA wrapper. Original V7VGA conditionals preserved."
+  },
+  "other_residuals": "Retain copied frame/stream palette publication, blocked-worker route synchronization, sequencer chain4 packed mode selection, 8-bit DAC logic, fullscreen DIB allocation. Existing controls and producer evidence retained in point ledgers.",
+  "verification": {
+    "paired_excluded": 20,
+    "mask_issues": [],
+    "line_check": "No new logical line mismatches on shared original lines. All error directives byte identical.",
+    "cached_build": {
+      "x86": 0,
+      "x64": 0
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "a9a16831-8898-4098-a0ad-ff47bafe901c",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "tests": [
+      "PASS original flush: graphics repaint, initialization/update/mode gates, windowed and text routes\nPASS blocked video tick: no transport, retained dirt/cursor/mode/stream state, resume, shell-count independence, final paint and real error propagation",
+      "PASS graphics source: host flush publishes a valid unselected software-VGA DIB; 200 invalidations coalesce before one deferred full-frame capture/send; palette-late DIB defers without poisoning publication",
+      "PASS actual packed painter: 640x480, pitched rows, clipped damage, source end, invalid input, guards",
+      "DOS video source contract PASS (static)."
+    ],
+    "limits": "Controlled tick/graphics/painter tests, no new live guest display run."
+  },
+  "coverage": {
+    "complete": 93,
+    "remaining": 138,
+    "files": 231,
+    "points": 1935,
+    "lines": 27066,
+    "pending": 1547
+  }
+}

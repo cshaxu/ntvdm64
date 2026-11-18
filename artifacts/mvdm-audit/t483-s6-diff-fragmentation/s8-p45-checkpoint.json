@@ -1,0 +1,57 @@
+{
+  "packet": "T483 S8 P45",
+  "position": 89,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+  "review_ids": [
+    "T483-R1024",
+    "T483-R1025",
+    "T483-R1026",
+    "T483-R1029",
+    "T483-R1032"
+  ],
+  "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+  "current_sha256": "23c6f5890fb60aae48f319b7b0426ed8c9dff8656c8eaf8a2f911acf23b700fc",
+  "before": {
+    "blocks": 5,
+    "added": 10,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 4,
+    "added": 4,
+    "deleted": 2
+  },
+  "decision": "R1026 mirror insertion removed. BIOS FE still links host_unsimulate, now provided by the host execution adapter, which calls the unchanged c_cpu_unsimulate. R1024/R1025 keep the activation at CPU startup after InitialiseDosEmulation and before cpu_simulate. R1029/R1032 keep addresses from the selected GDP layout (563/3099 vs original 631/4355). Four residuals pending.",
+  "verification": {
+    "paired_error_bodies": 10,
+    "mask_issues": [],
+    "original_logical_lines": [
+      109,
+      112,
+      114
+    ],
+    "cached_build": {
+      "x86": 0,
+      "x64": 0
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "61069184-98f8-4515-ab63-246376ee7d19",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "tests": "Relocation only. Build and publish per owner."
+  },
+  "coverage": {
+    "complete": 89,
+    "remaining": 142,
+    "files": 231,
+    "points": 1944,
+    "lines": 27077,
+    "pending": 1548
+  }
+}

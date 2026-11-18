@@ -1,0 +1,101 @@
+{
+  "packet": "T483 S8 P48",
+  "position": 92,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "review_ids": [
+    "T483-R1056",
+    "T483-R1057",
+    "T483-R1058",
+    "T483-R1059",
+    "T483-R1060",
+    "T483-R1061",
+    "T483-R1062",
+    "T483-R1063",
+    "T483-R1064",
+    "T483-R1065",
+    "T483-R1066",
+    "T483-R1067",
+    "T483-R1068",
+    "T483-R1069",
+    "T483-R1070",
+    "T483-R1071",
+    "T483-R1072",
+    "T483-R1073",
+    "T483-R1074",
+    "T483-R1075",
+    "T483-R1076",
+    "T483-R1077",
+    "T483-R1078",
+    "T483-R1079",
+    "T483-R1080",
+    "T483-R1081",
+    "T483-R1082",
+    "T483-R1083",
+    "T483-R1084",
+    "T483-R1085",
+    "T483-R1086",
+    "T483-R1088",
+    "T483-R1089",
+    "T483-R1090",
+    "T483-R1091",
+    "T483-R1092",
+    "T483-R1094",
+    "T483-R1095",
+    "T483-R1096",
+    "T483-R1097",
+    "T483-R1098",
+    "T483-R1099"
+  ],
+  "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+  "before_sha256": "cfd95cacb80744d56296be20320867bdb52b8852b667a02d8f6aa95b8b02e38d",
+  "current_sha256": "e4a9c4de74fb9c0df79a879b0ff4c97d3aa995495304c5c6bff3ce03927fbf7a",
+  "before": {
+    "blocks": 43,
+    "added": 76,
+    "deleted": 39
+  },
+  "after": {
+    "blocks": 37,
+    "added": 76,
+    "deleted": 39
+  },
+  "decision": "Group host-only includes and declarations after original includes. Use the existing console_client.h signature for ntvdm_console_set_active. Preserve original declaration order for other globals, data ownership, all executable statements, and cleanup/return ordering. Points R1056-R1063 and R1098 include displaced bindings; remaining obligations still pending. No residual classified as fully restored merely because contiguous declarations measure as one block.",
+  "verification": {
+    "compiler": "Using current Ninja cc_host flags, compiled prior and final nt_event.c separately with MSVC x86. 2884 assembler listing lines identical after removing blank/comment lines, object title and extern declarations. Sorted external declarations identical separately. Not a binary-identity claim.",
+    "paired_error_bodies": 12,
+    "mask_issues": [],
+    "lines": "Compared shared original logical lines in prior and candidate; no new mismatches. Preserve existing exclusion guards and restore pinned line 78 after consolidated includes.",
+    "source_controls": [
+      "r1056-r1057-nt-event-header-review.json",
+      "r1058-r1063-nt-event-boundary-review.json",
+      "r1064-r1069-nt-event-input-review.json",
+      "r1070-r1078-nt-event-origin-review.json",
+      "r1079-r1087-nt-event-handoff-review.json",
+      "r1088-r1099-nt-event-return-review.json",
+      "nt-event-whole-file-review.json"
+    ],
+    "cached_build": {
+      "x86": 0,
+      "x64": 0
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "6c6b9f36-67f0-45e2-9d00-c08f5895244d",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "runtime": "No new runtime test; owner authorized cached compile and publish for relocation."
+  },
+  "coverage": {
+    "complete": 92,
+    "remaining": 139,
+    "files": 231,
+    "points": 1938,
+    "lines": 27077,
+    "pending": 1548
+  }
+}

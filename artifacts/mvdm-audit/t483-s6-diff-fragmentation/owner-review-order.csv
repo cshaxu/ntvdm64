@@ -6,7 +6,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 5,src/mvdm-host/oemuni/process.c,30,74,26,100,1,0,7,s8-p8-restored-and-rechecked-residuals-pending-owner,a63520c503f095f3c31c76d45bee878832f9414e7079c90bdc87f36bfd224d89
 6,src/non-mvdm/windows/core/ntuser/client/usercli.h,44,75,38,113,17,0,6,reviewed-delivered-p3-residuals-pending-owner,d74581564575ea3a4e0ad27a762df8cdb65afacb693baab166ec19d83c223803
 7,src/non-mvdm/windows/core/ntuser/inc/user.h,45,93,17,110,24,0,8,reviewed-delivered-p4-residuals-pending-owner,0c09ef59ed8b07ed5db86093c095f7bcf66d383d440462cfbffa175ceb1a4e4c
-8,src/mvdm-host/softpc.new/host/src/nt_event.c,43,76,39,115,12,0,9,reviewed-delivered-p5-residuals-pending-owner,cfd95cacb80744d56296be20320867bdb52b8852b667a02d8f6aa95b8b02e38d
+8,src/mvdm-host/softpc.new/host/src/nt_event.c,37,76,39,115,12,0,9,s8-p48-reviewed,e4a9c4de74fb9c0df79a879b0ff4c97d3aa995495304c5c6bff3ce03927fbf7a
 9,src/mvdm-host/wow32/wowhooks.c,38,93,21,114,2,0,11,reviewed-no-code-change-residuals-pending-owner,2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836
 10,src/non-mvdm/public/sdk/inc/ntpsapi.h,38,1,309,310,5,0,12,reviewed-delivered-p5-residuals-pending-owner,30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2
 11,src/mvdm-host/wow32/wmsg16.c,37,111,35,146,3,0,13,reviewed-delivered-p6-residuals-pending-owner,4033c6c31ead02a917dae947346ff68c054e456992061b2fd86e9385db5b00b7
@@ -24,7 +24,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 23,src/mvdm-host/softpc.new/base/cvidc/sevid001.c,25,25,25,50,0,0,26,s8-p22-reviewed,2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5
 24,src/mvdm-host/wow32/wkman.c,25,32,13,45,24,0,27,reviewed-verified-p14-residuals-pending-owner,f6a57202203d62dbe4fa6dff6991660d7f3aa281456abec6f1e0c40c683b388f
 26,src/mvdm-host/softpc.new/base/keymouse/keyba.c,24,49,7,56,69,0,29,s8-p26-reviewed,98f124308ee7c089cc4a6156e3de2f5887a01b637950eff5f616d07961e06fab
-29,src/mvdm-host/softpc.new/host/src/nt_graph.c,19,53,11,64,20,0,34,s7-p16-format-restored-residual-pending,c0b6e20da702e4fb9b02d9d008f4be57986ada35584c8f0206f78c466f36da4c
+29,src/mvdm-host/softpc.new/host/src/nt_graph.c,16,43,10,53,20,0,34,s8-p49-reviewed,029acccddfa56c2d147603beefbaf1ef26240d9436561dc191cd89c7cfa700bc
 30,src/mvdm-host/wow32/wsdata.c,20,161,13,174,0,0,35,s7-p22-reviewed,c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def
 31,src/non-mvdm/base/win32/client/vdm.c,20,38,594,632,2,0,30,reviewed-verified-p16-residuals-pending-owner,c8fbc28a468f39a7cb409866efdb06c5a3c5fcc16ea039da6897120fbfedd1db
 32,src/non-mvdm/windows/core/ntuser/kernel/cleanup.c,20,24,20,44,1,0,33,reviewed-verified-p18-residuals-pending-owner,277eab261158aed8d5545d70a3874c7dd70a09502254df49b63adbce6948be2d
@@ -75,12 +75,12 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 78,src/non-mvdm/windows/core/ntuser/client/mngrayc.c,8,14,1,15,2,0,79,s7-p20-reviewed,9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572
 79,src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,8,2,245,247,12,0,80,s7-p7-reviewed-residual-pending,e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9
 80,src/non-mvdm/windows/core/ntuser/rtl/getset.c,8,14,223,237,0,0,81,s7-p5-reviewed-residual-pending,1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b
-81,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,59,5,0,84,s7-p10-format-restored-residual-pending,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
+81,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,59,5,0,84,s8-p46-reviewed,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
 82,src/mvdm-host/wow32/wuclass.c,7,19,7,26,6,0,85,s7-p15-reviewed,1c6a49f1f38126cc200734faf2a2c8ecebca734ff969584386e16e4db60c2b3c
 83,src/non-mvdm/base/ntdll/csrutil.c,7,7,615,622,0,0,86,s7-p2-reviewed-residual-pending,75c1609c7a7d51c2fd4ebad2cd99da78eaaefee5135348835cefe45ccedb432a
 84,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,866,3,0,87,s7-reviewed-residuals-pending,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
-85,src/mvdm-host/softpc.new/host/src/nt_cpu.c,5,10,2,12,10,0,83,s7-p6-original-format-restored-residual-pending,ed1f783668ec45dd96994b1d344dbe2f27f9b1bd09cc0193bf9f6264df101a6e
-86,src/mvdm-host/softpc.new/host/src/nt_cga.c,6,13,33,46,6,0,82,s7-p3-original-comments-restored-residual-pending,036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b
+85,src/mvdm-host/softpc.new/host/src/nt_cpu.c,4,4,2,6,10,0,83,s8-p45-reviewed,23c6f5890fb60aae48f319b7b0426ed8c9dff8656c8eaf8a2f911acf23b700fc
+86,src/mvdm-host/softpc.new/host/src/nt_cga.c,6,13,33,46,6,0,82,s8-p44-reviewed,036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b
 87,src/mvdm-host/dpmi32/dpmimemr.c,6,4,19,23,0,0,88,s7-p18-reviewed,568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4
 88,src/mvdm-host/dpmi32/modesw.c,6,26,6,32,2,0,89,s8-p5-rechecked-residuals-pending-owner,28836a7ec6efc3516e78f9e96daa1675c2b4540a2b72d4a14676d56fbf7f455c
 89,src/mvdm-host/softpc.new/base/ccpu386/ntthread.c,5,31,0,31,0,0,90,s8-p19-reviewed,8dd53012bfac7fc25b818ce78017766420fec650772fbdc7c68825b87c82e188
@@ -157,7 +157,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 173,src/mvdm-host/softpc.new/base/video/vga_prts.c,2,2,2,4,34,0,175,s8-p39-reviewed,63144c55a5f74c99cf5d4da74f9fe547f16ade2e84d32b64f5dcce517dea12ac
 174,src/mvdm-host/softpc.new/host/src/nt_com.c,2,2,2,4,9,0,176,s7-p18-reviewed,e8f6583e07f1f79036c56c454a22574dfb5987f3e0e1dab9afcb0a6f717f6af7
 175,src/mvdm-host/softpc.new/host/src/nt_eoi.c,2,5,5,10,8,0,177,s7-p8-reviewed,a5c144ad5d99806af6ed57b5cfb6aad92bc4e3474bc83f8be74942abc69be29d
-176,src/mvdm-host/softpc.new/host/src/nt_error.c,2,2,2,4,6,0,178,s7-p16-reviewed,23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d
+176,src/mvdm-host/softpc.new/host/src/nt_error.c,2,2,2,4,6,0,178,s8-p47-reviewed,23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d
 177,src/mvdm-host/softpc.new/host/src/nt_keycd.c,2,2,2,4,0,0,179,s7-p19-reviewed,eee7e08dd0bc4b094907d176b465d0cbb29fabf61dc9dcf0954fb88fe72fa794
 178,src/mvdm-host/softpc.new/host/src/nt_vga.c,2,8,1,9,3,0,180,s7-p15-reviewed,e02b45a17b7ae8c171a880c2dc4df3d87e478126a2b8ce1c479667e17b96e03e
 179,src/mvdm-host/vdmredir/vrremote.c,2,10,2,12,8,0,181,s7-p22-reviewed,e85a1f718c4b19c370a2a3f52f6c1c7726113628392c203ce14b7081b53c6689
