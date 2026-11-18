@@ -1,0 +1,68 @@
+{
+  "packet": "T483 S8 P175",
+  "position": 218,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+  "review_ids": [
+    "T483-R2697"
+  ],
+  "original_sha256": "5147fce6825d1f7e8d69298e4da617f0fe414150963cff391ee53c856a0f5b2a",
+  "current_sha256": "73b573c7020a29248a3dbd7bb7599182da636ebc7e87a370edf70961aecf0bd2",
+  "before": {
+    "blocks": 1,
+    "added": 4,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 218,
+    "remaining": 13,
+    "files": 231,
+    "points": 1912,
+    "lines": 26351,
+    "pending": 1532
+  },
+  "decision": "Restore direct use of original USER declarations via user.h. No prior USER include guard is active in either supported translation unit. Removed redundant windows.h, unused LARGE_STRING selector and multipass include. Pure original fails at TextCopy in both real build contexts. Keep the sole explicit include pending.",
+  "verification": {
+    "controls": {
+      "wow32/original": {
+        "exit": 2,
+        "errors": [
+          "C2146: syntax error: missing ')' before identifier 'pstr'",
+          "C2061: syntax error: identifier 'pstr'",
+          "C2059: syntax error: ';'",
+          "C2059: syntax error: ','"
+        ]
+      },
+      "wow32/single": {
+        "exit": 0,
+        "errors": []
+      },
+      "call-boundaries/original": {
+        "exit": 2,
+        "errors": [
+          "C2146: syntax error: missing ')' before identifier 'pstr'",
+          "C2061: syntax error: identifier 'pstr'",
+          "C2059: syntax error: ';'",
+          "C2059: syntax error: ','"
+        ]
+      },
+      "call-boundaries/single": {
+        "exit": 0,
+        "errors": []
+      }
+    },
+    "scope": "Production and call-boundaries objects recompiled; linked focused fixture ran and printed WOW_CONTROL_STRING_OK. Production COFF differs only in timestamp field; no new published binary.",
+    "old_sha256": "8459ae0e7e965501429a62b704e4ac4af5e74887eb31509bcb86119b14df22a9",
+    "new_sha256": "c26b02b0662d03ababbe6f95fe0305a7dec6ab2db28856fb2b27a229c61c096d"
+  }
+}

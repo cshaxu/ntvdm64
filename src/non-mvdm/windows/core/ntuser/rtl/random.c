@@ -11,10 +11,7 @@
 * 10-17-90 DarrinM      Created.
 * 02-06-91 IanJa        HWND revalidation added (none required)
 \***************************************************************************/
-#include <windows.h>
-#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include "user.h"
 #line 14
 
 

@@ -240,4 +240,4 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 252,src/non-mvdm/windows/core/ntuser/client/dlgend.c,1,2,0,3,0,s8-p144-reviewed,T483-R2213;T483-R2214;T483-R2215;T483-R2216;T483-R2217;T483-R2218;T483-R2219,a8fbf7c90496774075cecdde77f5ed52bab0c1cf195a02babf44bbc8a045ad3c
 253,src/non-mvdm/windows/core/ntuser/client/editec.c,1,1,1,10,0,s8-p150-reviewed,T483-R2314;T483-R2315,f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07
 254,src/non-mvdm/windows/core/ntuser/client/lboxrare.c,1,1,1,1,0,s8-p153-reviewed,T483-R2337,4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8
-255,src/non-mvdm/windows/core/ntuser/rtl/random.c,1,4,0,0,0,s7-p9-reviewed,T483-R2697;T483-R2698;T483-R2699;T483-R2700,531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b
+255,src/non-mvdm/windows/core/ntuser/rtl/random.c,1,1,0,0,0,s8-p175-reviewed,T483-R2697;T483-R2698;T483-R2699;T483-R2700,73b573c7020a29248a3dbd7bb7599182da636ebc7e87a370edf70961aecf0bd2

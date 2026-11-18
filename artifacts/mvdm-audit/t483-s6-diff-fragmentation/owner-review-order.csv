@@ -229,4 +229,4 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 249,src/non-mvdm/windows/core/ntuser/client/dlgend.c,1,2,0,2,3,0,252,s8-p144-reviewed,a8fbf7c90496774075cecdde77f5ed52bab0c1cf195a02babf44bbc8a045ad3c
 250,src/non-mvdm/windows/core/ntuser/client/editec.c,1,1,1,2,10,0,253,s8-p150-reviewed,f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07
 251,src/non-mvdm/windows/core/ntuser/client/lboxrare.c,1,1,1,2,1,0,254,s8-p153-reviewed,4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8
-252,src/non-mvdm/windows/core/ntuser/rtl/random.c,1,4,0,4,0,0,255,s7-p9-reviewed,531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b
+252,src/non-mvdm/windows/core/ntuser/rtl/random.c,1,1,0,1,0,0,255,s8-p175-reviewed,73b573c7020a29248a3dbd7bb7599182da636ebc7e87a370edf70961aecf0bd2
