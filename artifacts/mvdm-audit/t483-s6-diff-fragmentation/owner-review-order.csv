@@ -10,7 +10,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 9,src/mvdm-host/wow32/wowhooks.c,38,93,21,114,2,0,11,reviewed-no-code-change-residuals-pending-owner,2505c46afd632cb9812c8af1961bbcf305b2c014be72e3854396763c9be16836
 10,src/non-mvdm/public/sdk/inc/ntpsapi.h,38,1,309,310,5,0,12,reviewed-delivered-p5-residuals-pending-owner,30c20b09f4e9a721ccfbe8fe802fa86dfdc0415c0e4eb471dfe95b0a272a38d2
 11,src/mvdm-host/wow32/wmsg16.c,37,111,35,146,3,0,13,reviewed-delivered-p6-residuals-pending-owner,4033c6c31ead02a917dae947346ff68c054e456992061b2fd86e9385db5b00b7
-12,src/mvdm-host/softpc.new/base/ccpu386/c_main.c,36,116,30,146,75,0,14,reviewed-delivered-p7-residuals-pending-owner,837de6568a31820f73177d9d0764c6f9dc0067afd1d1967c3ff7f26a65fec2bf
+12,src/mvdm-host/softpc.new/base/ccpu386/c_main.c,36,112,30,142,75,0,14,s8-p13-reduced-residuals-pending-owner,4b2639592dea1d4ef6abf0fe3d0bb85e46f9d8294e8df822e589cb5d1d94312c
 13,src/non-mvdm/windows/core/ntuser/client/ntstubs.c,35,25,1778,1803,16,0,15,reviewed-delivered-p8-residuals-pending-owner,aa0d284cd631c81071c1714ed7884421daaea540e75df0a8731cb67061636de8
 14,src/non-mvdm/windows/core/ntuser/kernel/queue.c,35,5,4168,4173,24,0,16,reviewed-delivered-p8-residuals-pending-owner,25063755ffb0e0dfd2a35fe1e34d1c889d6e7a1973897b5681d2289aa2c80854
 15,src/mvdm-host/dpmi32/dpmiint.c,30,143,37,180,8,0,10,s8-p4-rechecked-residuals-pending-owner,9082b02db98c67cc4378a61fccd39f71746214b58d13bfd6865b847c3f629935

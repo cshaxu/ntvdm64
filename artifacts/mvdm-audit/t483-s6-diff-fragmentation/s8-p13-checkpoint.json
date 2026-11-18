@@ -1,0 +1,111 @@
+{
+  "packet": "T483 S8 P13",
+  "position": 34,
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "source_sha256": "4b2639592dea1d4ef6abf0fe3d0bb85e46f9d8294e8df822e589cb5d1d94312c",
+  "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+  "review_ids": [
+    "T483-R0358",
+    "T483-R0359",
+    "T483-R0360",
+    "T483-R0361",
+    "T483-R0364",
+    "T483-R0365",
+    "T483-R0366",
+    "T483-R0368",
+    "T483-R0369",
+    "T483-R0370",
+    "T483-R0371",
+    "T483-R0372",
+    "T483-R0373",
+    "T483-R0375",
+    "T483-R0376",
+    "T483-R0377",
+    "T483-R0378",
+    "T483-R0379",
+    "T483-R0380",
+    "T483-R0381",
+    "T483-R0382",
+    "T483-R0383",
+    "T483-R0384",
+    "T483-R0385",
+    "T483-R0386",
+    "T483-R0387",
+    "T483-R0388",
+    "T483-R0389",
+    "T483-R0390",
+    "T483-R0391",
+    "T483-R0392",
+    "T483-R0393",
+    "T483-R0394",
+    "T483-R0395",
+    "T483-R0396",
+    "T483-R0397",
+    "T483-R0398",
+    "T483-P222-COMPLETION"
+  ],
+  "before": {
+    "blocks": 36,
+    "added": 116,
+    "deleted": 30
+  },
+  "after": {
+    "blocks": 36,
+    "added": 112,
+    "deleted": 30
+  },
+  "decision": "Remove the two project-added NTVDM conditional frames guarding the TLS simulation frame declaration and abnormal unwind. The original selected NTVDM setjmp branch and excluded alternative remain. All three supported compiles define NTVDM. Preserve typed providers, atomic event consumption, HLT wakeup, breakpoint delivery, interrupt and DPMI completion boundaries, and TLS unwind. Existing per-point necessity evidence stays in the pending ledger.",
+  "error_bodies": 75,
+  "mask_issues": [],
+  "preprocessing": [
+    {
+      "profile": "worker",
+      "target": "obj/ccpu/c_main.obj",
+      "selected_lines": 51613,
+      "sha256": "ef47c82106d436d4795f88e88c2354cf49e63f537150a57e8f90cf60d41d1999"
+    },
+    {
+      "profile": "worker-reference-x86",
+      "target": "obj/ccpu/c_main.obj",
+      "selected_lines": 51613,
+      "sha256": "ef47c82106d436d4795f88e88c2354cf49e63f537150a57e8f90cf60d41d1999"
+    },
+    {
+      "profile": "wow-callback-fixture",
+      "target": "c_main.c",
+      "selected_lines": 51613,
+      "sha256": "ef47c82106d436d4795f88e88c2354cf49e63f537150a57e8f90cf60d41d1999"
+    }
+  ],
+  "verification": {
+    "builds": [
+      "x86",
+      "x64"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "fb699915-9c99-4ae7-a9e6-f771368377f5",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "manifest_sha256": "5eecbcf8be5d278c412e821b465aa6eebdac531deb2e954e38949c683fda64e7",
+    "targeted": [
+      "ccpu-halt-reset",
+      "ccpu-debug-match",
+      "ccpu-monitor-boundary",
+      "wow-callback-abort-ccpu"
+    ]
+  },
+  "coverage": {
+    "complete": 34,
+    "remaining": 197,
+    "files": 231,
+    "points": 1957,
+    "lines": 27114,
+    "pending": 1549
+  }
+}

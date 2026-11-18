@@ -4738,9 +4738,8 @@ LOCAL VOID
    GLOBAL VOID
    c_cpu_simulate IFN0()
       {
-#ifdef NTVDM
+#line 4834
       jmp_buf *frame;
-#endif
 #line 4833
       SYNCH_TICK();
       if (simulate_level >= FRAMES)
@@ -4761,11 +4760,10 @@ LOCAL VOID
 	 in_C = 0;
 	 ccpu(FALSE);
 	 }
-#ifdef NTVDM
+#line 4848
       } __finally {
          if (AbnormalTermination()) ccpu386AbandonSimulate(frame);
       }
-#endif
 #line 4847
       }
 
