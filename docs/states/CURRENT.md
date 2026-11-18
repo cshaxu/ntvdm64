@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P121 completed review through `basesrv.h`. Next is position 165, `srvvdm.c`.
+S8 P122 completed review through `srvvdm.c`. Next is position 166, `srvvdm.h`.
 
 ## Active Packet
 
@@ -34,10 +34,10 @@ S8 P121 completed review through `basesrv.h`. Next is position 165, `srvvdm.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P121, 164 of 231 positions are covered and 67 remain queued.
+IDs. After S8 P122, 165 of 231 positions are covered and 66 remain queued.
 P107 Win16 shared clipboard transfer remains deferred by owner direction. Both P106 and P107 failed at the same stage. The candidate passed 56 open-state checks and 24 ownership cases. Rerun the real transfer when native OpenClipboard succeeds.
 
-S8 has removed 66 points and 571 diff lines, leaving 1,908 points and 26,639 lines. The live pending backlog has 1,534 rows.
+S8 has removed 66 points and 578 diff lines, leaving 1,908 points and 26,632 lines. The live pending backlog has 1,534 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p3-checkpoint.json).
@@ -159,6 +159,7 @@ S8 has removed 66 points and 571 diff lines, leaving 1,908 points and 26,639 lin
 [P119 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p119-checkpoint.json).
 [P120 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p120-checkpoint.json).
 [P121 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p121-checkpoint.json).
+[P122 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p122-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

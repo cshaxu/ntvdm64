@@ -59,7 +59,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 61,src/non-mvdm/public/sdk/inc/ntrtl.h,11,0,147,147,10,0,64,s7-p9-reviewed,2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37
 62,src/mvdm-host/dos/command/cmdmisc.c,9,46,6,52,1,0,65,s7-p48-verified-residuals-pending-owner,ed8067d60dfa322ae96bcefff8b34a0b44865d58c55d88462e63314887bcf88a
 63,src/mvdm-host/softpc.new/host/src/sim32.c,7,8,5,13,3,0,66,s8-p61-reviewed,e9fb203a7f1797d6513f2046825def6a72d9b88f035a98c6e28f257da2335130
-64,src/non-mvdm/base/win32/server/srvvdm.c,10,46,8,54,3,0,67,s7-p23-reviewed,f3cb247cbefe3ebd6fd1bc7864ab6f8ae3246988806d57e2f2cea4e0de694b88
+64,src/non-mvdm/base/win32/server/srvvdm.c,10,39,8,47,3,0,67,s8-p122-reviewed,644a28e3674cb6c17c461a7376e23d99fd1cb0673214dc106ba38c539dd7b67c
 65,src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,9,26,6,32,1,0,68,s7-p23-format-restored-residual-pending,c33d003c0db56f0729172d7f482c2b32fbb95c70fc5feb54ed45b39b897eed1d
 66,src/non-mvdm/windows/core/ntuser/kernel/getset.c,10,5,673,678,6,0,69,s7-reviewed-residuals-pending,b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d
 67,src/non-mvdm/windows/core/ntuser/rtl/userrtl.h,8,4,37,41,10,0,58,s7-p2-original-comments-restored-residual-pending,9928d826d81e8a5eb272d1bb82b2628c02fe96d9ea5074092550d17fc41bbba6

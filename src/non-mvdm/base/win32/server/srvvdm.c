@@ -1284,21 +1284,14 @@ BaseSrvDOSWorkerWaitPending(
     EVENT_BASIC_INFORMATION EventInformation;
     BOOL Pending = FALSE;
 
-    *ConsoleRecordExists = FALSE;
-
     Status = RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
     ASSERT(NT_SUCCESS(Status));
     Status = BaseSrvGetConsoleRecord(ConsoleHandle,&pConsoleRecord);
-    if (NT_SUCCESS(Status)) {
-        *ConsoleRecordExists = TRUE;
-        if (pConsoleRecord->hWaitForVDMDup) {
-            Status = NtQueryEvent(pConsoleRecord->hWaitForVDMDup,
-                                  EventBasicInformation,
-                                  &EventInformation,
-                                  sizeof(EventInformation),
-                                  NULL);
-            Pending = NT_SUCCESS(Status) && !EventInformation.EventState;
-        }
+    *ConsoleRecordExists = NT_SUCCESS(Status);
+    if (*ConsoleRecordExists && pConsoleRecord->hWaitForVDMDup) {
+        Status = NtQueryEvent(pConsoleRecord->hWaitForVDMDup, EventBasicInformation,
+                              &EventInformation, sizeof(EventInformation), NULL);
+        Pending = NT_SUCCESS(Status) && !EventInformation.EventState;
     }
     RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
     return Pending;

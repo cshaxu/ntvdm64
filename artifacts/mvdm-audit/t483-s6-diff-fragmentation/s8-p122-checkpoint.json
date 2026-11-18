@@ -1,0 +1,58 @@
+{
+  "packet": "T483 S8 P122",
+  "position": 165,
+  "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+  "review_ids": [
+    "T483-R1982",
+    "T483-R1983",
+    "T483-R1984",
+    "T483-R1985",
+    "T483-R1986",
+    "T483-R1987",
+    "T483-R1988",
+    "T483-R1989",
+    "T483-R1990",
+    "T483-R1991"
+  ],
+  "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+  "current_sha256": "644a28e3674cb6c17c461a7376e23d99fd1cb0673214dc106ba38c539dd7b67c",
+  "before": {
+    "blocks": 10,
+    "added": 46,
+    "deleted": 8
+  },
+  "after": {
+    "blocks": 10,
+    "added": 39,
+    "deleted": 8
+  },
+  "source_changed": true,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 165,
+    "remaining": 66,
+    "files": 231,
+    "points": 1908,
+    "lines": 26632,
+    "pending": 1534
+  },
+  "decision": "R1987 one successful locked lookup supplies ConsoleRecordExists; only an existing record with a duplicate event is queried. No record, no event, failed query or signaled event yields false pending. The caller needs both answers to choose the original CheckDOS admission path. R1982/83/90/91 retain record-local early-return notification; zero-initialize on allocation, publish on decrement, consume on eligible Get. Prior original controls lose early notifications. R1984/85/86/88 retain explicit native/numeric conversions supported by prior x64 compiler controls. R1989 mask bit zero without truncating the handle. No changes to the selected busy record or task pairing.",
+  "verification": {
+    "tests": "x86/x64 each passed the five reenter modes: before-return, after-return, nested-return, pending-command, before-increment. The fixture checks present record with no wait and with pending wait.",
+    "build": "cached x86/x64 and explicit owning product/fixture links",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "881eec1c-c8af-4446-a703-a28c0df16d5a",
+      "hashVerified": true,
+      "stopped": 0
+    }
+  }
+}
