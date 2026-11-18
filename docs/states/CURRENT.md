@@ -178,13 +178,11 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-50 points and 747 changed lines in S7. The current census is 1,997 non-error
-points and 28,229 changed lines across 233 mirrors with filtered differences.
+54 points and 1,594 changed lines in S7. The current census is 1,993 non-error
+points and 27,382 changed lines across 233 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
-reviewed paths. All are local conditional frames without a matching original
-arm. Both ledgers have zero unresolved mask
-cases. Residual source decisions remain recorded in the pending ledger.
+reviewed paths. Both ledgers have zero unresolved mask cases.
 [P24 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p24-checkpoint.json).
 
 P25 removes nineteen local frames and restores R0158. Any new local
@@ -199,11 +197,7 @@ P27 removes seven local X86GFX frames. Both worker inputs match.
 The font fixture passes and the old-code control fails as expected.
 [P27 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p27-checkpoint.json).
 
-P28 removes four local compile frames from `nt_cpu.c`, `reset.c` and
-`dpmi386.c`. Six actual worker preprocessing controls preserve selected
-text and logical lines. The original CPU30 frames in `reset.c` stay in
-place. The reset continuation and DPMI register-read adaptations remain
-pending with their existing evidence.
+P28 removes four local CPU and DPMI frames with six matching worker controls.
 [P28 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p28-checkpoint.json).
 
 P29 removes ten local compile frames from `nt_emm.c` and `nt_graph.c`.
@@ -222,6 +216,12 @@ P31 clears the non-error differences in `egacpu.h` and `gmi.h`.
 `ica.h` keeps only the omission of two conflicting hardware interrupt
 macros. All 136 preprocessing entries and four targeted fixtures pass.
 [P31 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p31-checkpoint.json).
+
+P32 restores four original EGA writer ranges and retains the fourteen
+original BACK_M condition frames with excluded bodies. The cached builds,
+EGA fixture and timestamp-only link control pass. Both published manifests
+match all eleven staged images. Only PE timestamps differ from P10.
+[P32 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p32-checkpoint.json).
 
 ## S1 Closure Record
 

@@ -40,7 +40,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 42,src/mvdm-host/wow32/wow32.c,15,26,11,37,34,0,44,s7-p10-format-restored-residual-pending,4f3a34410fe3b847ec4793c351da6604fab069dc1ec99dbdb933f424d252935f
 43,src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,15,23,0,23,3,0,45,s7-p20-format-restored-residual-pending,0cb29a05517e3276d751b8e83b01a50e4326dc1f4b708efacc294ffc9ab28954
 44,src/mvdm-host/dpmi32/i386/dpmi386.c,14,29,231,260,0,0,42,s7-p6-original-format-restored-residual-pending,eab875c345d4a55c532616c87eb3180f02f3f7ce3e769bf5a5c07d13da2fe55b
-45,src/mvdm-host/softpc.new/base/video/egwrtm12.c,14,21,438,459,7,0,46,s7-p7-reviewed-residual-pending,ba364e0597af92f8530214a8f43479e9d141c4e8579d0a78c15ab9d0dee037d3
+45,src/mvdm-host/softpc.new/base/video/egwrtm12.c,12,15,10,25,12,0,46,s7-p7-reviewed-residual-pending,5d88168c59ab1f0f32e2360d2214319175a6f9a61f7e2c2873f2fa86b5550dfc
 46,src/mvdm-host/softpc.new/host/inc/cfpu_def.h,14,36,12,48,2,0,47,s7-p4-reviewed-residual-pending,71d576e975b49379a2cad1cfc0f6a82579a2e81b4e096222363a70147cfb1535
 47,src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c,13,16,6,22,7,0,50,s7-p15-reviewed,c5844ce336dee9f1c1a3a42baa78ea8fd31f27439538e89cab4b66e4820697ed
 48,src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,13,17,10,27,10,0,51,s7-p14-reviewed,b035518e1bd3b9d4884516d2af18e2fcbbc7cfbb40517e9b308e48fd1841c1d7
@@ -68,7 +68,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 70,src/mvdm-host/vdmredir/vrnmpipe.c,9,22,29,51,80,0,72,s7-p16-reviewed,a83b99a6f2021f9b86db1947301983f5f908fdeae915b950d56fa20f0dc7d108
 71,src/non-mvdm/windows/core/ntuser/rtl/wow.c,8,1,176,177,6,0,49,s7-p7-reviewed-residual-pending,a93ae54fa9aec8ab9063ff752544a16e11ba6198011612aa105522dcde9af37e
 72,src/mvdm-host/dos/dem/demsrch.c,5,25,0,25,11,0,73,s7-p18-format-restored-residual-pending,07c466258a44779f55158209cc10a58f901a8a0970355ecdfa26618544723427
-73,src/mvdm-host/softpc.new/base/video/egawrtm0.c,8,15,411,426,6,0,74,s7-p8-reviewed,5044e92f636b864b54922ad5b2339d4c8c1e026f0d0697655ee3e730571c595d
+73,src/mvdm-host/softpc.new/base/video/egawrtm0.c,6,9,4,13,15,0,74,s7-p8-reviewed,b1aeb3e852ba79eb8f93885196463122f2a471858d8a8f6b6f86ecb873f9b2b8
 74,src/mvdm-host/wow32/wcall16.c,7,23,5,28,9,0,75,s7-p15-format-restored-residual-pending,8853ed166922757da97af47cefb3e793714e4975e533db4a8d51a5297c7f5b99
 75,src/mvdm-host/wow32/wow32fax.c,8,15,5,20,2,0,76,s7-p21-reviewed,a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad
 76,src/mvdm-host/wow32/wudlg.c,8,17,2,19,5,0,77,s7-p7-reviewed-residual-pending,f98049a1afa471764fb825ccdd498a8ad189a697a181c347eba6ee8464ec542b

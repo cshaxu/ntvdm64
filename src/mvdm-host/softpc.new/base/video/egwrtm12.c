@@ -334,10 +334,248 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	update_alg.mark_word( offset );
 }
 
-#ifndef CPU_40_STYLE
-#line 414
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif /* CPU_40_STYLE */
+#line 412
+/* used by both byte and word mode1 fill */
+
+LOCAL VOID
+ega_mode1_chn_fill IFN2(ULONG, offset, ULONG, count )
+{
+	ULONG low_offset;			/* distance into regen buffer of start of write */
+	ULONG high_offset;		/* distance into regen buffer of end of write */
+	ULONG length;			/* length of fill in bytes */
+	ULONG lsb;
+
+	note_entrance0("ega_mode1_chn_fill");
+
+	/*
+	 *	Complicated by possibility that only one of a chained pair of
+	 *	planes is write enabled, needing alternate bytes to be written.
+	 */
+
+	high_offset = offset + count - 1;
+	lsb = high_offset & 1;
+	high_offset = (high_offset >> 1) << 2;
+	high_offset |= lsb;
+
+	low_offset = offset;
+	length = count;
+
+	switch( getVideoplane_enable() & 3 )
+	{
+		case 1:	/* just plane 0, ie even addresses to be written */
+			if( offset & 1 )
+				low_offset++;
+
+			low_offset = (low_offset >> 1) << 2;
+			fill_alternate_bytes( &EGA_plane01[low_offset],
+							&EGA_plane01[high_offset], get_latch0 );
+			break;
+
+		case 2:	/* just plane 1, ie odd addresses to be written */
+			if(( offset & 1 ) == 0 )
+				low_offset++;
+
+			low_offset = (low_offset >> 1) << 2;
+			fill_alternate_bytes( &EGA_plane01[low_offset],
+							&EGA_plane01[high_offset], get_latch1 );
+			break;
+
+		case 3:	/* sensible case is to have both chained planes write enabled */
+			lsb = low_offset & 1;
+			low_offset = (low_offset >> 1) << 2;
+
+			if( lsb )
+			{
+				EGA_plane01[low_offset + 1] = get_latch1;
+				low_offset += 4;
+				length--;
+			}
+
+			if( length & 1 )
+			{
+				length -= 1;
+				EGA_plane01[low_offset + (length << 1)] = get_latch0;
+			}
+
+			fill_both_bytes( get_latch1 | get_latch0 << 8,
+							(USHORT *)&EGA_plane01[low_offset], length >> 1 );
+			break;
+	}	/* end of switch on plane01 enabled */
+
+	low_offset = offset;
+	length = count;
+
+	switch( getVideoplane_enable() & 0xc )	/* isolate 2 bits for planes2 and 3 */
+	{
+		case 4:	/* just plane 2, ie even addresses to be written */
+			if( low_offset & 1 )
+				low_offset++;
+
+			low_offset = (low_offset >> 1) << 2;
+			fill_alternate_bytes( &EGA_plane23[low_offset],
+							&EGA_plane23[high_offset], get_latch2 );
+			break;
+
+		case 8:	/* just plane 3, ie odd addresses to be written */
+			if(( low_offset & 1 ) == 0 )
+				low_offset++;
+
+			low_offset = (low_offset >> 1) << 2;
+			fill_alternate_bytes( &EGA_plane23[low_offset],
+							&EGA_plane23[high_offset], get_latch3 );
+			break;
+
+		case 12:	/* sensible case is to have both chained planes write enabled */
+			lsb = low_offset & 1;
+			low_offset = (low_offset >> 1) << 2;
+
+			if( lsb )
+			{
+				EGA_plane23[low_offset + 1] = get_latch1;
+				low_offset += 4;
+				length--;
+			}
+
+			if( length & 1 )
+			{
+				length -= 1;
+				EGA_plane23[low_offset + (length << 1)] = get_latch0;
+			}
+
+			fill_both_bytes( get_latch1 | get_latch0 << 8,
+							(USHORT *)&EGA_plane23[low_offset], length >> 1 );
+			break;
+	}	/* end of switch on plane23 enabled */
+}
+
+VOID
+ega_mode1_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
+{
+  UNUSED(value);
+  
+  note_entrance0("ega_mode1_chn_b_fill");
+
+  ega_mode1_chn_fill( offset, count );
+  update_alg.mark_fill( offset, offset + count - 1 );
+}
+
+VOID
+ega_mode1_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
+{
+	UNUSED(value);
+	
+	note_entrance0("ega_mode1_chn_w_fill");
+
+	ega_mode1_chn_fill( offset, count );
+	update_alg.mark_fill( offset, offset + count - 1 );
+}
+
+LOCAL VOID
+ega_mode1_chn_move_vid_src IFN5(ULONG, ead, ULONG, eas, ULONG, count,
+	UTINY	*, EGA_plane, ULONG, plane )
+{
+	ULONG end, lsbd, lsbs, dst, src;
+
+	lsbs = eas & 1;
+	eas = (eas >> 1) << 2;	
+	eas |= lsbs;
+
+	end = ead + count - 1;
+	lsbd = end & 1;
+	end = (end >> 1) << 2;	
+	end |= lsbd;
+
+	lsbd = ead & 1;
+	ead = (ead >> 1) << 2;	
+	ead |= lsbd;
+
+	if( lsbd != ( plane & 1 ))
+	{
+		dst = lsbd ? ead + 3 : ead + 1;
+		src = lsbs ? eas + 3 : eas + 1;
+	}
+	else
+	{
+		dst = ead;
+		src = eas;
+	}
+
+	copy_alternate_bytes( &EGA_plane[dst], &EGA_plane[end], &EGA_plane[src] );
+}
+
+GLOBAL VOID
+ega_mode1_chn_b_move IFN4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag )
+{
+	note_entrance0("ega_mode1_chn_b_move");
+
+	if( src_flag )
+	{
+		if( getDF() )
+		{
+			eas -= count - 1;
+			ead -= count - 1;
+		}
+
+		if( getVideoplane_enable() & 1 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane01, 0 );
+
+		if( getVideoplane_enable() & 2 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane01, 1 );
+
+		if( getVideoplane_enable() & 4 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane23, 2 );
+
+		if( getVideoplane_enable() & 8 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane23, 3 );
+	}
+	else	/* source is not in ega memory, it becomes a fill */
+	{
+		if( getDF() )
+			ead -= count - 1;
+
+		ega_mode1_chn_fill( ead, count );
+	}
+
+	update_alg.mark_string( ead, ead + count - 1 );
+}
+
+VOID
+ega_mode1_chn_w_move IFN4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag)
+{
+	note_entrance0("ega_mode1_chn_w_move");
+
+	count <<= 1;
+
+	if( src_flag )
+	{
+		if( getDF() )
+		{
+			eas -= count - 2;
+			ead -= count - 2;
+		}
+
+		if( getVideoplane_enable() & 1 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane01, 0 );
+
+		if( getVideoplane_enable() & 2 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane01, 1 );
+
+		if( getVideoplane_enable() & 4 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane23, 2 );
+
+		if( getVideoplane_enable() & 8 )
+			ega_mode1_chn_move_vid_src( ead, eas, count, EGA_plane23, 3 );
+	}
+	else	/* source is not in ega memory, it becomes a fill */
+	{
+		if( getDF() )
+			ead -= count - 2;
+
+		ega_mode1_chn_fill( ead, count );
+	}
+
+	update_alg.mark_string( ead, ead + count - 1 );
+}
 
 #line 654
 VOID
@@ -714,10 +952,203 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	update_alg.mark_wfill( offset, offset + count - 1, 0 );
 }
 
-#ifndef CPU_40_STYLE
 #line 1028
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif /* CPU_40_STYLE */
+LOCAL VOID
+ega_mode2_chn_move_guts IFN8(UTINY *, eas, UTINY *, ead, LONG, count,
+	UTINY *, EGA_plane, ULONG, scratch, ULONG, plane, ULONG, w,
+	ULONG, src_flag )
+{
+	ULONG src, dst;
+	UTINY *source;
+	USHORT value;
+	ULONG lsb;
+
+	src = (ULONG) eas;
+
+	dst = (ULONG) ead;
+
+	/*
+	 *	even planes cannot start with odd addresses
+	 *	odd planes cannot start with even addresses
+	 */
+
+	if(( dst & 1 ) != ( plane & 1 ))	
+	{
+#ifdef BACK_M
+#line 1050
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1053
+		src++;
+		scratch++;
+#endif
+		dst++;
+		count--;
+	}
+
+	lsb = dst & 1;
+	dst = (dst >> 1) << 2;
+	dst |= lsb;
+
+	if( src_flag )
+	{
+		lsb = src & 1;
+		src = (src >> 1) << 2;
+		src |= lsb;
+
+		if( plane & 1 )
+		{
+
+		/*
+		 *	This causes latches to be read from 2 bytes above the word
+		 *	that was read if it was on an odd address, ie it only applies
+		 *	to planes 1 and 3 in chained mode word operations.
+		 */
+
+			source = w ? &EGA_plane[src] + 2 : &EGA_plane[src];
+		}
+		else
+		{
+			source = &EGA_plane[src];
+		}
+
+		src = scratch;
+	}
+
+	if( EGA_CPU.fun_or_protection )
+	{
+		while( count > 0 )
+		{
+			count -= 2;
+
+			value = *(UTINY *) src & (1 << plane) ? 0xff : 0;
+#ifdef BACK_M
+#line 1097
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1099
+			src += 2;
+#endif
+
+			if( src_flag )
+			{
+				put_latch( plane, *source );
+				source += 4;
+			}
+
+			EGA_plane[dst] = do_logicals( value, get_latch(plane) );
+			dst += 4;
+		}
+	}
+	else
+	{
+		while( count > 0 )
+		{
+			count -= 2;
+
+			EGA_plane[dst] = *(UTINY *) src & (1 << plane) ? 0xff : 0;
+#ifdef BACK_M
+#line 1120
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1122
+			src += 2;
+#endif
+			dst += 4;
+		}
+	}
+}
+
+/*
+ * Used by ega_mode2_chn_b_move with w == 0 and by
+ * ega_mode2_gen_w_move with w == 1
+ */
+
+VOID
+ega_mode2_chn_move IFN5(UTINY, w, UTINY *, ead, UTINY *, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	UTINY *scr;
+
+	IMPORT VOID (*string_read_ptr)();
+
+	count <<= w;
+
+	if( src_flag )
+	{
+		/*
+		 *	Source is in EGA, latches will change with each byte moved. We
+		 *	restore CPU's view of source in regen, and use it to update planes
+		 *	with the aid of the SAS scratch area.
+		 */
+
+#ifdef BACK_M
+#line 1153
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1155
+		scr = getVideoscratch();
+#endif
+
+		if( getDF() )
+		{
+			eas = eas - count + 1 + w;
+			ead = ead - count + 1 + w;
+		}
+
+		(*string_read_ptr)( scr, eas, count );
+	}
+	else
+	{
+		if( getDF() )
+		{
+#ifdef BACK_M
+#line 1171
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1173
+			eas = eas - count + 1 + w;
+#endif
+			ead = ead - count + 1 + w;
+		}
+	}
+
+	if( getVideoplane_enable() & 1 )		/* plane 0, even addresses, enabled */
+		ega_mode2_chn_move_guts( eas, ead, count, EGA_plane01, (ULONG) scr, 0, w, src_flag );
+
+	if( getVideoplane_enable() & 2 )		/* plane 1, odd addresses, enabled */
+		ega_mode2_chn_move_guts( eas, ead, count, EGA_plane01, (ULONG) scr, 1, w, src_flag );
+
+	if( getVideoplane_enable() & 4 )		/* plane 2, even addresses, enabled */
+		ega_mode2_chn_move_guts( eas, ead, count, EGA_plane23, (ULONG) scr, 2, w, src_flag );
+
+	if( getVideoplane_enable() & 8 )		/* plane 3, odd addresses, enabled */
+		ega_mode2_chn_move_guts( eas, ead, count, EGA_plane23, (ULONG) scr, 3, w, src_flag );
+
+	update_alg.mark_string( (int) ead, (int) ead + count - 1 );
+}
+
+VOID
+ega_mode2_chn_b_move IFN4(ULONG, ead, ULONG, eas, ULONG, count,
+	ULONG, src_flag)
+{
+  note_entrance0("ega_mode2_chn_b_move");
+
+  /* general function, 0 means byte write */
+
+  ega_mode2_chn_move(0, (UTINY *) ead, (UTINY *) eas, count, src_flag);
+}
+
+VOID
+ega_mode2_chn_w_move IFN4(ULONG, ead, ULONG, eas, ULONG, count,
+	ULONG, src_flag)
+{
+  note_entrance0("ega_mode2_chn_w_move");
+
+  /* general function, 1 means word write */
+
+  ega_mode2_chn_move(1, (UTINY *)ead, (UTINY *)eas, count, src_flag);
+}
 
 #line 1216
 #endif

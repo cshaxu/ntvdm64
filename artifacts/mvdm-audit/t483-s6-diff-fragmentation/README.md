@@ -427,3 +427,8 @@ and the byte-level WOW object comparison preserve selected behavior.
 136 matched worker/fixture preprocessing entries and four focused fixture
 outcomes. The filtered census is 1,997 points and 28,229 changed lines
 across 233 differing mirrors.
+
+[S7 P32 receipt](s7-p32-checkpoint.json) records four original EGA writer
+ranges restored, fourteen original BACK_M exclusions and matching
+product code in the isolated before/after linker control. The filtered
+census is 1,993 points and 27,382 changed lines across 233 mirrors.

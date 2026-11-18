@@ -380,10 +380,151 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
     }
 }
 
-#ifndef CPU_40_STYLE
 #line 467
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif /* CPU_40_STYLE */
+LOCAL VOID
+ega_copy_move IFN6(UTINY *, dst, UTINY *, eas, ULONG, count, ULONG, src_flag,
+	ULONG, w, IBOOL, forward )
+{
+	ULONG lsbeas, lsbdst;
+	ULONG easinc, dstinc;
+	ULONG easoff, dstoff;
+	UTINY *planes;
+
+	note_entrance0("ega_copy_move");
+
+	(*update_alg.mark_string)( (ULONG) dst, (ULONG) dst + count - 1);
+
+	planes = (UTINY *) getVideowplane();
+
+	if( src_flag == 1 )
+	{
+		if(!forward)
+		{
+			eas += w;
+			dst += w;
+		}
+
+		lsbeas = (ULONG) eas & 0x1;
+		lsbdst = (ULONG) dst & 0x1;
+
+		if(forward)
+		{
+			easinc = lsbeas ? 3 : 1;
+			dstinc = lsbdst ? 3 : 1;
+		}
+		else
+		{
+			easinc = lsbeas ? -1 : -3;
+			dstinc = lsbdst ? -1 : -3;
+		}
+
+		easoff = (( (ULONG) eas >> 1 ) << 2 ) | lsbeas;
+		dstoff = (( (ULONG) dst >> 1 ) << 2 ) | lsbdst;
+
+		while( count-- )
+		{
+			*(planes + dstoff) = *(planes + easoff);
+
+			dstoff += dstinc;
+			easoff += easinc;
+			dstinc ^= 0x2;
+			easinc ^= 0x2;
+		}
+	}
+	else
+	{
+		if(!forward)
+		{
+			dst += w;
+#ifdef BACK_M
+#line 523
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 525
+			eas += w;
+#endif
+		}
+
+		lsbdst = (ULONG) dst & 0x1;
+
+		if(forward)
+		{
+#ifdef BACK_M
+#line 534
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 536
+			easinc = 1;
+#endif
+			dstinc = lsbdst ? 3 : 1;
+		}
+		else
+		{
+#ifdef BACK_M
+#line 543
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 545
+			easinc = -1;
+#endif
+			dstinc = lsbdst ? -1 : -3;
+		}
+
+		dstoff = (((ULONG) dst >> 1 ) << 2 ) | lsbdst;
+
+		while( count-- )
+		{
+			*(planes + dstoff) = *eas;
+
+			dstoff += dstinc;
+			eas += easinc;
+			dstinc ^= 0x2;
+		}
+	}
+}
+
+
+VOID
+ega_copy_b_move IFN4(UTINY *,  offset, UTINY *, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_copy_move(offset, eas, count, src_flag, 0, getDF() ? FALSE : TRUE);
+}
+
+VOID
+ega_copy_b_move_fwd IFN4(ULONG,  offset, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_copy_move( (UTINY *)offset, (UTINY *)eas, count, src_flag, 0, TRUE );
+}
+
+VOID
+ega_copy_b_move_bwd IFN4(ULONG,  offset, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_copy_move( (UTINY *)offset, (UTINY *)eas, count, src_flag, 0, FALSE );
+}
+
+VOID
+ega_copy_w_move IFN4(UTINY *,  offset, UTINY *, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_copy_move(offset, eas, count << 1, src_flag, 1, getDF() ? FALSE : TRUE);
+}
+
+VOID
+ega_copy_w_move_fwd IFN4(ULONG,  offset, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_copy_move( (UTINY *)offset, (UTINY *)eas, count << 1, src_flag, 1, TRUE );
+}
+
+VOID
+ega_copy_w_move_bwd IFN4(ULONG,  offset, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_copy_move( (UTINY *)offset, (UTINY *)eas, count << 1, src_flag, 1, FALSE );
+}
 
 #line 606
 VOID
@@ -865,10 +1006,288 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	}
 }
 
-#ifndef CPU_40_STYLE
 #line 1085
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif /* CPU_40_STYLE */
+LOCAL VOID
+ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
+	UTINY *, EGA_plane, ULONG, plane )
+{
+	ULONG	offset;
+	UTINY *src_offset;
+	UTINY value;
+	ULONG lsb, srcinc;
+
+	src_offset = (UTINY *) eas;
+	offset = (ULONG) ead;
+
+	if(( offset & 1 ) != ( plane & 1 ))
+	{
+#ifdef BACK_M
+#line 1100
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1102
+		src_offset++;
+#endif
+		offset++;
+		count--;
+	}
+
+#ifdef BACK_M
+#line 1109
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1111
+	srcinc = 2;
+#endif
+
+	lsb = offset & 1;
+	offset = (offset >> 1) << 2;
+	offset |= lsb;
+
+	/*
+	 * check if set/reset function enable for this plane 
+	 */
+
+	if( EGA_CPU.sr_enable & ( 1 << plane ))
+	{
+		value = *((UTINY *) &EGA_CPU.sr_value + plane );
+
+		while( count > 0 )
+		{
+			count -= 2;
+
+			EGA_plane[offset] = do_logicals( value, get_latch(plane) );
+			offset += 4;
+		}
+	}
+	else
+	{
+		while( count > 0 )
+		{
+			value = *src_offset;
+			src_offset += srcinc;
+			count -= 2;
+
+			/*
+			 * set/reset not enabled so here we go
+			 */
+
+			if( getVideorotate() > 0 )
+				value = rotate( value, getVideorotate() );
+
+			value = do_logicals( value, get_latch(plane) );
+			EGA_plane[offset] = value;
+			offset += 4;
+		}
+	}
+}
+
+LOCAL VOID
+ega_mode0_chn_move_vid_src IFN7(UTINY *, eas, LONG, count, UTINY *, ead,
+	UTINY *, EGA_plane, UTINY *, scratch, ULONG, plane, ULONG, w )
+{
+	ULONG	offset;
+	ULONG src_offset;
+	UTINY *source;
+	UTINY value;
+	UTINY valsrc;
+	ULONG lsb, inc, srcinc;
+
+	offset = (ULONG ) ead;
+
+	if(( offset & 1 ) != ( plane & 1 ))
+	{
+		eas++;
+#ifdef BACK_M
+#line 1173
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1175
+		scratch++;
+#endif
+		offset++;
+		count--;
+	}
+
+	src_offset = (ULONG) eas;
+
+#ifdef BACK_M
+#line 1184
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1186
+	srcinc = 2;
+#endif
+	inc = 4;
+
+	lsb = offset & 1;
+	offset = (offset >> 1) << 2;
+	offset |= lsb;
+
+	lsb = src_offset & 1;
+	src_offset = (src_offset >> 1) << 2;
+	src_offset |= lsb;
+
+	source = &EGA_plane[src_offset] + (w << 2);
+
+	/*
+	 * check if set/reset function enable for this plane 
+	 */
+
+	if( EGA_CPU.sr_enable & ( 1 << plane ))
+	{
+		value = *((UTINY *) &EGA_CPU.sr_value + plane );
+
+		while( count > 0 )
+		{
+			count -= 2;
+			valsrc = *source;
+			source += inc;
+			EGA_plane[offset] = do_logicals( value, valsrc );
+			offset += inc;
+		}
+	}
+	else
+	{
+		while( count > 0 )
+		{
+			count -= 2;
+
+			value = *(UTINY *) scratch;
+			scratch += srcinc;
+
+			valsrc = *source;
+			source += inc; 
+
+			/*
+			 * set/reset not enabled so here we go
+			 */
+
+			if( getVideorotate() > 0 )
+				value = rotate( value, getVideorotate() );
+
+			value = do_logicals( value, valsrc );
+			EGA_plane[offset] = value;
+			offset += inc;
+		}
+	}
+}
+
+VOID
+ega_mode0_chn_move IFN6(UTINY, w, UTINY *, ead, UTINY *, eas, ULONG, count,
+	ULONG, src_flag, IBOOL, forwards )
+{
+	UTINY *scratch;
+	IMPORT VOID (*string_read_ptr)();
+
+	note_entrance0("ega_mode0_chn_move");
+
+	if( src_flag == 1 )
+	{
+		/*
+		 *	Source is in EGA, latches will change with each byte moved. We
+		 *	restore CPU's view of source in regen, and use it to update planes
+		 *	with the aid of the SAS scratch area.
+		 */
+
+#ifdef BACK_M
+#line 1261
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1263
+		scratch = getVideoscratch();
+#endif
+
+		if( !forwards )
+		{
+			eas += - count + 1 + w;
+			ead += - count + 1 + w;
+		}
+
+		(*string_read_ptr)( scratch, eas, count );
+
+		if( getVideoplane_enable() & 1 )
+			ega_mode0_chn_move_vid_src( eas, count, ead, EGA_plane01, scratch, 0, 0 );
+
+		if( getVideoplane_enable() & 2 )
+			ega_mode0_chn_move_vid_src( eas, count, ead, EGA_plane01, scratch, 1, w );
+
+		if( getVideoplane_enable() & 4 )
+			ega_mode0_chn_move_vid_src( eas, count, ead, EGA_plane23, scratch, 2, 0 );
+
+		if( getVideoplane_enable() & 8 )
+			ega_mode0_chn_move_vid_src( eas, count, ead, EGA_plane23, scratch, 3, w );
+	}
+	else
+	{
+		if( !forwards )
+		{
+#ifdef BACK_M
+#line 1291
+#error Excluded original BACK_M graphics storage profile
+#else
+#line 1293
+			eas += - count + 1 + w;
+#endif
+			ead += - count + 1 + w;
+		}
+
+		if( getVideoplane_enable() & 1 )
+			ega_mode0_chn_move_ram_src( eas, count, ead, EGA_plane01, 0 );
+
+		if( getVideoplane_enable() & 2 )
+			ega_mode0_chn_move_ram_src( eas, count, ead, EGA_plane01, 1 );
+
+		if( getVideoplane_enable() & 4 )
+			ega_mode0_chn_move_ram_src( eas, count, ead, EGA_plane23, 2 );
+
+		if( getVideoplane_enable() & 8 )
+			ega_mode0_chn_move_ram_src( eas, count, ead, EGA_plane23, 3 );
+	}
+
+	(*update_alg.mark_string)( (ULONG) ead, (ULONG) ead + count );
+}
+
+
+VOID
+ega_mode0_chn_b_move IFN4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag)
+{
+	ega_mode0_chn_move( 0, (UTINY *)ead, (UTINY *)eas, count, src_flag, getDF() ? FALSE : TRUE);
+}
+
+VOID
+ega_mode0_chn_b_move_fwd IFN4(ULONG, ead, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_mode0_chn_move( 0, (UTINY *)ead, (UTINY *)eas, count, src_flag, TRUE );
+}
+
+VOID
+ega_mode0_chn_b_move_bwd IFN4(ULONG, ead, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_mode0_chn_move( 0, (UTINY *)ead, (UTINY *)eas, count, src_flag, FALSE );
+}
+
+VOID
+ega_mode0_chn_w_move IFN4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag)
+{
+	ega_mode0_chn_move(1, (UTINY *)ead, (UTINY *)eas, count << 1, src_flag, getDF() ? FALSE : TRUE);
+}
+
+VOID
+ega_mode0_chn_w_move_fwd IFN4(ULONG, ead, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_mode0_chn_move(1,(UTINY *)ead, (UTINY *)eas, count << 1, src_flag, TRUE );
+}
+
+VOID
+ega_mode0_chn_w_move_bwd IFN4(ULONG, ead, ULONG, eas, ULONG, count,
+	ULONG, src_flag )
+{
+	ega_mode0_chn_move(1,(UTINY *)ead, (UTINY *)eas, count << 1, src_flag, FALSE );
+}
 
 #line 1355
 VOID

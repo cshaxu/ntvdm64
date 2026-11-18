@@ -1,0 +1,316 @@
+{
+  "packet": "M0 T483 S7 P32",
+  "prior_checkpoint": "6bf07f1ee",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/softpc.new/base/video/egwrtm12.c": {
+      "before": {
+        "blocks": 14,
+        "added": 21,
+        "deleted": 438
+      },
+      "after": {
+        "blocks": 12,
+        "added": 15,
+        "deleted": 10
+      },
+      "restored_original_ranges": [
+        [
+          1028,
+          1215
+        ],
+        [
+          412,
+          653
+        ]
+      ],
+      "paired_error_bodies": 12,
+      "original_sha256": "826aa1a6f685f7dc0d8b4362f3eb83899697d8a6e2a555739ff61e2388d254a1",
+      "prior_sha256": "ba364e0597af92f8530214a8f43479e9d141c4e8579d0a78c15ab9d0dee037d3",
+      "current_sha256": "5d88168c59ab1f0f32e2360d2214319175a6f9a61f7e2c2873f2fa86b5550dfc"
+    },
+    "src/mvdm-host/softpc.new/base/video/egawrtm0.c": {
+      "before": {
+        "blocks": 8,
+        "added": 15,
+        "deleted": 411
+      },
+      "after": {
+        "blocks": 6,
+        "added": 9,
+        "deleted": 4
+      },
+      "restored_original_ranges": [
+        [
+          1085,
+          1354
+        ],
+        [
+          467,
+          605
+        ]
+      ],
+      "paired_error_bodies": 15,
+      "original_sha256": "4dd8d5fb60d9ff0298bb59e0c40245f9a4bfd3a5d19e50341e246320abcc95e1",
+      "prior_sha256": "5044e92f636b864b54922ad5b2339d4c8c1e026f0d0697655ee3e730571c595d",
+      "current_sha256": "b1aeb3e852ba79eb8f93885196463122f2a471858d8a8f6b6f86ecb873f9b2b8"
+    }
+  },
+  "decision": "Restore four original EGA writer ranges and their original fourteen BACK_M condition frames. Keep excluded BACK_M bodies as #error and existing logical line policy. No change to the scalar CHAIN2 or generated dispatch adaptations.",
+  "restored_review_ids": [
+    "T483-R0849",
+    "T483-R0851",
+    "T483-R0856",
+    "T483-R0863"
+  ],
+  "census": {
+    "non_error_points": 1993,
+    "non_error_lines": 27382,
+    "nonzero_mirrors": 233,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 54,
+      "lines": 1594
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "cached_x86_x64": "pass",
+    "final_x86_product_and_x64_reference_worker_incremental": "pass",
+    "controlled_before_after_link": [
+      {
+        "name": "ntvdm",
+        "bytes": 2107392,
+        "different_byte_offsets": [
+          280,
+          281,
+          282,
+          1710068,
+          1710069,
+          1710070
+        ],
+        "timestamp_fields": [
+          280,
+          1710068
+        ],
+        "normalized_sha256": "42ff9ba044a75690fe999db4b940129b4e5df0798c0c0fb26072b3b49126b947"
+      },
+      {
+        "name": "cvidc-vector-binding-fixture",
+        "bytes": 1959424,
+        "different_byte_offsets": [
+          272,
+          273,
+          274,
+          1579268,
+          1579269,
+          1579270
+        ],
+        "timestamp_fields": [
+          272,
+          1579268
+        ],
+        "normalized_sha256": "f1044200cf7c1c75539b1f6d3607cfbe9d00c2e07e04c9a7a3398b75274a95a0"
+      }
+    ],
+    "final_cvidc_vector_binding_fixture": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation",
+    "package": {
+      "identity": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "publication": {
+        "images": 11,
+        "destinations": [
+          "O:\\repos.hobby\\ntvdm64/assets/release",
+          "O:/winnt/system32"
+        ],
+        "package": "619955ae-00b2-4174-b75a-471ac49f7add",
+        "hashVerified": true,
+        "stopped": 0
+      },
+      "all_11_images": [
+        {
+          "name": "VCDEX.DLL",
+          "prior_sha256": "f6d53ae57df32835cd28a769b7ae3585321b5bfd3fe1f387d7b0353da5f719b8",
+          "staged_sha256": "f6d53ae57df32835cd28a769b7ae3585321b5bfd3fe1f387d7b0353da5f719b8",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 0,
+          "first_offsets": [],
+          "lengths": [
+            10240,
+            10240
+          ]
+        },
+        {
+          "name": "run16.exe",
+          "prior_sha256": "34995f15578b5d6ccd48d545ef2a6458a6b94502b63d1176f6839c93a2c202b4",
+          "staged_sha256": "c829bc8ae53963962a8b169694e3590870e91b6403d719f0bf6ce096f80d18de",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 6,
+          "first_offsets": [
+            256,
+            257,
+            258,
+            211428,
+            211429,
+            211430
+          ],
+          "lengths": [
+            308224,
+            308224
+          ]
+        },
+        {
+          "name": "ntsrv.exe",
+          "prior_sha256": "b4ed5f2139afb71dc7c2e3af45101da5e0c184c4237df125954533f0e9ce4820",
+          "staged_sha256": "49e658a574215f3b080ce4ab3015cb95075c81c2ebbafef98151080d8783d1ee",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 6,
+          "first_offsets": [
+            264,
+            265,
+            266,
+            300004,
+            300005,
+            300006
+          ],
+          "lengths": [
+            411136,
+            411136
+          ]
+        },
+        {
+          "name": "ntcon.exe",
+          "prior_sha256": "fbc90b0944425c44ff070d3c2cba0fd3f8acf32110962c6563b1e3a4bf107ae9",
+          "staged_sha256": "dbc319c4a12dae9723a135eb043089f43280524971cdd30e51a51116e1414f17",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 6,
+          "first_offsets": [
+            264,
+            265,
+            266,
+            250580,
+            250581,
+            250582
+          ],
+          "lengths": [
+            357376,
+            357376
+          ]
+        },
+        {
+          "name": "ntvdm.exe",
+          "prior_sha256": "1f409da96f56feea254d1d1ccaab6f6081b69ffac8893efc86494550a64abace",
+          "staged_sha256": "ab660735da6620671625a667ce41589c8fa4aa39c93fdc59f136ad56fd04e734",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 6,
+          "first_offsets": [
+            280,
+            281,
+            282,
+            1710068,
+            1710069,
+            1710070
+          ],
+          "lengths": [
+            2107392,
+            2107392
+          ]
+        },
+        {
+          "name": "ntvwm.exe",
+          "prior_sha256": "c90d6fb50591ff452237b66e8753c84c6ffe3fadb474dea2f0c5b531f2142678",
+          "staged_sha256": "ba1970324f5b4eaec61b4b0aa77d73af9491f6521fc55af57eafae3b330d5738",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 6,
+          "first_offsets": [
+            248,
+            249,
+            250,
+            227252,
+            227253,
+            227254
+          ],
+          "lengths": [
+            327168,
+            327168
+          ]
+        },
+        {
+          "name": "ntmon.exe",
+          "prior_sha256": "d3df7e7edf3195b6d8647037e5fa6595921a160589cea6b348c79ec992c2db9c",
+          "staged_sha256": "d3df7e7edf3195b6d8647037e5fa6595921a160589cea6b348c79ec992c2db9c",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 0,
+          "first_offsets": [],
+          "lengths": [
+            169984,
+            169984
+          ]
+        },
+        {
+          "name": "WOW32.DLL",
+          "prior_sha256": "8e2d25544b5a77f95352c11d3636437c989ff0f90fb68539fc4c67f162b39d7d",
+          "staged_sha256": "c853314cff7488d573d21ec53fd33d89582fa99c2af34e90c585ea2733d68ecc",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 4,
+          "first_offsets": [
+            304,
+            305,
+            620404,
+            620405
+          ],
+          "lengths": [
+            707584,
+            707584
+          ]
+        },
+        {
+          "name": "VDMREDIR.DLL",
+          "prior_sha256": "693ded67fbd0a21e7844f949de2c4e6b5d17dd50fba8a8caae28c0913098f4f9",
+          "staged_sha256": "b4a62c9997a190019e5ae9b9f2ebaaeff2873001226666e4f47ed791a9a845ef",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 4,
+          "first_offsets": [
+            280,
+            281,
+            125268,
+            125269
+          ],
+          "lengths": [
+            209408,
+            209408
+          ]
+        },
+        {
+          "name": "nthook32.dll",
+          "prior_sha256": "b7044a9cee3fc1855bf5fac53d829ffc399103a313848d8053729ab50e41b74f",
+          "staged_sha256": "612552bdd3f23c916aa5e0a03b5a60a451ea001a3be87fbc5baa621c9d4d98f2",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 4,
+          "first_offsets": [
+            272,
+            273,
+            134228,
+            134229
+          ],
+          "lengths": [
+            216064,
+            216064
+          ]
+        },
+        {
+          "name": "nthook64.dll",
+          "prior_sha256": "86692e6cc9da50cd2f6de6525e62879e442cb6b5bfabe7145c3da2d3c695d441",
+          "staged_sha256": "86692e6cc9da50cd2f6de6525e62879e442cb6b5bfabe7145c3da2d3c695d441",
+          "same_except_coff_and_debug_timestamps": true,
+          "different_bytes": 0,
+          "first_offsets": [],
+          "lengths": [
+            261120,
+            261120
+          ]
+        }
+      ],
+      "full_suite": "No repeat of prior P10 Full. Exact comparison to published P10 images differs only at located PE COFF and debug-directory timestamps. Three images are byte-identical."
+    }
+  }
+}
