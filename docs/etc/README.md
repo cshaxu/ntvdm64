@@ -1389,5 +1389,6 @@ the pinned source intersection, compatibility findings and generic-test plan.
 
 - [T483 S5 closure](evidence/m0-t483-s5-closure.md):final nine-file batch,verified publication and explicit residual-decision handoff to S6.
 - [T483 S6 closure](evidence/m0-t483-s6-closure.md) records the P32 baseline and the remaining mirror reviews transferred to S7.
+- [T483 S7 closure](evidence/m0-t483-s7-closure.md) records the P48 baseline and the final sequential review transferred to S8.
 
 - [T483 S6 descending mirror-diff worklist](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md):owner-admitted successor,exclusion-aware counts and decision handoff.
