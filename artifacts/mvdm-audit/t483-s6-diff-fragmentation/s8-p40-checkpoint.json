@@ -1,0 +1,93 @@
+{
+  "packet": "T483 S8 P40",
+  "position": 82,
+  "path": "src/mvdm-host/softpc.new/base/video/video.c",
+  "review_ids": [
+    "T483-R0955",
+    "T483-R0956",
+    "T483-R0958",
+    "T483-R0959",
+    "T483-R0960",
+    "T483-R0961",
+    "T483-R0962",
+    "T483-R0964",
+    "T483-R0965",
+    "T483-R0966",
+    "T483-R0967",
+    "T483-R0968",
+    "T483-R0969"
+  ],
+  "source_sha256": "e76cdce88dc8bad15f84afc903f265f37f78e9d0fe5e5fb846c42863235e99da",
+  "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+  "before": {
+    "blocks": 13,
+    "added": 52,
+    "deleted": 12
+  },
+  "after": {
+    "blocks": 13,
+    "added": 49,
+    "deleted": 12
+  },
+  "source_decision": "Keep caller BIOS aperture, initialized scroll result and original-plane/SAS routing. The MONITOR profile still supplies the NTIO vector and stream hooks. End each local unsupported-profile guard immediately after its error. All old non-directive source lines retain exact text and logical coordinates. Local guards have no original conditional counterpart and remain counted.",
+  "alternatives": {
+    "changed outer predicate": [
+      13,
+      49,
+      15
+    ],
+    "move selected code past both guards": [
+      16,
+      49,
+      12
+    ],
+    "use two explicit rejection arms before original body": [
+      16,
+      25,
+      18
+    ]
+  },
+  "mask_issues": [
+    {
+      "line": 1600,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 1678,
+      "reason": "ambiguous-original-arm"
+    },
+    {
+      "line": 2180,
+      "reason": "ambiguous-original-arm"
+    }
+  ],
+  "coverage": {
+    "complete": 82,
+    "remaining": 149,
+    "files": 231,
+    "points": 1946,
+    "lines": 27089,
+    "pending": 1549
+  },
+  "verification": {
+    "profile_comparison": "GCC preprocessor on three extracted blocks, all 64 combinations of NTVDM, MONITOR, GISP_SVGA, MVDM_STANDALONE_SAS_VIDEO, EGG, CPU_40_STYLE. Replaced errors with rejection witnesses for comparison: 12 selected token streams identical, 180 identical rejection messages. Not 64 production builds.",
+    "inputs": "build/t483-s8-p40/{prior-profile,updated-profile}.c",
+    "build": {
+      "cached_x86": 0,
+      "cached_x64": 0
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "3b817a7f-8289-4064-9c14-a1bd5413c3ad",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "probe": "Authored test COM; mode 3, page 0, cursor (6,5); INT 10h AH=09h writes A/1F, 0Ah overwrites B and preserves attribute, 0Eh writes C and advances. AH=08h readback after each, explicitly reposition after teletype. Production staged package in isolated private desktop. Standard colour text only.",
+    "probe_sha256": "f3e66794c08f23a873fa2ea9e8da2723ac5e2b88dcc72b00792b83cda8c853b4",
+    "result": "P40-BIOS-WRITES-PASS; observer result exited; exit=0"
+  }
+}

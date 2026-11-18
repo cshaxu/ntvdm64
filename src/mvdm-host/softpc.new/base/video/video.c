@@ -1600,7 +1600,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 #if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
 #line 1512
 #error Excluded unsupported original monitor or GISP video pointer
-#else
+#endif
 #line 1514
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
@@ -1612,7 +1612,6 @@ GLOBAL void vd_write_char_attrib IFN0()
 			else
 #endif	/* EGG */
 				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
-#endif
 #line 1513
 #else
 #line 1514
@@ -1679,7 +1678,7 @@ GLOBAL void vd_write_char IFN0()
 #if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
 #line 1580
 #error Excluded unsupported original monitor or GISP video pointer
-#else
+#endif
 #line 1582
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
@@ -1695,7 +1694,6 @@ GLOBAL void vd_write_char IFN0()
 #endif	/* EGG */
 #line 1591
 				(*bios_ch2_byte_wrt_fn)( getAL(), cpos );
-#endif
 #line 1581
 #else
 #line 1582
@@ -2182,7 +2180,7 @@ GLOBAL void vd_write_teletype IFN0()
 #if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
 #line 2043
 #error Excluded unsupported original monitor or GISP video pointer
-#else
+#endif
 #line 2045
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
@@ -2198,7 +2196,6 @@ GLOBAL void vd_write_teletype IFN0()
 #endif	/* EGG */
 #line 2054
 				(*bios_ch2_byte_wrt_fn)( ch, ch_addr );
-#endif
 #line 2044
 #else
 #line 2045
