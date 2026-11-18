@@ -284,8 +284,7 @@ mvdm_guest_location_lease bufferLease;
     if (!mvdm_guest_location_acquire(&bufferLocation, (DWORD)getCX(),
         GUEST_MEMORY_ACCESS_READ, &bufferLease)) {
         SetLastError(ERROR_INVALID_ADDRESS);
-        demClientError(hFile, (CHAR)-1);
-        return;
+        goto writeFailureExit;
     }
     lpBuf = (LPVOID)bufferLease.bytes;
 #line 264

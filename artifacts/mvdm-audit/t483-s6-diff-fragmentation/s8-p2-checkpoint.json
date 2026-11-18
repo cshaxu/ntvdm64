@@ -1,0 +1,94 @@
+{
+  "packet": "M0 T483 S8 P2",
+  "prior_checkpoint": "e22aeb558",
+  "covered_before": 5,
+  "covered_after": 7,
+  "remaining": 224,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1974,
+    "lines": 27209
+  },
+  "cumulative_s8_reduction": {
+    "points": 0,
+    "lines": 1
+  },
+  "pending_rows": 1566,
+  "files": [
+    {
+      "position": 6,
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "source_sha256": "35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e",
+      "points_before_after": [
+        3,
+        3
+      ],
+      "lines_before_after": [
+        7,
+        7
+      ],
+      "disposition": "Keep the one-field volume padding correction and existing DOSWOWDATA registration pending. Both clear and register are needed to preserve invalidation on failed registration. The 2-VM session/epoch consumer remains active.",
+      "media_control": {
+        "scope": "Exact source owner extraction with mocked volume-query endpoint; not a fresh DOS integration test",
+        "cases": [
+          {
+            "source_sha256": "35B917886EEE3AA1CEB6197ACC88AAF0FC786A8EBF82836FDEE0AE422B847F1E",
+            "case": "current",
+            "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+            "exit": 0,
+            "output": "S37_DEM_MEDIA_PADDING_LABEL_CANARY_FAILURE_OK"
+          },
+          {
+            "source_sha256": "19C5999308A479CC9C0FCB30D23E8301D9A835408417AA965B85523DFB8A1653",
+            "case": "original",
+            "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+            "exit": 1,
+            "output": "S37_MEDIA_FAIL line=42"
+          }
+        ],
+        "fixture_sha256": "4A430FB6A12A5F72F175F8763E0717675E309AEDBB0D4E60DA2BC1660A0B9FCC"
+      },
+      "directives": "Source unchanged."
+    },
+    {
+      "position": 7,
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+      "measurement": {
+        "before": {
+          "blocks": 12,
+          "added": 32,
+          "deleted": 14
+        },
+        "after": {
+          "blocks": 12,
+          "added": 31,
+          "deleted": 14
+        },
+        "current_sha256": "ffe30feeafd8e968bbf0f9b4671824d051c0932c77bdb626de51f5490241c784"
+      },
+      "disposition": "Share existing write failure cleanup after failed acquisition. The acquire adapter zeroes its output; release returns before touching native state when empty. All other read/write routes retain the bounded adapter.",
+      "directives": "Two excluded branches and all #line directives are byte-identical. The following original source resumes at #line 264."
+    }
+  ],
+  "delivery": {
+    "cached_x86_x64": "passed",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "10402eec-5c79-4440-b15b-eb43551d93d9",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "manifest_sha256": "59441e2ae833e446a5c1f7d867fafd868c557c3bae7d4f2aba44a7eb640793f8",
+    "focused_negative": "PASS failed DEM write acquisition uses empty cleanup and reports error once",
+    "negative_scope": "Exact demWrite body with stubbed providers exercises acquisition-failure routing; real empty-lease behavior checked in provider source.",
+    "guest": "S33_FILE_COMMIT_SHARE_LOCK_FIND_RENAME_FCB_ATTR_DIR_ERROR_MAP_OK",
+    "guest_fixture_sha256": "35A6B9932B92121D9A2B9A52BBFCBE267288CE06ED4B84EF8F698B82BDB933D5",
+    "guest_verified_images": 11,
+    "full_suite": "Targeted checks only under active S8 packet"
+  }
+}
