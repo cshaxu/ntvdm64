@@ -1,0 +1,77 @@
+{
+  "packet": "T483 S8 P96",
+  "coupled_with_position": 140,
+  "path": "src/mvdm-host/wow32/wkman.c",
+  "review_ids": [
+    "T483-R1470",
+    "T483-R1471",
+    "T483-R1472",
+    "T483-R1473",
+    "T483-R1474",
+    "T483-R1475",
+    "T483-R1477",
+    "T483-R1478",
+    "T483-R1479",
+    "T483-R1480",
+    "T483-R1481",
+    "T483-R1482",
+    "T483-R1483",
+    "T483-R1484",
+    "T483-R1485",
+    "T483-R1486",
+    "T483-R1487",
+    "T483-R1488",
+    "T483-R1492",
+    "T483-R1493",
+    "T483-R1495",
+    "T483-R1496"
+  ],
+  "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+  "current_sha256": "675eb55367e0d442ef50496625fd806add1ba7374100dde0dacae6e2863afb8e",
+  "before": {
+    "blocks": 17,
+    "added": 27,
+    "deleted": 16
+  },
+  "after": {
+    "blocks": 17,
+    "added": 19,
+    "deleted": 16
+  },
+  "source_changed": true,
+  "paired_error_bodies": 24,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        1721,
+        1722,
+        "    // Remove this task from the linked list of tasks"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 139,
+    "remaining": 92,
+    "files": 231,
+    "points": 1913,
+    "lines": 26994,
+    "pending": 1536
+  },
+  "decision": "Consolidate the identical whole-process exit sequence in the existing WOW task termination component. WOWStartupFailed and the four wkman.c callers retain their individual input codes. Keep failures in registry setup other than absent key in the existing R1696 decision; the absent-key witness alone does not justify masking every error. Package path providers, missing private GDI import, LPC declarations, USER borrow scope and SEH recovery remain covered by r1687-r1708-wow32-review.json.",
+  "verification": {
+    "build": "x86/x64 cached product graphs passed",
+    "exitOrder": "Source-verified: authorize before ExitVDM(WOWVDM, ALL_TASKS), then ExitProcess with authorized result",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "336a1dfb-d2ed-4346-a595-d8fbc9f055e3",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "dispatch": "Exact dispatch + exception policy 8 phases, 5 hard-error scopes; not a runtime test of shutdown"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "packet": "T483 S8 P97",
+  "position": 141,
+  "path": "src/mvdm-host/wow32/wow32.def",
+  "review_ids": [
+    "T483-R1709"
+  ],
+  "original_sha256": "0df4286cc384d667dd95bf00b84d81f4afb6536a4fc387a5546b8e74b2f321b4",
+  "current_sha256": "0df4286cc384d667dd95bf00b84d81f4afb6536a4fc387a5546b8e74b2f321b4",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 0,
+    "added": 0,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 141,
+    "remaining": 90,
+    "files": 231,
+    "points": 1910,
+    "lines": 26992,
+    "pending": 1535
+  },
+  "decision": "R1709 restored byte-for-byte. Product generation appends the ticket entry to its existing x86 export list; the generated definition is also an explicit link dependency. Worker task_instruction still looks up the public name. The original HTASK entry remains independent.",
+  "verification": {
+    "exports": {
+      "named_exports": 35,
+      "ticket_ordinal": 15,
+      "symbol": "_W32TerminateTaskTicket@8",
+      "full_named_ordinal_map_preserved": true,
+      "definition_is_link_input": true,
+      "candidate_sha256": "0f0b7825b662e9c2af363b5f90098ff105a3aba11679585db8680009bca70dc2"
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "80852fcc-0e8a-4f6d-880c-63ebdd198444",
+      "hashVerified": true,
+      "stopped": 0
+    }
+  },
+  "fully_restored": [
+    "T483-R1709"
+  ]
+}

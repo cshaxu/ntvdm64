@@ -4,6 +4,8 @@
 #include <windows.h>
 #include <stdint.h>
 
+VOID WINAPI W32ExitWowProcess(DWORD exit_code);
+
 /* The broker owns ticket identity.  This DLL owns only the current original
  * task mapping and invokes the original in-process termination entry. */
 DWORD WINAPI wow_task_termination_bind(ULONG task, USHORT htask);

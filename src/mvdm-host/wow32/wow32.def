@@ -7,7 +7,6 @@ EXPORTS
     W32Init
     W32Dispatch
     W32HungAppNotifyThread
-    W32TerminateTaskTicket
 
     GetCommShadowMSR
     GetCommHandle

@@ -34,14 +34,6 @@
 #include "wow_task_termination.h"
 #include "wow_idle_hook_binding.h"
 #include <common/wow/registry.h>
-extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
-
-static VOID W32ExitWowProcess(DWORD exit_code)
-{
-    exit_code = NtvdmAuthorizeExit(exit_code);
-    ExitVDM(WOWVDM, ALL_TASKS);
-    ExitProcess(exit_code);
-}
 
 #line 32
 extern void UnloadNetworkFonts( UINT id );

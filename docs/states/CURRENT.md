@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P95 completed review through `wole2.c`. Next is position 140, `wow32.c`.
+S8 P97 completed review through `wow32.def`. Next is position 142, `wow32fax.c`.
 
 ## Active Packet
 
@@ -34,8 +34,8 @@ S8 P95 completed review through `wole2.c`. Next is position 140, `wow32.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P95, 139 of 231 positions are covered and 92 remain queued.
-S8 has removed 61 points and 208 diff lines, leaving 1,913 points and 27,002 lines. The live pending backlog has 1,536 rows.
+IDs. After S8 P97, 141 of 231 positions are covered and 90 remain queued.
+S8 has removed 64 points and 218 diff lines, leaving 1,910 points and 26,992 lines. The live pending backlog has 1,535 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p3-checkpoint.json).
@@ -131,6 +131,8 @@ S8 has removed 61 points and 208 diff lines, leaving 1,913 points and 27,002 lin
 [P93 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p93-checkpoint.json).
 [P94 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p94-checkpoint.json).
 [P95 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p95-checkpoint.json).
+[P96 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p96-checkpoint.json).
+[P97 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p97-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

@@ -76,7 +76,7 @@ try {
         '_CreateSmallHeap@0','_W32InitWOWSetupNames@0','_W32LocalFree@8','_W32EmptyClipboard@0',
         '_W32LoadResource@8','_W32EditNextWord@20','_W32DDEFreeGlobalMem32@4',
         '_W32InitDlg@8','_W32LocalAlloc@12','_W32FreeResource@8',
-        '_WK32InitializeHungAppSupport@0','_ntvdm_shadow_reg_close_key@4','_NtvdmAuthorizeExit@4',
+        '_WK32InitializeHungAppSupport@0','_ntvdm_shadow_reg_close_key@4','_W32ExitWowProcess@4',
         '_UserRegisterWowHandlers@8','_InitParamMap@0')
     $unreachedData=@('_VdmLoadCritSec','_tableoffsets','_TimerList','_vpDebugWOW','_dwWOWBatchLimit')
     $aliases=@($unreached|ForEach-Object {'/alternatename:'+$_+'=_fixture_unreachable_dependency'})+

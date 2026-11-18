@@ -20,6 +20,7 @@
 
 #include "precomp.h"
 #include "wow_user_thunk_scope.h"
+#include "wow_task_termination.h"
 #line 22
 #pragma hdrstop
 #include "wktbl.h"
@@ -1702,8 +1703,6 @@ PVOID WOWStartupFailed(VOID)
 {
     char szCaption[256];
     char szMsgBoxText[1024];
-    DWORD exit_code;
-    extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 
 #line 2312
     LoadString(hmodWOW32, iszStartupFailed, szMsgBoxText, sizeof szMsgBoxText);
@@ -1714,10 +1713,8 @@ PVOID WOWStartupFailed(VOID)
         szCaption,
         MB_SETFOREGROUND | MB_TASKMODAL | MB_ICONSTOP | MB_OK | MB_DEFBUTTON1);
 
-    exit_code = NtvdmAuthorizeExit(EXIT_FAILURE);
-#line 2320
-    ExitVDM(WOWVDM, ALL_TASKS);         // Tell Win32 All Tasks are gone.
-    ExitProcess(exit_code);
+    W32ExitWowProcess(EXIT_FAILURE);
+#line 2322
     return (PVOID)NULL;
 }
 

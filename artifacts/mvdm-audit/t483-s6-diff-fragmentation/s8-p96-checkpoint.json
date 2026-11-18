@@ -1,0 +1,64 @@
+{
+  "packet": "T483 S8 P96",
+  "position": 140,
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "review_ids": [
+    "T483-R1688",
+    "T483-R1689",
+    "T483-R1690",
+    "T483-R1692",
+    "T483-R1694",
+    "T483-R1695",
+    "T483-R1696",
+    "T483-R1698",
+    "T483-R1699",
+    "T483-R1700",
+    "T483-R1701",
+    "T483-R1702",
+    "T483-R1706",
+    "T483-R1707",
+    "T483-R1708"
+  ],
+  "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+  "current_sha256": "fb6e8b6fbf15f2b193f9b989f69d8fa17b53c5f2d26cf590553c9f5190cc676a",
+  "before": {
+    "blocks": 15,
+    "added": 26,
+    "deleted": 11
+  },
+  "after": {
+    "blocks": 13,
+    "added": 24,
+    "deleted": 12
+  },
+  "source_changed": true,
+  "paired_error_bodies": 34,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 140,
+    "remaining": 91,
+    "files": 231,
+    "points": 1911,
+    "lines": 26993,
+    "pending": 1536
+  },
+  "decision": "Consolidate the identical whole-process exit sequence in the existing WOW task termination component. WOWStartupFailed and the four wkman.c callers retain their individual input codes. Keep failures in registry setup other than absent key in the existing R1696 decision; the absent-key witness alone does not justify masking every error. Package path providers, missing private GDI import, LPC declarations, USER borrow scope and SEH recovery remain covered by r1687-r1708-wow32-review.json.",
+  "verification": {
+    "build": "x86/x64 cached product graphs passed",
+    "exitOrder": "Source-verified: authorize before ExitVDM(WOWVDM, ALL_TASKS), then ExitProcess with authorized result",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "336a1dfb-d2ed-4346-a595-d8fbc9f055e3",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "dispatch": "Exact dispatch + exception policy 8 phases, 5 hard-error scopes; not a runtime test of shutdown"
+  }
+}

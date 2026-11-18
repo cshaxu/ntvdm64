@@ -2,6 +2,15 @@
 #include "wow_task_termination.h"
 #include "common/base_srv/base_rpc_client.h"
 
+extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
+
+VOID WINAPI W32ExitWowProcess(DWORD exit_code)
+{
+    exit_code = NtvdmAuthorizeExit(exit_code);
+    ExitVDM(WOWVDM, ALL_TASKS);
+    ExitProcess(exit_code);
+}
+
 typedef struct wow_task_termination_entry {
     struct wow_task_termination_entry *next;
     uint64_t ticket;

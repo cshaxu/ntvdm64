@@ -171,8 +171,8 @@ New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj'),
     (Join-Path $build 'obj\adapter-win32') | Out-Null
 
 # The original definition deliberately retains undecorated public aliases for
-# two stdcall COMM exports.  Keep the original file immutable and derive only
-# the x86 linker aliases needed by the selected source bodies.
+# two stdcall COMM exports. Add their x86 linker aliases and the worker
+# management export to the generated product definition.
 $x86Definition = Join-Path $build 'wow32-x86.def'
 $x86DefinitionLines = [Collections.Generic.List[string]]::new()
 foreach ($line in Get-Content -LiteralPath $definition) {
@@ -181,6 +181,7 @@ foreach ($line in Get-Content -LiteralPath $definition) {
 $x86DefinitionLines.Add('')
 $x86DefinitionLines.Add('GetCommHandle=GetCommHandle@4')
 $x86DefinitionLines.Add('GetCommShadowMSR=GetCommShadowMSR@4')
+$x86DefinitionLines.Add('W32TerminateTaskTicket')
 [IO.File]::WriteAllLines($x86Definition, $x86DefinitionLines,
     [Text.UTF8Encoding]::new($false))
 
@@ -699,7 +700,7 @@ $ninja.Add('build ' + $editMenuResource + ': rc ' + (ConvertTo-NinjaPath (Join-P
 $ninja.Add('build legacy-wow-user32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyUser32Definition))
 $ninja.Add('build legacy-wow-kernel32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyKernel32Definition))
 $ninja.Add('build legacy-wow-ntdll.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyNtdllDefinition))
-$ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' ') + ' | ' + (ConvertTo-NinjaPath $parentImportLibraryPath) + ' obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj')
+$ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' ') + ' | wow32-x86.def ' + (ConvertTo-NinjaPath $parentImportLibraryPath) + ' obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj')
 $ninja.Add('default wow32.dll')
 
 [IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $ninja, [Text.UTF8Encoding]::new($false))
