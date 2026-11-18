@@ -168,7 +168,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 185,src/non-mvdm/windows/core/ntuser/client/clmenu.c,2,2,7,9,7,0,187,s8-p140-reviewed,a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c
 186,src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,2,0,75,75,3,0,188,s8-p147-reviewed,ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a
 187,src/non-mvdm/windows/core/ntuser/client/hdata.c,2,1,441,442,0,0,189,s8-p152-reviewed,5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4
-188,src/non-mvdm/windows/core/ntuser/client/rtlinit.c,2,2,2,4,4,0,190,s7-p13-reviewed,eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd
+188,src/non-mvdm/windows/core/ntuser/client/rtlinit.c,2,1,2,3,4,0,190,s8-p156-reviewed,8f461a2506dec5f89e9daa1e9ac5846daa966c131969897a322f58f23eaa61d5
 189,src/non-mvdm/windows/core/ntuser/rtl/chartran.c,2,2,1,3,15,0,191,s7-p12-reviewed,ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35
 190,src/non-mvdm/windows/core/ntuser/rtl/help.c,2,4,2,6,0,0,192,s7-p11-reviewed,71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668
 191,src/non-mvdm/windows/core/ntuser/server/exports.c,2,1,85,86,1,0,193,s7-p6-reviewed-residual-pending,40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d

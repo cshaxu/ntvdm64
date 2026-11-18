@@ -14,13 +14,11 @@
 #define MOVE_TO_RTL
 
 #include "wow_user_capture_bindings.h"
-#include "wow_edit_lookaside_bindings.h"
 #line 17
 #pragma hdrstop
 #line 19
 
 
-#line 21
 /**************************************************************************\
 * RtlCaptureAnsiString
 *
@@ -147,7 +145,6 @@ BOOL RtlCaptureLargeAnsiString(
         plstr->strCapture.Buffer = NULL;
     }
     return TRUE;
-#line 147
 }
 
 //++

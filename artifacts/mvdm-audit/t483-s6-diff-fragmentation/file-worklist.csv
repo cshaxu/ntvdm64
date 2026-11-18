@@ -175,7 +175,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 187,src/non-mvdm/windows/core/ntuser/client/clmenu.c,2,2,7,7,0,s8-p140-reviewed,T483-R2161;T483-R2162;T483-R2163;T483-R2164;T483-R2165;T483-R2166;T483-R2167;T483-R2168;T483-R2169;T483-R2170;T483-R2171;T483-R2172;T483-R2173;T483-R2174,a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c
 188,src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,2,0,75,3,0,s8-p147-reviewed,T483-R2289;T483-R2290;T483-R2291;T483-R2292;T483-R2293;T483-R2294,ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a
 189,src/non-mvdm/windows/core/ntuser/client/hdata.c,2,1,441,0,0,s8-p152-reviewed,T483-R2332;T483-R2333;T483-R2334,5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4
-190,src/non-mvdm/windows/core/ntuser/client/rtlinit.c,2,2,2,4,0,s7-p13-reviewed,T483-R2380;T483-R2381;T483-R2382,eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd
+190,src/non-mvdm/windows/core/ntuser/client/rtlinit.c,2,1,2,4,0,s8-p156-reviewed,T483-R2380;T483-R2381;T483-R2382,8f461a2506dec5f89e9daa1e9ac5846daa966c131969897a322f58f23eaa61d5
 191,src/non-mvdm/windows/core/ntuser/rtl/chartran.c,2,2,1,15,0,s7-p12-reviewed,T483-R2667;T483-R2668;T483-R2669;T483-R2670;T483-R2671;T483-R2672,ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35
 192,src/non-mvdm/windows/core/ntuser/rtl/help.c,2,4,2,0,0,s7-p11-reviewed,T483-R2692;T483-R2693;T483-R2694;T483-R2695;T483-R2696,71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668
 193,src/non-mvdm/windows/core/ntuser/server/exports.c,2,1,85,1,0,s7-p6-reviewed-residual-pending,T483-R2718;T483-R2719;T483-R2720,40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d

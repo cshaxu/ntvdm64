@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P156",
+  "position": 199,
+  "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+  "review_ids": [
+    "T483-R2382"
+  ],
+  "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+  "current_sha256": "8f461a2506dec5f89e9daa1e9ac5846daa966c131969897a322f58f23eaa61d5",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 2,
+    "added": 1,
+    "deleted": 2
+  },
+  "source_changed": true,
+  "paired_error_bodies": 4,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 199,
+    "remaining": 32,
+    "files": 231,
+    "points": 1912,
+    "lines": 26394,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Both actual cached x86 product and fixture objects rebuilt with exit 0: wow32 obj/opennt-user/rtlinit.obj and call-boundaries obj/capture_owner.obj. Compiler emitted warnings including SDK macro redefinitions. No full build, runtime test or publication for this redundant include."
+  },
+  "decision": "R2382 partially reduced: wow_user_capture_bindings.h already includes the guarded wow_edit_lookaside_bindings.h unconditionally. Removed the redundant second include and redundant #line 21 and 147. Original precomp.h still requires private CSR/kernel dependencies, and original ntimage.h is absent from the selected source set. Keep remaining +1/-2 pending. No C body or symbol binding change."
+}
