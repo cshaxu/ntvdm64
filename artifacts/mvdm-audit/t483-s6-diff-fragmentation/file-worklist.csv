@@ -171,7 +171,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 183,src/mvdm-host/xms.486/xmsmemr.c,0,0,0,0,0,s7-p26-original-byte-restored,T483-R1943;T483-R1944,70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c
 184,src/non-mvdm/base/win32/server/basesrv.h,2,1,1,0,0,s8-p121-reviewed,T483-R1978;T483-R1979,f117b69ebce871cb8b850b1bca8588c8d592e706abcde1d23e7f7319b5c59ee4
 185,src/non-mvdm/base/win32/server/srvvdm.h,1,1,0,0,0,s8-p123-reviewed,T483-R1992;T483-R1993,a62c55844a2000b67216a5eeb30bf85ccf0e7bd2b2adb3d3f662b08523682102
-186,src/non-mvdm/ds/netapi/xactsrv/apisrv.c,2,2,182,1,0,s7-p20-reviewed,T483-R2002;T483-R2003;T483-R2004;T483-R2005;T483-R2006;T483-R2007;T483-R2008;T483-R2009;T483-R2010,a99164a46963e5fb81a2e998438eadb8284cabd185886ca379251e15f6064711
+186,src/non-mvdm/ds/netapi/xactsrv/apisrv.c,2,2,182,1,0,s8-p125-reviewed,T483-R2002;T483-R2003;T483-R2004;T483-R2005;T483-R2006;T483-R2007;T483-R2008;T483-R2009;T483-R2010,a99164a46963e5fb81a2e998438eadb8284cabd185886ca379251e15f6064711
 187,src/non-mvdm/windows/core/ntuser/client/clmenu.c,2,2,7,7,0,s7-p8-reviewed,T483-R2161;T483-R2162;T483-R2163;T483-R2164;T483-R2165;T483-R2166;T483-R2167;T483-R2168;T483-R2169;T483-R2170;T483-R2171;T483-R2172;T483-R2173;T483-R2174,a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c
 188,src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,2,0,75,3,0,s7-p14-reviewed,T483-R2289;T483-R2290;T483-R2291;T483-R2292;T483-R2293;T483-R2294,ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a
 189,src/non-mvdm/windows/core/ntuser/client/hdata.c,2,1,441,0,0,s7-p5-reviewed-residual-pending,T483-R2332;T483-R2333;T483-R2334,5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4
@@ -229,9 +229,9 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 241,src/mvdm-host/wow32/wowhooks.h,0,0,0,0,0,s8-p100-reviewed,T483-R1765,b377c978e75e62e5701a8914c03de40eebc917ee54fa47fdaef0a638fbe6452f
 242,src/mvdm-host/wow32/wumsg.h,1,1,1,0,0,s8-p111-reviewed,T483-R1895,870f8b15e374da3c6c752982e15f881ddc60a29c93b832bbfd100766c96841b7
 243,src/mvdm-host/wow32/wutmr.c,1,1,1,0,0,s8-p114-reviewed,T483-R1913,ac32decdb5712f1dbfcdd0948095c2995426f6734b2b284bd85e6ee28a59c296
-244,src/non-mvdm/ds/netapi/xactsrv/apimsg.c,1,1,1,1,0,s7-p22-reviewed,T483-R1999;T483-R2000;T483-R2001,a5957f51780bd7a8e76e1330438aab1168688378e7ff71ff82b70ec04f9bd548
-245,src/non-mvdm/ds/netapi/xactsrv/apisvc.c,1,1,1,1,0,s7-p23-reviewed,T483-R2011,4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6
-246,src/non-mvdm/ds/netapi/xactsrv/apiuse.c,1,1,1,0,0,s7-p23-reviewed,T483-R2012,5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b
+244,src/non-mvdm/ds/netapi/xactsrv/apimsg.c,1,1,1,1,0,s8-p124-reviewed,T483-R1999;T483-R2000;T483-R2001,a5957f51780bd7a8e76e1330438aab1168688378e7ff71ff82b70ec04f9bd548
+245,src/non-mvdm/ds/netapi/xactsrv/apisvc.c,1,1,1,1,0,s8-p126-reviewed,T483-R2011,4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6
+246,src/non-mvdm/ds/netapi/xactsrv/apiuse.c,1,1,1,0,0,s8-p127-reviewed,T483-R2012,5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b
 247,src/non-mvdm/ds/netapi/xactsrv/apiwksta.c,1,1,1,0,0,s7-p23-reviewed,T483-R2013,a6ade59855dfea2345ce294564bfbc275b8956d34bebc93049c7de6e0fd31bf5
 248,src/non-mvdm/ds/netapi/xactsrv/xssubs.c,1,1,1,0,0,s7-p23-reviewed,T483-R2014,88317bde54a8960e94f650822fe4ae024b1b5224af06c4636ee0627617aa6b33
 249,src/non-mvdm/ds/netapi/xactsrv/xsunicod.c,1,1,1,0,0,s7-p20-reviewed,T483-R2015,9fc9f7ea082b2e7c75087f3fde34a2a97ade86af0e7fe0ec97c1cad4581789e0

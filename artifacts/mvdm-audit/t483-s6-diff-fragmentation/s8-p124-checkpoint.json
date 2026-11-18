@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P124",
+  "position": 167,
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+  "review_ids": [
+    "T483-R1999"
+  ],
+  "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+  "current_sha256": "a5957f51780bd7a8e76e1330438aab1168688378e7ff71ff82b70ec04f9bd548",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 167,
+    "remaining": 64,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Checked current source/build graph, original and selected headers, pinned hash and P186 paired controls. Those earlier controls compile the selected include (0), reject original header and original-plus-SMB (both 2), compile and link complete original bodies with selected header (0). No new build or runtime run."
+  },
+  "decision": "R1999 retain the one explicit include boundary pending owner. Actual worker graph builds apimsg.obj; VrpNetMessageBufferSend reaches XsNetMessageBufferSend, then native NetMessageBufferSend. The original aggregate requires smb.h and private authentication interfaces. Renaming the local substitute to disguise it as the original would not restore that dependency. All original handler bodies and descriptors already present."
+}

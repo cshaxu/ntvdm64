@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P127",
+  "position": 170,
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+  "review_ids": [
+    "T483-R2012"
+  ],
+  "original_sha256": "93d368f24f2b8fdf82e7f3459dbd53d028ccf6059db5e0f7fb621826135e96c4",
+  "current_sha256": "5ce45d1c76dc2d8e1f216ad06f574218b0242317149a9910278cef2b4760900b",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 170,
+    "remaining": 61,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "decision": "R2012: actual DOS redirector calls XsNetUseAdd/Del; all differences from the pinned original are confined to one aggregate include. P189 selected-token/line control covers 335 lines. Original header fails C1083 smb.h. Keep the single explicit private include boundary pending.",
+  "verification": {
+    "scope": "Fresh filtered diff and logical lines; checked current callers, header and historical original-include compile control. No product changes or new runtime tests."
+  }
+}

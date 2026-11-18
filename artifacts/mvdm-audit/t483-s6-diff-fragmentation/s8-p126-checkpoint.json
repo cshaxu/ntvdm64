@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P126",
+  "position": 169,
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+  "review_ids": [
+    "T483-R2011"
+  ],
+  "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+  "current_sha256": "4ff8d45835cc748177609ff83fe764050d75c127f1d2917d0b777915b094b6c6",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 169,
+    "remaining": 62,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Current filtered measurement, original body and include-chain inspection, P188 production flags control. No product edit."
+  },
+  "decision": "R2011 only changes the private include. Checked DOS service relay and selected original NetService bodies. All four bodies present; selected tokens and line numbers match the P188 control. Restoring aggregate XactSrvP.h requires absent SMB and authentication headers. Keep explicit boundary pending."
+}

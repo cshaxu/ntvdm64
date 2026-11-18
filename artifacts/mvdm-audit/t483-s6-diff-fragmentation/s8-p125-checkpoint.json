@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P125",
+  "position": 168,
+  "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+  "review_ids": [
+    "T483-R2002",
+    "T483-R2009"
+  ],
+  "original_sha256": "070437121d8a1ee57ea07672ea9aba3e85a8f4b80b802034cc208383dca4e5cd",
+  "current_sha256": "a99164a46963e5fb81a2e998438eadb8284cabd185886ca379251e15f6064711",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 182
+  },
+  "after": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 182
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 168,
+    "remaining": 63,
+    "files": 231,
+    "points": 1907,
+    "lines": 26631,
+    "pending": 1533
+  },
+  "decision": "R2002 covers the selected XACTSRV private include and exact browser import declaration. Original lmbrowsr.h is absent from the admitted include paths; a historical isolated control with the original header supplied did compile. Keep the original-header-import alternative pending. R2009: original Enum3 compiles but full VDMREDIR link lacks _NetServerEnumEx@36; removing only that complete function allowed link. Its resume input is a name, while NetServerEnum accepts a numeric continuation. No selected replacement with the original contract found. Keep only this omission; other restored functions remain.",
+  "verification": {
+    "scope": "Compared pinned source and current bodies, inspected browser declaration, current SDK and P187 positive/negative product link controls. One paired exclusion, logical lines checked. Audit only."
+  }
+}
