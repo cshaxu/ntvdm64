@@ -47,7 +47,6 @@ BOOL EndDialog(
     if (!ValidateDialogPwnd(pwnd))
         return 0;
 
-#line 46
     if (SAMEWOWHANDLE(hwnd, GetActiveWindow())) {
         fWasActive = TRUE;
     }
@@ -96,7 +95,6 @@ BOOL EndDialog(
         NtUserSetFocus(hwnd);
     }
 
-#line 91
     NtUserSetWindowPos(hwnd, NULL, 0, 0, 0, 0,
                        SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOMOVE |
                        SWP_NOSIZE | SWP_NOZORDER);
@@ -151,7 +149,6 @@ BOOL EndDialog(
      * the window. This happens when the dialog is obscured.
      * This is a problem with winfile and its copy/move dialog.
      */
-#line 171
     PostMessage(hwnd, WM_NULL, 0, 0);
 
     return TRUE;

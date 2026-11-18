@@ -186,7 +186,6 @@ HWND InternalCreateDialog(
     HWND hwnd;
     HWND hwnd2;
     PWND pwnd;
-#line 189
     HWND hwndNewFocus;
     HWND hwndEditFirst = NULL;
     RECT rc;
@@ -201,7 +200,6 @@ HWND InternalCreateDialog(
     BOOL fSuccess;
     BOOL fWowWindow;
     HANDLE hmodCreate;
-#line 203
     LPBYTE lpCreateParamsData;
     DLGTEMPLATE2 dt;
     DLGITEMTEMPLATE2   dit;
@@ -629,7 +627,6 @@ DeleteFontAndMenuAndFail:
     /*
      * Time to lock pwnd so it doesn't go away while we're calling back.
      */
-#line 613
     ThreadLock(pwnd, &tlpwnd);
 
     /*
@@ -866,7 +863,6 @@ NoCreate:
         else
         {
 
-#line 839
             if (dit.dwHelpID)
                 NtUserSetWindowContextHelpId(hwnd2, dit.dwHelpID);
 
@@ -913,7 +909,6 @@ NoCreate:
             goto CreateDialogReturn;
         }
 
-#line 880
         if (fSuccess && !PDLG(pwnd)->fEnd) {
 
             //
@@ -937,15 +932,12 @@ NoCreate:
                 if (hwndNewFocus = HW(pwndT))
                     DlgSetFocus(hwndNewFocus);
 
-#line 903
                 xxxCheckDefPushButton(pwnd, hwndEditFirst, hwndNewFocus);
-#line 904
             }
         }
     }
 
     if (!IsWindow(hwnd))
-#line 909
     {
         // Omnis7 relies on a nonzero return even though they nuked this
         // dialog during processing of the WM_INITDIALOG message
@@ -964,7 +956,6 @@ NoCreate:
     if (bFlags & CD_SETFOREGROUND) {
         NtUserSetForegroundWindow(hwnd);
         if (!IsWindow(hwnd))
-#line 927
         {
             hwnd = NULL;
             goto CreateDialogReturn;
@@ -973,7 +964,6 @@ NoCreate:
 
     if ((bFlags & CD_VISIBLE) && !PDLG(pwnd)->fEnd && (!TestWF(pwnd, WFVISIBLE))) {
         NtUserShowWindow(hwnd, SHOW_OPENWINDOW);
-#line 935
         UpdateWindow(hwnd);
     }
 
@@ -986,7 +976,6 @@ CreateDialogReturn:
      * do like win 3.1 and not revalidate for 16 bit apps
      */
     if (!(fSCDLGFlags & SCDLG_NOREVALIDATE) && !RevalidateHwnd(hwnd)) {
-#line 947
         hwnd = NULL;
     }
 

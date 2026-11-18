@@ -1,0 +1,44 @@
+{
+  "packet": "T483 S8 P143",
+  "position": 186,
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+  "review_ids": [
+    "T483-R2197;T483-R2198",
+    "T483-R2199",
+    "T483-R2201",
+    "T483-R2202",
+    "T483-R2203",
+    "T483-R2205",
+    "T483-R2206"
+  ],
+  "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+  "current_sha256": "a3513065a68716f066a6dd143c854151d905dea8f6e22b9a5b06b4b354f2680b",
+  "before": {
+    "blocks": 9,
+    "added": 26,
+    "deleted": 6
+  },
+  "after": {
+    "blocks": 9,
+    "added": 26,
+    "deleted": 6
+  },
+  "source_changed": true,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 186,
+    "remaining": 45,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Compared complete logical line streams, before/after metrics, selected host bindings and existing callback controls; no new runtime test."
+  },
+  "decision": "Removed eleven redundant unconditional #line directives after verifying identical (logical line, source text) pairs for all remaining non-marker lines. Kept all excluded-branch markers. R2197/R2198: created native HWND and attached menu cleanup; R2199: public dialog-proc slot and ANSI state owned by native dialog. R2201/2202/2203/2205/2206: font, edit allocator, child creation and dialog-code callbacks may destroy the parent. Returning an edit allocation to an invalid dialog loses its owner. Prior edge1/2/5 controls fault on restoration. No executable code changed."
+}

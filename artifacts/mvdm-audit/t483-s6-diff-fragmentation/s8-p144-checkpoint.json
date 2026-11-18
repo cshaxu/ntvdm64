@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P144",
+  "position": 187,
+  "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+  "review_ids": [
+    "T483-R2216"
+  ],
+  "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
+  "current_sha256": "a8fbf7c90496774075cecdde77f5ed52bab0c1cf195a02babf44bbc8a045ad3c",
+  "before": {
+    "blocks": 1,
+    "added": 2,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 1,
+    "added": 2,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 187,
+    "remaining": 44,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh byte comparison, filtered metrics and line stream validation. Historical native callback evidence; no runtime code change."
+  },
+  "decision": "R2216: NtUserEnableWindow synchronously notifies the owner, which can destroy the dialog and free PDLG before the two result writes. Published negative control removing this guard saw three access violations; retained guard passed 22 cases. Removed only three redundant unconditional #line directives. Verified exact (logical coordinate, source line) equality against HEAD for every non-marker line in both files."
+}
