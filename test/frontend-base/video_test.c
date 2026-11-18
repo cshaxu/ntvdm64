@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "common/frontend-base/video.h"
+#include "frontend-base/video.h"
 #define REQUIRE(x) do { if (!(x)) {printf("FAIL line=%d\n",__LINE__);return 1;} } while(0)
 
 int main(void)

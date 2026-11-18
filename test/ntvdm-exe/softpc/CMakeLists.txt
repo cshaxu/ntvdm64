@@ -7,7 +7,7 @@ add_executable(mvdm-vm-notification-test
   mvdm_vm_io_test.c
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_executor.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/frontend/vm_text.c"
-  "${CMAKE_SOURCE_DIR}/src/common/frontend-base/video.c")
+  "${CMAKE_SOURCE_DIR}/src/frontend-base/video.c")
 target_include_directories(mvdm-vm-notification-test PRIVATE
   "${CMAKE_SOURCE_DIR}/src"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/include")

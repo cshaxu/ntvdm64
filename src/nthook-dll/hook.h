@@ -1,5 +1,5 @@
-#ifndef NTHOOK32_H
-#define NTHOOK32_H
+#ifndef NTHOOK_DLL_H
+#define NTHOOK_DLL_H
 #include "common/native-hook/installer.h"
 #ifdef __cplusplus
 extern "C" {

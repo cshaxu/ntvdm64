@@ -1,5 +1,5 @@
-#ifndef COMMON_FRONTEND_BASE_SERVICE_H
-#define COMMON_FRONTEND_BASE_SERVICE_H
+#ifndef FRONTEND_BASE_SERVICE_H
+#define FRONTEND_BASE_SERVICE_H
 #include <windows.h>
 typedef struct frontend_base_service frontend_base_service;
 typedef struct frontend_base_service_ops {

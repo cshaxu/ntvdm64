@@ -1,7 +1,7 @@
 #ifndef NTVDM_VM_FRONTEND_H
 #define NTVDM_VM_FRONTEND_H
 
-#include "common/frontend-base/channel.h"
+#include "frontend-base/channel.h"
 #include "common/protocol/frontend_instance.h"
 
 typedef struct ntvdm_vm_frontends ntvdm_vm_frontends;

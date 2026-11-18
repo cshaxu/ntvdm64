@@ -1,6 +1,6 @@
 # NTVDM VM frontend adapter
 
-`vm_frontend.c` composes common/frontend-base directly for independent,
+`vm_frontend.c` composes frontend-base directly for independent,
 payload-scoped VM frontends. It does not depend on worker-base or NTCON.
 NTSRV owns registration, association, downstream close and final retirement.
 The adapter owns local registry entries and waits for serving threads before

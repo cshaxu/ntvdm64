@@ -186,7 +186,7 @@ foreach ($object in $fixtureSupportObjects) {
     }
 }
 $fixtureLibraries = @(
-    'worker-base.lib', 'ntvdm-vm-frontend.lib', 'common-frontend-base.lib',
+    'worker-base.lib', 'ntvdm-vm-frontend.lib', 'frontend-base.lib',
     'base-rpc-client-core.lib', 'base-rpc-client-launch.lib',
     'common-root.lib', 'common-rpc.lib', 'lib-rpc.lib',
     'common-native-hook-installer.lib', 'common-native-hook-context.lib', 'lib-process-launch.lib', 'lib-process-hook.lib', 'lib-process-image.lib', 'lib-handle.lib',

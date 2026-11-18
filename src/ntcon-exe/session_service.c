@@ -2,7 +2,7 @@
 #include "session_service.h"
 #include "lib-win32/process-observation/console_members.h"
 #include "console_channel.h"
-#include "common/frontend-base/service.h"
+#include "frontend-base/service.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"
 struct frontend_session_service {

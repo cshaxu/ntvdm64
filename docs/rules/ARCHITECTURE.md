@@ -142,7 +142,7 @@ The active packet governs implementation admission, not this exception alone.
 
 ## Owner-approved T431 S2 native hook boundary
 
-Owner admits src/nthook32-dll for one32-bit DLL and shared static installer,
+Owner admits src/nthook-dll for one32-bit DLL and shared static installer,
 with exact MIT Detours4.0.1 source provenance. NTVWM and controlled CUI/GUI
 callers use the same suspended-child installation mechanism. Run16 consumes
 context only, never intercepts itself. No worker policy/rendering moves into

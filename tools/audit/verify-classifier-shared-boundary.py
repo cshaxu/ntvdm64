@@ -6,7 +6,7 @@ import re
 import subprocess
 
 SHARED = "src/common/base_srv/legacy_classifier_arch.h"
-PRIVATE = "src/nthook32-dll/legacy_classifier_arch.h"
+PRIVATE = "src/nthook-dll/legacy_classifier_arch.h"
 
 
 def inspect(root: Path, inject: bool = False) -> None:
@@ -66,7 +66,7 @@ def inspect(root: Path, inject: bool = False) -> None:
                 if target.endswith(".obj"):
                     if target not in blocks:
                         raise RuntimeError(f"missing launcher object dependencies: {target}")
-                    if any("/src/nthook32-dll/" in p for p in blocks[target]):
+                    if any("/src/nthook-dll/" in p for p in blocks[target]):
                         raise RuntimeError(f"NTHook private header in launcher closure: {target}")
     digest = hashlib.sha256(Path(SHARED).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
     # Git stores this project-owned adapter with LF; check the pinned original

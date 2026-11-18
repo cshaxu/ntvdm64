@@ -60,9 +60,9 @@ def inspect(graph_root: Path, inject: bool) -> int:
             for path in deps[item]:
                 match = re.search(
                     r"(?:^|/)src/(run16-exe|ntsrv-exe|ntcon-exe|ntmon-exe|"
-                    r"ntvdm-exe|ntvwm-exe|wow32-dll|vdmredir-dll|nthook32-dll|"
+                    r"ntvdm-exe|ntvwm-exe|wow32-dll|vdmredir-dll|nthook-dll|"
                     r"worker-base)/", path)
-                own = "nthook32-dll" if target == "nthook32.dll" else "vdmredir-dll"
+                own = "nthook-dll" if target == "nthook32.dll" else "vdmredir-dll"
                 if match and match.group(1) != own:
                     raise RuntimeError(f"{target}: {item}: {path}")
     print(f"PASS {total} DLL closure objects, including all archive candidates")

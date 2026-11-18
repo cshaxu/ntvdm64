@@ -1,6 +1,6 @@
 /* Service pump unit: real threads/events, explicit local control callbacks.
  * NTSRV authentication and Console restoration require integration tests. */
-#include "common/frontend-base/service.h"
+#include "frontend-base/service.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include <stdio.h>
 #define CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL %u: %s error=%lu\n",__LINE__,#x,GetLastError());ExitProcess(1);}}while(0)

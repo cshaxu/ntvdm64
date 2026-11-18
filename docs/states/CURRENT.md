@@ -2,26 +2,27 @@
 
 ## Current Work
 
-**Active: M0 T483 S9**
+**Active: M0 T483 S10**
 
-Owner closed S8 and admitted the sequential non-mirror code quality audit.
-[Previous closure](../etc/evidence/m0-t483-s8-closure.md).
+Owner accepted S9 and admitted S10. [S9 audit and delivery](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
 
 ## Active Packet
 
 | Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T483 S9, Ordinary Mode. |
-| Baseline | P190 at 4f4d6596c. |
-| Scope | Owner narrowed S9 to the 40 tracked files in src/compat. Follow callers in other components for evidence. |
-| Order | [Directory-ordered file audit](../../artifacts/t483-s9-non-mirror-audit/order.csv). |
-| Objective | Identify project-wide source or runtime reductions while preserving original ABI, ownership, errors and mirror boundaries. |
-| Execution | Separate duplicate declarations, test-only conveniences, native replacement candidates and original extracted implementations. |
-| Exit criteria | Record file-level disposition and evidence, distinguish estimated savings from delivered changes, and identify the verification needed for implementation. |
+|---|---|
+| Identifier Mode | M0 T483 S10, Ordinary Mode. |
+| Baseline | S9 P9 at 55643b6c5. |
+| Scope | Promote frontend-base to a top-level source and test component. Rename the shared Hook source component to nthook-dll. |
+| Deliverables | Update source consumers, build graphs, ownership gates and current architecture documentation. Preserve both Hook DLL filenames and the 11-image package contract. |
+| Verification | Cached x86/x64 builds, publish to both destinations, targeted frontend and Hook ownership tests, commit and push. |
 
-## Progress
+## S10 delivery
 
-S9 is ready for owner review. All 40 files in the frozen DIR order have a recorded disposition. P5, P7, P8 and P9 delivered the source changes; P6 updated the historical register. The final 14 C files and 27 headers total 2209 physical lines (2298 at entry, reduction 89 including the cost of both new shared headers). README is separately down 9 lines. P9 published package 20cfd8c5-b279-43e4-b856-0317296d8bcb to both release destinations. Thread lifecycle, original heartbeat, redirector enumeration, the 38-case WOW control cohort and the real Win16 guest probe passed. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
+P1 built both release presets and published package c3e16355-bebc-4896-a22b-b77a3553ae2c. [Delivery evidence](../etc/evidence/m0-t483-s10-components.md). Ready for owner acceptance.
+
+## S9 Closure Record
+
+[40-file compat audit and verification](../../artifacts/t483-s9-non-mirror-audit/sequential.md), delivered at 55643b6c5.
 
 ## S1 Closure Record
 

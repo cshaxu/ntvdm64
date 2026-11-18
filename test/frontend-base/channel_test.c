@@ -1,6 +1,6 @@
 /* Production archive, real pipes/events/threads; no Console or service.
  * The attachment callback is local test composition, not RPC acceptance. */
-#include "common/frontend-base/channel.h"
+#include "frontend-base/channel.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

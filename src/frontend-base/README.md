@@ -16,7 +16,7 @@ context and the input-readiness handle remain borrowed until stop joins.
 The serving thread drains pending I/O, finishes adapter transactions, closes
 its pipe and wakes peer readiness before exit. Failed joins retain ownership.
 
-Tests under test/common/frontend-base link the production archive with real
+Tests under test/frontend-base link the production archive with real
 pipes, threads and events. Their local attachment binding does not establish
 RPC authentication or real guest acceptance; those use integration gates.
 

@@ -5,7 +5,7 @@ param(
     [ValidateSet('channel','service','video')][string[]]$Cases=@('channel','service','video')
 )
 $ErrorActionPreference='Stop'
-$repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../..'))
+$repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $build=(Resolve-Path -LiteralPath $BuildRoot).Path
 $logs=[IO.Path]::GetFullPath($LogRoot)
 foreach($path in @($build,$logs)) {

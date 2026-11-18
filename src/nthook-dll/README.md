@@ -1,7 +1,7 @@
-# nthook32-dll
+# nthook-dll
 
-Owner-accepted T431 S2 baseline is x86 /MT. T432 S6 freshly builds this shared
-source family as nthook32.dll and nthook64.dll; ntvwm.exe remains x86 only.
+The same source component builds nthook32.dll for x86 and nthook64.dll for x64.
+Each architecture has its own export definition file.
 NTVWM and both DLLs select the same suspended-child installer;
 run16 selects the copied-context reader without loading the interception DLL.
 Native GUI propagation does not grant character-frontend authority.

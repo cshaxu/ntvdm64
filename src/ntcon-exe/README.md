@@ -8,7 +8,7 @@ helper. The duplicate native renderer has also been removed. Current delivery
 and remaining acceptance gates are recorded in docs/states/CURRENT.md.
 
 The channel transport and serving-thread lifetime are selected from
-`common/frontend-base`. `console_channel.c` is the NTCON adapter: it owns
+`frontend-base`. `console_channel.c` is the NTCON adapter: it owns
 native Console handles, dispatch, input receipts and presentation transactions.
 The shared channel does not include this owner's private headers or choose
 workers. NTSRV still authorizes attachment and release. See the active S1
@@ -135,6 +135,6 @@ research provenance only. They have no formal production link edge. Historical
 ConPTY/parser tests that require deleted providers are not S12 acceptance tests;
 their retirement and replacement coverage are tracked in the S12 ledger.
 
-The service pump also uses common/frontend-base/service. NTCON retains
+The service pump also uses frontend-base/service. NTCON retains
 same-Console membership checks, presentation return/park and BaseSrv calls;
 the common instance owns single-channel sequencing and service/fault waits.

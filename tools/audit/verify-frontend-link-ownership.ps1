@@ -18,7 +18,7 @@ $graph = @($graph | ForEach-Object {
 })
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 function Assert-WorkerBackendRole([string]$Text) {
-    if($Text -match '#include\s*[<"](?:common/frontend-base/|common/base_srv/frontend_client\.h)' -or
+    if($Text -match '#include\s*[<"](?:frontend-base/|common/base_srv/frontend_client\.h)' -or
         $Text -match '\bOpenNtBaseClient(?:RegisterEmbeddedFrontend|RegisterFrontendRoot|FrontendRequest|AttachFrontendRequest|CloseFrontendInstance|UnregisterFrontendInstance)\s*\(') {
         throw 'Worker Base cannot compose a frontend role; the executable owns VM frontend adapters'
     }
@@ -27,7 +27,7 @@ foreach($file in Get-ChildItem (Join-Path $repo 'src/worker-base') -File -Recurs
         Where-Object Extension -in '.c','.h') {
     Assert-WorkerBackendRole (Get-Content $file.FullName -Raw)
 }
-foreach($negative in @('#include "common/frontend-base/service.h"',
+foreach($negative in @('#include "frontend-base/service.h"',
         '#include "common/base_srv/frontend_client.h"',
         'OpenNtBaseClientRegisterEmbeddedFrontend(location,key,notify,retire);')) {
     $rejected=$false
@@ -51,7 +51,7 @@ foreach($owner in @('ntcon-exe','ntsrv-exe','ntvwm-exe')) {
     }
 }
 foreach($file in Get-ChildItem (Join-Path $repo 'src/lib-win32'),(Join-Path $repo 'src/lib-nxvm') -File -Recurse | Where-Object Extension -in '.c','.h','.cpp') {
-    if((Get-Content $file.FullName -Raw) -match '#include\s*[<"](?:common|worker-base|ntsrv-exe|run16-exe|ntcon-exe|ntvdm-exe|ntvwm-exe|ntmon-exe|nthook32-dll)/') {
+    if((Get-Content $file.FullName -Raw) -match '#include\s*[<"](?:common|frontend-base|worker-base|ntsrv-exe|run16-exe|ntcon-exe|ntvdm-exe|ntvwm-exe|ntmon-exe|nthook-dll)/') {
         throw "Generic library depends on product code: $($file.FullName)"
     }
 }
@@ -309,7 +309,12 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         if ($required -notin $service) { throw "ntcon.exe omits $required" }
     }
     if ('lib/kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib-nxvm')) { throw 'ntcon.exe omits shared window implementation' }
-    if ('video.c' -notin @(Get-FrontendSources 'ntcon.exe' 'common/frontend-base')) { throw 'ntcon.exe omits shared frame receiver' }
+    foreach($target in @('frontend-base.lib','ntcon.exe','ntvdm.exe')) {
+        $sources = @(Get-FrontendSources $target 'frontend-base')
+        if (@(Compare-Object @('channel.c','service.c','video.c') $sources).Count) {
+            throw "Unexpected frontend-base source ownership in $target"
+        }
+    }
 }
 
 Assert-FrontendOwnership $graph

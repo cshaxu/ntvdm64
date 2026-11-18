@@ -1,4 +1,4 @@
-#include "nthook32-dll/hook.h"
+#include "nthook-dll/hook.h"
 #include "lib-win32/process-hook/helper.h"
 #include "lib-win32/process-hook/payload.h"
 #include <stdio.h>

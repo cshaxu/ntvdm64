@@ -10,8 +10,8 @@ VM frontends directly; worker-base must never depend on frontend-base.
 | Role | Direct I/O owner | NTSRV control owner |
 | --- | --- | --- |
 | Worker backend | worker-base connects to its selected upstream frontend. | worker-base reports/receives backend execution and lifecycle control. |
-| VM frontend | NTVDM supplies per-VM adapters to common/frontend-base. | Its frontend adapter uses explicit per-instance control identity. |
-| Native frontend | NTCON supplies Console/Window adapters to common/frontend-base. | Its single frontend instance uses the same explicit control contract. |
+| VM frontend | NTVDM supplies per-VM adapters to frontend-base. | Its frontend adapter uses explicit per-instance control identity. |
+| Native frontend | NTCON supplies Console/Window adapters to frontend-base. | Its single frontend instance uses the same explicit control contract. |
 
 Frontend-base owns reusable frontend channel/service mechanics; executable
 adapters own presentation and input interpretation. A frontend control pump
@@ -30,7 +30,7 @@ NTVDM VM adapters remain S3 scope, not an implied S2 implementation.
 ## Frontend connection base — T477 S1
 
 The delivered frontend extraction places reusable channel and service mechanics
-in `common/frontend-base`. NTCON supplies its native Console/Window and
+in `frontend-base`. NTCON supplies its native Console/Window and
 operation-dispatch adapter; it retains screen transactions, input receipts and
 restoration. NTSRV remains association, handoff and retirement authority.
 Each base instance owns at most one active worker channel. The protocol and
@@ -304,7 +304,7 @@ control edge is admitted by this design section.
 ### Controlled native launch hook contract — T431 S1 design
 
 Owner subsequently admits T431 S2 implementation as32-bit only, component
-nthook32-dll. One installation transaction covers both native CUI and GUI
+nthook-dll. One installation transaction covers both native CUI and GUI
 creation/propagation; GUI receives launch compatibility but no implicit text
 frontend authority. Cross-width feasibility is deferred, not proved. The
 existing caller's native flags/resources and GUI startup-only completion stay
@@ -319,7 +319,7 @@ consumer and no API interception of itself. NTCON presentation, NTSRV task/
 lifecycle authority and original DOS/WOW execution remain unchanged.
 The [detailed contract](../etc/operations/t431-native-launch-hook-design.md)
 records source reuse, native search/flags, loader-lock limits and rollback.
-S2 admits nthook32-dll and its exact Detours slice, not a native-x64 toolchain.
+S2 admits nthook-dll and its exact Detours slice, not a native-x64 toolchain.
 The candidate is not yet delivered. Actual CMD selection, bootstrap authority,
 flags/resources and retained product acceptance remain runtime gates.
 

@@ -1,7 +1,7 @@
 #include "common/base_srv/frontend_client.h"
 #include "console_channel.h"
 #include "console_frontend.h"
-#include "common/frontend-base/channel.h"
+#include "frontend-base/channel.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"
 #include <stddef.h>

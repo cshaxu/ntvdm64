@@ -1,6 +1,6 @@
 #include "ntvwm-exe/presentation.h"
 #include "ntvwm-exe/console_state.h"
-#include "common/frontend-base/video.h"
+#include "frontend-base/video.h"
 #include "common/console/client.h"
 #include <stdio.h>
 #include <stddef.h>

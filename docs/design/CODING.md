@@ -40,7 +40,7 @@ T477 separates explicit frontend-instance control into frontend_client.c/.h
 within the same shared client archive. The process core owns the authenticated
 RPC connection; frontend calls borrow it and pass an instance key. Worker-base
 consumes backend control only. NTCON and future NTVDM VM adapters compose
-common/frontend-base directly; worker-base does not depend on frontend-base.
+frontend-base directly; worker-base does not depend on frontend-base.
 
 ## Owner-approved independent guest add-on — T435
 
@@ -156,6 +156,7 @@ src/
   common/{protocol,codec,console}/
   lib-nxvm/lib/{types,base,kvm-base,kvm-window}/
   lib-win32/{rpc,io,file,handle,process-attributes,process-observation,process-hook}/
+  frontend-base/
   worker-base/
   run16-exe/
   ntsrv-exe/
@@ -165,7 +166,7 @@ src/
   ntmon-exe/
   wow32-dll/
   vdmredir-dll/
-  nthook32-dll/
+  nthook-dll/
 ```
 
 `mvdm-host/` and `mvdm-guest/` partition the canonical selected-OpenNT
@@ -185,7 +186,7 @@ explicitly read-only external reference roots under `O:\repos.external`.
 `src.old/` is quarantined comparison material and never a source, build, link
 or runtime input.
 
-Owner-admitted T431 S2 nthook32-dll is a specialist x86 /MT native launch hook.
+Owner-admitted T431 S2 nthook-dll is a specialist x86 /MT native launch hook.
 Its installer/context static slice is selected by NTVWM and the DLL; the
 context-only consumer is selected by run16. Pinned MIT Detours sources remain
 under this component with notices/provenance. GUI/CUI propagation is separate

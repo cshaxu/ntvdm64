@@ -1,5 +1,5 @@
-#ifndef COMMON_FRONTEND_BASE_CHANNEL_H
-#define COMMON_FRONTEND_BASE_CHANNEL_H
+#ifndef FRONTEND_BASE_CHANNEL_H
+#define FRONTEND_BASE_CHANNEL_H
 #include <windows.h>
 #include "common/protocol/console_io.h"
 

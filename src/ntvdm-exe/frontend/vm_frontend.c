@@ -1,5 +1,5 @@
 #include "vm_frontend.h"
-#include "common/frontend-base/service.h"
+#include "frontend-base/service.h"
 #include "common/base_srv/frontend_client.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "common/protocol/frontend_lifecycle.h"
