@@ -1,0 +1,70 @@
+{
+  "packet": "M0 T483 S7 P47",
+  "prior_checkpoint": "c7285dc39",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "source": "src/mvdm-host/dos/command/cmdexec.c",
+  "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+  "measure": {
+    "before": {
+      "blocks": 17,
+      "added": 67,
+      "deleted": 15
+    },
+    "after": {
+      "blocks": 16,
+      "added": 63,
+      "deleted": 15
+    },
+    "current_sha256": "ee1c313dd9153d9e65c5751fc03074cfd4da4ca5dd9a6d98c13b86b3c5441538"
+  },
+  "scope": [
+    "T483-R0021",
+    "T483-R0023",
+    "T483-R0024",
+    "T483-R0025",
+    "T483-R0027"
+  ],
+  "disposition": {
+    "minimized": "Reuse original Status for snapshot validity and later launch status.",
+    "original_declaration": "Original contiguous declaration layout 317–318 restored; no #error arms.",
+    "failure": "Failed retrieval retains sentinel handles, reports ERROR_INVALID_HANDLE, skips the conversion/launch, and reaches original shared cleanup.",
+    "success": "Install the same three non-sentinel handles; then conversion or process launch sets Status before the shared cleanup checks it.",
+    "retained": "Pre-reentry owned capture and the fallible consumer remain pending. All other allocations, dispatch and abort paths were preserved."
+  },
+  "census": {
+    "non_error_points": 1974,
+    "non_error_lines": 27215,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 73,
+      "lines": 1759
+    },
+    "pending_decisions": 1566,
+    "pending_original_review_ids": 1561,
+    "pending_non_r_rows": 9
+  },
+  "verification": {
+    "cached_x86_x64": "pass",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "3b5b329f-6d17-42b3-8800-27aacd87aed1",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "release_manifest_sha256": "ffba74a265c313dc19607d94d8cb5686e68b6241610b52a3a95a98c0d94b0f48",
+    "command_fixtures": {
+      "capture": "PASS 140 independent command capture assertions",
+      "launch": "raw CreateProcess startup handles before=112 after=118\nraw CreatePipe startup handles before=118 after=119\nrequest 0 child exit=65\nrequest 1 child exit=66\nhandles before=123 after=121 expected=121\nPASS 65 per-request launch assertions"
+    },
+    "launcher_control": "The initial sandboxed child exited 0xc0000008. The same binary passed all 65 assertions with the historical unsandboxed process-launch path.",
+    "isolated_amd64_nested_console": "pass: actual CMD/DOS input, parent return and direct exit 23",
+    "runtime_probe_image_hashes": 10,
+    "full_runtime_suite": "Not run under the current targeted policy",
+    "limits": "The actual handoff exercises the successful capture path. Failure preservation was reviewed by source control flow; the scheduling interleave was not reproduced."
+  }
+}

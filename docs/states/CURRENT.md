@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-72 points and 1,755 changed lines in S7. The current census is 1,975 non-error
-points and 27,219 changed lines across 231 mirrors with filtered differences.
+73 points and 1,759 changed lines in S7. The current census is 1,974 non-error
+points and 27,215 changed lines across 231 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -223,9 +223,9 @@ P38 to P40 simplify guards, restore original spacing, and correct a mask pair.
 P41 to P43 simplify BaseSrv, DPMI and window-manager selectors.
 [Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
-P44 and P45 consolidate selectors and line anchors. P46 unifies generation
-of the VDM configuration source and tracks its mirror input.
-[P46 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p46-checkpoint.json).
+P44 to P47 consolidate selectors, line anchors, VDM configuration generation,
+and COMMAND capture status.
+[Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
 ## S1 Closure Record
 

@@ -330,8 +330,6 @@ VOID cmdCreateProcess ( VOID )
     CHAR *CurDir = Buffer;
     DWORD dwRet;
     BOOL  Status;
-    BOOL  StdHandlesValid = TRUE;
-#line 318
     NTSTATUS NtStatus;
     UNICODE_STRING Unicode;
     OEM_STRING	   OemString;
@@ -360,9 +358,8 @@ VOID cmdCreateProcess ( VOID )
 	CurDir = NULL;
 
     pStdHandles = (PSTD_HANDLES)SnapshotStdHandles;
-    if (!mvdm_command_native_child_std_handles(SnapshotStdHandles))
-        StdHandlesValid = FALSE;
-    else {
+    Status = mvdm_command_native_child_std_handles(SnapshotStdHandles);
+    if (Status) {
 #line 343
     if ((hStd16In = (HANDLE) FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
 #line 344
@@ -388,10 +385,8 @@ VOID cmdCreateProcess ( VOID )
 
     Env_A.Buffer = NULL;
 
-    if (!StdHandlesValid) {
+    if (!Status)
         SetLastError(ERROR_INVALID_HANDLE);
-        Status = FALSE;
-        }
     else {
 #line 363
     RtlInitString((PSTRING)&OemString, pCommand32);

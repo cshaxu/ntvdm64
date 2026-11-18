@@ -497,3 +497,9 @@ original VDM configuration source and tracks the mirror as a configure input.
 Cached x86/x64 builds, both release destinations, four service fixtures, and
 the isolated DOS handoff passed. The published payload differs from the prior
 package only in PE timestamps. The filtered mirror census stays the same.
+
+[S7 P47 receipt](s7-p47-checkpoint.json) reuses the original COMMAND status
+for standard-handle capture and child launch. `cmdexec.c` drops from 17 to 16
+non-error blocks and from 82 to 78 changed lines. Cached x86/x64 builds, both
+release destinations, the capture and launch fixtures, and the isolated DOS
+handoff passed. The capture boundary remains pending owner decision.
