@@ -1,0 +1,73 @@
+{
+  "packet": "T483 S8 P112",
+  "position": 156,
+  "path": "src/mvdm-host/wow32/wuser.c",
+  "review_ids": [
+    "T483-R1897",
+    "T483-R1899",
+    "T483-R1905"
+  ],
+  "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+  "current_sha256": "c0a1045b8c020c91c414add27b781a12a005cc31f0163225bb8dcf2aabf1c4da",
+  "before": {
+    "blocks": 3,
+    "added": 10,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 3,
+    "added": 10,
+    "deleted": 1
+  },
+  "source_changed": true,
+  "paired_error_bodies": 4,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        543,
+        533,
+        "#else"
+      ],
+      [
+        1917,
+        1909,
+        "#endif"
+      ],
+      [
+        3002,
+        2976,
+        "#endif // NEVER"
+      ],
+      [
+        3368,
+        3274,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 156,
+    "remaining": 75,
+    "files": 231,
+    "points": 1908,
+    "lines": 26943,
+    "pending": 1534
+  },
+  "verification": {
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "09b26b37-9889-4fd8-9c5e-824c518a441c",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "branch": "Compiled selected production branch with controlled host setter/publisher. 12 cases, no failures (0,1,2,-1 BOOL results, zero to two entries, counts and data). No desktop colours changed.",
+    "source_gate": "WOW32_CLIENT_VIEW_B1_OK. Source gate, not desktop runtime evidence.",
+    "cached": "Both x86/x64 full cached release builds passed"
+  },
+  "decision": "R1905 restore original SetSysColors FALSE branch including conditional alignment retry; place existing page-domain publish loop on the success alternative. No second publish on retry. USER16 reads system colours directly from guest SERVERINFO. R1897 retain page-domain prototype; R1899 retain native GetDC window binding and original cache operations. No guest or common/shim changes."
+}

@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P111",
+  "position": 155,
+  "path": "src/mvdm-host/wow32/wumsg.h",
+  "review_ids": [
+    "T483-R1895"
+  ],
+  "original_sha256": "1f18e9770131f758947986de78dcb6c974730bcbaad3137e3c69a615f0f79324",
+  "current_sha256": "870f8b15e374da3c6c752982e15f881ddc60a29c93b832bbfd100766c96841b7",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 155,
+    "remaining": 76,
+    "files": 231,
+    "points": 1908,
+    "lines": 26944,
+    "pending": 1534
+  },
+  "verification": {
+    "scope": "Compiler ABI control and source-permitted interleaving; no claim of observed concurrent failure.",
+    "control": "x86 MSVC compiled isolated exact header declarations against the same actual wumsg.c definition. Original declaration: C2370 different storage class, exit 2. Current declaration: exit 0."
+  },
+  "decision": "R1895 retain the TLS declaration pending owner decision. The hook snapshots DDE post mode before entering the task and restores it on departure. A process-wide slot permits one thread to restore a value captured from another; wmsg16 uses that value to select DDE ownership. Consumers span translation units. Both original variable identity and interface remain; declaration must match its thread-local definition."
+}

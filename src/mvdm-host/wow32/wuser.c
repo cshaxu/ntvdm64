@@ -2929,16 +2929,8 @@ ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
         INT32(parg16->f1),
         p2,
         p3
-        ) != FALSE) {
-        INT index;
-
-        for (index = 0; index < INT32(parg16->f1); ++index) {
-            (void)mvdm_softpc_wow_page_domain_publish_system_color(
-                (unsigned long)p2[index], (unsigned long)p3[index]);
-        }
-    } else {
+        ) == FALSE) {
 #ifndef i386
-#line 2941
     PDWORD p4;
     ULONG   BufRGB [SSC_BUF_SIZE];
 
@@ -2965,6 +2957,15 @@ ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
 #endif
 
     }
+    else {
+        INT index;
+
+        for (index = 0; index < INT32(parg16->f1); ++index) {
+            (void)mvdm_softpc_wow_page_domain_publish_system_color(
+                (unsigned long)p2[index], (unsigned long)p3[index]);
+        }
+    }
+#line 2967
 
     FREEDWORDARRAY16(p3);
     STACKORHEAPFREE(p2, BufElements);
