@@ -1,0 +1,76 @@
+{
+  "packet": "T483 S8 P83",
+  "position": 127,
+  "path": "src/mvdm-host/wow32/winsockp.h",
+  "review_ids": [
+    "T483-R1436",
+    "T483-R1437",
+    "T483-R1438"
+  ],
+  "original_sha256": "08e825ba1ce4b4226bf46045ffb2c0dad08e38a6a9bbb18653215c64a05086d1",
+  "current_sha256": "14bfe1a54324736958561935ac88df621b330f2b362b2aa31bfdf8e30b06f2d2",
+  "before": {
+    "blocks": 3,
+    "added": 17,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 3,
+    "added": 17,
+    "deleted": 0
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 127,
+    "remaining": 104,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "decision": "Retain R1435-R1438 pending. Owner serial disambiguates reused Win16 aliases. Retired, cancel-started, cancel-active and completed distinguish teardown, late completion and reentrant completion. Per-task cleanup is called from wsext.c; native-handle lookup is called only from wsdata.c before its definition. Moving that entire helper before its caller removes the header declaration but increases the combined zero-context point count from 23 to 24. Discarded the unpublished trial.",
+  "move_control": {
+    "before": [
+      {
+        "path": "src/mvdm-host/wow32/wsdata.c",
+        "filtered": {
+          "blocks": 20,
+          "added": 161,
+          "deleted": 13
+        }
+      },
+      {
+        "path": "src/mvdm-host/wow32/winsockp.h",
+        "filtered": {
+          "blocks": 3,
+          "added": 17,
+          "deleted": 0
+        }
+      }
+    ],
+    "candidate": [
+      {
+        "path": "src/mvdm-host/wow32/wsdata.c",
+        "filtered": {
+          "blocks": 21,
+          "added": 161,
+          "deleted": 13
+        }
+      },
+      {
+        "path": "src/mvdm-host/wow32/winsockp.h",
+        "filtered": {
+          "blocks": 3,
+          "added": 11,
+          "deleted": 0
+        }
+      }
+    ]
+  },
+  "evidence": "Prior exact original finder control in r1435-r1438-winsockp-review.json: 39 failed assertions. Current exact bodies and context, controlled provider, verify-wow-winsock-rundown.ps1: 353 checks, zero failures."
+}
