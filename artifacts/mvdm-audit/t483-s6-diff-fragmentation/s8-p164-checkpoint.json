@@ -1,0 +1,45 @@
+{
+  "packet": "T483 S8 P164",
+  "position": 207,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+  "review_ids": [
+    "T483-R2540",
+    "T483-R2541",
+    "T483-R2542",
+    "T483-R2545",
+    "T483-R2547",
+    "T483-R2548",
+    "T483-R2549",
+    "T483-R2551"
+  ],
+  "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+  "current_sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d",
+  "before": {
+    "blocks": 10,
+    "added": 5,
+    "deleted": 673
+  },
+  "after": {
+    "blocks": 10,
+    "added": 5,
+    "deleted": 673
+  },
+  "source_changed": false,
+  "paired_error_bodies": 6,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 207,
+    "remaining": 24,
+    "files": 231,
+    "points": 1912,
+    "lines": 26389,
+    "pending": 1532
+  },
+  "decision": "Original xxxSetWindowLong local extra-byte writes retained. DWL_MSGRESULT is the one native setter branch: WOW native dialog callback/getter must use the same HWND result slot. Local callback fixtures use PDIALOG. Build variants in New-T447S3CallBoundaryNinja.ps1; product control-client/precomp.h selects native owner. DefSetText, user word/negative setters, CPD list/allocation and server procedure lookup depend on desktop heap, kernel locks, handle manager or shared procedure tables; private kernel declarations do not supply native HWND state or usable CPD tokens. FCallerOk requires NT4 thread ownership; product accepts only enrolled allocations. No independent restorable function identified.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  }
+}
