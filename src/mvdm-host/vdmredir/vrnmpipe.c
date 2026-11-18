@@ -794,6 +794,7 @@ Return Value:
         }
         if (Error == NO_ERROR || Error == ERROR_MORE_DATA) {
 
+#line 832
 #if DBG
 #line 833
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -1249,6 +1250,13 @@ Return Value:
     DWORD   Type;
 
     //
+    // StructurePointer is 32-bit flat pointer to structure in DOS memory
+    // containing request parameters
+    //
+
+    PDOS_ASYNC_NAMED_PIPE_STRUCT StructurePointer;
+
+    //
     // pAsyncInfo is a pointer to the request packet we stick on the request
     // queue
     //
@@ -1287,6 +1295,7 @@ Return Value:
     pipeInfo = VrpGetOpenNamedPipeInfo(Handle);
     Type = (DWORD)getAX() & 0xff;   // 0x86, 0x8f, 0x90 or 0x91
 
+#line 1338
 #if DBG
 #line 1339
 #error DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register.
@@ -1957,14 +1966,9 @@ Return Value:
     // update the VDM variables
     //
 
-    if (!mvdm_redirector_async_complete(pAsyncInfo, bytesTransferred, error)) {
-        VrpDequeueAsyncRequest(pAsyncInfo);
-        CloseHandle(pAsyncInfo->Overlapped.hEvent);
-        mvdm_redirector_async_release(pAsyncInfo);
-        LocalFree(pAsyncInfo);
-        return;
-    }
+    ok = mvdm_redirector_async_complete(pAsyncInfo, bytesTransferred, error);
 
+#line 2095
 #if DBG
 #line 2096
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -1977,7 +1981,7 @@ Return Value:
     // packet and free it
     //
 
-    if (!pAsyncInfo->ANR) {
+    if (!ok || !pAsyncInfo->ANR) {
 
 #if DBG
 #line 2115
