@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P185",
+  "position": 228,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+  "review_ids": [
+    "T483-R1047",
+    "T483-S8-P185-EOI"
+  ],
+  "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+  "current_sha256": "76fc5add9050196cc2067387d458568e9be3e27574d208305d2a3efe8dceada6",
+  "before": {
+    "blocks": 2,
+    "added": 5,
+    "deleted": 5
+  },
+  "after": {
+    "blocks": 2,
+    "added": 3,
+    "deleted": 5
+  },
+  "paired_error_bodies": 8,
+  "decision": "Redirector calls SoftPcEoi with int*; ica_eoi takes IS32*, reads -1 to select a pending IRQ and writes the selected number. Keep a correctly typed local and copy its result back. Production compile of the original direct call exits 0 with C4057 at original line 416. No runtime failure of the original call was asserted. Retain approved hardware-monitor declaration removal; combined local initialization and removed redundant conversions. Corrected logical call coordinate and removed stray line 91 marker.",
+  "verification": {
+    "objects": {
+      "worker": "COFF timestamp only",
+      "reference": "COFF timestamp only"
+    },
+    "test": "SLAVE_BIOS_EOI checks=79 failures=0"
+  },
+  "coverage": {
+    "complete": 228,
+    "remaining": 3,
+    "files": 231,
+    "points": 1903,
+    "lines": 26243,
+    "pending": 1533
+  }
+}

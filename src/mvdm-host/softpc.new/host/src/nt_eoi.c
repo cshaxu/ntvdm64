@@ -103,7 +103,6 @@ BlockWOWIdle(
 #line 102
        BlockTime = CurrHeartBeat;
 #endif
-#line 91
 
 #line 105
        }
@@ -400,10 +399,9 @@ void InitializeIcaLock(void)
 // Exported for vdmredir
 
 void SoftPcEoi(int Adapter, int* Line) {
-    IS32 pic_line;
-
-    pic_line = (IS32)*Line;
-    ica_eoi((IU32)Adapter, &pic_line, 0);
+    IS32 pic_line = *Line;
+#line 416
+    ica_eoi(Adapter, &pic_line, 0);
     *Line = (int)pic_line;
 #line 417
 }
