@@ -10,6 +10,7 @@
 
 void VrGetUserName(void);
 void VrGetCDNames(void);
+void VrGetComputerName(void);
 static uint8_t memory[2048];
 static USHORT ax, bx, cx, di;
 static ULONG carry;
@@ -25,6 +26,13 @@ USHORT __cdecl getES(void) { return 0; }
 USHORT __cdecl getDI(void) { return di; }
 void __cdecl setAX(USHORT value) { ax = value; }
 void __cdecl setCF(ULONG value) { carry = value; }
+BOOL WINAPI fixture_computer_name(LPSTR buffer, LPDWORD size)
+{
+    if (*size < sizeof("HOST")) return FALSE;
+    memcpy(buffer, "HOST", sizeof("HOST"));
+    *size = sizeof("HOST") - 1;
+    return TRUE;
+}
 NET_API_STATUS WINAPI fixture_user_info(LPCWSTR server, DWORD level, LPBYTE *p)
 {
     (void)server;
@@ -119,6 +127,12 @@ int main(void)
     session_initialize(&s, 1);
     if (!session_activate(&s) || !session_guest_memory_begin(&s, NULL,
         read_memory, write_memory) || !session_thread_bind(&s)) return 2;
+    init(0); VrGetComputerName();
+    check(ax == 0 && carry == 0 && !memcmp(memory + di, "HOST", 5) &&
+        memory[di + 5] == 0xa5, "actual computer name copied and success flags set");
+    init(0); di = sizeof(memory) - 1; VrGetComputerName();
+    check(ax == ERROR_INVALID_ADDRESS && carry == 1 && memory[di] == 0xa5,
+        "failed computer name copy preserves error and guest destination");
     user0.wkui0_username = L"\x65e5";
     init(2); VrGetUserName();
     check(ax == NERR_BufTooSmall && carry == 1 && memory[0x40] == 0xa5 &&

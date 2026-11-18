@@ -46,12 +46,12 @@ _CRTAPI1 main(int argc, CHAR ** argv)
         goto finish;
     }
 
+#line 37
     /*
      *  Intialize synchronization events for the timer\heartbeat
      *  so that we can always suspend the heartbeat when an exception
      *  occurs.
      */
-#line 42
     TimerInit();
 
 

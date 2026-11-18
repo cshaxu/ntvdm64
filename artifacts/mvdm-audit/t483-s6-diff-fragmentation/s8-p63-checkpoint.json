@@ -1,0 +1,40 @@
+{
+  "packet": "T483 S8 P63",
+  "position": 107,
+  "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+  "review_ids": [
+    "T483-R1258"
+  ],
+  "original_sha256": "1e04779ee75de6b1cb294e4b036e68745f84815d73c6037ee577258e97c629ca",
+  "current_sha256": "8da33b50d26bf86d1c7bdf22548338f8ec7912fae26705962a00e1bd6b668f52",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 107,
+    "remaining": 124,
+    "files": 231,
+    "points": 1931,
+    "lines": 27041,
+    "pending": 1544
+  },
+  "verification": [
+    "  Hint on symbols that are defined and could potentially match:",
+    "    _VDDInitialize",
+    "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p63\\original.dll : fatal error LNK1120: 1 unresolved externals"
+  ],
+  "decision": "Retain local WINAPI at VDDInitialize (R1258). The x86 loader entry has three arguments and stdcall cleanup. The remaining VDD service ABI is cdecl. With the original single declaration restored, compilation succeeds but the actual production linker cannot resolve its entry. No alternate thunk or whole-file ABI change."
+}

@@ -1,0 +1,69 @@
+{
+  "packet": "T483 S8 P62",
+  "position": 106,
+  "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+  "review_ids": [
+    "T483-R1251",
+    "T483-R1252",
+    "T483-R1253",
+    "T483-R1254",
+    "T483-R1255"
+  ],
+  "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+  "current_sha256": "c478cf86589393ace97917a95fc7ba625bf9b6183caba345362dc827be127aa3",
+  "before": {
+    "blocks": 4,
+    "added": 11,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 4,
+    "added": 11,
+    "deleted": 2
+  },
+  "source_changed": true,
+  "paired_error_bodies": 4,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        323,
+        319,
+        "#endif"
+      ],
+      [
+        351,
+        349,
+        "#endif"
+      ]
+    ],
+    "correction": "Moved existing #line 42 to #line 37 before timer comment; TimerInit remains original line 42."
+  },
+  "coverage": {
+    "complete": 106,
+    "remaining": 125,
+    "files": 231,
+    "points": 1931,
+    "lines": 27041,
+    "pending": 1544
+  },
+  "verification": {
+    "originalABI": "Actual worker flags, C2373 line 77, exit 2. Source and object checks; no new runtime test or allocation failure injection.",
+    "currentObjectSymbols": [
+      "021 00000000 SECT8  notype ()    External     | _DbgBreakPoint@0",
+      "027 00000000 UNDEF  notype ()    External     | _mvdm_standalone_worker_begin",
+      "028 00000000 UNDEF  notype ()    External     | _mvdm_standalone_worker_termination_escape",
+      "029 00000000 UNDEF  notype ()    External     | _mvdm_standalone_worker_completion_code",
+      "02A 00000000 UNDEF  notype ()    External     | _mvdm_standalone_worker_finish",
+      "02B 00000000 UNDEF  notype ()    External     | _ntvdm_shadow_nt_open_key@12",
+      "02C 00000000 UNDEF  notype ()    External     | _ntvdm_shadow_nt_enumerate_value_key@24",
+      "02D 00000000 UNDEF  notype ()    External     | _ntvdm_shadow_nt_close@4"
+    ],
+    "withoutRegistryHeader": [
+      "01E 00000000 UNDEF  notype ()    External     | _NtClose@4",
+      "023 00000000 UNDEF  notype       External     | __imp__NtEnumerateValueKey@24",
+      "024 00000000 UNDEF  notype       External     | __imp__NtOpenKey@12"
+    ]
+  },
+  "decision": "R1251/R1253/R1254: begin owns heap creation, NTSRV registration and session activation before original TimerInit. The completion jump returns into the still-live main frame and both successful startup paths share finish. Bootstrap failure already performs its own cleanup. Native CRT return would bypass the shared finish. R1252: removing the shadow registry include compiles but rebinds all three CpuEnv operations to native NT, bypassing the selected package overlay. R1255: restoring VOID without NTAPI fails x86 compile."
+}

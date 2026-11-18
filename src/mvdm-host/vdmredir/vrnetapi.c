@@ -355,11 +355,11 @@ Return Value:
             if (!mvdm_redirector_copy_ansi_to_guest(getES(), getDI(), nameBuf,
                 nameLen + 1u)) {
                 SET_ERROR(ERROR_INVALID_ADDRESS);
-            } else {
-#line 352
-                setAX(0);
-                setCF(0);
+                return;
             }
+#line 352
+            setAX(0);
+            setCF(0);
 #line 354
 #if DBG
 #line 355

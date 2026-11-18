@@ -1,0 +1,43 @@
+{
+  "packet": "T483 S8 P65",
+  "position": 109,
+  "path": "src/mvdm-host/vdmredir/vrica.h",
+  "review_ids": [
+    "T483-R1265"
+  ],
+  "original_sha256": "b93042ce17ae454d6bff085b15d93221bc86adb1fde50620675bf41ee34d8d75",
+  "current_sha256": "12b035d868e78ccee22a945a3e369e23642d9fc4fb66b562fea05876ee1d74af",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 109,
+    "remaining": 122,
+    "files": 231,
+    "points": 1931,
+    "lines": 27041,
+    "pending": 1544
+  },
+  "verification": {
+    "importArchive": [
+      "     EF9E __imp_call_ica_hw_interrupt",
+      "     EF9E call_ica_hw_interrupt"
+    ],
+    "scope": "Current production COFF, Ninja link edge and public wrapper verified; prior real original-header link control failed for the cdecl spelling.",
+    "caller": "059 00000000 UNDEF  notype ()    External     | _call_ica_hw_interrupt@12"
+  },
+  "decision": "R1265 retain the stdcall prototype. The x86 redirector object references _call_ica_hw_interrupt@12; the generated VDMREDIR link explicitly aliases this to the raw call_ica_hw_interrupt import. NTVDM exports the public wrapper _mvdm_public_ica_interrupt@12, which invokes the internal cdecl ica_hw_interrupt. Restoring the default cdecl declaration changes callee cleanup as well as the requested symbol."
+}

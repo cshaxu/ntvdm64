@@ -1,0 +1,72 @@
+{
+  "packet": "T483 S8 P64",
+  "position": 108,
+  "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+  "review_ids": [
+    "T483-R1260"
+  ],
+  "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+  "current_sha256": "e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 5,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        802,
+        767,
+        "#endif"
+      ],
+      [
+        1241,
+        1239,
+        "#endif"
+      ],
+      [
+        1995,
+        1988,
+        "#endif"
+      ],
+      [
+        3251,
+        3249,
+        "#else"
+      ],
+      [
+        3354,
+        3352,
+        "#else"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 108,
+    "remaining": 123,
+    "files": 231,
+    "points": 1931,
+    "lines": 27041,
+    "pending": 1544
+  },
+  "decision": "Retain R1260, the single completion-event identifier. The original tests the first handle twice; on second-event failure it starts a worker without its completion event and fails to retire the untransferred handle. Current code enters the original cleanup branch. No hardware provider was exercised.",
+  "verification": {
+    "current": "DLC_WORKER_EVENT checks=33 failures=0",
+    "restoredOriginalCheck": [
+      "FAIL both events precede thread",
+      "FAIL initialization result",
+      "FAIL no thread after event failure",
+      "FAIL failure event retirement count",
+      "FAIL no untransferred live handles",
+      "DLC_WORKER_EVENT checks=35 failures=5"
+    ]
+  }
+}

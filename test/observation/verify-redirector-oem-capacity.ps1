@@ -100,7 +100,7 @@ $linkArgs | ForEach-Object { '"' + $_ + '"' } | Set-Content $linkResponse -Encod
 if ($LASTEXITCODE -ne 0) { throw 'Link failed.' }
 if ($OriginalProviders) {
     $map = Get-Content -LiteralPath "$exe.map" -Raw
-    foreach ($symbol in @('VrGetUserName','VrGetCDNames')) {
+    foreach ($symbol in @('VrGetUserName','VrGetCDNames','VrGetComputerName')) {
         if ($map -notmatch "(?m)^.*_$symbol\s+.*\bvrnetapi\.obj\s*$") {
             throw "Original entrypoint not bound to this run's compiled unit: $symbol"
         }
@@ -123,7 +123,7 @@ try {
         })
     } | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $out 'result.json')
     Write-Output $text
-    $count = if ($OriginalProviders) { 16 } else { 14 }
+    $count = if ($OriginalProviders) { 18 } else { 14 }
     if ($p.ExitCode -ne 0 -or $text -notmatch "assertions=$count failures=0") {
         throw 'OEM/CD assertions failed.'
     }

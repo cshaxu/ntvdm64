@@ -36,7 +36,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 38,src/mvdm-host/dpmi32/int21map.c,16,27,6,33,14,0,39,s8-p5-rechecked-residuals-pending-owner,23c9046e7c7f862a71700411b0f024c1497391b606ff8b57307856c29904f542
 39,src/mvdm-host/softpc.new/base/video/video.c,13,49,12,61,57,0,40,s8-p40-reviewed,e76cdce88dc8bad15f84afc903f265f37f78e9d0fe5e5fb846c42863235e99da
 40,src/mvdm-host/wow32/wuclip.c,16,63,27,90,1,0,41,s7-p13-reviewed,6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b
-41,src/mvdm-host/vdmredir/vrnetapi.c,15,35,20,55,64,0,43,s7-p17-reviewed,2a329bee7eac3b511b967a82c3cbdf7b6fad9bec1eb48c9f8e0b67f7100599eb
+41,src/mvdm-host/vdmredir/vrnetapi.c,15,33,18,51,64,0,43,s8-p66-reviewed,481ef3fa15499d2b9b607099ce71b4a3e581ca66e2bcfe558a868aa30f00095d
 42,src/mvdm-host/wow32/wow32.c,15,26,11,37,34,0,44,s7-p10-format-restored-residual-pending,4f3a34410fe3b847ec4793c351da6604fab069dc1ec99dbdb933f424d252935f
 43,src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,15,23,0,23,3,0,45,s7-p20-format-restored-residual-pending,0cb29a05517e3276d751b8e83b01a50e4326dc1f4b708efacc294ffc9ab28954
 44,src/mvdm-host/dpmi32/i386/dpmi386.c,14,29,231,260,0,0,42,s8-p6-rechecked-residuals-pending-owner,59e1a591f708cc05ce6bbb2acb31204c5f33b86a8f3f306661d0ea8b8b4e31c1
@@ -107,7 +107,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 113,src/mvdm-host/softpc.new/base/cvidc/evidgen.h,3,3,1,4,0,0,115,s8-p22-reviewed,7767392b882d1794d55422ca13de1ee8e34f501044c34f0c0eb1d48a67428567
 114,src/mvdm-host/softpc.new/base/cvidc/sevid016.c,4,6,6,12,0,0,116,s8-p23-reviewed,636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc
 116,src/mvdm-host/softpc.new/host/src/nt_rflop.c,3,3,2,5,34,0,119,s8-p58-reviewed,71408ce0c925397b2e2e0ba6176118390be2a7556a53e29e504379537ecb9b07
-118,src/mvdm-host/softpc.new/obj.vdm/ntvdm.c,4,11,2,13,4,0,120,s7-p17-reviewed,406863948f5e8c06d9da183622d691f68313abdfeaa7fb99af4fc7b772a0c200
+118,src/mvdm-host/softpc.new/obj.vdm/ntvdm.c,4,11,2,13,4,0,120,s8-p62-reviewed,c478cf86589393ace97917a95fc7ba625bf9b6183caba345362dc827be127aa3
 119,src/mvdm-host/wow32/wmsgem.c,4,4,1,5,1,0,121,s7-p17-reviewed,f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8
 120,src/mvdm-host/wow32/wsext.c,4,7,1,8,0,0,122,s7-p21-reviewed,23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5
 121,src/mvdm-host/wow32/wuman.c,3,3,2,5,2,0,123,s7-p17-format-restored-residual-pending,a1c34a9b9554b9db8a7163742433521c0280e79621e9626fc68fe9aee6592936
@@ -203,9 +203,9 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 221,src/mvdm-host/softpc.new/host/src/nt_rez.c,1,3,0,3,1,0,224,s8-p57-reviewed,2448aec8c1645a93f237cfeb394227a12d1c1c4306d25a1c26516fc2c782806c
 223,src/mvdm-host/softpc.new/host/src/nt_unix.c,1,0,1,1,2,0,226,s8-p59-reviewed,59ff5502badd8e75136da1ab1b4bf69b50add4b2d11731bd2fd678f83d842cab
 224,src/mvdm-host/softpc.new/host/src/sources,1,0,1,1,0,0,227,s7-p23-reviewed,d98e4e87d136d13c385f1ac8c1bcda6766dd708ce2dffd1c833bb3fb9f014771
-225,src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c,1,1,1,2,0,0,228,s7-p22-reviewed,8da33b50d26bf86d1c7bdf22548338f8ec7912fae26705962a00e1bd6b668f52
-226,src/mvdm-host/vdmredir/vrdlc5c.c,1,1,1,2,5,0,229,s7-p22-reviewed,e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695
-227,src/mvdm-host/vdmredir/vrica.h,1,1,1,2,0,0,230,s7-p2-reviewed-residual-pending,12b035d868e78ccee22a945a3e369e23642d9fc4fb66b562fea05876ee1d74af
+225,src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c,1,1,1,2,0,0,228,s8-p63-reviewed,8da33b50d26bf86d1c7bdf22548338f8ec7912fae26705962a00e1bd6b668f52
+226,src/mvdm-host/vdmredir/vrdlc5c.c,1,1,1,2,5,0,229,s8-p64-reviewed,e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695
+227,src/mvdm-host/vdmredir/vrica.h,1,1,1,2,0,0,230,s8-p65-reviewed,12b035d868e78ccee22a945a3e369e23642d9fc4fb66b562fea05876ee1d74af
 228,src/mvdm-host/wow32/isvwow.h,1,1,1,2,0,0,231,s7-p5-reviewed-residual-pending,de0c0839707c033582c23a706eae019cd9c42f3424815e5ba0d9ec6135e06e08
 229,src/mvdm-host/wow32/wdib.c,1,1,1,2,2,0,232,s7-p22-reviewed,aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98
 230,src/mvdm-host/wow32/wdos.c,1,1,1,2,1,0,233,s7-p15-reviewed,a0bc00db06a8d45b56798d7263e6827f95ead9b5e0add8ef44d134aced88b793
