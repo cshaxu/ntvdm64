@@ -1,0 +1,88 @@
+{
+  "packet": "T483 S8 P172",
+  "position": 215,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+  "review_ids": [
+    "T483-R2678",
+    "T483-R2682",
+    "T483-R2685"
+  ],
+  "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+  "current_sha256": "e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9",
+  "before": {
+    "blocks": 8,
+    "added": 2,
+    "deleted": 245
+  },
+  "after": {
+    "blocks": 8,
+    "added": 2,
+    "deleted": 245
+  },
+  "source_changed": false,
+  "paired_error_bodies": 12,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 215,
+    "remaining": 16,
+    "files": 231,
+    "points": 1912,
+    "lines": 26354,
+    "pending": 1532
+  },
+  "decision": "R2678 header is needed by the existing layout and GDI helpers; the no-header control fails. R2682 PSMTextOut must allocate at cch==255 since GetPrefixCount copies 255 non-prefix WCHARs and appends a terminator. The existing 254/255/256 mnemonic extent fixture exercises PSMGetTextExtent, so it is not evidence of running the PSMTextOut case. R2685 current linked WOW32 map imports DrawTextExW from USER32. Restoring just that original body fails in the actual release compile context (RIP_WARNING); dll linkage itself is warning C4273. It additionally lacks GETAPPVER and multiple GDI region aliases. Retain public provider pending owner; recovered helpers remain unchanged.",
+  "verification": {
+    "scope": "Three isolated MSVC compilations with product control-text-rtl flags, actual linked WOW32 map inspected. No new runtime test, linked candidate or publication.",
+    "controls": {
+      "current": {
+        "exit": 0,
+        "errors": [],
+        "warnings": []
+      },
+      "no_header": {
+        "exit": 2,
+        "errors": [
+          "C2065: 'CH_PREFIX': undeclared identifier",
+          "C2065: 'CH_PREFIX': undeclared identifier",
+          "C2065: 'CH_PREFIX': undeclared identifier",
+          "C2065: 'CH_PREFIX': undeclared identifier",
+          "C2065: 'RIP_WARNING': undeclared identifier",
+          "C2065: 'gpsi': undeclared identifier"
+        ],
+        "warnings": [
+          "C4013: 'UserGetTextExtentPointW' undefined; assuming extern returning int",
+          "C4013: 'UserGetViewportExtEx' undefined; assuming extern returning int",
+          "C4013: 'UserGetWindowExtEx' undefined; assuming extern returning int",
+          "C4013: 'IsSysFontAndDefaultMode' undefined; assuming extern returning int",
+          "C4013: 'UserGetCharDimensionsW' undefined; assuming extern returning int",
+          "C4013: 'UserGetTextMetricsW' undefined; assuming extern returning int",
+          "C4013: 'RIPMSG0' undefined; assuming extern returning int",
+          "C4013: 'UserRtlAllocMem' undefined; assuming extern returning int",
+          "C4013: 'UserRtlFreeMem' undefined; assuming extern returning int",
+          "C4013: 'UserTextOutW' undefined; assuming extern returning int",
+          "C4013: 'UserSetBkColor' undefined; assuming extern returning int",
+          "C4013: 'UserGetTextColor' undefined; assuming extern returning int"
+        ]
+      },
+      "restore": {
+        "exit": 2,
+        "errors": [
+          "C2065: 'RIP_WARNING': undeclared identifier"
+        ],
+        "warnings": [
+          "C4273: 'DrawTextExW': inconsistent dll linkage",
+          "C4013: 'RIPERR1' undefined; assuming extern returning int",
+          "C4013: 'GETAPPVER' undefined; assuming extern returning int",
+          "C4013: 'UserCreateRectRgn' undefined; assuming extern returning int",
+          "C4013: 'UserGetClipRgn' undefined; assuming extern returning int",
+          "C4013: 'UserDeleteObject' undefined; assuming extern returning int",
+          "C4013: 'UserIntersectClipRect' undefined; assuming extern returning int",
+          "C4013: 'UserExtSelectClipRgn' undefined; assuming extern returning int"
+        ]
+      }
+    }
+  }
+}

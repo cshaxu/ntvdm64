@@ -73,7 +73,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 75,src/mvdm-host/wow32/wow32fax.c,8,15,5,20,2,0,76,s8-p98-reviewed,a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad
 76,src/mvdm-host/wow32/wudlg.c,8,16,2,18,5,0,77,s8-p108-reviewed,1f8cb2f28e8f3d320cc322512b273915f20aed4a2aa336678c1c7d78acae9736
 78,src/non-mvdm/windows/core/ntuser/client/mngrayc.c,8,14,1,15,2,0,79,s8-p154-reviewed,e3c78a070cd6a42293358cdadb762755ecdecfbd86bae727298b1fb53d582964
-79,src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,8,2,245,247,12,0,80,s7-p7-reviewed-residual-pending,e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9
+79,src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,8,2,245,247,12,0,80,s8-p172-reviewed,e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9
 80,src/non-mvdm/windows/core/ntuser/rtl/getset.c,8,14,223,237,0,0,81,s7-p5-reviewed-residual-pending,1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b
 81,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,59,5,0,84,s8-p46-reviewed,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
 82,src/mvdm-host/wow32/wuclass.c,7,13,7,20,6,0,85,s8-p106-reviewed,e88dbe493e58e12f8fd2b55395e8ebcff1ce7858c06a3dae944c5c3e742e4485
