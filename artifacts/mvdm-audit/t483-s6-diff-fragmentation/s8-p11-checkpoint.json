@@ -1,0 +1,67 @@
+{
+  "packet": "T483 S8 P11",
+  "position": 30,
+  "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+  "source_sha256": "aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622",
+  "points": {
+    "T483-R0346": "Driver signature4e544d56/op6 in insignia.asm requires directory-instance result; original NIDDB switch has no bridge operation. Termination declaration provides nonreturning failure for byte>=80 or freed record before device access.",
+    "T483-R0347": "Original System_Exit calls ClearInstanceDataMarking; sole current definition is VOID(void) in vdd unavailable provider. Declaration avoids implicit int, not authority for provider semantics. Current companion shutdown sends0x17 and does not use this unavailable call.",
+    "T483-R0348": "Table calloc remains local until successful final vrecs publication. On child allocation failure original frees children but never table; no later owner can free it.",
+    "T483-R0351": "Bridge result is read to marshal status/value/serial registers for actual independent addon BOP requests; original NIDDB EAX control switch cannot supply these operations.",
+    "T483-R0352": "Guest virtualising byte is8-bit; table has80 entries; freed table is null. Original swap indexes/dereferences without checking and equality shortcut can retain stale data. Keep fail-fast validation before device access."
+  },
+  "before_and_after": {
+    "blocks": 5,
+    "added": 22,
+    "deleted": 0
+  },
+  "coverage": {
+    "complete": 30,
+    "remaining": 201,
+    "files": 231,
+    "points": 1957,
+    "lines": 27118,
+    "pending": 1549
+  },
+  "verification": {
+    "contract_checks": 15,
+    "callbacks": 3,
+    "reuse": "pass",
+    "invalid_identity": "pass (fixture termination seam)",
+    "rollback": {
+      "result": "pass",
+      "exit": 0,
+      "scope": "intercepted object and controlled VxD boundaries, not guest execution",
+      "baseline_control": false,
+      "inputs": [
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_no_retry_fixture.c",
+          "sha256": "c3b2d0cf18c6f4311dfdb0d086d0f9e283f56f138a4e8b9d4ec4a8a4f1b290a1"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_bridge_boundary.h",
+          "sha256": "2759a2f56219fbf1d5f2ce2516a8c6b33ea9045e12b585d6d0c06f488e643fd3"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_vm_bridge.h",
+          "sha256": "ecc3d25e9dc019dff4214d4af48016b6eaa3b3d19f5c7a1af5e60169f1650155"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+          "sha256": "00e3a6b713a35d5eb62c4091b7633b1b42299e0eac89c9f9b4fa5e38fdb48e04"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p11\\rollback\\virtual-intercept.obj",
+          "sha256": "5bf4b46761268b66ba0a8e045522a636b7be68d39b82335ee719ad12867c998b"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s8-p11\\rollback\\fixture.exe",
+          "sha256": "cd95f459ab476588b11edea54ca2d875f09bc97c0da300efd09fa54c29a85b3a"
+        }
+      ]
+    },
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance"
+  },
+  "line_evidence": "Same source hash as r0346-r0352-virtual-review.json post_build_format. Reused logical-line and exclusion evidence.",
+  "production": "Audit only. P8 package."
+}
