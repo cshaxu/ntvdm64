@@ -441,3 +441,8 @@ census is 1,992 points and 27,372 changed lines across 233 mirrors.
 [S7 P34 receipt](s7-p34-checkpoint.json) records nine local frame removals,
 184 matched worker and WOW preprocessing entries and two focused fixtures.
 The filtered census is 1,986 points and 27,336 changed lines across 231 mirrors.
+
+[S7 P35 receipt](s7-p35-checkpoint.json) records nineteen local frames removed
+from the WOW procedure entry code, dialog creation and CCPU diagnostic
+configuration. The filtered census is 1,985 points and 27,281 changed lines,
+with all six tracked preprocessing inputs identical.

@@ -1700,25 +1700,21 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
         case GWL_WNDPROC:
             if (pww = FindPWW(HWND32(parg16->f1), WOWCLASS_UNKNOWN)) {
                 DWORD dwWndProc32Cur;
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 1704
                 BOOL procedureIsGuest;
 
                 dwWndProc32Cur = wow_user_get_procedure(HWND32(parg16->f1), FALSE, &procedureIsGuest);
-#else
-#line 1704
-#error Unsupported excluded original configuration
-#endif
 #line 1705
 
                 if ( (dwWndProc32Cur & WNDPROC_WOW)
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 1708
                      && (procedureIsGuest || HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE)
-#endif
+#line 1710
                    ) {
                     if ( HIWORD(dwWndProc32Cur) == WNDPROC_HANDLE
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 1713
                          && !procedureIsGuest
-#endif
+#line 1715
                        ) {
 #line 1708
                         /*
@@ -2469,9 +2465,9 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
         if (pww = FindPWW(HWND32(parg16->f1), WOWCLASS_UNKNOWN)) {
             DWORD dwWndProc32Old;
             DWORD dwWndProc32New;
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 2452
             BOOL previousIsGuest;
-#endif
+#line 2454
 
 #line 2452
             // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
@@ -2484,12 +2480,8 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 // 16-bit thunk that is really just a thunk for a 32-bit
                 // routine.  We can just set it back to the 32-bit routine.
                 //
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 2462
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, dwWndProc32New, FALSE, &previousIsGuest);
-#else
-#line 2461
-#error Unsupported excluded original configuration
-#endif
 #line 2462
 
                 // If the 32 bit set failed, perhaps because its another process,
@@ -2522,12 +2514,8 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                     l &= ~WOWCLASS_VIRTUAL_NOT_BIT31;
                 }
 
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 2494
                 dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), FALSE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
-#else
-#line 2493
-#error Unsupported excluded original configuration
-#endif
 #line 2494
 
                 // If the 32 bit set failed, perhaps because its another process,
@@ -2539,14 +2527,14 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
             }
 
             if ( (dwWndProc32Old & WNDPROC_WOW)
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 2505
                  && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)
-#endif
+#line 2507
                ) {
                 if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 2510
                      && !previousIsGuest
-#endif
+#line 2512
                    ) {
 #line 2505
                     //

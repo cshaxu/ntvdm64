@@ -38,7 +38,6 @@ GLOBAL BOOL show_exceptions = FALSE;
 GLOBAL BOOL trap_exceptions = FALSE;
 LOCAL  BOOL first_exception = TRUE;
 
-#ifdef PROD
 #line 40
 #define check_exception_env()						\
 {									\
@@ -56,10 +55,6 @@ LOCAL  BOOL first_exception = TRUE;
 	first_exception = FALSE;					\
 }
 
-#else
-#line 40
-#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
-#endif
 
 #line 56
 IMPORT FILE *trace_file;

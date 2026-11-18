@@ -608,7 +608,7 @@ DeleteFontAndMenuAndFail:
 
     PDLG(pwnd)->cxChar = cxChar;
     PDLG(pwnd)->cyChar = cyChar;
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
+#line 601
     SetLastError(0);
     wow_dialog_host_set(hwnd, DWL_DLGPROC, (LONG)lpfnDialog,
         (fSCDLGFlags & SCDLG_ANSI) != 0);
@@ -617,10 +617,6 @@ DeleteFontAndMenuAndFail:
         hMenu = NULL; /* DestroyWindow owns its attached menu. */
         goto DeleteFontAndMenuAndFail;
     }
-#else
-#line 600
-#error Unsupported excluded original configuration
-#endif
 #line 601
     PDLG(pwnd)->fEnd = FALSE;
     PDLG(pwnd)->result = IDOK;
@@ -628,10 +624,6 @@ DeleteFontAndMenuAndFail:
     /*
      * Need to remember Unicode status.
      */
-#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-#line 607
-#error Unsupported excluded original configuration
-#endif
 #line 609
 
     /*

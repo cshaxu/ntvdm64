@@ -268,25 +268,21 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
         case GCL_WNDPROC:
             {
                 DWORD   dwProc32;
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 272
                 BOOL procedureIsGuest;
 
                 dwProc32 = wow_user_get_procedure(hwnd, TRUE, &procedureIsGuest);
-#else
-#line 272
-#error Unsupported excluded original configuration
-#endif
 #line 273
 
                 if ( (dwProc32 & WNDPROC_WOW)
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 276
                      && (procedureIsGuest || HIWORD(dwProc32) == WNDPROC_HANDLE)
-#endif
+#line 278
                    ) {
                     if ( HIWORD(dwProc32) == WNDPROC_HANDLE
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 281
                          && !procedureIsGuest
-#endif
+#line 283
                        ) {
                         //
                         // Class has a window proc which is really a handle
@@ -737,9 +733,9 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                 DWORD   dwWndProc32Old;
                 DWORD   dwWndProc32New;
                 PWW     pww;
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 721
                 BOOL previousIsGuest;
-#endif
+#line 723
 
                 // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
 #line 722
@@ -751,13 +747,9 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                     // 16-bit thunk that is really just a thunk for a 32-bit
                     // routine.  We can just set it back to the 32-bit routine.
                     //
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 731
                     dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, dwWndProc32New, FALSE, &previousIsGuest);
                     if (!dwWndProc32Old) break;
-#else
-#line 730
-#error Unsupported excluded original configuration
-#endif
 #line 731
                     SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, 0);
                 } else {
@@ -781,26 +773,22 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                         l &= ~WOWCLASS_VIRTUAL_NOT_BIT31;
                     }
 
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 754
                     dwWndProc32Old = wow_user_set_procedure(HWND32(parg16->f1), TRUE, l | WNDPROC_WOW, TRUE, &previousIsGuest);
                     if (!dwWndProc32Old) break;
-#else
-#line 753
-#error Unsupported excluded original configuration
-#endif
 #line 754
                     SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, LONG32(parg16->f3));
                 }
 
                 if ( (dwWndProc32Old & WNDPROC_WOW)
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 759
                      && (previousIsGuest || HIWORD(dwWndProc32Old) == WNDPROC_HANDLE)
-#endif
+#line 761
                    ) {
                     if ( HIWORD(dwWndProc32Old) == WNDPROC_HANDLE
-#ifdef WOW_USER_PRIVATE_REDIRECT
+#line 764
                          && !previousIsGuest
-#endif
+#line 766
                        ) {
                         //
                         // If the return value is a handle, then just thunk it.

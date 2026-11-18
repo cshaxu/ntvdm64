@@ -1,0 +1,346 @@
+{
+  "packet": "M0 T483 S7 P35",
+  "prior_checkpoint": "b452cd9a5",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c": {
+      "before": {
+        "blocks": 13,
+        "added": 16,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 12,
+        "added": 12,
+        "deleted": 6
+      },
+      "removed_local_frame_ranges": [
+        [
+          41,
+          41,
+          0
+        ],
+        [
+          59,
+          62,
+          0
+        ]
+      ],
+      "original_error_pairs": 7,
+      "prior_sha256": "c5844ce336dee9f1c1a3a42baa78ea8fd31f27439538e89cab4b66e4820697ed",
+      "current_sha256": "aa6acdce270c3fa7557acac960d51cc65c31b25abe85603169bb73230cc8c537",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2"
+    },
+    "src/mvdm-host/wow32/wuwind.c": {
+      "before": {
+        "blocks": 12,
+        "added": 49,
+        "deleted": 11
+      },
+      "after": {
+        "blocks": 12,
+        "added": 27,
+        "deleted": 11
+      },
+      "removed_local_frame_ranges": [
+        [
+          1703,
+          1703,
+          1
+        ],
+        [
+          1707,
+          1710,
+          0
+        ],
+        [
+          1714,
+          1714,
+          1
+        ],
+        [
+          1716,
+          1716,
+          1
+        ],
+        [
+          1719,
+          1719,
+          1
+        ],
+        [
+          1721,
+          1721,
+          1
+        ],
+        [
+          2472,
+          2472,
+          1
+        ],
+        [
+          2474,
+          2474,
+          1
+        ],
+        [
+          2487,
+          2487,
+          1
+        ],
+        [
+          2489,
+          2492,
+          0
+        ],
+        [
+          2525,
+          2525,
+          1
+        ],
+        [
+          2527,
+          2530,
+          0
+        ],
+        [
+          2542,
+          2542,
+          1
+        ],
+        [
+          2544,
+          2544,
+          1
+        ],
+        [
+          2547,
+          2547,
+          1
+        ],
+        [
+          2549,
+          2549,
+          1
+        ]
+      ],
+      "original_error_pairs": 5,
+      "prior_sha256": "671d14c3f1ca7e8351f0a874579c2962d7c9a4a671a1437370b22ec891e5d0f1",
+      "current_sha256": "423433654a7f6d7ee8348de9bad83702608dd873214f2c477717b40c3fcf9431",
+      "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c": {
+      "before": {
+        "blocks": 9,
+        "added": 33,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 9,
+        "added": 26,
+        "deleted": 6
+      },
+      "removed_local_frame_ranges": [
+        [
+          611,
+          611,
+          1
+        ],
+        [
+          620,
+          623,
+          0
+        ],
+        [
+          631,
+          634,
+          0
+        ]
+      ],
+      "original_error_pairs": 1,
+      "prior_sha256": "575a8e67626f75ebc1446cc3186e7d9f070be45271d2254394d47fee7e35211c",
+      "current_sha256": "c33d003c0db56f0729172d7f482c2b32fbb95c70fc5feb54ed45b39b897eed1d",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44"
+    },
+    "src/mvdm-host/wow32/wuclass.c": {
+      "before": {
+        "blocks": 7,
+        "added": 41,
+        "deleted": 7
+      },
+      "after": {
+        "blocks": 7,
+        "added": 19,
+        "deleted": 7
+      },
+      "removed_local_frame_ranges": [
+        [
+          271,
+          271,
+          1
+        ],
+        [
+          275,
+          278,
+          0
+        ],
+        [
+          282,
+          282,
+          1
+        ],
+        [
+          284,
+          284,
+          1
+        ],
+        [
+          287,
+          287,
+          1
+        ],
+        [
+          289,
+          289,
+          1
+        ],
+        [
+          740,
+          740,
+          1
+        ],
+        [
+          742,
+          742,
+          1
+        ],
+        [
+          754,
+          754,
+          1
+        ],
+        [
+          757,
+          760,
+          0
+        ],
+        [
+          784,
+          784,
+          1
+        ],
+        [
+          787,
+          790,
+          0
+        ],
+        [
+          796,
+          796,
+          1
+        ],
+        [
+          798,
+          798,
+          1
+        ],
+        [
+          801,
+          801,
+          1
+        ],
+        [
+          803,
+          803,
+          1
+        ]
+      ],
+      "original_error_pairs": 6,
+      "prior_sha256": "ceb60357f24f8a6bc728ee5dfb83131a4a30875bc914f625009a48eaa597ab09",
+      "current_sha256": "1c6a49f1f38126cc200734faf2a2c8ecebca734ff969584386e16e4db60c2b3c",
+      "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d"
+    }
+  },
+  "removed_frames": {
+    "wuwind.c": 8,
+    "wuclass.c": 8,
+    "dlgbegin.c": 2,
+    "c_xcptn.c": 1
+  },
+  "decisions": {
+    "wuwind.c": "Keep the origin information required at the native USER procedure boundary. Remove the local build selector.",
+    "wuclass.c": "Keep class procedure provenance and native USER ownership. Remove the local build selector.",
+    "dlgbegin.c": "Keep the native USER procedure slot as the single owner. Remove its local build selector.",
+    "c_xcptn.c": "Keep the trace stream precondition for exception diagnostics. Remove the local PROD wrapper around the environment check."
+  },
+  "census": {
+    "non_error_points": 1985,
+    "non_error_lines": 27281,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 62,
+      "lines": 1695
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "context": "wow-wuwind",
+          "graph": "build/.ninja/msvc-x86-release/wow32",
+          "target": "obj/wuwind.obj",
+          "selected_lines": 63024,
+          "comparison_sha256": "c48212cddd1bd7967d77a75db293740193e44f63b0a6eaa85ef3b03c423dacd9"
+        },
+        {
+          "context": "wow-wuclass",
+          "graph": "build/.ninja/msvc-x86-release/wow32",
+          "target": "obj/wuclass.obj",
+          "selected_lines": 62592,
+          "comparison_sha256": "13121574fd2a7826970c3d7b52ad37bc6832a8db8ffc7ff00af895f308b397b3"
+        },
+        {
+          "context": "wow-dlgbegin",
+          "graph": "build/.ninja/msvc-x86-release/wow32",
+          "target": "obj/opennt-user/control-body-dlgbegin.obj",
+          "selected_lines": 49486,
+          "comparison_sha256": "dc2d435d814d49b761c3ee2ed79bfb4d370364f4e781d676d5fca229d0ee2474"
+        },
+        {
+          "context": "fixture-dlgbegin",
+          "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+          "target": "obj/original_dlgbegin.obj",
+          "selected_lines": 50016,
+          "comparison_sha256": "769197a5335fd71015f4be8d7839065777fd92c96c5e8068dd38d49f23629ffc"
+        },
+        {
+          "context": "worker-c_xcptn",
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "target": "obj/ccpu/c_xcptn.obj",
+          "selected_lines": 46069,
+          "comparison_sha256": "f3d54a3b74a6ef5aa1030c9fcd941f55ca589d94a272d4fb2f2d76b9164b5e60"
+        },
+        {
+          "context": "worker-reference-c_xcptn",
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "target": "obj/ccpu/c_xcptn.obj",
+          "selected_lines": 46069,
+          "comparison_sha256": "f3d54a3b74a6ef5aa1030c9fcd941f55ca589d94a272d4fb2f2d76b9164b5e60"
+        }
+      ]
+    },
+    "targeted": {
+      "wow_entry_objects": "pass",
+      "wow_dialog_creator_lifetime_fixture": "pass",
+      "ccpu_monitor_boundary_cases_passed": 58
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Six relevant generated compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

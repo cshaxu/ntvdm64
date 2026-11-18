@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-61 points and 1,640 changed lines in S7. The current census is 1,986 non-error
-points and 27,336 changed lines across 231 mirrors with filtered differences.
+62 points and 1,695 changed lines in S7. The current census is 1,985 non-error
+points and 27,281 changed lines across 231 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -211,20 +211,23 @@ P31 clears the non-error differences in `egacpu.h` and `gmi.h`.
 `ica.h` keeps only the omission of two conflicting macros.
 [P31 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p31-checkpoint.json).
 
-P32 restores four original EGA writer ranges and retains the fourteen
-original BACK_M condition frames with excluded bodies. The cached builds,
-EGA fixture and timestamp-only link control pass. Both published manifests
-match all eleven staged images. Only PE timestamps differ from P10.
+P32 restores four original EGA writer ranges and retains the original BACK_M
+frames. The verified package matches both published manifests and differs
+from P10 only in PE timestamps.
 [P32 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p32-checkpoint.json).
 
-P33 removes three local DPMI and word-layout frames. The protected-mode,
-descriptor and little-endian contracts pass. Two hundred compile entries
-match with the original line anchor for the `low` register field corrected.
+P33 removes three local DPMI and word-layout frames and restores the
+original line anchor for the `low` register field.
 [P33 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p33-checkpoint.json).
 
 P34 removes nine local video, MVDM and floating-layout frames. `cpu_vid.h`
 and `mvdm.h` have no non-error difference. The x87 layout stays verified.
 [P34 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p34-checkpoint.json).
+
+P35 removes nineteen local WOW, dialog and CCPU diagnostic frames. Six
+product and fixture inputs retain identical selected source and logical
+lines.
+[P35 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p35-checkpoint.json).
 
 ## S1 Closure Record
 
