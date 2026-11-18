@@ -63,7 +63,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 65,src/non-mvdm/windows/core/ntuser/client/dlgbegin.c,9,26,6,32,1,0,68,s7-p23-format-restored-residual-pending,c33d003c0db56f0729172d7f482c2b32fbb95c70fc5feb54ed45b39b897eed1d
 66,src/non-mvdm/windows/core/ntuser/kernel/getset.c,10,5,673,678,6,0,69,s7-reviewed-residuals-pending,b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d
 67,src/non-mvdm/windows/core/ntuser/rtl/userrtl.h,8,4,37,41,10,0,58,s7-p2-original-comments-restored-residual-pending,9928d826d81e8a5eb272d1bb82b2628c02fe96d9ea5074092550d17fc41bbba6
-68,src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h,9,18,8,26,3,0,70,s7-p2-reviewed-residual-pending,8a83af2254588831515340e0fb2ddcbf38ce17bc836cda439401663ec5f47ce9
+68,src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h,9,18,8,26,3,0,70,s8-p14-rechecked-residuals-pending-owner,8a83af2254588831515340e0fb2ddcbf38ce17bc836cda439401663ec5f47ce9
 69,src/mvdm-host/softpc.new/base/cvidc/sevid018.c,9,16,16,32,0,0,71,s7-p23-reviewed,571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471
 70,src/mvdm-host/vdmredir/vrnmpipe.c,9,22,29,51,80,0,72,s7-p16-reviewed,a83b99a6f2021f9b86db1947301983f5f908fdeae915b950d56fa20f0dc7d108
 71,src/non-mvdm/windows/core/ntuser/rtl/wow.c,7,1,170,171,6,0,49,s7-p7-reviewed-residual-pending,cee4533a5bd742002e4cdcd025f061e91a217c9326a0944c4b3fe068ea0fcd65
@@ -186,7 +186,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 203,src/mvdm-host/softpc.new/base/bios/tape_io.c,1,1,0,1,12,0,204,s8-p10-rechecked-residual-pending-owner,e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9
 204,src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h,1,1,0,1,0,0,205,s8-p12-rechecked-residuals-pending-owner,c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15
 205,src/mvdm-host/softpc.new/base/ccpu386/c_debug.h,1,1,0,1,0,0,206,s8-p12-rechecked-residuals-pending-owner,66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f
-206,src/mvdm-host/softpc.new/base/ccpu386/c_seg.c,1,8,0,8,3,0,207,s7-p19-reviewed,983bcd1de050928237f211ea391b5e4d9f5191a7a1ed04e60f23e79f93e2a51b
+206,src/mvdm-host/softpc.new/base/ccpu386/c_seg.c,1,8,0,8,3,0,207,s8-p14-rechecked-residuals-pending-owner,983bcd1de050928237f211ea391b5e4d9f5191a7a1ed04e60f23e79f93e2a51b
 207,src/mvdm-host/softpc.new/base/ccpu386/call.c,1,1,1,2,6,0,208,s7-p17-reviewed,4053cf58e9c439bdcc74611d31bbddcc21a24884b1eb8d0df9f9595127e202ae
 208,src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1,2,1,3,6,0,209,s7-p18-reviewed,a306e8e1c8623c891f32dfc9e693ce5b4bb7a873f76291daddfdc7f151f98921
 209,src/mvdm-host/softpc.new/base/ccpu386/iret.c,1,1,1,2,1,0,210,s7-p19-reviewed,22a4c8ea19036b35388a5286a992bbd63b19ecfa05157cd71f075f73546c382b
