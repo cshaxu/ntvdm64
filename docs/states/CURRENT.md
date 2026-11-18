@@ -18,7 +18,8 @@
 | Candidate Proposal | [T483 parent proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
 | Identifier Mode | M0 T483 S11, Ordinary Mode. |
 | Admission And Approval | Owner reopened T483 for S11 following accepted S10. |
-| Non-goals | BC internal dependencies and other layer violations. |
+| P3 scope amendment | Owner approved moving the extracted RegisterClassWOWA translation unit from compat to wow32-dll, which owns its class context and registration bindings. Preserve the source body, original x86 flags, exports and the parent import. Verify the production graph and class-client behavior. |
+| Non-goals | BC internal dependencies and other layer violations beyond the approved class-client move. |
 | Expected Markers | No BC header, forced include or resolved BC provider in A-owned production units. |
 | Similar-Issue Sweep | Check both A libraries across native, worker, WOW32 and Hook builds. |
 | Reporting Requirements | Record affected objects, flags, dependency paths and ownership decisions. |
@@ -26,6 +27,8 @@
 | Exit Criteria | Evidence covers every selected A unit, relevant tests and verified product delivery. |
 
 ## Current Technical Baseline
+
+S11 P3 moved the [RegisterClassWOWA unit](../../src/wow32-dll/source/wow_class_client.c) from compat to wow32-dll with identical source contents. The WOW32 production graph now builds the object under its binding owner. Cached x86 and x64 release builds and the formal graph check passed. The class-client fixture reported zero errors across five version domains, server_owner=1 and cpd=2. All eleven images and the manifest of package 5116116b-cf58-4523-8835-bf63c97248a6 matched the staged hashes in assets/release and O:/winnt/system32. Receipts are under build/t483-s11-p3.
 
 S11 P2 isolates the WOW32 production CRT object from the BC headers. Its native flags retain the x86 CRT, calling convention and optimization settings. No declaration or implementation moved. The cached x86 and x64 release builds passed. The [CRT regression](../../test/lib-win32/crt-compat/verify-crt-compat.ps1) checked the production command, compiler dependency record, both link maps, formatting with the actual WOW32 object, and missing/duplicate provider failures. All eleven images of package 1941b6a0-3dc9-4549-a420-64c4a06c13b2 were hash-verified at both release destinations. Build, test and publication receipts are under build/t483-s11-p2. S11 remains active for the other A-library compilation contexts.
 

@@ -89,7 +89,10 @@ $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
 if (@(Compare-Object $expectedUser $actualUser).Count) {
     throw 'The original OpenNT USER-owner object set differs from the admitted formal graph.'
 }
-foreach ($unit in @('wow-client-dispatch','wow-dialog-memory','wow-control-state','wow-default-window-bits','wow-class-client','wow-control-rect','wow-dialog-pointer','wow-control-brush')) {
+if ($link -notmatch '\bobj/wow32-dll/wow_class_client\.obj\b' -or $link -match '\bobj/compat/wow-class-client\.obj\b') {
+    throw 'The extracted class registration unit must be linked from its WOW32 owner.'
+}
+foreach ($unit in @('wow-client-dispatch','wow-dialog-memory','wow-control-state','wow-default-window-bits','wow-control-rect','wow-dialog-pointer','wow-control-brush')) {
     if ($link -notmatch ('\bobj/compat/' + $unit + '\.obj\b')) {
         throw "Missing extracted USER client unit: $unit"
     }

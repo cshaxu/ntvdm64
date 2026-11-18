@@ -656,7 +656,7 @@ $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_REGISTRATION')
 $taskOrderObject = 'obj/opennt-user/taskman.obj'
 $objects.Add($taskOrderObject)
 $ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/taskman.c')))
-$classClientObject = 'obj/compat/wow-class-client.obj'
+$classClientObject = 'obj/wow32-dll/wow_class_client.obj'
 $inputGroupObject = 'obj/compat/wow-input-membership.obj'
 $objects.Add($inputGroupObject)
 $ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_input_membership.c')))
@@ -670,7 +670,7 @@ $taskRegisterObject = 'obj/opennt-user/exitwin.obj'
 $objects.Add($taskRegisterObject)
 $ninja.Add('build ' + $taskRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/exitwin.c')))
 $objects.Add($classClientObject)
-$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_class_client.c')))
+$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $adapterWow 'wow_class_client.c')))
 $ninja.Add('  cflags = $cflags')
 $objects.Add($classLookupObject)
 $ninja.Add('build ' + $classLookupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/class.c')))
