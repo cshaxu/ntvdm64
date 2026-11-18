@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P135",
+  "position": 178,
+  "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+  "review_ids": [
+    "T483-R2089",
+    "T483-R2102"
+  ],
+  "original_sha256": "2fc698d4e078abf7b18722f3e84712ab580bf22cf3362ba3ce9fb9486b1a7e98",
+  "current_sha256": "2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37",
+  "before": {
+    "blocks": 11,
+    "added": 0,
+    "deleted": 147
+  },
+  "after": {
+    "blocks": 11,
+    "added": 0,
+    "deleted": 147
+  },
+  "source_changed": false,
+  "paired_error_bodies": 10,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 178,
+    "remaining": 53,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Compared pinned and current source, paired exclusion structure, and previous actual compiler controls recorded under R2089 and R2102. No product edit or new runtime test."
+  },
+  "decision": "R2089: the SDK memory macros expand inside the original function prototypes on x64. R2102: public SDK process parameters, message resources and OS version structures already own the tags; the two private process information layouts embed missing SECTION_IMAGE_INFORMATION types by value. A forward declaration cannot supply their sizes. Retain the recorded omissions."
+}
