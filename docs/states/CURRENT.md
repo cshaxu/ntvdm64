@@ -4,7 +4,8 @@
 
 **Active: M0 T483 S7**
 
-Continue the original-first audit in production integration order.
+The initial production-order pass is complete. Follow the pending-decision
+register in order, one file at a time. P48 ends at `cmdmisc.c`.
 
 The owner closed S6 at P32 and admitted continuous S7 review. See
 [S6 closure](../etc/evidence/m0-t483-s6-closure.md). The initial class.c,
@@ -178,8 +179,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-73 points and 1,759 changed lines in S7. The current census is 1,974 non-error
-points and 27,215 changed lines across 231 mirrors with filtered differences.
+73 points and 1,764 changed lines in S7. The current census is 1,974 non-error
+points and 27,210 changed lines across 231 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -223,8 +224,8 @@ P38 to P40 simplify guards, restore original spacing, and correct a mask pair.
 P41 to P43 simplify BaseSrv, DPMI and window-manager selectors.
 [Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
-P44 to P47 consolidate selectors, line anchors, VDM configuration generation,
-and COMMAND capture status.
+P44 to P48 consolidate selectors, line anchors, VDM configuration generation,
+and COMMAND capture and directory handling.
 [Batch evidence index](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/README.md).
 
 ## S1 Closure Record

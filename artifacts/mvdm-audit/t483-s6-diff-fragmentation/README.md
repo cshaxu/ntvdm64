@@ -503,3 +503,9 @@ for standard-handle capture and child launch. `cmdexec.c` drops from 17 to 16
 non-error blocks and from 82 to 78 changed lines. Cached x86/x64 builds, both
 release destinations, the capture and launch fixtures, and the isolated DOS
 handoff passed. The capture boundary remains pending owner decision.
+
+[S7 P48 receipt](s7-p48-checkpoint.json) records the ordered keyboard and
+COMMAND directory reviews. `cmdkeyb.c` keeps two evidenced pending points.
+`cmdmisc.c` keeps nine points and drops from 57 to 52 changed lines. Cached
+x86/x64 builds, both release destinations, six before/after directory controls,
+and the isolated DOS handoff passed.

@@ -603,11 +603,8 @@ UINT  DriveType;
 
 	// if its not in env then and drive exist then we have'nt
 	// yet touched it.
-        strcpy(CurDir, RootName);
-        /* DIVERGENCE(MVDM-HOST-DIV-009): exact synchronous write replaces
-         * the source's direct guest alias before its environment mutation. */
         if (!mvdm_guest_location_copy_to_guest(&CurDirLocation,
-            (PBYTE)CurDir, (ULONG)strlen(CurDir) + 1)) {
+            (PBYTE)RootName, sizeof(RootName))) {
             setCF(1);
             setAX(0);
             return;
@@ -629,7 +626,7 @@ UINT  DriveType;
             return;
         }
 #line 574
-	setCF(0);
+        setCF(0);
 #line 575
     }
     return;

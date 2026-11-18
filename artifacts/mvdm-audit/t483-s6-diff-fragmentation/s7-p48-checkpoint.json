@@ -1,0 +1,108 @@
+{
+  "packet": "M0 T483 S7 P48",
+  "prior_checkpoint": "95a516ade",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "ordered_files": [
+    {
+      "source": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "review_ids": [
+        "T483-R0037",
+        "T483-R0038"
+      ],
+      "points_before_after": [
+        2,
+        2
+      ],
+      "lines_before_after": [
+        4,
+        4
+      ],
+      "disposition": "No code changes. Package path and configured registry projection remain pending.",
+      "deployment_checks": [
+        {
+          "path": "O:\\winnt\\system32\\KB16.COM",
+          "present": true
+        },
+        {
+          "path": "O:\\winnt\\system32\\KEYBOARD.SYS",
+          "present": true
+        },
+        {
+          "path": "C:\\WINDOWS\\System32\\KB16.COM",
+          "present": false
+        },
+        {
+          "path": "C:\\WINDOWS\\System32\\KEYBOARD.SYS",
+          "present": false
+        },
+        {
+          "path": "C:\\WINDOWS\\SysWOW64\\KB16.COM",
+          "present": false
+        },
+        {
+          "path": "C:\\WINDOWS\\SysWOW64\\KEYBOARD.SYS",
+          "present": false
+        }
+      ],
+      "registry_proof": "The host keys exist. Native registry calls bypass package overrides supported by the existing S45 keyboard shadow contract."
+    },
+    {
+      "source": "src/mvdm-host/dos/command/cmdmisc.c",
+      "scope": [
+        "MVDM-HOST-DIV-009",
+        "T483-R0040"
+      ],
+      "measurement": {
+        "before": {
+          "blocks": 9,
+          "added": 50,
+          "deleted": 7
+        },
+        "after": {
+          "blocks": 9,
+          "added": 46,
+          "deleted": 6
+        },
+        "current_sha256": "ed8067d60dfa322ae96bcefff8b34a0b44865d58c55d88462e63314887bcf88a"
+      },
+      "disposition": "Write the original four-byte RootName string directly on fallback, without copying it into CurDir or scanning for its fixed-length terminator. Retain normal paths and provider.",
+      "line_and_error": "Original logical anchors 565 and 574/575 remain correct and the CHECK_IT_LATER excluded arm is unchanged.",
+      "discarded_candidate": "Combining both writeback branches increased filtered points from 9 to 10 in the scratch candidate."
+    }
+  ],
+  "census": {
+    "non_error_points": 1974,
+    "non_error_lines": 27210,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 73,
+      "lines": 1764
+    },
+    "pending_decisions": 1566,
+    "pending_original_review_ids": 1561,
+    "pending_non_r_rows": 9
+  },
+  "delivery": {
+    "cached_x86_x64": "pass",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "a24c96b7-15df-40a8-8e77-3ca5d05a2c44",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "release_manifest_sha256": "84c0c2b8dd079eccfecba28038127c800718c43b02ae247a3f796d392613c0db",
+    "exact_body_controls": {
+      "before": "6 pass",
+      "after": "6 pass",
+      "boundary": "Real function bodies with stubbed directory and guest-copy providers."
+    },
+    "published_bytes_probe": "PASS nested-console AMD64 CMD/DOS input, parent return and direct exit 23",
+    "probe_checked_image_hashes": 10,
+    "full_runtime_suite": "Not repeated under targeted policy"
+  }
+}
