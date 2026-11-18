@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P181",
+  "position": 224,
+  "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+  "review_ids": [
+    "T483-S7-P1-packstr-rpc"
+  ],
+  "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115",
+  "current_sha256": "12276ab2954e4c74bbe7a4e895ff96ea49800cdfff72a678781728c3803b5b91",
+  "before": {
+    "blocks": 3,
+    "added": 0,
+    "deleted": 261
+  },
+  "after": {
+    "blocks": 3,
+    "added": 0,
+    "deleted": 261
+  },
+  "paired_error_bodies": 0,
+  "line_mismatches": [],
+  "decision": "The original NetAPI public/internal/com/inc/rpcutil.h suffices for isolated compilation, as do SDK rpc.h plus rpcndr.h. The production VDMREDIR link still fails LNK2019 for _MIDL_user_allocate@4 and _MIDL_user_free@4, also with /Gy and explicit /OPT:REF /INCREMENTAL:NO. The adjacent allocstr build rule does not resolve this edge. Original netlib/midluser.c defines the allocator ownership separately. No new allocator, import or shim introduced for this unused enumeration API.",
+  "verification": {
+    "compiler": "Pinned header and SDK pair both pass x86 compile with /we4013; without prototypes C4013.",
+    "link": "Three restoration trials failed LNK1120. Actual VDMREDIR.dll relink passed after restoring the audited subset.",
+    "tests": [
+      "PASS original packstr: exact fit, overflow/no-write, NULL terminator, no-room"
+    ]
+  },
+  "coverage": {
+    "complete": 224,
+    "remaining": 7,
+    "files": 231,
+    "points": 1906,
+    "lines": 26250,
+    "pending": 1532
+  }
+}

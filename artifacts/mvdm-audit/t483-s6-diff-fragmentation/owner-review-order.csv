@@ -114,7 +114,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 122,src/non-mvdm/base/ntos/ex/probe.c,4,2,97,99,2,0,124,s8-p118-reviewed,92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f
 123,src/non-mvdm/windows/core/ntuser/client/globals.h,4,0,5,5,2,0,126,s8-p151-reviewed,5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8
 125,src/non-mvdm/windows/core/ntuser/rtl/text.c,4,11,3,14,0,0,128,s8-p176-reviewed,9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c
-127,src/non-mvdm/ds/netapi/netlib/packstr.c,3,0,261,261,0,0,106,s7-partial-restoration-delivered-p1-residual-pending,12276ab2954e4c74bbe7a4e895ff96ea49800cdfff72a678781728c3803b5b91
+127,src/non-mvdm/ds/netapi/netlib/packstr.c,3,0,261,261,0,0,106,s8-p181-reviewed,12276ab2954e4c74bbe7a4e895ff96ea49800cdfff72a678781728c3803b5b91
 128,src/mvdm-host/dos/dem/demgset.c,3,6,1,7,0,0,129,s8-p2-rechecked-residuals-pending-owner,35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e
 129,src/mvdm-host/softpc.new/base/ccpu386/c_debug.c,3,3,0,3,0,0,130,s8-p12-rechecked-residuals-pending-owner,b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9
 130,src/mvdm-host/softpc.new/base/cvidc/sevid004.c,3,3,3,6,0,0,131,s8-p23-reviewed,b239bbed52f17d86e5a21a86f1cdac71c98363f4495a8c699efa46d421d17da2
