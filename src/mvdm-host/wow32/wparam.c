@@ -192,10 +192,8 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 {
     LPPARAMNODE lpn;
     FINDPARAM fp;
-    BOOL updated = FALSE;
 
     if (!dwPtr32) return NULL;
-
 #line 193
      // see if it's there already
 #line 194
@@ -206,15 +204,15 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
         ++lpn->dwRefCount; // increase ref count
         
         __try {
-            updated = ParamMapUpdateNode(dwPtr32, PARAM_32, lpn) != NULL;
+            if (!ParamMapUpdateNode(dwPtr32, PARAM_32, lpn))
+                lpn = NULL;
         } __finally {
-            if (!updated) {
+            if (AbnormalTermination() || !lpn) {
                 DWORD error = GetLastError();
                 DeleteParamMap(dwPtr16, PARAM_16, NULL);
                 SetLastError(error);
             }
         }
-        if (!updated) return NULL;
 #line 201
     }
     else { 

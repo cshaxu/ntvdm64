@@ -54,5 +54,6 @@
   },
   "fully_restored": [
     "T483-R1709"
-  ]
+  ],
+  "byte_identity_correction": "P97 matched the CRLF checkout, not the LF Git blob. See s8-p100-checkpoint.json for byte-exact restoration in P100."
 }

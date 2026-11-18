@@ -10,6 +10,8 @@
  * and dispatch. Protect that whole interval, not just its final CallBack16.
  * All 32 unchanged native hook stubs still call WU32StdHookProc. */
 LONG WINAPI WowOriginalStdHookProc(INT, LONG, LONG, INT);
+extern __declspec(thread) HOOKPARAMS vHookParams;
+extern __declspec(thread) INT viCurrentHookStateDataIndex;
 
 /* wowhooks.c owns conversion. These are only the native HWND operands that
  * its selected hook converter exposes to the guest. Do not interpret hook

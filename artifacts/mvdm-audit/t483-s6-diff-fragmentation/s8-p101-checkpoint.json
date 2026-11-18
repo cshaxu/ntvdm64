@@ -1,0 +1,57 @@
+{
+  "packet": "T483 S8 P101",
+  "position": 145,
+  "path": "src/mvdm-host/wow32/wparam.c",
+  "review_ids": [
+    "T483-R1769",
+    "T483-R1770",
+    "T483-R1771"
+  ],
+  "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+  "current_sha256": "29575fcdc512fb86741fbcbf2eb06525085213e976bcf1f2afd51630049fd5b2",
+  "before": {
+    "blocks": 3,
+    "added": 14,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 3,
+    "added": 12,
+    "deleted": 1
+  },
+  "source_changed": true,
+  "paired_error_bodies": 8,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 145,
+    "remaining": 86,
+    "files": 231,
+    "points": 1909,
+    "lines": 26983,
+    "pending": 1534
+  },
+  "decision": "Keep R1769-R1771 pending for null-input rejection, reentrant pin rollback and preservation of the old mapping on failed address conversion. Reuse lpn and the original conditional return instead of maintaining a second success indicator. Pin stays live across the refresh. Native exceptions propagate with the failing LastError after rollback.",
+  "verification": {
+    "current": "PARAMETER_MAP failures=0 scenarios=54 reverse=148 buffer=84 forward=72",
+    "negative": "PARAMETER_MAP failures=17 scenarios=54 reverse=140 buffer=84 forward=72",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "308fa657-748c-4991-b8ca-d2388209fab7",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "targeted": {
+      "baseline": "18d0ec060024912e6b03aec69bdded6c9181af03",
+      "passed": true,
+      "end": "2026-11-18T12:50:08.7286556Z",
+      "scope": "selected original release cache and exact extracted bodies with actual finalizer; lower services doubled, not actual guest"
+    }
+  }
+}

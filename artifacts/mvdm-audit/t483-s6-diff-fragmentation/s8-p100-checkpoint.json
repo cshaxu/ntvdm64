@@ -1,0 +1,67 @@
+{
+  "packet": "T483 S8 P100",
+  "position": 144,
+  "path": "src/mvdm-host/wow32/wowhooks.h",
+  "review_ids": [
+    "T483-R1765"
+  ],
+  "original_sha256": "b377c978e75e62e5701a8914c03de40eebc917ee54fa47fdaef0a638fbe6452f",
+  "current_sha256": "b377c978e75e62e5701a8914c03de40eebc917ee54fa47fdaef0a638fbe6452f",
+  "before": {
+    "blocks": 1,
+    "added": 2,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 0,
+    "added": 0,
+    "deleted": 0
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 144,
+    "remaining": 87,
+    "files": 231,
+    "points": 1909,
+    "lines": 26985,
+    "pending": 1534
+  },
+  "verification": {
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "cf6dcfb3-c976-4a2f-b801-f033ad3a62b6",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "build": "Cached full x86/x64 product, final x86 rebuild after restoring exact LF bytes.",
+    "exports": {
+      "named_exports": 35,
+      "ticket_ordinal": 15,
+      "symbol": "_W32TerminateTaskTicket@8",
+      "full_named_ordinal_map_preserved": true,
+      "definition_is_link_input": true,
+      "candidate_sha256": "81c493ed9d4fb66e478586f28399180dd0bd73c2353fe0a2428911c4dbe2efc3"
+    }
+  },
+  "decision": "Move the two TLS externs beside the native callback prototype in the sole external production consumer. Keep symbol names, storage class, definitions and nested save/restore unchanged. Header now matches the pinned original Git blob.",
+  "fully_restored": [
+    "T483-R1765"
+  ],
+  "checkout_sha256": "82e539d3278858b018a742c1890862471bca2f2e7166c663fbebba0c02e20dc3",
+  "pinned_blob": "d36a4a8bf167bae87710eedd2253ed94c3666e33",
+  "p97_correction": {
+    "path": "src/mvdm-host/wow32/wow32.def",
+    "pinned_blob": "2a18cfb9164d52355d74335610a3afac640916a1",
+    "sha256": "06235ab815498832bd06756869a392eca911c7333a56148c6ccab5faa60e06ae",
+    "reason": "P97 matched a CRLF checkout. P100 restores the LF bytes in the pinned Git blob. No difference in named exports or ordinals."
+  }
+}
