@@ -1,0 +1,71 @@
+{
+  "packet": "T483 S8 P17",
+  "position": 40,
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+  "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+  "source_sha256": "dbf544fca4304c530b989d3f2458391e104f180c14eaf5bfbd12ea3bff0695fe",
+  "before": {
+    "blocks": 13,
+    "added": 17,
+    "deleted": 10
+  },
+  "after": {
+    "blocks": 12,
+    "added": 17,
+    "deleted": 10
+  },
+  "remaining_ids": [
+    "T483-R0440",
+    "T483-R0442",
+    "T483-R0443",
+    "T483-R0444",
+    "T483-R0445",
+    "T483-R0446",
+    "T483-R0447",
+    "T483-R0448",
+    "T483-R0449",
+    "T483-R0450",
+    "T483-R0451",
+    "T483-R0452",
+    "T483-R0453"
+  ],
+  "decisions": [
+    "Keep external page and EMS alias resolution. Restoring the original single backing-pointer expression loses bidirectional DIB sharing and EMS translations. The typed header declares the out-parameter. The translated address declaration now follows the original blank at logical 1312, joining two diff fragments. The mapping header and API are unchanged.",
+    "Retain six CPL predicates. Historical original-predicate control failed 24 of 90 page access cases.",
+    "Retain four return width corrections. Original BIOS fallback returns AX/EAX; original byte casts discard high bits."
+  ],
+  "prior_evidence": "../t483-remaining-reaudit/r0439-r0453-investigation.json",
+  "exclusions": 10,
+  "mask_issues": [],
+  "lines": "No change to header directives or executable statement coordinates. Original blank after retVal restored at logical 1312.",
+  "verification": {
+    "cached": [
+      "x86",
+      "x64"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "65249fcb-78aa-477e-9902-bd4233ab13b4",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "manifest_sha256": "1eb4e7e1194331909a0ce141b62af063ad0ffa0346042db58ecef126de5b8bb4",
+    "focused": [
+      "original-external-memory-test",
+      "ccpu-bios-access-test: 90/90",
+      "verify-ccpu-bios-width: extracted fallback and mapped reads"
+    ]
+  },
+  "coverage": {
+    "complete": 40,
+    "remaining": 191,
+    "files": 231,
+    "points": 1956,
+    "lines": 27109,
+    "pending": 1549
+  }
+}

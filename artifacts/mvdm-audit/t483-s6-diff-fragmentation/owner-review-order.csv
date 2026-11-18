@@ -43,7 +43,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 45,src/mvdm-host/softpc.new/base/video/egwrtm12.c,12,15,10,25,12,0,46,s7-p7-reviewed-residual-pending,5d88168c59ab1f0f32e2360d2214319175a6f9a61f7e2c2873f2fa86b5550dfc
 46,src/mvdm-host/softpc.new/host/inc/cfpu_def.h,14,12,12,24,2,0,47,s7-p4-reviewed-residual-pending,d6e31fea7dc2a9b5bc140d590d39075942c0459019284df1dd1642f91ef39250
 47,src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c,12,12,1,13,7,0,50,s8-p15-rechecked-residuals-pending-owner,7c446bc9f7647e5c00c8032c3d15bbde82d9118900be39eb89fcfecbd7ee4653
-48,src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,13,17,10,27,10,0,51,s7-p14-reviewed,b035518e1bd3b9d4884516d2af18e2fcbbc7cfbb40517e9b308e48fd1841c1d7
+48,src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c,12,17,10,27,10,0,51,s8-p17-reviewed,dbf544fca4304c530b989d3f2458391e104f180c14eaf5bfbd12ea3bff0695fe
 49,src/mvdm-host/wow32/wole2.c,13,26,10,36,2,0,52,s7-p18-format-restored-residual-pending,9284b1e593d60d86c68ccaff1dbc6b99a7704ada793a0e33893e1ec2210c697b
 50,src/mvdm-host/softpc.new/host/src/nt_fulsc.c,11,11,18,29,29,0,48,s7-p2-reviewed-mask-corrected-residual-pending,8617a5690ccc0d8926fe948e2bd31e28192bfad74551085297ba34111bad500a
 51,src/mvdm-host/dos/dem/demhndl.c,12,31,14,45,2,0,53,s8-p2-verified-residuals-pending-owner,ffe30feeafd8e968bbf0f9b4671824d051c0932c77bdb626de51f5490241c784

@@ -1295,9 +1295,9 @@ GLOBAL IU8 *
 c_GetPhyAdd IFN1(PHY_ADDR, addr)
 {
 	IU8 *retVal;
-	uint32_t translated_address;
 
 	/* MVDM-HOST-DIV-036/097: resolve original host remaps and EMS aliases. */
+	uint32_t translated_address;
 	mvdm_softpc_physical_mapping_translate(addr, &translated_address);
 	addr = (PHY_ADDR)translated_address;
 	if (mvdm_softpc_physical_mapping_resolve(addr, &retVal))
