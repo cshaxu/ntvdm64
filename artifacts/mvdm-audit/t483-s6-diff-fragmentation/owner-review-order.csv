@@ -33,7 +33,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 35,src/mvdm-host/dos/command/cmdexec.c,16,63,15,78,0,0,28,s7-p47-verified-residuals-pending-owner,ee1c313dd9153d9e65c5751fc03074cfd4da4ca5dd9a6d98c13b86b3c5441538
 36,src/non-mvdm/windows/core/ntuser/client/dlgmgr.c,17,20,205,225,1,0,31,reviewed-verified-p17-residuals-pending-owner,fcde4b2905dce5e73b510af3ffe588684da11f311fb0124b0595065640c4ef7f
 37,src/non-mvdm/windows/core/ntuser/kernel/taskman.c,15,20,16,36,0,0,38,s7-p19-reviewed,3a993b151b013a70768345c54cb10c340d871739171926bd81cf6fb4569dbcca
-38,src/mvdm-host/dpmi32/int21map.c,16,27,6,33,14,0,39,s7-p22-format-restored-residual-pending,98cd13535fdd1b821b62ea8b65dd2394318523a32f4d84a129f0ae98bca9a736
+38,src/mvdm-host/dpmi32/int21map.c,16,27,6,33,14,0,39,s8-p5-rechecked-residuals-pending-owner,23c9046e7c7f862a71700411b0f024c1497391b606ff8b57307856c29904f542
 39,src/mvdm-host/softpc.new/base/video/video.c,13,52,12,64,57,0,40,s7-p17-format-restored-residual-pending,5a4c7821cc9703f3fa0f82d9310d79137b07833bada8d6e67370ab915da22c44
 40,src/mvdm-host/wow32/wuclip.c,16,63,27,90,1,0,41,s7-p13-reviewed,6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b
 41,src/mvdm-host/vdmredir/vrnetapi.c,15,35,20,55,64,0,43,s7-p17-reviewed,2a329bee7eac3b511b967a82c3cbdf7b6fad9bec1eb48c9f8e0b67f7100599eb
@@ -82,7 +82,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 85,src/mvdm-host/softpc.new/host/src/nt_cpu.c,5,10,2,12,10,0,83,s7-p6-original-format-restored-residual-pending,ed1f783668ec45dd96994b1d344dbe2f27f9b1bd09cc0193bf9f6264df101a6e
 86,src/mvdm-host/softpc.new/host/src/nt_cga.c,6,13,33,46,6,0,82,s7-p3-original-comments-restored-residual-pending,036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b
 87,src/mvdm-host/dpmi32/dpmimemr.c,6,4,19,23,0,0,88,s7-p18-reviewed,568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4
-88,src/mvdm-host/dpmi32/modesw.c,6,28,6,34,2,0,89,s7-p14-reviewed,401d13ac2ec3e9705c45cfa857916e15cff1ec19897bd893356ca4fc78ec7f97
+88,src/mvdm-host/dpmi32/modesw.c,6,26,6,32,2,0,89,s8-p5-rechecked-residuals-pending-owner,28836a7ec6efc3516e78f9e96daa1675c2b4540a2b72d4a14676d56fbf7f455c
 89,src/mvdm-host/softpc.new/base/ccpu386/ntthread.c,6,32,0,32,0,0,90,s7-p21-reviewed,4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045
 90,src/mvdm-host/softpc.new/host/src/nt_mouse.c,6,23,1,24,17,0,91,s7-p14-format-restored-residual-pending,9287115bab8384d6421d03e42f443e149d8736d83a092db464a3bcfbe9c49478
 91,src/mvdm-host/softpc.new/host/src/nt_msscs.c,5,11,57,68,9,0,92,s7-p15-format-restored-residual-pending,712314072154f66fbe8186470a81887adda8a1c729a720c01efcf5bfb7bb8c8f
@@ -177,7 +177,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 194,src/mvdm-host/dos/dem/dem.h,1,1,0,1,9,0,195,s7-p8-reviewed,9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c
 195,src/mvdm-host/dpmi32/data.c,1,36,0,36,1,0,196,s8-p3-rechecked-residuals-pending-owner,22f7f1a784d5bbd0e2d805f3b7e660ef782d1012c7d92efa610aae9658d0289b
 196,src/mvdm-host/dpmi32/dpmi32p.h,1,9,0,9,3,0,197,s8-p3-rechecked-residuals-pending-owner,1ad270afcedb0fb775f893b9a117f78163323ba23b47547754028ae8c8829276
-197,src/mvdm-host/dpmi32/xmem.c,1,1,1,2,5,0,198,s7-p18-reviewed,ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b
+197,src/mvdm-host/dpmi32/xmem.c,1,1,1,2,5,0,198,s8-p5-rechecked-residuals-pending-owner,ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b
 198,src/mvdm-host/inc/dbgexp.h,1,3,3,6,0,0,199,s7-p3-reviewed-residual-pending,dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2
 199,src/mvdm-host/inc/demexp.h,1,3,3,6,0,0,200,s7-p3-reviewed-residual-pending,e54226374cf63c384528aa2f89ec4329680fe97275acfacdbeedb2d81cb20788
 200,src/mvdm-host/inc/suballoc.h,1,2,0,2,1,0,201,s7-p8-reviewed,d18350215388f68a97817da37acb9df032c47074f0fb3354c2e212166a37058c

@@ -210,7 +210,6 @@ Return Value:
 #line 202
 #error Unsupported excluded original configuration
 #endif
-#line 210
 #line 214
 
 #line 211
@@ -2647,7 +2646,6 @@ Return Value:
 
     IoctlSubFunction = getCL();
 
-#line 2660
 #line 2658
     if (((IoctlSubFunction < 0x40) || (IoctlSubFunction > 0x42) &&
         (IoctlSubFunction < 0x60) || (IoctlSubFunction > 0x62) &&
@@ -2838,7 +2836,6 @@ Return Value:
 
     if (CurrentAppFlags & DPMI_32BIT) {
 
-#line 2832
 #line 2830
         Data = Sim32GetVDMPointer(
             (*((PWORD16)(ParameterBlock + 0xd)) << 16),

@@ -1,0 +1,121 @@
+{
+  "packet": "M0 T483 S8 P5",
+  "prior_checkpoint": "ca6a5056d",
+  "covered_before": 14,
+  "covered_after": 17,
+  "remaining": 214,
+  "pending_rows": 1566,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1974,
+    "lines": 27185
+  },
+  "cumulative_s8_reduction": {
+    "points": 0,
+    "lines": 25
+  },
+  "files": [
+    {
+      "position": 15,
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "review_ids": "T483-R0187;T483-R0188;T483-R0189,R0190,R0191;T483-R0192,R0193;T483-R0194,R0195,R0196;T483-R0197;T483-R0198,R0199,R0200;T483-R0201;T483-R0203",
+      "disposition": "Retain the evidenced DOS register, flag and parameter translation boundaries. Remove three immediately superseded line directives.",
+      "before": {
+        "blocks": 16,
+        "added": 27,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 16,
+        "added": 27,
+        "deleted": 6
+      },
+      "source_sha256": "23c9046e7c7f862a71700411b0f024c1497391b606ff8b57307856c29904f542",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "paired_error_bodies": 14
+    },
+    {
+      "position": 16,
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "review_ids": "T483-R0204;T483-R0205;T483-R0206;T483-R0207;T483-R0208;T483-R0209;T483-R0210;T483-R0212;T483-R0213",
+      "disposition": "Retain CCPU segment refresh, PE/CPL ordering, protected selector staging and page-domain handoff. Shorten the existing refresh comment.",
+      "before": {
+        "blocks": 6,
+        "added": 28,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 6,
+        "added": 26,
+        "deleted": 6
+      },
+      "source_sha256": "28836a7ec6efc3516e78f9e96daa1675c2b4540a2b72d4a14676d56fbf7f455c",
+      "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+      "paired_error_bodies": 2
+    },
+    {
+      "position": 17,
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "review_ids": "T483-R0216",
+      "disposition": "Retain !Status. The selected portable BOOL provider returns 0 on failure, which the original NT_SUCCESS condition accepts. Original suballocation leaves the old block unchanged on failure.",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "ca2d27371372842ede5fce0a72443bdc6d1f4c4bdda158d65bac724447909c7b",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "paired_error_bodies": 5
+    }
+  ],
+  "verification": {
+    "selected_preprocessing_and_logical_locations_identical": [
+      {
+        "profile": "worker",
+        "target": "obj/dpmi/int21map.obj",
+        "selected_lines": 46125,
+        "sha256": "d026d398a18d6dca47e04f153169d14be015fe9b18bc7fab98369e317aa7c404"
+      },
+      {
+        "profile": "worker",
+        "target": "obj/dpmi/modesw.obj",
+        "selected_lines": 44898,
+        "sha256": "a46480e9b96b398fc0d29186ff9e16dcb49fdc3de6deab69835eb4db83711ad8"
+      },
+      {
+        "profile": "worker-reference-x86",
+        "target": "obj/dpmi/int21map.obj",
+        "selected_lines": 46125,
+        "sha256": "d026d398a18d6dca47e04f153169d14be015fe9b18bc7fab98369e317aa7c404"
+      },
+      {
+        "profile": "worker-reference-x86",
+        "target": "obj/dpmi/modesw.obj",
+        "selected_lines": 44898,
+        "sha256": "a46480e9b96b398fc0d29186ff9e16dcb49fdc3de6deab69835eb4db83711ad8"
+      },
+      {
+        "profile": "observation",
+        "target": "dpmi_pointer_trace.c",
+        "selected_lines": 47843,
+        "sha256": "69c85e342cd353fe61ae45d8f72a2bf0a2aafbc6a479baf0280c906c5f5b17e6"
+      },
+      {
+        "profile": "observation",
+        "target": "dpmi_ioctl_boundary.c",
+        "selected_lines": 47976,
+        "sha256": "711fb3f217d808e9079ddc7dc3f1b56eee3c4fe1c82e40be9134a8193b298d05"
+      }
+    ],
+    "paired_excluded_arms": "All 16 paired error bodies in the changed files remain byte-identical; xmem.c remains unchanged.",
+    "publication": "Reuse P4 after compiler input identity. Both destinations verify against the P4 manifest.",
+    "manifest_sha256": "0ae16e9c0490c3cc7ae726fc9d0376786e8d481bf8b47dc4b51ff2ffa667ec19",
+    "images_per_destination": 11,
+    "runtime_suite": "No fresh runtime or full build run. P4 remains the published baseline."
+  }
+}

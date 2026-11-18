@@ -25,9 +25,8 @@ Revision History:
 #include "softpc.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
-/* CCPU's internal segment-register indices and pseudo-descriptor routine
- * are deliberately kept private to its generated headers.  CPU40's DPMI
- * provider needs only this source-defined real-mode cache refresh. */
+/* Refresh CCPU's real-mode segment caches through its existing helper. */
+#line 31
 extern void load_pseudo_descr(int index);
 #define CPU40_ES_REG 0
 #define CPU40_SS_REG 2
