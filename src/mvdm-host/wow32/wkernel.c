@@ -136,20 +136,16 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     PSZ pszKey;
     PSZ pszValue;
     PSZ pszFilename;
-#line 129
     register PWRITEPRIVATEPROFILESTRING16 parg16;
     BOOL fIsWinIni;
     CHAR szLowercase[MAX_PATH];
-    CHAR szPackageProfile[MAX_PATH];
 
-#line 133
     GETARGPTR(pFrame, sizeof(WRITEPRIVATEPROFILESTRING16), parg16);
     GETPSZPTR(parg16->f1, pszSection);
     GETPSZPTR(parg16->f2, pszKey);
     GETPSZPTR(parg16->f3, pszValue);
     GETPSZPTR(parg16->f4, pszFilename);
 
-#line 139
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
     strcpy(szLowercase, pszFilename);
@@ -173,7 +169,7 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
              pszSection,
              pszKey,
              pszValue,
-             W32PrivateProfileFileName(pszFilename, szPackageProfile)
+             W32PrivateProfileFileName(pszFilename, szLowercase)
              ));
 
     if( ul != 0 &&

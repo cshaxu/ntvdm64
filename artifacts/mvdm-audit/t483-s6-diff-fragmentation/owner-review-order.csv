@@ -55,7 +55,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 57,src/mvdm-host/softpc.new/base/cvidc/sevid017.c,11,18,18,36,0,0,60,s8-p23-reviewed,178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2
 58,src/mvdm-host/softpc.new/host/src/nt_bop.c,11,15,7,22,30,0,61,s8-p43-reviewed,8ff3d15be855aef22138c04d74e3090bf36ca1b580bb2fb385e76c44ded8a158
 59,src/mvdm-host/wow32/wcommdlg.c,10,15,6,21,2,0,62,s8-p74-reviewed,6538eecdce146500e76f7b7a39dc48a6fd0d916e388ee8c9404d270b8120b322
-60,src/mvdm-host/wow32/wkernel.c,11,25,5,30,5,0,63,s7-p18-reviewed,a31be79d597a27a6e438a19ae2747285d9225965b22f8c339a2ba5770caeb6d1
+60,src/mvdm-host/wow32/wkernel.c,10,24,5,29,5,0,63,s8-p84-reviewed,ac5ae96da876eeaa32181df73f92a1ca1c127f572b3de44867fd1bc86efffb39
 61,src/non-mvdm/public/sdk/inc/ntrtl.h,11,0,147,147,10,0,64,s7-p9-reviewed,2233f00906030450f2a20dc28487e148e27fc82b4d5898d4b71b78f7c399da37
 62,src/mvdm-host/dos/command/cmdmisc.c,9,46,6,52,1,0,65,s7-p48-verified-residuals-pending-owner,ed8067d60dfa322ae96bcefff8b34a0b44865d58c55d88462e63314887bcf88a
 63,src/mvdm-host/softpc.new/host/src/sim32.c,7,8,5,13,3,0,66,s8-p61-reviewed,e9fb203a7f1797d6513f2046825def6a72d9b88f035a98c6e28f257da2335130

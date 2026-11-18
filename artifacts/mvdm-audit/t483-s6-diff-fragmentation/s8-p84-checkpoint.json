@@ -1,0 +1,87 @@
+{
+  "packet": "T483 S8 P84",
+  "position": 128,
+  "path": "src/mvdm-host/wow32/wkernel.c",
+  "review_ids": [
+    "T483-R1440",
+    "T483-R1442",
+    "T483-R1445",
+    "T483-R1447",
+    "T483-R1450",
+    "T483-R1451",
+    "T483-R1452",
+    "T483-R1454",
+    "T483-R1455",
+    "T483-R1456",
+    "T483-R1459"
+  ],
+  "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+  "current_sha256": "ac5ae96da876eeaa32181df73f92a1ca1c127f572b3de44867fd1bc86efffb39",
+  "before": {
+    "blocks": 11,
+    "added": 25,
+    "deleted": 5
+  },
+  "after": {
+    "blocks": 10,
+    "added": 24,
+    "deleted": 5
+  },
+  "source_changed": true,
+  "paired_error_bodies": 5,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        317,
+        315,
+        "#endif"
+      ],
+      [
+        371,
+        347,
+        "#endif"
+      ],
+      [
+        508,
+        506,
+        "#endif"
+      ],
+      [
+        582,
+        558,
+        "#endif"
+      ],
+      [
+        634,
+        593,
+        "#endif // DEBUG"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 128,
+    "remaining": 103,
+    "files": 231,
+    "points": 1926,
+    "lines": 27012,
+    "pending": 1541
+  },
+  "published": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ceca2095-1ad2-4985-8515-293c48d750b6",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "restored": "R1442: Original write-thunk local declarations restored. The result of IS_WIN_INI is stored before providing its expired scratch buffer to the private-profile path resolver. Original guest filename kept for cleanup. Removed now-redundant #line directives in this function.",
+  "remaining": "R1440/1445/1447/1450/1451/1452/1454 retain exact bare SYSTEM.INI session binding. Reader still inspects original lowercase name for xtalk.ini after the native call. Integer reader has no existing scratch array. R1455/1456/1459 preserve signed capacity check and bounded flush; prior original failure reproduced 3 invalid reads. Original guest and exclusions untouched.",
+  "focused": {
+    "write": "Six exact write-thunk cases passed with controlled provider and Win16 mapping: mixed-case bare name, resolver failure, win.ini embedding, fax short circuit, other file, explicit path. Verified filename released and API call counts.",
+    "nativeRead": "Native x86 probe: bare 0/0, absolute system.ini 0/1973, alternate filename 1/1973 (boot marker / integer)",
+    "module": "4 cases; zero faults; valid short module returned 4"
+  }
+}
