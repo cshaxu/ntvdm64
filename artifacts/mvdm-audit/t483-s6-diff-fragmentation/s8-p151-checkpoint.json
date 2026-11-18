@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P151",
+  "position": 194,
+  "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+  "review_ids": [
+    "T483-R2321",
+    "T483-R2323"
+  ],
+  "original_sha256": "fd78200232574074f7ec68d2f5b851c27ee9d5024427310d18ebbcb048336e97",
+  "current_sha256": "5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8",
+  "before": {
+    "blocks": 4,
+    "added": 0,
+    "deleted": 5
+  },
+  "after": {
+    "blocks": 4,
+    "added": 0,
+    "deleted": 5
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 194,
+    "remaining": 37,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "R2321: four declarations across three sites need PSERVERINFO, RESCALLS/PRESCALLS, and CFNSCSENDMESSAGE. The earlier product compile rejects the missing private types; the admitted WOW gpsi is a DWORD guest address and cannot satisfy the original USER pointer contract. R2323: the fifth declaration defines an extern array with ICLS_MAX as a required constant bound; actual C2065/C2057 prove unavailable server class registry. No synthetic type, bound or alternate owner. DEBUG/WX86 arms remain excluded."
+}

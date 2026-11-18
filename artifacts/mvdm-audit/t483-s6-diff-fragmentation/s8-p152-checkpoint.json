@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P152",
+  "position": 195,
+  "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+  "review_ids": [
+    "T483-R2332",
+    "T483-R2333"
+  ],
+  "original_sha256": "3bec21c4bb3caef0798208693a89012df6005c6a330f0f670f974a1ce821fca2",
+  "current_sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+  "before": {
+    "blocks": 2,
+    "added": 1,
+    "deleted": 441
+  },
+  "after": {
+    "blocks": 2,
+    "added": 1,
+    "deleted": 441
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 195,
+    "remaining": 36,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "R2332: original USER PCH compile needs CSR private types and ntos.h. R2333: 440 original lines implement nine DDEML data-manager entries including the thin ApplyFreeDataHandle forwarding into InternalFreeDataHandle. Those operations consume private DDEML instances, validated handles and manager locking; original compile control rejects PCL_INSTANCE_INFO and EnterDDECrit. The retained WOW data-release path is not the DDEML handle manager. Keep both boundaries pending; no new implementation of data-handle ownership."
+}

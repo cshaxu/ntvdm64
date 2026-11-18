@@ -112,7 +112,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 120,src/mvdm-host/wow32/wsext.c,4,7,1,8,0,0,122,s8-p103-reviewed,23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5
 121,src/mvdm-host/wow32/wuman.c,3,3,2,5,2,0,123,s8-p109-reviewed,a1c34a9b9554b9db8a7163742433521c0280e79621e9626fc68fe9aee6592936
 122,src/non-mvdm/base/ntos/ex/probe.c,4,2,97,99,2,0,124,s8-p118-reviewed,92b5f91c00adb7cbab43a54373b93b697bcc25cc598bc0d812071530726b4c0f
-123,src/non-mvdm/windows/core/ntuser/client/globals.h,4,0,5,5,2,0,126,s7-p5-reviewed-residual-pending,5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8
+123,src/non-mvdm/windows/core/ntuser/client/globals.h,4,0,5,5,2,0,126,s8-p151-reviewed,5c24d7c60bf186b1663b5c1db69d6c9638484ab8bbdd608aeb0afb8a17139be8
 125,src/non-mvdm/windows/core/ntuser/rtl/text.c,4,11,3,14,0,0,128,s7-p7-reviewed-residual-pending,9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c
 127,src/non-mvdm/ds/netapi/netlib/packstr.c,3,0,261,261,0,0,106,s7-partial-restoration-delivered-p1-residual-pending,12276ab2954e4c74bbe7a4e895ff96ea49800cdfff72a678781728c3803b5b91
 128,src/mvdm-host/dos/dem/demgset.c,3,6,1,7,0,0,129,s8-p2-rechecked-residuals-pending-owner,35b917886eee3aa1ceb6197acc88aaf0fc786a8ebf82836fdee0ae422b847f1e
@@ -167,7 +167,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 184,src/non-mvdm/ds/netapi/xactsrv/apisrv.c,2,2,182,184,1,0,186,s8-p125-reviewed,a99164a46963e5fb81a2e998438eadb8284cabd185886ca379251e15f6064711
 185,src/non-mvdm/windows/core/ntuser/client/clmenu.c,2,2,7,9,7,0,187,s8-p140-reviewed,a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c
 186,src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c,2,0,75,75,3,0,188,s8-p147-reviewed,ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a
-187,src/non-mvdm/windows/core/ntuser/client/hdata.c,2,1,441,442,0,0,189,s7-p5-reviewed-residual-pending,5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4
+187,src/non-mvdm/windows/core/ntuser/client/hdata.c,2,1,441,442,0,0,189,s8-p152-reviewed,5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4
 188,src/non-mvdm/windows/core/ntuser/client/rtlinit.c,2,2,2,4,4,0,190,s7-p13-reviewed,eb4b53cefaf89a92ba42b645521aa6771edde1e41a31ba9a27d0afdda07001bd
 189,src/non-mvdm/windows/core/ntuser/rtl/chartran.c,2,2,1,3,15,0,191,s7-p12-reviewed,ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35
 190,src/non-mvdm/windows/core/ntuser/rtl/help.c,2,4,2,6,0,0,192,s7-p11-reviewed,71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668
