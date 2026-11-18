@@ -3096,9 +3096,6 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #else		/* MOUSE_16_BIT */
 
-#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): no host-arrow shape provider. */
-#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#endif
 #line 3321
 	{
 		MOUSE_SCREEN_DATA *mask_address;
@@ -4992,9 +4989,6 @@ LOCAL void cursor_update IFN0()
 	point_copy(&cursor_position, &cursor_status.position);
 	point_coerce_to_grid(&cursor_status.position, &cursor_grid);
 
-#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): Window never warps host pointer. */
-#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#endif
 
 #line 5242
 #endif
@@ -5066,9 +5060,6 @@ LOCAL void cursor_display IFN0()
 #line 5299
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #else /* MOUSE_16_BIT */
-#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): bypass the Console host arrow. */
-#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#endif
 #line 5312
 		{
 #line 5313

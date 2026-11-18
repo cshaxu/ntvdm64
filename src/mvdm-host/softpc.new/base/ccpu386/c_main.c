@@ -4345,7 +4345,7 @@ CPU_RESTORED_RESET:
 	 acknowledged_interrupt = ica_intack(&hook_address);
 	 if (acknowledged_interrupt != -1)
 	 {
-#ifdef NTVDM
+#line 4418
 	    extern BOOL host_hwint_hook IPT1(IS32, int_no);
 	    cpu_hw_interrupt_number = (IU16)acknowledged_interrupt;
 	    EXT = EXTERNAL;
@@ -4353,10 +4353,7 @@ CPU_RESTORED_RESET:
 	    if (!host_hwint_hook(acknowledged_interrupt))
 	       do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
 	    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
-#else
-#line 4413
-#error Excluded unsupported non-NTVDM CCPU interrupt dispatch
-#endif
+#line 4429
 	 }
 #line 4419
       }

@@ -532,10 +532,6 @@ Return Value:
     SaveEFLAGS = getEFLAGS();
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
-#if !defined(CPU_40_STYLE)
-#line 529
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
 #line 530
 
     if (!(getMSW() & MSW_PE)) {
@@ -551,38 +547,25 @@ Return Value:
 
         // Protect mode
 
-#if defined(CPU_40_STYLE)
+#line 541
         /* DIVERGENCE(MVDM-HOST-DIV-481): the x86 monitor's PushInt
          * selects the return frame from the registered handler flags, not
          * the interrupted application's default width. */
         BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
         if (!BuildStackFrameWithWidth(3, WideFrame, &VdmStackPointer, &NewSP)) {
-#else
-#line 540
-#error Unsupported excluded original configuration
-#endif
 #line 541
             return FALSE;
         }
 
-#if defined(CPU_40_STYLE)
+#line 545
         /* A rejected frame does not commit the monitor's flag updates. */
         setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
-#else
-#line 529
-#error Unsupported excluded original configuration
-#endif
 #line 544
         if (WideFrame) {
 
             *(PDWORD16)(VdmStackPointer-4) =  SaveEFLAGS;
-#if defined(CPU_40_STYLE)
 #line 547
             *(PDWORD16)(VdmStackPointer-8) =  getCS();
-#else
-#line 547
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
 #line 548
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
 #line 549
@@ -598,12 +581,8 @@ Return Value:
 #line 560
         }
 
-#if defined(CPU_40_STYLE)
+#line 563
         setESP(NewSP);
-#else
-#line 549
-#error Unsupported excluded original configuration
-#endif
 #line 562
         setCS(Handlers[IntNumber].CsSelector);
 
@@ -1086,16 +1065,12 @@ Routine Description:
 }
 
 
-#if defined(CPU_40_STYLE)
+#line 1058
 static BOOL
 BuildStackFrameWithWidth(
 #line 1059
     ULONG StackUnits,
     BOOL WideFrame,
-#else
-#line 1058
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif
 #line 1060
     PUCHAR *pVdmStackPointer,
     ULONG *pNewSP
@@ -1160,12 +1135,8 @@ Notes:
         VdmSp = getSP();
     }
 
-    #if defined(CPU_40_STYLE)
+#line 1122
     if (WideFrame) {
-    #else
-#line 1121
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-    #endif
 #line 1122
         StackOffset = StackUnits*sizeof(DWORD);
     } else {
@@ -1232,9 +1203,6 @@ Return Value:
         VdmInstallFaultHandler(DpmiFaultHandler);
         fDpmiIntsHaveBeenHooked = TRUE;
     }
-#else
-#line 1174
-#error Excluded unsupported i386 kernel VDM interrupt hook path
 #endif // i386
 #line 1175
 }
@@ -1271,9 +1239,6 @@ Return Value:
         VdmInstallFaultHandler(NULL);
         fDpmiIntsHaveBeenHooked = FALSE;
     }
-#else
-#line 1208
-#error Excluded unsupported i386 kernel VDM interrupt hook path
 #endif // i386
 #line 1209
 }

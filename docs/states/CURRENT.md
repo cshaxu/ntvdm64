@@ -178,14 +178,22 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-36 points and 582 changed lines in S7. The current census is 2,011 non-error
-points and 28,394 changed lines across 236 mirrors with filtered differences.
+40 points and 647 changed lines in S7. The current census is 2,007 non-error
+points and 28,329 changed lines across 236 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. All are local conditional frames without a matching original
-arm. The totals above include them. Both ledgers have zero unresolved mask
+arm. Both ledgers have zero unresolved mask
 cases. Residual source decisions remain recorded in the pending ledger.
 [P24 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p24-checkpoint.json).
+
+P25 removes all nineteen redundant local frames. A new local conditional
+requires concrete build, ABI or behavior evidence from a supported context.
+The original conditional structure and its excluded bodies remain. Eleven
+actual MSVC compile entries yield identical selected text and logical lines
+before and after the cleanup. Both published copies of the eleven images
+still match the P10 Full manifest. R0158 is restored and leaves the pending
+ledger. [P25 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p25-checkpoint.json).
 
 ## S1 Closure Record
 

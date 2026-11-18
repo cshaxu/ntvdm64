@@ -1,0 +1,285 @@
+{
+  "packet": "M0 T483 S7 P25",
+  "prior_checkpoint": "d4b40bfcd",
+  "prior_original_context_evidence": "s7-p24-checkpoint.json",
+  "scope": "Remove local conditional frames lacking an independent supported compile context.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "before": {
+        "blocks": 43,
+        "added": 82,
+        "deleted": 39
+      },
+      "after": {
+        "blocks": 43,
+        "added": 76,
+        "deleted": 39
+      },
+      "paired_original_error_bodies": 12,
+      "removed_local_frames": 2,
+      "previous_physical_ranges": [
+        [
+          1478,
+          1481
+        ],
+        [
+          1507,
+          1510
+        ]
+      ],
+      "source_sha256": "cfd95cacb80744d56296be20320867bdb52b8852b667a02d8f6aa95b8b02e38d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "before": {
+        "blocks": 36,
+        "added": 128,
+        "deleted": 30
+      },
+      "after": {
+        "blocks": 36,
+        "added": 124,
+        "deleted": 30
+      },
+      "paired_original_error_bodies": 75,
+      "removed_local_frames": 1,
+      "previous_physical_ranges": [
+        [
+          4348,
+          4359
+        ]
+      ],
+      "source_sha256": "c59f05895bcc318df5e9cdcff1598eb1a9c1884b510ece039f0a9bb1887fa949"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "before": {
+        "blocks": 34,
+        "added": 184,
+        "deleted": 37
+      },
+      "after": {
+        "blocks": 30,
+        "added": 153,
+        "deleted": 37
+      },
+      "paired_original_error_bodies": 8,
+      "removed_local_frames": 9,
+      "previous_physical_ranges": [
+        [
+          535,
+          538
+        ],
+        [
+          554,
+          563
+        ],
+        [
+          568,
+          574
+        ],
+        [
+          579,
+          585
+        ],
+        [
+          601,
+          606
+        ],
+        [
+          1089,
+          1098
+        ],
+        [
+          1163,
+          1168
+        ],
+        [
+          1235,
+          1238
+        ],
+        [
+          1274,
+          1277
+        ]
+      ],
+      "source_sha256": "67db1983e72986ff2ff12cde9e504094ad6980806915f61cfd6a0f775599d514"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "before": {
+        "blocks": 33,
+        "added": 319,
+        "deleted": 30
+      },
+      "after": {
+        "blocks": 33,
+        "added": 310,
+        "deleted": 30
+      },
+      "paired_original_error_bodies": 88,
+      "removed_local_frames": 3,
+      "previous_physical_ranges": [
+        [
+          3099,
+          3101
+        ],
+        [
+          4995,
+          4997
+        ],
+        [
+          5069,
+          5071
+        ]
+      ],
+      "source_sha256": "63806d86356c919260146466365658b07dd3ef2d548d5e91ca62eec4f0456035"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "before": {
+        "blocks": 17,
+        "added": 37,
+        "deleted": 205
+      },
+      "after": {
+        "blocks": 17,
+        "added": 22,
+        "deleted": 205
+      },
+      "paired_original_error_bodies": 1,
+      "removed_local_frames": 4,
+      "previous_physical_ranges": [
+        [
+          305,
+          313
+        ],
+        [
+          322,
+          328
+        ],
+        [
+          736,
+          739
+        ],
+        [
+          792,
+          797
+        ]
+      ],
+      "source_sha256": "94880f8c2bbd27a82cac654dcfa089eeaf477937a6b4fbcb3321c2ef930269f0"
+    }
+  ],
+  "original_condition_policy": "Retain the original conditional framework and paired #error interiors. In dpmiint.c the two #ifndef i386 groups remain with their locally added #else arms removed.",
+  "verification": {
+    "method": "MSVC /P replay from actual generated commands with original include order. Compare all nonblank preprocessed lines byte-for-byte with logical file and line coordinates from #line. Both input variants use the actual source path.",
+    "profiles": [
+      {
+        "context": "worker-x86-nt_event",
+        "graph": "msvc-x86-release/worker",
+        "target": "obj/host/nt_event.obj",
+        "selected_lines": 51513,
+        "comparison_sha256": "da9e2287fb97f4d5fe06a62f0356fd66566b046cc147758320664554e09c0841"
+      },
+      {
+        "context": "worker-x86-dpmiint",
+        "graph": "msvc-x86-release/worker",
+        "target": "obj/dpmi/dpmiint.obj",
+        "selected_lines": 45509,
+        "comparison_sha256": "f20fc368bdb001f38653eb428eff44e0d0ee9e781dbbbcff1c0393bbef17b659"
+      },
+      {
+        "context": "worker-x86-c_main",
+        "graph": "msvc-x86-release/worker",
+        "target": "obj/ccpu/c_main.obj",
+        "selected_lines": 51613,
+        "comparison_sha256": "6945326628067a1879e31d79cc924d7f7d75224da6340256d4d9f9371f8faecb"
+      },
+      {
+        "context": "worker-x86-mouse_io",
+        "graph": "msvc-x86-release/worker",
+        "target": "obj/keymouse/mouse_io.obj",
+        "selected_lines": 51565,
+        "comparison_sha256": "7af7175bb4804d95284b19067328862352eb5b32e5791077d0eea18c3c0ee398"
+      },
+      {
+        "context": "worker-reference-x86-nt_event",
+        "graph": "msvc-x64-release/worker-reference-x86",
+        "target": "obj/host/nt_event.obj",
+        "selected_lines": 51513,
+        "comparison_sha256": "da9e2287fb97f4d5fe06a62f0356fd66566b046cc147758320664554e09c0841"
+      },
+      {
+        "context": "worker-reference-x86-dpmiint",
+        "graph": "msvc-x64-release/worker-reference-x86",
+        "target": "obj/dpmi/dpmiint.obj",
+        "selected_lines": 45509,
+        "comparison_sha256": "f20fc368bdb001f38653eb428eff44e0d0ee9e781dbbbcff1c0393bbef17b659"
+      },
+      {
+        "context": "worker-reference-x86-c_main",
+        "graph": "msvc-x64-release/worker-reference-x86",
+        "target": "obj/ccpu/c_main.obj",
+        "selected_lines": 51613,
+        "comparison_sha256": "6945326628067a1879e31d79cc924d7f7d75224da6340256d4d9f9371f8faecb"
+      },
+      {
+        "context": "worker-reference-x86-mouse_io",
+        "graph": "msvc-x64-release/worker-reference-x86",
+        "target": "obj/keymouse/mouse_io.obj",
+        "selected_lines": 51565,
+        "comparison_sha256": "7af7175bb4804d95284b19067328862352eb5b32e5791077d0eea18c3c0ee398"
+      },
+      {
+        "context": "wow-control-body-dlgmgr",
+        "graph": "msvc-x86-release/wow32",
+        "target": "obj/opennt-user/control-body-dlgmgr.obj",
+        "selected_lines": 49544,
+        "comparison_sha256": "67b1ce07b5f077ee1f60abae4a6f7817c76d3adb5b862d1b4a37c30bcb9c1bf6"
+      },
+      {
+        "context": "fixture-modal_lifetime_body",
+        "graph": "msvc-x86-release/call-boundaries",
+        "target": "obj/modal_lifetime_body.obj",
+        "selected_lines": 44485,
+        "comparison_sha256": "b474a3a9ef7bbaed1f8603c2b48f653c314d2ce8350c0649aa4e502c5d170d3b"
+      },
+      {
+        "context": "fixture-original_dlgmgr",
+        "graph": "msvc-x86-release/call-boundaries",
+        "target": "obj/original_dlgmgr.obj",
+        "selected_lines": 50074,
+        "comparison_sha256": "d77324b35fac16332ca49f399ef806c7b95e1eb39142c6c62a2b4b1f04f7d3a7"
+      }
+    ],
+    "delivery": "Source-only equivalence. No link, new runtime publication or repeated runtime tests.",
+    "published_package_id": "619955ae-00b2-4174-b75a-471ac49f7add",
+    "published_images_matching_p10_full_in_both_destinations": 11
+  },
+  "pending_decisions": {
+    "restored": [
+      "T483-R0158"
+    ],
+    "total_remaining": 1567
+  },
+  "file_reviews": {
+    "s7_admitted": 213,
+    "s7_completed": 213,
+    "s7_unreviewed": 0,
+    "ledger_paths": 242,
+    "nonzero_paths": 236
+  },
+  "before": {
+    "non_error_points": 2011,
+    "non_error_lines": 28394
+  },
+  "after": {
+    "non_error_points": 2007,
+    "non_error_lines": 28329
+  },
+  "source_reduction_s7": {
+    "points": 40,
+    "lines": 647
+  }
+}

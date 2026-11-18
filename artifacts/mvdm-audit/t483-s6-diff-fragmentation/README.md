@@ -389,3 +389,8 @@ still carry nineteen conservatively counted mask cases.
 [S7 P24 receipt](s7-p24-checkpoint.json) resolves the nineteen historical
 mask flags in those five paths. Each local frame stays counted. Source
 bytes and the filtered census of 2,011 points and 28,394 lines are unchanged.
+
+[S7 P25 receipt](s7-p25-checkpoint.json) records the removal of all nineteen
+local frames and the exact selected-source and logical-line match across
+eleven real compilation entries. The filtered census is 2,007 points and
+28,329 changed lines. The published package remains the P10 Full package.

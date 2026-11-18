@@ -1475,10 +1475,6 @@ BOOL CntrlHandler(ULONG CtrlType)
 	    stream_io_update();
 #line 1412
 	else {
-#ifdef X86GFX
-#line 1413
-#error Unsupported excluded original configuration
-#endif
 #line 1402
 #line 1407
                 for (dw = 0; dw < EGA_TICK_DELAY && get_mode_change_required(); ++dw)
@@ -1504,10 +1500,6 @@ BOOL CntrlHandler(ULONG CtrlType)
 
 	    /* If keeping window open when exiting and fullscreen, return to desktop */
 	    /* Transition made simple as VDM de-registered from console */
-#ifdef X86GFX
-#line 1428
-#error Unsupported excluded original configuration
-#endif
 #line 1432
 	}
 

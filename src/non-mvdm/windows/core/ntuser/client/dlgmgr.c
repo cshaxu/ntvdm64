@@ -302,15 +302,11 @@ LONG DefDlgProcWorker(
     if (!ValidateDialogPwnd(pwnd))
         return 0;
 
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
+#line 475
     if (message == WM_NOTIFYFORMAT)
         return wow_dialog_host_notify(hwnd, message, wParam, lParam, fAnsi);
     if (message != WM_FINALDESTROY &&
             wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi) != 0)
-#else
-#line 474
-#error Unsupported excluded original configuration
-#endif
 #line 475
         NtUserSetWindowLong(hwnd, DWL_MSGRESULT, 0, FALSE);
     result = 0;   // no dialog proc
@@ -319,13 +315,9 @@ LONG DefDlgProcWorker(
         goto DoCleanup;
     }
 
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
+#line 483
     if (wow_dialog_host_get(hwnd, DWL_DLGPROC, fAnsi) != 0) {
         result = wow_dialog_host_call(hwnd, message, wParam, lParam, fAnsi);
-#else
-#line 482
-#error Unsupported excluded original configuration
-#endif
 #line 484
 
         /*
@@ -733,10 +725,6 @@ DoCleanup:
             return result;
 
         case WM_NOTIFYFORMAT:
-#ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-#line 884
-#error Unsupported excluded original configuration
-#endif
 #line 886
             return result;
 
@@ -789,12 +777,8 @@ CallDWP:
      * and freed our private memory so return the stored value.
      */
     if (TestWF(pwnd, WFDIALOGWINDOW))
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
+#line 938
         return wow_dialog_host_get(hwnd, DWL_MSGRESULT, fAnsi);
-#else
-#line 937
-#error Unsupported excluded original configuration
-#endif
 #line 938
     else
         return result;
