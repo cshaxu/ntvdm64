@@ -417,3 +417,8 @@ is 2,003 points and 28,291 changed lines across 235 differing mirrors.
 from `nt_emm.c` and `nt_graph.c`. The filtered census is 2,002 points and
 28,262 changed lines across 235 differing mirrors. The paired evidence
 keeps the existing original exclusion groups and selected logical lines.
+
+[S7 P30 receipt](s7-p30-checkpoint.json) records two local startup
+framework removals and original WOW logging restoration. The filtered
+census is 2,002 points and 28,253 changed lines. Both worker controls
+and the byte-level WOW object comparison preserve selected behavior.

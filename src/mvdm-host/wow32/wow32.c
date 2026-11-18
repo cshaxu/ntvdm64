@@ -587,14 +587,10 @@ BOOL W32Init(VOID)
                KEY_QUERY_VALUE,
                &WowKey
              ) != 0){
-#ifdef DEBUG
 #line 582
-#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
-#else
+        LOGDEBUG(0,("    W32INIT ERROR: Registry Opening failed\n"));
 #line 600
         WowKey = NULL;
-#endif
-#line 604
 #line 584
     }
 

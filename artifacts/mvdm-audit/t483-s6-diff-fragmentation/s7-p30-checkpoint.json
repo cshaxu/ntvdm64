@@ -1,0 +1,128 @@
+{
+  "packet": "M0 T483 S7 P30",
+  "prior_checkpoint": "acb589160",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/wow32/wow32.c": {
+      "before": {
+        "blocks": 15,
+        "added": 30,
+        "deleted": 12
+      },
+      "after": {
+        "blocks": 15,
+        "added": 26,
+        "deleted": 11
+      },
+      "removed_local_frame_ranges": [
+        [
+          590,
+          593,
+          2
+        ],
+        [
+          596,
+          597,
+          0
+        ]
+      ],
+      "original_error_pairs": 34,
+      "prior_sha256": "b11970d3862c1a74b0d710030c8f167790018c17c9852c9b4afaefba2a5caaae",
+      "current_sha256": "4f3a34410fe3b847ec4793c351da6604fab069dc1ec99dbdb933f424d252935f",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_msscs.c": {
+      "before": {
+        "blocks": 5,
+        "added": 15,
+        "deleted": 57
+      },
+      "after": {
+        "blocks": 5,
+        "added": 11,
+        "deleted": 57
+      },
+      "removed_local_frame_ranges": [
+        [
+          275,
+          275,
+          0
+        ],
+        [
+          280,
+          283,
+          0
+        ]
+      ],
+      "original_error_pairs": 9,
+      "prior_sha256": "3dffee0a28b60d072219d48c863aa3a6cda23908be8091d5c91d42c028f6b824",
+      "current_sha256": "712314072154f66fbe8186470a81887adda8a1c729a720c01efcf5bfb7bb8c8f",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3"
+    }
+  },
+  "removed_frames": {
+    "wow32.c": 1,
+    "nt_msscs.c": 1
+  },
+  "remaining": {
+    "wow32.c": "Original unconditional diagnostic restored. The actual hosted WOW key can be missing; the executable needs its existing startup fallback. Broader access-error masking remains in the R1696 decision.",
+    "nt_msscs.c": "Original unconditional function shape restored. Preserve this project boundary avoiding writes of placeholder DOS boot files at real host drive roots. The original i386 and LIM conditions remain."
+  },
+  "census": {
+    "non_error_points": 2002,
+    "non_error_lines": 28253,
+    "nonzero_mirrors": 235,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 45,
+      "lines": 723
+    },
+    "pending_decisions": 1566,
+    "updated_pending_id": "T483-R1696"
+  },
+  "verification": {
+    "preprocessing": [
+      {
+        "context": "wow-provider",
+        "graph": "build/.ninja/msvc-x86-release/wow32",
+        "target": "obj/wow32.obj",
+        "selected_lines": 63479,
+        "restored_null_statements": 1,
+        "comparison_sha256": "65ab4b4793064170366fc3730132379956d1731067facf888372d9e09e1d916d"
+      },
+      {
+        "context": "worker-x86",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "target": "obj/host/nt_msscs.obj",
+        "selected_lines": 49931,
+        "restored_null_statements": 0,
+        "comparison_sha256": "29c3823819fe319471c92b685f123276339e12457554080745d3b5e4f2659199"
+      },
+      {
+        "context": "worker-reference-x86",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "target": "obj/host/nt_msscs.obj",
+        "selected_lines": 49931,
+        "restored_null_statements": 0,
+        "comparison_sha256": "29c3823819fe319471c92b685f123276339e12457554080745d3b5e4f2659199"
+      }
+    ],
+    "wow_object_equivalence": {
+      "pipeline": "MSVC x86 compile of the two actual preprocessor outputs using the same input and output paths",
+      "flags": "/TC /MT /Gz /O2 /Brepro /c",
+      "bytes": 25089,
+      "sha256": "3c989da285c98d463b53eebd46f7038d11c2f505260f343e7d21172021eae139"
+    },
+    "targeted": {
+      "wow_provider_and_both_worker_object_builds": "pass",
+      "wow_thunk_nls_controls": 6,
+      "wow_dispatch_exception_fixture": "pass",
+      "dos_fast_io_original_source_contract": "pass"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. The worker inputs match and the WOW object is byte-identical.",
+      "p10_full_package_id": "619955ae-00b2-4174-b75a-471ac49f7add",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-45 points and 714 changed lines in S7. The current census is 2,002 non-error
-points and 28,262 changed lines across 235 mirrors with filtered differences.
+45 points and 723 changed lines in S7. The current census is 2,002 non-error
+points and 28,253 changed lines across 235 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. All are local conditional frames without a matching original
@@ -216,6 +216,11 @@ R1127 is restored and leaves the pending ledger. Four actual worker
 preprocessing comparisons preserve selected text and logical lines.
 The display tick fixture and video source contract checks pass.
 [P29 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p29-checkpoint.json).
+
+P30 restores original WOW logging and removes two local condition frames
+in WOW and DOS startup. Both worker inputs match. The WOW object control
+matches byte for byte. Focused WOW and DOS checks pass.
+[P30 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p30-checkpoint.json).
 
 ## S1 Closure Record
 

@@ -37,7 +37,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 39,src/mvdm-host/softpc.new/base/video/video.c,13,52,12,64,57,0,40,s7-p17-format-restored-residual-pending,5a4c7821cc9703f3fa0f82d9310d79137b07833bada8d6e67370ab915da22c44
 40,src/mvdm-host/wow32/wuclip.c,16,63,27,90,1,0,41,s7-p13-reviewed,6c3c7666a6b193374945f7ecb83b5dba7dabab5b09ea63364cfdfbc8105d7a9b
 41,src/mvdm-host/vdmredir/vrnetapi.c,15,35,20,55,64,0,43,s7-p17-reviewed,2a329bee7eac3b511b967a82c3cbdf7b6fad9bec1eb48c9f8e0b67f7100599eb
-42,src/mvdm-host/wow32/wow32.c,15,30,12,42,34,0,44,s7-p10-format-restored-residual-pending,b11970d3862c1a74b0d710030c8f167790018c17c9852c9b4afaefba2a5caaae
+42,src/mvdm-host/wow32/wow32.c,15,26,11,37,34,0,44,s7-p10-format-restored-residual-pending,4f3a34410fe3b847ec4793c351da6604fab069dc1ec99dbdb933f424d252935f
 43,src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,15,23,0,23,3,0,45,s7-p20-format-restored-residual-pending,0cb29a05517e3276d751b8e83b01a50e4326dc1f4b708efacc294ffc9ab28954
 44,src/mvdm-host/dpmi32/i386/dpmi386.c,14,29,231,260,0,0,42,s7-p6-original-format-restored-residual-pending,eab875c345d4a55c532616c87eb3180f02f3f7ce3e769bf5a5c07d13da2fe55b
 45,src/mvdm-host/softpc.new/base/video/egwrtm12.c,14,21,438,459,7,0,46,s7-p7-reviewed-residual-pending,ba364e0597af92f8530214a8f43479e9d141c4e8579d0a78c15ab9d0dee037d3
@@ -85,7 +85,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 88,src/mvdm-host/dpmi32/modesw.c,6,28,6,34,2,0,89,s7-p14-reviewed,401d13ac2ec3e9705c45cfa857916e15cff1ec19897bd893356ca4fc78ec7f97
 89,src/mvdm-host/softpc.new/base/ccpu386/ntthread.c,6,32,0,32,0,0,90,s7-p21-reviewed,4fef223b0f9174cedc272b4dd14bc22063a94bb1410d4ded0521376b8cd93045
 90,src/mvdm-host/softpc.new/host/src/nt_mouse.c,6,23,1,24,17,0,91,s7-p14-format-restored-residual-pending,9287115bab8384d6421d03e42f443e149d8736d83a092db464a3bcfbe9c49478
-91,src/mvdm-host/softpc.new/host/src/nt_msscs.c,5,15,57,72,9,0,92,s7-p15-format-restored-residual-pending,3dffee0a28b60d072219d48c863aa3a6cda23908be8091d5c91d42c028f6b824
+91,src/mvdm-host/softpc.new/host/src/nt_msscs.c,5,11,57,68,9,0,92,s7-p15-format-restored-residual-pending,712314072154f66fbe8186470a81887adda8a1c729a720c01efcf5bfb7bb8c8f
 92,src/mvdm-host/wow32/walias.h,6,11,4,15,1,0,93,s7-p4-reviewed-residual-pending,f20548935ced3d6ace5ad0885dfe890cddd2f193f911e3afc2db5e813e580a61
 94,src/non-mvdm/windows/core/ntuser/client/winmgrc.c,6,4,496,500,0,0,95,s7-reviewed-residuals-pending,888747b8340cef18516be1edfd80ed078a17a2f622068c449f1fd2fde452f1a5
 96,src/non-mvdm/windows/core/ntuser/rtl/winmgr.c,6,11,301,312,0,0,97,s7-p6-reviewed-residual-pending,ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3

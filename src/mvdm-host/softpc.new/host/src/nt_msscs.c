@@ -272,15 +272,10 @@ InitialiseDosEmulation(int argc, char **argv)
  */
 void AddSystemFiles(void)
 {
-#if defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)
    /* DIVERGENCE(MVDM-HOST-DIV-134): preserve the original first-session
     * call site and void completion contract, but do not create Brief's
     * installation-only C:\\MSDOS.SYS/C:\\IO.SYS placeholders on an admitted
     * real host drive. This entry deliberately performs no host mutation. */
-#else
-#line 260
-#error Unsupported excluded original configuration
-#endif
 #line 313
 }
 
