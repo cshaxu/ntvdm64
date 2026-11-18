@@ -1,0 +1,43 @@
+{
+  "packet": "T483 S8 P180",
+  "position": 223,
+  "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+  "review_ids": [
+    "T483-R2718",
+    "T483-R2720"
+  ],
+  "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+  "current_sha256": "73c78576137fa1b6326ac5685f5bbb7e8c0862e2022ab783b1dfeefecab957fa",
+  "before": {
+    "blocks": 2,
+    "added": 1,
+    "deleted": 85
+  },
+  "after": {
+    "blocks": 2,
+    "added": 1,
+    "deleted": 84
+  },
+  "paired_error_bodies": 1,
+  "line_mismatches": [],
+  "decision": "The original include resolves to the DPMI precomp.h in the production service search path, losing the token query and interactive-user declarations (C4013). Restoring the three omitted private winsrv bodies with the finite header fails at the CSR thread parameter and the private NtUserSoundSentry and NtUserSelectPalette calls. Original hdrstop and the GetConsoleWindowStation declaration alone compile; this candidate fragments the file from two to three points (+1/-81), so that choice is pending. Retained both live helper bodies; restored one original blank line and the logical coordinates for the token helper comment and LATER closing directive.",
+  "verification": {
+    "objects": {
+      "x64": "COFF timestamp only",
+      "x86": "COFF timestamp only"
+    },
+    "isolated_compile": {
+      "original_include": 2,
+      "all_bodies_with_finite_header": 2,
+      "pragma_and_unused_declaration": 0
+    }
+  },
+  "coverage": {
+    "complete": 223,
+    "remaining": 8,
+    "files": 231,
+    "points": 1906,
+    "lines": 26250,
+    "pending": 1532
+  }
+}

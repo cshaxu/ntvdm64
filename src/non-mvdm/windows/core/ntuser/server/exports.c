@@ -8,7 +8,9 @@
 * History:
 * 03-04-95 JimA                Created.
 \***************************************************************************/
+
 #include <base_interactive.h>
+#line 89
 
 /***************************************************************************\
 * _UserTestTokenForInteractive
@@ -82,6 +84,7 @@ _UserTestTokenForInteractive(
 #ifdef LATER
 #line 158
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
+#line 162
 #endif
 #line 163
     }
