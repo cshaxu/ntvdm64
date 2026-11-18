@@ -1,0 +1,73 @@
+{
+  "packet": "T483 S8 P177",
+  "position": 220,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+  "review_ids": [
+    "T483-R2708",
+    "T483-R2709",
+    "T483-R2710"
+  ],
+  "original_sha256": "b632fc75232db7c2bc95baf758820c087a23f7e17a61c361e47c4687a4f543d3",
+  "current_sha256": "516a7dfc896ed24d3f793b6a1f22bb7c2f30d42828505c6f0130b9f88aae2aec",
+  "before": {
+    "blocks": 8,
+    "added": 4,
+    "deleted": 37
+  },
+  "after": {
+    "blocks": 7,
+    "added": 3,
+    "deleted": 32
+  },
+  "source_changed": true,
+  "paired_error_bodies": 10,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 220,
+    "remaining": 11,
+    "files": 231,
+    "points": 1911,
+    "lines": 26345,
+    "pending": 1532
+  },
+  "decision": "Restored original wingdip.h, user.h and REBASEPWND; preserve process-local REBASE. Corrected logical macro coordinates to 86,87,94,96. Production binding uses scoped gpsi and gSharedInfo rather than original globals. Standalone winuserp.h restore is accepted by the help compiler but resolves to the compat header and splits one remaining omission (+1 point). Leave decision open. Unguarded wowuserp.h duplicates existing structs. Existing RIP_COMPONENT negative control and SDK NLS linkage boundary remain recorded.",
+  "verification": {
+    "scope": "Both cached Ninja graphs: 81 consumers compiled; compared COFF bytes against saved inputs. Two linked focused fixtures passed; no new package.",
+    "objects": {
+      "call-boundaries": {
+        "objects": 45,
+        "raw_identical": 0,
+        "identical_outside_timestamp": 45
+      },
+      "wow32": {
+        "objects": 36,
+        "raw_identical": 0,
+        "identical_outside_timestamp": 36
+      }
+    },
+    "extra": {
+      "user": {
+        "exit": 0,
+        "errors": []
+      },
+      "winuserp": {
+        "exit": 0,
+        "errors": []
+      },
+      "wowuserp": {
+        "exit": 2,
+        "errors": [
+          "C2011: '_NE_MODULE_SEG': 'struct' type redefinition",
+          "C2011: 'tagAPFNWOWHANDLERSIN': 'struct' type redefinition"
+        ]
+      }
+    },
+    "tests": [
+      "WOW_DIALOG_NAVIGATION_OK",
+      "original-default failures=0"
+    ]
+  }
+}

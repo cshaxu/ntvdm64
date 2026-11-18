@@ -28,7 +28,7 @@ typedef struct _SECURITY_ATTRIBUTES *LPSECURITY_ATTRIBUTES;
 #include <wingdi.h>
 #include <winuser.h>
 #include <winerror.h>
-#line 30
+#include <wingdip.h>
 #ifdef _USERK_
 #line 31
 #error T476-S1: branch not selected by product build
@@ -61,6 +61,7 @@ typedef struct _SECURITY_ATTRIBUTES *LPSECURITY_ATTRIBUTES;
 #endif // _USERK
 #line 54
 
+#include "user.h"
 #line 58
 /*
  * REBASE macros take kernel desktop addresses and convert them into
@@ -88,7 +89,6 @@ typedef struct _SECURITY_ATTRIBUTES *LPSECURITY_ATTRIBUTES;
 #line 85
 #else
 #line 86
-#line 71
 #define REBASEALWAYS(p, elem) ((p)->elem)
 #define REBASEPTR(obj, p) (p)
 #line 88
@@ -99,10 +99,11 @@ typedef struct _SECURITY_ATTRIBUTES *LPSECURITY_ATTRIBUTES;
 #error T476-S1: branch not selected by product build
 #line 92
 #endif
-#line 73
+
 #define REBASE(p, elem) ((p)->elem)
-#define REBASEPWND(p, elem) ((p)->elem)
-#line 98
+#line 96
+#define REBASEPWND(p, elem) ((PWND)REBASE(p, elem))
+
 #define GETAPPVER() GetClientInfo()->dwExpWinVer
 
 /*
