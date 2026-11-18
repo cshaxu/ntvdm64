@@ -1,0 +1,161 @@
+{
+  "packet": "T483 S8 P41",
+  "files": [
+    {
+      "position": 83,
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "review_ids": [
+        "T483-R0971",
+        "T483-R0972",
+        "T483-R0973",
+        "T483-R0974",
+        "T483-R0975",
+        "T483-R0976",
+        "T483-R0977",
+        "T483-R0978",
+        "T483-R0979",
+        "T483-R0980",
+        "T483-R0981",
+        "T483-R0982",
+        "T483-R0983",
+        "T483-R0984"
+      ],
+      "prior_sha256": "d6e31fea7dc2a9b5bc140d590d39075942c0459019284df1dd1642f91ef39250",
+      "source_sha256": "d6e31fea7dc2a9b5bc140d590d39075942c0459019284df1dd1642f91ef39250",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "before": {
+        "blocks": 14,
+        "added": 12,
+        "deleted": 12
+      },
+      "after": {
+        "blocks": 14,
+        "added": 12,
+        "deleted": 12
+      },
+      "decision": "Original field order independently fails each of six x86 layout probes against known bytes. Selected source passes. Six types account for fourteen edit blocks. Reordering needed at original consumers in fpu.c."
+    },
+    {
+      "position": 84,
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "review_ids": [
+        "T483-R0985",
+        "T483-R0986",
+        "T483-R0992"
+      ],
+      "prior_sha256": "68befcbaae9545cadb39bbbe2741ab647237ec42ca125d6ab1640fca76cdf343",
+      "source_sha256": "68befcbaae9545cadb39bbbe2741ab647237ec42ca125d6ab1640fca76cdf343",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+      "before": {
+        "blocks": 3,
+        "added": 1,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 3,
+        "added": 1,
+        "deleted": 2
+      },
+      "decision": "The low/high overlay is consumed as two bytes. Original host_simulate function-like macro rewrites the nt_cpu.c definition to an invalid declaration; retain that one omission."
+    },
+    {
+      "position": 85,
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "review_ids": [
+        "T483-R0995",
+        "T483-R0997"
+      ],
+      "prior_sha256": "71b0afcd5906ef2dddac4ca2fa546aa4ceedd8302d097fb62ab71ee0b4b1254e",
+      "source_sha256": "d3c6808620ed4d304fde38647b13d4a4e37260399e9a43e8f6d7398f8d5f63ec",
+      "original_sha256": "480c35aa09b40d75d82fe0e1fe3e6cb0f981e573549ea2e193e8a62be4816d10",
+      "before": {
+        "blocks": 3,
+        "added": 4,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 1
+      },
+      "decision": "Preserve original MONITOR conditional and its else. Reject non-CPU40 MONITOR early, then select the original CPU40 provider. The pinned original cpu.h has no providers for 28 legacy function pointers; enabling CPU30 selects an excluded platform. Mask the inner rejection against original line 40, per S7 P39."
+    }
+  ],
+  "coverage": {
+    "complete": 85,
+    "remaining": 146,
+    "files": 231,
+    "points": 1946,
+    "lines": 27088,
+    "pending": 1549
+  },
+  "verification": {
+    "x86_layout": {
+      "current": [
+        "FP32 sign=1 exp=127 mant=400000",
+        "FP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4",
+        "FP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8",
+        "I64 high=-2 low=12345678 offsets=0,4",
+        "layout_ok=1 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f"
+      ],
+      "FP32": [
+        "FP32 sign=0 exp=0 mant=5fe000",
+        "FP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4",
+        "FP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8",
+        "I64 high=-2 low=12345678 offsets=0,4",
+        "layout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f"
+      ],
+      "FP64HI": [
+        "FP32 sign=1 exp=127 mant=400000",
+        "FP64 sign=0 exp=0 hi=bff80 lo=0 offsets=0,4",
+        "FP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8",
+        "I64 high=-2 low=12345678 offsets=0,4",
+        "layout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f"
+      ],
+      "FP80SE": [
+        "FP32 sign=1 exp=127 mant=400000",
+        "FP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4",
+        "FP80 sign=1 exp=24575 hi=c0000000 lo=0 offsets=0,4,8",
+        "I64 high=-2 low=12345678 offsets=0,4",
+        "layout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f"
+      ],
+      "FP64": [
+        "FP32 sign=1 exp=127 mant=400000",
+        "FP64 sign=0 exp=0 hi=0 lo=bff80000 offsets=4,0",
+        "FP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8",
+        "I64 high=-2 low=12345678 offsets=0,4",
+        "layout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f"
+      ],
+      "FPU_I64": [
+        "FP32 sign=1 exp=127 mant=400000",
+        "FP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4",
+        "FP80 sign=1 exp=16383 hi=c0000000 lo=0 offsets=0,4,8",
+        "I64 high=305419896 low=fffffffe offsets=4,0",
+        "layout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f"
+      ],
+      "FP80": [
+        "FP32 sign=1 exp=127 mant=400000",
+        "FP64 sign=1 exp=1023 hi=80000 lo=0 offsets=0,4",
+        "FP80 sign=1 exp=16383 hi=0 lo=c0000000 offsets=4,0,8",
+        "I64 high=-2 low=12345678 offsets=0,4",
+        "layout_ok=0 clean_exception_queries=0 mask_before=8001f mask_after_clear=8001f expected_mask=8001f"
+      ]
+    },
+    "cpu_header_profiles": "MSVC /EP extracted selectors: current and prior all four MONITOR/CPU_40_STYLE combinations, three select cpu4.h, one rejected as intended.",
+    "cached_build": {
+      "x86": 0,
+      "x64": 0
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "f27186d1-d523-4d9a-bc13-9a13fb6481db",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "targeted": "CCPU monitor boundary: 58 cases passed"
+  }
+}

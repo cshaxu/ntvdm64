@@ -37,13 +37,12 @@
 #define YYLENG_ADJUST 0
 
 #ifdef MONITOR
-#if defined(CPU_40_STYLE)
-#line 40
-#define CpuH "cpu4.h"
-#else
+#ifndef CPU_40_STYLE
 #line 40
 #error Excluded non-CPU40 MONITOR CPU interface
 #endif
+#line 40
+#define CpuH "cpu4.h"
 #else
 #line 42
 #define CpuH "cpu4.h"
