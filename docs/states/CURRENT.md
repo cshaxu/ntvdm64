@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P164 completed review through `getset.c`. Next is position 208, `profile.c`.
+S8 P165 completed review through `profile.c`. Next is position 209, `queue.c`.
 
 ## Active Packet
 
@@ -34,7 +34,7 @@ S8 P164 completed review through `getset.c`. Next is position 208, `profile.c`.
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P164, 207 of 231 positions are covered and 24 remain queued.
+IDs. After S8 P165, 208 of 231 positions are covered and 23 remain queued.
 P107 Win16 shared clipboard transfer remains deferred by owner direction. Both P106 and P107 failed at the same stage. The candidate passed 56 open-state checks and 24 ownership cases. Rerun the real transfer when native OpenClipboard succeeds.
 
 S8 has removed 62 points and 821 diff lines, leaving 1,912 points and 26,389 lines. The live pending backlog has 1,532 rows.
@@ -202,6 +202,7 @@ S8 has removed 62 points and 821 diff lines, leaving 1,912 points and 26,389 lin
 [P162 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p162-checkpoint.json).
 [P163 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p163-checkpoint.json).
 [P164 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p164-checkpoint.json).
+[P165 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p165-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

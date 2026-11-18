@@ -80,7 +80,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 84,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,5,0,s8-p46-reviewed,T483-R1040;T483-R1041;T483-R1042;T483-R1043;T483-R1044;T483-R1045;T483-R1046,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
 85,src/mvdm-host/wow32/wuclass.c,7,13,7,6,0,s8-p106-reviewed,T483-R1816;T483-R1817;T483-R1818;T483-R1819;T483-R1820;T483-R1821;T483-R1822;T483-R1823,e88dbe493e58e12f8fd2b55395e8ebcff1ce7858c06a3dae944c5c3e742e4485
 86,src/non-mvdm/base/ntdll/csrutil.c,8,7,450,0,0,s8-p119-reviewed,T483-R1945;T483-R1946;T483-R1947;T483-R1948;T483-R1949;T483-R1950;T483-R1951,a424054e40fee1a72ecf6a8f37d367ffd84156d29cdf4cbd81826e84bef99415
-87,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,3,0,s7-reviewed-residuals-pending,T483-R2611;T483-R2612;T483-R2613;T483-R2614;T483-R2615;T483-R2616;T483-R2617,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
+87,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,3,0,s8-p165-reviewed,T483-R2611;T483-R2612;T483-R2613;T483-R2614;T483-R2615;T483-R2616;T483-R2617,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
 88,src/mvdm-host/dpmi32/dpmimemr.c,6,4,19,0,0,s7-p18-reviewed,,568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4
 89,src/mvdm-host/dpmi32/modesw.c,6,26,6,2,0,s8-p5-rechecked-residuals-pending-owner,T483-R0204;T483-R0205;T483-R0206;T483-R0207;T483-R0208;T483-R0209;T483-R0210;T483-R0211;T483-R0212;T483-R0213,28836a7ec6efc3516e78f9e96daa1675c2b4540a2b72d4a14676d56fbf7f455c
 90,src/mvdm-host/softpc.new/base/ccpu386/ntthread.c,5,31,0,0,0,s8-p19-reviewed,T483-R0476;T483-R0477;T483-R0478,8dd53012bfac7fc25b818ce78017766420fec650772fbdc7c68825b87c82e188

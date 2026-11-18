@@ -78,7 +78,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 81,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,59,5,0,84,s8-p46-reviewed,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
 82,src/mvdm-host/wow32/wuclass.c,7,13,7,20,6,0,85,s8-p106-reviewed,e88dbe493e58e12f8fd2b55395e8ebcff1ce7858c06a3dae944c5c3e742e4485
 83,src/non-mvdm/base/ntdll/csrutil.c,8,7,450,457,0,0,86,s8-p119-reviewed,a424054e40fee1a72ecf6a8f37d367ffd84156d29cdf4cbd81826e84bef99415
-84,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,866,3,0,87,s7-reviewed-residuals-pending,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
+84,src/non-mvdm/windows/core/ntuser/kernel/profile.c,7,2,864,866,3,0,87,s8-p165-reviewed,430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911
 85,src/mvdm-host/softpc.new/host/src/nt_cpu.c,4,4,2,6,10,0,83,s8-p45-reviewed,23c6f5890fb60aae48f319b7b0426ed8c9dff8656c8eaf8a2f911acf23b700fc
 86,src/mvdm-host/softpc.new/host/src/nt_cga.c,6,13,33,46,6,0,82,s8-p44-reviewed,036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b
 87,src/mvdm-host/dpmi32/dpmimemr.c,6,4,19,23,0,0,88,s7-p18-reviewed,568c9b416ba5aa013ae442ac193b2c44537cccccab17cec702763b23b612bfe4

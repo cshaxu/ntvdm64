@@ -1,0 +1,54 @@
+{
+  "packet": "T483 S8 P165",
+  "position": 208,
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+  "review_ids": [
+    "T483-R2611",
+    "T483-R2612",
+    "T483-R2614",
+    "T483-R2616",
+    "T483-R2617"
+  ],
+  "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+  "current_sha256": "430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911",
+  "before": {
+    "blocks": 7,
+    "added": 2,
+    "deleted": 864
+  },
+  "after": {
+    "blocks": 7,
+    "added": 2,
+    "deleted": 864
+  },
+  "source_changed": false,
+  "paired_error_bodies": 3,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        429,
+        288,
+        "}"
+      ],
+      [
+        750,
+        832,
+        "#endif"
+      ]
+    ],
+    "coordinate_verification": "Original bytes match at logical 288 (end of DWORD reader), 750 and 832 (distinct DEBUG terminators). Sequence alignment paired identical delimiters across omitted bodies."
+  },
+  "coverage": {
+    "complete": 208,
+    "remaining": 23,
+    "files": 231,
+    "points": 1912,
+    "lines": 26389,
+    "pending": 1532
+  },
+  "decision": "Original DWORD, string, integer readers retained. wow_profile_open_key restricts access to KEY_READ; DESKTOP uses current user and COMPAT requests machine native view. NT4 OpenCacheKeyEx instead depends on kernel process identity, impersonation and serialized path/cache ownership. Raw cache globals are state for that implementation. FastGetProfileKeysW needs pool reallocation and enumeration; FastGetProfileValue additionally dereferences server-owned string resources for integer IDs; FastWriteProfileStringW requests KEY_WRITE, which actual provider rejects. UT wrappers use FastOpen/FastCloseProfileUserMapping. No general kernel-profile service supplied by existing WOW binding. Do not duplicate its cache or invent a writable provider.",
+  "verification": {
+    "scope": "Fresh original/source hashes, filtered comparison, #line coordinate checks and source-level caller/provider audit; no new build or runtime test."
+  }
+}
