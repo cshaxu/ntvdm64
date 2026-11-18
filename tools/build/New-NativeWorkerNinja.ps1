@@ -19,7 +19,8 @@ $compilerCacheDirectory=if($CompilerCache){Join-Path $root 'build/.ccache'}else{
 $baseFlags=[regex]::Match($text,'(?m)^cflags = (.*)$').Groups[1].Value
 if(!$baseFlags){throw 'Missing audited reference flags'}
 $includes=@([regex]::Matches($baseFlags,'/I "[^"]+"')|ForEach-Object {$_.Value})
-$nativeFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00 '+($includes -join ' ')+' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'" /I obj/basesrv'
+$nativeCompileFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00'
+$nativeFlags=$nativeCompileFlags+' '+($includes -join ' ')+' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'" /I obj/basesrv'
 if($Component -eq 'Service'){
  $nativeFlags+=' /we4312 /FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/inc'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/server'))+'"'
 }
@@ -130,8 +131,16 @@ function Add-Edge([string]$target) {
  $null=New-Item -ItemType Directory -Path (Join-Path $build (Split-Path $target -Parent)) -Force
  $generatedHeaders='obj/basesrv/service.h'
  if($target -in @('obj/common/interface_query.obj','obj/common/rpc_management_stub.obj')){$generatedHeaders+=' obj/basesrv/rpc_management.h'}
- $graph.Add('build '+$target+': cc '+$source+' | '+$generatedHeaders)
- $flags=$nativeFlags
+ $library=$source -match '/src/lib-(win32|nxvm)/'
+ if($library){
+  $graph.Add('build '+$target+': cc '+$source)
+  $flags=$nativeCompileFlags+' /I "'+(NP (Join-Path $root 'src'))+'"'
+  if($Component -eq 'Service'){$flags+=' /we4312'}
+  if($source -match '/src/lib-nxvm/'){$flags+=' /I "'+(NP (Join-Path $root 'src/lib-nxvm'))+'"'}
+ }else{
+  $graph.Add('build '+$target+': cc '+$source+' | '+$generatedHeaders)
+  $flags=$nativeFlags
+ }
  if($target -eq 'obj/opennt-base-server/srvvdm.obj'){
   # OPENNT-HOST-068: integer-zero binding is local to this original TU.
   $flags+=' /DNULL=0 /FI "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include/base_server.h'))+'"'
@@ -141,8 +150,10 @@ function Add-Edge([string]$target) {
  if($binding){
   foreach($option in [regex]::Matches($binding,'/std:c(?:11|17)(?=\s|$)')){$flags+=' '+$option.Value}
   foreach($option in [regex]::Matches($binding,'/(?:O[0-9dis]|Gy|we4013)(?=\s|$)')){$flags+=' '+$option.Value}
-  foreach($include in [regex]::Matches($binding,'/I (?:"[^"]+"|[^\s]+)')){
-   $flags+=' '+$include.Value.Replace((NP (Split-Path $reference -Parent)),(NP $build))
+  if(!$library){
+   foreach($include in [regex]::Matches($binding,'/I (?:"[^"]+"|[^\s]+)')){
+    $flags+=' '+$include.Value.Replace((NP (Split-Path $reference -Parent)),(NP $build))
+   }
   }
   foreach($define in [regex]::Matches($binding,'/D[^\s]+')){
    if($define.Value -notmatch '^/D(_X86_|CPU_[A-Z0-9_]+|NEW_CPU|CCPU|C_VID|SPC386|SIM32|V7VGA|NTVDM|ANSI|PROD|WIN32|WINNT|MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION|_NO_CRT_STDIO_INLINE|_WIN32_WINNT)($|=)'){$flags+=' '+$define.Value}

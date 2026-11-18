@@ -25,7 +25,8 @@ $referenceRun16=Join-Path (Split-Path -Parent ([IO.Path]::GetFullPath($Reference
 # Reuse only native include closure, never x86 objects/defines/worker targets.
 $includes=@([regex]::Matches($referenceFlags,'/I "[^"]+"') | ForEach-Object { $_.Value })
 $includes += '/I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'"'
-$flags='/nologo /c /MT /W4 /Gy /showIncludes /D_WIN32_WINNT=0x0A00 /I obj/basesrv '+($includes -join ' ')
+$compileFlags='/nologo /c /MT /W4 /Gy /showIncludes /D_WIN32_WINNT=0x0A00'
+$flags=$compileFlags+' /I obj/basesrv '+($includes -join ' ')
 $graph=[Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('release_cflags = /O2')
@@ -58,9 +59,15 @@ $sources+=@('src/lib-win32/rpc/local_binding.c','src/common/rpc/management.c','s
 $objects=@();$manifest=@();$i=0
 foreach($source in $sources) {
     $object='unit'+$i+'.obj';++$i;$objects+=$object
-    $graph.Add('build '+$object+': cc '+(NP (Join-Path $root $source))+' | obj/basesrv/service.h')
-    if($source -in @('src/lib-win32/process-hook/staging.c','src/lib-win32/process-hook/helper.c','src/lib-win32/process-hook/payload.c')) { $graph.Add('  cflags = $cflags /std:c11') }
-    if($source -eq 'src/lib-win32/process-hook/startup_hooks.c') { $graph.Add('  cflags = $cflags /std:c11') }
+    $edge='build '+$object+': cc '+(NP (Join-Path $root $source))
+    if($source.StartsWith('src/lib-win32/')){
+        $graph.Add($edge)
+        $unitFlags=$compileFlags+' /I "'+(NP (Join-Path $root 'src'))+'"'
+        if($source -match '^src/lib-win32/process-hook/[^/]+[.]c$'){$unitFlags+=' /std:c11'}
+        $graph.Add('  cflags = '+$unitFlags)
+    }else{
+        $graph.Add($edge+' | obj/basesrv/service.h')
+    }
     if($source -eq 'src/non-mvdm/base/win32/client/vdm.c') {
         $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/common/base_srv/legacy_classifier_arch.h'))+'"')
     }

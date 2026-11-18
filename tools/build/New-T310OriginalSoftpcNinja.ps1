@@ -1159,13 +1159,14 @@ $consoleGridObject = 'obj/opennt-abi-host-compat/console_grid.obj'
 $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root 'src/compat/console_grid.c')))
 $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
 $adapterWin32Objects += $consoleGridObject
+$libraryFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
 $crtCompatObject = 'obj/lib-win32/crt-compat/crt_compat.obj'
 $graph.Add('build ' + $crtCompatObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c')))
-$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT')
 $graph.Add('build lib-crt-compat.lib: lib ' + $crtCompatObject)
 $threadObject = 'obj/lib-win32/thread/thread.obj'
 $graph.Add('build ' + $threadObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/thread/thread.c')))
-$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT')
 $graph.Add('build lib-thread.lib: lib ' + $threadObject)
 $graph.Add('build obj/tests/lib_thread.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/thread/thread_test.c')))
 $graph.Add('build lib-thread-test.exe: broker_test_link obj/tests/lib_thread.obj lib-thread.lib')
@@ -1452,7 +1453,12 @@ if ($Architecture -eq 'x86') {
     foreach ($source in $frontendWindowSources) {
         $object = 'obj/frontend/window/' + ($source -replace '^src/(ntcon-exe/)?','').Replace('.c','.obj')
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))
-        $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 /I "' + (NinjaPath $frontendRoot) + '" /I "' + (NinjaPath $fontBuild) + '"')
+        $windowFlags = if ($source.StartsWith('src/lib-nxvm/')) {
+            $libraryFlags + ' /I "' + (NinjaPath (Join-Path $root 'src/lib-nxvm')) + '"'
+        } else {
+            $nativeServiceFlags + ' /I "' + (NinjaPath $frontendRoot) + '" /I "' + (NinjaPath $fontBuild) + '"'
+        }
+        $graph.Add('  cflags = ' + $windowFlags + ' /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601')
         $windowObjects += $object
     }
     $graph.Add('build frontend-window.lib: lib ' + ($windowObjects -join ' '))
@@ -1530,9 +1536,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-shutdown-test.exe: base_rpc_test_link obj/tests/worker_shutdown.obj worker-base.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/lib-win32/pipe/pipe_transfer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/pipe/pipe_transfer.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/lib-win32/pipe/pipe_pair.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/pipe/pipe_pair.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build lib-pipe.lib: lib obj/lib-win32/pipe/pipe_transfer.obj obj/lib-win32/pipe/pipe_pair.obj' )
     $graph.Add('build obj/tests/win32_pipe_pair.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/pipe/pipe_pair_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1544,19 +1550,19 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-system-root-test.exe: broker_test_link obj/tests/common_system_root.obj common-root.lib')
     $graph.Add('build obj/lib-win32/process-observation/console_members.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-observation/console_members.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build common-console.lib: lib obj/common/console_client.obj')
     $graph.Add('build obj/lib-win32/rpc/local_binding.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/rpc/local_binding.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/lib-win32/rpc/peer.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/rpc/peer.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build lib-rpc.lib: lib obj/lib-win32/rpc/local_binding.obj obj/lib-win32/rpc/peer.obj')
     $graph.Add('build obj/lib-win32/process-launch/attributes.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/attributes.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/lib-win32/process-launch/process.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/process.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/lib-win32/process-launch/command_line.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-launch/command_line.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build lib-process-launch.lib: lib obj/lib-win32/process-launch/attributes.obj obj/lib-win32/process-launch/process.obj obj/lib-win32/process-launch/command_line.obj')
     $graph.Add('build obj/tests/ntvdm_command_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_launch.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1568,13 +1574,13 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')
     $graph.Add('build obj/lib-win32/process-image/image.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-image/image.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build lib-process-image.lib: lib obj/lib-win32/process-image/image.obj')
     $graph.Add('build obj/tests/process_image_machine.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-image/image_machine_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build process-image-machine-test.exe: broker_test_link obj/tests/process_image_machine.obj lib-process-image.lib')
     $graph.Add('build obj/lib-win32/process-observation/observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-observation/observation.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build lib-process-observation.lib: lib obj/lib-win32/process-observation/observation.obj obj/lib-win32/process-observation/console_members.obj')
     $graph.Add('build obj/tests/win32_process_observation.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-observation/observation_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1583,10 +1589,10 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-observation-failure-test.exe: broker_test_link obj/tests/win32_process_observation_failure.obj')
     $graph.Add('build obj/lib-win32/handle/duplicate.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/handle/duplicate.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build lib-handle.lib: lib obj/lib-win32/handle/duplicate.obj')
     $graph.Add('build obj/lib-win32/file/identity.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/file/identity.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build lib-file.lib: lib obj/lib-win32/file/identity.obj obj/lib-win32/file/native_path.obj')
     $graph.Add('build obj/tests/win32_file_identity.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/file/identity_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1742,7 +1748,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/common/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/console/client.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/lib-win32/file/native_path.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/file/native_path.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj')
     $graph.Add('rule frontend_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib')
@@ -1774,13 +1780,14 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/common/native_image.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_image.c')))
     $graph.Add('  cflags = ' + $baseAdapterFlags)
     # One worker; actual child machine selects the reviewed matching Hook installer.
-    $hookCFlags = '/nologo /TC /c /MT /O2 /Gy /W4 /we4013 /showIncludes /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $hookLibraryFlags = '/nologo /TC /c /MT /O2 /Gy /W4 /we4013 /showIncludes /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $hookCFlags = $hookLibraryFlags + ' /I obj/basesrv'
     $hookObjects = @()
     foreach ($name in @('staging','helper','payload','startup_hooks','minhook/src/buffer','minhook/src/trampoline','minhook/src/hde/hde32')) {
         $object = 'obj/lib-win32/process-hook/' + $name + '.obj'
         $hookObjects += $object
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/lib-win32/process-hook/' + $name + '.c'))))
-        $graph.Add('  cflags = ' + $hookCFlags)
+        $graph.Add('  cflags = ' + $hookLibraryFlags)
     }
     $graph.Add('build obj/common/native-hook/packet.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native-hook/packet.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
