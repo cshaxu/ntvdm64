@@ -1,0 +1,106 @@
+{
+  "packet": "T483 S8 P102",
+  "position": 146,
+  "path": "src/mvdm-host/wow32/wsdata.c",
+  "review_ids": [
+    "T483-R1777",
+    "T483-R1778",
+    "T483-R1779",
+    "T483-R1780",
+    "T483-R1781",
+    "T483-R1782",
+    "T483-R1783",
+    "T483-R1784",
+    "T483-R1785",
+    "T483-R1786",
+    "T483-R1787",
+    "T483-R1788",
+    "T483-R1789",
+    "T483-R1790",
+    "T483-R1791",
+    "T483-R1793",
+    "T483-R1795",
+    "T483-R1796",
+    "T483-R1797",
+    "T483-R1798"
+  ],
+  "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+  "current_sha256": "748f8ffcf553696df0fd2fa313d01555417868f41a65e11bf79d692453ebe5e2",
+  "before": {
+    "blocks": 20,
+    "added": 161,
+    "deleted": 13
+  },
+  "after": {
+    "blocks": 19,
+    "added": 157,
+    "deleted": 11
+  },
+  "source_changed": true,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 146,
+    "remaining": 85,
+    "files": 231,
+    "points": 1908,
+    "lines": 26977,
+    "pending": 1534
+  },
+  "verification": {
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "526df184-663a-43b3-ac0e-17f637fb5d63",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "guest": {
+      "Completion": {
+        "phase": 2,
+        "errors": 0,
+        "startup": 0,
+        "task": 2,
+        "completion": 1,
+        "freed": 1,
+        "cancel": 0,
+        "select": 0,
+        "disabled": 0,
+        "closed": 0
+      },
+      "Cancel": {
+        "phase": 2,
+        "errors": 0,
+        "startup": 0,
+        "task": 2,
+        "completion": 0,
+        "freed": 1,
+        "cancel": 1,
+        "select": 0,
+        "disabled": 0,
+        "closed": 0
+      },
+      "TaskLoss": {
+        "phase": 3,
+        "errors": 0,
+        "startup": 0,
+        "task": 2,
+        "completion": 0,
+        "freed": 0,
+        "cancel": 0,
+        "select": 0,
+        "disabled": 0,
+        "closed": 0
+      }
+    },
+    "rundown": "353 checks; zero failures",
+    "cached": "x86 and x64 all passed"
+  },
+  "decision": "Keep task-owned aliases, retirement, late-post guards and allocation failure checks. Restore original invalid-handle error return and reuse the common unlock on reentrant completion during cancellation. All residual adaptations remain pending."
+}

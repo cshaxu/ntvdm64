@@ -1818,27 +1818,26 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
                             GETWORD16( parg16->hAsyncTaskHandle ),
                             WWS32ThreadSerialNumber
                             );
-    if ( asyncTaskHandle32 == NULL ) {
-
+    if ( asyncTaskHandle32 != NULL ) {
+        ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(
+                            asyncTaskHandle32
+                            ));
         FREEARGPTR(parg16);
-        SetLastError( WSAEINVAL );
-        RETURN((ULONG)SOCKET_ERROR);
+        if ( ul == NO_ERROR ) {
+            context = WWS32FindAndRemoveAsyncContext( asyncTaskHandle32 );
+            if ( context != NULL ) {
+                free_w( context->Buffer32 );
+                free_w( (PVOID)context );
+            }
+        }
+        RETURN(ul);
     }
-
-    ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(
-                        asyncTaskHandle32
-                        ));
 #line 1787
 
     FREEARGPTR(parg16);
 
-    if ( ul == NO_ERROR ) {
-        context = WWS32FindAndRemoveAsyncContext( asyncTaskHandle32 );
-        if ( context != NULL ) {
-            free_w( context->Buffer32 );
-            free_w( (PVOID)context );
-        }
-    }
+    ul = (ULONG) SOCKET_ERROR;
+    SetLastError( WSAEINVAL );
 #line 1792
 
     RETURN(ul);
@@ -1974,13 +1973,12 @@ WWS32FindAndRemoveAsyncContext (
             if ( context->RundownState & WWS32_ASYNC_RETIRED ) {
                 if ( context->RundownState & WWS32_ASYNC_CANCEL_ACTIVE ) {
                     context->RundownState |= WWS32_ASYNC_COMPLETED;
-                    RtlLeaveCriticalSection( &WWS32CriticalSection );
-                } else {
-                    RemoveEntryList( &context->ContextBlockListEntry );
-                    RtlLeaveCriticalSection( &WWS32CriticalSection );
-                    free_w( context->Buffer32 );
-                    free_w( (PVOID)context );
+                    break;
                 }
+                RemoveEntryList( &context->ContextBlockListEntry );
+                RtlLeaveCriticalSection( &WWS32CriticalSection );
+                free_w( context->Buffer32 );
+                free_w( (PVOID)context );
                 return NULL;
             }
 
