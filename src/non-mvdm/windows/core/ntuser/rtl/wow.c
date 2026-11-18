@@ -65,16 +65,99 @@
 
 /* !!! LATER BUG 14263 remove 0xc000000 check */
 
+#define DESKTOPVALIDATE(pobj) \
+                                                                \
+    PCLIENTINFO pci = GetClientInfo();                          \
+    if (pci->pDeskInfo &&                                       \
+            pobj >= pci->pDeskInfo->pvDesktopBase &&            \
+            pobj < pci->pDeskInfo->pvDesktopLimit) {            \
+        pobj = (PVOID)((PBYTE)pobj -                            \
+                pci->ulClientDelta);                            \
+    } else {                                                    \
+        pobj = (PVOID)NtUserCallOneParam((DWORD)h,              \
+                SFI__MAPDESKTOPOBJECT);                         \
+        if ((pobj == NULL) || ((DWORD)pobj > 0xC0000000))       \
+            return NULL;                                        \
+                                                                \
+    }
 #endif
-#line 170
 #endif
 
 
-#line 244
+
+/*
+ * Keep the general path through validation straight without jumps - that
+ * means tunneling if()'s for this routine - this'll make validation fastest
+ * because of instruction caching.
+ *
+ * If you change this macro also look at the one in the server handtabl.c.
+ *
+ */
+#define ValidateHandleMacro(h, bType)                                       \
+{                                                                           \
+    PHE phe;                                                                \
+    DWORD dw;                                                               \
+    WORD uniq;                                                              \
+                                                                            \
+    /*                                                                      \
+     * This is a macro that does an AND with HMINDEXBITS,                   \
+     * so it is fast.                                                       \
+     */                                                                     \
+    dw = HMIndexFromHandle(h);                                              \
+                                                                            \
+    /*                                                                      \
+     * Make sure it is part of our handle table.                            \
+     */                                                                     \
+    if (dw < ServerInfo()->cHandleEntries) {                     \
+        /*                                                                  \
+         * Make sure it is the handle                                       \
+         * the app thought it was, by                                       \
+         * checking the uniq bits in                                        \
+         * the handle against the uniq                                      \
+         * bits in the handle entry.                                        \
+         */                                                                 \
+        phe = &ClientSharedInfo()->aheList[dw];                             \
+        uniq = HMUniqFromHandle(h);                                         \
+        if (   uniq == phe->wUniq                                           \
+            || uniq == 0                                                    \
+            || uniq == HMUNIQBITS                                           \
+            ) {                                                             \
+                                                                            \
+            /*                                                              \
+             * Now make sure the app is passing the right handle            \
+             * type for this api. If the handle is TYPE_FREE, this'll       \
+             * catch it.  Also let Generic requests through.                \
+             */                                                             \
+            if ((phe->bType == bType) || (bType == TYPE_GENERIC)) {         \
+                                                                            \
+                /*                                                          \
+                 * Instead of try/except we use the heap range check        \
+                 * mechanism to verify that the given 'pwnd' belongs to     \
+                 * the default desktop. We also have to do a Win 3.1 like   \
+                 * check to make sure the window is not deleted             \
+                 * See NT bug 12242 Kitchen app.  Also 6479                 \
+                 *                                                          \
+                 * TESTDESKOP returns the handle if the handle is valid     \
+                 * in the current desktop                                   \
+                 */                                                         \
+                PVOID pobj = phe->phead;                                    \
+                                                                            \
+                DESKTOPVALIDATE(pobj);                                      \
+                                                                            \
+                return pobj;                                                \
+            }                                                               \
+        }                                                                   \
+    }                                                                       \
+}
+
+
+/*
+ * The handle validation routines should be optimized for time, not size,
+ * since they get called so often.
+ */
 #ifndef WOW
-#line 245
+#pragma optimize("t", on)
 #endif
-#line 247
 
 #line 262
 #if defined(DEBUG) && !defined(_USERK_) && !defined(WOW)
@@ -82,11 +165,13 @@
 #error Unsupported DEBUG original branch
 #line 274
 #endif
-#line 275
+#line 340
 
-#line 344
+/*
+ * Switch back to default optimization.
+ */
 #ifndef WOW
-#line 345
+#pragma optimize("", on)
 #endif
 #line 347
 

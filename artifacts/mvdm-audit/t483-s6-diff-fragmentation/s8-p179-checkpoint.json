@@ -1,0 +1,41 @@
+{
+  "packet": "T483 S8 P179",
+  "position": 222,
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+  "review_ids": [
+    "T483-R2715",
+    "T483-R2716"
+  ],
+  "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+  "current_sha256": "47c5e5544aa3b1f8c663ebcd4974b5110b94d0dd91915b8c60b2fb70e9499886",
+  "before": {
+    "blocks": 7,
+    "added": 1,
+    "deleted": 170
+  },
+  "after": {
+    "blocks": 3,
+    "added": 1,
+    "deleted": 79
+  },
+  "paired_error_bodies": 6,
+  "line_mismatches": [],
+  "decision": "Restored both private-validation macro definitions and their original pragma scope. No remaining compiled function expands these macros. Isolated restoration of both callers under the production control-view compile command fails: no PHE, cHandleEntries or aheList. The scoped HWND view cannot provide NT4 shared handle entries with uniqueness, type, object and desktop bounds.",
+  "verification": {
+    "negative_control": "Production compile, both validation function bodies restored, exit 2; C2065 PHE and C2039 cHandleEntries/aheList at original line 282.",
+    "objects": "Production control-view-wow and fixture view_wow/default_view identical except COFF timestamp.",
+    "tests": [
+      "original_edit_view_failures=0",
+      "WOW_DIALOG_NAVIGATION_OK",
+      "original-default failures=0"
+    ]
+  },
+  "coverage": {
+    "complete": 222,
+    "remaining": 9,
+    "files": 231,
+    "points": 1906,
+    "lines": 26251,
+    "pending": 1532
+  }
+}
