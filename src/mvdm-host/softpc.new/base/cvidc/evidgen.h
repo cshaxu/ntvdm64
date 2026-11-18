@@ -91,6 +91,8 @@ struct	VideoVector	{
 extern	struct	VideoVector	Video;
 
 #define	getVideolatches()	(*(Video.GetVideolatches))()
+#line 132
+#define	setVideolatches(value)	(*(Video.SetVideolatches))(value)
 #ifndef CPU_40_STYLE
 #line 94
 #define	getVideorplane()	(*(Video.GetVideorplane))()
@@ -131,10 +133,6 @@ extern	struct	VideoVector	Video;
 #define	getVideowrmode()	(*(Video.GetVideowrmode))()
 #define	getVideochain()	(*(Video.GetVideochain))()
 #define	getVideowrstate()	(*(Video.GetVideowrstate))()
-#endif
-#line 132
-#define	setVideolatches(value)	(*(Video.SetVideolatches))(value)
-#ifndef CPU_40_STYLE
 #line 133
 #define	setVideorplane(value)	(*(Video.SetVideorplane))(value)
 #define	setVideowplane(value)	(*(Video.SetVideowplane))(value)

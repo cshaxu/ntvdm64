@@ -1,0 +1,280 @@
+{
+  "packet": "T483 S8 P23",
+  "files": [
+    {
+      "position": 52,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid004.c",
+      "sha256": "b239bbed52f17d86e5a21a86f1cdac71c98363f4495a8c699efa46d421d17da2",
+      "original_sha256": "92f4f394a1325293279cdaf520dc493b25be739a5c91c35078735fabdea9fbfa",
+      "blocks": 3,
+      "added": 3,
+      "deleted": 3,
+      "changes": [
+        {
+          "id": "T483-R0605",
+          "first": 3746,
+          "last": 3746,
+          "evidence": "r0605-r0607-generic-rotation-review.json",
+          "reason": "Generic VGA write reads high byte of scalar rotation count on x86,losing nonzero rotate."
+        },
+        {
+          "id": "T483-R0606",
+          "first": 4305,
+          "last": 4305,
+          "evidence": "r0605-r0607-generic-rotation-review.json",
+          "reason": "Generic VGA write reads high byte of scalar rotation count on x86,losing nonzero rotate."
+        },
+        {
+          "id": "T483-R0607",
+          "first": 4315,
+          "last": 4315,
+          "evidence": "r0605-r0607-generic-rotation-review.json",
+          "reason": "Generic VGA write reads high byte of scalar rotation count on x86,losing nonzero rotate."
+        }
+      ]
+    },
+    {
+      "position": 53,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+      "sha256": "636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc",
+      "original_sha256": "e13a03dc8accb3746873c1482d19a168eaeb48641e5a509c0c20bba8ed5e9b3f",
+      "blocks": 4,
+      "added": 6,
+      "deleted": 6,
+      "changes": [
+        {
+          "id": "T483-R0608",
+          "first": 4062,
+          "last": 4062,
+          "evidence": "r0608-r0611-chain2-write-review.json",
+          "reason": "Odd-address store must map4*(a&~1)+(a&1);original shift2 writes compact alias rather than shared-plane position. Direct actual S_2624 16address control restores8wrong odd stores."
+        },
+        {
+          "id": "T483-R0609",
+          "first": 4070,
+          "last": 4071,
+          "evidence": "r0608-r0611-chain2-write-review.json",
+          "reason": "Nested S_2625 is called by fill/move activations. Original internal wrapper enters crules with CopyLocalIUH=0, frees child then restores0 instead of parent; caller continuation accesses lost locals. Actual fixture restoration raises c0000005."
+        },
+        {
+          "id": "T483-R0610",
+          "first": 4087,
+          "last": 4087,
+          "evidence": "r0608-r0611-chain2-write-review.json",
+          "reason": "Even-address store requires same shared-plane spacing;original shift2 restores8wrong even stores in16address control."
+        },
+        {
+          "id": "T483-R0611",
+          "first": 4421,
+          "last": 4422,
+          "evidence": "r0608-r0611-chain2-write-review.json",
+          "reason": "S_2628 allocates20bytes then calls S_2629. Original internal cleanup wrapper has CopyLocalIUH=0, frees S_2629 then sets LocalIUH=0;S_2628 cleanup skips freeing its own allocated block. Diagnostic allocator accounting confirms one outstanding allocation per call."
+        }
+      ]
+    },
+    {
+      "position": 54,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+      "sha256": "178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2",
+      "original_sha256": "110e8fd11ce828d7a3dfc7c51adcefb07faca83219a6a3d742d7f63bdc810706",
+      "blocks": 11,
+      "added": 18,
+      "deleted": 18,
+      "changes": [
+        {
+          "id": "T483-R0612",
+          "first": 883,
+          "last": 884,
+          "evidence": "r0612-r0613-word-continuation-review.json",
+          "reason": "Preserve original nested generated activation lifetime."
+        },
+        {
+          "id": "T483-R0613",
+          "first": 1234,
+          "last": 1235,
+          "evidence": "r0612-r0613-word-continuation-review.json",
+          "reason": "Preserve original nested generated activation lifetime."
+        },
+        {
+          "id": "T483-R0614",
+          "first": 1809,
+          "last": 1809,
+          "evidence": "r0614-r0616-mode1-byte-review.json",
+          "reason": "Odd-address plane store needs shared CHAIN2/unchained address correspondence;original shift2 writes compact alias instead of4*(a&~1)+(a&1)."
+        },
+        {
+          "id": "T483-R0615",
+          "first": 1817,
+          "last": 1818,
+          "evidence": "r0614-r0616-mode1-byte-review.json",
+          "reason": "Original L21_35if_d wrapper enters crules without ENTER_SECTION;CopyLocalIUH=0. Cleanup1850-1852 loses parent S_2642 frame,so wrapper skips freeing it."
+        },
+        {
+          "id": "T483-R0616",
+          "first": 1834,
+          "last": 1834,
+          "evidence": "r0614-r0616-mode1-byte-review.json",
+          "reason": "Even-address store must obey same cross-mode plane correspondence;original shift2 selects compact aliases."
+        },
+        {
+          "id": "T483-R0617",
+          "first": 2168,
+          "last": 2169,
+          "evidence": "r0617-r0622-final-sevid017-review.json",
+          "reason": "S_2646 -> S_2647 -> L21_43if_d: original internal wrapper reenters crules without ENTER_SECTION;CopyLocalIUH=0. Child cleanup therefore loses parent frame and wrapper cannot free it."
+        },
+        {
+          "id": "T483-R0618",
+          "first": 2357,
+          "last": 2358,
+          "evidence": "r0617-r0622-final-sevid017-review.json",
+          "reason": "S_2648 -> S_2649 -> L21_53if_d: original internal wrapper reenters crules without ENTER_SECTION;CopyLocalIUH=0. Child cleanup therefore loses parent frame and wrapper cannot free it."
+        },
+        {
+          "id": "T483-R0619",
+          "first": 2708,
+          "last": 2709,
+          "evidence": "r0617-r0622-final-sevid017-review.json",
+          "reason": "S_2652 -> S_2653 -> L21_58if_d: original internal wrapper reenters crules without ENTER_SECTION;CopyLocalIUH=0. Child cleanup therefore loses parent frame and wrapper cannot free it."
+        },
+        {
+          "id": "T483-R0620",
+          "first": 3311,
+          "last": 3311,
+          "evidence": "r0617-r0622-final-sevid017-review.json",
+          "reason": "Odd mode2 byte store: original shift2 aliases compact addresses;shared-plane transition requires4*(a&~1)+(a&1)."
+        },
+        {
+          "id": "T483-R0621",
+          "first": 3319,
+          "last": 3320,
+          "evidence": "r0617-r0622-final-sevid017-review.json",
+          "reason": "S_2660 -> S_2661 -> L21_69if_d: original cleanup wrapper restores0 instead of saved parent frame,losing one wrapper allocation per odd address."
+        },
+        {
+          "id": "T483-R0622",
+          "first": 3336,
+          "last": 3336,
+          "evidence": "r0617-r0622-final-sevid017-review.json",
+          "reason": "Even mode2 byte store: original shift2 aliases compact addresses;shared-plane transition requires4*(a&~1)+(a&1)."
+        }
+      ]
+    },
+    {
+      "position": 55,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+      "sha256": "571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471",
+      "original_sha256": "df9f565cbac31789e833c9fb6a26c5b8a9ee12ce3cb2f366f61037deca6415da",
+      "blocks": 9,
+      "added": 16,
+      "deleted": 16,
+      "changes": [
+        {
+          "id": "T483-R0623",
+          "first": 1172,
+          "last": 1173,
+          "evidence": "r0623-r0625-mode2-continuation-review.json",
+          "reason": "S_2664->S_2665->L21_77if_d caller lifetime"
+        },
+        {
+          "id": "T483-R0624",
+          "first": 1361,
+          "last": 1362,
+          "evidence": "r0623-r0625-mode2-continuation-review.json",
+          "reason": "S_2666->S_2667->L21_87if_d caller lifetime"
+        },
+        {
+          "id": "T483-R0625",
+          "first": 1712,
+          "last": 1713,
+          "evidence": "r0623-r0625-mode2-continuation-review.json",
+          "reason": "S_2670->S_2671->L21_92if_d caller lifetime"
+        },
+        {
+          "id": "T483-R0626",
+          "first": 2300,
+          "last": 2300,
+          "evidence": "r0626-r0631-final-sevid018-review.json",
+          "reason": "Odd mode3 byte store original shift2 writes compact aliases instead of shared-plane4*(a&~1)+(a&1)."
+        },
+        {
+          "id": "T483-R0627",
+          "first": 2308,
+          "last": 2309,
+          "evidence": "r0626-r0631-final-sevid018-review.json",
+          "reason": "S_2678->S_2679->L21_103if_d loses caller saved allocation on odd addresses."
+        },
+        {
+          "id": "T483-R0628",
+          "first": 2325,
+          "last": 2325,
+          "evidence": "r0626-r0631-final-sevid018-review.json",
+          "reason": "Even mode3 byte store original shift2 writes compact aliases instead of shared-plane4*(a&~1)+(a&1)."
+        },
+        {
+          "id": "T483-R0629",
+          "first": 2659,
+          "last": 2660,
+          "evidence": "r0626-r0631-final-sevid018-review.json",
+          "reason": "S_2682->S_2683->L21_111if_d: original internal wrapper enters crules without ENTER_SECTION;CopyLocalIUH starts0 and cleanup loses parent frame. Outer wrapper skips free."
+        },
+        {
+          "id": "T483-R0630",
+          "first": 2848,
+          "last": 2849,
+          "evidence": "r0626-r0631-final-sevid018-review.json",
+          "reason": "S_2684->S_2685->L21_121if_d: original internal wrapper enters crules without ENTER_SECTION;CopyLocalIUH starts0 and cleanup loses parent frame. Outer wrapper skips free."
+        },
+        {
+          "id": "T483-R0631",
+          "first": 3199,
+          "last": 3200,
+          "evidence": "r0626-r0631-final-sevid018-review.json",
+          "reason": "S_2688->S_2689->L21_126if_d: original internal wrapper enters crules without ENTER_SECTION;CopyLocalIUH starts0 and cleanup loses parent frame. Outer wrapper skips free."
+        }
+      ]
+    },
+    {
+      "position": 56,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+      "sha256": "c763b216c1caef24611efb43faa133423d47a193bf700a870e99ec0c2c125f6c",
+      "original_sha256": "4c3a5cd67165db676418868a2895d266ef61bfa9fed7e4389d0fbbf6b10b1c9c",
+      "blocks": 3,
+      "added": 3,
+      "deleted": 3,
+      "changes": [
+        {
+          "id": "T483-R0632",
+          "first": 1299,
+          "last": 1299,
+          "evidence": "r0632-chain2-copy-byte-review.json",
+          "reason": "CHAIN2 copies must preserve shared-plane addresses across unchained transitions."
+        },
+        {
+          "id": "T483-R0648",
+          "first": 1718,
+          "last": 1718,
+          "evidence": "r0648-r0650-copy-word-review.json",
+          "reason": "Shared-plane word write address correspondence"
+        },
+        {
+          "id": "T483-R0650",
+          "first": 1736,
+          "last": 1736,
+          "evidence": "r0648-r0650-copy-word-review.json",
+          "reason": "Shared-plane word write address correspondence"
+        }
+      ]
+    }
+  ],
+  "scope": "Source-only review. Each fixed-order source hash checked against the frozen worklist; current and original ranges coincide. All 30 live zero-context blocks mapped to their pending rows and corresponding prior control records. No newly run runtime tests or package publication in P23.",
+  "known_boundary": "Existing odd-destination VRAM copy issue in sevid019 remains separate (r0642-r0647-vram-copy-review.json).",
+  "coverage": {
+    "complete": 56,
+    "remaining": 175,
+    "files": 231,
+    "points": 1952,
+    "lines": 27107,
+    "pending": 1549
+  }
+}

@@ -6,7 +6,7 @@
 
 The owner closed S7 and admitted the final sequential audit in S8.
 The first three sequential file reviews carry forward from S7 P47 and P48.
-S8 P21 completed review through C-VID `ev_glue.c`. Next is position 49, `evidgen.h`.
+S8 P25 completed review through `timeval.h`. Next is position 62, `keyba.c`.
 
 ## Active Packet
 
@@ -34,8 +34,8 @@ S8 P21 completed review through C-VID `ev_glue.c`. Next is position 49, `evidgen
 S7 ends with 1,974 non-error points and 27,210 changed lines across 231
 mirrors. It removed 73 points and 1,764 lines. The pending backlog has 1,566
 rows. Those rows are decision records and can group multiple original review
-IDs. After S8 P21, 48 of 231 positions are covered and 183 remain queued.
-S8 has removed 21 points and 103 diff lines, leaving 1,953 points and 27,107 lines. The live pending backlog has 1,549 rows.
+IDs. After S8 P25, 61 of 231 positions are covered and 170 remain queued.
+S8 has removed 23 points and 104 diff lines, leaving 1,951 points and 27,106 lines. The live pending backlog has 1,549 rows.
 [P1 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p1-checkpoint.json).
 [P2 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p2-checkpoint.json).
 [P3 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p3-checkpoint.json).
@@ -57,6 +57,10 @@ S8 has removed 21 points and 103 diff lines, leaving 1,953 points and 27,107 lin
 [P19 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p19-checkpoint.json).
 [P20 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p20-checkpoint.json).
 [P21 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p21-checkpoint.json).
+[P22 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p22-checkpoint.json).
+[P23 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p23-checkpoint.json).
+[P24 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p24-checkpoint.json).
+[P25 receipt](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-p25-checkpoint.json).
 
 Follow the [frozen sequential order](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s8-sequential-order.csv).
 The list follows first occurrence in the pending register, then the live

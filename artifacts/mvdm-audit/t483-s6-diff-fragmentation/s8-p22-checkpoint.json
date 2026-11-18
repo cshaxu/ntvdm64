@@ -1,0 +1,97 @@
+{
+  "packet": "T483 S8 P22",
+  "files": [
+    {
+      "position": 49,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+      "sha256": "7767392b882d1794d55422ca13de1ee8e34f501044c34f0c0eb1d48a67428567",
+      "review": "R0496-R0499",
+      "after": [
+        3,
+        3,
+        1
+      ],
+      "before": [
+        4,
+        4,
+        0
+      ],
+      "decision": "One shared CPU profile guard, unchanged 38 accessor pairs and unconditional latch getter/setter. All original macro definition line numbers verified. GCC macro tables and expanded header verified for both selector states."
+    },
+    {
+      "position": 50,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+      "sha256": "208ca0085de613aeb8beb33f6e20b7e006df89b93a9462b6ab25929b80f15278",
+      "review": "see individual 64-point ledger",
+      "after": [
+        64,
+        66,
+        66
+      ],
+      "before": [
+        64,
+        66,
+        66
+      ],
+      "decision": "Verified both source hashes and every current diff span and evidence reference against sevid000-whole-file-review.json. Preserve shared-plane addressing, scratch cleanup and mode1 fields. R0562/R0563 high-byte gap remains pending."
+    },
+    {
+      "position": 51,
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+      "sha256": "2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5",
+      "review": "see individual 25-point ledger",
+      "after": [
+        25,
+        25,
+        25
+      ],
+      "before": [
+        25,
+        25,
+        25
+      ],
+      "decision": "Verified both source hashes and every current diff span and evidence reference against sevid001-whole-file-review.json. Backward CHAIN2 stride alternates 1 and 7. Original UNCHAINED backward mode1 failures remain a recorded boundary."
+    }
+  ],
+  "metrics_order": [
+    "blocks",
+    "added",
+    "deleted"
+  ],
+  "verification": {
+    "cached": [
+      "x86",
+      "x64"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "5b42dc1f-2aa1-4622-96c8-762db235076c",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "manifest_sha256": "33a5d2588bfc34208e297d58469e24d2d64641266a170744c13a4165dff455a7",
+    "preprocessor": {
+      "-DCPU_40_STYLE": {
+        "macro_sha256": "064dbf264ae4e627081dd45c9aa8121c61d9713d05f45a3cf72823bff12cbe6e",
+        "expanded_sha256": "60258d9c7c96e223e79e5b194007d328862caa95cc877501ae877e41cd1cb777"
+      },
+      "-UCPU_40_STYLE": {
+        "macro_sha256": "425822d1773c4902871906a54756583926d22ab4f72ba5e3bf3eaa34ba04aad1",
+        "expanded_sha256": "60258d9c7c96e223e79e5b194007d328862caa95cc877501ae877e41cd1cb777"
+      }
+    },
+    "scope": "Header macro placement only; cached build and publication, historical generated-C controls reused."
+  },
+  "coverage": {
+    "complete": 51,
+    "remaining": 180,
+    "files": 231,
+    "points": 1952,
+    "lines": 27107,
+    "pending": 1549
+  }
+}

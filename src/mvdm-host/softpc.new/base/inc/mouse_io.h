@@ -935,8 +935,6 @@ typedef struct
 			windowed Enhanced Mode DOS box. This overrides
 			the cursor_flag variable.
  */
-typedef enum { MOUSE_SAVED_TEXT, MOUSE_SAVED_EGA, MOUSE_SAVED_VGA, MOUSE_SAVED_CGA } MOUSE_SAVED_KIND;
-#line 949
 typedef struct
    {
    MOUSE_CONTEXT     MM_IN_mouse_context;
@@ -1007,7 +1005,7 @@ typedef struct
 #line 1013
    boolean           MM_IN_cursor_EM_disabled;
    MOUSE_BYTE_ADDRESS MM_IN_saved_text_address;
-   MOUSE_SAVED_KIND   MM_IN_saved_cursor_kind;
+   enum { MOUSE_SAVED_TEXT, MOUSE_SAVED_EGA, MOUSE_SAVED_VGA, MOUSE_SAVED_CGA } MM_IN_saved_cursor_kind;
 #line 1014
    } MM_INSTANCE_DATA, **MM_INSTANCE_DATA_HANDLE;
 

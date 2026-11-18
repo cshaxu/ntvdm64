@@ -1,0 +1,51 @@
+{
+  "packet": "T483 S8 P24",
+  "files": [
+    {
+      "position": 57,
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "sha256": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe",
+      "metrics": [
+        1,
+        190,
+        0
+      ],
+      "decision": "Current CCPU object has two UNDEF LIM writes, and emm_mngr defines both. The alternate CCPU arm contains 189 original source lines excluding line directives. Prior original gate emits neither definition."
+    },
+    {
+      "position": 58,
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "sha256": "10e0a5f9639787bdbc7f7937c42b51d09056f1b6fabb13a895b90a3814365e89",
+      "metrics": [
+        1,
+        1,
+        0
+      ],
+      "decision": "Text offsets 4 and 5 map to backing addresses 8 and 9. Confirmed shared users in gfx_updt.c and nt_cga.c; original get_screen_ptr also serves other layouts."
+    },
+    {
+      "position": 59,
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "sha256": "688f70b6522198847952c591f2c9a89e7222251a5468eb64ae425721edd9a34a",
+      "metrics": [
+        1,
+        0,
+        2
+      ],
+      "decision": "Fresh MSVC c_main controls: restoring mask alone gives C4005 and exits 0; it conflicts with the CCPU bit-zero mask. Restoring both macros gives duplicate case 0 C2196 and exits 2. Runtime failure is not claimed for mask alone."
+    }
+  ],
+  "metrics_order": [
+    "blocks",
+    "added",
+    "deleted"
+  ],
+  "coverage": {
+    "complete": 59,
+    "remaining": 172,
+    "files": 231,
+    "points": 1952,
+    "lines": 27107,
+    "pending": 1549
+  }
+}

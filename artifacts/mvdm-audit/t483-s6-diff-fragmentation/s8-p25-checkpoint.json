@@ -1,0 +1,103 @@
+{
+  "packet": "T483 S8 P25",
+  "files": [
+    {
+      "position": 60,
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "sha256": "c9bf9d17ddf1cadd00b22f505c066ba241d1e1f9ea3bd0bb79b223aee6552294",
+      "review": "R0711-R0713",
+      "after": [
+        2,
+        4,
+        0
+      ],
+      "before": [
+        3,
+        5,
+        0
+      ],
+      "decision": "Inline the sole-use saved representation enum at its member declaration. R0711 is consolidated into R0712: four values remain and owner decision is still pending. Per-instance saved address and accessor macros remain."
+    },
+    {
+      "position": 61,
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+      "review": "R0716",
+      "after": [
+        1,
+        1,
+        1
+      ],
+      "before": [
+        1,
+        1,
+        1
+      ],
+      "decision": "Fresh MSVC production flags compile nt_unix.c with current declaration, exit 0; original declaration alone produces C2371 at logical line 348, exit 2. Keep the one-line long signature matching the original definition."
+    }
+  ],
+  "metrics_order": [
+    "blocks",
+    "added",
+    "deleted"
+  ],
+  "verification": {
+    "cached": [
+      "x86",
+      "x64"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "7e171de6-09a6-4c94-8442-46ed1e661044",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "manifest_sha256": "3e6a585568705d5251d018bd201610dc899807ead08b5b37cf0447bac096ac1e",
+    "layout_controls": [
+      {
+        "layout": [
+          1452,
+          1444,
+          1448,
+          4,
+          0,
+          1,
+          2,
+          3
+        ],
+        "normalized_sha256": "2d437742507a0e93991be7ba27b2ea68946e249f2ace0d4902fb8b9b5289d12a"
+      },
+      {
+        "layout": [
+          1452,
+          1444,
+          1448,
+          4,
+          0,
+          1,
+          2,
+          3
+        ],
+        "normalized_sha256": "2d437742507a0e93991be7ba27b2ea68946e249f2ace0d4902fb8b9b5289d12a"
+      }
+    ],
+    "focused": {
+      "scope": "production cursor dispatch; VGA/memory/graphics mocked, no integrated guest assertion",
+      "exitCode": 0,
+      "stdout": "PASS original software text cursor: masks, saved-position restore, page offset, conditional exclusion, off-screen exclusion; memory/geometry mocked\r\nPASS saved text owner: graphics transition, page transition, single consumption; graphics dispatch retained\r\n",
+      "stderr": ""
+    }
+  },
+  "coverage": {
+    "complete": 61,
+    "remaining": 170,
+    "files": 231,
+    "points": 1951,
+    "lines": 27106,
+    "pending": 1549
+  }
+}
