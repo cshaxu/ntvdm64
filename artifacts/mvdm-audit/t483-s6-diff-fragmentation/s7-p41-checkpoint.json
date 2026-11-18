@@ -1,0 +1,327 @@
+{
+  "packet": "M0 T483 S7 P41",
+  "prior_checkpoint": "eb02cc93a",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/non-mvdm/base/win32/server/basesrv.h": {
+      "before": {
+        "blocks": 2,
+        "added": 3,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 1,
+        "deleted": 1
+      },
+      "removed_local_frame_ranges": [
+        [
+          28,
+          28,
+          0
+        ],
+        [
+          30,
+          30,
+          0
+        ]
+      ],
+      "original_error_pairs": 0,
+      "prior_sha256": "dd05fe7525c25cec41b3ac0d613547440e1ac8d46c2d004b60fedf1444da5d5a",
+      "current_sha256": "f117b69ebce871cb8b850b1bca8588c8d592e706abcde1d23e7f7319b5c59ee4",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31"
+    }
+  },
+  "decisions": {
+    "basesrv.h": "Remove two local directives around base_server.h and the active builder's obsolete define. Keep the mandatory binding include and the separately evidenced DFS omission."
+  },
+  "negative_controls": {
+    "current": {
+      "exit": 0,
+      "diagnostics": []
+    },
+    "without-selector": {
+      "exit": 2,
+      "diagnostics": [
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(108): error C2061: syntax error: identifier 'PORT_MESSAGE'",
+        "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\ntcsrmsg.h(127): error C2059: syntax error: '}'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2061: syntax error: identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(158): error C2059: syntax error: ','",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(160): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(165): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(165): error C2061: syntax error: identifier 'ReplyMsg'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(165): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(166): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrsrv.h(171): error C2146: syntax error: missing ')' before identifier 'ReplyMsg'"
+      ]
+    },
+    "existing-binding-forced": {
+      "exit": 0,
+      "diagnostics": []
+    }
+  },
+  "census": {
+    "non_error_points": 1977,
+    "non_error_lines": 27230,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 70,
+      "lines": 1744
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/dispatch.obj",
+          "selected_lines": 46950,
+          "sha256": "0b72191da77361f4d433736ccb135f8e6f193352598d268bdf49a8256979c540"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/frontend-registry.obj",
+          "selected_lines": 50506,
+          "sha256": "8fb4e7635126d0ad8c522abcc4ffd25ae78cad914ea0f150747023073d66fcfa"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/native-commands.obj",
+          "selected_lines": 49350,
+          "sha256": "edeb39f3dafc6a7ab0cd95c8e436617e90805a815b26c39c37c2fef4e8b5ca3c"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/service-core.obj",
+          "selected_lines": 48949,
+          "sha256": "22240ba51febfa60b278672d8a8bdca096e625eee671e8404f239a86568c7204"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/service-lifecycle.obj",
+          "selected_lines": 49154,
+          "sha256": "366b14f2a85ed6eb546691490cb03a9856a517ad5c1416aba59dc24b19de9fcd"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/service-management.obj",
+          "selected_lines": 49377,
+          "sha256": "d71b33975dad2227b9c2d9d3e67175287c9fb164a529a97e67a2b66f89b2c23e"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/service.obj",
+          "selected_lines": 49419,
+          "sha256": "5c00f7c4b8383bd905f364164237ef89b40ea243787dccb084605dc66e5648ab"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/task-observation.obj",
+          "selected_lines": 48976,
+          "sha256": "9df5a9223a1d54a34ff378de23007f22c7efcf9424746197870f7e40a7ec5c15"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-bindings/worker-registry.obj",
+          "selected_lines": 49265,
+          "sha256": "970796621adb1f31315844472f8018bd6ceff4936c5e64846bd3ad803d6a4be1"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/opennt-base-server/srvvdm.obj",
+          "selected_lines": 48902,
+          "sha256": "190447b318049cbf42aebf1916de9e007bab6c3467daef2c8772adbebe37a191"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/tests/base_service_fixture.obj",
+          "selected_lines": 49595,
+          "sha256": "dd2815cbd6c9ebf9ef456d3d3dbb2aed8e96bb79cf0ff89323f58a974c2b0dbc"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/tests/base_service_reservation_test.obj",
+          "selected_lines": 51773,
+          "sha256": "938a93512ef2f89ee10c446bd5acbce5ed5998e370c43ccfdca939826be44041"
+        },
+        {
+          "profile": "worker",
+          "target": "obj/tests/native_service_layout.obj",
+          "selected_lines": 46891,
+          "sha256": "2a243cd5ead62532f0e907190cbf302979bd3a896f7a6292ce840a116e53f88f"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/dispatch.obj",
+          "selected_lines": 46950,
+          "sha256": "0b72191da77361f4d433736ccb135f8e6f193352598d268bdf49a8256979c540"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/frontend-registry.obj",
+          "selected_lines": 50506,
+          "sha256": "8fb4e7635126d0ad8c522abcc4ffd25ae78cad914ea0f150747023073d66fcfa"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/native-commands.obj",
+          "selected_lines": 49350,
+          "sha256": "edeb39f3dafc6a7ab0cd95c8e436617e90805a815b26c39c37c2fef4e8b5ca3c"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/service-core.obj",
+          "selected_lines": 48949,
+          "sha256": "22240ba51febfa60b278672d8a8bdca096e625eee671e8404f239a86568c7204"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/service-lifecycle.obj",
+          "selected_lines": 49154,
+          "sha256": "366b14f2a85ed6eb546691490cb03a9856a517ad5c1416aba59dc24b19de9fcd"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/service-management.obj",
+          "selected_lines": 49377,
+          "sha256": "d71b33975dad2227b9c2d9d3e67175287c9fb164a529a97e67a2b66f89b2c23e"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/service.obj",
+          "selected_lines": 49419,
+          "sha256": "5c00f7c4b8383bd905f364164237ef89b40ea243787dccb084605dc66e5648ab"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/task-observation.obj",
+          "selected_lines": 48976,
+          "sha256": "9df5a9223a1d54a34ff378de23007f22c7efcf9424746197870f7e40a7ec5c15"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-bindings/worker-registry.obj",
+          "selected_lines": 49265,
+          "sha256": "970796621adb1f31315844472f8018bd6ceff4936c5e64846bd3ad803d6a4be1"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/opennt-base-server/srvvdm.obj",
+          "selected_lines": 48902,
+          "sha256": "190447b318049cbf42aebf1916de9e007bab6c3467daef2c8772adbebe37a191"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/tests/base_service_fixture.obj",
+          "selected_lines": 49595,
+          "sha256": "dd2815cbd6c9ebf9ef456d3d3dbb2aed8e96bb79cf0ff89323f58a974c2b0dbc"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/tests/base_service_reservation_test.obj",
+          "selected_lines": 51773,
+          "sha256": "938a93512ef2f89ee10c446bd5acbce5ed5998e370c43ccfdca939826be44041"
+        },
+        {
+          "profile": "worker-reference-x86",
+          "target": "obj/tests/native_service_layout.obj",
+          "selected_lines": 46891,
+          "sha256": "2a243cd5ead62532f0e907190cbf302979bd3a896f7a6292ce840a116e53f88f"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/dispatch.obj",
+          "selected_lines": 47606,
+          "sha256": "318fe2cf87cb30a4770a09434a7697d4d64aa41b3ddda2ad2dfcf48e11bad1f4"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/frontend-registry.obj",
+          "selected_lines": 51162,
+          "sha256": "685b3a1f2815c7cc83e9f881f7ad420e448f8c15f5c95ddc708f6093eeb4ae24"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/native-commands.obj",
+          "selected_lines": 50006,
+          "sha256": "817633c5305a1b1d1785e0ec42a0df72f502dad36e20adbca93791e26f82ea12"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/service-core.obj",
+          "selected_lines": 49605,
+          "sha256": "59d57c23a79982de36bd35b5904b3b6ac41583bb5c4d0d3aac58b0cee98469c7"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/service-lifecycle.obj",
+          "selected_lines": 49810,
+          "sha256": "b9bc3aaeef263340f8ff8503138374bbcefdf30d1f72690da223658a2850032e"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/service-management.obj",
+          "selected_lines": 50033,
+          "sha256": "117d2cac1c642e7c54027c7aac19ce2f4b795bec7d449acfca256646a17710a0"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/service.obj",
+          "selected_lines": 50075,
+          "sha256": "857211fc4d340e82cf511649d3b3049e6afe5a6eb94c7dd3af7b30e2a6afdb13"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/task-observation.obj",
+          "selected_lines": 49632,
+          "sha256": "fd1e4255b62e421e60ad2ff0189ec7b862d7443a243a377170b52cf5b65a8f98"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-bindings/worker-registry.obj",
+          "selected_lines": 49921,
+          "sha256": "98118538d5bb5ad7e63d5e539213b6462ba284b55578bc9a03431717534e89e4"
+        },
+        {
+          "profile": "service",
+          "target": "obj/opennt-base-server/srvvdm.obj",
+          "selected_lines": 49558,
+          "sha256": "24351f41347ba21df15cc5fa4829e120c58e907371e6b6ea2ee221ba555b7c68"
+        },
+        {
+          "profile": "service",
+          "target": "obj/tests/base_service_fixture.obj",
+          "selected_lines": 50252,
+          "sha256": "418a8ac5005c5e9cd7c6a5f6e67a0c62d20aafd08b773a41fa27bddac5a1a600"
+        },
+        {
+          "profile": "service",
+          "target": "obj/tests/base_service_reservation_test.obj",
+          "selected_lines": 52429,
+          "sha256": "f57f77d790fa91bb967e181b7eea3a49ca5985c98257d19180dbbef69f5cf5a9"
+        },
+        {
+          "profile": "service",
+          "target": "obj/tests/native_service_layout.obj",
+          "selected_lines": 47547,
+          "sha256": "6c32e27624e2f28921de6fcac6b054a530f7ad10ac9f99571cb54d894a9adc9d"
+        }
+      ]
+    },
+    "targeted": {
+      "cached_graph_generation": "pass x86 and x64",
+      "native_service_layout": "pass x86 and x64",
+      "service_reservation_fixture": "pass x86 and x64"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Thirty-nine actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

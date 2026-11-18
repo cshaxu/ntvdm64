@@ -1887,6 +1887,8 @@ T412 S2 registers OPENNT-HOST-028 in `base/win32/server/basesrv.h`: the
 declaration binding and omits the unrelated DFS device header. The original
 header is otherwise retained and srvvdm.c remains byte-identical. This removes
 the generated empty DFS header from the selected original-owner library test.
+T483 S7 P41 drops the local selector and keeps the single declaration include.
+Native x64 service consumers need it for the original CSR declarations.
 OPENNT-HOST-029 restores original RtlConvertLongToLuid in the selected
 `public/sdk/inc/ntrtl.h` subset, including its __inline storage shape; only
 trailing blank-line whitespace is normalized. Origin is the same pinned

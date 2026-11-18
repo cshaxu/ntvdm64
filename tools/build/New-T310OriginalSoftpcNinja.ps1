@@ -1279,7 +1279,7 @@ if ($Architecture -eq 'x86') {
     $baseOwnerFlags = $baseFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/inc')) + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
-    $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /FI "' +
+    $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /FI "' +
         $baseBindingInclude + '/base_server.h"'
     # Project-owned Base/RPC sources consume the public adapter contracts, not
     # the SoftPC execution profile. Keep historical flags on original units.

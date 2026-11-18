@@ -25,9 +25,7 @@ Revision History:
 
 #include <base.h>
 
-#if defined(OPENNT_BASE_VDM_SERVER)
 #include <base_server.h>
-#endif
 #line 28
 //
 // Include server definitions for CSR
