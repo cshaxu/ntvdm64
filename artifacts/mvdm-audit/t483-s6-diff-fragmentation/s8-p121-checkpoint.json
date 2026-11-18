@@ -1,0 +1,39 @@
+{
+  "packet": "T483 S8 P121",
+  "position": 164,
+  "path": "src/non-mvdm/base/win32/server/basesrv.h",
+  "review_ids": [
+    "T483-R1978",
+    "T483-R1979"
+  ],
+  "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+  "current_sha256": "f117b69ebce871cb8b850b1bca8588c8d592e706abcde1d23e7f7319b5c59ee4",
+  "before": {
+    "blocks": 2,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 2,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 164,
+    "remaining": 67,
+    "files": 231,
+    "points": 1908,
+    "lines": 26639,
+    "pending": 1534
+  },
+  "decision": "R1978 original ntdddfs.h absent from selected tree and installed SDK; restored include fails C1083 in P180 control. R1979 actual base_dispatch and service_internal consumers include basesrv.h. The private binding introduces ntlpcapi before ntcsrsrv and binds CSR_SERVER_QUERYCLIENTTHREAD to the authenticated dispatch context. Removal control fails at PORT_MESSAGE. Keep both residual include decisions pending. No new header import or per-caller shim.",
+  "verification": {
+    "basis": "Rechecked live headers, direct inclusion sites, installed SDK and frozen negative compile controls. Fresh metric and diagnostic coordinate check. No production edit."
+  }
+}
