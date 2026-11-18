@@ -1,0 +1,114 @@
+{
+  "packet": "T483 S8 P74",
+  "position": 118,
+  "path": "src/mvdm-host/wow32/wcommdlg.c",
+  "review_ids": [
+    "T483-R1372",
+    "T483-R1373",
+    "T483-R1374",
+    "T483-R1375",
+    "T483-R1376",
+    "T483-R1377",
+    "T483-R1378",
+    "T483-R1380",
+    "T483-R1381",
+    "T483-R1382",
+    "T483-R1383"
+  ],
+  "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+  "current_sha256": "6538eecdce146500e76f7b7a39dc48a6fd0d916e388ee8c9404d270b8120b322",
+  "before": {
+    "blocks": 11,
+    "added": 16,
+    "deleted": 6
+  },
+  "after": {
+    "blocks": 10,
+    "added": 15,
+    "deleted": 6
+  },
+  "source_changed": true,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        233,
+        36,
+        "#else"
+      ],
+      [
+        654,
+        657,
+        "    // If the app has GP Faulted we don't want to pass it any more input"
+      ],
+      [
+        655,
+        658,
+        "    // This should be removed when USER32 does clean up on task death so"
+      ],
+      [
+        656,
+        659,
+        "    // it doesn't call us - mattfe june 24 92"
+      ],
+      [
+        659,
+        662,
+        "    // Uncomment to receive messages on entrance"
+      ],
+      [
+        660,
+        663,
+        "    // LOGDEBUG(10, (\"CommonDialogProc In: %lX %X %X %lX (%lX)\\n\", (DWORD)hdlg, uMsg, uParam, lParam"
+      ],
+      [
+        685,
+        674,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 118,
+    "remaining": 113,
+    "files": 231,
+    "points": 1929,
+    "lines": 27021,
+    "pending": 1543
+  },
+  "reviewed_points": {
+    "T483-R1372": "Lifetime declarations",
+    "T483-R1373": "Capture SHAREVIOLATION buffer",
+    "T483-R1374": "Consume SHAREVIOLATION buffer",
+    "T483-R1375": "Dialog native entrance",
+    "T483-R1376": "Print-setup native entrance",
+    "T483-R1377": "Initialize cleanup progress",
+    "T483-R1378": "Scope before construction",
+    "T483-R1380": "Synchronous converter release policy",
+    "T483-R1381": "Completed output conversion",
+    "T483-R1382": "Cleanup then stack restore",
+    "T483-R1383": "Modeless resource destroy entrance"
+  },
+  "decisions": {
+    "share violation": "Paired heap capture and consume are needed when guest string construction or callback unwinds. Ordinary free alone leaves a live cleanup key.",
+    "dialog procedures": "Original procedures remain implementation bodies behind native callback entry and teardown admission. FindReplace WM_DESTROY owns modeless template and host resource release.",
+    "synchronous initialization": "Set fFree in the designated initializer. It remains TRUE for every selected converter; all other members start at zero. In the early no-converter path unwind32 sees zero message, conversion and owned-key fields, and never reads fFree. Original WM32DDEAck uses fFree to release an EXECUTE pair. The flag requirement is source-contract evidence.",
+    "stack cleanup": "Preserve completion after original callback and output conversion. stack_leave already checks !scope->completed; pass only the abnormal flag. Nested finally still releases the stack if unwinding the message raises."
+  },
+  "verification": {
+    "build": "Cached full x86/x64 passed.",
+    "publish": "11 images verified at each destination, c26d0694-f336-4da1-8364-a19ae41f6de3",
+    "line_check": "1218 shared MSVC-preprocessed lines, zero mismatches. Both excluded branches retained.",
+    "common_dialog": "COMMON_DIALOG_BOUNDARIES errors=0 leaves=7 scenarios=42 guest_proof=0",
+    "native_reference": "NATIVE_COMMDLG_REFERENCE_RESULT errors=0 modes=2",
+    "transaction": {
+      "negative": "six named source defects",
+      "scope": "exact-body service doubles, not runtime/guest proof",
+      "baseline": "4b8a7c8ae6eaaca3350d640650dd9d57201fd581",
+      "end": "2026-11-18T11:06:28.2816519Z",
+      "passed": true
+    },
+    "limit": "No end-to-end guest DDE dialog case was run."
+  }
+}

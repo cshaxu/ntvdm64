@@ -459,7 +459,7 @@ Routine Description:
 {
     BOOL            fSuccess;
     LPFNM32         pfnThunkMsg;
-    WM32MSGPARAMEX  wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-349): actual common-dialog conversion owner. */
+    WM32MSGPARAMEX  wm32mpex = { .fFree = TRUE }; /* Synchronous callback owns DDE cleanup. */
     BOOL            fMessageNeedsThunking;
     POPENFILENAME16 pStruct16;
     wow_message_stack stack;
@@ -594,7 +594,6 @@ Routine Description:
         wm32mpex.lParam = lParam;
         wm32mpex.pww = NULL;
         wm32mpex.lpfnM32 = pfnThunkMsg;
-        wm32mpex.fFree = TRUE; /* DIV-349: synchronous callback, not a DDE transfer. */
 
 #line 789
         if (!(pfnThunkMsg)(&wm32mpex)) {
@@ -657,7 +656,7 @@ SilentError:
     goto Done;
     } __finally {
         __try { wow_message_unwind32(&wm32mpex); }
-        __finally { wow_message_stack_leave(&stack, !stack.completed || AbnormalTermination()); }
+        __finally { wow_message_stack_leave(&stack, AbnormalTermination()); }
     }
 #line 845
 }
