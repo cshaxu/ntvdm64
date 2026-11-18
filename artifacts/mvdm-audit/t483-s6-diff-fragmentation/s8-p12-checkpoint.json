@@ -1,0 +1,51 @@
+{
+  "packet": "T483 S8 P12",
+  "files": [
+    {
+      "position": 31,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
+      "source_sha256": "c5ad4c2635548c1ec3440618f53f9827fdce257a901ed216dbeda3f7bfffce15",
+      "points": 1,
+      "added": 1,
+      "deleted": 0,
+      "review_ids": "T483-R0353",
+      "disposition": "Retain pending owner decision",
+      "evidence": "../t483-remaining-reaudit/r0353-ccpu-flags-declaration.json"
+    },
+    {
+      "position": 32,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+      "source_sha256": "b0c4affefa2a12b0961c1297cf0156caa4887cedc30365c031eb02d319bb0eb9",
+      "points": 3,
+      "added": 3,
+      "deleted": 0,
+      "review_ids": "T483-R0354;T483-R0355;T483-R0356",
+      "disposition": "Retain pending owner decision",
+      "evidence": "../t483-remaining-reaudit/r0354-r0356-debug-events.json"
+    },
+    {
+      "position": 33,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_debug.h",
+      "source_sha256": "66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f",
+      "points": 1,
+      "added": 1,
+      "deleted": 0,
+      "review_ids": "T483-R0357",
+      "disposition": "Retain pending owner decision",
+      "evidence": "../t483-remaining-reaudit/r0357-debug-event-interface.json"
+    }
+  ],
+  "verification": {
+    "flags": "Both cached object sets have three consumers of _c_getEFLAGS (c_intr, c_tsksw, pushf) and one c_bsic provider. Worker link map confirms provider. Prior paired compile records C4013 on omission.",
+    "debug": "Fresh ccpu-debug-match-test pass. Current ccpu-halt-reset-test verifies prior fault cancellation, RF and TSS T-bit delivery. debug-register-binding-test also passed.",
+    "locations": "Reviewed files match admitted hashes. Prior line and exclusion evidence reused."
+  },
+  "coverage": {
+    "complete": 33,
+    "remaining": 198,
+    "files": 231,
+    "points": 1957,
+    "lines": 27118,
+    "pending": 1549
+  }
+}
