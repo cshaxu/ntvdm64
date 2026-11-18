@@ -523,7 +523,7 @@ $ninja.Add('build obj/compat/wow-client-dispatch.obj: cc ' + (ConvertTo-NinjaPat
 $classLookupObject = 'obj/opennt-user/class.obj'
 # Original dialog initialization and shared EDIT DS callbacks use the same
 # registered WOW table as LOCAL*. Do not replace these bodies in an adapter.
-$dialogMemoryObject = 'obj/compat/wow-dialog-memory.obj'
+$dialogMemoryObject = 'obj/wow32-dll/wow_dialog_memory.obj'
 # OPENNT-HOST-079: original modal template entry, separate from clres's
 # bitmap slice. The existing modal entry owns context/task/borrow lifetimes.
 $dialogTemplateObject = 'obj/opennt-user/dialog-template.obj'
@@ -531,12 +531,12 @@ $objects.Add($dialogTemplateObject)
 $ninja.Add('build ' + $dialogTemplateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clres.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_TEMPLATE')
 $objects.Add($dialogMemoryObject)
-$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_memory.c')))
+$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_dialog_memory.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 # Original state transitions, not replacements in the binding units. The
 # kernel ntstubs subset has its registered receive facade in the source;
 # miscutil keeps precomp.h and receives only its finite original layouts.
-$controlFnidObject = 'obj/opennt-user/control-fnid.obj'
+$controlFnidObject = 'obj/wow32-dll/wow_control_fnid.obj'
 $controlTextObject = 'obj/opennt-user/control-text.obj'
 $objects.Add($controlTextObject)
 $ninja.Add('build ' + $controlTextObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c')))
@@ -545,20 +545,20 @@ $controlColorObject = 'obj/opennt-user/control-color.obj'
 $objects.Add($controlColorObject)
 $ninja.Add('build ' + $controlColorObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_COLOR')
-$controlBrushObject = 'obj/compat/wow-control-brush.obj'
+$controlBrushObject = 'obj/wow32-dll/wow_control_brush.obj'
 $controlBrushClientObject = 'obj/opennt-user/control-brush-client.obj'
 $objects.Add($controlBrushClientObject)
 $ninja.Add('build ' + $controlBrushClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT')
 $objects.Add($controlBrushObject)
-$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_brush.c')))
+$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_brush.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
-$controlStateObject = 'obj/compat/wow-control-state.obj'
+$controlStateObject = 'obj/wow32-dll/wow_control_state.obj'
 $objects.Add($controlStateObject)
-$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_state.c')))
+$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_state.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $objects.Add($controlFnidObject)
-$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_fnid.c')))
+$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_fnid.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $dialogPointerObject = 'obj/compat/wow-dialog-pointer.obj'
 $objects.Add($dialogPointerObject)

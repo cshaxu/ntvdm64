@@ -31,8 +31,8 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 # preprocessor subsets are mutually exclusive, as in the product generator.
 $messageFaults = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/wow_default_messages_faults.h')) + '"'
 $units = @(
-    @('control_fnid_fixture', 'test/compat/wow_control_fnid_fixture.c', ''),
-    @('control_fnid_owner', 'src/compat/wow_control_fnid.c', ''),
+    @('control_fnid_fixture', 'test/wow32-dll/source/wow_control_fnid_fixture.c', ''),
+    @('control_fnid_owner', 'src/wow32-dll/source/wow_control_fnid.c', ''),
     @('default_messages_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c', ''),
     @('default_messages_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', $messageFaults),
     @('default_messages_state', 'src/wow32-dll/source/wow_default_message_bindings.c', $messageFaults),
@@ -70,13 +70,13 @@ $units = @(
     @('edit_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_call_fixture.c', ''),
     @('edit_adapter', 'src/wow32-dll/source/wow_edit_call_bindings.c', ''),
     @('control_extent', 'src/wow32-dll/source/wow_control_extent_bindings.c', ''),
-    @('state_guards', 'src/compat/wow_control_state.c', ''),
+    @('state_guards', 'src/wow32-dll/source/wow_control_state.c', ''),
     @('color_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_COLOR'),
     @('memory_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_memory_callbacks_fixture.c', ''),
-    @('dialog_memory', 'src/compat/wow_dialog_memory.c', ''),
+    @('dialog_memory', 'src/wow32-dll/source/wow_dialog_memory.c', ''),
     @('brush_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c', ''),
     @('brush_adapter', 'src/wow32-dll/source/wow_control_brush_bindings.c', ''),
-    @('brush_owner', 'src/compat/wow_control_brush.c', ''),
+    @('brush_owner', 'src/wow32-dll/source/wow_control_brush.c', ''),
     @('brush_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT'),
     @('default_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_window_binding_fixture.c', ''),
     @('default_adapter', 'src/wow32-dll/source/wow_default_window_bindings.c', ''),

@@ -1,4 +1,4 @@
-/* Exercises the production compat operation with a controlled HWND boundary. */
+/* Exercises the production WOW32 operation with a controlled HWND boundary. */
 #include "wow_edit_state_bindings.h"
 #include <stdio.h>
 static WND state;

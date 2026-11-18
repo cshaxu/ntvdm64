@@ -74,7 +74,6 @@ $expectedUser = @(
     'hdata', 'clres', 'cldib', 'rtlinit', 'ntstubs', 'clmenu',
     'clglobal', 'dialog-template',
     'control-text', 'control-color', 'control-brush-client',
-    'control-fnid',
     'default-client', 'private-word-reader', 'private-word-client',
     'private-word-setter',
     'default-borders', 'default-messages', 'control-draw',
@@ -89,10 +88,17 @@ $actualUser = @([regex]::Matches($link, '\bobj/opennt-user/([^\s/]+)\.obj') |
 if (@(Compare-Object $expectedUser $actualUser).Count) {
     throw 'The original OpenNT USER-owner object set differs from the admitted formal graph.'
 }
-if ($link -notmatch '\bobj/wow32-dll/wow_class_client\.obj\b' -or $link -match '\bobj/compat/wow-class-client\.obj\b') {
-    throw 'The extracted class registration unit must be linked from its WOW32 owner.'
+if ($link -match '\bobj/compat/wow-(?:class-client|control-brush|control-state|dialog-memory)\.obj\b') {
+    throw 'The WOW32 link still selects a former compat object.'
 }
-foreach ($unit in @('wow-client-dispatch','wow-dialog-memory','wow-control-state','wow-default-window-bits','wow-control-rect','wow-dialog-pointer','wow-control-brush')) {
+foreach ($unit in @('wow_class_client','wow_dialog_memory','wow_control_state','wow_control_fnid','wow_control_brush')) {
+    $object = "obj/wow32-dll/$unit.obj"
+    if (($link -split '\s+') -notcontains $object -or
+        $ninja -notmatch ('(?m)^build ' + [regex]::Escape($object) + ': cc [^\r\n]*/src/wow32-dll/source/' + $unit + '\.c\s*$')) {
+        throw "Missing WOW32-owned source or link input: $unit"
+    }
+}
+foreach ($unit in @('wow-client-dispatch','wow-default-window-bits','wow-control-rect','wow-dialog-pointer')) {
     if ($link -notmatch ('\bobj/compat/' + $unit + '\.obj\b')) {
         throw "Missing extracted USER client unit: $unit"
     }

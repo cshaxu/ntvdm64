@@ -583,7 +583,7 @@ unchanged-body description for editec.c in OPENNT-HOST-073 only.
 OPENNT-HOST-102 admits the unchanged GetControlBrush client wrapper from
 windows/core/ntuser/client/ntstubs.c and xxxGetControlBrush from
 windows/core/ntuser/kernel/random.c in the pinned OpenNT revision below.
-P31 preserves the brush body in ../compat/wow_control_brush.c.
+P31 preserves the brush body in ../wow32-dll/source/wow_control_brush.c.
 Only subset selection/include environment changes: original null-DC check,
 popup-owner/parent/self selection and color-call ordering remain. The private
 facade retains exact WND allocations in the existing call borrow scope and

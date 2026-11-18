@@ -185,7 +185,7 @@ Frontend teardown cancels synchronous reads and drains outstanding pipe I/O.
 
 ## OpenNT-derived control FNID operation
 
-T483 S6 P19 owner-approved extraction: `wow_control_fnid.c` retains
+T483 S6 P19 owner-approved extraction: [wow_control_fnid.c](../wow32-dll/source/wow_control_fnid.c) retains
 NtUserSetWindowFNID from pinned OpenNT revision
 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c,
 windows/core/ntuser/kernel/ntstubs.c:6170-6188. Original file SHA256:
@@ -194,9 +194,9 @@ The function continues using the existing borrowed local HWND/PWND state;
 no kernel USER lock or new lifetime owner is introduced. The original file
 was 10,309 lines; only this 19-line function was selected. The retired mirror's
 130 non-error blocks/9,237 changed lines are a census retirement, not an
-original-code restoration. The active test/compat/wow_control_fnid_fixture.c covers invalid HWND, first
+original-code restoration. The active test/wow32-dll/source/wow_control_fnid_fixture.c covers invalid HWND, first
 assignment, conflicting reassignment, cleanup and repeated cleanup through the
-production compat operation; the boundary supplies only a controlled PWND.
+production WOW32 operation; the boundary supplies only a controlled PWND.
 Actual WOW lifetime and Full guest tests remain separate delivery evidence.
 
 `wow_dialog_lookup.c` retains OpenNT client/wow.c::_GetDlgItem (251-265),
@@ -215,7 +215,7 @@ from OpenNT kernel/handtabl.c lines39-59,revision
 leaves original type/flag definitions and the WOW cleanup consumer unchanged.
 
 P24 extracts client/client.c into [wow_class_client.c](../wow32-dll/source/wow_class_client.c) (moved to its WOW32 binding owner in S11 P3), wow_default_window_bits.c,
-wow_dialog_memory.c,wow_client_dispatch.c and wow_control_state.c. All eight
+[wow_dialog_memory.c](../wow32-dll/source/wow_dialog_memory.c), wow_client_dispatch.c and [wow_control_state.c](../wow32-dll/source/wow_control_state.c). All eight
 OpenNT bodies retain their bindings and ABI;original ntcftxt.h still implements
 class registration. Provenance is recorded in each unit.
 

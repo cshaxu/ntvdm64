@@ -8,7 +8,7 @@
 #include <string.h>
 
 /* Supplemental original FNID and host-storage contract. Not real EDIT
- * allocation/teardown or guest acceptance. Link the OpenNT-derived compat/wow_control_fnid.c
+ * allocation/teardown or guest acceptance. Link the OpenNT-derived wow32-dll/source/wow_control_fnid.c
  * in its scoped EDIT selection, never the native NtUserSetWindowFNID. */
 static unsigned failures;
 static unsigned final_calls;

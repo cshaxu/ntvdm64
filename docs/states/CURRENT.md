@@ -19,7 +19,8 @@
 | Identifier Mode | M0 T483 S11, Ordinary Mode. |
 | Admission And Approval | Owner reopened T483 for S11 following accepted S10. |
 | P3 scope amendment | Owner approved moving the extracted RegisterClassWOWA translation unit from compat to wow32-dll, which owns its class context and registration bindings. Preserve the source body, original x86 flags, exports and the parent import. Verify the production graph and class-client behavior. |
-| Non-goals | BC internal dependencies and other layer violations beyond the approved class-client move. |
+| P6 scope amendment | Move the four WOW32-only brush, FNID, control state and dialog memory units from compat to their binding owner. Preserve their contents and x86 build contracts. |
+| Non-goals | Other B-layer dependencies, including RTL and forwarding headers, remain outside this batch. |
 | Expected Markers | No BC header, forced include or resolved BC provider in A-owned production units. |
 | Similar-Issue Sweep | Check both A libraries across native, worker, WOW32 and Hook builds. |
 | Reporting Requirements | Record affected objects, flags, dependency paths and ownership decisions. |
@@ -27,6 +28,16 @@
 | Exit Criteria | Evidence covers every selected A unit, relevant tests and verified product delivery. |
 
 ## Current Technical Baseline
+
+S11 P6 moved wow_control_brush, wow_control_fnid, wow_control_state and
+wow_dialog_memory to wow32-dll/source. Each source and all seven object code
+sections match the preceding build byte for byte. Cached x86/x64 builds and
+the formal WOW32 link check passed. Four fixtures exercised FNID, brush,
+edit state and dialog callbacks with zero failures. The six distinct WOW32
+provider symbols previously bound by those compat units now resolve within
+WOW32. Six remaining compat units still read WOW32 headers. Package
+e0b93bbc-5a9f-43c3-a1c0-09d527bd1f40 matched both release destinations and
+all eleven PE text sections matched P4. Receipts are under build/t483-s11-p6.
 
 S11 P4 isolates A-library compilation in the x86 worker and native x64 product
 graphs. The generators select library flags by source ownership and keep

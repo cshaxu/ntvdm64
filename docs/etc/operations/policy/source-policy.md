@@ -358,7 +358,7 @@ delivery. Do not transfer equal complexity into autonomous code or shims.
 
 The owner explicitly retires non-mvdm/windows/core/ntuser/kernel/ntstubs.c:
 only NtUserSetWindowFNID (original lines 6170-6188) was used. Preserve that
-OpenNT-derived operation in src/compat/wow_control_fnid.c with its source
+OpenNT-derived operation in src/wow32-dll/source/wow_control_fnid.c with its source
 notice and the existing local HWND validation binding. This file-specific
 exception removes the former mirror from the current diff census and pending
 backlog; it does not count as restoration of the omitted kernel USER server,
@@ -393,7 +393,9 @@ change the modern USER ownership boundary.
 ### T483 S6 P24 owner-approved USER client extraction
 
 The owner approves retiring windows/core/ntuser/client/client.c and retaining
-its eight selected functions in five responsibility-specific compat units.
+its eight selected functions in five units. WOW32 owns class registration,
+dialog memory callbacks and control state. Compat retains default window bits
+and client dispatch.
 Preserve original bodies,ABI and existing binding contracts,including original
 ntcftxt.h registration. This retires source-selection scaffolding,not original
 algorithms;it does not establish minimality of the registration or wait adapters.
