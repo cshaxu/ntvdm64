@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P153",
+  "position": 196,
+  "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+  "review_ids": [
+    "T483-R2337"
+  ],
+  "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+  "current_sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 196,
+    "remaining": 35,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "R2337: reset-to-default tabs via LB_SETTABSTOPS frees the pixel position array. OpenNT usercli.h 1154 and current usercli.h 1185 both map UserLocalFree to HeapFree, which returns nonzero on success. Original inverted predicate retains a stale array pointer after successful free and clears it on failure. Existing real heap control fails with original predicate and passes with selected one. Keep just the one-line polarity correction pending."
+}

@@ -1,0 +1,45 @@
+{
+  "packet": "T483 S8 P154",
+  "position": 197,
+  "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+  "review_ids": [
+    "T483-R2339",
+    "T483-R2342",
+    "T483-R2347",
+    "T483-R2348",
+    "T483-R2349",
+    "T483-R2350",
+    "T483-R2352",
+    "T483-R2353"
+  ],
+  "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+  "current_sha256": "e3c78a070cd6a42293358cdadb762755ecdecfbd86bae727298b1fb53d582964",
+  "before": {
+    "blocks": 8,
+    "added": 14,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 8,
+    "added": 14,
+    "deleted": 1
+  },
+  "source_changed": true,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 197,
+    "remaining": 34,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh source, metrics, logical lines; historical targeted controls distinguished from ownership reasoning. Line-marker-only cleanup; no runtime rerun."
+  },
+  "decision": "Removed only redundant #line 22 and 33, checked full non-marker line stream. R2339/R2350/R2352/R2353 split two linked production objects with distinct bindings and one BltColor definition. R2342/R2349: old callback exception leaves the drawing critical section held (historical control 91 vs 0). R2347: after failed bitmap selection ownership stays with caller, so delete and take failure exit; this is source proof. R2348: second original assignment writes cx instead of cy; prior height check fails on original, passes with corrected field. Both excluded #if 0 bodies stay intact."
+}

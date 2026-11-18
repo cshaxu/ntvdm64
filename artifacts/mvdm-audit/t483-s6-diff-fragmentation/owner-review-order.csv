@@ -72,7 +72,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 74,src/mvdm-host/wow32/wcall16.c,7,21,5,26,9,0,75,s8-p72-reviewed,ebec54988f77dc3d6e72145603d85241ddffa383b9d00b1c8010d2e5195c2ecf
 75,src/mvdm-host/wow32/wow32fax.c,8,15,5,20,2,0,76,s8-p98-reviewed,a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad
 76,src/mvdm-host/wow32/wudlg.c,8,16,2,18,5,0,77,s8-p108-reviewed,1f8cb2f28e8f3d320cc322512b273915f20aed4a2aa336678c1c7d78acae9736
-78,src/non-mvdm/windows/core/ntuser/client/mngrayc.c,8,14,1,15,2,0,79,s7-p20-reviewed,9984334dfca40526729db5fb3ee24a14194c25ee10c0ab7a419b3566f01de572
+78,src/non-mvdm/windows/core/ntuser/client/mngrayc.c,8,14,1,15,2,0,79,s8-p154-reviewed,e3c78a070cd6a42293358cdadb762755ecdecfbd86bae727298b1fb53d582964
 79,src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,8,2,245,247,12,0,80,s7-p7-reviewed-residual-pending,e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9
 80,src/non-mvdm/windows/core/ntuser/rtl/getset.c,8,14,223,237,0,0,81,s7-p5-reviewed-residual-pending,1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b
 81,src/mvdm-host/softpc.new/host/src/nt_emm.c,7,51,8,59,5,0,84,s8-p46-reviewed,6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7
@@ -228,5 +228,5 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 248,src/non-mvdm/windows/core/ntuser/client/cldib.c,1,1,1,2,0,0,251,s8-p138-reviewed,b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea
 249,src/non-mvdm/windows/core/ntuser/client/dlgend.c,1,2,0,2,3,0,252,s8-p144-reviewed,a8fbf7c90496774075cecdde77f5ed52bab0c1cf195a02babf44bbc8a045ad3c
 250,src/non-mvdm/windows/core/ntuser/client/editec.c,1,1,1,2,10,0,253,s8-p150-reviewed,f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07
-251,src/non-mvdm/windows/core/ntuser/client/lboxrare.c,1,1,1,2,1,0,254,s7-p21-reviewed,4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8
+251,src/non-mvdm/windows/core/ntuser/client/lboxrare.c,1,1,1,2,1,0,254,s8-p153-reviewed,4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8
 252,src/non-mvdm/windows/core/ntuser/rtl/random.c,1,4,0,4,0,0,255,s7-p9-reviewed,531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b

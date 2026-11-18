@@ -19,7 +19,6 @@
 void BltColor(HDC hdc, HBRUSH hbr, HDC hdcSrce,int xO, int yO,
        int cx, int cy, int xO1, int yO1, BOOL fInvert);
 
-#line 22
 /***************************************************************************\
 *
 *  BitBltSysBmp()
@@ -31,7 +30,6 @@ BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
     POEMBITMAPINFO pOem = oemInfo.bm + i;
     return(NtUserBitBltSysBmp(hdc, x, y, pOem->cx, pOem->cy, pOem->x, pOem->y, SRCCOPY));
 }
-#line 33
 
 
 #ifdef WOW_ORIGINAL_STATE_DRAWING
