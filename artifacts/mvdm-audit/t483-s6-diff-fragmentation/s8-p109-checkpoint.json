@@ -1,0 +1,52 @@
+{
+  "packet": "T483 S8 P109",
+  "position": 153,
+  "path": "src/mvdm-host/wow32/wuman.c",
+  "review_ids": [
+    "T483-R1856",
+    "T483-R1858",
+    "T483-R1859"
+  ],
+  "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+  "current_sha256": "a1c34a9b9554b9db8a7163742433521c0280e79621e9626fc68fe9aee6592936",
+  "before": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 3,
+    "added": 3,
+    "deleted": 2
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        103,
+        101,
+        "#endif"
+      ],
+      [
+        169,
+        147,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 153,
+    "remaining": 78,
+    "files": 231,
+    "points": 1908,
+    "lines": 26946,
+    "pending": 1534
+  },
+  "verification": {
+    "controls": "test/mvdm-host/wow_page_domain_fixture.c checks shared to handle-table link, writable CSR flag and post-teardown zeros.",
+    "scope": "Read original and selected code, actual guest consumers and worker accessor definitions, checked current fixture assertions; no new runtime test or product build"
+  },
+  "decision": "R1856 declares the two worker page-domain accessors. R1858 publishes guest-linear SHAREDINFO: init.c supplies the destination and daytona/wowasmk.asm follows the published shared pointer to the handle table. R1859 publishes the writable guest CSR byte: usercli.asm tests/clears it and daytona/wowasmk.asm writes it. Original publication of native gpsi and address of DLL-static CallCsrFlag cannot provide these guest-linear objects. Preserve both original declarations and original store/flush mechanics. Moving getters behind a macro or another header would only hide the same ABI. All three remain in pending decisions."
+}
