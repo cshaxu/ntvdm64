@@ -178,8 +178,8 @@ blank in `dlgbegin.c` before the existing logical-line reset.
 [P23 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p23-checkpoint.json).
 
 The S7 file pass covers all 213 admitted paths. Source restorations reduce
-70 points and 1,750 changed lines in S7. The current census is 1,977 non-error
-points and 27,224 changed lines across 231 mirrors with filtered differences.
+71 points and 1,752 changed lines in S7. The current census is 1,976 non-error
+points and 27,222 changed lines across 231 mirrors with filtered differences.
 The reconciled worklist has 242 unique paths and all source hashes match.
 P24 reconciles nineteen historical mask cases across five previously
 reviewed paths. Both ledgers have zero unresolved mask cases.
@@ -225,6 +225,9 @@ P41 removes the redundant BaseSrv selector and verifies 39 compile inputs.
 
 P42 removes three redundant CPU40-only guards from `dpmiint.c`.
 [P42 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p42-checkpoint.json).
+
+P43 removes one redundant local `winmgrc.c` guard.
+[P43 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p43-checkpoint.json).
 
 ## S1 Closure Record
 

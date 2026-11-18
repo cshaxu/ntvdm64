@@ -1,0 +1,83 @@
+{
+  "packet": "M0 T483 S7 P43",
+  "prior_checkpoint": "84536f92f",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/non-mvdm/windows/core/ntuser/client/winmgrc.c": {
+      "before": {
+        "blocks": 5,
+        "added": 3,
+        "deleted": 496
+      },
+      "after": {
+        "blocks": 4,
+        "added": 1,
+        "deleted": 496
+      },
+      "removed_local_frame_ranges": [
+        [
+          29,
+          29,
+          0
+        ],
+        [
+          112,
+          112,
+          0
+        ]
+      ],
+      "original_error_pairs": 0,
+      "prior_sha256": "066c3f3f2b5f48f5614fb5e356743cccd4fde83eafb077f682e8a98c9253dff4",
+      "current_sha256": "7bdc635f086160eb4f0ac6902c890234c79169597e788943e97f4fdfbf5b0aa2",
+      "original_sha256": "26f0174e6a0db53d942506cbdc12efbfebc34a943d780170e7bf9d95775514a4"
+    }
+  },
+  "decisions": {
+    "winmgrc.c": "Remove the local WOW_ORIGINAL_EDIT_CLIENT frame around the admitted GetAppCompatFlags and _AdjustWindowRectEx functions. Production and original compile fixture define it on the command line; the EDIT view fixture defines it in its precompiled-header binding. Existing task-scoped GetAppCompatFlags adaptation remains pending owner."
+  },
+  "census": {
+    "non_error_points": 1976,
+    "non_error_lines": 27222,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 71,
+      "lines": 1752
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "result": "Exact selected source and logical file/line match",
+      "contexts": [
+        {
+          "profile": "wow32",
+          "target": "obj/opennt-user/control-body-winmgrc.obj",
+          "selected_lines": 48951,
+          "sha256": "e07fc55392ec5ae43f69500e9eeb0fecb90a0f86c995726988ced0a2aec6cc6f"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/original_winmgrc.obj",
+          "selected_lines": 49481,
+          "sha256": "4d9f5228a15e4d6bc5b345a33f4b399047533d7f666195618775274f09bdc319"
+        },
+        {
+          "profile": "call-boundaries",
+          "target": "obj/view_client.obj",
+          "selected_lines": 49492,
+          "sha256": "bfcb575aacce81c86541a0fe7a78a20ff206683e2f60a286e9a0dfdde8ff011f"
+        }
+      ]
+    },
+    "targeted": {
+      "wow32_and_fixture_objects": "pass",
+      "wow_edit_view_fixture": "pass"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Three actual compile inputs matched exactly.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

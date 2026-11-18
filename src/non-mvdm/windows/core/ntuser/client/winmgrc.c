@@ -26,7 +26,6 @@ BOOL FChildVisible(
     return (_FChildVisible(pwnd));
 }
 
-#ifdef WOW_ORIGINAL_EDIT_CLIENT
 #line 447
 /***************************************************************************\
 * GetAppCompatFlags
@@ -109,4 +108,3 @@ BOOL _AdjustWindowRectEx(
 
     return TRUE;
 }
-#endif

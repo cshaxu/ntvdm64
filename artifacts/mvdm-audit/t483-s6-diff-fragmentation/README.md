@@ -479,3 +479,7 @@ from `dpmiint.c`. The two worker graphs and allocation-failure observation
 entry have identical selected preprocessing and logical lines. The original
 software-interrupt fixture uses the production CPU40/CCPU compile profile
 and fails immediately if vector 14 unexpectedly enters instruction emulation.
+
+[S7 P43 receipt](s7-p43-checkpoint.json) removes the redundant local
+`winmgrc.c` selector. Three actual inputs retain identical preprocessing
+and logical lines, and the EDIT view fixture passes.

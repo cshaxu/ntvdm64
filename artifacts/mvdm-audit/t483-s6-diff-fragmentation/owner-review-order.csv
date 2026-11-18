@@ -87,7 +87,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 90,src/mvdm-host/softpc.new/host/src/nt_mouse.c,6,23,1,24,17,0,91,s7-p14-format-restored-residual-pending,9287115bab8384d6421d03e42f443e149d8736d83a092db464a3bcfbe9c49478
 91,src/mvdm-host/softpc.new/host/src/nt_msscs.c,5,11,57,68,9,0,92,s7-p15-format-restored-residual-pending,712314072154f66fbe8186470a81887adda8a1c729a720c01efcf5bfb7bb8c8f
 92,src/mvdm-host/wow32/walias.h,6,11,4,15,1,0,93,s7-p4-reviewed-residual-pending,f20548935ced3d6ace5ad0885dfe890cddd2f193f911e3afc2db5e813e580a61
-94,src/non-mvdm/windows/core/ntuser/client/winmgrc.c,5,3,496,499,0,0,95,s7-reviewed-residuals-pending,066c3f3f2b5f48f5614fb5e356743cccd4fde83eafb077f682e8a98c9253dff4
+94,src/non-mvdm/windows/core/ntuser/client/winmgrc.c,4,1,496,497,0,0,95,s7-reviewed-residuals-pending,7bdc635f086160eb4f0ac6902c890234c79169597e788943e97f4fdfbf5b0aa2
 96,src/non-mvdm/windows/core/ntuser/rtl/winmgr.c,6,11,301,312,0,0,97,s7-p6-reviewed-residual-pending,ed7a246191f44527c09a70dd881eb471e0036e5face04961ea36b87838b18eb3
 97,src/mvdm-host/inc/memapi.h,5,5,5,10,0,0,98,s7-p10-reviewed,26515fc97789f77e6e1632d3d3c19e810ade63539650de1b7dcbf6056688d546
 98,src/mvdm-host/softpc.new/base/bios/virtual.c,5,22,0,22,3,0,99,s7-p11-reviewed,aec2dfc7cbd43bcfbce434ae2a3fe7fcc917025ba6fc2bb4f87affc089ed1622
