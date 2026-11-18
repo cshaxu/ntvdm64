@@ -27,6 +27,8 @@
 
 ## Current Technical Baseline
 
+S11 P2 isolates the WOW32 production CRT object from the BC headers. Its native flags retain the x86 CRT, calling convention and optimization settings. No declaration or implementation moved. The cached x86 and x64 release builds passed. The [CRT regression](../../test/lib-win32/crt-compat/verify-crt-compat.ps1) checked the production command, compiler dependency record, both link maps, formatting with the actual WOW32 object, and missing/duplicate provider failures. All eleven images of package 1941b6a0-3dc9-4549-a420-64c4a06c13b2 were hash-verified at both release destinations. Build, test and publication receipts are under build/t483-s11-p2. S11 remains active for the other A-library compilation contexts.
+
 S10 delivered the frontend-base and nthook-dll layout at 14969ed80. S11 admission starts from the accepted closure at 49d0ce087.
 
 ## S10 Closure Record

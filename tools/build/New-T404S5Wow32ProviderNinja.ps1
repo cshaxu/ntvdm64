@@ -399,7 +399,8 @@ $force = '/FI "' + (Join-Path $root 'src/compat/include/nt.h') + '"'
 # internal ABI; worker-owned cdecl imports need explicit declarations, not a
 # package-wide /Gd override or aliases that conceal different stack cleanup.
 $cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
-$adapterCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' + $force + ' ' + $includes
+$nativeCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT'
+$adapterCflags = $nativeCflags + ' ' + $force + ' ' + $includes
 
 $ninja = [System.Collections.Generic.List[string]]::new()
 $ninja.Add('ninja_required_version = 1.10')
@@ -678,9 +679,10 @@ foreach ($source in $providerSupportSources) {
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
-    if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
-        $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase) -or
-        $source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
+    if ($source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
+        $ninja.Add('  cflags = ' + $nativeCflags)
+    } elseif ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
+        $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase)) {
         $ninja.Add('  cflags = $adapter_cflags')
     }
 }

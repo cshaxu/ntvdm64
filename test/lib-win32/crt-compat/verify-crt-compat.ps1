@@ -12,6 +12,16 @@ if (!$out.StartsWith(([IO.Path]::GetFullPath((Join-Path $root 'build')) + '\'),
 New-Item -ItemType Directory -Path $out | Out-Null
 $worker = Get-Content (Join-Path $WorkerBuildRoot 'build.ninja') -Raw
 $wow = Get-Content (Join-Path $WowBuildRoot 'build.ninja') -Raw
+$wowCrtObject = 'obj/adapter-win32/crt_compat.obj'
+$compile = & ninja -C $WowBuildRoot -t commands $wowCrtObject
+if ($LASTEXITCODE -or !$compile -or $compile -match '(?i)/FI\s*"?.*?src[/\\]compat[/\\]') {
+    throw 'WOW32 CRT must compile independently of the historical forced include.'
+}
+$headers = & ninja -C $WowBuildRoot -t deps $wowCrtObject
+if ($LASTEXITCODE -or !($headers -match '\(VALID\)') -or
+    $headers -match 'src[/\\](?:compat|mvdm-host|non-mvdm)[/\\]') {
+    throw 'Missing WOW32 CRT dependency record or unexpected OpenNT header.'
+}
 if ($worker -notmatch 'src/lib-win32/crt-compat/crt_compat\.c' -or
     $worker -match 'src/ntvdm-exe/win32/crt_compat\.c' -or
     $worker -notmatch 'build ntvdm\.exe[^\r\n]*lib-crt-compat\.lib' -or
@@ -44,6 +54,11 @@ $exe = Join-Path $out 'crt-test.exe'
 if ($LASTEXITCODE) { throw 'Valid provider link failed.' }
 & $exe *> (Join-Path $out 'result.log')
 if ($LASTEXITCODE) { throw 'Formatting behavior failed.' }
+$wowExe = Join-Path $out 'wow-crt-test.exe'
+& $wrapper link /nologo "/OUT:$wowExe" $test (Join-Path $WowBuildRoot $wowCrtObject) *> (Join-Path $out 'link-wow.log')
+if ($LASTEXITCODE) { throw 'Production WOW32 CRT object link failed.' }
+& $wowExe *> (Join-Path $out 'result-wow.log')
+if ($LASTEXITCODE) { throw 'Production WOW32 CRT formatting behavior failed.' }
 & $wrapper link /nologo "/OUT:$out/missing.exe" $test *> (Join-Path $out 'missing.log')
 if (!$LASTEXITCODE -or (Get-Content (Join-Path $out 'missing.log') -Raw) -notmatch 'LNK2019') {
     throw 'Missing provider was not rejected.'
@@ -53,4 +68,4 @@ Copy-Item $provider (Join-Path $out 'duplicate.obj')
 if (!$LASTEXITCODE -or (Get-Content (Join-Path $out 'duplicate.log') -Raw) -notmatch 'LNK2005') {
     throw 'Duplicate provider was not rejected.'
 }
-Write-Output 'PASS CRT source ownership, formatting and missing/duplicate provider controls'
+Write-Output 'PASS CRT source ownership, WOW32 header isolation, production object formatting and missing/duplicate provider controls'
