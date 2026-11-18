@@ -1,0 +1,41 @@
+{
+  "packet": "T483 S8 P103",
+  "position": 147,
+  "path": "src/mvdm-host/wow32/wsext.c",
+  "review_ids": [
+    "T483-R1799",
+    "T483-R1800"
+  ],
+  "original_sha256": "13a04aa32c045b6dfde4a12099d06c99ce2ec84362f30f296d677f7c47b200f7",
+  "current_sha256": "23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5",
+  "before": {
+    "blocks": 4,
+    "added": 7,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 4,
+    "added": 7,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 147,
+    "remaining": 84,
+    "files": 231,
+    "points": 1908,
+    "lines": 26977,
+    "pending": 1534
+  },
+  "verification": {
+    "fixture": "P102 rundown dispatch_contract tests concurrent lock exclusion and exceptional release on unchanged wsext.c, SHA256 23EC40B58BFD5AFA1BB051328535A10AADB7D5FB9A2A6430C601414C8D57D1D5",
+    "source": "Pinned OpenNT with four non-error blocks and actual provider registration and cleanup call sites",
+    "build": "Audit only; P102 published source unchanged"
+  },
+  "decision": "Retain the provider predicate call (R1799), final explicit WSACleanup retirement (R1800), and dispatcher synchronization already registered with R1797. The original predicate tests an initialized address and rejects a valid idle provider. Only final explicit cleanup knows the closing serial while the process-wide provider remains live. Lookup alone cannot protect the interval between unlink and guest-buffer conversion; finally unlocks on converter exceptions."
+}
