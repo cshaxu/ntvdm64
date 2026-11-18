@@ -1,0 +1,57 @@
+{
+  "packet": "T483 S8 P98",
+  "position": 142,
+  "path": "src/mvdm-host/wow32/wow32fax.c",
+  "review_ids": [
+    "T483-R1712",
+    "T483-R1714",
+    "T483-R1715",
+    "T483-R1717",
+    "T483-R1718",
+    "T483-R1719",
+    "T483-R1720"
+  ],
+  "original_sha256": "855ac6c5d6d6ca97cc78802994784e8612e5eb6197533790466664bf0e892700",
+  "current_sha256": "a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad",
+  "before": {
+    "blocks": 8,
+    "added": 15,
+    "deleted": 5
+  },
+  "after": {
+    "blocks": 8,
+    "added": 15,
+    "deleted": 5
+  },
+  "source_changed": false,
+  "paired_error_bodies": 2,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        226,
+        222,
+        "#endif"
+      ],
+      [
+        964,
+        962,
+        "#endif"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 142,
+    "remaining": 89,
+    "files": 231,
+    "points": 1910,
+    "lines": 26992,
+    "pending": 1535
+  },
+  "verification": {
+    "scope": "Five extracted production functions with simulated registry, allocation and spooler. No physical fax installation.",
+    "current": "WOW_FAX_FAILURE checks=135 failures=0",
+    "negative": "Pinned previous baseline recorded 15 failures in 132 checks in r1711-r1720-fax-review.json."
+  },
+  "decision": "R1712/R1714/R1715: registry and allocation failures reach shared exit before all assignments. Maintain NULL result and zero count, release allocated backing text only when the array did not take ownership. SortedInsert reads unoccupied slots, so zeroing must occur after successful allocation and before BuildStrList. The fixture allocator accepts NULL release, but production free_w directly invokes HeapFree; keep the pointer guard. R1717-R1720: preserve actual AddPrinterDriver result (BOOL may be any nonzero value), handle documented already-installed/already-exists separately, and close exactly the returned AddPrinter handle on success."
+}

@@ -1,0 +1,149 @@
+{
+  "packet": "T483 S8 P99",
+  "coupled_with_position": 143,
+  "path": "src/mvdm-host/wow32/wmdisp32.c",
+  "review_ids": [
+    "T483-R1504",
+    "T483-R1505",
+    "T483-R1506",
+    "T483-R1507",
+    "T483-R1508",
+    "T483-R1509",
+    "T483-R1510",
+    "T483-R1511",
+    "T483-R1512",
+    "T483-R1514",
+    "T483-R1515",
+    "T483-R1516",
+    "T483-R1517",
+    "T483-R1520",
+    "T483-R1521",
+    "T483-R1524",
+    "T483-R1525",
+    "T483-R1526",
+    "T483-R1527",
+    "T483-R1528",
+    "T483-R1530",
+    "T483-R1531",
+    "T483-R1532",
+    "T483-R1533",
+    "T483-R1534",
+    "T483-R1535",
+    "T483-R1536",
+    "T483-R1537",
+    "T483-R1538",
+    "T483-R1539",
+    "T483-R1540",
+    "T483-R1541",
+    "T483-R1542",
+    "T483-R1543",
+    "T483-R1544",
+    "T483-R1546",
+    "T483-R1548",
+    "T483-R1549",
+    "T483-R1550",
+    "T483-R1551",
+    "T483-R1552",
+    "T483-R1553",
+    "T483-R1554",
+    "T483-R1555",
+    "T483-R1556",
+    "T483-R1560",
+    "T483-R1561",
+    "T483-R1562",
+    "T483-R1563",
+    "T483-R1564",
+    "T483-R1565",
+    "T483-R1566",
+    "T483-R1567",
+    "T483-R1568",
+    "T483-R1569",
+    "T483-R1572",
+    "T483-R1573",
+    "T483-R1574",
+    "T483-R1575",
+    "T483-R1578",
+    "T483-R1579",
+    "T483-R1580",
+    "T483-R1581",
+    "T483-R1583",
+    "T483-R1586",
+    "T483-R1587",
+    "T483-R1588",
+    "T483-R1590",
+    "T483-R1591",
+    "T483-R1593"
+  ],
+  "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+  "current_sha256": "456124e440cdd6665b222fc76996eac9c3847ad94d68bf362cbd45a3a68abb34",
+  "before": {
+    "blocks": 72,
+    "added": 128,
+    "deleted": 94
+  },
+  "after": {
+    "blocks": 72,
+    "added": 127,
+    "deleted": 94
+  },
+  "source_changed": true,
+  "paired_error_bodies": 11,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        733,
+        734,
+        "        //"
+      ],
+      [
+        734,
+        735,
+        "        // non-zero fill to detect people who write more than they"
+      ],
+      [
+        735,
+        736,
+        "        // say that they do!"
+      ],
+      [
+        736,
+        737,
+        "        //"
+      ],
+      [
+        1534,
+        1528,
+        "            //  if HIWORD(class) is zero, class is an atom, else a pointer."
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 142,
+    "remaining": 89,
+    "files": 231,
+    "points": 1910,
+    "lines": 26989,
+    "pending": 1535
+  },
+  "verification": {
+    "transaction": {
+      "scope": "exact-body service doubles, not runtime/guest proof",
+      "end": "2026-11-18T12:40:35.39076Z",
+      "negative": "six named source defects",
+      "baseline": "4b8a7c8ae6eaaca3350d640650dd9d57201fd581",
+      "passed": true
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "99696ec5-8a8b-4a6f-86b6-022bbfa54867",
+      "hashVerified": true,
+      "stopped": 0
+    }
+  },
+  "decision": "Use wow_message_finish32 for the identical nested unwind and stack-leave sequence at five sites. It captures AbnormalTermination inside the same inner finally. Keep per-caller completion timing, separate MsgFilter borrowed buffers/recursion and DDE mode restoration, TLS for independent native threads, original entry wrapped for native hook ownership, and conversion-status checks. Prior pinned whole-file review and same-source failure controls remain applicable to unchanged blocks. The related wudlg change covers only the finalizer, not its future whole-file review."
+}

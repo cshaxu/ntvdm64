@@ -655,8 +655,7 @@ SilentError:
     wm32mpex.lReturn = 0;
     goto Done;
     } __finally {
-        __try { wow_message_unwind32(&wm32mpex); }
-        __finally { wow_message_stack_leave(&stack, AbnormalTermination()); }
+        wow_message_finish32(&wm32mpex, &stack);
     }
 #line 845
 }

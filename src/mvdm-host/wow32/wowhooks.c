@@ -645,8 +645,7 @@ LONG ThunkCallWndProcHook(INT nCode, LONG wParam, LPCWPSTRUCT lpCwpStruct,
 #line 634
     return (LONG)FALSE;   // return value doesn't matter
     } __finally {
-        __try { wow_message_unwind32(&wm32mpex); }
-        __finally { wow_message_stack_leave(&stack, AbnormalTermination()); }
+        wow_message_finish32(&wm32mpex, &stack);
     }
 #line 635
 }
@@ -861,8 +860,7 @@ LONG ThunkCbtHook(INT nCode, LONG wParam, LONG lParam,
 #line 837
     return (LONG)(BOOL)LOWORD(lReturn);
     } __finally {
-        __try { wow_message_unwind32(&wm32mpex); }
-        __finally { wow_message_stack_leave(&stack, AbnormalTermination()); }
+        wow_message_finish32(&wm32mpex, &stack);
     }
 #line 838
 }

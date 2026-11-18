@@ -25,4 +25,12 @@ void WINAPI wow_message_stack_enter(wow_message_stack *);
 void WINAPI wow_message_stack_leave(wow_message_stack *, BOOL abnormal);
 void WINAPI wow_message_unwind32(struct _WM32MSGPARAMEX *);
 void WINAPI wow_message_unwind16(struct _MSGPARAMEX *);
+static __inline void wow_message_finish32(struct _WM32MSGPARAMEX *message, wow_message_stack *stack)
+{
+    __try {
+        wow_message_unwind32(message);
+    } __finally {
+        wow_message_stack_leave(stack, AbnormalTermination());
+    }
+}
 #endif
