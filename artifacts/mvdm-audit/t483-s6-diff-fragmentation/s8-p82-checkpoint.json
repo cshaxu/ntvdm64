@@ -1,0 +1,48 @@
+{
+  "packet": "T483 S8 P82",
+  "position": 126,
+  "path": "src/mvdm-host/wow32/wgprnset.c",
+  "review_ids": [
+    "T483-R1431",
+    "T483-R1432",
+    "T483-R1433"
+  ],
+  "original_sha256": "7e53074328ace93ae8ce39fb218fa780ff868999b40f7904fdbbff45fbd7b990",
+  "current_sha256": "ee0a7c3ad040edfd9712eccd02c2eec1b89d85861b00d3b49ffc5ecfb3a00ce2",
+  "before": {
+    "blocks": 3,
+    "added": 7,
+    "deleted": 0
+  },
+  "after": {
+    "blocks": 3,
+    "added": 7,
+    "deleted": 0
+  },
+  "source_changed": false,
+  "paired_error_bodies": 1,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        574,
+        545,
+        "#endif  //i386"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 126,
+    "remaining": 105,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "verification": {
+    "original": "Only wgprnset.c replaced by pinned source; same fixture, 72 checks, 12 failures on unreleased copied parameters. Injected loader failure, not guest printer acceptance.",
+    "current": "72 checks, 0 failures",
+    "fixture": "test/integration/verify-wow-spool-loader-failure.ps1"
+  },
+  "decision": "Keep R1431, R1432 and R1433 pending. On spooler loader failure the three original immediate returns bypass the only release of 2, 3 and 2 local string copies respectively. Redirecting to success cleanup changes return values or requires extra labels. All other code matches after masking the single excluded i386 body."
+}

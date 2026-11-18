@@ -1,0 +1,40 @@
+{
+  "packet": "T483 S8 P81",
+  "position": 125,
+  "path": "src/mvdm-host/wow32/wgpal.c",
+  "review_ids": [
+    "T483-R1429"
+  ],
+  "original_sha256": "942bd3c12615416a532638df4b53a08e963bd1e60dd0d081fd34765ace0872c8",
+  "current_sha256": "1c29cff4af4ec8565f9d2e1931a1596dccd21c1b8285563b9c3d203d617c1cb1",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 125,
+    "remaining": 106,
+    "files": 231,
+    "points": 1927,
+    "lines": 27013,
+    "pending": 1542
+  },
+  "verification": {
+    "original": "19 checks, 5 failures: two valid-count checks, two tail checks and one failed-query check",
+    "fixture": "test/integration/verify-wow-palette-output.ps1",
+    "current": "19 checks, 0 failures"
+  },
+  "decision": "Keep R1429 pending. The native return count bounds the valid entries copied to the Win16 buffer. The correction changes a single argument."
+}
