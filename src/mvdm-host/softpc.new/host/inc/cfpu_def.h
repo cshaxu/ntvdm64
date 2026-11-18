@@ -16,74 +16,49 @@ typedef double 		FPH;
 #define HOST_BIAS 1023
 #endif
 typedef struct {
-#ifdef LITTLEND
 #line 21
 IU32	mant:23;
 #line 20
 IU32	exp:8;
 #line 19
 IU32	sign:1;
-#else
-#line 19
-#error Unsupported excluded original configuration
-#endif
 #line 22
 } FP32;
 
 typedef struct {
-#ifdef LITTLEND
 #line 27
 IU32	mant_hi:20;
 #line 26
 IU32	exp:11;
 #line 25
 IU32 	sign:1;
-#else
-#line 25
-#error Unsupported excluded original configuration
-#endif
 #line 28
 } FP64HI;
 
 typedef struct {
-#ifdef LITTLEND
 #line 32
 IU16	exp:15;
 #line 31
 IU16	sign:1;
-#else
-#line 31
-#error Unsupported excluded original configuration
-#endif
 #line 33
 } FP80SE;
 
 //#ifdef BIGEND
 
 typedef struct {
-#ifdef LITTLEND
 #line 39
 IU32	mant_lo;
 #line 38
 FP64HI	hiword;
-#else
-#line 38
-#error Unsupported excluded original configuration
-#endif
 #line 40
 } FP64;
 
 
 typedef struct {
-#ifdef LITTLEND
 #line 45
 IU32 low_word;
 #line 44
 IS32 high_word;
-#else
-#line 44
-#error Unsupported excluded original configuration
-#endif
 #line 46
 } FPU_I64;
 
@@ -94,15 +69,10 @@ IS32 high_word;
  */
 
 typedef struct {
-#ifdef LITTLEND
 #line 56
 IU32	mant_lo;
 #line 55
 IU32	mant_hi;
-#else
-#line 55
-#error Unsupported excluded original configuration
-#endif
 #line 57
 FP80SE	sign_exp;
 } FP80;

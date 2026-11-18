@@ -69,15 +69,11 @@ typedef DWORD UNALIGNED *PDWORD16;
 #line 74
 #error Excluded unsupported historical i386 SDK profile
 #else
-#if defined(_M_IX86)
 #line 79
 #define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))
 #define FETCHDWORD(s) (*(UNALIGNED DWORD *)&(s))
 #define STOREWORD(d,s)  *(UNALIGNED WORD *)&(d)=(WORD)s
 #define STOREDWORD(d,s) *(UNALIGNED DWORD *)&(d)=(DWORD)s
-#else
-#error Unsupported non-x86 MVDM host access profile
-#endif
 #endif
 #line 84
 #define FETCHSHORT(s)	((SHORT)(FETCHWORD(s)))

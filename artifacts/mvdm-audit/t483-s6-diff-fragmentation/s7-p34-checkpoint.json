@@ -1,0 +1,199 @@
+{
+  "packet": "M0 T483 S7 P34",
+  "prior_checkpoint": "a45513248",
+  "opennt_revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "files": {
+    "src/mvdm-host/softpc.new/host/inc/cfpu_def.h": {
+      "before": {
+        "blocks": 14,
+        "added": 36,
+        "deleted": 12
+      },
+      "after": {
+        "blocks": 14,
+        "added": 12,
+        "deleted": 12
+      },
+      "removed_local_frame_ranges": [
+        [
+          19,
+          19,
+          0
+        ],
+        [
+          26,
+          29,
+          0
+        ],
+        [
+          34,
+          34,
+          0
+        ],
+        [
+          41,
+          44,
+          0
+        ],
+        [
+          49,
+          49,
+          0
+        ],
+        [
+          54,
+          57,
+          0
+        ],
+        [
+          64,
+          64,
+          0
+        ],
+        [
+          69,
+          72,
+          0
+        ],
+        [
+          78,
+          78,
+          0
+        ],
+        [
+          83,
+          86,
+          0
+        ],
+        [
+          97,
+          97,
+          0
+        ],
+        [
+          102,
+          105,
+          0
+        ]
+      ],
+      "original_error_pairs": 2,
+      "prior_sha256": "71d576e975b49379a2cad1cfc0f6a82579a2e81b4e096222363a70147cfb1535",
+      "current_sha256": "d6e31fea7dc2a9b5bc140d590d39075942c0459019284df1dd1642f91ef39250",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f"
+    },
+    "src/mvdm-host/softpc.new/base/inc/cpu_vid.h": {
+      "before": {
+        "blocks": 4,
+        "added": 8,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          87,
+          87,
+          0
+        ],
+        [
+          91,
+          94,
+          0
+        ],
+        [
+          98,
+          98,
+          0
+        ],
+        [
+          101,
+          104,
+          0
+        ]
+      ],
+      "original_error_pairs": 1,
+      "prior_sha256": "3ccaff846af99bd34046d43b8b9f30c114f373e5ca6f35d7cc966e996ee460c2",
+      "current_sha256": "1fc6d99e6df66945b279c3b9c9eda880955f42457091c15ae354fb9df0900aa1",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500"
+    },
+    "src/mvdm-host/inc/mvdm.h": {
+      "before": {
+        "blocks": 2,
+        "added": 4,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "removed_local_frame_ranges": [
+        [
+          72,
+          72,
+          0
+        ],
+        [
+          78,
+          80,
+          0
+        ]
+      ],
+      "original_error_pairs": 3,
+      "prior_sha256": "24db8a244bbbd4880e7c18fff338c33659d28864f04ce3efd2b4810925a05f0f",
+      "current_sha256": "5a982e59142bd54c93d1bdfa3e2e204e93ed62d1045745c65627305203ee5d78",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7"
+    }
+  },
+  "removed_frames": {
+    "cfpu_def.h": 6,
+    "cpu_vid.h": 2,
+    "mvdm.h": 1
+  },
+  "decisions": {
+    "cfpu_def.h": "Keep the measured little-endian floating-layout order. Drop local LITTLEND rejection frames. Preserve original logical field anchors.",
+    "cpu_vid.h": "Restore both original generic read declarations and preserve the original NO_STRING_OPERATIONS group.",
+    "mvdm.h": "Restore the original non-i386 macro body without an extra _M_IX86 wrapper. Preserve the original i386/SDK exclusions."
+  },
+  "census": {
+    "non_error_points": 1986,
+    "non_error_lines": 27336,
+    "nonzero_mirrors": 231,
+    "historical_rows": 242,
+    "source_reduction_s7": {
+      "points": 61,
+      "lines": 1640
+    },
+    "pending_decisions": 1566
+  },
+  "verification": {
+    "preprocessing": {
+      "entries": 184,
+      "by_graph": {
+        "worker": 48,
+        "worker-reference-x86": 48,
+        "wow32": 88
+      },
+      "dependency_consumers": {
+        "build/.ninja/msvc-x86-release/worker": 48,
+        "build/.ninja/msvc-x86-release/wow32": 88,
+        "build/.ninja/msvc-x64-release/worker-reference-x86": 44
+      },
+      "identical_result_sha256": "d7da5309a7055fcc5a8d2963da3bbfed68040f974e1508fe6bbac68542dcb34c",
+      "comparison": "Exact selected token text and logical source file and line for all listed worker and WOW32 compile inputs."
+    },
+    "targeted": {
+      "x87_layout_fixture": "pass",
+      "cvidc_vector_binding_fixture": "pass",
+      "wow_entry_object_compile": "pass"
+    },
+    "release": {
+      "action": "No product relink, republication or Full rerun. Selected product inputs including logical lines are identical.",
+      "published_checkpoint": "s7-p32-checkpoint.json",
+      "matching_image_hashes_in_both_destinations": 11
+    }
+  }
+}

@@ -84,24 +84,14 @@ extern MODE_TABLE mode_table;
 
 typedef struct 
 {
-#if defined(CPU_40_STYLE) && defined(C_VID)
 #line 87
 	IU32 (*b_read) IPT1(ULONG, offset);
 	IU32 (*w_read) IPT1(ULONG, offset);
-#else
-#line 87
-#error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile
-#endif
 
 #line 90
 #ifndef	NO_STRING_OPERATIONS
-#if defined(CPU_40_STYLE) && defined(C_VID)
 #line 91
 	void (*str_read) IPT3(IU8 *, dest, ULONG, offset, ULONG, count);
-#else
-#line 91
-#error Excluded unsupported generic string video callback profile
-#endif
 #endif	/* NO_STRING_OPERATIONS */
 #line 93
 

@@ -437,3 +437,7 @@ census is 1,993 points and 27,382 changed lines across 233 mirrors.
 from `dpmidata.h` and `host_cpu.h`. It matches 200 actual preprocessing
 entries apart from one original logical-line correction. The filtered
 census is 1,992 points and 27,372 changed lines across 233 mirrors.
+
+[S7 P34 receipt](s7-p34-checkpoint.json) records nine local frame removals,
+184 matched worker and WOW preprocessing entries and two focused fixtures.
+The filtered census is 1,986 points and 27,336 changed lines across 231 mirrors.
