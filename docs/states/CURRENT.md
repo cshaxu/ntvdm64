@@ -168,9 +168,14 @@ S7 P21 completes ten file reviews. It restores the original unused
 and symbol bindings. The header has no remaining non-error difference.
 [P21 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p21-checkpoint.json).
 
-S7 progress is 189 reviewed and 24 remaining. Source restorations reduce
-35 points and 579 changed lines in S7. The current census is 2,012 non-error
-points and 28,397 changed lines across 236 mirrors with filtered differences.
+S7 P22 completes ten file reviews and restores the original blank-line
+layout around the EXEC translation in `int21map.c`. Existing logical
+line resets and excluded branches are preserved.
+[P22 evidence](../../artifacts/mvdm-audit/t483-s6-diff-fragmentation/s7-p22-checkpoint.json).
+
+S7 progress is 199 reviewed and 14 remaining. Source restorations reduce
+35 points and 581 changed lines in S7. The current census is 2,012 non-error
+points and 28,395 changed lines across 236 mirrors with filtered differences.
 
 ## S1 Closure Record
 

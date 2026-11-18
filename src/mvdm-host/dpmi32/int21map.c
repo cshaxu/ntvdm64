@@ -1610,7 +1610,6 @@ Return Value:
 
 #line 1643
         if (getAL() == 1) LoadResult = CommandTail + 14;
-
 #line 1642
         if (CurrentAppFlags & DPMI_32BIT) {
             //
@@ -1693,7 +1692,6 @@ Return Value:
 
 #line 1723
         if (LoadResult && !getCF()) CopyMemory(LoadResult, LargeXlatBuffer + 14, 8);
-
 #line 1721
         //
         // Free translation buffer

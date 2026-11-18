@@ -1,0 +1,188 @@
+{
+  "packet": "M0 T483 S7 P22",
+  "prior_delivery": "802dd2c36",
+  "reviews": [
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98",
+      "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "decision": "Release the actual GDI bitmap with DeleteObject on the original failure path. CloseHandle does not own that object class. Original creation and subsequent DIB mapping stay in place.",
+      "evidence": "../t483-remaining-reaudit/r1418-r1420-wdib-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "before": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 2
+      },
+      "source_sha256": "3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d",
+      "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+      "decision": "Retain native handle acquisition for GetDCEx and reverse identity lookup for clipboard owner. Original short guest tokens cannot encode an independently published modern USER window; bindings preserve original thunk inputs and output conversion.",
+      "evidence": "../t483-remaining-reaudit/r1906-r1911-wuser31-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "source_sha256": "cf9f03650cce420116b6bf87f1a9c95f21b8a26ce4861159520e95453aaf9a41",
+      "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+      "decision": "Release the previously acquired temporary string on the other string-conversion failure. Original success branch already releases both; no existing owner can release the first on the early return.",
+      "evidence": "../t483-remaining-reaudit/r1423-r1424-wgdi-review.json"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "8da33b50d26bf86d1c7bdf22548338f8ec7912fae26705962a00e1bd6b668f52",
+      "original_sha256": "1e04779ee75de6b1cb294e4b036e68745f84815d73c6037ee577258e97c629ca",
+      "decision": "Keep WINAPI only at the DLL initializer. Original selected compile succeeds but actual /entry link fails; whole-file /Gz loses selected cdecl VDD imports. The ordinary original drive operations remain.",
+      "evidence": "../t483-remaining-reaudit/r1258-vcdex-entry-review.json"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "before": {
+        "blocks": 2,
+        "added": 10,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 10,
+        "deleted": 2
+      },
+      "source_sha256": "e85a1f718c4b19c370a2a3f52f6c1c7726113628392c203ce14b7081b53c6689",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "decision": "Convert actual wide workstation name into the bounded ANSI UNC buffer. Original TCHAR macro selects a wide source but the original consumer is narrow. Keep the original allocation path and cleanup if conversion fails.",
+      "evidence": "../t483-remaining-reaudit/batch-p129-checkpoint.json"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "decision": "Keep checking the second event creation against the second event handle. Actual Windows event fixture shows original mistakenly reports successful setup with no completion event. Availability of the external DLC provider is outside fixture scope.",
+      "evidence": "../t483-remaining-reaudit/r1259-r1260-vrdlc5c-review.json"
+    },
+    {
+      "path": "src/mvdm-host/oemuni/file.c",
+      "before": {
+        "blocks": 12,
+        "added": 26,
+        "deleted": 11
+      },
+      "after": {
+        "blocks": 12,
+        "added": 26,
+        "deleted": 11
+      },
+      "source_sha256": "d8557d2b6b4b9aafb99736570288a3a800108c94c0e8e73c48600324c801698a",
+      "original_sha256": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df",
+      "decision": "Preserve original wide file API calls and accurately compute byte-size/offset in OEM encoding. Keep capacities, DBCS offsets and failed name-conversion cases covered by the existing focused comparison.",
+      "evidence": "../t483-remaining-reaudit/r0278-r0290-oem-file-review.json"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "before": {
+        "blocks": 20,
+        "added": 161,
+        "deleted": 13
+      },
+      "after": {
+        "blocks": 20,
+        "added": 161,
+        "deleted": 13
+      },
+      "source_sha256": "c2549ce5a12579274bf3fbc5bde5045dbfc6d8ae06e277d962d4ea75ec533def",
+      "original_sha256": "f8f95c4cb6ec3aca607e66d615900129497738617b9a6a192880dc66beb5e63b",
+      "decision": "Keep the original async list owner and existing task serial. Original creation checks the wrong allocation, completion assumes a live context, and original cancel never calls provider. Existing native cancellation outcomes and task-owned retire controls justify bounded rundown in the same list. Also consult r1779-r1791-winsock-review.json.",
+      "evidence": "../t483-remaining-reaudit/r1793-r1798-cancel-review.json"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "before": {
+        "blocks": 16,
+        "added": 29,
+        "deleted": 6
+      },
+      "after": {
+        "blocks": 16,
+        "added": 27,
+        "deleted": 6
+      },
+      "source_sha256": "98cd13535fdd1b821b62ea8b65dd2394318523a32f4d84a129f0ae98bca9a736",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "decision": "Remove two nonoriginal blanks before the original EXEC flow anchors. Keep existing DOS register/flag, EXEC load-only return, IOCTL packet and high-memory DPB parameter fixes; original guest handlers and explicit DPMI translation callers establish the boundary.",
+      "evidence": "../t483-remaining-reaudit/r0187-r0203-call-chain-review.json"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "source_sha256": "a5957f51780bd7a8e76e1330438aab1168688378e7ff71ff82b70ec04f9bd548",
+      "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
+      "decision": "Keep the finite XACTSRV declaration header because original aggregate include crosses missing SMB and private authentication interfaces. Original message body remains intact.",
+      "evidence": "../t483-remaining-reaudit/batch-p186-checkpoint.json"
+    }
+  ],
+  "counts": {
+    "reviewed_in_s7": 199,
+    "remaining": 14,
+    "nonzero_files": 236,
+    "non_error_points": 2012,
+    "non_error_lines": 28395,
+    "source_reduction_s7": {
+      "points": 35,
+      "lines": 581
+    }
+  },
+  "verification": "Pinned sources and hashes, masked census, and unchanged selected executable lines and directives checked. Removed two nonoriginal blanks before existing original EXEC logical-line anchors. Nine other files remain byte-identical. The P7 published runtime remains byte-identical to the package that passed the P10 postpublication Full run."
+}
