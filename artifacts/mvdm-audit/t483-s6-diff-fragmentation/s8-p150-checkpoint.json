@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P150",
+  "position": 193,
+  "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+  "review_ids": [
+    "T483-R2315"
+  ],
+  "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+  "current_sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 10,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 193,
+    "remaining": 38,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "decision": "R2315: retained resource WND does not know the creator compatibility version used by original clmsg for WM_CTLCOLOR selection. A zero WFWIN40COMPAT flag on that copy does not establish a legacy application. Current control-color fallback passes the actual HWND to the native default procedure. This replaces only the provider name; do not generalize its control-window LPARAM conversion to other messages.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  }
+}

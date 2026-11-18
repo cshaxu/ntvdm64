@@ -100,7 +100,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 106,src/non-mvdm/ds/netapi/netlib/packstr.c,3,0,261,0,0,s7-partial-restoration-delivered-p1-residual-pending,,12276ab2954e4c74bbe7a4e895ff96ea49800cdfff72a678781728c3803b5b91
 107,src/non-mvdm/public/sdk/inc/ntregapi.h,5,0,12,2,0,s8-p134-reviewed,T483-R2057;T483-R2058,815ebfe8de1b013662ecd197326c9d22eed4f2dd6354b5ffae5358ee0f0da56b
 108,src/non-mvdm/windows/core/ntuser/client/dmmnem.c,5,11,1,3,0,s8-p148-reviewed,T483-R2295;T483-R2296;T483-R2297;T483-R2298;T483-R2299;T483-R2300;T483-R2301;T483-R2302;T483-R2303;T483-R2304;T483-R2305;T483-R2306;T483-R2307;T483-R2308;T483-R2309;T483-R2310,e59074c1e33943f5827af85d4c0fcaafd07e70fcc33bc9b2ff2c47e79f28f795
-109,src/non-mvdm/windows/core/ntuser/client/drawtext.c,5,0,137,0,0,s7-p11-reviewed,T483-R2311;T483-R2312,507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1
+109,src/non-mvdm/windows/core/ntuser/client/drawtext.c,5,0,137,0,0,s8-p149-reviewed,T483-R2311;T483-R2312,507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1
 111,src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,5,14,480,1,0,s7-p3-reviewed-residual-pending,T483-R2526;T483-R2527;T483-R2528;T483-R2529;T483-R2530;T483-R2531;T483-R2532;T483-R2533;T483-R2534;T483-R2535;T483-R2536;T483-R2537;T483-R2538,61622ce243fa816e2309a07c4cfdd4dc2f5b5e18b3d1a82fac0425fae1049629
 112,src/non-mvdm/windows/core/ntuser/rtl/draw.c,5,1,388,1,0,s7-p12-reviewed,T483-R2673;T483-R2674;T483-R2675;T483-R2676;T483-R2677,c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb
 113,src/mvdm-host/dpmi32/dpmidata.h,2,1,26,2,0,s8-p4-rechecked-residuals-pending-owner,T483-R0143;T483-R0144;T483-R0145;T483-R0146,e4a48426f06d09ecf275a89c4c6067ff80b1221141649da8f323b88d24ff3c7d
@@ -238,6 +238,6 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 250,src/non-mvdm/public/sdk/inc/ntcsrmsg.h,1,2,2,0,0,s8-p131-reviewed,T483-R2031,7c72f522a841a78f78494e950190588fcaf26a2251412a7725171db25258b949
 251,src/non-mvdm/windows/core/ntuser/client/cldib.c,1,1,1,0,0,s8-p138-reviewed,T483-R2141;T483-R2142,b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea
 252,src/non-mvdm/windows/core/ntuser/client/dlgend.c,1,2,0,3,0,s8-p144-reviewed,T483-R2213;T483-R2214;T483-R2215;T483-R2216;T483-R2217;T483-R2218;T483-R2219,a8fbf7c90496774075cecdde77f5ed52bab0c1cf195a02babf44bbc8a045ad3c
-253,src/non-mvdm/windows/core/ntuser/client/editec.c,1,1,1,10,0,s7-p20-reviewed,T483-R2314;T483-R2315,f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07
+253,src/non-mvdm/windows/core/ntuser/client/editec.c,1,1,1,10,0,s8-p150-reviewed,T483-R2314;T483-R2315,f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07
 254,src/non-mvdm/windows/core/ntuser/client/lboxrare.c,1,1,1,1,0,s7-p21-reviewed,T483-R2337,4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8
 255,src/non-mvdm/windows/core/ntuser/rtl/random.c,1,4,0,0,0,s7-p9-reviewed,T483-R2697;T483-R2698;T483-R2699;T483-R2700,531cb137f8b24df7664a617f2c5db84042b429ae6f20d751bf9fa2f8a5a5761b

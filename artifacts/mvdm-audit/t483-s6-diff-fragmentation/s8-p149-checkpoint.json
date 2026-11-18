@@ -1,0 +1,45 @@
+{
+  "packet": "T483 S8 P149",
+  "position": 192,
+  "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+  "review_ids": [
+    "T483-R2311",
+    "T483-R2312"
+  ],
+  "original_sha256": "014e568b4f4ae57d54b8afc4502c890cd19ef1a698273561d9627b1b9c9ec10a",
+  "current_sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+  "before": {
+    "blocks": 5,
+    "added": 0,
+    "deleted": 137
+  },
+  "after": {
+    "blocks": 5,
+    "added": 0,
+    "deleted": 137
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        37,
+        70,
+        "/***************************************************************************\\"
+      ]
+    ]
+  },
+  "coverage": {
+    "complete": 192,
+    "remaining": 39,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "decision": "R2311 and R2312: the omitted bodies implement the ANSI public DrawTextExA, DrawTextA, TabbedTextOutA and GetTabbedTextExtentA providers. P230 actual original link reports duplicate symbols for ANSI imports and unresolved private GdiGetCodePage/UserLocalFree. Supported WOW text thunks use public ANSI services. Original independent Unicode bodies remain in the mirror. No standalone helper among the four deleted functions; keep the public provider boundary pending.",
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  }
+}
