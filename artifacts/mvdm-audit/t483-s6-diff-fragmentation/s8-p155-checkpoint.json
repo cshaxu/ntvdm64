@@ -1,0 +1,61 @@
+{
+  "packet": "T483 S8 P155",
+  "position": 198,
+  "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "review_ids": [
+    "T483-R2354",
+    "T483-R2356",
+    "T483-R2360",
+    "T483-R2361",
+    "T483-R2362",
+    "T483-R2363",
+    "T483-R2379"
+  ],
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "current_sha256": "cfd55dbba23584bf5490a225d1cce0b95c3df885f0daaa931f72b1803cbe193c",
+  "before": {
+    "blocks": 35,
+    "added": 25,
+    "deleted": 1778
+  },
+  "after": {
+    "blocks": 35,
+    "added": 25,
+    "deleted": 1778
+  },
+  "source_changed": true,
+  "paired_error_bodies": 16,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": [
+      [
+        368,
+        167,
+        "#endif"
+      ],
+      [
+        797,
+        753,
+        "#ifdef FE_SB // _PeekMessage()"
+      ],
+      [
+        799,
+        766,
+        "#endif // FE_SB"
+      ]
+    ],
+    "qualification": "The final edit also anchors the original selected precomp.h include at 12, with pragma hdrstop still at 13. Remaining matches are repeated conditional delimiters or FE_SB directives; explicit anchors 368 and 797 identify those original occurrences."
+  },
+  "coverage": {
+    "complete": 198,
+    "remaining": 33,
+    "files": 231,
+    "points": 1912,
+    "lines": 26395,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Current source diff, P8 source history, original and final masked metrics, exact logical stream. Prior product compile controls; no runtime rerun."
+  },
+  "decision": "Current source matched the S6 P8 product mirror before this review. R2354/2356/2360/2379: original service bodies need NT4 private USER receive ABI and queue, task and handle management. Current creation binding differs in argument count (17 vs 14). R2361/2362: dialog procedure and A/W identity are held in native HWND slots; original private PDLG writes alone cannot update those slots. R2363: retain the selection of five compiled providers. Removed six consecutive, immediately superseded #line directives (440,721,759,765,780,793); proved identical logical coordinates of every non-marker line. Original #error bodies unchanged. After the removal-only comparison, added #line 12 for the selected original PCH include. Net five fewer marker lines."
+}

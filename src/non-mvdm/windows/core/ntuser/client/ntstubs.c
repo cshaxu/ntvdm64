@@ -10,6 +10,7 @@
 \**************************************************************************/
 
 #if defined(WOW_ORIGINAL_CONTROL_TEXT) || defined(WOW_ORIGINAL_DIALOG_GETSET)
+#line 12
 #include "precomp.h"
 #elif defined(WOW_ORIGINAL_CONTROL_COLOR) || defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
 #include "wow_edit_call_bindings.h"
@@ -77,7 +78,6 @@ LONG GetClassWOWWords(
 #error
 #line 439
 #else // MEMPHIS_MENUS
-#line 440
 #line 498
 #endif // MEMPHIS_MENUS
 
@@ -145,7 +145,6 @@ HBRUSH GetControlColor(
 #error
 #line 720
 #else
-#line 721
 #line 722
 #endif // FE_IME
 
@@ -155,14 +154,12 @@ HBRUSH GetControlColor(
 #error
 #line 758
 #else
-#line 759
 #line 760
 #ifdef DEBUG
 #line 761
 #error
 #line 764
 #endif
-#line 765
 #line 766
 #endif // FE_SB
 
@@ -172,7 +169,6 @@ HBRUSH GetControlColor(
 #error
 #line 779
 #else
-#line 780
 #line 782
 #endif // FE_SB
 
@@ -182,7 +178,6 @@ HBRUSH GetControlColor(
 #error
 #line 792
 #else
-#line 793
 #line 794
 #endif // FE_SB
 
