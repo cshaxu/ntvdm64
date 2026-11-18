@@ -172,7 +172,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 189,src/non-mvdm/windows/core/ntuser/rtl/chartran.c,2,2,1,3,15,0,191,s7-p12-reviewed,ecf906a4a052d4c1bbd6de179cbd79b6095e7ba786576e9a3f393ac1ae1f4b35
 190,src/non-mvdm/windows/core/ntuser/rtl/help.c,2,4,2,6,0,0,192,s7-p11-reviewed,71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668
 191,src/non-mvdm/windows/core/ntuser/server/exports.c,2,1,85,86,1,0,193,s7-p6-reviewed-residual-pending,40a914396b1123b59a5c4d888860f3b5110e3afaf9be90a70738f0ea50fe2e0d
-192,src/mvdm-host/softpc.new/base/ccpu386/localfm.c,1,2,0,2,0,0,163,s7-p5-partial-original-restoration-residual-pending,1296da38c0d62145e8b867f2f504e649d2caf449039be55acdf60e7e26cf6b67
+192,src/mvdm-host/softpc.new/base/ccpu386/localfm.c,1,2,0,2,0,0,163,s8-p18-reviewed,1296da38c0d62145e8b867f2f504e649d2caf449039be55acdf60e7e26cf6b67
 193,src/mvdm-host/dbg/dbg.c,1,1,1,2,35,0,194,s7-p14-reviewed,f6c2da346f0a421620523036c1afa156852441a035e1407906616ae86e82bd27
 194,src/mvdm-host/dos/dem/dem.h,1,1,0,1,9,0,195,s7-p8-reviewed,9546744ca9593a1f0f9f68d6ffa819c1a265819842e4bd76ebc84d4d6d2b192c
 195,src/mvdm-host/dpmi32/data.c,1,36,0,36,1,0,196,s8-p3-rechecked-residuals-pending-owner,22f7f1a784d5bbd0e2d805f3b7e660ef782d1012c7d92efa610aae9658d0289b
@@ -188,8 +188,8 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 205,src/mvdm-host/softpc.new/base/ccpu386/c_debug.h,1,1,0,1,0,0,206,s8-p12-rechecked-residuals-pending-owner,66711d8b0a1b270cb8196c20b478ff75e18d404a1fd3b40ad081da79498fb97f
 206,src/mvdm-host/softpc.new/base/ccpu386/c_seg.c,1,8,0,8,3,0,207,s8-p14-rechecked-residuals-pending-owner,983bcd1de050928237f211ea391b5e4d9f5191a7a1ed04e60f23e79f93e2a51b
 207,src/mvdm-host/softpc.new/base/ccpu386/call.c,1,1,1,2,6,0,208,s8-p16-reviewed,4053cf58e9c439bdcc74611d31bbddcc21a24884b1eb8d0df9f9595127e202ae
-208,src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1,2,1,3,6,0,209,s7-p18-reviewed,a306e8e1c8623c891f32dfc9e693ce5b4bb7a873f76291daddfdc7f151f98921
-209,src/mvdm-host/softpc.new/base/ccpu386/iret.c,1,1,1,2,1,0,210,s7-p19-reviewed,22a4c8ea19036b35388a5286a992bbd63b19ecfa05157cd71f075f73546c382b
+208,src/mvdm-host/softpc.new/base/ccpu386/fpu.c,1,2,1,3,6,0,209,s8-p18-reviewed,a306e8e1c8623c891f32dfc9e693ce5b4bb7a873f76291daddfdc7f151f98921
+209,src/mvdm-host/softpc.new/base/ccpu386/iret.c,1,1,1,2,1,0,210,s8-p18-reviewed,22a4c8ea19036b35388a5286a992bbd63b19ecfa05157cd71f075f73546c382b
 210,src/mvdm-host/softpc.new/base/ccpu386/ret.c,1,1,1,2,1,0,211,s7-p18-reviewed,033ed0ac65d26a9ec5105fdf6ebb1992eb635080d463bb975a2dc16a178b7cc6
 211,src/mvdm-host/softpc.new/base/ccpu386/sources,1,0,1,1,0,0,212,s7-p23-reviewed,7f87b0cff6f41a59084e736b906e6f2457f7580dfc2cdf98682d8855a13f4432
 212,src/mvdm-host/softpc.new/base/dos/emm_mngr.c,1,190,0,190,25,0,213,s7-p10-reviewed,065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe

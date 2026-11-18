@@ -1,0 +1,47 @@
+{
+  "packet": "T483 S8 P18",
+  "files": [
+    {
+      "position": 41,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "sha256": "a306e8e1c8623c891f32dfc9e693ce5b4bb7a873f76291daddfdc7f151f98921",
+      "pending": "T483-R0472",
+      "blocks": 1,
+      "added": 2,
+      "deleted": 1,
+      "excluded_bodies": 6,
+      "evidence": "Current FIST64 entrypoint 16/16. Historical original rounding control failed 4/16; conversion macro needs the address of a rounded value."
+    },
+    {
+      "position": 42,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "sha256": "22a4c8ea19036b35388a5286a992bbd63b19ecfa05157cd71f075f73546c382b",
+      "pending": "T483-R0473",
+      "blocks": 1,
+      "added": 1,
+      "deleted": 1,
+      "excluded_bodies": 1,
+      "evidence": "Current CALLF/RETF/IRET stack transition fixture 36/36. Historical original predicate failed 2 mixed-width cases; this is a historical target contract without a hardware oracle."
+    },
+    {
+      "position": 43,
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "sha256": "1296da38c0d62145e8b867f2f504e649d2caf449039be55acdf60e7e26cf6b67",
+      "pending": "T483-R0474",
+      "blocks": 1,
+      "added": 2,
+      "deleted": 0,
+      "excluded_bodies": 0,
+      "evidence": "Fresh x86 production flags: current source compiled. Removing evidgen.h gives C2079 VideoVector, removing sas.h gives C2079 SasVector, removing both gives both errors. Original global definitions and logical lines 8 and 9 retained."
+    }
+  ],
+  "delivery": "Audit records only; no product or test source changes. P17 runtime remains published.",
+  "coverage": {
+    "complete": 43,
+    "remaining": 188,
+    "files": 231,
+    "points": 1956,
+    "lines": 27109,
+    "pending": 1549
+  }
+}
