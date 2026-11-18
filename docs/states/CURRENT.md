@@ -2,23 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T483 S10**
+**No active M/T/S packet.** T483 remains open between subtasks.
 
-Owner accepted S9 and admitted S10. [S9 audit and delivery](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
+## S10 Closure Record
 
-## Active Packet
-
-| Field | Record |
-|---|---|
-| Identifier Mode | M0 T483 S10, Ordinary Mode. |
-| Baseline | S9 P9 at 55643b6c5. |
-| Scope | Promote frontend-base to a top-level source and test component. Rename the shared Hook source component to nthook-dll. |
-| Deliverables | Update source consumers, build graphs, ownership gates and current architecture documentation. Preserve both Hook DLL filenames and the 11-image package contract. |
-| Verification | Cached x86/x64 builds, publish to both destinations, targeted frontend and Hook ownership tests, commit and push. |
-
-## S10 delivery
-
-P1 built both release presets and published package c3e16355-bebc-4896-a22b-b77a3553ae2c. [Delivery evidence](../etc/evidence/m0-t483-s10-components.md). Ready for owner acceptance.
+Owner accepted and closed T483 S10. P1 shipped at 14969ed80 with the targeted verification recorded in the [S10 delivery and closure record](../etc/evidence/m0-t483-s10-components.md).
 
 ## S9 Closure Record
 

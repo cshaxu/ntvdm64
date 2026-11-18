@@ -8,3 +8,7 @@ Baseline 55643b6c5. The owner admitted frontend-base promotion and shared Hook c
 - Explicitly built and ran the three frontend-base test targets (channel, service and video) on x64 and ntvdm-vm-frontend-test.exe on x86 (233 assertions). The default build does not produce all test executables.
 - The isolated nested-window broker I/O integration ran actual CMD/DOS input, returned to its parent and delivered exit code 23. Frontend link ownership, BaseSrv ownership and both native Hook context/installer ownership checks passed including negative controls. The BaseSrv verifier now accepts the actual x64 Hook graph path while retaining its existing default for combined build trees.
 - Targeted verification per owner request. Historical delivery records retain their original paths.
+
+## Closure
+
+Owner accepted S10 after P1 was pushed to main at 14969ed80. The closure check confirmed both published manifests and all eleven image hashes at both destinations, both successful build receipts, and the passing targeted test witnesses. T483 remains open between subtasks.
