@@ -1,0 +1,35 @@
+{
+  "packet": "T483 S8 P183",
+  "position": 226,
+  "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+  "review_ids": [
+    "T483-S7-P18-NTCOM"
+  ],
+  "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+  "current_sha256": "2b1eb93e32d33751bf2913f714bc370fb05918166921b60f9ef3e4cf4a283178",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "paired_error_bodies": 9,
+  "decision": "Only the live sprintf uses the long argument at a variadic boundary; its original %d is diagnosed by gcc -m32 -Werror=format on the extracted call. Retain %ld there. The original trace call is erased by production debug.h; restore its original %d and match the fixture to the production no-op. The real error string and saved baud state remain checked.",
+  "line_check": "Changed trace aligns with original 1086. Only selected statement difference at 1084. Six compressed excluded bodies have physical closing directives before their original coordinates; the following #line restores each selected continuation. No exclusion edits.",
+  "verification": {
+    "objects": "Worker raw identical, worker-reference identical outside COFF timestamp.",
+    "test": "Production baud arm fixture passed 12 cases; no physical serial device."
+  },
+  "coverage": {
+    "complete": 226,
+    "remaining": 5,
+    "files": 231,
+    "points": 1903,
+    "lines": 26246,
+    "pending": 1532
+  }
+}

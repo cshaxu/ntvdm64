@@ -161,7 +161,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 173,src/mvdm-host/softpc.new/base/video/v7_ports.c,2,2,2,1,0,s8-p38-reviewed,T483-R0941;T483-R0942,4194a9d0dfbaeef1b7b8c2c1970a1758507b724d3e8167687f0b2d3ce06b44b3
 174,src/mvdm-host/softpc.new/base/video/v7_video.c,2,2,1,4,0,s8-p38-reviewed,T483-R0943;T483-R0944;T483-R0945;T483-R0946,30a54762cb9bf8acb3a2d7d23b64e9ac41092ab83f4327b5742710e4e1be1d0b
 175,src/mvdm-host/softpc.new/base/video/vga_prts.c,2,2,2,34,0,s8-p39-reviewed,T483-R0950;T483-R0951;T483-R0952;T483-R0953,63144c55a5f74c99cf5d4da74f9fe547f16ade2e84d32b64f5dcce517dea12ac
-176,src/mvdm-host/softpc.new/host/src/nt_com.c,2,2,2,9,0,s7-p18-reviewed,,e8f6583e07f1f79036c56c454a22574dfb5987f3e0e1dab9afcb0a6f717f6af7
+176,src/mvdm-host/softpc.new/host/src/nt_com.c,1,1,1,9,0,s8-p183-reviewed,,2b1eb93e32d33751bf2913f714bc370fb05918166921b60f9ef3e4cf4a283178
 177,src/mvdm-host/softpc.new/host/src/nt_eoi.c,2,5,5,8,0,s7-p8-reviewed,T483-R1047,a5c144ad5d99806af6ed57b5cfb6aad92bc4e3474bc83f8be74942abc69be29d
 178,src/mvdm-host/softpc.new/host/src/nt_error.c,2,2,2,6,0,s8-p47-reviewed,T483-R1048;T483-R1049;T483-R1050;T483-R1051;T483-R1052;T483-R1053;T483-R1054;T483-R1055,23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d
 179,src/mvdm-host/softpc.new/host/src/nt_keycd.c,2,2,2,0,0,s8-p51-reviewed,T483-R1170;T483-R1171;T483-R1172,eee7e08dd0bc4b094907d176b465d0cbb29fabf61dc9dcf0954fb88fe72fa794

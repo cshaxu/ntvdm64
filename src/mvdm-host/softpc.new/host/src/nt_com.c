@@ -1065,7 +1065,7 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	    {
 		sprintf(BaudRateStr, "(%ld)", arg);
 		host_error(EHS_UNSUPPORTED_BAUD, ERR_CONT, BaudRateStr);
-		always_trace1("set BAUD failed - SetBaudRate:%ld", arg);
+		always_trace1("set BAUD failed - SetBaudRate:%d", arg);
 	    }
 	    current->ComStates.BaudRate = (DWORD)arg;
 
