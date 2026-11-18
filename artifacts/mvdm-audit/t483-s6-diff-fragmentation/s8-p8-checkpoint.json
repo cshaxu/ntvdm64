@@ -1,0 +1,131 @@
+{
+  "packet": "M0 T483 S8 P8",
+  "prior_checkpoint": "268a68aa9",
+  "covered_before": 25,
+  "covered_after": 27,
+  "remaining": 204,
+  "pending_rows": 1549,
+  "global_non_error": {
+    "mirrors": 231,
+    "points": 1957,
+    "lines": 27118
+  },
+  "cumulative_s8_reduction": {
+    "points": 17,
+    "lines": 92
+  },
+  "files": [
+    {
+      "position": 26,
+      "path": "src/mvdm-host/oemuni/process.c",
+      "original_sha256": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+      "source_sha256": "a63520c503f095f3c31c76d45bee878832f9414e7079c90bdc87f36bfd224d89",
+      "before": {
+        "blocks": 47,
+        "added": 119,
+        "deleted": 48
+      },
+      "after": {
+        "blocks": 30,
+        "added": 74,
+        "deleted": 26
+      },
+      "review_ids": "T483-R0292;T483-R0293;T483-R0294;T483-R0295;T483-R0296;T483-R0297;T483-R0298;T483-R0299;T483-R0300;T483-R0301;T483-R0302;T483-R0303;T483-R0304;T483-R0306;T483-R0307;T483-R0308;T483-R0309;T483-R0310;T483-R0311;T483-R0312;T483-R0313;T483-R0314;T483-R0315;T483-R0316;T483-R0317;T483-R0318;T483-R0319;T483-R0320;T483-R0321;T483-R0322;T483-R0323;T483-R0324;T483-R0325;T483-R0326;T483-R0327;T483-R0328;T483-R0329;T483-R0330;T483-R0331;T483-R0332;T483-R0333;T483-R0334;T483-R0335;T483-R0336;T483-R0337;T483-R0338;T483-R0339;T483-R0340",
+      "paired_error_bodies_unchanged": 1,
+      "restored_ids": [
+        "T483-R0292",
+        "T483-R0293",
+        "T483-R0294",
+        "T483-R0295",
+        "T483-R0296",
+        "T483-R0297",
+        "T483-R0298",
+        "T483-R0299",
+        "T483-R0300",
+        "T483-R0301",
+        "T483-R0302",
+        "T483-R0303",
+        "T483-R0313",
+        "T483-R0314",
+        "T483-R0315",
+        "T483-R0316",
+        "T483-R0317"
+      ],
+      "pending_ids": [
+        "T483-R0304",
+        "T483-R0306",
+        "T483-R0307",
+        "T483-R0308",
+        "T483-R0309",
+        "T483-R0310",
+        "T483-R0311",
+        "T483-R0312",
+        "T483-R0318",
+        "T483-R0319",
+        "T483-R0320",
+        "T483-R0321",
+        "T483-R0322",
+        "T483-R0323",
+        "T483-R0324",
+        "T483-R0325",
+        "T483-R0326",
+        "T483-R0327",
+        "T483-R0328",
+        "T483-R0329",
+        "T483-R0330",
+        "T483-R0331",
+        "T483-R0332",
+        "T483-R0333",
+        "T483-R0334",
+        "T483-R0335",
+        "T483-R0336",
+        "T483-R0337",
+        "T483-R0338",
+        "T483-R0339",
+        "T483-R0340"
+      ],
+      "disposition": "Restore the complete OpenNT implementations of GetSystemDirectoryOem, GetWindowsDirectoryOem and GetTempPathOem. No production source consumer or production link-map entry found. The historical CP932 fixture demonstrated differences in these test-only API capacities. Its corresponding cases are withdrawn, while native family smoke and DBCS coverage of production APIs remain. The seven-function historical controls and per-point evidence remain indexed by the prior receipt.",
+      "previous_evidence": "process-whole-file-review.json"
+    },
+    {
+      "position": 27,
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "source_sha256": "02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449",
+      "before": {
+        "blocks": 2,
+        "added": 0,
+        "deleted": 2
+      },
+      "after": {
+        "blocks": 2,
+        "added": 0,
+        "deleted": 2
+      },
+      "review_ids": "T483-R0342;T483-R0343",
+      "paired_error_bodies_unchanged": 38,
+      "disposition": "Keep the original CPU_30_STYLE conditional and both continuation omissions pending. Selected CCPU handler invalidates the fetch pointer after BOP and resumes from c_setIP's exact EIP. Restoring -2 changes supplied continuation T to T-2. Source-call-chain evidence, no dedicated reset runtime reproduction.",
+      "previous_evidence": "../t483-remaining-reaudit/r0342-r0343-reset-call-chain.json"
+    }
+  ],
+  "verification": {
+    "cached_builds": [
+      "x86",
+      "x64"
+    ],
+    "package_id": "11f359ee-1d43-4787-9db2-d9841e4f48f2",
+    "manifest_sha256": "ce8a14c8a2f4b9845e7a707b2d533f35504a5aa5c460a7b76d4d84a20dca9ca8",
+    "images_per_destination": 11,
+    "publication": "Both assets/release and O:/winnt/system32 verified against the staged manifest.",
+    "targeted_oem_tests": [
+      "oemuni-dbcs-fixture",
+      "oemuni-expand-failure-fixture",
+      "oemuni-family-fixture",
+      "oemuni-failure-fixture",
+      "oemuni-pif-fault-fixture"
+    ],
+    "full_runtime_suite": "Owner requested focused testing for this checkpoint.",
+    "line_anchors": "Matching nonempty original code lines preserve logical coordinates in both audited files. The three restored complete functions have original bodies and start coordinates.",
+    "excluded_arms": "1 unchanged paired error body in process.c and 38 in reset.c."
+  }
+}

@@ -31,11 +31,7 @@ Routine Description:
     UNICODE_STRING Unicode;
     NTSTATUS Status;
 
-    DWORD UnicodeCapacity = GetSystemDirectoryW(NULL,0);
-    if ( !UnicodeCapacity ) return 0;
-    if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
-    Unicode.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
-#line 35
+    Unicode.MaximumLength = (USHORT)((uSize<<1)+sizeof(UNICODE_NULL));
     Unicode.Buffer = RtlAllocateHeap(
                                 RtlProcessHeap(), 0,
                                 Unicode.MaximumLength
@@ -45,25 +41,16 @@ Routine Description:
         return 0;
         }
 
-    UnicodeCapacity = GetSystemDirectoryW(Unicode.Buffer,UnicodeCapacity);
+    Unicode.Length = GetSystemDirectoryW(Unicode.Buffer,
+                               (Unicode.MaximumLength-sizeof(UNICODE_NULL))/2
+                                )*2;
 
-    if ( !UnicodeCapacity || UnicodeCapacity >= Unicode.MaximumLength/sizeof(WCHAR) ) {
-#line 49
+    if ( Unicode.Length > (USHORT)(Unicode.MaximumLength-sizeof(UNICODE_NULL)) ) {
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
-        if ( UnicodeCapacity ) BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
-        return 0;
-#line 51
+        return Unicode.Length>>1;
         }
-    Unicode.Length = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
-#line 52
     OemString.Buffer = lpBuffer;
-    OemString.MaximumLength = (USHORT)min(uSize,65535);
-    if ( RtlUnicodeStringToOemSize(&Unicode) > uSize ) {
-        uSize = RtlUnicodeStringToOemSize(&Unicode);
-        RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
-        return uSize;
-        }
-#line 54
+    OemString.MaximumLength = (USHORT)(uSize+1);
     Status = RtlUnicodeStringToOemString(&OemString,&Unicode,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
     if ( !NT_SUCCESS(Status) ) {
@@ -95,11 +82,7 @@ Routine Description:
     UNICODE_STRING Unicode;
     NTSTATUS Status;
 
-    DWORD UnicodeCapacity = GetWindowsDirectoryW(NULL,0);
-    if ( !UnicodeCapacity ) return 0;
-    if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
-    Unicode.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
-#line 86
+    Unicode.MaximumLength = (USHORT)((uSize<<1)+sizeof(UNICODE_NULL));
     Unicode.Buffer = RtlAllocateHeap(
                                 RtlProcessHeap(), 0,
                                 Unicode.MaximumLength
@@ -109,25 +92,16 @@ Routine Description:
         return 0;
         }
 
-    UnicodeCapacity = GetWindowsDirectoryW(Unicode.Buffer,UnicodeCapacity);
+    Unicode.Length = GetWindowsDirectoryW(Unicode.Buffer,
+                                (Unicode.MaximumLength-sizeof(UNICODE_NULL))/2
+                                )*2;
 
-    if ( !UnicodeCapacity || UnicodeCapacity >= Unicode.MaximumLength/sizeof(WCHAR) ) {
-#line 100
+    if ( Unicode.Length > (USHORT)(Unicode.MaximumLength-sizeof(UNICODE_NULL)) ) {
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
-        if ( UnicodeCapacity ) BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
-        return 0;
-#line 102
+        return Unicode.Length>>1;
         }
-    Unicode.Length = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
-#line 103
     OemString.Buffer = lpBuffer;
-    OemString.MaximumLength = (USHORT)min(uSize,65535);
-    if ( RtlUnicodeStringToOemSize(&Unicode) > uSize ) {
-        uSize = RtlUnicodeStringToOemSize(&Unicode);
-        RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
-        return uSize;
-        }
-#line 105
+    OemString.MaximumLength = (USHORT)(uSize+1);
     Status = RtlUnicodeStringToOemString(&OemString,&Unicode,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
     if ( !NT_SUCCESS(Status) ) {
@@ -306,11 +280,7 @@ Routine Description:
     UNICODE_STRING UnicodeString;
     NTSTATUS Status;
 
-    DWORD UnicodeCapacity = GetTempPathW(0,NULL);
-    if ( !UnicodeCapacity ) return 0;
-    if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
-    UnicodeString.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
-#line 264
+    UnicodeString.MaximumLength = (USHORT)((nBufferLength<<1)+sizeof(UNICODE_NULL));
     UnicodeString.Buffer = RtlAllocateHeap(
                                 RtlProcessHeap(), 0,
                                 UnicodeString.MaximumLength
@@ -319,24 +289,16 @@ Routine Description:
         BaseSetLastNTError(STATUS_NO_MEMORY);
         return 0;
         }
-    UnicodeCapacity = GetTempPathW(UnicodeCapacity,UnicodeString.Buffer);
-    if ( !UnicodeCapacity || UnicodeCapacity >= UnicodeString.MaximumLength/sizeof(WCHAR) ) {
-#line 277
+    UnicodeString.Length = (USHORT)GetTempPathW(
+                                        (DWORD)(UnicodeString.MaximumLength-sizeof(UNICODE_NULL))/2,
+                                        UnicodeString.Buffer
+                                        )*2;
+    if ( UnicodeString.Length > (USHORT)(UnicodeString.MaximumLength-sizeof(UNICODE_NULL)) ) {
         RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
-        if ( UnicodeCapacity ) BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
-        return 0;
-#line 279
+        return UnicodeString.Length>>1;
         }
-    UnicodeString.Length = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
-#line 280
     OemString.Buffer = lpBuffer;
-    OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
-    if ( RtlUnicodeStringToOemSize(&UnicodeString) > nBufferLength ) {
-        nBufferLength = RtlUnicodeStringToOemSize(&UnicodeString);
-        RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
-        return nBufferLength;
-        }
-#line 282
+    OemString.MaximumLength = (USHORT)(nBufferLength+1);
     Status = RtlUnicodeStringToOemString(&OemString,&UnicodeString,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
     if ( !NT_SUCCESS(Status) ) {

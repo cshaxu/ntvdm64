@@ -64,15 +64,6 @@ static DWORD WINAPI fixed_search(LPCWSTR path, LPCWSTR name, LPCWSTR extension,
     return fixed_path(L"", chars * sizeof(WCHAR), output, part) / sizeof(WCHAR);
 }
 
-static UINT WINAPI fixed_directory(LPWSTR output, UINT chars)
-{
-    return fixed_path(L"", chars * sizeof(WCHAR), output, NULL) / sizeof(WCHAR);
-}
-
-static DWORD WINAPI fixed_temp(DWORD chars, LPWSTR output)
-{
-    return fixed_directory(output, chars);
-}
 static DWORD WINAPI fixed_short(LPCWSTR input, LPWSTR output, DWORD chars)
 {
     return fixed_path(input, chars*sizeof(WCHAR), output, NULL)/sizeof(WCHAR);
@@ -123,9 +114,6 @@ static BOOL WINAPI fixed_volume(LPCWSTR root, LPWSTR volume, DWORD volume_size,
 #define RtlUnicodeStringToOemSize cp932_size
 #define RtlGetCurrentDirectory_U fixed_current
 #define SearchPathW fixed_search
-#define GetSystemDirectoryW fixed_directory
-#define GetWindowsDirectoryW fixed_directory
-#define GetTempPathW fixed_temp
 #define GetShortPathNameW fixed_short
 #define GetComputerNameW fixed_computer
 #define GetVolumeInformationW fixed_volume
@@ -174,19 +162,6 @@ int main(void)
     if (SearchPathOem(NULL, "x.txt", NULL, 12, output, &part) != 11 ||
         part != output+6 || memcmp(output, expected, 12)) return 14;
     puts("S37_DBCS_CURRENT_SEARCH_CAPACITY_OK");
-    memset(output, 0x5a, sizeof(output));
-    actual = GetSystemDirectoryOem(output, 11);
-    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 10;
-    if (GetSystemDirectoryOem(output, 12) != 11 || memcmp(output, expected, 12)) return 15;
-    memset(output, 0x5a, sizeof(output));
-    actual = GetWindowsDirectoryOem(output, 11);
-    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 11;
-    if (GetWindowsDirectoryOem(output, 12) != 11 || memcmp(output, expected, 12)) return 16;
-    memset(output, 0x5a, sizeof(output));
-    actual = GetTempPathOem(11, output);
-    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 12;
-    if (GetTempPathOem(12, output) != 11 || memcmp(output, expected, 12)) return 17;
-    puts("S37_DBCS_SYSTEM_WINDOWS_TEMP_CAPACITY_OK");
     {
         CHAR volume[8], fs[8];
         int which;
@@ -212,9 +187,9 @@ int main(void)
     puts("S37_DBCS_VOLUME_BOTH_CAPACITIES_OPTIONAL_FAILURE_CLEANUP_OK");
     {
         static const DWORD capacities[] = {0, 1, 10, 11, 12, 65536};
-        static const char *names[] = {"current", "system", "windows", "temp", "search"};
+        static const char *names[] = {"current", "search"};
         unsigned i, api, mismatches = 0;
-        for (api = 0; api < 5; ++api) {
+        for (api = 0; api < 2; ++api) {
             for (i = 0; i < sizeof(capacities)/sizeof(capacities[0]); ++i) {
                 DWORD cap = capacities[i], wanted = cap < 12 ? 12 : 11;
                 int valid;
@@ -222,9 +197,6 @@ int main(void)
                 SetLastError(0);
                 switch (api) {
                 case 0: actual = GetCurrentDirectoryOem(cap, output); break;
-                case 1: actual = GetSystemDirectoryOem(output, cap); break;
-                case 2: actual = GetWindowsDirectoryOem(output, cap); break;
-                case 3: actual = GetTempPathOem(cap, output); break;
                 default: actual = SearchPathOem(NULL, "x.txt", NULL, cap, output, NULL); break;
                 }
                 valid = actual == wanted && (cap < 12 ? output[0] == 0x5a :
@@ -235,22 +207,15 @@ int main(void)
             }
         }
         if (mismatches) return 22;
-        puts("S37_SIZE_MATRIX_ALL_30_PASS");
+        puts("S37_SIZE_MATRIX_ALL_12_PASS");
         for (path_mode = 4; path_mode <= 7; ++path_mode) {
-            for (api = 1; api < 5; ++api) {
-                DWORD error = path_mode == 5 ? ERROR_NOT_READY :
-                    path_mode == 7 ? ERROR_NOT_ENOUGH_MEMORY : ERROR_MORE_DATA;
-                fail_allocation = path_mode == 7;
-                memset(output, 0x5a, sizeof(output));
-                SetLastError(0);
-                switch (api) {
-                case 1: actual = GetSystemDirectoryOem(output, 12); break;
-                case 2: actual = GetWindowsDirectoryOem(output, 12); break;
-                case 3: actual = GetTempPathOem(12, output); break;
-                default: actual = SearchPathOem(NULL, "x.txt", NULL, 12, output, NULL); break;
-                }
-                if (actual || GetLastError() != error || output[0] != 0x5a || outstanding) return 23;
-            }
+            DWORD error = path_mode == 5 ? ERROR_NOT_READY :
+                path_mode == 7 ? ERROR_NOT_ENOUGH_MEMORY : ERROR_MORE_DATA;
+            fail_allocation = path_mode == 7;
+            memset(output, 0x5a, sizeof(output));
+            SetLastError(0);
+            actual = SearchPathOem(NULL, "x.txt", NULL, 12, output, NULL);
+            if (actual || GetLastError() != error || output[0] != 0x5a || outstanding) return 23;
         }
         puts("S37_QUERY_GROWTH_FAILURE_OVERSIZE_ALLOCATION_CLEANUP_OK");
         path_mode = 0;
