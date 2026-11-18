@@ -104,7 +104,7 @@ typedef struct tagTDB *PTDB;
 
 /* Original user.h:761 queue pointer for consumers without the cleanup
  * input-group binding. No native queue object is created or reinterpreted. */
-#if !defined(WOW_ORIGINAL_CLEANUP) && (defined(WOW_ORIGINAL_TASK_ORDER) || defined(WOW_USER_OBJECT_FLAGS_ONLY))
+#ifndef WOW_ORIGINAL_CLEANUP
 typedef struct tagQ *PQ;
 #endif
 

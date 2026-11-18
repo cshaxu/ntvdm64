@@ -17,13 +17,6 @@ typedef DWORD (__cdecl *OPENNT_CDECL_THREAD_START_ROUTINE)(LPVOID parameter);
 typedef VOID (__cdecl *OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(VOID);
 typedef VOID (__cdecl *OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)(LPVOID parameter);
 
-HANDLE opennt_create_cdecl_thread(
-    LPSECURITY_ATTRIBUTES attributes,
-    SIZE_T stack_bytes,
-    OPENNT_CDECL_THREAD_START_ROUTINE start_routine,
-    LPVOID parameter,
-    DWORD flags,
-    LPDWORD thread_id);
 HANDLE opennt_create_cdecl_thread_named(
     LPSECURITY_ATTRIBUTES attributes,
     SIZE_T stack_bytes,
@@ -46,13 +39,6 @@ HANDLE opennt_create_winapi_thread_named(
     LPDWORD thread_id,
     const char *source_name);
 
-HANDLE opennt_create_void_cdecl_thread(
-    LPSECURITY_ATTRIBUTES attributes,
-    SIZE_T stack_bytes,
-    OPENNT_VOID_CDECL_THREAD_START_ROUTINE start_routine,
-    LPVOID parameter,
-    DWORD flags,
-    LPDWORD thread_id);
 HANDLE opennt_create_void_cdecl_thread_named(
     LPSECURITY_ATTRIBUTES attributes,
     SIZE_T stack_bytes,

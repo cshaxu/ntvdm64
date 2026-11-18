@@ -56,14 +56,6 @@ HANDLE opennt_create_cdecl_thread_named(LPSECURITY_ATTRIBUTES attributes,
         thread_id, source_name);
 }
 
-HANDLE opennt_create_cdecl_thread(LPSECURITY_ATTRIBUTES attributes,
-    SIZE_T stack_bytes, OPENNT_CDECL_THREAD_START_ROUTINE start_routine, LPVOID parameter,
-    DWORD flags, LPDWORD thread_id)
-{
-    return opennt_create_cdecl_thread_named(attributes, stack_bytes,
-        start_routine, parameter, flags, thread_id, NULL);
-}
-
 HANDLE opennt_create_winapi_thread_named(LPSECURITY_ATTRIBUTES attributes,
     SIZE_T stack_bytes, LPTHREAD_START_ROUTINE start_routine, LPVOID parameter,
     DWORD flags, LPDWORD thread_id, const char *source_name)
@@ -82,14 +74,6 @@ HANDLE opennt_create_void_cdecl_thread_named(LPSECURITY_ATTRIBUTES attributes,
     entry.void_entry = start_routine;
     return create_bound(attributes, stack_bytes, entry, parameter, flags,
         thread_id, source_name);
-}
-
-HANDLE opennt_create_void_cdecl_thread(LPSECURITY_ATTRIBUTES attributes,
-    SIZE_T stack_bytes, OPENNT_VOID_CDECL_THREAD_START_ROUTINE start_routine, LPVOID parameter,
-    DWORD flags, LPDWORD thread_id)
-{
-    return opennt_create_void_cdecl_thread_named(attributes, stack_bytes,
-        start_routine, parameter, flags, thread_id, NULL);
 }
 
 HANDLE opennt_create_void_cdecl_parameter_thread_named(LPSECURITY_ATTRIBUTES attributes,

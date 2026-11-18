@@ -21,7 +21,7 @@ Owner closed S8 and admitted the sequential non-mirror code quality audit.
 
 ## Progress
 
-P3 screened all 40 files and compiled isolated candidates. Its [findings](../../artifacts/t483-s9-non-mirror-audit/p3.md) are leads for the file-by-file review. The sequential audit has completed 26/40 files. P5 reduced compat by 36 physical lines and published the verified 11-image package. P6 updated the historical register and reviewed four original WOW units. P7 simplified COMMAND forwarding aliases and reviewed files 8 through 16. P8 removed duplicate RTL declarations, memory macros, I/O class aliases and includes. Cumulative C/header reduction is 60 lines. Files 17 through 19 retain distinct console header scopes and share their existing providers. Next is include/thread_start_compat.h. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
+S9 is ready for owner review. All 40 files in the frozen DIR order have a recorded disposition. P5, P7, P8 and P9 delivered the source changes; P6 updated the historical register. The final 14 C files and 27 headers total 2209 physical lines (2298 at entry, reduction 89 including the cost of both new shared headers). README is separately down 9 lines. P9 published package 20cfd8c5-b279-43e4-b856-0317296d8bcb to both release destinations. Thread lifecycle, original heartbeat, redirector enumeration, the 38-case WOW control cohort and the real Win16 guest probe passed. [Sequential decisions](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
 
 ## S1 Closure Record
 

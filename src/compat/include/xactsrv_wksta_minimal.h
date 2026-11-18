@@ -10,7 +10,6 @@
 #define _XACTSRV_LOCAL_MINIMAL_H_
 
 #include <nt.h>
-#include <windows.h>
 #include <tstring.h>
 #include <lm.h>
 #include <winsvc.h>
@@ -41,12 +40,6 @@
 
 #ifndef IF_DEBUG
 #define IF_DEBUG(_x) if (0)
-#endif
-
-#ifndef API_HANDLER_PARAMETERS_REFERENCE
-#define API_HANDLER_PARAMETERS_REFERENCE \
-    UNREFERENCED_PARAMETER(Header); \
-    UNREFERENCED_PARAMETER(AuxStructureDesc)
 #endif
 
 #endif

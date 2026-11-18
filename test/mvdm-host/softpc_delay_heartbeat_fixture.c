@@ -40,12 +40,23 @@ void PrioWaitIfIdle(void) { ExitProcess(110u); }
 void c_cpu_interrupt(void) { ExitProcess(111u); }
 void idetect(void) { ExitProcess(112u); }
 void GetScaleEvent(void) { ExitProcess(113u); }
-HANDLE opennt_create_cdecl_thread(LPSECURITY_ATTRIBUTES attributes,
+/* STATUS_ALERTED termination falls outside the suspend/resume case. */
+BOOL WINAPI MvdmCloseConsoleHandle(HANDLE handle)
+{
+    (void)handle;
+    ExitProcess(117u);
+}
+VOID WINAPI opennt_exit_thread(DWORD code)
+{
+    (void)code;
+    ExitProcess(118u);
+}
+HANDLE opennt_create_cdecl_thread_named(LPSECURITY_ATTRIBUTES attributes,
     SIZE_T stack_bytes, OPENNT_CDECL_THREAD_START_ROUTINE start_routine,
-    LPVOID parameter, DWORD flags, LPDWORD thread_id)
+    LPVOID parameter, DWORD flags, LPDWORD thread_id, const char *source_name)
 {
     (void)attributes; (void)stack_bytes; (void)start_routine;
-    (void)parameter; (void)flags; (void)thread_id;
+    (void)parameter; (void)flags; (void)thread_id; (void)source_name;
     ExitProcess(114u);
     return NULL;
 }

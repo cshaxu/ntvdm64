@@ -3,7 +3,7 @@
 
 /* DIVERGENCE(ADAPTER-WIN32-034): preserve all other original private-console
  * declarations verbatim, but prevent its DLL-import declaration from being
- * attached to the one ANSI layout query supplied by console_compat.c. */
+ * attached to the one ANSI layout query supplied by console_client.c. */
 #define GetConsoleKeyboardLayoutNameA opennt_private_GetConsoleKeyboardLayoutNameA
 #include "../../non-mvdm/public/internal/windows/inc/winconp.h"
 #undef GetConsoleKeyboardLayoutNameA

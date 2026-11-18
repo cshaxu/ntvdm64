@@ -22,13 +22,10 @@
 #include <string.h>
 #include <wchar.h>
 int WCSToMBEx(WORD, LPCWSTR, int, LPSTR *, int, BOOL);
-int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
+#include "wow_multibyte.h"
 #define WCSToMB(pUnicodeString, cbUnicodeChar, ppAnsiString, nAnsiChar,\
 bAllocateMem)\
 WCSToMBEx(0, pUnicodeString, cbUnicodeChar, ppAnsiString, nAnsiChar, bAllocateMem)
-#define MBToWCS(pAnsiString, nAnsiChar, ppUnicodeString, cbUnicodeChar,\
-bAllocateMem)\
-MBToWCSEx(0, pAnsiString, nAnsiChar, ppUnicodeString, cbUnicodeChar, bAllocateMem)
 #include <pshpack2.h>
 typedef struct {
     WORD wDlgVer;
@@ -65,21 +62,5 @@ typedef struct {
 #define SW_SCROLLWINDOW     0x8000  /* Called from ScrollWindow() */
 #define DS_VALID40          0x3FFFL
 #define DS_COMMONDIALOG     0x4000L
-#ifndef SCDLG_CLIENT
-#define SCDLG_CLIENT            0x0001
-#define SCDLG_ANSI              0x0002
-#define SCDLG_NOREVALIDATE      0x0004
-#define SCDLG_16BIT             0x0008
-#endif
-#ifndef DDL_VALID
-#define DDL_VALID          (DDL_READWRITE  | \
-                            DDL_READONLY   | \
-                            DDL_HIDDEN     | \
-                            DDL_SYSTEM     | \
-                            DDL_DIRECTORY  | \
-                            DDL_ARCHIVE    | \
-                            DDL_POSTMSGS   | \
-                            DDL_DRIVES     | \
-                            DDL_EXCLUSIVE)
-#endif
+#include "wow_dialog_flags.h"
 #endif

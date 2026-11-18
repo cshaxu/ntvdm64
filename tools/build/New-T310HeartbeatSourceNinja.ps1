@@ -36,12 +36,11 @@ $includes = @(
     'src',
     'src/compat/include',
     'src/non-mvdm/public/sdk/inc',
-    'src/non-mvdm/public/sdk/inc',
     'src/non-mvdm/public/internal/base/inc',
     'src/non-mvdm/public/internal/windows/inc',
     'src/non-mvdm/private/windows/inc',
     'src/non-mvdm/public/ddk/inc',
-    'src/mvdm-support/inc',
+    'src/mvdm-host/inc',
     'src/ntvdm-exe/softpc/include/generated/x86/prod',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
@@ -57,7 +56,7 @@ $includes = @(
 $nt = NinjaPath (Join-Path $root 'src/compat/include/nt.h')
 $ntexapi = NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/ntexapi.h')
 $threadCompat = NinjaPath (Join-Path $root 'src/compat/include/thread_start_compat.h')
-$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + $nt + '" /FI "' + $ntexapi + '" /FI "' + $threadCompat + '" ' + ($includes -join ' ')
+$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DV7VGA /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + $nt + '" /FI "' + $ntexapi + '" /FI "' + $threadCompat + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = ' + $cflags)

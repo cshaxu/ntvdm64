@@ -18,10 +18,7 @@
 #define GCL_WOWWORDS (-27)
 #define GCL_WOWDWORD1 (-28)
 #define GCL_WOWDWORD2 (-29)
-#define SCDLG_CLIENT 0x0001
-#define SCDLG_ANSI 0x0002
-#define SCDLG_NOREVALIDATE 0x0004
-#define SCDLG_16BIT 0x0008
+#include "wow_dialog_flags.h"
 #define WM_WINHELP 0x0038
 #define WM_CLIENTSHUTDOWN 0x003B
 #define MM_CALCSCROLL 0x003F
@@ -30,9 +27,6 @@
 #define COLOR_ENDCOLORS COLOR_INFOBK
 #define WMNW_UPDATEFINDREPLACE 0
 #define EWX_NOTIFY 0x8000
-#define DDL_VALID (DDL_READWRITE | DDL_READONLY | DDL_HIDDEN | DDL_SYSTEM | \
-                   DDL_DIRECTORY | DDL_ARCHIVE | DDL_POSTMSGS | DDL_DRIVES | \
-                   DDL_EXCLUSIVE)
 #define SWP_VALID (SWP_DEFERERASE | SWP_ASYNCWINDOWPOS | SWP_NOCOPYBITS | \
                    SWP_NOOWNERZORDER | SWP_NOSENDCHANGING | SWP_NOSIZE | \
                    SWP_NOMOVE | SWP_NOZORDER | SWP_NOREDRAW | SWP_NOACTIVATE | \
@@ -55,9 +49,7 @@ typedef struct _WOW32_DROPFILESTRUCT {
     BOOL fWide;
 } DROPFILESTRUCT, *LPDROPFILESTRUCT;
 
-int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
-#define MBToWCS(ansi, ansi_count, wide_out, wide_count, allocate) \
-    MBToWCSEx(0, (ansi), (ansi_count), (wide_out), (wide_count), (allocate))
+#include "wow_multibyte.h"
 int WINAPI DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW, HWND,
     DLGPROC, LPARAM, UINT);
 HFONT WINAPI GetHFONT(HDC);

@@ -32,7 +32,7 @@ ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *, PUNICODE_STRING,
 BOOL WINAPI wow_class_client_remove(PUNICODE_STRING, HINSTANCE, PCLSMENUNAME);
 BOOL WINAPI wow_class_client_query_native(HINSTANCE, PUNICODE_STRING,
     WNDCLASSEXW *, LPWSTR *, BOOL);
-int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
+#include "compat/include/wow_multibyte.h"
 #define TEXT_FN(x) x##A
 #define GetClientInfo() wow_class_client_current()
 #define GETEXPWINVER(module) (wow_class_client_current()->get_version(module))
@@ -46,7 +46,6 @@ int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
 #define RIPMSG1(level,text,arg) ((void)0)
 #define RIPERR0(code,level,text) SetLastError(code)
 #define GdiValidateHandle(handle) (GetObjectType(handle) != 0)
-#define MBToWCS(text,count,out,cap,alloc) MBToWCSEx(0,text,count,out,cap,alloc)
 #define NtUserRegisterClassExWOW wow_class_client_publish
 #define NtUserUnregisterClass wow_class_client_remove
 #define NtUserGetClassInfo wow_class_client_query_native

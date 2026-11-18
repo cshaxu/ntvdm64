@@ -117,3 +117,66 @@ P7 delivery: cached x86/x64 builds passed. Both release destinations matched the
 
 4 to 4 lines. wow_edit_state_bindings.c re-enters only usercli.h. wow_control_extent_bindings.c re-enters both original headers. Separate guard scopes preserve both consumers without broadening the selected layout.
 P8 delivery: 26/40 complete; C/header lines 2298 to 2238 (-60), README separately -9. Both cached release builds and 11-image staging passed. Package 4afc66ae-310c-4ca0-9cda-a10fdb2a980d was hash-verified at both release destinations. x86 environment projection and guest environment fixtures and both x86/x64 NT I/O facade fixtures returned zero. The latter exercises typed function bindings, layout and an invalid-handle query; it does not exercise successful directory enumeration. Refreshed the independent fixture generator include paths.
+
+## 27 include/thread_start_compat.h
+
+100 to 86. Drop two entry points that only supplied a NULL name to the same typed provider. The linked worker bridge loses 16 additional lines. Session tests retain all four denied-entry cases and successful callback kinds. The heartbeat test's unexpected-thread sentinel now names the same symbol as the production macro. No .def export or product caller of the old names was found. nt_rflop.c uses the separate parameterized void callback; keep that signature and preserve x86 stack cleanup.
+
+## 28 include/vdmapi.h
+
+6 to 6. NTSRV main explicitly includes this forwarding header. Original worker callers use vdmapi.h by name. All declarations come from the original private base header, with no copied implementation.
+
+## 29 include/winbasep.h
+
+8 to 8. Both original demsrch.c and base.h include this private historical spelling. The empty carrier is the sole repository file by that name; no store, declaration or operation to consolidate.
+
+## 30 include/winconp.h
+
+15 to 15. Correct the provider filename in the comment. Scope one rename around the WINBASEAPI keyboard layout import, then declare the actual worker provider and bind the COMMAND code page query. console_client.c owns both frontend exchanges and native detached fallbacks.
+
+## 31 include/winuserp.h
+
+125 to 125. The outer OR already restricts all nested declarations to task-order or object-flags mode. Neither selector changes inside this block. Reduce the PQ guard to its remaining cleanup condition.
+
+## 32 include/wow32_provider_private.h
+
+73 to 65. The directory-list mask has the same nine bits and the dialog flags the same four values in both compat headers. The shared flags header keeps the provider's original include site inside the GWL_WOWWORDS gate, and the resource consumer's independent fallback guards. MBToWCSEx has the same signature and a code page of zero at all four selected binding sites. Shared wow_multibyte.h keeps the original chartran.c owner. Two new headers cost 12 and 7 lines respectively and count in all totals; the class/bitmap binding headers outside compat lose another 3 lines combined.
+
+## 33 include/wow_button_style_table.h
+
+31 to 31. wow_button_resources.c indexes both columns by the original contiguous radio-mask to three-state range. Keep the 16-row slice and its original ordinal layout.
+
+## 34 include/wow_char_conversion_abi.h
+
+22 to 22. chartran.c uses its original LARGE_STRING and the bound code-page and paired allocation services. ntuser_rtl_compat.c backs allocation/free with LocalAlloc/LocalFree. The drawing precomp also declares that pair, but importing this entire header there would select an unrelated original USER layout.
+
+## 35 include/wow_control_message_abi.h
+
+25 to 25. wcntl32.c translates combo focus by subtracting the NT4 identifier, editsl.c emits it, and lb1.c dispatches listbox tracking. Preserve pinned cross-boundary constants independent of the contemporary SDK upper bound.
+
+## 36 include/wow_control_resource_abi.h
+
+85 to 66. Shares the flags and multibyte declaration reviewed with 32. Keep the two-byte packed dialog resources: clres.c advances by the concrete template/item sizes, and a modern in-memory object layout is a different contract.
+
+## 37 include/wow_full_user_handle.h
+
+38 to 38. GetFullUserHandle restores window uniqueness and passes the low handle for the historical DDE fallback. Single caller wow_user_full_handle performs one fallible metadata lookup and temporarily binds one copied row for the original signature. No shadow registry. wow_page_domain_fixture.c covers handle reuse and missing ownership.
+
+## 38 include/wow_user_declarations.h
+
+26 to 26. Actual users include wkman.c (callback ABI), wcall16.c (cdecl flag), wkgthunk.c (VDM pointer) and original draw.c (scroll flags). One declaration boundary, no alternate route.
+
+## 39 include/xactsrv_wksta_minimal.h
+
+52 to 45. Remove redundant windows.h after nt.h and the dead fallback for API_HANDLER_PARAMETERS_REFERENCE. Included original xstypes.h defines the macro unconditionally, including all four parameter references. Keep the reached handler types and remaining STATIC/IF_DEBUG bindings.
+
+## 40 include/zwapi.h
+
+20 to 20. Original environ.c allocates, queries and frees mutable environment regions. The wrappers are declarations only; native SIZE_T and ULONG_PTR preserve host width. No substitute VM allocator or second environment owner.
+
+### P9 delivery measurements
+
+The frozen 40-file list is complete. The final scope on disk is 14 C files (810 lines), 27 headers (1399 lines) and the README. Two new, reviewed shared declarations are included in these totals. The 39 baseline C/header files had 2298 lines; all current C/header files have 2209 (-89). README is separately -9. The last batch additionally removed 16 lines from worker-thread/bridge.c and 3 from the class/bitmap callers. These are physical source measurements, not image or performance claims.
+
+Both cached product builds succeeded. Both release manifests and all 11 binary SHA256 values matched candidate 20cfd8c5-b279-43e4-b856-0317296d8bcb. The frozen inputs, logs and package are in build/t483-s9-thread. Thread-session test verified four rollback paths, five normal terminal releases and exactly-once cleanup. The original x86 DelayHeartBeat suspend/resume test passed after selecting the actual production video flags and binding its two unexpected alert-termination calls to explicit failure sentinels. The test does not exercise STATUS_ALERTED. Original redirector server enum passed 37 assertions. The private desktop Win16 tab-stop guest witness completed with observer exit 0 and bound the exact published WOW32 DLL (CA31B5A333A62514DD564FEB5D2E70EA8864638FE3738B37BB908330227FD275). Targeted verification per owner scope.
+The supplemental x86 WOW control cohort built and ran 38 executables, each exit 0; build/t483-s9-thread/wow-run.log lists per-case outcomes. This is separate from the real Win16 guest witness.

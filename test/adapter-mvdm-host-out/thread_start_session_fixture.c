@@ -104,12 +104,12 @@ int main(int argc, char **argv)
     for (kind = 0; kind != 4; ++kind) {
         session_binding_diagnostic bindings;
         switch (kind) {
-        case 0: thread = opennt_create_cdecl_thread(NULL, 0u, bound_worker,
-            &instance, 0u, NULL); break;
+        case 0: thread = opennt_create_cdecl_thread_named(NULL, 0u, bound_worker,
+            &instance, 0u, NULL, NULL); break;
         case 1: thread = opennt_create_winapi_thread_named(NULL, 0u,
             bound_winapi_worker, &instance, 0u, NULL, "fixture-rejected-start"); break;
-        case 2: thread = opennt_create_void_cdecl_thread(NULL, 0u,
-            bound_void_worker, NULL, 0u, NULL); break;
+        case 2: thread = opennt_create_void_cdecl_thread_named(NULL, 0u,
+            bound_void_worker, NULL, 0u, NULL, NULL); break;
         default: thread = opennt_create_void_cdecl_parameter_thread(NULL, 0u,
             bound_parameter_worker, &instance, 0u, NULL); break;
         }
@@ -125,12 +125,12 @@ int main(int argc, char **argv)
     puts("THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1");
     for (kind = 0; kind != 5; ++kind) {
         switch (kind) {
-        case 0: thread = opennt_create_cdecl_thread(NULL, 0u, bound_worker,
-            &instance, 0u, NULL); break;
+        case 0: thread = opennt_create_cdecl_thread_named(NULL, 0u, bound_worker,
+            &instance, 0u, NULL, NULL); break;
         case 1: thread = opennt_create_winapi_thread_named(NULL, 0u,
             bound_winapi_worker, &instance, 0u, NULL, "fixture-winapi"); break;
-        case 2: thread = opennt_create_void_cdecl_thread(NULL, 0u,
-            bound_void_worker, NULL, 0u, NULL); break;
+        case 2: thread = opennt_create_void_cdecl_thread_named(NULL, 0u,
+            bound_void_worker, NULL, 0u, NULL, NULL); break;
         case 3: thread = opennt_create_void_cdecl_parameter_thread(NULL, 0u,
             bound_parameter_worker, &instance, 0u, NULL); break;
         default: thread = opennt_create_winapi_thread_named(NULL, 0u,

@@ -47,9 +47,7 @@ void WINAPI wow_bitmap_bindings_shutdown(void);
 #define ID(string) (((DWORD)(string) & 0xffff0000) == 0)
 /* The only selected LoadBmp caller supplies zero dimensions/flags. */
 #define LoadBmp(module, name, cx, cy, flags) LoadBitmapW(module, name)
-int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
-#define MBToWCS(text, count, output, capacity, allocate) \
-    MBToWCSEx(0, text, count, output, capacity, allocate)
+#include "compat/include/wow_multibyte.h"
 
 int SmartStretchDIBits(HDC, int, int, int, int, int, int, int, int,
     LPVOID, LPBITMAPINFO, UINT, DWORD);
