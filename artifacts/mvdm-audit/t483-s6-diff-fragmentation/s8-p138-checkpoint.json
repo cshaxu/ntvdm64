@@ -1,0 +1,38 @@
+{
+  "packet": "T483 S8 P138",
+  "position": 181,
+  "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+  "review_ids": [
+    "T483-R2141"
+  ],
+  "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+  "current_sha256": "b17e47eecf15d22f781f30056b51ee5a8cdcb5d0313877905f5752f702e349ea",
+  "before": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "source_changed": false,
+  "paired_error_bodies": 0,
+  "line_check": {
+    "method": "Matched original nonempty source lines against #line coordinates, including inactive boundaries and comments. Existing mismatches listed explicitly.",
+    "mismatches": []
+  },
+  "coverage": {
+    "complete": 181,
+    "remaining": 50,
+    "files": 231,
+    "points": 1912,
+    "lines": 26396,
+    "pending": 1533
+  },
+  "verification": {
+    "scope": "Fresh baseline hash, filtered source difference and logical line check; prior compiler controls cited in decision. No production change or new runtime test."
+  },
+  "decision": "R2141: the single include provides the selected private USER drawing bindings. Direct original PCH compilation fails on private CSR/kernel dependencies including ntos.h. Omitting the binding instead leaves five missing macro providers at link (P217 controls). The bitmap algorithms and remaining source are original. Restored canonical path spelling for the existing pending row so both ledgers reference this review."
+}
