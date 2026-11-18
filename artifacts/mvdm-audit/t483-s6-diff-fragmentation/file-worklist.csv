@@ -126,7 +126,7 @@ rank,path,remaining_blocks,added,deleted,excluded_bodies,mask_review_cases,statu
 136,src/mvdm-host/softpc.new/base/video/vga_mode.c,3,3,3,26,0,s8-p38-reviewed,T483-R0947;T483-R0948;T483-R0949,120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3
 137,src/mvdm-host/softpc.new/host/inc/host_cpu.h,3,1,2,8,0,s8-p41-reviewed,T483-R0985;T483-R0986;T483-R0987;T483-R0988;T483-R0989;T483-R0990;T483-R0991;T483-R0992;T483-R0993,68befcbaae9545cadb39bbbe2741ab647237ec42ca125d6ab1640fca76cdf343
 138,src/mvdm-host/softpc.new/host/inc/host_def.h,3,3,1,3,0,s8-p41-reviewed,T483-R0994;T483-R0995;T483-R0996;T483-R0997,d3c6808620ed4d304fde38647b13d4a4e37260399e9a43e8f6d7398f8d5f63ec
-139,src/mvdm-host/softpc.new/host/src/copy_fnc.c,2,2,2,4,0,s7-p16-reviewed-mask-corrected-residual-pending,T483-R1002;T483-R1003;T483-R1004,a5d17a7e5d2d48fe58dbe0e265a9c1291bc14076aa8c5fa858a641c0edc51660
+139,src/mvdm-host/softpc.new/host/src/copy_fnc.c,1,1,1,4,0,s8-p42-reviewed,T483-R1002;T483-R1003;T483-R1004,1fe81882570ad6ba7f4aba85dd19a378f2eb039bcae69cb75617ddf4fb2f46fa
 140,src/mvdm-host/softpc.new/host/src/nt_mem.c,3,7,0,26,0,s7-p13-format-restored-residual-pending,T483-R1173;T483-R1174;T483-R1175,e3fa1b2f51ff24a997059b18c0b97874d01f9aed16c768a17ad37591405ac1ab
 141,src/mvdm-host/wow32/precomp.h,3,13,1,0,0,s7-p2-reviewed-residual-pending,T483-R1305;T483-R1306;T483-R1307;T483-R1308,2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d
 142,src/mvdm-host/wow32/wgprnset.c,3,7,0,1,0,s7-p20-reviewed,T483-R1430;T483-R1431;T483-R1432;T483-R1433,ee0a7c3ad040edfd9712eccd02c2eec1b89d85861b00d3b49ffc5ecfb3a00ce2

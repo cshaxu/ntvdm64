@@ -97,10 +97,10 @@ fwd_word_fill(
 #error Excluded unsupported original constant-false fill branch
                 l_addr = (unsigned char *)l_addr4;
 #else
-                count = h_addr4 - l_addr4;
-                RtlFillMemoryUlong(l_addr4, count << 2, data4);
+                count = (unsigned char *)h_addr4 - (unsigned char *)l_addr4;
+                RtlFillMemoryUlong(l_addr4, count, data4);
                 l_addr = (unsigned char *)l_addr4;
-                l_addr += count << 2;
+                l_addr += count;
 #endif
 
 	}

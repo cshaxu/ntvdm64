@@ -1,0 +1,50 @@
+{
+  "packet": "T483 S8 P42",
+  "position": 86,
+  "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+  "review_ids": [
+    "T483-R1004"
+  ],
+  "current_sha256": "1fe81882570ad6ba7f4aba85dd19a378f2eb039bcae69cb75617ddf4fb2f46fa",
+  "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+  "before": {
+    "blocks": 2,
+    "added": 2,
+    "deleted": 2
+  },
+  "after": {
+    "blocks": 1,
+    "added": 1,
+    "deleted": 1
+  },
+  "decision": "Measure the span of aligned bounds in bytes once. Both the RTL call and the byte pointer advance are verbatim original. Original DWORD pointer subtraction undercounts by four; assignment remains pending. Same directives and logical coordinates; mask paired constant-false arm per S7 P16.",
+  "coverage": {
+    "complete": 86,
+    "remaining": 145,
+    "files": 231,
+    "points": 1945,
+    "lines": 27086,
+    "pending": 1549
+  },
+  "cached_build": {
+    "x86": 0,
+    "x64": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3e953365-945a-469d-bd90-091bf1dc2e49",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "targeted": {
+    "method": "MSVC x86 production copy_fnc.obj and original RTL movemem.obj linked to P78 probe; 4 offsets x 33 lengths, whole-buffer digest and out-of-range checks. No guest test claimed.",
+    "result": [
+      "aligned4words=1234123412341234",
+      "cases=132 digest=91153575 guard_failures=0"
+    ]
+  }
+}

@@ -125,7 +125,7 @@ rank,path,non_error_blocks,added,deleted,difference_lines,paired_error_bodies,ma
 135,src/mvdm-host/softpc.new/base/video/vga_mode.c,3,3,3,6,26,0,136,s8-p38-reviewed,120188308f03815920d317cfaf070dd57446a1bfe7a8d102039520a03907cac3
 136,src/mvdm-host/softpc.new/host/inc/host_cpu.h,3,1,2,3,8,0,137,s8-p41-reviewed,68befcbaae9545cadb39bbbe2741ab647237ec42ca125d6ab1640fca76cdf343
 137,src/mvdm-host/softpc.new/host/inc/host_def.h,3,3,1,4,3,0,138,s8-p41-reviewed,d3c6808620ed4d304fde38647b13d4a4e37260399e9a43e8f6d7398f8d5f63ec
-138,src/mvdm-host/softpc.new/host/src/copy_fnc.c,2,2,2,4,4,0,139,s7-p16-reviewed-mask-corrected-residual-pending,a5d17a7e5d2d48fe58dbe0e265a9c1291bc14076aa8c5fa858a641c0edc51660
+138,src/mvdm-host/softpc.new/host/src/copy_fnc.c,1,1,1,2,4,0,139,s8-p42-reviewed,1fe81882570ad6ba7f4aba85dd19a378f2eb039bcae69cb75617ddf4fb2f46fa
 139,src/mvdm-host/softpc.new/host/src/nt_mem.c,3,7,0,7,26,0,140,s7-p13-format-restored-residual-pending,e3fa1b2f51ff24a997059b18c0b97874d01f9aed16c768a17ad37591405ac1ab
 140,src/mvdm-host/wow32/precomp.h,3,13,1,14,0,0,141,s7-p2-reviewed-residual-pending,2f25c67b85727fed0cdcf7a0f0a1b1d1bf780a0347f3eee496f616260e85bc6d
 141,src/mvdm-host/wow32/wgprnset.c,3,7,0,7,1,0,142,s7-p20-reviewed,ee0a7c3ad040edfd9712eccd02c2eec1b89d85861b00d3b49ffc5ecfb3a00ce2
