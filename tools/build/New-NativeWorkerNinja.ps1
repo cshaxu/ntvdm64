@@ -16,11 +16,15 @@ $text=Get-Content $reference -Raw
 function NP([string]$path){$path.Replace('\','/').Replace(':','$:')}
 $compilerCachePath=$CompilerCache
 $compilerCacheDirectory=if($CompilerCache){Join-Path $root 'build/.ccache'}else{''}
-$baseFlags=[regex]::Match($text,'(?m)^cflags = (.*)$').Groups[1].Value
-if(!$baseFlags){throw 'Missing audited reference flags'}
-$includes=@([regex]::Matches($baseFlags,'/I "[^"]+"')|ForEach-Object {$_.Value})
+$includePattern='/I (?:"[^"]+"|[^\s]+)'
+$referenceFlags=[regex]::Match($text,'(?m)^cflags = (.*)$').Groups[1].Value
+if(!$referenceFlags){throw 'Missing audited reference flags'}
+$referenceRoots=@([regex]::Matches($referenceFlags,$includePattern)|ForEach-Object {$_.Value})
+$includeRoots=@('src/lib-nxvm','src','src/common/base_srv','src/compat/include','src/non-mvdm/public/sdk/inc','src/non-mvdm/public/internal/base/inc')
+if($Component -eq 'Service'){$includeRoots+='src/ntsrv-exe/opennt/include'}
+$includes=@($includeRoots|ForEach-Object {'/I "'+(NP (Join-Path $root $_))+'"'})
 $nativeCompileFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00'
-$nativeFlags=$nativeCompileFlags+' '+($includes -join ' ')+' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'" /I obj/basesrv'
+$nativeFlags=$nativeCompileFlags+' '+($includes -join ' ')+' /I obj/basesrv'
 if($Component -eq 'Service'){
  $nativeFlags+=' /we4312 /FI "'+(NP (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/inc'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/base/win32/server'))+'"'
 }
@@ -155,7 +159,8 @@ function Add-Edge([string]$target) {
   foreach($option in [regex]::Matches($binding,'/std:c(?:11|17)(?=\s|$)')){$flags+=' '+$option.Value}
   foreach($option in [regex]::Matches($binding,'/(?:O[0-9dis]|Gy|we4013)(?=\s|$)')){$flags+=' '+$option.Value}
   if(!$library){
-   foreach($include in [regex]::Matches($binding,'/I (?:"[^"]+"|[^\s]+)')){
+   foreach($include in [regex]::Matches($binding,$includePattern)){
+    if($include.Value -in $referenceRoots){continue}
     $flags+=' '+$include.Value.Replace((NP (Split-Path $reference -Parent)),(NP $build))
    }
   }

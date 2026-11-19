@@ -34,6 +34,8 @@ P2 removed C0056, C0138, C0140 and C0144 without changing either mirror. The WOW
 
 P3 restored the original SoftPC entry and placed process startup and exit in the F worker owner. The [P3 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p3-entry.json) covers both published packages, 539 compiler contexts and the mirror reduction of two blocks and ten lines. The tracker retains all original indirect observations.
 
+P4 removed 60 private include-directory occurrences from AMD64 mirror object commands. Six root IDs remain open across the supported graphs. Both cached architectures built, both eleven-image releases were verified and four targeted native fixtures passed. See the [P4 receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p4-native-roots.json).
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

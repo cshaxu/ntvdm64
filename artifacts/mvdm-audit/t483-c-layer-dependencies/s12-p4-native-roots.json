@@ -1,0 +1,85 @@
+{
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "803d07ee-bc36-4046-8243-edab363bded8",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "product_commands": {
+    "x64/worker": {
+      "contexts": 1,
+      "roots": {
+        "C0135": 1
+      }
+    },
+    "x64/frontend": {
+      "contexts": 0,
+      "roots": {}
+    },
+    "x64/monitor": {
+      "contexts": 0,
+      "roots": {}
+    },
+    "x64/launcher": {
+      "contexts": 5,
+      "roots": {
+        "C0135": 5,
+        "C0136": 3
+      }
+    },
+    "x64/service": {
+      "contexts": 3,
+      "roots": {
+        "C0135": 3,
+        "C0136": 3
+      }
+    },
+    "x64/hook": {
+      "contexts": 2,
+      "roots": {
+        "C0135": 2
+      }
+    },
+    "x86/worker": {
+      "contexts": 392,
+      "roots": {
+        "C0135": 391,
+        "C0136": 3,
+        "C0137": 391,
+        "C0141": 391,
+        "C0142": 391,
+        "C0145": 391,
+        "C0146": 391
+      }
+    },
+    "x86/wow32": {
+      "contexts": 136,
+      "roots": {
+        "C0146": 136,
+        "C0147": 1,
+        "C0148": 34,
+        "C0149": 1,
+        "C0150": 4,
+        "C0151": 1
+      }
+    }
+  },
+  "measurement": "Count distinct object commands per product graph; a search directory does not establish header use.",
+  "before": "Both native generators propagated all five x86 private product roots into all 11 AMD64 C-layer object commands. All 11 also inherited the service include directory.",
+  "after": "The five roots have zero occurrences across 11 AMD64 C-layer object commands. The service include remains in six. Corresponding x86 rows remain open.",
+  "mirror_delta": {
+    "blocks": 0,
+    "lines": 0
+  },
+  "binary_check": "All executable sections in all 11 published images match P3 byte for byte.",
+  "tests": {
+    "native-service-layout-test": "64-bit layouts, exit 0; removed two redundant includes of unguarded vdmapi.h already included by basesrv.h",
+    "monitor-layout-test": "private desktop observer: PASS and exit 0; console buffer assertion in direct noninteractive run",
+    "process-image-machine-test": "normal Windows environment: PASS and exit 0; restricted environment returned invalid handle",
+    "run16-image-classification-test": "227 checks, failures 0, handle delta 0"
+  }
+}
