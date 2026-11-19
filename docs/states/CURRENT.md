@@ -68,7 +68,7 @@ P24-P27 delivered native ordinal, GDI alias and VDD ABI boundary cleanup, plus l
 
 P28-P31 are delivered and indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md): P28 removed the redundant CreateProcess wrapper, P29 moved shared message progress constants into B, and P30/P31 classified lifecycle and page-domain consumers. P29 package09b1e845-1132-4570-b217-12281f4891ab is the published product baseline. Review reached58/116,13 header clears,39 lifecycle,6 source/ABI;519/617 IDs open. Source-only classifications do not claim runtime proof.
 
-P32 delivered the unchanged native probe environment to B; original ProbeForRead remains C. [P32 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json) records source ownership, both builds, probe tests and dual publication.
+P32: [user-probe boundary delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json).
 
 P33: [Console-handle delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json); native predicate moved D to B, mixed header still open.
 
@@ -100,7 +100,9 @@ P44: [control brushes and verified publication](../../artifacts/mvdm-audit/t483-
 
 P45: [EDIT creation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p45-edit-create-ownership.json).
 
-P46: [rare EDIT operations](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p46-edit-rare-ownership.json). Review88/116:16 clears,58 lifecycle,14 source/ABI,28 unreviewed;503/617 open. Source classification only; P44 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P46: [rare EDIT operations](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p46-edit-rare-ownership.json).
+
+P47: [DDE declaration delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p47-dde-header.json). Review89/116:17 clears,58 lifecycle,14 source/ABI,27 unreviewed;502/617 open. Cached builds, dual publication, DDE and boundary checks passed;11 images normalized-equal P44. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

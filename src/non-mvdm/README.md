@@ -1749,12 +1749,13 @@ and handle machinery; those APIs are cropped with registered markers.
 The retained function owns original release-flag and format-dependent nested
 object cleanup, unchanged. Its outgoing closure is GlobalLock/Unlock/Size/Free,
 DeleteObject, DeleteMetaFile and DeleteEnhMetaFile, all public native APIs.
-`wow32-dll/include/wow_dde_data_bindings.h` retains the original DDE_DATA
+`compat/include/wow_dde_data_bindings.h` retains the original DDE_DATA
 layout and retail USER memory macros; it owns no replacement DDE algorithm.
-This source is selected in the WOW32 provider build and native fixtures,
-but not registered as a working WOW output slot. Evidence and remaining
-real-Win16 acceptance are in the indexed
-S40 USER profile audit. No full USER package or new server is imported.
+This source is selected in the WOW32 provider build and native fixtures.
+The current UserRegisterWowHandlers bridge assigns FreeDDEData to the
+pfnFreeDDEData output slot; that source binding alone is not real-Win16
+acceptance. Historical S40 evidence remains in the indexed USER profile
+audit. No full USER package or new server is imported.
 
 This root is not limited to BaseSrv/BaseClient. Every separately admitted
 non-MVDM OpenNT host package belongs below this root with its original

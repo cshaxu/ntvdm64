@@ -209,3 +209,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P45 EDIT creation](s12-p45-edit-create-ownership.json): file086; original construction stays C, extracted state function and mixed header remain open. Review86/116,503/617 open; no production changes.
 
 [P46 rare EDIT operations](s12-p46-edit-rare-ownership.json): files087-088; callback/native-return and mixed-header dependencies distinguished. Review88/116,503/617 open; production unchanged.
+
+[P47 DDE declarations](s12-p47-dde-header.json): file089 cleared by unchanged header move to B; both builds, dual publication and DDE fixture passed. Review89/116,502/617 open.

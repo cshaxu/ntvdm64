@@ -1,0 +1,110 @@
+{
+  "baseline": "58694595483acfcee8dc3feef0f59c3432cce660",
+  "status": "P47 DDE native declaration boundary delivery",
+  "files": [
+    {
+      "number": 89,
+      "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+      "compilerObject": "obj/opennt-user/hdata.obj",
+      "dependencyRecord": "obj/opennt-user/hdata.obj: #deps 12, deps mtime 8167743697703905 (VALID)",
+      "projectDependencies": [
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/wow_dde_data_bindings.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        ""
+      ],
+      "coffUndefined": [
+        "__imp__GlobalAlloc@8",
+        "__imp__GlobalSize@4",
+        "__imp__GlobalUnlock@4",
+        "__imp__GlobalLock@4",
+        "__imp__GlobalFree@4",
+        "__imp__LocalAlloc@8",
+        "__imp__LocalFree@4",
+        "__imp__BitBlt@36",
+        "__imp__CopyMetaFileA@8",
+        "__imp__CreateCompatibleBitmap@12",
+        "__imp__CreateCompatibleDC@4",
+        "__imp__CreatePalette@4",
+        "__imp__DeleteDC@4",
+        "__imp__DeleteMetaFile@4",
+        "__imp__DeleteObject@4",
+        "__imp__GetPaletteEntries@16",
+        "__imp__SelectObject@8",
+        "__imp__SetPaletteEntries@16",
+        "__imp__CopyEnhMetaFileA@8",
+        "__imp__DeleteEnhMetaFile@4",
+        "__imp__GetObjectA@12",
+        "__imp__GetDC@4",
+        "__imp__ReleaseDC@8",
+        "_memcpy"
+      ],
+      "conclusion": "Original FreeDDEData/CopyDDEData/CopyBitmap/CopyPalette stay C unchanged. Only direct outer header C0086 moved byte-identically to B; selected object now has no D/E/F project header. Actual outgoing calls are native SDK/CRT."
+    }
+  ],
+  "change": {
+    "from": "src/wow32-dll/include/wow_dde_data_bindings.h",
+    "to": "src/compat/include/wow_dde_data_bindings.h",
+    "headerSha256": "58cc7ea96960701647fec8870b8b0c274c9d866bf0417519e4d365843a959452",
+    "byteIdentical": true,
+    "scope": "36-line declaration/layout/native macro header only; no implementation, lifecycle state, new interface or duplicate helper. Existing compat include root resolves unchanged hdata.c include spelling. Test resolves same B header.",
+    "originalOwnership": "DDE_DATA field layout from original ddetrack.h, retail USER memory macros from usercli.h/ddemlcli.h; fixed original-selected algorithms remain C. This move does not authorize changing any DDE policy.",
+    "documentationCorrection": "non-mvdm README previously claimed FreeDDEData was unregistered. Current wow_user_registration_bridge.c assigns output->pfnFreeDDEData = FreeDDEData. Updated source-binding statement without claiming real Win16 acceptance."
+  },
+  "progress": {
+    "reviewedFiles": 89,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 58,
+    "deferredSourceAbiCompositionFiles": 14,
+    "unreviewedFiles": 27,
+    "totalFiles": 116,
+    "openIds": 502,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Cached x86/x64 and explicit four x86 worker images exit0; coherent eleven-image staging exit0.",
+    "publication": {
+      "packageId": "52216b4e-b210-4b25-81d1-e9c923d4750c",
+      "destinations": [
+        "assets/release",
+        "O:/winnt/system32"
+      ],
+      "verifiedImages": 22,
+      "status": "Published before targeted tests, publish.exit0; no processes stopped."
+    },
+    "identity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityScope": "Only unique package GUID bytes, COFF and debug directory timestamps normalized. All eleven match P44. Raw hashes differ; do not call them byte-identical unnormalized. Repeat Win16 runtime waived under owner authorization.",
+    "targeted": "original-dde-data-boundary build and wow_original_dde_free_fixture.exe exit0; WOW_ORIGINAL_DDE_FREE_OK. Real native memory/GDI with retained original C code: release override, bitmap/palette/DIB/metafile/enhanced/display formats/null, text copy and bitmap deep-copy. Not full Win16 DDE exchange.",
+    "boundaries": "Eight product A/B graphs passed;149 selected WOW objects and9 private-header negative controls passed.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-dde-header/docs.log and docs.exit. git diff --check passed."
+  },
+  "limits": "No mirror bytes, #error/#line, original guest or winnt.zip changed. Remaining shared header/lifecycle issues stay open. Only S12 active."
+}

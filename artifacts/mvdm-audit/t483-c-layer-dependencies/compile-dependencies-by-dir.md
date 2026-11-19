@@ -581,6 +581,8 @@
 
 - 直接包含 · C0086 · wow32-dll · src/wow32-dll/include/wow_dde_data_bindings.h
 
+089 P47: C0086 eliminated by byte-identical native declaration/layout header move F to B. Original hdata.c and its include spelling unchanged; actual product deps contain no D/E/F header. Mirror delta0/0. Both builds, dual publication and DDE fixture pass; all11 normalized images equal P44. See s12-p47-dde-header.json.
+
 ## 090 — src/non-mvdm/windows/core/ntuser/client/lb1.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
