@@ -178,4 +178,6 @@ P57: [Cleanup/event delivery](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 
 P58: [Private-word ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p58-private-word-ownership.json).
 
-P59: [Native profile boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p59-profile-native.json). Reviewed105/116:17 clear,71 lifecycle,17 ABI;11 remain. Open499/617. Mirror0/0; cumulative reduction2 points/10 lines. Cached builds, profile checks, retained Win16 frontiers and dual publication passed. S12 active.
+P59: [Native profile delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p59-profile-native.json).
+
+P60: [Task initialization ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p60-task-init-ownership.json). Reviewed106/116:17 clear,72 lifecycle,17 ABI;10 remain. Open500/618 after missing direct link C0618 added. Mirror0/0; cumulative reduction2 points/10 lines. Product unchanged; P59 publication hashes verified. S12 active.

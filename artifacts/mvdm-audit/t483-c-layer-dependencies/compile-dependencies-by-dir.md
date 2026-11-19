@@ -688,6 +688,8 @@
 
 - 直接包含 · C0116 · wow32-dll · src/wow32-dll/include/wow_task_init_bindings.h
 
+106 P60: C0116 task-state/input callbacks remain S13/S14. Added missing direct link C0618 to F runtime TLS owner; original initialization stays C. Mirror0/0; reviewed106/116, open500/618. See s12-p60-task-init-ownership.json.
+
 ## 107 — src/non-mvdm/windows/core/ntuser/kernel/server.c
 
 - 直接包含 · C0087 · wow32-dll · src/wow32-dll/include/wow_default_message_bindings.h

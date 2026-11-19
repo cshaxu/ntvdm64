@@ -1,0 +1,130 @@
+{
+  "baseline": "978171c83cd5e5fda4a94e18514f6b013bf95dcd",
+  "status": "P60 task initialization ownership audit; no product changes",
+  "files": [
+    {
+      "number": 106,
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "sha256": "393591adf5233a17ff9384fef39d9fd96baeb0df4bada2740d029e5f38a1d686",
+      "compilerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\queue.obj",
+      "objectSha256": "1d693c31a4bcace4cf8419a4e536c342657b8cc1fe9f9a377fee58041a82cfaf",
+      "coffUndefined": [
+        "_wcsstr",
+        "__imp__HeapAlloc@12",
+        "__imp__HeapFree@12",
+        "__imp__GetProcessHeap@0",
+        "_RtlInitUnicodeString@8",
+        "_RtlUnicodeStringToInteger@12",
+        "_wow_user_runtime_current@0",
+        "_InsertTask@8",
+        "@__security_check_cookie@4",
+        "__except_handler4",
+        "_memcpy",
+        "___security_cookie"
+      ],
+      "dependencies": [
+        "obj/opennt-user/queue.obj: #deps 22, deps mtime 8167781179397431 (VALID)",
+        "    ../../../../src/common/wow/user_runtime.h",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/winuserp.h",
+        "    ../../../../src/compat/include/wow_task_event_binding.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+        "    ../../../../src/wow32-dll/include/wow_shared_user_abi.h",
+        "    ../../../../src/wow32-dll/include/wow_task_init_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_task_order_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_user_client_view_layout.h",
+        ""
+      ],
+      "mapProviders": [
+        "0001:00051970       _InsertTask@8              10052970 f   taskman.obj",
+        "0001:00075b39       @__security_check_cookie@4 10076b39 f   LIBCMT:secchk.obj",
+        "0001:00076c90       __except_handler4          10077c90 f   libvcruntime:chandler4.obj",
+        "0001:00076df0       _memcpy                    10077df0 f   libvcruntime:memcpy.obj",
+        "0001:0008cb01       _RtlInitUnicodeString@8    1008db01 f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008cb61       _RtlUnicodeStringToInteger@12 1008db61 f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008cbdf       _wow_user_runtime_current@0 1008dbdf f   ntvdm:ntvdm.exe",
+        "0002:000003e4       __imp__GetProcessHeap@0    1008e3e4     kernel32:KERNEL32.dll",
+        "0002:000005c8       __imp__HeapFree@12         1008e5c8     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj"
+      ]
+    }
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "windows/core/ntuser/kernel/queue.c",
+    "lines": "649-892",
+    "evidence": "Read fixed original xxxInitTask and _ShowStartGlass, current complete selected queue.c, task initialization binding and lifecycle/input plan consumers."
+  },
+  "mechanisms": {
+    "retained": "C owns task name copy, startup options, TDB allocation, TIF_16BIT publication before queue attachment, shared waiter lookup, original InsertTask, compatibility flags and initial scheduling. InsertTask resolves to C taskman.obj; RTL helpers resolve to NTDLL. Moving the complete original algorithm to F is not an in-place cleanup.",
+    "directHeader": "C0116 imports F task state and callbacks through wow_task_init_bindings.h. Whole-header migration to B would retain its dependence on F task_order state and C nt.h.",
+    "directLink": "New C0618: queue.obj references wow_user_runtime_current; map resolves ntvdm.exe, definition is src/ntvdm-exe/wow/wow_user_runtime.c:61. D common/wow/user_runtime.h supplies declaration only. TLS pointer belongs to bind/unbind and task retirement, not an independent generic current-thread query.",
+    "input": "F lifecycle prepares native input plan before xxxInitTask, commits through reattach after C sets TIF_16BIT, releases plan in finally. Commit calls existing AddAttachment/Recalc2, then AttachThreadInput and owns native links until retire. Fallible allocation precedes original TDB commit; native attachment failure uses existing failure owner. Replacing with one native API call or relocating only the callback loses this contract. S13 must reconcile the one existing lifecycle with original C ordering.",
+    "limitations": "journal_hooked returns FALSE and start_cursor is a no-op presentation boundary. These are observed existing limitations, not evidence of full original journal/cursor equivalence, and are not newly approved here. S13 must explicitly retain/resolve their boundary classification; do not hide them by moving header.",
+    "profile": "Profile callback reaches retained C query policy and P59 B native opener. No duplicate profile service is required.",
+    "criticalSection": "Original userk.h EnterWowCritSect inline reaches F host client_context callback when taking initial execution ownership. Indirect callback therefore remains relevant even though no standalone provider symbol appears in queue.obj."
+  },
+  "progress": {
+    "reviewedFiles": 106,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 72,
+    "deferredSourceAbiCompositionFiles": 17,
+    "unreviewedFiles": 10,
+    "totalFiles": 116,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production changes. Actual product COFF, VALID include dependency and final map checked.",
+    "runtime": "Not run: no new behavioral acceptance claimed.",
+    "publication": {
+      "packageId": "a287f10d-c93a-4720-833c-5eee7bfd6e99",
+      "verifiedImages": [
+        "assets\\release\\VCDEX.DLL",
+        "O:\\WINNT\\system32\\VCDEX.DLL",
+        "assets\\release\\run16.exe",
+        "O:\\WINNT\\system32\\run16.exe",
+        "assets\\release\\ntsrv.exe",
+        "O:\\WINNT\\system32\\ntsrv.exe",
+        "assets\\release\\ntcon.exe",
+        "O:\\WINNT\\system32\\ntcon.exe",
+        "assets\\release\\ntvdm.exe",
+        "O:\\WINNT\\system32\\ntvdm.exe",
+        "assets\\release\\ntvwm.exe",
+        "O:\\WINNT\\system32\\ntvwm.exe",
+        "assets\\release\\ntmon.exe",
+        "O:\\WINNT\\system32\\ntmon.exe",
+        "assets\\release\\WOW32.DLL",
+        "O:\\WINNT\\system32\\WOW32.DLL",
+        "assets\\release\\VDMREDIR.DLL",
+        "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "assets\\release\\nthook32.dll",
+        "O:\\WINNT\\system32\\nthook32.dll",
+        "assets\\release\\nthook64.dll",
+        "O:\\WINNT\\system32\\nthook64.dll"
+      ]
+    },
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-task-init-ownership/docs.log and docs.exit. git diff --check passed. No source changes."
+  },
+  "followup": "S13 shared task lifecycle/current binding/input commit boundary; S14 original declaration/state composition. C0116 remains open; C0618 appended as verified direct link, not eliminated."
+}

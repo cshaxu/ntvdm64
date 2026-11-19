@@ -235,3 +235,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P58 Private-word setter](s12-p58-private-word-ownership.json): file104; original storage rules retained, three F edges classified. Review104/116,500/617 open; production unchanged.
 
 [P59 Native profile boundary](s12-p59-profile-native.json): file105; native read-only opener moves to B, original query policy unchanged. Review105/116,499/617 open.
+
+[P60 Task initialization](s12-p60-task-init-ownership.json): file106; original C ordering retained, F lifecycle callbacks classified, missing direct TLS link C0618 added. Review106/116;500/618 open. No product change.
