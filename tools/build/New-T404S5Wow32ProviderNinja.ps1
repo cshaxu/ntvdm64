@@ -72,7 +72,6 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_window_procedure_entry.c'),
     (Join-Path $adapterWow 'wow_user_object_bindings.c'),
     (Join-Path $adapterWow 'wow_user_discovery.c'),
-    (Join-Path $adapterWow 'wow_hook_native_binding.c'),
     (Join-Path $adapterWow 'wow_menu_client_bindings.c'),
     (Join-Path $adapterWow 'wow_menu_native_bindings.c'),
     (Join-Path $adapterWow 'wow_cleanup_bindings.c'),
@@ -687,6 +686,9 @@ foreach ($source in $providerSupportSources) {
         $ninja.Add('  cflags = $adapter_cflags')
     }
 }
+$supportObjects.Add('obj/compat/wow_hook_native_binding.obj')
+$ninja.Add('build obj/compat/wow_hook_native_binding.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_hook_native_binding.c')))
+$ninja.Add('  cflags = ' + $nativeCflags)
 $supportObjects.Add('obj/compat/wow_fonts.obj')
 $ninja.Add('build obj/compat/wow_fonts.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_fonts.c')))
 $ninja.Add('  cflags = ' + $nativeCflags)

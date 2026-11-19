@@ -305,3 +305,5 @@ P92: [Font provider ownership delivery](s12-p92-font-owner.json); files48-53 rev
 P93: [GDI cache and thunk ownership](s12-p93-gdi-cache-ownership.json); files54-60 reviewed; C0435 moved unchanged to B with identical 8-byte function, cached builds and dual publication. Native-call/flush contracts remain grouped for S13/S14.
 
 P94: [Public style binding](s12-p94-wstruc-public-style.json); files61-65 reviewed, one wstruc caller edge removed without mirror changes; actual product symbol comparison, focused lifecycle checks and dual publication.
+
+P95: [Native hook ownership](s12-p95-hook-native-ownership.json); files66-69 reviewed, C0402 SDK-only hook binding moved F to B unchanged;24-case boundary test, cached builds and dual publication.

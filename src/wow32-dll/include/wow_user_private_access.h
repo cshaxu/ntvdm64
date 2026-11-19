@@ -3,7 +3,7 @@
 #include <windows.h>
 #include "wow_dialog_creation_binding.h"
 #include "wow_dialog_api_bindings.h"
-#include "wow_hook_native_binding.h"
+#include "compat/include/wow_hook_native_binding.h"
 LONG WINAPI wow_user_get_window_longA(HWND, int);
 LONG WINAPI wow_user_set_window_longA(HWND, int, LONG);
 DWORD WINAPI wow_user_get_class_longA(HWND, int);

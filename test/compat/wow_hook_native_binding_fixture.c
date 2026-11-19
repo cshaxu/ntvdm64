@@ -19,7 +19,7 @@ static HHOOK WINAPI observed_native_registration(int kind, HOOKPROC callback,
     return (HHOOK)(ULONG_PTR)0x1234u;
 }
 #define SetWindowsHookExA observed_native_registration
-#include "wow32-dll/source/wow_hook_native_binding.c"
+#include "compat/wow_hook_native_binding.c"
 #undef SetWindowsHookExA
 
 static LRESULT CALLBACK callback(int code,WPARAM wp,LPARAM lp)

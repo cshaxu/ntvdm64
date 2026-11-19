@@ -1,4 +1,4 @@
-#include "wow_hook_native_binding.h"
+#include "include/wow_hook_native_binding.h"
 
 /* ADAPTER-WOW-090: original WOW's fixed hook stubs remain in this provider
  * until worker teardown. Native USER needs no DLL-registration dependency

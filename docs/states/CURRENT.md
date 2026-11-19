@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P94: [Public style binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p94-wstruc-public-style.json). Reviewed116/116 compile and65/74 link-only (181/190);484/618 IDs open,84 eliminated. One wstruc caller edge cleared; C0492 remains open elsewhere. Mirror delta0/0; cumulative reduction2 points/10 lines. Complete11 published to both destinations;22 hashes verified. Cached builds, focused lifecycle tests and8 A/B graphs passed. S12 active.
+P95: [Native hook ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p95-hook-native-ownership.json). Reviewed116/116 compile and69/74 link-only (185/190);483/618 IDs open,85 eliminated. C0402 SDK-only provider moved F to B unchanged. Mirror delta0/0; cumulative reduction2 points/10 lines. Complete11 published to both destinations;22 hashes verified. Cached builds,24-case hook boundary test and8 A/B graphs passed. S12 active.

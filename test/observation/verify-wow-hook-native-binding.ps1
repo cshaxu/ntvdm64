@@ -12,9 +12,9 @@ function Owned($name,$exe,$line,$seconds){
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/$name.exit.txt";if($code){throw "$name failed $code"}
 }
 try{
- $source="$repo/test/adapter-mvdm-host-out/wow/wow_hook_native_binding_fixture.c"
- Get-FileHash $source,$PSCommandPath,$CompilerDriver,"$repo/src/wow32-dll/source/wow_hook_native_binding.c","$repo/src/wow32-dll/include/wow_hook_native_binding.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
- Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W4 /I"'+$repo+'/src" /I"'+$repo+'/src/wow32-dll/include" /Fo"'+$root+'/fixture.obj" /Fe"'+$root+'/fixture.exe" "'+$source+'" /link kernel32.lib"') 120
+ $source="$repo/test/compat/wow_hook_native_binding_fixture.c"
+ Get-FileHash $source,$PSCommandPath,$CompilerDriver,"$repo/src/compat/wow_hook_native_binding.c","$repo/src/compat/include/wow_hook_native_binding.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W4 /I"'+$repo+'/src" /I"'+$repo+'/src/compat/include" /Fo"'+$root+'/fixture.obj" /Fe"'+$root+'/fixture.exe" "'+$source+'" /link kernel32.lib"') 120
  Owned fixture "$root/fixture.exe" '--boundary' 30
  if((Get-Content "$root/fixture.stdout.txt" -Raw) -notmatch 'WOW_HOOK_NATIVE_BOUNDARY errors=0 calls=24 local=17 global=1 invalid=1 null=1 mismatch=1 callback=1 dead=1 foreign=1 handles=([0-9]+)/\1'){throw 'Incomplete hook input/handle/error proof'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Frozen boundary input changed'}}

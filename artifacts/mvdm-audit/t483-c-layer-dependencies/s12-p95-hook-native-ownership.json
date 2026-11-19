@@ -1,0 +1,325 @@
+{
+  "baseline": "409855cbc00ba9b6f07d4c4b6763f9638a3a48d3",
+  "files": [
+    {
+      "order": 66,
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "decision": "Keep C class conversion and superclass algorithm. GetClassLong uses public and private/procedure indices, unlike public-style-only wstruc. Guest procedure exchange and class query/unregister reach owned F runtime, class registration and borrow storage: S13 paired ownership. C0456 mapping/ABI pairing remains S14.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0489",
+          "symbols": [
+            "_wow_user_get_class_infoA@12"
+          ],
+          "providers": [
+            "0001:0006fb80       _wow_user_get_class_infoA@12 10070b80 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0490",
+          "symbols": [
+            "_wow_user_get_class_longA@8"
+          ],
+          "providers": [
+            "0001:0006fbc0       _wow_user_get_class_longA@8 10070bc0 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0491",
+          "symbols": [
+            "_wow_user_get_procedure@12"
+          ],
+          "providers": [
+            "0001:0006fc50       _wow_user_get_procedure@12 10070c50 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0493",
+          "symbols": [
+            "_wow_user_set_class_longA@12"
+          ],
+          "providers": [
+            "0001:0006fda0       _wow_user_set_class_longA@12 10070da0 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0494",
+          "symbols": [
+            "_wow_user_set_procedure@20"
+          ],
+          "providers": [
+            "0001:0006fea0       _wow_user_set_procedure@20 10070ea0 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0496",
+          "symbols": [
+            "_wow_user_unregister_classA@8"
+          ],
+          "providers": [
+            "0001:000700d0       _wow_user_unregister_classA@8 100710d0 f   wow_user_private_access.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wuclass.obj",
+      "sha256": "b9697cc67b03308f854d4b71f9df1b2b3a1a317e6a38d38482e4bcbb59361616",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 67,
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "decision": "Keep original C communication conversion. Flushes112/185/531/614/1109 publish DCB16, DEB, COMSTAT16 and receive bytes. C0456 joins S14 reader/writer mapping and ABI contract; mechanically moving its current no-op would not resolve that contract.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wucomm.obj",
+      "sha256": "6eb5f9bc32ff17bfd46f7845f8b78060671ce47c45480cd45ae81fe63d319701",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 68,
+      "path": "src/mvdm-host/wow32/wuhook.c",
+      "decision": "Original C hook-state/thunk bookkeeping and calls475/606 remain unchanged. SDK-only module/thread validation provider and declaration move F to B. Same compiled DLL owns callback and provider, preserving self-module comparison. No class/runtime state moved.",
+      "bindings": [
+        {
+          "id": "C0402",
+          "symbols": [
+            "_wow_native_SetWindowsHookExA@16"
+          ],
+          "providers": [
+            "0001:000746e0       _wow_native_SetWindowsHookExA@16 100756e0 f   wow_hook_native_binding.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wuhook.obj",
+      "sha256": "eca9497c18ef5be81635a95be2779ee5d92d2a34676146848ca10cb4b1220910",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 69,
+      "path": "src/mvdm-host/wow32/wulang.c",
+      "decision": "Original C AnsiLowerBuff/AnsiUpperBuff operate on mapped guest buffer and flush100/271. Preserve original size-to-64K semantics. C0456 joins S14 mapping/writeback cohort.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wulang.obj",
+      "sha256": "03173eeabd7c53897488a6b58653f12118dcd9b597226c2d51eeed69a9a4a403",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "migration": {
+    "id": "C0402",
+    "source": "src/wow32-dll/source/wow_hook_native_binding.c",
+    "destination": "src/compat/wow_hook_native_binding.c",
+    "declaration": "src/compat/include/wow_hook_native_binding.h",
+    "symbol": "_wow_native_SetWindowsHookExA@16",
+    "bodyIdentical": true,
+    "compiledCode": {
+      "beforeCode": [
+        "51538b5c2418558b6c24145657c744241c0000000033ffc744241000000000ff15000000008b7424208944242485f60f840101000085ed0f84f900000085db0f84f10000008d44241c50556a06ff150000000085c00f84db0000003974241c0f85d10000008d4424105068000000006a06ff150000000085c00f84b7000000397424100f85ad000000ff15000000003bd87532ff7424248b3500000000ffd68b44241853575550ff15000000008bd8a100000000ffd08be855ffd65f5e5d8bc35b59c21000536a006800081000ff15000000008bf885ff745d57ff15000000008bf0ff15000000003bf0754a6a0057ff15000000003d02010000753aff7424248b3500000000ffd68b442418536a005550ff15000000008bd8a100000000ffd0578be8ff150000000055ffd65f5e5d8bc35b59c21000ff7424248b3500000000ffd68b44241853ff7424245550ff15000000008bd8a100000000ffd08be885ff740757ff150000000055ffd65f5e5d8bc35b59c21000"
+      ],
+      "afterCode": [
+        "51538b5c2418558b6c24145657c744241c0000000033ffc744241000000000ff15000000008b7424208944242485f60f840101000085ed0f84f900000085db0f84f10000008d44241c50556a06ff150000000085c00f84db0000003974241c0f85d10000008d4424105068000000006a06ff150000000085c00f84b7000000397424100f85ad000000ff15000000003bd87532ff7424248b3500000000ffd68b44241853575550ff15000000008bd8a100000000ffd08be855ffd65f5e5d8bc35b59c21000536a006800081000ff15000000008bf885ff745d57ff15000000008bf0ff15000000003bf0754a6a0057ff15000000003d02010000753aff7424248b3500000000ffd68b442418536a005550ff15000000008bd8a100000000ffd0578be8ff150000000055ffd65f5e5d8bc35b59c21000ff7424248b3500000000ffd68b44241853ff7424245550ff15000000008bd8a100000000ffd08be885ff740757ff150000000055ffd65f5e5d8bc35b59c21000"
+      ],
+      "rawCodeEqual": true,
+      "bytesBefore": 374,
+      "bytesAfter": 374,
+      "limitation": "Nonempty COFF executable-section bytes only; final link and source body separately checked."
+    },
+    "providerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_hook_native_binding.obj",
+    "providerSha256": "2bc0efb11f1d6bca6c7484c0b72e894e19d50f55195ad59fa69b341086f10b36",
+    "undefined": [
+      "__imp__CloseHandle@4",
+      "__imp__GetLastError@0",
+      "__imp__SetLastError@4",
+      "__imp__WaitForSingleObject@8",
+      "__imp__GetCurrentProcessId@0",
+      "__imp__GetCurrentThreadId@0",
+      "__imp__OpenThread@12",
+      "__imp__GetProcessIdOfThread@4",
+      "__imp__GetModuleHandleExA@12",
+      "__imp__SetWindowsHookExA@16"
+    ],
+    "authority": "Modern USER owns native hooks. B validates supplied callback/module/thread using public APIs only; C retains HOOKSTATEDATA and guest hook thunks. F composes the same callback and provider in WOW32.dll.",
+    "selfAddress": "GetModuleHandleExA of this function still identifies WOW32.dll; source directory is not module identity.",
+    "scope": "Existing input normalization preserved exactly. No claim to restore missing NT4 global-WOW hook semantics."
+  },
+  "verification": {
+    "buildExit": 0,
+    "targetedExit": 0,
+    "deliveryExit": 0,
+    "initialFailure": "First build failed C1083: moved B source retained F header-search assumption. Corrected to B-relative include; no outer include root added.",
+    "test": "test/observation/verify-wow-hook-native-binding.ps1",
+    "testScope": "Existing 24-case argument seam; actual SDK module/thread queries and handle counts, controlled SetWindowsHookExA destination. Not real guest/USER hook acceptance.",
+    "marker": "WOW_HOOK_NATIVE_BOUNDARY errors=0 calls=24 local=17 global=1 invalid=1 null=1 mismatch=1 callback=1 dead=1 foreign=1 handles=103/103",
+    "abGraphs": 8,
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityRule": "Only package GUID and PE/debug timestamps masked; no raw identity claim."
+  },
+  "publication": {
+    "package": "8bb49d26-18e4-4925-8b13-f341211b438d",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "fcc1d281deda4195eadcb203aa63b384cc6f7a675e3eea0d8b1b6d4442f96988"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "9df9afee5734cef1cc924ba4d20714f982588efd166af024247d3bdd5bf55243"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "4a53d4bc236c5fabe33483a3ea4343ba9688a3b6c54370c938a1301d1af1e460"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "ec074c29a8ea2932760f38a8f39f6b9c9d1fe67386bc80c2140175730bd5a47c"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "7bdc17f4153ded993ef8cdf4d81b85456a855d8b21c5e700b707019875066f53"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "d245875d58ffc3ee39539d53bf8d71e07b10f5036107d40e09ed7e9b0d1bf72f"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "1886df89aa427ddc31153da76c462047d8199017b9526f464696aab0adf3de03"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "c83fde45f8775c311ca6855e1040000fb866ae172f11867b93b774d95b90ed3c"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "29dc80db70bdc03062e8d1948c64173d334b15cf342f7aee3c990d87febdd963"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "ce8d8ef52cc42f077217e73bfdf03736ea3b6f11d86b4545dfe8d08d679427c3"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "befdc22b98af83c1f91f2ce01bfe87dbf957ba7611c511f00683710f4fbfad96"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "fcc1d281deda4195eadcb203aa63b384cc6f7a675e3eea0d8b1b6d4442f96988"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "9df9afee5734cef1cc924ba4d20714f982588efd166af024247d3bdd5bf55243"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "4a53d4bc236c5fabe33483a3ea4343ba9688a3b6c54370c938a1301d1af1e460"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "ec074c29a8ea2932760f38a8f39f6b9c9d1fe67386bc80c2140175730bd5a47c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "7bdc17f4153ded993ef8cdf4d81b85456a855d8b21c5e700b707019875066f53"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "d245875d58ffc3ee39539d53bf8d71e07b10f5036107d40e09ed7e9b0d1bf72f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "1886df89aa427ddc31153da76c462047d8199017b9526f464696aab0adf3de03"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "c83fde45f8775c311ca6855e1040000fb866ae172f11867b93b774d95b90ed3c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "29dc80db70bdc03062e8d1948c64173d334b15cf342f7aee3c990d87febdd963"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "ce8d8ef52cc42f077217e73bfdf03736ea3b6f11d86b4545dfe8d08d679427c3"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "befdc22b98af83c1f91f2ce01bfe87dbf957ba7611c511f00683710f4fbfad96"
+      }
+    ]
+  },
+  "progress": {
+    "compileReviewed": 116,
+    "compileTotal": 116,
+    "linkOnlyReviewed": 69,
+    "linkOnlyTotal": 74,
+    "filesReviewed": 185,
+    "filesTotal": 190,
+    "remainingFiles": 5,
+    "total": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 483,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 85
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 active. Private class/procedure ownership S13; mapping/flush S14. Classification is not elimination. Guest/mirrors unchanged."
+}
