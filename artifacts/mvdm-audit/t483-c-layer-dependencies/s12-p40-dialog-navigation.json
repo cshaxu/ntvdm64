@@ -1,0 +1,90 @@
+{
+  "baseline": "f73d61671066009d911cc1aa9f64b884b229fa28",
+  "status": "P40 source-only ownership classification",
+  "files": [
+    {
+      "number": 77,
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "sha256": "e814918e8e7470a9bcaae9e8241b26627b2b0193d17a58fcdb1a7121d8a5f44d",
+      "compilerObject": "obj/opennt-user/control-body-dlgmgr2.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-dlgmgr2.obj: #deps 66, deps mtime 8167706423835526 (VALID)",
+      "header": "C0064",
+      "linkedIds": [
+        "C0326",
+        "C0327",
+        "C0357",
+        "C0474",
+        "C0510",
+        "C0522",
+        "C0557",
+        "C0596",
+        "C0597"
+      ],
+      "conclusion": "Original ANSI/Unicode keyboard handling, default button, tab/group/Enter/Escape and recursive item lookup remain C. F task/borrow scopes surround original keyboard entry; button scope delays BUTN reuse across focus callbacks and restores BST_DONTCLICK before releasing storage. S13 shared entry/lifetime boundary; no permanent exception."
+    },
+    {
+      "number": 78,
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+      "compilerObject": "obj/opennt-user/control-body-dlgmgrc.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-dlgmgrc.obj: #deps 66, deps mtime 8167706426049597 (VALID)",
+      "header": "C0064",
+      "linkedIds": [],
+      "conclusion": "Original tree/group/tab navigation remains C. Actual COFF undefined callable is _IsDescendant, resolved to C control-view-winmgr.obj; gcWheelDelta is a common tentative declaration already assigned C ownership. No F linked function observed. C0064 nevertheless imports F-selected original WND/CLS/layout/macros and declarations. S14 original USER header/layout composition, not wholesale source migration or duplicated B layouts."
+    },
+    {
+      "number": 79,
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "sha256": "e59074c1e33943f5827af85d4c0fcaafd07e70fcc33bc9b2ff2c47e79f28f795",
+      "compilerObject": "obj/opennt-user/control-body-dmmnem.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-dmmnem.obj: #deps 66, deps mtime 8167706429140241 (VALID)",
+      "header": "C0064",
+      "linkedIds": [
+        "C0326",
+        "C0327",
+        "C0544",
+        "C0557"
+      ],
+      "conclusion": "Original mnemonic text matching, traversal, button flash and command behavior remain C. Four outer symbols are shared button enter/leave and task-aware GetWindowTextW/SendMessageW. Audit jointly with dlgmgr2 and button entry/cleanup in S13; do not split into parallel lifecycle paths."
+    }
+  ],
+  "mechanism": {
+    "button": "wow_button_scope_enter retains exact original BUTNWND on TLS stack. wow_button_free_state assigns deferred lookaside release to oldest matching invocation. Leave releases its resources then pending state; caller clears BST_DONTCLICK in finally before leave. Uses F native failure handling and resources, C BUTN/lookaside ABI and enclosing retained WND; not an SDK-only leaf.",
+    "keyboard": "wow_dialog_messageA/W -> task callback scope, borrow, capture/restore dialog context -> original IsDialogMessageA/W. Native CallMsgFilter/Dispatch/SendMessage use existing callback/identity restoration, not a second keyboard algorithm.",
+    "layout": "wow_user_client_view_layout.h selects original user.h bodies with opaque thread-type spelling, fixed x86 hook count and offset assertions; wow_shared_user_abi.h imports original wowuserp.h. Original client/precomp.h is absent from selected mirror; a C-owned header restoration/cohort must be reviewed in S14, not invented here."
+  },
+  "progress": {
+    "reviewedFiles": 79,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 51,
+    "deferredSourceAbiCompositionFiles": 12,
+    "unreviewedFiles": 37,
+    "totalFiles": 116,
+    "openIds": 510,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "limits": "No source or #error/#line changes. Classification is not elimination, approval of every existing diff, or S13/S14 implementation. Existing fixture doubles cannot prove complete live GUI lifecycle.",
+  "validation": {
+    "compiler": "Three actual production dependency records VALID, original keyboard selection verified.",
+    "productBuild": "Not run: product source unchanged.",
+    "publication": "P38 eleven-image package retained, no new publication claimed.",
+    "targeted": {
+      "result": "passed",
+      "evidence": "build/t483-s12-dialog-navigation/targeted.log and targeted.exit",
+      "markers": [
+        "original-mnemonic-lifetime failures=0",
+        "original-keyboard-lifetime failures=0",
+        "dialog-keyboard-entry failures=0",
+        "WOW_DIALOG_NAVIGATION_OK"
+      ],
+      "scope": "Actual retained original mnemonic/keyboard bodies and production button scope with explicit native dispatch/graph/allocator doubles; entry and navigation fixtures. Not complete live guest UI acceptance."
+    },
+    "documentation": "Verify-DocumentationGovernance.ps1 before commit; build/t483-s12-dialog-navigation/docs.log and docs.exit"
+  }
+}

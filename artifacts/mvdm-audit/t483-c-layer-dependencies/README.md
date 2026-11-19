@@ -195,3 +195,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P38 dialog native leaves](s12-p38-dialog-native-leaves.json): file074, four SDK-only symbols moved to B, no mirror changes; remaining lifecycle/ABI ownership stays open.
 
 [P39 dialog end and manager](s12-p39-dialog-end-manager.json): files075-076, original end/default/modal policy stays C; explicit task/borrow/message boundaries remain open.
+
+[P40 dialog navigation](s12-p40-dialog-navigation.json): files077-079; keyboard/mnemonic lifecycle and original tree-layout composition distinguished.

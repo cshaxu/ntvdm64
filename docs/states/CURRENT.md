@@ -84,9 +84,11 @@ P36: [menu/default/resource ownership evidence](../../artifacts/mvdm-audit/t483-
 
 P37: [combo ownership evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p37-combo-ownership.json).
 
-P38 delivered four unchanged native leaves to B with coherent build/publication and targeted/runtime checks. [P38 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p38-dialog-native-leaves.json).
+P38: [native-leaf migration, build, publication and tests](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p38-dialog-native-leaves.json).
 
-P39 classified dialog end/manager ownership; original algorithms stay C and task/native/message scopes remain S13, extracted state provenance S14. [P39 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p39-dialog-end-manager.json). Review76/116:16 clears,49 lifecycle,11 source/ABI,40 unreviewed;510/617 open. Source unchanged;22 original-end fixture cases passed. P38 package unchanged. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P39: [dialog end/manager ownership and 22-case verification](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p39-dialog-end-manager.json).
+
+P40 classified keyboard/mnemonic lifecycle as S13 and pure navigation header/layout composition as S14. [P40 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p40-dialog-navigation.json). Review79/116:16 clears,51 lifecycle,12 source/ABI,37 unreviewed;510/617 open. Source unchanged; P38 package retained. Four targeted fixtures passed. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

@@ -509,13 +509,19 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+077 P40: Original ANSI/Unicode keyboard handling, default button, tab/group/Enter/Escape and recursive item lookup remain C. F task/borrow scopes surround original keyboard entry; button scope delays BUTN reuse across focus callbacks and restores BST_DONTCLICK before releasing storage. S13 shared entry/lifetime boundary; no permanent exception. Mirror delta0 points/0 lines; see s12-p40-dialog-navigation.json.
+
 ## 078 — src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+078 P40: Original tree/group/tab navigation remains C. Actual COFF undefined callable is _IsDescendant, resolved to C control-view-winmgr.obj; gcWheelDelta is a common tentative declaration already assigned C ownership. No F linked function observed. C0064 nevertheless imports F-selected original WND/CLS/layout/macros and declarations. S14 original USER header/layout composition, not wholesale source migration or duplicated B layouts. Mirror delta0 points/0 lines; see s12-p40-dialog-navigation.json.
+
 ## 079 — src/non-mvdm/windows/core/ntuser/client/dmmnem.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+079 P40: Original mnemonic text matching, traversal, button flash and command behavior remain C. Four outer symbols are shared button enter/leave and task-aware GetWindowTextW/SendMessageW. Audit jointly with dlgmgr2 and button entry/cleanup in S13; do not split into parallel lifecycle paths. Mirror delta0 points/0 lines; see s12-p40-dialog-navigation.json.
 
 ## 080 — src/non-mvdm/windows/core/ntuser/client/draw.c
 
