@@ -259,3 +259,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P70 Inventory reconciliation](s12-p70-inventory-reconciliation.json): all618 stable IDs cross-indexed with the original190-file inventory;116 direct compile and74 link-only files. No status promotion. The latter136 symbol IDs include87 exclusive IDs (82 open,5 eliminated). Source-only;22 release hashes verified.
 
 [P71 Console title and native I/O](s12-p71-console-title-native-io.json): link-only files1-2/74. C0282 requires session Console ownership treatment in S13; demerror four native I/O edges already eliminated in P14. Both actual product maps checked; no new elimination or mirror delta.
+
+[P72 DEM buffer ownership](s12-p72-dem-buffer-ownership.json): link-only file3/74. Separates proven page-aware-copy requirement from unproven necessity of the whole lease design. C0194/C0196/C0197 remain open for S13. Both product COFF/maps and22 publication hashes checked; no production change.

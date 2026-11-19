@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P70-P71: [Inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p70-inventory-reconciliation.json), [Console/native I/O](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p71-console-title-native-io.json). Reviewed116/116 direct compile and2/74 link-only files. C0282 goes to S13; demerror already cleared by P14. Total500/618 open. Mirror delta0/0; cumulative reduction2 points/10 lines. P67 release22 hashes verified. S12 active.
+P70-P72: [Inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p70-inventory-reconciliation.json), [DEM buffer ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p72-dem-buffer-ownership.json). Reviewed116/116 direct compile and3/74 link-only files. Page-aware copy proven; entire lease design not thereby justified. Total500/618 open. Mirror delta0/0; cumulative reduction2 points/10 lines. P67 release22 hashes verified. S12 active.

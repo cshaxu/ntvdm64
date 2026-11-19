@@ -1,0 +1,95 @@
+{
+  "baseline": "d521f2b7b3759aec80b0178860d5d0c8c4a8cfbe",
+  "file": "src/mvdm-host/dos/dem/demhndl.c",
+  "linkOnlyOrder": 3,
+  "ids": [
+    "C0194",
+    "C0196",
+    "C0197"
+  ],
+  "conclusion": "The arbitrary DOS buffer requires page-aware access; current lease ownership is F session state, not an independent B native API capability. Resolve this dependency with the S13 guest-memory boundary, preserving original DEM I/O and error policy. The setter alone is pure numeric construction, but moving it alone would leave acquisition/release and its lease ABI coupled to F.",
+  "evidenceDistinctions": {
+    "responsibility": "Original DS:DX buffer is passed to native ReadFile/WriteFile. Valid adjacent guest pages need not have adjacent physical backing.",
+    "originalLimitation": "Fixed OpenNT base/mvdm/dos/dem/demhndl.c:124-127 uses GetVDMAddr; historical actual CCPU counterexample in r0102-r0113-requalification.json proves a single translated pointer cannot implement arbitrary cross-page native I/O.",
+    "specificImplementation": "Counterexample does not prove this entire lease architecture is minimal or every cleanup behavior equivalent. Do not promote all remaining mirror diff to approved retention.",
+    "ownership": "mvdm_guest_location_acquire_vm -> session_thread_current -> session_guest_memory_acquire -> per-session guest_memory_lease; release checks slot ownership and epoch, optionally scatters through CCPU SAS and releases bounce storage.",
+    "reuse": "CCPU c_sas_loads/c_sas_stores already perform page-aware copies; original shared scratch transbuf cannot simply replace per-call storage across blocking/reentry without defining lifetime."
+  },
+  "followUp": "S13 guest-memory boundary must account for synchronous native/redirector I/O lifetime, actual byte counts, failure/EOF/ERROR_MORE_DATA, zero-length write/truncate, and mapping changes. Keep original DEM dispatch and register/error semantics in C; do not move whole demhndl.c solely to satisfy layering. Consider shared numeric location separately only as part of cohesive ABI treatment.",
+  "priorRuntimeEvidence": "../t483-remaining-reaudit/r0102-r0113-requalification.json: exit0 DOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1; valid fixture mapping, not a production application reproduction or a new run.",
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 3,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 71,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demhndl.obj",
+      "objectSha256": "639c4bc486a738a3f2962a186d37101e427b91d18d70702b4c24f3ea974641fb",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "mapSha256": "8c32e5527259e251559e415255ee3296efe5df426bf2d53dcc7daa666f92cdea",
+      "bindings": [
+        "0001:00003040       _mvdm_guest_location_acquire 00404040 f   softpc-bindings:mvdm_guest_location.obj",
+        "0001:000031e0       _mvdm_guest_location_release 004041e0 f   softpc-bindings:mvdm_guest_location.obj",
+        "0001:00003220       _mvdm_guest_location_set_real_mode 00404220 f   softpc-bindings:mvdm_guest_location.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\dem\\demhndl.obj",
+      "objectSha256": "d0bf89bf3f146a167fcbedbf5a79367e151b722390c5d5f6fd8d3daf8c8429ff",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "mapSha256": "28578c3eefc280bc16d1132c7545e8b56ef39806d17e580d224ccde3150f86c8",
+      "bindings": [
+        "0001:00003040       _mvdm_guest_location_acquire 00404040 f   softpc-bindings:mvdm_guest_location.obj",
+        "0001:000031e0       _mvdm_guest_location_release 004041e0 f   softpc-bindings:mvdm_guest_location.obj",
+        "0001:00003220       _mvdm_guest_location_set_real_mode 00404220 f   softpc-bindings:mvdm_guest_location.obj"
+      ]
+    }
+  ],
+  "validation": {
+    "build": "Not run: production unchanged. Existing real COFF and exact map bindings inspected.",
+    "runtime": "No new runtime test; historical counterexample and current fixture source inspected.",
+    "publishedImagesVerified": [
+      "assets\\release\\VCDEX.DLL",
+      "O:\\WINNT\\system32\\VCDEX.DLL",
+      "assets\\release\\run16.exe",
+      "O:\\WINNT\\system32\\run16.exe",
+      "assets\\release\\ntsrv.exe",
+      "O:\\WINNT\\system32\\ntsrv.exe",
+      "assets\\release\\ntcon.exe",
+      "O:\\WINNT\\system32\\ntcon.exe",
+      "assets\\release\\ntvdm.exe",
+      "O:\\WINNT\\system32\\ntvdm.exe",
+      "assets\\release\\ntvwm.exe",
+      "O:\\WINNT\\system32\\ntvwm.exe",
+      "assets\\release\\ntmon.exe",
+      "O:\\WINNT\\system32\\ntmon.exe",
+      "assets\\release\\WOW32.DLL",
+      "O:\\WINNT\\system32\\WOW32.DLL",
+      "assets\\release\\VDMREDIR.DLL",
+      "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "assets\\release\\nthook32.dll",
+      "O:\\WINNT\\system32\\nthook32.dll",
+      "assets\\release\\nthook64.dll",
+      "O:\\WINNT\\system32\\nthook64.dll"
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/dos/dem/demhndl.c": "ffe30feeafd8e968bbf0f9b4671824d051c0932c77bdb626de51f5490241c784",
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c": "c1c1498531e727c3049c90eeb9ef8c15ea0a09f8dbc09b8e41ad55dfb3e4a203",
+    "src/ntvdm-exe/session/session.c": "e59ab2a6ebe824c11553eaf6f758ef67b568c495a75d1f720675f6761ab12506",
+    "src/ntvdm-exe/session/guest_memory_lease.c": "98f1fb811e769ff00e9ed98ac8311b4d07dcd4b5c9d4d137f536eeea634b2d5c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c": "681b9e93f652b321a5a6ee8292dbc6449a60edd41499961e39d8caf1323f4b46",
+    "test/mvdm-host/ccpu_bounded_execution_fixture.c": "3c39c10e303a5f23fbf860371e9f92db2e8267e2f4fe73cec0c9a3f34493441f"
+  }
+}
