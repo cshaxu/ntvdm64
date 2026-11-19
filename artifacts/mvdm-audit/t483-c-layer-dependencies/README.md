@@ -295,3 +295,5 @@ P87: [ROM resource ownership delivery](s12-p87-rom-resource-owner.json); C0222 m
 P88: [Thread callback ABI](s12-p88-thread-callback-abi.json); files35-37 reviewed; corrected nt_thred actual callback selection without mirror edits; lifecycle ownership remains S13.
 
 P89: [Timer/idle/VGA ownership](s12-p89-timer-idle-vga-ownership.json); files38-40 reviewed; timer native handle binding joins S13 cleanup, idle callback already B, painter/presentation ownership separated.
+
+P90: [RAP provider ownership](s12-p90-rap-owner.json); files41-43 reviewed; three SDK-only provider symbols moved unchanged F to B, all cached builds, focused redirector tests and dual publication passed. DLC lifetime remains S13.

@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P88-P89: [Thread delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p88-thread-callback-abi.json), [timer/idle/VGA review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p89-timer-idle-vga-ownership.json). Reviewed116/116 compile and40/74 link-only;494/618 IDs open,74 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package843cb8d8-4bb3-4d88-af5e-d98b34b887f7 remains published;22 hashes verified. S12 active.
+P90: [RAP ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p90-rap-owner.json). Reviewed116/116 compile and43/74 link-only;491/618 IDs open,77 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Packagebcdecd3d-405c-4367-a428-892650e11c8b published to both destinations;22 hashes verified. Cached builds, focused redirector tests and8 A/B graphs passed. S12 active.

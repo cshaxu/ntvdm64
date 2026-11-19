@@ -10,13 +10,8 @@
  * client or silently treating unrelated NetAPI calls as equivalent.
  */
 
-#include <nt.h>
 #include <windows.h>
-#include <lmerr.h>
-#include <rxp.h>
-#include <rxuser.h>
-#include <xstypes.h>
-#include <xsprocs.h>
+#include <lmcons.h>
 
 NET_API_STATUS
 RxpTransactSmb(

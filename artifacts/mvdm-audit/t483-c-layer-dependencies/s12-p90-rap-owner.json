@@ -1,0 +1,265 @@
+{
+  "baseline": "56fd9563f075f02cc1ccad9ff782f7f9b55f5ad3",
+  "question": "Resolve SDK-only remote RAP provider ownership; finish ordered link-only files 41-43.",
+  "files": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "order": 41,
+      "ids": [
+        "C0157"
+      ],
+      "decision": "Keep original DLC worker C; D bridge owns session tracking. Void cdecl callback is cast to DWORD callback; loop has no normal return. S13 must select matching void callback and preserve paired lifetime, not assume hypothetical return safety.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "order": 42,
+      "ids": [
+        "C0157"
+      ],
+      "decision": "DWORD cdecl event worker matches current bridge; keep original queue/interrupt algorithm C and handle paired worker session lifetime in S13.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "order": 43,
+      "ids": [
+        "C0605"
+      ],
+      "decision": "Unchanged SDK-only failure provider moved F to B; C caller unchanged. Coupled C0603/4 in vrnetapi also eliminated.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "migration": {
+    "source": "src/vdmredir-dll/source/mvdm_redirector_remote_unavailable.c",
+    "destination": "src/compat/remote_rap.c",
+    "functionBodiesIdentical": true,
+    "dependency": "windows.h and lmcons.h only; no C/D/E/F header or state",
+    "symbols": [
+      "GetLanmanSessionKey",
+      "RxNetUserPasswordSet",
+      "RxpTransactSmb"
+    ]
+  },
+  "boundary": "vrnetapi.c:1062 stores NET_API_STATUS GetLanmanSessionKey result in NTSTATUS and applies NT_SUCCESS; positive ERROR_CALL_NOT_IMPLEMENTED is therefore not rejected by that check. Existing status-domain mismatch is not repaired or claimed valid by this ownership-only move. No remote RAP capability restored; original caller and provider behavior unchanged.",
+  "compiledEvidence": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrdlc5c.obj",
+      "sha256": "d5389d97421fb14b4f576918d435e82aa05108689b6e3085ac20d768da62523c",
+      "symbols": {
+        "_opennt_create_cdecl_thread_named": {
+          "section": 0,
+          "value": 0
+        }
+      }
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrdlcpst.obj",
+      "sha256": "2bada7e9efbd59ff28216432ae1f426d8374b16e6e6cc64a1c687d58af27589d",
+      "symbols": {
+        "_opennt_create_cdecl_thread_named": {
+          "section": 0,
+          "value": 0
+        }
+      }
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrremote.obj",
+      "sha256": "9ec2c68592ce2c86223e9c2898eb4bc98d0cea939c1bf37f74d0858be10f8b63",
+      "symbols": {
+        "_RxpTransactSmb": {
+          "section": 0,
+          "value": 0
+        }
+      }
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrnetapi.obj",
+      "sha256": "249b075a4733d6b685f8ffcd45bc1657aeec65383164216629be67b089ad0cb1",
+      "symbols": {
+        "_GetLanmanSessionKey": {
+          "section": 0,
+          "value": 0
+        },
+        "_RxNetUserPasswordSet": {
+          "section": 0,
+          "value": 0
+        },
+        "_RxpTransactSmb": {
+          "section": 0,
+          "value": 0
+        }
+      }
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\compat\\remote_rap.obj",
+      "sha256": "cd488f23b5a68f78003fe1f7324e622fb10de4efd9918a42f8514683f7013f5c",
+      "symbols": {
+        "_GetLanmanSessionKey": {
+          "section": 3,
+          "value": 0
+        },
+        "_RxNetUserPasswordSet": {
+          "section": 5,
+          "value": 0
+        },
+        "_RxpTransactSmb": {
+          "section": 7,
+          "value": 0
+        }
+      }
+    }
+  ],
+  "verification": {
+    "buildExit": 0,
+    "deliveryExit": 0,
+    "commands": [
+      "build/t483-s12-rap-owner/build.ps1",
+      "build/t483-s12-rap-owner/deliver.ps1",
+      "build/t483-s12-rap-owner/targeted.ps1"
+    ],
+    "provider": "4000 failure/output-unchanged checks passed using actual product objects",
+    "enum": "37 assertions passed",
+    "dos": "PASS actual DOS remote/transact/null-transact failure, enum counts and local workstation provider",
+    "abGraphs": "8 passed",
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "normalization": "Only package GUID, PE and debug-directory timestamps; not raw byte identity",
+    "runtimeScope": "Focused redirector tests; no Full regression claim",
+    "documentationGate": "passed; build/t483-s12-rap-owner/docs.exit=0"
+  },
+  "publication": {
+    "package": "bcdecd3d-405c-4367-a428-892650e11c8b",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "178cad2b26e6145f81d9ef80d5fa2e4f5d84a6814b47ee4766185726a833e262"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "1bfc4d510c3a6db7b1253a1d890ab4f89941cc71a11c5164333c14b91e0f1b9b"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "cd8587ff8b4ad7049c3dd3de97b0b23b273f424241c221e149573d12baf3d272"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "a30fc8d869ed9c79b9ca6e111e2bb3e3fa97f6b4ab9aa0e6b470cbe4163043b9"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "867b138c125923dff3152abe81be4ce2e270e915f63e037bf7177187ad6fd996"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "154233b164de805a23b9995ce9e1a0284afcb5e498e44a68f5bc6f4c6b598ae9"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "25f6e671f89788c9cdbde0752dbd96dd920e118b22746601bdc49f1fa08d94fe"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "1074c67cbc94a31d8dedc430654cce917be68b52c82c40fe9a6517c343ec24b6"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "bbab27c40c00f3b5de300c9c2ce261db9a509b6753ad91bc0cbd8adcb6e0c1f8"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "0f83b396a8011337cfbf983cb0f97f0b01d558832dee0ada31fde80a9627f42d"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "88d24fc9c08a184e9bc5d4b2fe64f5d1441deeb592ba7e6852cfbfbaf5773f43"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "178cad2b26e6145f81d9ef80d5fa2e4f5d84a6814b47ee4766185726a833e262"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "1bfc4d510c3a6db7b1253a1d890ab4f89941cc71a11c5164333c14b91e0f1b9b"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "cd8587ff8b4ad7049c3dd3de97b0b23b273f424241c221e149573d12baf3d272"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "a30fc8d869ed9c79b9ca6e111e2bb3e3fa97f6b4ab9aa0e6b470cbe4163043b9"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "867b138c125923dff3152abe81be4ce2e270e915f63e037bf7177187ad6fd996"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "154233b164de805a23b9995ce9e1a0284afcb5e498e44a68f5bc6f4c6b598ae9"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "25f6e671f89788c9cdbde0752dbd96dd920e118b22746601bdc49f1fa08d94fe"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "1074c67cbc94a31d8dedc430654cce917be68b52c82c40fe9a6517c343ec24b6"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "bbab27c40c00f3b5de300c9c2ce261db9a509b6753ad91bc0cbd8adcb6e0c1f8"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "0f83b396a8011337cfbf983cb0f97f0b01d558832dee0ada31fde80a9627f42d"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "88d24fc9c08a184e9bc5d4b2fe64f5d1441deeb592ba7e6852cfbfbaf5773f43"
+      }
+    ]
+  },
+  "progress": {
+    "compileFilesReviewed": 116,
+    "compileFilesTotal": 116,
+    "linkOnlyFilesReviewed": 43,
+    "linkOnlyFilesTotal": 74,
+    "stableIds": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 491,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 77
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 remains active; remaining link-only files start waccel.c. C0157 thread ownership stays S13. Status-domain mismatch requires separate semantic review, not silent alteration in this relocation."
+}
