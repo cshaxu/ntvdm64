@@ -10,7 +10,6 @@
 #include "host_rrr.h"
 #include "host_nls.h"
 #include "nt_timer.h"
-#include "mvdm_standalone_worker.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
 
@@ -39,14 +38,7 @@ INT host_main(INT argc, CHAR **argv);  // located in base\support\main.c
 _CRTAPI1 main(int argc, CHAR ** argv)
 {
    int ret=-1;
-   DWORD bootstrap=mvdm_standalone_worker_begin();
-    if (bootstrap!=ERROR_SUCCESS) return (int)bootstrap;
-    if (setjmp(*mvdm_standalone_worker_termination_escape()) != 0) {
-        ret=(int)mvdm_standalone_worker_completion_code();
-        goto finish;
-    }
 
-#line 37
     /*
      *  Intialize synchronization events for the timer\heartbeat
      *  so that we can always suspend the heartbeat when an exception
@@ -73,9 +65,7 @@ _CRTAPI1 main(int argc, CHAR ** argv)
         ;  // we shouldn't arrive here
         }
 
-finish:
-    return mvdm_standalone_worker_finish(ret);
-#line 64
+    return ret;
 }
 
 

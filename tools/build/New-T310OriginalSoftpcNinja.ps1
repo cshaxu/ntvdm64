@@ -1136,6 +1136,7 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
 $hostFixtureObjects = @($hostObjects)
 $hostEntryObject = 'obj/host/ntvdm_entry.obj'
 $graph.Add('build ' + $hostEntryObject + ': cc_host ' + (NinjaPath $hostEntrySource))
+$graph.Add('  host_cflags = ' + $hostFlags + ' /Dmain=mvdm_softpc_main')
 $graph.Add('build obj/host/softpc-resource.res: rc ' + (NinjaPath $embeddedRomResourceSource))
 $hostObjects += $hostEntryObject
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {

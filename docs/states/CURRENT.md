@@ -18,7 +18,8 @@
 | Candidate Proposal | [T483 parent proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
 | Identifier Mode | M0 T483 S12, Ordinary Mode. |
 | Admission And Approval | Owner closed S11 and authorized the three sequential C-layer scopes. |
-| Non-goals | No guest changes. Ownership migrations belong to the two successor scopes. |
+| Owner amendment | Process the named ntvdm.c worker entry migration during S12. Preserve the independent CPU registry binding. Review every transitive witness and associate it with the direct edge. |
+| Non-goals | No guest changes. Other ownership migrations belong to the two successor scopes. |
 | Expected Markers | Eliminated direct edges have compiler or linker witnesses; indirect-only evidence stays traceable separately. |
 | Similar-Issue Sweep | Review both C owners and all supported production targets. |
 | Reporting Requirements | Record stable IDs, direct source, provider, disposition, non-exclusion mirror block and line deltas and verification. |
@@ -30,6 +31,8 @@
 S12 P1 eliminated C0042, C0139 and C0143 in place. The worker build selects its historical terminate symbol name directly. The two unused private search directories have been removed from product and fixture generators. All eight production graphs covering eleven images passed the command check. The 27 async publication and 14 OEM assertions, original COM lifecycle, 98-object nonworker compiler closure and its injected negative control passed. Both cached architectures built. Both release manifests match package 7fe6d388-ad54-4952-a212-1abeefe9cb75. All executable sections match P7. Mirror block and line deltas are zero. Of 599 stable IDs, 544 remain open, 51 are supporting evidence, three eliminated and one excluded diagnostic. S12 remains active.
 
 P2 removed C0056, C0138, C0140 and C0144 without changing either mirror. The WOW32 graph also dropped its inherited worker command and SoftPC search roots. P2 package 93bb7b13-4fcd-42ce-bbfe-c318a53669ba was built with both cached toolchains and hash-verified at both destinations. Every byte of all eleven P2 images equals P1 after masking only the package GUID and COFF/debug-directory timestamps. The WOW32 formal graph, worker session lifecycle and A/B production boundary checks passed. The expanded compile commands and a VDMREDIR link map corrected the baseline coverage. See the C tracker for the updated counts.
+
+P3 restored the original SoftPC entry and placed process startup and exit in the F worker owner. The [P3 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p3-entry.json) covers both published packages, 539 compiler contexts and the mirror reduction of two blocks and ten lines. The tracker retains all original indirect observations.
 
 ## Successor scopes
 

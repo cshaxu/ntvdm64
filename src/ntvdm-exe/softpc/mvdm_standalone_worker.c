@@ -134,7 +134,7 @@ static int mvdm_standalone_worker_cleanup(int result)
     return result;
 }
 
-DWORD mvdm_standalone_worker_begin(void)
+static DWORD mvdm_standalone_worker_begin(void)
 {
     DWORD error=ERROR_INVALID_STATE;
     int index;
@@ -213,18 +213,22 @@ fail:
     return error;
 }
 
-jmp_buf *mvdm_standalone_worker_termination_escape(void)
-{
-    return worker_started && worker_escape ? &worker_session.termination_escape : NULL;
-}
+/* The worker build binds only the original SoftPC entry unit to this name. */
+int __cdecl mvdm_softpc_main(int argc, char **argv);
 
-DWORD mvdm_standalone_worker_completion_code(void)
+int main(int argc, char **argv)
 {
-    return worker_started ? worker_session.completion_code : ERROR_INVALID_STATE;
-}
+    DWORD error = mvdm_standalone_worker_begin();
+    int result;
 
-int mvdm_standalone_worker_finish(int result)
-{
-    result=(int)NtvdmAuthorizeExit((DWORD)result);
+    if (error != ERROR_SUCCESS)
+        return (int)error;
+
+    if (setjmp(worker_session.termination_escape) == 0)
+        result = mvdm_softpc_main(argc, argv);
+    else
+        result = (int)worker_session.completion_code;
+
+    result = (int)NtvdmAuthorizeExit((DWORD)result);
     return mvdm_standalone_worker_cleanup(result);
 }

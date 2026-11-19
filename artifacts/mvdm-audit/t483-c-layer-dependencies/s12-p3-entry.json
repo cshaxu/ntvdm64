@@ -1,0 +1,97 @@
+{
+  "package": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "74d08748-f1dd-4a39-ab92-61c7faa696ee",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "mirror": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+  "baseline": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "entry_original_lines": [
+    33,
+    64
+  ],
+  "non_error_diff": {
+    "before": {
+      "blocks": 4,
+      "added": 11,
+      "deleted": 2
+    },
+    "after": {
+      "blocks": 2,
+      "added": 2,
+      "deleted": 1
+    }
+  },
+  "link_map": {
+    "main": "softpc-bindings:mvdm_standalone_worker.obj",
+    "mvdm_softpc_main": "ntvdm_entry.obj",
+    "host_main": "main.obj"
+  },
+  "scope": "C-owned production C/C++ compile commands. Assembly and runtime bindings require their own evidence.",
+  "msvc_syntax_showIncludes": {
+    "x86": 528,
+    "x64": 11,
+    "errors": 0
+  },
+  "eliminated_transitive": [
+    "C0008",
+    "C0011",
+    "C0019",
+    "C0025",
+    "C0026"
+  ],
+  "eliminated_direct": [
+    "C0046",
+    "C0251",
+    "C0252",
+    "C0253",
+    "C0254"
+  ],
+  "original_51_direct": [
+    "C0056",
+    "C0068"
+  ],
+  "remaining_registry": "C0036",
+  "bad_package_path_exit": {
+    "P2": 161,
+    "P3": 161
+  },
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 544,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 12
+  },
+  "full": {
+    "passed": [
+      "guest-media",
+      "startup-presentation",
+      "console-font-restore",
+      "console-input-batch",
+      "ntvdm-export-ordinals",
+      "wow-frontiers",
+      "Console-17",
+      "Window-17",
+      "rpc",
+      "native-gui",
+      "version-negatives",
+      "strict-dir",
+      "modern-edit-return",
+      "cooked-return",
+      "rapid-relaunch",
+      "interactive-relaunch",
+      "session-isolation",
+      "retirement-wiring",
+      "nested-window-handoff",
+      "dos4gw-nesticle"
+    ],
+    "elapsedMs": 389243,
+    "exit": 0
+  }
+}
