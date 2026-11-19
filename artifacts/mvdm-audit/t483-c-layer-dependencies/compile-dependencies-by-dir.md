@@ -605,9 +605,13 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+093 P51: Native filesystem, C encoding and original directory algorithms retained. Five F task/window/message symbols and C0064 remain open. Mirror0/0; see s12-p51-list-directory-ownership.json.
+
 ## 094 — src/non-mvdm/windows/core/ntuser/client/lboxmult.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+094 P51: All business calls resolve C; F precomp compile dependency remains for shared ABI cleanup. Keep original geometry. Mirror0/0; see s12-p51-list-directory-ownership.json.
 
 ## 095 — src/non-mvdm/windows/core/ntuser/client/lboxrare.c
 
