@@ -1,0 +1,323 @@
+{
+  "baseline": "e247cb4824b3efcd34902c7d337e02aefb78625e",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "ids": [
+        "C0264",
+        "C0269",
+        "C0271",
+        "C0272",
+        "C0276",
+        "C0280",
+        "C0296"
+      ],
+      "linkOnlyOrder": 30,
+      "decision": "S13 Console endpoint initialization and presentation notifications. Keep original startup/redirected-handle decisions in C; F duplicates bound frontend endpoint identities for CONIN$/CONOUT$, marks identity file type, and dispatches modes/cursor/screen state. Do not substitute worker-local Console ownership.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "ids": [
+        "C0185",
+        "C0186",
+        "C0187"
+      ],
+      "linkOnlyOrder": 31,
+      "decision": "S14 original printer semantic carrier ownership. Keep nt_lpt and printer state algorithm in C scope; current extracted F provider operates on C-layout VDM_TIB, so a B move would violate B-to-C. Assess finite original owner subset with storage/control ABI and mirror impact, not whole hardware monitor restoration.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "ids": [
+        "C0308"
+      ],
+      "linkOnlyOrder": 32,
+      "decision": "C0308 already eliminated P14: current serial device-control calls link B native I/O facade; no new eliminated credit.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_hosts.obj",
+      "sha256": "20d8e9d9f77a25fab3e843850f7ee0584903373873f02aba5e2ffd2b36159f0a",
+      "bindings": [
+        {
+          "id": "C0264",
+          "symbol": "_MvdmCreateFileA@28",
+          "provider": "0001:001755a0       _MvdmCreateFileA@28        005765a0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0269",
+          "symbol": "_MvdmGetConsoleCursorInfo@8",
+          "provider": "0001:00175950       _MvdmGetConsoleCursorInfo@8 00576950 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0271",
+          "symbol": "_MvdmGetConsoleMode@8",
+          "provider": "0001:00175ab0       _MvdmGetConsoleMode@8      00576ab0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0272",
+          "symbol": "_MvdmGetConsoleScreenBufferInfo@8",
+          "provider": "0001:00175bd0       _MvdmGetConsoleScreenBufferInfo@8 00576bd0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0276",
+          "symbol": "_MvdmGetFileType@4",
+          "provider": "0001:00175f90       _MvdmGetFileType@4         00576f90 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0280",
+          "symbol": "_MvdmSetConsoleMode@8",
+          "provider": "0001:00176150       _MvdmSetConsoleMode@8      00577150 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0296",
+          "symbol": "_SetLastConsoleEventActive@0",
+          "provider": "0001:00178890       _SetLastConsoleEventActive@0 00579890 f   softpc-win32-bindings:console_compat.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_lpt.obj",
+      "sha256": "6516740614dab22ba0bcb0deef3866268c421de19f3ef031601adcfdebbb7c8c",
+      "bindings": [
+        {
+          "id": "C0185",
+          "symbol": "_MonitorEnablePrinterDirectAccess",
+          "provider": "0001:0017ba30       _MonitorEnablePrinterDirectAccess 0057ca30 f   kernel-vdm-printer:monitor_printer.obj"
+        },
+        {
+          "id": "C0186",
+          "symbol": "_MonitorInitializePrinterInfo",
+          "provider": "0001:0017bab0       _MonitorInitializePrinterInfo 0057cab0 f   kernel-vdm-printer:monitor_printer.obj"
+        },
+        {
+          "id": "C0187",
+          "symbol": "_MonitorPrinterWriteData",
+          "provider": "0001:0017bb50       _MonitorPrinterWriteData   0057cb50 f   kernel-vdm-printer:monitor_printer.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_ntfun.obj",
+      "sha256": "ac525bcc288af0650b9768812cceb8ac89af1613825c42970e7c9f6069e9f2d5",
+      "bindings": [
+        {
+          "id": "C0308",
+          "symbol": "_opennt_NtDeviceIoControlFile@40",
+          "provider": "0001:001750b0       _opennt_NtDeviceIoControlFile@40 005760b0 f   softpc-win32-bindings:ntioapi_facade.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_hosts.obj",
+      "sha256": "7761025aec36dfbe70b211ec0262db26b10a6f7521c9de2fd267c8419fa55319",
+      "bindings": [
+        {
+          "id": "C0264",
+          "symbol": "_MvdmCreateFileA@28",
+          "provider": "0001:001755a0       _MvdmCreateFileA@28        005765a0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0269",
+          "symbol": "_MvdmGetConsoleCursorInfo@8",
+          "provider": "0001:00175950       _MvdmGetConsoleCursorInfo@8 00576950 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0271",
+          "symbol": "_MvdmGetConsoleMode@8",
+          "provider": "0001:00175ab0       _MvdmGetConsoleMode@8      00576ab0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0272",
+          "symbol": "_MvdmGetConsoleScreenBufferInfo@8",
+          "provider": "0001:00175bd0       _MvdmGetConsoleScreenBufferInfo@8 00576bd0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0276",
+          "symbol": "_MvdmGetFileType@4",
+          "provider": "0001:00175f90       _MvdmGetFileType@4         00576f90 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0280",
+          "symbol": "_MvdmSetConsoleMode@8",
+          "provider": "0001:00176150       _MvdmSetConsoleMode@8      00577150 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0296",
+          "symbol": "_SetLastConsoleEventActive@0",
+          "provider": "0001:00178890       _SetLastConsoleEventActive@0 00579890 f   softpc-win32-bindings:console_compat.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_lpt.obj",
+      "sha256": "cd0526a2cff03937db5dd51dee6bcbe26ad9be62e751ef57d84de1b21244e0fb",
+      "bindings": [
+        {
+          "id": "C0185",
+          "symbol": "_MonitorEnablePrinterDirectAccess",
+          "provider": "0001:0017ba30       _MonitorEnablePrinterDirectAccess 0057ca30 f   kernel-vdm-printer:monitor_printer.obj"
+        },
+        {
+          "id": "C0186",
+          "symbol": "_MonitorInitializePrinterInfo",
+          "provider": "0001:0017bab0       _MonitorInitializePrinterInfo 0057cab0 f   kernel-vdm-printer:monitor_printer.obj"
+        },
+        {
+          "id": "C0187",
+          "symbol": "_MonitorPrinterWriteData",
+          "provider": "0001:0017bb50       _MonitorPrinterWriteData   0057cb50 f   kernel-vdm-printer:monitor_printer.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_ntfun.obj",
+      "sha256": "825ac49ff975be591ed1fef3cf0d2d6c764416fd26366e56c13cab02edeb6f95",
+      "bindings": [
+        {
+          "id": "C0308",
+          "symbol": "_opennt_NtDeviceIoControlFile@40",
+          "provider": "0001:001750b0       _opennt_NtDeviceIoControlFile@40 005760b0 f   softpc-win32-bindings:ntioapi_facade.obj"
+        }
+      ]
+    }
+  ],
+  "printerEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "original": "base/mvdm/v86/monitor/i386/monitor.c: MonitorInitializePrinterInfo, MonitorEnablePrinterDirectAccess, MonitorPrinterWriteData; pinned git show and nt_lpt caller sites checked.",
+    "current": "Initialize binds original printer arrays once and initializes modes; enable changes handle/mode; write appends byte to VDM_TIB buffer. This is not CPU execution ownership.",
+    "boundary": "Current NtVdmControl in ntvdm-exe/monitor/source/vdm_control.c accepts only VdmQueryDir. Printer close service returns STATUS_NOT_IMPLEMENTED, and printer helper ignores that result. No claim of working physical direct printer I/O; S14 must preserve/classify this boundary before restoration."
+  },
+  "consoleEvidence": "nt_hosts explicitly opens CONIN$/CONOUT$ when standard handles redirected; MvdmCreateFileA duplicates session endpoint identity. MvdmGetFileType recognizes it; state calls use existing frontend channel. SetLastConsoleEventActive emits session video event. Reuse P83 dispatch proof.",
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 32,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 42,
+    "openIds": 498,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "No production changes; 22 imports verified across six P81 objects and both maps.",
+    "runtime": "No new runtime or physical printer/serial acceptance claimed.",
+    "publishedHashesVerified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_hosts.c": "a1f23673515b408894109ed5367821bb50f77bc156a643cea997798da9865aa7",
+    "src/mvdm-host/softpc.new/host/src/nt_lpt.c": "d0f71dd769536e845e42b601ddd3e10e4b4a52386fb94236293afa4144cd8943",
+    "src/mvdm-host/softpc.new/host/src/nt_ntfun.c": "14a734378272bf6cf08aafe072a427bf63cdde2eb7face818509ad07cfe6adf8",
+    "src/ntvdm-exe/monitor/source/monitor_printer.c": "f45b156f5704b4f5ae79cd83cdd856468fac7ad8bddb0cdb047403fdb9f80268",
+    "src/ntvdm-exe/monitor/source/vdm_control.c": "b1b1504a351c79f0036ddd49c845561e929f60fc5ffd164aa7216ed5f32dfc29",
+    "src/ntvdm-exe/monitor/include/monitor_context.h": "11b4e831893f71c97a8821d0809665d1ce989f60237d9feb1eb6f9b81624aa6f",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntvdm-exe/win32/console_compat.c": "f0c45d8b63ffcebad73724348cf0577c902a9e4efbf0e99ffe84415594439065"
+  }
+}

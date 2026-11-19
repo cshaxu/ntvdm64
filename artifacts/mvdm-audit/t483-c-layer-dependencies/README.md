@@ -283,3 +283,5 @@ P81: [Activity compatibility delivery](s12-p81-activity-owner.json); C0189 elimi
 P82: [Error/disk bindings](s12-p82-error-disk-bindings.json); files27-28 reviewed; error thread close is native-only, disk bindings already B since P14.
 
 P83: [Console transition ownership](s12-p83-console-transition-ownership.json); file29 ten bindings traced through NTCON; original VGA/cursor calculations stay C.
+
+P84: [Host/printer/serial ownership](s12-p84-host-printer-serial-ownership.json); files30-32 classified, including explicit unsupported printer-control boundary.
