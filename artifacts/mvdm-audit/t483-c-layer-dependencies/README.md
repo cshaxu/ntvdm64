@@ -273,3 +273,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 P77: [System address ownership](s12-p77-system-address-ownership.json); link-only files16-17 stay C; shared provider goes to S14 review. No production change.
 
 P78: [Video address ownership](s12-p78-video-address-ownership.json); files18-20 remain C; C0216 joins C0215 CPU provider review in S14. No product change.
+
+P79: [Presentation/thread/start ownership](s12-p79-presentation-thread-start-ownership.json); files21-23 assigned to grouped S13 responsibility review, no product change.
