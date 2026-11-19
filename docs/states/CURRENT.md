@@ -62,6 +62,8 @@ P17 is evidence-only: [files 013-016](../../artifacts/mvdm-audit/t483-c-layer-de
 
 P18 moves unchanged caller-owned keyboard metadata into B and classifies files 017-018 for S14. Both cached architectures, eight A/B graphs and three keyboard suites passed; eleven images are published and hash-verified. [P18 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p18-keyboard-history.json) records 19/116 classified, six direct-header clears, eight lifecycle files, five source/ABI/composition files and 97 unreviewed. Seven IDs are eliminated; 524/617 remain open. C0204 IRQ binding remains open. Mirror delta is zero; cumulative reduction stays two points and ten lines.
 
+P19 is evidence-only: [files 020-023](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p19-mouse-bop-ems-ownership.json) classify mouse route, WOW/BOP and EMS lifecycle dependencies and confirm config registry was cleared by P12. Classification is 23/116: seven direct-header clears, eleven lifecycle files, five source/ABI/composition files and 93 unreviewed. 524/617 IDs remain open. No product or release change; P18 remains current.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

@@ -148,3 +148,10 @@ three targeted suites. Seven stable IDs are eliminated; 524/617 remain open.
 [Files 017-018](s12-file017-018-ownership.json) remain S14 composition/ABI work.
 Review is 19/116: six direct-header clears, eight lifecycle files, five source/ABI
 files, 97 unreviewed. C0204 remains a direct link dependency.
+
+## P19 mouse, BOP and EMS ownership
+
+[Source evidence](s12-p19-mouse-bop-ems-ownership.json) classifies files020-023.
+Config registry was already cleared by P12. Three lifecycle callers remain open.
+Review is 23/116: seven direct-header clears, eleven lifecycle files and five
+source/ABI/composition files; 93 unreviewed, 524/617 open IDs. P18 release unchanged.

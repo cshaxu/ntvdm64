@@ -137,19 +137,27 @@
 
 - 直接包含 · C0049 · ntvdm-exe · src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h
 
+020：mouse_io.c 三处调用仅查询 route_active；提供者在 ICA 锁内通过 console_client.c 的 current 查询当前 session->console_client->mouse。桥头同时带 D Console 鼠标协议，不能整体下沉 B。归 S13 显示所有者/输入路由接线；C0049 保持开放。源码未改，镜像净变 0 点、0 行。
+
 ## 021 — src/mvdm-host/softpc.new/host/src/config.c
 
 - 直接包含 · C0017 · common · src/common/wow/registry.h
+
+021：config.c 的原外层注册表头已在 P12 改为 B wow_registry.h，当前仅使用 RegOpenKeyEx/RegQueryValueEx/RegCloseKey。确认没有旧头引用，直接外层头已解除；不提前推断所有链接绑定均已解决。本轮无修改/构建/发布，镜像净变 0 点、0 行。
 
 ## 022 — src/mvdm-host/softpc.new/host/src/nt_bop.c
 
 - 直接包含 · C0031 · ntvdm-exe · src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h
 - 直接包含 · C0045 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h
 
+022：nt_bop.c 在 WOW 初始化前进入 F 页域、初始化成功后激活 WOW 上下文，与009/010同属 session 页表/GDT生命周期。还依赖 C0031 GDP生成载体；MS_bop_4 内联 extern 调用 mvdm_vm_command_enter 是另一实际 F 链接，不能漏掉。归 S13 页域和产品入口接线，关联 S14生成ABI组；C0045/C0031保持开放。源码未改，镜像净变0点、0行。
+
 ## 023 — src/mvdm-host/softpc.new/host/src/nt_emm.c
 
 - 直接包含 · C0040 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h
 - 直接包含 · C0041 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h
+
+023：nt_emm.c 先查询 session EMS别名，非别名保持原版 EM_*；别名路径调用 F guest-memory copy/move，内部逐段取得/释放 session租约并处理重叠。C0040/C0041不能仅迁声明，归S13与013/004/006成组审计映射、租约与销毁责任。源码未改，镜像净变0点、0行。累计分类23/116，七文件直接头依赖已解除、十一生命周期项、五来源/ABI/组合项、93未审查；524/617依赖开放，累计镜像缩减2点、10行。
 
 ## 024 — src/mvdm-host/softpc.new/host/src/nt_event.c
 

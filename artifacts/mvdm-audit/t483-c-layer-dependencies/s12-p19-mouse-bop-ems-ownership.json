@@ -1,0 +1,47 @@
+{
+  "baseline": "127f31a12cddabe22570eabc48c1e014f861c5fe",
+  "question": "Classify direct outward dependencies for directory-ordered files020-023",
+  "procedure": "Read each direct consumer, provider ownership and actual call order. Confirm config registry was already cleared by P12. Inspect inline extern product BOP call as link evidence rather than ignoring it.",
+  "files": {
+    "20": "020：mouse_io.c 三处调用仅查询 route_active；提供者在 ICA 锁内通过 console_client.c 的 current 查询当前 session->console_client->mouse。桥头同时带 D Console 鼠标协议，不能整体下沉 B。归 S13 显示所有者/输入路由接线；C0049 保持开放。源码未改，镜像净变 0 点、0 行。",
+    "21": "021：config.c 的原外层注册表头已在 P12 改为 B wow_registry.h，当前仅使用 RegOpenKeyEx/RegQueryValueEx/RegCloseKey。确认没有旧头引用，直接外层头已解除；不提前推断所有链接绑定均已解决。本轮无修改/构建/发布，镜像净变 0 点、0 行。",
+    "22": "022：nt_bop.c 在 WOW 初始化前进入 F 页域、初始化成功后激活 WOW 上下文，与009/010同属 session 页表/GDT生命周期。还依赖 C0031 GDP生成载体；MS_bop_4 内联 extern 调用 mvdm_vm_command_enter 是另一实际 F 链接，不能漏掉。归 S13 页域和产品入口接线，关联 S14生成ABI组；C0045/C0031保持开放。源码未改，镜像净变0点、0行。",
+    "23": "023：nt_emm.c 先查询 session EMS别名，非别名保持原版 EM_*；别名路径调用 F guest-memory copy/move，内部逐段取得/释放 session租约并处理重叠。C0040/C0041不能仅迁声明，归S13与013/004/006成组审计映射、租约与销毁责任。源码未改，镜像净变0点、0行。累计分类23/116，七文件直接头依赖已解除、十一生命周期项、五来源/ABI/组合项、93未审查；524/617依赖开放，累计镜像缩减2点、10行。"
+  },
+  "sha256": {
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": "a41f2eea922987cdc43ab4c5d87558a79b13eb931997909fb48fe05bd0efee0a",
+    "src/mvdm-host/softpc.new/host/src/config.c": "892519573d6013db4c4725209fbe44fb66651b681d73ab215c2fbcfe852a6bea",
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c": "8ff3d15be855aef22138c04d74e3090bf36ca1b580bb2fb385e76c44ded8a158",
+    "src/mvdm-host/softpc.new/host/src/nt_emm.c": "6e93597c0212e3a6c2a795b5c5d7d83b3aede520339ec84bbaa48a24315befb7",
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c": "a83a8103f3e4adbce9d04fbd8bd85466ea936ad48aba6d3578dad6e81fb3f014",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c": "681b9e93f652b321a5a6ee8292dbc6449a60edd41499961e39d8caf1323f4b46",
+    "src/ntvdm-exe/softpc/mvdm_vm_ingress.c": "252003e9fab88482449c32f3170d5f4468c8ea751dc4025a5b51621cb0f6d0be"
+  },
+  "interpretation": "Three callers require F lifecycle/route integration work; one has its direct registry header already in B. No product change warranted for this classification batch.",
+  "followUp": {
+    "S13": [
+      "Mouse route owner and synchronization with original display state",
+      "WOW domain initialization and BOP product ingress",
+      "EMS alias and guest lease mapping lifecycle"
+    ],
+    "S14": [
+      "GDP generated ABI carrier, also consumed by nt_bop.c"
+    ]
+  },
+  "progress": {
+    "reviewedFiles": 23,
+    "clearedDirectHeaderFiles": 7,
+    "deferredLifecycleFiles": 11,
+    "deferredSourceAbiCompositionFiles": 5,
+    "unreviewedFiles": 93,
+    "totalFiles": 116,
+    "openIds": 524,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "validation": "Source classification only; no new runtime validation. Product source, build/test scripts and release unchanged from P18."
+}
