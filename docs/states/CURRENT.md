@@ -28,6 +28,18 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P26 moves copied-window graph validation, its relation ABI and scratch
+cleanup from F/D to B. No outward callback or new B-to-C exception is added.
+The24-operation whole-domain candidate remains experiment evidence only.
+Cached full builds, dual11 publication/22 hashes,11 unit cases, actual CCPU
+page-domain/graph-snapshot fixtures and immutable Win16 dialog acceptance pass.
+Package e1fc8800-0ebc-412b-8498-22d1313dd486 is published. Mirror delta0/0;
+cumulative remains-1 point/+43 lines. Direct ledger150 eliminated/418 open
+is unchanged: this is implementation migration, not whole-domain closure.
+[P26 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p26-wow-window-graph-owner.json)
+records the failed observer invocation and corrected final-package test.
+WOW CPU/guest-memory-dependent implementation remains; S14 is active.
+
 S14 P25 completes the XMS-specific outward-provider cleanup. Descriptor reads
 use B; range validation and forward copying use C; invalid transport enters
 the existing C termination chain. F cancellation/copy providers are removed.

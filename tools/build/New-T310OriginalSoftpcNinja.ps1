@@ -1265,6 +1265,9 @@ $sessionObjects += 'obj/compat/guest_memory_access.obj'
 $graph.Add('build obj/compat/wow_shared_clock.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_shared_clock.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/wow_shared_clock.obj'
+$graph.Add('build obj/compat/wow_window_graph.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_window_graph.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$sessionObjects += 'obj/compat/wow_window_graph.obj'
 
 $graph.Add('build obj/compat/physical_mapping.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/physical_mapping.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
@@ -2064,6 +2067,9 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build obj/tests/wow_shared_clock.obj: cc ' + (NinjaPath (Join-Path $root 'test/compat/wow_shared_clock_test.c')))
     $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
     $graph.Add('build wow-shared-clock-test.exe: console_test_link obj/tests/wow_shared_clock.obj obj/compat/wow_shared_clock.obj')
+    $graph.Add('build obj/tests/wow_window_graph.obj: cc ' + (NinjaPath (Join-Path $root 'test/compat/wow_window_graph_test.c')))
+    $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+    $graph.Add('build wow-window-graph-test.exe: console_test_link obj/tests/wow_window_graph.obj obj/compat/wow_window_graph.obj')
 
     $monitorRpcTestObject = 'obj/tests/monitor_rpc_test.obj'
     $graph.Add('build ' + $monitorRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/monitor_rpc_test.c')) + ' | obj/basesrv/service.h')

@@ -1,0 +1,197 @@
+{
+  "delivery": "T483 S14 P26",
+  "baseline": "96033ed479a0881b8c198496b0c4ce84e175c705",
+  "status": "compiled-published-targeted-tests-and-governance-passed; commit/push recorded by delivery history",
+  "scope": "Move the complete copied-window graph validator, relation type and temporary scratch ownership from F/D to B; retain guest publication and CPU/session admission in F pending separate ownership work.",
+  "function": {
+    "old": "page_domain_validate_window_graph",
+    "new": "compat_wow_window_graph_validate",
+    "body_proof": "Exact original body preserved after replacing static function exposure and domain.desktop_handle with explicit desktop argument.",
+    "production_provider": "session:wow_window_graph.obj from src/compat/wow_window_graph.c",
+    "caller": "mvdm_softpc_wow_page_domain_project_window_graph",
+    "scratch": "B allocates/frees traversal color storage; caller retains its transaction slot index and discards a partial index on failure.",
+    "semantics": "Full HWND generation checks, missing edge/cycle rejection, permitted asymmetric parent/child relation, LastError preservation and error choices unchanged."
+  },
+  "architecture": {
+    "new_outward_callbacks": 0,
+    "B_dependencies": "Only Win32 SDK and CRT; no C/D/E/F header, direct symbol, or runtime provider.",
+    "approved_B_to_C_exceptions": 2,
+    "whole_domain_candidate": "24-operation experiment not promoted; separately indexed evidence does not constitute approval."
+  },
+  "mirror": {
+    "changed_files": 0,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_net_points": -1,
+    "cumulative_net_lines": 43,
+    "error_line_directives": "No mirror files modified; #error/#line unchanged."
+  },
+  "direct_dependencies": {
+    "new_eliminated": 0,
+    "counts": {
+      "excluded-diagnostic": 1,
+      "open": 418,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 150
+    },
+    "total": 618
+  },
+  "verification": {
+    "build": "Cached full x86/x64 products and x86 reference worker passed.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "e1fc8800-0ebc-412b-8498-22d1313dd486",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "hash_checks": [
+      {
+        "path": "assets/release/VCDEX.DLL",
+        "sha256": "ee956083ae0bb07696c615be4fad54d7c62cbeb33def1ce2565a34761a7473de"
+      },
+      {
+        "path": "O:/winnt/system32/VCDEX.DLL",
+        "sha256": "ee956083ae0bb07696c615be4fad54d7c62cbeb33def1ce2565a34761a7473de"
+      },
+      {
+        "path": "assets/release/run16.exe",
+        "sha256": "f36124bf1828124ec04c02cf10a8d5931d6edc7fbb6b6a5323ed33a8ef9a3d3c"
+      },
+      {
+        "path": "O:/winnt/system32/run16.exe",
+        "sha256": "f36124bf1828124ec04c02cf10a8d5931d6edc7fbb6b6a5323ed33a8ef9a3d3c"
+      },
+      {
+        "path": "assets/release/ntsrv.exe",
+        "sha256": "8ffbbdccaadc09c07e820c050b524a4a9b15a7981fde244ec369d75582fe6d0d"
+      },
+      {
+        "path": "O:/winnt/system32/ntsrv.exe",
+        "sha256": "8ffbbdccaadc09c07e820c050b524a4a9b15a7981fde244ec369d75582fe6d0d"
+      },
+      {
+        "path": "assets/release/ntcon.exe",
+        "sha256": "2d9e32e9f514dbc3c4d60aa85594e058a14c16975c2444f8c56a92dc507642cf"
+      },
+      {
+        "path": "O:/winnt/system32/ntcon.exe",
+        "sha256": "2d9e32e9f514dbc3c4d60aa85594e058a14c16975c2444f8c56a92dc507642cf"
+      },
+      {
+        "path": "assets/release/ntvdm.exe",
+        "sha256": "4837e14f6c68968e19075fd968856fe4271dcdbb4ea8bb21207a019b5210f49b"
+      },
+      {
+        "path": "O:/winnt/system32/ntvdm.exe",
+        "sha256": "4837e14f6c68968e19075fd968856fe4271dcdbb4ea8bb21207a019b5210f49b"
+      },
+      {
+        "path": "assets/release/ntvwm.exe",
+        "sha256": "0ae5313be7d8a14364e2be25db4736f3f3c91090cf1bb4b7cdbfd6f2f7c25298"
+      },
+      {
+        "path": "O:/winnt/system32/ntvwm.exe",
+        "sha256": "0ae5313be7d8a14364e2be25db4736f3f3c91090cf1bb4b7cdbfd6f2f7c25298"
+      },
+      {
+        "path": "assets/release/ntmon.exe",
+        "sha256": "18bb63b41515fdbf51f8f03976e1ea6a0c9ac4353826bee4fd7e10b6f5bb99d4"
+      },
+      {
+        "path": "O:/winnt/system32/ntmon.exe",
+        "sha256": "18bb63b41515fdbf51f8f03976e1ea6a0c9ac4353826bee4fd7e10b6f5bb99d4"
+      },
+      {
+        "path": "assets/release/WOW32.DLL",
+        "sha256": "2fa5eff07dceebe341ec2e6f22e4430281e6e4d67e9b515a9130842d5ce81a03"
+      },
+      {
+        "path": "O:/winnt/system32/WOW32.DLL",
+        "sha256": "2fa5eff07dceebe341ec2e6f22e4430281e6e4d67e9b515a9130842d5ce81a03"
+      },
+      {
+        "path": "assets/release/VDMREDIR.DLL",
+        "sha256": "0e0180d8ccc2d199681ef583abdfc5d1b28b2e1226a02459d2c88de5df01c7ea"
+      },
+      {
+        "path": "O:/winnt/system32/VDMREDIR.DLL",
+        "sha256": "0e0180d8ccc2d199681ef583abdfc5d1b28b2e1226a02459d2c88de5df01c7ea"
+      },
+      {
+        "path": "assets/release/nthook32.dll",
+        "sha256": "cec84e30249add1eed1f50a1aab9657af17f30240ce8387032b39c7d5330ff8f"
+      },
+      {
+        "path": "O:/winnt/system32/nthook32.dll",
+        "sha256": "cec84e30249add1eed1f50a1aab9657af17f30240ce8387032b39c7d5330ff8f"
+      },
+      {
+        "path": "assets/release/nthook64.dll",
+        "sha256": "6ff99678d74c1dd4cd81919cc60f9197018c8b71826a2270e9051285f56d9998"
+      },
+      {
+        "path": "O:/winnt/system32/nthook64.dll",
+        "sha256": "6ff99678d74c1dd4cd81919cc60f9197018c8b71826a2270e9051285f56d9998"
+      }
+    ],
+    "normalized_images": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "library_boundaries": "All8 generated production graphs passed, including new B object.",
+    "unit": "WOW_WINDOW_GRAPH checks=11 errors=0",
+    "ccpu": [
+      "WOW_FIXTURE_OK case=page-domain",
+      "WOW_FIXTURE_OK case=graph-snapshot"
+    ],
+    "real_Win16": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "runner_failure": "First dialog attempt used terminal-observer instead of required console-startup-observer and exited64 before starting guest. Failed inputs preserved. Correct runner passed on unchanged final package.",
+    "Full": "Not run, per owner small-five authorization.",
+    "governance": "Worker-thread boundary, PowerShell syntax, documentation governance, relative links and git diff --check passed."
+  },
+  "sources": [
+    {
+      "path": "src/compat/wow_window_graph.c",
+      "sha256": "119231eda97d9483092273ae7b5d58577bc0276d6ede7d6e66ea6ca0580d98ba"
+    },
+    {
+      "path": "src/compat/include/wow_window_graph.h",
+      "sha256": "c42dd261734290243803b142b279b60edc9caee1f55ec21f8fd64ffd4bee0fce"
+    },
+    {
+      "path": "src/compat/README.md",
+      "sha256": "10966a6cedaeb81b6bb0db9036d51cd72715291d63662ed128fc09411e9e9b8e"
+    },
+    {
+      "path": "src/common/wow/page_domain.h",
+      "sha256": "dc3b73343e982957d2ecba8d4d4038903468eff9be47a8641dfb807df47f002f"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "sha256": "9db7fa8bc66a9af3e9c291c796eeed266096b034f568d76b8636f956399fecdb"
+    },
+    {
+      "path": "test/compat/wow_window_graph_test.c",
+      "sha256": "cd17435ead7ed99e50b4caaa50300fb453dc27c09745c1ca810f5ab95553509b"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "3fb2db08ee5fe59fe6a6df14ebdf2995f1192214af19b8523a8334841c1f428a"
+    }
+  ],
+  "remaining": "S14 active: CPU/guest-memory-dependent WOW projection and lifecycle still require ownership resolution. This complete leaf migration is not whole-domain completion."
+}

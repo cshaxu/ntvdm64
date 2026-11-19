@@ -1,0 +1,161 @@
+{
+  "task": "T483 S14",
+  "baseline": "96033ed479a0881b8c198496b0c4ce84e175c705",
+  "status": "not selected for production; runtime binding would expand B-to-C exceptions",
+  "purpose": "Determine whether complete WOW page-domain implementation can leave F without copying CCPU or VDM algorithms.",
+  "candidate": {
+    "source": "build/t483-s14-wow-boundary-review/candidate.c",
+    "header": "build/t483-s14-wow-boundary-review/candidate.h",
+    "bootstrap": "build/t483-s14-wow-boundary-review/binding.c",
+    "operations": [
+      "c_sas_memory_size",
+      "c_sas_dw_at",
+      "c_sas_twenty_bit_wrapping_enabled",
+      "c_sas_fills",
+      "c_sas_storedw",
+      "c_sas_storew",
+      "c_sas_loads",
+      "c_sas_stores",
+      "xtrn2phy",
+      "c_getCPL",
+      "c_getVM",
+      "c_getCR0",
+      "c_getCR3",
+      "c_setCR0",
+      "c_setCR3",
+      "c_getGDT_BASE",
+      "c_getGDT_LIMIT",
+      "c_setGDT_BASE_LIMIT",
+      "VdmAllocateVirtualMemory",
+      "VdmFreeVirtualMemory",
+      "VdmAddVirtualMemory",
+      "VdmRemoveVirtualMemory",
+      "c_GetLinAdd",
+      "c_GetPhyAdd"
+    ],
+    "cpu_state_operation_count": 9,
+    "memory_operation_count": 11,
+    "allocation_mapping_operation_count": 4,
+    "diagnostic_sink": "Existing optional F report function; exact CS/IP types are unsigned short.",
+    "other_runtime_callback": "Existing caller-supplied host-storage disposer; pure native storage deallocation, not CPU control or guest callbacks."
+  },
+  "verified_before_diagnostic_signature_correction": {
+    "kind": "isolated actual-CCPU ownership candidate runtime evidence, not delivery",
+    "baseline": "96033ed479a0881b8c198496b0c4ce84e175c705",
+    "runner_origin": "test/observation/verify-wow-task-lifecycle.ps1",
+    "runner_adjustments": [
+      "Repository path fixed because the diagnostic runner is under build.",
+      "Compile candidate and test-only entry bootstrap.",
+      "Remove original page-domain object from copied fixture archive before linking candidate."
+    ],
+    "process": {
+      "start": "2026-11-19T11:00:24.8748062-08:00",
+      "script": "build/t483-s14-wow-boundary-review/run-candidate.ps1",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "pid": 34168
+    },
+    "exit": 0,
+    "markers": [
+      "WOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1",
+      "WOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14",
+      "WOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1",
+      "WOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1",
+      "WOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1",
+      "WOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1",
+      "WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1",
+      "WOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1",
+      "WOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1",
+      "WOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1",
+      "WOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1",
+      "WOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1",
+      "WOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1",
+      "WOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1",
+      "WOW_NATIVE_MENU_ENTRY_CCPU result=1",
+      "WOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1",
+      "WOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+    ],
+    "selected_providers": {
+      "_mvdm_softpc_wow_page_domain_publish_cursor": [
+        "0001:00009a10       _mvdm_softpc_wow_page_domain_publish_cursor 0040aa10 f   candidate.obj"
+      ],
+      "_mvdm_softpc_wow_page_domain_enter": [
+        "0001:0000dee0       _mvdm_softpc_wow_page_domain_enter 0040eee0 f   binding.obj"
+      ],
+      "_VdmAllocateVirtualMemory": [
+        "0001:0007ffa0       _VdmAllocateVirtualMemory  00480fa0 f   original-softpc-host-fixture-roots:nt_mem.obj"
+      ],
+      "_c_setCR3": [
+        "0001:001a1a70       _c_setCR3                  005a2a70 f   original-ccpu386:c_reg.obj"
+      ]
+    },
+    "identities": [
+      {
+        "path": "build\\t483-s14-wow-boundary-review\\candidate.c",
+        "sha256": "ca3da1d6aa70abc044774df949f0999183468a96614a437bf4a591175ade12ae"
+      },
+      {
+        "path": "build\\t483-s14-wow-boundary-review\\candidate.h",
+        "sha256": "88aa2b62c4c076c9c0ed57e4fe0c4a39c519fbbec70596e2497e8a4c8e702b76"
+      },
+      {
+        "path": "build\\t483-s14-wow-boundary-review\\binding.c",
+        "sha256": "148988cef9c1ce73ea30572d310e756d380efde957acec128a5a0a96b4c0ddf3"
+      },
+      {
+        "path": "build\\t483-s14-wow-boundary-review\\verify-candidate.ps1",
+        "sha256": "b8cbc13c2906cdb043e294a539780d4560c47ff1b2f37b657d3ad70a2fc88ff5"
+      },
+      {
+        "path": "build\\t483-s14-wow-boundary-review\\page-domain\\fixture.exe",
+        "sha256": "6b96a1e6fce80738240e26c378a30035be66a762079f9c9f9a98f39645983569"
+      },
+      {
+        "path": "build\\t483-s14-wow-boundary-review\\page-domain\\fixture.map",
+        "sha256": "eb7861cbf7f3ffdb1d669542f1b997736553a72231f5c5c0af0319746bcb3d07"
+      },
+      {
+        "path": "build\\t483-s14-wow-boundary-review\\page-domain\\stderr.txt",
+        "sha256": "30383c5a91150188aa58707bed65721a812a940be90745728ff98c0880b745bd"
+      }
+    ],
+    "conclusion": "B implementation candidate can compile and execute the existing page-domain lifecycle against actual CCPU and VDM allocation providers. The broad 24-operation machine ABI is not accepted as final architecture solely because this passes.",
+    "remaining": [
+      "Explicit CPU provider/runtime dependency must not be described as absent merely because static imports are removed.",
+      "Select ownership split for CPU control before production; no new B-to-C exception approved.",
+      "Test-only bootstrap is not product initialization and does not establish final binding lifetime.",
+      "No real Win16 integration or production package tested in this experiment."
+    ],
+    "product_modified": false,
+    "mirror_delta_points": 0,
+    "mirror_delta_lines": 0
+  },
+  "decision": {
+    "question": "May B consume the explicit C CPU/memory/allocation ABI while owning the real view, borrow records and cleanup?",
+    "reason": "Direct include/symbol independence is proved, but it does not remove runtime dependence on C. No new B-to-C exception is presumed approved.",
+    "owner_reply": "Owner asks whether this expands two exceptions to26. Agent confirms the 24 calls cannot be hidden by a table and withdraws this production direction; no approval was granted."
+  },
+  "alternatives": {
+    "blind_B_lease_substitution": "Rejected: mapped refusal before SAS differs from scalar SAS fallback; teardown also cannot depend on thread-bound lease access after unbinding.",
+    "headers_or_F_forwarding_only": "Rejected: does not transfer implementation/state ownership.",
+    "whole_24_operation_candidate": "Compiled and fixture-tested; not approved production architecture.",
+    "C_control_B_projection_split": "Not implemented or measured; requires concrete original owners and mirror-diff approval if increased."
+  },
+  "next": [
+    "Keep CPU-dependent responsibilities out of B.",
+    "Move only independently owned compatibility implementation without new outward callbacks; measure C-owner adaptations before seeking mirror increases."
+  ],
+  "production_changes": 0,
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "direct_ledger_changed": false,
+  "final_diagnostic_signature_check": {
+    "cs_ip": "unsigned short from actual production declaration",
+    "exit": 0,
+    "marker": "WOW_PAGE_DOMAIN_LIFECYCLE_OK",
+    "log": "build/t483-s14-wow-boundary-review/page-domain-final/stderr.txt",
+    "interpretation": "Pass retained as experiment evidence only; broad binding still not selected."
+  }
+}

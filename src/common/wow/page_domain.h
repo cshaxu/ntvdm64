@@ -1,6 +1,8 @@
 #ifndef COMMON_WOW_PAGE_DOMAIN_H
 #define COMMON_WOW_PAGE_DOMAIN_H
 
+#include "compat/include/wow_window_graph.h"
+
 
 
 
@@ -113,15 +115,6 @@ int __cdecl mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backi
 int __cdecl mvdm_softpc_wow_page_domain_collect_observed_classes(void);
 
 
-/* Caller supplies one structurally consistent observation view, including
- * every affected record, with guest entry excluded. This is not an atomic
- * native desktop snapshot. Resolve full identities before changing guest memory.
- * NULL links are explicit; an unknown identity is never silently omitted.
- * This copies relationships, not native tree policy. In particular parent
- * and child links need not be symmetric during original window creation. */
-typedef struct mvdm_softpc_wow_window_links {
-    unsigned long window, next, parent, child, owner;
-} mvdm_softpc_wow_window_links;
 /* Counted class query bytes are copied during this synchronous call. They
  * neither register native classes nor carry native pointers into guest state. */
 typedef struct mvdm_softpc_wow_window_descriptor {
@@ -165,6 +158,12 @@ typedef struct mvdm_softpc_wow_window_menu_observation {
 int __cdecl mvdm_softpc_wow_page_domain_copy_window_menu_view(
     unsigned long capacity, mvdm_softpc_wow_window_menu_observation *rows,
     unsigned long *count);
+/* Caller supplies one structurally consistent observation view, including
+ * every affected record, with guest entry excluded. This is not an atomic
+ * native desktop snapshot. Resolve full identities before changing guest memory.
+ * NULL links are explicit; an unknown identity is never silently omitted.
+ * This copies relationships, not native tree policy. In particular parent
+ * and child links need not be symmetric during original window creation. */
 int __cdecl mvdm_softpc_wow_page_domain_project_window_graph(
     unsigned long count, const mvdm_softpc_wow_window_observation *rows);
 

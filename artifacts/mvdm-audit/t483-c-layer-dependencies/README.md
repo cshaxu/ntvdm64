@@ -416,3 +416,16 @@ existing termination chain. Real BOP failures prove worker487/launcher1067,
 no guest continuation and successful restart. C0040/C0224/C0257 are eliminated;
 150 eliminated/418 open. Owner-approved mirror increment is1 point/4 lines.
 WOW page-domain ownership remains open; this is not S14 closure.
+
+[S14 WOW machine-binding candidate](s14-wow-machine-binding-candidate.json)
+records an isolated B implementation linked to actual CCPU/VDM providers.
+The broad runtime ABI is not selected for production; source independence and
+a passing fixture do not remove its24 C runtime calls. Production
+P25 and its dependency counts remain unchanged.
+
+[S14 P26 window graph implementation](s14-p26-wow-window-graph-owner.json)
+moves actual structural validation and scratch cleanup to B without new
+outward callbacks. Cached builds, dual11 publication,11 unit cases, real
+CCPU page-domain/graph snapshots and immutable Win16 dialog acceptance pass.
+Mirror delta0/0; direct ledger150 eliminated/418 open is unchanged.
+CPU-dependent page-domain work remains active.

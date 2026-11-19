@@ -17,6 +17,11 @@ The worker RTL adapter owns its surrogate process and thread state. Its PEB
 exposes the same lock that the local RTL acquires. Environment refresh owns
 the page-backed snapshot. Original RTL owns environment mutation and cloning.
 
+WOW copied-window graph validation lives in `wow_window_graph.c` with its
+relation type in `include/wow_window_graph.h`. It owns only structural checks
+and temporary traversal storage. Its caller retains guest publication,
+CCPU admission and transaction lifetime; no CPU/session callback enters B.
+
 ## Registered divergences
 
 S10 owner consolidation: the declarations for mvdm_base_vdm_environment,
