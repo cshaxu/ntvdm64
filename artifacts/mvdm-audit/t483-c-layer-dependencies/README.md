@@ -311,3 +311,5 @@ P95: [Native hook ownership](s12-p95-hook-native-ownership.json); files66-69 rev
 P96: [Menu and timer ownership](s12-p96-menu-timer-ownership.json); files70-72 reviewed against actual product objects/maps; parser rewire separated from lifecycle cohort; no production edits.
 
 P97: [Final file ownership review](s12-p97-final-file-ownership.json); all190 files reviewed, not all dependencies removed. C0169/C0170 remain S12 native-resource migration candidates before closure.
+
+P98: [Resource binding ownership](s12-p98-resource-binding-ownership.json); C0169/C0170 moved to SDK-only compat, exact bodies/state retained; cached builds, actual x86/x64 object tests and dual release.

@@ -1,0 +1,183 @@
+{
+  "baseline": "f8ffcc8fb7a5da724148d9a61bbdd725550fda98",
+  "migration": {
+    "ids": [
+      "C0169",
+      "C0170"
+    ],
+    "source": "src/ntsrv-exe/opennt/source/base_resource.c",
+    "destination": "src/compat/base_resource.c",
+    "header": "src/compat/include/base_resource.h",
+    "bodiesAndStateIdentical": true,
+    "abi": "OpenNtBaseClose and OpenNtBaseDuplicateObject remain NTAPI; binder and callback table preserve original default convention. SDK windows.h/winternl.h replace unnecessary C nt.h/base_server.h dependency; NtDuplicateObject declaration retains original ntobapi.h signature.",
+    "ownership": "B stores borrowed per-thread explicit operations and calls native APIs for the unchanged unbound same-process case. F owns authentication, receipt transport, target identities, rollback and scope lifetime. No callback table crosses a wire.",
+    "build": "Reference x86 generator selects B unit with libraryFlags, without forced base_server.h or historical CPU macros. Native x64 graph derives same B owner. Existing archive/object names retained; ownership follows source, not archive label."
+  },
+  "verification": {
+    "buildExit": 0,
+    "postExit": 0,
+    "deliveryExit": 0,
+    "actualProductObjects": [
+      {
+        "architecture": "x86",
+        "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\opennt-base-bindings\\resources.obj",
+        "sha256": "ef54f169ceb8f43d894af84dc72739a61154a0b4a8e039f93fc13fcde9bc133c",
+        "undefined": [
+          "__imp__GetCurrentProcessId@0",
+          "__imp__GetProcessId@4",
+          "_NtClose@4",
+          "_NtDuplicateObject@28",
+          "__tls_array",
+          "__tls_index"
+        ],
+        "test": "BASE_RESOURCE errors=0 duplicates=1 closes=1"
+      },
+      {
+        "architecture": "x64",
+        "path": "build\\.ninja\\msvc-x64-release\\service\\obj\\opennt-base-bindings\\resources.obj",
+        "sha256": "bc3d0f6ee10ceee1dc14b330212b33483cc34fae53cbe92c87eef54dc7c968d2",
+        "undefined": [
+          "__imp_GetCurrentProcessId",
+          "__imp_GetProcessId",
+          "NtClose",
+          "NtDuplicateObject",
+          "_tls_index"
+        ],
+        "test": "BASE_RESOURCE errors=0 duplicates=1 closes=1"
+      }
+    ],
+    "tests": "Real local event duplicate/close; exact bound callback arguments/results; missing operations reject without native fallback; nested binding restore; thread-local isolation. Test links actual x86/x64 production resources.obj.",
+    "limits": "No new authenticated remote-process delivery or full lifecycle acceptance claimed; that F implementation is unchanged. Callback operation bodies identical. No Full regression rerun.",
+    "abGraphs": 8,
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityRule": "Only package GUID and PE/debug timestamps masked; raw identity not claimed."
+  },
+  "publication": {
+    "package": "614ed535-8262-4093-8dd4-d6d3f4b649de",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "c305e0b5cc24005485373cfb7f47af7e870818f6f382c76841f8bb6e9768b6c5"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "aea9d54d3c102d39f2c5792aa87d2b002eb34a8949e3960250897e2214831e52"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "cc705b76f63abe727218df71c0b3aeed3cbd29346bfe2a4981f6804dc37895d1"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "c9b57d4b379c74dc76954ed9206e7601078320b2d17f4dd01c627a96f1e9f100"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "1d5b05208e3114d780eef52df408946c069b1441340bb4edc074ea14c893002c"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "c3c1739b7c6520e8a676b72b8e605b86ff641774664f579a46f191fdfd3d616f"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "13a7bcd2f2d43502e484299ecf08f522dd154aa30d8accd5ce6cb738216c06e6"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "7e2f430cd90254841899e5a16ea81a4e4dd5e8e9a9f5284eec856185134c9920"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "43257a0bb77614744285c443f6ecf180b0f39b7647c4641871ef1a3f70bf0f1b"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "a9011f93b387ecaf3c99a69df594dabc575123ea1df265a4c275b5364f2376b1"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "1367d90122b6f9f2e5a99fba7e837c2a2f23740aedfdf504b8439baab0620772"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "c305e0b5cc24005485373cfb7f47af7e870818f6f382c76841f8bb6e9768b6c5"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "aea9d54d3c102d39f2c5792aa87d2b002eb34a8949e3960250897e2214831e52"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "cc705b76f63abe727218df71c0b3aeed3cbd29346bfe2a4981f6804dc37895d1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "c9b57d4b379c74dc76954ed9206e7601078320b2d17f4dd01c627a96f1e9f100"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "1d5b05208e3114d780eef52df408946c069b1441340bb4edc074ea14c893002c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "c3c1739b7c6520e8a676b72b8e605b86ff641774664f579a46f191fdfd3d616f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "13a7bcd2f2d43502e484299ecf08f522dd154aa30d8accd5ce6cb738216c06e6"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "7e2f430cd90254841899e5a16ea81a4e4dd5e8e9a9f5284eec856185134c9920"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "43257a0bb77614744285c443f6ecf180b0f39b7647c4641871ef1a3f70bf0f1b"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "a9011f93b387ecaf3c99a69df594dabc575123ea1df265a4c275b5364f2376b1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "1367d90122b6f9f2e5a99fba7e837c2a2f23740aedfdf504b8439baab0620772"
+      }
+    ]
+  },
+  "progress": {
+    "filesReviewed": 190,
+    "filesTotal": 190,
+    "compileReviewed": 116,
+    "compileTotal": 116,
+    "linkOnlyReviewed": 74,
+    "linkOnlyTotal": 74,
+    "total": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 481,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 87
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 ledger reconciliation remains before closure; S13/S14 not admitted. Original guest and all mirrors unchanged."
+}

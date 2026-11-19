@@ -1,0 +1,27 @@
+param([Parameter(Mandatory)][string]$BuildRoot)
+$ErrorActionPreference='Stop'
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
+$out=[IO.Path]::GetFullPath($BuildRoot)
+if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh build-owned root required'}
+New-Item -ItemType Directory $out | Out-Null
+foreach($arch in @('x86','x64')) {
+    $part=if($arch -eq 'x86'){'worker'}else{'service'}
+    $object="$repo/build/.ninja/msvc-$arch-release/$part/obj/opennt-base-bindings/resources.obj"
+    $dir=New-Item -ItemType Directory "$out/$arch"
+    Get-FileHash $object,"$repo/test/compat/base_resource.c","$repo/src/compat/base_resource.c","$repo/src/compat/include/base_resource.h" | Export-Csv "$dir/inputs.csv" -NoTypeInformation
+    $command="@echo off`r`ncall `"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat`" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b 1`r`ncl /nologo /W4 /WX /MT /I`"$repo/src`" `"$repo/test/compat/base_resource.c`" `"$object`" /Fo`"$dir/test.obj`" /Fe`"$dir/test.exe`" /link ntdll.lib`r`nexit /b %errorlevel%`r`n"
+    [IO.File]::WriteAllText("$dir/build.cmd",$command)
+    foreach($step in @('compile','run')) {
+        $file=if($step -eq 'compile'){$env:ComSpec}else{"$dir/test.exe"}
+        $options=@{FilePath=$file;WindowStyle='Hidden';PassThru=$true;RedirectStandardOutput="$dir/$step.log";RedirectStandardError="$dir/$step.err"}
+        if($step -eq 'compile'){$options.ArgumentList=@('/d','/c',"`"$dir/build.cmd`"")}
+        $p=Start-Process @options;$null=$p.Handle
+        $p.Id | Set-Content "$dir/$step.pid"
+        if(!$p.WaitForExit(60000)){throw "Owned $arch $step timed out; PID $($p.Id)"}
+        $p.Refresh();$p.ExitCode | Set-Content "$dir/$step.exit"
+        if($p.ExitCode){throw "$arch $step failed: $($p.ExitCode)"}
+    }
+    if((Get-Content "$dir/run.log" -Raw) -notmatch 'BASE_RESOURCE errors=0 duplicates=1 closes=1'){throw 'Incomplete resource result'}
+    foreach($row in Import-Csv "$dir/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Input drift'}}
+    Get-Content "$dir/run.log"
+}

@@ -1,9 +1,11 @@
-/* Compile with OPENNT_BASE_NATIVE_RESOURCES: this TU calls actual native APIs.
- * Original BaseSrv algorithms are unchanged. Remote delivery requires a bound
- * authenticated recipient implementation; it never falls back to native
- * cross-process duplication if that implementation is absent or fails. */
-#include <base_server.h>
-#include <base_resource.h>
+/* Native resource binding. Authentication and delivery policy stay with the
+ * caller that binds the synchronous operations; this unit owns no CSR state. */
+#include "include/base_resource.h"
+
+/* Original ntobapi.h signature; the SDK exposes NtClose but not this import. */
+NTSTATUS NTAPI NtDuplicateObject(HANDLE, HANDLE, HANDLE, PHANDLE,
+    ACCESS_MASK, ULONG, ULONG);
+
 static __declspec(thread) const OPENNT_BASE_RESOURCE_BINDING *resources;
 const OPENNT_BASE_RESOURCE_BINDING *OpenNtBaseBindResources(const OPENNT_BASE_RESOURCE_BINDING *binding)
 {

@@ -1,6 +1,6 @@
 #ifndef OPENNT_BASE_WAIT_H
 #define OPENNT_BASE_WAIT_H
-#include <base_resource.h>
+#include "compat/include/base_resource.h"
 #include <stdint.h>
 /* One original wait-pair scope. Local event stays owned by the original
  * record; remote delivery must be authenticated and journalled by the caller.

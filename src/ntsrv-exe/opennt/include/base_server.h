@@ -37,7 +37,7 @@ BOOLEAN NTAPI RtlEqualSid(PSID, PSID);
 #define RtlEqualLuid(L1,L2) (((L1)->HighPart == (L2)->HighPart) && ((L1)->LowPart == (L2)->LowPart))
 #define KdPrint(x) DbgPrint x
 ULONG __cdecl DbgPrint(PCSTR, ...);
-#include <base_resource.h>
+#include "compat/include/base_resource.h"
 #ifndef OPENNT_BASE_NATIVE_RESOURCES
 #define NtDuplicateObject OpenNtBaseDuplicateObject
 #define NtClose OpenNtBaseClose

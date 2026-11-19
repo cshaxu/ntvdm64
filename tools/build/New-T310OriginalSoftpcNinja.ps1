@@ -1357,7 +1357,7 @@ if ($Architecture -eq 'x86') {
             @('payload', 'src/common/base_srv/base_payload.c', $baseAdapterFlags),
             @('startup', 'src/common/base_srv/base_startup.c', $baseOwnerFlags),
             @('dispatch', 'src/ntsrv-exe/opennt/source/base_dispatch.c', $baseServerFlags),
-            @('resources', 'src/ntsrv-exe/opennt/source/base_resource.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
+            @('resources', 'src/compat/base_resource.c', $libraryFlags),
             @('streams', 'src/ntsrv-exe/opennt/source/base_stream.c', $baseServerFlags),
             @('waits', 'src/ntsrv-exe/opennt/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
             @('registry', 'src/ntsrv-exe/opennt/source/base_process.c', $baseServerFlags),

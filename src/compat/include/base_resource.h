@@ -1,7 +1,8 @@
 /* Private, synchronous resource transport binding. No pointer is wire data. */
 #ifndef OPENNT_BASE_RESOURCE_H
 #define OPENNT_BASE_RESOURCE_H
-#include <nt.h>
+#include <windows.h>
+#include <winternl.h>
 typedef struct OPENNT_BASE_RESOURCE_BINDING {
     void *Context;
     NTSTATUS (*Duplicate)(void *,HANDLE,HANDLE,HANDLE,PHANDLE,ACCESS_MASK,ULONG,ULONG);
