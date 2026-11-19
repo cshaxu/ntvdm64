@@ -38,6 +38,8 @@ P4 removed 60 private include-directory occurrences from AMD64 mirror object com
 
 P5 scoped three private header roots on x86. The worker graph drops 1171 C-layer search-root occurrences. Eleven published images match P4 after normalizing only the package GUID and PE timestamps. Two redirector and two WOW fixture runs passed. The [P5 receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p5-worker-roots.json) records the counts and fixture corrections.
 
+P6 audited coalesced storage in the eleven product link maps, cross-checking C relocations with tentative definitions in selected COFF objects. The [storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json) adds eleven direct bindings and distinguishes ten mixed declaration groups. The tracker has 617 IDs; 555 remain open. P6 is evidence-only and retains the P5 package.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

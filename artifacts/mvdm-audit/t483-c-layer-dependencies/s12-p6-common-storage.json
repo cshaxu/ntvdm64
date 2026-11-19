@@ -1,0 +1,1324 @@
+{
+  "baseline": "d091c7665",
+  "mirror_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "method": "Link-map <common> denotes coalescible storage. Match relocations in C-owned COFF sections carrying a live map symbol to external COFF symbols with section 0 and nonzero size across source-attributed objects in the selected image closure. Require one candidate with an independently mapped symbol for a unique attribution. Counts are per image and symbol, not per relocation.",
+  "limits": "Object mapping covers the source-attributed Ninja closure. Link maps do not name the common storage provider; attribution uses COFF evidence. A live section is a link dependency, not runtime execution evidence. Multiple declarations do not by themselves establish state ownership.",
+  "counts": {
+    "images": 11,
+    "candidate_groups": 507,
+    "only_inner": 486,
+    "unique_outer": 11,
+    "mixed": 10
+  },
+  "unique_outer": [
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_CsrPortHeap",
+      "callers": [
+        {
+          "path": "src/non-mvdm/base/ntdll/csrutil.c",
+          "sections": [
+            3,
+            13
+          ],
+          "live_symbols": [
+            "_CsrAllocateCaptureBuffer@12",
+            "_CsrFreeCaptureBuffer@4"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-softpc/mvdm_standalone_worker.obj",
+          "source": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0607"
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_verbose",
+      "callers": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/main.c",
+          "sections": [
+            6
+          ],
+          "live_symbols": [
+            "_host_main"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_execution.obj",
+          "source": "src/ntvdm-exe/softpc/mvdm_softpc_execution.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0608"
+    },
+    {
+      "image": "run16.exe",
+      "link_name": "BaseDotComSuffixName",
+      "callers": [
+        {
+          "path": "src/non-mvdm/base/win32/client/vdm.c",
+          "sections": [
+            3
+          ],
+          "live_symbols": [
+            "BaseIsDosApplication"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/run16/entry.obj",
+          "source": "src/run16-exe/main.c",
+          "size": 16,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0609"
+    },
+    {
+      "image": "run16.exe",
+      "link_name": "BaseDotExeSuffixName",
+      "callers": [
+        {
+          "path": "src/non-mvdm/base/win32/client/vdm.c",
+          "sections": [
+            3
+          ],
+          "live_symbols": [
+            "BaseIsDosApplication"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/run16/entry.obj",
+          "source": "src/run16-exe/main.c",
+          "size": 16,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0610"
+    },
+    {
+      "image": "run16.exe",
+      "link_name": "BaseDotPifSuffixName",
+      "callers": [
+        {
+          "path": "src/non-mvdm/base/win32/client/vdm.c",
+          "sections": [
+            3
+          ],
+          "live_symbols": [
+            "BaseIsDosApplication"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/run16/entry.obj",
+          "source": "src/run16-exe/main.c",
+          "size": 16,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0611"
+    },
+    {
+      "image": "run16.exe",
+      "link_name": "CsrPortHeap",
+      "callers": [
+        {
+          "path": "src/non-mvdm/base/ntdll/csrutil.c",
+          "sections": [
+            3,
+            8
+          ],
+          "live_symbols": [
+            "CsrAllocateCaptureBuffer",
+            "CsrFreeCaptureBuffer"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/run16/entry.obj",
+          "source": "src/run16-exe/main.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0612"
+    },
+    {
+      "image": "wow32.dll",
+      "link_name": "_g_abLeadTable",
+      "callers": [
+        {
+          "path": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "sections": [
+            13
+          ],
+          "live_symbols": [
+            "_GetStringPtr16@16"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/wow32-dll/wow_ole_descriptor_binding.obj",
+          "source": "src/wow32-dll/source/wow_ole_descriptor_binding.c",
+          "size": 256,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0613"
+    },
+    {
+      "image": "wow32.dll",
+      "link_name": "_wow_bitmap_lock",
+      "callers": [
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+          "sections": [
+            3
+          ],
+          "live_symbols": [
+            "_BitmapFromDIB@40"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/wow32-dll/wow_bitmap_bindings.obj",
+          "source": "src/wow32-dll/source/wow_bitmap_bindings.c",
+          "size": 24,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0614"
+    },
+    {
+      "image": "wow32.dll",
+      "link_name": "_wow_default_message_state",
+      "callers": [
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+          "sections": [
+            14,
+            16
+          ],
+          "live_symbols": [
+            "_ButtonWndProcA@16",
+            "_ButtonWndProcW@16"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+          "sections": [
+            7
+          ],
+          "live_symbols": [
+            "$LN93",
+            "$LN94",
+            "$LN95",
+            "$LN96",
+            "_wow_original_default_window_proc@20"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+          "sections": [
+            3,
+            5
+          ],
+          "live_symbols": [
+            "_ComboBoxWndProcA@16",
+            "_ComboBoxWndProcW@16"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+          "sections": [
+            63,
+            65
+          ],
+          "live_symbols": [
+            "_EditWndProcA@16",
+            "_EditWndProcW@16"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+          "sections": [
+            3,
+            5,
+            9,
+            11
+          ],
+          "live_symbols": [
+            "_ComboListBoxWndProcA@16",
+            "_ComboListBoxWndProcW@16",
+            "_ListBoxWndProcA@16",
+            "_ListBoxWndProcW@16"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+          "sections": [
+            21
+          ],
+          "live_symbols": [
+            "_InitMessageTables@0"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/wow32-dll/wow_default_message_bindings.obj",
+          "source": "src/wow32-dll/source/wow_default_message_bindings.c",
+          "size": 124,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0615"
+    },
+    {
+      "image": "wow32.dll",
+      "link_name": "_wow_edit_gray_brush",
+      "callers": [
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+          "sections": [
+            7
+          ],
+          "live_symbols": [
+            "$LN93",
+            "$LN94",
+            "$LN95",
+            "$LN96",
+            "_wow_original_default_window_proc@20"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+          "sections": [
+            7
+          ],
+          "live_symbols": [
+            "$LN90",
+            "$LN93",
+            "_ClientDrawState@40"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+          "sections": [
+            12,
+            20
+          ],
+          "live_symbols": [
+            "_DrawFrame@16",
+            "_DrawPushButton@16"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/wow32-dll/wow_edit_drawing_bindings.obj",
+          "source": "src/wow32-dll/source/wow_edit_drawing_bindings.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0616"
+    },
+    {
+      "image": "wow32.dll",
+      "link_name": "_wow_edit_system_brushes",
+      "callers": [
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+          "sections": [
+            24
+          ],
+          "live_symbols": [
+            "_xxxBNDrawText@16"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+          "sections": [
+            7
+          ],
+          "live_symbols": [
+            "$LN93",
+            "$LN94",
+            "$LN95",
+            "$LN96",
+            "_wow_original_default_window_proc@20"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+          "sections": [
+            19
+          ],
+          "live_symbols": [
+            "_xxxCBInternalUpdateEditWindow@8"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+          "sections": [
+            7
+          ],
+          "live_symbols": [
+            "_SLDrawLine@28"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+          "sections": [
+            49
+          ],
+          "live_symbols": [
+            "_xxxLBDrawLBItem@20"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+          "sections": [
+            7
+          ],
+          "live_symbols": [
+            "$LN90",
+            "$LN93",
+            "_ClientDrawState@40"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+          "sections": [
+            12,
+            20
+          ],
+          "live_symbols": [
+            "_DrawFrame@16",
+            "_DrawPushButton@16"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/wow32-dll/wow_edit_drawing_bindings.obj",
+          "source": "src/wow32-dll/source/wow_edit_drawing_bindings.c",
+          "size": 100,
+          "other_symbol_in_map": true
+        }
+      ],
+      "id": "C0617"
+    }
+  ],
+  "shared_declarations": [
+    {
+      "image": "ntsrv.exe",
+      "link_name": "BaseSrvHeap",
+      "callers": [
+        {
+          "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+          "sections": [
+            31,
+            39,
+            50,
+            60
+          ],
+          "live_symbols": [
+            "BaseSrvFreeConsoleRecord",
+            "BaseSrvGetVDMCurDirs",
+            "BaseSrvSetVDMCurDirs",
+            "OkToRunInSharedWOW"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/opennt-base-bindings/dispatch.obj",
+          "source": "src/ntsrv-exe/opennt/source/base_dispatch.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/frontend-registry.obj",
+          "source": "src/ntsrv-exe/opennt/source/frontend_registry.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/native-commands.obj",
+          "source": "src/ntsrv-exe/opennt/source/native_commands.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service-core.obj",
+          "source": "src/ntsrv-exe/opennt/source/service_core.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service-lifecycle.obj",
+          "source": "src/ntsrv-exe/opennt/source/lifecycle.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service-management.obj",
+          "source": "src/ntsrv-exe/opennt/source/management.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service.obj",
+          "source": "src/ntsrv-exe/opennt/source/base_service.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/task-observation.obj",
+          "source": "src/ntsrv-exe/opennt/source/task_observation.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/worker-registry.obj",
+          "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-server/srvvdm.obj",
+          "source": "src/non-mvdm/base/win32/server/srvvdm.c",
+          "size": 8,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntsrv.exe",
+      "link_name": "BaseSrvTag",
+      "callers": [
+        {
+          "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+          "sections": [
+            10,
+            12,
+            13,
+            15,
+            17,
+            21,
+            50,
+            60
+          ],
+          "live_symbols": [
+            "BaseSrvAllocateDOSRecord",
+            "BaseSrvAllocateWOWRecord",
+            "BaseSrvBatNotification",
+            "BaseSrvCheckDOS",
+            "BaseSrvCheckWOW",
+            "BaseSrvCopyCommand",
+            "BaseSrvSetVDMCurDirs",
+            "OkToRunInSharedWOW"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/opennt-base-bindings/dispatch.obj",
+          "source": "src/ntsrv-exe/opennt/source/base_dispatch.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/frontend-registry.obj",
+          "source": "src/ntsrv-exe/opennt/source/frontend_registry.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/native-commands.obj",
+          "source": "src/ntsrv-exe/opennt/source/native_commands.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service-core.obj",
+          "source": "src/ntsrv-exe/opennt/source/service_core.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service-lifecycle.obj",
+          "source": "src/ntsrv-exe/opennt/source/lifecycle.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service-management.obj",
+          "source": "src/ntsrv-exe/opennt/source/management.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/service.obj",
+          "source": "src/ntsrv-exe/opennt/source/base_service.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/task-observation.obj",
+          "source": "src/ntsrv-exe/opennt/source/task_observation.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-bindings/worker-registry.obj",
+          "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-base-server/srvvdm.obj",
+          "source": "src/non-mvdm/base/win32/server/srvvdm.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_VrAddOpenNamedPipeInfo",
+      "callers": [
+        {
+          "path": "src/mvdm-host/dos/dem/demfile.c",
+          "sections": [
+            29
+          ],
+          "live_symbols": [
+            "$LN65",
+            "$LN66",
+            "_demOpen"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "sections": [
+            15,
+            31
+          ],
+          "live_symbols": [
+            "_LoadVdmRedir",
+            "_MS_bop_7"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_async.obj",
+          "source": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demfile.obj",
+          "source": "src/mvdm-host/dos/dem/demfile.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demhndl.obj",
+          "source": "src/mvdm-host/dos/dem/demhndl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_VrConvertLocalNtPipeName",
+      "callers": [
+        {
+          "path": "src/mvdm-host/dos/dem/demfile.c",
+          "sections": [
+            29
+          ],
+          "live_symbols": [
+            "$LN65",
+            "$LN66",
+            "_demOpen"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "sections": [
+            15,
+            31
+          ],
+          "live_symbols": [
+            "_LoadVdmRedir",
+            "_MS_bop_7"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_async.obj",
+          "source": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demfile.obj",
+          "source": "src/mvdm-host/dos/dem/demfile.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demhndl.obj",
+          "source": "src/mvdm-host/dos/dem/demhndl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_VrIsNamedPipeHandle",
+      "callers": [
+        {
+          "path": "src/mvdm-host/dos/dem/demhndl.c",
+          "sections": [
+            15,
+            17
+          ],
+          "live_symbols": [
+            "_demRead",
+            "_demWrite"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "sections": [
+            15,
+            31
+          ],
+          "live_symbols": [
+            "_LoadVdmRedir",
+            "_MS_bop_7"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_async.obj",
+          "source": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demfile.obj",
+          "source": "src/mvdm-host/dos/dem/demfile.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demhndl.obj",
+          "source": "src/mvdm-host/dos/dem/demhndl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_VrIsNamedPipeName",
+      "callers": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "sections": [
+            15,
+            31
+          ],
+          "live_symbols": [
+            "_LoadVdmRedir",
+            "_MS_bop_7"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_async.obj",
+          "source": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demfile.obj",
+          "source": "src/mvdm-host/dos/dem/demfile.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demhndl.obj",
+          "source": "src/mvdm-host/dos/dem/demhndl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_VrReadNamedPipe",
+      "callers": [
+        {
+          "path": "src/mvdm-host/dos/dem/demhndl.c",
+          "sections": [
+            15
+          ],
+          "live_symbols": [
+            "_demRead"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "sections": [
+            15,
+            31
+          ],
+          "live_symbols": [
+            "_LoadVdmRedir",
+            "_MS_bop_7"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_async.obj",
+          "source": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demfile.obj",
+          "source": "src/mvdm-host/dos/dem/demfile.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demhndl.obj",
+          "source": "src/mvdm-host/dos/dem/demhndl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_VrRemoveOpenNamedPipeInfo",
+      "callers": [
+        {
+          "path": "src/mvdm-host/dos/dem/demhndl.c",
+          "sections": [
+            5
+          ],
+          "live_symbols": [
+            "_demClose"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "sections": [
+            15,
+            31
+          ],
+          "live_symbols": [
+            "_LoadVdmRedir",
+            "_MS_bop_7"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_async.obj",
+          "source": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demfile.obj",
+          "source": "src/mvdm-host/dos/dem/demfile.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demhndl.obj",
+          "source": "src/mvdm-host/dos/dem/demhndl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "ntvdm.exe",
+      "link_name": "_VrWriteNamedPipe",
+      "callers": [
+        {
+          "path": "src/mvdm-host/dos/dem/demhndl.c",
+          "sections": [
+            17
+          ],
+          "live_symbols": [
+            "_demWrite"
+          ]
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "sections": [
+            15,
+            31
+          ],
+          "live_symbols": [
+            "_LoadVdmRedir",
+            "_MS_bop_7"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_async.obj",
+          "source": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demfile.obj",
+          "source": "src/mvdm-host/dos/dem/demfile.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/dem/demhndl.obj",
+          "source": "src/mvdm-host/dos/dem/demhndl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    },
+    {
+      "image": "wow32.dll",
+      "link_name": "_gcWheelDelta",
+      "callers": [
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+          "sections": [
+            15
+          ],
+          "live_symbols": [
+            "$LN107",
+            "$LN108",
+            "$LN111",
+            "$LN112",
+            "$LN113",
+            "$LN114",
+            "_MLEditWndProc@20"
+          ]
+        },
+        {
+          "path": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+          "sections": [
+            13
+          ],
+          "live_symbols": [
+            "$LN220",
+            "$LN221",
+            "$LN222",
+            "$LN223",
+            "$LN224",
+            "$LN225",
+            "$LN226",
+            "$LN227",
+            "_ListBoxWndProcWorker@20"
+          ]
+        }
+      ],
+      "tentative_definitions": [
+        {
+          "object": "obj/compat/wow-dialog-lookup.obj",
+          "source": "src/compat/wow_dialog_lookup.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/button-client.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/clglobal.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-combo.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-combodir.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/combodir.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-comboini.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-dlgbegin.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-dlgend.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-dlgmgr.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-dlgmgr2.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-dlgmgrc.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-dmmnem.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-edecrare.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-editec.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-editml.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-editsl.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-edmlonce.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-edmlrare.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-edslrare.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-lb1.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-lboxctl1.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-lboxctl2.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-lboxctl3.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-lboxmult.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/lboxmult.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-lboxrare.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-lboxvar.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/lboxvar.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-body-winmgrc.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-client-draw.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-text.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-view-winmgr.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/control-view-wow.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/dialog-template.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/private-word-client.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/private-word-reader.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/opennt-user/private-word-setter.obj",
+          "source": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/wow32-dll/wow_control_extent_bindings.obj",
+          "source": "src/wow32-dll/source/wow_control_extent_bindings.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/wow32-dll/wow_control_fnid.obj",
+          "source": "src/wow32-dll/source/wow_control_fnid.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/wow32-dll/wow_dialog_memory.obj",
+          "source": "src/wow32-dll/source/wow_dialog_memory.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        },
+        {
+          "object": "obj/wow32-dll/wow_edit_state_bindings.obj",
+          "source": "src/wow32-dll/source/wow_edit_state_bindings.c",
+          "size": 4,
+          "other_symbol_in_map": true
+        }
+      ],
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+    }
+  ],
+  "per_image": {
+    "ntvdm.exe": {
+      "common_names": 412,
+      "reached_refs": 5910,
+      "unowned_objects": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ]
+    },
+    "VCDEX.DLL": {
+      "common_names": 6,
+      "reached_refs": 22,
+      "unowned_objects": []
+    },
+    "VDMREDIR.dll": {
+      "common_names": 24,
+      "reached_refs": 102,
+      "unowned_objects": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ]
+    },
+    "nthook32.dll": {
+      "common_names": 6,
+      "reached_refs": 0,
+      "unowned_objects": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ]
+    },
+    "wow32.dll": {
+      "common_names": 68,
+      "reached_refs": 267,
+      "unowned_objects": [
+        "no-valid-includes obj/callpr32.obj",
+        "unattributed-object obj/wow32-dll-entry-bridge.obj",
+        "unattributed-object obj/wow32-parent-import-abi-aliases.obj",
+        "unattributed-object obj/wow32-system-import-abi-aliases.obj"
+      ]
+    },
+    "ntcon.exe": {
+      "common_names": 4,
+      "reached_refs": 0,
+      "unowned_objects": []
+    },
+    "ntsrv.exe": {
+      "common_names": 9,
+      "reached_refs": 36,
+      "unowned_objects": []
+    },
+    "ntmon.exe": {
+      "common_names": 3,
+      "reached_refs": 0,
+      "unowned_objects": []
+    },
+    "run16.exe": {
+      "common_names": 7,
+      "reached_refs": 5,
+      "unowned_objects": []
+    },
+    "ntvwm.exe": {
+      "common_names": 4,
+      "reached_refs": 0,
+      "unowned_objects": []
+    },
+    "nthook64.dll": {
+      "common_names": 4,
+      "reached_refs": 0,
+      "unowned_objects": []
+    }
+  }
+}
