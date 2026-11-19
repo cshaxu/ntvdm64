@@ -1,0 +1,223 @@
+{
+  "baseline": "7b419304400eb61cc11a25f544c9b9c4082669f4",
+  "files": [
+    {
+      "linkOnlyOrder": 27,
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "ids": [
+        "C0160",
+        "C0300"
+      ],
+      "decision": "Keep error logic in C. WINAPI thread bridge includes D session ownership; review creation/finish together in S13. Sole CloseHandle operand is hThread from CreateThread: graphics redirection is unnecessary at this caller. Narrow Console binding scope in S13 instead of claiming a thread handle needs graphics state. No caller edit or extra selector introduced."
+    },
+    {
+      "linkOnlyOrder": 28,
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "ids": [
+        "C0308",
+        "C0309",
+        "C0310",
+        "C0313"
+      ],
+      "decision": "Four native operations already moved to B in P14. Current object/map bindings confirm same provider. No additional eliminated-ID credit."
+    }
+  ],
+  "originalEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "procedure": "git show original nt_error thread creation, wait, CloseHandle and exit; nt_fdisk geometry/alignment/BPB query calls. Source signatures and handle producer inspected.",
+    "errorABI": "ErrorDialogBoxThread is DWORD WINAPI(VOID*); selected OPENNT_HOST_CREATE_THREAD_ABI chooses WINAPI bridge, unlike nt_com cdecl bridge.",
+    "closeBoundary": "compat conapi.h globally maps CloseHandle to MvdmCloseConsoleHandle; provider falls through to native CloseHandle when handle is not graphics identity. Thread handle provenance proves this caller needs no graphics close behavior, not that every caller can bypass it."
+  },
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_error.obj",
+      "sha256": "cd4fb2f33d3a4443cf7bf86f097e063dbe02cb3857edaf766afd75d73317e85f",
+      "symbol": "_opennt_create_winapi_thread_named",
+      "provider": "0001:0017ef30       _opennt_create_winapi_thread_named 0057ff30 f   common-worker-thread:bridge.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_error.obj",
+      "sha256": "cd4fb2f33d3a4443cf7bf86f097e063dbe02cb3857edaf766afd75d73317e85f",
+      "symbol": "_MvdmCloseConsoleHandle@4",
+      "provider": "0001:00173d80       _MvdmCloseConsoleHandle@4  00574d80 f   softpc-win32-bindings:console_graphics.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_fdisk.obj",
+      "sha256": "93796e3e7ceb553d0a94d348643549e3d951ed96f805498a4f39f29e91e991e2",
+      "symbol": "_opennt_NtOpenFile@24",
+      "provider": "0001:001751b0       _opennt_NtOpenFile@24      005761b0 f   softpc-win32-bindings:ntioapi_facade.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_fdisk.obj",
+      "sha256": "93796e3e7ceb553d0a94d348643549e3d951ed96f805498a4f39f29e91e991e2",
+      "symbol": "_opennt_NtDeviceIoControlFile@40",
+      "provider": "0001:001750b0       _opennt_NtDeviceIoControlFile@40 005760b0 f   softpc-win32-bindings:ntioapi_facade.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_fdisk.obj",
+      "sha256": "93796e3e7ceb553d0a94d348643549e3d951ed96f805498a4f39f29e91e991e2",
+      "symbol": "_opennt_NtQueryInformationFile@20",
+      "provider": "0001:001752d0       _opennt_NtQueryInformationFile@20 005762d0 f   softpc-win32-bindings:ntioapi_facade.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_fdisk.obj",
+      "sha256": "93796e3e7ceb553d0a94d348643549e3d951ed96f805498a4f39f29e91e991e2",
+      "symbol": "_opennt_NtFsControlFile@40",
+      "provider": "0001:00175130       _opennt_NtFsControlFile@40 00576130 f   softpc-win32-bindings:ntioapi_facade.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_error.obj",
+      "sha256": "59273687e9db764e86c6e3de905eb5c17ed6fbefdd20d839d7cb6f3603df11d4",
+      "symbol": "_opennt_create_winapi_thread_named",
+      "provider": "0001:0017ef30       _opennt_create_winapi_thread_named 0057ff30 f   common-worker-thread:bridge.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_error.obj",
+      "sha256": "59273687e9db764e86c6e3de905eb5c17ed6fbefdd20d839d7cb6f3603df11d4",
+      "symbol": "_MvdmCloseConsoleHandle@4",
+      "provider": "0001:00173d80       _MvdmCloseConsoleHandle@4  00574d80 f   softpc-win32-bindings:console_graphics.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_fdisk.obj",
+      "sha256": "2187ad69ac08a29911bd69252697268b5597209daa75e28f85b699f78cda1f64",
+      "symbol": "_opennt_NtOpenFile@24",
+      "provider": "0001:001751b0       _opennt_NtOpenFile@24      005761b0 f   softpc-win32-bindings:ntioapi_facade.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_fdisk.obj",
+      "sha256": "2187ad69ac08a29911bd69252697268b5597209daa75e28f85b699f78cda1f64",
+      "symbol": "_opennt_NtDeviceIoControlFile@40",
+      "provider": "0001:001750b0       _opennt_NtDeviceIoControlFile@40 005760b0 f   softpc-win32-bindings:ntioapi_facade.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_fdisk.obj",
+      "sha256": "2187ad69ac08a29911bd69252697268b5597209daa75e28f85b699f78cda1f64",
+      "symbol": "_opennt_NtQueryInformationFile@20",
+      "provider": "0001:001752d0       _opennt_NtQueryInformationFile@20 005762d0 f   softpc-win32-bindings:ntioapi_facade.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_fdisk.obj",
+      "sha256": "2187ad69ac08a29911bd69252697268b5597209daa75e28f85b699f78cda1f64",
+      "symbol": "_opennt_NtFsControlFile@40",
+      "provider": "0001:00175130       _opennt_NtFsControlFile@40 00576130 f   softpc-win32-bindings:ntioapi_facade.obj"
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 28,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 46,
+    "openIds": 498,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "No production change; checked twelve imports in four P81 objects and current link maps.",
+    "runtime": "No new runtime run or physical disk acceptance claimed.",
+    "publishedHashesVerified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_error.c": "23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d",
+    "src/mvdm-host/softpc.new/host/src/nt_fdisk.c": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+    "src/compat/include/conapi.h": "6f66445927ad772e87e9fd1b1e95d08de9ec6f00e44b9efc3bc14e6503cf7094",
+    "src/compat/include/thread_start_compat.h": "4d3dc513fc576015a593df9743832f5c8d45e98a9d67e5b38348a527394a951f",
+    "src/common/worker-thread/bridge.c": "ad58270fdeb72b37a44ffd951a8a4a6d0c7c176da4ed7d476b32ab1e5316db87",
+    "src/ntvdm-exe/win32/console_graphics.c": "77dd8ca309a906f2cd5789577bf516698569d717a1792cb786ab39a0a676661a",
+    "src/compat/ntioapi_facade.c": "c1575ce20f958ca226e362c614d9419cdbf118049e4006db81049eb1597f7014"
+  }
+}

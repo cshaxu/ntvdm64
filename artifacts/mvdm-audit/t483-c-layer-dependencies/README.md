@@ -279,3 +279,5 @@ P79: [Presentation/thread/start ownership](s12-p79-presentation-thread-start-own
 P80: [Console registration ownership](s12-p80-console-registration-ownership.json); files24-25 classified; C0189 remains the next in-place candidate. No product change.
 
 P81: [Activity compatibility delivery](s12-p81-activity-owner.json); C0189 eliminated F-to-B, unchanged callback; final cached builds, normalized identity and eight A/B graphs passed.
+
+P82: [Error/disk bindings](s12-p82-error-disk-bindings.json); files27-28 reviewed; error thread close is native-only, disk bindings already B since P14.
