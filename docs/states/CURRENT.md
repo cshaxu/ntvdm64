@@ -174,4 +174,6 @@ The unrelated project [TODO](TODO.md) remains separate.
 
 P56: [Class lookup ABI](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p56-class-lookup-abi.json).
 
-P57: [Cleanup/event ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p57-cleanup-event.json). Reviewed103/116:17 clear,70 lifecycle,16 ABI;13 remain. Open500/617. Mirror0/0; cumulative reduction2 points/10 lines. Cached builds, task-order, retained Win16 frontiers and dual publication passed. S12 active.
+P57: [Cleanup/event delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p57-cleanup-event.json).
+
+P58: [Private-word setter](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p58-private-word-ownership.json). Reviewed104/116:17 clear,71 lifecycle,16 ABI;12 remain. Open500/617. Mirror0/0; cumulative reduction2 points/10 lines. Production unchanged; P57 publication hashes verified. S12 active.

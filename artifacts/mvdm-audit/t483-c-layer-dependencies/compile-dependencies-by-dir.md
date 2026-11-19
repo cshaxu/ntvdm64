@@ -676,6 +676,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+104 P58: Three F symbols C0388/C0592/C0595 and mixed C0064 header remain; original private-word policy C, dialog result native leaf already B. S13 lifetime and S14 extent/type follow-up; mirror0/0. See s12-p58-private-word-ownership.json.
+
 ## 105 — src/non-mvdm/windows/core/ntuser/kernel/profile.c
 
 - 直接包含 · C0118 · wow32-dll · src/wow32-dll/include/wow_task_profile_bindings.h
