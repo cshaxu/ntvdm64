@@ -29,6 +29,8 @@
 
 S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. Both assets/release and O:/WINNT/system32 contain package94150155-5251-42f3-b587-9803d82bc178.
 
+S13 P2: [COMMAND/thread boundary design](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p2-command-thread-boundary.json). First remaining file cmdexec.c retains original algorithms. Shared thread bridge is present in both EXE and redirector DLL; implementation must cover per-image bindings and terminal cleanup. No product change or new elimination;96 eliminated/472 open.
+
 ## S12 Closure Record
 
 [In-place cleanup closure](../etc/evidence/m0-t483-s12-closure.md).

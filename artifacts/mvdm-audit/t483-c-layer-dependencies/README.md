@@ -333,3 +333,5 @@ P106: [First nine open header dispositions](s12-p106-header-dispositions.json); 
 P107: [CCPU fallback ownership delivery](s12-p107-vector-defaults.json); three unchanged breakpoint providers move F to B, C0190-C0192 eliminated. Cached builds, eight boundary graphs and dual publication pass; all eleven normalized images equal P104.
 
 P108: [S12 closure and complete successor handoff](s12-p108-closure-handoff.json); 96 eliminated,472 still open. S13 receives428 lifecycle edges and21 mixed groups;23 original-owner edges reserved for S14. Allocation is not implementation approval or dependency elimination.
+
+S13 P2: [COMMAND and shared thread boundary design](s13-p2-command-thread-boundary.json); first remaining file reviewed as a coupled snapshot/thread/launch group. Per-image VDMREDIR initialization must be verified; no product migration or dependency elimination yet.

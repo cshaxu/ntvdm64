@@ -1,0 +1,90 @@
+{
+  "baseline": "2f5ed24a8",
+  "fileOrder": {
+    "first": "src/mvdm-host/dos/command/cmdconf.c",
+    "firstDisposition": "Directory provider/header already cleared in S12; no reimplementation.",
+    "current": "src/mvdm-host/dos/command/cmdexec.c",
+    "status": "whole-file coupling identified; product changes not started, not counted cleared"
+  },
+  "question": "How to remove COMMAND outward dependencies without moving the original COMMAND algorithm or duplicating its state?",
+  "findings": [
+    "Native-child input is captured on the guest thread before detached cmdCreateProcess. The F provider owns snapshot storage, session epoch and release. Removing it would change the current asynchronous pointer-lifetime contract; this source observation does not prove a bug in original OpenNT, and direct restoration needs an equivalent lifetime witness in this host.",
+    "Original C owns conversion, reentry counters, process wait, return-code flow and guest register results; retain those algorithms.",
+    "The current thread bridge adapts four callback ABI shapes through existing A win32_thread_create and binds the same session on the new thread. It also performs terminal release before native ExitThread.",
+    "common-worker-thread.lib is linked separately into NTVDM and VDMREDIR. The latter imports session_thread_current/bind_owned_source/finish through ntvdm.lib. A B static registration table would be per image, not shared across the two images.",
+    "session_thread_bind_owned_source rolls back failed binding; session_thread_finish marks terminal intent and must reset it after refusal or exception. The original CCPU stack release must remain after successful unbinding."
+  ],
+  "rejectedAlternatives": [
+    "Moving entire cmdexec.c into F would discard original ownership and increase mirror differences. Not authorized.",
+    "Moving current bridge unchanged into B retains D/F session dependencies. Renaming headers cannot fix this.",
+    "A process-global table initialized only by the EXE would leave the separately linked DLL unconfigured.",
+    "Replacing thread callbacks with ordinary CreateThread loses historical cdecl/void ABI and session propagation."
+  ],
+  "implementationDirection": {
+    "thread": "Use existing A win32_thread_hooks. B owns only callback-shape adaptation and explicitly supplied operations; outer code captures session identity, binds and performs terminal release. Initialize every consuming module before original entry calls; no new session authority, polling or fallback state machine.",
+    "command": "Handle the snapshot and native-launch interfaces as one separate owner group after the shared thread foundation. Preserve capture before detach, exact service selection, synchronous borrow lifetime and release after native launch preparation. Do not classify pointer-returning accessors as independent native leaves.",
+    "mirror": "Aim for unchanged mirror call sites and fewer outward headers. Measure full-file mirror points/lines before implementation; any increase requires approval."
+  },
+  "requiredVerification": [
+    "Existing thread-start fixture: four rejected entries, five normal ABI/explicit-exit cases, pre-CCPU unbind order, refused finish, exception reset and fail-fast child.",
+    "Actual NTVDM and VDMREDIR links and per-image binding initialization; exercise redirector async worker creation, not just EXE fixture.",
+    "No changes to A shared-library implementation; verify B actual compile closure has no C/D/E/F headers or undefined direct provider symbols.",
+    "COMMAND snapshot failure/release and native-child reentry targeted tests after its interface group changes.",
+    "Full cached build, complete dual publication, appropriate focused runtime verification, commit/push and clean tree after implementation."
+  ],
+  "ids": {
+    "thread": [
+      "C0157",
+      "C0158",
+      "C0159",
+      "C0160",
+      "C0161"
+    ],
+    "command": [
+      "C0024",
+      "C0174",
+      "C0175",
+      "C0176",
+      "C0177",
+      "C0178",
+      "C0179",
+      "C0180",
+      "C0181",
+      "C0182",
+      "C0260",
+      "C0261"
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/dos/command/cmdexec.c": "577d3ddf27c9a503db9cfb00d8ed812154a55f5a656a7563b8125f33e12a88c0",
+    "src/common/worker-thread/bridge.c": "ad58270fdeb72b37a44ffd951a8a4a6d0c7c176da4ed7d476b32ab1e5316db87",
+    "src/common/worker-thread/session.h": "465107103c90e76d1d1cffa103ecfe9e3ffae419aaed3cb14da46382122e99de",
+    "src/lib-win32/thread/thread.c": "0add0b0b7a480902c1ae7f3863799363d0cc2c5cf03db57820c4597f6844960c",
+    "src/lib-win32/thread/thread.h": "ff6cf69e81983f9916d68f328a1593b15e20568c0808a68c94111b414d2b49bd",
+    "src/ntvdm-exe/session/session.c": "e59ab2a6ebe824c11553eaf6f758ef67b568c495a75d1f720675f6761ab12506",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "7a7442a56675cb590b0b7f5a84bddd4f2a4a9d9de0089a4187a32928ed39a13d",
+    "src/ntvdm-exe/command/source/mvdm_command_native_child.c": "c330fbf9f0fa6d22df07cff9fa1dfe8c1875f481db200f39410a1d7d3601add5",
+    "src/ntvdm-exe/win32/command_process_compat.c": "ca9f2141a3244b517b2befd6f87c83bbfa1199a5051e27c3e6e9bbef272a1851",
+    "src/mvdm-host/vdmredir/vrdll.c": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "b1f8b26af70ed2dfac2bdf4c1744ae182749e771ecabd711ceb765d2db1dc0d5",
+    "test/adapter-mvdm-host-out/thread_start_session_fixture.c": "597719a08efcd5b8d143cb25365fdb842af0f25b69b1af6759c7de1890d90dd8",
+    "test/observation/verify-thread-start-boundary.ps1": "ba043d37a56c457eff242ea37e1833d2fa3930e6354921ebc385868a075d7109"
+  },
+  "verification": "Source and build-generator investigation only; no candidate compile, product mutation, runtime test or new release in this packet.",
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "progress": {
+    "stableIds": 618,
+    "eliminated": 96,
+    "open": 472,
+    "supportingOrExcluded": 50,
+    "S13Cleared": 0
+  },
+  "documentationGate": "passed: build/t483-s12-vector-defaults/s13-p2-docs.log, exit0; git diff --check passed."
+}
