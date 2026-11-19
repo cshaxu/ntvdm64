@@ -744,6 +744,10 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+115 P69: C0064 original WND/menu declaration composition remains; no direct F function import in current object. Preserve unused original helpers. Mirror0/0; reviewed115/116. See s12-p69-final-file-ownership.json.
+
 ## 116 — src/non-mvdm/windows/core/ntuser/server/exports.c
 
 - 直接包含 · C0020 · ntsrv-exe · src/ntsrv-exe/opennt/include/base_interactive.h
+
+116 P69: C0020/C0165 service logon admission scope remains; original token-query algorithm stays C. Mirror0/0; reviewed116/116, open500/618. See s12-p69-final-file-ownership.json.

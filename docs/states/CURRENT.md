@@ -36,13 +36,13 @@ P3: [Worker entry delivery and mirror reduction](../../artifacts/mvdm-audit/t483
 
 P4-P5: [Cached architecture delivery evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
-P6: [Common storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json) expanded the tracker to617 IDs using production COFF/link ownership; release unchanged.
+P6: [Common storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
 
 P7: [Mixed storage ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
 
 P8: [Original caller anchors](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p8-caller-anchors.json).
 
-P9 removed the redundant forced service header from srvvdm.c. The normal include remains. Both release destinations have the eleven verified images. The [per-file inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p9-file-dependencies.json) covers 539 product compile contexts and records 116 distinct C-layer files with a direct compile dependency and 170 with a direct link binding (190 in their union). The stable tracker still has 555 open items.
+P9: [Forced-header removal and original file inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p9-file-dependencies.json). Historical counts are superseded by the latest receipt.
 
 P11 moved shared package directory mechanics and guest directory queries into B compat. cmdconf.c now includes the B header. Both cached product builds, directory/PIF/media/boot tests and the eight-graph library boundary check passed. Eleven images were published and hash-verified at both destinations. See [directory receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p11-directory.json). The sequential compile-dependency review is 1/116; 115 mirror files remain directly dependent. Mirror delta is zero blocks and lines.
 
@@ -196,4 +196,6 @@ P66: [Help ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p
 
 P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p67-text-measure.json).
 
-P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json). Reviewed114/116;2 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P67 release hashes verified; S12 active.
+P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
+
+P69: [Final sequential files](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p69-final-file-ownership.json). Reviewed116/116;500/618 open. Classification:18 cleared,78 lifecycle,20 source/ABI. Reconcile remaining evidence before S12 closure. Mirror0/0; cumulative -2 points/-10 lines. P67 release hashes verified.
