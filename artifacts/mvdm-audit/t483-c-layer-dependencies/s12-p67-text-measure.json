@@ -1,0 +1,134 @@
+{
+  "baseline": "b9c5163171d64b77e860c382a85e5c70c8f5fefe",
+  "status": "P67 text-measure declaration boundary delivered",
+  "files": [
+    {
+      "number": 113,
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "sha256": "9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c",
+      "compilerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\control-text-extent.obj",
+      "objectSha256": "d591af357f173c0919bd2bd1581a420d1117dfc957df094c7ba9a8636293266d",
+      "coffUndefined": [
+        "__imp__GetTextExtentPointW@16",
+        "_OpenNtUserRtlAllocMem@4",
+        "_OpenNtUserRtlFreeMem@4",
+        "_GetPrefixCount@16",
+        "@__security_check_cookie@4",
+        "___security_cookie"
+      ],
+      "dependencies": [
+        "obj/opennt-user/control-text-extent.obj: #deps 13, deps mtime 8167804598398290 (VALID)",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/text-measure/precomp.h",
+        "    ../../../../src/compat/include/wow_char_conversion_abi.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        ""
+      ],
+      "mapProviders": [
+        "0001:0004cd70       _OpenNtUserRtlAllocMem@4   1004dd70 f   ntuser_rtl_compat.obj",
+        "0001:0004cd80       _OpenNtUserRtlFreeMem@4    1004dd80 f   ntuser_rtl_compat.obj",
+        "0001:0004e370       _GetPrefixCount@16         1004f370 f   control-text-rtl.obj",
+        "0001:0004e5d0       _PSMGetTextExtent@16       1004f5d0 f   control-text-extent.obj",
+        "0001:00075b39       @__security_check_cookie@4 10076b39 f   LIBCMT:secchk.obj",
+        "0002:000001a0       __imp__GetTextExtentPointW@16 1008e1a0     gdi32:GDI32.dll",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj"
+      ]
+    }
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "declarations": [
+      "windows/core/ntuser/inc/user.h:2596 GetPrefixCount",
+      "windows/core/ntuser/rtl/text.c:28-32 PSMGetTextExtent"
+    ],
+    "evidence": "Complete original/current text.c read. Original prefix-removal/measurement behavior and existing long-text allocation adaptation remain unchanged. No new approval of existing mirror differences is implied."
+  },
+  "change": {
+    "declarations": "Move existing SDK-only prototypes, allocator include and text-extent API alias into B compat/include/text-measure/precomp.h. Shared F drawing precomp includes it rather than duplicating declarations. Product selects this narrow include directory for text.c only. Test string_extent uses the same product header; failure-instrumented fixture retains its own test leaves.",
+    "abi": "Explicit WINAPI preserves existing product /Gz and decorated COFF exports/imports. B declares C-implemented algorithms but contains no calls or link requirement on C; types are SDK-only. Original function bodies stay C.",
+    "scope": "Actual compiled include closure shrinks24 to13, with no D/E/F headers. GetPrefixCount resolves C, allocations resolve B, measurement resolves GDI and security support resolves CRT. C0066 remains open for other drawing consumers, not for this file. No second allocator or text implementation."
+  },
+  "progress": {
+    "reviewedFiles": 113,
+    "clearedDirectHeaderFiles": 18,
+    "deferredLifecycleFiles": 76,
+    "deferredSourceAbiCompositionFiles": 19,
+    "unreviewedFiles": 3,
+    "totalFiles": 116,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Cached x86 WOW32 and x64 worker/frontend/monitor/launcher/service/hook completed; four x86 worker images explicitly built. Final x86 rebuild followed correction of provenance comment only. build.exit and finish.exit=0.",
+    "focused": "original-string-boundaries built; WOW_CONTROL_STRING_OK; text_measure_failure_failures=0. Covers actual prefix/extent results and allocation failure/254-255 threshold. targeted.exit=0. Tests precede final comment-only provenance correction; no semantic change followed.",
+    "boundaries": "Eight A/B product graphs passed; WOW shared boundary passed148 objects and9 negative controls. finish.log.",
+    "identity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityMethod": "Compare all11 staged images against P59 after masking only the single package GUID, PE header timestamp and debug-directory timestamps. All equal. This is normalized equality, not raw hash equality. Repeated guest runtime omitted under owner authorization.",
+    "publication": {
+      "packageId": "05bf1b27-cc74-49a1-b253-b4f975362985",
+      "verifiedImages": [
+        "assets\\release\\VCDEX.DLL",
+        "O:\\WINNT\\system32\\VCDEX.DLL",
+        "assets\\release\\run16.exe",
+        "O:\\WINNT\\system32\\run16.exe",
+        "assets\\release\\ntsrv.exe",
+        "O:\\WINNT\\system32\\ntsrv.exe",
+        "assets\\release\\ntcon.exe",
+        "O:\\WINNT\\system32\\ntcon.exe",
+        "assets\\release\\ntvdm.exe",
+        "O:\\WINNT\\system32\\ntvdm.exe",
+        "assets\\release\\ntvwm.exe",
+        "O:\\WINNT\\system32\\ntvwm.exe",
+        "assets\\release\\ntmon.exe",
+        "O:\\WINNT\\system32\\ntmon.exe",
+        "assets\\release\\WOW32.DLL",
+        "O:\\WINNT\\system32\\WOW32.DLL",
+        "assets\\release\\VDMREDIR.DLL",
+        "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "assets\\release\\nthook32.dll",
+        "O:\\WINNT\\system32\\nthook32.dll",
+        "assets\\release\\nthook64.dll",
+        "O:\\WINNT\\system32\\nthook64.dll"
+      ],
+      "receipt": {
+        "images": 11,
+        "destinations": [
+          "O:\\repos.hobby\\ntvdm64/assets/release",
+          "O:/winnt/system32"
+        ],
+        "package": "05bf1b27-cc74-49a1-b253-b4f975362985",
+        "hashVerified": true,
+        "stopped": 0
+      }
+    },
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-text-measure/docs.log and docs.exit; git diff --check passed.",
+    "postPublication": "Reran both focused executables after publication: WOW_CONTROL_STRING_OK and text_measure_failure_failures=0. post-publish.exit=0. These are focused native fixtures, not a new real-guest run."
+  }
+}

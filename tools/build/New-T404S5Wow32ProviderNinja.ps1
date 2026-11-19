@@ -612,7 +612,7 @@ foreach ($textPart in @('client', 'rtl')) {
 $extentObject = 'obj/opennt-user/control-text-extent.obj'
 $objects.Add($extentObject)
 $ninja.Add('build ' + $extentObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/text.c')))
-$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags')
+$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/include/text-measure')) + '" $cflags $control_user_flags')
 foreach ($drawingPart in @('draw', 'mngrayc')) {
     $drawingObject = 'obj/opennt-user/control-client-' + $drawingPart + '.obj'
     $objects.Add($drawingObject)

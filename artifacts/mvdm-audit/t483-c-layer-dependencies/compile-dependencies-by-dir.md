@@ -731,6 +731,8 @@
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h
 
+113 P67: cleared outward compile dependency using shared SDK-only B text declarations; original body unchanged. C0066 remains open for other files. Mirror0/0; reviewed113/116, open500/618. See s12-p67-text-measure.json.
+
 ## 114 — src/non-mvdm/windows/core/ntuser/rtl/winmgr.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

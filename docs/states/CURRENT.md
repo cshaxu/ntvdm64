@@ -34,7 +34,7 @@ P2: [Build-root cleanup, identity and dual-publication evidence](../../artifacts
 
 P3: [Worker entry delivery and mirror reduction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p3-entry.json).
 
-P4-P5: [AMD64 roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p4-native-roots.json) and [x86 roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p5-worker-roots.json) include verified builds, dual publication and targeted checks.
+P4-P5: [Cached architecture delivery evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
 P6: [Common storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json) expanded the tracker to617 IDs using production COFF/link ownership; release unchanged.
 
@@ -192,4 +192,6 @@ P64: [RTL text ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s
 
 P65: [RTL private reader](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p65-rtl-private-reader.json).
 
-P66: [Help ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p66-help-ownership.json). Reviewed112/116;4 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.
+P66: [Help ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p66-help-ownership.json).
+
+P67: [Text measurement boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p67-text-measure.json). Reviewed113/116;3 remain;500/618 open. SDK-only text declarations moved to B. Cached builds, focused tests and dual publication passed. All11 images normalized-equal P59. Mirror0/0; cumulative -2 points/-10 lines. S12 active.

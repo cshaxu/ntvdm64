@@ -23,11 +23,8 @@
 BOOL WINAPI IsSysFontAndDefaultMode(HDC);
 /* OPENNT-HOST-110: original user.h contract for the retained text body. */
 #define CH_PREFIX TEXT('&')
-LONG GetPrefixCount(LPCWSTR lpstr, int cb, LPWSTR lpstrCopy, int cbCopy);
 /* OPENNT-HOST-112: reuse the already selected RTL allocation service. */
-#include "compat/include/wow_char_conversion_abi.h"
-#define UserGetTextExtentPointW GetTextExtentPointW
-BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
+#include "compat/include/text-measure/precomp.h"
 /* OPENNT-HOST-115: original text/underline algorithm, public GDI leaves. */
 #define UserTextOutW TextOutW
 #define UserGetTextMetricsW GetTextMetricsW
