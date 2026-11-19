@@ -1,4 +1,4 @@
-#include "common/guest_environment.h"
+#include "compat/include/guest_environment.h"
 #include <stdio.h>
 #include <string.h>
 

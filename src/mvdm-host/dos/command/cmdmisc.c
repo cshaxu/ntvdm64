@@ -18,8 +18,8 @@
 #include "oemuni.h"
 #include "nt_pif.h"
 #include "nt_uis.h"	  // For resource id
-#include "mvdm_guest_location.h"
-#include "mvdm_softpc_firmware.h"
+#include "compat/include/guest_location.h"
+#include "compat/include/guest_environment.h"
 
 
 #line 22

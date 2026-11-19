@@ -343,3 +343,5 @@ S13 P4: [COMMAND boundary delivery](s13-p4-command-boundary.json); twelve direct
 S13 P5: [Console keyboard query boundary](s13-p5-console-keyboard-boundary.json); cmdkeyb retains its original algorithm and both query symbols now resolve to B, with explicit F routing operations. No mirror change; cached builds, dual publication, three Console transport cases and actual native EDIT return pass.115 eliminated,453 open.
 
 S13 P6: [cmdmisc ownership review](s13-p6-cmdmisc-ownership-review.json); bounded environment, guest output and Console title groups mapped before implementation. No product change or dependency elimination; P5 remains the released baseline.
+
+S13 P7: [cmdmisc boundary delivery](s13-p7-cmdmisc-boundary.json); pure environment and numeric location move to B, session copy and Console title bodies remain F behind installed B contracts. Six IDs eliminated;121 eliminated,447 open. Cached x86/x64/reference,8 boundary graphs,dual11 publication and targeted COMMAND/Console/WOW/location checks pass. Mirror remains9 points/52 lines;delta0/0.

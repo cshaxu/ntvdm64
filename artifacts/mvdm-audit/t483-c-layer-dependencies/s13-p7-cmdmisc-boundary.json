@@ -1,0 +1,334 @@
+{
+  "scope": "T483 S13 P7: complete cmdmisc environment, guest directory output and Console-title ownership cohort",
+  "baseline": "31651eefe4cd0d973e75b4ddd94f64ab30425646",
+  "ids": [
+    "C0039",
+    "C0195",
+    "C0197",
+    "C0223",
+    "C0273",
+    "C0282"
+  ],
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 447,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 121
+  },
+  "total": 618,
+  "S13Eliminated": 25,
+  "ownership": {
+    "C": "Original cmdmisc algorithm retained; only two header references change. No guest change.",
+    "B": "Pure environment projection and numeric real-mode address setter; immutable write and unified four-operation Console contracts. No outer static imports or mutable session state.",
+    "F": "Unchanged copy/lease and title/frontend bodies installed once before original worker execution; session and request lifetime remain product-owned."
+  },
+  "preservedBodies": [
+    {
+      "symbol": "common_guest_environment_root",
+      "source": "src/common/guest_environment.c",
+      "destination": "src/compat/guest_environment.c",
+      "bodyIdentical": true
+    },
+    {
+      "symbol": "mvdm_softpc_project_wow_initial_environment",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "destination": "src/compat/guest_environment.c",
+      "bodyIdentical": true
+    },
+    {
+      "symbol": "mvdm_guest_location_set_real_mode",
+      "source": "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+      "destination": "src/compat/guest_location.c",
+      "bodyIdentical": true
+    },
+    {
+      "symbol": "mvdm_guest_location_copy_to_guest",
+      "source": "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+      "destination": "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+      "bodyIdentical": true
+    },
+    {
+      "symbol": "MvdmGetConsoleTitleA",
+      "source": "src/ntvdm-exe/win32/console_client.c",
+      "destination": "src/ntvdm-exe/win32/console_client.c",
+      "bodyIdentical": true
+    },
+    {
+      "symbol": "MvdmSetConsoleTitleA",
+      "source": "src/ntvdm-exe/win32/console_client.c",
+      "destination": "src/ntvdm-exe/win32/console_client.c",
+      "bodyIdentical": true
+    }
+  ],
+  "mirrorBefore": {
+    "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+    "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+    "files": [
+      {
+        "path": "src/mvdm-host/dos/command/cmdmisc.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+        "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+        "current_sha256": "ed8067d60dfa322ae96bcefff8b34a0b44865d58c55d88462e63314887bcf88a",
+        "raw": {
+          "blocks": 10,
+          "added": 47,
+          "deleted": 62
+        },
+        "filtered": {
+          "blocks": 9,
+          "added": 46,
+          "deleted": 6
+        },
+        "excluded": [
+          {
+            "original": [
+              657,
+              712
+            ],
+            "current": [
+              716,
+              718
+            ]
+          }
+        ],
+        "issues": [],
+        "rank": 1
+      }
+    ]
+  },
+  "mirrorAfter": {
+    "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+    "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+    "files": [
+      {
+        "path": "src/mvdm-host/dos/command/cmdmisc.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+        "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+        "current_sha256": "cdeb4f58009cd3f95f5cae10ec6f6eb5e5dfbef26fae168c2757aff99a68614f",
+        "raw": {
+          "blocks": 10,
+          "added": 47,
+          "deleted": 62
+        },
+        "filtered": {
+          "blocks": 9,
+          "added": 46,
+          "deleted": 6
+        },
+        "excluded": [
+          {
+            "original": [
+              657,
+              712
+            ],
+            "current": [
+              716,
+              718
+            ]
+          }
+        ],
+        "issues": [],
+        "rank": 1
+      }
+    ]
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "compileEvidence": "Actual cmdmisc dependencies and commands checked in both product-x86 and reference-x86: no D/E/F headers/search roots. Actual NTVDM map resolves the five symbols to B sources. COFF imports are Windows/CRT and B system_root only. Eight A/B graphs passed.",
+  "sharedOpen": {
+    "C0034": "cmdmisc cleared, DEM still imports guest-location lease header; do not count entire shared ID eliminated.",
+    "searchRoots": "C0135/C0137/C0141/C0142/C0145/C0146 remain shared open IDs. Only current cmdmisc command narrowed; three roots were actually present before this batch."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "80eb0fde-c679-4242-aec5-5630d5173fd9",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "tests": {
+    "environment": "Existing malformed MULTI_SZ, root projection and ownership tests pass.",
+    "bootEnvironment": "Existing WOW environment fixture passes x86 and x64; only B code linked.",
+    "location": "Existing real-mode, zero-length, VM overflow, acquisition/commit rejection, retirement fixture passes through actual binding.",
+    "command": "149 capture and 65 launch assertions; real native EDIT return and strict repeated DIR pass.",
+    "console": "Normal exit 0x49, broken pipe 0, hung close c000013a pass; these are fixture-specific expected exits.",
+    "wow": "Real WINMINE frontier matches retained baseline on private desktop. Probe uses bounded timeout cleanup; not normal-exit/gameplay acceptance.",
+    "redirector": "27 async assertions and 14 OEM capacity assertions pass; controlled-memory fixtures, not live guest pipe/NetAPI claims.",
+    "full": "Not run: owner-authorized affected targeted selection; ten other normalized product images unchanged."
+  },
+  "failuresRetained": [
+    "Initial full build failed: native standalone graph strips root includes; corrected environment source to component-local header spelling, then cached full build passed.",
+    "First WOW wrapper omitted existing short physical runtime/environment setup and returned 87 before application observation. Same published package passed after restoring canonical runner setup.",
+    "First restricted proof launcher disappeared without an exit receipt; not accepted. Repeated read-only collection under normal pwsh completed."
+  ],
+  "evidence": [
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/build-process.json",
+      "sha256": "eddab0f426f92bd47371d3d0f4d9785ace81bf77c58e4a909807cba258650cd9"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/build.exit",
+      "sha256": "df4e26a04a444901b95afef44e4a96cfae34690fff2ad2c66389c70079cdff2b"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/build2-process.json",
+      "sha256": "094ab757af93fe78d0b3f63c8c77d5baef7a69c74062fac76ef22c490df55491"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/build2.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/deliver-process.json",
+      "sha256": "b95be20499cc6b105379f4badaa87af0725c2b71c2e9fef3bf4c4c22cac77728"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/deliver.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/units-process.json",
+      "sha256": "b817ac37c5fe692099edc9ff60bf417cb50636fd5e3d2bd921d5b9ce5cafbbf9"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/units.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/commands/results.json",
+      "sha256": "19ebe1c196f8c09ae944045bdbc7cc6538671f2529e7b2a567816e05091783b2"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/runtime-process.json",
+      "sha256": "0f608e9f5facbe9a5d0598ea92e2e76a273c8312db62a9f61443c38e872dfc5d"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/runtime.exit",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/targeted.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/strict-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/wow-final-process.json",
+      "sha256": "192e05fe74407cec8d128cc59d7db90168091d2bb8dc5e754995f0700a10d1a3"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/wow-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/wow-final/result.txt",
+      "sha256": "0c43078e27a253558577f765e37b310e21f5150d882c9ca68bce298f4f60e561"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/redirector-async/result.json",
+      "sha256": "cb77a9e582113b8f32fbae07c60bd9ad576fa560d92f10db3cadc20aae4690bf"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/redirector-oem/result.json",
+      "sha256": "5b90f6cec63811793ed0ef1604c44018f7dab78d24442efeabf610a5b9059014"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/proof2-process.json",
+      "sha256": "1f1dde90f4df2e4e0b0659c816be1ce82265448f6ca3129aa9b6d239a800e6d5"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/proof2.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/msvc-x86-release-worker-deps.txt",
+      "sha256": "d718b873b1024c67563dbc16eab5c18f94cb2c3793bb1e55706001e861a69741"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/msvc-x64-release-worker-reference-x86-deps.txt",
+      "sha256": "8a530dfd523f8342739a2323595e6e9b6fdce1f428fcccbf08530ba7fa32a9a3"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/msvc-x86-release-worker-command.txt",
+      "sha256": "c872d1ceead31532a0d3020935764798cbb6d77bb523c397fb54790e1a7a2ab7"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/msvc-x64-release-worker-reference-x86-command.txt",
+      "sha256": "c872d1ceead31532a0d3020935764798cbb6d77bb523c397fb54790e1a7a2ab7"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/guest_location-symbols.txt",
+      "sha256": "ac794d9a789e2d16efe289ef2115116f252896195615e83daa704d608d94d312"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/guest_environment-symbols.txt",
+      "sha256": "cb1470df78f7a4f163ffcb1281041146eeea4ad25614a83ac7456b6d49e22b18"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/console_services-symbols.txt",
+      "sha256": "c00fc88f80861d3ba340111b56425d352bef9d99d66ef3f58b68bcb26c41f665"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/preserved-bodies.json",
+      "sha256": "96f9853e914cca66a7043657e6b5094ebfe73f927b14147c25a07dfde90d0477"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/final-metric.json",
+      "sha256": "4a2839bd92d4b21902dd4faf9a780c4f18fb20a1f673cae795069d502af81283"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/publication-final.json",
+      "sha256": "5dde741426fc21b321992d51cd51e407a3d451c86ebbcce1f6b78d5c670e36ee"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/normalized-final.json",
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/check-process.json",
+      "sha256": "0dd800303955e5e59e235e68e726787e31f271bd780016fc5eb14ca40e9a7fbe"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdmisc-boundary/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    }
+  ],
+  "delivery": "Cached full build, dual publication, affected tests and governance checks passed. The enclosing P commit records this delivery; remote synchronization is verified after push.",
+  "remaining": "S13 remains active; other ownership cohorts and S14 not complete.",
+  "mapProviders": {
+    "mvdm_guest_location_copy_to_guest": "0001:00003090       _mvdm_guest_location_copy_to_guest 00404090 f   softpc-bindings:guest_location.obj",
+    "mvdm_guest_location_set_real_mode": "0001:000030b0       _mvdm_guest_location_set_real_mode 004040b0 f   softpc-bindings:guest_location.obj",
+    "mvdm_softpc_project_wow_initial_environment": "0001:0017d7c0       _mvdm_softpc_project_wow_initial_environment 0057e7c0 f   common-root:guest_environment.obj",
+    "MvdmGetConsoleTitleA": "0001:00179410       _MvdmGetConsoleTitleA@8    0057a410 f   softpc-win32-bindings:console_services.obj",
+    "MvdmSetConsoleTitleA": "0001:00179430       _MvdmSetConsoleTitleA@4    0057a430 f   softpc-win32-bindings:console_services.obj"
+  }
+}

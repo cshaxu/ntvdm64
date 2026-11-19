@@ -5,32 +5,6 @@
 
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/system_root.h"
-#include "common/guest_environment.h"
-#include <stdlib.h>
-
-/* WOW's kernel obtains SYSTEMROOT from the initial guest PDB, before the
- * first submitted Win16 record. Keep the original saved/native environment
- * untouched: only replace the finished guest MULTI_SZ before its copy. */
-int mvdm_softpc_project_wow_initial_environment(char **environment,unsigned long *bytes)
-{
-    char root[MAX_PATH],short_root[MAX_PATH],*projected=NULL,*copy;
-    DWORD error,length,projected_bytes=0;
-    if(!environment || !*environment || !bytes){SetLastError(ERROR_INVALID_PARAMETER);return 0;}
-    error=compat_system_root_a(root,sizeof(root));
-    if(error){SetLastError(error);return 0;}
-    length=GetShortPathNameA(root,short_root,sizeof(short_root));
-    if(!length)return 0;
-    if(length>=sizeof(short_root)){SetLastError(ERROR_FILENAME_EXCED_RANGE);return 0;}
-    error=common_guest_environment_root(*environment,*bytes,short_root,&projected,&projected_bytes);
-    if(error){SetLastError(error);return 0;}
-    copy=malloc(projected_bytes);
-    if(!copy){HeapFree(GetProcessHeap(),0,projected);SetLastError(ERROR_NOT_ENOUGH_MEMORY);return 0;}
-    memcpy(copy,projected,projected_bytes);
-    HeapFree(GetProcessHeap(),0,projected);
-    free(*environment);
-    *environment=copy;*bytes=projected_bytes;
-    return 1;
-}
 
 static int mvdm_softpc_media_find_file(const char *root, const char *name,
     char *path_out, uint32_t path_out_bytes)

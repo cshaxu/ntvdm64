@@ -32,6 +32,7 @@ static int write_memory(void *context, uint32_t address, uint8_t const *bytes,
 
 int main(void)
 {
+    if (!mvdm_guest_location_initialize()) return 255;
     fixture_memory memory;
     session instance;
     mvdm_guest_location location;

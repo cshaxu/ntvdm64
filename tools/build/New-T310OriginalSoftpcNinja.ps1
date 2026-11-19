@@ -1025,7 +1025,16 @@ $commandObjects = foreach ($name in $commandNames) {
     $object = 'obj/command/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
     if ($name -in @('cmdmisc.c','cmdpif.c')) {
-        $graph.Add('  cflags = ' + $baseFlags + ' /FI "' +
+        $commandFlags = $baseFlags
+        if ($name -eq 'cmdmisc.c') {
+            foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
+                'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/softpc/include/generated/x86/prod',
+                'src/vdmredir-dll/include', 'src/wow32-dll/include')) {
+                $commandFlags = $commandFlags.Replace(' /I "' +
+                    (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
+            }
+        }
+        $graph.Add('  cflags = ' + $commandFlags + ' /FI "' +
             (NinjaPath (Join-Path $root 'src/compat/include/console_title.h')) + '"')
     }
     $object
@@ -1224,6 +1233,9 @@ $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_shadow_registry.obj'
 $graph.Add('build obj/compat/pif_path.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/pif_path.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/pif_path.obj'
+$graph.Add('build obj/compat/guest_location.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_location.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/guest_location.obj'
 $graph.Add('build obj/compat/mvdm_firmware.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_firmware.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_firmware.obj'
@@ -1547,11 +1559,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/application_search.obj: cc ' + (NinjaPath (Join-Path $root 'test/common/application_search_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build application-search-test.exe: broker_test_link obj/tests/application_search.obj obj/common/application_search.obj')
-    $graph.Add('build obj/common/guest_environment.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/guest_environment.c')))
+    $graph.Add('build obj/common/guest_environment.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_environment.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
+    $graph.Add('build obj/tests/guest_environment.obj: cc ' + (NinjaPath (Join-Path $root 'test/compat/guest_environment_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/tests/guest_environment.obj: cc ' + (NinjaPath (Join-Path $root 'test/common/guest_environment_test.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build guest-environment-test.exe: broker_test_link obj/tests/guest_environment.obj obj/common/guest_environment.obj')
+    $graph.Add('build guest-environment-test.exe: broker_test_link obj/tests/guest_environment.obj obj/common/guest_environment.obj obj/common/system_root.obj')
     $graph.Add('build obj/worker-base/connection.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/connection.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/shutdown_close.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/shutdown_close.c')))
@@ -1608,7 +1620,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj lib-process-launch.lib')
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/adapter-softpc/mvdm_guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
+    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/adapter-softpc/mvdm_guest_location.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
     $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/process.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')
@@ -1951,7 +1963,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/worker_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/worker_lifecycle.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/compat/console_keyboard.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
+    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/compat/console_services.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/softpc_text_video.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/softpc/softpc_text_video_test.c')))
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')
     $graph.Add('build obj/tests/console_text_producer.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/win32/console_text_producer_test.c')))
@@ -2109,9 +2121,9 @@ $graph.Add('build wow-worker-bindings.lib: lib ' + ($adapterWowWorkerObjects -jo
 $graph.Add('build rtl-x86-fixture.exe: rtl_fixture_link ' + $rtlX86FixtureObject + ' original-opennt-rtl-x86.lib')
 $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $environmentProjectionFixtureObject + ' original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-win32-bindings.lib')
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
-$graph.Add('build obj/compat/console_keyboard.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_keyboard.c')))
+$graph.Add('build obj/compat/console_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
-$graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' ') + ' obj/compat/console_keyboard.obj')
+$graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' ') + ' obj/compat/console_services.obj')
 # Worker composition contains only reached COMMAND/BOP support.  It has no
 # local BaseVDM producer, retry loop or single-process queue.
 $graph.Add('build obj/compat/command_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/command_services.c')))
@@ -2454,7 +2466,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'common-root.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'checked actual-own-EXE root and relative internal paths; no RPC peer validation, search or environment authority'
-        sources = @('src/compat/system_root.c', 'src/compat/include/system_root.h', 'src/common/guest_environment.c', 'src/common/guest_environment.h' | ForEach-Object {
+        sources = @('src/compat/system_root.c', 'src/compat/include/system_root.h', 'src/compat/guest_environment.c', 'src/compat/include/guest_environment.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

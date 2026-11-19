@@ -229,6 +229,8 @@ capture/release and native launch providers remain product-owned. Borrowed
 strings retain their existing lifetime through finish; the table does not
 introduce another snapshot, request registry or mutable command state.
 
-`ntvdm_console_keyboard_initialize` installs the two existing Console keyboard
-queries at worker entry. Their frontend/native selection and error behavior
-remain in `win32/console_client.c`; B retains the original query symbols.
+`ntvdm_console_services_initialize` installs the existing Console keyboard and
+title operations at worker entry. Their frontend/native selection and error
+behavior remain in `win32/console_client.c`; B retains the original symbols.
+`mvdm_guest_location_initialize` installs the guest-copy operation at the same
+entry. Its provider retains the session-owned lease and existing copy behavior.

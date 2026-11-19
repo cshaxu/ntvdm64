@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "mvdm_softpc_firmware.h"
+#include "compat/include/guest_environment.h"
 #include "compat/include/system_root.h"
 #include <stdio.h>
 #include <stdlib.h>

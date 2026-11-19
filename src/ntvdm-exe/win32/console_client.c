@@ -9,7 +9,7 @@
 #include "common/console/client.h"
 #include "common/protocol/frontend_protocol.h"
 #include "compat/include/console_grid.h"
-#include "compat/include/console_keyboard.h"
+#include "compat/include/console_services.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "worker-base/connection.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
@@ -563,15 +563,7 @@ static BOOL WINAPI keyboard_layout_name(LPSTR name)
     return error==ERROR_SUCCESS;
 }
 
-BOOL ntvdm_console_keyboard_initialize(void)
-{
-    static const compat_console_keyboard services = {
-        input_code_page, keyboard_layout_name
-    };
-    return compat_console_keyboard_install(&services);
-}
-
-DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title,DWORD capacity)
+static DWORD WINAPI get_console_title(LPSTR title,DWORD capacity)
 {
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
@@ -595,7 +587,7 @@ DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title,DWORD capacity)
     SetLastError(error);return error ? 0 : result;
 }
 
-BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title)
+static BOOL WINAPI set_console_title(LPCSTR title)
 {
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
@@ -624,6 +616,14 @@ BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title)
     }
     LeaveCriticalSection(&client->lock);
     SetLastError(error);return !error && result;
+}
+
+BOOL ntvdm_console_services_initialize(void)
+{
+    static const compat_console_services services = {
+        input_code_page, keyboard_layout_name, get_console_title, set_console_title
+    };
+    return compat_console_services_install(&services);
 }
 
 BOOL WINAPI MvdmGetCursorPos(LPPOINT point)

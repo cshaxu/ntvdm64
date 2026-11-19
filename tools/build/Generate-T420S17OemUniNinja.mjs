@@ -118,7 +118,7 @@ const lines = [
   `  cflags = ${formalFlags}`,
   "build obj/pif-system-root.obj: cc $root/src/compat/system_root.c",
   `  cflags = ${formalFlags}`,
-  "build obj/pif-guest-env.obj: cc $root/src/common/guest_environment.c",
+  "build obj/pif-guest-env.obj: cc $root/src/compat/guest_environment.c",
   `  cflags = ${formalFlags}`,
   "build oemuni-pif-root-fixture.exe: link obj/pif-root.obj obj/pif-session.obj obj/pif-lease.obj obj/pif-firmware.obj obj/pif-system-root.obj obj/pif-guest-env.obj $formal/obj/host/nt_pif.obj obj/process.obj",
   "build obj/pif-parser.obj: cc $root/test/mvdm/oemuni/oemuni_pif_parser_fixture.c",

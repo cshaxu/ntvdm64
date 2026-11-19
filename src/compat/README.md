@@ -299,10 +299,19 @@ native launch policy and imports no outer provider. The installing product
 retains those responsibilities; a missing binding fails rather than silently
 selecting another execution route.
 
-## Console keyboard query boundary
+## Console service boundary
 
-`console_keyboard.c` retains the `GetConsoleKeyboardLayoutNameA` and
-`MvdmGetConsoleCP` symbols and WINAPI signatures. Its immutable operation table
+`console_services.c` retains the `GetConsoleKeyboardLayoutNameA`,
+`MvdmGetConsoleCP`, `MvdmGetConsoleTitleA` and `MvdmSetConsoleTitleA` symbols
+and WINAPI signatures. Its immutable operation table
 is installed by the NTVDM product before original execution. The product
 continues to own frontend selection, session state, channel locking and native
 no-frontend queries; B holds no Console state and imports no outer provider.
+
+`guest_environment.c` owns bounded ANSI environment projection and the existing
+WOW boot-block allocation contract. It uses native APIs and `system_root.c`,
+not worker/session state; tests reside under `test/compat`.
+
+`guest_location.c` exposes numeric real-mode locations and an immutable guest-copy
+operation installed by the product. Mapping leases, session selection and copy
+failure semantics remain in the NTVDM provider; no mapping pointer crosses B.

@@ -44,7 +44,7 @@ rule run
 
 build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/console_input_contract_fixture.c
 build obj/console_compat.obj: cc `$root/src/ntvdm-exe/win32/console_compat.c
-build obj/console_keyboard.obj: cc `$root/src/compat/console_keyboard.c
+build obj/console_keyboard.obj: cc `$root/src/compat/console_services.c
 build obj/console_client.obj: cc `$root/src/ntvdm-exe/win32/console_client.c
 build obj/worker_client.obj: cc `$root/src/common/console/client.c
 build obj/common_pipe_transfer.obj: cc `$root/src/lib-win32/pipe/pipe_transfer.c

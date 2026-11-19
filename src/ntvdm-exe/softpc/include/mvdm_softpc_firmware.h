@@ -10,11 +10,6 @@
 extern "C" {
 #endif
 
-/* Finished ANSI guest boot block only. Success replaces CRT-owned storage;
- * failure preserves input. Never changes the worker's native environment. */
-int mvdm_softpc_project_wow_initial_environment(char **environment,
-    unsigned long *bytes); /* Original Win32 DWORD cchEnv carrier. */
-
 /* Same-shaped media-location binding for original MVDM system files.
  * It returns a caller-owned path only when the selected image exists. */
 int __cdecl mvdm_softpc_system_find_file(const char *name, char *path_out,

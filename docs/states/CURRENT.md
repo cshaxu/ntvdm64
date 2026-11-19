@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has453 open direct dependency IDs.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has447 open direct dependency IDs.
 
 ## Active Packet
 
@@ -29,11 +29,11 @@
 
 S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P5 below supersedes both published copies.
 
-S13 P5: [Console keyboard query boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p5-console-keyboard-boundary.json). cmdkeyb.c remains byte-identical; both query symbols now resolve to B, with explicit F-installed operations retaining frontend/session ownership. Two IDs eliminated:115 eliminated/453 open of618. Cached x86/x64/reference builds,8 A/B graphs,three Console transport cases and actual native EDIT return passed. Package3b266c46-62fd-4735-9c9c-fbae59c3acac is published to both destinations with22 verified hashes. Only NTVDM changes after identity normalization; no Full claim. File mirror diff remains2 points/4 lines,delta0/0;cumulative reduction2 points/10 lines. S13 has cleared19 IDs;remaining ownership groups are not complete. S14 remains unadmitted.
+S13 P7: [cmdmisc complete boundary delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p7-cmdmisc-boundary.json). Pure environment projection and numeric locations belong to B; unchanged session-copy and Console title operations remain F behind explicitly installed B contracts. Original cmdmisc algorithms remain C. Six IDs eliminated:121 eliminated/447 open of618; S13 has cleared25 IDs. Shared DEM header and other files' search roots remain open.
 
-The preceding [P4 COMMAND delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p4-command-boundary.json) closes cmdexec.c outward edges; [P3 thread delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p3-thread-boundary.json) retains per-image lifecycle and actual guest redirector evidence.
+Cached x86/x64 and reference-x86 builds,8 A/B graphs and targeted environment/location/COMMAND/Console/WOW checks passed. Package80eb0fde-c679-4242-aec5-5630d5173fd9 is published to both destinations with22 hashes verified. Only NTVDM differs after package/time normalization. Initial missing-header build and incorrectly configured WOW wrapper failures are retained; their corrected runs passed. WOW proves the application frontier, not normal exit or gameplay. No Full claim.
 
-Next file: [cmdmisc.c ownership review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p6-cmdmisc-ownership-review.json). Its non-error mirror baseline is9 points/52 lines. Three coupled ownership groups and the actual compile search roots must be completed together before a product build; review does not eliminate any ID. P6 is documentation only; P5 remains the published product.
+Current file mirror diff remains9 points/52 lines (+46/-6),delta0/0;cumulative reduction2 points/10 lines. P7 governance and relative-link checks passed; the enclosing P commit records this delivery. S13 remains active;S14 remains unadmitted. The preceding [P6 ownership review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p6-cmdmisc-ownership-review.json) records alternatives and the preserved failure contract.
 
 ## S12 Closure Record
 

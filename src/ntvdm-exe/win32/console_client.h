@@ -16,7 +16,7 @@ HANDLE WINAPI MvdmCreateFileW(LPCWSTR,DWORD,DWORD,LPSECURITY_ATTRIBUTES,DWORD,DW
 DWORD WINAPI MvdmGetFileType(HANDLE);
 BOOL ntvdm_console_set_active(BOOL);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR);
-BOOL ntvdm_console_keyboard_initialize(void);
+BOOL ntvdm_console_services_initialize(void);
 HANDLE ntvdm_console_input_wait_handle(void);
 BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *,HANDLE *);
 BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);

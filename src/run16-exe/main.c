@@ -13,7 +13,7 @@
 #include "image_classification.h"
 #include "common/protocol/console_io.h"
 #include "compat/include/system_root.h"
-#include "common/guest_environment.h"
+#include "compat/include/guest_environment.h"
 #include "common/application_search.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include <shellapi.h>

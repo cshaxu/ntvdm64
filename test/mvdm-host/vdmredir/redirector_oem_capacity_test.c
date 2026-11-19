@@ -56,6 +56,7 @@ int __cdecl mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int comm
 }
 int main(void)
 {
+    if (!mvdm_guest_location_initialize()) return 255;
     session s;
     char encoded[8];
     char large[5000];

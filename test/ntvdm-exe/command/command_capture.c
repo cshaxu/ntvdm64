@@ -52,6 +52,7 @@ BOOL opennt_command_create_process_a(LPCSTR app, LPSTR command,
 
 int main(void)
 {
+    if (!mvdm_guest_location_initialize()) return 255;
     mvdm_command_capture_input input={0};
     mvdm_command_capture *a=NULL,*b=NULL,*failed=NULL;
     mvdm_command_capture_view av,bv;

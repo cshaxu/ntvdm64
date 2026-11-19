@@ -18,16 +18,6 @@ static int mvdm_guest_location_linear_address(
     return 1;
 }
 
-int mvdm_guest_location_set_real_mode(mvdm_guest_location *location,
-    uint16_t segment, uint16_t offset)
-{
-    if (location == NULL) return 0;
-    location->segment = segment;
-    location->offset = offset;
-    location->valid = 1u;
-    return 1;
-}
-
 int mvdm_guest_location_from_far_value(mvdm_guest_location *location,
     uint32_t far_value)
 {
@@ -107,7 +97,7 @@ int mvdm_guest_location_copy_c_string(mvdm_guest_location const *location,
     return 0;
 }
 
-int mvdm_guest_location_copy_to_guest(mvdm_guest_location const *location,
+static int copy_to_guest(mvdm_guest_location const *location,
     uint8_t const *bytes, uint32_t byte_count)
 {
     mvdm_guest_location_lease lease;
@@ -117,6 +107,12 @@ int mvdm_guest_location_copy_to_guest(mvdm_guest_location const *location,
             GUEST_MEMORY_ACCESS_WRITE, &lease)) return 0;
     memcpy(lease.bytes, bytes, byte_count);
     return mvdm_guest_location_release(&lease, 1);
+}
+
+int mvdm_guest_location_initialize(void)
+{
+    static const compat_guest_location_services services = {copy_to_guest};
+    return compat_guest_location_install(&services);
 }
 
 int mvdm_guest_location_acquire(mvdm_guest_location const *location,
