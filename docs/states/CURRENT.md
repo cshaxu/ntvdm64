@@ -180,4 +180,6 @@ P58: [Private-word ownership](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 
 P59: [Native profile delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p59-profile-native.json).
 
-P60: [Task initialization ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p60-task-init-ownership.json). Reviewed106/116:17 clear,72 lifecycle,17 ABI;10 remain. Open500/618 after missing direct link C0618 added. Mirror0/0; cumulative reduction2 points/10 lines. Product unchanged; P59 publication hashes verified. S12 active.
+P60: [Task initialization ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p60-task-init-ownership.json).
+
+P61: [Message-table ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p61-message-table-ownership.json). Reviewed107/116;9 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.

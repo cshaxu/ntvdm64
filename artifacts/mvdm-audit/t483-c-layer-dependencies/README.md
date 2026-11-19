@@ -237,3 +237,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P59 Native profile boundary](s12-p59-profile-native.json): file105; native read-only opener moves to B, original query policy unchanged. Review105/116,499/617 open.
 
 [P60 Task initialization](s12-p60-task-init-ownership.json): file106; original C ordering retained, F lifecycle callbacks classified, missing direct TLS link C0618 added. Review106/116;500/618 open. No product change.
+
+[P61 Message-table ownership](s12-p61-message-table-ownership.json): file107; C algorithms, F storage/publication and original global owner traced. Review107/116;500/618 open. No product change.

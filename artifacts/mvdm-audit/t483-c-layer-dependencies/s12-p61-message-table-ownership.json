@@ -1,0 +1,188 @@
+{
+  "baseline": "eb8d50ff90f898f6bec6fb7edcc00416eb8eec2d",
+  "status": "P61 original message-table ownership audit; no product changes",
+  "files": [
+    {
+      "number": 107,
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "sha256": "aae6f7a6cfdf89be9ca1f41e027d4ab536978b9e9f3eb7897ec6693d11bcd283",
+      "compilerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\default-messages.obj",
+      "objectSha256": "1b9cb05fbf6b48cf56f722cea0f3e98f286653b1bcdd5557e9ce6b02541a817a",
+      "coffSymbols": [
+        {
+          "name": "_gpfnDebugAttachRoutine",
+          "value": 4,
+          "section": 0
+        },
+        {
+          "name": "__imp__HeapAlloc@12",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "__imp__GetProcessHeap@0",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "_memset",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "_wow_default_message_state",
+          "value": 0,
+          "section": 0
+        }
+      ],
+      "providerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_default_message_bindings.obj",
+      "providerObjectSha256": "e60dd289cbc43adbb9d8bd93ebbe9ddb4c125b2bba2d4c3eed6a2c935deac797",
+      "providerSymbols": [
+        {
+          "name": "_wow_default_message_state",
+          "value": 124,
+          "section": 0
+        },
+        {
+          "name": "__imp__GetLastError@0",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "__imp__SetLastError@4",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "__imp__HeapFree@12",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "__imp__GetProcessHeap@0",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "__imp__InitOnceExecuteOnce@16",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "__imp__RegisterWindowMessageW@4",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "_InitMessageTables@0",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "__except_handler4",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "_memset",
+          "value": 0,
+          "section": 0
+        },
+        {
+          "name": "___security_cookie",
+          "value": 0,
+          "section": 0
+        }
+      ],
+      "dependencies": [
+        "obj/opennt-user/default-messages.obj: #deps 15, deps mtime 8167519800023519 (VALID)",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/wow_control_message_abi.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+        "    ../../../../src/wow32-dll/include/wow_default_message_bindings.h",
+        ""
+      ]
+    }
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "paths": [
+      "windows/core/ntuser/kernel/server.c:879-917,1022-1057,1833,1883,1905",
+      "windows/core/ntuser/kernel/globals.c:50",
+      "windows/core/ntuser/inc/user.h:999-1018"
+    ],
+    "evidence": "Read fixed original bitmap initialization and original global definition; current full selected server.c and F header, initializer, readers, and fault-injection fixture."
+  },
+  "mechanisms": {
+    "C": "Original constant message lists and InitWindowMsgTable/InitMessageTables remain C; they determine bitmap size, membership and FNID selection. Original gSharedInfo belongs to kernel/globals.c, while uiShellMsg belongs to SERVERINFO, not SHAREDINFO. Preserve this distinction in S14.",
+    "F": "wow_default_message_state is F tentative global storage; actual provider COFF is recorded. Link map labels it <common>, which denotes a COFF common symbol and does not make it D common. Header C0087 depends on original C WNDMSG and FNID types through opennt_user_multipass. C0615 is a real data dependency.",
+    "lifetime": "F InitOnce callback calls C InitMessageTables, then RegisterWindowMessageW(SHELLHOOK). Failure frees all allocated bitmaps and zeroes shared state before retry; STATUS_NO_MEMORY becomes ERROR_NOT_ENOUGH_MEMORY. Success publishes process-lifetime immutable bitmaps; readiness preserves prior last-error on success.",
+    "consumers": "F wow_private_user_get_def_window_proc_bits gates readiness, checks buffer bounds and calls retained original merge body. EDIT entry and default-context capture gate readiness before C consumers. Existing window/task state must not be moved into the bitmap provider.",
+    "disposition": "No independent B leaf remains here: allocation and message registration are already direct SDK calls. Moving initializer wholesale to B would introduce B-to-C calls; moving all mirror algorithms to F discards original ownership. S14 should assess original C storage/declarations with F once/publication and rollback retained. Measure mirror points/lines before implementation and obtain approval for any increase. Do not add a second table or duplicate WNDMSG/FNID in B.",
+    "scope": "C0087 and C0615 remain open, not approved exceptions and not eliminated. This source-only review does not certify runtime concurrency or arbitrary readers."
+  },
+  "verificationPlan": {
+    "existingFixture": "test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c via tools/build/New-T447S3CallBoundaryNinja.ps1",
+    "coverageRead": "12 allocation failure points, shell registration failure, all-zero rollback, successful retry, selected positive/negative message membership, repeated readiness preserving pointers and last-error. Not a guest or concurrency test; not executed in this audit.",
+    "afterChange": "Compile final package, run existing fault fixture and applicable control/Win16 frontier checks; add concurrent initialization evidence if ownership/publication changes."
+  },
+  "progress": {
+    "reviewedFiles": 107,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 72,
+    "deferredSourceAbiCompositionFiles": 18,
+    "unreviewedFiles": 9,
+    "totalFiles": 116,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no product source changed; VALID product include record and COFF providers inspected.",
+    "runtime": "Not run; fixture source reviewed only.",
+    "documentation": "Governance passed exit0 (build/t483-s12-message-table-ownership/docs.log, docs.exit). Its temporary CURRENT size warning was addressed by compacting the progress paragraph to 16348 bytes; source and packet unchanged. git diff --check passed.",
+    "publication": {
+      "packageId": "a287f10d-c93a-4720-833c-5eee7bfd6e99",
+      "verifiedImages": [
+        "assets\\release\\VCDEX.DLL",
+        "O:\\WINNT\\system32\\VCDEX.DLL",
+        "assets\\release\\run16.exe",
+        "O:\\WINNT\\system32\\run16.exe",
+        "assets\\release\\ntsrv.exe",
+        "O:\\WINNT\\system32\\ntsrv.exe",
+        "assets\\release\\ntcon.exe",
+        "O:\\WINNT\\system32\\ntcon.exe",
+        "assets\\release\\ntvdm.exe",
+        "O:\\WINNT\\system32\\ntvdm.exe",
+        "assets\\release\\ntvwm.exe",
+        "O:\\WINNT\\system32\\ntvwm.exe",
+        "assets\\release\\ntmon.exe",
+        "O:\\WINNT\\system32\\ntmon.exe",
+        "assets\\release\\WOW32.DLL",
+        "O:\\WINNT\\system32\\WOW32.DLL",
+        "assets\\release\\VDMREDIR.DLL",
+        "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "assets\\release\\nthook32.dll",
+        "O:\\WINNT\\system32\\nthook32.dll",
+        "assets\\release\\nthook64.dll",
+        "O:\\WINNT\\system32\\nthook64.dll"
+      ]
+    }
+  }
+}

@@ -694,6 +694,8 @@
 
 - 直接包含 · C0087 · wow32-dll · src/wow32-dll/include/wow_default_message_bindings.h
 
+107 P61: C0087/C0615 remain open for S14 original message-table storage/declarations; F once/publication and rollback retained. Mirror0/0; reviewed107/116, open500/618. See s12-p61-message-table-ownership.json.
+
 ## 108 — src/non-mvdm/windows/core/ntuser/kernel/taskman.c
 
 - 直接包含 · C0117 · wow32-dll · src/wow32-dll/include/wow_task_order_bindings.h
