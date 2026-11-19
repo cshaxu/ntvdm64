@@ -199,3 +199,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P40 dialog navigation](s12-p40-dialog-navigation.json): files077-079; keyboard/mnemonic lifecycle and original tree-layout composition distinguished.
 
 [P41 drawing ownership](s12-p41-drawing-ownership.json): file080 classified; file081 native export/context investigation remains open. Review80/116,510/617 open.
+
+[P42 native controls](s12-p42-native-controls.json): file081, unified native export carrier in B; five direct symbols cleared. Review81/116,505/617 open.

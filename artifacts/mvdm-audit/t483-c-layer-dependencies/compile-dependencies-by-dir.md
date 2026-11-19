@@ -533,6 +533,8 @@
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h
 
+081 P42: Original text body stays C. Five native linked providers moved B as one resolver group; TLS context and private declaration composition remain S13/S14. Mirror delta0 points/0 lines; see s12-p42-native-controls.json.
+
 ## 082 — src/non-mvdm/windows/core/ntuser/client/edecrare.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

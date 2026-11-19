@@ -1,0 +1,83 @@
+{
+  "baseline": "073323b46d4b7e83d365442ade0f27e2eaf8840c",
+  "status": "P42 native controls migrated, built, tested and published",
+  "file": {
+    "number": 81,
+    "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+    "sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+    "conclusion": "Original TabTextOut and wrappers remain C unchanged. Native export carrier is B. TLS gpsi mapping remains an S13 context boundary; private precomp/original declaration composition remains S14. No whole-file migration."
+  },
+  "migration": {
+    "from": "src/wow32-dll/source/wow_edit_native_bindings.c",
+    "to": "src/compat/wow_native_controls.c",
+    "nativeDeclaration": "src/compat/include/wow_native_controls.h",
+    "ownership": "One unchanged INIT_ONCE resolver, twelve native exports. Opaque CHWIDTHINFO/POLYPATBLT pointers pass through B; original layouts and field assertions remain with caller. B reads neither original structure. Native counted-text ABI lives B; original LARGE_STRING conversion remains F.",
+    "correction": "P41 described eleven exports; recounting the twelve fields and assignments proves twelve. No new export added.",
+    "textFailureOrdering": "F keeps readiness before accessing original LARGE_STRING fields. B dispatch also checks the same already-ready INIT_ONCE. No second loader or state machine.",
+    "bodyIdentity": {
+      "unchangedBodies": {
+        "wow_edit_native_ready": true,
+        "wow_edit_native_GdiGetCharDimensions": true,
+        "wow_edit_native_GetCharWidthInfo": true,
+        "wow_edit_native_PolyPatBlt": true,
+        "wow_edit_native_NtUserSetSystemTimer": true,
+        "wow_edit_native_NtUserKillSystemTimer": true,
+        "wow_edit_native_NtUserGetCPD": true,
+        "wow_edit_native_NtUserSetWindowState": true,
+        "wow_edit_native_NtUserClearWindowState": true,
+        "wow_edit_native_NtUserAlterWindowStyle": true,
+        "wow_edit_native_NtUserFillWindow": true,
+        "wow_edit_native_NtUserGetControlColor": true
+      },
+      "resolverUnchanged": true,
+      "textConversion": "Existing original-to-native capture remains F; native descriptor dispatch moves B."
+    },
+    "ids": [
+      "C0393",
+      "C0394",
+      "C0395",
+      "C0396",
+      "C0397"
+    ]
+  },
+  "progress": {
+    "reviewedFiles": 81,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 53,
+    "deferredSourceAbiCompositionFiles": 12,
+    "unreviewedFiles": 35,
+    "totalFiles": 116,
+    "openIds": 505,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "x86.exit=0, x64.exit=0, finish-x86.exit=0, worker-images.exit=0; cached product graphs, explicit four x86 worker images",
+    "compiler": "obj/compat/wow_native_controls.obj: VALID, only project dependency compat/include/wow_native_controls.h; SDK-only flags.",
+    "link": "All five stable symbol IDs resolve to wow_native_controls.obj in final wow32.dll.map.",
+    "targeted": "targeted.exit=0: native-controls failures=0; WOW_CONTROL_STRING_OK; text_measure_failure_failures=0; mnemonic_drawing_failures=0; WOW_DIALOG_NAVIGATION_OK",
+    "identity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityScope": "Only package GUID and COFF/debug-directory timestamps masked. WOW32 changed; no runtime waiver.",
+    "runtime": "runtime.exit=0: eight A/B graphs; 150 WOW objects and nine negative controls; retained Winmine/Sol/Write frontiers and controlled cleanup. Not full interaction or normal user exit.",
+    "publication": "publish.exit=0: package 5034f37d-cd76-4ee8-9313-b4ec42272707, eleven images at assets/release and O:/winnt/system32; all 22 hashes match tested final candidate.",
+    "documentation": "Verify-DocumentationGovernance.ps1 before commit; build/t483-s12-native-controls/docs.log and docs.exit"
+  },
+  "limits": "Original guest and all mirror bytes unchanged. Remaining TLS/state/header ownership is not eliminated or permanently approved."
+}

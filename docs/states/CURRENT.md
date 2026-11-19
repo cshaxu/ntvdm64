@@ -90,7 +90,9 @@ P39: [dialog end/manager ownership and 22-case verification](../../artifacts/mvd
 
 P40: [dialog navigation classification and four targeted fixtures](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p40-dialog-navigation.json).
 
-P41: [drawing ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p41-drawing-ownership.json). Review80/116:16 clears,52 lifecycle,12 source/ABI,36 unreviewed;510/617 open. File081 remains under investigation for grouped native-export ownership. Source unchanged; P38 release retained. Mirror delta0/0, cumulative reduction2 points/10 lines. Only S12 active.
+P41: [drawing ownership and native-export investigation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p41-drawing-ownership.json).
+
+P42: [native controls](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p42-native-controls.json). Review81/116:16 clears,53 lifecycle,12 source/ABI,35 unreviewed;505/617 open. Five native symbols moved B with one resolver. Both cached builds, five targeted fixtures and isolated Win16 frontiers passed. Eleven images published and hash-verified at both destinations. Mirror delta0/0, cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 
