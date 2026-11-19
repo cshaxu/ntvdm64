@@ -718,6 +718,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+111 P65: native dialog slots already B; C0064/C0388/C0595 retain shared declaration, original extent and allocation ownership dependencies. Mirror0/0; reviewed111/116, open500/618. See s12-p65-rtl-private-reader.json.
+
 ## 112 — src/non-mvdm/windows/core/ntuser/rtl/help.c
 
 - 直接包含 · C0122 · wow32-dll · src/wow32-dll/include/wow_user_client_view_layout.h

@@ -245,3 +245,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P63 RTL drawing](s12-p63-rtl-drawing-ownership.json): file109; native providers already B, captured color-depth context remains F. Review109/116;500/618 open. No product changes.
 
 [P64 RTL text](s12-p64-rtl-text-ownership.json): file110; compiled context dependency distinguished from live prefix/underline/font helpers. Review110/116;500/618 open. No product changes.
+
+[P65 RTL private reader](s12-p65-rtl-private-reader.json): file111; original index policy retained, B slot provider distinguished from F allocation and extent dependencies. Review111/116;500/618 open. No product changes.
