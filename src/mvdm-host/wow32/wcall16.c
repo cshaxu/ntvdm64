@@ -14,7 +14,6 @@
 
 
 #include "precomp.h"
-#include "wow_callback_frame_lease.h"
 #line 17
 #pragma hdrstop
 
@@ -549,9 +548,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     register PCBVDMFRAME pCBFrame;
 #line 651
     WORD wAX;
-    VPVOID callerStack, callerCallbackStack;
-    DWORD callerInit;
-    wow_callback_control control = {0};
 #if FASTBOPPING
 #line 653
 #error Unsupported excluded original configuration
@@ -572,11 +568,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     ptd = CURRENTPTD();
 
-    callerStack = ptd->vpStack;
-    callerCallbackStack = ptd->vpCBStack;
-    callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;
-    wow_callback_control_capture(&control);
-    __try {
 #line 665
     GETFRAMEPTR(ptd->vpStack, pFrame);
 
@@ -710,14 +701,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     FREEVDMPTR(pCBFrame);
 
-    } __finally {
-        if (AbnormalTermination() && wow_callback_control_restore(&control, callerStack)) {
-            ptd->vpStack = callerStack;
-            ptd->vpCBStack = callerCallbackStack;
-            if (!(ptd->dwFlags & TDF_IGNOREINPUT))
-                ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
-        }
-    }
 #line 818
     return TRUE;
 }

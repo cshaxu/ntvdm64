@@ -28,6 +28,15 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P63 [callback ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p63-callback-owner.json)
+removes C abort cleanup into the existing F CallBack16 wrapper, preserving
+nested restoration/scope retirement. Non-error mirror7/26 ->3/9: -4 points/-17
+lines. Cached full builds, dual11 publication/22 hashes, frame4/abort11,
+real CCPU, WOW page domain and actual Win16 dialog pass. Package
+73a9df4f-26a9-4e44-b8d1-744ac2a54da3; only WOW32 materially changes from P62.
+Direct ledger155 eliminated/413 open. C0456 remains open; S14 is not closed.
+The enclosing commit is the delivery receipt; commit/push verification follows.
+
 S14 P62 [lease ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p62-lease-owner.json)
 places machine coordination in C, independent resources in B and session
 admission in F. B no longer stores CPU read/write callbacks; session.c no

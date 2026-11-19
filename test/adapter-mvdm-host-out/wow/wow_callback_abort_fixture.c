@@ -9,6 +9,43 @@
 #undef host_simulate
 #undef GetPModeVDMPointerAssert
 
+#include "common/wow/user_runtime.h"
+#include "wow_user_native_call.h"
+
+/* The complete F translation unit also owns native extensions. They are
+ * outside this frame/abort fixture; reaching one is a test failure. */
+BOOL WINAPI wow_user_native_call_begin_inline(wow_user_native_call *call)
+{ (void)call; ExitProcess(95); return FALSE; }
+BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
+{ (void)call; ExitProcess(95); return FALSE; }
+DWORD FASTCALL wow_original_WK32ICallProc32(PVDMFRAME frame)
+{ (void)frame; ExitProcess(95); return 0; }
+ULONG FASTCALL wow_original_WMM32CallProc32(PVDMFRAME frame)
+{ (void)frame; ExitProcess(95); return 0; }
+VOID WINAPI wow_original_WOWYield16(VOID) { ExitProcess(95); }
+VOID WINAPI wow_original_WOWDirectedYield16(WORD task_id)
+{ (void)task_id; ExitProcess(95); }
+
+static unsigned callback_scopes;
+static wow_user_runtime_thread callback_binding;
+wow_user_runtime_thread *WINAPI wow_user_runtime_current(void) { return &callback_binding; }
+BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *scope)
+{
+    ZeroMemory(scope,sizeof(*scope));
+    scope->binding=&callback_binding;
+    ++callback_scopes;
+    return TRUE;
+}
+BOOL WINAPI wow_task_resource_cleanup_enter(wow_task_callback_scope *scope)
+{ return wow_task_callback_enter(scope); }
+BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *scope)
+{
+    if(scope->binding!=&callback_binding || callback_scopes!=1)++errors;
+    --callback_scopes;
+    SetLastError(0x7003);
+    return TRUE;
+}
+
 static WORD cs_value=0x2467;
 static int32_t pe_value=1,vm_value,cpl_value=3;
 static BOOL active=TRUE;
@@ -114,6 +151,7 @@ static int abort_case(const char *name)
     if(!strcmp(name,"selector"))variant=4;
     __try {if(!CallBack16(RET_ENUMWINDOWPROC,&args,0x15070020,&output))++errors;}
     __except(abort_filter(GetExceptionCode())){exception=GetExceptionCode();}
+    if(callback_scopes)goto wrong;
     if(variant==3){
         void *inaccessible=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_NOACCESS);
         if(!inaccessible)goto wrong;

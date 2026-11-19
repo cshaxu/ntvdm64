@@ -1326,9 +1326,13 @@ cbArgs store; invalid-size output remains untouched as before.
 A whole-unit rename is rejected because
 it also redirects20 same-unit memory/resource/public callback calls around the
 entry. Late host_simulate gating is rejected because frame writes precede it.
-Original-body fixtures explicitly call the retained-body name; separate scope
-and real extension/callback/yield/resource/lifetime acceptance must prove the
-composed production entry. Registration precedes the mirror edit.
+T483 S14 P63 moves abnormal control/TD restoration out of this original
+body into the existing F CallBack16 wrapper. The wrapper keeps nested finally
+ordering: restore a live continuation first, then leave its callback scope even
+when restoration fails. Normal frame/CPU/return code remains original.
+The frame/abort fixture now composes the actual F entry and C body; its immutable
+historical counterexample still calls the retained-body name directly. Real
+CCPU and guest acceptance remain separate from controlled scope assertions.
 
 Retrospective MVDM-HOST-DIV-304 register completion: wcall16.c's existing
 before/simulate/after callback-frame observations call the already owned

@@ -12,9 +12,9 @@ $null=New-Item -ItemType Directory $root
 $graph=Get-Content "$ProviderBuildRoot/build.ninja" -Raw
 $flags=[regex]::Match($graph,'(?m)^cflags = (.*)\r?$').Groups[1].Value.Trim()
 $release=[regex]::Match($graph,'(?m)^release_cflags = (.*)\r?$').Groups[1].Value.Trim()
-# This fixture deliberately tests the retained frame body, not the separate
-# production execution-admission facade. Keep that declared scope explicit.
-$flags += ' /DCallBack16=wow_original_CallBack16'
+# Exercise the real F wrapper and C frame body together. The immutable old
+# counterexample remains a direct original-body test.
+if($ReferenceRevision){$flags += ' /DCallBack16=wow_original_CallBack16'}
 if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/MT') -or !$release){throw 'Require selected CCPU40 provider graph'}
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,[int]$expected=0){
@@ -29,6 +29,7 @@ try {
     # Compile the complete selected original file, never extract/rewrite the
     # function. /Gy permits discarding unrelated functions at this fixture link.
     $sources=@('src/mvdm-host/wow32/wcall16.c','src/wow32-dll/source/wow_callback_frame_lease.c','test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c')
+    if(!$ReferenceRevision){$sources+='src/wow32-dll/source/wow_user_native_extension.c'}
     $objects=@()
     foreach($source in $sources){
         $name=[IO.Path]::GetFileNameWithoutExtension($source)

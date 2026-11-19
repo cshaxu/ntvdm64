@@ -1,0 +1,95 @@
+{
+  "delivery": "T483 S14 P63",
+  "status": "Final build/publication/targeted verification complete; enclosing commit is delivery receipt",
+  "baseline": "5905066bd1658991c1251c010f2e3c224364c3a4",
+  "question": "Remove C-owned product abort cleanup while preserving control/TD restoration and F scope retirement.",
+  "source": {
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+    "sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+    "current": "7f944cf3cc2907f2e510fcfc571f00d7b209cc40d59ac8835fb117c80d1f0f0e"
+  },
+  "mirror": {
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "before": {
+      "blocks": 7,
+      "added": 21,
+      "deleted": 5
+    },
+    "after": {
+      "blocks": 3,
+      "added": 4,
+      "deleted": 5
+    },
+    "delta_points": -4,
+    "delta_lines": -17,
+    "error_and_line_directives_byte_identical": true
+  },
+  "ids": [
+    "C0075",
+    "C0328",
+    "C0329"
+  ],
+  "restored_review_ids": [
+    "T483-R1325",
+    "T483-R1330",
+    "T483-R1331",
+    "T483-R1335"
+  ],
+  "ownership": {
+    "C": "Original callback frame construction, guest call and normal return algorithm.",
+    "F": "Existing CallBack16 wrapper captures after scope entry, restores live control/TD on unwind, always leaves scope even when restoration fails.",
+    "B": "No change or new callback exception."
+  },
+  "ordering_proof": "Only production caller of wow_original_CallBack16 is the F wrapper. CURRENTPTD uses the current-thread TEB; selected release WOW32ASSERT is empty. No guest/native call intervenes between capture and original frame body. Nested finally preserves restoration before scope leave, including restoration failure.",
+  "verification": {
+    "scope_extension": "Extension, original MM body and public rejection passed in boundaries-r3. Group stopped at frame fixture link before unrelated native edges were declared.",
+    "frame": "frame-r4: four normal original-frame cases and eleven abort cases passed; scope-count assertion includes selector restore failure.",
+    "fixture_limits": "Scope owners and CPU access are controlled in frame-r4; not real guest/scheduler proof.",
+    "build": "PASS cached x86/x64/reference builds; build.exit=0",
+    "publication": "PASS dual eleven images and 22 hashes; publication-final.json",
+    "real_cpu": "PASS current descriptor/mode/continuation/shared CR3/LastError; three thread abort runs and real selector errors 13/11",
+    "guest": "PASS published package: WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "page_domain": "PASS current production WOW/CCPU page-domain lifecycle",
+    "normalized_images": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "compiled_edges": "Rebuilt wcall16.obj has no wow_callback_control_capture/restore references; wcall16.c no longer includes the F header",
+    "runner_attempts": "Restricted detached supervisors were reaped; explicit supervising handles used thereafter. First guest launch rejected existing production NTSRV before testing; exact-path authorized cleanup and same-runner retry passed.",
+    "governance": "PASS documentation, relative links, A/B compiled boundaries and git diff --check; existing documented status-size warning only."
+  },
+  "remaining": "C0456 Sim32FlushVDMPointer still open; no whole chain closure.",
+  "package": "73a9df4f-26a9-4e44-b8d1-744ac2a54da3",
+  "ledger": {
+    "before": {
+      "eliminated": 152,
+      "open": 416
+    },
+    "after": {
+      "eliminated": 155,
+      "open": 413
+    },
+    "other": {
+      "supporting": 44,
+      "eliminated_transitive": 5,
+      "excluded": 1
+    },
+    "total": 618
+  },
+  "test_roots": [
+    "build/t483-s14-callback-owner/boundaries-r3",
+    "build/t483-s14-callback-owner/frame-r4",
+    "build/t483-s14-callback-owner/real-ccpu",
+    "build/t483-s14-callback-owner/page-domain",
+    "build/t483-s14-callback-owner/dialog-guest-r2"
+  ]
+}

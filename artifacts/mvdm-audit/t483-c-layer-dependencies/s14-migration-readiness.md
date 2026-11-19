@@ -1,14 +1,14 @@
 # S14 migration readiness and counts
 
-Initial P60 baseline `85700b2a5`; P61/P62 updates below supersede its
+Initial P60 baseline `85700b2a5`; P61/P62/P63 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 416 currently open stable IDs to the existing ten chains.
+assigns all 413 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
 | Chain | Symbols | Headers | Include roots | Image imports | Total |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| 1. guest-access-leases | 3 | 1 | 0 | 0 | 4 |
+| 1. guest-access-leases | 1 | 0 | 0 | 0 | 1 |
 | 2. wow-machine-context | 1 | 0 | 0 | 0 | 1 |
 | 3. user-projection-generations | 10 | 3 | 0 | 0 | 13 |
 | 4. console-mechanics | 50 | 7 | 0 | 0 | 57 |
@@ -18,7 +18,7 @@ assigns all 416 currently open stable IDs to the existing ten chains.
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
 | 9. native-user | 152 | 26 | 0 | 0 | 178 |
 | 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 345 | 59 | 11 | 1 | 416 |
+| Total | 343 | 58 | 11 | 1 | 413 |
 
 79 distinct provider files have complete body-read records. Header classification
 is 56/59, with three generated contracts still awaiting their final owner/ABI
@@ -31,7 +31,7 @@ design: **10/10**. This does not discard previously delivered subchains. It make
 the missing candidate-level decisions explicit rather than treating source reading
 or broad B/C/F classification as a completed migration design.
 
-Ledger status remains 152 eliminated, 416 open, 44 supporting, five
+Ledger status is 155 eliminated, 413 open, 44 supporting, five
 eliminated-transitive and one excluded diagnostic, total 618. This delivery
 implements/delivers zero new dependency removals and changes zero mirror points
 or lines. Production remains the P26 package.
@@ -107,3 +107,8 @@ The four chain-1 WOW consumer IDs remain open; this internal coordinator
 relocation does not alone resolve their implementation ownership. The416-ID
 partition and zero fully closed chains are unchanged. Continue with those
 consumers and the coupled WOW machine-context chain; do not recreate B callbacks.
+
+P63 removes C0075/C0328/C0329 by moving abort cleanup into the existing F
+CallBack16 wrapper. [Delivery evidence](s14-p63-callback-owner.json) records
+7/26 ->3/9 non-error mirror differences and final package/targeted tests.
+Chain1 retains C0456; this does not close the whole chain.

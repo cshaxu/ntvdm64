@@ -3,8 +3,9 @@
  * existing original-body/CCPU groups must separately prove their composition. */
 #include "precomp.h"
 #include "wow_user_native_extension.h"
-#include "wow_user_runtime.h"
+#include "common/wow/user_runtime.h"
 #include "wow_user_native_call.h"
+#include "wow_callback_frame_lease.h"
 #include <stdio.h>
 
 static wow_user_runtime_thread binding;
@@ -18,6 +19,20 @@ static PPARM16 expected_parameters;
 static VPPROC expected_procedure;
 static PVPVOID expected_output;
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr,"FAIL line=%u %s\n",__LINE__,#x); } } while (0)
+
+static OPENNT_SUPPORT_TEB control_teb;
+static TD control_task;
+POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID)
+{
+    control_teb.WOW32Reserved=&control_task;
+    return &control_teb;
+}
+/* Scope-only fixture: actual control restoration is tested with the complete
+ * original frame and real control implementation in original-frame. */
+void __cdecl wow_callback_control_capture(wow_callback_control *control)
+{ CHECK(ready_depth); ZeroMemory(control,sizeof(*control)); }
+int __cdecl wow_callback_control_restore(const wow_callback_control *control,uint32_t stack)
+{ (void)control; (void)stack; CHECK(ready_depth); return 1; }
 
 wow_user_runtime_thread *WINAPI wow_user_runtime_current(void) { return &binding; }
 BOOL WINAPI wow_user_native_call_begin_inline(wow_user_native_call *call)

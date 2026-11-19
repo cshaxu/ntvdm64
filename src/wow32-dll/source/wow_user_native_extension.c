@@ -4,6 +4,7 @@
 #include "wow_user_native_extension.h"
 #include "common/wow/user_runtime.h"
 #include "wow_user_native_call.h"
+#include "wow_callback_frame_lease.h"
 
 BOOL WINAPI wow_original_CallBack16(INT, PPARM16, VPPROC, PVPVOID);
 DWORD FASTCALL wow_original_WK32ICallProc32(PVDMFRAME);
@@ -44,12 +45,31 @@ BOOL CallBack16(INT id, PPARM16 parameters, VPPROC procedure, PVPVOID output)
     wow_task_callback_scope scope;
     BOOL result;
     DWORD error;
+    PTD ptd;
+    VPVOID callerStack, callerCallbackStack;
+    DWORD callerInit;
+    wow_callback_control control = {0};
     BOOL cleanup = binding && binding->thread &&
         (binding->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP);
     if (!(cleanup && kernel_resource_return(id) ?
             wow_task_resource_cleanup_enter(&scope) : wow_task_callback_enter(&scope)))
         return FALSE;
-    __try { result = wow_original_CallBack16(id, parameters, procedure, output); }
+    __try {
+        ptd = CURRENTPTD();
+        callerStack = ptd->vpStack;
+        callerCallbackStack = ptd->vpCBStack;
+        callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;
+        wow_callback_control_capture(&control);
+        __try { result = wow_original_CallBack16(id, parameters, procedure, output); }
+        __finally {
+            if (AbnormalTermination() && wow_callback_control_restore(&control, callerStack)) {
+                ptd->vpStack = callerStack;
+                ptd->vpCBStack = callerCallbackStack;
+                if (!(ptd->dwFlags & TDF_IGNOREINPUT))
+                    ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
+            }
+        }
+    }
     __finally {
         error = GetLastError();
         (void)wow_task_callback_leave(&scope);
