@@ -353,3 +353,5 @@ S13 P9: [DEM guest-lease boundary](s13-p9-dem-lease-boundary.json); opaque B con
 S13 P10: [demgset directory registration](../t483-c-layer-dependencies/s13-p10-demgset-directory-boundary.json); existing B COMMAND table now carries the two registration operations. F state source and C algorithms unchanged; three IDs eliminated:127 eliminated,441 open. Cached builds, dual11 publication and targeted COMMAND/directory/Console/guest checks pass. Mirror3 points/7 lines;delta0/0.
 
 S13 P11: [demsrch unavailable VDM boundary](s13-p11-demsrch-vdm-boundary.json); unused F callback state removed, B retains original cdecl unavailable result, C search algorithms byte-unchanged. C0188 eliminated:128 eliminated,440 open. Cached builds, dual11 publication, original ABI,115 directory assertions and real DOS DIR pass. Mirror5 points/25 lines;delta0/0.
+
+S13 P12: [DPMI service boundary](s13-p12-dpmi-services-boundary.json); four direct symbol edges replaced by B contracts, unchanged F state and C algorithms.132 eliminated,436 open. Cached builds,dual11 publication,debug/PM-entry/WOW page-domain and actual DOS4GW/DIR pass. Mirror20/292 ->19/290; reduction1 point/2 lines.

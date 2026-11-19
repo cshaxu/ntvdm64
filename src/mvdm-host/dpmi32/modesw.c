@@ -23,7 +23,7 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/dpmi_host.h"
 
 /* Refresh CCPU's real-mode segment caches through its existing helper. */
 #line 31

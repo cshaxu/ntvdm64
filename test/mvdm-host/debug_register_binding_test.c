@@ -89,11 +89,36 @@ void MOV_DR(ULONG index, ULONG value)
     ++moves;
     CCPU_DR[index] = value;
 }
+/* Exercise the same installed boundary used by original DPMI callers. */
+static int mode_phase, mode_calls;
+void mvdm_softpc_wow_page_domain_leave_protected(void)
+{
+    mode_phase = 1;
+    ++mode_calls;
+}
+int mvdm_softpc_wow_page_domain_reenter_protected(void)
+{
+    ++mode_calls;
+    return mode_phase;
+}
+#include "../../src/ntvdm-exe/softpc/mvdm_dpmi_binding.c"
+#include "compat/include/dpmi_host.h"
+
 #define CHECK(x) do { if (!(x)) { printf("FAIL line=%d\n", __LINE__); return 1; } } while (0)
 int main(void)
 {
     ULONG output[6], input[6] = {10,11,12,13,16,17};
     ULONG i;
+    compat_dpmi_services other = {0};
+    CHECK(!compat_dpmi_install(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(!compat_dpmi_install(&other) && GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(ntvdm_dpmi_initialize());
+    CHECK(ntvdm_dpmi_initialize());
+    other = *compat_dpmi_current_services();
+    CHECK(!compat_dpmi_install(&other) && GetLastError() == ERROR_ALREADY_INITIALIZED);
+    CHECK(!mvdm_softpc_wow_page_domain_reenter_protected());
+    mvdm_softpc_wow_page_domain_leave_protected();
+    CHECK(mvdm_softpc_wow_page_domain_reenter_protected() == 1 && mode_calls == 3);
     supplied.base = 0x1000; supplied.limit = 0xffff; supplied.AR = 0x92;
     CHECK(mvdm_debugger_read_debug_registers(8, 0x20, output));
     CHECK(copies == 1 && copied_address == 0x1020 && copied_size == 24);

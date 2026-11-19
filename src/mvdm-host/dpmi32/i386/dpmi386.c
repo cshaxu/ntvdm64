@@ -27,11 +27,7 @@ Revision History:
 #include <softpc.h>
 #include <memory.h>
 #include <malloc.h>
-extern BOOL ThreadSetDebugContext(PULONG Registers);
-extern BOOL mvdm_debugger_read_debug_registers(USHORT Selector,
-    USHORT Offset, PULONG Registers);
-
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/dpmi_host.h"
 extern void load_pseudo_descr(int index);
 extern void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit);
 extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);

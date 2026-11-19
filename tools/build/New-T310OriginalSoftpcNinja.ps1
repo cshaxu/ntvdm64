@@ -280,7 +280,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
-$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
+$adapterSoftpcNames = @('mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_vm_notification.c',
                          'mvdm_vm_wake.c',
@@ -1233,6 +1233,9 @@ $adapterSoftpcObjects += 'obj/compat/pif_path.obj'
 $graph.Add('build obj/compat/guest_location.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_location.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/guest_location.obj'
+$graph.Add('build obj/compat/dpmi_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/dpmi_services.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/dpmi_services.obj'
 $graph.Add('build obj/compat/mvdm_firmware.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_firmware.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_firmware.obj'
@@ -2170,7 +2173,7 @@ $graph.Add('  command = link.exe /nologo /machine:x86 /opt:ref /out:$out $in leg
 $graph.Add('build obj/tests/ccpu_debug_match_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_debug_match_test.c')))
 $graph.Add('build ccpu-debug-match-test.exe: debug_unit_link obj/tests/ccpu_debug_match_test.obj obj/ccpu/c_debug.obj')
 $graph.Add('build obj/tests/debug_register_binding_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/debug_register_binding_test.c')))
-$graph.Add('build debug-register-binding-test.exe: debug_unit_link obj/tests/debug_register_binding_test.obj')
+$graph.Add('build debug-register-binding-test.exe: debug_unit_link obj/tests/debug_register_binding_test.obj obj/compat/dpmi_services.obj')
 $graph.Add('build obj/tests/debugger_event_transport_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/debugger_event_transport_test.c')))
 $graph.Add('build debugger-event-transport-test.exe: event_test_link obj/tests/debugger_event_transport_test.obj')
 $graph.Add('build obj/tests/debugger_module_event_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/debugger_module_event_test.c')))

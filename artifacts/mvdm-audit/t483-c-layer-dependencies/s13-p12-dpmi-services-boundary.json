@@ -1,0 +1,459 @@
+{
+  "scope": "T483 S13 P12: DPMI service boundary",
+  "baseline": "51c2c0c064c4b688dad68ba51668b569626676b7",
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\i386\\dpmi386.c",
+      "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+      "current_sha256": "ad41b4ed7a1b541d890075a8b843c50ff7e707fb6f73f07116827188c7c9297c",
+      "raw": {
+        "blocks": 13,
+        "added": 26,
+        "deleted": 232
+      },
+      "filtered": {
+        "blocks": 13,
+        "added": 26,
+        "deleted": 232
+      },
+      "excluded": [],
+      "issues": [],
+      "rank": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+      "original_sha256": "aa7157e2a39fead41e42e87f87e332e9464bf69a668671de976c69637ce06a67",
+      "current_sha256": "20c85513ed25cac3ac5b3403cf5c0ffb6d1cc5b6c78d5f2b5d0e36419d06ee0b",
+      "raw": {
+        "blocks": 8,
+        "added": 28,
+        "deleted": 10
+      },
+      "filtered": {
+        "blocks": 6,
+        "added": 26,
+        "deleted": 6
+      },
+      "excluded": [
+        {
+          "original": [
+            50,
+            51
+          ],
+          "current": [
+            62,
+            63
+          ]
+        },
+        {
+          "original": [
+            98,
+            99
+          ],
+          "current": [
+            124,
+            125
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 2
+    }
+  ],
+  "before": {
+    "points": 20,
+    "lines": 292
+  },
+  "after": {
+    "points": 19,
+    "lines": 290
+  },
+  "delta": {
+    "points": -1,
+    "lines": -2
+  },
+  "cumulativeMirrorReduction": {
+    "points": 3,
+    "lines": 12
+  },
+  "eliminatedIds": [
+    "C0183",
+    "C0184",
+    "C0248",
+    "C0250"
+  ],
+  "partialHeaderIds": [
+    "C0015",
+    "C0045"
+  ],
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 436,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 132
+  },
+  "total": 618,
+  "S13Eliminated": 36,
+  "ownership": {
+    "C": "All original DPMI bodies, register order, failure handling, #error and #line unchanged.",
+    "B": "Immutable process interface only; no thread, session, paging or guest state; no static outer imports.",
+    "F": "Installs four unchanged providers before worker session/guest execution. All state ownership remains here."
+  },
+  "semantics": "leave before clearing PE; reenter after protected context setup. Debug read/broadcast keep six-DWORD layout and failure/CF handling. Process-lifetime binding accepts repeat same-table initialization and rejects replacement.",
+  "sourceIdentity": {
+    "src/ntvdm-exe/debugger/source/dbg_registers.c": "1cdd4880662983694881dd67595db263e54c2ff2a28dd8fa1c08a610320c726e",
+    "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c": "c685d4cc5ef52d4b8301946e386f5824245f7699bce90ac52f0b2d2f3c5b6f8c",
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": {
+      "functionBodies": "byte-identical from first VOID through EOF",
+      "lineAndErrorDirectives": "unchanged",
+      "sha256": "ad41b4ed7a1b541d890075a8b843c50ff7e707fb6f73f07116827188c7c9297c"
+    },
+    "src/mvdm-host/dpmi32/modesw.c": {
+      "functionBodies": "byte-identical from first VOID through EOF",
+      "lineAndErrorDirectives": "unchanged",
+      "sha256": "20c85513ed25cac3ac5b3403cf5c0ffb6d1cc5b6c78d5f2b5d0e36419d06ee0b"
+    }
+  },
+  "build": "Cached full x86/x64, explicit x86 images, reference-x86 and eight A/B graphs passed.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "015f6cb9-b41f-46d1-8325-5e9479734fa1",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "tests": [
+    "Actual B binding through checked debugger provider fixture: registration/replacement and mode callbacks; original debug thread lifecycle and CCPU halt/reset pass.",
+    "65538 current PM-entry body cases pass using mocked CPU endpoints.",
+    "Actual WOW page-domain lifecycle fixture passes, not real Win16 desktop acceptance.",
+    "Published DOS4GW/NESticle rendered menu and Escape response pass; strict DOS DIR passes."
+  ],
+  "failures": "First runtime invocation used wrong observer (exit64); second used historical observer lacking graphics witness. Current observer rebuilt and unfinished runtime tests passed. Both failures retained; product code unchanged between attempts.",
+  "limitations": [
+    "No Full or real Win3.x/Win95 desktop acceptance claimed.",
+    "Shared C0015/C0045 remain open.",
+    "S13 active; S14 not admitted."
+  ],
+  "evidence": [
+    {
+      "path": "build/t483-s13-dpmi-boundary/before.json",
+      "sha256": "961a78e42401ae1944d5c05560f0bd3518ea58c7afe279cad5cccace8d61f11d"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/build.ps1",
+      "sha256": "1b62b86b394527f6238522accb5b76d4c9cf5d23e1707003cd21a88f498b5e24"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/candidate.json",
+      "sha256": "a1df29670ac12ff0f37c027685ee56dc0b6c294086a08dbfaf1cdce8454619dd"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/deliver.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/deliver.ps1",
+      "sha256": "b30925fb4488350d6cc29d9ac817f4892e0e5d2a83eca5ffdfcc1efdd2ec1280"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/identity.py",
+      "sha256": "bf58fb58994485cfbff7c0d69607ba30b57dc23f2fdefd2f0eec8c16396e9384"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/measure.py",
+      "sha256": "a677d6158539ba573ea7c6471444d879e99162665f90892d6ee609b976991fdc"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle/inputs.json",
+      "sha256": "94fc047f5002a8005a78c38ba497d200ab51aa35ff0a1ed683eba072f06bae6d"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle/observer-process.json",
+      "sha256": "3370afed5349323236945eea6b7d23495ba7477b6cd81b8b15b14023a907ade6"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle/runtime-manifest.json",
+      "sha256": "a3608fe371fe04c55604e50ac0df6c0e9e4218c50f22904474a190f40464de9a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle/staged-pif.txt",
+      "sha256": "ef32f830d6acb3af022bf01b2056cafbb92b3ae5d7712324f08ce50b92ccfd00"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/inputs.json",
+      "sha256": "bd947477a571a2f214fdeaaa931098d39c254c5514cd33f39e5d383b8f426610"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt",
+      "sha256": "0dcbd2a4464dec169c5b1bef4061dec5c10730dfec7ea2b104695c544dfcb871"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.command-line.txt",
+      "sha256": "792176afbd877efdcde4cd260f316d621794c93a09c195246705d2ea9556d5e2"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.console.txt",
+      "sha256": "72d2faad3bdbb88f1b827f1b657cdd3d28d15356958bcf712b7925066d65bbdf"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.geometry.txt",
+      "sha256": "5ffdbbe00c03c3fddbcc52515e3777b9c284145fa455ddc507ebea5d0f743935"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.graphics-before.png",
+      "sha256": "013f0f171ba16ffe643125ad9a232cfe28ba236228358b280f7dba8ce320161f"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.graphics-hidden.png",
+      "sha256": "3d924ebc0556fa8fa666923ab457e46527832572eca0ffc6b3895d5941cfff0b"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.graphics-restored.png",
+      "sha256": "4b09fd91d9e641b490721a8209067afcf545c26d4fb8ba5ad4b38191833ef487"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.graphics-result.json",
+      "sha256": "d8da829eb1fb265b86c8855400286b4e268adfa7c3195ef3713d0f2d19604cdb"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.graphics-witness.txt",
+      "sha256": "b4c4bea4854ed5ad8ed06471849131fa731cb18eaddbc11dce446d23e8332073"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.initial-console.txt",
+      "sha256": "5530707e179356b3dcb1069aff269e09ed1a4c976bbb34dbfee017fac41c8dc4"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/nesticle.txt.timeout-live.txt",
+      "sha256": "ca35ae30065d59d7676ca788ef8c9a3ecd7780eb6d39a97a7369fa1bcb5cdaaa"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/observer-process.json",
+      "sha256": "72784cbb63786103cbcf381e86d259d5997601cbcd7e9072587d51bda863d5f4"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/runtime-manifest.json",
+      "sha256": "a3608fe371fe04c55604e50ac0df6c0e9e4218c50f22904474a190f40464de9a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-current/staged-pif.txt",
+      "sha256": "cd4674d7e81dbb29fb47f9d75f853036607fd4da6fa58e78e5dcf85aa9770e56"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/inputs.json",
+      "sha256": "44176029544b77530db92f4926823290a6f2c4d5c97914ee24d24053715fe82a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/nesticle.txt",
+      "sha256": "4c4c104e133eebeb17456be41e6261af6794cbb3c1bfd0af9f6e49badde0c3ee"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/nesticle.txt.command-line.txt",
+      "sha256": "d3f146ba7d9a309597cffdf6cd69f1178b3fb0b215a3a0b6bed5aebcf16cf767"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/nesticle.txt.console.txt",
+      "sha256": "f64900a878d01f9114e6c32a95bd9ef089487479bb3fc7cea7c73dccef626157"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/nesticle.txt.geometry.txt",
+      "sha256": "5ffdbbe00c03c3fddbcc52515e3777b9c284145fa455ddc507ebea5d0f743935"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/nesticle.txt.initial-console.txt",
+      "sha256": "323a668894a5825645bd9412a8a02b2532502f005b97c5cb36bd8bc7f136c303"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/nesticle.txt.timeout-live.txt",
+      "sha256": "fb9434c8f0f201f9d4f69b85ed4bc11c91639818adeee9b95e5a84ae86eed6ad"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/observer-process.json",
+      "sha256": "76f1a85ea0a892254be9668dbdc6110648f120d9d1417244dcfdc39105f6c96b"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/runtime-manifest.json",
+      "sha256": "a3608fe371fe04c55604e50ac0df6c0e9e4218c50f22904474a190f40464de9a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/nesticle-final/staged-pif.txt",
+      "sha256": "12957c2a84f4db6a610d21d95749148f8d9c5f3a4d841d3a052a93ce30c19e24"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/normalized-final.json",
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/package-id.txt",
+      "sha256": "c50efcd03365c7f02f9eebe03b3997cf448fd5fe0a10d952094c159f32501fe5"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/pipeline-process.json",
+      "sha256": "93408f0f3f70c3f00a2cd3f52b20ff1831bcc1583573092f8acb2ee29680eb15"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/pipeline.err",
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/pipeline.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/pipeline.out",
+      "sha256": "5936092ba1bf495c548066761a7040f5d5e424ec186ed51004ddaace7e03e83a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/pipeline.ps1",
+      "sha256": "f344b090cdef0779336678645b6d5b7f31468108035e6ca4b065fb2df8df51e5"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/publication-final.json",
+      "sha256": "d3e5722e84c2e7cf66629baa9acf48ec616b29c73955d147812b7ec34aec4516"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/publish.ps1",
+      "sha256": "37cfd2cb71e0ea233861d8ccc149dbca8ec9e509fd194c7502d00047e1685102"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-current-process.json",
+      "sha256": "a5565794c5dfcee93cba879afadf78900d4207fd50168c56185a7a948798ee57"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-current.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-current.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-current.out",
+      "sha256": "74b4e80ea908d6553cacf71ba39b4615295d0a6afa16def5a1a78c93e926e6b3"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-current.ps1",
+      "sha256": "7e8d047899cc6b34eac9720e646fc54b79c8f15f8aa151f28adb53e71562d2e3"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-final.err",
+      "sha256": "3659ff6ea64ab71ecf11380927f13c1b8d278595143bdae8575b968f2313096a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-final.exit",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-final.out",
+      "sha256": "6a8808fb75e859209b8b3d0cb32c0a97559002c52655727a3baf835d1d122a6f"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-final.ps1",
+      "sha256": "d514604f423a02fe8f400fc42ecb58b2339ba3f5025ee29b2c96478c99c14822"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/runtime-process.json",
+      "sha256": "62c864c86e43d646d12d524d9cd1bebb8df49c68f9b975f12846069cb6a65206"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/selected-deps.txt",
+      "sha256": "55ba369cff2a649605fcdbb7f7c857afe1bf9cb700a4f759f56ddbbcd8488f2d"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/selected-symbols.txt",
+      "sha256": "623e7688e75a5c6e231ca1b75de3b74edc6eaea2de8f4cdb773ef36e214051dc"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/source-identity.json",
+      "sha256": "bc7152b0140725ad888b8cd86cf063c31612a00dd95d6b8c7959006b745e244a"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/source-review.json",
+      "sha256": "2c751577f6d320ec5402418d67bf9f38907790b59db2ca004e4a7c48bbbce7f2"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/stage.ps1",
+      "sha256": "d5e11538f0eb29e647df77f83a3415dfaa9d808d7bad09a4aeb390db05c425bd"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/strict-dir-final.txt",
+      "sha256": "033e872ffa78665ba31cc53646ef22aea6b0194deeb0fd4fe9d4e329b0913150"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/strict-dir-final.txt.cells.txt",
+      "sha256": "a0ef547822d76b86bec4f6c00ef89bbfb9947eb1b548607b1f23f3c4e81c5e1f"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/strict-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/strict-final.ps1",
+      "sha256": "3f22fb90548a019df45e2d8c81d0cbdbce930e96cd66e7994a845e38e4a47f3b"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/tests-process.json",
+      "sha256": "fc51af5dec6257d44054968abc8e1ec5c88b61d9aecb7bb7b3bf939d0a6cc7fa"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/tests.err",
+      "sha256": "54247574398aa4cb7888414407702d913542fac649d99959ee6c047ffb9fb2db"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/tests.exit",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/tests.out",
+      "sha256": "1e9b8349ca855635f9270885ec0ca3367eddf082ed23ebfffc1d5f24760e24bc"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/tests.ps1",
+      "sha256": "1b94436b34ffa0bbfcff3ca74f109dcc569759a3f30860e6639a9e7c8d98c126"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/check.err",
+      "sha256": "cf0cf7974077cbc04411eb5d0451941f734be558e3718305dd8cb7fe7edea2c4"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/check-process.json",
+      "sha256": "b52945b9e52f62173bbf5fb937878bd89d178614ababfbab4e47de06f70ba1aa"
+    },
+    {
+      "path": "build/t483-s13-dpmi-boundary/final-hashes.json",
+      "sha256": "065fe6c63b901af058fedb86acf554f4331f2c5cfd7b54926ae192ae9a3b5412"
+    }
+  ],
+  "finalChecks": "Worker thread boundary, documentation governance, relative links, diff check and22 post-test published hashes pass."
+}

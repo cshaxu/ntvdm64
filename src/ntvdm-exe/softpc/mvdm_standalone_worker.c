@@ -145,7 +145,8 @@ static DWORD mvdm_standalone_worker_begin(void)
 
     if (worker_started) return ERROR_ALREADY_EXISTS;
     if (!worker_thread_initialize() || !ntvdm_command_initialize() ||
-            !ntvdm_console_services_initialize() || !mvdm_guest_location_initialize()) return GetLastError();
+            !ntvdm_console_services_initialize() || !mvdm_guest_location_initialize() ||
+            !ntvdm_dpmi_initialize()) return GetLastError();
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;
     mvdm_softpc_v7_pointer_attach();

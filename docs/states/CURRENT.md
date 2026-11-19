@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has440 open direct dependency IDs.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has436 open direct dependency IDs.
 
 ## Active Packet
 
@@ -27,15 +27,15 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P11 below supersedes both published copies.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P12 below supersedes both published copies.
 
-S13 P11: [demsrch unavailable VDM boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p11-demsrch-vdm-boundary.json). Original demsrch.c is byte-unchanged:5 non-error points/25 lines;delta0/0. The previous F query callback had no production installer. Its unused thread/session state is deleted; B retains the same cdecl NtVdmControl ABI and existing STATUS_NOT_IMPLEMENTED result. Original DEM owns the enumeration fallback.
+S13 P12: [DPMI service boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p12-dpmi-services-boundary.json). dpmi386.c and modesw.c retain all function bodies and diagnostic mappings. C uses an immutable B contract; F installs unchanged debug-context and page-domain providers before guest execution. No state moved into B.
 
-C0188 eliminated:128 eliminated/440 open of618;S13 has cleared32 IDs. Cumulative mirror reduction remains2 points/10 lines. No new mirror difference or guest change.
+C0183/C0184/C0248/C0250 eliminated:132 eliminated/436 open of618; S13 has cleared36 IDs. C0015/C0045 remain open for other consumers. Cohort mirror20 points/292 lines ->19/290; cumulative reduction3 points/12 lines. No guest changes.
 
-Cached full x86/x64 products, reference-x86 and8 A/B graphs pass. Packageb93146bd-24be-4120-a919-3dd1e5f58502 is published to both destinations with22 hashes verified. Original-declaration ABI/unavailability fixture,115 actual directory reset assertions and real DOS full DIR pass. The first build's single-element generator concatenation error was fixed before publication; failure evidence retained. No Full or Win3.x/Win95 acceptance claimed.
+Cached full x86/x64,reference-x86 and8 A/B graphs pass. Package015f6cb9-b41f-46d1-8325-5e9479734fa1 published to both destinations with22 hashes. Debug contract/lifecycle,65538 mock PM-entry cases,WOW page-domain,actual NESticle graphics/Escape and DOS DIR pass. Two observer-selection failures are retained; final runtime verification uses the rebuilt current observer. No Full or real Win3.x/Win95 desktop acceptance claimed.
 
-Next remaining DIR file:dpmi32/i386/dpmi386.c. S13 remains active;S14 remains unadmitted.
+Next remaining DIR file:softpc.new/base/bios/bios.c. S13 active;S14 unadmitted.
 
 ## S12 Closure Record
 

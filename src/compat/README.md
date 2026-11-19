@@ -328,3 +328,7 @@ enumeration fallback. The former F callback binding had no production installer
 and has been removed; this boundary owns no session, thread or callback state.
 The original enum tag is forward-declared using the supported MSVC C contract,
 without importing C headers or duplicating its service values.
+
+DPMI caller contracts live in `include/dpmi_services.h` and `include/dpmi_host.h`.
+The product installs immutable function addresses before guest execution; all
+debug-thread and WOW page-domain state and teardown remain in NTVDM.
