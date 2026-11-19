@@ -301,3 +301,5 @@ P90: [RAP provider ownership](s12-p90-rap-owner.json); files41-43 reviewed; thre
 P91: [WOW alias and flush ownership](s12-p91-wow-alias-flush-ownership.json); files44-47 reviewed using current COFF/maps; C0456 original-provider/ABI pairing reserved for S14, product alias/callback scopes for S13. No code migration or new elimination.
 
 P92: [Font provider ownership delivery](s12-p92-font-owner.json); files48-53 reviewed; six public-GDI/font-resource symbols moved F to B with SDK metrics layout, actual-object/native/negative checks and dual publication.
+
+P93: [GDI cache and thunk ownership](s12-p93-gdi-cache-ownership.json); files54-60 reviewed; C0435 moved unchanged to B with identical 8-byte function, cached builds and dual publication. Native-call/flush contracts remain grouped for S13/S14.

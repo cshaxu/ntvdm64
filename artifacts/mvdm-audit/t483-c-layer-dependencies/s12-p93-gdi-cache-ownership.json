@@ -1,0 +1,332 @@
+{
+  "baseline": "ac8db711df8c686915c867e28b880a804afaa0b9",
+  "files": [
+    {
+      "order": 54,
+      "path": "src/mvdm-host/wow32/wgtext.c",
+      "decision": "Original GetTextFace writes guest output, then flushes it. Keep C conversion; C0456 joins S14 ABI/mapping provider reconnection, not deleting the call.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgtext.obj",
+      "sha256": "de4439b836ba0480f5791b0cd4b3951423495cfec470326c1a4e2e96c7844ea6",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 55,
+      "path": "src/mvdm-host/wow32/wkbman.c",
+      "decision": "Original ToAscii and ANSI/OEM conversion flush guest outputs. Keep C conversion algorithms; C0456 same S14 contract.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkbman.obj",
+      "sha256": "360666a05bb3f49c4dd1c84ba375e18c70927ed975c1304a98a196d11a1eacb0",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 56,
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "decision": "Original EM_SETSEL compatibility sends EM_SCROLLCARET synchronously or posts it by original mode. Synchronous wrapper owns native execution entry/return and message result publication. Original subclass callback remains C. S13 move paired execution boundary, not replace with an unscoped SendMessage.",
+      "bindings": [
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f650       _CallBack16@16             10070650 f   wow_user_native_extension.obj"
+          ]
+        },
+        {
+          "id": "C0555",
+          "symbols": [
+            "_wow_native_SendMessageA@16"
+          ],
+          "providers": [
+            "0001:00063c70       _wow_native_SendMessageA@16 10064c70 f   wow_user_task_lifecycle.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmsgem.obj",
+      "sha256": "e9d00c6a7c0ce200427f4545b7b5e096a99f2ba9b264e796d743f4dee335a13f",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 57,
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "decision": "Original thunk table references WK32ICallProc32 and WMM32CallProc32 from included wktbl2.h and wmmtbl2.h. Wrappers enter native-call inline scope, invoke retained original wkgthunk/wmmedia bodies, restore execution in finally. Keep table and original bodies C; S13 handles paired extension boundary.",
+      "bindings": [
+        {
+          "id": "C0482",
+          "symbols": [
+            "_WK32ICallProc32@4"
+          ],
+          "providers": [
+            "0001:0006f790       _WK32ICallProc32@4         10070790 f   wow_user_native_extension.obj"
+          ]
+        },
+        {
+          "id": "C0483",
+          "symbols": [
+            "_WMM32CallProc32@4"
+          ],
+          "providers": [
+            "0001:0006f860       _WMM32CallProc32@4         10070860 f   wow_user_native_extension.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "572e4649ae2cce1da06d175db85b09184392c17c2deeaa8824ba6a3b3e412869",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 58,
+      "path": "src/mvdm-host/wow32/wreldc.c",
+      "decision": "GdiCleanCacheDC moved unchanged from F to existing B native USER/GDI compatibility unit. Original CacheReleasedDC discards result then calls GdiFlush; original cache state and flush stay C.",
+      "bindings": [
+        {
+          "id": "C0435",
+          "symbols": [
+            "_GdiCleanCacheDC@4"
+          ],
+          "providers": [
+            "0001:0000b7a0       _GdiCleanCacheDC@4         1000c7a0 f   wow_native_controls.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wreldc.obj",
+      "sha256": "5beca2b0c713e3ffbda30422c90d3af7603ab138c23472d83abe37f375db6da5",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 59,
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "decision": "Original find/load/free/lock/unlock/size resource helpers call CallBack16. Resource callback cleanup whitelist and execution lifetime belong to same S13 group; keep original resource conversion C.",
+      "bindings": [
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f650       _CallBack16@16             10070650 f   wow_user_native_extension.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wres16.obj",
+      "sha256": "0a0ee1ec401af2537e2740a9e37a68083bc0533710ad2d991518ae35d1561edd",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 60,
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "decision": "Original socket host/protocol/service output conversion reacquires guest pointer after potential callbacks then flushes. Keep conversion and reacquisition C; C0456 joins S14 mapping contract. The source comment template is not counted as an executable flush call.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsdata.obj",
+      "sha256": "0ff1a3292a5c7dffd3c954a1e29bb9087ed523a38f7e7081ea4704dc3c7bd1f0",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "migration": {
+    "id": "C0435",
+    "source": "src/wow32-dll/source/wow_public_user_facade.c",
+    "destination": "src/compat/wow_native_controls.c",
+    "sourceBodyIdentical": true,
+    "machineCode": {
+      "symbol": "_GdiCleanCacheDC@4",
+      "before": "b801000000c20400",
+      "after": "b801000000c20400",
+      "identical": true
+    },
+    "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c windows/core/ntgdi/client/local.c:182-195; private IS_ALTDC_TYPE validation then TRUE. Modern native handle cannot use NT4 private tag. This migration preserves existing no-state contract; no full equivalence of invalid-HDC error behavior claimed.",
+    "caller": "CacheReleasedDC in wreldc.c:273 ignores result then invokes GdiFlush; original cache bookkeeping unchanged."
+  },
+  "verification": {
+    "buildExit": 0,
+    "deliveryExit": 0,
+    "commands": [
+      "build/t483-s12-gdi-cache-owner/build.ps1",
+      "build/t483-s12-gdi-cache-owner/deliver.ps1"
+    ],
+    "map": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+    "mapSha256": "bf99d21c214ce390fa028d2e3e612c68abbb94a0caed68a1bf657548ed865542",
+    "abGraphs": 8,
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityRule": "Mask only package GUID plus PE/debug timestamps. Report per-image equality, not raw equality.",
+    "runtime": "Not rerun under owner-authorized pure relocation build/publication scope; same function body, actual 8-byte compiled code, ABI and caller. No new runtime acceptance claim.",
+    "documentationGate": "passed; build/t483-s12-gdi-cache-owner/docs.exit=0"
+  },
+  "publication": {
+    "package": "78fc8d5b-3a2d-4145-8fb8-710896683d58",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "88cbd7fadb7ca271d3dfa1515fb97025d21f2832ce2cee7420ffc057ea1b82a4"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "24cd78f79c44883b5957990aa647c560f469bbcecbdf82b1e458f0fb5e24730d"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "a0c85de6a509df238263428a9a5b7fff04c2c8ed9e11d9b926183ac4741864a5"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "8f523d380f4fe834ed42b1a9ea914022d19e85c218d7355a104a04b88d72f60c"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "15fd036adc66c5e10dff8ed2e1d65aec2781532f2b96afd4891d925103f385b1"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "3eda9f8328f18a3670e37c0c8faede96d747017f36059edce62ad28a4f2ca890"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "97df5a8c0c0034c07f03438c4bdbcdea081516892004b0c47a8a8db2b1b76e27"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "e8f8811a148585053d8cc00d8e47f47fc0ce91a7ab5b911f55272299243441d0"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "71408f8444ca634b2c15cb2508b70c4fafc70840fe20d96a8f83f1ae0aff3c47"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "b6f237484472ed20d94ab316471a6983bfa5fe6106f487f37758ff029f6831ed"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "6581953538205674f95d542c0e73bc6d9fbf69c2ac86ba4dad2dcaebdca7dd5f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "88cbd7fadb7ca271d3dfa1515fb97025d21f2832ce2cee7420ffc057ea1b82a4"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "24cd78f79c44883b5957990aa647c560f469bbcecbdf82b1e458f0fb5e24730d"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "a0c85de6a509df238263428a9a5b7fff04c2c8ed9e11d9b926183ac4741864a5"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "8f523d380f4fe834ed42b1a9ea914022d19e85c218d7355a104a04b88d72f60c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "15fd036adc66c5e10dff8ed2e1d65aec2781532f2b96afd4891d925103f385b1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "3eda9f8328f18a3670e37c0c8faede96d747017f36059edce62ad28a4f2ca890"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "97df5a8c0c0034c07f03438c4bdbcdea081516892004b0c47a8a8db2b1b76e27"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "e8f8811a148585053d8cc00d8e47f47fc0ce91a7ab5b911f55272299243441d0"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "71408f8444ca634b2c15cb2508b70c4fafc70840fe20d96a8f83f1ae0aff3c47"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "b6f237484472ed20d94ab316471a6983bfa5fe6106f487f37758ff029f6831ed"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "6581953538205674f95d542c0e73bc6d9fbf69c2ac86ba4dad2dcaebdca7dd5f"
+      }
+    ]
+  },
+  "progress": {
+    "compileReviewed": 116,
+    "compileTotal": 116,
+    "linkOnlyReviewed": 60,
+    "linkOnlyTotal": 74,
+    "total": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 484,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 84
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 active; 14 link-only files remain. Execution scopes stay S13; C0456 stays S14. No original guest or mirror edits."
+}

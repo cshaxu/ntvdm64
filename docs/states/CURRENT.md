@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P92: [Font ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p92-font-owner.json). Reviewed116/116 compile and53/74 link-only;485/618 IDs open,83 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package81afdfb3-2a7e-4b14-a08e-917573c7ed5b published to both destinations;22 hashes verified. Cached builds, final font checks and8 A/B graphs passed. S12 active.
+P93: [GDI cache ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p93-gdi-cache-ownership.json). Reviewed116/116 compile and60/74 link-only;484/618 IDs open,84 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package78fc8d5b-3a2d-4145-8fb8-710896683d58 published to both destinations;22 hashes verified. Cached builds and8 A/B graphs passed; runtime omitted for byte-identical function relocation. S12 active.

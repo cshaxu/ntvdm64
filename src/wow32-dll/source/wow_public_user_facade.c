@@ -29,14 +29,3 @@ void ShowStartGlass(DWORD timeout)
 {
     UNREFERENCED_PARAMETER(timeout);
 }
-
-/* DIVERGENCE(ADAPTER-WIN32-056): OpenNT's GdiCleanCacheDC validates a private
- * local-DC tag, then returns TRUE without mutating the DC; its own source
- * calls out that a server-side cleanup would be preferable.  WOW calls it
- * only before the existing public GdiFlush.  Modern public HDCs do not expose
- * that private tag, so preserve the reached successful no-state direction. */
-BOOL GdiCleanCacheDC(HDC device_context)
-{
-    UNREFERENCED_PARAMETER(device_context);
-    return TRUE;
-}
