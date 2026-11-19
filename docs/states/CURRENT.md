@@ -58,6 +58,8 @@ P15 moves the unchanged native invalid-VM failure helper from F to B. Both cache
 
 P16 moves the unchanged CCPU wake event carrier to B; F retains its lifetime and C retains pending-work authority. Both cached architectures, eight A/B graphs and the real CCPU HLT/RESET fixture passed. Eleven images are published and hash-verified. [P16 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p16-ccpu-wait.json) records 12/116 files classified, five cleared, seven lifecycle moves and 104 unreviewed. C0037/C0212/C0213 are eliminated; 531/617 IDs remain open. Mirror delta is zero; cumulative reduction stays two points and ten lines.
 
+P17 is evidence-only: [files 013-016](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p17-mapping-generated-ownership.json) establish session mapping ownership and external generated-header ABI constraints. Classification is 16/116: five cleared, eight lifecycle files for S13, three source/ABI files for S14 and 100 unreviewed. 531/617 IDs remain open. No source, build or release changed; P16 remains current.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

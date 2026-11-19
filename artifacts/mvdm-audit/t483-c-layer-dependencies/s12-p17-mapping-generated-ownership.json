@@ -1,0 +1,49 @@
+{
+  "baseline": "7fcd164d5be8b0f97633eb6dc0f71dd880f3decd",
+  "question": "Classify direct outward compilation dependencies of ordered files013-016",
+  "procedure": "Read caller sites, complete mapping provider, selected generated declarations and approved provenance; compare concrete GDP sizes. No source changes.",
+  "files": {
+    "13": "013：ccpusas4.c 的 translate/resolve 读取 F 当前 session 的物理页与 EMS 别名记录；initialize 和 VdmMapDosMemory 注册 teardown，release_owner 清理所属记录。不能单搬头或让 B 依赖 session。归 S13 映射生命周期接线，C0041/C0238/C0240 保持开放。源码未改，镜像净变 0 点、0 行。",
+    "14": "014：cpu4gen.h 使用 F 下的 x86 生成 gdpvar.h，内容是 CCPU/设备类型和 GDP 固定偏移，非产品业务。ADAPTER-SOFTPC-051 与当前来源政策将它限定为 NTVDMx64 外部生成 ABI 载体，禁止直接导入 C 镜像。简单搬 B 也不能消除其对 C 类型/布局的语义耦合。归 S14 来源和 ABI 归属审核，C0031 保持开放；源码未改，镜像净变 0 点、0 行。",
+    "15": "015：sascdef.c 包含的 PigReg_c.h 提供 CpuRegsREC/NpxRegsREC/CpuStateREC，并内嵌 C 的 FPSTACKENTRY；同属获准的外部生成载体。保留原版 include，归 S14 与 014 同组审核，不以测试或名称 PIG 推断该声明可删除。C0030 保持开放；源码未改，镜像净变 0 点、0 行。",
+    "16": "016：vglob.c 实际通过 GLOBAL_VGAGlobals 读写 VGA 状态，使用同一 x86 GDP 载体。当前载体 GDP_SIZE=43517，C-VID 镜像载体=43513，存在已记录的 TraceVector 位移差异，不能无验证换用。归 S14 同组核对来源、分配尺寸与所有访问布局，C0031 保持开放。源码未改，镜像净变 0 点、0 行。累计分类 16/116：五文件已解除、八生命周期项、三来源/ABI项，100 未审查；531/617 依赖开放。"
+  },
+  "sha256": {
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c": "dbf544fca4304c530b989d3f2458391e104f180c14eaf5bfbd12ea3bff0695fe",
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h": "1a21caf7f22b7271e4be6df6cb23a891fd8af6d31998a593692551a0e7fb6055",
+    "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c",
+    "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8",
+    "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c": "dd07c28b27004de60df0a040598a8428396504056386d1b648e9b6bfc1712b05",
+    "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h": "7b942fbf7d32c8f4f274f5cadf8612c15a67c3235488b4476e5a00970c058bb0",
+    "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h": "fac49a3797900896f2c84a9c7484cb456312511482d80edf08305b5f034ec784",
+    "src/mvdm-host/softpc.new/base/cvidc/gdpvar.h": "557c5d1d0effd1f8b1a18e0df5415924d63773edbc7ee762a624720229c24042"
+  },
+  "sourceAuthority": [
+    "docs/etc/operations/policy/source-policy.md: NTVDMx64 SoftPC patch exception",
+    "src/ntvdm-exe/softpc/README.md: ADAPTER-SOFTPC-051"
+  ],
+  "supportingEvidence": [
+    "docs/etc/evidence/m0-t411-s1-ccpu40-cvid-event-audit.md: P01",
+    "docs/etc/evidence/opennt-replacement-audit-20260912.md: SoftPC patch carrier follow-up"
+  ],
+  "interpretation": "Session mapping is F lifecycle coupled. Three generated-header consumers have C ABI coupling and external source admission constraints; no supported relocation is claimed yet.",
+  "followUp": {
+    "S13": "Mapping ownership, current-owner selection, creation/alias/removal and teardown must be designed together.",
+    "S14": "Review generated ABI carrier admission and exact existing C counterparts; prove layout before replacement, obtain approval for policy changes or net mirror increases."
+  },
+  "progress": {
+    "reviewedFiles": 16,
+    "clearedDirectHeaderFiles": 5,
+    "deferredLifecycleFiles": 8,
+    "deferredSourceAbiFiles": 3,
+    "unreviewedFiles": 100,
+    "totalFiles": 116,
+    "openIds": 531,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "validation": "Source and policy evidence only. No product changes, new compilation, runtime or publication claimed; P16 release remains current."
+}

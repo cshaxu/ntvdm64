@@ -95,17 +95,25 @@
 
 - 直接包含 · C0041 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h
 
+013：ccpusas4.c 的 translate/resolve 读取 F 当前 session 的物理页与 EMS 别名记录；initialize 和 VdmMapDosMemory 注册 teardown，release_owner 清理所属记录。不能单搬头或让 B 依赖 session。归 S13 映射生命周期接线，C0041/C0238/C0240 保持开放。源码未改，镜像净变 0 点、0 行。
+
 ## 014 — src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h
 
 - 直接包含 · C0031 · ntvdm-exe · src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h
+
+014：cpu4gen.h 使用 F 下的 x86 生成 gdpvar.h，内容是 CCPU/设备类型和 GDP 固定偏移，非产品业务。ADAPTER-SOFTPC-051 与当前来源政策将它限定为 NTVDMx64 外部生成 ABI 载体，禁止直接导入 C 镜像。简单搬 B 也不能消除其对 C 类型/布局的语义耦合。归 S14 来源和 ABI 归属审核，C0031 保持开放；源码未改，镜像净变 0 点、0 行。
 
 ## 015 — src/mvdm-host/softpc.new/base/ccpu386/sascdef.c
 
 - 直接包含 · C0030 · ntvdm-exe · src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h
 
+015：sascdef.c 包含的 PigReg_c.h 提供 CpuRegsREC/NpxRegsREC/CpuStateREC，并内嵌 C 的 FPSTACKENTRY；同属获准的外部生成载体。保留原版 include，归 S14 与 014 同组审核，不以测试或名称 PIG 推断该声明可删除。C0030 保持开放；源码未改，镜像净变 0 点、0 行。
+
 ## 016 — src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c
 
 - 直接包含 · C0031 · ntvdm-exe · src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h
+
+016：vglob.c 实际通过 GLOBAL_VGAGlobals 读写 VGA 状态，使用同一 x86 GDP 载体。当前载体 GDP_SIZE=43517，C-VID 镜像载体=43513，存在已记录的 TraceVector 位移差异，不能无验证换用。归 S14 同组核对来源、分配尺寸与所有访问布局，C0031 保持开放。源码未改，镜像净变 0 点、0 行。累计分类 16/116：五文件已解除、八生命周期项、三来源/ABI项，100 未审查；531/617 依赖开放。
 
 ## 017 — src/mvdm-host/softpc.new/base/cvidc/ev_glue.c
 

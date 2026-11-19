@@ -133,3 +133,10 @@ files reserved for S13. 534 of 617 stable IDs remain open. Mirror delta zero.
 [Delivery evidence](s12-p16-ccpu-wait.json) records the unchanged Windows event
 carrier moved to B. C0037, C0212 and C0213 are eliminated; 531/617 remain open.
 Sequential review is 12/116, five cleared and seven lifecycle files for S13.
+
+## P17 mapping and generated ABI classification
+
+[Source evidence](s12-p17-mapping-generated-ownership.json) classifies files
+013-016 without changing product code. Review is 16/116: five cleared, eight
+lifecycle files for S13 and three source/ABI files for S14; 100 unreviewed.
+531 of 617 stable IDs remain open. The P16 release remains current.
