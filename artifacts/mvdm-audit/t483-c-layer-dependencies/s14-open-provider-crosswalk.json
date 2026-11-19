@@ -1,0 +1,3883 @@
+{
+  "baseline": "f9e4e8b1d",
+  "kind": "open-dependency-to-provider-crosswalk-not-closure",
+  "source_ledger_sha256": "b094cccf3aee51eb32e31201d8ecc2ff0ba7a4dc0a1d8d21735f9b08df021cfb",
+  "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. No status promotion, new IDs or dependency rescan.",
+  "summary": {
+    "open_records": 418,
+    "kinds": {
+      "header": 60,
+      "image-import": 1,
+      "include-root": 12,
+      "symbol": 345
+    },
+    "target_groups": 152,
+    "symbol_provider_files": 79,
+    "wow_reviewed_bodies": 22,
+    "symbol_provider_files_with_wow_body_review": 16,
+    "symbol_records_in_reviewed_bodies": 114,
+    "reviewed_bodies_without_direct_symbol_record": [
+      "src/wow32-dll/source/wow_button_resources.c",
+      "src/wow32-dll/source/wow_class_client_bindings.c",
+      "src/wow32-dll/source/wow_idle_hook_binding.c",
+      "src/wow32-dll/source/wow_user_message_bridge.c",
+      "src/wow32-dll/source/wow_user_session_binding.c",
+      "src/wow32-dll/source/wow_window_words_binding.c"
+    ]
+  },
+  "targets": [
+    {
+      "path": "ntvdm.exe",
+      "sha256": null,
+      "ids": [
+        "C0134"
+      ],
+      "kinds": {
+        "image-import": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/base_srv",
+      "sha256": null,
+      "ids": [
+        "C0135"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/base_srv/base_capture.h",
+      "sha256": "d694a8651c1e0dbda0e85203d1b08c66b5ddd98874f34794ab6346e93a4db90f",
+      "ids": [
+        "C0002"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/base_srv/base_classifier.h",
+      "sha256": "a92fa8c404cb33aba457a27e05bb0e0f6244d52b5354643145e8f3822693f819",
+      "ids": [
+        "C0003"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/base_srv/base_client.h",
+      "sha256": "414bbc72688c219c867d586b2bf2db3a57466afeea1ce297b7f87371b49517fe",
+      "ids": [
+        "C0004"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/base_srv/base_config.h",
+      "sha256": "07bc489782a97b8ab91a89aec5918c9e284c50480c2de2665b4aab649898b866",
+      "ids": [
+        "C0005"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/base_srv/base_rpc_client_launch.c",
+      "sha256": "a37e13534704c26169aa7ef76aa1261ab92c2f2b53b898e3bd2e857e930a1a0c",
+      "ids": [
+        "C0156"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0156",
+          "name": "OpenNtBaseClientCallServer"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/base_srv/legacy_classifier_arch.h",
+      "sha256": "142f700874be0689e4c0ba7a38ec0359236f02449308300d0965fc4212b499f9",
+      "ids": [
+        "C0006"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/redirector/async.h",
+      "sha256": "30c873e67ab002c7d7962c47ed19979e48fcba73614a6bffdc92af805a1a0a4a",
+      "ids": [
+        "C0012"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/wow/page_domain.h",
+      "sha256": "dc3b73343e982957d2ecba8d4d4038903468eff9be47a8641dfb807df47f002f",
+      "ids": [
+        "C0015"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/common/wow/paths.h",
+      "sha256": "49ddc12803dfb999d1da5bc996ea15ee784c417e5e71223d26e3794a606d5177",
+      "ids": [
+        "C0016"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/nthook-dll/hook_classification.c",
+      "sha256": "d75fd7b8026cd52632f248f6ac48d7475293321187dab30935109c9b405a9316",
+      "ids": [
+        "C0162",
+        "C0163",
+        "C0164"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0162",
+          "name": "BaseDotComSuffixName"
+        },
+        {
+          "id": "C0163",
+          "name": "BaseDotExeSuffixName"
+        },
+        {
+          "id": "C0164",
+          "name": "BaseDotPifSuffixName"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/include",
+      "sha256": null,
+      "ids": [
+        "C0136"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/include/base_interactive.h",
+      "sha256": "9652ae272e0e60132c14dd1721e71c26f020550127523ec598bfeb44ab0d7f73",
+      "ids": [
+        "C0020"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/include/base_server.h",
+      "sha256": "249055581fc112ff45d8aac48c29d2c3421f616f61a54884e4f9988583c40f43",
+      "ids": [
+        "C0022"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_interactive.c",
+      "sha256": "94540d380a98cc712886bcafe5c71da7120fa66b577fbc6a835b5ac94f00c015",
+      "ids": [
+        "C0165"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0165",
+          "name": "NtUserTestForInteractiveUser"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_process.c",
+      "sha256": "cc9e3fc7d4fa5b7101d9b79074d9e879436065518c4f47cb4a2a5af558d91c0e",
+      "ids": [
+        "C0166",
+        "C0167"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0166",
+          "name": "CsrLockProcessByClientId"
+        },
+        {
+          "id": "C0167",
+          "name": "CsrUnlockProcess"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_request.c",
+      "sha256": "f6b8e822286d9c806a93f91b194ee923fa0c7fccc282b39f1d030fc3d962bd99",
+      "ids": [
+        "C0168"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0168",
+          "name": "OpenNtBaseServerRequestThread"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/service_core.c",
+      "sha256": "15c0546485abc4cbbc312f333875c3a47349f07ebb340473048e1ecf0d3427d3",
+      "ids": [
+        "C0171"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0171",
+          "name": "UserNotifyProcessCreate"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/command/include",
+      "sha256": null,
+      "ids": [
+        "C0137"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/monitor/source/monitor_printer.c",
+      "sha256": "f45b156f5704b4f5ae79cd83cdd856468fac7ad8bddb0cdb047403fdb9f80268",
+      "ids": [
+        "C0185",
+        "C0186",
+        "C0187"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0185",
+          "name": "MonitorEnablePrinterDirectAccess"
+        },
+        {
+          "id": "C0186",
+          "name": "MonitorInitializePrinterInfo"
+        },
+        {
+          "id": "C0187",
+          "name": "MonitorPrinterWriteData"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include",
+      "sha256": null,
+      "ids": [
+        "C0141"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/generated/x86/prod",
+      "sha256": null,
+      "ids": [
+        "C0142"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
+      "sha256": "fac49a3797900896f2c84a9c7484cb456312511482d80edf08305b5f034ec784",
+      "ids": [
+        "C0030"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+      "sha256": "7b942fbf7d32c8f4f274f5cadf8612c15a67c3235488b4476e5a00970c058bb0",
+      "ids": [
+        "C0031"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "sha256": "7f4520389338f9d265ce4d4a3e72980356687aebc9ed836b4707d5a250519afa",
+      "ids": [
+        "C0032"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h",
+      "sha256": "3efd20a777331338a0657a81a7ded9deac0efa9b7bcc71e55d959611d2d2ae7c",
+      "ids": [
+        "C0033"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+      "sha256": "4c60f2b25b7994b13c8bfb2b02fb4ca67f8dca31e10bf6bc379073f2dbeaa10e",
+      "ids": [
+        "C0043"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_text_video.h",
+      "sha256": "fca206b5fb2c6407bcb0345ed0202ba84d8c6ad095f34beb87e541bc59c0ceec",
+      "ids": [
+        "C0044"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h",
+      "sha256": "0bcb56eeca450d4eb1dadcf8319eacd5700f45bdd2960bfd30c39f628749fa56",
+      "ids": [
+        "C0045"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_xms_memory.h",
+      "sha256": null,
+      "ids": [
+        "C0048"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+      "sha256": "a3d6f35fef8bae86a04b49ecc2bc4ece34d103c80f31b4248d403035831c3364",
+      "ids": [
+        "C0193"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0193",
+          "name": "mvdm_cvidc_bind_vectors"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_keyboard_reset.c",
+      "sha256": "805fae267bac53acb8667c59ebed80036eb87a2655b4896dda9a51702eb7421d",
+      "ids": [
+        "C0204"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0204",
+          "name": "mvdm_keyboard_reset_pending_irq"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_descriptor_fields.c",
+      "sha256": "683e5e835b48d7918621e6c72279807f441ad4dc0c5e7dca248f4b9621876d3d",
+      "ids": [
+        "C0214"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0214",
+          "name": "retrieve_descr_fields"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
+      "sha256": "b712adf510bcddc316616bbf9c8df775a114a0f94d42c2a558716d039f8c56b5",
+      "ids": [
+        "C0215",
+        "C0216"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0215",
+          "name": "c_effective_addr"
+        },
+        {
+          "id": "C0216",
+          "name": "effective_addr"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_execution.c",
+      "sha256": "97d239565e1ace23b72979f3eea7c678382891477292d8487fc72eeff2606477",
+      "ids": [
+        "C0608"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0608",
+          "name": "verbose"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c",
+      "sha256": "f35b85f124c41265e4c5275a123d6819ed90c252771d0230c4dd7eb23811ee26",
+      "ids": [
+        "C0228",
+        "C0229"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0228",
+          "name": "mvdm_softpc_mouse_cancel"
+        },
+        {
+          "id": "C0229",
+          "name": "mvdm_softpc_mouse_pending"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h",
+      "sha256": "f28aab3411d5d93b3ef7da82d21a6d152b9ff6ccd96fcdde1f1f2584fdf0fa6c",
+      "ids": [
+        "C0049"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+      "sha256": "a83a8103f3e4adbce9d04fbd8bd85466ea936ad48aba6d3578dad6e81fb3f014",
+      "ids": [
+        "C0230",
+        "C0231",
+        "C0232"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0230",
+          "name": "mvdm_softpc_mouse_apply"
+        },
+        {
+          "id": "C0231",
+          "name": "mvdm_softpc_mouse_receive"
+        },
+        {
+          "id": "C0232",
+          "name": "mvdm_softpc_mouse_route_active"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h",
+      "sha256": "30847bc06ca9205972d3761d046b1b6475b6e0ecf6e7cc254b65774d7ef6b655",
+      "ids": [
+        "C0050"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+      "sha256": "638d005185cd67a49af857102b59af1f36832328596c228a58e44f9a55065455",
+      "ids": [
+        "C0242"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0242",
+          "name": "mvdm_softpc_terminate_current_session"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c",
+      "sha256": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747",
+      "ids": [
+        "C0243",
+        "C0244",
+        "C0245"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0243",
+          "name": "mvdm_softpc_text_video_flush"
+        },
+        {
+          "id": "C0244",
+          "name": "mvdm_softpc_text_video_pause"
+        },
+        {
+          "id": "C0245",
+          "name": "mvdm_softpc_text_video_sync_route"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "sha256": "9db7fa8bc66a9af3e9c291c796eeed266096b034f568d76b8636f956399fecdb",
+      "ids": [
+        "C0246",
+        "C0247",
+        "C0249"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0246",
+          "name": "mvdm_softpc_wow_page_domain_activate_wow_context"
+        },
+        {
+          "id": "C0247",
+          "name": "mvdm_softpc_wow_page_domain_enter"
+        },
+        {
+          "id": "C0249",
+          "name": "mvdm_softpc_wow_page_domain_publish_cursor"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+      "sha256": "b735c7e189e1c4d404c3474d4e44dc7c7e5160aa251e6acfe81721a387708963",
+      "ids": [
+        "C0607"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0607",
+          "name": "CsrPortHeap"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_ingress.c",
+      "sha256": "252003e9fab88482449c32f3170d5f4468c8ea751dc4025a5b51621cb0f6d0be",
+      "ids": [
+        "C0255"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0255",
+          "name": "mvdm_vm_command_enter"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/ccpu_thread_exit_compat.c",
+      "sha256": "74fe8c46b469386d6288438d81f0795d95d6f64e16e64a859be53a85a5975dac",
+      "ids": [
+        "C0259"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0259",
+          "name": "opennt_ccpu_exit_thread"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_client.c",
+      "sha256": "dda43927f8179b5899da6267e81d07865a69253aef70813a9c120b3659845236",
+      "ids": [
+        "C0263",
+        "C0264",
+        "C0265",
+        "C0266",
+        "C0267",
+        "C0269",
+        "C0270",
+        "C0271",
+        "C0272",
+        "C0274",
+        "C0275",
+        "C0276",
+        "C0277",
+        "C0278",
+        "C0279",
+        "C0280",
+        "C0281",
+        "C0283",
+        "C0284",
+        "C0285",
+        "C0286",
+        "C0287",
+        "C0288",
+        "C0289"
+      ],
+      "kinds": {
+        "symbol": 24
+      },
+      "symbols": [
+        {
+          "id": "C0263",
+          "name": "MvdmClipCursor"
+        },
+        {
+          "id": "C0264",
+          "name": "MvdmCreateFileA"
+        },
+        {
+          "id": "C0265",
+          "name": "MvdmFillConsoleOutputAttribute"
+        },
+        {
+          "id": "C0266",
+          "name": "MvdmFillConsoleOutputCharacterA"
+        },
+        {
+          "id": "C0267",
+          "name": "MvdmGetClipCursor"
+        },
+        {
+          "id": "C0269",
+          "name": "MvdmGetConsoleCursorInfo"
+        },
+        {
+          "id": "C0270",
+          "name": "MvdmGetConsoleFontSize"
+        },
+        {
+          "id": "C0271",
+          "name": "MvdmGetConsoleMode"
+        },
+        {
+          "id": "C0272",
+          "name": "MvdmGetConsoleScreenBufferInfo"
+        },
+        {
+          "id": "C0274",
+          "name": "MvdmGetCurrentConsoleFont"
+        },
+        {
+          "id": "C0275",
+          "name": "MvdmGetCursorPos"
+        },
+        {
+          "id": "C0276",
+          "name": "MvdmGetFileType"
+        },
+        {
+          "id": "C0277",
+          "name": "MvdmReadConsoleOutputA"
+        },
+        {
+          "id": "C0278",
+          "name": "MvdmSetConsoleCursorInfo"
+        },
+        {
+          "id": "C0279",
+          "name": "MvdmSetConsoleCursorPosition"
+        },
+        {
+          "id": "C0280",
+          "name": "MvdmSetConsoleMode"
+        },
+        {
+          "id": "C0281",
+          "name": "MvdmSetConsoleScreenBufferSize"
+        },
+        {
+          "id": "C0283",
+          "name": "MvdmSetConsoleWindowInfo"
+        },
+        {
+          "id": "C0284",
+          "name": "MvdmSetCursorPos"
+        },
+        {
+          "id": "C0285",
+          "name": "MvdmWriteConsoleA"
+        },
+        {
+          "id": "C0286",
+          "name": "NtvdmConsoleTextColours"
+        },
+        {
+          "id": "C0287",
+          "name": "ShowConsoleCursor"
+        },
+        {
+          "id": "C0288",
+          "name": "mvdm_softpc_mouse_current"
+        },
+        {
+          "id": "C0289",
+          "name": "ntvdm_console_set_active"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_client.h",
+      "sha256": "0330e35c5ee51a57e42b891782b16d69b2285645dd15838c2f327de3975a82f6",
+      "ids": [
+        "C0052"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_compat.c",
+      "sha256": "f0c45d8b63ffcebad73724348cf0577c902a9e4efbf0e99ffe84415594439065",
+      "ids": [
+        "C0290",
+        "C0291",
+        "C0292",
+        "C0293",
+        "C0294",
+        "C0295",
+        "C0296",
+        "C0297",
+        "C0298",
+        "C0299"
+      ],
+      "kinds": {
+        "symbol": 10
+      },
+      "symbols": [
+        {
+          "id": "C0290",
+          "name": "ConsoleMenuControl"
+        },
+        {
+          "id": "C0291",
+          "name": "GetConsoleInputWaitHandle"
+        },
+        {
+          "id": "C0292",
+          "name": "InvalidateConsoleDIBits"
+        },
+        {
+          "id": "C0293",
+          "name": "RegisterConsoleVDM"
+        },
+        {
+          "id": "C0294",
+          "name": "SetConsoleKeyShortcuts"
+        },
+        {
+          "id": "C0295",
+          "name": "SetConsolePalette"
+        },
+        {
+          "id": "C0296",
+          "name": "SetLastConsoleEventActive"
+        },
+        {
+          "id": "C0297",
+          "name": "VDMConsoleOperation"
+        },
+        {
+          "id": "C0298",
+          "name": "WriteConsoleInputVDMW"
+        },
+        {
+          "id": "C0299",
+          "name": "ntvdm_console_read_pc_input"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_graphics.c",
+      "sha256": "77dd8ca309a906f2cd5789577bf516698569d717a1792cb786ab39a0a676661a",
+      "ids": [
+        "C0300",
+        "C0301",
+        "C0302",
+        "C0303",
+        "C0304"
+      ],
+      "kinds": {
+        "symbol": 5
+      },
+      "symbols": [
+        {
+          "id": "C0300",
+          "name": "MvdmCloseConsoleHandle"
+        },
+        {
+          "id": "C0301",
+          "name": "MvdmCreateConsoleScreenBuffer"
+        },
+        {
+          "id": "C0302",
+          "name": "MvdmSetConsoleActiveScreenBuffer"
+        },
+        {
+          "id": "C0303",
+          "name": "ntvdm_console_graphics_begin_update"
+        },
+        {
+          "id": "C0304",
+          "name": "ntvdm_console_graphics_end_update"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_graphics.h",
+      "sha256": "190254aa7a349d8600d42b2b27944ebb1310988a9ad3d982c9ee4cb78d4915c2",
+      "ids": [
+        "C0053"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_input.h",
+      "sha256": "aa3ccb5a1ce26c4c4fe47d9858eb440b1d46e5e458dee8b925238838d0ee400c",
+      "ids": [
+        "C0054"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_text.c",
+      "sha256": "220f7637c3e94e70a2bd7456f445d974ff4a20178d9fc1c963ca8f420f007b39",
+      "ids": [
+        "C0305",
+        "C0306"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0305",
+          "name": "NtvdmConsoleUpdateText"
+        },
+        {
+          "id": "C0306",
+          "name": "NtvdmConsoleUpdateTextConfiguration"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_text.h",
+      "sha256": "796cdb99f0421d177761370b9040302933ac64a3d563ce455404328fbf210039",
+      "ids": [
+        "C0055"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/worker_lifecycle.c",
+      "sha256": "c82db52b06708386f8a6ad141d5676f2c1be2d2fd6f62c56a9726a09363952b2",
+      "ids": [
+        "C0317",
+        "C0318",
+        "C0319"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0317",
+          "name": "NtvdmActivateLifecycle"
+        },
+        {
+          "id": "C0318",
+          "name": "ntvdm_worker_lifecycle_authorize_exit"
+        },
+        {
+          "id": "C0319",
+          "name": "ntvdm_worker_lifecycle_input_terminal"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/worker_lifecycle.h",
+      "sha256": "63d36f87afbe38571aa7e805592da2fa4187684342aa81675a32221369618c32",
+      "ids": [
+        "C0057"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/ntvdm-exe/wow/wow_user_runtime.c",
+      "sha256": "195ed8a3c08266d5783bae23364b968c40d42adc0e3c23d0895be58b4da0d1e3",
+      "ids": [
+        "C0618"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0618",
+          "name": "wow_user_runtime_current"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/run16-exe/main.c",
+      "sha256": "6bf513efac8b8eed4aee766374848c3478fc10ae7fea2ec3118bf3da815dd134",
+      "ids": [
+        "C0609",
+        "C0610",
+        "C0611",
+        "C0612"
+      ],
+      "kinds": {
+        "symbol": 4
+      },
+      "symbols": [
+        {
+          "id": "C0609",
+          "name": "BaseDotComSuffixName"
+        },
+        {
+          "id": "C0610",
+          "name": "BaseDotExeSuffixName"
+        },
+        {
+          "id": "C0611",
+          "name": "BaseDotPifSuffixName"
+        },
+        {
+          "id": "C0612",
+          "name": "CsrPortHeap"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/vdmredir-dll/include",
+      "sha256": null,
+      "ids": [
+        "C0145"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/vdmredir-dll/include/mvdm_redirector_guest_copy.h",
+      "sha256": "2efa694f5d8910c0bca0e3ef3f64e5255f5821ec35d65e6ea95fedce82d65b9d",
+      "ids": [
+        "C0058"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/vdmredir-dll/source/mvdm_redirector_guest_copy.c",
+      "sha256": "6818fcf2b34c10ebf721c5ad0b615b566512e82788dddb7702df368631eb4d8a",
+      "ids": [
+        "C0600",
+        "C0601",
+        "C0602"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0600",
+          "name": "mvdm_redirector_cd_name_target"
+        },
+        {
+          "id": "C0601",
+          "name": "mvdm_redirector_copy_ansi_to_guest"
+        },
+        {
+          "id": "C0602",
+          "name": "mvdm_redirector_copy_wide_to_guest"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/worker-base/connection.c",
+      "sha256": "9b88445427acf5ec599fe07743fc3806839c69c2ec43e119c7f83ecbf324e810",
+      "ids": [
+        "C0321"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0321",
+          "name": "worker_base_request_console_exit"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/worker-base/connection.h",
+      "sha256": "07a9aa207dee1dce9a1c676a050d7d33188e13aa1baa26fe2fb68d5451fe4889",
+      "ids": [
+        "C0060"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include",
+      "sha256": null,
+      "ids": [
+        "C0146"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/button-drawing",
+      "sha256": null,
+      "ids": [
+        "C0147"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/button-drawing/precomp.h",
+      "sha256": "c91243cc77b05d6f5816c909859c5fbb1e02c80c4b64351d6cd3394d02173eec",
+      "ids": [
+        "C0062"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-client",
+      "sha256": null,
+      "ids": [
+        "C0148"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-client/precomp.h",
+      "sha256": "a356b8494199c36cb44a39d0f4766f1fbc1ad00fe48d9d6732099ec693a8ef00",
+      "ids": [
+        "C0064"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-draw-state",
+      "sha256": null,
+      "ids": [
+        "C0149"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-draw-state/precomp.h",
+      "sha256": "bc09581d9816a08ab0ed4ddb0afcc9f091e867b0d35cb931b6d53435fc31e6d3",
+      "ids": [
+        "C0065"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-drawing",
+      "sha256": null,
+      "ids": [
+        "C0150"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-drawing/precomp.h",
+      "sha256": "279f3e88868b0059650042660883d01b14e0f4c510b9f1779418b76b391aae24",
+      "ids": [
+        "C0066"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-geometry",
+      "sha256": null,
+      "ids": [
+        "C0151"
+      ],
+      "kinds": {
+        "include-root": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/control-geometry/precomp.h",
+      "sha256": "65c28ced536af80e4fe7b6f3d3096b78efe48087e61843dbc0aa5d3087bf4619",
+      "ids": [
+        "C0067"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_bitmap_bindings.h",
+      "sha256": "0a7ca0b711fb6503a134304dfe976cdba385c8cd907d182239686f7d39148df4",
+      "ids": [
+        "C0072"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_callback_frame_lease.h",
+      "sha256": "9068eb5b7d5276a8433c1b55a057888736398708f8f31d0268d85d32ac3e1c79",
+      "ids": [
+        "C0075"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_class_query_bindings.h",
+      "sha256": "966382e14b4c1a89143497937073cc38c094b676906866ffe871b8b28c40aaa9",
+      "ids": [
+        "C0077"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_class_register_bindings.h",
+      "sha256": "f88aca85b5a89c25e9c90d88b402598e613bd1d674c15e1119949bb5834d4f84",
+      "ids": [
+        "C0078"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_class_remove_bindings.h",
+      "sha256": "67822c8c4c3a1b489bfdb3ead050e8b69aa211b7e82e785e2efc49a89f99937f",
+      "ids": [
+        "C0079"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_cleanup_bindings.h",
+      "sha256": "d940a7fdc7bba51b14c0c5c29194f2e4f6a7bfe5bc01dec8dab60e05b38a4948",
+      "ids": [
+        "C0081"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_clipboard_epoch.h",
+      "sha256": "7fdcd882e1740a47a985eee555675f3c5aef5aa73e401fd631a764377ce9942b",
+      "ids": [
+        "C0082"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_common_dialog_calls.h",
+      "sha256": "36b08b11ae21953a23ee7a8cf41984d8129d8a905816a5d38b8eb7637aa2eb40",
+      "ids": [
+        "C0083"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_default_message_bindings.h",
+      "sha256": "4c8f5ab54cdb291f9e66eb8bf8c2bc5bcc5fee9f9833b3824622a1f0eb0a147b",
+      "ids": [
+        "C0087"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_edit_call_bindings.h",
+      "sha256": "684739f82bf323af544af3250162c81e76d925e4d12472a434ab8e8c90aa69b4",
+      "ids": [
+        "C0095"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_idle_hook_binding.h",
+      "sha256": "3b0301d329468ff52cb2673d93854a3a32f164b4b9c6172be4f7a3cd940c8210",
+      "ids": [
+        "C0105"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_menu_parser_bindings.h",
+      "sha256": "f54a2788dd9f90c602db3b08e4b6d6357ef7b3f30b84149b0e7f0ceeae2e0a25",
+      "ids": [
+        "C0108"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_menu_resource_bindings.h",
+      "sha256": "5d11c9cc839082caf93e19e3a63b9217c638117a81f86a425eacba47ad7ce297",
+      "ids": [
+        "C0109"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_message_lifetime.h",
+      "sha256": "26c608d6b21e797188a680dee5cf9ad9130bf79ec89449893f755094b618c3f9",
+      "ids": [
+        "C0110"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_native_process.h",
+      "sha256": "2edeaa3437e5ceac2986ab82196436081963f56f9c09ef768f93aead69b26c82",
+      "ids": [
+        "C0112"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_ole_descriptor_private.h",
+      "sha256": "2699951c48276f8ea17f892c4ff018d118a22a7a0fda003ae8d80ac14c24facb",
+      "ids": [
+        "C0113"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_registry_binding.h",
+      "sha256": "f0f20904101782095c79bf697dd8225ee481ff2c4b40ce6f07b2dcc854cbef26",
+      "ids": [
+        "C0114"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_init_bindings.h",
+      "sha256": "ac7d1f8c2070ae07e82277013380955ed363569893d2169e545b99c2595c25bd",
+      "ids": [
+        "C0116"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_order_bindings.h",
+      "sha256": "61efd1be0d7bd9e5acb2162140bdf6c631579da752513edb9f2df051e48ff493",
+      "ids": [
+        "C0117"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_profile_bindings.h",
+      "sha256": "702ef5ae1c07557afe8e9f162b1961453d66b1377d4bde44b5dcf80efcba1583",
+      "ids": [
+        "C0118"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_task_termination.h",
+      "sha256": "fd0977e38d97b27d60015238ec11756261b62942737fb405fb59cd3e3456edc9",
+      "ids": [
+        "C0119"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_capture_bindings.h",
+      "sha256": "843682131b8054cfbfce6a9f81df26248fd9824bd359ed9310b0cc2fe9273529",
+      "ids": [
+        "C0121"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_client_view_layout.h",
+      "sha256": "db410bac67ce2d3aac62dc7d4c1fd43a362abcb0f7a48687a7f91ca39e0e4c27",
+      "ids": [
+        "C0122"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_native_extension.h",
+      "sha256": "5ae3d36993ceeeb64436f9c99cff1b103d306c4aebd5fde8fed28949f41e11b2",
+      "ids": [
+        "C0123"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_object_bindings.h",
+      "sha256": "5cd9d4730a993cb143001d5c92521b59eb9d85bd3f4eee4bfada0f431c10796d",
+      "ids": [
+        "C0124"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_private_access.h",
+      "sha256": "28c2c5d43980dcbd931f6227dbe641a5a6dd703c6a58c35eda7cfef1543c60fd",
+      "ids": [
+        "C0125"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_thunk_scope.h",
+      "sha256": "7e3a9a1e6e563219b3ebfdfd0d488fdf6f8df3675aaf8730effc6eb4acc673e5",
+      "ids": [
+        "C0128"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_window_client_state_bindings.h",
+      "sha256": "e5189ce658990a27048c164a2c9863bab30976e94a249605c5836d9dd6595b77",
+      "ids": [
+        "C0129"
+      ],
+      "kinds": {
+        "header": 1
+      },
+      "symbols": [],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_bitmap_bindings.c",
+      "sha256": "fcef55ad919e28ac93f7fd5ad4cfcc76fad9450fb79fa97180a3e077ffdd1da9",
+      "ids": [
+        "C0322",
+        "C0614"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0322",
+          "name": "wow_bitmap_current"
+        },
+        {
+          "id": "C0614",
+          "name": "wow_bitmap_lock"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_button_lifetime.c",
+      "sha256": "3bd06583604b8d3b68fb8310758a7fd2fe4dc9d9d61167f8b0ee3b9af734866a",
+      "ids": [
+        "C0323",
+        "C0324",
+        "C0325",
+        "C0326",
+        "C0327"
+      ],
+      "kinds": {
+        "symbol": 5
+      },
+      "symbols": [
+        {
+          "id": "C0323",
+          "name": "wow_button_atlas_blit"
+        },
+        {
+          "id": "C0324",
+          "name": "wow_button_current_resources"
+        },
+        {
+          "id": "C0325",
+          "name": "wow_button_free_state"
+        },
+        {
+          "id": "C0326",
+          "name": "wow_button_scope_enter"
+        },
+        {
+          "id": "C0327",
+          "name": "wow_button_scope_leave"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_callback_frame_lease.c",
+      "sha256": "bffc0b9b7836a78f19df2e5e764a2aae8fb66a33bd2ed1e1ee6a2e7ce344908e",
+      "ids": [
+        "C0328",
+        "C0329"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0328",
+          "name": "wow_callback_control_capture"
+        },
+        {
+          "id": "C0329",
+          "name": "wow_callback_control_restore"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_class_words_binding.c",
+      "sha256": "bb1a73851b95f5493a6b56547b49e500cdcb82eb92b5552d5d5452ccaba5e10d",
+      "ids": [
+        "C0330"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0330",
+          "name": "wow_class_words_find_atom"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_cleanup_bindings.c",
+      "sha256": "6bb3dd3d5556df3364114950a48d5517324cad0477d6cafa885b266a31150640",
+      "ids": [
+        "C0331",
+        "C0332"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0331",
+          "name": "wow_cleanup_set_class_procedure"
+        },
+        {
+          "id": "C0332",
+          "name": "wow_cleanup_set_window_procedure"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_clipboard_epoch.c",
+      "sha256": "71a0c5795f0fb3d988c67d7abf5c0f1cbc895856ae8034ce55b4c0e0fb5a107b",
+      "ids": [
+        "C0333"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0333",
+          "name": "wow_clipboard_opened"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_common_dialog_callback.c",
+      "sha256": "7f74375ff12e04f359a5571521c556b75131ddf86527bf1f14ddb4e6c084fe1a",
+      "ids": [
+        "C0334",
+        "C0335",
+        "C0336"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0334",
+          "name": "WCD32DialogProc"
+        },
+        {
+          "id": "C0335",
+          "name": "WCD32FindReplaceDialogProc"
+        },
+        {
+          "id": "C0336",
+          "name": "WCD32PrintSetupDialogProc"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_common_dialog_calls.c",
+      "sha256": "4373dd6bad1f4b3a1a517f450c327d997c5169d66ecad9f157e5c2417b52c702",
+      "ids": [
+        "C0337",
+        "C0338",
+        "C0339",
+        "C0340",
+        "C0341",
+        "C0342",
+        "C0343"
+      ],
+      "kinds": {
+        "symbol": 7
+      },
+      "symbols": [
+        {
+          "id": "C0337",
+          "name": "wow_native_choose_color"
+        },
+        {
+          "id": "C0338",
+          "name": "wow_native_choose_font"
+        },
+        {
+          "id": "C0339",
+          "name": "wow_native_find_text"
+        },
+        {
+          "id": "C0340",
+          "name": "wow_native_open_file"
+        },
+        {
+          "id": "C0341",
+          "name": "wow_native_print_dialog"
+        },
+        {
+          "id": "C0342",
+          "name": "wow_native_replace_text"
+        },
+        {
+          "id": "C0343",
+          "name": "wow_native_save_file"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_control_brush_bindings.c",
+      "sha256": "9a20472b39134c3f61b0dc7965514a9922a4ae35e24f3eed5a3e8e6cfad829e4",
+      "ids": [
+        "C0344"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0344",
+          "name": "wow_control_brush"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_control_draw_state.c",
+      "sha256": "7487e80269c9e08081e42556b1f8e758b2d7a969046663a7491b147fcadb6cc9",
+      "ids": [
+        "C0345",
+        "C0346",
+        "C0347",
+        "C0348"
+      ],
+      "kinds": {
+        "symbol": 4
+      },
+      "symbols": [
+        {
+          "id": "C0345",
+          "name": "wow_control_atlas_blit"
+        },
+        {
+          "id": "C0346",
+          "name": "wow_control_draw_current"
+        },
+        {
+          "id": "C0347",
+          "name": "wow_control_draw_select"
+        },
+        {
+          "id": "C0348",
+          "name": "wow_control_draw_state"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_control_fnid.c",
+      "sha256": "3fba58040f47d8c851548fadf5764df031d21563ff24b6a20e6e909a6c71c2d9",
+      "ids": [
+        "C0350"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0350",
+          "name": "wow_edit_set_window_fnid"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_control_state.c",
+      "sha256": "0c63a06a8b05182793db23b7b6d5a1bf2cbf0d3b9578985c2c11fb75262777a6",
+      "ids": [
+        "C0351",
+        "C0352"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0351",
+          "name": "ClearWindowState"
+        },
+        {
+          "id": "C0352",
+          "name": "SetWindowState"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_default_message_bindings.c",
+      "sha256": "85d2b977eae204acc9f474db4a7f9b6fa902daeffec1b4688d314e63c4b811cd",
+      "ids": [
+        "C0615"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0615",
+          "name": "wow_default_message_state"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_default_native_bindings.c",
+      "sha256": "1f7765c4e7fcd929c1209698806dadc1b5dce72155e14d4a1da3f7aed1347630",
+      "ids": [
+        "C0353",
+        "C0354"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0353",
+          "name": "wow_default_CsSendMessage"
+        },
+        {
+          "id": "C0354",
+          "name": "wow_default_find_nc_hit"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_default_state_bindings.c",
+      "sha256": "1f81054f43d1d76c429e978a43e23711841e354f91feeb7f2feb56656906af58",
+      "ids": [
+        "C0355"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0355",
+          "name": "wow_default_ensure_shell_message"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_default_window_bindings.c",
+      "sha256": "9cef1bb568121d430450db3eb67eaf0b5929e4393456287911cbbcad120b09d4",
+      "ids": [
+        "C0356",
+        "C0357",
+        "C0358"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0356",
+          "name": "wow_default_current"
+        },
+        {
+          "id": "C0357",
+          "name": "wow_default_window_proc"
+        },
+        {
+          "id": "C0358",
+          "name": "wow_edit_default_control_color"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_dialog_call_bindings.c",
+      "sha256": "eaf6347286772fefc4ea70b857e3b1a4c5939a022c5caf3cfb94a8d4fdfa0a11",
+      "ids": [
+        "C0359",
+        "C0360",
+        "C0361",
+        "C0362"
+      ],
+      "kinds": {
+        "symbol": 4
+      },
+      "symbols": [
+        {
+          "id": "C0359",
+          "name": "wow_dialog_set_pointer_word"
+        },
+        {
+          "id": "C0360",
+          "name": "wow_dialog_set_system_menu"
+        },
+        {
+          "id": "C0361",
+          "name": "wow_dialog_set_thread_state"
+        },
+        {
+          "id": "C0362",
+          "name": "wow_dialog_zap_active_and_focus"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_dialog_context_bindings.c",
+      "sha256": "a3fb49677acfed80dcdbffc1e0bf93a557a700100a7154c2a9bf6173dc58761f",
+      "ids": [
+        "C0363"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0363",
+          "name": "wow_dialog_current"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_dialog_finalization_binding.c",
+      "sha256": "939291b35b56fac0159da1ecbcf5a2b1cb98c3fb2df1518b7e2b84400ca37c77",
+      "ids": [
+        "C0364",
+        "C0365",
+        "C0366",
+        "C0367",
+        "C0368",
+        "C0369"
+      ],
+      "kinds": {
+        "symbol": 6
+      },
+      "symbols": [
+        {
+          "id": "C0364",
+          "name": "wow_user_dlg_dir_listA"
+        },
+        {
+          "id": "C0365",
+          "name": "wow_user_dlg_dir_list_comboA"
+        },
+        {
+          "id": "C0366",
+          "name": "wow_user_dlg_dir_selectA"
+        },
+        {
+          "id": "C0367",
+          "name": "wow_user_dlg_dir_select_comboA"
+        },
+        {
+          "id": "C0368",
+          "name": "wow_user_end_dialog"
+        },
+        {
+          "id": "C0369",
+          "name": "wow_user_map_dialog_rect"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_dialog_keyboard_binding.c",
+      "sha256": "2ceba14eccd7adb9dcf3cd1ac68b5e936c201f84ae4d32e4959a101d307b6b42",
+      "ids": [
+        "C0370",
+        "C0371"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0370",
+          "name": "wow_dialog_messageA"
+        },
+        {
+          "id": "C0371",
+          "name": "wow_dialog_messageW"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_dialog_memory.c",
+      "sha256": "ce0facbd87ae1b515292ddd345218d71a8bc42a6a1ceb0e0a1bb0b78ce327845",
+      "ids": [
+        "C0372",
+        "C0373",
+        "C0374"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0372",
+          "name": "GetEditDS"
+        },
+        {
+          "id": "C0373",
+          "name": "ReleaseEditDS"
+        },
+        {
+          "id": "C0374",
+          "name": "WOWDlgInit"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "sha256": "d03c4b4d40079099197770990a9b2c58f90c0d7c9d4546aae5154169dad33539",
+      "ids": [
+        "C0375",
+        "C0376",
+        "C0377"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0375",
+          "name": "wow_dialog_current_foreground"
+        },
+        {
+          "id": "C0376",
+          "name": "wow_dialog_cursor_position"
+        },
+        {
+          "id": "C0377",
+          "name": "wow_dialog_window_foreground"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_dialog_procedure_bindings.c",
+      "sha256": "b27ecd91447057f7481eb34e6a16dacd197711d04efd7c62c7685260a200b3c0",
+      "ids": [
+        "C0378",
+        "C0380",
+        "C0381"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0378",
+          "name": "wow_dialog_host_call"
+        },
+        {
+          "id": "C0380",
+          "name": "wow_dialog_host_initialize"
+        },
+        {
+          "id": "C0381",
+          "name": "wow_dialog_host_notify"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_edit_call_bindings.c",
+      "sha256": "aae75d219ad8bac84fabc897fa73664b9db89ab68a6e7a398db534ae0599bc12",
+      "ids": [
+        "C0383",
+        "C0384",
+        "C0385",
+        "C0386",
+        "C0387",
+        "C0388",
+        "C0389"
+      ],
+      "kinds": {
+        "symbol": 7
+      },
+      "symbols": [
+        {
+          "id": "C0383",
+          "name": "wow_edit_FillWindow"
+        },
+        {
+          "id": "C0384",
+          "name": "wow_edit_NtUserDefSetText"
+        },
+        {
+          "id": "C0385",
+          "name": "wow_edit_NtUserGetControlColor"
+        },
+        {
+          "id": "C0386",
+          "name": "wow_edit_alter_window_style"
+        },
+        {
+          "id": "C0387",
+          "name": "wow_edit_client_info"
+        },
+        {
+          "id": "C0388",
+          "name": "wow_edit_control_extent"
+        },
+        {
+          "id": "C0389",
+          "name": "wow_list_reset_double_click"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_edit_conversion_bindings.c",
+      "sha256": "867ace11b51104d0ca621212f3ec70bc6e250a9ed436c1d804348286337d2ec5",
+      "ids": [
+        "C0390"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0390",
+          "name": "wow_edit_CsSendMessage"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_edit_entry_bindings.c",
+      "sha256": "ec80fb7d280dbf2ec62e23788baa9d5db38e3c7fc43ef6e90150445060ba9d4a",
+      "ids": [
+        "C0391",
+        "C0392"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0391",
+          "name": "wow_control_set_timer"
+        },
+        {
+          "id": "C0392",
+          "name": "wow_edit_current"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_edit_thread_bindings.c",
+      "sha256": "83393f9136fa26d49cd97d246bca08507c37190c469d93e29891298cf6811ee0",
+      "ids": [
+        "C0400"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0400",
+          "name": "wow_edit_window_thread_id"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_hook_callback.c",
+      "sha256": "0bc020eecf7908d8533b479373273f2ff091ece692de5e3341a1fc4a65c85a71",
+      "ids": [
+        "C0401"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0401",
+          "name": "WU32StdHookProc"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_menu_native_bindings.c",
+      "sha256": "641a1cd995ec39391c237b64211573931afd58446cfdfe115c0d394347fc84e2",
+      "ids": [
+        "C0403",
+        "C0404",
+        "C0405",
+        "C0406",
+        "C0407",
+        "C0408",
+        "C0409",
+        "C0410",
+        "C0411",
+        "C0412",
+        "C0413",
+        "C0414",
+        "C0415",
+        "C0416",
+        "C0417",
+        "C0418",
+        "C0419",
+        "C0420",
+        "C0421",
+        "C0422"
+      ],
+      "kinds": {
+        "symbol": 20
+      },
+      "symbols": [
+        {
+          "id": "C0403",
+          "name": "wow_menu_native_AppendMenuA"
+        },
+        {
+          "id": "C0404",
+          "name": "wow_menu_native_ChangeMenuA"
+        },
+        {
+          "id": "C0405",
+          "name": "wow_menu_native_CheckMenuItem"
+        },
+        {
+          "id": "C0406",
+          "name": "wow_menu_native_CreateMenu"
+        },
+        {
+          "id": "C0407",
+          "name": "wow_menu_native_CreatePopupMenu"
+        },
+        {
+          "id": "C0408",
+          "name": "wow_menu_native_DeleteMenu"
+        },
+        {
+          "id": "C0409",
+          "name": "wow_menu_native_DestroyMenu"
+        },
+        {
+          "id": "C0410",
+          "name": "wow_menu_native_DrawMenuBar"
+        },
+        {
+          "id": "C0411",
+          "name": "wow_menu_native_EnableMenuItem"
+        },
+        {
+          "id": "C0412",
+          "name": "wow_menu_native_GetMenu"
+        },
+        {
+          "id": "C0413",
+          "name": "wow_menu_native_GetSystemMenu"
+        },
+        {
+          "id": "C0414",
+          "name": "wow_menu_native_HiliteMenuItem"
+        },
+        {
+          "id": "C0415",
+          "name": "wow_menu_native_InsertMenuA"
+        },
+        {
+          "id": "C0416",
+          "name": "wow_menu_native_InsertMenuItemW"
+        },
+        {
+          "id": "C0417",
+          "name": "wow_menu_native_ModifyMenuA"
+        },
+        {
+          "id": "C0418",
+          "name": "wow_menu_native_RemoveMenu"
+        },
+        {
+          "id": "C0419",
+          "name": "wow_menu_native_SetMenu"
+        },
+        {
+          "id": "C0420",
+          "name": "wow_menu_native_SetMenuItemBitmaps"
+        },
+        {
+          "id": "C0421",
+          "name": "wow_menu_native_TrackPopupMenu"
+        },
+        {
+          "id": "C0422",
+          "name": "wow_menu_native_TrackPopupMenuEx"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_message_lifetime.c",
+      "sha256": "a5b966ab4c8cbf2122665efba4679153fd1ba81c2ce6da585f695a94f8d4c72e",
+      "ids": [
+        "C0423",
+        "C0424",
+        "C0425",
+        "C0426",
+        "C0427",
+        "C0428",
+        "C0429"
+      ],
+      "kinds": {
+        "symbol": 7
+      },
+      "symbols": [
+        {
+          "id": "C0423",
+          "name": "wow_message_free16"
+        },
+        {
+          "id": "C0424",
+          "name": "wow_message_heap32"
+        },
+        {
+          "id": "C0425",
+          "name": "wow_message_release32"
+        },
+        {
+          "id": "C0426",
+          "name": "wow_message_stack_enter"
+        },
+        {
+          "id": "C0427",
+          "name": "wow_message_stack_leave"
+        },
+        {
+          "id": "C0428",
+          "name": "wow_message_unwind16"
+        },
+        {
+          "id": "C0429",
+          "name": "wow_message_unwind32"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_ole_descriptor_binding.c",
+      "sha256": "db6a9dcba85b9df53580ad3673dcbea55edb0e4155c70183d3044e4013fe89a0",
+      "ids": [
+        "C0431",
+        "C0432",
+        "C0613"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0431",
+          "name": "wow_ole_convert_descriptor"
+        },
+        {
+          "id": "C0432",
+          "name": "wow_ole_touch_pointer"
+        },
+        {
+          "id": "C0613",
+          "name": "g_abLeadTable"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_private_user_compat.c",
+      "sha256": "7d6392e71fff4fee054cb2eedec29f6ff3d711d2d849c58ac9252970c6fdd40c",
+      "ids": [
+        "C0433"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0433",
+          "name": "wow_user_load_menu_indirect"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_public_user_facade.c",
+      "sha256": "e74e2ad47408f8ce83203b2d52029407d4a3f5e0980b25b8e40010b1c979f239",
+      "ids": [
+        "C0442"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0442",
+          "name": "wow_user_dialog_box_indirect_param"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_registry_binding.c",
+      "sha256": "f7ba62630f538d45fcefb2985f4093d5769e848829350dac1c6f818b271f8544",
+      "ids": [
+        "C0443",
+        "C0444",
+        "C0445",
+        "C0446",
+        "C0447",
+        "C0448",
+        "C0449",
+        "C0450",
+        "C0451",
+        "C0452",
+        "C0453",
+        "C0454"
+      ],
+      "kinds": {
+        "symbol": 12
+      },
+      "symbols": [
+        {
+          "id": "C0443",
+          "name": "wow_registry_close_key"
+        },
+        {
+          "id": "C0444",
+          "name": "wow_registry_create_key"
+        },
+        {
+          "id": "C0445",
+          "name": "wow_registry_delete_key"
+        },
+        {
+          "id": "C0446",
+          "name": "wow_registry_enum_key"
+        },
+        {
+          "id": "C0447",
+          "name": "wow_registry_enum_value"
+        },
+        {
+          "id": "C0448",
+          "name": "wow_registry_open_key"
+        },
+        {
+          "id": "C0449",
+          "name": "wow_registry_open_key_ex"
+        },
+        {
+          "id": "C0450",
+          "name": "wow_registry_query_info_key"
+        },
+        {
+          "id": "C0451",
+          "name": "wow_registry_query_value"
+        },
+        {
+          "id": "C0452",
+          "name": "wow_registry_query_value_ex"
+        },
+        {
+          "id": "C0453",
+          "name": "wow_registry_set_value"
+        },
+        {
+          "id": "C0454",
+          "name": "wow_registry_set_value_ex"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_shell_callback.c",
+      "sha256": "255792a7d691bafb4eae847035edf0d2f372984d1cb9f5a8d0545d3d2e68e8f4",
+      "ids": [
+        "C0455"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0455",
+          "name": "wow_shell_execute"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_sim32_pointer_compat.c",
+      "sha256": "44874c6b1c952f6e063e50e17432ad5f647f3d6c5f763e74192ba58757316b46",
+      "ids": [
+        "C0456"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0456",
+          "name": "Sim32FlushVDMPointer"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_task_cleanup_entry.c",
+      "sha256": "d6a1b003cc269accb15848fd9306eb7f84b69117134011fc53b8657253779d2c",
+      "ids": [
+        "C0457"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0457",
+          "name": "W32FreeTask"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_task_termination.c",
+      "sha256": "3424c0eea1dafd7eedd8ee313b3a85b4b34b26842bb3454365af3a04b85172ed",
+      "ids": [
+        "C0460",
+        "C0461",
+        "C0462",
+        "C0463"
+      ],
+      "kinds": {
+        "symbol": 4
+      },
+      "symbols": [
+        {
+          "id": "C0460",
+          "name": "W32ExitWowProcess"
+        },
+        {
+          "id": "C0461",
+          "name": "wow_task_termination_bind"
+        },
+        {
+          "id": "C0462",
+          "name": "wow_task_termination_fail"
+        },
+        {
+          "id": "C0463",
+          "name": "wow_task_termination_retire"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_timer_callback.c",
+      "sha256": "173ba3ab5e0299c6cf7b8400f0b48790055b4ef664bd7b2d3ba6233c304f12d9",
+      "ids": [
+        "C0464"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0464",
+          "name": "W32TimerFunc"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_borrow_scope.c",
+      "sha256": "d3209c424ee1037d5bfe41716a5dfa6151ea7500403377f63a656fea0bed1faf",
+      "ids": [
+        "C0465"
+      ],
+      "kinds": {
+        "symbol": 1
+      },
+      "symbols": [
+        {
+          "id": "C0465",
+          "name": "wow_user_borrow_named_class"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_discovery.c",
+      "sha256": "766160007de138f7c3055dc171b0ad6b7b65b1c0a2c18c098633712e38a227a0",
+      "ids": [
+        "C0466",
+        "C0467",
+        "C0468",
+        "C0469",
+        "C0470",
+        "C0471",
+        "C0472",
+        "C0473",
+        "C0474",
+        "C0475",
+        "C0476",
+        "C0477",
+        "C0478",
+        "C0479",
+        "C0480"
+      ],
+      "kinds": {
+        "symbol": 15
+      },
+      "symbols": [
+        {
+          "id": "C0466",
+          "name": "wow_native_ChildWindowFromPoint"
+        },
+        {
+          "id": "C0467",
+          "name": "wow_native_EnumChildWindows"
+        },
+        {
+          "id": "C0468",
+          "name": "wow_native_EnumPropsA"
+        },
+        {
+          "id": "C0469",
+          "name": "wow_native_EnumThreadWindows"
+        },
+        {
+          "id": "C0470",
+          "name": "wow_native_EnumWindows"
+        },
+        {
+          "id": "C0471",
+          "name": "wow_native_FindWindowA"
+        },
+        {
+          "id": "C0472",
+          "name": "wow_native_GetActiveWindow"
+        },
+        {
+          "id": "C0473",
+          "name": "wow_native_GetCapture"
+        },
+        {
+          "id": "C0474",
+          "name": "wow_native_GetFocus"
+        },
+        {
+          "id": "C0475",
+          "name": "wow_native_GetForegroundWindow"
+        },
+        {
+          "id": "C0476",
+          "name": "wow_native_GetLastActivePopup"
+        },
+        {
+          "id": "C0477",
+          "name": "wow_native_GetNextDlgGroupItem"
+        },
+        {
+          "id": "C0478",
+          "name": "wow_native_GetNextDlgTabItem"
+        },
+        {
+          "id": "C0479",
+          "name": "wow_native_GetWindowThreadProcessId"
+        },
+        {
+          "id": "C0480",
+          "name": "wow_native_WindowFromPoint"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_native_extension.c",
+      "sha256": "d0dc0dfb97303e3f53344c24d0f3283a0ed5e28d638f93c0902014f010d25d37",
+      "ids": [
+        "C0481",
+        "C0482",
+        "C0483",
+        "C0484",
+        "C0485",
+        "C0486"
+      ],
+      "kinds": {
+        "symbol": 6
+      },
+      "symbols": [
+        {
+          "id": "C0481",
+          "name": "CallBack16"
+        },
+        {
+          "id": "C0482",
+          "name": "WK32ICallProc32"
+        },
+        {
+          "id": "C0483",
+          "name": "WMM32CallProc32"
+        },
+        {
+          "id": "C0484",
+          "name": "wow_extension_free_library"
+        },
+        {
+          "id": "C0485",
+          "name": "wow_extension_get_proc_address"
+        },
+        {
+          "id": "C0486",
+          "name": "wow_extension_load_library_a"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_object_bindings.c",
+      "sha256": "70cdcb1dbf4a1239a4bca5c75eb1d9fb4e67ac5df98486d33fc39368e883550d",
+      "ids": [
+        "C0487",
+        "C0488"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0487",
+          "name": "wow_user_window_public_guest_handle"
+        },
+        {
+          "id": "C0488",
+          "name": "wow_user_window_public_handle"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_private_access.c",
+      "sha256": "ba8081be96b4bc1859aa25de555e0251ef5a3a386bb411bda43f9c4cfac9a789",
+      "ids": [
+        "C0489",
+        "C0490",
+        "C0491",
+        "C0492",
+        "C0493",
+        "C0494",
+        "C0495",
+        "C0496"
+      ],
+      "kinds": {
+        "symbol": 8
+      },
+      "symbols": [
+        {
+          "id": "C0489",
+          "name": "wow_user_get_class_infoA"
+        },
+        {
+          "id": "C0490",
+          "name": "wow_user_get_class_longA"
+        },
+        {
+          "id": "C0491",
+          "name": "wow_user_get_procedure"
+        },
+        {
+          "id": "C0492",
+          "name": "wow_user_get_window_longA"
+        },
+        {
+          "id": "C0493",
+          "name": "wow_user_set_class_longA"
+        },
+        {
+          "id": "C0494",
+          "name": "wow_user_set_procedure"
+        },
+        {
+          "id": "C0495",
+          "name": "wow_user_set_window_longA"
+        },
+        {
+          "id": "C0496",
+          "name": "wow_user_unregister_classA"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_registration_bridge.c",
+      "sha256": "d4576d797c3cdd354078ff0a442cbe5c6a82c9acac1deae17f230140afe82607",
+      "ids": [
+        "C0497",
+        "C0498",
+        "C0499",
+        "C0500",
+        "C0501",
+        "C0502",
+        "C0503",
+        "C0504",
+        "C0505"
+      ],
+      "kinds": {
+        "symbol": 9
+      },
+      "symbols": [
+        {
+          "id": "C0497",
+          "name": "UserRegisterWowHandlers"
+        },
+        {
+          "id": "C0498",
+          "name": "wow_user_call_window_procA"
+        },
+        {
+          "id": "C0499",
+          "name": "wow_user_get_messageA"
+        },
+        {
+          "id": "C0500",
+          "name": "wow_user_notify_startup_noop"
+        },
+        {
+          "id": "C0501",
+          "name": "wow_user_peek_messageA"
+        },
+        {
+          "id": "C0502",
+          "name": "wow_user_peek_messageW"
+        },
+        {
+          "id": "C0503",
+          "name": "wow_user_register_wow_exec"
+        },
+        {
+          "id": "C0504",
+          "name": "wow_user_registered_callbacks"
+        },
+        {
+          "id": "C0505",
+          "name": "wow_user_wait_message"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089",
+      "ids": [
+        "C0506",
+        "C0507",
+        "C0508",
+        "C0509",
+        "C0510",
+        "C0511",
+        "C0512",
+        "C0513",
+        "C0514",
+        "C0515",
+        "C0516",
+        "C0517",
+        "C0518",
+        "C0519",
+        "C0520",
+        "C0521",
+        "C0522",
+        "C0523",
+        "C0524",
+        "C0525",
+        "C0526",
+        "C0527",
+        "C0528",
+        "C0529",
+        "C0530",
+        "C0531",
+        "C0532",
+        "C0533",
+        "C0534",
+        "C0535",
+        "C0536",
+        "C0537",
+        "C0538",
+        "C0539",
+        "C0540",
+        "C0541",
+        "C0542",
+        "C0543",
+        "C0544",
+        "C0545",
+        "C0546",
+        "C0547",
+        "C0548",
+        "C0549",
+        "C0550",
+        "C0551",
+        "C0552",
+        "C0553",
+        "C0554",
+        "C0555",
+        "C0556",
+        "C0557",
+        "C0558",
+        "C0559",
+        "C0560",
+        "C0561",
+        "C0562",
+        "C0563",
+        "C0564",
+        "C0565",
+        "C0566",
+        "C0567",
+        "C0568",
+        "C0569",
+        "C0570",
+        "C0571",
+        "C0572",
+        "C0573",
+        "C0574",
+        "C0575",
+        "C0576",
+        "C0577",
+        "C0578",
+        "C0579",
+        "C0580",
+        "C0581",
+        "C0582",
+        "C0583",
+        "C0584",
+        "C0585",
+        "C0586"
+      ],
+      "kinds": {
+        "symbol": 81
+      },
+      "symbols": [
+        {
+          "id": "C0506",
+          "name": "wow_native_ArrangeIconicWindows"
+        },
+        {
+          "id": "C0507",
+          "name": "wow_native_BeginPaint"
+        },
+        {
+          "id": "C0508",
+          "name": "wow_native_BringWindowToTop"
+        },
+        {
+          "id": "C0509",
+          "name": "wow_native_CallMsgFilterA"
+        },
+        {
+          "id": "C0510",
+          "name": "wow_native_CallMsgFilterW"
+        },
+        {
+          "id": "C0511",
+          "name": "wow_native_CallNextHookEx"
+        },
+        {
+          "id": "C0512",
+          "name": "wow_native_CloseWindow"
+        },
+        {
+          "id": "C0513",
+          "name": "wow_native_CreateCaret"
+        },
+        {
+          "id": "C0514",
+          "name": "wow_native_DefDlgProcA"
+        },
+        {
+          "id": "C0515",
+          "name": "wow_native_DefFrameProcA"
+        },
+        {
+          "id": "C0516",
+          "name": "wow_native_DefMDIChildProcA"
+        },
+        {
+          "id": "C0517",
+          "name": "wow_native_DefWindowProcA"
+        },
+        {
+          "id": "C0518",
+          "name": "wow_native_DeferWindowPos"
+        },
+        {
+          "id": "C0519",
+          "name": "wow_native_DestroyCaret"
+        },
+        {
+          "id": "C0520",
+          "name": "wow_native_DestroyWindow"
+        },
+        {
+          "id": "C0521",
+          "name": "wow_native_DispatchMessageA"
+        },
+        {
+          "id": "C0522",
+          "name": "wow_native_DispatchMessageW"
+        },
+        {
+          "id": "C0523",
+          "name": "wow_native_DragDetect"
+        },
+        {
+          "id": "C0524",
+          "name": "wow_native_EnableScrollBar"
+        },
+        {
+          "id": "C0525",
+          "name": "wow_native_EnableWindow"
+        },
+        {
+          "id": "C0526",
+          "name": "wow_native_EndDeferWindowPos"
+        },
+        {
+          "id": "C0527",
+          "name": "wow_native_EndPaint"
+        },
+        {
+          "id": "C0528",
+          "name": "wow_native_ExcludeUpdateRgn"
+        },
+        {
+          "id": "C0529",
+          "name": "wow_native_FlashWindow"
+        },
+        {
+          "id": "C0530",
+          "name": "wow_native_GetClassNameA"
+        },
+        {
+          "id": "C0531",
+          "name": "wow_native_GetClientRect"
+        },
+        {
+          "id": "C0532",
+          "name": "wow_native_GetDC"
+        },
+        {
+          "id": "C0533",
+          "name": "wow_native_GetDCEx"
+        },
+        {
+          "id": "C0534",
+          "name": "wow_native_GetParent"
+        },
+        {
+          "id": "C0535",
+          "name": "wow_native_GetPropA"
+        },
+        {
+          "id": "C0536",
+          "name": "wow_native_GetScrollPos"
+        },
+        {
+          "id": "C0537",
+          "name": "wow_native_GetScrollRange"
+        },
+        {
+          "id": "C0538",
+          "name": "wow_native_GetUpdateRect"
+        },
+        {
+          "id": "C0539",
+          "name": "wow_native_GetUpdateRgn"
+        },
+        {
+          "id": "C0540",
+          "name": "wow_native_GetWindowDC"
+        },
+        {
+          "id": "C0541",
+          "name": "wow_native_GetWindowRect"
+        },
+        {
+          "id": "C0542",
+          "name": "wow_native_GetWindowTextA"
+        },
+        {
+          "id": "C0543",
+          "name": "wow_native_GetWindowTextLengthA"
+        },
+        {
+          "id": "C0544",
+          "name": "wow_native_GetWindowTextW"
+        },
+        {
+          "id": "C0545",
+          "name": "wow_native_HideCaret"
+        },
+        {
+          "id": "C0546",
+          "name": "wow_native_InvalidateRect"
+        },
+        {
+          "id": "C0547",
+          "name": "wow_native_InvalidateRgn"
+        },
+        {
+          "id": "C0548",
+          "name": "wow_native_MoveWindow"
+        },
+        {
+          "id": "C0549",
+          "name": "wow_native_OpenIcon"
+        },
+        {
+          "id": "C0550",
+          "name": "wow_native_RedrawWindow"
+        },
+        {
+          "id": "C0551",
+          "name": "wow_native_ReleaseCapture"
+        },
+        {
+          "id": "C0552",
+          "name": "wow_native_RemovePropA"
+        },
+        {
+          "id": "C0553",
+          "name": "wow_native_ScrollWindow"
+        },
+        {
+          "id": "C0554",
+          "name": "wow_native_ScrollWindowEx"
+        },
+        {
+          "id": "C0555",
+          "name": "wow_native_SendMessageA"
+        },
+        {
+          "id": "C0556",
+          "name": "wow_native_SendMessageTimeoutA"
+        },
+        {
+          "id": "C0557",
+          "name": "wow_native_SendMessageW"
+        },
+        {
+          "id": "C0558",
+          "name": "wow_native_SetActiveWindow"
+        },
+        {
+          "id": "C0559",
+          "name": "wow_native_SetCapture"
+        },
+        {
+          "id": "C0560",
+          "name": "wow_native_SetCaretPos"
+        },
+        {
+          "id": "C0561",
+          "name": "wow_native_SetCursor"
+        },
+        {
+          "id": "C0562",
+          "name": "wow_native_SetCursorPos"
+        },
+        {
+          "id": "C0563",
+          "name": "wow_native_SetDlgItemTextW"
+        },
+        {
+          "id": "C0564",
+          "name": "wow_native_SetFocus"
+        },
+        {
+          "id": "C0565",
+          "name": "wow_native_SetForegroundWindow"
+        },
+        {
+          "id": "C0566",
+          "name": "wow_native_SetParent"
+        },
+        {
+          "id": "C0567",
+          "name": "wow_native_SetPropA"
+        },
+        {
+          "id": "C0568",
+          "name": "wow_native_SetScrollInfo"
+        },
+        {
+          "id": "C0569",
+          "name": "wow_native_SetScrollPos"
+        },
+        {
+          "id": "C0570",
+          "name": "wow_native_SetScrollRange"
+        },
+        {
+          "id": "C0571",
+          "name": "wow_native_SetWindowContextHelpId"
+        },
+        {
+          "id": "C0572",
+          "name": "wow_native_SetWindowPlacement"
+        },
+        {
+          "id": "C0573",
+          "name": "wow_native_SetWindowPos"
+        },
+        {
+          "id": "C0574",
+          "name": "wow_native_SetWindowTextA"
+        },
+        {
+          "id": "C0575",
+          "name": "wow_native_SetWindowTextW"
+        },
+        {
+          "id": "C0576",
+          "name": "wow_native_SetWindowWord"
+        },
+        {
+          "id": "C0577",
+          "name": "wow_native_ShowCaret"
+        },
+        {
+          "id": "C0578",
+          "name": "wow_native_ShowCursor"
+        },
+        {
+          "id": "C0579",
+          "name": "wow_native_ShowOwnedPopups"
+        },
+        {
+          "id": "C0580",
+          "name": "wow_native_ShowScrollBar"
+        },
+        {
+          "id": "C0581",
+          "name": "wow_native_ShowWindow"
+        },
+        {
+          "id": "C0582",
+          "name": "wow_native_UpdateWindow"
+        },
+        {
+          "id": "C0583",
+          "name": "wow_native_ValidateRect"
+        },
+        {
+          "id": "C0584",
+          "name": "wow_native_ValidateRgn"
+        },
+        {
+          "id": "C0585",
+          "name": "wow_user_idle_hook_for_current"
+        },
+        {
+          "id": "C0586",
+          "name": "wow_user_msg_wait"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_thunk_scope.c",
+      "sha256": "650318802ad3d08a2a6b3f0428bba1ef51551bf5ad3976f4e204a67a50cbe6d3",
+      "ids": [
+        "C0587",
+        "C0588",
+        "C0589"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0587",
+          "name": "wow_user_dispatch_exception"
+        },
+        {
+          "id": "C0588",
+          "name": "wow_user_invoke_thunk"
+        },
+        {
+          "id": "C0589",
+          "name": "wow_user_sys_error_box"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_window_client_access_bindings.c",
+      "sha256": "a59e41958744681e972d2767a549e5fc20f77e4aa5b35c5a8f3e76e84e2c0e31",
+      "ids": [
+        "C0590",
+        "C0591",
+        "C0592"
+      ],
+      "kinds": {
+        "symbol": 3
+      },
+      "symbols": [
+        {
+          "id": "C0590",
+          "name": "wow_window_client_send_message"
+        },
+        {
+          "id": "C0591",
+          "name": "wow_window_client_set_window_long"
+        },
+        {
+          "id": "C0592",
+          "name": "xxxSetWindowData"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_window_client_state_bindings.c",
+      "sha256": "a9630ad86dc92afe3c96d71eb12869ad0eba9e2f02c552f0d39d41e3a4d10ab4",
+      "ids": [
+        "C0593",
+        "C0594",
+        "C0595",
+        "C0596",
+        "C0597"
+      ],
+      "kinds": {
+        "symbol": 5
+      },
+      "symbols": [
+        {
+          "id": "C0593",
+          "name": "wow_window_client_context_help"
+        },
+        {
+          "id": "C0594",
+          "name": "wow_window_client_desktop"
+        },
+        {
+          "id": "C0595",
+          "name": "wow_window_client_owns_state"
+        },
+        {
+          "id": "C0596",
+          "name": "wow_window_client_validate_window"
+        },
+        {
+          "id": "C0597",
+          "name": "wow_window_client_validate_window_no_rip"
+        }
+      ],
+      "wow_body_review": "not-covered-by-wow-body-record",
+      "review_evidence": null,
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_window_creation_binding.c",
+      "sha256": "df7672b6dec8d748e4b52e74fc93bb767f3100da07074697c61ffcafd24e8c5f",
+      "ids": [
+        "C0598",
+        "C0599"
+      ],
+      "kinds": {
+        "symbol": 2
+      },
+      "symbols": [
+        {
+          "id": "C0598",
+          "name": "wow_control_create_window_ex"
+        },
+        {
+          "id": "C0599",
+          "name": "wow_user_create_dialog_window_ex"
+        }
+      ],
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+    }
+  ]
+}
