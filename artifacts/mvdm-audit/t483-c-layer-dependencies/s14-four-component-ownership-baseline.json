@@ -1,0 +1,217 @@
+{
+  "kind": "source-ownership-review",
+  "baseline": "f1597df53f0eea3098007526ebbd7e9f48463c4d",
+  "historical_moves": {
+    "T418_S4": "df34f4ce5: src/session to src/ntvdm/session, core files unchanged",
+    "T419_S5": "e769ac104: src/ntvdm to src/ntvdm-exe"
+  },
+  "inputs": [
+    {
+      "path": "src/compat/host_context.c",
+      "sha256": "EF24A8FC596DB917ED862A62183FC3613E7168B4FB1C2733E3E61B199BAAAAF2"
+    },
+    {
+      "path": "src/compat/include/host_context.h",
+      "sha256": "952E1841755F869096DF5AB9C02B123A1ADC8D529858888F8AD7836D5AAD9B29"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.c",
+      "sha256": "5BD4DC53CFA781F00D3C3D6F750D45BE33BBB5AB027719C079101FF9DF6FDB80"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.h",
+      "sha256": "697DBF171FB56BCBDD8A3CEACC98BC2783E6658EF92CE0B09F2E5DC7B11B602C"
+    }
+  ],
+  "findings": [
+    {
+      "owner": "B host_context",
+      "action": "Reuse existing binding; no second TLS registry.",
+      "evidence": "host_context.c owns current_context TLS; F session_thread_current uses offsetof to recover its containing session",
+      "operation": "current-thread binding"
+    },
+    {
+      "owner": "B host_context",
+      "action": "Review every registered function provider; B registry ownership does not imply cleanup body ownership.",
+      "evidence": "F session_register_teardown delegates registration; F session_dispose_with_reason invokes B disposal before ending guest memory",
+      "operation": "resource cleanup registry"
+    },
+    {
+      "owner": "F session",
+      "action": "Keep product policy F; do not replace full session_valid checks with B validity without proving each caller precondition.",
+      "evidence": "session_thread_bind_owned_source requires ACTIVE; rollback and unbind preserve remaining bindings on hook failure; disposal rejects live binding_count and armed termination",
+      "operation": "product admission and disposal timing"
+    },
+    {
+      "owner": "F pending migration design",
+      "action": "Audit shared CPU transition state and complete resource lifetime before relocation; no 24-operation B-to-C callback exception.",
+      "evidence": "page-domain enter uses session_thread_current/session_valid; page_domain_create registers F dispose; disposal calls C memory providers",
+      "operation": "WOW page-domain owner and teardown"
+    }
+  ],
+  "validation": "Source inspection only, not new build/runtime evidence",
+  "inventory_summary": {
+    "baseline": "f1597df53f0eea3098007526ebbd7e9f48463c4d",
+    "scope": "all tracked files in four requested roots; no production-selection inference",
+    "files": 1494,
+    "source_files": 1284,
+    "owners": {
+      "ntvdm-exe": {
+        "files": 124,
+        "source_files": 113
+      },
+      "mvdm-host": {
+        "files": 1018,
+        "source_files": 872
+      },
+      "non-mvdm": {
+        "files": 228,
+        "source_files": 176
+      },
+      "compat": {
+        "files": 124,
+        "source_files": 123
+      }
+    },
+    "ledger_sha256": "b094cccf3aee51eb32e31201d8ecc2ff0ba7a4dc0a1d8d21735f9b08df021cfb",
+    "ledger_statuses": {
+      "excluded-diagnostic": 1,
+      "open": 418,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 150
+    },
+    "open_provider_owners": {
+      "common": 10,
+      "ntsrv-exe": 8,
+      "ntvdm-exe": 88,
+      "vdmredir-dll": 5,
+      "worker-base": 2,
+      "wow32-dll": 298,
+      "nthook-dll": 3,
+      "run16-exe": 4
+    },
+    "source_files_with_ledger_references": 616,
+    "limitations": [
+      "Path references do not prove live calls or current provider ownership.",
+      "No file is marked reviewed by this inventory.",
+      "Eliminated legacy edges still require implementation-ownership reconciliation.",
+      "Generated inputs, linked providers and indirect callbacks require separate compiler/link/source evidence."
+    ]
+  },
+  "compiled_context_inventory": {
+    "graphs": [
+      {
+        "graph": "x86/worker",
+        "selected_contexts": 490,
+        "valid_dep_records": 488,
+        "stale_dep_records": 0,
+        "missing_dep_records": 2,
+        "missing_objects": [
+          "obj/opennt-rtl-x86/largeint.obj",
+          "obj/opennt-rtl-x86/movemem.obj"
+        ],
+        "commands_sha256": "deb5689abe8e2457602166c8b3b8a9c55f66887b08d3641032b648193be425c0",
+        "deps_sha256": "f7e0ec6172629ec33d816096b8b9cd97b779ce379091247bb497614969dc6631"
+      },
+      {
+        "graph": "x86/wow32",
+        "selected_contexts": 151,
+        "valid_dep_records": 150,
+        "stale_dep_records": 0,
+        "missing_dep_records": 1,
+        "missing_objects": [
+          "obj/callpr32.obj"
+        ],
+        "commands_sha256": "3cee70c36076ca24c2eeecea03bf853d433a989a271135dfd15bb1111c22f263",
+        "deps_sha256": "a786283d18bf724003cf24918cc5c04c3437e45141270e0173573a66b04cf21c"
+      },
+      {
+        "graph": "x64/frontend",
+        "selected_contexts": 5,
+        "valid_dep_records": 5,
+        "stale_dep_records": 0,
+        "missing_dep_records": 0,
+        "missing_objects": [],
+        "commands_sha256": "1072b4f26dda004e21702888d5ee564e7ed58a3dcc6d3512dda07a93e6ba456f",
+        "deps_sha256": "ad1f9be05f0417606f1e6ae3cecf6a25266c52f80e10baf7e24048f97e26a9f9"
+      },
+      {
+        "graph": "x64/service",
+        "selected_contexts": 10,
+        "valid_dep_records": 10,
+        "stale_dep_records": 0,
+        "missing_dep_records": 0,
+        "missing_objects": [],
+        "commands_sha256": "a84bdafe1bd20ae7d92528ffd0dcca67e102e6198e48b3eb89602dca4aa684f1",
+        "deps_sha256": "1c09a1a655b993d153659dbb600756278d778272f2dadcac8567025dccdfab81"
+      },
+      {
+        "graph": "x64/launcher",
+        "selected_contexts": 11,
+        "valid_dep_records": 11,
+        "stale_dep_records": 0,
+        "missing_dep_records": 0,
+        "missing_objects": [],
+        "commands_sha256": "67109c847dc4ddf2b8e8253aa4e501e82a1cb79cd506305bc22f00bebe9d0ef0",
+        "deps_sha256": "2fda16350ad5608a12dad2fa1fdaf3ab74d3afdb2dc5cd8bf40bbabf233770d1"
+      },
+      {
+        "graph": "x64/monitor",
+        "selected_contexts": 0,
+        "valid_dep_records": 0,
+        "stale_dep_records": 0,
+        "missing_dep_records": 0,
+        "missing_objects": [],
+        "commands_sha256": "0b64f8c07e90828ace4e9b65635fb4cfdc8ceb48e55590f591377f55385f1a58",
+        "deps_sha256": "a2a177185047f05c4aba56dd72547e0e927ee0f5f61ebc5b99233cc212e9f625"
+      },
+      {
+        "graph": "x64/worker",
+        "selected_contexts": 7,
+        "valid_dep_records": 7,
+        "stale_dep_records": 0,
+        "missing_dep_records": 0,
+        "missing_objects": [],
+        "commands_sha256": "bfb74feb409fd3840f1a62dfb2dc1adec2cde8263639ffffa964e071ed4e2976",
+        "deps_sha256": "0d48742b993aba4981ccc09d30a053eb45f62a9f7a8171070d5f5a6e80d50a8b"
+      },
+      {
+        "graph": "x64/hook",
+        "selected_contexts": 4,
+        "valid_dep_records": 4,
+        "stale_dep_records": 0,
+        "missing_dep_records": 0,
+        "missing_objects": [],
+        "commands_sha256": "0ec59420627f4b12dc095db504a76c283b5435c850f467a7f69505310957dab6",
+        "deps_sha256": "fa7e13e5df63f3b348c12942428d15cede9e67180df039083f0e1a5776cdbf5d"
+      }
+    ],
+    "compile_contexts": 678,
+    "distinct_compiled_sources": 631,
+    "recorded_header_paths": 641,
+    "not_observed_paths": 222,
+    "missing_dep_contexts": [
+      {
+        "graph": "x86/worker",
+        "source": "src/non-mvdm/base/ntos/rtl/x86/largeint.asm",
+        "object": "obj/opennt-rtl-x86/largeint.obj",
+        "command_sha256": "2e84b206e6a3428f4b87738b5dfe5bf012b1b3e21df7fff44bc632eef9720a67"
+      },
+      {
+        "graph": "x86/worker",
+        "source": "src/non-mvdm/base/ntos/rtl/x86/movemem.asm",
+        "object": "obj/opennt-rtl-x86/movemem.obj",
+        "command_sha256": "c9f64a21b75e00c934993cda012ec74aa8c3ac99dd33a93a812f4c3a8e400e8e"
+      },
+      {
+        "graph": "x86/wow32",
+        "source": "src/mvdm-host/wow32/i386/callpr32.asm",
+        "object": "obj/callpr32.obj",
+        "command_sha256": "1728aedac762cad02549e94984daf297bb46762ae9923c86bc71da2f2bcdc9c6"
+      }
+    ],
+    "reproduction": "build/t483-s14-architecture-inventory/compile-contexts.py",
+    "limitation": "No new compilation; existing selected commands/deps. No proof of archive member inclusion, runtime reachability or ownership. Non-observation is not exclusion."
+  }
+}

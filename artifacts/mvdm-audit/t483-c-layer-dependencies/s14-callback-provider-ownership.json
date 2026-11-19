@@ -1,0 +1,161 @@
+{
+  "baseline": "f1597df53f0eea3098007526ebbd7e9f48463c4d",
+  "kind": "source-resolved-callback-inventory-not-runtime-test",
+  "scope": "Four explicit B service tables, guest-memory lease callbacks and original-thread lifecycle bridge; not an exhaustive callback census",
+  "groups": [
+    {
+      "provider_layer": "F",
+      "slots": 12,
+      "disposition": "Confirmed native_child_finish only clears capture buffers; select_command_service stores caller-selected mode, not broker scheduling. Move capture-state mechanics with B core context after resolving guest-access dependency; actual create_process and guest-directory operations require separate full-chain review.",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "contract": "src/compat/include/command_services.h"
+    },
+    {
+      "provider_layer": "F",
+      "slots": 4,
+      "disposition": "Separate compatibility state from frontend channel and presentation policy; replacing routed title/layout with local Win32 calls is not proven equivalent.",
+      "installation": "src/ntvdm-exe/win32/console_client.c:ntvdm_console_services_initialize",
+      "contract": "src/compat/include/console_services.h"
+    },
+    {
+      "provider_layer": "F",
+      "slots": 4,
+      "disposition": "Two debug-register operations consume CPU/private descriptor state; two mode transitions share WOW page-domain state. Not eligible for wholesale B move.",
+      "installation": "src/ntvdm-exe/softpc/mvdm_dpmi_binding.c",
+      "contract": "src/compat/include/dpmi_services.h"
+    },
+    {
+      "provider_layer": "F",
+      "slots": 2,
+      "disposition": "VM bridge includes product orchestration; unsupported VDD cleanup enters product termination. Do not replace failure with no-op or move task policy B.",
+      "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c",
+      "contract": "src/compat/include/vm_services.h"
+    },
+    {
+      "implementation": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:mvdm_softpc_guest_memory_read/write",
+      "contract": "src/compat/include/guest_memory_lease.h",
+      "slots": 2,
+      "provider_layer": "C",
+      "disposition": "Actual C callbacks remain in B lease acquire/release/copy. Prior provider relocation approval is not proof of B runtime independence; separate machine access from generic lease storage before claiming closure.",
+      "installation": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c:mvdm_softpc_guest_memory_begin"
+    }
+  ],
+  "counts": {
+    "explicit_service_slots_to_F": 22,
+    "lease_slots_to_C": 2
+  },
+  "caveats": [
+    "These slot counts are not new C ledger IDs or approved architecture exceptions.",
+    "Known providers are source-resolved; final linker and runtime evidence remains required.",
+    "Existing delivered tests prove behavior only, not elimination of these dependencies."
+  ],
+  "next": "Enumerate native-child capture and lease/state ownership as complete chains; preserve failure and lifetime semantics.",
+  "command_capture_review": {
+    "file": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+    "sha256": "339F0EFEDF145DEBFFC2A28253FCDDFD71FD0F5E1861C1A0ED21CC59CB3233FD",
+    "decision": "Capture storage, bounded copying, borrowed views, reset and disposal belong to compatibility mechanics; current F session ownership alone is not a reason to retain them F.",
+    "state": "command/environment/standard tokens/directory, active capture, selected mode and borrowed tail; no NTSRV request ID or waiter",
+    "ordinary_lifetime": "session slot with owner and epoch, lazy allocation, registered teardown",
+    "vm_lifetime": "explicit ownerless capture create/read/destroy used by mvdm_vm_command and mvdm_vm_ingress",
+    "preserve": [
+      "single active ordinary capture",
+      "owner/epoch isolation",
+      "borrowed view until finish/destroy",
+      "failed capture clears partial buffers",
+      "guest CR terminator is changed to NUL via committed write lease",
+      "explicit VM capture independent lifetime",
+      "mode selection remains caller authoritative"
+    ],
+    "remaining_evidence": [
+      "final inward guest-memory access design",
+      "thread and cancellation behavior across ordinary capture lifetime",
+      "actual process-launch caller coupling and tests"
+    ],
+    "implementation": "not changed"
+  },
+  "command_launch_review": {
+    "files": [
+      "src/ntvdm-exe/win32/command_process_compat.c",
+      "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "src/mvdm-host/dos/command/cmdexec.c"
+    ],
+    "conclusions": [
+      {
+        "decision": "TLS override storage is compatibility mechanics; isolate from product launch without adding second handle authority",
+        "evidence": "Stores three handles and overridden bits; does not call host SetStdHandle or broker.",
+        "operation": "opennt_command_set_std_handle"
+      },
+      {
+        "decision": "Keep product launch policy F; C caller must be separated from this outward implementation rather than putting its wrapper in B",
+        "evidence": "Run16 selection, frontend/execution capability propagation, Console stream classification, nthook installation and suspended launch.",
+        "operation": "opennt_command_create_process_a and create_frontend_child/create_policy_child"
+      },
+      {
+        "decision": "B core context candidate for numeric location, epochs, lock and cleanup",
+        "evidence": "No task/request identity; current session slot controls lifetime.",
+        "operation": "DOSWOW registration record"
+      },
+      {
+        "decision": "Retain original DOSWOWDATA/CDS interpretation with C responsibility; do not import these private structures into B",
+        "evidence": "Reads doswow.lpCDSBuffer and validates sizeof(CDS); sole production caller found is mvdm_vm_notification.c.",
+        "operation": "directory_instance"
+      }
+    ],
+    "required_before_implementation": [
+      "Trace original cmdCreateProcess thread and result ownership before selecting a C-to-F orchestration split.",
+      "Prove caller/storage lifetime across detached thread and cancellation.",
+      "Review original DOSWOW registration owner for minimal mirror adaptation.",
+      "Measure mirror points/lines and seek approval for increases."
+    ],
+    "verification": "source only; no build/runtime or migrated-provider claim"
+  },
+  "thread_chain_review": {
+    "chain": [
+      "C cmdexec.c::cmdExec32",
+      "B thread_start.c::opennt_create_void_cdecl_thread_named/create_bound",
+      "D common/worker-thread/bridge.c::capture_owner",
+      "A lib-win32/thread::win32_thread_create/thunk",
+      "D enter_owner -> F session_thread_bind_owned_source",
+      "C cmdCreateProcess",
+      "B opennt_exit_thread -> D finish_owner -> F session_thread_finish"
+    ],
+    "additional_installed_slots": 2,
+    "provider_layer": "D with F session dependency",
+    "body_facts": [
+      "cmdCreateProcess increments original reentry counters, converts command/environment, creates suspended child, clears capture, restores standard handles, resumes/waits/reads exit status, decrements counters and exits thread.",
+      "Capture finish occurs before child wait; it is not request completion.",
+      "cmdExec32 independently calls GetNextVDMCommand to accept reentry or return dwExitCode32 to guest.",
+      "F thread hooks currently register WOW USER binding; unbind can fail with live USER state and must retain registration.",
+      "A thread thunk accepts generic callbacks and has no product knowledge; actual installed callbacks traverse D/F."
+    ],
+    "decision": "B core thread-binding/lease mechanics require complete WOW hook-provider review; moving only D bridge into B would preserve F dependency. Keep product launch policy external and original COMMAND wait/reentry semantics intact.",
+    "next_required_evidence": [
+      "WOW runtime bind/unbind actual implementation owners",
+      "separation of core binding lifetime from USER product callbacks",
+      "original COMMAND product launch split with mirror delta measurement"
+    ],
+    "status": "source-audited-chain; design incomplete; no production change",
+    "wow_hook_followup": {
+      "implementation": "src/ntvdm-exe/wow/wow_user_runtime.c",
+      "contract": "src/common/wow/user_runtime.h",
+      "provider": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "findings": [
+        "initialize/bind/enter/leave provide TLS binding and SRW exclusion, but types currently carry task/class provider pointers.",
+        "unbind calls runtime.retire_thread before clearing TLS; failure preserves binding.",
+        "session detach calls runtime.dispose_process and retains registration on failure."
+      ],
+      "disposition": "Split compatibility binding/exclusion from WOW task retirement orchestration; whole runtime move into B is not allowed merely because CPU access is absent.",
+      "verification": "source only"
+    }
+  },
+  "console_review": {
+    "file": "src/ntvdm-exe/win32/console_client.c",
+    "findings": [
+      "keyboard_layout_name queries actual frontend Console through exchange, or native Console API when no client exists; thread HKL is not equivalent.",
+      "get/set_console_title use frontend protocol; successful set additionally publishes the KVM title without changing original result.",
+      "console_client owns channel and product session association; moving the full body B would carry NTCON protocol/presentation knowledge."
+    ],
+    "decision": "Separate compatibility operation/data handling from external frontend routing, with original error and result semantics. No blanket replacement with local SDK calls and no B callback wrapper claimed as completion.",
+    "remaining": "Identify synchronous request/response ownership boundary that removes C outward implementation dependence without adding a second transport or state authority."
+  }
+}

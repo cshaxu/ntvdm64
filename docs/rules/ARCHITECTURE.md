@@ -50,6 +50,26 @@ implementation ownership and runtime protocols separately. Existing service
 tables remain transitional until their complete chains have been migrated and
 verified, not evidence that their implementations already reside in B.
 
+Owner clarification permits a minimal B-owned core session when retained
+MVDM operations require instance-scoped compatibility state. Reuse the
+existing compat host context and its binding/resource mechanism rather than
+introducing a parallel session or TLS registry. Keep stateless compatibility
+operations independent of that context. F composes the B context and retains
+product task identity, scheduling, cancellation/completion policy and worker
+start/stop authority. This is not permission to move the entire product
+session into B or add B-to-C provider exceptions. Audit actual callback
+targets, including memory providers and cleanup functions; source-independent
+headers and a B-owned registry alone do not prove inward implementation.
+
+For each proposed B function, apply the owner's responsibility test: after
+removing knowledge of Run16, NTSRV, NTCON and the concrete task chain, can
+the function still completely explain its behavior? Saving input, reading
+it within its lifetime and releasing it normally passes. Creating a VM
+frontend for a request, choosing Run16 or reporting task completion does not.
+Original CPU/subsystem algorithms and private C representations remain C
+responsibilities even when they know nothing about product task chains.
+Split mixed responsibilities; callbacks must not conceal the product knowledge.
+
 Product components select shared source from common, lib-nxvm, lib-win32, mvdm-host and
 non-mvdm, not another product component's private implementation. NTVDM and
 NTVWM may share worker-base; no other component may depend on it, and

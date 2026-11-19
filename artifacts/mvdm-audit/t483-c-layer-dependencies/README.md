@@ -429,3 +429,20 @@ outward callbacks. Cached builds, dual11 publication,11 unit cases, real
 CCPU page-domain/graph snapshots and immutable Win16 dialog acceptance pass.
 Mirror delta0/0; direct ledger150 eliminated/418 open is unchanged.
 CPU-dependent page-domain work remains active.
+
+[Four-component ownership baseline](s14-four-component-ownership-baseline.json)
+records the expanded owner-directed audit and historical session split.
+The 1,494 tracked files include 1,284 source files; 616 source paths have
+references in the existing ledger. These are coverage counts, not reviewed
+or production-selected counts. Source inspection confirms one B thread-context
+binding and B cleanup registry, while F retains admission/disposal policy and
+WOW page-domain implementations. Callback provider ownership remains in scope.
+No production source or dependency status is changed by this baseline.
+
+[Callback provider ownership](s14-callback-provider-ownership.json) resolves
+22 slots in four B service tables to F implementations, plus two lease
+callbacks to C checked SAS providers. These are source-resolved slots, not
+new ledger IDs or approved exceptions. The two original B USER exceptions
+do not establish that existing callback implementations are independent of C.
+Actual machine access, product orchestration and generic resource management
+must be separated by complete chain before claiming architectural closure.

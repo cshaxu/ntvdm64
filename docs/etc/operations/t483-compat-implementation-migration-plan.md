@@ -32,6 +32,37 @@ instead of widening B.
 
 ## Baseline and accounting
 
+### Owner revision: complete four-component ownership audit
+
+Before further production relocation, audit all tracked files in ntvdm-exe,
+mvdm-host, non-mvdm and compat and reconcile their implementation owners.
+The existing S13-S19 worklist remains a grouping of functional chains, not
+permission to skip the complete inventory or to declare unresolved outward
+implementation dependencies closed. Final closure requires eliminating
+C-to-D/E/F implementation dependencies, including forwarding through B.
+
+Keep the existing C identifiers and historical evidence. For every reviewed
+chain record callers, actual providers, state, creation/use/failure/destruction,
+destination, superseded forwarding, mirror point/line impact and verification.
+File presence, compile selection and live product use are separate facts.
+An old eliminated include edge is not proof that its implementation moved.
+Track public runtime module protocols separately, without using that category
+to exempt private provider calls. Retain the two approved B-to-C exceptions;
+the rejected 24-operation WOW machine callback candidate is not admitted.
+
+Reconcile the historical src/session split against current compat and
+ntvdm-exe/session bodies. Reuse the one existing host-context binding and
+cleanup mechanism; do not create a third session abstraction. F retains
+product identity, cancellation, completion, thread admission and disposal
+timing. B owns independent compatibility resources; C owns original machine
+operations. Shared transition state must be reviewed with every consumer,
+not moved as an isolated header or opaque F pointer.
+
+Task-local reproducible coverage inventory:
+build/t483-s14-architecture-inventory/inventory.py. Its files.jsonl records
+each tracked path/hash and references to existing ledger IDs. Its summary
+is coverage evidence only; it marks no source file or dependency as reviewed.
+
 Delivered baseline: 0c165f5a4, package137949a3-b4bd-457d-82c4-1b455762eb17.
 The old direct-edge ledger has618 IDs:144 eliminated,424 open,44 supporting,
 5 eliminated-transitive and1 excluded. Those counts describe direct edges,

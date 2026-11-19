@@ -10,8 +10,8 @@ implementation migration. The broader C-layer cleanup remains active.
 | Field | Record |
 | --- | --- |
 | Original Owner Request | 实际公共实现及必要状态下沉B，不只是移动头文件或增加转发；不把NTVDM/NTSRV核心搬进B；按批准的S队列连续执行。 |
-| Objective | Audit and migrate the remaining reusable guest-memory/lease, XMS and WOW page-domain mechanics with their state/cleanup to B, preserving C algorithms and product lifecycle ownership. |
-| Files And ABI Surface | Existing guest-location/memory contracts, F guest-memory/lease/XMS/page-domain providers, D page-domain declarations, production callers and selected tests. Follow the approved plan by complete ownership chain. |
+| Objective | Audit the complete responsibility and implementation ownership of ntvdm-exe, mvdm-host, non-mvdm and compat, including the historical session split; establish a file/symbol/state/lifecycle migration ledger before further relocation, then implement complete chains to eliminate all C-to-D/E/F implementation dependencies. B owns independent compatibility mechanics and resources; C retains original machine/subsystem algorithms; F owns product composition and lifecycle. No forwarding disguise or additional B-to-C exception. |
+| Files And ABI Surface | Complete ntvdm-exe, mvdm-host, non-mvdm and compat inventory; historical session split, production compile/link providers and indirect calls. Inspect external consumers/providers as needed for complete chains without unrelated product expansion. |
 | Reference Baseline | S13 P17; package92f469bf-1555-4ff0-b16d-ef2d9292934a; source/evidence in the linked closure. Direct ledger144 eliminated/424 open is not an implementation-migration count. |
 | Applicable Rules | Six-layer architecture, original-first source policy, coding/execution/documentation rules and approved implementation migration. |
 | Verification | Cached full x86/x64/reference builds; dual11-image publication and22 hashes; affected memory/lease/page-domain and isolated guest tests; governance and relative links; commit and push. |
@@ -24,7 +24,7 @@ implementation migration. The broader C-layer cleanup remains active.
 | Similar-Issue Sweep | All acquire/use/release, thread and cross-image consumers of each selected chain; distinguish original C provider algorithms from common compatibility mechanics. |
 | Reporting Requirements | File entry/exit, mirror points/lines and cumulative totals; direct edges, actual migration, deleted forwarding and remaining ownership counted separately. |
 | Stop Conditions | Prior approval for net mirror-diff increases or materially changed semantic/ownership boundaries; investigate before migration. |
-| Exit Criteria | Complete eligible chains and concrete dispositions for unresolved original/private boundaries, final-code targeted tests, coherent dual release, updated ledgers, commit/push, then sequential S15 admission. |
+| Exit Criteria | Complete four-component ownership and migration ledger before further relocation; implement admitted complete chains with final-code targeted tests, coherent dual release and commit/push. Overall closure requires no C-to-D/E/F implementation dependency; unresolved dispositions are not elimination. |
 
 ## Current Technical Baseline
 
@@ -53,53 +53,20 @@ subsequent starts. Full was not run under the owner's small-delivery scope.
 closes C0040/C0224/C0257:150 eliminated/418 open of618. Generic F lifecycle
 authority and WOW USER/page-domain ownership remain; S14 is still active.
 
-S14 P24 moves the three checked SAS provider bodies from F to C. Final
-production and real-CCPU fixture maps resolve them to ccpusas4.obj; F retains
-registration/lifetime and forward-copy admission. Cached full builds,
-dual11 publication/22 hashes and targeted lease/memory/thread/redirector/WOW,
-published NESticle and DOS DIR tests passed. Package
-3df9d92c-3912-4efa-8866-7e2667f45785 is published.
-[P24 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p24-sas-provider.json)
-records owner approval for +1 point/+52 raw inserted lines. Non-error diff
-changes12 points/27 lines to13/78; one extra #line is counted separately.
-Prior gross reduction3/12 remains recorded; cumulative net is-2 points/+39
-lines after this approved ownership adaptation. Direct ledger147 eliminated/
-421 open is unchanged. XMS and USER boundaries remain; S14 is not closed.
+Earlier delivered S14 memory work remains recorded in
+[P24 SAS ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p24-sas-provider.json),
+[P22 EMS header cleanup](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p22-ems-header-delivery.json),
+[P21 shared clock](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p21-wow-clock-implementation.json),
+and [P20 memory access](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p20-memory-access-implementation.json).
+These preserve package/test identities and mirror accounting. They do not
+prove absence of indirect provider dependencies; the expanded ownership
+review explicitly includes the B lease callbacks to C SAS.
 
-S14 P22 removes the remaining F guest-memory include from EMS; actual copy
-implementations already moved to B in P20. Cached full builds and dual11
-publication/22 hashes passed. All11 normalized images match P21 after
-package/PE timestamp masking; runtime tests are reused under owner approval.
-Packagec7d90841-65da-481f-8a89-090e0e41e922 is published.
-[P22 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p22-ems-header-delivery.json)
-records compiler dependencies and XMS return-owner findings. C0040 remains
-open for XMS; ledger147 eliminated/421 open. Mirror delta0/0, cumulative
-reduction3 points/12 lines. S14 remains active.
-
-S14 P21 moves the actual shared WOW clock resource into B: host page,
-stop event, publisher thread and cleanup. F retains guest mapping and CPU/
-session lifecycle. Stop/join precedes unmap; page release follows unmap.
-[P21 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p21-wow-clock-implementation.json)
-records cached full builds, dual11 publication/22 hashes,23 clock assertions,
-lease/memory/redirector/thread checks, actual CCPU WOW clock update/reentry,
-and published NESticle/DOS DIR. Packageceb7fcbe-4574-4763-8e1d-64bf4be708ab
-is published. Mirror delta0/0; cumulative reduction3 points/12 lines.
-Direct ledger remains147 eliminated/421 open. S14 still owns unresolved
-SAS/XMS and USER projection boundaries; this is not its closure.
-
-S14 P20 migrates five guest-memory acquire/release/copy/move implementations
-and their contract into B. F keeps SAS providers and lifecycle ownership;
-there is no new binding or state machine. Cached full builds, dual11 publication
-and22 hashes,75 lease-boundary assertions,33 linear-memory assertions,
-redirector27/14,thread,WOW page-domain,NESticle and DOS DIR passed.
-Package3b7fca15-11f2-47b3-b598-37319f654d3d is published.
-[P20 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p20-memory-access-implementation.json)
-records actual symbol ownership. C0225-C0227 are eliminated:147 eliminated,
-421 open of618. Mirror delta0/0; cumulative reduction3 points/12 lines.
-The mixed SAS header/provider, XMS cancellation and WOW ownership remain open;
-[source investigation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-sas-xms-owner-review.json)
-explains why raw SAS void operations cannot replace fallible leases.
-
+The owner-directed four-component audit now precedes further relocation.
+[Coverage and session history](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-four-component-ownership-baseline.json)
+and [callback chains](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-callback-provider-ownership.json)
+record source findings, not migrated-code or runtime acceptance. The complete
+migration ledger remains unfinished; no production change follows this review.
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.
