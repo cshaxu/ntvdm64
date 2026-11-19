@@ -190,4 +190,6 @@ P63: [RTL drawing ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencie
 
 P64: [RTL text ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p64-rtl-text-ownership.json).
 
-P65: [RTL private reader](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p65-rtl-private-reader.json). Reviewed111/116;5 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.
+P65: [RTL private reader](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p65-rtl-private-reader.json).
+
+P66: [Help ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p66-help-ownership.json). Reviewed112/116;4 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.

@@ -1,0 +1,112 @@
+{
+  "baseline": "ee37ceee23c96cadcf019167c6cb2ce9aa97e00b",
+  "status": "P66 help inheritance and captured-input ownership audit; no product change",
+  "files": [
+    {
+      "number": 112,
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+      "sha256": "71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668",
+      "compilerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\adapter-win32\\help.obj",
+      "objectSha256": "d61dd542e0dc089319814699972a00ebda4f1413a72e36aeabba437e967c5a3f",
+      "coffUndefined": [
+        "__imp__PtInRect@12",
+        "_IsVisible@4",
+        "_wow_window_client_context_help@4"
+      ],
+      "dependencies": [
+        "obj/adapter-win32/help.obj: #deps 19, deps mtime 8167519978588415 (VALID)",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "    ../../../../src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+        "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+        "    ../../../../src/wow32-dll/include/wow_shared_user_abi.h",
+        "    ../../../../src/wow32-dll/include/wow_user_client_view_layout.h",
+        "    ../../../../src/wow32-dll/include/wow_window_client_state_bindings.h",
+        ""
+      ],
+      "mapProviders": [
+        "0001:0004a3c0       _IsVisible@4               1004b3c0 f   control-view-winmgr.obj",
+        "0001:0006c3d0       _wow_window_client_context_help@4 1006d3d0 f   wow_window_client_state_bindings.obj",
+        "0001:000747d0       _GetContextHelpId@4        100757d0 f   help.obj",
+        "0002:000009cc       __imp__PtInRect@12         1008e9cc     user32:USER32.dll"
+      ]
+    }
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "windows/core/ntuser/rtl/help.c",
+    "evidence": "Read complete original and current file. GetContextHelpId originally reads _GetProp(atomContextHelpIdProp,PROPF_INTERNAL), then follows TestwndChild parent versus owner until a nonzero ID or desktop/NULL boundary. Current file keeps this inheritance loop and other original helper bodies; replaces the scalar input and adds composition includes."
+  },
+  "mechanisms": {
+    "caller": "Selected C combo.c WM_HELP path calls GetContextHelpId. Final map retains GetContextHelpId; other helper compilation does not prove runtime use.",
+    "input": "C0593 wow_window_client_context_help is F-owned: require current USER runtime, preserve entry lock ownership, borrow exact client-state allocation, pin its nonzero backing generation, read context_help_id, release generation and restore lock/LastError in finally. Failure is not a legitimate zero help ID.",
+    "provider": "F wow_user_object_bindings.c captures GetWindowContextHelpId into an observation; F mvdm_softpc_wow_page_domain.c publishes/stores context_help_id and returns the retained observation. Native window properties are the external authority, but the selected C algorithm consumes one retained graph generation.",
+    "whyNotLeaf": "Replacing this read with native GetWindowContextHelpId(state->head.h) would requery a possibly changed or reused HWND while C follows retained parent/owner links. Existing wow_page_domain_fixture.c:3323-3336 asserts native mutation does not change an already retained help view; explicit publication is required. Thus the operation is not a standalone SDK leaf suitable for wholesale B migration.",
+    "disposition": "Keep original inheritance/enum policy C. S13 must unify its read-only captured-input and retained-window scope with other consumers, without a second cache or per-query native resampling. S14 handles original type/declaration composition. C0122/C0129/C0593 remain open, not approved exceptions.",
+    "otherImports": "Actual COFF also imports IsVisible, resolving C control-view-winmgr.obj (allowed C sibling), and PtInRect, resolving USER32. Only GetContextHelpId survives from help.obj in the inspected final map; do not count the other helpers as product execution evidence."
+  },
+  "verificationPlan": {
+    "sourceEvidence": "wow_dialog_navigation_fixture.c:194-213 covers own/ancestor/owner help IDs, mixed child-popup style, NULL/desktop boundary. This fixture explicitly does not prove production publication/lifetime. wow_page_domain_fixture.c also covers external-window snapshot retention and explicit refresh. Inspected test source only; no new run claimed.",
+    "afterChange": "Run both inheritance and actual page-domain/lifecycle tests, including retained value across native mutation, explicit publication, generation retirement, and balanced pin/lock cleanup."
+  },
+  "progress": {
+    "reviewedFiles": 112,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 76,
+    "deferredSourceAbiCompositionFiles": 19,
+    "unreviewedFiles": 4,
+    "totalFiles": 116,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no source change. Inspected actual COFF, VALID compiler includes and final map.",
+    "runtime": "Not run; evidence is source/compiled ownership, not new runtime proof.",
+    "publication": {
+      "packageId": "a287f10d-c93a-4720-833c-5eee7bfd6e99",
+      "verifiedImages": [
+        "assets\\release\\VCDEX.DLL",
+        "O:\\WINNT\\system32\\VCDEX.DLL",
+        "assets\\release\\run16.exe",
+        "O:\\WINNT\\system32\\run16.exe",
+        "assets\\release\\ntsrv.exe",
+        "O:\\WINNT\\system32\\ntsrv.exe",
+        "assets\\release\\ntcon.exe",
+        "O:\\WINNT\\system32\\ntcon.exe",
+        "assets\\release\\ntvdm.exe",
+        "O:\\WINNT\\system32\\ntvdm.exe",
+        "assets\\release\\ntvwm.exe",
+        "O:\\WINNT\\system32\\ntvwm.exe",
+        "assets\\release\\ntmon.exe",
+        "O:\\WINNT\\system32\\ntmon.exe",
+        "assets\\release\\WOW32.DLL",
+        "O:\\WINNT\\system32\\WOW32.DLL",
+        "assets\\release\\VDMREDIR.DLL",
+        "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "assets\\release\\nthook32.dll",
+        "O:\\WINNT\\system32\\nthook32.dll",
+        "assets\\release\\nthook64.dll",
+        "O:\\WINNT\\system32\\nthook64.dll"
+      ]
+    },
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-help-ownership/docs.log and docs.exit. git diff --check passed."
+  }
+}

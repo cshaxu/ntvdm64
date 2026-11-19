@@ -725,6 +725,8 @@
 - 直接包含 · C0122 · wow32-dll · src/wow32-dll/include/wow_user_client_view_layout.h
 - 直接包含 · C0129 · wow32-dll · src/wow32-dll/include/wow_window_client_state_bindings.h
 
+112 P66: C0122/C0129/C0593 retain captured graph input and original declaration dependencies. Preserve C inheritance; unify generation scope in S13. Mirror0/0; reviewed112/116, open500/618. See s12-p66-help-ownership.json.
+
 ## 113 — src/non-mvdm/windows/core/ntuser/rtl/text.c
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h

@@ -247,3 +247,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P64 RTL text](s12-p64-rtl-text-ownership.json): file110; compiled context dependency distinguished from live prefix/underline/font helpers. Review110/116;500/618 open. No product changes.
 
 [P65 RTL private reader](s12-p65-rtl-private-reader.json): file111; original index policy retained, B slot provider distinguished from F allocation and extent dependencies. Review111/116;500/618 open. No product changes.
+
+[P66 Help inheritance](s12-p66-help-ownership.json): file112; retained-generation scalar distinguished from fresh native query. Review112/116;500/618 open. No product changes.
