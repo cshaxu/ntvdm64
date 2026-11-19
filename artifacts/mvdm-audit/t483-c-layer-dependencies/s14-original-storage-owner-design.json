@@ -1,0 +1,86 @@
+{
+  "baseline": "5d7484b8d",
+  "question": "Determine concrete storage owners independently from product entry files and private original algorithms.",
+  "procedure": "Read current definitions/callers and native compatibility ABI; locate original declarations and initialization with rg in local OpenNT. External git rev-parse was denied; original input bytes are hashed below, not claimed as a newly verified repository revision.",
+  "items": [
+    {
+      "ids": [
+        "C0162",
+        "C0163",
+        "C0164",
+        "C0609",
+        "C0610",
+        "C0611"
+      ],
+      "symbol": "BaseDotCom/Pif/ExeSuffixName",
+      "original": "base/win32/client/basedll.h:80-82; baseinit.c:270 and adjacent initialization",
+      "current_callers": [
+        "src/non-mvdm/base/win32/client/vdm.c"
+      ],
+      "current_providers": [
+        "src/nthook-dll/hook_classification.c",
+        "src/run16-exe/main.c"
+      ],
+      "decision": "Place the three native UNICODE_STRING descriptors with B classifier compatibility, not product entry or original whole basedll/baseinit. Both current products use identical literal values. Keep symbol names and lengths; common classifier header remains a separate unresolved declaration edge.",
+      "state_lifetime": "Per product image static descriptors, no request identity, native resource or runtime callback. Remove duplicate F definitions and redundant launcher initialization when the selected B object is linked.",
+      "proof_required": "Both x86 hook and x64 launcher selected links must resolve one definition; classifier tests must preserve DOS/Win16/PIF/OS2 cases and ANSI/Unicode callers. Native UNICODE_STRING ABI is already used by B path adapter.",
+      "mirror_cost": "Expected zero for storage move; declaration/include recovery may affect mirrors and must be measured separately."
+    },
+    {
+      "ids": [
+        "C0607",
+        "C0612"
+      ],
+      "symbol": "CsrPortHeap",
+      "original": "base/ntdll/csrdll.h:167; csrinit.c:257,500; csrutil.c:332,413",
+      "current_callers": [
+        "src/non-mvdm/base/ntdll/csrutil.c"
+      ],
+      "current_providers": [
+        "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+        "src/run16-exe/main.c"
+      ],
+      "decision": "B owns the current local capture heap storage and native create/destroy mechanism; F chooses initialization and quiescent destruction timing. Preserve each image instance, never a broker-visible pointer or shared NT4 CSR heap. Keep original C capture algorithms and reuse existing C ntcsrdll.h declarations instead of D duplicates where actual compiler ABI permits.",
+      "state_lifetime": "Allocate before capture; free all captures before heap teardown; worker joins and service disconnect remain outer. Do not silently alter current HeapDestroy failure or error propagation during relocation.",
+      "proof_required": "Reconcile every capture consumer and error cleanup; x86 worker and x64 launcher link ownership; create failure and destroy with live capture; check NTSYSAPI import decoration before enabling original declarations. Header existence alone is not compiler proof.",
+      "mirror_cost": "Storage/mechanism move expected zero; header binding cost still requires actual candidate measurement."
+    },
+    {
+      "ids": [
+        "C0171"
+      ],
+      "symbol": "UserNotifyProcessCreate",
+      "original": "base/win32/server/srvtask.c:23-30",
+      "current_callers": [
+        "src/non-mvdm/base/win32/server/srvvdm.c"
+      ],
+      "current_providers": [
+        "src/ntsrv-exe/opennt/source/service_core.c"
+      ],
+      "decision": "Recover C ownership of the existing disabled hook cell; do not move NTSRV core, enable original USER initialization, or import srvtask process creation. Existing selected srvvdm.c is a candidate carrier for the original null declaration; this would be an explicit mirror adaptation, not original same-file restoration. No production change until mirror cost/approval.",
+      "state_lifetime": "Process-static NULL; current source search finds no setter. Original BaseSetProcessCreateNotify exists upstream but is not admitted here. Retain both original guarded calls rather than delete them merely because NULL today.",
+      "proof_required": "Final ntsrv link has no outer definition; source/build scan confirms no selected setter; ordinary/WOW process bookkeeping unchanged. Measure points and lines before requesting approval.",
+      "mirror_cost": "Potential positive delta for moving original declaration to existing C carrier; not measured or approved in this record."
+    }
+  ],
+  "current_sha256": {
+    "src/common/base_srv/base_capture.h": "d694a8651c1e0dbda0e85203d1b08c66b5ddd98874f34794ab6346e93a4db90f",
+    "src/common/base_srv/base_classifier.h": "a92fa8c404cb33aba457a27e05bb0e0f6244d52b5354643145e8f3822693f819",
+    "src/common/base_srv/base_client.h": "414bbc72688c219c867d586b2bf2db3a57466afeea1ce297b7f87371b49517fe",
+    "src/non-mvdm/base/ntdll/csrutil.c": "a424054e40fee1a72ecf6a8f37d367ffd84156d29cdf4cbd81826e84bef99415",
+    "src/non-mvdm/base/win32/client/vdm.c": "b6adab886c5ddc55935f5969175f83d90543231cb7a94672647219607cb4855f",
+    "src/non-mvdm/base/win32/server/basesrv.h": "f117b69ebce871cb8b850b1bca8588c8d592e706abcde1d23e7f7319b5c59ee4",
+    "src/non-mvdm/base/win32/server/srvvdm.c": "644a28e3674cb6c17c461a7376e23d99fd1cb0673214dc106ba38c539dd7b67c",
+    "src/non-mvdm/public/sdk/inc/ntcsrdll.h": "ed1f1868eaca9e9d2a781bb57bd5e35538c0f5755f508438a6b804816655d7e8",
+    "src/nthook-dll/hook_classification.c": "d75fd7b8026cd52632f248f6ac48d7475293321187dab30935109c9b405a9316",
+    "src/ntsrv-exe/opennt/source/service_core.c": "15c0546485abc4cbbc312f333875c3a47349f07ebb340473048e1ecf0d3427d3",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "b735c7e189e1c4d404c3474d4e44dc7c7e5160aa251e6acfe81721a387708963",
+    "src/run16-exe/main.c": "6bf513efac8b8eed4aee766374848c3478fc10ae7fea2ec3118bf3da815dd134"
+  },
+  "original_input_sha256": {
+    "base/win32/client/basedll.h": "f7f295d58032ab2157b448ff421445f7e45c59662b026e82c5307d75e953be2a",
+    "base/ntdll/csrdll.h": "ea19f491d058ea557f17dc259b8b8981d7c3ef590fd62a71cf5e3e2461f9f6db",
+    "base/win32/server/srvtask.c": "a5e822caf2f3e81ece577d3df6d90536fefc8dd56ef14c17ea72dc554fb71338"
+  },
+  "limits": "Source ownership design only. No production patch, compilation, runtime proof, dependency elimination or new approval. Full migration-ledger prerequisite remains active."
+}

@@ -524,3 +524,8 @@ P52 [four-root reconciliation](s14-four-component-reconciliation.json) verifies
 all1494 inventory source hashes unchanged and distinguishes provider coverage
 from caller coverage. The existing migration plan now consolidates ten chains;
 exact C carriers and control-flow separation remain design work.
+
+P53 [original storage owner design](s14-original-storage-owner-design.json)
+resolves destinations for nine open symbol rows without moving product cores:
+B suffix/capture resources, C disabled notification cell. No production change
+or mirror-increase approval is inferred; the ledger retains open status.

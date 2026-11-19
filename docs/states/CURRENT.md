@@ -92,6 +92,8 @@ thread-exit orchestration still need lifetime proof. No production changes.
 P52 [inventory reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-four-component-reconciliation.json) confirms all1494 inventory file hashes unchanged.
 The existing migration plan groups ten chains; exact C carriers and outer-policy
 control-flow separation remain unfinished. Provider coverage is not whole-root closure.
+P53 [storage-owner design](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-original-storage-owner-design.json) specifies nine symbol rows: B suffix/capture resources and C disabled hook storage.
+Mirror cost and final ABI candidates remain to validate; statuses stay open.
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.

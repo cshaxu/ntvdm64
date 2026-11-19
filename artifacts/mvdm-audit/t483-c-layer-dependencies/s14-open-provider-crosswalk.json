@@ -1,7 +1,7 @@
 {
   "baseline": "d676f1150",
   "kind": "open-dependency-to-provider-crosswalk-not-closure",
-  "source_ledger_sha256": "b094cccf3aee51eb32e31201d8ecc2ff0ba7a4dc0a1d8d21735f9b08df021cfb",
+  "source_ledger_sha256": "75941c58b89905e88f5ef8142dd26ee41008ef7ef5fbdc65fd271cbc2b057b6b",
   "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. No status promotion, new IDs or dependency rescan.",
   "summary": {
     "open_records": 418,
