@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <lm.h>
-#include "vdmredir-dll/include/remote_browser.h"
+#include "compat/include/remote_browser.h"
 #include <string.h>
 DWORD __cdecl RxpTransactSmb(void *,void *,void *,DWORD,void *,DWORD,void *,DWORD,void *,DWORD *,BOOL);
 DWORD __cdecl RxNetUserPasswordSet(void *,void *,void *,void *);

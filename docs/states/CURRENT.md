@@ -68,13 +68,15 @@ P24-P27 delivered native ordinal, GDI alias and VDD ABI boundary cleanup, plus l
 
 P28-P31 are delivered and indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md): P28 removed the redundant CreateProcess wrapper, P29 moved shared message progress constants into B, and P30/P31 classified lifecycle and page-domain consumers. P29 package09b1e845-1132-4570-b217-12281f4891ab is the published product baseline. Review reached58/116,13 header clears,39 lifecycle,6 source/ABI;519/617 IDs open. Source-only classifications do not claim runtime proof.
 
-P32 moves the unchanged SDK-only probe header F to B; original ProbeForRead remains C. Files059-060 identify session cancellation and CSR heap/header ownership for successors. Native range/alignment/no-page-touch fixture passes; x86 compiler dependencies select B. Both cached builds, native probe and product boundary checks passed;11 images published and hash-verified at both destinations. All11 equal P29 after GUID/PE timestamp normalization; repeat guest tests waived. Review61/116:14 header clears,40 lifecycle,7 source/ABI,55 unreviewed; C0126 eliminated,518/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. [P32 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json). Only S12 active.
+P32 delivered the unchanged native probe environment to B; original ProbeForRead remains C. [P32 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json) records source ownership, both builds, probe tests and dual publication.
 
 P33 moves the unchanged Console handle predicate D to B, preserving object and link order; original vdm.c stays untouched. File062 mixed ABI/configuration/transport declarations are classified for S14/S13. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json). Review62/116:14 header clears,40 lifecycle,8 source/ABI,54 unreviewed;517/617 open; C0153 eliminated. Both cached builds, product boundaries and dual11-image publication passed. All images match P32 after GUID/PE timestamp normalization; repeated runtime tests waived. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.
+
+P34 completed verification for files063-065: BaseSrv/OLE mixed ownership remains open for S14/S13; standalone unavailable Browser provider and header move to B. [P34 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json). Both cached builds and targeted checks passed; eleven-image package published to both destinations. Actual DOS redirector probe passed96 calls, native-matched enumeration and exit0;37 original enumeration assertions passed. VDMREDIR changed beyond GUID/timestamps; other10 images normalize equal P33. Review65/116:15 clears,40 lifecycle,10 source/ABI,51 unreviewed;515/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

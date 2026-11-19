@@ -423,13 +423,19 @@
 
 - 直接包含 · C0022 · ntsrv-exe · src/ntsrv-exe/opennt/include/base_server.h
 
+063 P34: S14: original CSR declarations are mixed with S13 authenticated request/resource binding. Dispatch binds borrowed CSR_THREAD and resource callbacks and restores both on exit; whole header cannot move to B. Original basesrv.h unchanged. Mirror delta0 points/0 lines; #error/#line unchanged. See s12-p34-remote-browser.json.
+
 ## 064 — src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx
 
 - 直接包含 · C0113 · wow32-dll · src/wow32-dll/include/wow_ole_descriptor_private.h
 
+064 P34: S14: original OLE private types are mixed with S13 guest pointer/ACP initialization binding. Keep original ConvertObjDescriptor in C; do not move the mixed precomp-dependent header to B. Original thoputil.cxx unchanged. Mirror delta0 points/0 lines; #error/#line unchanged. See s12-p34-remote-browser.json.
+
 ## 065 — src/non-mvdm/ds/netapi/xactsrv/apisrv.c
 
 - 直接包含 · C0059 · vdmredir-dll · src/vdmredir-dll/include/remote_browser.h
+
+065 P34: S12: SDK-only unavailable Browser provider/declaration moved F to B; original public enumeration stays C. Function body unchanged, WORD/cdecl status120 and untouched output semantics retained. Actual compiler closure uses B header; original handler fixture links B remote_browser.obj and passes37 checks. C0059/C0606 eliminated. Mirror delta0 points/0 lines; #error/#line unchanged. See s12-p34-remote-browser.json.
 
 ## 066 — src/non-mvdm/windows/core/ntuser/client/btnctl.c
 

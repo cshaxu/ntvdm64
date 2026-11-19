@@ -1229,6 +1229,9 @@ $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $graph.Add('  cflags = ' + $redirBaseFlags + $redirInclude)
     $object
 }
+$graph.Add('build obj/compat/remote_browser.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/remote_browser.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterRedirObjects += 'obj/compat/remote_browser.obj'
 $adapterRedirWorkerObjects = foreach ($name in $adapterRedirWorkerNames) {
     $object = 'obj/adapter-redir/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterRedirRoot $name)))

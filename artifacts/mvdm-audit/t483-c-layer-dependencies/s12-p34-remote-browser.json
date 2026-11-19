@@ -1,0 +1,110 @@
+{
+  "baseline": "9a3ffadf85884fce419b8ec9eef415801d3c1b30",
+  "status": "P34 build, publication and targeted verification complete; commit/push follows",
+  "files": [
+    {
+      "number": 63,
+      "file": "src/non-mvdm/base/win32/server/basesrv.h",
+      "ids": [
+        "C0022"
+      ],
+      "disposition": "S14 mixed original CSR declarations; S13 authenticated request/resource bindings. base_service binds borrowed local CSR_THREAD and resource callbacks around dispatch and restores them. Keep original BaseSrv code C; do not move this C-dependent header wholesale to B.",
+      "sha256": "f117b69ebce871cb8b850b1bca8588c8d592e706abcde1d23e7f7319b5c59ee4"
+    },
+    {
+      "number": 64,
+      "file": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "ids": [
+        "C0113"
+      ],
+      "disposition": "S14 original OLE declaration cohort; S13 guest mapping and initialization wrapper. Private header reproduces THUNKINFO/OBJECTDESCRIPTOR and includes precomp.h; wrapper initializes ACP lead-byte table then invokes original ConvertObjDescriptor; touch calls original GetPModeVDMPointerAssert. Original conversion remains C.",
+      "sha256": "2c069996be218dd858c0c242607d2fa5e3a550a126bff9f65e939fe921476732"
+    },
+    {
+      "number": 65,
+      "file": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+      "ids": [
+        "C0059",
+        "C0606"
+      ],
+      "disposition": "Move standalone SDK-only unavailable Browser function/declaration F to B. Preserve WORD/cdecl ABI and ERROR_CALL_NOT_IMPLEMENTED, no output writes or state. Original public NetServerEnum handler remains C; remaining RAP/password/session-key providers stay F.",
+      "sha256": "42da6c5b322b9b7f458cddb9619dfe2af88d1a49e672b1334b173a522a6c6326"
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "limits": "Classification does not establish every existing adapter necessary or minimal. No S13/S14 implementation admitted. Private Browser service remains unsupported; this changes ownership only.",
+  "progress": {
+    "reviewedFiles": 65,
+    "clearedDirectHeaderFiles": 15,
+    "deferredLifecycleFiles": 40,
+    "deferredSourceAbiCompositionFiles": 10,
+    "unreviewedFiles": 51,
+    "totalFiles": 116,
+    "openIds": 515,
+    "totalIds": 617
+  },
+  "provider": {
+    "symbol": "I_BrowserServerEnumForXactsrv",
+    "from": "src/vdmredir-dll/source/mvdm_redirector_remote_unavailable.c:79",
+    "to": "src/compat/remote_browser.c:5",
+    "kind": "Autonomous unsupported-private-service boundary, not imported original implementation",
+    "contract": "WORD/cdecl,13 arguments, return ERROR_CALL_NOT_IMPLEMENTED without output writes; original public enumeration remains selected",
+    "bodyIdentity": "Identical after normalizing LF; mirror apisrv.c has exactly one include path replacement, preserving all other bytes and line directives",
+    "compiler": "obj/compat/remote_browser.obj with SDK-only libraryFlags; no C/D/E/F include roots or historical CPU profile",
+    "production": "vdmredir-dll-bindings.lib linked into VDMREDIR.dll; actual apisrv compiler deps use B header",
+    "targetedLink": "enum-test.map resolves symbol to remote_browser.obj"
+  },
+  "validation": {
+    "build": {
+      "x86WowWorker": 0,
+      "x86AllFourWorkerImages": 0,
+      "x64SelectedProducts": 0
+    },
+    "publication": {
+      "package": "950bb24d-25ef-4c12-9b31-150ae614245f",
+      "images": 11,
+      "destinations": [
+        "assets/release",
+        "O:/WINNT/system32"
+      ],
+      "hashVerified": true
+    },
+    "normalizedComparison": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": false,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "targeted": {
+      "originalServerEnumerationChecks": 37,
+      "failures": 0,
+      "ABGraphs": 8,
+      "WOWObjects": 150,
+      "WOWNegativeControls": 9,
+      "originalVddSourceBoundary": "passed"
+    },
+    "runtime": {
+      "result": "passed",
+      "calls": 96,
+      "marker": "RAP-UNAVAILABLE-OK 96 calls; enum matches native; local wksta OK",
+      "exitCode": 0,
+      "nativeEnumStatus": 6118,
+      "evidence": "build/t483-s12-remote-browser/runtime-final",
+      "cleanup": "Existing runner finally removes owned isolated package and processes",
+      "firstAttempt": "Retained failure: task-local PInvoke string parameters supplied empty strings instead of NULL, yielding native87 vs guest6118. Corrected IntPtr.Zero baseline returns6118; no product change needed."
+    },
+    "documentation": "Verify-DocumentationGovernance.ps1 passed; final record gate repeated before commit"
+  }
+}
