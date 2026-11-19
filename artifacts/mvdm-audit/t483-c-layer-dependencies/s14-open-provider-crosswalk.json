@@ -1,17 +1,17 @@
 {
   "baseline": "d676f1150",
   "kind": "open-dependency-to-provider-crosswalk-not-closure",
-  "source_ledger_sha256": "ab67578f8da9a1af05d38137044e238266d643957a8e165f7b091870c4ba7e18",
+  "source_ledger_sha256": "bf4d44bb15a1a6680ea371d5ceedcbe4fe6fd78f93ac0c3abaec100a19471ce3",
   "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. Original crosswalk did not promote statuses or rescan dependencies; P56 separately reconciles the previously removed C0048.",
   "summary": {
-    "open_records": 417,
+    "open_records": 416,
     "kinds": {
       "header": 59,
       "image-import": 1,
-      "include-root": 12,
+      "include-root": 11,
       "symbol": 345
     },
-    "target_groups": 151,
+    "target_groups": 150,
     "symbol_provider_files": 79,
     "wow_reviewed_bodies": 59,
     "symbol_provider_files_with_wow_body_review": 51,
@@ -364,20 +364,6 @@
         "status": "complete-source-read-not-migration",
         "evidence": "s14-request-lifecycle-provider-ownership.md"
       }
-    },
-    {
-      "path": "src/ntvdm-exe/command/include",
-      "sha256": null,
-      "ids": [
-        "C0137"
-      ],
-      "kinds": {
-        "include-root": 1
-      },
-      "symbols": [],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
-      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
       "path": "src/ntvdm-exe/monitor/source/monitor_printer.c",
@@ -3982,5 +3968,5 @@
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     }
   ],
-  "reconciliation": "P56 removes C0048, already eliminated by P25; see s14-p56-xms-header-reconciliation.json."
+  "reconciliation": "P56 removes C0048, already eliminated by P25; see s14-p56-xms-header-reconciliation.json. P59 closes C0137 after current graph and generator reconciliation."
 }

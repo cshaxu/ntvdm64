@@ -196,9 +196,9 @@ adapter for every operation.
 1. Reconcile the four-root file inventory against all body/chain evidence,
    including already eliminated direct edges. Non-observed compilation is not
    proof of irrelevance; no file is deleted from this audit on that basis.
-2. Resolve the 59 header, 12 include-root and one image-import records against
+2. Resolve the 59 header, 11 include-root and one image-import records against
    their current actual users; their absence from the 79-provider body list
-   must not hide them. Preserve the 417 stable open IDs until proved removed.
+   must not hide them. Preserve the 416 stable open IDs until proved removed.
 3. For each chain above, assign exact original C carriers or B destination,
    list all state/lifetime callers and removal sites, then measure candidate
    mirror block/line delta. Any increase still needs the owner's approval.

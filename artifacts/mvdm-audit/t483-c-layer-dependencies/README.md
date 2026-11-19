@@ -553,3 +553,8 @@ P58 [build and ABI reconciliation](s14-build-abi-boundary-reconciliation.json)
 records12 current include-root observations, generated declaration constraints
 and the12 VCDEX imports resolving to C providers. C0137 has no current C-command
 hit; this is not removal proof. No ledger status or production change.
+
+P59 [COMMAND root and lease contract](s14-command-root-and-lease-contract.json)
+closes stale C0137 using current commands and generator ownership:152 eliminated,
+416 open. Explicit resource operations replace callback ownership in the proposed
+lease split; reservation/reentry and exact C mirror cost remain unverified.

@@ -1,0 +1,85 @@
+{
+  "delivery": "T483 S14 P59",
+  "baseline": "1c9bbfd4c",
+  "question": "Close stale COMMAND search-root evidence and define explicit lease operations without B-to-C callbacks.",
+  "command_root": {
+    "id": "C0137",
+    "status": "eliminated",
+    "current_evidence": "s14-build-abi-boundary-reconciliation.json",
+    "generator": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+    "generator_sha256": "3fb2db08ee5fe59fe6a6df14ebdf2995f1192214af19b8523a8334841c1f428a",
+    "generator_use": "commandInclude assigned at722, used only for adapterBaseSrvNames at1214; those sources are ntvdm-exe/command/source, not C.",
+    "historical_evidence": [
+      "s13-p7-cmdmisc-boundary.json",
+      "s13-p8-cmdpif-search-boundary.json",
+      "s13-p10-demgset-directory-boundary.json",
+      "s13-p13-bios-vm-boundary.json",
+      "s13-p15-base-device-search-roots.json"
+    ],
+    "conclusion": "Historical shared-ID retention became stale after per-caller removal. Current observed C commands contain zero matching root; no source/build mutation is needed. This does not eliminate COMMAND implementation forwarding."
+  },
+  "lease_API_proposal": {
+    "B_resource_owner": "Existing guest_memory_lease_context embedded in session and associated through existing compat_host_context. Remove provider context/read/write fields; retain eight slots, epoch, active and copy_lock.",
+    "operations": [
+      {
+        "operation": "begin/end",
+        "contract": "Begin activates resource epoch without registering provider callbacks. End holds existing exclusive copy lock, clears buffers and deactivates. F retains lifecycle/admission timing."
+      },
+      {
+        "operation": "reserve",
+        "contract": "Validate context/access/range and reserve existing slot/buffer. No C access. C hydrates all nonempty buffers including WRITE-only; on failure cancel reservation, publish no output. Do not claim early active-slot publication equivalent until reentry boundary is verified."
+      },
+      {
+        "operation": "validate",
+        "contract": "Check pointer membership before dereference; reject foreign/inactive/stale lease. Return the existing slot only within caller-owned lifetime; no second token registry."
+      },
+      {
+        "operation": "consume",
+        "contract": "Release and clear validated slot without machine access. C performs conditional commit first and consumes even after failed write; return original write result."
+      },
+      {
+        "operation": "copy scope enter/leave",
+        "contract": "Hold existing shared copy_lock across C read/write with matching active epoch; end waits on exclusive lock. Copy-only access uses no borrowed slot. No callback supplied to B."
+      }
+    ],
+    "C_coordinator": "Existing checked provider boundary in ccpusas4.c is the candidate. It must own hydration/commit/short copied access and machine-dependent location operations, calling B resource primitives. Candidate mirror size and original-carrier suitability require measurement/approval before production edits.",
+    "F_changes": "session_guest_memory_begin removes provider parameters; explicit-owner acquire/release retain ACTIVE admission and call C coordinator. mvdm_softpc_guest_memory_begin installer loses C callback installation. Saved DOSWOW epoch calls use C copied access within B lock scope.",
+    "compatibility": "Keep existing public mvdm_softpc_guest_memory_* and location access names where feasible, but remove their B implementations which call C callbacks. Two scalar location constructors remain independent. No second session/TLS, no runtime F callbacks in B."
+  },
+  "semantic_checks": [
+    {
+      "requirement": "WRITE-only acquire still hydrates",
+      "existing_evidence": "src/compat/guest_memory_lease.c acquire read before publication; test/compat/guest_memory_lease_boundary_test.c",
+      "required_new_evidence": "Fail C read on WRITE-only acquire; outputs empty and slot reusable."
+    },
+    {
+      "requirement": "Failed commit consumes",
+      "existing_evidence": "release always free/memset after write result; boundary fixture failed write",
+      "required_new_evidence": "Failed real C write returns failure, subsequent release cannot write/free replacement."
+    },
+    {
+      "requirement": "Copied access retirement",
+      "existing_evidence": "guest_memory_lease_copy shared lock; end exclusive lock",
+      "required_new_evidence": "Blocked copy excludes retirement until operation exits; epoch mismatch produces no SAS call."
+    },
+    {
+      "requirement": "Reentry/slot publication",
+      "existing_evidence": "Original acquire marks active only after callback read; C range preflight calls xtrn2phy then c_sas_loads",
+      "required_new_evidence": "Trace actual preflight/load effects before changing reservation visibility; do not infer no reentry from function name or comment."
+    },
+    {
+      "requirement": "Preserve copy/location behavior",
+      "existing_evidence": "4096-byte chunks, direction-aware overlap, VM-base addition and 16-bit string offset stop",
+      "required_new_evidence": "C coordinator fixtures preserve partial progress and overflow/zero-size result differences."
+    }
+  ],
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 416,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 152
+  },
+  "total": 618,
+  "status": "No product change; C0137 accounting correction only. Lease contract is a design proposal, not compiled implementation or final migration readiness."
+}

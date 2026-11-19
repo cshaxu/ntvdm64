@@ -251,3 +251,7 @@ exact migration carriers/ABI and mirror cost are not yet complete. Counts unchan
 P58 [build/ABI reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-build-abi-boundary-reconciliation.json) traces12 include roots and12 VCDEX ordinal imports to C providers.
 Generated headers retain provenance/layout constraints; C0137 has no current
 C-command hit and needs historical reconciliation. No dependency status change.
+
+P59 [COMMAND root/lease contract](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-root-and-lease-contract.json) closes stale C0137: current ledger152 eliminated/416 open of618.
+The proposed callback-free lease ABI preserves hydration/consume/retirement;
+reservation reentry and exact C mirror cost still need evidence. No product change.
