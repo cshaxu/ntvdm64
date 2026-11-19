@@ -271,3 +271,44 @@ No production change, mirror delta, test invocation or dependency closure is
 claimed. The exact destination carriers and complete migration plan remain
 unfinished; the next work is to reconcile these ownership domains with the
 page-domain and object-table implementations.
+
+## Scoped alias ownership
+
+Against P36 `ba695335d`, read all 655 lines of
+`src/wow32-dll/source/wow_user_borrow_scope.c`, its complete header, and
+the selected thunk invocation and page-domain fixture consumers. This raises
+this record to 17 complete implementation-body reviews, not 17 migrations.
+
+The file is not a generic native resource scope. `wow_user_borrow_window_state`
+resolves the retained callback generation before the current shared handle
+table, preserves original short-handle uniqueness rules, and returns a private
+WND only after pinning its reachable graph. `retain_window_generation` matches
+both the full window and exact backing; its 512-slot index is transaction
+scratch with collision fallback, not a second identity authority.
+
+`wow_user_borrow_client_graph` transfers newly reached graph pins to the
+outermost existing scope before publishing links. Suspended original code
+holds those same WND addresses: popping the inner callback must not free the
+new targets or restore obsolete links. Preserve this algorithm with the C
+window representation and page-domain owner. Moving only the list/TLS to B
+and calling F for release would retain the forbidden outward dependency.
+
+The concrete split is: original handle/class resolution, callback-pair
+restoration and typed graph projection belong to C; independent allocation
+and reference mechanics may use B without callbacks into product ownership;
+product entry/finally and fatal-error policy stay outside. The existing
+`wow_user_invoke_thunk` enters the scope and leaves in finally without taking
+over original W32Dispatch/W32TryCall exception policy. Do not create another
+scope stack when changing ownership. The exact C carrier and mirror cost
+still require the complete migration design before implementation.
+
+Leave has two different failure contracts. A mismatched scope is not consumed;
+a matching scope restores its callback, pops, releases pins and can then report
+deferred collection failure. Retrying leave in the latter case is incorrect.
+`wow_user_borrow_leave_required` enforces this distinction. The selected fixture
+at `test/mvdm-host/wow_page_domain_fixture.c:2261` checks stable PWW identity,
+nested borrowing and retained data across handle retirement. This is source
+coverage evidence only; no test was run for this documentation delivery.
+
+No product or mirror change and no eliminated dependency is claimed. The
+object-table implementation has only been partially read and is not counted.
