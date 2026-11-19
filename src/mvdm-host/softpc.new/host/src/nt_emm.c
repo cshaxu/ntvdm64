@@ -58,7 +58,7 @@ The Following Routines are defined:
 #include "host_emm.h"
 #include "nt_mem.h"
 #include "compat/include/physical_mapping_host.h"
-#include "mvdm_softpc_guest_memory.h"
+#include "compat/include/guest_memory_access.h"
 
 
 /*	Global Variables		*/

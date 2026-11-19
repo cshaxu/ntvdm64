@@ -1,0 +1,77 @@
+{
+  "delivery": "T483 S14 P22",
+  "baseline": "03a11cc87d5db283a932634ce103fd6a308dc33b",
+  "change": "EMS directly consumes existing B copy contract. No implementation/state move in this delivery; actual copy bodies migrated in P20.",
+  "source_review": "s14-ems-header-review.json",
+  "xms_review": "s14-xms-return-owner-review.json",
+  "xms_disposition": "No production change: HIMEM A20/stack result contract disproves a naive AX/BL-only failure replacement. Original failure carrier and outer ownership still require resolution.",
+  "build_exit": "0",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c7d90841-65da-481f-8a89-090e0e41e922",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized_images_equal_P21": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": true,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "identity_scope": "Masks package GUID and PE COFF/debug timestamps only; not raw byte identity.",
+  "runtime_verification": "No repeated runtime tests: authorized reuse of P21 final-code tests because all normalized images match. P21 tests.exit=0 and s14-p21-wow-clock-implementation.json retain coverage and limitations.",
+  "compile_dependency_proof": {
+    "path": "build\\t483-s14-ems-include\\nt-emm-deps.txt",
+    "sha256": "b37963df9b9463c3b34c29e8f44d49c23261c45b8421ad70c1ec3743a0ce0ff1",
+    "B_header_selected": true,
+    "former_F_header_absent": true,
+    "F_session_header_absent": true
+  },
+  "mirror": {
+    "before_points": 7,
+    "after_points": 7,
+    "before_lines": 59,
+    "after_lines": 59,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_reduction_points": 3,
+    "cumulative_reduction_lines": 12,
+    "error_line": "All conditional/error/line directives unchanged; one existing added include replaced."
+  },
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 421,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 147
+  },
+  "remaining": "C0040 remains open for XMS; S14 remains active for SAS/XMS and USER ownership.",
+  "checks": "PASS: worker thread boundary, documentation governance, relative links and git diff --check",
+  "processes": {
+    "build": {
+      "pid": 16708,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-ems-include/build-only.ps1",
+      "start": "2026-11-19T09:38:35.1256350-08:00"
+    },
+    "publish": {
+      "pid": 6828,
+      "start": "2026-11-19T09:42:58.3391144-08:00",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-ems-include/publish-only.ps1"
+    },
+    "check": {
+      "start": "2026-11-19T09:44:29.1399727-08:00",
+      "pid": 27000
+    }
+  }
+}

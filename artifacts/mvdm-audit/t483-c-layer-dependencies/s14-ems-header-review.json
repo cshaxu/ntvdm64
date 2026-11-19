@@ -1,0 +1,30 @@
+{
+  "task": "T483 S14",
+  "baseline": "03a11cc87d5db283a932634ce103fd6a308dc33b",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+  "before_sha256": "8e6a91287be5db3cce2801124ffd5d4d307ae4a31089f9cb0182b63f1cfe602f",
+  "after_sha256": "187c1dc7a07e05bab70e8e827d7060c0501f82de06686412e5c0c63bd79e317d",
+  "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+  "change": "Replace mixed F include with B-owned declarations for the three generic copies actually consumed by EMS. Bodies already migrated in P20. No function or conditional/#line changes.",
+  "raw_original_relative_before": {
+    "blocks": 24,
+    "lines": 103
+  },
+  "raw_original_relative_after": {
+    "blocks": 24,
+    "lines": 103
+  },
+  "measurement": "SequenceMatcher line opcodes including excluded arms. Only an existing added include changes spelling; no new line, branch or logical-line displacement. Excluded arms unchanged; non-error delta0 points/0 lines.",
+  "status": "cached full build and dual publication passed; normalized eleven images equal P21; runtime tests reused by owner authorization",
+  "non_error_diff_before": {
+    "blocks": 7,
+    "added": 51,
+    "deleted": 8
+  },
+  "non_error_diff_after": {
+    "blocks": 7,
+    "added": 51,
+    "deleted": 8
+  },
+  "prior_count_identity": "Exact before hash matches S13 P14 nt_emm record; same-length added include substitution leaves point/line count unchanged."
+}

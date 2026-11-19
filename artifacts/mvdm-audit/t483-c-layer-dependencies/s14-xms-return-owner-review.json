@@ -1,0 +1,76 @@
+{
+  "task": "T483 S14",
+  "baseline": "03a11cc87d5db283a932634ce103fd6a308dc33b",
+  "kind": "source call-chain proof; not binary execution or new runtime failure evidence",
+  "inputs": [
+    {
+      "path": "src/mvdm-guest/dos/v86/dev/himem/himem5.asm",
+      "sha256": "b4fdca7092d350578e9e86e1db2284b66cd7e071a9bfc9ca859ddaa6cd2c2b74"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/dev/himem/himem4.asm",
+      "sha256": "0eae030990a2ee242e94f0ab0d49248d4c0de4cff8cdaf5ff7e355c5939809f2"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/dev/himem/himem.asm",
+      "sha256": "bfadf282d547b0b0dbc008405c4882f333c047ec235529d928e5d9ca0184e0ca"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "sha256": "b36334e5f935a1e9face8676b35d3752fa5658d5cc6392a0b61958b601af97ee"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "sha256": "a062de312853f50f47764882f0e929a971a390ba50e08b4fff39c1aa8bdde774"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "sha256": "565d0149004bae0d13970e78d7fed16b6f42117328c5dbbee98e8602431a711b"
+    }
+  ],
+  "chain": [
+    {
+      "path": "src/mvdm-guest/dos/v86/dev/himem/himem5.asm",
+      "range": "79-174",
+      "facts": [
+        "MoveBlock initializes [BP.MEReturn] to0, validates/locks handles and length before XMSSVC XMS_MOVEBLOCK.",
+        "After XMSSVC it directly calls LDSblA20; no intervening test of host AX/BL.",
+        "MEM2_Exit restores saved BX and sets AX=1 unless [BP.MEReturn] is nonzero; failure uses that stack-local byte."
+      ]
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/dev/himem/himem4.asm",
+      "range": "61-69",
+      "facts": [
+        "LDsblA20 is the far pointer to _text:FLclDsblA20."
+      ]
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/dev/himem/himem.asm",
+      "range": "1273-1365",
+      "facts": [
+        "FLclDsblA20 returns AX=1 directly for fInHMA, otherwise calls LocalDisableA20.",
+        "LocalDisableA20 success assigns AX=1 and clears BL. Its A20 failure has its own error result."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "range": "XMSDispatch",
+      "facts": [
+        "The service table invokes a void function and XMSDispatch returns TRUE independently of its result."
+      ]
+    }
+  ],
+  "conclusion": "Replacing mvdm_xms_cancel_current_operation by setAX(0)/setBL(error) is not a valid error propagation path for this original guest caller. Its ordinary A20/exit path can overwrite the host error and report success. Do not change product behavior on the basis of xmsMoveBlock C header comments alone.",
+  "disposition": "Keep product cancellation outside B. Do not delete or move it merely to improve layering. A future removal must establish a failure carrier observed by the original caller or an existing outer exception owner, while preserving guest binaries and measuring mirror diff before approval.",
+  "excluded_shortcuts": [
+    "No blind AX/BL substitution",
+    "No new B last-error/session cancellation registry",
+    "No guest patch or guest rebuild",
+    "No new callback table hiding the current F cancellation function"
+  ],
+  "limitations": [
+    "This proves the checked-in original source call shape; it does not claim disassembly of every deployed HIMEM binary.",
+    "No production fault reproduced or new runtime acceptance claimed."
+  ]
+}

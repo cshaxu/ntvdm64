@@ -28,6 +28,16 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P22 removes the remaining F guest-memory include from EMS; actual copy
+implementations already moved to B in P20. Cached full builds and dual11
+publication/22 hashes passed. All11 normalized images match P21 after
+package/PE timestamp masking; runtime tests are reused under owner approval.
+Packagec7d90841-65da-481f-8a89-090e0e41e922 is published.
+[P22 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p22-ems-header-delivery.json)
+records compiler dependencies and XMS return-owner findings. C0040 remains
+open for XMS; ledger147 eliminated/421 open. Mirror delta0/0, cumulative
+reduction3 points/12 lines. S14 remains active.
+
 S14 P21 moves the actual shared WOW clock resource into B: host page,
 stop event, publisher thread and cleanup. F retains guest mapping and CPU/
 session lifecycle. Stop/join precedes unmap; page release follows unmap.

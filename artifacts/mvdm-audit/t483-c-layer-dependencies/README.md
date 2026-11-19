@@ -400,3 +400,7 @@ moves page/event/thread ownership and cleanup into B; F keeps guest map/unmap
 and CPU/session timing. Cached builds,dual11 publication,23 clock assertions,
 actual CCPU WOW clock update/reentry and published DOS checks pass. Mirror
 delta0/0; direct ledger147 eliminated/421 open unchanged. USER/SAS remains open.
+
+## S14 P22 EMS header boundary
+
+[Delivery](s14-p22-ems-header-delivery.json), [EMS review](s14-ems-header-review.json), and [XMS return-owner evidence](s14-xms-return-owner-review.json) record the EMS include cleanup and unresolved XMS failure contract. Runtime evidence is reused only after eleven normalized images match P21.
