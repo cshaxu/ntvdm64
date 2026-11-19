@@ -1,5 +1,5 @@
 {
-  "baseline": "abaf38657",
+  "baseline": "804ad42ae",
   "kind": "open-dependency-to-provider-crosswalk-not-closure",
   "source_ledger_sha256": "b094cccf3aee51eb32e31201d8ecc2ff0ba7a4dc0a1d8d21735f9b08df021cfb",
   "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. No status promotion, new IDs or dependency rescan.",
@@ -26,8 +26,8 @@
       "src/wow32-dll/source/wow_user_message_bridge.c",
       "src/wow32-dll/source/wow_window_words_binding.c"
     ],
-    "additional_provider_files_reviewed": 25,
-    "additional_symbol_records_reviewed": 48
+    "additional_provider_files_reviewed": 27,
+    "additional_symbol_records_reviewed": 82
   },
   "targets": [
     {
@@ -1047,7 +1047,11 @@
       ],
       "wow_body_review": "not-covered-by-wow-body-record",
       "review_evidence": null,
-      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+      "implementation_disposition": "Separate independent native resources from authenticated endpoint, publication and receipt protocol; four B-installed F service callbacks remain unresolved implementation dependencies.",
+      "additional_body_review": {
+        "status": "complete-source-read-not-migration",
+        "evidence": "s14-console-provider-ownership.md"
+      }
     },
     {
       "path": "src/ntvdm-exe/win32/console_client.h",
@@ -1125,7 +1129,11 @@
       ],
       "wow_body_review": "not-covered-by-wow-body-record",
       "review_evidence": null,
-      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+      "implementation_disposition": "Separate independent native resources from authenticated endpoint, publication and receipt protocol; four B-installed F service callbacks remain unresolved implementation dependencies.",
+      "additional_body_review": {
+        "status": "complete-source-read-not-migration",
+        "evidence": "s14-console-provider-ownership.md"
+      }
     },
     {
       "path": "src/ntvdm-exe/win32/console_graphics.c",

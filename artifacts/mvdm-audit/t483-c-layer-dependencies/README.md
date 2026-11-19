@@ -509,3 +509,8 @@ P49 completes service_core, launch RPC and Run16 entry body reviews in the
 [request/lifecycle record](s14-request-lifecycle-provider-ownership.md).
 Combined coverage is76/79 providers and308/345 symbol rows; no dependency
 elimination is claimed.
+
+P50 [Console ownership](s14-console-provider-ownership.md) adds two complete
+provider bodies/34 symbol records: combined78/79 providers and342/345 symbol
+rows. Four B-installed F callbacks remain explicit dependencies; no status
+promotion, production migration or runtime verification is claimed.
