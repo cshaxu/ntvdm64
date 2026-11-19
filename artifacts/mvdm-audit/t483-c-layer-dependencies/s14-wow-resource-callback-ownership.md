@@ -312,3 +312,45 @@ coverage evidence only; no test was run for this documentation delivery.
 
 No product or mirror change and no eliminated dependency is claimed. The
 object-table implementation has only been partially read and is not counted.
+
+## Object publication and four callback consumers
+
+Against P37 `fc28c99d5`, finish the 790-line
+`src/wow32-dll/source/wow_user_object_bindings.c` and its header; read the
+complete control-brush, dialog-keyboard, timer-callback and idle-hook binding
+bodies. This record now covers 22 complete implementation bodies. The prior
+partial object-table read is superseded, not counted twice. These are source
+findings, not migrations or new runtime passes.
+
+| Concrete functions | Actual responsibility and proposed owner |
+| --- | --- |
+| `wow_user_window_sample_links`, `capture_window` | Public USER property and identity sampling; candidate B with a finite observation value. No task lookup, guest mapping or original private-state inference is needed by these bodies. Preserve desktop parent versus owner and legitimate zero-valued properties. |
+| `position_roots`, message/queue/return root extractors | Typed native message operands; candidate B without a provider callback. Keep posted-message and synchronous payload rules distinct, exclude menu handles and insertion constants, and do not recursively dereference arbitrary payloads. Original thunk conversion stays C. |
+| `wow_user_full_handle`, native/public/owned/guest handle conversion | Original shared metadata versus cleanup ownership are different authorities. These operations require C-owned identity publication; moving the function names into a B header would not remove their page-domain dependency. |
+| `project_graph_attempt`, refresh and observed publication | Mixed native capture and C generation/guest commit. Split capture from commit, with one transaction owner; do not put a guest commit callback into B. Native observations are not an atomic desktop snapshot. |
+| `wow_user_window_publish`, retire, cancel-native-adoption | C typed object/generation ownership. Publish rolls back the provisional local entry when guest publication fails; retire and cancel clear the local entry only after page-domain success. Cancellation retains the observed generation and is not equivalent to destruction. |
+| `wow_control_brush`, retain/color helpers | Original `xxxGetControlBrush` plus retained PWND and a native color call. C owns private state and original behavior; the bounded native color service can be B. Read native handles before reentrant USER calls, keeping both exact allocations retained. |
+| `wow_dialog_messageA/W` | Original IsDialogMessage behavior wrapped in task execution, borrow and dialog context. Split the execution boundary from the original manager; retain context/borrow/task unwind ordering. Do not replace the original manager with native IsDialogMessage. |
+| `W32TimerFunc` | C timer stubs call this F scope wrapper, which invokes renamed C `WowOriginalTimerFunc`. Original timer slot selection, queued callback after KillTimer and CallBack16 stay C. Scope ownership must move inward before removing this outward wrapper. |
+| Idle registration and dispatch | `wow_user_idle_hook_registered` reads C TD nodes under C gcsWOW; belongs with that original state, not generic B. Native hook forwarding happens after callback scopes leave; direct taskman notification must not forward a native hook chain. |
+
+The actual timer round trip is visible in `mvdm-host/wow32/wutmr.c`: the
+27 stubs retain W32TimerFunc calls, while the original body at physical line
+219 is named WowOriginalTimerFunc. `wkman.c:683` similarly retains the original
+CallBack16 foreground-idle body under a renamed symbol. These are concrete
+candidate C carriers, not authorization to insert an unmeasured mirror patch.
+The scope implementation and complete call chain must be settled first.
+
+`mvdm-host/wow32/wuclip.c:39` directly calls the F public HWND resolver.
+Its fallback to an externally observed, committed window differs from owned
+window cleanup lookup; deleting that distinction would break the public
+clipboard boundary. Native capture can move independently, but eliminating
+this edge requires moving the identity implementation, not just its header.
+
+The graph collector uses temporary indexed rows, prepares local storage before
+the irreversible guest publication, and retries only a detected local capture
+cycle once. It does not retry commit failures or reuse an invalid old graph.
+Those distinctions are migration invariants; this review does not claim that
+every existing adaptation is minimal or that all original alternatives have
+been proved unavailable. Destination carriers and mirror costs remain design
+work. Direct dependency counts and production package identity are unchanged.
