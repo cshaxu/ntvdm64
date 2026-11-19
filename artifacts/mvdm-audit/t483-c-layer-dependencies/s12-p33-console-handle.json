@@ -1,0 +1,51 @@
+{
+  "baseline": "6d5814ae6aac58a7aab38f5e67d31d62976b6407",
+  "status": "verified P33 delivery",
+  "files": [
+    {
+      "number": 62,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "ids": [
+        "C0003",
+        "C0004",
+        "C0005",
+        "C0006",
+        "C0153"
+      ],
+      "classification": "S14 mixed original ABI/composition with S13 command transport/configuration binding; one S12 independent provider migration",
+      "findings": [
+        "Classifier header combines original RTL_RELATIVE_NAME/SECTION_IMAGE_INFORMATION declarations, symbol renames and full-path adapter. Path provider passes NULL modern relative output then zeros original relative structure; do not move C-layout dependency wholesale to B.",
+        "Client header binds CsrClientCallServer to authenticated project transport and finite process support carrier; original message/capture ABI remains C. S13 must retain capture validation and request lifecycle.",
+        "Config provider binds caller-owned immutable command templates in TLS, including package-specific image boundary; it is not a generic native API facade. Keep package policy with product/common and assess original provider boundary in S13.",
+        "AMD64 forced _X86_ after nt.h selects guest NE classification behavior rather than host architecture. S14 must retain real per-TU macro selection while considering original header ownership.",
+        "OpenNtBaseIsConsoleHandle uses only SDK GetConsoleMode and original low-bit pseudo-handle signature, preserving LastError. Move function byte-identically D to B; retain original symbol and input/output and shared archive object/link order. Both original C caller and common RPC caller keep same provider."
+      ]
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 62,
+    "clearedDirectHeaderFiles": 14,
+    "deferredLifecycleFiles": 40,
+    "deferredSourceAbiCompositionFiles": 8,
+    "unreviewedFiles": 54,
+    "totalFiles": 116,
+    "totalIds": 617,
+    "openIds": 517
+  },
+  "validation": {
+    "build": "Both cached product architectures exit0; x86 worker and x64 launcher graphs compile src/compat/base_console_handle.c to existing process.obj; same archive/link order.",
+    "providerSha256": "c2ac3a035fa043da6b8a7d31b26964f7c384138080e83e3616c6666e293e7b63",
+    "link": "run16.exe.map resolves OpenNtBaseIsConsoleHandle to common-base-srv-bindings:process.obj; source graph assigns it to B. Archive name is packaging, not source ownership.",
+    "publication": "11 images hash-verified assets/release and O:/winnt/system32; package15bca985-56cc-44d8-80c2-e9d211f9736d.",
+    "tests": "Eight A/B build graphs,150 WOW objects/nine negative controls and VDD source check pass. All11 images equal P32 after GUID/PE timestamps only; repeated runtime tests waived.",
+    "evidenceRoot": "build/t483-s12-console-handle",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed; build/t483-s12-console-handle/docs.log",
+    "commit": "Receipt included in P33 delivery commit."
+  }
+}

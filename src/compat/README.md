@@ -286,3 +286,5 @@ selects this directory. No C include, table or implementation is introduced into
 `include/wow_message_progress.h` owns shared message conversion acquisition bits only. C converters and F unwind use the same values; allocation, task state and cleanup remain with their existing owners.
 
 `include/wow_user_probe_bindings.h` supplies the SDK-only environment for the original C-layer `ProbeForRead`; it owns no worker state and does not change the original range/alignment algorithm.
+
+`base_console_handle.c` supplies the shared original Console pseudo-handle / modern Console capability predicate. It preserves LastError and owns no product lifetime or transport state.

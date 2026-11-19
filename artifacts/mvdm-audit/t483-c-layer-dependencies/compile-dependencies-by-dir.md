@@ -417,6 +417,8 @@
 - 直接包含 · C0005 · common · src/common/base_srv/base_config.h
 - 强制包含 · C0006 · common · src/common/base_srv/legacy_classifier_arch.h
 
+062 P33: independent console handle predicate moved unchanged D to B; original vdm.c untouched. Mixed classifier/client/config/architecture headers require S14 source ABI and S13 transport/template ownership review; not wholesale B moves.62/116 classified,54 unreviewed;517/617 IDs open; C0153 eliminated after both builds, same link provider object and boundary verification.11 images published at both destinations and normalized-identical to P32. Mirror delta0/0, cumulative reduction2 points/10 lines. See s12-p33-console-handle.json.
+
 ## 063 — src/non-mvdm/base/win32/server/basesrv.h
 
 - 直接包含 · C0022 · ntsrv-exe · src/ntsrv-exe/opennt/include/base_server.h

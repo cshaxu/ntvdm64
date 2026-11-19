@@ -1351,7 +1351,7 @@ if ($Architecture -eq 'x86') {
             @('reservation', 'src/ntsrv-exe/opennt/source/base_reservation.c', $baseOwnerFlags),
             @('request', 'src/ntsrv-exe/opennt/source/base_request.c', $baseServerFlags),
             @('config', 'src/common/base_srv/base_config.c', $baseOwnerFlags),
-            @('process', 'src/common/base_srv/base_client_process.c', $baseOwnerFlags),
+            @('process', 'src/compat/base_console_handle.c', $libraryFlags),
             @('interactive', 'src/ntsrv-exe/opennt/source/base_interactive.c', $baseOwnerFlags),
             @('classifier-path', 'src/common/base_srv/base_classifier_path.c', $baseOwnerFlags))
     }
@@ -1369,7 +1369,7 @@ if ($Architecture -eq 'x86') {
             } else { $member[2] }
             $graph.Add('  cflags = ' + $memberFlags)
             $baseOwnerManifest += [ordered]@{
-                archive = if ($group -eq 'opennt-base-bindings' -and $member[1].StartsWith('src/common/base_srv/')) { 'common-base-srv-bindings.lib' } else { $group + '.lib' }
+                archive = if ($group -eq 'opennt-base-bindings' -and ($member[1].StartsWith('src/common/base_srv/') -or $member[1] -eq 'src/compat/base_console_handle.c')) { 'common-base-srv-bindings.lib' } else { $group + '.lib' }
                 path = $member[1]
                 sha256 = Get-NodeSha256 (Join-Path $root $member[1])
                 object = $object

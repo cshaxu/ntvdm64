@@ -70,6 +70,8 @@ P28-P31 are delivered and indexed in the [C dependency tracker](../../artifacts/
 
 P32 moves the unchanged SDK-only probe header F to B; original ProbeForRead remains C. Files059-060 identify session cancellation and CSR heap/header ownership for successors. Native range/alignment/no-page-touch fixture passes; x86 compiler dependencies select B. Both cached builds, native probe and product boundary checks passed;11 images published and hash-verified at both destinations. All11 equal P29 after GUID/PE timestamp normalization; repeat guest tests waived. Review61/116:14 header clears,40 lifecycle,7 source/ABI,55 unreviewed; C0126 eliminated,518/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. [P32 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json). Only S12 active.
 
+P33 moves the unchanged Console handle predicate D to B, preserving object and link order; original vdm.c stays untouched. File062 mixed ABI/configuration/transport declarations are classified for S14/S13. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json). Review62/116:14 header clears,40 lifecycle,8 source/ABI,54 unreviewed;517/617 open; C0153 eliminated. Both cached builds, product boundaries and dual11-image publication passed. All images match P32 after GUID/PE timestamp normalization; repeated runtime tests waived. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

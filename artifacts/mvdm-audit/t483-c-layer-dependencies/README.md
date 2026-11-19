@@ -181,3 +181,5 @@ P30: [Dispatch, fax registry, hooks and guest registry ownership](s12-p30-wow-re
 P31: [Clipboard identity, message cleanup and guest page publication](s12-p31-wow-clipboard-page-domain.json).
 
 P32: [XMS/CSR ownership and original probe environment](s12-p32-user-probe.json).
+
+P33: [BaseClient dependencies and native console handle compatibility](s12-p33-console-handle.json).

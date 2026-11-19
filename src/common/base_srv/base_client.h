@@ -33,7 +33,7 @@ BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULO
 #ifndef STATUS_INVALID_IMAGE_NOT_MZ
 #define STATUS_INVALID_IMAGE_NOT_MZ ((NTSTATUS)0xC000012FL)
 #endif
-BOOL OpenNtBaseIsConsoleHandle(HANDLE);
+#include "compat/include/base_console_handle.h"
 /* Original conroute.h's low-two-bit test described NT4 pseudo handles;
  * modern Console identity is queried, not inferred from a numeric value. */
 #undef CONSOLE_HANDLE
