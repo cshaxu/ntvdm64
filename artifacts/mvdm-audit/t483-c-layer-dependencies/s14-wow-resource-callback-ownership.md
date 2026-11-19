@@ -217,3 +217,57 @@ No production edit or test run occurred. Direct ledger and mirror-difference
 counts remain unchanged. Next resolve window-word storage, guest projections
 and provider cleanup against the proposed B/C split; independently movable
 leaf identification is not permission to skip the complete migration ledger.
+
+## Window storage and generation ownership
+
+Against P35 `083c3ffe1`, complete the 1,536-line
+`wow_window_words_binding.c` body review (16 complete bodies in this record).
+Follow its generation binding into NTVDM's page-domain provider at
+`bind_window_host_storage`, `retain_host_window`, `window_host_storage` and
+`dispose_window_borrow`. These selected provider functions are not a fresh
+complete audit of the page-domain file.
+
+The storage record combines native property/refcount mechanics, original
+`WW`/`WND`/`CLS` representations, USER cleanup ownership, native class
+references, guest generation identity and resource-only destruction callbacks.
+Its opening comment is not sufficient evidence of independent resource-only
+behavior: actual final release can return retained guest backing, and
+terminal retirement can invoke original control/dialog finalizers.
+
+| Ownership domain | Current concrete behavior | Migration constraint |
+| --- | --- | --- |
+| Native property/storage | GetProp/SetProp/RemoveProp, publication lock, references, immutable native thread identity | Candidate B mechanism only after isolating typed original state and guest release; preserve exact-binding checks against HWND reuse. No generic callback bag that still invokes the outer provider. |
+| Original state | WND allocation and promotion, FNID/private-state flags, WW words, CLS atom projection, original finalizers | C-owned representation/algorithm. Resource-only views cannot acquire control-private access merely by having a WND-shaped allocation. Promotion preserves previously borrowed addresses and graph edges. |
+| Guest generation | Borrow/pin/release, guest WW updates, published graph and retained backing | C machine ownership with independent B bookkeeping only where actually separable. Preserve original SAS behavior and existing generation identity, not a new registry. |
+| Product retirement | Runtime admission/cleanup scope, late callback rejection and terminal failure | Keep product policy outside B. C finalization and native deallocation need explicit ordering rather than calls back into product state from B. |
+
+The generation owns one host-storage reference. A retired host binding can
+also own a retained generation reference. `release_reciprocal_generation_owner`
+clears the latter before release, outside the publication lock while other
+references still keep the binding alive, to break the cycle. Conversely,
+`dispose_window_borrow` unlinks the generation and clears its stored callback
+before invoking `release_generation_storage`; that callback clears generation
+and retired-backing fields before the final host release. Do not substitute
+unconditional free or change this into two independent disposal registries.
+
+Observed-graph publication first captures fallible native information and
+names, then locks/revalidates exact properties and states, commits the guest
+graph, and performs prepared local swaps. Terminal cleanup marks WFDESTROYED,
+drops locks before original finalizers, rechecks whether nested cleanup already
+retired the binding, and only then withdraws property/table ownership. Native
+WM_NCDESTROY observation retains the old binding before forwarding other hooks;
+the returned HWND alone cannot identify the generation to retire.
+
+The native-procedure dispatch path does not acquire guest execution. Tagged
+guest dispatch does acquire the task and borrow scopes, publishes callback
+window/menu views, then releases the WND while those scopes are still live.
+Keep that distinction; merging both paths around an unconditional CPU scope
+would change native-only behavior.
+
+Existing `test/mvdm-host/wow_page_domain_fixture.c` cases cover atomic link
+publication, reused slots, retained class/window release ordering and duplicate
+release rejection. They are candidate regression requirements, not a new pass.
+No production change, mirror delta, test invocation or dependency closure is
+claimed. The exact destination carriers and complete migration plan remain
+unfinished; the next work is to reconcile these ownership domains with the
+page-domain and object-table implementations.
