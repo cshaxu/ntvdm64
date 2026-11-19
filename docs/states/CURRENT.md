@@ -32,7 +32,7 @@ S12 P1-P2 build, publication and direct-header evidence are indexed in the [C de
 
 P2 removed C0056, C0138, C0140 and C0144 without changing either mirror. The WOW32 graph also dropped its inherited worker command and SoftPC search roots. P2 package 93bb7b13-4fcd-42ce-bbfe-c318a53669ba was built with both cached toolchains and hash-verified at both destinations. Every byte of all eleven P2 images equals P1 after masking only the package GUID and COFF/debug-directory timestamps. The WOW32 formal graph, worker session lifecycle and A/B production boundary checks passed. The expanded compile commands and a VDMREDIR link map corrected the baseline coverage. See the C tracker for the updated counts.
 
-P3 restored the original SoftPC entry and placed process startup and exit in the F worker owner. The [P3 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p3-entry.json) covers both published packages, 539 compiler contexts and the mirror reduction of two blocks and ten lines. The tracker retains all original indirect observations.
+P3: [Worker entry delivery and mirror reduction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p3-entry.json).
 
 P4-P5: [AMD64 roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p4-native-roots.json) and [x86 roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p5-worker-roots.json) include verified builds, dual publication and targeted checks.
 
@@ -182,4 +182,6 @@ P59: [Native profile delivery](../../artifacts/mvdm-audit/t483-c-layer-dependenc
 
 P60: [Task initialization ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p60-task-init-ownership.json).
 
-P61: [Message-table ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p61-message-table-ownership.json). Reviewed107/116;9 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.
+P61: [Message-table ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p61-message-table-ownership.json).
+
+P62: [Scheduler ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p62-scheduler-ownership.json). Reviewed108/116;8 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.

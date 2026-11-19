@@ -1,0 +1,113 @@
+{
+  "baseline": "1faf819b24550d1164293964dc543df93eedc320",
+  "status": "P62 scheduler ownership audit; no production changes",
+  "files": [
+    {
+      "number": 108,
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "sha256": "4321a7b4b60f6a65f5ee7d3beec75b8f6ddd55a971774d0230567d5d109ac99f",
+      "compilerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\taskman.obj",
+      "objectSha256": "593ef403cf6d77253e3bc5d01d5741682dd4be7d869f8d88456db3dd736ed49e",
+      "coffUndefined": [
+        "__imp__CloseHandle@4",
+        "__imp__HeapAlloc@12",
+        "__imp__HeapFree@12",
+        "__imp__GetProcessHeap@0",
+        "__imp__SetEvent@4",
+        "__imp__ResetEvent@4",
+        "_wow_user_runtime_current@0"
+      ],
+      "dependencies": [
+        "obj/opennt-user/taskman.obj: #deps 21, deps mtime 8167781124989689 (VALID)",
+        "    ../../../../src/common/wow/user_runtime.h",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/winuserp.h",
+        "    ../../../../src/compat/include/wow_task_event_binding.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+        "    ../../../../src/wow32-dll/include/wow_shared_user_abi.h",
+        "    ../../../../src/wow32-dll/include/wow_task_order_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_user_client_view_layout.h",
+        ""
+      ]
+    }
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "windows/core/ntuser/kernel/taskman.c",
+    "evidence": "Compared complete fixed original file to current file; read all current 752 lines, task-order header, lifecycle host operations, readiness push/pop and return paths, existing task-order fixture."
+  },
+  "mechanisms": {
+    "originalOwner": "C retains InsertTask priority ordering, DestroyTask unlink/free and wake selection, xxxSleepTask event scan and send/receive lock rules, UserYield/DirectedYield and CurrentTaskLock. Do not migrate the full original algorithm to F merely because its host services currently live there.",
+    "direct": "C0117 imports F task-order state and macro callbacks. C0618 also applies here: actual COFF imports wow_user_runtime_current, whose definition belongs to F ntvdm-exe; common header is not implementation ownership. Native heap/event operations already call SDK directly, with retained event-reference primitive already B after P57.",
+    "wait": "F wait_for_task_or_message handles existing sent messages and MsgWaitForMultipleObjectsEx. It may receive callbacks, synchronize queue projection, increment existing task event counters and signal original task event under runtime lock. It is not a pure native wait leaf that can move wholesale into B. S13 must separate native mechanism from task-state effects without changing original rescan or inventing another queue.",
+    "lockAndContext": "Original LeaveCrit/EnterCrit delegate to F runtime release/acquire; Enter/ExitWowCritSect invoke client_context to transfer debug/page-domain client view. These callbacks tie exact task lifetime and execution ownership to the same runtime. Header relocation alone does not remove the dependency.",
+    "readiness": "OPENNT-HOST-123 adds the native-stack eligibility predicate to the C scan. F execution_push/pop owns its nested scopes; native completion marks ready then reacquires through original DirectedYield. Existing persistent_eligibility fixture checks excluded suspended frame, event preservation, locking, idle/hardware paths. This audit classifies the actual contract, not a fresh approval or blanket proof of every nested callback case.",
+    "failure": "check_death and deliver_apc terminate through existing worker failure owner; APC completion is not modeled as successful task wake. F wait can return unsuccessful status; original loop only branches specially on WAIT_1 and USER_APC. Negative-wait failure propagation must be explicitly tested during S13 before changing that contract; current source alone is not runtime proof.",
+    "disposition": "No independent native leaf remains to move in place. Keep C algorithms. S13 jointly reconciles runtime lock/current TLS, native wait/message callbacks, readiness and retirement. S14 assesses the original state/declaration ABI. C0117/C0618 remain open; no new exception or source migration."
+  },
+  "verificationPlan": {
+    "existing": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c and test/observation/verify-wow-task-lifecycle.ps1; reuse P57 task-order evidence as historical only.",
+    "afterChange": "Verify priority/event ordering, nested native callback and return, directed send/reply, task locks, waiter destruction, native wait failures and retirement. Existing unit fixture uses test host ops; it cannot alone certify all production message bridge behavior."
+  },
+  "progress": {
+    "reviewedFiles": 108,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 73,
+    "deferredSourceAbiCompositionFiles": 18,
+    "unreviewedFiles": 8,
+    "totalFiles": 116,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production changes. Existing COFF and VALID compiler dependencies inspected.",
+    "runtime": "Not run; existing fixture source and earlier receipt reviewed, no new runtime pass claimed.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-scheduler-ownership/docs.log and docs.exit. CURRENT 16235 bytes; git diff --check passed.",
+    "publication": {
+      "packageId": "a287f10d-c93a-4720-833c-5eee7bfd6e99",
+      "verifiedImages": [
+        "assets\\release\\VCDEX.DLL",
+        "O:\\WINNT\\system32\\VCDEX.DLL",
+        "assets\\release\\run16.exe",
+        "O:\\WINNT\\system32\\run16.exe",
+        "assets\\release\\ntsrv.exe",
+        "O:\\WINNT\\system32\\ntsrv.exe",
+        "assets\\release\\ntcon.exe",
+        "O:\\WINNT\\system32\\ntcon.exe",
+        "assets\\release\\ntvdm.exe",
+        "O:\\WINNT\\system32\\ntvdm.exe",
+        "assets\\release\\ntvwm.exe",
+        "O:\\WINNT\\system32\\ntvwm.exe",
+        "assets\\release\\ntmon.exe",
+        "O:\\WINNT\\system32\\ntmon.exe",
+        "assets\\release\\WOW32.DLL",
+        "O:\\WINNT\\system32\\WOW32.DLL",
+        "assets\\release\\VDMREDIR.DLL",
+        "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "assets\\release\\nthook32.dll",
+        "O:\\WINNT\\system32\\nthook32.dll",
+        "assets\\release\\nthook64.dll",
+        "O:\\WINNT\\system32\\nthook64.dll"
+      ]
+    }
+  }
+}

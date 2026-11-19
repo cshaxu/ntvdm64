@@ -700,6 +700,8 @@
 
 - 直接包含 · C0117 · wow32-dll · src/wow32-dll/include/wow_task_order_bindings.h
 
+108 P62: C0117/C0618 remain open; original scheduling C, runtime wait/lock/context and readiness require joint S13 review, state ABI S14. Mirror0/0; reviewed108/116, open500/618. See s12-p62-scheduler-ownership.json.
+
 ## 109 — src/non-mvdm/windows/core/ntuser/rtl/draw.c
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h

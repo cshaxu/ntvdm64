@@ -239,3 +239,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P60 Task initialization](s12-p60-task-init-ownership.json): file106; original C ordering retained, F lifecycle callbacks classified, missing direct TLS link C0618 added. Review106/116;500/618 open. No product change.
 
 [P61 Message-table ownership](s12-p61-message-table-ownership.json): file107; C algorithms, F storage/publication and original global owner traced. Review107/116;500/618 open. No product change.
+
+[P62 Scheduler ownership](s12-p62-scheduler-ownership.json): file108; original scheduler policy and host wait/context boundary traced. Review108/116;500/618 open. No product changes.
