@@ -36,3 +36,6 @@ default mvdm_guest_location_fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
 Write-Host "Wrote T280 S20 $Architecture MVDM guest-location Ninja graph: $build/build.ninja"
+
+& python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja")
+if ($LASTEXITCODE) { throw "Guest memory fixture wiring failed" }

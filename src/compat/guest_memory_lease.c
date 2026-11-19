@@ -13,22 +13,14 @@ static int access_valid(uint32_t access)
 
 int guest_memory_lease_context_valid(const guest_memory_lease_context *context)
 {
-    return context != NULL &&
-        ((context->active == 0u && context->context == NULL &&
-          context->read == NULL && context->write == NULL) ||
-         (context->active == 1u && context->read != NULL &&
-          context->write != NULL));
+    return context != NULL && context->active <= 1u;
 }
 
-static int lease_begin(guest_memory_lease_context *lease_context,
-    void *context, guest_memory_read_fn read, guest_memory_write_fn write)
+static int lease_begin(guest_memory_lease_context *lease_context)
 {
     if (!guest_memory_lease_context_valid(lease_context) ||
-        lease_context->active != 0u || read == NULL || write == NULL) return 0;
+        lease_context->active != 0u) return 0;
     if (++lease_context->epoch == 0u) ++lease_context->epoch;
-    lease_context->context = context;
-    lease_context->read = read;
-    lease_context->write = write;
     lease_context->active = 1u;
     return 1;
 }
@@ -41,13 +33,10 @@ static void lease_end(guest_memory_lease_context *context)
         free(context->leases[index].bounce);
         memset(&context->leases[index], 0, sizeof(context->leases[index]));
     }
-    context->context = NULL;
-    context->read = NULL;
-    context->write = NULL;
     context->active = 0u;
 }
 
-int guest_memory_lease_acquire(guest_memory_lease_context *context,
+int guest_memory_lease_prepare(guest_memory_lease_context *context,
     uint32_t address, uint32_t byte_count, uint32_t access,
     guest_memory_lease **lease_out, uint8_t **bytes_out)
 {
@@ -67,26 +56,22 @@ int guest_memory_lease_acquire(guest_memory_lease_context *context,
     if (lease == NULL) return 0;
     lease->bounce = (uint8_t *)malloc(byte_count == 0u ? 1u : byte_count);
     if (lease->bounce == NULL) return 0;
-    if (byte_count != 0u && !context->read(context->context, address,
-        lease->bounce, byte_count)) {
-        free(lease->bounce);
-        memset(lease, 0, sizeof(*lease));
-        return 0;
-    }
-    lease->epoch = context->epoch;
-    lease->address = address;
-    lease->byte_count = byte_count;
-    lease->access = access;
-    lease->active = 1u;
     *lease_out = lease;
     *bytes_out = lease->bounce;
     return 1;
 }
 
-int guest_memory_lease_release(guest_memory_lease_context *context,
-    guest_memory_lease *lease, int commit)
+void guest_memory_lease_publish(guest_memory_lease_context *context,
+    guest_memory_lease *lease, uint32_t address, uint32_t byte_count, uint32_t access)
 {
-    int result;
+    lease->epoch = context->epoch;
+    lease->address = address;
+    lease->byte_count = byte_count;
+    lease->access = access;
+    lease->active = 1u;
+}
+int guest_memory_lease_validate(guest_memory_lease_context *context, guest_memory_lease *lease)
+{
     uint32_t index;
     if (!guest_memory_lease_context_valid(context) || context->active == 0u ||
         lease == NULL)
@@ -98,24 +83,23 @@ int guest_memory_lease_release(guest_memory_lease_context *context,
     if (index == GUEST_MEMORY_LEASE_MAXIMUM || lease->active == 0u ||
         lease->epoch != context->epoch)
         return 0;
-    result = commit == 0 || (lease->access & GUEST_MEMORY_ACCESS_WRITE) == 0u ||
-        lease->byte_count == 0u || context->write(context->context, lease->address,
-            lease->bounce, lease->byte_count);
+    return 1;
+}
+void guest_memory_lease_discard(guest_memory_lease *lease)
+{
     free(lease->bounce);
     memset(lease, 0, sizeof(*lease));
-    return result;
 }
 
 /* Copy-only clients (including original FDC helper threads) never contend for
  * the CPU thread's borrowed slots. Retirement waits only for this bounded
  * provider call, not for hardware work or a new device cancellation protocol. */
-int guest_memory_lease_begin(guest_memory_lease_context *context,
-    void *provider, guest_memory_read_fn read, guest_memory_write_fn write)
+int guest_memory_lease_begin(guest_memory_lease_context *context)
 {
     int result;
     if (context == NULL) return 0;
     AcquireSRWLockExclusive((PSRWLOCK)&context->copy_lock);
-    result = lease_begin(context, provider, read, write);
+    result = lease_begin(context);
     ReleaseSRWLockExclusive((PSRWLOCK)&context->copy_lock);
     return result;
 }
@@ -128,18 +112,15 @@ void guest_memory_lease_end(guest_memory_lease_context *context)
     ReleaseSRWLockExclusive((PSRWLOCK)&context->copy_lock);
 }
 
-int guest_memory_lease_copy(guest_memory_lease_context *context, uint32_t epoch,
-    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write)
+int guest_memory_lease_copy_enter(guest_memory_lease_context *context, uint32_t epoch)
 {
-    int result = 0;
-    if (context == NULL || bytes == NULL || byte_count > UINT32_MAX-address)
-        return 0;
+    if (context == NULL) return 0;
     AcquireSRWLockShared((PSRWLOCK)&context->copy_lock);
-    if (guest_memory_lease_context_valid(context) && context->active &&
-        context->epoch == epoch) {
-        result = write ? context->write(context->context,address,bytes,byte_count)
-                       : context->read(context->context,address,bytes,byte_count);
-    }
+    if (guest_memory_lease_context_valid(context) && context->active && context->epoch == epoch) return 1;
     ReleaseSRWLockShared((PSRWLOCK)&context->copy_lock);
-    return result;
+    return 0;
+}
+void guest_memory_lease_copy_leave(guest_memory_lease_context *context)
+{
+    ReleaseSRWLockShared((PSRWLOCK)&context->copy_lock);
 }

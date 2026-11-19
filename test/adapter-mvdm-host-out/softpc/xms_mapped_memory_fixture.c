@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "ntvdm-exe/session/session.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "xms.h"
@@ -54,7 +55,7 @@ int main(void)
     uint8_t *bytes;
     session_initialize(&owner, 420u);
     CHECK(session_activate(&owner) && session_thread_bind(&owner));
-    CHECK(session_guest_memory_begin(&owner, NULL, read_memory, write_memory));
+    CHECK(fixture_session_memory_begin(&owner, NULL, read_memory, write_memory));
     memset(memory, 0x5a, sizeof(memory));
     pool = SAInitialize(0, MEMORY_SIZE, xmsCommitBlock, xmsDecommitBlock, xmsMoveMemory);
     CHECK(pool && SAAllocate(pool, MEMORY_SIZE, &a) && a == 0);

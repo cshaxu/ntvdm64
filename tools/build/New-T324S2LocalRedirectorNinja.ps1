@@ -79,3 +79,6 @@ default $originalTargets bin/redirector-async-contract-fixture.exe
 [IO.File]::WriteAllText((Join-Path $BuildRoot 'build.ninja'), $content + [Environment]::NewLine,
     (New-Object Text.UTF8Encoding($false)))
 Write-Host "Generated T324 S2 local Redirector x86/x64 source graph: $BuildRoot"
+
+& python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $BuildRoot "build.ninja")
+if ($LASTEXITCODE) { throw "Guest memory fixture wiring failed" }

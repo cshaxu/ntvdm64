@@ -470,36 +470,15 @@ const char *session_mvdm_system_root(const session *instance)
         instance != NULL ? instance->mvdm_system_root : NULL);
 }
 
-int session_guest_memory_begin(session *instance, void *context,
-    guest_memory_read_fn read, guest_memory_write_fn write)
+int session_guest_memory_begin(session *instance)
 {
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
         return 0;
-    return guest_memory_lease_begin(&instance->guest_memory_lease, context,
-        read, write);
+    return guest_memory_lease_begin(&instance->guest_memory_lease);
 }
 
 void session_guest_memory_end(session *instance)
 {
     if (instance == NULL) return;
     guest_memory_lease_end(&instance->guest_memory_lease);
-}
-
-int session_guest_memory_acquire(session *instance, uint32_t address,
-    uint32_t byte_count, uint32_t access, guest_memory_lease **lease_out,
-    uint8_t **bytes_out)
-{
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
-        return 0;
-    return guest_memory_lease_acquire(&instance->guest_memory_lease, address,
-        byte_count, access, lease_out, bytes_out);
-}
-
-int session_guest_memory_release(session *instance, guest_memory_lease *lease,
-    int commit)
-{
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
-        return 0;
-    return guest_memory_lease_release(&instance->guest_memory_lease, lease,
-        commit);
 }

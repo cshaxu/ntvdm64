@@ -13,7 +13,7 @@ $wrapper = Join-Path $out 'compiler.cmd'
 @('@echo off', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
     'if errorlevel 1 exit /b %errorlevel%', '%*') |
     Set-Content -LiteralPath $wrapper -Encoding ASCII
-$sources = @('src/vdmredir-dll/source/mvdm_redirector_guest_copy.c',
+$sources = @('src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/vdmredir-dll/source/mvdm_redirector_guest_copy.c',
     'src/compat/guest_location.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/guest_memory_lease.c',
     'test/mvdm-host/vdmredir/redirector_oem_capacity_test.c')
@@ -21,6 +21,10 @@ if ($OriginalProviders) {
     $sources[-1] = 'test/mvdm-host/vdmredir/redirector_netapi_provider_test.c'
     $sources += 'src/ntvdm-exe/redir/mvdm_redirector_async.c'
 }
+$coordination = Join-Path $out 'guest-memory-coordination.c'
+& python (Join-Path $root 'tools/build/extract-guest-memory-fixture.py') $coordination --core-only
+if ($LASTEXITCODE) { throw 'Guest memory coordination extraction failed' }
+$sources += [IO.Path]::GetRelativePath($root, $coordination)
 $inputs = $sources | ForEach-Object { Join-Path $root $_ }
 $objects = $sources | ForEach-Object {
     Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($_) + '.obj')

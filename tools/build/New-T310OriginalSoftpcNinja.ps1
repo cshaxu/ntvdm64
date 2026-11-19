@@ -1259,9 +1259,6 @@ $sessionObjects += 'obj/compat/host_context.obj'
 $graph.Add('build obj/compat/guest_memory_lease.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_memory_lease.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/guest_memory_lease.obj'
-$graph.Add('build obj/compat/guest_memory_access.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_memory_access.c')))
-$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
-$sessionObjects += 'obj/compat/guest_memory_access.obj'
 $graph.Add('build obj/compat/wow_shared_clock.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_shared_clock.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/wow_shared_clock.obj'
@@ -2693,3 +2690,8 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook-dll/hook.h', 'src/n
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 
 Write-Host "Generated T310 original SoftPC CCPU candidate graph: $build (CCPU sources: $(@($ccpuNames).Count))"
+
+if ($graph -match "build ntvdm-command-directory-test.exe:") {
+    & python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja") --target "ntvdm-command-directory-test.exe,guest-location-test.exe"
+    if ($LASTEXITCODE) { throw "Command fixture wiring failed" }
+}

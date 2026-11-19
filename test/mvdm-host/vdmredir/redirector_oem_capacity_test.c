@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "mvdm_redirector_guest_copy.h"
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/guest_location.h"
@@ -61,7 +62,7 @@ int main(void)
     char large[5000];
     int count;
     session_initialize(&s, 1);
-    if (!session_activate(&s) || !session_guest_memory_begin(&s, NULL,
+    if (!session_activate(&s) || !fixture_session_memory_begin(&s, NULL,
         read_memory, write_memory) || !session_thread_bind(&s)) return 2;
     memset(memory, 0xa5, sizeof(memory));
     count = WideCharToMultiByte(932, 0, L"\x65e5", -1, encoded, sizeof(encoded),

@@ -1,3 +1,4 @@
+#include "../common/guest_memory_fixture.h"
 #include "ntvdm-exe/session/session.h"
 
 #include <string.h>
@@ -41,7 +42,7 @@ int main(void)
     memory.bytes[8] = 0x11u;
     session_initialize(&instance, 1u);
     if (session_activate(&instance) == 0 ||
-        session_guest_memory_begin(&instance, &memory, read_memory, write_memory) == 0 ||
+        fixture_session_memory_begin(&instance, &memory, read_memory, write_memory) == 0 ||
         session_guest_memory_acquire(&instance, 8u, 2u,
             GUEST_MEMORY_ACCESS_WRITE, &lease, &bytes) == 0 || bytes[0] != 0x11u)
         return 1;

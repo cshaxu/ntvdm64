@@ -8,9 +8,17 @@
 extern "C" {
 #endif
 
-/* Bind the current CPU40 SAS address space as the active session's bounded
- * guest-memory lease provider.  The values remain Intel linear addresses;
- * this interface never publishes a SoftPC backing pointer. */
+/* Session admission for bounded access to the current CPU40 SAS address space.
+ * Addresses are Intel linear values, never native backing pointers. */
+/* C-owned SAS coordination. F may use an explicitly admitted resource owner. */
+int ccpu_guest_memory_acquire(guest_memory_lease_context *context,
+    uint32_t address, uint32_t byte_count, uint32_t access,
+    guest_memory_lease **lease_out, uint8_t **bytes_out);
+int ccpu_guest_memory_release(guest_memory_lease_context *context,
+    guest_memory_lease *lease, int commit);
+int ccpu_guest_memory_copy(guest_memory_lease_context *context, uint32_t epoch,
+    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write);
+
 int mvdm_softpc_guest_memory_begin(session *owner);
 void mvdm_softpc_guest_memory_end(session *owner);
 

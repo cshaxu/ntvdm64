@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "ntvdm-exe/command/include/mvdm_command_guest_directory.h"
 
 #include <string.h>
@@ -43,8 +44,8 @@ int main(void)
     session_initialize(&first, 1u);
     session_initialize(&second, 2u);
     if (!session_activate(&first) || !session_activate(&second) ||
-        !session_guest_memory_begin(&first, &first_memory, read_memory,
-            write_memory) || !session_guest_memory_begin(&second,
+        !fixture_session_memory_begin(&first, &first_memory, read_memory,
+            write_memory) || !fixture_session_memory_begin(&second,
             &second_memory, read_memory, write_memory) ||
         !session_thread_bind(&first)) return 1;
     /* DOS owns the directory pointer; resolve its current far value. */
@@ -69,7 +70,7 @@ int main(void)
     session_guest_memory_end(&first);
     if (mvdm_command_guest_state_directory_instance(&directory, &directory_bytes))
         return 5;
-    if (!session_guest_memory_begin(&first, &first_memory, read_memory,
+    if (!fixture_session_memory_begin(&first, &first_memory, read_memory,
             write_memory) ||
         mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
         !mvdm_command_guest_state_register_doswow(0u, 0x300u) ||

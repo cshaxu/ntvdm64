@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "ntvdm-exe/session/session.h"
 #include "memapi.h"
 #include "suballoc.h"
@@ -146,7 +147,7 @@ int main(void)
 
     session_initialize(&instance, 371u);
     if (!session_activate(&instance) || !session_thread_bind(&instance) ||
-        !session_guest_memory_begin(&instance, &active_memory, fixture_read,
+        !fixture_session_memory_begin(&instance, &active_memory, fixture_read,
             fixture_write)) return 1;
 
     if (!fixture_run_branch(&active_memory, 0, 1)) return 2;

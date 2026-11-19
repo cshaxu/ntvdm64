@@ -1,0 +1,266 @@
+{
+  "delivery": "T483 S14 P62",
+  "baseline": "3e3c40bc9d385e7a5189b7a73b46166834ee8078",
+  "approval": "Owner approved the measured non-error mirror increment of zero points and 292 lines, implemented directly in the main worktree.",
+  "ownership": {
+    "B": "Buffers, eight lease slots, epochs, lifetime lock; two pure guest-location numeric constructors. No CPU provider callbacks or opaque provider context.",
+    "C": "Existing SAS translation/read/write plus acquisition, commit, chunked copy/move and guest-location operations.",
+    "F": "Session core owns admission, cancellation gate, resource begin/end and composition. Existing F SoftPC unit owns the two explicit session-to-CCPU wrappers; session.c has no CCPU reference."
+  },
+  "mirror": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "before": {
+      "points": 13,
+      "added": 68,
+      "deleted": 10,
+      "lines": 78
+    },
+    "after": {
+      "points": 13,
+      "added": 360,
+      "deleted": 10,
+      "lines": 370
+    },
+    "delta": {
+      "points": 0,
+      "lines": 292
+    },
+    "original_bytes_retained": true,
+    "existing_error_and_line_directives_unchanged": true,
+    "approved": true,
+    "source_sha256": "e3131414fc143c47392424f45006dcce5fd4b99d46fe389916379de47f88a36e"
+  },
+  "validation": {
+    "first_cached_product_build": "Superseded by final cached product build; not used as final-code evidence.",
+    "real_ccpu": "Final current-product fixture passed with CCPU_SAS_PROVIDER_PREFLIGHT_NO_PARTIAL_WRITE_OK, CCPU_LEASE_RESOURCE_OWNERSHIP_OK and CCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK.",
+    "resource_unit": "44 checks passed",
+    "session_unit": "passed",
+    "caller_tests": "Final caller tests passed; old test build dependency/SDK-header and unrelated control-restore link assumptions were corrected without production fallbacks.",
+    "publication": "11 images in each destination, 22 hashes verified; package 8ec5f8b9-ea6f-43b8-9810-73d7592e7950",
+    "commit_push": "The enclosing P62 Git commit is the reviewed delivery receipt; remote status is verified after push.",
+    "final_cached_product_build": "passed x86/x64/reference after moving the two wrappers; build-r2.out and owned process exit 0",
+    "final_unit_tests": "x86 and x64: B resources 44 checks, extracted current C coordination 75 checks, session test passed. Guest-location, WOW task-frame/resource leases, XMS and redirector async 27 assertions passed.",
+    "final_product_tests": "passed actual CCPU/SAS, COMMAND state, WOW page-domain/graph-snapshot and immutable Win16 dialog on final package",
+    "additional_tests": "Passed final physical mapping, original external-memory aliases, guest-location, session lifecycle, WOW clock, redirector OEM 14 assertions, DOS4GW/NESticle menu and Escape, and strict DOS DIR launch/repeat/exit gate.",
+    "normalized_images": "Only NTVDM differs from P26 after masking package identity and PE/debug timestamps; other ten images normalize identically.",
+    "build_test_repairs": [
+      "Corrected the probe wrapper Select-String post-check; the probe process itself had exited zero.",
+      "Added the retained B numeric guest-location constructor to isolated fixture links.",
+      "Replaced an obsolete full nt.h fixture include with its actual opennt_support_types.h dependency.",
+      "Replaced unused fake SAS helpers in the resource-only WOW fixture with fail-fast traps for its uncalled independent CPU control path.",
+      "Moved session access wrappers to the existing F SoftPC unit so lifecycle-only consumers do not acquire a CCPU link dependency."
+    ]
+  },
+  "direct_ledger": {
+    "eliminated": 152,
+    "open": 416,
+    "note": "No direct ID promoted solely for this internal B/C ownership relocation. Whole-chain WOW pointer consumer disposition remains separate."
+  },
+  "limitations": [
+    "Caller unit fixtures replace only address-space reads/writes and compile the current extracted production coordination; they do not prove CCPU/SAS behavior.",
+    "No guest code or binary changed.",
+    "No S14 closure claim; other migration chains remain active."
+  ],
+  "package": "8ec5f8b9-ea6f-43b8-9810-73d7592e7950",
+  "production_line_change": {
+    "mirror_added": 292,
+    "mirror_deleted": 0,
+    "non_mirror_added": 78,
+    "non_mirror_deleted": 356,
+    "total_net": 14
+  },
+  "sources": [
+    {
+      "path": "src/compat/guest_location.c",
+      "sha256": "cc26e195d3e25e128db407e6baad7d0d4bb943ddf71b80912ace80dfbe5808d7",
+      "status": "modified"
+    },
+    {
+      "path": "src/compat/guest_memory_access.c",
+      "sha256": null,
+      "status": "removed"
+    },
+    {
+      "path": "src/compat/guest_memory_lease.c",
+      "sha256": "0fa8fb0649198677feda3fca0a156158f4fd28fff7cec9b26f41dfaf660d4eb5",
+      "status": "modified"
+    },
+    {
+      "path": "src/compat/include/guest_memory_lease.h",
+      "sha256": "ee8aa30a542ddc594344796a3c4469316b3ee66baf44f1726aaa7d5e9848151b",
+      "status": "modified"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "e3131414fc143c47392424f45006dcce5fd4b99d46fe389916379de47f88a36e",
+      "status": "modified"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "sha256": "afe356772b621869dad2a826c5219e9cfd2972c12c2d46ff208c2350ed65416b",
+      "status": "modified"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.c",
+      "sha256": "8cf1b9f20b28730cfbcae86294d8dcb6452b5d0db3378ff7b71854d890466c5a",
+      "status": "modified"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.h",
+      "sha256": "1447c37bdabb1f4b0cf2d3f7bebecf9c6e9adaee9b69ed32ab6d84f24ff9bb6f",
+      "status": "modified"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h",
+      "sha256": "a3e1079c21d2b94c6547037ba23e986ae9c61f5f0b54ae18b88cdec2f9cc6a7c",
+      "status": "modified"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "9ecc2274cffbe43fca0a5541b3080472a8b4ad79cdd6cccf83ecf8e93caa29e0",
+      "status": "modified"
+    }
+  ],
+  "link_owners": {
+    "build/.ninja/msvc-x86-release/worker": {
+      "map_sha256": "65fa5060494f2c229041c86c329c20e0ca2e5484e53232d6a8e08aab8cca148a",
+      "coordination": [
+        "0001:00005670       _ccpu_guest_memory_acquire 00406670 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005740       _ccpu_guest_memory_copy    00406740 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005810       _ccpu_guest_memory_release 00406810 f   original-ccpu386:ccpusas4.obj",
+        "0001:000058e0       _mvdm_guest_location_acquire 004068e0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005960       _mvdm_guest_location_acquire_vm 00406960 f   original-ccpu386:ccpusas4.obj",
+        "0001:000059e0       _mvdm_guest_location_copy_to_guest 004069e0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005a80       _mvdm_guest_location_release 00406a80 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005af0       _mvdm_softpc_guest_memory_acquire 00406af0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005b20       _mvdm_softpc_guest_memory_copy_from 00406b20 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005cc0       _mvdm_softpc_guest_memory_copy_to 00406cc0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005e60       _mvdm_softpc_guest_memory_move 00406e60 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005f50       _mvdm_softpc_guest_memory_range_valid 00406f50 f   original-ccpu386:ccpusas4.obj",
+        "0001:00006040       _mvdm_softpc_guest_memory_release 00407040 f   original-ccpu386:ccpusas4.obj"
+      ],
+      "session_wrappers": [
+        "0001:0016d430       _session_guest_memory_acquire 0056e430 f   softpc-bindings:mvdm_softpc_guest_memory.obj",
+        "0001:0016d480       _session_guest_memory_release 0056e480 f   softpc-bindings:mvdm_softpc_guest_memory.obj"
+      ]
+    },
+    "build/.ninja/msvc-x64-release/worker-reference-x86": {
+      "map_sha256": "95acd33da5553d0b866265c6241b3b174ff3ec9b8c3a1dd02dc1a0476ee93049",
+      "coordination": [
+        "0001:00005670       _ccpu_guest_memory_acquire 00406670 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005740       _ccpu_guest_memory_copy    00406740 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005810       _ccpu_guest_memory_release 00406810 f   original-ccpu386:ccpusas4.obj",
+        "0001:000058e0       _mvdm_guest_location_acquire 004068e0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005960       _mvdm_guest_location_acquire_vm 00406960 f   original-ccpu386:ccpusas4.obj",
+        "0001:000059e0       _mvdm_guest_location_copy_to_guest 004069e0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005a80       _mvdm_guest_location_release 00406a80 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005af0       _mvdm_softpc_guest_memory_acquire 00406af0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005b20       _mvdm_softpc_guest_memory_copy_from 00406b20 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005cc0       _mvdm_softpc_guest_memory_copy_to 00406cc0 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005e60       _mvdm_softpc_guest_memory_move 00406e60 f   original-ccpu386:ccpusas4.obj",
+        "0001:00005f50       _mvdm_softpc_guest_memory_range_valid 00406f50 f   original-ccpu386:ccpusas4.obj",
+        "0001:00006040       _mvdm_softpc_guest_memory_release 00407040 f   original-ccpu386:ccpusas4.obj"
+      ],
+      "session_wrappers": [
+        "0001:0016d430       _session_guest_memory_acquire 0056e430 f   softpc-bindings:mvdm_softpc_guest_memory.obj",
+        "0001:0016d480       _session_guest_memory_release 0056e480 f   softpc-bindings:mvdm_softpc_guest_memory.obj"
+      ]
+    }
+  },
+  "evidence_root": "build/t483-s14-lease-owner",
+  "test_limit": "Extracted coordination uses its exact current C source body and a recorded source hash with test-only memory providers. It is caller/unit evidence, not evidence of guest paging. Actual CCPU/SAS and immutable Win16/DOS runs provide the separate machine/runtime evidence.",
+  "test_evidence": {
+    "build-r2.out": {
+      "sha256": "57962fa476d30f048055ac1203a2a4ddd57d5928ea59d5a840cefa9f27d9d6ba",
+      "bytes": 74197
+    },
+    "build-r2.err": {
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a",
+      "bytes": 22
+    },
+    "publication-final.json": {
+      "sha256": "19eaa2e8252584011a0f1a9205243fea75deda751786d763ba4129507463d304",
+      "bytes": 218
+    },
+    "normalized-final.json": {
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f",
+      "bytes": 255
+    },
+    "final-units.out": {
+      "sha256": "2c32b905a492963ba73e9f64aeb5326049d145ac13009f4bb968df13b4b4f575",
+      "bytes": 12999
+    },
+    "final-units.err": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "product-tests-final.out": {
+      "sha256": "6dfaa7e245d3e6f6f1bc2056f2c796765a0b4418f381f01d37a5a798448f5f21",
+      "bytes": 17151
+    },
+    "product-tests-final.err": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "additional-final.out": {
+      "sha256": "37a6b84fda90a1ae78ad6e13a1d783e102a688f0470fc576f40d9599cd9c2e11",
+      "bytes": 5887
+    },
+    "additional-final.err": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "ccpu.out": {
+      "sha256": "0c768864d8bb1ea5ab270a6a0621bac555bcd48fe4706accceed967362e941ea",
+      "bytes": 229
+    },
+    "command.out": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "final-units.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "product-tests.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "additional-tests.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "governance.out": {
+      "sha256": "ba8fe590a64cb1c41e5fd55570f203ddb891fa4119a8aebccb23d6ad6af45a4d",
+      "bytes": 518
+    },
+    "governance.err": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "review": [
+    "All original ccpusas4.c bytes retained; only two insertions totaling 292 lines. Existing #error/#line arrays match baseline byte-for-byte.",
+    "No guest or winnt.zip changes. No product callback registry replaces the removed B registry.",
+    "Session structure size remains validated by session_valid, rejecting stale layouts. Current package is rebuilt coherently.",
+    "Test extraction is generated from the current C body; its source hash and Ninja dependency prevent a stale maintained algorithm copy."
+  ],
+  "dir_rendering_boundary": {
+    "observation": "Some DOS DIR timestamps are malformed and print The parameter is incorrect. The lifecycle gate does not validate date rendering.",
+    "control": {
+      "final": {
+        "sha256": "4fb4ee28743154aa7940c9887f17a759260e0644026943181340ba8edc0b3b08",
+        "parameter_incorrect_count": 74,
+        "gate_exit": "0"
+      },
+      "P26": {
+        "sha256": "eab3a7afbc6302a7eca37e35cfc0bf44275be553e1a58f310b2c646e5419309b",
+        "parameter_incorrect_count": 73,
+        "gate_exit": "0"
+      }
+    },
+    "interpretation": "The same symptom exists in P26 as well as P62. Raw terminal repaint occurrence counts are not semantic failure counts; no source attribution or fix is claimed.",
+    "disposition": "Recorded independent debt in TODO; not treated as a passing date-format test or silently repaired in this migration."
+  },
+  "status": "Final-code cached build, dual publication, targeted tests and governance passed; P62 delivery. S14 remains active."
+}

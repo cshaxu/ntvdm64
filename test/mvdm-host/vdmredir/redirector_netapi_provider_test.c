@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include <windows.h>
 #include <lm.h>
 #include <winternl.h>
@@ -125,7 +126,7 @@ int main(void)
 {
     session s;
     session_initialize(&s, 1);
-    if (!session_activate(&s) || !session_guest_memory_begin(&s, NULL,
+    if (!session_activate(&s) || !fixture_session_memory_begin(&s, NULL,
         read_memory, write_memory) || !session_thread_bind(&s)) return 2;
     init(0); VrGetComputerName();
     check(ax == 0 && carry == 0 && !memcmp(memory + di, "HOST", 5) &&

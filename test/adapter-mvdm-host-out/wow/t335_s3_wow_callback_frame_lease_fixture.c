@@ -1,8 +1,9 @@
+#include "../../common/guest_memory_fixture.h"
 #include "wow_callback_frame_lease.h"
 
 #include <string.h>
 
-#include <nt.h>
+#include "compat/include/opennt_support_types.h"
 #include "ntvdm-exe/session/session.h"
 
 typedef struct fixture_memory {
@@ -11,28 +12,23 @@ typedef struct fixture_memory {
     uint32_t writes;
 } fixture_memory;
 
-static fixture_memory *cpu_memory;
-
-uint32_t c_sas_memory_size(void)
-{
-    return cpu_memory != NULL ? (uint32_t)sizeof(cpu_memory->bytes) : 0u;
-}
-
-void c_sas_loads(uint32_t address, uint8_t *bytes, uint32_t byte_count)
-{
-    if (cpu_memory == NULL || bytes == NULL || address > sizeof(cpu_memory->bytes) ||
-        byte_count > sizeof(cpu_memory->bytes) - address) return;
-    memcpy(bytes, cpu_memory->bytes + address, byte_count);
-    cpu_memory->reads++;
-}
-
-void c_sas_stores(uint32_t address, uint8_t *bytes, uint32_t byte_count)
-{
-    if (cpu_memory == NULL || bytes == NULL || address > sizeof(cpu_memory->bytes) ||
-        byte_count > sizeof(cpu_memory->bytes) - address) return;
-    memcpy(cpu_memory->bytes + address, bytes, byte_count);
-    cpu_memory->writes++;
-}
+/* Resource leases must not enter the independent CPU control-restore path. */
+#include <stdlib.h>
+unsigned short getCS(void) { abort(); }
+unsigned short getIP(void) { abort(); }
+int32_t c_getPE(void) { abort(); }
+int32_t c_getVM(void) { abort(); }
+int32_t c_getCPL(void) { abort(); }
+void c_setPE(int32_t v) { (void)v; abort(); }
+void c_setVM(int32_t v) { (void)v; abort(); }
+void c_setCPL(int32_t v) { (void)v; abort(); }
+int32_t c_setCS(uint16_t v) { (void)v; abort(); }
+int32_t c_setSS(uint16_t v) { (void)v; abort(); }
+void setSP(uint16_t v) { (void)v; abort(); }
+void setIP(uint16_t v) { (void)v; abort(); }
+BOOL WINAPI wow_user_worker_active(void) { abort(); }
+void WINAPI wow_user_native_call_failed(const char *where, DWORD error)
+{ (void)where; (void)error; abort(); }
 
 int mvdm_softpc_protected_address(uint16_t selector, uint32_t offset,
     uint32_t *address_out)
@@ -73,7 +69,6 @@ int main(void)
     POPENNT_SUPPORT_TEB teb;
 
     memset(&memory, 0, sizeof(memory));
-    cpu_memory = &memory;
     teb = opennt_support_current_teb();
     if (teb == NULL || teb->WOW32Reserved != NULL) return 7;
     teb->WOW32Reserved = &owner;
@@ -82,7 +77,7 @@ int main(void)
     memory.bytes[8] = 0x42u;
     session_initialize(&owner, 335u);
     if (!session_activate(&owner) ||
-        !session_guest_memory_begin(&owner, &memory, read_memory, write_memory) ||
+        !fixture_session_memory_begin(&owner, &memory, read_memory, write_memory) ||
         !session_thread_bind(&owner) ||
         !wow_callback_frame_acquire_protected_vp(0x12340008u, 4u,
         GUEST_MEMORY_ACCESS_READ, &source_frame) ||

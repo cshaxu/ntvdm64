@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include <windows.h>
 
 #include <stdint.h>
@@ -67,7 +68,7 @@ int main(void)
         INVALID_SET_FILE_POINTER) goto done;
 
     session_initialize(&instance, 3652u);
-    if (!session_activate(&instance) || !session_guest_memory_begin(&instance,
+    if (!session_activate(&instance) || !fixture_session_memory_begin(&instance,
         &memory, read_memory, write_memory) || !session_thread_bind(&instance))
         goto done;
 

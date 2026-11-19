@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "mvdm_wow_callback_transaction.h"
 
 #include <string.h>
@@ -108,7 +109,7 @@ int main(void)
     state.memory[0x123c5u] = 0xbeu;
     session_initialize(&instance, 291u);
     if (!session_activate(&instance) ||
-        !session_guest_memory_begin(&instance, &state, read_memory, write_memory) ||
+        !fixture_session_memory_begin(&instance, &state, read_memory, write_memory) ||
         !session_thread_bind(&instance) ||
         !mvdm_wow_task_frame_bind(0x12340080u, 0x12340080u, 0u, 0x0042u) ||
         !mvdm_wow_callback_transaction_invoke(7u, 0xabcd1234u, parameters,

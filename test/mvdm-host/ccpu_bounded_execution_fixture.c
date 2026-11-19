@@ -479,6 +479,37 @@ static int fixture_high_linear_page(void)
         if (!fixture_stdout("CCPU_SAS_PROVIDER_PREFLIGHT_NO_PARTIAL_WRITE_OK\n"))
             goto done;
     }
+    /* Exercise actual C coordination over B resources, not installed test callbacks. */
+    {
+        guest_memory_lease *held[GUEST_MEMORY_LEASE_MAXIMUM];
+        guest_memory_lease_context other = {0};
+        unsigned i;
+        phy_w32(pte, first | 7u);
+        c_setCR3(directory);
+        if (!mvdm_softpc_guest_memory_acquire(linear, 4u,
+            GUEST_MEMORY_ACCESS_WRITE, &lease, &lease_bytes) ||
+            memcmp(lease_bytes, updated_tick, 4u) != 0) goto done;
+        if (!guest_memory_lease_begin(&other)) goto done;
+        if (ccpu_guest_memory_release(&other, lease, 1)) {
+            guest_memory_lease_end(&other);
+            goto done;
+        }
+        guest_memory_lease_end(&other);
+        /* Permission loss makes commit fail, but the borrowed slot is consumed. */
+        phy_w32(pte, first | 5u);
+        c_setCR3(directory);
+        if (mvdm_softpc_guest_memory_release(lease, 1) || lease->active || lease->bounce ||
+            mvdm_softpc_guest_memory_release(lease, 0)) goto done;
+        lease = NULL;
+        for (i = 0; i < GUEST_MEMORY_LEASE_MAXIMUM; ++i)
+            if (!mvdm_softpc_guest_memory_acquire(linear, 1u,
+                GUEST_MEMORY_ACCESS_READ, &held[i], &lease_bytes)) goto done;
+        if (mvdm_softpc_guest_memory_acquire(linear, 1u,
+            GUEST_MEMORY_ACCESS_READ, &lease, &lease_bytes) || lease || lease_bytes) goto done;
+        for (i = 0; i < GUEST_MEMORY_LEASE_MAXIMUM; ++i)
+            if (!mvdm_softpc_guest_memory_release(held[i], 0)) goto done;
+        if (!fixture_stdout("CCPU_LEASE_RESOURCE_OWNERSHIP_OK\n")) goto done;
+    }
     /* Original MOV_CR rejects PG=1/PE=0. A standalone mode boundary must
      * suspend PG before DOSX clears PE, then restore it after PE is set.
      * This proves only that order, not the product's DOSX frame handling. */

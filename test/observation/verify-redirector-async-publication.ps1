@@ -14,22 +14,26 @@ $wrapper = Join-Path $out 'compiler.cmd'
 @('@echo off', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
     'if errorlevel 1 exit /b %errorlevel%', '%*') |
     Set-Content -LiteralPath $wrapper -Encoding ASCII
-$sources = @('src/ntvdm-exe/redir/mvdm_redirector_async.c',
+$sources = @('src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/ntvdm-exe/redir/mvdm_redirector_async.c',
     'src/common/worker-thread/bridge.c', 'src/compat/thread_start.c', 'src/lib-win32/thread/thread.c',
     'src/compat/guest_location.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/guest_memory_lease.c',
     'test/mvdm-host/vdmredir/redirector_async_publication_test.c')
+$coordination = Join-Path $out 'guest-memory-coordination.c'
+& python (Join-Path $root 'tools/build/extract-guest-memory-fixture.py') $coordination
+if ($LASTEXITCODE) { throw 'Guest memory coordination extraction failed' }
+$sources += [IO.Path]::GetRelativePath($root, $coordination)
 $objects = @()
 foreach ($source in $sources) {
     $object = Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($source) + '.obj')
-    & $wrapper cl /nologo /TC /c /MT /W4 /DWIN_32 /DVDMREDIR_DLL /DNTVDM /DCPU_40_STYLE /DCCPU "/I$root/src" "/I$root/src/ntvdm-exe/softpc/include" "/Fo$object" (Join-Path $root $source) 2>&1 |
+    & $wrapper cl /nologo /TC /c /MT /W4 /Gy /DWIN_32 /DVDMREDIR_DLL /DNTVDM /DCPU_40_STYLE /DCCPU "/I$root/src" "/I$root/src/ntvdm-exe/softpc/include" "/Fo$object" (Join-Path $root $source) 2>&1 |
         Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
     if ($LASTEXITCODE -ne 0) { throw "Compile failed: $source" }
     $objects += $object
 }
 $exe = Join-Path $out 'redirector-async-publication-test.exe'
-& $wrapper link /nologo "/OUT:$exe" "/MAP:$exe.map" @objects kernel32.lib 2>&1 |
+& $wrapper link /nologo /OPT:REF "/OUT:$exe" "/MAP:$exe.map" @objects kernel32.lib 2>&1 |
     Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
 if ($LASTEXITCODE -ne 0) { throw 'Link failed.' }
 $start = [Diagnostics.ProcessStartInfo]::new()

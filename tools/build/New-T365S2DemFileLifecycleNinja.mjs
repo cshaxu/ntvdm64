@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -36,3 +37,5 @@ fs.writeFileSync(path.join(build, 'build.ninja'), [
   ''
 ].join('\n'), { encoding: 'utf8' });
 console.log(`Wrote T365 S2 DEM file lifecycle Ninja graph: ${path.join(build, 'build.ninja')}`);
+
+execFileSync("python", [path.join(root, "tools/build/wire-guest-memory-fixture.py"), path.join(build, "build.ninja")], {stdio: "inherit"});

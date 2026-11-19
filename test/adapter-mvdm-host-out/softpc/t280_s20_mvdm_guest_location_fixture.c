@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "compat/include/guest_location.h"
 
 #include <string.h>
@@ -45,7 +46,7 @@ int main(void)
     memset(&memory, 0, sizeof(memory));
     session_initialize(&instance, 1u);
     if (!session_activate(&instance) ||
-        !session_guest_memory_begin(&instance, &memory, read_memory,
+        !fixture_session_memory_begin(&instance, &memory, read_memory,
             write_memory) || !session_thread_bind(&instance) ||
         !mvdm_guest_location_set_real_mode(&location, 0x1234u, 0x0056u) ||
         !mvdm_guest_location_acquire(&location, 9u,
@@ -124,7 +125,7 @@ int main(void)
         if (!session_thread_unbind(&instance)) return 19;
         session_initialize(&other, 2u);
         if (!session_activate(&other) ||
-                !session_guest_memory_begin(&other, &memory, read_memory, write_memory) ||
+                !fixture_session_memory_begin(&other, &memory, read_memory, write_memory) ||
                 !session_thread_bind(&other)) return 20;
         if (mvdm_guest_location_release(&lease, 0) || lease.lease || lease.bytes ||
                 !saved.lease->active) return 21;

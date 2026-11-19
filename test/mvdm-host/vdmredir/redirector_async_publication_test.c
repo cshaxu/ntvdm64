@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "compat/include/guest_location.h"
 #define MVDM_REDIRECTOR_WORKER_EXPORTS
 #include "common/redirector/async.h"
@@ -90,7 +91,7 @@ int main(void)
     static uint32_t const destinations[] = {0x140, 0x182, 0x180};
     if (!worker_thread_initialize()) return 90;
     session_initialize(&s, 1);
-    if (!session_activate(&s) || !session_guest_memory_begin(&s, &m,
+    if (!session_activate(&s) || !fixture_session_memory_begin(&s, &m,
         read_memory, write_memory) || !session_thread_bind(&s)) return 2;
 
     if (!prepare(&m, &request, ANP_READ)) return 2;

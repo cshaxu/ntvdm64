@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "mvdm_wow_task_frame.h"
 
 #include <string.h>
@@ -30,7 +31,7 @@ int main(void)
 
     session_initialize(&instance, 291u);
     if (!session_activate(&instance) ||
-        !session_guest_memory_begin(&instance, NULL, read_memory, write_memory) ||
+        !fixture_session_memory_begin(&instance, NULL, read_memory, write_memory) ||
         !session_thread_bind(&instance)) return 1;
     if (mvdm_wow_task_frame_copy(&frame) ||
         !mvdm_wow_task_frame_bind(0x12340080u, 0x12340060u, 0u, 0x0042u) ||

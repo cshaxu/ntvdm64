@@ -5,11 +5,6 @@
 
 #define GUEST_MEMORY_LEASE_MAXIMUM 8u
 
-typedef int (*guest_memory_read_fn)(void *context, uint32_t address,
-    uint8_t *bytes, uint32_t byte_count);
-typedef int (*guest_memory_write_fn)(void *context, uint32_t address,
-    const uint8_t *bytes, uint32_t byte_count);
-
 struct guest_memory_lease {
     uint32_t epoch;
     uint32_t address;
@@ -24,25 +19,23 @@ typedef struct guest_memory_lease_context {
     void *copy_lock;
     uint32_t epoch;
     uint32_t active;
-    void *context;
-    guest_memory_read_fn read;
-    guest_memory_write_fn write;
     guest_memory_lease leases[GUEST_MEMORY_LEASE_MAXIMUM];
 } guest_memory_lease_context;
 
+/* Slot operations belong to the owning CPU thread. prepare/publish is a
+ * synchronous pair; discard rolls back an unpublished allocation as well. */
 int guest_memory_lease_context_valid(const guest_memory_lease_context *context);
-int guest_memory_lease_begin(guest_memory_lease_context *lease_context,
-    void *context, guest_memory_read_fn read, guest_memory_write_fn write);
+int guest_memory_lease_begin(guest_memory_lease_context *context);
 void guest_memory_lease_end(guest_memory_lease_context *context);
-int guest_memory_lease_acquire(guest_memory_lease_context *context,
+int guest_memory_lease_prepare(guest_memory_lease_context *context,
     uint32_t address, uint32_t byte_count, uint32_t access,
     guest_memory_lease **lease_out, uint8_t **bytes_out);
-int guest_memory_lease_release(guest_memory_lease_context *context,
-    guest_memory_lease *lease, int commit);
-
-/* Short copied access does not borrow a shared lease slot. The expected epoch
- * prevents a saved numeric registration from accessing a replacement provider. */
-int guest_memory_lease_copy(guest_memory_lease_context *context, uint32_t epoch,
-    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write);
-
+void guest_memory_lease_publish(guest_memory_lease_context *context,
+    guest_memory_lease *lease, uint32_t address, uint32_t byte_count, uint32_t access);
+int guest_memory_lease_validate(guest_memory_lease_context *context,
+    guest_memory_lease *lease);
+void guest_memory_lease_discard(guest_memory_lease *lease);
+/* copy_enter holds a shared lifetime lock until copy_leave. */
+int guest_memory_lease_copy_enter(guest_memory_lease_context *context, uint32_t epoch);
+void guest_memory_lease_copy_leave(guest_memory_lease_context *context);
 #endif

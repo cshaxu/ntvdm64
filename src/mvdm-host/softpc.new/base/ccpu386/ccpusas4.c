@@ -60,6 +60,11 @@
 #include <yoda.h>
 #include "compat/include/physical_mapping_host.h"
 
+#include "compat/include/guest_memory_access.h"
+#include "compat/include/guest_location.h"
+#include "compat/include/guest_memory_lease.h"
+#include "compat/include/host_context.h"
+
 #line 65
 /********************************************************/
 #define SIXTY_FOUR_K 1024*64
@@ -2004,6 +2009,293 @@ int mvdm_softpc_guest_memory_write(void *context, uint32_t address,
     if (byte_count != 0u) c_sas_stores(address, (uint8_t *)bytes, byte_count);
     return 1;
 }
+
+/* Explicit C SAS access over B-owned lease storage. */
+int ccpu_guest_memory_acquire(guest_memory_lease_context *context,
+    uint32_t address, uint32_t byte_count, uint32_t access,
+    guest_memory_lease **lease_out, uint8_t **bytes_out)
+{
+    guest_memory_lease *lease;
+    uint8_t *bytes;
+    if (lease_out != NULL) *lease_out = NULL;
+    if (bytes_out != NULL) *bytes_out = NULL;
+    if (lease_out == NULL || bytes_out == NULL ||
+        !guest_memory_lease_prepare(context, address, byte_count, access, &lease, &bytes)) return 0;
+    if (byte_count != 0u && !mvdm_softpc_guest_memory_read(context, address, bytes, byte_count)) {
+        guest_memory_lease_discard(lease);
+        return 0;
+    }
+    guest_memory_lease_publish(context, lease, address, byte_count, access);
+    *lease_out = lease;
+    *bytes_out = bytes;
+    return 1;
+}
+int ccpu_guest_memory_release(guest_memory_lease_context *context,
+    guest_memory_lease *lease, int commit)
+{
+    int result;
+    if (!guest_memory_lease_validate(context, lease)) return 0;
+    result = commit == 0 || (lease->access & GUEST_MEMORY_ACCESS_WRITE) == 0u ||
+        lease->byte_count == 0u || mvdm_softpc_guest_memory_write(context, lease->address,
+            lease->bounce, lease->byte_count);
+    guest_memory_lease_discard(lease);
+    return result;
+}
+int ccpu_guest_memory_copy(guest_memory_lease_context *context, uint32_t epoch,
+    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write)
+{
+    int result;
+    if (bytes == NULL || byte_count > UINT32_MAX-address ||
+        !guest_memory_lease_copy_enter(context, epoch)) return 0;
+    result = write ? mvdm_softpc_guest_memory_write(context,address,bytes,byte_count)
+                   : mvdm_softpc_guest_memory_read(context,address,bytes,byte_count);
+    guest_memory_lease_copy_leave(context);
+    return result;
+}
+
+#define MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK 4096u
+
+static int acquire(compat_host_context *owner, uint32_t address,
+    uint32_t byte_count, uint32_t access, guest_memory_lease **lease_out,
+    uint8_t **bytes_out)
+{
+    if (!compat_host_context_valid(owner) || !owner->registration_open) return 0;
+    return ccpu_guest_memory_acquire(owner->guest_memory, address, byte_count,
+        access, lease_out, bytes_out);
+}
+
+static int release(compat_host_context *owner, guest_memory_lease *lease,
+    int commit)
+{
+    if (!compat_host_context_valid(owner) || !owner->registration_open) return 0;
+    return ccpu_guest_memory_release(owner->guest_memory, lease, commit);
+}
+
+int mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t byte_count,
+    uint32_t access, guest_memory_lease **lease_out, uint8_t **bytes_out)
+{
+    compat_host_context *owner = compat_host_context_current();
+
+    if (owner == NULL) return 0;
+    return acquire(owner, address, byte_count, access,
+        lease_out, bytes_out);
+}
+
+int mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
+{
+    compat_host_context *owner = compat_host_context_current();
+
+    if (owner == NULL) return 0;
+    return release(owner, lease, commit);
+}
+
+int mvdm_softpc_guest_memory_copy_from(uint32_t address, uint8_t *bytes,
+    uint32_t byte_count)
+{
+    compat_host_context *owner = compat_host_context_current();
+    uint32_t offset = 0u;
+
+    if (owner == NULL || (byte_count != 0u && bytes == NULL) ||
+        byte_count > UINT32_MAX - address) return 0;
+    while (offset < byte_count) {
+        guest_memory_lease *lease;
+        uint8_t *guest_bytes;
+        uint32_t chunk = byte_count - offset;
+
+        if (chunk > MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK)
+            chunk = MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK;
+        if (!acquire(owner, address + offset, chunk,
+            GUEST_MEMORY_ACCESS_READ, &lease, &guest_bytes)) return 0;
+        memcpy(bytes + offset, guest_bytes, chunk);
+        if (!release(owner, lease, 0)) return 0;
+        offset += chunk;
+    }
+    return 1;
+}
+
+int mvdm_softpc_guest_memory_copy_to(uint32_t address, uint8_t const *bytes,
+    uint32_t byte_count)
+{
+    compat_host_context *owner = compat_host_context_current();
+    uint32_t offset = 0u;
+
+    if (owner == NULL || (byte_count != 0u && bytes == NULL) ||
+        byte_count > UINT32_MAX - address) return 0;
+    while (offset < byte_count) {
+        guest_memory_lease *lease;
+        uint8_t *guest_bytes;
+        uint32_t chunk = byte_count - offset;
+
+        if (chunk > MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK)
+            chunk = MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK;
+        if (!acquire(owner, address + offset, chunk,
+            GUEST_MEMORY_ACCESS_WRITE, &lease, &guest_bytes)) return 0;
+        memcpy(guest_bytes, bytes + offset, chunk);
+        if (!release(owner, lease, 1)) return 0;
+        offset += chunk;
+    }
+    return 1;
+}
+
+int mvdm_softpc_guest_memory_move(uint32_t destination, uint32_t source,
+    uint32_t byte_count)
+{
+    uint8_t bytes[MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK];
+    uint32_t remaining = byte_count;
+
+    if (byte_count > UINT32_MAX - source ||
+        byte_count > UINT32_MAX - destination) return 0;
+    while (remaining != 0u) {
+        uint32_t chunk = remaining;
+        uint32_t offset;
+
+        if (chunk > (uint32_t)sizeof(bytes)) chunk = (uint32_t)sizeof(bytes);
+        offset = destination > source && destination - source < byte_count ?
+            remaining - chunk : byte_count - remaining;
+        if (!mvdm_softpc_guest_memory_copy_from(source + offset, bytes, chunk) ||
+            !mvdm_softpc_guest_memory_copy_to(destination + offset, bytes, chunk))
+            return 0;
+        remaining -= chunk;
+    }
+    return 1;
+}
+
+static int mvdm_guest_location_linear_address(
+    mvdm_guest_location const *location, uint32_t *address_out)
+{
+    uint32_t address;
+
+    if (address_out != NULL) *address_out = 0u;
+    if (location == NULL || address_out == NULL || location->valid != 1u)
+        return 0;
+
+    address = ((uint32_t)location->segment << 4) + location->offset;
+    *address_out = address;
+    return 1;
+}
+
+int mvdm_guest_location_read_far(mvdm_guest_location const *location,
+    mvdm_guest_location *far_location_out)
+{
+    mvdm_guest_location_lease lease;
+    mvdm_guest_location resolved;
+    uint32_t far_value;
+
+    if (far_location_out == NULL || !mvdm_guest_location_acquire(location,
+        4u, GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
+    far_value = (uint32_t)lease.bytes[0] |
+        ((uint32_t)lease.bytes[1] << 8) |
+        ((uint32_t)lease.bytes[2] << 16) |
+        ((uint32_t)lease.bytes[3] << 24);
+    if (!mvdm_guest_location_release(&lease, 0) ||
+        !mvdm_guest_location_from_far_value(&resolved, far_value)) return 0;
+    *far_location_out = resolved;
+    return 1;
+}
+
+int mvdm_guest_location_acquire_far(mvdm_guest_location const *location,
+    uint32_t byte_count, uint32_t access,
+    mvdm_guest_location_lease *lease_out)
+{
+    mvdm_guest_location far_location;
+
+    return mvdm_guest_location_read_far(location, &far_location) &&
+        mvdm_guest_location_acquire(&far_location, byte_count, access,
+            lease_out);
+}
+
+int mvdm_guest_location_read_u16(mvdm_guest_location const *location,
+    uint16_t *value_out)
+{
+    mvdm_guest_location_lease lease;
+    uint16_t value;
+
+    if (value_out != NULL) *value_out = 0u;
+    if (value_out == NULL || !mvdm_guest_location_acquire(location, 2u,
+        GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
+    value = (uint16_t)((uint16_t)lease.bytes[0] |
+        ((uint16_t)lease.bytes[1] << 8));
+    if (!mvdm_guest_location_release(&lease, 0)) return 0;
+    *value_out = value;
+    return 1;
+}
+
+int mvdm_guest_location_copy_c_string(mvdm_guest_location const *location,
+    uint8_t *bytes_out, uint32_t capacity, uint32_t *byte_count_out)
+{
+    mvdm_guest_location probe;
+    mvdm_guest_location_lease lease;
+    uint32_t index;
+
+    if (byte_count_out != NULL) *byte_count_out = 0u;
+    if (location == NULL || bytes_out == NULL || byte_count_out == NULL ||
+        capacity == 0u || location->valid != 1u) return 0;
+    probe = *location;
+    for (index = 0u; index < capacity; ++index) {
+        if (!mvdm_guest_location_acquire(&probe, 1u, GUEST_MEMORY_ACCESS_READ,
+            &lease)) return 0;
+        bytes_out[index] = lease.bytes[0];
+        if (!mvdm_guest_location_release(&lease, 0)) return 0;
+        if (bytes_out[index] == 0u) {
+            *byte_count_out = index + 1u;
+            return 1;
+        }
+        if (probe.offset == UINT16_MAX) return 0;
+        ++probe.offset;
+    }
+    return 0;
+}
+
+int mvdm_guest_location_copy_to_guest(mvdm_guest_location const *location,
+    uint8_t const *bytes, uint32_t byte_count)
+{
+    mvdm_guest_location_lease lease;
+
+    if (location == NULL || bytes == NULL ||
+        !mvdm_guest_location_acquire(location, byte_count,
+            GUEST_MEMORY_ACCESS_WRITE, &lease)) return 0;
+    memcpy(lease.bytes, bytes, byte_count);
+    return mvdm_guest_location_release(&lease, 1);
+}
+
+int mvdm_guest_location_acquire(mvdm_guest_location const *location,
+    uint32_t byte_count, uint32_t access,
+    mvdm_guest_location_lease *lease_out)
+{
+    return mvdm_guest_location_acquire_vm(location, 0, byte_count, access, lease_out);
+}
+
+int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
+    uint32_t linear_base, uint32_t byte_count, uint32_t access,
+    mvdm_guest_location_lease *lease_out)
+{
+    compat_host_context *instance = compat_host_context_current();
+    uint32_t address;
+
+    if (lease_out != NULL) memset(lease_out, 0, sizeof(*lease_out));
+    if (lease_out == NULL || instance == NULL ||
+        !mvdm_guest_location_linear_address(location, &address) ||
+        linear_base > UINT32_MAX - address) return 0;
+    address += linear_base;
+
+    if (!compat_host_context_valid(instance) || !instance->registration_open) return 0;
+    return ccpu_guest_memory_acquire(instance->guest_memory, address, byte_count, access,
+        &lease_out->lease, &lease_out->bytes);
+}
+
+int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
+    int commit)
+{
+    compat_host_context *instance = compat_host_context_current();
+    int result;
+
+    if (lease == NULL || instance == NULL || lease->lease == NULL) return 0;
+    result = compat_host_context_valid(instance) && instance->registration_open &&
+        ccpu_guest_memory_release(instance->guest_memory, lease->lease, commit);
+    memset(lease, 0, sizeof(*lease));
+    return result;
+}
+
 
 #line 1960
 #endif 				/* CCPU */

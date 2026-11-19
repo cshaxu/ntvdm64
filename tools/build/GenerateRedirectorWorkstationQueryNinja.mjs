@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -72,3 +73,5 @@ const ninja = [
 ].join("\n");
 fs.writeFileSync(path.join(buildRoot, "build.ninja"), ninja, "utf8");
 console.log(`Generated Redirector workstation-query graph: ${buildRoot}`);
+
+execFileSync("python", [path.join(root, "tools/build/wire-guest-memory-fixture.py"), path.join(buildRoot, "build.ninja"), "--core-only"], {stdio: "inherit"});

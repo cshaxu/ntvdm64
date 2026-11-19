@@ -37,7 +37,6 @@ $sources = @(
     'src/mvdm-host/suballoc/suballoc.c',
     'src/mvdm-host/xms.486/xmsmemr.c',
     'test/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c',
-    'src/compat/guest_memory_access.c',
     'src/compat/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c'
 )
@@ -81,3 +80,6 @@ default xms-mapped-memory-fixture.exe
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine,
     (New-Object System.Text.UTF8Encoding($false)))
 Write-Host "Wrote T322 S2 $Architecture mapped-XMS fixture graph: $build/build.ninja"
+
+& python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja")
+if ($LASTEXITCODE) { throw "Guest memory fixture wiring failed" }

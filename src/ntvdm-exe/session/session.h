@@ -172,8 +172,7 @@ const char *session_firmware_root(const session *instance);
  * WOW media.  It is not a guest-drive or a replacement for host SystemRoot. */
 int session_set_mvdm_system_root(session *instance, const char *path);
 const char *session_mvdm_system_root(const session *instance);
-int session_guest_memory_begin(session *instance, void *context,
-    guest_memory_read_fn read, guest_memory_write_fn write);
+int session_guest_memory_begin(session *instance);
 void session_guest_memory_end(session *instance);
 int session_guest_memory_acquire(session *instance, uint32_t address,
     uint32_t byte_count, uint32_t access, guest_memory_lease **lease_out,

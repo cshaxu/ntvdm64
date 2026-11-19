@@ -27,3 +27,6 @@ build test: run bounded_copy_fixture.exe
 default bounded_copy_fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
+
+& python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja")
+if ($LASTEXITCODE) { throw "Guest memory fixture wiring failed" }

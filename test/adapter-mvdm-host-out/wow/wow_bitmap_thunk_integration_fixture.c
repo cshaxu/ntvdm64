@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include "wow_bitmap_bindings.h"
 #include "wow_callback_frame_lease.h"
 #include <stdio.h>
@@ -40,11 +41,11 @@ int __cdecl mvdm_softpc_protected_address(uint16_t selector, uint32_t offset, ui
 int __cdecl mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t count,
     uint32_t access, guest_memory_lease **lease, uint8_t **bytes)
 {
-    return guest_memory_lease_acquire(&memory, address, count, access, lease, bytes);
+    return ccpu_guest_memory_acquire(&memory, address, count, access, lease, bytes);
 }
 int __cdecl mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
 {
-    return guest_memory_lease_release(&memory, lease, commit);
+    return ccpu_guest_memory_release(&memory, lease, commit);
 }
 #define FASTCALL
 #define GETARGPTR(frame,size,arg) ((arg)=(frame))
@@ -74,7 +75,7 @@ int __cdecl main(void)
     header->biWidth = 128; header->biHeight = 255;
     header->biPlanes = 1; header->biBitCount = 24;
     memset(backing + sizeof(*header), 255, 128 * 3 * 255);
-    CHECK(guest_memory_lease_begin(&memory, NULL, read_bytes, write_bytes));
+    CHECK(fixture_lease_memory_begin(&memory, NULL, read_bytes, write_bytes));
     bitmap = (HBITMAP)(ULONG_PTR)WU32LoadBitmap(&frame);
     CHECK(bitmap && !wow_bitmap_current);
     CHECK(GetObject(bitmap, sizeof(object), &object) == sizeof(object));

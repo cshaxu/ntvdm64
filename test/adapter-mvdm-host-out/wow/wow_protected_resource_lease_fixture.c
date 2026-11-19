@@ -1,3 +1,4 @@
+#include "../../common/guest_memory_fixture.h"
 #include <stdio.h>
 #include <string.h>
 #include "wow32-dll/include/wow_callback_frame_lease.h"
@@ -47,12 +48,12 @@ int __cdecl mvdm_softpc_protected_address(uint16_t selector, uint32_t offset,
 int __cdecl mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t count,
     uint32_t access, guest_memory_lease **lease, uint8_t **bytes)
 {
-    return guest_memory_lease_acquire(&memory, address, count, access, lease, bytes);
+    return ccpu_guest_memory_acquire(&memory, address, count, access, lease, bytes);
 }
 
 int __cdecl mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
 {
-    return guest_memory_lease_release(&memory, lease, commit);
+    return ccpu_guest_memory_release(&memory, lease, commit);
 }
 
 static void rejected(uint32_t vp, uint32_t count, uint32_t access)
@@ -70,7 +71,7 @@ int __cdecl main(void)
 {
     wow_callback_frame_lease view;
     unsigned i, before, after;
-    CHECK(guest_memory_lease_begin(&memory, NULL, read_bytes, write_bytes));
+    CHECK(fixture_lease_memory_begin(&memory, NULL, read_bytes, write_bytes));
     for (i = 0; i < sizeof(backing); ++i) backing[i] = (unsigned char)(i ^ (i >> 8));
     __asm mov before, esp
     CHECK(wow_callback_frame_acquire_protected_vp(0x12340020, 0x18000,

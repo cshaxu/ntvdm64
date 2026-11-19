@@ -1,7 +1,7 @@
 # S14 migration readiness and counts
 
-P60, baseline `85700b2a5`. This is a design/accounting delivery, not product
-migration. The [machine-readable partition](s14-migration-readiness.json)
+Initial P60 baseline `85700b2a5`; P61/P62 updates below supersede its
+classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
 assigns all 416 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
@@ -87,3 +87,23 @@ whole-file differences are in [the disposition](s14-generated-header-disposition
 Migration of those three still requires layout/selection verification, final
 mirror-cost measurement and applicable source-policy approval. This supersedes
 the56/59 classification count above, not the0/10 whole-chain readiness count.
+
+## P62 coordinator delivery update
+
+The [approved coordinator delivery](s14-p62-lease-owner.json) implements the
+C coordinator/B resource split directly in the main worktree. B no longer
+stores or invokes CCPU read/write callbacks. C preserves hydration before
+publication, consume-on-failed-commit and captured-owner chunk copying. F
+keeps admission/lifetime; its SoftPC unit owns the two session access wrappers.
+The former candidate-creation gate and B callback description above are historical.
+
+Non-error mirror change is13/78 to13/370 (zero additional points,292 additional
+lines), approved by the owner. Cached full builds, coherent dual publication
+and final-code targeted tests passed. Package8ec5f8b9-ea6f-43b8-9810-73d7592e7950
+replaces P26. Existing DIR date-rendering diagnostics reproduce on P26 too;
+they are recorded separately rather than counted as date-rendering acceptance.
+
+The four chain-1 WOW consumer IDs remain open; this internal coordinator
+relocation does not alone resolve their implementation ownership. The416-ID
+partition and zero fully closed chains are unchanged. Continue with those
+consumers and the coupled WOW machine-context chain; do not recreate B callbacks.

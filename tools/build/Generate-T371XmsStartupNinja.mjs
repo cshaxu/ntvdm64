@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve, join, basename } from "node:path";
 
@@ -21,7 +22,6 @@ const sources = [
   "src/mvdm-host/xms.486/xmsmemr.c",
   "src/mvdm-host/suballoc/suballoc.c",
   "src/compat/guest_memory_lease.c",
-  "src/compat/guest_memory_access.c",
   "src/compat/host_context.c",
   "src/ntvdm-exe/session/session.c"
 ];
@@ -61,3 +61,5 @@ const lines = [
 ];
 writeFileSync(join(build, "build.ninja"), lines.join("\n"));
 console.log(`Wrote T371 XMS startup graph: ${join(build, "build.ninja")}`);
+
+execFileSync("python", [join(root, "tools/build/wire-guest-memory-fixture.py"), join(build, "build.ninja")], {stdio: "inherit"});

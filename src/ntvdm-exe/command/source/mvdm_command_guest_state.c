@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "ntvdm-exe/session/session.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "mvdm-host/inc/doswow.h"
 #include "mvdm-host/inc/curdir.h"
 
@@ -94,14 +95,14 @@ int mvdm_command_guest_state_directory_instance(uint32_t *linear_out,
     ReleaseSRWLockShared(&registration->lock);
     if (!location.valid || session_epoch != owner->epoch ||
         memory_epoch != owner->guest_memory_lease.epoch ||
-        !guest_memory_lease_copy(&owner->guest_memory_lease, memory_epoch,
+        !ccpu_guest_memory_copy(&owner->guest_memory_lease, memory_epoch,
             ((uint32_t)location.segment << 4) + location.offset,
             (uint8_t *)&doswow, sizeof(doswow), 0)) return 0;
     far_value = doswow.lpCDSBuffer;
     segment = far_value >> 16;
     if (!segment) segment = location.segment; /* before DOS patches far segments */
     linear = (segment << 4) + (far_value & 0xffffu);
-    if (!guest_memory_lease_copy(&owner->guest_memory_lease, memory_epoch,
+    if (!ccpu_guest_memory_copy(&owner->guest_memory_lease, memory_epoch,
             linear, check, sizeof(check), 0)) return 0;
     *linear_out = linear;
     *bytes_out = sizeof(CDS);

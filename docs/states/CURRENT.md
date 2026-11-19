@@ -28,6 +28,22 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P62 [lease ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p62-lease-owner.json)
+places machine coordination in C, independent resources in B and session
+admission in F. B no longer stores CPU read/write callbacks; session.c no
+longer links CCPU. Non-error mirror13/78 ->13/370: approved0 points/+292 lines.
+Final cached builds and dual11-image/22-hash publication completed with package
+8ec5f8b9-ea6f-43b8-9810-73d7592e7950. x86/x64 resource and coordination tests,
+real CCPU, COMMAND, WOW, immutable Win16 and DOS4GW targeted checks pass.
+DOS DIR lifecycle passes; date-rendering diagnostics also reproduce on P26
+and are separately recorded in TODO. P62 verification/publication complete;
+commit/push receipt is the enclosing delivery commit. Direct ledger152 eliminated/416 open is unchanged;
+this bounded coordinator delivery does not close S14 or all ten chains.
+Temporary status-size exception: retain indexed S14 history until chain handoff;
+this file remains below the 32 KiB hard limit.
+
+Earlier delivered baseline:
+
 S14 P26 moves copied-window graph validation, its relation ABI and scratch
 cleanup from F/D to B. No outward callback or new B-to-C exception is added.
 The24-operation whole-domain candidate remains experiment evidence only.

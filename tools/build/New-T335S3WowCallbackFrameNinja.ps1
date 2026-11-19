@@ -23,7 +23,7 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T335_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T335_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/wow32-dll/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/non-mvdm/public/sdk/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /WX /Gy /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/wow32-dll/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/non-mvdm/public/sdk/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -36,7 +36,6 @@ rule cc
 rule link
   command = cmd /c "`$environment link /nologo /out:`$out `$in"
   description = LINK `$out
-build obj/guest_memory_access.obj: cc `$root/src/compat/guest_memory_access.c
 build obj/guest_memory_lease.obj: cc `$root/src/compat/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/host_context.obj: cc `$root/src/compat/host_context.c
@@ -44,8 +43,11 @@ build obj/mvdm_softpc_guest_memory.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_soft
 build obj/wow_callback_frame_lease.obj: cc `$root/src/wow32-dll/source/wow_callback_frame_lease.c
 build obj/opennt_support_rtl.obj: cc `$root/src/compat/opennt_support_rtl.c
 build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/wow/t335_s3_wow_callback_frame_lease_fixture.c
-build bin/t335-s3-wow-callback-frame-fixture.exe: link obj/guest_memory_access.obj obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/mvdm_softpc_guest_memory.obj obj/wow_callback_frame_lease.obj obj/opennt_support_rtl.obj obj/fixture.obj
+build bin/t335-s3-wow-callback-frame-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/mvdm_softpc_guest_memory.obj obj/wow_callback_frame_lease.obj obj/opennt_support_rtl.obj obj/fixture.obj
 default bin/t335-s3-wow-callback-frame-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
 Write-Host "Generated T335 S3 $Architecture WOW callback-frame graph: $build"
+
+& python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja")
+if ($LASTEXITCODE) { throw "Guest memory fixture wiring failed" }

@@ -36,3 +36,6 @@ default bin/t291-s3-wow-task-frame-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
 Write-Host "Generated T291 S3 $Architecture WOW task-frame graph: $build"
+
+& python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja")
+if ($LASTEXITCODE) { throw "Guest memory fixture wiring failed" }

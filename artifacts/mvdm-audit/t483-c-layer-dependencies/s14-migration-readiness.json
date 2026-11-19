@@ -16,7 +16,8 @@
       "planned_scope": "S14",
       "execution_ownership": "C translation/access; B buffers, epochs and locks; F admission",
       "evidence": [
-        "s14-command-root-and-lease-contract.json"
+        "s14-command-root-and-lease-contract.json",
+        "s14-p62-lease-owner.json"
       ],
       "open_ids": [
         "C0075",
@@ -37,10 +38,11 @@
         3,
         8
       ],
-      "design_status": "incomplete",
-      "next_design_gate": "Finish exact C coordinator insertion and B resource API candidate, preserve acquire publication order, measure mirror delta, then approve any increase.",
+      "design_status": "C coordinator/B resources implemented and verified; remaining consumer ownership is not a whole-chain closure",
+      "next_design_gate": "Review the four still-open WOW lease/pointer consumer IDs without restoring B-to-C callback registration. C coordinator mirror increase was approved and delivered in P62.",
       "newly_implemented_ids": [],
-      "newly_delivered_ids": []
+      "newly_delivered_ids": [],
+      "coordinator_delivery": "T483 S14 P62"
     },
     {
       "chain": 2,
@@ -799,5 +801,5 @@
     "classified_headers": 59,
     "generated_header_migrations_pending": 3
   },
-  "updated_by": "T483 S14 P61"
+  "updated_by": "T483 S14 P62"
 }
