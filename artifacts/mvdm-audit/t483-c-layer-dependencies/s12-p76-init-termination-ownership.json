@@ -1,0 +1,187 @@
+{
+  "baseline": "355d969cc245a3f86ec38549cee98cb1ed8843cb",
+  "files": [
+    {
+      "linkOnlyOrder": 12,
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "ids": [
+        "C0215"
+      ],
+      "decision": "EMS page-frame RAM connection and mapping table reads/writes; retain original C algorithm, S14 CPU address ownership.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 13,
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "ids": [
+        "C0215"
+      ],
+      "decision": "Keyboard setup parses guest table via CS:SI numeric address. Retain C initialization; S14 common CPU address interface.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 14,
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "ids": [
+        "C0608"
+      ],
+      "decision": "host_main still initializes original verbose storage. Original xt.c was withdrawn; F execution.c currently defines storage. S14 cohesive original-state owner; do not restore an entire withdrawn file for one variable without review.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 15,
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "ids": [
+        "C0318"
+      ],
+      "decision": "S13 product lifecycle admission must precede original repeated-terminate shortcut and device destruction. Moving authorization only to late host_applClose is not equivalent. Preserve original cleanup order; arrange product boundary around all entry routes.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "originalEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "verbose": "base/mvdm/softpc.new/base/support/xt.c:152 defines int verbose; main.c:175 initializes FALSE. Storage already traced in s12-p6-common-storage.json; common map labels alone do not name source owner.",
+    "terminate": "base/mvdm/softpc.new/base/support/terminat.c:56 onward guards repeat calls, then tears down devices before host_applClose and host_terminate. Current inserted authorization precedes the original guard."
+  },
+  "lifecycleChain": {
+    "provider": "src/ntvdm-exe/win32/worker_lifecycle.c::ntvdm_worker_lifecycle_authorize_exit",
+    "ownership": "F owner/closing-thread state plus E worker close/service handles. Claims one closing thread, requests authority, waits for service/worker/console close, quiesces VM frontends before original destruction. Other closing thread waits instead of entering repeated-call exit.",
+    "entryPaths": [
+      "natural terminate",
+      "service callback -> TerminateVDM -> terminate",
+      "console callback -> CntrlHandler",
+      "host_applClose has separate authorization call"
+    ],
+    "notB": "Request admission, close instruction and VM frontend teardown are product lifecycle responsibilities, not native API compatibility.",
+    "testLimit": "console_client_test.c has substituted TerminateVDM/CntrlHandler bodies and repeated natural_exit calls; source evidence only, not new real-guest test or proof every current branch is minimal."
+  },
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dos\\emm_mngr.obj",
+      "sha256": "2fac5864c294c3928f36328a97f2f9658e1cf70a4348f3e9de576565330465e7",
+      "symbol": "_c_effective_addr",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\keymouse\\keybd_io.obj",
+      "sha256": "d80eb03beffadf37ee176cc5ae843f3c656381d34f2ddbdd85d8a1945d0108b7",
+      "symbol": "_c_effective_addr",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\main.obj",
+      "sha256": "62fd194e9d58a60be7272b4c5ad35fea16b9f624f24af4505a74851c32d75ecb",
+      "symbol": "_verbose",
+      "binding": "0003:0025ab2c       _verbose                   00813b2c     <common>"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\terminat.obj",
+      "sha256": "b455774df5e9312bf2df489b7d027f37d0e237bba0430245083ff302d0c55ecc",
+      "symbol": "_ntvdm_worker_lifecycle_authorize_exit",
+      "binding": "0001:00174c00       _ntvdm_worker_lifecycle_authorize_exit 00575c00 f   softpc-win32-bindings:worker_lifecycle.obj"
+    },
+    {
+      "commonDefinitionObject": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_softpc_execution.obj",
+      "sha256": "6a8f97ef0daf996538e0cef35fd09cc5a65b476a15986b46d4683cd295bcb7b1",
+      "symbol": "_verbose",
+      "size": 4,
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_execution.c"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\dos\\emm_mngr.obj",
+      "sha256": "377fe5c3d83e83b9c69e1be6e6fcedd79a7b74128909c5a5b071376b08b859cd",
+      "symbol": "_c_effective_addr",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\keymouse\\keybd_io.obj",
+      "sha256": "d991fc649dd1bbfcb7ec71e55737dbe22f285b91a0364ba8fe139a91b609451d",
+      "symbol": "_c_effective_addr",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\support\\main.obj",
+      "sha256": "bd895504f5854f8ede7984c582865351d73939f5745c0c5722361119f3d4b734",
+      "symbol": "_verbose",
+      "binding": "0003:0025ab2c       _verbose                   00813b2c     <common>"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\support\\terminat.obj",
+      "sha256": "435137ee58981ccdce7f88a25606018092f8b2128f0a67f8607752d0140a28a0",
+      "symbol": "_ntvdm_worker_lifecycle_authorize_exit",
+      "binding": "0001:00174c00       _ntvdm_worker_lifecycle_authorize_exit 00575c00 f   softpc-win32-bindings:worker_lifecycle.obj"
+    },
+    {
+      "commonDefinitionObject": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\adapter-softpc\\mvdm_softpc_execution.obj",
+      "sha256": "f165a2dff0c3ae98e55f658f11e622da1b4bb5fb9dbe77efecb3461e53fc368a",
+      "symbol": "_verbose",
+      "size": 4,
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_execution.c"
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 15,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 59,
+    "openIds": 499,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "No production changes; inspect existing P73 COFF/maps, do not rebuild unchanged files.",
+    "runtime": "No new run; responsibility classification only.",
+    "publishedHashesVerified": [
+      "assets\\release\\VCDEX.DLL",
+      "O:\\WINNT\\system32\\VCDEX.DLL",
+      "assets\\release\\run16.exe",
+      "O:\\WINNT\\system32\\run16.exe",
+      "assets\\release\\ntsrv.exe",
+      "O:\\WINNT\\system32\\ntsrv.exe",
+      "assets\\release\\ntcon.exe",
+      "O:\\WINNT\\system32\\ntcon.exe",
+      "assets\\release\\ntvdm.exe",
+      "O:\\WINNT\\system32\\ntvdm.exe",
+      "assets\\release\\ntvwm.exe",
+      "O:\\WINNT\\system32\\ntvwm.exe",
+      "assets\\release\\ntmon.exe",
+      "O:\\WINNT\\system32\\ntmon.exe",
+      "assets\\release\\WOW32.DLL",
+      "O:\\WINNT\\system32\\WOW32.DLL",
+      "assets\\release\\VDMREDIR.DLL",
+      "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "assets\\release\\nthook32.dll",
+      "O:\\WINNT\\system32\\nthook32.dll",
+      "assets\\release\\nthook64.dll",
+      "O:\\WINNT\\system32\\nthook64.dll"
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/base/dos/emm_mngr.c": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe",
+    "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9",
+    "src/mvdm-host/softpc.new/base/support/main.c": "6975575c0c3b98e3cc4a246cd5910fbb93370506d593a13e212c1dfb69834898",
+    "src/mvdm-host/softpc.new/base/support/terminat.c": "ab8e3b60456e945b1f32864f9741ea0595a3ec5647774ce9ac3ab678a46743fb",
+    "src/ntvdm-exe/win32/worker_lifecycle.c": "c82db52b06708386f8a6ad141d5676f2c1be2d2fd6f62c56a9726a09363952b2",
+    "src/ntvdm-exe/softpc/mvdm_softpc_execution.c": "97d239565e1ace23b72979f3eea7c678382891477292d8487fc72eeff2606477",
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c": "9b42cf3434167bef3bdaa5c981d5877d1489ad28f3eb4b6aa96c0648b6ef0ad8",
+    "test/ntvdm-exe/win32/console_client_test.c": "0fb53f8869e690b1e1901011f29f842e4f631beadd289a114d33838ffce307ab"
+  }
+}
