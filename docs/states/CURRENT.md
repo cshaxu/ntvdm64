@@ -2,133 +2,40 @@
 
 ## Current Work
 
-**Active: M0 T483 S12** (Ordinary Mode). The owner accepted S11 and admitted C-layer direct dependency cleanup.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C still has472 open direct dependency IDs.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Original Owner Request | 先解决 C 层可以原地解除的直接依赖，随后处理可安全迁到 F 的产品职责，最后逐案判断 F 回迁 C。 |
-| Objective | Remove direct outward C dependencies that can be eliminated in place. Classify all baseline evidence by direct owner and mechanism. |
-| Files And ABI Surface | Production build graphs, mirror consumers and their include, link and runtime contracts. Keep the selected ABIs. |
-| Reference Baseline | 81f4cef3d and the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md). |
-| Applicable Rules | Architecture, source policy, coding and execution authorities. Attribute direct dependencies to their actual source. |
-| Verification | Check production commands, compiler includes, resolved link providers and applicable behavior. Compare mirror points and lines with the fixed original. |
-| Asset Needs | Existing release, fixed OpenNT baseline and cached production graphs. |
+| Original Owner Request | 原地依赖清理后，处理可以从 C 安全挪到 F 的产品职责；再逐案判断 F 回迁 C。迁移须分析镜像 diff 点位和行数。 |
+| Objective | Remove product-owned outward C dependencies through coherent ownership changes while preserving original C algorithms and the selected ABIs. |
+| Files And ABI Surface | C callers and their D/E/F providers, grouped by request, session, native-call and resource lifetime. Scope is the S13 allocation in the S12 handoff. |
+| Reference Baseline | bf53bd508; package94150155-5251-42f3-b587-9803d82bc178; [complete handoff](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p108-closure-handoff.json). |
+| Applicable Rules | Architecture, source policy, coding and execution authorities; original-first recovery and minimal mirror differences. |
+| Verification | Real production compile/include/link dependencies, affected ABI and lifecycle cases, cached builds, complete dual publication and hash checks. Apply existing owner verification waivers only with corresponding evidence. |
+| Asset Needs | Existing fixed OpenNT baseline, cached production graphs and approved immutable guest fixtures. |
 | Candidate Proposal | [T483 parent proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
-| Identifier Mode | M0 T483 S12, Ordinary Mode. |
-| Admission And Approval | Owner closed S11 and authorized the three sequential C-layer scopes. |
-| Owner amendment | Process the named ntvdm.c worker entry migration during S12. Preserve the independent CPU registry binding. Review every transitive witness and associate it with the direct edge. |
-| Non-goals | No guest changes. Other ownership migrations belong to the two successor scopes. |
-| Expected Markers | Eliminated direct edges have compiler or linker witnesses; indirect-only evidence stays traceable separately. |
-| Similar-Issue Sweep | Review both C owners and all supported production targets. |
-| Reporting Requirements | Record stable IDs, direct source, provider, disposition, non-exclusion mirror block and line deltas and verification. |
-| Stop Conditions | Obtain prior approval before increasing mirror differences. |
-| Exit Criteria | Reconcile in-place candidates and open ownership decisions with the tracker; verify and deliver the completed changes. |
+| Identifier Mode | M0 T483 S13, Ordinary Mode. |
+| Admission And Approval | Owner authorized three sequential C-layer scopes: in-place cleanup, safe C-to-F product responsibility changes, then individual F-to-C assessment. S12 closure admits this second scope. |
+| Non-goals | No guest modification/rebuild; no wholesale C algorithm extraction; S14 original source/ABI restoration is not yet admitted. |
+| Expected Markers | Each eliminated edge has actual compiler/linker evidence and the applicable behavior/lifetime validation. |
+| Similar-Issue Sweep | Process coupled creation/use/retirement callers together across supported product graphs. Include mixed-header witnesses; do not ignore transitive paths. |
+| Reporting Requirements | File entry/exit, stable IDs, scope, current and cumulative mirror points/lines, open/eliminated counts, and build/publication/test/commit status. |
+| Stop Conditions | Obtain prior approval for net mirror diff increases or unapproved scope changes. |
+| Exit Criteria | Finish the admitted ownership groups with preserved C algorithms and correct lifecycle, update tracker, verify and deliver; any unresolved original-ownership matter has a concrete S14 handoff. |
 
 ## Current Technical Baseline
 
-S12 P1-P2 build, publication and direct-header evidence are indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. Both assets/release and O:/WINNT/system32 contain package94150155-5251-42f3-b587-9803d82bc178.
 
-P2: [Build-root cleanup, identity and dual-publication evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
+## S12 Closure Record
 
-P3: [Worker entry delivery and mirror reduction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p3-entry.json).
+[In-place cleanup closure](../etc/evidence/m0-t483-s12-closure.md).
 
-P4-P5: [Cached architecture delivery evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
+[Closure and successor inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p108-closure-handoff.json) reconciles618 stable IDs:96 eliminated,472 open,44 supporting witnesses,5 eliminated transitive witnesses and1 excluded diagnostic. File review covers116 compile-dependent and74 additional link-only files. Mirror reduction totals2 points/10 lines; this closure changes no product source.
 
-P6: [Common storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
-
-P7: [Mixed storage ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
-
-P8: [Original caller anchors](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p8-caller-anchors.json).
-
-P9: [Forced-header removal and original file inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p9-file-dependencies.json). Historical counts are superseded by the latest receipt.
-
-P11 moved shared package directory mechanics and guest directory queries into B compat. cmdconf.c now includes the B header. Both cached product builds, directory/PIF/media/boot tests and the eight-graph library boundary check passed. Eleven images were published and hash-verified at both destinations. See [directory receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p11-directory.json). The sequential compile-dependency review is 1/116; 115 mirror files remain directly dependent. Mirror delta is zero blocks and lines.
-
-P12 moves the existing registry provider and shared declarations from F/D to B. Eight mirror callers only change include paths; mirror delta is zero points/lines and #error/#line remain unchanged. Both cached architectures, final corrected x86 rebuild, eight product A/B graphs, native enum/persistence and 31 embedding checks passed. Eleven images were published and hash-verified at both destinations. See [registry evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p12-registry-candidate.json). File 002 retains its native-child lifecycle dependency for S13. Two files have been reviewed; only file 001 is fully cleared. S12 remains active.
-
-P13 clears the remaining directory-query header dependencies in cmdkeyb.c and dem.c. Both cached architectures built. All eleven images equal P12 after masking only package GUID and PE timestamps; repeated runtime tests were omitted under owner authorization. Both releases were hash-verified. [P13 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p13-directory-callers.json) records 5/116 files reviewed, three fully cleared and two deferred lifecycle moves. Mirror delta is zero; cumulative S12 reduction remains two points and ten lines.
-
-P14 moves the native NT I/O facade and directory restart helper into B. File 008 demsrch.c changes only its include path. Both cached architectures, eight product A/B graphs, x86/x64 native interface checks and 115 original DEM directory assertions passed. The fixture runner now refreshes its selected archives before linking. Eleven images are published and hash-verified. [P14 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p14-native-io.json) records 535 open stable IDs, 8/116 files reviewed, four cleared direct headers and four lifecycle files reserved for S13. Mirror delta is zero; S12 cumulative reduction stays two points and ten lines.
-
-P15 moves the unchanged native invalid-VM failure helper from F to B. Both cached architectures, eight A/B graphs and ten NIDDB rollback cases passed; eleven images are published and hash-verified. [P15 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p15-native-failure.json) records 11/116 files classified: four cleared, seven lifecycle files reserved for S13, 105 unreviewed. C0241 is eliminated; 534 of 617 IDs remain open. Mirror delta is zero; cumulative reduction remains two points and ten lines.
-
-P16 moves the unchanged CCPU wake event carrier to B; F retains its lifetime and C retains pending-work authority. Both cached architectures, eight A/B graphs and the real CCPU HLT/RESET fixture passed. Eleven images are published and hash-verified. [P16 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p16-ccpu-wait.json) records 12/116 files classified, five cleared, seven lifecycle moves and 104 unreviewed. C0037/C0212/C0213 are eliminated; 531/617 IDs remain open. Mirror delta is zero; cumulative reduction stays two points and ten lines.
-
-Subsequent delivered batches are recorded in the dependency tracker:
-- Source-only classifications: [P17](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p17-mapping-generated-ownership.json), [P19](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p19-mouse-bop-ems-ownership.json), [P21](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p21-display-mapping-ownership.json) and [P23](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p23-redir-wow-binding.json). These do not claim runtime validation or dependency elimination.
-- [P18](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p18-keyboard-history.json) moves keyboard metadata into B; both builds, eight A/B graphs, three keyboard suites and dual publication passed. C0204 IRQ binding remains open.
-- [P20](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p20-event-thread.json) moves native event join into B; both builds, six native thread cases, eight A/B graphs and dual publication passed.
-- [P22](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p22-system-loader.json) clears the NTIO directory header; both builds and dual publication passed. All eleven images match P20 after masking only package GUID and PE timestamps; repeated runtime tests were waived. C0039 remains open for cmdmisc.
-
-P24-P27 delivered native ordinal, GDI alias and VDD ABI boundary cleanup, plus lifecycle classifications. Detailed evidence is retained in the [C tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md). P27 delivery and its superseded counts remain in those receipts.
-
-P28-P31 are delivered and indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md): P28 removed the redundant CreateProcess wrapper, P29 moved shared message progress constants into B, and P30/P31 classified lifecycle and page-domain consumers. P29 package09b1e845-1132-4570-b217-12281f4891ab is the published product baseline. Review reached58/116,13 header clears,39 lifecycle,6 source/ABI;519/617 IDs open. Source-only classifications do not claim runtime proof.
-
-P32: [user-probe boundary delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json).
-
-P33: [Console-handle delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json); native predicate moved D to B, mixed header still open.
-
-## Successor scopes
-
-S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.
-
-P34: [native Browser boundary delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json).
-
-P35: [bitmap and icon provider delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json).
-
-P36: [menu/default/resource ownership evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p36-menu-resource-ownership.json).
-
-P37: [combo ownership evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p37-combo-ownership.json).
-
-P38: [native-leaf migration, build, publication and tests](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p38-dialog-native-leaves.json).
-
-P39: [dialog end/manager ownership and 22-case verification](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p39-dialog-end-manager.json).
-
-P40: [dialog navigation classification and four targeted fixtures](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p40-dialog-navigation.json).
-
-P41: [drawing ownership and native-export investigation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p41-drawing-ownership.json).
-
-P42: [native control migration and verified eleven-image publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p42-native-controls.json).
-
-P43: [EDIT ownership classification](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p43-edit-ownership.json).
-
-P44: [control brushes and verified publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p44-control-brushes.json).
-
-P45: [EDIT creation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p45-edit-create-ownership.json).
-
-P46: [rare EDIT operations](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p46-edit-rare-ownership.json).
-
-P47: [DDE declaration delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p47-dde-header.json).
-
-P48: [ListBox entry ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p48-list-entry-ownership.json).
-
-P49: [ListBox item ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p49-list-items-ownership.json).
-
-P50: [List interaction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p50-list-interaction-ownership.json).
-
-P51: [Directory and columns](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p51-list-directory-ownership.json).
-
-P52: [List lifecycle](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p52-list-lifecycle-ownership.json).
-
-P53: [Drawing contexts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p53-drawing-ownership.json).
-
-P54: [Client stubs](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p54-client-stubs-ownership.json).
-
-P55: [Capture/lookaside](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p55-capture-lookaside-ownership.json).
-
-## S11 Closure Record
-
-The owner accepted [A and B cleanup](../etc/evidence/m0-t483-s11-layer-boundaries.md) after P7 at 81f4cef3d. The [delivery record](../../artifacts/mvdm-audit/t483-s11-p7-compat-boundary.json) lists the two approved WOW32 exceptions, eight production graphs, both published eleven-image packages and twenty passing Full gates. The C dependency tracker uses direct ownership; transitive observations remain supporting evidence.
-
-## S10 Closure Record
-
-Owner accepted and closed T483 S10. P1 shipped at 14969ed80 with the targeted verification recorded in the [S10 delivery and closure record](../etc/evidence/m0-t483-s10-components.md).
-
-## S9 Closure Record
-
-[40-file compat audit and verification](../../artifacts/t483-s9-non-mirror-audit/sequential.md), delivered at 55643b6c5. [Successor packet delivery](../etc/evidence/m0-t483-s10-components.md) records this revision as its baseline.
+S13 receives428 product-boundary IDs and the lifecycle side of21 mixed declaration groups. S14 retains23 original-owner IDs and the declaration side of those21 groups. These are allocations, not claims of safe wholesale file movement or completed fixes. S14 remains unadmitted. All prior S12 receipts remain indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
 ## S1 Closure Record
 
@@ -162,40 +69,32 @@ Owner accepted and closed T483 S10. P1 shipped at 14969ed80 with the targeted ve
 
 [T483 S8 closure](../etc/evidence/m0-t483-s8-closure.md).
 
+## S9 Closure Record
+
+[40-file compat audit and verification](../../artifacts/t483-s9-non-mirror-audit/sequential.md), delivered at 55643b6c5. [Successor packet delivery](../etc/evidence/m0-t483-s10-components.md) records this revision as its baseline.
+
+## S10 Closure Record
+
+Owner accepted and closed T483 S10. P1 shipped at 14969ed80 with the targeted verification recorded in the [S10 delivery and closure record](../etc/evidence/m0-t483-s10-components.md).
+
+## S11 Closure Record
+
+The owner accepted [A and B cleanup](../etc/evidence/m0-t483-s11-layer-boundaries.md) after P7 at 81f4cef3d. The [delivery record](../../artifacts/mvdm-audit/t483-s11-p7-compat-boundary.json) lists the two approved WOW32 exceptions, eight production graphs, both published eleven-image packages and twenty passing Full gates. The C dependency tracker uses direct ownership; transitive observations remain supporting evidence.
+
 ## Recent M0 Closures
 
-- [T483 S7 closure](../etc/evidence/m0-t483-s7-closure.md)
-- [T483 S6 closure](../etc/evidence/m0-t483-s6-closure.md)
+- [S11 A/B boundary closure](../etc/evidence/m0-t483-s11-layer-boundaries.md): two owner-approved B exceptions remain.
+- [S10 component delivery](../etc/evidence/m0-t483-s10-components.md).
+- [S9 compat audit](../../artifacts/t483-s9-non-mirror-audit/sequential.md).
+- [S8 closure](../etc/evidence/m0-t483-s8-closure.md).
+- [S7 closure](../etc/evidence/m0-t483-s7-closure.md).
+- [S6 closure](../etc/evidence/m0-t483-s6-closure.md).
+- [S5 closure](../etc/evidence/m0-t483-s5-closure.md).
+- [S4 closure](../etc/evidence/m0-t483-s4-closure.md).
+- [S3 closure](../etc/evidence/m0-t483-s3-closure.md).
+- [S2 closure](../etc/evidence/m0-t483-s2-closure.md).
+- [S1 closure](../etc/evidence/m0-t483-s1-closure.md).
 
 ## Recent Governance
 
-Each sequential-file entry and exit reports both file and whole-audit totals.
-The unrelated project [TODO](TODO.md) remains separate.
-
-P56: [Class lookup ABI](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p56-class-lookup-abi.json).
-
-P57: [Cleanup/event delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p57-cleanup-event.json).
-
-P58: [Private-word ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p58-private-word-ownership.json).
-
-P59: [Native profile delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p59-profile-native.json).
-
-P60: [Task initialization ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p60-task-init-ownership.json).
-
-P61: [Message-table ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p61-message-table-ownership.json).
-
-P62: [Scheduler ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p62-scheduler-ownership.json).
-
-P63: [RTL drawing ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p63-rtl-drawing-ownership.json).
-
-P64: [RTL text ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p64-rtl-text-ownership.json).
-
-P65: [RTL private reader](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p65-rtl-private-reader.json).
-
-P66: [Help ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p66-help-ownership.json).
-
-P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p67-text-measure.json).
-
-P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
-
-P107: [CCPU fallback delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p107-vector-defaults.json). Three F breakpoint providers moved unchanged to B; C0190-C0192 eliminated. Reviewed190/190 files;472/618 IDs open,96 eliminated. Cached builds,8 A/B graphs and22 dual-release hashes passed. Package94150155-5251-42f3-b587-9803d82bc178 published;all11 normalized equal P104, repeated runtime tests waived. Mirror delta0/0;cumulative reduction2 points/10 lines. S12 remains active.
+Each file entry and exit reports both file and whole-audit totals. The unrelated [TODO](TODO.md) remains separate. The active goal is not complete; S13 implementation and S14 remain.

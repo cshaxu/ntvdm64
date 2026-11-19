@@ -1,0 +1,2672 @@
+{
+  "baseline": "bf53bd5084465460d4829244e90f1e913f973521",
+  "purpose": "S12 closure and complete residual ownership handoff; successor allocation is not approval to move entire files.",
+  "s12Conclusion": "Known native-leaf and original-binding in-place candidates are delivered. Compile-file and link-only review is complete; remaining direct dependencies are explicitly retained for the two authorized ownership scopes. C is not clean.",
+  "coverage": {
+    "reviewedCompileFiles": 116,
+    "reviewedLinkOnlyFiles": 74,
+    "stableIds": 618,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 472,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 96
+    },
+    "successorIds": {
+      "S13": 428,
+      "S13 then S14": 21,
+      "S14": 23
+    }
+  },
+  "rules": [
+    "S13 handles product-specific extensions and lifetime boundaries, retaining original C algorithms. A dependency on F does not authorize moving its whole C consumer.",
+    "S14 judges original source/ABI/declaration ownership case by case; net mirror increases require owner approval before implementation.",
+    "Mixed headers remain open until both declaration and live-provider dependencies are resolved. Include-root/image-import rows require actual compiler/linker verification, not source-path inference.",
+    "Evidence index references locate prior reviews; source review and runtime evidence remain distinct. Recheck the exact affected cohort before implementation.",
+    "Keep existing callbacks, identity domains and state owners; no duplicate state machine.",
+    "Apply file-order reporting, full-file batching, cached build, publication, authorized focused verification, commit and push."
+  ],
+  "remainingGroups": [
+    {
+      "scope": "S13 then S14",
+      "target": "src/common/base_srv/base_capture.h",
+      "ids": [
+        "C0002"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p32-user-probe.json"
+      ],
+      "sha256": "d694a8651c1e0dbda0e85203d1b08c66b5ddd98874f34794ab6346e93a4db90f"
+    },
+    {
+      "scope": "S14",
+      "target": "src/common/base_srv/base_classifier.h",
+      "ids": [
+        "C0003"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p33-console-handle.json"
+      ],
+      "sha256": "a92fa8c404cb33aba457a27e05bb0e0f6244d52b5354643145e8f3822693f819"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/common/base_srv/base_client.h",
+      "ids": [
+        "C0004"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p33-console-handle.json"
+      ],
+      "sha256": "414bbc72688c219c867d586b2bf2db3a57466afeea1ce297b7f87371b49517fe"
+    },
+    {
+      "scope": "S14",
+      "target": "src/common/base_srv/base_config.h",
+      "ids": [
+        "C0005"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p33-console-handle.json"
+      ],
+      "sha256": "07bc489782a97b8ab91a89aec5918c9e284c50480c2de2665b4aab649898b866"
+    },
+    {
+      "scope": "S14",
+      "target": "src/common/base_srv/legacy_classifier_arch.h",
+      "ids": [
+        "C0006"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p33-console-handle.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "142f700874be0689e4c0ba7a38ec0359236f02449308300d0965fc4212b499f9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/common/redirector/async.h",
+      "ids": [
+        "C0012"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p23-redir-wow-binding.json"
+      ],
+      "sha256": "30c873e67ab002c7d7962c47ed19979e48fcba73614a6bffdc92af805a1a0a4a"
+    },
+    {
+      "scope": "S13",
+      "target": "src/common/wow/page_domain.h",
+      "ids": [
+        "C0015"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p31-wow-clipboard-page-domain.json"
+      ],
+      "sha256": "ca57c6af30723dca4c09c346a2f9d11bb0b23f2936aa3389d679745bf24899d5"
+    },
+    {
+      "scope": "S13",
+      "target": "src/common/wow/paths.h",
+      "ids": [
+        "C0016"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p24-wow-precomp.json"
+      ],
+      "sha256": "49ddc12803dfb999d1da5bc996ea15ee784c417e5e71223d26e3794a606d5177"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/ntsrv-exe/opennt/include/base_interactive.h",
+      "ids": [
+        "C0020"
+      ],
+      "evidence": [
+        "s12-p106-header-dispositions.json",
+        "s12-p69-final-file-ownership.json"
+      ],
+      "sha256": "9652ae272e0e60132c14dd1721e71c26f020550127523ec598bfeb44ab0d7f73"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/ntsrv-exe/opennt/include/base_server.h",
+      "ids": [
+        "C0022"
+      ],
+      "evidence": [
+        "s12-p34-remote-browser.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "249055581fc112ff45d8aac48c29d2c3421f616f61a54884e4f9988583c40f43"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/command/include/mvdm_command_guest_directory.h",
+      "ids": [
+        "C0023"
+      ],
+      "evidence": [
+        "s12-p10-guest-location.json",
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "9b4c63f231b9086a707c01139c9163deb39895e975b19ea5b294368cf7e33d91"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/command/include/mvdm_command_native_child.h",
+      "ids": [
+        "C0024"
+      ],
+      "evidence": [
+        "s12-p12-registry-candidate.json"
+      ],
+      "sha256": "4e37a33b6db0a553e0f226921b7309592443c0b83d5a6f36c29a554153530e0c"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
+      "ids": [
+        "C0030"
+      ],
+      "evidence": [
+        "s12-p17-mapping-generated-ownership.json"
+      ],
+      "sha256": "fac49a3797900896f2c84a9c7484cb456312511482d80edf08305b5f034ec784"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+      "ids": [
+        "C0031"
+      ],
+      "evidence": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "7b942fbf7d32c8f4f274f5cadf8612c15a67c3235488b4476e5a00970c058bb0"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "ids": [
+        "C0032"
+      ],
+      "evidence": [
+        "s12-file017-018-ownership.json"
+      ],
+      "sha256": "7f4520389338f9d265ce4d4a3e72980356687aebc9ed836b4707d5a250519afa"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h",
+      "ids": [
+        "C0033"
+      ],
+      "evidence": [
+        "s12-file017-018-ownership.json"
+      ],
+      "sha256": "3efd20a777331338a0657a81a7ded9deac0efa9b7bcc71e55d959611d2d2ae7c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "ids": [
+        "C0034"
+      ],
+      "evidence": [
+        "s12-p10-guest-location.json"
+      ],
+      "sha256": "8933cf95e0bc00f9b2d43504975efb6d3af26d5f1f1f6d310380ea7230dd09dd"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h",
+      "ids": [
+        "C0039"
+      ],
+      "evidence": [
+        "s12-p86-pif-path-owner.json",
+        "s12-p87-rom-resource-owner.json"
+      ],
+      "sha256": "67c60898936e2b9d84ebadaad34794f1a74ac39d9756514cd89a5c7aba9ed1fb"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h",
+      "ids": [
+        "C0040"
+      ],
+      "evidence": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p32-user-probe.json"
+      ],
+      "sha256": "e5967e7f72847544edaad4f3de26002e78cf2f2a4c73aa3b3157ee25fc3b54b8"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h",
+      "ids": [
+        "C0041"
+      ],
+      "evidence": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "761c7238030417d0ab4baaca367269c23b7aa1ac89402ef973f8280b274ed06b"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+      "ids": [
+        "C0043"
+      ],
+      "evidence": [
+        "s12-file009-011-ownership.json",
+        "s12-p15-native-failure.json"
+      ],
+      "sha256": "4c60f2b25b7994b13c8bfb2b02fb4ca67f8dca31e10bf6bc379073f2dbeaa10e"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_softpc_text_video.h",
+      "ids": [
+        "C0044"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "fca206b5fb2c6407bcb0345ed0202ba84d8c6ad095f34beb87e541bc59c0ceec"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h",
+      "ids": [
+        "C0045"
+      ],
+      "evidence": [
+        "s12-file009-011-ownership.json",
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "0bcb56eeca450d4eb1dadcf8319eacd5700f45bdd2960bfd30c39f628749fa56"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_vm_bridge.h",
+      "ids": [
+        "C0047"
+      ],
+      "evidence": [
+        "s12-file009-011-ownership.json"
+      ],
+      "sha256": "ecc3d25e9dc019dff4214d4af48016b6eaa3b3d19f5c7a1af5e60169f1650155"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/include/mvdm_xms_memory.h",
+      "ids": [
+        "C0048"
+      ],
+      "evidence": [
+        "s12-p32-user-probe.json"
+      ],
+      "sha256": "4b0441700758d3544290dc2d065337f2d8a8f0f4b45f21f547b984f47f35250a"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h",
+      "ids": [
+        "C0049"
+      ],
+      "evidence": [
+        "s12-p19-mouse-bop-ems-ownership.json"
+      ],
+      "sha256": "f28aab3411d5d93b3ef7da82d21a6d152b9ff6ccd96fcdde1f1f2584fdf0fa6c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h",
+      "ids": [
+        "C0050"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "30847bc06ca9205972d3761d046b1b6475b6e0ecf6e7cc254b65774d7ef6b655"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_client.h",
+      "ids": [
+        "C0052"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json"
+      ],
+      "sha256": "30602c995f317158eaa3efcf817f3719b3a244be4692f93534f084a33867b9ea"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_graphics.h",
+      "ids": [
+        "C0053"
+      ],
+      "evidence": [
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "190254aa7a349d8600d42b2b27944ebb1310988a9ad3d982c9ee4cb78d4915c2"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_input.h",
+      "ids": [
+        "C0054"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json"
+      ],
+      "sha256": "aa3ccb5a1ce26c4c4fe47d9858eb440b1d46e5e458dee8b925238838d0ee400c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_text.h",
+      "ids": [
+        "C0055"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "796cdb99f0421d177761370b9040302933ac64a3d563ce455404328fbf210039"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/worker_lifecycle.h",
+      "ids": [
+        "C0057"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json"
+      ],
+      "sha256": "63d36f87afbe38571aa7e805592da2fa4187684342aa81675a32221369618c32"
+    },
+    {
+      "scope": "S13",
+      "target": "src/vdmredir-dll/include/mvdm_redirector_guest_copy.h",
+      "ids": [
+        "C0058"
+      ],
+      "evidence": [
+        "s12-p23-redir-wow-binding.json"
+      ],
+      "sha256": "2efa694f5d8910c0bca0e3ef3f64e5255f5821ec35d65e6ea95fedce82d65b9d"
+    },
+    {
+      "scope": "S13",
+      "target": "src/worker-base/connection.h",
+      "ids": [
+        "C0060"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json"
+      ],
+      "sha256": "07a9aa207dee1dce9a1c676a050d7d33188e13aa1baa26fe2fb68d5451fe4889"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/button-drawing/precomp.h",
+      "ids": [
+        "C0062"
+      ],
+      "evidence": [
+        "s12-p53-drawing-ownership.json"
+      ],
+      "sha256": "c91243cc77b05d6f5816c909859c5fbb1e02c80c4b64351d6cd3394d02173eec"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-client/precomp.h",
+      "ids": [
+        "C0064"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p36-menu-resource-ownership.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p41-drawing-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p45-edit-create-ownership.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p56-class-lookup-abi.json",
+        "s12-p58-private-word-ownership.json",
+        "s12-p65-rtl-private-reader.json",
+        "s12-p69-final-file-ownership.json"
+      ],
+      "sha256": "a356b8494199c36cb44a39d0f4766f1fbc1ad00fe48d9d6732099ec693a8ef00"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-draw-state/precomp.h",
+      "ids": [
+        "C0065"
+      ],
+      "evidence": [
+        "s12-p53-drawing-ownership.json"
+      ],
+      "sha256": "bc09581d9816a08ab0ed4ddb0afcc9f091e867b0d35cb931b6d53435fc31e6d3"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-drawing/precomp.h",
+      "ids": [
+        "C0066"
+      ],
+      "evidence": [
+        "s12-p41-drawing-ownership.json",
+        "s12-p63-rtl-drawing-ownership.json",
+        "s12-p64-rtl-text-ownership.json",
+        "s12-p67-text-measure.json"
+      ],
+      "sha256": "279f3e88868b0059650042660883d01b14e0f4c510b9f1779418b76b391aae24"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-geometry/precomp.h",
+      "ids": [
+        "C0067"
+      ],
+      "evidence": [
+        "s12-p68-window-geometry-ownership.json"
+      ],
+      "sha256": "65c28ced536af80e4fe7b6f3d3096b78efe48087e61843dbc0aa5d3087bf4619"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_bitmap_bindings.h",
+      "ids": [
+        "C0072"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p36-menu-resource-ownership.json"
+      ],
+      "sha256": "0a7ca0b711fb6503a134304dfe976cdba385c8cd907d182239686f7d39148df4"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_callback_frame_lease.h",
+      "ids": [
+        "C0075"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json"
+      ],
+      "sha256": "9068eb5b7d5276a8433c1b55a057888736398708f8f31d0268d85d32ac3e1c79"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_class_query_bindings.h",
+      "ids": [
+        "C0077"
+      ],
+      "evidence": [
+        "s12-p54-client-stubs-ownership.json"
+      ],
+      "sha256": "966382e14b4c1a89143497937073cc38c094b676906866ffe871b8b28c40aaa9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_class_register_bindings.h",
+      "ids": [
+        "C0078"
+      ],
+      "evidence": [
+        "s12-p56-class-lookup-abi.json"
+      ],
+      "sha256": "f88aca85b5a89c25e9c90d88b402598e613bd1d674c15e1119949bb5834d4f84"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_class_remove_bindings.h",
+      "ids": [
+        "C0079"
+      ],
+      "evidence": [
+        "s12-p56-class-lookup-abi.json"
+      ],
+      "sha256": "67822c8c4c3a1b489bfdb3ead050e8b69aa211b7e82e785e2efc49a89f99937f"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_cleanup_bindings.h",
+      "ids": [
+        "C0081"
+      ],
+      "evidence": [
+        "s12-p57-cleanup-event.json"
+      ],
+      "sha256": "d940a7fdc7bba51b14c0c5c29194f2e4f6a7bfe5bc01dec8dab60e05b38a4948"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_clipboard_epoch.h",
+      "ids": [
+        "C0082"
+      ],
+      "evidence": [
+        "s12-p24-wow-precomp.json"
+      ],
+      "sha256": "7fdcd882e1740a47a985eee555675f3c5aef5aa73e401fd631a764377ce9942b"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_common_dialog_calls.h",
+      "ids": [
+        "C0083"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "36b08b11ae21953a23ee7a8cf41984d8129d8a905816a5d38b8eb7637aa2eb40"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_default_message_bindings.h",
+      "ids": [
+        "C0087"
+      ],
+      "evidence": [
+        "s12-p61-message-table-ownership.json"
+      ],
+      "sha256": "4c8f5ab54cdb291f9e66eb8bf8c2bc5bcc5fee9f9833b3824622a1f0eb0a147b"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_edit_call_bindings.h",
+      "ids": [
+        "C0095"
+      ],
+      "evidence": [
+        "s12-p54-client-stubs-ownership.json"
+      ],
+      "sha256": "684739f82bf323af544af3250162c81e76d925e4d12472a434ab8e8c90aa69b4"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_idle_hook_binding.h",
+      "ids": [
+        "C0105"
+      ],
+      "evidence": [
+        "s12-p28-native-process.json"
+      ],
+      "sha256": "3b0301d329468ff52cb2673d93854a3a32f164b4b9c6172be4f7a3cd940c8210"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/wow_menu_parser_bindings.h",
+      "ids": [
+        "C0108"
+      ],
+      "evidence": [
+        "s12-p24-wow-precomp.json"
+      ],
+      "sha256": "f54a2788dd9f90c602db3b08e4b6d6357ef7b3f30b84149b0e7f0ceeae2e0a25"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_menu_resource_bindings.h",
+      "ids": [
+        "C0109"
+      ],
+      "evidence": [
+        "s12-p36-menu-resource-ownership.json"
+      ],
+      "sha256": "5d11c9cc839082caf93e19e3a63b9217c638117a81f86a425eacba47ad7ce297"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_message_lifetime.h",
+      "ids": [
+        "C0110"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p31-wow-clipboard-page-domain.json"
+      ],
+      "sha256": "26c608d6b21e797188a680dee5cf9ad9130bf79ec89449893f755094b618c3f9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_native_process.h",
+      "ids": [
+        "C0112"
+      ],
+      "evidence": [
+        "s12-p28-native-process.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "2edeaa3437e5ceac2986ab82196436081963f56f9c09ef768f93aead69b26c82"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/wow_ole_descriptor_private.h",
+      "ids": [
+        "C0113"
+      ],
+      "evidence": [
+        "s12-p34-remote-browser.json"
+      ],
+      "sha256": "2699951c48276f8ea17f892c4ff018d118a22a7a0fda003ae8d80ac14c24facb"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_registry_binding.h",
+      "ids": [
+        "C0114"
+      ],
+      "evidence": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "f0f20904101782095c79bf697dd8225ee481ff2c4b40ce6f07b2dcc854cbef26"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_task_init_bindings.h",
+      "ids": [
+        "C0116"
+      ],
+      "evidence": [
+        "s12-p60-task-init-ownership.json"
+      ],
+      "sha256": "ac7d1f8c2070ae07e82277013380955ed363569893d2169e545b99c2595c25bd"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_task_order_bindings.h",
+      "ids": [
+        "C0117"
+      ],
+      "evidence": [
+        "s12-p57-cleanup-event.json",
+        "s12-p62-scheduler-ownership.json"
+      ],
+      "sha256": "61efd1be0d7bd9e5acb2162140bdf6c631579da752513edb9f2df051e48ff493"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_task_profile_bindings.h",
+      "ids": [
+        "C0118"
+      ],
+      "evidence": [
+        "s12-p59-profile-native.json"
+      ],
+      "sha256": "702ef5ae1c07557afe8e9f162b1961453d66b1377d4bde44b5dcf80efcba1583"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_task_termination.h",
+      "ids": [
+        "C0119"
+      ],
+      "evidence": [
+        "s12-p28-native-process.json",
+        "s12-p30-wow-registry-dispatch.json"
+      ],
+      "sha256": "fd0977e38d97b27d60015238ec11756261b62942737fb405fb59cd3e3456edc9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_user_capture_bindings.h",
+      "ids": [
+        "C0121"
+      ],
+      "evidence": [
+        "s12-p55-capture-lookaside-ownership.json"
+      ],
+      "sha256": "843682131b8054cfbfce6a9f81df26248fd9824bd359ed9310b0cc2fe9273529"
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/wow_user_client_view_layout.h",
+      "ids": [
+        "C0122"
+      ],
+      "evidence": [
+        "s12-p66-help-ownership.json"
+      ],
+      "sha256": "db410bac67ce2d3aac62dc7d4c1fd43a362abcb0f7a48687a7f91ca39e0e4c27"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_user_native_extension.h",
+      "ids": [
+        "C0123"
+      ],
+      "evidence": [
+        "s12-p28-native-process.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "5ae3d36993ceeeb64436f9c99cff1b103d306c4aebd5fde8fed28949f41e11b2"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_user_object_bindings.h",
+      "ids": [
+        "C0124"
+      ],
+      "evidence": [
+        "s12-p31-wow-clipboard-page-domain.json"
+      ],
+      "sha256": "5cd9d4730a993cb143001d5c92521b59eb9d85bd3f4eee4bfada0f431c10796d"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_user_private_access.h",
+      "ids": [
+        "C0125"
+      ],
+      "evidence": [
+        "s12-p24-wow-precomp.json"
+      ],
+      "sha256": "28c2c5d43980dcbd931f6227dbe641a5a6dd703c6a58c35eda7cfef1543c60fd"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_user_thunk_scope.h",
+      "ids": [
+        "C0128"
+      ],
+      "evidence": [
+        "s12-p30-wow-registry-dispatch.json"
+      ],
+      "sha256": "7e3a9a1e6e563219b3ebfdfd0d488fdf6f8df3675aaf8730effc6eb4acc673e5"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/include/wow_window_client_state_bindings.h",
+      "ids": [
+        "C0129"
+      ],
+      "evidence": [
+        "s12-p66-help-ownership.json"
+      ],
+      "sha256": "e5189ce658990a27048c164a2c9863bab30976e94a249605c5836d9dd6595b77"
+    },
+    {
+      "scope": "S13",
+      "target": "ntvdm.exe",
+      "ids": [
+        "C0134"
+      ],
+      "evidence": [
+        "s12-p10-guest-location.json",
+        "s12-p13-directory-callers.json",
+        "s12-p15-native-failure.json",
+        "s12-p25-gdi-alias.json",
+        "s12-p34-remote-browser.json",
+        "s12-p35-bitmap-native.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p42-native-controls.json",
+        "s12-p44-control-brushes.json",
+        "s12-p47-dde-header.json",
+        "s12-p5-worker-roots.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p55-capture-lookaside-ownership.json",
+        "s12-p56-class-lookup-abi.json",
+        "s12-p57-cleanup-event.json",
+        "s12-p59-profile-native.json",
+        "s12-p6-common-storage.json",
+        "s12-p60-task-init-ownership.json",
+        "s12-p61-message-table-ownership.json",
+        "s12-p62-scheduler-ownership.json",
+        "s12-p63-rtl-drawing-ownership.json",
+        "s12-p64-rtl-text-ownership.json",
+        "s12-p65-rtl-private-reader.json",
+        "s12-p66-help-ownership.json",
+        "s12-p67-text-measure.json",
+        "s12-p68-window-geometry-ownership.json",
+        "s12-p69-final-file-ownership.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p72-dem-buffer-ownership.json",
+        "s12-p73-bop-exit-binding.json",
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json",
+        "s12-p78-video-address-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p81-activity-owner.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s12-p86-pif-path-owner.json",
+        "s12-p87-rom-resource-owner.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p9-forced-headers.json",
+        "s12-p90-rap-owner.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json",
+        "s12-p98-resource-binding-ownership.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/common/base_srv",
+      "ids": [
+        "C0135"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/ntsrv-exe/opennt/include",
+      "ids": [
+        "C0136"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/command/include",
+      "ids": [
+        "C0137"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/ntvdm-exe/softpc/include",
+      "ids": [
+        "C0141"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/include/generated/x86/prod",
+      "ids": [
+        "C0142"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13",
+      "target": "src/vdmredir-dll/include",
+      "ids": [
+        "C0145"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include",
+      "ids": [
+        "C0146"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/button-drawing",
+      "ids": [
+        "C0147"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-client",
+      "ids": [
+        "C0148"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-draw-state",
+      "ids": [
+        "C0149"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-drawing",
+      "ids": [
+        "C0150"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13 then S14",
+      "target": "src/wow32-dll/include/control-geometry",
+      "ids": [
+        "C0151"
+      ],
+      "evidence": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ],
+      "sha256": null
+    },
+    {
+      "scope": "S13",
+      "target": "src/common/base_srv/base_rpc_client_launch.c",
+      "ids": [
+        "C0156"
+      ],
+      "evidence": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "a37e13534704c26169aa7ef76aa1261ab92c2f2b53b898e3bd2e857e930a1a0c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/common/worker-thread/bridge.c",
+      "ids": [
+        "C0157",
+        "C0158",
+        "C0159",
+        "C0160",
+        "C0161"
+      ],
+      "evidence": [
+        "s12-p103-config-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json"
+      ],
+      "sha256": "ad58270fdeb72b37a44ffd951a8a4a6d0c7c176da4ed7d476b32ab1e5316db87"
+    },
+    {
+      "scope": "S14",
+      "target": "src/nthook-dll/hook_classification.c",
+      "ids": [
+        "C0162",
+        "C0163",
+        "C0164"
+      ],
+      "evidence": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "d75fd7b8026cd52632f248f6ac48d7475293321187dab30935109c9b405a9316"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntsrv-exe/opennt/source/base_interactive.c",
+      "ids": [
+        "C0165"
+      ],
+      "evidence": [
+        "s12-p69-final-file-ownership.json"
+      ],
+      "sha256": "94540d380a98cc712886bcafe5c71da7120fa66b577fbc6a835b5ac94f00c015"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntsrv-exe/opennt/source/base_process.c",
+      "ids": [
+        "C0166",
+        "C0167"
+      ],
+      "evidence": [
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "cc9e3fc7d4fa5b7101d9b79074d9e879436065518c4f47cb4a2a5af558d91c0e"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntsrv-exe/opennt/source/base_request.c",
+      "ids": [
+        "C0168"
+      ],
+      "evidence": [
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "f6b8e822286d9c806a93f91b194ee923fa0c7fccc282b39f1d030fc3d962bd99"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntsrv-exe/opennt/source/service_core.c",
+      "ids": [
+        "C0171"
+      ],
+      "evidence": [
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "15c0546485abc4cbbc312f333875c3a47349f07ebb340473048e1ecf0d3427d3"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "ids": [
+        "C0172",
+        "C0173"
+      ],
+      "evidence": [
+        "s12-p10-guest-location.json",
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "27795331d87db89b6ad3f5af8fc9dc2b892013e1120cb61d4e23e9bdb9ed394c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "ids": [
+        "C0174",
+        "C0175",
+        "C0176",
+        "C0177",
+        "C0178",
+        "C0179",
+        "C0180",
+        "C0181",
+        "C0182"
+      ],
+      "evidence": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "c330fbf9f0fa6d22df07cff9fa1dfe8c1875f481db200f39410a1d7d3601add5"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/debugger/source/dbg_registers.c",
+      "ids": [
+        "C0183",
+        "C0184"
+      ],
+      "evidence": [
+        "s12-file009-011-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "1cdd4880662983694881dd67595db263e54c2ff2a28dd8fa1c08a610320c726e"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/monitor/source/monitor_printer.c",
+      "ids": [
+        "C0185",
+        "C0186",
+        "C0187"
+      ],
+      "evidence": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ],
+      "sha256": "f45b156f5704b4f5ae79cd83cdd856468fac7ad8bddb0cdb047403fdb9f80268"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/monitor/source/vdm_control.c",
+      "ids": [
+        "C0188"
+      ],
+      "evidence": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ],
+      "sha256": "b1b1504a351c79f0036ddd49c845561e929f60fc5ffd164aa7216ed5f32dfc29"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+      "ids": [
+        "C0193"
+      ],
+      "evidence": [
+        "s12-file017-018-ownership.json"
+      ],
+      "sha256": "a3d6f35fef8bae86a04b49ecc2bc4ece34d103c80f31b4248d403035831c3364"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+      "ids": [
+        "C0194",
+        "C0195",
+        "C0196",
+        "C0197"
+      ],
+      "evidence": [
+        "s12-p72-dem-buffer-ownership.json"
+      ],
+      "sha256": "c1c1498531e727c3049c90eeb9ef8c15ea0a09f8dbc09b8e41ad55dfb3e4a203"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_keyboard_reset.c",
+      "ids": [
+        "C0204"
+      ],
+      "evidence": [
+        "s12-p18-keyboard-history.json"
+      ],
+      "sha256": "805fae267bac53acb8667c59ebed80036eb87a2655b4896dda9a51702eb7421d"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_descriptor_fields.c",
+      "ids": [
+        "C0214"
+      ],
+      "evidence": [
+        "s12-p75-disk-descriptor-ownership.json"
+      ],
+      "sha256": "683e5e835b48d7918621e6c72279807f441ad4dc0c5e7dca248f4b9621876d3d"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
+      "ids": [
+        "C0215",
+        "C0216"
+      ],
+      "evidence": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json",
+        "s12-p78-video-address-ownership.json"
+      ],
+      "sha256": "b712adf510bcddc316616bbf9c8df775a114a0f94d42c2a558716d039f8c56b5"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "ids": [
+        "C0223"
+      ],
+      "evidence": [
+        "s12-p86-pif-path-owner.json",
+        "s12-p87-rom-resource-owner.json"
+      ],
+      "sha256": "990e033a1262e78c06621356f0eb5662f83aaeebaae75a6118a093398909d851"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "ids": [
+        "C0224",
+        "C0225",
+        "C0226",
+        "C0227"
+      ],
+      "evidence": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p72-dem-buffer-ownership.json"
+      ],
+      "sha256": "681b9e93f652b321a5a6ee8292dbc6449a60edd41499961e39d8caf1323f4b46"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c",
+      "ids": [
+        "C0228",
+        "C0229"
+      ],
+      "evidence": [
+        "s12-p18-keyboard-history.json",
+        "s12-p20-event-thread.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "f35b85f124c41265e4c5275a123d6819ed90c252771d0230c4dd7eb23811ee26"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+      "ids": [
+        "C0230",
+        "C0231",
+        "C0232"
+      ],
+      "evidence": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "a83a8103f3e4adbce9d04fbd8bd85466ea936ad48aba6d3578dad6e81fb3f014"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "ids": [
+        "C0233",
+        "C0234",
+        "C0235",
+        "C0236",
+        "C0237",
+        "C0238",
+        "C0239",
+        "C0240"
+      ],
+      "evidence": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "dd07c28b27004de60df0a040598a8428396504056386d1b648e9b6bfc1712b05"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
+      "ids": [
+        "C0242"
+      ],
+      "evidence": [
+        "s12-p22-system-loader.json"
+      ],
+      "sha256": "638d005185cd67a49af857102b59af1f36832328596c228a58e44f9a55065455"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c",
+      "ids": [
+        "C0243",
+        "C0244",
+        "C0245"
+      ],
+      "evidence": [
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "ids": [
+        "C0246",
+        "C0247",
+        "C0248",
+        "C0249",
+        "C0250"
+      ],
+      "evidence": [
+        "s12-file009-011-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "c685d4cc5ef52d4b8301946e386f5824245f7699bce90ac52f0b2d2f3c5b6f8c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_vm_ingress.c",
+      "ids": [
+        "C0255"
+      ],
+      "evidence": [
+        "s12-p19-mouse-bop-ems-ownership.json"
+      ],
+      "sha256": "252003e9fab88482449c32f3170d5f4468c8ea751dc4025a5b51621cb0f6d0be"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_vm_notification.c",
+      "ids": [
+        "C0256"
+      ],
+      "evidence": [
+        "s12-file009-011-ownership.json"
+      ],
+      "sha256": "d8b843492c84d77fb39812f8af1fc1669e36e63ed5d04012a1b9d829c7740f40"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "ids": [
+        "C0257"
+      ],
+      "evidence": [
+        "s12-p32-user-probe.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "565d0149004bae0d13970e78d7fed16b6f42117328c5dbbee98e8602431a711b"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/vdd/mvdm_softpc_vdd_unavailable.c",
+      "ids": [
+        "C0258"
+      ],
+      "evidence": [
+        "s12-file009-011-ownership.json",
+        "s12-p15-native-failure.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "0236931d1d518006475e400554222b471b837e1a3c6e03cb5f9676cb3d2487b1"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/ccpu_thread_exit_compat.c",
+      "ids": [
+        "C0259"
+      ],
+      "evidence": [
+        "s12-p88-thread-callback-abi.json"
+      ],
+      "sha256": "74fe8c46b469386d6288438d81f0795d95d6f64e16e64a859be53a85a5975dac"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/command_process_compat.c",
+      "ids": [
+        "C0260",
+        "C0261"
+      ],
+      "evidence": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "ca9f2141a3244b517b2befd6f87c83bbfa1199a5051e27c3e6e9bbef272a1851"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_client.c",
+      "ids": [
+        "C0262",
+        "C0263",
+        "C0264",
+        "C0265",
+        "C0266",
+        "C0267",
+        "C0268",
+        "C0269",
+        "C0270",
+        "C0271",
+        "C0272",
+        "C0273",
+        "C0274",
+        "C0275",
+        "C0276",
+        "C0277",
+        "C0278",
+        "C0279",
+        "C0280",
+        "C0281",
+        "C0282",
+        "C0283",
+        "C0284",
+        "C0285",
+        "C0286",
+        "C0287",
+        "C0288",
+        "C0289"
+      ],
+      "evidence": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ],
+      "sha256": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_compat.c",
+      "ids": [
+        "C0290",
+        "C0291",
+        "C0292",
+        "C0293",
+        "C0294",
+        "C0295",
+        "C0296",
+        "C0297",
+        "C0298",
+        "C0299"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "sha256": "f0c45d8b63ffcebad73724348cf0577c902a9e4efbf0e99ffe84415594439065"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_graphics.c",
+      "ids": [
+        "C0300",
+        "C0301",
+        "C0302",
+        "C0303",
+        "C0304"
+      ],
+      "evidence": [
+        "s12-p105-console-close-ownership.json",
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "sha256": "77dd8ca309a906f2cd5789577bf516698569d717a1792cb786ab39a0a676661a"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/console_text.c",
+      "ids": [
+        "C0305",
+        "C0306"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ],
+      "sha256": "220f7637c3e94e70a2bd7456f445d974ff4a20178d9fc1c963ca8f420f007b39"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/win32/worker_lifecycle.c",
+      "ids": [
+        "C0317",
+        "C0318",
+        "C0319"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json",
+        "s12-p22-system-loader.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json"
+      ],
+      "sha256": "c82db52b06708386f8a6ad141d5676f2c1be2d2fd6f62c56a9726a09363952b2"
+    },
+    {
+      "scope": "S13",
+      "target": "src/worker-base/connection.c",
+      "ids": [
+        "C0321"
+      ],
+      "evidence": [
+        "s12-p20-event-thread.json"
+      ],
+      "sha256": "9b88445427acf5ec599fe07743fc3806839c69c2ec43e119c7f83ecbf324e810"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_bitmap_bindings.c",
+      "ids": [
+        "C0322",
+        "C0614"
+      ],
+      "evidence": [
+        "s12-p6-common-storage.json"
+      ],
+      "sha256": "fcef55ad919e28ac93f7fd5ad4cfcc76fad9450fb79fa97180a3e077ffdd1da9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_button_lifetime.c",
+      "ids": [
+        "C0323",
+        "C0324",
+        "C0325",
+        "C0326",
+        "C0327"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p53-drawing-ownership.json"
+      ],
+      "sha256": "3bd06583604b8d3b68fb8310758a7fd2fe4dc9d9d61167f8b0ee3b9af734866a"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_callback_frame_lease.c",
+      "ids": [
+        "C0328",
+        "C0329"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json"
+      ],
+      "sha256": "bffc0b9b7836a78f19df2e5e764a2aae8fb66a33bd2ed1e1ee6a2e7ce344908e"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_class_words_binding.c",
+      "ids": [
+        "C0330"
+      ],
+      "evidence": [
+        "s12-p56-class-lookup-abi.json"
+      ],
+      "sha256": "bb1a73851b95f5493a6b56547b49e500cdcb82eb92b5552d5d5452ccaba5e10d"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_cleanup_bindings.c",
+      "ids": [
+        "C0331",
+        "C0332"
+      ],
+      "evidence": [
+        "s12-p57-cleanup-event.json"
+      ],
+      "sha256": "6bb3dd3d5556df3364114950a48d5517324cad0477d6cafa885b266a31150640"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_clipboard_epoch.c",
+      "ids": [
+        "C0333"
+      ],
+      "evidence": [
+        "s12-p24-wow-precomp.json"
+      ],
+      "sha256": "71a0c5795f0fb3d988c67d7abf5c0f1cbc895856ae8034ce55b4c0e0fb5a107b"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_common_dialog_callback.c",
+      "ids": [
+        "C0334",
+        "C0335",
+        "C0336"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "7f74375ff12e04f359a5571521c556b75131ddf86527bf1f14ddb4e6c084fe1a"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_common_dialog_calls.c",
+      "ids": [
+        "C0337",
+        "C0338",
+        "C0339",
+        "C0340",
+        "C0341",
+        "C0342",
+        "C0343"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json"
+      ],
+      "sha256": "4373dd6bad1f4b3a1a517f450c327d997c5169d66ecad9f157e5c2417b52c702"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_control_brush_bindings.c",
+      "ids": [
+        "C0344"
+      ],
+      "evidence": [
+        "s12-p54-client-stubs-ownership.json"
+      ],
+      "sha256": "9a20472b39134c3f61b0dc7965514a9922a4ae35e24f3eed5a3e8e6cfad829e4"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_control_draw_state.c",
+      "ids": [
+        "C0345",
+        "C0346",
+        "C0347",
+        "C0348"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p53-drawing-ownership.json"
+      ],
+      "sha256": "7487e80269c9e08081e42556b1f8e758b2d7a969046663a7491b147fcadb6cc9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_control_fnid.c",
+      "ids": [
+        "C0350"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json"
+      ],
+      "sha256": "3fba58040f47d8c851548fadf5764df031d21563ff24b6a20e6e909a6c71c2d9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_control_state.c",
+      "ids": [
+        "C0351",
+        "C0352"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p45-edit-create-ownership.json"
+      ],
+      "sha256": "0c63a06a8b05182793db23b7b6d5a1bf2cbf0d3b9578985c2c11fb75262777a6"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_default_native_bindings.c",
+      "ids": [
+        "C0353",
+        "C0354"
+      ],
+      "evidence": [
+        "s12-p50-list-interaction-ownership.json"
+      ],
+      "sha256": "1f7765c4e7fcd929c1209698806dadc1b5dce72155e14d4a1da3f7aed1347630"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_default_state_bindings.c",
+      "ids": [
+        "C0355"
+      ],
+      "evidence": [
+        "s12-p36-menu-resource-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "1f81054f43d1d76c429e978a43e23711841e354f91feeb7f2feb56656906af58"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_default_window_bindings.c",
+      "ids": [
+        "C0356",
+        "C0357",
+        "C0358"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p68-window-geometry-ownership.json"
+      ],
+      "sha256": "9cef1bb568121d430450db3eb67eaf0b5929e4393456287911cbbcad120b09d4"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_dialog_call_bindings.c",
+      "ids": [
+        "C0359",
+        "C0360",
+        "C0361",
+        "C0362"
+      ],
+      "evidence": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json"
+      ],
+      "sha256": "eaf6347286772fefc4ea70b857e3b1a4c5939a022c5caf3cfb94a8d4fdfa0a11"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_dialog_context_bindings.c",
+      "ids": [
+        "C0363"
+      ],
+      "evidence": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json"
+      ],
+      "sha256": "a3fb49677acfed80dcdbffc1e0bf93a557a700100a7154c2a9bf6173dc58761f"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_dialog_finalization_binding.c",
+      "ids": [
+        "C0364",
+        "C0365",
+        "C0366",
+        "C0367",
+        "C0368",
+        "C0369"
+      ],
+      "evidence": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "939291b35b56fac0159da1ecbcf5a2b1cb98c3fb2df1518b7e2b84400ca37c77"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_dialog_keyboard_binding.c",
+      "ids": [
+        "C0370",
+        "C0371"
+      ],
+      "evidence": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "2ceba14eccd7adb9dcf3cd1ac68b5e936c201f84ae4d32e4959a101d307b6b42"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_dialog_memory.c",
+      "ids": [
+        "C0372",
+        "C0373",
+        "C0374"
+      ],
+      "evidence": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json"
+      ],
+      "sha256": "ce0facbd87ae1b515292ddd345218d71a8bc42a6a1ceb0e0a1bb0b78ce327845"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "ids": [
+        "C0375",
+        "C0376",
+        "C0377"
+      ],
+      "evidence": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json"
+      ],
+      "sha256": "d03c4b4d40079099197770990a9b2c58f90c0d7c9d4546aae5154169dad33539"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_dialog_procedure_bindings.c",
+      "ids": [
+        "C0378",
+        "C0380",
+        "C0381"
+      ],
+      "evidence": [
+        "s12-p39-dialog-end-manager.json"
+      ],
+      "sha256": "b27ecd91447057f7481eb34e6a16dacd197711d04efd7c62c7685260a200b3c0"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_edit_call_bindings.c",
+      "ids": [
+        "C0383",
+        "C0384",
+        "C0385",
+        "C0386",
+        "C0387",
+        "C0388",
+        "C0389"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p56-class-lookup-abi.json",
+        "s12-p58-private-word-ownership.json",
+        "s12-p65-rtl-private-reader.json"
+      ],
+      "sha256": "aae75d219ad8bac84fabc897fa73664b9db89ab68a6e7a398db534ae0599bc12"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_edit_conversion_bindings.c",
+      "ids": [
+        "C0390"
+      ],
+      "evidence": [
+        "s12-p43-edit-ownership.json"
+      ],
+      "sha256": "867ace11b51104d0ca621212f3ec70bc6e250a9ed436c1d804348286337d2ec5"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_edit_entry_bindings.c",
+      "ids": [
+        "C0391",
+        "C0392"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p41-drawing-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p63-rtl-drawing-ownership.json",
+        "s12-p64-rtl-text-ownership.json",
+        "s12-p68-window-geometry-ownership.json"
+      ],
+      "sha256": "ec80fb7d280dbf2ec62e23788baa9d5db38e3c7fc43ef6e90150445060ba9d4a"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_edit_thread_bindings.c",
+      "ids": [
+        "C0400"
+      ],
+      "evidence": [
+        "s12-p43-edit-ownership.json"
+      ],
+      "sha256": "83393f9136fa26d49cd97d246bca08507c37190c469d93e29891298cf6811ee0"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_hook_callback.c",
+      "ids": [
+        "C0401"
+      ],
+      "evidence": [
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "0bc020eecf7908d8533b479373273f2ff091ece692de5e3341a1fc4a65c85a71"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_menu_native_bindings.c",
+      "ids": [
+        "C0403",
+        "C0404",
+        "C0405",
+        "C0406",
+        "C0407",
+        "C0408",
+        "C0409",
+        "C0410",
+        "C0411",
+        "C0412",
+        "C0413",
+        "C0414",
+        "C0415",
+        "C0416",
+        "C0417",
+        "C0418",
+        "C0419",
+        "C0420",
+        "C0421",
+        "C0422"
+      ],
+      "evidence": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p96-menu-timer-ownership.json"
+      ],
+      "sha256": "641a1cd995ec39391c237b64211573931afd58446cfdfe115c0d394347fc84e2"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_message_lifetime.c",
+      "ids": [
+        "C0423",
+        "C0424",
+        "C0425",
+        "C0426",
+        "C0427",
+        "C0428",
+        "C0429"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json"
+      ],
+      "sha256": "a5b966ab4c8cbf2122665efba4679153fd1ba81c2ce6da585f695a94f8d4c72e"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_ole_descriptor_binding.c",
+      "ids": [
+        "C0431",
+        "C0432",
+        "C0613"
+      ],
+      "evidence": [
+        "s12-p6-common-storage.json"
+      ],
+      "sha256": "db6a9dcba85b9df53580ad3673dcbea55edb0e4155c70183d3044e4013fe89a0"
+    },
+    {
+      "scope": "S14",
+      "target": "src/wow32-dll/source/wow_private_user_compat.c",
+      "ids": [
+        "C0433"
+      ],
+      "evidence": [
+        "s12-p96-menu-timer-ownership.json"
+      ],
+      "sha256": "7d6392e71fff4fee054cb2eedec29f6ff3d711d2d849c58ac9252970c6fdd40c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_public_user_facade.c",
+      "ids": [
+        "C0442"
+      ],
+      "evidence": [
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ],
+      "sha256": "e74e2ad47408f8ce83203b2d52029407d4a3f5e0980b25b8e40010b1c979f239"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_registry_binding.c",
+      "ids": [
+        "C0443",
+        "C0444",
+        "C0445",
+        "C0446",
+        "C0447",
+        "C0448",
+        "C0449",
+        "C0450",
+        "C0451",
+        "C0452",
+        "C0453",
+        "C0454"
+      ],
+      "evidence": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ],
+      "sha256": "f7ba62630f538d45fcefb2985f4093d5769e848829350dac1c6f818b271f8544"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_shell_callback.c",
+      "ids": [
+        "C0455"
+      ],
+      "evidence": [
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "255792a7d691bafb4eae847035edf0d2f372984d1cb9f5a8d0545d3d2e68e8f4"
+    },
+    {
+      "scope": "S14",
+      "target": "src/wow32-dll/source/wow_sim32_pointer_compat.c",
+      "ids": [
+        "C0456"
+      ],
+      "evidence": [
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "44874c6b1c952f6e063e50e17432ad5f647f3d6c5f763e74192ba58757316b46"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_task_cleanup_entry.c",
+      "ids": [
+        "C0457"
+      ],
+      "evidence": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ],
+      "sha256": "d6a1b003cc269accb15848fd9306eb7f84b69117134011fc53b8657253779d2c"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_task_termination.c",
+      "ids": [
+        "C0460",
+        "C0461",
+        "C0462",
+        "C0463"
+      ],
+      "evidence": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ],
+      "sha256": "3424c0eea1dafd7eedd8ee313b3a85b4b34b26842bb3454365af3a04b85172ed"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_timer_callback.c",
+      "ids": [
+        "C0464"
+      ],
+      "evidence": [
+        "s12-p96-menu-timer-ownership.json"
+      ],
+      "sha256": "173ba3ab5e0299c6cf7b8400f0b48790055b4ef664bd7b2d3ba6233c304f12d9"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_borrow_scope.c",
+      "ids": [
+        "C0465"
+      ],
+      "evidence": [
+        "s12-p54-client-stubs-ownership.json"
+      ],
+      "sha256": "d3209c424ee1037d5bfe41716a5dfa6151ea7500403377f63a656fea0bed1faf"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_discovery.c",
+      "ids": [
+        "C0466",
+        "C0467",
+        "C0468",
+        "C0469",
+        "C0470",
+        "C0471",
+        "C0472",
+        "C0473",
+        "C0474",
+        "C0475",
+        "C0476",
+        "C0477",
+        "C0478",
+        "C0479",
+        "C0480"
+      ],
+      "evidence": [
+        "s12-p24-wow-precomp.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "766160007de138f7c3055dc171b0ad6b7b65b1c0a2c18c098633712e38a227a0"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_native_extension.c",
+      "ids": [
+        "C0481",
+        "C0482",
+        "C0483",
+        "C0484",
+        "C0485",
+        "C0486"
+      ],
+      "evidence": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "d0dc0dfb97303e3f53344c24d0f3283a0ed5e28d638f93c0902014f010d25d37"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_object_bindings.c",
+      "ids": [
+        "C0487",
+        "C0488"
+      ],
+      "evidence": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ],
+      "sha256": "70cdcb1dbf4a1239a4bca5c75eb1d9fb4e67ac5df98486d33fc39368e883550d"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_private_access.c",
+      "ids": [
+        "C0489",
+        "C0490",
+        "C0491",
+        "C0492",
+        "C0493",
+        "C0494",
+        "C0495",
+        "C0496"
+      ],
+      "evidence": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "ba8081be96b4bc1859aa25de555e0251ef5a3a386bb411bda43f9c4cfac9a789"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_registration_bridge.c",
+      "ids": [
+        "C0497",
+        "C0498",
+        "C0499",
+        "C0500",
+        "C0501",
+        "C0502",
+        "C0503",
+        "C0504",
+        "C0505"
+      ],
+      "evidence": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p94-wstruc-public-style.json"
+      ],
+      "sha256": "d4576d797c3cdd354078ff0a442cbe5c6a82c9acac1deae17f230140afe82607"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "ids": [
+        "C0506",
+        "C0507",
+        "C0508",
+        "C0509",
+        "C0510",
+        "C0511",
+        "C0512",
+        "C0513",
+        "C0514",
+        "C0515",
+        "C0516",
+        "C0517",
+        "C0518",
+        "C0519",
+        "C0520",
+        "C0521",
+        "C0522",
+        "C0523",
+        "C0524",
+        "C0525",
+        "C0526",
+        "C0527",
+        "C0528",
+        "C0529",
+        "C0530",
+        "C0531",
+        "C0532",
+        "C0533",
+        "C0534",
+        "C0535",
+        "C0536",
+        "C0537",
+        "C0538",
+        "C0539",
+        "C0540",
+        "C0541",
+        "C0542",
+        "C0543",
+        "C0544",
+        "C0545",
+        "C0546",
+        "C0547",
+        "C0548",
+        "C0549",
+        "C0550",
+        "C0551",
+        "C0552",
+        "C0553",
+        "C0554",
+        "C0555",
+        "C0556",
+        "C0557",
+        "C0558",
+        "C0559",
+        "C0560",
+        "C0561",
+        "C0562",
+        "C0563",
+        "C0564",
+        "C0565",
+        "C0566",
+        "C0567",
+        "C0568",
+        "C0569",
+        "C0570",
+        "C0571",
+        "C0572",
+        "C0573",
+        "C0574",
+        "C0575",
+        "C0576",
+        "C0577",
+        "C0578",
+        "C0579",
+        "C0580",
+        "C0581",
+        "C0582",
+        "C0583",
+        "C0584",
+        "C0585",
+        "C0586"
+      ],
+      "evidence": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_user_thunk_scope.c",
+      "ids": [
+        "C0587",
+        "C0588",
+        "C0589"
+      ],
+      "evidence": [
+        "s12-p12-registry-candidate.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ],
+      "sha256": "650318802ad3d08a2a6b3f0428bba1ef51551bf5ad3976f4e204a67a50cbe6d3"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_window_client_access_bindings.c",
+      "ids": [
+        "C0590",
+        "C0591",
+        "C0592"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p58-private-word-ownership.json"
+      ],
+      "sha256": "a59e41958744681e972d2767a549e5fc20f77e4aa5b35c5a8f3e76e84e2c0e31"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_window_client_state_bindings.c",
+      "ids": [
+        "C0593",
+        "C0594",
+        "C0595",
+        "C0596",
+        "C0597"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p41-drawing-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p56-class-lookup-abi.json",
+        "s12-p58-private-word-ownership.json",
+        "s12-p65-rtl-private-reader.json",
+        "s12-p66-help-ownership.json",
+        "s12-p68-window-geometry-ownership.json"
+      ],
+      "sha256": "a9630ad86dc92afe3c96d71eb12869ad0eba9e2f02c552f0d39d41e3a4d10ab4"
+    },
+    {
+      "scope": "S13",
+      "target": "src/wow32-dll/source/wow_window_creation_binding.c",
+      "ids": [
+        "C0598",
+        "C0599"
+      ],
+      "evidence": [
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json"
+      ],
+      "sha256": "df7672b6dec8d748e4b52e74fc93bb767f3100da07074697c61ffcafd24e8c5f"
+    },
+    {
+      "scope": "S13",
+      "target": "src/vdmredir-dll/source/mvdm_redirector_guest_copy.c",
+      "ids": [
+        "C0600",
+        "C0601",
+        "C0602"
+      ],
+      "evidence": [
+        "s12-p23-redir-wow-binding.json"
+      ],
+      "sha256": "6818fcf2b34c10ebf721c5ad0b615b566512e82788dddb7702df368631eb4d8a"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+      "ids": [
+        "C0607"
+      ],
+      "evidence": [
+        "s12-p6-common-storage.json"
+      ],
+      "sha256": "7a7442a56675cb590b0b7f5a84bddd4f2a4a9d9de0089a4187a32928ed39a13d"
+    },
+    {
+      "scope": "S14",
+      "target": "src/ntvdm-exe/softpc/mvdm_softpc_execution.c",
+      "ids": [
+        "C0608"
+      ],
+      "evidence": [
+        "s12-p6-common-storage.json",
+        "s12-p76-init-termination-ownership.json"
+      ],
+      "sha256": "97d239565e1ace23b72979f3eea7c678382891477292d8487fc72eeff2606477"
+    },
+    {
+      "scope": "S14",
+      "target": "src/run16-exe/main.c",
+      "ids": [
+        "C0609",
+        "C0610",
+        "C0611"
+      ],
+      "evidence": [
+        "s12-p6-common-storage.json"
+      ],
+      "sha256": "2e3a9b5e38ea39fb6a36fb298efc23f5ab427e1cf3f85642cb34f53a5600c4af"
+    },
+    {
+      "scope": "S13",
+      "target": "src/run16-exe/main.c",
+      "ids": [
+        "C0612"
+      ],
+      "evidence": [
+        "s12-p6-common-storage.json"
+      ],
+      "sha256": "2e3a9b5e38ea39fb6a36fb298efc23f5ab427e1cf3f85642cb34f53a5600c4af"
+    },
+    {
+      "scope": "S14",
+      "target": "src/wow32-dll/source/wow_default_message_bindings.c",
+      "ids": [
+        "C0615"
+      ],
+      "evidence": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p61-message-table-ownership.json"
+      ],
+      "sha256": "85d2b977eae204acc9f474db4a7f9b6fa902daeffec1b4688d314e63c4b811cd"
+    },
+    {
+      "scope": "S13",
+      "target": "src/ntvdm-exe/wow/wow_user_runtime.c",
+      "ids": [
+        "C0618"
+      ],
+      "evidence": [
+        "s12-p60-task-init-ownership.json",
+        "s12-p62-scheduler-ownership.json"
+      ],
+      "sha256": "195ed8a3c08266d5783bae23364b968c40d42adc0e3c23d0895be58b4da0d1e3"
+    }
+  ],
+  "deliveredBaseline": {
+    "package": "94150155-5251-42f3-b587-9803d82bc178",
+    "receipt": "s12-p107-vector-defaults.json",
+    "hashes": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "d2900ae27e1c798b51c1c45fd03e7f39d25efc3749d01acd7d058cd3dad2dee6"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "8613ecf5bb1d2987a364a5f47b86816183bddb180240c3f38a0d291e3ec38a3c"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "b8ed0c386122711dda360685cba4e09423f15d1a56d9e1f479ed52f3ab5d106d"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "6639f3b1fdd159750cea774a9b50f18fc276bc4f17a1d0492a669b70ccece079"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "3b69a38813f9ac18582ed45f143d7c460725c67d2cc337c8677fec993f21a8ca"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "fc9bcd3fa258aaf8ecdab885e86893b036caa8f26e99b6c9b15c8e8f56dbcd5a"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "0cf4631b81051b89e5d6ed913bee0e643f9fc102682064f2a0cceec86a8e8573"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "e5c7db849b7c2cd972a30d4b5796665380fa1699728072cff2f9a9ecd8760cef"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "b61d9cbc74b0674bdf4ce737898be727ebf0fac000ab8b0c0159e64ce5591ce4"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "a296329d940e8e37647c8e08aac5d68cba234019b8c3d20dd356ef8fc264a7f2"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "5f129ee733fbc47b757e0c11d65523402bddac2a1fe61987209461b4b3c4c3c2"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "d2900ae27e1c798b51c1c45fd03e7f39d25efc3749d01acd7d058cd3dad2dee6"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "8613ecf5bb1d2987a364a5f47b86816183bddb180240c3f38a0d291e3ec38a3c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "b8ed0c386122711dda360685cba4e09423f15d1a56d9e1f479ed52f3ab5d106d"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "6639f3b1fdd159750cea774a9b50f18fc276bc4f17a1d0492a669b70ccece079"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "3b69a38813f9ac18582ed45f143d7c460725c67d2cc337c8677fec993f21a8ca"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "fc9bcd3fa258aaf8ecdab885e86893b036caa8f26e99b6c9b15c8e8f56dbcd5a"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "0cf4631b81051b89e5d6ed913bee0e643f9fc102682064f2a0cceec86a8e8573"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "e5c7db849b7c2cd972a30d4b5796665380fa1699728072cff2f9a9ecd8760cef"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "b61d9cbc74b0674bdf4ce737898be727ebf0fac000ab8b0c0159e64ce5591ce4"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "a296329d940e8e37647c8e08aac5d68cba234019b8c3d20dd356ef8fc264a7f2"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "5f129ee733fbc47b757e0c11d65523402bddac2a1fe61987209461b4b3c4c3c2"
+      }
+    ],
+    "runtime": "P107 pure-relocation/normalized-identity waiver. No new runtime test in this closure.",
+    "boundary": "P107 eight A/B product graphs passed."
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "limitations": [
+    "472 direct dependencies remain open; allocation does not eliminate them.",
+    "S13 and S14 still require implementation, ABI/lifetime verification and delivery. No goal completion claim.",
+    "No new production source or binary changes in this closure packet."
+  ],
+  "documentationGate": "passed: build/t483-s12-vector-defaults/closure-docs-verified.log, exit0; git diff --check passed. Earlier draft failed missing required closure headings; restored all S1-S11 headings and linked the S12 closure record before final verification."
+}
