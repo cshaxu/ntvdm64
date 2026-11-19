@@ -497,9 +497,13 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+075 P39: C retains EndDialog state/result, owner enablement, focus/hide/activation and WM_NULL modal-loop wake. All eight remaining direct external symbols involve identity discovery, retained-state validation or native-call/task restoration; S13 boundary group. Do not replace no-notification zap with public SetActiveWindow/SetFocus pair. Source unchanged; mirror delta0 points/0 lines. See s12-p39-dialog-end-manager.json.
+
 ## 076 — src/non-mvdm/windows/core/ntuser/client/dlgmgr.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+076 P39: C retains promotion, default message policy, keyboard/modal loop and resource cleanup; F supplies registered callbacks, native procedure dispatch, context and scheduler/publication ownership. Already-cleared C0379 is supplied by B. Remaining source extraction provenance for FNID/SetWindowState/ClearWindowState/ReleaseEditDS belongs to S14; lifecycle composition to S13. Source unchanged; mirror delta0 points/0 lines. See s12-p39-dialog-end-manager.json.
 
 ## 077 — src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c
 

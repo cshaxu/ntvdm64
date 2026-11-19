@@ -1,0 +1,100 @@
+{
+  "baseline": "6a3a895c2629db43150db8b2b654d37d50ec9cb1",
+  "status": "P39 source-only ownership classification",
+  "files": [
+    {
+      "number": 75,
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "sha256": "a8fbf7c90496774075cecdde77f5ed52bab0c1cf195a02babf44bbc8a045ad3c",
+      "compilerObject": "obj/opennt-user/control-body-dlgend.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-dlgend.obj: #deps 66, deps mtime 8167706414053157 (VALID)",
+      "linkedIds": [
+        "C0362",
+        "C0472",
+        "C0474",
+        "C0525",
+        "C0558",
+        "C0564",
+        "C0573",
+        "C0596"
+      ],
+      "sourceChanged": false,
+      "conclusion": "C retains EndDialog state/result, owner enablement, focus/hide/activation and WM_NULL modal-loop wake. All eight remaining direct external symbols involve identity discovery, retained-state validation or native-call/task restoration; S13 boundary group. Do not replace no-notification zap with public SetActiveWindow/SetFocus pair.",
+      "chain": "WU32EndDialog -> private EndDialog macro -> F wow_user_end_dialog -> acquired window binding -> recovered dialog_entry task/borrow scope -> C wow_original_EndDialog; untouched native dialogs take existing native EndDialog path. Finally restores task/borrow lifetime."
+    },
+    {
+      "number": 76,
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "sha256": "859c909bcb7110f031b503f853bb18af7a5a840b942759496c59ad2f40b7d3cb",
+      "compilerObject": "obj/opennt-user/control-body-dlgmgr.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-dlgmgr.obj: #deps 66, deps mtime 8167706423835526 (VALID)",
+      "linkedIds": [
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0359",
+        "C0361",
+        "C0363",
+        "C0371",
+        "C0373",
+        "C0375",
+        "C0377",
+        "C0378",
+        "C0379",
+        "C0380",
+        "C0381",
+        "C0383",
+        "C0387",
+        "C0388",
+        "C0472",
+        "C0473",
+        "C0474",
+        "C0502",
+        "C0504",
+        "C0505",
+        "C0520",
+        "C0522",
+        "C0525",
+        "C0557",
+        "C0561",
+        "C0562",
+        "C0564",
+        "C0565",
+        "C0573",
+        "C0578",
+        "C0581",
+        "C0582",
+        "C0591",
+        "C0596",
+        "C0597"
+      ],
+      "sourceChanged": false,
+      "conclusion": "C retains promotion, default message policy, keyboard/modal loop and resource cleanup; F supplies registered callbacks, native procedure dispatch, context and scheduler/publication ownership. Already-cleared C0379 is supplied by B. Remaining source extraction provenance for FNID/SetWindowState/ClearWindowState/ReleaseEditDS belongs to S14; lifecycle composition to S13.",
+      "chain": "DialogBox2 uses registration bridge wow_user_peek_messageW/wow_user_wait_message, whose actual link provider is wow_user_registration_bridge.obj, then wow_user_task_lifecycle message/wait methods. Peek handles sent-message callbacks even on FALSE; wait keeps native queue wake observation and original taskman handoff. Default finalization invokes original DefDlgProcWorker cleanup, not a duplicated F resource-release algorithm."
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 76,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 49,
+    "deferredSourceAbiCompositionFiles": 11,
+    "unreviewedFiles": 40,
+    "totalFiles": 116,
+    "openIds": 510,
+    "totalIds": 617
+  },
+  "limits": "Classification is not elimination or approval of every existing shim. S13/S14 not implemented. No new mirror exceptions. Source, #error and #line unchanged.",
+  "validation": {
+    "build": "No product build: production unchanged; both actual compiler dependency records VALID.",
+    "targeted": "Existing original-dialog-end-boundary target built and run: dialog-end-original cases=22 failures=0. Native mutation/state are explicit doubles, real hidden HWND supplies posted WM_NULL; not complete guest modal-loop acceptance. build/t483-s12-dialog-end/targeted.log and targeted.exit.",
+    "publication": "P38 eleven-image package unchanged, fcd303b9-790b-4b25-9a57-918f1932eff0; no new publication or runtime claim.",
+    "documentation": "Verify-DocumentationGovernance.ps1 before commit; build/t483-s12-dialog-end/docs.log and docs.exit."
+  }
+}
