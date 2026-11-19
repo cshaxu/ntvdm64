@@ -1,0 +1,39 @@
+{
+  "baseline": "d149cb9a64d196efc415f6dda16a975816368d09",
+  "question": "Separate Windows-only compatibility from product-owned lifecycle in files009-011",
+  "procedure": "Read direct callers, provider bodies and teardown owners; preserve all runtime code except unchanged fail-fast ownership move.",
+  "files": {
+    "009": "009 核查：C0045 的 WOW 页域由 F 创建页表、GDT 和客户端视图，并注册 session teardown。退出保护模式前调用 leave，恢复寄存器后调用 reenter；不能只换头或整体下沉 B。归 S13 与 010 成组处理模式转换接线。源码未改，镜像净变 0 点、0 行。",
+    "010": "010 核查：与 009 共享 F 页域。leave 在清 PE 前，reenter 在保护模式段寄存器恢复后；时序属于迁移契约。归 S13 同组，未消除 C0045。源码未改，镜像净变 0 点、0 行。累计完成分类 10/116，四文件解除直接头依赖，六文件保留 S13 生命周期接线。",
+    "011": "011 审查中：C0047 VM bridge 涉及 IRQ、任务及输入生命周期，保留开放，归 S13。C0043 在本文件仅用于 invalid_virtual_instance，函数无 session 依赖；本地候选将原函数体迁 B，镜像只换 include。尚未完成构建、发布与验证，不能计入已消除。"
+  },
+  "evidence": {
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": "59e1a591f708cc05ce6bbb2acb31204c5f33b86a8f3f306661d0ea8b8b4e31c1",
+    "src/mvdm-host/dpmi32/modesw.c": "28836a7ec6efc3516e78f9e96daa1675c2b4540a2b72d4a14676d56fbf7f455c",
+    "src/mvdm-host/softpc.new/base/bios/virtual.c": "569ce1a02997b054088a460f6fe2cff005d05b830ee0cbd979fcea25ea921135",
+    "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c": "c685d4cc5ef52d4b8301946e386f5824245f7699bce90ac52f0b2d2f3c5b6f8c",
+    "src/ntvdm-exe/softpc/mvdm_vm_notification.c": "d8b843492c84d77fb39812f8af1fc1669e36e63ed5d04012a1b9d829c7740f40",
+    "src/compat/invalid_virtual_instance.c": "3fc7c8887c4a4fd3740ec349669d5af6b68f8a2b4c72c19d675a65a357273100"
+  },
+  "anchors": {
+    "pageDomain": "mvdm_softpc_wow_page_domain.c:647-710; owner teardown and CR3/CR0/GDT transitions",
+    "bridge": "virtual.c:708-725 -> mvdm_vm_notification.c:140 onward; BIOS BOP table bios.c:587",
+    "failure": "original mvdm_softpc_termination.c:98-107: RaiseFailFastException, abort, no session"
+  },
+  "progress": {
+    "reviewedFiles": 10,
+    "clearedDirectHeaderFiles": 4,
+    "deferredLifecycleFiles": 6,
+    "inProgressFile": 11,
+    "totalFiles": 116,
+    "openIds": 535,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "validation": "Candidate not yet verified or published; no runtime equivalence claim.",
+  "followUp": "Complete native failure migration and targeted validation; preserve VM bridge and page-domain work for S13.",
+  "supersededBy": "s12-p15-native-failure.json: native helper delivered; lifecycle dependencies remain open."
+}

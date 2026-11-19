@@ -115,3 +115,15 @@ five eliminated transitive, one diagnostic. Sequential review: 8/116, four
 cleared direct header dependencies, four lifecycle moves reserved for S13.
 Both cached architectures, native ABI tests and original DEM 115 assertions
 passed. Eleven images are published and hash-verified. Mirror delta is zero.
+
+## Files 009-011 ownership
+
+[Ownership evidence](s12-file009-011-ownership.json) separates the two WOW
+page-domain lifecycle callers from the native failure helper and VM bridge.
+Files 009/010 are classified for S13; 011 is a local candidate pending delivery.
+
+## P15 native failure ownership
+
+[Delivery evidence](s12-p15-native-failure.json): C0241 binds to B; C0043
+remains open for sim32.c. Eleven files reviewed, four cleared, seven lifecycle
+files reserved for S13. 534 of 617 stable IDs remain open. Mirror delta zero.

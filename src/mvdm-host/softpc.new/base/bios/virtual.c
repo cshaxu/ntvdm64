@@ -39,7 +39,7 @@
 #include "sas.h"
 #include "bios.h"
 #include "virtual.h"
-#include "mvdm_softpc_termination.h"
+#include "compat/include/invalid_virtual_instance.h"
 #include "mvdm_vm_bridge.h"
 #line 36
 #include "error.h"

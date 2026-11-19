@@ -1,0 +1,94 @@
+{
+  "baseline": "d149cb9a64d196efc415f6dda16a975816368d09",
+  "scope": "S12 P15 native failure ownership; files009-011 classified",
+  "productionChange": "Move mvdm_softpc_invalid_virtual_instance body/signature unchanged from F to B; virtual.c include only.",
+  "nativeBodyIdentity": "Exact equality after LF normalization, compared to baseline function body.",
+  "mirror": {
+    "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+    "pointsDelta": 0,
+    "linesDelta": 0,
+    "errorAndLineUnchanged": true
+  },
+  "counts": {
+    "totalStableIds": 617,
+    "open": 534,
+    "eliminated": 33,
+    "supporting": 44,
+    "eliminatedTransitive": 5,
+    "diagnostic": 1,
+    "reviewedFiles": 11,
+    "clearedDirectHeaderFiles": 4,
+    "deferredLifecycleFiles": 7,
+    "unreviewedFiles": 105,
+    "totalFiles": 116
+  },
+  "build": {
+    "x86": 0,
+    "x64": 0,
+    "targets": "Explicit cached product targets, same command set as P14"
+  },
+  "linkWitness": "ntvdm.exe.map: _mvdm_softpc_invalid_virtual_instance -> softpc-win32-bindings:invalid_virtual_instance.obj",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "2b06aec4-b92b-4b89-906a-61a82622f233",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "targeted": {
+    "result": "pass",
+    "exit": 0,
+    "scope": "intercepted object and controlled VxD boundaries, not guest execution",
+    "baseline_control": false,
+    "inputs": [
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_no_retry_fixture.c",
+        "sha256": "c3b2d0cf18c6f4311dfdb0d086d0f9e283f56f138a4e8b9d4ec4a8a4f1b290a1"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_bridge_boundary.h",
+        "sha256": "2759a2f56219fbf1d5f2ce2516a8c6b33ea9045e12b585d6d0c06f488e643fd3"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_vm_bridge.h",
+        "sha256": "ecc3d25e9dc019dff4214d4af48016b6eaa3b3d19f5c7a1af5e60169f1650155"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+        "sha256": "02b18e3ef67b6ac34dd111fec919caebcb5960a480b53ad171f1ae997f962f97"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s12-invalid-instance\\niddb\\virtual-intercept.obj",
+        "sha256": "5bf4b46761268b66ba0a8e045522a636b7be68d39b82335ee719ad12867c998b"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s12-invalid-instance\\niddb\\fixture.exe",
+        "sha256": "119a5bbc9cf925ba768ad4cdb9bd72e41f06bb2ffb7954e52cf461ef4ca8c509"
+      }
+    ]
+  },
+  "limits": [
+    "NIDDB fixture intercepts allocation and stubs fatal boundary: not a real fail-fast or guest runtime test.",
+    "VM bridge and WOW page-domain lifecycles remain open; no behavior change attempted.",
+    "C0043 remains open for sim32.c."
+  ],
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "commands": [
+    "build/t483-s12-registry/build.cmd x86 / x64",
+    "python tools/audit/verify-library-build-boundary.py",
+    "python test/observation/verify-niddb-no-retry.py --build-root build/t483-s12-invalid-instance/niddb"
+  ],
+  "verification": {
+    "eightABGraphs": "passed",
+    "niddbRollbackCases": 10,
+    "documentation": "Final documentation governance passed",
+    "diffCheck": "passed"
+  },
+  "postBuildFormatting": "Removed only blank line after final closing brace; no token or diagnostic line change. No repeated build/test under owner formatting authorization."
+}

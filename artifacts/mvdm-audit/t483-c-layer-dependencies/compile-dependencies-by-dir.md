@@ -68,14 +68,22 @@
 
 - 直接包含 · C0045 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h
 
+009 核查：C0045 的 WOW 页域由 F 创建页表、GDT 和客户端视图，并注册 session teardown。退出保护模式前调用 leave，恢复寄存器后调用 reenter；不能只换头或整体下沉 B。归 S13 与 010 成组处理模式转换接线。源码未改，镜像净变 0 点、0 行。
+
 ## 010 — src/mvdm-host/dpmi32/modesw.c
 
 - 直接包含 · C0045 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h
+
+010 核查：与 009 共享 F 页域。leave 在清 PE 前，reenter 在保护模式段寄存器恢复后；时序属于迁移契约。归 S13 同组，未消除 C0045。源码未改，镜像净变 0 点、0 行。累计完成分类 10/116，四文件解除直接头依赖，六文件保留 S13 生命周期接线。
 
 ## 011 — src/mvdm-host/softpc.new/base/bios/virtual.c
 
 - 直接包含 · C0043 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h
 - 直接包含 · C0047 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_vm_bridge.h
+
+011 审查中：C0047 VM bridge 涉及 IRQ、任务及输入生命周期，保留开放，归 S13。C0043 在本文件仅用于 invalid_virtual_instance，函数无 session 依赖；本地候选将原函数体迁 B，镜像只换 include。尚未完成构建、发布与验证，不能计入已消除。
+
+011 P15：native failure 已迁 B，函数体与签名保持不变，产品链接验证 B 对象；两架构 cached 构建和 NIDDB 十组回滚专项通过，11组件双端发布哈希通过。直接外层头 2→1；C0241 消除，C0043 仍覆盖 sim32.c，C0047 保持开放。镜像净变 0 点、0 行；累计缩减 2 点、10 行。累计分类 11/116，四文件已解除直接外层头，七文件保留生命周期接线，105 未审查。
 
 ## 012 — src/mvdm-host/softpc.new/base/ccpu386/c_main.c
 

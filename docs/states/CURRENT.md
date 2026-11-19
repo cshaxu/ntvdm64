@@ -54,6 +54,8 @@ P13 clears the remaining directory-query header dependencies in cmdkeyb.c and de
 
 P14 moves the native NT I/O facade and directory restart helper into B. File 008 demsrch.c changes only its include path. Both cached architectures, eight product A/B graphs, x86/x64 native interface checks and 115 original DEM directory assertions passed. The fixture runner now refreshes its selected archives before linking. Eleven images are published and hash-verified. [P14 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p14-native-io.json) records 535 open stable IDs, 8/116 files reviewed, four cleared direct headers and four lifecycle files reserved for S13. Mirror delta is zero; S12 cumulative reduction stays two points and ten lines.
 
+P15 moves the unchanged native invalid-VM failure helper from F to B. Both cached architectures, eight A/B graphs and ten NIDDB rollback cases passed; eleven images are published and hash-verified. [P15 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p15-native-failure.json) records 11/116 files classified: four cleared, seven lifecycle files reserved for S13, 105 unreviewed. C0241 is eliminated; 534 of 617 IDs remain open. Mirror delta is zero; cumulative reduction remains two points and ten lines.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

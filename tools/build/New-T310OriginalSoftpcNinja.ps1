@@ -1164,6 +1164,9 @@ $adapterWin32Objects += 'obj/adapter-win32/ntioapi_facade.obj'
 $graph.Add('build obj/adapter-win32/dem_restart_hint.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/dem_restart_hint.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterWin32Objects += 'obj/adapter-win32/dem_restart_hint.obj'
+$graph.Add('build obj/adapter-win32/invalid_virtual_instance.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/invalid_virtual_instance.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterWin32Objects += 'obj/adapter-win32/invalid_virtual_instance.obj'
 $crtCompatObject = 'obj/lib-win32/crt-compat/crt_compat.obj'
 $graph.Add('build ' + $crtCompatObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT')

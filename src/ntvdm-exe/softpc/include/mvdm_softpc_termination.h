@@ -18,7 +18,4 @@ void mvdm_softpc_report_cpu40_descriptor_publish(unsigned short selector,
     unsigned long gdt_low, unsigned long gdt_high, unsigned long ldt_low,
     unsigned long ldt_high);
 
-/* A stale NIDDB identity cannot safely select a device instance. */
-__declspec(noreturn) void mvdm_softpc_invalid_virtual_instance(unsigned long id);
-
 #endif
