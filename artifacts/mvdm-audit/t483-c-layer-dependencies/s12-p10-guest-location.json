@@ -1,0 +1,488 @@
+{
+  "method": "All 16 x86 product contexts with dem.h -> mvdm_guest_location.h in recorded include edges, using current Ninja commands. Suppress header guard in paired compile. This proves actual declarations are required in two consumers; it does not prove existing ownership or lease implementation is necessary.",
+  "results": [
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/dem.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/dem.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "baseline_hash": "b7188e2288adb9be372449df72ce46db81661010ea7815118554b528d9e81c83",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "omitted_hash": "b7188e2288adb9be372449df72ce46db81661010ea7815118554b528d9e81c83"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demfcb.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demfcb.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4131",
+        "C4201",
+        "C4273",
+        "C4305",
+        "C4996"
+      ],
+      "baseline_hash": "adb1cea1f38ca76598dfde9dc0dcfaeffd2675f8e4f823c29913d28a6bc024be",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4131",
+        "C4201",
+        "C4273",
+        "C4305",
+        "C4996"
+      ],
+      "omitted_hash": "adb1cea1f38ca76598dfde9dc0dcfaeffd2675f8e4f823c29913d28a6bc024be"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demdata.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demdata.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "baseline_hash": "07fbe83afbbafe7bbb1b3d9a74bbc44d2814a94988184ec43e87bf241624073f",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "omitted_hash": "07fbe83afbbafe7bbb1b3d9a74bbc44d2814a94988184ec43e87bf241624073f"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demdir.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demdir.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4273",
+        "C4996"
+      ],
+      "baseline_hash": "393298e450aa9a408e805884af1b317ad1d1d64dc51b4a1d359c2a15c000871e",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4273",
+        "C4996"
+      ],
+      "omitted_hash": "393298e450aa9a408e805884af1b317ad1d1d64dc51b4a1d359c2a15c000871e"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demdisp.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demdisp.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273",
+        "C4996"
+      ],
+      "baseline_hash": "e4fe057cd7ceeac967e0db53e5c186efe6d4e7ff01355eb6eeaeebbeb9a606f4",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273",
+        "C4996"
+      ],
+      "omitted_hash": "e4fe057cd7ceeac967e0db53e5c186efe6d4e7ff01355eb6eeaeebbeb9a606f4"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demerror.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demerror.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4273"
+      ],
+      "baseline_hash": "d209a455f5514c0476991754c065eb50b0a8d2a6f0fd15fca5dfd3e014823fcc",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4273"
+      ],
+      "omitted_hash": "d209a455f5514c0476991754c065eb50b0a8d2a6f0fd15fca5dfd3e014823fcc"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demfile.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demfile.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4057",
+        "C4101",
+        "C4131",
+        "C4201",
+        "C4273",
+        "C4305",
+        "C4554",
+        "C4996"
+      ],
+      "baseline_hash": "e35126e03e79f41bc058505151ad365b010a5bdb585c6e8b6675370c7632ed05",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4057",
+        "C4101",
+        "C4131",
+        "C4201",
+        "C4273",
+        "C4305",
+        "C4554",
+        "C4996"
+      ],
+      "omitted_hash": "e35126e03e79f41bc058505151ad365b010a5bdb585c6e8b6675370c7632ed05"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demgset.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demgset.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4057",
+        "C4201",
+        "C4244",
+        "C4273",
+        "C4706",
+        "C4996"
+      ],
+      "baseline_hash": "4bdc2149faca6eb2a43d9e7953de7700efdb12b6f4b05987be36e2b87263313f",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4057",
+        "C4201",
+        "C4244",
+        "C4273",
+        "C4706",
+        "C4996"
+      ],
+      "omitted_hash": "4bdc2149faca6eb2a43d9e7953de7700efdb12b6f4b05987be36e2b87263313f"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demhndl.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demhndl.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4057",
+        "C4201",
+        "C4273",
+        "C4701",
+        "C4703"
+      ],
+      "baseline_hash": "1a55281113c410f987869e1ad03826b6c8fda2a5bebc941c2d1ee275cc4f800f",
+      "omitted_rc": 2,
+      "omitted_warnings": [
+        "C4005",
+        "C4013",
+        "C4028",
+        "C4057",
+        "C4201",
+        "C4273"
+      ],
+      "omitted_first_error": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demhndl.c(123): error C2065: 'mvdm_guest_location': undeclared identifier"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demioctl.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demioctl.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "baseline_hash": "2a2501d3065bb965c54a20c49ca1a977bc426a38f7f136e37322957623a48c18",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "omitted_hash": "2a2501d3065bb965c54a20c49ca1a977bc426a38f7f136e37322957623a48c18"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demlock.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demlock.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "baseline_hash": "32d4f7d73ee55d1b1aa2bed6c043090b9c1fa7995b07ca9fff74fa198893eedf",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273"
+      ],
+      "omitted_hash": "32d4f7d73ee55d1b1aa2bed6c043090b9c1fa7995b07ca9fff74fa198893eedf"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demmisc.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demmisc.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273",
+        "C4996"
+      ],
+      "baseline_hash": "3783d97e24bb700a6bb2496010d1adf56317f0e8ec9ca07fe8d11592f4289e94",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273",
+        "C4996"
+      ],
+      "omitted_hash": "3783d97e24bb700a6bb2496010d1adf56317f0e8ec9ca07fe8d11592f4289e94"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demsrch.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demsrch.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4101",
+        "C4201",
+        "C4273",
+        "C4459",
+        "C4996"
+      ],
+      "baseline_hash": "e60f3cfb1cbe1479da5e6ea66b9e1b010a43bc72e936adea0d000f90165e8860",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4101",
+        "C4201",
+        "C4273",
+        "C4459",
+        "C4996"
+      ],
+      "omitted_hash": "e60f3cfb1cbe1479da5e6ea66b9e1b010a43bc72e936adea0d000f90165e8860"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demdasd.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demdasd.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4273",
+        "C4459",
+        "C4996"
+      ],
+      "baseline_hash": "7eea8b02b0b23037d7f3589e426d4cf871b6ebcbe798364e9e314d920fedf5de",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4273",
+        "C4459",
+        "C4996"
+      ],
+      "omitted_hash": "7eea8b02b0b23037d7f3589e426d4cf871b6ebcbe798364e9e314d920fedf5de"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/dem/demlabel.c",
+      "parent": "src/mvdm-host/dos/dem/dem.h",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/dem/demlabel.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273",
+        "C4996"
+      ],
+      "baseline_hash": "d4a692b15fb4513cbf17e73a70f24d0cda09ea447f3b50d6e1ea702fc6745f0f",
+      "omitted_rc": 0,
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4273",
+        "C4996"
+      ],
+      "omitted_hash": "d4a692b15fb4513cbf17e73a70f24d0cda09ea447f3b50d6e1ea702fc6745f0f"
+    },
+    {
+      "id": "C0034",
+      "source": "src/mvdm-host/dos/command/cmdmisc.c",
+      "parent": "src/mvdm-host/dos/command/cmdmisc.c",
+      "header": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "arch": "x86",
+      "graph": "worker",
+      "obj": "obj/command/cmdmisc.obj",
+      "target": "ntvdm.exe",
+      "baseline_rc": 0,
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4267",
+        "C4273",
+        "C4310",
+        "C4996"
+      ],
+      "baseline_hash": "95fd2e0ec8ae949f64a4b69127df17e68813d0cbeffd3ce9f5479bd412874f3d",
+      "omitted_rc": 2,
+      "omitted_warnings": [
+        "C4005",
+        "C4013",
+        "C4028",
+        "C4201",
+        "C4244",
+        "C4267",
+        "C4273",
+        "C4310",
+        "C4996"
+      ],
+      "omitted_first_error": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdmisc.c(533): error C2065: 'mvdm_guest_location': undeclared identifier"
+    }
+  ],
+  "conclusion": "14 identical objects; demhndl.c and cmdmisc.c fail with missing mvdm_guest_location declarations. C0034 cannot be eliminated merely by removing the header. Review read/write and command guest-location ownership together in S13. No production change."
+}
