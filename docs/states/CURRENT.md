@@ -89,6 +89,9 @@ and [complete page-domain review](../../artifacts/mvdm-audit/t483-c-layer-depend
 add28 providers/85 symbol records: combined79/79 files and345/345
 symbol records. C descriptor/IRQ carriers are identified; initialization and
 thread-exit orchestration still need lifetime proof. No production changes.
+P52 [inventory reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-four-component-reconciliation.json) confirms all1494 inventory file hashes unchanged.
+The existing migration plan groups ten chains; exact C carriers and outer-policy
+control-flow separation remain unfinished. Provider coverage is not whole-root closure.
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.

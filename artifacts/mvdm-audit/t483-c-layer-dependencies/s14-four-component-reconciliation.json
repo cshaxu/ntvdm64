@@ -1,0 +1,76 @@
+{
+  "baseline": "d9646e427",
+  "question": "Reconcile complete file inventory with provider-body coverage before selecting production migrations.",
+  "inputs": [
+    "build/t483-s14-architecture-inventory/files-with-contexts.jsonl",
+    "s14-open-provider-crosswalk.json",
+    "s14-compat-implementation-ledger.json"
+  ],
+  "procedure": "Read every inventory path and compare its current SHA256 with recorded bytes; aggregate compile/header observations and intersections with explicit body-review records. No source or build change.",
+  "observations": {
+    "inventory_files": 1494,
+    "source_files": 1284,
+    "changed_inventory_file_hashes": [],
+    "rows": [
+      {
+        "component": "compat",
+        "files": 124,
+        "source_files": 123,
+        "compiled": 49,
+        "included_headers": 72,
+        "not_observed": 3,
+        "direct_provider_bodies": 0,
+        "compat_body_records": 49
+      },
+      {
+        "component": "mvdm-host",
+        "files": 1018,
+        "source_files": 872,
+        "compiled": 435,
+        "included_headers": 434,
+        "not_observed": 149,
+        "direct_provider_bodies": 0,
+        "compat_body_records": 0
+      },
+      {
+        "component": "non-mvdm",
+        "files": 228,
+        "source_files": 176,
+        "compiled": 87,
+        "included_headers": 86,
+        "not_observed": 55,
+        "direct_provider_bodies": 0,
+        "compat_body_records": 0
+      },
+      {
+        "component": "ntvdm-exe",
+        "files": 124,
+        "source_files": 113,
+        "compiled": 60,
+        "included_headers": 49,
+        "not_observed": 15,
+        "direct_provider_bodies": 20,
+        "compat_body_records": 0
+      }
+    ]
+  },
+  "interpretation": [
+    "The 79-provider census spans outer components; only 20 providers are inside the requested four roots. It is not a review of 79 arbitrary four-root files.",
+    "Zero provider-body intersection for C is expected for an outward-provider list, not evidence that C callers are unreviewed or clean. Reconcile existing caller records separately.",
+    "Compile selection and include observation are separate columns, not proof of archive inclusion or runtime use. Non-observation cannot authorize deletion.",
+    "All inventory file hashes match the current sources. Prior source evidence remains reusable; no new build or runtime validation follows from this check."
+  ],
+  "migration_plan": "docs/etc/operations/t483-compat-implementation-migration-plan.md",
+  "remaining": [
+    "Join C caller records, associated bodies and prior eliminated-edge evidence to the four-root inventory.",
+    "Resolve exact C carriers and outward-policy control-flow boundaries for the ten consolidated chains.",
+    "Measure mirror deltas before production relocation; request approval for increases."
+  ],
+  "dependency_ids_eliminated": 0,
+  "production_changed": false,
+  "input_sha256": {
+    "build/t483-s14-architecture-inventory/files-with-contexts.jsonl": "f6becaa1db74982978308f4da5f7351b9a0b457b150aac673254559e245319bc",
+    "s14-open-provider-crosswalk.json": "a8b0dc9497811184178eb676ef5779988ff1c930a471999260d0f4de45dd9653",
+    "s14-compat-implementation-ledger.json": "66d5e5a19183c0e3b3a46182394674618ed0e5dd61d263bcdc4bf16f839be376"
+  }
+}

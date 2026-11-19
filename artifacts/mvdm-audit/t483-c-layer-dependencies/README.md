@@ -519,3 +519,8 @@ P51 [complete page-domain review](s14-page-domain-complete-ownership.md) covers
 the last direct-symbol provider:79/79 bodies and345/345 symbol records.
 This is not complete four-root migration design or dependency elimination.
 Machine/USER projection requires C ownership; no new B callback exception.
+
+P52 [four-root reconciliation](s14-four-component-reconciliation.json) verifies
+all1494 inventory source hashes unchanged and distinguishes provider coverage
+from caller coverage. The existing migration plan now consolidates ten chains;
+exact C carriers and control-flow separation remain design work.

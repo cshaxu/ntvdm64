@@ -160,3 +160,51 @@ and dependency ledger without losing stable IDs or historical evidence.
 The [first-chain inventory](../../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-implementation-migration-first-chain.json) pins source hashes and all eight operation locations, binding invariants and test gaps. It is source evidence, not a delivered migration.
 
 [S13 closure](../evidence/m0-t483-s13-implementation-closure.md) records the completed first chain and its limits. Current now admits S14; subsequent rows remain planned.
+
+## P52 consolidation: execution owners, not header destinations
+
+Source basis: complete direct-provider body coverage at P51 (79 files,
+345 symbol rows), the 49-body compat ledger, historical session review and
+four-root inventory. These establish the following chain decisions. They do
+not establish that every source in the four roots has been fully audited.
+No new callback exception or production relocation is admitted by this table.
+
+| Order / chain | State and execution owner | Required change, superseded indirection and validation |
+| --- | --- | --- |
+| 1. Guest access and leases (S14) | C owns translation/SAS effects; B owns host buffers and borrow lifetime; F selects product lifetime. | Separate lease storage from C reads/writes: C performs machine access at explicit acquire/commit boundaries, B must not call installed C access callbacks. Reconcile all direct and indirect consumers before changing the ABI. Preserve partial writes, failure and borrowed-view lifetime; never replace SAS with raw memcpy. Remove the old provider slots only after callers use the final chain. |
+| 2. WOW machine context (S14 prerequisite) | C owns CR3/CR0/GDT and guest mapping; B owns existing shared clock; F admits startup and chooses quiescent teardown. | Resolve existing original C carrier and measure mirror cost before implementation. Remove F leave/reenter providers and their B DPMI table entries when C owns the actual transition. Preserve DOSX GDT restoration, A20 precondition, failed initialization cleanup and protected/real-mode round trips. No whole-domain 24-operation B provider table. |
+| 3. USER projection and retained generations (S14/S18 dependency) | C owns original USER layout and guest graph interpretation; native USER owns native objects; independent copied-graph validator already B. | Keep one backing/borrow/retirement authority. Decide original C insertion points jointly with WOW consumers, not a 2673-line transplant into an unrelated mirror file. Preserve pinned old generations across handle reuse, logical withdrawal before physical free, class reachability and atomic graph/menu commit. Host-storage deallocation must not become arbitrary outer reentry. |
+| 4. Console mechanics (S15) | B owns independent buffers, native identity/conversion and cleanup; E/F own authenticated endpoint and presentation transitions. | Extract actual resource bodies with their state. Four Console callbacks currently installed from F remain violations until routed operation ownership is resolved. Do not substitute local Console APIs for the selected frontend. Preserve release barrier, producer join, input receipts, layout/code page and off-screen/partial transfer semantics. |
+| 5. COMMAND capture (S16) | B owns bounded copied command/environment/handles, capture epoch and borrowed views; C owns DOSWOW/CDS interpretation; F owns launch policy. | Move capture storage and implementation using the existing B context, not a session pointer accessor. C supplies machine-derived data through explicit operations; remove native-child forwarding entries after migration. Preserve single active ordinary capture and separate explicit VM-capture lifetime. Capture finish is not task completion. |
+| 6. Launch, CSR and request completion (S16) | C owns original classification and retained record algorithms; NTSRV owns request identity/authorization/completion; D/F own transport and composition. | Split product policy at its real call boundary. cmdCreateProcess's apparent CreateProcess call currently reaches Run16/frontends/capabilities; moving that wrapper into B is forbidden. Preserve suspended-child handle ownership, reentry counters, receipt generation, return-code/waiter association and rollback handoff. The exact synchronous boundary is a design obligation, not permission to add callbacks. |
+| 7. Thread and lifecycle binding (S16 prerequisite) | Existing B host_context owns binding/resource mechanics; C owns CPU-thread state; F owns thread admission/cancellation and final product completion. | Reconcile WOW bind/unbind hooks and exception exits before removing D bridge/F providers. No second TLS, no whole-session move. Failed unbind with live USER state must retain ownership; cleanup waits for users, never guesses quiescence from timeout. |
+| 8. Redirector, printer and devices (S17) | C owns segment/VDM_TIB/CPU-device semantics; B owns native device or buffer mechanics; outer code owns connection admission. | Reuse delivered SAS and lease implementations; eliminate F-to-C guest-copy detours. Preserve chunked partial-copy and OEM bounds. Resolve printer NtVdmControl close provider without restoring hardware-V86 monitor. IRQ/reset helpers belong with original C device providers, not B callback facades. |
+| 9. Native USER edges (S18) | B owns SDK-only operations with explicit inputs; C owns private WND/CLS/FNID and original callbacks; F composes product runtime. | Migrate complete object/class/message/resource subgroups; retain exact-generation references through callback reentry. Keep native object lifetime distinct from guest projection. Do not rewrite retained original controls wholesale using modern controls, or move private C layouts into B. |
+| 10. Original-owned helpers and final reconciliation (S19) | C owns descriptor/effective-address/vector/IRQ operations and original storage; product entry points stay F. | Recover at actual original carriers, minimize mirror changes and remove old F providers. Suffix descriptors, CsrPortHeap and optional hooks are separate from Run16/NTSRV main bodies. Recheck final build/link providers, forced/transitive includes, imports and residual service installations. |
+
+An independent host resource can move to B without moving its product owner:
+F acquires admission, calls the inner operation, and chooses when to release
+it. Conversely, a C caller that synchronously invokes product policy cannot
+be fixed by placing a typedef or forwarder in B. Such a call needs a real
+control-flow separation, or a change in the calling code's ownership. The
+final design must show that separation and its original-semantic cost before
+production changes; the current inventory does not yet justify one universal
+adapter for every operation.
+
+### Finite remaining design checks
+
+1. Reconcile the four-root file inventory against all body/chain evidence,
+   including already eliminated direct edges. Non-observed compilation is not
+   proof of irrelevance; no file is deleted from this audit on that basis.
+2. Resolve the 60 header, 12 include-root and one image-import records against
+   their current actual users; their absence from the 79-provider body list
+   must not hide them. Preserve the 418 stable open IDs until proved removed.
+3. For each chain above, assign exact original C carriers or B destination,
+   list all state/lifetime callers and removal sites, then measure candidate
+   mirror block/line delta. Any increase still needs the owner's approval.
+4. Reconcile indirect callbacks and teardown providers with these same chains;
+   do not count callbacks as new approved exceptions or as eliminated edges.
+5. Only after the complete migration ledger is ready, implement each admitted
+   whole chain and run the required cached build, publication, targeted tests,
+   commit and push. Body review, design readiness and delivered elimination
+   remain separate states.
