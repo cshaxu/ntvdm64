@@ -534,3 +534,8 @@ P54 [C caller reconciliation](s14-c-caller-reconciliation.json) joins190 histori
 caller files with current IDs:179 source-unchanged and11 cumulative source
 deltas reviewed. Forwarding-only header changes are explicitly distinguished
 from P19/P24/P25 implementation migration; no dependency status promotion.
+
+P55 [lease design without outward callbacks](s14-lease-no-callback-design.json)
+traces B location/access through C SAS and specifies resource-versus-access
+ownership. Eight of ten location operations still perform guest access; P19
+is not proof of B independence. No production or ledger-status changes.

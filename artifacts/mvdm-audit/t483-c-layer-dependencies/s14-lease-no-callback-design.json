@@ -1,0 +1,88 @@
+{
+  "baseline": "9cb965c05",
+  "question": "Remove the actual B-to-C memory callbacks without retaining a second access path or changing existing lease failure semantics.",
+  "procedure": "Read complete B lease, access and location implementations; inspect provider installer, session admission wrappers and DOSWOW directory copy; search src consumers separately from tests. No product edits.",
+  "input_sha256": {
+    "src/compat/guest_memory_lease.c": "f60a88a8691fbc8fb2c787e10ae58d7014f5129c7188606f538217ec65d55ad5",
+    "src/compat/include/guest_memory_lease.h": "ffb7a0c5f6e9c1795939745e358323ae1ffa1e22797d52486439452a11fdf008",
+    "src/compat/guest_memory_access.c": "997a61a96aa1e64943ce24e369a0743749951e7f402dfff2830d725b519de570",
+    "src/compat/guest_location.c": "64625b0cb2f50720dc152db9a9526508141ccb4d8cb0344b51167af723344af3",
+    "src/compat/include/guest_location.h": "76e7340b5da6cf8b4239bd8adeb76552e1bb6c4bc4ebe493977c12a8accfa745",
+    "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c": "a6ecac8596658573d487b17c76ccbeeea11dad41ed8eeede9a13d5f5a29ebbe1",
+    "src/ntvdm-exe/session/session.c": "5bd4dc53cfa781f00d3c3d6f750d45be33bbb5ab027719c079101ff9df6fdb80",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c": "b365b3bc47acbe8ffcddc0bd9c589d2ba40faca089850882e8464bde832a6445"
+  },
+  "current_chain": [
+    "C/F caller -> B guest_memory_access or guest_location",
+    "B lease acquire hydrates via installed C read callback, including WRITE-only leases",
+    "B lease release validates slot/epoch, optionally invokes C write, then always frees consumed valid lease",
+    "F mvdm_softpc_guest_memory_begin installs C SAS callbacks; F session gates ACTIVE admission",
+    "B copied access holds shared copy_lock while invoking C; end holds exclusive lock before freeing slots"
+  ],
+  "findings": [
+    {
+      "topic": "Location ownership",
+      "evidence": "guest_location.c has ten public operations: from_far_value and set_real_mode are scalar; read_far, acquire_far, read_u16, copy_c_string, copy_to_guest, acquire, acquire_vm and release reach lease/SAS.",
+      "conclusion": "P19 actual implementation relocation removed F providers, but those eight functions still indirectly depend on C. Do not treat B placement as architectural closure."
+    },
+    {
+      "topic": "Write hydration",
+      "evidence": "guest_memory_lease_acquire invokes context->read for every nonempty lease regardless of access.",
+      "conclusion": "A split must still hydrate write-only leases before publication. Do not optimize away that read or change failure conditions as part of ownership migration."
+    },
+    {
+      "topic": "Consumed failure",
+      "evidence": "A valid release frees and zeroes the slot even if provider write fails; foreign/stale slots return without dereference or consumption.",
+      "conclusion": "C must validate through B before touching lease fields, perform write when required, then unconditionally consume that validated lease. Preserve result and no-retry ownership."
+    },
+    {
+      "topic": "Copy lifetime",
+      "evidence": "Shared copy_lock spans provider call; provider end takes exclusive lock. Copy-only clients do not consume the eight borrowed slots.",
+      "conclusion": "Split lock/epoch scope from machine access, holding the existing lock across C operation. Do not add a parallel lifetime registry or move the call outside the protection."
+    },
+    {
+      "topic": "Chunk and location contracts",
+      "evidence": "guest_memory_access uses 4096-byte chunks and overlap-directed move; location strings stop at NUL or 16-bit offset exhaustion; acquire_vm adds explicit linear base with overflow check.",
+      "conclusion": "Keep these observable contracts and prior committed chunks on later failure. Do not reinterpret VM base as a host pointer or assume a particular guest OS."
+    }
+  ],
+  "recommended_split": {
+    "B": [
+      "Keep the existing eight-slot resource owner, epoch and copy/retirement lock; remove read/write/context provider fields.",
+      "Offer explicit reserve/validate/consume and begin/end copy-scope mechanics, with no callback execution. Names/signatures are a design proposal, not a new committed ABI.",
+      "Retain scalar location value construction and independent memory types. Reuse the existing host_context association; no second session/TLS."
+    ],
+    "C": [
+      "Own checked SAS acquire/hydration/commit and copy operations at the existing SAS provider boundary. Candidate carrier is selected ccpusas4.c; exact insertion and mirror cost must be measured before approval.",
+      "Own location operations that perform guest access, or replace them at actual callers with the same C access path and B scalar values. Do not leave an identically complex shim in F/B.",
+      "Maintain current access symbol names/ABI where feasible; declarations consumed by C must cease importing outer private headers."
+    ],
+    "F": [
+      "Keep ACTIVE admission, owner selection and shutdown timing. Call inward C access directly when a product needs guest bytes.",
+      "Remove provider installer/table when no production consumer uses it. Session wrappers may enforce product admission, but C must not call those wrappers.",
+      "Preserve DOSWOW registration epochs and original DOSWOWDATA/CDS decoding with C ownership; do not move private DOS structures into B."
+    ]
+  },
+  "consumer_cohorts": [
+    "Original EMS copy/move and XMS descriptor reads",
+    "DEM/COMMAND location and scalar access",
+    "VM command/application/executor explicit-owner accesses",
+    "Debugger descriptor reads",
+    "Redirector guest copy and worker copy",
+    "WOW callback frame leases",
+    "DOSWOW directory registration/copy and session shutdown"
+  ],
+  "required_validation": [
+    "Write-only read failure before lease publication",
+    "Foreign-owner/epoch-invalid release has no access or free",
+    "Failed commit still consumes valid lease exactly once",
+    "Eight-slot exhaustion and copy-only path independence",
+    "Retirement waits for active copy; no wait on unrelated guest/hardware work",
+    "Cross-page preflight, permissions and no unintended guest exception reentry",
+    "Chunk partial progress and overlapping moves",
+    "VM linear-base addition, far indirection, string terminator and offset boundary",
+    "Cross-image WOW/redirector imports resolve the same owner/context",
+    "Real EMS/XMS/DOS/WOW targeted regressions and coherent release"
+  ],
+  "status": "Complete-chain design refinement; exact API and measured mirror patch remain pending. No dependency IDs eliminated, no code/build/runtime changes."
+}

@@ -96,6 +96,8 @@ P53 [storage-owner design](../../artifacts/mvdm-audit/t483-c-layer-dependencies/
 Mirror cost and final ABI candidates remain to validate; statuses stay open.
 P54 [C caller reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-c-caller-reconciliation.json) covers190 prior callers:179 source-unchanged,11 cumulative deltas reviewed.
 COMMAND/DPMI/VM header forwarding remains unresolved, separately from delivered SAS/XMS/mapping implementations.
+P55 [lease split design](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-lease-no-callback-design.json) preserves hydration, consume-on-failed-commit and copy-retirement locking while removing B callbacks to C.
+Eight location access operations also require C ownership; exact ABI/mirror candidate remains pending.
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.
