@@ -551,9 +551,13 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+084 P44: Keep original multiline selection, line building, paste, scroll/timer scheduling and paint order C. Native system-timer leaves already B under P42. Remaining task context, callbacks and mapped native-return/publication are S13. FillWindow native API is B, while the F wrapper around it owns current native-call scope and CTLCOLOR return handling. Mirror delta0 points/0 lines; see s12-p44-control-brushes.json.
+
 ## 085 — src/non-mvdm/windows/core/ntuser/client/editsl.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+085 P44: Keep original single-line edit and hide/BeginPaint/EndPaint/show ordering C. Borrowed system-brush storage/resource provider moved B unchanged. Other mapped window/caret/native returns belong to shared S13 boundary, not an entire-file move. Mirror delta0 points/0 lines; see s12-p44-control-brushes.json.
 
 ## 086 — src/non-mvdm/windows/core/ntuser/client/edmlonce.c
 

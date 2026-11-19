@@ -103,7 +103,6 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_edit_call_bindings.c'),
     (Join-Path $adapterWow 'wow_control_brush_bindings.c'),
     (Join-Path $adapterWow 'wow_edit_conversion_bindings.c'),
-    (Join-Path $adapterWow 'wow_edit_drawing_bindings.c'),
     (Join-Path $adapterWow 'wow_control_draw_state.c'),
     (Join-Path $adapterWow 'wow_button_resources.c'),
     (Join-Path $adapterWow 'wow_button_lifetime.c'),
@@ -686,6 +685,9 @@ foreach ($source in $providerSupportSources) {
         $ninja.Add('  cflags = $adapter_cflags')
     }
 }
+$supportObjects.Add('obj/compat/wow_control_brushes.obj')
+$ninja.Add('build obj/compat/wow_control_brushes.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_brushes.c')))
+$ninja.Add('  cflags = ' + $nativeCflags)
 $supportObjects.Add('obj/compat/wow_icon_size.obj')
 $ninja.Add('build obj/compat/wow_icon_size.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_icon_size.c')))
 $ninja.Add('  cflags = ' + $nativeCflags)

@@ -94,7 +94,9 @@ P41: [drawing ownership and native-export investigation](../../artifacts/mvdm-au
 
 P42: [native control migration and verified eleven-image publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p42-native-controls.json).
 
-P43: [EDIT ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p43-edit-ownership.json). Review83/116:16 clears,55 lifecycle,12 source/ABI,33 unreviewed;505/617 open. Source unchanged, P42 package retained. Mirror delta0/0, cumulative reduction2 points/10 lines. Only S12 active.
+P43: [EDIT ownership classification](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p43-edit-ownership.json).
+
+P44: [control brushes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p44-control-brushes.json). Review85/116:16 clears,57 lifecycle,12 source/ABI,31 unreviewed;503/617 open. Native resources moved B unchanged. Both cached builds, drawing fixture and isolated Win16 frontiers passed; eleven images published and hash-verified at both destinations. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

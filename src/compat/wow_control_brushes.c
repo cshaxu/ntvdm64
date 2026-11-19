@@ -1,4 +1,4 @@
-#include "wow_edit_drawing_bindings.h"
+#include "include/wow_control_brushes.h"
 
 /* ADAPTER-WOW-064. Original Microsoft kernel/init.c LW_BrushInit's
  * monochrome pattern, pinned source/hash in the S3 source ledger. Only
