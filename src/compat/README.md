@@ -258,3 +258,10 @@ provide the existing alert-and-join operation using only native host handles.
 The caller retains thread startup and lifetime policy. The native import
 keeps the NtAlertThread ABI from OpenNT public/sdk/inc/ntpsapi.h:792-797;
 no original header, session state or outer component is required by B.
+
+## Native thread query ordinal
+
+`include/ntpsapi_wow32.h` supplies the unchanged `ThreadBasicInformation`
+ordinal (zero), from OpenNT public/sdk/inc/ntpsapi.h:558-559. The caller
+provides the native THREADINFOCLASS type; this header has no WOW state or
+outer-component dependency. The original precomp.h include is unchanged.

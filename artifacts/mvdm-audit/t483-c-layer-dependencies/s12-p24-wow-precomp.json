@@ -1,0 +1,54 @@
+{
+  "baseline": "b5a5351f97f12415e3877578d7480f888ed59a49",
+  "question": "Review all five direct outward headers in file036 precomp.h; relocate independent native ordinal without editing the mirror.",
+  "procedure": "Read native ordinal and fixed original enum; trace actual consumers in wkman/wole2, wkernel/wow32, wuclip, menu/parser and USER state providers. Inspect selected build search paths and final compiler dependency records.",
+  "file": "src/mvdm-host/wow32/precomp.h",
+  "dispositions": {
+    "C0069": "Unchanged native THREADINFOCLASS zero ordinal moved F to B; original include spelling preserved. No C type or outer implementation dependency in this header.",
+    "C0016": "Directory queries already B, but same D paths header also exposes session-owned SYSTEM.INI shadow staging used by wkernel. Cannot move mixed declaration wholesale to B; S13 lifetime/input boundary.",
+    "C0082": "wow_clipboard_opened updates epoch and calls original W32EmptyClipboard for external clipboard ownership. Original guest-handle cleanup prevents treating whole helper as native-only B. S13 clipboard boundary.",
+    "C0108": "LoadMenuIndirect binding delegates retained CreateMenuFromResource with current task CLIENTINFO and task-associated native menu calls. S13 execution/native object boundary; not a plain USER API alias.",
+    "C0125": "Private USER indices/procedures use WOW window/class borrowed state and immutable guest callbacks; discovery publishes shared identities; message/paint APIs use native-call handoff and return publication. S13 runtime/alias/callback boundary. No blanket claim that every helper requires permanent outer placement."
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "proof": "No mirror file changed, including precomp.h and error/line directives."
+  },
+  "progress": {
+    "reviewedFiles": 36,
+    "clearedDirectHeaderFiles": 9,
+    "deferredLifecycleFiles": 21,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 80,
+    "totalFiles": 116,
+    "openIds": 521,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "Both cached architectures complete; WOW32 header consumers rebuilt.",
+    "compiler": "wkman.obj and wole2.obj current VALID dependencies resolve compat/include/ntpsapi_wow32.h, not the former F path.",
+    "publication": "11 images hash verified at assets/release and O:/winnt/system32; no stopped processes.",
+    "package": "bc6e4899-0a3a-4135-ae55-c4c7b120fe7f",
+    "identity": "All eleven full images equal P22 after masking package GUID and COFF/debug-directory timestamps only. Raw hashes differ.",
+    "runtime": "Repeated runtime tests waived under owner authorization for equivalent images; no new guest runtime claim.",
+    "gates": "PASS: eight production A/B graphs and documentation governance."
+  },
+  "sha256": {
+    "src/mvdm-host/wow32/precomp.h": "2d023cf0ec5014d334eae420563eb966fc6777c019def155017504d307948f0d",
+    "src/compat/include/ntpsapi_wow32.h": "9e850d764dd61129ef11743ee6427791ddb967e832527e2cc90e5b6edf6f7642",
+    "src/common/wow/paths.h": "49ddc12803dfb999d1da5bc996ea15ee784c417e5e71223d26e3794a606d5177",
+    "src/wow32-dll/source/wow_clipboard_epoch.c": "71a0c5795f0fb3d988c67d7abf5c0f1cbc895856ae8034ce55b4c0e0fb5a107b",
+    "src/wow32-dll/source/wow_private_user_compat.c": "7d6392e71fff4fee054cb2eedec29f6ff3d711d2d849c58ac9252970c6fdd40c",
+    "src/wow32-dll/source/wow_user_private_access.c": "ba8081be96b4bc1859aa25de555e0251ef5a3a386bb411bda43f9c4cfac9a789",
+    "src/wow32-dll/source/wow_user_discovery.c": "766160007de138f7c3055dc171b0ad6b7b65b1c0a2c18c098633712e38a227a0",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089",
+    "O:/repos.external/OpenNT/public/sdk/inc/ntpsapi.h": "cafd48b3a9c672c6a18503d4565e7864a284ec029f63ae04ff221c58a2db5148",
+    "build/t483-s12-wow-precomp/x86.log": "4e91244baadc520fc91b85a55c3a70d0bb979ca08949658dda183d60136186dd",
+    "build/t483-s12-wow-precomp/x64.log": "8d3297db653c1b1ce979dc7b27bbf1f5ab25e5593d063c59f06de4be3ee4adac",
+    "build/t483-s12-wow-precomp/normalized.json": "a619014f7c381dd87239c0626a7afb4c24a74b71e74c3f0fe5ab7c91c263e5a4",
+    "build/t483-s12-wow-precomp/includes.json": "61a376a129a057c5bee698d025a9b79d4b65f6dab1fe2bf37c51f805017180dd"
+  }
+}

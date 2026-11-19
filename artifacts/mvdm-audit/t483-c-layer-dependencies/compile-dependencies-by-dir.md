@@ -251,6 +251,8 @@
 - 直接包含 · C0108 · wow32-dll · src/wow32-dll/include/wow_menu_parser_bindings.h
 - 直接包含 · C0125 · wow32-dll · src/wow32-dll/include/wow_user_private_access.h
 
+036 P24：C0069 native thread ordinal unchanged to B; mirror include spelling unchanged. Other four headers retain session shadow, clipboard cleanup, task menu parser and USER alias/callback ownership. S13; see s12-p24-wow-precomp.json. Direct outer headers5→4, mirror0点/0行，#error/#line不变。
+
 ## 037 — src/mvdm-host/wow32/walias.h
 
 - 直接包含 · C0014 · common · src/common/wow/gdi_alias.h
