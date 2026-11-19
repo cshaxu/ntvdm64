@@ -500,3 +500,7 @@ provider files and267/345 symbol records; direct statuses remain unchanged.
 [Device/presentation ownership](s14-device-presentation-provider-ownership.md)
 adds eight complete provider bodies/twenty symbol rows. Combined coverage
 is65/79 providers and287/345 symbol rows; no dependencies eliminated.
+
+[Request/lifecycle ownership](s14-request-lifecycle-provider-ownership.md) adds eight complete bodies.
+Combined coverage is73/79 providers and302/345 symbol rows; no dependency
+elimination or production migration is claimed.
