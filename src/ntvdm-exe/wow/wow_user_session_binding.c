@@ -1,4 +1,4 @@
-#include "wow_user_session_binding.h"
+#include "include/wow_user_session_binding.h"
 
 static __declspec(thread) wow_user_runtime_thread current_binding;
 

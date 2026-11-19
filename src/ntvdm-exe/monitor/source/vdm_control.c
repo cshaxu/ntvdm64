@@ -1,5 +1,5 @@
-#include "vdm_control.h"
-#include "session.h"
+#include "../include/vdm_control.h"
+#include "../../session/session.h"
 
 typedef struct adapter_vdm_monitor_query_dir_binding {
     session *owner;

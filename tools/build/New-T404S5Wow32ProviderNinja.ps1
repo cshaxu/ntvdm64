@@ -375,7 +375,6 @@ $includeRoots = @(
     'src',
     'src/compat/include',
     'src/wow32-dll/include',
-    'src/ntvdm-exe/wow/include',
     'src/mvdm-host/wow32',
     'src/mvdm-host/inc',
     'src/mvdm-host/softpc.new/base/inc',
@@ -385,11 +384,7 @@ $includeRoots = @(
     'src/non-mvdm/windows/core/ntuser/inc',
     'src/non-mvdm/public/internal/windows/inc',
     'src/non-mvdm/public/internal/shell/inc',
-    'src/non-mvdm/private/windows/inc',
-    'src/ntvdm-exe/softpc/include',
-    'src/ntvdm-exe/command/include',
-    'src/ntvdm-exe/monitor/include',
-    'src/ntvdm-exe/session'
+    'src/non-mvdm/private/windows/inc'
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
 $force = '/FI "' + (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h') + '"'

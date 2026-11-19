@@ -3,7 +3,7 @@
 
 #include <nt.h>
 #include <vdm.h>
-#include "session.h"
+#include "../../session/session.h"
 
 typedef NTSTATUS (*adapter_vdm_monitor_query_dir_fn)(void *context,
     PVDMQUERYDIRINFO query);

@@ -1,4 +1,4 @@
-#include "wow_gdi_alias.h"
+#include "include/wow_gdi_alias.h"
 
 #define MVDM_WOW_GDI_SLOT_COUNT 0x4000u
 /* Original WOW class/CTLCOLOR consumers reserve values through

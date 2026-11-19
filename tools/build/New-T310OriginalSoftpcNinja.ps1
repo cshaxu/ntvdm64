@@ -123,7 +123,6 @@ $hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
 $adapterSoftpcRoot = Join-Path $root 'src/ntvdm-exe/softpc'
 $adapterWin32Root = Join-Path $root 'src/ntvdm-exe/win32'
 $hostCompatSource = Join-Path $root 'src/compat/opennt_support_rtl.c'
-$hostCrtRedirect = Join-Path $root 'src/ntvdm-exe/win32/mvdm_crt_redirect.h'
 $softpcRename = '/Dterminate=mvdm_softpc_terminate '
 $run16Root = Join-Path $root 'src/run16-exe'
 $frontendRoot = Join-Path $root 'src/ntcon-exe'
@@ -723,10 +722,7 @@ $includeRootPaths = @(
     'src/mvdm-host/softpc.new/base/inc',
     'src/ntvdm-exe/softpc/include',
     'src/ntvdm-exe/command/include',
-    'src/ntvdm-exe/monitor/include',
-    'src/wow32-dll/include',
-    'src/ntvdm-exe/wow/include',
-    'src/ntvdm-exe/session'
+    'src/wow32-dll/include'
 )
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $softpcIncludeRootPaths = [System.Collections.Generic.List[string]]::new()
@@ -781,7 +777,8 @@ $authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INL
     '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" '
 $authoredSoftpcFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ')
 $ccpuFlags = $baseFlags
-$hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
+# Keep the original SoftPC host's CRT spellings private to its source group.
+$hostFlags = $baseFlags + ' /Dgetenv=mvdm_host_getenv /Dfprintf=mvdm_host_fprintf /D_assert=mvdm_host_assert'
 # XACTSRV's selected local-provider bodies retain the original RAP-to-native
 # conversion.  On modern Windows the ANSI NetUse entry no longer preserves the
 # `USE_INFO_1` contract, whereas its native Unicode counterpart does.  Select
