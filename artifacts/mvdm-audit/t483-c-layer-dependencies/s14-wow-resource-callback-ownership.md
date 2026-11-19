@@ -354,3 +354,45 @@ Those distinctions are migration invariants; this review does not claim that
 every existing adaptation is minimal or that all original alternatives have
 been proved unavailable. Destination carriers and mirror costs remain design
 work. Direct dependency counts and production package identity are unchanged.
+
+## Control state and default-window boundary
+
+Against P39 `23035c8f6`, complete seven further bodies: control_draw_state,
+control_fnid, control_state, default_message_bindings, default_native_bindings,
+default_state_bindings and default_window_bindings (all under
+`src/wow32-dll/source`, with `.c` suffix). This brings this record to 29 bodies.
+Read the corresponding default/drawing headers, original server.c message-table
+initialization, drawing precomp aliases and the selected control finalizer.
+The larger edit_state_bindings.c is only partially read and is not counted.
+
+| File | Concrete disposition |
+| --- | --- |
+| wow_control_draw_state.c | DC/bitmap/lock/atlas acquisition and disposal are candidate B resource mechanics, with screen bits/brushes supplied as values. Original ClientDrawState invocation and original-global binding remain a separate C boundary. The whole body cannot move B unchanged because it calls that C algorithm and reads the F edit context. |
+| wow_control_fnid.c | Extracted original NtUserSetWindowFNID algorithm now exposed as wow_edit_set_window_fnid: validates PWND, reads GETFNID and mutates fnid. It belongs with C private window state, not B; original ntstubs retirement remains approved and is not silently reversed. A bounded C carrier needs an explicit mirror/provenance decision. |
+| wow_control_state.c | Extracted original SetWindowState/ClearWindowState retain TestWF and private operation semantics. Preserve these original bodies while resolving their C state provider; public SetWindowLong is not an established substitute for internal WF bits. |
+| wow_default_message_bindings.c | INIT_ONCE invokes C InitMessageTables, publishes FNID-indexed WNDMSG arrays, registers SHELLHOOK, and frees all partial allocations on failure. The table algorithm/state is C; native allocation and message registration may use B/public APIs. Moving the initializer B would introduce a C callback dependency. |
+| wow_default_native_bindings.c | FindNCHit adaptation calls native DefWindowProcW for host-owned nonclient geometry, but first retains exact PWND and crosses the WOW execution boundary. Split those C obligations from the native call, preserving existing approved modern-host behavior. CsSendMessage admits only the explicit default-window operation and zero extra data. |
+| wow_default_state_bindings.c | System color/border/display sampling is B-eligible finite data capture; initialization of original tables and current invocation storage is not. SPI_GETBORDER supplies logical border units; padded-frame pixel metrics are not interchangeable. Shell-message initialization must not call native SetTaskmanWindow. |
+| wow_default_window_bindings.c | Original default processing, retained PWND, creation facts and stored-name locking remain C responsibilities. Only WM_GETTEXT/WM_GETTEXTLENGTH take the name lock, around the non-callback original branch. The WM_CTLCOLORSTATIC fallback for unavailable creator facts preserves the approved native-host boundary. |
+
+The drawing lifetime requires special care without a second resource registry:
+original scratch bitmap growth changes the owned bitmap through
+wow_control_draw_select, while arbitrary application callback selections are
+borrowed. Cleanup reselects the original bitmap before deleting the DC and
+owned scratch; exceptional return restores the caller viewport and prior TLS
+context. A B resource object can implement this without knowing Run16 or task
+requests, but its interface must not call ClientDrawState or fetch F TLS.
+
+`non-mvdm/windows/core/ntuser/kernel/server.c:676` is an existing original
+InitMessageTables carrier. Its gSharedInfo mapping currently selects the F
+message-state global. Resolving this means moving actual table storage and
+initialization ownership, not merely relocating a declaration. The retained
+original arrays and FNID indexing make wholesale substitution unnecessary.
+
+The native default-window implementation is an approved stopping boundary,
+not evidence that every omitted USER server algorithm must be reimported.
+Conversely, moving an original control-private algorithm into compat would
+create another B-to-C exception. The migration plan must preserve both rules.
+These source conclusions identify destinations and necessary splits; they do
+not approve a net mirror increase or establish final candidate equivalence.
+No production edits, tests, publication or dependency elimination occurred.

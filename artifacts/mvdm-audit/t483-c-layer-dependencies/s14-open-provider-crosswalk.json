@@ -1,5 +1,5 @@
 {
-  "baseline": "f9e4e8b1d",
+  "baseline": "23035c8f6",
   "kind": "open-dependency-to-provider-crosswalk-not-closure",
   "source_ledger_sha256": "b094cccf3aee51eb32e31201d8ecc2ff0ba7a4dc0a1d8d21735f9b08df021cfb",
   "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. No status promotion, new IDs or dependency rescan.",
@@ -13,9 +13,9 @@
     },
     "target_groups": 152,
     "symbol_provider_files": 79,
-    "wow_reviewed_bodies": 22,
-    "symbol_provider_files_with_wow_body_review": 16,
-    "symbol_records_in_reviewed_bodies": 114,
+    "wow_reviewed_bodies": 29,
+    "symbol_provider_files_with_wow_body_review": 23,
+    "symbol_records_in_reviewed_bodies": 128,
     "reviewed_bodies_without_direct_symbol_record": [
       "src/wow32-dll/source/wow_button_resources.c",
       "src/wow32-dll/source/wow_class_client_bindings.c",
@@ -2160,8 +2160,8 @@
           "name": "wow_control_draw_state"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2179,8 +2179,8 @@
           "name": "wow_edit_set_window_fnid"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2203,8 +2203,8 @@
           "name": "SetWindowState"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2222,8 +2222,8 @@
           "name": "wow_default_message_state"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2246,8 +2246,8 @@
           "name": "wow_default_find_nc_hit"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2265,8 +2265,8 @@
           "name": "wow_default_ensure_shell_message"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2294,8 +2294,8 @@
           "name": "wow_edit_default_control_color"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
