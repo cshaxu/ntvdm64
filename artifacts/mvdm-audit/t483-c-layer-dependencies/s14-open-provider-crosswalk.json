@@ -1,5 +1,5 @@
 {
-  "baseline": "2e09f3f8d",
+  "baseline": "5cc40c455",
   "kind": "open-dependency-to-provider-crosswalk-not-closure",
   "source_ledger_sha256": "b094cccf3aee51eb32e31201d8ecc2ff0ba7a4dc0a1d8d21735f9b08df021cfb",
   "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. No status promotion, new IDs or dependency rescan.",
@@ -13,16 +13,17 @@
     },
     "target_groups": 152,
     "symbol_provider_files": 79,
-    "wow_reviewed_bodies": 41,
-    "symbol_provider_files_with_wow_body_review": 34,
-    "symbol_records_in_reviewed_bodies": 160,
+    "wow_reviewed_bodies": 49,
+    "symbol_provider_files_with_wow_body_review": 41,
+    "symbol_records_in_reviewed_bodies": 194,
     "reviewed_bodies_without_direct_symbol_record": [
+      "src/ntvdm-exe/wow/wow_user_session_binding.c",
       "src/wow32-dll/source/wow_button_resources.c",
       "src/wow32-dll/source/wow_class_client_bindings.c",
       "src/wow32-dll/source/wow_control_extent_bindings.c",
       "src/wow32-dll/source/wow_idle_hook_binding.c",
+      "src/wow32-dll/source/wow_menu_client_bindings.c",
       "src/wow32-dll/source/wow_user_message_bridge.c",
-      "src/wow32-dll/source/wow_user_session_binding.c",
       "src/wow32-dll/source/wow_window_words_binding.c"
     ]
   },
@@ -2747,8 +2748,8 @@
           "name": "wow_menu_native_TrackPopupMenuEx"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2796,8 +2797,8 @@
           "name": "wow_message_unwind32"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2825,8 +2826,8 @@
           "name": "g_abLeadTable"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2844,8 +2845,8 @@
           "name": "wow_user_load_menu_indirect"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2863,8 +2864,8 @@
           "name": "wow_user_dialog_box_indirect_param"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2956,8 +2957,8 @@
           "name": "wow_shell_execute"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {
@@ -2975,8 +2976,8 @@
           "name": "Sim32FlushVDMPointer"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     },
     {

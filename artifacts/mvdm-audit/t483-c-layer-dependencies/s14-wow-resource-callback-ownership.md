@@ -472,3 +472,35 @@ routine would register host control classes. A C placement still needs a
 measured mirror candidate, not implicit re-admission of retired mirror files.
 No source migration or runtime pass is claimed. Existing dependency statuses
 and mirror counts are unchanged; the crosswalk records coverage only.
+
+## Menu lifetime and small conversion providers
+
+Against P42 `5cc40c455`, complete eight bodies: wow_menu_native_bindings.c,
+wow_menu_client_bindings.c, wow_message_lifetime.c,
+wow_ole_descriptor_binding.c, wow_private_user_compat.c,
+wow_public_user_facade.c, wow_shell_callback.c and
+wow_sim32_pointer_compat.c (wow32-dll/source). Total: 49 complete bodies.
+
+| Chain | Migration disposition |
+| --- | --- |
+| Native menu operations and client projection | Native USER owns actual menus. C must own copied MENU/ITEM generations, original task cleanup selection and identity translation. Split finite native observations from typed publication; no B callback into page-domain or task state. Preserve native operation return conventions, including TPM_RETURNCMD and minus-one results. |
+| Menu capture and retirement | Capture the whole tree before guest commit, install cleanup ownership only after commit. Created-task ownership and locally refreshed observation are distinct. Publish surviving parent/window edges before retiring descendants; RemoveMenu detachment alone is not destruction. Retire copied parent views before referenced children, and validate no live owners before forgetting borrowed views. |
+| Message lifetime | Captured original converter keys, PTD callback stack and original unthunkers belong C. Do not replay output conversion on failure, substitute a new heap registry, or restore a retired/reused TD. Worker-active admission currently comes from F; separate that product decision from C cleanup rather than relocate the predicate behind B. |
+| OLE descriptor | ACP lead-byte initialization is native data mechanics; original ConvertObjDescriptor and GetPModeVDMPointerAssert are C algorithm/mapping paths. Whole-file B migration would retain C callbacks. Keep the original descriptor conversion and segment-fault owner, without OLE activation or new mapping. |
+| Private USER resource helpers | Native icon/cursor creation and validated native menu-index lookup are B candidates; original default-message bitmap merge and menu template parsing remain C. Owner-draw template data can be a guest pointer, so public LoadMenuIndirect is not an established replacement for CreateMenuFromResource. |
+| Public dialog facade | One forwarding call preserves all flags into the recovered modal manager. Reconcile this alias with the eventual C dialog entry and remove an unnecessary forwarding layer only after its callers/ABI are checked; do not restore the old native-dialog substitution. |
+| Shell callback | The synchronous modern three-slot to original two-slot callback bridge retains nested TLS and delegates execution/current-directory semantics to original wshell. It invokes an original callback, so it cannot move B unchanged under the existing two-exception rule. Native module resolution alone does not make the entire bridge a B leaf. |
+| Sim32FlushVDMPointer | Current body is a cdecl constant-success completion with no state. Candidate finite B ABI implementation after checking the pinned CPU40 contract and selected import/export shape; its comment alone is not proof. Current selected softpc.h exposes an extern declaration, so no restoration or removal is claimed from that comment. |
+
+`wow_message_lifetime.c` clears captured keys before release and restores the
+callback stack only when the current live TD and task16 still match. Its
+worker-active provider is `ntvdm-exe/wow/wow_user_session_binding.c:95`, which
+reads session_thread_current and SESSION_STATE_ACTIVE. This is concrete F
+state dependence, not independent resource cleanup. Disposal ordering must
+remove that dependency without attempting guest frees after machine retirement.
+
+Correct the crosswalk's associated-body path for wow_user_session_binding.c
+from the nonexistent wow32-dll/source location to ntvdm-exe/wow. The earlier
+body review already identified the latter component; this corrects the mapping
+artifact, not its count or a production file. Validate associated paths as
+well as direct-target hashes. No dependency status, source or release changes.
