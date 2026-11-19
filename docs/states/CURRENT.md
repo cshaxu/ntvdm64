@@ -78,11 +78,13 @@ S13 will assess and implement safe C-to-F moves of product-owned behavior, with 
 
 P34 delivered the unchanged private Browser unavailable provider F to B; original public enumeration remains C. Both builds, dual publication,37 original enumeration assertions and96 actual DOS calls passed. [P34 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json).
 
-P35 delivered native bitmap macros and icon-size provider to B; original button/scaling algorithms unchanged. Both cached builds, dual publication, bitmap/drawing/icon checks and three retained Win16 frontiers passed. [P35 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json).
+P35 delivered native bitmap macros and icon-size provider to B, with coherent build/publication and targeted checks. [P35 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json).
 
 P36 recorded menu/default/resource ownership and both clres compiler contexts, with source identities and unchanged release verified. [P36 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p36-menu-resource-ownership.json).
 
-P37 classified files071-073: original combo/directory/child lifecycle algorithms stay C; task entry, exact-object validation and creation binding require S13 work, extracted state/FNID needs S14 review. [P37 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p37-combo-ownership.json). Review73/116:16 clears,46 lifecycle,11 source/ABI,43 unreviewed;514/617 open. Source-only; no new build/runtime claim, P35 package unchanged. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P37 recorded original combo ownership and outstanding task/class lifecycle dependencies. [P37 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p37-combo-ownership.json).
+
+P38 moved four unchanged native HWND-slot and GUI/system-query leaves to B; original dlgbegin remains byte-identical. [P38 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p38-dialog-native-leaves.json). Review74/116:16 clears,47 lifecycle,11 source/ABI,42 unreviewed;510/617 open. Both cached builds, six fixtures and retained Win16 frontiers passed; eleven images published and hash-verified twice. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

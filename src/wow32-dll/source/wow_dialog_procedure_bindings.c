@@ -6,16 +6,6 @@ LRESULT WINAPI wow_user_call_window_procA(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_user_call_window_procW(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 C_ASSERT(sizeof(LONG_PTR) == sizeof(LONG));
 
-LONG WINAPI wow_dialog_host_get(HWND w, int index, BOOL ansi)
-{
-    return ansi ? GetWindowLongA(w, index) : GetWindowLongW(w, index);
-}
-
-LONG WINAPI wow_dialog_host_set(HWND w, int index, LONG value, BOOL ansi)
-{
-    return ansi ? SetWindowLongA(w, index, value) : SetWindowLongW(w, index, value);
-}
-
 static LRESULT native_default(HWND w, UINT m, WPARAM a, LPARAM b, BOOL ansi)
 {
     DWORD error = GetLastError();

@@ -491,6 +491,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+074 P38: unchanged native HWND slot get/set and GUI/system query leaves moved F to B; C0379/C0382/C0398/C0399 eliminated by actual link map. Original template parsing, child construction and rollback remain C. Task/borrow/TLS/class enrollment remains S13; extracted original callbacks and private native ABI cohort remain S14. Mirror delta0 points/0 lines. See s12-p38-dialog-native-leaves.json.
+
 ## 075 — src/non-mvdm/windows/core/ntuser/client/dlgend.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

@@ -191,3 +191,5 @@ P35: [Button ownership and native bitmap/icon leaves](s12-p35-bitmap-native.json
 P36: [Menu/default-window/resource ownership and actual compile contexts](s12-p36-menu-resource-ownership.json).
 
 P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-combo-ownership.json).
+
+[P38 dialog native leaves](s12-p38-dialog-native-leaves.json): file074, four SDK-only symbols moved to B, no mirror changes; remaining lifecycle/ABI ownership stays open.

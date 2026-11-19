@@ -12,7 +12,6 @@
  * No HWND, text pointer, timer or CallProc identity is retained here. */
 BOOL WINAPI wow_edit_native_ready(void);
 BOOL WINAPI wow_edit_native_NtUserDefSetText(HWND, const LARGE_STRING *);
-PVOID WINAPI wow_edit_native_highest_user_address(void);
 int WINAPI wow_edit_native_GdiGetCharDimensions(HDC, TEXTMETRICW *, LPINT);
 BOOL WINAPI wow_edit_native_GetCharWidthInfo(HDC, PCHWIDTHINFO);
 BOOL WINAPI wow_edit_native_PolyPatBlt(HDC, DWORD, PPOLYPATBLT, DWORD, DWORD);

@@ -1,0 +1,116 @@
+{
+  "baseline": "0c9c490b9",
+  "status": "P38 delivered native-leaf ownership cleanup; remaining dialog lifecycle/ABI classified",
+  "file": {
+    "number": 74,
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+    "sha256": "a3513065a68716f066a6dd143c854151d905dea8f6e22b9a5b06b4b354f2680b",
+    "header": "C0064",
+    "linkedIds": [
+      "C0360",
+      "C0363",
+      "C0372",
+      "C0373",
+      "C0374",
+      "C0376",
+      "C0382",
+      "C0387",
+      "C0393",
+      "C0398",
+      "C0409",
+      "C0413",
+      "C0504",
+      "C0520",
+      "C0557",
+      "C0565",
+      "C0571",
+      "C0581",
+      "C0582",
+      "C0590",
+      "C0596",
+      "C0597",
+      "C0599"
+    ]
+  },
+  "moves": [
+    {
+      "from": "src/wow32-dll/source/wow_dialog_procedure_bindings.c",
+      "to": "src/compat/wow_dialog_slots.c",
+      "functionBodiesIdentical": true
+    },
+    {
+      "from": "src/wow32-dll/source/wow_edit_native_bindings.c",
+      "to": "src/compat/wow_native_environment.c",
+      "functionBodiesIdentical": true
+    }
+  ],
+  "eliminatedIds": [
+    "C0379",
+    "C0382",
+    "C0398",
+    "C0399"
+  ],
+  "retained": [
+    "Original template/font parsing, child order, WOWDlgInit, DS_LOCALEDIT allocation, WM_INITDIALOG revalidation and failure rollback stay C. Source bytes, #error and #line unchanged.",
+    "F dialog creation enters current task and borrow scopes, captures/restores dialog/default TLS and registered class atoms, calls original creator, releases context in finally. Native creation resolves class in current process owner and enrolls HWND before callbacks. S13 boundary work; not whole original algorithm migration.",
+    "WOWDlgInit/GetEditDS/ReleaseEditDS were extracted from OpenNT client/client.c in S6 P24; original callback ownership must be reviewed in S14. Current F placement is not proof original cannot own them.",
+    "GdiGetCharDimensions uses shared InitOnce export cohort with original private GDI types and native service ABIs. S14 cohort split/ABI review remains; cursor and system-menu failures/native-call restoration remain F lifecycle concerns. No new permanent exceptions approved."
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 74,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 47,
+    "deferredSourceAbiCompositionFiles": 11,
+    "unreviewedFiles": 42,
+    "totalFiles": 116,
+    "openIds": 510,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "Both cached architectures plus explicit four x86 worker images passed.",
+    "targeted": "64 real native dialog iterations / 256 callbacks / 32 terminal notifications, zero errors; 14 initialization cases; navigation, context, creation and finalization passed.",
+    "boundaries": "8 A/B graphs, 150 WOW objects, 9 negative controls passed.",
+    "publication": {
+      "package": "fcd303b9-790b-4b25-9a57-918f1932eff0",
+      "images": 11,
+      "destinations": [
+        "assets/release",
+        "O:/WINNT/system32"
+      ],
+      "hashVerified": true
+    },
+    "runtime": {
+      "result": "passed",
+      "evidence": "build/t483-s12-dialog-slots/runtime-final.log and runtime-final.exit",
+      "scope": "Winmine/Sol/Write retained application-window frontier and controlled cleanup, not full interaction/gameplay acceptance.",
+      "initialAttempt": "Sandbox denied short stage allocation before runtime; elevated isolated rerun passed."
+    },
+    "bodyIdentity": "Both extracted source bodies are literal unchanged substrings of baseline; signatures unchanged.",
+    "comparison": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "publicationReview": "Initial publication withheld by automatic review pending WOW32 changed-image validation. After unchanged-body proof, link attribution, six targeted fixtures and final-package runtime passed, re-review approved publication.",
+    "documentation": "Verify-DocumentationGovernance.ps1 before commit; build/t483-s12-dialog-slots/docs.log and docs.exit.",
+    "compilerDependencies": {
+      "obj/opennt-user/control-body-dlgbegin.obj": "obj/opennt-user/control-body-dlgbegin.obj: #deps 66, deps mtime 8167706419037709 (VALID)",
+      "obj/compat/wow_dialog_slots.obj": "obj/compat/wow_dialog_slots.obj: #deps 1, deps mtime 8167706512426597 (VALID)",
+      "obj/compat/wow_native_environment.obj": "obj/compat/wow_native_environment.obj: #deps 1, deps mtime 8167706512284851 (VALID)"
+    }
+  }
+}

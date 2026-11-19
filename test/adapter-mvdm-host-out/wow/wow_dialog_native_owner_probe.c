@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include "wow_dialog_procedure_bindings.h"
+#include "compat/include/wow_native_environment.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_window_words_binding.h"
 #include "dialog-getset/precomp.h"
@@ -130,6 +131,11 @@ int __cdecl main(void)
 {
     WNDCLASSW wc = {0};
     unsigned i;
+    SetLastError(6447);
+    CHECK(wow_edit_native_ensure_gui_thread());
+    CHECK(IsGUIThread(FALSE) && GetLastError() == 6447);
+    CHECK(wow_edit_native_ensure_gui_thread() && GetLastError() == 6447);
+    CHECK(wow_edit_native_highest_user_address() != NULL && GetLastError() == 6447);
     wc.lpfnWndProc = subject;
     wc.cbWndExtra = DLGWINDOWEXTRA;
     wc.hInstance = GetModuleHandleW(NULL);
@@ -149,10 +155,10 @@ int __cdecl main(void)
         CHECK(_GetWindowLong(&recovered.wnd, GWL_STYLE, TRUE) == 0);
         CHECK(GetLastError() == ERROR_INVALID_INDEX);
         before = callbacks;
-        prior = ansi ? GetWindowLongPtrA(w, DWLP_DLGPROC) : GetWindowLongPtrW(w, DWLP_DLGPROC);
+        prior = wow_dialog_host_get(w, DWLP_DLGPROC, ansi);
         SetLastError(0);
-        replaced = ansi ? SetWindowLongPtrA(w, DWLP_DLGPROC, (LONG_PTR)dialog_a) :
-            SetWindowLongPtrW(w, DWLP_DLGPROC, (LONG_PTR)dialog_w);
+        replaced = wow_dialog_host_set(w, DWLP_DLGPROC,
+            (LONG)(LONG_PTR)(ansi ? dialog_a : dialog_w), ansi);
         if (i < 2) printf("ansi=%d prior=%p replaced=%p\n", ansi, (void *)prior, (void *)replaced);
         CHECK(GetLastError() == 0);
         CHECK(prior == 0);
