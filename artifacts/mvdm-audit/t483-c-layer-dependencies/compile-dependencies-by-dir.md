@@ -706,6 +706,8 @@
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h
 
+109 P63: C0066/C0392 remain; native exports and brushes already B, original drawing stays C. Shared captured input belongs to S13 review. Mirror0/0; reviewed109/116, open500/618. See s12-p63-rtl-drawing-ownership.json.
+
 ## 110 — src/non-mvdm/windows/core/ntuser/rtl/drawtext.c
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h

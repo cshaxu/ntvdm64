@@ -241,3 +241,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P61 Message-table ownership](s12-p61-message-table-ownership.json): file107; C algorithms, F storage/publication and original global owner traced. Review107/116;500/618 open. No product change.
 
 [P62 Scheduler ownership](s12-p62-scheduler-ownership.json): file108; original scheduler policy and host wait/context boundary traced. Review108/116;500/618 open. No product changes.
+
+[P63 RTL drawing](s12-p63-rtl-drawing-ownership.json): file109; native providers already B, captured color-depth context remains F. Review109/116;500/618 open. No product changes.

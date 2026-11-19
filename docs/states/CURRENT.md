@@ -184,4 +184,6 @@ P60: [Task initialization ownership](../../artifacts/mvdm-audit/t483-c-layer-dep
 
 P61: [Message-table ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p61-message-table-ownership.json).
 
-P62: [Scheduler ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p62-scheduler-ownership.json). Reviewed108/116;8 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.
+P62: [Scheduler ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p62-scheduler-ownership.json).
+
+P63: [RTL drawing ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p63-rtl-drawing-ownership.json). Reviewed109/116;7 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.

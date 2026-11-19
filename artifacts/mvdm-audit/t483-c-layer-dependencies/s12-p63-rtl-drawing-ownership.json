@@ -1,0 +1,151 @@
+{
+  "baseline": "bc3fd7e539398f29c3895299ecbca052e5883e80",
+  "status": "P63 RTL drawing ownership audit; no product changes",
+  "files": [
+    {
+      "number": 109,
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "sha256": "c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb",
+      "compilerObject": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\control-draw.obj",
+      "objectSha256": "aac5594f718eb05a597dec5150928f98824a8757306c856ab9c0e7826cb11ecf",
+      "coffUndefined": [
+        "__imp__GetStockObject@4",
+        "__imp__GetViewportExtEx@8",
+        "__imp__GetWindowExtEx@8",
+        "__imp__SelectObject@8",
+        "__imp__SetBkColor@8",
+        "__imp__SetTextColor@8",
+        "__imp__TextOutW@20",
+        "__imp__DrawEdge@16",
+        "__imp__GetSystemMetrics@4",
+        "__imp__GetSysColor@4",
+        "__imp__FillRect@12",
+        "__imp__IsRectEmpty@4",
+        "_wow_edit_native_PolyPatBlt@20",
+        "@__security_check_cookie@4",
+        "_wow_edit_system_brushes",
+        "_wow_edit_gray_brush",
+        "_wow_edit_current",
+        "___security_cookie",
+        "__tls_array",
+        "__tls_index"
+      ],
+      "dependencies": [
+        "obj/opennt-user/control-draw.obj: #deps 24, deps mtime 8167732592729257 (VALID)",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/wow_char_conversion_abi.h",
+        "    ../../../../src/compat/include/wow_control_brushes.h",
+        "    ../../../../src/compat/include/wow_native_controls.h",
+        "    ../../../../src/compat/include/wow_native_environment.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "    ../../../../src/wow32-dll/include/control-drawing/precomp.h",
+        "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+        "    ../../../../src/wow32-dll/include/wow_edit_drawing_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_edit_entry_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_edit_native_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_native_gui_thread.h",
+        "    ../../../../src/wow32-dll/include/wow_window_client_state_bindings.h",
+        ""
+      ],
+      "mapProviders": [
+        "0000:0000002c       __tls_array                0000002c     <absolute>",
+        "0001:0004dd20       _DrawFrame@16              1004ed20 f   control-draw.obj",
+        "0001:0004de80       _DrawPushButton@16         1004ee80 f   control-draw.obj",
+        "0001:000754f0       _wow_edit_native_PolyPatBlt@20 100764f0 f   wow_native_controls.obj",
+        "0001:00075b39       @__security_check_cookie@4 10076b39 f   LIBCMT:secchk.obj",
+        "0002:00000054       __imp__GetViewportExtEx@8  1008e054     gdi32:GDI32.dll",
+        "0002:0000005c       __imp__GetWindowExtEx@8    1008e05c     gdi32:GDI32.dll",
+        "0002:00000068       __imp__SelectObject@8      1008e068     gdi32:GDI32.dll",
+        "0002:000001bc       __imp__TextOutW@20         1008e1bc     gdi32:GDI32.dll",
+        "0002:000001f8       __imp__GetStockObject@4    1008e1f8     gdi32:GDI32.dll",
+        "0002:0000024c       __imp__SetBkColor@8        1008e24c     gdi32:GDI32.dll",
+        "0002:00000330       __imp__SetTextColor@8      1008e330     gdi32:GDI32.dll",
+        "0002:000009ac       __imp__DrawEdge@16         1008e9ac     user32:USER32.dll",
+        "0002:000009f4       __imp__GetSysColor@4       1008e9f4     user32:USER32.dll",
+        "0002:00000a10       __imp__GetSystemMetrics@4  1008ea10     user32:USER32.dll",
+        "0002:00000a78       __imp__FillRect@12         1008ea78     user32:USER32.dll",
+        "0002:0000a8ec       _wow_edit_current          100988ec     wow_edit_entry_bindings.obj",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj",
+        "0003:000052a4       __tls_index                100a52a4     LIBCMT:tlssup.obj",
+        "0003:00005cf4       _wow_edit_gray_brush       100a5cf4     <common>",
+        "0003:00005d00       _wow_edit_system_brushes   100a5d00     <common>"
+      ]
+    }
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "windows/core/ntuser/rtl/draw.c",
+    "evidence": "Compared fixed full original and current selected file using line SequenceMatcher; read all current 849 lines. Retained drawing bodies are unchanged; existing omissions and #error/#line structure are not modified."
+  },
+  "mechanisms": {
+    "production": "Final WOW32 map retains DrawFrame and DrawPushButton from control-draw.obj. Original btnctl.c invokes both; editsl.c/editml.c invoke DrawFrame. Other restored drawing helpers compile but are not established production survivors by this map; do not count them as reached functionality.",
+    "native": "PolyPatBlt wrapper C0397 already belongs to B wow_native_controls.c. System/gray brushes C0617/C0616 already belong to B wow_control_brushes.c after P44. Remaining public drawing APIs including DrawEdge and FillRect resolve modern SDK imports. Do not restore omitted original implementations merely because modern USER32 supplies them.",
+    "outer": "C0392 wow_edit_current is F TLS in wow_edit_entry_bindings.c. DrawPushButton reads screen.BitCount to select original dither policy. Its context is captured from DISPLAY IC PLANES/BITSPIXEL before the original control invocation, published within existing borrow/callback scope, and previous TLS restored in finally. This is actual runtime dependence, not merely an unused header.",
+    "header": "C0066 control-drawing/precomp.h composes original C types, B native exports/resources and F context. Whole-header move to B would still depend outward. No new B provider is needed for already-moved native exports or brushes.",
+    "disposition": "Keep original geometry/raster/brush restoration logic in C. S13 must separate common drawing input from the F control invocation lifetime as one shared change across consumers; do not add per-function display probes or parallel context state. S14 assesses original declarations. C0066/C0392 remain open, not permanent exceptions.",
+    "limits": "No runtime equivalence claim for unreached helpers, arbitrary DC/display changes or all nested callbacks. Existing P44 evidence is historical, not a new test result."
+  },
+  "verificationPlan": {
+    "existing": "test/adapter-mvdm-host-out/wow control draw-state fixtures; prior P44 receipt records selected original drawing/text, nesting, false-return/exception cleanup and GDI lifetime.",
+    "afterChange": "Verify retained button and edit callers, same captured color-depth input, nested context restoration and GDI resource lifetime; build final package and targeted real Win16 frontiers as required. Do not substitute successful native export lookup for drawing behavior."
+  },
+  "progress": {
+    "reviewedFiles": 109,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 74,
+    "deferredSourceAbiCompositionFiles": 18,
+    "unreviewedFiles": 7,
+    "totalFiles": 116,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: production source unchanged. Actual COFF, VALID dependency record and final link map inspected.",
+    "runtime": "Not run: source/provider attribution only.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-rtl-drawing-ownership/docs.log and docs.exit. CURRENT 16355 bytes; git diff --check passed.",
+    "publication": {
+      "packageId": "a287f10d-c93a-4720-833c-5eee7bfd6e99",
+      "verifiedImages": [
+        "assets\\release\\VCDEX.DLL",
+        "O:\\WINNT\\system32\\VCDEX.DLL",
+        "assets\\release\\run16.exe",
+        "O:\\WINNT\\system32\\run16.exe",
+        "assets\\release\\ntsrv.exe",
+        "O:\\WINNT\\system32\\ntsrv.exe",
+        "assets\\release\\ntcon.exe",
+        "O:\\WINNT\\system32\\ntcon.exe",
+        "assets\\release\\ntvdm.exe",
+        "O:\\WINNT\\system32\\ntvdm.exe",
+        "assets\\release\\ntvwm.exe",
+        "O:\\WINNT\\system32\\ntvwm.exe",
+        "assets\\release\\ntmon.exe",
+        "O:\\WINNT\\system32\\ntmon.exe",
+        "assets\\release\\WOW32.DLL",
+        "O:\\WINNT\\system32\\WOW32.DLL",
+        "assets\\release\\VDMREDIR.DLL",
+        "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "assets\\release\\nthook32.dll",
+        "O:\\WINNT\\system32\\nthook32.dll",
+        "assets\\release\\nthook64.dll",
+        "O:\\WINNT\\system32\\nthook64.dll"
+      ]
+    }
+  }
+}
