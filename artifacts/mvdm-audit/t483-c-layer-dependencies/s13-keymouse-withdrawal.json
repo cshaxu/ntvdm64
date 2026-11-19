@@ -1,0 +1,54 @@
+{
+  "baseline": "0c165f5a4",
+  "reason": "Owner approved actual implementation migration, not another B-to-F forwarding callback. Withdraw only the unpublished experiment.",
+  "build_exit": 0,
+  "published": false,
+  "runtime_tested": false,
+  "files": [
+    {
+      "path": "src/compat/console_services.c",
+      "candidate_sha256": "e4648115ca23b2daf928ae5829c53381aeb89e5eb0567a42b3da898e08d4b4b6",
+      "restored_sha256": "0661262db0e2215ed91aa2e45727b4b8849a2353330bc183c1e97f7e5a365f37"
+    },
+    {
+      "path": "src/compat/include/console_services.h",
+      "candidate_sha256": "55aff1d63cdb88c280b3a1c116e0859dd3bcd966a7aff4c340921877850bf20e",
+      "restored_sha256": "1cedcc16ad4bd53b23c98f274ebdfd4c389f8600680b640364255b2f3b7b6870"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "candidate_sha256": "30c26cf4244d724c81f17c6a37ff2851c242af7d969ef98b38c00865fcb3ce4e",
+      "restored_sha256": "a41f2eea922987cdc43ab4c5d87558a79b13eb931997909fb48fe05bd0efee0a"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h",
+      "candidate_sha256": "3b536c82f1772bac129fcc63db7a73ad4a1d5f47355112e69ff4ddb24666b67a",
+      "restored_sha256": "f28aab3411d5d93b3ef7da82d21a6d152b9ff6ccd96fcdde1f1f2584fdf0fa6c"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+      "candidate_sha256": "732059084f7b87a5ad9df848ccea732d5992bcab1c120451acfc253386aa7213",
+      "restored_sha256": "a83a8103f3e4adbce9d04fbd8bd85466ea936ad48aba6d3578dad6e81fb3f014"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/console_client.c",
+      "candidate_sha256": "f60a4e1ad0c093c8a82f891821320e6ac43c476ea6f905171dbff53af45a736f",
+      "restored_sha256": "dda43927f8179b5899da6267e81d07865a69253aef70813a9c120b3659845236"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/softpc_relative_mouse_guest_test.c",
+      "candidate_sha256": "49e058f486943137bb7ac263a547575c9318d569b9ae9dcd32e74b60c954da41",
+      "restored_sha256": "a310130e2ce1bdc807958e3f3fa23257493aa49cdd97a0f6da02196779983157"
+    },
+    {
+      "path": "test/ntvdm-exe/win32/console_client_test.c",
+      "candidate_sha256": "79eb7e6d836308cb489bd17da7cef5dba43360a42096e02d379b44da05dac419",
+      "restored_sha256": "089b2220cbea0c79d4dff373f32bae83df2912bab384a60c2327e058cac16bd1"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "candidate_sha256": "3130bd56da0c52e392c727755751d720a5af7ee626a8671f6558a2fdf0caa4f4",
+      "restored_sha256": "0de8384db3303cf0f3b88331ad198f190359ff57e6055d3df8510c0d670fc9f7"
+    }
+  ]
+}

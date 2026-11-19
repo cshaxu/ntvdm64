@@ -1,0 +1,142 @@
+{
+  "baseline": "0c165f5a4",
+  "scope": "S13 actual implementation migration, first-chain source inventory",
+  "status": "source chain inspected; migration and final-code verification pending",
+  "inputs": [
+    {
+      "path": "src/ntvdm-exe/session/session.c",
+      "sha256": "e59ab2a6ebe824c11553eaf6f758ef67b568c495a75d1f720675f6761ab12506",
+      "lines": 511
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.h",
+      "sha256": "ddde8823f32c80554382b424d000b2d09992b832fc66b9ebc617176b518eb23e",
+      "lines": 212
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "sha256": "dd07c28b27004de60df0a040598a8428396504056386d1b648e9b6bfc1712b05",
+      "lines": 287
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_physical_mapping_binding.c",
+      "sha256": "1086fd189684385b486e44aa0b2f1c6014e1b9c72d953130dec923f427c0d51d",
+      "lines": 17
+    },
+    {
+      "path": "src/compat/physical_mapping_services.c",
+      "sha256": "535002fd3eae526ed6f79d88d3ade90c695795f2ae8279bcaed730b78a28c951",
+      "lines": 33
+    },
+    {
+      "path": "src/compat/include/physical_mapping_services.h",
+      "sha256": "ed83f177eb25ba306a9709cfe42fd76393bd23f5586d095d3e911a4e4e28c685",
+      "lines": 20
+    },
+    {
+      "path": "src/compat/include/physical_mapping_host.h",
+      "sha256": "d58277d47dd7964a31daa645ed4206fd337a1a3a28e3ae3a2e1643d32e505695",
+      "lines": 13
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/physical_mapping_observation_test.c",
+      "sha256": "a84d9a37bb18108f4a959cf492d56bdf24f9821643383fe9f0e01c02bc651eb0",
+      "lines": 89
+    },
+    {
+      "path": "test/session/session_lifecycle_test.c",
+      "sha256": "83905fbdb704e0794a32120573ebc5657cf075c128b545b121fdac7459cb58b2",
+      "lines": 111
+    }
+  ],
+  "operations": [
+    {
+      "symbol": "mvdm_softpc_physical_mapping_initialize",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 91,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    },
+    {
+      "symbol": "mvdm_softpc_physical_mapping_release",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 116,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    },
+    {
+      "symbol": "VdmSetPhysRecStructs",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 268,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    },
+    {
+      "symbol": "VdmMapDosMemory",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 122,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    },
+    {
+      "symbol": "VdmUnmapDosMemory",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 177,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    },
+    {
+      "symbol": "mvdm_softpc_physical_mapping_translate",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 199,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    },
+    {
+      "symbol": "mvdm_softpc_physical_mapping_resolve",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 227,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    },
+    {
+      "symbol": "mvdm_softpc_physical_mapping_span_is_aliased",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+      "line": 242,
+      "current_owner": "F",
+      "planned_owner": "B",
+      "status": "implementation-migration-pending"
+    }
+  ],
+  "binding_contract": [
+    "one current-instance TLS, published before hooks",
+    "failed bind reverses completed hooks; failed rollback retains binding",
+    "failed unbind retains binding and counts",
+    "disposal requires no live binding and no armed termination escape",
+    "teardown executes in reverse registration order",
+    "session_thread_current retains cdecl and existing exported ordinal218"
+  ],
+  "state_migration_constraints": [
+    "Do not retain F session accessor behind B callback",
+    "Do not add a second independent current-instance TLS",
+    "Extract shared teardown storage/mechanics only if needed, preserving registration order and failures",
+    "Keep product cancellation/completion, termination escape and policy F-owned"
+  ],
+  "test_gaps": [
+    "Existing mapping fixture is single-instance; extend for distinct instances and aliases without page-record initialization",
+    "Retain current lifecycle fixture ordering, failed bind/unbind and disposal assertions",
+    "Verify cross-image accessor ABI and current owner recovery in real product graph"
+  ],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "production_edits": false
+}

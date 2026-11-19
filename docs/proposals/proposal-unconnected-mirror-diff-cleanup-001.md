@@ -2,6 +2,23 @@
 
 ## Admission and objective
 
+### Approved implementation-ownership correction — 2026-11-19
+
+The owner approves actual inward relocation of the public host compatibility
+implementations needed by C, together with their state and cleanup. Moving a
+header or installing a B-to-F forwarding table is not completion of this goal.
+Review both remaining outward edges and previously isolated service contracts.
+Retain the six-layer architecture; B may use A and platform APIs, not C/D/E/F
+private implementations. Original simulation algorithms belong in C; product
+request, scheduling and lifecycle decisions remain with their product owners.
+
+The approved [implementation migration plan](../etc/operations/t483-compat-implementation-migration-plan.md)
+owns the sequential S worklist and detailed acceptance requirements. Current
+owns the single active packet. The plan supersedes the earlier blanket S13
+product-boundary/S14 original-owner allocation, without erasing its evidence.
+No new guest code, second session state machine or mirror-diff increase is
+implicitly authorized. A required net mirror increase still needs prior approval.
+
 This proposal is admitted in the dedicated mirror-diff review worktree;
 [Current](../states/CURRENT.md) owns its numeric admission and active packet.
 The historical 2026-10-29 request and checkpoint below are retained as

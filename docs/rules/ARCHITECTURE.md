@@ -38,6 +38,18 @@ runtime dependency even when its name never appears in a source include.
 
 ### Shared ownership restrictions
 
+For the owner-approved T483 implementation migration, a B contract forwarding
+to an outer implementation does not satisfy inward implementation ownership.
+Move reusable compatibility bodies, their necessary state and cleanup together;
+the product may compose those B-owned objects and select lifecycle timing.
+Do not move the whole product session, introduce duplicate binding/state
+machines, or conceal an outer session accessor behind an opaque callback.
+Original algorithms/private layouts remain C-owned; product request and
+completion authority remains product-owned. Record source dependencies,
+implementation ownership and runtime protocols separately. Existing service
+tables remain transitional until their complete chains have been migrated and
+verified, not evidence that their implementations already reside in B.
+
 Product components select shared source from common, lib-nxvm, lib-win32, mvdm-host and
 non-mvdm, not another product component's private implementation. NTVDM and
 NTVWM may share worker-base; no other component may depend on it, and

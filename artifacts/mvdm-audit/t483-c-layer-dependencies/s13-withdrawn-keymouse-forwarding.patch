@@ -1,0 +1,168 @@
+diff --git a/src/compat/console_services.c b/src/compat/console_services.c
+index 207b6ad53..dfc49f0b9 100644
+--- a/src/compat/console_services.c
++++ b/src/compat/console_services.c
+@@ -6,7 +6,7 @@ BOOL compat_console_services_install(const compat_console_services *services)
+ {
+     const compat_console_services *previous;
+     if (!services || !services->code_page || !services->layout_name ||
+-            !services->get_title || !services->set_title) {
++            !services->get_title || !services->set_title || !services->mouse_route_active) {
+         SetLastError(ERROR_INVALID_PARAMETER);
+         return FALSE;
+     }
+@@ -42,3 +42,9 @@ BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title)
+     if (!binding) RaiseFailFastException(NULL, NULL, 0);
+     return binding->set_title(title);
+ }
++
++BOOL mvdm_softpc_mouse_route_active(void)
++{
++    if (!binding) RaiseFailFastException(NULL, NULL, 0);
++    return binding->mouse_route_active();
++}
+diff --git a/src/compat/include/console_services.h b/src/compat/include/console_services.h
+index f39ca870d..75be8f31c 100644
+--- a/src/compat/include/console_services.h
++++ b/src/compat/include/console_services.h
+@@ -10,6 +10,7 @@ typedef struct compat_console_services {
+     BOOL (WINAPI *layout_name)(LPSTR);
+     DWORD (WINAPI *get_title)(LPSTR, DWORD);
+     BOOL (WINAPI *set_title)(LPCSTR);
++    BOOL (*mouse_route_active)(void);
+ } compat_console_services;
+ 
+ BOOL compat_console_services_install(const compat_console_services *services);
+@@ -17,5 +18,6 @@ UINT WINAPI MvdmGetConsoleCP(void);
+ BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
+ DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title, DWORD capacity);
+ BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title);
++BOOL mvdm_softpc_mouse_route_active(void);
+ 
+ #endif
+diff --git a/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c b/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c
+index cf4d763a3..90b0fa7bf 100644
+--- a/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c
++++ b/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c
+@@ -104,7 +104,7 @@
+ #ifdef NTVDM
+ #include "nt_event.h"
+ #include "nt_mouse.h"
+-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h" /* DIVERGENCE(MVDM-HOST-DIV-318) */
++#include "compat/include/console_services.h" /* DIVERGENCE(MVDM-HOST-DIV-318) */
+ 
+ #line 110
+ #ifdef MONITOR
+diff --git a/src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h b/src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h
+index 51eab1e78..ba9f9b828 100644
+--- a/src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h
++++ b/src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h
+@@ -1,6 +1,7 @@
+ #ifndef MVDM_SOFTPC_MOUSE_BRIDGE_H
+ #define MVDM_SOFTPC_MOUSE_BRIDGE_H
+ #include <windows.h>
++#include "compat/include/console_services.h"
+ #include "common/protocol/console_mouse.h"
+ #include "mvdm_softpc_mouse_input.h"
+ 
+@@ -25,7 +26,7 @@ DWORD mvdm_softpc_mouse_capacity(mvdm_mouse_bridge *);
+ BOOL mvdm_softpc_mouse_pending(const mvdm_mouse_bridge *);
+ BOOL mvdm_softpc_mouse_active(const mvdm_mouse_bridge *);
+ /* Original CCPU painter reads a synchronized route snapshot, never UI state. */
+-BOOL mvdm_softpc_mouse_route_active(void);
++BOOL ntvdm_mouse_route_active(void);
+ /* CPU-side conversion, with the selected original instance extent. */
+ DWORD mvdm_softpc_mouse_prepare(mvdm_mouse_bridge *,unsigned,unsigned);
+ BOOL mvdm_softpc_mouse_next(mvdm_mouse_bridge *,mvdm_mouse_input_sample *);
+diff --git a/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c b/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c
+index 4f5b09fdd..d50b5fcdf 100644
+--- a/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c
++++ b/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c
+@@ -15,7 +15,7 @@ extern void host_ica_lock(void);
+ extern void host_ica_unlock(void);
+ extern void mouse_pointer_route_changed(int);
+ 
+-BOOL mvdm_softpc_mouse_route_active(void)
++BOOL ntvdm_mouse_route_active(void)
+ {
+     BOOL active;
+     host_ica_lock();
+diff --git a/src/ntvdm-exe/win32/console_client.c b/src/ntvdm-exe/win32/console_client.c
+index 6384c348f..7d5754d15 100644
+--- a/src/ntvdm-exe/win32/console_client.c
++++ b/src/ntvdm-exe/win32/console_client.c
+@@ -621,7 +621,8 @@ static BOOL WINAPI set_console_title(LPCSTR title)
+ BOOL ntvdm_console_services_initialize(void)
+ {
+     static const compat_console_services services = {
+-        input_code_page, keyboard_layout_name, get_console_title, set_console_title
++        input_code_page, keyboard_layout_name, get_console_title, set_console_title,
++        ntvdm_mouse_route_active
+     };
+     return compat_console_services_install(&services);
+ }
+diff --git a/test/ntvdm-exe/softpc/softpc_relative_mouse_guest_test.c b/test/ntvdm-exe/softpc/softpc_relative_mouse_guest_test.c
+index d3b5c14bd..19d4bd5aa 100644
+--- a/test/ntvdm-exe/softpc/softpc_relative_mouse_guest_test.c
++++ b/test/ntvdm-exe/softpc/softpc_relative_mouse_guest_test.c
+@@ -63,10 +63,10 @@ int main(void)
+ #define APPLY() mvdm_softpc_mouse_apply(&cursor,&counter,&x,&y,&unchanged, \
+     bFunctionZeroReset,&bFunctionFour,&newF4x,&newF4y)
+     assert(!APPLY());
+-    assert(!mvdm_softpc_mouse_route_active() && !locked);
++    assert(!ntvdm_mouse_route_active() && !locked);
+     receive(CONSOLE_MOUSE_ENTER,0,0,0);
+     assert(APPLY() && x==100 && y==50 && unchanged);
+-    assert(mvdm_softpc_mouse_route_active() && !locked);
++    assert(ntvdm_mouse_route_active() && !locked);
+     receive(CONSOLE_MOUSE_MOVE,7,9,0);
+     assert(APPLY() && x==107 && y==59 && !unchanged);
+     assert(counter.x==7 && counter.y==9 && !os_pointer_data.button_l);
+@@ -86,7 +86,7 @@ int main(void)
+     receive(CONSOLE_MOUSE_LEAVE,0,0,0);
+     receive(CONSOLE_MOUSE_ENTER,0,0,0);
+     assert(APPLY() && !mvdm_softpc_mouse_active(&bridge));
+-    assert(!mvdm_softpc_mouse_route_active() && !locked);
++    assert(!ntvdm_mouse_route_active() && !locked);
+     assert(APPLY() && mvdm_softpc_mouse_active(&bridge));
+     assert(interrupts==9 && !locked);
+     receive(CONSOLE_MOUSE_LEAVE,0,0,0);
+diff --git a/test/ntvdm-exe/win32/console_client_test.c b/test/ntvdm-exe/win32/console_client_test.c
+index 621cf03e3..42238c259 100644
+--- a/test/ntvdm-exe/win32/console_client_test.c
++++ b/test/ntvdm-exe/win32/console_client_test.c
+@@ -40,6 +40,8 @@ static BOOL native_set_display(HANDLE h,DWORD flags,COORD *size)
+ #include <stdio.h>
+ #include <string.h>
+ #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); ExitProcess(1); } } while (0)
++static BOOL test_mouse_route;
++BOOL ntvdm_mouse_route_active(void) { return test_mouse_route; }
+ static session owner;
+ static __declspec(thread) session *bound;
+ static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
+@@ -341,6 +343,10 @@ int main(int argc,char **argv)
+     BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
+     CHECK(!compat_console_services_install(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+     CHECK(ntvdm_console_services_initialize() && ntvdm_console_services_initialize());
++    CHECK(!mvdm_softpc_mouse_route_active());
++    test_mouse_route=TRUE;
++    CHECK(mvdm_softpc_mouse_route_active());
++    test_mouse_route=FALSE;
+     if(argc==2 && !strcmp(argv[1],"--input-terminal")) {
+         SetLastError(ERROR_PIPE_NOT_CONNECTED);
+         CHECK(!ntvdm_worker_lifecycle_input_terminal());
+diff --git a/tools/build/New-T310OriginalSoftpcNinja.ps1 b/tools/build/New-T310OriginalSoftpcNinja.ps1
+index 6b13c4c46..30f0b21e5 100644
+--- a/tools/build/New-T310OriginalSoftpcNinja.ps1
++++ b/tools/build/New-T310OriginalSoftpcNinja.ps1
+@@ -948,7 +948,9 @@ $keymouseObjects = foreach ($name in $keymouseNames) {
+     $object = 'obj/keymouse/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $keymouseRoot $name)))
+     if ($name -eq 'keybd_io.c') {
+-        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR')
++        $graph.Add('  cflags = ' + $baseDeviceFlags + ' /DMONITOR')
++    } else {
++        $graph.Add('  cflags = ' + $baseDeviceFlags)
+     }
+     $object
+ }

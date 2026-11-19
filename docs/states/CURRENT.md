@@ -8,22 +8,35 @@
 
 | Field | Record |
 | --- | --- |
-| Original Owner Request | 原地依赖清理后，处理可以从 C 安全挪到 F 的产品职责；再逐案判断 F 回迁 C。迁移须分析镜像 diff 点位和行数。 |
-| Objective | Remove product-owned outward C dependencies through coherent ownership changes while preserving original C algorithms and the selected ABIs. |
-| Files And ABI Surface | C callers and their D/E/F providers, grouped by request, session, native-call and resource lifetime. Scope is the S13 allocation in the S12 handoff. |
-| Reference Baseline | bf53bd508; package94150155-5251-42f3-b587-9803d82bc178; [complete handoff](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p108-closure-handoff.json). |
-| Applicable Rules | Architecture, source policy, coding and execution authorities; original-first recovery and minimal mirror differences. |
-| Verification | Real production compile/include/link dependencies, affected ABI and lifecycle cases, cached builds, complete dual publication and hash checks. Apply existing owner verification waivers only with corresponding evidence. |
-| Asset Needs | Existing fixed OpenNT baseline, cached production graphs and approved immutable guest fixtures. |
+| Original Owner Request | 写入当前proposal，制作S任务队列，自行更新目标开始执行；目标是实际公共实现及必要状态下沉B，不只是移动头文件或增加转发。 |
+| Objective | Move the physical-mapping implementation, state and cleanup into compat, extracting only its required shared instance/thread binding without a second session state machine. |
+| Files And ABI Surface | session binding, physical mapping provider/contracts, production consumers, build ownership and corresponding tests; see the approved migration plan. |
+| Reference Baseline | 0c165f5a4; package137949a3-b4bd-457d-82c4-1b455762eb17. Old direct ledger144 eliminated/424 open is not an implementation-migration count. |
+| Applicable Rules | Six-layer architecture, original-first source policy, execution/coding/documentation rules and owner-approved implementation migration. |
+| Verification | Cached full x86/x64/reference builds; dual eleven-image publication and22 hashes; affected binding/lifecycle/memory and isolated DOS/NESticle tests; governance and relative links; commit and push. |
+| Asset Needs | Existing fixed OpenNT baseline, cached graphs, existing approved guest fixtures. No new guest sources or binaries. |
 | Candidate Proposal | [T483 parent proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
-| Identifier Mode | M0 T483 S13, Ordinary Mode. |
-| Admission And Approval | Owner authorized three sequential C-layer scopes: in-place cleanup, safe C-to-F product responsibility changes, then individual F-to-C assessment. S12 closure admits this second scope. |
-| Non-goals | No guest modification/rebuild; no wholesale C algorithm extraction; S14 original source/ABI restoration is not yet admitted. |
-| Expected Markers | Each eliminated edge has actual compiler/linker evidence and the applicable behavior/lifetime validation. |
-| Similar-Issue Sweep | Process coupled creation/use/retirement callers together across supported product graphs. Include mixed-header witnesses; do not ignore transitive paths. |
-| Reporting Requirements | File entry/exit, stable IDs, scope, current and cumulative mirror points/lines, open/eliminated counts, and build/publication/test/commit status. |
-| Stop Conditions | Obtain prior approval for net mirror diff increases or unapproved scope changes. |
-| Exit Criteria | Finish the admitted ownership groups with preserved C algorithms and correct lifecycle, update tracker, verify and deliver; any unresolved original-ownership matter has a concrete S14 handoff. |
+| Identifier Mode | M0 T483 S13, Ordinary Mode; scope revised by owner, not a new simultaneous S. |
+| Admission And Approval | Owner explicitly approved the implementation migration plan and continuous execution on2026-11-19. Prior pause is revoked. S14-S19 are sequential planned successors, not yet active. |
+| Non-goals | No guest modification/rebuild, whole-session migration, duplicate TLS/state machine, wholesale C extraction or forwarding-only completion. |
+| Expected Markers | Actual B provider bodies and B-owned mapping state; removal of superseded F mapping provider/table; preserved binding, rollback and disposal behavior. |
+| Similar-Issue Sweep | All binding/unbinding and cross-image consumers of the first chain, including failure cleanup; remaining memory services assigned to S14. |
+| Reporting Requirements | Per-file entry/exit, mirror points/lines and cumulative changes; direct edges, actual implementation migration and removed forwarding counted separately. |
+| Stop Conditions | Prior approval required for net mirror-diff increases or a materially different product/guest semantic boundary. |
+| Exit Criteria | Complete the first production chain, targeted final-code verification, coherent dual release, updated ledgers, commit and push; admit S14 only after bounded closure. |
+
+## Revised execution plan
+
+[Approved S13-S19 migration worklist](../etc/operations/t483-compat-implementation-migration-plan.md).
+S13 starts with binding and physical mapping; S14 remaining memory, S15 input/display,
+S16 COMMAND/BASE separation, S17 devices, S18 WOW and S19 original-owner recovery
+and final reconciliation. This supersedes the earlier S13/S14 allocation.
+
+The unpublished keymouse forwarding candidate was withdrawn; its patch and hashes
+are retained in [withdrawal evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-keymouse-withdrawal.json).
+Its cached build passed, but it was not published or runtime-accepted. Current
+production baseline remains P15. Implementation migration is now beginning;
+previous direct-edge elimination does not count as actual implementation descent.
 
 ## Current Technical Baseline
 
@@ -39,7 +52,7 @@ S13 P14: [physical mapping boundary](../../artifacts/mvdm-audit/t483-c-layer-dep
 
 Cached x86/x64/reference builds and8 A/B graphs passed. Package4f34bf15-fc3b-4ccc-96a4-be3a154dd923 published to both destinations;22 hashes verified. Mapping, original external memory, CCPU high-linear-page, WOW page-domain, NESticle graphics/Escape and final isolated DOS DIR pass. The first DIR wrapper failed on an obsolete receipt name before product execution; preserved aggregate failure is superseded only for DIR by strict-final.exit0. No Full or desktop acceptance claimed.
 
-[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json) confirms COMMON definitions belong to C. Generated ABI remains S14. [Remaining CCPU/comms/C-VID review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-cpu-comms-ownership-review.json) confirms generated/vector ABI ownership remains S14; no new eliminated IDs or code edits. S13 P15: [base device search roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p15-base-device-search-roots.json) removes unused D/F search roots from24 comms/debug/disks/DOS units. All source bytes and selected headers unchanged. Full cached x86/x64/reference builds and8 A/B graphs pass. All11 images equal P14 after package GUID and PE/debug timestamp masking; repeated runtime tests waived. New package137949a3-b4bd-457d-82c4-1b455762eb17 published twice with22 matching manifest hashes. Shared root IDs remain open:144 eliminated/424 open of618. Mirror delta0/0; cumulative reduction3 points/12 lines. Next DIR file is base/keymouse/keyba.c; sas.h generated ABI remains S14. S13 active, S14 unadmitted.
+[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json) confirms COMMON definitions belong to C. Generated ABI remains S14. [Remaining CCPU/comms/C-VID review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-cpu-comms-ownership-review.json) confirms generated/vector ABI ownership remains S14; no new eliminated IDs or code edits. S13 P15: [base device search roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p15-base-device-search-roots.json) removes unused D/F search roots from24 comms/debug/disks/DOS units. All source bytes and selected headers unchanged. Full cached x86/x64/reference builds and8 A/B graphs pass. All11 images equal P14 after package GUID and PE/debug timestamp masking; repeated runtime tests waived. New package137949a3-b4bd-457d-82c4-1b455762eb17 published twice with22 matching manifest hashes. Shared root IDs remain open:144 eliminated/424 open of618. Mirror delta0/0; cumulative reduction3 points/12 lines. The subsequent owner-approved migration plan above replaces the old DIR continuation; generated ABI ownership is assigned to planned S19.
 
 ## S12 Closure Record
 
