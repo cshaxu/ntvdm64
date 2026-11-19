@@ -1,0 +1,134 @@
+{
+  "baseline": "3454e4177cb77b860323954fb84d414a430349db",
+  "sources": [
+    {
+      "path": "src/compat/wow_shared_clock.c",
+      "sha256": "94a3e3757c496ba3526b7cfa0bccba2690eb8dfb0072e8cd109199181935adde"
+    },
+    {
+      "path": "src/compat/include/wow_shared_clock.h",
+      "sha256": "2ec3cb1eab991dc24719e9616735ed57cdc260b61f0d722f16a643af1c100665"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "sha256": "172b26d70b1f2d942e06ffba043feef0c8a3e93319336c5effe8aa5b6ad9849e"
+    },
+    {
+      "path": "test/compat/wow_shared_clock_test.c",
+      "sha256": "e9938bbd422e7c416818ed3f7520be34e3ac53e9c00428ae825abd95eb78cb9e"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "8a75088b1a5e247a312f3ec06bb48745d91558d0130daf435891f4245b68d8ef"
+    }
+  ],
+  "link_map": {
+    "path": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+    "sha256": "2371b00174af233d621b0c640c0e44beb33b6c0179b4319a032be60c7a4c2558",
+    "symbols": [
+      " 0001:0017cbd0       _compat_wow_shared_clock_allocate 0057dbd0 f   session:wow_shared_clock.obj",
+      " 0001:0017cc30       _compat_wow_shared_clock_dispose 0057dc30 f   session:wow_shared_clock.obj",
+      " 0001:0017cca0       _compat_wow_shared_clock_start 0057dca0 f   session:wow_shared_clock.obj",
+      " 0001:0017cd00       _compat_wow_shared_clock_stop 0057dd00 f   session:wow_shared_clock.obj"
+    ]
+  },
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 421,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 147
+  },
+  "delivery": "T483 S14 P21",
+  "status": "cached build, dual publication and targeted runtime tests passed",
+  "package": "ceb7fcbe-4574-4763-8e1d-64bf4be708ab",
+  "implementation": "Move the actual WOW shared-clock host page, stop event, publisher thread and their operations into B. F embeds one clock resource and retains guest mapping, CPU transitions and teardown ordering. Remove old F publisher and resource-management bodies; no forwarding table, duplicate TLS or session manager.",
+  "source_review": "s14-wow-page-domain-owner-review.json",
+  "ownership": {
+    "B": [
+      "host page allocation and initialization",
+      "existing10ms clock publication",
+      "stop/join and native handle cleanup",
+      "host-page release"
+    ],
+    "F": [
+      "guest mapping/unmapping",
+      "CR0/CR3/GDT",
+      "session teardown registration",
+      "USER projection storage until its SAS boundary is resolved"
+    ]
+  },
+  "lifetime": [
+    "allocate host page",
+    "F maps page into guest clock address",
+    "start publication",
+    "stop and join before unmap",
+    "F removes guest mapping",
+    "dispose host resource"
+  ],
+  "preserved": [
+    "4096-byte page",
+    "GetTickCount and0x01000000 multiplier",
+    "existing10ms update period",
+    "existing infinite stop/join wait",
+    "one create-failure/normal teardown path",
+    "mapping removal failures retain existing policy; no new retry"
+  ],
+  "detail": "The private stop-event handle is now closed by resource disposal after guest unmapping; no publisher survives stop and no caller receives the event handle. Host-page release remains after unmap.",
+  "mirror": {
+    "changed_files": 0,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_reduction_points": 3,
+    "cumulative_reduction_lines": 12
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ceb7fcbe-4574-4763-8e1d-64bf4be708ab",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "tests": [
+    "shared clock23 assertions: update, stop/join, page retained until disposal, partial-created resource state, duplicate start/allocate rejection, independent resources and recreation",
+    "lease75 assertions",
+    "linear guest memory33 assertions",
+    "physical mapping and original external memory",
+    "CCPU high-linear read-only clock and reentry",
+    "guest location and session lifecycle",
+    "redirector async27 and capacity14 assertions",
+    "thread bind/unbind rollback and cross-DLL ownership",
+    "actual CCPU WOW page-domain including mapped clock update and reentry",
+    "published NESticle menu pixels/Escape hide-restore",
+    "published DOS DIR final0 entered-dos1 dirty-prompt0"
+  ],
+  "processes": {
+    "build": {
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-wow-clock-implementation/build-only.ps1",
+      "start": "2026-11-19T09:24:17.5908598-08:00",
+      "pid": 24968
+    },
+    "publication": {
+      "start": "2026-11-19T09:27:24.1590351-08:00",
+      "pid": 25768,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-wow-clock-implementation/publish-only.ps1"
+    },
+    "tests": {
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-wow-clock-implementation/tests.ps1",
+      "start": "2026-11-19T09:28:05.9205056-08:00",
+      "pid": 20444
+    }
+  },
+  "build": "cached full supported x86/x64 and reference-x86 worker",
+  "normalized_images": "NTVDM changed; other10 identical after package GUID and PE COFF/debug timestamp masking",
+  "evidence_root": "build/t483-s14-wow-clock-implementation",
+  "limitations": [
+    "No Full or new manual Win3.x/Win95 acceptance.",
+    "Partial-created clock test constructs the state after event creation/thread failure; it does not claim inducing Windows CreateThread resource exhaustion.",
+    "No new direct-edge elimination;147 eliminated/421 open remains unchanged.",
+    "SAS provider/copy_forward, XMS cancellation and USER projection storage are not claimed migrated."
+  ]
+}

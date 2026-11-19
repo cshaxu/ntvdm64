@@ -389,3 +389,14 @@ publication,75 lease assertions,33 linear-memory assertions,redirector/thread/
 WOW and published NESticle/DIR pass. [SAS/XMS source review](s14-sas-xms-owner-review.json)
 keeps original CPU algorithms and product cancellation separate; C0040 remains
 open. No new TLS, dispatch table or session manager. Mirror delta0/0.
+
+S14 follow-up: [WOW page-domain ownership review](s14-wow-page-domain-owner-review.json)
+records107 function ranges in2760 lines, the original CPU and USER storage
+coupling, and the next bounded shared-clock extraction. This is source evidence
+only: no product modification, runtime result or new eliminated dependency.
+
+S14 P21: [actual shared WOW clock resource](s14-p21-wow-clock-implementation.json)
+moves page/event/thread ownership and cleanup into B; F keeps guest map/unmap
+and CPU/session timing. Cached builds,dual11 publication,23 clock assertions,
+actual CCPU WOW clock update/reentry and published DOS checks pass. Mirror
+delta0/0; direct ledger147 eliminated/421 open unchanged. USER/SAS remains open.

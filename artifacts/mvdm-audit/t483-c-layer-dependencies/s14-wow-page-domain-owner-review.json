@@ -1,0 +1,1721 @@
+{
+  "task": "T483 S14",
+  "baseline": "3454e4177cb77b860323954fb84d414a430349db",
+  "kind": "source ownership investigation, not a runtime result",
+  "inputs": [
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "sha256": "c685d4cc5ef52d4b8301946e386f5824245f7699bce90ac52f0b2d2f3c5b6f8c"
+    },
+    {
+      "path": "src/common/wow/page_domain.h",
+      "sha256": "ca57c6af30723dca4c09c346a2f9d11bb0b23f2936aa3389d679745bf24899d5"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h",
+      "sha256": "0bcb56eeca450d4eb1dadcf8319eacd5700f45bdd2960bfd30c39f628749fa56"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_user_client_view_layout.h",
+      "sha256": "db410bac67ce2d3aac62dc7d4c1fd43a362abcb0f7a48687a7f91ca39e0e4c27"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_dpmi_binding.c",
+      "sha256": "a77d13a4091e2b5e5be5ab26b301b02e7546c73c5e0693f8d292ab9fc306adf3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "sha256": "8ff3d15be855aef22138c04d74e3090bf36ca1b580bb2fb385e76c44ded8a158"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "sha256": "20c85513ed25cac3ac5b3403cf5c0ffb6d1cc5b6c78d5f2b5d0e36419d06ee0b"
+    },
+    {
+      "path": "test/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "sha256": "d4ad701bfde96395cb3d72cfd55f744591f5c0fba0d92637fbba102357cd4278"
+    }
+  ],
+  "file_lines": 2760,
+  "functions": [
+    {
+      "name": "class_bucket",
+      "start_line": 177,
+      "end_line": 180,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "class_index_insert",
+      "start_line": 182,
+      "end_line": 187,
+      "calls": [
+        "class_bucket"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "class_index_link",
+      "start_line": 189,
+      "end_line": 195,
+      "calls": [
+        "class_bucket"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_collect_menu_storage",
+      "start_line": 205,
+      "end_line": 216,
+      "calls": [
+        "GetProcessHeap",
+        "HeapFree",
+        "VdmFreeVirtualMemory"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmFreeVirtualMemory"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_defer_menu_storage",
+      "start_line": 218,
+      "end_line": 223,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "window_bucket",
+      "start_line": 246,
+      "end_line": 249,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "window_index_insert",
+      "start_line": 250,
+      "end_line": 255,
+      "calls": [
+        "window_bucket"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "window_borrow_find",
+      "start_line": 256,
+      "end_line": 262,
+      "calls": [
+        "window_bucket"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "dispose_window_borrow",
+      "start_line": 263,
+      "end_line": 278,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapFree",
+        "SetLastError",
+        "dispose",
+        "window_bucket"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_window_observed",
+      "start_line": 281,
+      "end_line": 285,
+      "calls": [
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_round_page",
+      "start_line": 293,
+      "end_line": 297,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_report",
+      "start_line": 303,
+      "end_line": 307,
+      "calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "mvdm_softpc_report_dpmi_mode_state"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "clock_publisher",
+      "start_line": 309,
+      "end_line": 319,
+      "calls": [
+        "GetTickCount",
+        "WaitForSingleObject"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_dispose",
+      "start_line": 321,
+      "end_line": 379,
+      "calls": [
+        "CloseHandle",
+        "GetProcessHeap",
+        "HeapFree",
+        "SetEvent",
+        "VdmFreeVirtualMemory",
+        "VdmRemoveVirtualMemory",
+        "VirtualFree",
+        "WaitForSingleObject",
+        "ZeroMemory",
+        "dispose_window_borrow",
+        "mvdm_softpc_wow_page_domain_leave_protected",
+        "page_domain_collect_menu_storage"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmFreeVirtualMemory",
+        "VdmRemoveVirtualMemory"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_store_descriptor",
+      "start_line": 381,
+      "end_line": 393,
+      "calls": [
+        "c_sas_storedw"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_create_client_view",
+      "start_line": 395,
+      "end_line": 477,
+      "calls": [
+        "GetCursorPos",
+        "GetSysColor",
+        "GetSystemMetrics",
+        "VdmAllocateVirtualMemory",
+        "c_sas_fills",
+        "c_sas_storedw",
+        "page_domain_round_page"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmAllocateVirtualMemory",
+        "c_sas_fills",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_create_desktop_root",
+      "start_line": 479,
+      "end_line": 538,
+      "calls": [
+        "GetDesktopWindow",
+        "GetSystemMetrics",
+        "LOWORD",
+        "c_sas_storedw",
+        "c_sas_storew"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_storedw",
+        "c_sas_storew"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_create_wow_gdt",
+      "start_line": 540,
+      "end_line": 573,
+      "calls": [
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "VdmAllocateVirtualMemory",
+        "c_getGDT_BASE",
+        "c_getGDT_LIMIT",
+        "c_sas_loads",
+        "c_sas_stores",
+        "page_domain_store_descriptor"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmAllocateVirtualMemory",
+        "c_getGDT_BASE",
+        "c_getGDT_LIMIT",
+        "c_sas_loads",
+        "c_sas_stores"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_create",
+      "start_line": 575,
+      "end_line": 655,
+      "calls": [
+        "CreateEventA",
+        "CreateThread",
+        "GetTickCount",
+        "VdmAddVirtualMemory",
+        "VdmAllocateVirtualMemory",
+        "VirtualAlloc",
+        "c_sas_fills",
+        "c_sas_memory_size",
+        "c_sas_storedw",
+        "c_sas_twenty_bit_wrapping_enabled",
+        "page_domain_create_client_view",
+        "page_domain_create_desktop_root",
+        "page_domain_create_wow_gdt",
+        "page_domain_dispose",
+        "page_domain_report",
+        "session_register_teardown"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmAddVirtualMemory",
+        "VdmAllocateVirtualMemory",
+        "c_sas_fills",
+        "c_sas_memory_size",
+        "c_sas_storedw",
+        "c_sas_twenty_bit_wrapping_enabled"
+      ],
+      "session_calls": [
+        "session_register_teardown"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_enter",
+      "start_line": 657,
+      "end_line": 680,
+      "calls": [
+        "c_getCR0",
+        "c_setCR0",
+        "c_setCR3",
+        "c_setGDT_BASE_LIMIT",
+        "mvdm_softpc_wow_page_domain_leave_protected",
+        "page_domain_client_desktop",
+        "page_domain_create",
+        "page_domain_report",
+        "session_thread_current",
+        "session_valid"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_setCR0",
+        "c_setCR3",
+        "c_setGDT_BASE_LIMIT"
+      ],
+      "session_calls": [
+        "session_thread_current",
+        "session_valid"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_leave_protected",
+      "start_line": 682,
+      "end_line": 690,
+      "calls": [
+        "c_getCR0",
+        "c_getGDT_BASE",
+        "c_setCR0",
+        "c_setGDT_BASE_LIMIT",
+        "page_domain_report"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getGDT_BASE",
+        "c_setCR0",
+        "c_setGDT_BASE_LIMIT"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_reenter_protected",
+      "start_line": 692,
+      "end_line": 705,
+      "calls": [
+        "c_getCR0",
+        "c_setCR0",
+        "c_setCR3",
+        "c_setGDT_BASE_LIMIT",
+        "page_domain_report"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_setCR0",
+        "c_setCR3",
+        "c_setGDT_BASE_LIMIT"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_active",
+      "start_line": 707,
+      "end_line": 710,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_activate_wow_context",
+      "start_line": 712,
+      "end_line": 720,
+      "calls": [
+        "c_getCR0",
+        "c_setGDT_BASE_LIMIT",
+        "page_domain_report"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_setGDT_BASE_LIMIT"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_guest_shared_info",
+      "start_line": 722,
+      "end_line": 725,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_guest_teb",
+      "start_line": 727,
+      "end_line": 730,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_set_expected_windows_version",
+      "start_line": 732,
+      "end_line": 744,
+      "calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_publish_cursor",
+      "start_line": 746,
+      "end_line": 762,
+      "calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_publish_system_color",
+      "start_line": 764,
+      "end_line": 778,
+      "calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_guest_csr_flag",
+      "start_line": 780,
+      "end_line": 783,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_client_desktop_ready",
+      "start_line": 785,
+      "end_line": 791,
+      "calls": [
+        "c_sas_dw_at"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_client_desktop",
+      "start_line": 793,
+      "end_line": 806,
+      "calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_set_client_desktop",
+      "start_line": 808,
+      "end_line": 817,
+      "calls": [
+        "page_domain_client_desktop"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_clear_client_desktop",
+      "start_line": 819,
+      "end_line": 822,
+      "calls": [
+        "page_domain_client_desktop"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_child_style",
+      "start_line": 827,
+      "end_line": 830,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_store_owned_words",
+      "start_line": 840,
+      "end_line": 858,
+      "calls": [
+        "CopyMemory",
+        "c_GetPhyAdd",
+        "c_getCPL",
+        "c_getVM",
+        "c_sas_storedw",
+        "xtrn2phy"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_GetPhyAdd",
+        "c_getCPL",
+        "c_getVM",
+        "c_sas_storedw",
+        "xtrn2phy"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_window_fields",
+      "start_line": 860,
+      "end_line": 878,
+      "calls": [
+        "CopyMemory",
+        "c_sas_storedw",
+        "page_domain_child_style",
+        "page_domain_store_owned_words"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_window_info",
+      "start_line": 880,
+      "end_line": 905,
+      "calls": [
+        "GetLastError",
+        "GetWindowContextHelpId",
+        "GetWindowLongA",
+        "SetLastError",
+        "page_domain_child_style",
+        "page_domain_window_fields",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_refresh_window",
+      "start_line": 907,
+      "end_line": 924,
+      "calls": [
+        "GetWindowInfo",
+        "LOWORD",
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_dw_at",
+        "page_domain_window_info",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_dw_at"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_callback_window",
+      "start_line": 926,
+      "end_line": 940,
+      "calls": [
+        "LOWORD",
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "mvdm_softpc_wow_page_domain_refresh_window"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_restore_callback",
+      "start_line": 942,
+      "end_line": 951,
+      "calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_storedw"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "page_domain_callback_context_valid",
+      "start_line": 957,
+      "end_line": 967,
+      "calls": [
+        "c_sas_dw_at",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_exchange_client_context",
+      "start_line": 969,
+      "end_line": 993,
+      "calls": [
+        "CopyMemory",
+        "GetLastError",
+        "SetLastError",
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "page_domain_callback_context_valid",
+        "page_domain_menu_context"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_include_object",
+      "start_line": 1001,
+      "end_line": 1010,
+      "calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_class_allocation",
+      "start_line": 1012,
+      "end_line": 1019,
+      "calls": [
+        "class_bucket"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_prepare_window",
+      "start_line": 1025,
+      "end_line": 1066,
+      "calls": [
+        "GetProcessHeap",
+        "GetWindowThreadProcessId",
+        "HeapAlloc",
+        "HeapFree",
+        "VdmAllocateVirtualMemory",
+        "c_sas_fills",
+        "c_sas_storedw",
+        "mvdm_softpc_wow_page_domain_release_window",
+        "page_domain_class_allocation",
+        "page_domain_window_fields",
+        "page_domain_window_info",
+        "window_index_insert"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmAllocateVirtualMemory",
+        "c_sas_fills",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_commit_window",
+      "start_line": 1070,
+      "end_line": 1080,
+      "calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "page_domain_include_object"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_publish_handle",
+      "start_line": 1082,
+      "end_line": 1165,
+      "calls": [
+        "GetWindowInfo",
+        "IsWindow",
+        "LOWORD",
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "mvdm_softpc_wow_page_domain_release_retained_window",
+        "mvdm_softpc_wow_page_domain_release_window",
+        "mvdm_softpc_wow_page_domain_retire_handle",
+        "page_domain_class_allocation",
+        "page_domain_commit_window",
+        "page_domain_prepare_window",
+        "page_domain_window_info",
+        "page_domain_window_observed",
+        "session_thread_current",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_publish_handle",
+      "start_line": 1167,
+      "end_line": 1173,
+      "calls": [
+        "page_domain_publish_handle"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_cancel_native_adoption",
+      "start_line": 1175,
+      "end_line": 1192,
+      "calls": [
+        "LOWORD",
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_dw_at",
+        "page_domain_class_allocation",
+        "session_thread_current",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_dw_at"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "page_domain_menu_context",
+      "start_line": 1199,
+      "end_line": 1204,
+      "calls": [
+        "c_getCR0",
+        "c_getCR3",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_getCR0",
+        "c_getCR3"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "page_domain_menu_lookup",
+      "start_line": 1206,
+      "end_line": 1213,
+      "calls": [
+        "LOWORD",
+        "c_sas_dw_at"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_prepare_menu_storage",
+      "start_line": 1221,
+      "end_line": 1237,
+      "calls": [
+        "GetProcessHeap",
+        "HeapAlloc",
+        "SetLastError",
+        "VdmAllocateVirtualMemory",
+        "c_sas_fills"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmAllocateVirtualMemory",
+        "c_sas_fills"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_publish_menus",
+      "start_line": 1239,
+      "end_line": 1374,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "LOWORD",
+        "SetLastError",
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "page_domain_collect_menu_storage",
+        "page_domain_defer_menu_storage",
+        "page_domain_include_object",
+        "page_domain_menu_context",
+        "page_domain_menu_lookup",
+        "page_domain_prepare_menu_storage"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_publish_menu",
+      "start_line": 1376,
+      "end_line": 1382,
+      "calls": [
+        "mvdm_softpc_wow_page_domain_publish_menus",
+        "page_domain_menu_lookup"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_menu_referenced",
+      "start_line": 1384,
+      "end_line": 1409,
+      "calls": [
+        "GetCurrentProcessId",
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "page_domain_child_style",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_retire_menu",
+      "start_line": 1411,
+      "end_line": 1449,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "LOWORD",
+        "SetLastError",
+        "c_sas_storedw",
+        "page_domain_collect_menu_storage",
+        "page_domain_defer_menu_storage",
+        "page_domain_menu_context",
+        "page_domain_menu_lookup",
+        "page_domain_menu_referenced"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_window_menu",
+      "start_line": 1451,
+      "end_line": 1463,
+      "calls": [
+        "LOWORD",
+        "c_sas_storedw",
+        "page_domain_child_style",
+        "page_domain_menu_context",
+        "page_domain_menu_lookup",
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_window_lookup",
+      "start_line": 1465,
+      "end_line": 1474,
+      "calls": [
+        "LOWORD",
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "window_borrow_link",
+      "start_line": 1476,
+      "end_line": 1481,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "window_borrow_is_current",
+      "start_line": 1483,
+      "end_line": 1490,
+      "calls": [
+        "LOWORD",
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_window_handle",
+      "start_line": 1492,
+      "end_line": 1499,
+      "calls": [
+        "LOWORD",
+        "page_domain_menu_context",
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_handle_metadata",
+      "start_line": 1501,
+      "end_line": 1508,
+      "calls": [
+        "page_domain_menu_context",
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "borrow_window_backing",
+      "start_line": 1513,
+      "end_line": 1528,
+      "calls": [
+        "GetProcessHeap",
+        "HeapAlloc",
+        "window_borrow_find",
+        "window_borrow_link",
+        "window_index_insert"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_borrow_window",
+      "start_line": 1530,
+      "end_line": 1536,
+      "calls": [
+        "borrow_window_backing",
+        "page_domain_menu_context",
+        "page_domain_window_lookup"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "release_window_record",
+      "start_line": 1540,
+      "end_line": 1561,
+      "calls": [
+        "VdmFreeVirtualMemory",
+        "dispose_window_borrow",
+        "page_domain_window_referenced",
+        "window_borrow_link"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmFreeVirtualMemory"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "release_window_backing",
+      "start_line": 1563,
+      "end_line": 1569,
+      "calls": [
+        "page_domain_menu_context",
+        "release_window_record",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_collect_retired_windows",
+      "start_line": 1571,
+      "end_line": 1591,
+      "calls": [
+        "VdmFreeVirtualMemory",
+        "dispose_window_borrow",
+        "page_domain_menu_context",
+        "page_domain_window_referenced"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmFreeVirtualMemory"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_release_window",
+      "start_line": 1593,
+      "end_line": 1596,
+      "calls": [
+        "release_window_backing"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_release_retained_window",
+      "start_line": 1598,
+      "end_line": 1601,
+      "calls": [
+        "release_window_backing"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_bind_window_host_storage",
+      "start_line": 1603,
+      "end_line": 1613,
+      "calls": [
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_retain_host_window",
+      "start_line": 1615,
+      "end_line": 1624,
+      "calls": [
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_window_host_storage",
+      "start_line": 1626,
+      "end_line": 1633,
+      "calls": [
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_read_window_words",
+      "start_line": 1635,
+      "end_line": 1645,
+      "calls": [
+        "c_sas_dw_at",
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_exchange_window_word",
+      "start_line": 1647,
+      "end_line": 1660,
+      "calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_read_window_identity",
+      "start_line": 1662,
+      "end_line": 1672,
+      "calls": [
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_copy_owned_ram",
+      "start_line": 1680,
+      "end_line": 1686,
+      "calls": [
+        "CopyMemory",
+        "c_GetLinAdd",
+        "c_sas_loads"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_GetLinAdd",
+        "c_sas_loads"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_read_owned_word",
+      "start_line": 1688,
+      "end_line": 1693,
+      "calls": [
+        "page_domain_copy_owned_ram"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_read_window_words_view",
+      "start_line": 1695,
+      "end_line": 1712,
+      "calls": [
+        "page_domain_copy_owned_ram",
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_publish_window_links",
+      "start_line": 1731,
+      "end_line": 1735,
+      "calls": [
+        "mvdm_softpc_wow_page_domain_replace_window_links"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_replace_window_links",
+      "start_line": 1737,
+      "end_line": 1743,
+      "calls": [
+        "page_domain_replace_window_links"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_replace_window_links",
+      "start_line": 1745,
+      "end_line": 1914,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "IsWindow",
+        "LOWORD",
+        "SetLastError",
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "dispose_window_borrow",
+        "page_domain_commit_window",
+        "page_domain_menu_context",
+        "page_domain_store_owned_words",
+        "page_domain_window_fields",
+        "page_domain_window_lookup",
+        "page_domain_window_observed",
+        "page_domain_withdraw_window",
+        "window_borrow_find",
+        "window_index_insert"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_window_has_edge",
+      "start_line": 1916,
+      "end_line": 1923,
+      "calls": [
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_window_referenced",
+      "start_line": 1925,
+      "end_line": 1936,
+      "calls": [
+        "page_domain_window_has_edge",
+        "window_borrow_is_current"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_withdraw_window",
+      "start_line": 1941,
+      "end_line": 1970,
+      "calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "page_domain_child_style"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_retire_handle",
+      "start_line": 1972,
+      "end_line": 2009,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "LOWORD",
+        "SetLastError",
+        "VdmFreeVirtualMemory",
+        "c_getCR0",
+        "c_getCR3",
+        "mvdm_softpc_wow_page_domain_collect_retired_windows",
+        "page_domain_window_referenced",
+        "page_domain_withdraw_window",
+        "session_thread_current",
+        "window_borrow_find",
+        "window_borrow_link",
+        "window_index_insert"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmFreeVirtualMemory",
+        "c_getCR0",
+        "c_getCR3"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_publish_named_class",
+      "start_line": 2011,
+      "end_line": 2076,
+      "calls": [
+        "GetProcessHeap",
+        "HIWORD",
+        "HeapAlloc",
+        "HeapFree",
+        "VdmAllocateVirtualMemory",
+        "VdmFreeVirtualMemory",
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_fills",
+        "c_sas_storedw",
+        "c_sas_stores",
+        "c_sas_storew",
+        "class_index_insert",
+        "page_domain_include_object",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmAllocateVirtualMemory",
+        "VdmFreeVirtualMemory",
+        "c_getCR0",
+        "c_getCR3",
+        "c_sas_fills",
+        "c_sas_storedw",
+        "c_sas_stores",
+        "c_sas_storew"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "class_is_referenced",
+      "start_line": 2078,
+      "end_line": 2088,
+      "calls": [
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_retire_class",
+      "start_line": 2090,
+      "end_line": 2123,
+      "calls": [
+        "GetProcessHeap",
+        "HeapFree",
+        "SetLastError",
+        "VdmFreeVirtualMemory",
+        "c_getCR0",
+        "c_getCR3",
+        "class_index_link",
+        "class_is_referenced",
+        "mvdm_softpc_wow_page_domain_collect_retired_windows",
+        "session_thread_current"
+      ],
+      "cpu_or_mapping_calls": [
+        "VdmFreeVirtualMemory",
+        "c_getCR0",
+        "c_getCR3"
+      ],
+      "session_calls": [
+        "session_thread_current"
+      ]
+    },
+    {
+      "name": "compare_class_reference",
+      "start_line": 2125,
+      "end_line": 2129,
+      "calls": [],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_collect_observed_classes",
+      "start_line": 2131,
+      "end_line": 2177,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "SetLastError",
+        "bsearch",
+        "mvdm_softpc_wow_page_domain_collect_retired_windows",
+        "mvdm_softpc_wow_page_domain_retire_class",
+        "page_domain_menu_context",
+        "page_domain_read_owned_word",
+        "qsort"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_release_class",
+      "start_line": 2179,
+      "end_line": 2199,
+      "calls": [
+        "class_is_referenced",
+        "mvdm_softpc_wow_page_domain_retire_class",
+        "page_domain_class_allocation",
+        "page_domain_menu_context",
+        "page_domain_read_owned_word",
+        "window_borrow_is_current"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_observe_window",
+      "start_line": 2201,
+      "end_line": 2238,
+      "calls": [
+        "HIWORD",
+        "LOWORD",
+        "c_sas_dw_at",
+        "c_sas_storedw",
+        "mvdm_softpc_wow_page_domain_collect_observed_classes",
+        "mvdm_softpc_wow_page_domain_publish_named_class",
+        "mvdm_softpc_wow_page_domain_refresh_window",
+        "page_domain_class_allocation",
+        "page_domain_menu_context",
+        "page_domain_publish_handle"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_storedw"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "copy_window_observation",
+      "start_line": 2240,
+      "end_line": 2314,
+      "calls": [
+        "SetLastError",
+        "ZeroMemory",
+        "bsearch",
+        "c_sas_dw_at",
+        "c_sas_loads",
+        "page_domain_child_style",
+        "page_domain_class_allocation",
+        "page_domain_copy_owned_ram"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at",
+        "c_sas_loads"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_read_window_view",
+      "start_line": 2316,
+      "end_line": 2331,
+      "calls": [
+        "GetLastError",
+        "SetLastError",
+        "copy_window_observation",
+        "page_domain_menu_context",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_borrow_callback_window",
+      "start_line": 2333,
+      "end_line": 2365,
+      "calls": [
+        "GetLastError",
+        "SetLastError",
+        "c_sas_dw_at",
+        "mvdm_softpc_wow_page_domain_borrow_window",
+        "page_domain_menu_context",
+        "page_domain_read_owned_word",
+        "page_domain_window_lookup",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_borrow_window_relation",
+      "start_line": 2367,
+      "end_line": 2404,
+      "calls": [
+        "GetLastError",
+        "SetLastError",
+        "c_sas_dw_at",
+        "mvdm_softpc_wow_page_domain_borrow_window",
+        "page_domain_menu_context",
+        "page_domain_read_owned_word",
+        "page_domain_window_lookup",
+        "window_borrow_find"
+      ],
+      "cpu_or_mapping_calls": [
+        "c_sas_dw_at"
+      ],
+      "session_calls": []
+    },
+    {
+      "name": "compare_window_observation_slot",
+      "start_line": 2406,
+      "end_line": 2411,
+      "calls": [
+        "LOWORD"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "compare_window_menu_slot",
+      "start_line": 2413,
+      "end_line": 2418,
+      "calls": [
+        "LOWORD"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "copy_window_projection",
+      "start_line": 2420,
+      "end_line": 2435,
+      "calls": [
+        "copy_window_observation",
+        "page_domain_read_owned_word"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "copy_current_window_view",
+      "start_line": 2437,
+      "end_line": 2502,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "LOWORD",
+        "SetLastError",
+        "copy_window_projection",
+        "page_domain_menu_context",
+        "qsort",
+        "window_borrow_find",
+        "window_borrow_is_current"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_copy_window_view",
+      "start_line": 2504,
+      "end_line": 2508,
+      "calls": [
+        "copy_current_window_view"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_copy_window_menu_view",
+      "start_line": 2510,
+      "end_line": 2514,
+      "calls": [
+        "copy_current_window_view"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "page_domain_validate_window_graph",
+      "start_line": 2519,
+      "end_line": 2574,
+      "calls": [
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "LOWORD",
+        "SetLastError",
+        "ZeroMemory"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_project_window_graph",
+      "start_line": 2578,
+      "end_line": 2729,
+      "calls": [
+        "CopyMemory",
+        "GetLastError",
+        "GetProcessHeap",
+        "HeapAlloc",
+        "HeapFree",
+        "LOWORD",
+        "SetLastError",
+        "borrow_window_backing",
+        "mvdm_softpc_wow_page_domain_collect_observed_classes",
+        "mvdm_softpc_wow_page_domain_publish_named_class",
+        "page_domain_class_allocation",
+        "page_domain_menu_context",
+        "page_domain_prepare_window",
+        "page_domain_read_owned_word",
+        "page_domain_replace_window_links",
+        "page_domain_validate_window_graph",
+        "page_domain_window_observed",
+        "release_window_record"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_forget_observed_window",
+      "start_line": 2731,
+      "end_line": 2739,
+      "calls": [
+        "LOWORD",
+        "mvdm_softpc_wow_page_domain_retire_handle",
+        "page_domain_menu_context",
+        "page_domain_window_lookup",
+        "page_domain_window_observed"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    },
+    {
+      "name": "mvdm_softpc_wow_page_domain_collect_observed_windows",
+      "start_line": 2741,
+      "end_line": 2760,
+      "calls": [
+        "GetLastError",
+        "IsWindow",
+        "SetLastError",
+        "mvdm_softpc_wow_page_domain_collect_observed_classes",
+        "mvdm_softpc_wow_page_domain_retire_handle",
+        "page_domain_menu_context",
+        "page_domain_read_owned_word",
+        "page_domain_window_observed",
+        "page_domain_window_referenced"
+      ],
+      "cpu_or_mapping_calls": [],
+      "session_calls": []
+    }
+  ],
+  "scan_limit": "Lexical function/call inventory supplements manually traced entry/disposal paths; it is not a compiler reachability or ownership proof. Macro calls remain in the list.",
+  "reviewed_chains": [
+    {
+      "chain": "entry and CPU mode",
+      "evidence": "nt_bop.c enters the domain and selects WOW context; DPMI modesw.c and dpmi386.c leave/reenter via the existing services. page_domain_create builds identity/page-clock tables and a copied DOSX GDT; enter/reenter writes CR3/CR0/GDT.",
+      "decision": "Keep CPU operations outside B. Their original C owner recovery requires a separate measured mirror candidate; do not replace them with another B forwarding table."
+    },
+    {
+      "chain": "compatibility USER projection",
+      "evidence": "WND/CLS/MENU records, borrow/refcount lists and hash indexes share domain storage with numeric guest backing; publication and retirement read/write through c_sas_* and free through VdmFreeVirtualMemory. page_domain_menu_context checks PG and current CR3 as well as session.",
+      "decision": "Not independently movable as-is. A B copy helper would not preserve the raw SAS fallback/guest-entry semantics. Keep one backing owner and resolve the memory service prerequisite before moving this group; no duplicate object cache."
+    },
+    {
+      "chain": "shared clock",
+      "evidence": "clock_publisher uses only WaitForSingleObject, GetTickCount and two volatile words. create allocates a host page before VdmAddVirtualMemory, maps it, then starts the publisher. dispose signals/joins publisher before VdmRemoveVirtualMemory, then releases the host page.",
+      "decision": "Eligible complete next B cohort: host page, stop event, publisher thread and their ownership. F retains guest mapping and phase ordering. Existing 10ms publication policy remains unchanged; this adds no polling."
+    },
+    {
+      "chain": "teardown",
+      "evidence": "One session teardown callback first leaves protected mode, retires USER storage, stops clock, removes its guest mapping, then frees host page/page tables/client view/GDT. Failed create uses the same disposal path.",
+      "decision": "Do not move the whole teardown callback to B or combine clock stop with host-page free before the guest unmap. Preserve partial-create cleanup and idempotent stopped resource handling."
+    }
+  ],
+  "next_implementation": {
+    "module": "B-owned shared WOW clock resource",
+    "phases": [
+      "allocate and initialize host page",
+      "F registers/maps that page",
+      "start existing publisher",
+      "stop/join publisher",
+      "F removes guest mapping",
+      "release host page"
+    ],
+    "retained_F": [
+      "mapping registration/removal",
+      "CR0/CR3/GDT selection",
+      "session teardown registration and ordering",
+      "USER backing ownership pending memory-boundary resolution"
+    ],
+    "verification": [
+      "resource creation/start/stop/release and partial-creation cleanup",
+      "existing actual-CCPU high-linear/read-only-clock/reentry checks",
+      "WOW page-domain lifecycle and published DOS regression"
+    ],
+    "mirror_expected_delta": {
+      "points": 0,
+      "lines": 0
+    }
+  },
+  "delivery_state": "No product source modified by this investigation. Published P20 remains unchanged. No new eliminated dependency IDs."
+}

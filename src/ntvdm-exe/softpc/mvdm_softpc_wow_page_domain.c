@@ -1,5 +1,6 @@
 #include "mvdm_softpc_wow_page_domain.h"
 #include "mvdm_softpc_effective_address.h"
+#include "compat/include/wow_shared_clock.h"
 
 #include <windows.h>
 #include <stdlib.h>
@@ -132,9 +133,7 @@ typedef struct mvdm_softpc_wow_page_domain {
     ULONG table_allocation;
     ULONG table_bytes;
     ULONG clock_intel_address;
-    volatile ULONG *clock_page;
-    HANDLE clock_stop;
-    HANDLE clock_thread;
+    compat_wow_shared_clock clock;
     ULONG directory;
     ULONG client_allocation;
     ULONG guest_shared_info;
@@ -306,18 +305,6 @@ static void page_domain_report(char const *stage)
         (unsigned long)c_getCR3(), 0u, 0u, 0u, 0u);
 }
 
-static DWORD WINAPI clock_publisher(void *context)
-{
-    mvdm_softpc_wow_page_domain *value = context;
-
-    for (;;) {
-        if (WaitForSingleObject(value->clock_stop, 10u) != WAIT_TIMEOUT)
-            return 0;
-        value->clock_page[0] = GetTickCount();
-        value->clock_page[1] = 0x01000000u;
-    }
-}
-
 static void page_domain_dispose(void *context)
 {
     mvdm_softpc_wow_page_domain *value = context;
@@ -332,11 +319,7 @@ static void page_domain_dispose(void *context)
         retired_menu_storage = storage->next;
         HeapFree(GetProcessHeap(), 0, storage); /* VDM allocation domain tears down next. */
     }
-    if (value->clock_stop != NULL) SetEvent(value->clock_stop);
-    if (value->clock_thread != NULL) {
-        WaitForSingleObject(value->clock_thread, INFINITE);
-        CloseHandle(value->clock_thread);
-    }
+    compat_wow_shared_clock_stop(&value->clock);
     /* The provider normally retires every original-layout object itself.
      * Worker teardown is the exceptional backstop: no outstanding client
      * object may survive this worker's VDM allocation domain. */
@@ -364,11 +347,9 @@ static void page_domain_dispose(void *context)
         HeapFree(GetProcessHeap(), 0u, class_allocation);
     }
     ZeroMemory(class_index, sizeof(class_index));
-    if (value->clock_stop != NULL) CloseHandle(value->clock_stop);
     if (value->clock_intel_address != 0u)
         (void)VdmRemoveVirtualMemory(value->clock_intel_address);
-    if (value->clock_page != NULL)
-        (void)VirtualFree((void *)value->clock_page, 0u, MEM_RELEASE);
+    compat_wow_shared_clock_dispose(&value->clock);
     if (value->table_allocation != 0u)
         (void)VdmFreeVirtualMemory(value->table_allocation);
     if (value->client_allocation != 0u)
@@ -616,14 +597,10 @@ static int page_domain_create(session *owner)
     }
     page_domain_report("wow-domain-identity-ready");
     page_domain_report("wow-domain-clock-allocate");
-    domain.clock_page = VirtualAlloc(NULL, MVDM_SOFTPC_PAGE_BYTES,
-        MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
-    if (domain.clock_page == NULL) goto fail;
+    if (!compat_wow_shared_clock_allocate(&domain.clock)) goto fail;
     page_domain_report("wow-domain-clock-allocated");
-    domain.clock_page[0] = GetTickCount();
-    domain.clock_page[1] = 0x01000000u;
     page_domain_report("wow-domain-clock-register");
-    status = VdmAddVirtualMemory((ULONG)(ULONG_PTR)domain.clock_page,
+    status = VdmAddVirtualMemory((ULONG)(ULONG_PTR)domain.clock.page,
         MVDM_SOFTPC_PAGE_BYTES, &domain.clock_intel_address);
     if (status < 0) goto fail;
     page_domain_report("wow-domain-clock-registered");
@@ -634,11 +611,7 @@ static int page_domain_create(session *owner)
         (((MVDM_SOFTPC_SHARED_CLOCK_LINEAR >> 12) & 1023u) * 4u),
         domain.clock_intel_address | MVDM_SOFTPC_PAGE_PRESENT_USER_READ);
     page_domain_report("wow-domain-clock-ready");
-    domain.clock_stop = CreateEventA(NULL, TRUE, FALSE, NULL);
-    if (domain.clock_stop == NULL) goto fail;
-    domain.clock_thread = CreateThread(NULL, 0u, clock_publisher, &domain, 0u,
-        NULL);
-    if (domain.clock_thread == NULL) goto fail;
+    if (!compat_wow_shared_clock_start(&domain.clock)) goto fail;
     page_domain_report("wow-domain-thread-ready");
     if (!page_domain_create_client_view() || !page_domain_create_desktop_root() ||
             !page_domain_create_wow_gdt())

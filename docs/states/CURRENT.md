@@ -28,6 +28,17 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P21 moves the actual shared WOW clock resource into B: host page,
+stop event, publisher thread and cleanup. F retains guest mapping and CPU/
+session lifecycle. Stop/join precedes unmap; page release follows unmap.
+[P21 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p21-wow-clock-implementation.json)
+records cached full builds, dual11 publication/22 hashes,23 clock assertions,
+lease/memory/redirector/thread checks, actual CCPU WOW clock update/reentry,
+and published NESticle/DOS DIR. Packageceb7fcbe-4574-4763-8e1d-64bf4be708ab
+is published. Mirror delta0/0; cumulative reduction3 points/12 lines.
+Direct ledger remains147 eliminated/421 open. S14 still owns unresolved
+SAS/XMS and USER projection boundaries; this is not its closure.
+
 S14 P20 migrates five guest-memory acquire/release/copy/move implementations
 and their contract into B. F keeps SAS providers and lifecycle ownership;
 there is no new binding or state machine. Cached full builds, dual11 publication
@@ -87,6 +98,11 @@ transitive and1 excluded of618. Nine rows receive implementation evidence,
 not a second elimination count. Build-generation failures are retained in P17.
 
 ## Sequential Work
+
+[WOW page-domain ownership review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-page-domain-owner-review.json)
+separates clock ownership from CPU and USER backing. P21 completes the
+shared host-clock extraction. USER backing remains coupled to SAS and still
+requires its own boundary resolution; the source review is not runtime proof.
 
 [Approved S13-S19 worklist](../etc/operations/t483-compat-implementation-migration-plan.md):
 S13 closed; S14 memory active; S15 input/display, S16 COMMAND/BASE separation,
