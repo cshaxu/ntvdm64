@@ -38,7 +38,7 @@ P4-P5: [AMD64 roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p4
 
 P6: [Common storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json) expanded the tracker to617 IDs using production COFF/link ownership; release unchanged.
 
-P7 traced all ten mixed storage groups: seven redirector slots and the USER wheel remainder have C owners. Two BASE server globals require a startup-binding review in S14. The original server initializes both; the current lifecycle fixture supplies its own heap. Product failure has not been demonstrated. See the [per-symbol review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
+P7: [Mixed storage ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
 
 P8 indexed all 462 open link symbols against 170 fixed original caller sources. The [caller anchors](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p8-caller-anchors.json) distinguish name occurrences from product relocations. C0456 requires a calling-convention and guest-buffer ownership review before restoring the original flush provider. Package and tracker totals remain at P7.
 
@@ -116,7 +116,7 @@ P53: [Drawing contexts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12
 
 P54: [Client stubs](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p54-client-stubs-ownership.json).
 
-P55: [Capture/lookaside](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p55-capture-lookaside-ownership.json). Reviewed99/116:17 clear,66 lifecycle,16 ABI;17 remain. Open502/617. Mirror0/0; cumulative reduction2 points/10 lines. S12 active.
+P55: [Capture/lookaside](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p55-capture-lookaside-ownership.json).
 
 ## S11 Closure Record
 
@@ -171,3 +171,5 @@ Owner accepted and closed T483 S10. P1 shipped at 14969ed80 with the targeted ve
 
 Each sequential-file entry and exit reports both file and whole-audit totals.
 The unrelated project [TODO](TODO.md) remains separate.
+
+P56: [Class lookup ABI](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p56-class-lookup-abi.json). Reviewed101/116:17 clear,68 lifecycle,16 ABI;15 remain. Open501/617. Mirror0/0; cumulative reduction2 points/10 lines. Both cached builds, dual publication, class lookup and boundary checks passed. S12 active.

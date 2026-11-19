@@ -1,0 +1,271 @@
+{
+  "baseline": "dc7baa0e81d00865703b83a27d3904fa48fc5076",
+  "status": "P56 shared class lookup declarations; window manager and class ownership audit",
+  "files": [
+    {
+      "number": 100,
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "sha256": "7bdc635f086160eb4f0ac6902c890234c79169597e788943e97f4fdfbf5b0aa2",
+      "contexts": [
+        {
+          "object": "obj/opennt-user/control-body-winmgrc.obj",
+          "sha256": "8e4901ec7453c60159745a890e7a44233bdc3c3e6a11ff0c19995f04221b947f",
+          "undefined": [
+            "__imp__GetSystemMetrics@4",
+            "__imp__InflateRect@12",
+            "__FChildVisible@4",
+            "_GetWindowBorders@16",
+            "_NeedsWindowEdge@12",
+            "_wow_edit_client_info@0",
+            "_wow_window_client_validate_window@4",
+            "_wow_edit_native_ensure_gui_thread@0"
+          ],
+          "stableSymbols": [
+            "C0387",
+            "C0398",
+            "C0596"
+          ],
+          "dependencies": [
+            "obj/opennt-user/control-body-winmgrc.obj: #deps 66, deps mtime 8167769405069690 (VALID)",
+            "    ../../../../src/common/wow/user_runtime.h",
+            "    ../../../../src/compat/include/nt_event_declarations.h",
+            "    ../../../../src/compat/include/ntioapi.h",
+            "    ../../../../src/compat/include/opennt_support_thread.h",
+            "    ../../../../src/compat/include/opennt_support_types.h",
+            "    ../../../../src/compat/include/wow_class_lookup_bindings.h",
+            "    ../../../../src/compat/include/wow_control_brushes.h",
+            "    ../../../../src/compat/include/wow_control_message_abi.h",
+            "    ../../../../src/compat/include/wow_control_resource_abi.h",
+            "    ../../../../src/compat/include/wow_dialog_flags.h",
+            "    ../../../../src/compat/include/wow_dialog_slots.h",
+            "    ../../../../src/compat/include/wow_icon_size.h",
+            "    ../../../../src/compat/include/wow_multibyte.h",
+            "    ../../../../src/compat/include/wow_native_controls.h",
+            "    ../../../../src/compat/include/wow_native_environment.h",
+            "    ../../../../src/compat/include/wow_user_declarations.h",
+            "    ../../../../src/non-mvdm/public/internal/windows/inc/wingdip.h",
+            "    ../../../../src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+            "    ../../../../src/non-mvdm/windows/core/ntuser/client/globals.h",
+            "    ../../../../src/non-mvdm/windows/core/ntuser/client/usercli.h",
+            "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+            "    ../../../../src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+            "    ../../../../src/wow32-dll/include/control-client/precomp.h",
+            "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+            "    ../../../../src/wow32-dll/include/opennt_usercli_multipass.h",
+            "    ../../../../src/wow32-dll/include/wow_button_resources.h",
+            "    ../../../../src/wow32-dll/include/wow_class_words_binding.h",
+            "    ../../../../src/wow32-dll/include/wow_control_draw_state.h",
+            "    ../../../../src/wow32-dll/include/wow_default_message_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_default_window_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_dialog_api_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_dialog_creation_binding.h",
+            "    ../../../../src/wow32-dll/include/wow_dialog_native_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_dialog_procedure_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_dialog_state_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_call_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_conversion_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_drawing_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_entry_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_memory_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_menu_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_native_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_edit_state_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_hook_native_binding.h",
+            "    ../../../../src/wow32-dll/include/wow_menu_native_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_menu_parser_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_menu_resource_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_native_gui_thread.h",
+            "    ../../../../src/wow32-dll/include/wow_shared_user_abi.h",
+            "    ../../../../src/wow32-dll/include/wow_task_init_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_task_order_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_user_client_view_layout.h",
+            "    ../../../../src/wow32-dll/include/wow_user_private_access.h",
+            "    ../../../../src/wow32-dll/include/wow_user_registered_callbacks.h",
+            "    ../../../../src/wow32-dll/include/wow_window_client_state_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_window_creation_binding.h",
+            "    ../../../../src/wow32-dll/include/wow_window_dispatch_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_window_procedure_entry.h",
+            "    ../../../../src/wow32-dll/include/wow_window_words_binding.h",
+            ""
+          ],
+          "mapProviders": [
+            "0001:0004a410       _NeedsWindowEdge@12        1004b410 f   control-view-winmgr.obj",
+            "0001:0004a460       __FChildVisible@4          1004b460 f   control-view-winmgr.obj",
+            "0001:0004db00       _GetWindowBorders@16       1004eb00 f   default-borders.obj",
+            "0001:0006a5d0       _wow_edit_client_info@0    1006b5d0 f   wow_edit_call_bindings.obj",
+            "0001:0006cd90       _wow_window_client_validate_window@4 1006dd90 f   wow_window_client_state_bindings.obj",
+            "0001:00075790       _wow_edit_native_ensure_gui_thread@0 10076790 f   wow_native_environment.obj",
+            "0002:000009d4       __imp__InflateRect@12      1008e9d4     user32:USER32.dll",
+            "0002:00000a10       __imp__GetSystemMetrics@4  1008ea10     user32:USER32.dll"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 101,
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "sha256": "56ecb777d126c5614e0e9a2008529b9471f1aae71d553bb2ee9a34e714f97ef3",
+      "contexts": [
+        {
+          "object": "obj/opennt-user/class.obj",
+          "sha256": "785aa7ec5258872b75412cbfa065ae65516b3227b1e885c6ddad8abb1ee3ffa8",
+          "undefined": [],
+          "stableSymbols": [],
+          "dependencies": [
+            "obj/opennt-user/class.obj: #deps 12, deps mtime 8167769458539122 (VALID)",
+            "    ../../../../src/compat/include/nt_event_declarations.h",
+            "    ../../../../src/compat/include/ntioapi.h",
+            "    ../../../../src/compat/include/opennt_support_thread.h",
+            "    ../../../../src/compat/include/opennt_support_types.h",
+            "    ../../../../src/compat/include/wow_class_lookup_bindings.h",
+            "    ../../../../src/compat/include/wow_user_declarations.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+            ""
+          ],
+          "mapProviders": []
+        },
+        {
+          "object": "obj/opennt-user/class-register.obj",
+          "sha256": "fe234524e7e8fd9f6a10dddb8a62c0758063afc8c80b774a085b4bddbd5c232f",
+          "undefined": [],
+          "stableSymbols": [],
+          "dependencies": [
+            "obj/opennt-user/class-register.obj: #deps 19, deps mtime 8167769452320055 (VALID)",
+            "    ../../../../src/common/wow/user_runtime.h",
+            "    ../../../../src/compat/include/nt_event_declarations.h",
+            "    ../../../../src/compat/include/ntioapi.h",
+            "    ../../../../src/compat/include/opennt_support_thread.h",
+            "    ../../../../src/compat/include/opennt_support_types.h",
+            "    ../../../../src/compat/include/wow_class_lookup_bindings.h",
+            "    ../../../../src/compat/include/wow_user_declarations.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+            "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+            "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+            "    ../../../../src/wow32-dll/include/wow_class_register_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_class_words_binding.h",
+            "    ../../../../src/wow32-dll/include/wow_task_order_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_window_dispatch_bindings.h",
+            ""
+          ],
+          "mapProviders": []
+        },
+        {
+          "object": "obj/opennt-user/class-remove.obj",
+          "sha256": "cbe700f068a5c8b03c09fd417ae89d87b7d7843705f0e58af632988b2f5334d8",
+          "undefined": [
+            "__imp__SetLastError@4",
+            "__InnerGetClassPtr@12",
+            "_wow_class_words_find_atom@8"
+          ],
+          "stableSymbols": [
+            "C0330"
+          ],
+          "dependencies": [
+            "obj/opennt-user/class-remove.obj: #deps 17, deps mtime 8167769449613427 (VALID)",
+            "    ../../../../src/compat/include/nt_event_declarations.h",
+            "    ../../../../src/compat/include/ntioapi.h",
+            "    ../../../../src/compat/include/opennt_support_thread.h",
+            "    ../../../../src/compat/include/opennt_support_types.h",
+            "    ../../../../src/compat/include/wow_class_lookup_bindings.h",
+            "    ../../../../src/compat/include/wow_user_declarations.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+            "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+            "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+            "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+            "    ../../../../src/wow32-dll/include/wow_class_remove_bindings.h",
+            "    ../../../../src/wow32-dll/include/wow_class_words_binding.h",
+            "    ../../../../src/wow32-dll/include/wow_window_dispatch_bindings.h",
+            ""
+          ],
+          "mapProviders": [
+            "0001:00052c20       __InnerGetClassPtr@12      10053c20 f   class.obj",
+            "0001:00072670       _wow_class_words_find_atom@8 10073670 f   wow_class_words_binding.obj",
+            "0002:00000580       __imp__SetLastError@4      1008e580     kernel32:KERNEL32.dll"
+          ]
+        }
+      ]
+    }
+  ],
+  "change": {
+    "from": "src/wow32-dll/include/wow_class_lookup_bindings.h",
+    "to": "src/compat/include/wow_class_lookup_bindings.h",
+    "sha256": "4260b3b8b59c5bfe3a7f7683395bff3479bba4f24497a9988b52a1f57b3cc5c7",
+    "byteIdentical": true,
+    "scope": "49-line SDK-only metadata and original lookup declaration header. Existing include spelling resolves through the existing B search root. No new functions, state, signatures, source selectors or layout; mirror files unchanged."
+  },
+  "mechanisms": {
+    "winmgrc": "FChildVisible validates current enrolled window using F shared borrow scope then calls C _FChildVisible. GetAppCompatFlags/GetAppVer consume current WOW client info (C0387), not native executable metadata. Validation C0596 stays F pending S13 shared lifecycle review. Native GUI initialization C0398 already B. Original edge/border algorithms remain C; metrics and InflateRect native. Header C0064 remains mixed.",
+    "lookup": "Original _InnerGetClassPtr/GetClassPtr remain C. Production object has no undefined external symbol and now no D/E/F header. B owns the finite native metadata ABI, not C implementation or F registration lifetime. Private/public/client-module/system precedence, high-word module matching and deferred-destroy filtering unchanged.",
+    "registration": "Original _RegisterClassEx invokes context callbacks for native registration and CPD resolution, then writes original menu/WOW/task fields. F wow_class_client_bindings constructs context, preserves guest procedure encoding, invokes existing class registry, and projects completed fields after original function returns. Callback ownership is an outward runtime dependency even though COFF has no named F symbol. C0078 remains open; no second registry or migration solely based on empty undefined-symbol list.",
+    "removal": "Original _UnregisterClass finds private/public class, rejects live windows, and invokes context destroy callback. C0330 wow_class_words_find_atom is also a direct F link symbol. F destroys native class first; failure leaves menu ownership unchanged, success releases guest projection and detaches existing entry. C0079 remains open. Moving the register/remove headers wholesale into B would retain task/window binding dependencies.",
+    "followup": "S13 review shared F lifecycle and indirect callback ownership; S14 review remaining original declaration composition. Classification does not approve retaining every local mirror deviation."
+  },
+  "progress": {
+    "reviewedFiles": 101,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 68,
+    "deferredSourceAbiCompositionFiles": 16,
+    "unreviewedFiles": 15,
+    "totalFiles": 116,
+    "openIds": 501,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Cached x86/x64 and explicit four x86 worker images completed exit0; coherent eleven-image package staged.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "a06b8082-2fd0-4088-be50-e44f6f84818a",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityScope": "Only package GUID and COFF/debug-directory timestamps masked. All eleven match P47; raw images differ. Repeated Win16 runtime waived under owner authorization.",
+    "targeted": "Existing wow_original_class_lookup_fixture linked against final actual production class.obj: errors=0 checks=14. Tests private/public/system and client-module precedence, high-word module identity, deferred destruction, missing atom and owning-link mutation.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-class-lookup-abi/docs.log and docs.exit. git diff --check passed. Both mirror files equal HEAD bytes, moved header equals prior Git blob; all22 final publication hashes reverified.",
+    "boundaries": "Eight production A/B graphs passed;149 selected WOW objects and9 private-header negative controls passed; checks.exit0."
+  },
+  "limits": "No guest, mirror #error/#line, addon or winnt.zip change. Only S12 active. Source ownership proof is distinct from runtime evidence."
+}

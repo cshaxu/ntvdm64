@@ -650,11 +650,15 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+100 P56: Original visibility/border policies remain C; current client info C0387 and window validation C0596 remain F. Native GUI readiness already B. Mirror0/0; see s12-p56-class-lookup-abi.json.
+
 ## 101 — src/non-mvdm/windows/core/ntuser/kernel/class.c
 
 - 直接包含 · C0076 · wow32-dll · src/wow32-dll/include/wow_class_lookup_bindings.h
 - 直接包含 · C0078 · wow32-dll · src/wow32-dll/include/wow_class_register_bindings.h
 - 直接包含 · C0079 · wow32-dll · src/wow32-dll/include/wow_class_remove_bindings.h
+
+101 P56: Lookup header C0076 moved byte-identically to B; production lookup has no D/E/F header. Registration/removal C0078/C0079 and C0330 plus context callbacks remain lifecycle work. All three contexts reviewed; mirror0/0. See s12-p56-class-lookup-abi.json.
 
 ## 102 — src/non-mvdm/windows/core/ntuser/kernel/cleanup.c
 
