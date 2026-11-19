@@ -10,6 +10,8 @@
 
 001 核查：仅使用 NtvdmGetWindowsDirectoryA。原版 cmdconf.c:209 查询宿主 Windows 目录，当前函数读取 session_mvdm_system_root。结果用于 SHELL、COUNTRY 与 SystemRoot 展开。包目录绑定仍需解决，C0039 保持开放。未修改源码，镜像变化 0 点、0 行。
 
+001 处理方向：保留原版配置解析在 C；F 保有包选择及 session 生命周期。当前无可直接复用的目录注入入口。实际入口是 cmddisp.c 的 apfnSVCCmd 调用 cmdGetConfigSys(void) 或 cmdGetAutoexecBat(void)，再调用 ExpandConfigFiles(BOOLEAN)，均不接收根目录。现有 achSysRoot/dwLenSysRoot 会被 ExpandConfigFiles 覆写，且处理时会去掉末尾反斜线，不能仅在 F 启动时预填它们。解除边界需要设计由 F 初始化、C/B 持有的目录契约，并同时审查其他包目录消费者；不能把当前读取 session 的函数直接搬入 B。归入后续所有权设计，未证明可以原地删除依赖。当前文件保留在 C 的结论明确，接口实施仍待完成。
+
 ## 002 — src/mvdm-host/dos/command/cmdexec.c
 
 - 直接包含 · C0024 · ntvdm-exe · src/ntvdm-exe/command/include/mvdm_command_native_child.h
