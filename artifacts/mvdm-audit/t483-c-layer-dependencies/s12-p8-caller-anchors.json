@@ -1,0 +1,711 @@
+{
+  "fixed_original": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+  "baseline": "518c1cf23",
+  "method": "Exact COFF provider name (canonical tracker spelling) indexed as a C identifier in the current and fixed original caller. Physical lines, excluding comments and literals. A match may be a declaration or an unselected branch. Relocation evidence in points.jsonl independently identifies the selected current binding; this index does not prove identical semantics or transfer ownership.",
+  "counts": {
+    "points": 462,
+    "sources": 170,
+    "caller_symbol_pairs": 929,
+    "by_match": {
+      "neither": 670,
+      "both": 110,
+      "only_current": 149
+    }
+  },
+  "caller_spelling_evidence_fields": [
+    "current source path",
+    "physical lines with identifier in original blob",
+    "physical lines with identifier in current source"
+  ],
+  "sources": {
+    "src/mvdm-host/dos/command/cmdconf.c": {
+      "path": "base/mvdm/dos/command/cmdconf.c",
+      "git_blob": "0b57d2bf6340ba1a76a4a9dd15b17e710e54969d"
+    },
+    "src/mvdm-host/dos/command/cmdexec.c": {
+      "path": "base/mvdm/dos/command/cmdexec.c",
+      "git_blob": "61af4c591792b67c622621170edcc89a6733a5fd"
+    },
+    "src/mvdm-host/dos/command/cmdkeyb.c": {
+      "path": "base/mvdm/dos/command/cmdkeyb.c",
+      "git_blob": "f32a394d7b97ee95356e54d4a0ccec1d5af43636"
+    },
+    "src/mvdm-host/dos/command/cmdmisc.c": {
+      "path": "base/mvdm/dos/command/cmdmisc.c",
+      "git_blob": "4e8ed2557c4eccf4c0c3813d672a7a77f1c063c1"
+    },
+    "src/mvdm-host/dos/command/cmdpif.c": {
+      "path": "base/mvdm/dos/command/cmdpif.c",
+      "git_blob": "5fa2c2190c138024e92f7318e01088915142719b"
+    },
+    "src/mvdm-host/dos/dem/dem.c": {
+      "path": "base/mvdm/dos/dem/dem.c",
+      "git_blob": "b8b46868edadcca710152342f92611d0fb024eec"
+    },
+    "src/mvdm-host/dos/dem/demerror.c": {
+      "path": "base/mvdm/dos/dem/demerror.c",
+      "git_blob": "2775ddc2333c2fc82faeeffc155a2441623eb932"
+    },
+    "src/mvdm-host/dos/dem/demgset.c": {
+      "path": "base/mvdm/dos/dem/demgset.c",
+      "git_blob": "511867cae23a6efe93ffecd44df2f2e036857807"
+    },
+    "src/mvdm-host/dos/dem/demhndl.c": {
+      "path": "base/mvdm/dos/dem/demhndl.c",
+      "git_blob": "7d6fd50458f20295c44a0d68a7e8bf4085e36d93"
+    },
+    "src/mvdm-host/dos/dem/demsrch.c": {
+      "path": "base/mvdm/dos/dem/demsrch.c",
+      "git_blob": "bc99d4d4d83086c9059b5fe574e94d602fcd3963"
+    },
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": {
+      "path": "base/mvdm/dpmi32/i386/dpmi386.c",
+      "git_blob": "19c9d678cfa50f7be4be67bdbc249188e38bccaf"
+    },
+    "src/mvdm-host/dpmi32/modesw.c": {
+      "path": "base/mvdm/dpmi32/modesw.c",
+      "git_blob": "1cc618c4ece32487a4adac22542554d705a0bfb5"
+    },
+    "src/mvdm-host/softpc.new/base/bios/bios.c": {
+      "path": "base/mvdm/softpc.new/base/bios/bios.c",
+      "git_blob": "75e0a6a9cea8b1e7bdce232d92dcc5363ce9d149"
+    },
+    "src/mvdm-host/softpc.new/base/bios/build_id.c": {
+      "path": "base/mvdm/softpc.new/base/bios/build_id.c",
+      "git_blob": "9fc778ba423c35a8200342443eabbea2045f3fe0"
+    },
+    "src/mvdm-host/softpc.new/base/bios/emm_fncs.c": {
+      "path": "base/mvdm/softpc.new/base/bios/emm_fncs.c",
+      "git_blob": "66bbea843590bca86cc8b507b2c0e9428153b268"
+    },
+    "src/mvdm-host/softpc.new/base/bios/reset.c": {
+      "path": "base/mvdm/softpc.new/base/bios/reset.c",
+      "git_blob": "c342d8b3a276d6cc155498dee8d2848ce3fa4d5d"
+    },
+    "src/mvdm-host/softpc.new/base/bios/rtc_bios.c": {
+      "path": "base/mvdm/softpc.new/base/bios/rtc_bios.c",
+      "git_blob": "531e461ee3f1a31bc37a89a1792972481ca0466b"
+    },
+    "src/mvdm-host/softpc.new/base/bios/tape_io.c": {
+      "path": "base/mvdm/softpc.new/base/bios/tape_io.c",
+      "git_blob": "e1fd245f07b764ef61667def9ff3e87655e258ca"
+    },
+    "src/mvdm-host/softpc.new/base/bios/virtual.c": {
+      "path": "base/mvdm/softpc.new/base/bios/virtual.c",
+      "git_blob": "1b9d6d2e750868ffce37990520bc66befae0ec42"
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": {
+      "path": "base/mvdm/softpc.new/base/ccpu386/c_main.c",
+      "git_blob": "24b5582a5e7536f35cfbe600f050d6032536c587"
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c": {
+      "path": "base/mvdm/softpc.new/base/ccpu386/ccpusas4.c",
+      "git_blob": "57aa76d5ef8fcdecee960896caac3cea4420c9c2"
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c": {
+      "path": "base/mvdm/softpc.new/base/ccpu386/sascdef.c",
+      "git_blob": "4d6959da16e7cb1edac51ecb8ef2ffdcc52275bb"
+    },
+    "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c": {
+      "path": "base/mvdm/softpc.new/base/cvidc/ev_glue.c",
+      "git_blob": "05086a140387bde01378f305c11f7680a2e7372a"
+    },
+    "src/mvdm-host/softpc.new/base/disks/diskbios.c": {
+      "path": "base/mvdm/softpc.new/base/disks/diskbios.c",
+      "git_blob": "16106fb8c3df147bda43f7566afc086536a699c2"
+    },
+    "src/mvdm-host/softpc.new/base/disks/floppy.c": {
+      "path": "base/mvdm/softpc.new/base/disks/floppy.c",
+      "git_blob": "e6bd51f95d3bded5a4db822bfd0e194157de851c"
+    },
+    "src/mvdm-host/softpc.new/base/dos/emm_mngr.c": {
+      "path": "base/mvdm/softpc.new/base/dos/emm_mngr.c",
+      "git_blob": "847a1f4a563ac8082005eb359d28fc1cb75d44ea"
+    },
+    "src/mvdm-host/softpc.new/base/keymouse/keyba.c": {
+      "path": "base/mvdm/softpc.new/base/keymouse/keyba.c",
+      "git_blob": "90fbea0fd2010c833bea2f3b825fd5ad69bb955d"
+    },
+    "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c": {
+      "path": "base/mvdm/softpc.new/base/keymouse/keybd_io.c",
+      "git_blob": "c3dc483ba31d86cfee0571f5514c1d23fc48f69d"
+    },
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": {
+      "path": "base/mvdm/softpc.new/base/keymouse/mouse_io.c",
+      "git_blob": "399dfcf8caba4365f4f58919e470f1264f948aa5"
+    },
+    "src/mvdm-host/softpc.new/base/support/main.c": {
+      "path": "base/mvdm/softpc.new/base/support/main.c",
+      "git_blob": "e5344357df057c41ecea63e0eeb24f01ef84b13b"
+    },
+    "src/mvdm-host/softpc.new/base/support/terminat.c": {
+      "path": "base/mvdm/softpc.new/base/support/terminat.c",
+      "git_blob": "6896028a2a2c555489e606c6b3d583312eed82d1"
+    },
+    "src/mvdm-host/softpc.new/base/system/illegalp.c": {
+      "path": "base/mvdm/softpc.new/base/system/illegalp.c",
+      "git_blob": "e38786214ad5c44c1277fe464004a7d84e4a76e5"
+    },
+    "src/mvdm-host/softpc.new/base/system/rom.c": {
+      "path": "base/mvdm/softpc.new/base/system/rom.c",
+      "git_blob": "2a7190bceb2450610d5e258c73bc9db409a8fc4e"
+    },
+    "src/mvdm-host/softpc.new/base/video/ega_vide.c": {
+      "path": "base/mvdm/softpc.new/base/video/ega_vide.c",
+      "git_blob": "28f73127ef4f9a7610ddcf973a0701b5ffc2ecfa"
+    },
+    "src/mvdm-host/softpc.new/base/video/vga_vide.c": {
+      "path": "base/mvdm/softpc.new/base/video/vga_vide.c",
+      "git_blob": "766a1b5f20d15d387b650c02f0c8bc019ecdbd6a"
+    },
+    "src/mvdm-host/softpc.new/base/video/video.c": {
+      "path": "base/mvdm/softpc.new/base/video/video.c",
+      "git_blob": "7355190b19659d1697b3d15fda77b2d35dd47f74"
+    },
+    "src/mvdm-host/softpc.new/host/src/config.c": {
+      "path": "base/mvdm/softpc.new/host/src/config.c",
+      "git_blob": "1115980b6d69202f5b7c5b801d5dd1d09bc844be"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_bop.c",
+      "git_blob": "999663cc47d75d765ca22270badf4e3253d72421"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_cga.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_cga.c",
+      "git_blob": "512ee3ac80f4bd55affba92206f5995cbe75b5bf"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_com.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_com.c",
+      "git_blob": "4900c27ca4d064c666a665887aa44bf3ecc07432"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_cpu.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_cpu.c",
+      "git_blob": "7dd303d9d9f144a9ff279b7ca271e155d7f4a83a"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_det.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_det.c",
+      "git_blob": "398907e66916c1b68782281d4d56ad8502d0a5d7"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_ega.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_ega.c",
+      "git_blob": "db83e95f2091636f3d61bb61be7c4d11b912e5f7"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_emm.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_emm.c",
+      "git_blob": "79a8204abca2b0bb32ec17a320a07b517824a133"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_eoi.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_eoi.c",
+      "git_blob": "05653c2d572dd4b916a4c4ddbc8a5eae2b687aa0"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_error.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_error.c",
+      "git_blob": "9f8757655a6be17e55b7b26966adedc05bfdfdd9"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_event.c",
+      "git_blob": "9e746c10237e028ee9e2abeae77383908a2fbb7d"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_fdisk.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_fdisk.c",
+      "git_blob": "915b26f0353510794b9d1e68aa0f8e1de99f627e"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_fulsc.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_fulsc.c",
+      "git_blob": "1fbe4ced0e8ac8449ba6ec01f97d432ac5ab91fc"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_graph.c",
+      "git_blob": "a0a56df31d81eb7c928b38d8e03d2194e71f453b"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_hosts.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_hosts.c",
+      "git_blob": "bbf99e7a5877516e92d181263f8c2962c407f685"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_lpt.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_lpt.c",
+      "git_blob": "083ca7586527d514b723577e25c44fd6af536217"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_mem.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_mem.c",
+      "git_blob": "73578a04bfe4af58e0ee8d155a975797e4e78d61"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_mouse.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_mouse.c",
+      "git_blob": "2fbb3a9c846afb6474fb8ff759fd54f357deeff3"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_msscs.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_msscs.c",
+      "git_blob": "d9286056a53562ee51c7ae0e10047f3820d98e26"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_ntfun.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_ntfun.c",
+      "git_blob": "8d98c959dd1ccd5433459582ade3c18806112bf3"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_pif.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_pif.c",
+      "git_blob": "84371ef2f325d77a187b201bd0108e4b71900c23"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_reset.c",
+      "git_blob": "8b004fe9ef5833d8f94d969838ad9c1777e59bea"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_rez.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_rez.c",
+      "git_blob": "fd6b94a2375a55a05dcdb80df3d711f96c9a2533"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_rflop.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_rflop.c",
+      "git_blob": "ec6444f5f26e545503ffa85fecbd817121e34896"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_sound.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_sound.c",
+      "git_blob": "10cc043ef22d667ff386105fb3e05d8be9c50c71"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_thred.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_thred.c",
+      "git_blob": "c5074095211d1627747c1096a78fe54075c64635"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_timer.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_timer.c",
+      "git_blob": "bb4c7504331003a3afdd37185c9eff01df65c536"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_unix.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_unix.c",
+      "git_blob": "e89b10b8173aaf0db138553a8ea10569c76044be"
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_vga.c": {
+      "path": "base/mvdm/softpc.new/host/src/nt_vga.c",
+      "git_blob": "a5c97c34fdc43f3ac24970d07dceab4de4acb8a4"
+    },
+    "src/mvdm-host/softpc.new/host/src/sim32.c": {
+      "path": "base/mvdm/softpc.new/host/src/sim32.c",
+      "git_blob": "5bcfcf37d7ea1b9139b8e67be8ad9bc8088a7596"
+    },
+    "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c": {
+      "path": "base/mvdm/softpc.new/obj.vdm/ntvdm.c",
+      "git_blob": "be19e33277ec1a71de5d91bbc8d0a52ce2b32561"
+    },
+    "src/mvdm-host/vdmredir/vrdlc5c.c": {
+      "path": "base/mvdm/vdmredir/vrdlc5c.c",
+      "git_blob": "d45fec96c3d0f858ac70bc63c4ebec3159ca64d7"
+    },
+    "src/mvdm-host/vdmredir/vrdlcpst.c": {
+      "path": "base/mvdm/vdmredir/vrdlcpst.c",
+      "git_blob": "a4fd8fc9aa120e82441deec63fbbf21779ac3aed"
+    },
+    "src/mvdm-host/vdmredir/vrnetapi.c": {
+      "path": "base/mvdm/vdmredir/vrnetapi.c",
+      "git_blob": "b414814daad335a22824b4cb0aeefafbdf1f29a9"
+    },
+    "src/mvdm-host/vdmredir/vrnmpipe.c": {
+      "path": "base/mvdm/vdmredir/vrnmpipe.c",
+      "git_blob": "f1b7b07f8c012abb396487bc33c167d8c369fda7"
+    },
+    "src/mvdm-host/vdmredir/vrremote.c": {
+      "path": "base/mvdm/vdmredir/vrremote.c",
+      "git_blob": "9b2de21f85f6eb6bb2d0d234b234b43ca75f8775"
+    },
+    "src/mvdm-host/wow32/mapembed.c": {
+      "path": "base/mvdm/wow32/mapembed.c",
+      "git_blob": "0b38bf44afd29665e0e9419b29a03845a35974d6"
+    },
+    "src/mvdm-host/wow32/waccel.c": {
+      "path": "base/mvdm/wow32/waccel.c",
+      "git_blob": "630a9b7882ef35486b4f50b9d7139adea0b750f7"
+    },
+    "src/mvdm-host/wow32/walias.c": {
+      "path": "base/mvdm/wow32/walias.c",
+      "git_blob": "27185aa37a7cd3896410bd5176cc7f747fd4c90a"
+    },
+    "src/mvdm-host/wow32/wcall16.c": {
+      "path": "base/mvdm/wow32/wcall16.c",
+      "git_blob": "c90570007d28e3b00fc4ad37274323f5e845dd3f"
+    },
+    "src/mvdm-host/wow32/wcall32.c": {
+      "path": "base/mvdm/wow32/wcall32.c",
+      "git_blob": "4f9799a52203eca3f97d8381afecab65233f892a"
+    },
+    "src/mvdm-host/wow32/wcntl32.c": {
+      "path": "base/mvdm/wow32/wcntl32.c",
+      "git_blob": "94951f5b9ad728df578c8ba8b7c34a0c138213a8"
+    },
+    "src/mvdm-host/wow32/wcommdlg.c": {
+      "path": "base/mvdm/wow32/wcommdlg.c",
+      "git_blob": "bc309fd98c360daa9d4f0c225294c8b497b92023"
+    },
+    "src/mvdm-host/wow32/wcuricon.c": {
+      "path": "base/mvdm/wow32/wcuricon.c",
+      "git_blob": "ce6f19390f13a0ea66a44e11361b06846843afc5"
+    },
+    "src/mvdm-host/wow32/wdde.c": {
+      "path": "base/mvdm/wow32/wdde.c",
+      "git_blob": "1fbdbf5bb06ad307bb169696c6cc512508c13f57"
+    },
+    "src/mvdm-host/wow32/wdib.c": {
+      "path": "base/mvdm/wow32/wdib.c",
+      "git_blob": "6cdececf368c0a1568134522f0a1bf451991baf6"
+    },
+    "src/mvdm-host/wow32/wgdi.c": {
+      "path": "base/mvdm/wow32/wgdi.c",
+      "git_blob": "fbe3469013bd6c38b75fd22b310856ed3f54c633"
+    },
+    "src/mvdm-host/wow32/wgdi31.c": {
+      "path": "base/mvdm/wow32/wgdi31.c",
+      "git_blob": "790d37a4057b3fc02bb6f15b407cb614de44d342"
+    },
+    "src/mvdm-host/wow32/wgfont.c": {
+      "path": "base/mvdm/wow32/wgfont.c",
+      "git_blob": "eabb77bb282c72a12bc77800793e6b092ee975e1"
+    },
+    "src/mvdm-host/wow32/wgmeta.c": {
+      "path": "base/mvdm/wow32/wgmeta.c",
+      "git_blob": "44fa11e8fd62db7dd41eb8a3f2617c1f4ef5becf"
+    },
+    "src/mvdm-host/wow32/wgprnset.c": {
+      "path": "base/mvdm/wow32/wgprnset.c",
+      "git_blob": "d431fbbaddc053af4e9ebb2b70c4e2323a18fc1b"
+    },
+    "src/mvdm-host/wow32/wgtext.c": {
+      "path": "base/mvdm/wow32/wgtext.c",
+      "git_blob": "4a808a1a357ace2e877f75efeea1bd29b53b1720"
+    },
+    "src/mvdm-host/wow32/wkbman.c": {
+      "path": "base/mvdm/wow32/wkbman.c",
+      "git_blob": "9d4f3073d541d002c6d43612aa77c4f2b14a5956"
+    },
+    "src/mvdm-host/wow32/wkernel.c": {
+      "path": "base/mvdm/wow32/wkernel.c",
+      "git_blob": "80562472f2c89eb2ef3a129a432414ccd557507f"
+    },
+    "src/mvdm-host/wow32/wkfileio.c": {
+      "path": "base/mvdm/wow32/wkfileio.c",
+      "git_blob": "6b24944e09d63ede3de4455395497f904bf231eb"
+    },
+    "src/mvdm-host/wow32/wkgthunk.c": {
+      "path": "base/mvdm/wow32/wkgthunk.c",
+      "git_blob": "7d6fb356bef1ea4dfa368803350a3ee4186a8242"
+    },
+    "src/mvdm-host/wow32/wkman.c": {
+      "path": "base/mvdm/wow32/wkman.c",
+      "git_blob": "bba2d4bc44b9bc410fd7880ff62780bef3f19695"
+    },
+    "src/mvdm-host/wow32/wmdisp32.c": {
+      "path": "base/mvdm/wow32/wmdisp32.c",
+      "git_blob": "e1d7d86fdbbb4bb5b13fae9f466303375ec71e50"
+    },
+    "src/mvdm-host/wow32/wmsg16.c": {
+      "path": "base/mvdm/wow32/wmsg16.c",
+      "git_blob": "2ea8462c470dda3d849dee669bf87d59271f5db9"
+    },
+    "src/mvdm-host/wow32/wmsgem.c": {
+      "path": "base/mvdm/wow32/wmsgem.c",
+      "git_blob": "6744fb42b092e55fe6844ab24994bfac62d6794a"
+    },
+    "src/mvdm-host/wow32/wow32.c": {
+      "path": "base/mvdm/wow32/wow32.c",
+      "git_blob": "269a998ac40488bc39b4c452ae5fb5c4a31da71d"
+    },
+    "src/mvdm-host/wow32/wow32fax.c": {
+      "path": "base/mvdm/wow32/wow32fax.c",
+      "git_blob": "85e399cd8acd9c0a852759acce7c5de17de829d7"
+    },
+    "src/mvdm-host/wow32/wowhooks.c": {
+      "path": "base/mvdm/wow32/wowhooks.c",
+      "git_blob": "a996f1c3a9f54715041a9a3132d31d4ef83d7348"
+    },
+    "src/mvdm-host/wow32/wowtbl.c": {
+      "path": "base/mvdm/wow32/wowtbl.c",
+      "git_blob": "6f4ef6606b209bbf870a6a15b871397bc0552b96"
+    },
+    "src/mvdm-host/wow32/wreldc.c": {
+      "path": "base/mvdm/wow32/wreldc.c",
+      "git_blob": "f7a124d367bf5c7cd704854c533ed9a96d8edc4a"
+    },
+    "src/mvdm-host/wow32/wres16.c": {
+      "path": "base/mvdm/wow32/wres16.c",
+      "git_blob": "206d9b9845aab05219ddf4c1ca36587e7b4de860"
+    },
+    "src/mvdm-host/wow32/wsdata.c": {
+      "path": "base/mvdm/wow32/wsdata.c",
+      "git_blob": "e12d83314310cfffbb4a8be9d18dff87587446de"
+    },
+    "src/mvdm-host/wow32/wsext.c": {
+      "path": "base/mvdm/wow32/wsext.c",
+      "git_blob": "5b1645fe723d4d1987d39abd310edfccace65ef8"
+    },
+    "src/mvdm-host/wow32/wshell.c": {
+      "path": "base/mvdm/wow32/wshell.c",
+      "git_blob": "85a75af079391d328f77bcf54b367d4266e748fe"
+    },
+    "src/mvdm-host/wow32/wsraw.c": {
+      "path": "base/mvdm/wow32/wsraw.c",
+      "git_blob": "d59f227fd14c4dc71916091f6a4967da84e1bbd8"
+    },
+    "src/mvdm-host/wow32/wstruc.c": {
+      "path": "base/mvdm/wow32/wstruc.c",
+      "git_blob": "fb09a12d2f208362b01d68a6109d8f22af0bb3c8"
+    },
+    "src/mvdm-host/wow32/wsubcls.c": {
+      "path": "base/mvdm/wow32/wsubcls.c",
+      "git_blob": "89e333f6f1ffcd8f1a0217479d74c6b9400c55de"
+    },
+    "src/mvdm-host/wow32/wucaret.c": {
+      "path": "base/mvdm/wow32/wucaret.c",
+      "git_blob": "694fca8a57d5063c6e711c864c6c19d7f21e5927"
+    },
+    "src/mvdm-host/wow32/wuclass.c": {
+      "path": "base/mvdm/wow32/wuclass.c",
+      "git_blob": "c40e1cb4018de33da2d127ececf1e51c51277812"
+    },
+    "src/mvdm-host/wow32/wuclip.c": {
+      "path": "base/mvdm/wow32/wuclip.c",
+      "git_blob": "b33d49a06e885b20dead77cc749adc6f17afe58e"
+    },
+    "src/mvdm-host/wow32/wucomm.c": {
+      "path": "base/mvdm/wow32/wucomm.c",
+      "git_blob": "98eabe3d7aa793648987d51ff84d1340bdc4301d"
+    },
+    "src/mvdm-host/wow32/wudlg.c": {
+      "path": "base/mvdm/wow32/wudlg.c",
+      "git_blob": "ac725f5eb3e64ff8bf1196beeb90c11649f94340"
+    },
+    "src/mvdm-host/wow32/wuhook.c": {
+      "path": "base/mvdm/wow32/wuhook.c",
+      "git_blob": "a08962b5c0fd68fca7fca647c42d880f43eee47f"
+    },
+    "src/mvdm-host/wow32/wulang.c": {
+      "path": "base/mvdm/wow32/wulang.c",
+      "git_blob": "102a579ab1e217e37766a24813624caa28d1db4c"
+    },
+    "src/mvdm-host/wow32/wuman.c": {
+      "path": "base/mvdm/wow32/wuman.c",
+      "git_blob": "46763a589ed8d5ada5ff9fa6a946a391722481be"
+    },
+    "src/mvdm-host/wow32/wumenu.c": {
+      "path": "base/mvdm/wow32/wumenu.c",
+      "git_blob": "8ae3715d9c2d1de8fad3cb5325ca8999f4d282c7"
+    },
+    "src/mvdm-host/wow32/wumsg.c": {
+      "path": "base/mvdm/wow32/wumsg.c",
+      "git_blob": "02d1b5108bac09064f030894f0eb08aef979bc4f"
+    },
+    "src/mvdm-host/wow32/wuser.c": {
+      "path": "base/mvdm/wow32/wuser.c",
+      "git_blob": "e9d171d0a7765ea045e3ed157d87c24a35a44b55"
+    },
+    "src/mvdm-host/wow32/wuser31.c": {
+      "path": "base/mvdm/wow32/wuser31.c",
+      "git_blob": "ae505ee49fcfeb13e18ebb36a2856e8c189fa1ca"
+    },
+    "src/mvdm-host/wow32/wusercli.c": {
+      "path": "base/mvdm/wow32/wusercli.c",
+      "git_blob": "c93e9f1b68fefbe398a4b137d69ed3cf30ab7083"
+    },
+    "src/mvdm-host/wow32/wutmr.c": {
+      "path": "base/mvdm/wow32/wutmr.c",
+      "git_blob": "693a78eb3348010fb44698f3e77b848c37cd6843"
+    },
+    "src/mvdm-host/wow32/wuwind.c": {
+      "path": "base/mvdm/wow32/wuwind.c",
+      "git_blob": "da66bfcc47cc594745add82d11a081fee29d9b69"
+    },
+    "src/mvdm-host/xms.486/xmsblock.c": {
+      "path": "base/mvdm/xms.486/xmsblock.c",
+      "git_blob": "8eb2818c9cb14bcb177d08e9da9fb306e7a38701"
+    },
+    "src/non-mvdm/base/ntdll/csrutil.c": {
+      "path": "base/ntdll/csrutil.c",
+      "git_blob": "1e5f63f529224acf480ec7acc0bfcb01f1d7e4b3"
+    },
+    "src/non-mvdm/base/win32/client/vdm.c": {
+      "path": "base/win32/client/vdm.c",
+      "git_blob": "372b351eeb10ac7e64fe61a1758ac83506e81c1d"
+    },
+    "src/non-mvdm/base/win32/server/srvvdm.c": {
+      "path": "base/win32/server/srvvdm.c",
+      "git_blob": "4837e850617b3914ff61ab8faacbfa7abcf8d12e"
+    },
+    "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx": {
+      "path": "com/ole32/olethunk/olethk32/thoputil.cxx",
+      "git_blob": "da4f424b6e4c65afdb17060c6124968c47ba1195"
+    },
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c": {
+      "path": "ds/netapi/xactsrv/apisrv.c",
+      "git_blob": "a36471fad41d4988d7490b43338bb21a6ff02daf"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/btnctl.c": {
+      "path": "windows/core/ntuser/client/btnctl.c",
+      "git_blob": "3cb75a244217e07959c960535aab6d170f4d1772"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/clmenu.c": {
+      "path": "windows/core/ntuser/client/clmenu.c",
+      "git_blob": "cd37b39b8a942607264ed9c8946b1613a4c6c991"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/clmsg.c": {
+      "path": "windows/core/ntuser/client/clmsg.c",
+      "git_blob": "4c1b7ae390dc7d15b8db98f8a36d5e8ddf446387"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/clres.c": {
+      "path": "windows/core/ntuser/client/clres.c",
+      "git_blob": "e6fd8db7f4ef05d5377143874bcb5a2a4ebd69ef"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/combo.c": {
+      "path": "windows/core/ntuser/client/combo.c",
+      "git_blob": "de000921ecc635a2e282a7d6472863ada31abd35"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/combodir.c": {
+      "path": "windows/core/ntuser/client/combodir.c",
+      "git_blob": "b4aa0c0fc56f895dca72c587cd34c8ed166b7d77"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/comboini.c": {
+      "path": "windows/core/ntuser/client/comboini.c",
+      "git_blob": "63cf6725db28f9eaa6da5fda46ef9c0c8f2235c7"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c": {
+      "path": "windows/core/ntuser/client/dlgbegin.c",
+      "git_blob": "088cec377068e045095721d40c4bbe3a76d4d635"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgend.c": {
+      "path": "windows/core/ntuser/client/dlgend.c",
+      "git_blob": "3f784316f920a8dda9d04245650f407c5f083a77"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c": {
+      "path": "windows/core/ntuser/client/dlgmgr.c",
+      "git_blob": "4dac85bf608b3053a5018d9eb3201ae0abc927aa"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c": {
+      "path": "windows/core/ntuser/client/dlgmgr2.c",
+      "git_blob": "b67bca343d0ff1ba5ca9294911e7100945aa3873"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dmmnem.c": {
+      "path": "windows/core/ntuser/client/dmmnem.c",
+      "git_blob": "4bbd8e3ed54824c995c2c0103a0fe8a681521542"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/draw.c": {
+      "path": "windows/core/ntuser/client/draw.c",
+      "git_blob": "c9311e180849aa02c77ae9e84c544e7a628e75c9"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/drawtext.c": {
+      "path": "windows/core/ntuser/client/drawtext.c",
+      "git_blob": "37ede1b9a914e517254825a6fb8a0755e7bd6cb0"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edecrare.c": {
+      "path": "windows/core/ntuser/client/edecrare.c",
+      "git_blob": "b5ec4b8c6242509feae80ad88ba085033343c680"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/editec.c": {
+      "path": "windows/core/ntuser/client/editec.c",
+      "git_blob": "2b51b1e0e8a8e8025bc16d7361910e13c65d66ae"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/editml.c": {
+      "path": "windows/core/ntuser/client/editml.c",
+      "git_blob": "1db43d5cb3ab73456237466ff57fd1978a8450f3"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/editsl.c": {
+      "path": "windows/core/ntuser/client/editsl.c",
+      "git_blob": "d2b2c4e8e0a061e7eafe066a678c5648482878d1"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edmlonce.c": {
+      "path": "windows/core/ntuser/client/edmlonce.c",
+      "git_blob": "2c00a91882b2e685bb9c48a1fada9045118802f1"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edmlrare.c": {
+      "path": "windows/core/ntuser/client/edmlrare.c",
+      "git_blob": "1ee12ca2d5b215b592293638ba8cb54b39bf6572"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edslrare.c": {
+      "path": "windows/core/ntuser/client/edslrare.c",
+      "git_blob": "363d56604a2f5f326c04e5bcbb45e7f2bfdda6a4"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lb1.c": {
+      "path": "windows/core/ntuser/client/lb1.c",
+      "git_blob": "f5c4677bb98897e007d8aa8526998bbc173bdba5"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c": {
+      "path": "windows/core/ntuser/client/lboxctl1.c",
+      "git_blob": "d1022f092cc3768a35fd79fa345bbbbc9a4ea249"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c": {
+      "path": "windows/core/ntuser/client/lboxctl2.c",
+      "git_blob": "7b104755f9d8605bb47e570e8df87818fe8f96ce"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c": {
+      "path": "windows/core/ntuser/client/lboxctl3.c",
+      "git_blob": "3c37138e6ca6791b936a5b66d98f8f9b2b22bbb9"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxrare.c": {
+      "path": "windows/core/ntuser/client/lboxrare.c",
+      "git_blob": "d1b631b8e8df3f6893d80691fc9857784b640b6c"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxvar.c": {
+      "path": "windows/core/ntuser/client/lboxvar.c",
+      "git_blob": "86d22c19ef0fa7403de0b1f761757503df32158b"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/mngrayc.c": {
+      "path": "windows/core/ntuser/client/mngrayc.c",
+      "git_blob": "4e8c72791e03e7eeb105d5b3fc9e139df70f42bf"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c": {
+      "path": "windows/core/ntuser/client/ntstubs.c",
+      "git_blob": "8b6cbd785ffe0588c24f03e99110f38208c44939"
+    },
+    "src/non-mvdm/windows/core/ntuser/client/winmgrc.c": {
+      "path": "windows/core/ntuser/client/winmgrc.c",
+      "git_blob": "a8ad2b8ec78fe5236ec1ebeef5cde4c949724f64"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/class.c": {
+      "path": "windows/core/ntuser/kernel/class.c",
+      "git_blob": "51c95e1f710e8c091e0e361f4d8275d340c40a46"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c": {
+      "path": "windows/core/ntuser/kernel/cleanup.c",
+      "git_blob": "194a0a9f4d36e7f1092a0a1ef3e1fcbc0dad7458"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c": {
+      "path": "windows/core/ntuser/kernel/exitwin.c",
+      "git_blob": "b475f44d3102bd70dfde46ff8ed40182a36404c0"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/getset.c": {
+      "path": "windows/core/ntuser/kernel/getset.c",
+      "git_blob": "c88fb7853cefbf1c9830b914484262f6946faf11"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/profile.c": {
+      "path": "windows/core/ntuser/kernel/profile.c",
+      "git_blob": "a37cb4d5d14f2c441c1ecd4dc5ee115358cc4473"
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/server.c": {
+      "path": "windows/core/ntuser/kernel/server.c",
+      "git_blob": "39a127ae87ceee283e6d5f11c091765a21742677"
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/draw.c": {
+      "path": "windows/core/ntuser/rtl/draw.c",
+      "git_blob": "985d1a9b66d27d28c25ca30fe0d9bb3dfef625c7"
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/getset.c": {
+      "path": "windows/core/ntuser/rtl/getset.c",
+      "git_blob": "a6101b35a0abc70b7bb3e2be1cdc51d6274c1022"
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/help.c": {
+      "path": "windows/core/ntuser/rtl/help.c",
+      "git_blob": "532d741bcfea1e42dece79d105915d115a9bbd22"
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c": {
+      "path": "windows/core/ntuser/rtl/winmgr.c",
+      "git_blob": "65745551a446b23e335cfda9644f86f1da99eb01"
+    },
+    "src/non-mvdm/windows/core/ntuser/server/exports.c": {
+      "path": "windows/core/ntuser/server/exports.c",
+      "git_blob": "bb283aec3e5f743eb0bd6095f4c47598c2255260"
+    }
+  },
+  "flush_review": {
+    "point": "C0456",
+    "caller_files": 38,
+    "original_header": "base/mvdm/inc/softpc.h:225 (#ifdef i386), :471 (TRUE), :526 (#else), :535 (external declaration)",
+    "original_wow": "base/mvdm/wow32/wow32.h:574,576; base/mvdm/wow32/sources:19 links ntvdm.lib",
+    "current_wow": "src/wow32-dll/source/wow_sim32_pointer_compat.c:17. WOW32.DLL link map 10053d60 _Sim32FlushVDMPointer@16; mov eax,1; ret 16.",
+    "current_worker": "src/mvdm-host/softpc.new/host/src/sim32.c:186. NTVDM.EXE link map 004526b0 _Sim32FlushVDMPointer. Product machine code includes PM/RM translation, a test against video range 0xa0000..0xbffff, and plain ret. SetVideoMemory requires the scratch buffer and writes via sas_stores. c_sas_overwrite_memory itself is a CCPU no-op.",
+    "decision": "Do not bind the decorated call to the raw export by name. No runtime regression claimed. S14 must verify pointer acquisition, failure behavior, visibility of video writes, and x86 calling convention before selecting the original binding."
+  }
+}
