@@ -1,0 +1,1322 @@
+{
+  "question": "Do all 88 eliminated stable IDs retain their S12 ownership result?",
+  "baseline": "fdf3553ec93c5e79c0a6fa7ce651e72ab5330589",
+  "procedure": [
+    "Expand ninja -t commands for the eight production graph target sets.",
+    "Parse COFF external definitions from each selected C object; COMMON definitions count as providers, not undefined references.",
+    "Query ninja -t deps for all selected C mirror C objects; require VALID records and check original eliminated header paths.",
+    "Inspect C compile /I options for eliminated outer roots.",
+    "Verify six renamed/retired external symbols against source and current object/map plus P3/P73/P99 delivery evidence."
+  ],
+  "symbolChecks": {
+    "graphObjects": {
+      "x86/worker": 534,
+      "x86/wow32": 224,
+      "x64/frontend": 63,
+      "x64/service": 58,
+      "x64/launcher": 55,
+      "x64/monitor": 13,
+      "x64/worker": 60,
+      "x64/hook": 24
+    },
+    "results": [
+      {
+        "id": "C0153",
+        "symbol": "OpenNtBaseIsConsoleHandle",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\opennt-base-bindings\\process.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/base_console_handle.c",
+            "symbol": "_OpenNtBaseIsConsoleHandle"
+          },
+          {
+            "graph": "x64/frontend",
+            "object": "build\\.ninja\\msvc-x64-release\\frontend\\obj\\opennt-base-bindings\\process.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/base_console_handle.c",
+            "symbol": "OpenNtBaseIsConsoleHandle"
+          },
+          {
+            "graph": "x64/service",
+            "object": "build\\.ninja\\msvc-x64-release\\service\\obj\\opennt-base-bindings\\process.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/base_console_handle.c",
+            "symbol": "OpenNtBaseIsConsoleHandle"
+          },
+          {
+            "graph": "x64/launcher",
+            "object": "build\\.ninja\\msvc-x64-release\\launcher\\obj\\opennt-base-bindings\\process.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/base_console_handle.c",
+            "symbol": "OpenNtBaseIsConsoleHandle"
+          },
+          {
+            "graph": "x64/worker",
+            "object": "build\\.ninja\\msvc-x64-release\\worker\\obj\\opennt-base-bindings\\process.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/base_console_handle.c",
+            "symbol": "OpenNtBaseIsConsoleHandle"
+          }
+        ]
+      },
+      {
+        "id": "C0169",
+        "symbol": "OpenNtBaseClose",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x64/service",
+            "object": "build\\.ninja\\msvc-x64-release\\service\\obj\\opennt-base-bindings\\resources.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/base_resource.c",
+            "symbol": "OpenNtBaseClose"
+          }
+        ]
+      },
+      {
+        "id": "C0170",
+        "symbol": "OpenNtBaseDuplicateObject",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x64/service",
+            "object": "build\\.ninja\\msvc-x64-release\\service\\obj\\opennt-base-bindings\\resources.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/base_resource.c",
+            "symbol": "OpenNtBaseDuplicateObject"
+          }
+        ]
+      },
+      {
+        "id": "C0189",
+        "symbol": "ActivityCheckAfterTimeSlice",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\fmstubs_activity_check.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_ccpu_activity_check.c",
+            "symbol": "_ActivityCheckAfterTimeSlice"
+          }
+        ]
+      },
+      {
+        "id": "C0198",
+        "symbol": "mvdm_keyboard_history_age",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_keyboard_history.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_keyboard_history.c",
+            "symbol": "_mvdm_keyboard_history_age"
+          }
+        ]
+      },
+      {
+        "id": "C0199",
+        "symbol": "mvdm_keyboard_history_begin",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_keyboard_history.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_keyboard_history.c",
+            "symbol": "_mvdm_keyboard_history_begin"
+          }
+        ]
+      },
+      {
+        "id": "C0200",
+        "symbol": "mvdm_keyboard_history_clear_ring",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_keyboard_history.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_keyboard_history.c",
+            "symbol": "_mvdm_keyboard_history_clear_ring"
+          }
+        ]
+      },
+      {
+        "id": "C0201",
+        "symbol": "mvdm_keyboard_history_end",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_keyboard_history.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_keyboard_history.c",
+            "symbol": "_mvdm_keyboard_history_end"
+          }
+        ]
+      },
+      {
+        "id": "C0202",
+        "symbol": "mvdm_keyboard_history_pending",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_keyboard_history.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_keyboard_history.c",
+            "symbol": "_mvdm_keyboard_history_pending"
+          }
+        ]
+      },
+      {
+        "id": "C0203",
+        "symbol": "mvdm_keyboard_history_record",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_keyboard_history.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_keyboard_history.c",
+            "symbol": "_mvdm_keyboard_history_record"
+          }
+        ]
+      },
+      {
+        "id": "C0205",
+        "symbol": "ntvdm_shadow_nt_close",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_shadow_registry.c",
+            "symbol": "_ntvdm_shadow_nt_close@4"
+          }
+        ]
+      },
+      {
+        "id": "C0206",
+        "symbol": "ntvdm_shadow_nt_enumerate_value_key",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_shadow_registry.c",
+            "symbol": "_ntvdm_shadow_nt_enumerate_value_key@24"
+          }
+        ]
+      },
+      {
+        "id": "C0207",
+        "symbol": "ntvdm_shadow_nt_open_key",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_shadow_registry.c",
+            "symbol": "_ntvdm_shadow_nt_open_key@12"
+          }
+        ]
+      },
+      {
+        "id": "C0208",
+        "symbol": "ntvdm_shadow_reg_close_key",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_shadow_registry.c",
+            "symbol": "_ntvdm_shadow_reg_close_key@4"
+          }
+        ]
+      },
+      {
+        "id": "C0209",
+        "symbol": "ntvdm_shadow_reg_open_key_ex",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_shadow_registry.c",
+            "symbol": "_ntvdm_shadow_reg_open_key_ex@20"
+          }
+        ]
+      },
+      {
+        "id": "C0210",
+        "symbol": "ntvdm_shadow_reg_query_info_key",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_shadow_registry.c",
+            "symbol": "_ntvdm_shadow_reg_query_info_key@48"
+          }
+        ]
+      },
+      {
+        "id": "C0211",
+        "symbol": "ntvdm_shadow_reg_query_value_ex",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_shadow_registry.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_shadow_registry.c",
+            "symbol": "_ntvdm_shadow_reg_query_value_ex@24"
+          }
+        ]
+      },
+      {
+        "id": "C0212",
+        "symbol": "mvdm_softpc_ccpu_wait_for_event",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_softpc_ccpu_wait.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_softpc_ccpu_wait.c",
+            "symbol": "_mvdm_softpc_ccpu_wait_for_event"
+          }
+        ]
+      },
+      {
+        "id": "C0213",
+        "symbol": "mvdm_softpc_ccpu_wait_signal",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_softpc_ccpu_wait.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_softpc_ccpu_wait.c",
+            "symbol": "_mvdm_softpc_ccpu_wait_signal"
+          }
+        ]
+      },
+      {
+        "id": "C0217",
+        "symbol": "mvdm_softpc_event_thread_alert_and_join",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-softpc\\mvdm_softpc_event_thread.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_softpc_event_thread.c",
+            "symbol": "_mvdm_softpc_event_thread_alert_and_join"
+          }
+        ]
+      },
+      {
+        "id": "C0218",
+        "symbol": "host_unsimulate",
+        "owners": [],
+        "definitions": []
+      },
+      {
+        "id": "C0219",
+        "symbol": "NtvdmGetSystemDirectoryA",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "_NtvdmGetSystemDirectoryA"
+          },
+          {
+            "graph": "x64/service",
+            "object": "build\\.ninja\\msvc-x64-release\\service\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "NtvdmGetSystemDirectoryA"
+          },
+          {
+            "graph": "x64/launcher",
+            "object": "build\\.ninja\\msvc-x64-release\\launcher\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "NtvdmGetSystemDirectoryA"
+          },
+          {
+            "graph": "x64/worker",
+            "object": "build\\.ninja\\msvc-x64-release\\worker\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "NtvdmGetSystemDirectoryA"
+          }
+        ]
+      },
+      {
+        "id": "C0220",
+        "symbol": "NtvdmGetWindowsDirectoryA",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "_NtvdmGetWindowsDirectoryA"
+          },
+          {
+            "graph": "x64/service",
+            "object": "build\\.ninja\\msvc-x64-release\\service\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "NtvdmGetWindowsDirectoryA"
+          },
+          {
+            "graph": "x64/launcher",
+            "object": "build\\.ninja\\msvc-x64-release\\launcher\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "NtvdmGetWindowsDirectoryA"
+          },
+          {
+            "graph": "x64/worker",
+            "object": "build\\.ninja\\msvc-x64-release\\worker\\obj\\common\\system_root.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/system_root.c",
+            "symbol": "NtvdmGetWindowsDirectoryA"
+          }
+        ]
+      },
+      {
+        "id": "C0221",
+        "symbol": "mvdm_softpc_config_path_to_ansi",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\compat\\pif_path.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/pif_path.c",
+            "symbol": "_mvdm_softpc_config_path_to_ansi"
+          }
+        ]
+      },
+      {
+        "id": "C0222",
+        "symbol": "mvdm_softpc_firmware_read_embedded_rom",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\compat\\mvdm_firmware.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/mvdm_firmware.c",
+            "symbol": "_mvdm_softpc_firmware_read_embedded_rom"
+          }
+        ]
+      },
+      {
+        "id": "C0241",
+        "symbol": "mvdm_softpc_invalid_virtual_instance",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\invalid_virtual_instance.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/invalid_virtual_instance.c",
+            "symbol": "_mvdm_softpc_invalid_virtual_instance"
+          }
+        ]
+      },
+      {
+        "id": "C0251",
+        "symbol": "mvdm_standalone_worker_begin",
+        "owners": [],
+        "definitions": []
+      },
+      {
+        "id": "C0252",
+        "symbol": "mvdm_standalone_worker_completion_code",
+        "owners": [],
+        "definitions": []
+      },
+      {
+        "id": "C0253",
+        "symbol": "mvdm_standalone_worker_finish",
+        "owners": [],
+        "definitions": []
+      },
+      {
+        "id": "C0254",
+        "symbol": "mvdm_standalone_worker_termination_escape",
+        "owners": [],
+        "definitions": []
+      },
+      {
+        "id": "C0307",
+        "symbol": "opennt_NtCreateFile",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtCreateFile@44"
+          }
+        ]
+      },
+      {
+        "id": "C0308",
+        "symbol": "opennt_NtDeviceIoControlFile",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtDeviceIoControlFile@40"
+          }
+        ]
+      },
+      {
+        "id": "C0309",
+        "symbol": "opennt_NtFsControlFile",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtFsControlFile@40"
+          }
+        ]
+      },
+      {
+        "id": "C0310",
+        "symbol": "opennt_NtOpenFile",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtOpenFile@24"
+          }
+        ]
+      },
+      {
+        "id": "C0311",
+        "symbol": "opennt_NtOpenSymbolicLinkObject",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtOpenSymbolicLinkObject@12"
+          }
+        ]
+      },
+      {
+        "id": "C0312",
+        "symbol": "opennt_NtQueryDirectoryFile",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtQueryDirectoryFile@44"
+          }
+        ]
+      },
+      {
+        "id": "C0313",
+        "symbol": "opennt_NtQueryInformationFile",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtQueryInformationFile@20"
+          }
+        ]
+      },
+      {
+        "id": "C0314",
+        "symbol": "opennt_NtQueryObject",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtQueryObject@20"
+          }
+        ]
+      },
+      {
+        "id": "C0315",
+        "symbol": "opennt_NtQuerySymbolicLinkObject",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtQuerySymbolicLinkObject@12"
+          }
+        ]
+      },
+      {
+        "id": "C0316",
+        "symbol": "opennt_NtQueryVolumeInformationFile",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\ntioapi_facade.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/ntioapi_facade.c",
+            "symbol": "_opennt_NtQueryVolumeInformationFile@20"
+          }
+        ]
+      },
+      {
+        "id": "C0349",
+        "symbol": "wow_control_icon_size",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_icon_size.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_icon_size.c",
+            "symbol": "_wow_control_icon_size@16"
+          }
+        ]
+      },
+      {
+        "id": "C0379",
+        "symbol": "wow_dialog_host_get",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_dialog_slots.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_dialog_slots.c",
+            "symbol": "_wow_dialog_host_get@12"
+          }
+        ]
+      },
+      {
+        "id": "C0382",
+        "symbol": "wow_dialog_host_set",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_dialog_slots.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_dialog_slots.c",
+            "symbol": "_wow_dialog_host_set@16"
+          }
+        ]
+      },
+      {
+        "id": "C0393",
+        "symbol": "wow_edit_native_GdiGetCharDimensions",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_controls.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_controls.c",
+            "symbol": "_wow_edit_native_GdiGetCharDimensions@12"
+          }
+        ]
+      },
+      {
+        "id": "C0394",
+        "symbol": "wow_edit_native_GetCharWidthInfo",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_controls.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_controls.c",
+            "symbol": "_wow_edit_native_GetCharWidthInfo@8"
+          }
+        ]
+      },
+      {
+        "id": "C0395",
+        "symbol": "wow_edit_native_NtUserKillSystemTimer",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_controls.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_controls.c",
+            "symbol": "_wow_edit_native_NtUserKillSystemTimer@8"
+          }
+        ]
+      },
+      {
+        "id": "C0396",
+        "symbol": "wow_edit_native_NtUserSetSystemTimer",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_controls.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_controls.c",
+            "symbol": "_wow_edit_native_NtUserSetSystemTimer@16"
+          }
+        ]
+      },
+      {
+        "id": "C0397",
+        "symbol": "wow_edit_native_PolyPatBlt",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_controls.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_controls.c",
+            "symbol": "_wow_edit_native_PolyPatBlt@20"
+          }
+        ]
+      },
+      {
+        "id": "C0398",
+        "symbol": "wow_edit_native_ensure_gui_thread",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_environment.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_environment.c",
+            "symbol": "_wow_edit_native_ensure_gui_thread@0"
+          }
+        ]
+      },
+      {
+        "id": "C0399",
+        "symbol": "wow_edit_native_highest_user_address",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_environment.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_environment.c",
+            "symbol": "_wow_edit_native_highest_user_address@0"
+          }
+        ]
+      },
+      {
+        "id": "C0402",
+        "symbol": "wow_native_SetWindowsHookExA",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_hook_native_binding.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_hook_native_binding.c",
+            "symbol": "_wow_native_SetWindowsHookExA@16"
+          }
+        ]
+      },
+      {
+        "id": "C0430",
+        "symbol": "wow_native_create_process_a",
+        "owners": [],
+        "definitions": []
+      },
+      {
+        "id": "C0434",
+        "symbol": "AddFontResourceTracking",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_fonts.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_fonts.c",
+            "symbol": "_AddFontResourceTracking@8"
+          }
+        ]
+      },
+      {
+        "id": "C0435",
+        "symbol": "GdiCleanCacheDC",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_native_controls.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_native_controls.c",
+            "symbol": "_GdiCleanCacheDC@4"
+          }
+        ]
+      },
+      {
+        "id": "C0436",
+        "symbol": "GetETM",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_fonts.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_fonts.c",
+            "symbol": "_GetETM@8"
+          }
+        ]
+      },
+      {
+        "id": "C0437",
+        "symbol": "GetGlyphOutlineWow",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_fonts.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_fonts.c",
+            "symbol": "_GetGlyphOutlineWow@28"
+          }
+        ]
+      },
+      {
+        "id": "C0438",
+        "symbol": "GetHFONT",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_fonts.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_fonts.c",
+            "symbol": "_GetHFONT@4"
+          }
+        ]
+      },
+      {
+        "id": "C0439",
+        "symbol": "RemoveFontResourceTracking",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_fonts.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_fonts.c",
+            "symbol": "_RemoveFontResourceTracking@8"
+          }
+        ]
+      },
+      {
+        "id": "C0441",
+        "symbol": "UnloadNetworkFonts",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_fonts.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_fonts.c",
+            "symbol": "_UnloadNetworkFonts@4"
+          }
+        ]
+      },
+      {
+        "id": "C0458",
+        "symbol": "wow_task_reference_event",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_task_event_binding.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_task_event_binding.c",
+            "symbol": "_wow_task_reference_event@8"
+          }
+        ]
+      },
+      {
+        "id": "C0459",
+        "symbol": "wow_profile_open_key",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_profile_native.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_profile_native.c",
+            "symbol": "_wow_profile_open_key@8"
+          }
+        ]
+      },
+      {
+        "id": "C0603",
+        "symbol": "GetLanmanSessionKey",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\compat\\remote_rap.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/remote_rap.c",
+            "symbol": "_GetLanmanSessionKey"
+          }
+        ]
+      },
+      {
+        "id": "C0604",
+        "symbol": "RxNetUserPasswordSet",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\compat\\remote_rap.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/remote_rap.c",
+            "symbol": "_RxNetUserPasswordSet"
+          }
+        ]
+      },
+      {
+        "id": "C0605",
+        "symbol": "RxpTransactSmb",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\compat\\remote_rap.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/remote_rap.c",
+            "symbol": "_RxpTransactSmb"
+          }
+        ]
+      },
+      {
+        "id": "C0606",
+        "symbol": "I_BrowserServerEnumForXactsrv",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/worker",
+            "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\compat\\remote_browser.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/remote_browser.c",
+            "symbol": "_I_BrowserServerEnumForXactsrv"
+          }
+        ]
+      },
+      {
+        "id": "C0616",
+        "symbol": "wow_edit_gray_brush",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_control_brushes.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_control_brushes.c",
+            "symbol": "_wow_edit_gray_brush"
+          }
+        ]
+      },
+      {
+        "id": "C0617",
+        "symbol": "wow_edit_system_brushes",
+        "owners": [
+          "compat"
+        ],
+        "definitions": [
+          {
+            "graph": "x86/wow32",
+            "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_control_brushes.obj",
+            "source": "O:/repos.hobby/ntvdm64/src/compat/wow_control_brushes.c",
+            "symbol": "_wow_edit_system_brushes"
+          }
+        ]
+      }
+    ]
+  },
+  "compilerChecks": {
+    "graphMirrorObjects": {
+      "x86/worker": 392,
+      "x86/wow32": 135,
+      "x64/frontend": 0,
+      "x64/service": 3,
+      "x64/launcher": 5,
+      "x64/monitor": 0,
+      "x64/worker": 1,
+      "x64/hook": 2
+    },
+    "invalid": [],
+    "checks": [
+      {
+        "id": "C0014",
+        "kind": "header",
+        "oldTarget": "src/common/wow/gdi_alias.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0017",
+        "kind": "header",
+        "oldTarget": "src/common/wow/registry.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0027",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/session/dem_restart_hint.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0035",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/softpc/include/mvdm_keyboard_history.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0036",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/softpc/include/mvdm_shadow_registry.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0037",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/softpc/include/mvdm_softpc_ccpu_wait.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0038",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/softpc/include/mvdm_softpc_event_thread.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0042",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0046",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/softpc/include/mvdm_standalone_worker.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0056",
+        "kind": "header",
+        "oldTarget": "src/ntvdm-exe/win32/mvdm_crt_redirect.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0059",
+        "kind": "header",
+        "oldTarget": "src/vdmredir-dll/include/remote_browser.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0068",
+        "kind": "header",
+        "oldTarget": "src/wow32-dll/include/nt_vdd.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0069",
+        "kind": "header",
+        "oldTarget": "src/wow32-dll/include/ntpsapi_wow32.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0076",
+        "kind": "header",
+        "oldTarget": "src/wow32-dll/include/wow_class_lookup_bindings.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0086",
+        "kind": "header",
+        "oldTarget": "src/wow32-dll/include/wow_dde_data_bindings.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0126",
+        "kind": "header",
+        "oldTarget": "src/wow32-dll/include/wow_user_probe_bindings.h",
+        "remainingHits": []
+      },
+      {
+        "id": "C0138",
+        "kind": "include-root",
+        "oldTarget": "src/ntvdm-exe/monitor/include",
+        "remainingHits": []
+      },
+      {
+        "id": "C0139",
+        "kind": "include-root",
+        "oldTarget": "src/ntvdm-exe/redir/include",
+        "remainingHits": []
+      },
+      {
+        "id": "C0140",
+        "kind": "include-root",
+        "oldTarget": "src/ntvdm-exe/session",
+        "remainingHits": []
+      },
+      {
+        "id": "C0143",
+        "kind": "include-root",
+        "oldTarget": "src/ntvdm-exe/vdd/include",
+        "remainingHits": []
+      },
+      {
+        "id": "C0144",
+        "kind": "include-root",
+        "oldTarget": "src/ntvdm-exe/wow/include",
+        "remainingHits": []
+      }
+    ]
+  },
+  "specialCases": [
+    {
+      "ids": [
+        "C0218"
+      ],
+      "proof": "Current bios.obj references _c_cpu_unsimulate, not _host_unsimulate; map selects original-ccpu386:c_main.obj. P73 provides scope/behavior evidence."
+    },
+    {
+      "ids": [
+        "C0251",
+        "C0252",
+        "C0253",
+        "C0254"
+      ],
+      "proof": "Original C entry has no mvdm_standalone_worker references. F main owns startup/setjmp/cleanup; C entry is renamed mvdm_softpc_main, mapped to ntvdm_entry.obj. worker_begin remains private static F code, not an outward C dependency. P3 provides delivery evidence."
+    },
+    {
+      "ids": [
+        "C0430"
+      ],
+      "proof": "P99 verified original WK32LoadModule32 imports SDK CreateProcessA directly after P28 removed F wrapper."
+    }
+  ],
+  "interpretation": "All 88 eliminated IDs retain the scoped removal evidence. Seven obsolete next_check instructions corrected. No additional dependency claimed eliminated.",
+  "limits": [
+    "COFF provider census covers C objects in the eight production command sets, not every assembly or C++ object.",
+    "Compiler closure covers selected mirror C translation units; this is not a new audit of all dependencies or all 480 open IDs.",
+    "Object selection/definition evidence is not new runtime behavior proof. Prior delivery acceptance remains authoritative; no runtime repeated."
+  ],
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 480,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 88
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "publication": {
+    "package": "614ed535-8262-4093-8dd4-d6d3f4b649de",
+    "verifiedHashes": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "c305e0b5cc24005485373cfb7f47af7e870818f6f382c76841f8bb6e9768b6c5"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "aea9d54d3c102d39f2c5792aa87d2b002eb34a8949e3960250897e2214831e52"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "cc705b76f63abe727218df71c0b3aeed3cbd29346bfe2a4981f6804dc37895d1"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "c9b57d4b379c74dc76954ed9206e7601078320b2d17f4dd01c627a96f1e9f100"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "1d5b05208e3114d780eef52df408946c069b1441340bb4edc074ea14c893002c"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "c3c1739b7c6520e8a676b72b8e605b86ff641774664f579a46f191fdfd3d616f"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "13a7bcd2f2d43502e484299ecf08f522dd154aa30d8accd5ce6cb738216c06e6"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "7e2f430cd90254841899e5a16ea81a4e4dd5e8e9a9f5284eec856185134c9920"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "43257a0bb77614744285c443f6ecf180b0f39b7647c4641871ef1a3f70bf0f1b"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "a9011f93b387ecaf3c99a69df594dabc575123ea1df265a4c275b5364f2376b1"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "1367d90122b6f9f2e5a99fba7e837c2a2f23740aedfdf504b8439baab0620772"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "c305e0b5cc24005485373cfb7f47af7e870818f6f382c76841f8bb6e9768b6c5"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "aea9d54d3c102d39f2c5792aa87d2b002eb34a8949e3960250897e2214831e52"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "cc705b76f63abe727218df71c0b3aeed3cbd29346bfe2a4981f6804dc37895d1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "c9b57d4b379c74dc76954ed9206e7601078320b2d17f4dd01c627a96f1e9f100"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "1d5b05208e3114d780eef52df408946c069b1441340bb4edc074ea14c893002c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "c3c1739b7c6520e8a676b72b8e605b86ff641774664f579a46f191fdfd3d616f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "13a7bcd2f2d43502e484299ecf08f522dd154aa30d8accd5ce6cb738216c06e6"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "7e2f430cd90254841899e5a16ea81a4e4dd5e8e9a9f5284eec856185134c9920"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "43257a0bb77614744285c443f6ecf180b0f39b7647c4641871ef1a3f70bf0f1b"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "a9011f93b387ecaf3c99a69df594dabc575123ea1df265a4c275b5364f2376b1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "1367d90122b6f9f2e5a99fba7e837c2a2f23740aedfdf504b8439baab0620772"
+      }
+    ]
+  },
+  "verification": {
+    "documentation": "Passed: build/t483-s12-eliminated-recheck/docs.log",
+    "build": "Not repeated: no production input changes"
+  },
+  "followUp": "Finish explicit open-ID disposition reconciliation before S12 closure; S13/S14 not admitted yet."
+}

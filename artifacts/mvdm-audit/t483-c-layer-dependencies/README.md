@@ -315,3 +315,5 @@ P97: [Final file ownership review](s12-p97-final-file-ownership.json); all190 fi
 P98: [Resource binding ownership](s12-p98-resource-binding-ownership.json); C0169/C0170 moved to SDK-only compat, exact bodies/state retained; cached builds, actual x86/x64 object tests and dual release.
 
 P99: [Ledger correction](s12-p99-ledger-correction.json); C0430 was eliminated in P28, confirmed against current product COFF/map and both release hashes. No production change.
+
+P100: [Eliminated-edge reconciliation](s12-p100-eliminated-recheck.json); all88 eliminated IDs checked against current production objects/compiler inputs and specific retired-edge evidence; seven stale follow-up instructions corrected.
