@@ -1,0 +1,168 @@
+{
+  "baseline": "6aba64b29c4559ba7434b8e96b50ceced819bb91",
+  "ids": [
+    "C0215"
+  ],
+  "files": [
+    {
+      "linkOnlyOrder": 5,
+      "path": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+      "role": "Original module-name write through write_intel_byte_string -> effective_addr -> SAS; no product session state.",
+      "decision": "Keep original consumer in C. S14 address-interface ownership review; do not migrate BIOS/EMS/RTC algorithms to F.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 6,
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "role": "Original EMS parameter, handle-name and page-map data accesses; numeric address used before SAS and in conventional-memory bound check.",
+      "decision": "Keep original consumer in C. S14 address-interface ownership review; do not migrate BIOS/EMS/RTC algorithms to F.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 7,
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "role": "Original BIOS saved SS:SP/user-stack restoration and firmware continuation addresses; CPU/BIOS responsibility.",
+      "decision": "Keep original consumer in C. S14 address-interface ownership review; do not migrate BIOS/EMS/RTC algorithms to F.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 8,
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "role": "Original RTC wait completion loads guest flag segment/offset and writes 0x80 through SAS; no frontend/lifecycle state.",
+      "decision": "Keep original consumer in C. S14 address-interface ownership review; do not migrate BIOS/EMS/RTC algorithms to F.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "provider": "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
+  "finding": "This F provider implements CPU address semantics, not product lifecycle. It already calls original CPU40 selector_outside_GDT_LDT/read_descriptor_linear; it cannot move to B while still depending on C. A cohesive C owner must be evaluated in S14, with mirror diff approval if required. No per-caller real-mode shortcut, duplicate page walker, or added callback introduced.",
+  "originalEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "macro": "base/mvdm/softpc.new/host/inc/host_gen.h:64 writes SAS using effective_addr; cpu4gen.h:266-267 maps to c_effective_addr.",
+    "body": "base/mvdm/softpc.new/base/support/xt.c:157-226 nests the address functions in CPU_30_STYLE. CPU40 PROD/non-CCPU arm dispatches Cpu.EffectiveAddr; non-CPU40 arm uses CPU30 DESCR/selector_outside_table/read_descriptor with real-mode fallback. Neither is a direct drop-in CPU40 function body.",
+    "currentProvider": "Mode PE/VM selects real arithmetic versus original CPU40 descriptor read. Protected selected descriptor is resolved from table, not guessed from whichever hidden segment cache has a matching selector.",
+    "limit": "No assertion that every current helper line is necessary; this is dependency/ownership classification, not approval to preserve all implementation differences."
+  },
+  "nextScope": "S14 compare minimal original-owner restoration against added mirror points/lines; preserve exported ABI and CPU40 real/VM/protected selector semantics. Reuse shared provider findings for other C0215 consumers but inspect each caller.",
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\build_id.obj",
+      "sha256": "8fe9147b681a079db89f5098e3b7fe93d68cbde14a2359d4c0eeb319a35b76a7",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\emm_fncs.obj",
+      "sha256": "9acf388984c69d3735290a961fbd4414ab2555afcd63d23c81b5e196059640c4",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\reset.obj",
+      "sha256": "8a80e61be4d042ec3b1450f530e28ff42a22d73680ccf4ab70ed862b5389cbb6",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\rtc_bios.obj",
+      "sha256": "1f5052a63e910f0842bc03b675f5a0475f504524f612a799d1f2184e7b226969",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\build_id.obj",
+      "sha256": "1cddccee7c7cd52fe9a894a171e5119766c8739365046a7250fa024fa64aa761",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\emm_fncs.obj",
+      "sha256": "d212ddd65c998bbc34d0752bdf0b6b6e5702aa0aba0e1302cd0842a5da807744",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\reset.obj",
+      "sha256": "37d05a3f0cf3ec74e625f0e26a7e5e3964e68854cf33853872ba87b72ec807ab",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\rtc_bios.obj",
+      "sha256": "b7734c540a796cdbb7732053056f48a9a9dc0cb3162ec4930a48e4341170a289",
+      "addressImport": "_c_effective_addr",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "provider": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 8,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 66,
+    "openIds": 499,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production changes. Both current P73 product/reference COFF objects and exact map providers checked.",
+    "runtime": "Not run; no new behavioral claim.",
+    "publicationHashesVerified": [
+      "assets\\release\\VCDEX.DLL",
+      "O:\\WINNT\\system32\\VCDEX.DLL",
+      "assets\\release\\run16.exe",
+      "O:\\WINNT\\system32\\run16.exe",
+      "assets\\release\\ntsrv.exe",
+      "O:\\WINNT\\system32\\ntsrv.exe",
+      "assets\\release\\ntcon.exe",
+      "O:\\WINNT\\system32\\ntcon.exe",
+      "assets\\release\\ntvdm.exe",
+      "O:\\WINNT\\system32\\ntvdm.exe",
+      "assets\\release\\ntvwm.exe",
+      "O:\\WINNT\\system32\\ntvwm.exe",
+      "assets\\release\\ntmon.exe",
+      "O:\\WINNT\\system32\\ntmon.exe",
+      "assets\\release\\WOW32.DLL",
+      "O:\\WINNT\\system32\\WOW32.DLL",
+      "assets\\release\\VDMREDIR.DLL",
+      "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "assets\\release\\nthook32.dll",
+      "O:\\WINNT\\system32\\nthook32.dll",
+      "assets\\release\\nthook64.dll",
+      "O:\\WINNT\\system32\\nthook64.dll"
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/base/bios/build_id.c": "9ff03f58980437d69cf245e18907ed5e5f4760622d90c870c617e410eeafd6e4",
+    "src/mvdm-host/softpc.new/base/bios/emm_fncs.c": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+    "src/mvdm-host/softpc.new/base/bios/reset.c": "02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449",
+    "src/mvdm-host/softpc.new/base/bios/rtc_bios.c": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+    "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c": "b712adf510bcddc316616bbf9c8df775a114a0f94d42c2a558716d039f8c56b5",
+    "src/mvdm-host/softpc.new/host/inc/host_gen.h": "d86cd3c505d643531dafaa548e66fbb42ba13c37e3c632a214a69b4f2f86f557",
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h": "1a21caf7f22b7271e4be6df6cb23a891fd8af6d31998a593692551a0e7fb6055"
+  }
+}

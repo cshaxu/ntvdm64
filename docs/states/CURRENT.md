@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P73: [BOP FE delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p73-bop-exit-binding.json). BIOS binds original CCPU exit directly; F wrapper removed. Reviewed116/116 compile and4/74 link-only files;499/618 IDs open. Mirror delta0/0; cumulative reduction2 points/10 lines. Cached build, dual11-image publication, CPU/BIOS and DOS return tests passed. Package26a87d88-8d03-4947-9982-69574aafd87e;22 hashes verified. S12 active.
+P73-P74: [BOP FE delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p73-bop-exit-binding.json), [BIOS address ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p74-bios-address-ownership.json). Reviewed116/116 compile and8/74 link-only;499/618 IDs open. C0215 CPU semantics require S14 owner review, not migration of BIOS callers. Mirror delta0/0; cumulative reduction2 points/10 lines. P73 package26a87d88-8d03-4947-9982-69574aafd87e remains published;22 hashes verified. S12 active.

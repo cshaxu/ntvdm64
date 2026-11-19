@@ -263,3 +263,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P72 DEM buffer ownership](s12-p72-dem-buffer-ownership.json): link-only file3/74. Separates proven page-aware-copy requirement from unproven necessity of the whole lease design. C0194/C0196/C0197 remain open for S13. Both product COFF/maps and22 publication hashes checked; no production change.
 
 [P73 BOP FE binding](s12-p73-bop-exit-binding.json): link-only file4/74. BIOS directly binds original CCPU exit; F wrapper removed; C0218 eliminated without mirror changes. Cached complete build, dual publication, CPU/BIOS and real DOS return checks passed. Current package26a87d88-8d03-4947-9982-69574aafd87e;499/618 IDs open.
+
+[P74 BIOS address ownership](s12-p74-bios-address-ownership.json): link-only files5-8/74, all C0215. Original consumers stay C; CPU30 body is not a direct CPU40 replacement. S14 evaluates common address owner. Eight current objects and22 published hashes checked; no production changes.
