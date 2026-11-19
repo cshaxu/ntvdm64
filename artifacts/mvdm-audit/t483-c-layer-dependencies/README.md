@@ -309,3 +309,5 @@ P94: [Public style binding](s12-p94-wstruc-public-style.json); files61-65 review
 P95: [Native hook ownership](s12-p95-hook-native-ownership.json); files66-69 reviewed, C0402 SDK-only hook binding moved F to B unchanged;24-case boundary test, cached builds and dual publication.
 
 P96: [Menu and timer ownership](s12-p96-menu-timer-ownership.json); files70-72 reviewed against actual product objects/maps; parser rewire separated from lifecycle cohort; no production edits.
+
+P97: [Final file ownership review](s12-p97-final-file-ownership.json); all190 files reviewed, not all dependencies removed. C0169/C0170 remain S12 native-resource migration candidates before closure.

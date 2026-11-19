@@ -1,0 +1,624 @@
+{
+  "baseline": "b3c8d02e992e54aefe5c44415bfbdb1af68bf18b",
+  "files": [
+    {
+      "order": 73,
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "decision": "Keep original C window thunks, enumeration argument conversion and guest callback. Unlike wstruc, generic window-long indices include dialog proc, WOW/private words and mapped HWND returns; cannot disable the whole selector. Discovery publishes full HWND before USER16 use; enumeration retains callback failure/cancellation. Native mutations pair execution enter/return and owned HWND resolution. S13 grouped identity/procedure/execution boundary; C0456 mapping/ABI S14.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0466",
+          "symbols": [
+            "_wow_native_ChildWindowFromPoint@12"
+          ],
+          "providers": [
+            "0001:000585f0       _wow_native_ChildWindowFromPoint@12 100595f0 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0467",
+          "symbols": [
+            "_wow_native_EnumChildWindows@12"
+          ],
+          "providers": [
+            "0001:00058630       _wow_native_EnumChildWindows@12 10059630 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0469",
+          "symbols": [
+            "_wow_native_EnumThreadWindows@12"
+          ],
+          "providers": [
+            "0001:000588c0       _wow_native_EnumThreadWindows@12 100598c0 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0470",
+          "symbols": [
+            "_wow_native_EnumWindows@8"
+          ],
+          "providers": [
+            "0001:00058a00       _wow_native_EnumWindows@8  10059a00 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0471",
+          "symbols": [
+            "_wow_native_FindWindowA@8"
+          ],
+          "providers": [
+            "0001:00058b40       _wow_native_FindWindowA@8  10059b40 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0472",
+          "symbols": [
+            "_wow_native_GetActiveWindow@0"
+          ],
+          "providers": [
+            "0001:00058b80       _wow_native_GetActiveWindow@0 10059b80 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0475",
+          "symbols": [
+            "_wow_native_GetForegroundWindow@0"
+          ],
+          "providers": [
+            "0001:00058c10       _wow_native_GetForegroundWindow@0 10059c10 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0479",
+          "symbols": [
+            "_wow_native_GetWindowThreadProcessId@8"
+          ],
+          "providers": [
+            "0001:00058d50       _wow_native_GetWindowThreadProcessId@8 10059d50 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0480",
+          "symbols": [
+            "_wow_native_WindowFromPoint@8"
+          ],
+          "providers": [
+            "0001:00058ea0       _wow_native_WindowFromPoint@8 10059ea0 f   wow_user_discovery.obj"
+          ]
+        },
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f4d0       _CallBack16@16             100704d0 f   wow_user_native_extension.obj"
+          ]
+        },
+        {
+          "id": "C0491",
+          "symbols": [
+            "_wow_user_get_procedure@12"
+          ],
+          "providers": [
+            "0001:0006fc50       _wow_user_get_procedure@12 10070c50 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0492",
+          "symbols": [
+            "_wow_user_get_window_longA@8"
+          ],
+          "providers": [
+            "0001:0006fcf0       _wow_user_get_window_longA@8 10070cf0 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0494",
+          "symbols": [
+            "_wow_user_set_procedure@20"
+          ],
+          "providers": [
+            "0001:0006fea0       _wow_user_set_procedure@20 10070ea0 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0495",
+          "symbols": [
+            "_wow_user_set_window_longA@12"
+          ],
+          "providers": [
+            "0001:00070050       _wow_user_set_window_longA@12 10071050 f   wow_user_private_access.obj"
+          ]
+        },
+        {
+          "id": "C0506",
+          "symbols": [
+            "_wow_native_ArrangeIconicWindows@4"
+          ],
+          "providers": [
+            "0001:000605a0       _wow_native_ArrangeIconicWindows@4 100615a0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0508",
+          "symbols": [
+            "_wow_native_BringWindowToTop@4"
+          ],
+          "providers": [
+            "0001:000607c0       _wow_native_BringWindowToTop@4 100617c0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0512",
+          "symbols": [
+            "_wow_native_CloseWindow@4"
+          ],
+          "providers": [
+            "0001:00060ba0       _wow_native_CloseWindow@4  10061ba0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0518",
+          "symbols": [
+            "_wow_native_DeferWindowPos@32"
+          ],
+          "providers": [
+            "0001:00061270       _wow_native_DeferWindowPos@32 10062270 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0520",
+          "symbols": [
+            "_wow_native_DestroyWindow@4"
+          ],
+          "providers": [
+            "0001:000614c0       _wow_native_DestroyWindow@4 100624c0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0525",
+          "symbols": [
+            "_wow_native_EnableWindow@8"
+          ],
+          "providers": [
+            "0001:000619f0       _wow_native_EnableWindow@8 100629f0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0526",
+          "symbols": [
+            "_wow_native_EndDeferWindowPos@4"
+          ],
+          "providers": [
+            "0001:00061b00       _wow_native_EndDeferWindowPos@4 10062b00 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0529",
+          "symbols": [
+            "_wow_native_FlashWindow@8"
+          ],
+          "providers": [
+            "0001:00061f10       _wow_native_FlashWindow@8  10062f10 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0530",
+          "symbols": [
+            "_wow_native_GetClassNameA@12"
+          ],
+          "providers": [
+            "0001:00062020       _wow_native_GetClassNameA@12 10063020 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0534",
+          "symbols": [
+            "_wow_native_GetParent@4"
+          ],
+          "providers": [
+            "0001:00062460       _wow_native_GetParent@4    10063460 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0540",
+          "symbols": [
+            "_wow_native_GetWindowDC@4"
+          ],
+          "providers": [
+            "0001:00062af0       _wow_native_GetWindowDC@4  10063af0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0541",
+          "symbols": [
+            "_wow_native_GetWindowRect@8"
+          ],
+          "providers": [
+            "0001:00062bf0       _wow_native_GetWindowRect@8 10063bf0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0542",
+          "symbols": [
+            "_wow_native_GetWindowTextA@12"
+          ],
+          "providers": [
+            "0001:00062d00       _wow_native_GetWindowTextA@12 10063d00 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0543",
+          "symbols": [
+            "_wow_native_GetWindowTextLengthA@4"
+          ],
+          "providers": [
+            "0001:00062e20       _wow_native_GetWindowTextLengthA@4 10063e20 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0548",
+          "symbols": [
+            "_wow_native_MoveWindow@24"
+          ],
+          "providers": [
+            "0001:00063370       _wow_native_MoveWindow@24  10064370 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0553",
+          "symbols": [
+            "_wow_native_ScrollWindow@20"
+          ],
+          "providers": [
+            "0001:000638a0       _wow_native_ScrollWindow@20 100648a0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0555",
+          "symbols": [
+            "_wow_native_SendMessageA@16"
+          ],
+          "providers": [
+            "0001:00063af0       _wow_native_SendMessageA@16 10064af0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0558",
+          "symbols": [
+            "_wow_native_SetActiveWindow@4"
+          ],
+          "providers": [
+            "0001:00063dc0       _wow_native_SetActiveWindow@4 10064dc0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0566",
+          "symbols": [
+            "_wow_native_SetParent@8"
+          ],
+          "providers": [
+            "0001:000646b0       _wow_native_SetParent@8    100656b0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0573",
+          "symbols": [
+            "_wow_native_SetWindowPos@28"
+          ],
+          "providers": [
+            "0001:00064ff0       _wow_native_SetWindowPos@28 10065ff0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0574",
+          "symbols": [
+            "_wow_native_SetWindowTextA@8"
+          ],
+          "providers": [
+            "0001:00065150       _wow_native_SetWindowTextA@8 10066150 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0576",
+          "symbols": [
+            "_wow_native_SetWindowWord@12"
+          ],
+          "providers": [
+            "0001:00065370       _wow_native_SetWindowWord@12 10066370 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0580",
+          "symbols": [
+            "_wow_native_ShowScrollBar@12"
+          ],
+          "providers": [
+            "0001:00065780       _wow_native_ShowScrollBar@12 10066780 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0581",
+          "symbols": [
+            "_wow_native_ShowWindow@8"
+          ],
+          "providers": [
+            "0001:000658a0       _wow_native_ShowWindow@8   100668a0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0582",
+          "symbols": [
+            "_wow_native_UpdateWindow@4"
+          ],
+          "providers": [
+            "0001:000659b0       _wow_native_UpdateWindow@4 100669b0 f   wow_user_task_lifecycle.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wuwind.obj",
+      "sha256": "170f573102dacc0187bdffe4b006568c3abeff20a22534ac3e5fdccbc47ce804",
+      "map": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "mapSha256": "89a6d7e9c2332e0d7d7e531a9bea484261706e74feb41e27a9052982793bc73e",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 74,
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "decision": "Keep original C BaseSrv task/command algorithm. C0166/0167 lookup pins registered process under the bound registry lock; C0168 borrows authenticated request-thread scope. These are scoped NTSRV composition boundaries, not process-global native lookups. C0169/0170 resource wrappers are a remaining S12 B-migration candidate: they use explicit callback table and native handle APIs, not CSR layout. C0171 null USER notification storage is an S14 original-owner/disabled-feature storage decision; do not import USER server to initialize it.",
+      "bindings": [
+        {
+          "id": "C0166",
+          "symbols": [
+            "CsrLockProcessByClientId"
+          ],
+          "providers": [
+            "0001:000181e0       CsrLockProcessByClientId   00000001400191e0 f   opennt-base-bindings:registry.obj"
+          ]
+        },
+        {
+          "id": "C0167",
+          "symbols": [
+            "CsrUnlockProcess"
+          ],
+          "providers": [
+            "0001:000182d0       CsrUnlockProcess           00000001400192d0 f   opennt-base-bindings:registry.obj"
+          ]
+        },
+        {
+          "id": "C0168",
+          "symbols": [
+            "OpenNtBaseServerRequestThread"
+          ],
+          "providers": [
+            "0001:00019fa0       OpenNtBaseServerRequestThread 000000014001afa0 f   opennt-base-bindings:request.obj"
+          ]
+        },
+        {
+          "id": "C0169",
+          "symbols": [
+            "OpenNtBaseClose"
+          ],
+          "providers": [
+            "0001:00019ff0       OpenNtBaseClose            000000014001aff0 f   opennt-base-bindings:resources.obj"
+          ]
+        },
+        {
+          "id": "C0170",
+          "symbols": [
+            "OpenNtBaseDuplicateObject"
+          ],
+          "providers": [
+            "0001:0001a040       OpenNtBaseDuplicateObject  000000014001b040 f   opennt-base-bindings:resources.obj"
+          ]
+        },
+        {
+          "id": "C0171",
+          "symbols": [
+            "UserNotifyProcessCreate"
+          ],
+          "providers": [
+            "0003:00000c10       UserNotifyProcessCreate    0000000140061c10     opennt-base-bindings:service-core.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x64-release\\service\\obj\\opennt-base-server\\srvvdm.obj",
+      "sha256": "1979f1b4869e638641a3dd43564f6c81f812e199dcbe1b28e04ecd4420d2b99a",
+      "map": "build\\.ninja\\msvc-x64-release\\service\\ntsrv.exe.map",
+      "mapSha256": "7be764c702680394a47840acced1511d02a6fc0c42923e370cd639f8c914a9ce",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "sourceEvidence": [
+    {
+      "path": "src/wow32-dll/source/wow_user_discovery.c",
+      "sha256": "766160007de138f7c3055dc171b0ad6b7b65b1c0a2c18c098633712e38a227a0"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_private_access.c",
+      "sha256": "ba8081be96b4bc1859aa25de555e0251ef5a3a386bb411bda43f9c4cfac9a789"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_process.c",
+      "sha256": "cc9e3fc7d4fa5b7101d9b79074d9e879436065518c4f47cb4a2a5af558d91c0e"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_request.c",
+      "sha256": "f6b8e822286d9c806a93f91b194ee923fa0c7fccc282b39f1d030fc3d962bd99"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_resource.c",
+      "sha256": "70f9b1d2da2152ecfd589b3eaa6f99589aa23d83c38610bbec24860e9a8fabb5"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/base_service.c",
+      "sha256": "72f268424fba27d2b99d55dd4f22e5381095e87e94da93ceb0078a118bf15821"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/source/service_core.c",
+      "sha256": "15c0546485abc4cbbc312f333875c3a47349f07ebb340473048e1ecf0d3427d3"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/include/base_server.h",
+      "sha256": "460b974d4b2e511f1c3792ba67d16407f268b70f2e0d52eceb01685b8799fdc6"
+    },
+    {
+      "path": "src/ntsrv-exe/opennt/include/base_resource.h",
+      "sha256": "948889952401f2baabbcd7043ad184d089f658fbd8381be2e21bf6720c25e449"
+    }
+  ],
+  "remainingS12": {
+    "ids": [
+      "C0169",
+      "C0170"
+    ],
+    "reason": "base_resource.c does not access CSR structures: current base_server.h forces unnecessary outer/C declarations onto a public-type callback/TLS provider. Native NtClose/NtDuplicateObject declarations and the resource callback table must use an independent B compilation context before migration.",
+    "tests": "Bound and unbound resource scope, missing operations, same-process native fallback, cross-process rejection without authenticated binding, nested restore, x86/x64 calling convention and final product links."
+  },
+  "verification": {
+    "actualObjects": true,
+    "abGraphs": 8,
+    "productSourceChanged": false,
+    "build": "Not repeated; evidence-only review of P95 products.",
+    "runtime": "Not run; no new runtime acceptance claimed."
+  },
+  "publication": {
+    "package": "8bb49d26-18e4-4925-8b13-f341211b438d",
+    "action": "Existing P95 package hash check, not new publication.",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "fcc1d281deda4195eadcb203aa63b384cc6f7a675e3eea0d8b1b6d4442f96988"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "9df9afee5734cef1cc924ba4d20714f982588efd166af024247d3bdd5bf55243"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "4a53d4bc236c5fabe33483a3ea4343ba9688a3b6c54370c938a1301d1af1e460"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "ec074c29a8ea2932760f38a8f39f6b9c9d1fe67386bc80c2140175730bd5a47c"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "7bdc17f4153ded993ef8cdf4d81b85456a855d8b21c5e700b707019875066f53"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "d245875d58ffc3ee39539d53bf8d71e07b10f5036107d40e09ed7e9b0d1bf72f"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "1886df89aa427ddc31153da76c462047d8199017b9526f464696aab0adf3de03"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "c83fde45f8775c311ca6855e1040000fb866ae172f11867b93b774d95b90ed3c"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "29dc80db70bdc03062e8d1948c64173d334b15cf342f7aee3c990d87febdd963"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "ce8d8ef52cc42f077217e73bfdf03736ea3b6f11d86b4545dfe8d08d679427c3"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "befdc22b98af83c1f91f2ce01bfe87dbf957ba7611c511f00683710f4fbfad96"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "fcc1d281deda4195eadcb203aa63b384cc6f7a675e3eea0d8b1b6d4442f96988"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "9df9afee5734cef1cc924ba4d20714f982588efd166af024247d3bdd5bf55243"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "4a53d4bc236c5fabe33483a3ea4343ba9688a3b6c54370c938a1301d1af1e460"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "ec074c29a8ea2932760f38a8f39f6b9c9d1fe67386bc80c2140175730bd5a47c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "7bdc17f4153ded993ef8cdf4d81b85456a855d8b21c5e700b707019875066f53"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "d245875d58ffc3ee39539d53bf8d71e07b10f5036107d40e09ed7e9b0d1bf72f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "1886df89aa427ddc31153da76c462047d8199017b9526f464696aab0adf3de03"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "c83fde45f8775c311ca6855e1040000fb866ae172f11867b93b774d95b90ed3c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "29dc80db70bdc03062e8d1948c64173d334b15cf342f7aee3c990d87febdd963"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "ce8d8ef52cc42f077217e73bfdf03736ea3b6f11d86b4545dfe8d08d679427c3"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "befdc22b98af83c1f91f2ce01bfe87dbf957ba7611c511f00683710f4fbfad96"
+      }
+    ]
+  },
+  "progress": {
+    "compileReviewed": 116,
+    "compileTotal": 116,
+    "linkOnlyReviewed": 74,
+    "linkOnlyTotal": 74,
+    "filesReviewed": 190,
+    "filesTotal": 190,
+    "remainingFiles": 0,
+    "total": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 483,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 85
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "File review complete, S12 not closed. Implement remaining in-place candidates and reconcile the complete stable-ID ledger before S13 admission. S13/S14 implementation and full C cleanup remain outstanding."
+}

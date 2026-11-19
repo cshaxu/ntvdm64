@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P96: [Menu/timer ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p96-menu-timer-ownership.json). Reviewed116/116 compile and72/74 link-only (188/190);483/618 IDs open,85 eliminated. Evidence-only audit; P95 complete11 publication retained and22 hashes reverified;8 A/B graphs passed. Mirror delta0/0; cumulative reduction2 points/10 lines. Menu/callback ownership S13; existing parser rewire C0433 and flush contract S14. S12 active.
+P97: [Final file review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p97-final-file-ownership.json). Reviewed116/116 compile and74/74 link-only (190/190);483/618 IDs open,85 eliminated. C0169/C0170 remain S12 in-place resource-binding candidates; final ledger reconciliation also pending. Evidence only; P95 complete11/22 release hashes reverified and8 A/B graphs passed. Mirror delta0/0; cumulative reduction2 points/10 lines. S12 active, not closed.
