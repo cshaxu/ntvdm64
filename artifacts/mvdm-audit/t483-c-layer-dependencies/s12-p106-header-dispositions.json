@@ -1,0 +1,126 @@
+{
+  "baseline": "395511a5522c6d763fce3233a57859f2c1ceaebf",
+  "question": "Reconcile first nine open headers with current providers and previous ownership evidence.",
+  "procedure": "Read the nine current headers, associated earlier receipts, and P102/P103 delivered native-provider extractions. Replace obsolete generic next_check text; retain all open statuses.",
+  "items": [
+    {
+      "id": "C0002",
+      "header": "src/common/base_srv/base_capture.h",
+      "sha256": "d694a8651c1e0dbda0e85203d1b08c66b5ddd98874f34794ab6346e93a4db90f",
+      "scope": "S14 + S13",
+      "decision": "Original CSR capture declarations and tag macros use C types; reconcile original header in S14. CsrPortHeap allocation/retirement belongs to S13 product lifetime. No wholesale move to B.",
+      "evidence": [
+        "s12-p32-user-probe.json"
+      ]
+    },
+    {
+      "id": "C0003",
+      "header": "src/common/base_srv/base_classifier.h",
+      "sha256": "a92fa8c404cb33aba457a27e05bb0e0f6244d52b5354643145e8f3822693f819",
+      "scope": "S14",
+      "decision": "P102 already moved path conversion to B. Remaining header contains original section-image ABI, classifier declarations, suffix storage references and bindings. Reconcile original declarations and build bindings, not duplicate the B path provider.",
+      "evidence": [
+        "s12-p33-console-handle.json",
+        "s12-p102-classifier-path-ownership.json"
+      ]
+    },
+    {
+      "id": "C0004",
+      "header": "src/common/base_srv/base_client.h",
+      "sha256": "414bbc72688c219c867d586b2bf2db3a57466afeea1ce297b7f87371b49517fe",
+      "scope": "S14 + S13",
+      "decision": "Original CSR/BaseClient message declarations remain C-shaped; S14 declaration recovery. S13 retains authenticated client transport and capture validation. B console-handle predicate is already delivered.",
+      "evidence": [
+        "s12-p33-console-handle.json"
+      ]
+    },
+    {
+      "id": "C0005",
+      "header": "src/common/base_srv/base_config.h",
+      "sha256": "07bc489782a97b8ab91a89aec5918c9e284c50480c2de2665b4aab649898b866",
+      "scope": "S14",
+      "decision": "P103 already moved immutable config carrier and reads to B. Remaining D header adds original BaseGetVdmConfigInfo declaration and FULL_INFO_BUFFER_SIZE using C KEY_VALUE_FULL_INFORMATION. Reconcile original declaration owner; do not repeat config migration.",
+      "evidence": [
+        "s12-p33-console-handle.json",
+        "s12-p103-config-ownership.json"
+      ]
+    },
+    {
+      "id": "C0006",
+      "header": "src/common/base_srv/legacy_classifier_arch.h",
+      "sha256": "142f700874be0689e4c0ba7a38ec0359236f02449308300d0965fc4212b499f9",
+      "scope": "S14",
+      "decision": "Per-translation-unit _X86_ selection after native nt.h deliberately enables DOS/OS2 NE classification on AMD64. Preserve actual guest classification while resolving build/header ownership; not a generic B architecture selector.",
+      "evidence": [
+        "s12-p33-console-handle.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0012",
+      "header": "src/common/redirector/async.h",
+      "sha256": "30c873e67ab002c7d7962c47ed19979e48fcba73614a6bffdc92af805a1a0a4a",
+      "scope": "S13",
+      "decision": "Redirector prepare/complete/release bind worker-owned request staging and epoch. Preserve payload commit before error/count and release of PrivateAsyncState. Declaration relocation alone cannot eliminate the F call.",
+      "evidence": [
+        "s12-p23-redir-wow-binding.json"
+      ]
+    },
+    {
+      "id": "C0015",
+      "header": "src/common/wow/page_domain.h",
+      "sha256": "ca57c6af30723dca4c09c346a2f9d11bb0b23f2936aa3389d679745bf24899d5",
+      "scope": "S13",
+      "decision": "Guest page-domain publication, callback context and exact-generation borrowed views belong to current worker lifetime. Preserve original SetSysColors success ordering; do not create independent B guest state.",
+      "evidence": [
+        "s12-p31-wow-clipboard-page-domain.json"
+      ]
+    },
+    {
+      "id": "C0016",
+      "header": "src/common/wow/paths.h",
+      "sha256": "49ddc12803dfb999d1da5bc996ea15ee784c417e5e71223d26e3794a606d5177",
+      "scope": "S13",
+      "decision": "Directory queries already B; mixed header still declares worker-owned SYSTEM.INI shadow staging. Resolve staging input/lifetime with wkernel consumer; no wholesale move of mixed header into B.",
+      "evidence": [
+        "s12-p24-wow-precomp.json"
+      ]
+    },
+    {
+      "id": "C0020",
+      "header": "src/ntsrv-exe/opennt/include/base_interactive.h",
+      "sha256": "9652ae272e0e60132c14dd1721e71c26f020550127523ec598bfeb44ab0d7f73",
+      "scope": "S13 + S14",
+      "decision": "Service owns trusted interactive LUID and scoped request binding; original C token-query algorithm remains. S13 settles admission policy boundary, S14 original token declarations. Do not move admission policy wholesale into B.",
+      "evidence": [
+        "s12-p69-final-file-ownership.json"
+      ]
+    }
+  ],
+  "limitations": [
+    "These are execution dispositions, not approval for new mirror differences.",
+    "Mixed header removal is not proved by moving only its native helper.",
+    "No product source, build, package or guest changed. No new runtime validation claimed."
+  ],
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 475,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 93
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "documentationGate": "passed: build/t483-s12-timer-close-trial/p106-docs.log; exit 0. git diff --check passed."
+}

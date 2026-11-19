@@ -327,3 +327,5 @@ P103: [Immutable config ownership](s12-p103-config-ownership.json); C0154/C0155 
 P104: [Start-glass ownership](s12-p104-start-glass-ownership.json); C0320/C0440 use one B source with original per-product ABI, identical function bytes, cached builds and complete dual publication. Pure-relocation runtime waiver applies.
 
 P105: [Console close ownership](s12-p105-console-close-ownership.json); five callers classified, isolated macro alias rejected for C4273. Graphics lifetime remains an open S13 cohort; no product change or new runtime claim.
+
+P106: [First nine open header dispositions](s12-p106-header-dispositions.json); S13 lifecycle and S14 original declaration ownership separated, P102/P103 delivered providers excluded from remaining work. No dependency counted eliminated.

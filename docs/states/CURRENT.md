@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P105: [Console close ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p105-console-close-ownership.json). Reviewed190/190 files;475/618 IDs open,93 eliminated. C0300 native and graphics callers distinguished; isolated macro alias rejected for C4273. Graphics lifetime belongs to S13. No product changes; P104 package5180945b-69e6-4556-8e21-0853a5aae788 remains published. Mirror delta0/0; cumulative reduction2 points/10 lines. S12 remains active.
+P106: [Header dispositions](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p106-header-dispositions.json). First nine open headers assigned concrete S13/S14 follow-up; obsolete P102/P103 provider work removed from remaining instructions. Reviewed190/190 files;475/618 IDs open,93 eliminated. No product changes; P104 package5180945b-69e6-4556-8e21-0853a5aae788 remains published. Mirror delta0/0; cumulative reduction2 points/10 lines. S12 reconciliation remains active.
