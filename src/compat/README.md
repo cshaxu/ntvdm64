@@ -265,3 +265,12 @@ no original header, session state or outer component is required by B.
 ordinal (zero), from OpenNT public/sdk/inc/ntpsapi.h:558-559. The caller
 provides the native THREADINFOCLASS type; this header has no WOW state or
 outer-component dependency. The original precomp.h include is unchanged.
+
+## WOW GDI alias compatibility
+
+`wow_gdi_alias.c` and `include/wow_gdi_alias.h` own the existing bounded
+14-bit GDI alias representation. The provider uses only SDK types and SRW
+locks; it has no session, guest-memory or mirror dependency. It is linked
+once into NTVDM, whose unchanged exports supply WOW32 imports, so callers
+continue to share one table. Native GDI remains the object validator.
+The independent alias and native brush fixtures live under `test/compat`.

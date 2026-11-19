@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <stdio.h>
-#include "ntvdm-exe/wow/include/wow_gdi_alias.h"
+#include "compat/include/wow_gdi_alias.h"
 int main(void) {
  HBRUSH native=CreateSolidBrush(RGB(128,128,128));
  WORD alias; HBRUSH decoded; int collision;

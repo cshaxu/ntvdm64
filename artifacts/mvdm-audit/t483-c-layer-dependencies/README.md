@@ -165,3 +165,5 @@ P22: [NTIO directory and host exit ownership](s12-p22-system-loader.json).
 P23: [redirector memory and WOW registry token ownership](s12-p23-redir-wow-binding.json).
 
 P24: [WOW precompiled-header ownership and native ordinal](s12-p24-wow-precomp.json).
+
+P25: [GDI alias compatibility ownership and publication](s12-p25-gdi-alias.json).

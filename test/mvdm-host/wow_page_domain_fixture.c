@@ -25,7 +25,7 @@
 #include "wow32-dll/include/wow_cleanup_bindings.h"
 #include "wow32-dll/include/wow_user_task_lifecycle.h"
 #include "wow32-dll/include/wow_user_private_access.h"
-#include "ntvdm-exe/wow/include/wow_gdi_alias.h"
+#include "compat/include/wow_gdi_alias.h"
 #include "non-mvdm/public/sdk/inc/nt.h"
 
 extern BOOL WINAPI StoreDC(WORD, WORD, WORD);

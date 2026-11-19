@@ -257,6 +257,8 @@
 
 - 直接包含 · C0014 · common · src/common/wow/gdi_alias.h
 
+037 P25：walias.h 留在 C，仅替换已有 include。独立 GDI alias 表实现由 F 迁 B，声明由 D 迁 B，函数体、声明字节、三个导出及 DLL 导入不变。实际编译只依赖 SDK/B，NTVDM 链接一份表。C0014 消除，直接外层头 1→0；镜像差异净变 0 点、0 行，#error/#line 不变。两架构 cached 全量构建、两个 GDI 专项、八产品图 A/B 检查和151个 WOW 对象边界通过；11组件双端发布。与P24只差包GUID和PE时间戳，按授权跳过重复guest运行。累计37/116：10个直接头解除、21个生命周期、6个来源ABI，79未审查；520/617开放，累计镜像缩减2点10行。
+
 ## 038 — src/mvdm-host/wow32/wcall16.c
 
 - 直接包含 · C0075 · wow32-dll · src/wow32-dll/include/wow_callback_frame_lease.h

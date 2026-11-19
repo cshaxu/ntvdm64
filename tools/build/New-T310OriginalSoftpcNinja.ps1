@@ -228,7 +228,7 @@ $sessionNames = @('guest_memory_lease.c', 'session.c')
 # One `ntvdm.exe` owns the worker-local USER runtime.  WOW32.DLL imports its
 # current-thread operations from that parent; it must not acquire a second TLS
 # copy of the same worker domain.
-$adapterWowWorkerNames = @('wow_gdi_alias.c', 'wow_user_runtime.c', 'wow_user_session_binding.c')
+$adapterWowWorkerNames = @('wow_user_runtime.c', 'wow_user_session_binding.c')
 # The complete original SoftPC base debug package remains a worker-local
 # provider.  The separate MVDM `dbg` product is a debugger/CSR owner package
 # and is not selected merely to satisfy these original debug edges.
@@ -1155,6 +1155,9 @@ $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root
 $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
 $adapterWin32Objects += $consoleGridObject
 $libraryFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+$graph.Add('build obj/adapter-wow-worker/wow_gdi_alias.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_gdi_alias.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterWowWorkerObjects = @('obj/adapter-wow-worker/wow_gdi_alias.obj') + $adapterWowWorkerObjects
 $graph.Add('build obj/adapter-win32/ntioapi_facade.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/ntioapi_facade.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterWin32Objects += 'obj/adapter-win32/ntioapi_facade.obj'

@@ -1,0 +1,136 @@
+{
+  "baseline": "fba3ce66ab4c3aae0588d69547595eea10a47806",
+  "question": "File037 walias.h: remove direct D declaration and F implementation dependency without moving original WOW header or duplicating the worker table.",
+  "procedure": "Trace GDI32/GDI16/FREEHDC16/FREEHOBJ16 through common declaration, three NTVDM exports and WOW32 imports; inspect whole implementation and compare moved bytes. Verify generated compiler context, selected object, published identity and independent alias fixtures.",
+  "file": "src/mvdm-host/wow32/walias.h",
+  "dispositions": {
+    "C0014": "Eliminated: declaration D to B; unchanged fixed 14-bit alias implementation F to B, SDK/SRW only, no guest/session/C types. NTVDM links one object and retains exports 201-203; WOW32 retains imports. No second table or runtime owner change."
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "proof": "One include target replaces existing non-original include; no original code, condition or logical line changed."
+  },
+  "validation": {
+    "build": "Both cached architectures passed, x86 PID12840 and x64 PID32396, exit0. First attempted host path did not exist and created no child; subsequent actual pwsh path recorded in runner evidence.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "737038e1-abbf-4353-b808-cab8019238f4",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "tests": "Both independent x86 fixtures pass: aliases/retire/reuse/exhaustion and native brush pseudo-color boundary. Eight A/B graphs and151 selected WOW objects plus9 negative controls pass.",
+    "identity": "All eleven full images equal P24 after masking package GUID and COFF/debug-directory timestamps only. Raw hashes differ.",
+    "runtime": "Repeated guest runtime waived by owner authorization for identical normalized binaries. No new guest runtime claim.",
+    "documentation": "PASS: documentation governance including links; git diff --check passed."
+  },
+  "progress": {
+    "reviewedFiles": 37,
+    "clearedDirectHeaderFiles": 10,
+    "deferredLifecycleFiles": 21,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 79,
+    "totalFiles": 116,
+    "openIds": 520,
+    "totalIds": 617,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 520,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 47
+    }
+  },
+  "sourceIdentity": {
+    "implementationByteIdentical": true,
+    "headerByteIdentical": true
+  },
+  "limitations": [
+    "No claim that all C outward link edges or all WOW ownership issues are cleared.",
+    "No change to GDI alias allocation algorithm, stale-handle policy or process-scoped lifetime."
+  ],
+  "compilerEvidence": "obj/adapter-wow-worker/wow_gdi_alias.obj: #deps 1, deps mtime 8167645160955956 (VALID)\n    ../../../../src/compat/include/wow_gdi_alias.h\n\n",
+  "linkEvidence": {
+    "worker": [
+      " 0001:00000ce0       _mvdm_wow_gdi_handle_from_native 00401ce0 f   wow_gdi_alias.obj",
+      " 0001:00000d70       _mvdm_wow_gdi_handle_retire 00401d70 f   wow_gdi_alias.obj",
+      " 0001:00000da0       _mvdm_wow_gdi_handle_to_native 00401da0 f   wow_gdi_alias.obj",
+      " 0003:00008ca8       _table                     005c1ca8     wow_gdi_alias.obj"
+    ],
+    "wow": [
+      " 0001:000758db       _mvdm_wow_gdi_handle_from_native 100768db f   ntvdm:ntvdm.exe",
+      " 0001:000758e1       _mvdm_wow_gdi_handle_to_native 100768e1 f   ntvdm:ntvdm.exe",
+      " 0001:000758ff       _mvdm_wow_gdi_handle_retire 100768ff f   ntvdm:ntvdm.exe",
+      " 0002:00000df0       __imp__mvdm_wow_gdi_handle_retire 1008edf0     ntvdm:ntvdm.exe",
+      " 0002:00000e04       __imp__mvdm_wow_gdi_handle_to_native 1008ee04     ntvdm:ntvdm.exe",
+      " 0002:00000e08       __imp__mvdm_wow_gdi_handle_from_native 1008ee08     ntvdm:ntvdm.exe"
+    ]
+  },
+  "sha256": {
+    "src\\mvdm-host\\wow32\\walias.h": "5e3eea7a9232b391fba5c2230cb8c9142da223462e8c5dc5566c7bb9822288a3",
+    "src\\compat\\wow_gdi_alias.c": "74b40d4ba24dd66c7d450442e7a66e30cff6e6a617ffa606ad340b3ffacc8c56",
+    "src\\compat\\include\\wow_gdi_alias.h": "58c0530f29c494b31731df7e42e66e6ed80328ab8e763ec2ddced4aa1c054632",
+    "build\\t483-s12-gdi-alias\\x86.log": "8f0682ae49bb9c572b95bc94c78686c3b02b80ac38bef7067099b3193a55ae0d",
+    "build\\t483-s12-gdi-alias\\x64.log": "26ed3a27e877ab344f7fb69d8cbb177612977809938d489cf297a5d0ed8176b0",
+    "build\\t483-s12-gdi-alias\\fixture.log": "243a4ce67e6309582d8d0652ef0aa3a804ffa302f31a3193ea3dcc96dfd8c4f1",
+    "build\\t483-s12-gdi-alias\\boundary.log": "e5e097f05c75ea55d35d8c22930a0584ea63e6e836fdd8a38c025b88a871304d",
+    "build\\t483-s12-gdi-alias\\normalized.json": "a619014f7c381dd87239c0626a7afb4c24a74b71e74c3f0fe5ab7c91c263e5a4"
+  },
+  "runs": {
+    "x86": {
+      "pid": 12840,
+      "exit": 0,
+      "stdout": "build\\t483-s12-gdi-alias\\x86.log",
+      "stderr": "build\\t483-s12-gdi-alias\\x86.err",
+      "stdoutSha256": "8f0682ae49bb9c572b95bc94c78686c3b02b80ac38bef7067099b3193a55ae0d"
+    },
+    "x64": {
+      "pid": 32396,
+      "exit": 0,
+      "stdout": "build\\t483-s12-gdi-alias\\x64.log",
+      "stderr": "build\\t483-s12-gdi-alias\\x64.err",
+      "stdoutSha256": "26ed3a27e877ab344f7fb69d8cbb177612977809938d489cf297a5d0ed8176b0"
+    },
+    "fixture": {
+      "pid": 35248,
+      "exit": 0,
+      "stdout": "build\\t483-s12-gdi-alias\\fixture.log",
+      "stderr": "build\\t483-s12-gdi-alias\\fixture.err",
+      "stdoutSha256": "243a4ce67e6309582d8d0652ef0aa3a804ffa302f31a3193ea3dcc96dfd8c4f1"
+    },
+    "stage": {
+      "pid": 16892,
+      "exit": 0,
+      "stdout": "build\\t483-s12-gdi-alias\\stage.log",
+      "stderr": "build\\t483-s12-gdi-alias\\stage.err",
+      "stdoutSha256": "a37e1ac7bb1281f6f791d8097b9c3dd19c0f4bbbfc6d0184cbb049bf57f2ff72"
+    },
+    "publish": {
+      "pid": 19928,
+      "exit": 0,
+      "stdout": "build\\t483-s12-gdi-alias\\publish.log",
+      "stderr": "build\\t483-s12-gdi-alias\\publish.err",
+      "stdoutSha256": "77e2e611e83f9baaf0456c1dc7060682cf6bd39a0f414286f344dcc6405f6c57"
+    },
+    "boundary": {
+      "pid": 34688,
+      "exit": 0,
+      "stdout": "build\\t483-s12-gdi-alias\\boundary.log",
+      "stderr": "build\\t483-s12-gdi-alias\\boundary.err",
+      "stdoutSha256": "e5e097f05c75ea55d35d8c22930a0584ea63e6e836fdd8a38c025b88a871304d"
+    },
+    "docs": {
+      "pid": 28444,
+      "exit": 0,
+      "stdout": "build\\t483-s12-gdi-alias\\docs.log",
+      "stderr": "build\\t483-s12-gdi-alias\\docs.err",
+      "stdoutSha256": "cfd597275399951ea25568faae268fe21175399ca22c178221c702249af14d45"
+    }
+  }
+}

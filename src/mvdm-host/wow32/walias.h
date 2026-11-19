@@ -17,7 +17,7 @@ typedef HANDLE HAND32;
 #define _WALIAS_
 #include "wspool.h"
 #include "wowuserp.h"
-#include "common/wow/gdi_alias.h"
+#include "compat/include/wow_gdi_alias.h"
 
 
 /* WOW class/handle type identifiers (see WARNING below)

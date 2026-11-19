@@ -66,6 +66,8 @@ Subsequent delivered batches are recorded in the dependency tracker:
 
 P24 reviews file036 precomp.h and moves its unchanged native thread ordinal header into B without editing a mirror. [P24 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p24-wow-precomp.json) records final verification and publication status. Classification is 36/116: nine direct-header clears, twenty-one lifecycle files, six source/ABI files and 80 unreviewed. C0069 is eliminated; 521/617 IDs remain open. Cumulative mirror reduction remains two points and ten lines. S12 remains active.
 
+P25 moves the independent GDI alias implementation from F and declaration from D into B; file037 walias.h stays in C. [P25 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p25-gdi-alias.json) records both cached builds, two GDI fixtures, eight A/B graphs, 151 WOW object checks and dual eleven-image publication. All images equal P24 after GUID/PE-timestamp normalization; repeated guest runs are waived. Review is 37/116: ten direct-header clears, twenty-one lifecycle files, six source/ABI files and 79 unreviewed. C0014 is eliminated; 520/617 IDs remain open. Mirror delta is zero; cumulative reduction remains two points and ten lines. S12 remains active.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

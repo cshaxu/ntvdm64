@@ -10,7 +10,7 @@
 #include <windows.h>
 #include <stdio.h>
 
-#include "ntvdm-exe/wow/include/wow_gdi_alias.h"
+#include "compat/include/wow_gdi_alias.h"
 
 static int fail(const char *what)
 {
