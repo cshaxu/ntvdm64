@@ -514,3 +514,8 @@ P50 [Console ownership](s14-console-provider-ownership.md) adds two complete
 provider bodies/34 symbol records: combined78/79 providers and342/345 symbol
 rows. Four B-installed F callbacks remain explicit dependencies; no status
 promotion, production migration or runtime verification is claimed.
+
+P51 [complete page-domain review](s14-page-domain-complete-ownership.md) covers
+the last direct-symbol provider:79/79 bodies and345/345 symbol records.
+This is not complete four-root migration design or dependency elimination.
+Machine/USER projection requires C ownership; no new B callback exception.
