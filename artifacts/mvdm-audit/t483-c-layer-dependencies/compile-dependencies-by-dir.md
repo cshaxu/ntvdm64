@@ -359,25 +359,37 @@
 
 - 直接包含 · C0124 · wow32-dll · src/wow32-dll/include/wow_user_object_bindings.h
 
+053 P31: Clipboard native HWND conversion uses current runtime object table and already published shared-window view; reverse conversion refreshes typed native result and verifies exact generation. S13: place native clipboard boundary and publication with existing F owner; original guest conversions remain C. Do not substitute LOWORD/truncation or move runtime-dependent object table to B. Mirror delta0/0; see s12-p31-wow-clipboard-page-domain.json.
+
 ## 054 — src/mvdm-host/wow32/wudlg.c
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
+
+054 P31: W32DialogFunc captures stack before conversion; successful unthunk sets completed; finally always finishes message/stack. Other dialog message entry unwinds16. S13: same allocation/normal completion/exception unwind group as files039/046/051; no independent cleanup state. Mirror delta0/0; see s12-p31-wow-clipboard-page-domain.json.
 
 ## 055 — src/mvdm-host/wow32/wuman.c
 
 - 直接包含 · C0015 · common · src/common/wow/page_domain.h
 
+055 P31: USER16 initialization writes guest_shared_info and guest_csr_flag addresses. F page_domain_create registers session teardown; getters return zero when inactive. S13: initialization publication must remain tied to domain lifetime and guest address ownership. D declaration is not an independent mechanism suitable for B; assess existing F registration/init boundary. Mirror delta0/0; see s12-p31-wow-clipboard-page-domain.json.
+
 ## 056 — src/mvdm-host/wow32/wumsg.c
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
+
+056 P31: Message entry finally paths call wow_message_unwind16; original message conversion and DDE cleanup precede those finalizers. Provider only replays designated input-only cleanup, not arbitrary output conversion. S13: audit whole message entry/unwind boundary with existing conversion scopes; preserve ordinary copyback and DDE ordering. Mirror delta0/0; see s12-p31-wow-clipboard-page-domain.json.
 
 ## 057 — src/mvdm-host/wow32/wuser.c
 
 - 直接包含 · C0015 · common · src/common/wow/page_domain.h
 
+057 P31: SetSysColors success path publishes each accepted element to guest server-info. F provider checks active domain, current owner, index, PG and CR3 before c_sas_storedw. S13: keep native success/failure authority and original conversion; move product publication with existing F integration boundary only after checking ordering and all publishers. No generic B pointer writer. Mirror delta0/0; see s12-p31-wow-clipboard-page-domain.json.
+
 ## 058 — src/mvdm-host/wow32/wuser31.c
 
 - 直接包含 · C0124 · wow32-dll · src/wow32-dll/include/wow_user_object_bindings.h
+
+058 P31: GetOpenClipboardWindow result passes through wow_user_window_public_guest_handle before GETHWND16. Same current-worker exact-generation conversion as wuclip.c. S13: group with file053; native cross-process window observation does not confer guest ownership. Do not invent separate alias mapping. Mirror delta0/0; see s12-p31-wow-clipboard-page-domain.json.
 
 ## 059 — src/mvdm-host/xms.486/xmsblock.c
 

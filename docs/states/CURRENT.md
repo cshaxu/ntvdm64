@@ -72,6 +72,8 @@ P29 classifies file046 lifecycle ownership and clears files047-048 F header depe
 
 P30 classifies files049-052 dispatch, fax registry, hook unwind and guest registry for S13. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p30-wow-registry-dispatch.json) distinguishes local fax HKEYs from guest-visible WS32 tokens, and original policy from product lifecycle. No source/build changes or new runtime claim. Review52/116:13 header clears,33 lifecycle,6 source/ABI,64 unreviewed;519/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. P29 publication remains current. Only S12 active.
 
+P31 classifies files053-058 clipboard HWND conversion, dialog/message unwind and USER16 page-domain publication for S13. [Source evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p31-wow-clipboard-page-domain.json) records exact consumers and current owners, not permanent exceptions or new runtime proof. Review58/116:13 header clears,39 lifecycle,6 source/ABI,58 unreviewed;519/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. No product changes; P29 package remains published. Only S12 active.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

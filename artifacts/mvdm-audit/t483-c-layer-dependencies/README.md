@@ -177,3 +177,5 @@ P28: [WOW execution ownership and native process simplification](s12-p28-native-
 P29: [Message progress constants and lifecycle ownership](s12-p29-message-progress.json).
 
 P30: [Dispatch, fax registry, hooks and guest registry ownership](s12-p30-wow-registry-dispatch.json).
+
+P31: [Clipboard identity, message cleanup and guest page publication](s12-p31-wow-clipboard-page-domain.json).

@@ -1,0 +1,89 @@
+{
+  "baseline": "40f87add40767831bba34df864ddbec8ee43e5b9",
+  "status": "P31 source-only classification",
+  "files": [
+    {
+      "number": 53,
+      "file": "src/mvdm-host/wow32/wuclip.c",
+      "ids": [
+        "C0124"
+      ],
+      "actualChain": "Clipboard native HWND conversion uses current runtime object table and already published shared-window view; reverse conversion refreshes typed native result and verifies exact generation.",
+      "disposition": "S13: place native clipboard boundary and publication with existing F owner; original guest conversions remain C. Do not substitute LOWORD/truncation or move runtime-dependent object table to B.",
+      "sha256": "f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47"
+    },
+    {
+      "number": 54,
+      "file": "src/mvdm-host/wow32/wudlg.c",
+      "ids": [
+        "C0110"
+      ],
+      "actualChain": "W32DialogFunc captures stack before conversion; successful unthunk sets completed; finally always finishes message/stack. Other dialog message entry unwinds16.",
+      "disposition": "S13: same allocation/normal completion/exception unwind group as files039/046/051; no independent cleanup state.",
+      "sha256": "1f8cb2f28e8f3d320cc322512b273915f20aed4a2aa336678c1c7d78acae9736"
+    },
+    {
+      "number": 55,
+      "file": "src/mvdm-host/wow32/wuman.c",
+      "ids": [
+        "C0015"
+      ],
+      "actualChain": "USER16 initialization writes guest_shared_info and guest_csr_flag addresses. F page_domain_create registers session teardown; getters return zero when inactive.",
+      "disposition": "S13: initialization publication must remain tied to domain lifetime and guest address ownership. D declaration is not an independent mechanism suitable for B; assess existing F registration/init boundary.",
+      "sha256": "a1c34a9b9554b9db8a7163742433521c0280e79621e9626fc68fe9aee6592936"
+    },
+    {
+      "number": 56,
+      "file": "src/mvdm-host/wow32/wumsg.c",
+      "ids": [
+        "C0110"
+      ],
+      "actualChain": "Message entry finally paths call wow_message_unwind16; original message conversion and DDE cleanup precede those finalizers. Provider only replays designated input-only cleanup, not arbitrary output conversion.",
+      "disposition": "S13: audit whole message entry/unwind boundary with existing conversion scopes; preserve ordinary copyback and DDE ordering.",
+      "sha256": "c73b954e96c769d07f2a48ade2ee8147f41a8894c830369670b135b099bfa465"
+    },
+    {
+      "number": 57,
+      "file": "src/mvdm-host/wow32/wuser.c",
+      "ids": [
+        "C0015"
+      ],
+      "actualChain": "SetSysColors success path publishes each accepted element to guest server-info. F provider checks active domain, current owner, index, PG and CR3 before c_sas_storedw.",
+      "disposition": "S13: keep native success/failure authority and original conversion; move product publication with existing F integration boundary only after checking ordering and all publishers. No generic B pointer writer.",
+      "sha256": "c0a1045b8c020c91c414add27b781a12a005cc31f0163225bb8dcf2aabf1c4da"
+    },
+    {
+      "number": 58,
+      "file": "src/mvdm-host/wow32/wuser31.c",
+      "ids": [
+        "C0124"
+      ],
+      "actualChain": "GetOpenClipboardWindow result passes through wow_user_window_public_guest_handle before GETHWND16. Same current-worker exact-generation conversion as wuclip.c.",
+      "disposition": "S13: group with file053; native cross-process window observation does not confer guest ownership. Do not invent separate alias mapping.",
+      "sha256": "3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d"
+    }
+  ],
+  "limits": "No runtime tests or necessity/minimality proof for every existing adapter. This records actual consumers and state ownership for S13, not permanent exceptions. No product code or ABI changed.",
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 58,
+    "clearedDirectHeaderFiles": 13,
+    "deferredLifecycleFiles": 39,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 58,
+    "totalFiles": 116,
+    "openIds": 519,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "Not run: no source/build changes.",
+    "publication": "P29 package09b1e845-1132-4570-b217-12281f4891ab unchanged.",
+    "runtime": "No new runtime claim.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed; build/t483-s12-message-progress/p31-docs.log"
+  }
+}
