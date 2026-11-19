@@ -569,9 +569,13 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+087 P46: Original multiline rare algorithms stay C; C0504/C0546/C0557 require shared callback/native-return ownership review. No new in-place leaf; mirror delta0/0. See s12-p46-edit-rare-ownership.json.
+
 ## 088 — src/non-mvdm/windows/core/ntuser/client/edslrare.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+088 P46: Original single-line creation/undo stays C. No remaining direct F function; C0064 mixed precomp remains an actual outward compile dependency, S14 composition. Native query already B. Mirror delta0/0. See s12-p46-edit-rare-ownership.json.
 
 ## 089 — src/non-mvdm/windows/core/ntuser/client/hdata.c
 

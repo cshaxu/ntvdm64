@@ -1,0 +1,170 @@
+{
+  "baseline": "4fa96547ea464c833ecff15b3f7f8ede36b8be2f",
+  "status": "P46 source-only rare EDIT operation ownership classification",
+  "files": [
+    {
+      "number": 87,
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d",
+      "compilerObject": "obj/opennt-user/control-body-edmlrare.obj",
+      "objectSha256": "04aee5df7b71ce341bb4de86eec280c7bb50ba9fe8ff36fe2bf41d80390d6034",
+      "dependencyRecord": "obj/opennt-user/control-body-edmlrare.obj: #deps 66, deps mtime 8167732531804654 (VALID)",
+      "header": "C0064",
+      "coffUndefined": [
+        "__imp__SetLastError@4",
+        "__imp__HeapAlloc@12",
+        "__imp__HeapReAlloc@16",
+        "__imp__HeapFree@12",
+        "_GetProcessHeap@0",
+        "__imp__GlobalFree@4",
+        "_wow_user_registered_callbacks@0",
+        "_ECLock@4",
+        "_ECUnlock@4",
+        "_ECResetTextInfo@4",
+        "_ECNotifyParent@8",
+        "_ECGetEditDC@8",
+        "_ECReleaseEditDC@12",
+        "_MLInsertText@16",
+        "_MLEnsureCaretVisible@4",
+        "_MLBuildchLines@24",
+        "_MLSetCaretPosition@8",
+        "_MLIchToLine@8",
+        "_MLLine@8",
+        "_MLChangeSelection@16",
+        "_wow_native_InvalidateRect@12",
+        "_wow_native_SendMessageW@16",
+        "_memmove"
+      ],
+      "verifiedSymbols": [
+        {
+          "id": "C0504",
+          "symbol": "wow_user_registered_callbacks",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_registration_bridge.c"
+        },
+        {
+          "id": "C0546",
+          "symbol": "wow_native_InvalidateRect",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0557",
+          "symbol": "wow_native_SendMessageW",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        }
+      ],
+      "mapProviders": [
+        "0001:00033220       _ECGetEditDC@8             10034220 f   control-body-editec.obj",
+        "0001:000336d0       _ECLock@4                  100346d0 f   control-body-editec.obj",
+        "0001:00033930       _ECNotifyParent@8          10034930 f   control-body-editec.obj",
+        "0001:00033960       _ECReleaseEditDC@12        10034960 f   control-body-editec.obj",
+        "0001:00033990       _ECResetTextInfo@4         10034990 f   control-body-editec.obj",
+        "0001:00034660       _ECUnlock@4                10035660 f   control-body-editec.obj",
+        "0001:00038510       _MLBuildchLines@24         10039510 f   control-body-editml.obj",
+        "0001:00038b00       _MLChangeSelection@16      10039b00 f   control-body-editml.obj",
+        "0001:00039ec0       _MLEnsureCaretVisible@4    1003aec0 f   control-body-editml.obj",
+        "0001:0003a010       _MLIchToLine@8             1003b010 f   control-body-editml.obj",
+        "0001:0003a210       _MLInsertText@16           1003b210 f   control-body-editml.obj",
+        "0001:0003ac20       _MLLine@8                  1003bc20 f   control-body-editml.obj",
+        "0001:0003b870       _MLSetCaretPosition@8      1003c870 f   control-body-editml.obj",
+        "0001:000634a0       _wow_native_InvalidateRect@12 100644a0 f   wow_user_task_lifecycle.obj",
+        "0001:00064030       _wow_native_SendMessageW@16 10065030 f   wow_user_task_lifecycle.obj",
+        "0001:00074460       _wow_user_registered_callbacks@0 10075460 f   wow_user_registration_bridge.obj",
+        "0001:00075b07       _GetProcessHeap@0          10076b07 f   kernel32:KERNEL32.dll",
+        "0001:00076e00       _memmove                   10077e00 f   libvcruntime:memmove.obj",
+        "0002:00000550       __imp__GlobalFree@4        1008e550     kernel32:KERNEL32.dll",
+        "0002:00000580       __imp__SetLastError@4      1008e580     kernel32:KERNEL32.dll",
+        "0002:000005c8       __imp__HeapFree@12         1008e5c8     kernel32:KERNEL32.dll",
+        "0002:000005cc       __imp__HeapReAlloc@16      1008e5cc     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll"
+      ],
+      "conclusion": "Original soft-wrap, line/selection/tabstop and undo algorithms stay C. Three direct outer symbols C0504/C0546/C0557 require shared callback-registration/native-return ownership review S13, with original callback ABI/table placement S14. No SDK-only provider identified for a new in-place move."
+    },
+    {
+      "number": 88,
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "sha256": "a356c448d85fcdbb213e693b366416ef44f3943d5227c3f1439fd57427c16a72",
+      "compilerObject": "obj/opennt-user/control-body-edslrare.obj",
+      "objectSha256": "bfe5fdbd4bbf30f79fb65f8a26c8107a4c3beae1a546cc074d2e08787a23e25c",
+      "dependencyRecord": "obj/opennt-user/control-body-edslrare.obj: #deps 66, deps mtime 8167732531319654 (VALID)",
+      "header": "C0064",
+      "coffUndefined": [
+        "__imp__GlobalFree@4",
+        "__imp__IsWindow@4",
+        "__imp__GetDlgItem@8",
+        "_wow_edit_native_highest_user_address@0",
+        "_ECInvalidateClient@8",
+        "_ECCreate@12",
+        "_ECSetText@8",
+        "_ECSetPasswordChar@8",
+        "_ECDeleteText@4",
+        "_ECNotifyParent@8",
+        "_ECSetFont@12",
+        "_SLSetSelection@12",
+        "_SLInsertText@12",
+        "_FChildVisible@4"
+      ],
+      "verifiedSymbols": [
+        {
+          "id": "C0399",
+          "symbol": "wow_edit_native_highest_user_address",
+          "status": "eliminated",
+          "target": "src/wow32-dll/source/wow_edit_native_bindings.c"
+        }
+      ],
+      "mapProviders": [
+        "0001:00032df0       _ECDeleteText@4            10033df0 f   control-body-editec.obj",
+        "0001:000335f0       _ECInvalidateClient@8      100345f0 f   control-body-editec.obj",
+        "0001:00033930       _ECNotifyParent@8          10034930 f   control-body-editec.obj",
+        "0001:00033b80       _ECSetText@8               10034b80 f   control-body-editec.obj",
+        "0001:000357f0       _ECCreate@12               100367f0 f   control-body-edecrare.obj",
+        "0001:00035bf0       _ECSetFont@12              10036bf0 f   control-body-edecrare.obj",
+        "0001:00036230       _ECSetPasswordChar@8       10037230 f   control-body-edecrare.obj",
+        "0001:000377a0       _SLInsertText@12           100387a0 f   control-body-editsl.obj",
+        "0001:000384b0       _SLSetSelection@12         100394b0 f   control-body-editsl.obj",
+        "0001:0004a290       _FChildVisible@4           1004b290 f   control-body-winmgrc.obj",
+        "0001:00075810       _wow_edit_native_highest_user_address@0 10076810 f   wow_native_environment.obj",
+        "0002:00000550       __imp__GlobalFree@4        1008e550     kernel32:KERNEL32.dll",
+        "0002:00000b34       __imp__IsWindow@4          1008eb34     user32:USER32.dll",
+        "0002:00000c24       __imp__GetDlgItem@8        1008ec24     user32:USER32.dll"
+      ],
+      "conclusion": "Original single-line creation/password/undo and notification order stay C. No remaining direct outer function: native address query already B, GetDlgItem/IsWindow are direct USER32 imports, and FChildVisible directly resolves C control-body-winmgrc.obj. Mixed F precomp still a real direct compile dependency, classified S14. Not cleared."
+    }
+  ],
+  "mechanisms": {
+    "allocation": "globals.h LOCALREALLOC and LOCALSIZE retain hInstance and the one registered original callback table. MLInsertCrCrLf and MLSetHandle call these macros. Registration bridge owns wow_input_handlers; accessor merely returns it. Do not substitute a host heap or add another registration table. UserLocal tabstop allocation maps existing native heap; UserGlobalFree directly imports GlobalFree.",
+    "multilineUndo": "Original MLUndo sends WM_CHAR/VK_BACK via SendMessageW, then inserts prior deleted text; the selected native wrapper enters target-aware call scope, publishes message result and restores in finally. InvalidateRect uses native-window conversion plus the same call boundary. Source proves current ownership, not that every wrapper step is minimal.",
+    "singlelineUndo": "Selected SLUndo calls ECDeleteText directly rather than its excluded NEVER SendMessage branch. After SLInsertText it frees the undo buffer and checks IsWindow(hwndSave) before touching the selection again. EN_UPDATE precedes original invalidation and EN_CHANGE follows. Preserve this ordering and original failure returns.",
+    "transitive": "FChildVisible is supplied by C winmgrc.c, which subsequently validates HWND through the existing mapped provider. That later outward edge belongs to the winmgrc owner, not a direct F function of edslrare.c. Mixed precomp remains a direct compile dependency of both files.",
+    "method": "Read both entire selected files, current binding headers, registration storage/accessor, native call macros and original globals; decode actual release COFF references, require VALID Ninja records and correlate final link map. No new runtime claim."
+  },
+  "progress": {
+    "reviewedFiles": 88,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 58,
+    "deferredSourceAbiCompositionFiles": 14,
+    "unreviewedFiles": 28,
+    "totalFiles": 116,
+    "openIds": 503,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: production bytes unchanged.",
+    "runtime": "Not run: classification only, not lifecycle acceptance.",
+    "publication": "P44 retained; all22 image hashes at both destinations verified against released manifest.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed, exit0; build/t483-s12-edit-rare-ownership/docs.log and docs.exit. git diff --check passed."
+  },
+  "followup": {
+    "S13": "Review shared callback/native-return boundaries once with all consumers; cover callback hInstance, nested notifications and destruction during undo. Do not create per-file adapters.",
+    "S14": "Resolve shared original callback-table ABI and original control precompiled-header composition. A file without direct F symbols is not dependency-free while its private F header remains."
+  },
+  "limits": "No edge elimination claimed. No successor scope admitted. Neither mirror, #error/#line, original guest, nor runtime files were changed."
+}

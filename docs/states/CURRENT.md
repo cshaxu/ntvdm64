@@ -70,7 +70,7 @@ P28-P31 are delivered and indexed in the [C dependency tracker](../../artifacts/
 
 P32 delivered the unchanged native probe environment to B; original ProbeForRead remains C. [P32 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json) records source ownership, both builds, probe tests and dual publication.
 
-P33 delivered the unchanged Console predicate D to B; file062 mixed declarations remain S14/S13. Both builds, boundaries and dual publication passed;11 images normalized-equal P32. [P33 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json).
+P33: [Console-handle delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json); native predicate moved D to B, mixed header still open.
 
 ## Successor scopes
 
@@ -98,7 +98,9 @@ P43: [EDIT ownership classification](../../artifacts/mvdm-audit/t483-c-layer-dep
 
 P44: [control brushes and verified publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p44-control-brushes.json).
 
-P45: [EDIT creation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p45-edit-create-ownership.json). Review86/116:16 clears,57 lifecycle,13 source/ABI,30 unreviewed;503/617 open. No production changes; P44 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P45: [EDIT creation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p45-edit-create-ownership.json).
+
+P46: [rare EDIT operations](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p46-edit-rare-ownership.json). Review88/116:16 clears,58 lifecycle,14 source/ABI,28 unreviewed;503/617 open. Source classification only; P44 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 
