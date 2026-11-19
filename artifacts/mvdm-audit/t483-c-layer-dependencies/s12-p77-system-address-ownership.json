@@ -1,0 +1,191 @@
+{
+  "baseline": "d9eb7f6f846fb092ba252013ae6e6a0bfb9deb73",
+  "files": [
+    {
+      "linkOnlyOrder": 16,
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "ids": [
+        "C0215"
+      ],
+      "role": "where/illegal_op_int converts CS:IP and SS:ESP to numeric addresses for SAS exception-frame reads and writes.",
+      "decision": "Keep caller in C. S14 shared CPU address-provider ownership; no whole-file C-to-F migration.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 17,
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "ids": [
+        "C0215"
+      ],
+      "role": "do_search_for_roms pushes FE00:095A using push_word -> write_intel_word -> effective_addr before host_simulate; original ROM initialization responsibility.",
+      "decision": "Keep caller in C. S14 shared CPU address-provider ownership; no whole-file C-to-F migration.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\illegalp.obj",
+      "sha256": "3a8230fda5aea987d4c64e4eabb9e75e1a89f92ee76bdaa2a2ea26f2fec027e3",
+      "symbol": "_c_effective_addr",
+      "coff": "External undefined, section=0,value=0,storage=2; observed by COFF symbol table traversal.",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "mapSha256": "8ffb96406cceb980e9e3404934a5d738c1938fa8c200005167a606227c8ed854",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\rom.obj",
+      "sha256": "0c4e3f2e81bc190e75a1f8c52fe47c2abae01c06b9ac56e466ffee1731c2cd02",
+      "symbol": "_c_effective_addr",
+      "coff": "External undefined, section=0,value=0,storage=2; observed by COFF symbol table traversal.",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "mapSha256": "8ffb96406cceb980e9e3404934a5d738c1938fa8c200005167a606227c8ed854",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\system\\illegalp.obj",
+      "sha256": "8bdf435853fdcf571d50d4300015ad0e4874a76c51b07a7201b62dc41641c27c",
+      "symbol": "_c_effective_addr",
+      "coff": "External undefined, section=0,value=0,storage=2; observed by COFF symbol table traversal.",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "mapSha256": "a4aba167aba776d528407b3fa9c28a759199fe6e0308242ef09b85385c467f97",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\system\\rom.obj",
+      "sha256": "0b7b597a0495522757a5aa3ef52c9d29d823d995166c50d1598c1d5b0e1f1a69",
+      "symbol": "_c_effective_addr",
+      "coff": "External undefined, section=0,value=0,storage=2; observed by COFF symbol table traversal.",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "mapSha256": "a4aba167aba776d528407b3fa9c28a759199fe6e0308242ef09b85385c467f97",
+      "binding": "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    }
+  ],
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/base/system/illegalp.c": "4d1f5114376ef5142aade4aa8a8fc53aaf9c8cfa2eecb8f3df68b147f73d39b4",
+    "src/mvdm-host/softpc.new/base/system/rom.c": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+    "src/mvdm-host/softpc.new/host/inc/host_gen.h": "d86cd3c505d643531dafaa548e66fbb42ba13c37e3c632a214a69b4f2f86f557",
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h": "1a21caf7f22b7271e4be6df6cb23a891fd8af6d31998a593692551a0e7fb6055",
+    "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c": "b712adf510bcddc316616bbf9c8df775a114a0f94d42c2a558716d039f8c56b5"
+  },
+  "originalEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "procedure": "Read pinned git show base/mvdm/softpc.new/base/system/illegalp.c lines1-140 and rom.c lines391-435; compare current call sites. Numeric addressing and ROM return-frame operations are original.",
+    "sharedProviderReview": "s12-p74-bios-address-ownership.json"
+  },
+  "finding": "Both consumers require CPU segment-to-linear semantics, not product request/frontend state. F provider calls CCPU descriptor primitives; moving it to B would recreate B-to-C coupling. S14 must assess one cohesive CPU owner and mirror impact, not duplicate per-caller real-mode arithmetic.",
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 17,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 57,
+    "openIds": 499,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "No production changes; inspected P73 objects/maps, no rebuild.",
+    "runtime": "No new runtime run. Compiled/link evidence does not prove execution of optional ROM or exception paths.",
+    "publishedHashesVerified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "07649f43856c9861fdcac2e9c91988380faaa47c339a70af9aaeabb06f127a32"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+        "sha256": "07649f43856c9861fdcac2e9c91988380faaa47c339a70af9aaeabb06f127a32"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "58d492dbe0502df9f89ef93c4c764f7e04d5446723be902c012cc8bca818b2f5"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\run16.exe",
+        "sha256": "58d492dbe0502df9f89ef93c4c764f7e04d5446723be902c012cc8bca818b2f5"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "ed066184b2c13008fca7985e548e3377f1455eaa588de026b257f50c5b123091"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntsrv.exe",
+        "sha256": "ed066184b2c13008fca7985e548e3377f1455eaa588de026b257f50c5b123091"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "eed8d7538adc66f834b869816b8dbe2b2dced8f842790ac9e9ae6ab405fa0ffc"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntcon.exe",
+        "sha256": "eed8d7538adc66f834b869816b8dbe2b2dced8f842790ac9e9ae6ab405fa0ffc"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "81f69fa4a3e3344f4e70a15a97f184f25216c6e1652314b131467f0eeb9e1fdd"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvdm.exe",
+        "sha256": "81f69fa4a3e3344f4e70a15a97f184f25216c6e1652314b131467f0eeb9e1fdd"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "4f91c1d14d17ddc1c11a0b3c85a73e0e43759b3bd87485a7daf15439d1579164"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvwm.exe",
+        "sha256": "4f91c1d14d17ddc1c11a0b3c85a73e0e43759b3bd87485a7daf15439d1579164"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "c8eed0ffa29d2bf53c6bba5fb81e192cb22370c3ef55426a0a0578ad22532c2e"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntmon.exe",
+        "sha256": "c8eed0ffa29d2bf53c6bba5fb81e192cb22370c3ef55426a0a0578ad22532c2e"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "a2c4245ddcfbd096fe7c8919b1bb5b94f8088d114988a86efd62008440cd66de"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\WOW32.DLL",
+        "sha256": "a2c4245ddcfbd096fe7c8919b1bb5b94f8088d114988a86efd62008440cd66de"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "42651965c1883062fe629b72babc6cbf248249b5ff092d9a86565129b2228bdb"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "sha256": "42651965c1883062fe629b72babc6cbf248249b5ff092d9a86565129b2228bdb"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "7f4c2960052c01d785e83614a528e53ee0a1bd49be82e6170c67799498df4e24"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook32.dll",
+        "sha256": "7f4c2960052c01d785e83614a528e53ee0a1bd49be82e6170c67799498df4e24"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "3a10f59abf81aae57730f01ecd6a0474d37dcff18b17431188e57aa3890ca2e6"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook64.dll",
+        "sha256": "3a10f59abf81aae57730f01ecd6a0474d37dcff18b17431188e57aa3890ca2e6"
+      }
+    ]
+  }
+}

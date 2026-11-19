@@ -269,3 +269,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P75 Disk and descriptor ownership](s12-p75-disk-descriptor-ownership.json): link-only files9-11/74. Original INT15/disk/DMA consumers stay C; C0214 cannot alias CPU_DESCR reader because output ABI differs. C0214/C0215 need S14 CPU owner treatment. Six actual objects and22 publication hashes checked; no production change.
 
 [P76 Initialization and termination ownership](s12-p76-init-termination-ownership.json): link-only files12-15/74. C0215 CPU address and C0608 original storage require S14; C0318 product admission precedes original destruction and belongs to S13 entry treatment. Current objects/common definitions and22 published hashes verified; no production change.
+
+P77: [System address ownership](s12-p77-system-address-ownership.json); link-only files16-17 stay C; shared provider goes to S14 review. No production change.
