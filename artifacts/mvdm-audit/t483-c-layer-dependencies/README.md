@@ -492,3 +492,7 @@ The remaining 38 symbol-provider files are not covered by that particular
 record; this does not discard their earlier investigation evidence. Each row
 retains exact C IDs, target hash and explicit review limit. Source coverage
 does not prove a complete migration design or dependency elimination.
+
+[CPU/execution ownership](s14-cpu-execution-provider-ownership.md): six additional
+provider bodies and seven symbol records reviewed. Combined coverage is57/79
+provider files and267/345 symbol records; direct statuses remain unchanged.
