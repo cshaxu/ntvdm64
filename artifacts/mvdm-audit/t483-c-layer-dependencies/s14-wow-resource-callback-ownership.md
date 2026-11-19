@@ -437,3 +437,38 @@ service ABI comments identify historical inspection evidence; this source
 review does not newly verify those exports on other Windows versions.
 Mirror carriers/costs and final runtime validation remain outstanding. No
 production change or dependency elimination is claimed by this delivery.
+
+## EDIT calls, entry scopes and hook dispatch
+
+Against P41 `2e09f3f8d`, complete wow_edit_call_bindings.c,
+wow_edit_conversion_bindings.c, wow_edit_thread_bindings.c,
+wow_edit_entry_bindings.c, wow_hook_callback.c and the associated
+wow_control_extent_bindings.c under wow32-dll/source. Total complete bodies:
+41. Original dlgmgr.c, editec.c and wowhooks.c call sites were checked; those
+partial mirror reads are not included in the body count.
+
+| Implementation | Ownership decision and preserved contract |
+| --- | --- |
+| EDIT native calls | Native text/style/color/fill providers already use B leaves. Their wrappers additionally retain original state, hand off execution and publish return state; do not move these wrappers wholesale B. A successful native text write followed by failed publication cannot resume with stale original text. |
+| Set/ClearWindowState | WFWIN40COMPAT is C behavior state: dlgmgr.c temporarily toggles it around DefWindowProcWorker, and clmsg.c reads it. Other admitted flags use native state operations then refresh the projection. Preserve this ownership distinction; neither a universal native setter nor universal private-bit mutation is equivalent. |
+| Client info and registered extent | C queue initialization owns TIF_16BIT and app-version state. Registered control sizes use exact WND/control layouts, not current HWND guesses. Keep these beside their C type/algorithm owners; no new B exception or duplicate flag writer. |
+| A/W conversion | editec.c:2270-2274 admits only the opposite original EDIT procedure and FNID_CALLWINDOWPROC. Native CPD creation is B; original target selection and task/borrow entry are C execution concerns. Preserve the native class-owned opaque procedure token across window destruction. |
+| Thread identity | Retain the exact original WND allocation and read its bound native thread identity. Do not fabricate THREADINFO or re-query a reused HWND. Typed retained-state access belongs with C window ownership. |
+| Context capture | Display IC metrics, preferences and font measurement are candidate B input capture. Profile lookup must be resolved separately; current FastGetProfileIntW routing is not proof of B independence. Supply original class atoms from C rather than fetch F lifecycle state inside B. |
+| Control entry and caret callback | One task/borrow/context boundary covers EDIT, combo, list and button entries. Cleanup avoids fresh metric acquisition; caret callbacks refresh existing state and reject cleaned-up list state rather than allocate it. Keep original control bodies and timer identities; do not expose raw original procedures without their retained execution contract. |
+| Hook dispatch | Original wowhooks.c owns hook identity, conversion and guest stack. F WU32StdHookProc currently wraps the renamed C body; move required scope mechanics with C execution ownership, leaving only genuine product admission outside. Typed native payload extraction can be B with explicit hook type/code, not private HOOKSTATEDATA access. |
+
+Hook creation has an ordering constraint beyond a simple finally pop. It
+retains exact enrollment until callback completion and task-scope return both
+accept creation; a failed return vetoes creation. Nested hook parameters,
+current index and DDE/caller flags are restored before finishing enrollment,
+then borrowed aliases retire. Replacing this with an unconditional finalizer
+or identifying hooks by overlapping numeric codes would change behavior.
+
+The control extent helper is another associated provider absent from the open
+direct-symbol rows. Its original layout expressions can be evaluated by C;
+the full original registration routine cannot simply replace it because that
+routine would register host control classes. A C placement still needs a
+measured mirror candidate, not implicit re-admission of retired mirror files.
+No source migration or runtime pass is claimed. Existing dependency statuses
+and mirror counts are unchanged; the crosswalk records coverage only.
