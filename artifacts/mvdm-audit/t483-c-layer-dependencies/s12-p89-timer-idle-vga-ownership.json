@@ -1,0 +1,261 @@
+{
+  "baseline": "cf8844d65ccba44030abe3dadf03fdd24b0310b6",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "order": 38,
+      "ids": [
+        "C0157",
+        "C0161",
+        "C0300"
+      ],
+      "decision": "HeartBeatThread is cdecl; current C0157 selection correct. C0157/C0161 remain S13 paired worker session start/finish ownership. Sole CloseHandle closes ThreadInfo.HeartBeat.Handle on STATUS_ALERTED; C0300 originates from broad conapi macro. Narrow binding with nt_error thread-handle case; do not move original timer algorithm or assume graphics ownership for this handle.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "order": 39,
+      "ids": [
+        "C0189"
+      ],
+      "decision": "Three original idle-path activity notifications link B callback already moved P81. No new elimination; this is current-object/map evidence for another caller.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "order": 40,
+      "ids": [
+        "C0292"
+      ],
+      "decision": "Twelve painter invalidations follow bitmap conversion and mutex release. Keep original pixel/rectangle algorithms C. F owns graphics identity/dirty signaling or text-plane presentation and session video delivery. Resolve S13 as presentation registration/buffer/lifetime group, not moving whole painter or replacing with worker-local Console.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_timer.obj",
+      "sha256": "fab4729831c323f00bdb7a28eb3b1986e5dd8ad2d683b9ee782b17b8879cc807",
+      "bindings": [
+        {
+          "id": "C0157",
+          "symbol": "_opennt_create_cdecl_thread_named",
+          "provider": "0001:0017ed00       _opennt_create_cdecl_thread_named 0057fd00 f   common-worker-thread:bridge.obj"
+        },
+        {
+          "id": "C0161",
+          "symbol": "_opennt_exit_thread@4",
+          "provider": "0001:0017ee30       _opennt_exit_thread@4      0057fe30 f   common-worker-thread:bridge.obj"
+        },
+        {
+          "id": "C0300",
+          "symbol": "_MvdmCloseConsoleHandle@4",
+          "provider": "0001:00173c30       _MvdmCloseConsoleHandle@4  00574c30 f   softpc-win32-bindings:console_graphics.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_unix.obj",
+      "sha256": "2a4f02909233f529072bbf223c0923142ad6662048a0df216bae6ea1ceb65f4d",
+      "bindings": [
+        {
+          "id": "C0189",
+          "symbol": "_ActivityCheckAfterTimeSlice",
+          "provider": "0001:00005e80       _ActivityCheckAfterTimeSlice 00406e80 f   softpc-activity-check:fmstubs_activity_check.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_vga.obj",
+      "sha256": "130a1175a7caeec790c581c26f719ff7f14b08dbbf7a72642f72d66376b266e2",
+      "bindings": [
+        {
+          "id": "C0292",
+          "symbol": "_InvalidateConsoleDIBits@8",
+          "provider": "0001:00178560       _InvalidateConsoleDIBits@8 00579560 f   softpc-win32-bindings:console_compat.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_timer.obj",
+      "sha256": "758bad1f1570c19f98cb4c148a4916c531b35a917414a84340d05c321ec00106",
+      "bindings": [
+        {
+          "id": "C0157",
+          "symbol": "_opennt_create_cdecl_thread_named",
+          "provider": "0001:0017ed00       _opennt_create_cdecl_thread_named 0057fd00 f   common-worker-thread:bridge.obj"
+        },
+        {
+          "id": "C0161",
+          "symbol": "_opennt_exit_thread@4",
+          "provider": "0001:0017ee30       _opennt_exit_thread@4      0057fe30 f   common-worker-thread:bridge.obj"
+        },
+        {
+          "id": "C0300",
+          "symbol": "_MvdmCloseConsoleHandle@4",
+          "provider": "0001:00173c30       _MvdmCloseConsoleHandle@4  00574c30 f   softpc-win32-bindings:console_graphics.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_unix.obj",
+      "sha256": "37c17b8d4f5494e4fc60eb8031d69044d70ec1d98be5e45a2650f078f54020ce",
+      "bindings": [
+        {
+          "id": "C0189",
+          "symbol": "_ActivityCheckAfterTimeSlice",
+          "provider": "0001:00005e80       _ActivityCheckAfterTimeSlice 00406e80 f   softpc-activity-check:fmstubs_activity_check.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_vga.obj",
+      "sha256": "624ac0dde12619fe5fd21d6ab89cefc861e1a4a92f727f0323667ea2d4ed0fd3",
+      "bindings": [
+        {
+          "id": "C0292",
+          "symbol": "_InvalidateConsoleDIBits@8",
+          "provider": "0001:00178560       _InvalidateConsoleDIBits@8 00579560 f   softpc-win32-bindings:console_compat.obj"
+        }
+      ]
+    }
+  ],
+  "verification": "Read actual source, six current COFF objects and both worker maps; verified all22 published hashes. No product change, rebuild or new runtime assertion.",
+  "limitations": [
+    "Ownership classification is not elimination. Thread and presentation dependencies remain open for S13.",
+    "Native handle fallthrough proves this caller does not need graphics handling; it does not prove every C0300 caller can use native CloseHandle.",
+    "Current graphics invalidation sets dirty/signals owner; source review does not validate every VGA mode or all lifecycle races."
+  ],
+  "publication": {
+    "package": "843cb8d8-4bb3-4d88-af5e-d98b34b887f7",
+    "hashes": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "d1355ffdea6a9213f452642d937578331ad6fd4928770f5ce8bf6c08c432ab50"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+        "sha256": "d1355ffdea6a9213f452642d937578331ad6fd4928770f5ce8bf6c08c432ab50"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "9874d86cccbda9de66eb7acf26ba5411e7b0d1499c467ddc8e9cce760e8a2a41"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\run16.exe",
+        "sha256": "9874d86cccbda9de66eb7acf26ba5411e7b0d1499c467ddc8e9cce760e8a2a41"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "866b9681369bd113cb038963e8a94160e6ec6b04fb1343b67f97cc914e77b789"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntsrv.exe",
+        "sha256": "866b9681369bd113cb038963e8a94160e6ec6b04fb1343b67f97cc914e77b789"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "c9497c09e10f1202136d0c818b7c7fa45d82dcc70f4553fc693c5c7f0e7da670"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntcon.exe",
+        "sha256": "c9497c09e10f1202136d0c818b7c7fa45d82dcc70f4553fc693c5c7f0e7da670"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "00a4d026ff724d9fee91fad4004d02094cd9b842fa21cfd04a9aa34d93d53873"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvdm.exe",
+        "sha256": "00a4d026ff724d9fee91fad4004d02094cd9b842fa21cfd04a9aa34d93d53873"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "6d567496ecd25e4619163ec585aacf2371ff004012405b0747788c3e39ef0e6f"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvwm.exe",
+        "sha256": "6d567496ecd25e4619163ec585aacf2371ff004012405b0747788c3e39ef0e6f"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "d52042c4ba5b7fad4400b779006c3c57b50abf3c40289a025b4c9edb7529179b"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntmon.exe",
+        "sha256": "d52042c4ba5b7fad4400b779006c3c57b50abf3c40289a025b4c9edb7529179b"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "03d1c712eea67519716f02df9e0ac083a97f4ee6b8be49bacdbd31c0ae5cac9e"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\WOW32.DLL",
+        "sha256": "03d1c712eea67519716f02df9e0ac083a97f4ee6b8be49bacdbd31c0ae5cac9e"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "167a60fd5bcfc15a51b00a479db665b48678e33dbe8da030a530b4e75e73d7b1"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "sha256": "167a60fd5bcfc15a51b00a479db665b48678e33dbe8da030a530b4e75e73d7b1"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "ca21d35a67b65749ee0383258d69dcb8b1e7e22e40bbe45c40ade2385afb46be"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook32.dll",
+        "sha256": "ca21d35a67b65749ee0383258d69dcb8b1e7e22e40bbe45c40ade2385afb46be"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "702d9996332634a2a49d605b9b37d514c926e03c0836ef9ca65f2d5d4ddaf97d"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook64.dll",
+        "sha256": "702d9996332634a2a49d605b9b37d514c926e03c0836ef9ca65f2d5d4ddaf97d"
+      }
+    ]
+  },
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 40,
+    "linkOnlyTotal": 74,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 494,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 74
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_timer.c": "7c4a0fd51a07ad761b9ea35a5e288f66bca7fd47416675c239cea871d9e2816f",
+    "src/mvdm-host/softpc.new/host/src/nt_unix.c": "59ff5502badd8e75136da1ab1b4bf69b50add4b2d11731bd2fd678f83d842cab",
+    "src/mvdm-host/softpc.new/host/src/nt_vga.c": "e02b45a17b7ae8c171a880c2dc4df3d87e478126a2b8ce1c479667e17b96e03e",
+    "src/ntvdm-exe/win32/console_graphics.c": "77dd8ca309a906f2cd5789577bf516698569d717a1792cb786ab39a0a676661a",
+    "src/ntvdm-exe/win32/console_compat.c": "f0c45d8b63ffcebad73724348cf0577c902a9e4efbf0e99ffe84415594439065",
+    "src/compat/mvdm_ccpu_activity_check.c": "6263bbffefe2102bba0e8ffa919fd12db4d674bf832e7fd26dc5c4945905eeec",
+    "src/compat/include/conapi.h": "6f66445927ad772e87e9fd1b1e95d08de9ec6f00e44b9efc3bc14e6503cf7094",
+    "src/common/worker-thread/bridge.c": "ad58270fdeb72b37a44ffd951a8a4a6d0c7c176da4ed7d476b32ab1e5316db87"
+  }
+}

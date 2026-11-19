@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P88: [Thread ABI delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p88-thread-callback-abi.json). Reviewed116/116 compile and37/74 link-only. 494/618 IDs open,74 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package843cb8d8-4bb3-4d88-af5e-d98b34b887f7 published;22 hashes verified. Cached full builds, default thread fixtures, three DOS cases and eight A/B graphs passed; initial shortened throughput failure retained. S12 active.
+P88-P89: [Thread delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p88-thread-callback-abi.json), [timer/idle/VGA review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p89-timer-idle-vga-ownership.json). Reviewed116/116 compile and40/74 link-only;494/618 IDs open,74 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package843cb8d8-4bb3-4d88-af5e-d98b34b887f7 remains published;22 hashes verified. S12 active.
