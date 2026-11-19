@@ -281,7 +281,6 @@ $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
-                         'mvdm_softpc_ccpu_wait.c',
                          'mvdm_vm_notification.c',
                          'mvdm_vm_wake.c',
                          'mvdm_vm_continuation.c', 'mvdm_vm_command.c', 'mvdm_vm_application.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
@@ -1167,6 +1166,8 @@ $adapterWin32Objects += 'obj/adapter-win32/dem_restart_hint.obj'
 $graph.Add('build obj/adapter-win32/invalid_virtual_instance.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/invalid_virtual_instance.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterWin32Objects += 'obj/adapter-win32/invalid_virtual_instance.obj'
+$graph.Add('build obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_ccpu_wait.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
 $crtCompatObject = 'obj/lib-win32/crt-compat/crt_compat.obj'
 $graph.Add('build ' + $crtCompatObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT')
@@ -1214,6 +1215,7 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
 $graph.Add('build obj/adapter-softpc/mvdm_shadow_registry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_shadow_registry.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_shadow_registry.obj'
+$adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj'
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))

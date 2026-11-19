@@ -89,6 +89,8 @@
 
 - 直接包含 · C0037 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_ccpu_wait.h
 
+012 P16：等待实现及声明整体迁 B；仅 Windows 自动复位事件，无 session/guest/外层依赖。F 保持创建与关闭所有权，CCPU 事件位图及检查、等待、通知顺序不变。C0037、C0212、C0213 消除，直接外层头 1→0。两架构 cached 构建、八产品图 A/B 边界及真实 CCPU HLT/RESET 专项通过，11组件双端发布哈希通过。镜像只换 include，#error/#line 不变，净变 0 点、0 行；累计缩减 2 点、10 行。累计分类 12/116，五文件解除直接外层头，七文件保留生命周期接线，104 未审查；531/617 依赖开放。
+
 ## 013 — src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c
 
 - 直接包含 · C0041 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h

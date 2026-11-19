@@ -1,0 +1,91 @@
+{
+  "baseline": "e484d8ca686ac2b3d7af8bbed7d2a20cbf964b94",
+  "scope": "S12 P16 file012 c_main.c native wake carrier ownership",
+  "sourceReview": {
+    "bodyIdentical": true,
+    "headerIdentical": true,
+    "mirrorOnlyIncludeChanged": true,
+    "mirrorErrorLineUnchanged": true,
+    "lifetime": [
+      "mvdm_standalone_worker.c begin before mvdm_softpc_main",
+      "nt_reset.c host_applClose stops event thread and heartbeat",
+      "mvdm_standalone_worker_cleanup closes carrier after original host returns"
+    ],
+    "eventAuthority": "c_main.c event snapshot and quick-event count; signal after event map update",
+    "functionSymbolsUnchanged": true,
+    "mirrorDelta": {
+      "points": 0,
+      "lines": 0
+    }
+  },
+  "eliminated": [
+    "C0037",
+    "C0212",
+    "C0213"
+  ],
+  "counts": {
+    "totalFiles": 116,
+    "reviewedFiles": 12,
+    "clearedDirectHeaderFiles": 5,
+    "deferredLifecycleFiles": 7,
+    "unreviewedFiles": 104,
+    "totalStableIds": 617,
+    "open": 531,
+    "eliminated": 36,
+    "supporting": 44,
+    "eliminatedTransitive": 5,
+    "diagnostic": 1
+  },
+  "mirror": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "pointsDelta": 0,
+    "linesDelta": 0,
+    "errorAndLineUnchanged": true
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "build": {
+    "x86": 0,
+    "x64": 0,
+    "eightABGraphs": "pass",
+    "providerFlags": "/nologo /c /MT /W4 /we4013 /showIncludes /I src",
+    "objectIdentity": "obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj retained in softpc-bindings.lib"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "1ea87a8a-0bd5-4ab9-89b7-b7f76990db6d",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "tests": {
+    "ccpuHaltResetExit": 0,
+    "resetResult": "AX=BEEF producer=0",
+    "additionalMarkers": [
+      "S38_CCPU_DIV_FAULT_CANCELS_PENDING_DEBUG_OK",
+      "S38_CCPU_RF_SUPPRESS_ONCE_THEN_BREAK_OK",
+      "S38_CCPU_REAL_DESCRIPTOR_PAGING_REFUSAL_OK",
+      "S38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK",
+      "T430_CCPU_STALE_PIC_SENTINEL_OK"
+    ],
+    "generatorNodeSyntax": 0,
+    "documentationGovernance": 0
+  },
+  "limits": [
+    "Targeted real CCPU fixture with synthetic guest instructions and existing host seams, not full DOS/WOW/Win3.x regression.",
+    "Fixture link retains existing /FORCE multiple-definition warnings; successful runtime markers are independently checked.",
+    "WOW callback add-on generator updated and syntax checked, full callback runtime not rerun."
+  ],
+  "artifacts": {
+    "x86.log": "a31cd6df58c0d763cbc79b439c69bd0015f45c62643ab47ad0cfd40499fb68d3",
+    "x64.log": "f7f3c366369fb4947a8a7b6b2717886548bcd5f02016e932055fbe15f0e7d253",
+    "checks.log": "f4ec3712a7698f5acb8e0a56641fbe730b3ae1ef030f24eda39514675a277039",
+    "checks.err": "c6f939b082a21a2aaa021d61c0dde6491f49bdf4d53f3ffc59bcd617f25e6891",
+    "docs.log": "cfd597275399951ea25568faae268fe21175399ca22c178221c702249af14d45"
+  }
+}

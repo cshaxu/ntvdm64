@@ -9,7 +9,7 @@
 #include "ntthread.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_ccpu_wait.h"
+#include "compat/include/mvdm_softpc_ccpu_wait.h"
 #include "wow32-dll/include/wow_callback_frame_lease.h"
 extern int fixture_simulation_level(void);
 extern void fixture_thread_exit(void);

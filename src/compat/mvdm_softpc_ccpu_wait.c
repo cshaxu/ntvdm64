@@ -1,4 +1,4 @@
-#include "mvdm_softpc_ccpu_wait.h"
+#include "compat/include/mvdm_softpc_ccpu_wait.h"
 
 /* The worker creates this before TimerInit can start an interrupt producer.
  * It is closed only after the original host has stopped those producers and

@@ -57,7 +57,7 @@ Actual worker routines are spun off elsewhere.
 #include <fault.h>
 #include <ica.h>
 #include <timer.h>
-#include <mvdm_softpc_ccpu_wait.h>
+#include <compat/include/mvdm_softpc_ccpu_wait.h>
 extern void force_yoda(void);
 extern void TakeNpxExceptionInt(void);
 extern void EDL_fast_bop(ULONG immed);

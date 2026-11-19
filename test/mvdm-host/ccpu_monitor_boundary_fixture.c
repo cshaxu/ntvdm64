@@ -8,7 +8,7 @@
 #include <vint.h>
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_ccpu_wait.h"
+#include "compat/include/mvdm_softpc_ccpu_wait.h"
 
 /* Formal original CCPU/SAS providers, not replacement decode/reset bodies. */
 extern void *setup_global_data_ptr(void);

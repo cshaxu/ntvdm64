@@ -127,3 +127,9 @@ Files 009/010 are classified for S13; 011 is a local candidate pending delivery.
 [Delivery evidence](s12-p15-native-failure.json): C0241 binds to B; C0043
 remains open for sim32.c. Eleven files reviewed, four cleared, seven lifecycle
 files reserved for S13. 534 of 617 stable IDs remain open. Mirror delta zero.
+
+## P16 CCPU wake carrier
+
+[Delivery evidence](s12-p16-ccpu-wait.json) records the unchanged Windows event
+carrier moved to B. C0037, C0212 and C0213 are eliminated; 531/617 remain open.
+Sequential review is 12/116, five cleared and seven lifecycle files for S13.
