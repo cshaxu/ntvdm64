@@ -221,3 +221,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P51 ListBox directories](s12-p51-list-directory-ownership.json): files093-094; native filesystem/original geometry retained; five shared invocation symbols and mixed header remain. Review94/116,502/617 open.
 
 [P52 ListBox lifecycle and heights](s12-p52-list-lifecycle-ownership.json): files095-096; original algorithms/storage retained, shared invocation and mixed header stay open. Review96/116,502/617 open.
+
+[P53 DrawState contexts](s12-p53-drawing-ownership.json): file097; both production compositions verified, five F symbols remain; native leaves already B. Review97/116,502/617 open.

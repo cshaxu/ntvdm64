@@ -630,6 +630,8 @@
 - 直接包含 · C0062 · wow32-dll · src/wow32-dll/include/button-drawing/precomp.h
 - 直接包含 · C0065 · wow32-dll · src/wow32-dll/include/control-draw-state/precomp.h
 
+097 P53: Both DrawState and Button-blit contexts verified; original effects remain C, five F resource/scope symbols and two private precomp headers stay open. Mirror0/0; see s12-p53-drawing-ownership.json.
+
 ## 098 — src/non-mvdm/windows/core/ntuser/client/ntstubs.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

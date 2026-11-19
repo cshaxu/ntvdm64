@@ -110,7 +110,9 @@ P50: [List interaction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12
 
 P51: [Directory and columns](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p51-list-directory-ownership.json).
 
-P52: [List lifecycle](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p52-list-lifecycle-ownership.json). Reviewed96/116:17 clear,64 lifecycle,15 ABI;20 remain. Open502/617. Mirror0/0; cumulative reduction2 points/10 lines. S12 active.
+P52: [List lifecycle](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p52-list-lifecycle-ownership.json).
+
+P53: [Drawing contexts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p53-drawing-ownership.json). Reviewed97/116:17 clear,65 lifecycle,15 ABI;19 remain. Open502/617. Mirror0/0; cumulative reduction2 points/10 lines. S12 active.
 
 ## S11 Closure Record
 
