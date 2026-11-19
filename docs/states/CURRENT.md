@@ -28,6 +28,18 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+Owner priority update: select complete batches by actual outward-dependency
+removal count, not the previous chain order. The [batch census](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-batch-priority.json)
+identifies a114-ID WOW API/discovery/menu cluster,39 console IDs and12 registry
+IDs. These are candidates, not delivered removals. Review the114-ID cluster
+first, including its scheduler/publication prerequisites; the unimplemented
+CPU-context proposal is deferred. Mirror-cost approval rules remain in force.
+The [114-ID ownership review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-native-batch-ownership.json)
+confirms original taskman scheduling, copied USER projection and one shared
+EXE/DLL runtime as coupled prerequisites. Directly copying wrappers into B
+would preserve forbidden callbacks. Concrete C carrier/mirror-cost work remains;
+no additional dependency is counted eliminated by this review.
+
 P65 [WOW direct-pointer completion](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p65-wow-flush-owner.json)
 removes the F empty provider into the existing C macro. Owner approved
 non-error mirror +1 point/+2 lines. Cached builds and dual11 publication pass;

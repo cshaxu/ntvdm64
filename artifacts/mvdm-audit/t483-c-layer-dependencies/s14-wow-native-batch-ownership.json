@@ -1,0 +1,127 @@
+{
+  "baseline": "51711305f0649680202f9d9002bbb7c165b8926b",
+  "kind": "Source ownership review, not product implementation or runtime acceptance",
+  "candidate_direct_ids": 114,
+  "newly_eliminated": 0,
+  "sources": {
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": {
+      "sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089",
+      "lines": 1871
+    },
+    "src/wow32-dll/source/wow_user_discovery.c": {
+      "sha256": "766160007de138f7c3055dc171b0ad6b7b65b1c0a2c18c098633712e38a227a0",
+      "lines": 214
+    },
+    "src/wow32-dll/source/wow_menu_native_bindings.c": {
+      "sha256": "641a1cd995ec39391c237b64211573931afd58446cfdfe115c0d394347fc84e2",
+      "lines": 374
+    },
+    "src/common/wow/user_runtime.h": {
+      "sha256": "1454e2ea2d2632af701702967a5005630c9a6eebb9fd2cb4695d86532669b3c3",
+      "lines": 56
+    },
+    "src/ntvdm-exe/wow/wow_user_runtime.c": {
+      "sha256": "195ed8a3c08266d5783bae23364b968c40d42adc0e3c23d0895be58b4da0d1e3",
+      "lines": 114
+    },
+    "src/ntvdm-exe/wow/wow_user_session_binding.c": {
+      "sha256": "97b35a96c4c406b703e72f46ea49a8e89bd8add8a04977e5f5336d447f1eb660",
+      "lines": 100
+    },
+    "src/wow32-dll/include/wow_user_native_call.h": {
+      "sha256": "4b18b313bf2c8d1b934246faee78a900d52c1310718c6a1c90bacb5dddf45315",
+      "lines": 34
+    },
+    "src/wow32-dll/include/wow_task_order_bindings.h": {
+      "sha256": "61efd1be0d7bd9e5acb2162140bdf6c631579da752513edb9f2df051e48ff493",
+      "lines": 236
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/taskman.c": {
+      "sha256": "4321a7b4b60f6a65f5ee7d3beec75b8f6ddd55a971774d0230567d5d109ac99f",
+      "lines": 752
+    }
+  },
+  "verified_edges": [
+    {
+      "from": "wow_user_task_lifecycle.c:1224 WOW_NATIVE_CALL_AFTER",
+      "to": "wow_user_native_call_begin/end",
+      "contract": "Every generated native call preserves native result/LastError across a finally-protected ownership return."
+    },
+    {
+      "from": "wow_user_task_lifecycle.c:950 native_call_begin",
+      "to": "original taskman xxxSleepTask",
+      "contract": "Push exact execution scope; suspend only held execution for non-inline operation when task lock permits. Native resource-only entry has a distinct existing no-task path."
+    },
+    {
+      "from": "wow_user_task_lifecycle.c:1146 native_call_end",
+      "to": "original taskman xxxDirectedYield; execution_pop; publish_guest_return",
+      "contract": "Restore the exact thread/scope and ownership before guest continuation; wait-only return sets pending publication rather than pretending guest resumes."
+    },
+    {
+      "from": "publish_guest_return/publish_call_windows",
+      "to": "window graph refresh, borrowed desktop graph, menu refresh",
+      "contract": "Current-task wait_publication_pending clears only after complete publication. Cannot replace with native API alone or a second dirty flag."
+    },
+    {
+      "from": "wow_user_discovery.c publish_discovery",
+      "to": "wow_user_runtime + window identity/graph",
+      "contract": "Preserve short-HWND full identity, retained lock state and publication on discovered native windows."
+    },
+    {
+      "from": "wow_menu_native_bindings.c menu_publish",
+      "to": "wow_user_runtime + menu_client generation ownership",
+      "contract": "Retire destroyed relations and publish replacement edges before freeing old backing; native success is not permission to omit publication."
+    },
+    {
+      "from": "ntvdm-exe/wow/wow_user_runtime.c unbind",
+      "to": "runtime->retire_thread(runtime->lifecycle)",
+      "contract": "False retains binding; moving this implementation unchanged into B creates a forbidden outward algorithm callback."
+    },
+    {
+      "from": "wow_user_session_binding.c detach",
+      "to": "runtime unbind, dispose_process, session unregister",
+      "contract": "Refuse other bound threads; preserve registration on failed retirement/disposal. F owns quiescence/session hooks."
+    }
+  ],
+  "ownership_decisions": [
+    {
+      "unit": "TLS, lock owner and matching bind/unbind mechanics",
+      "destination": "B independent resources",
+      "constraint": "Remove outward retirement invocation from B. Preserve one worker-owned instance across EXE/DLL imports, not two statically linked TLS copies."
+    },
+    {
+      "unit": "execution scope, task ownership and wait publication obligation",
+      "destination": "C original USER/taskman integration",
+      "constraint": "Original taskman remains sole scheduler; use current execution scope/state, no second scheduler or lifetime state machine."
+    },
+    {
+      "unit": "native wrappers, discovery and menu completion",
+      "destination": "C-owned boundary coordination plus native Win32 operations",
+      "constraint": "Exact existing C carriers and total mirror insertion still require a measured complete proposal. Moving wrappers alone to B is rejected."
+    },
+    {
+      "unit": "original-layout projection and pinned generation reclamation",
+      "destination": "C machine/USER owner with B independent copied graph checks",
+      "constraint": "Must accompany the native boundary because every ordinary return can invoke it. Do not retain a C-to-F publisher callback."
+    },
+    {
+      "unit": "session attach/detach, producer quiescence and registration",
+      "destination": "F composition",
+      "constraint": "Invoke inner retirement before inner unbind; preserve failure ownership. No Run16/NTSRV task-chain policy moves to B."
+    }
+  ],
+  "count_limits": "114 is the enumerated API cluster (79 native +15 discovery +20 menu). C0618 runtime current and other prerequisites are not added to claimed savings until their actual implementation is migrated. Two idle/wait APIs excluded from79.",
+  "rejected_shortcuts": [
+    "Copy the three F files into B with their current includes/callbacks",
+    "Replace wrappers with raw USER32 calls and drop scheduler/publication",
+    "Move only headers or install a generic outer call table",
+    "Statically link separate resource stores into worker and WOW32"
+  ],
+  "next_required_work": "Build the complete source-unit cut: original C carriers for scheduler and projection, B resource split, F lifecycle calls and exact mirror point/line measurement. No implementation approval requested on an unmeasured estimate.",
+  "delivery": "T483 S14 P66 research/prioritization only",
+  "verification": {
+    "governance": "PASS build/t483-s14-batch-priority/exit.txt=0; documentation, links and A/B build boundaries",
+    "product": "No product changes; P65 dual11 remains current. No new runtime test/publication claimed.",
+    "progress": "114-ID shared chain has source-supported ownership decisions; exact C insertion and complete mirror-cost approval remain pending."
+  }
+}
