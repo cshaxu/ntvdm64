@@ -1363,7 +1363,7 @@ if ($Architecture -eq 'x86') {
             @('registry', 'src/ntsrv-exe/opennt/source/base_process.c', $baseServerFlags),
             @('reservation', 'src/ntsrv-exe/opennt/source/base_reservation.c', $baseOwnerFlags),
             @('request', 'src/ntsrv-exe/opennt/source/base_request.c', $baseServerFlags),
-            @('config', 'src/common/base_srv/base_config.c', $baseOwnerFlags),
+            @('config', 'src/compat/base_vdm_config.c', $libraryFlags),
             @('process', 'src/compat/base_console_handle.c', $libraryFlags),
             @('interactive', 'src/ntsrv-exe/opennt/source/base_interactive.c', $baseOwnerFlags),
             @('classifier-path', 'src/compat/base_classifier_path.c', $libraryFlags))

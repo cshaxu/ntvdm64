@@ -1,0 +1,185 @@
+{
+  "baseline": "8eaa765c161781b44952195ad3141bf1a62d4532",
+  "question": "Do the immutable config operations require D request/session ownership?",
+  "conclusion": "No. Exact four functions and TLS binding move D to B. External callers select and validate package paths, pass explicit borrowed config, and restore prior binding. B does not access RPC/session/server types.",
+  "migration": {
+    "source": "src/common/base_srv/base_config.c",
+    "destination": "src/compat/base_vdm_config.c",
+    "eliminated": [
+      "C0154",
+      "C0155"
+    ],
+    "preserved": "All four function bodies and boundConfig declaration byte-equivalent after line-ending normalization.",
+    "header": "B owns OPENNT_BASE_VDM_CONFIG, keyword constants and four operations. Existing D base_config.h keeps original C BaseGetVdmConfigInfo declaration and registry scratch-size macro. Its separate dependency remains open.",
+    "mirror": "No mirror changes; original BaseGetVdmConfigInfo algorithm remains C."
+  },
+  "threadCohort": {
+    "ids": [
+      "C0157",
+      "C0158",
+      "C0159",
+      "C0160",
+      "C0161"
+    ],
+    "source": "src/common/worker-thread/bridge.c",
+    "sha256": "ad58270fdeb72b37a44ffd951a8a4a6d0c7c176da4ed7d476b32ab1e5316db87",
+    "evidence": "create_bound supplies session_thread_current as owner, enter_owner binds SESSION_THREAD_BINDING_ORIGINAL_WORKER, finish_owner/opennt_exit_thread calls session_thread_finish. A thread creation mechanics are already reused. These are not generic native-only leaves.",
+    "disposition": "S13 coupled caller/owner boundary; no dependency elimination or code change claimed."
+  },
+  "sourceHashes": {
+    "src/compat/base_vdm_config.c": "47c530eafae91857a3d3ccc004167fd134a482e5c5eca9787f690c3427d5a3c4",
+    "src/compat/include/base_vdm_config.h": "ba9e3a7e794a2a2378ae017d620f1cdec49fca9bf2b8687b06146a25d207b3d1",
+    "src/common/base_srv/base_config.h": "07bc489782a97b8ab91a89aec5918c9e284c50480c2de2665b4aab649898b866",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "94b97d91b67adcc872af6eb5df3c93835e1f1db9ccb724f327670ee3b236ee99",
+    "test/compat/base_vdm_config.c": "e1b7911e98e297306d5ac8c145d4fd853430c1880b55412846a4460b18d6df2b",
+    "test/observation/verify-base-vdm-config.ps1": "78c70323cbe92da5a073d3d2bef83e62ce10f86ea372d37aebb884c10c61e128"
+  },
+  "verification": {
+    "build": "Cached x86/x64 and explicit x86 four worker images plus reference worker passed.",
+    "publication": "11 images both destinations;22 hashes verified.",
+    "normalized": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityRule": "Only GUID and PE/debug timestamps masked; raw hashes differ. All11 otherwise equal P102; repeated guest tests omitted under authorization.",
+    "tests": "test/observation/verify-base-vdm-config.ps1 -BuildRoot build/t483-s12-config-owner/config-test",
+    "testInputs": "Actual x86 worker and x64 service config.obj, hashes captured in each inputs.csv.",
+    "testsPassed": [
+      "unbound read fails",
+      "invalid config rejected",
+      "DOS and WOW config reads",
+      "image-end prefix matching",
+      "insufficient output buffer remains unchanged",
+      "nested binding returns/restores previous pointer",
+      "separate native thread has independent TLS config",
+      "unbind returns to failure"
+    ],
+    "results": [
+      "BASE_VDM_CONFIG failures=0",
+      "BASE_VDM_CONFIG failures=0"
+    ],
+    "abGraphs": 8,
+    "documentation": "Passed: build/t483-s12-config-owner/docs.log"
+  },
+  "publication": {
+    "package": "ff3cb6a4-f6b2-410e-8e56-8fd5296673ed",
+    "verifiedHashes": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "ce5a0bdde9e761a401dd2feab809c8f617aff05c3cb7b45b9f020c46ae0aa581"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "16631093db9edcf2a718b2061233dd33a6d46e3c740e745efeab6c670ea03d90"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "87a8883e41e5438a7ce0087cb0fd14b3cf0158911aa10ac06ae6d84dcc6f2bd5"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "5626db9168691cbac1a392f31f73288e11b3f5e02fbbbd520ab67188561cac80"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "50100d461420cc871b7571ab1e7f632894e7cebdb50a0e997c84293285187b4b"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "6fe4c2d51d74c2b1ec5a8751776f9dcb51bc78b6bd42638503157a5121144ab4"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "3bb511175664998166fae6fb65e2d45cc0b065ab20cb5a848e5f5221217969c8"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "d06d931e568c896aeb1a69a26fc226eb43864b5b99876da6bdef48d9394385f7"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "d7f712e404ac57059c598ce765b1182112e115a0d2b3e88d95faaacc7e1a49c9"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "01c5a4281ec1ba97498e9c7b9c160f157e2efa82119142f75bf458f76aa0fd51"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "b3e85e72ab9d1ba732beb708d2e7e0c9a68ca9de54a1c82e0b2b10b3ca388cbf"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "ce5a0bdde9e761a401dd2feab809c8f617aff05c3cb7b45b9f020c46ae0aa581"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "16631093db9edcf2a718b2061233dd33a6d46e3c740e745efeab6c670ea03d90"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "87a8883e41e5438a7ce0087cb0fd14b3cf0158911aa10ac06ae6d84dcc6f2bd5"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "5626db9168691cbac1a392f31f73288e11b3f5e02fbbbd520ab67188561cac80"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "50100d461420cc871b7571ab1e7f632894e7cebdb50a0e997c84293285187b4b"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "6fe4c2d51d74c2b1ec5a8751776f9dcb51bc78b6bd42638503157a5121144ab4"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "3bb511175664998166fae6fb65e2d45cc0b065ab20cb5a848e5f5221217969c8"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "d06d931e568c896aeb1a69a26fc226eb43864b5b99876da6bdef48d9394385f7"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "d7f712e404ac57059c598ce765b1182112e115a0d2b3e88d95faaacc7e1a49c9"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "01c5a4281ec1ba97498e9c7b9c160f157e2efa82119142f75bf458f76aa0fd51"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "b3e85e72ab9d1ba732beb708d2e7e0c9a68ca9de54a1c82e0b2b10b3ca388cbf"
+      }
+    ]
+  },
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 477,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 91
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "Continue remaining S12 disposition reconciliation. No S13/S14 admission claimed."
+}

@@ -321,3 +321,5 @@ P100: [Eliminated-edge reconciliation](s12-p100-eliminated-recheck.json); all88 
 P101: [Open-ID evidence index](s12-p101-open-evidence-index.json); navigation for480 remaining IDs and explicit S13 cohort disposition for81 WOW native-call/lifecycle symbols. No dependency elimination claimed.
 
 P102: [Classifier path ownership delivery](s12-p102-classifier-path-ownership.json); C0152 moves D to B with unchanged function body and original output ABI. Cached builds,8 A/B graphs,actual x86/x64 object tests and22 publication hashes passed.
+
+P103: [Immutable config ownership](s12-p103-config-ownership.json); C0154/C0155 move D to B unchanged, actual x86/x64 object tests and dual release pass. Five session-thread edges explicitly remain S13.

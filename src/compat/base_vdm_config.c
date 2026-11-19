@@ -1,7 +1,7 @@
 /* NT4 reads WOW registry templates. Standalone binds caller-owned immutable
  * package paths and preserves original argument construction in vdm.c.
  * ANSI conversion and file validation belong to run16 before this binding. */
-#include <base_config.h>
+#include "include/base_vdm_config.h"
 #include <string.h>
 #include <wchar.h>
 static __declspec(thread) const OPENNT_BASE_VDM_CONFIG *boundConfig;
