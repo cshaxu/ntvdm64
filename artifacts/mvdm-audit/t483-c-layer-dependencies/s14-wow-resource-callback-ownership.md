@@ -396,3 +396,44 @@ create another B-to-C exception. The migration plan must preserve both rules.
 These source conclusions identify destinations and necessary splits; they do
 not approve a net mirror increase or establish final candidate equivalence.
 No production edits, tests, publication or dependency elimination occurred.
+
+## Dialog services and retirement
+
+Against P40 `0ddef04bb`, read six complete bodies under wow32-dll/source:
+wow_dialog_call_bindings.c, wow_dialog_context_bindings.c,
+wow_dialog_memory.c, wow_dialog_native_bindings.c,
+wow_dialog_procedure_bindings.c and wow_dialog_finalization_binding.c.
+The complete-body count is now 35. Selected registration, original callback
+assignments and existing B native-service headers were also checked, without
+counting those partial reads as additional complete files.
+
+| Implementation | Destination and required split |
+| --- | --- |
+| Native export resolver, system-menu/thread-state/reset services | Reuse B wow_native_controls.c as the native USER/GDI service owner. These leaves need no task/request/guest state. Keep availability failures explicit; do not add another service table or map original NT4 syscall numbers to modern calls. |
+| Native dialog creation | The installed 17-argument service and 16-byte counted descriptor differ from the original declaration. B can own the resolved native call with already converted values. Resolve guest parent identity and translate original LARGE_STRING in C before calling B; do not let B call wow_user_window_owned_handle. |
+| Context capture/release | Native work area, snap-to setting, DPI and optional font are B mechanics with caller-owned lifetime. Runtime validation and copying original class atoms belong to the C context owner. Publish output only after successful capture; font cleanup accompanies the resource, not a new lifecycle registry. |
+| WOWDlgInit/GetEditDS/ReleaseEditDS | Original callback algorithms, not native memory allocation. wow32.c assigns W32InitDlg/W32GlobalAlloc16/W32GlobalFree16; the F registration bridge currently supplies that table. Reunite original registration/consumer ownership in C rather than move these callbacks into B. Preserve 256-byte GHND/GMEM_SHARE allocation and LOWORD release. |
+| Procedure initialization and dispatch | Save/null/restore native DWL_DLGPROC prevents an extra application callback during native WM_NULL initialization. Procedure-token handling and native calls may use B, but execution handoff and guest procedure selection remain outside B. No replacement HWND or second dialog-procedure owner. |
+| Dialog finalization and API routing | C owns original PDLG/FNID state and EndDialog/DefDlgProcWorker policy. Outer admission must distinguish ordinary callbacks from cleanup-only entry; split it from typed original finalization. Unowned native dialogs continue to native APIs, never reinterpret native PDLG as original state. |
+
+Specific lifetime constraints from the bodies: failed original allocation must
+not initialize a pool merely for teardown; WM_FINALDESTROY must reach the
+original cleanup body without an application subclass; native WM_NCDESTROY
+retirement happens while HWND remains valid and is not repeated by the later
+private finalizer. The terminal native procedure clears the application slot
+before native cleanup and consumes owned resource destruction once.
+
+The context and procedure wrappers preserve original/outer TLS in finally.
+The caller owns failure policy: existing native helpers that invoke
+wow_user_native_call_failed need a finite status-return leaf before moving B,
+not a B callback into F failure handling. This is a proposed split, not an
+implemented or approved semantic change. In particular no silent false/zero
+substitution is authorized for a failed void native operation.
+
+Existing B wow_native_controls.h already defines the modern counted-text
+descriptor and retains original-layout translation outside B. Extend that
+same boundary rather than copy the F header with original C layouts. Native
+service ABI comments identify historical inspection evidence; this source
+review does not newly verify those exports on other Windows versions.
+Mirror carriers/costs and final runtime validation remain outstanding. No
+production change or dependency elimination is claimed by this delivery.
