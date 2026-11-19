@@ -1,0 +1,46 @@
+{
+  "delivery": "T483 S14 P64",
+  "kind": "Research/test and correction of false provenance comment; no product behavior change",
+  "baseline": "43b7cdb3bfe089124da86a498471021d80215885",
+  "id": "C0456",
+  "question": "Can the F local successful pointer completion be removed and its C callers linked directly to original SIM32?",
+  "conclusion": "Not by link-only substitution: WOW direct mappings do not imply SIM32 scratch ownership, and ABI differs. Keep ID open; no B no-op relocation or new state machine.",
+  "evidence": {
+    "selection": "Pinned OpenNT softpc.h line471 TRUE macro is under i386. Selected non-i386 declaration is line535. Current mirror retains this external declaration.",
+    "CPU": "ccpusas4.c c_sas_overwrite_memory is an intentional empty CCPU no-compiled-cache notification. This does not erase SIM32 video writeback.",
+    "WOW": "GetPModeVDMPointerAssert uses FlatAddress after original selector validation/fault-in. DpmiSetDescriptorEntry sets FlatAddress from GetDescriptorMapping or IntelBase+base. This is not Sim32pGetVDMPointer/GetVideoMemory pairing.",
+    "SIM32": "Original sim32.c converts selector/real address; video targets require ScratchVideoBuffer and SetVideoMemory writes the remaining aperture from its snapshot, ignoring buff/size as transfer source/extent.",
+    "ABI": "Current WOW map resolves _Sim32FlushVDMPointer@16 locally; worker original resolves _Sim32FlushVDMPointer cdecl, already exported at44. No blind decorated alias.",
+    "runtime": "Existing real CCPU fixture, linked original sim32.obj: RAM success; missing scratch FALSE; paired scratch writeback succeeds; direct writes followed by flush are overwritten from old scratch, including a second byte outside size=1. Full existing bounded/high-linear/lease checks still pass."
+  },
+  "verification": {
+    "runner": "build/t483-s14-sim32-contract/check.ps1",
+    "command": "existing worker ccpu-high-linear-page-test.exe target and executable",
+    "result": "SIM32_FLUSH_CONTRACT_OK ram=1 missing_scratch=1 paired_write=1 stale_overwrite=1 count_not_extent=1",
+    "first_attempt": "Fixture exited0 but marker went to the legacy CRT stream; existing fixture_stdout helper fixed the assertion channel; rerun passed.",
+    "scope_limit": "RAM backs the video-address aperture to isolate original scratch mechanics. Not a video-device or actual WOW caller-reachability test. SAS overwrite vector is bound to the same original CCPU provider as production.",
+    "product": "P63 package unchanged; no behavior or ABI edits, no guest changed. No new runtime publication claimed.",
+    "governance": "PASS documentation governance, links, A/B build-boundary gate and git diff --check.",
+    "product_tokens_unchanged": "Only the leading provenance comment in wow_sim32_pointer_compat.c changed; bytewise function/include suffix equals P63.",
+    "release_identity": "P63 dual11 package hashes rechecked unchanged; no new product release required for test/comment-only delivery."
+  },
+  "next_action": "Trace actual writable views and all flush return uses; select a C-owned completion interface appropriate to direct mappings, preserving original paired SIM32 callers. Measure any required C ABI/mirror change for approval before implementation.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "ledger": {
+    "eliminated": 155,
+    "open": 413,
+    "total": 618
+  },
+  "sources": {
+    "src/mvdm-host/inc/softpc.h": "90414e65ce628b379ac9bbf8051307839eaae61f802924dcac4b47b9d70b0aeb",
+    "src/mvdm-host/wow32/wow32.h": "e160f50f8405d6302decec1ff46ff03c4a59f3a39cac8bce5a7d05e2581527cc",
+    "src/mvdm-host/wow32/wow32.c": "680995940632c19876e196e7cd68d55b7775f7226ec86559596d4e25b8a14a99",
+    "src/mvdm-host/dpmi32/dpmiselr.c": "7dbb3253292fcc1c3138c1867c2326f1a23b237c06e30a11b9dddd689c03c29e",
+    "src/mvdm-host/softpc.new/host/src/sim32.c": "e9fb203a7f1797d6513f2046825def6a72d9b88f035a98c6e28f257da2335130",
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c": "e3131414fc143c47392424f45006dcce5fd4b99d46fe389916379de47f88a36e",
+    "test/mvdm-host/ccpu_bounded_execution_fixture.c": "64beed9d4e1393c974b3b61fae6109869783fc5053c50d3d0f108767bcf3444f"
+  }
+}

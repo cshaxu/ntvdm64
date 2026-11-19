@@ -28,6 +28,12 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P64 [SIM32 contract probe](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p64-sim32-contract.json)
+rejects a blind original-provider redirect: real CCPU/SIM32 evidence shows stale
+video scratch overwrites direct writes. The prior CPU40 macro/cdecl rationale
+is corrected. Research/test only; P63 remains the runtime package. C0456 stays
+open and the direct ledger remains155 eliminated/413 open.
+
 S14 P63 [callback ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p63-callback-owner.json)
 removes C abort cleanup into the existing F CallBack16 wrapper, preserving
 nested restoration/scope retirement. Non-error mirror7/26 ->3/9: -4 points/-17

@@ -1,15 +1,9 @@
 /*
- * CPU40 WOW32 pointer-flush compatibility.
- *
- * Original `mvdm-host/inc/softpc.h` selects this exact no-op success contract
- * under the non-CPU30 CCPU profile:
- *
- *   #define Sim32FlushVDMPointer(address, size, buffer, mode) TRUE
- *
- * WOW32's historical declaration remains an external function spelling, so a
- * late-loaded DLL needs one concrete cdecl definition.  It owns no pointer,
- * mapping, guest state or cache; CallBack16 writes its original resolved
- * native mapping before this source-shaped completion.
+ * WOW32 mapped-pointer completion. This local provider returns success without
+ * transferring memory; it is not the original SIM32 scratch-video writeback.
+ * The selected CCPU cache notification is empty, but sim32.c also owns a paired
+ * video scratch-buffer contract. Ownership remains under C0456 investigation;
+ * see s14-p64-sim32-contract.json. The formal WOW build uses its default stdcall.
  */
 
 #include <windows.h>

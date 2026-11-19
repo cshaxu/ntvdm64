@@ -636,6 +636,44 @@ done:
     return passed;
 }
 
+/* Contract probe of the linked original sim32.c, not a video-device test.
+ * RAM backs the test aperture: this isolates the scratch-buffer writeback
+ * rules that a direct-mapping WOW caller must not silently inherit. */
+static int fixture_sim32_flush_contract(void)
+{
+    extern BOOL __cdecl Sim32FlushVDMPointer(IU32, IU16, IU8 *, BOOL);
+    extern IU8 *__cdecl Sim32pGetVDMPointer(IU32, IU8);
+    extern IU8 *ScratchVideoBuffer;
+    extern void c_sas_overwrite_memory(IU32, IU32);
+    TYPE_sas_overwrite_memory *saved = Sas.Sas_overwrite_memory;
+    IU8 *scratch;
+    int passed = 0;
+    if (ScratchVideoBuffer) return 0;
+    /* Same selected provider installed by mvdm_cvidc_bind_vectors. */
+    Sas.Sas_overwrite_memory = c_sas_overwrite_memory;
+    if (!Sim32FlushVDMPointer(0x70000000u, 1, NULL, FALSE) ||
+        Sim32FlushVDMPointer(0xa0000000u, 1, NULL, FALSE)) goto done;
+    c_sas_store(0xa0000u, 0x11);
+    c_sas_store(0xa0001u, 0x22);
+    scratch = Sim32pGetVDMPointer(0xa0000000u, FALSE);
+    if (!scratch || scratch[0] != 0x11 || scratch[1] != 0x22) goto done;
+    scratch[0] = 0x33;
+    if (!Sim32FlushVDMPointer(0xa0000000u, 1, scratch, FALSE) ||
+        c_sas_hw_at(0xa0000u) != 0x33) goto done;
+    /* Direct writes do not update the SIM32 scratch snapshot. Even size=1
+     * writes back the remaining aperture, and buff is not the source. */
+    c_sas_store(0xa0000u, 0x44);
+    c_sas_store(0xa0001u, 0x55);
+    if (!Sim32FlushVDMPointer(0xa0000000u, 1, NULL, FALSE) ||
+        c_sas_hw_at(0xa0000u) != 0x33 || c_sas_hw_at(0xa0001u) != 0x22) goto done;
+    passed = fixture_stdout("SIM32_FLUSH_CONTRACT_OK ram=1 missing_scratch=1 paired_write=1 stale_overwrite=1 count_not_extent=1\n");
+done:
+    free(ScratchVideoBuffer);
+    ScratchVideoBuffer = NULL;
+    Sas.Sas_overwrite_memory = saved;
+    return passed;
+}
+
 int main(void)
 {
     session physical_owner;
@@ -657,6 +695,7 @@ int main(void)
         sas_term();
         return 1;
     }
+    if (!fixture_sim32_flush_contract()) { sas_term(); return 1; }
     Sas.Sas_store(UINT32_C(0x00000123), UINT8_C(0xa6));
     if (Sas.Sas_hw_at(UINT32_C(0x00000123)) != UINT8_C(0xa6)) {
         fputs("selected original SAS vector did not dispatch RAM access\n", stderr);
